@@ -1,0 +1,5121 @@
+{
+  "artifact_type": "printed_fidelity",
+  "code_composition_size_pt": 7.414,
+  "french_typography_keeps_its_quotes": "Le guillemet courbe n'est cherche que dans ce qui est compose avec la fonte du code. Le corps du texte garde les siens.",
+  "generated_by": "scripts/build_1spe_printed_fidelity.py",
+  "indentation_is_not_what_is_checked": "La couche texte d'un PDF ne restitue pas fidelement les espaces de tete. La comparaison porte sur tout le reste, espaces retires.",
+  "literate_substitutions": {
+    "À": "À",
+    "È": "È",
+    "É": "É",
+    "à": "à",
+    "â": "â",
+    "ç": "ç",
+    "è": "è",
+    "é": "é",
+    "ê": "ê",
+    "ë": "ë",
+    "î": "î",
+    "ô": "ô",
+    "ù": "ù",
+    "û": "û",
+    "—": "---"
+  },
+  "manual": "MANUEL_TNSI",
+  "only_what_is_composed_as_a_program_is_compared": "La fonte du code sert aussi aux numeros de ligne et aux annotations de marge de l'edition professeur, plus petites, qui s'intercalent dans l'ordre de lecture. La comparaison ne retient que ce qui est compose a la taille d'un programme, taille lue dans la classe. Le controle des guillemets, lui, regarde toute la fonte du code.",
+  "schema_version": 1,
+  "source_fragments": [],
+  "summary": {
+    "CODE_BLOCKS": 622,
+    "CODE_BLOCK_FAITHFUL": 622,
+    "CODE_BLOCK_NOT_FAITHFUL": 0,
+    "CODE_BLOCK_WITHHELD_AS_DECLARED": 0,
+    "MALFORMED_FRAGMENT_IN_SOURCE": 0,
+    "SMART_QUOTE_IN_CODE_TOKEN": 0,
+    "UNKNOWN": 0,
+    "VISIBLE_MALFORMED_LATEX_FRAGMENT": 0,
+    "WITHHELD_CODE_BLOCK_PRINTED": 0
+  },
+  "the_vocabulary_is_read_not_listed": "Les queues de commande surveillees viennent des sequences de controle que le corpus emploie reellement, pas d'une liste noire ecrite a la main. Celles qui sont aussi des mots du corpus sont surveillees dans les sources et non sur la page, ou rien ne permettrait de les distinguer.",
+  "this_compares_it_does_not_blacklist": "Chaque programme publie est retrouve dans la couche texte du PDF et compare caractere par caractere a sa source. Comparer plutot que suspecter fait voir aussi bien un guillemet courbe qu'une ligature fusionnee ou un programme compose dans la mauvaise fonte.",
+  "variants": [
+    {
+      "code_blocks": 187,
+      "emptied_environments": [
+        "corrige"
+      ],
+      "faithful": [
+        {
+          "characters_compared": 114,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/10_C01_arbres_parcours.tex#python-1",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 183,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/10_C01_arbres_parcours.tex#python-2",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 101,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/10_C01_arbres_parcours.tex#python-3",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 231,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/10_C01_arbres_parcours.tex#python-4",
+          "pages": [
+            8
+          ]
+        },
+        {
+          "characters_compared": 281,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/11_C02_arbres_recherche.tex#python-1",
+          "pages": [
+            8
+          ]
+        },
+        {
+          "characters_compared": 179,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/11_C02_arbres_recherche.tex#python-2",
+          "pages": [
+            9
+          ]
+        },
+        {
+          "characters_compared": 180,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/12_C03_graphes_parcours.tex#python-1",
+          "pages": [
+            9,
+            10
+          ]
+        },
+        {
+          "characters_compared": 169,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/12_C03_graphes_parcours.tex#python-2",
+          "pages": [
+            10
+          ]
+        },
+        {
+          "characters_compared": 206,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/13_C04_graphes_cycle_chemin.tex#python-1",
+          "pages": [
+            10,
+            11
+          ]
+        },
+        {
+          "characters_compared": 406,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/13_C04_graphes_cycle_chemin.tex#python-2",
+          "pages": [
+            11
+          ]
+        },
+        {
+          "characters_compared": 369,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/14_C05_diviser_pour_regner.tex#python-1",
+          "pages": [
+            11,
+            12
+          ]
+        },
+        {
+          "characters_compared": 187,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/15_C06_programmation_dynamique.tex#python-1",
+          "pages": [
+            12,
+            13
+          ]
+        },
+        {
+          "characters_compared": 258,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/15_C06_programmation_dynamique.tex#python-2",
+          "pages": [
+            13
+          ]
+        },
+        {
+          "characters_compared": 146,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/16_C07_boyer_moore.tex#python-1",
+          "pages": [
+            13
+          ]
+        },
+        {
+          "characters_compared": 344,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/16_C07_boyer_moore.tex#python-2",
+          "pages": [
+            14
+          ]
+        },
+        {
+          "characters_compared": 114,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-01.tex#python-1",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 183,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-01.tex#python-2",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 101,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-01.tex#python-3",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 231,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-01.tex#python-4",
+          "pages": [
+            8
+          ]
+        },
+        {
+          "characters_compared": 281,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-02.tex#python-1",
+          "pages": [
+            8
+          ]
+        },
+        {
+          "characters_compared": 179,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-02.tex#python-2",
+          "pages": [
+            9
+          ]
+        },
+        {
+          "characters_compared": 180,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-03.tex#python-1",
+          "pages": [
+            9,
+            10
+          ]
+        },
+        {
+          "characters_compared": 169,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-03.tex#python-2",
+          "pages": [
+            10
+          ]
+        },
+        {
+          "characters_compared": 206,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-04.tex#python-1",
+          "pages": [
+            10,
+            11
+          ]
+        },
+        {
+          "characters_compared": 406,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-04.tex#python-2",
+          "pages": [
+            11
+          ]
+        },
+        {
+          "characters_compared": 369,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-05.tex#python-1",
+          "pages": [
+            11,
+            12
+          ]
+        },
+        {
+          "characters_compared": 187,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-06.tex#python-1",
+          "pages": [
+            12,
+            13
+          ]
+        },
+        {
+          "characters_compared": 258,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-06.tex#python-2",
+          "pages": [
+            13
+          ]
+        },
+        {
+          "characters_compared": 146,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-07.tex#python-1",
+          "pages": [
+            13
+          ]
+        },
+        {
+          "characters_compared": 344,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-07.tex#python-2",
+          "pages": [
+            14
+          ]
+        },
+        {
+          "characters_compared": 114,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-08.tex#python-1",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 183,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-08.tex#python-2",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 101,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-08.tex#python-3",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 231,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-08.tex#python-4",
+          "pages": [
+            8
+          ]
+        },
+        {
+          "characters_compared": 281,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-09.tex#python-1",
+          "pages": [
+            8
+          ]
+        },
+        {
+          "characters_compared": 179,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-09.tex#python-2",
+          "pages": [
+            9
+          ]
+        },
+        {
+          "characters_compared": 180,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-10.tex#python-1",
+          "pages": [
+            9,
+            10
+          ]
+        },
+        {
+          "characters_compared": 169,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-10.tex#python-2",
+          "pages": [
+            10
+          ]
+        },
+        {
+          "characters_compared": 206,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-11.tex#python-1",
+          "pages": [
+            10,
+            11
+          ]
+        },
+        {
+          "characters_compared": 406,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-11.tex#python-2",
+          "pages": [
+            11
+          ]
+        },
+        {
+          "characters_compared": 369,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-12.tex#python-1",
+          "pages": [
+            11,
+            12
+          ]
+        },
+        {
+          "characters_compared": 187,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-13.tex#python-1",
+          "pages": [
+            12,
+            13
+          ]
+        },
+        {
+          "characters_compared": 258,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-13.tex#python-2",
+          "pages": [
+            13
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-003.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-008.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-013.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-018.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-023.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-028.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-033.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-038.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-043.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-048.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 292,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/11_C02_processus.tex#python-1",
+          "pages": [
+            40
+          ]
+        },
+        {
+          "characters_compared": 124,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/11_C02_processus.tex#python-2",
+          "pages": [
+            40
+          ]
+        },
+        {
+          "characters_compared": 87,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/12_C03_routage.tex#python-1",
+          "pages": [
+            41
+          ]
+        },
+        {
+          "characters_compared": 169,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/13_C04_chiffrement.tex#python-1",
+          "pages": [
+            42
+          ]
+        },
+        {
+          "characters_compared": 292,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/TNSI-ARCH-COURS-02.tex#python-1",
+          "pages": [
+            40
+          ]
+        },
+        {
+          "characters_compared": 124,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/TNSI-ARCH-COURS-02.tex#python-2",
+          "pages": [
+            40
+          ]
+        },
+        {
+          "characters_compared": 87,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/TNSI-ARCH-COURS-03.tex#python-1",
+          "pages": [
+            41
+          ]
+        },
+        {
+          "characters_compared": 169,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/TNSI-ARCH-COURS-04.tex#python-1",
+          "pages": [
+            42
+          ]
+        },
+        {
+          "characters_compared": 292,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/TNSI-ARCH-COURS-06.tex#python-1",
+          "pages": [
+            40
+          ]
+        },
+        {
+          "characters_compared": 124,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/TNSI-ARCH-COURS-06.tex#python-2",
+          "pages": [
+            40
+          ]
+        },
+        {
+          "characters_compared": 87,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/TNSI-ARCH-COURS-07.tex#python-1",
+          "pages": [
+            41
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-003.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-007.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-011.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-015.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-019.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-023.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-027.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-031.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-035.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-039.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 289,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-BASES-DE-DONNEES/cours/11_C02_sgbd.tex#python-1",
+          "pages": [
+            58
+          ]
+        },
+        {
+          "characters_compared": 289,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-BASES-DE-DONNEES/cours/TNSI-BDD-COURS-02.tex#python-1",
+          "pages": [
+            58
+          ]
+        },
+        {
+          "characters_compared": 289,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-BASES-DE-DONNEES/cours/TNSI-BDD-COURS-07.tex#python-1",
+          "pages": [
+            58
+          ]
+        },
+        {
+          "characters_compared": 289,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-BASES-DE-DONNEES/cours/TNSI-BDD-COURS-12.tex#python-1",
+          "pages": [
+            58
+          ]
+        },
+        {
+          "characters_compared": 176,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/10_C01_programme_donnee.tex#python-1",
+          "pages": [
+            93
+          ]
+        },
+        {
+          "characters_compared": 56,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/11_C02_recursivite.tex#python-1",
+          "pages": [
+            94
+          ]
+        },
+        {
+          "characters_compared": 128,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/11_C02_recursivite.tex#python-2",
+          "pages": [
+            94
+          ]
+        },
+        {
+          "characters_compared": 118,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/11_C02_recursivite.tex#python-3",
+          "pages": [
+            94,
+            95
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/12_C03_api_modules.tex#python-1",
+          "pages": [
+            95
+          ]
+        },
+        {
+          "characters_compared": 268,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/12_C03_api_modules.tex#python-2",
+          "pages": [
+            95,
+            96
+          ]
+        },
+        {
+          "characters_compared": 89,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/13_C04_paradigmes.tex#python-1",
+          "pages": [
+            96
+          ]
+        },
+        {
+          "characters_compared": 75,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/13_C04_paradigmes.tex#python-2",
+          "pages": [
+            96
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/13_C04_paradigmes.tex#python-3",
+          "pages": [
+            96
+          ]
+        },
+        {
+          "characters_compared": 123,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/14_C05_debug.tex#python-1",
+          "pages": [
+            97
+          ]
+        },
+        {
+          "characters_compared": 90,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/14_C05_debug.tex#python-2",
+          "pages": [
+            97
+          ]
+        },
+        {
+          "characters_compared": 114,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/14_C05_debug.tex#python-3",
+          "pages": [
+            97,
+            98
+          ]
+        },
+        {
+          "characters_compared": 140,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/14_C05_debug.tex#python-4",
+          "pages": [
+            98
+          ]
+        },
+        {
+          "characters_compared": 176,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-01.tex#python-1",
+          "pages": [
+            93
+          ]
+        },
+        {
+          "characters_compared": 56,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-02.tex#python-1",
+          "pages": [
+            94
+          ]
+        },
+        {
+          "characters_compared": 128,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-02.tex#python-2",
+          "pages": [
+            94
+          ]
+        },
+        {
+          "characters_compared": 118,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-02.tex#python-3",
+          "pages": [
+            94,
+            95
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-03.tex#python-1",
+          "pages": [
+            95
+          ]
+        },
+        {
+          "characters_compared": 268,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-03.tex#python-2",
+          "pages": [
+            95,
+            96
+          ]
+        },
+        {
+          "characters_compared": 89,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-04.tex#python-1",
+          "pages": [
+            96
+          ]
+        },
+        {
+          "characters_compared": 75,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-04.tex#python-2",
+          "pages": [
+            96
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-04.tex#python-3",
+          "pages": [
+            96
+          ]
+        },
+        {
+          "characters_compared": 123,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-05.tex#python-1",
+          "pages": [
+            97
+          ]
+        },
+        {
+          "characters_compared": 90,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-05.tex#python-2",
+          "pages": [
+            97
+          ]
+        },
+        {
+          "characters_compared": 114,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-05.tex#python-3",
+          "pages": [
+            97,
+            98
+          ]
+        },
+        {
+          "characters_compared": 140,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-05.tex#python-4",
+          "pages": [
+            98
+          ]
+        },
+        {
+          "characters_compared": 176,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-06.tex#python-1",
+          "pages": [
+            93
+          ]
+        },
+        {
+          "characters_compared": 56,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-07.tex#python-1",
+          "pages": [
+            94
+          ]
+        },
+        {
+          "characters_compared": 128,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-07.tex#python-2",
+          "pages": [
+            94
+          ]
+        },
+        {
+          "characters_compared": 118,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-07.tex#python-3",
+          "pages": [
+            94,
+            95
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-08.tex#python-1",
+          "pages": [
+            95
+          ]
+        },
+        {
+          "characters_compared": 268,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-08.tex#python-2",
+          "pages": [
+            95,
+            96
+          ]
+        },
+        {
+          "characters_compared": 89,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-09.tex#python-1",
+          "pages": [
+            96
+          ]
+        },
+        {
+          "characters_compared": 75,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-09.tex#python-2",
+          "pages": [
+            96
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-09.tex#python-3",
+          "pages": [
+            96
+          ]
+        },
+        {
+          "characters_compared": 123,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-10.tex#python-1",
+          "pages": [
+            97
+          ]
+        },
+        {
+          "characters_compared": 90,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-10.tex#python-2",
+          "pages": [
+            97
+          ]
+        },
+        {
+          "characters_compared": 114,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-10.tex#python-3",
+          "pages": [
+            97,
+            98
+          ]
+        },
+        {
+          "characters_compared": 140,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-10.tex#python-4",
+          "pages": [
+            98
+          ]
+        },
+        {
+          "characters_compared": 176,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-11.tex#python-1",
+          "pages": [
+            93
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-003.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-004.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-007.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-008.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-011.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-012.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-015.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-016.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-019.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-020.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-023.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-024.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-027.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-028.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-031.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-032.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-035.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-036.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-039.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-040.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-043.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-044.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-047.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-048.tex#python-1",
+          "pages": [
+            110
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/10_C01_interface_implementation.tex#python-1",
+          "pages": [
+            123
+          ]
+        },
+        {
+          "characters_compared": 326,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/10_C01_interface_implementation.tex#python-2",
+          "pages": [
+            123
+          ]
+        },
+        {
+          "characters_compared": 165,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/11_C02_classes.tex#python-1",
+          "pages": [
+            124
+          ]
+        },
+        {
+          "characters_compared": 124,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/11_C02_classes.tex#python-2",
+          "pages": [
+            124
+          ]
+        },
+        {
+          "characters_compared": 184,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/12_C03_piles_files_choix.tex#python-1",
+          "pages": [
+            125
+          ]
+        },
+        {
+          "characters_compared": 383,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/13_C04_arbres_binaires.tex#python-1",
+          "pages": [
+            126
+          ]
+        },
+        {
+          "characters_compared": 34,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/14_C05_graphes.tex#python-1",
+          "pages": [
+            127
+          ]
+        },
+        {
+          "characters_compared": 33,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/14_C05_graphes.tex#python-2",
+          "pages": [
+            127
+          ]
+        },
+        {
+          "characters_compared": 105,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/14_C05_graphes.tex#python-3",
+          "pages": [
+            127
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-01.tex#python-1",
+          "pages": [
+            123
+          ]
+        },
+        {
+          "characters_compared": 326,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-01.tex#python-2",
+          "pages": [
+            123
+          ]
+        },
+        {
+          "characters_compared": 165,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-02.tex#python-1",
+          "pages": [
+            124
+          ]
+        },
+        {
+          "characters_compared": 124,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-02.tex#python-2",
+          "pages": [
+            124
+          ]
+        },
+        {
+          "characters_compared": 184,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-03.tex#python-1",
+          "pages": [
+            125
+          ]
+        },
+        {
+          "characters_compared": 383,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-04.tex#python-1",
+          "pages": [
+            126
+          ]
+        },
+        {
+          "characters_compared": 34,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-05.tex#python-1",
+          "pages": [
+            127
+          ]
+        },
+        {
+          "characters_compared": 33,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-05.tex#python-2",
+          "pages": [
+            127
+          ]
+        },
+        {
+          "characters_compared": 105,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-05.tex#python-3",
+          "pages": [
+            127
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-06.tex#python-1",
+          "pages": [
+            123
+          ]
+        },
+        {
+          "characters_compared": 326,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-06.tex#python-2",
+          "pages": [
+            123
+          ]
+        },
+        {
+          "characters_compared": 165,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-07.tex#python-1",
+          "pages": [
+            124
+          ]
+        },
+        {
+          "characters_compared": 124,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-07.tex#python-2",
+          "pages": [
+            124
+          ]
+        },
+        {
+          "characters_compared": 184,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-08.tex#python-1",
+          "pages": [
+            125
+          ]
+        },
+        {
+          "characters_compared": 383,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-09.tex#python-1",
+          "pages": [
+            126
+          ]
+        },
+        {
+          "characters_compared": 34,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-10.tex#python-1",
+          "pages": [
+            127
+          ]
+        },
+        {
+          "characters_compared": 33,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-10.tex#python-2",
+          "pages": [
+            127
+          ]
+        },
+        {
+          "characters_compared": 105,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-10.tex#python-3",
+          "pages": [
+            127
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-11.tex#python-1",
+          "pages": [
+            123
+          ]
+        },
+        {
+          "characters_compared": 326,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-11.tex#python-2",
+          "pages": [
+            123
+          ]
+        },
+        {
+          "characters_compared": 165,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-12.tex#python-1",
+          "pages": [
+            124
+          ]
+        },
+        {
+          "characters_compared": 124,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-12.tex#python-2",
+          "pages": [
+            124
+          ]
+        },
+        {
+          "characters_compared": 184,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-13.tex#python-1",
+          "pages": [
+            125
+          ]
+        },
+        {
+          "characters_compared": 383,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-14.tex#python-1",
+          "pages": [
+            126
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-004.tex#python-1",
+          "pages": [
+            142
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-008.tex#python-1",
+          "pages": [
+            142
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-012.tex#python-1",
+          "pages": [
+            142
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-016.tex#python-1",
+          "pages": [
+            142
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-020.tex#python-1",
+          "pages": [
+            142
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-024.tex#python-1",
+          "pages": [
+            142
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-028.tex#python-1",
+          "pages": [
+            142
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-032.tex#python-1",
+          "pages": [
+            142
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-036.tex#python-1",
+          "pages": [
+            142
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-040.tex#python-1",
+          "pages": [
+            142
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-044.tex#python-1",
+          "pages": [
+            142
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-048.tex#python-1",
+          "pages": [
+            142
+          ]
+        }
+      ],
+      "leaked": [],
+      "pages": 158,
+      "smart_quote_pages": [],
+      "unfaithful": [],
+      "unresolved_references": [],
+      "variant": "eleve",
+      "visible_malformed_fragments": [],
+      "withheld": []
+    },
+    {
+      "code_blocks": 435,
+      "emptied_environments": [],
+      "faithful": [
+        {
+          "characters_compared": 114,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/10_C01_arbres_parcours.tex#python-1",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 183,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/10_C01_arbres_parcours.tex#python-2",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 101,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/10_C01_arbres_parcours.tex#python-3",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 231,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/10_C01_arbres_parcours.tex#python-4",
+          "pages": [
+            8
+          ]
+        },
+        {
+          "characters_compared": 281,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/11_C02_arbres_recherche.tex#python-1",
+          "pages": [
+            8
+          ]
+        },
+        {
+          "characters_compared": 179,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/11_C02_arbres_recherche.tex#python-2",
+          "pages": [
+            9
+          ]
+        },
+        {
+          "characters_compared": 180,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/12_C03_graphes_parcours.tex#python-1",
+          "pages": [
+            9,
+            10
+          ]
+        },
+        {
+          "characters_compared": 169,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/12_C03_graphes_parcours.tex#python-2",
+          "pages": [
+            10
+          ]
+        },
+        {
+          "characters_compared": 206,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/13_C04_graphes_cycle_chemin.tex#python-1",
+          "pages": [
+            10,
+            11
+          ]
+        },
+        {
+          "characters_compared": 406,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/13_C04_graphes_cycle_chemin.tex#python-2",
+          "pages": [
+            11
+          ]
+        },
+        {
+          "characters_compared": 369,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/14_C05_diviser_pour_regner.tex#python-1",
+          "pages": [
+            11,
+            12
+          ]
+        },
+        {
+          "characters_compared": 187,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/15_C06_programmation_dynamique.tex#python-1",
+          "pages": [
+            12,
+            13
+          ]
+        },
+        {
+          "characters_compared": 258,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/15_C06_programmation_dynamique.tex#python-2",
+          "pages": [
+            13
+          ]
+        },
+        {
+          "characters_compared": 146,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/16_C07_boyer_moore.tex#python-1",
+          "pages": [
+            13
+          ]
+        },
+        {
+          "characters_compared": 344,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/16_C07_boyer_moore.tex#python-2",
+          "pages": [
+            14
+          ]
+        },
+        {
+          "characters_compared": 114,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-01.tex#python-1",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 183,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-01.tex#python-2",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 101,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-01.tex#python-3",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 231,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-01.tex#python-4",
+          "pages": [
+            8
+          ]
+        },
+        {
+          "characters_compared": 281,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-02.tex#python-1",
+          "pages": [
+            8
+          ]
+        },
+        {
+          "characters_compared": 179,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-02.tex#python-2",
+          "pages": [
+            9
+          ]
+        },
+        {
+          "characters_compared": 180,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-03.tex#python-1",
+          "pages": [
+            9,
+            10
+          ]
+        },
+        {
+          "characters_compared": 169,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-03.tex#python-2",
+          "pages": [
+            10
+          ]
+        },
+        {
+          "characters_compared": 206,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-04.tex#python-1",
+          "pages": [
+            10,
+            11
+          ]
+        },
+        {
+          "characters_compared": 406,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-04.tex#python-2",
+          "pages": [
+            11
+          ]
+        },
+        {
+          "characters_compared": 369,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-05.tex#python-1",
+          "pages": [
+            11,
+            12
+          ]
+        },
+        {
+          "characters_compared": 187,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-06.tex#python-1",
+          "pages": [
+            12,
+            13
+          ]
+        },
+        {
+          "characters_compared": 258,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-06.tex#python-2",
+          "pages": [
+            13
+          ]
+        },
+        {
+          "characters_compared": 146,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-07.tex#python-1",
+          "pages": [
+            13
+          ]
+        },
+        {
+          "characters_compared": 344,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-07.tex#python-2",
+          "pages": [
+            14
+          ]
+        },
+        {
+          "characters_compared": 114,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-08.tex#python-1",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 183,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-08.tex#python-2",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 101,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-08.tex#python-3",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 231,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-08.tex#python-4",
+          "pages": [
+            8
+          ]
+        },
+        {
+          "characters_compared": 281,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-09.tex#python-1",
+          "pages": [
+            8
+          ]
+        },
+        {
+          "characters_compared": 179,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-09.tex#python-2",
+          "pages": [
+            9
+          ]
+        },
+        {
+          "characters_compared": 180,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-10.tex#python-1",
+          "pages": [
+            9,
+            10
+          ]
+        },
+        {
+          "characters_compared": 169,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-10.tex#python-2",
+          "pages": [
+            10
+          ]
+        },
+        {
+          "characters_compared": 206,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-11.tex#python-1",
+          "pages": [
+            10,
+            11
+          ]
+        },
+        {
+          "characters_compared": 406,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-11.tex#python-2",
+          "pages": [
+            11
+          ]
+        },
+        {
+          "characters_compared": 369,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-12.tex#python-1",
+          "pages": [
+            11,
+            12
+          ]
+        },
+        {
+          "characters_compared": 187,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-13.tex#python-1",
+          "pages": [
+            12,
+            13
+          ]
+        },
+        {
+          "characters_compared": 258,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-13.tex#python-2",
+          "pages": [
+            13
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-003.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-008.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-013.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-018.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-023.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-028.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-033.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-038.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-043.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-048.tex#python-1",
+          "pages": [
+            29
+          ]
+        },
+        {
+          "characters_compared": 84,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/evaluations/TNSI-ALGO-EVAL-A-corrige.tex#python-1",
+          "pages": [
+            41
+          ]
+        },
+        {
+          "characters_compared": 81,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/evaluations/TNSI-ALGO-EVAL-A-corrige.tex#python-2",
+          "pages": [
+            41
+          ]
+        },
+        {
+          "characters_compared": 52,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/evaluations/TNSI-ALGO-EVAL-A.tex#python-1",
+          "pages": [
+            41
+          ]
+        },
+        {
+          "characters_compared": 127,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/evaluations/TNSI-ALGO-EVAL-B-corrige.tex#python-1",
+          "pages": [
+            42
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/evaluations/TNSI-ALGO-EVAL-B.tex#python-1",
+          "pages": [
+            42
+          ]
+        },
+        {
+          "characters_compared": 63,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/remediation/TNSI-ALGO-REMED-01.tex#python-1",
+          "pages": [
+            42,
+            43
+          ]
+        },
+        {
+          "characters_compared": 63,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/remediation/TNSI-ALGO-REMED-02.tex#python-1",
+          "pages": [
+            42,
+            43
+          ]
+        },
+        {
+          "characters_compared": 63,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/remediation/TNSI-ALGO-REMED-03.tex#python-1",
+          "pages": [
+            42,
+            43
+          ]
+        },
+        {
+          "characters_compared": 63,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/remediation/TNSI-ALGO-REMED-04.tex#python-1",
+          "pages": [
+            42,
+            43
+          ]
+        },
+        {
+          "characters_compared": 63,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/remediation/TNSI-ALGO-REMED-05.tex#python-1",
+          "pages": [
+            42,
+            43
+          ]
+        },
+        {
+          "characters_compared": 63,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/remediation/TNSI-ALGO-REMED-06.tex#python-1",
+          "pages": [
+            42,
+            43
+          ]
+        },
+        {
+          "characters_compared": 63,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/remediation/TNSI-ALGO-REMED-07.tex#python-1",
+          "pages": [
+            42,
+            43
+          ]
+        },
+        {
+          "characters_compared": 63,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/remediation/TNSI-ALGO-REMED-08.tex#python-1",
+          "pages": [
+            42,
+            43
+          ]
+        },
+        {
+          "characters_compared": 63,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/remediation/TNSI-ALGO-REMED-09.tex#python-1",
+          "pages": [
+            42,
+            43
+          ]
+        },
+        {
+          "characters_compared": 63,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/remediation/TNSI-ALGO-REMED-10.tex#python-1",
+          "pages": [
+            42,
+            43
+          ]
+        },
+        {
+          "characters_compared": 63,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/remediation/TNSI-ALGO-REMED-11.tex#python-1",
+          "pages": [
+            42,
+            43
+          ]
+        },
+        {
+          "characters_compared": 63,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/remediation/TNSI-ALGO-REMED-12.tex#python-1",
+          "pages": [
+            42,
+            43
+          ]
+        },
+        {
+          "characters_compared": 63,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/remediation/TNSI-ALGO-REMED-13.tex#python-1",
+          "pages": [
+            42,
+            43
+          ]
+        },
+        {
+          "characters_compared": 63,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/remediation/TNSI-ALGORITHMIQUE-RE-C04.tex#python-1",
+          "pages": [
+            42,
+            43
+          ]
+        },
+        {
+          "characters_compared": 164,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-001.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 103,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-002.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 59,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-003.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-004.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 180,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-005.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 164,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-006.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 103,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-007.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 59,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-008.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-009.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 180,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-010.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 164,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-011.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 103,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-012.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 59,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-013.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-014.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 180,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-015.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 164,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-016.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 103,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-017.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 59,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-018.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-019.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 180,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-020.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 164,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-021.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 103,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-022.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 59,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-023.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-024.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 180,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-025.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 164,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-026.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 103,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-027.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 59,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-028.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-029.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 180,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-030.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 164,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-031.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 103,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-032.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 59,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-033.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-034.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 180,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-035.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 164,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-036.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 103,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-037.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 59,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-038.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-039.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 180,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-040.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 164,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-041.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 103,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-042.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 59,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-043.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-044.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 180,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-045.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 164,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-046.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 103,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-047.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 59,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-048.tex#python-1",
+          "pages": [
+            48
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-049.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 180,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-050.tex#python-1",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 292,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/11_C02_processus.tex#python-1",
+          "pages": [
+            62
+          ]
+        },
+        {
+          "characters_compared": 124,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/11_C02_processus.tex#python-2",
+          "pages": [
+            62
+          ]
+        },
+        {
+          "characters_compared": 87,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/12_C03_routage.tex#python-1",
+          "pages": [
+            63
+          ]
+        },
+        {
+          "characters_compared": 169,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/13_C04_chiffrement.tex#python-1",
+          "pages": [
+            64
+          ]
+        },
+        {
+          "characters_compared": 292,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/TNSI-ARCH-COURS-02.tex#python-1",
+          "pages": [
+            62
+          ]
+        },
+        {
+          "characters_compared": 124,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/TNSI-ARCH-COURS-02.tex#python-2",
+          "pages": [
+            62
+          ]
+        },
+        {
+          "characters_compared": 87,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/TNSI-ARCH-COURS-03.tex#python-1",
+          "pages": [
+            63
+          ]
+        },
+        {
+          "characters_compared": 169,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/TNSI-ARCH-COURS-04.tex#python-1",
+          "pages": [
+            64
+          ]
+        },
+        {
+          "characters_compared": 292,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/TNSI-ARCH-COURS-06.tex#python-1",
+          "pages": [
+            62
+          ]
+        },
+        {
+          "characters_compared": 124,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/TNSI-ARCH-COURS-06.tex#python-2",
+          "pages": [
+            62
+          ]
+        },
+        {
+          "characters_compared": 87,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/TNSI-ARCH-COURS-07.tex#python-1",
+          "pages": [
+            63
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-003.tex#python-1",
+          "pages": [
+            71
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-007.tex#python-1",
+          "pages": [
+            71
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-011.tex#python-1",
+          "pages": [
+            71
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-015.tex#python-1",
+          "pages": [
+            71
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-019.tex#python-1",
+          "pages": [
+            71
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-023.tex#python-1",
+          "pages": [
+            71
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-027.tex#python-1",
+          "pages": [
+            71
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-031.tex#python-1",
+          "pages": [
+            71
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-035.tex#python-1",
+          "pages": [
+            71
+          ]
+        },
+        {
+          "characters_compared": 65,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-039.tex#python-1",
+          "pages": [
+            71
+          ]
+        },
+        {
+          "characters_compared": 124,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/evaluations/TNSI-ARCH-EVAL-A-corrige.tex#python-1",
+          "pages": [
+            80
+          ]
+        },
+        {
+          "characters_compared": 81,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/evaluations/TNSI-ARCH-EVAL-B.tex#python-1",
+          "pages": [
+            81
+          ]
+        },
+        {
+          "characters_compared": 95,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-001.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 82,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-002.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 126,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-004.tex#python-1",
+          "pages": [
+            84
+          ]
+        },
+        {
+          "characters_compared": 95,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-005.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 82,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-006.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 126,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-008.tex#python-1",
+          "pages": [
+            84
+          ]
+        },
+        {
+          "characters_compared": 95,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-009.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 82,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-010.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 126,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-012.tex#python-1",
+          "pages": [
+            84
+          ]
+        },
+        {
+          "characters_compared": 95,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-013.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 82,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-014.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 126,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-016.tex#python-1",
+          "pages": [
+            84
+          ]
+        },
+        {
+          "characters_compared": 95,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-017.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 82,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-018.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 126,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-020.tex#python-1",
+          "pages": [
+            84
+          ]
+        },
+        {
+          "characters_compared": 95,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-021.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 82,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-022.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 126,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-024.tex#python-1",
+          "pages": [
+            84
+          ]
+        },
+        {
+          "characters_compared": 95,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-025.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 82,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-026.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 126,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-028.tex#python-1",
+          "pages": [
+            84
+          ]
+        },
+        {
+          "characters_compared": 95,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-029.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 82,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-030.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 126,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-032.tex#python-1",
+          "pages": [
+            84
+          ]
+        },
+        {
+          "characters_compared": 95,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-033.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 82,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-034.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 126,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-036.tex#python-1",
+          "pages": [
+            84
+          ]
+        },
+        {
+          "characters_compared": 95,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-037.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 82,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-038.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 126,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-040.tex#python-1",
+          "pages": [
+            84
+          ]
+        },
+        {
+          "characters_compared": 95,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-041.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 82,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-042.tex#python-1",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 289,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-BASES-DE-DONNEES/cours/11_C02_sgbd.tex#python-1",
+          "pages": [
+            92
+          ]
+        },
+        {
+          "characters_compared": 289,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-BASES-DE-DONNEES/cours/TNSI-BDD-COURS-02.tex#python-1",
+          "pages": [
+            92
+          ]
+        },
+        {
+          "characters_compared": 289,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-BASES-DE-DONNEES/cours/TNSI-BDD-COURS-07.tex#python-1",
+          "pages": [
+            92
+          ]
+        },
+        {
+          "characters_compared": 289,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-BASES-DE-DONNEES/cours/TNSI-BDD-COURS-12.tex#python-1",
+          "pages": [
+            92
+          ]
+        },
+        {
+          "characters_compared": 176,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/10_C01_programme_donnee.tex#python-1",
+          "pages": [
+            151
+          ]
+        },
+        {
+          "characters_compared": 56,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/11_C02_recursivite.tex#python-1",
+          "pages": [
+            152
+          ]
+        },
+        {
+          "characters_compared": 128,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/11_C02_recursivite.tex#python-2",
+          "pages": [
+            152
+          ]
+        },
+        {
+          "characters_compared": 118,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/11_C02_recursivite.tex#python-3",
+          "pages": [
+            152,
+            153
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/12_C03_api_modules.tex#python-1",
+          "pages": [
+            153
+          ]
+        },
+        {
+          "characters_compared": 268,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/12_C03_api_modules.tex#python-2",
+          "pages": [
+            153,
+            154
+          ]
+        },
+        {
+          "characters_compared": 89,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/13_C04_paradigmes.tex#python-1",
+          "pages": [
+            154
+          ]
+        },
+        {
+          "characters_compared": 75,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/13_C04_paradigmes.tex#python-2",
+          "pages": [
+            154
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/13_C04_paradigmes.tex#python-3",
+          "pages": [
+            154
+          ]
+        },
+        {
+          "characters_compared": 123,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/14_C05_debug.tex#python-1",
+          "pages": [
+            155
+          ]
+        },
+        {
+          "characters_compared": 90,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/14_C05_debug.tex#python-2",
+          "pages": [
+            155
+          ]
+        },
+        {
+          "characters_compared": 114,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/14_C05_debug.tex#python-3",
+          "pages": [
+            155,
+            156
+          ]
+        },
+        {
+          "characters_compared": 140,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/14_C05_debug.tex#python-4",
+          "pages": [
+            156
+          ]
+        },
+        {
+          "characters_compared": 176,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-01.tex#python-1",
+          "pages": [
+            151
+          ]
+        },
+        {
+          "characters_compared": 56,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-02.tex#python-1",
+          "pages": [
+            152
+          ]
+        },
+        {
+          "characters_compared": 128,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-02.tex#python-2",
+          "pages": [
+            152
+          ]
+        },
+        {
+          "characters_compared": 118,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-02.tex#python-3",
+          "pages": [
+            152,
+            153
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-03.tex#python-1",
+          "pages": [
+            153
+          ]
+        },
+        {
+          "characters_compared": 268,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-03.tex#python-2",
+          "pages": [
+            153,
+            154
+          ]
+        },
+        {
+          "characters_compared": 89,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-04.tex#python-1",
+          "pages": [
+            154
+          ]
+        },
+        {
+          "characters_compared": 75,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-04.tex#python-2",
+          "pages": [
+            154
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-04.tex#python-3",
+          "pages": [
+            154
+          ]
+        },
+        {
+          "characters_compared": 123,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-05.tex#python-1",
+          "pages": [
+            155
+          ]
+        },
+        {
+          "characters_compared": 90,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-05.tex#python-2",
+          "pages": [
+            155
+          ]
+        },
+        {
+          "characters_compared": 114,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-05.tex#python-3",
+          "pages": [
+            155,
+            156
+          ]
+        },
+        {
+          "characters_compared": 140,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-05.tex#python-4",
+          "pages": [
+            156
+          ]
+        },
+        {
+          "characters_compared": 176,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-06.tex#python-1",
+          "pages": [
+            151
+          ]
+        },
+        {
+          "characters_compared": 56,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-07.tex#python-1",
+          "pages": [
+            152
+          ]
+        },
+        {
+          "characters_compared": 128,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-07.tex#python-2",
+          "pages": [
+            152
+          ]
+        },
+        {
+          "characters_compared": 118,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-07.tex#python-3",
+          "pages": [
+            152,
+            153
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-08.tex#python-1",
+          "pages": [
+            153
+          ]
+        },
+        {
+          "characters_compared": 268,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-08.tex#python-2",
+          "pages": [
+            153,
+            154
+          ]
+        },
+        {
+          "characters_compared": 89,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-09.tex#python-1",
+          "pages": [
+            154
+          ]
+        },
+        {
+          "characters_compared": 75,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-09.tex#python-2",
+          "pages": [
+            154
+          ]
+        },
+        {
+          "characters_compared": 133,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-09.tex#python-3",
+          "pages": [
+            154
+          ]
+        },
+        {
+          "characters_compared": 123,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-10.tex#python-1",
+          "pages": [
+            155
+          ]
+        },
+        {
+          "characters_compared": 90,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-10.tex#python-2",
+          "pages": [
+            155
+          ]
+        },
+        {
+          "characters_compared": 114,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-10.tex#python-3",
+          "pages": [
+            155,
+            156
+          ]
+        },
+        {
+          "characters_compared": 140,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-10.tex#python-4",
+          "pages": [
+            156
+          ]
+        },
+        {
+          "characters_compared": 176,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/TNSI-LANG-COURS-11.tex#python-1",
+          "pages": [
+            151
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-003.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-004.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-007.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-008.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-011.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-012.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-015.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-016.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-019.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-020.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-023.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-024.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-027.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-028.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-031.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-032.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-035.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-036.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-039.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-040.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-043.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-044.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-047.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 155,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-048.tex#python-1",
+          "pages": [
+            168
+          ]
+        },
+        {
+          "characters_compared": 86,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/evaluations/TNSI-LANG-EVAL-A-corrige.tex#python-1",
+          "pages": [
+            183
+          ]
+        },
+        {
+          "characters_compared": 236,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/evaluations/TNSI-LANG-EVAL-B-corrige.tex#python-1",
+          "pages": [
+            183,
+            184
+          ]
+        },
+        {
+          "characters_compared": 70,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/evaluations/TNSI-LANG-EVAL-B-corrige.tex#python-2",
+          "pages": [
+            184
+          ]
+        },
+        {
+          "characters_compared": 104,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/evaluations/TNSI-LANG-EVAL-B.tex#python-1",
+          "pages": [
+            184
+          ]
+        },
+        {
+          "characters_compared": 70,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/evaluations/TNSI-LANG-EVAL-B.tex#python-2",
+          "pages": [
+            184
+          ]
+        },
+        {
+          "characters_compared": 36,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/evaluations/TNSI-LANG-EVAL-B.tex#python-3",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 49,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-01.tex#python-1",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 52,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-01.tex#python-2",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 49,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-02.tex#python-1",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 52,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-02.tex#python-2",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 49,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-03.tex#python-1",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 52,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-03.tex#python-2",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 49,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-04.tex#python-1",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 52,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-04.tex#python-2",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 49,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-05.tex#python-1",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 52,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-05.tex#python-2",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 49,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-06.tex#python-1",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 52,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-06.tex#python-2",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 49,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-07.tex#python-1",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 52,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-07.tex#python-2",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 49,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-08.tex#python-1",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 52,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-08.tex#python-2",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 49,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-09.tex#python-1",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 52,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-09.tex#python-2",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 49,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-10.tex#python-1",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 52,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-10.tex#python-2",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 49,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-11.tex#python-1",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 52,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANG-REMED-11.tex#python-2",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 49,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANGAGES-ET-PROGRAMMATION-RE-C05.tex#python-1",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 52,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/remediation/TNSI-LANGAGES-ET-PROGRAMMATION-RE-C05.tex#python-2",
+          "pages": [
+            185
+          ]
+        },
+        {
+          "characters_compared": 67,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-001.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 141,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-002.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 100,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-003.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-003.tex#python-2",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 60,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-004.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 67,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-005.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 141,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-006.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 100,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-007.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-007.tex#python-2",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 60,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-008.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 67,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-009.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 141,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-010.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 100,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-011.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-011.tex#python-2",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 60,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-012.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 67,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-013.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 141,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-014.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 100,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-015.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-015.tex#python-2",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 60,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-016.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 67,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-017.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 141,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-018.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 100,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-019.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-019.tex#python-2",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 60,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-020.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 67,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-021.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 141,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-022.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 100,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-023.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-023.tex#python-2",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 60,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-024.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 67,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-025.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 141,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-026.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 100,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-027.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-027.tex#python-2",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 60,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-028.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 67,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-029.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 141,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-030.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 100,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-031.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-031.tex#python-2",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 60,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-032.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 67,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-033.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 141,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-034.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 100,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-035.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-035.tex#python-2",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 60,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-036.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 67,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-037.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 141,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-038.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 100,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-039.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-039.tex#python-2",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 60,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-040.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 67,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-041.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 141,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-042.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 100,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-043.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-043.tex#python-2",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 60,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-044.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 67,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-045.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 141,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-046.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 100,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-047.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-047.tex#python-2",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 60,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-048.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 67,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-049.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 141,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-050.tex#python-1",
+          "pages": [
+            189
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/10_C01_interface_implementation.tex#python-1",
+          "pages": [
+            201
+          ]
+        },
+        {
+          "characters_compared": 326,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/10_C01_interface_implementation.tex#python-2",
+          "pages": [
+            201
+          ]
+        },
+        {
+          "characters_compared": 165,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/11_C02_classes.tex#python-1",
+          "pages": [
+            202
+          ]
+        },
+        {
+          "characters_compared": 124,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/11_C02_classes.tex#python-2",
+          "pages": [
+            202
+          ]
+        },
+        {
+          "characters_compared": 184,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/12_C03_piles_files_choix.tex#python-1",
+          "pages": [
+            203
+          ]
+        },
+        {
+          "characters_compared": 383,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/13_C04_arbres_binaires.tex#python-1",
+          "pages": [
+            204
+          ]
+        },
+        {
+          "characters_compared": 34,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/14_C05_graphes.tex#python-1",
+          "pages": [
+            205
+          ]
+        },
+        {
+          "characters_compared": 33,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/14_C05_graphes.tex#python-2",
+          "pages": [
+            205
+          ]
+        },
+        {
+          "characters_compared": 105,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/14_C05_graphes.tex#python-3",
+          "pages": [
+            205
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-01.tex#python-1",
+          "pages": [
+            201
+          ]
+        },
+        {
+          "characters_compared": 326,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-01.tex#python-2",
+          "pages": [
+            201
+          ]
+        },
+        {
+          "characters_compared": 165,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-02.tex#python-1",
+          "pages": [
+            202
+          ]
+        },
+        {
+          "characters_compared": 124,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-02.tex#python-2",
+          "pages": [
+            202
+          ]
+        },
+        {
+          "characters_compared": 184,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-03.tex#python-1",
+          "pages": [
+            203
+          ]
+        },
+        {
+          "characters_compared": 383,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-04.tex#python-1",
+          "pages": [
+            204
+          ]
+        },
+        {
+          "characters_compared": 34,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-05.tex#python-1",
+          "pages": [
+            205
+          ]
+        },
+        {
+          "characters_compared": 33,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-05.tex#python-2",
+          "pages": [
+            205
+          ]
+        },
+        {
+          "characters_compared": 105,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-05.tex#python-3",
+          "pages": [
+            205
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-06.tex#python-1",
+          "pages": [
+            201
+          ]
+        },
+        {
+          "characters_compared": 326,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-06.tex#python-2",
+          "pages": [
+            201
+          ]
+        },
+        {
+          "characters_compared": 165,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-07.tex#python-1",
+          "pages": [
+            202
+          ]
+        },
+        {
+          "characters_compared": 124,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-07.tex#python-2",
+          "pages": [
+            202
+          ]
+        },
+        {
+          "characters_compared": 184,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-08.tex#python-1",
+          "pages": [
+            203
+          ]
+        },
+        {
+          "characters_compared": 383,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-09.tex#python-1",
+          "pages": [
+            204
+          ]
+        },
+        {
+          "characters_compared": 34,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-10.tex#python-1",
+          "pages": [
+            205
+          ]
+        },
+        {
+          "characters_compared": 33,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-10.tex#python-2",
+          "pages": [
+            205
+          ]
+        },
+        {
+          "characters_compared": 105,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-10.tex#python-3",
+          "pages": [
+            205
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-11.tex#python-1",
+          "pages": [
+            201
+          ]
+        },
+        {
+          "characters_compared": 326,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-11.tex#python-2",
+          "pages": [
+            201
+          ]
+        },
+        {
+          "characters_compared": 165,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-12.tex#python-1",
+          "pages": [
+            202
+          ]
+        },
+        {
+          "characters_compared": 124,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-12.tex#python-2",
+          "pages": [
+            202
+          ]
+        },
+        {
+          "characters_compared": 184,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-13.tex#python-1",
+          "pages": [
+            203
+          ]
+        },
+        {
+          "characters_compared": 383,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/TNSI-STRUCT-COURS-14.tex#python-1",
+          "pages": [
+            204
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-004.tex#python-1",
+          "pages": [
+            220
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-008.tex#python-1",
+          "pages": [
+            220
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-012.tex#python-1",
+          "pages": [
+            220
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-016.tex#python-1",
+          "pages": [
+            220
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-020.tex#python-1",
+          "pages": [
+            220
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-024.tex#python-1",
+          "pages": [
+            220
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-028.tex#python-1",
+          "pages": [
+            220
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-032.tex#python-1",
+          "pages": [
+            220
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-036.tex#python-1",
+          "pages": [
+            220
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-040.tex#python-1",
+          "pages": [
+            220
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-044.tex#python-1",
+          "pages": [
+            220
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-048.tex#python-1",
+          "pages": [
+            220
+          ]
+        },
+        {
+          "characters_compared": 188,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/evaluations/TNSI-STRUCT-EVAL-A-corrige.tex#python-1",
+          "pages": [
+            234
+          ]
+        },
+        {
+          "characters_compared": 34,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/evaluations/TNSI-STRUCT-EVAL-B-corrige.tex#python-1",
+          "pages": [
+            235
+          ]
+        },
+        {
+          "characters_compared": 32,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/evaluations/TNSI-STRUCT-EVAL-B.tex#python-1",
+          "pages": [
+            235
+          ]
+        },
+        {
+          "characters_compared": 327,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-001.tex#python-1",
+          "pages": [
+            238
+          ]
+        },
+        {
+          "characters_compared": 252,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-002.tex#python-1",
+          "pages": [
+            238,
+            239
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-003.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 38,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-004.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 327,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-005.tex#python-1",
+          "pages": [
+            238
+          ]
+        },
+        {
+          "characters_compared": 252,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-006.tex#python-1",
+          "pages": [
+            238,
+            239
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-007.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 38,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-008.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 327,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-009.tex#python-1",
+          "pages": [
+            238
+          ]
+        },
+        {
+          "characters_compared": 252,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-010.tex#python-1",
+          "pages": [
+            238,
+            239
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-011.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 38,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-012.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 327,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-013.tex#python-1",
+          "pages": [
+            238
+          ]
+        },
+        {
+          "characters_compared": 252,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-014.tex#python-1",
+          "pages": [
+            238,
+            239
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-015.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 38,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-016.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 327,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-017.tex#python-1",
+          "pages": [
+            238
+          ]
+        },
+        {
+          "characters_compared": 252,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-018.tex#python-1",
+          "pages": [
+            238,
+            239
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-019.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 38,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-020.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 327,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-021.tex#python-1",
+          "pages": [
+            238
+          ]
+        },
+        {
+          "characters_compared": 252,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-022.tex#python-1",
+          "pages": [
+            238,
+            239
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-023.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 38,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-024.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 327,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-025.tex#python-1",
+          "pages": [
+            238
+          ]
+        },
+        {
+          "characters_compared": 252,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-026.tex#python-1",
+          "pages": [
+            238,
+            239
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-027.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 38,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-028.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 327,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-029.tex#python-1",
+          "pages": [
+            238
+          ]
+        },
+        {
+          "characters_compared": 252,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-030.tex#python-1",
+          "pages": [
+            238,
+            239
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-031.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 38,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-032.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 327,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-033.tex#python-1",
+          "pages": [
+            238
+          ]
+        },
+        {
+          "characters_compared": 252,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-034.tex#python-1",
+          "pages": [
+            238,
+            239
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-035.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 38,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-036.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 327,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-037.tex#python-1",
+          "pages": [
+            238
+          ]
+        },
+        {
+          "characters_compared": 252,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-038.tex#python-1",
+          "pages": [
+            238,
+            239
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-039.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 38,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-040.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 327,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-041.tex#python-1",
+          "pages": [
+            238
+          ]
+        },
+        {
+          "characters_compared": 252,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-042.tex#python-1",
+          "pages": [
+            238,
+            239
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-043.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 38,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-044.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 327,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-045.tex#python-1",
+          "pages": [
+            238
+          ]
+        },
+        {
+          "characters_compared": 252,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-046.tex#python-1",
+          "pages": [
+            238,
+            239
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-047.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 38,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-048.tex#python-1",
+          "pages": [
+            239
+          ]
+        },
+        {
+          "characters_compared": 327,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-049.tex#python-1",
+          "pages": [
+            238
+          ]
+        },
+        {
+          "characters_compared": 252,
+          "kind": "inline_python_environment",
+          "origin": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-050.tex#python-1",
+          "pages": [
+            238,
+            239
+          ]
+        }
+      ],
+      "leaked": [],
+      "pages": 259,
+      "smart_quote_pages": [],
+      "unfaithful": [],
+      "unresolved_references": [],
+      "variant": "professeur",
+      "visible_malformed_fragments": [],
+      "withheld": []
+    }
+  ],
+  "what_a_variant_withholds_is_declared_not_guessed": "L'edition eleve vide l'environnement `corrige` : elle l'ecrit dans son propre maitre. Un programme de corrige n'y est donc pas attendu, et s'il y apparaissait ce serait le defaut.",
+  "why_geometry_could_not_see_this": "Une page peut etre parfaitement composee — encre dans le format, aucun debordement, aucune collision — et raconter print(f”...”) ou afficher « ewpage » en toutes lettres. La geometrie regarde ou l'encre se pose ; il fallait lire ce qu'elle dit."
+}

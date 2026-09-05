@@ -1,0 +1,139 @@
+{
+  "artifact_type": "printed_fidelity",
+  "code_composition_size_pt": 7.414,
+  "french_typography_keeps_its_quotes": "Le guillemet courbe n'est cherche que dans ce qui est compose avec la fonte du code. Le corps du texte garde les siens.",
+  "generated_by": "scripts/build_1spe_printed_fidelity.py",
+  "indentation_is_not_what_is_checked": "La couche texte d'un PDF ne restitue pas fidelement les espaces de tete. La comparaison porte sur tout le reste, espaces retires.",
+  "literate_substitutions": {
+    "À": "À",
+    "È": "È",
+    "É": "É",
+    "à": "à",
+    "â": "â",
+    "ç": "ç",
+    "è": "è",
+    "é": "é",
+    "ê": "ê",
+    "ë": "ë",
+    "î": "î",
+    "ô": "ô",
+    "ù": "ù",
+    "û": "û",
+    "—": "---"
+  },
+  "manual": "MANUEL_TCOMPL",
+  "only_what_is_composed_as_a_program_is_compared": "La fonte du code sert aussi aux numeros de ligne et aux annotations de marge de l'edition professeur, plus petites, qui s'intercalent dans l'ordre de lecture. La comparaison ne retient que ce qui est compose a la taille d'un programme, taille lue dans la classe. Le controle des guillemets, lui, regarde toute la fonte du code.",
+  "schema_version": 1,
+  "source_fragments": [],
+  "summary": {
+    "CODE_BLOCKS": 8,
+    "CODE_BLOCK_FAITHFUL": 8,
+    "CODE_BLOCK_NOT_FAITHFUL": 0,
+    "CODE_BLOCK_WITHHELD_AS_DECLARED": 0,
+    "MALFORMED_FRAGMENT_IN_SOURCE": 0,
+    "SMART_QUOTE_IN_CODE_TOKEN": 0,
+    "UNKNOWN": 0,
+    "VISIBLE_MALFORMED_LATEX_FRAGMENT": 0,
+    "WITHHELD_CODE_BLOCK_PRINTED": 0
+  },
+  "the_vocabulary_is_read_not_listed": "Les queues de commande surveillees viennent des sequences de controle que le corpus emploie reellement, pas d'une liste noire ecrite a la main. Celles qui sont aussi des mots du corpus sont surveillees dans les sources et non sur la page, ou rien ne permettrait de les distinguer.",
+  "this_compares_it_does_not_blacklist": "Chaque programme publie est retrouve dans la couche texte du PDF et compare caractere par caractere a sa source. Comparer plutot que suspecter fait voir aussi bien un guillemet courbe qu'une ligature fusionnee ou un programme compose dans la mauvaise fonte.",
+  "variants": [
+    {
+      "code_blocks": 3,
+      "emptied_environments": [
+        "corrige"
+      ],
+      "faithful": [
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex#python-1",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 129,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/11_C2_calculs_esperance.tex#python-1",
+          "pages": [
+            95
+          ]
+        },
+        {
+          "characters_compared": 225,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/12_C3_intervalle_simulation.tex#python-1",
+          "pages": [
+            96
+          ]
+        }
+      ],
+      "leaked": [],
+      "pages": 139,
+      "smart_quote_pages": [],
+      "unfaithful": [],
+      "unresolved_references": [],
+      "variant": "eleve",
+      "visible_malformed_fragments": [],
+      "withheld": []
+    },
+    {
+      "code_blocks": 5,
+      "emptied_environments": [],
+      "faithful": [
+        {
+          "characters_compared": 134,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex#python-1",
+          "pages": [
+            7
+          ]
+        },
+        {
+          "characters_compared": 98,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/evaluations/TCOMPL-MF-EV-A-corrige.tex#python-1",
+          "pages": [
+            25
+          ]
+        },
+        {
+          "characters_compared": 129,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/11_C2_calculs_esperance.tex#python-1",
+          "pages": [
+            146
+          ]
+        },
+        {
+          "characters_compared": 225,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/12_C3_intervalle_simulation.tex#python-1",
+          "pages": [
+            147
+          ]
+        },
+        {
+          "characters_compared": 167,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/evaluations/TCOMPL-ECH-EV-B-corrige.tex#python-1",
+          "pages": [
+            160
+          ]
+        }
+      ],
+      "leaked": [],
+      "pages": 217,
+      "smart_quote_pages": [],
+      "unfaithful": [],
+      "unresolved_references": [],
+      "variant": "professeur",
+      "visible_malformed_fragments": [],
+      "withheld": []
+    }
+  ],
+  "what_a_variant_withholds_is_declared_not_guessed": "L'edition eleve vide l'environnement `corrige` : elle l'ecrit dans son propre maitre. Un programme de corrige n'y est donc pas attendu, et s'il y apparaissait ce serait le defaut.",
+  "why_geometry_could_not_see_this": "Une page peut etre parfaitement composee — encre dans le format, aucun debordement, aucune collision — et raconter print(f”...”) ou afficher « ewpage » en toutes lettres. La geometrie regarde ou l'encre se pose ; il fallait lire ce qu'elle dit."
+}
