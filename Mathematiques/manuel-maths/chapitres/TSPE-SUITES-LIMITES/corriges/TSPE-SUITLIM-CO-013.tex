@@ -10,7 +10,14 @@
 
 \textit{Init.} $n=1$ : $1 = \dfrac{1 \times 2 \times 3}{6} = 1$. Vrai.
 
-\textit{Heredite.} Supposons $\mathcal{P}(n)$. $\sum_{k=1}^{n+1} k^2 = \dfrac{n(n+1)(2n+1)}{6} + (n+1)^2 = \dfrac{(n+1)[n(2n+1)+6(n+1)]}{6} = \dfrac{(n+1)(2n^2+7n+6)}{6} = \dfrac{(n+1)(n+2)(2n+3)}{6}$.
+\textit{Heredite.} Supposons $\mathcal{P}(n)$.
+\begin{align*}
+  \sum_{k=1}^{n+1} k^2
+    &= \dfrac{n(n+1)(2n+1)}{6} + (n+1)^2
+     = \dfrac{(n+1)\left[n(2n+1)+6(n+1)\right]}{6} \\
+    &= \dfrac{(n+1)(2n^2+7n+6)}{6}
+     = \dfrac{(n+1)(n+2)(2n+3)}{6}.
+\end{align*}
 
 C'est bien $\dfrac{(n+1)((n+1)+1)(2(n+1)+1)}{6}$. $\mathcal{P}(n+1)$ vraie.
 
