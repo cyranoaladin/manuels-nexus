@@ -77,14 +77,16 @@ def compile_target(
     env.update(repro_env)
     env["NEXUS_BUILD_RUN"] = run_id
 
-    # Working dir is the directory containing master
-    work_dir = master_path.parent
+    # Working dir is the manual's root directory (Mathematiques/manuel-maths or NSI)
+    manual_root = (root / "NSI") if "NSI" in master_path.parts else (root / "Mathematiques/manuel-maths")
+    work_dir = manual_root
+    env["TEXINPUTS"] = f".:{manual_root}/gabarits:{env.get('TEXINPUTS', '')}"
     cmd = [
         "lualatex",
         "--interaction=nonstopmode",
         "--recorder",
         f"--output-directory={output_dir.resolve()}",
-        master_path.name,
+        str(master_path.relative_to(manual_root)),
     ]
 
     res = subprocess.run(
@@ -336,7 +338,7 @@ def run_clean_reproducibility(
         f.write("| :--- | :--- | :--- | :---: | :---: | :---: |\n")
         for r in reproducibility_results:
             f.write(
-                f"| **{r['target_id']}** | `{r['build_a_sha256'][:14]}...` | `{r['build_b_sha256'][:14]}...` | "
+                f"| **{r['target_id']}** | `{r['build_a_sha256']}` | `{r['build_b_sha256']}` | "
                 f"{'OUI' if r['sha256_identical'] else 'NON'} | {r['build_a_pages']} | **`{r['reproducibility_status']}`** |\n"
             )
         f.write("\n")

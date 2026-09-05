@@ -1,7 +1,7 @@
 # BUILD_MANIFEST — Registre Canonique des 12 PDF Nexus
 
-- **Build State Digest** : `sha256:6f6f77323a8eabe16b91e10e24835ae3639f4c8bbdde9cf76a3aa1e5f9fb1b9c`
-- **Git HEAD** : `6510d1042f1b3882f662223b27b8e66902e77d54`
+- **Build State Digest** : `sha256:a820a698c6cc53b6aa57f193ab1a4df2c224f331ee4ff40455251d25f4750e8f`
+- **Git HEAD** : `8bb12b86df6806bdbed4bcc7c325e1ce25a6fbfc`
 - **Couverture Manifeste** : `12/12 CANONICAL BUILDS REGISTERED`
 - **Statut Global** : `FULL_CURRENT`
 
