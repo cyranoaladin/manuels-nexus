@@ -6,16 +6,16 @@ Genere par `scripts/build_1spe_teacher_completeness_metrics.py`.
 | --- | --- | --- | --- | --- |
 | TEACHER_CORRECTION_PER_CORRECTABLE_OBJECT | 502 | 502 | 0 | PASS |
 | TEACHER_QCM_ANSWER_KEY_PER_DECLARED_QUESTION | 168 | 168 | 0 | PASS |
-| TEACHER_BAREME_PER_GRADED_OBJECT | 20 | 18 | 2 | FAIL |
+| TEACHER_BAREME_PER_GRADED_OBJECT | 20 | 20 | 0 | PASS |
 | STUDENT_VARIANT_CORRECTION_OBJECTS | 0 | 0 | 0 | PASS |
 | STUDENT_VARIANT_BAREME_CARRIERS | 0 | 0 | 0 | PASS |
 | STUDENT_VARIANT_QCM_ANSWER_KEYS | 0 | 0 | 0 | PASS |
 
 | METRIC_NAME | VALEUR |
 | --- | --- |
-| TEACHER_MISSING_REQUIRED_CONTENT | 2 |
+| TEACHER_MISSING_REQUIRED_CONTENT | 0 |
 | STUDENT_TEACHER_ONLY_LEAKS | 0 |
-| GATE | FAIL |
+| GATE | PASS |
 
 ## Derivation de chaque EXPECTED
 
@@ -28,10 +28,7 @@ Genere par `scripts/build_1spe_teacher_completeness_metrics.py`.
 
 ## Ecarts
 
-### TEACHER_BAREME_PER_GRADED_OBJECT
-
-- `1SPE-GEOREP-EV-A` — NO_CHARTER_BAREME_CARRIER_IN_CORRECTION
-- `1SPE-GEOREP-EV-B` — NO_CHARTER_BAREME_CARRIER_IN_CORRECTION
+Aucun ecart.
 
 ## Verification secondaire sur les PDF candidats
 

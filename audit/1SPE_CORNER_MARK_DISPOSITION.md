@@ -19,7 +19,7 @@ Ce classement est mesure, pas suppose :
 
 > Classer n'est pas accepter. Ces equerres sont un choix de maquette, et leur sort appartient a la revue visuelle : la disposition est demandee explicitement dans le D7 final, elle n'est pas acquise par defaut.
 
-**Disposition D7** : `PENDING_HUMAN_DISPOSITION`
+**Disposition D7** : `ACCEPTED_AS_INTENTIONAL_DESIGN_ELEMENT`
 
 > TrimBox, BleedBox, fond perdu de 3 mm et debord d'onglet de 1 mm sont lus, jamais ecrits par ce module.
 

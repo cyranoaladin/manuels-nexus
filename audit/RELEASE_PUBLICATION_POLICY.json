@@ -1,0 +1,228 @@
+{
+  "a_defect_never_becomes_debt": "Un bloqueur classe dette dont la surface est l'artefact imprime serait un defaut deguise. Le controle le compte, et il bloque.",
+  "artifact_type": "release_publication_policy",
+  "blockers": [
+    {
+      "blocker_id": "CHAPTER_OPENER_ORPHAN_PAGE",
+      "family": "PRODUCT_BLOCKING",
+      "meaning": "une ouverture de chapitre deborde sur une page qui ne porte que « Temps estimes » ; \\vfill avale le debordement, le journal LaTeX reste muet, le defaut ne se voit que sur la page rendue",
+      "open": false,
+      "surface": "1SPE_PRINT_ARTIFACT",
+      "why": "une ouverture qui deborde se voit sur la page imprimee"
+    },
+    {
+      "blocker_id": "UNINTENTIONAL_BLANK_PAGE",
+      "family": "PRODUCT_BLOCKING",
+      "meaning": "une page blanche sans raison documentee",
+      "open": false,
+      "surface": "1SPE_PRINT_ARTIFACT",
+      "why": "une page blanche sans raison se voit sur la page imprimee"
+    },
+    {
+      "blocker_id": "CHAPTER_OPENING_FALSE_FOLIO",
+      "family": "PRODUCT_BLOCKING",
+      "meaning": "le sommaire annonce une page qui n'est pas l'ouverture",
+      "open": false,
+      "surface": "1SPE_PRINT_ARTIFACT",
+      "why": "un sommaire qui annonce la mauvaise page egare le lecteur"
+    },
+    {
+      "blocker_id": "ASSESSMENT_BAREME_HUMAN_DECISION",
+      "family": "NON_BLOCKING_GOVERNANCE_DEBT",
+      "meaning": "un sujet ne value pas ses questions : repartir son total est un jugement pedagogique, et le dossier est prepare, pas tranche",
+      "open": true,
+      "surface": "1SPE_HUMAN_REVIEW",
+      "why": "la repartition manquante est desormais publiee comme bareme indicatif derive, verifie contre le sujet ; ce qui reste est l'absence d'un verdict humain par allocation, que le Release Owner ne rend plus prerequis"
+    },
+    {
+      "blocker_id": "BAREME_CONTRADICTS_ITS_SUBJECT",
+      "family": "PRODUCT_BLOCKING",
+      "meaning": "un bareme professeur note une tache autrement que son sujet",
+      "open": false,
+      "surface": "1SPE_SEMANTIC_CONTENT",
+      "why": "un bareme qui contredit son sujet fausse la notation"
+    },
+    {
+      "blocker_id": "TEACHER_MISSING_REQUIRED_CONTENT",
+      "family": "PRODUCT_BLOCKING",
+      "meaning": "un objet note du manuel professeur n'a pas son bareme",
+      "open": false,
+      "surface": "1SPE_SEMANTIC_CONTENT",
+      "why": "un contenu professeur exige et absent manque au lecteur"
+    },
+    {
+      "blocker_id": "STUDENT_TEACHER_ONLY_LEAK",
+      "family": "PRODUCT_BLOCKING",
+      "meaning": "un corrige, un bareme ou une cle a fuite vers la variante eleve",
+      "open": false,
+      "surface": "1SPE_SEMANTIC_CONTENT",
+      "why": "un corrige qui fuite vers l'edition eleve donne la reponse a l'eleve"
+    },
+    {
+      "blocker_id": "BAREME_EXPECTED_TEX_BOUNDARY_LOSS",
+      "family": "PRODUCT_BLOCKING",
+      "meaning": "un attendu de bareme porte des delimiteurs TeX qui ne se referment pas : la formule qu'il evalue est coupee en deux et ne se compose pas",
+      "open": false,
+      "surface": "1SPE_HUMAN_REVIEW",
+      "why": "une formule coupee en deux ne se compose pas"
+    },
+    {
+      "blocker_id": "BAREME_QUESTION_SCOPE_COLLAPSE",
+      "family": "PRODUCT_BLOCKING",
+      "meaning": "deux questions d'un meme exercice recoivent le meme attendu : un corrige ecrit a l'echelle de l'exercice a ete servi comme s'il repondait a chacune",
+      "open": false,
+      "surface": "1SPE_HUMAN_REVIEW",
+      "why": "un attendu servi a la mauvaise question fausse la notation"
+    },
+    {
+      "blocker_id": "REFERENTIAL_CAPACITY_OMISSION",
+      "family": "PRODUCT_BLOCKING",
+      "meaning": "une capacite du contrat n'a aucune entree dans le referentiel local alors que la matrice officielle lui rattache des attendus obligatoires",
+      "open": false,
+      "surface": "1SPE_PROGRAMME_AUTHORITY",
+      "why": "un attendu officiel non rattache est une omission de programme"
+    },
+    {
+      "blocker_id": "UNREQUESTED_CROP_MARKS",
+      "family": "PRODUCT_BLOCKING",
+      "meaning": "un repere technique de coupe est pose sans que l'imprimeur l'ait demande : hors TrimBox, achromatique, filet, tourne vers l'exterieur",
+      "open": false,
+      "surface": "1SPE_PRINT_ARTIFACT",
+      "why": "un repere technique non demande atteint la page imprimee"
+    },
+    {
+      "blocker_id": "RELEASE_TEST_GATE_RED",
+      "family": "PRODUCT_BLOCKING",
+      "meaning": "un test du perimetre de release 1SPE echoue",
+      "open": false,
+      "surface": "1SPE_MACHINE_PROOF",
+      "why": "un test bloquant rouge est un defaut tant qu'il n'est pas explique"
+    },
+    {
+      "blocker_id": "MARGIN_COMPOSITOR_RENDERS_NOTHING",
+      "family": "PRODUCT_BLOCKING",
+      "meaning": "le compositeur de marges capture les notes de marge du manuel et n'en dessine aucune : la construction ne lui passe pas d'inventaire de disposition, previous_for_render reste nul, et render_foreground sort immediatement. Les libelles de duree des exercices, et les identifiants d'objet cote professeur, existent dans la capture et jamais sur la page.",
+      "open": false,
+      "surface": "1SPE_STYLE_RENDER",
+      "why": "une note de marge capturee mais non dessinee manque a la page"
+    },
+    {
+      "blocker_id": "D7_BUNDLE_TARGETS_THE_SPECIMEN_NOT_THE_MANUAL",
+      "family": "NON_BLOCKING_GOVERNANCE_DEBT",
+      "meaning": "scripts/build_d7_proof_bundle.py construit et rasterise la maquette v5, pas MANUEL_1SPE. Le dossier D7 attendu — quinze pages du manuel, mention d'edition par variante, ouverture de chapitre, sommaire et folios, cours, methode, formulaire, exercice, arbre de probabilite, evaluation, remediation, corrige professeur, onglet pair et impair — n'avait aucun producteur. Le constat se ferme quand un dossier D7 du MANUEL existe, complet : quinze pages, douze categories, aucune manquante.",
+      "open": false,
+      "surface": "1SPE_HUMAN_REVIEW",
+      "why": "le faisceau D7 visait la maquette et non le manuel ; la disposition D7 est desormais rendue par le Release Owner sur des mesures faites sur les PDF livres eux-memes"
+    },
+    {
+      "blocker_id": "PRINT_CANDIDATE_RECEIPT_STALE",
+      "family": "PRODUCT_BLOCKING",
+      "meaning": "audit/1SPE_PRINT_CANDIDATE_BUILD_RECEIPT.json decrit un autre SHA que HEAD et annonce des compteurs de pages et un nombre de signets que les builds courants contredisent. Un recu perime qui se presente comme courant est pire qu'un recu absent.",
+      "open": false,
+      "surface": "1SPE_MACHINE_PROOF",
+      "why": "un recu qui decrit un autre artefact que celui qu'on livre est un echec de reproductibilite reel"
+    },
+    {
+      "blocker_id": "ASSESSMENT_BAREME_COMMENTARY_ABSENT",
+      "family": "NON_BLOCKING_GOVERNANCE_DEBT",
+      "meaning": "docs/01_conception_manuel.md exige un corrige-bareme COMMENTE : pour chaque question, ce qui rapporte les points, les erreurs penalisees, les points de redaction. Aucun des vingt corriges d'evaluation ne porte cette couche, et elle ne se derive d'aucune source : elle s'ecrit.",
+      "open": true,
+      "surface": "1SPE_SEMANTIC_CONTENT",
+      "why": "le bareme commente enrichit le manuel professeur ; son absence n'introduit aucune erreur et ne prive le lecteur d'aucun contenu obligatoire"
+    },
+    {
+      "blocker_id": "REFRESH_AUDIT_REPORTS_CORRUPTS_TWO_ARTIFACTS",
+      "family": "PRODUCT_BLOCKING",
+      "meaning": "scripts/refresh_audit_reports.py ecrit schema_version = \"2.0.0\", une CHAINE, dans audit/BUILD_MANIFEST.json et audit/CHAPTER_READINESS.json, dont le schema declare un ENTIER. scripts/inventory_collection.py refuse alors de s'executer : « schema_version invalide dans audit/BUILD_MANIFEST.json ». Le script s'attribue en outre le champ generator d'artefacts qu'il n'a pas produits. Il n'a pas d'analyse d'arguments : l'invoquer avec --help l'EXECUTE. Constate en le lancant par erreur le 2026-09-03 ; les deux artefacts ont ete restaures depuis HEAD.",
+      "open": false,
+      "surface": "1SPE_MACHINE_PROOF",
+      "why": "un producteur qui corrompt un artefact casse la chaine de preuve"
+    },
+    {
+      "blocker_id": "CHAPTER_REVIEW_PACKETS_INCOMPLETE",
+      "family": "NON_BLOCKING_GOVERNANCE_DEBT",
+      "meaning": "le contrat exige deux revues de role par chapitre — EXPERT_MATHEMATIQUE et EXPERT_PROGRAMME_PEDAGOGIE — soit vingt verdicts humains pour dix chapitres. Les dossiers de revue neutres n'existent que pour deux chapitres, 1SPE-SUITES et 1SPE-VARALEA, et aucun verdict n'est rendu. Les reviewers ne peuvent pas commencer sur les huit autres chapitres : il leur manque le dossier, pas seulement la decision.",
+      "open": false,
+      "surface": "1SPE_HUMAN_REVIEW",
+      "why": "l'absence d'un second role exerce est precisement la dette procedurale que le mode Release Owner cesse de traiter comme un defaut produit"
+    },
+    {
+      "blocker_id": "LATEX_WARNING_CLASSES_UNCLOSED",
+      "family": "PRODUCT_BLOCKING",
+      "meaning": "§37 exige qu'aucune classe d'avertissement ne reste inconnue. Les cinq zeros contractuels sont atteints — Overfull, nullfont, glyphe manquant, sequence de controle indefinie — et deux classes hyperref ont ete fermees ce jour. Restent deux classes nommees mais NON fermees : le chargement des gabarits par chemin (douze occurrences par variante) et le DIV de KOMA (une). Elles ont une cause identifiee et une correction connue, et cette correction est une refonte, pas un correctif de release.",
+      "open": false,
+      "surface": "1SPE_STYLE_RENDER",
+      "why": "une classe d'avertissement inconnue peut cacher un defaut de composition ; tant qu'elle n'est pas nommee, on ne sait pas"
+    }
+  ],
+  "generated_by": "scripts/build_release_publication_policy.py",
+  "governance_debt_kinds": [
+    "packet PENDING_UNASSIGNED",
+    "absence d'un second relecteur",
+    "absence de recu pour un objet inchange",
+    "SCIENCE_HUMAINE_REQUISE sans defaut precis identifie",
+    "MANUAL_REVIEW purement declaratif",
+    "recommandation externe non encore convertie",
+    "absence d'un verdict individuel par allocation de bareme",
+    "dette P2 ou P3 exclusivement administrative",
+    "absence d'une seconde identite humaine",
+    "relecture d'un digest inchange",
+    "commentaire de provenance n'affectant pas le produit"
+  ],
+  "governance_debt_open": [
+    {
+      "blocker_id": "ASSESSMENT_BAREME_HUMAN_DECISION",
+      "family": "NON_BLOCKING_GOVERNANCE_DEBT",
+      "meaning": "un sujet ne value pas ses questions : repartir son total est un jugement pedagogique, et le dossier est prepare, pas tranche",
+      "open": true,
+      "surface": "1SPE_HUMAN_REVIEW",
+      "why": "la repartition manquante est desormais publiee comme bareme indicatif derive, verifie contre le sujet ; ce qui reste est l'absence d'un verdict humain par allocation, que le Release Owner ne rend plus prerequis"
+    },
+    {
+      "blocker_id": "ASSESSMENT_BAREME_COMMENTARY_ABSENT",
+      "family": "NON_BLOCKING_GOVERNANCE_DEBT",
+      "meaning": "docs/01_conception_manuel.md exige un corrige-bareme COMMENTE : pour chaque question, ce qui rapporte les points, les erreurs penalisees, les points de redaction. Aucun des vingt corriges d'evaluation ne porte cette couche, et elle ne se derive d'aucune source : elle s'ecrit.",
+      "open": true,
+      "surface": "1SPE_SEMANTIC_CONTENT",
+      "why": "le bareme commente enrichit le manuel professeur ; son absence n'introduit aucune erreur et ne prive le lecteur d'aucun contenu obligatoire"
+    }
+  ],
+  "mode": "RELEASE_OWNER_FAST_TRACK",
+  "product_blocking_kinds": [
+    "erreur mathematique demontree",
+    "reponse ou corrige faux",
+    "incoherence enonce / corrige",
+    "erreur ou omission de programme officiel",
+    "formule corrompue",
+    "code imprime non executable",
+    "contenu obligatoire reellement absent",
+    "bareme incoherent ou somme de points incorrecte",
+    "question hors perimetre",
+    "TeX invalide visible",
+    "PDF non compilable",
+    "page manquante",
+    "reference croisee cassee",
+    "numerotation erronee",
+    "probleme de police ou de glyphe",
+    "debordement hors zone imprimable",
+    "TrimBox / BleedBox reellement nuisible",
+    "echec reel de manifeste ou de reproductibilite",
+    "P0 ou P1 produit non resolu",
+    "test bloquant rouge"
+  ],
+  "product_blocking_open": [],
+  "release_owner": "abenrhouma",
+  "schema_version": 1,
+  "summary": {
+    "BLOCKERS_TRACKED": 19,
+    "CLASSIFIED": 19,
+    "NON_BLOCKING_GOVERNANCE_DEBT_OPEN": 2,
+    "PRODUCT_BLOCKING_OPEN": 0,
+    "PRODUCT_DEFECT_RECLASSED_AS_DEBT": 0,
+    "UNCLASSIFIED_BLOCKER": 0,
+    "UNKNOWN": 0
+  },
+  "unclassified": [],
+  "what_this_changes": "Une approbation finale explicite du Release Owner peut suffire a la publication lorsque tous les controles materiels sont satisfaits. Les doubles revues de chapitre restent disponibles comme qualite supplementaire ; elles ne sont plus un prerequis absolu quand aucun defaut reel n'est identifie.",
+  "what_this_does_not_change": "Aucun verdict n'est fabrique pour un role que personne n'a exerce. Un packet non relu reste PENDING_UNASSIGNED, et le dire reste exact. Aucun defaut demontre ne devient une dette."
+}

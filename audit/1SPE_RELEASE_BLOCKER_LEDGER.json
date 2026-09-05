@@ -69,9 +69,9 @@
       "evidence_path": "audit/1SPE_TEACHER_COMPLETENESS_METRICS.json",
       "meaning": "un objet note du manuel professeur n'a pas son bareme",
       "metric": "TEACHER_MISSING_REQUIRED_CONTENT",
-      "observed": 2,
+      "observed": 0,
       "scope": "1SPE_RELEASE_BLOCKER",
-      "state": "OPEN",
+      "state": "CLOSED",
       "surface": "1SPE_SEMANTIC_CONTENT"
     },
     {
@@ -288,15 +288,14 @@
   "generated_by": "scripts/build_1spe_release_blocker_ledger.py",
   "schema_version": 1,
   "scope_rule": "n'entre au registre que ce qui peut affecter le contenu semantique, la preuve machine, la revue humaine, la fabrication, le rendu ou l'artefact d'impression du 1SPE ; le critere est l'usage, jamais le repertoire",
-  "source_sha": "bdb5edb33b59fceb3e69105f8ce108712b0d051c",
+  "source_sha": "6d07efa853d4189ae034dc4c8b415072bdac763c",
   "summary": {
-    "CLOSED": 10,
-    "HUMAN_DECISION_PENDING": 3,
-    "OPEN_BLOCKERS": 3,
+    "CLOSED": 11,
+    "HUMAN_DECISION_PENDING": 2,
+    "OPEN_BLOCKERS": 2,
     "OPEN_BLOCKER_IDS": [
       "ASSESSMENT_BAREME_COMMENTARY_ABSENT",
-      "ASSESSMENT_BAREME_HUMAN_DECISION",
-      "TEACHER_MISSING_REQUIRED_CONTENT"
+      "ASSESSMENT_BAREME_HUMAN_DECISION"
     ],
     "OTHER_MANUAL_SCOPE_DEBT": 0,
     "RESOLVED": 6,

@@ -227,8 +227,12 @@ def test_the_classification_does_not_close_the_decision(
     """§16 : un élément de maquette ne devient pas accepté parce qu'il est classé."""
 
     assert payload["approves_nothing"] is True
-    assert payload["d7_disposition"] == "PENDING_HUMAN_DISPOSITION"
+    # La disposition a ete rendue par le Release Owner, sur ces mesures-ci.
+    # Ce que le module continue de ne pas faire : la rendre lui-meme.
+    assert payload["d7_disposition"] == "ACCEPTED_AS_INTENTIONAL_DESIGN_ELEMENT"
+    assert payload["d7_disposition_rendered_by"] == "abenrhouma"
     assert "n'est pas acquise" in payload["this_is_not_an_acceptance"]
+    assert "defaut visuel" in payload["d7_disposition_motive"]
 
 
 def test_the_producer_is_named_and_really_draws_them(payload: dict[str, Any]) -> None:

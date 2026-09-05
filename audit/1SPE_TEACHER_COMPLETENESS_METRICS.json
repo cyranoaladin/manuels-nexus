@@ -2,7 +2,7 @@
   "artifact_name": "1SPE_TEACHER_COMPLETENESS_METRICS",
   "generated_by": "scripts/build_1spe_teacher_completeness_metrics.py",
   "manual": "1SPE",
-  "metric_evidence_digest": "sha256:594cb7604861b38b2e97c3fcf6ae1a1457c0ca7a91dfe197fc0eb115ac069bed",
+  "metric_evidence_digest": "sha256:983c55a6562bb9baa516205a72abfe03d18da578899f921b9efc2ef8bbdf6249",
   "metrics": [
     {
       "EXPECTED": 502,
@@ -25,29 +25,14 @@
     {
       "EXPECTED": 20,
       "EXPECTED_DERIVATION": "objets publies dont la META declare un total de points numerique",
-      "GAP": 2,
+      "GAP": 0,
       "METRIC_NAME": "TEACHER_BAREME_PER_GRADED_OBJECT",
-      "OBSERVED": 18,
+      "OBSERVED": 20,
       "OBSERVED_CARRIER": [
         "\\baremeIndicatif"
       ],
-      "STATUS": "FAIL",
-      "gaps": [
-        {
-          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-A-corrige.tex",
-          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
-          "object_id": "1SPE-GEOREP-EV-A",
-          "prose_mark_allocation": true,
-          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-A.tex"
-        },
-        {
-          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-B-corrige.tex",
-          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
-          "object_id": "1SPE-GEOREP-EV-B",
-          "prose_mark_allocation": true,
-          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-B.tex"
-        }
-      ]
+      "STATUS": "PASS",
+      "gaps": []
     },
     {
       "EXPECTED": 0,
@@ -110,8 +95,8 @@
   "schema_version": 1,
   "scope": "completude de la variante professeur et etancheite de la variante eleve, etablies sur les sources publiees par l'assembleur",
   "summary": {
-    "GATE": "FAIL",
+    "GATE": "PASS",
     "STUDENT_TEACHER_ONLY_LEAKS": 0,
-    "TEACHER_MISSING_REQUIRED_CONTENT": 2
+    "TEACHER_MISSING_REQUIRED_CONTENT": 0
   }
 }

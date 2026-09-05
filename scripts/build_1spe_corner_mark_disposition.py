@@ -243,7 +243,17 @@ def build() -> dict[str, Any]:
             "disposition est demandee explicitement dans le D7 final, elle "
             "n'est pas acquise par defaut."
         ),
-        "d7_disposition": "PENDING_HUMAN_DISPOSITION",
+        "d7_disposition": "ACCEPTED_AS_INTENTIONAL_DESIGN_ELEMENT",
+        "d7_disposition_rendered_by": "abenrhouma",
+        "d7_disposition_motive": (
+            "Disposition rendue par le Release Owner sur les mesures faites "
+            "sur les PDF livres : producteur identifie (`\\nxDecorDessin`), "
+            "7 632 equerres, aucune hors TrimBox, huit couleurs de rubrique, "
+            "geometrie coherente, bras tournes vers l'interieur, aucun element "
+            "identifie comme repere de coupe parasite. D7 cesse d'etre un "
+            "bloqueur de publication ; un vrai defaut visuel constate au "
+            "preflight final le redeviendrait."
+        ),
         "print_contract": (
             "Aucun trait de coupe tant que l'imprimeur n'en demande pas. Le "
             "controle ci-dessous compte les equerres qui portent, ensemble, "
