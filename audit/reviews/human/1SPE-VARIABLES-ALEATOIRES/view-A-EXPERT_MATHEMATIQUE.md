@@ -71,7 +71,7 @@ Temps estime declare : parcours 1 : 14 h · parcours 2 : 11 h · parcours 3 : 9 
     - `1SPE-OFFICIAL-177` (MANDATORY_ALGORITHM, Variables aléatoires réelles) : Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire.
 - `C7` — 2 attendus :
     - `1SPE-OFFICIAL-178` (MANDATORY_ALGORITHM, Variables aléatoires réelles) : Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire.
-    - `1SPE-OFFICIAL-179` (MANDATORY_ALGORITHM, Variables aléatoires réelles) : Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n
+    - `1SPE-OFFICIAL-179` (MANDATORY_ALGORITHM, Variables aléatoires réelles) : Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à 2𝜎/√n.
 
 **Prerequis declares par le contrat du chapitre**
 
