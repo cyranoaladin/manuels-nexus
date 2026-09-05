@@ -119,8 +119,13 @@
 % elle seule : la typographie française du corps garde ses guillemets, ses
 % tirets et ses ligatures. Remplacer globalement les guillemets du manuel
 % aurait cassé le texte pour réparer le code.
-\setmonofont{JetBrains Mono}[Scale=0.89,
-  Ligatures=NoCommon, RawFeature={-tlig;-calt;-liga}]
+% `Ligatures=NoCommon` demandait la desactivation de `liga` par le nom que
+% fontspec lui donne ; JetBrains Mono n'expose pas cette fonctionnalite sous ce
+% script, et fontspec le signalait dix fois par compilation. L'option etait de
+% toute facon redondante : `RawFeature` desactive les trois fonctionnalites
+% -- ligatures TeX, contextuelles et de programmation -- et le controle de
+% fidelite du code imprime prouve que la sortie reste fidele a l'octet pres.
+\setmonofont{JetBrains Mono}[Scale=0.89, RawFeature={-tlig;-calt;-liga}]
 
 % ===========================================================================
 %  TYPOGRAPHIE PROFESSIONNELLE
