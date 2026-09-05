@@ -714,10 +714,15 @@ def main(argv: list[str] | None = None) -> int:
     )
     arguments = parser.parse_args(argv)
 
-    BUILD, SOURCE_ROOT = CANONICAL_MANUALS[arguments.manual]
-    MASTER_STEM = BUILD.name
-    JSON_TARGET = ROOT / f"audit/{arguments.manual}_PRINTED_FIDELITY.json"
-    MD_TARGET = ROOT / f"audit/{arguments.manual}_PRINTED_FIDELITY.md"
+    # Le manuel n'est repris de la table QUE s'il est demande explicitement :
+    # sans cela, `main` ecraserait un reglage pose par l'appelant -- et un
+    # manuel miniature monte pour un test se retrouverait a lire les sources
+    # du vrai depot.
+    if "--manual" in (argv or sys.argv[1:]):
+        BUILD, SOURCE_ROOT = CANONICAL_MANUALS[arguments.manual]
+        MASTER_STEM = BUILD.name
+        JSON_TARGET = ROOT / f"audit/{arguments.manual}_PRINTED_FIDELITY.json"
+        MD_TARGET = ROOT / f"audit/{arguments.manual}_PRINTED_FIDELITY.md"
 
     try:
         payload = build()

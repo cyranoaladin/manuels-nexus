@@ -132,6 +132,11 @@ def manual(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Any:
     monkeypatch.setattr(gate, "MATH", math)
     monkeypatch.setattr(gate, "BUILD", build)
     monkeypatch.setattr(gate, "ROOT", tmp_path)
+    # Le controle connait desormais les six manuels : la racine d'inclusion et
+    # le nom du maitre sont des reglages, et le manuel miniature doit les
+    # porter aussi, sinon il lit les sources du vrai depot.
+    monkeypatch.setattr(gate, "SOURCE_ROOT", math)
+    monkeypatch.setattr(gate, "MASTER_STEM", "MANUEL_1SPE")
     for cached in (gate.latex_sources, gate.command_tails, gate.plain_words):
         cached.cache_clear()
 

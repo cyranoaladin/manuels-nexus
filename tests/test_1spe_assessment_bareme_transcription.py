@@ -116,20 +116,42 @@ def test_the_human_packet_gives_the_task_before_asking_for_a_price(
     assert payload["summary"]["CANDIDATE_PROPOSAL_SUM_MISMATCH"] == 0
 
 
-def test_no_candidate_proposal_reaches_a_correction() -> None:
-    """La proposition machine ne doit exister QUE dans l'artefact d'audit."""
+def test_a_bareme_reaching_a_correction_is_materialised_with_its_provenance() -> None:
+    """Ce qui descend dans un corrige n'est plus une proposition d'audit.
+
+    La regle precedente etait qu'aucune proposition ne devait atteindre un
+    corrige. Le Release Owner a decide autrement : ces repartitions, deja
+    confrontees au sujet, sont publiees comme « Barème indicatif ». Ce qui
+    reste interdit est de les faire passer pour ce qu'elles ne sont pas -- la
+    provenance est enregistree, et elle ne dit pas « approuve par un expert ».
+    """
+
+    import json as _json
+
+    record = _json.loads(
+        (ROOT / "audit/1SPE_INDICATIVE_BAREME_MATERIALISATION.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert record["provenance"] == "DERIVED_FROM_EXTERNAL_REVIEW"
+    assert record["summary"]["HUMAN_EXPERT_APPROVALS_CLAIMED"] == 0
+    materialised = {row["object_id"] for row in record["materialised"]}
 
     for object_id in ("1SPE-GEOREP-EV-A", "1SPE-GEOREP-EV-B"):
-        chapter = "1SPE-GEOMETRIE-REPEREE"
         correction = (
             ROOT
-            / "Mathematiques/manuel-maths/chapitres"
-            / chapter
+            / "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE"
             / "evaluations"
             / f"{object_id}-corrige.tex"
         )
         assert correction.is_file()
-        assert gate.CARRIER not in correction.read_text(encoding="utf-8"), object_id
+        text = correction.read_text(encoding="utf-8")
+        assert object_id in materialised, object_id
+        # Le porteur de la charte, celui que l'edition eleve vide.
+        assert "\\baremeIndicatif{" in text, object_id
+        # Et rien qui revendique une approbation humaine.
+        for forbidden in ("HUMAN_EXPERT_APPROVED", "APPROVED_BY", "valide par"):
+            assert forbidden not in text, (object_id, forbidden)
 
 
 # ---------------------------------------------------------------------------
