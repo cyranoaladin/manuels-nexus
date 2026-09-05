@@ -1574,7 +1574,7 @@ def _student_text_violations(text: str) -> list[str]:
     checks = (
         (
             "identifiant interne",
-            r"\b(?:1SPE|1NSI)-[A-Z0-9]+(?:-[A-Z0-9]+)*",
+            r"\b(?:1SPE|TSPE|TCOMPL|TEXPERTES|TEXP|1NSI|TNSI)-[A-Z0-9]+(?:-[A-Z0-9]+)*",
         ),
         (
             "corrigé",
