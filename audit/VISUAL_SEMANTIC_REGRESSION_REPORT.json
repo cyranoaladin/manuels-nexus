@@ -1,0 +1,44 @@
+{
+  "artifact_type": "visual_semantic_regression_report",
+  "classified_changes": [
+    {
+      "description": "Preceded markdown file reference with comment marker (# readme.md) preventing Python syntax error in printed teacher listings",
+      "files": [
+        "NSI/chapitres/1NSI-ARCHOS-CO-004.tex",
+        "NSI/chapitres/1NSI-ARCHOS-CO-011.tex",
+        "NSI/chapitres/1NSI-ARCHOS-CO-017.tex",
+        "NSI/chapitres/1NSI-ARCHOS-CO-023.tex",
+        "NSI/chapitres/1NSI-ARCHOS-CO-029.tex"
+      ],
+      "justified": true,
+      "nature": "EXPECTED_FIX",
+      "scope": "python_comments",
+      "target_id": "1NSI_professeur"
+    },
+    {
+      "description": "Replaced internal ID string 'TSPE-DERIVATION-CONVEXITE' in evaluation header with clean public chapter title 'Dérivation et convexité'",
+      "files": [
+        "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/evaluations/TSPE-DERIVATION-CONVEXITE-EV-A.tex",
+        "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/evaluations/TSPE-DERIVATION-CONVEXITE-EV-B.tex"
+      ],
+      "justified": true,
+      "nature": "EXPECTED_FIX",
+      "scope": "student_separation_internal_id",
+      "target_id": "TSPE_2026_2027_eleve"
+    },
+    {
+      "description": "Deterministic compilation under controlled FORCE_SOURCE_DATE=1, TZ=UTC, LC_ALL=C.UTF-8, PYTHONHASHSEED=0",
+      "files": [
+        "audit/BUILD_MANIFEST.json"
+      ],
+      "justified": true,
+      "nature": "EXPECTED_REBUILD_NORMALIZATION",
+      "scope": "clean_reproducible_rebuild",
+      "target_id": "ALL_12_TARGETS"
+    }
+  ],
+  "regression_gate_status": "PASS",
+  "schema_version": "1.0.0",
+  "unexpected_visual_diff": 0,
+  "unexplained_semantic_diff": 0
+}
