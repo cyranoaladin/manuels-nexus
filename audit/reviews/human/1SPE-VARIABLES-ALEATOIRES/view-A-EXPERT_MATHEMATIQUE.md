@@ -256,7 +256,6 @@ La relation exercice/corrige n'est etablie que structurellement : une COUVERTURE
 
 Dettes de revue declarees pour ce chapitre :
 
-- `QCM_ANSWER_SEMANTICS` — 1 unite, categorie `QCM_ANSWER_SEMANTICS`, bloquant : oui.
 - `QCM_DIAGNOSTIC_RENVOI_SEMANTICS` — 1 unite, categorie `QCM_DIAGNOSTIC_RENVOI_SEMANTICS`, bloquant : oui.
 - `RESIDUAL_TRUE_NEW_13` — 4 unites, categorie `OBJECT_REVIEW`, bloquant : oui.
 - `UNCHANGED` — 152 unites, categorie `OBJECT_REVIEW`, bloquant : oui.
