@@ -7,4 +7,4 @@ Un gate n'est fiable que si sa valeur descend d'une preuve tracable.
 - **LOADED_BUT_UNUSED_EVIDENCE** : `0`
 - **TAUTOLOGICAL_GATE_TESTS** : `0`
 - **UNTRACED_RELEASE_METRICS** : `0`
-- **RELEASE_METRICS** : `55`
+- **RELEASE_METRICS** : `57`

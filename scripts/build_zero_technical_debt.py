@@ -96,22 +96,26 @@ def audit_technical_debt(root: Path) -> dict[str, Any]:
         for key in (
             "STUDENT_WITHOUT_CORRECTION",
             "ORPHAN_TEACHER_CORRECTION",
-            "STUDENT_TEACHER_STATEMENT_DRIFT",
             "TEACHER_CONTENT_LEAK_IN_STUDENT",
             "BAREME_TOTAL_MISMATCH",
             "BAREME_SCOPE_AMBIGUOUS",
         ):
             content_debt_open += _required(p_data, parity_rel, key)
 
-    # Le clonage pedagogique est un blocage de publication declare : il doit
-    # peser sur la dette de contenu, pas rester dans un registre isole.
-    clone_rel = "audit/P0_CONTENT_CLONE_LEDGER.json"
-    clone_data = _load_evidence(clone_rel)
+    # Source unique : le registre des findings ouverts. L'ancien
+    # P0_CONTENT_CLONE_LEDGER decrivait un etat anterieur aux recuperations et
+    # se serait fige a 1368 ; ici la dette est la longueur d'une liste nommee.
+    findings_rel = "audit/OPEN_FINDINGS.json"
+    findings_data = _load_evidence(findings_rel)
     clone_excess = 0
-    if clone_data is not None:
-        clone_excess = int(clone_data.get("inventory", {}).get("excess_objects", 0))
-        if clone_data.get("publication_blocker"):
-            content_debt_open += clone_excess
+    if findings_data is not None:
+        clone_ids = findings_data.get("clone_finding_ids") or []
+        clone_excess = len(clone_ids)
+        declared = _required(findings_data, findings_rel, "TRUE_PRODUCT_CLONES_OPEN")
+        if declared != clone_excess:
+            missing_evidence.append(f"{findings_rel}#TRUE_PRODUCT_CLONES_OPEN incoherent")
+        content_debt_open += clone_excess
+        content_debt_open += _required(findings_data, findings_rel, "STUDENT_TEACHER_STATEMENT_DRIFT")
 
     # 4. Programme Debt
     programme_debt_open = 0

@@ -10,6 +10,7 @@
         "audit/CANONICAL_RELEASE_INVENTORY.json",
         "audit/DOUBLE_BUILD_REPRODUCIBILITY.json",
         "audit/FINAL_PRINT_PREFLIGHT.json",
+        "audit/OPEN_FINDINGS.json",
         "audit/PARITY_BAREMES_VALIDATION.json",
         "audit/PRINTED_CODE_VALIDATION.json",
         "audit/PROGRAMME_AUTHORITY_MATRIX.json",
@@ -55,6 +56,7 @@
         "audit/CANONICAL_RELEASE_INVENTORY.json",
         "audit/DOUBLE_BUILD_REPRODUCIBILITY.json",
         "audit/FINAL_PRINT_PREFLIGHT.json",
+        "audit/OPEN_FINDINGS.json",
         "audit/PARITY_BAREMES_VALIDATION.json",
         "audit/PRINTED_CODE_VALIDATION.json",
         "audit/PROGRAMME_AUTHORITY_MATRIX.json",
@@ -142,6 +144,7 @@
         "audit/CANONICAL_RELEASE_INVENTORY.json",
         "audit/DOUBLE_BUILD_REPRODUCIBILITY.json",
         "audit/FINAL_PRINT_PREFLIGHT.json",
+        "audit/OPEN_FINDINGS.json",
         "audit/PARITY_BAREMES_VALIDATION.json",
         "audit/PRINTED_CODE_VALIDATION.json",
         "audit/PROGRAMME_AUTHORITY_MATRIX.json",
@@ -226,7 +229,7 @@
         "scripts/build_zero_technical_debt.py"
       ],
       "source_kind": "DERIVED_FROM_EVIDENCE",
-      "value": 1548
+      "value": 318
     },
     {
       "consumer_gate": "scripts/release_all_check.py",
@@ -439,6 +442,18 @@
     {
       "consumer_gate": "scripts/release_all_check.py",
       "derived": true,
+      "expression": "len(findings.get('finding_ids_by_severity', {}).get('P0', []))",
+      "input_artifacts": [
+        "audit/OPEN_FINDINGS.json"
+      ],
+      "metric": "OPEN_FINDING_IDS_P0",
+      "producers": [],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 318
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
       "expression": "require(parity_summary, 'audit/PARITY_BAREMES_VALIDATION.json', 'ORPHAN_TEACHER_CORRECTION')",
       "input_artifacts": [
         "audit/PARITY_BAREMES_VALIDATION.json"
@@ -587,6 +602,7 @@
         "audit/CANONICAL_RELEASE_INVENTORY.json",
         "audit/DOUBLE_BUILD_REPRODUCIBILITY.json",
         "audit/FINAL_PRINT_PREFLIGHT.json",
+        "audit/OPEN_FINDINGS.json",
         "audit/PARITY_BAREMES_VALIDATION.json",
         "audit/PRINTED_CODE_VALIDATION.json",
         "audit/PROGRAMME_AUTHORITY_MATRIX.json",
@@ -628,6 +644,7 @@
         "audit/CANONICAL_RELEASE_INVENTORY.json",
         "audit/DOUBLE_BUILD_REPRODUCIBILITY.json",
         "audit/FINAL_PRINT_PREFLIGHT.json",
+        "audit/OPEN_FINDINGS.json",
         "audit/PARITY_BAREMES_VALIDATION.json",
         "audit/PRINTED_CODE_VALIDATION.json",
         "audit/PROGRAMME_AUTHORITY_MATRIX.json",
@@ -690,7 +707,7 @@
         "scripts/build_parity_baremes_validation.py"
       ],
       "source_kind": "DERIVED_FROM_EVIDENCE",
-      "value": 180
+      "value": 0
     },
     {
       "consumer_gate": "scripts/release_all_check.py",
@@ -737,44 +754,50 @@
     {
       "consumer_gate": "scripts/release_all_check.py",
       "derived": true,
-      "expression": "content_debt + evidence_debt + len(missing_evidence)",
+      "expression": "len(findings.get('finding_ids_by_severity', {}).get('P0', [])) + len(missing_evidence)",
       "input_artifacts": [
-        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+        "audit/OPEN_FINDINGS.json"
       ],
       "metric": "TOTAL_P0_OPEN",
-      "producers": [
-        "scripts/build_zero_technical_debt.py"
-      ],
+      "producers": [],
       "source_kind": "DERIVED_FROM_EVIDENCE",
-      "value": 1548
+      "value": 318
     },
     {
       "consumer_gate": "scripts/release_all_check.py",
       "derived": true,
-      "expression": "programme_debt",
+      "expression": "len(findings.get('finding_ids_by_severity', {}).get('P1', []))",
       "input_artifacts": [
-        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+        "audit/OPEN_FINDINGS.json"
       ],
       "metric": "TOTAL_P1_OPEN",
-      "producers": [
-        "scripts/build_zero_technical_debt.py"
-      ],
+      "producers": [],
       "source_kind": "DERIVED_FROM_EVIDENCE",
-      "value": 44
+      "value": 28
     },
     {
       "consumer_gate": "scripts/release_all_check.py",
       "derived": true,
-      "expression": "technical_debt",
+      "expression": "len(findings.get('finding_ids_by_severity', {}).get('P2', []))",
       "input_artifacts": [
-        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+        "audit/OPEN_FINDINGS.json"
       ],
       "metric": "TOTAL_P2_OPEN",
-      "producers": [
-        "scripts/build_zero_technical_debt.py"
-      ],
+      "producers": [],
       "source_kind": "DERIVED_FROM_EVIDENCE",
-      "value": 0
+      "value": 16
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "len(findings.get('clone_finding_ids', []))",
+      "input_artifacts": [
+        "audit/OPEN_FINDINGS.json"
+      ],
+      "metric": "TRUE_PRODUCT_CLONES_OPEN",
+      "producers": [],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 318
     },
     {
       "consumer_gate": "scripts/release_all_check.py",
@@ -891,8 +914,8 @@
   ],
   "generated_by": "scripts/audit_gate_integrity.py",
   "summary": {
-    "RELEASE_METRICS": 55,
-    "TRACED_RELEASE_METRICS": 55,
+    "RELEASE_METRICS": 57,
+    "TRACED_RELEASE_METRICS": 57,
     "UNTRACED_RELEASE_METRICS": 0
   }
 }

@@ -44,6 +44,7 @@ REPRO_PATH = ROOT / "audit/DOUBLE_BUILD_REPRODUCIBILITY.json"
 PREFLIGHT_PATH = ROOT / "audit/FINAL_PRINT_PREFLIGHT.json"
 REGRESSION_PATH = ROOT / "audit/VISUAL_SEMANTIC_REGRESSION_REPORT.json"
 DEBT_PATH = ROOT / "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+FINDINGS_PATH = ROOT / "audit/OPEN_FINDINGS.json"
 
 
 def evaluate_release(
@@ -80,6 +81,10 @@ def evaluate_release(
 
     # 8. Zero Debt
     debt = json.load(DEBT_PATH.open("r", encoding="utf-8")) if DEBT_PATH.is_file() else {}
+    findings = (
+        json.load(FINDINGS_PATH.open("r", encoding="utf-8"))
+        if FINDINGS_PATH.is_file() else {}
+    )
     debt_summary = debt.get("product_debt_summary", {})
 
     target_evaluations = []
@@ -227,9 +232,14 @@ def evaluate_release(
         "CANONICAL_TARGETS_COUNT": len(target_evaluations),
         "CANDIDATE_READY_COUNT": sum(1 for t in target_evaluations if t["publish_ready_candidate"]),
         "PUBLISH_READY_COUNT": sum(1 for t in target_evaluations if t["publish_ready"]),
-        "TOTAL_P0_OPEN": content_debt + evidence_debt + len(missing_evidence),
-        "TOTAL_P1_OPEN": programme_debt,
-        "TOTAL_P2_OPEN": technical_debt,
+        # Les severites descendent du registre des findings : chaque total est
+        # la longueur de sa liste d'identifiants, jamais une somme recomposee.
+        "TOTAL_P0_OPEN": len(findings.get("finding_ids_by_severity", {}).get("P0", []))
+        + len(missing_evidence),
+        "TOTAL_P1_OPEN": len(findings.get("finding_ids_by_severity", {}).get("P1", [])),
+        "TOTAL_P2_OPEN": len(findings.get("finding_ids_by_severity", {}).get("P2", [])),
+        "OPEN_FINDING_IDS_P0": len(findings.get("finding_ids_by_severity", {}).get("P0", [])),
+        "TRUE_PRODUCT_CLONES_OPEN": len(findings.get("clone_finding_ids", [])),
         "EVIDENCE_DEBT_OPEN": evidence_debt + len(missing_evidence),
         "MISSING_EVIDENCE_KEYS": len(missing_evidence),
         "PRODUCT_TECHNICAL_DEBT_OPEN": technical_debt,
