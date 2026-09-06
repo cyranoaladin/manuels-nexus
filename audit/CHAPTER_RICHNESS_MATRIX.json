@@ -1,6 +1,6 @@
 {
   "artifact_type": "collection_chapter_richness_matrix",
-  "capacity_count": 320,
+  "capacity_count": 322,
   "chapter_count": 52,
   "chapters": {
     "1NSI-ALGO-DICHO-GLOUTON-KNN": {
@@ -5341,14 +5341,14 @@
           "capacity_type": "PROCEDURAL",
           "declarative_status": "SUFFICIENT",
           "distinct_opportunities": 5,
-          "libelle_eleve": "Je sais factoriser un trinome et etudier son signe.",
+          "libelle_eleve": "Je sais factoriser un trinome en diversifiant les strategies.",
           "missing_function": [],
           "opportunities": {
             "assessment": 2,
             "method": 1,
             "qcm": 3,
             "remediation": 1,
-            "targeted_practice": 13
+            "targeted_practice": 14
           },
           "practice": [
             {
@@ -5427,6 +5427,12 @@
               "duree_min": 10,
               "id": "1SPE-SECDEG-EX-044",
               "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 20,
+              "id": "1SPE-SECDEG-EX-102",
+              "parcours": 2,
               "questions_for_this_capacity": null
             }
           ],
@@ -5641,13 +5647,80 @@
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
           "status": "CANDIDATE_NON_SEMANTIC"
+        },
+        "C7": {
+          "assessed_by": [],
+          "capacity_type": "PROCEDURAL",
+          "declarative_status": "INSUFFICIENT",
+          "distinct_opportunities": 1,
+          "libelle_eleve": "Je sais determiner les fonctions polynomes du second degre s'annulant en deux nombres reels distincts, en utilisant la somme et le produit des racines.",
+          "missing_function": [
+            "NO_REMEDIATION",
+            "NO_METHOD",
+            "NO_QCM"
+          ],
+          "opportunities": {
+            "assessment": 0,
+            "method": 0,
+            "qcm": 0,
+            "remediation": 0,
+            "targeted_practice": 2
+          },
+          "practice": [
+            {
+              "duree_min": 10,
+              "id": "1SPE-SECDEG-EX-101",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 20,
+              "id": "1SPE-SECDEG-EX-102",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            }
+          ],
+          "reasoning_paths": [],
+          "semantic_validation_status": "UNKNOWN",
+          "status": "INSUFFICIENT"
+        },
+        "C8": {
+          "assessed_by": [],
+          "capacity_type": "PROCEDURAL",
+          "declarative_status": "INSUFFICIENT",
+          "distinct_opportunities": 1,
+          "libelle_eleve": "Je sais etudier le signe d'un polynome du second degre donne sous forme factorisee.",
+          "missing_function": [
+            "NO_REMEDIATION",
+            "NO_METHOD",
+            "NO_QCM"
+          ],
+          "opportunities": {
+            "assessment": 0,
+            "method": 0,
+            "qcm": 0,
+            "remediation": 0,
+            "targeted_practice": 1
+          },
+          "practice": [
+            {
+              "duree_min": 20,
+              "id": "1SPE-SECDEG-EX-025",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            }
+          ],
+          "reasoning_paths": [],
+          "semantic_validation_status": "UNKNOWN",
+          "status": "INSUFFICIENT"
         }
       },
-      "capacities_digest": "sha256:282c6ec4a527884926f2ceb6b43529519ac68c01d2eb531652799e429c259513",
+      "capacities_digest": "sha256:000739ccdb36b909b885cd1c89787cd1047ac49909f3fc1c1ec79629abb1d961",
       "capacity_identity_blockers": [],
       "chapter": "1SPE-SECOND-DEGRE",
       "counts": {
-        "CANDIDATE_NON_SEMANTIC": 6
+        "CANDIDATE_NON_SEMANTIC": 6,
+        "INSUFFICIENT": 2
       },
       "declarative_diversity_status": "INSUFFICIENT",
       "distinct_reasoning_paths": [],
@@ -5655,9 +5728,12 @@
       "diversity_status": "INSUFFICIENT",
       "excluded_credit_objects": [],
       "generated_by": "scripts/build_chapter_richness_matrix.py",
-      "insufficient": [],
-      "machine_status": "COMPLETE",
-      "routed_to_human": 6,
+      "insufficient": [
+        "C7",
+        "C8"
+      ],
+      "machine_status": "GAP",
+      "routed_to_human": 8,
       "rule": "la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers",
       "schema_version": 1,
       "semantic_validation_status": "ROUTED_TO_HUMAN",
@@ -18352,7 +18428,7 @@
       "unknown": 0
     }
   },
-  "chapters_digest": "sha256:ea5f7e4e9a45a0d65e67c41fd196b724dda48bd185ac1cefbaea2d78464499cc",
+  "chapters_digest": "sha256:8d3dac087ee2b26f327b3d04c80f81d043834b654fac828e22e4fd89df14c527",
   "generated_by": "scripts/build_chapter_richness_matrix.py",
   "incomplete_chapters": [
     "1NSI-ARCHITECTURE-OS",
@@ -18362,6 +18438,7 @@
     "1NSI-TABLES",
     "1NSI-TYPES-BASE",
     "1NSI-WEB-IHM",
+    "1SPE-SECOND-DEGRE",
     "TCOMPL-CALCULS-AIRES",
     "TCOMPL-CORRELATION-CAUSALITE",
     "TCOMPL-ECHANTILLONNAGE",

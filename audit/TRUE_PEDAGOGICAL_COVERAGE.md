@@ -5,10 +5,10 @@ Un objet ne crédite une capacité que si son **corps** la sert. Le seul
 exploitait — dix-sept fiches identiques déclarées `C1` à `C16` créditaient
 seize capacités alors qu'une seule, `C7`, était traitée.
 
-- capacités contractuelles : `320`
-- cellules (capacité × rôle) : `2240`
-- cellules avec déclaration exacte (alignement sémantique à établir) : `1783`
-- **unités d'écriture requises** : `457`
+- capacités contractuelles : `322`
+- cellules (capacité × rôle) : `2254`
+- cellules avec déclaration exacte (alignement sémantique à établir) : `1789`
+- **unités d'écriture requises** : `465`
 
 | Manuel | cours | methodes | exercices | corriges | remediation | qcm | evaluations | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -17,6 +17,7 @@ seize capacités alors qu'une seule, `C7`, était traitée.
 | `TCOMPL` | 3 | 3 | 3 | 3 | 43 | 14 | 4 | **73** |
 | `TSPE` | 0 | 18 | 0 | 0 | 25 | 9 | 18 | **70** |
 | `TEXPERTES` | 0 | 0 | 0 | 0 | 23 | 14 | 9 | **46** |
+| `1SPE` | 0 | 2 | 0 | 0 | 2 | 2 | 2 | **8** |
 
 Ce backlog se compte en unités d'écriture — un couple (capacité, rôle)
 sans contenu valide — jamais en fichiers à remplacer. Le volume cloné
