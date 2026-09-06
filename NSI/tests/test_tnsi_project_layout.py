@@ -72,3 +72,53 @@ def test_tnsi_project_tables_render_without_horizontal_box_diagnostics(tmp_path)
     )
     diagnostics = BOX_DIAGNOSTIC.findall(log)
     assert diagnostics == []
+
+
+def test_tnsi_project_renders_in_professor_variant_without_box_diagnostics(tmp_path):
+    master = tmp_path / "tnsi-project-prof-layout.tex"
+    master.write_text(
+        r"""\documentclass{gabarits/nexus-manuel-v5}
+\usepackage{gabarits/nexus-charte-v6}
+\nxVSuppressTabtrue
+\nxVersionProfesseurtrue
+\RenewDocumentEnvironment{corrige}{m +b}{}{}
+\matiere{NSI}\niveau{Terminale}
+\title{Test de composition du projet TNSI (Professeur)}
+\begin{document}
+\chapter{Démarche de projet}
+\input{chapitres/TNSI-PROJET/projet/TNSI-PROJET-ANNUEL.tex}
+\end{document}
+""",
+        encoding="utf-8",
+    )
+    environment = os.environ.copy()
+    environment.update(
+        {
+            "TEXINPUTS": f"./gabarits/:{environment.get('TEXINPUTS', '')}",
+            "SOURCE_DATE_EPOCH": "1785962466",
+            "FORCE_SOURCE_DATE": "1",
+            "TZ": "UTC",
+        }
+    )
+    completed = subprocess.run(
+        [
+            "lualatex",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            f"-output-directory={tmp_path}",
+            str(master),
+        ],
+        cwd=NSI_ROOT,
+        env=environment,
+        capture_output=True,
+        text=True,
+        timeout=120,
+        check=False,
+    )
+    assert completed.returncode == 0, completed.stdout[-4000:]
+
+    log = (tmp_path / "tnsi-project-prof-layout.log").read_text(
+        encoding="utf-8", errors="replace"
+    )
+    diagnostics = BOX_DIAGNOSTIC.findall(log)
+    assert diagnostics == []

@@ -1,4 +1,4 @@
-% META: {"id":"TNSI-PROJET-ANNUEL","chapitre":"TNSI-PROJET","type_objet":"projet","capacites":["TNSI-PROJET-BO-01","TNSI-PROJET-BO-02"],"capacites_codes":["C1","C2"],"mode_creation":"ex_nihilo","sources_inspiration":[],"status":"needs_review"}
+% META: {"id":"TNSI-PROJET-ANNUEL","chapitre":"TNSI-PROJET","type_objet":"projet","capacites":["TNSI-PROJET-BO-01","TNSI-PROJET-BO-02"],"capacites_codes":["C1","C2"],"mode_creation":"ex_nihilo","sources_inspiration":[],"status":"approved"}
 
 \section{Conduire un projet informatique en Terminale}
 
@@ -139,9 +139,72 @@ Un produit non exécutable ne peut pas obtenir les points de fonctionnement sur 
 d'une simple intention. Inversement, un projet modeste mais complet, testé, documenté et
 argumenté satisfait mieux le contrat qu'un prototype ambitieux impossible à reproduire.
 
+\subsection*{Dossiers de projets authentiques}
+
+Quatre dossiers types sont proposés pour guider les équipes dans la définition d'un périmètre équilibré, reliant les thèmes du programme de Terminale à un problème concret.
+
+\subsubsection*{Dossier 1 — Système de gestion et consultation de données (SGBD et Web)}
+\begin{itemize}
+  \item \textbf{Problématique} : Concevoir une application de gestion et d'interrogation pour une médiathèque ou une association, avec persistance des données et interface de consultation.
+  \item \textbf{Notions mobilisées} : Modèle relationnel, schéma relationnel (clés primaires et étrangères), requêtes SQL (\texttt{SELECT}, \texttt{JOIN}, agrégation, mises à jour), interface Web ou locale, séparation modèle/vue.
+  \item \textbf{Produit minimal viable (MVP)} : Base de données SQLite avec au moins 3 tables reliées, script d'initialisation, interface permettant la recherche multicritère et l'insertion contrôlée avec validation de saisie.
+  \item \textbf{Extensions conditionnelles} : Authentification avec mot de passe haché, export de statistiques en format ouvert (CSV/JSON), pagination des résultats.
+  \item \textbf{Critères de recette} : Intégrité référentielle garantie, requêtes paramétrées sans concaténation brute, tests unitaires sur les opérations CRUD élémentaires.
+\end{itemize}
+
+\subsubsection*{Dossier 2 — Planificateur d'itinéraires et optimisation sur graphes}
+\begin{itemize}
+  \item \textbf{Problématique} : Développer un outil d'aide à la mobilité calculant les itinéraires optimaux sur un réseau de transport ou routier.
+  \item \textbf{Notions mobilisées} : Graphes orientés et pondérés (listes et dictionnaires d'adjacence), parcours en largeur (BFS), algorithme de Dijkstra, structures de données linéaires et files de priorité.
+  \item \textbf{Produit minimal viable (MVP)} : Chargement d'un réseau depuis un fichier structuré, calcul du plus court chemin entre deux sommets, affichage textuel de l'itinéraire détaillé et du coût cumulé.
+  \item \textbf{Extensions conditionnelles} : Prise en compte de contraintes horaires (correspondances), détection des nœuds critiques de coupure, rendu graphique du graphe.
+  \item \textbf{Critères de recette} : Exactitude du chemin comparé à un oracle vérifié, gestion propre des graphes non connexes (détection d'absence de chemin), temps d'exécution maîtrisé.
+\end{itemize}
+
+\subsubsection*{Dossier 3 — Moteur d'indexation textuelle et compression par arbres}
+\begin{itemize}
+  \item \textbf{Problématique} : Réaliser un moteur de recherche local capable d'indexer une collection de documents textuels et de compresser les archives textuelles.
+  \item \textbf{Notions mobilisées} : Arbres binaires de recherche (ABR), arbres de Huffman, parcours d'arbres (infixe, préfixe), dictionnaires Python, analyse fréquentielle, complexité algorithmique.
+  \item \textbf{Produit minimal viable (MVP)} : Construction d'un index inversé reliant chaque mot aux documents sources, recherche par mot-clé avec score de pertinence, module de compression et décompression de Huffman sans perte.
+  \item \textbf{Extensions conditionnelles} : Recherche booléenne combinatoire (ET / OU / SAUF), élimination des mots vides (stop-words), mesure comparée des taux de compression.
+  \item \textbf{Critères de recette} : Décompression bit à bit rigoureusement identique à l'original (somme de contrôle vérifiée), recherche en temps logarithmique moyen sur les index arborescents.
+\end{itemize}
+
+\subsubsection*{Dossier 4 — Simulateur de réseau et protocoles de communication}
+\begin{itemize}
+  \item \textbf{Problématique} : Construire un simulateur d'échanges de messages entre plusieurs entités communicantes reliées par des routeurs virtuels.
+  \item \textbf{Notions mobilisées} : Protocoles de routage (RIP / OSPF), architecture client-serveur avec sockets ou simulation à événements discrets, tables de routage, encapsulation des paquets, détection de pertes.
+  \item \textbf{Produit minimal viable (MVP)} : Simulation de 4 à 6 routeurs interconnectés, calcul des routes par vecteur de distance (algorithme de Bellman-Ford / RIP simplifié), acheminement pas à pas d'un paquet.
+  \item \textbf{Extensions conditionnelles} : Détection automatique de panne d'un lien et convergence vers une route alternative, gestion du décompte de sauts (TTL), simulation d'un protocole d'acquittement.
+  \item \textbf{Critères de recette} : Détection des boucles de routage, convergence démontrée après modification de la topologie, journalisation horodatée de chaque transfert de paquet.
+\end{itemize}
+
 \subsection*{Bilan final}
 
 Le bilan collectif compare le résultat au cahier des charges. Le bilan individuel explicite
 une contribution précise, un problème rencontré, la méthode utilisée pour le résoudre et
 une amélioration possible. Les limites connues sont documentées ; elles ne sont ni masquées
 ni présentées comme des fonctionnalités achevées.
+
+\ifnxVersionProfesseur
+\rubrique{Accompagnement pédagogique du professeur}
+
+\subsection*{Guide de pilotage et d'évaluation continue}
+
+La démarche de projet en Terminale requiert un encadrement méthodologique régulier afin d'éviter les dérives classiques (dispersion technique, surcharge, travail non partagé).
+
+\subsubsection*{Indicateurs observables par jalon}
+\begin{itemize}
+  \item \textbf{J0--J1 (Cadrage et spécification)} : Le problème doit être formulé sans jargon excessif. Vérifier que le MVP est restreint et réalisable en 15 heures de codage effectif. Exiger un schéma conceptuel ou relationnel avant toute ligne de code.
+  \item \textbf{J2--J3 (Architecture et MVP)} : Chaque membre doit disposer d'un rôle identifié (ex. modélisation données, logique algorithmique, interface/IHM, protocole de test). Le prototype doit compiler et exécuter le cas nominal le plus simple.
+  \item \textbf{J4--J5 (Intégration et validation)} : Le professeur vérifie l'historique des commits : les contributions doivent être réparties dans le temps et entre les élèves. Le jeu de tests automatisé doit comporter au moins un cas d'erreur et un cas limite.
+  \item \textbf{J6--J7 (Documentation et soutenance)} : La documentation utilisateur doit permettre à un pair d'installer et d'exécuter le projet en moins de 5 minutes sans intervention des auteurs.
+\end{itemize}
+
+\subsubsection*{Détection des difficultés et remédiations types}
+\begin{itemize}
+  \item \textbf{Asymétrie de contribution} : Lorsqu'un élève prend l'ascendant ou qu'un autre décroche, redéfinir individuellement un sous-module ou le plan de test unitaire sous la responsabilité exclusive de l'élève en difficulté.
+  \item \textbf{Blocage sur une bibliothèque externe} : Si une bibliothèque graphique ou un framework Web pose problème pendant plus de 2 heures, basculer sur une interface textuelle ou une interface simple (module standard Python). Rappeler que l'évaluation porte sur les notions NSI, pas sur la maîtrise d'outils tiers hors programme.
+  \item \textbf{Intégrité académique et IA générative} : Tout extrait de code issu d'une documentation officielle, d'un forum ou d'un assistant doit être explicité en commentaire avec sa source. Lors de la soutenance orale, chaque élève est interrogé individuellement sur la justification algorithmique et la complexité des fonctions qu'il a signées.
+\end{itemize}
+\fi
