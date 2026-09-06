@@ -131,7 +131,23 @@ def run_clean_reproducibility(
     reproducibility_results: list[dict[str, Any]] = []
     manifest_builds: list[dict[str, Any]] = []
 
-    print(f"=== ORCHESTRATING CLEAN REPRODUCIBILITY (12 Canonical Targets) ===")
+    # Derive authentic source_digest and model_digest from current tree
+    try:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "inventory_collection", root / "scripts/inventory_collection.py"
+        )
+        assert spec and spec.loader
+        inv_mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(inv_mod)
+        inv_data = inv_mod._build_inventory_for_stale_manifest_invalidation(root)
+        source_digest = str(inv_data["source_digest"])
+        model_digest = str(inv_mod._model_digest(inv_data))
+    except Exception as exc:
+        print(f"Warning: could not dynamically derive digests ({exc}), falling back to existing file")
+        manifest_existing = json.loads((root / "audit/BUILD_MANIFEST.json").read_text(encoding="utf-8"))
+        source_digest = manifest_existing["source_digest"]
+        model_digest = manifest_existing["model_digest"]
 
     for target in inv.get("canonical_targets", []):
         manual_id = target["manual_id"]
@@ -215,11 +231,6 @@ def run_clean_reproducibility(
             "reproducibility_status": "PASS" if (sha_identical and pages_identical) else "FAIL",
         }
         reproducibility_results.append(repro_record)
-
-        # Load source_digest and model_digest from manifest envelope
-        manifest_existing = json.loads((root / "audit/BUILD_MANIFEST.json").read_text(encoding="utf-8"))
-        source_digest = manifest_existing["source_digest"]
-        model_digest = manifest_existing["model_digest"]
 
         build_entry = {
             "excluded_objects": [],

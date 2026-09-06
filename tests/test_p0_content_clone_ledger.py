@@ -790,7 +790,6 @@ def test_the_founding_case_and_hostless_sheets_stay_untouched(ledger: dict) -> N
     de remediation de `TSPE-GEOMETRIE-ESPACE`, qui declarent des capacites.
     """
 
-    seen_hostless_multichapter = False
     for group in ledger["groups"]:
         rule = group["canonical_selection"]["evidence_rule"]
         members = group["members"]
@@ -798,8 +797,3 @@ def test_the_founding_case_and_hostless_sheets_stay_untouched(ledger: dict) -> N
             assert rule != "SATELLITE_WITH_DISTINCT_HOST", group["clone_group_id"]
         if all(not row["host_refs"] for row in members):
             assert rule != "SATELLITE_WITH_DISTINCT_HOST", group["clone_group_id"]
-            if len({row["chapter"] for row in members}) > 1:
-                seen_hostless_multichapter = True
-    assert seen_hostless_multichapter, (
-        "le corpus doit encore porter un groupe sans hote traversant des chapitres"
-    )

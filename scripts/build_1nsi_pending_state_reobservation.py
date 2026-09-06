@@ -195,6 +195,10 @@ def observe_status() -> dict[str, Any]:
 def cause_commit() -> dict[str, Any]:
     """Le commit qui explique l'écart, lu dans l'historique."""
 
+    chapter_paths = sorted(
+        p.relative_to(ROOT).as_posix()
+        for p in (ROOT / "NSI/chapitres").glob("1NSI*")
+    )
     result = subprocess.run(
         [
             "git",
@@ -203,7 +207,7 @@ def cause_commit() -> dict[str, Any]:
             "-1",
             "--diff-filter=D",
             "--",
-            "NSI/chapitres",
+            *chapter_paths,
         ],
         cwd=ROOT,
         capture_output=True,
@@ -211,7 +215,7 @@ def cause_commit() -> dict[str, Any]:
         check=False,
     )
     if result.returncode != 0 or not result.stdout.strip():
-        _reject("aucun commit de suppression trouvé sous NSI/chapitres")
+        _reject("aucun commit de suppression trouvé sous NSI/chapitres/1NSI*")
     sha, subject, date = result.stdout.strip().split("\0")
     counted = subprocess.run(
         [
@@ -222,7 +226,7 @@ def cause_commit() -> dict[str, Any]:
             "--format=",
             sha,
             "--",
-            "NSI/chapitres",
+            *chapter_paths,
         ],
         cwd=ROOT,
         capture_output=True,
@@ -236,6 +240,7 @@ def cause_commit() -> dict[str, Any]:
         "date": date,
         "deleted_tex_files": len(deleted),
     }
+
 
 
 def apply_delta(

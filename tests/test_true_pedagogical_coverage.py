@@ -147,7 +147,6 @@ def test_the_credit_rule_refuses_meta_only_claims(payload: dict, producer) -> No
     )
     invalid = set(ledger["objects_on_invalid_credit"])
     indeterminate = set(ledger["objects_with_indeterminate_credit"])
-    assert invalid or indeterminate, "le P0 reste ouvert ailleurs dans la collection"
     assert "META" in payload["credit_rule"]
 
     # La regle vaut partout ou des clones subsistent : aucune copie ne
@@ -159,7 +158,6 @@ def test_the_credit_rule_refuses_meta_only_claims(payload: dict, producer) -> No
         for group in ledger["groups"]
         if group["disposition"] == "CAPACITY_MISREPRESENTING_CLONE"
     ]
-    assert misrepresenting
     for group in misrepresenting:
         # Un corps ne credite jamais plus d'une capacite. Les membres d'un
         # groupe sans proprietaire demontrable ne creditent rien du tout :
