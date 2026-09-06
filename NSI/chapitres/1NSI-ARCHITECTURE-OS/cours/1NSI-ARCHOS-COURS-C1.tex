@@ -7,7 +7,7 @@ d'organisation : l'architecture de von Neumann.}
 \definition[D1]{
   L'\textbf{architecture de von Neumann} décrit une machine composée de quatre constituants
   principaux, reliés par un \textbf{bus} : le \textbf{processeur} (ou UC, unité centrale),
-  la \textbf{mémoire}, et les périphériques d'\textbf{entrée-sortie}.
+  la \textbf{mémoire}, les \textbf{entrées} et les \textbf{sorties}.
 }
 
 \begin{center}
@@ -59,9 +59,9 @@ d'organisation : l'architecture de von Neumann.}
 \erreurFrequente{Croire que le processeur \og sait \fg{} distinguer une instruction d'une
 donnée en mémoire. Dans l'architecture de von Neumann, instructions et données sont stockées
 dans le \textbf{même espace mémoire}, sous forme de suites de bits identiques dans leur
-nature : c'est uniquement le \textbf{contexte de lecture} (est-ce le séquenceur qui lit à
-cette adresse pour exécuter, ou l'UAL qui lit une donnée pour calculer ?) qui détermine
-comment ces bits sont interprétés.
+nature : c'est uniquement la \textbf{phase du cycle d'exécution} (le processeur lit-il
+cette adresse pour charger l'instruction à exécuter, ou pour charger une donnée dans un
+registre ?) qui détermine comment ces bits sont interprétés.
 }
 
 \alamachine{Recherche le nombre de cœurs du processeur de l'ordinateur que tu utilises

@@ -1,0 +1,210 @@
+{
+  "artifact_type": "manual_review_adversarial_disposition",
+  "entries": [
+    {
+      "all_defects_resolved": true,
+      "classification": "CONCRETE_DEFECT_FOUND",
+      "defects": [
+        {
+          "kind": "WRONG_ORDER_OF_MAGNITUDE",
+          "now": "« une puce d'environ un centimetre carre ».",
+          "status": "FIXED",
+          "was": "« une puce de quelques millimetres carres » : un die de SoC de smartphone avoisine 100 mm2 (Apple A16 ~113 mm2, Snapdragon 8 Gen 2 ~130 mm2), soit un facteur 20 a 50."
+        }
+      ],
+      "object_id": "10_C01_systeme_sur_puce",
+      "review_method": "Relecture integrale adversariale de la source et de l'enonce apparie ; verification une par une des affirmations verifiables."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "10_C1_evenements_cles",
+      "review_method": "Chaque date et chaque attribution ont ete confrontees aux faits etablis ; baremes recalcules."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "11_C2_evolution_logiciel_materiel",
+      "review_method": "Chaque date et chaque attribution ont ete confrontees aux faits etablis ; baremes recalcules."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "1NSI-APT-CO-025",
+      "review_method": "Objet d'un lot d'audit historique : aucune source .tex correspondante dans le depot, absent de la fermeture d'assemblage des 12 cibles."
+    },
+    {
+      "all_defects_resolved": true,
+      "classification": "CONCRETE_DEFECT_FOUND",
+      "defects": [
+        {
+          "kind": "WRONG_COMPONENT_ROLE",
+          "now": "Aligne sur la phase du cycle d'execution.",
+          "status": "FIXED",
+          "was": "Le corrige propageait la meme attribution erronee a l'UAL."
+        }
+      ],
+      "object_id": "1NSI-ARCHOS-CO-001",
+      "review_method": "Relecture integrale adversariale de la source et de l'enonce apparie ; verification une par une des affirmations verifiables."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "1NSI-ARCHOS-CO-003",
+      "review_method": "Relecture integrale adversariale de la source et de l'enonce apparie ; verification une par une des affirmations verifiables."
+    },
+    {
+      "all_defects_resolved": true,
+      "classification": "CONCRETE_DEFECT_FOUND",
+      "defects": [
+        {
+          "kind": "INTERNAL_COUNT_INCONSISTENCY",
+          "now": "D1 enumere les quatre constituants : processeur, memoire, entrees, sorties.",
+          "status": "FIXED",
+          "was": "D1 annonce « quatre constituants principaux » puis n'en enumere que trois (processeur, memoire, entree-sortie) alors que la figure TikZ en dessine quatre."
+        },
+        {
+          "kind": "WRONG_COMPONENT_ROLE",
+          "now": "Reformule sur la phase du cycle d'execution : le processeur lit pour charger l'instruction ou pour charger une donnee dans un registre.",
+          "status": "FIXED",
+          "was": "L'erreurFrequente attribuait a l'UAL la lecture d'une donnee en memoire, ce que D2 du meme cours contredit (l'UAL effectue les calculs, elle n'adresse pas la memoire)."
+        }
+      ],
+      "object_id": "1NSI-ARCHOS-COURS-C1",
+      "review_method": "Relecture integrale adversariale de la source et de l'enonce apparie ; verification une par une des affirmations verifiables."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "1NSI-ARCHOS-EX-001",
+      "review_method": "Relecture integrale adversariale de la source et de l'enonce apparie ; verification une par une des affirmations verifiables."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "1NSI-ARCHOS-EX-003",
+      "review_method": "Relecture integrale adversariale de la source et de l'enonce apparie ; verification une par une des affirmations verifiables."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "1NSI-TC-CO-002",
+      "review_method": "Chaque expression Python affirmee a ete reexecutee et comparee au resultat annonce."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "1NSI-TC-CO-004",
+      "review_method": "Chaque expression Python affirmee a ete reexecutee et comparee au resultat annonce."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "1NSI-TC-CO-005",
+      "review_method": "Chaque expression Python affirmee a ete reexecutee et comparee au resultat annonce."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "1NSI-TC-CO-007",
+      "review_method": "Chaque expression Python affirmee a ete reexecutee et comparee au resultat annonce."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "1NSI-TC-CO-010",
+      "review_method": "Chaque expression Python affirmee a ete reexecutee et comparee au resultat annonce."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "1NSI-TC-CO-049",
+      "review_method": "Chaque expression Python affirmee a ete reexecutee et comparee au resultat annonce."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "1NSI-TC-PROJET",
+      "review_method": "Chaque expression Python affirmee a ete reexecutee et comparee au resultat annonce."
+    },
+    {
+      "all_defects_resolved": true,
+      "classification": "CONCRETE_DEFECT_FOUND",
+      "defects": [
+        {
+          "kind": "WRONG_TECHNICAL_STATEMENT",
+          "now": "« la structure et le contenu ». Correction propagee aux 9 corriges clones et aux 2 corriges d'evaluation, ainsi qu'au cours source 1NSI-WEB-COURS-C1.",
+          "status": "FIXED",
+          "was": "« Le code HTML decrit uniquement la structure et l'apparence » : l'apparence releve de CSS, non de HTML ; le QCM du meme chapitre affirme l'inverse."
+        }
+      ],
+      "object_id": "1NSI-WEB-CO-001",
+      "review_method": "Relecture integrale adversariale de la source et de l'enonce apparie ; verification une par une des affirmations verifiables."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "1NSI-WEB-EX-001",
+      "review_method": "Schema relationnel et requetes rejoues en SQLite en memoire ; HTML valide au regard de HTML5."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "TNSI-BDD-EX-001",
+      "review_method": "Schema relationnel et requetes rejoues en SQLite en memoire ; HTML valide au regard de HTML5."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "TNSI-HIST-CO-002",
+      "review_method": "Chaque date et chaque attribution ont ete confrontees aux faits etablis ; baremes recalcules."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "TNSI-HIST-EVAL-A-corrige",
+      "review_method": "Chaque date et chaque attribution ont ete confrontees aux faits etablis ; baremes recalcules."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "TNSI-HIST-EVAL-B",
+      "review_method": "Chaque date et chaque attribution ont ete confrontees aux faits etablis ; baremes recalcules."
+    },
+    {
+      "all_defects_resolved": false,
+      "classification": "NON_FORMALIZABLE_NO_CONCRETE_DEFECT",
+      "defects": [],
+      "object_id": "TNSI-HIST-EVAL-B-corrige",
+      "review_method": "Chaque date et chaque attribution ont ete confrontees aux faits etablis ; baremes recalcules."
+    }
+  ],
+  "generated_by": "passe adversariale consolidee sur les 23 objets en verdict manual_review",
+  "schema_version": "1.0.0",
+  "summary": {
+    "CONCRETE_DEFECTS_RESOLVED": 5,
+    "CONCRETE_DEFECTS_TOTAL": 5,
+    "CONCRETE_DEFECT_FOUND": 4,
+    "MANUAL_REVIEW_OBJECTS": 23,
+    "NON_FORMALIZABLE_NO_CONCRETE_DEFECT": 19
+  },
+  "why_this_exists": "Un verdict `manual_review` signifie « aucun bloc VERIFY/TRACE executable », pas « correction inconnue ». Ce registre porte la disposition reelle de chaque objet, adossee a une relecture. Aucun statut n'est deduit d'une heuristique de mots-cles : un objet absent de ce registre est compte UNREVIEWED, jamais suppose conforme."
+}

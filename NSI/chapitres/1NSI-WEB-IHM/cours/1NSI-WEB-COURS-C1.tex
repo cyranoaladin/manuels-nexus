@@ -19,7 +19,7 @@ choisir une option).}
 \end{console}
 
 \propriete[Description vs comportement]{
-  Le code \textbf{HTML} décrit uniquement l'\textbf{apparence} et la \textbf{structure} d'un
+  Le code \textbf{HTML} décrit uniquement la \textbf{structure} et le \textbf{contenu} d'un
   composant graphique (« il y a un bouton, avec ce texte »). Le \textbf{comportement} du
   composant (que se passe-t-il quand on clique dessus ?) est programmé séparément, en
   général en \textbf{JavaScript}.
@@ -90,7 +90,7 @@ print(declencher_clic("bouton_plus"))  # 2
 % assert declencher_clic("bouton_inexistant") is None
 % END-VERIFY
 
-\erreurFrequente{Confondre la \textbf{description} HTML d'un composant (son apparence, son
+\erreurFrequente{Confondre la \textbf{description} HTML d'un composant (sa structure, son
 identifiant) avec son \textbf{comportement} programmé (ce qui se passe lors d'un événement).
 Le code HTML \lstinline{<button id="bouton_plus">+</button>} ne fait \textbf{rien} par
 lui-même tant qu'aucune fonction n'est associée à l'un de ses événements.}
