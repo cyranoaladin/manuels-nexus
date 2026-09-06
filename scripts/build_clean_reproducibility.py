@@ -149,6 +149,12 @@ def run_clean_reproducibility(
         source_digest = manifest_existing["source_digest"]
         model_digest = manifest_existing["model_digest"]
 
+    declared_by_identity = {
+        (asm["manual"], asm["variant"]): asm.get("included_objects", [])
+        for asm in inv_data.get("assemblies", [])
+        if asm.get("scope") == "manual"
+    } if "inv_data" in locals() and inv_data else {}
+
     for target in inv.get("canonical_targets", []):
         manual_id = target["manual_id"]
         variant = target["variant"]
@@ -216,6 +222,10 @@ def run_clean_reproducibility(
 
         # Inclusions & trace
         included_inputs = _extract_tex_inputs(root, master_path)
+        dec = declared_by_identity.get((manual_id, variant), [])
+        dec_set = set(dec)
+        inc = [obj for obj in included_inputs if obj in dec_set] if dec_set else included_inputs
+        exc = sorted(dec_set - set(inc)) if dec_set else []
 
         repro_record = {
             "target_id": target_id,
@@ -233,15 +243,15 @@ def run_clean_reproducibility(
         reproducibility_results.append(repro_record)
 
         build_entry = {
-            "excluded_objects": [],
+            "excluded_objects": exc,
             "gates": gates,
             "generated_dependencies": [],
             "generated_dependency_digests": {},
             "git_sha": head_commit,
-            "included_objects": included_inputs,
+            "included_objects": inc,
             "manual": manual_id,
             "model_digest": model_digest,
-            "ordered_trace": included_inputs,
+            "ordered_trace": inc,
             "page_count": build_a_pages,
             "pdf_path": pdf_rel,
             "pdf_sha256": build_a_sha,
