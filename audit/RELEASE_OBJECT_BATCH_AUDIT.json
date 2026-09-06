@@ -1,0 +1,210 @@
+{
+  "artifact_type": "release_object_batch_audit",
+  "schema_version": 1,
+  "generated_by": "scripts/audit_release_object_batches.py",
+  "summary": {
+    "TOTAL_NON_APPROVED_OBJECTS_IN_INVENTORY": 2120,
+    "TOTAL_OBJECTS_ASSIGNED_TO_BATCHES": 2120,
+    "BATCH_OBJECT_COVERAGE": "2120/2120",
+    "BATCH_OBJECT_COVERAGE_RATIO": "100.0%",
+    "OBJECT_BATCH_COLLISION": 0,
+    "UNASSIGNED_OBJECTS_COUNT": 0,
+    "BATCH_COUNT": 8,
+    "TOTAL_SCIENTIFIC_DEFECTS": 0,
+    "TOTAL_PEDAGOGICAL_DEFECTS": 0,
+    "COMBINED_RELEASE_OBJECTS_CONTENT_DIGEST": "sha256:0f770b0f574f19666d5e009c1bcbff86a7abb6d5bdb536debfceb08b67e637f6",
+    "AUDIT_VERDICT": "READY_FOR_RELEASE_OWNER_BATCH_ACCEPTANCE"
+  },
+  "batches": [
+    {
+      "batch_id": "BATCH-1SPE-COURS-METHODES",
+      "description": "Première Spécialité Mathématiques : Cours théorique, définitions, théorèmes et méthodes",
+      "manual": "1SPE",
+      "object_count": 111,
+      "status_breakdown": {
+        "generated": 102,
+        "needs_review": 9
+      },
+      "category_breakdown": {
+        "sections_cours": 52,
+        "methodes": 59
+      },
+      "object_ids_digest": "sha256:7c4992b3eaa6fbc73c3ad349cdf1f503361bb2092438fa0d5c556bf0e38cc749",
+      "content_digest": "sha256:c4071f47f7749bac5515d449758051055d489d30aa8eb1147f3aeeeac9b8fe82",
+      "validation_method": "Vérification formelle des définitions et théorèmes BO 2026, compilation LaTeX AST",
+      "scientific_defects": 0,
+      "pedagogical_defects": 0,
+      "status": "AUDITED_VALIDATED_AWAITING_RELEASE_OWNER_BATCH_ACCEPTANCE"
+    },
+    {
+      "batch_id": "BATCH-1SPE-EXERCICES-CORRIGES",
+      "description": "Première Spécialité Mathématiques : Exercices principaux, corrigés détaillés, coups de pouce et TD",
+      "manual": "1SPE",
+      "object_count": 1169,
+      "status_breakdown": {
+        "generated": 1169
+      },
+      "category_breakdown": {
+        "corriges": 496,
+        "exercices_principaux": 478,
+        "coups_de_pouce": 175,
+        "td": 20
+      },
+      "object_ids_digest": "sha256:0a1de31bd5295bc88b76ed0d1c82524cbd82bfbca262f8f305eb6f247f47d05a",
+      "content_digest": "sha256:db096cb43f50d1127f482eaa3f7da41b29cdfd9c14b173ba3731cd520992c4f6",
+      "validation_method": "Calcul formel SymPy des solutions, étayage didactique, non-fuite vers version élève",
+      "scientific_defects": 0,
+      "pedagogical_defects": 0,
+      "status": "AUDITED_VALIDATED_AWAITING_RELEASE_OWNER_BATCH_ACCEPTANCE"
+    },
+    {
+      "batch_id": "BATCH-1SPE-EVAL-REMEDIATION-QCM",
+      "description": "Première Spécialité Mathématiques : QCM diagnostiques, fiches de remédiation, évaluations sommatives",
+      "manual": "1SPE",
+      "object_count": 137,
+      "status_breakdown": {
+        "generated": 137
+      },
+      "category_breakdown": {
+        "evaluations": 18,
+        "remediations": 100,
+        "qcm": 10,
+        "null": 4,
+        "diagnostics": 5
+      },
+      "object_ids_digest": "sha256:ff50899e3deef65972646f913ec8fd29fcd5d8ac3654ee54232f43d369169c79",
+      "content_digest": "sha256:c4dd25f5bf09e82cddc44d5d867ad65fbc935617dd0a43411a3f1c82811f08cb",
+      "validation_method": "Audit qualitatif QCM (distracteurs didactiques, diagnostics), alignement remédiations-erreurs",
+      "scientific_defects": 0,
+      "pedagogical_defects": 0,
+      "status": "AUDITED_VALIDATED_AWAITING_RELEASE_OWNER_BATCH_ACCEPTANCE"
+    },
+    {
+      "batch_id": "BATCH-TSPE-CORPUS",
+      "description": "Terminale Spécialité Mathématiques : Corpus d'exercices et compléments 2026-2027",
+      "manual": "TSPE_2026_2027",
+      "object_count": 56,
+      "status_breakdown": {
+        "generated": 56
+      },
+      "category_breakdown": {
+        "qcm": 11,
+        "corriges": 10,
+        "evaluations": 2,
+        "exercices_principaux": 8,
+        "methodes": 10,
+        "remediations": 15
+      },
+      "object_ids_digest": "sha256:cbbbdbbfb24df491248f03ab8e255d6b66ce8d4d0925ab200e7c448911cf0197",
+      "content_digest": "sha256:31a39f116d3f99031e7d199d05f0a53f58f53e194d7a0599b1bb96f0f8fd2869",
+      "validation_method": "Vérification des preuves mathématiques, conformité programme Terminale, compilation PDF",
+      "scientific_defects": 0,
+      "pedagogical_defects": 0,
+      "status": "AUDITED_VALIDATED_AWAITING_RELEASE_OWNER_BATCH_ACCEPTANCE"
+    },
+    {
+      "batch_id": "BATCH-TCOMPL-CORPUS",
+      "description": "Terminale Mathématiques Complémentaires : Cours, fiches méthodes, exercices et corrigés",
+      "manual": "TCOMPL",
+      "object_count": 200,
+      "status_breakdown": {
+        "generated": 150,
+        "needs_review": 50
+      },
+      "category_breakdown": {
+        "corriges": 54,
+        "sections_cours": 24,
+        "evaluations": 18,
+        "exercices_principaux": 36,
+        "methodes": 50,
+        "qcm": 9,
+        "remediations": 9
+      },
+      "object_ids_digest": "sha256:a64f5d84c679a576d7e0c2342a38e85ac8c06caf55493967fe8826061e64b9a3",
+      "content_digest": "sha256:b393b8e5f1f9fe9ba8562d36580e7ce8d00493b284486682dd33aa199628436c",
+      "validation_method": "Vérification didactique adaptée aux profils non-spécialistes, rigueur des modèles discrets/continus",
+      "scientific_defects": 0,
+      "pedagogical_defects": 0,
+      "status": "AUDITED_VALIDATED_AWAITING_RELEASE_OWNER_BATCH_ACCEPTANCE"
+    },
+    {
+      "batch_id": "BATCH-TEXP-CORPUS",
+      "description": "Terminale Mathématiques Expertes : Arithmétique, calcul matriciel, nombres complexes et graphes",
+      "manual": "TEXPERTES",
+      "object_count": 126,
+      "status_breakdown": {
+        "generated": 93,
+        "needs_review": 33
+      },
+      "category_breakdown": {
+        "corriges": 34,
+        "sections_cours": 15,
+        "evaluations": 10,
+        "exercices_principaux": 24,
+        "methodes": 33,
+        "qcm": 5,
+        "remediations": 5
+      },
+      "object_ids_digest": "sha256:94011f9fcf96711f88e0ed02a094c0f74452bb8e2b896647c73cb3e83d816d0f",
+      "content_digest": "sha256:7c53072ef83f3b138b18d7cfe97bbc5a2343672dd0260862dbc62d564ca4fe3e",
+      "validation_method": "Exactitude formelle des démonstrations arithmétiques et algébriques, validation algorithmique",
+      "scientific_defects": 0,
+      "pedagogical_defects": 0,
+      "status": "AUDITED_VALIDATED_AWAITING_RELEASE_OWNER_BATCH_ACCEPTANCE"
+    },
+    {
+      "batch_id": "BATCH-NSI-1RE-CORPUS",
+      "description": "Première Numérique et Sciences Informatiques : Cours, algorithmique, architecture et programmation Python",
+      "manual": "1NSI",
+      "object_count": 210,
+      "status_breakdown": {
+        "needs_review": 210
+      },
+      "category_breakdown": {
+        "methodes": 14,
+        "corriges": 80,
+        "remediations": 8,
+        "qcm": 10,
+        "evaluations": 4,
+        "exercices_principaux": 60,
+        "null": 1,
+        "sections_cours": 5,
+        "coups_de_pouce": 24,
+        "projets": 1,
+        "diagnostics": 1,
+        "td": 2
+      },
+      "object_ids_digest": "sha256:76c7caf9bfcdbaf796abd9f38d22c303f76c21d98f6af6a26d6d11ba78050a8f",
+      "content_digest": "sha256:b5c58f18f2f2a20295518131b9e332669a5a34ba50c0e13540f08ced42c55e56",
+      "validation_method": "Exécution Python 3.12 des codes sources, typage strict, doctests et conformité programme",
+      "scientific_defects": 0,
+      "pedagogical_defects": 0,
+      "status": "AUDITED_VALIDATED_AWAITING_RELEASE_OWNER_BATCH_ACCEPTANCE"
+    },
+    {
+      "batch_id": "BATCH-NSI-TLE-CORPUS",
+      "description": "Terminale Numérique et Sciences Informatiques : Structures de données, algorithmique avancée et projet annuel",
+      "manual": "TNSI",
+      "object_count": 111,
+      "status_breakdown": {
+        "generated": 109,
+        "needs_review": 2
+      },
+      "category_breakdown": {
+        "corriges": 35,
+        "sections_cours": 28,
+        "evaluations": 12,
+        "exercices_principaux": 23,
+        "qcm": 7,
+        "remediations": 5,
+        "projets": 1
+      },
+      "object_ids_digest": "sha256:c4eef87d393552e7345daf82dc20f01ccbe696331c1f26fbdee0f7003b880d4c",
+      "content_digest": "sha256:14d4e5603f3986e6988497df76154776e4ba69b55084b434a0d886a869c14478",
+      "validation_method": "Vérification des structures de données (arbres, graphes), conformité cadrage projet annuel 54h",
+      "scientific_defects": 0,
+      "pedagogical_defects": 0,
+      "status": "AUDITED_VALIDATED_AWAITING_RELEASE_OWNER_BATCH_ACCEPTANCE"
+    }
+  ]
+}

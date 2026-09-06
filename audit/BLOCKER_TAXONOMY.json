@@ -1,0 +1,37 @@
+{
+  "artifact_type": "blocker_taxonomy",
+  "schema_version": 1,
+  "generated_by": "scripts/build_blocker_taxonomy.py",
+  "summary": {
+    "TOTAL_BLOCKERS": 2,
+    "PRODUCT_P0_COUNT": 0,
+    "PRODUCT_P1_COUNT": 0,
+    "PRODUCT_P2_COUNT": 0,
+    "RELEASE_POLICY_BLOCKERS_COUNT": 1,
+    "GOVERNANCE_BLOCKERS_COUNT": 1,
+    "BLOCKER_CLASSIFICATION_CONFLICTS": 0,
+    "UNCLASSIFIED_BLOCKERS": 0,
+    "ALL_PRODUCT_DEBTS_ZERO": true,
+    "RELEASE_READINESS_STATE": "AWAITING_SINGLE_HUMAN_RELEASE_DECISION"
+  },
+  "blockers": [
+    {
+      "id": "BLK-GOV-001",
+      "taxonomy": "GOVERNANCE_BLOCKER",
+      "title": "Décision humaine unique du Release Owner",
+      "description": "L'approbation formelle de la collection nécessite la signature humaine unique sur le RELEASE_OWNER_BATCH_ACCEPTANCE_PACKET gelé.",
+      "status": "OPEN_AWAITING_HUMAN_DECISION",
+      "target": "RELEASE_OWNER_BATCH_ACCEPTANCE_PACKET",
+      "p0_product_debt": false
+    },
+    {
+      "id": "BLK-POL-001",
+      "taxonomy": "RELEASE_POLICY_BLOCKER",
+      "title": "Garde-fou de non-promotion prématurée des PDF candidats",
+      "description": "Les 12 PDF candidats certifiés restent cantonnés dans build/certified_unsigned_release_candidates/ tant que le signoff humain n'a pas été accordé.",
+      "status": "OPEN_ENFORCING_INTEGRITY",
+      "target": "MANUELS_PDF_PUBLICATION",
+      "p0_product_debt": false
+    }
+  ]
+}

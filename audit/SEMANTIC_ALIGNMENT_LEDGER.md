@@ -10,6 +10,8 @@ résultat légitime — mais `UNKNOWN = 0`.
 
 - portée : `1SPE`
 - cellules examinées : `371`
+- `SEMANTIC_ROUTING_UNRESOLVED` : `0`
+- `SEMANTIC_CERTIFICATION_PENDING` : `371`
 - `DEFAUT_ETABLI` : `0`
 - `JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS` : `371`
 - `UNKNOWN` : `0`

@@ -710,6 +710,8 @@ def build_ledger(
         },
         "counts": {
             "cells_examined": len(records),
+            "SEMANTIC_ROUTING_UNRESOLVED": unknown,
+            "SEMANTIC_CERTIFICATION_PENDING": by_disposition.get(HUMAIN, 0),
             "UNKNOWN": unknown,
             **{name: by_disposition.get(name, 0) for name in DISPOSITIONS},
         },
@@ -782,6 +784,8 @@ def render_md(payload: dict[str, Any]) -> str:
         "",
         f"- portée : `{payload['scope']}`",
         f"- cellules examinées : `{counts['cells_examined']}`",
+        f"- `SEMANTIC_ROUTING_UNRESOLVED` : `{counts.get('SEMANTIC_ROUTING_UNRESOLVED', 0)}`",
+        f"- `SEMANTIC_CERTIFICATION_PENDING` : `{counts.get('SEMANTIC_CERTIFICATION_PENDING', 0)}`",
         f"- `DEFAUT_ETABLI` : `{counts['DEFAUT_ETABLI']}`",
         f"- `JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS` : "
         f"`{counts['JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS']}`",

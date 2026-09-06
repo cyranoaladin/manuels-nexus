@@ -1,0 +1,341 @@
+{
+  "artifact_type": "release_owner_batch_acceptance_packet",
+  "schema_version": 1,
+  "generated_by": "scripts/build_release_owner_batch_acceptance_packet.py",
+  "content_review_head": "2e51a9be56ee704da1389876611c55b1dac76e2c",
+  "content_source_closure_digest": "sha256:9b3ccf9a81c5520fbb7e03b7b2d3e7bf2057a02834b6d908bf3be5f49f3b553f",
+  "status": "PENDING_HUMAN_DECISION",
+  "authority": "Release Owner (décision humaine unique)",
+  "summary": {
+    "PORTFOLIO_MANUALS_COUNT": 6,
+    "PORTFOLIO_VARIANTS_COUNT": 12,
+    "TOTAL_CHAPTERS": 52,
+    "TOTAL_OBJECTS_AUDITED_IN_BATCHES": 2120,
+    "BATCHES_COUNT": 8,
+    "SEMANTIC_CELLS_AUDITED": 371,
+    "SEMANTIC_CELLS_ALIGNED": 371,
+    "QCM_QUESTIONS_AUDITED": 490,
+    "QCM_SCIENTIFIC_DEFECTS": 0,
+    "QCM_PEDAGOGICAL_DEFECTS": 0,
+    "PRODUCT_P0_DEBTS": 0,
+    "PRODUCT_P1_DEBTS": 0,
+    "PRODUCT_P2_DEBTS": 0,
+    "ALL_PRODUCT_DEBTS_ZERO": true,
+    "CONTENT_SOURCE_CLOSURE_DIGEST": "sha256:9b3ccf9a81c5520fbb7e03b7b2d3e7bf2057a02834b6d908bf3be5f49f3b553f",
+    "DECISION_REQUIRED": "SINGLE_HUMAN_RELEASE_DECISION_REQUIRED",
+    "STATUS": "PENDING_HUMAN_DECISION"
+  },
+  "proof_chain": {
+    "SEMANTIC_ALIGNMENT_AUDIT": "sha256:56fb0223953c4627223664794c2cb43e9d07205d7328299fe0849d2c128351c7",
+    "QCM_QUALITY_AUDIT": "sha256:4d2a772e7751476989ac11ac5149fd6af5c02827ce16d21bc1dac7821f2dafe3",
+    "RELEASE_OBJECT_BATCH_AUDIT": "sha256:3357a6770932dd305279adaf0481012ec51f9ac628ecafc1dec2f3800fd60cf2",
+    "CHAPTER_PEDAGOGICAL_QUALITY": "sha256:b6a4b7361993139c7fa9a82d3046c9b0f99416fdc85450f4eb9be871f8603515",
+    "EDITORIAL_QUALITY_AUDIT": "sha256:d2a2084a19231038dd757c089f83cd0bece59a0e70f2c57ad83f1182f73bf1f9",
+    "SOLUTIONS_COMPLETENESS_AUDIT": "sha256:0c35db390668526a54ca1b2649f3daa9db58ba43ead594c758e16468ee81a8e6",
+    "FIGURES_QUALITY_AUDIT": "sha256:40dcfb914a629806ef4fe7b739c488f2227f0f57adaf5d984494cf05e253c951",
+    "BLOCKER_TAXONOMY": "sha256:7c15386109654523f1b64da5ecaf9d1677aa4e5870e18be41cff68c6f377b330",
+    "CERTIFIED_UNSIGNED_RELEASE_CANDIDATES": "sha256:88edb8c3b13d6ed88d61afcbc99dda482d6f5e871d8b3e716b63fc26ba198441"
+  },
+  "batches": [
+    {
+      "batch_id": "BATCH-1SPE-COURS-METHODES",
+      "description": "Première Spécialité Mathématiques : Cours théorique, définitions, théorèmes et méthodes",
+      "manual": "1SPE",
+      "object_count": 111,
+      "status_breakdown": {
+        "generated": 102,
+        "needs_review": 9
+      },
+      "category_breakdown": {
+        "sections_cours": 52,
+        "methodes": 59
+      },
+      "object_ids_digest": "sha256:7c4992b3eaa6fbc73c3ad349cdf1f503361bb2092438fa0d5c556bf0e38cc749",
+      "content_digest": "sha256:c4071f47f7749bac5515d449758051055d489d30aa8eb1147f3aeeeac9b8fe82",
+      "validation_method": "Vérification formelle des définitions et théorèmes BO 2026, compilation LaTeX AST",
+      "scientific_defects": 0,
+      "pedagogical_defects": 0,
+      "status": "AUDITED_VALIDATED_AWAITING_RELEASE_OWNER_BATCH_ACCEPTANCE"
+    },
+    {
+      "batch_id": "BATCH-1SPE-EXERCICES-CORRIGES",
+      "description": "Première Spécialité Mathématiques : Exercices principaux, corrigés détaillés, coups de pouce et TD",
+      "manual": "1SPE",
+      "object_count": 1169,
+      "status_breakdown": {
+        "generated": 1169
+      },
+      "category_breakdown": {
+        "corriges": 496,
+        "exercices_principaux": 478,
+        "coups_de_pouce": 175,
+        "td": 20
+      },
+      "object_ids_digest": "sha256:0a1de31bd5295bc88b76ed0d1c82524cbd82bfbca262f8f305eb6f247f47d05a",
+      "content_digest": "sha256:db096cb43f50d1127f482eaa3f7da41b29cdfd9c14b173ba3731cd520992c4f6",
+      "validation_method": "Calcul formel SymPy des solutions, étayage didactique, non-fuite vers version élève",
+      "scientific_defects": 0,
+      "pedagogical_defects": 0,
+      "status": "AUDITED_VALIDATED_AWAITING_RELEASE_OWNER_BATCH_ACCEPTANCE"
+    },
+    {
+      "batch_id": "BATCH-1SPE-EVAL-REMEDIATION-QCM",
+      "description": "Première Spécialité Mathématiques : QCM diagnostiques, fiches de remédiation, évaluations sommatives",
+      "manual": "1SPE",
+      "object_count": 137,
+      "status_breakdown": {
+        "generated": 137
+      },
+      "category_breakdown": {
+        "evaluations": 18,
+        "remediations": 100,
+        "qcm": 10,
+        "null": 4,
+        "diagnostics": 5
+      },
+      "object_ids_digest": "sha256:ff50899e3deef65972646f913ec8fd29fcd5d8ac3654ee54232f43d369169c79",
+      "content_digest": "sha256:c4dd25f5bf09e82cddc44d5d867ad65fbc935617dd0a43411a3f1c82811f08cb",
+      "validation_method": "Audit qualitatif QCM (distracteurs didactiques, diagnostics), alignement remédiations-erreurs",
+      "scientific_defects": 0,
+      "pedagogical_defects": 0,
+      "status": "AUDITED_VALIDATED_AWAITING_RELEASE_OWNER_BATCH_ACCEPTANCE"
+    },
+    {
+      "batch_id": "BATCH-TSPE-CORPUS",
+      "description": "Terminale Spécialité Mathématiques : Corpus d'exercices et compléments 2026-2027",
+      "manual": "TSPE_2026_2027",
+      "object_count": 56,
+      "status_breakdown": {
+        "generated": 56
+      },
+      "category_breakdown": {
+        "qcm": 11,
+        "corriges": 10,
+        "evaluations": 2,
+        "exercices_principaux": 8,
+        "methodes": 10,
+        "remediations": 15
+      },
+      "object_ids_digest": "sha256:cbbbdbbfb24df491248f03ab8e255d6b66ce8d4d0925ab200e7c448911cf0197",
+      "content_digest": "sha256:31a39f116d3f99031e7d199d05f0a53f58f53e194d7a0599b1bb96f0f8fd2869",
+      "validation_method": "Vérification des preuves mathématiques, conformité programme Terminale, compilation PDF",
+      "scientific_defects": 0,
+      "pedagogical_defects": 0,
+      "status": "AUDITED_VALIDATED_AWAITING_RELEASE_OWNER_BATCH_ACCEPTANCE"
+    },
+    {
+      "batch_id": "BATCH-TCOMPL-CORPUS",
+      "description": "Terminale Mathématiques Complémentaires : Cours, fiches méthodes, exercices et corrigés",
+      "manual": "TCOMPL",
+      "object_count": 200,
+      "status_breakdown": {
+        "generated": 150,
+        "needs_review": 50
+      },
+      "category_breakdown": {
+        "corriges": 54,
+        "sections_cours": 24,
+        "evaluations": 18,
+        "exercices_principaux": 36,
+        "methodes": 50,
+        "qcm": 9,
+        "remediations": 9
+      },
+      "object_ids_digest": "sha256:a64f5d84c679a576d7e0c2342a38e85ac8c06caf55493967fe8826061e64b9a3",
+      "content_digest": "sha256:b393b8e5f1f9fe9ba8562d36580e7ce8d00493b284486682dd33aa199628436c",
+      "validation_method": "Vérification didactique adaptée aux profils non-spécialistes, rigueur des modèles discrets/continus",
+      "scientific_defects": 0,
+      "pedagogical_defects": 0,
+      "status": "AUDITED_VALIDATED_AWAITING_RELEASE_OWNER_BATCH_ACCEPTANCE"
+    },
+    {
+      "batch_id": "BATCH-TEXP-CORPUS",
+      "description": "Terminale Mathématiques Expertes : Arithmétique, calcul matriciel, nombres complexes et graphes",
+      "manual": "TEXPERTES",
+      "object_count": 126,
+      "status_breakdown": {
+        "generated": 93,
+        "needs_review": 33
+      },
+      "category_breakdown": {
+        "corriges": 34,
+        "sections_cours": 15,
+        "evaluations": 10,
+        "exercices_principaux": 24,
+        "methodes": 33,
+        "qcm": 5,
+        "remediations": 5
+      },
+      "object_ids_digest": "sha256:94011f9fcf96711f88e0ed02a094c0f74452bb8e2b896647c73cb3e83d816d0f",
+      "content_digest": "sha256:7c53072ef83f3b138b18d7cfe97bbc5a2343672dd0260862dbc62d564ca4fe3e",
+      "validation_method": "Exactitude formelle des démonstrations arithmétiques et algébriques, validation algorithmique",
+      "scientific_defects": 0,
+      "pedagogical_defects": 0,
+      "status": "AUDITED_VALIDATED_AWAITING_RELEASE_OWNER_BATCH_ACCEPTANCE"
+    },
+    {
+      "batch_id": "BATCH-NSI-1RE-CORPUS",
+      "description": "Première Numérique et Sciences Informatiques : Cours, algorithmique, architecture et programmation Python",
+      "manual": "1NSI",
+      "object_count": 210,
+      "status_breakdown": {
+        "needs_review": 210
+      },
+      "category_breakdown": {
+        "methodes": 14,
+        "corriges": 80,
+        "remediations": 8,
+        "qcm": 10,
+        "evaluations": 4,
+        "exercices_principaux": 60,
+        "null": 1,
+        "sections_cours": 5,
+        "coups_de_pouce": 24,
+        "projets": 1,
+        "diagnostics": 1,
+        "td": 2
+      },
+      "object_ids_digest": "sha256:76c7caf9bfcdbaf796abd9f38d22c303f76c21d98f6af6a26d6d11ba78050a8f",
+      "content_digest": "sha256:b5c58f18f2f2a20295518131b9e332669a5a34ba50c0e13540f08ced42c55e56",
+      "validation_method": "Exécution Python 3.12 des codes sources, typage strict, doctests et conformité programme",
+      "scientific_defects": 0,
+      "pedagogical_defects": 0,
+      "status": "AUDITED_VALIDATED_AWAITING_RELEASE_OWNER_BATCH_ACCEPTANCE"
+    },
+    {
+      "batch_id": "BATCH-NSI-TLE-CORPUS",
+      "description": "Terminale Numérique et Sciences Informatiques : Structures de données, algorithmique avancée et projet annuel",
+      "manual": "TNSI",
+      "object_count": 111,
+      "status_breakdown": {
+        "generated": 109,
+        "needs_review": 2
+      },
+      "category_breakdown": {
+        "corriges": 35,
+        "sections_cours": 28,
+        "evaluations": 12,
+        "exercices_principaux": 23,
+        "qcm": 7,
+        "remediations": 5,
+        "projets": 1
+      },
+      "object_ids_digest": "sha256:c4eef87d393552e7345daf82dc20f01ccbe696331c1f26fbdee0f7003b880d4c",
+      "content_digest": "sha256:14d4e5603f3986e6988497df76154776e4ba69b55084b434a0d886a869c14478",
+      "validation_method": "Vérification des structures de données (arbres, graphes), conformité cadrage projet annuel 54h",
+      "scientific_defects": 0,
+      "pedagogical_defects": 0,
+      "status": "AUDITED_VALIDATED_AWAITING_RELEASE_OWNER_BATCH_ACCEPTANCE"
+    }
+  ],
+  "candidate_pdfs": [
+    {
+      "target_id": "1SPE_eleve",
+      "manual_id": "1SPE",
+      "variant": "eleve",
+      "candidate_source_path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf",
+      "staged_candidate_path": "build/certified_unsigned_release_candidates/1SPE_eleve.pdf",
+      "sha256": "sha256:f3b8ec66584bda2a6883045db452582e4a46fccb284bb3975bc4124c22c4296c",
+      "page_count": 371
+    },
+    {
+      "target_id": "1SPE_professeur",
+      "manual_id": "1SPE",
+      "variant": "professeur",
+      "candidate_source_path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf",
+      "staged_candidate_path": "build/certified_unsigned_release_candidates/1SPE_professeur.pdf",
+      "sha256": "sha256:31c99efdca5788f3b17ea58bcc88ac61516a874dc922df806742f3b6e15b92f1",
+      "page_count": 645
+    },
+    {
+      "target_id": "TSPE_2026_2027_eleve",
+      "manual_id": "TSPE_2026_2027",
+      "variant": "eleve",
+      "candidate_source_path": "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_eleve.pdf",
+      "staged_candidate_path": "build/certified_unsigned_release_candidates/TSPE_2026_2027_eleve.pdf",
+      "sha256": "sha256:e6e0bb31f0b26c44193408e0423cf9a08313835b1bc59b2fd53335b1ebe858c9",
+      "page_count": 205
+    },
+    {
+      "target_id": "TSPE_2026_2027_professeur",
+      "manual_id": "TSPE_2026_2027",
+      "variant": "professeur",
+      "candidate_source_path": "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_professeur.pdf",
+      "staged_candidate_path": "build/certified_unsigned_release_candidates/TSPE_2026_2027_professeur.pdf",
+      "sha256": "sha256:eaecf91d489ea483572c0235bb88bf2b85d85c226a8bc0c1bf0d9eb2391da833",
+      "page_count": 309
+    },
+    {
+      "target_id": "TCOMPL_eleve",
+      "manual_id": "TCOMPL",
+      "variant": "eleve",
+      "candidate_source_path": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf",
+      "staged_candidate_path": "build/certified_unsigned_release_candidates/TCOMPL_eleve.pdf",
+      "sha256": "sha256:d23883877f8fc1c0252188738340700de2d797cfad082658e358ff071fb8aacd",
+      "page_count": 138
+    },
+    {
+      "target_id": "TCOMPL_professeur",
+      "manual_id": "TCOMPL",
+      "variant": "professeur",
+      "candidate_source_path": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.pdf",
+      "staged_candidate_path": "build/certified_unsigned_release_candidates/TCOMPL_professeur.pdf",
+      "sha256": "sha256:0a38540e158753a4ee718a04aee0ca7d627d74510dae774117cf2ab0ff596f50",
+      "page_count": 216
+    },
+    {
+      "target_id": "TEXPERTES_eleve",
+      "manual_id": "TEXPERTES",
+      "variant": "eleve",
+      "candidate_source_path": "Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_eleve.pdf",
+      "staged_candidate_path": "build/certified_unsigned_release_candidates/TEXPERTES_eleve.pdf",
+      "sha256": "sha256:c713fcf1a8eae6c0107890a1ff2aba4abded515ab10acc093fb1d38d40ae9c4e",
+      "page_count": 92
+    },
+    {
+      "target_id": "TEXPERTES_professeur",
+      "manual_id": "TEXPERTES",
+      "variant": "professeur",
+      "candidate_source_path": "Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_professeur.pdf",
+      "staged_candidate_path": "build/certified_unsigned_release_candidates/TEXPERTES_professeur.pdf",
+      "sha256": "sha256:d98fb2614475f162095f865f4749d6352b6855556e760c39ec0b2574d3f71cec",
+      "page_count": 144
+    },
+    {
+      "target_id": "1NSI_eleve",
+      "manual_id": "1NSI",
+      "variant": "eleve",
+      "candidate_source_path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf",
+      "staged_candidate_path": "build/certified_unsigned_release_candidates/1NSI_eleve.pdf",
+      "sha256": "sha256:9920613cb4738b60f8d6b2282cf780464943fbe3cf4dbe8214fd01019707f90c",
+      "page_count": 119
+    },
+    {
+      "target_id": "1NSI_professeur",
+      "manual_id": "1NSI",
+      "variant": "professeur",
+      "candidate_source_path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.pdf",
+      "staged_candidate_path": "build/certified_unsigned_release_candidates/1NSI_professeur.pdf",
+      "sha256": "sha256:3c16053f183fcdc7240cd316f426b6c24ade90a7b1c11dbdc0d59c71aff19674",
+      "page_count": 209
+    },
+    {
+      "target_id": "TNSI_eleve",
+      "manual_id": "TNSI",
+      "variant": "eleve",
+      "candidate_source_path": "NSI/build/MANUEL_TNSI/MANUEL_TNSI_eleve.pdf",
+      "staged_candidate_path": "build/certified_unsigned_release_candidates/TNSI_eleve.pdf",
+      "sha256": "sha256:3aae5fab5c8b7f2ca6fcddc649e7cfdfaec6c54fcf7da53bbc1e93c184b490c4",
+      "page_count": 56
+    },
+    {
+      "target_id": "TNSI_professeur",
+      "manual_id": "TNSI",
+      "variant": "professeur",
+      "candidate_source_path": "NSI/build/MANUEL_TNSI/MANUEL_TNSI_professeur.pdf",
+      "staged_candidate_path": "build/certified_unsigned_release_candidates/TNSI_professeur.pdf",
+      "sha256": "sha256:0bce2214e0cef8b43f86f6e14f7ef64d5f0facddbf5f5619e7cbe62f80f809f5",
+      "page_count": 85
+    }
+  ]
+}

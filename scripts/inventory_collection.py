@@ -2248,6 +2248,9 @@ def _project_identity_migration_qualifications(
             continue
 
         occurrences = current_anomalies.get(current_fingerprint, [])
+        if not occurrences:
+            # L'anomalie n'est plus active dans le corpus courant (objet approuvé ou résolu)
+            continue
         if len(occurrences) != 1:
             raise InventoryError(
                 "cible de migration absente ou ambiguë fp="

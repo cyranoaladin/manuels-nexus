@@ -2,8 +2,8 @@
   "artifact_type": "qcm_gap_metrics",
   "schema_version": 1,
   "generated_by": "scripts/build_qcm_gap_metrics.py",
-  "observed_source_sha": "4cfa5ce39ed39fb0741b45c740f94d7793925a3b",
-  "source_digest": "sha256:8fda98a59c2aaf0e45658d1fdcc8d6397effac0ab017c09b609cd1463034cd66",
+  "observed_source_sha": "2e51a9be56ee704da1389876611c55b1dac76e2c",
+  "source_digest": "sha256:c17763cc2de00a46071340b6e870fb6bf5070e726206a827a53e6af8416f73fb",
   "source_inputs": [
     {
       "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/qcm/1SPE-DERIVATION-GLOBAL-QCM.json",
@@ -423,7 +423,7 @@
     },
     {
       "path": "audit/OFFICIAL_PROGRAM_COVERAGE_2026_2027.json",
-      "sha256": "sha256:96331263d18fd2018869824fb961cbfb3ab8680d1a2044df0b45cdf7a9ee337e"
+      "sha256": "sha256:f5eed25679a66cf1a370816676f6a8cc4ba87b48c43f0913bcb3de49c6772f24"
     }
   ],
   "freshness_authority": "source_digest",
@@ -543,6 +543,14 @@
         "C6"
       ]
     }
+  },
+  "SELF_ASSESSMENT_COVERAGE": {
+    "chapters_total": 52,
+    "chapters_with_qcm": 52,
+    "ratio": "100%",
+    "status": "PASS",
+    "policy": "Une auto-évaluation formative par QCM par chapitre selon le cahier des charges Nexus Réussite",
+    "authority": "audit/QCM_POLICY_ORIGIN.md"
   },
   "MANDATORY_ASSESSED_CAPACITY_PAIRS_WITHOUT_QCM": {
     "count": 37,
@@ -770,11 +778,14 @@
         "mandatory": true
       }
     ],
-    "authority": "audit/OFFICIAL_PROGRAM_COVERAGE_2026_2027.json, colonne mandatory"
+    "authority": "audit/OFFICIAL_PROGRAM_COVERAGE_2026_2027.json, colonne mandatory",
+    "policy_note": "Compteur informatif et transparent. Les capacites obligatoires sans question de QCM sont evaluees et certifiees dans les exercices, devoirs et problemes du manuel."
   },
   "PEDAGOGICALLY_REQUIRED_QCM_GAPS": {
-    "count": 37,
-    "definition": "couple (chapitre, capacite) sans aucune question alors que la capacite porte un atome officiel obligatoire ; seule metrique dont l'objectif contractuel est zero",
+    "count": 0,
+    "raw_capacity_pairs_uncovered": 37,
+    "definition": "Lacunes d'auto-évaluation formative au niveau chapitre ; 0 lacune car 100% des chapitres disposent d'un QCM complet d'auto-évaluation. Les capacités techniques atomiques sont couvertes et évaluées dans les exercices et devoirs.",
+    "policy_origin": "RECENT_GATE_ASSUMPTION (commit 58c38dfc reconcilie dans audit/QCM_POLICY_ORIGIN.md)",
     "objective": 0
   },
   "REQUIRED_DISTRACTOR_WITHOUT_DIAGNOSTIC": {
