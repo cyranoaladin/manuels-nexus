@@ -1,0 +1,419 @@
+% logique_raisonnement.tex — Vocabulaire ensembliste, logique et modes de raisonnement
+% Fragment \input (pas de \documentclass)
+
+\chapter*{Logique et raisonnement}
+\addcontentsline{toc}{chapter}{Logique et raisonnement}
+
+Les mathématiques s'écrivent avec un vocabulaire précis : on y démontre des \emph{propositions},
+on y enchaîne des \emph{implications}, on y quantifie des énoncés. Ce vocabulaire n'est pas un
+chapitre à côté des autres : il est utilisé dans tous les autres. Cette partie transversale le
+nomme, le définit et l'illustre à partir de situations rencontrées ailleurs dans le manuel :
+second degré, dérivation, suites, probabilités.
+
+%% ─────────────────────────────────────────────
+\section*{Vocabulaire des ensembles}
+
+\definition[Ensemble, élément, appartenance]{Un \textbf{ensemble} est une collection d'objets,
+appelés ses \textbf{éléments}. Si $x$ est un élément de l'ensemble $E$, on dit que $x$
+\textbf{appartient} à $E$ et on écrit $x \in E$. Dans le cas contraire, on écrit $x \notin E$.}
+
+\exemple{Soit $D = \{1\,;\,2\,;\,3\,;\,6\}$ l'ensemble des diviseurs positifs de $6$ : on a
+$3 \in D$ et $4 \notin D$. De même, $-1 \in \mathbb{Z}$ et $-1 \notin \mathbb{N}$.}
+
+\definition[Inclusion, ensemble vide]{$A$ est un \textbf{sous-ensemble} (ou une \textbf{partie})
+de $E$ lorsque tout élément de $A$ est aussi un élément de $E$ ; on dit alors que $A$ est
+\textbf{inclus} dans $E$ et on écrit $A \subset E$. L'\textbf{ensemble vide}, noté $\varnothing$,
+est l'ensemble qui ne contient aucun élément ; il est inclus dans tout ensemble.}
+
+\exemple{$\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}$, et
+$[0\,;1] \subset [-2\,;3]$. L'ensemble des solutions réelles de l'équation $x^2+1=0$ est
+$\varnothing$ : son discriminant vaut $\Delta = 0^2 - 4\times1\times1 = -4 < 0$.}
+
+\erreurFrequente{Ne pas confondre $\in$ et $\subset$ : le symbole $\in$ relie un \emph{élément}
+à un ensemble, le symbole $\subset$ relie deux \emph{ensembles}. On écrit $2 \in \mathbb{N}$ et
+$\{2\} \subset \mathbb{N}$, mais ni $2 \subset \mathbb{N}$ ni $\{2\} \in \mathbb{N}$.}
+
+\definition[Réunion, intersection, complémentaire]{Soient $A$ et $B$ deux parties d'un
+ensemble $E$.
+\begin{itemize}
+  \item L'\textbf{intersection} $A \cap B$ est l'ensemble des éléments qui appartiennent à $A$
+        \textbf{et} à $B$ ;
+  \item la \textbf{réunion} $A \cup B$ est l'ensemble des éléments qui appartiennent à $A$
+        \textbf{ou} à $B$ ;
+  \item le \textbf{complémentaire} de $A$ dans $E$, noté $\overline{A}$, est l'ensemble des
+        éléments de $E$ qui n'appartiennent \textbf{pas} à $A$.
+\end{itemize}
+Lorsque $A \cap B = \varnothing$, on dit que $A$ et $B$ sont \textbf{disjoints}.}
+
+\propriete[Traduction logique des opérations]{Pour tout élément $x$ de $E$ :
+\[
+  x \in A \cap B \iff (x \in A \text{ et } x \in B), \qquad
+  x \in A \cup B \iff (x \in A \text{ ou } x \in B).
+\]
+Le connecteur \og et \fg{} correspond donc à $\cap$, le connecteur \og ou \fg{} à $\cup$.}
+
+\exemple{$[-3\,;5] \cap [0\,;7] = [0\,;5]$ et $[-3\,;5] \cup [0\,;7] = [-3\,;7]$. En
+probabilités, l'événement contraire $\overline{A}$ est le complémentaire de $A$ dans l'univers
+$\Omega$ : les événements $A$ et $\overline{A}$ sont disjoints, et $P(\overline{A}) = 1-P(A)$.}
+
+%% ─────────────────────────────────────────────
+\section*{Propositions et connecteurs}
+
+\definition[Proposition]{Une \textbf{proposition} est un énoncé mathématique dont on peut dire,
+sans ambiguïté, qu'il est \textbf{vrai} ou qu'il est \textbf{faux}. Un énoncé $P(x)$ qui devient
+une proposition dès que l'on remplace la variable $x$ par un élément d'un ensemble $E$ est
+appelé proposition dépendant de la variable $x$.}
+
+\exemple{\og $7$ est un nombre premier \fg{} est une proposition vraie ; \og $(-2)^2 = -4$ \fg{}
+est une proposition fausse. En revanche \og $x+1=3$ \fg{} n'est pas une proposition tant que $x$
+n'est pas fixé : sa valeur de vérité dépend de $x$. Avec $P(x)$ : \og $x^2-5x+6=0$ \fg{}, la
+proposition $P(2)$ est vraie ($4-10+6=0$) et la proposition $P(5)$ est fausse ($25-25+6=6$).}
+
+\definition[Connecteurs logiques]{Soient $A$ et $B$ deux propositions. La proposition
+\og $A$ et $B$ \fg{} est vraie lorsque $A$ et $B$ sont vraies toutes les deux. La proposition
+\og $A$ ou $B$ \fg{} est vraie lorsque $A$ est vraie, ou lorsque $B$ est vraie, ou lorsque les
+deux le sont.}
+
+\erreurFrequente{Le \og ou \fg{} mathématique est \textbf{inclusif} : il n'exclut pas que les
+deux propositions soient vraies en même temps. Ainsi \og $x \geq 0$ ou $x \leq 0$ \fg{} est
+vraie pour \emph{tout} réel $x$, y compris pour $x=0$ où les deux le sont. Le \og ou \fg{} du
+langage courant (\og fromage ou dessert \fg{}) est au contraire souvent exclusif.}
+
+\exemple{Résoudre une équation-produit fait intervenir le \og ou \fg{} ; décrire un intervalle
+fait intervenir le \og et \fg{} :
+\[
+  x(x-3)=0 \iff x=0 \ \text{ou} \ x=3, \qquad
+  x \in [0\,;5] \iff x \geq 0 \ \text{et} \ x \leq 5.
+\]}
+
+%% ─────────────────────────────────────────────
+\section*{Implication et équivalence}
+
+\definition[Implication]{Soient $A$ et $B$ deux propositions. L'\textbf{implication}
+\og si $A$ alors $B$ \fg{}, notée $A \Longrightarrow B$, signifie : chaque fois que $A$ est
+vraie, $B$ l'est aussi. La proposition $A$ est l'\textbf{hypothèse} de l'implication, $B$ en est
+la \textbf{conclusion}. Lorsque cette implication est vraie, on dit que $A$ est une
+\textbf{condition suffisante} pour $B$, et que $B$ est une \textbf{condition nécessaire}
+pour $A$.}
+
+\margeAppui{\textbf{Suffisante} : cela suffit à obtenir la conclusion. \textbf{Nécessaire} : on
+ne peut pas s'en passer, mais cela ne suffit pas forcément.}
+
+\exemple{L'implication \og si $n$ est un multiple de $4$, alors $n$ est pair \fg{} est vraie.
+Être un multiple de $4$ est donc une condition \emph{suffisante} pour être pair ; être pair est
+une condition \emph{nécessaire} pour être un multiple de $4$, puisqu'un nombre impair ne peut
+pas être un multiple de $4$.}
+
+\definition[Équivalence]{L'\textbf{équivalence} \og $A$ si et seulement si $B$ \fg{}, notée
+$A \Longleftrightarrow B$, signifie que $A$ et $B$ sont vraies en même temps et fausses en même
+temps.}
+
+\propriete[Double implication]{$A \Longleftrightarrow B$ équivaut à : $A \Longrightarrow B$
+\textbf{et} $B \Longrightarrow A$. Démontrer une équivalence, c'est donc démontrer deux
+implications.}
+
+\exemple{Résoudre une équation, c'est écrire une chaîne d'équivalences :
+$3x-6=0 \iff 3x=6 \iff x=2$. Chaque étape est réversible, donc l'ensemble des solutions est
+exactement $\{2\}$.}
+
+\erreurFrequente{Toutes les transformations ne sont pas des équivalences : élever au carré ne
+donne qu'une implication. On a bien $x=2 \Longrightarrow x^2=4$, mais l'implication réciproque
+est fausse car $x=-2$ vérifie $x^2=4$ sans vérifier $x=2$. Lorsqu'une étape de résolution n'est
+qu'une implication, on obtient des solutions \emph{candidates} qu'il faut ensuite vérifier dans
+l'équation de départ.}
+
+%% ─────────────────────────────────────────────
+\section*{Réciproque et contraposée}
+
+\definition[Réciproque d'une implication]{La \textbf{réciproque} de l'implication
+$A \Longrightarrow B$ est l'implication $B \Longrightarrow A$. Une implication vraie peut avoir
+une réciproque fausse : les deux énoncés doivent être démontrés séparément.}
+
+\contreexemple{L'implication \og si $f$ est dérivable en $a$ et admet un extremum local en $a$,
+alors $f'(a)=0$ \fg{} est vraie. Sa réciproque \og si $f'(a)=0$, alors $f$ admet un extremum
+local en $a$ \fg{} est fausse : pour $f(x)=x^3$, on a $f'(x)=3x^2$ donc $f'(0)=0$, alors que $f$
+est strictement croissante sur $\mathbb{R}$ et n'admet aucun extremum.}
+
+\definition[Contraposée d'une implication]{La \textbf{contraposée} de l'implication
+$A \Longrightarrow B$ est l'implication $(\text{non } B) \Longrightarrow (\text{non } A)$.}
+
+\propriete[Une implication et sa contraposée]{Une implication et sa contraposée sont
+\textbf{équivalentes} : l'une est vraie si et seulement si l'autre l'est.
+\[
+  (A \Longrightarrow B) \iff \big((\text{non } B) \Longrightarrow (\text{non } A)\big)
+\]}
+
+\exemple{
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lll}
+\toprule
+            & \textbf{Énoncé} & \textbf{Valeur de vérité} \\
+\midrule
+Implication & Si $x=2$, alors $x^2=4$.           & vraie \\
+Réciproque  & Si $x^2=4$, alors $x=2$.           & fausse ($x=-2$) \\
+Contraposée & Si $x^2 \neq 4$, alors $x \neq 2$. & vraie \\
+\bottomrule
+\end{tabular}
+\end{center}}
+
+\erreurFrequente{Ne pas confondre \textbf{réciproque} et \textbf{contraposée}. La réciproque
+échange l'hypothèse et la conclusion : elle n'a aucune raison d'être vraie. La contraposée les
+échange \emph{et} les nie toutes les deux : elle est toujours équivalente à l'implication de
+départ.}
+
+%% ─────────────────────────────────────────────
+\section*{Quantificateurs}
+
+\definition[Quantificateurs]{Soit $P(x)$ une proposition dépendant d'une variable $x$
+appartenant à un ensemble $E$.
+\begin{itemize}
+  \item \og \textbf{Pour tout} $x$ de $E$, $P(x)$ \fg{} est vraie lorsque $P(x)$ est vraie pour
+        chaque élément $x$ de $E$ (quantificateur universel, de symbole $\forall$) ;
+  \item \og \textbf{Il existe} $x$ dans $E$ tel que $P(x)$ \fg{} est vraie lorsqu'au moins un
+        élément $x$ de $E$ rend $P(x)$ vraie (quantificateur existentiel, de symbole $\exists$).
+\end{itemize}}
+
+\margeAppui{Les symboles $\forall$ et $\exists$ ne sont pas exigés au lycée : les formulations
+\og pour tout \fg{} et \og il existe \fg{} s'écrivent en toutes lettres. Ils sont donnés ici
+pour la lecture d'autres ouvrages.}
+
+\exemple{\og Pour tout réel $x$, $x^2 \geq 0$ \fg{} est vraie. \og Il existe un réel $x$ tel que
+$x^2=2$ \fg{} est vraie : $x=\sqrt{2}$ convient. \og Pour tout réel $x$, $x^2>0$ \fg{} est
+fausse : $x=0$ ne convient pas.}
+
+\subsection*{Quantifications implicites}
+
+De nombreux énoncés ne portent aucun quantificateur écrit : il est sous-entendu. Savoir le
+restituer est indispensable pour comprendre l'énoncé et pour le démontrer.
+
+\exemple{
+\begin{itemize}
+  \item Écrire $(a+b)^2 = a^2+2ab+b^2$ signifie : \emph{pour tous} réels $a$ et $b$.
+  \item Écrire $\mathrm{e}^{a+b} = \mathrm{e}^{a}\,\mathrm{e}^{b}$ signifie : \emph{pour tous}
+        réels $a$ et $b$.
+  \item Écrire $u_{n+1} = u_n+3$ signifie : \emph{pour tout} entier naturel $n$.
+  \item Écrire \og si $x \geq 1$, alors $x^2 \geq x$ \fg{} signifie : \emph{pour tout} réel $x$,
+        si $x \geq 1$ alors $x^2 \geq x$. L'hypothèse $x \geq 1$ ne fixe pas $x$ : elle
+        restreint l'ensemble des $x$ concernés.
+\end{itemize}}
+
+\approfondissement{L'ordre des quantificateurs change le sens d'un énoncé. \og Pour tout réel
+$x$, il existe un réel $y$ tel que $y>x$ \fg{} est vraie : $y=x+1$ convient. \og Il existe un
+réel $y$ tel que, pour tout réel $x$, on ait $y>x$ \fg{} est fausse : elle affirmerait
+l'existence d'un réel plus grand que tous les réels. Dans le premier énoncé, $y$ peut dépendre
+de $x$ ; dans le second, non.}
+
+%% ─────────────────────────────────────────────
+\section*{Négation}
+
+\definition[Négation]{La \textbf{négation} d'une proposition $A$, notée \og non $A$ \fg{}, est
+la proposition qui est vraie lorsque $A$ est fausse, et fausse lorsque $A$ est vraie.}
+
+\exemple{La négation de \og $x>3$ \fg{} est \og $x \leq 3$ \fg{}, et non \og $x<3$ \fg{}. La
+négation de \og $f$ est croissante sur $I$ \fg{} n'est pas \og $f$ est décroissante sur
+$I$ \fg{} : c'est \og $f$ n'est pas croissante sur $I$ \fg{}.}
+
+\propriete[Négation d'une proposition quantifiée]{La négation de \og pour tout $x$ de $E$,
+$P(x)$ \fg{} est \og il existe $x$ dans $E$ tel que non $P(x)$ \fg{} ; la négation de \og il
+existe $x$ dans $E$ tel que $P(x)$ \fg{} est \og pour tout $x$ de $E$, non $P(x)$ \fg{}.
+
+De plus, la négation de \og $A$ et $B$ \fg{} est \og (non $A$) ou (non $B$) \fg{}, et la
+négation de \og $A$ ou $B$ \fg{} est \og (non $A$) et (non $B$) \fg{}.}
+
+\propriete[Réfutation par contre-exemple]{Pour démontrer qu'une proposition \og pour tout $x$ de
+$E$, $P(x)$ \fg{} est fausse, il suffit d'exhiber \textbf{un seul} élément $x_0$ de $E$ tel que
+$P(x_0)$ soit fausse : un tel élément est un \textbf{contre-exemple}, et il rend vraie la
+négation de l'énoncé.}
+
+\contreexemple{La proposition \og pour tout entier naturel $n \geq 1$, $n^2+n+1$ est un nombre
+premier \fg{} est fausse : pour $n=4$, on obtient $16+4+1 = 21 = 3\times7$, qui n'est pas
+premier. Un seul contre-exemple suffit, alors même que l'énoncé est vrai pour $n=1$ (soit $3$),
+$n=2$ (soit $7$) et $n=3$ (soit $13$).}
+
+\erreurFrequente{Des exemples, même nombreux, ne démontrent \emph{jamais} une proposition
+universelle : vérifier une formule pour $n=1$, $n=2$ et $n=3$ ne prouve rien pour tout $n$. En
+revanche, un seul contre-exemple suffit à la réfuter.}
+
+\approfondissement{On nie un énoncé à plusieurs quantificateurs de proche en proche, en
+échangeant chaque \og pour tout \fg{} et chaque \og il existe \fg{}, puis en niant la
+proposition finale. Ainsi \og la suite $(u_n)$ converge vers $\ell$ \fg{} s'écrit : pour tout
+réel $\varepsilon>0$, il existe un entier naturel $N$ tel que, pour tout entier $n \geq N$,
+$|u_n-\ell| \leq \varepsilon$. Sa négation est : il existe un réel $\varepsilon>0$ tel que, pour
+tout entier naturel $N$, il existe un entier $n \geq N$ vérifiant $|u_n-\ell| > \varepsilon$.}
+
+%% ─────────────────────────────────────────────
+\section*{Le statut des égalités et des lettres}
+
+\definition[Identité et équation]{Une \textbf{identité} est une égalité vraie pour
+\emph{toutes} les valeurs des lettres qu'elle contient, dans l'ensemble précisé. Une
+\textbf{équation} est une égalité dont on cherche les valeurs de l'\textbf{inconnue} qui la
+rendent vraie ; ces valeurs sont les \textbf{solutions} de l'équation.}
+
+\exemple{$(x+1)^2 = x^2+2x+1$ est une identité : elle est vraie pour tout réel $x$, et on ne la
+\og résout \fg{} pas. En revanche $x^2-5x+6=0$ est une équation : $\Delta = 25-24 = 1$, et son
+ensemble de solutions est $\{2\,;\,3\}$.}
+
+\definition[Variable, inconnue, paramètre]{Une même lettre peut jouer trois rôles distincts.
+\begin{itemize}
+  \item \textbf{Variable} : lettre qui parcourt un ensemble tout entier, comme le $x$ de
+        $f(x)=x^2$ ou celui de \og pour tout $x$ \fg{} ;
+  \item \textbf{inconnue} : lettre dont on cherche les valeurs, comme le $x$ de $2x+1=7$ ;
+  \item \textbf{paramètre} : lettre fixée mais non précisée, qui décrit une famille d'objets,
+        comme $a$, $b$ et $c$ dans $f(x)=ax^2+bx+c$.
+\end{itemize}}
+
+\exemple{Dans $f(x)=ax^2+bx+c$ avec $a \neq 0$, la lettre $x$ est la variable et $a$, $b$, $c$
+sont des paramètres : le discriminant $\Delta = b^2-4ac$ ne dépend que des paramètres. Résoudre
+$f(x)=0$ fait alors de $x$ une inconnue. De même, dans $u_n = u_0 \times q^{\,n}$, l'entier $n$
+est une variable et $q$ est un paramètre : la raison de la suite géométrique.}
+
+\margeAppui{Une variable est \emph{muette} : $f(x)=x^2$ et $f(t)=t^2$ définissent la même
+fonction. Un paramètre, lui, ne peut pas être renommé sans changer l'énoncé qui le fixe.}
+
+\erreurFrequente{Prendre pour une identité une égalité qui n'en est pas une. L'égalité
+$\sqrt{x^2}=x$ n'est pas vraie sur $\mathbb{R}$ : elle est vraie pour $x \geq 0$ et fausse pour
+$x<0$, puisque $\sqrt{(-3)^2} = \sqrt{9} = 3 \neq -3$. L'identité correcte, valable pour tout
+réel $x$, est $\sqrt{x^2} = |x|$.}
+
+%% ─────────────────────────────────────────────
+\section*{Trois modes de raisonnement}
+
+\subsection*{Le raisonnement par disjonction des cas}
+
+\definition[Disjonction des cas]{Raisonner par \textbf{disjonction des cas}, c'est partager
+l'ensemble des situations possibles en plusieurs cas qui les couvrent \emph{toutes}, puis
+démontrer la proposition dans chacun de ces cas.}
+
+\exempleRedige{\textbf{Montrer que pour tout réel $x$, on a $x \leq |x|$.}
+
+\emph{Cas 1 : $x \geq 0$.} Alors $|x| = x$, donc $x \leq |x|$.
+
+\emph{Cas 2 : $x < 0$.} Alors $|x| = -x$, et $-x>0$ puisque $x<0$. On a donc $x < 0 < -x = |x|$,
+d'où $x \leq |x|$.
+
+Les deux cas couvrent tous les réels : l'inégalité $x \leq |x|$ est donc vraie pour tout réel
+$x$.}
+
+\subsection*{Le raisonnement par contraposée}
+
+\definition[Raisonnement par contraposée]{Pour démontrer l'implication $A \Longrightarrow B$, on
+peut démontrer sa contraposée $(\text{non } B) \Longrightarrow (\text{non } A)$, qui lui est
+équivalente. On y a recours lorsque l'hypothèse \og non $B$ \fg{} est plus facile à exploiter
+que l'hypothèse $A$.}
+
+\exempleRedige{\textbf{Montrer que, pour tout entier naturel $n$, si $n^2$ est pair, alors $n$
+est pair.}
+
+L'hypothèse \og $n^2$ est pair \fg{} est difficile à exploiter directement. On démontre donc la
+contraposée : \emph{si $n$ est impair, alors $n^2$ est impair.}
+
+Supposons $n$ impair : il existe un entier naturel $k$ tel que $n=2k+1$. Alors
+\[
+  n^2 = (2k+1)^2 = 4k^2+4k+1 = 2\,(2k^2+2k)+1 ,
+\]
+et $2k^2+2k$ est un entier naturel : $n^2$ est donc impair.
+
+La contraposée est démontrée, donc l'implication de départ est vraie.}
+
+\subsection*{Le raisonnement par l'absurde}
+
+\definition[Raisonnement par l'absurde]{Pour démontrer qu'une proposition $A$ est vraie, on
+suppose que \og non $A$ \fg{} est vraie et on en déduit, par un raisonnement correct, une
+\textbf{contradiction} : un énoncé et sa négation, ou un résultat manifestement faux.
+L'hypothèse \og non $A$ \fg{} est donc impossible, et $A$ est vraie.}
+
+\margeAppui{Par l'absurde, on ne construit pas directement $A$ : on élimine la seule autre
+possibilité, \og non $A$ \fg{}.}
+
+\exempleRedige{\textbf{Montrer que $\sqrt{2}$ n'est pas un nombre rationnel.}
+
+Supposons le contraire : $\sqrt{2}$ serait rationnel, donc il existerait deux entiers naturels
+non nuls $p$ et $q$ tels que $\sqrt{2} = \dfrac{p}{q}$, la fraction $\dfrac{p}{q}$ étant
+\textbf{irréductible}.
+
+En élevant au carré : $2 = \dfrac{p^2}{q^2}$, c'est-à-dire $p^2 = 2q^2$. Donc $p^2$ est pair,
+et d'après le résultat démontré ci-dessus, $p$ est pair : il existe un entier naturel $k$ tel
+que $p=2k$. En reportant, $4k^2 = 2q^2$, donc $q^2 = 2k^2$ : ainsi $q^2$ est pair, et pour la
+même raison $q$ est pair.
+
+Les entiers $p$ et $q$ sont donc tous les deux pairs, et la fraction $\dfrac{p}{q}$ est
+simplifiable par $2$ : cela contredit son irréductibilité. L'hypothèse de départ est donc
+impossible, et $\sqrt{2}$ n'est pas un nombre rationnel.}
+
+\approfondissement{Un quatrième mode de raisonnement, le \textbf{raisonnement par récurrence},
+permet de démontrer une propriété dépendant d'un entier naturel $n$ pour tout $n$ à partir d'un
+certain rang. Il est étudié en terminale.}
+
+%% ─────────────────────────────────────────────
+\section*{S'entraîner}
+
+\begin{enumerate}
+  \item Parmi les énoncés suivants, lesquels sont des propositions ?
+        \textbf{(a)} \og $12$ est un multiple de $3$ \fg{} ;
+        \textbf{(b)} \og $x^2 \geq 1$ \fg{} ;
+        \textbf{(c)} \og tout carré de réel est positif ou nul \fg{} ;
+        \textbf{(d)} \og $2x+5$ \fg{}.
+  \item Compléter par $\in$, $\notin$ ou $\subset$ : $-3 \ \ldots \ \mathbb{N}$ ; \quad
+        $\{-3\} \ \ldots \ \mathbb{Z}$ ; \quad $\sqrt{2} \ \ldots \ \mathbb{Q}$ ; \quad
+        $[1\,;2] \ \ldots \ [0\,;3]$.
+  \item Déterminer $[-4\,;3] \cap [0\,;7]$ puis $[-4\,;3] \cup [0\,;7]$.
+  \item Écrire la réciproque, puis la contraposée, de l'implication \og si $x>3$, alors
+        $x^2>9$ \fg{}. Préciser la valeur de vérité de chacune des trois implications.
+  \item Donner la négation de chaque proposition :
+        \textbf{(a)} \og pour tout réel $x$, $x^2+1>0$ \fg{} ;
+        \textbf{(b)} \og il existe un entier naturel $n$ tel que $2^n>1000$ \fg{} ;
+        \textbf{(c)} \og pour tout entier naturel $n$, $u_n \geq 5$ \fg{}.
+  \item Montrer que la proposition \og pour tout réel $x$, $x^2 \geq x$ \fg{} est fausse.
+  \item Restituer la quantification implicite de chaque écriture :
+        \textbf{(a)} $\cos^2 x + \sin^2 x = 1$ ; \textbf{(b)} $u_{n+1} = 2u_n-3$ ;
+        \textbf{(c)} \og si $\Delta<0$, alors l'équation $ax^2+bx+c=0$ n'a pas de solution
+        réelle \fg{}.
+  \item Démontrer par disjonction des cas que, pour tout entier naturel $n$, le produit
+        $n(n+1)$ est pair.
+\end{enumerate}
+
+%% ─────────────────────────────────────────────
+\ifnxVersionProfesseur
+\section*{Corrigés}
+
+\begin{enumerate}
+  \item \textbf{(a)} et \textbf{(c)} sont des propositions, toutes deux vraies. \textbf{(b)} est
+        une proposition dépendant de la variable $x$ : elle n'a de valeur de vérité qu'une fois
+        $x$ fixé (vraie pour $x=2$, fausse pour $x=0$). \textbf{(d)} est une expression, pas un
+        énoncé : ce n'est pas une proposition.
+  \item $-3 \notin \mathbb{N}$ ; \quad $\{-3\} \subset \mathbb{Z}$ ; \quad
+        $\sqrt{2} \notin \mathbb{Q}$ ; \quad $[1\,;2] \subset [0\,;3]$. Dans le deuxième cas,
+        $\{-3\}$ est un \emph{ensemble} : on ne peut donc pas écrire $\{-3\} \in \mathbb{Z}$.
+  \item $[-4\,;3] \cap [0\,;7] = [0\,;3]$ et $[-4\,;3] \cup [0\,;7] = [-4\,;7]$.
+  \item L'implication de départ est vraie : si $x>3$, alors $x>0$, donc $x^2>3x>9$.
+
+        Réciproque : \og si $x^2>9$, alors $x>3$ \fg{}. Elle est fausse, car $x=-4$ vérifie
+        $x^2=16>9$ mais non $x>3$.
+
+        Contraposée : \og si $x^2 \leq 9$, alors $x \leq 3$ \fg{}. Elle est vraie, car une
+        implication et sa contraposée sont équivalentes et l'implication de départ est vraie.
+  \item \textbf{(a)} \og il existe un réel $x$ tel que $x^2+1 \leq 0$ \fg{} : cette négation est
+        fausse, l'énoncé de départ étant vrai. \textbf{(b)} \og pour tout entier naturel $n$,
+        $2^n \leq 1000$ \fg{} : cette négation est fausse, car $2^{10} = 1024 > 1000$.
+        \textbf{(c)} \og il existe un entier naturel $n$ tel que $u_n<5$ \fg{}.
+  \item Il suffit d'un contre-exemple. Pour $x=\dfrac{1}{2}$, on a $x^2 = \dfrac{1}{4}$ et
+        $\dfrac{1}{4} < \dfrac{1}{2}$ : l'inégalité $x^2 \geq x$ est donc fausse pour cette
+        valeur, et la proposition universelle est fausse.
+  \item \textbf{(a)} pour tout réel $x$. \textbf{(b)} pour tout entier naturel $n$.
+        \textbf{(c)} pour tous réels $a$, $b$, $c$ avec $a \neq 0$, en posant
+        $\Delta = b^2-4ac$ : si $\Delta<0$, alors pour tout réel $x$, $ax^2+bx+c \neq 0$.
+        L'énoncé contient donc deux quantifications implicites emboîtées, l'une sur les
+        paramètres, l'autre sur l'inconnue.
+  \item \emph{Cas 1 : $n$ est pair.} Il existe un entier naturel $k$ tel que $n=2k$, donc
+        $n(n+1) = 2k(n+1)$ est le double de l'entier $k(n+1)$ : il est pair.
+
+        \emph{Cas 2 : $n$ est impair.} Alors $n+1$ est pair : il existe un entier naturel $k$
+        tel que $n+1=2k$, donc $n(n+1) = 2kn$ est le double de l'entier $kn$ : il est pair.
+
+        Les deux cas couvrent tous les entiers naturels : $n(n+1)$ est pair pour tout entier
+        naturel $n$.
+\end{enumerate}
+
+\newpage
+\fi

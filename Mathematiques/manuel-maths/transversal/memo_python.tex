@@ -73,15 +73,171 @@ valeur = nom_fonction(3, 5)
 %% ─────────────────────────────────────────────
 \section*{Listes}
 
-\begin{verbatim}
-L = [1, 4, 9, 16]          # définition d'une liste
-L[0]                        # premier élément (indice 0)
-len(L)                      # nombre d'éléments
-L.append(25)                # ajouter un élément en fin de liste
+Une liste est une suite \emph{ordonnée} de valeurs, appelées ses éléments.
+Chaque élément est repéré par son \emph{indice} ; les indices commencent à 0.
+Une même valeur peut figurer plusieurs fois dans une liste.
 
-# Construction par compréhension
-carres = [i**2 for i in range(1, 11)]
+\textbf{Créer une liste en extension.}
+On écrit entre crochets tous les éléments, séparés par des virgules.
+
+\begin{verbatim}
+notes = [12, 15, 8, 17]     # les éléments sont donnés un à un
+print(notes)                # [12, 15, 8, 17]
 \end{verbatim}
+
+\textbf{Créer une liste par ajouts successifs.}
+On part de la liste vide, puis une boucle (voir la section \emph{Boucles})
+ajoute les éléments un à un avec \verb|append|. C'est la construction à
+utiliser lorsque chaque élément doit être calculé avant d'être rangé.
+
+\begin{verbatim}
+carres = []                 # on part d'une liste vide
+for i in range(1, 6):       # i prend les valeurs 1, 2, 3, 4, 5
+    carres.append(i**2)     # on ajoute i² à la fin de la liste
+print(carres)               # [1, 4, 9, 16, 25]
+\end{verbatim}
+
+\textbf{Créer une liste en compréhension.}
+Une seule ligne décrit la règle qui engendre les éléments. Le résultat est
+exactement la même liste que par ajouts successifs.
+
+\begin{verbatim}
+carres = [i**2 for i in range(1, 6)]
+print(carres)               # [1, 4, 9, 16, 25]
+
+# Variante avec filtre : on ne garde que les éléments
+# vérifiant la condition placée après le mot-clé if
+notes = [12, 15, 8, 17]
+admis = [n for n in notes if n >= 10]
+print(admis)                # [12, 15, 17]
+\end{verbatim}
+
+\textbf{Le lien avec les ensembles.}
+Un ensemble peut être défini \emph{en extension}, en donnant la liste de tous
+ses éléments, ou \emph{en compréhension}, en donnant une propriété
+caractéristique de ses éléments. Les deux façons de construire une liste sont
+la traduction en Python de ces deux définitions.
+
+\begin{itemize}
+  \item En extension : $E = \{1,\ 4,\ 9,\ 16,\ 25\}$ s'écrit
+        \verb|[1, 4, 9, 16, 25]|.
+  \item En compréhension : $E = \{n^2 \mid n \in \mathbb{N},\
+        1 \leqslant n \leqslant 5\}$ s'écrit
+        \verb|[n**2 for n in range(1, 6)]|.
+  \item Avec une condition supplémentaire : $\{n \in E \mid n \geqslant 10\}$
+        s'écrit \verb|[n for n in E if n >= 10]|.
+\end{itemize}
+
+Une liste n'est cependant pas un ensemble. Une liste est \emph{ordonnée} : le
+premier et le dernier élément ne jouent pas le même rôle, et elle peut
+contenir des \emph{répétitions}. Dans un ensemble, au contraire, l'ordre
+n'intervient pas et un élément n'est compté qu'une seule fois. Ainsi
+\verb|[1, 2, 2]| et \verb|[2, 1]| sont deux listes différentes, alors que
+$\{1, 2, 2\}$ et $\{2, 1\}$ désignent le même ensemble $\{1, 2\}$.
+
+\textbf{Indices.}
+L'élément d'indice $i$ se note \verb|L[i]|. Le premier a l'indice 0, le
+dernier l'indice $\mathtt{len(L)} - 1$, que l'on peut aussi désigner par
+l'indice $-1$. Un élément peut être lu, mais aussi remplacé.
+
+\begin{verbatim}
+notes = [12, 15, 8, 17]
+notes[0]                    # 12   premier élément
+notes[3]                    # 17   indice len(notes) - 1
+notes[-1]                   # 17   même élément, autre écriture
+len(notes)                  # 4    nombre d'éléments
+
+notes[1] = 14               # remplace l'élément d'indice 1
+print(notes)                # [12, 14, 8, 17]
+\end{verbatim}
+
+\textbf{Ajouter et supprimer des éléments.}
+Ces opérations modifient la liste sur place : sa longueur change et les
+indices des éléments situés après le point de modification sont décalés.
+
+\begin{verbatim}
+notes = [12, 15, 8, 17]
+
+notes.append(9)             # ajoute 9 à la fin :
+                            # [12, 15, 8, 17, 9]
+notes.insert(1, 20)         # insère 20 à l'indice 1 :
+                            # [12, 20, 15, 8, 17, 9]
+del notes[2]                # supprime l'élément d'indice 2 :
+                            # [12, 20, 8, 17, 9]
+notes.pop()                 # retire le dernier élément et le
+                            # renvoie : 9
+                            # [12, 20, 8, 17]
+notes.remove(8)             # supprime la première occurrence
+                            # de la valeur 8
+                            # [12, 20, 17]
+print(notes)                # [12, 20, 17]
+\end{verbatim}
+
+\verb|del L[i]| supprime par \emph{indice} et \verb|L.remove(x)| par
+\emph{valeur} (la première occurrence rencontrée seulement) ; ni l'un ni
+l'autre ne renvoie de résultat. \verb|L.pop()| est le seul des trois à
+renvoyer l'élément supprimé, ce qui permet d'écrire
+\verb|derniere = L.pop()|.
+
+\textbf{Parcourir une liste par indices.}
+La variable de boucle parcourt tous les indices valides, de 0 à
+\verb|len(L) - 1|, et l'on accède à l'élément par \verb|L[i]|.
+
+\begin{verbatim}
+notes = [12, 15, 8, 17]
+for i in range(len(notes)):     # i parcourt 0, 1, 2, 3
+    print(i, notes[i])          # affiche l'indice puis l'élément
+
+# Affichage obtenu :
+# 0 12
+# 1 15
+# 2 8
+# 3 17
+\end{verbatim}
+
+Ce parcours est nécessaire dès que la \emph{position} d'un élément intervient :
+pour repérer où se trouve une valeur, pour comparer un élément à son voisin
+\verb|L[i-1]|, ou pour modifier la liste en écrivant dans \verb|L[i]|.
+
+\begin{verbatim}
+for i in range(len(notes)):
+    if notes[i] < 10:
+        print("Note insuffisante à la position", i)
+
+# Affichage obtenu :
+# Note insuffisante à la position 2
+\end{verbatim}
+
+\textbf{Itérer sur les éléments d'une liste.}
+Lorsque l'indice n'est pas utile, on itère directement sur les éléments : la
+variable de boucle prend successivement la valeur de chaque élément. C'est la
+forme habituelle, plus courte et plus lisible.
+
+\begin{verbatim}
+notes = [12, 15, 8, 17]
+for note in notes:          # note vaut 12, 15, 8, puis 17
+    print(note)
+
+# Affichage obtenu :
+# 12
+# 15
+# 8
+# 17
+
+# Exemple : somme et moyenne des notes
+somme = 0
+for note in notes:
+    somme = somme + note
+print(somme)                # 52
+print(somme / len(notes))   # 13.0
+\end{verbatim}
+
+La différence entre les deux parcours est essentielle. Avec
+\verb|for i in range(len(L))| la variable de boucle est un \emph{indice},
+c'est-à-dire un entier ; avec \verb|for x in L| elle est un \emph{élément} de
+la liste. Confondre les deux et écrire \verb|for note in notes: notes[note]|
+provoque une erreur (\verb|IndexError: list index out of range|) dès qu'une
+note dépasse la longueur de la liste.
 
 %% ─────────────────────────────────────────────
 \section*{Modules utilisés dans le manuel}

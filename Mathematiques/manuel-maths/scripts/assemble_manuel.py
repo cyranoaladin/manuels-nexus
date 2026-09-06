@@ -1053,13 +1053,28 @@ def render_master(
         parts.append(opening)
         parts.append("\n".join(blocs))
 
-    # Back matter (1SPE uniquement : formulaire et memo Python specifiques)
-    if manual == "1SPE":
+    # Back matter. Le formulaire est propre au 1SPE ; la logique et le memo
+    # Python sont transversaux : le programme les demande en Premiere comme en
+    # Terminale, et les capacites correspondantes ne sont portees par aucun
+    # chapitre disciplinaire.
+    back_matter = {
+        "1SPE": [
+            "transversal/formulaire",
+            "transversal/logique_raisonnement",
+            "transversal/statistiques_automatismes",
+            "transversal/memo_python",
+        ],
+        "TSPE_2026_2027": [
+            "transversal/logique_raisonnement",
+            "transversal/memo_python",
+        ],
+    }
+    annexes = back_matter.get(manual, [])
+    if annexes:
         parts.append("\\appendix")
-        parts.append("\\clearpage")
-        parts.append("\\input{transversal/formulaire}")
-        parts.append("\\clearpage")
-        parts.append("\\input{transversal/memo_python}")
+        for annexe in annexes:
+            parts.append("\\clearpage")
+            parts.append(f"\\input{{{annexe}}}")
 
     # Quatrieme de couverture de collection (charte v6)
     parts.append("\\nxSuspendreDecor")

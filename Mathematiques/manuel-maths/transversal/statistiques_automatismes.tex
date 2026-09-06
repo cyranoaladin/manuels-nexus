@@ -1,0 +1,497 @@
+% statistiques_automatismes.tex — Automatismes : lire et résumer des données
+% Fragment \input (pas de \documentclass)
+% Couvre les automatismes 1SPE-OFFICIAL-039 (lecture de représentations)
+% et 1SPE-OFFICIAL-041 (indicateurs d'une série statistique).
+
+\chapter*{Automatismes : lire et résumer des données}
+\addcontentsline{toc}{chapter}{Automatismes : lire et résumer des données}
+
+Les notions rassemblées ici viennent du collège et de la classe de seconde. Le
+programme de première demande de les entretenir toute l'année : elles servent dès
+qu'un énoncé donne un graphique à lire ou une série de valeurs à résumer. Cette
+page est une révision active, à reprendre avant chaque devoir.
+
+%% ─────────────────────────────────────────────
+\section*{Lire une représentation graphique}
+
+Avant de lire la moindre valeur sur un graphique, on effectue toujours les mêmes
+quatre gestes, dans cet ordre.
+
+\begin{enumerate}
+  \item \textbf{Repérer l'origine du repère.} C'est le point où les deux axes se
+    coupent. Rien ne garantit qu'il corresponde au couple $(0\,;0)$ : un axe peut
+    commencer à $1000$, à $2015$ ou à $-5$.
+  \item \textbf{Lire l'unité de graduation de chaque axe.} On compte combien de
+    carreaux séparent deux graduations chiffrées, puis on divise : si $50$ unités
+    couvrent $5$ carreaux, un carreau vaut $10$ unités.
+  \item \textbf{Identifier les grandeurs et leurs unités} (des euros, des minutes,
+    des élèves, des pourcentages) grâce aux légendes et au titre.
+  \item \textbf{Lire la valeur cherchée}, puis vérifier qu'elle est plausible au
+    regard de l'ensemble du graphique.
+\end{enumerate}
+
+\margeAppui{%
+Quatre gestes :
+\newline
+origine,
+\newline
+graduations,
+\newline
+unités,
+\newline
+lecture.%
+}
+
+\erreurFrequente{
+\textbf{Croire qu'un axe part toujours de zéro.}
+
+Deux barres dont les hauteurs dessinées sont dans le rapport $1$ pour $2$
+représentent des valeurs dans le rapport $1$ pour $2$ \emph{seulement si} l'axe
+vertical part de $0$. Si l'axe commence à $1000$, une barre de hauteur $50$ vaut
+$1050$ et une barre de hauteur $100$ vaut $1100$ : la seconde valeur n'est pas le
+double de la première, elle lui est supérieure de moins de $5~\%$.
+
+Réflexe : lire la graduation la plus basse de l'axe \emph{avant} de comparer des
+hauteurs.
+}
+
+\erreurFrequente{
+\textbf{Comparer deux graphiques dont les échelles diffèrent.}
+
+Deux courbes d'allures identiques peuvent décrire des évolutions très différentes
+si un carreau vaut $10$ sur l'une et $1000$ sur l'autre. On ne compare jamais deux
+graphiques \og à l'\oe il \fg{} : on relève les valeurs chiffrées, puis on compare
+les nombres.
+}
+
+%% ─────────────────────────────────────────────
+\section*{Les quatre représentations à connaître}
+
+\subsection*{Le diagramme en barres}
+
+Chaque modalité d'un caractère (une couleur, un moyen de transport, une note)
+reçoit une barre dont la \textbf{hauteur} est proportionnelle à son effectif ou à
+sa fréquence. Les barres sont séparées les unes des autres, car les modalités ne
+se prolongent pas : il sert aux caractères qualitatifs ou aux valeurs isolées. On
+y lit directement l'effectif d'une modalité et on y compare les modalités entre
+elles d'un coup d'\oe il.
+
+\subsection*{L'histogramme}
+
+Il représente un caractère quantitatif regroupé en \textbf{classes} (des
+intervalles). C'est l'\textbf{aire} de chaque rectangle, et non sa hauteur, qui
+est proportionnelle à l'effectif de la classe. Les rectangles sont accolés, car
+les classes se suivent sans trou. Quand toutes les classes ont la même amplitude,
+hauteurs et effectifs sont proportionnels et la lecture est directe ; sinon, il
+faut revenir aux aires.
+
+\exemple{
+Temps d'écran quotidien de $54$ élèves, en minutes :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Classe} & $[0\,;30[$ & $[30\,;60[$ & $[60\,;120[$ \\
+\midrule
+Effectif                  & $12$ & $18$ & $24$ \\
+Amplitude                 & $30$ & $30$ & $60$ \\
+Hauteur du rectangle      & $0{,}4$ & $0{,}6$ & $0{,}4$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+La classe $[60\,;120[$ est la plus nombreuse ($24$ élèves), pourtant son rectangle
+n'est pas le plus haut : il est deux fois plus large, donc deux fois moins haut à
+aire égale. Le rectangle le plus haut est celui de $[30\,;60[$.
+}
+
+\erreurFrequente{
+\textbf{Lire un histogramme comme un diagramme en barres.}
+
+Avec des classes d'amplitudes inégales, le rectangle le plus haut n'est pas celui
+de la classe la plus nombreuse. Vérifier les amplitudes est le premier réflexe.
+}
+
+\subsection*{Le diagramme circulaire}
+
+Le disque entier représente l'effectif total. Chaque modalité occupe un secteur
+dont l'angle est proportionnel à sa \textbf{fréquence} :
+\[
+  \text{angle} = f \times 360^\circ,
+  \qquad \text{et réciproquement} \qquad
+  f = \frac{\text{angle}}{360^\circ}.
+\]
+Il montre des \emph{parts d'un tout} et ne permet pas de lire les effectifs si le
+total n'est pas donné.
+
+\exemple{
+Moyen de transport de $25$ élèves.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Transport} & Bus & Vélo & À pied & Voiture \\
+\midrule
+Effectif   & $10$ & $5$ & $8$ & $2$ \\
+Fréquence  & $0{,}40$ & $0{,}20$ & $0{,}32$ & $0{,}08$ \\
+Angle      & $144^\circ$ & $72^\circ$ & $115{,}2^\circ$ & $28{,}8^\circ$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Contrôle indispensable : $144 + 72 + 115{,}2 + 28{,}8 = 360$.
+}
+
+\subsection*{Le diagramme en boîte}
+
+Aussi appelé \textbf{boîte à moustaches}, il résume une série par cinq nombres
+seulement, placés sur un axe gradué : le minimum, le premier quartile $Q_1$, la
+médiane, le troisième quartile $Q_3$ et le maximum. La \emph{boîte} est le
+rectangle allant de $Q_1$ à $Q_3$ : elle contient au moins la moitié des valeurs
+et sa largeur est l'écart interquartile. Les deux \emph{moustaches} joignent la
+boîte au minimum et au maximum ; leur longueur signale l'étalement des valeurs
+extrêmes. Un trait à l'intérieur de la boîte marque la médiane. On y compare très
+vite deux séries : positions des boîtes, largeurs des boîtes, longueurs des
+moustaches.
+
+\commentaireMarge{Le diagramme en boîte ne montre ni la moyenne, ni les effectifs.}
+
+%% ─────────────────────────────────────────────
+\section*{Résumer une série par des indicateurs}
+
+\definition[1]{
+Une \textbf{série statistique} est la liste des valeurs $x_1, x_2, \ldots, x_p$
+prises par un caractère, avec leurs \textbf{effectifs} $n_1, n_2, \ldots, n_p$.
+L'effectif total est $N = n_1 + n_2 + \cdots + n_p$.
+
+La \textbf{fréquence} de la valeur $x_i$ est $f_i = \dfrac{n_i}{N}$. Les
+fréquences sont comprises entre $0$ et $1$ et leur somme vaut $1$.
+}
+
+\subsection*{Indicateurs de position}
+
+\definition[2]{
+La \textbf{moyenne} de la série est
+\[
+  \overline{x} = \frac{n_1 x_1 + n_2 x_2 + \cdots + n_p x_p}{N}.
+\]
+Elle répartit également le total entre tous les individus : c'est la valeur que
+chacun aurait si l'on partageait la somme en parts égales.
+}
+
+\definition[3]{
+La \textbf{médiane} $\mathrm{Me}$ est une valeur qui partage la série \emph{ordonnée
+dans l'ordre croissant} en deux groupes de même effectif. Sur $N$ valeurs
+ordonnées :
+\begin{itemize}
+  \item si $N$ est impair, $\mathrm{Me}$ est la valeur de rang $\dfrac{N+1}{2}$ ;
+  \item si $N$ est pair, $\mathrm{Me}$ est la demi-somme des valeurs de rangs
+    $\dfrac{N}{2}$ et $\dfrac{N}{2}+1$.
+\end{itemize}
+Au moins la moitié des valeurs sont inférieures ou égales à $\mathrm{Me}$, et au
+moins la moitié lui sont supérieures ou égales.
+}
+
+\definition[4]{
+Le \textbf{premier quartile} $Q_1$ est la plus petite valeur de la série ordonnée
+telle qu'au moins $25~\%$ des valeurs lui soient inférieures ou égales. Le
+\textbf{troisième quartile} $Q_3$ est la plus petite valeur telle qu'au moins
+$75~\%$ des valeurs lui soient inférieures ou égales.
+
+\textbf{Convention de calcul utilisée dans tout le manuel.} Sur la série ordonnée
+de $N$ valeurs, $Q_1$ est la valeur de rang $\lceil N/4 \rceil$ et $Q_3$ celle de
+rang $\lceil 3N/4 \rceil$, où $\lceil a \rceil$ désigne le plus petit entier
+supérieur ou égal à $a$. Quand le quotient tombe juste, on prend ce rang ; sinon,
+on arrondit à l'entier supérieur.
+}
+
+\margeAppui{%
+$Q_1$ : rang $\lceil N/4 \rceil$.
+\newline
+$Q_3$ : rang $\lceil 3N/4 \rceil$.
+\newline
+Toujours \emph{après} avoir ordonné la série.%
+}
+
+\propriete[1]{
+Moyenne et médiane ne réagissent pas de la même façon aux valeurs extrêmes.
+\begin{itemize}
+  \item La moyenne tient compte de toutes les valeurs et se déplace dès qu'une
+    seule valeur devient très grande ou très petite.
+  \item La médiane ne dépend que du rang des valeurs : modifier la plus grande
+    valeur ne la change pas.
+\end{itemize}
+Quand une série comporte quelques valeurs extrêmes (salaires, temps de trajet,
+prix de logements), la médiane décrit mieux la situation \og habituelle \fg{} que
+la moyenne.
+}
+
+\erreurFrequente{
+\textbf{Calculer la médiane sans ordonner la série.}
+
+La médiane n'est pas la valeur \og du milieu de la liste \fg{} telle qu'elle est
+écrite dans l'énoncé : c'est la valeur du milieu de la liste \emph{triée}. On
+ordonne d'abord, on compte ensuite.
+}
+
+\subsection*{Indicateurs de dispersion}
+
+\definition[5]{
+L'\textbf{étendue} d'une série est la différence entre sa plus grande et sa plus
+petite valeur :
+\[
+  e = x_{\max} - x_{\min}.
+\]
+Elle mesure l'amplitude totale de la série, mais elle ne repose que sur deux
+valeurs : une seule donnée aberrante suffit à la rendre énorme.
+}
+
+\definition[6]{
+L'\textbf{écart interquartile} est
+\[
+  \mathrm{EI} = Q_3 - Q_1.
+\]
+C'est la largeur de la boîte du diagramme en boîte : l'intervalle $[Q_1\,;Q_3]$
+contient au moins $50~\%$ des valeurs de la série. Un petit écart interquartile
+signifie que la moitié centrale des données est resserrée. Contrairement à
+l'étendue, il ignore les valeurs extrêmes.
+}
+
+\definition[7]{
+L'\textbf{écart type} $\sigma$ mesure la dispersion des valeurs \emph{autour de la
+moyenne}. On calcule d'abord la variance, moyenne des carrés des écarts à
+$\overline{x}$ :
+\[
+  V = \frac{n_1 (x_1 - \overline{x})^2 + \cdots + n_p (x_p - \overline{x})^2}{N},
+  \qquad \sigma = \sqrt{V}.
+\]
+L'écart type s'exprime dans la même unité que les données. Plus il est petit, plus
+les valeurs sont regroupées autour de la moyenne. En pratique, on l'obtient à la
+calculatrice ou au tableur.
+}
+
+\contreexemple{
+Les séries $10,\ 10,\ 10,\ 10$ et $0,\ 0,\ 20,\ 20$ ont la même moyenne $10$, mais
+la première a un écart type nul et la seconde un écart type de $10$. Une moyenne
+seule ne dit rien de la dispersion : un indicateur de position s'accompagne
+toujours d'un indicateur de dispersion.
+}
+
+%% ─────────────────────────────────────────────
+\section*{Exemple entièrement traité}
+
+\exempleRedige{
+On relève le temps de trajet quotidien, en minutes, de $12$ élèves d'une classe :
+\[
+  14 \quad 25 \quad 8 \quad 55 \quad 12 \quad 20 \quad 5 \quad 14 \quad 24
+  \quad 10 \quad 16 \quad 13.
+\]
+
+\textbf{1. Ordonner la série.}
+\[
+  5 \quad 8 \quad 10 \quad 12 \quad 13 \quad 14 \quad 14 \quad 16 \quad 20
+  \quad 24 \quad 25 \quad 55 .
+\]
+Ici $N = 12$.
+
+\textbf{2. Moyenne.} La somme des douze valeurs vaut
+\[
+  5+8+10+12+13+14+14+16+20+24+25+55 = 216,
+\]
+donc
+\[
+  \overline{x} = \frac{216}{12} = 18 \text{ minutes.}
+\]
+
+\textbf{3. Médiane.} $N = 12$ est pair : on prend la demi-somme des valeurs de
+rangs $6$ et $7$, qui valent toutes deux $14$ :
+\[
+  \mathrm{Me} = \frac{14 + 14}{2} = 14 \text{ minutes.}
+\]
+
+\textbf{4. Quartiles.} $\dfrac{N}{4} = \dfrac{12}{4} = 3$, donc $Q_1$ est la valeur
+de rang $3$ : $Q_1 = 10$. Ensuite $\dfrac{3N}{4} = \dfrac{36}{4} = 9$, donc $Q_3$
+est la valeur de rang $9$ : $Q_3 = 20$.
+
+\textbf{5. Étendue et écart interquartile.}
+\[
+  e = 55 - 5 = 50 \text{ minutes},
+  \qquad
+  \mathrm{EI} = Q_3 - Q_1 = 20 - 10 = 10 \text{ minutes.}
+\]
+
+\textbf{6. Interprétation.} Le temps de trajet moyen est de $18$ minutes, mais la
+moitié des élèves mettent au plus $14$ minutes : la moyenne est tirée vers le haut
+par l'élève qui met $55$ minutes. C'est la médiane qui décrit le mieux le trajet
+d'un élève ordinaire de cette classe. Au moins la moitié des élèves ont un trajet
+compris entre $10$ et $20$ minutes, un intervalle de $10$ minutes seulement,
+alors que l'étendue atteint $50$ minutes : la série est resserrée en son centre et
+étalée sur sa droite par une unique valeur extrême. Pour information, l'écart type
+vaut ici $\sigma \approx 12{,}5$ minutes ; il est très supérieur à l'écart
+interquartile, ce qui confirme le poids de la valeur $55$.
+}
+
+\exemple{
+\textbf{Le diagramme en boîte de cette série.} Sur un axe gradué en minutes de $0$
+à $60$, on trace un rectangle allant de $Q_1 = 10$ à $Q_3 = 20$, coupé par un trait
+vertical à la médiane $14$. Une moustache part du bord gauche de la boîte jusqu'au
+minimum $5$, une autre part du bord droit jusqu'au maximum $55$. Les cinq valeurs
+du résumé sont donc :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lccccc}
+\toprule
+& Minimum & $Q_1$ & Médiane & $Q_3$ & Maximum \\
+\midrule
+Temps (min) & $5$ & $10$ & $14$ & $20$ & $55$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+La moustache de droite, longue de $55 - 20 = 35$ minutes, est bien plus longue que
+celle de gauche, longue de $10 - 5 = 5$ minutes : le diagramme est dissymétrique,
+étalé vers les grandes valeurs.
+}
+
+\approfondissement{
+On qualifie parfois d'\textbf{atypique} une valeur située à plus de
+$1{,}5 \times \mathrm{EI}$ au-delà d'un quartile. Ici, $Q_3 + 1{,}5 \times 10 = 35$
+et la valeur $55$ dépasse ce seuil : elle mérite un examen particulier (cet élève
+habite-t-il beaucoup plus loin~?). Ce critère est un usage courant en statistique,
+hors du programme de première : il n'est jamais exigible en évaluation.
+}
+
+%% ─────────────────────────────────────────────
+\section*{S'entraîner}
+
+\begin{enumerate}
+  \item Sur un diagramme circulaire représentant les $25$ élèves d'une classe, le
+    secteur \og bus \fg{} a un angle de $144^\circ$. Quelle est la fréquence des
+    élèves venant en bus ? Combien sont-ils ? Quel angle faudrait-il tracer pour un
+    groupe de $8$ élèves ?
+
+  \item Un histogramme représente les classes $[0\,;30[$, $[30\,;60[$ et
+    $[60\,;120[$, d'effectifs respectifs $12$, $18$ et $24$. Quelle classe est la
+    plus nombreuse ? Quel rectangle est le plus haut ? Justifier.
+
+  \item Calculer la moyenne, la médiane, $Q_1$, $Q_3$, l'étendue et l'écart
+    interquartile de la série :
+    $11 \quad 3 \quad 15 \quad 8 \quad 21 \quad 6 \quad 12 \quad 5 \quad 9$.
+
+  \item Les notes sur $20$ d'une classe de $20$ élèves sont données par le tableau
+    suivant.
+    \begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{lccccc}
+    \toprule
+    Note     & $8$ & $10$ & $12$ & $14$ & $16$ \\
+    \midrule
+    Effectif & $3$ & $5$  & $8$  & $3$  & $1$ \\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+    Calculer la moyenne, puis déterminer la médiane, $Q_1$, $Q_3$ et l'écart
+    interquartile.
+
+  \item Un diagramme en boîte a pour résumé : minimum $2$, $Q_1 = 6$,
+    médiane $9$, $Q_3 = 11$, maximum $30$. Donner l'étendue et l'écart
+    interquartile, préciser quelle proportion des valeurs appartient au moins à
+    $[6\,;11]$, et commenter la forme du diagramme.
+
+  \item Un diagramme en barres compare les ventes de deux mois : $1050$ et $1100$
+    articles. L'axe vertical est gradué de $1000$ à $1120$. Sur le dessin, la
+    seconde barre paraît deux fois plus haute que la première. Cette impression
+    est-elle fidèle ? Chiffrer la hausse réelle.
+
+  \item Les salaires mensuels, en euros, des $9$ employés d'une entreprise sont :
+    $1600$, $1700$, $1700$, $1800$, $1900$, $2000$, $2100$, $2300$, $9200$.
+    Calculer la moyenne et la médiane. Lequel de ces deux indicateurs décrit le
+    mieux le salaire d'un employé de cette entreprise ? Justifier.
+\end{enumerate}
+
+%% ─────────────────────────────────────────────
+\ifnxVersionProfesseur
+\section*{Corrigés}
+
+\begin{enumerate}
+  \item La fréquence est $f = \dfrac{144}{360} = 0{,}4$. L'effectif correspondant
+    est $0{,}4 \times 25 = 10$ élèves. Pour $8$ élèves, la fréquence vaut
+    $\dfrac{8}{25} = 0{,}32$ et l'angle vaut $0{,}32 \times 360 = 115{,}2^\circ$.
+
+  \item La classe la plus nombreuse est $[60\,;120[$, avec $24$ individus. Mais les
+    amplitudes valent $30$, $30$ et $60$ : les hauteurs, proportionnelles au
+    quotient de l'effectif par l'amplitude, valent $\frac{12}{30} = 0{,}4$,
+    $\frac{18}{30} = 0{,}6$ et $\frac{24}{60} = 0{,}4$. Le rectangle le plus haut
+    est donc celui de $[30\,;60[$ : dans un histogramme, c'est l'aire, et non la
+    hauteur, qui représente l'effectif.
+
+  \item Série ordonnée :
+    $3 \quad 5 \quad 6 \quad 8 \quad 9 \quad 11 \quad 12 \quad 15 \quad 21$, avec
+    $N = 9$.
+    \begin{itemize}
+      \item Somme $= 3+5+6+8+9+11+12+15+21 = 90$, donc
+        $\overline{x} = \dfrac{90}{9} = 10$.
+      \item $N = 9$ est impair : la médiane est la valeur de rang
+        $\dfrac{9+1}{2} = 5$, soit $\mathrm{Me} = 9$.
+      \item $\dfrac{9}{4} = 2{,}25$, donc $Q_1$ est la valeur de rang $3$ :
+        $Q_1 = 6$. Puis $\dfrac{27}{4} = 6{,}75$, donc $Q_3$ est la valeur de
+        rang $7$ : $Q_3 = 12$.
+      \item Étendue : $21 - 3 = 18$. Écart interquartile : $12 - 6 = 6$.
+    \end{itemize}
+    La moyenne $10$ dépasse légèrement la médiane $9$, sous l'effet de la valeur
+    $21$.
+
+  \item L'effectif total est $3+5+8+3+1 = 20$. La somme des notes vaut
+    \[
+      8 \times 3 + 10 \times 5 + 12 \times 8 + 14 \times 3 + 16 \times 1
+      = 24 + 50 + 96 + 42 + 16 = 228,
+    \]
+    donc $\overline{x} = \dfrac{228}{20} = 11{,}4$.
+
+    Effectifs cumulés croissants : $3$, $8$, $16$, $19$, $20$.
+    \begin{itemize}
+      \item $N = 20$ est pair : la médiane est la demi-somme des valeurs de rangs
+        $10$ et $11$. Ces deux rangs sont compris entre $9$ et $16$, donc les deux
+        valeurs valent $12$ : $\mathrm{Me} = 12$.
+      \item $\dfrac{20}{4} = 5$, donc $Q_1$ est la valeur de rang $5$, comprise
+        entre les rangs $4$ et $8$ : $Q_1 = 10$.
+      \item $\dfrac{60}{4} = 15$, donc $Q_3$ est la valeur de rang $15$, comprise
+        entre les rangs $9$ et $16$ : $Q_3 = 12$.
+      \item Écart interquartile : $12 - 10 = 2$.
+    \end{itemize}
+    La moitié centrale de la classe est donc contenue dans seulement deux points
+    d'écart : les notes sont très resserrées.
+
+  \item Étendue : $30 - 2 = 28$. Écart interquartile : $11 - 6 = 5$. Par définition
+    des quartiles, au moins $50~\%$ des valeurs appartiennent à $[6\,;11]$. La
+    moustache de droite mesure $30 - 11 = 19$, celle de gauche $6 - 2 = 4$ : la
+    série est nettement étalée vers les grandes valeurs, alors que sa moitié
+    centrale tient dans un intervalle de largeur $5$.
+
+  \item L'impression est trompeuse, car l'axe ne part pas de $0$ mais de $1000$.
+    Les hauteurs dessinées valent $1050 - 1000 = 50$ et $1100 - 1000 = 100$ : ce
+    sont ces \emph{écarts au seuil} $1000$ qui sont dans le rapport $1$ pour $2$,
+    pas les ventes. La hausse réelle est de $1100 - 1050 = 50$ articles, soit
+    $\dfrac{50}{1050} \approx 0{,}048$, c'est-à-dire environ $4{,}8~\%$ : moins de
+    $5~\%$, et non $100~\%$.
+
+  \item La somme des salaires vaut
+    \[
+      1600+1700+1700+1800+1900+2000+2100+2300+9200 = 24\,300,
+    \]
+    donc $\overline{x} = \dfrac{24\,300}{9} = 2700$ euros. La série comporte
+    $N = 9$ valeurs déjà ordonnées ; la médiane est la valeur de rang $5$, soit
+    $\mathrm{Me} = 1900$ euros.
+
+    Un seul employé sur neuf gagne plus que la moyenne : le salaire de $9200$
+    euros, très supérieur aux autres, tire la moyenne vers le haut. La médiane
+    $1900$ euros décrit donc bien mieux le salaire d'un employé de cette
+    entreprise.
+\end{enumerate}
+
+
+\newpage
+\fi
