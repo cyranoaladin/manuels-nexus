@@ -1545,8 +1545,61 @@
         "C4",
         "C5"
       ],
-      "carrier_audit": [],
-      "carrier_present": false,
+      "carrier_audit": [
+        {
+          "committed": [
+            "1 pt",
+            "1 pt",
+            "1,5 pt",
+            "0,5 pt"
+          ],
+          "exercise": 1,
+          "expected": null,
+          "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+        },
+        {
+          "committed": [
+            "1 pt",
+            "2 pts",
+            "1 pt"
+          ],
+          "exercise": 2,
+          "expected": null,
+          "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+        },
+        {
+          "committed": [
+            "1 pt",
+            "0,5 pt",
+            "0,5 pt",
+            "2 pts"
+          ],
+          "exercise": 3,
+          "expected": null,
+          "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+        },
+        {
+          "committed": [
+            "1,5 pt",
+            "0,5 pt",
+            "2 pts"
+          ],
+          "exercise": 4,
+          "expected": null,
+          "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+        },
+        {
+          "committed": [
+            "1,5 pt",
+            "1,5 pt",
+            "1 pt"
+          ],
+          "exercise": 5,
+          "expected": null,
+          "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+        }
+      ],
+      "carrier_present": true,
       "chapter": "1SPE-GEOMETRIE-REPEREE",
       "classification": "HUMAN_PEDAGOGICAL_JUDGEMENT_REQUIRED",
       "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-A-corrige.tex",
@@ -1654,8 +1707,61 @@
         "C4",
         "C5"
       ],
-      "carrier_audit": [],
-      "carrier_present": false,
+      "carrier_audit": [
+        {
+          "committed": [
+            "1 pt",
+            "1 pt",
+            "1,5 pt",
+            "0,5 pt"
+          ],
+          "exercise": 1,
+          "expected": null,
+          "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+        },
+        {
+          "committed": [
+            "1 pt",
+            "2 pts",
+            "1 pt"
+          ],
+          "exercise": 2,
+          "expected": null,
+          "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+        },
+        {
+          "committed": [
+            "1 pt",
+            "0,5 pt",
+            "0,5 pt",
+            "2 pts"
+          ],
+          "exercise": 3,
+          "expected": null,
+          "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+        },
+        {
+          "committed": [
+            "1,5 pt",
+            "0,5 pt",
+            "2 pts"
+          ],
+          "exercise": 4,
+          "expected": null,
+          "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+        },
+        {
+          "committed": [
+            "1,5 pt",
+            "1,5 pt",
+            "1 pt"
+          ],
+          "exercise": 5,
+          "expected": null,
+          "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+        }
+      ],
+      "carrier_present": true,
       "chapter": "1SPE-GEOMETRIE-REPEREE",
       "classification": "HUMAN_PEDAGOGICAL_JUDGEMENT_REQUIRED",
       "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-B-corrige.tex",
@@ -5159,925 +5265,139 @@
   "authoritative_source": "le sujet compose lui-meme, question par question ; la somme n'est qu'un controle secondaire",
   "carrier_contradictions": [],
   "carrier_macro": "\\baremeIndicatif",
-  "carriers_without_subject_source": [],
-  "generated_by": "scripts/build_1spe_assessment_bareme_transcription.py",
-  "human_decision_packet": [
+  "carriers_without_subject_source": [
     {
-      "capacities": [
-        "C1",
-        "C2",
-        "C3",
-        "C4",
-        "C5"
+      "committed": [
+        "1 pt",
+        "1 pt",
+        "1,5 pt",
+        "0,5 pt"
       ],
-      "chapter": "1SPE-GEOMETRIE-REPEREE",
-      "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-A-corrige.tex",
-      "declared_total": "20",
-      "duration_min": 55,
-      "exercises": [
-        {
-          "candidate_allocation": [
-            {
-              "points": "1 pt",
-              "question": 1,
-              "rationale": "coordonnées d'un vecteur : application directe"
-            },
-            {
-              "points": "1 pt",
-              "question": 2,
-              "rationale": "coefficient directeur : application directe"
-            },
-            {
-              "points": "1,5 pt",
-              "question": 3,
-              "rationale": "équation cartésienne : c'est la capacité C1 elle-même, elle demande d'assembler les deux résultats précédents"
-            },
-            {
-              "points": "0,5 pt",
-              "question": 4,
-              "rationale": "vérification d'appartenance : contrôle, pas de méthode nouvelle"
-            }
-          ],
-          "candidate_sum": "4",
-          "candidate_sum_matches_declared_total": true,
-          "capacities": "C1",
-          "declared_total": "4",
-          "number": 1,
-          "question_count": 4,
-          "questions": [
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 47
-              },
-              "question": 1,
-              "reasoning_gesture": "calculer",
-              "statement": "Calculer les coordonnées du vecteur $\\vec{AB}$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 56
-              },
-              "question": 2,
-              "reasoning_gesture": "déterminer",
-              "statement": "Déterminer le coefficient directeur de la droite $(AB)$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": true,
-                "statement_characters": 56
-              },
-              "question": 3,
-              "reasoning_gesture": "en déduire",
-              "statement": "En déduire une équation cartésienne de la droite $(AB)$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 64
-              },
-              "question": 4,
-              "reasoning_gesture": "vérifier",
-              "statement": "Vérifier que les points $A$ et $B$ appartiennent à cette droite.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            }
-          ]
-        },
-        {
-          "candidate_allocation": [
-            {
-              "points": "1 pt",
-              "question": 1,
-              "rationale": "lecture d'un vecteur normal et d'un vecteur directeur"
-            },
-            {
-              "points": "2 pts",
-              "question": 2,
-              "rationale": "équation de la perpendiculaire par un point donné : tâche centrale de C2"
-            },
-            {
-              "points": "1 pt",
-              "question": 3,
-              "rationale": "vérification de l'orthogonalité par le produit scalaire"
-            }
-          ],
-          "candidate_sum": "4",
-          "candidate_sum_matches_declared_total": true,
-          "capacities": "C2",
-          "declared_total": "4",
-          "number": 2,
-          "question_count": 3,
-          "questions": [
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 66
-              },
-              "question": 1,
-              "reasoning_gesture": "donner",
-              "statement": "Donner un vecteur normal et un vecteur directeur de $\\mathcal{D}$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 105
-              },
-              "question": 2,
-              "reasoning_gesture": "déterminer",
-              "statement": "Déterminer l'équation de la droite $\\mathcal{D}'$ perpendiculaire à $\\mathcal{D}$ passant par $M(3 ; 4)$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 72
-              },
-              "question": 3,
-              "reasoning_gesture": "vérifier",
-              "statement": "Vérifier que $\\mathcal{D}$ et $\\mathcal{D}'$ sont bien perpendiculaires.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            }
-          ]
-        },
-        {
-          "candidate_allocation": [
-            {
-              "points": "1 pt",
-              "question": 1,
-              "rationale": "équation du cercle à partir du centre et du rayon"
-            },
-            {
-              "points": "0,5 pt",
-              "question": 2,
-              "rationale": "appartenance d'un point : substitution"
-            },
-            {
-              "points": "0,5 pt",
-              "question": 3,
-              "rationale": "appartenance d'un second point : même substitution"
-            },
-            {
-              "points": "2 pts",
-              "question": 4,
-              "rationale": "développer puis retrouver centre et rayon en complétant les carrés : seule question à changer de registre"
-            }
-          ],
-          "candidate_sum": "4",
-          "candidate_sum_matches_declared_total": true,
-          "capacities": "C3",
-          "declared_total": "4",
-          "number": 3,
-          "question_count": 4,
-          "questions": [
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 35
-              },
-              "question": 1,
-              "reasoning_gesture": "donner",
-              "statement": "Écrire l'équation de $\\mathcal{C}$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 47
-              },
-              "question": 2,
-              "reasoning_gesture": null,
-              "statement": "Le point $P(7 ; -1)$ est-il sur $\\mathcal{C}$ ?",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 46
-              },
-              "question": 3,
-              "reasoning_gesture": null,
-              "statement": "Le point $Q(3 ; 3)$ est-il sur $\\mathcal{C}$ ?",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 116
-              },
-              "question": 4,
-              "reasoning_gesture": "vérifier",
-              "statement": "Développer l'équation de $\\mathcal{C}$ et vérifier que l'on retrouve le centre et le rayon en complétant les carrés.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            }
-          ]
-        },
-        {
-          "candidate_allocation": [
-            {
-              "points": "1,5 pt",
-              "question": 1,
-              "rationale": "distance d'un point à une droite : formule à appliquer correctement"
-            },
-            {
-              "points": "0,5 pt",
-              "question": 2,
-              "rationale": "position relative : interprétation immédiate de la distance obtenue"
-            },
-            {
-              "points": "2 pts",
-              "question": 3,
-              "rationale": "coordonnées exactes des points d'intersection : résolution d'un système, valeurs exactes exigées"
-            }
-          ],
-          "candidate_sum": "4",
-          "candidate_sum_matches_declared_total": true,
-          "capacities": "C4",
-          "declared_total": "4",
-          "number": 4,
-          "question_count": 3,
-          "questions": [
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 52
-              },
-              "question": 1,
-              "reasoning_gesture": "calculer",
-              "statement": "Calculer la distance de $\\Omega$ à la droite $(AB)$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": true,
-                "statement_characters": 79
-              },
-              "question": 2,
-              "reasoning_gesture": "en déduire",
-              "statement": "En déduire la position relative de la droite $(AB)$ et du cercle $\\mathcal{C}$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 61
-              },
-              "question": 3,
-              "reasoning_gesture": "déterminer",
-              "statement": "Déterminer les coordonnées exactes des points d'intersection.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            }
-          ]
-        },
-        {
-          "candidate_allocation": [
-            {
-              "points": "1,5 pt",
-              "question": 1,
-              "rationale": "aire du triangle : le choix de la méthode est laissé à l'élève, ce que la compétence « chercher » vise"
-            },
-            {
-              "points": "1,5 pt",
-              "question": 2,
-              "rationale": "projeté orthogonal : construction la plus exigeante de l'exercice"
-            },
-            {
-              "points": "1 pt",
-              "question": 3,
-              "rationale": "hauteur déduite de l'aire et de la base"
-            }
-          ],
-          "candidate_sum": "4",
-          "candidate_sum_matches_declared_total": true,
-          "capacities": "C5",
-          "declared_total": "4",
-          "number": 5,
-          "question_count": 3,
-          "questions": [
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 39
-              },
-              "question": 1,
-              "reasoning_gesture": "calculer",
-              "statement": "Calculer l'aire du triangle $AB\\Omega$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 66
-              },
-              "question": 2,
-              "reasoning_gesture": "déterminer",
-              "statement": "Déterminer le projeté orthogonal de $\\Omega$ sur la droite $(AB)$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": true,
-                "statement_characters": 69
-              },
-              "question": 3,
-              "reasoning_gesture": "en déduire",
-              "statement": "En déduire la hauteur du triangle $AB\\Omega$ relative au côté $[AB]$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            }
-          ]
-        }
-      ],
-      "existing_subject_constraints": {
-        "capacities": [
-          "C1",
-          "C2",
-          "C3",
-          "C4",
-          "C5"
-        ],
-        "duration_min": 55,
-        "exercise_totals": {
-          "1": "4",
-          "2": "4",
-          "3": "4",
-          "4": "4",
-          "5": "4"
-        },
-        "required_total": "20",
-        "the_subject_values_no_question_individually": true
-      },
+      "exercise": 1,
+      "expected": null,
       "object_id": "1SPE-GEOREP-EV-A",
-      "parallel_form_of": "1SPE-GEOREP-EV-B",
-      "proposal_is_not_a_decision": "cette repartition est une proposition machine ; elle n'est ecrite dans aucun corrige et ne vaut pas barème",
-      "scientific_confirmation_owner": "EXPERT_MATHEMATIQUE",
-      "status": "ATTENTION_REQUIRED",
-      "subject_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-A.tex",
-      "verdict": "PENDING",
-      "verdict_owner": "EXPERT_PROGRAMME_PEDAGOGIE",
-      "version": "A",
-      "what_each_reviewer_owns": {
-        "EXPERT_MATHEMATIQUE": "la difficulté scientifique, la charge de travail mathématique et la cohérence des poids relatifs",
-        "EXPERT_PROGRAMME_PEDAGOGIE": "le verdict final de répartition des points"
-      },
-      "why_human": [
-        "exercice(s) 1, 2, 3, 4, 5 : le sujet ne donne pas de valeur question par question ; repartir le total serait un jugement pedagogique"
-      ]
+      "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
     },
     {
-      "capacities": [
-        "C1",
-        "C2",
-        "C3",
-        "C4",
-        "C5"
+      "committed": [
+        "1 pt",
+        "2 pts",
+        "1 pt"
       ],
-      "chapter": "1SPE-GEOMETRIE-REPEREE",
-      "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-B-corrige.tex",
-      "declared_total": "20",
-      "duration_min": 55,
-      "exercises": [
-        {
-          "candidate_allocation": [
-            {
-              "points": "1 pt",
-              "question": 1,
-              "rationale": "coordonnées d'un vecteur : application directe"
-            },
-            {
-              "points": "1 pt",
-              "question": 2,
-              "rationale": "coefficient directeur : application directe"
-            },
-            {
-              "points": "1,5 pt",
-              "question": 3,
-              "rationale": "équation cartésienne : c'est la capacité C1 elle-même, elle demande d'assembler les deux résultats précédents"
-            },
-            {
-              "points": "0,5 pt",
-              "question": 4,
-              "rationale": "vérification d'appartenance : contrôle, pas de méthode nouvelle"
-            }
-          ],
-          "candidate_sum": "4",
-          "candidate_sum_matches_declared_total": true,
-          "capacities": "C1",
-          "declared_total": "4",
-          "number": 1,
-          "question_count": 4,
-          "questions": [
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 47
-              },
-              "question": 1,
-              "reasoning_gesture": "calculer",
-              "statement": "Calculer les coordonnées du vecteur $\\vec{AB}$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 56
-              },
-              "question": 2,
-              "reasoning_gesture": "déterminer",
-              "statement": "Déterminer le coefficient directeur de la droite $(AB)$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": true,
-                "statement_characters": 56
-              },
-              "question": 3,
-              "reasoning_gesture": "en déduire",
-              "statement": "En déduire une équation cartésienne de la droite $(AB)$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 64
-              },
-              "question": 4,
-              "reasoning_gesture": "vérifier",
-              "statement": "Vérifier que les points $A$ et $B$ appartiennent à cette droite.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            }
-          ]
-        },
-        {
-          "candidate_allocation": [
-            {
-              "points": "1 pt",
-              "question": 1,
-              "rationale": "lecture d'un vecteur normal et d'un vecteur directeur"
-            },
-            {
-              "points": "2 pts",
-              "question": 2,
-              "rationale": "équation de la perpendiculaire par un point donné : tâche centrale de C2"
-            },
-            {
-              "points": "1 pt",
-              "question": 3,
-              "rationale": "vérification de l'orthogonalité par le produit scalaire"
-            }
-          ],
-          "candidate_sum": "4",
-          "candidate_sum_matches_declared_total": true,
-          "capacities": "C2",
-          "declared_total": "4",
-          "number": 2,
-          "question_count": 3,
-          "questions": [
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 66
-              },
-              "question": 1,
-              "reasoning_gesture": "donner",
-              "statement": "Donner un vecteur normal et un vecteur directeur de $\\mathcal{D}$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 105
-              },
-              "question": 2,
-              "reasoning_gesture": "déterminer",
-              "statement": "Déterminer l'équation de la droite $\\mathcal{D}'$ perpendiculaire à $\\mathcal{D}$ passant par $M(1 ; 2)$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 72
-              },
-              "question": 3,
-              "reasoning_gesture": "vérifier",
-              "statement": "Vérifier que $\\mathcal{D}$ et $\\mathcal{D}'$ sont bien perpendiculaires.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            }
-          ]
-        },
-        {
-          "candidate_allocation": [
-            {
-              "points": "1 pt",
-              "question": 1,
-              "rationale": "équation du cercle à partir du centre et du rayon"
-            },
-            {
-              "points": "0,5 pt",
-              "question": 2,
-              "rationale": "appartenance d'un point : substitution"
-            },
-            {
-              "points": "0,5 pt",
-              "question": 3,
-              "rationale": "appartenance d'un second point : même substitution"
-            },
-            {
-              "points": "2 pts",
-              "question": 4,
-              "rationale": "développer puis retrouver centre et rayon en complétant les carrés : seule question à changer de registre"
-            }
-          ],
-          "candidate_sum": "4",
-          "candidate_sum_matches_declared_total": true,
-          "capacities": "C3",
-          "declared_total": "4",
-          "number": 3,
-          "question_count": 4,
-          "questions": [
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 35
-              },
-              "question": 1,
-              "reasoning_gesture": "donner",
-              "statement": "Écrire l'équation de $\\mathcal{C}$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 46
-              },
-              "question": 2,
-              "reasoning_gesture": null,
-              "statement": "Le point $P(7 ; 1)$ est-il sur $\\mathcal{C}$ ?",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 46
-              },
-              "question": 3,
-              "reasoning_gesture": null,
-              "statement": "Le point $Q(4 ; 4)$ est-il sur $\\mathcal{C}$ ?",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 116
-              },
-              "question": 4,
-              "reasoning_gesture": "vérifier",
-              "statement": "Développer l'équation de $\\mathcal{C}$ et vérifier que l'on retrouve le centre et le rayon en complétant les carrés.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            }
-          ]
-        },
-        {
-          "candidate_allocation": [
-            {
-              "points": "1,5 pt",
-              "question": 1,
-              "rationale": "distance d'un point à une droite : formule à appliquer correctement"
-            },
-            {
-              "points": "0,5 pt",
-              "question": 2,
-              "rationale": "position relative : interprétation immédiate de la distance obtenue"
-            },
-            {
-              "points": "2 pts",
-              "question": 3,
-              "rationale": "coordonnées exactes des points d'intersection : résolution d'un système, valeurs exactes exigées"
-            }
-          ],
-          "candidate_sum": "4",
-          "candidate_sum_matches_declared_total": true,
-          "capacities": "C4",
-          "declared_total": "4",
-          "number": 4,
-          "question_count": 3,
-          "questions": [
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 52
-              },
-              "question": 1,
-              "reasoning_gesture": "calculer",
-              "statement": "Calculer la distance de $\\Omega$ à la droite $(AB)$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": true,
-                "statement_characters": 79
-              },
-              "question": 2,
-              "reasoning_gesture": "en déduire",
-              "statement": "En déduire la position relative de la droite $(AB)$ et du cercle $\\mathcal{C}$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 61
-              },
-              "question": 3,
-              "reasoning_gesture": "déterminer",
-              "statement": "Déterminer les coordonnées exactes des points d'intersection.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            }
-          ]
-        },
-        {
-          "candidate_allocation": [
-            {
-              "points": "1,5 pt",
-              "question": 1,
-              "rationale": "aire du triangle : le choix de la méthode est laissé à l'élève, ce que la compétence « chercher » vise"
-            },
-            {
-              "points": "1,5 pt",
-              "question": 2,
-              "rationale": "projeté orthogonal : construction la plus exigeante de l'exercice"
-            },
-            {
-              "points": "1 pt",
-              "question": 3,
-              "rationale": "hauteur déduite de l'aire et de la base"
-            }
-          ],
-          "candidate_sum": "4",
-          "candidate_sum_matches_declared_total": true,
-          "capacities": "C5",
-          "declared_total": "4",
-          "number": 5,
-          "question_count": 3,
-          "questions": [
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 39
-              },
-              "question": 1,
-              "reasoning_gesture": "calculer",
-              "statement": "Calculer l'aire du triangle $AB\\Omega$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": false,
-                "statement_characters": 66
-              },
-              "question": 2,
-              "reasoning_gesture": "déterminer",
-              "statement": "Déterminer le projeté orthogonal de $\\Omega$ sur la droite $(AB)$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            },
-            {
-              "observable_indicators": {
-                "asks_for_a_proof": false,
-                "chains_a_deduction": true,
-                "statement_characters": 69
-              },
-              "question": 3,
-              "reasoning_gesture": "en déduire",
-              "statement": "En déduire la hauteur du triangle $AB\\Omega$ relative au côté $[AB]$.",
-              "to_be_judged_by_a_human": {
-                "difficulty": "",
-                "scientific_complexity": "",
-                "student_autonomy": ""
-              }
-            }
-          ]
-        }
+      "exercise": 2,
+      "expected": null,
+      "object_id": "1SPE-GEOREP-EV-A",
+      "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+    },
+    {
+      "committed": [
+        "1 pt",
+        "0,5 pt",
+        "0,5 pt",
+        "2 pts"
       ],
-      "existing_subject_constraints": {
-        "capacities": [
-          "C1",
-          "C2",
-          "C3",
-          "C4",
-          "C5"
-        ],
-        "duration_min": 55,
-        "exercise_totals": {
-          "1": "4",
-          "2": "4",
-          "3": "4",
-          "4": "4",
-          "5": "4"
-        },
-        "required_total": "20",
-        "the_subject_values_no_question_individually": true
-      },
+      "exercise": 3,
+      "expected": null,
+      "object_id": "1SPE-GEOREP-EV-A",
+      "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+    },
+    {
+      "committed": [
+        "1,5 pt",
+        "0,5 pt",
+        "2 pts"
+      ],
+      "exercise": 4,
+      "expected": null,
+      "object_id": "1SPE-GEOREP-EV-A",
+      "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+    },
+    {
+      "committed": [
+        "1,5 pt",
+        "1,5 pt",
+        "1 pt"
+      ],
+      "exercise": 5,
+      "expected": null,
+      "object_id": "1SPE-GEOREP-EV-A",
+      "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+    },
+    {
+      "committed": [
+        "1 pt",
+        "1 pt",
+        "1,5 pt",
+        "0,5 pt"
+      ],
+      "exercise": 1,
+      "expected": null,
       "object_id": "1SPE-GEOREP-EV-B",
-      "parallel_form_of": "1SPE-GEOREP-EV-A",
-      "proposal_is_not_a_decision": "cette repartition est une proposition machine ; elle n'est ecrite dans aucun corrige et ne vaut pas barème",
-      "scientific_confirmation_owner": "EXPERT_MATHEMATIQUE",
-      "status": "ATTENTION_REQUIRED",
-      "subject_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-B.tex",
-      "verdict": "PENDING",
-      "verdict_owner": "EXPERT_PROGRAMME_PEDAGOGIE",
-      "version": "B",
-      "what_each_reviewer_owns": {
-        "EXPERT_MATHEMATIQUE": "la difficulté scientifique, la charge de travail mathématique et la cohérence des poids relatifs",
-        "EXPERT_PROGRAMME_PEDAGOGIE": "le verdict final de répartition des points"
-      },
-      "why_human": [
-        "exercice(s) 1, 2, 3, 4, 5 : le sujet ne donne pas de valeur question par question ; repartir le total serait un jugement pedagogique"
-      ]
+      "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+    },
+    {
+      "committed": [
+        "1 pt",
+        "2 pts",
+        "1 pt"
+      ],
+      "exercise": 2,
+      "expected": null,
+      "object_id": "1SPE-GEOREP-EV-B",
+      "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+    },
+    {
+      "committed": [
+        "1 pt",
+        "0,5 pt",
+        "0,5 pt",
+        "2 pts"
+      ],
+      "exercise": 3,
+      "expected": null,
+      "object_id": "1SPE-GEOREP-EV-B",
+      "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+    },
+    {
+      "committed": [
+        "1,5 pt",
+        "0,5 pt",
+        "2 pts"
+      ],
+      "exercise": 4,
+      "expected": null,
+      "object_id": "1SPE-GEOREP-EV-B",
+      "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
+    },
+    {
+      "committed": [
+        "1,5 pt",
+        "1,5 pt",
+        "1 pt"
+      ],
+      "exercise": 5,
+      "expected": null,
+      "object_id": "1SPE-GEOREP-EV-B",
+      "verdict": "CARRIER_WITHOUT_SUBJECT_SOURCE"
     }
   ],
+  "generated_by": "scripts/build_1spe_assessment_bareme_transcription.py",
+  "human_decision_packet": [],
   "no_bareme_is_invented": "aucune valeur n'est repartie, devinee ni recopiee d'une autre evaluation ; une valeur absente du sujet rend l'evaluation HUMAN_PEDAGOGICAL_JUDGEMENT_REQUIRED",
   "refused_overwrites": [],
   "schema_version": 1,
   "summary": {
     "ASSESSMENTS": 20,
-    "ATTENTION_REQUIRED": 2,
+    "ATTENTION_REQUIRED": 0,
     "CANDIDATE_PROPOSAL_SUM_MISMATCH": 0,
     "CARRIER_CONTRADICTS_SUBJECT": 0,
     "CARRIER_MATCHES_SUBJECT": 74,
     "CARRIER_MISPLACED_OR_MISSING": 0,
     "CARRIER_MISSING_AFTER_APPLY": 0,
     "CARRIER_OUTSIDE_ANY_EXERCISE": 0,
-    "CARRIER_PRESENT": 18,
+    "CARRIER_PRESENT": 20,
     "CARRIER_VALUES_DISPUTE_SUBJECT": 0,
-    "CARRIER_WITHOUT_SUBJECT_SOURCE": 0,
+    "CARRIER_WITHOUT_SUBJECT_SOURCE": 10,
     "HUMAN_PEDAGOGICAL_JUDGEMENT_REQUIRED": 2,
     "HUMAN_REQUIRED_IDS": [
       "1SPE-GEOREP-EV-A",

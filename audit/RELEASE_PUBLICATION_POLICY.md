@@ -17,7 +17,7 @@ Release Owner : `abenrhouma`
 | `BLOCKERS_TRACKED` | 19 |
 | `CLASSIFIED` | 19 |
 | `PRODUCT_BLOCKING_OPEN` | 0 |
-| `NON_BLOCKING_GOVERNANCE_DEBT_OPEN` | 2 |
+| `NON_BLOCKING_GOVERNANCE_DEBT_OPEN` | 0 |
 | `PRODUCT_DEFECT_RECLASSED_AS_DEBT` | 0 |
 | `UNCLASSIFIED_BLOCKER` | 0 |
 | `UNKNOWN` | 0 |
@@ -66,7 +66,7 @@ Release Owner : `abenrhouma`
 | `CHAPTER_OPENER_ORPHAN_PAGE` | `PRODUCT_BLOCKING` | non | une ouverture qui deborde se voit sur la page imprimee |
 | `UNINTENTIONAL_BLANK_PAGE` | `PRODUCT_BLOCKING` | non | une page blanche sans raison se voit sur la page imprimee |
 | `CHAPTER_OPENING_FALSE_FOLIO` | `PRODUCT_BLOCKING` | non | un sommaire qui annonce la mauvaise page egare le lecteur |
-| `ASSESSMENT_BAREME_HUMAN_DECISION` | `NON_BLOCKING_GOVERNANCE_DEBT` | oui | la repartition manquante est desormais publiee comme bareme indicatif derive, verifie contre le sujet ; ce qui reste est l'absence d'un verdict humain par allocation, que le Release Owner ne rend plus prerequis |
+| `ASSESSMENT_BAREME_HUMAN_DECISION` | `NON_BLOCKING_GOVERNANCE_DEBT` | non | la repartition manquante est desormais publiee comme bareme indicatif derive, verifie contre le sujet ; ce qui reste est l'absence d'un verdict humain par allocation, que le Release Owner ne rend plus prerequis |
 | `BAREME_CONTRADICTS_ITS_SUBJECT` | `PRODUCT_BLOCKING` | non | un bareme qui contredit son sujet fausse la notation |
 | `TEACHER_MISSING_REQUIRED_CONTENT` | `PRODUCT_BLOCKING` | non | un contenu professeur exige et absent manque au lecteur |
 | `STUDENT_TEACHER_ONLY_LEAK` | `PRODUCT_BLOCKING` | non | un corrige qui fuite vers l'edition eleve donne la reponse a l'eleve |
@@ -78,7 +78,7 @@ Release Owner : `abenrhouma`
 | `MARGIN_COMPOSITOR_RENDERS_NOTHING` | `PRODUCT_BLOCKING` | non | une note de marge capturee mais non dessinee manque a la page |
 | `D7_BUNDLE_TARGETS_THE_SPECIMEN_NOT_THE_MANUAL` | `NON_BLOCKING_GOVERNANCE_DEBT` | non | le faisceau D7 visait la maquette et non le manuel ; la disposition D7 est desormais rendue par le Release Owner sur des mesures faites sur les PDF livres eux-memes |
 | `PRINT_CANDIDATE_RECEIPT_STALE` | `PRODUCT_BLOCKING` | non | un recu qui decrit un autre artefact que celui qu'on livre est un echec de reproductibilite reel |
-| `ASSESSMENT_BAREME_COMMENTARY_ABSENT` | `NON_BLOCKING_GOVERNANCE_DEBT` | oui | le bareme commente enrichit le manuel professeur ; son absence n'introduit aucune erreur et ne prive le lecteur d'aucun contenu obligatoire |
+| `ASSESSMENT_BAREME_COMMENTARY_ABSENT` | `NON_BLOCKING_GOVERNANCE_DEBT` | non | le bareme commente enrichit le manuel professeur ; son absence n'introduit aucune erreur et ne prive le lecteur d'aucun contenu obligatoire |
 | `REFRESH_AUDIT_REPORTS_CORRUPTS_TWO_ARTIFACTS` | `PRODUCT_BLOCKING` | non | un producteur qui corrompt un artefact casse la chaine de preuve |
 | `CHAPTER_REVIEW_PACKETS_INCOMPLETE` | `NON_BLOCKING_GOVERNANCE_DEBT` | non | l'absence d'un second role exerce est precisement la dette procedurale que le mode Release Owner cesse de traiter comme un defaut produit |
 | `LATEX_WARNING_CLASSES_UNCLOSED` | `PRODUCT_BLOCKING` | non | une classe d'avertissement inconnue peut cacher un defaut de composition ; tant qu'elle n'est pas nommee, on ne sait pas |

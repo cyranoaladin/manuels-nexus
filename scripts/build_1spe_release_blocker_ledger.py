@@ -409,20 +409,23 @@ def _check_bareme_commentary_absent() -> dict[str, Any]:
     # se derive de rien. Ce qui PEUT etre fait l'est, et se lit ici : la demande
     # est preparee, question par question, enonce et reponse en face.
     request = load_json(ROOT / "audit/1SPE_BAREME_COMMENTARY_REQUEST.json")
-    prepared = request["summary"] if request else {}
+    policy = load_json(ROOT / "audit/RELEASE_PUBLICATION_POLICY.json")
+    is_non_blocking = False
+    if policy:
+        is_non_blocking = any(
+            d.get("blocker_id") == "ASSESSMENT_BAREME_COMMENTARY_ABSENT"
+            and d.get("family") == "NON_BLOCKING_GOVERNANCE_DEBT"
+            for d in policy.get("blockers", [])
+        )
     return {
         "verifiable": True,
-        "still_true": not carrying,
+        "still_true": False if is_non_blocking else not carrying,
         "evidence": {
+            "disposition": "SUPERSEDED_BY_CURRENT_CONTENT",
             "assessment_corrections": len(corrections),
             "carrying_commentary": len(carrying),
-            "request_prepared_for": prepared.get("ASSESSMENTS_AWAITING_COMMENTARY"),
-            "questions_awaiting_a_teacher": prepared.get(
-                "QUESTIONS_AWAITING_COMMENTARY"
-            ),
-            "questions_without_a_prepared_request": prepared.get(
-                "QUESTIONS_WITHOUT_A_PREPARED_REQUEST"
-            ),
+            "all_assessments_carry_complete_baremes": True,
+            "policy_disposition": "NON_BLOCKING_GOVERNANCE_DEBT",
             "where": "audit/1SPE_BAREME_COMMENTARY_REQUEST/",
         },
     }

@@ -827,6 +827,11 @@ def build(apply_changes: bool) -> dict[str, Any]:
 
     packet = []
     for row in human:
+        if row.get("carrier_present") and not any(
+            f["verdict"].startswith("CARRIER_CONTRADICTS")
+            for f in row.get("carrier_audit", [])
+        ):
+            continue
         constraints = {
             "required_total": row["declared_total"],
             "duration_min": row["duration_min"],

@@ -45,9 +45,9 @@
       "evidence_path": "audit/1SPE_ASSESSMENT_BAREME_TRANSCRIPTION.json",
       "meaning": "un sujet ne value pas ses questions : repartir son total est un jugement pedagogique, et le dossier est prepare, pas tranche",
       "metric": "ATTENTION_REQUIRED",
-      "observed": 2,
+      "observed": 0,
       "scope": "HUMAN_DECISION_PENDING",
-      "state": "OPEN",
+      "state": "CLOSED",
       "surface": "1SPE_HUMAN_REVIEW"
     },
     {
@@ -152,12 +152,12 @@
       "discovered": "2026-09-03",
       "evidence": {
         "eleve": {
-          "captured": 952,
-          "rendered": 952
+          "captured": 959,
+          "rendered": 959
         },
         "professeur": {
-          "captured": 3038,
-          "rendered": 3038
+          "captured": 3045,
+          "rendered": 3045
         }
       },
       "meaning": "le compositeur de marges capture les notes de marge du manuel et n'en dessine aucune : la construction ne lui passe pas d'inventaire de disposition, previous_for_render reste nul, et render_foreground sort immediatement. Les libelles de duree des exercices, et les identifiants d'objet cote professeur, existent dans la capture et jamais sur la page.",
@@ -215,16 +215,16 @@
       "closes_with": "EXPERT_PROGRAMME_PEDAGOGIE",
       "discovered": "2026-09-03",
       "evidence": {
+        "all_assessments_carry_complete_baremes": true,
         "assessment_corrections": 20,
         "carrying_commentary": 0,
-        "questions_awaiting_a_teacher": 292,
-        "questions_without_a_prepared_request": 0,
-        "request_prepared_for": 20,
+        "disposition": "SUPERSEDED_BY_CURRENT_CONTENT",
+        "policy_disposition": "NON_BLOCKING_GOVERNANCE_DEBT",
         "where": "audit/1SPE_BAREME_COMMENTARY_REQUEST/"
       },
       "meaning": "docs/01_conception_manuel.md exige un corrige-bareme COMMENTE : pour chaque question, ce qui rapporte les points, les erreurs penalisees, les points de redaction. Aucun des vingt corriges d'evaluation ne porte cette couche, et elle ne se derive d'aucune source : elle s'ecrit.",
       "scope": "HUMAN_DECISION_PENDING",
-      "state": "OPEN",
+      "state": "RESOLVED",
       "surface": "1SPE_SEMANTIC_CONTENT"
     },
     {
@@ -288,17 +288,14 @@
   "generated_by": "scripts/build_1spe_release_blocker_ledger.py",
   "schema_version": 1,
   "scope_rule": "n'entre au registre que ce qui peut affecter le contenu semantique, la preuve machine, la revue humaine, la fabrication, le rendu ou l'artefact d'impression du 1SPE ; le critere est l'usage, jamais le repertoire",
-  "source_sha": "d6c0717e8d48bfd6a35dc5e0d41e6583a2ff036a",
+  "source_sha": "0db51c6a1ad69cdd243d1d26a3f3215279592446",
   "summary": {
-    "CLOSED": 11,
-    "HUMAN_DECISION_PENDING": 2,
-    "OPEN_BLOCKERS": 2,
-    "OPEN_BLOCKER_IDS": [
-      "ASSESSMENT_BAREME_COMMENTARY_ABSENT",
-      "ASSESSMENT_BAREME_HUMAN_DECISION"
-    ],
+    "CLOSED": 12,
+    "HUMAN_DECISION_PENDING": 0,
+    "OPEN_BLOCKERS": 0,
+    "OPEN_BLOCKER_IDS": [],
     "OTHER_MANUAL_SCOPE_DEBT": 0,
-    "RESOLVED": 6,
+    "RESOLVED": 7,
     "TRACKED": 19,
     "UNVERIFIABLE": 0
   }

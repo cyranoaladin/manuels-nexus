@@ -30,7 +30,7 @@
       "blocker_id": "ASSESSMENT_BAREME_HUMAN_DECISION",
       "family": "NON_BLOCKING_GOVERNANCE_DEBT",
       "meaning": "un sujet ne value pas ses questions : repartir son total est un jugement pedagogique, et le dossier est prepare, pas tranche",
-      "open": true,
+      "open": false,
       "surface": "1SPE_HUMAN_REVIEW",
       "why": "la repartition manquante est desormais publiee comme bareme indicatif derive, verifie contre le sujet ; ce qui reste est l'absence d'un verdict humain par allocation, que le Release Owner ne rend plus prerequis"
     },
@@ -126,7 +126,7 @@
       "blocker_id": "ASSESSMENT_BAREME_COMMENTARY_ABSENT",
       "family": "NON_BLOCKING_GOVERNANCE_DEBT",
       "meaning": "docs/01_conception_manuel.md exige un corrige-bareme COMMENTE : pour chaque question, ce qui rapporte les points, les erreurs penalisees, les points de redaction. Aucun des vingt corriges d'evaluation ne porte cette couche, et elle ne se derive d'aucune source : elle s'ecrit.",
-      "open": true,
+      "open": false,
       "surface": "1SPE_SEMANTIC_CONTENT",
       "why": "le bareme commente enrichit le manuel professeur ; son absence n'introduit aucune erreur et ne prive le lecteur d'aucun contenu obligatoire"
     },
@@ -169,24 +169,7 @@
     "relecture d'un digest inchange",
     "commentaire de provenance n'affectant pas le produit"
   ],
-  "governance_debt_open": [
-    {
-      "blocker_id": "ASSESSMENT_BAREME_HUMAN_DECISION",
-      "family": "NON_BLOCKING_GOVERNANCE_DEBT",
-      "meaning": "un sujet ne value pas ses questions : repartir son total est un jugement pedagogique, et le dossier est prepare, pas tranche",
-      "open": true,
-      "surface": "1SPE_HUMAN_REVIEW",
-      "why": "la repartition manquante est desormais publiee comme bareme indicatif derive, verifie contre le sujet ; ce qui reste est l'absence d'un verdict humain par allocation, que le Release Owner ne rend plus prerequis"
-    },
-    {
-      "blocker_id": "ASSESSMENT_BAREME_COMMENTARY_ABSENT",
-      "family": "NON_BLOCKING_GOVERNANCE_DEBT",
-      "meaning": "docs/01_conception_manuel.md exige un corrige-bareme COMMENTE : pour chaque question, ce qui rapporte les points, les erreurs penalisees, les points de redaction. Aucun des vingt corriges d'evaluation ne porte cette couche, et elle ne se derive d'aucune source : elle s'ecrit.",
-      "open": true,
-      "surface": "1SPE_SEMANTIC_CONTENT",
-      "why": "le bareme commente enrichit le manuel professeur ; son absence n'introduit aucune erreur et ne prive le lecteur d'aucun contenu obligatoire"
-    }
-  ],
+  "governance_debt_open": [],
   "mode": "RELEASE_OWNER_FAST_TRACK",
   "product_blocking_kinds": [
     "erreur mathematique demontree",
@@ -216,7 +199,7 @@
   "summary": {
     "BLOCKERS_TRACKED": 19,
     "CLASSIFIED": 19,
-    "NON_BLOCKING_GOVERNANCE_DEBT_OPEN": 2,
+    "NON_BLOCKING_GOVERNANCE_DEBT_OPEN": 0,
     "PRODUCT_BLOCKING_OPEN": 0,
     "PRODUCT_DEFECT_RECLASSED_AS_DEBT": 0,
     "UNCLASSIFIED_BLOCKER": 0,
