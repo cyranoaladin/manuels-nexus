@@ -11,7 +11,7 @@
 ### assembler_invalid (0)
 - Aucune.
 
-### blocking_statuses (2325)
+### blocking_statuses (2323)
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-001, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
@@ -42,7 +42,7 @@
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-027.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-027, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-028.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-028, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-029.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-029, scope=object
-- … 2295 autres.
+- … 2293 autres.
 
 ### broken_assembly_references (0)
 - Aucune.
@@ -98,8 +98,11 @@
 ### missing_corrections (0)
 - Aucune.
 
-### orphan_files (0)
-- Aucune.
+### orphan_files (4)
+- source=Mathematiques/manuel-maths/transversal/formulaire.tex, cible=Mathematiques/manuel-maths/transversal/formulaire.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+- source=Mathematiques/manuel-maths/transversal/logique_raisonnement.tex, cible=Mathematiques/manuel-maths/transversal/logique_raisonnement.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+- source=Mathematiques/manuel-maths/transversal/memo_python.tex, cible=Mathematiques/manuel-maths/transversal/memo_python.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+- source=Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex, cible=Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
 
 ### unassembled_objects (0)
 - Aucune.

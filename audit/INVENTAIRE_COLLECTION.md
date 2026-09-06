@@ -6,18 +6,19 @@
 
 | ID | Manuel | Matière | Niveau | Édition | Chapitres | Capacités | Exercices | Fichiers contenu | Objets | Variantes compilées |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1NSI | NSI Première | NSI | Premiere | courante | 10 | 53 | 296 | 807 | 807 | manual |
+| 1NSI | NSI Première | NSI | Premiere | courante | 10 | 53 | 101 | 366 | 366 | manual |
 | 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 53 | 482 | 1441 | 1441 | manual |
-| TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 53 | 300 | 776 | 776 | manual |
+| TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 53 | 300 | 775 | 775 | manual |
 | TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 194 | 500 | 500 | manual |
-| TNSI | NSI Terminale | NSI | Terminale | courante | 7 | 61 | 266 | 721 | 721 | manual |
-| TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 11 | 67 | 413 | 1139 | 1139 | manual |
+| TNSI | NSI Terminale | NSI | Terminale | courante | 7 | 61 | 23 | 111 | 111 | manual |
+| TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 11 | 67 | 277 | 836 | 836 | manual |
 
 ## Anomalies détectées
 
 | Catégorie | Nombre |
 |---|---|
-| blocking_statuses | 2325 |
+| blocking_statuses | 2323 |
+| orphan_files | 4 |
 
 ### Échantillon déterministe
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
@@ -25,6 +26,10 @@
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-003, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-004, scope=object
+- orphan_files: source=Mathematiques/manuel-maths/transversal/formulaire.tex, cible=Mathematiques/manuel-maths/transversal/formulaire.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+- orphan_files: source=Mathematiques/manuel-maths/transversal/logique_raisonnement.tex, cible=Mathematiques/manuel-maths/transversal/logique_raisonnement.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+- orphan_files: source=Mathematiques/manuel-maths/transversal/memo_python.tex, cible=Mathematiques/manuel-maths/transversal/memo_python.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+- orphan_files: source=Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex, cible=Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
 
 ## Réconciliation des rapports
 
@@ -47,9 +52,9 @@
 - Mathematiques/manuel-maths/ETAT_COLLECTION.md | 36 | manual:1SPE | chapitres | 13 | 10 | contredit
 - Mathematiques/manuel-maths/ETAT_COLLECTION.md | 73 | unresolved:portee_chapitres_ambigue | chapitres | 3 | None | ouvert
 - Mathematiques/manuel-maths/ETAT_COLLECTION.md | 96 | manual:TSPE_2026_2027 | coups_de_pouce | 21 | 67 | contredit
-- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 96 | manual:TSPE_2026_2027 | exercices_principaux | 50 | 413 | contredit
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 96 | manual:TSPE_2026_2027 | exercices_principaux | 50 | 277 | contredit
 - Mathematiques/manuel-maths/ETAT_COLLECTION.md | 97 | manual:TSPE_2026_2027 | coups_de_pouce | 20 | 67 | contredit
-- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 97 | manual:TSPE_2026_2027 | exercices_principaux | 50 | 413 | contredit
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 97 | manual:TSPE_2026_2027 | exercices_principaux | 50 | 277 | contredit
 - Mathematiques/manuel-maths/ETAT_COLLECTION.md | 106 | manual:TSPE_2026_2027 | chapitres | 4 | 11 | contredit
 - Mathematiques/manuel-maths/MISSION_LOG.md | 7 | chapter:1SPE-SUITES | corriges | 49 | 53 | contredit
 - Mathematiques/manuel-maths/MISSION_LOG.md | 7 | chapter:1SPE-SUITES | exercices_principaux | 49 | 51 | contredit

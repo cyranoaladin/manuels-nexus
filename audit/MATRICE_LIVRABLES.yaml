@@ -42,21 +42,20 @@ manuals:
       - 1NSI-TYPES-CONSTRUITS
       - 1NSI-WEB-IHM
       statuses:
-        approved: 441
         manual_review: 7
         needs_review: 210
         verified: 149
       totals:
         capacites: 53
-        corriges: 332
+        corriges: 137
         coups_de_pouce: 24
         diagnostics: 1
         evaluations: 20
-        exercices_principaux: 296
-        methodes: 21
+        exercices_principaux: 101
+        methodes: 14
         projets: 1
         qcm: 10
-        remediations: 61
+        remediations: 17
         sections_cours: 38
         td: 2
     objective:
@@ -252,7 +251,7 @@ manuals:
       - TCOMPL-MODELES-FONCTION
       - TCOMPL-TEMPS-ATTENTE
       statuses:
-        approved: 576
+        approved: 575
         generated: 150
         needs_review: 50
       totals:
@@ -266,7 +265,7 @@ manuals:
         projets: 0
         qcm: 9
         remediations: 50
-        sections_cours: 25
+        sections_cours: 24
         td: 6
     objective:
       directive: docs/11_perimetre_terminale_complementaires.md
@@ -371,7 +370,7 @@ manuals:
   TNSI:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '118'
+      detail: '116'
       source: anomalies.blocking_statuses
     - code: chapitres_manquants
       detail: 7/12
@@ -392,7 +391,7 @@ manuals:
       detail: declared
       source: deliverable_matrix.TNSI.variants.version_amenagee
     - code: statuts_non_approuves
-      detail: objets=111; contrats=7
+      detail: objets=109; contrats=7
       source: manuals.TNSI.statuses
     current:
       artifacts:
@@ -408,21 +407,20 @@ manuals:
       - TNSI-PROJET
       - TNSI-STRUCTURES-DONNEES
       statuses:
-        approved: 610
+        approved: 2
         generated: 109
-        needs_review: 2
       totals:
         capacites: 61
-        corriges: 278
+        corriges: 35
         coups_de_pouce: 0
         diagnostics: 0
         evaluations: 12
-        exercices_principaux: 266
-        methodes: 6
+        exercices_principaux: 23
+        methodes: 0
         projets: 1
         qcm: 7
-        remediations: 64
-        sections_cours: 87
+        remediations: 5
+        sections_cours: 28
         td: 0
     objective:
       directive: MISSION_PRIORITAIRE §11
@@ -525,19 +523,19 @@ manuals:
       - TSPE-SUITES-LIMITES
       - TSPE-TRIGONOMETRIE
       statuses:
-        approved: 1083
+        approved: 780
         generated: 56
       totals:
         capacites: 67
-        corriges: 435
+        corriges: 299
         coups_de_pouce: 67
         diagnostics: 0
         evaluations: 22
-        exercices_principaux: 413
+        exercices_principaux: 277
         methodes: 38
         projets: 0
         qcm: 11
-        remediations: 87
+        remediations: 56
         sections_cours: 58
         td: 8
     objective:
@@ -589,24 +587,24 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:33f174e130a6bb47ab587fe22dfbb511b9ce5931868af759923bebd9f99a3d25
+model_digest: sha256:89c632b59491aef4d1220c07ec171831aa5a2328c4167920206ec4d67cc06139
 provenance:
   branch: null
   dirty: false
   errors: []
-  generated_at_utc: '2026-09-05T19:40:50Z'
+  generated_at_utc: '2026-09-06T12:29:24Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:79b255deeddfa4b483a9a5a9f568bdc143defd7b2a69e8b8a704f4afdd35d6bf
-    scripts/build_manifest.py: sha256:25c59c35918e651671c14b0e251a940311c998e5e32a82cb26a3727044dc4a77
+    scripts/build_manifest.py: sha256:62d4f5da9454aaa2923041db777b759e3e4b672e7c2f33b59a62e07afc76de26
     scripts/inventory_assembly.py: sha256:8a2eeaaa869413ae29c761b1972787f77bc2d0f4baf49aa653b70af98092dd0e
     scripts/inventory_collection.py: sha256:18a18497b8c129a9d98cf631f0d314a4e1f8958cdc395a9b0f23cb17025cc150
     scripts/inventory_graph.py: sha256:8589fc6483491413395e8f01afe86cef6b33414906da29e24a9ac070342d4103
     scripts/inventory_pdf.py: sha256:4d87858492b6f00a9eaf48a717a9c2ddfc423cbe533278747cb199ae885d90b8
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:5a1d29bba2adef2b3e3ec465f29597b2987ed3a926fbeecab3645abc52ca2163
+  generator_sha256: sha256:c925cbd22c023f6ffeb691652ec8278051c1d3244352c074dbf98e21bd7452b5
   generator_version: 1
   git_available: true
-  head_sha: d6c0717e8d48bfd6a35dc5e0d41e6583a2ff036a
+  head_sha: 288e294d3f8643930afd84a0c34c6c2f81b4e8d3
   modified_tracked: []
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
@@ -618,4 +616,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:c66ade02a489fcc27090764e03abef3263c51c773c81667c725aeba288ca8b96
+source_digest: sha256:9ab013ab185c6ddbfc6c0c1521d63164f3f31fc099b767f3384213a3f9023cbf

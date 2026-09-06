@@ -13820,18 +13820,6 @@ anomalies:
     path: NSI/chapitres/TNSI-PROJET/contrat.yaml
     scope: contract
     status: draft
-  - chapter: TNSI-PROJET
-    id: TNSI-PROJET-ANNUEL
-    manual: TNSI
-    path: NSI/chapitres/TNSI-PROJET/projet/TNSI-PROJET-ANNUEL.tex
-    scope: object
-    status: needs_review
-  - chapter: TNSI-PROJET
-    id: TNSI-PROJET-QCM
-    manual: TNSI
-    path: NSI/chapitres/TNSI-PROJET/qcm/TNSI-PROJET-QCM.tex
-    scope: object
-    status: needs_review
   - chapter: TNSI-STRUCTURES-DONNEES
     id: null
     manual: TNSI
@@ -13970,7 +13958,27 @@ anomalies:
   metadata_missing: []
   missing_assemblers: []
   missing_corrections: []
-  orphan_files: []
+  orphan_files:
+  - champ: reachability
+    cible: Mathematiques/manuel-maths/transversal/formulaire.tex
+    raison: fichier LaTeX suivi sans META, non reference et hors assemblage
+    role: latex_source
+    source: Mathematiques/manuel-maths/transversal/formulaire.tex
+  - champ: reachability
+    cible: Mathematiques/manuel-maths/transversal/logique_raisonnement.tex
+    raison: fichier LaTeX suivi sans META, non reference et hors assemblage
+    role: latex_source
+    source: Mathematiques/manuel-maths/transversal/logique_raisonnement.tex
+  - champ: reachability
+    cible: Mathematiques/manuel-maths/transversal/memo_python.tex
+    raison: fichier LaTeX suivi sans META, non reference et hors assemblage
+    role: latex_source
+    source: Mathematiques/manuel-maths/transversal/memo_python.tex
+  - champ: reachability
+    cible: Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex
+    raison: fichier LaTeX suivi sans META, non reference et hors assemblage
+    role: latex_source
+    source: Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex
   unassembled_objects: []
   unattributed_pdfs: []
   unavailable_inspiration_sources: []
@@ -14409,7 +14417,7 @@ claims:
     path: Mathematiques/manuel-maths/ETAT_COLLECTION.md
     raw: 'Completion E5/F01 : Suites 49→50 exercices + 21 coups de pouce (0→21) ;'
     scope: manual:TSPE_2026_2027
-  - calculated: 413
+  - calculated: 277
     declared: 50
     etat: contredit
     evidence: manuals.TSPE_2026_2027.totals.exercices_principaux
@@ -14427,7 +14435,7 @@ claims:
     path: Mathematiques/manuel-maths/ETAT_COLLECTION.md
     raw: Second degre 42→50 exercices + 20 coups de pouce (0→20). Couverture
     scope: manual:TSPE_2026_2027
-  - calculated: 413
+  - calculated: 277
     declared: 50
     etat: contredit
     evidence: manuals.TSPE_2026_2027.totals.exercices_principaux
@@ -14609,7 +14617,7 @@ claims:
     path: NSI/DIRECTIVES_EN_COURS.md
     raw: '- [x] Première chapitres 1, 3–10 : les 9 chapitres restants ont été produits le'
     scope: manual:1NSI
-  - calculated: 296
+  - calculated: 101
     declared: 6
     etat: contredit
     evidence: manuals.1NSI.totals.exercices_principaux
@@ -15225,24 +15233,24 @@ counts:
   claims_contredits: 31
   claims_ouverts: 53
 generated_by: inventory_collection.py
-model_digest: sha256:33f174e130a6bb47ab587fe22dfbb511b9ce5931868af759923bebd9f99a3d25
+model_digest: sha256:89c632b59491aef4d1220c07ec171831aa5a2328c4167920206ec4d67cc06139
 provenance:
   branch: null
   dirty: false
   errors: []
-  generated_at_utc: '2026-09-05T19:40:50Z'
+  generated_at_utc: '2026-09-06T12:29:24Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:79b255deeddfa4b483a9a5a9f568bdc143defd7b2a69e8b8a704f4afdd35d6bf
-    scripts/build_manifest.py: sha256:25c59c35918e651671c14b0e251a940311c998e5e32a82cb26a3727044dc4a77
+    scripts/build_manifest.py: sha256:62d4f5da9454aaa2923041db777b759e3e4b672e7c2f33b59a62e07afc76de26
     scripts/inventory_assembly.py: sha256:8a2eeaaa869413ae29c761b1972787f77bc2d0f4baf49aa653b70af98092dd0e
     scripts/inventory_collection.py: sha256:18a18497b8c129a9d98cf631f0d314a4e1f8958cdc395a9b0f23cb17025cc150
     scripts/inventory_graph.py: sha256:8589fc6483491413395e8f01afe86cef6b33414906da29e24a9ac070342d4103
     scripts/inventory_pdf.py: sha256:4d87858492b6f00a9eaf48a717a9c2ddfc423cbe533278747cb199ae885d90b8
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:5a1d29bba2adef2b3e3ec465f29597b2987ed3a926fbeecab3645abc52ca2163
+  generator_sha256: sha256:c925cbd22c023f6ffeb691652ec8278051c1d3244352c074dbf98e21bd7452b5
   generator_version: 1
   git_available: true
-  head_sha: d6c0717e8d48bfd6a35dc5e0d41e6583a2ff036a
+  head_sha: 288e294d3f8643930afd84a0c34c6c2f81b4e8d3
   modified_tracked: []
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
@@ -15254,4 +15262,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/ecarts-et-contradictions.schema.json
 schema_version: 1
-source_digest: sha256:c66ade02a489fcc27090764e03abef3263c51c773c81667c725aeba288ca8b96
+source_digest: sha256:9ab013ab185c6ddbfc6c0c1521d63164f3f31fc099b767f3384213a3f9023cbf
