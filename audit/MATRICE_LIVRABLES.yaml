@@ -145,10 +145,10 @@ manuals:
       detail: absent
       source: deliverable_matrix.1SPE.variants.banque_evaluations
     - code: livrable_non_compile
-      detail: partial
+      detail: declared
       source: deliverable_matrix.1SPE.variants.livret_methodes
     - code: livrable_non_compile
-      detail: partial
+      detail: declared
       source: deliverable_matrix.1SPE.variants.livret_remediation
     - code: statuts_non_approuves
       detail: objets=1430; contrats=10
@@ -217,14 +217,16 @@ manuals:
         artifacts: []
         declared_chapter_variants:
         - methodes
-        declared_manual_variants: []
-        state: partial
+        declared_manual_variants:
+        - methodes
+        state: declared
       livret_remediation:
         artifacts: []
         declared_chapter_variants:
         - remediation
-        declared_manual_variants: []
-        state: partial
+        declared_manual_variants:
+        - remediation
+        state: declared
       manuel_eleve:
         artifacts:
         - Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf
@@ -505,10 +507,10 @@ manuals:
       detail: absent
       source: deliverable_matrix.TSPE_2026_2027.variants.banque_evaluations
     - code: livrable_non_compile
-      detail: partial
+      detail: declared
       source: deliverable_matrix.TSPE_2026_2027.variants.livret_methodes
     - code: livrable_non_compile
-      detail: partial
+      detail: declared
       source: deliverable_matrix.TSPE_2026_2027.variants.livret_remediation
     - code: statuts_non_approuves
       detail: objets=56; contrats=0
@@ -573,14 +575,16 @@ manuals:
         artifacts: []
         declared_chapter_variants:
         - methodes
-        declared_manual_variants: []
-        state: partial
+        declared_manual_variants:
+        - methodes
+        state: declared
       livret_remediation:
         artifacts: []
         declared_chapter_variants:
         - remediation
-        declared_manual_variants: []
-        state: partial
+        declared_manual_variants:
+        - remediation
+        state: declared
       manuel_eleve:
         artifacts:
         - Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_eleve.pdf
@@ -595,25 +599,29 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:092866b999b3f3f825663c935bbc76017487df28631426ab47111c2790e48988
+model_digest: sha256:0cf52cad30eddcfa6e154b86e2262b436fd30a8f69a32e65a49a92684a6d17e0
 provenance:
   branch: null
-  dirty: false
+  dirty: true
   errors: []
-  generated_at_utc: '2026-09-06T20:56:52Z'
+  generated_at_utc: '2026-09-06T20:59:09Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:79b255deeddfa4b483a9a5a9f568bdc143defd7b2a69e8b8a704f4afdd35d6bf
     scripts/build_manifest.py: sha256:62d4f5da9454aaa2923041db777b759e3e4b672e7c2f33b59a62e07afc76de26
     scripts/inventory_assembly.py: sha256:8a2eeaaa869413ae29c761b1972787f77bc2d0f4baf49aa653b70af98092dd0e
-    scripts/inventory_collection.py: sha256:ae72d335be059a9b3bf2652bbb628abd16e563e3c83410da0c14c11167602305
+    scripts/inventory_collection.py: sha256:184cee05f96faf87fae6a15cb13d2f4b255cc64fb12957a685f551e9d17dd83e
     scripts/inventory_graph.py: sha256:8589fc6483491413395e8f01afe86cef6b33414906da29e24a9ac070342d4103
     scripts/inventory_pdf.py: sha256:4d87858492b6f00a9eaf48a717a9c2ddfc423cbe533278747cb199ae885d90b8
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:9baa99292772770cf183af00ece07d5bbc1e4fe9b036563aef380148e353bac1
+  generator_sha256: sha256:f571e10178353b5079ce3cab9ef0e52eeea80f9d2aae93f6adccb65e4be221ea
   generator_version: 1
   git_available: true
-  head_sha: c4d2fe38a53e905e61c56149160dc2018e717d3c
-  modified_tracked: []
+  head_sha: 0b9210f898b235fe4e40c705affd9d5262be552f
+  modified_tracked:
+  - Mathematiques/manuel-maths/scripts/assemble_manuel.py
+  - audit/RELEASE_DELIVERABLE_SCOPE_MATRIX.json
+  - audit/RELEASE_DELIVERABLE_SCOPE_MATRIX.md
+  - scripts/inventory_collection.py
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
     git: git version 2.43.0
@@ -624,4 +632,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:bcf1b1468f3a6595d09edf30cadb409ed858d49ff739a1062b9e75fec891de39
+source_digest: sha256:1bdfa637a48cdeeb82e932a516e6eae64ffe821a465ea219f1b76aede46dbaa2

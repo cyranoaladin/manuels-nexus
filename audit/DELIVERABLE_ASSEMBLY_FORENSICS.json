@@ -1,0 +1,80 @@
+{
+  "artifact_type": "deliverable_assembly_forensics",
+  "schema_version": 1,
+  "generated_by": "scripts/build_deliverable_assembly_forensics.py",
+  "summary": {
+    "INVESTIGATED_DELIVERABLES": 6,
+    "RESTORE_HISTORICAL_ASSEMBLY": 0,
+    "DERIVE_FROM_CURRENT_CANONICAL_SOURCES": 4,
+    "NEW_ASSEMBLY_REQUIRED": 2,
+    "ASSEMBLIES_NOW_DECLARED": 4,
+    "ASSEMBLIES_STILL_MISSING": 2,
+    "NEW_MASTERS_WRITTEN": 0
+  },
+  "deliverables": [
+    {
+      "deliverable_id": "1SPE::livret_methodes",
+      "historical_master_found": false,
+      "historical_generator_found": true,
+      "historical_generator": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+      "canonical_source_set": "chapitres/1SPE-*/methodes/*.tex",
+      "assembly_decision": "DERIVE_FROM_CURRENT_CANONICAL_SOURCES",
+      "rationale": "Les sources existent chapitre par chapitre et l'assembleur du manuel sait déjà parcourir les chapitres, poser les ouvertures et marquer les rubriques. Il manquait la déclaration de la variante, pas une recette.",
+      "assembly_id": "math:manual:1SPE:methodes",
+      "assembly_declared": true
+    },
+    {
+      "deliverable_id": "1SPE::livret_remediation",
+      "historical_master_found": false,
+      "historical_generator_found": true,
+      "historical_generator": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+      "canonical_source_set": "chapitres/1SPE-*/remediation/*.tex",
+      "assembly_decision": "DERIVE_FROM_CURRENT_CANONICAL_SOURCES",
+      "rationale": "Les sources existent chapitre par chapitre et l'assembleur du manuel sait déjà parcourir les chapitres, poser les ouvertures et marquer les rubriques. Il manquait la déclaration de la variante, pas une recette.",
+      "assembly_id": "math:manual:1SPE:remediation",
+      "assembly_declared": true
+    },
+    {
+      "deliverable_id": "TSPE_2026_2027::livret_methodes",
+      "historical_master_found": false,
+      "historical_generator_found": true,
+      "historical_generator": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+      "canonical_source_set": "chapitres/TSPE_2026_2027-*/methodes/*.tex",
+      "assembly_decision": "DERIVE_FROM_CURRENT_CANONICAL_SOURCES",
+      "rationale": "Les sources existent chapitre par chapitre et l'assembleur du manuel sait déjà parcourir les chapitres, poser les ouvertures et marquer les rubriques. Il manquait la déclaration de la variante, pas une recette.",
+      "assembly_id": "math:manual:TSPE_2026_2027:methodes",
+      "assembly_declared": true
+    },
+    {
+      "deliverable_id": "TSPE_2026_2027::livret_remediation",
+      "historical_master_found": false,
+      "historical_generator_found": true,
+      "historical_generator": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+      "canonical_source_set": "chapitres/TSPE_2026_2027-*/remediation/*.tex",
+      "assembly_decision": "DERIVE_FROM_CURRENT_CANONICAL_SOURCES",
+      "rationale": "Les sources existent chapitre par chapitre et l'assembleur du manuel sait déjà parcourir les chapitres, poser les ouvertures et marquer les rubriques. Il manquait la déclaration de la variante, pas une recette.",
+      "assembly_id": "math:manual:TSPE_2026_2027:remediation",
+      "assembly_declared": true
+    },
+    {
+      "deliverable_id": "TNSI::banque_ecrite",
+      "historical_master_found": false,
+      "historical_generator_found": false,
+      "canonical_source_set": null,
+      "assembly_decision": "NEW_ASSEMBLY_REQUIRED",
+      "rationale": "L'assembleur NSI prévoit déjà un répertoire `ece` dans ses ordres `eleve` et `professeur`, mais aucun chapitre TNSI n'en possède : le créneau est déclaré, le contenu n'existe pas. Ce n'est donc pas un assemblage manquant mais du contenu manquant.",
+      "assembly_id": "nsi:manual:TNSI:banque_ecrite",
+      "assembly_declared": false
+    },
+    {
+      "deliverable_id": "TNSI::banque_pratique",
+      "historical_master_found": false,
+      "historical_generator_found": false,
+      "canonical_source_set": null,
+      "assembly_decision": "NEW_ASSEMBLY_REQUIRED",
+      "rationale": "Même constat que la banque écrite. Une banque pratique exige en outre un environnement d'exécution, des jeux de données, des cas de test et des corrigés exécutables : elle ne peut pas être dérivée des chapitres existants.",
+      "assembly_id": "nsi:manual:TNSI:banque_pratique",
+      "assembly_declared": false
+    }
+  ]
+}

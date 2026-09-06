@@ -142,6 +142,46 @@ RUBRIQUES_COURS = {
 }
 
 ELEVE_EXCLUDES = {"corriges"}
+
+
+# Livrets auxiliaires requis par le contrat de mission. Ce ne sont pas des
+# extraits bruts : chaque livret rejoue la boucle de chapitres du manuel, donc
+# il conserve les ouvertures de chapitre, l'ordre canonique et les marques de
+# rubrique. Seule la sélection des rubriques change.
+#
+# Les trois constantes suivantes forment le contrat que `inventory_assembly`
+# vérifie : VARIANT_ORDERS couvre exactement VARIANTS, et ELEVE_VARIANTS en est
+# un sous-ensemble contenant `eleve`. C'est celui de l'assembleur NSI, qui
+# produit déjà ses livrets méthodes et remédiation — deux moteurs pour un même
+# besoin auraient divergé.
+VARIANTS = [
+    "professeur",
+    "eleve",
+    "methodes",
+    "remediation",
+]
+
+# `professeur` et `eleve` reprennent ORDER à l'identique : la sélection de ces
+# deux variantes ne change pas. Seules s'ajoutent les deux rubriques autonomes.
+VARIANT_ORDERS = {
+    "professeur": [
+        ("cours", "00_ouverture"), ("cours", "01_diagnostic"), ("cours", "02_activites"),
+        ("cours", "1*"), ("methodes", "*"), ("exercices", "*"),
+        ("cours", "07_td*"), ("qcm", "*"), ("evaluations", "*"), ("remediation", "*"),
+        ("corriges", "*"),
+    ],
+    "eleve": [
+        ("cours", "00_ouverture"), ("cours", "01_diagnostic"), ("cours", "02_activites"),
+        ("cours", "1*"), ("methodes", "*"), ("exercices", "*"),
+        ("cours", "07_td*"), ("qcm", "*"), ("evaluations", "*"), ("remediation", "*"),
+        ("corriges", "*"),
+    ],
+    "methodes": [("methodes", "*")],
+    "remediation": [("remediation", "*")],
+}
+
+# Livrets destinés aux élèves : ils ne portent jamais de corrigé.
+ELEVE_VARIANTS = ["eleve", "methodes", "remediation"]
 ELEVE_ALLOWED_TYPES = {
     "algorithme",
     "cours",
@@ -926,6 +966,8 @@ def rubrique_libelle(path: Path) -> str:
 
 
 def collect_chapter(chap_dir: Path, variant: str) -> list[Path]:
+    if variant in VARIANT_ORDERS:
+        return _collect_auxiliary_chapter(chap_dir, variant)
     if variant not in {"eleve", "professeur"}:
         raise AssemblyError("variante inconnue")
     files = []
@@ -952,6 +994,24 @@ def collect_chapter(chap_dir: Path, variant: str) -> list[Path]:
             seen.add(f)
             out.append(f)
     return out
+
+
+def _collect_auxiliary_chapter(chap_dir: Path, variant: str) -> list[Path]:
+    """Objets d'un chapitre retenus pour un livret auxiliaire.
+
+    On dédoublonne et on conserve l'ordre de fichier : un livret de méthodes
+    doit se lire dans la progression du manuel, pas dans un ordre arbitraire.
+    """
+    files: list[Path] = []
+    seen: set[Path] = set()
+    for sub, pattern in VARIANT_ORDERS[variant]:
+        suffix = ".tex" if not pattern.endswith("*") else "*.tex"
+        for path in sorted((chap_dir / sub).glob(pattern.rstrip("*") + suffix)):
+            if path in seen:
+                continue
+            seen.add(path)
+            files.append(path)
+    return files
 
 
 def ouverture_depuis_contrat(chap_dir: Path) -> str:
@@ -1026,8 +1086,12 @@ def render_master(
             print(f"SKIP {chap} (directory not found)")
             continue
 
-        opening = ouverture_depuis_contrat(chap_dir)
         files = collect_chapter(chap_dir, variant)
+        if variant in VARIANT_ORDERS and not files:
+            # Un chapitre sans objet de la rubrique ne doit pas laisser une
+            # ouverture orpheline dans le livret.
+            continue
+        opening = ouverture_depuis_contrat(chap_dir)
         assembled_objects.extend(files)
         # La marque de rubrique est posee au premier objet de chaque rubrique
         # et tient jusqu'au changement suivant : c'est elle que la page relit
@@ -1667,7 +1731,10 @@ def build_argument_parser() -> argparse.ArgumentParser:
     ap.add_argument(
         "--variant",
         default="professeur",
-        choices=["professeur", "eleve"],
+        # Littéral et non `VARIANTS` : le contrat d'assemblage interdit toute
+        # autre référence à cette constante, pour qu'une seule ligne du fichier
+        # puisse en changer la valeur.
+        choices=["professeur", "eleve", "methodes", "remediation"],
     )
     ap.add_argument(
         "--manual",

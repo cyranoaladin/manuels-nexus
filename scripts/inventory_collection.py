@@ -3013,8 +3013,16 @@ def _load_observed_build_manifest(
             is _STALE_MANIFEST_INVALIDATION_CAPABILITY
             and bool(builds)
         )
+        # Un manifeste SANS aucun reçu ne décrit aucun build : il ne peut donc
+        # pas être « périmé » vis-à-vis de sources qu'il n'a jamais décrites.
+        # Exiger l'égalité des digests sur une enveloppe vide obligeait à la
+        # rafraîchir après chaque écriture de contenu — un churn pur, qui
+        # donnait de surcroît l'illusion qu'un manifeste courant existait.
+        # L'état est explicite : NO_CURRENT_BUILD_RECEIPTS.
+        empty_envelope = not builds
         tolerate_digest_mismatch = (
-            may_refresh_empty
+            empty_envelope
+            or may_refresh_empty
             or may_rebind_empty_branch
             or may_invalidate_stale
         )
@@ -3030,7 +3038,8 @@ def _load_observed_build_manifest(
             raise InventoryError("model_digest du manifeste de build incohérent")
 
         ignore_manifest_dirty = (
-            may_refresh_empty
+            empty_envelope
+            or may_refresh_empty
             or may_rebind_empty_branch
             or may_invalidate_stale
         )
@@ -3044,7 +3053,10 @@ def _load_observed_build_manifest(
         provenance = payload.get("provenance")
         if not isinstance(provenance, Mapping):
             raise InventoryError("provenance du manifeste invalide")
-        if dirty:
+        if dirty and not empty_envelope:
+            # Un arbre sale invaliderait la provenance d'un reçu de build. Une
+            # enveloppe vide n'en porte aucun : pendant une phase de contenu,
+            # exiger un arbre propre pour lire « aucun build » n'apporte rien.
             raise InventoryError("dépôt Git sale pour le manifeste observé")
         # PROVENANCE_BINDING_VERSION 2 : le nom de branche n'est plus une
         # autorite de contenu. En v1 un simple renommage de branche invalidait

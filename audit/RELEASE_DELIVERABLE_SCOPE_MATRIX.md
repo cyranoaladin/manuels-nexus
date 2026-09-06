@@ -7,36 +7,36 @@ MISSION_PRIORITAIRE §8..§11 est cité par DELIVERABLE_SPECS mais aucun documen
 - `REQUIRED_AUXILIARY_PRODUCTS` : `12`
 - `OPTIONAL_DELIVERABLES` : `4`
 - `UNKNOWN_DELIVERABLE_REQUIREMENT_ORIGIN` : `0`
-- `REQUIRED_DELIVERABLES_WITHOUT_ASSEMBLY` : `6`
-- `REQUIRED_DELIVERABLES_WITHOUT_BUILD` : `12`
+- `REQUIRED_DELIVERABLES_WITHOUT_ASSEMBLY` : `2`
+- `REQUIRED_DELIVERABLES_WITHOUT_BUILD` : `24`
 
 | Livrable | Statut d'exigence | Canonique | Auxiliaire requis | Assemblé | Construit |
 |---|---|---|---|---|---|
 | `1NSI::evaluations` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | oui | **non** |
 | `1NSI::livret_methodes` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | oui | **non** |
-| `1NSI::manuel_eleve` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | oui |
-| `1NSI::manuel_professeur` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | oui |
+| `1NSI::manuel_eleve` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | **non** |
+| `1NSI::manuel_professeur` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | **non** |
 | `1NSI::projets` | `PROPOSED_NOT_APPROVED` | — | — | oui | **non** |
 | `1NSI::remediations` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | oui | **non** |
 | `1NSI::version_amenagee` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | oui | **non** |
 | `1SPE::banque_evaluations` | `PROPOSED_NOT_APPROVED` | — | — | **non** | **non** |
-| `1SPE::livret_methodes` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | **non** | **non** |
-| `1SPE::livret_remediation` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | **non** | **non** |
-| `1SPE::manuel_eleve` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | oui |
-| `1SPE::manuel_professeur` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | oui |
-| `TCOMPL::manuel_eleve` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | oui |
-| `TCOMPL::manuel_professeur` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | oui |
-| `TEXPERTES::manuel_eleve` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | oui |
-| `TEXPERTES::manuel_professeur` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | oui |
+| `1SPE::livret_methodes` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | oui | **non** |
+| `1SPE::livret_remediation` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | oui | **non** |
+| `1SPE::manuel_eleve` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | **non** |
+| `1SPE::manuel_professeur` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | **non** |
+| `TCOMPL::manuel_eleve` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | **non** |
+| `TCOMPL::manuel_professeur` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | **non** |
+| `TEXPERTES::manuel_eleve` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | **non** |
+| `TEXPERTES::manuel_professeur` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | **non** |
 | `TNSI::banque_ecrite` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | **non** | **non** |
 | `TNSI::banque_pratique` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | **non** | **non** |
-| `TNSI::manuel_eleve` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | oui |
-| `TNSI::manuel_professeur` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | oui |
+| `TNSI::manuel_eleve` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | **non** |
+| `TNSI::manuel_professeur` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | **non** |
 | `TNSI::projets` | `PROPOSED_NOT_APPROVED` | — | — | oui | **non** |
 | `TNSI::remediations` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | oui | **non** |
 | `TNSI::version_amenagee` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | oui | **non** |
 | `TSPE_2026_2027::banque_evaluations` | `PROPOSED_NOT_APPROVED` | — | — | **non** | **non** |
-| `TSPE_2026_2027::livret_methodes` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | **non** | **non** |
-| `TSPE_2026_2027::livret_remediation` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | **non** | **non** |
-| `TSPE_2026_2027::manuel_eleve` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | oui |
-| `TSPE_2026_2027::manuel_professeur` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | oui |
+| `TSPE_2026_2027::livret_methodes` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | oui | **non** |
+| `TSPE_2026_2027::livret_remediation` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | oui | **non** |
+| `TSPE_2026_2027::manuel_eleve` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | **non** |
+| `TSPE_2026_2027::manuel_professeur` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | **non** |

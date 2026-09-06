@@ -160,8 +160,8 @@
 ### Mathématiques Première
 - Éligible publication: False
 - banque_evaluations : absent (artifacts=0)
-- livret_methodes : partial (artifacts=0)
-- livret_remediation : partial (artifacts=0)
+- livret_methodes : declared (artifacts=0)
+- livret_remediation : declared (artifacts=0)
 - manuel_eleve : compiled (artifacts=1)
 - manuel_professeur : compiled (artifacts=1)
 
@@ -188,7 +188,7 @@
 ### Mathématiques Terminale
 - Éligible publication: False
 - banque_evaluations : absent (artifacts=0)
-- livret_methodes : partial (artifacts=0)
-- livret_remediation : partial (artifacts=0)
+- livret_methodes : declared (artifacts=0)
+- livret_remediation : declared (artifacts=0)
 - manuel_eleve : compiled (artifacts=1)
 - manuel_professeur : compiled (artifacts=1)
