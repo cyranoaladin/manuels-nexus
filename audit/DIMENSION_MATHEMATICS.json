@@ -5,8 +5,8 @@
   "scope": "objets porteurs d'une assertion mathématique mécaniquement vérifiable (blocs % VERIFY SymPy) dans les manuels de mathématiques et NSI",
   "producer": "scripts/build_dimension_mathematics.py",
   "producer_version": "1.0.0",
-  "status": "passed",
-  "evidence_head": "2761ffc435e794ef3644a441716eb02b9265b0cb",
+  "status": "failed",
+  "evidence_head": "620c414534de62d32c38c89de2ba66df3055c772",
   "input_digest": "sha256:d885ab179d9c3652116d2c0c63aa7420089cbcaa86c1ba4f72fa4d1fd8f6fe8b",
   "input_paths": [
     "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex",
@@ -6906,9 +6906,12 @@
   },
   "not_applicable_targets": {
     "objects_without_verifiable_assertion": "578",
-    "semantics": "NOT_APPLICABLE n'est pas PASS : ces objets ne portent aucune assertion mécaniquement vérifiable et relèvent de la revue humaine"
+    "semantics": "NOT_APPLICABLE n'est pas PASS : ces objets ne portent aucune assertion mécaniquement vérifiable et relèvent d'une autre preuve",
+    "MATHEMATICAL_NON_FORMALIZABLE": "399",
+    "MISSING_ORACLE": "91",
+    "TRULY_NOT_MATHEMATICAL": "88"
   },
-  "blocking_findings": 0,
+  "blocking_findings": 1,
   "findings": [
     {
       "target": "1SPE-DERLOCAL-EX-006",
@@ -7041,6 +7044,12 @@
       "code": "EMPTY_VERIFY_BLOCK",
       "detail": "bloc % VERIFY présent mais sans assertion exécutable",
       "blocking": false
+    },
+    {
+      "target": "ALL",
+      "code": "MATHEMATICAL_CONTENT_WITHOUT_ORACLE",
+      "detail": "91 objet(s) mathématiques d'un type qui pourrait porter un bloc % BEGIN-VERIFY n'en portent pas : leur exactitude n'est pas mécaniquement établie. Un objet qu'on *pourrait* vérifier et qu'on ne vérifie pas n'est pas hors champ : la dimension ne peut donc pas passer.",
+      "blocking": true
     }
   ],
   "summary": {
@@ -7048,6 +7057,12 @@
     "ASSERTIONS_EXECUTED": 12898,
     "MATHEMATICAL_ASSERTION_FAILURES": 0,
     "EMPTY_VERIFY_BLOCKS": 22,
-    "OBJECTS_NOT_APPLICABLE": 578
+    "OBJECTS_NOT_APPLICABLE": 578,
+    "NOT_APPLICABLE_PARTITION": {
+      "MATHEMATICAL_NON_FORMALIZABLE": 399,
+      "MISSING_ORACLE": 91,
+      "TRULY_NOT_MATHEMATICAL": 88
+    },
+    "MATHEMATICS_UNKNOWN": 0
   }
 }

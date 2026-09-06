@@ -220,3 +220,37 @@ def test_regulation_distinguishes_local_aliases_from_out_of_programme() -> None:
         assert regulation.LOCAL_ALIAS.match(alias), alias
     for real in ("T-ALGO-01D", "INVENTED-CODE-42"):
         assert not regulation.LOCAL_ALIAS.match(real), real
+
+
+# --- Partition des objets hors portée (§24) ----------------------------------
+
+def test_mathematics_partitions_every_not_applicable_object() -> None:
+    """`N/A` ne doit pas être un fourre-tout : chaque objet reçoit une raison."""
+    import build_dimension_mathematics as maths
+
+    payload = json.loads((ROOT / "audit/DIMENSION_MATHEMATICS.json").read_text(encoding="utf-8"))
+    summary = payload["summary"]
+    partition = summary["NOT_APPLICABLE_PARTITION"]
+    assert sum(partition.values()) == summary["OBJECTS_NOT_APPLICABLE"]
+    assert summary["MATHEMATICS_UNKNOWN"] == 0
+    assert set(partition) <= {
+        "TRULY_NOT_MATHEMATICAL",
+        "MATHEMATICAL_NON_FORMALIZABLE",
+        "MISSING_ORACLE",
+        "UNKNOWN",
+    }
+
+
+def test_verifiable_but_unverified_content_blocks_the_dimension() -> None:
+    """Un objet qu'on pourrait vérifier et qu'on ne vérifie pas n'est pas N/A."""
+    import build_dimension_mathematics as maths
+
+    assert maths.classify_not_applicable("1SPE", "cours", "$x^2$") == "MISSING_ORACLE"
+    assert maths.classify_not_applicable("1SPE", "coup_de_pouce", "$x^2$") == (
+        "MATHEMATICAL_NON_FORMALIZABLE"
+    )
+    assert maths.classify_not_applicable("TNSI", "cours", "du texte") == "TRULY_NOT_MATHEMATICAL"
+
+    payload = json.loads((ROOT / "audit/DIMENSION_MATHEMATICS.json").read_text(encoding="utf-8"))
+    if payload["summary"]["NOT_APPLICABLE_PARTITION"].get("MISSING_ORACLE"):
+        assert payload["status"] == "failed"

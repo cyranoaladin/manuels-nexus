@@ -40,6 +40,39 @@ ASSERT_LINE = re.compile(r"^\s*assert\b")
 
 MATHS_MANUALS = frozenset({"1SPE", "TSPE_2026_2027", "TCOMPL", "TEXPERTES"})
 
+#: Notation mathématique dans le corps imprimé.
+MATH_NOTATION = re.compile(r"\$|\\dfrac|\\frac|\\sqrt|\\int|\\sum|\\lim|\\vec|\\begin\{align")
+
+#: Types d'objets dont l'attendu est un accompagnement ou un jugement, pas une
+#: assertion calculable : un coup de pouce reformule une étape, une méthode
+#: décrit une démarche, un QCM est prouvé par la chaîne d'oracle QCM dédiée.
+NON_FORMALIZABLE_TYPES = frozenset({
+    "coup_de_pouce", "methode", "qcm", "qcm_diagnostics", "projet",
+    "experimentation", "remediation", "amenagee", "algorithme",
+})
+
+#: Types dont un objet mathématique *pourrait* porter un bloc de vérification.
+ORACLE_CAPABLE_TYPES = frozenset({
+    "cours", "exercice", "corrige", "evaluation", "corrige_evaluation",
+})
+
+
+def classify_not_applicable(manual: str, type_objet: str | None, body: str) -> str:
+    """Pourquoi cet objet ne porte pas d'assertion vérifiable.
+
+    `NOT_APPLICABLE` ne doit pas servir de fourre-tout : un contenu
+    mathématique sans oracle n'est pas hors sujet, il est simplement non
+    outillé, et cela doit se voir.
+    """
+    mathematical = manual in MATHS_MANUALS or bool(MATH_NOTATION.search(body))
+    if not mathematical:
+        return "TRULY_NOT_MATHEMATICAL"
+    if type_objet in NON_FORMALIZABLE_TYPES:
+        return "MATHEMATICAL_NON_FORMALIZABLE"
+    if type_objet in ORACLE_CAPABLE_TYPES:
+        return "MISSING_ORACLE"
+    return "UNKNOWN"
+
 
 def extract_program(block_body: str) -> list[str]:
     """Le programme Python que les auteurs ont écrit derrière les `%`."""
@@ -94,6 +127,9 @@ def build() -> dict[str, Any]:
         input_digest="",
     )
 
+    from collections import Counter
+
+    na_partition: Counter = Counter()
     inputs: list[Path] = [ROOT / "audit/INVENTAIRE_COLLECTION.json"]
     examined: list[str] = []
     assertions_run = 0
@@ -110,6 +146,13 @@ def build() -> dict[str, Any]:
                 block = VERIFY_BLOCK.search(text)
                 if not block:
                     not_applicable += 1
+                    lines_of_body = text.splitlines()[1:]
+                    meta = json.loads(text.split("\n", 1)[0][len("% META:"):]) if text.startswith("% META:") else {}
+                    na_partition[
+                        classify_not_applicable(
+                            manual, meta.get("type_objet"), "\n".join(lines_of_body)
+                        )
+                    ] += 1
                     continue
                 inputs.append(path)
                 objects_with_verify += 1
@@ -136,9 +179,26 @@ def build() -> dict[str, Any]:
         "objects_without_verifiable_assertion": str(not_applicable),
         "semantics": (
             "NOT_APPLICABLE n'est pas PASS : ces objets ne portent aucune assertion "
-            "mécaniquement vérifiable et relèvent de la revue humaine"
+            "mécaniquement vérifiable et relèvent d'une autre preuve"
         ),
+        **{key: str(value) for key, value in sorted(na_partition.items())},
     }
+    if na_partition.get("UNKNOWN"):
+        evidence.findings.append(cd.Finding(
+            target="ALL", code="MATHEMATICS_UNKNOWN_CLASSIFICATION",
+            detail=f"{na_partition['UNKNOWN']} objet(s) non classés",
+        ))
+    if na_partition.get("MISSING_ORACLE"):
+        evidence.findings.append(cd.Finding(
+            target="ALL", code="MATHEMATICAL_CONTENT_WITHOUT_ORACLE",
+            detail=(
+                f"{na_partition['MISSING_ORACLE']} objet(s) mathématiques d'un type "
+                "qui pourrait porter un bloc % BEGIN-VERIFY n'en portent pas : leur "
+                "exactitude n'est pas mécaniquement établie. Un objet qu'on "
+                "*pourrait* vérifier et qu'on ne vérifie pas n'est pas hors "
+                "champ : la dimension ne peut donc pas passer."
+            ),
+        ))
     evidence.coverage = {
         "targets_examined": examined,
         "objects_with_verify_block": objects_with_verify,
@@ -158,6 +218,8 @@ def build() -> dict[str, Any]:
             1 for f in evidence.findings if f.code == "EMPTY_VERIFY_BLOCK"
         ),
         "OBJECTS_NOT_APPLICABLE": not_applicable,
+        "NOT_APPLICABLE_PARTITION": dict(sorted(na_partition.items())),
+        "MATHEMATICS_UNKNOWN": na_partition.get("UNKNOWN", 0),
     }
     OUTPUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return payload
