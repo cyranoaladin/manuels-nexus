@@ -1,0 +1,152 @@
+{
+  "artifact_type": "auxiliary_rubric_applicability",
+  "schema_version": 1,
+  "generated_by": "scripts/build_auxiliary_rubric_applicability.py",
+  "summary": {
+    "CHAPTERS_WITHOUT_RUBRIC_OBJECT": 9,
+    "REAL_CONTENT_GAP": 7,
+    "NOT_PEDAGOGICALLY_REQUIRED": 1,
+    "COVERED_BY_ANOTHER_OBJECT": 1,
+    "UNJUSTIFIED_ABSENCES_ARE_GAPS": true
+  },
+  "chapters": [
+    {
+      "manual": "1NSI",
+      "rubric": "methodes",
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "chapter_object_types": {
+        "corrige": 6,
+        "cours": 3,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 5,
+        "qcm": 1,
+        "remediation": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
+    },
+    {
+      "manual": "1NSI",
+      "rubric": "methodes",
+      "chapter": "1NSI-LANGAGE",
+      "chapter_object_types": {
+        "corrige": 6,
+        "cours": 5,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 5,
+        "qcm": 1,
+        "remediation": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
+    },
+    {
+      "manual": "1NSI",
+      "rubric": "methodes",
+      "chapter": "1NSI-PROJET-METHODES",
+      "chapter_object_types": {
+        "corrige": 6,
+        "cours": 4,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 5,
+        "qcm": 1,
+        "remediation": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
+    },
+    {
+      "manual": "1NSI",
+      "rubric": "methodes",
+      "chapter": "1NSI-RESEAUX",
+      "chapter_object_types": {
+        "corrige": 6,
+        "cours": 3,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 5,
+        "qcm": 1,
+        "remediation": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
+    },
+    {
+      "manual": "1NSI",
+      "rubric": "methodes",
+      "chapter": "1NSI-TABLES",
+      "chapter_object_types": {
+        "corrige": 6,
+        "cours": 4,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 5,
+        "qcm": 1,
+        "remediation": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
+    },
+    {
+      "manual": "1NSI",
+      "rubric": "methodes",
+      "chapter": "1NSI-TYPES-BASE",
+      "chapter_object_types": {
+        "corrige": 6,
+        "cours": 5,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 5,
+        "qcm": 1,
+        "remediation": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
+    },
+    {
+      "manual": "1NSI",
+      "rubric": "methodes",
+      "chapter": "1NSI-WEB-IHM",
+      "chapter_object_types": {
+        "corrige": 6,
+        "cours": 3,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 5,
+        "qcm": 1,
+        "remediation": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
+    },
+    {
+      "manual": "TNSI",
+      "rubric": "remediation",
+      "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
+      "chapter_object_types": {
+        "corrige": 2,
+        "cours": 2,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 2,
+        "qcm": 1
+      },
+      "verdict": "COVERED_BY_ANOTHER_OBJECT",
+      "evidence": "Chapitre de culture : deux cours, deux exercices, aucune procédure à automatiser. Les erreurs visées sont des confusions de repères historiques, que les diagnostics du QCM du chapitre traitent déjà option par option."
+    },
+    {
+      "manual": "TNSI",
+      "rubric": "remediation",
+      "chapter": "TNSI-PROJET",
+      "chapter_object_types": {
+        "projet": 1,
+        "qcm": 1
+      },
+      "verdict": "NOT_PEDAGOGICALLY_REQUIRED",
+      "evidence": "Le chapitre ne porte ni cours ni exercice : il porte le projet annuel. La remédiation d'un projet passe par ses jalons et sa grille critériée, qui existent et sont vérifiés par le gate d'évaluation. Une fiche de remédiation y serait sans objet."
+    }
+  ]
+}

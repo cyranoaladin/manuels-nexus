@@ -29,6 +29,9 @@ import argparse
 import json
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import build_auxiliary_rubric_applicability as applicability  # noqa: E402
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -134,6 +137,11 @@ def content_coverage(inventory: dict[str, Any], assembly_id: str | None,
     n'est pas le livret de ce manuel.
     """
     chapters = set(inventory["manuals"].get(manual, {}).get("chapters", {}))
+    # Un chapitre où la rubrique n'est pas pédagogiquement attendue ne compte
+    # pas dans le dénominateur : exiger 10/10 partout produirait du remplissage.
+    rubric = (assembly_id or "").rsplit(":", 1)[-1]
+    if rubric in {"methodes", "remediation"}:
+        chapters = applicability.applicable_chapters(manual, rubric, chapters)
     assemblies = {a["assembly_id"]: a for a in inventory.get("declared_assemblies", [])}
     assembly = assemblies.get(assembly_id or "")
     if assembly is None:
