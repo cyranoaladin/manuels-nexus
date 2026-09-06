@@ -8,12 +8,52 @@
   },
   "findings": [],
   "generated_by": "scripts/build_open_findings.py",
-  "schema_version": "1.0.0",
+  "registered_producers": [
+    {
+      "artifact": "audit/CLONE_DISPOSITION_LEDGER.json",
+      "findings_count": 0,
+      "namespace": "clones",
+      "status": "ACTIVE"
+    },
+    {
+      "artifact": "audit/EX_CO_SEMANTIC_BINDING.json",
+      "findings_count": 0,
+      "namespace": "drift",
+      "status": "ACTIVE"
+    },
+    {
+      "artifact": "audit/FALSE_COVERAGE_TRIAGE.json",
+      "findings_count": 0,
+      "namespace": "coverage",
+      "status": "ACTIVE"
+    },
+    {
+      "artifact": "audit/PREFILLER_LINEAGE.json",
+      "findings_count": 0,
+      "namespace": "lineage",
+      "status": "ACTIVE"
+    },
+    {
+      "artifact": "audit/1SPE_RELEASE_BLOCKER_LEDGER.json",
+      "findings_count": 0,
+      "namespace": "release_blockers",
+      "status": "ACTIVE"
+    },
+    {
+      "artifact": "audit/1SPE_ASSESSMENT_BAREME_TRANSCRIPTION.json",
+      "findings_count": 0,
+      "namespace": "baremes",
+      "status": "ACTIVE"
+    }
+  ],
+  "schema_version": "2.0.0",
   "summary": {
     "BY_KIND": {},
     "COVERAGE_SOURCE_NOT_REGISTERED": 0,
+    "CURRENT_FINDING_SOURCE_CONFLICTS": 0,
     "DUPLICATE_FINDING_IDS": 0,
     "MISSING_EVIDENCE": 0,
+    "REGISTERED_PRODUCERS_TOTAL": 6,
     "STUDENT_TEACHER_STATEMENT_DRIFT": 0,
     "TOTAL_P0_OPEN": 0,
     "TOTAL_P1_OPEN": 0,
