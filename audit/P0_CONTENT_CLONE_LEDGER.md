@@ -8,9 +8,9 @@ C7 : produit scalaire ». Un élève en échec sur `C1` recevait la fiche `C7`.
 
 ## Mesure
 
-- objets analysés : `5384`
-- groupes de corps identiques : `260`
-- objets excédentaires : `1368`
+- objets analysés : `4029`
+- groupes de corps identiques : `6`
+- objets excédentaires : `14`
 - objets à crédit invalide : `0`
 - UNKNOWN : `0`
 
@@ -18,9 +18,7 @@ C7 : produit scalaire ». Un élève en échec sur `C1` recevait la fiche `C7`.
 
 | Disposition | Groupes | Objets excédentaires |
 |---|---:|---:|
-| `CAPACITY_MISREPRESENTING_CLONE` | 250 | 1337 |
-| `CROSS_MANUAL_CONTAMINATION` | 2 | 13 |
-| `REDUNDANT_SAME_CAPACITY` | 8 | 18 |
+| `REDUNDANT_SAME_CAPACITY` | 6 | 14 |
 
 ## Par manuel
 

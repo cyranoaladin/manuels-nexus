@@ -2,16 +2,15 @@
   "artifact_name": "1NSI_STATUS_GOVERNANCE_PENDING",
   "created": "2026-08-19",
   "status": "PENDING_HUMAN_REVIEW",
-  "reason": "La transition de statuts 1NSI a été figée (339 objets, a2013a12) AVANT la complétion des META (A4.1) qui a rendu visibles ~603 objets hérités portant le statut de génération 'approved' — statut INTERDIT par la politique scellée, qu'aucune promotion machine ne peut ni bénir ni rétrograder en masse (décision humaine requise). La reconstruction couplee du 2026-08-31 supprime ou supersede 93 objets et laisse 851 objets. Ses 36 objets nouveaux ou reecrits sont declares needs_review, jamais approuves ; ils portent la dette humaine de audit/NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT.json. Les trois cours APT verified n'ont plus de lacune de preuve : leurs recus d'execution portaient deja l'identite APT, seule la META des .tex etait restee sur l'ancienne identite AGT et rompait la liaison (a08f7ed0). La liaison est retablie sans qu'aucun statut soit promu, et scripts/verify_python.py --check rejoue les deux chapitres au vert. Ce registre fige l'etat EXACT ; toute derive supplementaire echoue. Ré-observation du 2026-09-01 : le commit 2d522877 ([1NSI] retirer 44 cours qui dupliquaient ou usurpaient un autre objet) a retiré 44 objets suivis sous NSI/chapitres ; les compteurs et condensats observés sont recalculés par scripts/build_1nsi_pending_state_reobservation.py. L'attente n'est pas levée.",
+  "reason": "La transition de statuts 1NSI a été figée (339 objets, a2013a12) AVANT la complétion des META (A4.1) qui a rendu visibles ~603 objets hérités portant le statut de génération 'approved' — statut INTERDIT par la politique scellée, qu'aucune promotion machine ne peut ni bénir ni rétrograder en masse (décision humaine requise). La reconstruction couplee du 2026-08-31 supprime ou supersede 93 objets et laisse 851 objets. Ses 36 objets nouveaux ou reecrits sont declares needs_review, jamais approuves ; ils portent la dette humaine de audit/NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT.json. Les trois cours APT verified n'ont plus de lacune de preuve : leurs recus d'execution portaient deja l'identite APT, seule la META des .tex etait restee sur l'ancienne identite AGT et rompait la liaison (a08f7ed0). La liaison est retablie sans qu'aucun statut soit promu, et scripts/verify_python.py --check rejoue les deux chapitres au vert. Ce registre fige l'etat EXACT ; toute derive supplementaire echoue. Ré-observation du 2026-09-01 : le commit 2d522877 ([1NSI] retirer 44 cours qui dupliquaient ou usurpaient un autre objet) a retiré 44 objets suivis sous NSI/chapitres ; les compteurs et condensats observés sont recalculés par scripts/build_1nsi_pending_state_reobservation.py. L'attente n'est pas levée. Ré-observation du 2026-09-06 : le commit 84baa826 ([1NSI-CANONICAL-RECOVERY] remove 441 synthetic fillers and restore the canonical set) a retiré 441 objets suivis sous NSI/chapitres ; les compteurs et condensats observés sont recalculés par scripts/build_1nsi_pending_state_reobservation.py. L'attente n'est pas levée.",
   "no_go_carrier": "release-strict — les blocking_statuses de l'inventaire portent déjà ces objets",
   "observed_counts": {
     "verified": 149,
     "needs_review": 210,
-    "manual_review": 7,
-    "approved": 441
+    "manual_review": 7
   },
-  "objects_total": 807,
-  "prohibited_status_objects_count": 441,
-  "prohibited_status_objects_digest": "sha256:e54846025a605977292e8f613f36fe5bf73c836e7a11e46daea1323cc50a0eed",
+  "objects_total": 366,
+  "prohibited_status_objects_count": 0,
+  "prohibited_status_objects_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "evidence_gaps": []
 }

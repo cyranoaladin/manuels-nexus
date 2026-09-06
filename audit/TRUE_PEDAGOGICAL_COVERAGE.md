@@ -7,15 +7,15 @@ seize capacités alors qu'une seule, `C7`, était traitée.
 
 - capacités contractuelles : `320`
 - cellules (capacité × rôle) : `2240`
-- cellules avec déclaration exacte (alignement sémantique à établir) : `1481`
-- **unités d'écriture requises** : `329`
+- cellules avec déclaration exacte (alignement sémantique à établir) : `1783`
+- **unités d'écriture requises** : `457`
 
 | Manuel | cours | methodes | exercices | corriges | remediation | qcm | evaluations | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `TNSI` | 2 | 61 | 3 | 22 | 2 | 0 | 23 | **113** |
+| `TNSI` | 2 | 61 | 22 | 22 | 56 | 0 | 23 | **186** |
+| `1NSI` | 0 | 39 | 0 | 0 | 32 | 0 | 11 | **82** |
 | `TCOMPL` | 3 | 3 | 3 | 3 | 43 | 14 | 4 | **73** |
-| `1NSI` | 0 | 39 | 0 | 0 | 0 | 0 | 11 | **50** |
-| `TSPE` | 0 | 18 | 0 | 0 | 2 | 9 | 18 | **47** |
+| `TSPE` | 0 | 18 | 0 | 0 | 25 | 9 | 18 | **70** |
 | `TEXPERTES` | 0 | 0 | 0 | 0 | 23 | 14 | 9 | **46** |
 
 Ce backlog se compte en unités d'écriture — un couple (capacité, rôle)
