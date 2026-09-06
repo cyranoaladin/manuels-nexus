@@ -7,7 +7,7 @@
 | ID | Manuel | Matière | Niveau | Édition | Chapitres | Capacités | Exercices | Fichiers contenu | Objets | Variantes compilées |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1NSI | NSI Première | NSI | Premiere | courante | 10 | 53 | 101 | 366 | 366 | manual |
-| 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 53 | 482 | 1441 | 1441 | manual |
+| 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 53 | 484 | 1446 | 1446 | manual |
 | TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 53 | 300 | 775 | 775 | manual |
 | TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 194 | 500 | 500 | manual |
 | TNSI | NSI Terminale | NSI | Terminale | courante | 7 | 61 | 23 | 111 | 111 | manual |
@@ -17,14 +17,26 @@
 
 | Catégorie | Nombre |
 |---|---|
-| blocking_statuses | 205 |
+| blocking_statuses | 2330 |
+| broken_meta_references | 53 |
+| duplicate_capacity_refs | 1 |
+| invalid_capacities | 1 |
+| unclassified_types | 1 |
 
 ### Échantillon déterministe
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
-- blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-LOCAL, scope=contract, status=draft
-- blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/contrat.yaml, manual=1SPE, chapter=1SPE-EXPONENTIELLE, scope=contract, status=complete
-- blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/contrat.yaml, manual=1SPE, chapter=1SPE-GEOMETRIE-REPEREE, scope=contract, status=draft
-- blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/contrat.yaml, manual=1SPE, chapter=1SPE-PROBA-COND, scope=contract, status=draft
+- blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-001, scope=object
+- blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
+- blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-003, scope=object
+- blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-004, scope=object
+- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-010.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-011.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-012.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-023.tex, cible=C4, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-024.tex, cible=C4, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- duplicate_capacity_refs: ref_capacite=1SPE-SECOND-DEGRE-2026-C4, occurrences=[{"chapter": "1SPE-SECOND-DEGRE", "index": 0, "manual": "1SPE", "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml"}, {"chapter": "1SPE-SECOND-DEGRE", "index": 1, "manual": "1SPE", "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml"}, {"chapter": "1SPE-SECOND-DEGRE", "index": 4, "manual": "1SPE", "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml"}, {"chapter": "1SPE-SECOND-DEGRE", "index": 5, "manual": "1SPE", "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml"}]
+- invalid_capacities: path=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml, reason=ref_capacite doit etre un texte non vide, index=3
+- unclassified_types: path=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/16_C7_somme_produit_racines.tex, id=1SPE-SECDEG-CR-016, source_subtype=notion, source_type=cours
 
 ## Réconciliation des rapports
 
@@ -54,7 +66,7 @@
 - Mathematiques/manuel-maths/MISSION_LOG.md | 7 | chapter:1SPE-SUITES | corriges | 49 | 53 | contredit
 - Mathematiques/manuel-maths/MISSION_LOG.md | 7 | chapter:1SPE-SUITES | exercices_principaux | 49 | 51 | contredit
 - Mathematiques/manuel-maths/MISSION_LOG.md | 10 | chapter:1SPE-SUITES | pages_compilees | 82 | None | ouvert
-- Mathematiques/manuel-maths/MISSION_LOG.md | 11 | chapter:1SPE-SECOND-DEGRE | exercices_principaux | 42 | 50 | contredit
+- Mathematiques/manuel-maths/MISSION_LOG.md | 11 | chapter:1SPE-SECOND-DEGRE | exercices_principaux | 42 | 52 | contredit
 - Mathematiques/manuel-maths/MISSION_LOG.md | 17 | chapter:1SPE-SUITES | chapitres | 3 | None | ouvert
 - Mathematiques/manuel-maths/MISSION_LOG.md | 20 | manual:1SPE | tests_passes | 214 | None | ouvert
 - Mathematiques/manuel-maths/MISSION_LOG.md | 23 | chapter:1SPE-DERIVATION-LOCAL | exercices_principaux | 30 | 50 | contredit

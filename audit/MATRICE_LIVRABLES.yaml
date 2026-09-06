@@ -5,7 +5,7 @@ manuals:
   1NSI:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '166'
+      detail: '376'
       source: anomalies.blocking_statuses
     - code: livrable_non_compile
       detail: declared
@@ -23,7 +23,7 @@ manuals:
       detail: declared
       source: deliverable_matrix.1NSI.variants.version_amenagee
     - code: statuts_non_approuves
-      detail: objets=156; contrats=10
+      detail: objets=366; contrats=10
       source: manuals.1NSI.statuses
     current:
       artifacts:
@@ -42,8 +42,8 @@ manuals:
       - 1NSI-TYPES-CONSTRUITS
       - 1NSI-WEB-IHM
       statuses:
-        approved: 210
         manual_review: 7
+        needs_review: 210
         verified: 149
       totals:
         capacites: 53
@@ -130,8 +130,17 @@ manuals:
   1SPE:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '18'
+      detail: '1440'
       source: anomalies.blocking_statuses
+    - code: anomalie:broken_meta_references
+      detail: '53'
+      source: anomalies.broken_meta_references
+    - code: anomalie:invalid_capacities
+      detail: '1'
+      source: anomalies.invalid_capacities
+    - code: anomalie:unclassified_types
+      detail: '1'
+      source: anomalies.unclassified_types
     - code: livrable_non_compile
       detail: absent
       source: deliverable_matrix.1SPE.variants.banque_evaluations
@@ -142,7 +151,7 @@ manuals:
       detail: partial
       source: deliverable_matrix.1SPE.variants.livret_remediation
     - code: statuts_non_approuves
-      detail: objets=8; contrats=10
+      detail: objets=1430; contrats=10
       source: manuals.1SPE.statuses
     current:
       artifacts:
@@ -161,15 +170,17 @@ manuals:
       - 1SPE-TRIGONOMETRIE
       - 1SPE-VARIABLES-ALEATOIRES
       statuses:
-        approved: 1433
+        approved: 16
+        generated: 1413
+        needs_review: 9
         verified: 8
       totals:
         capacites: 53
-        corriges: 502
+        corriges: 504
         coups_de_pouce: 180
         diagnostics: 5
         evaluations: 20
-        exercices_principaux: 482
+        exercices_principaux: 484
         methodes: 59
         projets: 0
         qcm: 10
@@ -191,6 +202,9 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
+    - anomalie:broken_meta_references
+    - anomalie:invalid_capacities
+    - anomalie:unclassified_types
     - statuts_non_approuves
     structural_compile_ready: false
     variants:
@@ -228,10 +242,10 @@ manuals:
   TCOMPL:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '9'
+      detail: '209'
       source: anomalies.blocking_statuses
     - code: statuts_non_approuves
-      detail: objets=0; contrats=9
+      detail: objets=200; contrats=9
       source: manuals.TCOMPL.statuses
     current:
       artifacts:
@@ -249,7 +263,9 @@ manuals:
       - TCOMPL-MODELES-FONCTION
       - TCOMPL-TEMPS-ATTENTE
       statuses:
-        approved: 775
+        approved: 575
+        generated: 150
+        needs_review: 50
       totals:
         capacites: 53
         corriges: 318
@@ -298,10 +314,10 @@ manuals:
   TEXPERTES:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '5'
+      detail: '131'
       source: anomalies.blocking_statuses
     - code: statuts_non_approuves
-      detail: objets=0; contrats=5
+      detail: objets=126; contrats=5
       source: manuals.TEXPERTES.statuses
     current:
       artifacts:
@@ -315,7 +331,9 @@ manuals:
       - TEXP-GRAPHES
       - TEXP-MATRICES-MARKOV
       statuses:
-        approved: 500
+        approved: 374
+        generated: 93
+        needs_review: 33
       totals:
         capacites: 33
         corriges: 204
@@ -364,11 +382,8 @@ manuals:
   TNSI:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '7'
+      detail: '118'
       source: anomalies.blocking_statuses
-    - code: chapitres_manquants
-      detail: 7/12
-      source: manuals.TNSI.chapters
     - code: livrable_non_compile
       detail: absent
       source: deliverable_matrix.TNSI.variants.banque_ecrite
@@ -385,7 +400,7 @@ manuals:
       detail: declared
       source: deliverable_matrix.TNSI.variants.version_amenagee
     - code: statuts_non_approuves
-      detail: objets=0; contrats=7
+      detail: objets=111; contrats=7
       source: manuals.TNSI.statuses
     current:
       artifacts:
@@ -401,7 +416,8 @@ manuals:
       - TNSI-PROJET
       - TNSI-STRUCTURES-DONNEES
       statuses:
-        approved: 111
+        generated: 109
+        needs_review: 2
       totals:
         capacites: 61
         corriges: 35
@@ -417,7 +433,7 @@ manuals:
         td: 0
     objective:
       directive: MISSION_PRIORITAIRE §11
-      target_chapters: 12
+      target_chapters: null
     phase0_structural_eligible: false
     publication_eligible: false
     publication_gate_coverage:
@@ -430,7 +446,6 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
-    - chapitres_manquants
     - statuts_non_approuves
     structural_compile_ready: false
     variants:
@@ -483,6 +498,9 @@ manuals:
         state: declared
   TSPE_2026_2027:
     blockers:
+    - code: anomalie:blocking_statuses
+      detail: '56'
+      source: anomalies.blocking_statuses
     - code: livrable_non_compile
       detail: absent
       source: deliverable_matrix.TSPE_2026_2027.variants.banque_evaluations
@@ -492,6 +510,9 @@ manuals:
     - code: livrable_non_compile
       detail: partial
       source: deliverable_matrix.TSPE_2026_2027.variants.livret_remediation
+    - code: statuts_non_approuves
+      detail: objets=56; contrats=0
+      source: manuals.TSPE_2026_2027.statuses
     current:
       artifacts:
       - Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_eleve.pdf
@@ -510,7 +531,8 @@ manuals:
       - TSPE-SUITES-LIMITES
       - TSPE-TRIGONOMETRIE
       statuses:
-        approved: 836
+        approved: 780
+        generated: 56
       totals:
         capacites: 67
         corriges: 299
@@ -527,7 +549,7 @@ manuals:
     objective:
       directive: MISSION_PRIORITAIRE §10
       target_chapters: 11
-    phase0_structural_eligible: true
+    phase0_structural_eligible: false
     publication_eligible: false
     publication_gate_coverage:
       execution: false
@@ -537,7 +559,9 @@ manuals:
       regulatory: false
       structural: true
       visual: false
-    structural_blockers: []
+    structural_blockers:
+    - anomalie:blocking_statuses
+    - statuts_non_approuves
     structural_compile_ready: false
     variants:
       banque_evaluations:
@@ -571,24 +595,24 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:d59c1385fb5cbec82e8aa7fd9e6d582a54e99f44028162fbb13cf7f63a3dee68
+model_digest: sha256:092866b999b3f3f825663c935bbc76017487df28631426ab47111c2790e48988
 provenance:
   branch: null
   dirty: false
   errors: []
-  generated_at_utc: '2026-09-06T16:58:44Z'
+  generated_at_utc: '2026-09-06T20:56:52Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:79b255deeddfa4b483a9a5a9f568bdc143defd7b2a69e8b8a704f4afdd35d6bf
     scripts/build_manifest.py: sha256:62d4f5da9454aaa2923041db777b759e3e4b672e7c2f33b59a62e07afc76de26
     scripts/inventory_assembly.py: sha256:8a2eeaaa869413ae29c761b1972787f77bc2d0f4baf49aa653b70af98092dd0e
-    scripts/inventory_collection.py: sha256:55068233d3fecd1e2a6ffe91bc46bc9248982ac7db6319ff51700956a5756800
+    scripts/inventory_collection.py: sha256:ae72d335be059a9b3bf2652bbb628abd16e563e3c83410da0c14c11167602305
     scripts/inventory_graph.py: sha256:8589fc6483491413395e8f01afe86cef6b33414906da29e24a9ac070342d4103
     scripts/inventory_pdf.py: sha256:4d87858492b6f00a9eaf48a717a9c2ddfc423cbe533278747cb199ae885d90b8
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:c8ee96855852a4fc54f9c28442c5ed5b9b083c453baae1bacbe527c8f8e61e6b
+  generator_sha256: sha256:9baa99292772770cf183af00ece07d5bbc1e4fe9b036563aef380148e353bac1
   generator_version: 1
   git_available: true
-  head_sha: 44fbb307c24f970247524fb95e8ebfc7cd2c3497
+  head_sha: c4d2fe38a53e905e61c56149160dc2018e717d3c
   modified_tracked: []
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
@@ -600,4 +624,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:89c62904616285229a99299e2dfd20630999dd875f3cb16e11729f8e6471d6a5
+source_digest: sha256:bcf1b1468f3a6595d09edf30cadb409ed858d49ff739a1062b9e75fec891de39

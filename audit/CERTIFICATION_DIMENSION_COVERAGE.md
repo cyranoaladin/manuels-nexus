@@ -4,8 +4,8 @@ Contrat : `docs/superpowers/specs/2026-07-22-phase-0-1-collection-audit-design.m
 
 - Dimensions déclarées : `7`
 - `REQUIRED_DIMENSION_PRODUCERS_MISSING` : `0`
-- `REQUIRED_DIMENSIONS_FAILED` : `7` (structure, pedagogy, regulation, mathematics, execution, visual, print)
-- `REQUIRED_DIMENSIONS_PASSED` : `0` (aucune)
+- `REQUIRED_DIMENSIONS_FAILED` : `6` (structure, pedagogy, mathematics, execution, visual, print)
+- `REQUIRED_DIMENSIONS_PASSED` : `1` (regulation)
 - `ALL_REQUIRED_DIMENSIONS_STATUS` : `FAIL`
 
 Le contrat exige les sept dimensions `passed` pour `publication_eligible`.
@@ -17,7 +17,7 @@ il a raison de refuser — « une dimension non vérifiée reste explicitement
 |---|---|---|
 | `structure` | assignée par `_release_strict_gate` | — |
 | `pedagogy` | assignée par `_release_strict_gate` | — |
-| `regulation` | `scripts/build_dimension_regulation.py` | statut `failed` |
+| `regulation` | `scripts/build_dimension_regulation.py` | statut `passed` |
 | `mathematics` | `scripts/build_dimension_mathematics.py` | statut `failed` |
 | `execution` | assignée par `_release_strict_gate` | — |
 | `visual` | `scripts/build_dimension_visual.py` | statut `failed` |

@@ -6,19 +6,20 @@
   "summary": {
     "DECLARED_DIMENSIONS": 7,
     "REQUIRED_DIMENSION_PRODUCERS_MISSING": 0,
-    "REQUIRED_DIMENSIONS_FAILED": 7,
-    "REQUIRED_DIMENSIONS_PASSED": 0,
+    "REQUIRED_DIMENSIONS_FAILED": 6,
+    "REQUIRED_DIMENSIONS_PASSED": 1,
     "DIMENSIONS_WITHOUT_PRODUCER": [],
     "DIMENSIONS_FAILED": [
       "structure",
       "pedagogy",
-      "regulation",
       "mathematics",
       "execution",
       "visual",
       "print"
     ],
-    "DIMENSIONS_PASSED": [],
+    "DIMENSIONS_PASSED": [
+      "regulation"
+    ],
     "ALL_REQUIRED_DIMENSIONS_STATUS": "FAIL",
     "APPROVES_NOTHING": true
   },
@@ -41,12 +42,12 @@
       "dimension": "regulation",
       "declared_by_contract": "docs/superpowers/specs/2026-07-22-phase-0-1-collection-audit-design.md",
       "assigned_by_gate": false,
-      "dedicated_producer_status": "failed",
+      "dedicated_producer_status": "passed",
       "has_producer": true,
       "evidence_artifact": "audit/DIMENSION_REGULATION.json",
       "evidence_present": true,
-      "evidence_head": "d9d34eff504c1c9321c1cb66e09419f2c201f5b2",
-      "blocking_findings": 4,
+      "evidence_head": "c4d2fe38a53e905e61c56149160dc2018e717d3c",
+      "blocking_findings": 0,
       "producer": "scripts/build_dimension_regulation.py"
     },
     {
@@ -57,7 +58,7 @@
       "has_producer": true,
       "evidence_artifact": "audit/DIMENSION_MATHEMATICS.json",
       "evidence_present": true,
-      "evidence_head": "620c414534de62d32c38c89de2ba66df3055c772",
+      "evidence_head": "c4d2fe38a53e905e61c56149160dc2018e717d3c",
       "blocking_findings": 1,
       "producer": "scripts/build_dimension_mathematics.py"
     },

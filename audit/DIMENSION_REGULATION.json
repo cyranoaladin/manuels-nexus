@@ -5,9 +5,9 @@
   "scope": "les six manuels de la collection, contre leur référentiel de capacités déposé",
   "producer": "scripts/build_dimension_regulation.py",
   "producer_version": "1.0.0",
-  "status": "failed",
-  "evidence_head": "aeac9e692c604b3f27b8b220edd975d14aaf8279",
-  "input_digest": "sha256:5b06d18d019204872354f594b1e3e7af5e695940f38db8a25da5ea37fac593ec",
+  "status": "passed",
+  "evidence_head": "c4d2fe38a53e905e61c56149160dc2018e717d3c",
+  "input_digest": "sha256:47b7aa1af6cafbaf4837e9e720d1add66a780fea34e803e82f464ff5c01c9c06",
   "input_paths": [
     "Mathematiques/manuel-maths/referentiel/capacites_1SPE_DERIVATION_GLOBAL.json",
     "Mathematiques/manuel-maths/referentiel/capacites_1SPE_DERIVATION_LOCAL.json",
@@ -80,8 +80,8 @@
       },
       "1SPE": {
         "official_capacities": 52,
-        "covered": 51,
-        "uncovered": 1,
+        "covered": 52,
+        "uncovered": 0,
         "unlabelled_out_of_programme": 0
       },
       "TCOMPL": {
@@ -111,20 +111,13 @@
     }
   },
   "not_applicable_targets": {},
-  "blocking_findings": 1,
-  "findings": [
-    {
-      "target": "1SPE::1SPE-SECOND-DEGRE-2026-C2",
-      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
-      "detail": "SECOND-DEGRE — ['Fonction polynôme du second degré donnée sous forme factorisée. Racines, signe, expression de la somme et du produit des racines.', 'Forme canonique d’une fonction polynôme du second degré. Discriminant. Factorisation éventuelle. Résolution d’une équation du second degré. Signe.']",
-      "blocking": true
-    }
-  ],
+  "blocking_findings": 0,
+  "findings": [],
   "summary": {
     "AUTHORITY_DIVERGENCES": 0,
     "REGULATORY_SOURCES_WITHOUT_AUTHORITY": 0,
     "REGULATORY_SOURCE_REVERIFY_PENDING": 0,
-    "OFFICIAL_REQUIREMENTS_UNCOVERED": 1,
+    "OFFICIAL_REQUIREMENTS_UNCOVERED": 0,
     "UNLABELLED_OUT_OF_PROGRAMME_CONTENT": 0
   }
 }

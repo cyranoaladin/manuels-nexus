@@ -11,38 +11,38 @@
 ### assembler_invalid (0)
 - Aucune.
 
-### blocking_statuses (205)
+### blocking_statuses (2330)
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
-- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-LOCAL, scope=contract, status=draft
-- path=Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/contrat.yaml, manual=1SPE, chapter=1SPE-EXPONENTIELLE, scope=contract, status=complete
-- path=Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/contrat.yaml, manual=1SPE, chapter=1SPE-GEOMETRIE-REPEREE, scope=contract, status=draft
-- path=Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/contrat.yaml, manual=1SPE, chapter=1SPE-PROBA-COND, scope=contract, status=draft
-- path=Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/cours/15_algorithmique_monte_carlo.tex, manual=1SPE, chapter=1SPE-PROBA-COND, id=1SPE-PROBCOND-ALG-001, scope=object
-- path=Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-040-CDP.tex, manual=1SPE, chapter=1SPE-PROBA-COND, id=1SPE-PROBCOND-EX-040-CDP, scope=object
-- path=Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/contrat.yaml, manual=1SPE, chapter=1SPE-PRODUIT-SCALAIRE, scope=contract, status=complete
-- path=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml, manual=1SPE, chapter=1SPE-SECOND-DEGRE, scope=contract, status=draft
-- path=Mathematiques/manuel-maths/chapitres/1SPE-SUITES/contrat.yaml, manual=1SPE, chapter=1SPE-SUITES, scope=contract, status=draft
-- path=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/contrat.yaml, manual=1SPE, chapter=1SPE-TRIGONOMETRIE, scope=contract, status=complete
-- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/contrat.yaml, manual=1SPE, chapter=1SPE-VARIABLES-ALEATOIRES, scope=contract, status=draft
-- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/15_experimentations.tex, manual=1SPE, chapter=1SPE-VARIABLES-ALEATOIRES, id=1SPE-VARALEA-ALG-001, scope=object
-- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, manual=1SPE, chapter=1SPE-VARIABLES-ALEATOIRES, id=1SPE-VARALEA-ALG-002, scope=object
-- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, manual=1SPE, chapter=1SPE-VARIABLES-ALEATOIRES, id=1SPE-VARALEA-EXP-001, scope=object
-- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, manual=1SPE, chapter=1SPE-VARIABLES-ALEATOIRES, id=1SPE-VARALEA-EXP-002, scope=object
-- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, manual=1SPE, chapter=1SPE-VARIABLES-ALEATOIRES, id=1SPE-VARALEA-EXP-003, scope=object
-- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, manual=1SPE, chapter=1SPE-VARIABLES-ALEATOIRES, id=1SPE-VARALEA-EXP-004, scope=object
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/contrat.yaml, manual=TCOMPL, chapter=TCOMPL-CALCULS-AIRES, scope=contract, status=valide
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/contrat.yaml, manual=TCOMPL, chapter=TCOMPL-CORRELATION-CAUSALITE, scope=contract, status=valide
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/contrat.yaml, manual=TCOMPL, chapter=TCOMPL-ECHANTILLONNAGE, scope=contract, status=valide
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/contrat.yaml, manual=TCOMPL, chapter=TCOMPL-INEGALITES, scope=contract, status=valide
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/contrat.yaml, manual=TCOMPL, chapter=TCOMPL-INFERENCE-BAYESIENNE, scope=contract, status=valide
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/contrat.yaml, manual=TCOMPL, chapter=TCOMPL-LOGARITHME-HISTORIQUE, scope=contract, status=valide
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/contrat.yaml, manual=TCOMPL, chapter=TCOMPL-MODELES-EVOLUTION, scope=contract, status=valide
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/contrat.yaml, manual=TCOMPL, chapter=TCOMPL-MODELES-FONCTION, scope=contract, status=valide
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/contrat.yaml, manual=TCOMPL, chapter=TCOMPL-TEMPS-ATTENTE, scope=contract, status=valide
-- path=Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/contrat.yaml, manual=TEXPERTES, chapter=TEXP-ARITHMETIQUE, scope=contract, status=valide
-- path=Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/contrat.yaml, manual=TEXPERTES, chapter=TEXP-COMPLEXES-ALGEBRE-GEOMETRIE, scope=contract, status=valide
-- path=Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/contrat.yaml, manual=TEXPERTES, chapter=TEXP-COMPLEXES-TRIGO-POLYNOMES, scope=contract, status=valide
-- … 175 autres.
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-001, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-003, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-004, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-005.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-005, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-006.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-006, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-007.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-007, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-008.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-008, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-009.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-009, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-010.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-010, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-011.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-011, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-012.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-012, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-013.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-013, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-014.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-014, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-015.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-015, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-016.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-016, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-017.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-017, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-018.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-018, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-019.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-019, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-020.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-020, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-021.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-021, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-022.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-022, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-023.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-023, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-024.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-024, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-025.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-025, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-026.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-026, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-027.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-027, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-028.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-028, scope=object
+- path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-029.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-029, scope=object
+- … 2300 autres.
 
 ### broken_assembly_references (0)
 - Aucune.
@@ -50,8 +50,38 @@
 ### broken_latex_references (0)
 - Aucune.
 
-### broken_meta_references (0)
-- Aucune.
+### broken_meta_references (53)
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-010.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-011.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-012.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-023.tex, cible=C4, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-024.tex, cible=C4, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-025.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-026.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-031.tex, cible=C4, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-032.tex, cible=C4, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-036.tex, cible=C4, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-038.tex, cible=C4, champ=capacites_codes[2], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-041.tex, cible=C4, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-044.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-102.tex, cible=1SPE-SECOND-DEGRE-2026-C3, champ=capacites[1], raison=capacite META absente du contrat du chapitre
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-102.tex, cible=C4, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/00_ouverture.tex, cible=C4, champ=capacites[3], raison=capacite META absente du contrat du chapitre
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_contextualise.tex, cible=C4, champ=capacites_codes[2], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_fil_rouge.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/13_C4_factorisation_signe.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-A-corrige.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-A.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-B-corrige.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-B.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-010.tex, cible=1SPE-SECOND-DEGRE-C4, champ=capacites[0], raison=capacite META absente du contrat du chapitre
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-010.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-011.tex, cible=1SPE-SECOND-DEGRE-C4, champ=capacites[0], raison=capacite META absente du contrat du chapitre
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-011.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-012.tex, cible=1SPE-SECOND-DEGRE-C4, champ=capacites[0], raison=capacite META absente du contrat du chapitre
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-012.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-023.tex, cible=1SPE-SECOND-DEGRE-C4, champ=capacites[1], raison=capacite META absente du contrat du chapitre
+- … 23 autres.
 
 ### chapters_not_in_manual (0)
 - Aucune.
@@ -68,14 +98,14 @@
 ### duplicate_assembly_objects (0)
 - Aucune.
 
-### duplicate_capacity_refs (0)
-- Aucune.
+### duplicate_capacity_refs (1)
+- ref_capacite=1SPE-SECOND-DEGRE-2026-C4, occurrences=[{"chapter": "1SPE-SECOND-DEGRE", "index": 0, "manual": "1SPE", "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml"}, {"chapter": "1SPE-SECOND-DEGRE", "index": 1, "manual": "1SPE", "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml"}, {"chapter": "1SPE-SECOND-DEGRE", "index": 4, "manual": "1SPE", "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml"}, {"chapter": "1SPE-SECOND-DEGRE", "index": 5, "manual": "1SPE", "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml"}]
 
 ### duplicate_ids (0)
 - Aucune.
 
-### invalid_capacities (0)
-- Aucune.
+### invalid_capacities (1)
+- path=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml, reason=ref_capacite doit etre un texte non vide, index=3
 
 ### invalid_meta_references (0)
 - Aucune.
@@ -110,8 +140,8 @@
 ### unavailable_inspiration_sources (0)
 - Aucune.
 
-### unclassified_types (0)
-- Aucune.
+### unclassified_types (1)
+- path=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/16_C7_somme_produit_racines.tex, id=1SPE-SECDEG-CR-016, source_subtype=notion, source_type=cours
 
 ### unknown_chapter_prefixes (0)
 - Aucune.
