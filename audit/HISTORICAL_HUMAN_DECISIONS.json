@@ -1,0 +1,45 @@
+{
+  "artifact_type": "historical_human_decisions",
+  "schema_version": 1,
+  "generated_by": "scripts/build_historical_human_decision_ledger.py",
+  "summary": {
+    "HISTORICAL_DECISIONS_COUNT": 1,
+    "HISTORICAL_RECEIPT_CAN_AUTHORIZE_CURRENT_RELEASE": false
+  },
+  "decisions": [
+    {
+      "decision_id": "HHD-2026-09-06-001",
+      "reviewer_identity": "abenrhouma",
+      "original_decision": "ACCEPT_FROZEN_RELEASE_CONTENT",
+      "original_decision_status": "APPROVED",
+      "current_status": "HISTORICAL_HUMAN_DECISION",
+      "non_authoritative_reason": "NON_AUTHORITATIVE_FOR_CURRENT_RELEASE_DUE_TO_INVALID_CONTENT_BINDING_AND_POST_ACCEPTANCE_CONTENT_MUTATION",
+      "timestamp": "2026-09-06T17:33:05+01:00",
+      "head_at_acceptance": "2e51a9be56ee704da1389876611c55b1dac76e2c",
+      "declared_digest": {
+        "name": "CONTENT_SOURCE_CLOSURE_DIGEST",
+        "value": "sha256:9b3ccf9a81c5520fbb7e03b7b2d3e7bf2057a02834b6d908bf3be5f49f3b553f"
+      },
+      "receipt_digest": "sha256:4fad86f0282e0fa4e0419cca1ad6379ae7af5a280c04a4a90880f90a1c044242",
+      "design_defect": {
+        "kind": "CIRCULAR_AND_MISNAMED_DIGEST",
+        "detail": "L'empreinte agrégeait neuf artefacts de audit/, dont BLOCKER_TAXONOMY.json qui bascule OPEN -> RESOLVED dès que le reçu existe. Une preuve ne peut pas dépendre de la décision qu'elle authentifie. De plus l'empreinte ne couvrait aucun octet de contenu pédagogique malgré son nom.",
+        "cycle": [
+          "RECEIPT -> BLOCKER_TAXONOMY.json",
+          "BLOCKER_TAXONOMY.json -> CONTENT_SOURCE_CLOSURE_DIGEST",
+          "CONTENT_SOURCE_CLOSURE_DIGEST -> RECEIPT"
+        ]
+      },
+      "post_acceptance_content_mutation": {
+        "object_path": "NSI/chapitres/TNSI-PROJET/projet/TNSI-PROJET-ANNUEL.tex",
+        "introduced_by_commit": "e76064c5",
+        "commit_subject": "[STATUS] apply digest-bound publication maturity transitions",
+        "accepted_body_sha256": "sha256:934581d9a47a6b20ab3f9d9bcc38a08ae364c6a85d52b03d1c92c8d94ecdc102",
+        "post_acceptance_body_sha256": "sha256:934581d9a47a6b20ab3f9d9bcc38a08ae364c6a85d52b03d1c92c8d94ecdc102",
+        "detail": "Ajout d'un bloc \\remarque{} de 10 lignes sur le périmètre d'exigibilité, dans un commit dont le contrat était limité à la maturité."
+      },
+      "supersedes_nothing": true,
+      "retained_for_history": true
+    }
+  ]
+}
