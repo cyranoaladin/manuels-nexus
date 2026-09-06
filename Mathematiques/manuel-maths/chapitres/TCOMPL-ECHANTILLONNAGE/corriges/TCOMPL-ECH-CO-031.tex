@@ -10,6 +10,12 @@
 % f = integrate(fp, x)
 % assert simplify(f - (x**4/2 - 4*x**3 + 9*x**2)) == 0
 % assert solve(fpp, x) == [1, 3]
+% # Q3 : variations et esquisse
+% assert factor(fp) == 2*x*(x - 3)**2
+% assert solve(fp, x) == [0, 3]
+% assert fp.subs(x, -1) < 0 and fp.subs(x, 1) > 0 and fp.subs(x, 4) > 0
+% assert f.subs(x, 0) == 0 and f.subs(x, 1) == Rational(11, 2) and f.subs(x, 3) == Rational(27, 2)
+% assert limit(f, x, oo) == oo and limit(f, x, -oo) == oo
 % END-VERIFY
 \begin{corrige}{TCOMPL-ECH-EX-031}
 
@@ -22,5 +28,20 @@
 \textbf{Question 2.} $f'' > 0$ sur $\left]-\infty, 1\right[ \cup \left]3, +\infty\right[$ (convexe) et $f'' < 0$ sur $\left]1, 3\right[$ (concave).
 
 Points d'inflexion en $x = 1$ et $x = 3$.
+
+\textbf{Question 3.} $f'(x) = 2x^3 - 12x^2 + 18x = 2x(x-3)^2$.
+
+Comme $(x-3)^2 \geq 0$, le signe de $f'$ est celui de $x$ : $f$ est décroissante
+sur $\left]-\infty,0\right]$ et croissante sur $\left[0,+\infty\right[$. Elle admet
+donc un minimum global en $x=0$, avec $f(0)=0$.
+
+En $x=3$, la tangente est horizontale ($f'(3)=0$) mais $f'$ ne change pas de
+signe : ce n'est pas un extremum. C'est le point d'inflexion à tangente
+horizontale, avec $f(3)=\dfrac{27}{2}$.
+
+Pour l'esquisse : $\lim\limits_{x\to\pm\infty} f(x) = +\infty$, la courbe passe par
+l'origine où elle atteint son minimum, s'infléchit en $x=1$ ($f(1)=\frac{11}{2}$),
+présente un palier à tangente horizontale en $x=3$ ($f(3)=\frac{27}{2}$), puis
+croît. Elle est convexe avant $x=1$ et après $x=3$, concave entre les deux.
 
 \end{corrige}

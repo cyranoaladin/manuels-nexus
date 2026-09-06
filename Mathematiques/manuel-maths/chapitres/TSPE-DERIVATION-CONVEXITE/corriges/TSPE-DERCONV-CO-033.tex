@@ -12,6 +12,16 @@
 % assert solve(fp, x)  # 3 racines reelles
 % crit = solve(fp, x)
 % assert len(crit) == 3
+% # Q3 : extremums et esquisse
+% racines = sorted(float(re(v)) for v in crit)
+% assert [round(v, 2) for v in racines] == [-2.53, 0.17, 2.36]
+% assert float(fpp.subs(x, racines[0])) > 0
+% assert float(fpp.subs(x, racines[1])) < 0
+% assert float(fpp.subs(x, racines[2])) > 0
+% assert [round(float(f.subs(x, v)), 2) for v in racines] == [-44.96, 1.33, -25.37]
+% assert simplify(f.subs(x, sqrt(2)) - (-19 + 4*sqrt(2))) == 0
+% assert simplify(f.subs(x, -sqrt(2)) - (-19 - 4*sqrt(2))) == 0
+% assert limit(f, x, oo) == oo and limit(f, x, -oo) == oo
 % END-VERIFY
 \begin{corrige}{TSPE-DERCONV-EX-033}
 
@@ -26,5 +36,22 @@ $f(x) = \int (4t^3 - 24t + 4)\,dt + C_2 = x^4 - 12x^2 + 4x + 1$ (car $f(0) = 1$)
 \textbf{Question 2.} $f'' = 0 \iff x = \pm\sqrt{2}$. Convexe sur $\left]-\infty,-\sqrt2\right] \cup \left[\sqrt2,+\infty\right[$, concave entre.
 
 Points d'inflexion en $x = \pm\sqrt{2}$.
+
+\textbf{Question 3.} $f'(x) = 4x^3 - 24x + 4 = 4(x^3 - 6x + 1)$ s'annule en trois
+réels, qu'on approche numériquement :
+\[ x_1 \approx -2{,}53, \qquad x_2 \approx 0{,}17, \qquad x_3 \approx 2{,}36. \]
+
+Le signe de $f''(x) = 12x^2 - 24$ en ces points donne leur nature :
+$f''(x_1) > 0$ et $f''(x_3) > 0$ (deux minimums locaux), $f''(x_2) < 0$ (un
+maximum local). Les valeurs correspondantes sont
+\[ f(x_1) \approx -44{,}96, \qquad f(x_2) \approx 1{,}33, \qquad f(x_3) \approx -25{,}37. \]
+
+Le minimum global est donc atteint en $x_1$.
+
+Pour l'esquisse : $\lim\limits_{x\to\pm\infty} f(x) = +\infty$ ; la courbe descend
+jusqu'au minimum $x_1$, remonte au maximum local $x_2$, redescend au minimum
+$x_3$, puis croît. Elle s'infléchit en $x=\pm\sqrt2$, où
+$f(-\sqrt2) = -19-4\sqrt2 \approx -24{,}66$ et $f(\sqrt2) = -19+4\sqrt2 \approx -13{,}34$,
+et elle est concave entre ces deux abscisses, convexe à l'extérieur.
 
 \end{corrige}
