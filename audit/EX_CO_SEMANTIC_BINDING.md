@@ -1,0 +1,6 @@
+# Liage semantique enonce / corrige
+
+- **STATEMENTS_DIGESTED** : `146`
+- **CORRECTIONS_BOUND** : `140`
+- **UNRESOLVED_CORRECTION_TARGETS** : `0`
+- **STUDENT_TEACHER_STATEMENT_DRIFT** : `0`
