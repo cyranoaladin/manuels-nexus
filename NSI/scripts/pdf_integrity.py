@@ -32,8 +32,13 @@ BOOK_LOG_DIAGNOSTICS = (
     MISSING_CHARACTER,
 )
 BOOK_METADATA_FIELDS = ("title", "author", "subject", "keywords")
+# Le mot « corrigé » est aussi un adjectif courant dans un énoncé d'élève :
+# « l'invariant corrigé par une assertion », « corriger le code ». Chercher le
+# mot n'importe où faisait échouer le livret de remédiation 1NSI sur une phrase
+# parfaitement légitime. Ce qui trahit une fuite, c'est la *rubrique* : un
+# corrigé s'ouvre par un titre en début de ligne.
 BOOK_STUDENT_LEAK = re.compile(
-    r"\bcorrigés?\b|^[ \t]*corriges\b|barème indicatif|réponse attendue|1NSI-",
+    r"^[ \t]*corrigés?\b|^[ \t]*corriges\b|barème indicatif|réponse attendue|1NSI-",
     re.IGNORECASE | re.MULTILINE,
 )
 
