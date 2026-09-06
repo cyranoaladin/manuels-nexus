@@ -78,3 +78,25 @@ def test_the_real_contract_still_blocks_on_uncovered_capacities() -> None:
     codes = [b["code"] for b in blockers]
     assert "capacites_officielles_non_couvertes" in codes
     assert "chapitres_manquants" not in codes
+
+
+def test_the_contract_is_reachable_through_the_deliverable_matrix() -> None:
+    """Le chemin complet doit fonctionner, pas seulement l'helper isolé.
+
+    Les premiers tests appelaient `_curricular_coverage_blockers` directement
+    et passaient alors que `build_deliverable_matrix` levait un NameError :
+    `root` n'était pas dans la portée de `_manual_blockers`. On exerce donc
+    l'appelant réel.
+    """
+    inventory = ic._build_inventory_for_stale_manifest_invalidation(ROOT)
+    codes = [b["code"] for b in inventory["deliverable_matrix"]["manuals"]["TNSI"]["blockers"]]
+    assert "capacites_officielles_non_couvertes" in codes
+    assert "chapitres_manquants" not in codes
+    assert "objectif_chapitres_non_fige" not in codes
+
+
+def test_build_deliverable_matrix_still_accepts_a_lone_inventory() -> None:
+    """Les appelants historiques ne passent que l'inventaire : ils doivent tenir."""
+    inventory = ic._build_inventory_for_stale_manifest_invalidation(ROOT)
+    matrix = ic.build_deliverable_matrix(inventory)
+    assert "TNSI" in matrix["manuals"]

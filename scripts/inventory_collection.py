@@ -1379,6 +1379,11 @@ def _classify_is_production(
     ) == "production_object"
 
 
+def _module_repo_root() -> Path:
+    """Racine du dépôt qui héberge ce module, faute de racine explicite."""
+    return Path(__file__).resolve().parents[1]
+
+
 def _curricular_coverage_blockers(
     root: Path, manual_id: str, contract: str
 ) -> list[dict[str, str]]:
@@ -5977,13 +5982,23 @@ def validate_inventory_coherence(inventory: Mapping[str, Any]) -> dict[str, Any]
     }
 
 
-def build_deliverable_matrix(inventory: Mapping[str, Any]) -> dict[str, Any]:
-    """Derive release readiness for every manual and required deliverable."""
+def build_deliverable_matrix(
+    inventory: Mapping[str, Any], root: Path | None = None
+) -> dict[str, Any]:
+    """Derive release readiness for every manual and required deliverable.
+
+    `root` sert à résoudre les contrats de conformité déposés dans `audit/`.
+    Il reste optionnel : les appelants historiques ne passent que l'inventaire,
+    et retombent alors sur la racine du dépôt qui héberge ce module.
+    """
+    resolved_root = root if root is not None else _module_repo_root()
     manuals: dict[str, Any] = {}
     for manual_id, specification in sorted(DELIVERABLE_SPECS.items()):
         source = inventory["manuals"][manual_id]
         publication_coverage = dict(PUBLICATION_GATE_TEMPLATE)
-        blockers = _manual_blockers(inventory, manual_id, specification)
+        blockers = _manual_blockers(
+            inventory, manual_id, specification, root=resolved_root
+        )
         variants = {
             variant_id: _variant_state(source, aliases)
             for variant_id, aliases in sorted(specification["variants"].items())
@@ -6543,7 +6558,7 @@ def _build_inventory_with_stable_controls(
         ),
     )
     inventory["coherence_checks"] = validate_inventory_coherence(inventory)
-    inventory["deliverable_matrix"] = build_deliverable_matrix(inventory)
+    inventory["deliverable_matrix"] = build_deliverable_matrix(inventory, root)
     inventory["generated_by"] = "inventory_collection.py"
     inventory["provenance"] = _build_provenance(
         root,
@@ -7539,6 +7554,7 @@ def _manual_blockers(
     inventory: Mapping[str, Any],
     manual_id: str,
     specification: Mapping[str, Any],
+    root: Path | None = None,
 ) -> list[dict[str, str]]:
     manual = inventory["manuals"][manual_id]
     qualifications = inventory.get("anomaly_qualifications", {})
@@ -7555,7 +7571,11 @@ def _manual_blockers(
         # par « 7 chapitres » remplacerait un dogme par un autre. La
         # conformité se prouve au niveau des capacités officielles.
         blockers.extend(
-            _curricular_coverage_blockers(root, manual_id, curricular_contract)
+            _curricular_coverage_blockers(
+                root if root is not None else _module_repo_root(),
+                manual_id,
+                curricular_contract,
+            )
         )
     elif target is None:
         blockers.append(
