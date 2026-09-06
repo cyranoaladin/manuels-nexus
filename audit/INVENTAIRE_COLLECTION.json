@@ -18428,6 +18428,14 @@
       },
       {
         "chapter": "TNSI-PROJET",
+        "id": "TNSI-PROJET-ANNUEL",
+        "manual": "TNSI",
+        "path": "NSI/chapitres/TNSI-PROJET/projet/TNSI-PROJET-ANNUEL.tex",
+        "scope": "object",
+        "status": "needs_review"
+      },
+      {
+        "chapter": "TNSI-PROJET",
         "id": "TNSI-PROJET-QCM",
         "manual": "TNSI",
         "path": "NSI/chapitres/TNSI-PROJET/qcm/TNSI-PROJET-QCM.tex",
@@ -46130,6 +46138,37 @@
       "release_blocking": true,
       "severity": "blocking",
       "source": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-037.tex"
+    },
+    "634c54857f49fcc0": {
+      "approved_by": "Alaeddine Ben Rhouma",
+      "baseline_sha": "0543df60f4931f0e9e24ce23a9635f203f3a3a53",
+      "blocking": true,
+      "categories": [
+        "blocking_statuses"
+      ],
+      "category": "blocking_statuses",
+      "chapter": "TNSI-PROJET",
+      "decision_ref": "audit/BASELINE_QUALIFICATION_DECISION.md#decision-baseline-residual-13-temporary-2026-08-25",
+      "disposition": "open_debt",
+      "expired": false,
+      "fingerprint": "634c54857f49fcc0",
+      "fingerprint_schema_version": 1,
+      "justification": "Objet pédagogique, de remédiation ou de variante non approuvé.",
+      "manual": "TNSI",
+      "occurrence_count": 1,
+      "owner": "direction_editoriale_pedagogique",
+      "policy_rule": "blocking-pedagogical-object",
+      "qualification_digest": "sha256:6387abdbc9991d9a8dbe368430694d433386b0481dc210e56b2f750c2b85cfc1",
+      "qualification_policy_digest": "sha256:a4fe5cd98879bd8901b5cfb360624f75bb8bf50b7140a6bd572b6da287e8d6c2",
+      "qualified": true,
+      "raw_identities": [
+        "8afb60db7b6f18c30dbe418c129f057b0946fd37c44d7f6e61b0a93f156a9142"
+      ],
+      "reason": "Objet pédagogique, de remédiation ou de variante non approuvé.",
+      "regression": false,
+      "release_blocking": true,
+      "severity": "blocking",
+      "source": "NSI/chapitres/TNSI-PROJET/projet/TNSI-PROJET-ANNUEL.tex"
     },
     "636aab6a35e90ff3": {
       "approved_by": "Alaeddine Ben Rhouma",
@@ -167514,7 +167553,7 @@
         "blockers": [
           {
             "code": "anomalie:blocking_statuses",
-            "detail": "117",
+            "detail": "118",
             "source": "anomalies.blocking_statuses"
           },
           {
@@ -167549,7 +167588,7 @@
           },
           {
             "code": "statuts_non_approuves",
-            "detail": "objets=110; contrats=7",
+            "detail": "objets=111; contrats=7",
             "source": "manuals.TNSI.statuses"
           }
         ],
@@ -167569,9 +167608,8 @@
             "TNSI-STRUCTURES-DONNEES"
           ],
           "statuses": {
-            "approved": 1,
             "generated": 109,
-            "needs_review": 1
+            "needs_review": 2
           },
           "totals": {
             "capacites": 61,
@@ -262951,16 +262989,16 @@
                 "id": "TNSI-PROJET-ANNUEL",
                 "mode_creation": "ex_nihilo",
                 "sources_inspiration": [],
-                "status": "approved",
+                "status": "needs_review",
                 "type_objet": "projet"
               },
               "path": "NSI/chapitres/TNSI-PROJET/projet/TNSI-PROJET-ANNUEL.tex",
               "path_chapter": "TNSI-PROJET",
-              "publishable": true,
-              "source_status": "approved",
+              "publishable": false,
+              "source_status": "needs_review",
               "source_subtype": null,
               "source_type": "projet",
-              "status": "approved",
+              "status": "needs_review",
               "status_valid": true
             },
             {
@@ -262989,8 +263027,7 @@
             "qcm": 1
           },
           "statuses": {
-            "approved": 1,
-            "needs_review": 1
+            "needs_review": 2
           }
         },
         "TNSI-STRUCTURES-DONNEES": {
@@ -263806,9 +263843,8 @@
       "level": "Terminale",
       "object_count": 111,
       "objects_by_status": {
-        "approved": 1,
         "generated": 109,
-        "needs_review": 1
+        "needs_review": 2
       },
       "objects_by_type": {
         "corrige": 23,
@@ -263821,9 +263857,8 @@
         "remediation": 5
       },
       "statuses": {
-        "approved": 1,
         "generated": 109,
-        "needs_review": 1
+        "needs_review": 2
       },
       "subject": "NSI",
       "totals": {
@@ -288915,7 +288950,7 @@
       }
     }
   },
-  "model_digest": "sha256:313650cd6327184d5bc5a5d5d8592ecd4bb3caf91f7f5237f757f5fe47ac5469",
+  "model_digest": "sha256:9fda209e2fe3e0868a7e800e05f9b74152acdf98c84011ce65d39c11274eaa89",
   "observed_build_coverage": {
     "1NSI": {
       "observed_build_ready": false,
@@ -289214,7 +289249,7 @@
       },
       "generated_dependencies": [],
       "generated_dependency_digests": {},
-      "git_sha": "daa7783ff0eba8cc67adb819a0b0b80046557f27",
+      "git_sha": "22bddf80547bdd795382cb897072b78165494714",
       "included_objects": [
         "NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C1.tex",
         "NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C2.tex",
@@ -289409,7 +289444,7 @@
         "NSI/chapitres/1NSI-PROJET-METHODES/qcm/1NSI-PROJET-METHODES-QCM.tex"
       ],
       "manual": "1NSI",
-      "model_digest": "sha256:313650cd6327184d5bc5a5d5d8592ecd4bb3caf91f7f5237f757f5fe47ac5469",
+      "model_digest": "sha256:9fda209e2fe3e0868a7e800e05f9b74152acdf98c84011ce65d39c11274eaa89",
       "ordered_trace": [
         "NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C1.tex",
         "NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C2.tex",
@@ -289615,7 +289650,7 @@
         "source_date_epoch": 1785962466,
         "timezone": "UTC"
       },
-      "source_digest": "sha256:3a1ccacc3dd3c60748ddf219a8a3ff196eb3cdf574947bca0cc434db337d996f",
+      "source_digest": "sha256:d8adc29c4bb349527a3082deb4c7bfdc988487ab2cb0af63f207191e981b719f",
       "tool_versions": {
         "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
         "pdffonts": "pdffonts version 24.02.0",
@@ -289640,7 +289675,7 @@
       },
       "generated_dependencies": [],
       "generated_dependency_digests": {},
-      "git_sha": "daa7783ff0eba8cc67adb819a0b0b80046557f27",
+      "git_sha": "22bddf80547bdd795382cb897072b78165494714",
       "included_objects": [
         "NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C1.tex",
         "NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C2.tex",
@@ -290010,7 +290045,7 @@
         "NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-RE-C3-CORRIGE.tex"
       ],
       "manual": "1NSI",
-      "model_digest": "sha256:313650cd6327184d5bc5a5d5d8592ecd4bb3caf91f7f5237f757f5fe47ac5469",
+      "model_digest": "sha256:9fda209e2fe3e0868a7e800e05f9b74152acdf98c84011ce65d39c11274eaa89",
       "ordered_trace": [
         "NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C1.tex",
         "NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C2.tex",
@@ -290391,7 +290426,7 @@
         "source_date_epoch": 1785962466,
         "timezone": "UTC"
       },
-      "source_digest": "sha256:3a1ccacc3dd3c60748ddf219a8a3ff196eb3cdf574947bca0cc434db337d996f",
+      "source_digest": "sha256:d8adc29c4bb349527a3082deb4c7bfdc988487ab2cb0af63f207191e981b719f",
       "tool_versions": {
         "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
         "pdffonts": "pdffonts version 24.02.0",
@@ -290419,7 +290454,7 @@
       },
       "generated_dependencies": [],
       "generated_dependency_digests": {},
-      "git_sha": "daa7783ff0eba8cc67adb819a0b0b80046557f27",
+      "git_sha": "22bddf80547bdd795382cb897072b78165494714",
       "included_objects": [
         "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/00_ouverture.tex",
         "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/01_diagnostic.tex",
@@ -291357,7 +291392,7 @@
         "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/remediation/1SPE-VARALEA-RE-C7.tex"
       ],
       "manual": "1SPE",
-      "model_digest": "sha256:313650cd6327184d5bc5a5d5d8592ecd4bb3caf91f7f5237f757f5fe47ac5469",
+      "model_digest": "sha256:9fda209e2fe3e0868a7e800e05f9b74152acdf98c84011ce65d39c11274eaa89",
       "ordered_trace": [
         "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/00_ouverture.tex",
         "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/01_diagnostic.tex",
@@ -292306,7 +292341,7 @@
         "source_date_epoch": 1785962466,
         "timezone": "UTC"
       },
-      "source_digest": "sha256:3a1ccacc3dd3c60748ddf219a8a3ff196eb3cdf574947bca0cc434db337d996f",
+      "source_digest": "sha256:d8adc29c4bb349527a3082deb4c7bfdc988487ab2cb0af63f207191e981b719f",
       "tool_versions": {
         "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
         "pdffonts": "pdffonts version 24.02.0",
@@ -292331,7 +292366,7 @@
       },
       "generated_dependencies": [],
       "generated_dependency_digests": {},
-      "git_sha": "daa7783ff0eba8cc67adb819a0b0b80046557f27",
+      "git_sha": "22bddf80547bdd795382cb897072b78165494714",
       "included_objects": [
         "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/00_ouverture.tex",
         "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/01_diagnostic.tex",
@@ -293771,7 +293806,7 @@
         "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-054.tex"
       ],
       "manual": "1SPE",
-      "model_digest": "sha256:313650cd6327184d5bc5a5d5d8592ecd4bb3caf91f7f5237f757f5fe47ac5469",
+      "model_digest": "sha256:9fda209e2fe3e0868a7e800e05f9b74152acdf98c84011ce65d39c11274eaa89",
       "ordered_trace": [
         "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/00_ouverture.tex",
         "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/01_diagnostic.tex",
@@ -295222,7 +295257,7 @@
         "source_date_epoch": 1785962466,
         "timezone": "UTC"
       },
-      "source_digest": "sha256:3a1ccacc3dd3c60748ddf219a8a3ff196eb3cdf574947bca0cc434db337d996f",
+      "source_digest": "sha256:d8adc29c4bb349527a3082deb4c7bfdc988487ab2cb0af63f207191e981b719f",
       "tool_versions": {
         "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
         "pdffonts": "pdffonts version 24.02.0",
@@ -295250,7 +295285,7 @@
       },
       "generated_dependencies": [],
       "generated_dependency_digests": {},
-      "git_sha": "daa7783ff0eba8cc67adb819a0b0b80046557f27",
+      "git_sha": "22bddf80547bdd795382cb897072b78165494714",
       "included_objects": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/11_C2_convexite.tex",
@@ -295711,7 +295746,7 @@
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/remediation/TCOMPL-CORRELATION-CAUSALITE-RE-C5.tex"
       ],
       "manual": "TCOMPL",
-      "model_digest": "sha256:313650cd6327184d5bc5a5d5d8592ecd4bb3caf91f7f5237f757f5fe47ac5469",
+      "model_digest": "sha256:9fda209e2fe3e0868a7e800e05f9b74152acdf98c84011ce65d39c11274eaa89",
       "ordered_trace": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/11_C2_convexite.tex",
@@ -296183,7 +296218,7 @@
         "source_date_epoch": 1785962466,
         "timezone": "UTC"
       },
-      "source_digest": "sha256:3a1ccacc3dd3c60748ddf219a8a3ff196eb3cdf574947bca0cc434db337d996f",
+      "source_digest": "sha256:d8adc29c4bb349527a3082deb4c7bfdc988487ab2cb0af63f207191e981b719f",
       "tool_versions": {
         "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
         "pdffonts": "pdffonts version 24.02.0",
@@ -296208,7 +296243,7 @@
       },
       "generated_dependencies": [],
       "generated_dependency_digests": {},
-      "git_sha": "daa7783ff0eba8cc67adb819a0b0b80046557f27",
+      "git_sha": "22bddf80547bdd795382cb897072b78165494714",
       "included_objects": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/11_C2_convexite.tex",
@@ -296987,7 +297022,7 @@
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-030.tex"
       ],
       "manual": "TCOMPL",
-      "model_digest": "sha256:313650cd6327184d5bc5a5d5d8592ecd4bb3caf91f7f5237f757f5fe47ac5469",
+      "model_digest": "sha256:9fda209e2fe3e0868a7e800e05f9b74152acdf98c84011ce65d39c11274eaa89",
       "ordered_trace": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/11_C2_convexite.tex",
@@ -297777,7 +297812,7 @@
         "source_date_epoch": 1785962466,
         "timezone": "UTC"
       },
-      "source_digest": "sha256:3a1ccacc3dd3c60748ddf219a8a3ff196eb3cdf574947bca0cc434db337d996f",
+      "source_digest": "sha256:d8adc29c4bb349527a3082deb4c7bfdc988487ab2cb0af63f207191e981b719f",
       "tool_versions": {
         "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
         "pdffonts": "pdffonts version 24.02.0",
@@ -297805,7 +297840,7 @@
       },
       "generated_dependencies": [],
       "generated_dependency_digests": {},
-      "git_sha": "daa7783ff0eba8cc67adb819a0b0b80046557f27",
+      "git_sha": "22bddf80547bdd795382cb897072b78165494714",
       "included_objects": [
         "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/cours/10_C1_algebre.tex",
         "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/cours/11_C2_geometrie.tex",
@@ -298105,7 +298140,7 @@
         "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/remediation/TEXP-MATRICES-MARKOV-RE-C5.tex"
       ],
       "manual": "TEXPERTES",
-      "model_digest": "sha256:313650cd6327184d5bc5a5d5d8592ecd4bb3caf91f7f5237f757f5fe47ac5469",
+      "model_digest": "sha256:9fda209e2fe3e0868a7e800e05f9b74152acdf98c84011ce65d39c11274eaa89",
       "ordered_trace": [
         "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/cours/10_C1_algebre.tex",
         "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/cours/11_C2_geometrie.tex",
@@ -298416,7 +298451,7 @@
         "source_date_epoch": 1785962466,
         "timezone": "UTC"
       },
-      "source_digest": "sha256:3a1ccacc3dd3c60748ddf219a8a3ff196eb3cdf574947bca0cc434db337d996f",
+      "source_digest": "sha256:d8adc29c4bb349527a3082deb4c7bfdc988487ab2cb0af63f207191e981b719f",
       "tool_versions": {
         "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
         "pdffonts": "pdffonts version 24.02.0",
@@ -298441,7 +298476,7 @@
       },
       "generated_dependencies": [],
       "generated_dependency_digests": {},
-      "git_sha": "daa7783ff0eba8cc67adb819a0b0b80046557f27",
+      "git_sha": "22bddf80547bdd795382cb897072b78165494714",
       "included_objects": [
         "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/cours/10_C1_algebre.tex",
         "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/cours/11_C2_geometrie.tex",
@@ -298945,7 +298980,7 @@
         "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/corriges/TEXP-MAT-CO-042.tex"
       ],
       "manual": "TEXPERTES",
-      "model_digest": "sha256:313650cd6327184d5bc5a5d5d8592ecd4bb3caf91f7f5237f757f5fe47ac5469",
+      "model_digest": "sha256:9fda209e2fe3e0868a7e800e05f9b74152acdf98c84011ce65d39c11274eaa89",
       "ordered_trace": [
         "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/cours/10_C1_algebre.tex",
         "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/cours/11_C2_geometrie.tex",
@@ -299460,7 +299495,7 @@
         "source_date_epoch": 1785962466,
         "timezone": "UTC"
       },
-      "source_digest": "sha256:3a1ccacc3dd3c60748ddf219a8a3ff196eb3cdf574947bca0cc434db337d996f",
+      "source_digest": "sha256:d8adc29c4bb349527a3082deb4c7bfdc988487ab2cb0af63f207191e981b719f",
       "tool_versions": {
         "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
         "pdffonts": "pdffonts version 24.02.0",
@@ -299488,7 +299523,7 @@
       },
       "generated_dependencies": [],
       "generated_dependency_digests": {},
-      "git_sha": "daa7783ff0eba8cc67adb819a0b0b80046557f27",
+      "git_sha": "22bddf80547bdd795382cb897072b78165494714",
       "included_objects": [
         "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/10_C01_arbres_parcours.tex",
         "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/11_C02_arbres_recherche.tex",
@@ -299551,7 +299586,7 @@
         "NSI/chapitres/TNSI-PROJET/qcm/TNSI-PROJET-QCM.tex"
       ],
       "manual": "TNSI",
-      "model_digest": "sha256:313650cd6327184d5bc5a5d5d8592ecd4bb3caf91f7f5237f757f5fe47ac5469",
+      "model_digest": "sha256:9fda209e2fe3e0868a7e800e05f9b74152acdf98c84011ce65d39c11274eaa89",
       "ordered_trace": [
         "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/10_C01_arbres_parcours.tex",
         "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/11_C02_arbres_recherche.tex",
@@ -299625,7 +299660,7 @@
         "source_date_epoch": 1785962466,
         "timezone": "UTC"
       },
-      "source_digest": "sha256:3a1ccacc3dd3c60748ddf219a8a3ff196eb3cdf574947bca0cc434db337d996f",
+      "source_digest": "sha256:d8adc29c4bb349527a3082deb4c7bfdc988487ab2cb0af63f207191e981b719f",
       "tool_versions": {
         "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
         "pdffonts": "pdffonts version 24.02.0",
@@ -299650,7 +299685,7 @@
       },
       "generated_dependencies": [],
       "generated_dependency_digests": {},
-      "git_sha": "daa7783ff0eba8cc67adb819a0b0b80046557f27",
+      "git_sha": "22bddf80547bdd795382cb897072b78165494714",
       "included_objects": [
         "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/10_C01_arbres_parcours.tex",
         "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/11_C02_arbres_recherche.tex",
@@ -299765,7 +299800,7 @@
         "NSI/chapitres/TNSI-PROJET/qcm/TNSI-PROJET-QCM.tex"
       ],
       "manual": "TNSI",
-      "model_digest": "sha256:313650cd6327184d5bc5a5d5d8592ecd4bb3caf91f7f5237f757f5fe47ac5469",
+      "model_digest": "sha256:9fda209e2fe3e0868a7e800e05f9b74152acdf98c84011ce65d39c11274eaa89",
       "ordered_trace": [
         "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/10_C01_arbres_parcours.tex",
         "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/11_C02_arbres_recherche.tex",
@@ -299891,7 +299926,7 @@
         "source_date_epoch": 1785962466,
         "timezone": "UTC"
       },
-      "source_digest": "sha256:3a1ccacc3dd3c60748ddf219a8a3ff196eb3cdf574947bca0cc434db337d996f",
+      "source_digest": "sha256:d8adc29c4bb349527a3082deb4c7bfdc988487ab2cb0af63f207191e981b719f",
       "tool_versions": {
         "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
         "pdffonts": "pdffonts version 24.02.0",
@@ -299919,7 +299954,7 @@
       },
       "generated_dependencies": [],
       "generated_dependency_digests": {},
-      "git_sha": "daa7783ff0eba8cc67adb819a0b0b80046557f27",
+      "git_sha": "22bddf80547bdd795382cb897072b78165494714",
       "included_objects": [
         "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/cours/10_C1_convergence_divergence.tex",
         "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/cours/11_C2_recurrence.tex",
@@ -300460,7 +300495,7 @@
         "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/remediation/TSPE-GEOMETRIE-ESPACE-RE-C9.tex"
       ],
       "manual": "TSPE_2026_2027",
-      "model_digest": "sha256:313650cd6327184d5bc5a5d5d8592ecd4bb3caf91f7f5237f757f5fe47ac5469",
+      "model_digest": "sha256:9fda209e2fe3e0868a7e800e05f9b74152acdf98c84011ce65d39c11274eaa89",
       "ordered_trace": [
         "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/cours/10_C1_convergence_divergence.tex",
         "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/cours/11_C2_recurrence.tex",
@@ -301012,7 +301047,7 @@
         "source_date_epoch": 1785962466,
         "timezone": "UTC"
       },
-      "source_digest": "sha256:3a1ccacc3dd3c60748ddf219a8a3ff196eb3cdf574947bca0cc434db337d996f",
+      "source_digest": "sha256:d8adc29c4bb349527a3082deb4c7bfdc988487ab2cb0af63f207191e981b719f",
       "tool_versions": {
         "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
         "pdffonts": "pdffonts version 24.02.0",
@@ -301037,7 +301072,7 @@
       },
       "generated_dependencies": [],
       "generated_dependency_digests": {},
-      "git_sha": "daa7783ff0eba8cc67adb819a0b0b80046557f27",
+      "git_sha": "22bddf80547bdd795382cb897072b78165494714",
       "included_objects": [
         "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/cours/10_C1_convergence_divergence.tex",
         "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/cours/11_C2_recurrence.tex",
@@ -301877,7 +301912,7 @@
         "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-058.tex"
       ],
       "manual": "TSPE_2026_2027",
-      "model_digest": "sha256:313650cd6327184d5bc5a5d5d8592ecd4bb3caf91f7f5237f757f5fe47ac5469",
+      "model_digest": "sha256:9fda209e2fe3e0868a7e800e05f9b74152acdf98c84011ce65d39c11274eaa89",
       "ordered_trace": [
         "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/cours/10_C1_convergence_divergence.tex",
         "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/cours/11_C2_recurrence.tex",
@@ -302728,7 +302763,7 @@
         "source_date_epoch": 1785962466,
         "timezone": "UTC"
       },
-      "source_digest": "sha256:3a1ccacc3dd3c60748ddf219a8a3ff196eb3cdf574947bca0cc434db337d996f",
+      "source_digest": "sha256:d8adc29c4bb349527a3082deb4c7bfdc988487ab2cb0af63f207191e981b719f",
       "tool_versions": {
         "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
         "pdffonts": "pdffonts version 24.02.0",
@@ -303304,7 +303339,7 @@
     "branch": null,
     "dirty": false,
     "errors": [],
-    "generated_at_utc": "2026-09-06T14:13:47Z",
+    "generated_at_utc": "2026-09-06T14:27:00Z",
     "generator_files": {
       "scripts/baseline_qualification.py": "sha256:79b255deeddfa4b483a9a5a9f568bdc143defd7b2a69e8b8a704f4afdd35d6bf",
       "scripts/build_manifest.py": "sha256:62d4f5da9454aaa2923041db777b759e3e4b672e7c2f33b59a62e07afc76de26",
@@ -303317,7 +303352,7 @@
     "generator_sha256": "sha256:c925cbd22c023f6ffeb691652ec8278051c1d3244352c074dbf98e21bd7452b5",
     "generator_version": 1,
     "git_available": true,
-    "head_sha": "1a3faac0eaa7df88b6e21bcda65142e41c119c26",
+    "head_sha": "ea2e2fa8c1aa460df607cb8cceea77d51777e98f",
     "modified_tracked": [],
     "pdf_artifact_registry_digest": "sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c",
     "tool_versions": {
@@ -391288,7 +391323,7 @@
   },
   "schema_ref": "audit/schemas/v1/inventory-collection.schema.json",
   "schema_version": 1,
-  "source_digest": "sha256:3a1ccacc3dd3c60748ddf219a8a3ff196eb3cdf574947bca0cc434db337d996f",
+  "source_digest": "sha256:d8adc29c4bb349527a3082deb4c7bfdc988487ab2cb0af63f207191e981b719f",
   "source_file_count": 4731,
   "source_files": [
     "MANUELS_PDF_PUBLICATION/01_Maths_1re_Spe_Eleve.pdf",
