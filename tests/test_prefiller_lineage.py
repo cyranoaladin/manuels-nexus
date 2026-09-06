@@ -35,6 +35,7 @@ def test_every_group_receives_exactly_one_lineage_case(lineage):
         "MULTIPLE_PREEXISTING_CONTENT",
         "ALL_EMPTY_PRE_FILLER",
         "PLACEHOLDER_NOT_CONTENT",
+        "PREEXISTING_SHARED_CONTENT",
     }
     for group in lineage["groups"]:
         assert group["lineage_case"] in cases
@@ -59,6 +60,16 @@ def test_resolved_groups_name_their_canonical(lineage):
             "RECOVERED_BY_LATER_HISTORY",
         }:
             assert group["canonical_path"], group["digest"]
+
+
+def test_shared_content_predating_the_filler_is_not_a_conflict(lineage):
+    """Des membres deja identiques avant le remplissage ne s'arbitrent pas."""
+
+    for group in lineage["groups"]:
+        if group["lineage_case"] != "PREEXISTING_SHARED_CONTENT":
+            continue
+        assert group["canonical_path"] is None
+        assert len(group["preexisting_paths"]) > 1
 
 
 def test_no_group_needs_an_author_decision(lineage):

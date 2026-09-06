@@ -30,6 +30,9 @@ SUBSTANTIVE_BYTES = 200
 
 MIN_BODY_CHARS = 80
 
+#: Roles dont un objet legitime tient en une ou deux phrases.
+BRIEF_ROLES = {"coup_de_pouce"}
+
 
 def _run_git(root: Path, args: list[str]) -> str:
     result = subprocess.run(
@@ -38,10 +41,14 @@ def _run_git(root: Path, args: list[str]) -> str:
     return result.stdout
 
 
+#: Les deux racines de contenu pedagogique de la collection.
+CONTENT_ROOTS = ("NSI/chapitres", "Mathematiques/manuel-maths/chapitres")
+
+
 def prefiller_tree(root: Path, subdir: str) -> dict[str, int]:
     """Taille de chaque fichier juste avant le commit de remplissage."""
 
-    output = _run_git(root, ["ls-tree", "-r", "-l", f"{FILLER_COMMIT}^", "--", subdir])
+    output = _run_git(root, ["ls-tree", "-r", "-l", f"{FILLER_COMMIT}^", "--", *subdir.split(",")])
     sizes: dict[str, int] = {}
     for line in output.splitlines():
         parts = line.split(maxsplit=4)
@@ -66,7 +73,7 @@ def filler_commit_bodies(root: Path, subdir: str) -> dict[str, str]:
     il sortirait de son groupe et le groupe paraitrait sans ancetre.
     """
 
-    listing = _run_git(root, ["ls-tree", "-r", FILLER_COMMIT, "--", subdir])
+    listing = _run_git(root, ["ls-tree", "-r", FILLER_COMMIT, "--", *subdir.split(",")])
     digest_to_paths: dict[str, str] = {}
     for line in listing.splitlines():
         parts = line.split(maxsplit=3)
@@ -90,6 +97,21 @@ def _body(path: Path) -> str:
     return "\n".join(line for line in lines[1:] if line.strip())
 
 
+MANUAL_PREFIXES = ("1NSI", "TNSI", "1SPE", "TSPE", "TCOMPL", "TEXP")
+
+
+def _manual_of(entries: list[dict[str, Any]]) -> str:
+    """Le manuel d'un groupe, ou MIXED s'il en traverse plusieurs."""
+
+    manuals = set()
+    for entry in entries:
+        chapter = str(entry.get("chapter") or "")
+        manuals.add(
+            next((p for p in MANUAL_PREFIXES if chapter.startswith(p)), "UNKNOWN")
+        )
+    return manuals.pop() if len(manuals) == 1 else "MIXED"
+
+
 def _meta(path: Path) -> dict[str, Any]:
     head = path.read_text(encoding="utf-8", errors="ignore").split("\n", 1)[0]
     if not head.startswith("% META:"):
@@ -99,6 +121,16 @@ def _meta(path: Path) -> dict[str, Any]:
     except json.JSONDecodeError:
         return {}
 
+
+
+def _prefiller_body_digest(root: Path, relative: str) -> str | None:
+    """Empreinte du corps d'un fichier juste avant le remplissage."""
+
+    content = _run_git(root, ["show", f"{FILLER_COMMIT}^:{relative}"])
+    if not content:
+        return None
+    body = _body_text(content)
+    return hashlib.sha256(body.encode()).hexdigest() if body else None
 
 
 def _historical_bodies(root: Path, relative: str, limit: int = 60) -> set[str]:
@@ -131,19 +163,27 @@ def resolve_by_chapter_history(
     for path, size in sorted(sizes.items()):
         if size < SUBSTANTIVE_BYTES:
             continue
-        if not any(f"/{chapter}/" in path for chapter in chapters):
+        if not any(f"/{chapter}/" in path for chapter in chapters if chapter):
             continue
         if group_digest in _historical_bodies(root, path):
             return path
     return None
 
 
-def classify_groups(root: Path, subdir: str = "NSI/chapitres") -> dict[str, Any]:
-    sizes = prefiller_tree(root, subdir)
-    filler_bodies = filler_commit_bodies(root, subdir)
+def classify_groups(
+    root: Path, subdirs: tuple[str, ...] = CONTENT_ROOTS
+) -> dict[str, Any]:
+    joined = ",".join(subdirs)
+    sizes = prefiller_tree(root, joined)
+    filler_bodies = filler_commit_bodies(root, joined)
 
     records: dict[str, dict[str, Any]] = {}
-    for path in sorted((root / subdir).rglob("*.tex")):
+    candidates = [
+        path
+        for subdir in subdirs
+        for path in sorted((root / subdir).rglob("*.tex"))
+    ]
+    for path in candidates:
         if "_harvest" in path.parts:
             continue
         relative = path.relative_to(root).as_posix()
@@ -178,7 +218,12 @@ def classify_groups(root: Path, subdir: str = "NSI/chapitres") -> dict[str, Any]
         preexisting = [e for e in entries if e["substantive_before_filler"]]
         body_length = len(_body(root / entries[0]["path"]))
 
-        if body_length < SUBSTANTIVE_BYTES:
+        # Un coup de pouce tient en une phrase : sa brievete est sa nature, pas
+        # le signe d'un gabarit. Le seuil de contenu ne s'y applique pas.
+        brief_by_design = all(
+            str(e.get("role")) in BRIEF_ROLES for e in entries
+        )
+        if body_length < SUBSTANTIVE_BYTES and not brief_by_design:
             # Aucun membre ne porte de contenu : ce groupe n'a pas de canonique
             # a elire, il n'a que des gabarits a retirer. Un placeholder n'est
             # pas publiable, il ne devient pas canonique faute de concurrent.
@@ -196,11 +241,7 @@ def classify_groups(root: Path, subdir: str = "NSI/chapitres") -> dict[str, Any]
                 "filler_paths": [e["path"] for e in entries],
                 "excess_objects": len(entries),
                 "chapters": sorted({e["chapter"] for e in entries if e["chapter"]}),
-                "manual": (
-                    "1NSI" if all(str(e["chapter"]).startswith("1NSI") for e in entries)
-                    else "TNSI" if all(str(e["chapter"]).startswith("TNSI") for e in entries)
-                    else "MIXED"
-                ),
+                "manual": _manual_of(entries),
             })
             continue
 
@@ -242,9 +283,27 @@ def classify_groups(root: Path, subdir: str = "NSI/chapitres") -> dict[str, Any]
                 canonical = None
                 why = "aucun ancetre substantiel avant le remplissage"
         elif len(preexisting) > 1:
-            case = "MULTIPLE_PREEXISTING_CONTENT"
-            canonical = None
-            why = "plusieurs membres preexistaient : ce ne sont pas des fillers equivalents"
+            # Plusieurs membres preexistaient : le conflit n'existe que si leurs
+            # corps differaient alors. S'ils etaient deja identiques, le partage
+            # precede le remplissage et ne demande aucun arbitrage.
+            pre_digests = {
+                _prefiller_body_digest(root, entry["path"]) for entry in preexisting
+            }
+            pre_digests.discard(None)
+            if len(pre_digests) <= 1:
+                case = "PREEXISTING_SHARED_CONTENT"
+                canonical = None
+                why = (
+                    "les membres portaient deja le meme corps avant le remplissage : "
+                    "partage anterieur, a declarer comme reutilisation et non a trancher"
+                )
+            else:
+                case = "MULTIPLE_PREEXISTING_CONTENT"
+                canonical = None
+                why = (
+                    "plusieurs membres portaient des corps DIFFERENTS avant le "
+                    "remplissage : chacun doit retrouver son propre contenu"
+                )
         else:
             case = "ALL_EMPTY_PRE_FILLER"
             canonical = None
@@ -266,11 +325,7 @@ def classify_groups(root: Path, subdir: str = "NSI/chapitres") -> dict[str, Any]
             ],
             "excess_objects": len(entries) - 1,
             "chapters": sorted({e["chapter"] for e in entries if e["chapter"]}),
-            "manual": (
-                "1NSI" if all(str(e["chapter"]).startswith("1NSI") for e in entries)
-                else "TNSI" if all(str(e["chapter"]).startswith("TNSI") for e in entries)
-                else "MIXED"
-            ),
+            "manual": _manual_of(entries),
         })
 
     by_case = collections.Counter(g["lineage_case"] for g in groups)
@@ -295,6 +350,7 @@ def classify_groups(root: Path, subdir: str = "NSI/chapitres") -> dict[str, Any]
             "MULTIPLE_PREEXISTING_CONTENT": by_case["MULTIPLE_PREEXISTING_CONTENT"],
             "ALL_EMPTY_PRE_FILLER": by_case["ALL_EMPTY_PRE_FILLER"],
             "PLACEHOLDER_NOT_CONTENT": by_case["PLACEHOLDER_NOT_CONTENT"],
+            "PREEXISTING_SHARED_CONTENT": by_case["PREEXISTING_SHARED_CONTENT"],
             "UNRESOLVED_AUTHOR_DECISION": (
                 by_case["ALL_EMPTY_PRE_FILLER"] + by_case["MULTIPLE_PREEXISTING_CONTENT"]
             ),

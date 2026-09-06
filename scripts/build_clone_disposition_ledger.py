@@ -177,7 +177,31 @@ def build(root: Path, *, with_history: bool = True) -> dict[str, Any]:
         stripped = {VARIANT_SEGMENT.sub(r"\1\3", e["path"]) for e in entries}
         mirror = len(stripped) == 1 and len(entries) > 1
 
-        declared = [e for e in entries if e["object_id"] in reuse_registry]
+        # Une declaration de reutilisation n'est honoree que si elle se verifie :
+        # anteriorite au remplissage synthetique, et consommateur propre et
+        # existant. Sinon elle ne vaut rien et le groupe reste un clone.
+        declared = []
+        rejected_declarations = []
+        for entry in entries:
+            declaration = reuse_registry.get(entry["object_id"])
+            if declaration is None:
+                continue
+            evidence = declaration.get("evidence", {})
+            consumer = declaration.get("consumer")
+            consumer_exists = bool(consumer) and any(
+                (root / entry["path"]).parent.parent.rglob(f"{consumer}.tex")
+            )
+            if (
+                evidence.get("predates_filler_commit")
+                and evidence.get("distinct_consumer")
+                and consumer_exists
+            ):
+                declared.append(entry)
+            else:
+                rejected_declarations.append({
+                    "object_id": entry["object_id"],
+                    "why": "declaration de reutilisation non verifiee",
+                })
 
         if mirror:
             disposition = "EXPECTED_STUDENT_TEACHER_MIRROR"
@@ -185,9 +209,12 @@ def build(root: Path, *, with_history: bool = True) -> dict[str, Any]:
         elif assembly_dupes:
             disposition = "ASSEMBLY_DUPLICATION"
             why = "une source unique incluse plusieurs fois par le graphe d'assemblage"
-        elif len(declared) == len(entries) - 1:
+        elif declared and len(declared) == len(entries) - 1:
             disposition = "INTENTIONAL_REUSE"
-            why = "reutilisation declaree et typee dans le registre"
+            why = (
+                "reutilisation declaree, et verifiee : chaque membre precede le "
+                "remplissage et sert son propre consommateur"
+            )
         elif len(set(ids)) > 1:
             disposition = "SOURCE_CLONE_WITH_DISTINCT_IDS"
             why = "corps identiques presentes comme des objets distincts"
@@ -209,6 +236,7 @@ def build(root: Path, *, with_history: bool = True) -> dict[str, Any]:
             "capacity_misrepresenting": len(capacities) > 1,
             "excess_objects": len(entries) - 1,
             "assembly_duplicates": assembly_dupes,
+            "rejected_reuse_declarations": rejected_declarations,
             "first_commits": (
                 {e["path"]: _first_commit(root, e["path"]) for e in entries}
                 if with_history else {}
@@ -265,6 +293,9 @@ def build(root: Path, *, with_history: bool = True) -> dict[str, Any]:
                 1 for g in groups if g["capacity_misrepresenting"]
             ),
             "CROSS_MANUAL_GROUPS": sum(1 for g in groups if g["cross_manual"]),
+            "REJECTED_REUSE_DECLARATIONS": sum(
+                len(g["rejected_reuse_declarations"]) for g in groups
+            ),
         },
     }
 

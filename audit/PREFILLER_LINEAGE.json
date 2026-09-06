@@ -2,18 +2,366 @@
   "artifact_type": "prefiller_lineage",
   "filler_commit": "533d19198eb7810699a41a7b5275744691420859",
   "generated_by": "scripts/build_prefiller_lineage.py",
-  "groups": [],
+  "groups": [
+    {
+      "canonical_object_id": null,
+      "canonical_path": null,
+      "chapters": [
+        "1SPE-SECOND-DEGRE"
+      ],
+      "digest": "39248edf7d191e1e8aea0ecef12d85d4b11ea073421ffc22f9894dc2cd89e57c",
+      "excess_objects": 1,
+      "filler_paths": [],
+      "lineage_case": "PREEXISTING_SHARED_CONTENT",
+      "manual": "1SPE",
+      "members": [
+        {
+          "capacities": [],
+          "chapter": "1SPE-SECOND-DEGRE",
+          "digest": "39248edf7d191e1e8aea0ecef12d85d4b11ea073421ffc22f9894dc2cd89e57c",
+          "existed_before_filler": true,
+          "object_id": "1SPE-SECDEG-EX-001-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-001-CDP.tex",
+          "prefiller_bytes": 285,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        },
+        {
+          "capacities": [],
+          "chapter": "1SPE-SECOND-DEGRE",
+          "digest": "39248edf7d191e1e8aea0ecef12d85d4b11ea073421ffc22f9894dc2cd89e57c",
+          "existed_before_filler": true,
+          "object_id": "1SPE-SECDEG-EX-043-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-043-CDP.tex",
+          "prefiller_bytes": 285,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        }
+      ],
+      "preexisting_paths": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-001-CDP.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-043-CDP.tex"
+      ],
+      "why": "les membres portaient deja le meme corps avant le remplissage : partage anterieur, a declarer comme reutilisation et non a trancher"
+    },
+    {
+      "canonical_object_id": null,
+      "canonical_path": null,
+      "chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "digest": "41cb83a70ada927bece1c7a4c878e869a44e7a9650c6e9246526bf7663ffd8d7",
+      "excess_objects": 3,
+      "filler_paths": [],
+      "lineage_case": "PREEXISTING_SHARED_CONTENT",
+      "manual": "1SPE",
+      "members": [
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "41cb83a70ada927bece1c7a4c878e869a44e7a9650c6e9246526bf7663ffd8d7",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-021-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-021-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        },
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "41cb83a70ada927bece1c7a4c878e869a44e7a9650c6e9246526bf7663ffd8d7",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-022-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-022-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        },
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "41cb83a70ada927bece1c7a4c878e869a44e7a9650c6e9246526bf7663ffd8d7",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-023-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-023-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        },
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "41cb83a70ada927bece1c7a4c878e869a44e7a9650c6e9246526bf7663ffd8d7",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-024-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-024-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        }
+      ],
+      "preexisting_paths": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-021-CDP.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-022-CDP.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-023-CDP.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-024-CDP.tex"
+      ],
+      "why": "les membres portaient deja le meme corps avant le remplissage : partage anterieur, a declarer comme reutilisation et non a trancher"
+    },
+    {
+      "canonical_object_id": null,
+      "canonical_path": null,
+      "chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "digest": "4e42f8e69861ed587fcfd90c7c082f956ee3f149f1e6fa53333af98c4c89355a",
+      "excess_objects": 1,
+      "filler_paths": [],
+      "lineage_case": "PREEXISTING_SHARED_CONTENT",
+      "manual": "1SPE",
+      "members": [
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "4e42f8e69861ed587fcfd90c7c082f956ee3f149f1e6fa53333af98c4c89355a",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-041-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-041-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        },
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "4e42f8e69861ed587fcfd90c7c082f956ee3f149f1e6fa53333af98c4c89355a",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-042-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-042-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        }
+      ],
+      "preexisting_paths": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-041-CDP.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-042-CDP.tex"
+      ],
+      "why": "les membres portaient deja le meme corps avant le remplissage : partage anterieur, a declarer comme reutilisation et non a trancher"
+    },
+    {
+      "canonical_object_id": null,
+      "canonical_path": null,
+      "chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "digest": "adb98165a3ef24c7cce63ea1e93c63f4499c826d256b6257d21583752d87f9db",
+      "excess_objects": 3,
+      "filler_paths": [],
+      "lineage_case": "PREEXISTING_SHARED_CONTENT",
+      "manual": "1SPE",
+      "members": [
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "adb98165a3ef24c7cce63ea1e93c63f4499c826d256b6257d21583752d87f9db",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-011-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-011-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        },
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "adb98165a3ef24c7cce63ea1e93c63f4499c826d256b6257d21583752d87f9db",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-012-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-012-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        },
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "adb98165a3ef24c7cce63ea1e93c63f4499c826d256b6257d21583752d87f9db",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-013-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-013-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        },
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "adb98165a3ef24c7cce63ea1e93c63f4499c826d256b6257d21583752d87f9db",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-014-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-014-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        }
+      ],
+      "preexisting_paths": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-011-CDP.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-012-CDP.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-013-CDP.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-014-CDP.tex"
+      ],
+      "why": "les membres portaient deja le meme corps avant le remplissage : partage anterieur, a declarer comme reutilisation et non a trancher"
+    },
+    {
+      "canonical_object_id": null,
+      "canonical_path": null,
+      "chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "digest": "c8b71ea71d9bca6b0546e3563f77846016908cb777aab83383c83d9a4561d070",
+      "excess_objects": 3,
+      "filler_paths": [],
+      "lineage_case": "PREEXISTING_SHARED_CONTENT",
+      "manual": "1SPE",
+      "members": [
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "c8b71ea71d9bca6b0546e3563f77846016908cb777aab83383c83d9a4561d070",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-001-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-001-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        },
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "c8b71ea71d9bca6b0546e3563f77846016908cb777aab83383c83d9a4561d070",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-002-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-002-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        },
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "c8b71ea71d9bca6b0546e3563f77846016908cb777aab83383c83d9a4561d070",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-003-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-003-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        },
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "c8b71ea71d9bca6b0546e3563f77846016908cb777aab83383c83d9a4561d070",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-004-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-004-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        }
+      ],
+      "preexisting_paths": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-001-CDP.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-002-CDP.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-003-CDP.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-004-CDP.tex"
+      ],
+      "why": "les membres portaient deja le meme corps avant le remplissage : partage anterieur, a declarer comme reutilisation et non a trancher"
+    },
+    {
+      "canonical_object_id": null,
+      "canonical_path": null,
+      "chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "digest": "de709feeb45bea656caca88df9ecc35a43d20f58835a70783982b0560dc1fa50",
+      "excess_objects": 3,
+      "filler_paths": [],
+      "lineage_case": "PREEXISTING_SHARED_CONTENT",
+      "manual": "1SPE",
+      "members": [
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "de709feeb45bea656caca88df9ecc35a43d20f58835a70783982b0560dc1fa50",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-031-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-031-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        },
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "de709feeb45bea656caca88df9ecc35a43d20f58835a70783982b0560dc1fa50",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-032-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-032-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        },
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "de709feeb45bea656caca88df9ecc35a43d20f58835a70783982b0560dc1fa50",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-033-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-033-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        },
+        {
+          "capacities": [],
+          "chapter": "1SPE-DERIVATION-GLOBAL",
+          "digest": "de709feeb45bea656caca88df9ecc35a43d20f58835a70783982b0560dc1fa50",
+          "existed_before_filler": true,
+          "object_id": "1SPE-DERGLOBAL-EX-034-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-034-CDP.tex",
+          "prefiller_bytes": 306,
+          "role": "coup_de_pouce",
+          "substantive_before_filler": true
+        }
+      ],
+      "preexisting_paths": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-031-CDP.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-032-CDP.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-033-CDP.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-034-CDP.tex"
+      ],
+      "why": "les membres portaient deja le meme corps avant le remplissage : partage anterieur, a declarer comme reutilisation et non a trancher"
+    }
+  ],
   "oracle": "533d19198eb7810699a41a7b5275744691420859^",
   "schema_version": "1.0.0",
   "substantive_threshold_bytes": 200,
   "summary": {
     "ALL_EMPTY_PRE_FILLER": 0,
     "CANONICAL_BY_PRE_FILLER_LINEAGE": 0,
-    "CLONE_GROUPS": 0,
+    "CLONE_GROUPS": 6,
     "FILLER_OBJECTS": 0,
     "MULTIPLE_PREEXISTING_CONTENT": 0,
-    "PER_MANUAL": {},
+    "PER_MANUAL": {
+      "1SPE": {
+        "PREEXISTING_SHARED_CONTENT": 6
+      }
+    },
     "PLACEHOLDER_NOT_CONTENT": 0,
+    "PREEXISTING_SHARED_CONTENT": 6,
     "RECOVERED_BY_LATER_HISTORY": 0,
     "UNRESOLVED_AUTHOR_DECISION": 0
   }
