@@ -22,6 +22,9 @@ import re
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import evidence_freshness as freshness  # noqa: E402
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -170,7 +173,8 @@ def classify(reason: str) -> dict[str, Any] | None:
     return None
 
 
-def build(gate_payloads: list[dict[str, Any]]) -> dict[str, Any]:
+def build(gate_payloads: list[dict[str, Any]],
+          gate_input_paths: list[str] | None = None) -> dict[str, Any]:
     """Union des motifs observés, chaque motif gardant sa provenance.
 
     Un gate s'arrête au premier étage qui échoue : une seule exécution ne voit
@@ -244,8 +248,20 @@ def build(gate_payloads: list[dict[str, Any]]) -> dict[str, Any]:
 
     return {
         "artifact_type": "release_raw_reasons",
-        "schema_version": 2,
+        "schema_version": 3,
         "generated_by": "scripts/build_release_raw_reasons.py",
+        # La taxonomie dérive d'observations du gate, et le gate lit le dépôt
+        # entier. L'empreinte du fichier d'observation ne prouverait donc que
+        # sa propre stabilité, pas celle de ce qu'il décrit : la fraîcheur se
+        # juge ici sur le HEAD auquel l'observation a été capturée.
+        "freshness": {
+            **freshness.stamp(gate_input_paths),
+            "WHOLE_REPOSITORY_INPUT": True,
+            "OBSERVATION_HEADS": sorted(
+                {str(p.get("captured_at_head")) for p in gate_payloads
+                 if p.get("captured_at_head")}
+            ),
+        },
         "gate_observations": [
             {
                 "observation_id": p.get("observation_id"),
@@ -316,14 +332,16 @@ def main() -> int:
     args = parser.parse_args()
 
     payloads = []
+    observation_paths = []
     for item in args.from_gate_json:
         observation_id, _, path = str(item).partition("=")
         if not path:
             observation_id, path = "observation", observation_id
+        observation_paths.append(path)
         loaded = json.loads(Path(path).read_text(encoding="utf-8"))
         loaded["observation_id"] = observation_id
         payloads.append(loaded)
-    payload = build(payloads)
+    payload = build(payloads, [str(p) for p in observation_paths])
     rendered = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
 
     if args.check:
