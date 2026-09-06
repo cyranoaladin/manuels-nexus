@@ -1,0 +1,53 @@
+{
+  "artifact_type": "amenagee_variant_forensics",
+  "schema_version": 1,
+  "generated_by": "scripts/build_tnsi_amenagee_forensics.py",
+  "summary": {
+    "TNSI_AMENAGEE_SOURCE_OBJECTS": 0,
+    "TNSI_AMENAGEE_ACTUAL_CONTENT_COVERAGE": "0/7",
+    "TNSI_AMENAGEE_CLASSIFICATION": "EMPTY_VARIANT",
+    "READINESS_METRIC_WAS_WRONG": true,
+    "WHY": "La maturité lisait included_files, qui compte les contrat.yaml des ouvertures de chapitre : une variante vide y déclarait sept fichiers."
+  },
+  "variants": [
+    {
+      "manual": "1NSI",
+      "source_objects": 1,
+      "chapters_with_content": 1,
+      "chapters_total": 10,
+      "coverage_ratio": "1/10",
+      "classification": "SKELETON_ONLY",
+      "per_chapter": {
+        "1NSI-ALGO-DICHO-GLOUTON-KNN": [],
+        "1NSI-ALGO-PARCOURS-TRIS": [],
+        "1NSI-ARCHITECTURE-OS": [],
+        "1NSI-LANGAGE": [],
+        "1NSI-PROJET-METHODES": [],
+        "1NSI-RESEAUX": [],
+        "1NSI-TABLES": [],
+        "1NSI-TYPES-BASE": [],
+        "1NSI-TYPES-CONSTRUITS": [
+          "1NSI-TC-AM-EXTRAIT.tex"
+        ],
+        "1NSI-WEB-IHM": []
+      }
+    },
+    {
+      "manual": "TNSI",
+      "source_objects": 0,
+      "chapters_with_content": 0,
+      "chapters_total": 7,
+      "coverage_ratio": "0/7",
+      "classification": "EMPTY_VARIANT",
+      "per_chapter": {
+        "TNSI-ALGORITHMIQUE": [],
+        "TNSI-ARCHITECTURES-MATERIELLES-SY": [],
+        "TNSI-BASES-DE-DONNEES": [],
+        "TNSI-HISTOIRE-INFORMATIQUE": [],
+        "TNSI-LANGAGES-ET-PROGRAMMATION": [],
+        "TNSI-PROJET": [],
+        "TNSI-STRUCTURES-DONNEES": []
+      }
+    }
+  ]
+}

@@ -54,16 +54,18 @@ def test_a_deliverable_is_ready_only_when_every_axis_is_green(payload) -> None:
 
 
 def test_the_remaining_gaps_are_content_gaps(payload) -> None:
-    """Les trois manquants sont des contenus absents, pas des outils absents."""
+    """Chaque livrable non prêt l'est faute de contenu, pas faute d'outil."""
     not_ready = {
         row["deliverable_id"]: [axis for axis, ok in row["axes"].items() if not ok]
         for row in payload["deliverables"] if not row["development_ready"]
     }
-    assert set(not_ready) == {
-        "TNSI::banque_ecrite", "TNSI::banque_pratique", "TNSI::version_amenagee",
-    }
-    for missing in not_ready.values():
-        assert "content" in missing or "development_build" in missing
+    assert not_ready, "il reste des livrables à compléter"
+    for deliverable, missing in not_ready.items():
+        assert "content" in missing, deliverable
+    # Les axes purement outillés sont fermés pour tout le monde.
+    for row in payload["deliverables"]:
+        assert row["axes"]["programme"], row["deliverable_id"]
+        assert row["axes"]["science"], row["deliverable_id"]
 
 
 def test_the_build_matcher_ignores_in_progress_work_directories(tmp_path: Path) -> None:
@@ -103,3 +105,45 @@ def test_student_leak_pattern_ignores_the_adjective() -> None:
 
     for leak in ("Corrigé\nExercice 1", "  Corrigés\n", "Barème indicatif : 4 points"):
         assert pdf_integrity.BOOK_STUDENT_LEAK.search(leak) is not None, leak
+
+
+# --- Le contenu se mesure en objets, pas en fichiers déclarés ----------------
+
+def test_content_is_measured_by_real_objects_not_declared_files() -> None:
+    """`included_files` compte les contrat.yaml des ouvertures de chapitre.
+
+    Une variante sans le moindre objet en déclarait sept, et la maturité la
+    comptait « contenu présent ». C'est ce faux vert qui a produit un 21/24
+    au lieu de 18/24.
+    """
+    inventory = json.loads((ROOT / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8"))
+    empty = readiness.content_coverage(inventory, "nsi:manual:TNSI:amenagee", "TNSI")
+    assert empty["objects"] == 0
+    assert empty["chapters_covered"] == 0
+    assert empty["complete"] is False
+
+
+def test_a_booklet_covering_part_of_its_chapters_is_not_complete() -> None:
+    inventory = json.loads((ROOT / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8"))
+    partial = readiness.content_coverage(inventory, "nsi:manual:1NSI:methodes", "1NSI")
+    assert partial["objects"] > 0
+    assert partial["chapters_covered"] < partial["chapters_total"]
+    assert partial["complete"] is False
+
+    full = readiness.content_coverage(inventory, "math:manual:1SPE:methodes", "1SPE")
+    assert full["chapters_covered"] == full["chapters_total"]
+    assert full["complete"] is True
+
+
+def test_an_unknown_assembly_is_never_complete() -> None:
+    inventory = json.loads((ROOT / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8"))
+    unknown = readiness.content_coverage(inventory, "nsi:manual:TNSI:ece", "TNSI")
+    assert unknown["complete"] is False
+
+
+def test_the_amenagee_forensics_agree_with_the_readiness_metric() -> None:
+    import build_tnsi_amenagee_forensics as forensics
+
+    payload = forensics.build()
+    assert payload["summary"]["TNSI_AMENAGEE_SOURCE_OBJECTS"] == 0
+    assert payload["summary"]["TNSI_AMENAGEE_CLASSIFICATION"] == "EMPTY_VARIANT"

@@ -4,12 +4,13 @@
   "generated_by": "scripts/build_release_deliverable_readiness.py",
   "summary": {
     "REQUIRED_RELEASE_DELIVERABLES": 24,
-    "DEVELOPMENT_READY": 21,
+    "DEVELOPMENT_READY": 18,
     "ASSEMBLY_READY": 22,
     "BUILD_TARGET_READY": 22,
     "DEVELOPMENT_BUILD_PASS": 21,
     "PROGRAMME_CONFORM": 24,
     "SCIENCE_CONFORM": 24,
+    "CONTENT_COMPLETE": 18,
     "RELEASE_READY": 0,
     "CURRENT_BUILD_RECEIPTS_REQUIRED_DURING_DEVELOPMENT": false
   },
@@ -25,6 +26,12 @@
         "development_build": true,
         "programme": true,
         "science": true
+      },
+      "content_coverage": {
+        "objects": 40,
+        "chapters_covered": 10,
+        "chapters_total": 10,
+        "complete": true
       },
       "development_build": {
         "present": true,
@@ -47,19 +54,25 @@
       "manual": "1NSI",
       "kind": "AUXILIAIRE",
       "axes": {
-        "content": true,
+        "content": false,
         "assembly": true,
         "build_target": true,
         "development_build": true,
         "programme": true,
         "science": true
       },
+      "content_coverage": {
+        "objects": 14,
+        "chapters_covered": 3,
+        "chapters_total": 10,
+        "complete": false
+      },
       "development_build": {
         "present": true,
         "path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_methodes.pdf",
         "bytes": 209674
       },
-      "development_ready": true,
+      "development_ready": false,
       "release_ready": false,
       "release_ready_blocked_by": [
         "FROZEN_HEAD",
@@ -81,6 +94,12 @@
         "development_build": true,
         "programme": true,
         "science": true
+      },
+      "content_coverage": {
+        "objects": 191,
+        "chapters_covered": 10,
+        "chapters_total": 10,
+        "complete": true
       },
       "development_build": {
         "present": true,
@@ -110,6 +129,12 @@
         "programme": true,
         "science": true
       },
+      "content_coverage": {
+        "objects": 366,
+        "chapters_covered": 10,
+        "chapters_total": 10,
+        "complete": true
+      },
       "development_build": {
         "present": true,
         "path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.pdf",
@@ -138,6 +163,12 @@
         "programme": true,
         "science": true
       },
+      "content_coverage": {
+        "objects": 17,
+        "chapters_covered": 10,
+        "chapters_total": 10,
+        "complete": true
+      },
       "development_build": {
         "present": true,
         "path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_remediation.pdf",
@@ -159,19 +190,25 @@
       "manual": "1NSI",
       "kind": "AUXILIAIRE",
       "axes": {
-        "content": true,
+        "content": false,
         "assembly": true,
         "build_target": true,
         "development_build": true,
         "programme": true,
         "science": true
       },
+      "content_coverage": {
+        "objects": 1,
+        "chapters_covered": 1,
+        "chapters_total": 10,
+        "complete": false
+      },
       "development_build": {
         "present": true,
         "path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_amenagee.pdf",
         "bytes": 114069
       },
-      "development_ready": true,
+      "development_ready": false,
       "release_ready": false,
       "release_ready_blocked_by": [
         "FROZEN_HEAD",
@@ -193,6 +230,12 @@
         "development_build": true,
         "programme": true,
         "science": true
+      },
+      "content_coverage": {
+        "objects": 59,
+        "chapters_covered": 10,
+        "chapters_total": 10,
+        "complete": true
       },
       "development_build": {
         "present": true,
@@ -222,6 +265,12 @@
         "programme": true,
         "science": true
       },
+      "content_coverage": {
+        "objects": 100,
+        "chapters_covered": 10,
+        "chapters_total": 10,
+        "complete": true
+      },
       "development_build": {
         "present": true,
         "path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_remediation.pdf",
@@ -249,6 +298,12 @@
         "development_build": true,
         "programme": true,
         "science": true
+      },
+      "content_coverage": {
+        "objects": 937,
+        "chapters_covered": 10,
+        "chapters_total": 10,
+        "complete": true
       },
       "development_build": {
         "present": true,
@@ -278,6 +333,12 @@
         "programme": true,
         "science": true
       },
+      "content_coverage": {
+        "objects": 1441,
+        "chapters_covered": 10,
+        "chapters_total": 10,
+        "complete": true
+      },
       "development_build": {
         "present": true,
         "path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf",
@@ -305,6 +366,12 @@
         "development_build": true,
         "programme": true,
         "science": true
+      },
+      "content_coverage": {
+        "objects": 457,
+        "chapters_covered": 9,
+        "chapters_total": 9,
+        "complete": true
       },
       "development_build": {
         "present": true,
@@ -334,6 +401,12 @@
         "programme": true,
         "science": true
       },
+      "content_coverage": {
+        "objects": 775,
+        "chapters_covered": 9,
+        "chapters_total": 9,
+        "complete": true
+      },
       "development_build": {
         "present": true,
         "path": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.pdf",
@@ -361,6 +434,12 @@
         "development_build": true,
         "programme": true,
         "science": true
+      },
+      "content_coverage": {
+        "objects": 296,
+        "chapters_covered": 5,
+        "chapters_total": 5,
+        "complete": true
       },
       "development_build": {
         "present": true,
@@ -390,6 +469,12 @@
         "programme": true,
         "science": true
       },
+      "content_coverage": {
+        "objects": 500,
+        "chapters_covered": 5,
+        "chapters_total": 5,
+        "complete": true
+      },
       "development_build": {
         "present": true,
         "path": "Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_professeur.pdf",
@@ -417,6 +502,12 @@
         "development_build": false,
         "programme": true,
         "science": true
+      },
+      "content_coverage": {
+        "objects": 0,
+        "chapters_covered": 0,
+        "chapters_total": 7,
+        "complete": false
       },
       "development_build": {
         "present": false,
@@ -446,6 +537,12 @@
         "programme": true,
         "science": true
       },
+      "content_coverage": {
+        "objects": 0,
+        "chapters_covered": 0,
+        "chapters_total": 7,
+        "complete": false
+      },
       "development_build": {
         "present": false,
         "path": null,
@@ -473,6 +570,12 @@
         "development_build": true,
         "programme": true,
         "science": true
+      },
+      "content_coverage": {
+        "objects": 59,
+        "chapters_covered": 7,
+        "chapters_total": 7,
+        "complete": true
       },
       "development_build": {
         "present": true,
@@ -502,6 +605,12 @@
         "programme": true,
         "science": true
       },
+      "content_coverage": {
+        "objects": 111,
+        "chapters_covered": 7,
+        "chapters_total": 7,
+        "complete": true
+      },
       "development_build": {
         "present": true,
         "path": "NSI/build/MANUEL_TNSI/MANUEL_TNSI_professeur.pdf",
@@ -523,19 +632,25 @@
       "manual": "TNSI",
       "kind": "AUXILIAIRE",
       "axes": {
-        "content": true,
+        "content": false,
         "assembly": true,
         "build_target": true,
         "development_build": true,
         "programme": true,
         "science": true
       },
+      "content_coverage": {
+        "objects": 5,
+        "chapters_covered": 5,
+        "chapters_total": 7,
+        "complete": false
+      },
       "development_build": {
         "present": true,
         "path": "NSI/build/MANUEL_TNSI/MANUEL_TNSI_remediation.pdf",
         "bytes": 114679
       },
-      "development_ready": true,
+      "development_ready": false,
       "release_ready": false,
       "release_ready_blocked_by": [
         "FROZEN_HEAD",
@@ -551,12 +666,18 @@
       "manual": "TNSI",
       "kind": "AUXILIAIRE",
       "axes": {
-        "content": true,
+        "content": false,
         "assembly": true,
         "build_target": true,
         "development_build": false,
         "programme": true,
         "science": true
+      },
+      "content_coverage": {
+        "objects": 0,
+        "chapters_covered": 0,
+        "chapters_total": 7,
+        "complete": false
       },
       "development_build": {
         "present": false,
@@ -586,6 +707,12 @@
         "programme": true,
         "science": true
       },
+      "content_coverage": {
+        "objects": 38,
+        "chapters_covered": 11,
+        "chapters_total": 11,
+        "complete": true
+      },
       "development_build": {
         "present": true,
         "path": "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_methodes.pdf",
@@ -613,6 +740,12 @@
         "development_build": true,
         "programme": true,
         "science": true
+      },
+      "content_coverage": {
+        "objects": 56,
+        "chapters_covered": 11,
+        "chapters_total": 11,
+        "complete": true
       },
       "development_build": {
         "present": true,
@@ -642,6 +775,12 @@
         "programme": true,
         "science": true
       },
+      "content_coverage": {
+        "objects": 537,
+        "chapters_covered": 11,
+        "chapters_total": 11,
+        "complete": true
+      },
       "development_build": {
         "present": true,
         "path": "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_eleve.pdf",
@@ -669,6 +808,12 @@
         "development_build": true,
         "programme": true,
         "science": true
+      },
+      "content_coverage": {
+        "objects": 836,
+        "chapters_covered": 11,
+        "chapters_total": 11,
+        "complete": true
       },
       "development_build": {
         "present": true,

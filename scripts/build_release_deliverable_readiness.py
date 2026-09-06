@@ -33,6 +33,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 SCOPE = ROOT / "audit/RELEASE_DELIVERABLE_SCOPE_MATRIX.json"
+INVENTORY = ROOT / "audit/INVENTAIRE_COLLECTION.json"
 OUTPUT_JSON = ROOT / "audit/RELEASE_DELIVERABLE_READINESS.json"
 OUTPUT_MD = ROOT / "audit/RELEASE_DELIVERABLE_READINESS.md"
 
@@ -95,8 +96,41 @@ def _development_build(manual: str, variant: str) -> dict[str, Any]:
     return {"present": False, "path": None, "bytes": 0}
 
 
+def content_coverage(inventory: dict[str, Any], assembly_id: str | None,
+                     manual: str) -> dict[str, Any]:
+    """Couverture réelle en objets de contenu d'un assemblage.
+
+    `included_files` ne mesure pas le contenu : il compte aussi les
+    `contrat.yaml` lus pour composer les ouvertures de chapitre. Une variante
+    vide déclare ainsi sept fichiers et zéro objet. On ne compte donc que les
+    sources `.tex` de chapitre, et on exige que **chaque** chapitre du manuel
+    en apporte au moins une — un livret qui saute la moitié des chapitres
+    n'est pas le livret de ce manuel.
+    """
+    chapters = set(inventory["manuals"].get(manual, {}).get("chapters", {}))
+    assemblies = {a["assembly_id"]: a for a in inventory.get("declared_assemblies", [])}
+    assembly = assemblies.get(assembly_id or "")
+    if assembly is None:
+        return {"objects": 0, "chapters_covered": 0, "chapters_total": len(chapters),
+                "complete": False}
+    covered = set()
+    objects = 0
+    for path in assembly.get("included_files", []):
+        if not path.endswith(".tex") or "/chapitres/" not in path:
+            continue
+        objects += 1
+        covered.add(path.split("/chapitres/", 1)[1].split("/", 1)[0])
+    return {
+        "objects": objects,
+        "chapters_covered": len(covered & chapters),
+        "chapters_total": len(chapters),
+        "complete": bool(chapters) and (covered & chapters) == chapters,
+    }
+
+
 def build() -> dict[str, Any]:
     scope = json.loads(SCOPE.read_text(encoding="utf-8"))
+    inventory = json.loads(INVENTORY.read_text(encoding="utf-8"))
     failing = {axis: _dimension_targets_in_failure(path)
                for axis, path in DIMENSION_BY_AXIS.items()}
 
@@ -108,9 +142,10 @@ def build() -> dict[str, Any]:
         manual = entry["deliverable_id"].split("::", 1)[0]
         profile = entry["build_profile"]
         dev_build = _development_build(manual, profile["variant_argument"])
+        coverage = content_coverage(inventory, profile["assembly_id"], manual)
 
         axes = {
-            "content": entry["declared_assembly"],
+            "content": coverage["complete"],
             "assembly": entry["declared_assembly"],
             "build_target": entry["build_target_declared"],
             "development_build": dev_build["present"],
@@ -122,6 +157,7 @@ def build() -> dict[str, Any]:
             "manual": manual,
             "kind": "MANUEL" if entry["canonical_release_product"] else "AUXILIAIRE",
             "axes": axes,
+            "content_coverage": coverage,
             "development_build": dev_build,
             "development_ready": all(axes.values()),
             # Volontairement faux pendant la phase de contenu : il exige un
@@ -144,6 +180,7 @@ def build() -> dict[str, Any]:
         "DEVELOPMENT_BUILD_PASS": count(lambda r: r["axes"]["development_build"]),
         "PROGRAMME_CONFORM": count(lambda r: r["axes"]["programme"]),
         "SCIENCE_CONFORM": count(lambda r: r["axes"]["science"]),
+        "CONTENT_COMPLETE": count(lambda r: r["axes"]["content"]),
         "RELEASE_READY": 0,
         "CURRENT_BUILD_RECEIPTS_REQUIRED_DURING_DEVELOPMENT": False,
     }
