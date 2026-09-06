@@ -122,11 +122,20 @@ def build_graph(
         if len(parts) <= index + 1:
             continue
         chapter, role = parts[index], parts[index + 1]
-        if role not in {"exercices", "corriges"}:
+        # Une remédiation est un objet auquel un corrigé peut répondre : ses
+        # corrections vivent bien dans `corriges/` et référencent un objet de
+        # `remediation/`. Ne pas indexer ce rôle faisait passer seize corrigés
+        # authentiques pour des orphelins.
+        if role not in {"exercices", "corriges", "remediation"}:
             continue
         meta = clone.read_meta(path.read_text(encoding="utf-8", errors="replace"))
         object_type = str(meta.get("type_objet") or "").strip()
+        # La classification dépend du type déclaré, jamais d'une chaîne dans
+        # l'identifiant : un objet dont l'id contient CORRIGE n'est pas pour
+        # autant un corrigé.
         if role == "exercices" and object_type != "exercice":
+            continue
+        if role == "remediation" and object_type != "remediation":
             continue
         if role == "corriges" and object_type not in {"corrige", "correction"}:
             continue
@@ -154,7 +163,8 @@ def build_graph(
             "is_clone_candidate": relative in clone_paths,
             "meta": meta,
         }
-        if role == "exercices":
+        row["answerable_role"] = role
+        if role in {"exercices", "remediation"}:
             exercises[object_id] = row
         else:
             corrections.append(row)
@@ -172,6 +182,8 @@ def build_graph(
         )
         classes: list[str] = []
         exercise = exercises.get(references[0]) if len(references) == 1 else None
+        if exercise is not None and exercise.get("answerable_role") == "remediation":
+            classes.append("REMEDIATION_CORRECTION")
         if not references:
             classes.append("ORPHAN_CO")
         elif len(references) > 1:
@@ -242,6 +254,9 @@ def build_graph(
             "ANSWERS_MISSING": 4,
             "CLONE": 5,
             "UNKNOWN": 6,
+            # Un corrigé de remédiation n'est pas un défaut : c'est le rôle de
+            # l'objet auquel il répond qui le qualifie.
+            "REMEDIATION_CORRECTION": 6.5,
             # Etabli en dernier : c'est le seul statut qui n'est pas un defaut,
             # et il ne vaut que couverture, jamais exactitude.
             "ANSWER_COVERAGE_ESTABLISHED": 7,
