@@ -24,6 +24,7 @@
         "scripts/build_clean_reproducibility.py",
         "scripts/build_final_preflight_and_regression.py",
         "scripts/build_manifest.py",
+        "scripts/build_open_findings.py",
         "scripts/build_parity_baremes_validation.py",
         "scripts/build_printed_code_validation.py",
         "scripts/build_programme_authority_matrix.py",
@@ -70,6 +71,7 @@
         "scripts/build_clean_reproducibility.py",
         "scripts/build_final_preflight_and_regression.py",
         "scripts/build_manifest.py",
+        "scripts/build_open_findings.py",
         "scripts/build_parity_baremes_validation.py",
         "scripts/build_printed_code_validation.py",
         "scripts/build_programme_authority_matrix.py",
@@ -158,6 +160,7 @@
         "scripts/build_clean_reproducibility.py",
         "scripts/build_final_preflight_and_regression.py",
         "scripts/build_manifest.py",
+        "scripts/build_open_findings.py",
         "scripts/build_parity_baremes_validation.py",
         "scripts/build_printed_code_validation.py",
         "scripts/build_programme_authority_matrix.py",
@@ -447,7 +450,9 @@
         "audit/OPEN_FINDINGS.json"
       ],
       "metric": "OPEN_FINDING_IDS_P0",
-      "producers": [],
+      "producers": [
+        "scripts/build_open_findings.py"
+      ],
       "source_kind": "DERIVED_FROM_EVIDENCE",
       "value": 318
     },
@@ -616,6 +621,7 @@
         "scripts/build_clean_reproducibility.py",
         "scripts/build_final_preflight_and_regression.py",
         "scripts/build_manifest.py",
+        "scripts/build_open_findings.py",
         "scripts/build_parity_baremes_validation.py",
         "scripts/build_printed_code_validation.py",
         "scripts/build_programme_authority_matrix.py",
@@ -658,6 +664,7 @@
         "scripts/build_clean_reproducibility.py",
         "scripts/build_final_preflight_and_regression.py",
         "scripts/build_manifest.py",
+        "scripts/build_open_findings.py",
         "scripts/build_parity_baremes_validation.py",
         "scripts/build_printed_code_validation.py",
         "scripts/build_programme_authority_matrix.py",
@@ -759,7 +766,9 @@
         "audit/OPEN_FINDINGS.json"
       ],
       "metric": "TOTAL_P0_OPEN",
-      "producers": [],
+      "producers": [
+        "scripts/build_open_findings.py"
+      ],
       "source_kind": "DERIVED_FROM_EVIDENCE",
       "value": 318
     },
@@ -771,7 +780,9 @@
         "audit/OPEN_FINDINGS.json"
       ],
       "metric": "TOTAL_P1_OPEN",
-      "producers": [],
+      "producers": [
+        "scripts/build_open_findings.py"
+      ],
       "source_kind": "DERIVED_FROM_EVIDENCE",
       "value": 28
     },
@@ -783,7 +794,9 @@
         "audit/OPEN_FINDINGS.json"
       ],
       "metric": "TOTAL_P2_OPEN",
-      "producers": [],
+      "producers": [
+        "scripts/build_open_findings.py"
+      ],
       "source_kind": "DERIVED_FROM_EVIDENCE",
       "value": 16
     },
@@ -795,7 +808,9 @@
         "audit/OPEN_FINDINGS.json"
       ],
       "metric": "TRUE_PRODUCT_CLONES_OPEN",
-      "producers": [],
+      "producers": [
+        "scripts/build_open_findings.py"
+      ],
       "source_kind": "DERIVED_FROM_EVIDENCE",
       "value": 318
     },

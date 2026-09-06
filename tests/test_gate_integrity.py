@@ -149,7 +149,7 @@ def test_mutation_missing_evidence_key_blocks_the_debt_gate(tmp_path):
 
     stripped = dict(parity)
     stripped["summary"] = {
-        k: v for k, v in parity["summary"].items() if k != "STUDENT_TEACHER_STATEMENT_DRIFT"
+        k: v for k, v in parity["summary"].items() if k != "TEACHER_CONTENT_LEAK_IN_STUDENT"
     }
     mutant_root = tmp_path / "root"
     (mutant_root / "audit").mkdir(parents=True)
@@ -165,7 +165,7 @@ def test_mutation_missing_evidence_key_blocks_the_debt_gate(tmp_path):
     assert mutated["product_debt_summary"]["EVIDENCE_DEBT_OPEN"] >= 1
     assert mutated["all_product_debts_zero"] is False
     assert any(
-        "STUDENT_TEACHER_STATEMENT_DRIFT" in entry
+        "TEACHER_CONTENT_LEAK_IN_STUDENT" in entry
         for entry in mutated["missing_or_malformed_evidence"]
     )
 

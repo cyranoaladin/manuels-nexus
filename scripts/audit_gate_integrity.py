@@ -347,6 +347,11 @@ def build_provenance_map(root: Path) -> dict[str, Any]:
         "audit/FINAL_PRINT_PREFLIGHT.json": "scripts/build_final_preflight_and_regression.py",
         "audit/VISUAL_SEMANTIC_REGRESSION_REPORT.json": "scripts/build_final_preflight_and_regression.py",
         "audit/ZERO_TECHNICAL_DEBT_REPORT.json": "scripts/build_zero_technical_debt.py",
+        "audit/OPEN_FINDINGS.json": "scripts/build_open_findings.py",
+        "audit/CLONE_DISPOSITION_LEDGER.json": "scripts/build_clone_disposition_ledger.py",
+        "audit/PREFILLER_LINEAGE.json": "scripts/build_prefiller_lineage.py",
+        "audit/EX_CO_SEMANTIC_BINDING.json": "scripts/build_ex_co_semantic_binding.py",
+        "audit/FALSE_COVERAGE_TRIAGE.json": "scripts/build_false_coverage_triage.py",
     }
 
     entries = []
