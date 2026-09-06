@@ -1,0 +1,35 @@
+{
+  "artifact_type": "mathematics_population_reconciliation",
+  "schema_version": 1,
+  "generated_by": "scripts/build_mathematics_population_reconciliation.py",
+  "freshness": {
+    "EVIDENCE_HEAD": "4e2892b7705df5e35cecf3d6c1f826b49ea7c04f",
+    "INPUT_PATHS": [
+      "audit/DIMENSION_MATHEMATICS.json",
+      "audit/INVENTAIRE_COLLECTION.json",
+      "audit/PUBLISH_READINESS_CHAPTER_MATRIX.json"
+    ],
+    "INPUT_DIGEST": "sha256:0af849daf7c0f49775a81bcef596465ebeec52fea46679d744b5018df01cbb7a"
+  },
+  "summary": {
+    "MATHEMATICS_OBJECTS_TOTAL": 4034,
+    "FORMAL_ASSERTION_OBJECTS": 3456,
+    "OBJECTS_MISSING_ORACLE": 91,
+    "NON_FORMALIZABLE_OBJECTS": 399,
+    "TRULY_NOT_MATHEMATICAL": 88,
+    "CHAPTERS_TOTAL": 52,
+    "CHAPTER_ORACLE_COMPLETE": 10,
+    "CHAPTER_ORACLE_GAPS": 25,
+    "ORACLE_EVIDENCE_MISSING_RECEIPT": 17,
+    "STORED_SYMPY_RECEIPTS": 3038,
+    "RECEIPT_PASS": 2674,
+    "RECEIPT_MANUAL_REVIEW": 364,
+    "RECEIPT_FAIL": 0,
+    "MACHINE_UNCLASSIFIED": 121,
+    "HUMAN_SCIENCE_REQUIRED": 148,
+    "EXECUTED_BUT_UNRECEIPTED": 418,
+    "MATHEMATICS_POPULATION_UNRECONCILED": 0,
+    "RECONCILIATION_EQUATION": "3456 exécutés + 91 sans oracle + 399 non formalisables + 88 non mathématiques = 4034 / 4034 objets",
+    "WHY_THE_TWO_ORACLE_FIGURES_DIFFER": "MISSING_ORACLE compte des objets sans bloc de vérification ; GAP et NO_RECEIPTS comptent des chapitres selon les reçus déposés. Le chapitre exige une preuve conservée, l'objet une preuve exécutable : fermer l'un ne ferme pas l'autre."
+  }
+}
