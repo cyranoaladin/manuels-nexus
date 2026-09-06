@@ -4,53 +4,31 @@
   "generated_by": "scripts/build_release_raw_reasons.py",
   "gate_observations": [
     {
-      "observation_id": "pre-acceptance-gate-logic",
-      "gate": "check",
-      "exit_code": 3,
-      "success": false,
-      "reason_count": 179
-    },
-    {
-      "observation_id": "post-acceptance-release-strict",
+      "observation_id": "release-strict-2026-09-06-current",
       "gate": "release-strict",
       "exit_code": 7,
       "success": false,
-      "reason_count": 376
-    },
-    {
-      "observation_id": "post-restore-check",
-      "gate": "check",
-      "exit_code": 3,
-      "success": false,
-      "reason_count": 90
-    },
-    {
-      "observation_id": "post-restore-release-strict",
-      "gate": "release-strict",
-      "exit_code": 7,
-      "success": false,
-      "reason_count": 1
+      "reason_count": 471
     }
   ],
   "summary": {
-    "RAW_REASON_COUNT": 557,
-    "ROOT_BLOCKER_COUNT": 24,
+    "RAW_REASON_COUNT": 471,
+    "ROOT_BLOCKER_COUNT": 20,
     "UNMAPPED_RAW_REASONS": 0,
     "DUPLICATE_REASON_IDS": 0,
     "BLOCKER_CLASSIFICATION_CONFLICTS": 0,
-    "PRODUCT_P0": 1,
+    "PRODUCT_P0": 0,
     "PRODUCT_P1": 8,
     "PRODUCT_P2": 1,
-    "CERTIFICATION_BLOCKERS": 12,
+    "CERTIFICATION_BLOCKERS": 9,
     "RELEASE_POLICY_BLOCKERS": 1,
     "GOVERNANCE_BLOCKERS": 1,
     "RAW_REASONS_BY_TAXONOMY": {
-      "CERTIFICATION_BLOCKER": 347,
-      "GOVERNANCE_BLOCKER": 10,
-      "PRODUCT_P1": 164,
+      "CERTIFICATION_BLOCKER": 248,
+      "GOVERNANCE_BLOCKER": 12,
+      "PRODUCT_P1": 176,
       "RELEASE_POLICY_BLOCKER": 1,
-      "PRODUCT_P2": 34,
-      "PRODUCT_P0": 1
+      "PRODUCT_P2": 34
     }
   },
   "root_blockers": [
@@ -160,15 +138,27 @@
       "root_blocker_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "title": "Variantes déclarées jamais construites",
       "taxonomy": "PRODUCT_P1",
-      "dependent_reason_count": 8,
+      "dependent_reason_count": 20,
       "dependent_reason_ids": [
         "RSN-0cc7c98e8018f7f3",
+        "RSN-23af4f1064b162e8",
+        "RSN-2b3674e20ca098b0",
+        "RSN-3b3f6ef3b0ebb702",
+        "RSN-3ff4aa7afde7d296",
         "RSN-400d21e552547541",
+        "RSN-41106933249fd1a6",
         "RSN-46002f4e6ac1f5d5",
+        "RSN-4c16c7611fd74f65",
+        "RSN-721166773fc7e9ed",
         "RSN-83f4fe36619ddbf1",
         "RSN-8c729c7e45eea659",
+        "RSN-971d7f66948ee446",
         "RSN-9b9e6ad9a3b47df2",
+        "RSN-9d6b554b08977e3d",
+        "RSN-b1a142de9d0d196d",
+        "RSN-e0aca017e6cb4a8e",
         "RSN-e9fb7a88504ba261",
+        "RSN-ed47cf9ba118f0fb",
         "RSN-f2bbad663d001791"
       ]
     },
@@ -210,18 +200,6 @@
         "RSN-9b6ea5f9fcf2eeda",
         "RSN-da584fa871457d5a",
         "RSN-f6a8301aa37f4882"
-      ]
-    },
-    {
-      "root_blocker_id": "ROOT-DIMENSION-NOT-COVERED",
-      "title": "Dimensions de certification sans preuve",
-      "taxonomy": "CERTIFICATION_BLOCKER",
-      "dependent_reason_count": 4,
-      "dependent_reason_ids": [
-        "RSN-13680493d6470419",
-        "RSN-154efa0bccd7df80",
-        "RSN-385435dc89962e35",
-        "RSN-9ad95a20a28a08c0"
       ]
     },
     {
@@ -271,16 +249,6 @@
       "dependent_reason_count": 1,
       "dependent_reason_ids": [
         "RSN-05ef488d6a3414b1"
-      ]
-    },
-    {
-      "root_blocker_id": "ROOT-GATE-CHECK-ERROR",
-      "title": "Erreur fatale de contrôle du gate",
-      "taxonomy": "CERTIFICATION_BLOCKER",
-      "dependent_reason_count": 2,
-      "dependent_reason_ids": [
-        "RSN-4b43d307937eb999",
-        "RSN-cd999f6a593df3bb"
       ]
     },
     {
@@ -345,39 +313,23 @@
       ]
     },
     {
-      "root_blocker_id": "ROOT-INVENTORY-UNAVAILABLE",
-      "title": "Inventaire indisponible",
-      "taxonomy": "CERTIFICATION_BLOCKER",
-      "dependent_reason_count": 1,
-      "dependent_reason_ids": [
-        "RSN-d4099b3f29040099"
-      ]
-    },
-    {
-      "root_blocker_id": "ROOT-MISSING-CHAPTERS",
-      "title": "Chapitres attendus absents de l'inventaire",
-      "taxonomy": "PRODUCT_P0",
-      "dependent_reason_count": 1,
-      "dependent_reason_ids": [
-        "RSN-e9ead859b1a2253b"
-      ]
-    },
-    {
       "root_blocker_id": "ROOT-NON-APPROVED-STATUSES",
       "title": "Objets et contrats non approuvés",
       "taxonomy": "GOVERNANCE_BLOCKER",
-      "dependent_reason_count": 10,
+      "dependent_reason_count": 12,
       "dependent_reason_ids": [
-        "RSN-05939d36d28a800e",
-        "RSN-2945cbb678bbedc8",
-        "RSN-434a000469cbb39e",
-        "RSN-7b1b7018543639fd",
-        "RSN-8568dc92fd872679",
-        "RSN-995079eb1384c618",
-        "RSN-9ea7689510b46436",
-        "RSN-a0acbf61e5a586c6",
-        "RSN-a70d0aa64b8585d8",
-        "RSN-be4d6f4710df7d3d"
+        "RSN-302b461039a6c905",
+        "RSN-46094e70aab2a0dc",
+        "RSN-586372bea334206c",
+        "RSN-5dcef3d743f66115",
+        "RSN-7677f4ce941e1ce7",
+        "RSN-83a7471cd5a2a468",
+        "RSN-939208beb4318fd1",
+        "RSN-aa4ca31e6c1853bf",
+        "RSN-b58f7e4e0b242959",
+        "RSN-b813de38b9f46081",
+        "RSN-e9b8c64d0a0d642b",
+        "RSN-f5adb8607b8946bf"
       ]
     },
     {
@@ -526,15 +478,12 @@
       "root_blocker_id": "ROOT-PRODUCER-STALE",
       "title": "Producteurs de preuve stale ou rouges",
       "taxonomy": "CERTIFICATION_BLOCKER",
-      "dependent_reason_count": 7,
+      "dependent_reason_count": 4,
       "dependent_reason_ids": [
-        "RSN-16caed16674c847b",
-        "RSN-2b3bf0280fc72f12",
         "RSN-3e60facdb2acfbd5",
         "RSN-745d2ec64d56190d",
         "RSN-8b256cdd8c834836",
-        "RSN-e65d25c529d7ae3a",
-        "RSN-ff2aa591cfe6c05c"
+        "RSN-e65d25c529d7ae3a"
       ]
     },
     {
@@ -571,55 +520,29 @@
       "root_blocker_id": "ROOT-QUALIFICATION-STALE",
       "title": "Qualifications dérivées invalidées par une mutation de source",
       "taxonomy": "CERTIFICATION_BLOCKER",
-      "dependent_reason_count": 178,
+      "dependent_reason_count": 89,
       "dependent_reason_ids": [
         "RSN-002bbfb6fdbbbb76",
         "RSN-004641885486413a",
-        "RSN-023abf38fc9c2100",
-        "RSN-092363f8e580682d",
-        "RSN-0b39a0f7f8ea10ad",
         "RSN-0b7f46f268d2aab4",
         "RSN-0d319a0094856878",
-        "RSN-0d9af49f55a62c7b",
         "RSN-0e15dc0d11a54d71",
-        "RSN-0f1e464c9ee9b720",
         "RSN-1099bf38b5077e9d",
-        "RSN-12e83b46471282aa",
-        "RSN-1395f521acad859d",
         "RSN-148dd84b589412a2",
-        "RSN-1762f0f04f31a51a",
-        "RSN-1a283a607fdb7136",
         "RSN-1c98a6161bba1191",
-        "RSN-208d679efd3e11eb",
-        "RSN-23c08391814e66a5",
-        "RSN-2b0c8114d7dd4518",
         "RSN-2b5f8c57b5c2ae41",
         "RSN-2c72a26b0fafc9f4",
-        "RSN-2d645e085e2c1bd5",
-        "RSN-2fee5a83aadc7e00",
         "RSN-30295675c9a71b34",
-        "RSN-311115d7c81f5255",
-        "RSN-314b9227495937cd",
         "RSN-317c2b4e0924be05",
         "RSN-338c682494390551",
-        "RSN-3390f0cc7763d71e",
-        "RSN-35fb292ae1b4072c",
         "RSN-367b12210fafff7d",
-        "RSN-3727f0dec40f09e9",
         "RSN-3748500e80f135c6",
-        "RSN-39e92a8a59ec3c5a",
-        "RSN-39f60ec6a4db3f20",
-        "RSN-3b7cf38fab358712",
-        "RSN-3bbf682b90c5036f",
-        "RSN-3ed8e03c3768b0cf",
-        "RSN-3f36368345b6863c",
         "RSN-3fc1078db18ae0df",
         "RSN-423ab667168abc28",
         "RSN-441ffc2337c7db54",
         "RSN-46bdb1a2295d4ba2",
         "RSN-471cc20745596189",
         "RSN-47df6279c94cf0cc",
-        "RSN-4991b9adbbf96af5",
         "RSN-4ae5006d63bf3402",
         "RSN-4b16bd67909cf11a",
         "RSN-4b360158e7b9cf15",
@@ -627,125 +550,62 @@
         "RSN-540e226dff3d9a8e",
         "RSN-544cc838584bb34a",
         "RSN-562dfdf154d84362",
-        "RSN-58d325a964ccff42",
         "RSN-5bb1e91935671792",
-        "RSN-5c01b019c858d8c6",
-        "RSN-5c034cc6bc23b9d2",
-        "RSN-5c93e69870e771b8",
-        "RSN-5ed6a5d152eb711a",
         "RSN-5fb81d3d606d3f93",
-        "RSN-61b26bddcf123212",
         "RSN-65d96f204371822c",
         "RSN-66d95904fa1c0e96",
-        "RSN-69d859967a29de23",
-        "RSN-6b1bbe3baf928ef5",
         "RSN-6b38168312d94c79",
-        "RSN-6d6f408b8ccf8de7",
-        "RSN-6d90d4d033ce03f0",
         "RSN-6ece264bf63b515d",
         "RSN-7000535f919be60f",
-        "RSN-7074630046dff726",
         "RSN-70a840de47453d90",
         "RSN-725f5e987a270bd0",
-        "RSN-727168a6fabb781d",
-        "RSN-738307f8f738eb63",
         "RSN-77f16a718c02c43b",
         "RSN-7adc90954459aa63",
-        "RSN-7cf10d1f25cd2da5",
-        "RSN-7e7aa690c6828236",
-        "RSN-7f012f496fb710e8",
         "RSN-7fa0253281c0b927",
         "RSN-808ab2673692ed11",
         "RSN-81347cc0a208150f",
-        "RSN-82f8acc607e42555",
         "RSN-83b60872a54470b3",
-        "RSN-8439284fd91a9892",
         "RSN-8476bcecee48b4dc",
-        "RSN-857434fb3c6159d9",
         "RSN-859d5aa5cc343f90",
-        "RSN-86684e73044435ec",
         "RSN-888bf00dd05b49f5",
-        "RSN-88b893a27856f6bd",
-        "RSN-89d8c5d1f752b11a",
         "RSN-8b2a1d575f4680e2",
-        "RSN-8b95ef1e8f73b23d",
         "RSN-8be4f76068287b18",
         "RSN-8c7956cea2a1af0e",
-        "RSN-907972de90e9c86a",
         "RSN-91c0a3fbb027e4b1",
-        "RSN-921bbcb7f2590cf2",
         "RSN-9285f8d7e1876321",
-        "RSN-9444f6536d550b07",
         "RSN-94dbf54765de22eb",
         "RSN-9606feae39530678",
-        "RSN-9a686f393ca3035f",
         "RSN-9a9f39a51bcda4e4",
         "RSN-9f0e27304cdbf9c6",
-        "RSN-9f3566a16f0b9105",
-        "RSN-9fb0cf0346e26d6b",
-        "RSN-9fb1298c7dca7aa4",
-        "RSN-a0885fff78713c7c",
-        "RSN-a1f2e1b894bfec2a",
-        "RSN-a2c8ca03b958a7df",
-        "RSN-a2e117f82b519994",
         "RSN-a411f7c21fb89c02",
-        "RSN-a6151f50008324b8",
-        "RSN-a69a80d216d20283",
         "RSN-a6e5ad049e64482e",
-        "RSN-a92fcfd00e1fcebe",
         "RSN-aa0b261fdff642a4",
         "RSN-ab515345d4d3649e",
         "RSN-acead4f42468b7cd",
-        "RSN-aed747964d347180",
-        "RSN-b51b8e87349c18e0",
         "RSN-b54ecc2a7fe57337",
         "RSN-b60953d4c36631ab",
-        "RSN-b68edc47b7ed42ae",
         "RSN-b901e663c91837ba",
-        "RSN-b9ddadb32dc79323",
         "RSN-bdb843e48a3f0547",
         "RSN-bea9b93e3d676683",
-        "RSN-bee6a2032409ad25",
-        "RSN-bf0bdd1d614636c2",
         "RSN-c0da1fec6cf009bd",
         "RSN-c16153c080a67e0a",
         "RSN-c1e6c6606a93177f",
         "RSN-c2b263a4c170d191",
-        "RSN-c2bc3dea7318dfe6",
         "RSN-c3841c310ce81768",
-        "RSN-c6ad072a436e17df",
-        "RSN-c78b771cdcc76a62",
         "RSN-c7ea99f7933e216e",
         "RSN-c84e16c67800c865",
-        "RSN-c8d26e7da048ac75",
         "RSN-c970768307e1cfd4",
-        "RSN-cae5ef2c73d53921",
         "RSN-cd4eb321619e6ccf",
         "RSN-ce8f72a62aa496b6",
-        "RSN-cff76570f5140735",
-        "RSN-d072dcae949d7692",
-        "RSN-d2104eb508041757",
         "RSN-d2141773f7fa5ad9",
-        "RSN-d31b34da14bd834b",
         "RSN-d39c9338e39d2f08",
-        "RSN-d55b60f6c3d9fa0a",
-        "RSN-d678b2a15b3013ef",
         "RSN-d8641e15a57480ea",
-        "RSN-d9677ca5522af3cb",
         "RSN-da4a065e93ae2e67",
         "RSN-dbff7444852d1047",
-        "RSN-e067eb07e8662320",
         "RSN-e4ba6da402a53983",
-        "RSN-e6f6e51ad0a5689b",
         "RSN-e9968b829f142d78",
-        "RSN-eb82df3d79ea1e01",
-        "RSN-ebd9c1176b4614fd",
-        "RSN-ed801860f3d07538",
         "RSN-f52550adcede64ef",
-        "RSN-f5689e65406241a9",
-        "RSN-fa28cc3f05ef917b",
         "RSN-fa5d85f92b9673a4",
-        "RSN-fa66838072c14086",
         "RSN-faf3ad92317dc6b3",
         "RSN-fdf4c8eda40799d0",
         "RSN-fed9945e4ea99e5a",
@@ -816,7 +676,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -829,7 +689,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -842,7 +702,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -855,7 +715,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -868,7 +728,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -881,7 +741,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -894,7 +754,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -907,7 +767,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -920,7 +780,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -933,7 +793,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -946,7 +806,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -959,7 +819,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -972,7 +832,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -985,7 +845,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -998,7 +858,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1011,7 +871,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1024,7 +884,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1037,7 +897,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1050,7 +910,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1063,7 +923,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1076,7 +936,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1089,7 +949,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1102,7 +962,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1115,7 +975,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1128,7 +988,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1141,7 +1001,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1154,7 +1014,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1167,7 +1027,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1180,7 +1040,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1193,7 +1053,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1206,7 +1066,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1219,7 +1079,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1232,7 +1092,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1245,7 +1105,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1258,7 +1118,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1271,7 +1131,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1284,7 +1144,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1297,7 +1157,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1310,7 +1170,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1323,7 +1183,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1336,7 +1196,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1349,7 +1209,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-BUILD-RECEIPT-NOT-INTEGRATED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1362,7 +1222,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CONTENT-MATRIX-INCOMPLETE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1375,7 +1235,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-COURSE-ASSEMBLY",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1388,7 +1248,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-COURSE-ASSEMBLY",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1401,7 +1261,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-COURSE-ASSEMBLY",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1414,7 +1274,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-COURSE-ASSEMBLY",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1427,7 +1287,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1440,7 +1300,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1453,7 +1313,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1466,7 +1326,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1479,7 +1339,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1492,7 +1352,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1505,7 +1365,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1518,7 +1378,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1531,7 +1391,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1544,7 +1404,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1557,7 +1417,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1570,7 +1430,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1583,7 +1443,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1596,7 +1456,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1609,7 +1469,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1622,7 +1482,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1635,7 +1495,33 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
+      ]
+    },
+    {
+      "reason_id": "RSN-b1a142de9d0d196d",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "1NSI",
+      "object_id": null,
+      "category": "PRODUCT_P1",
+      "evidence": "1NSI:build_observé_absent:manuel_eleve",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
+      "observed_in": [
+        "release-strict-2026-09-06-current"
+      ]
+    },
+    {
+      "reason_id": "RSN-3b3f6ef3b0ebb702",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "1NSI",
+      "object_id": null,
+      "category": "PRODUCT_P1",
+      "evidence": "1NSI:build_observé_absent:manuel_professeur",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
+      "observed_in": [
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1648,7 +1534,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1661,7 +1547,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1674,7 +1560,111 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
+      ]
+    },
+    {
+      "reason_id": "RSN-ed47cf9ba118f0fb",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "1SPE",
+      "object_id": null,
+      "category": "PRODUCT_P1",
+      "evidence": "1SPE:build_observé_absent:manuel_eleve",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
+      "observed_in": [
+        "release-strict-2026-09-06-current"
+      ]
+    },
+    {
+      "reason_id": "RSN-41106933249fd1a6",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "1SPE",
+      "object_id": null,
+      "category": "PRODUCT_P1",
+      "evidence": "1SPE:build_observé_absent:manuel_professeur",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
+      "observed_in": [
+        "release-strict-2026-09-06-current"
+      ]
+    },
+    {
+      "reason_id": "RSN-23af4f1064b162e8",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TCOMPL",
+      "object_id": null,
+      "category": "PRODUCT_P1",
+      "evidence": "TCOMPL:build_observé_absent:manuel_eleve",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
+      "observed_in": [
+        "release-strict-2026-09-06-current"
+      ]
+    },
+    {
+      "reason_id": "RSN-971d7f66948ee446",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TCOMPL",
+      "object_id": null,
+      "category": "PRODUCT_P1",
+      "evidence": "TCOMPL:build_observé_absent:manuel_professeur",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
+      "observed_in": [
+        "release-strict-2026-09-06-current"
+      ]
+    },
+    {
+      "reason_id": "RSN-e0aca017e6cb4a8e",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TEXPERTES",
+      "object_id": null,
+      "category": "PRODUCT_P1",
+      "evidence": "TEXPERTES:build_observé_absent:manuel_eleve",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
+      "observed_in": [
+        "release-strict-2026-09-06-current"
+      ]
+    },
+    {
+      "reason_id": "RSN-3ff4aa7afde7d296",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TEXPERTES",
+      "object_id": null,
+      "category": "PRODUCT_P1",
+      "evidence": "TEXPERTES:build_observé_absent:manuel_professeur",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
+      "observed_in": [
+        "release-strict-2026-09-06-current"
+      ]
+    },
+    {
+      "reason_id": "RSN-2b3674e20ca098b0",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TNSI",
+      "object_id": null,
+      "category": "PRODUCT_P1",
+      "evidence": "TNSI:build_observé_absent:manuel_eleve",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
+      "observed_in": [
+        "release-strict-2026-09-06-current"
+      ]
+    },
+    {
+      "reason_id": "RSN-4c16c7611fd74f65",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TNSI",
+      "object_id": null,
+      "category": "PRODUCT_P1",
+      "evidence": "TNSI:build_observé_absent:manuel_professeur",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
+      "observed_in": [
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1687,7 +1677,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1700,7 +1690,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1713,7 +1703,33 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
+      ]
+    },
+    {
+      "reason_id": "RSN-9d6b554b08977e3d",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TSPE_2026_2027",
+      "object_id": null,
+      "category": "PRODUCT_P1",
+      "evidence": "TSPE_2026_2027:build_observé_absent:manuel_eleve",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
+      "observed_in": [
+        "release-strict-2026-09-06-current"
+      ]
+    },
+    {
+      "reason_id": "RSN-721166773fc7e9ed",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TSPE_2026_2027",
+      "object_id": null,
+      "category": "PRODUCT_P1",
+      "evidence": "TSPE_2026_2027:build_observé_absent:manuel_professeur",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
+      "observed_in": [
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1726,7 +1742,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1739,7 +1755,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1752,7 +1768,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1765,7 +1781,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1778,7 +1794,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1791,7 +1807,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1804,7 +1820,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1817,7 +1833,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1830,7 +1846,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1843,7 +1859,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1856,7 +1872,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1869,7 +1885,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1882,7 +1898,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1895,7 +1911,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1908,7 +1924,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1921,7 +1937,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1934,7 +1950,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-DECLARED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1947,7 +1963,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-DECLARED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1960,7 +1976,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-DECLARED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1973,7 +1989,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-DECLARED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1986,7 +2002,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-DECLARED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -1999,7 +2015,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-DECLARED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2012,7 +2028,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-DECLARED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2025,59 +2041,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-DECLARED",
       "observed_in": [
-        "post-acceptance-release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-385435dc89962e35",
-      "producer": "inventory_collection.gate_dimensions",
-      "target": "mathematics",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "dimension_non_couverte:mathematics",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DIMENSION-NOT-COVERED",
-      "observed_in": [
-        "post-acceptance-release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-13680493d6470419",
-      "producer": "inventory_collection.gate_dimensions",
-      "target": "print",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "dimension_non_couverte:print",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DIMENSION-NOT-COVERED",
-      "observed_in": [
-        "post-acceptance-release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-9ad95a20a28a08c0",
-      "producer": "inventory_collection.gate_dimensions",
-      "target": "regulation",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "dimension_non_couverte:regulation",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DIMENSION-NOT-COVERED",
-      "observed_in": [
-        "post-acceptance-release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-154efa0bccd7df80",
-      "producer": "inventory_collection.gate_dimensions",
-      "target": "visual",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "dimension_non_couverte:visual",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DIMENSION-NOT-COVERED",
-      "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2090,7 +2054,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2103,7 +2067,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2116,7 +2080,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2129,7 +2093,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2142,7 +2106,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2155,7 +2119,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2168,7 +2132,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2181,7 +2145,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2194,7 +2158,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2207,7 +2171,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2220,7 +2184,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2233,7 +2197,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2246,7 +2210,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2259,7 +2223,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2272,7 +2236,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2285,7 +2249,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2298,7 +2262,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2311,7 +2275,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2324,7 +2288,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2337,7 +2301,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2350,7 +2314,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2363,7 +2327,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2376,7 +2340,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2389,7 +2353,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2402,7 +2366,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2415,7 +2379,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2428,7 +2392,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2441,7 +2405,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2454,7 +2418,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2467,7 +2431,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2480,7 +2444,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2493,7 +2457,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2506,33 +2470,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH-NOT-AUDITED",
       "observed_in": [
-        "post-acceptance-release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-4b43d307937eb999",
-      "producer": "inventory_collection",
-      "target": "COLLECTION",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "check_error:cible de migration absente ou ambiguë fp=6dbdcc7ea0c5b104: occurrences=0",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-GATE-CHECK-ERROR",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
-      ]
-    },
-    {
-      "reason_id": "RSN-cd999f6a593df3bb",
-      "producer": "inventory_collection",
-      "target": "COLLECTION",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "check_error:source_digest du manifeste de build incohérent",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-GATE-CHECK-ERROR",
-      "observed_in": [
-        "post-restore-check"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2545,7 +2483,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2558,7 +2496,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2571,7 +2509,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2584,7 +2522,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2597,7 +2535,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2610,7 +2548,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2623,7 +2561,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2636,7 +2574,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2649,7 +2587,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2662,7 +2600,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2675,7 +2613,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2688,7 +2626,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2701,7 +2639,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2714,7 +2652,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2727,7 +2665,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2740,7 +2678,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2753,7 +2691,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2766,7 +2704,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2779,7 +2717,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2792,7 +2730,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2805,7 +2743,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2818,7 +2756,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2831,7 +2769,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2844,7 +2782,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2857,7 +2795,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2870,7 +2808,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2883,7 +2821,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2896,7 +2834,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2909,7 +2847,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2922,7 +2860,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2935,7 +2873,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2948,7 +2886,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2961,7 +2899,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2974,7 +2912,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -2987,7 +2925,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3000,7 +2938,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3013,7 +2951,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3026,7 +2964,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3039,7 +2977,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3052,7 +2990,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3065,7 +3003,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3078,7 +3016,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3091,7 +3029,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3104,7 +3042,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3117,7 +3055,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3130,7 +3068,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3143,7 +3081,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3156,7 +3094,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3169,7 +3107,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3182,7 +3120,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3195,7 +3133,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3208,7 +3146,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3221,163 +3159,163 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
-      "reason_id": "RSN-d4099b3f29040099",
-      "producer": "inventory_collection",
-      "target": "COLLECTION",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "inventaire_indisponible:source_digest du manifeste de build incohérent",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-INVENTORY-UNAVAILABLE",
-      "observed_in": [
-        "post-restore-release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-e9ead859b1a2253b",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "TNSI",
-      "object_id": null,
-      "category": "PRODUCT_P0",
-      "evidence": "TNSI:chapitres_manquants:manuals.TNSI.chapters:7/12",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-MISSING-CHAPTERS",
-      "observed_in": [
-        "post-acceptance-release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-be4d6f4710df7d3d",
+      "reason_id": "RSN-939208beb4318fd1",
       "producer": "inventory_collection.anomalies",
       "target": "1NSI",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "1NSI:anomalie:blocking_statuses:anomalies.blocking_statuses:166",
+      "evidence": "1NSI:anomalie:blocking_statuses:anomalies.blocking_statuses:376",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
-      "reason_id": "RSN-a0acbf61e5a586c6",
+      "reason_id": "RSN-586372bea334206c",
       "producer": "inventory_collection.statuses",
       "target": "1NSI",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "1NSI:statuts_non_approuves:manuals.1NSI.statuses:objets=156; contrats=10",
+      "evidence": "1NSI:statuts_non_approuves:manuals.1NSI.statuses:objets=366; contrats=10",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
-      "reason_id": "RSN-434a000469cbb39e",
+      "reason_id": "RSN-b813de38b9f46081",
       "producer": "inventory_collection.anomalies",
       "target": "1SPE",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "1SPE:anomalie:blocking_statuses:anomalies.blocking_statuses:18",
+      "evidence": "1SPE:anomalie:blocking_statuses:anomalies.blocking_statuses:1435",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
-      "reason_id": "RSN-9ea7689510b46436",
+      "reason_id": "RSN-7677f4ce941e1ce7",
       "producer": "inventory_collection.statuses",
       "target": "1SPE",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "1SPE:statuts_non_approuves:manuals.1SPE.statuses:objets=8; contrats=10",
+      "evidence": "1SPE:statuts_non_approuves:manuals.1SPE.statuses:objets=1425; contrats=10",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
-      "reason_id": "RSN-8568dc92fd872679",
+      "reason_id": "RSN-46094e70aab2a0dc",
       "producer": "inventory_collection.anomalies",
       "target": "TCOMPL",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TCOMPL:anomalie:blocking_statuses:anomalies.blocking_statuses:9",
+      "evidence": "TCOMPL:anomalie:blocking_statuses:anomalies.blocking_statuses:209",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
-      "reason_id": "RSN-995079eb1384c618",
+      "reason_id": "RSN-302b461039a6c905",
       "producer": "inventory_collection.statuses",
       "target": "TCOMPL",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TCOMPL:statuts_non_approuves:manuals.TCOMPL.statuses:objets=0; contrats=9",
+      "evidence": "TCOMPL:statuts_non_approuves:manuals.TCOMPL.statuses:objets=200; contrats=9",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
-      "reason_id": "RSN-7b1b7018543639fd",
+      "reason_id": "RSN-aa4ca31e6c1853bf",
       "producer": "inventory_collection.anomalies",
       "target": "TEXPERTES",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TEXPERTES:anomalie:blocking_statuses:anomalies.blocking_statuses:5",
+      "evidence": "TEXPERTES:anomalie:blocking_statuses:anomalies.blocking_statuses:131",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
-      "reason_id": "RSN-2945cbb678bbedc8",
+      "reason_id": "RSN-b58f7e4e0b242959",
       "producer": "inventory_collection.statuses",
       "target": "TEXPERTES",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TEXPERTES:statuts_non_approuves:manuals.TEXPERTES.statuses:objets=0; contrats=5",
+      "evidence": "TEXPERTES:statuts_non_approuves:manuals.TEXPERTES.statuses:objets=126; contrats=5",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
-      "reason_id": "RSN-05939d36d28a800e",
+      "reason_id": "RSN-5dcef3d743f66115",
       "producer": "inventory_collection.anomalies",
       "target": "TNSI",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TNSI:anomalie:blocking_statuses:anomalies.blocking_statuses:7",
+      "evidence": "TNSI:anomalie:blocking_statuses:anomalies.blocking_statuses:118",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
-      "reason_id": "RSN-a70d0aa64b8585d8",
+      "reason_id": "RSN-83a7471cd5a2a468",
       "producer": "inventory_collection.statuses",
       "target": "TNSI",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TNSI:statuts_non_approuves:manuals.TNSI.statuses:objets=0; contrats=7",
+      "evidence": "TNSI:statuts_non_approuves:manuals.TNSI.statuses:objets=111; contrats=7",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
+      ]
+    },
+    {
+      "reason_id": "RSN-e9b8c64d0a0d642b",
+      "producer": "inventory_collection.anomalies",
+      "target": "TSPE_2026_2027",
+      "object_id": null,
+      "category": "GOVERNANCE_BLOCKER",
+      "evidence": "TSPE_2026_2027:anomalie:blocking_statuses:anomalies.blocking_statuses:56",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
+      "observed_in": [
+        "release-strict-2026-09-06-current"
+      ]
+    },
+    {
+      "reason_id": "RSN-f5adb8607b8946bf",
+      "producer": "inventory_collection.statuses",
+      "target": "TSPE_2026_2027",
+      "object_id": null,
+      "category": "GOVERNANCE_BLOCKER",
+      "evidence": "TSPE_2026_2027:statuts_non_approuves:manuals.TSPE_2026_2027.statuses:objets=56; contrats=0",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
+      "observed_in": [
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3390,7 +3328,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3403,7 +3341,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3416,7 +3354,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3429,7 +3367,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3442,7 +3380,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3455,7 +3393,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3468,7 +3406,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3481,7 +3419,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3494,7 +3432,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3507,7 +3445,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3520,7 +3458,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3533,7 +3471,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3546,7 +3484,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3559,7 +3497,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3572,7 +3510,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3585,7 +3523,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3598,7 +3536,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3611,7 +3549,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3624,7 +3562,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3637,7 +3575,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3650,7 +3588,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3663,7 +3601,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3676,7 +3614,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3689,7 +3627,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3702,7 +3640,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3715,7 +3653,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3728,7 +3666,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3741,7 +3679,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3754,7 +3692,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3767,7 +3705,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3780,7 +3718,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3793,7 +3731,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3806,7 +3744,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3819,7 +3757,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3832,7 +3770,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3845,7 +3783,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3858,7 +3796,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3871,7 +3809,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3884,7 +3822,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3897,7 +3835,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3910,7 +3848,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3923,7 +3861,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3936,7 +3874,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3949,7 +3887,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3962,7 +3900,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3975,7 +3913,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -3988,7 +3926,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4001,7 +3939,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4014,7 +3952,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4027,7 +3965,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4040,7 +3978,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4053,7 +3991,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4066,7 +4004,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4079,7 +4017,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4092,7 +4030,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4105,7 +4043,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4118,7 +4056,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4131,7 +4069,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4144,7 +4082,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4157,7 +4095,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4170,7 +4108,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4183,7 +4121,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4196,7 +4134,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4209,7 +4147,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4222,7 +4160,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4235,7 +4173,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4248,7 +4186,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4261,7 +4199,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4274,7 +4212,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4287,7 +4225,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4300,7 +4238,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4313,7 +4251,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4326,7 +4264,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4339,7 +4277,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4352,7 +4290,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4365,7 +4303,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4378,7 +4316,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4391,7 +4329,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4404,7 +4342,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4417,7 +4355,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4430,7 +4368,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4443,7 +4381,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4456,7 +4394,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4469,7 +4407,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4482,7 +4420,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4495,7 +4433,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4508,7 +4446,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4521,7 +4459,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4534,7 +4472,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4547,7 +4485,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4560,7 +4498,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4573,7 +4511,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4586,7 +4524,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4599,7 +4537,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4612,7 +4550,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4625,7 +4563,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4638,7 +4576,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4651,7 +4589,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4664,7 +4602,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4677,7 +4615,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4690,7 +4628,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4703,7 +4641,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4716,7 +4654,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4729,7 +4667,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4742,7 +4680,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4755,7 +4693,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4768,7 +4706,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4781,7 +4719,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4794,7 +4732,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4807,7 +4745,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4820,7 +4758,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4833,7 +4771,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4846,7 +4784,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4859,7 +4797,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4872,7 +4810,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4885,7 +4823,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4898,7 +4836,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4911,7 +4849,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4924,46 +4862,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
-        "post-acceptance-release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-2b3bf0280fc72f12",
-      "producer": "inventory_collection.content_integrity",
-      "target": "scripts/build_ex_co_graph.py",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_ex_co_graph.py:rc=1",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PRODUCER-STALE",
-      "observed_in": [
-        "post-acceptance-release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-ff2aa591cfe6c05c",
-      "producer": "inventory_collection.content_integrity",
-      "target": "scripts/build_nsi_cross_discipline_ledger.py",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_nsi_cross_discipline_ledger.py:rc=1",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PRODUCER-STALE",
-      "observed_in": [
-        "post-acceptance-release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-16caed16674c847b",
-      "producer": "inventory_collection.content_integrity",
-      "target": "scripts/build_p0_content_clone_ledger.py",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_p0_content_clone_ledger.py:rc=1",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PRODUCER-STALE",
-      "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4976,7 +4875,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -4989,7 +4888,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5002,7 +4901,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5015,7 +4914,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PUBLICATION-SNAPSHOT-UNDECIDED",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5028,7 +4927,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5041,7 +4940,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5054,7 +4953,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5067,7 +4966,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5080,7 +4979,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5093,7 +4992,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5106,7 +5005,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5119,7 +5018,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5132,7 +5031,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5145,7 +5044,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5158,7 +5057,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5171,7 +5070,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5184,7 +5083,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5197,21 +5096,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-a1f2e1b894bfec2a",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "0030282f546d3d82",
-      "object_id": "0030282f546d3d82",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:0030282f546d3d82:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=0030282f546d3d82: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/methodes/TCOMPL-LOG-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5224,21 +5109,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-58d325a964ccff42",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "01533128b52c0fa0",
-      "object_id": "01533128b52c0fa0",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:01533128b52c0fa0:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=01533128b52c0fa0: Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/methodes/TCOMPL-INEG-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5251,21 +5122,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-69d859967a29de23",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "021c56e25a132dd7",
-      "object_id": "021c56e25a132dd7",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:021c56e25a132dd7:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=021c56e25a132dd7: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/methodes/TCOMPL-LOG-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5278,21 +5135,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-3390f0cc7763d71e",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "06710621e974eafb",
-      "object_id": "06710621e974eafb",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:06710621e974eafb:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=06710621e974eafb: Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/methodes/TCOMPL-BAYES-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5305,21 +5148,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-6d6f408b8ccf8de7",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "06c9d10c3a3f09ef",
-      "object_id": "06c9d10c3a3f09ef",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:06c9d10c3a3f09ef:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=06c9d10c3a3f09ef: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/methodes/TCOMPL-LOG-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5332,21 +5161,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-a69a80d216d20283",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "0ae21dd0da220747",
-      "object_id": "0ae21dd0da220747",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:0ae21dd0da220747:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=0ae21dd0da220747: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/methodes/TEXP-CAG-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5359,21 +5174,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-208d679efd3e11eb",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "0c52237e59af9cc2",
-      "object_id": "0c52237e59af9cc2",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:0c52237e59af9cc2:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=0c52237e59af9cc2: Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/methodes/TEXP-GRA-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5386,21 +5187,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-89d8c5d1f752b11a",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "0c7cf3afe9c32860",
-      "object_id": "0c7cf3afe9c32860",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:0c7cf3afe9c32860:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=0c7cf3afe9c32860: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5413,21 +5200,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-3bbf682b90c5036f",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "0f1068a9fbddd4f5",
-      "object_id": "0f1068a9fbddd4f5",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:0f1068a9fbddd4f5:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=0f1068a9fbddd4f5: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-008.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5440,21 +5213,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-738307f8f738eb63",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "0fe136e4e18e572d",
-      "object_id": "0fe136e4e18e572d",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:0fe136e4e18e572d:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=0fe136e4e18e572d: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5467,21 +5226,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-39f60ec6a4db3f20",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "11abb6d5bc294fdc",
-      "object_id": "11abb6d5bc294fdc",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:11abb6d5bc294fdc:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=11abb6d5bc294fdc: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-007.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5494,21 +5239,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-d2104eb508041757",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "1e07caec5dab3c17",
-      "object_id": "1e07caec5dab3c17",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:1e07caec5dab3c17:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=1e07caec5dab3c17: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5521,21 +5252,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-c6ad072a436e17df",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "1fc241703550a485",
-      "object_id": "1fc241703550a485",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:1fc241703550a485:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=1fc241703550a485: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-007.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5548,21 +5265,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-fa66838072c14086",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "209f03089e4e176e",
-      "object_id": "209f03089e4e176e",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:209f03089e4e176e:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=209f03089e4e176e: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/methodes/TCOMPL-LOG-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5575,21 +5278,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-1762f0f04f31a51a",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "2650980f52446a6b",
-      "object_id": "2650980f52446a6b",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:2650980f52446a6b:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=2650980f52446a6b: Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/methodes/TCOMPL-INEG-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5602,21 +5291,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-d678b2a15b3013ef",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "265da5778de5d423",
-      "object_id": "265da5778de5d423",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:265da5778de5d423:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=265da5778de5d423: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5629,21 +5304,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-7074630046dff726",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "2ee632b82aa10c4a",
-      "object_id": "2ee632b82aa10c4a",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:2ee632b82aa10c4a:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=2ee632b82aa10c4a: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-006.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5656,21 +5317,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-6d90d4d033ce03f0",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "2f15b92d6ec50f69",
-      "object_id": "2f15b92d6ec50f69",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:2f15b92d6ec50f69:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=2f15b92d6ec50f69: Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/methodes/TCOMPL-INEG-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5683,21 +5330,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-9fb0cf0346e26d6b",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "3d2d2b1c09cee1c4",
-      "object_id": "3d2d2b1c09cee1c4",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:3d2d2b1c09cee1c4:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=3d2d2b1c09cee1c4: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5710,21 +5343,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-3727f0dec40f09e9",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "3e69771df38d383f",
-      "object_id": "3e69771df38d383f",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:3e69771df38d383f:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=3e69771df38d383f: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5737,21 +5356,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-8439284fd91a9892",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "3fb4aac030caa40c",
-      "object_id": "3fb4aac030caa40c",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:3fb4aac030caa40c:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=3fb4aac030caa40c: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5764,21 +5369,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-c78b771cdcc76a62",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "470fcd9c3b14067f",
-      "object_id": "470fcd9c3b14067f",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:470fcd9c3b14067f:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=470fcd9c3b14067f: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/methodes/TEXP-CAG-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5791,21 +5382,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-b68edc47b7ed42ae",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "4a32199d0e3b5481",
-      "object_id": "4a32199d0e3b5481",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:4a32199d0e3b5481:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=4a32199d0e3b5481: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-009.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5818,21 +5395,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-e067eb07e8662320",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "4ad3e114730f28ec",
-      "object_id": "4ad3e114730f28ec",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:4ad3e114730f28ec:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=4ad3e114730f28ec: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-AIR-ME-006.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5845,21 +5408,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-b9ddadb32dc79323",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "4bc68f1fa2bedcd3",
-      "object_id": "4bc68f1fa2bedcd3",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:4bc68f1fa2bedcd3:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=4bc68f1fa2bedcd3: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-AIR-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5872,21 +5421,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-7f012f496fb710e8",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "4e2d09feb48084a6",
-      "object_id": "4e2d09feb48084a6",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:4e2d09feb48084a6:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=4e2d09feb48084a6: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5899,21 +5434,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-d9677ca5522af3cb",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "4fe9c142ba3cc784",
-      "object_id": "4fe9c142ba3cc784",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:4fe9c142ba3cc784:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=4fe9c142ba3cc784: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5926,21 +5447,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-5c034cc6bc23b9d2",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "55146f6814087378",
-      "object_id": "55146f6814087378",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:55146f6814087378:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=55146f6814087378: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5953,21 +5460,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-86684e73044435ec",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "581904a3ac5370d2",
-      "object_id": "581904a3ac5370d2",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:581904a3ac5370d2:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=581904a3ac5370d2: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -5980,21 +5473,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-a0885fff78713c7c",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "590b0a7934abae80",
-      "object_id": "590b0a7934abae80",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:590b0a7934abae80:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=590b0a7934abae80: Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/methodes/TCOMPL-CORR-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6007,21 +5486,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-9a686f393ca3035f",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "5bec67f6f3b4f43d",
-      "object_id": "5bec67f6f3b4f43d",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:5bec67f6f3b4f43d:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=5bec67f6f3b4f43d: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6034,21 +5499,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-23c08391814e66a5",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "5d2c024d6ba0e509",
-      "object_id": "5d2c024d6ba0e509",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:5d2c024d6ba0e509:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=5d2c024d6ba0e509: Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/methodes/TCOMPL-BAYES-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6061,21 +5512,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-a2e117f82b519994",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "6457bb738aa0a816",
-      "object_id": "6457bb738aa0a816",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:6457bb738aa0a816:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=6457bb738aa0a816: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-CALCULS-AIRES-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6088,21 +5525,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-cae5ef2c73d53921",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "651dd33093c8cd7e",
-      "object_id": "651dd33093c8cd7e",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:651dd33093c8cd7e:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=651dd33093c8cd7e: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6115,21 +5538,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-6b1bbe3baf928ef5",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "663df7bbf976dcf1",
-      "object_id": "663df7bbf976dcf1",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:663df7bbf976dcf1:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=663df7bbf976dcf1: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-006.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6142,21 +5551,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-d31b34da14bd834b",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "6877641e8fa2f62e",
-      "object_id": "6877641e8fa2f62e",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:6877641e8fa2f62e:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=6877641e8fa2f62e: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-006.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6169,21 +5564,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-921bbcb7f2590cf2",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "69653e1c3bea2b5e",
-      "object_id": "69653e1c3bea2b5e",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:69653e1c3bea2b5e:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=69653e1c3bea2b5e: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-006.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6196,21 +5577,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-727168a6fabb781d",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "6ae81a03b6cc436b",
-      "object_id": "6ae81a03b6cc436b",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:6ae81a03b6cc436b:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=6ae81a03b6cc436b: Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/methodes/TEXP-GRA-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6223,21 +5590,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-7e7aa690c6828236",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "70dfcb9ea3d7e1ec",
-      "object_id": "70dfcb9ea3d7e1ec",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:70dfcb9ea3d7e1ec:statut source promu sans revue; approved interdit fp=70dfcb9ea3d7e1ec: approved",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6250,21 +5603,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-2d645e085e2c1bd5",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "72442cf47779336b",
-      "object_id": "72442cf47779336b",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:72442cf47779336b:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=72442cf47779336b: Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/methodes/TEXP-GRA-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6277,21 +5616,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-12e83b46471282aa",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "7268e1fc1b1346b3",
-      "object_id": "7268e1fc1b1346b3",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:7268e1fc1b1346b3:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=7268e1fc1b1346b3: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/methodes/TEXP-CAG-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6304,21 +5629,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-0b39a0f7f8ea10ad",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "74aacd756bac15f4",
-      "object_id": "74aacd756bac15f4",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:74aacd756bac15f4:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=74aacd756bac15f4: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6331,21 +5642,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-092363f8e580682d",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "7b40f5ed539c5a26",
-      "object_id": "7b40f5ed539c5a26",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:7b40f5ed539c5a26:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=7b40f5ed539c5a26: Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/methodes/TEXP-GRA-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6358,21 +5655,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-a92fcfd00e1fcebe",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "7eb525dfe531febe",
-      "object_id": "7eb525dfe531febe",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:7eb525dfe531febe:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=7eb525dfe531febe: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-006.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6385,21 +5668,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-2b0c8114d7dd4518",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "80d853f9d234f4a5",
-      "object_id": "80d853f9d234f4a5",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:80d853f9d234f4a5:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=80d853f9d234f4a5: Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/methodes/TCOMPL-BAYES-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6412,21 +5681,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-5ed6a5d152eb711a",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "8108bdb51a042101",
-      "object_id": "8108bdb51a042101",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:8108bdb51a042101:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=8108bdb51a042101: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6439,21 +5694,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-023abf38fc9c2100",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "83989c3720c75dfe",
-      "object_id": "83989c3720c75dfe",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:83989c3720c75dfe:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=83989c3720c75dfe: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6466,21 +5707,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-fa28cc3f05ef917b",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "83dae4249056ea23",
-      "object_id": "83dae4249056ea23",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:83dae4249056ea23:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=83dae4249056ea23: Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/methodes/TCOMPL-CORR-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6493,21 +5720,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-4991b9adbbf96af5",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "84c9ef77925f37c7",
-      "object_id": "84c9ef77925f37c7",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:84c9ef77925f37c7:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=84c9ef77925f37c7: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-AIR-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6520,21 +5733,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-7cf10d1f25cd2da5",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "84db8170cb56eee0",
-      "object_id": "84db8170cb56eee0",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:84db8170cb56eee0:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=84db8170cb56eee0: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6547,21 +5746,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-e6f6e51ad0a5689b",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "88b5b9d05ca06bcb",
-      "object_id": "88b5b9d05ca06bcb",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:88b5b9d05ca06bcb:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=88b5b9d05ca06bcb: Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/methodes/TCOMPL-BAYES-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6574,21 +5759,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-39e92a8a59ec3c5a",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "8eb2eaac657922e4",
-      "object_id": "8eb2eaac657922e4",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:8eb2eaac657922e4:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=8eb2eaac657922e4: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6601,21 +5772,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-1395f521acad859d",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "931d7cde398a47b3",
-      "object_id": "931d7cde398a47b3",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:931d7cde398a47b3:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=931d7cde398a47b3: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6628,21 +5785,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-61b26bddcf123212",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "9454cca9ee56bf2a",
-      "object_id": "9454cca9ee56bf2a",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:9454cca9ee56bf2a:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=9454cca9ee56bf2a: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6655,21 +5798,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-d072dcae949d7692",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "9ce6275a9fbf8c6f",
-      "object_id": "9ce6275a9fbf8c6f",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:9ce6275a9fbf8c6f:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=9ce6275a9fbf8c6f: Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/methodes/TCOMPL-BAYES-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6682,21 +5811,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-b51b8e87349c18e0",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "9f4c22f13c2d24c2",
-      "object_id": "9f4c22f13c2d24c2",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:9f4c22f13c2d24c2:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=9f4c22f13c2d24c2: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-AIR-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6709,21 +5824,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-9f3566a16f0b9105",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "9f9231b9f41e4b8b",
-      "object_id": "9f9231b9f41e4b8b",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:9f9231b9f41e4b8b:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=9f9231b9f41e4b8b: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6736,21 +5837,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-a6151f50008324b8",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "a0753d0aba4d02a8",
-      "object_id": "a0753d0aba4d02a8",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:a0753d0aba4d02a8:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=a0753d0aba4d02a8: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6763,21 +5850,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-0d9af49f55a62c7b",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "a3d1aec470dce9e8",
-      "object_id": "a3d1aec470dce9e8",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:a3d1aec470dce9e8:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=a3d1aec470dce9e8: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6790,21 +5863,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-88b893a27856f6bd",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "a54fcaaa934aa84d",
-      "object_id": "a54fcaaa934aa84d",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:a54fcaaa934aa84d:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=a54fcaaa934aa84d: Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/methodes/TCOMPL-INEG-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6817,21 +5876,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-5c93e69870e771b8",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "a6270d4ed2dba761",
-      "object_id": "a6270d4ed2dba761",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:a6270d4ed2dba761:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=a6270d4ed2dba761: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-AIR-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6844,21 +5889,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-311115d7c81f5255",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "ae6389117fc89d5f",
-      "object_id": "ae6389117fc89d5f",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:ae6389117fc89d5f:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=ae6389117fc89d5f: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-007.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6871,21 +5902,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-c8d26e7da048ac75",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "afcba49c06c9409b",
-      "object_id": "afcba49c06c9409b",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:afcba49c06c9409b:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=afcba49c06c9409b: Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/methodes/TCOMPL-INEG-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6898,21 +5915,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-a2c8ca03b958a7df",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "b0b81c9742c416e1",
-      "object_id": "b0b81c9742c416e1",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:b0b81c9742c416e1:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=b0b81c9742c416e1: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6925,21 +5928,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-ebd9c1176b4614fd",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "b2abd47781d37139",
-      "object_id": "b2abd47781d37139",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:b2abd47781d37139:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=b2abd47781d37139: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6952,21 +5941,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-d55b60f6c3d9fa0a",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "b488ade29a5828f1",
-      "object_id": "b488ade29a5828f1",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:b488ade29a5828f1:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=b488ade29a5828f1: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -6979,21 +5954,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-2fee5a83aadc7e00",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "b82fe87c65ab5b4b",
-      "object_id": "b82fe87c65ab5b4b",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:b82fe87c65ab5b4b:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=b82fe87c65ab5b4b: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/methodes/TEXP-CAG-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7006,21 +5967,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-bf0bdd1d614636c2",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "baf25a2d0a53d6dc",
-      "object_id": "baf25a2d0a53d6dc",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:baf25a2d0a53d6dc:statut source promu sans revue; approved interdit fp=baf25a2d0a53d6dc: approved",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7033,21 +5980,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-5c01b019c858d8c6",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "bb2cf6d945cb6cd5",
-      "object_id": "bb2cf6d945cb6cd5",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:bb2cf6d945cb6cd5:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=bb2cf6d945cb6cd5: Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/methodes/TCOMPL-CORR-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7060,21 +5993,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-3f36368345b6863c",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "bf30ca02ed1a0de7",
-      "object_id": "bf30ca02ed1a0de7",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:bf30ca02ed1a0de7:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=bf30ca02ed1a0de7: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7087,21 +6006,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-bee6a2032409ad25",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "bf8b8407281f12c7",
-      "object_id": "bf8b8407281f12c7",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:bf8b8407281f12c7:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=bf8b8407281f12c7: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7114,21 +6019,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-eb82df3d79ea1e01",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "c0db390090910a45",
-      "object_id": "c0db390090910a45",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:c0db390090910a45:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=c0db390090910a45: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7141,21 +6032,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-aed747964d347180",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "c298d72b87aa5543",
-      "object_id": "c298d72b87aa5543",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:c298d72b87aa5543:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=c298d72b87aa5543: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7168,21 +6045,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-3ed8e03c3768b0cf",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "c728b984c4f7958b",
-      "object_id": "c728b984c4f7958b",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:c728b984c4f7958b:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=c728b984c4f7958b: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7195,21 +6058,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-ed801860f3d07538",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "c858f076fae10c27",
-      "object_id": "c858f076fae10c27",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:c858f076fae10c27:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=c858f076fae10c27: Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/methodes/TEXP-GRA-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7222,21 +6071,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-c2bc3dea7318dfe6",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "caad266bff908115",
-      "object_id": "caad266bff908115",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:caad266bff908115:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=caad266bff908115: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7249,21 +6084,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-82f8acc607e42555",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "cedc0c971f03a4de",
-      "object_id": "cedc0c971f03a4de",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:cedc0c971f03a4de:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=cedc0c971f03a4de: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7276,21 +6097,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-9fb1298c7dca7aa4",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "d6db49d30489ae12",
-      "object_id": "d6db49d30489ae12",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:d6db49d30489ae12:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=d6db49d30489ae12: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-006.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7303,21 +6110,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-f5689e65406241a9",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "d960733fa0bd1035",
-      "object_id": "d960733fa0bd1035",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:d960733fa0bd1035:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=d960733fa0bd1035: Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/methodes/TCOMPL-CORR-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7330,21 +6123,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-9444f6536d550b07",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "db10ea45bab2b3a2",
-      "object_id": "db10ea45bab2b3a2",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:db10ea45bab2b3a2:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=db10ea45bab2b3a2: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7357,21 +6136,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-8b95ef1e8f73b23d",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "db730bde1c3ed617",
-      "object_id": "db730bde1c3ed617",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:db730bde1c3ed617:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=db730bde1c3ed617: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/methodes/TCOMPL-LOG-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7384,21 +6149,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-857434fb3c6159d9",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "dc0025fc58dc2e34",
-      "object_id": "dc0025fc58dc2e34",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:dc0025fc58dc2e34:statut source promu sans revue; approved interdit fp=dc0025fc58dc2e34: approved",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7411,21 +6162,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-3b7cf38fab358712",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "e9cb7ad0c70884b7",
-      "object_id": "e9cb7ad0c70884b7",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:e9cb7ad0c70884b7:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=e9cb7ad0c70884b7: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-007.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7438,21 +6175,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-35fb292ae1b4072c",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "ea40b78c1f105bcf",
-      "object_id": "ea40b78c1f105bcf",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:ea40b78c1f105bcf:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=ea40b78c1f105bcf: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7465,21 +6188,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-1a283a607fdb7136",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "ed9e59a472a9e4a5",
-      "object_id": "ed9e59a472a9e4a5",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:ed9e59a472a9e4a5:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=ed9e59a472a9e4a5: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7492,21 +6201,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-314b9227495937cd",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "f473b8a850a04afc",
-      "object_id": "f473b8a850a04afc",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:f473b8a850a04afc:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=f473b8a850a04afc: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7519,21 +6214,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-907972de90e9c86a",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "f49896a42f0000d4",
-      "object_id": "f49896a42f0000d4",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:f49896a42f0000d4:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=f49896a42f0000d4: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7546,21 +6227,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-0f1e464c9ee9b720",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "f55beaf4faa24cc5",
-      "object_id": "f55beaf4faa24cc5",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:f55beaf4faa24cc5:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=f55beaf4faa24cc5: Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/methodes/TCOMPL-CORR-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7573,21 +6240,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "pre-acceptance-gate-logic",
-        "post-restore-check"
-      ]
-    },
-    {
-      "reason_id": "RSN-cff76570f5140735",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "f7bcb21fb088ddda",
-      "object_id": "f7bcb21fb088ddda",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:f7bcb21fb088ddda:statut promu sans revue humaine (approved) alors que la dette A4 est ouverte fp=f7bcb21fb088ddda: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/methodes/TEXP-CAG-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "pre-acceptance-gate-logic"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7600,7 +6253,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7613,7 +6266,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7626,7 +6279,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7639,7 +6292,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7652,7 +6305,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7665,7 +6318,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7678,7 +6331,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7691,7 +6344,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7704,7 +6357,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7717,7 +6370,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7730,7 +6383,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7743,7 +6396,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7756,7 +6409,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7769,7 +6422,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7782,7 +6435,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7795,7 +6448,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7808,7 +6461,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7821,7 +6474,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7834,7 +6487,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7847,7 +6500,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7860,7 +6513,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7873,7 +6526,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7886,7 +6539,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7899,7 +6552,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7912,7 +6565,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7925,7 +6578,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7938,7 +6591,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7951,7 +6604,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7964,7 +6617,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7977,7 +6630,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -7990,7 +6643,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -8003,7 +6656,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -8016,7 +6669,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -8029,7 +6682,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -8042,7 +6695,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -8055,7 +6708,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -8068,7 +6721,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -8081,7 +6734,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -8094,7 +6747,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -8107,7 +6760,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -8120,7 +6773,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     },
     {
@@ -8133,7 +6786,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "post-acceptance-release-strict"
+        "release-strict-2026-09-06-current"
       ]
     }
   ]

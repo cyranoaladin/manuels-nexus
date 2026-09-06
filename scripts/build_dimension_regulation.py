@@ -46,7 +46,21 @@ MANUAL_TO_LEVEL = {
 }
 
 NOR_PATTERN = re.compile(r"MEN[A-Z]\d{7}[A-Z]")
-YEAR_PATTERN = re.compile(r"\b(19|20)\d{2}\b")
+
+#: Une référence contient souvent une date de *vérification* (« Vérifié le
+#: 2026-08-06 ») en plus de la date du programme. Confondre les deux faisait
+#: conclure à une divergence d'autorité entre deux fichiers citant pourtant le
+#: même arrêté. On tronque donc la chaîne au premier marqueur de vérification.
+VERIFICATION_MARKER = re.compile(r"\bv[ée]rifi[ée]?e?\s+le\b", re.I)
+
+#: Le programme lui-même est identifié par son bulletin : « BO spécial n°8 du
+#: 25 juillet 2019 », « BO n° 14 du 2 avril 2026 ».
+PROGRAMME_ISSUE = re.compile(
+    r"BO\s*(?:sp[ée]cial\s*)?n\s*[°o]?\s*(\d+)\s+du\s+(\d{1,2})\s+"
+    r"(janvier|f[ée]vrier|mars|avril|mai|juin|juillet|ao[ûu]t|septembre|octobre|novembre|d[ée]cembre)"
+    r"\s+((?:19|20)\d{2})",
+    re.I,
+)
 #: Espaces de nommage internes : alias de chapitre et compétences du préambule.
 LOCAL_ALIAS = re.compile(r"^(C\d+|[A-Z0-9_]+-[A-Z0-9-]+-C\d+|BO-PREAMBULE-[A-Z-]+)$")
 UNVERIFIED_MARKER = re.compile(r"a re-verifier|à re-vérifier", re.I)
@@ -63,11 +77,19 @@ def load_referentials() -> tuple[dict[str, dict[str, Any]], dict[str, list[dict[
             payload = json.loads(path.read_text(encoding="utf-8"))
             level = payload.get("niveau")
             reference = str(payload.get("bo_reference", ""))
+            marker = VERIFICATION_MARKER.search(reference)
+            programme_part = reference[: marker.start()] if marker else reference
+            issue = PROGRAMME_ISSUE.search(programme_part)
             authorities[level].append({
                 "file": str(path.relative_to(ROOT)),
                 "bo_reference": reference,
                 "nor": sorted(set(NOR_PATTERN.findall(reference))),
-                "years": sorted({m.group(0) for m in YEAR_PATTERN.finditer(reference)}),
+                "programme_issue": (
+                    f"BO n°{issue.group(1)} du {issue.group(2)} {issue.group(3).lower()} "
+                    f"{issue.group(4)}"
+                    if issue else None
+                ),
+                "programme_year": issue.group(4) if issue else None,
                 "self_declared_unverified": bool(UNVERIFIED_MARKER.search(reference)),
             })
             for capacity in payload.get("capacites", []):
@@ -173,7 +195,8 @@ def build() -> dict[str, Any]:
         nors = {tuple(e["nor"]) for e in entries if e["nor"]}
         missing_nor = [e["file"] for e in entries if not e["nor"]]
         unverified = [e["file"] for e in entries if e["self_declared_unverified"]]
-        year_sets = {tuple(e["years"]) for e in entries}
+        issues = {e["programme_issue"] for e in entries if e["programme_issue"]}
+        undated = [e["file"] for e in entries if not e["programme_issue"]]
         if len(nors) > 1:
             evidence.findings.append(cd.Finding(
                 target=manual, code="WRONG_YEAR_AUTHORITY",
@@ -189,10 +212,24 @@ def build() -> dict[str, Any]:
                 target=manual, code="AUTHORITY_SELF_DECLARED_UNVERIFIED",
                 detail=f"{len(unverified)} référentiel(s) portent « à re-vérifier contre le BO »",
             ))
-        if len(year_sets) > 1:
+        if len(issues) > 1:
+            per_issue = {
+                issue: sorted(
+                    Path(e["file"]).name for e in entries if e["programme_issue"] == issue
+                )
+                for issue in sorted(issues)
+            }
             evidence.findings.append(cd.Finding(
-                target=manual, code="AUTHORITY_YEAR_DIVERGENCE",
-                detail=f"années citées divergentes dans un même niveau : {sorted(year_sets)}",
+                target=manual, code="PROGRAMME_AUTHORITY_DIVERGENCE",
+                detail=(
+                    "deux programmes différents cités dans un même niveau : "
+                    + "; ".join(f"{k} -> {v}" for k, v in per_issue.items())
+                ),
+            ))
+        if undated:
+            evidence.findings.append(cd.Finding(
+                target=manual, code="PROGRAMME_ISSUE_UNIDENTIFIABLE",
+                detail=f"{len(undated)} référentiel(s) sans bulletin identifiable : {undated[:3]}",
             ))
 
         # 2. couverture
@@ -227,11 +264,15 @@ def build() -> dict[str, Any]:
     evidence.coverage = {"targets_examined": examined, "per_manual": coverage_rows}
     payload = cd.write_evidence(evidence, OUTPUT)
     payload["summary"] = {
-        "WRONG_YEAR_AUTHORITY": sum(
-            1 for f in evidence.findings if f.code in {"WRONG_YEAR_AUTHORITY", "AUTHORITY_YEAR_DIVERGENCE"}
+        "AUTHORITY_DIVERGENCES": sum(
+            1 for f in evidence.findings
+            if f.code in {"WRONG_YEAR_AUTHORITY", "PROGRAMME_AUTHORITY_DIVERGENCE"}
         ),
-        "AUTHORITY_NOR_ABSENT": sum(1 for f in evidence.findings if f.code == "AUTHORITY_NOR_ABSENT"),
-        "AUTHORITY_SELF_DECLARED_UNVERIFIED": sum(
+        "REGULATORY_SOURCES_WITHOUT_AUTHORITY": sum(
+            1 for f in evidence.findings
+            if f.code in {"AUTHORITY_NOR_ABSENT", "PROGRAMME_ISSUE_UNIDENTIFIABLE"}
+        ),
+        "REGULATORY_SOURCE_REVERIFY_PENDING": sum(
             1 for f in evidence.findings if f.code == "AUTHORITY_SELF_DECLARED_UNVERIFIED"
         ),
         "OFFICIAL_REQUIREMENTS_UNCOVERED": sum(
