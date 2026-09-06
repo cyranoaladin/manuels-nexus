@@ -290,25 +290,39 @@ def build_queue(
         }
     )
 
-    if (
+    resolved = decision.get("status") == "RESOLVED_BY_HUMAN_DECISION"
+    if resolved:
+        # Le Release Owner a tranché : TNSI-PROJET est évalué par son projet et
+        # sa grille critériée. La demande de décision est close, la preuve vit
+        # dans le contrat de chapitre et le gate la vérifie. La laisser dans la
+        # file la ferait réclamer indéfiniment une décision déjà rendue.
+        if not decision.get("decision_received", {}).get("decision"):
+            raise ValueError("décision éditoriale TNSI-PROJET résolue sans décision consignée")
+        if decision.get("release_blocking") is not False:
+            raise ValueError("décision éditoriale TNSI-PROJET résolue mais encore bloquante")
+    elif (
         decision.get("release_blocking") is not True
         or decision.get("machine_cannot_decide") is not True
         or not decision.get("decision_required_from_human")
     ):
         raise ValueError("décision éditoriale TNSI-PROJET non bloquante ou incomplète")
-    decision_units = [f"EDITORIAL_DECISION::{decision.get('chapter')}:ASSESSMENT_MODE"]
+    decision_units = (
+        [] if resolved
+        else [f"EDITORIAL_DECISION::{decision.get('chapter')}:ASSESSMENT_MODE"]
+    )
     items.append(
         {
             "item_id": "TNSI_PROJET_ASSESSMENT_MODE",
             "category": "EDITORIAL_DECISION",
-            "count": 1,
+            "count": 0 if resolved else 1,
             "unit_ids": decision_units,
             "set_digest": _set_digest(decision_units),
-            "chapters": {str(decision.get("chapter")): 1},
+            "chapters": {} if resolved else {str(decision.get("chapter")): 1},
             "units_by_chapter": _chapter_buckets(
-                [(str(decision.get("chapter")), decision_units[0])]
+                [(str(decision.get("chapter")), unit) for unit in decision_units]
             ),
-            "question": decision["decision_required_from_human"],
+            "question": decision.get("decision_required_from_human"),
+            "resolution": decision.get("decision_received") if resolved else None,
             "required_reviewers": [
                 "EXPERT_NSI",
                 "EXPERT_PROGRAMME_PEDAGOGIE",

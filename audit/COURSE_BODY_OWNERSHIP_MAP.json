@@ -2218,6 +2218,7 @@
             "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/13_C4_factorisation_signe.tex",
             "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/14_C5_inequations.tex",
             "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/15_C6_optimisation.tex",
+            "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/16_C7_somme_produit_racines.tex",
             "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_contextualise.tex",
             "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_fil_rouge.tex"
           ],
@@ -2230,10 +2231,11 @@
             6,
             7,
             8,
-            85,
-            86
+            9,
+            88,
+            89
           ],
-          "path_set_digest": "sha256:bc2e64932f42ed772e296f64d36b644d2fb550031370bc85c661e4d2e79e8347"
+          "path_set_digest": "sha256:36085fefabbb087e7fae7dc45cca4452acdab4a071c6c2f07fe1b835a5f1288e"
         },
         "professeur": {
           "paths": [
@@ -2245,6 +2247,7 @@
             "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/13_C4_factorisation_signe.tex",
             "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/14_C5_inequations.tex",
             "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/15_C6_optimisation.tex",
+            "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/16_C7_somme_produit_racines.tex",
             "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_contextualise.tex",
             "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_fil_rouge.tex"
           ],
@@ -2257,10 +2260,11 @@
             6,
             7,
             8,
-            85,
-            86
+            9,
+            88,
+            89
           ],
-          "path_set_digest": "sha256:bc2e64932f42ed772e296f64d36b644d2fb550031370bc85c661e4d2e79e8347"
+          "path_set_digest": "sha256:36085fefabbb087e7fae7dc45cca4452acdab4a071c6c2f07fe1b835a5f1288e"
         }
       },
       "expected_capacities": [
@@ -2268,8 +2272,10 @@
         "C2",
         "C3",
         "C4",
+        "C8",
         "C5",
-        "C6"
+        "C6",
+        "C7"
       ],
       "assembled_bodies": [
         {
@@ -2351,7 +2357,8 @@
           "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/13_C4_factorisation_signe.tex",
           "body_digest": "sha256:7b4444074cef7e9b7d78f506efee4222efbd9bd48a8565022675c2e5744a54ec",
           "declared_capacities": [
-            "C4"
+            "C4",
+            "C8"
           ],
           "semantic_owner_chapter": "1SPE-SECOND-DEGRE",
           "is_foreign": false,
@@ -2392,7 +2399,20 @@
           ]
         },
         {
-          "assembly_position": 85,
+          "assembly_position": 9,
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/16_C7_somme_produit_racines.tex",
+          "body_digest": "sha256:b2b7d8b12670a9f33dbd49a2404af51f3c84db0e08c6bb16ab90a739d89aef96",
+          "declared_capacities": [
+            "C7"
+          ],
+          "semantic_owner_chapter": "1SPE-SECOND-DEGRE",
+          "is_foreign": false,
+          "ownership_proven": true,
+          "ownership_status": "SOURCE_SCOPED_UNIQUE_BODY",
+          "toc_titles": []
+        },
+        {
+          "assembly_position": 88,
           "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_contextualise.tex",
           "body_digest": "sha256:018dddd9d53d83bf92b5d179da2027752f3cea27b52473f54baca4f56a2d7fec",
           "declared_capacities": [
@@ -2409,7 +2429,7 @@
           "toc_titles": []
         },
         {
-          "assembly_position": 86,
+          "assembly_position": 89,
           "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_fil_rouge.tex",
           "body_digest": "sha256:e1bc8287f8d65dd63e1a97e5087fe4d04402672fa125702c3bc2db8777d95266",
           "declared_capacities": [

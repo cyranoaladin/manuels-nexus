@@ -8,16 +8,16 @@
     "audit/CURRENT_REVIEW_DEBT_PARTITION.json": "sha256:a23c5c7ebe0000614bb963f157758ae61c9582ddea6039ba9c59311009aa85a7",
     "audit/QCM_INDEPENDENT_EVIDENCE_V2.json": "sha256:12405d55c205fd0e6111656110f95a0aac39dc42c7b0363081f97bafaad42315",
     "audit/QCM_REVIEW_PROOF_RECONCILIATION.json": "sha256:b2a6a242cab0b0e0f758ddd18a6d4a9a6c397fadff78266f3f8a805beb1fec8e",
-    "audit/TNSI_PROJET_ASSESSMENT_MODE.json": "sha256:15ee9492ab6ef5590de54db73afd49d469b16db594e1e181e06c0e6620edfc83"
+    "audit/TNSI_PROJET_ASSESSMENT_MODE.json": "sha256:1de1984e8cddb7cfdf08a5dffebb0b7eb286e21cecd9cdf39f57011d1a02c8b2"
   },
   "counts": {
     "OBJECT_REVIEW": 2325,
     "QCM_ANSWER_SEMANTICS": 166,
     "QCM_DIAGNOSTIC_RENVOI_SEMANTICS": 41,
-    "EDITORIAL_DECISION": 1,
-    "TOTAL": 2533
+    "EDITORIAL_DECISION": 0,
+    "TOTAL": 2532
   },
-  "queue_digest": "sha256:736fa2f6031f14618aa3e67e4b860fbee96d748b9cc9d3a81f5d19bfc25c3a06",
+  "queue_digest": "sha256:c66521ef249d3941f42f10e61ef05daae7b07045cdfd9328133454237032a08d",
   "pairwise_intersections": [],
   "unknown_count": 0,
   "items": [
@@ -6698,24 +6698,24 @@
     {
       "item_id": "TNSI_PROJET_ASSESSMENT_MODE",
       "category": "EDITORIAL_DECISION",
-      "count": 1,
-      "unit_ids": [
-        "EDITORIAL_DECISION::TNSI-PROJET:ASSESSMENT_MODE"
-      ],
-      "set_digest": "sha256:0c5c08d63397e5e253b38f9601a7968c45bb23f5297000778f9bc6557c2d364e",
-      "chapters": {
-        "TNSI-PROJET": 1
-      },
-      "units_by_chapter": {
-        "TNSI-PROJET": {
-          "count": 1,
-          "unit_ids": [
-            "EDITORIAL_DECISION::TNSI-PROJET:ASSESSMENT_MODE"
-          ],
-          "set_digest": "sha256:0c5c08d63397e5e253b38f9601a7968c45bb23f5297000778f9bc6557c2d364e"
+      "count": 0,
+      "unit_ids": [],
+      "set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "chapters": {},
+      "units_by_chapter": {},
+      "question": null,
+      "resolution": {
+        "decision": "TNSI_PROJECT_ASSESSED_BY_PROJECT_AND_CRITERIA_GRID",
+        "decided_by": "abenrhouma",
+        "decided_on": "2026-09-06",
+        "rationale": "Le programme fait de la démarche de projet une composante obligatoire de l'enseignement de terminale NSI et lui réserve au moins un quart de l'horaire. La création de deux devoirs écrits dans le seul but de faire passer un gate n'est pas autorisée.",
+        "materialised_as": {
+          "assessment_mode": "PROJECT_ASSESSMENT",
+          "declared_in": "NSI/chapitres/TNSI-PROJET/contrat.yaml",
+          "evidence": "grille critériée de TNSI-PROJET-ANNUEL.tex (7 critères, poids totalisant 100%, preuve attendue par critère)",
+          "verified_by": "scripts/assessment_modes.py via build_publish_readiness_chapter_matrix"
         }
       },
-      "question": "Confirmer que TNSI-PROJET est évalué par son projet et sa grille, et non par une évaluation écrite A/B — ou demander la rédaction de deux sujets écrits.",
       "required_reviewers": [
         "EXPERT_NSI",
         "EXPERT_PROGRAMME_PEDAGOGIE"

@@ -77,3 +77,48 @@ def test_the_corpus_has_no_unrecognised_layout_left() -> None:
     graph = json.loads((ROOT / "audit/EX_CO_GRAPH.json").read_text(encoding="utf-8"))
     assert graph["relation_counts"].get("UNKNOWN", 0) == 0
     assert graph["relation_counts"].get("ORPHAN_CO", 0) == 0
+
+
+# --- Non-régression des trois causes réellement rencontrées -----------------
+
+def test_regression_a_remediation_correction_is_not_an_orphan() -> None:
+    """Cause 1 : le corrigé vise un objet de `remediation/`, pas de `exercices/`."""
+    graph = json.loads((ROOT / "audit/EX_CO_GRAPH.json").read_text(encoding="utf-8"))
+    remediation = [
+        row for row in graph["relations"]
+        if "REMEDIATION_CORRECTION" in row["classifications"]
+    ]
+    assert remediation
+    assert all("ORPHAN_CO" not in row["classifications"] for row in remediation)
+
+
+def test_regression_the_third_question_is_answered_everywhere() -> None:
+    """Cause 2 : seize corrigés laissaient la question 3 sans réponse."""
+    graph = json.loads((ROOT / "audit/EX_CO_GRAPH.json").read_text(encoding="utf-8"))
+    assert graph["relation_counts"].get("ANSWERS_MISSING", 0) == 0
+
+
+@pytest.mark.parametrize("marker", ["Q1.", "Question 1.", "1.", "Q1 (C6)."])
+def test_regression_every_tspe_question_syntax_is_understood(marker) -> None:
+    """Cause 3 : trois syntaxes de repérage coexistent dans le corpus."""
+    single = "\\begin{enumerate}\n  \\item Une question.\n\\end{enumerate}"
+    verdict, _ = coverage.classify(single, f"\\textbf{{{marker}}} Réponse.")
+    assert verdict == coverage.ESTABLISHED, marker
+
+
+def test_remediation_objects_are_not_subject_to_the_cardinality_rule() -> None:
+    """Une remédiation n'exige pas de corrigé : elle n'est pas un exercice orphelin."""
+    graph = json.loads((ROOT / "audit/EX_CO_GRAPH.json").read_text(encoding="utf-8"))
+    assert graph["exercise_cardinality_counts"].get("ORPHAN_EX", 0) == 0
+    assert set(graph["exercise_cardinality_counts"]) == {"MATCH"}
+
+
+def test_an_unrecognised_layout_is_no_longer_tolerated_by_the_chapter_matrix() -> None:
+    """`UNKNOWN` ne fait plus partie des verdicts sans conséquence."""
+    source = (ROOT / "scripts/build_publish_readiness_chapter_matrix.py").read_text(
+        encoding="utf-8"
+    )
+    block = source.split("NOT_A_FAILURE = {", 1)[1].split("}", 1)[0]
+    assert '"UNKNOWN"' not in block
+    assert '"REMEDIATION_CORRECTION"' in block
+    assert '"SINGLE_PROGRAM_ANSWER"' in block

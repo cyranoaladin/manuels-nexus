@@ -302,6 +302,12 @@ def build_graph(
 
     cardinality = []
     for exercise_id, exercise in sorted(exercises.items(), key=lambda item: item[1]["path"]):
+        # La cardinalité ne juge que les exercices : une remédiation est un
+        # objet auquel un corrigé *peut* répondre, elle n'en exige pas un.
+        # L'y soumettre transformerait 261 remédiations sans corrigé en
+        # exercices orphelins.
+        if exercise.get("answerable_role") != "exercices":
+            continue
         correction_ids = sorted(linked.get(exercise_id, []))
         classification = (
             "ORPHAN_EX"

@@ -147,3 +147,70 @@ def test_the_amenagee_forensics_agree_with_the_readiness_metric() -> None:
     payload = forensics.build()
     assert payload["summary"]["TNSI_AMENAGEE_SOURCE_OBJECTS"] == 0
     assert payload["summary"]["TNSI_AMENAGEE_CLASSIFICATION"] == "EMPTY_VARIANT"
+
+
+# --- Garde de vérité : le contenu se compte en objets déclarés ---------------
+
+def test_only_inventory_declared_objects_count_as_content() -> None:
+    """La source d'autorité est la liste d'objets de l'inventaire.
+
+    Compter les `.tex` d'un assemblage laissait passer des includes techniques ;
+    compter ses `included_files` laissait passer les `contrat.yaml`. Seul un
+    objet que l'inventaire déclare est du contenu.
+    """
+    inventory = json.loads((ROOT / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8"))
+    declared = readiness.pedagogical_object_paths(inventory)
+    assert declared, "l'inventaire doit déclarer des objets"
+    assert not any(path.endswith("contrat.yaml") for path in declared)
+    assert not any(path.endswith(".json") for path in declared)
+    assert all(path.endswith(".tex") for path in declared)
+
+
+def test_a_deliverable_made_only_of_contracts_is_never_content_complete() -> None:
+    """Mutation exigée : contrats et configurations seuls ne font pas un produit."""
+    inventory = {
+        "manuals": {"X": {"chapters": {"X-CH1": {"objects": [
+            {"id": "X-CH1-CO-1", "path": "chapitres/X-CH1/cours/a.tex"},
+        ]}}}},
+        "declared_assemblies": [{
+            "assembly_id": "x:manual:X:amenagee",
+            "scope": "manual",
+            "included_files": [
+                "chapitres/X-CH1/contrat.yaml",
+                "chapitres/X-CH1/dossier_curation.json",
+                "gabarits/common/nexus-manuel.cls",
+            ],
+        }],
+    }
+    coverage = readiness.content_coverage(inventory, "x:manual:X:amenagee", "X")
+    assert coverage["objects"] == 0
+    assert coverage["complete"] is False
+
+
+def test_a_deliverable_with_one_real_object_per_chapter_is_content_complete() -> None:
+    inventory = {
+        "manuals": {"X": {"chapters": {
+            "X-CH1": {"objects": [{"id": "a", "path": "chapitres/X-CH1/cours/a.tex"}]},
+            "X-CH2": {"objects": [{"id": "b", "path": "chapitres/X-CH2/cours/b.tex"}]},
+        }}},
+        "declared_assemblies": [{
+            "assembly_id": "x:manual:X:eleve", "scope": "manual",
+            "included_files": [
+                "chapitres/X-CH1/contrat.yaml",
+                "chapitres/X-CH1/cours/a.tex",
+                "chapitres/X-CH2/cours/b.tex",
+            ],
+        }],
+    }
+    coverage = readiness.content_coverage(inventory, "x:manual:X:eleve", "X")
+    assert coverage["objects"] == 2
+    assert coverage["complete"] is True
+
+    # Retirer un chapitre du produit doit suffire à le rendre incomplet.
+    inventory["declared_assemblies"][0]["included_files"].remove("chapitres/X-CH2/cours/b.tex")
+    assert readiness.content_coverage(inventory, "x:manual:X:eleve", "X")["complete"] is False
+
+
+def test_development_ready_is_a_pure_function_of_the_axes(payload) -> None:
+    for row in payload["deliverables"]:
+        assert row["development_ready"] is all(row["axes"].values())

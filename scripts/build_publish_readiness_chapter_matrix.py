@@ -385,7 +385,17 @@ def _ex_co_truth(chapter: str, graph: dict[str, Any]) -> dict[str, Any]:
     # denonce pas un defaut : le corrige repond a chaque question de son
     # exercice. Il ne vaut que COUVERTURE -- l'exactitude scientifique est
     # prouvee par l'oracle, pas ici -- mais il n'est pas un echec structurel.
-    NOT_A_FAILURE = {"UNKNOWN", "ANSWER_COVERAGE_ESTABLISHED"}
+    # Verdicts qui ne dénoncent pas un défaut. `UNKNOWN` en faisait partie :
+    # une disposition non reconnue était tolérée. Elle ne l'est plus — le
+    # classifieur connaît désormais toutes les conventions du corpus, et une
+    # disposition inconnue redevient un signal. À la place, deux verdicts
+    # précis : un corrigé qui répond à une remédiation, et une réponse par
+    # programme unique à un énoncé qui énumère les étapes d'un même livrable.
+    NOT_A_FAILURE = {
+        "ANSWER_COVERAGE_ESTABLISHED",
+        "REMEDIATION_CORRECTION",
+        "SINGLE_PROGRAM_ANSWER",
+    }
     structural_failures = sum(
         count
         for classification, count in classifications.items()

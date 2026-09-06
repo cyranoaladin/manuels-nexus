@@ -96,6 +96,32 @@ def _development_build(manual: str, variant: str) -> dict[str, Any]:
     return {"present": False, "path": None, "bytes": 0}
 
 
+def _chapter_of(path: str) -> str | None:
+    """Chapitre auquel appartient un objet, quel que soit le préfixe du dépôt."""
+    parts = path.split("/")
+    if "chapitres" not in parts:
+        return None
+    index = parts.index("chapitres") + 1
+    return parts[index] if index < len(parts) else None
+
+
+def pedagogical_object_paths(inventory: dict[str, Any]) -> set[str]:
+    """Chemins des objets pédagogiques, tels que l'inventaire les déclare.
+
+    C'est la seule définition faisant autorité. Compter les `.tex` d'un
+    assemblage ne suffisait pas : un `contrat.yaml`, un include technique ou un
+    gabarit ne sont pas du contenu, et c'est exactement ce qui avait fait
+    passer une variante vide pour pourvue.
+    """
+    paths: set[str] = set()
+    for manual in inventory.get("manuals", {}).values():
+        for chapter in manual.get("chapters", {}).values():
+            for obj in chapter.get("objects", []):
+                if obj.get("path"):
+                    paths.add(str(obj["path"]))
+    return paths
+
+
 def content_coverage(inventory: dict[str, Any], assembly_id: str | None,
                      manual: str) -> dict[str, Any]:
     """Couverture réelle en objets de contenu d'un assemblage.
@@ -113,13 +139,17 @@ def content_coverage(inventory: dict[str, Any], assembly_id: str | None,
     if assembly is None:
         return {"objects": 0, "chapters_covered": 0, "chapters_total": len(chapters),
                 "complete": False}
+    declared = pedagogical_object_paths(inventory)
     covered = set()
     objects = 0
     for path in assembly.get("included_files", []):
-        if not path.endswith(".tex") or "/chapitres/" not in path:
+        # Un fichier ne compte que s'il est un objet pédagogique déclaré.
+        if path not in declared:
             continue
         objects += 1
-        covered.add(path.split("/chapitres/", 1)[1].split("/", 1)[0])
+        chapter = _chapter_of(path)
+        if chapter:
+            covered.add(chapter)
     return {
         "objects": objects,
         "chapters_covered": len(covered & chapters),
@@ -145,7 +175,7 @@ def build() -> dict[str, Any]:
         coverage = content_coverage(inventory, profile["assembly_id"], manual)
 
         axes = {
-            "content": coverage["complete"],
+            "content": coverage["complete"] and coverage["objects"] > 0,
             "assembly": entry["declared_assembly"],
             "build_target": entry["build_target_declared"],
             "development_build": dev_build["present"],
@@ -178,6 +208,9 @@ def build() -> dict[str, Any]:
         "ASSEMBLY_READY": count(lambda r: r["axes"]["assembly"]),
         "BUILD_TARGET_READY": count(lambda r: r["axes"]["build_target"]),
         "DEVELOPMENT_BUILD_PASS": count(lambda r: r["axes"]["development_build"]),
+        "PEDAGOGICAL_OBJECT_COUNT_TOTAL": sum(
+            r["content_coverage"]["objects"] for r in rows
+        ),
         "PROGRAMME_CONFORM": count(lambda r: r["axes"]["programme"]),
         "SCIENCE_CONFORM": count(lambda r: r["axes"]["science"]),
         "CONTENT_COMPLETE": count(lambda r: r["axes"]["content"]),
