@@ -13,12 +13,12 @@
 | `CANONICAL_MANUALS` | 6 |
 | `CANONICAL_PDFS` | 12 |
 | `CANONICAL_RELEASE_ROOTS` | 12 |
-| `EXPLICIT_NON_RELEASE_ROOTS` | 33 |
-| `TOTAL_TEX_ROOTS` | 45 |
-| `TEX_ROOTS_FOUND` | 45 |
+| `EXPLICIT_NON_RELEASE_ROOTS` | 34 |
+| `TOTAL_TEX_ROOTS` | 46 |
+| `TEX_ROOTS_FOUND` | 46 |
 | `UNCLASSIFIED_TEX_ROOTS` | 0 |
 | `EXTRA_ASSEMBLER_VARIANTS` | 5 |
-| `NON_RELEASE_TARGETS` | 38 |
+| `NON_RELEASE_TARGETS` | 39 |
 | `UNREGISTERED_RELEASE_TARGET` | 0 |
 | `MISSING_CANONICAL_TARGET` | 0 |
 | `AMBIGUOUS_CURRENT_ARTIFACT` | 0 |
@@ -47,6 +47,7 @@
 - `Mathematiques/manuel-maths/build/maquette-v5/maquette.tex` — maquette de charte : sert au controle visuel, ne se diffuse pas
 - `Mathematiques/manuel-maths/gabarits/chapitre_master.tex` — gabarit de compilation d'un chapitre isole
 - `Mathematiques/manuel-maths/gabarits/objet_standalone.tex` — gabarit de compilation d'un objet isole
+- `Mathematiques/manuel-maths/gabarits/reference-v4/manuel-kit/main.tex` — maquette de charte v4 heritee : plus aucune cible ne la compose
 - `Mathematiques/manuel-maths/gabarits/specimen-pont-v6.tex` — specimen de charte, jamais diffuse
 - `Mathematiques/manuel-maths/gabarits/specimen-v6.tex` — specimen de charte, jamais diffuse
 - `Mathematiques/manuel-maths/gabarits/specimen.tex` — specimen de charte, jamais diffuse

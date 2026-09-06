@@ -2,7 +2,7 @@
 
 - **Exercices sans corrige** : `0`
 - **Corriges orphelins** : `0`
-- **Derive d'enonce eleve/professeur** : `0`
+- **Derive d'enonce eleve/professeur** : `180`
 - **Fuites enseignant dans la version eleve** : `0`
 - **Ambigüites de bareme** : `0`
 - **Erreurs de total de bareme** : `0`

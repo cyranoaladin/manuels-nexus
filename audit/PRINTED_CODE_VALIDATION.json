@@ -7,23 +7,29 @@
     "PRINTED_CODE_EXPECTED_OUTPUT_MISMATCH": 0,
     "CURVED_QUOTES_IN_CODE": 0,
     "DESTRUCTIVE_LIGATURES_IN_CODE": 0,
-    "TOTAL_PYTHON_BLOCKS": 1014,
+    "TOTAL_PYTHON_BLOCKS": 1020,
     "TOTAL_SQL_BLOCKS": 152,
     "SQL_EXECUTABLE_QUERIES": 110,
     "SQL_DECLARATIVE_SCHEMAS": 42,
     "TOTAL_CONSOLE_BLOCKS": 123,
     "TOTAL_VERIFIED_EXECUTIONS": 133,
-    "COMPLEMENTARY_PRINTED_CODE_BLOCKS": 134,
+    "COMPLEMENTARY_PRINTED_CODE_BLOCKS": 56,
     "SYNTAX_REFERENCE_BLOCKS": 46,
     "RAW_VERBATIM_SNIPPETS": 10,
-    "ALGORITHMIC_PSEUDOCODE_BLOCKS": 78,
-    "TOTAL_PRINTED_CODE_BLOCKS": 1423,
+    "PRINTED_CODE_BLOCKS_DISCOVERED": 1351,
+    "PRINTED_CODE_BLOCKS_CLASSIFIED": 1351,
+    "TOTAL_PRINTED_CODE_BLOCKS": 1351,
     "UNCLASSIFIED_PRINTED_CODE": 0,
-    "SOURCES_AUDITED": 5384
+    "PRINTED_FIDELITY_OCCURRENCES": 1423,
+    "PRINTED_FIDELITY_DISTINCT_ORIGINS": 1014,
+    "PRINTED_IN_ONE_VARIANT": 605,
+    "PRINTED_IN_TWO_VARIANTS": 409,
+    "SOURCES_AUDITED": 5389
   },
   "reconciliation": {
-    "explanation_1423_vs_1289": "1289 blocs correspondent aux environnements directement exécutables et consoles (1014 Python + 152 SQL + 123 consoles). Les 134 blocs complémentaires qui portent le grand total à 1423 blocs de code imprimés se décomposent en : 46 fiches de référence syntaxique codereference, 10 extraits verbatim de flux bruts, et 78 spécifications d'algorithmes en pseudo-code formalisé. Aucun bloc de code n'est non classifié (0).",
-    "explanation_sql_152_vs_133": "Sur les 152 blocs SQL imprimés, exactement 133 correspondent à des requêtes actives (SELECT, INSERT, UPDATE, DELETE) accompagnées de leur bloc d'assertion BEGIN-VERIFY exécuté sans erreur dans SQLite. Les 19 blocs restants correspondent aux schémas relationnels textuels Inscription(...) des exercices de modélisation (13 blocs) et aux définitions déclaratives CREATE TABLE du cours (6 blocs) ne nécessitant pas de jeu d'essai isolé."
+    "explanation_1423_vs_1014": "Les rapports de fidelite comparent 1423 blocs caractere par caractere, mais ce sont des OCCURRENCES PAR VARIANTE, pas des blocs distincts : elles se rapportent a 1014 origines sources uniques, dont 605 composees dans une seule variante et 409 composees dans les deux (eleve et professeur). 605 + 2 x 409 = 1423. Il n'existe donc aucun bloc manquant entre les deux comptages : ce sont deux mesures de la meme population, l'une par surface imprimee, l'autre par source dedupliquee.",
+    "explanation_total_printed_blocks": "Le denombrement source distinct couvre 1020 blocs Python, 152 blocs SQL, 123 consoles, 46 fiches de reference syntaxique et 10 extraits verbatim, soit 1351 blocs, tous classifies (0 non classifie).",
+    "explanation_sql_vs_sqlite_executions": "Les 133 executions SQLite ne sont pas un sous-ensemble des 152 blocs SQL imprimes : ce sont des harnais de verification Python (blocs BEGIN-VERIFY portant sqlite3) places dans les commentaires TeX, executes pour controler le resultat annonce. Les 152 blocs SQL imprimes se repartissent en 110 requetes executables (categorie EXECUTABLE_QUERY) et 42 schemas relationnels textuels (categorie RELATIONAL_SCHEMA), qui ne sont pas du SQL executable et n'ont donc pas de jeu d'essai."
   },
   "fidelity_reports": {
     "1SPE": {

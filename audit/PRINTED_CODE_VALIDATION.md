@@ -7,18 +7,19 @@
 - **Ligatures destructives** : `0`
 
 ## Metriques de couverture et reconciliation
-- Blocs Python audites : 1014
+- Blocs Python audites : 1020
 - Blocs SQL audites : 152 (dont 110 requetes executees avec succes sous SQLite et 42 schemas relationnels textuels)
 - Blocs Console audites : 123
-- Blocs complementaires : 134 (46 codereference, 10 verbatim, 78 pseudocode)
-- **TOTAL BLOCS DE CODE IMPRIMES** : **1423**
+- Blocs complementaires : 56 (46 codereference, 10 verbatim)
+- **TOTAL BLOCS DE CODE IMPRIMES** : **1351**
 - **CODE NON CLASSIFIE** : **`0`**
 - Executions BEGIN-VERIFY verifiees : 133
-- Fichiers sources audites : 5384
+- Fichiers sources audites : 5389
 
 ## Justification des ecarts de certification
-- **1423 vs 1289** : 1289 blocs correspondent aux environnements directement exécutables et consoles (1014 Python + 152 SQL + 123 consoles). Les 134 blocs complémentaires qui portent le grand total à 1423 blocs de code imprimés se décomposent en : 46 fiches de référence syntaxique codereference, 10 extraits verbatim de flux bruts, et 78 spécifications d'algorithmes en pseudo-code formalisé. Aucun bloc de code n'est non classifié (0).
-- **SQL 152 vs 133** : Sur les 152 blocs SQL imprimés, exactement 133 correspondent à des requêtes actives (SELECT, INSERT, UPDATE, DELETE) accompagnées de leur bloc d'assertion BEGIN-VERIFY exécuté sans erreur dans SQLite. Les 19 blocs restants correspondent aux schémas relationnels textuels Inscription(...) des exercices de modélisation (13 blocs) et aux définitions déclaratives CREATE TABLE du cours (6 blocs) ne nécessitant pas de jeu d'essai isolé.
+- **Partition complete** : Le denombrement source distinct couvre 1020 blocs Python, 152 blocs SQL, 123 consoles, 46 fiches de reference syntaxique et 10 extraits verbatim, soit 1351 blocs, tous classifies (0 non classifie).
+- **Occurrences imprimees vs blocs distincts** : Les rapports de fidelite comparent 1423 blocs caractere par caractere, mais ce sont des OCCURRENCES PAR VARIANTE, pas des blocs distincts : elles se rapportent a 1014 origines sources uniques, dont 605 composees dans une seule variante et 409 composees dans les deux (eleve et professeur). 605 + 2 x 409 = 1423. Il n'existe donc aucun bloc manquant entre les deux comptages : ce sont deux mesures de la meme population, l'une par surface imprimee, l'autre par source dedupliquee.
+- **SQL imprime vs executions SQLite** : Les 133 executions SQLite ne sont pas un sous-ensemble des 152 blocs SQL imprimes : ce sont des harnais de verification Python (blocs BEGIN-VERIFY portant sqlite3) places dans les commentaires TeX, executes pour controler le resultat annonce. Les 152 blocs SQL imprimes se repartissent en 110 requetes executables (categorie EXECUTABLE_QUERY) et 42 schemas relationnels textuels (categorie RELATIONAL_SCHEMA), qui ne sont pas du SQL executable et n'ont donc pas de jeu d'essai.
 
 ## Rapports de fidelite par manuel
 - **1SPE** : `PASS`
