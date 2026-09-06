@@ -354,10 +354,18 @@ def test_dichotomy_method_sheet_traces_the_real_variant_values() -> None:
 
 
 def test_dichotomy_absence_sentinel_is_minus_one_across_the_chapter() -> None:
-    """La fiche methode M1 renvoyait None la ou tout le chapitre renvoie -1."""
+    """La fiche methode M1 et tout le chapitre doivent renvoyer -1 en cas d'absence.
+
+    Aucun texte ni code ne doit pretendre que la recherche dichotomique renvoie None.
+    """
     offenders = []
+    prose_contradictions = []
     for path in sorted(CHAPTER.rglob("*.tex")):
-        lines = path.read_text(encoding="utf-8").split("\n")
+        text = path.read_text(encoding="utf-8")
+        if "recherche_dichotomique" in text and "renvoie bien None" in text:
+            prose_contradictions.append(str(path.relative_to(CHAPTER)))
+
+        lines = text.split("\n")
         for index, line in enumerate(lines):
             if "def recherche_dichotomique(" not in line:
                 continue
@@ -370,7 +378,51 @@ def test_dichotomy_absence_sentinel_is_minus_one_across_the_chapter() -> None:
                                             "return -1, variants"):
                         offenders.append((str(path.relative_to(CHAPTER)), bare.strip()))
                     break
-    assert offenders == []
+    assert offenders == [], f"Dichotomy return offenders: {offenders}"
+    assert prose_contradictions == [], f"Prose contradictions: {prose_contradictions}"
+
+
+def test_dichotomy_contract_execution_exhaustive() -> None:
+    """Valide les sept cas obligatoires sur le code reellement extrait de M1.
+
+    1. tableau vide -> -1
+    2. valeur absente -> -1
+    3. valeur presente au debut -> 0
+    4. valeur presente a la fin -> len(t) - 1
+    5. valeur presente au milieu -> indice exact
+    6. tableau a un element -> present (0) ou absent (-1)
+    7. bornes coherentes
+    """
+    method_file = CHAPTER / "methodes/1NSI-ADGK-ME-001.tex"
+    content = method_file.read_text(encoding="utf-8")
+    py_block = content.split(r"\begin{python}")[1].split(r"\end{python}")[0]
+
+    env: dict[str, Any] = {}
+    exec(py_block, env)
+    fn = env["recherche_dichotomique"]
+
+    # 1. Tableau vide
+    assert fn([], 10) == -1
+    # 2. Valeur absente (plus petite, entre deux, plus grande)
+    t = [2, 5, 7, 11, 13, 17, 19, 23]
+    assert fn(t, 1) == -1
+    assert fn(t, 4) == -1
+    assert fn(t, 25) == -1
+    # 3. Valeur presente au debut
+    assert fn(t, 2) == 0
+    # 4. Valeur presente a la fin
+    assert fn(t, 23) == 7
+    # 5. Valeur presente au milieu
+    assert fn(t, 11) == 3
+    assert fn(t, 13) == 4
+    # 6. Tableau a un element
+    assert fn([42], 42) == 0
+    assert fn([42], 10) == -1
+    assert fn([42], 99) == -1
+    # 7. Bornes coherentes sur tableau a 2 elements
+    assert fn([10, 20], 10) == 0
+    assert fn([10, 20], 20) == 1
+    assert fn([10, 20], 15) == -1
 
 
 def test_greedy_method_sheet_refuses_a_silent_partial_change() -> None:

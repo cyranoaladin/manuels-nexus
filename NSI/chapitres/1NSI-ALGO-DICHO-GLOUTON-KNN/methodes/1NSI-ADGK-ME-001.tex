@@ -43,7 +43,7 @@ $7 \to 3 \to 0$ — trois tours suffisent, contre jusqu'à 8 pour un parcours s�
   \item Appliquer la dichotomie à un tableau \textbf{non trié} : le résultat est faux sans message d'erreur.
   \item Écrire \lstinline{g = m} ou \lstinline{d = m} au lieu de \lstinline{m + 1} / \lstinline{m - 1} : le variant ne décroît plus toujours et la boucle peut devenir infinie.
   \item Confondre \textbf{variant} (entier qui décroît, prouve la terminaison) et \textbf{invariant} (propriété qui reste vraie, prouve la correction).
-  \item Oublier le cas du tableau vide : avec \lstinline{g = 0} et \lstinline{d = -1}, la boucle ne s'exécute pas et on renvoie bien \lstinline{None}.
+  \item Oublier le cas du tableau vide : avec \lstinline{g = 0} et \lstinline{d = -1}, la boucle ne s'exécute pas et on renvoie bien \lstinline{-1}.
 \end{itemize}
 
 \textbf{Vérifier :} teste sur un tableau vide, un singleton, la première et la dernière case, et une valeur absente ; affiche $d-g$ à chaque tour et contrôle qu'il décroît strictement en restant $\geq 0$.
