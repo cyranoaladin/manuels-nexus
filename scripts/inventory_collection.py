@@ -1379,6 +1379,75 @@ def _classify_is_production(
     ) == "production_object"
 
 
+def _curricular_coverage_blockers(
+    root: Path, manual_id: str, contract: str
+) -> list[dict[str, str]]:
+    """Blocages de conformité curriculaire, capacité par capacité.
+
+    Remplace le comptage de chapitres par la seule question qui engage la
+    publication : le programme officiel est-il couvert ? Une preuve absente est
+    bloquante — on ne suppose pas la conformité faute de mesure.
+    """
+    artifact = root / contract
+    if not artifact.is_file():
+        return [
+            {
+                "code": "couverture_curriculaire_non_prouvee",
+                "detail": f"artefact de conformité absent: {contract}",
+                "source": f"manuals.{manual_id}.chapters",
+            }
+        ]
+    try:
+        payload = json.loads(artifact.read_text(encoding="utf-8"))
+        summary = payload["summary"]
+    except (OSError, UnicodeError, json.JSONDecodeError, KeyError):
+        return [
+            {
+                "code": "couverture_curriculaire_illisible",
+                "detail": contract,
+                "source": f"manuals.{manual_id}.chapters",
+            }
+        ]
+
+    blockers: list[dict[str, str]] = []
+    uncovered_rubrics = summary.get("OFFICIAL_RUBRICS_UNCOVERED") or []
+    if uncovered_rubrics:
+        blockers.append(
+            {
+                "code": "rubriques_officielles_non_couvertes",
+                "detail": ", ".join(sorted(uncovered_rubrics)),
+                "source": contract,
+            }
+        )
+    if summary.get("PROJECT_REQUIREMENT_COVERED") != "YES":
+        blockers.append(
+            {
+                "code": "demarche_de_projet_non_couverte",
+                "detail": str(summary.get("PROJECT_CAPACITIES", "?")),
+                "source": contract,
+            }
+        )
+    if summary.get("PEDAGOGICAL_STRUCTURE_COHERENT") != "YES":
+        blockers.append(
+            {
+                "code": "structure_pedagogique_incoherente",
+                "detail": "un chapitre mélange plusieurs rubriques du programme",
+                "source": contract,
+            }
+        )
+    uncovered = int(summary.get("OFFICIAL_CAPACITIES_UNCOVERED", 0) or 0)
+    if uncovered:
+        total = summary.get("OFFICIAL_CAPACITIES_TOTAL", "?")
+        blockers.append(
+            {
+                "code": "capacites_officielles_non_couvertes",
+                "detail": f"{uncovered}/{total}",
+                "source": contract,
+            }
+        )
+    return blockers
+
+
 def _a4_method_review_debt_violations(
     root: Path, record: Mapping[str, Any]
 ) -> list[str]:
@@ -5465,7 +5534,12 @@ DELIVERABLE_SPECS: dict[str, dict[str, Any]] = {
     },
     "TNSI": {
         "directive": "MISSION_PRIORITAIRE §11",
-        "target_chapters": 12,
+        # Décision Release Owner 2026-09-06 : la cible de 12 chapitres, issue de
+        # DIRECTIVES_COLLECTION.md J6 et marquée A_VALIDER_HUMAIN, est
+        # SUPERSEDED_EDITORIAL_PROPOSAL et n'est pas un critère de publication.
+        # La conformité est prouvée par couverture des capacités officielles.
+        "target_chapters": None,
+        "curricular_contract": "audit/TNSI_CURRICULAR_COVERAGE.json",
         "variants": {
             "banque_ecrite": ("banque_ecrite", "ecrite"),
             "banque_pratique": ("banque_pratique", "pratique"),
@@ -7473,7 +7547,17 @@ def _manual_blockers(
     blockers: list[dict[str, str]] = []
     target = specification["target_chapters"]
     chapter_count = len(manual["chapters"])
-    if target is None:
+    curricular_contract = specification.get("curricular_contract")
+    if curricular_contract is not None:
+        # Décision Release Owner du 2026-09-06 : le nombre de chapitres n'est
+        # pas un critère de publication. L'arrêté applicable précise que sa
+        # structure n'est pas un plan de cours, et remplacer « 12 chapitres »
+        # par « 7 chapitres » remplacerait un dogme par un autre. La
+        # conformité se prouve au niveau des capacités officielles.
+        blockers.extend(
+            _curricular_coverage_blockers(root, manual_id, curricular_contract)
+        )
+    elif target is None:
         blockers.append(
             {
                 "code": "objectif_chapitres_non_fige",
