@@ -24,7 +24,11 @@ def test_zero_student_without_correction_and_zero_orphan(parity_report: dict) ->
     assert summary["STUDENT_WITHOUT_CORRECTION"] == 0
     assert summary["ORPHAN_TEACHER_CORRECTION"] == 0
     assert summary["TOTAL_EXERCISES"] == summary["TOTAL_CORRECTIONS"]
-    assert summary["TOTAL_EXERCISES"] >= 1900
+    # Pas de plancher de volume : un seuil sur le nombre d'exercices ferait de
+    # la suppression des copies synthetiques une regression, et donnerait au
+    # remplissage une raison de rester. La bijection est l'invariant, pas la
+    # densite ; le volume descend legitimement quand des clones disparaissent.
+    assert summary["TOTAL_EXERCISES"] > 0
 
 
 def test_zero_teacher_content_leak_in_student(parity_report: dict) -> None:

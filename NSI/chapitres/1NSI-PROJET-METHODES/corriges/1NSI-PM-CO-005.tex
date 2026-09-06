@@ -14,6 +14,7 @@
 %     return -1
 % assert rechercher_participant(participants, "Yanis") == 3
 % END-VERIFY
+% CAPACITY-MAP: {"1": "BO-PREAMBULE-COMPETENCES-METHODE", "2": "BO-PREAMBULE-COMPETENCES-METHODE", "3": "BO-PREAMBULE-DEMARCHE-DE-PROJET"}
 \begin{corrige}{1NSI-PM-EX-005}
 \textbf{1.} L'appel renvoie $-1$ (« non trouvé »), alors que \lstinline{"Yanis"} est bien
 présent. La boucle \lstinline{range(len(participants) - 1)} parcourt les indices $0$ à
