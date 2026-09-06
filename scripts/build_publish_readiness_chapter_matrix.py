@@ -21,9 +21,12 @@ from collections import Counter
 from pathlib import Path
 from typing import Any, Mapping
 
+import yaml
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
+import assessment_modes  # noqa: E402
 import audit_editorial_diacritics as diacritics  # noqa: E402
 import build_p0_content_clone_ledger as clone_producer  # noqa: E402
 import build_course_assembly_truth as course_truth_producer  # noqa: E402
@@ -715,6 +718,47 @@ def _machine_science_current(source: Path, chapter_dir: Path) -> bool:
     return digest == declared
 
 
+def _relative_to_root(path: Path) -> str:
+    """Chemin relatif au dépôt quand il en fait partie, sinon tel quel."""
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
+
+
+def _declared_assessment_mode(directory: Path) -> str:
+    """Modalité d'évaluation déclarée par le contrat de chapitre."""
+    contract = directory / "contrat.yaml"
+    if not contract.is_file():
+        return assessment_modes.DEFAULT_MODE
+    try:
+        payload = yaml.safe_load(contract.read_text(encoding="utf-8")) or {}
+    except yaml.YAMLError:
+        return assessment_modes.DEFAULT_MODE
+    return assessment_modes.declared_mode(payload)
+
+
+def _project_assessment(chapter: str, directory: Path, mode: str) -> dict[str, Any]:
+    """Régime projet : la preuve est une grille critériée réellement exploitable.
+
+    Le programme fait de la démarche de projet une part obligatoire de
+    l'enseignement ; l'évaluation passe par le projet lui-même. Le gate ne
+    cherche donc pas deux sujets écrits, mais il ne se contente pas non plus
+    d'un fichier au bon nom : il lit la grille.
+    """
+    project_dir = directory / "projet"
+    sources = sorted(project_dir.glob("*.tex")) if project_dir.is_dir() else []
+    violations = assessment_modes.project_assessment_violations(sources)
+    return {
+        "assessment_mode": mode,
+        "subjects": [],
+        "corrections": [],
+        "project_sources": [_relative_to_root(path) for path in sources],
+        "criteria_grid_violations": violations,
+        "status": "COMPLETE" if not violations else "GAP",
+    }
+
+
 def _assessments(
     chapter: str,
     directory: Path,
@@ -722,6 +766,11 @@ def _assessments(
 ) -> dict[str, Any]:
     if directory is None:
         return {"variants": [], "status": "NO_SOURCE"}
+
+    mode = _declared_assessment_mode(directory)
+    if mode == assessment_modes.PROJECT_ASSESSMENT:
+        return _project_assessment(chapter, directory, mode)
+
     evaluation_dir = directory / "evaluations"
     paths = sorted(evaluation_dir.glob("*.tex")) if evaluation_dir.is_dir() else []
     subjects: dict[str, dict[str, Any]] = {}

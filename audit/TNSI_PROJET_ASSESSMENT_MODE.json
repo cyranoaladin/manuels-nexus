@@ -22,7 +22,20 @@
     "Le dispositif d'évaluation existe déjà, dans l'objet projet, sous forme de grille.",
     "Rédiger deux devoirs écrits pour ce seul chapitre rendrait la dimension verte sans répondre à un besoin pédagogique : ce serait forcer le gate, non combler une lacune."
   ],
-  "decision_required_from_human": "Confirmer que TNSI-PROJET est évalué par son projet et sa grille, et non par une évaluation écrite A/B — ou demander la rédaction de deux sujets écrits.",
-  "release_blocking": true,
-  "machine_cannot_decide": true
+  "decision_required_from_human": null,
+  "release_blocking": false,
+  "machine_cannot_decide": false,
+  "decision_received": {
+    "decision": "TNSI_PROJECT_ASSESSED_BY_PROJECT_AND_CRITERIA_GRID",
+    "decided_by": "abenrhouma",
+    "decided_on": "2026-09-06",
+    "rationale": "Le programme fait de la démarche de projet une composante obligatoire de l'enseignement de terminale NSI et lui réserve au moins un quart de l'horaire. La création de deux devoirs écrits dans le seul but de faire passer un gate n'est pas autorisée.",
+    "materialised_as": {
+      "assessment_mode": "PROJECT_ASSESSMENT",
+      "declared_in": "NSI/chapitres/TNSI-PROJET/contrat.yaml",
+      "evidence": "grille critériée de TNSI-PROJET-ANNUEL.tex (7 critères, poids totalisant 100%, preuve attendue par critère)",
+      "verified_by": "scripts/assessment_modes.py via build_publish_readiness_chapter_matrix"
+    }
+  },
+  "status": "RESOLVED_BY_HUMAN_DECISION"
 }
