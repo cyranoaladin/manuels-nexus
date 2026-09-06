@@ -20,6 +20,8 @@ PARTITIONS = (
     ("1SPE", EVIDENCE / "1SPE_162.json", 162),
     ("TSPE", EVIDENCE / "TSPE_96.json", 96),
     ("TCOMPL_TEXPERTES", EVIDENCE / "TCOMPL_TEXPERTES_73.json", 73),
+    ("1NSI", EVIDENCE / "1NSI_76.json", 76),
+    ("TNSI", EVIDENCE / "TNSI_66.json", 66),
 )
 QCM_ROOT = ROOT / "Mathematiques" / "manuel-maths" / "chapitres"
 OBJECTIVE_COUNTERS = (
@@ -45,7 +47,8 @@ def _sha256(path: Path) -> str:
 
 
 def _qcm_sources() -> list[Path]:
-    return sorted(QCM_ROOT.glob("*/qcm/*-QCM.json"))
+    roots = (QCM_ROOT, ROOT / "NSI" / "chapitres")
+    return sorted(p for r in roots for p in r.glob("*/qcm/*-QCM.json"))
 
 
 def _source_digest(paths: list[Path]) -> str:
