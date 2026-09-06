@@ -1057,24 +1057,22 @@ def render_master(
     # Python sont transversaux : le programme les demande en Premiere comme en
     # Terminale, et les capacites correspondantes ne sont portees par aucun
     # chapitre disciplinaire.
-    back_matter = {
-        "1SPE": [
-            "transversal/formulaire",
-            "transversal/logique_raisonnement",
-            "transversal/statistiques_automatismes",
-            "transversal/memo_python",
-        ],
-        "TSPE_2026_2027": [
-            "transversal/logique_raisonnement",
-            "transversal/memo_python",
-        ],
-    }
-    annexes = back_matter.get(manual, [])
-    if annexes:
+    if manual == "1SPE":
         parts.append("\\appendix")
-        for annexe in annexes:
-            parts.append("\\clearpage")
-            parts.append(f"\\input{{{annexe}}}")
+        parts.append("\\clearpage")
+        parts.append("\\input{transversal/formulaire}")
+        parts.append("\\clearpage")
+        parts.append("\\input{transversal/logique_raisonnement}")
+        parts.append("\\clearpage")
+        parts.append("\\input{transversal/statistiques_automatismes}")
+        parts.append("\\clearpage")
+        parts.append("\\input{transversal/memo_python}")
+    elif manual == "TSPE_2026_2027":
+        parts.append("\\appendix")
+        parts.append("\\clearpage")
+        parts.append("\\input{transversal/logique_raisonnement}")
+        parts.append("\\clearpage")
+        parts.append("\\input{transversal/memo_python}")
 
     # Quatrieme de couverture de collection (charte v6)
     parts.append("\\nxSuspendreDecor")
