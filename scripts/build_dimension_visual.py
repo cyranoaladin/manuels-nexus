@@ -200,6 +200,7 @@ def build(limit_pages: int | None = None) -> dict[str, Any]:
         per_target[target] = _inspect(path, target, evidence)
 
     evidence.input_digest = cd.digest_inputs(inputs)
+    evidence.input_paths = cd.relative_paths(inputs)
     evidence.coverage = {
         "targets_examined": examined,
         "artifact_source_head": artifact_head,

@@ -72,12 +72,24 @@ def test_each_curricular_requirement_blocks_on_its_own(tmp_path: Path) -> None:
         assert codes == [expected_code], (expected_code, codes)
 
 
-def test_the_real_contract_still_blocks_on_uncovered_capacities() -> None:
-    """La substitution n'a pas rendu TNSI vert : elle a déplacé le vrai défaut."""
-    blockers = ic._curricular_coverage_blockers(ROOT, "TNSI", CONTRACT)
-    codes = [b["code"] for b in blockers]
-    assert "capacites_officielles_non_couvertes" in codes
+def test_the_real_contract_is_evaluated_and_no_longer_counts_chapters() -> None:
+    """Le critère appliqué est curriculaire, quel que soit son verdict du jour.
+
+    La couverture TNSI est aujourd'hui complète (61/61) une fois les codes
+    locaux résolus, donc aucun blocage curriculaire ne subsiste. Ce test ne
+    fige pas ce verdict — il vérifie que le critère évalué est bien celui des
+    capacités, et jamais un comptage de chapitres. Les quatre exigences sont
+    éprouvées une à une par `test_each_curricular_requirement_blocks_on_its_own`.
+    """
+    codes = [b["code"] for b in ic._curricular_coverage_blockers(ROOT, "TNSI", CONTRACT)]
     assert "chapitres_manquants" not in codes
+    assert "objectif_chapitres_non_fige" not in codes
+    assert set(codes) <= {
+        "rubriques_officielles_non_couvertes",
+        "demarche_de_projet_non_couverte",
+        "structure_pedagogique_incoherente",
+        "capacites_officielles_non_couvertes",
+    }
 
 
 def test_the_contract_is_reachable_through_the_deliverable_matrix() -> None:
@@ -90,7 +102,6 @@ def test_the_contract_is_reachable_through_the_deliverable_matrix() -> None:
     """
     inventory = ic._build_inventory_for_stale_manifest_invalidation(ROOT)
     codes = [b["code"] for b in inventory["deliverable_matrix"]["manuals"]["TNSI"]["blockers"]]
-    assert "capacites_officielles_non_couvertes" in codes
     assert "chapitres_manquants" not in codes
     assert "objectif_chapitres_non_fige" not in codes
 

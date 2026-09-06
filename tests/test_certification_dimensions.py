@@ -63,10 +63,24 @@ def test_not_applicable_is_not_pass() -> None:
     assert evidence.status == "failed", "N/A ne doit jamais valoir PASS"
 
 
-def test_stale_evidence_is_rejected_by_the_gate() -> None:
-    payload = {"evidence_head": "a" * 40}
-    assert cd.evidence_is_fresh(payload, "a" * 40) is True
-    assert cd.evidence_is_fresh(payload, "b" * 40) is False
+def test_stale_evidence_is_rejected_by_the_gate(tmp_path: Path) -> None:
+    """La fraîcheur se juge sur les entrées mesurées, pas sur le HEAD git."""
+    source = tmp_path / "src.tex"
+    source.write_text("contenu", encoding="utf-8")
+    payload = {
+        "evidence_head": "a" * 40,
+        "input_paths": ["src.tex"],
+        "input_digest": cd.digest_inputs([source], tmp_path),
+    }
+    assert cd.evidence_is_fresh(payload, tmp_path) is True
+
+    source.write_text("contenu muté", encoding="utf-8")
+    assert cd.evidence_is_fresh(payload, tmp_path) is False
+
+
+def test_evidence_without_declared_inputs_is_never_fresh(tmp_path: Path) -> None:
+    """Une preuve qui ne dit pas ce qu'elle a lu n'est pas vérifiable."""
+    assert cd.evidence_is_fresh({"input_digest": "sha256:" + "0" * 64}, tmp_path) is False
 
 
 def test_input_digest_moves_when_an_input_moves(tmp_path: Path) -> None:

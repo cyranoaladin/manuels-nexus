@@ -152,6 +152,7 @@ def build() -> dict[str, Any]:
         producer_version=PRODUCER_VERSION,
         evidence_head=cd.current_head(),
         input_digest=cd.digest_inputs(inputs),
+        input_paths=cd.relative_paths(inputs),
     )
 
     examined = []

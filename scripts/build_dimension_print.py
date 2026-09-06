@@ -220,6 +220,7 @@ def build() -> dict[str, Any]:
         ))
 
     evidence.input_digest = cd.digest_inputs(inputs)
+    evidence.input_paths = cd.relative_paths(inputs)
     evidence.coverage = {
         "targets_examined": examined,
         "artifact_source_head": artifact_head,

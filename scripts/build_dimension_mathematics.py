@@ -131,6 +131,7 @@ def build() -> dict[str, Any]:
                     ))
 
     evidence.input_digest = cd.digest_inputs(inputs)
+    evidence.input_paths = cd.relative_paths(inputs)
     evidence.not_applicable_targets = {
         "objects_without_verifiable_assertion": str(not_applicable),
         "semantics": (

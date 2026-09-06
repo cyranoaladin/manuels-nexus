@@ -12771,10 +12771,64 @@ def _safe_materialize_baseline_qualifications(
         )
 
 
+#: Preuve publiée par chaque dimension outillée hors du gate.
+DIMENSION_EVIDENCE_ARTIFACTS = {
+    "mathematics": "audit/DIMENSION_MATHEMATICS.json",
+    "regulation": "audit/DIMENSION_REGULATION.json",
+    "print": "audit/DIMENSION_PRINT.json",
+    "visual": "audit/DIMENSION_VISUAL.json",
+}
+
+
+def _dimension_status_from_evidence(root: Path, relative: str) -> str:
+    """Statut d'une dimension, refusé si la preuve ne porte pas le HEAD candidat.
+
+    Une preuve calculée sur un autre commit décrit d'autres octets. Elle ne
+    peut donc pas verdir la dimension : elle la laisse `not_covered`, ce qui
+    dit exactement ce qui est vrai — rien n'a été mesuré ici.
+    """
+    path = root / relative
+    if not path.is_file():
+        return "not_covered"
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return "not_covered"
+    if not _dimension_evidence_is_fresh(root, payload):
+        return "not_covered"
+    status = payload.get("status")
+    return status if status in GATE_DIMENSION_STATUSES else "not_covered"
+
+
+def _dimension_evidence_is_fresh(root: Path, payload: Mapping[str, Any]) -> bool:
+    """La preuve décrit-elle encore les octets présents dans le dépôt ?
+
+    On revérifie l'empreinte des entrées que le producteur déclare avoir lues,
+    plutôt que de comparer au HEAD git : committer l'artefact de preuve
+    déplacerait le HEAD et périmerait la preuve au moment même de son
+    enregistrement.
+    """
+    paths = payload.get("input_paths") or []
+    if not paths:
+        return False
+    accumulator = hashlib.sha256()
+    for relative in sorted(paths):
+        candidate = root / relative
+        accumulator.update(str(relative).encode("utf-8"))
+        accumulator.update(b"\x00")
+        if candidate.is_file():
+            accumulator.update(hashlib.sha256(candidate.read_bytes()).digest())
+        else:
+            accumulator.update(b"ABSENT")
+        accumulator.update(b"\x00")
+    return "sha256:" + accumulator.hexdigest() == payload.get("input_digest")
+
+
 def _release_strict_gate(
     inventory: Mapping[str, Any],
     *,
     content_integrity: Mapping[str, Any] | None = None,
+    root: Path | None = None,
 ) -> dict[str, Any]:
     reasons: list[str] = []
     matrix = inventory["deliverable_matrix"]["manuals"]
@@ -12845,6 +12899,11 @@ def _release_strict_gate(
     if content_integrity is not None:
         dimensions["pedagogy"] = (
             "passed" if content_integrity.get("success") is True else "failed"
+        )
+    evidence_root = root if root is not None else _module_repo_root()
+    for dimension, relative in DIMENSION_EVIDENCE_ARTIFACTS.items():
+        dimensions[dimension] = _dimension_status_from_evidence(
+            evidence_root, relative
         )
     for dimension, status in dimensions.items():
         if status == "not_covered":
@@ -13054,7 +13113,7 @@ def _release_strict_gate_for_root(
         )
     content_integrity = _release_content_integrity_for_root(root)
     result = _release_strict_gate(
-        inventory, content_integrity=content_integrity
+        inventory, content_integrity=content_integrity, root=root
     )
     result["content_integrity"] = content_integrity
     invalides = _invalid_qualification_reasons(root)

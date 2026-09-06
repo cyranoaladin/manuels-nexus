@@ -5,15 +5,22 @@
   "contract": "docs/superpowers/specs/2026-07-22-phase-0-1-collection-audit-design.md",
   "summary": {
     "DECLARED_DIMENSIONS": 7,
-    "DIMENSIONS_WITH_A_PRODUCER": 3,
-    "REQUIRED_DIMENSIONS_NOT_COVERED": 4,
-    "UNCOVERED_DIMENSIONS": [
+    "REQUIRED_DIMENSION_PRODUCERS_MISSING": 0,
+    "REQUIRED_DIMENSIONS_FAILED": 6,
+    "REQUIRED_DIMENSIONS_PASSED": 1,
+    "DIMENSIONS_WITHOUT_PRODUCER": [],
+    "DIMENSIONS_FAILED": [
+      "structure",
+      "pedagogy",
       "regulation",
-      "mathematics",
+      "execution",
       "visual",
       "print"
     ],
-    "RELEASE_STRICT_SATISFIABLE_TODAY": false,
+    "DIMENSIONS_PASSED": [
+      "mathematics"
+    ],
+    "ALL_REQUIRED_DIMENSIONS_STATUS": "FAIL",
     "APPROVES_NOTHING": true
   },
   "dimensions": [
@@ -21,59 +28,70 @@
       "dimension": "structure",
       "declared_by_contract": "docs/superpowers/specs/2026-07-22-phase-0-1-collection-audit-design.md",
       "assigned_by_gate": true,
-      "gate_status_if_unassigned": null
+      "dedicated_producer_status": null,
+      "has_producer": true
     },
     {
       "dimension": "pedagogy",
       "declared_by_contract": "docs/superpowers/specs/2026-07-22-phase-0-1-collection-audit-design.md",
       "assigned_by_gate": true,
-      "gate_status_if_unassigned": null
+      "dedicated_producer_status": null,
+      "has_producer": true
     },
     {
       "dimension": "regulation",
       "declared_by_contract": "docs/superpowers/specs/2026-07-22-phase-0-1-collection-audit-design.md",
       "assigned_by_gate": false,
-      "gate_status_if_unassigned": "not_covered",
-      "required_evidence": "Couverture des programmes officiels, année applicable",
-      "raw_inputs": "référentiels BO, capacités déclarées, inventaire",
-      "candidate_producer": "scripts/build_official_program_coverage.py (non branché sur la dimension)",
-      "why_missing": "aucune ligne de `_release_strict_gate` n'assigne cette dimension ; elle conserve la valeur par défaut de GATE_DIMENSION_TEMPLATE"
+      "dedicated_producer_status": "failed",
+      "has_producer": true,
+      "evidence_artifact": "audit/DIMENSION_REGULATION.json",
+      "evidence_present": true,
+      "evidence_head": "a0db18ad08b44ded8cf82e2c4c0f12d70d3ef32f",
+      "blocking_findings": 7,
+      "producer": "scripts/build_dimension_regulation.py"
     },
     {
       "dimension": "mathematics",
       "declared_by_contract": "docs/superpowers/specs/2026-07-22-phase-0-1-collection-audit-design.md",
       "assigned_by_gate": false,
-      "gate_status_if_unassigned": "not_covered",
-      "required_evidence": "Audit scientifique indépendant du contenu mathématique imprimé",
-      "raw_inputs": "énoncés, corrigés, barèmes et figures des six manuels",
-      "candidate_producer": "scripts/audit_mathematical_correctness.py (inexistant)",
-      "why_missing": "aucune ligne de `_release_strict_gate` n'assigne cette dimension ; elle conserve la valeur par défaut de GATE_DIMENSION_TEMPLATE"
+      "dedicated_producer_status": "passed",
+      "has_producer": true,
+      "evidence_artifact": "audit/DIMENSION_MATHEMATICS.json",
+      "evidence_present": true,
+      "evidence_head": "58f23b71e23ab98a4f1f88e967d286a146cf4845",
+      "blocking_findings": 0,
+      "producer": "scripts/build_dimension_mathematics.py"
     },
     {
       "dimension": "execution",
       "declared_by_contract": "docs/superpowers/specs/2026-07-22-phase-0-1-collection-audit-design.md",
       "assigned_by_gate": true,
-      "gate_status_if_unassigned": null
+      "dedicated_producer_status": null,
+      "has_producer": true
     },
     {
       "dimension": "visual",
       "declared_by_contract": "docs/superpowers/specs/2026-07-22-phase-0-1-collection-audit-design.md",
       "assigned_by_gate": false,
-      "gate_status_if_unassigned": "not_covered",
-      "required_evidence": "Inspection ou mesure visuelle réelle des PDF rendus",
-      "raw_inputs": "rendu raster des pages, zones sûres d'impression",
-      "candidate_producer": "aucun (les QA raster existants sont partiels et par manuel)",
-      "why_missing": "aucune ligne de `_release_strict_gate` n'assigne cette dimension ; elle conserve la valeur par défaut de GATE_DIMENSION_TEMPLATE"
+      "dedicated_producer_status": "failed",
+      "has_producer": true,
+      "evidence_artifact": "audit/DIMENSION_VISUAL.json",
+      "evidence_present": true,
+      "evidence_head": "e868cb2a39287dec7eef04565ad1e6037841d226",
+      "blocking_findings": 2,
+      "producer": "scripts/build_dimension_visual.py"
     },
     {
       "dimension": "print",
       "declared_by_contract": "docs/superpowers/specs/2026-07-22-phase-0-1-collection-audit-design.md",
       "assigned_by_gate": false,
-      "gate_status_if_unassigned": "not_covered",
-      "required_evidence": "Preflight des PDF lié au HEAD de release",
-      "raw_inputs": "les 12 PDF produits par le build canonique",
-      "candidate_producer": "scripts/build_final_preflight_and_regression.py (non branché sur le gate)",
-      "why_missing": "aucune ligne de `_release_strict_gate` n'assigne cette dimension ; elle conserve la valeur par défaut de GATE_DIMENSION_TEMPLATE"
+      "dedicated_producer_status": "failed",
+      "has_producer": true,
+      "evidence_artifact": "audit/DIMENSION_PRINT.json",
+      "evidence_present": true,
+      "evidence_head": "58f23b71e23ab98a4f1f88e967d286a146cf4845",
+      "blocking_findings": 1,
+      "producer": "scripts/build_dimension_print.py"
     }
   ]
 }

@@ -37,15 +37,31 @@ def current_head() -> str:
     ).stdout.strip()
 
 
-def digest_inputs(paths: Iterable[Path]) -> str:
-    """Empreinte ordonnée des entrées réellement lues par un producteur."""
+def relative_paths(paths: Iterable[Path], root: Path = ROOT) -> list[str]:
+    """Chemins déclarés, relatifs au dépôt quand c'est possible."""
+    out = []
+    for path in sorted(set(paths)):
+        try:
+            out.append(str(path.relative_to(root)))
+        except ValueError:
+            out.append(str(path))
+    return out
+
+
+def digest_inputs(paths: Iterable[Path], root: Path = ROOT) -> str:
+    """Empreinte ordonnée des entrées réellement lues par un producteur.
+
+    Les entrées sont nommées relativement à `root` : c'est ce nom que le gate
+    réutilisera pour revérifier la fraîcheur, et les deux calculs doivent
+    porter sur exactement la même chaîne.
+    """
     acc = hashlib.sha256()
     for path in sorted(paths):
         try:
-            rel = str(path.relative_to(ROOT))
+            rel = str(path.relative_to(root))
         except ValueError:
-            # Entrée hors du dépôt (racine synthétique de test) : on la nomme
-            # telle quelle plutôt que d'échouer.
+            # Entrée hors de la racine : on la nomme telle quelle plutôt que
+            # d'échouer.
             rel = str(path)
         acc.update(rel.encode("utf-8"))
         acc.update(b"\x00")
@@ -77,6 +93,7 @@ class DimensionEvidence:
     producer_version: str
     evidence_head: str
     input_digest: str
+    input_paths: list[str] = field(default_factory=list)
     coverage: dict[str, Any] = field(default_factory=dict)
     findings: list[Finding] = field(default_factory=list)
     not_applicable_targets: dict[str, str] = field(default_factory=dict)
@@ -103,6 +120,7 @@ class DimensionEvidence:
             "status": self.status,
             "evidence_head": self.evidence_head,
             "input_digest": self.input_digest,
+            "input_paths": self.input_paths,
             "coverage": self.coverage,
             "not_applicable_targets": self.not_applicable_targets,
             "blocking_findings": sum(1 for f in self.findings if f.blocking),
@@ -120,6 +138,17 @@ def write_evidence(evidence: DimensionEvidence, output: Path) -> dict[str, Any]:
     return payload
 
 
-def evidence_is_fresh(payload: dict[str, Any], candidate_head: str) -> bool:
-    """Le gate n'accepte une preuve que si elle porte sur le HEAD candidat."""
-    return payload.get("evidence_head") == candidate_head
+def evidence_is_fresh(payload: dict[str, Any], root: Path = ROOT) -> bool:
+    """Une preuve est fraîche tant que ses entrées déclarées n'ont pas bougé.
+
+    On ne compare pas au HEAD git : committer l'artefact de preuve déplace le
+    HEAD et invaliderait la preuve à l'instant même où on l'enregistre. Ce qui
+    compte est que les octets mesurés soient toujours ceux du dépôt — d'où la
+    revérification de `input_digest` sur les chemins que le producteur déclare
+    avoir lus.
+    """
+    paths = payload.get("input_paths") or []
+    if not paths:
+        return False
+    recomputed = digest_inputs([root / p for p in paths], root)
+    return recomputed == payload.get("input_digest")

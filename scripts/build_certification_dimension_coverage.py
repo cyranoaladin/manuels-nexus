@@ -32,6 +32,14 @@ CONTRACT = "docs/superpowers/specs/2026-07-22-phase-0-1-collection-audit-design.
 OUTPUT_JSON = ROOT / "audit/CERTIFICATION_DIMENSION_COVERAGE.json"
 OUTPUT_MD = ROOT / "audit/CERTIFICATION_DIMENSION_COVERAGE.md"
 
+#: Preuve produite par chaque dimension désormais outillée.
+DIMENSION_EVIDENCE = {
+    "mathematics": "audit/DIMENSION_MATHEMATICS.json",
+    "regulation": "audit/DIMENSION_REGULATION.json",
+    "print": "audit/DIMENSION_PRINT.json",
+    "visual": "audit/DIMENSION_VISUAL.json",
+}
+
 REQUIRED_EVIDENCE = {
     "mathematics": {
         "required_evidence": "Audit scientifique indépendant du contenu mathématique imprimé",
@@ -80,27 +88,59 @@ def _declared_dimensions() -> list[str]:
     raise SystemExit("GATE_DIMENSIONS introuvable")
 
 
+def _evidence_status(name: str) -> tuple[str | None, dict[str, Any]]:
+    """Statut publié par le producteur dédié à cette dimension, s'il existe."""
+    relative = DIMENSION_EVIDENCE.get(name)
+    if relative is None:
+        return None, {}
+    path = ROOT / relative
+    if not path.is_file():
+        return None, {"evidence_artifact": relative, "evidence_present": False}
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    return payload.get("status"), {
+        "evidence_artifact": relative,
+        "evidence_present": True,
+        "evidence_head": payload.get("evidence_head"),
+        "blocking_findings": payload.get("blocking_findings"),
+        "producer": payload.get("producer"),
+    }
+
+
 def build() -> dict[str, Any]:
     declared = _declared_dimensions()
     assigned = _assigned_dimensions()
-    uncovered = [d for d in declared if d not in assigned]
 
     dimensions = []
+    producers_missing: list[str] = []
+    failed: list[str] = []
+    passed: list[str] = []
+
     for name in declared:
-        covered = name in assigned
+        assigned_by_gate = name in assigned
+        evidence_status, evidence = _evidence_status(name)
+        has_producer = assigned_by_gate or evidence_status is not None
         entry: dict[str, Any] = {
             "dimension": name,
             "declared_by_contract": CONTRACT,
-            "assigned_by_gate": covered,
-            "gate_status_if_unassigned": None if covered else "not_covered",
+            "assigned_by_gate": assigned_by_gate,
+            "dedicated_producer_status": evidence_status,
+            "has_producer": has_producer,
+            **evidence,
         }
-        if not covered:
+        if not has_producer:
+            producers_missing.append(name)
             entry.update(REQUIRED_EVIDENCE.get(name, {}))
             entry["why_missing"] = (
-                "aucune ligne de `_release_strict_gate` n'assigne cette dimension ; "
-                "elle conserve la valeur par défaut de GATE_DIMENSION_TEMPLATE"
+                "aucune ligne de `_release_strict_gate` n'assigne cette dimension "
+                "et aucun producteur dédié ne publie de preuve"
             )
+        elif evidence_status == "passed":
+            passed.append(name)
+        else:
+            failed.append(name)
         dimensions.append(entry)
+
+    uncovered = producers_missing
 
     return {
         "artifact_type": "certification_dimension_coverage",
@@ -109,10 +149,17 @@ def build() -> dict[str, Any]:
         "contract": CONTRACT,
         "summary": {
             "DECLARED_DIMENSIONS": len(declared),
-            "DIMENSIONS_WITH_A_PRODUCER": len(assigned),
-            "REQUIRED_DIMENSIONS_NOT_COVERED": len(uncovered),
-            "UNCOVERED_DIMENSIONS": uncovered,
-            "RELEASE_STRICT_SATISFIABLE_TODAY": not uncovered,
+            # Deux notions distinctes. Une dimension dont le producteur est
+            # rouge est *couverte par une preuve* : elle n'est simplement pas
+            # satisfaite. Les confondre laisserait croire qu'outiller une
+            # dimension suffit à la valider.
+            "REQUIRED_DIMENSION_PRODUCERS_MISSING": len(producers_missing),
+            "REQUIRED_DIMENSIONS_FAILED": len(failed),
+            "REQUIRED_DIMENSIONS_PASSED": len(passed),
+            "DIMENSIONS_WITHOUT_PRODUCER": producers_missing,
+            "DIMENSIONS_FAILED": failed,
+            "DIMENSIONS_PASSED": passed,
+            "ALL_REQUIRED_DIMENSIONS_STATUS": "PASS" if len(passed) == len(declared) else "FAIL",
             "APPROVES_NOTHING": True,
         },
         "dimensions": dimensions,
@@ -127,9 +174,12 @@ def render_md(payload: dict[str, Any]) -> str:
         f"Contrat : `{payload['contract']}`",
         "",
         f"- Dimensions déclarées : `{s['DECLARED_DIMENSIONS']}`",
-        f"- Dimensions réellement assignées par le gate : `{s['DIMENSIONS_WITH_A_PRODUCER']}`",
-        f"- `REQUIRED_DIMENSIONS_NOT_COVERED` : `{s['REQUIRED_DIMENSIONS_NOT_COVERED']}`",
-        f"- `release-strict` satisfiable en l'état : `{s['RELEASE_STRICT_SATISFIABLE_TODAY']}`",
+        f"- `REQUIRED_DIMENSION_PRODUCERS_MISSING` : `{s['REQUIRED_DIMENSION_PRODUCERS_MISSING']}`",
+        f"- `REQUIRED_DIMENSIONS_FAILED` : `{s['REQUIRED_DIMENSIONS_FAILED']}` "
+        f"({', '.join(s['DIMENSIONS_FAILED']) or 'aucune'})",
+        f"- `REQUIRED_DIMENSIONS_PASSED` : `{s['REQUIRED_DIMENSIONS_PASSED']}` "
+        f"({', '.join(s['DIMENSIONS_PASSED']) or 'aucune'})",
+        f"- `ALL_REQUIRED_DIMENSIONS_STATUS` : `{s['ALL_REQUIRED_DIMENSIONS_STATUS']}`",
         "",
         "Le contrat exige les sept dimensions `passed` pour `publication_eligible`.",
         "Quatre n'ont aucun producteur : le gate ne peut pas passer aujourd'hui, et",
@@ -140,7 +190,12 @@ def render_md(payload: dict[str, Any]) -> str:
         "|---|---|---|",
     ]
     for entry in payload["dimensions"]:
-        if entry["assigned_by_gate"]:
+        if entry.get("dedicated_producer_status"):
+            lines.append(
+                f"| `{entry['dimension']}` | `{entry.get('producer', '?')}` "
+                f"| statut `{entry['dedicated_producer_status']}` |"
+            )
+        elif entry["assigned_by_gate"]:
             lines.append(f"| `{entry['dimension']}` | assignée par `_release_strict_gate` | — |")
         else:
             lines.append(

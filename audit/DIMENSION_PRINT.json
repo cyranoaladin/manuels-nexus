@@ -6,8 +6,23 @@
   "producer": "scripts/build_dimension_print.py",
   "producer_version": "1.0.0",
   "status": "failed",
-  "evidence_head": "58f23b71e23ab98a4f1f88e967d286a146cf4845",
+  "evidence_head": "2761ffc435e794ef3644a441716eb02b9265b0cb",
   "input_digest": "sha256:be2b363a90bc9245f6f98f3be9718879caba27ea813b4c4b8ad9ed98be9652a4",
+  "input_paths": [
+    "audit/CERTIFIED_UNSIGNED_RELEASE_CANDIDATES.json",
+    "build/certified_unsigned_release_candidates/1NSI_eleve.pdf",
+    "build/certified_unsigned_release_candidates/1NSI_professeur.pdf",
+    "build/certified_unsigned_release_candidates/1SPE_eleve.pdf",
+    "build/certified_unsigned_release_candidates/1SPE_professeur.pdf",
+    "build/certified_unsigned_release_candidates/TCOMPL_eleve.pdf",
+    "build/certified_unsigned_release_candidates/TCOMPL_professeur.pdf",
+    "build/certified_unsigned_release_candidates/TEXPERTES_eleve.pdf",
+    "build/certified_unsigned_release_candidates/TEXPERTES_professeur.pdf",
+    "build/certified_unsigned_release_candidates/TNSI_eleve.pdf",
+    "build/certified_unsigned_release_candidates/TNSI_professeur.pdf",
+    "build/certified_unsigned_release_candidates/TSPE_2026_2027_eleve.pdf",
+    "build/certified_unsigned_release_candidates/TSPE_2026_2027_professeur.pdf"
+  ],
   "coverage": {
     "targets_examined": [
       "1SPE_eleve",
@@ -93,7 +108,7 @@
     {
       "target": "ALL",
       "code": "STALE_PREFLIGHT_ARTIFACTS",
-      "detail": "les PDF examinés ont été construits au HEAD 2e51a9be56ee704da1389876611c55b1dac76e2c, le HEAD candidat est 58f23b71e23ab98a4f1f88e967d286a146cf4845 : ce préflight ne décrit pas le dépôt courant",
+      "detail": "les PDF examinés ont été construits au HEAD 2e51a9be56ee704da1389876611c55b1dac76e2c, le HEAD candidat est 2761ffc435e794ef3644a441716eb02b9265b0cb : ce préflight ne décrit pas le dépôt courant",
       "blocking": true
     },
     {
