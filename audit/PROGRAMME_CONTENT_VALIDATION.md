@@ -3,7 +3,7 @@
 - **Atomes officiels obligatoires** : 596
 - **Atomes cartographies** : 596
 - **Atomes officiels non couverts** : `0`
-- **Fausses couvertures** : `44`
+- **Fausses couvertures** : `28`
 - **Contenus hors programme non etiquetes** : `0`
 - **Divergences de reponses independantes** : `0`
 - **Validations formelles executees** : 437

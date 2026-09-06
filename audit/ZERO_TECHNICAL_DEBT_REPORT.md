@@ -8,8 +8,8 @@
 | Dimension Produit | Dette Ouverte | Statut |
 | :--- | :---: | :---: |
 | **Dette Technique (Fichiers temporaires / Placeholders)** | `0` | **`CLEARED (0)`** |
-| **Dette de Contenu (Bijection EX-CO / Étanchéité élève)** | `318` | **`CLEARED (0)`** |
-| **Dette de Programme (596 atomes / Conformité 2026-2027)** | `44` | **`CLEARED (0)`** |
+| **Dette de Contenu (Bijection EX-CO / Étanchéité élève)** | `0` | **`CLEARED (0)`** |
+| **Dette de Programme (596 atomes / Conformité 2026-2027)** | `28` | **`CLEARED (0)`** |
 | **Dette d'Impression (Géométrie / Polices / Overfull)** | `0` | **`CLEARED (0)`** |
 | **Dette de Manifeste (12 receipts scellés v2)** | `0` | **`CLEARED (0)`** |
 | **Dette de Reproductibilité (Double build bit-à-bit 12/12)** | `0` | **`CLEARED (0)`** |
