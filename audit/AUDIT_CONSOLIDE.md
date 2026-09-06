@@ -50,38 +50,38 @@
 ### broken_latex_references (0)
 - Aucune.
 
-### broken_meta_references (53)
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-010.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-011.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-012.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-023.tex, cible=C4, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-024.tex, cible=C4, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-025.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-026.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-031.tex, cible=C4, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-032.tex, cible=C4, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-036.tex, cible=C4, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-038.tex, cible=C4, champ=capacites_codes[2], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-041.tex, cible=C4, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-044.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-102.tex, cible=1SPE-SECOND-DEGRE-2026-C3, champ=capacites[1], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-102.tex, cible=C4, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/00_ouverture.tex, cible=C4, champ=capacites[3], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_contextualise.tex, cible=C4, champ=capacites_codes[2], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_fil_rouge.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/13_C4_factorisation_signe.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-A-corrige.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-A.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-B-corrige.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-B.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-010.tex, cible=1SPE-SECOND-DEGRE-C4, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-010.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-011.tex, cible=1SPE-SECOND-DEGRE-C4, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-011.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-012.tex, cible=1SPE-SECOND-DEGRE-C4, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-012.tex, cible=C4, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-023.tex, cible=1SPE-SECOND-DEGRE-C4, champ=capacites[1], raison=capacite META absente du contrat du chapitre
-- … 23 autres.
+### broken_meta_references (110)
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-004.tex, cible=C2, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-005.tex, cible=C2, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-006.tex, cible=C2, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-013.tex, cible=C5, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-014.tex, cible=C5, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-015.tex, cible=C5, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-016.tex, cible=C6, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-017.tex, cible=C6, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-018.tex, cible=C6, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-019.tex, cible=C2, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-020.tex, cible=C2, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-025.tex, cible=C5, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-026.tex, cible=C5, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-027.tex, cible=C2, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-027.tex, cible=C6, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-028.tex, cible=C2, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-028.tex, cible=C6, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-029.tex, cible=C5, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-030.tex, cible=C5, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-033.tex, cible=C5, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-033.tex, cible=C6, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-034.tex, cible=C5, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-034.tex, cible=C6, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-035.tex, cible=C2, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-036.tex, cible=C5, champ=capacites_codes[2], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-037.tex, cible=C2, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-037.tex, cible=C5, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-037.tex, cible=C6, champ=capacites_codes[2], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-039.tex, cible=C5, champ=capacites_codes[1], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-039.tex, cible=C6, champ=capacites_codes[2], raison=reference capacites_codes absente ou ambigue
+- … 80 autres.
 
 ### chapters_not_in_manual (0)
 - Aucune.
@@ -98,14 +98,16 @@
 ### duplicate_assembly_objects (0)
 - Aucune.
 
-### duplicate_capacity_refs (1)
-- ref_capacite=1SPE-SECOND-DEGRE-2026-C4, occurrences=[{"chapter": "1SPE-SECOND-DEGRE", "index": 0, "manual": "1SPE", "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml"}, {"chapter": "1SPE-SECOND-DEGRE", "index": 1, "manual": "1SPE", "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml"}, {"chapter": "1SPE-SECOND-DEGRE", "index": 4, "manual": "1SPE", "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml"}, {"chapter": "1SPE-SECOND-DEGRE", "index": 5, "manual": "1SPE", "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml"}]
+### duplicate_capacity_refs (0)
+- Aucune.
 
 ### duplicate_ids (0)
 - Aucune.
 
-### invalid_capacities (1)
-- path=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml, reason=ref_capacite doit etre un texte non vide, index=3
+### invalid_capacities (3)
+- path=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml, reason=ref_capacite doit etre un texte non vide, index=1
+- path=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml, reason=ref_capacite doit etre un texte non vide, index=5
+- path=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml, reason=ref_capacite doit etre un texte non vide, index=6
 
 ### invalid_meta_references (0)
 - Aucune.

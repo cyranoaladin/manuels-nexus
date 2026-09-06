@@ -33,16 +33,37 @@ def test_chapter_contract_maps_local_codes_to_official_capacities(module) -> Non
 
 
 @pytest.mark.parametrize("module", [regulation, tnsi], ids=["regulation", "tnsi"])
-def test_a_local_code_may_cover_several_official_capacities(module) -> None:
-    """Le programme 2026 scinde le second degré : un code local en couvre deux."""
+def test_the_second_degree_alias_stays_one_to_one(module) -> None:
+    """Une référence officielle ne peut être portée que par un seul code local.
+
+    `capacity_identity` refuse deux codes locaux partageant une référence : le
+    crédit deviendrait indécidable. Le BO 2026 scindant « factoriser et étudier
+    le signe » en deux attendus, le chapitre a scindé son code local en
+    conséquence — C4 pour la factorisation, C8 pour l'étude du signe.
+    """
     mapping = module.chapter_code_map(
         ROOT / "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE"
     )
-    assert mapping["C4"] == [
-        "1SPE-SECOND-DEGRE-2026-C1",
-        "1SPE-SECOND-DEGRE-2026-C3",
-    ]
+    assert mapping["C4"] == ["1SPE-SECOND-DEGRE-2026-C3"]
+    assert mapping["C8"] == ["1SPE-SECOND-DEGRE-2026-C1"]
     assert mapping["C3"] == ["1SPE-SECOND-DEGRE-2026-D1"]
+
+    references = [ref for refs in mapping.values() for ref in refs]
+    assert len(references) == len(set(references)), "alias non un-vers-un"
+
+
+def test_no_chapter_contract_shares_an_official_reference() -> None:
+    """L'invariant vaut pour les 52 contrats, pas seulement pour celui-ci."""
+    offenders = []
+    contracts = sorted(ROOT.glob("NSI/chapitres/*/contrat.yaml")) + sorted(
+        ROOT.glob("Mathematiques/manuel-maths/chapitres/*/contrat.yaml")
+    )
+    for contract in contracts:
+        mapping = regulation.chapter_code_map(contract.parent)
+        references = [ref for refs in mapping.values() for ref in refs]
+        if len(references) != len(set(references)):
+            offenders.append(contract.parent.name)
+    assert offenders == [], offenders
 
 
 @pytest.mark.parametrize("module", [regulation, tnsi], ids=["regulation", "tnsi"])
