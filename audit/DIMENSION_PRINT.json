@@ -1,0 +1,110 @@
+{
+  "artifact_type": "certification_dimension_evidence",
+  "schema_version": 1,
+  "dimension": "print",
+  "scope": "les 12 cibles PDF canoniques (manuels élève et professeur)",
+  "producer": "scripts/build_dimension_print.py",
+  "producer_version": "1.0.0",
+  "status": "failed",
+  "evidence_head": "58f23b71e23ab98a4f1f88e967d286a146cf4845",
+  "input_digest": "sha256:be2b363a90bc9245f6f98f3be9718879caba27ea813b4c4b8ad9ed98be9652a4",
+  "coverage": {
+    "targets_examined": [
+      "1SPE_eleve",
+      "1SPE_professeur",
+      "TSPE_2026_2027_eleve",
+      "TSPE_2026_2027_professeur",
+      "TCOMPL_eleve",
+      "TCOMPL_professeur",
+      "TEXPERTES_eleve",
+      "TEXPERTES_professeur",
+      "1NSI_eleve",
+      "1NSI_professeur",
+      "TNSI_eleve",
+      "TNSI_professeur"
+    ],
+    "artifact_source_head": "2e51a9be56ee704da1389876611c55b1dac76e2c",
+    "per_target": {
+      "1SPE_eleve": {
+        "pages": 371,
+        "blank_pages": 4,
+        "outside_safe_area": 340
+      },
+      "1SPE_professeur": {
+        "pages": 645,
+        "blank_pages": 4,
+        "outside_safe_area": 615
+      },
+      "TSPE_2026_2027_eleve": {
+        "pages": 205,
+        "blank_pages": 1,
+        "outside_safe_area": 184
+      },
+      "TSPE_2026_2027_professeur": {
+        "pages": 309,
+        "blank_pages": 1,
+        "outside_safe_area": 288
+      },
+      "TCOMPL_eleve": {
+        "pages": 138,
+        "blank_pages": 1,
+        "outside_safe_area": 123
+      },
+      "TCOMPL_professeur": {
+        "pages": 216,
+        "blank_pages": 1,
+        "outside_safe_area": 201
+      },
+      "TEXPERTES_eleve": {
+        "pages": 92,
+        "blank_pages": 1,
+        "outside_safe_area": 82
+      },
+      "TEXPERTES_professeur": {
+        "pages": 144,
+        "blank_pages": 1,
+        "outside_safe_area": 134
+      },
+      "1NSI_eleve": {
+        "pages": 119,
+        "blank_pages": 2,
+        "outside_safe_area": 99
+      },
+      "1NSI_professeur": {
+        "pages": 209,
+        "blank_pages": 2,
+        "outside_safe_area": 76
+      },
+      "TNSI_eleve": {
+        "pages": 56,
+        "blank_pages": 2,
+        "outside_safe_area": 39
+      },
+      "TNSI_professeur": {
+        "pages": 85,
+        "blank_pages": 2,
+        "outside_safe_area": 70
+      }
+    }
+  },
+  "not_applicable_targets": {},
+  "blocking_findings": 1,
+  "findings": [
+    {
+      "target": "ALL",
+      "code": "STALE_PREFLIGHT_ARTIFACTS",
+      "detail": "les PDF examinés ont été construits au HEAD 2e51a9be56ee704da1389876611c55b1dac76e2c, le HEAD candidat est 58f23b71e23ab98a4f1f88e967d286a146cf4845 : ce préflight ne décrit pas le dépôt courant",
+      "blocking": true
+    },
+    {
+      "target": "ALL",
+      "code": "OUTSIDE_PROVISIONAL_SAFE_PRINT_AREA",
+      "detail": "2251 page(s) portent un bloc à moins de 28pt du bord. Seuil provisoire : aucune charte ne déclare de zone sûre, et les notes de marge sont contractuellement du contenu visible. Constat non bloquant, en attente d'une spécification d'impression.",
+      "blocking": false
+    }
+  ],
+  "summary": {
+    "OUTSIDE_PROVISIONAL_SAFE_PRINT_AREA": 1,
+    "STALE_PREFLIGHT_ARTIFACTS": 1
+  }
+}

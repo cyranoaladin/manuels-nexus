@@ -1,0 +1,172 @@
+{
+  "artifact_type": "certification_dimension_evidence",
+  "schema_version": 1,
+  "dimension": "regulation",
+  "scope": "les six manuels de la collection, contre leur référentiel de capacités déposé",
+  "producer": "scripts/build_dimension_regulation.py",
+  "producer_version": "1.0.0",
+  "status": "failed",
+  "evidence_head": "58f23b71e23ab98a4f1f88e967d286a146cf4845",
+  "input_digest": "sha256:b1dcc2c9d7abe328e36150306a43854e233ccd5b24fd70f96015382bc3c498cc",
+  "coverage": {
+    "targets_examined": [
+      "1NSI",
+      "1SPE",
+      "TCOMPL",
+      "TEXPERTES",
+      "TNSI",
+      "TSPE_2026_2027"
+    ],
+    "per_manual": {
+      "1NSI": {
+        "official_capacities": 50,
+        "covered": 50,
+        "uncovered": 0,
+        "unlabelled_out_of_programme": 0
+      },
+      "1SPE": {
+        "official_capacities": 53,
+        "covered": 53,
+        "uncovered": 0,
+        "unlabelled_out_of_programme": 0
+      },
+      "TCOMPL": {
+        "official_capacities": 50,
+        "covered": 50,
+        "uncovered": 0,
+        "unlabelled_out_of_programme": 0
+      },
+      "TEXPERTES": {
+        "official_capacities": 33,
+        "covered": 33,
+        "uncovered": 0,
+        "unlabelled_out_of_programme": 0
+      },
+      "TNSI": {
+        "official_capacities": 61,
+        "covered": 51,
+        "uncovered": 10,
+        "unlabelled_out_of_programme": 0
+      },
+      "TSPE_2026_2027": {
+        "official_capacities": 67,
+        "covered": 67,
+        "uncovered": 0,
+        "unlabelled_out_of_programme": 0
+      }
+    }
+  },
+  "not_applicable_targets": {},
+  "blocking_findings": 17,
+  "findings": [
+    {
+      "target": "1NSI",
+      "code": "AUTHORITY_NOR_ABSENT",
+      "detail": "7 référentiel(s) sans NOR identifiable : ['NSI/referentiel/capacites_1NSI_ALGORITHMIQUE.json', 'NSI/referentiel/capacites_1NSI_ARCHITECTURES-MATERIELLES-ET.json', 'NSI/referentiel/capacites_1NSI_HISTOIRE-DE-L-INFORMATIQUE.json']",
+      "blocking": true
+    },
+    {
+      "target": "1NSI",
+      "code": "AUTHORITY_SELF_DECLARED_UNVERIFIED",
+      "detail": "7 référentiel(s) portent « à re-vérifier contre le BO »",
+      "blocking": true
+    },
+    {
+      "target": "1NSI",
+      "code": "AUTHORITY_YEAR_DIVERGENCE",
+      "detail": "années citées divergentes dans un même niveau : [('2019',), ('2019', '2026')]",
+      "blocking": true
+    },
+    {
+      "target": "1SPE",
+      "code": "AUTHORITY_NOR_ABSENT",
+      "detail": "9 référentiel(s) sans NOR identifiable : ['Mathematiques/manuel-maths/referentiel/capacites_1SPE_DERIVATION_GLOBAL.json', 'Mathematiques/manuel-maths/referentiel/capacites_1SPE_DERIVATION_LOCAL.json', 'Mathematiques/manuel-maths/referentiel/capacites_1SPE_EXPONENTIELLE.json']",
+      "blocking": true
+    },
+    {
+      "target": "1SPE",
+      "code": "AUTHORITY_YEAR_DIVERGENCE",
+      "detail": "années citées divergentes dans un même niveau : [(), ('2019',), ('2026', '2027')]",
+      "blocking": true
+    },
+    {
+      "target": "TNSI",
+      "code": "AUTHORITY_YEAR_DIVERGENCE",
+      "detail": "années citées divergentes dans un même niveau : [('2019',), ('2019', '2026')]",
+      "blocking": true
+    },
+    {
+      "target": "TNSI::T-ALGO-01D",
+      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
+      "detail": "ALGORITHMIQUE — Parcours largeur d'arbre",
+      "blocking": true
+    },
+    {
+      "target": "TNSI::T-ALGO-02B",
+      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
+      "detail": "ALGORITHMIQUE — Parcours en profondeur d'un graphe",
+      "blocking": true
+    },
+    {
+      "target": "TNSI::T-ALGO-05",
+      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
+      "detail": "ALGORITHMIQUE — Recherche textuelle",
+      "blocking": true
+    },
+    {
+      "target": "TNSI::T-BDD-01B",
+      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
+      "detail": "BASES-DE-DONNEES — Structure et contenu",
+      "blocking": true
+    },
+    {
+      "target": "TNSI::T-BDD-03A",
+      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
+      "detail": "BASES-DE-DONNEES — Composants d'une requête SQL",
+      "blocking": true
+    },
+    {
+      "target": "TNSI::T-LANG-01B",
+      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
+      "detail": "LANGAGES-ET-PROGRAMMATION — Calculabilité indépendante du langage",
+      "blocking": true
+    },
+    {
+      "target": "TNSI::T-STRUCT-01A",
+      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
+      "detail": "STRUCTURES-DE-DONNEES — Interface d'une structure de données",
+      "blocking": true
+    },
+    {
+      "target": "TNSI::T-STRUCT-01B",
+      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
+      "detail": "STRUCTURES-DE-DONNEES — Interface et implémentation",
+      "blocking": true
+    },
+    {
+      "target": "TNSI::T-STRUCT-01C",
+      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
+      "detail": "STRUCTURES-DE-DONNEES — Implémentations multiples",
+      "blocking": true
+    },
+    {
+      "target": "TNSI::T-STRUCT-03C",
+      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
+      "detail": "STRUCTURES-DE-DONNEES — Liste et dictionnaire",
+      "blocking": true
+    },
+    {
+      "target": "TSPE_2026_2027",
+      "code": "AUTHORITY_NOR_ABSENT",
+      "detail": "12 référentiel(s) sans NOR identifiable : ['Mathematiques/manuel-maths/referentiel/capacites_TSPE_CALCUL_INTEGRAL.json', 'Mathematiques/manuel-maths/referentiel/capacites_TSPE_COMBINATOIRE.json', 'Mathematiques/manuel-maths/referentiel/capacites_TSPE_CONCENTRATION_LGN.json']",
+      "blocking": true
+    }
+  ],
+  "summary": {
+    "WRONG_YEAR_AUTHORITY": 3,
+    "AUTHORITY_NOR_ABSENT": 3,
+    "AUTHORITY_SELF_DECLARED_UNVERIFIED": 1,
+    "OFFICIAL_REQUIREMENTS_UNCOVERED": 10,
+    "UNLABELLED_OUT_OF_PROGRAMME_CONTENT": 0
+  }
+}
