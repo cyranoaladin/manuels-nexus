@@ -38,12 +38,33 @@ from pathlib import Path
 
 LIST_OPEN = re.compile(r"\\begin\{(enumerate|itemize|description)\}")
 LIST_CLOSE = re.compile(r"\\end\{(enumerate|itemize|description)\}")
+# Les corrigés numérotent leurs réponses de plusieurs façons : « 1. »,
+# « Question 1. » et, dans tout le corpus de terminale spécialité, « Q1. ».
+# Ne pas connaître la troisième faisait passer 134 corrigés complets pour des
+# dispositions de réponse non reconnues.
+# Les corrigés numérotent leurs réponses de plusieurs façons : « 1. »,
+# « Question 1. », « Q1. », et « Q1 (C6). » lorsque la réponse rappelle la
+# capacité travaillée. Ne connaître que les deux premières faisait passer 134
+# corrigés complets pour des dispositions de réponse non reconnues.
 NUMBERED_ANSWER = re.compile(
-    r"\\textbf\{\s*(?:Question\s+)?(\d+)\s*(?:[a-z]\s*)?[.\u2014\u2013:)-]"
+    r"\\textbf\{\s*(?:Question\s+|Q\s*)?(\d+)\s*(?:[a-z]\s*)?"
+    r"(?:\([^)]*\)\s*)?[.\u2014\u2013:)-]"
 )
 ALPHABETIC_ANSWER = re.compile(r"\\textbf\{\s*([a-z])\s*[).]")
 
+#: Un corrigé peut répondre par un seul programme lorsque l'énoncé énumère les
+#: étapes d'un même livrable — « crée un dossier ; crée deux fichiers ; liste le
+#: contenu » n'appelle pas trois réponses séparées mais un script qui fait les
+#: trois. Exiger un marqueur par étape reviendrait à demander un balisage
+#: cosmétique.
+CODE_ENVIRONMENT = re.compile(r"\\begin\{(python|sql|text|verbatim|lstlisting)\}")
+
+#: Au-delà, un énoncé décrit des questions indépendantes plutôt que les étapes
+#: d'un même programme, et la réponse doit être repérable question par question.
+SINGLE_PROGRAM_MAX_STEPS = 4
+
 ESTABLISHED = "ANSWER_COVERAGE_ESTABLISHED"
+SINGLE_PROGRAM = "SINGLE_PROGRAM_ANSWER"
 SINGLE_QUESTION = "SINGLE_QUESTION_NO_ENUMERATION"
 MISSING = "ANSWERS_MISSING"
 UNRECOGNISED = "UNRECOGNISED_ANSWER_LAYOUT"
@@ -115,4 +136,8 @@ def classify(exercise_body: str, correction_body: str) -> tuple[str, dict]:
             set(range(1, questions + 1)) - numbered
         )
         return MISSING, evidence
+    code_blocks = len(CODE_ENVIRONMENT.findall(correction_body))
+    evidence["code_blocks"] = code_blocks
+    if code_blocks and questions <= SINGLE_PROGRAM_MAX_STEPS:
+        return SINGLE_PROGRAM, evidence
     return UNRECOGNISED, evidence

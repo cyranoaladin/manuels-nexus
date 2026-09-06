@@ -242,6 +242,11 @@ def build_graph(
                 classes = ["ANSWER_COVERAGE_ESTABLISHED"]
             elif verdict == coverage.MISSING:
                 classes = ["ANSWERS_MISSING"]
+            elif verdict == coverage.SINGLE_PROGRAM:
+                # L'énoncé énumère les étapes d'un même livrable et le corrigé
+                # y répond par un programme unique : repérable, mais pas
+                # question par question.
+                classes = ["SINGLE_PROGRAM_ANSWER"]
             else:
                 # Convention de mise en page non reconnue : cela ne vaut pas
                 # une lacune, mais cela ne vaut pas non plus une preuve.
@@ -257,6 +262,9 @@ def build_graph(
             # Un corrigé de remédiation n'est pas un défaut : c'est le rôle de
             # l'objet auquel il répond qui le qualifie.
             "REMEDIATION_CORRECTION": 6.5,
+            # Réponse par un programme unique : ce n'est ni un défaut ni une
+            # couverture question par question.
+            "SINGLE_PROGRAM_ANSWER": 6.7,
             # Etabli en dernier : c'est le seul statut qui n'est pas un defaut,
             # et il ne vaut que couverture, jamais exactitude.
             "ANSWER_COVERAGE_ESTABLISHED": 7,
