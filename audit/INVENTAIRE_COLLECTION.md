@@ -18,7 +18,6 @@
 | Catégorie | Nombre |
 |---|---|
 | blocking_statuses | 2323 |
-| orphan_files | 4 |
 
 ### Échantillon déterministe
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
@@ -26,10 +25,6 @@
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-003, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-004, scope=object
-- orphan_files: source=Mathematiques/manuel-maths/transversal/formulaire.tex, cible=Mathematiques/manuel-maths/transversal/formulaire.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- orphan_files: source=Mathematiques/manuel-maths/transversal/logique_raisonnement.tex, cible=Mathematiques/manuel-maths/transversal/logique_raisonnement.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- orphan_files: source=Mathematiques/manuel-maths/transversal/memo_python.tex, cible=Mathematiques/manuel-maths/transversal/memo_python.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- orphan_files: source=Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex, cible=Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
 
 ## Réconciliation des rapports
 

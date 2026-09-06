@@ -98,11 +98,8 @@
 ### missing_corrections (0)
 - Aucune.
 
-### orphan_files (4)
-- source=Mathematiques/manuel-maths/transversal/formulaire.tex, cible=Mathematiques/manuel-maths/transversal/formulaire.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/transversal/logique_raisonnement.tex, cible=Mathematiques/manuel-maths/transversal/logique_raisonnement.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/transversal/memo_python.tex, cible=Mathematiques/manuel-maths/transversal/memo_python.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex, cible=Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+### orphan_files (0)
+- Aucune.
 
 ### unassembled_objects (0)
 - Aucune.
