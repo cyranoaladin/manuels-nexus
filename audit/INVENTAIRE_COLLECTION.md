@@ -17,7 +17,7 @@
 
 | Catégorie | Nombre |
 |---|---|
-| blocking_statuses | 2323 |
+| blocking_statuses | 2324 |
 
 ### Échantillon déterministe
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft

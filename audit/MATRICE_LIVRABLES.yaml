@@ -370,7 +370,7 @@ manuals:
   TNSI:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '116'
+      detail: '117'
       source: anomalies.blocking_statuses
     - code: chapitres_manquants
       detail: 7/12
@@ -391,7 +391,7 @@ manuals:
       detail: declared
       source: deliverable_matrix.TNSI.variants.version_amenagee
     - code: statuts_non_approuves
-      detail: objets=109; contrats=7
+      detail: objets=110; contrats=7
       source: manuals.TNSI.statuses
     current:
       artifacts:
@@ -407,8 +407,9 @@ manuals:
       - TNSI-PROJET
       - TNSI-STRUCTURES-DONNEES
       statuses:
-        approved: 2
+        approved: 1
         generated: 109
+        needs_review: 1
       totals:
         capacites: 61
         corriges: 35
@@ -587,12 +588,12 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:f1c2c839d8aec4d32e7f8fcac16e46a202f8c5dedc38abf7d22349292c83fca5
+model_digest: sha256:313650cd6327184d5bc5a5d5d8592ecd4bb3caf91f7f5237f757f5fe47ac5469
 provenance:
   branch: null
   dirty: false
   errors: []
-  generated_at_utc: '2026-09-06T14:03:24Z'
+  generated_at_utc: '2026-09-06T14:13:47Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:79b255deeddfa4b483a9a5a9f568bdc143defd7b2a69e8b8a704f4afdd35d6bf
     scripts/build_manifest.py: sha256:62d4f5da9454aaa2923041db777b759e3e4b672e7c2f33b59a62e07afc76de26
@@ -604,7 +605,7 @@ provenance:
   generator_sha256: sha256:c925cbd22c023f6ffeb691652ec8278051c1d3244352c074dbf98e21bd7452b5
   generator_version: 1
   git_available: true
-  head_sha: e67a97fbdbc8262b82050a73c45d7a9bac4b9d63
+  head_sha: 1a3faac0eaa7df88b6e21bcda65142e41c119c26
   modified_tracked: []
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
@@ -616,4 +617,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:9bbee51ca3626df6c59a2f656034548dad18a6bc62ae8677596261ce8d9dc085
+source_digest: sha256:3a1ccacc3dd3c60748ddf219a8a3ff196eb3cdf574947bca0cc434db337d996f
