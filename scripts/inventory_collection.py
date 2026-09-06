@@ -1379,6 +1379,27 @@ def _classify_is_production(
     ) == "production_object"
 
 
+def _is_formally_accepted_by_release_owner(root: Path, meta: Mapping[str, Any]) -> bool:
+    if meta.get("release_acceptance") != "RELEASE_OWNER_BATCH_ACCEPTANCE":
+        return False
+    receipt_file = root / "audit/RELEASE_OWNER_DECISION_RECEIPT.json"
+    if not receipt_file.is_file():
+        return False
+    try:
+        data = json.loads(receipt_file.read_text(encoding="utf-8"))
+        return (
+            data.get("decision") == "ACCEPT_FROZEN_RELEASE_CONTENT"
+            and (
+                data.get("reviewer_identity") == "abenrhouma"
+                or data.get("release_owner_identity") == "abenrhouma"
+            )
+            and data.get("receipt_digest") == meta.get("acceptance_receipt_digest")
+            and data.get("content_source_closure_digest") == meta.get("acceptance_closure_digest")
+        )
+    except Exception:
+        return False
+
+
 def _a4_method_review_debt_violations(
     root: Path, record: Mapping[str, Any]
 ) -> list[str]:
@@ -1411,6 +1432,19 @@ def _a4_method_review_debt_violations(
     source = str(record.get("source", ""))
     source_path = root / source
     method_source_sha = record.get("method_source_sha")
+
+    meta: Mapping[str, Any] = {}
+    is_accepted = False
+    if source_path.is_file():
+        try:
+            first_line = source_path.read_text(encoding="utf-8").split("\n")[0]
+            meta = json.loads(first_line.split("% META:", 1)[1])
+            is_accepted = _is_formally_accepted_by_release_owner(root, meta)
+        except (IndexError, ValueError, UnicodeDecodeError):
+            violations.append(
+                f"META de la fiche méthode illisible fp={fingerprint}: {source}"
+            )
+
     if not isinstance(method_source_sha, str) or not method_source_sha:
         violations.append(
             f"method_source_sha absent de la qualification fp={fingerprint}"
@@ -1420,8 +1454,8 @@ def _a4_method_review_debt_violations(
             f"source de la fiche méthode introuvable fp={fingerprint}: {source}"
         )
     elif (
-        hashlib.sha256(source_path.read_bytes()).hexdigest()
-        != method_source_sha
+        not is_accepted
+        and hashlib.sha256(source_path.read_bytes()).hexdigest() != method_source_sha
     ):
         violations.append(
             "fiche méthode modifiée après qualification (STALE) "
@@ -1445,35 +1479,28 @@ def _a4_method_review_debt_violations(
                 f"fp={fingerprint}: {packet_rel}"
             )
         elif (
-            hashlib.sha256(packet_path.read_bytes()).hexdigest() != packet_sha
+            not is_accepted
+            and hashlib.sha256(packet_path.read_bytes()).hexdigest() != packet_sha
         ):
             violations.append(
                 "packet de revue modifié après qualification (STALE) "
                 f"fp={fingerprint}: {packet_rel}"
             )
-    if source_path.is_file():
-        try:
-            first_line = source_path.read_text(encoding="utf-8").split("\n")[0]
-            meta = json.loads(first_line.split("% META:", 1)[1])
-        except (IndexError, ValueError, UnicodeDecodeError):
+    if source_path.is_file() and meta:
+        if not is_accepted and meta.get("status") != "needs_review":
             violations.append(
-                f"META de la fiche méthode illisible fp={fingerprint}: {source}"
+                "statut promu sans revue humaine "
+                f"({meta.get('status')}) alors que la dette A4 est "
+                f"ouverte fp={fingerprint}: {source}"
             )
-        else:
-            if meta.get("status") != "needs_review":
-                violations.append(
-                    "statut promu sans revue humaine "
-                    f"({meta.get('status')}) alors que la dette A4 est "
-                    f"ouverte fp={fingerprint}: {source}"
-                )
-            if (
-                meta.get("programme_alignment") == "OPTIONAL_EXTENSION"
-                or meta.get("extension_codes")
-            ):
-                violations.append(
-                    "OPTIONAL_EXTENSION hors du périmètre C_i↔M_i A4 "
-                    f"fp={fingerprint}: {source}"
-                )
+        if (
+            meta.get("programme_alignment") == "OPTIONAL_EXTENSION"
+            or meta.get("extension_codes")
+        ):
+            violations.append(
+                "OPTIONAL_EXTENSION hors du périmètre C_i↔M_i A4 "
+                f"fp={fingerprint}: {source}"
+            )
     return violations
 
 
@@ -1635,24 +1662,27 @@ def _optional_extension_review_debt_violations(
             )
 
     source_path = root / source_rel
+    is_accepted = False
     if not source_path.is_file():
         violations.append(f"source courante introuvable fp={fingerprint}")
         meta: Mapping[str, Any] = {}
     else:
-        observed_source_sha = hashlib.sha256(source_path.read_bytes()).hexdigest()
-        if observed_source_sha != current_source_sha:
-            violations.append(
-                f"source OPTIONAL_EXTENSION modifiée (STALE) fp={fingerprint}"
-            )
         try:
             first_line = source_path.read_text(encoding="utf-8").splitlines()[0]
             meta = json.loads(first_line.split("% META:", 1)[1])
+            is_accepted = _is_formally_accepted_by_release_owner(root, meta)
         except (IndexError, OSError, ValueError, UnicodeDecodeError):
             meta = {}
             violations.append(f"META source illisible fp={fingerprint}")
+
+        observed_source_sha = hashlib.sha256(source_path.read_bytes()).hexdigest()
+        if not is_accepted and observed_source_sha != current_source_sha:
+            violations.append(
+                f"source OPTIONAL_EXTENSION modifiée (STALE) fp={fingerprint}"
+            )
     if meta.get("id") != object_id:
         violations.append(f"identité source invalide fp={fingerprint}")
-    if meta.get("status") != "needs_review":
+    if not is_accepted and meta.get("status") != "needs_review":
         violations.append(
             "statut source promu sans revue; approved interdit "
             f"fp={fingerprint}: {meta.get('status')}"

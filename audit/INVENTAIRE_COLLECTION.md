@@ -17,14 +17,14 @@
 
 | Catégorie | Nombre |
 |---|---|
-| blocking_statuses | 2325 |
+| blocking_statuses | 205 |
 
 ### Échantillon déterministe
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
-- blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-001, scope=object
-- blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
-- blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-003, scope=object
-- blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-004, scope=object
+- blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-LOCAL, scope=contract, status=draft
+- blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/contrat.yaml, manual=1SPE, chapter=1SPE-EXPONENTIELLE, scope=contract, status=complete
+- blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/contrat.yaml, manual=1SPE, chapter=1SPE-GEOMETRIE-REPEREE, scope=contract, status=draft
+- blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/contrat.yaml, manual=1SPE, chapter=1SPE-PROBA-COND, scope=contract, status=draft
 
 ## Réconciliation des rapports
 
