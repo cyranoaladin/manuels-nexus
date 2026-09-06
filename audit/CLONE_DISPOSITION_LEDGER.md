@@ -1,6 +1,6 @@
 # Disposition des groupes de contenus identiques
 
-- **ASSEMBLED_OBJECTS** : `4027`
+- **ASSEMBLED_OBJECTS** : `4029`
 - **CLONE_GROUPS_TOTAL** : `6`
 - **EXPECTED_STUDENT_TEACHER_MIRROR** : `0`
 - **INTENTIONAL_REUSE** : `6`

@@ -19,12 +19,32 @@
       "chapter": "TCOMPL-MODELES-FONCTION + TCOMPL-MODELES-EVOLUTION + TCOMPL-LOGARITHME-HISTORIQUE + TCOMPL-CALCULS-AIRES + TCOMPL-INEGALITES + TCOMPL-INFERENCE-BAYESIENNE + TCOMPL-ECHANTILLONNAGE + TCOMPL-TEMPS-ATTENTE + TCOMPL-CORRELATION-CAUSALITE",
       "contract_capacity": "TCOMPL-MF-C1 + TCOMPL-MF-C2 + TCOMPL-MF-C3 + TCOMPL-MF-C4 + TCOMPL-MF-C5 + TCOMPL-MF-C6 + TCOMPL-MF-C7 + TCOMPL-ME-C1 + TCOMPL-ME-C2 + TCOMPL-ME-C3 + TCOMPL-ME-C4 + TCOMPL-ME-C5 + TCOMPL-ME-C6 + TCOMPL-LOG-C1 + TCOMPL-LOG-C2 + TCOMPL-LOG-C3 + TCOMPL-LOG-C4 + TCOMPL-LOG-C5 + TCOMPL-AIR-C1 + TCOMPL-AIR-C2 + TCOMPL-AIR-C3 + TCOMPL-AIR-C4 + TCOMPL-AIR-C5 + TCOMPL-AIR-C6 + TCOMPL-INEG-C1 + TCOMPL-INEG-C2 + TCOMPL-INEG-C3 + TCOMPL-INEG-C4 + TCOMPL-INEG-C5 + TCOMPL-BAYES-C1 + TCOMPL-BAYES-C2 + TCOMPL-BAYES-C3 + TCOMPL-BAYES-C4 + TCOMPL-BAYES-C5 + TCOMPL-ECH-C1 + TCOMPL-ECH-C2 + TCOMPL-ECH-C3 + TCOMPL-ECH-C4 + TCOMPL-ECH-C5 + TCOMPL-ECH-C6 + TCOMPL-ECH-C7 + TCOMPL-ATT-C1 + TCOMPL-ATT-C2 + TCOMPL-ATT-C3 + TCOMPL-ATT-C4 + TCOMPL-ATT-C5 + TCOMPL-ATT-C6 + TCOMPL-ATT-C7 + TCOMPL-CORR-C1 + TCOMPL-CORR-C2 + TCOMPL-CORR-C3 + TCOMPL-CORR-C4 + TCOMPL-CORR-C5",
       "correction_sources": [],
-      "course_sources": [],
+      "course_sources": [
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_primitives.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/10_C1_ajustement_affine.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/07_td_contextualise.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/cours/10_C1_courbe_lorenz.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/cours/10_C1_formule_bayes.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/cours/10_C1_definition_ln.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/10_C1_suites_geometriques.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/07_td_contextualise.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/07_td_contextualise.tex"
+      ],
       "coverage_status": "STRUCTURALLY_MAPPED",
-      "evidence_paths": [],
+      "evidence_paths": [
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_primitives.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/10_C1_ajustement_affine.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/07_td_contextualise.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/cours/10_C1_courbe_lorenz.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/cours/10_C1_formule_bayes.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/cours/10_C1_definition_ln.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/10_C1_suites_geometriques.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/07_td_contextualise.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/07_td_contextualise.tex"
+      ],
       "exercise_sources": [],
-      "gap_reason": "Les neuf thèmes sont désormais reliés explicitement aux neuf contrats de chapitre et à leurs 53 capacités réelles. La dette CHAPTER_SCOPE_WRONG est conservée jusqu'à l'existence d'un gate agrégé vérifiant leur présence et leur assemblage, sans capacité globale fictive.",
-      "gap_type": "CHAPTER_SCOPE_WRONG",
+      "gap_reason": "Exigence structurelle : les neuf themes d'etude du programme correspondent aux 9 chapitres du manuel, chacun avec son cours.",
+      "gap_type": null,
       "mandatory": "YES",
       "manual": "TCOMPL",
       "method_sources": [],
@@ -50,7 +70,8 @@
       "remediation_sources": [],
       "review_status": "PROGRAM_REVIEWED",
       "row_id": "TCOMPL-COVERAGE-002",
-      "scientific_state": "PENDING"
+      "scientific_state": "PENDING",
+      "source_content_state": "PRESENT"
     },
     {
       "NOR": "MENE1921265A",

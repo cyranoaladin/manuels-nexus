@@ -71,11 +71,35 @@ def test_mutation_a_declared_capacity_without_content_breaks_the_chain(tmp_path)
     proven = [r for r in baseline["results"] if r["chain"] == "PROVEN"]
     assert proven, "il faut au moins un atome prouve pour muter"
 
-    victim = proven[0]
+    # On mute un objet de chapitre, qui porte une ligne d'identite : c'est le
+    # scenario vise par la garde. Les annexes transversales n'en ont pas, et
+    # muter l'une d'elles ne testerait pas « capacite declaree sans contenu ».
+    # La victime doit etre un atome a source UNIQUE : un atome couvert par
+    # plusieurs objets reste legitimement couvert si l'on en vide un seul.
+    coverage = json.loads(
+        (ROOT / "audit/OFFICIAL_PROGRAM_COVERAGE_2026_2027.json").read_text(encoding="utf-8")
+    )
+    fields = (
+        "course_sources", "method_sources", "exercise_sources",
+        "correction_sources", "assessment_sources", "remediation_sources",
+    )
+    single = {
+        row["atom_id"]
+        for row in coverage["rows"]
+        if len({s for f in fields for s in (row.get(f) or [])}) == 1
+    }
+    victim = next(
+        (
+            r for r in proven
+            if r["atom_id"] in single
+            and (ROOT / r["source"]).read_text(encoding="utf-8").startswith("% META:")
+        ),
+        None,
+    )
+    assert victim is not None, "aucun atome a source unique et identifiee a muter"
     source = ROOT / victim["source"]
     original = source.read_text(encoding="utf-8")
     head, _, _ = original.partition("\n")
-    assert head.startswith("% META:"), "l'objet doit porter une ligne d'identite"
 
     # On conserve la META, on vide le contenu pedagogique.
     emptied = head + "\n\\section*{}\n"

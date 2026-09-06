@@ -8,6 +8,6 @@
 - **Erreurs de total de bareme** : `0`
 - **Double allocation de points** : `0`
 - **Questions manquantes au bareme** : `0`
-- **Total exercices audites** : 1756
-- **Total corriges audites** : 1756
+- **Total exercices audites** : 1377
+- **Total corriges audites** : 1377
 - **PDFs eleves controles** : 6

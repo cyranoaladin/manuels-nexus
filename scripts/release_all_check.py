@@ -87,6 +87,17 @@ def evaluate_release(
     )
     debt_summary = debt.get("product_debt_summary", {})
 
+    # Fail-closed : une cle absente d'une preuve obligatoire n'est pas « zero
+    # defaut », c'est une preuve manquante. On l'enregistre et on bloque.
+    missing_evidence: list[str] = []
+
+    def require(payload: Any, artifact: str, key: str, default: Any = 0) -> Any:
+        section = payload.get("summary", payload) if isinstance(payload, dict) else {}
+        if not isinstance(section, dict) or key not in section:
+            missing_evidence.append(f"{artifact}#{key}")
+            return default
+        return section[key]
+
     target_evaluations = []
 
     for target in canonical_targets:
@@ -190,17 +201,6 @@ def evaluate_release(
     # Chaque chiffre ci-dessous est LU dans la preuve correspondante. Un litteral
     # ecrit ici ne serait pas une mesure : c'est precisement ce qui laissait le
     # resume annoncer 0 pendant que les registres sous-jacents disaient autre chose.
-    # Fail-closed : une cle absente d'une preuve obligatoire n'est pas « zero
-    # defaut », c'est une preuve manquante. On l'enregistre et on bloque.
-    missing_evidence: list[str] = []
-
-    def require(payload: Any, artifact: str, key: str, default: Any = 0) -> Any:
-        section = payload.get("summary", payload) if isinstance(payload, dict) else {}
-        if not isinstance(section, dict) or key not in section:
-            missing_evidence.append(f"{artifact}#{key}")
-            return default
-        return section[key]
-
     auth_summary = auth.get("summary", {})
     parity_summary = parity.get("summary", {})
     prog_summary = prog_val.get("summary", {})
