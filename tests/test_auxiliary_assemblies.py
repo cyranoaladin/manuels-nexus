@@ -121,3 +121,44 @@ def test_the_two_ece_banks_remain_content_gaps() -> None:
     assert payload["summary"]["NEW_MASTERS_WRITTEN"] == 0
     assert not any((ROOT / "NSI/chapitres" / c / "ece").exists()
                    for c in ("TNSI-ALGORITHMIQUE", "TNSI-BASES-DE-DONNEES"))
+
+
+# --- Cible de build vs reçu de build ------------------------------------------
+
+def test_build_target_and_build_receipt_are_distinct_notions() -> None:
+    """Une cible de build existe ; un reçu de build n'a pas à exister encore.
+
+    Les confondre rendait `WITHOUT_BUILD = 24` alors que le moteur sait
+    produire 22 des 24 livrables. La gouvernance interdit d'enregistrer des
+    reçus tant que le contenu bouge : c'est un état voulu, pas un défaut.
+    """
+    import build_release_deliverable_scope_matrix as scope
+
+    payload = scope.build()
+    summary = payload["summary"]
+    assert summary["REQUIRED_DELIVERABLES_WITHOUT_BUILD_TARGET"] == 2
+    assert summary["REQUIRED_DELIVERABLES_WITHOUT_CURRENT_BUILD_RECEIPT"] == 24
+    assert summary["CURRENT_BUILD_RECEIPTS_EXPECTED_THIS_PHASE"] is False
+
+
+def test_every_required_deliverable_has_a_build_profile() -> None:
+    import build_release_deliverable_scope_matrix as scope
+
+    for row in scope.build()["deliverables"]:
+        if not (row["canonical_release_product"] or row["required_auxiliary_product"]):
+            continue
+        profile = row["build_profile"]
+        assert profile["engine"], row["deliverable_id"]
+        assert profile["variant_argument"], row["deliverable_id"]
+        assert profile["output"].endswith(".pdf"), row["deliverable_id"]
+
+
+def test_only_the_ece_banks_lack_a_build_target() -> None:
+    import build_release_deliverable_scope_matrix as scope
+
+    missing = sorted(
+        row["deliverable_id"] for row in scope.build()["deliverables"]
+        if (row["canonical_release_product"] or row["required_auxiliary_product"])
+        and not row["build_target_declared"]
+    )
+    assert missing == ["TNSI::banque_ecrite", "TNSI::banque_pratique"]

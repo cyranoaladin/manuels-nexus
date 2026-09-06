@@ -286,6 +286,16 @@ MARGIN_MAX_PASSES = 6
 MARGIN_MINIMUM_PASSES = 3
 
 
+def document_variant(variant: str) -> str:
+    """Variante telle que le document la déclare à la charte.
+
+    Un livret auxiliaire est un document élève : il n'active pas la version
+    professeur. La couche de marge compare cette valeur à celle du document,
+    et l'écart faisait échouer la compilation.
+    """
+    return "professeur" if variant == "professeur" else "eleve"
+
+
 def _margin_run_nonce(manual: str, variant: str) -> str:
     """Nonce deterministe : la reproductibilite passe avant l'unicite.
 
@@ -312,9 +322,11 @@ def _margin_pass_environment(
     environment = dict(compile_environment)
     environment.update(
         {
-            "NEXUS_MARGIN_VARIANT": variant,
+            "NEXUS_MARGIN_VARIANT": document_variant(variant),
             "NEXUS_MARGIN_PASS_NUMBER": str(pass_number),
-            "NEXUS_MARGIN_RUN_NONCE": _margin_run_nonce(manual, variant),
+            "NEXUS_MARGIN_RUN_NONCE": _margin_run_nonce(
+                manual, document_variant(variant)
+            ),
             "NEXUS_MARGIN_LAYOUT_PREVIOUS": str(previous),
             "NEXUS_MARGIN_LAYOUT_NEXT": str(following),
             # L'inventaire des liens ne change rien au PDF : il decrit ce que
@@ -1040,7 +1052,7 @@ def render_master(
     git_root: Path | None = None,
     tracked_paths: frozenset[str] | None = None,
 ) -> str:
-    if variant not in {"eleve", "professeur"}:
+    if variant not in VARIANT_ORDERS:
         raise ValueError("variante inconnue")
     if manual not in MANUAL_CHAPTERS:
         raise ValueError("manuel inconnu")
@@ -1162,7 +1174,7 @@ def render_master(
 
     content = "\n".join(parts)
 
-    titre_var = "professeur" if variant == "professeur" else "eleve"
+    titre_var = document_variant(variant)
     variant_configuration = (
         "\\nxVersionProfesseurtrue"
         if variant == "professeur"
@@ -1590,7 +1602,10 @@ def _main_locked(
                 environment=environment,
             ):
                 raise AssemblyError("préflight PDF en échec")
-            if variant == "eleve":
+            # Un livret auxiliaire est un document élève : c'est le contrôle
+            # de non-fuite qui s'applique, pas le décompte des clés QCM
+            # professeur, qu'un livret de méthodes n'a aucune raison de porter.
+            if document_variant(variant) == "eleve":
                 _verify_student_pdf_text(
                     run_pdf_path,
                     runner=active_runner,

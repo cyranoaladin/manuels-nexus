@@ -12,7 +12,9 @@
     "INTERNAL_ONLY_DELIVERABLES": 0,
     "UNKNOWN_DELIVERABLE_REQUIREMENT_ORIGIN": 0,
     "REQUIRED_DELIVERABLES_WITHOUT_ASSEMBLY": 2,
-    "REQUIRED_DELIVERABLES_WITHOUT_BUILD": 24,
+    "REQUIRED_DELIVERABLES_WITHOUT_BUILD_TARGET": 2,
+    "REQUIRED_DELIVERABLES_WITHOUT_CURRENT_BUILD_RECEIPT": 24,
+    "CURRENT_BUILD_RECEIPTS_EXPECTED_THIS_PHASE": false,
     "REQUIREMENT_STATUS_COUNTS": {
       "AUTHORITATIVE_CURRENT_REQUIREMENT": 24,
       "PROPOSED_NOT_APPROVED": 4
@@ -21,6 +23,13 @@
   },
   "deliverables": [
     {
+      "build_profile": {
+        "engine": "NSI/scripts/assemble_manuel.py",
+        "assembly_id": "nsi:manual:1NSI:evaluations",
+        "variant_argument": "evaluations",
+        "output": "MANUEL_1NSI_evaluations.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "1NSI::evaluations",
       "type": "DECLINAISON",
       "subject": "NSI",
@@ -33,7 +42,7 @@
       "build_target": "evaluations",
       "expected_output": "1NSI_evaluations",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « banque ECE » ; DIRECTIVES_COLLECTION.md#J7",
       "canonical_release_product": false,
@@ -43,6 +52,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "NSI/scripts/assemble_manuel.py",
+        "assembly_id": "nsi:manual:1NSI:methodes",
+        "variant_argument": "methodes",
+        "output": "MANUEL_1NSI_methodes.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "1NSI::livret_methodes",
       "type": "DECLINAISON",
       "subject": "NSI",
@@ -55,7 +71,7 @@
       "build_target": "livret_methodes",
       "expected_output": "1NSI_livret_methodes",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « méthodes » ; DIRECTIVES_COLLECTION.md#J7",
       "canonical_release_product": false,
@@ -65,6 +81,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "NSI/scripts/assemble_manuel.py",
+        "assembly_id": "nsi:manual:1NSI:eleve",
+        "variant_argument": "eleve",
+        "output": "MANUEL_1NSI_eleve.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "1NSI::manuel_eleve",
       "type": "MANUEL",
       "subject": "NSI",
@@ -77,7 +100,7 @@
       "build_target": "manuel_eleve",
       "expected_output": "1NSI_manuel_eleve",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « MANUEL_*_v1.pdf »",
       "canonical_release_product": true,
@@ -87,6 +110,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "NSI/scripts/assemble_manuel.py",
+        "assembly_id": "nsi:manual:1NSI:professeur",
+        "variant_argument": "professeur",
+        "output": "MANUEL_1NSI_professeur.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "1NSI::manuel_professeur",
       "type": "MANUEL",
       "subject": "NSI",
@@ -99,7 +129,7 @@
       "build_target": "manuel_professeur",
       "expected_output": "1NSI_manuel_professeur",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « livret professeur »",
       "canonical_release_product": true,
@@ -109,6 +139,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "NSI/scripts/assemble_manuel.py",
+        "assembly_id": "nsi:manual:1NSI:projets",
+        "variant_argument": "projets",
+        "output": "MANUEL_1NSI_projets.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "1NSI::projets",
       "type": "DECLINAISON",
       "subject": "NSI",
@@ -121,7 +158,7 @@
       "build_target": "projets",
       "expected_output": "1NSI_projets",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "PROPOSED_NOT_APPROVED",
       "source_of_requirement": "f5001666 (2026-07-20) [AUDIT][P0] etablit la source de verite de la collection (aucune clause de mission correspondante)",
       "canonical_release_product": false,
@@ -131,6 +168,13 @@
       "a_valider_humain": true
     },
     {
+      "build_profile": {
+        "engine": "NSI/scripts/assemble_manuel.py",
+        "assembly_id": "nsi:manual:1NSI:remediation",
+        "variant_argument": "remediation",
+        "output": "MANUEL_1NSI_remediation.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "1NSI::remediations",
       "type": "DECLINAISON",
       "subject": "NSI",
@@ -143,7 +187,7 @@
       "build_target": "remediations",
       "expected_output": "1NSI_remediations",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « remédiation » ; DIRECTIVES_COLLECTION.md#J7",
       "canonical_release_product": false,
@@ -153,6 +197,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "NSI/scripts/assemble_manuel.py",
+        "assembly_id": "nsi:manual:1NSI:amenagee",
+        "variant_argument": "amenagee",
+        "output": "MANUEL_1NSI_amenagee.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "1NSI::version_amenagee",
       "type": "DECLINAISON",
       "subject": "NSI",
@@ -165,7 +216,7 @@
       "build_target": "version_amenagee",
       "expected_output": "1NSI_version_amenagee",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « version aménagée NSI » ; DIRECTIVES_COLLECTION.md#J7",
       "canonical_release_product": false,
@@ -175,6 +226,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        "assembly_id": "math:manual:1SPE:evaluations",
+        "variant_argument": "evaluations",
+        "output": "MANUEL_1SPE_evaluations.pdf"
+      },
+      "build_target_declared": false,
       "deliverable_id": "1SPE::banque_evaluations",
       "type": "DECLINAISON",
       "subject": "Mathematiques",
@@ -187,7 +245,7 @@
       "build_target": "banque_evaluations",
       "expected_output": "1SPE_banque_evaluations",
       "declared_assembly": false,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "PROPOSED_NOT_APPROVED",
       "source_of_requirement": "f5001666 (2026-07-20) [AUDIT][P0] etablit la source de verite de la collection (aucune clause de mission correspondante)",
       "canonical_release_product": false,
@@ -197,6 +255,13 @@
       "a_valider_humain": true
     },
     {
+      "build_profile": {
+        "engine": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        "assembly_id": "math:manual:1SPE:methodes",
+        "variant_argument": "methodes",
+        "output": "MANUEL_1SPE_methodes.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "1SPE::livret_methodes",
       "type": "DECLINAISON",
       "subject": "Mathematiques",
@@ -209,7 +274,7 @@
       "build_target": "livret_methodes",
       "expected_output": "1SPE_livret_methodes",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « méthodes » ; DIRECTIVES_COLLECTION.md#J7",
       "canonical_release_product": false,
@@ -219,6 +284,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        "assembly_id": "math:manual:1SPE:remediation",
+        "variant_argument": "remediation",
+        "output": "MANUEL_1SPE_remediation.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "1SPE::livret_remediation",
       "type": "DECLINAISON",
       "subject": "Mathematiques",
@@ -231,7 +303,7 @@
       "build_target": "livret_remediation",
       "expected_output": "1SPE_livret_remediation",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « remédiation » ; DIRECTIVES_COLLECTION.md#J7",
       "canonical_release_product": false,
@@ -241,6 +313,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        "assembly_id": "math:manual:1SPE:eleve",
+        "variant_argument": "eleve",
+        "output": "MANUEL_1SPE_eleve.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "1SPE::manuel_eleve",
       "type": "MANUEL",
       "subject": "Mathematiques",
@@ -253,7 +332,7 @@
       "build_target": "manuel_eleve",
       "expected_output": "1SPE_manuel_eleve",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « MANUEL_*_v1.pdf »",
       "canonical_release_product": true,
@@ -263,6 +342,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        "assembly_id": "math:manual:1SPE:professeur",
+        "variant_argument": "professeur",
+        "output": "MANUEL_1SPE_professeur.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "1SPE::manuel_professeur",
       "type": "MANUEL",
       "subject": "Mathematiques",
@@ -275,7 +361,7 @@
       "build_target": "manuel_professeur",
       "expected_output": "1SPE_manuel_professeur",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « livret professeur »",
       "canonical_release_product": true,
@@ -285,6 +371,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        "assembly_id": "math:manual:TCOMPL:eleve",
+        "variant_argument": "eleve",
+        "output": "MANUEL_TCOMPL_eleve.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "TCOMPL::manuel_eleve",
       "type": "MANUEL",
       "subject": "Mathematiques",
@@ -297,7 +390,7 @@
       "build_target": "manuel_eleve",
       "expected_output": "TCOMPL_manuel_eleve",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "Mathematiques/manuel-maths/docs/11_perimetre_terminale_complementaires.md",
       "canonical_release_product": true,
@@ -307,6 +400,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        "assembly_id": "math:manual:TCOMPL:professeur",
+        "variant_argument": "professeur",
+        "output": "MANUEL_TCOMPL_professeur.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "TCOMPL::manuel_professeur",
       "type": "MANUEL",
       "subject": "Mathematiques",
@@ -319,7 +419,7 @@
       "build_target": "manuel_professeur",
       "expected_output": "TCOMPL_manuel_professeur",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "Mathematiques/manuel-maths/docs/11_perimetre_terminale_complementaires.md",
       "canonical_release_product": true,
@@ -329,6 +429,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        "assembly_id": "math:manual:TEXPERTES:eleve",
+        "variant_argument": "eleve",
+        "output": "MANUEL_TEXPERTES_eleve.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "TEXPERTES::manuel_eleve",
       "type": "MANUEL",
       "subject": "Mathematiques",
@@ -341,7 +448,7 @@
       "build_target": "manuel_eleve",
       "expected_output": "TEXPERTES_manuel_eleve",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "Mathematiques/manuel-maths/docs/12_perimetre_terminale_expertes.md",
       "canonical_release_product": true,
@@ -351,6 +458,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        "assembly_id": "math:manual:TEXPERTES:professeur",
+        "variant_argument": "professeur",
+        "output": "MANUEL_TEXPERTES_professeur.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "TEXPERTES::manuel_professeur",
       "type": "MANUEL",
       "subject": "Mathematiques",
@@ -363,7 +477,7 @@
       "build_target": "manuel_professeur",
       "expected_output": "TEXPERTES_manuel_professeur",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "Mathematiques/manuel-maths/docs/12_perimetre_terminale_expertes.md",
       "canonical_release_product": true,
@@ -373,6 +487,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "NSI/scripts/assemble_manuel.py",
+        "assembly_id": "nsi:manual:TNSI:ece",
+        "variant_argument": "ece",
+        "output": "MANUEL_TNSI_ece.pdf"
+      },
+      "build_target_declared": false,
       "deliverable_id": "TNSI::banque_ecrite",
       "type": "DECLINAISON",
       "subject": "NSI",
@@ -385,7 +506,7 @@
       "build_target": "banque_ecrite",
       "expected_output": "TNSI_banque_ecrite",
       "declared_assembly": false,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « banque ECE » ; DIRECTIVES_COLLECTION.md#J7",
       "canonical_release_product": false,
@@ -395,6 +516,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "NSI/scripts/assemble_manuel.py",
+        "assembly_id": "nsi:manual:TNSI:ece_pratique",
+        "variant_argument": "ece_pratique",
+        "output": "MANUEL_TNSI_ece_pratique.pdf"
+      },
+      "build_target_declared": false,
       "deliverable_id": "TNSI::banque_pratique",
       "type": "DECLINAISON",
       "subject": "NSI",
@@ -407,7 +535,7 @@
       "build_target": "banque_pratique",
       "expected_output": "TNSI_banque_pratique",
       "declared_assembly": false,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « banque ECE » ; DIRECTIVES_COLLECTION.md#J7",
       "canonical_release_product": false,
@@ -417,6 +545,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "NSI/scripts/assemble_manuel.py",
+        "assembly_id": "nsi:manual:TNSI:eleve",
+        "variant_argument": "eleve",
+        "output": "MANUEL_TNSI_eleve.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "TNSI::manuel_eleve",
       "type": "MANUEL",
       "subject": "NSI",
@@ -429,7 +564,7 @@
       "build_target": "manuel_eleve",
       "expected_output": "TNSI_manuel_eleve",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « MANUEL_*_v1.pdf »",
       "canonical_release_product": true,
@@ -439,6 +574,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "NSI/scripts/assemble_manuel.py",
+        "assembly_id": "nsi:manual:TNSI:professeur",
+        "variant_argument": "professeur",
+        "output": "MANUEL_TNSI_professeur.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "TNSI::manuel_professeur",
       "type": "MANUEL",
       "subject": "NSI",
@@ -451,7 +593,7 @@
       "build_target": "manuel_professeur",
       "expected_output": "TNSI_manuel_professeur",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « livret professeur »",
       "canonical_release_product": true,
@@ -461,6 +603,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "NSI/scripts/assemble_manuel.py",
+        "assembly_id": "nsi:manual:TNSI:projets",
+        "variant_argument": "projets",
+        "output": "MANUEL_TNSI_projets.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "TNSI::projets",
       "type": "DECLINAISON",
       "subject": "NSI",
@@ -473,7 +622,7 @@
       "build_target": "projets",
       "expected_output": "TNSI_projets",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "PROPOSED_NOT_APPROVED",
       "source_of_requirement": "f5001666 (2026-07-20) [AUDIT][P0] etablit la source de verite de la collection (aucune clause de mission correspondante)",
       "canonical_release_product": false,
@@ -483,6 +632,13 @@
       "a_valider_humain": true
     },
     {
+      "build_profile": {
+        "engine": "NSI/scripts/assemble_manuel.py",
+        "assembly_id": "nsi:manual:TNSI:remediation",
+        "variant_argument": "remediation",
+        "output": "MANUEL_TNSI_remediation.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "TNSI::remediations",
       "type": "DECLINAISON",
       "subject": "NSI",
@@ -495,7 +651,7 @@
       "build_target": "remediations",
       "expected_output": "TNSI_remediations",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « remédiation » ; DIRECTIVES_COLLECTION.md#J7",
       "canonical_release_product": false,
@@ -505,6 +661,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "NSI/scripts/assemble_manuel.py",
+        "assembly_id": "nsi:manual:TNSI:amenagee",
+        "variant_argument": "amenagee",
+        "output": "MANUEL_TNSI_amenagee.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "TNSI::version_amenagee",
       "type": "DECLINAISON",
       "subject": "NSI",
@@ -517,7 +680,7 @@
       "build_target": "version_amenagee",
       "expected_output": "TNSI_version_amenagee",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « version aménagée NSI » ; DIRECTIVES_COLLECTION.md#J7",
       "canonical_release_product": false,
@@ -527,6 +690,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        "assembly_id": "math:manual:TSPE_2026_2027:evaluations",
+        "variant_argument": "evaluations",
+        "output": "MANUEL_TSPE_2026_2027_evaluations.pdf"
+      },
+      "build_target_declared": false,
       "deliverable_id": "TSPE_2026_2027::banque_evaluations",
       "type": "DECLINAISON",
       "subject": "Mathematiques",
@@ -539,7 +709,7 @@
       "build_target": "banque_evaluations",
       "expected_output": "TSPE_2026_2027_banque_evaluations",
       "declared_assembly": false,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "PROPOSED_NOT_APPROVED",
       "source_of_requirement": "f5001666 (2026-07-20) [AUDIT][P0] etablit la source de verite de la collection (aucune clause de mission correspondante)",
       "canonical_release_product": false,
@@ -549,6 +719,13 @@
       "a_valider_humain": true
     },
     {
+      "build_profile": {
+        "engine": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        "assembly_id": "math:manual:TSPE_2026_2027:methodes",
+        "variant_argument": "methodes",
+        "output": "MANUEL_TSPE_2026_2027_methodes.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "TSPE_2026_2027::livret_methodes",
       "type": "DECLINAISON",
       "subject": "Mathematiques",
@@ -561,7 +738,7 @@
       "build_target": "livret_methodes",
       "expected_output": "TSPE_2026_2027_livret_methodes",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « méthodes » ; DIRECTIVES_COLLECTION.md#J7",
       "canonical_release_product": false,
@@ -571,6 +748,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        "assembly_id": "math:manual:TSPE_2026_2027:remediation",
+        "variant_argument": "remediation",
+        "output": "MANUEL_TSPE_2026_2027_remediation.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "TSPE_2026_2027::livret_remediation",
       "type": "DECLINAISON",
       "subject": "Mathematiques",
@@ -583,7 +767,7 @@
       "build_target": "livret_remediation",
       "expected_output": "TSPE_2026_2027_livret_remediation",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « remédiation » ; DIRECTIVES_COLLECTION.md#J7",
       "canonical_release_product": false,
@@ -593,6 +777,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        "assembly_id": "math:manual:TSPE_2026_2027:eleve",
+        "variant_argument": "eleve",
+        "output": "MANUEL_TSPE_2026_2027_eleve.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "TSPE_2026_2027::manuel_eleve",
       "type": "MANUEL",
       "subject": "Mathematiques",
@@ -605,7 +796,7 @@
       "build_target": "manuel_eleve",
       "expected_output": "TSPE_2026_2027_manuel_eleve",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « MANUEL_*_v1.pdf »",
       "canonical_release_product": true,
@@ -615,6 +806,13 @@
       "a_valider_humain": false
     },
     {
+      "build_profile": {
+        "engine": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        "assembly_id": "math:manual:TSPE_2026_2027:professeur",
+        "variant_argument": "professeur",
+        "output": "MANUEL_TSPE_2026_2027_professeur.pdf"
+      },
+      "build_target_declared": true,
       "deliverable_id": "TSPE_2026_2027::manuel_professeur",
       "type": "MANUEL",
       "subject": "Mathematiques",
@@ -627,7 +825,7 @@
       "build_target": "manuel_professeur",
       "expected_output": "TSPE_2026_2027_manuel_professeur",
       "declared_assembly": true,
-      "observed_build": false,
+      "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « livret professeur »",
       "canonical_release_product": true,
