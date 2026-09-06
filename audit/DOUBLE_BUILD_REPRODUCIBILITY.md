@@ -1,7 +1,7 @@
 # DOUBLE_BUILD_REPRODUCIBILITY — Preuve de Reproductibilité Déterministe
 
 - **Statut Global** : `PROVEN` (12/12)
-- **Commit Source** : `daa7783ff0eba8cc67adb819a0b0b80046557f27`
+- **Commit Source** : `22bddf80547bdd795382cb897072b78165494714`
 - **Date Epoch** : `1785962466`
 - **Fuseau Horaire** : `UTC` | **Locale** : `C.UTF-8`
 
