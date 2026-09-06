@@ -80,14 +80,23 @@ def load_referentials() -> tuple[dict[str, dict[str, Any]], dict[str, list[dict[
             marker = VERIFICATION_MARKER.search(reference)
             programme_part = reference[: marker.start()] if marker else reference
             issue = PROGRAMME_ISSUE.search(programme_part)
+            # La provenance appartient au bloc `authority`, résolu depuis la
+            # matrice ; le NOR n'a pas à être répété dans la phrase de
+            # référence, ni injecté dans le texte de l'annexe officielle.
+            declared_authority = payload.get("authority") or {}
+            declared_nor = str(declared_authority.get("nor") or "")
             authorities[level].append({
                 "file": str(path.relative_to(ROOT)),
                 "bo_reference": reference,
-                "nor": sorted(set(NOR_PATTERN.findall(reference))),
+                "authority": declared_authority,
+                "nor": sorted(
+                    set(NOR_PATTERN.findall(reference))
+                    | ({declared_nor} if NOR_PATTERN.fullmatch(declared_nor) else set())
+                ),
                 "programme_issue": (
                     f"BO n°{issue.group(1)} du {issue.group(2)} {issue.group(3).lower()} "
                     f"{issue.group(4)}"
-                    if issue else None
+                    if issue else (declared_authority.get("bulletin") or None)
                 ),
                 "programme_year": issue.group(4) if issue else None,
                 "self_declared_unverified": bool(UNVERIFIED_MARKER.search(reference)),

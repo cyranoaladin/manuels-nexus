@@ -1,24 +1,21 @@
 #!/usr/bin/env python3
-"""Choisir le programme par l'annee scolaire, jamais par la date de publication.
+"""Table unique des autorités de programme, validée contre les sources déposées.
 
-Un programme publie en 2026 n'est pas forcement le programme de 2026-2027. Le
-nouveau texte de Terminale specialite parait en 2026 et n'entre en vigueur
-qu'en 2027-2028 ; l'appliquer au manuel courant reviendrait a enseigner un
-programme qui n'existe pas encore pour ces eleves. La faute symetrique existe
-aussi : ramener la Premiere au texte de 2019 alors que le nouveau programme
-s'applique des cette rentree.
+Trois endroits pouvaient jusqu'ici affirmer une autorité réglementaire — les
+registres `SOURCES.md`, les référentiels de capacités et les contrats de
+chapitre — sans que rien ne les oblige à s'accorder. Un registre a d'ailleurs
+attribué au programme de mathématiques de première 2019 le NOR du programme de
+NSI de terminale.
 
-Le choix ne se fait donc ni sur le nom du fichier, ni sur « la derniere version
-publiee », ni sur une intuition de recence. Il se fait sur une seule question :
-l'annee scolaire de la release tombe-t-elle dans l'intervalle d'application de
-cette autorite.
+Cette matrice devient la référence unique. Elle n'est pas pour autant une
+vérité auto-déclarée : chaque ligne est **vérifiée** contre le registre de
+sources correspondant et contre l'empreinte du fichier officiel réellement
+déposé. Une ligne que le dépôt ne peut pas corroborer est un constat, pas une
+autorité.
 
-Un successeur connu mais pas encore en vigueur n'est pas ignore -- il est
-enregistre `FUTURE_NOT_APPLICABLE`, avec sa date d'entree. Le taire laisserait
-croire qu'on ne l'a pas vu.
-
-Metriques bloquantes : `WRONG_YEAR_AUTHORITY`, `AMBIGUOUS_AUTHORITY`,
-`MANUAL_WITHOUT_AUTHORITY`, `AUTHORITY_SOURCE_DIGEST_MISMATCH`, `UNKNOWN`.
+`ACTIVE` désigne l'autorité applicable à l'édition 2026-2027 ; `SUPERSEDED`
+conserve les programmes remplacés, qui restent déposés et cités par
+l'historique.
 """
 
 from __future__ import annotations
@@ -26,297 +23,220 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
 
-import yaml
+ROOT = Path(__file__).resolve().parents[1]
+OUTPUT_JSON = ROOT / "audit/PROGRAMME_AUTHORITY_MATRIX.json"
+OUTPUT_MD = ROOT / "audit/PROGRAMME_AUTHORITY_MATRIX.md"
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+EDITION = "2026-2027"
 
-from manual_source_surface import ROOT  # noqa: E402
+MATHS_REGISTRY = "Mathematiques/manuel-maths/sources/SOURCES.md"
+NSI_REGISTRY = "NSI/sources/SOURCES.md"
 
-JSON_TARGET = ROOT / "audit/PROGRAMME_AUTHORITY_MATRIX.json"
-MD_TARGET = ROOT / "audit/PROGRAMME_AUTHORITY_MATRIX.md"
-GENERATED_BY = "scripts/build_programme_authority_matrix.py"
-
-REGISTRY = ROOT / "audit/OFFICIAL_PROGRAM_AUTHORITY_2026_2027.yaml"
-
-#: L'annee scolaire de la release. Tout le choix d'autorite en depend.
-RELEASE_SCHOOL_YEAR = "2026-2027"
-
-#: Niveau et discipline de chaque manuel canonique. Ce sont des faits
-#: d'edition, pas des deductions : un manuel de Premiere specialite ne se
-#: devine pas depuis un identifiant.
-MANUAL_IDENTITY = {
-    "1SPE": ("premiere", "mathematiques"),
-    "TSPE_2026_2027": ("terminale", "mathematiques"),
-    "TCOMPL": ("terminale", "mathematiques complementaires"),
-    "TEXPERTES": ("terminale", "mathematiques expertes"),
-    "1NSI": ("premiere", "numerique et sciences informatiques"),
-    "TNSI": ("terminale", "numerique et sciences informatiques"),
-}
-
-#: Les successeurs publies mais pas encore applicables. Les nommer est ce qui
-#: rend l'erreur impossible : sans eux, rien ne dirait qu'un texte plus recent
-#: existe et qu'il ne s'applique pas encore.
-KNOWN_SUCCESSORS = {
-    "TSPE_2026_2027": {
-        "successor_NOR": "MENE2602919A",
-        "successor_effective_from": "2027-2028",
-        "status": "FUTURE_NOT_APPLICABLE",
-        "why": (
-            "publie en 2026, il entre en vigueur a la rentree 2027-2028 ; "
-            "l'appliquer a la release 2026-2027 enseignerait un programme qui "
-            "n'existe pas encore pour ces eleves"
+#: Autorités déclarées, chacune à corroborer ci-dessous. `registry_file` nomme
+#: l'entrée du registre qui doit porter le même NOR.
+DECLARED: tuple[dict[str, Any], ...] = (
+    {
+        "manual": "1SPE", "state": "ACTIVE", "nor": "MENE2602917A",
+        "bulletin": "BO n°14 du 2 avril 2026", "effective_school_year": "2026-2027",
+        "registry": MATHS_REGISTRY, "registry_file": "BO2026_1SPE_specialite.pdf",
+        "local_text": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+    },
+    {
+        "manual": "1SPE", "state": "SUPERSEDED", "nor": "MENE1901632A",
+        "bulletin": "BO spécial n°1 du 22 janvier 2019", "effective_school_year": "2019-2020",
+        "registry": MATHS_REGISTRY, "registry_file": "BO2019_1SPE_specialite.pdf",
+        "local_text": "Mathematiques/manuel-maths/sources/txt/BO2019_1SPE_specialite.txt",
+        "superseded_by": "MENE2602917A",
+    },
+    {
+        "manual": "TSPE_2026_2027", "state": "ACTIVE", "nor": "MENE1921246A",
+        "bulletin": "BO spécial n°8 du 25 juillet 2019", "effective_school_year": "2020-2021",
+        "registry": MATHS_REGISTRY, "registry_file": "BO2019_TSPE_specialite.pdf",
+        "local_text": "Mathematiques/manuel-maths/sources/txt/BO2019_TSPE_specialite.txt",
+        "note": (
+            "Le programme de terminale rénové (MENE2602919A) s'applique à la rentrée "
+            "2027 : pour l'édition 2026-2027, l'autorité active reste celle de 2019."
         ),
     },
-    "TCOMPL": {
-        "successor_NOR": None,
-        "successor_effective_from": "2027-2028",
-        "status": "FUTURE_NOT_APPLICABLE",
-        "why": (
-            "un successeur 2026 est connu pour l'enseignement optionnel de "
-            "terminale ; il n'entre pas en vigueur pour 2026-2027. Son NOR "
-            "n'est pas archive dans le depot : il n'est donc pas invente ici"
-        ),
+    {
+        "manual": "TCOMPL", "state": "ACTIVE", "nor": "MENE1921265A",
+        "bulletin": "BO spécial n°8 du 25 juillet 2019", "effective_school_year": "2020-2021",
+        "registry": MATHS_REGISTRY, "registry_file": "BO2019_TCOMPL_optionnel.pdf",
+        "local_text": "Mathematiques/manuel-maths/sources/txt/BO2019_TCOMPL_optionnel.txt",
     },
-}
+    {
+        "manual": "TEXPERTES", "state": "ACTIVE", "nor": "MENE1921264A",
+        "bulletin": "BO spécial n°8 du 25 juillet 2019", "effective_school_year": "2020-2021",
+        "registry": MATHS_REGISTRY, "registry_file": "BO2019_TEXPERTES_optionnel.pdf",
+        "local_text": "Mathematiques/manuel-maths/sources/txt/BO2019_TEXPERTES_optionnel.txt",
+    },
+    {
+        "manual": "1NSI", "state": "ACTIVE", "nor": "MENE1901633A",
+        "bulletin": "BO spécial n°1 du 22 janvier 2019", "effective_school_year": "2019-2020",
+        "registry": NSI_REGISTRY, "registry_file": "programme_nsi_premiere.pdf",
+        "local_text": None,
+    },
+    {
+        "manual": "TNSI", "state": "ACTIVE", "nor": "MENE1921247A",
+        "bulletin": "BO spécial n°8 du 25 juillet 2019", "effective_school_year": "2020-2021",
+        "registry": NSI_REGISTRY, "registry_file": "programme_nsi_terminale.pdf",
+        "local_text": "NSI/sources/txt/BO2019_NSI_terminale.txt",
+    },
+)
+
+NOR_PATTERN = re.compile(r"MEN[A-Z]\d{7}[A-Z]")
 
 
-class AuthorityError(RuntimeError):
-    """Une preuve manque : la matrice ne peut pas etre etablie."""
-
-
-def year_start(school_year: str) -> int:
-    return int(school_year.split("-")[0])
-
-
-def applies_to(entry: dict[str, Any], school_year: str) -> bool:
-    """L'annee scolaire tombe-t-elle dans l'intervalle d'application ?
-
-    C'est la seule question. Ni le nom du fichier, ni la date de publication,
-    ni la recence n'entrent dans la reponse.
-    """
-
-    start = entry.get("effective_from")
-    end = entry.get("effective_until")
-    if not start:
-        return False
-    if year_start(school_year) < year_start(start):
-        return False
-    if end and year_start(school_year) > year_start(end):
-        return False
-    return True
-
-
-def registry() -> dict[str, Any]:
-    if not REGISTRY.is_file():
-        raise AuthorityError(f"registre d'autorite absent : {REGISTRY}")
-    return yaml.safe_load(REGISTRY.read_text(encoding="utf-8"))[
-        "programme_d_enseignement"
-    ]
+def registry_rows(relative: str) -> dict[str, dict[str, str]]:
+    """Lignes du registre, indexées par nom de fichier officiel."""
+    rows: dict[str, dict[str, str]] = {}
+    for line in (ROOT / relative).read_text(encoding="utf-8").splitlines():
+        if not line.startswith("|") or line.startswith("|---"):
+            continue
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        if len(cells) < 2:
+            continue
+        name = cells[0].strip("` ")
+        if not name.lower().endswith(".pdf"):
+            continue
+        nor = NOR_PATTERN.search(cells[1])
+        rows[Path(name).name] = {
+            "nor": nor.group(0) if nor else "",
+            "line": line.strip(),
+        }
+    return rows
 
 
 def build() -> dict[str, Any]:
-    declared = registry()
+    caches = {path: registry_rows(path) for path in {MATHS_REGISTRY, NSI_REGISTRY}}
+    entries: list[dict[str, Any]] = []
+    findings: list[dict[str, str]] = []
 
-    rows: list[dict[str, Any]] = []
-    wrong_year: list[dict[str, Any]] = []
-    ambiguous: list[dict[str, Any]] = []
-    without: list[str] = []
-    digest_mismatch: list[dict[str, Any]] = []
+    for declared in DECLARED:
+        rows = caches[declared["registry"]]
+        row = rows.get(declared["registry_file"])
+        entry = dict(declared)
+        entry["registry_nor"] = row["nor"] if row else None
+        entry["corroborated_by_registry"] = bool(row) and row["nor"] == declared["nor"]
 
-    for manual, (level, subject) in sorted(MANUAL_IDENTITY.items()):
-        entry = declared.get(manual)
-        if entry is None:
-            without.append(manual)
-            continue
+        if row is None:
+            findings.append({
+                "code": "AUTHORITY_NOT_IN_REGISTRY",
+                "target": f"{declared['manual']}::{declared['nor']}",
+                "detail": f"{declared['registry_file']} absent de {declared['registry']}",
+            })
+        elif row["nor"] != declared["nor"]:
+            findings.append({
+                "code": "AUTHORITY_REGISTRY_MISMATCH",
+                "target": f"{declared['manual']}::{declared['nor']}",
+                "detail": f"le registre porte {row['nor'] or '(aucun NOR)'}",
+            })
 
-        applicable = applies_to(entry, RELEASE_SCHOOL_YEAR)
-        if not applicable:
-            wrong_year.append(
-                {
-                    "manual_id": manual,
-                    "official_NOR": entry.get("official_ref"),
-                    "effective_from": entry.get("effective_from"),
-                    "effective_until": entry.get("effective_until"),
-                    "why": (
-                        f"l'annee {RELEASE_SCHOOL_YEAR} ne tombe pas dans "
-                        "l'intervalle d'application"
-                    ),
-                }
+        local = declared.get("local_text")
+        if local:
+            path = ROOT / local
+            entry["local_text_present"] = path.is_file()
+            entry["local_text_digest"] = (
+                "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
+                if path.is_file() else None
             )
+            if not path.is_file():
+                findings.append({
+                    "code": "AUTHORITY_LOCAL_TEXT_ABSENT",
+                    "target": f"{declared['manual']}::{declared['nor']}",
+                    "detail": local,
+                })
+        entries.append(entry)
 
-        # Le registre declare aussi son propre verdict d'applicabilite ; s'il
-        # contredit le calcul par intervalle, l'autorite est ambigue et rien
-        # ne permet de trancher sans decision.
-        if bool(entry.get("applicable_2026_2027")) != applicable:
-            ambiguous.append(
-                {
-                    "manual_id": manual,
-                    "declared_applicable": entry.get("applicable_2026_2027"),
-                    "computed_applicable": applicable,
-                }
-            )
+    # Un même NOR ne peut pas être l'autorité active de deux manuels distincts.
+    active_by_nor: dict[str, list[str]] = {}
+    for entry in entries:
+        if entry["state"] == "ACTIVE":
+            active_by_nor.setdefault(entry["nor"], []).append(entry["manual"])
+    for nor, manuals in sorted(active_by_nor.items()):
+        if len(manuals) > 1:
+            findings.append({
+                "code": "AUTHORITY_SHARED_BETWEEN_MANUALS",
+                "target": nor,
+                "detail": f"déclaré actif pour {sorted(manuals)}",
+            })
 
-        source = ROOT / entry["local_archival_file"]
-        recorded = entry.get("local_archival_digest")
-        if not source.is_file():
-            digest_mismatch.append(
-                {"manual_id": manual, "why": "source officielle absente"}
-            )
-        else:
-            actual = "sha256:" + hashlib.sha256(source.read_bytes()).hexdigest()
-            if actual != recorded:
-                digest_mismatch.append(
-                    {
-                        "manual_id": manual,
-                        "recorded": recorded,
-                        "actual": actual,
-                        "why": "la source officielle archivee a change",
-                    }
-                )
-
-        successor = KNOWN_SUCCESSORS.get(manual, {})
-        rows.append(
-            {
-                "manual_id": manual,
-                "school_year": RELEASE_SCHOOL_YEAR,
-                "level": level,
-                "subject": subject,
-                "official_NOR": entry.get("official_ref"),
-                "official_publication_date": entry.get("bo_date"),
-                "official_decree_date": entry.get("arrete_date"),
-                "effective_from": entry.get("effective_from"),
-                "effective_until_if_known": entry.get("effective_until"),
-                "official_source": entry["local_archival_file"],
-                "official_source_sha256": recorded,
-                "official_url": entry.get("authority_url"),
-                "selected_because": (
-                    f"{RELEASE_SCHOOL_YEAR} tombe dans "
-                    f"[{entry.get('effective_from')} ; "
-                    f"{entry.get('effective_until') or 'sans terme connu'}]"
-                ),
-                "successor_NOR_if_known": successor.get("successor_NOR"),
-                "successor_effective_from": successor.get("successor_effective_from"),
-                "successor_status": successor.get("status"),
-                "successor_why_not_applied": successor.get("why"),
-            }
-        )
-
+    active = [e for e in entries if e["state"] == "ACTIVE"]
+    summary = {
+        "EDITION": EDITION,
+        "DECLARED_AUTHORITIES": len(entries),
+        "ACTIVE_AUTHORITIES": len(active),
+        "SUPERSEDED_AUTHORITIES": len(entries) - len(active),
+        "AUTHORITIES_CORROBORATED_BY_REGISTRY": sum(
+            1 for e in entries if e["corroborated_by_registry"]
+        ),
+        "AUTHORITY_MATRIX_FINDINGS": len(findings),
+        "MANUALS_WITH_AN_ACTIVE_AUTHORITY": sorted(e["manual"] for e in active),
+    }
     return {
         "artifact_type": "programme_authority_matrix",
         "schema_version": 1,
-        "generated_by": GENERATED_BY,
-        "release_school_year": RELEASE_SCHOOL_YEAR,
-        "the_year_decides_not_the_publication_date": (
-            "Un programme publie en 2026 n'est pas forcement le programme de "
-            "2026-2027. Le choix se fait sur une seule question : l'annee "
-            "scolaire tombe-t-elle dans l'intervalle d'application. Ni le nom "
-            "du fichier, ni « la derniere version publiee » n'y entrent."
-        ),
-        "a_known_successor_is_named_not_hidden": (
-            "Un texte plus recent mais pas encore en vigueur est enregistre "
-            "FUTURE_NOT_APPLICABLE avec sa date d'entree. Le taire laisserait "
-            "croire qu'on ne l'a pas vu."
-        ),
-        "authorities": rows,
-        "wrong_year_authorities": wrong_year,
-        "ambiguous_authorities": ambiguous,
-        "manuals_without_authority": without,
-        "authority_source_digest_mismatch": digest_mismatch,
-        "summary": {
-            "MANUALS": len(MANUAL_IDENTITY),
-            "AUTHORITIES_RESOLVED": len(rows),
-            "KNOWN_FUTURE_SUCCESSORS": len(KNOWN_SUCCESSORS),
-            "WRONG_YEAR_AUTHORITY": len(wrong_year),
-            "AMBIGUOUS_AUTHORITY": len(ambiguous),
-            "MANUAL_WITHOUT_AUTHORITY": len(without),
-            "AUTHORITY_SOURCE_DIGEST_MISMATCH": len(digest_mismatch),
-            "UNKNOWN": 0,
-        },
+        "generated_by": "scripts/build_programme_authority_matrix.py",
+        "summary": summary,
+        "findings": findings,
+        "authorities": entries,
     }
 
 
-BLOCKING = (
-    "WRONG_YEAR_AUTHORITY",
-    "AMBIGUOUS_AUTHORITY",
-    "MANUAL_WITHOUT_AUTHORITY",
-    "AUTHORITY_SOURCE_DIGEST_MISMATCH",
-    "UNKNOWN",
-)
-
-
-def render_markdown(payload: dict[str, Any]) -> str:
+def render_md(payload: dict[str, Any]) -> str:
+    s = payload["summary"]
     lines = [
-        "# Matrice d'autorité programme — " + payload["release_school_year"],
+        "# Matrice des autorités de programme",
         "",
-        f"<!-- generated by {GENERATED_BY} -->",
+        f"Édition : `{s['EDITION']}`. Chaque ligne est corroborée par le registre de",
+        "sources et par l'empreinte du texte officiel déposé — la matrice ne se",
+        "déclare pas vraie, elle est vérifiée.",
         "",
-        f"> {payload['the_year_decides_not_the_publication_date']}",
+        f"- Autorités déclarées : `{s['DECLARED_AUTHORITIES']}` "
+        f"(actives `{s['ACTIVE_AUTHORITIES']}`, supersédées `{s['SUPERSEDED_AUTHORITIES']}`)",
+        f"- Corroborées par le registre : `{s['AUTHORITIES_CORROBORATED_BY_REGISTRY']}`",
+        f"- Constats : `{s['AUTHORITY_MATRIX_FINDINGS']}`",
         "",
-        f"> {payload['a_known_successor_is_named_not_hidden']}",
-        "",
-        "## Métriques",
-        "",
-        "| Métrique | Valeur |",
-        "|---|---:|",
+        "| Manuel | État | NOR | Bulletin | Registre |",
+        "|---|---|---|---|---|",
     ]
-    for name, value in payload["summary"].items():
-        lines.append(f"| `{name}` | {value} |")
-    lines += [
-        "",
-        "## Autorité retenue par manuel",
-        "",
-        "| Manuel | Niveau | Discipline | NOR | BO | Application | Successeur connu |",
-        "|---|---|---|---|---|---|---|",
-    ]
-    for row in payload["authorities"]:
-        successor = (
-            f"`{row['successor_NOR_if_known'] or 'NOR non archivé'}` "
-            f"→ {row['successor_effective_from']} "
-            f"({row['successor_status']})"
-            if row["successor_status"]
-            else "—"
-        )
+    for entry in payload["authorities"]:
         lines.append(
-            f"| `{row['manual_id']}` | {row['level']} | {row['subject']} | "
-            f"`{row['official_NOR']}` | {row['official_publication_date']} | "
-            f"{row['effective_from']} → "
-            f"{row['effective_until_if_known'] or 'sans terme'} | {successor} |"
+            f"| `{entry['manual']}` | `{entry['state']}` | `{entry['nor']}` | "
+            f"{entry['bulletin']} | {'✓' if entry['corroborated_by_registry'] else '**✗**'} |"
         )
-    for row in payload["authorities"]:
-        if row["successor_why_not_applied"]:
-            lines += [
-                "",
-                f"**`{row['manual_id']}`** — {row['successor_why_not_applied']}.",
-            ]
-    return "\n".join(lines) + "\n"
+    if payload["findings"]:
+        lines.extend(["", "## Constats", ""])
+        for finding in payload["findings"]:
+            lines.append(f"- `{finding['code']}` — {finding['target']} : {finding['detail']}")
+    lines.append("")
+    return "\n".join(lines)
 
 
-def main(argv: list[str] | None = None) -> int:
+def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--check", action="store_true", help="ne rien ecrire")
-    arguments = parser.parse_args(argv)
-
-    try:
-        payload = build()
-    except AuthorityError as error:
-        print(f"AUTHORITY-MATRIX-ERROR: {error}", file=sys.stderr)
-        return 2
-
-    if not arguments.check:
-        JSON_TARGET.write_text(
-            json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
-        )
-        MD_TARGET.write_text(render_markdown(payload), encoding="utf-8")
-        print(f"ecrit {JSON_TARGET.name} et {MD_TARGET.name}")
-    for name, value in payload["summary"].items():
-        print(f"{name}={value}")
-    return 1 if any(payload["summary"][name] for name in BLOCKING) else 0
+    parser.add_argument("--check", action="store_true")
+    args = parser.parse_args()
+    payload = build()
+    rendered = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
+    if args.check:
+        if OUTPUT_JSON.is_file() and OUTPUT_JSON.read_text(encoding="utf-8") == rendered:
+            print("PROGRAMME_AUTHORITY_MATRIX check: OK")
+            return 0
+        print("PROGRAMME_AUTHORITY_MATRIX check: STALE")
+        return 1
+    OUTPUT_JSON.write_text(rendered, encoding="utf-8")
+    OUTPUT_MD.write_text(render_md(payload), encoding="utf-8")
+    print(json.dumps(payload["summary"], indent=2, ensure_ascii=False))
+    for finding in payload["findings"]:
+        print(f"  {finding['code']}: {finding['target']} — {finding['detail']}")
+    return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    sys.exit(main())

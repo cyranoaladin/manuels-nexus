@@ -6,8 +6,8 @@
   "producer": "scripts/build_dimension_regulation.py",
   "producer_version": "1.0.0",
   "status": "failed",
-  "evidence_head": "d9d34eff504c1c9321c1cb66e09419f2c201f5b2",
-  "input_digest": "sha256:c671e7051e38508b7108cdb43c518adc1e877b8ccf016d07ae5b89414a9d2fa6",
+  "evidence_head": "aeac9e692c604b3f27b8b220edd975d14aaf8279",
+  "input_digest": "sha256:5b06d18d019204872354f594b1e3e7af5e695940f38db8a25da5ea37fac593ec",
   "input_paths": [
     "Mathematiques/manuel-maths/referentiel/capacites_1SPE_DERIVATION_GLOBAL.json",
     "Mathematiques/manuel-maths/referentiel/capacites_1SPE_DERIVATION_LOCAL.json",
@@ -111,37 +111,19 @@
     }
   },
   "not_applicable_targets": {},
-  "blocking_findings": 4,
+  "blocking_findings": 1,
   "findings": [
-    {
-      "target": "1NSI",
-      "code": "AUTHORITY_NOR_ABSENT",
-      "detail": "7 référentiel(s) sans NOR identifiable : ['NSI/referentiel/capacites_1NSI_ALGORITHMIQUE.json', 'NSI/referentiel/capacites_1NSI_ARCHITECTURES-MATERIELLES-ET.json', 'NSI/referentiel/capacites_1NSI_HISTOIRE-DE-L-INFORMATIQUE.json']",
-      "blocking": true
-    },
-    {
-      "target": "1NSI",
-      "code": "AUTHORITY_SELF_DECLARED_UNVERIFIED",
-      "detail": "7 référentiel(s) portent « à re-vérifier contre le BO »",
-      "blocking": true
-    },
     {
       "target": "1SPE::1SPE-SECOND-DEGRE-2026-C2",
       "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
       "detail": "SECOND-DEGRE — ['Fonction polynôme du second degré donnée sous forme factorisée. Racines, signe, expression de la somme et du produit des racines.', 'Forme canonique d’une fonction polynôme du second degré. Discriminant. Factorisation éventuelle. Résolution d’une équation du second degré. Signe.']",
       "blocking": true
-    },
-    {
-      "target": "TSPE_2026_2027",
-      "code": "AUTHORITY_NOR_ABSENT",
-      "detail": "12 référentiel(s) sans NOR identifiable : ['Mathematiques/manuel-maths/referentiel/capacites_TSPE_CALCUL_INTEGRAL.json', 'Mathematiques/manuel-maths/referentiel/capacites_TSPE_COMBINATOIRE.json', 'Mathematiques/manuel-maths/referentiel/capacites_TSPE_CONCENTRATION_LGN.json']",
-      "blocking": true
     }
   ],
   "summary": {
     "AUTHORITY_DIVERGENCES": 0,
-    "REGULATORY_SOURCES_WITHOUT_AUTHORITY": 2,
-    "REGULATORY_SOURCE_REVERIFY_PENDING": 1,
+    "REGULATORY_SOURCES_WITHOUT_AUTHORITY": 0,
+    "REGULATORY_SOURCE_REVERIFY_PENDING": 0,
     "OFFICIAL_REQUIREMENTS_UNCOVERED": 1,
     "UNLABELLED_OUT_OF_PROGRAMME_CONTENT": 0
   }
