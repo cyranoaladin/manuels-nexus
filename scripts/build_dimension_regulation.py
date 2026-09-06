@@ -116,10 +116,15 @@ def chapter_code_map(chapter_dir: Path) -> dict[str, str]:
         payload = yaml.safe_load(contract.read_text(encoding="utf-8")) or {}
     except yaml.YAMLError:
         return {}
-    mapping: dict[str, str] = {}
+    mapping: dict[str, list[str]] = {}
     for entry in payload.get("capacites") or []:
-        if isinstance(entry, dict) and entry.get("code") and entry.get("ref_capacite"):
-            mapping[str(entry["code"])] = str(entry["ref_capacite"])
+        if not isinstance(entry, dict) or not entry.get("code") or not entry.get("ref_capacite"):
+            continue
+        reference = entry["ref_capacite"]
+        # Un code local peut couvrir plusieurs capacités officielles quand le
+        # programme regroupe ou scinde une rubrique.
+        references = reference if isinstance(reference, list) else [reference]
+        mapping[str(entry["code"])] = [str(r) for r in references]
     return mapping
 
 
@@ -151,10 +156,8 @@ def declared_by_manual() -> dict[str, dict[str, list[str]]]:
                 # par la table du contrat de chapitre.
                 for code in meta.get("capacites_codes") or []:
                     official = (local_map or {}).get(str(code))
-                    if official:
-                        codes[official].append(label)
-                    else:
-                        codes[str(code)].append(label)
+                    for resolved in official or [str(code)]:
+                        codes[resolved].append(label)
         result[manual] = dict(codes)
     return result
 

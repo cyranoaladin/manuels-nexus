@@ -6,8 +6,8 @@
   "producer": "scripts/build_dimension_regulation.py",
   "producer_version": "1.0.0",
   "status": "failed",
-  "evidence_head": "0253c0fcae7bac6d58f5866b3c53f95c889d51f5",
-  "input_digest": "sha256:b1dcc2c9d7abe328e36150306a43854e233ccd5b24fd70f96015382bc3c498cc",
+  "evidence_head": "0e7369b13403ae669a31544162e762954302c0a1",
+  "input_digest": "sha256:e15b08fbbae3c60ffd840ebb8356715e3308b977e7a2c8030d5ed1d78b3251c1",
   "input_paths": [
     "Mathematiques/manuel-maths/referentiel/capacites_1SPE_DERIVATION_GLOBAL.json",
     "Mathematiques/manuel-maths/referentiel/capacites_1SPE_DERIVATION_LOCAL.json",
@@ -79,9 +79,9 @@
         "unlabelled_out_of_programme": 0
       },
       "1SPE": {
-        "official_capacities": 53,
-        "covered": 53,
-        "uncovered": 0,
+        "official_capacities": 52,
+        "covered": 51,
+        "uncovered": 1,
         "unlabelled_out_of_programme": 0
       },
       "TCOMPL": {
@@ -128,19 +128,19 @@
     {
       "target": "1SPE",
       "code": "AUTHORITY_NOR_ABSENT",
-      "detail": "9 référentiel(s) sans NOR identifiable : ['Mathematiques/manuel-maths/referentiel/capacites_1SPE_DERIVATION_GLOBAL.json', 'Mathematiques/manuel-maths/referentiel/capacites_1SPE_DERIVATION_LOCAL.json', 'Mathematiques/manuel-maths/referentiel/capacites_1SPE_EXPONENTIELLE.json']",
-      "blocking": true
-    },
-    {
-      "target": "1SPE",
-      "code": "PROGRAMME_AUTHORITY_DIVERGENCE",
-      "detail": "deux programmes différents cités dans un même niveau : BO n°1 du 22 janvier 2019 -> ['capacites_1SPE_SECOND_DEGRE.json']; BO n°14 du 2 avril 2026 -> ['capacites_1SPE_DERIVATION_GLOBAL.json', 'capacites_1SPE_DERIVATION_LOCAL.json', 'capacites_1SPE_EXPONENTIELLE.json', 'capacites_1SPE_GEOMETRIE_REPEREE.json', 'capacites_1SPE_PROBA_COND.json', 'capacites_1SPE_PRODUIT_SCALAIRE.json', 'capacites_1SPE_TRIGONOMETRIE.json', 'capacites_1SPE_VARIABLES_ALEATOIRES.json']",
+      "detail": "8 référentiel(s) sans NOR identifiable : ['Mathematiques/manuel-maths/referentiel/capacites_1SPE_DERIVATION_GLOBAL.json', 'Mathematiques/manuel-maths/referentiel/capacites_1SPE_DERIVATION_LOCAL.json', 'Mathematiques/manuel-maths/referentiel/capacites_1SPE_EXPONENTIELLE.json']",
       "blocking": true
     },
     {
       "target": "1SPE",
       "code": "PROGRAMME_ISSUE_UNIDENTIFIABLE",
       "detail": "1 référentiel(s) sans bulletin identifiable : ['Mathematiques/manuel-maths/referentiel/capacites_1SPE_SUITES.json']",
+      "blocking": true
+    },
+    {
+      "target": "1SPE::1SPE-SECOND-DEGRE-2026-C2",
+      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
+      "detail": "SECOND-DEGRE — ['Fonction polynôme du second degré donnée sous forme factorisée. Racines, signe, expression de la somme et du produit des racines.', 'Forme canonique d’une fonction polynôme du second degré. Discriminant. Factorisation éventuelle. Résolution d’une équation du second degré. Signe.']",
       "blocking": true
     },
     {
@@ -151,10 +151,10 @@
     }
   ],
   "summary": {
-    "AUTHORITY_DIVERGENCES": 1,
+    "AUTHORITY_DIVERGENCES": 0,
     "REGULATORY_SOURCES_WITHOUT_AUTHORITY": 4,
     "REGULATORY_SOURCE_REVERIFY_PENDING": 1,
-    "OFFICIAL_REQUIREMENTS_UNCOVERED": 0,
+    "OFFICIAL_REQUIREMENTS_UNCOVERED": 1,
     "UNLABELLED_OUT_OF_PROGRAMME_CONTENT": 0
   }
 }

@@ -5,12 +5,19 @@ titre: "Fonctions polynômes du second degré"
 statut: draft
 
 capacites:
-  - { code: C1, ref_capacite: 1SPE-SECOND-DEGRE-C1, libelle_eleve: "Je sais reconnaitre un polynome du second degre et passer d'une forme a une autre." }
-  - { code: C2, ref_capacite: 1SPE-SECOND-DEGRE-C2, libelle_eleve: "Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations." }
-  - { code: C3, ref_capacite: 1SPE-SECOND-DEGRE-C3, libelle_eleve: "Je sais calculer le discriminant et resoudre une equation du second degre." }
-  - { code: C4, ref_capacite: 1SPE-SECOND-DEGRE-C4, libelle_eleve: "Je sais factoriser un trinome et etudier son signe." }
-  - { code: C5, ref_capacite: 1SPE-SECOND-DEGRE-C5, libelle_eleve: "Je sais resoudre une inequation du second degre." }
-  - { code: C6, ref_capacite: 1SPE-SECOND-DEGRE-C6, libelle_eleve: "Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum." }
+  # Autorité 2026 (MENE2602917A, BO n°14 du 2 avril 2026). Le programme 2026
+  # énonce quatre capacités attendues là où 2019 en portait six : plusieurs
+  # codes locaux pointent donc vers la même capacité officielle, et un code
+  # peut en couvrir deux. Voir audit/1SPE_SECOND_DEGRE_REFERENTIAL_DIFF.md.
+  - { code: C1, ref_capacite: 1SPE-SECOND-DEGRE-2026-C4, libelle_eleve: "Je sais reconnaitre un polynome du second degre et passer d'une forme a une autre." }
+  - { code: C2, ref_capacite: 1SPE-SECOND-DEGRE-2026-C4, libelle_eleve: "Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations." }
+  - { code: C3, ref_capacite: 1SPE-SECOND-DEGRE-2026-D1, libelle_eleve: "Je sais calculer le discriminant et resoudre une equation du second degre." }
+  - { code: C4, ref_capacite: [1SPE-SECOND-DEGRE-2026-C1, 1SPE-SECOND-DEGRE-2026-C3], libelle_eleve: "Je sais factoriser un trinome et etudier son signe." }
+  - { code: C5, ref_capacite: 1SPE-SECOND-DEGRE-2026-C4, libelle_eleve: "Je sais resoudre une inequation du second degre." }
+  - { code: C6, ref_capacite: 1SPE-SECOND-DEGRE-2026-C4, libelle_eleve: "Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum." }
+  # Exigence nouvelle du programme 2026, sans equivalent en 2019. Aucun objet
+  # ne la porte encore : la couverture doit donc la signaler comme manquante.
+  - { code: C7, ref_capacite: 1SPE-SECOND-DEGRE-2026-C2, libelle_eleve: "Je sais determiner les fonctions polynomes du second degre s'annulant en deux nombres reels distincts, en utilisant la somme et le produit des racines." }
 
 prerequis:
   - { code: R1, libelle: "Calcul litteral : developper, factoriser, identites remarquables", chapitre_origine: "2GT" }

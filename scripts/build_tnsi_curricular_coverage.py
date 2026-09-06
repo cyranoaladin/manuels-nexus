@@ -78,11 +78,14 @@ def chapter_code_map(chapter_dir: Path) -> dict[str, str]:
         payload = yaml.safe_load(contract.read_text(encoding="utf-8")) or {}
     except yaml.YAMLError:
         return {}
-    return {
-        str(entry["code"]): str(entry["ref_capacite"])
-        for entry in payload.get("capacites") or []
-        if isinstance(entry, dict) and entry.get("code") and entry.get("ref_capacite")
-    }
+    mapping: dict[str, list[str]] = {}
+    for entry in payload.get("capacites") or []:
+        if not isinstance(entry, dict) or not entry.get("code") or not entry.get("ref_capacite"):
+            continue
+        reference = entry["ref_capacite"]
+        references = reference if isinstance(reference, list) else [reference]
+        mapping[str(entry["code"])] = [str(r) for r in references]
+    return mapping
 
 
 def declared_capacities() -> tuple[dict[str, set[str]], Counter]:
@@ -104,8 +107,7 @@ def declared_capacities() -> tuple[dict[str, set[str]], Counter]:
             meta = json.loads(first[len("% META:"):])
             resolved = set(meta.get("capacites") or [])
             for code in meta.get("capacites_codes") or []:
-                official = (local_map or {}).get(str(code))
-                if official:
+                for official in (local_map or {}).get(str(code)) or []:
                     resolved.add(official)
             for capacity in resolved:
                 per_chapter[chapter].add(capacity)

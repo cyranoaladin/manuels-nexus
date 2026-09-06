@@ -1,45 +1,70 @@
 {
   "niveau": "1SPE",
   "theme": "SECOND-DEGRE",
-  "bo_reference": "Programme de specialite mathematiques de premiere generale, BO special n1 du 22 janvier 2019 — Algebre / Second degre",
-  "note": "Formulations libelle_bo a re-verifier mot a mot contre le B.O. en vigueur avant publication (regle R7).",
+  "bo_reference": "Programme d'enseignement de spécialité de mathématiques de la classe de première de la voie générale, BO n°14 du 2 avril 2026, arrêté MENE2602917A, algèbre : Équations, fonctions polynômes du second degré (application à la rentrée 2026-2027).",
+  "authority": {
+    "nor": "MENE2602917A",
+    "bulletin": "BO n°14 du 2 avril 2026",
+    "effective_school_year": "2026-2027",
+    "source_path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+    "source_digest": "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
+    "derived_by": "scripts/derive_1spe_referential_2026.py"
+  },
   "capacites": [
     {
-      "id": "1SPE-SECOND-DEGRE-C1",
-      "libelle_bo": "Determiner les fonctions polynomes du second degre definies sur R. Reconnaitre la forme developpee, factorisee et canonique.",
-      "libelle_eleve": "Je sais reconnaitre un polynome du second degre et passer d'une forme a une autre (developpee, factorisee, canonique).",
-      "demonstration_exigible": false
+      "id": "1SPE-SECOND-DEGRE-2026-C1",
+      "libelle_bo": "Étudier le signe d’une fonction polynôme du second degré donnée sous forme factorisée.",
+      "contenu_bo": [
+        "Fonction polynôme du second degré donnée sous forme factorisée. Racines, signe, expression de la somme et du produit des racines.",
+        "Forme canonique d’une fonction polynôme du second degré. Discriminant. Factorisation éventuelle. Résolution d’une équation du second degré. Signe."
+      ],
+      "demonstration_exigible": false,
+      "source_anchor": "Équations, fonctions polynômes du second degré / Capacités attendues / puce 1",
+      "source_digest": "sha256:d66fdc8fcc313718f1f862e8c0b26ecc32d2a658a4f1b79952c40a7ecbeb6b0e"
     },
     {
-      "id": "1SPE-SECOND-DEGRE-C2",
-      "libelle_bo": "Determiner l'axe de symetrie et le sommet de la parabole. Dresser le tableau de variations de la fonction polynome du second degre.",
-      "libelle_eleve": "Je sais determiner le sommet et l'axe de symetrie d'une parabole, et dresser le tableau de variations.",
-      "demonstration_exigible": false
+      "id": "1SPE-SECOND-DEGRE-2026-C2",
+      "libelle_bo": "Déterminer les fonctions polynômes du second degré s’annulant en deux nombres réels distincts.",
+      "contenu_bo": [
+        "Fonction polynôme du second degré donnée sous forme factorisée. Racines, signe, expression de la somme et du produit des racines.",
+        "Forme canonique d’une fonction polynôme du second degré. Discriminant. Factorisation éventuelle. Résolution d’une équation du second degré. Signe."
+      ],
+      "demonstration_exigible": false,
+      "source_anchor": "Équations, fonctions polynômes du second degré / Capacités attendues / puce 2",
+      "source_digest": "sha256:f5024521d8cf28981a1dd231ad50320cccbf6a28b4cd803b090bcf3914858d97"
     },
     {
-      "id": "1SPE-SECOND-DEGRE-C3",
-      "libelle_bo": "Calculer le discriminant d'une equation du second degre. Determiner les solutions reelles selon le signe du discriminant.",
-      "libelle_eleve": "Je sais calculer le discriminant et resoudre une equation du second degre.",
+      "id": "1SPE-SECOND-DEGRE-2026-C3",
+      "libelle_bo": "Factoriser une fonction polynôme du second degré, en diversifiant les stratégies : racine évidente, détection des racines par leur somme et leur produit, identité remarquable, application des formules générales.",
+      "contenu_bo": [
+        "Fonction polynôme du second degré donnée sous forme factorisée. Racines, signe, expression de la somme et du produit des racines.",
+        "Forme canonique d’une fonction polynôme du second degré. Discriminant. Factorisation éventuelle. Résolution d’une équation du second degré. Signe."
+      ],
+      "demonstration_exigible": false,
+      "source_anchor": "Équations, fonctions polynômes du second degré / Capacités attendues / puce 3",
+      "source_digest": "sha256:cc541713a05db5fc7661259fa368f9cd622f9f8cce9363a6b462f2699e622077"
+    },
+    {
+      "id": "1SPE-SECOND-DEGRE-2026-C4",
+      "libelle_bo": "Choisir une forme adaptée (développée réduite, canonique, factorisée) d’une fonction polynôme du second degré dans le cadre de la résolution d’un problème (équation, inéquation, optimisation, variations).",
+      "contenu_bo": [
+        "Fonction polynôme du second degré donnée sous forme factorisée. Racines, signe, expression de la somme et du produit des racines.",
+        "Forme canonique d’une fonction polynôme du second degré. Discriminant. Factorisation éventuelle. Résolution d’une équation du second degré. Signe."
+      ],
+      "demonstration_exigible": false,
+      "source_anchor": "Équations, fonctions polynômes du second degré / Capacités attendues / puce 4",
+      "source_digest": "sha256:aafaf5437e0e81f68e94e36cbd07c36decbc745bf39fd0643e5b929cb044ffee"
+    },
+    {
+      "id": "1SPE-SECOND-DEGRE-2026-D1",
+      "libelle_bo": "Résolution de l’équation du second degré.",
+      "contenu_bo": [
+        "Fonction polynôme du second degré donnée sous forme factorisée. Racines, signe, expression de la somme et du produit des racines.",
+        "Forme canonique d’une fonction polynôme du second degré. Discriminant. Factorisation éventuelle. Résolution d’une équation du second degré. Signe."
+      ],
       "demonstration_exigible": true,
-      "demonstration": "Etablissement des formules donnant les solutions d'une equation du second degre."
-    },
-    {
-      "id": "1SPE-SECOND-DEGRE-C4",
-      "libelle_bo": "Factoriser, si possible, un polynome du second degre. Determiner le signe d'un polynome du second degre a partir de ses racines ou du discriminant.",
-      "libelle_eleve": "Je sais factoriser un trinome et etudier son signe.",
-      "demonstration_exigible": false
-    },
-    {
-      "id": "1SPE-SECOND-DEGRE-C5",
-      "libelle_bo": "Resoudre une inequation du second degre. Resoudre une equation ou inequation se ramenant au second degre.",
-      "libelle_eleve": "Je sais resoudre une inequation du second degre et les equations/inequations s'y ramenant.",
-      "demonstration_exigible": false
-    },
-    {
-      "id": "1SPE-SECOND-DEGRE-C6",
-      "libelle_bo": "Modeliser un probleme a l'aide d'une fonction polynome du second degre. Problemes d'optimisation.",
-      "libelle_eleve": "Je sais modeliser un probleme concret par un polynome du second degre et determiner un optimum.",
-      "demonstration_exigible": false
+      "source_anchor": "Équations, fonctions polynômes du second degré / Démonstration / puce 1",
+      "source_digest": "sha256:3e985e9a7be9c3f596691e35fa36daad5e11eb644f4022864824e752627a9c27"
     }
   ]
 }

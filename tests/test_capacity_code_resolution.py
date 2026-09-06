@@ -26,10 +26,23 @@ CHAPTER = ROOT / "NSI/chapitres/TNSI-STRUCTURES-DONNEES"
 @pytest.mark.parametrize("module", [regulation, tnsi], ids=["regulation", "tnsi"])
 def test_chapter_contract_maps_local_codes_to_official_capacities(module) -> None:
     mapping = module.chapter_code_map(CHAPTER)
-    assert mapping["C1"] == "T-STRUCT-01A"
-    assert mapping["C2"] == "T-STRUCT-01B"
-    assert mapping["C3"] == "T-STRUCT-01C"
-    assert mapping["C8"] == "T-STRUCT-03C"
+    assert mapping["C1"] == ["T-STRUCT-01A"]
+    assert mapping["C2"] == ["T-STRUCT-01B"]
+    assert mapping["C3"] == ["T-STRUCT-01C"]
+    assert mapping["C8"] == ["T-STRUCT-03C"]
+
+
+@pytest.mark.parametrize("module", [regulation, tnsi], ids=["regulation", "tnsi"])
+def test_a_local_code_may_cover_several_official_capacities(module) -> None:
+    """Le programme 2026 scinde le second degré : un code local en couvre deux."""
+    mapping = module.chapter_code_map(
+        ROOT / "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE"
+    )
+    assert mapping["C4"] == [
+        "1SPE-SECOND-DEGRE-2026-C1",
+        "1SPE-SECOND-DEGRE-2026-C3",
+    ]
+    assert mapping["C3"] == ["1SPE-SECOND-DEGRE-2026-D1"]
 
 
 @pytest.mark.parametrize("module", [regulation, tnsi], ids=["regulation", "tnsi"])
