@@ -6,7 +6,7 @@
   "producer": "scripts/build_dimension_regulation.py",
   "producer_version": "1.0.0",
   "status": "failed",
-  "evidence_head": "58f23b71e23ab98a4f1f88e967d286a146cf4845",
+  "evidence_head": "a0db18ad08b44ded8cf82e2c4c0f12d70d3ef32f",
   "input_digest": "sha256:b1dcc2c9d7abe328e36150306a43854e233ccd5b24fd70f96015382bc3c498cc",
   "coverage": {
     "targets_examined": [
@@ -44,8 +44,8 @@
       },
       "TNSI": {
         "official_capacities": 61,
-        "covered": 51,
-        "uncovered": 10,
+        "covered": 61,
+        "uncovered": 0,
         "unlabelled_out_of_programme": 0
       },
       "TSPE_2026_2027": {
@@ -57,7 +57,7 @@
     }
   },
   "not_applicable_targets": {},
-  "blocking_findings": 17,
+  "blocking_findings": 7,
   "findings": [
     {
       "target": "1NSI",
@@ -96,66 +96,6 @@
       "blocking": true
     },
     {
-      "target": "TNSI::T-ALGO-01D",
-      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
-      "detail": "ALGORITHMIQUE — Parcours largeur d'arbre",
-      "blocking": true
-    },
-    {
-      "target": "TNSI::T-ALGO-02B",
-      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
-      "detail": "ALGORITHMIQUE — Parcours en profondeur d'un graphe",
-      "blocking": true
-    },
-    {
-      "target": "TNSI::T-ALGO-05",
-      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
-      "detail": "ALGORITHMIQUE — Recherche textuelle",
-      "blocking": true
-    },
-    {
-      "target": "TNSI::T-BDD-01B",
-      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
-      "detail": "BASES-DE-DONNEES — Structure et contenu",
-      "blocking": true
-    },
-    {
-      "target": "TNSI::T-BDD-03A",
-      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
-      "detail": "BASES-DE-DONNEES — Composants d'une requête SQL",
-      "blocking": true
-    },
-    {
-      "target": "TNSI::T-LANG-01B",
-      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
-      "detail": "LANGAGES-ET-PROGRAMMATION — Calculabilité indépendante du langage",
-      "blocking": true
-    },
-    {
-      "target": "TNSI::T-STRUCT-01A",
-      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
-      "detail": "STRUCTURES-DE-DONNEES — Interface d'une structure de données",
-      "blocking": true
-    },
-    {
-      "target": "TNSI::T-STRUCT-01B",
-      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
-      "detail": "STRUCTURES-DE-DONNEES — Interface et implémentation",
-      "blocking": true
-    },
-    {
-      "target": "TNSI::T-STRUCT-01C",
-      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
-      "detail": "STRUCTURES-DE-DONNEES — Implémentations multiples",
-      "blocking": true
-    },
-    {
-      "target": "TNSI::T-STRUCT-03C",
-      "code": "OFFICIAL_REQUIREMENT_UNCOVERED",
-      "detail": "STRUCTURES-DE-DONNEES — Liste et dictionnaire",
-      "blocking": true
-    },
-    {
       "target": "TSPE_2026_2027",
       "code": "AUTHORITY_NOR_ABSENT",
       "detail": "12 référentiel(s) sans NOR identifiable : ['Mathematiques/manuel-maths/referentiel/capacites_TSPE_CALCUL_INTEGRAL.json', 'Mathematiques/manuel-maths/referentiel/capacites_TSPE_COMBINATOIRE.json', 'Mathematiques/manuel-maths/referentiel/capacites_TSPE_CONCENTRATION_LGN.json']",
@@ -166,7 +106,7 @@
     "WRONG_YEAR_AUTHORITY": 3,
     "AUTHORITY_NOR_ABSENT": 3,
     "AUTHORITY_SELF_DECLARED_UNVERIFIED": 1,
-    "OFFICIAL_REQUIREMENTS_UNCOVERED": 10,
+    "OFFICIAL_REQUIREMENTS_UNCOVERED": 0,
     "UNLABELLED_OUT_OF_PROGRAMME_CONTENT": 0
   }
 }

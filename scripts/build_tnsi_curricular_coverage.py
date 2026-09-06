@@ -29,6 +29,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
+import yaml
+
 ROOT = Path(__file__).resolve().parents[1]
 REFERENTIAL = ROOT / "NSI/referentiel"
 INVENTORY = ROOT / "audit/INVENTAIRE_COLLECTION.json"
@@ -62,21 +64,50 @@ def official_capacities() -> dict[str, dict[str, Any]]:
     return capacities
 
 
+def chapter_code_map(chapter_dir: Path) -> dict[str, str]:
+    """Codes locaux du chapitre vers capacités officielles, via `contrat.yaml`.
+
+    Les objets de cours ne portent souvent que `capacites_codes: [C1, C2]` ;
+    la correspondance vers `T-STRUCT-01A` vit dans le contrat de chapitre.
+    Ne pas la suivre ferait passer pour absentes des capacités enseignées.
+    """
+    contract = chapter_dir / "contrat.yaml"
+    if not contract.is_file():
+        return {}
+    try:
+        payload = yaml.safe_load(contract.read_text(encoding="utf-8")) or {}
+    except yaml.YAMLError:
+        return {}
+    return {
+        str(entry["code"]): str(entry["ref_capacite"])
+        for entry in payload.get("capacites") or []
+        if isinstance(entry, dict) and entry.get("code") and entry.get("ref_capacite")
+    }
+
+
 def declared_capacities() -> tuple[dict[str, set[str]], Counter]:
     inventory = json.loads(INVENTORY.read_text(encoding="utf-8"))
     chapters = inventory["manuals"]["TNSI"]["chapters"]
     per_chapter: dict[str, set[str]] = defaultdict(set)
     occurrences: Counter = Counter()
     for chapter, value in chapters.items():
+        local_map: dict[str, str] | None = None
         for obj in value.get("objects", []):
             path = ROOT / obj["path"]
             if not path.is_file():
                 continue
+            if local_map is None:
+                local_map = chapter_code_map(path.parent.parent)
             first = path.read_text(encoding="utf-8", errors="replace").split("\n", 1)[0]
             if not first.startswith("% META:"):
                 continue
             meta = json.loads(first[len("% META:"):])
-            for capacity in meta.get("capacites") or []:
+            resolved = set(meta.get("capacites") or [])
+            for code in meta.get("capacites_codes") or []:
+                official = (local_map or {}).get(str(code))
+                if official:
+                    resolved.add(official)
+            for capacity in resolved:
                 per_chapter[chapter].add(capacity)
                 occurrences[capacity] += 1
     return per_chapter, occurrences

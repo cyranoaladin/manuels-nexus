@@ -27,6 +27,8 @@ import json
 import re
 import sys
 from collections import defaultdict
+
+import yaml
 from pathlib import Path
 from typing import Any
 
@@ -77,16 +79,41 @@ def load_referentials() -> tuple[dict[str, dict[str, Any]], dict[str, list[dict[
     return capacities, authorities
 
 
+def chapter_code_map(chapter_dir: Path) -> dict[str, str]:
+    """Traduction des codes locaux d'un chapitre vers les capacités officielles.
+
+    Chaque `contrat.yaml` déclare `- {code: C1, ref_capacite: T-STRUCT-01A, …}`.
+    Les objets ne portent souvent que le code local dans `capacites_codes` ;
+    ignorer cette table reviendrait à déclarer non couvertes des capacités que
+    le manuel enseigne réellement.
+    """
+    contract = chapter_dir / "contrat.yaml"
+    if not contract.is_file():
+        return {}
+    try:
+        payload = yaml.safe_load(contract.read_text(encoding="utf-8")) or {}
+    except yaml.YAMLError:
+        return {}
+    mapping: dict[str, str] = {}
+    for entry in payload.get("capacites") or []:
+        if isinstance(entry, dict) and entry.get("code") and entry.get("ref_capacite"):
+            mapping[str(entry["code"])] = str(entry["ref_capacite"])
+    return mapping
+
+
 def declared_by_manual() -> dict[str, dict[str, list[str]]]:
     inventory = json.loads((ROOT / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8"))
     result: dict[str, dict[str, list[str]]] = {}
     for manual, mval in inventory.get("manuals", {}).items():
         codes: dict[str, list[str]] = defaultdict(list)
         for chapter, cval in mval.get("chapters", {}).items():
+            local_map: dict[str, str] | None = None
             for obj in cval.get("objects", []):
                 path = ROOT / obj["path"]
                 if not path.is_file():
                     continue
+                if local_map is None:
+                    local_map = chapter_code_map(path.parent.parent)
                 first = path.read_text(encoding="utf-8", errors="replace").split("\n", 1)[0]
                 if not first.startswith("% META:"):
                     continue
@@ -95,8 +122,17 @@ def declared_by_manual() -> dict[str, dict[str, list[str]]]:
                     meta.get("programme_alignment") == "OPTIONAL_EXTENSION"
                     or bool(meta.get("extension_codes"))
                 )
+                label = f"{obj['id']}|{'EXT' if extension else 'STD'}"
                 for code in meta.get("capacites") or []:
-                    codes[code].append(f"{obj['id']}|{'EXT' if extension else 'STD'}")
+                    codes[code].append(label)
+                # Un objet peut ne porter que ses codes locaux : on les résout
+                # par la table du contrat de chapitre.
+                for code in meta.get("capacites_codes") or []:
+                    official = (local_map or {}).get(str(code))
+                    if official:
+                        codes[official].append(label)
+                    else:
+                        codes[str(code)].append(label)
         result[manual] = dict(codes)
     return result
 
