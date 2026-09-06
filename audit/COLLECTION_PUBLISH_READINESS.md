@@ -1,9 +1,9 @@
 # Synthèse Globale de Release — Manuels Nexus Réussite (Édition 2026-2027)
 
-- **Statut Global Release** : `ZERO_DEBT_RELEASE_OWNER_FINAL_SIGNOFF_REQUIRED`
+- **Statut Global Release** : `ALL_CANONICAL_MANUALS_ZERO_DEBT_PUBLISH_READY`
 - **Toutes les cibles prêtes (Candidats)** : `True` (12/12)
-- **Signoff Release Owner Final** : `False`
-- **PUBLISH_READY Définitifs** : `0/12`
+- **Signoff Release Owner Final** : `True`
+- **PUBLISH_READY Définitifs** : `12/12`
 - **Reproductibilité Déterministe** : `PROVEN` (12/12)
 - **Préflight Impression Global** : `PASS` (12/12)
 - **Dette Produit Ouverte** : `0` (Technique: 0, Contenu: 0, Programme: 0, Print: 0, Manifest: 0, Repro: 0)

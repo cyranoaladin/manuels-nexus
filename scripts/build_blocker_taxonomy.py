@@ -24,26 +24,53 @@ OUTPUT_MD = ROOT / "audit/BLOCKER_TAXONOMY.md"
 
 
 def build_taxonomy() -> dict[str, Any]:
-    blockers = [
-        {
-            "id": "BLK-GOV-001",
-            "taxonomy": "GOVERNANCE_BLOCKER",
-            "title": "Décision humaine unique du Release Owner",
-            "description": "L'approbation formelle de la collection nécessite la signature humaine unique sur le RELEASE_OWNER_BATCH_ACCEPTANCE_PACKET gelé.",
-            "status": "OPEN_AWAITING_HUMAN_DECISION",
-            "target": "RELEASE_OWNER_BATCH_ACCEPTANCE_PACKET",
-            "p0_product_debt": False,
-        },
-        {
-            "id": "BLK-POL-001",
-            "taxonomy": "RELEASE_POLICY_BLOCKER",
-            "title": "Garde-fou de non-promotion prématurée des PDF candidats",
-            "description": "Les 12 PDF candidats certifiés restent cantonnés dans build/certified_unsigned_release_candidates/ tant que le signoff humain n'a pas été accordé.",
-            "status": "OPEN_ENFORCING_INTEGRITY",
-            "target": "MANUELS_PDF_PUBLICATION",
-            "p0_product_debt": False,
-        }
-    ]
+    receipt_file = ROOT / "audit/RELEASE_OWNER_DECISION_RECEIPT.json"
+    gov_resolved = False
+    pol_resolved = False
+    if receipt_file.is_file():
+        receipt_data = json.loads(receipt_file.read_text(encoding="utf-8"))
+        if (
+            receipt_data.get("decision") == "ACCEPT_FROZEN_RELEASE_CONTENT"
+            and (
+                receipt_data.get("reviewer_identity") == "abenrhouma"
+                or receipt_data.get("release_owner_identity") == "abenrhouma"
+            )
+            and receipt_data.get("content_source_closure_digest")
+            == "sha256:9b3ccf9a81c5520fbb7e03b7b2d3e7bf2057a02834b6d908bf3be5f49f3b553f"
+        ):
+            gov_resolved = True
+            pol_resolved = True
+
+    blockers: list[dict[str, Any]] = []
+    resolved_blockers: list[dict[str, Any]] = []
+
+    gov_item = {
+        "id": "BLK-GOV-001",
+        "taxonomy": "GOVERNANCE_BLOCKER",
+        "title": "Décision humaine unique du Release Owner",
+        "description": "L'approbation formelle de la collection nécessite la signature humaine unique sur le RELEASE_OWNER_BATCH_ACCEPTANCE_PACKET gelé.",
+        "status": "RESOLVED_ACCEPTED_BY_RELEASE_OWNER" if gov_resolved else "OPEN_AWAITING_HUMAN_DECISION",
+        "target": "RELEASE_OWNER_BATCH_ACCEPTANCE_PACKET",
+        "p0_product_debt": False,
+    }
+    if gov_resolved:
+        resolved_blockers.append(gov_item)
+    else:
+        blockers.append(gov_item)
+
+    pol_item = {
+        "id": "BLK-POL-001",
+        "taxonomy": "RELEASE_POLICY_BLOCKER",
+        "title": "Garde-fou de non-promotion prématurée des PDF candidats",
+        "description": "Les 12 PDF candidats certifiés restent cantonnés dans build/certified_unsigned_release_candidates/ tant que le signoff humain n'a pas été accordé.",
+        "status": "RESOLVED_PROMOTION_AUTHORIZED" if pol_resolved else "OPEN_ENFORCING_INTEGRITY",
+        "target": "MANUELS_PDF_PUBLICATION",
+        "p0_product_debt": False,
+    }
+    if pol_resolved:
+        resolved_blockers.append(pol_item)
+    else:
+        blockers.append(pol_item)
 
     # Verify no unclassified or conflicting blockers
     valid_taxonomies = {
@@ -71,7 +98,11 @@ def build_taxonomy() -> dict[str, Any]:
         "BLOCKER_CLASSIFICATION_CONFLICTS": 0,
         "UNCLASSIFIED_BLOCKERS": len(unclassified),
         "ALL_PRODUCT_DEBTS_ZERO": (p0_count == 0 and p1_count == 0 and p2_count == 0),
-        "RELEASE_READINESS_STATE": "AWAITING_SINGLE_HUMAN_RELEASE_DECISION",
+        "RELEASE_READINESS_STATE": (
+            "ALL_CANONICAL_MANUALS_ZERO_DEBT_PUBLISH_READY"
+            if len(blockers) == 0
+            else "AWAITING_SINGLE_HUMAN_RELEASE_DECISION"
+        ),
     }
 
     return {
@@ -80,6 +111,7 @@ def build_taxonomy() -> dict[str, Any]:
         "generated_by": "scripts/build_blocker_taxonomy.py",
         "summary": summary,
         "blockers": blockers,
+        "resolved_blockers": resolved_blockers,
     }
 
 
@@ -111,15 +143,32 @@ def main() -> int:
         "| ID | Taxonomie | Titre | Statut | Cible |",
         "|---|---|---|---|---|",
     ]
-    for b in payload["blockers"]:
-        lines.append(
-            f"| `{b['id']}` | `{b['taxonomy']}` | {b['title']} | `{b['status']}` | `{b['target']}` |"
-        )
+    if payload["blockers"]:
+        for b in payload["blockers"]:
+            lines.append(
+                f"| `{b['id']}` | `{b['taxonomy']}` | {b['title']} | `{b['status']}` | `{b['target']}` |"
+            )
+    else:
+        lines.append("| *(aucun)* | - | Aucun bloqueur actif résiduel | `RESOLVED` | - |")
+
+    if payload.get("resolved_blockers"):
+        lines.extend([
+            "",
+            "## Bloqueurs Résolus Formellement",
+            "",
+            "| ID | Taxonomie | Titre | Statut | Cible |",
+            "|---|---|---|---|---|",
+        ])
+        for b in payload["resolved_blockers"]:
+            lines.append(
+                f"| `{b['id']}` | `{b['taxonomy']}` | {b['title']} | `{b['status']}` | `{b['target']}` |"
+            )
+
     lines.extend([
         "",
         "## Conclusion",
         "Toutes les dettes techniques, scientifiques et didactiques de niveau P0, P1 et P2 sont à ZÉRO.",
-        "Seuls subsistent les deux garde-fous de politique et de gouvernance garantissant l'intégrité de la décision humaine.",
+        "Tous les bloqueurs de politique et de gouvernance ont été formellement levés par la décision du Release Owner.",
         "",
     ])
     md_rendered = "\n".join(lines)
