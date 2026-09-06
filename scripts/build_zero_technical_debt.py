@@ -19,9 +19,13 @@ import json
 import re
 import sys
 from pathlib import Path
+from collections.abc import Mapping
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
+
+#: La collection publie 6 manuels en deux variantes.
+CANONICAL_TARGETS = 12
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
@@ -60,44 +64,97 @@ def audit_technical_debt(root: Path) -> dict[str, Any]:
 
     technical_debt_open = len(residual_files) + len(code_markers)
 
+    # Une preuve absente n'est pas une preuve de zero : elle est comptee comme
+    # dette. C'est la regression qui a laisse passer CONTENT_DEBT_OPEN = 0 alors
+    # que le rapport de parite n'existait pas, et PROGRAMME_DEBT_OPEN = 0 alors
+    # que les cles etaient lues au mauvais niveau de l'enveloppe.
+    missing_evidence: list[str] = []
+
+    def _load_evidence(rel: str) -> dict[str, Any] | None:
+        path = root / rel
+        if not path.is_file():
+            missing_evidence.append(rel)
+            return None
+        return json.loads(path.read_text(encoding="utf-8"))
+
+    def _required(payload: Mapping[str, Any], rel: str, key: str) -> int:
+        section = payload.get("summary", payload)
+        if key not in section:
+            missing_evidence.append(f"{rel}#{key}")
+            return 0
+        return int(section[key])
+
     # 3. Content Debt
-    parity_report_path = root / "audit" / "STUDENT_TEACHER_PARITY_AUDIT.json"
     content_debt_open = 0
-    if parity_report_path.is_file():
-        p_data = json.loads(parity_report_path.read_text(encoding="utf-8"))
-        content_debt_open += p_data.get("student_without_correction", 0)
-        content_debt_open += p_data.get("orphan_teacher_correction", 0)
-        content_debt_open += p_data.get("teacher_content_leak_in_student", 0)
+    # Le gate pointait vers `STUDENT_TEACHER_PARITY_AUDIT.json`, qu'aucun
+    # producteur du depot n'ecrit : la garde `is_file()` rendait donc la dette
+    # de contenu structurellement nulle. La preuve de parite reellement
+    # produite est PARITY_BAREMES_VALIDATION.json.
+    parity_rel = "audit/PARITY_BAREMES_VALIDATION.json"
+    p_data = _load_evidence(parity_rel)
+    if p_data is not None:
+        for key in (
+            "STUDENT_WITHOUT_CORRECTION",
+            "ORPHAN_TEACHER_CORRECTION",
+            "STUDENT_TEACHER_STATEMENT_DRIFT",
+            "TEACHER_CONTENT_LEAK_IN_STUDENT",
+            "BAREME_TOTAL_MISMATCH",
+            "BAREME_SCOPE_AMBIGUOUS",
+        ):
+            content_debt_open += _required(p_data, parity_rel, key)
+
+    # Le clonage pedagogique est un blocage de publication declare : il doit
+    # peser sur la dette de contenu, pas rester dans un registre isole.
+    clone_rel = "audit/P0_CONTENT_CLONE_LEDGER.json"
+    clone_data = _load_evidence(clone_rel)
+    clone_excess = 0
+    if clone_data is not None:
+        clone_excess = int(clone_data.get("inventory", {}).get("excess_objects", 0))
+        if clone_data.get("publication_blocker"):
+            content_debt_open += clone_excess
 
     # 4. Programme Debt
-    prog_report_path = root / "audit" / "PROGRAMME_CONTENT_VALIDATION.json"
     programme_debt_open = 0
-    if prog_report_path.is_file():
-        pr_data = json.loads(prog_report_path.read_text(encoding="utf-8"))
-        programme_debt_open += pr_data.get("official_atoms_uncovered", 0)
-        programme_debt_open += pr_data.get("false_coverage", 0)
-        programme_debt_open += pr_data.get("unlabelled_out_of_programme_content", 0)
+    prog_rel = "audit/PROGRAMME_CONTENT_VALIDATION.json"
+    pr_data = _load_evidence(prog_rel)
+    if pr_data is not None:
+        for key in (
+            "OFFICIAL_ATOMS_UNCOVERED",
+            "FALSE_COVERAGE",
+            "UNLABELLED_OUT_OF_PROGRAMME_CONTENT",
+            "CONCRETE_DEFECTS_FOUND",
+            "UNREVIEWED_MANUAL_OBJECTS",
+        ):
+            programme_debt_open += _required(pr_data, prog_rel, key)
 
     # 5. Print Debt
-    preflight_path = root / "audit" / "FINAL_PRINT_PREFLIGHT.json"
+    preflight_rel = "audit/FINAL_PRINT_PREFLIGHT.json"
     print_debt_open = 0
-    if preflight_path.is_file():
-        pf_data = json.loads(preflight_path.read_text(encoding="utf-8"))
-        print_debt_open += (pf_data.get("total_targets", 12) - pf_data.get("passed_targets", 0))
+    pf_data = _load_evidence(preflight_rel)
+    if pf_data is not None:
+        print_debt_open += _required(pf_data, preflight_rel, "total_targets") - _required(
+            pf_data, preflight_rel, "passed_targets"
+        )
 
     # 6. Manifest Debt
-    manifest_path = root / "audit" / "BUILD_MANIFEST.json"
+    manifest_rel = "audit/BUILD_MANIFEST.json"
     manifest_debt_open = 0
-    if manifest_path.is_file():
-        m_data = json.loads(manifest_path.read_text(encoding="utf-8"))
-        manifest_debt_open += max(0, 12 - len(m_data.get("builds", [])))
+    m_data = _load_evidence(manifest_rel)
+    if m_data is not None:
+        builds = m_data.get("builds")
+        if not isinstance(builds, list):
+            missing_evidence.append(f"{manifest_rel}#builds")
+        else:
+            manifest_debt_open += max(0, CANONICAL_TARGETS - len(builds))
 
     # 7. Reproducibility Debt
-    repro_path = root / "audit" / "DOUBLE_BUILD_REPRODUCIBILITY.json"
+    repro_rel = "audit/DOUBLE_BUILD_REPRODUCIBILITY.json"
     repro_debt_open = 0
-    if repro_path.is_file():
-        r_data = json.loads(repro_path.read_text(encoding="utf-8"))
-        repro_debt_open += (r_data.get("total_targets", 12) - r_data.get("reproducible_targets", 0))
+    r_data = _load_evidence(repro_rel)
+    if r_data is not None:
+        repro_debt_open += _required(r_data, repro_rel, "total_targets") - _required(
+            r_data, repro_rel, "reproducible_targets"
+        )
 
     # Governance / Bureaucratic Items
     governance_items = [
@@ -113,7 +170,10 @@ def audit_technical_debt(root: Path) -> dict[str, Any]:
         "artifact_type": "zero_technical_debt_report",
         "schema_version": "1.0.0",
         "generated_by": "scripts/build_zero_technical_debt.py",
+        "missing_or_malformed_evidence": missing_evidence,
+        "p0_content_clone_excess_objects": clone_excess,
         "product_debt_summary": {
+            "EVIDENCE_DEBT_OPEN": len(missing_evidence),
             "TECHNICAL_DEBT_OPEN": technical_debt_open,
             "CONTENT_DEBT_OPEN": content_debt_open,
             "PROGRAMME_DEBT_OPEN": programme_debt_open,
@@ -122,7 +182,8 @@ def audit_technical_debt(root: Path) -> dict[str, Any]:
             "REPRODUCIBILITY_DEBT_OPEN": repro_debt_open,
         },
         "all_product_debts_zero": (
-            technical_debt_open == 0
+            not missing_evidence
+            and technical_debt_open == 0
             and content_debt_open == 0
             and programme_debt_open == 0
             and print_debt_open == 0

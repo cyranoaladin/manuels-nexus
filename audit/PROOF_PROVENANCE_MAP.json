@@ -1,0 +1,898 @@
+{
+  "artifact_type": "proof_provenance_map",
+  "entries": [
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "global_publish_ready",
+      "input_artifacts": [
+        "audit/BUILD_MANIFEST.json",
+        "audit/CANONICAL_RELEASE_INVENTORY.json",
+        "audit/DOUBLE_BUILD_REPRODUCIBILITY.json",
+        "audit/FINAL_PRINT_PREFLIGHT.json",
+        "audit/PARITY_BAREMES_VALIDATION.json",
+        "audit/PRINTED_CODE_VALIDATION.json",
+        "audit/PROGRAMME_AUTHORITY_MATRIX.json",
+        "audit/PROGRAMME_CONTENT_VALIDATION.json",
+        "audit/VISUAL_SEMANTIC_REGRESSION_REPORT.json",
+        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+      ],
+      "metric": "ALL_CANONICAL_MANUALS_ZERO_DEBT_PUBLISH_READY",
+      "producers": [
+        "scripts/build_canonical_release_inventory.py",
+        "scripts/build_clean_reproducibility.py",
+        "scripts/build_final_preflight_and_regression.py",
+        "scripts/build_manifest.py",
+        "scripts/build_parity_baremes_validation.py",
+        "scripts/build_printed_code_validation.py",
+        "scripts/build_programme_authority_matrix.py",
+        "scripts/build_programme_content_validation.py",
+        "scripts/build_zero_technical_debt.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": false
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "bool(debt.get('all_product_debts_zero', False))",
+      "input_artifacts": [
+        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+      ],
+      "metric": "ALL_PRODUCT_DEBTS_ZERO",
+      "producers": [
+        "scripts/build_zero_technical_debt.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": false
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "all_targets_candidate_ready",
+      "input_artifacts": [
+        "audit/BUILD_MANIFEST.json",
+        "audit/CANONICAL_RELEASE_INVENTORY.json",
+        "audit/DOUBLE_BUILD_REPRODUCIBILITY.json",
+        "audit/FINAL_PRINT_PREFLIGHT.json",
+        "audit/PARITY_BAREMES_VALIDATION.json",
+        "audit/PRINTED_CODE_VALIDATION.json",
+        "audit/PROGRAMME_AUTHORITY_MATRIX.json",
+        "audit/PROGRAMME_CONTENT_VALIDATION.json",
+        "audit/VISUAL_SEMANTIC_REGRESSION_REPORT.json",
+        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+      ],
+      "metric": "ALL_TARGETS_CANDIDATE_READY",
+      "producers": [
+        "scripts/build_canonical_release_inventory.py",
+        "scripts/build_clean_reproducibility.py",
+        "scripts/build_final_preflight_and_regression.py",
+        "scripts/build_manifest.py",
+        "scripts/build_parity_baremes_validation.py",
+        "scripts/build_printed_code_validation.py",
+        "scripts/build_programme_authority_matrix.py",
+        "scripts/build_programme_content_validation.py",
+        "scripts/build_zero_technical_debt.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": false
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(inv_summary, 'audit/CANONICAL_RELEASE_INVENTORY.json', 'AMBIGUOUS_CURRENT_ARTIFACT')",
+      "input_artifacts": [
+        "audit/CANONICAL_RELEASE_INVENTORY.json"
+      ],
+      "metric": "AMBIGUOUS_CURRENT_ARTIFACT",
+      "producers": [
+        "scripts/build_canonical_release_inventory.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(auth_summary, 'audit/PROGRAMME_AUTHORITY_MATRIX.json', 'AUTHORITY_SOURCE_DIGEST_MISMATCH')",
+      "input_artifacts": [
+        "audit/PROGRAMME_AUTHORITY_MATRIX.json"
+      ],
+      "metric": "AUTHORITY_SOURCE_DIGEST_MISMATCH",
+      "producers": [
+        "scripts/build_programme_authority_matrix.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(parity_summary, 'audit/PARITY_BAREMES_VALIDATION.json', 'BAREME_SCOPE_AMBIGUOUS')",
+      "input_artifacts": [
+        "audit/PARITY_BAREMES_VALIDATION.json"
+      ],
+      "metric": "BAREME_SCOPE_AMBIGUOUS",
+      "producers": [
+        "scripts/build_parity_baremes_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(parity_summary, 'audit/PARITY_BAREMES_VALIDATION.json', 'BAREME_TOTAL_MISMATCH')",
+      "input_artifacts": [
+        "audit/PARITY_BAREMES_VALIDATION.json"
+      ],
+      "metric": "BAREME_TOTAL_MISMATCH",
+      "producers": [
+        "scripts/build_parity_baremes_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "sum((1 for t in target_evaluations if t['publish_ready_candidate']))",
+      "input_artifacts": [
+        "audit/BUILD_MANIFEST.json",
+        "audit/CANONICAL_RELEASE_INVENTORY.json",
+        "audit/DOUBLE_BUILD_REPRODUCIBILITY.json",
+        "audit/FINAL_PRINT_PREFLIGHT.json",
+        "audit/PARITY_BAREMES_VALIDATION.json",
+        "audit/PRINTED_CODE_VALIDATION.json",
+        "audit/PROGRAMME_AUTHORITY_MATRIX.json",
+        "audit/PROGRAMME_CONTENT_VALIDATION.json",
+        "audit/VISUAL_SEMANTIC_REGRESSION_REPORT.json",
+        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+      ],
+      "metric": "CANDIDATE_READY_COUNT",
+      "producers": [
+        "scripts/build_canonical_release_inventory.py",
+        "scripts/build_clean_reproducibility.py",
+        "scripts/build_final_preflight_and_regression.py",
+        "scripts/build_manifest.py",
+        "scripts/build_parity_baremes_validation.py",
+        "scripts/build_printed_code_validation.py",
+        "scripts/build_programme_authority_matrix.py",
+        "scripts/build_programme_content_validation.py",
+        "scripts/build_zero_technical_debt.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 12
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(inv_summary, 'audit/CANONICAL_RELEASE_INVENTORY.json', 'CANONICAL_MANUALS')",
+      "input_artifacts": [
+        "audit/CANONICAL_RELEASE_INVENTORY.json"
+      ],
+      "metric": "CANONICAL_MANUALS_COUNT",
+      "producers": [
+        "scripts/build_canonical_release_inventory.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 6
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "len(target_evaluations)",
+      "input_artifacts": [
+        "audit/CANONICAL_RELEASE_INVENTORY.json",
+        "audit/DOUBLE_BUILD_REPRODUCIBILITY.json",
+        "audit/FINAL_PRINT_PREFLIGHT.json",
+        "audit/PRINTED_CODE_VALIDATION.json",
+        "audit/PROGRAMME_AUTHORITY_MATRIX.json"
+      ],
+      "metric": "CANONICAL_TARGETS_COUNT",
+      "producers": [
+        "scripts/build_canonical_release_inventory.py",
+        "scripts/build_clean_reproducibility.py",
+        "scripts/build_final_preflight_and_regression.py",
+        "scripts/build_printed_code_validation.py",
+        "scripts/build_programme_authority_matrix.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 12
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(prog_summary, 'audit/PROGRAMME_CONTENT_VALIDATION.json', 'CONCRETE_DEFECTS_FOUND')",
+      "input_artifacts": [
+        "audit/PROGRAMME_CONTENT_VALIDATION.json"
+      ],
+      "metric": "CONCRETE_DEFECTS_FOUND",
+      "producers": [
+        "scripts/build_programme_content_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "content_debt",
+      "input_artifacts": [
+        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+      ],
+      "metric": "CONTENT_DEBT_OPEN",
+      "producers": [
+        "scripts/build_zero_technical_debt.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 1548
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(cval_summary, 'audit/PRINTED_CODE_VALIDATION.json', 'CURVED_QUOTES_IN_CODE')",
+      "input_artifacts": [
+        "audit/PRINTED_CODE_VALIDATION.json"
+      ],
+      "metric": "CURVED_QUOTES_IN_CODE",
+      "producers": [
+        "scripts/build_printed_code_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "f'{repro_ok_count}/{len(target_evaluations)}'",
+      "input_artifacts": [
+        "audit/CANONICAL_RELEASE_INVENTORY.json",
+        "audit/DOUBLE_BUILD_REPRODUCIBILITY.json",
+        "audit/FINAL_PRINT_PREFLIGHT.json",
+        "audit/PRINTED_CODE_VALIDATION.json",
+        "audit/PROGRAMME_AUTHORITY_MATRIX.json"
+      ],
+      "metric": "DOUBLE_BUILD_REPRODUCIBILITY",
+      "producers": [
+        "scripts/build_canonical_release_inventory.py",
+        "scripts/build_clean_reproducibility.py",
+        "scripts/build_final_preflight_and_regression.py",
+        "scripts/build_printed_code_validation.py",
+        "scripts/build_programme_authority_matrix.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": "12/12"
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "evidence_debt + len(missing_evidence)",
+      "input_artifacts": [
+        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+      ],
+      "metric": "EVIDENCE_DEBT_OPEN",
+      "producers": [
+        "scripts/build_zero_technical_debt.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(prog_summary, 'audit/PROGRAMME_CONTENT_VALIDATION.json', 'FALSE_COVERAGE')",
+      "input_artifacts": [
+        "audit/PROGRAMME_CONTENT_VALIDATION.json"
+      ],
+      "metric": "FALSE_COVERAGE",
+      "producers": [
+        "scripts/build_programme_content_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 44
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(prog_summary, 'audit/PROGRAMME_CONTENT_VALIDATION.json', 'INDEPENDENT_ANSWER_MISMATCH')",
+      "input_artifacts": [
+        "audit/PROGRAMME_CONTENT_VALIDATION.json"
+      ],
+      "metric": "INDEPENDENT_ANSWER_MISMATCH",
+      "producers": [
+        "scripts/build_programme_content_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(prog_summary, 'audit/PROGRAMME_CONTENT_VALIDATION.json', 'TOTAL_INDEPENDENT_VALIDATIONS')",
+      "input_artifacts": [
+        "audit/PROGRAMME_CONTENT_VALIDATION.json"
+      ],
+      "metric": "INDEPENDENT_FORMAL_VALIDATIONS",
+      "producers": [
+        "scripts/build_programme_content_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 437
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "f'{manifest_builds}/{len(target_evaluations)}'",
+      "input_artifacts": [
+        "audit/BUILD_MANIFEST.json",
+        "audit/CANONICAL_RELEASE_INVENTORY.json",
+        "audit/DOUBLE_BUILD_REPRODUCIBILITY.json",
+        "audit/FINAL_PRINT_PREFLIGHT.json",
+        "audit/PRINTED_CODE_VALIDATION.json",
+        "audit/PROGRAMME_AUTHORITY_MATRIX.json"
+      ],
+      "metric": "MANIFEST_COVERAGE",
+      "producers": [
+        "scripts/build_canonical_release_inventory.py",
+        "scripts/build_clean_reproducibility.py",
+        "scripts/build_final_preflight_and_regression.py",
+        "scripts/build_manifest.py",
+        "scripts/build_printed_code_validation.py",
+        "scripts/build_programme_authority_matrix.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": "12/12"
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "manifest_debt",
+      "input_artifacts": [
+        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+      ],
+      "metric": "MANIFEST_DEBT_OPEN",
+      "producers": [
+        "scripts/build_zero_technical_debt.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "'FULL_CURRENT' if manifest_builds == len(target_evaluations) and manifest_debt == 0 else 'INCOMPLETE'",
+      "input_artifacts": [
+        "audit/BUILD_MANIFEST.json",
+        "audit/CANONICAL_RELEASE_INVENTORY.json",
+        "audit/DOUBLE_BUILD_REPRODUCIBILITY.json",
+        "audit/FINAL_PRINT_PREFLIGHT.json",
+        "audit/PRINTED_CODE_VALIDATION.json",
+        "audit/PROGRAMME_AUTHORITY_MATRIX.json",
+        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+      ],
+      "metric": "MANIFEST_GLOBAL",
+      "producers": [
+        "scripts/build_canonical_release_inventory.py",
+        "scripts/build_clean_reproducibility.py",
+        "scripts/build_final_preflight_and_regression.py",
+        "scripts/build_manifest.py",
+        "scripts/build_printed_code_validation.py",
+        "scripts/build_programme_authority_matrix.py",
+        "scripts/build_zero_technical_debt.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": "FULL_CURRENT"
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(prog_summary, 'audit/PROGRAMME_CONTENT_VALIDATION.json', 'MANUAL_REVIEWS_COUNT')",
+      "input_artifacts": [
+        "audit/PROGRAMME_CONTENT_VALIDATION.json"
+      ],
+      "metric": "MANUAL_REVIEW_OBJECTS",
+      "producers": [
+        "scripts/build_programme_content_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 23
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(inv_summary, 'audit/CANONICAL_RELEASE_INVENTORY.json', 'MISSING_CANONICAL_TARGET')",
+      "input_artifacts": [
+        "audit/CANONICAL_RELEASE_INVENTORY.json"
+      ],
+      "metric": "MISSING_CANONICAL_TARGET",
+      "producers": [
+        "scripts/build_canonical_release_inventory.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "len(missing_evidence)",
+      "input_artifacts": [],
+      "metric": "MISSING_EVIDENCE_KEYS",
+      "producers": [],
+      "source_kind": "DERIVED_FROM_EVIDENCE_PRESENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(prog_summary, 'audit/PROGRAMME_CONTENT_VALIDATION.json', 'OFFICIAL_ATOMS_UNCOVERED')",
+      "input_artifacts": [
+        "audit/PROGRAMME_CONTENT_VALIDATION.json"
+      ],
+      "metric": "OFFICIAL_ATOMS_UNCOVERED",
+      "producers": [
+        "scripts/build_programme_content_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(parity_summary, 'audit/PARITY_BAREMES_VALIDATION.json', 'ORPHAN_TEACHER_CORRECTION')",
+      "input_artifacts": [
+        "audit/PARITY_BAREMES_VALIDATION.json"
+      ],
+      "metric": "ORPHAN_TEACHER_CORRECTION",
+      "producers": [
+        "scripts/build_parity_baremes_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "overfull_total",
+      "input_artifacts": [
+        "audit/DOUBLE_BUILD_REPRODUCIBILITY.json",
+        "audit/FINAL_PRINT_PREFLIGHT.json"
+      ],
+      "metric": "OVERFULL",
+      "producers": [
+        "scripts/build_clean_reproducibility.py",
+        "scripts/build_final_preflight_and_regression.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "preflight.get('preflight_all_targets', 'UNKNOWN')",
+      "input_artifacts": [
+        "audit/FINAL_PRINT_PREFLIGHT.json"
+      ],
+      "metric": "PREFLIGHT_ALL_TARGETS",
+      "producers": [
+        "scripts/build_final_preflight_and_regression.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": "PASS"
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(cval_summary, 'audit/PRINTED_CODE_VALIDATION.json', 'PRINTED_CODE_BLOCKS_CLASSIFIED')",
+      "input_artifacts": [
+        "audit/PRINTED_CODE_VALIDATION.json"
+      ],
+      "metric": "PRINTED_CODE_BLOCKS_CLASSIFIED",
+      "producers": [
+        "scripts/build_printed_code_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 1351
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(cval_summary, 'audit/PRINTED_CODE_VALIDATION.json', 'PRINTED_CODE_BLOCKS_DISCOVERED')",
+      "input_artifacts": [
+        "audit/PRINTED_CODE_VALIDATION.json"
+      ],
+      "metric": "PRINTED_CODE_BLOCKS_DISCOVERED",
+      "producers": [
+        "scripts/build_printed_code_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 1351
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(cval_summary, 'audit/PRINTED_CODE_VALIDATION.json', 'PRINTED_CODE_EXPECTED_OUTPUT_MISMATCH')",
+      "input_artifacts": [
+        "audit/PRINTED_CODE_VALIDATION.json"
+      ],
+      "metric": "PRINTED_CODE_EXPECTED_OUTPUT_MISMATCH",
+      "producers": [
+        "scripts/build_printed_code_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(cval_summary, 'audit/PRINTED_CODE_VALIDATION.json', 'PRINTED_CODE_SYNTAX_ERRORS')",
+      "input_artifacts": [
+        "audit/PRINTED_CODE_VALIDATION.json"
+      ],
+      "metric": "PRINTED_CODE_SYNTAX_ERRORS",
+      "producers": [
+        "scripts/build_printed_code_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "print_debt",
+      "input_artifacts": [
+        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+      ],
+      "metric": "PRINT_DEBT_OPEN",
+      "producers": [
+        "scripts/build_zero_technical_debt.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "technical_debt",
+      "input_artifacts": [
+        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+      ],
+      "metric": "PRODUCT_TECHNICAL_DEBT_OPEN",
+      "producers": [
+        "scripts/build_zero_technical_debt.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "programme_debt",
+      "input_artifacts": [
+        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+      ],
+      "metric": "PROGRAMME_DEBT_OPEN",
+      "producers": [
+        "scripts/build_zero_technical_debt.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 44
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "sum((1 for t in target_evaluations if t['publish_ready']))",
+      "input_artifacts": [
+        "audit/BUILD_MANIFEST.json",
+        "audit/CANONICAL_RELEASE_INVENTORY.json",
+        "audit/DOUBLE_BUILD_REPRODUCIBILITY.json",
+        "audit/FINAL_PRINT_PREFLIGHT.json",
+        "audit/PARITY_BAREMES_VALIDATION.json",
+        "audit/PRINTED_CODE_VALIDATION.json",
+        "audit/PROGRAMME_AUTHORITY_MATRIX.json",
+        "audit/PROGRAMME_CONTENT_VALIDATION.json",
+        "audit/VISUAL_SEMANTIC_REGRESSION_REPORT.json",
+        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+      ],
+      "metric": "PUBLISH_READY_COUNT",
+      "producers": [
+        "scripts/build_canonical_release_inventory.py",
+        "scripts/build_clean_reproducibility.py",
+        "scripts/build_final_preflight_and_regression.py",
+        "scripts/build_manifest.py",
+        "scripts/build_parity_baremes_validation.py",
+        "scripts/build_printed_code_validation.py",
+        "scripts/build_programme_authority_matrix.py",
+        "scripts/build_programme_content_validation.py",
+        "scripts/build_zero_technical_debt.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "release_owner_final_signoff",
+      "input_artifacts": [],
+      "metric": "RELEASE_OWNER_FINAL_SIGNOFF",
+      "producers": [],
+      "source_kind": "HUMAN_SIGNOFF",
+      "value": false
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "release_status",
+      "input_artifacts": [
+        "audit/BUILD_MANIFEST.json",
+        "audit/CANONICAL_RELEASE_INVENTORY.json",
+        "audit/DOUBLE_BUILD_REPRODUCIBILITY.json",
+        "audit/FINAL_PRINT_PREFLIGHT.json",
+        "audit/PARITY_BAREMES_VALIDATION.json",
+        "audit/PRINTED_CODE_VALIDATION.json",
+        "audit/PROGRAMME_AUTHORITY_MATRIX.json",
+        "audit/PROGRAMME_CONTENT_VALIDATION.json",
+        "audit/VISUAL_SEMANTIC_REGRESSION_REPORT.json",
+        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+      ],
+      "metric": "RELEASE_STATUS",
+      "producers": [
+        "scripts/build_canonical_release_inventory.py",
+        "scripts/build_clean_reproducibility.py",
+        "scripts/build_final_preflight_and_regression.py",
+        "scripts/build_manifest.py",
+        "scripts/build_parity_baremes_validation.py",
+        "scripts/build_printed_code_validation.py",
+        "scripts/build_programme_authority_matrix.py",
+        "scripts/build_programme_content_validation.py",
+        "scripts/build_zero_technical_debt.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": "FAIL"
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "repro_debt",
+      "input_artifacts": [
+        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+      ],
+      "metric": "REPRODUCIBILITY_DEBT_OPEN",
+      "producers": [
+        "scripts/build_zero_technical_debt.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "repro.get('reproducibility_global', 'UNKNOWN')",
+      "input_artifacts": [
+        "audit/DOUBLE_BUILD_REPRODUCIBILITY.json"
+      ],
+      "metric": "REPRODUCIBILITY_GLOBAL",
+      "producers": [
+        "scripts/build_clean_reproducibility.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": "PROVEN"
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(parity_summary, 'audit/PARITY_BAREMES_VALIDATION.json', 'STUDENT_TEACHER_STATEMENT_DRIFT')",
+      "input_artifacts": [
+        "audit/PARITY_BAREMES_VALIDATION.json"
+      ],
+      "metric": "STUDENT_TEACHER_STATEMENT_DRIFT",
+      "producers": [
+        "scripts/build_parity_baremes_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 180
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(parity_summary, 'audit/PARITY_BAREMES_VALIDATION.json', 'STUDENT_WITHOUT_CORRECTION')",
+      "input_artifacts": [
+        "audit/PARITY_BAREMES_VALIDATION.json"
+      ],
+      "metric": "STUDENT_WITHOUT_CORRECTION",
+      "producers": [
+        "scripts/build_parity_baremes_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(parity_summary, 'audit/PARITY_BAREMES_VALIDATION.json', 'TEACHER_CONTENT_LEAK_IN_STUDENT')",
+      "input_artifacts": [
+        "audit/PARITY_BAREMES_VALIDATION.json"
+      ],
+      "metric": "TEACHER_CONTENT_LEAK_IN_STUDENT",
+      "producers": [
+        "scripts/build_parity_baremes_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(inv_summary, 'audit/CANONICAL_RELEASE_INVENTORY.json', 'TOTAL_TEX_ROOTS')",
+      "input_artifacts": [
+        "audit/CANONICAL_RELEASE_INVENTORY.json"
+      ],
+      "metric": "TEX_ROOTS_DISCOVERED",
+      "producers": [
+        "scripts/build_canonical_release_inventory.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 46
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "content_debt + evidence_debt + len(missing_evidence)",
+      "input_artifacts": [
+        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+      ],
+      "metric": "TOTAL_P0_OPEN",
+      "producers": [
+        "scripts/build_zero_technical_debt.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 1548
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "programme_debt",
+      "input_artifacts": [
+        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+      ],
+      "metric": "TOTAL_P1_OPEN",
+      "producers": [
+        "scripts/build_zero_technical_debt.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 44
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "technical_debt",
+      "input_artifacts": [
+        "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
+      ],
+      "metric": "TOTAL_P2_OPEN",
+      "producers": [
+        "scripts/build_zero_technical_debt.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(cval_summary, 'audit/PRINTED_CODE_VALIDATION.json', 'UNCLASSIFIED_PRINTED_CODE')",
+      "input_artifacts": [
+        "audit/PRINTED_CODE_VALIDATION.json"
+      ],
+      "metric": "UNCLASSIFIED_PRINTED_CODE",
+      "producers": [
+        "scripts/build_printed_code_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(inv_summary, 'audit/CANONICAL_RELEASE_INVENTORY.json', 'UNCLASSIFIED_TEX_ROOTS')",
+      "input_artifacts": [
+        "audit/CANONICAL_RELEASE_INVENTORY.json"
+      ],
+      "metric": "UNCLASSIFIED_TEX_ROOTS",
+      "producers": [
+        "scripts/build_canonical_release_inventory.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "regression.get('unexpected_visual_diff', 0)",
+      "input_artifacts": [
+        "audit/VISUAL_SEMANTIC_REGRESSION_REPORT.json"
+      ],
+      "metric": "UNEXPECTED_VISUAL_DIFF",
+      "producers": [
+        "scripts/build_final_preflight_and_regression.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "regression.get('unexplained_semantic_diff', 0)",
+      "input_artifacts": [
+        "audit/VISUAL_SEMANTIC_REGRESSION_REPORT.json"
+      ],
+      "metric": "UNEXPLAINED_SEMANTIC_DIFF",
+      "producers": [
+        "scripts/build_final_preflight_and_regression.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(prog_summary, 'audit/PROGRAMME_CONTENT_VALIDATION.json', 'UNLABELLED_OUT_OF_PROGRAMME_CONTENT')",
+      "input_artifacts": [
+        "audit/PROGRAMME_CONTENT_VALIDATION.json"
+      ],
+      "metric": "UNLABELLED_OUT_OF_PROGRAMME_CONTENT",
+      "producers": [
+        "scripts/build_programme_content_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(inv_summary, 'audit/CANONICAL_RELEASE_INVENTORY.json', 'UNREGISTERED_RELEASE_TARGET')",
+      "input_artifacts": [
+        "audit/CANONICAL_RELEASE_INVENTORY.json"
+      ],
+      "metric": "UNREGISTERED_RELEASE_TARGET",
+      "producers": [
+        "scripts/build_canonical_release_inventory.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(prog_summary, 'audit/PROGRAMME_CONTENT_VALIDATION.json', 'UNREVIEWED_MANUAL_OBJECTS')",
+      "input_artifacts": [
+        "audit/PROGRAMME_CONTENT_VALIDATION.json"
+      ],
+      "metric": "UNREVIEWED_MANUAL_OBJECTS",
+      "producers": [
+        "scripts/build_programme_content_validation.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    },
+    {
+      "consumer_gate": "scripts/release_all_check.py",
+      "derived": true,
+      "expression": "require(auth_summary, 'audit/PROGRAMME_AUTHORITY_MATRIX.json', 'WRONG_YEAR_AUTHORITY')",
+      "input_artifacts": [
+        "audit/PROGRAMME_AUTHORITY_MATRIX.json"
+      ],
+      "metric": "WRONG_YEAR_AUTHORITY",
+      "producers": [
+        "scripts/build_programme_authority_matrix.py"
+      ],
+      "source_kind": "DERIVED_FROM_EVIDENCE",
+      "value": 0
+    }
+  ],
+  "generated_by": "scripts/audit_gate_integrity.py",
+  "summary": {
+    "RELEASE_METRICS": 55,
+    "TRACED_RELEASE_METRICS": 55,
+    "UNTRACED_RELEASE_METRICS": 0
+  }
+}

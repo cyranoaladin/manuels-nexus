@@ -1,0 +1,41 @@
+{
+  "artifact_type": "gate_integrity_audit",
+  "generated_by": "scripts/audit_gate_integrity.py",
+  "hardcoded_release_metrics": [],
+  "loaded_but_unused_evidence": [],
+  "optional_required_evidence": [],
+  "scanned_producers": [
+    "scripts/build_canonical_release_inventory.py",
+    "scripts/build_programme_authority_matrix.py",
+    "scripts/build_printed_code_validation.py",
+    "scripts/build_programme_content_validation.py",
+    "scripts/build_parity_baremes_validation.py",
+    "scripts/build_manifest.py",
+    "scripts/build_clean_reproducibility.py",
+    "scripts/build_final_preflight_and_regression.py",
+    "scripts/build_zero_technical_debt.py",
+    "scripts/release_all_check.py"
+  ],
+  "scanned_tests": [
+    "tests/test_canonical_release_inventory.py",
+    "tests/test_programme_authority_matrix.py",
+    "tests/test_printed_code_validation.py",
+    "tests/test_programme_content_validation.py",
+    "tests/test_parity_baremes_validation.py",
+    "tests/test_clean_build_reproducibility.py",
+    "tests/test_pdf_reproducibility.py",
+    "tests/test_final_print_preflight_and_regression.py",
+    "tests/test_zero_technical_debt.py",
+    "tests/test_release_all_check.py"
+  ],
+  "schema_version": "1.0.0",
+  "summary": {
+    "HARDCODED_RELEASE_METRICS": 0,
+    "LOADED_BUT_UNUSED_EVIDENCE": 0,
+    "OPTIONAL_REQUIRED_EVIDENCE": 0,
+    "RELEASE_METRICS": 55,
+    "TAUTOLOGICAL_GATE_TESTS": 0,
+    "UNTRACED_RELEASE_METRICS": 0
+  },
+  "tautological_gate_tests": []
+}

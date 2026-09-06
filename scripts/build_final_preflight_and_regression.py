@@ -142,7 +142,17 @@ def run_print_preflight(root: Path) -> dict[str, Any]:
                 overfull_count = len(re.findall(r"Overfull \\[hv]box", log_text))
                 break
 
-        overall_pass = geometry_ok and boxes_present and fonts_ok and structure_ok and student_separation_ok and (overfull_count == 0)
+        # Un log LaTeX absent ne prouve pas l'absence d'overfull : sans lui, la
+        # mesure n'existe pas et la cible ne peut pas passer.
+        overall_pass = (
+            geometry_ok
+            and boxes_present
+            and fonts_ok
+            and structure_ok
+            and student_separation_ok
+            and log_found
+            and (overfull_count == 0)
+        )
 
         preflight_records.append({
             "target_id": target_id,
@@ -180,6 +190,7 @@ def run_print_preflight(root: Path) -> dict[str, Any]:
                 "passed": student_separation_ok,
             },
             "overfull_hbox_vbox": overfull_count,
+            "latex_log_found": log_found,
             "preflight_status": "PASS" if overall_pass else "FAIL",
         })
 

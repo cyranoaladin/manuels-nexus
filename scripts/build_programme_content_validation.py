@@ -40,6 +40,52 @@ def validate_programme_and_content() -> dict[str, Any]:
     unmapped_atoms = [r["atom_id"] for r in cov_rows if r.get("coverage_status") == "UNMAPPED"]
     uncovered_count = len(unmapped_atoms) + cov_summary.get("unmapped_mandatory_atoms", 0)
 
+    # Une fausse couverture est un atome declare rattache dont rien ne porte
+    # reellement le contenu : aucune source pedagogique, ou une source declaree
+    # qui n'existe pas sur le disque. Le compter comme couvert rend la
+    # bijection 596/596 vraie sur le papier et fausse dans le manuel.
+    content_source_fields = (
+        "course_sources",
+        "exercise_sources",
+        "correction_sources",
+        "method_sources",
+        "remediation_sources",
+        "assessment_sources",
+    )
+    false_coverage = []
+    for row in cov_rows:
+        if row.get("coverage_status") == "UNMAPPED":
+            continue
+        sources = [
+            src
+            for field in content_source_fields
+            for src in (row.get(field) or [])
+        ]
+        if not sources:
+            false_coverage.append({
+                "atom_id": row.get("atom_id"),
+                "manual": row.get("manual"),
+                "chapter": row.get("chapter"),
+                "coverage_status": row.get("coverage_status"),
+                "gap_type": row.get("gap_type"),
+                "why": "atome declare couvert sans aucune source de contenu",
+            })
+            continue
+        # une ancre `#Q3` designe un fragment : le fichier porteur doit exister
+        absent = [
+            src for src in sources
+            if not (ROOT / src.split("#", 1)[0]).exists()
+        ]
+        if absent:
+            false_coverage.append({
+                "atom_id": row.get("atom_id"),
+                "manual": row.get("manual"),
+                "chapter": row.get("chapter"),
+                "coverage_status": row.get("coverage_status"),
+                "missing_sources": absent,
+                "why": "source de couverture declaree mais absente du depot",
+            })
+
     # 2. Manual to official : check unlabelled out of programme
     unlabelled_out_of_programme = []
 
@@ -50,8 +96,19 @@ def validate_programme_and_content() -> dict[str, Any]:
     passed_validations = 0
     mismatches = []
 
-    manual_reviews = []
+    manual_reviews: list[dict[str, Any]] = []
+    unreviewed: list[dict[str, Any]] = []
     concrete_defects_found = 0
+
+    disposition_path = ROOT / "audit/MANUAL_REVIEW_ADVERSARIAL_DISPOSITION.json"
+    manual_dispositions: dict[str, Any] = {}
+    if disposition_path.is_file():
+        disposition = json.loads(disposition_path.read_text(encoding="utf-8"))
+        manual_dispositions = {e["object_id"]: e for e in disposition.get("entries", [])}
+    else:
+        # registre absent : chaque objet retombe en UNREVIEWED et pese, plutot
+        # que de disparaitre silencieusement du compte
+        manual_dispositions = {}
 
     for vf in val_files:
         try:
@@ -62,33 +119,32 @@ def validate_programme_and_content() -> dict[str, Any]:
             elif verdict == "manual_review":
                 rel_val = str(vf.relative_to(ROOT))
                 obj_id = d.get("objet_id", vf.name.replace(".execution.json", ""))
-                # Adversarial audit of the underlying content
-                stem = vf.name.replace(".execution.json", ".tex")
-                parent = vf.parent.parent
-                candidates = list(parent.glob(f"**/{stem}"))
-                tex_path = candidates[0] if candidates else None
-                if tex_path and tex_path.is_file():
-                    txt = tex_path.read_text(encoding="utf-8", errors="ignore")
-                    has_todo = any(w in txt.lower() for w in ["todo", "fixme", "placeholder", "xxx"])
-                    if has_todo:
-                        concrete_defects_found += 1
+                # `manual_review` = aucun bloc executable, pas « correction
+                # inconnue ». La disposition vient d'un registre de relecture
+                # adossee a des preuves : un objet absent y est UNREVIEWED, il
+                # n'est jamais suppose conforme par defaut.
+                entry = manual_dispositions.get(obj_id)
+                if entry is None:
+                    unreviewed.append({"validation_file": rel_val, "object_id": obj_id})
                     manual_reviews.append({
                         "validation_file": rel_val,
                         "object_id": obj_id,
-                        "tex_source": str(tex_path.relative_to(ROOT)),
-                        "classification": "NON_FORMALIZABLE_CONCEPTUAL_CONTENT",
-                        "concrete_defect": False,
-                        "justification": "Contenu théorique/conceptuel ou historique sans code exécutable; vérification textuelle sans anomalie.",
+                        "classification": "UNREVIEWED",
+                        "concrete_defect": None,
                     })
                 else:
-                    # Archived or removed from production assembly
+                    open_defects = [
+                        x for x in entry.get("defects", []) if x.get("status") != "FIXED"
+                    ]
+                    concrete_defects_found += len(open_defects)
                     manual_reviews.append({
                         "validation_file": rel_val,
                         "object_id": obj_id,
-                        "tex_source": None,
-                        "classification": "ARCHIVED_NON_ASSEMBLED_OBJECT",
-                        "concrete_defect": False,
-                        "justification": "Objet issu d'un lot d'audit historique, absent des maîtres d'assemblage canoniques.",
+                        "classification": entry["classification"],
+                        "concrete_defect": bool(open_defects),
+                        "defects_total": len(entry.get("defects", [])),
+                        "defects_open": len(open_defects),
+                        "review_method": entry.get("review_method"),
                     })
             else:
                 mismatches.append({"file": str(vf.relative_to(ROOT)), "verdict": verdict, "details": d.get("details")})
@@ -100,14 +156,19 @@ def validate_programme_and_content() -> dict[str, Any]:
         "MANDATORY_ATOMS_COUNT": len(mandatory_atoms),
         "MAPPED_ATOMS_COUNT": len(cov_rows) - len(unmapped_atoms),
         "OFFICIAL_ATOMS_UNCOVERED": len(unmapped_atoms),
-        "FALSE_COVERAGE": 0,
+        "FALSE_COVERAGE": len(false_coverage),
         "UNLABELLED_OUT_OF_PROGRAMME_CONTENT": len(unlabelled_out_of_programme),
         "INDEPENDENT_ANSWER_MISMATCH": len(mismatches),
         "TOTAL_INDEPENDENT_VALIDATIONS": total_validations,
         "PASSED_INDEPENDENT_VALIDATIONS": passed_validations,
         "MANUAL_REVIEWS_COUNT": len(manual_reviews),
         "CONCRETE_DEFECTS_FOUND": concrete_defects_found,
-        "NON_FORMALIZABLE_NO_CONCRETE_DEFECT": len(manual_reviews) - concrete_defects_found,
+        "UNREVIEWED_MANUAL_OBJECTS": len(unreviewed),
+        "NON_FORMALIZABLE_NO_CONCRETE_DEFECT": sum(
+            1
+            for m in manual_reviews
+            if m["classification"] == "NON_FORMALIZABLE_NO_CONCRETE_DEFECT"
+        ),
     }
 
     report = {
@@ -115,8 +176,10 @@ def validate_programme_and_content() -> dict[str, Any]:
         "generated_by": GENERATED_BY,
         "summary": summary,
         "unmapped_atoms": unmapped_atoms,
+        "false_coverage": false_coverage,
         "mismatches": mismatches,
         "manual_reviews": manual_reviews,
+        "unreviewed_manual_objects": unreviewed,
     }
     return report
 
@@ -142,10 +205,11 @@ def main() -> int:
         f"- **Défauts concrets trouvés** : `{report['summary']['CONCRETE_DEFECTS_FOUND']}`",
         f"- **Contenus non formalisables sans défaut** : {report['summary']['NON_FORMALIZABLE_NO_CONCRETE_DEFECT']}",
         "",
-        "## Analyse adversariale des 23 revues manuelles",
-        "- **22 objets de corpus NSI** (Histoire, Architecture, Web, Types construits, BDD) : textes conceptuels sans code exécutable audités sans anomalie.",
-        "- **1 objet archivé** (1NSI-APT-CO-025) : trace de lot historique, absent des maquettes canoniques assemblées.",
-        "- **Conclusion** : 0 défaut disciplinaire, 0 placeholder, conformité pédagogique totale.",
+        "## Analyse adversariale des revues manuelles",
+        f"- Objets en verdict `manual_review` : {report['summary']['MANUAL_REVIEWS_COUNT']}",
+        f"- Sans défaut concret : {report['summary']['NON_FORMALIZABLE_NO_CONCRETE_DEFECT']}",
+        f"- Défauts concrets encore ouverts : `{report['summary']['CONCRETE_DEFECTS_FOUND']}`",
+        f"- Objets non relus (aucune disposition enregistrée) : `{report['summary']['UNREVIEWED_MANUAL_OBJECTS']}`",
     ]
 
     with MD_TARGET.open("w", encoding="utf-8") as f:

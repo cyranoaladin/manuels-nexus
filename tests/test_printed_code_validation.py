@@ -69,15 +69,50 @@ def test_mutation_syntax_error_detected(monkeypatch) -> None:
     assert report["summary"]["PRINTED_CODE_SYNTAX_ERRORS"] > 0
 
 
-def test_printed_code_reconciliation_1423_exact(validation_report: dict) -> None:
+def test_printed_code_partition_is_exhaustive(validation_report: dict) -> None:
+    """Toute famille imprimee est denombree et classee ; rien n'est postule."""
+
     summary = validation_report["summary"]
-    assert summary["TOTAL_PRINTED_CODE_BLOCKS"] == 1423
+    families = (
+        summary["TOTAL_PYTHON_BLOCKS"]
+        + summary["TOTAL_SQL_BLOCKS"]
+        + summary["TOTAL_CONSOLE_BLOCKS"]
+        + summary["SYNTAX_REFERENCE_BLOCKS"]
+        + summary["RAW_VERBATIM_SNIPPETS"]
+    )
+    assert families == summary["PRINTED_CODE_BLOCKS_DISCOVERED"]
+    assert summary["PRINTED_CODE_BLOCKS_CLASSIFIED"] == summary["PRINTED_CODE_BLOCKS_DISCOVERED"]
     assert summary["UNCLASSIFIED_PRINTED_CODE"] == 0
-    assert summary["TOTAL_PYTHON_BLOCKS"] == 1014
-    assert summary["TOTAL_SQL_BLOCKS"] == 152
-    assert summary["SQL_EXECUTABLE_QUERIES"] + summary["SQL_DECLARATIVE_SCHEMAS"] == 152
-    assert summary["TOTAL_CONSOLE_BLOCKS"] == 123
-    assert summary["TOTAL_PYTHON_BLOCKS"] + summary["TOTAL_SQL_BLOCKS"] + summary["TOTAL_CONSOLE_BLOCKS"] == 1289
-    assert summary["COMPLEMENTARY_PRINTED_CODE_BLOCKS"] == 134
-    assert 1289 + 134 == 1423
-    assert summary["TOTAL_VERIFIED_EXECUTIONS"] == 133
+    assert (
+        summary["SQL_EXECUTABLE_QUERIES"] + summary["SQL_DECLARATIVE_SCHEMAS"]
+        == summary["TOTAL_SQL_BLOCKS"]
+    )
+    assert summary["COMPLEMENTARY_PRINTED_CODE_BLOCKS"] == (
+        summary["SYNTAX_REFERENCE_BLOCKS"] + summary["RAW_VERBATIM_SNIPPETS"]
+    )
+
+
+def test_fidelity_occurrences_reconcile_with_distinct_origins(
+    validation_report: dict,
+) -> None:
+    """Les comparaisons de fidelite sont des occurrences par variante.
+
+    Le rapprochement historique « 1423 vs 1289 » comparait deux populations
+    differentes et inventait un pont de 134 blocs. Le seul rapprochement
+    valide est celui-ci : occurrences = origines vues une fois + deux fois
+    les origines composees dans les deux variantes.
+    """
+
+    summary = validation_report["summary"]
+    once = summary["PRINTED_IN_ONE_VARIANT"]
+    twice = summary["PRINTED_IN_TWO_VARIANTS"]
+    assert once + twice == summary["PRINTED_FIDELITY_DISTINCT_ORIGINS"]
+    assert once + 2 * twice == summary["PRINTED_FIDELITY_OCCURRENCES"]
+
+
+def test_printed_code_is_clean(validation_report: dict) -> None:
+    summary = validation_report["summary"]
+    assert summary["PRINTED_CODE_SYNTAX_ERRORS"] == 0
+    assert summary["PRINTED_CODE_EXPECTED_OUTPUT_MISMATCH"] == 0
+    assert summary["CURVED_QUOTES_IN_CODE"] == 0
+    assert summary["DESTRUCTIVE_LIGATURES_IN_CODE"] == 0

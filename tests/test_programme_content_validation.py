@@ -56,11 +56,25 @@ def test_mutation_uncovered_atom_fails(tmp_path, monkeypatch) -> None:
     assert report["summary"]["OFFICIAL_ATOMS_UNCOVERED"] > 0
 
 
-def test_adversarial_manual_reviews_zero_defects(prog_report: dict) -> None:
+def test_every_manual_review_object_has_a_recorded_disposition(
+    prog_report: dict,
+) -> None:
+    """Un verdict `manual_review` doit etre dispose, jamais suppose conforme.
+
+    La version precedente affirmait que les 23 objets etaient tous sans defaut
+    en ecrivant `concrete_defect: False` sans l'evaluer. On exige desormais
+    qu'aucun objet ne reste sans disposition enregistree.
+    """
+
     summary = prog_report["summary"]
-    assert summary["MANUAL_REVIEWS_COUNT"] == 23
-    assert summary["CONCRETE_DEFECTS_FOUND"] == 0
-    assert summary["NON_FORMALIZABLE_NO_CONCRETE_DEFECT"] == 23
-    assert len(prog_report["manual_reviews"]) == 23
-    for r in prog_report["manual_reviews"]:
-        assert r["concrete_defect"] is False
+    reviews = prog_report["manual_reviews"]
+    assert len(reviews) == summary["MANUAL_REVIEWS_COUNT"]
+    assert summary["UNREVIEWED_MANUAL_OBJECTS"] == 0
+    assert not [r for r in reviews if r["classification"] == "UNREVIEWED"]
+    assert summary["CONCRETE_DEFECTS_FOUND"] == sum(
+        r.get("defects_open", 0) for r in reviews
+    )
+    assert summary["NON_FORMALIZABLE_NO_CONCRETE_DEFECT"] == sum(
+        1 for r in reviews
+        if r["classification"] == "NON_FORMALIZABLE_NO_CONCRETE_DEFECT"
+    )

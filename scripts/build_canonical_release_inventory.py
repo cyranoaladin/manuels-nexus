@@ -95,6 +95,10 @@ NON_RELEASE_RULES = (
         re.compile(r"^(?:Mathematiques/manuel-maths|NSI)/build/(?!MANUEL_)"),
         "construction d'un chapitre isole : artefact de travail, pas un manuel",
     ),
+    (
+        re.compile(r"(^|/)gabarits/reference-v4/"),
+        "maquette de charte v4 heritee : plus aucune cible ne la compose",
+    ),
 )
 
 
@@ -118,7 +122,7 @@ def tex_roots() -> list[Path]:
 
     found: list[Path] = []
     for path in sorted(ROOT.rglob("*.tex")):
-        if ".git" in path.parts or "reference-v4" in path.parts:
+        if ".git" in path.parts:
             continue
         head = path.read_text(encoding="utf-8", errors="replace")[:4000]
         if re.search(r"^\\documentclass", head, re.M):

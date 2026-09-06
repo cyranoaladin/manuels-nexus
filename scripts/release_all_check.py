@@ -170,6 +170,7 @@ def evaluate_release(
         and preflight.get("preflight_all_targets") == "PASS"
         and regression.get("regression_gate_status") == "PASS"
         and debt.get("all_product_debts_zero") is True
+        and not missing_evidence
     )
 
     global_publish_ready = all_targets_candidate_ready and release_owner_final_signoff
@@ -181,47 +182,102 @@ def evaluate_release(
     else:
         release_status = "FAIL"
 
+    # Chaque chiffre ci-dessous est LU dans la preuve correspondante. Un litteral
+    # ecrit ici ne serait pas une mesure : c'est precisement ce qui laissait le
+    # resume annoncer 0 pendant que les registres sous-jacents disaient autre chose.
+    # Fail-closed : une cle absente d'une preuve obligatoire n'est pas « zero
+    # defaut », c'est une preuve manquante. On l'enregistre et on bloque.
+    missing_evidence: list[str] = []
+
+    def require(payload: Any, artifact: str, key: str, default: Any = 0) -> Any:
+        section = payload.get("summary", payload) if isinstance(payload, dict) else {}
+        if not isinstance(section, dict) or key not in section:
+            missing_evidence.append(f"{artifact}#{key}")
+            return default
+        return section[key]
+
+    auth_summary = auth.get("summary", {})
+    parity_summary = parity.get("summary", {})
+    prog_summary = prog_val.get("summary", {})
+    preflight_records = preflight.get("records", [])
+
+    def _debt(key: str) -> int:
+        return int(debt_summary.get(key, 0))
+
+    evidence_debt = _debt("EVIDENCE_DEBT_OPEN")
+    content_debt = _debt("CONTENT_DEBT_OPEN")
+    technical_debt = _debt("TECHNICAL_DEBT_OPEN")
+    programme_debt = _debt("PROGRAMME_DEBT_OPEN")
+    print_debt = _debt("PRINT_DEBT_OPEN")
+    manifest_debt = _debt("MANIFEST_DEBT_OPEN")
+    repro_debt = _debt("REPRODUCIBILITY_DEBT_OPEN")
+
+    manifest_builds = len(manifest.get("builds", []))
+    repro_ok_count = sum(
+        1 for r in repro.get("results", []) if r.get("reproducibility_status") == "PASS"
+    )
+    overfull_total = sum(int(r.get("overfull_hbox_vbox", 0)) for r in preflight_records)
+
     summary = {
         "RELEASE_STATUS": release_status,
         "ALL_CANONICAL_MANUALS_ZERO_DEBT_PUBLISH_READY": global_publish_ready,
         "ALL_TARGETS_CANDIDATE_READY": all_targets_candidate_ready,
         "RELEASE_OWNER_FINAL_SIGNOFF": release_owner_final_signoff,
-        "CANONICAL_MANUALS_COUNT": 6,
+        "CANONICAL_MANUALS_COUNT": require(inv_summary, "audit/CANONICAL_RELEASE_INVENTORY.json", "CANONICAL_MANUALS"),
         "CANONICAL_TARGETS_COUNT": len(target_evaluations),
         "CANDIDATE_READY_COUNT": sum(1 for t in target_evaluations if t["publish_ready_candidate"]),
         "PUBLISH_READY_COUNT": sum(1 for t in target_evaluations if t["publish_ready"]),
-        "TOTAL_P0_OPEN": 0,
-        "TOTAL_P1_OPEN": 0,
-        "TOTAL_P2_OPEN": 0,
-        "PRODUCT_TECHNICAL_DEBT_OPEN": 0,
-        "CONTENT_DEBT_OPEN": 0,
-        "PROGRAMME_DEBT_OPEN": 0,
-        "PRINT_DEBT_OPEN": 0,
-        "MANIFEST_DEBT_OPEN": 0,
-        "REPRODUCIBILITY_DEBT_OPEN": 0,
-        "UNREGISTERED_RELEASE_TARGET": 0,
-        "MISSING_CANONICAL_TARGET": 0,
-        "AMBIGUOUS_CURRENT_ARTIFACT": 0,
-        "WRONG_YEAR_AUTHORITY": 0,
-        "PRINTED_CODE_SYNTAX_ERRORS": 0,
-        "PRINTED_CODE_EXPECTED_OUTPUT_MISMATCH": 0,
-        "CURVED_QUOTES_IN_CODE": 0,
-        "OVERFULL": 0,
-        "OFFICIAL_ATOMS_UNCOVERED": 0,
-        "FALSE_COVERAGE": 0,
-        "UNLABELLED_OUT_OF_PROGRAMME_CONTENT": 0,
-        "INDEPENDENT_ANSWER_MISMATCH": 0,
-        "STUDENT_WITHOUT_CORRECTION": 0,
-        "ORPHAN_TEACHER_CORRECTION": 0,
-        "TEACHER_CONTENT_LEAK_IN_STUDENT": 0,
-        "DOUBLE_BUILD_REPRODUCIBILITY": "12/12",
-        "REPRODUCIBILITY_GLOBAL": "PROVEN",
-        "MANIFEST_COVERAGE": "12/12",
-        "MANIFEST_GLOBAL": "FULL_CURRENT",
-        "PREFLIGHT_ALL_TARGETS": "PASS",
-        "UNEXPECTED_VISUAL_DIFF": 0,
-        "UNEXPLAINED_SEMANTIC_DIFF": 0,
-        "ALL_PRODUCT_DEBTS_ZERO": True,
+        "TOTAL_P0_OPEN": content_debt + evidence_debt + len(missing_evidence),
+        "TOTAL_P1_OPEN": programme_debt,
+        "TOTAL_P2_OPEN": technical_debt,
+        "EVIDENCE_DEBT_OPEN": evidence_debt + len(missing_evidence),
+        "MISSING_EVIDENCE_KEYS": len(missing_evidence),
+        "PRODUCT_TECHNICAL_DEBT_OPEN": technical_debt,
+        "CONTENT_DEBT_OPEN": content_debt,
+        "PROGRAMME_DEBT_OPEN": programme_debt,
+        "PRINT_DEBT_OPEN": print_debt,
+        "MANIFEST_DEBT_OPEN": manifest_debt,
+        "REPRODUCIBILITY_DEBT_OPEN": repro_debt,
+        "TEX_ROOTS_DISCOVERED": require(inv_summary, "audit/CANONICAL_RELEASE_INVENTORY.json", "TOTAL_TEX_ROOTS"),
+        "UNCLASSIFIED_TEX_ROOTS": require(inv_summary, "audit/CANONICAL_RELEASE_INVENTORY.json", "UNCLASSIFIED_TEX_ROOTS"),
+        "UNREGISTERED_RELEASE_TARGET": require(inv_summary, "audit/CANONICAL_RELEASE_INVENTORY.json", "UNREGISTERED_RELEASE_TARGET"),
+        "MISSING_CANONICAL_TARGET": require(inv_summary, "audit/CANONICAL_RELEASE_INVENTORY.json", "MISSING_CANONICAL_TARGET"),
+        "AMBIGUOUS_CURRENT_ARTIFACT": require(inv_summary, "audit/CANONICAL_RELEASE_INVENTORY.json", "AMBIGUOUS_CURRENT_ARTIFACT"),
+        "WRONG_YEAR_AUTHORITY": require(auth_summary, "audit/PROGRAMME_AUTHORITY_MATRIX.json", "WRONG_YEAR_AUTHORITY"),
+        "AUTHORITY_SOURCE_DIGEST_MISMATCH": require(auth_summary, "audit/PROGRAMME_AUTHORITY_MATRIX.json", "AUTHORITY_SOURCE_DIGEST_MISMATCH"),
+        "PRINTED_CODE_BLOCKS_DISCOVERED": require(cval_summary, "audit/PRINTED_CODE_VALIDATION.json", "PRINTED_CODE_BLOCKS_DISCOVERED"),
+        "PRINTED_CODE_BLOCKS_CLASSIFIED": require(cval_summary, "audit/PRINTED_CODE_VALIDATION.json", "PRINTED_CODE_BLOCKS_CLASSIFIED"),
+        "UNCLASSIFIED_PRINTED_CODE": require(cval_summary, "audit/PRINTED_CODE_VALIDATION.json", "UNCLASSIFIED_PRINTED_CODE"),
+        "PRINTED_CODE_SYNTAX_ERRORS": require(cval_summary, "audit/PRINTED_CODE_VALIDATION.json", "PRINTED_CODE_SYNTAX_ERRORS"),
+        "PRINTED_CODE_EXPECTED_OUTPUT_MISMATCH": require(cval_summary, "audit/PRINTED_CODE_VALIDATION.json", "PRINTED_CODE_EXPECTED_OUTPUT_MISMATCH"),
+        "CURVED_QUOTES_IN_CODE": require(cval_summary, "audit/PRINTED_CODE_VALIDATION.json", "CURVED_QUOTES_IN_CODE"),
+        "OVERFULL": overfull_total,
+        "OFFICIAL_ATOMS_UNCOVERED": require(prog_summary, "audit/PROGRAMME_CONTENT_VALIDATION.json", "OFFICIAL_ATOMS_UNCOVERED"),
+        "FALSE_COVERAGE": require(prog_summary, "audit/PROGRAMME_CONTENT_VALIDATION.json", "FALSE_COVERAGE"),
+        "UNLABELLED_OUT_OF_PROGRAMME_CONTENT": require(prog_summary, "audit/PROGRAMME_CONTENT_VALIDATION.json", "UNLABELLED_OUT_OF_PROGRAMME_CONTENT"),
+        "INDEPENDENT_ANSWER_MISMATCH": require(prog_summary, "audit/PROGRAMME_CONTENT_VALIDATION.json", "INDEPENDENT_ANSWER_MISMATCH"),
+        "INDEPENDENT_FORMAL_VALIDATIONS": require(prog_summary, "audit/PROGRAMME_CONTENT_VALIDATION.json", "TOTAL_INDEPENDENT_VALIDATIONS"),
+        "MANUAL_REVIEW_OBJECTS": require(prog_summary, "audit/PROGRAMME_CONTENT_VALIDATION.json", "MANUAL_REVIEWS_COUNT"),
+        "CONCRETE_DEFECTS_FOUND": require(prog_summary, "audit/PROGRAMME_CONTENT_VALIDATION.json", "CONCRETE_DEFECTS_FOUND"),
+        "UNREVIEWED_MANUAL_OBJECTS": require(prog_summary, "audit/PROGRAMME_CONTENT_VALIDATION.json", "UNREVIEWED_MANUAL_OBJECTS"),
+        "STUDENT_WITHOUT_CORRECTION": require(parity_summary, "audit/PARITY_BAREMES_VALIDATION.json", "STUDENT_WITHOUT_CORRECTION"),
+        "ORPHAN_TEACHER_CORRECTION": require(parity_summary, "audit/PARITY_BAREMES_VALIDATION.json", "ORPHAN_TEACHER_CORRECTION"),
+        "STUDENT_TEACHER_STATEMENT_DRIFT": require(parity_summary, "audit/PARITY_BAREMES_VALIDATION.json", "STUDENT_TEACHER_STATEMENT_DRIFT"),
+        "TEACHER_CONTENT_LEAK_IN_STUDENT": require(parity_summary, "audit/PARITY_BAREMES_VALIDATION.json", "TEACHER_CONTENT_LEAK_IN_STUDENT"),
+        "BAREME_TOTAL_MISMATCH": require(parity_summary, "audit/PARITY_BAREMES_VALIDATION.json", "BAREME_TOTAL_MISMATCH"),
+        "BAREME_SCOPE_AMBIGUOUS": require(parity_summary, "audit/PARITY_BAREMES_VALIDATION.json", "BAREME_SCOPE_AMBIGUOUS"),
+        "DOUBLE_BUILD_REPRODUCIBILITY": f"{repro_ok_count}/{len(target_evaluations)}",
+        "REPRODUCIBILITY_GLOBAL": repro.get("reproducibility_global", "UNKNOWN"),
+        "MANIFEST_COVERAGE": f"{manifest_builds}/{len(target_evaluations)}",
+        "MANIFEST_GLOBAL": (
+            "FULL_CURRENT"
+            if manifest_builds == len(target_evaluations) and manifest_debt == 0
+            else "INCOMPLETE"
+        ),
+        "PREFLIGHT_ALL_TARGETS": preflight.get("preflight_all_targets", "UNKNOWN"),
+        "UNEXPECTED_VISUAL_DIFF": regression.get("unexpected_visual_diff", 0),
+        "UNEXPLAINED_SEMANTIC_DIFF": regression.get("unexplained_semantic_diff", 0),
+        "ALL_PRODUCT_DEBTS_ZERO": bool(debt.get("all_product_debts_zero", False)),
     }
 
     report = {
