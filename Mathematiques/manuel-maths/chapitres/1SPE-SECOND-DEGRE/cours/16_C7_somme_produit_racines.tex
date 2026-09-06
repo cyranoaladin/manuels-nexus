@@ -1,0 +1,151 @@
+% META: {"id": "1SPE-SECDEG-CR-016", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "cours", "sous_type": "notion", "titre": "Somme et produit des racines", "temps_gabarit": 1, "capacites_codes": ["C7"], "prerequis": ["R1", "R3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify, solve, Rational
+% x, a, x1, x2, X = symbols('x a x1 x2 X')
+% # Propriete : a(x-x1)(x-x2) = a x^2 - a(x1+x2) x + a x1 x2
+% dev = expand(a*(x - x1)*(x - x2))
+% assert simplify(dev.coeff(x, 1) + a*(x1 + x2)) == 0
+% assert simplify(dev.coeff(x, 0) - a*x1*x2) == 0
+% # Exemple 1 : 2x^2 - 10x + 12
+% f = 2*x**2 - 10*x + 12
+% assert sorted(solve(f, x)) == [2, 3]
+% assert 2 + 3 == Rational(10, 2) and 2*3 == Rational(12, 2)
+% assert expand(2*(x - 2)*(x - 3)) == f
+% # Famille des fonctions s'annulant en 2 et 3
+% for k in (1, -3, Rational(1, 2), 7):
+%     g = k*(x - 2)*(x - 3)
+%     assert g.subs(x, 2) == 0 and g.subs(x, 3) == 0
+% # Reciproque : somme 7, produit 12
+% assert sorted(solve(X**2 - 7*X + 12, X)) == [3, 4]
+% assert 7**2 - 4*12 > 0
+% # Racine evidente : 3 - 7 + 4 = 0
+% h = 3*x**2 - 7*x + 4
+% assert 3 - 7 + 4 == 0 and h.subs(x, 1) == 0
+% assert sorted(solve(h, x)) == [1, Rational(4, 3)]
+% assert expand(3*(x - 1)*(x - Rational(4, 3))) == h
+% # Racine evidente -1 : 2 - 5 + 3 = 0
+% k2 = 2*x**2 + 5*x + 3
+% assert 2 - 5 + 3 == 0 and k2.subs(x, -1) == 0
+% assert sorted(solve(k2, x)) == [Rational(-3, 2), -1]
+% END-VERIFY
+
+\section*{Somme et produit des racines}
+
+Quand un trinôme possède deux racines, celles-ci ne sont pas indépendantes des
+coefficients : leur somme et leur produit se lisent directement sur $a$, $b$ et $c$.
+C'est souvent le chemin le plus court vers une factorisation.
+
+\propriete[7 — Somme et produit des racines]{%
+Soit $f(x) = ax^2 + bx + c$ avec $a \neq 0$. Si $f$ admet deux racines réelles
+distinctes $x_1$ et $x_2$, alors
+\[
+  x_1 + x_2 = -\dfrac{b}{a}
+  \qquad\text{et}\qquad
+  x_1 \times x_2 = \dfrac{c}{a}.
+\]
+}
+
+\demonstration{%
+Puisque $f$ s'annule en $x_1$ et en $x_2$, elle s'écrit sous forme factorisée
+$f(x) = a(x - x_1)(x - x_2)$. En développant :
+\[
+  a(x - x_1)(x - x_2) = a x^2 - a(x_1 + x_2)\,x + a\,x_1 x_2 .
+\]
+Deux polynômes égaux ont les mêmes coefficients. En identifiant avec
+$ax^2 + bx + c$ : $b = -a(x_1 + x_2)$ et $c = a\,x_1 x_2$. Comme $a \neq 0$, on
+divise par $a$ et on obtient les deux égalités annoncées.
+}
+
+\exemple{%
+Pour $f(x) = 2x^2 - 10x + 12$, on a $-\dfrac{b}{a} = \dfrac{10}{2} = 5$ et
+$\dfrac{c}{a} = \dfrac{12}{2} = 6$. On cherche donc deux nombres de somme $5$ et
+de produit $6$ : ce sont $2$ et $3$. On vérifie : $2(x-2)(x-3) = 2x^2 - 10x + 12$.
+}
+
+\subsection*{Les fonctions qui s'annulent en deux réels distincts}
+
+\theoreme[8 — Fonctions s'annulant en deux réels donnés]{%
+Soit $x_1$ et $x_2$ deux réels \textbf{distincts}. Les fonctions polynômes du
+second degré qui s'annulent en $x_1$ et en $x_2$ sont exactement les fonctions
+\[
+  f : x \longmapsto a(x - x_1)(x - x_2), \qquad a \in \mathbb{R}^{*}.
+\]
+Il n'y en a donc pas une seule, mais une famille entière : deux racines
+imposent la forme factorisée, jamais le coefficient $a$.
+}
+
+\demonstration{%
+Si $f(x) = a(x - x_1)(x - x_2)$ avec $a \neq 0$, alors $f$ est bien du second
+degré et $f(x_1) = f(x_2) = 0$.
+
+Réciproquement, soit $f$ une fonction polynôme du second degré s'annulant en
+$x_1$ et $x_2$. Son coefficient dominant $a$ est non nul, et le produit de ses
+racines vaut $\dfrac{c}{a}$ tandis que leur somme vaut $-\dfrac{b}{a}$. Le
+trinôme $a(x - x_1)(x - x_2)$ a donc exactement les mêmes coefficients que $f$ :
+les deux fonctions sont égales.
+}
+
+\exemple{%
+Les fonctions du second degré s'annulant en $2$ et en $3$ sont les
+$x \mapsto a(x-2)(x-3)$. Pour $a = 1$ on obtient $x^2 - 5x + 6$ ; pour $a = -3$,
+$-3x^2 + 15x - 18$ ; pour $a = \frac{1}{2}$, $\frac{1}{2}x^2 - \frac{5}{2}x + 3$.
+Toutes s'annulent aux mêmes endroits, mais leurs paraboles n'ont ni la même
+ouverture ni le même sens de variation.
+}
+
+\subsection*{Retrouver deux nombres à partir de leur somme et de leur produit}
+
+\propriete[9 — Somme $s$ et produit $p$]{%
+Deux réels de somme $s$ et de produit $p$ sont les racines du trinôme
+$X^2 - sX + p$. Ils existent et sont distincts si et seulement si $s^2 - 4p > 0$.
+}
+
+\exemple{%
+Chercher deux nombres de somme $7$ et de produit $12$ revient à résoudre
+$X^2 - 7X + 12 = 0$. Ici $s^2 - 4p = 49 - 48 = 1 > 0$ : il y a bien deux
+solutions, $3$ et $4$.
+
+En revanche, aucun couple de réels n'a pour somme $2$ et pour produit $5$ :
+$s^2 - 4p = 4 - 20 = -16 < 0$.
+}
+
+\subsection*{Stratégie : chercher d'abord une racine évidente}
+
+Avant de calculer un discriminant, il vaut la peine de tester les valeurs
+simples. Deux cas reviennent très souvent.
+
+\propriete[10 — Racines évidentes]{%
+Soit $f(x) = ax^2 + bx + c$ avec $a \neq 0$.
+\begin{itemize}
+  \item Si $a + b + c = 0$, alors $1$ est racine de $f$, et l'autre racine vaut
+        $\dfrac{c}{a}$.
+  \item Si $a - b + c = 0$, alors $-1$ est racine de $f$, et l'autre racine vaut
+        $-\dfrac{c}{a}$.
+\end{itemize}
+}
+
+\demonstration{%
+$f(1) = a + b + c$ : dire que cette somme est nulle, c'est exactement dire que
+$1$ est racine. Le produit des racines valant $\dfrac{c}{a}$, la seconde racine
+$x_2$ vérifie $1 \times x_2 = \dfrac{c}{a}$, d'où $x_2 = \dfrac{c}{a}$. Le second
+cas se traite de même avec $f(-1) = a - b + c$.
+}
+
+\exemple{%
+Pour $f(x) = 3x^2 - 7x + 4$ : $3 - 7 + 4 = 0$, donc $1$ est racine et l'autre
+vaut $\dfrac{4}{3}$. La factorisation suit sans discriminant :
+$f(x) = 3(x - 1)\left(x - \dfrac{4}{3}\right)$.
+
+Pour $g(x) = 2x^2 + 5x + 3$ : $2 - 5 + 3 = 0$, donc $-1$ est racine et l'autre
+vaut $-\dfrac{3}{2}$.
+}
+
+\erreurFrequente{%
+Confondre $-\dfrac{b}{a}$ et $\dfrac{b}{a}$ pour la somme. Le signe vient du
+développement de $a(x-x_1)(x-x_2)$, où le terme en $x$ est $-a(x_1+x_2)$ : la
+somme est l'opposé de $\dfrac{b}{a}$.
+
+Autre piège : croire que deux racines déterminent la fonction. Elles
+déterminent la forme factorisée, pas le coefficient $a$ — il faut une condition
+supplémentaire, par exemple l'image d'un troisième point.
+}

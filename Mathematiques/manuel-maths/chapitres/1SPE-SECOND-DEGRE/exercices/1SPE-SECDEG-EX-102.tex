@@ -1,0 +1,46 @@
+% META: {"id": "1SPE-SECDEG-EX-102", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-2026-C2", "1SPE-SECOND-DEGRE-2026-C3"], "capacites_codes": ["C7", "C4"], "parcours": 2, "competences": ["chercher", "calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-102.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-102.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand, solve, Rational
+% x = symbols('x')
+% # a. racine evidente 1 : 7 - 10 + 3 = 0
+% f = 7*x**2 - 10*x + 3
+% assert 7 - 10 + 3 == 0 and f.subs(x, 1) == 0
+% assert sorted(solve(f, x)) == [Rational(3, 7), 1]
+% assert expand(7*(x - 1)*(x - Rational(3, 7))) == f
+% # b. racine evidente -1 : 4 - 9 + 5 = 0
+% g = 4*x**2 + 9*x + 5
+% assert 4 - 9 + 5 == 0 and g.subs(x, -1) == 0
+% assert sorted(solve(g, x)) == [Rational(-5, 4), -1]
+% # c. somme et produit entiers : x^2 - 9x + 20
+% h = x**2 - 9*x + 20
+% assert sorted(solve(h, x)) == [4, 5] and 4 + 5 == 9 and 4*5 == 20
+% assert expand((x - 4)*(x - 5)) == h
+% # d. identite remarquable : 9x^2 - 30x + 25 = (3x-5)^2, racine double
+% k = 9*x**2 - 30*x + 25
+% assert expand((3*x - 5)**2) == k
+% assert solve(k, x) == [Rational(5, 3)]
+% # la racine est double : la strategie somme/produit sur deux racines
+% # distinctes ne s'applique pas
+% assert (-30)**2 - 4*9*25 == 0
+% END-VERIFY
+
+\exercice{Choisir sa stratégie de factorisation}{20}{2}
+
+Pour chacun des trinômes suivants, factoriser en choisissant la stratégie la
+plus économique, et \textbf{justifier ce choix} avant de calculer.
+
+\begin{enumerate}
+  \item[\textbf{a.}] $f(x) = 7x^2 - 10x + 3$
+  \item[\textbf{b.}] $g(x) = 4x^2 + 9x + 5$
+  \item[\textbf{c.}] $h(x) = x^2 - 9x + 20$
+  \item[\textbf{d.}] $k(x) = 9x^2 - 30x + 25$
+\end{enumerate}
+
+\begin{enumerate}
+  \item[\textbf{e.}] L'une de ces quatre fonctions ne possède pas deux racines
+        réelles distinctes. Laquelle ? Que devient alors la propriété sur la
+        somme et le produit des racines ?
+\end{enumerate}
+
+\coupdepouce{Avant de calculer un discriminant, teste $x = 1$ et $x = -1$, et
+regarde si les coefficients évoquent une identité remarquable.}
