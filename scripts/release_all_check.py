@@ -21,7 +21,10 @@ RÈGLE D'AUTORITÉ ABSOLUE :
 from __future__ import annotations
 
 import argparse
+import datetime
+import hashlib
 import json
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -32,6 +35,7 @@ JSON_TARGET = ROOT / "audit/RELEASE_ALL_CHECK.json"
 MD_TARGET = ROOT / "audit/RELEASE_ALL_CHECK.md"
 COLLECTION_READINESS_JSON = ROOT / "audit/COLLECTION_PUBLISH_READINESS.json"
 COLLECTION_READINESS_MD = ROOT / "audit/COLLECTION_PUBLISH_READINESS.md"
+SNAPSHOT_TARGET = ROOT / "audit/RELEASE_SNAPSHOT.json"
 GENERATED_BY = "scripts/release_all_check.py"
 
 INVENTORY_PATH = ROOT / "audit/CANONICAL_RELEASE_INVENTORY.json"
@@ -45,6 +49,95 @@ PREFLIGHT_PATH = ROOT / "audit/FINAL_PRINT_PREFLIGHT.json"
 REGRESSION_PATH = ROOT / "audit/VISUAL_SEMANTIC_REGRESSION_REPORT.json"
 DEBT_PATH = ROOT / "audit/ZERO_TECHNICAL_DEBT_REPORT.json"
 FINDINGS_PATH = ROOT / "audit/OPEN_FINDINGS.json"
+
+
+def matches_manual(item: dict[str, Any] | str, manual_id: str) -> bool:
+    if isinstance(item, str):
+        path_str = item
+    else:
+        declared_manual = item.get("manual")
+        if declared_manual:
+            return declared_manual == manual_id or manual_id.startswith(declared_manual)
+        path_str = item.get("path") or item.get("file") or ""
+
+    if not path_str:
+        return True
+
+    parts = Path(path_str).parts
+    for part in parts:
+        if manual_id in part:
+            return True
+    normalized = manual_id.replace("_2026_2027", "").replace("EXPERTES", "EXP")
+    for part in parts:
+        if normalized in part:
+            return True
+    return False
+
+
+def get_git_commit_head(root: Path = ROOT) -> str:
+    try:
+        res = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=root,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        return res.stdout.strip()
+    except Exception:
+        head_file = root / ".git/HEAD"
+        if head_file.is_file():
+            ref = head_file.read_text(encoding="utf-8").strip()
+            if ref.startswith("ref: "):
+                ref_path = root / ".git" / ref[5:]
+                if ref_path.is_file():
+                    return ref_path.read_text(encoding="utf-8").strip()
+            return ref
+        return "UNKNOWN"
+
+
+def compute_file_sha256(path: Path) -> str:
+    if not path.is_file():
+        return "ABSENT"
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def create_release_snapshot(report: dict[str, Any], root: Path = ROOT) -> dict[str, Any]:
+    return {
+        "artifact_type": "release_snapshot",
+        "schema_version": "1.0.0",
+        "generated_by": GENERATED_BY,
+        "commit_head": get_git_commit_head(root),
+        "timestamp_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "release_status": report["summary"]["RELEASE_STATUS"],
+        "all_targets_candidate_ready": report["summary"]["ALL_TARGETS_CANDIDATE_READY"],
+        "evidence_digests": {
+            "canonical_release_inventory": compute_file_sha256(INVENTORY_PATH),
+            "programme_authority_matrix": compute_file_sha256(AUTHORITY_PATH),
+            "printed_code_validation": compute_file_sha256(CODE_VAL_PATH),
+            "programme_content_validation": compute_file_sha256(CONTENT_VAL_PATH),
+            "parity_baremes_validation": compute_file_sha256(PARITY_PATH),
+            "build_manifest": compute_file_sha256(MANIFEST_PATH),
+            "double_build_reproducibility": compute_file_sha256(REPRO_PATH),
+            "final_print_preflight": compute_file_sha256(PREFLIGHT_PATH),
+            "visual_semantic_regression_report": compute_file_sha256(REGRESSION_PATH),
+            "zero_technical_debt_report": compute_file_sha256(DEBT_PATH),
+            "open_findings": compute_file_sha256(FINDINGS_PATH),
+        },
+        "canonical_targets": [
+            {
+                "target_id": t["target_id"],
+                "manual_id": t["manual_id"],
+                "variant": t["variant"],
+                "master": t["master"],
+                "pdf": t["pdf"],
+                "page_count": t["page_count"],
+                "pdf_sha256": t["pdf_sha256"],
+                "publish_ready_candidate": t["publish_ready_candidate"],
+            }
+            for t in report["targets"]
+        ],
+    }
 
 
 def evaluate_release(
@@ -100,6 +193,17 @@ def evaluate_release(
 
     target_evaluations = []
 
+    findings_list = findings.get("findings", [])
+    ids_by_sev = findings.get("finding_ids_by_severity", {})
+    unattributed_p0 = max(0, len(ids_by_sev.get("P0", [])) - len([f for f in findings_list if f.get("severity") == "P0"]))
+    unattributed_p1 = max(0, len(ids_by_sev.get("P1", [])) - len([f for f in findings_list if f.get("severity") == "P1"]))
+    unattributed_p2 = max(0, len(ids_by_sev.get("P2", [])) - len([f for f in findings_list if f.get("severity") == "P2"]))
+
+    markers = debt.get("publishable_source_markers_detected", [])
+    residuals = debt.get("residual_files_detected", [])
+    global_tech_debt = int(debt_summary.get("TECHNICAL_DEBT_OPEN", 0))
+    unattributed_tech = max(0, global_tech_debt - len(markers) - len(residuals))
+
     for target in canonical_targets:
         manual_id = target["manual_id"]
         variant = target["variant"]
@@ -129,6 +233,19 @@ def evaluate_release(
         # Student separation
         student_sep_ok = pf_entry.get("student_separation", {}).get("passed", True)
 
+        # Dynamic defect derivation for this target
+        p0_matched = [f for f in findings_list if f.get("severity") == "P0" and matches_manual(f, manual_id)]
+        p1_matched = [f for f in findings_list if f.get("severity") == "P1" and matches_manual(f, manual_id)]
+        p2_matched = [f for f in findings_list if f.get("severity") == "P2" and matches_manual(f, manual_id)]
+
+        target_p0 = len(p0_matched) + unattributed_p0 + len(missing_evidence)
+        target_p1 = len(p1_matched) + unattributed_p1
+        target_p2 = len(p2_matched) + unattributed_p2 + overfull_cnt
+
+        matched_markers = [m for m in markers if matches_manual(m, manual_id)]
+        matched_residuals = [r for r in residuals if matches_manual(r, manual_id)]
+        target_tech_debt = len(matched_markers) + len(matched_residuals) + unattributed_tech
+
         checks = {
             "master_present": master_present,
             "pdf_present": pdf_present,
@@ -138,10 +255,10 @@ def evaluate_release(
             "reproducibility_proven": repro_ok,
             "preflight_passed": preflight_ok,
             "student_separation_clean": student_sep_ok,
-            "p0_open": 0,
-            "p1_open": 0,
-            "p2_open": overfull_cnt,
-            "technical_debt_open": 0,
+            "p0_open": target_p0,
+            "p1_open": target_p1,
+            "p2_open": target_p2,
+            "technical_debt_open": target_tech_debt,
         }
 
         all_checks_pass = all([
@@ -313,6 +430,11 @@ def main() -> int:
             json.dump(report, f, indent=2, ensure_ascii=False)
             f.write("\n")
 
+    snapshot = create_release_snapshot(report, root=ROOT)
+    with SNAPSHOT_TARGET.open("w", encoding="utf-8") as f:
+        json.dump(snapshot, f, indent=2, ensure_ascii=False)
+        f.write("\n")
+
     md_lines = [
         "# Synthèse Globale de Release — Manuels Nexus Réussite (Édition 2026-2027)",
         "",
@@ -322,8 +444,8 @@ def main() -> int:
         f"- **PUBLISH_READY Définitifs** : `{report['summary']['PUBLISH_READY_COUNT']}/{report['summary']['CANONICAL_TARGETS_COUNT']}`",
         f"- **Reproductibilité Déterministe** : `{report['summary']['REPRODUCIBILITY_GLOBAL']}` ({report['summary']['DOUBLE_BUILD_REPRODUCIBILITY']})",
         f"- **Préflight Impression Global** : `{report['summary']['PREFLIGHT_ALL_TARGETS']}` (12/12)",
-        f"- **Dette Produit Ouverte** : `0` (Technique: 0, Contenu: 0, Programme: 0, Print: 0, Manifest: 0, Repro: 0)",
-        f"- **Défauts Ouverts** : P0=0, P1=0, P2=0, Overfull=0",
+        f"- **Dette Produit Ouverte** : `{report['summary']['PRODUCT_TECHNICAL_DEBT_OPEN']}` (Technique: {report['summary']['PRODUCT_TECHNICAL_DEBT_OPEN']}, Contenu: {report['summary']['CONTENT_DEBT_OPEN']}, Programme: {report['summary']['PROGRAMME_DEBT_OPEN']}, Print: {report['summary']['PRINT_DEBT_OPEN']}, Manifest: {report['summary']['MANIFEST_DEBT_OPEN']}, Repro: {report['summary']['REPRODUCIBILITY_DEBT_OPEN']})",
+        f"- **Défauts Ouverts** : P0={report['summary']['TOTAL_P0_OPEN']}, P1={report['summary']['TOTAL_P1_OPEN']}, P2={report['summary']['TOTAL_P2_OPEN']}, Overfull={report['summary']['OVERFULL']}",
         "",
         "## Tableau Récapitulatif Exhaustif des 12 PDF Canoniques",
         "",
@@ -333,15 +455,21 @@ def main() -> int:
     for t in report["targets"]:
         sha_full = t["pdf_sha256"] if t["pdf_sha256"] else "N/A"
         cand = "OUI" if t["publish_ready_candidate"] else "NON"
+        c = t["checks"]
+        c_code = "PASS" if c["printed_code_ok"] else "FAIL"
+        c_prog = "PASS" if (c["authority_2026_2027"] and c["p0_open"] == 0 and c["p1_open"] == 0) else "FAIL"
+        c_parity = "PASS" if c["student_separation_clean"] else "FAIL"
+        c_pf = "PASS" if (c["preflight_passed"] and c["overfull_zero"]) else "FAIL"
+        c_repro = "PASS" if c["reproducibility_proven"] else "FAIL"
         md_lines.append(
             f"| **{t['manual_id']}** | `{t['variant']}` | {t['page_count']} | `{sha_full}` | "
-            f"PASS | PASS | PASS | PASS | PASS | **`{cand}`** |"
+            f"{c_code} | {c_prog} | {c_parity} | {c_pf} | {c_repro} | **`{cand}`** |"
         )
     for path in (MD_TARGET, COLLECTION_READINESS_MD):
         with path.open("w", encoding="utf-8") as f:
             f.write("\n".join(md_lines).rstrip() + "\n")
 
-    print(f"Rapports générés : {JSON_TARGET} et {COLLECTION_READINESS_JSON}")
+    print(f"Rapports générés : {JSON_TARGET}, {COLLECTION_READINESS_JSON} et {SNAPSHOT_TARGET}")
     print(f"Statut : {report['summary']['RELEASE_STATUS']}")
     print(f"Candidats prêts : {report['summary']['CANDIDATE_READY_COUNT']}/{report['summary']['CANONICAL_TARGETS_COUNT']}")
     return 0 if report["summary"]["ALL_TARGETS_CANDIDATE_READY"] else 1
