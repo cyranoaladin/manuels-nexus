@@ -3,3 +3,15 @@
 \begin{exercice}{1SPE-TRIGO-EX-024}{3}{15}
 Résoudre dans $]-\pi \,;\, \pi]$ l'équation $\cos(x) = \dfrac{\sqrt{2}}{2}$.
 \end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import pi, cos, sqrt, simplify, solveset, Symbol, Interval
+%
+% x = Symbol('x', real=True)
+% cible = sqrt(2)/2
+% assert simplify(cos(pi/4) - cible) == 0
+% ensemble = solveset(cos(x) - cible, x, Interval.Lopen(-pi, pi))
+% assert set(ensemble) == {pi/4, -pi/4}
+% # Les deux solutions sont opposees : c'est la parite du cosinus.
+% assert simplify(cos(-pi/4) - cos(pi/4)) == 0
+% END-VERIFY

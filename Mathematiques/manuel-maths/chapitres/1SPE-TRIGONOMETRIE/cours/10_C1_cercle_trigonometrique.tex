@@ -66,3 +66,28 @@ La \textbf{mesure principale} d'un angle est l'unique réel $t_0 \in {]-\pi\,;\,
 \approfondissement{
 La notion de radian est liee a la longueur d'arc : sur un cercle de rayon $R$, un angle au centre de mesure $\theta$ (en radians) intercepte un arc de longueur $\ell = R\theta$. Sur le cercle trigonométrique ($R = 1$), la longueur d'arc est donc égale a la mesure de l'angle en radians.
 }
+
+% BEGIN-VERIFY
+% from sympy import pi, Rational, simplify, cos, sin
+%
+% # La correspondance degres/radians, et les cinq conversions usuelles.
+% def en_radians(degres):
+%     return Rational(degres, 180) * pi
+% assert simplify(en_radians(180) - pi) == 0
+% for degres, attendu in ((90, pi/2), (60, pi/3), (45, pi/4), (30, pi/6),
+%                         (360, 2*pi)):
+%     assert simplify(en_radians(degres) - attendu) == 0
+%
+% # Le cercle trigonometrique est de rayon 1 : tout point associe a un reel t
+% # est a distance 1 de l'origine.
+% for t in (0, pi/6, pi/4, pi/3, pi/2, pi, Rational(7, 5)*pi):
+%     assert simplify(cos(t)**2 + sin(t)**2 - 1) == 0
+%
+% # Un radian intercepte un arc de longueur egale au rayon : sur le cercle
+% # unite, la longueur d'arc vaut la mesure de l'angle.
+% rayon = 1
+% for angle in (Rational(1), pi/2, pi):
+%     assert simplify(rayon * angle - angle) == 0
+% # Le tour complet mesure 2pi : c'est la circonference du cercle unite.
+% assert simplify(2*pi*rayon - 2*pi) == 0
+% END-VERIFY

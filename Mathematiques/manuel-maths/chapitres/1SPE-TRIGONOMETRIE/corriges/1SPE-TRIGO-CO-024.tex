@@ -4,3 +4,26 @@
 $\cos(x) = \cos\!\left(\dfrac{\pi}{4}\right) \iff x = \dfrac{\pi}{4} + 2k\pi \quad \text{ou} \quad x = -\dfrac{\pi}{4} + 2k\pi$.
 Dans $]-\pi \,;\, \pi]$, les solutions sont $S = \left\{-\dfrac{\pi}{4} \,;\, \dfrac{\pi}{4}\right\}$.
 \end{corrige}
+
+% BEGIN-VERIFY
+% from sympy import pi, cos, simplify, solveset, S, Interval
+%
+% cible = cos(pi/4)
+%
+% # Les deux familles de solutions annoncees verifient bien l'equation.
+% for k in range(-3, 4):
+%     for solution in (pi/4 + 2*k*pi, -pi/4 + 2*k*pi):
+%         assert simplify(cos(solution) - cible) == 0
+%
+% # Dans ]-pi ; pi], seules deux d'entre elles tombent dans l'intervalle.
+% candidates = set()
+% for k in range(-3, 4):
+%     for solution in (pi/4 + 2*k*pi, -pi/4 + 2*k*pi):
+%         if -pi < solution <= pi:
+%             candidates.add(simplify(solution))
+% assert candidates == {pi/4, -pi/4}
+%
+% # Controle independant par sympy, sur le meme intervalle.
+% ensemble = solveset(cos(S('x')) - cible, S('x'), Interval.Lopen(-pi, pi))
+% assert set(ensemble) == {pi/4, -pi/4}
+% END-VERIFY

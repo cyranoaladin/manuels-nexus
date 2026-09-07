@@ -80,3 +80,37 @@ Pour tout réel $x$ :
 \approfondissement{
 Les valeurs remarquables de $\cos\!\left(\dfrac{\pi}{6}\right)$ et $\sin\!\left(\dfrac{\pi}{6}\right)$ se retrouvent a partir d'un triangle equilateral de cote $1$ : la hauteur vaut $\dfrac{\sqrt{3}}{2}$ et la moitie de la base vaut $\dfrac{1}{2}$. Celles de $\cos\!\left(\dfrac{\pi}{4}\right)$ et $\sin\!\left(\dfrac{\pi}{4}\right)$ proviennent d'un triangle rectangle isocele d'hypotenuse $1$.
 }
+
+% BEGIN-VERIFY
+% from sympy import pi, sqrt, Rational, cos, sin, simplify
+%
+% # L'identite fondamentale, sur des angles remarquables et des angles
+% # quelconques.
+% for t in (0, pi/6, pi/4, pi/3, pi/2, Rational(2, 3)*pi, pi,
+%           Rational(-5, 7)*pi):
+%     assert simplify(cos(t)**2 + sin(t)**2 - 1) == 0
+%
+% # L'encadrement annonce : cosinus et sinus restent dans [-1 ; 1].
+% for k in range(-40, 41):
+%     t = Rational(k, 10) * pi
+%     assert -1 <= cos(t) <= 1
+%     assert -1 <= sin(t) <= 1
+%
+% # Les valeurs remarquables du tableau du cours.
+% attendus = {
+%     0: (1, 0),
+%     pi/6: (sqrt(3)/2, Rational(1, 2)),
+%     pi/4: (sqrt(2)/2, sqrt(2)/2),
+%     pi/3: (Rational(1, 2), sqrt(3)/2),
+%     pi/2: (0, 1),
+% }
+% for t, (c, s) in attendus.items():
+%     assert simplify(cos(t) - c) == 0, t
+%     assert simplify(sin(t) - s) == 0, t
+%
+% # Les coordonnees du point M sont bien (cos t ; sin t) : le point est sur le
+% # cercle, et son abscisse est le cosinus.
+% for t in (pi/6, pi/3, Rational(5, 4)*pi):
+%     M = (cos(t), sin(t))
+%     assert simplify(M[0]**2 + M[1]**2 - 1) == 0
+% END-VERIFY

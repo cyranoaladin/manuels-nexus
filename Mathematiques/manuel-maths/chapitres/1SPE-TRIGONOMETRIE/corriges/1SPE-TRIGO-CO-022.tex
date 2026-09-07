@@ -2,3 +2,23 @@
 \begin{corrige}{1SPE-TRIGO-EX-022}
 $\dfrac{17\pi}{3} = 6\pi - \dfrac{\pi}{3}$. La mesure principale est $-\dfrac{\pi}{3}\text{ rad}$.
 \end{corrige}
+
+% BEGIN-VERIFY
+% from sympy import pi, Rational, simplify, cos, sin
+%
+% angle = Rational(17, 3) * pi
+% principale = -pi/3
+%
+% # La mesure principale appartient a ]-pi ; pi] et differe de l'angle d'un
+% # multiple entier de 2pi.
+% assert -pi < principale <= pi
+% ecart = simplify((angle - principale) / (2*pi))
+% assert ecart == 3 and ecart.is_integer
+%
+% # Deux angles de meme mesure principale ont memes cosinus et sinus.
+% assert simplify(cos(angle) - cos(principale)) == 0
+% assert simplify(sin(angle) - sin(principale)) == 0
+%
+% # La decomposition annoncee, 17pi/3 = 6pi - pi/3, est exacte.
+% assert simplify(angle - (6*pi - pi/3)) == 0
+% END-VERIFY

@@ -2,3 +2,18 @@
 \begin{corrige}{1SPE-TRIGO-EX-021}
 $30^\circ = \dfrac{\pi}{6}\text{ rad}$, $45^\circ = \dfrac{\pi}{4}\text{ rad}$, $60^\circ = \dfrac{\pi}{3}\text{ rad}$ et $90^\circ = \dfrac{\pi}{2}\text{ rad}$.
 \end{corrige}
+
+% BEGIN-VERIFY
+% from sympy import pi, Rational, simplify
+%
+% def en_radians(degres):
+%     return Rational(degres, 180) * pi
+%
+% assert simplify(en_radians(30) - pi/6) == 0
+% assert simplify(en_radians(45) - pi/4) == 0
+% assert simplify(en_radians(60) - pi/3) == 0
+% assert simplify(en_radians(90) - pi/2) == 0
+% # Conversion inverse : on retombe sur les degres de depart.
+% for degres in (30, 45, 60, 90):
+%     assert simplify(en_radians(degres) * 180 / pi - degres) == 0
+% END-VERIFY

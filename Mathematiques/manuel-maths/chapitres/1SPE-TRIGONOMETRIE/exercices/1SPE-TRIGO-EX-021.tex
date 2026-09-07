@@ -2,3 +2,14 @@
 \begin{exercice}{1SPE-TRIGO-EX-021}{1}{10}
 Convertir en radians les angles suivants donnés en degrés : $30^\circ$, $45^\circ$, $60^\circ$ et $90^\circ$.
 \end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import pi, Rational, simplify
+%
+% conversions = {30: pi/6, 45: pi/4, 60: pi/3, 90: pi/2}
+% for degres, radians in conversions.items():
+%     assert simplify(Rational(degres, 180)*pi - radians) == 0
+% # Les quatre angles sont distincts et ordonnes comme leurs mesures.
+% valeurs = [conversions[d] for d in sorted(conversions)]
+% assert valeurs == sorted(valeurs)
+% END-VERIFY

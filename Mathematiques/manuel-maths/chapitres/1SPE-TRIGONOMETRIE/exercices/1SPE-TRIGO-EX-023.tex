@@ -2,3 +2,15 @@
 \begin{exercice}{1SPE-TRIGO-EX-023}{2}{10}
 Sachant que $x \in \left[0 \,;\, \dfrac{\pi}{2}\right]$ et $\sin(x) = \dfrac{3}{5}$, calculer $\cos(x)$.
 \end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational, asin, cos, sin, simplify, pi
+%
+% x = asin(Rational(3, 5))
+% assert 0 <= x <= pi/2
+% assert simplify(sin(x) - Rational(3, 5)) == 0
+% assert simplify(cos(x) - Rational(4, 5)) == 0
+% assert simplify(cos(x)**2 + sin(x)**2 - 1) == 0
+% # L'intervalle est ce qui tranche le signe : hors de lui, -4/5 conviendrait.
+% assert simplify(cos(pi - x) + Rational(4, 5)) == 0
+% END-VERIFY

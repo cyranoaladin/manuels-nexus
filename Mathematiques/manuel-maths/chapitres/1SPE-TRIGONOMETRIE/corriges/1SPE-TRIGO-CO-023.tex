@@ -2,3 +2,26 @@
 \begin{corrige}{1SPE-TRIGO-EX-023}
 $\cos^2(x) = 1 - \sin^2(x) = 1 - \dfrac{9}{25} = \dfrac{16}{25}$. Comme $x \in \left[0 \,;\, \dfrac{\pi}{2}\right]$, $\cos(x) \geq 0$, donc $\cos(x) = \dfrac{4}{5}$.
 \end{corrige}
+
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt, simplify, symbols, solve, cos, sin, asin, pi
+%
+% sinus = Rational(3, 5)
+% cos_carre = 1 - sinus**2
+% assert cos_carre == Rational(16, 25)
+%
+% # Les deux racines carrees possibles ; l'intervalle en selectionne une.
+% racines = [Rational(4, 5), Rational(-4, 5)]
+% assert {r**2 for r in racines} == {cos_carre}
+% x = asin(sinus)                       # dans [0 ; pi/2]
+% assert 0 <= x <= pi/2
+% assert simplify(cos(x) - Rational(4, 5)) == 0
+% assert cos(x) >= 0
+%
+% # Le controle de coherence : cos^2 + sin^2 = 1.
+% assert simplify(cos(x)**2 + sin(x)**2 - 1) == 0
+% # Hors de l'intervalle, l'autre signe serait le bon : en pi - x, le sinus
+% # est le meme et le cosinus vaut -4/5.
+% assert simplify(sin(pi - x) - sinus) == 0
+% assert simplify(cos(pi - x) + Rational(4, 5)) == 0
+% END-VERIFY

@@ -23,3 +23,32 @@ obtient $E(Z)=2E(Y)=18$.
 Dans $E(aX+b)=aE(X)+b$, le terme constant $b$ n'est pas multiplié par $a$.
 Par exemple, $E(2X-3)=2E(X)-3$, et non $2\bigl(E(X)-3\bigr)$.
 }
+
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+%
+% # La linearite, verifiee sur une loi explicite plutot que postulee.
+% loi = {0: Rational(1, 4), 5: Rational(1, 2), 20: Rational(1, 4)}
+% assert sum(loi.values()) == 1
+% E_X = sum(v*p for v, p in loi.items())
+% assert E_X == Rational(15, 2)
+%
+% a, b = symbols('a b', real=True)
+% loi_Y = {a*v + b: p for v, p in loi.items()}
+% E_Y = sum(v*p for v, p in loi_Y.items())
+% assert simplify(E_Y - (a*E_X + b)) == 0
+%
+% # L'exemple du cours : E(X) = 12, Y = X - 3, Z = 2Y.
+% loi12 = {10: Rational(1, 2), 14: Rational(1, 2)}
+% assert sum(v*p for v, p in loi12.items()) == 12
+% E_Y12 = sum((v - 3)*p for v, p in loi12.items())
+% assert E_Y12 == 9
+% E_Z = sum(2*(v - 3)*p for v, p in loi12.items())
+% assert E_Z == 18
+%
+% # L'erreur frequente nommee : b n'est pas multiplie par a.
+% faux = 2*(12 - 3)
+% correct = 2*12 - 3
+% assert correct == 21 and faux == 18
+% assert correct != faux
+% END-VERIFY

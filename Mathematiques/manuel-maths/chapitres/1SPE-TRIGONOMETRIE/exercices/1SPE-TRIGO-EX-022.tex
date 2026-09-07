@@ -2,3 +2,15 @@
 \begin{exercice}{1SPE-TRIGO-EX-022}{1}{10}
 Déterminer la mesure principale de l'angle orienté de mesure $\dfrac{17\pi}{3}\text{ rad}$.
 \end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import pi, Rational, simplify
+%
+% angle = Rational(17, 3)*pi
+% principale = -pi/3
+% assert -pi < principale <= pi
+% assert simplify((angle - principale) / (2*pi)) == 3
+% # Aucune autre mesure de la meme famille ne tombe dans ]-pi ; pi].
+% dans = [k for k in range(-5, 6) if -pi < angle - 2*k*pi <= pi]
+% assert len(dans) == 1 and simplify(angle - 2*dans[0]*pi - principale) == 0
+% END-VERIFY

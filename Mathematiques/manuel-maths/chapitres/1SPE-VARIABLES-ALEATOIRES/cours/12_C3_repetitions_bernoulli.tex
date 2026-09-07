@@ -157,3 +157,46 @@ générale n'est nécessaire.
 Sur un chemin, on \textbf{multiplie} les probabilités. Entre plusieurs chemins
 qui réalisent le même événement, on \textbf{additionne} leurs probabilités.
 }
+
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, expand, simplify, binomial
+% from itertools import product
+%
+% p = symbols('p', positive=True)
+%
+% # Deux epreuves independantes et identiques : les quatre chemins de l'arbre.
+% chemins = {
+%     ("S", "S"): p*p,
+%     ("S", "E"): p*(1 - p),
+%     ("E", "S"): (1 - p)*p,
+%     ("E", "E"): (1 - p)**2,
+% }
+% assert simplify(expand(sum(chemins.values())) - 1) == 0
+%
+% # Le nombre de succes suit la loi binomiale : on la retrouve en regroupant.
+% loi = {}
+% for chemin, poids in chemins.items():
+%     succes = chemin.count("S")
+%     loi[succes] = simplify(loi.get(succes, 0) + poids)
+% for k in range(3):
+%     attendu = binomial(2, k) * p**k * (1 - p)**(2 - k)
+%     assert simplify(expand(loi[k] - attendu)) == 0
+%
+% # Trois et quatre epreuves : meme construction, meme conclusion.
+% for n in (3, 4):
+%     total = {}
+%     for chemin in product("SE", repeat=n):
+%         poids = 1
+%         for lettre in chemin:
+%             poids = poids * (p if lettre == "S" else (1 - p))
+%         succes = chemin.count("S")
+%         total[succes] = simplify(total.get(succes, 0) + poids)
+%     assert simplify(expand(sum(total.values())) - 1) == 0
+%     for k in range(n + 1):
+%         attendu = binomial(n, k) * p**k * (1 - p)**(n - k)
+%         assert simplify(expand(total[k] - attendu)) == 0
+%
+% # Chiffre : pour p = 1/3 et n = 3, la probabilite d'exactement deux succes.
+% valeur = (binomial(3, 2) * Rational(1, 3)**2 * Rational(2, 3))
+% assert valeur == Rational(2, 9)
+% END-VERIFY

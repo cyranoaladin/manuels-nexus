@@ -50,3 +50,32 @@ Un assureur propose un contrat couvrant la casse d'un smartphone. La prime annue
 On a $X = 250$ (cas de casse : $300 - 50$) avec probabilité $\frac{1}{10}$ et $X = -50$ (pas de casse : $-50$) avec probabilité $\frac{9}{10}$. L'espérance $E(X) = 250 \times \frac{1}{10} + (-50) \times \frac{9}{10} = 25 - 45 = -20$. En moyenne, l'assuré perd $20$~euros par an : le contrat est avantageux pour l'assureur.
 
 Cette situation sera entièrement traitée au Temps~7 (TD fil rouge), une fois les capacités C1 à C5 acquises.
+
+% BEGIN-VERIFY
+% from sympy import Rational
+%
+% # L'accroche : prime 50 EUR, remboursement 300 EUR, casse avec probabilite 1/10.
+% prime, remboursement, p_casse = 50, 300, Rational(1, 10)
+%
+% # Gain de l'ASSURE : il paie toujours la prime, et touche le remboursement
+% # seulement en cas de casse.
+% loi = {remboursement - prime: p_casse, -prime: 1 - p_casse}
+% assert set(loi) == {250, -50}
+% assert sum(loi.values()) == 1
+%
+% esperance_assure = sum(valeur*proba for valeur, proba in loi.items())
+% assert esperance_assure == Rational(250, 10) - Rational(50*9, 10)
+% assert esperance_assure == -20
+%
+% # Le contrat est donc DEFAVORABLE a l'assure en moyenne, et favorable a
+% # l'assureur : les deux esperances sont opposees.
+% esperance_assureur = -esperance_assure
+% assert esperance_assureur == 20 > 0
+% assert esperance_assure < 0
+%
+% # Le point d'equilibre : la prime qui annulerait l'esperance de l'assure.
+% equitable = remboursement * p_casse
+% assert equitable == 30
+% loi_equitable = {remboursement - equitable: p_casse, -equitable: 1 - p_casse}
+% assert sum(v*p for v, p in loi_equitable.items()) == 0
+% END-VERIFY

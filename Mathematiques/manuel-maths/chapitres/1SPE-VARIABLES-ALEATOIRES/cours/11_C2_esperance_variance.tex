@@ -86,3 +86,32 @@ En général, $E(X^2)
 
 $\sigma(X) = \sqrt{V(X)}$, pas $V(X)$. L'écart type a la même unité que $X$, tandis que la variance est en unités au carré.
 }
+
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt, simplify
+%
+% faces = [1, 2, 3, 4, 5, 6]
+% loi = {f: Rational(1, 6) for f in faces}
+%
+% # L'exemple : esperance du de equilibre.
+% esperance = sum(valeur*proba for valeur, proba in loi.items())
+% assert esperance == Rational(21, 6) == Rational(7, 2)
+%
+% # Variance par la definition, puis par la formule de Koenig : deux chemins.
+% variance = sum((valeur - esperance)**2 * proba for valeur, proba in loi.items())
+% moment2 = sum(valeur**2 * proba for valeur, proba in loi.items())
+% assert simplify(variance - (moment2 - esperance**2)) == 0
+% assert variance == Rational(35, 12)
+%
+% # Ecart type : racine de la variance, homogene a X.
+% ecart_type = sqrt(variance)
+% assert simplify(ecart_type**2 - variance) == 0
+% assert abs(float(ecart_type) - 1.7078) < 0.001
+%
+% # La variance est toujours positive ou nulle, et nulle seulement si la
+% # variable est constante.
+% constante = {5: Rational(1)}
+% esperance_c = sum(v*p for v, p in constante.items())
+% assert sum((v - esperance_c)**2 * p for v, p in constante.items()) == 0
+% assert variance > 0
+% END-VERIFY
