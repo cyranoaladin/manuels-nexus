@@ -1,0 +1,21 @@
+% META: {"id": "TCOMPL-ME-CO-005", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-ME-EX-005", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% u = [Rational(50000)]
+% for _ in range(3):
+%     u.append(Rational(98, 100) * u[-1] + 1200)
+% assert u[1] == 50200
+% assert u[2] == 50396
+% assert u[1] / u[0] != u[2] / u[1]
+% assert u[1] / u[0] == Rational(502, 500)
+% END-VERIFY
+\begin{corrige}{TCOMPL-ME-EX-005}
+\textbf{1.} $u_0=50\,000$ et $u_{n+1}=0{,}98\,u_n+1200$.
+
+\textbf{2.} $u_1=0{,}98\times50000+1200=50\,200$ et
+$u_2=0{,}98\times50200+1200=50\,396$.
+
+\textbf{3.} Non : $\dfrac{u_1}{u_0}=1{,}004$ tandis que
+$\dfrac{u_2}{u_1}\approx1{,}0039$. Le quotient n'est pas constant, à cause du
+terme additif $1200$ : la suite est arithmético-géométrique.
+\end{corrige}

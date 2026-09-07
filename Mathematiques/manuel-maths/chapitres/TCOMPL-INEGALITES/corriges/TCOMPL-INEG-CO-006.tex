@@ -1,0 +1,26 @@
+% META: {"id": "TCOMPL-INEG-CO-006", "chapitre": "TCOMPL-INEGALITES", "type_objet": "corrige", "exercice_ref": "TCOMPL-INEG-EX-006", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, factor, simplify, Rational
+% x = symbols('x', nonnegative=True)
+% L = x ** 3
+% assert L.subs(x, 0) == 0 and L.subs(x, 1) == 1
+% assert simplify(factor(x - L) - x * (1 - x) * (1 + x)) == 0
+% for v in (Rational(1, 10), Rational(1, 2), Rational(9, 10), 1):
+%     assert (x - L).subs(x, v) >= 0
+% assert diff(L, x, 2) == 6 * x
+% for v in (0, Rational(1, 2), 1):
+%     assert diff(L, x, 2).subs(x, v) >= 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-INEG-EX-006}
+\textbf{1.} $L(0)=0$ et $L(1)=1$. Pour $x\in[0\,;\,1]$,
+$x-x^3=x(1-x^2)=x(1-x)(1+x)\geq0$ : la courbe est bien sous la première
+bissectrice.
+
+\textbf{2.} $L''(x)=6x\geq0$ sur $[0\,;\,1]$ : $L$ est convexe. C'est la
+propriété attendue d'une courbe de Lorenz, la part de revenu croissant de plus
+en plus vite à mesure qu'on monte dans la distribution.
+
+\textbf{3.} $L(x)=x$ signifierait que les $x\,\%$ les plus pauvres détiennent
+exactement $x\,\%$ du revenu, quelle que soit la tranche : c'est l'égalité
+parfaite, représentée par la première bissectrice.
+\end{corrige}

@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-TRIGO-EX-020", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["TSPE-TRIGO-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-TRIGONOMETRIE/exercices/TSPE-TRIGO-EX-020.tex", "corrige_tex": "chapitres/TSPE-TRIGONOMETRIE/corriges/TSPE-TRIGO-CO-020.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, cos, sqrt, pi, solveset, Interval, S, simplify, Rational
+% x = symbols('x', real=True)
+% sol1 = solveset(cos(x) - sqrt(3) / 2, x, Interval(-pi, pi))
+% assert sol1 == {-pi / 6, pi / 6}
+% assert simplify(cos(2 * x) - (2 * cos(x) ** 2 - 1)) == 0
+% sol3 = solveset(2 * cos(x) ** 2 - 1, x, Interval(-pi, pi))
+% assert sol3 == {-3 * pi / 4, -pi / 4, pi / 4, 3 * pi / 4}
+% assert cos(2 * pi / 3) == Rational(-1, 2)
+% assert cos(pi) == -1 and cos(0) == 1
+% END-VERIFY
+\begin{exercice}{TSPE-TRIGO-EX-020}{2}{15}
+Résoudre dans $[-\pi\,;\,\pi]$ les équations et inéquations suivantes.
+\begin{enumerate}
+  \item $\cos x=\dfrac{\sqrt3}{2}$.
+  \item $\cos x\leq-\dfrac12$.
+  \item $2\cos^2x-1=0$.
+\end{enumerate}
+\end{exercice}

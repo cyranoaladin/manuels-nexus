@@ -1,0 +1,25 @@
+% META: {"id": "TCOMPL-ECH-EX-005", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "exercice", "capacites": ["TCOMPL-ECH-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["modeliser"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/exercices/TCOMPL-ECH-EX-005.tex", "corrige_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-005.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial
+% p = Rational(1, 6)
+% assert p + (1 - p) == 1
+% n = 20
+% total = sum(binomial(n, k) * p ** k * (1 - p) ** (n - k) for k in range(n + 1))
+% assert total == 1
+% # Sans remise, la probabilite du second succes depend du premier.
+% p_as_1 = Rational(4, 32)
+% p_as_2_sachant = Rational(3, 31)
+% assert p_as_2_sachant != p_as_1
+% END-VERIFY
+\begin{exercice}{TCOMPL-ECH-EX-005}{1}{12}
+Pour chacune des situations, dire si la variable aléatoire décrite suit une
+loi de Bernoulli, une loi binomiale, ou aucune des deux, en précisant les
+paramètres.
+\begin{enumerate}
+  \item On lance un dé équilibré une fois ; $X$ vaut $1$ si l'on obtient un
+        six, $0$ sinon.
+  \item On lance ce dé $20$ fois ; $Y$ compte le nombre de six.
+  \item On tire successivement et \emph{sans remise} $3$ cartes d'un jeu de
+        $32$ ; $Z$ compte le nombre d'as.
+\end{enumerate}
+\end{exercice}

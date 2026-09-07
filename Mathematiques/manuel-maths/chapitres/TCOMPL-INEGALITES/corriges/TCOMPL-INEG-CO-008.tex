@@ -1,0 +1,26 @@
+% META: {"id": "TCOMPL-INEG-CO-008", "chapitre": "TCOMPL-INEGALITES", "type_objet": "corrige", "exercice_ref": "TCOMPL-INEG-EX-008", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% points = [(Rational(0), Rational(0)), (Rational(1, 2), Rational(1, 5)),
+%           (Rational(1), Rational(1))]
+% aire = sum(Rational(points[i][1] + points[i + 1][1], 2)
+%            * (points[i + 1][0] - points[i][0]) for i in range(2))
+% assert aire == Rational(35, 100)
+% gini = 2 * (Rational(1, 2) - aire)
+% assert gini == Rational(3, 10)
+% assert 2 * (Rational(1, 2) - Rational(1, 2)) == 0
+% assert 2 * (Rational(1, 2) - 0) == 1
+% END-VERIFY
+\begin{corrige}{TCOMPL-INEG-EX-008}
+\textbf{1.} L'aire sous la ligne brisée est la somme de deux trapèzes :
+$\tfrac{0+0{,}2}{2}\times0{,}5+\tfrac{0{,}2+1}{2}\times0{,}5
+=0{,}05+0{,}3=0{,}35$.
+
+\textbf{2.} L'aire entre la bissectrice et la courbe vaut
+$0{,}5-0{,}35=0{,}15$, donc $G=2\times0{,}15=0{,}3$.
+
+\textbf{3.} Égalité parfaite : la courbe est la bissectrice, l'aire entre
+elles est nulle et $G=0$. Concentration totale : la courbe suit l'axe
+horizontal puis remonte verticalement, l'aire vaut $\tfrac12$ et $G=1$.
+L'indice de Gini varie donc entre $0$ et $1$.
+\end{corrige}

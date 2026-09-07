@@ -1,0 +1,22 @@
+% META: {"id": "TCOMPL-ATT-EX-007", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "exercice", "capacites": ["TCOMPL-ATT-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-007.tex", "corrige_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-007.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, integrate, Rational, simplify, oo, N
+% t = symbols('t', positive=True)
+% lam = Rational(1, 2)
+% f = lam * exp(-lam * t)
+% assert integrate(f, (t, 0, oo)) == 1
+% F = integrate(f, (t, 0, symbols('x', positive=True)))
+% assert simplify(F - (1 - exp(-lam * symbols('x', positive=True)))) == 0
+% assert abs(float(N(1 - exp(-1))) - 0.6321) < 0.001
+% assert abs(float(N(exp(Rational(-3, 2)))) - 0.2231) < 0.001
+% assert simplify(exp(Rational(-5, 2)) / exp(Rational(-3, 2)) - exp(-1)) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-ATT-EX-007}{2}{15}
+Soit $T$ une variable aléatoire suivant la loi exponentielle de paramètre
+$\lambda=0{,}5$.
+\begin{enumerate}
+  \item Donner sa densité et sa fonction de répartition.
+  \item Calculer $P(T\leq2)$ et $P(T>3)$.
+  \item Vérifier l'absence de mémoire : $P_{T>3}(T>5)=P(T>2)$.
+\end{enumerate}
+\end{exercice}

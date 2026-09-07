@@ -1,0 +1,26 @@
+% META: {"id": "TCOMPL-LOG-CO-007", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "corrige", "exercice_ref": "TCOMPL-LOG-EX-007", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import log, N, Rational
+% taux = Rational(103, 100)
+% seuil = Rational(3, 2)
+% n_exact = float(N(log(seuil) / log(taux)))
+% assert 13.7 < n_exact < 13.8
+% import math
+% n = math.ceil(n_exact)
+% assert n == 14
+% c13 = 2000 * float(taux) ** 13
+% c14 = 2000 * float(taux) ** 14
+% assert c13 < 3000 <= c14
+% assert abs(c13 - 2937.07) < 0.5 and abs(c14 - 3025.18) < 0.5
+% END-VERIFY
+\begin{corrige}{TCOMPL-LOG-EX-007}
+\textbf{1.} $C_n=2000\times1{,}03^{\,n}$.
+
+\textbf{2.} $C_n\geq3000\iff1{,}03^{\,n}\geq1{,}5
+\iff n\ln1{,}03\geq\ln1{,}5$. Comme $\ln1{,}03>0$,
+$n\geq\dfrac{\ln1{,}5}{\ln1{,}03}\approx13{,}72$ : le plus petit entier est
+$n=14$.
+
+\textbf{3.} $C_{13}\approx2937{,}1<3000$ et $C_{14}\approx3025{,}2\geq3000$ :
+le seuil est bien atteint à la quatorzième année.
+\end{corrige}

@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-ATT-EX-005", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "exercice", "capacites": ["TCOMPL-ATT-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-005.tex", "corrige_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-005.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, summation, oo, simplify
+% p = Rational(1, 6)
+% def P(k):
+%     return (1 - p) ** (k - 1) * p
+% assert P(1) == Rational(1, 6)
+% assert P(2) == Rational(5, 36)
+% assert P(3) == Rational(25, 216)
+% k = symbols('k', integer=True, positive=True)
+% assert summation((1 - p) ** (k - 1) * p, (k, 1, oo)) == 1
+% esperance = summation(k * (1 - p) ** (k - 1) * p, (k, 1, oo))
+% assert simplify(esperance - 6) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-ATT-EX-005}{1}{12}
+On lance un dé équilibré jusqu'à obtenir un six. Soit $X$ le rang du premier
+six.
+\begin{enumerate}
+  \item Justifier que $X$ suit une loi géométrique et donner son paramètre.
+  \item Calculer $P(X=1)$, $P(X=2)$ et $P(X=3)$.
+  \item Calculer $E(X)$ et interpréter.
+\end{enumerate}
+\end{exercice}

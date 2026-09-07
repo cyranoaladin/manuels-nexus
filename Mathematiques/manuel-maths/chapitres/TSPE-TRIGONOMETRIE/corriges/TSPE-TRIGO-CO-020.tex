@@ -1,0 +1,25 @@
+% META: {"id": "TSPE-TRIGO-CO-020", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "TSPE-TRIGO-EX-020", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, cos, sqrt, pi, solveset, Interval, S, simplify, Rational
+% x = symbols('x', real=True)
+% sol1 = solveset(cos(x) - sqrt(3) / 2, x, Interval(-pi, pi))
+% assert sol1 == {-pi / 6, pi / 6}
+% assert simplify(cos(2 * x) - (2 * cos(x) ** 2 - 1)) == 0
+% sol3 = solveset(2 * cos(x) ** 2 - 1, x, Interval(-pi, pi))
+% assert sol3 == {-3 * pi / 4, -pi / 4, pi / 4, 3 * pi / 4}
+% assert cos(2 * pi / 3) == Rational(-1, 2)
+% assert cos(pi) == -1 and cos(0) == 1
+% END-VERIFY
+\begin{corrige}{TSPE-TRIGO-EX-020}
+\textbf{1.} $\cos x=\tfrac{\sqrt3}{2}$ donne $x=\pm\tfrac{\pi}{6}$ dans
+$[-\pi\,;\,\pi]$.
+
+\textbf{2.} $\cos x=-\tfrac12$ en $x=\pm\tfrac{2\pi}{3}$. La fonction
+$\cos$ étant décroissante sur $[0\,;\,\pi]$, l'inéquation est vérifiée pour
+$x\in\left[-\pi\,;\,-\tfrac{2\pi}{3}\right]\cup
+\left[\tfrac{2\pi}{3}\,;\,\pi\right]$.
+
+\textbf{3.} $2\cos^2x-1=\cos2x$, donc l'équation équivaut à $\cos2x=0$, soit
+$2x=\tfrac{\pi}{2}+k\pi$ et $x=\tfrac{\pi}{4}+k\tfrac{\pi}{2}$. Dans
+$[-\pi\,;\,\pi]$ : $x\in\left\{\pm\tfrac{\pi}{4},\pm\tfrac{3\pi}{4}\right\}$.
+\end{corrige}

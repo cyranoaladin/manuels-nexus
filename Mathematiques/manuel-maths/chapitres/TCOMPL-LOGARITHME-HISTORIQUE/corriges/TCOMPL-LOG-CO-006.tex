@@ -1,0 +1,24 @@
+% META: {"id": "TCOMPL-LOG-CO-006", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "corrige", "exercice_ref": "TCOMPL-LOG-EX-006", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, log, solve, simplify, Rational
+% x = symbols('x', positive=True)
+% t = symbols('t')  # sans hypothese : les deux racines doivent apparaitre
+% assert simplify(log(8) - log(2) + log(5) - log(20)) == 0
+% solutions = solve(t ** 2 - 3 * t - 10, t)
+% assert set(solutions) == {5, -2}
+% assert [s for s in solutions if s > 3] == [5]
+% assert simplify(log(5) + log(5 - 3) - log(10)) == 0
+% assert solve(2 * x - 1 - 7, x) == [4]
+% assert Rational(1, 2) < 4
+% END-VERIFY
+\begin{corrige}{TCOMPL-LOG-EX-006}
+\textbf{1.} $\ln8-\ln2+\ln5=\ln\dfrac{8\times5}{2}=\ln20$.
+
+\textbf{2.} Le domaine impose $x>3$. L'équation devient
+$\ln\big(x(x-3)\big)=\ln10$, soit $x^2-3x-10=0$, de racines $-2$ et $5$.
+Seule $x=5$ appartient au domaine.
+
+\textbf{3.} Le domaine impose $x>\tfrac12$. La fonction $\ln$ étant
+strictement croissante, l'inéquation équivaut à $2x-1\leq7$, soit $x\leq4$.
+L'ensemble solution est $\left]\tfrac12\,;\,4\right]$.
+\end{corrige}

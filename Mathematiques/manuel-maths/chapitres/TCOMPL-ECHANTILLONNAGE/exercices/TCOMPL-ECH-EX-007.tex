@@ -1,0 +1,22 @@
+% META: {"id": "TCOMPL-ECH-EX-007", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "exercice", "capacites": ["TCOMPL-ECH-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/exercices/TCOMPL-ECH-EX-007.tex", "corrige_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-007.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial, Rational, N
+% p = Rational(3, 10)
+% n = 10
+% def P(k):
+%     return binomial(n, k) * p ** k * (1 - p) ** (n - k)
+% assert abs(float(N(P(3))) - 0.2668) < 0.0005
+% cumul2 = sum(P(k) for k in range(3))
+% assert abs(float(N(cumul2)) - 0.3828) < 0.0005
+% cumul3 = cumul2 + P(3)
+% assert abs(float(N(1 - cumul3)) - 0.3504) < 0.0005
+% assert sum(P(k) for k in range(n + 1)) == 1
+% END-VERIFY
+\begin{exercice}{TCOMPL-ECH-EX-007}{2}{15}
+Soit $X$ suivant la loi binomiale $\mathcal{B}(10\,;\,0{,}3)$.
+\begin{enumerate}
+  \item Calculer $P(X=3)$.
+  \item Calculer $P(X\leq2)$.
+  \item Calculer $P(X\geq4)$ en utilisant l'événement contraire.
+\end{enumerate}
+\end{exercice}

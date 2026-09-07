@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-ME-CO-007", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-ME-EX-007", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, limit, oo, simplify, summation
+% n = symbols('n', integer=True, nonnegative=True)
+% q = Rational(2, 5)
+% v = 3 * q ** n
+% assert limit(v, n, oo) == 0
+% S = summation(3 * q ** symbols('k', integer=True), (symbols('k', integer=True), 0, n))
+% assert simplify(S - 5 * (1 - q ** (n + 1))) == 0
+% assert limit(5 * (1 - q ** (n + 1)), n, oo) == 5
+% assert simplify(3 / (1 - q) - 5) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-ME-EX-007}
+\textbf{1.} $v_n=3\times0{,}4^{\,n}$. Comme $0<0{,}4<1$, $0{,}4^n\to0$ et
+$v_n\to0$.
+
+\textbf{2.} $S_n=3\times\dfrac{1-0{,}4^{\,n+1}}{1-0{,}4}
+=5\left(1-0{,}4^{\,n+1}\right)$.
+
+\textbf{3.} $0{,}4^{\,n+1}\to0$, donc $S_n\to5$. La somme des termes d'une
+suite géométrique de raison dans $\left]0\,;\,1\right[$ converge vers
+$\dfrac{v_0}{1-q}$.
+\end{corrige}

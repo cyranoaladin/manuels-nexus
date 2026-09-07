@@ -1,0 +1,21 @@
+% META: {"id": "TCOMPL-ATT-EX-006", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "exercice", "capacites": ["TCOMPL-ATT-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-006.tex", "corrige_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-006.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, simplify, N
+% p = symbols('p', positive=True)
+% n, k = symbols('n k', integer=True, nonnegative=True)
+% survie = (1 - p) ** n
+% assert simplify((1 - p) ** (n + k) / (1 - p) ** n - (1 - p) ** k) == 0
+% q = Rational(95, 100)
+% assert abs(float(N(q ** 10)) - 0.5987) < 0.001
+% assert simplify(q ** 40 / q ** 30 - q ** 10) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-ATT-EX-006}{2}{15}
+Soit $X$ géométrique de paramètre $p$.
+\begin{enumerate}
+  \item Montrer que $P(X>n)=(1-p)^n$ pour tout entier $n\geq0$.
+  \item En déduire que $P_{X>n}(X>n+k)=P(X>k)$ : c'est l'absence de mémoire.
+  \item Une machine tombe en panne chaque jour avec probabilité $0{,}05$.
+        Elle a déjà fonctionné $30$ jours. Quelle est la probabilité qu'elle
+        tienne $10$ jours de plus ?
+\end{enumerate}
+\end{exercice}

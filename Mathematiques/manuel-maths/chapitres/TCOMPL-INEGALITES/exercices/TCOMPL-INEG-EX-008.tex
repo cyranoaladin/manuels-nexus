@@ -1,0 +1,24 @@
+% META: {"id": "TCOMPL-INEG-EX-008", "chapitre": "TCOMPL-INEGALITES", "type_objet": "exercice", "capacites": ["TCOMPL-INEG-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INEGALITES/exercices/TCOMPL-INEG-EX-008.tex", "corrige_tex": "chapitres/TCOMPL-INEGALITES/corriges/TCOMPL-INEG-CO-008.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% points = [(Rational(0), Rational(0)), (Rational(1, 2), Rational(1, 5)),
+%           (Rational(1), Rational(1))]
+% aire = sum(Rational(points[i][1] + points[i + 1][1], 2)
+%            * (points[i + 1][0] - points[i][0]) for i in range(2))
+% assert aire == Rational(35, 100)
+% gini = 2 * (Rational(1, 2) - aire)
+% assert gini == Rational(3, 10)
+% assert 2 * (Rational(1, 2) - Rational(1, 2)) == 0
+% assert 2 * (Rational(1, 2) - 0) == 1
+% END-VERIFY
+\begin{exercice}{TCOMPL-INEG-EX-008}{2}{15}
+Une répartition est donnée par les points de Lorenz $(0\,;\,0)$,
+$(0{,}5\,;\,0{,}2)$ et $(1\,;\,1)$, la courbe étant assimilée à la ligne
+brisée qui les relie.
+\begin{enumerate}
+  \item Calculer l'aire sous la ligne brisée.
+  \item En déduire l'indice de Gini.
+  \item Que vaudrait l'indice pour une répartition parfaitement égalitaire ?
+        Et pour une répartition où une seule personne détiendrait tout ?
+\end{enumerate}
+\end{exercice}

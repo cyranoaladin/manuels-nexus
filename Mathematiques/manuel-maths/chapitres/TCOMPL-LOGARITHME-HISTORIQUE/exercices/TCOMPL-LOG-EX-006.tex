@@ -1,0 +1,20 @@
+% META: {"id": "TCOMPL-LOG-EX-006", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "exercice", "capacites": ["TCOMPL-LOG-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/exercices/TCOMPL-LOG-EX-006.tex", "corrige_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/corriges/TCOMPL-LOG-CO-006.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, log, solve, simplify, Rational
+% x = symbols('x', positive=True)
+% t = symbols('t')  # sans hypothese : les deux racines doivent apparaitre
+% assert simplify(log(8) - log(2) + log(5) - log(20)) == 0
+% solutions = solve(t ** 2 - 3 * t - 10, t)
+% assert set(solutions) == {5, -2}
+% assert [s for s in solutions if s > 3] == [5]
+% assert simplify(log(5) + log(5 - 3) - log(10)) == 0
+% assert solve(2 * x - 1 - 7, x) == [4]
+% assert Rational(1, 2) < 4
+% END-VERIFY
+\begin{exercice}{TCOMPL-LOG-EX-006}{2}{15}
+\begin{enumerate}
+  \item Simplifier $\ln 8-\ln 2+\ln 5$.
+  \item Résoudre $\ln(x)+\ln(x-3)=\ln 10$.
+  \item Résoudre l'inéquation $\ln(2x-1)\leq\ln 7$.
+\end{enumerate}
+\end{exercice}

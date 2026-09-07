@@ -1,0 +1,25 @@
+% META: {"id": "TCOMPL-INEG-EX-005", "chapitre": "TCOMPL-INEGALITES", "type_objet": "exercice", "capacites": ["TCOMPL-INEG-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["modeliser", "calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INEGALITES/exercices/TCOMPL-INEG-EX-005.tex", "corrige_tex": "chapitres/TCOMPL-INEGALITES/corriges/TCOMPL-INEG-CO-005.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% points = [(Rational(0), Rational(0)), (Rational(1, 5), Rational(5, 100)),
+%           (Rational(2, 5), Rational(15, 100)), (Rational(3, 5), Rational(32, 100)),
+%           (Rational(4, 5), Rational(58, 100)), (Rational(1), Rational(1))]
+% assert points[0] == (0, 0) and points[-1] == (1, 1)
+% for x, y in points:
+%     assert y <= x
+% for i in range(len(points) - 1):
+%     assert points[i][0] < points[i + 1][0]
+%     assert points[i][1] <= points[i + 1][1]
+% assert points[3] == (Rational(3, 5), Rational(32, 100))
+% assert Rational(32, 100) < Rational(3, 5)
+% END-VERIFY
+\begin{exercice}{TCOMPL-INEG-EX-005}{1}{12}
+Dans un pays, les $20\,\%$ les plus pauvres détiennent $5\,\%$ du revenu
+total, les $40\,\%$ les plus pauvres en détiennent $15\,\%$, les $60\,\%$ en
+détiennent $32\,\%$, les $80\,\%$ en détiennent $58\,\%$.
+\begin{enumerate}
+  \item Construire la courbe de Lorenz de cette répartition.
+  \item Que valent $L(0)$ et $L(1)$ ? Justifier.
+  \item Interpréter le point $(0{,}6\,;\,0{,}32)$.
+\end{enumerate}
+\end{exercice}

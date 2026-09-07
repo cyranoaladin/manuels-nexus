@@ -1,0 +1,21 @@
+% META: {"id": "TCOMPL-INEG-EX-006", "chapitre": "TCOMPL-INEGALITES", "type_objet": "exercice", "capacites": ["TCOMPL-INEG-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INEGALITES/exercices/TCOMPL-INEG-EX-006.tex", "corrige_tex": "chapitres/TCOMPL-INEGALITES/corriges/TCOMPL-INEG-CO-006.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, factor, simplify, Rational
+% x = symbols('x', nonnegative=True)
+% L = x ** 3
+% assert L.subs(x, 0) == 0 and L.subs(x, 1) == 1
+% assert simplify(factor(x - L) - x * (1 - x) * (1 + x)) == 0
+% for v in (Rational(1, 10), Rational(1, 2), Rational(9, 10), 1):
+%     assert (x - L).subs(x, v) >= 0
+% assert diff(L, x, 2) == 6 * x
+% for v in (0, Rational(1, 2), 1):
+%     assert diff(L, x, 2).subs(x, v) >= 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-INEG-EX-006}{2}{15}
+On modélise une courbe de Lorenz par $L(x)=x^3$ sur $[0\,;\,1]$.
+\begin{enumerate}
+  \item Vérifier que $L(0)=0$, $L(1)=1$ et $L(x)\leq x$ sur $[0\,;\,1]$.
+  \item Montrer que $L$ est convexe sur $[0\,;\,1]$.
+  \item Que signifierait $L(x)=x$ pour tout $x$ ?
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-ATT-CO-008", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ATT-EX-008", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, integrate, oo, simplify, Rational
+% t = symbols('t', positive=True)
+% lam = symbols('lambda', positive=True)
+% esperance = integrate(t * lam * exp(-lam * t), (t, 0, oo))
+% assert simplify(esperance - 1 / lam) == 0
+% assert integrate(exp(-lam * t), (t, 0, oo)) == 1 / lam
+% assert simplify(esperance.subs(lam, Rational(1, 2)) - 2) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-ATT-EX-008}
+\textbf{1.} $E(T)=\displaystyle\int_0^{+\infty}t\lambda\mathrm{e}^{-\lambda t}
+\,\mathrm{d}t$.
+
+\textbf{2.} Avec $u=t$ et $v'=\lambda\mathrm{e}^{-\lambda t}$ :
+$E(T)=\left[-t\mathrm{e}^{-\lambda t}\right]_0^{+\infty}
++\int_0^{+\infty}\mathrm{e}^{-\lambda t}\,\mathrm{d}t
+=0+\dfrac{1}{\lambda}=\dfrac{1}{\lambda}$.
+
+\textbf{3.} Pour $\lambda=0{,}5$, $E(T)=2$ : la durée moyenne d'attente est de
+deux unités de temps. Plus $\lambda$ est grand, plus l'événement survient
+tôt en moyenne.
+\end{corrige}

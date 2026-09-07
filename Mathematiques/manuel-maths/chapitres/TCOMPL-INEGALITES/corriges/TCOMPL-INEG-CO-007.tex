@@ -1,0 +1,27 @@
+% META: {"id": "TCOMPL-INEG-CO-007", "chapitre": "TCOMPL-INEGALITES", "type_objet": "corrige", "exercice_ref": "TCOMPL-INEG-EX-007", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational
+% x = symbols('x')
+% aire3 = integrate(x - x ** 3, (x, 0, 1))
+% assert aire3 == Rational(1, 4)
+% gini3 = 2 * aire3
+% assert gini3 == Rational(1, 2)
+% aire2 = integrate(x - x ** 2, (x, 0, 1))
+% assert aire2 == Rational(1, 6)
+% gini2 = 2 * aire2
+% assert gini2 == Rational(1, 3)
+% assert gini3 > gini2
+% assert 0 <= gini2 <= 1 and 0 <= gini3 <= 1
+% END-VERIFY
+\begin{corrige}{TCOMPL-INEG-EX-007}
+\textbf{1.} L'aire vaut
+$\displaystyle\int_0^1\big(x-x^3\big)\,\mathrm{d}x
+=\left[\tfrac{x^2}{2}-\tfrac{x^4}{4}\right]_0^1=\tfrac12-\tfrac14=\tfrac14$.
+
+\textbf{2.} L'indice de Gini vaut $G=2\times\tfrac14=\tfrac12=0{,}5$.
+
+\textbf{3.} Pour $L(x)=x^2$ : $\int_0^1(x-x^2)\,\mathrm{d}x=\tfrac16$ et
+$G=\tfrac13\approx0{,}33$. L'indice est plus grand pour $x^3$ : cette
+répartition est plus inégalitaire, ce que confirme le fait que sa courbe
+s'écarte davantage de la bissectrice.
+\end{corrige}

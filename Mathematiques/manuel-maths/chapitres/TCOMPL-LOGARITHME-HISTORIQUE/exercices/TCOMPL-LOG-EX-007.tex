@@ -1,0 +1,24 @@
+% META: {"id": "TCOMPL-LOG-EX-007", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "exercice", "capacites": ["TCOMPL-LOG-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["modeliser", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/exercices/TCOMPL-LOG-EX-007.tex", "corrige_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/corriges/TCOMPL-LOG-CO-007.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import log, N, Rational
+% taux = Rational(103, 100)
+% seuil = Rational(3, 2)
+% n_exact = float(N(log(seuil) / log(taux)))
+% assert 13.7 < n_exact < 13.8
+% import math
+% n = math.ceil(n_exact)
+% assert n == 14
+% c13 = 2000 * float(taux) ** 13
+% c14 = 2000 * float(taux) ** 14
+% assert c13 < 3000 <= c14
+% assert abs(c13 - 2937.07) < 0.5 and abs(c14 - 3025.18) < 0.5
+% END-VERIFY
+\begin{exercice}{TCOMPL-LOG-EX-007}{2}{15}
+Un capital de $2\,000$ euros est placé à $3\,\%$ par an.
+\begin{enumerate}
+  \item Exprimer le capital $C_n$ après $n$ années.
+  \item Déterminer, par le logarithme, le plus petit $n$ tel que
+        $C_n\geq3\,000$.
+  \item Vérifier le résultat en calculant $C_{13}$ et $C_{14}$.
+\end{enumerate}
+\end{exercice}

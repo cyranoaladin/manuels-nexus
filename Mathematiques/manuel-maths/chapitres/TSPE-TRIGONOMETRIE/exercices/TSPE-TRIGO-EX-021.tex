@@ -1,0 +1,21 @@
+% META: {"id": "TSPE-TRIGO-EX-021", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["TSPE-TRIGO-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 3, "competences": ["raisonner", "calculer"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-TRIGONOMETRIE/exercices/TSPE-TRIGO-EX-021.tex", "corrige_tex": "chapitres/TSPE-TRIGONOMETRIE/corriges/TSPE-TRIGO-CO-021.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, sin, cos, diff, pi, sqrt, solveset, Interval, simplify
+% x = symbols('x', real=True)
+% f = sin(x) + cos(x)
+% assert simplify(diff(f, x) - (cos(x) - sin(x))) == 0
+% zeros = solveset(cos(x) - sin(x), x, Interval(0, 2 * pi))
+% assert zeros == {pi / 4, 5 * pi / 4}
+% assert simplify(f.subs(x, pi / 4) - sqrt(2)) == 0
+% assert simplify(f.subs(x, 5 * pi / 4) + sqrt(2)) == 0
+% assert simplify(f - sqrt(2) * sin(x + pi / 4)) == 0
+% assert diff(f, x).subs(x, 0) > 0
+% END-VERIFY
+\begin{exercice}{TSPE-TRIGO-EX-021}{3}{18}
+Soit $f(x)=\sin x+\cos x$ sur $[0\,;\,2\pi]$.
+\begin{enumerate}
+  \item Calculer $f'(x)$ et déterminer les valeurs où elle s'annule.
+  \item Dresser le tableau de variations de $f$ sur $[0\,;\,2\pi]$.
+  \item En déduire le maximum de $f$ et la valeur de $x$ où il est atteint.
+\end{enumerate}
+\end{exercice}

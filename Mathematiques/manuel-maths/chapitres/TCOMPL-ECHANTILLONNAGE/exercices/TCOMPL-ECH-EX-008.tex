@@ -1,0 +1,35 @@
+% META: {"id": "TCOMPL-ECH-EX-008", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "exercice", "capacites": ["TCOMPL-ECH-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/exercices/TCOMPL-ECH-EX-008.tex", "corrige_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-008.tex", "status": "generated"}
+% BEGIN-VERIFY
+% import random
+% from math import sqrt
+% random.seed(20262027)
+% 
+% def echantillon(n, p):
+%     return [1 if random.random() < p else 0 for _ in range(n)]
+% 
+% def moyennes(N, n, p):
+%     return [sum(echantillon(n, p)) / n for _ in range(N)]
+% 
+% p, n, N = 0.4, 100, 1000
+% valeurs = moyennes(N, n, p)
+% assert len(valeurs) == N
+% assert all(0 <= v <= 1 for v in valeurs)
+% moyenne_globale = sum(valeurs) / N
+% assert abs(moyenne_globale - p) < 0.01
+% ecart_theorique = sqrt(p * (1 - p) / n)
+% assert abs(ecart_theorique - 0.04899) < 1e-4
+% dans_trois_sigma = sum(1 for v in valeurs if abs(v - p) <= 3 * ecart_theorique)
+% assert dans_trois_sigma >= 0.99 * N
+% END-VERIFY
+\begin{exercice}{TCOMPL-ECH-EX-008}{2}{15}
+On simule en Python un échantillon d'une variable de Bernoulli de paramètre
+$p=0{,}4$.
+\begin{enumerate}
+  \item Écrire une fonction \texttt{echantillon(n, p)} renvoyant une liste de
+        $n$ valeurs $0$ ou $1$.
+  \item Écrire \texttt{moyennes(N, n, p)} renvoyant la liste des $N$ moyennes
+        d'échantillons de taille $n$.
+  \item Sur $N=1\,000$ échantillons de taille $n=100$, que peut-on dire de la
+        dispersion des moyennes obtenues ?
+\end{enumerate}
+\end{exercice}

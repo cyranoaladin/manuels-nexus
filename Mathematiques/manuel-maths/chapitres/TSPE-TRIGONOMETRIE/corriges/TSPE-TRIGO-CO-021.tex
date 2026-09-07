@@ -1,0 +1,26 @@
+% META: {"id": "TSPE-TRIGO-CO-021", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "TSPE-TRIGO-EX-021", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, sin, cos, diff, pi, sqrt, solveset, Interval, simplify
+% x = symbols('x', real=True)
+% f = sin(x) + cos(x)
+% assert simplify(diff(f, x) - (cos(x) - sin(x))) == 0
+% zeros = solveset(cos(x) - sin(x), x, Interval(0, 2 * pi))
+% assert zeros == {pi / 4, 5 * pi / 4}
+% assert simplify(f.subs(x, pi / 4) - sqrt(2)) == 0
+% assert simplify(f.subs(x, 5 * pi / 4) + sqrt(2)) == 0
+% assert simplify(f - sqrt(2) * sin(x + pi / 4)) == 0
+% assert diff(f, x).subs(x, 0) > 0
+% END-VERIFY
+\begin{corrige}{TSPE-TRIGO-EX-021}
+\textbf{1.} $f'(x)=\cos x-\sin x$, qui s'annule lorsque $\tan x=1$, soit
+$x=\tfrac{\pi}{4}$ ou $x=\tfrac{5\pi}{4}$ sur $[0\,;\,2\pi]$.
+
+\textbf{2.} $f'$ est positive sur $\left[0\,;\,\tfrac{\pi}{4}\right]$,
+négative sur $\left[\tfrac{\pi}{4}\,;\,\tfrac{5\pi}{4}\right]$, positive sur
+$\left[\tfrac{5\pi}{4}\,;\,2\pi\right]$. $f$ croît, décroît, puis croît.
+
+\textbf{3.} Le maximum est atteint en $x=\tfrac{\pi}{4}$ et vaut
+$f\left(\tfrac{\pi}{4}\right)=\tfrac{\sqrt2}{2}+\tfrac{\sqrt2}{2}=\sqrt2$.
+On peut le retrouver en écrivant
+$f(x)=\sqrt2\sin\left(x+\tfrac{\pi}{4}\right)$.
+\end{corrige}

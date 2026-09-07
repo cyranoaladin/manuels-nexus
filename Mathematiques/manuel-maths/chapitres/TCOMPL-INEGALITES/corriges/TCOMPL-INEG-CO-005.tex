@@ -1,0 +1,27 @@
+% META: {"id": "TCOMPL-INEG-CO-005", "chapitre": "TCOMPL-INEGALITES", "type_objet": "corrige", "exercice_ref": "TCOMPL-INEG-EX-005", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% points = [(Rational(0), Rational(0)), (Rational(1, 5), Rational(5, 100)),
+%           (Rational(2, 5), Rational(15, 100)), (Rational(3, 5), Rational(32, 100)),
+%           (Rational(4, 5), Rational(58, 100)), (Rational(1), Rational(1))]
+% assert points[0] == (0, 0) and points[-1] == (1, 1)
+% for x, y in points:
+%     assert y <= x
+% for i in range(len(points) - 1):
+%     assert points[i][0] < points[i + 1][0]
+%     assert points[i][1] <= points[i + 1][1]
+% assert points[3] == (Rational(3, 5), Rational(32, 100))
+% assert Rational(32, 100) < Rational(3, 5)
+% END-VERIFY
+\begin{corrige}{TCOMPL-INEG-EX-005}
+\textbf{1.} On place les points $(0\,;\,0)$, $(0{,}2\,;\,0{,}05)$,
+$(0{,}4\,;\,0{,}15)$, $(0{,}6\,;\,0{,}32)$, $(0{,}8\,;\,0{,}58)$ et
+$(1\,;\,1)$, puis on les relie.
+
+\textbf{2.} $L(0)=0$ : les $0\,\%$ les plus pauvres détiennent $0\,\%$ du
+revenu. $L(1)=1$ : la population entière détient la totalité du revenu.
+
+\textbf{3.} Les $60\,\%$ les plus pauvres se partagent $32\,\%$ du revenu
+total. La courbe passe sous la première bissectrice : la répartition est
+inégalitaire, puisque l'égalité parfaite donnerait $L(0{,}6)=0{,}6$.
+\end{corrige}

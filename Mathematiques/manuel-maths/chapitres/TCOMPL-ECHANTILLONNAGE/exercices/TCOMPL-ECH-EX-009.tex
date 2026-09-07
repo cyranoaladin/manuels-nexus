@@ -1,0 +1,20 @@
+% META: {"id": "TCOMPL-ECH-EX-009", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "exercice", "capacites": ["TCOMPL-ECH-C6"], "capacites_codes": ["C6"], "methodes": ["M6"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/exercices/TCOMPL-ECH-EX-009.tex", "corrige_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-009.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, binomial, simplify, expand
+% p = symbols('p')
+% for n in (1, 2, 3, 4, 5):
+%     esperance = sum(k * binomial(n, k) * p ** k * (1 - p) ** (n - k)
+%                     for k in range(n + 1))
+%     assert simplify(expand(esperance) - n * p) == 0
+% loi2 = [expand((1 - p) ** 2), expand(2 * p * (1 - p)), p ** 2]
+% assert simplify(sum(loi2) - 1) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-ECH-EX-009}{2}{15}
+Soit $X$ suivant $\mathcal{B}(n\,;\,p)$.
+\begin{enumerate}
+  \item Pour $n=1$, calculer $E(X)$ directement.
+  \item Pour $n=2$, écrire la loi de $X$ et calculer $E(X)$.
+  \item Pour $n=3$, faire de même. Quelle formule générale ces trois cas
+        suggèrent-ils ?
+\end{enumerate}
+\end{exercice}

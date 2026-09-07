@@ -1,0 +1,36 @@
+% META: {"id": "TCOMPL-ECH-CO-008", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ECH-EX-008", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import random
+% from math import sqrt
+% random.seed(20262027)
+% 
+% def echantillon(n, p):
+%     return [1 if random.random() < p else 0 for _ in range(n)]
+% 
+% def moyennes(N, n, p):
+%     return [sum(echantillon(n, p)) / n for _ in range(N)]
+% 
+% p, n, N = 0.4, 100, 1000
+% valeurs = moyennes(N, n, p)
+% assert len(valeurs) == N
+% assert all(0 <= v <= 1 for v in valeurs)
+% moyenne_globale = sum(valeurs) / N
+% assert abs(moyenne_globale - p) < 0.01
+% ecart_theorique = sqrt(p * (1 - p) / n)
+% assert abs(ecart_theorique - 0.04899) < 1e-4
+% dans_trois_sigma = sum(1 for v in valeurs if abs(v - p) <= 3 * ecart_theorique)
+% assert dans_trois_sigma >= 0.99 * N
+% END-VERIFY
+\begin{corrige}{TCOMPL-ECH-EX-008}
+\textbf{1.} \texttt{def echantillon(n, p): return [1 if random() < p else 0
+for \_ in range(n)]}.
+
+\textbf{2.} \texttt{def moyennes(N, n, p): return [sum(echantillon(n, p))/n
+for \_ in range(N)]}.
+
+\textbf{3.} Les moyennes se concentrent autour de $p=0{,}4$. L'écart-type
+théorique d'une moyenne vaut
+$\sqrt{p(1-p)/n}=\sqrt{0{,}24/100}\approx0{,}049$ : la quasi-totalité des
+moyennes tombe dans $[0{,}4-3\times0{,}049\,;\,0{,}4+3\times0{,}049]$, soit
+environ $[0{,}25\,;\,0{,}55]$.
+\end{corrige}

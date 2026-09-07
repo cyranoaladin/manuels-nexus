@@ -1,0 +1,26 @@
+% META: {"id": "TCOMPL-ATT-CO-005", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ATT-EX-005", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, summation, oo, simplify
+% p = Rational(1, 6)
+% def P(k):
+%     return (1 - p) ** (k - 1) * p
+% assert P(1) == Rational(1, 6)
+% assert P(2) == Rational(5, 36)
+% assert P(3) == Rational(25, 216)
+% k = symbols('k', integer=True, positive=True)
+% assert summation((1 - p) ** (k - 1) * p, (k, 1, oo)) == 1
+% esperance = summation(k * (1 - p) ** (k - 1) * p, (k, 1, oo))
+% assert simplify(esperance - 6) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-ATT-EX-005}
+\textbf{1.} On répète la même épreuve de Bernoulli de paramètre
+$p=\tfrac16$, de façon indépendante, jusqu'au premier succès : $X$ suit la loi
+géométrique de paramètre $\tfrac16$.
+
+\textbf{2.} $P(X=k)=(1-p)^{k-1}p$, d'où $P(X=1)=\tfrac16$,
+$P(X=2)=\tfrac56\times\tfrac16=\tfrac{5}{36}$ et
+$P(X=3)=\left(\tfrac56\right)^2\tfrac16=\tfrac{25}{216}$.
+
+\textbf{3.} $E(X)=\dfrac1p=6$ : il faut en moyenne six lancers pour obtenir un
+premier six.
+\end{corrige}

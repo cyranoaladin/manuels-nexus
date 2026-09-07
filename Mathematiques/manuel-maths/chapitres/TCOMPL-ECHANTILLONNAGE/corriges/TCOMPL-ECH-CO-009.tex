@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-ECH-CO-009", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ECH-EX-009", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, binomial, simplify, expand
+% p = symbols('p')
+% for n in (1, 2, 3, 4, 5):
+%     esperance = sum(k * binomial(n, k) * p ** k * (1 - p) ** (n - k)
+%                     for k in range(n + 1))
+%     assert simplify(expand(esperance) - n * p) == 0
+% loi2 = [expand((1 - p) ** 2), expand(2 * p * (1 - p)), p ** 2]
+% assert simplify(sum(loi2) - 1) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-ECH-EX-009}
+\textbf{1.} Pour $n=1$, $X$ vaut $1$ avec probabilité $p$ et $0$ sinon :
+$E(X)=0\times(1-p)+1\times p=p$.
+
+\textbf{2.} Pour $n=2$ : $P(X=0)=(1-p)^2$, $P(X=1)=2p(1-p)$,
+$P(X=2)=p^2$. Donc
+$E(X)=0+2p(1-p)+2p^2=2p(1-p)+2p^2=2p$.
+
+\textbf{3.} Pour $n=3$ : $E(X)=3p(1-p)^2+2\times3p^2(1-p)+3p^3=3p$ après
+développement. Les trois cas donnent $E(X)=np$, formule générale de
+l'espérance d'une loi binomiale.
+\end{corrige}

@@ -1,0 +1,28 @@
+% META: {"id": "TCOMPL-ME-CO-006", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-ME-EX-006", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import sqrt, symbols, solve, N
+% u = [0]
+% for _ in range(6):
+%     u.append(sqrt(u[-1] + 2))
+% assert abs(float(N(u[1])) - 1.414) < 0.001
+% assert abs(float(N(u[2])) - 1.848) < 0.001
+% assert abs(float(N(u[3])) - 1.961) < 0.001
+% for i in range(6):
+%     assert float(N(u[i])) < float(N(u[i + 1]))
+% l = symbols('l', positive=True)
+% assert solve(l ** 2 - l - 2, l) == [2]
+% assert abs(float(N(u[6])) - 2) < 0.01
+% END-VERIFY
+\begin{corrige}{TCOMPL-ME-EX-006}
+\textbf{1.} $u_1=\sqrt2\approx1{,}414$, $u_2=\sqrt{3{,}414}\approx1{,}848$,
+$u_3\approx1{,}961$.
+
+\textbf{2.} On trace la courbe de $f$ et la droite $y=x$ ; partant de $u_0$
+sur l'axe des abscisses, on monte verticalement jusqu'à la courbe puis
+horizontalement jusqu'à la droite, et on recommence. L'escalier converge vers
+le point d'intersection.
+
+\textbf{3.} La suite semble croissante et converger vers $2$. Le point fixe
+vérifie $\ell=\sqrt{\ell+2}$, soit $\ell^2-\ell-2=0$, de racines $2$ et $-1$ ;
+seule $\ell=2$ est positive.
+\end{corrige}

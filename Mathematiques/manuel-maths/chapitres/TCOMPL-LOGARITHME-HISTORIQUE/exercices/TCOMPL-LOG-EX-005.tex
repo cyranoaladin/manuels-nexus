@@ -1,0 +1,20 @@
+% META: {"id": "TCOMPL-LOG-EX-005", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "exercice", "capacites": ["TCOMPL-LOG-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/exercices/TCOMPL-LOG-EX-005.tex", "corrige_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/corriges/TCOMPL-LOG-CO-005.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, exp, log, diff, limit, oo, simplify
+% x = symbols('x', positive=True)
+% assert solve(exp(x) - 5, x) == [log(5)]
+% y = symbols('y', positive=True)
+% assert solve(log(y) + 2, y) == [exp(-2)]
+% assert limit(log(x), x, 0, '+') == -oo
+% assert limit(log(x), x, oo) == oo
+% z = symbols('z')
+% assert simplify(diff(log(3 * z + 1), z) - 3 / (3 * z + 1)) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-LOG-EX-005}{1}{12}
+\begin{enumerate}
+  \item Résoudre $\mathrm{e}^{x}=5$ puis $\ln x=-2$.
+  \item Déterminer les limites de $\ln$ en $0^+$ et en $+\infty$.
+  \item Calculer la dérivée de $x\mapsto\ln(3x+1)$ sur
+        $\left]-\tfrac13\,;\,+\infty\right[$.
+\end{enumerate}
+\end{exercice}

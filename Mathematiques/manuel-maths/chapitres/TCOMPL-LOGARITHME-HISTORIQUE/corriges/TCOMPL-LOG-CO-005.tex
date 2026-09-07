@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-LOG-CO-005", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "corrige", "exercice_ref": "TCOMPL-LOG-EX-005", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, exp, log, diff, limit, oo, simplify
+% x = symbols('x', positive=True)
+% assert solve(exp(x) - 5, x) == [log(5)]
+% y = symbols('y', positive=True)
+% assert solve(log(y) + 2, y) == [exp(-2)]
+% assert limit(log(x), x, 0, '+') == -oo
+% assert limit(log(x), x, oo) == oo
+% z = symbols('z')
+% assert simplify(diff(log(3 * z + 1), z) - 3 / (3 * z + 1)) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-LOG-EX-005}
+\textbf{1.} $\mathrm{e}^x=5\iff x=\ln5$. $\ln x=-2\iff x=\mathrm{e}^{-2}$.
+
+\textbf{2.} $\displaystyle\lim_{x\to0^+}\ln x=-\infty$ et
+$\displaystyle\lim_{x\to+\infty}\ln x=+\infty$ : $\ln$ est la réciproque de
+l'exponentielle, dont les limites en $-\infty$ et $+\infty$ sont $0^+$ et
+$+\infty$.
+
+\textbf{3.} La dérivée de $\ln u$ est $\dfrac{u'}{u}$, donc celle de
+$\ln(3x+1)$ est $\dfrac{3}{3x+1}$.
+\end{corrige}

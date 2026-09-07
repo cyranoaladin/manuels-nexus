@@ -1,0 +1,25 @@
+% META: {"id": "TCOMPL-ATT-CO-007", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ATT-EX-007", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, integrate, Rational, simplify, oo, N
+% t = symbols('t', positive=True)
+% lam = Rational(1, 2)
+% f = lam * exp(-lam * t)
+% assert integrate(f, (t, 0, oo)) == 1
+% F = integrate(f, (t, 0, symbols('x', positive=True)))
+% assert simplify(F - (1 - exp(-lam * symbols('x', positive=True)))) == 0
+% assert abs(float(N(1 - exp(-1))) - 0.6321) < 0.001
+% assert abs(float(N(exp(Rational(-3, 2)))) - 0.2231) < 0.001
+% assert simplify(exp(Rational(-5, 2)) / exp(Rational(-3, 2)) - exp(-1)) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-ATT-EX-007}
+\textbf{1.} La densité est $f(t)=0{,}5\,\mathrm{e}^{-0{,}5t}$ pour $t\geq0$,
+nulle sinon ; la fonction de répartition est
+$F(t)=1-\mathrm{e}^{-0{,}5t}$ pour $t\geq0$.
+
+\textbf{2.} $P(T\leq2)=1-\mathrm{e}^{-1}\approx0{,}632$ et
+$P(T>3)=\mathrm{e}^{-1{,}5}\approx0{,}223$.
+
+\textbf{3.} $P_{T>3}(T>5)=\dfrac{\mathrm{e}^{-2{,}5}}{\mathrm{e}^{-1{,}5}}
+=\mathrm{e}^{-1}=P(T>2)$ : la loi exponentielle est sans mémoire, comme la
+loi géométrique dont elle est l'analogue continu.
+\end{corrige}

@@ -1,0 +1,25 @@
+% META: {"id": "TCOMPL-ECH-CO-005", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ECH-EX-005", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial
+% p = Rational(1, 6)
+% assert p + (1 - p) == 1
+% n = 20
+% total = sum(binomial(n, k) * p ** k * (1 - p) ** (n - k) for k in range(n + 1))
+% assert total == 1
+% # Sans remise, la probabilite du second succes depend du premier.
+% p_as_1 = Rational(4, 32)
+% p_as_2_sachant = Rational(3, 31)
+% assert p_as_2_sachant != p_as_1
+% END-VERIFY
+\begin{corrige}{TCOMPL-ECH-EX-005}
+\textbf{1.} $X$ ne prend que les valeurs $0$ et $1$ : c'est une loi de
+Bernoulli de paramètre $p=\tfrac16$.
+
+\textbf{2.} On répète $20$ fois la même épreuve de Bernoulli, de façon
+indépendante, et $Y$ compte les succès : $Y$ suit la loi binomiale
+$\mathcal{B}\left(20\,;\,\tfrac16\right)$.
+
+\textbf{3.} Les tirages sont sans remise : les épreuves ne sont pas
+indépendantes et la probabilité de succès change à chaque tirage. $Z$ ne suit
+donc pas une loi binomiale.
+\end{corrige}

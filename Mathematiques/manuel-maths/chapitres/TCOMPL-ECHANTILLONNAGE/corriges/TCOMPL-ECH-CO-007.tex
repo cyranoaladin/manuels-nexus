@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-ECH-CO-007", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ECH-EX-007", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial, Rational, N
+% p = Rational(3, 10)
+% n = 10
+% def P(k):
+%     return binomial(n, k) * p ** k * (1 - p) ** (n - k)
+% assert abs(float(N(P(3))) - 0.2668) < 0.0005
+% cumul2 = sum(P(k) for k in range(3))
+% assert abs(float(N(cumul2)) - 0.3828) < 0.0005
+% cumul3 = cumul2 + P(3)
+% assert abs(float(N(1 - cumul3)) - 0.3504) < 0.0005
+% assert sum(P(k) for k in range(n + 1)) == 1
+% END-VERIFY
+\begin{corrige}{TCOMPL-ECH-EX-007}
+\textbf{1.} $P(X=3)=\binom{10}{3}0{,}3^3\times0{,}7^7
+=120\times0{,}027\times0{,}0823543\approx0{,}2668$.
+
+\textbf{2.} $P(X\leq2)=P(X=0)+P(X=1)+P(X=2)\approx0{,}0282+0{,}1211+0{,}2335
+=0{,}3828$.
+
+\textbf{3.} $P(X\geq4)=1-P(X\leq3)\approx1-(0{,}3828+0{,}2668)=0{,}3504$.
+\end{corrige}

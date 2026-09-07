@@ -1,0 +1,22 @@
+% META: {"id": "TCOMPL-ATT-CO-006", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ATT-EX-006", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, simplify, N
+% p = symbols('p', positive=True)
+% n, k = symbols('n k', integer=True, nonnegative=True)
+% survie = (1 - p) ** n
+% assert simplify((1 - p) ** (n + k) / (1 - p) ** n - (1 - p) ** k) == 0
+% q = Rational(95, 100)
+% assert abs(float(N(q ** 10)) - 0.5987) < 0.001
+% assert simplify(q ** 40 / q ** 30 - q ** 10) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-ATT-EX-006}
+\textbf{1.} $X>n$ signifie que les $n$ premières épreuves sont des échecs :
+$P(X>n)=(1-p)^n$.
+
+\textbf{2.} $P_{X>n}(X>n+k)=\dfrac{P(X>n+k)}{P(X>n)}
+=\dfrac{(1-p)^{n+k}}{(1-p)^n}=(1-p)^k=P(X>k)$.
+
+\textbf{3.} L'absence de mémoire s'applique : la probabilité vaut
+$P(X>10)=0{,}95^{10}\approx0{,}599$. Les $30$ jours déjà écoulés
+n'interviennent pas.
+\end{corrige}

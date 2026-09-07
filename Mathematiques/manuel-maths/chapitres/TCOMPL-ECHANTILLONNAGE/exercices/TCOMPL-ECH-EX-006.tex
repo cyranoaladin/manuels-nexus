@@ -1,0 +1,21 @@
+% META: {"id": "TCOMPL-ECH-EX-006", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "exercice", "capacites": ["TCOMPL-ECH-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/exercices/TCOMPL-ECH-EX-006.tex", "corrige_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-006.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial
+% lignes = [[binomial(n, k) for k in range(n + 1)] for n in range(6)]
+% assert lignes[5] == [1, 5, 10, 10, 5, 1]
+% assert lignes[4] == [1, 4, 6, 4, 1]
+% assert binomial(5, 2) == binomial(5, 3) == 10
+% assert binomial(4, 1) + binomial(4, 2) == binomial(5, 2)
+% for n in range(1, 12):
+%     for k in range(1, n + 1):
+%         assert binomial(n, k) == binomial(n - 1, k - 1) + binomial(n - 1, k)
+%         assert binomial(n, k) == binomial(n, n - k)
+% END-VERIFY
+\begin{exercice}{TCOMPL-ECH-EX-006}{1}{12}
+\begin{enumerate}
+  \item Construire les six premières lignes du triangle de Pascal.
+  \item En déduire $\binom{5}{2}$ et $\binom{5}{3}$. Que remarque-t-on ?
+  \item Vérifier la relation $\binom{5}{2}=\binom{4}{1}+\binom{4}{2}$ et
+        l'énoncer en général.
+\end{enumerate}
+\end{exercice}
