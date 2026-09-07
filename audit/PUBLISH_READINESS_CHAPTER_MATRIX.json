@@ -5315,13 +5315,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C7",
-          "C8"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "1SPE-SECDEG-EV-A",
           "1SPE-SECDEG-EV-B"
@@ -5332,7 +5329,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:6fd18e3fe5b6c9ae4e3de95d12eac621e12f9d53554eb3fdd4fe3cb348bfc45a",
+        "cell_state_set_digest": "sha256:e55b18685410c3da2cb09c68ad92d72876d8545e6c9d272be44d8f3c64fe6a3e",
         "cells": 56,
         "status": "COMPLETE",
         "unknown": 0,
@@ -5397,7 +5394,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 551,
+        "ambiguous": 554,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -5459,7 +5456,7 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
@@ -5486,7 +5483,7 @@
         "status": "COMPLETE"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:5c0b93b1829d8e8e6039cefce5a21bad5ae9747d094d4c31617758a72941d913",
+        "capacities_digest": "sha256:a075d9436438e5303bd56f8aa961970cebb096de95410b353666d33d897b03db",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 2,
@@ -5501,23 +5498,25 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 8,
+        "machine_unclassified": 10,
         "machine_unclassified_ids": [
           "1SPE::1SPE-SECOND-DEGRE::C7::corriges",
           "1SPE::1SPE-SECOND-DEGRE::C7::cours",
+          "1SPE::1SPE-SECOND-DEGRE::C7::evaluations",
           "1SPE::1SPE-SECOND-DEGRE::C7::exercices",
           "1SPE::1SPE-SECOND-DEGRE::C7::qcm",
           "1SPE::1SPE-SECOND-DEGRE::C8::corriges",
           "1SPE::1SPE-SECOND-DEGRE::C8::cours",
+          "1SPE::1SPE-SECOND-DEGRE::C8::evaluations",
           "1SPE::1SPE-SECOND-DEGRE::C8::exercices",
           "1SPE::1SPE-SECOND-DEGRE::C8::qcm"
         ],
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 6,
+        "raw_missing": 4,
         "routed_to_human": 42,
-        "semantically_unvalidated": 50,
+        "semantically_unvalidated": 52,
         "semantically_unvalidated_ids": [
           "1SPE::1SPE-SECOND-DEGRE::C1::corriges",
           "1SPE::1SPE-SECOND-DEGRE::C1::cours",
@@ -5563,24 +5562,24 @@
           "1SPE::1SPE-SECOND-DEGRE::C6::remediation",
           "1SPE::1SPE-SECOND-DEGRE::C7::corriges",
           "1SPE::1SPE-SECOND-DEGRE::C7::cours",
+          "1SPE::1SPE-SECOND-DEGRE::C7::evaluations",
           "1SPE::1SPE-SECOND-DEGRE::C7::exercices",
           "1SPE::1SPE-SECOND-DEGRE::C7::qcm",
           "1SPE::1SPE-SECOND-DEGRE::C8::corriges",
           "1SPE::1SPE-SECOND-DEGRE::C8::cours",
+          "1SPE::1SPE-SECOND-DEGRE::C8::evaluations",
           "1SPE::1SPE-SECOND-DEGRE::C8::exercices",
           "1SPE::1SPE-SECOND-DEGRE::C8::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:e590e324a735930f77c8cb9da098bd25fd76fd8b712924cc1e9c5acbe58c95de",
+        "semantically_unvalidated_set_digest": "sha256:eb3b6ec2b76223867a4d75812318c337e76ca035bb4c98bcf0b4e3b75c161f7b",
         "status": "GAP",
         "triaged_ids": [
-          "1SPE::1SPE-SECOND-DEGRE::C7::evaluations",
           "1SPE::1SPE-SECOND-DEGRE::C7::methodes",
           "1SPE::1SPE-SECOND-DEGRE::C7::remediation",
-          "1SPE::1SPE-SECOND-DEGRE::C8::evaluations",
           "1SPE::1SPE-SECOND-DEGRE::C8::methodes",
           "1SPE::1SPE-SECOND-DEGRE::C8::remediation"
         ],
-        "triaged_not_a_gap": 6
+        "triaged_not_a_gap": 4
       },
       "programme": {
         "mandatory_atoms": 10,
@@ -5659,7 +5658,7 @@
         "questions": 20,
         "status": "COMPLETE"
       },
-      "risk_score": 3130,
+      "risk_score": 3200,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -6644,12 +6643,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C1"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "TCOMPL-AIR-EV-A",
           "TCOMPL-AIR-EV-B"
@@ -6660,7 +6657,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:73597bd258e9501f3e579e04cdb590c43197ab8880d213dc0f7a6a592673be4b",
+        "cell_state_set_digest": "sha256:a44201a9eb77d9cd67d10a165d64456c767b525226b9c7bbd8bd1e0da986411e",
         "cells": 42,
         "status": "COMPLETE",
         "unknown": 0,
@@ -6715,7 +6712,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 85,
+        "ambiguous": 86,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -6763,7 +6760,7 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
@@ -6790,7 +6787,7 @@
         "status": "GAP"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:bb707942fd3b5656d38ce280a012f1f3ec201822fc4564786028e69bcf3a3dca",
+        "capacities_digest": "sha256:2e963612158aef2f7c66ef63db185bcc7d87c121745c1e4c98023ce8059db05a",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 5,
@@ -6805,10 +6802,11 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 36,
+        "machine_unclassified": 37,
         "machine_unclassified_ids": [
           "TCOMPL::TCOMPL-CALCULS-AIRES::C1::corriges",
           "TCOMPL::TCOMPL-CALCULS-AIRES::C1::cours",
+          "TCOMPL::TCOMPL-CALCULS-AIRES::C1::evaluations",
           "TCOMPL::TCOMPL-CALCULS-AIRES::C1::exercices",
           "TCOMPL::TCOMPL-CALCULS-AIRES::C1::methodes",
           "TCOMPL::TCOMPL-CALCULS-AIRES::C1::qcm",
@@ -6847,12 +6845,13 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 6,
+        "raw_missing": 5,
         "routed_to_human": 0,
-        "semantically_unvalidated": 36,
+        "semantically_unvalidated": 37,
         "semantically_unvalidated_ids": [
           "TCOMPL::TCOMPL-CALCULS-AIRES::C1::corriges",
           "TCOMPL::TCOMPL-CALCULS-AIRES::C1::cours",
+          "TCOMPL::TCOMPL-CALCULS-AIRES::C1::evaluations",
           "TCOMPL::TCOMPL-CALCULS-AIRES::C1::exercices",
           "TCOMPL::TCOMPL-CALCULS-AIRES::C1::methodes",
           "TCOMPL::TCOMPL-CALCULS-AIRES::C1::qcm",
@@ -6888,17 +6887,16 @@
           "TCOMPL::TCOMPL-CALCULS-AIRES::C6::methodes",
           "TCOMPL::TCOMPL-CALCULS-AIRES::C6::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:0ba6a3788b78438d959d29e9d2ade18659d97cfe3fd0ec51b8e8580d0f07e33d",
+        "semantically_unvalidated_set_digest": "sha256:ab53ea4715116f9e49caa6572278eb0d01c033947cce6faea68467e615773a16",
         "status": "GAP",
         "triaged_ids": [
-          "TCOMPL::TCOMPL-CALCULS-AIRES::C1::evaluations",
           "TCOMPL::TCOMPL-CALCULS-AIRES::C1::remediation",
           "TCOMPL::TCOMPL-CALCULS-AIRES::C2::remediation",
           "TCOMPL::TCOMPL-CALCULS-AIRES::C3::remediation",
           "TCOMPL::TCOMPL-CALCULS-AIRES::C5::remediation",
           "TCOMPL::TCOMPL-CALCULS-AIRES::C6::remediation"
         ],
-        "triaged_not_a_gap": 6
+        "triaged_not_a_gap": 5
       },
       "programme": {
         "mandatory_atoms": 13,
@@ -6962,7 +6960,7 @@
         "questions": 6,
         "status": "COMPLETE"
       },
-      "risk_score": 2020,
+      "risk_score": 2045,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -7297,12 +7295,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C7"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "TCOMPL-ECH-EV-A",
           "TCOMPL-ECH-EV-B"
@@ -7313,7 +7309,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:6855c124239e1b143be55a8aabd86052513eb3d66e569432e5986a809dd634fe",
+        "cell_state_set_digest": "sha256:b17d49c9c6726d89abd8ce5d8f33ae9205355d0a0e606a9becfd37b3a042f034",
         "cells": 49,
         "status": "COMPLETE",
         "unknown": 0,
@@ -7388,7 +7384,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 96,
+        "ambiguous": 100,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -7437,7 +7433,7 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
@@ -7464,7 +7460,7 @@
         "status": "GAP"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:e74139a199d819ec13502cf3d656f9baa36814c00d083906aadb9193cd3292a2",
+        "capacities_digest": "sha256:fc71962791d298529254567b2a07faadee783303ada336bf1f02976945292f4c",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 6,
@@ -7479,7 +7475,7 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 41,
+        "machine_unclassified": 42,
         "machine_unclassified_ids": [
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C1::corriges",
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C1::cours",
@@ -7520,15 +7516,16 @@
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C6::qcm",
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::corriges",
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::cours",
+          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::evaluations",
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::exercices",
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::qcm"
         ],
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 8,
+        "raw_missing": 7,
         "routed_to_human": 0,
-        "semantically_unvalidated": 41,
+        "semantically_unvalidated": 42,
         "semantically_unvalidated_ids": [
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C1::corriges",
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C1::cours",
@@ -7569,10 +7566,11 @@
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C6::qcm",
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::corriges",
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::cours",
+          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::evaluations",
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::exercices",
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:0a7ade7d610280024b9616c3ab912d29689f3147a1f07afd8abe495a54abe422",
+        "semantically_unvalidated_set_digest": "sha256:93c56c36a4b0d95c192786bb9d6e6983abf779a33f7a70ccb7079d824471b3cd",
         "status": "GAP",
         "triaged_ids": [
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C1::remediation",
@@ -7580,11 +7578,10 @@
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C4::remediation",
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C5::remediation",
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C6::remediation",
-          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::evaluations",
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::methodes",
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::remediation"
         ],
-        "triaged_not_a_gap": 8
+        "triaged_not_a_gap": 7
       },
       "programme": {
         "mandatory_atoms": 12,
@@ -7652,7 +7649,7 @@
         "questions": 7,
         "status": "COMPLETE"
       },
-      "risk_score": 2405,
+      "risk_score": 2430,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -8637,12 +8634,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C6"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "TCOMPL-ME-EV-A",
           "TCOMPL-ME-EV-B"
@@ -8653,7 +8648,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:b0c264d331b5c0dbf588a1df60879874a88ab569b61891c38b128cec5c17c0e2",
+        "cell_state_set_digest": "sha256:b893bc726e11775aa1f4689bb5d79b1659855b139070a8a135d94080478df418",
         "cells": 42,
         "status": "COMPLETE",
         "unknown": 0,
@@ -8728,7 +8723,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 114,
+        "ambiguous": 116,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -8777,7 +8772,7 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
@@ -8804,7 +8799,7 @@
         "status": "GAP"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:1de34e60ba52456f89cd6e93a22c07e6e0bc9951722f58d86ac2a24b0fd86847",
+        "capacities_digest": "sha256:e3101dca0283aa52ff99837a307b1b829a275d1abd33029b3c60d175591dd08a",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 5,
@@ -8819,7 +8814,7 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 36,
+        "machine_unclassified": 37,
         "machine_unclassified_ids": [
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C1::corriges",
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C1::cours",
@@ -8854,6 +8849,7 @@
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C5::remediation",
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::corriges",
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::cours",
+          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::evaluations",
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::exercices",
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::methodes",
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::qcm"
@@ -8861,9 +8857,9 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 6,
+        "raw_missing": 5,
         "routed_to_human": 0,
-        "semantically_unvalidated": 36,
+        "semantically_unvalidated": 37,
         "semantically_unvalidated_ids": [
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C1::corriges",
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C1::cours",
@@ -8898,21 +8894,21 @@
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C5::remediation",
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::corriges",
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::cours",
+          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::evaluations",
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::exercices",
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::methodes",
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:e9911b7b465c03a1f0148e85d5d4c70d17defce784930ff3b6519f6bfe310957",
+        "semantically_unvalidated_set_digest": "sha256:b033a256ac804a6d7e079081e5ee31c8c0d5227243e4249ac91317335c86b973",
         "status": "GAP",
         "triaged_ids": [
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C1::remediation",
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C2::remediation",
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C3::remediation",
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C4::remediation",
-          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::evaluations",
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::remediation"
         ],
-        "triaged_not_a_gap": 6
+        "triaged_not_a_gap": 5
       },
       "programme": {
         "mandatory_atoms": 13,
@@ -8977,7 +8973,7 @@
         "questions": 7,
         "status": "COMPLETE"
       },
-      "risk_score": 2110,
+      "risk_score": 2135,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -9359,12 +9355,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C7"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "TCOMPL-ATT-EV-A",
           "TCOMPL-ATT-EV-B"
@@ -9375,7 +9369,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:a7df6b6d168b26183ebe8963859915feb5ec75cdfe5ad9d614ec451dda1849f3",
+        "cell_state_set_digest": "sha256:76d6eb1d97daf183e956ae6bccfa3c6c0724dd63d6548ff0d8da8358527e9010",
         "cells": 49,
         "status": "COMPLETE",
         "unknown": 0,
@@ -9450,7 +9444,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 76,
+        "ambiguous": 77,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -9501,7 +9495,7 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
@@ -9528,7 +9522,7 @@
         "status": "GAP"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:b54720a501f17e2f47f28d5f657bf77833ab2ac1f1ba22930de30bbf3d69224f",
+        "capacities_digest": "sha256:4d8215c0348ea1391ac3ddc3eac2159de269c8450513f6dfd6ca3074fc77f392",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 6,
@@ -9543,7 +9537,7 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 42,
+        "machine_unclassified": 43,
         "machine_unclassified_ids": [
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C1::corriges",
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C1::cours",
@@ -9584,6 +9578,7 @@
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C6::qcm",
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::corriges",
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::cours",
+          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::evaluations",
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::exercices",
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::methodes",
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::qcm"
@@ -9591,9 +9586,9 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 7,
+        "raw_missing": 6,
         "routed_to_human": 0,
-        "semantically_unvalidated": 42,
+        "semantically_unvalidated": 43,
         "semantically_unvalidated_ids": [
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C1::corriges",
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C1::cours",
@@ -9634,11 +9629,12 @@
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C6::qcm",
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::corriges",
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::cours",
+          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::evaluations",
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::exercices",
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::methodes",
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:8b96c36f4bd710d8bc8f71a26dd111c226092af7314afdce582974c208e83c3e",
+        "semantically_unvalidated_set_digest": "sha256:3b9d885b1a1c6754bf2604747dd20b3a0dbbcc810bef808acb5dcc1976c20084",
         "status": "GAP",
         "triaged_ids": [
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C1::remediation",
@@ -9646,10 +9642,9 @@
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C3::remediation",
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C4::remediation",
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C6::remediation",
-          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::evaluations",
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::remediation"
         ],
-        "triaged_not_a_gap": 7
+        "triaged_not_a_gap": 6
       },
       "programme": {
         "mandatory_atoms": 12,
@@ -9719,7 +9714,7 @@
         "questions": 9,
         "status": "COMPLETE"
       },
-      "risk_score": 2570,
+      "risk_score": 2595,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -9735,14 +9730,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C2",
-          "C3",
-          "C9"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "TEXP-ARI-EV-A",
           "TEXP-ARI-EV-B"
@@ -9753,7 +9744,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:6a3c5ae3b5749402b8911e8f2aac00e3b60392fbde155b6c76e4e55d488857eb",
+        "cell_state_set_digest": "sha256:87e3b76850fecdbdf7b7139bcaa9eaf829f65b0ed847bc56db5969e1dc26cd37",
         "cells": 63,
         "status": "COMPLETE",
         "unknown": 0,
@@ -9818,7 +9809,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 214,
+        "ambiguous": 221,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -9871,7 +9862,7 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
@@ -9898,7 +9889,7 @@
         "status": "GAP"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:209e4421b46fd5c56c8bac5c004f86166910a9d263bc4c1086f58fcc56a776b3",
+        "capacities_digest": "sha256:31791f6e71885b355f6dfd415e377bd758c26b79270e24b6918bf6efa27f5bdc",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 6,
@@ -9913,7 +9904,7 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 55,
+        "machine_unclassified": 58,
         "machine_unclassified_ids": [
           "TEXPERTES::TEXP-ARITHMETIQUE::C1::corriges",
           "TEXPERTES::TEXP-ARITHMETIQUE::C1::cours",
@@ -9924,12 +9915,14 @@
           "TEXPERTES::TEXP-ARITHMETIQUE::C1::remediation",
           "TEXPERTES::TEXP-ARITHMETIQUE::C2::corriges",
           "TEXPERTES::TEXP-ARITHMETIQUE::C2::cours",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C2::evaluations",
           "TEXPERTES::TEXP-ARITHMETIQUE::C2::exercices",
           "TEXPERTES::TEXP-ARITHMETIQUE::C2::methodes",
           "TEXPERTES::TEXP-ARITHMETIQUE::C2::qcm",
           "TEXPERTES::TEXP-ARITHMETIQUE::C2::remediation",
           "TEXPERTES::TEXP-ARITHMETIQUE::C3::corriges",
           "TEXPERTES::TEXP-ARITHMETIQUE::C3::cours",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C3::evaluations",
           "TEXPERTES::TEXP-ARITHMETIQUE::C3::exercices",
           "TEXPERTES::TEXP-ARITHMETIQUE::C3::methodes",
           "TEXPERTES::TEXP-ARITHMETIQUE::C3::qcm",
@@ -9967,6 +9960,7 @@
           "TEXPERTES::TEXP-ARITHMETIQUE::C8::qcm",
           "TEXPERTES::TEXP-ARITHMETIQUE::C9::corriges",
           "TEXPERTES::TEXP-ARITHMETIQUE::C9::cours",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C9::evaluations",
           "TEXPERTES::TEXP-ARITHMETIQUE::C9::exercices",
           "TEXPERTES::TEXP-ARITHMETIQUE::C9::methodes",
           "TEXPERTES::TEXP-ARITHMETIQUE::C9::qcm"
@@ -9974,9 +9968,9 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 8,
+        "raw_missing": 5,
         "routed_to_human": 0,
-        "semantically_unvalidated": 55,
+        "semantically_unvalidated": 58,
         "semantically_unvalidated_ids": [
           "TEXPERTES::TEXP-ARITHMETIQUE::C1::corriges",
           "TEXPERTES::TEXP-ARITHMETIQUE::C1::cours",
@@ -9987,12 +9981,14 @@
           "TEXPERTES::TEXP-ARITHMETIQUE::C1::remediation",
           "TEXPERTES::TEXP-ARITHMETIQUE::C2::corriges",
           "TEXPERTES::TEXP-ARITHMETIQUE::C2::cours",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C2::evaluations",
           "TEXPERTES::TEXP-ARITHMETIQUE::C2::exercices",
           "TEXPERTES::TEXP-ARITHMETIQUE::C2::methodes",
           "TEXPERTES::TEXP-ARITHMETIQUE::C2::qcm",
           "TEXPERTES::TEXP-ARITHMETIQUE::C2::remediation",
           "TEXPERTES::TEXP-ARITHMETIQUE::C3::corriges",
           "TEXPERTES::TEXP-ARITHMETIQUE::C3::cours",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C3::evaluations",
           "TEXPERTES::TEXP-ARITHMETIQUE::C3::exercices",
           "TEXPERTES::TEXP-ARITHMETIQUE::C3::methodes",
           "TEXPERTES::TEXP-ARITHMETIQUE::C3::qcm",
@@ -10030,23 +10026,21 @@
           "TEXPERTES::TEXP-ARITHMETIQUE::C8::qcm",
           "TEXPERTES::TEXP-ARITHMETIQUE::C9::corriges",
           "TEXPERTES::TEXP-ARITHMETIQUE::C9::cours",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C9::evaluations",
           "TEXPERTES::TEXP-ARITHMETIQUE::C9::exercices",
           "TEXPERTES::TEXP-ARITHMETIQUE::C9::methodes",
           "TEXPERTES::TEXP-ARITHMETIQUE::C9::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:e3de0d365cc7750adfcfd64c24066b26ad190b6a4f7bd2476c21228769d25f7a",
+        "semantically_unvalidated_set_digest": "sha256:b88613c5dee178429c726b0070cfe198f4601051a52b2e685d3cc9fd32f66ecd",
         "status": "GAP",
         "triaged_ids": [
-          "TEXPERTES::TEXP-ARITHMETIQUE::C2::evaluations",
-          "TEXPERTES::TEXP-ARITHMETIQUE::C3::evaluations",
           "TEXPERTES::TEXP-ARITHMETIQUE::C5::remediation",
           "TEXPERTES::TEXP-ARITHMETIQUE::C6::remediation",
           "TEXPERTES::TEXP-ARITHMETIQUE::C7::remediation",
           "TEXPERTES::TEXP-ARITHMETIQUE::C8::remediation",
-          "TEXPERTES::TEXP-ARITHMETIQUE::C9::evaluations",
           "TEXPERTES::TEXP-ARITHMETIQUE::C9::remediation"
         ],
-        "triaged_not_a_gap": 8
+        "triaged_not_a_gap": 5
       },
       "programme": {
         "mandatory_atoms": 17,
@@ -10124,7 +10118,7 @@
         "questions": 11,
         "status": "COMPLETE"
       },
-      "risk_score": 3275,
+      "risk_score": 3390,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -10469,14 +10463,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C1",
-          "C3",
-          "C5"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "TEXP-CTP-EV-A",
           "TEXP-CTP-EV-B"
@@ -10487,7 +10477,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:e9b429670f3d109172c7bccb7eb351c2739292e3c3a17c438b1ba4fcf4dd5bc4",
+        "cell_state_set_digest": "sha256:bf5c075a5b7ea3970e020f27b7670e2ee59abcb3b7451486768948b1b74c89d6",
         "cells": 49,
         "status": "COMPLETE",
         "unknown": 0,
@@ -10552,7 +10542,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 118,
+        "ambiguous": 126,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -10602,7 +10592,7 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
@@ -10629,7 +10619,7 @@
         "status": "GAP"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:cb82c9858796a18e741a1acb3a0e55f5f82ee28a47a21f70f884cadbf86ffe13",
+        "capacities_digest": "sha256:a5fc02aae27380b74ae1512a966a896d14f8dd895b392755d2eede329ea5c7b8",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 5,
@@ -10644,10 +10634,11 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 41,
+        "machine_unclassified": 44,
         "machine_unclassified_ids": [
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C1::corriges",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C1::cours",
+          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C1::evaluations",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C1::exercices",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C1::methodes",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C1::qcm",
@@ -10660,6 +10651,7 @@
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C2::qcm",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::corriges",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::cours",
+          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::evaluations",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::exercices",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::methodes",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::qcm",
@@ -10671,6 +10663,7 @@
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C4::qcm",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::corriges",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::cours",
+          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::evaluations",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::exercices",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::methodes",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::qcm",
@@ -10691,12 +10684,13 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 8,
+        "raw_missing": 5,
         "routed_to_human": 0,
-        "semantically_unvalidated": 41,
+        "semantically_unvalidated": 44,
         "semantically_unvalidated_ids": [
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C1::corriges",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C1::cours",
+          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C1::evaluations",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C1::exercices",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C1::methodes",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C1::qcm",
@@ -10709,6 +10703,7 @@
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C2::qcm",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::corriges",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::cours",
+          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::evaluations",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::exercices",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::methodes",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::qcm",
@@ -10720,6 +10715,7 @@
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C4::qcm",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::corriges",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::cours",
+          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::evaluations",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::exercices",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::methodes",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::qcm",
@@ -10737,19 +10733,16 @@
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C7::qcm",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C7::remediation"
         ],
-        "semantically_unvalidated_set_digest": "sha256:e196dde632dffde2c3578826b709ca1a6b9199cc10e53fbe3845938a4244edbe",
+        "semantically_unvalidated_set_digest": "sha256:564907716fb19ae266f6a05e11a92621f36e762131158253ccfea5e67c324e00",
         "status": "GAP",
         "triaged_ids": [
-          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C1::evaluations",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C2::remediation",
-          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::evaluations",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::remediation",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C4::remediation",
-          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::evaluations",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::remediation",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C6::remediation"
         ],
-        "triaged_not_a_gap": 8
+        "triaged_not_a_gap": 5
       },
       "programme": {
         "mandatory_atoms": 22,
@@ -10818,7 +10811,7 @@
         "questions": 8,
         "status": "COMPLETE"
       },
-      "risk_score": 2380,
+      "risk_score": 2495,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -10834,12 +10827,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C2"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "TEXP-GRA-EV-A",
           "TEXP-GRA-EV-B"
@@ -10850,7 +10841,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:d6db6b42bf628e63cc23910230529bd31f90dddd3a929976005efffb3c9cd9f4",
+        "cell_state_set_digest": "sha256:19c5b7424f83f5447919a346188b728114aca76509777287701cd1b5998ad77e",
         "cells": 35,
         "status": "COMPLETE",
         "unknown": 0,
@@ -10915,7 +10906,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 73,
+        "ambiguous": 76,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -10963,7 +10954,7 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
@@ -10990,7 +10981,7 @@
         "status": "GAP"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:14d475fb0be1e5379d35e7331d614f135107dd16a27a025eb72ae09f7a7537b2",
+        "capacities_digest": "sha256:4eed13660f5bbae8c2e35727827b2b24e749086236ee92e6aff3fc583eb0f9a0",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 4,
@@ -11005,7 +10996,7 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 30,
+        "machine_unclassified": 31,
         "machine_unclassified_ids": [
           "TEXPERTES::TEXP-GRAPHES::C1::corriges",
           "TEXPERTES::TEXP-GRAPHES::C1::cours",
@@ -11015,6 +11006,7 @@
           "TEXPERTES::TEXP-GRAPHES::C1::qcm",
           "TEXPERTES::TEXP-GRAPHES::C2::corriges",
           "TEXPERTES::TEXP-GRAPHES::C2::cours",
+          "TEXPERTES::TEXP-GRAPHES::C2::evaluations",
           "TEXPERTES::TEXP-GRAPHES::C2::exercices",
           "TEXPERTES::TEXP-GRAPHES::C2::methodes",
           "TEXPERTES::TEXP-GRAPHES::C2::qcm",
@@ -11041,9 +11033,9 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 5,
+        "raw_missing": 4,
         "routed_to_human": 0,
-        "semantically_unvalidated": 30,
+        "semantically_unvalidated": 31,
         "semantically_unvalidated_ids": [
           "TEXPERTES::TEXP-GRAPHES::C1::corriges",
           "TEXPERTES::TEXP-GRAPHES::C1::cours",
@@ -11053,6 +11045,7 @@
           "TEXPERTES::TEXP-GRAPHES::C1::qcm",
           "TEXPERTES::TEXP-GRAPHES::C2::corriges",
           "TEXPERTES::TEXP-GRAPHES::C2::cours",
+          "TEXPERTES::TEXP-GRAPHES::C2::evaluations",
           "TEXPERTES::TEXP-GRAPHES::C2::exercices",
           "TEXPERTES::TEXP-GRAPHES::C2::methodes",
           "TEXPERTES::TEXP-GRAPHES::C2::qcm",
@@ -11076,16 +11069,15 @@
           "TEXPERTES::TEXP-GRAPHES::C5::methodes",
           "TEXPERTES::TEXP-GRAPHES::C5::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:2e7adc9be158cd798d022798225e20dce13a224844ab7b3279685fd9c785bc2d",
+        "semantically_unvalidated_set_digest": "sha256:e171cdbf8683d1098b3c29d78e398e9d2dfa97cf51c7ef60e7d391c72593601e",
         "status": "GAP",
         "triaged_ids": [
           "TEXPERTES::TEXP-GRAPHES::C1::remediation",
-          "TEXPERTES::TEXP-GRAPHES::C2::evaluations",
           "TEXPERTES::TEXP-GRAPHES::C2::remediation",
           "TEXPERTES::TEXP-GRAPHES::C3::remediation",
           "TEXPERTES::TEXP-GRAPHES::C5::remediation"
         ],
-        "triaged_not_a_gap": 5
+        "triaged_not_a_gap": 4
       },
       "programme": {
         "mandatory_atoms": 6,
@@ -11146,7 +11138,7 @@
         "questions": 6,
         "status": "COMPLETE"
       },
-      "risk_score": 1725,
+      "risk_score": 1750,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -11162,13 +11154,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C2",
-          "C3"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "TEXP-MAT-EV-A",
           "TEXP-MAT-EV-B"
@@ -11179,7 +11168,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:0675e4a5b4093a5408888e6a794f73da2aa303ddec4b34687877dd5119f584b0",
+        "cell_state_set_digest": "sha256:74ec1e42cc716544ecda8fa4ede792bfdad4f5f197a324014ed814b9a4305b2b",
         "cells": 49,
         "status": "COMPLETE",
         "unknown": 0,
@@ -11244,7 +11233,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 116,
+        "ambiguous": 118,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -11293,7 +11282,7 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
@@ -11320,7 +11309,7 @@
         "status": "GAP"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:99d4d9e4991f30dfd7df407e0f5fda1047e25780c12d9af83e40e2e428fb6bac",
+        "capacities_digest": "sha256:1f4855f38b8c11ec1af1d853442bacec322a652bc6c70375cd4c896372659d1c",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 5,
@@ -11335,7 +11324,7 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 42,
+        "machine_unclassified": 44,
         "machine_unclassified_ids": [
           "TEXPERTES::TEXP-MATRICES-MARKOV::C1::corriges",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C1::cours",
@@ -11346,11 +11335,13 @@
           "TEXPERTES::TEXP-MATRICES-MARKOV::C1::remediation",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C2::corriges",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C2::cours",
+          "TEXPERTES::TEXP-MATRICES-MARKOV::C2::evaluations",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C2::exercices",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C2::methodes",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C2::qcm",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C3::corriges",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C3::cours",
+          "TEXPERTES::TEXP-MATRICES-MARKOV::C3::evaluations",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C3::exercices",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C3::methodes",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C3::qcm",
@@ -11383,9 +11374,9 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 7,
+        "raw_missing": 5,
         "routed_to_human": 0,
-        "semantically_unvalidated": 42,
+        "semantically_unvalidated": 44,
         "semantically_unvalidated_ids": [
           "TEXPERTES::TEXP-MATRICES-MARKOV::C1::corriges",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C1::cours",
@@ -11396,11 +11387,13 @@
           "TEXPERTES::TEXP-MATRICES-MARKOV::C1::remediation",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C2::corriges",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C2::cours",
+          "TEXPERTES::TEXP-MATRICES-MARKOV::C2::evaluations",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C2::exercices",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C2::methodes",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C2::qcm",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C3::corriges",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C3::cours",
+          "TEXPERTES::TEXP-MATRICES-MARKOV::C3::evaluations",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C3::exercices",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C3::methodes",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C3::qcm",
@@ -11430,18 +11423,16 @@
           "TEXPERTES::TEXP-MATRICES-MARKOV::C7::methodes",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C7::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:b29bfca1aa9779f07e52a19a53324652a215df4b0b4b48380cc225849b719a4a",
+        "semantically_unvalidated_set_digest": "sha256:4a3de4e7cf034aec9c675d22a29c127dea99404c71d95ba8d095cc8ddf8d90c8",
         "status": "GAP",
         "triaged_ids": [
-          "TEXPERTES::TEXP-MATRICES-MARKOV::C2::evaluations",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C2::remediation",
-          "TEXPERTES::TEXP-MATRICES-MARKOV::C3::evaluations",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C3::remediation",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C4::remediation",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C6::remediation",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C7::remediation"
         ],
-        "triaged_not_a_gap": 7
+        "triaged_not_a_gap": 5
       },
       "programme": {
         "mandatory_atoms": 13,
@@ -11509,7 +11500,7 @@
         "questions": 7,
         "status": "COMPLETE"
       },
-      "risk_score": 2380,
+      "risk_score": 2450,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -14296,14 +14287,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C3",
-          "C6",
-          "C7"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "TSPE-INTEG-EV-A",
           "TSPE-INTEG-EV-B"
@@ -14314,7 +14301,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:7d72d242de27e65fe1dd3d05edd48876bce95bc4e570fb6292e30aa9e3e94038",
+        "cell_state_set_digest": "sha256:37b9dc77602909cc28710fcdd95912afb10bd9751fc0ea98f5e2fb94885fba88",
         "cells": 56,
         "status": "COMPLETE",
         "unknown": 0,
@@ -14379,7 +14366,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 58,
+        "ambiguous": 61,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -14431,7 +14418,7 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
@@ -14458,7 +14445,7 @@
         "status": "GAP"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:115561702f4c499db81197bcec865e26850cdc4900a8a7197e2387e1d8294048",
+        "capacities_digest": "sha256:0bc8857a2226903e5df43d553e94bf5e6e8476537c8ae9dceda16a5dd8ac0bcc",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 7,
@@ -14473,7 +14460,7 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 44,
+        "machine_unclassified": 47,
         "machine_unclassified_ids": [
           "TSPE::TSPE-CALCUL-INTEGRAL::C1::corriges",
           "TSPE::TSPE-CALCUL-INTEGRAL::C1::cours",
@@ -14490,6 +14477,7 @@
           "TSPE::TSPE-CALCUL-INTEGRAL::C2::remediation",
           "TSPE::TSPE-CALCUL-INTEGRAL::C3::corriges",
           "TSPE::TSPE-CALCUL-INTEGRAL::C3::cours",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C3::evaluations",
           "TSPE::TSPE-CALCUL-INTEGRAL::C3::exercices",
           "TSPE::TSPE-CALCUL-INTEGRAL::C3::methodes",
           "TSPE::TSPE-CALCUL-INTEGRAL::C3::qcm",
@@ -14507,10 +14495,12 @@
           "TSPE::TSPE-CALCUL-INTEGRAL::C5::qcm",
           "TSPE::TSPE-CALCUL-INTEGRAL::C6::corriges",
           "TSPE::TSPE-CALCUL-INTEGRAL::C6::cours",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C6::evaluations",
           "TSPE::TSPE-CALCUL-INTEGRAL::C6::exercices",
           "TSPE::TSPE-CALCUL-INTEGRAL::C6::qcm",
           "TSPE::TSPE-CALCUL-INTEGRAL::C7::corriges",
           "TSPE::TSPE-CALCUL-INTEGRAL::C7::cours",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C7::evaluations",
           "TSPE::TSPE-CALCUL-INTEGRAL::C7::exercices",
           "TSPE::TSPE-CALCUL-INTEGRAL::C7::qcm",
           "TSPE::TSPE-CALCUL-INTEGRAL::C8::corriges",
@@ -14523,9 +14513,9 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 12,
+        "raw_missing": 9,
         "routed_to_human": 0,
-        "semantically_unvalidated": 44,
+        "semantically_unvalidated": 47,
         "semantically_unvalidated_ids": [
           "TSPE::TSPE-CALCUL-INTEGRAL::C1::corriges",
           "TSPE::TSPE-CALCUL-INTEGRAL::C1::cours",
@@ -14542,6 +14532,7 @@
           "TSPE::TSPE-CALCUL-INTEGRAL::C2::remediation",
           "TSPE::TSPE-CALCUL-INTEGRAL::C3::corriges",
           "TSPE::TSPE-CALCUL-INTEGRAL::C3::cours",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C3::evaluations",
           "TSPE::TSPE-CALCUL-INTEGRAL::C3::exercices",
           "TSPE::TSPE-CALCUL-INTEGRAL::C3::methodes",
           "TSPE::TSPE-CALCUL-INTEGRAL::C3::qcm",
@@ -14559,10 +14550,12 @@
           "TSPE::TSPE-CALCUL-INTEGRAL::C5::qcm",
           "TSPE::TSPE-CALCUL-INTEGRAL::C6::corriges",
           "TSPE::TSPE-CALCUL-INTEGRAL::C6::cours",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C6::evaluations",
           "TSPE::TSPE-CALCUL-INTEGRAL::C6::exercices",
           "TSPE::TSPE-CALCUL-INTEGRAL::C6::qcm",
           "TSPE::TSPE-CALCUL-INTEGRAL::C7::corriges",
           "TSPE::TSPE-CALCUL-INTEGRAL::C7::cours",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C7::evaluations",
           "TSPE::TSPE-CALCUL-INTEGRAL::C7::exercices",
           "TSPE::TSPE-CALCUL-INTEGRAL::C7::qcm",
           "TSPE::TSPE-CALCUL-INTEGRAL::C8::corriges",
@@ -14572,23 +14565,20 @@
           "TSPE::TSPE-CALCUL-INTEGRAL::C8::qcm",
           "TSPE::TSPE-CALCUL-INTEGRAL::C8::remediation"
         ],
-        "semantically_unvalidated_set_digest": "sha256:031e23eebe545545edd644b0f564fe8e9612d34eea22d1887ffac49f00adb2cc",
+        "semantically_unvalidated_set_digest": "sha256:c2b05077974a1c590bec5b1092b0acb8b7a8e76d33213cf438d64000acdbf154",
         "status": "GAP",
         "triaged_ids": [
           "TSPE::TSPE-CALCUL-INTEGRAL::C1::remediation",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C3::evaluations",
           "TSPE::TSPE-CALCUL-INTEGRAL::C3::remediation",
           "TSPE::TSPE-CALCUL-INTEGRAL::C4::remediation",
           "TSPE::TSPE-CALCUL-INTEGRAL::C5::remediation",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C6::evaluations",
           "TSPE::TSPE-CALCUL-INTEGRAL::C6::methodes",
           "TSPE::TSPE-CALCUL-INTEGRAL::C6::remediation",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C7::evaluations",
           "TSPE::TSPE-CALCUL-INTEGRAL::C7::methodes",
           "TSPE::TSPE-CALCUL-INTEGRAL::C7::remediation",
           "TSPE::TSPE-CALCUL-INTEGRAL::C8::methodes"
         ],
-        "triaged_not_a_gap": 12
+        "triaged_not_a_gap": 9
       },
       "programme": {
         "mandatory_atoms": 16,
@@ -14662,7 +14652,7 @@
         "questions": 10,
         "status": "COMPLETE"
       },
-      "risk_score": 2745,
+      "risk_score": 2860,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -14678,12 +14668,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C1"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "TSPE-COMBI-EV-A",
           "TSPE-COMBI-EV-B"
@@ -14694,7 +14682,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:6004a3c62290bd6ed3332173010fbcfbcf7dd5d04c323209f7b84e98f7ebbaac",
+        "cell_state_set_digest": "sha256:ccf04a0adfc9d52d6cd9880737c7a005099bff2168aec4029c353d9a72aa7688",
         "cells": 28,
         "status": "COMPLETE",
         "unknown": 0,
@@ -14739,9 +14727,9 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 63,
-        "status": "COMPLETE",
-        "unambiguous": 0
+        "ambiguous": 64,
+        "status": "GAP",
+        "unambiguous": 5
       },
       "evidence_routing": {
         "carried_forward": 5,
@@ -14786,12 +14774,12 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_APPLICABLE",
-        "diacritics": "COMPLETE",
+        "diacritics": "GAP",
         "evidence_routing": "COMPLETE",
         "ex_co_graph": "COMPLETE",
         "oracle": "GAP",
@@ -14813,7 +14801,7 @@
         "status": "GAP"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:79ac5c8579c97d0632130f3e0d44d9bdf573d51a86944e79609168f7a97a4918",
+        "capacities_digest": "sha256:1ddb705319ac7de4d12e2d7d5c69133dfbab0680bea1ade367bf52afcda08b6c",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 3,
@@ -14828,10 +14816,11 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 22,
+        "machine_unclassified": 23,
         "machine_unclassified_ids": [
           "TSPE::TSPE-COMBINATOIRE::C1::corriges",
           "TSPE::TSPE-COMBINATOIRE::C1::cours",
+          "TSPE::TSPE-COMBINATOIRE::C1::evaluations",
           "TSPE::TSPE-COMBINATOIRE::C1::exercices",
           "TSPE::TSPE-COMBINATOIRE::C1::methodes",
           "TSPE::TSPE-COMBINATOIRE::C1::qcm",
@@ -14856,12 +14845,13 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 6,
+        "raw_missing": 5,
         "routed_to_human": 0,
-        "semantically_unvalidated": 22,
+        "semantically_unvalidated": 23,
         "semantically_unvalidated_ids": [
           "TSPE::TSPE-COMBINATOIRE::C1::corriges",
           "TSPE::TSPE-COMBINATOIRE::C1::cours",
+          "TSPE::TSPE-COMBINATOIRE::C1::evaluations",
           "TSPE::TSPE-COMBINATOIRE::C1::exercices",
           "TSPE::TSPE-COMBINATOIRE::C1::methodes",
           "TSPE::TSPE-COMBINATOIRE::C1::qcm",
@@ -14883,17 +14873,16 @@
           "TSPE::TSPE-COMBINATOIRE::C4::exercices",
           "TSPE::TSPE-COMBINATOIRE::C4::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:e4efb2f50b7d0e1fbf75978b1bfda8130e81ba544ce31fa9fc5d4180258f508f",
+        "semantically_unvalidated_set_digest": "sha256:eb4a9ce6ded68b4d4a94d36b5ab275da672d58f336ab84ae5efd27076255882d",
         "status": "GAP",
         "triaged_ids": [
-          "TSPE::TSPE-COMBINATOIRE::C1::evaluations",
           "TSPE::TSPE-COMBINATOIRE::C1::remediation",
           "TSPE::TSPE-COMBINATOIRE::C3::methodes",
           "TSPE::TSPE-COMBINATOIRE::C3::remediation",
           "TSPE::TSPE-COMBINATOIRE::C4::methodes",
           "TSPE::TSPE-COMBINATOIRE::C4::remediation"
         ],
-        "triaged_not_a_gap": 6
+        "triaged_not_a_gap": 5
       },
       "programme": {
         "mandatory_atoms": 14,
@@ -14950,7 +14939,7 @@
         "questions": 5,
         "status": "COMPLETE"
       },
-      "risk_score": 1250,
+      "risk_score": 1285,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -16470,13 +16459,11 @@
         "duplicate_variants": [],
         "invalid_status": [],
         "invalid_variants": [],
-        "mismatched_capacity": [
-          "TSPE-LOG-EV-A-corrige"
-        ],
+        "mismatched_capacity": [],
         "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "TSPE-LOG-EV-A",
           "TSPE-LOG-EV-B"
@@ -16589,7 +16576,7 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
@@ -16616,7 +16603,7 @@
         "status": "GAP"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:97b74cd5787e6db469e263125baf4043ad4cb480766de406ad2bf3ebc9547ceb",
+        "capacities_digest": "sha256:499482862a1d743f63ec21329eb52ff9a1c141d9beaaee530d4535ff9a56e259",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 2,
@@ -16756,7 +16743,7 @@
         "questions": 5,
         "status": "COMPLETE"
       },
-      "risk_score": 1315,
+      "risk_score": 1295,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -17083,15 +17070,12 @@
         "duplicate_correction_targets": [],
         "duplicate_ids": [],
         "duplicate_variants": [],
-        "invalid_status": [],
+        "invalid_status": [
+          "TSPE-PROBA-EV-B-corrige"
+        ],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C2",
-          "C4",
-          "C6",
-          "C7"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
         "status": "GAP",
@@ -17105,7 +17089,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:1b28a76647d267fd6693524dd6c5de8618b0ab492048ed4d91f5b481dc186cab",
+        "cell_state_set_digest": "sha256:a549a114ac804ae14b1b258579de5c2c2a3cbcfb69fb854d442144eab120c539",
         "cells": 70,
         "status": "COMPLETE",
         "unknown": 0,
@@ -17180,9 +17164,9 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 68,
-        "status": "COMPLETE",
-        "unambiguous": 0
+        "ambiguous": 74,
+        "status": "GAP",
+        "unambiguous": 2
       },
       "evidence_routing": {
         "carried_forward": 6,
@@ -17237,7 +17221,7 @@
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_APPLICABLE",
-        "diacritics": "COMPLETE",
+        "diacritics": "GAP",
         "evidence_routing": "COMPLETE",
         "ex_co_graph": "COMPLETE",
         "oracle": "GAP",
@@ -17259,7 +17243,7 @@
         "status": "GAP"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:a45ff55daf210dc0bc42b1d555192a5f70d9dd69f2fbb52e10d232bf195806f0",
+        "capacities_digest": "sha256:dc4248280ad9fea78b23b6e4d28e8eaf9c433febd3bded0a87e0380c9ed877cd",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 9,
@@ -17274,7 +17258,7 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 51,
+        "machine_unclassified": 55,
         "machine_unclassified_ids": [
           "TSPE::TSPE-PROBABILITES::C10::corriges",
           "TSPE::TSPE-PROBABILITES::C10::cours",
@@ -17289,6 +17273,7 @@
           "TSPE::TSPE-PROBABILITES::C1::qcm",
           "TSPE::TSPE-PROBABILITES::C2::corriges",
           "TSPE::TSPE-PROBABILITES::C2::cours",
+          "TSPE::TSPE-PROBABILITES::C2::evaluations",
           "TSPE::TSPE-PROBABILITES::C2::exercices",
           "TSPE::TSPE-PROBABILITES::C2::methodes",
           "TSPE::TSPE-PROBABILITES::C2::qcm",
@@ -17301,6 +17286,7 @@
           "TSPE::TSPE-PROBABILITES::C3::qcm",
           "TSPE::TSPE-PROBABILITES::C4::corriges",
           "TSPE::TSPE-PROBABILITES::C4::cours",
+          "TSPE::TSPE-PROBABILITES::C4::evaluations",
           "TSPE::TSPE-PROBABILITES::C4::exercices",
           "TSPE::TSPE-PROBABILITES::C4::methodes",
           "TSPE::TSPE-PROBABILITES::C4::qcm",
@@ -17311,10 +17297,12 @@
           "TSPE::TSPE-PROBABILITES::C5::qcm",
           "TSPE::TSPE-PROBABILITES::C6::corriges",
           "TSPE::TSPE-PROBABILITES::C6::cours",
+          "TSPE::TSPE-PROBABILITES::C6::evaluations",
           "TSPE::TSPE-PROBABILITES::C6::exercices",
           "TSPE::TSPE-PROBABILITES::C6::qcm",
           "TSPE::TSPE-PROBABILITES::C7::corriges",
           "TSPE::TSPE-PROBABILITES::C7::cours",
+          "TSPE::TSPE-PROBABILITES::C7::evaluations",
           "TSPE::TSPE-PROBABILITES::C7::exercices",
           "TSPE::TSPE-PROBABILITES::C7::qcm",
           "TSPE::TSPE-PROBABILITES::C8::corriges",
@@ -17331,9 +17319,9 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 19,
+        "raw_missing": 15,
         "routed_to_human": 0,
-        "semantically_unvalidated": 51,
+        "semantically_unvalidated": 55,
         "semantically_unvalidated_ids": [
           "TSPE::TSPE-PROBABILITES::C10::corriges",
           "TSPE::TSPE-PROBABILITES::C10::cours",
@@ -17348,6 +17336,7 @@
           "TSPE::TSPE-PROBABILITES::C1::qcm",
           "TSPE::TSPE-PROBABILITES::C2::corriges",
           "TSPE::TSPE-PROBABILITES::C2::cours",
+          "TSPE::TSPE-PROBABILITES::C2::evaluations",
           "TSPE::TSPE-PROBABILITES::C2::exercices",
           "TSPE::TSPE-PROBABILITES::C2::methodes",
           "TSPE::TSPE-PROBABILITES::C2::qcm",
@@ -17360,6 +17349,7 @@
           "TSPE::TSPE-PROBABILITES::C3::qcm",
           "TSPE::TSPE-PROBABILITES::C4::corriges",
           "TSPE::TSPE-PROBABILITES::C4::cours",
+          "TSPE::TSPE-PROBABILITES::C4::evaluations",
           "TSPE::TSPE-PROBABILITES::C4::exercices",
           "TSPE::TSPE-PROBABILITES::C4::methodes",
           "TSPE::TSPE-PROBABILITES::C4::qcm",
@@ -17370,10 +17360,12 @@
           "TSPE::TSPE-PROBABILITES::C5::qcm",
           "TSPE::TSPE-PROBABILITES::C6::corriges",
           "TSPE::TSPE-PROBABILITES::C6::cours",
+          "TSPE::TSPE-PROBABILITES::C6::evaluations",
           "TSPE::TSPE-PROBABILITES::C6::exercices",
           "TSPE::TSPE-PROBABILITES::C6::qcm",
           "TSPE::TSPE-PROBABILITES::C7::corriges",
           "TSPE::TSPE-PROBABILITES::C7::cours",
+          "TSPE::TSPE-PROBABILITES::C7::evaluations",
           "TSPE::TSPE-PROBABILITES::C7::exercices",
           "TSPE::TSPE-PROBABILITES::C7::qcm",
           "TSPE::TSPE-PROBABILITES::C8::corriges",
@@ -17387,22 +17379,18 @@
           "TSPE::TSPE-PROBABILITES::C9::exercices",
           "TSPE::TSPE-PROBABILITES::C9::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:5f5bfcfaa33b4dc30cef4de51830465bafe3e82654e863748b905051a7374d37",
+        "semantically_unvalidated_set_digest": "sha256:94bf764ff77496dc665d618dc92bbd835c8ba868703a6b49241cc9539205b02c",
         "status": "GAP",
         "triaged_ids": [
           "TSPE::TSPE-PROBABILITES::C10::methodes",
           "TSPE::TSPE-PROBABILITES::C10::remediation",
           "TSPE::TSPE-PROBABILITES::C1::remediation",
-          "TSPE::TSPE-PROBABILITES::C2::evaluations",
           "TSPE::TSPE-PROBABILITES::C3::remediation",
-          "TSPE::TSPE-PROBABILITES::C4::evaluations",
           "TSPE::TSPE-PROBABILITES::C4::remediation",
           "TSPE::TSPE-PROBABILITES::C5::methodes",
           "TSPE::TSPE-PROBABILITES::C5::remediation",
-          "TSPE::TSPE-PROBABILITES::C6::evaluations",
           "TSPE::TSPE-PROBABILITES::C6::methodes",
           "TSPE::TSPE-PROBABILITES::C6::remediation",
-          "TSPE::TSPE-PROBABILITES::C7::evaluations",
           "TSPE::TSPE-PROBABILITES::C7::methodes",
           "TSPE::TSPE-PROBABILITES::C7::remediation",
           "TSPE::TSPE-PROBABILITES::C8::methodes",
@@ -17410,7 +17398,7 @@
           "TSPE::TSPE-PROBABILITES::C9::methodes",
           "TSPE::TSPE-PROBABILITES::C9::remediation"
         ],
-        "triaged_not_a_gap": 19
+        "triaged_not_a_gap": 15
       },
       "programme": {
         "mandatory_atoms": 21,
@@ -17490,7 +17478,7 @@
         "questions": 10,
         "status": "COMPLETE"
       },
-      "risk_score": 3155,
+      "risk_score": 3339,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -18143,7 +18131,7 @@
   "generated_by": "scripts/build_publish_readiness_chapter_matrix.py",
   "input_digests": {
     "capacity_alias_map": "sha256:3e4f302650f04f0a80acf302a3fae6a246662b9055a27b01952dce2619346261",
-    "chapter_richness": "sha256:68cbe6e759463e519d39d8e6455a28bfcc6d91b1049eb54629b306557399078c",
+    "chapter_richness": "sha256:4e7d57159c2f330d0d3148472a6744c25050316258f08e6b056fd17e5346036d",
     "clone_ledger": "sha256:255d43c0098205aa247df44feb07f4306e192b1e583f4c5f6607c087cb70d69c",
     "course_body_ownership_map": "sha256:030c328435a18d7fbd346b2b70591e637e2dcd236bd1cdef4371cba8f32e2fbd",
     "cross_discipline_ledger": "sha256:80770d18a4a04f8480587d9b8ee646fa83729c72a4e2b79b5a35794512a3f714",
@@ -18152,7 +18140,7 @@
     "official_programme_sources": "sha256:bf20d6ba7001dae939b572bff8d4d368d99b179bb419d33d240eb98aeeb4fcad",
     "pedagogical_role_applicability": "sha256:d0b74c7910d3786b53aa7fb2bd16cd81762d94fd53d649da2ee417f8125f13c0",
     "semantic_alignment_ledger": "sha256:5806101d48561b4c45b99fea70d41524e14a834c74bd58c6f968d940c4af589b",
-    "true_coverage": "sha256:6b2a971a1ff77344b6b5222378af5e1090e86bfad255578e443c0953bf79ed6d"
+    "true_coverage": "sha256:1c641a76e641468729f9ecca9421ee48d172acd544fa8ddead5394a74a9f13e7"
   },
   "manuals": [
     "1NSI",
@@ -18191,17 +18179,17 @@
     {
       "chapter": "TEXP-ARITHMETIQUE",
       "manual": "TEXPERTES",
-      "risk_score": 3275
+      "risk_score": 3390
     },
     {
       "chapter": "TSPE-PROBABILITES",
       "manual": "TSPE_2026_2027",
-      "risk_score": 3155
+      "risk_score": 3339
     },
     {
       "chapter": "1SPE-SECOND-DEGRE",
       "manual": "1SPE",
-      "risk_score": 3130
+      "risk_score": 3200
     },
     {
       "chapter": "1NSI-WEB-IHM",
@@ -18216,15 +18204,15 @@
     {
       "chapter": "TSPE-CALCUL-INTEGRAL",
       "manual": "TSPE_2026_2027",
-      "risk_score": 2745
-    },
-    {
-      "chapter": "TCOMPL-MODELES-FONCTION",
-      "manual": "TCOMPL",
-      "risk_score": 2570
+      "risk_score": 2860
     },
     {
       "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "manual": "TCOMPL",
+      "risk_score": 2595
+    },
+    {
+      "chapter": "TCOMPL-MODELES-FONCTION",
       "manual": "TCOMPL",
       "risk_score": 2570
     },
@@ -18234,19 +18222,19 @@
       "risk_score": 2560
     },
     {
-      "chapter": "TCOMPL-ECHANTILLONNAGE",
-      "manual": "TCOMPL",
-      "risk_score": 2405
-    },
-    {
       "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
       "manual": "TEXPERTES",
-      "risk_score": 2380
+      "risk_score": 2495
     },
     {
       "chapter": "TEXP-MATRICES-MARKOV",
       "manual": "TEXPERTES",
-      "risk_score": 2380
+      "risk_score": 2450
+    },
+    {
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "manual": "TCOMPL",
+      "risk_score": 2430
     },
     {
       "chapter": "TSPE-DERIVATION-CONVEXITE",
@@ -18271,12 +18259,12 @@
     {
       "chapter": "TCOMPL-MODELES-EVOLUTION",
       "manual": "TCOMPL",
-      "risk_score": 2110
+      "risk_score": 2135
     },
     {
       "chapter": "TCOMPL-CALCULS-AIRES",
       "manual": "TCOMPL",
-      "risk_score": 2020
+      "risk_score": 2045
     },
     {
       "chapter": "1NSI-TYPES-BASE",
@@ -18309,14 +18297,14 @@
       "risk_score": 1750
     },
     {
+      "chapter": "TEXP-GRAPHES",
+      "manual": "TEXPERTES",
+      "risk_score": 1750
+    },
+    {
       "chapter": "TCOMPL-CORRELATION-CAUSALITE",
       "manual": "TCOMPL",
       "risk_score": 1735
-    },
-    {
-      "chapter": "TEXP-GRAPHES",
-      "manual": "TEXPERTES",
-      "risk_score": 1725
     },
     {
       "chapter": "TCOMPL-INEGALITES",
@@ -18351,17 +18339,17 @@
     {
       "chapter": "TSPE-LOGARITHME",
       "manual": "TSPE_2026_2027",
-      "risk_score": 1315
+      "risk_score": 1295
+    },
+    {
+      "chapter": "TSPE-COMBINATOIRE",
+      "manual": "TSPE_2026_2027",
+      "risk_score": 1285
     },
     {
       "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
       "manual": "1NSI",
       "risk_score": 1265
-    },
-    {
-      "chapter": "TSPE-COMBINATOIRE",
-      "manual": "TSPE_2026_2027",
-      "risk_score": 1250
     },
     {
       "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
