@@ -5,19 +5,19 @@
   "approves_nothing": true,
   "status": "HUMAN_REVIEW_ACTION_REQUIRED",
   "source_inputs": {
-    "audit/CURRENT_REVIEW_DEBT_PARTITION.json": "sha256:116ef77a510fd06bfe707225d1455beede24d61989c81c75acade4e70bf7accb",
+    "audit/CURRENT_REVIEW_DEBT_PARTITION.json": "sha256:ec18e0299ec70de40bb494ac018f1ce951df71255e0cd7b367f03cde5f39fb89",
     "audit/QCM_INDEPENDENT_EVIDENCE_V2.json": "sha256:12405d55c205fd0e6111656110f95a0aac39dc42c7b0363081f97bafaad42315",
     "audit/QCM_REVIEW_PROOF_RECONCILIATION.json": "sha256:b2a6a242cab0b0e0f758ddd18a6d4a9a6c397fadff78266f3f8a805beb1fec8e",
     "audit/TNSI_PROJET_ASSESSMENT_MODE.json": "sha256:1de1984e8cddb7cfdf08a5dffebb0b7eb286e21cecd9cdf39f57011d1a02c8b2"
   },
   "counts": {
-    "OBJECT_REVIEW": 2330,
+    "OBJECT_REVIEW": 2392,
     "QCM_ANSWER_SEMANTICS": 166,
     "QCM_DIAGNOSTIC_RENVOI_SEMANTICS": 41,
     "EDITORIAL_DECISION": 0,
-    "TOTAL": 2537
+    "TOTAL": 2599
   },
-  "queue_digest": "sha256:7f629c6f23ccb45416c5fc2bb8fbda522313546e935fc29769099b05f1335f39",
+  "queue_digest": "sha256:f05ccd85242df9fe749d803c29914a286a7cb6153cdc9d4ed85fd3af37783ac0",
   "pairwise_intersections": [],
   "unknown_count": 0,
   "items": [
@@ -446,6 +446,144 @@
       "release_blocking": true
     },
     {
+      "item_id": "NSI_AMENAGEE_AUTHORED_REVIEW_DEBT_9",
+      "category": "OBJECT_REVIEW",
+      "count": 9,
+      "unit_ids": [
+        "OBJECT_REVIEW::51bd6d8f658137ba",
+        "OBJECT_REVIEW::58c8c975e082ffa5",
+        "OBJECT_REVIEW::5c35a7920a8c799b",
+        "OBJECT_REVIEW::62cd5ec9493d851d",
+        "OBJECT_REVIEW::8834acaec45827dd",
+        "OBJECT_REVIEW::912ea449aa6a98cc",
+        "OBJECT_REVIEW::9b763c5f18cc630d",
+        "OBJECT_REVIEW::9dfcd6063c48d4ed",
+        "OBJECT_REVIEW::bd3a9b398e0d45aa"
+      ],
+      "set_digest": "sha256:9450ad8913a0ad0f5e2eeb294eef175fbb1a13bee56b46f84b1a4a6657c809d2",
+      "chapters": {
+        "1NSI-ALGO-DICHO-GLOUTON-KNN": 1,
+        "1NSI-ALGO-PARCOURS-TRIS": 1,
+        "1NSI-ARCHITECTURE-OS": 1,
+        "1NSI-LANGAGE": 1,
+        "1NSI-PROJET-METHODES": 1,
+        "1NSI-RESEAUX": 1,
+        "1NSI-TABLES": 1,
+        "1NSI-TYPES-BASE": 1,
+        "1NSI-WEB-IHM": 1
+      },
+      "units_by_chapter": {
+        "1NSI-ALGO-DICHO-GLOUTON-KNN": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::8834acaec45827dd"
+          ],
+          "set_digest": "sha256:fe079b1b3f291e9d6ff50a6e7aff05ba23c7acaff9d4feeae3e96da0c767525a"
+        },
+        "1NSI-ALGO-PARCOURS-TRIS": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::9dfcd6063c48d4ed"
+          ],
+          "set_digest": "sha256:dcfc98118080687d6bd08b2632e004305d8608247048b6c537bf5052c49a232b"
+        },
+        "1NSI-ARCHITECTURE-OS": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::bd3a9b398e0d45aa"
+          ],
+          "set_digest": "sha256:5394e5f580af5dd75954c364e56410822f0f6c4d1be258674bf29f9f66d820b5"
+        },
+        "1NSI-LANGAGE": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::5c35a7920a8c799b"
+          ],
+          "set_digest": "sha256:ff353bfe7e1b0f9651652648f573983a5ed7f7dc83f2c3ee270ce00d2d869082"
+        },
+        "1NSI-PROJET-METHODES": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::62cd5ec9493d851d"
+          ],
+          "set_digest": "sha256:05e8a16096b151b8e640641fb70afc8f6c93ffc5aaaf1c88b2905c531eb869b0"
+        },
+        "1NSI-RESEAUX": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::912ea449aa6a98cc"
+          ],
+          "set_digest": "sha256:22204108179e9f83311afbd8363cd2c8ab6e5ff9a4d5582fca54a90b222ee51b"
+        },
+        "1NSI-TABLES": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::9b763c5f18cc630d"
+          ],
+          "set_digest": "sha256:9e2b90712483e4cb6f1f6476523e84e78b7f91043541f06feaef1513b730bd8b"
+        },
+        "1NSI-TYPES-BASE": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::51bd6d8f658137ba"
+          ],
+          "set_digest": "sha256:5acf7191ab30c70ece64dd213d8f81254374a3e7947e5ddaebfebe72673f8207"
+        },
+        "1NSI-WEB-IHM": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::58c8c975e082ffa5"
+          ],
+          "set_digest": "sha256:938b5df0493cefe9e8882b743f6cdf0bef57505ec4b3fa8704c584c2b139c43f"
+        }
+      },
+      "provenance": "separately declared current review debt",
+      "required_reviewers_by_chapter": {
+        "1NSI-ALGO-DICHO-GLOUTON-KNN": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "1NSI-ALGO-PARCOURS-TRIS": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "1NSI-ARCHITECTURE-OS": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "1NSI-LANGAGE": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "1NSI-PROJET-METHODES": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "1NSI-RESEAUX": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "1NSI-TABLES": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "1NSI-TYPES-BASE": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "1NSI-WEB-IHM": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ]
+      },
+      "required_reviewers": [
+        "EXPERT_NSI",
+        "EXPERT_PROGRAMME_PEDAGOGIE"
+      ],
+      "distinct_humans_required": true,
+      "release_blocking": true
+    },
+    {
       "item_id": "NSI_COUPLED_DECLARATION_CHANGED",
       "category": "OBJECT_REVIEW",
       "count": 6,
@@ -724,6 +862,144 @@
       "release_blocking": true
     },
     {
+      "item_id": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "category": "OBJECT_REVIEW",
+      "count": 20,
+      "unit_ids": [
+        "OBJECT_REVIEW::042463a9af62be29",
+        "OBJECT_REVIEW::0cee19302faa3b35",
+        "OBJECT_REVIEW::3001cb9418fd1e30",
+        "OBJECT_REVIEW::421075be9489bbba",
+        "OBJECT_REVIEW::5605699ea6d692bf",
+        "OBJECT_REVIEW::687f30c09c8e3b7e",
+        "OBJECT_REVIEW::688fefec1218a5b2",
+        "OBJECT_REVIEW::727c7454d53a18c3",
+        "OBJECT_REVIEW::7a85f67acec08625",
+        "OBJECT_REVIEW::823934aaf3cc6364",
+        "OBJECT_REVIEW::8398d944920f9a7d",
+        "OBJECT_REVIEW::8aafd5876ec72121",
+        "OBJECT_REVIEW::97a9229435efeaf5",
+        "OBJECT_REVIEW::9b980ed1adf5b21f",
+        "OBJECT_REVIEW::a0b1b78b20c05afd",
+        "OBJECT_REVIEW::a0f6bbe48c19edc5",
+        "OBJECT_REVIEW::c4cdaca4f65539d5",
+        "OBJECT_REVIEW::d4fd791daff8ca98",
+        "OBJECT_REVIEW::f30af1c3e43a8e91",
+        "OBJECT_REVIEW::f85cef1f904baec3"
+      ],
+      "set_digest": "sha256:8191019741167f4b95ddfe928718620d9d70d06a8f6cb3fd5345e4deb86f99ee",
+      "chapters": {
+        "1NSI-ARCHITECTURE-OS": 3,
+        "1NSI-LANGAGE": 3,
+        "1NSI-PROJET-METHODES": 2,
+        "1NSI-RESEAUX": 3,
+        "1NSI-TABLES": 4,
+        "1NSI-TYPES-BASE": 3,
+        "1NSI-WEB-IHM": 2
+      },
+      "units_by_chapter": {
+        "1NSI-ARCHITECTURE-OS": {
+          "count": 3,
+          "unit_ids": [
+            "OBJECT_REVIEW::042463a9af62be29",
+            "OBJECT_REVIEW::8aafd5876ec72121",
+            "OBJECT_REVIEW::a0f6bbe48c19edc5"
+          ],
+          "set_digest": "sha256:05b46e03e805a4d963966868367f260c6307a40397b899d9c632c5b2ac596a94"
+        },
+        "1NSI-LANGAGE": {
+          "count": 3,
+          "unit_ids": [
+            "OBJECT_REVIEW::7a85f67acec08625",
+            "OBJECT_REVIEW::823934aaf3cc6364",
+            "OBJECT_REVIEW::c4cdaca4f65539d5"
+          ],
+          "set_digest": "sha256:faf25e530a90d3bf9ff401502b76ee2636076f2269f6f207605489d464e308fb"
+        },
+        "1NSI-PROJET-METHODES": {
+          "count": 2,
+          "unit_ids": [
+            "OBJECT_REVIEW::3001cb9418fd1e30",
+            "OBJECT_REVIEW::97a9229435efeaf5"
+          ],
+          "set_digest": "sha256:ea936e3e6ce41dbe8a93d44b4ea2279370ff854321d9df8bcdb682cc67aa11cd"
+        },
+        "1NSI-RESEAUX": {
+          "count": 3,
+          "unit_ids": [
+            "OBJECT_REVIEW::0cee19302faa3b35",
+            "OBJECT_REVIEW::5605699ea6d692bf",
+            "OBJECT_REVIEW::f30af1c3e43a8e91"
+          ],
+          "set_digest": "sha256:8ee76e1dd95b0cbaf59c78dbc83bd9ac01101ab6ddbce90fa30bdf8086ce2816"
+        },
+        "1NSI-TABLES": {
+          "count": 4,
+          "unit_ids": [
+            "OBJECT_REVIEW::687f30c09c8e3b7e",
+            "OBJECT_REVIEW::727c7454d53a18c3",
+            "OBJECT_REVIEW::9b980ed1adf5b21f",
+            "OBJECT_REVIEW::d4fd791daff8ca98"
+          ],
+          "set_digest": "sha256:79bb932960795e85bfbe6a3320d86633cc162cc6b725a7c1ae0dc0b73e51bf0f"
+        },
+        "1NSI-TYPES-BASE": {
+          "count": 3,
+          "unit_ids": [
+            "OBJECT_REVIEW::421075be9489bbba",
+            "OBJECT_REVIEW::8398d944920f9a7d",
+            "OBJECT_REVIEW::a0b1b78b20c05afd"
+          ],
+          "set_digest": "sha256:f484f8bff7dd6fd7faa5bf6e506de0a2e0b4bff7cc30175760acfe09cdce046f"
+        },
+        "1NSI-WEB-IHM": {
+          "count": 2,
+          "unit_ids": [
+            "OBJECT_REVIEW::688fefec1218a5b2",
+            "OBJECT_REVIEW::f85cef1f904baec3"
+          ],
+          "set_digest": "sha256:aeb829bb48c5283f42ab1c034b23cb684169fca7a68c452d727ebfd2bb304f26"
+        }
+      },
+      "provenance": "separately declared current review debt",
+      "required_reviewers_by_chapter": {
+        "1NSI-ARCHITECTURE-OS": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "1NSI-LANGAGE": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "1NSI-PROJET-METHODES": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "1NSI-RESEAUX": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "1NSI-TABLES": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "1NSI-TYPES-BASE": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "1NSI-WEB-IHM": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ]
+      },
+      "required_reviewers": [
+        "EXPERT_NSI",
+        "EXPERT_PROGRAMME_PEDAGOGIE"
+      ],
+      "distinct_humans_required": true,
+      "release_blocking": true
+    },
+    {
       "item_id": "NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2",
       "category": "OBJECT_REVIEW",
       "count": 2,
@@ -883,6 +1159,257 @@
       },
       "required_reviewers": [
         "EXPERT_MATHEMATIQUE",
+        "EXPERT_PROGRAMME_PEDAGOGIE"
+      ],
+      "distinct_humans_required": true,
+      "release_blocking": true
+    },
+    {
+      "item_id": "TNSI_AMENAGEE_AUTHORED_REVIEW_DEBT_7",
+      "category": "OBJECT_REVIEW",
+      "count": 7,
+      "unit_ids": [
+        "OBJECT_REVIEW::31bef70c62b1e126",
+        "OBJECT_REVIEW::563f0c87af5e6e14",
+        "OBJECT_REVIEW::69bc482a3dccc35a",
+        "OBJECT_REVIEW::71beeb77bfe46810",
+        "OBJECT_REVIEW::a0fec48b8e9e4e53",
+        "OBJECT_REVIEW::e918e9455ebfa2e8",
+        "OBJECT_REVIEW::feb3b12c9cdd2088"
+      ],
+      "set_digest": "sha256:30f39cd3d8cb95991e9bac906098137c653f84506efa18b14c6a8a38fea36cb4",
+      "chapters": {
+        "TNSI-ALGORITHMIQUE": 1,
+        "TNSI-ARCHITECTURES-MATERIELLES-SY": 1,
+        "TNSI-BASES-DE-DONNEES": 1,
+        "TNSI-HISTOIRE-INFORMATIQUE": 1,
+        "TNSI-LANGAGES-ET-PROGRAMMATION": 1,
+        "TNSI-PROJET": 1,
+        "TNSI-STRUCTURES-DONNEES": 1
+      },
+      "units_by_chapter": {
+        "TNSI-ALGORITHMIQUE": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::feb3b12c9cdd2088"
+          ],
+          "set_digest": "sha256:950120669ef3a22fdcc84a3c30bfb4fb5e91698d0f3aa9dbe2155bb750e8b1f6"
+        },
+        "TNSI-ARCHITECTURES-MATERIELLES-SY": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::e918e9455ebfa2e8"
+          ],
+          "set_digest": "sha256:a375b6fbb400f442ee5ece97561061692471d862413ca2dc23356213f23ee25c"
+        },
+        "TNSI-BASES-DE-DONNEES": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::a0fec48b8e9e4e53"
+          ],
+          "set_digest": "sha256:9483ccd0c3d40ee22b2c83fce055868362336e4ee93ec3388041d01a99d029f5"
+        },
+        "TNSI-HISTOIRE-INFORMATIQUE": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::71beeb77bfe46810"
+          ],
+          "set_digest": "sha256:d63d859225d8989002666eee4ddf4ceff72d6fc08ae86f71d245308d89ec5699"
+        },
+        "TNSI-LANGAGES-ET-PROGRAMMATION": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::31bef70c62b1e126"
+          ],
+          "set_digest": "sha256:644ffc3ac1bbb15588c5aaa86b2bccabef665cfec3b1bb4ffc0c954e25adc8f6"
+        },
+        "TNSI-PROJET": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::69bc482a3dccc35a"
+          ],
+          "set_digest": "sha256:9d1cce291942c460d85202a7ad798a33b764bff8a4fcaecc17acdfe1f567080c"
+        },
+        "TNSI-STRUCTURES-DONNEES": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::563f0c87af5e6e14"
+          ],
+          "set_digest": "sha256:ec1160f267c7fed66902ccd70fe7ae64eb6a734db198475ce5c2214c4379eee0"
+        }
+      },
+      "provenance": "separately declared current review debt",
+      "required_reviewers_by_chapter": {
+        "TNSI-ALGORITHMIQUE": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TNSI-ARCHITECTURES-MATERIELLES-SY": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TNSI-BASES-DE-DONNEES": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TNSI-HISTOIRE-INFORMATIQUE": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TNSI-LANGAGES-ET-PROGRAMMATION": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TNSI-PROJET": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TNSI-STRUCTURES-DONNEES": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ]
+      },
+      "required_reviewers": [
+        "EXPERT_NSI",
+        "EXPERT_PROGRAMME_PEDAGOGIE"
+      ],
+      "distinct_humans_required": true,
+      "release_blocking": true
+    },
+    {
+      "item_id": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "category": "OBJECT_REVIEW",
+      "count": 26,
+      "unit_ids": [
+        "OBJECT_REVIEW::10837d516894ac12",
+        "OBJECT_REVIEW::12d548a9281ac2c0",
+        "OBJECT_REVIEW::1bead9dd55109a15",
+        "OBJECT_REVIEW::1d2ce0effa9e1e27",
+        "OBJECT_REVIEW::270b89223b58d60e",
+        "OBJECT_REVIEW::288c63469dc18c2a",
+        "OBJECT_REVIEW::291732518ab1b2a0",
+        "OBJECT_REVIEW::2b739ac84ed22b2c",
+        "OBJECT_REVIEW::2f7dc86509d1d709",
+        "OBJECT_REVIEW::493f16fbaeba0773",
+        "OBJECT_REVIEW::59dec8cd734b2b99",
+        "OBJECT_REVIEW::5a29440d74876abc",
+        "OBJECT_REVIEW::71df0b4cf68f1da0",
+        "OBJECT_REVIEW::7236693ffa6d16dc",
+        "OBJECT_REVIEW::8c0144439c84b9d9",
+        "OBJECT_REVIEW::95826a3ee7c1378a",
+        "OBJECT_REVIEW::ab6de8506d69da6f",
+        "OBJECT_REVIEW::b131d32939bee40b",
+        "OBJECT_REVIEW::b3bc3adfc12c9030",
+        "OBJECT_REVIEW::b56052224a2372e4",
+        "OBJECT_REVIEW::c9bf51ea57f25202",
+        "OBJECT_REVIEW::cb2bda128fe4a16e",
+        "OBJECT_REVIEW::d756bd5ad493d1c3",
+        "OBJECT_REVIEW::dbb512f1dad91fa8",
+        "OBJECT_REVIEW::f3f6e4d8c3caa2a0",
+        "OBJECT_REVIEW::f5a9dbcfb4e00129"
+      ],
+      "set_digest": "sha256:98e47bdf93058c9072d0088a816e9a39cfcdcd1ed61e878a5aeefd6933799ef9",
+      "chapters": {
+        "TNSI-ALGORITHMIQUE": 7,
+        "TNSI-ARCHITECTURES-MATERIELLES-SY": 3,
+        "TNSI-BASES-DE-DONNEES": 4,
+        "TNSI-HISTOIRE-INFORMATIQUE": 1,
+        "TNSI-LANGAGES-ET-PROGRAMMATION": 4,
+        "TNSI-STRUCTURES-DONNEES": 7
+      },
+      "units_by_chapter": {
+        "TNSI-ALGORITHMIQUE": {
+          "count": 7,
+          "unit_ids": [
+            "OBJECT_REVIEW::288c63469dc18c2a",
+            "OBJECT_REVIEW::2b739ac84ed22b2c",
+            "OBJECT_REVIEW::493f16fbaeba0773",
+            "OBJECT_REVIEW::71df0b4cf68f1da0",
+            "OBJECT_REVIEW::ab6de8506d69da6f",
+            "OBJECT_REVIEW::d756bd5ad493d1c3",
+            "OBJECT_REVIEW::f5a9dbcfb4e00129"
+          ],
+          "set_digest": "sha256:0453643a1dad404944b59f2977549b6e185e8fa749e0abe6ecb0a9060d2eaa95"
+        },
+        "TNSI-ARCHITECTURES-MATERIELLES-SY": {
+          "count": 3,
+          "unit_ids": [
+            "OBJECT_REVIEW::1d2ce0effa9e1e27",
+            "OBJECT_REVIEW::2f7dc86509d1d709",
+            "OBJECT_REVIEW::8c0144439c84b9d9"
+          ],
+          "set_digest": "sha256:3dc6a72114aa1ecfaf49f06cd34a1532ef22a827afd7711e699eca5916f6ee76"
+        },
+        "TNSI-BASES-DE-DONNEES": {
+          "count": 4,
+          "unit_ids": [
+            "OBJECT_REVIEW::10837d516894ac12",
+            "OBJECT_REVIEW::12d548a9281ac2c0",
+            "OBJECT_REVIEW::270b89223b58d60e",
+            "OBJECT_REVIEW::5a29440d74876abc"
+          ],
+          "set_digest": "sha256:67d3640d0c357dd48619f4484611da0e00a6af213097cf0e5c38993e34d42ce7"
+        },
+        "TNSI-HISTOIRE-INFORMATIQUE": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::cb2bda128fe4a16e"
+          ],
+          "set_digest": "sha256:f785c7a2106f23443b1466289045e6255f412d53f29a0db2813fa313fa3d68b7"
+        },
+        "TNSI-LANGAGES-ET-PROGRAMMATION": {
+          "count": 4,
+          "unit_ids": [
+            "OBJECT_REVIEW::291732518ab1b2a0",
+            "OBJECT_REVIEW::7236693ffa6d16dc",
+            "OBJECT_REVIEW::b131d32939bee40b",
+            "OBJECT_REVIEW::dbb512f1dad91fa8"
+          ],
+          "set_digest": "sha256:4f3c7d26e9c3aa10f94c6a48ecf0737892c613316b7b664c6a03bb7a191c31af"
+        },
+        "TNSI-STRUCTURES-DONNEES": {
+          "count": 7,
+          "unit_ids": [
+            "OBJECT_REVIEW::1bead9dd55109a15",
+            "OBJECT_REVIEW::59dec8cd734b2b99",
+            "OBJECT_REVIEW::95826a3ee7c1378a",
+            "OBJECT_REVIEW::b3bc3adfc12c9030",
+            "OBJECT_REVIEW::b56052224a2372e4",
+            "OBJECT_REVIEW::c9bf51ea57f25202",
+            "OBJECT_REVIEW::f3f6e4d8c3caa2a0"
+          ],
+          "set_digest": "sha256:6b06ebb90c0023477fd79f767d2b49c2a0697192b209af44f80074d6f6d72b1d"
+        }
+      },
+      "provenance": "separately declared current review debt",
+      "required_reviewers_by_chapter": {
+        "TNSI-ALGORITHMIQUE": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TNSI-ARCHITECTURES-MATERIELLES-SY": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TNSI-BASES-DE-DONNEES": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TNSI-HISTOIRE-INFORMATIQUE": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TNSI-LANGAGES-ET-PROGRAMMATION": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TNSI-STRUCTURES-DONNEES": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ]
+      },
+      "required_reviewers": [
+        "EXPERT_NSI",
         "EXPERT_PROGRAMME_PEDAGOGIE"
       ],
       "distinct_humans_required": true,

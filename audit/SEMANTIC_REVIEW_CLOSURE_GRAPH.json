@@ -4,38 +4,38 @@
   "generated_by": "scripts/build_semantic_review_closure_graph.py",
   "approves_nothing": true,
   "summary": {
-    "RAW_REVIEW_ITEMS": 2537,
-    "CANONICAL_SEMANTIC_UNITS": 2523,
+    "RAW_REVIEW_ITEMS": 2599,
+    "CANONICAL_SEMANTIC_UNITS": 2585,
     "EXACT_DERIVED_DUPLICATES": 14,
     "SEMANTIC_DELTA_VARIANTS": 13,
-    "INDEPENDENT_CONTENT_REVIEW_UNITS": 2523,
-    "INDEPENDENT_REVIEW_UNITS_REQUIRED": 2523,
-    "PER_ITEM_ADEQUACY_CHECKS_STILL_REQUIRED": 2537,
+    "INDEPENDENT_CONTENT_REVIEW_UNITS": 2585,
+    "INDEPENDENT_REVIEW_UNITS_REQUIRED": 2585,
+    "PER_ITEM_ADEQUACY_CHECKS_STILL_REQUIRED": 2599,
     "UNJUSTIFIED_REVIEW_EVIDENCE_INHERITANCE": 0,
-    "REVIEW_ITEMS_WITH_MULTIPLE_RENDERED_CONSUMERS": 1642,
+    "REVIEW_ITEMS_WITH_MULTIPLE_RENDERED_CONSUMERS": 1704,
     "REVIEW_ITEMS_OUTSIDE_LATEX_ASSEMBLY_SCOPE": 207,
     "LATEX_OBJECTS_IN_NO_ASSEMBLY": 5,
-    "MAX_RENDERED_CONSUMERS_FOR_ONE_ITEM": 16,
-    "REDUCTION_RATIO": 0.0055
+    "MAX_RENDERED_CONSUMERS_FOR_ONE_ITEM": 18,
+    "REDUCTION_RATIO": 0.0054
   },
   "derivation_distribution": {
-    "CANONICAL": 2510,
+    "CANONICAL": 2572,
     "EXACT_COPY": 14,
     "NUMERIC_DELTA": 13
   },
   "rendered_consumer_histogram": {
     "0": 212,
     "1": 683,
-    "2": 5,
-    "3": 49,
+    "2": 31,
+    "3": 65,
     "4": 907,
     "5": 23,
     "6": 280,
     "7": 1,
     "8": 322,
     "9": 24,
-    "10": 14,
-    "16": 17
+    "10": 34,
+    "18": 17
   },
   "inheritance_model": {
     "INHERITABLE_DIMENSIONS": [
@@ -1031,6 +1031,41 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::0412d52c365db251",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:a52e40cf50c7a5449097c287b12bd1cf746135583cbe62ac7df87e8f2587ca3c",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::042463a9af62be29",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-ARCHOS-M3",
+      "path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M3.tex",
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "canonical_body_digest": "sha256:a0c67c62f06daed05cec6d0dfb938a817c996e3d2d1afe8587632b791563260a",
+      "numeric_skeleton_digest": "sha256:ef92a47508185cf551c59a7e07b0d89485825ae7d49e9916c72d5e7c2ba855c8",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:complet",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:eleve",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:evaluations",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:methodes",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:parcours1",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:professeur",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::042463a9af62be29",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:a0c67c62f06daed05cec6d0dfb938a817c996e3d2d1afe8587632b791563260a",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -3490,6 +3525,41 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::0cee19302faa3b35",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-RES-M2",
+      "path": "NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-M2.tex",
+      "chapter": "1NSI-RESEAUX",
+      "canonical_body_digest": "sha256:ac796f3d1f9045cb419e588702e4c53d64430c6dd1bfd391f7e4fd74f111fd61",
+      "numeric_skeleton_digest": "sha256:ec851b79192711263df012305c84c7857429c0340c172c8ddef3181295c2de57",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-RESEAUX:complet",
+        "nsi:chapter:1NSI-RESEAUX:eleve",
+        "nsi:chapter:1NSI-RESEAUX:evaluations",
+        "nsi:chapter:1NSI-RESEAUX:methodes",
+        "nsi:chapter:1NSI-RESEAUX:parcours1",
+        "nsi:chapter:1NSI-RESEAUX:professeur",
+        "nsi:chapter:1NSI-RESEAUX:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::0cee19302faa3b35",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:ac796f3d1f9045cb419e588702e4c53d64430c6dd1bfd391f7e4fd74f111fd61",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::0cee7e620037bd75",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -4467,6 +4537,33 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::10837d516894ac12",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S1-EX3",
+      "path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/banque_ecrite/TNSI-ECRIT-S1-EX3.tex",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "canonical_body_digest": "sha256:eb837030ad2237c6bc4fb88a79325015cdfea95e567a2aaa4c813b00b5c6b39c",
+      "numeric_skeleton_digest": "sha256:1e21f833ee51957f0286202a77eb5514d40a636a11c09c49139ade480c5283d8",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::10837d516894ac12",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:eb837030ad2237c6bc4fb88a79325015cdfea95e567a2aaa4c813b00b5c6b39c",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::109afecdc9d34c91",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -5209,6 +5306,33 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::12ce4ec778fa2cd7",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:2b940b34893b0a4a225b1d33ff74fa07edc31fe2c823e63876e50a7e697a8687",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::12d548a9281ac2c0",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S5-EX3",
+      "path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/banque_ecrite/TNSI-ECRIT-S5-EX3.tex",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "canonical_body_digest": "sha256:c90e06ad2a3c0b98247803089ebcf5b71369cf27f8ed38d35276e6c6b15e2d9e",
+      "numeric_skeleton_digest": "sha256:939c42631a155205d7ddd93a8b44783a1645d6563859305c437ad83fb82b971f",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::12d548a9281ac2c0",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:c90e06ad2a3c0b98247803089ebcf5b71369cf27f8ed38d35276e6c6b15e2d9e",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -6671,6 +6795,8 @@
         "nsi:chapter:TNSI-BASES-DE-DONNEES:projets",
         "nsi:chapter:TNSI-BASES-DE-DONNEES:remediation",
         "nsi:manual:TNSI:amenagee",
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:banque_pratique",
         "nsi:manual:TNSI:eleve",
         "nsi:manual:TNSI:evaluations",
         "nsi:manual:TNSI:methodes",
@@ -7398,6 +7524,33 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::1bead9dd55109a15",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S1-EX1",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S1-EX1.tex",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "canonical_body_digest": "sha256:a3adbedd24f860da067e4a4424981fbd608b11cbab4aab387e775d34210caa73",
+      "numeric_skeleton_digest": "sha256:a5ee543b32209e09d511bd3a5bf9b63ad52605fc3f54fbfa0e0736e873f9c53e",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::1bead9dd55109a15",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:a3adbedd24f860da067e4a4424981fbd608b11cbab4aab387e775d34210caa73",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::1bf8030e8203f03b",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -7753,6 +7906,33 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::1d28a54531e8d5c0",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:c3d64eed161ecb0be09066a4a89efd09e7ef6254a52bfeedd4ee2a47bd14dd37",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::1d2ce0effa9e1e27",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-PRATIQUE-P1",
+      "path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/banque_pratique/TNSI-PRATIQUE-P1.tex",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "canonical_body_digest": "sha256:fd4cd9da2e31222fa3159671cdf50d10a1f36762a9cec291bb2b87e326360d38",
+      "numeric_skeleton_digest": "sha256:57ab9234527d547445a2bca425ee759e949e554b8db53d8d3251c9b400b1d5fb",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_pratique",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::1d2ce0effa9e1e27",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:fd4cd9da2e31222fa3159671cdf50d10a1f36762a9cec291bb2b87e326360d38",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -10380,6 +10560,33 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::270b89223b58d60e",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-PRATIQUE-P4",
+      "path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/banque_pratique/TNSI-PRATIQUE-P4.tex",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "canonical_body_digest": "sha256:fcd15ee7c33593025e7829e53712042728ed3f1c9b9b8c5eee096c5e0cf36cd8",
+      "numeric_skeleton_digest": "sha256:c7853effdb3bf67daffdf974141cc294a0fbb8df375cb008542997f48e2ef149",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_pratique",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::270b89223b58d60e",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:fcd15ee7c33593025e7829e53712042728ed3f1c9b9b8c5eee096c5e0cf36cd8",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::273b211436944efd",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -11002,6 +11209,33 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::288c63469dc18c2a",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-PRATIQUE-P3",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_pratique/TNSI-PRATIQUE-P3.tex",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "canonical_body_digest": "sha256:043570cca68f29d3cdba589fbf6c5aed11e7e4694a069cdf302eb16c5a7e8803",
+      "numeric_skeleton_digest": "sha256:b19782d3d3cb5a4da6e548c54fae78e112e19b9d6c9cc528ef08979963c8e58b",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_pratique",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::288c63469dc18c2a",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:043570cca68f29d3cdba589fbf6c5aed11e7e4694a069cdf302eb16c5a7e8803",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::28b5c3e45c15e43c",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -11103,6 +11337,33 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::28f0e782c92889b8",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:6ecf36a88bdc97c08f20ebaeef2a8d3ffaf862e6af0a0629207716cd6a078cbf",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::291732518ab1b2a0",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S2-EX2",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/banque_ecrite/TNSI-ECRIT-S2-EX2.tex",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "canonical_body_digest": "sha256:04c74999488510e52574a1a35246f3877956e68a2b7c0a7c06cd383849c02d4f",
+      "numeric_skeleton_digest": "sha256:2307ac4b73321f339639c8b789328bc3587e563bd15a8555afeb89e65819a1c0",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::291732518ab1b2a0",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:04c74999488510e52574a1a35246f3877956e68a2b7c0a7c06cd383849c02d4f",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -11450,6 +11711,33 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::2b2adab31ed3f4be",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:a3d669dfc18e74e1da6ab2272fac3bcb1c5f616d5a182edd3daea18516bff12e",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::2b739ac84ed22b2c",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S3-EX1",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_ecrite/TNSI-ECRIT-S3-EX1.tex",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "canonical_body_digest": "sha256:e6e641ae6d3060396bf8b55ecd2b5b887f8fac250535d5345372887a1c37e1b7",
+      "numeric_skeleton_digest": "sha256:8a6afcad85ac5ab463a675fdd278593c5235bb133323abe86bccd5f046676746",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::2b739ac84ed22b2c",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:e6e641ae6d3060396bf8b55ecd2b5b887f8fac250535d5345372887a1c37e1b7",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -12614,6 +12902,8 @@
         "nsi:chapter:1NSI-LANGAGE:projets",
         "nsi:chapter:1NSI-LANGAGE:remediation",
         "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:banque_ecrite",
+        "nsi:manual:1NSI:banque_pratique",
         "nsi:manual:1NSI:eleve",
         "nsi:manual:1NSI:evaluations",
         "nsi:manual:1NSI:methodes",
@@ -12687,6 +12977,33 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::2f7783cd454f7459",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:06de79aaf82b5ec3b26f9fb03c4139be03c28d84130558c8c3d9fcec13ef7213",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::2f7dc86509d1d709",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S2-EX3",
+      "path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/banque_ecrite/TNSI-ECRIT-S2-EX3.tex",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "canonical_body_digest": "sha256:604630dcf02c0f13e189c1328abed1b5e5016441a25b37f3294eaefb0946c7c7",
+      "numeric_skeleton_digest": "sha256:23a18c33dcb5d95b7b69cc25b1366e7435f2c9b78900b19aa77941ec37400f4c",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::2f7dc86509d1d709",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:604630dcf02c0f13e189c1328abed1b5e5016441a25b37f3294eaefb0946c7c7",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -12842,6 +13159,41 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::300195544a51fa1d",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:5a3d600f4f9f5ddbf58035788b62f635f000aaf9602e166ff2ac3fe1acf41ba8",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::3001cb9418fd1e30",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-PM-M2",
+      "path": "NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-M2.tex",
+      "chapter": "1NSI-PROJET-METHODES",
+      "canonical_body_digest": "sha256:5eee40f6c118b839f904e6c1b98832de749a724393e70ef1d02f1f0ce20067a5",
+      "numeric_skeleton_digest": "sha256:0b236867da9de93fa3317a3d121d60db82330706633effd5d196709c32894db1",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-PROJET-METHODES:complet",
+        "nsi:chapter:1NSI-PROJET-METHODES:eleve",
+        "nsi:chapter:1NSI-PROJET-METHODES:evaluations",
+        "nsi:chapter:1NSI-PROJET-METHODES:methodes",
+        "nsi:chapter:1NSI-PROJET-METHODES:parcours1",
+        "nsi:chapter:1NSI-PROJET-METHODES:professeur",
+        "nsi:chapter:1NSI-PROJET-METHODES:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::3001cb9418fd1e30",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:5eee40f6c118b839f904e6c1b98832de749a724393e70ef1d02f1f0ce20067a5",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -13297,6 +13649,34 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::31a453cab6927a48",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:936adf15b2ee0c0eb16e92f129e6ab8d6f650112513938aa0a546d11cda88e2d",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::31bef70c62b1e126",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_AMENAGEE_AUTHORED_REVIEW_DEBT_7",
+      "object_id": "TNSI-LANG-AM-EXTRAIT",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/amenagee/TNSI-LANG-AM-EXTRAIT.tex",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "canonical_body_digest": "sha256:befcb63d3e8b59b2c8dd6d21a220278ed1110ffbd1d35d85f59885a4ec210429",
+      "numeric_skeleton_digest": "sha256:0d9c466abbff654877f68fff257bcee279a2b98a21f0302c701b8fc904649da7",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:TNSI-LANGAGES-ET-PROGRAMMATION:amenagee",
+        "nsi:manual:TNSI:amenagee",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::31bef70c62b1e126",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:befcb63d3e8b59b2c8dd6d21a220278ed1110ffbd1d35d85f59885a4ec210429",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -17866,6 +18246,41 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::421075be9489bbba",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-TB-M2",
+      "path": "NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-M2.tex",
+      "chapter": "1NSI-TYPES-BASE",
+      "canonical_body_digest": "sha256:2c3ad99d401177a4f4e6a6b1db127b3771adaffd9ede2445ecf7efc88a432854",
+      "numeric_skeleton_digest": "sha256:906019557077a9047b8c363f1ea11d0b43227c5a68834562ee56f9af2c7c42b0",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-TYPES-BASE:complet",
+        "nsi:chapter:1NSI-TYPES-BASE:eleve",
+        "nsi:chapter:1NSI-TYPES-BASE:evaluations",
+        "nsi:chapter:1NSI-TYPES-BASE:methodes",
+        "nsi:chapter:1NSI-TYPES-BASE:parcours1",
+        "nsi:chapter:1NSI-TYPES-BASE:professeur",
+        "nsi:chapter:1NSI-TYPES-BASE:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::421075be9489bbba",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:2c3ad99d401177a4f4e6a6b1db127b3771adaffd9ede2445ecf7efc88a432854",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::425e6358aecccaa0",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -18233,6 +18648,8 @@
         "nsi:chapter:TNSI-ARCHITECTURES-MATERIELLES-SY:projets",
         "nsi:chapter:TNSI-ARCHITECTURES-MATERIELLES-SY:remediation",
         "nsi:manual:TNSI:amenagee",
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:banque_pratique",
         "nsi:manual:TNSI:eleve",
         "nsi:manual:TNSI:evaluations",
         "nsi:manual:TNSI:methodes",
@@ -18626,6 +19043,8 @@
         "nsi:chapter:TNSI-LANGAGES-ET-PROGRAMMATION:projets",
         "nsi:chapter:TNSI-LANGAGES-ET-PROGRAMMATION:remediation",
         "nsi:manual:TNSI:amenagee",
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:banque_pratique",
         "nsi:manual:TNSI:eleve",
         "nsi:manual:TNSI:evaluations",
         "nsi:manual:TNSI:methodes",
@@ -19765,6 +20184,33 @@
         "FORMULATION"
       ],
       "REQUIRES_OWN_REVIEW_FOR": [
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::493f16fbaeba0773",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S5-EX2",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_ecrite/TNSI-ECRIT-S5-EX2.tex",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "canonical_body_digest": "sha256:1a91b268fa28f4e48e140d7387dce6bc6b013c7cff51b6270dc3e79754f27feb",
+      "numeric_skeleton_digest": "sha256:cb405f1579d3aaf37a6d0c8ddd759472bbf65948dd8dccfb20248c40b45ee56c",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::493f16fbaeba0773",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:1a91b268fa28f4e48e140d7387dce6bc6b013c7cff51b6270dc3e79754f27feb",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
         "ADEQUATION_A_L_OBJET_PARENT",
         "PLACEMENT_CURRICULAIRE"
       ]
@@ -22015,6 +22461,34 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::51bd6d8f658137ba",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_AMENAGEE_AUTHORED_REVIEW_DEBT_9",
+      "object_id": "1NSI-TB-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-TYPES-BASE/amenagee/1NSI-TB-AM-EXTRAIT.tex",
+      "chapter": "1NSI-TYPES-BASE",
+      "canonical_body_digest": "sha256:368c551883715d4e907d6d26e9b4d40ff56e3e77bb1d7708a0bbcdccfd32c743",
+      "numeric_skeleton_digest": "sha256:b29baab9c6bc3369a019c967a2b5e7060c97a0879419684b3466ddf948ee91a0",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-TYPES-BASE:amenagee",
+        "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::51bd6d8f658137ba",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:368c551883715d4e907d6d26e9b4d40ff56e3e77bb1d7708a0bbcdccfd32c743",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::51da03b12b8aba41",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -23204,6 +23678,41 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::5605699ea6d692bf",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-RES-M1",
+      "path": "NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-M1.tex",
+      "chapter": "1NSI-RESEAUX",
+      "canonical_body_digest": "sha256:fccbe56166543f674179246c5f3d418114715c6dec26f113fbc660331446b7be",
+      "numeric_skeleton_digest": "sha256:e785760821dc7c70b92ffddc0a8d5de3d61f7881662db135d28647f96eb4a7a9",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-RESEAUX:complet",
+        "nsi:chapter:1NSI-RESEAUX:eleve",
+        "nsi:chapter:1NSI-RESEAUX:evaluations",
+        "nsi:chapter:1NSI-RESEAUX:methodes",
+        "nsi:chapter:1NSI-RESEAUX:parcours1",
+        "nsi:chapter:1NSI-RESEAUX:professeur",
+        "nsi:chapter:1NSI-RESEAUX:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::5605699ea6d692bf",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:fccbe56166543f674179246c5f3d418114715c6dec26f113fbc660331446b7be",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::562105b086194267",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -23245,6 +23754,34 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::5635a3034ad19830",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:d3e4dbedc1677b48546f5970b11e2a999382dc770512795fc435e8dc1b933f81",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::563f0c87af5e6e14",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_AMENAGEE_AUTHORED_REVIEW_DEBT_7",
+      "object_id": "TNSI-STRUCT-AM-EXTRAIT",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/amenagee/TNSI-STRUCT-AM-EXTRAIT.tex",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "canonical_body_digest": "sha256:4fad23948e5643ec29db51cea3f90a40b391f5132254ed5dd5dd3fd9bd014311",
+      "numeric_skeleton_digest": "sha256:2f5cccef5ddd3ddbde41cd8ff00ee238e439bc2728f630c7db211858725b58d7",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:TNSI-STRUCTURES-DONNEES:amenagee",
+        "nsi:manual:TNSI:amenagee",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::563f0c87af5e6e14",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:4fad23948e5643ec29db51cea3f90a40b391f5132254ed5dd5dd3fd9bd014311",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -23929,6 +24466,34 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::58c8c975e082ffa5",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_AMENAGEE_AUTHORED_REVIEW_DEBT_9",
+      "object_id": "1NSI-WEB-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-WEB-IHM/amenagee/1NSI-WEB-AM-EXTRAIT.tex",
+      "chapter": "1NSI-WEB-IHM",
+      "canonical_body_digest": "sha256:122912bd0d9d587cef18028300887d5b5d87e2ae51105f57ae4febe0debece34",
+      "numeric_skeleton_digest": "sha256:e365e89a3e9a5df9aa0829abdd332826552254919472f5340e2318d8c9f53d69",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-WEB-IHM:amenagee",
+        "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::58c8c975e082ffa5",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:122912bd0d9d587cef18028300887d5b5d87e2ae51105f57ae4febe0debece34",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::5900a200f473a901",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -24173,6 +24738,33 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::59dec8cd734b2b99",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S5-EX1",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S5-EX1.tex",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "canonical_body_digest": "sha256:b4217de9da441c01c307e7d952a5c4812eae8db457f0cfb321c224dd939619c9",
+      "numeric_skeleton_digest": "sha256:35026762d9fdf6504af1ef99fc080997ee30585181acbb767b81f3adb09c620a",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::59dec8cd734b2b99",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:b4217de9da441c01c307e7d952a5c4812eae8db457f0cfb321c224dd939619c9",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::59ef752731d0ce3b",
       "category": "OBJECT_REVIEW",
       "queue_item": "NSI_COUPLED_NEW_32",
@@ -24214,6 +24806,33 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::59f40788415b2556",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:f47c43cc9f085fd15c42d278c69b6611ec4bad5e6283a03f4f113eb55830bc1b",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::5a29440d74876abc",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S3-EX2",
+      "path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/banque_ecrite/TNSI-ECRIT-S3-EX2.tex",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "canonical_body_digest": "sha256:83b7ebd861c9ac269b41454584b61ecd830c8b79badf91224d6cfd7139622e97",
+      "numeric_skeleton_digest": "sha256:62c6743d87a71e90e4a3984c4e2de3d77abb15c7a473acc606f443ed47e4d7ff",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::5a29440d74876abc",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:83b7ebd861c9ac269b41454584b61ecd830c8b79badf91224d6cfd7139622e97",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -24862,6 +25481,34 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::5c27cf20950bcadc",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:d8fd7b5be0b70da5d97bd7db645dd7f7892faa25931582a49435b6b536704b7a",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::5c35a7920a8c799b",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_AMENAGEE_AUTHORED_REVIEW_DEBT_9",
+      "object_id": "1NSI-LANG-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-LANGAGE/amenagee/1NSI-LANG-AM-EXTRAIT.tex",
+      "chapter": "1NSI-LANGAGE",
+      "canonical_body_digest": "sha256:aeb33f3d540fc0193fcbd0c4a19ac490c08d7a3176e7d92bb4ce9f73475dc8fa",
+      "numeric_skeleton_digest": "sha256:a5fd586dc3d0f04a8450859e845eb9a2ba8a8cc0a971191ee2b89847b7343f4c",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-LANGAGE:amenagee",
+        "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::5c35a7920a8c799b",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:aeb33f3d540fc0193fcbd0c4a19ac490c08d7a3176e7d92bb4ce9f73475dc8fa",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -26633,6 +27280,34 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::62cd5ec9493d851d",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_AMENAGEE_AUTHORED_REVIEW_DEBT_9",
+      "object_id": "1NSI-PM-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-PROJET-METHODES/amenagee/1NSI-PM-AM-EXTRAIT.tex",
+      "chapter": "1NSI-PROJET-METHODES",
+      "canonical_body_digest": "sha256:51898e24ddc619dcf341298d83286ef770047ee8f9612287d21c0f2358eb49a9",
+      "numeric_skeleton_digest": "sha256:0a2a93fea76c6f6a250099b13d153c5bb1fe07c3a9544f92e81eb8126d3897f9",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-PROJET-METHODES:amenagee",
+        "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::62cd5ec9493d851d",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:51898e24ddc619dcf341298d83286ef770047ee8f9612287d21c0f2358eb49a9",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::62f10baafc7cd94e",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -28029,6 +28704,76 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::687f30c09c8e3b7e",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-TAB-M4",
+      "path": "NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-M4.tex",
+      "chapter": "1NSI-TABLES",
+      "canonical_body_digest": "sha256:720d5bd1ac565407716a2c4e75bcefa4384bcfe50f68917a907c30ecc556723a",
+      "numeric_skeleton_digest": "sha256:34795731f0fbdb8757fde2a710882289bc192ac1127cbfb578f0bbceafefe20d",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-TABLES:complet",
+        "nsi:chapter:1NSI-TABLES:eleve",
+        "nsi:chapter:1NSI-TABLES:evaluations",
+        "nsi:chapter:1NSI-TABLES:methodes",
+        "nsi:chapter:1NSI-TABLES:parcours1",
+        "nsi:chapter:1NSI-TABLES:professeur",
+        "nsi:chapter:1NSI-TABLES:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::687f30c09c8e3b7e",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:720d5bd1ac565407716a2c4e75bcefa4384bcfe50f68917a907c30ecc556723a",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::688fefec1218a5b2",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-WEB-M1",
+      "path": "NSI/chapitres/1NSI-WEB-IHM/methodes/1NSI-WEB-M1.tex",
+      "chapter": "1NSI-WEB-IHM",
+      "canonical_body_digest": "sha256:c9b5286f0918345065aa766af18fa9e67be1fdf62fd19d4105cbdbbe58d38b23",
+      "numeric_skeleton_digest": "sha256:6738473d435b6128207cd4b9c415f4c3a634cf3729433d70b060782cbc5ec23a",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-WEB-IHM:complet",
+        "nsi:chapter:1NSI-WEB-IHM:eleve",
+        "nsi:chapter:1NSI-WEB-IHM:evaluations",
+        "nsi:chapter:1NSI-WEB-IHM:methodes",
+        "nsi:chapter:1NSI-WEB-IHM:parcours1",
+        "nsi:chapter:1NSI-WEB-IHM:professeur",
+        "nsi:chapter:1NSI-WEB-IHM:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::688fefec1218a5b2",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:c9b5286f0918345065aa766af18fa9e67be1fdf62fd19d4105cbdbbe58d38b23",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::68b195047a62efe5",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -28400,6 +29145,34 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::69bc2f380e7361d8",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:88abaee4603f47fcd7952ec19e60953842872060f09f1302ab157e3384e83f34",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::69bc482a3dccc35a",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_AMENAGEE_AUTHORED_REVIEW_DEBT_7",
+      "object_id": "TNSI-PROJET-AM-EXTRAIT",
+      "path": "NSI/chapitres/TNSI-PROJET/amenagee/TNSI-PROJET-AM-EXTRAIT.tex",
+      "chapter": "TNSI-PROJET",
+      "canonical_body_digest": "sha256:1bdcc9920306c8477dcf5c6bbf288a0e98b0a960e4ea87613081e616a59120ff",
+      "numeric_skeleton_digest": "sha256:bbdef69ced5aceb319d3cdf4a638ba60c43db42ddfb8e6a355c06d2eef070adf",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:TNSI-PROJET:amenagee",
+        "nsi:manual:TNSI:amenagee",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::69bc482a3dccc35a",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:1bdcc9920306c8477dcf5c6bbf288a0e98b0a960e4ea87613081e616a59120ff",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -29804,6 +30577,8 @@
         "nsi:chapter:1NSI-PROJET-METHODES:projets",
         "nsi:chapter:1NSI-PROJET-METHODES:remediation",
         "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:banque_ecrite",
+        "nsi:manual:1NSI:banque_pratique",
         "nsi:manual:1NSI:eleve",
         "nsi:manual:1NSI:evaluations",
         "nsi:manual:1NSI:methodes",
@@ -30643,6 +31418,34 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::71beeb77bfe46810",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_AMENAGEE_AUTHORED_REVIEW_DEBT_7",
+      "object_id": "TNSI-HIST-AM-EXTRAIT",
+      "path": "NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/amenagee/TNSI-HIST-AM-EXTRAIT.tex",
+      "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
+      "canonical_body_digest": "sha256:967ef2e0dac4c60dc92748cef88b06f7d4a13a31a859d0b1012b713782340bc7",
+      "numeric_skeleton_digest": "sha256:b6a799049240cc4e9b9fb0b8c63e77f1882345e86fb01b52c29643fd8600cb72",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:TNSI-HISTOIRE-INFORMATIQUE:amenagee",
+        "nsi:manual:TNSI:amenagee",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::71beeb77bfe46810",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:967ef2e0dac4c60dc92748cef88b06f7d4a13a31a859d0b1012b713782340bc7",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::71c361795e70f0ba",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -30705,6 +31508,33 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::71df0b4cf68f1da0",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S4-EX2",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_ecrite/TNSI-ECRIT-S4-EX2.tex",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "canonical_body_digest": "sha256:9904ced3aa5e9060c9c46f4de7b2d846f77426c89bdb63986771a5221630e764",
+      "numeric_skeleton_digest": "sha256:15bfc101d386b11401b71739ed5c562a744dee751a82c207fca588c8176bdfcc",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::71df0b4cf68f1da0",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:9904ced3aa5e9060c9c46f4de7b2d846f77426c89bdb63986771a5221630e764",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::71fd24c202b1aaa9",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -30749,6 +31579,33 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::721cd2c45b573b96",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:c18d0fde65fdb8758d6d2eb7990598a5ae933881fcb70eb80d40eba3e31b524e",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::7236693ffa6d16dc",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S3-EX3",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/banque_ecrite/TNSI-ECRIT-S3-EX3.tex",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "canonical_body_digest": "sha256:1852a243f9cc29d39c665a3728f2bf3a0a9a4e38cf93d16972b44f8aabc73182",
+      "numeric_skeleton_digest": "sha256:039da72a60a78f1a15fbed51bfd1b9c982077ae2a6a2f1fc21bb7b15b8a72a52",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::7236693ffa6d16dc",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:1852a243f9cc29d39c665a3728f2bf3a0a9a4e38cf93d16972b44f8aabc73182",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -31022,6 +31879,41 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::7268e1fc1b1346b3",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:faaa77460dd90d62d8b5ea79dad2021e69ae25b90caeab42f644b4bec56872e3",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::727c7454d53a18c3",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-TAB-M1",
+      "path": "NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-M1.tex",
+      "chapter": "1NSI-TABLES",
+      "canonical_body_digest": "sha256:1c2a67f76972e11580e0cb0ef0b572b6f7edebd5eaa100307e33919f01284c39",
+      "numeric_skeleton_digest": "sha256:29f66e7d7e832a954029bd94f0d9e89c9ad072e9a93a6504a307e05986000efd",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-TABLES:complet",
+        "nsi:chapter:1NSI-TABLES:eleve",
+        "nsi:chapter:1NSI-TABLES:evaluations",
+        "nsi:chapter:1NSI-TABLES:methodes",
+        "nsi:chapter:1NSI-TABLES:parcours1",
+        "nsi:chapter:1NSI-TABLES:professeur",
+        "nsi:chapter:1NSI-TABLES:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::727c7454d53a18c3",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:1c2a67f76972e11580e0cb0ef0b572b6f7edebd5eaa100307e33919f01284c39",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -33170,6 +34062,41 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::7a7d31deaa083488",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:c5150ed4c8c4dc07cc7a204e30b8b4b7dc050faf0ffde3dc1159faf034abbb2a",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::7a85f67acec08625",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-LANG-M1",
+      "path": "NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M1.tex",
+      "chapter": "1NSI-LANGAGE",
+      "canonical_body_digest": "sha256:6b27afa010c129eacccbfbe4162d61f466d4d41637c6e49d9f405c41f3bf8a57",
+      "numeric_skeleton_digest": "sha256:c5a4a5c91e10428686d4bad42f9e4300e2ccbc43c2ab34173c5211c0abed3630",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-LANGAGE:complet",
+        "nsi:chapter:1NSI-LANGAGE:eleve",
+        "nsi:chapter:1NSI-LANGAGE:evaluations",
+        "nsi:chapter:1NSI-LANGAGE:methodes",
+        "nsi:chapter:1NSI-LANGAGE:parcours1",
+        "nsi:chapter:1NSI-LANGAGE:professeur",
+        "nsi:chapter:1NSI-LANGAGE:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::7a85f67acec08625",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:6b27afa010c129eacccbfbe4162d61f466d4d41637c6e49d9f405c41f3bf8a57",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -35368,6 +36295,41 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::823934aaf3cc6364",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-LANG-M3",
+      "path": "NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M3.tex",
+      "chapter": "1NSI-LANGAGE",
+      "canonical_body_digest": "sha256:95d796731f4ec43bf1523d06ff5ea9f1d7d8dcf327eedad7175a027a0391e155",
+      "numeric_skeleton_digest": "sha256:6eb7d0449ab3ce1bb7fee93cd0cc9bd0a364ea32d0981dbcb8ca5966a53c93d4",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-LANGAGE:complet",
+        "nsi:chapter:1NSI-LANGAGE:eleve",
+        "nsi:chapter:1NSI-LANGAGE:evaluations",
+        "nsi:chapter:1NSI-LANGAGE:methodes",
+        "nsi:chapter:1NSI-LANGAGE:parcours1",
+        "nsi:chapter:1NSI-LANGAGE:professeur",
+        "nsi:chapter:1NSI-LANGAGE:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::823934aaf3cc6364",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:95d796731f4ec43bf1523d06ff5ea9f1d7d8dcf327eedad7175a027a0391e155",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::824218a1d9297ad0",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -35829,6 +36791,41 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::83989c3720c75dfe",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:5164a51e966d22b170d26e6c34410c994a0add97ccdd030282d816005bb55c70",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::8398d944920f9a7d",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-TB-M1",
+      "path": "NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-M1.tex",
+      "chapter": "1NSI-TYPES-BASE",
+      "canonical_body_digest": "sha256:bbdf1d3810578fabf8c96c08e657538c2db87f328e8b85b2068b6fe2ab1d5c35",
+      "numeric_skeleton_digest": "sha256:70231ba3b8effbb18a65d2714f530887501fdf4c932bfb908357584eb5f5e8cc",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-TYPES-BASE:complet",
+        "nsi:chapter:1NSI-TYPES-BASE:eleve",
+        "nsi:chapter:1NSI-TYPES-BASE:evaluations",
+        "nsi:chapter:1NSI-TYPES-BASE:methodes",
+        "nsi:chapter:1NSI-TYPES-BASE:parcours1",
+        "nsi:chapter:1NSI-TYPES-BASE:professeur",
+        "nsi:chapter:1NSI-TYPES-BASE:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::8398d944920f9a7d",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:bbdf1d3810578fabf8c96c08e657538c2db87f328e8b85b2068b6fe2ab1d5c35",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -37310,6 +38307,8 @@
         "nsi:chapter:1NSI-ALGO-DICHO-GLOUTON-KNN:projets",
         "nsi:chapter:1NSI-ALGO-DICHO-GLOUTON-KNN:remediation",
         "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:banque_ecrite",
+        "nsi:manual:1NSI:banque_pratique",
         "nsi:manual:1NSI:eleve",
         "nsi:manual:1NSI:evaluations",
         "nsi:manual:1NSI:methodes",
@@ -37647,6 +38646,34 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::88215b81d7fe07d0",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:06c74be937d6884830b06f7453f65a7d2b1fb4c20b85ca9ba35dfa01a65bf1fb",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::8834acaec45827dd",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_AMENAGEE_AUTHORED_REVIEW_DEBT_9",
+      "object_id": "1NSI-ADGK-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/amenagee/1NSI-ADGK-AM-EXTRAIT.tex",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "canonical_body_digest": "sha256:53294d6c82e2addfe4f95c254f4d68ed4de3c1331fe54ed0636df54bfb7526ae",
+      "numeric_skeleton_digest": "sha256:41ce53e1bfe42d895ddc18d6d033825f8f68767664045a79fd5bb450cc8ef9f4",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-ALGO-DICHO-GLOUTON-KNN:amenagee",
+        "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::8834acaec45827dd",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:53294d6c82e2addfe4f95c254f4d68ed4de3c1331fe54ed0636df54bfb7526ae",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -38318,6 +39345,41 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::8aafd5876ec72121",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-ARCHOS-M2",
+      "path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M2.tex",
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "canonical_body_digest": "sha256:9b7985fbe0e81f17a6eee93b69033317a479d38dab5c43e8f251a6567f6dd80b",
+      "numeric_skeleton_digest": "sha256:183fc3c2e7971e5752ef3f46acb0782b8a927dc1161396a544d479d9b0a52fef",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:complet",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:eleve",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:evaluations",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:methodes",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:parcours1",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:professeur",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::8aafd5876ec72121",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:9b7985fbe0e81f17a6eee93b69033317a479d38dab5c43e8f251a6567f6dd80b",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::8ae8b5e29bcb02d3",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -38457,6 +39519,8 @@
         "nsi:chapter:TNSI-STRUCTURES-DONNEES:projets",
         "nsi:chapter:TNSI-STRUCTURES-DONNEES:remediation",
         "nsi:manual:TNSI:amenagee",
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:banque_pratique",
         "nsi:manual:TNSI:eleve",
         "nsi:manual:TNSI:evaluations",
         "nsi:manual:TNSI:methodes",
@@ -38579,6 +39643,33 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::8beefc7bd774164c",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:447646f593ee70c8dadda651231370f7562e5e65f4bf8a50590c3b93885bb2c6",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::8c0144439c84b9d9",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S4-EX3",
+      "path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/banque_ecrite/TNSI-ECRIT-S4-EX3.tex",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "canonical_body_digest": "sha256:3845090b14cde1d18e9123ab5b8d9aaf03381f800811ec2941778edb11d1c4ba",
+      "numeric_skeleton_digest": "sha256:b7c3ab477b1a55ce5a30a5f7345292ffc1e573c5b70997770059b66635fedcb2",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::8c0144439c84b9d9",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:3845090b14cde1d18e9123ab5b8d9aaf03381f800811ec2941778edb11d1c4ba",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -39988,6 +41079,34 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::912ea449aa6a98cc",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_AMENAGEE_AUTHORED_REVIEW_DEBT_9",
+      "object_id": "1NSI-RES-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-RESEAUX/amenagee/1NSI-RES-AM-EXTRAIT.tex",
+      "chapter": "1NSI-RESEAUX",
+      "canonical_body_digest": "sha256:792244f948e6caf796d0d41b41a4c727de3cdd20420425f7642e8e7298c1ca1b",
+      "numeric_skeleton_digest": "sha256:11754f5585759cbb475036d7f94f9aa84dbe29de425c7c441af659e39f49ec19",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-RESEAUX:amenagee",
+        "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::912ea449aa6a98cc",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:792244f948e6caf796d0d41b41a4c727de3cdd20420425f7642e8e7298c1ca1b",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::9137a2b12898d13b",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -41200,6 +42319,33 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::95826a3ee7c1378a",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-PRATIQUE-P6",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_pratique/TNSI-PRATIQUE-P6.tex",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "canonical_body_digest": "sha256:83c32e4f77d16d60546e1e22a8ee257ad63b44792525622df610a37edd08e837",
+      "numeric_skeleton_digest": "sha256:249206647d94510ab684ecfa8d846250dc1f8ed35206b1d2f62950d80e0e37ec",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_pratique",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::95826a3ee7c1378a",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:83c32e4f77d16d60546e1e22a8ee257ad63b44792525622df610a37edd08e837",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::9589451b6f81daf7",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -41843,6 +42989,41 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::979b13170dc045ad",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:fbec5b02a2adda243250f3220617afa6d1b995f687bbca870cab2047e6deae00",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::97a9229435efeaf5",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-PM-M1",
+      "path": "NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-M1.tex",
+      "chapter": "1NSI-PROJET-METHODES",
+      "canonical_body_digest": "sha256:24e14f1f5d29590aa6c192795e74bdb771bc43ea2dce53141c6a209bb503e3fa",
+      "numeric_skeleton_digest": "sha256:57ee7df2112147c4ce19188ff2b378634290e30c2b7268ba818d3c32a00ed7a9",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-PROJET-METHODES:complet",
+        "nsi:chapter:1NSI-PROJET-METHODES:eleve",
+        "nsi:chapter:1NSI-PROJET-METHODES:evaluations",
+        "nsi:chapter:1NSI-PROJET-METHODES:methodes",
+        "nsi:chapter:1NSI-PROJET-METHODES:parcours1",
+        "nsi:chapter:1NSI-PROJET-METHODES:professeur",
+        "nsi:chapter:1NSI-PROJET-METHODES:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::97a9229435efeaf5",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:24e14f1f5d29590aa6c192795e74bdb771bc43ea2dce53141c6a209bb503e3fa",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -42713,6 +43894,69 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::9b763c5f18cc630d",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_AMENAGEE_AUTHORED_REVIEW_DEBT_9",
+      "object_id": "1NSI-TAB-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-TABLES/amenagee/1NSI-TAB-AM-EXTRAIT.tex",
+      "chapter": "1NSI-TABLES",
+      "canonical_body_digest": "sha256:f48d3fc927b0c70f5ceb522a48f9237344b722872d8189b5fe7f949007608e89",
+      "numeric_skeleton_digest": "sha256:0fc881aec11ff187ffd8295c394dde64ac5b98de42c9b6cdf1723705874983a1",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-TABLES:amenagee",
+        "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::9b763c5f18cc630d",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:f48d3fc927b0c70f5ceb522a48f9237344b722872d8189b5fe7f949007608e89",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::9b980ed1adf5b21f",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-TAB-M2",
+      "path": "NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-M2.tex",
+      "chapter": "1NSI-TABLES",
+      "canonical_body_digest": "sha256:2d18cf052c021ece4947568543e6a029412680302db8e674d671272b4da06ae5",
+      "numeric_skeleton_digest": "sha256:9b534ed4c6e4235525eee2a55e097e5ba7f9cb62d283a4a008e32fe316f1738b",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-TABLES:complet",
+        "nsi:chapter:1NSI-TABLES:eleve",
+        "nsi:chapter:1NSI-TABLES:evaluations",
+        "nsi:chapter:1NSI-TABLES:methodes",
+        "nsi:chapter:1NSI-TABLES:parcours1",
+        "nsi:chapter:1NSI-TABLES:professeur",
+        "nsi:chapter:1NSI-TABLES:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::9b980ed1adf5b21f",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:2d18cf052c021ece4947568543e6a029412680302db8e674d671272b4da06ae5",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::9bc05524d4ef9a01",
       "category": "OBJECT_REVIEW",
       "queue_item": "APPROVED_TRANSITION_NEW",
@@ -43457,6 +44701,34 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::9dfcd6063c48d4ed",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_AMENAGEE_AUTHORED_REVIEW_DEBT_9",
+      "object_id": "1NSI-APT-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/amenagee/1NSI-APT-AM-EXTRAIT.tex",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "canonical_body_digest": "sha256:e9280dc54360071cac154b08ff77f1d5fb18641ada0cc61ad128d77a7fde64d9",
+      "numeric_skeleton_digest": "sha256:f77fda0b23c633b2d396652c8b307406f9aef47732ffa9b72bdb48e1b739ed1c",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-ALGO-PARCOURS-TRIS:amenagee",
+        "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::9dfcd6063c48d4ed",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:e9280dc54360071cac154b08ff77f1d5fb18641ada0cc61ad128d77a7fde64d9",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::9e25b145f5f010f3",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -43964,6 +45236,41 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::a0b1b78b20c05afd",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-TB-M3",
+      "path": "NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-M3.tex",
+      "chapter": "1NSI-TYPES-BASE",
+      "canonical_body_digest": "sha256:dc9ee540fcfd00ef7ed78930be33e661423315967d681a61cf1ea89b92ac3602",
+      "numeric_skeleton_digest": "sha256:08d080a3611b79b5a80cfbf6c9ecde9e781c5d3488bef4060248da1cedb48cd4",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-TYPES-BASE:complet",
+        "nsi:chapter:1NSI-TYPES-BASE:eleve",
+        "nsi:chapter:1NSI-TYPES-BASE:evaluations",
+        "nsi:chapter:1NSI-TYPES-BASE:methodes",
+        "nsi:chapter:1NSI-TYPES-BASE:parcours1",
+        "nsi:chapter:1NSI-TYPES-BASE:professeur",
+        "nsi:chapter:1NSI-TYPES-BASE:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::a0b1b78b20c05afd",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:dc9ee540fcfd00ef7ed78930be33e661423315967d681a61cf1ea89b92ac3602",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::a0cb5717119ff037",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -43989,6 +45296,69 @@
         "FORMULATION"
       ],
       "REQUIRES_OWN_REVIEW_FOR": [
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::a0f6bbe48c19edc5",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-ARCHOS-M1",
+      "path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M1.tex",
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "canonical_body_digest": "sha256:9ef2c5ec8c83febda4d3c4b10891a7435d6dddc55a31936de978defaced95fcb",
+      "numeric_skeleton_digest": "sha256:506d6a6e950d540de763dc5b449ab264ade0bd7cab17e58d632fbc969a330a46",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:complet",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:eleve",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:evaluations",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:methodes",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:parcours1",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:professeur",
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::a0f6bbe48c19edc5",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:9ef2c5ec8c83febda4d3c4b10891a7435d6dddc55a31936de978defaced95fcb",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::a0fec48b8e9e4e53",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_AMENAGEE_AUTHORED_REVIEW_DEBT_7",
+      "object_id": "TNSI-BDD-AM-EXTRAIT",
+      "path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/amenagee/TNSI-BDD-AM-EXTRAIT.tex",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "canonical_body_digest": "sha256:7c67ce4001bb6dd3c89f0125e586b643f82b20f50c41b4520fe529bb1ac3fedd",
+      "numeric_skeleton_digest": "sha256:548efa474310be7cdde0e0b31fbe7911fcace13cd7377e69c2d9e2113ae690b3",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:TNSI-BASES-DE-DONNEES:amenagee",
+        "nsi:manual:TNSI:amenagee",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::a0fec48b8e9e4e53",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:7c67ce4001bb6dd3c89f0125e586b643f82b20f50c41b4520fe529bb1ac3fedd",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
         "ADEQUATION_A_L_OBJET_PARENT",
         "PLACEMENT_CURRICULAIRE"
       ]
@@ -46415,6 +47785,33 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::ab6de8506d69da6f",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S1-EX2",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_ecrite/TNSI-ECRIT-S1-EX2.tex",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "canonical_body_digest": "sha256:c39e801ce89fd11399ef2faba54aac7190dad0437ba05b9a2ffdbc974d4d1162",
+      "numeric_skeleton_digest": "sha256:9ed091131786eb77ce84d319f11a6314f318caa03e9976d23e6a197c91047faa",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::ab6de8506d69da6f",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:c39e801ce89fd11399ef2faba54aac7190dad0437ba05b9a2ffdbc974d4d1162",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::abceff04c189acb5",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -47067,6 +48464,8 @@
         "nsi:chapter:1NSI-ALGO-PARCOURS-TRIS:projets",
         "nsi:chapter:1NSI-ALGO-PARCOURS-TRIS:remediation",
         "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:banque_ecrite",
+        "nsi:manual:1NSI:banque_pratique",
         "nsi:manual:1NSI:eleve",
         "nsi:manual:1NSI:evaluations",
         "nsi:manual:1NSI:methodes",
@@ -47554,6 +48953,33 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::b0ff408c6853137b",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:1bf252556b50df507a3eb8f02d3650aa749e972845f3f11f6c8679077e3d909e",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::b131d32939bee40b",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S6-EX2",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/banque_ecrite/TNSI-ECRIT-S6-EX2.tex",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "canonical_body_digest": "sha256:43e79349919b6f6e12987f390252a9d20d7d5193b59c6f196d1e9c293ebc7496",
+      "numeric_skeleton_digest": "sha256:ced23222e630142cf1958f85b3c2c0b5ee6f4ca4ad8927d62f970318f254f038",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::b131d32939bee40b",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:43e79349919b6f6e12987f390252a9d20d7d5193b59c6f196d1e9c293ebc7496",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -48227,6 +49653,33 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::b3bc3adfc12c9030",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-PRATIQUE-P8",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_pratique/TNSI-PRATIQUE-P8.tex",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "canonical_body_digest": "sha256:a90a95d3c708d30285a3b2161fa0169e8798ae6ed5270db094150c5fa03bce97",
+      "numeric_skeleton_digest": "sha256:0ba8ed2347a2d5877fd3c279552c3ce57e3de18348d4a938b61e9712ba686a44",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_pratique",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::b3bc3adfc12c9030",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:a90a95d3c708d30285a3b2161fa0169e8798ae6ed5270db094150c5fa03bce97",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::b3c839ff09b1610a",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -48814,6 +50267,33 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::b56052224a2372e4",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S2-EX1",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S2-EX1.tex",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "canonical_body_digest": "sha256:0284d205fa5f1d4ebee851b1cc55110b5a9a1da81a01ec2aa3008f9885725466",
+      "numeric_skeleton_digest": "sha256:5f377a72939daf529efcf346707606455d420227cc1ed16b3f00527228a18f2a",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::b56052224a2372e4",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:0284d205fa5f1d4ebee851b1cc55110b5a9a1da81a01ec2aa3008f9885725466",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::b5ee5967b10adc5f",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -48978,6 +50458,8 @@
         "nsi:chapter:1NSI-TYPES-BASE:projets",
         "nsi:chapter:1NSI-TYPES-BASE:remediation",
         "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:banque_ecrite",
+        "nsi:manual:1NSI:banque_pratique",
         "nsi:manual:1NSI:eleve",
         "nsi:manual:1NSI:evaluations",
         "nsi:manual:1NSI:methodes",
@@ -49425,6 +50907,8 @@
         "nsi:chapter:1NSI-TYPES-CONSTRUITS:projets",
         "nsi:chapter:1NSI-TYPES-CONSTRUITS:remediation",
         "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:banque_ecrite",
+        "nsi:manual:1NSI:banque_pratique",
         "nsi:manual:1NSI:eleve",
         "nsi:manual:1NSI:evaluations",
         "nsi:manual:1NSI:methodes",
@@ -49941,6 +51425,8 @@
         "nsi:chapter:1NSI-TABLES:projets",
         "nsi:chapter:1NSI-TABLES:remediation",
         "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:banque_ecrite",
+        "nsi:manual:1NSI:banque_pratique",
         "nsi:manual:1NSI:eleve",
         "nsi:manual:1NSI:evaluations",
         "nsi:manual:1NSI:methodes",
@@ -50944,6 +52430,34 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::bd3a9b398e0d45aa",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_AMENAGEE_AUTHORED_REVIEW_DEBT_9",
+      "object_id": "1NSI-ARCHOS-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/amenagee/1NSI-ARCHOS-AM-EXTRAIT.tex",
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "canonical_body_digest": "sha256:d85369a8736f396af283f3a43b19648cf0fabce630ec0b5128e2d3b9d494624a",
+      "numeric_skeleton_digest": "sha256:4f4be303eb3b77e4307eb11d37054c33685a5649983f662b66ba553264e11363",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-ARCHITECTURE-OS:amenagee",
+        "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::bd3a9b398e0d45aa",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:d85369a8736f396af283f3a43b19648cf0fabce630ec0b5128e2d3b9d494624a",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::bd3fdafb662b1670",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -51041,6 +52555,8 @@
         "nsi:chapter:TNSI-PROJET:projets",
         "nsi:chapter:TNSI-PROJET:remediation",
         "nsi:manual:TNSI:amenagee",
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:banque_pratique",
         "nsi:manual:TNSI:eleve",
         "nsi:manual:TNSI:evaluations",
         "nsi:manual:TNSI:methodes",
@@ -51716,6 +53232,8 @@
         "nsi:chapter:1NSI-ARCHITECTURE-OS:projets",
         "nsi:chapter:1NSI-ARCHITECTURE-OS:remediation",
         "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:banque_ecrite",
+        "nsi:manual:1NSI:banque_pratique",
         "nsi:manual:1NSI:eleve",
         "nsi:manual:1NSI:evaluations",
         "nsi:manual:1NSI:methodes",
@@ -53072,6 +54590,41 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::c4cdaca4f65539d5",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-LANG-M2",
+      "path": "NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M2.tex",
+      "chapter": "1NSI-LANGAGE",
+      "canonical_body_digest": "sha256:367dfc94c3a82691c64809e8f21a2b45a82eeafea80d9500d1cce87b58f910e5",
+      "numeric_skeleton_digest": "sha256:6ade51d5e4bf32c70a4d6f6f1566e89487f1a8bc18f062edc76328908a45f9b1",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-LANGAGE:complet",
+        "nsi:chapter:1NSI-LANGAGE:eleve",
+        "nsi:chapter:1NSI-LANGAGE:evaluations",
+        "nsi:chapter:1NSI-LANGAGE:methodes",
+        "nsi:chapter:1NSI-LANGAGE:parcours1",
+        "nsi:chapter:1NSI-LANGAGE:professeur",
+        "nsi:chapter:1NSI-LANGAGE:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::c4cdaca4f65539d5",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:367dfc94c3a82691c64809e8f21a2b45a82eeafea80d9500d1cce87b58f910e5",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::c4cf6a31025eb9af",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -54393,6 +55946,33 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::c9bf51ea57f25202",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S4-EX1",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S4-EX1.tex",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "canonical_body_digest": "sha256:3f3398ae707c1d0dfcc8f54749bb32896dc1a4ef076c2e86de49fa27bbcf42a2",
+      "numeric_skeleton_digest": "sha256:7e81edbfb4d9667ff96d96e3c49e7a95642b384de567107b32f4523c69b3d1d6",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::c9bf51ea57f25202",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:3f3398ae707c1d0dfcc8f54749bb32896dc1a4ef076c2e86de49fa27bbcf42a2",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::c9d5f14bb192b91b",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -54626,6 +56206,33 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::cb2bda128fe4a16e",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S6-EX3",
+      "path": "NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/banque_ecrite/TNSI-ECRIT-S6-EX3.tex",
+      "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
+      "canonical_body_digest": "sha256:7050feda1e966e1022c90c3779b3d34998ccd1ee0b8af8a2dcf7312f72354fa3",
+      "numeric_skeleton_digest": "sha256:c910396972edcab711da293cc3896cca19455c69d20202676917db99e004e420",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::cb2bda128fe4a16e",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:7050feda1e966e1022c90c3779b3d34998ccd1ee0b8af8a2dcf7312f72354fa3",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::cb326d04ddaa9349",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -54826,6 +56433,8 @@
         "nsi:chapter:TNSI-ALGORITHMIQUE:projets",
         "nsi:chapter:TNSI-ALGORITHMIQUE:remediation",
         "nsi:manual:TNSI:amenagee",
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:banque_pratique",
         "nsi:manual:TNSI:eleve",
         "nsi:manual:TNSI:evaluations",
         "nsi:manual:TNSI:methodes",
@@ -57565,6 +59174,41 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::d4fd791daff8ca98",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-TAB-M3",
+      "path": "NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-M3.tex",
+      "chapter": "1NSI-TABLES",
+      "canonical_body_digest": "sha256:8dac48ffa4f5b1738c9c2d2586aa277928d0614b1b5541f82435be38131a9537",
+      "numeric_skeleton_digest": "sha256:5c6e219cfadd5d6f414713d6d87a3ed8919219a800a31ebd4c1c252ba4a7847f",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-TABLES:complet",
+        "nsi:chapter:1NSI-TABLES:eleve",
+        "nsi:chapter:1NSI-TABLES:evaluations",
+        "nsi:chapter:1NSI-TABLES:methodes",
+        "nsi:chapter:1NSI-TABLES:parcours1",
+        "nsi:chapter:1NSI-TABLES:professeur",
+        "nsi:chapter:1NSI-TABLES:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::d4fd791daff8ca98",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:8dac48ffa4f5b1738c9c2d2586aa277928d0614b1b5541f82435be38131a9537",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::d50997e21510fe04",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -58073,6 +59717,33 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::d754aea5e48e7a15",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:0a48832c63e18391603711d5ea94e78c7c776ece3695d5684b058b6d56a0ad20",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::d756bd5ad493d1c3",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-PRATIQUE-P7",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_pratique/TNSI-PRATIQUE-P7.tex",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "canonical_body_digest": "sha256:ee57bc502731b72b6a00aa69fcd4b653563f7f1cfe467bf52422ab9250f6bd39",
+      "numeric_skeleton_digest": "sha256:23d5ecc8387ef3d21c8090c17d03adf95bc1fe8dbcb1e20d534d12bf66aec88f",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_pratique",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::d756bd5ad493d1c3",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:ee57bc502731b72b6a00aa69fcd4b653563f7f1cfe467bf52422ab9250f6bd39",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -59216,6 +60887,33 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::dba6ada48a24e3b9",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:e286d2a2a3d8a2c6df6efa4bb9e9b7f1f559ca6b856c97643070192588907421",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::dbb512f1dad91fa8",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-PRATIQUE-P5",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/banque_pratique/TNSI-PRATIQUE-P5.tex",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "canonical_body_digest": "sha256:0fad04075d935bfc13eeaa8469d429b322276371a1702147bc97cb7ea0ce4428",
+      "numeric_skeleton_digest": "sha256:646cfc6bdba4ffde3df53028972e11328cb45082495b60f2227d0846077d229d",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_pratique",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::dbb512f1dad91fa8",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:0fad04075d935bfc13eeaa8469d429b322276371a1702147bc97cb7ea0ce4428",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -61797,6 +63495,34 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::e918e9455ebfa2e8",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_AMENAGEE_AUTHORED_REVIEW_DEBT_7",
+      "object_id": "TNSI-ARCH-AM-EXTRAIT",
+      "path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/amenagee/TNSI-ARCH-AM-EXTRAIT.tex",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "canonical_body_digest": "sha256:8c39226e0caf952f7627dc8fd53049d73df696c84116db1f0519190fa0db2478",
+      "numeric_skeleton_digest": "sha256:518105f61fc31eeea9bfbc2bfa3041b5571f4f416ad72335f1505065089bf023",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:TNSI-ARCHITECTURES-MATERIELLES-SY:amenagee",
+        "nsi:manual:TNSI:amenagee",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::e918e9455ebfa2e8",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:8c39226e0caf952f7627dc8fd53049d73df696c84116db1f0519190fa0db2478",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::e91f071adff467c2",
       "category": "OBJECT_REVIEW",
       "queue_item": "TSPE_GEO_NEW_40",
@@ -64174,6 +65900,41 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::f30af1c3e43a8e91",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-RES-M3",
+      "path": "NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-M3.tex",
+      "chapter": "1NSI-RESEAUX",
+      "canonical_body_digest": "sha256:6cf1df69dee422bbb36bcbeb18cb77e0be76399090b0de22722e092d80d33db2",
+      "numeric_skeleton_digest": "sha256:b5d2aa1bc80562cbe3c2614074957d937a1f9a463ba69189b154ec07eb9a7651",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-RESEAUX:complet",
+        "nsi:chapter:1NSI-RESEAUX:eleve",
+        "nsi:chapter:1NSI-RESEAUX:evaluations",
+        "nsi:chapter:1NSI-RESEAUX:methodes",
+        "nsi:chapter:1NSI-RESEAUX:parcours1",
+        "nsi:chapter:1NSI-RESEAUX:professeur",
+        "nsi:chapter:1NSI-RESEAUX:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::f30af1c3e43a8e91",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:6cf1df69dee422bbb36bcbeb18cb77e0be76399090b0de22722e092d80d33db2",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::f312f1ba4a4aae54",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -64273,6 +66034,33 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::f3d53a356367dd9f",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:0f20ecd25a7c91f68154a0305758354b234239a4283ff26b994467c5167574be",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::f3f6e4d8c3caa2a0",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-ECRIT-S6-EX1",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S6-EX1.tex",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "canonical_body_digest": "sha256:0337f9ec472ffce39e0a0ce63f6ff45348b7efe60b90613fab2435898656084b",
+      "numeric_skeleton_digest": "sha256:9bcd20e70c043c192ec7b093b9e32f930eed29d631b030aebd89ef594887d1c1",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::f3f6e4d8c3caa2a0",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:0337f9ec472ffce39e0a0ce63f6ff45348b7efe60b90613fab2435898656084b",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -64692,6 +66480,33 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::f5a9dbcfb4e00129",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26",
+      "object_id": "TNSI-PRATIQUE-P2",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_pratique/TNSI-PRATIQUE-P2.tex",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "canonical_body_digest": "sha256:049d66c049650276bb7e2f4635ac5fb41c24636997f6ccef9dfbce5ea05a1233",
+      "numeric_skeleton_digest": "sha256:42cd6d6c973a7015dc89602c12eae886deb43848724a68adac6b0e4e0e24917b",
+      "RENDERED_CONSUMERS": [
+        "nsi:manual:TNSI:banque_pratique",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::f5a9dbcfb4e00129",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:049d66c049650276bb7e2f4635ac5fb41c24636997f6ccef9dfbce5ea05a1233",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::f5abd2afedb23f4a",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -65045,6 +66860,8 @@
         "nsi:chapter:1NSI-RESEAUX:projets",
         "nsi:chapter:1NSI-RESEAUX:remediation",
         "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:banque_ecrite",
+        "nsi:manual:1NSI:banque_pratique",
         "nsi:manual:1NSI:eleve",
         "nsi:manual:1NSI:evaluations",
         "nsi:manual:1NSI:methodes",
@@ -65249,6 +67066,41 @@
       "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::f845f37ce244791c",
       "DERIVATION_PROOF": {
         "canonical_body_digest": "sha256:d0d90195155cd73d3e5bb8d825f4eb65030e461a6883b2f49c1665277b95faf2",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::f85cef1f904baec3",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+      "object_id": "1NSI-WEB-M2",
+      "path": "NSI/chapitres/1NSI-WEB-IHM/methodes/1NSI-WEB-M2.tex",
+      "chapter": "1NSI-WEB-IHM",
+      "canonical_body_digest": "sha256:e654f33d5ce3976d54064609fdfee1144a94106b713dea37a44e9c88f7c56140",
+      "numeric_skeleton_digest": "sha256:8f6d49f8a3df7d888ce83e17b11334db65df5dd7b1ef44c1229898690293a5db",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:1NSI-WEB-IHM:complet",
+        "nsi:chapter:1NSI-WEB-IHM:eleve",
+        "nsi:chapter:1NSI-WEB-IHM:evaluations",
+        "nsi:chapter:1NSI-WEB-IHM:methodes",
+        "nsi:chapter:1NSI-WEB-IHM:parcours1",
+        "nsi:chapter:1NSI-WEB-IHM:professeur",
+        "nsi:chapter:1NSI-WEB-IHM:projets",
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:1NSI:methodes",
+        "nsi:manual:1NSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::f85cef1f904baec3",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:e654f33d5ce3976d54064609fdfee1144a94106b713dea37a44e9c88f7c56140",
         "is_source": true
       },
       "INHERITS_REVIEW_EVIDENCE_FOR": [],
@@ -65653,6 +67505,8 @@
         "nsi:chapter:TNSI-HISTOIRE-INFORMATIQUE:projets",
         "nsi:chapter:TNSI-HISTOIRE-INFORMATIQUE:remediation",
         "nsi:manual:TNSI:amenagee",
+        "nsi:manual:TNSI:banque_ecrite",
+        "nsi:manual:TNSI:banque_pratique",
         "nsi:manual:TNSI:eleve",
         "nsi:manual:TNSI:evaluations",
         "nsi:manual:TNSI:methodes",
@@ -67408,6 +69262,34 @@
       ]
     },
     {
+      "REVIEW_ITEM_ID": "OBJECT_REVIEW::feb3b12c9cdd2088",
+      "category": "OBJECT_REVIEW",
+      "queue_item": "TNSI_AMENAGEE_AUTHORED_REVIEW_DEBT_7",
+      "object_id": "TNSI-ALGO-AM-EXTRAIT",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/amenagee/TNSI-ALGO-AM-EXTRAIT.tex",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "canonical_body_digest": "sha256:b7f7336cc72b45cedd6fd377e480fea913e992bab6488143b7da6583f7070a20",
+      "numeric_skeleton_digest": "sha256:3001e6ba76d788e251890517ab7a46ebad25272b5b812f4900b7dce80bc3885b",
+      "RENDERED_CONSUMERS": [
+        "nsi:chapter:TNSI-ALGORITHMIQUE:amenagee",
+        "nsi:manual:TNSI:amenagee",
+        "nsi:manual:TNSI:professeur"
+      ],
+      "DERIVATION": "CANONICAL",
+      "CANONICAL_SEMANTIC_SOURCE": "OBJECT_REVIEW::feb3b12c9cdd2088",
+      "DERIVATION_PROOF": {
+        "canonical_body_digest": "sha256:b7f7336cc72b45cedd6fd377e480fea913e992bab6488143b7da6583f7070a20",
+        "is_source": true
+      },
+      "INHERITS_REVIEW_EVIDENCE_FOR": [],
+      "REQUIRES_OWN_REVIEW_FOR": [
+        "CONTENU_SCIENTIFIQUE",
+        "FORMULATION",
+        "ADEQUATION_A_L_OBJET_PARENT",
+        "PLACEMENT_CURRICULAIRE"
+      ]
+    },
+    {
       "REVIEW_ITEM_ID": "OBJECT_REVIEW::ff28291175fa7d68",
       "category": "OBJECT_REVIEW",
       "queue_item": "UNCHANGED",
@@ -67453,6 +69335,8 @@
         "nsi:chapter:1NSI-WEB-IHM:projets",
         "nsi:chapter:1NSI-WEB-IHM:remediation",
         "nsi:manual:1NSI:amenagee",
+        "nsi:manual:1NSI:banque_ecrite",
+        "nsi:manual:1NSI:banque_pratique",
         "nsi:manual:1NSI:eleve",
         "nsi:manual:1NSI:evaluations",
         "nsi:manual:1NSI:methodes",
@@ -72760,12 +74644,12 @@
     }
   ],
   "freshness": {
-    "EVIDENCE_HEAD": "2d78e00ac1af216d0fddfb9bd922029cdb010121",
+    "EVIDENCE_HEAD": "5a7c43b44e52ebde0eeee4956c6653d52c79879d",
     "INPUT_PATHS": [
       "audit/CURRENT_REVIEW_DEBT_PARTITION.json",
       "audit/HUMAN_REVIEW_QUEUE.json",
       "audit/INVENTAIRE_COLLECTION.json"
     ],
-    "INPUT_DIGEST": "sha256:cb0d2026d21572eefaf69dbc676e093eb520fecaaa7c83a450ad09c1e5ea9ecb"
+    "INPUT_DIGEST": "sha256:15b8a06b0febdc5cbd8e7d0711130e010e0a663b171630497829546fd19b250b"
   }
 }
