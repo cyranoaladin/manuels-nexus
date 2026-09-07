@@ -1,6 +1,6 @@
 {
   "artifact_type": "clone_disposition_ledger",
-  "body_definition": "fichier moins sa ligne % META, lignes vides retirees",
+  "body_definition": "fichier moins sa ligne % META, identite declaree neutralisee, lignes vides retirees",
   "generated_by": "scripts/build_clone_disposition_ledger.py",
   "groups": [
     {
@@ -21629,5 +21629,18 @@
     "REJECTED_REUSE_DECLARATIONS": 0,
     "SOURCE_CLONE_WITH_DISTINCT_IDS": 118,
     "TRUE_PRODUCT_CLONES_OPEN": 903
+  },
+  "superseded_measure": {
+    "HISTORICAL_MEASURE_BEFORE_CORRECTION": {
+      "CAPACITY_MISREPRESENTING_GROUPS": 0,
+      "CLONE_GROUPS_TOTAL": 6,
+      "CROSS_MANUAL_GROUPS": 0,
+      "NEAR_CLONES": 131,
+      "TRUE_PRODUCT_CLONES_OPEN": 0
+    },
+    "HISTORICAL_MEASURE_PRESERVED_IN_GIT": true,
+    "SUPERSEDED_BY": "audit/CROSS_MANUAL_CONTAMINATION.json",
+    "SUPERSEDED_REASON": "la normalisation employee laissait l'identite de l'objet dans le corps compare : chaque copie etait unique par construction, et la contamination inter-manuels ne pouvait structurellement pas etre vue",
+    "SUPERSEDED_STATUS": "SUPERSEDED_BY_CORRECTED_CLONE_DETECTOR"
   }
 }
