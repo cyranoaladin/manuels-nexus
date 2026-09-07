@@ -1,0 +1,99 @@
+% META: {"id": "TNSI-ARCH-CO-006", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "corrige", "exercice_ref": "TNSI-ARCH-EX-006", "capacites": ["T-ARCH-02B"], "capacites_codes": ["C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def tourniquet(processus, tranche):
+%     restant = dict(processus)
+%     ordre, instant, fin = [], 0, {}
+%     while any(restant[p] > 0 for p in restant):
+%         for p in processus:
+%             if restant[p] == 0:
+%                 continue
+%             duree = min(tranche, restant[p])
+%             instant = instant + duree
+%             restant[p] = restant[p] - duree
+%             ordre.append((p, duree, instant))
+%             if restant[p] == 0:
+%                 fin[p] = instant
+%     return ordre, fin
+% processus = {"compilation": 12, "telechargement": 9, "lecteur": 2}
+% ordre6, fin6 = tourniquet(processus, 6)
+% assert ordre6 == [("compilation", 6, 6), ("telechargement", 6, 12),
+%                   ("lecteur", 2, 14), ("compilation", 6, 20),
+%                   ("telechargement", 3, 23)]
+% assert fin6["lecteur"] == 14 and fin6["compilation"] == 20 and fin6["telechargement"] == 23
+% assert len(ordre6) == 5
+% ordre2, fin2 = tourniquet(processus, 2)
+% assert len(ordre2) == 12
+% assert fin2["lecteur"] == 6 and fin2["telechargement"] == 21 and fin2["compilation"] == 23
+% assert fin6["lecteur"] - fin2["lecteur"] == 8
+% assert ordre6[-1][2] == ordre2[-1][2] == 23 == sum(processus.values())
+% assert len(ordre2) - len(ordre6) == 7
+% assert 12 - 2 == 10
+% END-VERIFY
+\begin{corrige}{TNSI-ARCH-EX-006}
+\textbf{1.} La fonction fait tourner les processus non terminés, en accordant à
+chacun le minimum entre la tranche et ce qu'il lui reste :
+\begin{python}
+def tourniquet(processus, tranche):
+    restant = dict(processus)
+    ordre, instant, fin = [], 0, {}
+    while any(restant[p] > 0 for p in restant):
+        for p in processus:
+            if restant[p] == 0:
+                continue
+            duree = min(tranche, restant[p])
+            instant = instant + duree
+            restant[p] = restant[p] - duree
+            ordre.append((p, duree, instant))
+            if restant[p] == 0:
+                fin[p] = instant
+    return ordre, fin
+\end{python}
+
+\textbf{2.} Avec une tranche de $6$, les passages sont
+\begin{center}
+\begin{tabular}{llrr}
+\hline
+ & processus & durée & instant de fin \\
+\hline
+1 & compilation & $6$ & $6$ \\
+2 & téléchargement & $6$ & $12$ \\
+3 & lecteur & $2$ & $14$ \\
+4 & compilation & $6$ & $20$ \\
+5 & téléchargement & $3$ & $23$ \\
+\hline
+\end{tabular}
+\end{center}
+Le lecteur se termine à $14$, la compilation à $20$, le téléchargement à $23$.
+Il y a $5$ passages, donc $4$ changements de processus.
+
+\textbf{3.} Avec une tranche de $2$, il y a $12$ passages. Le lecteur passe en
+troisième position et se termine dès l'instant $6$ ; le téléchargement se
+termine à $21$ et la compilation à $23$.
+
+\textbf{4.} Le lecteur démarre après $12$ unités d'attente avec la tranche de
+$6$ — il ne reçoit le processeur qu'au troisième passage, après deux tranches
+pleines — contre $4$ unités avec la tranche de $2$. L'écart d'achèvement est de
+$8$ unités.
+
+C'est exactement ce que perçoit l'utilisateur : la vidéo se lance
+immédiatement, ou après un délai qui paraît une panne. Le travail à faire est
+pourtant rigoureusement le même.
+
+\textbf{5.} Les deux ordonnancements se terminent à l'instant $23$, qui est la
+somme $12+9+2$ des besoins. C'était prévisible : le tourniquet ne fait
+qu'\emph{ordonner} le travail, il n'en crée ni n'en supprime. Tant qu'on néglige
+le coût des changements, le processeur travaille sans interruption de $0$ à $23$.
+Un ordonnanceur ne rend pas une machine plus rapide ; il décide seulement de
+qui attend.
+
+\textbf{6.} Le nombre de changements de processus. Il passe de $5$ passages à
+$12$ lorsque la tranche descend de $6$ à $2$, et il continuerait de croître.
+
+Or chaque changement a un coût réel, que le modèle ci-dessus néglige : il faut
+sauvegarder l'état du processus sortant — registres, compteur de programme — et
+recharger celui du processus entrant, ce qui vide au passage une partie des
+mémoires caches. Avec une tranche très courte, le processeur passerait plus de
+temps à changer de tâche qu'à en exécuter une. Le choix de la tranche est donc
+un compromis : assez courte pour que les tâches brèves ne soient pas prises en
+otage, assez longue pour que le coût de la commutation reste marginal.
+\end{corrige}

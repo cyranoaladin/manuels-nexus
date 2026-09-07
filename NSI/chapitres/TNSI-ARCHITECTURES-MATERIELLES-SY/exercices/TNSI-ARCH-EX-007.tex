@@ -1,0 +1,57 @@
+% META: {"id": "TNSI-ARCH-EX-007", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "exercice", "capacites": ["T-ARCH-04B"], "capacites_codes": ["C7"], "parcours": 2, "competences": ["analyser", "programmer", "raisonner"], "duree_min": 28, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-007.tex", "corrige_tex": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-007.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-3E6F83C1BEC7", "PEDAGOGICAL_GAP_IDS": ["GAP-3E6F83C1BEC7", "GAP-102FFED16FF5"], "CAPACITY_ID": "C7", "EXERCISE_ROLE": "DIRECT_APPLICATION", "EXERCISE_ROLES": ["DIRECT_APPLICATION", "CONTEXT_VARIATION", "REASONING"], "DIFFICULTY": 2, "AUTHORING_REASON": "aucun exercice ne portait cette capacite : le chiffrement symetrique et l'asymetrique etaient traites separement, et l'articulation des deux -- qui est tout le principe de HTTPS -- restait un paragraphe de cours a croire sur parole", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% p, q = 11, 13
+% n = p * q
+% phi = (p - 1) * (q - 1)
+% e = 7
+% d = pow(e, -1, phi)
+% assert (n, phi, d) == (143, 120, 103)
+% assert (e * d) % phi == 1
+% assert e * d == 721 == 6 * 120 + 1
+% cle_symetrique = 42
+% chiffre = pow(cle_symetrique, e, n)
+% assert chiffre == 81
+% assert pow(chiffre, d, n) == cle_symetrique
+% assert all(pow(pow(k, e, n), d, n) == k for k in (5, 42, 100))
+% assert pow(5, e, n) == 47 and pow(100, e, n) == 100
+% def chiffrer_xor(message, cle):
+%     return bytes(octet ^ cle for octet in message)
+% message = b"BONJOUR"
+% cache = chiffrer_xor(message, cle_symetrique)
+% assert cache == b"hed`e\x7fx"
+% assert chiffrer_xor(cache, cle_symetrique) == message
+% assert cache != message
+% # L'espion ne dispose que de la cle publique et du chiffre.
+% public = (n, e)
+% assert d not in public
+% assert [k for k in range(2, n) if pow(k, e, n) == chiffre] == [cle_symetrique]
+% assert n == p * q and p * q == 143
+% END-VERIFY
+\begin{exercice}{TNSI-ARCH-EX-007}{2}{28}
+Un navigateur ouvre une connexion HTTPS vers un serveur. Le serveur possède une
+paire de clés construite ainsi : deux nombres premiers $p=11$ et $q=13$, dont on
+pose $n=pq$ et $\varphi=(p-1)(q-1)$, un exposant public $e=7$, et un exposant
+privé $d$ tel que $ed\equiv 1 \pmod{\varphi}$. Le serveur publie $(n\,;\,e)$ et
+garde $d$ secret.
+
+Chiffrer un entier $m$ avec la clé publique, c'est calculer $m^e \bmod n$ ; le
+déchiffrer avec la clé privée, c'est calculer $c^d \bmod n$.
+\begin{enumerate}
+  \item Calculer $n$ et $\varphi$, puis déterminer $d$. Vérifier la relation
+    $ed\equiv 1 \pmod{\varphi}$.
+  \item Le navigateur tire au hasard une clé symétrique, ici l'entier $42$, et
+    la chiffre avec la clé publique du serveur. Calculer l'entier transmis.
+  \item Le serveur reçoit cet entier et le déchiffre avec $d$. Vérifier qu'il
+    retrouve bien $42$. Refaire la vérification pour les clés $5$ et $100$.
+  \item Les deux machines partagent maintenant un secret commun. L'utiliser
+    comme clé du chiffrement symétrique du cours pour transmettre le message
+    \lstinline{b"BONJOUR"}, puis vérifier qu'on le retrouve au déchiffrement.
+  \item Un espion capte l'entier transmis à la question~2 et connaît $n$ et $e$,
+    qui sont publics. Peut-il retrouver la clé symétrique ? Que lui faudrait-il
+    calculer, et pourquoi cela reste-t-il hors de portée avec des nombres
+    premiers de plusieurs centaines de chiffres ?
+  \item Pourquoi ne pas chiffrer \emph{toute} la communication avec la méthode
+    asymétrique, et se dispenser du chiffrement symétrique ? Donner les deux
+    raisons, l'une de coût et l'autre de nature des données à chiffrer.
+\end{enumerate}
+\end{exercice}

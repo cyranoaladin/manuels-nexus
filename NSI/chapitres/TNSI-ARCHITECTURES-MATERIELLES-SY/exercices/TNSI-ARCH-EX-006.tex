@@ -1,0 +1,56 @@
+% META: {"id": "TNSI-ARCH-EX-006", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "exercice", "capacites": ["T-ARCH-02B"], "capacites_codes": ["C3"], "parcours": 2, "competences": ["modeliser", "programmer", "raisonner"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-006.tex", "corrige_tex": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-006.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-2A556873FD17", "CAPACITY_ID": "C3", "EXERCISE_ROLE": "CONTEXT_VARIATION", "DIFFICULTY": 2, "AUTHORING_REASON": "l'ordonnancement n'etait travaille que sur deux processus abstraits avec une seule tranche, ou l'eleve deroule sans qu'aucun choix ne soit en jeu ; c'est en comparant deux tranches sur une machine reelle que la latence percue devient une grandeur", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% def tourniquet(processus, tranche):
+%     restant = dict(processus)
+%     ordre, instant, fin = [], 0, {}
+%     while any(restant[p] > 0 for p in restant):
+%         for p in processus:
+%             if restant[p] == 0:
+%                 continue
+%             duree = min(tranche, restant[p])
+%             instant = instant + duree
+%             restant[p] = restant[p] - duree
+%             ordre.append((p, duree, instant))
+%             if restant[p] == 0:
+%                 fin[p] = instant
+%     return ordre, fin
+% processus = {"compilation": 12, "telechargement": 9, "lecteur": 2}
+% assert sum(processus.values()) == 23
+% ordre6, fin6 = tourniquet(processus, 6)
+% assert len(ordre6) == 5
+% assert fin6 == {"lecteur": 14, "compilation": 20, "telechargement": 23}
+% assert ordre6[-1][2] == 23
+% ordre2, fin2 = tourniquet(processus, 2)
+% assert len(ordre2) == 12
+% assert fin2 == {"lecteur": 6, "telechargement": 21, "compilation": 23}
+% assert ordre2[-1][2] == 23
+% assert ordre6[-1][2] == ordre2[-1][2] == sum(processus.values())
+% assert fin2["lecteur"] < fin6["lecteur"]
+% assert len(ordre2) > len(ordre6)
+% assert fin6["lecteur"] - fin2["lecteur"] == 8
+% assert [p for p, _, _ in ordre2[:3]] == ["compilation", "telechargement", "lecteur"]
+% END-VERIFY
+\begin{exercice}{TNSI-ARCH-EX-006}{2}{25}
+Un poste de travail exécute trois tâches lancées dans cet ordre : une
+\lstinline{compilation} qui demande $12$ unités de temps processeur, un
+\lstinline{telechargement} qui en demande $9$, et un \lstinline{lecteur} vidéo
+qui en demande $2$. L'ordonnanceur est un tourniquet : il donne à chaque
+processus non terminé une tranche de temps, puis passe au suivant.
+\begin{enumerate}
+  \item Écrire \lstinline{tourniquet(processus, tranche)} qui renvoie la suite
+    des passages — sous forme de triplets (processus, durée accordée, instant de
+    fin de tranche) — et le dictionnaire des instants d'achèvement.
+  \item Dérouler l'ordonnancement pour une tranche de $6$. Donner la suite des
+    passages, l'instant où chaque tâche se termine, et le nombre de changements
+    de processus.
+  \item Faire de même pour une tranche de $2$.
+  \item Comparer les deux instants d'achèvement du lecteur vidéo. De combien
+    d'unités de temps l'utilisateur attend-il avant que sa vidéo démarre dans
+    chaque cas ?
+  \item Comparer les instants où \emph{l'ensemble} des tâches se termine.
+    Qu'observe-t-on, et pourquoi était-ce prévisible ?
+  \item Une tranche plus courte améliore donc le confort d'usage. Qu'est-ce qui
+    empêche de la réduire indéfiniment ? On s'appuiera sur le nombre de
+    changements de processus relevé aux questions~2 et~3.
+\end{enumerate}
+\end{exercice}

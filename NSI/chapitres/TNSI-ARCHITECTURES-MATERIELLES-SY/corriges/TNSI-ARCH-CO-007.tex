@@ -1,0 +1,77 @@
+% META: {"id": "TNSI-ARCH-CO-007", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "corrige", "exercice_ref": "TNSI-ARCH-EX-007", "capacites": ["T-ARCH-04B"], "capacites_codes": ["C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% p, q, e = 11, 13, 7
+% n, phi = p * q, (p - 1) * (q - 1)
+% assert (n, phi) == (143, 120)
+% d = pow(e, -1, phi)
+% assert d == 103 and (e * d) % phi == 1
+% assert pow(42, e, n) == 81
+% assert pow(81, d, n) == 42
+% assert pow(pow(5, e, n), d, n) == 5
+% assert pow(pow(100, e, n), d, n) == 100
+% def chiffrer_xor(message, cle):
+%     return bytes(octet ^ cle for octet in message)
+% assert chiffrer_xor(b"BONJOUR", 42) == b"hed`e\x7fx"
+% assert chiffrer_xor(chiffrer_xor(b"BONJOUR", 42), 42) == b"BONJOUR"
+% assert [k for k in range(2, n) if pow(k, e, n) == 81] == [42]
+% assert n == 143 and 11 * 13 == 143
+% assert phi == (11 - 1) * (13 - 1)
+% assert len(str(n)) == 3
+% END-VERIFY
+\begin{corrige}{TNSI-ARCH-EX-007}
+\textbf{1.} $n=11\times 13=143$ et $\varphi=10\times 12=120$. On cherche $d$ tel
+que $7d\equiv 1\pmod{120}$ : $d=103$ convient, car $7\times 103=721=6\times
+120+1$. La clé publique est donc $(143\,;\,7)$ et la clé privée $103$.
+
+Cette relation est le c\oe{}ur du procédé : c'est elle qui garantit que déchiffrer
+défait exactement ce que chiffrer a fait, autrement dit que
+$(m^e)^d\equiv m \pmod n$.
+
+\textbf{2.} L'entier transmis est $42^7 \bmod 143 = 81$. C'est ce nombre, et lui
+seul, qui circule sur le réseau.
+
+\textbf{3.} $81^{103}\bmod 143 = 42$ : le serveur retrouve la clé. La
+vérification tient aussi pour $5$, qui se chiffre en $47$ et se déchiffre en $5$,
+et pour $100$, qui se chiffre en $100$ — un point fixe, curiosité due à la
+petitesse des nombres choisis et qui disparaît avec des clés réalistes.
+
+\textbf{4.} Les deux machines partagent le secret $42$. On l'emploie comme clé du
+chiffrement symétrique :
+\begin{python}
+def chiffrer_xor(message, cle):
+    return bytes(octet ^ cle for octet in message)
+
+cache = chiffrer_xor(b"BONJOUR", 42)   # b"hed`e\x7fx"
+chiffrer_xor(cache, 42)                # b"BONJOUR"
+\end{python}
+Appliquer deux fois le \lstinline{ou exclusif} avec la même clé redonne le
+message : c'est bien un chiffrement symétrique.
+
+\textbf{5.} Non, l'espion ne peut pas. Il dispose de $81$, de $n=143$ et de
+$e=7$, mais pas de $d$. Pour obtenir $d$ il lui faudrait $\varphi$, donc
+connaître $p$ et $q$, donc \textbf{factoriser} $n$.
+
+Sur $143$, c'est l'affaire de quelques secondes — on peut même, ici, essayer les
+$141$ clés possibles et constater que $42$ est la seule dont le chiffré vaut
+$81$. Mais avec des nombres premiers de plusieurs centaines de chiffres, aucun
+algorithme connu ne factorise $n$ en un temps raisonnable, alors que le calcul
+de $m^e \bmod n$ reste immédiat. Toute la sécurité tient dans cet écart entre une
+opération facile et son inverse.
+
+\textbf{6.} Deux raisons, et les deux comptent.
+
+D'abord le \textbf{coût}. Une exponentiation modulaire sur des nombres de mille
+bits est plusieurs centaines de fois plus lente qu'un chiffrement symétrique sur
+la même quantité de données. Chiffrer ainsi une vidéo entière saturerait le
+serveur, alors que chiffrer une seule clé de quelques dizaines d'octets ne coûte
+rien.
+
+Ensuite la \textbf{nature des données}. Le chiffrement asymétrique opère sur des
+entiers plus petits que $n$ : il faudrait découper le message en blocs, et chaque
+bloc identique produirait le même chiffré, ce qui laisserait apparaître la
+structure du message. Les schémas symétriques sont conçus pour traiter des flux
+de longueur quelconque sans cette faiblesse.
+
+C'est pourquoi HTTPS combine les deux : l'asymétrique une fois, pour convenir
+d'un secret ; le symétrique ensuite, pour tout le reste de la conversation.
+\end{corrige}

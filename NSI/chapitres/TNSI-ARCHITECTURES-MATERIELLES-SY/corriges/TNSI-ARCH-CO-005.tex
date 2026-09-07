@@ -1,0 +1,114 @@
+% META: {"id": "TNSI-ARCH-CO-005", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "corrige", "exercice_ref": "TNSI-ARCH-EX-005", "capacites": ["T-ARCH-01", "T-ARCH-02A"], "capacites_codes": ["C1", "C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% fiche = {"processeurs": 8, "memoire_vive_Go": 8,
+%          "accelerateurs": ["graphique", "reseau de neurones", "signal audio"],
+%          "interfaces": ["Wi-Fi", "Bluetooth", "USB", "modem 5G"]}
+% assert 1 + 1 + len(fiche["interfaces"]) + len(fiche["accelerateurs"]) == 9
+% assert "modem 5G" in fiche["interfaces"]
+% def creer(arbre, parent, enfant):
+%     arbre = {p: list(f) for p, f in arbre.items()}
+%     arbre.setdefault(parent, [])
+%     arbre[parent].append(enfant)
+%     arbre.setdefault(enfant, [])
+%     return arbre
+% arbre = {"init": []}
+% creations = [("init", "session"), ("session", "terminal"),
+%              ("session", "navigateur"), ("navigateur", "onglet1"),
+%              ("navigateur", "onglet2")]
+% for parent, enfant in creations:
+%     arbre = creer(arbre, parent, enfant)
+% assert len(arbre) == 6 and len(creations) == 5
+% assert len(arbre) == len(creations) + 1
+% assert sorted(arbre) == ["init", "navigateur", "onglet1", "onglet2", "session", "terminal"]
+% assert arbre["session"] == ["terminal", "navigateur"]
+% assert arbre["init"] == ["session"]
+% def descendants(arbre, racine):
+%     total = 0
+%     for enfant in arbre[racine]:
+%         total = total + 1 + descendants(arbre, enfant)
+%     return total
+% assert descendants(arbre, "init") == 5
+% assert descendants(arbre, "session") == 4
+% assert descendants(arbre, "navigateur") == 2
+% assert descendants(arbre, "terminal") == 0
+% assert descendants(arbre, "init") == len(arbre) - 1
+% END-VERIFY
+\begin{corrige}{TNSI-ARCH-EX-005}
+\textbf{1.} Le classement est immédiat :
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+catégorie & éléments de la fiche \\
+\hline
+processeurs & les $8$ c\oe{}urs \\
+mémoire & les $8$~Go de mémoire vive \\
+interfaces & Wi-Fi, Bluetooth, USB, modem 5G \\
+accélérateurs & graphique, réseau de neurones, signal audio \\
+\hline
+\end{tabular}
+\end{center}
+
+En comptant les processeurs pour un composant et la mémoire pour un autre, cela
+fait $1+1+4+3=9$ composants intégrés sur une seule puce. Chacun d'eux occupait
+autrefois un circuit distinct sur une carte mère.
+
+\textbf{2.} Les trois avantages sont la \textbf{compacité} (une seule puce au
+lieu d'une carte), la \textbf{consommation énergétique réduite} (les distances
+entre composants sont très courtes, donc les pertes liées à leurs échanges le
+sont aussi) et le \textbf{coût de fabrication} (une puce produite en grande série
+revient moins cher qu'un assemblage).
+
+C'est le deuxième qui explique l'autonomie : sur une carte mère, faire circuler
+un signal du processeur vers la mémoire coûte de l'énergie proportionnellement à
+la distance parcourue, et ces échanges sont incessants. Les rapprocher de
+quelques millimètres change l'ordre de grandeur de la facture énergétique.
+
+\textbf{3.} Il faut remplacer \textbf{toute la puce}, donc en pratique changer
+le téléphone ou sa carte principale — avec les huit c\oe{}urs, les huit gigaoctets
+de mémoire et les trois accélérateurs qui fonctionnaient parfaitement. Sur
+l'ordinateur de bureau, on remplace la seule carte réseau, pour une fraction du
+prix.
+
+La propriété perdue est la \textbf{modularité} : la capacité à remplacer ou faire
+évoluer un composant indépendamment des autres. C'est le contrepoids exact des
+trois avantages, et il n'est pas mince — il pèse sur la durée de vie des
+appareils.
+
+\textbf{4.} Le dictionnaire associe à chaque processus ses enfants :
+\begin{python}
+def creer(arbre, parent, enfant):
+    arbre = {p: list(f) for p, f in arbre.items()}
+    arbre.setdefault(parent, [])
+    arbre[parent].append(enfant)
+    arbre.setdefault(enfant, [])
+    return arbre
+\end{python}
+En partant de \lstinline!{"init": []}! et en appliquant les cinq créations, on
+obtient
+\lstinline!{"init": ["session"], "session": ["terminal", "navigateur"],!
+\lstinline!"terminal": [], "navigateur": ["onglet1", "onglet2"],!
+\lstinline!"onglet1": [], "onglet2": []}!.
+
+\textbf{5.} Il y a $6$ processus pour $5$ créations : le nombre de processus
+vaut toujours le nombre de créations plus un.
+
+La raison est que chaque création ajoute \emph{exactement} un processus, et que
+le premier — \lstinline{init} — n'a été créé par personne. Tout processus autre
+que lui a un parent et un seul, ce qui fait de l'ensemble un arbre : $n$ sommets,
+$n-1$ arêtes. C'est aussi ce qui garantit qu'aucun processus n'est orphelin de
+l'arborescence.
+
+\textbf{6.} La fonction descend récursivement :
+\begin{python}
+def descendants(arbre, racine):
+    total = 0
+    for enfant in arbre[racine]:
+        total = total + 1 + descendants(arbre, enfant)
+    return total
+\end{python}
+On obtient $5$ pour \lstinline{init} — soit tous les autres processus, ce qui
+confirme la relation de la question précédente —, $2$ pour
+\lstinline{navigateur} et $0$ pour \lstinline{terminal}, qui n'a rien créé.
+Fermer le navigateur reviendrait à terminer trois processus, et non un seul.
+\end{corrige}

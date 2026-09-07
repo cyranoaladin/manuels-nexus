@@ -1,0 +1,82 @@
+% META: {"id": "TNSI-ARCH-EX-005", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "exercice", "capacites": ["T-ARCH-01", "T-ARCH-02A"], "capacites_codes": ["C1", "C2"], "parcours": 1, "competences": ["analyser", "programmer", "raisonner"], "duree_min": 22, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-005.tex", "corrige_tex": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-005.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-CBECF0CAEBF8", "PEDAGOGICAL_GAP_IDS": ["GAP-CBECF0CAEBF8", "GAP-9100FD0B50F1", "GAP-DB9AE7618264", "GAP-A037DEC9A05B"], "CAPACITY_ID": "C1", "CAPACITY_IDS": ["C1", "C2"], "EXERCISE_ROLE": "DIRECT_APPLICATION", "EXERCISE_ROLES": ["DIRECT_APPLICATION", "CONTEXT_VARIATION", "REASONING"], "DIFFICULTY": 1, "AUTHORING_REASON": "deux capacites du contrat n'avaient aucun exercice : le systeme sur puce et la creation d'un processus n'etaient que du cours a retenir, alors qu'une fiche technique se depouille et qu'un arbre de processus se compte", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% fiche = {
+%     "processeurs": 8,
+%     "memoire_vive_Go": 8,
+%     "accelerateurs": ["graphique", "reseau de neurones", "signal audio"],
+%     "interfaces": ["Wi-Fi", "Bluetooth", "USB", "modem 5G"],
+% }
+% assert fiche["processeurs"] == 8
+% assert len(fiche["accelerateurs"]) == 3
+% assert len(fiche["interfaces"]) == 4
+% assert len(fiche["accelerateurs"]) + len(fiche["interfaces"]) + 2 == 9
+% categories = ["processeurs", "memoire", "interfaces", "accelerateurs"]
+% assert len(categories) == 4
+% # Un arbre de processus : chaque creation ajoute exactement un processus.
+% def creer(arbre, parent, enfant):
+%     arbre = {p: list(f) for p, f in arbre.items()}
+%     arbre.setdefault(parent, [])
+%     arbre[parent].append(enfant)
+%     arbre.setdefault(enfant, [])
+%     return arbre
+% arbre = {"init": []}
+% for parent, enfant in [("init", "session"), ("session", "terminal"),
+%                        ("session", "navigateur"), ("navigateur", "onglet1"),
+%                        ("navigateur", "onglet2")]:
+%     arbre = creer(arbre, parent, enfant)
+% assert len(arbre) == 6
+% assert sum(len(f) for f in arbre.values()) == 5
+% assert len(arbre) == sum(len(f) for f in arbre.values()) + 1
+% assert arbre["navigateur"] == ["onglet1", "onglet2"]
+% assert arbre["onglet1"] == []
+% def descendants(arbre, racine):
+%     total = 0
+%     for enfant in arbre[racine]:
+%         total = total + 1 + descendants(arbre, enfant)
+%     return total
+% assert descendants(arbre, "init") == 5
+% assert descendants(arbre, "navigateur") == 2
+% assert descendants(arbre, "terminal") == 0
+% END-VERIFY
+\begin{exercice}{TNSI-ARCH-EX-005}{1}{22}
+\textbf{A. Une fiche technique.} Le système sur puce d'un téléphone est décrit
+ainsi :
+\begin{python}
+fiche = {
+    "processeurs": 8,
+    "memoire_vive_Go": 8,
+    "accelerateurs": ["graphique", "reseau de neurones", "signal audio"],
+    "interfaces": ["Wi-Fi", "Bluetooth", "USB", "modem 5G"],
+}
+\end{python}
+\begin{enumerate}
+  \item Classer les éléments de cette fiche dans les quatre catégories de
+    composants d'un système sur puce vues en cours. Combien de composants
+    distincts sont ainsi intégrés sur une seule puce, en comptant les
+    processeurs comme un composant et la mémoire comme un autre ?
+  \item Citer les trois avantages de cette intégration, et préciser lequel
+    explique qu'un téléphone puisse tenir une journée sur batterie.
+  \item Le modem 5G de ce téléphone tombe en panne. Que faut-il remplacer ?
+    Comparer avec un ordinateur de bureau où le module réseau est une carte
+    séparée, et nommer la propriété perdue par l'intégration.
+\end{enumerate}
+
+\medskip
+\textbf{B. Un arbre de processus.} Au démarrage, le système ne contient que le
+processus \lstinline{init}. Se succèdent ensuite les créations suivantes :
+\lstinline{init} crée \lstinline{session} ; \lstinline{session} crée
+\lstinline{terminal} puis \lstinline{navigateur} ; \lstinline{navigateur} crée
+\lstinline{onglet1} puis \lstinline{onglet2}.
+\begin{enumerate}
+  \setcounter{enumi}{3}
+  \item Représenter cette suite de créations par un dictionnaire associant à
+    chaque processus la liste de ses enfants. Écrire la fonction
+    \lstinline{creer(arbre, parent, enfant)} qui ajoute une création.
+  \item Combien de processus existent à la fin ? Combien de créations ont eu
+    lieu ? Établir la relation entre ces deux nombres et expliquer pourquoi elle
+    vaut toujours.
+  \item Écrire \lstinline{descendants(arbre, racine)} qui compte les descendants
+    d'un processus. Donner sa valeur pour \lstinline{init},
+    \lstinline{navigateur} et \lstinline{terminal}.
+\end{enumerate}
+\end{exercice}
