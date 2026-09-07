@@ -1,0 +1,41 @@
+% META: {"id": "TCOMPL-BAYES-EX-010", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "exercice", "capacites": ["TCOMPL-BAYES-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["modeliser", "calculer"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/exercices/TCOMPL-BAYES-EX-010.tex", "corrige_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/corriges/TCOMPL-BAYES-CO-010.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-7889B5827F0D", "CAPACITY_ID": "C1", "EXERCISE_ROLE": "CONTEXT_VARIATION", "DIFFICULTY": 2, "AUTHORING_REASON": "le calcul conditionnel n'etait entraine que sur un tirage d'urne, ou les probabilites se lisent directement sur l'enonce ; rien n'obligeait l'eleve a construire lui-meme la partition a partir d'une situation industrielle", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% pA, pB = Rational(3, 5), Rational(2, 5)
+% dA, dB = Rational(3, 100), Rational(7, 100)
+% assert pA + pB == 1
+% inter_A = pA * dA
+% inter_B = pB * dB
+% assert inter_A == Rational(9, 500)
+% assert inter_B == Rational(14, 500)
+% defaut = inter_A + inter_B
+% assert defaut == Rational(23, 500)
+% assert float(defaut) == 0.046
+% assert inter_B / defaut == Rational(14, 23)
+% assert abs(float(Rational(14, 23)) - 0.6087) < 0.0001
+% au_moins_une = 1 - (1 - defaut) ** 2
+% assert au_moins_une == Rational(22471, 250000)
+% assert abs(float(au_moins_une) - 0.0899) < 0.0001
+% assert pB < pA and inter_B > inter_A
+% END-VERIFY
+\begin{exercice}{TCOMPL-BAYES-EX-010}{2}{18}
+Une usine assemble un même composant sur deux lignes. La ligne $A$ fournit
+$60\,\%$ de la production et la ligne $B$ les $40\,\%$ restants. Un contrôle
+établit que $3\,\%$ des pièces issues de $A$ sont défectueuses, contre $7\,\%$
+de celles issues de $B$. On prélève une pièce au hasard dans la production
+totale. On note $A$ et $B$ les événements « la pièce vient de la ligne $A$ (resp.
+$B$) » et $D$ l'événement « la pièce est défectueuse ».
+\begin{enumerate}
+  \item Traduire l'énoncé par un arbre pondéré. Préciser quelles probabilités de
+    l'énoncé sont des probabilités conditionnelles, et sachant quoi.
+  \item Calculer $P(A\cap D)$ et $P(B\cap D)$.
+  \item En déduire $P(D)$. Donner la valeur exacte sous forme de fraction, puis
+    en pourcentage.
+  \item Le responsable qualité prélève deux pièces au hasard, indépendamment
+    l'une de l'autre. Calculer la probabilité qu'au moins l'une des deux soit
+    défectueuse.
+  \item La ligne $B$ est minoritaire dans la production. Quelle part des pièces
+    défectueuses produit-elle pourtant ? Commenter ce que ce chiffre suggère
+    pour l'ordre des priorités du responsable qualité.
+\end{enumerate}
+\end{exercice}

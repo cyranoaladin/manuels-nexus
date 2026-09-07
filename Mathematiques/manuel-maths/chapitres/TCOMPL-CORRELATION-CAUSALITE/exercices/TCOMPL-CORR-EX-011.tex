@@ -1,0 +1,34 @@
+% META: {"id": "TCOMPL-CORR-EX-011", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "exercice", "capacites": ["TCOMPL-CORR-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-011.tex", "corrige_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-011.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-FE0BA83A1C09", "CAPACITY_ID": "C4", "EXERCISE_ROLE": "DIRECT_APPLICATION", "DIFFICULTY": 1, "AUTHORING_REASON": "les deux enonces existants lisent tous deux la droite dans le sens x vers y et se terminent sur la meme question de fiabilite ; aucun ne demande le calcul inverse, qui est pourtant l'usage le plus frequent d'un ajustement", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, solve, Eq, Interval, oo
+% x = symbols('x')
+% ajustement = Rational(-18, 10) * x + Rational(964, 10)
+% assert ajustement.subs(x, Rational(75, 10)) == Rational(829, 10)
+% cible = solve(Eq(ajustement, 70), x)
+% assert cible == [Rational(44, 3)]
+% assert abs(float(cible[0]) - 14.6667) < 0.001
+% seuil = solve(ajustement - 80 >= 0, x).as_set()
+% assert seuil == Interval(-oo, Rational(82, 9))
+% assert seuil.sup == Rational(82, 9)
+% assert abs(float(Rational(82, 9)) - 9.1111) < 0.001
+% assert 2 <= Rational(44, 3) <= 20
+% END-VERIFY
+\begin{exercice}{TCOMPL-CORR-EX-011}{1}{12}
+Le rendement $y$ d'une batterie, en pourcentage de sa capacité initiale, est
+ajusté en fonction du nombre $x$ de cycles de charge (en centaines) par
+\[
+  y=-1{,}8x+96{,}4,
+\]
+ajustement établi pour $x$ compris entre $2$ et $20$.
+\begin{enumerate}
+  \item Calculer le rendement estimé après $750$ cycles.
+  \item Le constructeur garantit la batterie tant que son rendement dépasse
+    $80\,\%$. Résoudre $-1{,}8x+96{,}4\geqslant 80$ et traduire le résultat en
+    nombre de cycles.
+  \item Déterminer, par le calcul, le nombre de cycles pour lequel le rendement
+    estimé vaut exactement $70\,\%$. Donner la valeur exacte puis un arrondi à
+    l'unité près en cycles.
+  \item Cette dernière valeur relève-t-elle de l'interpolation ou de
+    l'extrapolation ? Justifier en la comparant à la plage d'ajustement.
+\end{enumerate}
+\end{exercice}

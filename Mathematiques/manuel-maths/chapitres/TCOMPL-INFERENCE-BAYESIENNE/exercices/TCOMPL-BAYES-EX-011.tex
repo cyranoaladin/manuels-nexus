@@ -1,0 +1,37 @@
+% META: {"id": "TCOMPL-BAYES-EX-011", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "exercice", "capacites": ["TCOMPL-BAYES-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/exercices/TCOMPL-BAYES-EX-011.tex", "corrige_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/corriges/TCOMPL-BAYES-CO-011.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-9AAE42D252F3", "CAPACITY_ID": "C3", "EXERCISE_ROLE": "DIRECT_APPLICATION", "DIFFICULTY": 1, "AUTHORING_REASON": "les deux enonces existants font distinguer les deux conditionnelles par le discours seul ; aucun ne fait CALCULER les deux nombres sur les memes donnees, alors que c'est en les voyant differer que la distinction devient un fait et non une consigne", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% total, dp, ext = 500, 300, 200
+% assert dp + ext == total
+% sport_dp, sport_ext = 180, 60
+% sport = sport_dp + sport_ext
+% assert sport == 240
+% p_D = Rational(dp, total)
+% p_S = Rational(sport, total)
+% p_DS = Rational(sport_dp, total)
+% assert p_D == Rational(3, 5) and p_S == Rational(12, 25) and p_DS == Rational(9, 25)
+% p_S_sachant_D = p_DS / p_D
+% p_D_sachant_S = p_DS / p_S
+% assert p_S_sachant_D == Rational(3, 5) and p_S_sachant_D == Rational(sport_dp, dp)
+% assert p_D_sachant_S == Rational(3, 4) and p_D_sachant_S == Rational(sport_dp, sport)
+% assert p_S_sachant_D != p_D_sachant_S
+% assert (p_S_sachant_D == p_D_sachant_S) == (p_D == p_S)
+% END-VERIFY
+\begin{exercice}{TCOMPL-BAYES-EX-011}{1}{12}
+Un lycée compte $500$ élèves, dont $300$ demi-pensionnaires et $200$ externes.
+Parmi les demi-pensionnaires, $180$ pratiquent un sport en club ; parmi les
+externes, $60$. On choisit un élève au hasard et on note $D$ l'événement « l'élève
+est demi-pensionnaire » et $S$ l'événement « l'élève pratique un sport en club ».
+\begin{enumerate}
+  \item Dresser le tableau croisé des effectifs, puis calculer $P(D)$, $P(S)$ et
+    $P(D\cap S)$.
+  \item Calculer $P_D(S)$ de deux façons : directement sur les effectifs, puis
+    par la formule $P_D(S)=\dfrac{P(D\cap S)}{P(D)}$.
+  \item Calculer de même $P_S(D)$.
+  \item Les deux nombres obtenus sont différents. Lequel répond à la question
+    « on croise un sportif du club : quelle chance qu'il déjeune à la cantine ? »
+  \item À quelle condition sur $P(D)$ et $P(S)$ ces deux probabilités
+    conditionnelles seraient-elles égales ? Vérifier que cette condition n'est
+    pas remplie ici.
+\end{enumerate}
+\end{exercice}

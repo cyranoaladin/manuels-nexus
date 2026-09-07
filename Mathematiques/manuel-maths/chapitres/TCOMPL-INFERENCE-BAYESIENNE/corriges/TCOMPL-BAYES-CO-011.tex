@@ -1,0 +1,63 @@
+% META: {"id": "TCOMPL-BAYES-CO-011", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "corrige", "exercice_ref": "TCOMPL-BAYES-EX-011", "capacites_codes": ["C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% total = 500
+% sport_dp, sport_ext, dp, ext = 180, 60, 300, 200
+% assert dp + ext == total
+% assert sport_dp + sport_ext == 240
+% assert dp - sport_dp == 120 and ext - sport_ext == 140
+% assert (dp - sport_dp) + (ext - sport_ext) == 260
+% p_D, p_S = Rational(dp, total), Rational(240, total)
+% p_DS = Rational(sport_dp, total)
+% assert p_D == Rational(3, 5) and p_S == Rational(12, 25) and p_DS == Rational(9, 25)
+% assert p_DS / p_D == Rational(3, 5) == Rational(180, 300)
+% assert p_DS / p_S == Rational(3, 4) == Rational(180, 240)
+% assert float(p_DS / p_D) == 0.6 and float(p_DS / p_S) == 0.75
+% assert p_D != p_S
+% assert (p_DS / p_D) * p_D == (p_DS / p_S) * p_S == p_DS
+% END-VERIFY
+\begin{corrige}{TCOMPL-BAYES-EX-011}
+\textbf{1.} Le tableau croisé s'obtient par différences :
+
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+ & sport en club & pas de sport & total \\
+\hline
+demi-pensionnaires & $180$ & $120$ & $300$ \\
+externes & $60$ & $140$ & $200$ \\
+\hline
+total & $240$ & $260$ & $500$ \\
+\hline
+\end{tabular}
+\end{center}
+
+D'où $P(D)=\dfrac{300}{500}=\dfrac35$, $P(S)=\dfrac{240}{500}=\dfrac{12}{25}$ et
+$P(D\cap S)=\dfrac{180}{500}=\dfrac{9}{25}$.
+
+\textbf{2.} Sur les effectifs, on se restreint à la ligne des
+demi-pensionnaires : $P_D(S)=\dfrac{180}{300}=\dfrac35=0{,}6$. Par la formule :
+\[
+  P_D(S)=\dfrac{P(D\cap S)}{P(D)}=\dfrac{9/25}{3/5}=\dfrac{9}{25}\times\dfrac53=\dfrac35.
+\]
+Les deux chemins donnent le même nombre, ce qui est attendu : diviser par
+$P(D)$, c'est exactement se restreindre à la ligne $D$.
+
+\textbf{3.} Cette fois on se restreint à la colonne des sportifs :
+\[
+  P_S(D)=\dfrac{180}{240}=\dfrac34=0{,}75
+  \qquad\text{et}\qquad
+  P_S(D)=\dfrac{P(D\cap S)}{P(S)}=\dfrac{9/25}{12/25}=\dfrac34.
+\]
+
+\textbf{4.} La question part de l'information « c'est un sportif du club » : on
+conditionne donc par $S$. La réponse est $P_S(D)=0{,}75$, et non $P_D(S)=0{,}6$.
+Les deux fractions ont le même numérateur, $180$ élèves, mais pas le même
+dénominateur : $300$ pour l'une, $240$ pour l'autre.
+
+\textbf{5.} On a $P_D(S)=\dfrac{P(D\cap S)}{P(D)}$ et
+$P_S(D)=\dfrac{P(D\cap S)}{P(S)}$ : ces deux quotients ont le même numérateur,
+donc ils sont égaux si et seulement si $P(D)=P(S)$. Ici $P(D)=0{,}6$ et
+$P(S)=0{,}48$ : la condition n'est pas remplie, et l'écart entre $0{,}6$ et
+$0{,}75$ ne fait que refléter celui-là.
+\end{corrige}

@@ -1,0 +1,45 @@
+% META: {"id": "TCOMPL-MF-EX-011", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "exercice", "capacites": ["TCOMPL-MF-C6"], "capacites_codes": ["C6"], "methodes": ["M6"], "parcours": 2, "competences": ["representer", "calculer", "raisonner"], "duree_min": 22, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-011.tex", "corrige_tex": "chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-011.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-3C9D7BB4136C", "CAPACITY_ID": "C6", "EXERCISE_ROLE": "CONTEXT_VARIATION", "DIFFICULTY": 2, "AUTHORING_REASON": "le point moyen n'etait calcule que pour lui-meme, sur une liste de couples hors contexte ; rien ne montrait a quoi il sert, alors que c'est le point par lequel tout ajustement affine doit passer", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, Point2D, symbols, Eq, solve, simplify
+% xs = [2, 5, 8, 11, 14, 20]
+% ys = [310, 266, 240, 196, 158, 90]
+% assert len(xs) == len(ys) == 6
+% assert sum(xs) == 60 and sum(ys) == 1260
+% xbar, ybar = Rational(sum(xs), 6), Rational(sum(ys), 6)
+% assert xbar == 10 and ybar == 210
+% g1 = Point2D(Rational(sum(xs[:3]), 3), Rational(sum(ys[:3]), 3))
+% g2 = Point2D(Rational(sum(xs[3:]), 3), Rational(sum(ys[3:]), 3))
+% assert g1 == Point2D(5, 272) and g2 == Point2D(15, 148)
+% assert Point2D(xbar, ybar) == g1.midpoint(g2)
+% pente = (g2.y - g1.y) / (g2.x - g1.x)
+% assert pente == Rational(-62, 5)
+% x = symbols('x')
+% droite = pente * (x - xbar) + ybar
+% assert simplify(droite - (Rational(-62, 5) * x + 334)) == 0
+% assert droite.subs(x, 10) == 210
+% assert droite.subs(x, 17) == Rational(616, 5)
+% assert float(droite.subs(x, 17)) == 123.2
+% assert droite.subs(x, g1.x) == g1.y and droite.subs(x, g2.x) == g2.y
+% END-VERIFY
+\begin{exercice}{TCOMPL-MF-EX-011}{2}{22}
+Un gestionnaire d'immeuble relève, pour six mois de l'année, la température
+moyenne extérieure $x_i$ (en degrés Celsius) et la consommation de chauffage
+$y_i$ (en kilowattheures par logement) :
+\[
+  (2,310),\ (5,266),\ (8,240),\ (11,196),\ (14,158),\ (20,90).
+\]
+\begin{enumerate}
+  \item Représenter le nuage de points dans un repère, en prenant $1$~cm pour
+    $2\,^\circ$C en abscisse et $1$~cm pour $40$~kWh en ordonnée.
+  \item Calculer les coordonnées du point moyen $G$ et le placer sur le graphique.
+  \item On partage le nuage en deux groupes de trois points, dans l'ordre des
+    abscisses croissantes. Calculer les points moyens $G_1$ et $G_2$ de ces deux
+    groupes. Vérifier que $G$ est le milieu de $[G_1G_2]$, et expliquer pourquoi
+    ce n'est pas un hasard ici.
+  \item Déterminer une équation de la droite $(G_1G_2)$, appelée droite de Mayer.
+    Vérifier qu'elle passe par $G$.
+  \item Estimer la consommation pour une température moyenne de $17\,^\circ$C.
+  \item Le gestionnaire propose une autre droite d'ajustement, d'équation
+    $y=-13x+340$. Passe-t-elle par $G$ ? Que peut-on en dire ?
+\end{enumerate}
+\end{exercice}

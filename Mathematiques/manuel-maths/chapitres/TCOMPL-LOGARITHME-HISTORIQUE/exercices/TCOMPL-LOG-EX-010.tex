@@ -1,0 +1,43 @@
+% META: {"id": "TCOMPL-LOG-EX-010", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "exercice", "capacites": ["TCOMPL-LOG-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/exercices/TCOMPL-LOG-EX-010.tex", "corrige_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/corriges/TCOMPL-LOG-CO-010.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-8431BEDAC51A", "CAPACITY_ID": "C1", "EXERCISE_ROLE": "CONTEXT_VARIATION", "DIFFICULTY": 2, "AUTHORING_REASON": "la reciprocite entre ln et exp n'etait rencontree que comme une regle de calcul sur des equations nues ; aucun enonce ne la faisait servir a ce a quoi elle sert, inverser un modele pour lire un temps a partir d'une grandeur observee", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, log, diff, limit, solve, Eq, simplify, oo, Rational, N
+% t, c = symbols('t c', positive=True)
+% concentration = 12 * exp(-t / 4)
+% assert concentration.subs(t, 0) == 12
+% instants = solve(Eq(concentration, 3), t)
+% assert len(instants) == 1
+% assert simplify(instants[0] - 8 * log(2)) == 0
+% assert simplify(instants[0] - 4 * log(4)) == 0
+% assert abs(N(instants[0]) - 5.5452) < 0.0001
+% assert limit(concentration, t, oo) == 0
+% reciproque = 4 * log(12 / c)
+% assert simplify(reciproque.subs(c, concentration) - t) == 0
+% assert simplify(concentration.subs(t, reciproque) - c) == 0
+% derivee = diff(concentration, t)
+% assert simplify(derivee + 3 * exp(-t / 4)) == 0
+% assert simplify(derivee.subs(t, 8 * log(2)) + Rational(3, 4)) == 0
+% assert simplify(diff(reciproque, c) + 4 / c) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-LOG-EX-010}{2}{20}
+Après l'injection d'une dose unique, la concentration d'un médicament dans le
+sang, en milligrammes par litre, est modélisée pour $t\geqslant 0$ (en heures) par
+\[
+  c(t)=12\,\mathrm{e}^{-t/4}.
+\]
+Le médicament n'est plus considéré comme actif en dessous de $3$~mg/L.
+\begin{enumerate}
+  \item Quelle est la concentration à l'instant de l'injection ?
+  \item Déterminer l'instant $t$ où la concentration atteint $3$~mg/L. Donner la
+    valeur exacte à l'aide du logarithme népérien, puis un arrondi à la minute.
+  \item Déterminer $\displaystyle\lim_{t\to+\infty}c(t)$ et dire ce que cette
+    limite signifie pour le patient.
+  \item Exprimer $t$ en fonction de $c$ pour $0<c\leqslant 12$. Quelle fonction
+    obtient-on ? Vérifier qu'en composant les deux expressions dans un sens puis
+    dans l'autre on retrouve bien $t$, puis $c$.
+  \item Calculer $c'(t)$, puis la valeur de $c'$ à l'instant trouvé à la
+    question~2. Interpréter le signe et l'ordre de grandeur du résultat.
+  \item Sans calcul, expliquer pourquoi les courbes représentatives de
+    $t\mapsto c(t)$ et de $c\mapsto t(c)$ sont symétriques par rapport à la
+    droite d'équation $y=x$.
+\end{enumerate}
+\end{exercice}

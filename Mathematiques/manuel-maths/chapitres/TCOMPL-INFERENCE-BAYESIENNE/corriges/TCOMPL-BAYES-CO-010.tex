@@ -1,0 +1,56 @@
+% META: {"id": "TCOMPL-BAYES-CO-010", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "corrige", "exercice_ref": "TCOMPL-BAYES-EX-010", "capacites_codes": ["C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% pA, pB = Rational(3, 5), Rational(2, 5)
+% dA, dB = Rational(3, 100), Rational(7, 100)
+% inter_A, inter_B = pA * dA, pB * dB
+% assert inter_A == Rational(9, 500) and float(inter_A) == 0.018
+% assert inter_B == Rational(14, 500) and float(inter_B) == 0.028
+% defaut = inter_A + inter_B
+% assert defaut == Rational(23, 500) and float(defaut) == 0.046
+% assert 1 - defaut == Rational(477, 500)
+% au_moins_une = 1 - (1 - defaut) ** 2
+% assert au_moins_une == Rational(22471, 250000)
+% assert abs(float(au_moins_une) - 0.089884) < 1e-6
+% part_B = inter_B / defaut
+% assert part_B == Rational(14, 23)
+% assert abs(float(part_B) - 0.608695) < 1e-6
+% assert part_B > Rational(1, 2)
+% END-VERIFY
+\begin{corrige}{TCOMPL-BAYES-EX-010}
+\textbf{1.} L'arbre a deux niveaux. Au premier, deux branches : $A$ pondérée par
+$P(A)=0{,}6$ et $B$ pondérée par $P(B)=0{,}4$. Au second, sous chaque branche,
+$D$ et $\overline{D}$. Les taux de défaut sont des probabilités
+\emph{conditionnelles} : $P_A(D)=0{,}03$ se lit « sachant que la pièce vient de
+$A$ », et $P_B(D)=0{,}07$ « sachant qu'elle vient de $B$ ». Ce ne sont pas des
+probabilités d'intersection.
+
+\textbf{2.} En multipliant le long des branches :
+\[
+  P(A\cap D)=0{,}6\times 0{,}03=0{,}018=\dfrac{9}{500},
+  \qquad
+  P(B\cap D)=0{,}4\times 0{,}07=0{,}028=\dfrac{14}{500}.
+\]
+
+\textbf{3.} Les événements $A$ et $B$ forment une partition, donc par la formule
+des probabilités totales
+\[
+  P(D)=P(A\cap D)+P(B\cap D)=\dfrac{9}{500}+\dfrac{14}{500}=\dfrac{23}{500}=0{,}046,
+\]
+soit $4{,}6\,\%$ de pièces défectueuses.
+
+\textbf{4.} Les deux prélèvements sont indépendants, donc la probabilité
+qu'aucune ne soit défectueuse vaut $(1-0{,}046)^2=0{,}954^2$. D'où
+\[
+  P(\text{au moins une défectueuse})=1-0{,}954^2=\dfrac{22\,471}{250\,000}\approx 0{,}090.
+\]
+
+\textbf{5.} Parmi les pièces défectueuses, la part venant de $B$ vaut
+\[
+  \dfrac{P(B\cap D)}{P(D)}=\dfrac{14/500}{23/500}=\dfrac{14}{23}\approx 60{,}9\,\%.
+\]
+La ligne $B$ ne fournit que $40\,\%$ de la production mais près de $61\,\%$ des
+défauts : c'est elle qu'il faut régler en priorité. Le renversement vient de ce
+que le taux de défaut de $B$ est plus de deux fois celui de $A$, ce qui compense
+largement sa part de production plus faible.
+\end{corrige}

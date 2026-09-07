@@ -1,0 +1,57 @@
+% META: {"id": "TCOMPL-MF-CO-011", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-MF-EX-011", "capacites_codes": ["C6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, Point2D, symbols, simplify
+% xs = [2, 5, 8, 11, 14, 20]
+% ys = [310, 266, 240, 196, 158, 90]
+% xbar, ybar = Rational(sum(xs), 6), Rational(sum(ys), 6)
+% assert (xbar, ybar) == (10, 210)
+% g1 = Point2D(Rational(sum(xs[:3]), 3), Rational(sum(ys[:3]), 3))
+% g2 = Point2D(Rational(sum(xs[3:]), 3), Rational(sum(ys[3:]), 3))
+% assert (g1.x, g1.y) == (5, 272) and (g2.x, g2.y) == (15, 148)
+% assert g1.midpoint(g2) == Point2D(xbar, ybar)
+% x = symbols('x')
+% mayer = Rational(-62, 5) * x + 334
+% assert mayer.subs(x, 5) == 272 and mayer.subs(x, 15) == 148
+% assert mayer.subs(x, 10) == 210
+% assert mayer.subs(x, 17) == Rational(616, 5) and float(mayer.subs(x, 17)) == 123.2
+% autre = -13 * x + 340
+% assert autre.subs(x, 10) == 210
+% assert simplify(autre - mayer) != 0
+% assert autre.subs(x, 17) == 119
+% END-VERIFY
+\begin{corrige}{TCOMPL-MF-EX-011}
+\textbf{1.} Le nuage descend régulièrement de gauche à droite : plus il fait
+doux, moins on chauffe. Les six points sont proches d'une droite, ce qui rend
+un ajustement affine légitime.
+
+\textbf{2.} On a $\bar x=\dfrac{2+5+8+11+14+20}{6}=\dfrac{60}{6}=10$ et
+$\bar y=\dfrac{310+266+240+196+158+90}{6}=\dfrac{1260}{6}=210$. Donc
+$G(10\,;\,210)$.
+
+\textbf{3.} Pour les trois premiers points,
+$G_1\left(\dfrac{2+5+8}{3}\,;\,\dfrac{310+266+240}{3}\right)=G_1(5\,;\,272)$ ; pour
+les trois derniers, $G_2\left(\dfrac{11+14+20}{3}\,;\,\dfrac{196+158+90}{3}\right)=G_2(15\,;\,148)$.
+Le milieu de $[G_1G_2]$ a pour coordonnées
+$\left(\dfrac{5+15}{2}\,;\,\dfrac{272+148}{2}\right)=(10\,;\,210)$ : c'est bien $G$.
+Ce n'est pas un hasard : les deux groupes ont le \emph{même effectif}, donc la
+moyenne générale est la moyenne des deux moyennes partielles. Avec des groupes
+de tailles différentes, $G$ serait sur $[G_1G_2]$ mais pas en son milieu.
+
+\textbf{4.} La pente de $(G_1G_2)$ vaut
+$\dfrac{148-272}{15-5}=\dfrac{-124}{10}=-12{,}4$. La droite passe par
+$G_1(5\,;\,272)$, donc
+\[
+  y=-12{,}4(x-5)+272=-12{,}4x+334.
+\]
+Pour $x=10$ : $-124+334=210$. Elle passe bien par $G$, ce qui était acquis
+puisque $G$ appartient à $[G_1G_2]$.
+
+\textbf{5.} Pour $x=17$ : $-12{,}4\times 17+334=-210{,}8+334=123{,}2$~kWh.
+
+\textbf{6.} Pour $x=10$ : $-13\times 10+340=210$. Cette droite passe donc elle
+aussi par $G$, tout en étant différente de la droite de Mayer — elle donne
+$119$~kWh à $17\,^\circ$C au lieu de $123{,}2$. Passer par le point moyen est une
+condition \emph{nécessaire} pour un ajustement affine raisonnable, jamais une
+condition suffisante : une infinité de droites passent par $G$, et c'est un
+autre critère — celui des moindres carrés — qui en désigne une seule.
+\end{corrige}

@@ -1,0 +1,46 @@
+% META: {"id": "TCOMPL-AIR-EX-011", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "exercice", "capacites": ["TCOMPL-AIR-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-011.tex", "corrige_tex": "chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-011.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-89B5BD878115", "CAPACITY_ID": "C4", "EXERCISE_ROLE": "CONTEXT_VARIATION", "DIFFICULTY": 2, "AUTHORING_REASON": "la reconnaissance des formes usuelles n'etait entrainee que sur des fonctions nues ; aucun enonce ne demandait de la mobiliser dans une situation ou la primitive represente une grandeur cumulee", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, exp, log, simplify, Rational, N, integrate
+% t = symbols('t', nonnegative=True)
+% d = 6 * t / (t ** 2 + 4) + 2 * exp(-t / 2)
+% D = 3 * log(t ** 2 + 4) - 4 * exp(-t / 2)
+% assert simplify(diff(D, t) - d) == 0
+% masse = (D.subs(t, 5) - D.subs(t, 0)).simplify()
+% assert simplify(masse - (3 * log(Rational(29, 4)) + 4 - 4 * exp(Rational(-5, 2)))) == 0
+% assert abs(N(masse) - 9.6) < 0.05
+% expo_debut = integrate(2 * exp(-t / 2), (t, 0, 5))
+% expo_fin = integrate(2 * exp(-t / 2), (t, 5, 10))
+% assert simplify(expo_debut - (4 - 4 * exp(Rational(-5, 2)))) == 0
+% assert simplify(expo_fin - (4 * exp(Rational(-5, 2)) - 4 * exp(-5))) == 0
+% assert N(expo_debut) > 12 * N(expo_fin)
+% assert abs(N(expo_fin) - 0.3014) < 0.001
+% ratio_debut = integrate(6 * t / (t ** 2 + 4), (t, 0, 5))
+% ratio_fin = integrate(6 * t / (t ** 2 + 4), (t, 5, 10))
+% assert simplify(ratio_debut - 3 * log(Rational(29, 4))) == 0
+% assert simplify(ratio_fin - 3 * log(Rational(104, 29))) == 0
+% assert N(ratio_fin) > N(ratio_debut) / 2
+% assert abs(N(ratio_debut) - 5.9430) < 0.001
+% assert abs(N(ratio_fin) - 3.8314) < 0.001
+% END-VERIFY
+\begin{exercice}{TCOMPL-AIR-EX-011}{2}{20}
+Une station d'épuration mesure le débit de polluant rejeté dans une rivière. Sur
+l'intervalle $[0\,;\,10]$, ce débit, en grammes par heure, est modélisé par
+\[
+  d(t)=\dfrac{6t}{t^2+4}+2\,\mathrm{e}^{-t/2}.
+\]
+La masse rejetée entre deux instants est l'intégrale du débit sur cet intervalle.
+\begin{enumerate}
+  \item Chacun des deux termes de $d$ est de la forme $\dfrac{u'}{u}$ ou $u'\mathrm{e}^{u}$.
+    Préciser la fonction $u$ dans chaque cas, sans calculer encore de primitive.
+  \item En déduire une primitive $D$ de $d$ sur $[0\,;\,10]$.
+  \item Calculer la masse rejetée pendant les cinq premières heures. Donner la
+    valeur exacte, puis une valeur approchée au dixième de gramme.
+  \item L'exploitant affirme : « après cinq heures, le terme exponentiel ne
+    contribue presque plus au rejet ». Comparer la masse due au seul terme
+    $2\mathrm{e}^{-t/2}$ sur $[0\,;\,5]$ et sur $[5\,;\,10]$, puis dire si
+    l'affirmation est justifiée.
+  \item Le terme $\dfrac{6t}{t^2+4}$ se comporte-t-il de la même façon ? Comparer
+    de même sa contribution sur les deux intervalles et conclure sur ce que
+    l'exploitant aurait dû préciser.
+\end{enumerate}
+\end{exercice}

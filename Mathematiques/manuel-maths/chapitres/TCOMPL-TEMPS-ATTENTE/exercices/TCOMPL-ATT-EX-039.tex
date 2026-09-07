@@ -1,0 +1,45 @@
+% META: {"id": "TCOMPL-ATT-EX-039", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "exercice", "capacites": ["TCOMPL-ATT-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner"], "duree_min": 22, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-039.tex", "corrige_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-039.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-92E5B8694173", "CAPACITY_ID": "C5", "EXERCISE_ROLE": "CONTEXT_VARIATION", "DIFFICULTY": 2, "AUTHORING_REASON": "la verification n'etait demandee que sur une densite exponentielle, ou l'eleve reconnait un resultat de cours au lieu de verifier quoi que ce soit ; sur une densite qui n'est pas au programme comme loi usuelle, les deux conditions doivent etre etablies pour de bon", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational, solve, Eq, exp, N, root, simplify
+% t, k = symbols('t k', positive=True)
+% masse = integrate(k * t ** 2, (t, 0, 4))
+% assert simplify(masse - Rational(64, 3) * k) == 0
+% valeur_k = solve(Eq(masse, 1), k)
+% assert valeur_k == [Rational(3, 64)]
+% f = Rational(3, 64) * t ** 2
+% assert integrate(f, (t, 0, 4)) == 1
+% assert integrate(f, (t, 0, 2)) == Rational(1, 8)
+% assert integrate(f, (t, 1, 3)) == Rational(13, 32)
+% F = integrate(Rational(3, 64) * symbols('u') ** 2, (symbols('u'), 0, t))
+% assert simplify(F - t ** 3 / 64) == 0
+% mediane = solve(Eq(t ** 3 / 64, Rational(1, 2)), t)
+% assert len(mediane) == 1 and simplify(mediane[0] ** 3 - 32) == 0
+% assert abs(N(mediane[0]) - 3.1748) < 0.0001
+% esperance = integrate(t * f, (t, 0, 4))
+% assert esperance == 3
+% expo = 1 - exp(Rational(-2, 3))
+% assert abs(N(expo) - 0.4866) < 0.0001
+% assert N(expo) > 3 * N(Rational(1, 8))
+% END-VERIFY
+\begin{exercice}{TCOMPL-ATT-EX-039}{2}{22}
+Un service de maintenance relève la durée $X$, en heures, de ses interventions
+sur site. Aucune intervention ne dépasse $4$~heures. Les techniciens proposent de
+modéliser $X$ par la densité
+\[
+  f(t)=k\,t^2 \quad\text{pour } t\in[0\,;\,4], \qquad f(t)=0 \text{ ailleurs},
+\]
+où $k$ est un réel à déterminer.
+\begin{enumerate}
+  \item Déterminer $k$ pour que $f$ soit une densité de probabilité. Les deux
+    conditions à vérifier devront être énoncées explicitement.
+  \item Calculer $P(X\leqslant 2)$ puis $P(1\leqslant X\leqslant 3)$.
+  \item Déterminer la fonction de répartition $F$ de $X$ sur $[0\,;\,4]$.
+  \item En déduire la durée médiane d'une intervention, à $0{,}01$~h près.
+  \item Calculer l'espérance de $X$ et l'interpréter.
+  \item Le responsable envisageait au départ une loi exponentielle de même
+    espérance, c'est-à-dire de paramètre $\lambda=\tfrac13$. Avec ce second
+    modèle, la probabilité qu'une intervention dure moins de deux heures vaut
+    $1-\mathrm{e}^{-2/3}$. Comparer avec la valeur trouvée à la question~2, et
+    dire ce que chacun des deux modèles suppose sur les interventions courtes.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,44 @@
+% META: {"id": "TCOMPL-CORR-CO-011", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "corrige", "exercice_ref": "TCOMPL-CORR-EX-011", "capacites_codes": ["C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, solve, Eq, Interval, oo, nsimplify
+% x = symbols('x')
+% ajustement = Rational(-18, 10) * x + Rational(964, 10)
+% assert ajustement.subs(x, Rational(75, 10)) == Rational(829, 10)
+% seuil = solve(ajustement - 80 >= 0, x).as_set()
+% assert seuil == Interval(-oo, Rational(82, 9))
+% assert abs(float(Rational(82, 9)) - 9.1111) < 0.0001
+% assert round(float(Rational(82, 9)) * 100) == 911
+% cible = solve(Eq(ajustement, 70), x)
+% assert cible == [Rational(44, 3)]
+% assert round(float(cible[0]) * 100) == 1467
+% assert 2 <= Rational(44, 3) <= 20
+% assert ajustement.subs(x, Rational(44, 3)) == 70
+% END-VERIFY
+\begin{corrige}{TCOMPL-CORR-EX-011}
+\textbf{1.} $750$ cycles correspondent à $x=7{,}5$. Le rendement estimé vaut
+\[
+  -1{,}8\times 7{,}5+96{,}4=-13{,}5+96{,}4=82{,}9\,\%.
+\]
+
+\textbf{2.} On résout
+\[
+  -1{,}8x+96{,}4\geqslant 80
+  \iff -1{,}8x\geqslant -16{,}4
+  \iff x\leqslant \dfrac{16{,}4}{1{,}8}=\dfrac{82}{9}\approx 9{,}11.
+\]
+On divise par $-1{,}8$, qui est négatif : le sens de l'inégalité change. La
+garantie porte donc sur les $911$ premiers cycles environ.
+
+\textbf{3.} On résout cette fois une égalité :
+\[
+  -1{,}8x+96{,}4=70 \iff 1{,}8x=26{,}4 \iff x=\dfrac{26{,}4}{1{,}8}=\dfrac{44}{3}.
+\]
+Soit $x\approx 14{,}67$ centaines de cycles, c'est-à-dire environ $1\,467$ cycles.
+
+\textbf{4.} L'ajustement a été établi pour $x\in[2\,;\,20]$, et
+$\dfrac{44}{3}\approx 14{,}67$ appartient à cet intervalle : il s'agit d'une
+\emph{interpolation}. L'estimation reste dans le domaine où le modèle a été
+construit, elle est donc défendable — au contraire de ce qu'on obtiendrait en
+cherchant à quel moment le rendement s'annulerait, qui vaudrait
+$x\approx 53{,}6$, très au-delà de la plage observée.
+\end{corrige}

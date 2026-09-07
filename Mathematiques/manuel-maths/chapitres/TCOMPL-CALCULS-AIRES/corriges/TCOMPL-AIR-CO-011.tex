@@ -1,0 +1,57 @@
+% META: {"id": "TCOMPL-AIR-CO-011", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "corrige", "exercice_ref": "TCOMPL-AIR-EX-011", "capacites_codes": ["C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, exp, log, simplify, Rational, N, integrate
+% t = symbols('t', nonnegative=True)
+% d = 6 * t / (t ** 2 + 4) + 2 * exp(-t / 2)
+% D = 3 * log(t ** 2 + 4) - 4 * exp(-t / 2)
+% assert simplify(diff(D, t) - d) == 0
+% masse = simplify(D.subs(t, 5) - D.subs(t, 0))
+% assert simplify(masse - (3 * log(Rational(29, 4)) + 4 - 4 * exp(Rational(-5, 2)))) == 0
+% assert abs(N(masse) - 9.6147) < 0.001
+% expo_debut = integrate(2 * exp(-t / 2), (t, 0, 5))
+% expo_fin = integrate(2 * exp(-t / 2), (t, 5, 10))
+% assert abs(N(expo_debut) - 3.6717) < 0.001
+% assert abs(N(expo_fin) - 0.3014) < 0.001
+% assert N(expo_debut) > 12 * N(expo_fin)
+% ratio_debut = integrate(6 * t / (t ** 2 + 4), (t, 0, 5))
+% ratio_fin = integrate(6 * t / (t ** 2 + 4), (t, 5, 10))
+% assert abs(N(ratio_debut) - 5.9430) < 0.001
+% assert abs(N(ratio_fin) - 3.8314) < 0.001
+% assert N(ratio_fin) > N(ratio_debut) / 2
+% assert abs(N(expo_debut + ratio_debut) - N(masse)) < 1e-9
+% END-VERIFY
+\begin{corrige}{TCOMPL-AIR-EX-011}
+\textbf{1.} Pour le premier terme, on pose $u(t)=t^2+4$, de sorte que
+$u'(t)=2t$ et $\dfrac{6t}{t^2+4}=3\,\dfrac{u'(t)}{u(t)}$. Pour le second, on pose
+$u(t)=-\dfrac{t}{2}$, de sorte que $u'(t)=-\dfrac12$ et
+$2\mathrm{e}^{-t/2}=-4\,u'(t)\mathrm{e}^{u(t)}$.
+
+\textbf{2.} Comme $u(t)=t^2+4>0$ sur $[0\,;\,10]$, une primitive de
+$3\dfrac{u'}{u}$ est $3\ln(t^2+4)$ ; une primitive de $-4u'\mathrm{e}^{u}$ est
+$-4\mathrm{e}^{u}$. Donc
+\[
+  D(t)=3\ln\!\left(t^2+4\right)-4\mathrm{e}^{-t/2}.
+\]
+On vérifie : $D'(t)=3\times\dfrac{2t}{t^2+4}+2\mathrm{e}^{-t/2}=d(t)$.
+
+\textbf{3.} La masse rejetée sur $[0\,;\,5]$ vaut
+\[
+  D(5)-D(0)=\left(3\ln 29-4\mathrm{e}^{-5/2}\right)-\left(3\ln 4-4\right)
+  =3\ln\!\dfrac{29}{4}+4-4\mathrm{e}^{-5/2}\approx 9{,}6\ \text{g}.
+\]
+
+\textbf{4.} La masse due au seul terme exponentiel vaut
+$\int_0^5 2\mathrm{e}^{-t/2}\,\mathrm{d}t=4-4\mathrm{e}^{-5/2}\approx 3{,}67$~g sur
+$[0\,;\,5]$, et $\int_5^{10} 2\mathrm{e}^{-t/2}\,\mathrm{d}t
+=4\mathrm{e}^{-5/2}-4\mathrm{e}^{-5}\approx 0{,}30$~g sur $[5\,;\,10]$ : plus de
+douze fois moins. Pour ce terme, l'affirmation est justifiée.
+
+\textbf{5.} Pour le premier terme, en revanche,
+$\int_0^5\dfrac{6t}{t^2+4}\,\mathrm{d}t=3\ln\dfrac{29}{4}\approx 5{,}94$~g et
+$\int_5^{10}\dfrac{6t}{t^2+4}\,\mathrm{d}t=3\ln\dfrac{104}{29}\approx 3{,}83$~g :
+la contribution ne diminue que d'un tiers environ, elle reste du même ordre.
+L'exploitant aurait dû préciser \emph{quel} terme devient négligeable : la
+décroissance exponentielle s'éteint vite, la décroissance en $\frac{1}{t}$ du
+second terme, elle, laisse un rejet durable. C'est ce terme-là qui détermine la
+pollution à long terme.
+\end{corrige}

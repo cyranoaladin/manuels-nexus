@@ -1,0 +1,60 @@
+% META: {"id": "TCOMPL-LOG-CO-010", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "corrige", "exercice_ref": "TCOMPL-LOG-EX-010", "capacites_codes": ["C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, log, diff, limit, solve, Eq, simplify, oo, Rational, N
+% t, c = symbols('t c', positive=True)
+% concentration = 12 * exp(-t / 4)
+% assert concentration.subs(t, 0) == 12
+% racine = solve(Eq(concentration, 3), t)[0]
+% assert simplify(racine - 8 * log(2)) == 0
+% assert abs(N(racine) - 5.545177) < 1e-5
+% assert round(N(racine) * 60) == 333
+% assert limit(concentration, t, oo) == 0
+% reciproque = 4 * log(12 / c)
+% assert simplify(reciproque.subs(c, concentration) - t) == 0
+% assert simplify(concentration.subs(t, reciproque) - c) == 0
+% assert simplify(reciproque.subs(c, 3) - 8 * log(2)) == 0
+% derivee = diff(concentration, t)
+% assert simplify(derivee + 3 * exp(-t / 4)) == 0
+% assert simplify(derivee.subs(t, racine) + Rational(3, 4)) == 0
+% assert N(derivee.subs(t, 0)) == -3
+% END-VERIFY
+\begin{corrige}{TCOMPL-LOG-EX-010}
+\textbf{1.} $c(0)=12\mathrm{e}^{0}=12$~mg/L.
+
+\textbf{2.} On résout
+\[
+  12\mathrm{e}^{-t/4}=3
+  \iff \mathrm{e}^{-t/4}=\dfrac14
+  \iff -\dfrac t4=\ln\dfrac14=-\ln 4
+  \iff t=4\ln 4=8\ln 2.
+\]
+C'est ici que la réciprocité sert : $\ln$ est la seule fonction qui « défait »
+l'exponentielle. Numériquement $t\approx 5{,}545$~h, soit environ $5$~h~$33$~min.
+
+\textbf{3.} Comme $-\dfrac t4\to-\infty$ et $\mathrm{e}^{u}\to 0$ quand
+$u\to-\infty$, on a $\displaystyle\lim_{t\to+\infty}c(t)=0$. Le médicament
+s'élimine : sa concentration tend vers zéro sans jamais l'atteindre.
+
+\textbf{4.} De $c=12\mathrm{e}^{-t/4}$ on tire $\mathrm{e}^{-t/4}=\dfrac{c}{12}$,
+donc $-\dfrac t4=\ln\dfrac{c}{12}$ et
+\[
+  t(c)=-4\ln\dfrac{c}{12}=4\ln\dfrac{12}{c}.
+\]
+C'est une fonction logarithme. En composant :
+$t\big(c(t)\big)=4\ln\!\left(\dfrac{12}{12\mathrm{e}^{-t/4}}\right)=4\ln\!\left(\mathrm{e}^{t/4}\right)=t$,
+et de même $c\big(t(c)\big)=c$. Les deux fonctions sont réciproques l'une de
+l'autre. On retrouve la question~2 en calculant $t(3)=4\ln 4=8\ln 2$.
+
+\textbf{5.} $c'(t)=12\times\left(-\dfrac14\right)\mathrm{e}^{-t/4}=-3\mathrm{e}^{-t/4}$.
+À l'instant $t=8\ln 2$, on a $\mathrm{e}^{-t/4}=\dfrac14$, donc
+$c'(8\ln 2)=-\dfrac34$~mg/L par heure. Le signe est négatif : la concentration
+décroît. L'ordre de grandeur dit qu'à ce moment-là le patient perd environ
+$0{,}75$~mg/L par heure, contre $3$~mg/L par heure juste après l'injection :
+l'élimination ralentit à mesure qu'il reste moins de produit.
+
+\textbf{6.} Le point de coordonnées $(t\,;\,c)$ appartient à la courbe de
+$t\mapsto c(t)$ si et seulement si le point $(c\,;\,t)$ appartient à celle de la
+fonction réciproque. Or échanger les deux coordonnées d'un point, c'est
+précisément le symétriser par rapport à la droite $y=x$. Les deux courbes sont
+donc symétriques par rapport à cette droite.
+\end{corrige}
