@@ -90,3 +90,39 @@ On obtient $\ln\!\left(\dfrac{a+b}{2}\right) \geq \dfrac{\ln a + \ln b}{2}$, soi
 \]
 Le cas $n = 2$ est la définition de la convexité.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, exp, log, Rational, simplify
+%
+% x = symbols('x', real=True)
+% xp = symbols('xp', positive=True)
+%
+% # Le critere de la derivee seconde, sur des fonctions de reference.
+% convexes = {x**2: x, exp(x): x}
+% for f, var in convexes.items():
+%     assert all(diff(f, var, 2).subs(var, t) >= 0
+%                for t in (-3, -1, 0, 1, 3))
+% concave = log(xp)
+% assert all(diff(concave, xp, 2).subs(xp, t) <= 0
+%            for t in (Rational(1, 2), 1, 5, 100))
+%
+% # La definition elle-meme, verifiee sur x^2 : la corde est au-dessus.
+% f = lambda t: t**2
+% for a, b in ((-2, 3), (0, 5), (1, 1), (-4, -1)):
+%     for k in range(0, 11):
+%         t = Rational(k, 10)
+%         gauche = f(t*a + (1 - t)*b)
+%         droite = t*f(a) + (1 - t)*f(b)
+%         assert gauche <= droite
+%
+% # Et sur une fonction CONCAVE, l'inegalite s'inverse.
+% g = lambda t: -t**2
+% for a, b in ((-2, 3), (0, 5)):
+%     for k in range(0, 11):
+%         t = Rational(k, 10)
+%         assert g(t*a + (1 - t)*b) >= t*g(a) + (1 - t)*g(b)
+%
+% # Une fonction ni convexe ni concave sur R : x^3 change de convexite en 0.
+% h = x**3
+% assert diff(h, x, 2).subs(x, -1) < 0 < diff(h, x, 2).subs(x, 1)
+% END-VERIFY

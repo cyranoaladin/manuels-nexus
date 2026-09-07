@@ -21,3 +21,28 @@ if presque_egaux(x, 0.3):
     ...
 \end{python}
 \end{corrige}
+
+% BEGIN-VERIFY
+% # Q1 : la valeur affichee par la boucle.
+% x = 0.0
+% for _ in range(3):
+%     x = x + 0.1
+% assert repr(x) == "0.30000000000000004"
+% assert x != 0.3
+%
+% # Q2 : les deux flottants sont distincts, et l'ecart est minuscule.
+% assert x - 0.3 > 0
+% assert 0 < abs(x - 0.3) < 1e-15
+% # Les deux exemples cites sur les regles d'egalite de Python.
+% assert (-0.0 == 0.0) is True
+% assert (float("nan") == float("nan")) is False
+%
+% # Q3 : la comparaison a tolerance pres repare le test.
+% def presque_egaux(a, b, tolerance=1e-9):
+%     return abs(a - b) < tolerance
+% assert presque_egaux(x, 0.3)
+% assert not presque_egaux(0.3, 0.4)
+% # Elle reste correcte la ou l'egalite exacte fonctionnait deja.
+% assert presque_egaux(0.5 + 0.25, 0.75)
+% assert (0.5 + 0.25 == 0.75) is True
+% END-VERIFY

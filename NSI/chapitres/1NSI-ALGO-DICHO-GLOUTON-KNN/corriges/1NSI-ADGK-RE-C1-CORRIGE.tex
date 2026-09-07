@@ -15,3 +15,60 @@ cours ne s'applique plus, et effectivement, l'algorithme ne termine pas.
 garantir que \lstinline{borne_inf} augmente strictement à chaque fois que cette branche est
 empruntée, ce qui restaure la décroissance stricte du variant $V$.
 \end{corrige}
+
+% BEGIN-VERIFY
+% # La version FAUTIVE : borne_inf = milieu au lieu de milieu + 1.
+% def dichotomie_fautive(tableau, valeur, budget=200):
+%     borne_inf, borne_sup, tours = 0, len(tableau) - 1, 0
+%     while borne_inf <= borne_sup and tours < budget:
+%         tours += 1
+%         milieu = (borne_inf + borne_sup) // 2
+%         if tableau[milieu] == valeur:
+%             return milieu, tours
+%         if tableau[milieu] < valeur:
+%             borne_inf = milieu          # la faute
+%         else:
+%             borne_sup = milieu - 1
+%     return None, tours
+%
+% # Q1 : sur un cas ou la valeur cherchee est au-dela du milieu, la boucle ne
+% # termine pas — elle epuise le budget.
+% tableau = [1, 3, 5, 7, 9, 11]
+% resultat, tours = dichotomie_fautive(tableau, 11)
+% assert resultat is None and tours == 200
+%
+% # Q2 : le variant cesse de decroitre. On le mesure : borne_inf ne bouge plus.
+% borne_inf, borne_sup, variants = 0, len(tableau) - 1, []
+% for _ in range(12):
+%     milieu = (borne_inf + borne_sup) // 2
+%     variants.append(borne_sup - borne_inf)
+%     if tableau[milieu] < 11:
+%         borne_inf = milieu
+%     else:
+%         borne_sup = milieu - 1
+% assert variants[-1] == variants[-2] == variants[-3]      # il stagne
+% assert min(variants) == 1                                 # a la valeur 1
+%
+% # Q3 : la correction restaure la decroissance stricte, et la fonction termine.
+% def dichotomie_corrigee(tableau, valeur):
+%     borne_inf, borne_sup, variants = 0, len(tableau) - 1, []
+%     while borne_inf <= borne_sup:
+%         variants.append(borne_sup - borne_inf)
+%         milieu = (borne_inf + borne_sup) // 2
+%         if tableau[milieu] == valeur:
+%             return milieu, variants
+%         if tableau[milieu] < valeur:
+%             borne_inf = milieu + 1
+%         else:
+%             borne_sup = milieu - 1
+%     return None, variants
+%
+% indice, variants = dichotomie_corrigee(tableau, 11)
+% assert indice == 5 and tableau[indice] == 11
+% assert all(variants[i] > variants[i+1] for i in range(len(variants) - 1))
+% # Et sur tout le tableau, y compris les absents.
+% for valeur in tableau:
+%     assert dichotomie_corrigee(tableau, valeur)[0] is not None
+% for absent in (0, 4, 12):
+%     assert dichotomie_corrigee(tableau, absent)[0] is None
+% END-VERIFY

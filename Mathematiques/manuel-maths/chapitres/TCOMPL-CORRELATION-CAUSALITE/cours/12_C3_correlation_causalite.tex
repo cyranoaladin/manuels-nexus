@@ -39,3 +39,40 @@ Pour établir une causalité de façon rigoureuse, les scientifiques utilisent d
 \erreurFrequente{
 \textbf{Affirmer une causalité uniquement à partir d'un coefficient de corrélation élevé.} Le calcul de $r$ ne renseigne que sur la force d'une association \textbf{statistique} entre deux séries de données ; il ne dit rien sur le \textbf{mécanisme} qui relie ces deux variables. Toute affirmation de causalité doit s'appuyer sur un raisonnement (ou une expérimentation) allant au-delà du simple calcul du coefficient de corrélation.
 }
+
+% BEGIN-VERIFY
+% import random
+% from statistics import correlation
+%
+% # Une correlation forte peut naitre d'une CAUSE COMMUNE, sans lien direct.
+% # On simule l'exemple : la chaleur Z cause a la fois les glaces X et les
+% # baignades Y, et X n'a aucun effet sur Y.
+% chaleur = [15, 18, 20, 22, 25, 28, 30, 32, 34, 35]
+% glaces = [2*z - 20 for z in chaleur]
+% baignades = [3*z - 35 for z in chaleur]
+%
+% assert correlation(glaces, baignades) > 0.99
+% assert correlation(glaces, chaleur) > 0.99
+% assert correlation(baignades, chaleur) > 0.99
+%
+% # A chaleur CONSTANTE, la correlation entre X et Y s'effondre : c'est la
+% # signature d'une variable cachee. Le generateur est ensemence pour que ce
+% # controle soit reproductible.
+% alea = random.Random(20262027)
+% glaces_c = [30 + alea.gauss(0, 3) for _ in range(400)]
+% baignades_c = [40 + alea.gauss(0, 3) for _ in range(400)]
+% assert abs(correlation(glaces_c, baignades_c)) < 0.15
+%
+% # Le hasard suffit aussi a produire une correlation elevee sur un petit
+% # echantillon : ici deux series independantes de quatre points.
+% meilleure = 0.0
+% alea_petit = random.Random(7)
+% for _ in range(2000):
+%     a = [alea_petit.gauss(0, 1) for _ in range(4)]
+%     b = [alea_petit.gauss(0, 1) for _ in range(4)]
+%     try:
+%         meilleure = max(meilleure, abs(correlation(a, b)))
+%     except Exception:
+%         pass
+% assert meilleure > 0.99      # une correlation quasi parfaite, purement fortuite
+% END-VERIFY

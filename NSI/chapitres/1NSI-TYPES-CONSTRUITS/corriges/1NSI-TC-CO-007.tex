@@ -8,3 +8,18 @@
 
 Vérification : les résultats ont été confirmés par exécution.
 \end{corrige}
+
+% BEGIN-VERIFY
+% match = ("TeamA", "TeamB", 2, 1)
+% equipe1, equipe2, buts1, buts2 = match
+%
+% # Q1 : les deux affichages.
+% assert (equipe1 if buts1 > buts2 else equipe2) == "TeamA"
+% assert buts1 + buts2 == 3
+%
+% # Q2 : avec ("X", "Y", 0, 3), l'expression conditionnelle choisit l'autre.
+% e1, e2, b1, b2 = ("X", "Y", 0, 3)
+% assert (b1 > b2) is False
+% assert (e1 if b1 > b2 else e2) == "Y"
+% assert b1 + b2 == 3
+% END-VERIFY

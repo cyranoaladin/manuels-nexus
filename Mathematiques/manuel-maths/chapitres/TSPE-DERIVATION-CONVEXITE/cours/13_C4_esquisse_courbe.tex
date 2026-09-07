@@ -75,3 +75,33 @@ $f'' < 0$ : courbe en forme de chapeau (concave, « triste »).
 
 Point d'inflexion : passage de l'un a l'autre.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational
+%
+% x = symbols('x', real=True)
+%
+% # Un point d'inflexion exige que f'' s'annule EN CHANGEANT DE SIGNE.
+% f = x**3
+% assert solve(diff(f, x, 2), x) == [0]
+% assert diff(f, x, 2).subs(x, -1) < 0 < diff(f, x, 2).subs(x, 1)
+% # La tangente en 0 est l'axe des abscisses, et la courbe la traverse.
+% assert f.subs(x, -1) < 0 < f.subs(x, 1)
+%
+% # Le contre-exemple decisif : f'' peut s'annuler SANS changement de signe,
+% # et il n'y a alors pas de point d'inflexion. Sur x^4 :
+% g = x**4
+% assert solve(diff(g, x, 2), x) == [0]
+% assert diff(g, x, 2).subs(x, -1) > 0 and diff(g, x, 2).subs(x, 1) > 0
+% # La courbe reste au-dessus de sa tangente en 0 des deux cotes.
+% assert g.subs(x, -1) > 0 and g.subs(x, 1) > 0
+%
+% # Signe de f' et sens de variation, sur x^3 - 3x.
+% h = x**3 - 3*x
+% hp = diff(h, x)
+% assert sorted(solve(hp, x)) == [-1, 1]
+% assert hp.subs(x, -2) > 0 and hp.subs(x, 0) < 0 and hp.subs(x, 2) > 0
+% assert h.subs(x, -2) < h.subs(x, -1)          # croissante avant -1
+% assert h.subs(x, -1) > h.subs(x, 0)           # decroissante entre -1 et 1
+% assert h.subs(x, 1) < h.subs(x, 2)            # croissante apres 1
+% END-VERIFY

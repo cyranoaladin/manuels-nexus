@@ -74,3 +74,32 @@ $h'(x) = 7 \times u'(x) \times u(x)^6 = 7 \times 2 \times (2x-5)^6 = 14(2x-5)^6$
 \approfondissement{
 \textbf{Dérivée logarithmique.} Pour une fonction $f > 0$ et dérivable, $(\ln f)' = \dfrac{f'}{f}$. Cette technique est utile pour dériver des produits compliques : on prend le logarithme, on derive, puis on multiplie par $f$.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, exp, log, sqrt, simplify, Rational
+%
+% x = symbols('x', positive=True)
+%
+% # La regle de la chaine, verifiee sur plusieurs couples (u, v).
+% for u in (x**2 + 1, 3*x - 5, exp(x)):
+%     for v_de in (lambda t: exp(t), lambda t: t**3, lambda t: sqrt(t)):
+%         compose = v_de(u)
+%         attendu = diff(u, x) * diff(v_de(symbols('t', positive=True)),
+%                                     symbols('t', positive=True)
+%                                     ).subs(symbols('t', positive=True), u)
+%         assert simplify(diff(compose, x) - attendu) == 0
+%
+% # Les quatre cas particuliers annonces.
+% u = x**2 + 1
+% up = diff(u, x)
+% assert simplify(diff(exp(u), x) - up*exp(u)) == 0
+% assert simplify(diff(log(u), x) - up/u) == 0
+% for n in (2, 3, -1, -2):
+%     assert simplify(diff(u**n, x) - n*up*u**(n - 1)) == 0
+% assert simplify(diff(sqrt(u), x) - up/(2*sqrt(u))) == 0
+%
+% # L'erreur classique : oublier le facteur u'. Sur e^{x^2}, la derivee n'est
+% # pas e^{x^2}.
+% assert simplify(diff(exp(x**2), x) - exp(x**2)) != 0
+% assert simplify(diff(exp(x**2), x) - 2*x*exp(x**2)) == 0
+% END-VERIFY

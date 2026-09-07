@@ -91,3 +91,38 @@ L'espérance n'est pas une probabilité : $E(G) = -2$ signifie qu'en moyenne on 
 
 Avant tout calcul, écrire « Soit $X$ la variable aléatoire qui représente\ldots ». Un exercice où $X$ n'est pas défini est incomplet.
 }
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% from itertools import product
+%
+% # L'exemple du de : gain +10 sur un 6, -2 sinon.
+% loi = {10: Rational(1, 6), -2: Rational(5, 6)}
+% assert sum(loi.values()) == 1
+% esperance = sum(v*p for v, p in loi.items())
+% assert esperance == 0
+% # Le jeu est donc equitable, au sens de la definition.
+% assert esperance == 0 and not esperance > 0 and not esperance < 0
+%
+% # Un jeu voisin, defavorable : la perte passe a 3 euros.
+% defavorable = {10: Rational(1, 6), -3: Rational(5, 6)}
+% assert sum(v*p for v, p in defavorable.items()) == Rational(-5, 6) < 0
+% # Et un jeu favorable : le gain passe a 11 euros.
+% favorable = {11: Rational(1, 6), -2: Rational(5, 6)}
+% assert sum(v*p for v, p in favorable.items()) == Rational(1, 6) > 0
+%
+% # Controle qualite : loi du nombre de pieces defectueuses sur un
+% # prelevement de trois pieces independantes, p = 1/10.
+% p = Rational(1, 10)
+% loi_X = {}
+% for tirage in product([1, 0], repeat=3):
+%     poids = 1
+%     for piece in tirage:
+%         poids = poids * (p if piece else 1 - p)
+%     loi_X[sum(tirage)] = loi_X.get(sum(tirage), 0) + poids
+% assert sum(loi_X.values()) == 1
+% assert loi_X[0] == Rational(729, 1000)
+% assert loi_X[3] == Rational(1, 1000)
+% # L'esperance vaut np, comme pour une binomiale.
+% assert sum(k*proba for k, proba in loi_X.items()) == 3*p
+% END-VERIFY

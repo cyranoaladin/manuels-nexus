@@ -47,3 +47,36 @@ Ce résultat signifie que $\ln x$ « l'emporte » face a $x$, mais beaucoup moin
 \erreurFrequente{
 \textbf{Croire que $\ln x \to -\infty$ quand $x \to +\infty$.} $\ln$ est croissante sur $]0,+\infty[$ : sa limite en $+\infty$ est $+\infty$, pas $-\infty$. C'est en $0^+$ (et non en $+\infty$) que la limite vaut $-\infty$.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, log, diff, limit, oo, exp, simplify, Rational
+%
+% x = symbols('x', positive=True)
+%
+% # La derivee et la stricte croissance.
+% assert simplify(diff(log(x), x) - 1/x) == 0
+% for t in (Rational(1, 100), 1, 5, 1000):
+%     assert (1/x).subs(x, t) > 0
+% echantillon = [Rational(k, 4) for k in range(1, 40)]
+% valeurs = [log(t) for t in echantillon]
+% assert all(valeurs[i] < valeurs[i+1] for i in range(len(valeurs) - 1))
+%
+% # Les deux limites aux bornes.
+% assert limit(log(x), x, oo) == oo
+% assert limit(log(x), x, 0, '+') == -oo
+%
+% # La demonstration en +infini : pour tout A, x0 = e^A convient.
+% for A in (1, 5, 20):
+%     x0 = exp(A)
+%     assert simplify(log(x0) - A) == 0
+%     for facteur in (1, 2, 10):
+%         assert log(x0*facteur) >= A
+%
+% # La demonstration en 0+ repose sur ln(1/X) = -ln(X).
+% for X in (2, 10, 1000):
+%     assert simplify(log(Rational(1, X)) + log(X)) == 0
+%
+% # La croissance comparee annoncee.
+% assert limit(log(x)/x, x, oo) == 0
+% assert float((log(x)/x).subs(x, 10**6)) < 1e-4
+% END-VERIFY

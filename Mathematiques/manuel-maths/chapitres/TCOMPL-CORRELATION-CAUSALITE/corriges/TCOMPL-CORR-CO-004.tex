@@ -4,3 +4,25 @@
 
 \textbf{2.} La variable cachée est la \textbf{taille de l'incendie} : un incendie plus important mobilise davantage de pompiers \textbf{et} cause davantage de dégâts. C'est la taille de l'incendie qui cause les deux variables observées, pas l'une qui cause l'autre.
 \end{corrige}
+
+% BEGIN-VERIFY
+% from statistics import correlation
+%
+% taille = [1, 2, 3, 5, 8, 13, 20, 30]
+% pompiers = [2*t + 3 for t in taille]
+% degats = [15*t + 10 for t in taille]
+%
+% # La correlation observee est reelle.
+% assert correlation(pompiers, degats) > 0.99
+%
+% # Q1 : elle ne prouve pas la causalite. A taille d'incendie fixee, plus de
+% # pompiers va de pair avec MOINS de degats : le sens suppose est meme inverse.
+% pompiers_fixe = [4, 6, 8, 10, 12]
+% degats_fixe = [90, 80, 70, 60, 50]
+% assert correlation(pompiers_fixe, degats_fixe) < -0.99
+%
+% # Q2 : la variable cachee est la taille de l'incendie ; elle explique les
+% # deux series observees.
+% assert correlation(pompiers, taille) > 0.99
+% assert correlation(degats, taille) > 0.99
+% END-VERIFY

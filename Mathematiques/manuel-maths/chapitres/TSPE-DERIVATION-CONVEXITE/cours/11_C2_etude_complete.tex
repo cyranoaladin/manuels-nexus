@@ -73,3 +73,30 @@ Donc $g(x) \leq 0$ pour tout $x > 0$, c'est-a-dire $\ln x \leq x - 1$.
 
 $\lim_{x \to +\infty} \frac{\mathrm{e}^x}{x^n} = +\infty$, \quad $\lim_{x \to +\infty} \frac{(\ln x)^n}{x} = 0$, \quad $\lim_{x \to 0^+} x^n \ln x = 0$.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, exp, limit, oo, solve, simplify, E
+%
+% x = symbols('x', real=True)
+% f = x*exp(-x)
+%
+% # Limites aux bornes.
+% assert limit(f, x, oo) == 0
+% assert limit(f, x, -oo) == -oo
+%
+% # Derivee et son signe.
+% fp = diff(f, x)
+% assert simplify(fp - (1 - x)*exp(-x)) == 0
+% assert solve(fp, x) == [1]
+% assert fp.subs(x, 0) > 0 and fp.subs(x, 2) < 0
+%
+% # Le maximum est atteint en 1 et vaut 1/e, et il est GLOBAL.
+% maximum = f.subs(x, 1)
+% assert simplify(maximum - 1/E) == 0
+% from sympy import Rational
+% for essai in [Rational(k, 4) for k in range(-40, 60)]:
+%     assert f.subs(x, essai) <= maximum
+%
+% # La fonction change de signe en 0 : negative avant, positive apres.
+% assert f.subs(x, -1) < 0 and f.subs(x, 1) > 0 and f.subs(x, 0) == 0
+% END-VERIFY

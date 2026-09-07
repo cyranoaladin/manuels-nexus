@@ -17,3 +17,36 @@ paquets_tries = sorted(ordre_arrivee, key=lambda p: p["numero"])
 message_correct = "".join(p["donnees"] for p in paquets_tries)
 \end{python}
 \end{corrige}
+
+% BEGIN-VERIFY
+% from itertools import permutations
+%
+% # Le message et son decoupage, comme dans l'enonce de remediation.
+% message = "RESEAUXNSI"
+% taille = 3
+% paquets = [{"numero": i, "donnees": message[i*taille:(i + 1)*taille]}
+%            for i in range((len(message) + taille - 1)//taille)]
+% assert [p["donnees"] for p in paquets] == ["RES", "EAU", "XNS", "I"]
+% assert "".join(p["donnees"] for p in paquets) == message
+%
+% # L'ordre d'arrivee de l'enonce : 3, 1, 0, 2.
+% ordre_arrivee = [paquets[3], paquets[1], paquets[0], paquets[2]]
+%
+% # Q1 : concatener dans l'ordre d'arrivee donne un message faux.
+% reconstitue = "".join(p["donnees"] for p in ordre_arrivee)
+% assert reconstitue == "IEAURESXNS"
+% assert reconstitue != message
+%
+% # Q2 : la methode naive ne marche que si l'ordre d'arrivee est celui d'envoi.
+% assert "".join(p["donnees"] for p in paquets) == message
+%
+% # Q3 : trier par le champ numero restitue le message quel que soit l'ordre
+% # d'arrivee. On l'eprouve sur les 24 permutations, pas sur une seule.
+% for arrivee in permutations(paquets):
+%     tries = sorted(arrivee, key=lambda p: p["numero"])
+%     assert "".join(p["donnees"] for p in tries) == message
+% # Et la methode naive echoue sur la plupart d'entre elles.
+% echecs = sum(1 for arrivee in permutations(paquets)
+%              if "".join(p["donnees"] for p in arrivee) != message)
+% assert echecs == 23
+% END-VERIFY

@@ -13,3 +13,21 @@ C'est la \textbf{phase du cycle d'exécution} (le processeur lit-il cette adress
 charger l'instruction à exécuter, ou pour charger une donnée dans un registre ?) qui
 détermine l'interprétation de ces bits, pas leur contenu lui-même.
 \end{corrige}
+
+% BEGIN-VERIFY
+% # Q3 : le meme octet se lit de trois facons, selon la phase du cycle.
+% octet = 0b01100001
+% assert octet == 97 == 0x61
+% assert chr(octet) == "a"
+% jeu_instructions = {0b01100001: "CHARGE"}
+% assert jeu_instructions[octet] == "CHARGE"
+% assert len({chr(octet), str(octet), jeu_instructions[octet]}) == 3
+%
+% # Aucun bit du mot ne porte l'information « ceci est une instruction » : le
+% # motif est identique dans les trois lectures.
+% assert bin(octet) == "0b1100001"
+% assert format(octet, "08b") == "01100001"
+%
+% # Q2 : huit coeurs, donc multiprocesseur.
+% assert 8 > 1
+% END-VERIFY

@@ -10,3 +10,25 @@
 
 Vérification : les résultats ont été confirmés par exécution.
 \end{corrige}
+
+% BEGIN-VERIFY
+% joueur = ("Fatou", 2350, "diamant")
+%
+% # Q1 : les trois affichages.
+% assert joueur[0] == "Fatou"
+% assert (joueur[1] > 2000) is True
+% assert joueur[2] == "diamant"
+%
+% # Q2 : le deballage affecte dans l'ordre.
+% nom, points, rang = joueur
+% assert (nom, points, rang) == ("Fatou", 2350, "diamant")
+%
+% # Q3 : un tuple n'est pas mutable.
+% try:
+%     joueur[1] = 2400
+% except TypeError as erreur:
+%     assert "does not support item assignment" in str(erreur)
+% else:
+%     raise AssertionError("l'affectation aurait du echouer")
+% assert joueur == ("Fatou", 2350, "diamant")
+% END-VERIFY

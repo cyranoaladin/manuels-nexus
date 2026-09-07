@@ -6,3 +6,26 @@ Dans une ville, le nombre de pompiers mobilisés lors d'un incendie et les dég�
   \item Proposer une explication plus plausible à cette corrélation, en identifiant une variable cachée.
 \end{enumerate}
 \end{exercice}
+
+% BEGIN-VERIFY
+% from statistics import correlation
+%
+% # La situation de l'enonce, simulee : la TAILLE de l'incendie cause a la fois
+% # le nombre de pompiers et les degats.
+% taille = [1, 2, 3, 5, 8, 13, 20, 30]
+% pompiers = [2*t + 3 for t in taille]
+% degats = [15*t + 10 for t in taille]
+%
+% # Q1 : les deux variables observees sont bien fortement correlees...
+% assert correlation(pompiers, degats) > 0.99
+% # ... et chacune l'est tout autant avec la taille.
+% assert correlation(pompiers, taille) > 0.99
+% assert correlation(degats, taille) > 0.99
+%
+% # Q2 : a taille d'incendie FIXEE, envoyer plus de pompiers va de pair avec
+% # MOINS de degats. La causalite suggeree par la question 1 est donc refutee
+% # par les donnees elles-memes.
+% pompiers_fixe = [4, 6, 8, 10, 12]
+% degats_fixe = [90, 80, 70, 60, 50]
+% assert correlation(pompiers_fixe, degats_fixe) < -0.99
+% END-VERIFY

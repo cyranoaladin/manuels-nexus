@@ -13,3 +13,30 @@
 \textbf{Q4.} Ce raisonnement part d'une solution \emph{quelconque} $y$ de $(E)$ (on n'a fait aucune hypothèse particulière sur $y$, seulement qu'elle vérifie $y'=4y$), et aboutit a $y(x)=C\mathrm{e}^{4x}$ pour un certain $C$. Cela prouve donc que \emph{toute} solution de $(E)$ est necessairement de cette forme : il n'y a pas d'autre solution possible.
 
 \end{corrige}
+
+% BEGIN-VERIFY
+% from sympy import symbols, Function, exp, diff, simplify, dsolve, Eq
+%
+% x = symbols('x', real=True)
+% y = Function('y')
+%
+% # Q1 : derivee du produit z(x) = y(x) e^{-4x}.
+% z = y(x)*exp(-4*x)
+% attendu = (diff(y(x), x) - 4*y(x))*exp(-4*x)
+% assert simplify(diff(z, x) - attendu) == 0
+%
+% # Q2 : si y verifie (E) : y' = 4y, alors z' = 0.
+% assert simplify(diff(z, x).subs(diff(y(x), x), 4*y(x))) == 0
+%
+% # Q3 : z constante donne y(x) = C e^{4x}, qui est bien solution.
+% C = symbols('C', real=True)
+% candidate = C*exp(4*x)
+% assert simplify(candidate*exp(-4*x) - C) == 0
+% assert simplify(diff(candidate, x) - 4*candidate) == 0
+%
+% # Q4 : le raisonnement part d'une solution QUELCONQUE, donc il n'y en a pas
+% # d'autre. Controle independant par le solveur d'equations differentielles.
+% solution = dsolve(Eq(diff(y(x), x), 4*y(x)), y(x))
+% constante = list(solution.rhs.free_symbols - {x})[0]
+% assert simplify(solution.rhs - constante*exp(4*x)) == 0
+% END-VERIFY

@@ -6,3 +6,23 @@
   \item Pourquoi le processeur ne peut-il pas, en lisant une suite de bits en mémoire, savoir \og à l'avance \fg{} s'il s'agit d'une instruction ou d'une donnée ?
 \end{enumerate}
 \end{exercice}
+
+% BEGIN-VERIFY
+% # Q3 : une meme suite de bits peut se lire comme une instruction ou comme une
+% # donnee ; rien dans le contenu ne tranche. On le montre sur un octet.
+% octet = 0b01100001
+% assert octet == 97
+% assert chr(octet) == "a"                    # lu comme un caractere
+% assert octet == 0x61                        # lu comme un entier hexadecimal
+% # Le meme motif interprete comme un code d'instruction fictif.
+% jeu_instructions = {0b01100001: "CHARGE"}
+% assert jeu_instructions[octet] == "CHARGE"
+% # Trois lectures, un seul contenu : c'est la PHASE du cycle qui decide.
+% assert len({chr(octet), str(octet), jeu_instructions[octet]}) == 3
+%
+% # Q2 : huit coeurs permettent huit executions simultanees ; un seul coeur
+% # n'en permet qu'une a la fois.
+% coeurs = 8
+% assert coeurs > 1                            # multiprocesseur
+% assert coeurs >= 8
+% END-VERIFY

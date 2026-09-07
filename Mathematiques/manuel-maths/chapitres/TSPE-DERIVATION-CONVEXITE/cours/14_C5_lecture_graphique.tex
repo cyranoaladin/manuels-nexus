@@ -50,3 +50,36 @@ On en deduit que $f$ est convexe sur $]-\infty, 2[$ et concave sur $]2, +\infty[
 \erreurFrequente{
 \textbf{Confondre le graphe de $f$ et celui de $f'$.} Sur le graphe de $f'$, les zeros donnent les extremums de $f$, et les extremums de $f'$ donnent les points d'inflexion de $f$.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational
+%
+% x = symbols('x', real=True)
+%
+% # Convexe <=> f' croissante. Sur x^2 :
+% f = x**2
+% fp = diff(f, x)
+% echantillon = [Rational(k, 2) for k in range(-8, 9)]
+% valeurs = [fp.subs(x, t) for t in echantillon]
+% assert valeurs == sorted(valeurs)
+% # Et la corde est bien au-dessus de la courbe.
+% g = lambda t: t**2
+% for k in range(0, 11):
+%     t = Rational(k, 10)
+%     assert g(t*(-2) + (1 - t)*3) <= t*g(-2) + (1 - t)*g(3)
+%
+% # Concave <=> f' decroissante. Sur -x^2 :
+% h = -x**2
+% hp = diff(h, x)
+% valeurs_h = [hp.subs(x, t) for t in echantillon]
+% assert valeurs_h == sorted(valeurs_h, reverse=True)
+%
+% # Les points d'inflexion de f correspondent aux extremums de f'. Sur x^3 :
+% k = x**3
+% kp = diff(k, x)                      # 3x^2, minimum en 0
+% assert diff(kp, x).subs(x, 0) == 0
+% assert kp.subs(x, 0) == 0
+% assert all(kp.subs(x, t) > 0 for t in (-1, Rational(-1, 2), Rational(1, 2), 1))
+% # f'' change bien de signe en 0 : c'est un point d'inflexion.
+% assert diff(k, x, 2).subs(x, -1) < 0 < diff(k, x, 2).subs(x, 1)
+% END-VERIFY

@@ -68,3 +68,36 @@ En multipliant par $-1$ : $\ln x \leq x - 1$.
 \margeAppui{
 \textbf{Réciproque.} Si $f$ est concave ($f'' \leq 0$), la courbe est en dessous de ses tangentes. C'est le cas de $\ln$ : sa courbe est sous toutes ses tangentes.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, exp, Rational, simplify
+%
+% x = symbols('x', real=True)
+%
+% # Le theoreme : f convexe => la courbe est au-dessus de chaque tangente.
+% def au_dessus(f, a, essais):
+%     tangente = f.subs(x, a) + diff(f, x).subs(x, a)*(x - a)
+%     return all(f.subs(x, t) >= tangente.subs(x, t) for t in essais)
+%
+% essais = [Rational(k, 2) for k in range(-10, 11)]
+% for f in (x**2, exp(x), x**4):
+%     assert all(diff(f, x, 2).subs(x, t) >= 0 for t in essais)
+%     for a in (-2, 0, Rational(3, 2), 4):
+%         assert au_dessus(f, a, essais), (f, a)
+%
+% # La demonstration passe par phi(x) = f(x) - f(a) - f'(a)(x-a), de derivee
+% # f'(x) - f'(a) : on verifie phi(a) = 0 et le signe de phi' de part et
+% # d'autre de a.
+% f = x**2
+% a = 1
+% phi = f - f.subs(x, a) - diff(f, x).subs(x, a)*(x - a)
+% assert phi.subs(x, a) == 0
+% assert simplify(diff(phi, x) - (diff(f, x) - diff(f, x).subs(x, a))) == 0
+% assert diff(phi, x).subs(x, 3) > 0 and diff(phi, x).subs(x, -1) < 0
+%
+% # Pour une fonction CONCAVE, la conclusion s'inverse : la courbe passe
+% # au-dessous de ses tangentes.
+% g = -x**2
+% tangente_g = g.subs(x, 1) + diff(g, x).subs(x, 1)*(x - 1)
+% assert all(g.subs(x, t) <= tangente_g.subs(x, t) for t in essais)
+% END-VERIFY
