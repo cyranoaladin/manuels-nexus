@@ -427,15 +427,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais dérouler l'exécution d'une séquence d'instructions simples de type langage machine.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -488,15 +487,14 @@
           "assessed_by": [],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 2,
+          "distinct_opportunities": 3,
           "libelle_eleve": "Je sais utiliser les commandes de base en ligne de commande.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 0,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -519,15 +517,13 @@
             "1NSI-ARCHOS-EVAL-B"
           ],
           "capacity_type": "PROCEDURAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 4,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 5,
           "libelle_eleve": "Je sais gérer les droits et permissions d'accès aux fichiers.",
-          "missing_function": [
-            "NO_METHOD"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 2,
             "remediation": 1,
             "targeted_practice": 1
@@ -542,14 +538,15 @@
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:031a69081944a83d3771ffd67faebfb5e2e969e4d5a8567cc3f567f82b48c22e",
+      "capacities_digest": "sha256:bd0978efa4a98e37672345a768ee65fa3bdef63004c0e74f8b9c59b5f999bd09",
       "capacity_identity_blockers": [],
       "chapter": "1NSI-ARCHITECTURE-OS",
       "counts": {
-        "INSUFFICIENT": 5
+        "CANDIDATE_NON_SEMANTIC": 1,
+        "INSUFFICIENT": 4
       },
       "declarative_diversity_status": "INSUFFICIENT",
       "distinct_reasoning_paths": [],
@@ -561,8 +558,7 @@
         "C1",
         "C2",
         "C3",
-        "C4",
-        "C5"
+        "C4"
       ],
       "machine_status": "GAP",
       "routed_to_human": 5,
@@ -639,15 +635,14 @@
           "assessed_by": [],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 2,
+          "distinct_opportunities": 3,
           "libelle_eleve": "Je sais prototyper une fonction.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 0,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -670,15 +665,13 @@
             "1NSI-LANG-EVAL-B"
           ],
           "capacity_type": "PROCEDURAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 4,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 5,
           "libelle_eleve": "Je sais mettre au point un programme à l'aide de jeux de tests.",
-          "missing_function": [
-            "NO_METHOD"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 1,
             "targeted_practice": 1
@@ -693,7 +686,7 @@
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C5": {
           "assessed_by": [
@@ -702,15 +695,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais utiliser la documentation d'une bibliothèque pour trouver et employer une fonction.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 2,
             "remediation": 0,
             "targeted_practice": 1
@@ -734,15 +726,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais décrire les préconditions sur les arguments d'une fonction.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -763,15 +754,14 @@
           "assessed_by": [],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 2,
+          "distinct_opportunities": 3,
           "libelle_eleve": "Je sais décrire les postconditions sur les résultats d'une fonction.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 0,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -789,11 +779,12 @@
           "status": "INSUFFICIENT"
         }
       },
-      "capacities_digest": "sha256:a8fd814390d16d6827f8a4a80f1c09a911cc0a06968ad26e831b84b741def1e0",
+      "capacities_digest": "sha256:f153b4473327119da057b11316ea238764dc62ce8de0d7fc29d476c9314076e8",
       "capacity_identity_blockers": [],
       "chapter": "1NSI-LANGAGE",
       "counts": {
-        "INSUFFICIENT": 7
+        "CANDIDATE_NON_SEMANTIC": 1,
+        "INSUFFICIENT": 6
       },
       "declarative_diversity_status": "INSUFFICIENT",
       "distinct_reasoning_paths": [],
@@ -805,7 +796,6 @@
         "C1",
         "C2",
         "C3",
-        "C4",
         "C5",
         "C6",
         "C7"
@@ -859,15 +849,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais structurer un projet informatique en jalons, avec un cahier des charges et un travail en équipe.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 2,
             "remediation": 0,
             "targeted_practice": 2
@@ -931,15 +920,14 @@
           "assessed_by": [],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 2,
+          "distinct_opportunities": 3,
           "libelle_eleve": "Je sais documenter mon code et préparer une présentation orale argumentée d'un projet informatique.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 0,
-            "method": 0,
+            "method": 1,
             "qcm": 2,
             "remediation": 0,
             "targeted_practice": 1
@@ -957,7 +945,7 @@
           "status": "INSUFFICIENT"
         }
       },
-      "capacities_digest": "sha256:93e60a42c6d0dd3ae8893c7c5218a2f4031c9f953b0074478af969b3d619ab0a",
+      "capacities_digest": "sha256:13b373ae819717783be73d5d1efd2d9996f893b22792c1e625e323f8e7c24095",
       "capacity_identity_blockers": [],
       "chapter": "1NSI-PROJET-METHODES",
       "counts": {
@@ -1023,15 +1011,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais dérouler le fonctionnement d'un protocole simple de récupération de perte de paquets (bit alterné).",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -1055,15 +1042,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais simuler un réseau simple et déterminer si deux machines peuvent communiquer.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -1116,15 +1102,14 @@
           "assessed_by": [],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 2,
+          "distinct_opportunities": 3,
           "libelle_eleve": "Je sais réaliser par programmation une IHM répondant à un cahier des charges donné.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 0,
-            "method": 0,
+            "method": 1,
             "qcm": 2,
             "remediation": 0,
             "targeted_practice": 1
@@ -1142,7 +1127,7 @@
           "status": "INSUFFICIENT"
         }
       },
-      "capacities_digest": "sha256:2d8d72668c5449254b00f1110b1799cf034681515f134b603f9a0087f4f9226e",
+      "capacities_digest": "sha256:3d8775e7eea448a443247b076e3a58b7aaf957b1aab8a4f6bf39b47ef611795f",
       "capacity_identity_blockers": [],
       "chapter": "1NSI-RESEAUX",
       "counts": {
@@ -1178,15 +1163,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais importer une table depuis un fichier texte tabulé ou un fichier CSV.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 2,
             "remediation": 0,
             "targeted_practice": 1
@@ -1209,15 +1193,13 @@
             "1NSI-TAB-EVAL-B"
           ],
           "capacity_type": "PROCEDURAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 4,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 5,
           "libelle_eleve": "Je sais rechercher les lignes d'une table vérifiant des critères exprimés en logique propositionnelle, et détecter des doublons.",
-          "missing_function": [
-            "NO_METHOD"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 2,
             "remediation": 1,
             "targeted_practice": 2
@@ -1238,7 +1220,7 @@
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C3": {
           "assessed_by": [
@@ -1247,15 +1229,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais trier une table suivant une colonne.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -1279,15 +1260,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais construire une nouvelle table en combinant les données de deux tables.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -1305,11 +1285,12 @@
           "status": "INSUFFICIENT"
         }
       },
-      "capacities_digest": "sha256:f06dea98eef1fa367e17103f8b40d8a145e2217fdb79fde098d27003272841d3",
+      "capacities_digest": "sha256:454c154e06145b545ced6d4e162e03d4f7054f762865107ee3678b3afb5bce65",
       "capacity_identity_blockers": [],
       "chapter": "1NSI-TABLES",
       "counts": {
-        "INSUFFICIENT": 4
+        "CANDIDATE_NON_SEMANTIC": 1,
+        "INSUFFICIENT": 3
       },
       "declarative_diversity_status": "INSUFFICIENT",
       "distinct_reasoning_paths": [],
@@ -1319,7 +1300,6 @@
       "generated_by": "scripts/build_chapter_richness_matrix.py",
       "insufficient": [
         "C1",
-        "C2",
         "C3",
         "C4"
       ],
@@ -1340,15 +1320,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais passer de la représentation d'un entier positif dans une base à une autre (bases 2, 10, 16).",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -1372,15 +1351,14 @@
           ],
           "capacity_type": "ATOMIC_SUPPORT",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais évaluer le nombre de bits nécessaires à l'écriture d'un entier en base 2, et utiliser le complément à 2 pour représenter un entier relatif.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 2,
             "remediation": 0,
             "targeted_practice": 1
@@ -1435,15 +1413,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais dresser la table de vérité d'une expression booléenne construite avec and, or, not.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -1493,7 +1470,7 @@
           "status": "INSUFFICIENT"
         }
       },
-      "capacities_digest": "sha256:8b68a869688e51a448ed014f0a4588639e3f15e0f4dd8dc646c772baf4a13d57",
+      "capacities_digest": "sha256:005aaedda6a9846d3808d358662abff0a3abbd00c31dd54e7921490b13431607",
       "capacity_identity_blockers": [],
       "chapter": "1NSI-TYPES-BASE",
       "counts": {
@@ -2059,15 +2036,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais analyser et modifier les méthodes exécutées lors d'un clic sur un bouton d'une page Web.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -2175,15 +2151,14 @@
           "assessed_by": [],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 2,
+          "distinct_opportunities": 3,
           "libelle_eleve": "Je sais analyser le fonctionnement d'un formulaire Web simple.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 0,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -2207,15 +2182,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais distinguer les transmissions de paramètres par requêtes POST ou GET.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -2238,15 +2212,13 @@
             "1NSI-WEB-EVAL-B"
           ],
           "capacity_type": "PROCEDURAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 4,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 5,
           "libelle_eleve": "Je sais discuter du choix du type de requête selon les valeurs à transmettre et leur confidentialité.",
-          "missing_function": [
-            "NO_METHOD"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 2,
-            "method": 0,
+            "method": 1,
             "qcm": 2,
             "remediation": 1,
             "targeted_practice": 1
@@ -2261,14 +2233,15 @@
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:a8e285cbf37d3786c05775e3dde0d5f60b12b9a82509dc8e19295d0c510b3534",
+      "capacities_digest": "sha256:c1c9970231c65c3de9f6c6a8e5612f081ed9408efc2fb7ce72bc94dbc8f9019f",
       "capacity_identity_blockers": [],
       "chapter": "1NSI-WEB-IHM",
       "counts": {
-        "INSUFFICIENT": 9
+        "CANDIDATE_NON_SEMANTIC": 1,
+        "INSUFFICIENT": 8
       },
       "declarative_diversity_status": "INSUFFICIENT",
       "distinct_reasoning_paths": [],
@@ -2284,8 +2257,7 @@
         "C5",
         "C6",
         "C7",
-        "C8",
-        "C9"
+        "C8"
       ],
       "machine_status": "GAP",
       "routed_to_human": 9,
@@ -8463,10 +8435,9 @@
           "assessed_by": [],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 0,
+          "distinct_opportunities": 1,
           "libelle_eleve": "Je sais définir la loi uniforme sur {1,2,…,n} et calculer son espérance.",
           "missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION",
             "NO_METHOD",
             "NO_QCM"
@@ -8476,15 +8447,28 @@
             "method": 0,
             "qcm": 0,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 2
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 10,
+              "id": "TCOMPL-ECH-EX-037",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-ECH-EX-038",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            }
+          ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
           "status": "INSUFFICIENT"
         }
       },
-      "capacities_digest": "sha256:1cfc9124852a6b0454f24f099efea23f097c819feaec4504ff938b5c2735a896",
+      "capacities_digest": "sha256:6c1141e90d152a9287c8cace246ff396c98df5ca0e7ff0b52b23d1fe7ff5c797",
       "capacity_identity_blockers": [],
       "chapter": "TCOMPL-ECHANTILLONNAGE",
       "counts": {
@@ -9824,28 +9808,39 @@
           "assessed_by": [],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 0,
+          "distinct_opportunities": 2,
           "libelle_eleve": "Je sais mobiliser la notion intuitive de limite finie ou infinie d'une suite, les opérations sur les limites, le passage à la limite dans les inégalités et le théorème des gendarmes.",
           "missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION",
-            "NO_METHOD",
             "NO_QCM"
           ],
           "opportunities": {
             "assessment": 0,
-            "method": 0,
+            "method": 1,
             "qcm": 0,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 2
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-ME-EX-031",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 20,
+              "id": "TCOMPL-ME-EX-032",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            }
+          ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
           "status": "INSUFFICIENT"
         }
       },
-      "capacities_digest": "sha256:66dcc3b1030b26fd186768159b4031829e2929052d05b63ad568ea225b0ce36f",
+      "capacities_digest": "sha256:d4bf7886726566b01d5aa7517818b126e6492059f64c93e38f9cdd6c1175c9dd",
       "capacity_identity_blockers": [],
       "chapter": "TCOMPL-MODELES-EVOLUTION",
       "counts": {
@@ -10698,28 +10693,39 @@
           "assessed_by": [],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 0,
+          "distinct_opportunities": 2,
           "libelle_eleve": "Je sais définir la loi uniforme sur [0,1] puis sur [a,b], déterminer sa densité et sa fonction de répartition, et calculer son espérance et sa variance.",
           "missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION",
-            "NO_METHOD",
             "NO_QCM"
           ],
           "opportunities": {
             "assessment": 0,
-            "method": 0,
+            "method": 1,
             "qcm": 0,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 2
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-ATT-EX-037",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 20,
+              "id": "TCOMPL-ATT-EX-038",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            }
+          ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
           "status": "INSUFFICIENT"
         }
       },
-      "capacities_digest": "sha256:9b58c50cbbf30d2224a52c54ba74ec9459d4f3e5a5882afcb7f1b6aab5d64a86",
+      "capacities_digest": "sha256:9abb71f82b770257c63ec882e3b97581fbaae446ab263126acc56670fddb5c94",
       "capacity_identity_blockers": [],
       "chapter": "TCOMPL-TEMPS-ATTENTE",
       "counts": {
@@ -12921,15 +12927,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais écrire un algorithme utilisant la méthode diviser pour régner.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 1,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -12949,15 +12954,13 @@
         "C12": {
           "assessed_by": [],
           "capacity_type": "PROCEDURAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais utiliser la programmation dynamique pour écrire un algorithme.",
-          "missing_function": [
-            "NO_METHOD"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 0,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 1,
             "targeted_practice": 1
@@ -12972,7 +12975,7 @@
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C13": {
           "assessed_by": [],
@@ -13026,15 +13029,14 @@
           "assessed_by": [],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 2,
+          "distinct_opportunities": 3,
           "libelle_eleve": "Je sais parcourir un arbre en ordres infixe, préfixe ou suffixe.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 0,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -13055,16 +13057,15 @@
           "assessed_by": [],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 1,
+          "distinct_opportunities": 2,
           "libelle_eleve": "Je sais parcourir un arbre en largeur d'abord.",
           "missing_function": [
             "NO_TARGETED_PRACTICE",
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 0,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 0
@@ -13142,15 +13143,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais parcourir un graphe en largeur d'abord.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 1,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -13171,16 +13171,15 @@
           "assessed_by": [],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 1,
+          "distinct_opportunities": 2,
           "libelle_eleve": "Je sais parcourir un graphe en profondeur d'abord.",
           "missing_function": [
             "NO_TARGETED_PRACTICE",
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 0,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 0
@@ -13216,11 +13215,12 @@
           "status": "INSUFFICIENT"
         }
       },
-      "capacities_digest": "sha256:8130d74c9a0622ad9b7ba4e7c5f3b18133cd65094073ea3bcb355536ac6969ad",
+      "capacities_digest": "sha256:03048d101ace5f0ad7e278147f0f7f0b95359c86c475bdc1cfb2970c2ba145d9",
       "capacity_identity_blockers": [],
       "chapter": "TNSI-ALGORITHMIQUE",
       "counts": {
-        "INSUFFICIENT": 13
+        "CANDIDATE_NON_SEMANTIC": 1,
+        "INSUFFICIENT": 12
       },
       "declarative_diversity_status": "INSUFFICIENT",
       "distinct_reasoning_paths": [],
@@ -13232,7 +13232,6 @@
         "C1",
         "C10",
         "C11",
-        "C12",
         "C13",
         "C2",
         "C3",
@@ -13308,15 +13307,13 @@
             "TNSI-ARCH-EVAL-A"
           ],
           "capacity_type": "PROCEDURAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 4,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 5,
           "libelle_eleve": "Je sais décrire l'ordonnancement de plusieurs processus.",
-          "missing_function": [
-            "NO_METHOD"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 1,
             "targeted_practice": 1
@@ -13331,7 +13328,7 @@
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C4": {
           "assessed_by": [
@@ -13370,15 +13367,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais identifier, selon le protocole de routage utilisé, la route empruntée par un paquet.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 1,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -13452,11 +13448,12 @@
           "status": "INSUFFICIENT"
         }
       },
-      "capacities_digest": "sha256:d6cbbc44ca2cde3649b2bd0bdee26e6411890a55d8d152c9ffd84fcef6c49c55",
+      "capacities_digest": "sha256:7ed89de3ecf7bf3c9c596a0a6134c7fc947b49fee79ea25c7c0e8a430adef981",
       "capacity_identity_blockers": [],
       "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
       "counts": {
-        "INSUFFICIENT": 7
+        "CANDIDATE_NON_SEMANTIC": 1,
+        "INSUFFICIENT": 6
       },
       "declarative_diversity_status": "INSUFFICIENT",
       "distinct_reasoning_paths": [],
@@ -13467,7 +13464,6 @@
       "insufficient": [
         "C1",
         "C2",
-        "C3",
         "C4",
         "C5",
         "C6",
@@ -13633,15 +13629,14 @@
           "assessed_by": [],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 2,
+          "distinct_opportunities": 3,
           "libelle_eleve": "Je sais repérer les anomalies dans le schéma d'une base de données.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 0,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -13712,15 +13707,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais construire des requêtes d'interrogation avec SELECT et FROM.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 1,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -13743,15 +13737,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais construire des requêtes d'interrogation avec WHERE.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 1,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -13774,15 +13767,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais construire des requêtes d'interrogation avec JOIN.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 1,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -13805,15 +13797,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais construire des requêtes d'interrogation avec ORDER BY.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 1,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -13831,7 +13822,7 @@
           "status": "INSUFFICIENT"
         }
       },
-      "capacities_digest": "sha256:7bc6e0d84b0fc4e0c500b329c15b69a1cdadec1cebdc51b1c4df5a0d6ff2079e",
+      "capacities_digest": "sha256:d2bde6fec3b9ba1c64e49d7f89ca6e186bb9c8b9e9b521f55c59133907f03428",
       "capacity_identity_blockers": [],
       "chapter": "TNSI-BASES-DE-DONNEES",
       "counts": {
@@ -14096,15 +14087,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais écrire un programme récursif.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 1,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -14127,15 +14117,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais analyser le fonctionnement d'un programme récursif.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 1,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -14267,7 +14256,7 @@
           "status": "INSUFFICIENT"
         }
       },
-      "capacities_digest": "sha256:ff88930c8c4512cd120e91821228f491465b5c70b4f04b356f3ad3f327a5a3f1",
+      "capacities_digest": "sha256:532c6d86cd4f2c2206b02ca079eb6d5b3ad9066916fdba4eecf197453c3aba87",
       "capacity_identity_blockers": [],
       "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
       "counts": {
@@ -14379,16 +14368,15 @@
           "assessed_by": [],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 1,
+          "distinct_opportunities": 2,
           "libelle_eleve": "Je sais spécifier une structure de données par son interface.",
           "missing_function": [
             "NO_TARGETED_PRACTICE",
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 0,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 0
@@ -14433,16 +14421,15 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 2,
+          "distinct_opportunities": 3,
           "libelle_eleve": "Je sais modéliser des situations sous forme de graphes.",
           "missing_function": [
             "NO_TARGETED_PRACTICE",
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 1,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 0
@@ -14518,15 +14505,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais passer d'une représentation de graphe à une autre.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 1,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -14763,7 +14749,7 @@
           "status": "INSUFFICIENT"
         }
       },
-      "capacities_digest": "sha256:4930c6ab04fed65ba58ed2397e479a5a89bfd9f2e88a3e5519b83c4477e95723",
+      "capacities_digest": "sha256:a2ac870c6f8ed7e3419ab6e305226acbb966c6b2ac1d86ac552eabfc8b2ed164",
       "capacity_identity_blockers": [],
       "chapter": "TNSI-STRUCTURES-DONNEES",
       "counts": {
@@ -14807,15 +14793,14 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "distinct_opportunities": 4,
           "libelle_eleve": "Je sais estimer graphiquement ou encadrer une intégrale et une valeur moyenne.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 1,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -14864,15 +14849,14 @@
           "assessed_by": [],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 2,
+          "distinct_opportunities": 3,
           "libelle_eleve": "Je sais majorer ou minorer une intégrale en comparant les fonctions intégrées.",
           "missing_function": [
-            "NO_REMEDIATION",
-            "NO_METHOD"
+            "NO_REMEDIATION"
           ],
           "opportunities": {
             "assessment": 0,
-            "method": 0,
+            "method": 1,
             "qcm": 1,
             "remediation": 0,
             "targeted_practice": 1
@@ -14926,16 +14910,15 @@
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 2,
+          "distinct_opportunities": 3,
           "libelle_eleve": "Je sais étudier une suite d'intégrales, notamment en établissant une relation de récurrence.",
           "missing_function": [
             "NO_REMEDIATION",
-            "NO_METHOD",
             "NO_QCM"
           ],
           "opportunities": {
             "assessment": 1,
-            "method": 0,
+            "method": 1,
             "qcm": 0,
             "remediation": 0,
             "targeted_practice": 1
@@ -15045,7 +15028,7 @@
           "status": "INSUFFICIENT"
         }
       },
-      "capacities_digest": "sha256:31d89c36d23b1ce84ea404bfbd04eb76bcaa06595fe41baa80c081802c0b87db",
+      "capacities_digest": "sha256:38dc0631d162595e17b5ececf5c8dd035a336c01543d69664137a66017697ef5",
       "capacity_identity_blockers": [],
       "chapter": "TSPE-CALCUL-INTEGRAL",
       "counts": {
@@ -17410,16 +17393,15 @@
           ],
           "capacity_type": "ATOMIC_SUPPORT",
           "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 2,
+          "distinct_opportunities": 3,
           "libelle_eleve": "Je sais modéliser une situation par une succession d'épreuves indépendantes, la représenter par un arbre et calculer des probabilités.",
           "missing_function": [
             "NO_REMEDIATION",
-            "NO_METHOD",
             "NO_QCM"
           ],
           "opportunities": {
             "assessment": 1,
-            "method": 0,
+            "method": 1,
             "qcm": 0,
             "remediation": 0,
             "targeted_practice": 1
@@ -17707,7 +17689,7 @@
           "status": "INSUFFICIENT"
         }
       },
-      "capacities_digest": "sha256:36a9b2fef06d69b7c424cf79e2b9b3473ea6da8808987dfe172cabdcd0d9a27e",
+      "capacities_digest": "sha256:9173c29a088437544acbea8b1d193a17d4722aa1d67ce0a4a6e6f02ef45becf2",
       "capacity_identity_blockers": [],
       "chapter": "TSPE-PROBABILITES",
       "counts": {
@@ -18428,7 +18410,7 @@
       "unknown": 0
     }
   },
-  "chapters_digest": "sha256:8d3dac087ee2b26f327b3d04c80f81d043834b654fac828e22e4fd89df14c527",
+  "chapters_digest": "sha256:448fa7248d72b5c5f1da0fb0be0dfb57ce1fd41952c3a50a8ffe216fe3b9b114",
   "generated_by": "scripts/build_chapter_richness_matrix.py",
   "incomplete_chapters": [
     "1NSI-ARCHITECTURE-OS",

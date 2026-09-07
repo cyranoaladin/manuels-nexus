@@ -2,8 +2,8 @@
   "artifact_type": "qcm_gap_metrics",
   "schema_version": 1,
   "generated_by": "scripts/build_qcm_gap_metrics.py",
-  "observed_source_sha": "2e51a9be56ee704da1389876611c55b1dac76e2c",
-  "source_digest": "sha256:c17763cc2de00a46071340b6e870fb6bf5070e726206a827a53e6af8416f73fb",
+  "observed_source_sha": "c668f79a8b85b350f881ccf840e34e20dfddc4cc",
+  "source_digest": "sha256:3d824a15216d291c1698573ed48e7947d685645a0dd899e976d6675b0caed044",
   "source_inputs": [
     {
       "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/qcm/1SPE-DERIVATION-GLOBAL-QCM.json",
@@ -171,7 +171,7 @@
     },
     {
       "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml",
-      "sha256": "sha256:77fc35142c1b30142a781f8ca1221ba517d4479f492a6467416cbd09d6d9c678"
+      "sha256": "sha256:5c2e8817e924c2b3a0d5b750b53952bbb373e7ded94fc14d18d8e45288688d9b"
     },
     {
       "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/contrat.yaml",
@@ -415,7 +415,7 @@
     },
     {
       "path": "NSI/chapitres/TNSI-PROJET/contrat.yaml",
-      "sha256": "sha256:b85d3f5d99a4f2e4223578008cb5c5d2209d4a062a33c6258f936fa251989465"
+      "sha256": "sha256:05b5886783c7ff5699202ebb9967c2644e4c0f4c762ac83ada2eb0343f9814ec"
     },
     {
       "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/contrat.yaml",
@@ -431,12 +431,14 @@
   "inventory": {
     "chapters": 52,
     "questions": 490,
-    "contract_capacity_pairs": 320,
+    "contract_capacity_pairs": 322,
     "distractors": 1470
   },
   "UNIQUE_CAPACITY_IDS_WITHOUT_ANY_QCM": {
-    "count": 37,
+    "count": 39,
     "ids": [
+      "1SPE-SECOND-DEGRE-2026-C1",
+      "1SPE-SECOND-DEGRE-2026-C2",
       "TCOMPL-ATT-C4",
       "TCOMPL-ATT-C5",
       "TCOMPL-ATT-C6",
@@ -477,8 +479,12 @@
     ]
   },
   "CHAPTER_CAPACITY_PAIRS_WITHOUT_ANY_QCM": {
-    "count": 37,
+    "count": 39,
     "by_chapter": {
+      "1SPE-SECOND-DEGRE": [
+        "C7",
+        "C8"
+      ],
       "TCOMPL-ECHANTILLONNAGE": [
         "C6",
         "C7"
