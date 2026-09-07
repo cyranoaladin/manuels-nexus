@@ -93,6 +93,28 @@ def _file_digest(path: Path) -> str:
 #: ensemble — et ils ne l'étaient plus.
 FREEZE_FIELDS = ("forensic_source_sha",)
 
+#: Champs de PROVENANCE de l'inventaire canonique. Ils enregistrent le HEAD
+#: observé et le compte de bloqueurs du moment : ils changent donc à chaque
+#: commit, y compris à celui qui dépose ce rapport. Les inclure dans une
+#: empreinte de preuve recrée exactement le cycle décrit ci-dessus — le
+#: rapport périme l'inventaire, dont la régénération périme le rapport — et
+#: aucun des deux ne pouvait plus être courant. Ce qui est vérifié ici, c'est
+#: que le MODÈLE de la collection n'a pas bougé, pas qu'il a été régénéré au
+#: même commit.
+INVENTORY_PROVENANCE_FIELDS = ("provenance", "report_reconciliation")
+
+
+def _inventory_model_digest(path: Path) -> str:
+    """Empreinte du modèle de collection, sa provenance retirée."""
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if isinstance(payload, dict):
+        payload = {k: v for k, v in payload.items()
+                   if k not in INVENTORY_PROVENANCE_FIELDS}
+    return "sha256:" + hashlib.sha256(
+        json.dumps(payload, ensure_ascii=False, sort_keys=True,
+                   separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+
 
 def _content_digest_without_freeze(path: Path) -> str:
     """Empreinte du CONTENU d'un artefact, sa marque de gel retirée.
@@ -482,7 +504,7 @@ def build_partition(root: Path = ROOT) -> dict[str, Any]:
         "union_equals_current_review_debt": union == current,
         "unknown_count": 0,
         "evidence": {
-            str(INVENTORY): _file_digest(root / INVENTORY),
+            str(INVENTORY): _inventory_model_digest(root / INVENTORY),
             str(ALGEBRA): _content_digest_without_freeze(root / ALGEBRA),
             str(METHOD_REQUALIFICATION): _file_digest(root / METHOD_REQUALIFICATION),
             str(RESIDUAL_FORENSICS): _content_digest_without_freeze(
