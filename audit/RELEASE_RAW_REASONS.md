@@ -2,18 +2,18 @@
 
 Dérivé intégralement du gate `release-strict`. Aucun compte n'est écrit en dur.
 
-- Motifs bruts (`RAW_REASON_COUNT`) : `293`
-- Bloqueurs racines (`ROOT_BLOCKER_COUNT`) : `16`
-- Motifs non classés (`UNMAPPED_RAW_REASONS`) : `0`
+- Motifs bruts (`RAW_REASON_COUNT`) : `147`
+- Bloqueurs racines (`ROOT_BLOCKER_COUNT`) : `13`
+- Motifs non classés (`UNMAPPED_RAW_REASONS`) : `1`
 - Identifiants dupliqués (`DUPLICATE_REASON_IDS`) : `0`
 - Conflits de classification : `0`
 
 | Taxonomie | Bloqueurs racines |
 |---|---|
 | `PRODUCT_P0` | 0 |
-| `PRODUCT_P1` | 2 |
-| `PRODUCT_P2` | 1 |
-| `CERTIFICATION_BLOCKER` | 10 |
+| `PRODUCT_P1` | 1 |
+| `PRODUCT_P2` | 0 |
+| `CERTIFICATION_BLOCKER` | 9 |
 | `RELEASE_POLICY_BLOCKER` | 2 |
 | `GOVERNANCE_BLOCKER` | 1 |
 
@@ -31,9 +31,6 @@ Dérivé intégralement du gate `release-strict`. Aucun compte n'est écrit en d
 | `ROOT-HUMAN-REVIEW-QUEUE` | `CERTIFICATION_BLOCKER` | File de revue humaine ouverte | 53 |
 | `ROOT-NON-APPROVED-STATUSES` | `GOVERNANCE_BLOCKER` | Objets et contrats non approuvés | 12 |
 | `ROOT-OPTIONAL-DELIVERABLE-NOT-APPROVED` | `RELEASE_POLICY_BLOCKER` | Livrable facultatif seulement proposé | 4 |
-| `ROOT-ORACLE-EVIDENCE` | `CERTIFICATION_BLOCKER` | Preuve oracle QCM absente | 42 |
-| `ROOT-PEDAGOGICAL-RICHNESS` | `PRODUCT_P2` | Richesse pédagogique insuffisante | 35 |
-| `ROOT-PEDAGOGICAL-ROLE-COVERAGE` | `PRODUCT_P1` | Rôles pédagogiques non couverts | 43 |
+| `ROOT-PRODUCER-STALE` | `CERTIFICATION_BLOCKER` | Producteurs de preuve stale ou rouges | 5 |
 | `ROOT-PUBLICATION-SNAPSHOT-UNDECIDED` | `RELEASE_POLICY_BLOCKER` | Snapshots de publication non arbitrés | 1 |
-| `ROOT-QUALIFICATION-STALE` | `CERTIFICATION_BLOCKER` | Qualifications dérivées invalidées par une mutation de source | 3 |
-| `ROOT-VERTICAL-MACHINE-STATUS` | `CERTIFICATION_BLOCKER` | Chaîne machine verticale incomplète | 43 |
+| `ROOT-VERTICAL-MACHINE-STATUS` | `CERTIFICATION_BLOCKER` | Chaîne machine verticale incomplète | 15 |

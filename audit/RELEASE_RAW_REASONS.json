@@ -3,14 +3,14 @@
   "schema_version": 3,
   "generated_by": "scripts/build_release_raw_reasons.py",
   "freshness": {
-    "EVIDENCE_HEAD": "51f0717b53ca97014aecb5931b47411d720892f2",
+    "EVIDENCE_HEAD": "f54149a5b486fa1a1532f60630a6589741b7e965",
     "INPUT_PATHS": [
-      "audit/gate_observations/release-strict-3233bd50.json"
+      "audit/gate_observations/0eebd5426b5c74a4bc0d4d69dc5e594d22fd2bc8/release-strict.json"
     ],
-    "INPUT_DIGEST": "sha256:27a04f578739dd165c22477547b21ccece3e635091a376bd621b0ea1ac325e05",
+    "INPUT_DIGEST": "sha256:c890e129a80679f65a0622d0335c581abdae34cfdfeecb2fd1c3c0b3e88aca03",
     "WHOLE_REPOSITORY_INPUT": true,
     "OBSERVATION_HEADS": [
-      "3233bd5020448dafeebde37fae5a8f860aaee845"
+      "0eebd5426b5c74a4bc0d4d69dc5e594d22fd2bc8"
     ]
   },
   "gate_observations": [
@@ -19,27 +19,26 @@
       "gate": "release-strict",
       "exit_code": 7,
       "success": false,
-      "reason_count": 293
+      "reason_count": 148
     }
   ],
   "summary": {
-    "RAW_REASON_COUNT": 293,
-    "ROOT_BLOCKER_COUNT": 16,
-    "UNMAPPED_RAW_REASONS": 0,
+    "RAW_REASON_COUNT": 147,
+    "ROOT_BLOCKER_COUNT": 13,
+    "UNMAPPED_RAW_REASONS": 1,
     "DUPLICATE_REASON_IDS": 0,
     "BLOCKER_CLASSIFICATION_CONFLICTS": 0,
     "PRODUCT_P0": 0,
-    "PRODUCT_P1": 2,
-    "PRODUCT_P2": 1,
-    "CERTIFICATION_BLOCKERS": 10,
+    "PRODUCT_P1": 1,
+    "PRODUCT_P2": 0,
+    "CERTIFICATION_BLOCKERS": 9,
     "RELEASE_POLICY_BLOCKERS": 2,
     "GOVERNANCE_BLOCKERS": 1,
     "RAW_REASONS_BY_TAXONOMY": {
-      "CERTIFICATION_BLOCKER": 197,
       "GOVERNANCE_BLOCKER": 12,
+      "CERTIFICATION_BLOCKER": 129,
       "RELEASE_POLICY_BLOCKER": 5,
-      "PRODUCT_P1": 44,
-      "PRODUCT_P2": 35
+      "PRODUCT_P1": 1
     }
   },
   "root_blockers": [
@@ -223,18 +222,18 @@
       "taxonomy": "GOVERNANCE_BLOCKER",
       "dependent_reason_count": 12,
       "dependent_reason_ids": [
-        "RSN-2a34d93718ad0cd4",
-        "RSN-2ace443e173bdbf1",
-        "RSN-6747c7c7d8e80eb4",
+        "RSN-0d783b67681e0601",
+        "RSN-4ba69b2db98124f6",
+        "RSN-6b634ff929041975",
         "RSN-7a6b0954401662cd",
         "RSN-9796c7a4e9eb47cf",
         "RSN-a27dc36e44e4961e",
         "RSN-aa4b7ff5845168fc",
-        "RSN-aa4ca31e6c1853bf",
-        "RSN-b58f7e4e0b242959",
+        "RSN-b8ebfb1ad19e34e8",
         "RSN-c298974c70e4aabe",
-        "RSN-ca3f478e66d9c874",
-        "RSN-fec8187a1229ea49"
+        "RSN-d3b2989e49fc9b52",
+        "RSN-fec8187a1229ea49",
+        "RSN-ffd4c998b59001b7"
       ]
     },
     {
@@ -250,147 +249,16 @@
       ]
     },
     {
-      "root_blocker_id": "ROOT-ORACLE-EVIDENCE",
-      "title": "Preuve oracle QCM absente",
+      "root_blocker_id": "ROOT-PRODUCER-STALE",
+      "title": "Producteurs de preuve stale ou rouges",
       "taxonomy": "CERTIFICATION_BLOCKER",
-      "dependent_reason_count": 42,
+      "dependent_reason_count": 5,
       "dependent_reason_ids": [
-        "RSN-03ce0b230ac26fac",
-        "RSN-058ccacc136d76b3",
-        "RSN-0f55795b93d924bd",
-        "RSN-21ce97f2901e0e86",
-        "RSN-2e8299b19b36e95e",
-        "RSN-3fd5e135bb704439",
-        "RSN-48a61f2bf1a21f61",
-        "RSN-4e9098c43cd993d7",
-        "RSN-5193e791b3d427f3",
-        "RSN-5cd8078152ebc8a9",
-        "RSN-5de3a10fe7e6294a",
-        "RSN-61695c59ad5e49f2",
-        "RSN-65838404ee688c99",
-        "RSN-6958ca12a355a9d3",
-        "RSN-6a61b1b24ead4b39",
-        "RSN-7581772dca9246f1",
-        "RSN-7dc328af17703f92",
-        "RSN-83c2479ff2848a9a",
-        "RSN-83cf10d670889eb6",
-        "RSN-8633e98f7ed1d2e5",
-        "RSN-8791ea5419d2ba80",
-        "RSN-986012569fe1c921",
-        "RSN-9b2bf40f07d5dca1",
-        "RSN-9ec73788923e8d11",
-        "RSN-a4e0170752f6b837",
-        "RSN-ad15c5e71588b820",
-        "RSN-b2454850cf81e926",
-        "RSN-b897fc57eb4b41b8",
-        "RSN-b99cb31de8c43fca",
-        "RSN-bd52d794b64d22e0",
-        "RSN-bd89b40c8b9e2d5c",
-        "RSN-c236a3852b70d07a",
-        "RSN-c74345b3279bedaa",
-        "RSN-cbde156a4cd5d200",
-        "RSN-cf935240dadb8609",
-        "RSN-cfe78e29a38d9859",
-        "RSN-d5bac70544a316c7",
-        "RSN-da754af7b19300e4",
-        "RSN-dc93a35b4847ce0a",
-        "RSN-f07d5e04d6fd16a6",
-        "RSN-f9ce08b982dc4e2f",
-        "RSN-fec61d9b5e05dfe8"
-      ]
-    },
-    {
-      "root_blocker_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "title": "Richesse pédagogique insuffisante",
-      "taxonomy": "PRODUCT_P2",
-      "dependent_reason_count": 35,
-      "dependent_reason_ids": [
-        "RSN-03fa11f3b6c7a13a",
-        "RSN-07fd8ec119b34c44",
-        "RSN-135fb26bf994f89b",
-        "RSN-1e7380fcd5685fad",
-        "RSN-302260bfca8a4c99",
-        "RSN-332c5bed074f44d6",
-        "RSN-3cc23472ac5bb00e",
-        "RSN-54319e8386446776",
-        "RSN-5c7079f321442cba",
-        "RSN-5f63b2ed22783b0b",
-        "RSN-5fd2baf63e715f33",
-        "RSN-68b39e02f78631ad",
-        "RSN-6ce866ce630cc25c",
-        "RSN-7699dc73d1f8c011",
-        "RSN-886aee6c34ee17e5",
-        "RSN-a039d9c3fbee772d",
-        "RSN-a13ffd45a67ad972",
-        "RSN-a2675d260cc67224",
-        "RSN-b06153a6b15acb85",
-        "RSN-b15da2b28f6b7103",
-        "RSN-b8b888c70b5bd802",
-        "RSN-c13feca67c8154c6",
-        "RSN-c2aedbb82b9dc448",
-        "RSN-c6d6fbdd79c77f68",
-        "RSN-ccdc67ef21d59b71",
-        "RSN-ccf8a443d034387b",
-        "RSN-d41a9647df7c77ab",
-        "RSN-d6a1dc9dce260583",
-        "RSN-d8f48a5fc40cd0a0",
-        "RSN-d9defb4a3a9a0513",
-        "RSN-dddeb14f43c2919f",
-        "RSN-f1d92e00067f7f04",
-        "RSN-f707839b05d6dd53",
-        "RSN-f9348d25da1edba5",
-        "RSN-faa34069924db221"
-      ]
-    },
-    {
-      "root_blocker_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "title": "Rôles pédagogiques non couverts",
-      "taxonomy": "PRODUCT_P1",
-      "dependent_reason_count": 43,
-      "dependent_reason_ids": [
-        "RSN-03c3bcc6e1bed8a4",
-        "RSN-03e3142c8abc1c22",
-        "RSN-0aa5ffbf5a70c067",
-        "RSN-0e5198e4e79d517b",
-        "RSN-0f7e11880899c74f",
-        "RSN-10ac06e5912335e0",
-        "RSN-173f6ce5ca0fd30c",
-        "RSN-1ff71af47d3c2317",
-        "RSN-242a1677f6c7d181",
-        "RSN-2c79298b16dedd06",
-        "RSN-3702b7e01ac9a864",
-        "RSN-3808e2be83ca86a7",
-        "RSN-3bf52c9b751faef6",
-        "RSN-3d48c389a4579517",
-        "RSN-4581dd592deaae0b",
-        "RSN-4a5b4c4d1481b658",
-        "RSN-4ac5f9134b5fda8c",
-        "RSN-4e02fe72b59bc2d3",
-        "RSN-634c39011aaf4913",
-        "RSN-65eb981b7779bc08",
-        "RSN-6658c3be6c0f9c6a",
-        "RSN-678d596491cfb507",
-        "RSN-71f2f0fecf2380b1",
-        "RSN-75590122a6f92bf4",
-        "RSN-7709ad99b34a2ed9",
-        "RSN-918d90ca5fddcd74",
-        "RSN-950b23aa0e5151f5",
-        "RSN-ade90524d13358e6",
-        "RSN-ae68923878af5176",
-        "RSN-af65b0a11285981e",
-        "RSN-b74b4903209f3215",
-        "RSN-bbe6f1a680d62c69",
-        "RSN-c6c54b4034b34b09",
-        "RSN-cd3318119d46cd2a",
-        "RSN-cea44aff01fe79e5",
-        "RSN-d2b00e9547e75c21",
-        "RSN-d3a3571493ec2fcc",
-        "RSN-d4ccc61f93d02661",
-        "RSN-ddbce8a5fba3faaa",
-        "RSN-e453c8c0aebc764f",
-        "RSN-eace6d5110325ca0",
-        "RSN-f2d448ca08c0c6c7",
-        "RSN-f8e7e112363fcb86"
+        "RSN-16caed16674c847b",
+        "RSN-3e60facdb2acfbd5",
+        "RSN-745d2ec64d56190d",
+        "RSN-8b256cdd8c834836",
+        "RSN-dc90fa82930fe714"
       ]
     },
     {
@@ -403,69 +271,32 @@
       ]
     },
     {
-      "root_blocker_id": "ROOT-QUALIFICATION-STALE",
-      "title": "Qualifications dérivées invalidées par une mutation de source",
-      "taxonomy": "CERTIFICATION_BLOCKER",
-      "dependent_reason_count": 3,
-      "dependent_reason_ids": [
-        "RSN-544cc838584bb34a",
-        "RSN-7000535f919be60f",
-        "RSN-c84e16c67800c865"
-      ]
-    },
-    {
       "root_blocker_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "title": "Chaîne machine verticale incomplète",
       "taxonomy": "CERTIFICATION_BLOCKER",
-      "dependent_reason_count": 43,
+      "dependent_reason_count": 15,
       "dependent_reason_ids": [
-        "RSN-0f2fe2cf6c04f3bb",
-        "RSN-1d3c4d1071c6cfc8",
-        "RSN-1dad1ea6508c6739",
-        "RSN-1ee945b7b970600c",
-        "RSN-2f07a8e173af1ba2",
         "RSN-2f1a3540cf7b61fc",
-        "RSN-31a70d4dd0e1114c",
-        "RSN-33df5b13118d4861",
-        "RSN-35a252751a78c949",
-        "RSN-380c58022e835a1e",
         "RSN-381eab0621863b18",
         "RSN-3f257ec053e695f3",
         "RSN-4529623ffbeb6210",
-        "RSN-46ed5516e64fa859",
-        "RSN-4acc73b80c47bd9a",
-        "RSN-5f475e72785e407a",
         "RSN-600eabb62ee3903d",
-        "RSN-7c1e3af3529c4a12",
         "RSN-7d21d71d32443c64",
-        "RSN-7e6f7f32bd9b5766",
         "RSN-86fee4983a669ee5",
-        "RSN-8ace626dd4f9f182",
-        "RSN-8bee33b70f3950ba",
-        "RSN-8c89223a3e6b54bf",
         "RSN-8dfb24dd0444e2c9",
         "RSN-914f99c9dafc940d",
         "RSN-969ae511c4e345ed",
         "RSN-a22ab92c7e1ea912",
-        "RSN-a50bd93f8c700f84",
-        "RSN-a6664d3b1865bdb6",
         "RSN-abdb79f9919b5f8e",
         "RSN-b06c6b5f5129f524",
         "RSN-ba20fadb40df128e",
-        "RSN-d09e6ed08e4cecec",
-        "RSN-d363f95e5c6b4ed2",
-        "RSN-d3f0d78c23c343e6",
-        "RSN-d4dd9321fd1d9d02",
-        "RSN-d81cd8a83fbc3174",
-        "RSN-de2738f342e68f04",
-        "RSN-dfab0051b1012fb8",
-        "RSN-f23fcaec1c15826b",
-        "RSN-f5beb2a1001b3597",
-        "RSN-f921b5a9656c33dc"
+        "RSN-d81cd8a83fbc3174"
       ]
     }
   ],
-  "unmapped_raw_reasons": [],
+  "unmapped_raw_reasons": [
+    "TSPE_2026_2027:anomalie:broken_meta_references:anomalies.broken_meta_references:2"
+  ],
   "raw_reasons": [
     {
       "reason_id": "RSN-145b39f80a963ded",
@@ -2166,12 +1997,12 @@
       ]
     },
     {
-      "reason_id": "RSN-2a34d93718ad0cd4",
+      "reason_id": "RSN-ffd4c998b59001b7",
       "producer": "inventory_collection.anomalies",
       "target": "TCOMPL",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TCOMPL:anomalie:blocking_statuses:anomalies.blocking_statuses:226",
+      "evidence": "TCOMPL:anomalie:blocking_statuses:anomalies.blocking_statuses:309",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
@@ -2179,12 +2010,12 @@
       ]
     },
     {
-      "reason_id": "RSN-6747c7c7d8e80eb4",
+      "reason_id": "RSN-b8ebfb1ad19e34e8",
       "producer": "inventory_collection.statuses",
       "target": "TCOMPL",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TCOMPL:statuts_non_approuves:manuals.TCOMPL.statuses:objets=217; contrats=9",
+      "evidence": "TCOMPL:statuts_non_approuves:manuals.TCOMPL.statuses:objets=300; contrats=9",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
@@ -2192,12 +2023,12 @@
       ]
     },
     {
-      "reason_id": "RSN-aa4ca31e6c1853bf",
+      "reason_id": "RSN-6b634ff929041975",
       "producer": "inventory_collection.anomalies",
       "target": "TEXPERTES",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TEXPERTES:anomalie:blocking_statuses:anomalies.blocking_statuses:131",
+      "evidence": "TEXPERTES:anomalie:blocking_statuses:anomalies.blocking_statuses:240",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
@@ -2205,12 +2036,12 @@
       ]
     },
     {
-      "reason_id": "RSN-b58f7e4e0b242959",
+      "reason_id": "RSN-4ba69b2db98124f6",
       "producer": "inventory_collection.statuses",
       "target": "TEXPERTES",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TEXPERTES:statuts_non_approuves:manuals.TEXPERTES.statuses:objets=126; contrats=5",
+      "evidence": "TEXPERTES:statuts_non_approuves:manuals.TEXPERTES.statuses:objets=235; contrats=5",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
@@ -2244,12 +2075,12 @@
       ]
     },
     {
-      "reason_id": "RSN-2ace443e173bdbf1",
+      "reason_id": "RSN-0d783b67681e0601",
       "producer": "inventory_collection.anomalies",
       "target": "TSPE_2026_2027",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TSPE_2026_2027:anomalie:blocking_statuses:anomalies.blocking_statuses:59",
+      "evidence": "TSPE_2026_2027:anomalie:blocking_statuses:anomalies.blocking_statuses:67",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
@@ -2257,12 +2088,12 @@
       ]
     },
     {
-      "reason_id": "RSN-ca3f478e66d9c874",
+      "reason_id": "RSN-d3b2989e49fc9b52",
       "producer": "inventory_collection.statuses",
       "target": "TSPE_2026_2027",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TSPE_2026_2027:statuts_non_approuves:manuals.TSPE_2026_2027.statuses:objets=59; contrats=0",
+      "evidence": "TSPE_2026_2027:statuts_non_approuves:manuals.TSPE_2026_2027.statuses:objets=67; contrats=0",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
@@ -2346,1561 +2177,66 @@
       }
     },
     {
-      "reason_id": "RSN-c236a3852b70d07a",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "reason_id": "RSN-3e60facdb2acfbd5",
+      "producer": "inventory_collection.content_integrity",
+      "target": "scripts/build_current_review_debt_partition.py",
       "object_id": null,
       "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-ALGO-DICHO-GLOUTON-KNN:oracle:NO_RECEIPTS",
+      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_current_review_debt_partition.py:rc=1",
       "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
+      "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
         "release-strict"
       ]
     },
     {
-      "reason_id": "RSN-5de3a10fe7e6294a",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "1NSI-ALGO-PARCOURS-TRIS",
+      "reason_id": "RSN-16caed16674c847b",
+      "producer": "inventory_collection.content_integrity",
+      "target": "scripts/build_p0_content_clone_ledger.py",
       "object_id": null,
       "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-ALGO-PARCOURS-TRIS:oracle:NO_RECEIPTS",
+      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_p0_content_clone_ledger.py:rc=1",
       "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
+      "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
         "release-strict"
       ]
     },
     {
-      "reason_id": "RSN-0f55795b93d924bd",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "1NSI-ARCHITECTURE-OS",
+      "reason_id": "RSN-dc90fa82930fe714",
+      "producer": "inventory_collection.content_integrity",
+      "target": "scripts/build_qcm_capacity_coverage_debt.py",
       "object_id": null,
       "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-ARCHITECTURE-OS:oracle:NO_RECEIPTS",
+      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_qcm_capacity_coverage_debt.py:rc=1",
       "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
+      "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
         "release-strict"
       ]
     },
     {
-      "reason_id": "RSN-6a61b1b24ead4b39",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "1NSI-LANGAGE",
+      "reason_id": "RSN-745d2ec64d56190d",
+      "producer": "inventory_collection.content_integrity",
+      "target": "scripts/build_qcm_gap_metrics.py",
       "object_id": null,
       "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-LANGAGE:oracle:NO_RECEIPTS",
+      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_qcm_gap_metrics.py:rc=1",
       "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
+      "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
         "release-strict"
       ]
     },
     {
-      "reason_id": "RSN-bd89b40c8b9e2d5c",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "1NSI-PROJET-METHODES",
+      "reason_id": "RSN-8b256cdd8c834836",
+      "producer": "inventory_collection.content_integrity",
+      "target": "scripts/collection_dashboard.py",
       "object_id": null,
       "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-PROJET-METHODES:oracle:NO_RECEIPTS",
+      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/collection_dashboard.py:rc=1",
       "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-b99cb31de8c43fca",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "1NSI-RESEAUX",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-RESEAUX:oracle:NO_RECEIPTS",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-83cf10d670889eb6",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "1NSI-TABLES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-TABLES:oracle:NO_RECEIPTS",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-83c2479ff2848a9a",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "1NSI-TYPES-BASE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-TYPES-BASE:oracle:NO_RECEIPTS",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-61695c59ad5e49f2",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "1NSI-TYPES-CONSTRUITS",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-TYPES-CONSTRUITS:oracle:NO_RECEIPTS",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-9b2bf40f07d5dca1",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "1NSI-WEB-IHM",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-WEB-IHM:oracle:NO_RECEIPTS",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-cf935240dadb8609",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TCOMPL-CALCULS-AIRES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-CALCULS-AIRES:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-8791ea5419d2ba80",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TCOMPL-CORRELATION-CAUSALITE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-CORRELATION-CAUSALITE:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-f07d5e04d6fd16a6",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TCOMPL-ECHANTILLONNAGE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-ECHANTILLONNAGE:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-4e9098c43cd993d7",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TCOMPL-INEGALITES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-INEGALITES:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-3fd5e135bb704439",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TCOMPL-INFERENCE-BAYESIENNE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-INFERENCE-BAYESIENNE:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-65838404ee688c99",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TCOMPL-LOGARITHME-HISTORIQUE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-LOGARITHME-HISTORIQUE:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-cfe78e29a38d9859",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TCOMPL-MODELES-EVOLUTION",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-MODELES-EVOLUTION:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-058ccacc136d76b3",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TCOMPL-MODELES-FONCTION",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-MODELES-FONCTION:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-bd52d794b64d22e0",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TCOMPL-TEMPS-ATTENTE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-TEMPS-ATTENTE:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-b897fc57eb4b41b8",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TEXP-ARITHMETIQUE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TEXP-ARITHMETIQUE:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-03ce0b230ac26fac",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TEXP-COMPLEXES-ALGEBRE-GEOMETRIE:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-5cd8078152ebc8a9",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TEXP-COMPLEXES-TRIGO-POLYNOMES:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-da754af7b19300e4",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TEXP-GRAPHES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TEXP-GRAPHES:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-6958ca12a355a9d3",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TEXP-MATRICES-MARKOV",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TEXP-MATRICES-MARKOV:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-7581772dca9246f1",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TNSI-ALGORITHMIQUE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-ALGORITHMIQUE:oracle:NO_RECEIPTS",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-9ec73788923e8d11",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TNSI-ARCHITECTURES-MATERIELLES-SY",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-ARCHITECTURES-MATERIELLES-SY:oracle:NO_RECEIPTS",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-a4e0170752f6b837",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TNSI-BASES-DE-DONNEES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-BASES-DE-DONNEES:oracle:NO_RECEIPTS",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-d5bac70544a316c7",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TNSI-HISTOIRE-INFORMATIQUE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-HISTOIRE-INFORMATIQUE:oracle:NO_RECEIPTS",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-fec61d9b5e05dfe8",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TNSI-LANGAGES-ET-PROGRAMMATION",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-LANGAGES-ET-PROGRAMMATION:oracle:NO_RECEIPTS",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-8633e98f7ed1d2e5",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TNSI-PROJET",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-PROJET:oracle:NO_RECEIPTS",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-21ce97f2901e0e86",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TNSI-STRUCTURES-DONNEES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-STRUCTURES-DONNEES:oracle:NO_RECEIPTS",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-ad15c5e71588b820",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TSPE-CALCUL-INTEGRAL",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-CALCUL-INTEGRAL:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-7dc328af17703f92",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TSPE-COMBINATOIRE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-COMBINATOIRE:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-b2454850cf81e926",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TSPE-CONTINUITE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-CONTINUITE:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-986012569fe1c921",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TSPE-DERIVATION-CONVEXITE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-DERIVATION-CONVEXITE:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-c74345b3279bedaa",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TSPE-GEOMETRIE-ESPACE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-GEOMETRIE-ESPACE:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-48a61f2bf1a21f61",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TSPE-LIMITES-FONCTIONS",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-LIMITES-FONCTIONS:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-2e8299b19b36e95e",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TSPE-LOGARITHME",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-LOGARITHME:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-5193e791b3d427f3",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TSPE-PRIMITIVES-EQDIFF",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-PRIMITIVES-EQDIFF:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-dc93a35b4847ce0a",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TSPE-PROBABILITES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-PROBABILITES:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-cbde156a4cd5d200",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TSPE-SUITES-LIMITES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-SUITES-LIMITES:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-f9ce08b982dc4e2f",
-      "producer": "build_qcm_independent_evidence_v2",
-      "target": "TSPE-TRIGONOMETRIE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-TRIGONOMETRIE:oracle:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ORACLE-EVIDENCE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-7699dc73d1f8c011",
-      "producer": "build_chapter_richness_matrix",
-      "target": "1NSI-ARCHITECTURE-OS",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:1NSI-ARCHITECTURE-OS:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-ccf8a443d034387b",
-      "producer": "build_chapter_richness_matrix",
-      "target": "1NSI-LANGAGE",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:1NSI-LANGAGE:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-03fa11f3b6c7a13a",
-      "producer": "build_chapter_richness_matrix",
-      "target": "1NSI-PROJET-METHODES",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:1NSI-PROJET-METHODES:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-d6a1dc9dce260583",
-      "producer": "build_chapter_richness_matrix",
-      "target": "1NSI-RESEAUX",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:1NSI-RESEAUX:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-b06153a6b15acb85",
-      "producer": "build_chapter_richness_matrix",
-      "target": "1NSI-TABLES",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:1NSI-TABLES:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-f707839b05d6dd53",
-      "producer": "build_chapter_richness_matrix",
-      "target": "1NSI-TYPES-BASE",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:1NSI-TYPES-BASE:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-6ce866ce630cc25c",
-      "producer": "build_chapter_richness_matrix",
-      "target": "1NSI-WEB-IHM",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:1NSI-WEB-IHM:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-c13feca67c8154c6",
-      "producer": "build_chapter_richness_matrix",
-      "target": "1SPE-SECOND-DEGRE",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:1SPE-SECOND-DEGRE:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-dddeb14f43c2919f",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TCOMPL-CALCULS-AIRES",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TCOMPL-CALCULS-AIRES:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-faa34069924db221",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TCOMPL-CORRELATION-CAUSALITE",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TCOMPL-CORRELATION-CAUSALITE:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-a2675d260cc67224",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TCOMPL-ECHANTILLONNAGE",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TCOMPL-ECHANTILLONNAGE:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-3cc23472ac5bb00e",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TCOMPL-INEGALITES",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TCOMPL-INEGALITES:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-1e7380fcd5685fad",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TCOMPL-INFERENCE-BAYESIENNE",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TCOMPL-INFERENCE-BAYESIENNE:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-c6d6fbdd79c77f68",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TCOMPL-LOGARITHME-HISTORIQUE",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TCOMPL-LOGARITHME-HISTORIQUE:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-b15da2b28f6b7103",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TCOMPL-MODELES-EVOLUTION",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TCOMPL-MODELES-EVOLUTION:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-135fb26bf994f89b",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TCOMPL-MODELES-FONCTION",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TCOMPL-MODELES-FONCTION:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-d9defb4a3a9a0513",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TCOMPL-TEMPS-ATTENTE",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TCOMPL-TEMPS-ATTENTE:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-a039d9c3fbee772d",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TEXP-ARITHMETIQUE",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TEXP-ARITHMETIQUE:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-d41a9647df7c77ab",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TEXP-COMPLEXES-ALGEBRE-GEOMETRIE:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-d8f48a5fc40cd0a0",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TEXP-COMPLEXES-TRIGO-POLYNOMES:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-5fd2baf63e715f33",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TEXP-GRAPHES",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TEXP-GRAPHES:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-886aee6c34ee17e5",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TEXP-MATRICES-MARKOV",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TEXP-MATRICES-MARKOV:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-332c5bed074f44d6",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TNSI-ALGORITHMIQUE",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TNSI-ALGORITHMIQUE:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-68b39e02f78631ad",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TNSI-ARCHITECTURES-MATERIELLES-SY",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TNSI-ARCHITECTURES-MATERIELLES-SY:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-302260bfca8a4c99",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TNSI-BASES-DE-DONNEES",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TNSI-BASES-DE-DONNEES:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-a13ffd45a67ad972",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TNSI-HISTOIRE-INFORMATIQUE",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TNSI-HISTOIRE-INFORMATIQUE:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-5f63b2ed22783b0b",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TNSI-LANGAGES-ET-PROGRAMMATION",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TNSI-LANGAGES-ET-PROGRAMMATION:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-07fd8ec119b34c44",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TNSI-PROJET",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TNSI-PROJET:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-54319e8386446776",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TNSI-STRUCTURES-DONNEES",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TNSI-STRUCTURES-DONNEES:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-5c7079f321442cba",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TSPE-CALCUL-INTEGRAL",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TSPE-CALCUL-INTEGRAL:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-f1d92e00067f7f04",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TSPE-COMBINATOIRE",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TSPE-COMBINATOIRE:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-b8b888c70b5bd802",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TSPE-LOGARITHME",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TSPE-LOGARITHME:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-c2aedbb82b9dc448",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TSPE-PRIMITIVES-EQDIFF",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TSPE-PRIMITIVES-EQDIFF:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-f9348d25da1edba5",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TSPE-PROBABILITES",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TSPE-PROBABILITES:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-ccdc67ef21d59b71",
-      "producer": "build_chapter_richness_matrix",
-      "target": "TSPE-SUITES-LIMITES",
-      "object_id": null,
-      "category": "PRODUCT_P2",
-      "evidence": "CONTENT:TSPE-SUITES-LIMITES:pedagogical_richness:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-03c3bcc6e1bed8a4",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-ALGO-DICHO-GLOUTON-KNN:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-3808e2be83ca86a7",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "1NSI-ALGO-PARCOURS-TRIS",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-ALGO-PARCOURS-TRIS:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-75590122a6f92bf4",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "1NSI-ARCHITECTURE-OS",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-ARCHITECTURE-OS:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-3702b7e01ac9a864",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "1NSI-LANGAGE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-LANGAGE:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-950b23aa0e5151f5",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "1NSI-PROJET-METHODES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-PROJET-METHODES:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-242a1677f6c7d181",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "1NSI-RESEAUX",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-RESEAUX:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-0aa5ffbf5a70c067",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "1NSI-TABLES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-TABLES:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-ade90524d13358e6",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "1NSI-TYPES-BASE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-TYPES-BASE:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-173f6ce5ca0fd30c",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "1NSI-TYPES-CONSTRUITS",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-TYPES-CONSTRUITS:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-c6c54b4034b34b09",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "1NSI-WEB-IHM",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-WEB-IHM:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-4a5b4c4d1481b658",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "1SPE-SECOND-DEGRE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1SPE-SECOND-DEGRE:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-65eb981b7779bc08",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TCOMPL-CALCULS-AIRES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-CALCULS-AIRES:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-b74b4903209f3215",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TCOMPL-CORRELATION-CAUSALITE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-CORRELATION-CAUSALITE:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-7709ad99b34a2ed9",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TCOMPL-ECHANTILLONNAGE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-ECHANTILLONNAGE:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-918d90ca5fddcd74",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TCOMPL-INEGALITES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-INEGALITES:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-f2d448ca08c0c6c7",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TCOMPL-INFERENCE-BAYESIENNE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-INFERENCE-BAYESIENNE:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-e453c8c0aebc764f",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TCOMPL-LOGARITHME-HISTORIQUE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-LOGARITHME-HISTORIQUE:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-af65b0a11285981e",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TCOMPL-MODELES-EVOLUTION",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-MODELES-EVOLUTION:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-d2b00e9547e75c21",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TCOMPL-MODELES-FONCTION",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-MODELES-FONCTION:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-2c79298b16dedd06",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TCOMPL-TEMPS-ATTENTE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-TEMPS-ATTENTE:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-0f7e11880899c74f",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TEXP-ARITHMETIQUE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-ARITHMETIQUE:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-71f2f0fecf2380b1",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-COMPLEXES-ALGEBRE-GEOMETRIE:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-f8e7e112363fcb86",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-COMPLEXES-TRIGO-POLYNOMES:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-ddbce8a5fba3faaa",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TEXP-GRAPHES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-GRAPHES:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-d3a3571493ec2fcc",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TEXP-MATRICES-MARKOV",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-MATRICES-MARKOV:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-bbe6f1a680d62c69",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TNSI-ALGORITHMIQUE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-ALGORITHMIQUE:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-03e3142c8abc1c22",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TNSI-ARCHITECTURES-MATERIELLES-SY",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-ARCHITECTURES-MATERIELLES-SY:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-eace6d5110325ca0",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TNSI-BASES-DE-DONNEES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-BASES-DE-DONNEES:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-3d48c389a4579517",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TNSI-HISTOIRE-INFORMATIQUE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-HISTOIRE-INFORMATIQUE:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-3bf52c9b751faef6",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TNSI-LANGAGES-ET-PROGRAMMATION",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-LANGAGES-ET-PROGRAMMATION:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-4ac5f9134b5fda8c",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TNSI-PROJET",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-PROJET:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-10ac06e5912335e0",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TNSI-STRUCTURES-DONNEES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-STRUCTURES-DONNEES:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-4e02fe72b59bc2d3",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TSPE-CALCUL-INTEGRAL",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-CALCUL-INTEGRAL:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-6658c3be6c0f9c6a",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TSPE-COMBINATOIRE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-COMBINATOIRE:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-cd3318119d46cd2a",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TSPE-CONTINUITE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-CONTINUITE:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-1ff71af47d3c2317",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TSPE-DERIVATION-CONVEXITE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-DERIVATION-CONVEXITE:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-4581dd592deaae0b",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TSPE-GEOMETRIE-ESPACE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-GEOMETRIE-ESPACE:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-d4ccc61f93d02661",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TSPE-LIMITES-FONCTIONS",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-LIMITES-FONCTIONS:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-634c39011aaf4913",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TSPE-LOGARITHME",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-LOGARITHME:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-0e5198e4e79d517b",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TSPE-PRIMITIVES-EQDIFF",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-PRIMITIVES-EQDIFF:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-cea44aff01fe79e5",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TSPE-PROBABILITES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-PROBABILITES:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-678d596491cfb507",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TSPE-SUITES-LIMITES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-SUITES-LIMITES:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-ae68923878af5176",
-      "producer": "build_true_pedagogical_coverage",
-      "target": "TSPE-TRIGONOMETRIE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-TRIGONOMETRIE:pedagogical_role_coverage:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
+      "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
         "release-strict"
       ]
@@ -3914,71 +2250,6 @@
       "evidence": "COLLECTION:publication_snapshots:stale_undecided:12",
       "status": "OPEN",
       "root_cause_id": "ROOT-PUBLICATION-SNAPSHOT-UNDECIDED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-544cc838584bb34a",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "70dfcb9ea3d7e1ec",
-      "object_id": "70dfcb9ea3d7e1ec",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:70dfcb9ea3d7e1ec:source OPTIONAL_EXTENSION modifiée (STALE) fp=70dfcb9ea3d7e1ec",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-7000535f919be60f",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "baf25a2d0a53d6dc",
-      "object_id": "baf25a2d0a53d6dc",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:baf25a2d0a53d6dc:source OPTIONAL_EXTENSION modifiée (STALE) fp=baf25a2d0a53d6dc",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-c84e16c67800c865",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "dc0025fc58dc2e34",
-      "object_id": "dc0025fc58dc2e34",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:dc0025fc58dc2e34:source OPTIONAL_EXTENSION modifiée (STALE) fp=dc0025fc58dc2e34",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-f23fcaec1c15826b",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-ALGO-DICHO-GLOUTON-KNN:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-8ace626dd4f9f182",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-ALGO-PARCOURS-TRIS",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-ALGO-PARCOURS-TRIS:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
         "release-strict"
       ]
@@ -4088,201 +2359,6 @@
       ]
     },
     {
-      "reason_id": "RSN-d09e6ed08e4cecec",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1SPE-SECOND-DEGRE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1SPE-SECOND-DEGRE:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-46ed5516e64fa859",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-CALCULS-AIRES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-CALCULS-AIRES:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-1ee945b7b970600c",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-CORRELATION-CAUSALITE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-CORRELATION-CAUSALITE:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-0f2fe2cf6c04f3bb",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-ECHANTILLONNAGE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-ECHANTILLONNAGE:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-d363f95e5c6b4ed2",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-INEGALITES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-INEGALITES:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-8c89223a3e6b54bf",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-INFERENCE-BAYESIENNE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-INFERENCE-BAYESIENNE:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-2f07a8e173af1ba2",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-LOGARITHME-HISTORIQUE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-LOGARITHME-HISTORIQUE:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-de2738f342e68f04",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-MODELES-EVOLUTION",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-MODELES-EVOLUTION:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-380c58022e835a1e",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-MODELES-FONCTION",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-MODELES-FONCTION:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-35a252751a78c949",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-TEMPS-ATTENTE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TCOMPL-TEMPS-ATTENTE:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-f921b5a9656c33dc",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TEXP-ARITHMETIQUE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TEXP-ARITHMETIQUE:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-8bee33b70f3950ba",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TEXP-COMPLEXES-ALGEBRE-GEOMETRIE:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-a6664d3b1865bdb6",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TEXP-COMPLEXES-TRIGO-POLYNOMES:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-33df5b13118d4861",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TEXP-GRAPHES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TEXP-GRAPHES:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-1dad1ea6508c6739",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TEXP-MATRICES-MARKOV",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TEXP-MATRICES-MARKOV:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
       "reason_id": "RSN-8dfb24dd0444e2c9",
       "producer": "build_publish_readiness_chapter_matrix",
       "target": "TNSI-ALGORITHMIQUE",
@@ -4367,149 +2443,6 @@
       "object_id": null,
       "category": "CERTIFICATION_BLOCKER",
       "evidence": "CONTENT:TNSI-STRUCTURES-DONNEES:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-1d3c4d1071c6cfc8",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-CALCUL-INTEGRAL",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-CALCUL-INTEGRAL:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-d3f0d78c23c343e6",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-COMBINATOIRE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-COMBINATOIRE:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-31a70d4dd0e1114c",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-CONTINUITE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-CONTINUITE:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-7c1e3af3529c4a12",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-DERIVATION-CONVEXITE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-DERIVATION-CONVEXITE:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-dfab0051b1012fb8",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-GEOMETRIE-ESPACE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-GEOMETRIE-ESPACE:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-7e6f7f32bd9b5766",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-LIMITES-FONCTIONS",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-LIMITES-FONCTIONS:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-d4dd9321fd1d9d02",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-LOGARITHME",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-LOGARITHME:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-a50bd93f8c700f84",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-PRIMITIVES-EQDIFF",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-PRIMITIVES-EQDIFF:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-4acc73b80c47bd9a",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-PROBABILITES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-PROBABILITES:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-f5beb2a1001b3597",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-SUITES-LIMITES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-SUITES-LIMITES:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-5f475e72785e407a",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-TRIGONOMETRIE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TSPE-TRIGONOMETRIE:vertical_machine_status:INCOMPLETE",
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
