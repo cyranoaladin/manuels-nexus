@@ -6,18 +6,18 @@
   "approves_nothing": true,
   "independence_contract": "Une dérivation mécanique ne reçoit que les options, jamais la clé ni les diagnostics. Le rapprochement avec la clé est fait par ce producteur, après.",
   "summary": {
-    "QCM_HUMAN_REVIEW_POPULATION": 166,
-    "QCM_MECHANICAL_PROVEN": 62,
+    "QCM_HUMAN_REVIEW_POPULATION": 205,
+    "QCM_MECHANICAL_PROVEN": 77,
     "QCM_MECHANICAL_BY_FAMILY": {
-      "SYMBOLIC": 14,
+      "SYMBOLIC": 29,
       "PYTHON": 41,
       "SQL": 7
     },
-    "QCM_CONCEPTUAL_REVIEWED": 104,
+    "QCM_CONCEPTUAL_REVIEWED": 128,
     "QCM_REVIEW_OPEN": 0,
     "QCM_KEY_DISAGREEMENTS": 0,
     "QCM_DERIVATION_FAILURES": 0,
-    "QCM_REVIEW_CLOSED": 166
+    "QCM_REVIEW_CLOSED": 205
   },
   "questions": [
     {
@@ -907,6 +907,355 @@
       "source_programme": "1NSI-WEB-IHM::C9"
     },
     {
+      "chapter": "1SPE-SECOND-DEGRE",
+      "question_id": "Q19",
+      "capacity": "C7",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/qcm/1SPE-SECDEG-QCM.json",
+      "regime": "MECHANICAL",
+      "key": "C",
+      "state": "MECHANICALLY_PROVEN",
+      "family": "SYMBOLIC",
+      "computed": "C"
+    },
+    {
+      "chapter": "1SPE-SECOND-DEGRE",
+      "question_id": "Q20",
+      "capacity": "C8",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/qcm/1SPE-SECDEG-QCM.json",
+      "regime": "MECHANICAL",
+      "key": "D",
+      "state": "MECHANICALLY_PROVEN",
+      "family": "SYMBOLIC",
+      "computed": "D"
+    },
+    {
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "question_id": "Q6",
+      "capacity": "C6",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/qcm/TCOMPL-ECHANTILLONNAGE-QCM.json",
+      "regime": "MECHANICAL",
+      "key": "B",
+      "state": "MECHANICALLY_PROVEN",
+      "family": "SYMBOLIC",
+      "computed": "B"
+    },
+    {
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "question_id": "Q7",
+      "capacity": "C7",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/qcm/TCOMPL-ECHANTILLONNAGE-QCM.json",
+      "regime": "MECHANICAL",
+      "key": "C",
+      "state": "MECHANICALLY_PROVEN",
+      "family": "SYMBOLIC",
+      "computed": "C"
+    },
+    {
+      "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+      "question_id": "Q6",
+      "capacity": "C5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/qcm/TCOMPL-INFERENCE-BAYESIENNE-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "B",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "B",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/cours/11_C2_tests_depistage.tex",
+      "source_programme": "TCOMPL-INFERENCE-BAYESIENNE::C5"
+    },
+    {
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "question_id": "Q6",
+      "capacity": "C4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/qcm/TCOMPL-LOGARITHME-HISTORIQUE-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "B",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "B",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/cours/11_C2_equation_fonctionnelle.tex",
+      "source_programme": "TCOMPL-LOGARITHME-HISTORIQUE::C4"
+    },
+    {
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "question_id": "Q6",
+      "capacity": "C3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/qcm/TCOMPL-MODELES-EVOLUTION-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "B",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "B",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/11_C2_recurrence_arithmetico_geometrique.tex",
+      "source_programme": "TCOMPL-MODELES-EVOLUTION::C3"
+    },
+    {
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "question_id": "Q7",
+      "capacity": "C6",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/qcm/TCOMPL-MODELES-EVOLUTION-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "C",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "C",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/13_C6_limites_suites.tex",
+      "source_programme": "TCOMPL-MODELES-EVOLUTION::C6"
+    },
+    {
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "question_id": "Q6",
+      "capacity": "C2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "B",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "B",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex",
+      "source_programme": "TCOMPL-MODELES-FONCTION::C2"
+    },
+    {
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "question_id": "Q7",
+      "capacity": "C3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "C",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "C",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex",
+      "source_programme": "TCOMPL-MODELES-FONCTION::C3"
+    },
+    {
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "question_id": "Q8",
+      "capacity": "C6",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "D",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "D",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/12_C3_statistique_deux_variables.tex",
+      "source_programme": "TCOMPL-MODELES-FONCTION::C6"
+    },
+    {
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "question_id": "Q9",
+      "capacity": "C7",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "D",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "D",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/12_C3_statistique_deux_variables.tex",
+      "source_programme": "TCOMPL-MODELES-FONCTION::C7"
+    },
+    {
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "question_id": "Q6",
+      "capacity": "C4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "B",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "B",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/11_C2_loi_exponentielle.tex",
+      "source_programme": "TCOMPL-TEMPS-ATTENTE::C4"
+    },
+    {
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "question_id": "Q7",
+      "capacity": "C5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json",
+      "regime": "MECHANICAL",
+      "key": "C",
+      "state": "MECHANICALLY_PROVEN",
+      "family": "SYMBOLIC",
+      "computed": "C"
+    },
+    {
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "question_id": "Q8",
+      "capacity": "C6",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "D",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "D",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/11_C2_loi_exponentielle.tex",
+      "source_programme": "TCOMPL-TEMPS-ATTENTE::C6"
+    },
+    {
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "question_id": "Q9",
+      "capacity": "C7",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json",
+      "regime": "MECHANICAL",
+      "key": "A",
+      "state": "MECHANICALLY_PROVEN",
+      "family": "SYMBOLIC",
+      "computed": "A"
+    },
+    {
+      "chapter": "TEXP-ARITHMETIQUE",
+      "question_id": "Q10",
+      "capacity": "C8",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json",
+      "regime": "MECHANICAL",
+      "key": "B",
+      "state": "MECHANICALLY_PROVEN",
+      "family": "SYMBOLIC",
+      "computed": "B"
+    },
+    {
+      "chapter": "TEXP-ARITHMETIQUE",
+      "question_id": "Q11",
+      "capacity": "C9",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "C",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "C",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/cours/10_C1_divisibilite_pgcd.tex",
+      "source_programme": "TEXP-ARITHMETIQUE::C9"
+    },
+    {
+      "chapter": "TEXP-ARITHMETIQUE",
+      "question_id": "Q6",
+      "capacity": "C3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json",
+      "regime": "MECHANICAL",
+      "key": "B",
+      "state": "MECHANICALLY_PROVEN",
+      "family": "SYMBOLIC",
+      "computed": "B"
+    },
+    {
+      "chapter": "TEXP-ARITHMETIQUE",
+      "question_id": "Q7",
+      "capacity": "C4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json",
+      "regime": "MECHANICAL",
+      "key": "C",
+      "state": "MECHANICALLY_PROVEN",
+      "family": "SYMBOLIC",
+      "computed": "C"
+    },
+    {
+      "chapter": "TEXP-ARITHMETIQUE",
+      "question_id": "Q8",
+      "capacity": "C6",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "A",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "A",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/cours/12_C3_bezout_gauss.tex",
+      "source_programme": "TEXP-ARITHMETIQUE::C6"
+    },
+    {
+      "chapter": "TEXP-ARITHMETIQUE",
+      "question_id": "Q9",
+      "capacity": "C7",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "D",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "D",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/cours/13_C4_nombres_premiers.tex",
+      "source_programme": "TEXP-ARITHMETIQUE::C7"
+    },
+    {
+      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "question_id": "Q6",
+      "capacity": "C2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/qcm/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-QCM.json",
+      "regime": "MECHANICAL",
+      "key": "B",
+      "state": "MECHANICALLY_PROVEN",
+      "family": "SYMBOLIC",
+      "computed": "B"
+    },
+    {
+      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "question_id": "Q7",
+      "capacity": "C5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/qcm/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "C",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "C",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/cours/11_C2_geometrie.tex",
+      "source_programme": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C5"
+    },
+    {
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "question_id": "Q6",
+      "capacity": "C3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "B",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "B",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/cours/11_C2_equations_polynomiales.tex",
+      "source_programme": "TEXP-COMPLEXES-TRIGO-POLYNOMES::C3"
+    },
+    {
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "question_id": "Q7",
+      "capacity": "C4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.json",
+      "regime": "MECHANICAL",
+      "key": "C",
+      "state": "MECHANICALLY_PROVEN",
+      "family": "SYMBOLIC",
+      "computed": "C"
+    },
+    {
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "question_id": "Q8",
+      "capacity": "C6",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "D",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "D",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/cours/12_C3_geometrie_racines_unite.tex",
+      "source_programme": "TEXP-COMPLEXES-TRIGO-POLYNOMES::C6"
+    },
+    {
+      "chapter": "TEXP-GRAPHES",
+      "question_id": "Q6",
+      "capacity": "C2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "B",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "B",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/cours/10_C1_vocabulaire_graphes.tex",
+      "source_programme": "TEXP-GRAPHES::C2"
+    },
+    {
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "question_id": "Q6",
+      "capacity": "C2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "B",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "B",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/cours/11_C2C3_suites_matricielles.tex",
+      "source_programme": "TEXP-MATRICES-MARKOV::C2"
+    },
+    {
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "question_id": "Q7",
+      "capacity": "C6",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "C",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "C",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/cours/13_C6C7_demonstration_distribution_invariante.tex",
+      "source_programme": "TEXP-MATRICES-MARKOV::C6"
+    },
+    {
       "chapter": "TNSI-ALGORITHMIQUE",
       "question_id": "Q1",
       "capacity": "C1",
@@ -1675,6 +2024,64 @@
       "source_programme": "TNSI-STRUCTURES-DONNEES::C9"
     },
     {
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "question_id": "Q10",
+      "capacity": "C8",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "B",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "B",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/13_C8_integration_par_parties.tex",
+      "source_programme": "TSPE-CALCUL-INTEGRAL::C8"
+    },
+    {
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "question_id": "Q6",
+      "capacity": "C4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.json",
+      "regime": "MECHANICAL",
+      "key": "B",
+      "state": "MECHANICALLY_PROVEN",
+      "family": "SYMBOLIC",
+      "computed": "B"
+    },
+    {
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "question_id": "Q7",
+      "capacity": "C5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.json",
+      "regime": "MECHANICAL",
+      "key": "C",
+      "state": "MECHANICALLY_PROVEN",
+      "family": "SYMBOLIC",
+      "computed": "C"
+    },
+    {
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "question_id": "Q8",
+      "capacity": "C6",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "D",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "D",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/16_C6_applications.tex",
+      "source_programme": "TSPE-CALCUL-INTEGRAL::C6"
+    },
+    {
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "question_id": "Q9",
+      "capacity": "C7",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "A",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "A",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/11_C7_fonction_integrale.tex",
+      "source_programme": "TSPE-CALCUL-INTEGRAL::C7"
+    },
+    {
       "chapter": "TSPE-CONTINUITE",
       "question_id": "Q11",
       "capacity": "C2",
@@ -1894,6 +2301,52 @@
       "computed": "B"
     },
     {
+      "chapter": "TSPE-PROBABILITES",
+      "question_id": "Q10",
+      "capacity": "C6",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "B",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "B",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/13_C6_C7_esperance_linearite.tex",
+      "source_programme": "TSPE-PROBABILITES::C6"
+    },
+    {
+      "chapter": "TSPE-PROBABILITES",
+      "question_id": "Q7",
+      "capacity": "C1",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.json",
+      "regime": "MECHANICAL",
+      "key": "C",
+      "state": "MECHANICALLY_PROVEN",
+      "family": "SYMBOLIC",
+      "computed": "C"
+    },
+    {
+      "chapter": "TSPE-PROBABILITES",
+      "question_id": "Q8",
+      "capacity": "C3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.json",
+      "regime": "MECHANICAL",
+      "key": "D",
+      "state": "MECHANICALLY_PROVEN",
+      "family": "SYMBOLIC",
+      "computed": "D"
+    },
+    {
+      "chapter": "TSPE-PROBABILITES",
+      "question_id": "Q9",
+      "capacity": "C4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.json",
+      "regime": "CONCEPTUAL",
+      "key": "A",
+      "state": "CONCEPTUALLY_REVIEWED",
+      "computed": "A",
+      "source_cours": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/12_C3_C4_utilisation_binomiale.tex",
+      "source_programme": "TSPE-PROBABILITES::C4"
+    },
+    {
       "chapter": "TSPE-SUITES-LIMITES",
       "question_id": "Q1",
       "capacity": "C1",
@@ -1951,13 +2404,13 @@
       "source_programme": "TSPE-SUITES-LIMITES::C4"
     }
   ],
-  "closure_digest": "sha256:e486920ef314723993f874c8b9f86c51e9855ffb8509dd2ca2c188ac331bb425",
+  "closure_digest": "sha256:47754413aac5dec2ac21c73290fbfae99202d9e22fe723fd68e20506216579d9",
   "freshness": {
-    "EVIDENCE_HEAD": "dcf4b0e602bcfce5258e43262931fc6658da7795",
+    "EVIDENCE_HEAD": "973f2aa71af2af8c55493a1719a2e5568768291e",
     "INPUT_PATHS": [
       "audit/QCM_INDEPENDENT_EVIDENCE_V2.json",
       "scripts/qcm_reviews.py"
     ],
-    "INPUT_DIGEST": "sha256:288332c816bf1e6c7b0ceb95a6f344a59f2dd2e7ff9dcfc1e0bfec36f13d9437"
+    "INPUT_DIGEST": "sha256:913dbc6a27a7486153d9e75768d1447eae8c04ef7a7a4682e7f2eb18316ae72d"
   }
 }

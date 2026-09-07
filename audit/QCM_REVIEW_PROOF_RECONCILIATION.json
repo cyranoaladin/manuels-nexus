@@ -1,5 +1,5 @@
 {
-  "aggregate_current_set_digest": "sha256:8c663f58ff12cabbe522bdf7dc2867d67c42fdaad79fc20dc2b230c638c3a126",
+  "aggregate_current_set_digest": "sha256:348d270ef613bf4a6f7c8921d949d31053770dd1ef9447a2a9365a375068e8de",
   "approves_nothing": true,
   "artifact_type": "qcm_review_proof_reconciliation",
   "carried_forward": [
@@ -2113,12 +2113,12 @@
   ],
   "counts": {
     "CARRIED_FORWARD_UNCHANGED": 301,
-    "CURRENT_QCM_QUESTION_COUNT": 490,
+    "CURRENT_QCM_QUESTION_COUNT": 529,
     "OLD_PROOF_QUESTION_COUNT": 331,
     "PROOF_ROWS_WITHOUT_CURRENT_QUESTION": 0,
-    "REPROOF_REQUIRED": 189
+    "REPROOF_REQUIRED": 228
   },
-  "equation": "490 = 301 + 189",
+  "equation": "529 = 301 + 228",
   "generated_by": "scripts/build_qcm_review_proof_reconciliation.py",
   "historical_proof_status": "HISTORICAL",
   "proof_field_coverage_gaps": [
@@ -3195,6 +3195,22 @@
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/qcm/1SPE-PRODUIT-SCALAIRE-QCM.json"
     },
     {
+      "chapter": "1SPE-SECOND-DEGRE",
+      "current_semantic_digest": "sha256:d59330c2b5af147f12bbb198a81d2538486299368d3fbbff5b6e134b6de0f63d",
+      "delta_classes": [],
+      "question_id": "Q19",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/qcm/1SPE-SECDEG-QCM.json"
+    },
+    {
+      "chapter": "1SPE-SECOND-DEGRE",
+      "current_semantic_digest": "sha256:dd78fab9d8e4e88fd1a74ddf7addb0f409a7dd0a8ccbedf271cdb020dc6499f9",
+      "delta_classes": [],
+      "question_id": "Q20",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/qcm/1SPE-SECDEG-QCM.json"
+    },
+    {
       "chapter": "1SPE-VARIABLES-ALEATOIRES",
       "current_semantic_digest": "sha256:ab1887e49f6e487630bed7f2b0ce8b9685ad48b5d428572a59377a5317dd3624",
       "delta_classes": [
@@ -3381,6 +3397,230 @@
       "question_id": "Q9",
       "reason": "CHAPTER_SCOPE_CHANGED_FULL_REPROOF",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json"
+    },
+    {
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "current_semantic_digest": "sha256:16d2338b79dbd2e8d1c5b92b63c59128ccec96065cf34d49a6818665afe09663",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/qcm/TCOMPL-ECHANTILLONNAGE-QCM.json"
+    },
+    {
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "current_semantic_digest": "sha256:f6865417d5f0719601122a595ab4c13d949cab1f4b07d1ba5671351df006a393",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/qcm/TCOMPL-ECHANTILLONNAGE-QCM.json"
+    },
+    {
+      "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+      "current_semantic_digest": "sha256:ad20778ce7bdb6330565d9a28b81c7033fcfbf5d4baf3347b88686fe8de73af3",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/qcm/TCOMPL-INFERENCE-BAYESIENNE-QCM.json"
+    },
+    {
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "current_semantic_digest": "sha256:bb3e58bba084b1d30b556241e0e4c85a987bdb98b9f5f91d5d86def5897d3bc8",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/qcm/TCOMPL-LOGARITHME-HISTORIQUE-QCM.json"
+    },
+    {
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "current_semantic_digest": "sha256:6462931a16d8c952b60dc5d3aaf75bdb626d6338f788d6ef3c75208b9135dd6c",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/qcm/TCOMPL-MODELES-EVOLUTION-QCM.json"
+    },
+    {
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "current_semantic_digest": "sha256:26512789cba447ca925e528c4d599bf7982b02cc5b8ea1ea76621f68b042cd66",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/qcm/TCOMPL-MODELES-EVOLUTION-QCM.json"
+    },
+    {
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "current_semantic_digest": "sha256:a3a43559540db6b3741e8a5e050bed8d6de9755d03d345c713acc2b3c457b789",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json"
+    },
+    {
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "current_semantic_digest": "sha256:1536d1ea7e59fd5a1f15cb9b1394650a9b489ec216fcb8750abb4fbf931ec7ca",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json"
+    },
+    {
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "current_semantic_digest": "sha256:6ff89a2f060eb1f156795a2bbc46445b2ed8bf5ed594064fb0c44e996debb05f",
+      "delta_classes": [],
+      "question_id": "Q8",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json"
+    },
+    {
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "current_semantic_digest": "sha256:752f89d8bccf05e0c2b1c69894eff7eb578d43ea92254b595c9ec5376da91067",
+      "delta_classes": [],
+      "question_id": "Q9",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json"
+    },
+    {
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "current_semantic_digest": "sha256:703d4a7e8e9dc20aedd667962b9b10a83bda8c5eecca08d035a2c29331fe4c7c",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json"
+    },
+    {
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "current_semantic_digest": "sha256:ab23a436443860982c9d61bc6c79dde36b2b38ff5d427711b97d47da19dda561",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json"
+    },
+    {
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "current_semantic_digest": "sha256:9f91f207d23e2f80581ec0f0f73ad63e0ab48b06cb0bff7eeba32b6a80bbb696",
+      "delta_classes": [],
+      "question_id": "Q8",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json"
+    },
+    {
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "current_semantic_digest": "sha256:a6cc2e59139a7585271088df310ac5c689bc5d70722f193dd110152f8dbd0486",
+      "delta_classes": [],
+      "question_id": "Q9",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json"
+    },
+    {
+      "chapter": "TEXP-ARITHMETIQUE",
+      "current_semantic_digest": "sha256:97b7bed955cb8135b616efbccebc2a479338d41bb93f06076a412aec9ba68588",
+      "delta_classes": [],
+      "question_id": "Q10",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json"
+    },
+    {
+      "chapter": "TEXP-ARITHMETIQUE",
+      "current_semantic_digest": "sha256:46106c15649131fc606fa6b7129c70d935b13a38fd7f98cfc2ffb6ca918153b9",
+      "delta_classes": [],
+      "question_id": "Q11",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json"
+    },
+    {
+      "chapter": "TEXP-ARITHMETIQUE",
+      "current_semantic_digest": "sha256:00677bc0d78e8517892026f22be9ae4accd16ea3857d6ae8f1733cdf8237914e",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json"
+    },
+    {
+      "chapter": "TEXP-ARITHMETIQUE",
+      "current_semantic_digest": "sha256:6c115b2a9c3d33a20472dc0a7504b066a81b02eded2a979e9851c6ce41c9a169",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json"
+    },
+    {
+      "chapter": "TEXP-ARITHMETIQUE",
+      "current_semantic_digest": "sha256:40ca00e2bd624893562a53318e12cd24ba799d9c61132044bf22e883ef7e9908",
+      "delta_classes": [],
+      "question_id": "Q8",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json"
+    },
+    {
+      "chapter": "TEXP-ARITHMETIQUE",
+      "current_semantic_digest": "sha256:8f6e76f11c09c086d8c002650c59258cac0774dfb5942b4cc807d6198f31ecef",
+      "delta_classes": [],
+      "question_id": "Q9",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json"
+    },
+    {
+      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "current_semantic_digest": "sha256:eb89e2be90885d8c0462dc7ee745a3a83528f0a5d7ce40a22a13d503baaa4eff",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/qcm/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-QCM.json"
+    },
+    {
+      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "current_semantic_digest": "sha256:c0cdbde60689e7a48f238f4c03e9db3f2332419302c593d597299eaec35b995b",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/qcm/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-QCM.json"
+    },
+    {
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "current_semantic_digest": "sha256:537581b8467fc93d8cc4e88640e04ad9010eae703c54dcdf56a2bc0d72d8f4ff",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.json"
+    },
+    {
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "current_semantic_digest": "sha256:58e638731ed2dbe8a4c89eba015dad3bbcfb0d05ef6c6b286ad2e1f7d75b3831",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.json"
+    },
+    {
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "current_semantic_digest": "sha256:8962032a67f91ca9c8578b10245d8fdb2d69b9e7e5c66ab855eb5578e60504b0",
+      "delta_classes": [],
+      "question_id": "Q8",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.json"
+    },
+    {
+      "chapter": "TEXP-GRAPHES",
+      "current_semantic_digest": "sha256:4fd8b0dc3b1ef3f4c05040b58e04e2278a5f8008f4c29335f8a21aef8905a740",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.json"
+    },
+    {
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "current_semantic_digest": "sha256:b08d55634d3fe2c99d1325869bf6b18584aef72345ef13b32980fe8ec284ee22",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.json"
+    },
+    {
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "current_semantic_digest": "sha256:c1304a30601a5df8d68c08de084eb65a6fb4b148c1a7f53b3ed40898b2c26a70",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.json"
     },
     {
       "chapter": "TNSI-ALGORITHMIQUE",
@@ -3911,6 +4151,46 @@
       "source_path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/qcm/TNSI-STRUCTURES-DONNEES-QCM.json"
     },
     {
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "current_semantic_digest": "sha256:1683dd36b569b4da78a97f4ef0105aa6262a827d49388784208362e5b82588d9",
+      "delta_classes": [],
+      "question_id": "Q10",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.json"
+    },
+    {
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "current_semantic_digest": "sha256:bb1cfb3978d5890e8c69e4f1cb532fb1328ba393e7bb64eadcc02542fc2feabe",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.json"
+    },
+    {
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "current_semantic_digest": "sha256:01180eaa225a623794c20ec3a46ed918241c7c68dd55db7930a6b6aba034d8f1",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.json"
+    },
+    {
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "current_semantic_digest": "sha256:1aa3250633be476561369135c8211c1730a4bc869e2cce8d11d1088a6f60e32f",
+      "delta_classes": [],
+      "question_id": "Q8",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.json"
+    },
+    {
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "current_semantic_digest": "sha256:523c1698868b3db8eba2b9333a8b7d6b85190ecf3b8d9eb8a83a20c4f72a8ea7",
+      "delta_classes": [],
+      "question_id": "Q9",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.json"
+    },
+    {
       "chapter": "TSPE-CONTINUITE",
       "current_semantic_digest": "sha256:60c35a8a603e65dc4863dc6767019a1d8bcd9438b511ce3b10f1c1e38bf10c7c",
       "delta_classes": [
@@ -4111,6 +4391,38 @@
       "question_id": "Q9",
       "reason": "SEMANTIC_CHANGE",
       "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/qcm/TSPE-LIMITES-FONCTIONS-QCM.json"
+    },
+    {
+      "chapter": "TSPE-PROBABILITES",
+      "current_semantic_digest": "sha256:7804ff7b271303be163f75101bf12318330eda9c1075bf5f587ad7089943ba4c",
+      "delta_classes": [],
+      "question_id": "Q10",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.json"
+    },
+    {
+      "chapter": "TSPE-PROBABILITES",
+      "current_semantic_digest": "sha256:f9233ea675e712392d62f6546119c8e2b0ea21e6d484c6d95f57674faeccdc74",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.json"
+    },
+    {
+      "chapter": "TSPE-PROBABILITES",
+      "current_semantic_digest": "sha256:4dee11dca491513d92575b0036cbb01e6b2106752dbe4fe4db7ec84fa8f55eaa",
+      "delta_classes": [],
+      "question_id": "Q8",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.json"
+    },
+    {
+      "chapter": "TSPE-PROBABILITES",
+      "current_semantic_digest": "sha256:fa4d4fd644771e3ed439cf7f354ffcdedaabc01bc363424891db2d9badd62cd6",
+      "delta_classes": [],
+      "question_id": "Q9",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.json"
     },
     {
       "chapter": "TSPE-SUITES-LIMITES",

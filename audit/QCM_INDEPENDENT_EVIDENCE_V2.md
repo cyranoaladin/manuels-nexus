@@ -5,12 +5,12 @@
 Une identite par question. La v1 reste l'enregistrement historique.
 Cet artefact n'approuve rien.
 
-- Questions du corpus : 490
+- Questions du corpus : 529
 - Report d'identite : 301
 - Recalcul independant : 23
-- Revue humaine requise : 166
+- Revue humaine requise : 205
 - UNKNOWN : 0
-- Equation : 490 = 301 + 23 + 166
+- Equation : 529 = 301 + 23 + 205
 - EVIDENCE_ROUTING_COMPLETE : True
 - ALL_QCM_HUMAN_REVIEW_COMPLETE : False
 
@@ -146,6 +146,36 @@ Comportement correct du solveur, pas un echec : aucune regle mathematique generi
 | 1NSI-WEB-IHM | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | 1NSI-WEB-IHM | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | 1NSI-WEB-IHM | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q19 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q20 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TCOMPL-ECHANTILLONNAGE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TCOMPL-ECHANTILLONNAGE | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TCOMPL-INFERENCE-BAYESIENNE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TCOMPL-LOGARITHME-HISTORIQUE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TCOMPL-MODELES-EVOLUTION | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TCOMPL-MODELES-EVOLUTION | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TCOMPL-MODELES-FONCTION | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TCOMPL-MODELES-FONCTION | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TCOMPL-MODELES-FONCTION | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TCOMPL-MODELES-FONCTION | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TCOMPL-TEMPS-ATTENTE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TCOMPL-TEMPS-ATTENTE | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TCOMPL-TEMPS-ATTENTE | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TCOMPL-TEMPS-ATTENTE | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TEXP-ARITHMETIQUE | Q10 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TEXP-ARITHMETIQUE | Q11 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TEXP-ARITHMETIQUE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TEXP-ARITHMETIQUE | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TEXP-ARITHMETIQUE | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TEXP-ARITHMETIQUE | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TEXP-COMPLEXES-ALGEBRE-GEOMETRIE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TEXP-COMPLEXES-ALGEBRE-GEOMETRIE | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TEXP-COMPLEXES-TRIGO-POLYNOMES | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TEXP-COMPLEXES-TRIGO-POLYNOMES | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TEXP-COMPLEXES-TRIGO-POLYNOMES | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TEXP-GRAPHES | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TEXP-MATRICES-MARKOV | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TEXP-MATRICES-MARKOV | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TNSI-ALGORITHMIQUE | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TNSI-ALGORITHMIQUE | Q10 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TNSI-ALGORITHMIQUE | Q11 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
@@ -212,6 +242,11 @@ Comportement correct du solveur, pas un echec : aucune regle mathematique generi
 | TNSI-STRUCTURES-DONNEES | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TNSI-STRUCTURES-DONNEES | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TNSI-STRUCTURES-DONNEES | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-CALCUL-INTEGRAL | Q10 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-CALCUL-INTEGRAL | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-CALCUL-INTEGRAL | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-CALCUL-INTEGRAL | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-CALCUL-INTEGRAL | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TSPE-CONTINUITE | Q11 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TSPE-CONTINUITE | Q14 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TSPE-CONTINUITE | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
@@ -231,6 +266,10 @@ Comportement correct du solveur, pas un echec : aucune regle mathematique generi
 | TSPE-LIMITES-FONCTIONS | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TSPE-LIMITES-FONCTIONS | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TSPE-LIMITES-FONCTIONS | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-PROBABILITES | Q10 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-PROBABILITES | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-PROBABILITES | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-PROBABILITES | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TSPE-SUITES-LIMITES | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TSPE-SUITES-LIMITES | Q12 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TSPE-SUITES-LIMITES | Q13 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |

@@ -1,6 +1,6 @@
 # Renvois des diagnostics QCM : chaque cible existe-t-elle ?
 
-- Population : `1470` renvois
+- Population : `1587` renvois
 - `BROKEN_REMEDIATION_REFERENCES` : `0`
 - `QCM_DIAGNOSTIC_MISMATCH` : `0`
 - `CROSS_CAPACITY_RENVOI_JUSTIFIED` : `11`
