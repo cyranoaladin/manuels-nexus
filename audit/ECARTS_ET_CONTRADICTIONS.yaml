@@ -15819,12 +15819,12 @@ counts:
   claims_contredits: 31
   claims_ouverts: 53
 generated_by: inventory_collection.py
-model_digest: sha256:851c0448f22f6995459215b05dfff6cd544f59b889857871089c99476d3286a5
+model_digest: sha256:0c6f191f0ecb5a8d82429d6924464e692dcd40182258450f51898341f2349d9b
 provenance:
   branch: null
-  dirty: false
+  dirty: true
   errors: []
-  generated_at_utc: '2026-09-07T11:28:25Z'
+  generated_at_utc: '2026-09-07T11:33:55Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:79b255deeddfa4b483a9a5a9f568bdc143defd7b2a69e8b8a704f4afdd35d6bf
     scripts/build_manifest.py: sha256:62d4f5da9454aaa2923041db777b759e3e4b672e7c2f33b59a62e07afc76de26
@@ -15836,8 +15836,13 @@ provenance:
   generator_sha256: sha256:f932fe8c33273bdba8f5f9230ed39a824111f74177310dc1c4ea7c529714d065
   generator_version: 1
   git_available: true
-  head_sha: 6a6a682802bf0ab57276b8abd04ba504b68c455c
-  modified_tracked: []
+  head_sha: bdcf14b5470320442d9d0910fb7de9026b894298
+  modified_tracked:
+  - audit/ANOMALY_DISPOSITIONS.yaml
+  - audit/HUMAN_DECISION_1SPE_TRIGO_OPTIONAL_EXTENSIONS_2026-08-23.json
+  - audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/current/1SPE-TRIGO-ME-003.optional-extension-review.json
+  - audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/current/1SPE-TRIGO-ME-004.optional-extension-review.json
+  - audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/current/1SPE-TRIGO-ME-005.optional-extension-review.json
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
     git: git version 2.43.0
@@ -15845,7 +15850,9 @@ provenance:
     pdfinfo: pdfinfo version 24.02.0
     python: Python 3.12.3
     texlive: pdfTeX 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian)
-  untracked_relevant: []
+  untracked_relevant:
+  - audit/TRIGO_ACCENT_REBIND_RECEIPT.json
+  - audit/TRIGO_ACCENT_REBIND_RECEIPT.md
 schema_ref: audit/schemas/v1/ecarts-et-contradictions.schema.json
 schema_version: 1
-source_digest: sha256:547e966fe24c748482eddde67f131f43750b533fd8a2e2b8e949facc95f7c396
+source_digest: sha256:0b65b22b513bd7fcf60f3db1e86de1da48375d7d0744518131f34e32994623bd

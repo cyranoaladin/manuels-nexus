@@ -1,0 +1,82 @@
+{
+  "artifact_type": "trigo_accent_rebind_receipt",
+  "schema_version": 1,
+  "generated_by": "scripts/build_trigo_accent_rebind.py",
+  "approves_no_content": true,
+  "promotes_no_status": true,
+  "REVIEWER_IDENTITY": "abenrhouma",
+  "DECISION": "ACCEPT_ACCENT_ONLY_QUALIFICATION_REBIND",
+  "OBJECT_IDS": [
+    "1SPE-TRIGO-ME-003",
+    "1SPE-TRIGO-ME-004",
+    "1SPE-TRIGO-ME-005"
+  ],
+  "OLD_QUALIFICATION_FINGERPRINTS": [
+    "3f40a2be975d3f4189555fba859170e2f91558d26f1725e8937ad7e783023fe4",
+    "2e55e4efe104f2b2be37155332a026bdf97f10c354025ae222d8daa1e397c2ca",
+    "1166d8df0e97def48f03a71e9410fa95406950f5a8fe317096c49558dd166ee4"
+  ],
+  "NEW_QUALIFICATION_FINGERPRINTS": [
+    "71e550f0411be8d71695caa87e2a00197abdf7ff5341b17e96268449be117b96",
+    "a976eb9636eaf6b1a0048d1f1a8dfc8c0054e43c633c1139e1f5ad982cd47c05",
+    "b6dae2256196ea075aec5be31fb6e4c34fa95b1359fec8ae3e459d862ee6afd9"
+  ],
+  "ANOMALY_FINGERPRINTS": [
+    "baf25a2d0a53d6dc",
+    "dc0025fc58dc2e34",
+    "70dfcb9ea3d7e1ec"
+  ],
+  "ACCENT_ONLY_FORENSICS_DIGEST": "sha256:1287b314bd5b6869140ab3a2638fa0c7942dcab57ea815603ba4c314bc73543f",
+  "PEDAGOGICAL_CONTENT_UNCHANGED": true,
+  "scope": "Re-liaison de la qualification 1SPE-TRIGO au texte courant, dont seule l'accentuation a changé. La décision humaine du 2026-08-23 reste entière : quatre revues PENDING, objets `needs_review`, dette bloquante. N'approuve aucun contenu, ne promeut aucun statut.",
+  "authorized_object_ids": [
+    "1SPE-TRIGO-ME-003",
+    "1SPE-TRIGO-ME-004",
+    "1SPE-TRIGO-ME-005"
+  ],
+  "inheritance": "aucun objet hors de OBJECT_IDS n'hérite de cette décision",
+  "covered": [
+    {
+      "object_id": "1SPE-TRIGO-ME-003",
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/methodes/1SPE-TRIGO-ME-003.tex",
+      "anomaly_fingerprint": "baf25a2d0a53d6dc",
+      "old_qualification_fingerprint": "3f40a2be975d3f4189555fba859170e2f91558d26f1725e8937ad7e783023fe4",
+      "new_qualification_fingerprint": "71e550f0411be8d71695caa87e2a00197abdf7ff5341b17e96268449be117b96",
+      "recomputed_change_class": "ACCENT_ONLY",
+      "meta_identical": true,
+      "verify_blocks_identical": true,
+      "body_identical_without_accents": true
+    },
+    {
+      "object_id": "1SPE-TRIGO-ME-004",
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/methodes/1SPE-TRIGO-ME-004.tex",
+      "anomaly_fingerprint": "dc0025fc58dc2e34",
+      "old_qualification_fingerprint": "2e55e4efe104f2b2be37155332a026bdf97f10c354025ae222d8daa1e397c2ca",
+      "new_qualification_fingerprint": "a976eb9636eaf6b1a0048d1f1a8dfc8c0054e43c633c1139e1f5ad982cd47c05",
+      "recomputed_change_class": "ACCENT_ONLY",
+      "meta_identical": true,
+      "verify_blocks_identical": true,
+      "body_identical_without_accents": true
+    },
+    {
+      "object_id": "1SPE-TRIGO-ME-005",
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/methodes/1SPE-TRIGO-ME-005.tex",
+      "anomaly_fingerprint": "70dfcb9ea3d7e1ec",
+      "old_qualification_fingerprint": "1166d8df0e97def48f03a71e9410fa95406950f5a8fe317096c49558dd166ee4",
+      "new_qualification_fingerprint": "b6dae2256196ea075aec5be31fb6e4c34fa95b1359fec8ae3e459d862ee6afd9",
+      "recomputed_change_class": "ACCENT_ONLY",
+      "meta_identical": true,
+      "verify_blocks_identical": true,
+      "body_identical_without_accents": true
+    }
+  ],
+  "excluded": [],
+  "freshness": {
+    "EVIDENCE_HEAD": "bdcf14b5470320442d9d0910fb7de9026b894298",
+    "INPUT_PATHS": [
+      "audit/ANOMALY_DISPOSITIONS.yaml",
+      "audit/HUMAN_DECISION_1SPE_TRIGO_OPTIONAL_EXTENSIONS_2026-08-23.json"
+    ],
+    "INPUT_DIGEST": "sha256:a5cbe71e0ca648d045f51081f4e4c95cd5141158097643c49d479c1ac8c2d678"
+  }
+}

@@ -1,5 +1,5 @@
 artifact_type: anomaly_dispositions
-control_digest: sha256:5c88a6070cc787222f6a0dad1d7d13f791ac3bf9ebe024bf3c684248b5b34c1d
+control_digest: sha256:06ee40357d969f5ecadc0b58c0bec5ab7fa297485dec0e820f800c0f0b00a85f
 dispositions:
   0030282f546d3d82:
     approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19
@@ -72275,18 +72275,24 @@ dispositions:
     justification: 'OPTIONAL_EXTENSION_REVIEW_PENDING: packet courant lié au SHA; revues scientifique,
       pédagogique, éditoriale et variante PENDING; reste bloquant release.'
     manual: 1SPE
-    method_source_sha: 1166d8df0e97def48f03a71e9410fa95406950f5a8fe317096c49558dd166ee4
+    method_source_sha: b6dae2256196ea075aec5be31fb6e4c34fa95b1359fec8ae3e459d862ee6afd9
     object_id: 1SPE-TRIGO-ME-005
     owner: direction_scientifique_programme
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:7a49505cd43dcaab50b10f559cce8b45a157415112aa61a0432836b817403dfe
-    qualification_policy_digest: sha256:13107fc484ca24807bb127286b1af36aff4569d13bbbf7b64e541bad357ba0b5
+    qualification_digest: sha256:b6955e2fa6b1479626060595297af3aa1418bd58a100fc4c40632840d2f6823b
+    qualification_policy_digest: sha256:766c852de99c8be3c3b74a0c29bdfab0448b3e8f1b2dd385c80d2678f851cc58
     qualification_reason: Contenu disciplinaire sans statut de publication approuvé.
     reason: Contenu disciplinaire sans statut de publication approuvé.
     release_blocking: true
+    requalification:
+      change_class: ACCENT_ONLY
+      decision: ACCEPT_ACCENT_ONLY_QUALIFICATION_REBIND
+      previous_method_source_sha: 1166d8df0e97def48f03a71e9410fa95406950f5a8fe317096c49558dd166ee4
+      receipt: audit/TRIGO_ACCENT_REBIND_RECEIPT.json
+      reviewer_identity: abenrhouma
     review_condition: OPTIONAL_EXTENSION_REVIEW_PENDING
     review_packet: audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/current/1SPE-TRIGO-ME-005.optional-extension-review.json
-    review_packet_sha: 47e7bc6915a2996be28778242f93ce1f2255c2a94c198afd11de1cb7d3472462
+    review_packet_sha: 6128f20f47817759e8b033eb80c743fb1ebff00a466dd6f992a642f744ba35d4
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/methodes/1SPE-TRIGO-ME-005.tex
   70e74035a135f3bc:
@@ -119619,18 +119625,24 @@ dispositions:
     justification: 'OPTIONAL_EXTENSION_REVIEW_PENDING: packet courant lié au SHA; revues scientifique,
       pédagogique, éditoriale et variante PENDING; reste bloquant release.'
     manual: 1SPE
-    method_source_sha: 3f40a2be975d3f4189555fba859170e2f91558d26f1725e8937ad7e783023fe4
+    method_source_sha: 71e550f0411be8d71695caa87e2a00197abdf7ff5341b17e96268449be117b96
     object_id: 1SPE-TRIGO-ME-003
     owner: direction_scientifique_programme
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:7a49505cd43dcaab50b10f559cce8b45a157415112aa61a0432836b817403dfe
-    qualification_policy_digest: sha256:13107fc484ca24807bb127286b1af36aff4569d13bbbf7b64e541bad357ba0b5
+    qualification_digest: sha256:b6955e2fa6b1479626060595297af3aa1418bd58a100fc4c40632840d2f6823b
+    qualification_policy_digest: sha256:766c852de99c8be3c3b74a0c29bdfab0448b3e8f1b2dd385c80d2678f851cc58
     qualification_reason: Contenu disciplinaire sans statut de publication approuvé.
     reason: Contenu disciplinaire sans statut de publication approuvé.
     release_blocking: true
+    requalification:
+      change_class: ACCENT_ONLY
+      decision: ACCEPT_ACCENT_ONLY_QUALIFICATION_REBIND
+      previous_method_source_sha: 3f40a2be975d3f4189555fba859170e2f91558d26f1725e8937ad7e783023fe4
+      receipt: audit/TRIGO_ACCENT_REBIND_RECEIPT.json
+      reviewer_identity: abenrhouma
     review_condition: OPTIONAL_EXTENSION_REVIEW_PENDING
     review_packet: audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/current/1SPE-TRIGO-ME-003.optional-extension-review.json
-    review_packet_sha: 177efd2fa5952c5274148b73b96cf1a69db65b8cf8750d59646935725052c39a
+    review_packet_sha: 7b26c4991c8d49adc287a37eddc8dd14beb289c60a5811a62f2928a18412daf9
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/methodes/1SPE-TRIGO-ME-003.tex
   baf8ecdaa180ce84:
@@ -141350,18 +141362,24 @@ dispositions:
     justification: 'OPTIONAL_EXTENSION_REVIEW_PENDING: packet courant lié au SHA; revues scientifique,
       pédagogique, éditoriale et variante PENDING; reste bloquant release.'
     manual: 1SPE
-    method_source_sha: 2e55e4efe104f2b2be37155332a026bdf97f10c354025ae222d8daa1e397c2ca
+    method_source_sha: a976eb9636eaf6b1a0048d1f1a8dfc8c0054e43c633c1139e1f5ad982cd47c05
     object_id: 1SPE-TRIGO-ME-004
     owner: direction_scientifique_programme
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:7a49505cd43dcaab50b10f559cce8b45a157415112aa61a0432836b817403dfe
-    qualification_policy_digest: sha256:13107fc484ca24807bb127286b1af36aff4569d13bbbf7b64e541bad357ba0b5
+    qualification_digest: sha256:b6955e2fa6b1479626060595297af3aa1418bd58a100fc4c40632840d2f6823b
+    qualification_policy_digest: sha256:766c852de99c8be3c3b74a0c29bdfab0448b3e8f1b2dd385c80d2678f851cc58
     qualification_reason: Contenu disciplinaire sans statut de publication approuvé.
     reason: Contenu disciplinaire sans statut de publication approuvé.
     release_blocking: true
+    requalification:
+      change_class: ACCENT_ONLY
+      decision: ACCEPT_ACCENT_ONLY_QUALIFICATION_REBIND
+      previous_method_source_sha: 2e55e4efe104f2b2be37155332a026bdf97f10c354025ae222d8daa1e397c2ca
+      receipt: audit/TRIGO_ACCENT_REBIND_RECEIPT.json
+      reviewer_identity: abenrhouma
     review_condition: OPTIONAL_EXTENSION_REVIEW_PENDING
     review_packet: audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/current/1SPE-TRIGO-ME-004.optional-extension-review.json
-    review_packet_sha: c0b64ee602bd5ad3aeb630d44cbcd772d40e7d954ccc111e11b1cdd3afb8cfff
+    review_packet_sha: 802e2e223bf159ad7c5371535f1439fa7de05ae4487ae04412b8802d5604d97f
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/methodes/1SPE-TRIGO-ME-004.tex
   dc0af25ba94e247a:
