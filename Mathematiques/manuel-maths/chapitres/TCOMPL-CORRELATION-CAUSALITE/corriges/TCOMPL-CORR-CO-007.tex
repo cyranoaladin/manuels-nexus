@@ -1,0 +1,29 @@
+% META: {"id": "TCOMPL-CORR-CO-007", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "corrige", "exercice_ref": "TCOMPL-CORR-EX-007", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt, N
+% xs = [1, 2, 3, 4, 5]
+% ys = [4, 7, 9, 12, 13]
+% n = len(xs)
+% xbar, ybar = Rational(sum(xs), n), Rational(sum(ys), n)
+% cov = Rational(1, n) * sum((x - xbar) * (y - ybar) for x, y in zip(xs, ys))
+% vx = Rational(1, n) * sum((x - xbar) ** 2 for x in xs)
+% vy = Rational(1, n) * sum((y - ybar) ** 2 for y in ys)
+% assert cov == Rational(23, 5) and vx == 2 and vy == Rational(54, 5)
+% a = cov / vx
+% b = ybar - a * xbar
+% assert a == Rational(23, 10) and b == Rational(21, 10)
+% assert a * xbar + b == ybar
+% r = cov / sqrt(vx * vy)
+% assert 0.989 < float(N(r)) < 0.991
+% END-VERIFY
+\begin{corrige}{TCOMPL-CORR-EX-007}
+\textbf{1.} $\mathrm{cov}(x,y)=\dfrac{1}{5}\sum(x_i-\bar x)(y_i-\bar y)
+=\dfrac{23}{5}=4{,}6$, $V(x)=2$ et $V(y)=\dfrac{54}{5}=10{,}8$.
+
+\textbf{2.} La pente vaut $a=\dfrac{\mathrm{cov}(x,y)}{V(x)}
+=\dfrac{23}{10}=2{,}3$, et $b=\bar y-a\bar x=9-6{,}9=2{,}1$. La droite de
+régression est $y=2{,}3x+2{,}1$ ; elle passe bien par $G(3\,;\,9)$.
+
+\textbf{3.} $r=\dfrac{\mathrm{cov}(x,y)}{\sqrt{V(x)V(y)}}\approx0{,}990$ :
+très proche de $1$, la liaison linéaire croissante est presque parfaite.
+\end{corrige}

@@ -1,0 +1,29 @@
+% META: {"id": "TCOMPL-CORR-CO-010", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "corrige", "exercice_ref": "TCOMPL-CORR-EX-010", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt, N
+% chaleur = [15, 18, 22, 26, 30, 33]
+% glaces = [100, 140, 210, 300, 380, 440]
+% noyades = [1, 2, 3, 5, 6, 8]
+% def correlation(u, v):
+%     n = len(u)
+%     ub, vb = Rational(sum(u), n), Rational(sum(v), n)
+%     cov = Rational(1, n) * sum((a - ub) * (b - vb) for a, b in zip(u, v))
+%     vu = Rational(1, n) * sum((a - ub) ** 2 for a in u)
+%     vv = Rational(1, n) * sum((b - vb) ** 2 for b in v)
+%     return cov / sqrt(vu * vv)
+% assert float(N(correlation(glaces, noyades))) > 0.98
+% assert float(N(correlation(chaleur, glaces))) > 0.98
+% assert float(N(correlation(chaleur, noyades))) > 0.98
+% END-VERIFY
+\begin{corrige}{TCOMPL-CORR-EX-010}
+\textbf{1.} Non. Une corrélation, même forte, mesure une liaison statistique,
+pas un lien de cause à effet.
+
+\textbf{2.} La température : quand il fait chaud, on achète plus de glaces
+\emph{et} on se baigne davantage, donc les noyades augmentent. Cette variable
+tierce, non observée dans l'étude, agit sur les deux autres.
+
+\textbf{3.} Le coefficient de corrélation mesure l'intensité et le sens de la
+liaison \emph{linéaire} entre deux séries ; il ne dit rien du mécanisme qui
+les relie, ni du sens d'une éventuelle causalité.
+\end{corrige}

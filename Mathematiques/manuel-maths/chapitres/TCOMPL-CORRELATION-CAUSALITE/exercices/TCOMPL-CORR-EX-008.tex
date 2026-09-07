@@ -1,0 +1,26 @@
+% META: {"id": "TCOMPL-CORR-EX-008", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "exercice", "capacites": ["TCOMPL-CORR-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["modeliser", "calculer"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-008.tex", "corrige_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-008.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import log, N, Rational
+% xs = [0, 1, 2, 3, 4]
+% ys = [100, 205, 395, 810, 1600]
+% ecarts_y = [ys[i + 1] - ys[i] for i in range(4)]
+% assert ecarts_y == [105, 190, 415, 790]
+% assert max(ecarts_y) > 7 * min(ecarts_y)
+% zs = [float(N(log(y), 10)) for y in ys]
+% assert all(abs(z - attendu) < 0.01 for z, attendu in
+%            zip(zs, [4.61, 5.32, 5.98, 6.70, 7.38]))
+% ecarts_z = [zs[i + 1] - zs[i] for i in range(4)]
+% assert max(ecarts_z) - min(ecarts_z) < 0.07
+% assert abs(float(N(log(2))) - 0.69) < 0.01
+% END-VERIFY
+\begin{exercice}{TCOMPL-CORR-EX-008}{2}{18}
+Une population double environ tous les ans : rangs $x=0,1,2,3,4$ et effectifs
+$y=100,205,395,810,1600$.
+\begin{enumerate}
+  \item Le nuage $(x\,;\,y)$ est-il proche d'une droite ? Justifier.
+  \item Poser $z=\ln y$ et calculer les cinq valeurs de $z$ (arrondies au
+        centième).
+  \item Ajuster $z$ par une droite en $x$ et en déduire un modèle de la forme
+        $y=A\mathrm{e}^{kx}$.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,27 @@
+% META: {"id": "TCOMPL-BAYES-EX-007", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "exercice", "capacites": ["TCOMPL-BAYES-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/exercices/TCOMPL-BAYES-EX-007.tex", "corrige_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/corriges/TCOMPL-BAYES-CO-007.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, N
+% pm, sens, faux = Rational(2, 100), Rational(95, 100), Rational(4, 100)
+% pt = pm * sens + (1 - pm) * faux
+% vpp = pm * sens / pt
+% assert sens != vpp
+% assert float(N(sens)) > 0.9 and float(N(vpp)) < 0.4
+% # Sans la prevalence, la VPP n'est pas determinee : elle varie de 0 a 1.
+% for prevalence in (Rational(1, 1000), Rational(1, 2), Rational(9, 10)):
+%     p = prevalence * sens + (1 - prevalence) * faux
+%     v = prevalence * sens / p
+%     assert 0 < float(N(v)) < 1
+% assert float(N(Rational(1, 1000) * sens / (Rational(1, 1000) * sens + Rational(999, 1000) * faux))) < 0.03
+% END-VERIFY
+\begin{exercice}{TCOMPL-BAYES-EX-007}{2}{15}
+Dans le contexte de l'exercice précédent, on note $M$ « être malade » et
+$T^+$ « être testé positif ».
+\begin{enumerate}
+  \item Que valent $P_M(T^+)$ et $P_{T^+}(M)$ ? Les distinguer en une phrase
+        chacune.
+  \item Un patient affirme : « le test est fiable à $95\,\%$, donc j'ai
+        $95\,\%$ de chances d'être malade ». Où est l'erreur ?
+  \item Quelle information supplémentaire est indispensable pour répondre
+        correctement ?
+\end{enumerate}
+\end{exercice}

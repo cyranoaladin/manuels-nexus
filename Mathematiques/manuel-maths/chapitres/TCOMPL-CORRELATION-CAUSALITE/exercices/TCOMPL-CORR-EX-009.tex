@@ -1,0 +1,21 @@
+% META: {"id": "TCOMPL-CORR-EX-009", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "exercice", "capacites": ["TCOMPL-CORR-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-009.tex", "corrige_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-009.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% a, b = Rational(23, 10), Rational(21, 10)
+% assert a * Rational(9, 2) + b == Rational(1245, 100)
+% assert a * 50 + b == Rational(1171, 10)
+% plage = (1, 5)
+% assert plage[0] <= Rational(9, 2) <= plage[1]
+% assert not (plage[0] <= 50 <= plage[1])
+% assert 50 == 10 * plage[1]
+% END-VERIFY
+\begin{exercice}{TCOMPL-CORR-EX-009}{2}{15}
+Un ajustement affine donne $y=2{,}3x+2{,}1$ pour des surfaces $x$ comprises
+entre $1$ et $5$ (centaines de m$^2$).
+\begin{enumerate}
+  \item Estimer le chiffre d'affaires d'un magasin de $450$ m$^2$.
+  \item Estimer celui d'un magasin de $5\,000$ m$^2$.
+  \item Laquelle des deux estimations est fiable ? Justifier en distinguant
+        interpolation et extrapolation.
+\end{enumerate}
+\end{exercice}

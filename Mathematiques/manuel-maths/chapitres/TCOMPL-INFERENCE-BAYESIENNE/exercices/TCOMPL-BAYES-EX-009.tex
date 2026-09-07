@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-BAYES-EX-009", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "exercice", "capacites": ["TCOMPL-BAYES-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 3, "competences": ["raisonner", "calculer"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/exercices/TCOMPL-BAYES-EX-009.tex", "corrige_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/corriges/TCOMPL-BAYES-CO-009.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, simplify, diff, N
+% p = symbols('p', positive=True)
+% V = Rational(95, 100) * p / (Rational(95, 100) * p + Rational(4, 100) * (1 - p))
+% assert simplify(V - Rational(95, 100) * p / (Rational(4, 100) + Rational(91, 100) * p)) == 0
+% assert abs(float(N(V.subs(p, Rational(1, 1000)))) - 0.0232) < 0.001
+% assert abs(float(N(V.subs(p, Rational(2, 100)))) - 0.3264) < 0.001
+% assert abs(float(N(V.subs(p, Rational(1, 2)))) - 0.9596) < 0.001
+% derivee = simplify(diff(V, p))
+% for valeur in (Rational(1, 100), Rational(1, 2), Rational(9, 10)):
+%     assert float(N(derivee.subs(p, valeur))) > 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-BAYES-EX-009}{3}{18}
+On garde une sensibilité de $0{,}95$ et un taux de faux positifs de
+$0{,}04$, et on fait varier la prévalence $p$.
+\begin{enumerate}
+  \item Exprimer la valeur prédictive positive $V(p)$ en fonction de $p$.
+  \item Calculer $V(0{,}001)$, $V(0{,}02)$ et $V(0{,}5)$.
+  \item Étudier le sens de variation de $V$ et interpréter pour le dépistage
+        d'une maladie rare.
+\end{enumerate}
+\end{exercice}

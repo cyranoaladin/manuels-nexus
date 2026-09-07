@@ -1,0 +1,25 @@
+% META: {"id": "TCOMPL-CORR-CO-006", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "corrige", "exercice_ref": "TCOMPL-CORR-EX-006", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% xs = [1, 2, 3, 4, 5]
+% ys = [4, 7, 9, 12, 13]
+% n = len(xs)
+% xbar = Rational(sum(xs), n)
+% ybar = Rational(sum(ys), n)
+% assert xbar == 3 and ybar == 9
+% assert sum(x - xbar for x in xs) == 0
+% assert sum(y - ybar for y in ys) == 0
+% assert (3, 9) in list(zip(xs, ys))
+% END-VERIFY
+\begin{corrige}{TCOMPL-CORR-EX-006}
+\textbf{1.} Les cinq points s'alignent presque parfaitement sur une droite
+croissante.
+
+\textbf{2.} $\bar x=\dfrac{1+2+3+4+5}{5}=3$ et
+$\bar y=\dfrac{4+7+9+12+13}{5}=9$ : $G(3\,;\,9)$.
+
+\textbf{3.} $G$ appartient ici au nuage par coïncidence de la valeur de
+$\bar x$, mais son ordonnée $9$ est bien celle du troisième point : $G$ est le
+centre de gravité du nuage, et la droite de régression passe toujours par lui,
+qu'il soit ou non un point observé.
+\end{corrige}

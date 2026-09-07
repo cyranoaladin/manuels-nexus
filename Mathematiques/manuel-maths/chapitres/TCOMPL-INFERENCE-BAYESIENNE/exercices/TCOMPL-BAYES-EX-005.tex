@@ -1,0 +1,19 @@
+% META: {"id": "TCOMPL-BAYES-EX-005", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "exercice", "capacites": ["TCOMPL-BAYES-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/exercices/TCOMPL-BAYES-EX-005.tex", "corrige_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/corriges/TCOMPL-BAYES-CO-005.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% assert Rational(5, 8) * Rational(4, 7) == Rational(5, 14)
+% p_v2 = Rational(5, 8) * Rational(3, 7) + Rational(3, 8) * Rational(2, 7)
+% assert p_v2 == Rational(3, 8)
+% assert Rational(5, 8) + Rational(3, 8) == 1
+% p_r2 = Rational(5, 8) * Rational(4, 7) + Rational(3, 8) * Rational(5, 7)
+% assert p_r2 + p_v2 == 1
+% END-VERIFY
+\begin{exercice}{TCOMPL-BAYES-EX-005}{1}{12}
+Une urne contient $5$ boules rouges et $3$ boules vertes. On tire deux boules
+successivement, sans remise.
+\begin{enumerate}
+  \item Construire l'arbre pondéré de l'expérience.
+  \item Calculer la probabilité que les deux boules soient rouges.
+  \item Calculer la probabilité que la seconde boule soit verte.
+\end{enumerate}
+\end{exercice}

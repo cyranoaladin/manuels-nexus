@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-CORR-CO-009", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "corrige", "exercice_ref": "TCOMPL-CORR-EX-009", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% a, b = Rational(23, 10), Rational(21, 10)
+% assert a * Rational(9, 2) + b == Rational(1245, 100)
+% assert a * 50 + b == Rational(1171, 10)
+% plage = (1, 5)
+% assert plage[0] <= Rational(9, 2) <= plage[1]
+% assert not (plage[0] <= 50 <= plage[1])
+% assert 50 == 10 * plage[1]
+% END-VERIFY
+\begin{corrige}{TCOMPL-CORR-EX-009}
+\textbf{1.} $x=4{,}5$ donne $y=2{,}3\times4{,}5+2{,}1=12{,}45$ millions
+d'euros. C'est une \emph{interpolation} : $4{,}5$ est à l'intérieur de la
+plage observée $[1\,;\,5]$.
+
+\textbf{2.} $x=50$ donnerait $y=117{,}1$ millions d'euros.
+
+\textbf{3.} Seule la première est fiable. La seconde est une
+\emph{extrapolation} très au-delà des données : rien ne garantit que la
+relation reste linéaire pour des surfaces dix fois supérieures à la plus
+grande observée. Un modèle n'est valide que sur le domaine où il a été ajusté.
+\end{corrige}

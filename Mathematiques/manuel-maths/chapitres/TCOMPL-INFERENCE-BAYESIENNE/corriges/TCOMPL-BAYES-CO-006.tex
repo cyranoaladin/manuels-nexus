@@ -1,0 +1,26 @@
+% META: {"id": "TCOMPL-BAYES-CO-006", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "corrige", "exercice_ref": "TCOMPL-BAYES-EX-006", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, N
+% pm = Rational(2, 100)
+% sens = Rational(95, 100)
+% faux = Rational(4, 100)
+% pt = pm * sens + (1 - pm) * faux
+% assert pt == Rational(582, 10000)
+% vpp = pm * sens / pt
+% assert abs(float(N(vpp)) - 0.3264) < 0.001
+% assert float(N(vpp)) < Rational(1, 2)
+% assert (1 - pm) * faux > pm * sens
+% END-VERIFY
+\begin{corrige}{TCOMPL-BAYES-EX-006}
+\textbf{1.} $P(T^+)=P(M)P_M(T^+)+P(\overline{M})P_{\overline{M}}(T^+)
+=0{,}02\times0{,}95+0{,}98\times0{,}04=0{,}019+0{,}0392=0{,}0582$.
+
+\textbf{2.} La formule de Bayes donne
+$P_{T^+}(M)=\dfrac{P(M)P_M(T^+)}{P(T^+)}=\dfrac{0{,}019}{0{,}0582}
+\approx0{,}326$.
+
+\textbf{3.} Un test positif ne rend malade qu'avec environ $33\,\%$ de
+chances : deux tiers des positifs sont des faux positifs. La maladie étant
+rare, les $4\,\%$ de faux positifs portent sur une population bien plus
+nombreuse que les $2\,\%$ de malades.
+\end{corrige}

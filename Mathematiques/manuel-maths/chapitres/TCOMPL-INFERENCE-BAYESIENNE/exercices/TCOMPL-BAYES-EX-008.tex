@@ -1,0 +1,25 @@
+% META: {"id": "TCOMPL-BAYES-EX-008", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "exercice", "capacites": ["TCOMPL-BAYES-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/exercices/TCOMPL-BAYES-EX-008.tex", "corrige_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/corriges/TCOMPL-BAYES-CO-008.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, N
+% vp, fn, fp, vn = 18, 2, 39, 941
+% assert vp + fn + fp + vn == 1000
+% sensibilite = Rational(vp, vp + fn)
+% specificite = Rational(vn, vn + fp)
+% vpp = Rational(vp, vp + fp)
+% vpn = Rational(vn, vn + fn)
+% assert sensibilite == Rational(9, 10)
+% assert abs(float(N(specificite)) - 0.9602) < 0.001
+% assert abs(float(N(vpp)) - 0.3158) < 0.001
+% assert abs(float(N(vpn)) - 0.9979) < 0.001
+% END-VERIFY
+\begin{exercice}{TCOMPL-BAYES-EX-008}{1}{12}
+Sur $1\,000$ personnes testées, on observe : $18$ malades positifs, $2$
+malades négatifs, $39$ non-malades positifs, $941$ non-malades négatifs.
+\begin{enumerate}
+  \item Calculer la sensibilité et la spécificité du test.
+  \item Calculer la valeur prédictive positive et la valeur prédictive
+        négative.
+  \item Relier chacune de ces quatre quantités à une probabilité
+        conditionnelle.
+\end{enumerate}
+\end{exercice}

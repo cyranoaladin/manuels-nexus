@@ -1,0 +1,28 @@
+% META: {"id": "TCOMPL-CORR-CO-008", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "corrige", "exercice_ref": "TCOMPL-CORR-EX-008", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import log, N, Rational
+% xs = [0, 1, 2, 3, 4]
+% ys = [100, 205, 395, 810, 1600]
+% ecarts_y = [ys[i + 1] - ys[i] for i in range(4)]
+% assert ecarts_y == [105, 190, 415, 790]
+% assert max(ecarts_y) > 7 * min(ecarts_y)
+% zs = [float(N(log(y), 10)) for y in ys]
+% assert all(abs(z - attendu) < 0.01 for z, attendu in
+%            zip(zs, [4.61, 5.32, 5.98, 6.70, 7.38]))
+% ecarts_z = [zs[i + 1] - zs[i] for i in range(4)]
+% assert max(ecarts_z) - min(ecarts_z) < 0.07
+% assert abs(float(N(log(2))) - 0.69) < 0.01
+% END-VERIFY
+\begin{corrige}{TCOMPL-CORR-EX-008}
+\textbf{1.} Non : les écarts successifs de $y$ valent $105$, $190$, $415$,
+$790$ ; ils croissent fortement, ce qui exclut un ajustement affine.
+
+\textbf{2.} $z=\ln y$ vaut environ $4{,}61$, $5{,}32$, $5{,}98$, $6{,}70$,
+$7{,}38$.
+
+\textbf{3.} Les écarts de $z$ valent environ $0{,}71$, $0{,}66$, $0{,}72$,
+$0{,}68$ : ils sont quasi constants, le nuage $(x\,;\,z)$ est donc presque
+aligné. L'ajustement donne $z\approx0{,}69x+4{,}61$, d'où
+$y\approx\mathrm{e}^{4{,}61}\mathrm{e}^{0{,}69x}\approx100\times2^{x}$,
+puisque $\mathrm{e}^{0{,}69}\approx2$.
+\end{corrige}

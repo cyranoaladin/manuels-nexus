@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-CORR-EX-006", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "exercice", "capacites": ["TCOMPL-CORR-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-006.tex", "corrige_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-006.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% xs = [1, 2, 3, 4, 5]
+% ys = [4, 7, 9, 12, 13]
+% n = len(xs)
+% xbar = Rational(sum(xs), n)
+% ybar = Rational(sum(ys), n)
+% assert xbar == 3 and ybar == 9
+% assert sum(x - xbar for x in xs) == 0
+% assert sum(y - ybar for y in ys) == 0
+% assert (3, 9) in list(zip(xs, ys))
+% END-VERIFY
+\begin{exercice}{TCOMPL-CORR-EX-006}{1}{12}
+On relève, pour cinq magasins, la surface $x$ (en centaines de m$^2$) et le
+chiffre d'affaires $y$ (en millions d'euros) :
+$(1\,;\,4)$, $(2\,;\,7)$, $(3\,;\,9)$, $(4\,;\,12)$, $(5\,;\,13)$.
+\begin{enumerate}
+  \item Représenter le nuage de points.
+  \item Calculer les coordonnées du point moyen $G$.
+  \item Le point $G$ appartient-il au nuage ? Que représente-t-il ?
+\end{enumerate}
+\end{exercice}

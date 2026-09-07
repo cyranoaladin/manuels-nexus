@@ -1,0 +1,28 @@
+% META: {"id": "TCOMPL-CORR-EX-010", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "exercice", "capacites": ["TCOMPL-CORR-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-010.tex", "corrige_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-010.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt, N
+% chaleur = [15, 18, 22, 26, 30, 33]
+% glaces = [100, 140, 210, 300, 380, 440]
+% noyades = [1, 2, 3, 5, 6, 8]
+% def correlation(u, v):
+%     n = len(u)
+%     ub, vb = Rational(sum(u), n), Rational(sum(v), n)
+%     cov = Rational(1, n) * sum((a - ub) * (b - vb) for a, b in zip(u, v))
+%     vu = Rational(1, n) * sum((a - ub) ** 2 for a in u)
+%     vv = Rational(1, n) * sum((b - vb) ** 2 for b in v)
+%     return cov / sqrt(vu * vv)
+% assert float(N(correlation(glaces, noyades))) > 0.98
+% assert float(N(correlation(chaleur, glaces))) > 0.98
+% assert float(N(correlation(chaleur, noyades))) > 0.98
+% END-VERIFY
+\begin{exercice}{TCOMPL-CORR-EX-010}{2}{15}
+Dans une ville, on observe sur plusieurs années une forte corrélation
+($r\approx0{,}93$) entre le nombre de ventes de crèmes glacées et le nombre
+de noyades.
+\begin{enumerate}
+  \item Peut-on conclure que manger des glaces provoque des noyades ?
+  \item Proposer une variable tierce expliquant la corrélation observée.
+  \item Formuler en une phrase ce qu'un coefficient de corrélation mesure, et
+        ce qu'il ne mesure pas.
+\end{enumerate}
+\end{exercice}
