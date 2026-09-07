@@ -5,19 +5,19 @@
   "approves_nothing": true,
   "status": "HUMAN_REVIEW_ACTION_REQUIRED",
   "source_inputs": {
-    "audit/CURRENT_REVIEW_DEBT_PARTITION.json": "sha256:ec18e0299ec70de40bb494ac018f1ce951df71255e0cd7b367f03cde5f39fb89",
+    "audit/CURRENT_REVIEW_DEBT_PARTITION.json": "sha256:99bc6d7144f6e0279a31e84ffaf6dcbed38405bd01031f3583bf97a7ae4f0bcd",
     "audit/QCM_INDEPENDENT_EVIDENCE_V2.json": "sha256:12405d55c205fd0e6111656110f95a0aac39dc42c7b0363081f97bafaad42315",
     "audit/QCM_REVIEW_PROOF_RECONCILIATION.json": "sha256:b2a6a242cab0b0e0f758ddd18a6d4a9a6c397fadff78266f3f8a805beb1fec8e",
     "audit/TNSI_PROJET_ASSESSMENT_MODE.json": "sha256:1de1984e8cddb7cfdf08a5dffebb0b7eb286e21cecd9cdf39f57011d1a02c8b2"
   },
   "counts": {
-    "OBJECT_REVIEW": 2392,
+    "OBJECT_REVIEW": 2424,
     "QCM_ANSWER_SEMANTICS": 166,
     "QCM_DIAGNOSTIC_RENVOI_SEMANTICS": 41,
     "EDITORIAL_DECISION": 0,
-    "TOTAL": 2599
+    "TOTAL": 2631
   },
-  "queue_digest": "sha256:f05ccd85242df9fe749d803c29914a286a7cb6153cdc9d4ed85fd3af37783ac0",
+  "queue_digest": "sha256:9dd64648042756040d731a159d3dbe76ed03a36edf04e52ba1428afc87b9d4a3",
   "pairwise_intersections": [],
   "unknown_count": 0,
   "items": [
@@ -1161,6 +1161,197 @@
         "EXPERT_MATHEMATIQUE",
         "EXPERT_PROGRAMME_PEDAGOGIE"
       ],
+      "distinct_humans_required": true,
+      "release_blocking": true
+    },
+    {
+      "item_id": "T3_AUTHORED_REVIEW_DEBT",
+      "category": "OBJECT_REVIEW",
+      "count": 32,
+      "unit_ids": [
+        "OBJECT_REVIEW::013af528530e42ce",
+        "OBJECT_REVIEW::027b15c59d435fe6",
+        "OBJECT_REVIEW::19825f9bd00943f9",
+        "OBJECT_REVIEW::1ccdfe1ea2a28e62",
+        "OBJECT_REVIEW::2329a4bfa86e4887",
+        "OBJECT_REVIEW::27f6366bb35fef8a",
+        "OBJECT_REVIEW::2b0c05eba8e3bb7d",
+        "OBJECT_REVIEW::2fd569c0cf85335d",
+        "OBJECT_REVIEW::35e581fc5eb5af5e",
+        "OBJECT_REVIEW::3913df04da3499fa",
+        "OBJECT_REVIEW::43d8310d8acadf10",
+        "OBJECT_REVIEW::4f247a31c5e2785f",
+        "OBJECT_REVIEW::5138337325ce1f17",
+        "OBJECT_REVIEW::51651ff74001e515",
+        "OBJECT_REVIEW::530f6c4363963116",
+        "OBJECT_REVIEW::538af5ad84a311e7",
+        "OBJECT_REVIEW::53b981f844852aab",
+        "OBJECT_REVIEW::5e2bdcce01bff4cc",
+        "OBJECT_REVIEW::6db16da6fcb01de6",
+        "OBJECT_REVIEW::6f61542adeeeb5a0",
+        "OBJECT_REVIEW::745d7a7f73534d82",
+        "OBJECT_REVIEW::9853f563376d8f42",
+        "OBJECT_REVIEW::9985ade0c7a739c2",
+        "OBJECT_REVIEW::99d521e3029f49ae",
+        "OBJECT_REVIEW::9b93600dd285fc23",
+        "OBJECT_REVIEW::a7b5315d573977c6",
+        "OBJECT_REVIEW::aaca82d122f82077",
+        "OBJECT_REVIEW::c465f474aebad401",
+        "OBJECT_REVIEW::c8e6f23b723acc42",
+        "OBJECT_REVIEW::e6f6264da6e5603c",
+        "OBJECT_REVIEW::e7ba3fd7e7f3707e",
+        "OBJECT_REVIEW::f75d245fcb244281"
+      ],
+      "set_digest": "sha256:9db37c98585698630df5b6e3add9e69d435285ea2e0dcb22ef6cb885c7d6bfb9",
+      "chapters": {
+        "TCOMPL-ECHANTILLONNAGE": 5,
+        "TCOMPL-MODELES-EVOLUTION": 6,
+        "TCOMPL-TEMPS-ATTENTE": 6,
+        "TNSI-ALGORITHMIQUE": 4,
+        "TNSI-ARCHITECTURES-MATERIELLES-SY": 2,
+        "TNSI-BASES-DE-DONNEES": 2,
+        "TNSI-LANGAGES-ET-PROGRAMMATION": 1,
+        "TNSI-STRUCTURES-DONNEES": 3,
+        "TSPE-CALCUL-INTEGRAL": 2,
+        "TSPE-PROBABILITES": 1
+      },
+      "units_by_chapter": {
+        "TCOMPL-ECHANTILLONNAGE": {
+          "count": 5,
+          "unit_ids": [
+            "OBJECT_REVIEW::35e581fc5eb5af5e",
+            "OBJECT_REVIEW::538af5ad84a311e7",
+            "OBJECT_REVIEW::99d521e3029f49ae",
+            "OBJECT_REVIEW::aaca82d122f82077",
+            "OBJECT_REVIEW::c8e6f23b723acc42"
+          ],
+          "set_digest": "sha256:c2cbef4b85eacaa96c639f72b092bff35273a8df1d089e2dcdec00d86fecfd21"
+        },
+        "TCOMPL-MODELES-EVOLUTION": {
+          "count": 6,
+          "unit_ids": [
+            "OBJECT_REVIEW::2fd569c0cf85335d",
+            "OBJECT_REVIEW::5138337325ce1f17",
+            "OBJECT_REVIEW::51651ff74001e515",
+            "OBJECT_REVIEW::6db16da6fcb01de6",
+            "OBJECT_REVIEW::a7b5315d573977c6",
+            "OBJECT_REVIEW::e6f6264da6e5603c"
+          ],
+          "set_digest": "sha256:26331dca082b34d753d07b275cc9ae983f3b44747e5a0f7ae5dde113dbc25d8b"
+        },
+        "TCOMPL-TEMPS-ATTENTE": {
+          "count": 6,
+          "unit_ids": [
+            "OBJECT_REVIEW::013af528530e42ce",
+            "OBJECT_REVIEW::27f6366bb35fef8a",
+            "OBJECT_REVIEW::530f6c4363963116",
+            "OBJECT_REVIEW::53b981f844852aab",
+            "OBJECT_REVIEW::c465f474aebad401",
+            "OBJECT_REVIEW::f75d245fcb244281"
+          ],
+          "set_digest": "sha256:b6aecb74fd2363438791517693e4ea28d92c6d4dcdafcb5e61b8382e23ce148a"
+        },
+        "TNSI-ALGORITHMIQUE": {
+          "count": 4,
+          "unit_ids": [
+            "OBJECT_REVIEW::3913df04da3499fa",
+            "OBJECT_REVIEW::43d8310d8acadf10",
+            "OBJECT_REVIEW::745d7a7f73534d82",
+            "OBJECT_REVIEW::9985ade0c7a739c2"
+          ],
+          "set_digest": "sha256:2d61ac85a60f27deba0b7612f6d64a913c960baf51b0d39e02665d0f4ecb4efa"
+        },
+        "TNSI-ARCHITECTURES-MATERIELLES-SY": {
+          "count": 2,
+          "unit_ids": [
+            "OBJECT_REVIEW::19825f9bd00943f9",
+            "OBJECT_REVIEW::6f61542adeeeb5a0"
+          ],
+          "set_digest": "sha256:e117357364d7d34e500f5102da516bbd5208d78a648a8648ddd96f4a8de11716"
+        },
+        "TNSI-BASES-DE-DONNEES": {
+          "count": 2,
+          "unit_ids": [
+            "OBJECT_REVIEW::1ccdfe1ea2a28e62",
+            "OBJECT_REVIEW::9853f563376d8f42"
+          ],
+          "set_digest": "sha256:6a33414ab0ffcc1ca37f89735461761553faa7abafc48e2fde5a88a035563007"
+        },
+        "TNSI-LANGAGES-ET-PROGRAMMATION": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::5e2bdcce01bff4cc"
+          ],
+          "set_digest": "sha256:f74fe365054a0ca8a9f7109de8c4b1dfddd0fa51895ecf16fc9ddcda507f438e"
+        },
+        "TNSI-STRUCTURES-DONNEES": {
+          "count": 3,
+          "unit_ids": [
+            "OBJECT_REVIEW::027b15c59d435fe6",
+            "OBJECT_REVIEW::2329a4bfa86e4887",
+            "OBJECT_REVIEW::4f247a31c5e2785f"
+          ],
+          "set_digest": "sha256:7b1f94ebc7e3504600afdf59c92caf93dc6d281e6c3aadec004aa7bb0fc5f127"
+        },
+        "TSPE-CALCUL-INTEGRAL": {
+          "count": 2,
+          "unit_ids": [
+            "OBJECT_REVIEW::9b93600dd285fc23",
+            "OBJECT_REVIEW::e7ba3fd7e7f3707e"
+          ],
+          "set_digest": "sha256:03baba3c4cf1f5bd50b835c05d3dca57b59385500be8c107f11806185fc06614"
+        },
+        "TSPE-PROBABILITES": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::2b0c05eba8e3bb7d"
+          ],
+          "set_digest": "sha256:01768a9e9885f7e60019dd09fd178e1f4c3668a09b948961e05baf53254843ee"
+        }
+      },
+      "provenance": "separately declared current review debt",
+      "required_reviewers_by_chapter": {
+        "TCOMPL-ECHANTILLONNAGE": [
+          "EXPERT_MATHEMATIQUE",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TCOMPL-MODELES-EVOLUTION": [
+          "EXPERT_MATHEMATIQUE",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TCOMPL-TEMPS-ATTENTE": [
+          "EXPERT_MATHEMATIQUE",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TNSI-ALGORITHMIQUE": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TNSI-ARCHITECTURES-MATERIELLES-SY": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TNSI-BASES-DE-DONNEES": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TNSI-LANGAGES-ET-PROGRAMMATION": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TNSI-STRUCTURES-DONNEES": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TSPE-CALCUL-INTEGRAL": [
+          "EXPERT_MATHEMATIQUE",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "TSPE-PROBABILITES": [
+          "EXPERT_MATHEMATIQUE",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ]
+      },
       "distinct_humans_required": true,
       "release_blocking": true
     },
