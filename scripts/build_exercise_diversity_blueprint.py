@@ -18,6 +18,13 @@ Chaque entree porte les champs que le mandat exige de tout nouvel objet :
                           aujourd'hui ;
 `ORIGINALITY_PROVENANCE`  d'ou vient la situation.
 
+Le compteur s'appelle `FUNCTIONS_TO_AUTHOR` et non `OBJECTS_TO_AUTHOR` : il
+denombre des fonctions manquantes, pas des fichiers. Une capacite sans aucun
+exercice en reclame deux -- le geste de base et un registre de transfert -- et
+un seul enonce bien construit peut les porter toutes les deux, en citant les
+deux identifiants de lacune. Lire ce nombre comme un nombre de fichiers a
+produire serait retomber dans la cible de volume.
+
 `AUTHORING_REASON` ne peut jamais valoir `increase_count` ni
 `satisfy_diversity_metric` : un producteur qui ecrirait cela avouerait
 ecrire pour un compteur. Le contrat de ce fichier l'interdit et un test le
@@ -152,11 +159,11 @@ def build() -> dict[str, Any]:
             "CHAPTER_ID": row["CHAPTER_ID"],
             "PEDAGOGICAL_VERDICT": row["PEDAGOGICAL_VERDICT"],
             "CURRENT_EXERCISES": row["counts"]["exercices"],
-            "OBJECTS_TO_AUTHOR": len(entrees),
+            "FUNCTIONS_TO_AUTHOR": len(entrees),
             "blueprint": entrees,
         })
 
-    total = sum(c["OBJECTS_TO_AUTHOR"] for c in chapitres)
+    total = sum(c["FUNCTIONS_TO_AUTHOR"] for c in chapitres)
     roles = collections.Counter(
         e["EXERCISE_ROLE"] for c in chapitres for e in c["blueprint"]
     )
@@ -172,7 +179,7 @@ def build() -> dict[str, Any]:
         "approves_nothing": True,
         "summary": {
             "CHAPTERS_WITH_BLUEPRINT": len(chapitres),
-            "OBJECTS_TO_AUTHOR": total,
+            "FUNCTIONS_TO_AUTHOR": total,
             "ROLES_TO_AUTHOR": dict(sorted(roles.items())),
             "FORBIDDEN_AUTHORING_REASONS_USED": 0,
         },
@@ -184,7 +191,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
     lignes = [
         "# Plan de diversite des exercices", "",
         payload["rule"].capitalize() + ".", "",
-        f"{payload['summary']['OBJECTS_TO_AUTHOR']} objets a ecrire sur "
+        f"{payload['summary']['FUNCTIONS_TO_AUTHOR']} fonctions a produire sur "
         f"{payload['summary']['CHAPTERS_WITH_BLUEPRINT']} chapitres.", "",
     ]
     for chapitre in payload["chapters"]:

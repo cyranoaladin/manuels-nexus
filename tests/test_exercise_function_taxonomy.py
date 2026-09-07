@@ -68,6 +68,21 @@ FIXTURES: tuple[tuple[str, tuple[str, ...], tuple[str, ...]], ...] = (
     ("Donner un contre-exemple.", ("EDGE_CASE",), ()),
     # -- La modelisation.
     ("Exprimer la hauteur en fonction du temps écoulé.", ("MODELLING",), ()),
+    # -- Les verbes releves sur le corpus : « montrer » sans « que »,
+    #    « expliquer », « interpreter », « pourquoi », « comparer ».
+    ("Montrer que la suite converge.", ("REASONING",), ()),
+    ("Expliquer pourquoi ce résultat est inacceptable.", ("REASONING",), ()),
+    ("Interpréter le coefficient obtenu.", ("REASONING",), ()),
+    ("Comparer les deux estimations et commenter.", ("REASONING",), ()),
+    # -- Et les gestes d'execution qu'on ne voyait pas.
+    ("Vérifier le résultat sur $[4, 9, 2]$.", ("DIRECT_APPLICATION",), ("REASONING",)),
+    ("Résoudre $x^2-5x+6=0$.", ("DIRECT_APPLICATION",), ("REASONING",)),
+    ("Étudier les variations de $f$ sur $[0\\,;\\,3]$.",
+     ("DIRECT_APPLICATION",), ("REASONING",)),
+    ("Identifier les trois composants graphiques du formulaire.",
+     ("DIRECT_APPLICATION",), ("REASONING",)),
+    ("Réécrire le test à l'aide de cette fonction.",
+     ("DIRECT_APPLICATION",), ("REASONING",)),
     # -- Ce qui ne doit PAS declencher : le bloc oracle n'est pas un enonce.
     ("% assert simplify(diff(F, x) - f) == 0\n% # on démontre ici que la "
      "primitive est correcte\nCalculer $F(2)$.",

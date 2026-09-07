@@ -53,9 +53,15 @@ TRANSFER_FUNCTIONS = frozenset(
     {CONTEXT, TRANSFER, REASONING, PROBLEM, SYNTHESIS, EDGE, MODELLING}
 )
 
+#: Les verbes ont ete releves sur le corpus, pas devines : « montrer » y
+#: apparait cent-quatre-vingt-quinze fois, « expliquer » vingt-six,
+#: « interpreter » vingt-quatre. N'en reconnaitre qu'une partie faisait voir
+#: des chapitres sans raisonnement la ou l'enonce en demandait un.
 _RAISONNER = re.compile(
-    r"\bd[ée]montrer\b|\bmontrer que\b|\bprouver\b|\bjustifier\b|"
-    r"\ben d[ée]duire\b|\br[ée]currence\b|\bconclure\b",
+    r"\bd[ée]montrer\b|\bmontrer\b|\bprouver\b|\bjustifier\b|"
+    r"\ben d[ée]duire\b|\br[ée]currence\b|\bconclure\b|\bexpliquer\b|"
+    r"\binterpr[ée]ter\b|\bpourquoi\b|\bcomparer\b|\bcommenter\b|"
+    r"\bargumenter\b|\bcritiquer\b",
     re.I,
 )
 _TRANSFERT = re.compile(
@@ -90,11 +96,14 @@ _DIRECT = re.compile(
     r"que (?:renvoie|vaut|retourne)|\bappliquer\b|\beffectuer\b|"
     r"\bsimplifier\b|\bd[ée]velopper\b|\bfactoriser\b|\bd[ée]river\b|"
     r"\bex[ée]cuter\b|\b[ée]valuer\b|\bcompl[ée]ter\b|\bdresser\b|"
-    r"r[ée]soudre (?:l'|l’)?(?:[ée]quation|in[ée]quation|le syst)|"
-    r"\b[ée]crire\b|\btraduire\b|\br[ée]diger\b|\bconvertir\b|\bcodera?\b|\bd[ée]nombrer\b|"
-    r"\bd[ée]composer\b|\bconstruire\b|\btracer\b|\bplacer\b|\brepr[ée]senter\b|"
-    r"\bv[ée]rifier que\b|\bencadrer\b|\bmajorer\b|\bminorer\b|\bprimitiver\b|"
-    r"\bint[ée]grer\b|\bsimuler\b|\bexprimer\b",
+    r"\br[ée]soudre\b|\b[ée]crire\b|\btraduire\b|\br[ée]diger\b|"
+    r"\bconvertir\b|\bcodera?\b|\bd[ée]nombrer\b|\bd[ée]composer\b|"
+    r"\bconstruire\b|\btracer\b|\bplacer\b|\brepr[ée]senter\b|"
+    r"\bv[ée]rifier\b|\bencadrer\b|\bmajorer\b|\bminorer\b|"
+    r"\bint[ée]grer\b|\bsimuler\b|\bexprimer\b|\b[ée]tudier\b|"
+    r"\bidentifier\b|\btester\b|\br[ée]{1,2}crire\b|\bestimer\b|"
+    r"\breconna[îi]tre\b|\brappeler\b|\besquisser\b|\bmodifier\b|"
+    r"\bmettre\b.{0,25}\bsous (?:la|cette) forme\b",
     re.I,
 )
 _ETAPES = re.compile(r"\\item", re.I)

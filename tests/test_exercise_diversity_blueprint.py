@@ -45,6 +45,19 @@ def test_no_entry_is_written_for_a_counter(payload: dict) -> None:
             assert len(entree["AUTHORING_REASON"]) > 40, entree["PEDAGOGICAL_GAP_ID"]
 
 
+def test_the_counter_denumbers_functions_not_files(payload: dict) -> None:
+    """Le nom du compteur dit ce qu'il compte.
+
+    `OBJECTS_TO_AUTHOR` se lisait comme un nombre de fichiers a produire, donc
+    comme une cible de volume. Ce sont des fonctions manquantes.
+    """
+
+    assert "OBJECTS_TO_AUTHOR" not in payload["summary"]
+    assert payload["summary"]["FUNCTIONS_TO_AUTHOR"] == sum(
+        c["FUNCTIONS_TO_AUTHOR"] for c in payload["chapters"]
+    )
+
+
 def test_no_entry_prescribes_a_number_of_exercises(payload: dict) -> None:
     """Un motif qui compte des exercices est un quota, meme bien redige."""
 
@@ -99,11 +112,12 @@ def test_the_prescribed_role_is_one_the_capacity_lacks(payload: dict) -> None:
             )
 
 
-def test_a_capacity_already_served_asks_for_at_most_one_object(payload: dict) -> None:
+def test_a_capacity_already_served_asks_for_at_most_one_function(payload: dict) -> None:
     """Une capacite deja pourvue ne reclame qu'UNE fonction manquante.
 
     Seule une capacite sans aucun exercice en reclame deux -- le geste de
-    base et un registre de transfert -- parce qu'il n'y a rien a completer.
+    base et un registre de transfert -- parce qu'il n'y a rien a completer,
+    et un seul enonce peut les porter toutes les deux.
     """
 
     for chapitre in payload["chapters"]:
