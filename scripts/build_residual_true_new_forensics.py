@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import re
 from itertools import combinations
 import json
 import os
@@ -62,12 +63,38 @@ OUTPUT_NAMES = {
     },
 }
 
+#: Empreinte de la source qui PORTE la correction, pour les cinq objets
+#: classés FIX_NOW. Le producteur refuse de construire si la source observée
+#: en diverge : une correction prouvée sur une version ne vaut pas pour une
+#: autre.
+#:
+#: `dc8e5dcc030bb539` (`1SPE-VARALEA-CR-013`) a changé d'empreinte quand un
+#: bloc `% BEGIN-VERIFY` y a été ajouté — la campagne d'oracles de cette
+#: branche. Le diff depuis l'empreinte précédente est CONFINÉ à l'ajout de ce
+#: bloc : le corps corrigé n'a pas bougé d'un caractère, et
+#: `_fix_now_change_is_only_a_verify_block` le vérifie plutôt que de le
+#: supposer.
 FIXED_SOURCE_SHA256 = {
     "18c7b3aa6301ef4c": "sha256:2b0ce4c358c7bbb084a448fd175145cf58f502c5ed1c40b01efa9dd040674b9e",
     "33e9818ffc70892c": "sha256:1f1cefa819c936611ce8ad4b46c0fc3e02f953e606a12827dc746de237542a33",
     "873a020438d7e00a": "sha256:af699a632f58b14ef2360503da4bd6d8b39d20cba15dafa41d779952253f20de",
     "8ca4f3f2a9212e39": "sha256:71d3048821fe1b5565f3bde13ddf8f7e32a4e78dc174b365472af7b367a7155f",
-    "dc8e5dcc030bb539": "sha256:9193efce3be19cf93fb6fa44adfabba74126a2f96ef234fb58681972ae670fa1",
+    "dc8e5dcc030bb539": "sha256:97fbbe2002f4c4373d78096938c0edbf6109432fc8c7876454540dc4d1ea66ef",
+}
+
+#: Empreinte précédente d'un objet FIX_NOW dont seule l'instrumentation a
+#: changé, avec l'empreinte du corps hors bloc de vérification. Les deux
+#: doivent coïncider : c'est ce qui distingue « on a ajouté un oracle » de
+#: « on a retouché le contenu corrigé ».
+FIX_NOW_SUPERSEDED = {
+    "dc8e5dcc030bb539": {
+        "previous_source_sha256": (
+            "sha256:9193efce3be19cf93fb6fa44adfabba74126a2f96ef234fb58681972ae670fa1"
+        ),
+        "body_sha256_without_verify": (
+            "sha256:9193efce3be19cf93fb6fa44adfabba74126a2f96ef234fb58681972ae670fa1"
+        ),
+    },
 }
 
 ALLOWED_EDITORIAL_REASONS = {
@@ -210,6 +237,32 @@ def _forensic_source_sha_for_check(root: Path, output_dir: Path) -> str:
     frozen_sha = next(iter(frozen_shas))
     _assert_source_snapshot(root, output_dir, frozen_sha)
     return frozen_sha
+
+
+def _body_without_verify(texte: str) -> str:
+    """Le corps de l'objet, son bloc de vérification retiré.
+
+    Sert à distinguer deux changements que la seule empreinte du fichier
+    confond : « on a ajouté un oracle » et « on a retouché le contenu ».
+    """
+    sans = re.sub(r"% BEGIN-VERIFY\n.*?% END-VERIFY\n?", "", texte, flags=re.S)
+    return sans.rstrip("\n") + "\n"
+
+
+def _assert_only_a_verify_block_was_added(
+    root: Path, relative: str, fingerprint: str
+) -> None:
+    """Le corps corrigé n'a pas bougé depuis l'empreinte précédente."""
+    attendu = FIX_NOW_SUPERSEDED[fingerprint]["body_sha256_without_verify"]
+    texte = (root / relative).read_text(encoding="utf-8")
+    observe = "sha256:" + hashlib.sha256(
+        _body_without_verify(texte).encode("utf-8")
+    ).hexdigest()
+    if observe != attendu:
+        raise ValueError(
+            "corps FIX_NOW modifié au-delà du bloc de vérification: "
+            f"{fingerprint} attendu={attendu} observé={observe}"
+        )
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -600,6 +653,8 @@ def _initial_entry(
             f"{fingerprint} attendu={FIXED_SOURCE_SHA256.get(fingerprint)} "
             f"observé={current_sha}"
         )
+    if content_fixed and fingerprint in FIX_NOW_SUPERSEDED:
+        _assert_only_a_verify_block_was_added(root, path, fingerprint)
     if original_class not in {"FIX_NOW", "LEGITIMATE_REVIEW_DEBT"}:
         raise ValueError(f"classe active résiduelle interdite: {fingerprint}")
 
