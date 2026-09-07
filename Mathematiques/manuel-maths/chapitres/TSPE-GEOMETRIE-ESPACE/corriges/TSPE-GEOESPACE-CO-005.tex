@@ -13,3 +13,37 @@
 \textbf{Q5.} Ce résultat montre que $H$ est strictement plus proche de $M$ que tout autre point $N$ de $\mathcal{P}$ : $H$ est donc le point de $\mathcal{P}$ le plus proche de $M$.
 
 \end{corrige}
+
+% BEGIN-VERIFY
+% from sympy import sqrt, simplify, symbols, Rational
+%
+% # Le raisonnement du corrige est general ; on l'instancie sur un plan et un
+% # point concrets, puis on verifie chacune de ses cinq etapes.
+% # Plan P : z = 0. M au-dessus, H son projete, N un autre point de P.
+% M, H = (1, 2, 5), (1, 2, 0)
+% def vecteur(U, V): return tuple(V[n] - U[n] for n in range(3))
+% def scalaire(u, v): return sum(u[n]*v[n] for n in range(3))
+% norme = lambda u: sqrt(sum(c**2 for c in u))
+%
+% for N in ((0, 0, 0), (4, -3, 0), (1, 9, 0), (-2, 2, 0)):
+%     # Q1 : HN est un vecteur du plan (troisieme coordonnee nulle).
+%     HN = vecteur(H, N)
+%     assert HN[2] == 0
+%     # Q2 : MH est orthogonal a tout vecteur du plan.
+%     MH = vecteur(M, H)
+%     assert scalaire(MH, HN) == 0
+%     # Q3 : Pythagore dans le triangle rectangle en H.
+%     MN = vecteur(M, N)
+%     assert simplify(norme(MN)**2 - (norme(MH)**2 + norme(HN)**2)) == 0
+%     # Q4 : si N != H, alors MN > MH strictement.
+%     if N != H:
+%         assert norme(HN) > 0
+%         assert norme(MN) > norme(MH)
+%
+% # Q5 : H est donc le point du plan le plus proche de M, et c'est un minimum
+% # strict — aucun autre point n'atteint la meme distance.
+% distances = {N: norme(vecteur(M, N))
+%              for N in ((0, 0, 0), (4, -3, 0), (1, 9, 0), H)}
+% assert min(distances, key=lambda N: distances[N]) == H
+% assert all(distances[N] > distances[H] for N in distances if N != H)
+% END-VERIFY

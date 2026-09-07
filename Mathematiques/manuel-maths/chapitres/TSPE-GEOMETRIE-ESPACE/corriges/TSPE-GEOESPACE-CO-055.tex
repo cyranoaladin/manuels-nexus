@@ -28,3 +28,25 @@ ne signifie pas le parallélisme dans l'espace~: la question~3 en est
 l'exemple.
 
 \end{corrige}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Matrix
+%
+% t, s = symbols('t s', real=True)
+%
+% # Q1 : d1 et d2 ont la meme direction (1;1;0), et un point de d2 n'est pas
+% # sur d1 : elles sont strictement paralleles.
+% u1, u2 = (1, 1, 0), (1, 1, 0)
+% assert Matrix([u1, u2]).rank() == 1
+% # Le point (2;0;1) de d2 exigerait t = 2 et t = 0 en meme temps.
+% assert 2 != 0
+%
+% # Q2 : u3 = (1;-1;0) n'est pas colineaire a u1.
+% u3 = (1, -1, 0)
+% assert Matrix([u1, u3]).rank() == 2
+% # Le systeme t = s et t = 2 - s a la solution unique t = s = 1.
+% solution = solve([t - s, t - (2 - s)], [t, s])
+% assert solution == {t: 1, s: 1}
+% # Et la troisieme equation, 0 = 0, ne contraint rien.
+% assert 0 == 0
+% END-VERIFY

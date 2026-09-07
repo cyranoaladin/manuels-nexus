@@ -23,3 +23,31 @@ donc une position dans une base~; elles ne mesurent une longueur que si la
 base est orthonormée.
 
 \end{corrige}
+
+% BEGIN-VERIFY
+% from sympy import sqrt, simplify
+%
+% A, B = (0, 0, 0), (1, 0, 0)
+% D, E = (0, 1, 0), (0, 0, 1)
+% C = (1, 1, 0)
+% F = (1, 0, 1)
+% G = (1, 1, 1)
+% def vecteur(U, V): return tuple(V[n] - U[n] for n in range(3))
+%
+% # Q1 : G a pour coordonnees (1;1;1) dans le repere d'origine A.
+% assert G == vecteur(A, G) == (1, 1, 1)
+%
+% # Q2 : BG = (0;1;1), et differe des coordonnees du POINT G.
+% assert vecteur(B, G) == (0, 1, 1)
+% assert vecteur(B, G) != G
+% # L'ecart tient a ce que B n'est pas l'origine.
+% assert B != A
+%
+% # Q3 : DF = -AD + AB + AE = (1;-1;1).
+% assert vecteur(D, F) == (1, -1, 1)
+%
+% # Q4 : la base etant orthonormee, les longueurs se calculent par la norme.
+% for U, V, attendu in ((A, G, sqrt(3)), (B, G, sqrt(2)), (D, F, sqrt(3))):
+%     w = vecteur(U, V)
+%     assert simplify(sqrt(sum(c**2 for c in w)) - attendu) == 0
+% END-VERIFY

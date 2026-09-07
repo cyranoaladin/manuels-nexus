@@ -31,3 +31,26 @@ vecteurs ensemble --- aucun ne doit être combinaison des deux autres --- et
 non sur les paires.
 
 \end{corrige}
+
+% BEGIN-VERIFY
+% from sympy import Rational, Matrix
+%
+% u, v, w = (1, 2, -1), (2, -1, 3), (3, 1, 2)
+%
+% def colineaires(a, b):
+%     return Matrix([a, b]).rank() < 2
+%
+% # Q1 : les trois vecteurs sont deux a deux non colineaires.
+% assert not colineaires(u, v)
+% assert not colineaires(u, w)
+% assert not colineaires(v, w)
+%
+% # Q2 : ils ne forment pourtant pas une base, car w = u + v.
+% assert tuple(u[n] + v[n] for n in range(3)) == w
+% assert Matrix([u, v, w]).det() == 0
+% assert Matrix([u, v, w]).rank() == 2
+%
+% # Ils sont donc coplanaires : non colineaires deux a deux ne suffit pas.
+% # Un contre-controle : la base canonique, elle, a un determinant non nul.
+% assert Matrix([(1, 0, 0), (0, 1, 0), (0, 0, 1)]).det() == 1
+% END-VERIFY

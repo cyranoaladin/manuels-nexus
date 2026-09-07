@@ -35,3 +35,50 @@ Si elles etaient coplanaires, les quatre points $A,B,C,D$ seraient coplanaires, 
 \erreurFrequente{
 \textbf{Croire que deux droites non paralleles sont toujours secantes.} C'est vrai dans le plan mais faux dans l'espace : deux droites non paralleles et non secantes existent (droites non coplanaires).
 }
+
+% BEGIN-VERIFY
+% from sympy import Matrix, symbols, solve, simplify
+%
+% t, s = symbols('t s', real=True)
+%
+% # Le tetraedre de l'exemple : quatre points non coplanaires.
+% A, B, C, D = (0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1)
+% def vecteur(U, V): return tuple(V[n] - U[n] for n in range(3))
+% assert Matrix([vecteur(A, B), vecteur(A, C), vecteur(A, D)]).det() != 0
+%
+% # (AB) et (CD) ne sont donc pas coplanaires : le systeme d'intersection n'a
+% # pas de solution, et leurs directions ne sont pas colineaires.
+% AB, CD = vecteur(A, B), vecteur(C, D)
+% assert Matrix([AB, CD]).rank() == 2                     # non paralleles
+% point_AB = tuple(A[n] + t*AB[n] for n in range(3))
+% point_CD = tuple(C[n] + s*CD[n] for n in range(3))
+% assert solve([point_AB[n] - point_CD[n] for n in range(3)], [t, s]) == []
+%
+% # Les trois positions d'une droite et d'un plan, sur le plan z = 0.
+% directions = {
+%     "secante": ((0, 0, 1), (0, 0, 5)),        # traverse
+%     "parallele": ((1, 0, 0), (0, 0, 5)),      # au-dessus, jamais atteint
+%     "incluse": ((1, 0, 0), (0, 0, 0)),        # dans le plan
+% }
+% attendus = {"secante": 1, "parallele": 0, "incluse": None}
+% for nom, (direction, origine) in directions.items():
+%     solutions = solve(origine[2] + t*direction[2], t)
+%     if attendus[nom] == 1:
+%         assert len(solutions) == 1
+%     elif attendus[nom] == 0:
+%         assert solutions == []
+%     else:
+%         assert solutions == []      # 0 = 0 : sympy ne renvoie pas de racine
+%         assert origine[2] == 0 and direction[2] == 0    # tout le monde convient
+%
+% # Trois vecteurs coplanaires : w s'ecrit comme combinaison de u et v.
+% u, v = (1, 0, 0), (0, 1, 0)
+% w = (3, -2, 0)
+% assert Matrix([u, v, w]).det() == 0
+% a, b = symbols('a b', real=True)
+% assert solve([a*u[n] + b*v[n] - w[n] for n in range(3)], [a, b]) == {a: 3, b: -2}
+% # Et un vecteur hors du plan ne s'y ecrit pas.
+% hors = (0, 0, 1)
+% assert Matrix([u, v, hors]).det() != 0
+% assert solve([a*u[n] + b*v[n] - hors[n] for n in range(3)], [a, b]) == []
+% END-VERIFY

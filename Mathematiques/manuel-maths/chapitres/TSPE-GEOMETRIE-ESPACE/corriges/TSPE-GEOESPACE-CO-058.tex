@@ -46,3 +46,34 @@ $d(B,\mathcal{P})=\dfrac{\lvert 1-0\rvert}{\sqrt{1^2+(-1)^2}}
 =\dfrac{1}{\sqrt2}=\dfrac{\sqrt2}{2}$. Les deux voies concordent.
 
 \end{corrige}
+
+% BEGIN-VERIFY
+% from sympy import sqrt, simplify, Rational, Matrix
+%
+% A, Bp, D, E = (0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1)
+% C = (1, 1, 0)
+% G = (1, 1, 1)
+% def vecteur(U, V): return tuple(V[n] - U[n] for n in range(3))
+% def scalaire(u, v): return sum(u[n]*v[n] for n in range(3))
+%
+% # Q1 : AG = AC + AE, donc A, C, G, E sont coplanaires.
+% AG, AC, AE = vecteur(A, G), vecteur(A, C), vecteur(A, E)
+% assert tuple(AC[n] + AE[n] for n in range(3)) == AG
+% assert Matrix([AC, AE, AG]).det() == 0
+%
+% # Q2 : (BD) est orthogonale au plan P dirige par AC et AE.
+% BD = vecteur(Bp, D)
+% assert BD == (-1, 1, 0)
+% assert scalaire(BD, AC) == 0 and scalaire(BD, AE) == 0
+% assert Matrix([AC, AE]).rank() == 2
+% # La remarque : un seul produit scalaire nul ne suffirait pas. Le vecteur
+% # (0;0;1) est orthogonal a AC sans etre orthogonal au plan.
+% assert scalaire((0, 0, 1), AC) == 0 and scalaire((0, 0, 1), AE) != 0
+%
+% # Q3 : le triangle ACE est rectangle en A, d'aire sqrt(2)/2.
+% assert scalaire(AC, AE) == 0
+% norme = lambda u: sqrt(sum(c**2 for c in u))
+% assert simplify(norme(AC) - sqrt(2)) == 0 and norme(AE) == 1
+% aire = Rational(1, 2) * norme(AC) * norme(AE)
+% assert simplify(aire - sqrt(2)/2) == 0
+% END-VERIFY

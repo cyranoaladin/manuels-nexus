@@ -34,3 +34,43 @@ Le volume, invariant par changement de base, permet ainsi d'obtenir une
 distance sans écrire l'équation du plan.
 
 \end{corrige}
+
+% BEGIN-VERIFY
+% from sympy import sqrt, simplify, Rational, acos, pi, sin, Matrix
+%
+% A, Bp, C, S = (0, 0, 0), (2, 0, 0), (0, 2, 0), (0, 0, 2)
+% def vecteur(U, V): return tuple(V[n] - U[n] for n in range(3))
+% def scalaire(u, v): return sum(u[n]*v[n] for n in range(3))
+% def norme(u): return sqrt(sum(c**2 for c in u))
+%
+% # Q1 : le triangle SBC est equilateral.
+% SB, SC, BC = vecteur(S, Bp), vecteur(S, C), vecteur(Bp, C)
+% for u in (SB, SC, BC):
+%     assert simplify(norme(u) - 2*sqrt(2)) == 0
+%
+% # Q2 : l'angle BSC vaut pi/3.
+% cosinus = scalaire(SB, SC) / (norme(SB)*norme(SC))
+% assert scalaire(SB, SC) == 4
+% assert simplify(cosinus - Rational(1, 2)) == 0
+% assert simplify(acos(cosinus) - pi/3) == 0
+%
+% # Q3 : l'aire de SBC.
+% aire_SBC = Rational(1, 2) * norme(SB) * norme(SC) * sin(pi/3)
+% assert simplify(aire_SBC - 2*sqrt(3)) == 0
+%
+% # Q4 : le volume du tetraedre, base ABC et hauteur SA.
+% aire_ABC = Rational(1, 2) * 2 * 2
+% assert aire_ABC == 2
+% hauteur = norme(vecteur(S, A))
+% assert hauteur == 2
+% volume = Rational(1, 3) * aire_ABC * hauteur
+% assert volume == Rational(4, 3)
+% # Controle independant : le volume par le determinant.
+% det = Matrix([vecteur(A, Bp), vecteur(A, C), vecteur(A, S)]).det()
+% assert simplify(abs(det)/6 - volume) == 0
+%
+% # Q5 : la distance de A au plan (SBC), tiree du meme volume.
+% distance = 3*volume / aire_SBC
+% assert simplify(distance - 2*sqrt(3)/3) == 0
+% assert simplify(distance - 2/sqrt(3)) == 0
+% END-VERIFY

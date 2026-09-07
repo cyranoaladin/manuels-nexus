@@ -30,3 +30,34 @@ proportionnalité vaudrait nécessairement $1$, ce qui imposerait l'égalité de
 vecteurs. Comme ils sont deux à deux distincts, aucun couple n'est colinéaire.
 
 \end{corrige}
+
+% BEGIN-VERIFY
+% # Cube ABCDEFGH, repere (A ; AB, AD, AE).
+% AB, AD, AE = (1, 0, 0), (0, 1, 0), (0, 0, 1)
+% A = (0, 0, 0)
+% B = tuple(A[n] + AB[n] for n in range(3))
+% D = tuple(A[n] + AD[n] for n in range(3))
+% E = tuple(A[n] + AE[n] for n in range(3))
+% C = tuple(B[n] + AD[n] for n in range(3))
+% G = tuple(C[n] + AE[n] for n in range(3))
+% H = tuple(D[n] + AE[n] for n in range(3))
+% def vecteur(U, V): return tuple(V[n] - U[n] for n in range(3))
+%
+% # Q1 : AG = AB + AD + AE.
+% assert vecteur(A, G) == (1, 1, 1)
+% assert vecteur(A, G) == tuple(AB[n] + AD[n] + AE[n] for n in range(3))
+%
+% # Q2 : EC par le chemin E -> A -> C, et HB par H -> D -> A -> B.
+% assert vecteur(E, C) == (1, 1, -1)
+% assert vecteur(E, C) == tuple(AB[n] + AD[n] - AE[n] for n in range(3))
+% assert vecteur(H, B) == (1, -1, -1)
+% assert vecteur(H, B) == tuple(AB[n] - AD[n] - AE[n] for n in range(3))
+%
+% # La relation de Chasles est verifiee sur ces deux chemins : le resultat ne
+% # depend pas du trajet choisi.
+% via_A = tuple(vecteur(E, A)[n] + vecteur(A, C)[n] for n in range(3))
+% assert via_A == vecteur(E, C)
+% via_D_A = tuple(vecteur(H, D)[n] + vecteur(D, A)[n] + vecteur(A, B)[n]
+%                 for n in range(3))
+% assert via_D_A == vecteur(H, B)
+% END-VERIFY

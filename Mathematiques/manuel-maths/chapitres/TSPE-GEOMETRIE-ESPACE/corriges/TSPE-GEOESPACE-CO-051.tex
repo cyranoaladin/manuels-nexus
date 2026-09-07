@@ -21,3 +21,29 @@ $\vec{k}$ n'appartient donc pas au plan engendré par $\vec{i}$ et $\vec{j}$~:
 il faut bien trois vecteurs non coplanaires pour atteindre tout l'espace.
 
 \end{corrige}
+
+% BEGIN-VERIFY
+% # Construction vectorielle dans la base (i, j, k).
+% i, j, k = (1, 0, 0), (0, 1, 0), (0, 0, 1)
+% def combinaison(*termes):
+%     return tuple(sum(coef*vecteur[axe] for coef, vecteur in termes)
+%                  for axe in range(3))
+%
+% p = combinaison((2, i), (-1, j))
+% assert p == (2, -1, 0)
+% q = combinaison((2, i), (-1, j), (3, k))
+% assert q == (2, -1, 3)
+% # q est bien p auquel on ajoute 3k.
+% assert q == tuple(p[axe] + 3*k[axe] for axe in range(3))
+%
+% # Q3 : les combinaisons a*i + b*j ont une troisieme coordonnee nulle, et
+% # decrivent exactement le plan (Oij).
+% for a in (-3, 0, 2, 7):
+%     for b in (-1, 0, 5):
+%         assert combinaison((a, i), (b, j))[2] == 0
+% # Reciproquement, tout vecteur de troisieme coordonnee nulle s'y ecrit.
+% for vecteur in ((3, -4, 0), (0, 0, 0), (-2, 9, 0)):
+%     assert combinaison((vecteur[0], i), (vecteur[1], j)) == vecteur
+% # Et k n'y est pas.
+% assert k[2] != 0
+% END-VERIFY
