@@ -4,8 +4,8 @@
   "generated_by": "scripts/build_current_review_debt_partition.py",
   "approves_nothing": true,
   "release_acceptance": false,
-  "current_review_debt_count": 2325,
-  "current_review_debt_digest": "sha256:80d191926c47ac876193b9cee90258f869d9a298e1f0077c9d8325222561ab3e",
+  "current_review_debt_count": 2330,
+  "current_review_debt_digest": "sha256:6db7314dedc960e0c3d6dbd143ecf246baa15150007b0492f7abda956167552f",
   "components": {
     "UNCHANGED": {
       "count": 2110,
@@ -30395,6 +30395,84 @@
           "category": "blocking_statuses"
         }
       ]
+    },
+    "SECOND_DEGRE_C7_AUTHORED_REVIEW_DEBT_5": {
+      "count": 5,
+      "provenance": "separately declared current review debt",
+      "fingerprints": [
+        "41cbe81d22e55fde",
+        "6631d324a007922a",
+        "bdef4699521fb8c3",
+        "ed21892bdaed3370",
+        "f5afdfdcce883980"
+      ],
+      "fingerprints_digest": "sha256:8133e001559762afb4a45d9c85207f22212e6d7d66045970b705512e35974bcc",
+      "object_ids": [
+        "1SPE-SECDEG-CO-101",
+        "1SPE-SECDEG-CO-102",
+        "1SPE-SECDEG-CR-016",
+        "1SPE-SECDEG-EX-101",
+        "1SPE-SECDEG-EX-102"
+      ],
+      "object_ids_digest": "sha256:cf12c5aadfd8d1cc096e20f85c5cf1446ba35e5fce7bd1ce19aa4ddf1fc8f3a3",
+      "object_keys_digest": "sha256:9e36d2d343bc91d7af251af60a9f2c338dd0d38ccfd3fe85ac88a6cee8ab067a",
+      "objects": [
+        {
+          "fingerprint": "41cbe81d22e55fde",
+          "object_id": "1SPE-SECDEG-CR-016",
+          "object_key": "OBJECT:1SPE-SECDEG-CR-016",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/16_C7_somme_produit_racines.tex",
+          "manual": "1SPE",
+          "chapter": "1SPE-SECOND-DEGRE",
+          "scope": "object",
+          "status": "generated",
+          "category": "blocking_statuses"
+        },
+        {
+          "fingerprint": "6631d324a007922a",
+          "object_id": "1SPE-SECDEG-EX-102",
+          "object_key": "OBJECT:1SPE-SECDEG-EX-102",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-102.tex",
+          "manual": "1SPE",
+          "chapter": "1SPE-SECOND-DEGRE",
+          "scope": "object",
+          "status": "generated",
+          "category": "blocking_statuses"
+        },
+        {
+          "fingerprint": "bdef4699521fb8c3",
+          "object_id": "1SPE-SECDEG-EX-101",
+          "object_key": "OBJECT:1SPE-SECDEG-EX-101",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-101.tex",
+          "manual": "1SPE",
+          "chapter": "1SPE-SECOND-DEGRE",
+          "scope": "object",
+          "status": "generated",
+          "category": "blocking_statuses"
+        },
+        {
+          "fingerprint": "ed21892bdaed3370",
+          "object_id": "1SPE-SECDEG-CO-101",
+          "object_key": "OBJECT:1SPE-SECDEG-CO-101",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-101.tex",
+          "manual": "1SPE",
+          "chapter": "1SPE-SECOND-DEGRE",
+          "scope": "object",
+          "status": "generated",
+          "category": "blocking_statuses"
+        },
+        {
+          "fingerprint": "f5afdfdcce883980",
+          "object_id": "1SPE-SECDEG-CO-102",
+          "object_key": "OBJECT:1SPE-SECDEG-CO-102",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-102.tex",
+          "manual": "1SPE",
+          "chapter": "1SPE-SECOND-DEGRE",
+          "scope": "object",
+          "status": "generated",
+          "category": "blocking_statuses"
+        }
+      ]
     }
   },
   "non_counting_aliases_and_aggregates": {
@@ -30458,8 +30536,8 @@
     },
     "OTHER_CURRENT_REVIEW_DEBT": {
       "aggregate_definition": "CURRENT_REVIEW_DEBT minus TSPE_GEO packet minus RESIDUAL_TRUE_NEW_13",
-      "count": 2267,
-      "fingerprints_digest": "sha256:bb86d5c3dc9b866dfaf3a76cb3e61aafa1e5d4eaa16e54bb06c4953638876e7d",
+      "count": 2272,
+      "fingerprints_digest": "sha256:2d20153346fbbb9ed6ff3189cd1c3ff63958fe265573bc4a102574329b68d7eb",
       "contributes_to_union": false
     }
   },
@@ -30467,15 +30545,16 @@
   "union_equals_current_review_debt": true,
   "unknown_count": 0,
   "evidence": {
-    "audit/INVENTAIRE_COLLECTION.json": "sha256:607a498810d83aeb5a84fc2814227053e8d2b970532b83799bfe3739a8b414ff",
-    "audit/CURRENT_ANOMALY_SET_ALGEBRA_RESIDUAL.json": "sha256:c9dc837319ff13ea55e71b08c93e77c0390b225562378ae33b0ed06908ccdf4b",
+    "audit/INVENTAIRE_COLLECTION.json": "sha256:9277e0e7421d34754a0eb043f1f98a4c3c017c067a1d60ff3045865ac873c936",
+    "audit/CURRENT_ANOMALY_SET_ALGEBRA_RESIDUAL.json": "sha256:c7007aaa6157393596d7617cb7be2b7d1160d92cab19dd5c1280e53860ba0381",
     "audit/METHOD_REQUALIFICATION_QUEUE.json": "sha256:fd5d0f23c922d71a5fa0c16c59de6cf258c118424e264706d75ca765e89f1462",
-    "audit/RESIDUAL_TRUE_NEW_FORENSICS.json": "sha256:37d3e269b5cbce84f79ad1879662ad9fd46aedd1dfd9ed94cde189407710c0eb",
+    "audit/RESIDUAL_TRUE_NEW_FORENSICS.json": "sha256:798771fd8c4bc5310182ae5544a8d1b125da827da011778bc6ec7179cfaef381",
     "audit/VARALEA_C6C7_REVIEW_DEBT_12.json": "sha256:c4f75c6b87744a4a8ed7ad76aa9e18c9135a5272572baf7c75c8b178a05d07be",
     "audit/EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1.json": "sha256:06277faa722af746ce2c82025a18b3957b5d2f42f4526104535de218da5723f9",
     "audit/NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2.json": "sha256:49ede6fc069187c9be3a501f57adb69b208940cd9739279b619e332ed6afdcb4",
     "audit/TNSI_PROJET_QCM_REVIEW_DEBT_1.json": "sha256:e8e2c7346db8c938d718df2227cf8d4d83d7091b2669f319d999e9cf4c13122b",
     "audit/TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_45.json": "sha256:bc71ff0041bfbc4b4e822b344d2ebdb0859c11bcff293d23b05b23d97ca8f514",
-    "audit/NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT.json": "sha256:7958b78dcd0a73743882a6f6f1de744920006b95e0d755ccc1a0fcbcc53b4a25"
+    "audit/NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT.json": "sha256:7958b78dcd0a73743882a6f6f1de744920006b95e0d755ccc1a0fcbcc53b4a25",
+    "audit/SECOND_DEGRE_C7_AUTHORED_REVIEW_DEBT_5.json": "sha256:5ac148c9580a88e7d516d5e53969dbe11ce06a9ac0b79d71d7ca970e1e847e9c"
   }
 }

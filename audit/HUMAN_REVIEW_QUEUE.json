@@ -5,19 +5,19 @@
   "approves_nothing": true,
   "status": "HUMAN_REVIEW_ACTION_REQUIRED",
   "source_inputs": {
-    "audit/CURRENT_REVIEW_DEBT_PARTITION.json": "sha256:a23c5c7ebe0000614bb963f157758ae61c9582ddea6039ba9c59311009aa85a7",
+    "audit/CURRENT_REVIEW_DEBT_PARTITION.json": "sha256:116ef77a510fd06bfe707225d1455beede24d61989c81c75acade4e70bf7accb",
     "audit/QCM_INDEPENDENT_EVIDENCE_V2.json": "sha256:12405d55c205fd0e6111656110f95a0aac39dc42c7b0363081f97bafaad42315",
     "audit/QCM_REVIEW_PROOF_RECONCILIATION.json": "sha256:b2a6a242cab0b0e0f758ddd18a6d4a9a6c397fadff78266f3f8a805beb1fec8e",
     "audit/TNSI_PROJET_ASSESSMENT_MODE.json": "sha256:1de1984e8cddb7cfdf08a5dffebb0b7eb286e21cecd9cdf39f57011d1a02c8b2"
   },
   "counts": {
-    "OBJECT_REVIEW": 2325,
+    "OBJECT_REVIEW": 2330,
     "QCM_ANSWER_SEMANTICS": 166,
     "QCM_DIAGNOSTIC_RENVOI_SEMANTICS": 41,
     "EDITORIAL_DECISION": 0,
-    "TOTAL": 2532
+    "TOTAL": 2537
   },
-  "queue_digest": "sha256:c66521ef249d3941f42f10e61ef05daae7b07045cdfd9328133454237032a08d",
+  "queue_digest": "sha256:7f629c6f23ccb45416c5fc2bb8fbda522313546e935fc29769099b05f1335f39",
   "pairwise_intersections": [],
   "unknown_count": 0,
   "items": [
@@ -843,6 +843,48 @@
           "EXPERT_PROGRAMME_PEDAGOGIE"
         ]
       },
+      "distinct_humans_required": true,
+      "release_blocking": true
+    },
+    {
+      "item_id": "SECOND_DEGRE_C7_AUTHORED_REVIEW_DEBT_5",
+      "category": "OBJECT_REVIEW",
+      "count": 5,
+      "unit_ids": [
+        "OBJECT_REVIEW::41cbe81d22e55fde",
+        "OBJECT_REVIEW::6631d324a007922a",
+        "OBJECT_REVIEW::bdef4699521fb8c3",
+        "OBJECT_REVIEW::ed21892bdaed3370",
+        "OBJECT_REVIEW::f5afdfdcce883980"
+      ],
+      "set_digest": "sha256:944be82b85703f005e7a4a064356a8ab44ce27a678a977255093dd46b436fb9e",
+      "chapters": {
+        "1SPE-SECOND-DEGRE": 5
+      },
+      "units_by_chapter": {
+        "1SPE-SECOND-DEGRE": {
+          "count": 5,
+          "unit_ids": [
+            "OBJECT_REVIEW::41cbe81d22e55fde",
+            "OBJECT_REVIEW::6631d324a007922a",
+            "OBJECT_REVIEW::bdef4699521fb8c3",
+            "OBJECT_REVIEW::ed21892bdaed3370",
+            "OBJECT_REVIEW::f5afdfdcce883980"
+          ],
+          "set_digest": "sha256:944be82b85703f005e7a4a064356a8ab44ce27a678a977255093dd46b436fb9e"
+        }
+      },
+      "provenance": "separately declared current review debt",
+      "required_reviewers_by_chapter": {
+        "1SPE-SECOND-DEGRE": [
+          "EXPERT_MATHEMATIQUE",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ]
+      },
+      "required_reviewers": [
+        "EXPERT_MATHEMATIQUE",
+        "EXPERT_PROGRAMME_PEDAGOGIE"
+      ],
       "distinct_humans_required": true,
       "release_blocking": true
     },
