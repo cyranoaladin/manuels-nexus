@@ -1,0 +1,121 @@
+% META: {"id": "TNSI-LANG-AM-EXTRAIT", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "amenagee", "capacites_codes": ["C4", "C5", "C11"], "derive_de": ["TNSI-LANG-EX-001", "TNSI-LANG-EX-004"], "profil_amenagement": ["SEQUENCAGE", "ALLEGEMENT_ENONCE", "REPONSE_FERMEE", "AERATION", "AMORCE_FOURNIE", "RETRAIT_DOUBLE_TACHE"], "mode_creation": "adaptation", "sources_inspiration": [], "status": "generated"}
+\section*{Version aménagée --- Extrait Langages et programmation}
+\textit{Consignes séquencées, mise en page aérée, énoncés allégés.}
+
+\bigskip
+
+\subsection*{Exercice 1 --- Une fonction récursive (C4, C5)}
+
+On veut la somme des chiffres d'un entier positif. Exemple : $327 \rightarrow 12$.
+
+\bigskip
+
+\textbf{Étape 1.} Décompose $327$. Une ligne à la fois.
+
+\medskip
+\textit{Rappel :} \lstinline{n % 10} donne le dernier chiffre,
+\lstinline{n // 10} enlève ce dernier chiffre.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+$n$ & \textbf{Dernier chiffre} & \textbf{Reste} \\
+\hline
+$327$ & $7$ & $32$ \\
+\hline
+$32$ & \dotfill & \dotfill \\
+\hline
+$3$ & \dotfill & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} Quand la décomposition s'arrête-t-elle ?
+
+\medskip
+Quand $n$ vaut \dotfill
+
+\bigskip
+
+\textbf{Étape 3.} Complète la fonction. Le cas d'arrêt d'abord.
+
+\begin{python}
+def somme_chiffres(n):
+    if n == ______:
+        return 0
+    return n % 10 + somme_chiffres(n ______ 10)
+\end{python}
+
+\medskip
+Le second trou : \fbox{\texttt{//}} \qquad ou \qquad \fbox{\texttt{\%}}
+
+\bigskip
+
+\textbf{Étape 4.} Sans cas d'arrêt, que se passerait-il ?
+
+\medskip
+\begin{center}
+\fbox{la fonction s'appelle sans fin} \qquad \fbox{elle renvoie $0$}
+\end{center}
+
+\bigskip
+\bigskip
+
+\subsection*{Exercice 2 --- Un effet de bord (C11)}
+
+\begin{python}
+def ajouter_note(bulletin, note):
+    bulletin.append(note)
+    return bulletin
+
+mien = [12, 15]
+tien = ajouter_note(mien, 18)
+\end{python}
+
+\bigskip
+
+\textbf{Étape 1.} Complète le tableau après ces quatre lignes.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Variable} & \textbf{Valeur} \\
+\hline
+\texttt{tien} & \texttt{[12, 15, 18]} \\
+\hline
+\texttt{mien} & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} La liste de départ a-t-elle été modifiée ?
+
+\medskip
+\begin{center}
+\fbox{Oui} \qquad \fbox{Non}
+\end{center}
+
+\medskip
+C'est ce qu'on appelle un \dotfill\ de bord.
+
+\bigskip
+
+\textbf{Étape 3.} Complète la version sans effet de bord.
+
+\begin{python}
+def ajouter_note(bulletin, note):
+    copie = ______(bulletin)
+    copie.append(note)
+    return copie
+\end{python}
+
+\medskip
+Le mot manquant : \fbox{\texttt{list}} \qquad ou \qquad \fbox{\texttt{len}}

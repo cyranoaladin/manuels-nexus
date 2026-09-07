@@ -1,0 +1,143 @@
+% META: {"id": "TNSI-ALGO-AM-EXTRAIT", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "amenagee", "capacites_codes": ["C1", "C3", "C7", "C10"], "derive_de": ["TNSI-ALGO-EX-001", "TNSI-ALGO-EX-003"], "profil_amenagement": ["SEQUENCAGE", "ALLEGEMENT_ENONCE", "REPONSE_FERMEE", "AERATION", "AMORCE_FOURNIE", "RETRAIT_DOUBLE_TACHE"], "mode_creation": "adaptation", "sources_inspiration": [], "status": "generated"}
+\section*{Version aménagée --- Extrait Algorithmique}
+\textit{Consignes séquencées, mise en page aérée, énoncés allégés.}
+
+\bigskip
+
+\subsection*{Exercice 1 --- Compter les feuilles d'un arbre (C1, C3)}
+
+Une \textbf{feuille} est un nœud sans aucun fils.
+
+\medskip
+On représente un arbre par \texttt{(valeur, gauche, droite)}, et \texttt{None}
+pour un arbre vide.
+
+\begin{python}
+arbre = (1,
+         (2, None, None),
+         (3, (4, None, None), None))
+\end{python}
+
+\bigskip
+
+\textbf{Étape 1.} Classe chaque nœud. Le premier est donné.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Nœud} & \textbf{Fils gauche} & \textbf{Fils droit} & \textbf{Feuille ?} \\
+\hline
+$2$ & aucun & aucun & oui \\
+\hline
+$4$ & \dotfill & \dotfill & \dotfill \\
+\hline
+$3$ & \dotfill & \dotfill & \dotfill \\
+\hline
+$1$ & \dotfill & \dotfill & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} Combien de feuilles au total ?
+
+\medskip
+\dotfill
+
+\bigskip
+
+\textbf{Étape 3.} Complète le cas d'arrêt de la fonction récursive.
+
+\begin{python}
+def compter_feuilles(arbre):
+    if arbre is ______:
+        return 0
+    valeur, gauche, droite = arbre
+    if gauche is None and droite is None:
+        return ______
+    return compter_feuilles(gauche) + compter_feuilles(droite)
+\end{python}
+
+\medskip
+Pour le second trou : \fbox{$0$} \qquad \fbox{$1$} \qquad \fbox{$2$}
+
+\bigskip
+\bigskip
+
+\subsection*{Exercice 2 --- Un trajet de métro (C7, C10)}
+
+\begin{python}
+metro = {
+    "A": ["B"],
+    "B": ["A", "C", "D"],
+    "C": ["B", "E"],
+    "D": ["B", "E"],
+    "E": ["C", "D"],
+}
+\end{python}
+
+\bigskip
+
+\textbf{Étape 1.} Complète les voisins de chaque station.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Station} & \textbf{Voisines} \\
+\hline
+\texttt{A} & \texttt{B} \\
+\hline
+\texttt{B} & \dotfill \\
+\hline
+\texttt{C} & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} On part de \texttt{A} et on cherche \texttt{E}, en visitant
+d'abord toutes les stations à une station de distance, puis à deux, etc.
+
+\medskip
+Complète la découverte, niveau par niveau.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Distance depuis A} & \textbf{Stations} \\
+\hline
+$0$ & \texttt{A} \\
+\hline
+$1$ & \dotfill \\
+\hline
+$2$ & \dotfill \\
+\hline
+$3$ & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 3.} Écris le trajet trouvé de \texttt{A} à \texttt{E} :
+
+\medskip
+\texttt{A} $\rightarrow$ \dotfill $\rightarrow$ \dotfill $\rightarrow$ \texttt{E}
+
+\bigskip
+
+\textbf{Étape 4.} Combien de stations ce trajet compte-t-il, départ et arrivée
+compris ?
+
+\medskip
+\begin{center}
+\fbox{$3$} \qquad \fbox{$4$} \qquad \fbox{$5$}
+\end{center}

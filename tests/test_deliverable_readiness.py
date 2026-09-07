@@ -115,12 +115,40 @@ def test_content_is_measured_by_real_objects_not_declared_files() -> None:
     Une variante sans le moindre objet en déclarait sept, et la maturité la
     comptait « contenu présent ». C'est ce faux vert qui a produit un 21/24
     au lieu de 18/24.
+
+    `TNSI::amenagee` servait d'exemple vivant tant qu'elle était vide. Elle ne
+    l'est plus : les sept extraits sont écrits. Le test fabrique donc le vide
+    au lieu de l'emprunter à un livrable qu'on espère remplir — un assemblage
+    dont on retire tous les objets ne doit compter aucun contenu, même si ses
+    `included_files` restent peuplés de contrats.
     """
     inventory = json.loads((ROOT / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8"))
-    empty = readiness.content_coverage(inventory, "nsi:manual:TNSI:amenagee", "TNSI")
+    covered = readiness.content_coverage(inventory, "nsi:manual:TNSI:amenagee", "TNSI")
+    assert covered["objects"] > 0
+
+    emptied = json.loads(json.dumps(inventory))
+    for manual in emptied["manuals"].values():
+        for chapter in manual["chapters"].values():
+            for key, items in list(chapter.items()):
+                if isinstance(items, list):
+                    chapter[key] = [
+                        o for o in items
+                        if not (isinstance(o, dict) and o.get("source_type") == "amenagee")
+                    ]
+    empty = readiness.content_coverage(emptied, "nsi:manual:TNSI:amenagee", "TNSI")
     assert empty["objects"] == 0
     assert empty["chapters_covered"] == 0
     assert empty["complete"] is False
+
+    declared = [
+        a for a in inventory.get("declared_assemblies", [])
+        if a.get("assembly_id") == "nsi:manual:TNSI:amenagee"
+    ]
+    assert declared, "l'assemblage doit rester déclaré même vidé de ses objets"
+    assert declared[0].get("included_files"), (
+        "c'est précisément parce que `included_files` reste peuplé que le "
+        "comptage doit se faire sur les objets"
+    )
 
 
 def test_a_booklet_covering_part_of_its_chapters_is_not_complete() -> None:
@@ -167,11 +195,24 @@ def test_an_unknown_assembly_is_never_complete() -> None:
 
 
 def test_the_amenagee_forensics_agree_with_the_readiness_metric() -> None:
+    """Les deux mesures doivent dire la même chose, quel que soit le nombre.
+
+    Ce test exigeait zéro objet, l'état qui avait révélé la contradiction entre
+    « CONTENT = oui » et un livret vide. Les sept extraits sont écrits ; exiger
+    zéro reviendrait à exiger que le livret reste vide. Ce qui doit tenir, et
+    qui tenait déjà, c'est l'accord entre le forensique et la maturité.
+    """
     import build_tnsi_amenagee_forensics as forensics
 
     payload = forensics.build()
-    assert payload["summary"]["TNSI_AMENAGEE_SOURCE_OBJECTS"] == 0
-    assert payload["summary"]["TNSI_AMENAGEE_CLASSIFICATION"] == "EMPTY_VARIANT"
+    inventory = json.loads((ROOT / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8"))
+    coverage = readiness.content_coverage(inventory, "nsi:manual:TNSI:amenagee", "TNSI")
+
+    assert payload["summary"]["TNSI_AMENAGEE_SOURCE_OBJECTS"] == coverage["objects"]
+    if coverage["objects"] == 0:
+        assert payload["summary"]["TNSI_AMENAGEE_CLASSIFICATION"] == "EMPTY_VARIANT"
+    else:
+        assert payload["summary"]["TNSI_AMENAGEE_CLASSIFICATION"] != "EMPTY_VARIANT"
 
 
 # --- Garde de vérité : le contenu se compte en objets déclarés ---------------

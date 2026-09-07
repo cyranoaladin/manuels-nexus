@@ -1,0 +1,136 @@
+% META: {"id": "TNSI-STRUCT-AM-EXTRAIT", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "amenagee", "capacites_codes": ["C6", "C7", "C12", "C13", "C14"], "derive_de": ["TNSI-STRUCT-EX-001", "TNSI-STRUCT-EX-004"], "profil_amenagement": ["SEQUENCAGE", "ALLEGEMENT_ENONCE", "REPONSE_FERMEE", "AERATION", "AMORCE_FOURNIE", "RETRAIT_DOUBLE_TACHE"], "mode_creation": "adaptation", "sources_inspiration": [], "status": "generated"}
+\section*{Version aménagée --- Extrait Structures de données}
+\textit{Consignes séquencées, mise en page aérée, énoncés allégés.}
+
+\bigskip
+
+\subsection*{Exercice 1 --- Pile ou file ? (C6, C7)}
+
+On vérifie si les parenthèses d'une expression sont bien fermées.
+
+\medskip
+Expression : \texttt{( [ ] )}
+
+\bigskip
+
+\textbf{Étape 1.} Complète la lecture, caractère par caractère.
+
+\medskip
+\textit{Règle :} une ouvrante s'empile ; une fermante doit correspondre au
+\textbf{sommet}.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Caractère lu} & \textbf{Action} & \textbf{Pile après} \\
+\hline
+\texttt{(} & empiler & \texttt{[ ( ]} \\
+\hline
+\texttt{[} & \dotfill & \dotfill \\
+\hline
+\texttt{]} & \dotfill & \dotfill \\
+\hline
+\texttt{)} & \dotfill & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} À la fin, la pile est-elle vide ?
+
+\medskip
+\begin{center}
+\fbox{Oui} \qquad \fbox{Non}
+\end{center}
+
+\medskip
+L'expression est donc : \fbox{bien parenthésée} \qquad \fbox{mal parenthésée}
+
+\bigskip
+
+\textbf{Étape 3.} Quelle structure convient ici ? Entoure.
+
+\medskip
+\begin{center}
+\fbox{une pile (LIFO)} \qquad \fbox{une file (FIFO)}
+\end{center}
+
+\medskip
+\textit{Aide :} la dernière ouvrante posée est la première à refermer.
+
+\bigskip
+\bigskip
+
+\subsection*{Exercice 2 --- Deux représentations d'un graphe (C12, C13, C14)}
+
+\begin{python}
+matrice = [
+    [0, 1, 0, 1],
+    [0, 0, 1, 0],
+    [0, 0, 0, 0],
+    [0, 0, 1, 0],
+]
+\end{python}
+
+\medskip
+La case ligne $i$, colonne $j$ vaut $1$ s'il existe une flèche $i \rightarrow j$.
+
+\bigskip
+
+\textbf{Étape 1.} Lis la matrice ligne par ligne. La première est faite.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Ligne} & \textbf{Flèches partant de ce sommet} \\
+\hline
+$0$ & $0 \rightarrow 1$ \quad et \quad $0 \rightarrow 3$ \\
+\hline
+$1$ & \dotfill \\
+\hline
+$2$ & \dotfill \\
+\hline
+$3$ & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} Le sommet $2$ a-t-il des successeurs ?
+
+\medskip
+\begin{center}
+\fbox{Oui} \qquad \fbox{Non}
+\end{center}
+
+\medskip
+Que signifie cette ligne entièrement à zéro ? \dotfill
+
+\bigskip
+
+\textbf{Étape 3.} Complète la représentation par listes de successeurs.
+
+\begin{python}
+successeurs = {
+    0: [1, 3],
+    1: [______],
+    2: [______],
+    3: [______],
+}
+\end{python}
+
+\bigskip
+
+\textbf{Étape 4.} Combien de flèches ce graphe compte-t-il au total ?
+
+\medskip
+\dotfill
+
+\medskip
+\textit{Contrôle :} ce nombre doit être égal au nombre de $1$ dans la matrice.

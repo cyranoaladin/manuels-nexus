@@ -10,7 +10,7 @@ reliées par un identifiant.
     désigne la même chose. Vérifie qu'elle est bien \textbf{unique} dans au moins l'une des
     deux — sinon la fusion multipliera les lignes.
   \item \textbf{Indexe la seconde table} par cette clé, dans un dictionnaire
-    \lstinline{{valeur_de_cle: ligne}}. C'est l'étape qui fait tout : sans elle, on
+    \lstinline!{valeur_de_cle: ligne}!. C'est l'étape qui fait tout : sans elle, on
     reparcourt la seconde table pour chaque ligne de la première.
   \item \textbf{Parcours la première table} et, pour chaque ligne, va chercher la ligne
     correspondante dans l'index.
@@ -23,7 +23,10 @@ reliées par un identifiant.
 \textbf{Exemple :}
 \begin{python}
 def fusionner(gauche, droite, cle):
-    """Joint deux tables sur `cle`. Les lignes sans correspondance sont ecartees."""
+    """Joint deux tables sur `cle`.
+
+    Les lignes sans correspondance sont ecartees.
+    """
     index = {ligne[cle]: ligne for ligne in droite}
     resultat = []
     for ligne in gauche:
@@ -76,7 +79,7 @@ def fusionner(gauche, droite, cle):
     la table fusionnée est plus courte que les deux. Si on attendait toutes les lignes de
     gauche, le résultat est silencieusement amputé.
   \item \textbf{Deux colonnes de même nom dans les deux tables.} Avec
-    \lstinline{{**gauche, **droite}}, celle de droite écrase celle de gauche. Renomme avant
+    \lstinline!{**gauche, **droite}!, celle de droite écrase celle de gauche. Renomme avant
     de fusionner si les deux comptent.
   \item Comparer des clés de types différents : \lstinline{"12"} et \lstinline{12} ne
     s'apparient jamais. C'est encore la conversion oubliée à l'import.

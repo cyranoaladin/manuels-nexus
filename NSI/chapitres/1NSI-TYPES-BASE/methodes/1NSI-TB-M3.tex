@@ -23,15 +23,20 @@ qu'une expression est toujours vraie.
 \lstinline{(not a) or (not b)}.
 
 \begin{center}
-\begin{tabular}{cc|c|c|cc|c}
-$a$ & $b$ & \lstinline{a and b} & \lstinline{not (a and b)} & \lstinline{not a} & \lstinline{not b} & \lstinline{(not a) or (not b)} \\
+\begin{tabular}{cc|c|c|c}
+$a$ & $b$ & $a \wedge b$ & $\neg(a \wedge b)$ & $\neg a \vee \neg b$ \\
 \hline
-$0$ & $0$ & $0$ & $1$ & $1$ & $1$ & $1$ \\
-$0$ & $1$ & $0$ & $1$ & $1$ & $0$ & $1$ \\
-$1$ & $0$ & $0$ & $1$ & $0$ & $1$ & $1$ \\
-$1$ & $1$ & $1$ & $0$ & $0$ & $0$ & $0$ \\
+$0$ & $0$ & $0$ & $1$ & $1$ \\
+$0$ & $1$ & $0$ & $1$ & $1$ \\
+$1$ & $0$ & $0$ & $1$ & $1$ \\
+$1$ & $1$ & $1$ & $0$ & $0$ \\
 \end{tabular}
 \end{center}
+
+\medskip
+Avec $\wedge$ pour \texttt{and}, $\vee$ pour \texttt{or} et $\neg$ pour \texttt{not}.
+Les colonnes intermédiaires $\neg a$ et $\neg b$ se lisent directement dans les
+deux premières : elles valent l'inverse de $a$ et de $b$.
 
 Les deux dernières colonnes coïncident sur les quatre lignes : les expressions sont
 équivalentes. C'est l'une des deux lois de De Morgan.

@@ -1,0 +1,130 @@
+% META: {"id": "TNSI-BDD-AM-EXTRAIT", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "amenagee", "capacites_codes": ["C1", "C3", "C6", "C7"], "derive_de": ["TNSI-BDD-EX-001", "TNSI-BDD-EX-002"], "profil_amenagement": ["SEQUENCAGE", "ALLEGEMENT_ENONCE", "REPONSE_FERMEE", "AERATION", "AMORCE_FOURNIE", "RETRAIT_DOUBLE_TACHE"], "mode_creation": "adaptation", "sources_inspiration": [], "status": "generated"}
+\section*{Version aménagée --- Extrait Bases de données}
+\textit{Consignes séquencées, mise en page aérée, énoncés allégés.}
+
+\bigskip
+
+\subsection*{Exercice 1 --- Repérer une redondance (C1, C3)}
+
+Un club range tous ses adhérents dans une seule table :
+
+\begin{sql}
+Inscription(id, nom_adherent, prenom_adherent, nom_activite, tarif_activite)
+\end{sql}
+
+\medskip
+Deux adhérents inscrits à la même activité y répètent donc son tarif.
+
+\bigskip
+
+\textbf{Étape 1.} Complète le tableau. La première ligne est faite.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Information} & \textbf{Répétée pour chaque inscription ?} \\
+\hline
+\texttt{nom\_adherent} & non \\
+\hline
+\texttt{nom\_activite} & \dotfill \\
+\hline
+\texttt{tarif\_activite} & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} Le tarif du judo change. Combien de lignes faut-il modifier ?
+
+\medskip
+\begin{center}
+\fbox{une seule} \qquad \fbox{toutes celles où le judo apparaît}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 3.} On sépare en deux tables. Complète.
+
+\begin{sql}
+Adherent(id, nom, prenom)
+Activite(id, nom, ______)
+\end{sql}
+
+\medskip
+Le champ manquant : \fbox{\texttt{tarif}} \qquad ou \qquad \fbox{\texttt{prenom}}
+
+\bigskip
+
+\textbf{Étape 4.} Après séparation, combien de lignes faut-il modifier pour
+changer le tarif du judo ?
+
+\medskip
+\dotfill
+
+\bigskip
+\bigskip
+
+\subsection*{Exercice 2 --- Deux requêtes SQL (C6, C7)}
+
+\begin{sql}
+CREATE TABLE Film(id INTEGER PRIMARY KEY, titre TEXT,
+                  realisateur TEXT, duree INTEGER);
+INSERT INTO Film VALUES
+  (1, 'Le Voyage de Chihiro', 'Miyazaki', 125),
+  (2, 'Princesse Mononoke',   'Miyazaki', 134),
+  (3, 'Vice-versa',           'Docter',    95);
+\end{sql}
+
+\bigskip
+
+\textbf{Étape 1.} Une requête a trois parties. Complète le tableau.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Mot-clé} & \textbf{Ce qu'il indique} \\
+\hline
+\texttt{SELECT} & les colonnes voulues \\
+\hline
+\texttt{FROM} & \dotfill \\
+\hline
+\texttt{WHERE} & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} Les titres des films de Miyazaki. Complète les trous.
+
+\begin{sql}
+SELECT ______ FROM Film WHERE realisateur = '______';
+\end{sql}
+
+\bigskip
+
+\textbf{Étape 3.} Combien de lignes cette requête renvoie-t-elle ?
+
+\medskip
+\begin{center}
+\fbox{$1$} \qquad \fbox{$2$} \qquad \fbox{$3$}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 4.} Les titres des films de plus de $100$ minutes.
+
+\begin{sql}
+SELECT titre FROM Film WHERE duree ______ 100;
+\end{sql}
+
+\medskip
+Le signe manquant : \fbox{\texttt{>}} \qquad \fbox{\texttt{<}} \qquad \fbox{\texttt{=}}
+
+\medskip
+Titres obtenus : \dotfill

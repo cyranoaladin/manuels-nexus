@@ -25,7 +25,10 @@ exploitable — une liste de dictionnaires, un dictionnaire par ligne.
 import csv
 
 def importer(chemin, entiers=()):
-    """Renvoie la table du fichier CSV, colonnes `entiers` converties en int."""
+    """Table du fichier CSV.
+
+    Les colonnes `entiers` sont converties en int.
+    """
     with open(chemin, encoding="utf-8", newline="") as f:
         table = list(csv.DictReader(f))
     for ligne in table:

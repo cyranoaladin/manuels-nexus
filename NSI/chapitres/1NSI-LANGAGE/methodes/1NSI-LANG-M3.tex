@@ -26,9 +26,11 @@ remplace savoir par cœur.
 \begin{python}
 import random
 
-[n for n in dir(random) if "int" in n]   # ['getrandbits', 'randint', 'randrange']
+[n for n in dir(random) if "int" in n]
+# ['getrandbits', 'randint', 'randrange']
 help(random.randint)
-# randint(a, b) -> Return random integer in range [a, b], including both end points.
+# randint(a, b) -> Return random integer in range [a, b],
+#                  including both end points.
 \end{python}
 
 La fiche dit \textbf{including both end points} : les deux bornes sont possibles.

@@ -31,7 +31,8 @@ dans un seul sens : du bouton vers la fonction.
 
 \begin{console}
 // page.js
-document.getElementById("convertir").addEventListener("click", function () {
+const bouton = document.getElementById("convertir");
+bouton.addEventListener("click", function () {
     const c = Number(document.getElementById("celsius").value);
     const f = c * 9 / 5 + 32;
     document.getElementById("resultat").textContent = f + " F";
@@ -47,8 +48,8 @@ $c \times 9/5 + 32$ \emph{(traitement)}, écrit dans le paragraphe \lstinline{re
 \begin{tabular}{l|l|l}
 question & où regarder & ce qu'on y trouve \\
 \hline
-quel composant ? & HTML & \lstinline{id="convertir"} \\
-quel événement ? & JavaScript & \lstinline{addEventListener("click", …)} \\
+quel composant ? & HTML & \texttt{id="convertir"} \\
+quel événement ? & JavaScript & \texttt{addEventListener("click", …)} \\
 quel traitement ? & corps de la fonction & source, calcul, destination \\
 \end{tabular}
 \end{center}

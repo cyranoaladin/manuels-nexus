@@ -25,18 +25,31 @@ il se déroule.
 \textbf{Exemple :} trois messages $A$, $B$, $C$ ; l'accusé de $A$ est perdu, puis tout passe.
 
 \begin{center}
-\begin{tabular}{c|l|c|c|l}
-\# & événement & bit émis & bit attendu & effet \\
+\begin{tabular}{c|l|c|c}
+\# & événement & émis & attendu \\
 \hline
-1 & envoi $A$ (bit $0$) & $0$ & $0$ & $A$ accepté, attendu passe à $1$ \\
-2 & accusé $0$ \textbf{perdu} & $0$ & $1$ & l'émetteur attend en vain \\
-3 & délai expiré, réémission $A$ (bit $0$) & $0$ & $1$ & doublon : jeté, accusé renvoyé \\
-4 & accusé $0$ reçu & $1$ & $1$ & l'émetteur bascule, passe à $B$ \\
-5 & envoi $B$ (bit $1$) & $1$ & $1$ & $B$ accepté, attendu passe à $0$ \\
-6 & accusé $1$ reçu & $0$ & $0$ & passe à $C$ \\
-7 & envoi $C$ (bit $0$) & $0$ & $0$ & $C$ accepté \\
+1 & envoi $A$ & $0$ & $0$ \\
+2 & accusé \textbf{perdu} & $0$ & $1$ \\
+3 & délai expiré, réémission $A$ & $0$ & $1$ \\
+4 & accusé reçu & $1$ & $1$ \\
+5 & envoi $B$ & $1$ & $1$ \\
+6 & accusé reçu & $0$ & $0$ \\
+7 & envoi $C$ & $0$ & $0$ \\
 \end{tabular}
 \end{center}
+
+\medskip
+Effet de chaque ligne :
+
+\begin{enumerate}
+  \item $A$ est accepté ; le bit attendu passe à $1$.
+  \item L'accusé se perd : l'émetteur attend en vain.
+  \item Le bit émis n'est plus celui attendu : doublon, jeté, mais accusé renvoyé.
+  \item L'accusé arrive : l'émetteur bascule et passe à $B$.
+  \item $B$ est accepté ; le bit attendu repasse à $0$.
+  \item L'accusé arrive : l'émetteur passe à $C$.
+  \item $C$ est accepté.
+\end{enumerate}
 
 Quatre envois pour trois messages, et le récepteur a délivré $A$, $B$, $C$ une seule fois
 chacun. C'est exactement ce que le protocole promet.

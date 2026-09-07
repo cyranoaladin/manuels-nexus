@@ -27,8 +27,8 @@ def moyenne_ponderee(valeurs, poids):
     """Moyenne de `valeurs` ponderee par `poids`.
 
     Precondition  : meme longueur, non vides, somme des poids non nulle.
-    Postcondition : le resultat est compris entre min(valeurs) et max(valeurs) ;
-                    ni `valeurs` ni `poids` ne sont modifiees.
+    Postcondition : le resultat est entre min(valeurs) et max(valeurs) ;
+                    `valeurs` et `poids` ne sont pas modifiees.
     """
     assert len(valeurs) == len(poids), "listes de longueurs differentes"
     assert len(valeurs) > 0, "listes vides"

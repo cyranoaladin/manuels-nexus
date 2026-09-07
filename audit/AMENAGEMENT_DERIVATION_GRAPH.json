@@ -4,8 +4,8 @@
   "generated_by": "scripts/build_amenagement_derivation_graph.py",
   "approves_nothing": true,
   "summary": {
-    "AMENAGED_OBJECTS": 10,
-    "CHAPTERS_COVERED": 10,
+    "AMENAGED_OBJECTS": 17,
+    "CHAPTERS_COVERED": 17,
     "CHAPTERS_TOTAL": 17,
     "AMENAGED_WITHOUT_SOURCE": 0,
     "AMENAGEMENT_MOVES_THE_TARGET": 0,
@@ -21,7 +21,7 @@
     },
     "TNSI": {
       "chapters_total": 7,
-      "chapters_covered": 0
+      "chapters_covered": 7
     }
   },
   "profiles": {
@@ -106,50 +106,50 @@
     {
       "manual": "TNSI",
       "chapter": "TNSI-ALGORITHMIQUE",
-      "amenaged_objects": 0,
-      "covered": false,
+      "amenaged_objects": 1,
+      "covered": true,
       "findings": []
     },
     {
       "manual": "TNSI",
       "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
-      "amenaged_objects": 0,
-      "covered": false,
+      "amenaged_objects": 1,
+      "covered": true,
       "findings": []
     },
     {
       "manual": "TNSI",
       "chapter": "TNSI-BASES-DE-DONNEES",
-      "amenaged_objects": 0,
-      "covered": false,
+      "amenaged_objects": 1,
+      "covered": true,
       "findings": []
     },
     {
       "manual": "TNSI",
       "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
-      "amenaged_objects": 0,
-      "covered": false,
+      "amenaged_objects": 1,
+      "covered": true,
       "findings": []
     },
     {
       "manual": "TNSI",
       "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
-      "amenaged_objects": 0,
-      "covered": false,
+      "amenaged_objects": 1,
+      "covered": true,
       "findings": []
     },
     {
       "manual": "TNSI",
       "chapter": "TNSI-PROJET",
-      "amenaged_objects": 0,
-      "covered": false,
+      "amenaged_objects": 1,
+      "covered": true,
       "findings": []
     },
     {
       "manual": "TNSI",
       "chapter": "TNSI-STRUCTURES-DONNEES",
-      "amenaged_objects": 0,
-      "covered": false,
+      "amenaged_objects": 1,
+      "covered": true,
       "findings": []
     }
   ],
@@ -577,10 +577,297 @@
         "P-IHM-04B"
       ],
       "findings": []
+    },
+    {
+      "object_id": "TNSI-ALGO-AM-EXTRAIT",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/amenagee/TNSI-ALGO-AM-EXTRAIT.tex",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "status": "generated",
+      "CANONICAL_OBJECT": [
+        "TNSI-ALGO-EX-001",
+        "TNSI-ALGO-EX-003"
+      ],
+      "canonical_resolved": [
+        "TNSI-ALGO-EX-001",
+        "TNSI-ALGO-EX-003"
+      ],
+      "AMENAGEMENT_PROFILE": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "profiles_observed": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "capacity_codes": [
+        "T-ALGO-01A",
+        "T-ALGO-01C",
+        "T-ALGO-02A",
+        "T-ALGO-02D"
+      ],
+      "source_capacity_codes": [
+        "T-ALGO-01A",
+        "T-ALGO-01C",
+        "T-ALGO-02A",
+        "T-ALGO-02D"
+      ],
+      "findings": []
+    },
+    {
+      "object_id": "TNSI-ARCH-AM-EXTRAIT",
+      "path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/amenagee/TNSI-ARCH-AM-EXTRAIT.tex",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "status": "generated",
+      "CANONICAL_OBJECT": [
+        "TNSI-ARCH-EX-001",
+        "TNSI-ARCH-EX-002"
+      ],
+      "canonical_resolved": [
+        "TNSI-ARCH-EX-001",
+        "TNSI-ARCH-EX-002"
+      ],
+      "AMENAGEMENT_PROFILE": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "profiles_observed": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "capacity_codes": [
+        "T-ARCH-02B",
+        "T-ARCH-02C"
+      ],
+      "source_capacity_codes": [
+        "T-ARCH-02B",
+        "T-ARCH-02C"
+      ],
+      "findings": []
+    },
+    {
+      "object_id": "TNSI-BDD-AM-EXTRAIT",
+      "path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/amenagee/TNSI-BDD-AM-EXTRAIT.tex",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "status": "generated",
+      "CANONICAL_OBJECT": [
+        "TNSI-BDD-EX-001",
+        "TNSI-BDD-EX-002"
+      ],
+      "canonical_resolved": [
+        "TNSI-BDD-EX-001",
+        "TNSI-BDD-EX-002"
+      ],
+      "AMENAGEMENT_PROFILE": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "profiles_observed": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "capacity_codes": [
+        "T-BDD-01A",
+        "T-BDD-01C",
+        "T-BDD-03B",
+        "T-BDD-03C"
+      ],
+      "source_capacity_codes": [
+        "T-BDD-01A",
+        "T-BDD-01C",
+        "T-BDD-03B",
+        "T-BDD-03C"
+      ],
+      "findings": []
+    },
+    {
+      "object_id": "TNSI-HIST-AM-EXTRAIT",
+      "path": "NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/amenagee/TNSI-HIST-AM-EXTRAIT.tex",
+      "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
+      "status": "generated",
+      "CANONICAL_OBJECT": [
+        "TNSI-HIST-EX-001",
+        "TNSI-HIST-EX-002"
+      ],
+      "canonical_resolved": [
+        "TNSI-HIST-EX-001",
+        "TNSI-HIST-EX-002"
+      ],
+      "AMENAGEMENT_PROFILE": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "profiles_observed": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "capacity_codes": [
+        "T-HIST-01A",
+        "T-HIST-01B"
+      ],
+      "source_capacity_codes": [
+        "T-HIST-01A",
+        "T-HIST-01B"
+      ],
+      "findings": []
+    },
+    {
+      "object_id": "TNSI-LANG-AM-EXTRAIT",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/amenagee/TNSI-LANG-AM-EXTRAIT.tex",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "status": "generated",
+      "CANONICAL_OBJECT": [
+        "TNSI-LANG-EX-001",
+        "TNSI-LANG-EX-004"
+      ],
+      "canonical_resolved": [
+        "TNSI-LANG-EX-001",
+        "TNSI-LANG-EX-004"
+      ],
+      "AMENAGEMENT_PROFILE": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "profiles_observed": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "capacity_codes": [
+        "T-LANG-02A",
+        "T-LANG-02B",
+        "T-LANG-05"
+      ],
+      "source_capacity_codes": [
+        "T-LANG-02A",
+        "T-LANG-02B",
+        "T-LANG-05"
+      ],
+      "findings": []
+    },
+    {
+      "object_id": "TNSI-PROJET-AM-EXTRAIT",
+      "path": "NSI/chapitres/TNSI-PROJET/amenagee/TNSI-PROJET-AM-EXTRAIT.tex",
+      "chapter": "TNSI-PROJET",
+      "status": "generated",
+      "CANONICAL_OBJECT": [
+        "TNSI-PROJET-ANNUEL"
+      ],
+      "canonical_resolved": [
+        "TNSI-PROJET-ANNUEL"
+      ],
+      "AMENAGEMENT_PROFILE": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "profiles_observed": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "capacity_codes": [
+        "TNSI-PROJET-BO-01",
+        "TNSI-PROJET-BO-02"
+      ],
+      "source_capacity_codes": [
+        "TNSI-PROJET-BO-01",
+        "TNSI-PROJET-BO-02"
+      ],
+      "findings": []
+    },
+    {
+      "object_id": "TNSI-STRUCT-AM-EXTRAIT",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/amenagee/TNSI-STRUCT-AM-EXTRAIT.tex",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "status": "generated",
+      "CANONICAL_OBJECT": [
+        "TNSI-STRUCT-EX-001",
+        "TNSI-STRUCT-EX-004"
+      ],
+      "canonical_resolved": [
+        "TNSI-STRUCT-EX-001",
+        "TNSI-STRUCT-EX-004"
+      ],
+      "AMENAGEMENT_PROFILE": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "profiles_observed": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "capacity_codes": [
+        "T-STRUCT-03A",
+        "T-STRUCT-03B",
+        "T-STRUCT-05B",
+        "T-STRUCT-05C",
+        "T-STRUCT-05D"
+      ],
+      "source_capacity_codes": [
+        "T-STRUCT-03A",
+        "T-STRUCT-03B",
+        "T-STRUCT-05B",
+        "T-STRUCT-05C",
+        "T-STRUCT-05D"
+      ],
+      "findings": []
     }
   ],
   "freshness": {
-    "EVIDENCE_HEAD": "05a92d3d529d1bcda260b816761d772d1a733831",
+    "EVIDENCE_HEAD": "64d6d1156010ba3f515fe10d289f3c57bacd6650",
     "INPUT_PATHS": [
       "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/amenagee/1NSI-ADGK-AM-EXTRAIT.tex",
       "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/amenagee/1NSI-APT-AM-EXTRAIT.tex",
@@ -591,8 +878,15 @@
       "NSI/chapitres/1NSI-TABLES/amenagee/1NSI-TAB-AM-EXTRAIT.tex",
       "NSI/chapitres/1NSI-TYPES-BASE/amenagee/1NSI-TB-AM-EXTRAIT.tex",
       "NSI/chapitres/1NSI-TYPES-CONSTRUITS/amenagee/1NSI-TC-AM-EXTRAIT.tex",
-      "NSI/chapitres/1NSI-WEB-IHM/amenagee/1NSI-WEB-AM-EXTRAIT.tex"
+      "NSI/chapitres/1NSI-WEB-IHM/amenagee/1NSI-WEB-AM-EXTRAIT.tex",
+      "NSI/chapitres/TNSI-ALGORITHMIQUE/amenagee/TNSI-ALGO-AM-EXTRAIT.tex",
+      "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/amenagee/TNSI-ARCH-AM-EXTRAIT.tex",
+      "NSI/chapitres/TNSI-BASES-DE-DONNEES/amenagee/TNSI-BDD-AM-EXTRAIT.tex",
+      "NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/amenagee/TNSI-HIST-AM-EXTRAIT.tex",
+      "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/amenagee/TNSI-LANG-AM-EXTRAIT.tex",
+      "NSI/chapitres/TNSI-PROJET/amenagee/TNSI-PROJET-AM-EXTRAIT.tex",
+      "NSI/chapitres/TNSI-STRUCTURES-DONNEES/amenagee/TNSI-STRUCT-AM-EXTRAIT.tex"
     ],
-    "INPUT_DIGEST": "sha256:bfbb48a73be2eab271517337fbdf32c063b7f5f560b827dfcdf005304931472d"
+    "INPUT_DIGEST": "sha256:94e24fb50805ca056cb66424d6f0c3f9fb60e2dd58345b0bdee9174093becd10"
   }
 }
