@@ -1,0 +1,80 @@
+% META: {"id": "TNSI-LANG-CO-005", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "corrige", "exercice_ref": "TNSI-LANG-EX-005", "capacites": ["T-LANG-01A"], "capacites_codes": ["C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def double(n):
+%     return 2 * n
+% def carre(n):
+%     return n * n
+% def incrementer(n):
+%     return n + 1
+% def appliquer(f, x):
+%     return f(x)
+% assert appliquer(carre, 5) == 25
+% assert [appliquer(f, 5) for f in [double, carre, incrementer]] == [10, 25, 6]
+% assert type(double).__name__ == "function"
+% def composer(f, g):
+%     def composee(x):
+%         return f(g(x))
+%     return composee
+% assert composer(carre, double)(3) == 36
+% assert composer(double, carre)(3) == 18
+% assert carre(double(3)) == 36 and double(carre(3)) == 18
+% source = "def triple(n):\n    return 3 * n\n"
+% assert type(source) is str and len(source) == 32
+% espace = {}
+% exec(source, espace)
+% assert espace["triple"](7) == 21
+% assert "triple" in espace and callable(espace["triple"])
+% assert type(espace["triple"]).__name__ == "function"
+% END-VERIFY
+\begin{corrige}{TNSI-LANG-EX-005}
+\textbf{1.} \lstinline{def appliquer(f, x): return f(x)}. On a
+\lstinline{appliquer(carre, 5) == 25}. Le premier argument est de type
+\lstinline{function} : une fonction Python est une \emph{valeur}, au même titre
+qu'un entier ou une chaîne, et rien n'empêche de la passer en argument.
+
+\textbf{2.} \lstinline{operations = [double, carre, incrementer]}, et
+\lstinline{[appliquer(f, 5) for f in operations]} vaut
+\lstinline{[10, 25, 6]}.
+
+Une liste peut donc contenir des programmes. C'est le premier sens de
+l'affirmation du cours : un programme n'est pas d'une autre nature que les
+données qu'il traite, il peut être rangé, parcouru, choisi. C'est ce qui rend
+possible une table d'actions — un menu, un gestionnaire d'événements, un
+dictionnaire de commandes.
+
+\textbf{3.} La composition renvoie une fonction, pas un nombre :
+\begin{python}
+def composer(f, g):
+    def composee(x):
+        return f(g(x))
+    return composee
+\end{python}
+\lstinline{composer(carre, double)(3)} vaut $\left(2\times 3\right)^2=36$, tandis
+que \lstinline{composer(double, carre)(3)} vaut $2\times 3^2=18$. Les deux
+diffèrent : la composition n'est pas commutative, et l'ordre des arguments décide
+de la fonction obtenue. On tient ici une fonction qui \emph{fabrique} un
+programme.
+
+\textbf{4.} \lstinline{source} est de type \lstinline{str} et compte $32$
+caractères, dont deux sauts de ligne. Après
+\begin{python}
+espace = {}
+exec(source, espace)
+\end{python}
+la clé \lstinline{"triple"} apparaît dans \lstinline{espace}, associée à une
+fonction, et \lstinline{espace["triple"](7)} vaut $21$. Le même objet a donc été
+successivement du texte, puis un programme exécutable — sans rien changer, sinon
+la façon dont on l'a regardé.
+
+\textbf{5.} Deux exemples parmi d'autres. Un \textbf{interpréteur} prend un
+programme en entrée et produit non pas un autre programme mais son
+\emph{exécution}, c'est-à-dire ses résultats. Un \textbf{formateur de code}
+(\lstinline{black}, \lstinline{gofmt}) prend un programme et en produit un autre,
+équivalent mais présenté selon des règles fixes. On pourrait ajouter les
+analyseurs statiques, qui prennent un programme et produisent une liste de
+défauts.
+
+Tous n'existent que parce qu'un programme est manipulable comme une donnée. Un
+langage où le code serait d'une autre nature que les données n'aurait ni
+compilateur écrit dans lui-même, ni outil d'analyse.
+\end{corrige}

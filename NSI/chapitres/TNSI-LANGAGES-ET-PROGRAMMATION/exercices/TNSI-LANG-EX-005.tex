@@ -1,0 +1,71 @@
+% META: {"id": "TNSI-LANG-EX-005", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "exercice", "capacites": ["T-LANG-01A"], "capacites_codes": ["C1"], "parcours": 2, "competences": ["programmer", "analyser", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-005.tex", "corrige_tex": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-005.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-ECBC145169B9", "PEDAGOGICAL_GAP_IDS": ["GAP-ECBC145169B9", "GAP-71D21653CA7A"], "CAPACITY_ID": "C1", "EXERCISE_ROLE": "DIRECT_APPLICATION", "EXERCISE_ROLES": ["DIRECT_APPLICATION", "CONTEXT_VARIATION", "REASONING"], "DIFFICULTY": 2, "AUTHORING_REASON": "aucun exercice ne portait cette capacite : elle etait enoncee dans le cours et jamais eprouvee, alors qu'elle se manipule -- une fonction passee en argument, une source stockee dans une chaine, une fonction qui en fabrique une autre", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% def double(n):
+%     return 2 * n
+% def carre(n):
+%     return n * n
+% def incrementer(n):
+%     return n + 1
+% def appliquer(f, x):
+%     return f(x)
+% assert appliquer(double, 5) == 10
+% assert appliquer(carre, 5) == 25
+% assert appliquer(incrementer, 5) == 6
+% operations = [double, carre, incrementer]
+% assert [appliquer(f, 5) for f in operations] == [10, 25, 6]
+% assert all(callable(f) for f in operations)
+% def composer(f, g):
+%     def composee(x):
+%         return f(g(x))
+%     return composee
+% double_puis_carre = composer(carre, double)
+% assert double_puis_carre(3) == 36
+% carre_puis_double = composer(double, carre)
+% assert carre_puis_double(3) == 18
+% assert double_puis_carre(3) != carre_puis_double(3)
+% assert callable(double_puis_carre)
+% source = "def triple(n):\n    return 3 * n\n"
+% assert isinstance(source, str)
+% assert len(source) == 32
+% espace = {}
+% exec(source, espace)
+% assert espace["triple"](7) == 21
+% assert callable(espace["triple"])
+% assert source.count("\n") == 2
+% END-VERIFY
+\begin{exercice}{TNSI-LANG-EX-005}{2}{20}
+Le cours affirme que tout programme est aussi une donnée. Cet exercice le met à
+l'épreuve. On dispose des trois fonctions
+\begin{python}
+def double(n):
+    return 2 * n
+
+def carre(n):
+    return n * n
+
+def incrementer(n):
+    return n + 1
+\end{python}
+\begin{enumerate}
+  \item Écrire \lstinline{appliquer(f, x)} qui renvoie \lstinline{f(x)}. Que vaut
+    \lstinline{appliquer(carre, 5)} ? Quel est ici le \emph{type} du premier
+    argument ?
+  \item Construire la liste \lstinline{operations} contenant les trois fonctions,
+    puis donner la liste des résultats de leur application à $5$. Une liste peut
+    donc contenir des programmes : qu'est-ce que cela signifie ?
+  \item Écrire \lstinline{composer(f, g)} qui renvoie une \textbf{nouvelle
+    fonction} $x\mapsto f(g(x))$. Calculer l'image de $3$ par
+    \lstinline{composer(carre, double)} puis par \lstinline{composer(double, carre)}.
+    Les deux résultats coïncident-ils ? Conclure sur l'ordre.
+  \item On stocke maintenant un programme dans une chaîne de caractères :
+    \begin{python}
+source = "def triple(n):\n    return 3 * n\n"
+    \end{python}
+    Donner le type et la longueur de \lstinline{source}. Utiliser
+    \lstinline{exec(source, espace)} avec un dictionnaire \lstinline{espace}
+    initialement vide, puis appeler la fonction ainsi définie sur $7$.
+  \item Un compilateur est un programme dont l'\emph{entrée} est un programme.
+    Citer deux autres logiciels dans ce cas, et dire à chaque fois ce qu'ils
+    produisent en sortie.
+\end{enumerate}
+\end{exercice}

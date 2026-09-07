@@ -1,0 +1,116 @@
+% META: {"id": "TNSI-LANG-CO-008", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "corrige", "exercice_ref": "TNSI-LANG-EX-008", "capacites": ["T-LANG-05"], "capacites_codes": ["C11"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% notes = [8, 12, 16, 4, 10]
+% assert sum(notes) / len(notes) == 10.0
+% def moyenne_bug(notes):
+%     total = 0
+%     for i in range(1, len(notes)):
+%         total = total + notes[i]
+%     return total / len(notes)
+% assert moyenne_bug(notes) == 8.4
+% assert (12 + 16 + 4 + 10) / 5 == 8.4
+% def moyenne(notes):
+%     total = 0
+%     for i in range(len(notes)):
+%         total = total + notes[i]
+%     return total / len(notes)
+% assert moyenne(notes) == 10.0
+% def au_dessus(notes, seuil):
+%     return [n for n in notes if n > seuil]
+% assert au_dessus(notes, 8.4) == [12, 16, 10]
+% assert au_dessus(notes, 10.0) == [12, 16]
+% assert len(au_dessus(notes, 8.4)) == 3 and len(au_dessus(notes, 10.0)) == 2
+% def ajouter_seuil_bug(valeur, memoire=[]):
+%     memoire.append(valeur)
+%     return memoire
+% assert ajouter_seuil_bug(10) == [10]
+% assert ajouter_seuil_bug(12) == [10, 12]
+% assert ajouter_seuil_bug(8) == [10, 12, 8]
+% assert ajouter_seuil_bug.__defaults__[0] == [10, 12, 8]
+% def ajouter_seuil(valeur, memoire=None):
+%     if memoire is None:
+%         memoire = []
+%     memoire.append(valeur)
+%     return memoire
+% assert ajouter_seuil(10) == [10] and ajouter_seuil(12) == [12]
+% assert ajouter_seuil(8, [1, 2]) == [1, 2, 8]
+% assert ajouter_seuil.__defaults__ == (None,)
+% total = 0.0
+% for _ in range(3):
+%     total = total + 0.1
+% assert total == 0.30000000000000004 and total != 0.3
+% assert abs(total - 0.3) < 1e-9
+% END-VERIFY
+\begin{corrige}{TNSI-LANG-EX-008}
+\textbf{1.} À la main : $8+12+16+4+10=50$, donc la moyenne vaut
+$50\div 5=10$. La fonction renvoie $8{,}4$, car
+\lstinline{range(1, len(notes))} commence à l'indice $1$ et \emph{saute la
+première note} : elle additionne $12+16+4+10=42$, puis divise par $5$.
+
+La cause est un décalage d'indice. La correction consiste à parcourir depuis $0$ :
+\begin{python}
+for i in range(len(notes)):
+\end{python}
+On aurait aussi pu écrire \lstinline{for note in notes:}, qui rend l'erreur
+impossible — les décalages d'indice n'existent que là où l'on manipule des
+indices.
+
+\textbf{2.} Avec le seuil erroné $8{,}4$, \lstinline{au_dessus} renvoie
+\lstinline{[12, 16, 10]} ; avec le seuil correct $10{,}0$, elle renvoie
+\lstinline{[12, 16]}. Un élève passe de « au-dessus de la moyenne » à
+« au-dessous » selon la version.
+
+Ce défaut est plus dangereux qu'un plantage parce qu'il ne se signale pas. Un
+programme qui s'arrête sur une erreur exhibe son problème ; celui-ci produit un
+nombre plausible — $8{,}4$ est une moyenne parfaitement crédible pour ces notes —
+et ce nombre voyage ensuite dans tout le reste de l'application. On ne le
+découvre qu'en refaisant le calcul à la main, c'est-à-dire en soupçonnant déjà
+quelque chose.
+
+\textbf{3.} Les trois appels renvoient \lstinline{[10]}, puis
+\lstinline{[10, 12]}, puis \lstinline{[10, 12, 8]}. La liste ne repart jamais de
+zéro.
+
+La cause tient au moment de l'évaluation : la valeur par défaut
+\lstinline{[]} est créée \textbf{une seule fois}, quand Python lit la ligne
+\lstinline{def}, et non à chaque appel. Tous les appels qui omettent le second
+argument partagent donc la même liste, qu'ils enrichissent tour à tour. On peut
+même l'observer directement : \lstinline{ajouter_seuil.__defaults__} contient la
+liste accumulée.
+
+\textbf{4.} On remplace la valeur par défaut par un objet immuable, et on crée la
+liste dans le corps :
+\begin{python}
+def ajouter_seuil(valeur, memoire=None):
+    if memoire is None:
+        memoire = []
+    memoire.append(valeur)
+    return memoire
+\end{python}
+Chaque appel sans second argument repart d'une liste neuve, et
+\lstinline{ajouter_seuil(8, [1, 2])} donne bien \lstinline{[1, 2, 8]} : la
+possibilité de fournir sa propre liste est préservée. La règle est de ne jamais
+mettre en valeur par défaut un objet modifiable — liste, dictionnaire, ensemble.
+
+\textbf{5.} Le cumul donne $0{,}30000000000000004$, et la comparaison
+\lstinline{total == 0.3} vaut \lstinline{False}.
+
+\textbf{6.} La cause est la représentation binaire : $0{,}1$ n'a pas d'écriture
+finie en base $2$, exactement comme $\tfrac13$ n'en a pas en base $10$. Chaque
+addition arrondit, et trois arrondis laissent un écart de l'ordre de $10^{-17}$.
+Le test correct compare à une tolérance :
+\begin{python}
+if abs(total - 0.3) < 1e-9:
+\end{python}
+La règle générale est qu'on ne teste jamais l'égalité de deux nombres à virgule :
+on teste que leur écart est inférieur à une tolérance choisie en fonction de la
+grandeur mesurée. Le seul cas où \lstinline{==} reste légitime est celui de
+valeurs qui n'ont subi aucun calcul — deux lectures de la même constante, par
+exemple.
+
+\medskip
+Les trois défauts illustrent trois causes distinctes : un décalage d'indice, une
+valeur par défaut modifiable évaluée une seule fois, et une comparaison exacte de
+flottants. Aucun des trois ne provoque d'erreur : tous produisent un résultat
+faux mais vraisemblable, ce qui est la marque des bugs les plus coûteux.
+\end{corrige}

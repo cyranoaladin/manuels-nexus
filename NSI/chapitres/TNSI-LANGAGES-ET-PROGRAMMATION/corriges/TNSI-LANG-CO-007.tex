@@ -1,0 +1,99 @@
+% META: {"id": "TNSI-LANG-CO-007", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "corrige", "exercice_ref": "TNSI-LANG-EX-007", "capacites": ["T-LANG-03C"], "capacites_codes": ["C8"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% ZERO_ABSOLU_CELSIUS = -273.15
+% def celsius_vers_fahrenheit(temperature):
+%     """Convertit des degres Celsius en degres Fahrenheit."""
+%     if temperature < ZERO_ABSOLU_CELSIUS:
+%         raise ValueError("temperature sous le zero absolu")
+%     return temperature * 9 / 5 + 32
+% def fahrenheit_vers_celsius(temperature):
+%     """Convertit des degres Fahrenheit en degres Celsius."""
+%     return (temperature - 32) * 5 / 9
+% assert celsius_vers_fahrenheit(0) == 32
+% assert celsius_vers_fahrenheit(100) == 212
+% assert celsius_vers_fahrenheit(-40) == -40
+% assert fahrenheit_vers_celsius(212) == 100
+% assert fahrenheit_vers_celsius(32) == 0
+% assert fahrenheit_vers_celsius(-40) == -40
+% refus = False
+% try:
+%     celsius_vers_fahrenheit(-300)
+% except ValueError:
+%     refus = True
+% assert refus
+% aller = celsius_vers_fahrenheit(37)
+% assert aller == 98.6
+% retour = fahrenheit_vers_celsius(aller)
+% assert abs(retour - 37) < 1e-9
+% assert retour == 37.00000000000001 or retour == 37.0
+% assert celsius_vers_fahrenheit.__doc__ is not None
+% assert fahrenheit_vers_celsius.__doc__ is not None
+% assert __name__ != "meteo"
+% END-VERIFY
+\begin{corrige}{TNSI-LANG-EX-007}
+\textbf{1 à 3.} Le module complet :
+\begin{python}
+"""Conversions de temperatures.
+
+Ce module regroupe les conversions utilisees par la station meteo.
+"""
+
+ZERO_ABSOLU_CELSIUS = -273.15
+
+
+def celsius_vers_fahrenheit(temperature):
+    """Convertit des degres Celsius en degres Fahrenheit.
+
+    Precondition : temperature >= ZERO_ABSOLU_CELSIUS.
+    """
+    if temperature < ZERO_ABSOLU_CELSIUS:
+        raise ValueError("temperature sous le zero absolu")
+    return temperature * 9 / 5 + 32
+
+
+def fahrenheit_vers_celsius(temperature):
+    """Convertit des degres Fahrenheit en degres Celsius."""
+    return (temperature - 32) * 5 / 9
+
+
+if __name__ == "__main__":
+    assert celsius_vers_fahrenheit(100) == 212
+    assert celsius_vers_fahrenheit(0) == 32
+    assert fahrenheit_vers_celsius(212) == 100
+\end{python}
+La précondition est écrite deux fois, et ce n'est pas une redondance : la
+documentation la fait connaître au lecteur \emph{avant} l'appel, le
+\lstinline{raise} la fait respecter \emph{pendant}. L'une sans l'autre laisse
+soit un contrat non tenu, soit une erreur inexplicable.
+
+\textbf{4.} Depuis un autre fichier :
+\begin{python}
+import meteo
+
+print(meteo.celsius_vers_fahrenheit(0))    # 32.0
+print(meteo.fahrenheit_vers_celsius(212))  # 100.0
+\end{python}
+Les assertions ne s'exécutent \textbf{pas}. À l'import, Python donne à la
+variable \lstinline{__name__} du module la valeur \lstinline{"meteo"}, et non
+\lstinline{"__main__"} : la condition est fausse, le bloc est sauté. La valeur
+\lstinline{"__main__"} n'est attribuée qu'au fichier lancé directement.
+
+\textbf{5.} Sans ce garde-fou, les tests s'exécuteraient à chaque import. Tant
+qu'ils passent, on ne perd qu'un peu de temps. Mais qu'une assertion échoue — par
+exemple parce qu'un jeu de données de test a changé — et l'\lstinline{import}
+lui-même lèverait une erreur : un programme qui n'utilise que
+\lstinline{fahrenheit_vers_celsius} refuserait de démarrer à cause d'un test
+portant sur l'autre fonction. Pire encore si le bloc contenait un affichage ou
+une écriture de fichier : chaque import produirait un effet visible dont
+l'appelant n'a pas idée.
+
+\textbf{6.} $37\,^\circ$C donne $37\times\dfrac95+32=98{,}6\,^\circ$F, et la
+conversion inverse donne $37{,}00000000000001$ et non $37$ exactement.
+
+Ce n'est pas une faute du module : $98{,}6$ n'est pas représentable exactement en
+binaire, et le double passage laisse une erreur d'arrondi de l'ordre de
+$10^{-14}$. La leçon pratique est qu'un test de réciprocité doit s'écrire
+\lstinline{abs(retour - 37) < 1e-9} et non \lstinline{retour == 37} — c'est
+d'ailleurs pour cela que le bloc de tests du module compare des valeurs entières,
+$0$, $100$ et $212$, dont les conversions tombent juste.
+\end{corrige}

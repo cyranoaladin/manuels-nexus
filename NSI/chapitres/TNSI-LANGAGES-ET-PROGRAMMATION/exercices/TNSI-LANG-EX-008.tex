@@ -1,0 +1,94 @@
+% META: {"id": "TNSI-LANG-EX-008", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "exercice", "capacites": ["T-LANG-05"], "capacites_codes": ["C11"], "parcours": 2, "competences": ["analyser", "programmer", "valider"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-008.tex", "corrige_tex": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-008.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-7838F4B56702", "CAPACITY_ID": "C11", "EXERCISE_ROLE": "CONTEXT_VARIATION", "DIFFICULTY": 2, "AUTHORING_REASON": "la capacite parle de causes typiques au pluriel, et le seul exercice rattache n'en montrait qu'une, l'effet de bord ; trois autres causes classiques -- decalage d'indice, argument par defaut mutable, comparaison de flottants -- ne se rencontraient nulle part", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% notes = [8, 12, 16, 4, 10]
+% def moyenne_bug(notes):
+%     total = 0
+%     for i in range(1, len(notes)):
+%         total = total + notes[i]
+%     return total / len(notes)
+% def moyenne(notes):
+%     total = 0
+%     for i in range(len(notes)):
+%         total = total + notes[i]
+%     return total / len(notes)
+% assert moyenne_bug(notes) == 8.4
+% assert moyenne(notes) == 10.0
+% assert sum(notes) == 50 and len(notes) == 5
+% def au_dessus(notes, seuil):
+%     return [n for n in notes if n > seuil]
+% assert au_dessus(notes, moyenne_bug(notes)) == [12, 16, 10]
+% assert au_dessus(notes, moyenne(notes)) == [12, 16]
+% def ajouter_seuil_bug(valeur, memoire=[]):
+%     memoire.append(valeur)
+%     return memoire
+% assert ajouter_seuil_bug(10) == [10]
+% assert ajouter_seuil_bug(12) == [10, 12]
+% assert ajouter_seuil_bug(8) == [10, 12, 8]
+% def ajouter_seuil(valeur, memoire=None):
+%     if memoire is None:
+%         memoire = []
+%     memoire.append(valeur)
+%     return memoire
+% assert ajouter_seuil(10) == [10]
+% assert ajouter_seuil(12) == [12]
+% assert ajouter_seuil(8) == [8]
+% assert ajouter_seuil(8, [1, 2]) == [1, 2, 8]
+% total = 0.0
+% for _ in range(3):
+%     total = total + 0.1
+% assert total != 0.3
+% assert total == 0.30000000000000004
+% assert abs(total - 0.3) < 1e-9
+% assert 0.1 + 0.2 != 0.3
+% END-VERIFY
+\begin{exercice}{TNSI-LANG-EX-008}{2}{25}
+Une application de suivi scolaire donne des résultats incohérents. Trois défauts
+distincts s'y cachent, chacun d'une cause différente. On travaille sur
+\lstinline{notes = [8, 12, 16, 4, 10]}.
+
+\medskip
+\textbf{Défaut A.} La moyenne affichée ne correspond pas au calcul fait à la main.
+\begin{python}
+def moyenne(notes):
+    total = 0
+    for i in range(1, len(notes)):
+        total = total + notes[i]
+    return total / len(notes)
+\end{python}
+\begin{enumerate}
+  \item Calculer à la main la moyenne des cinq notes, puis donner la valeur
+    renvoyée par cette fonction. Identifier la cause du défaut et la corriger.
+  \item La fonction \lstinline{au_dessus(notes, seuil)} renvoie les notes
+    strictement supérieures au seuil. Donner son résultat avec la moyenne
+    erronée, puis avec la moyenne correcte. En quoi ce défaut est-il plus
+    dangereux qu'une erreur qui ferait planter le programme ?
+\end{enumerate}
+
+\medskip
+\textbf{Défaut B.} L'historique des seuils enregistrés se remplit tout seul.
+\begin{python}
+def ajouter_seuil(valeur, memoire=[]):
+    memoire.append(valeur)
+    return memoire
+\end{python}
+\begin{enumerate}
+  \setcounter{enumi}{2}
+  \item Donner le résultat de trois appels successifs
+    \lstinline{ajouter_seuil(10)}, \lstinline{ajouter_seuil(12)},
+    \lstinline{ajouter_seuil(8)}. Expliquer ce qui se passe : à quel moment la
+    liste par défaut est-elle créée ?
+  \item Corriger la fonction pour que chaque appel sans second argument reparte
+    d'une liste vide, sans perdre la possibilité de lui en fournir une.
+\end{enumerate}
+
+\medskip
+\textbf{Défaut C.} Un objectif de progression de $0{,}3$ point n'est jamais
+déclaré atteint, alors que trois progressions de $0{,}1$ ont été enregistrées.
+\begin{enumerate}
+  \setcounter{enumi}{4}
+  \item Cumuler trois fois $0{,}1$ dans une variable et afficher le résultat.
+    Comparer avec $0{,}3$ à l'aide de \lstinline{==}. Que constate-t-on ?
+  \item Expliquer la cause, puis écrire le test correct. Quelle règle générale
+    en tirer sur les comparaisons de nombres à virgule ?
+\end{enumerate}
+\end{exercice}

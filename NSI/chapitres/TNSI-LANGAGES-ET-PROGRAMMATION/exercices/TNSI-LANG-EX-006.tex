@@ -1,0 +1,77 @@
+% META: {"id": "TNSI-LANG-EX-006", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "exercice", "capacites": ["T-LANG-01B", "T-LANG-01C"], "capacites_codes": ["C2", "C3"], "parcours": 2, "competences": ["programmer", "raisonner"], "duree_min": 30, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-006.tex", "corrige_tex": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-006.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-8AA60419729C", "PEDAGOGICAL_GAP_IDS": ["GAP-8AA60419729C", "GAP-2471D1A9CF82", "GAP-6711B97601CE", "GAP-157935C7330E"], "CAPACITY_ID": "C2", "CAPACITY_IDS": ["C2", "C3"], "EXERCISE_ROLE": "REASONING", "EXERCISE_ROLES": ["DIRECT_APPLICATION", "REASONING", "CONTEXT_VARIATION"], "DIFFICULTY": 2, "AUTHORING_REASON": "deux capacites du contrat n'avaient aucun exercice ; l'indecidabilite du probleme de l'arret etait affirmee par le cours et jamais construite par l'eleve, alors que l'argument diagonal tient en cinq lignes des lors qu'on dispose d'un langage jouet a interpreter", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% def executer(programme, memoire):
+%     memoire = dict(memoire)
+%     for instruction in programme:
+%         op = instruction[0]
+%         if op == "SET":
+%             memoire[instruction[1]] = instruction[2]
+%         elif op == "ADD":
+%             memoire[instruction[1]] += memoire[instruction[2]]
+%         elif op == "DEC":
+%             memoire[instruction[1]] -= 1
+%         elif op == "TANTQUE":
+%             while memoire[instruction[1]] != 0:
+%                 memoire = executer(instruction[2], memoire)
+%     return memoire
+% somme = [
+%     ("SET", "s", 0),
+%     ("TANTQUE", "n", [("ADD", "s", "n"), ("DEC", "n")]),
+% ]
+% assert executer(somme, {"n": 5})["s"] == 15
+% assert executer(somme, {"n": 1})["s"] == 1
+% assert executer(somme, {"n": 0})["s"] == 0
+% assert executer(somme, {"n": 10})["s"] == 55
+% def somme_python(n):
+%     return n * (n + 1) // 2
+% assert all(executer(somme, {"n": k})["s"] == somme_python(k) for k in range(11))
+% assert executer(somme, {"n": 5})["n"] == 0
+% # Le programme qui ne s'arrete jamais existe dans ce langage.
+% boucle = [("SET", "v", 1), ("TANTQUE", "v", [("SET", "v", 1)])]
+% assert boucle[1][0] == "TANTQUE"
+% assert executer([("SET", "v", 1), ("TANTQUE", "v", [("DEC", "v")])], {})["v"] == 0
+% END-VERIFY
+\begin{exercice}{TNSI-LANG-EX-006}{2}{30}
+On considère un langage jouet à quatre instructions, dont les variables sont des
+entiers :
+\begin{itemize}
+  \item \lstinline{("SET", v, k)} affecte l'entier \lstinline{k} à la variable
+    \lstinline{v} ;
+  \item \lstinline{("ADD", v, w)} ajoute à \lstinline{v} la valeur de
+    \lstinline{w} ;
+  \item \lstinline{("DEC", v)} diminue \lstinline{v} de $1$ ;
+  \item \lstinline{("TANTQUE", v, corps)} répète le sous-programme
+    \lstinline{corps} tant que \lstinline{v} n'est pas nul.
+\end{itemize}
+\begin{enumerate}
+  \item Écrire en Python l'interpréteur \lstinline{executer(programme, memoire)}
+    de ce langage. Il prend une liste d'instructions et un dictionnaire, et
+    renvoie l'état final de la mémoire.
+  \item Écrire, \textbf{dans le langage jouet}, le programme qui calcule dans la
+    variable \lstinline{s} la somme des entiers de $1$ à \lstinline{n}. Donner
+    l'état de la mémoire après exécution pour $n=5$.
+  \item Écrire la même fonction en Python, puis vérifier que les deux versions
+    coïncident pour tous les $n$ de $0$ à $10$.
+  \item Le langage jouet n'a ni fonction, ni liste, ni chaîne de caractères, et
+    quatre instructions en tout. Que montre pourtant la question précédente sur
+    ce qu'il est capable de calculer ? Quelle est la portée de cette remarque
+    pour la notion de calculabilité ?
+  \item Écrire un programme du langage jouet qui ne s'arrête jamais. Un tel
+    programme existe-t-il aussi en Python ?
+  \item Supposons qu'il existe une fonction Python \lstinline{arrete(source, x)}
+    qui, pour \emph{toute} source de fonction et toute entrée, renvoie
+    \lstinline{True} si l'exécution s'arrête et \lstinline{False} sinon. On
+    définit alors
+    \begin{python}
+def diagonale(source):
+    if arrete(source, source):
+        while True:
+            pass
+    return "fini"
+    \end{python}
+    Étudier ce que fait \lstinline{diagonale} appliquée à sa propre source, dans
+    les deux cas possibles. Conclure sur l'existence de \lstinline{arrete}.
+  \item Cette conclusion vaudrait-elle encore si l'on remplaçait Python par le
+    langage jouet ? Par n'importe quel autre langage ? Justifier en une phrase.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,122 @@
+% META: {"id": "TNSI-LANG-CO-006", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "corrige", "exercice_ref": "TNSI-LANG-EX-006", "capacites": ["T-LANG-01B", "T-LANG-01C"], "capacites_codes": ["C2", "C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def executer(programme, memoire):
+%     memoire = dict(memoire)
+%     for instruction in programme:
+%         op = instruction[0]
+%         if op == "SET":
+%             memoire[instruction[1]] = instruction[2]
+%         elif op == "ADD":
+%             memoire[instruction[1]] += memoire[instruction[2]]
+%         elif op == "DEC":
+%             memoire[instruction[1]] -= 1
+%         elif op == "TANTQUE":
+%             while memoire[instruction[1]] != 0:
+%                 memoire = executer(instruction[2], memoire)
+%     return memoire
+% somme = [("SET", "s", 0),
+%          ("TANTQUE", "n", [("ADD", "s", "n"), ("DEC", "n")])]
+% finale = executer(somme, {"n": 5})
+% assert finale == {"n": 0, "s": 15}
+% assert 5 + 4 + 3 + 2 + 1 == 15
+% def somme_python(n):
+%     total = 0
+%     while n != 0:
+%         total = total + n
+%         n = n - 1
+%     return total
+% assert all(executer(somme, {"n": k})["s"] == somme_python(k) for k in range(11))
+% assert somme_python(10) == 55 and executer(somme, {"n": 10})["s"] == 55
+% assert len({"SET", "ADD", "DEC", "TANTQUE"}) == 4
+% # Un programme qui ne s'arrete pas : la garde ne decroit jamais.
+% jamais = [("SET", "v", 1), ("TANTQUE", "v", [("SET", "v", 1)])]
+% assert jamais[1][2] == [("SET", "v", 1)]
+% assert executer([("SET", "v", 3), ("TANTQUE", "v", [("DEC", "v")])], {}) == {"v": 0}
+% END-VERIFY
+\begin{corrige}{TNSI-LANG-EX-006}
+\textbf{1.} L'interpréteur parcourt les instructions et modifie la mémoire. Le
+cas \lstinline{TANTQUE} s'appelle lui-même sur le sous-programme :
+\begin{python}
+def executer(programme, memoire):
+    memoire = dict(memoire)
+    for instruction in programme:
+        op = instruction[0]
+        if op == "SET":
+            memoire[instruction[1]] = instruction[2]
+        elif op == "ADD":
+            memoire[instruction[1]] += memoire[instruction[2]]
+        elif op == "DEC":
+            memoire[instruction[1]] -= 1
+        elif op == "TANTQUE":
+            while memoire[instruction[1]] != 0:
+                memoire = executer(instruction[2], memoire)
+    return memoire
+\end{python}
+
+\textbf{2.} On accumule dans \lstinline{s} en faisant décroître \lstinline{n} :
+\begin{python}
+somme = [
+    ("SET", "s", 0),
+    ("TANTQUE", "n", [("ADD", "s", "n"), ("DEC", "n")]),
+]
+\end{python}
+Pour $n=5$, la mémoire finale est \lstinline!{"n": 0, "s": 15}!. La variable
+\lstinline{n} a été consommée : elle servait de compteur.
+
+\textbf{3.} En Python, le même algorithme s'écrit
+\begin{python}
+def somme_python(n):
+    total = 0
+    while n != 0:
+        total = total + n
+        n = n - 1
+    return total
+\end{python}
+et l'égalité \lstinline{executer(somme, {"n": k})["s"] == somme_python(k)} est
+vérifiée pour tout $k$ de $0$ à $10$, y compris $k=0$ où les deux renvoient $0$.
+
+\textbf{4.} Le langage jouet, avec ses quatre instructions et ses seuls entiers,
+calcule exactement ce que calcule la boucle Python. Ce n'est pas un hasard : dès
+qu'un langage possède l'affectation, l'incrémentation et une boucle conditionnée,
+il peut simuler n'importe quel autre langage — il suffit d'y écrire son
+interpréteur, comme on vient d'écrire celui-ci en Python.
+
+La portée est la suivante : ce qui est calculable ne dépend pas du langage. Un
+langage riche est plus \emph{commode} — il demande moins de lignes, il est plus
+lisible, il va plus vite — mais il ne repousse pas la frontière du calculable. La
+question « ce problème est-il soluble en Python ? » n'a pas de réponse différente
+de « est-il soluble tout court ? ».
+
+\textbf{5.} Il suffit d'une garde qui ne décroît jamais :
+\begin{python}
+jamais = [("SET", "v", 1), ("TANTQUE", "v", [("SET", "v", 1)])]
+\end{python}
+La variable \lstinline{v} est remise à $1$ à chaque tour, donc la condition reste
+vraie indéfiniment. En Python, \lstinline{while True: pass} joue le même rôle.
+Aucun des deux langages ne peut interdire ces programmes : c'est le prix de la
+boucle conditionnée, et c'est ce qui rend la question suivante non triviale.
+
+\textbf{6.} Supposons \lstinline{arrete} existante et appliquons
+\lstinline{diagonale} à sa propre source. Deux cas, et deux seulement.
+
+Si \lstinline{arrete(diagonale, diagonale)} vaut \lstinline{True}, alors
+\lstinline{diagonale} entre dans la boucle infinie : elle \emph{ne s'arrête pas},
+et \lstinline{arrete} a donc répondu faux.
+
+Si \lstinline{arrete(diagonale, diagonale)} vaut \lstinline{False}, alors le
+\lstinline{if} n'est pas pris, la fonction renvoie \lstinline{"fini"} : elle
+\emph{s'arrête}, et \lstinline{arrete} a de nouveau répondu faux.
+
+Dans les deux cas \lstinline{arrete} se trompe sur cette entrée-là. Or on l'avait
+supposée correcte pour \emph{toute} source et toute entrée. L'hypothèse est donc
+contradictoire : une telle fonction n'existe pas. Le problème de l'arrêt est
+indécidable.
+
+\textbf{7.} Oui, dans le langage jouet comme dans n'importe quel autre. L'argument
+n'utilise du langage que trois choses : qu'un programme puisse être donné en
+entrée à un programme, qu'on puisse tester une condition, et qu'on puisse boucler
+indéfiniment. Tout langage qui possède ces trois traits — c'est-à-dire tout
+langage de programmation usuel — permet de construire la même
+\lstinline{diagonale} et aboutit à la même contradiction. L'indécidabilité n'est
+pas une faiblesse de Python : c'est une limite du calcul.
+\end{corrige}

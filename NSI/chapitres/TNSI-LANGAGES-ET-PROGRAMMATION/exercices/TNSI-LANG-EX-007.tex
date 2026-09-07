@@ -1,0 +1,81 @@
+% META: {"id": "TNSI-LANG-EX-007", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "exercice", "capacites": ["T-LANG-03C"], "capacites_codes": ["C8"], "parcours": 1, "competences": ["programmer", "valider"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-007.tex", "corrige_tex": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-007.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-B06A696CD18D", "PEDAGOGICAL_GAP_IDS": ["GAP-B06A696CD18D", "GAP-CC2FBE333035"], "CAPACITY_ID": "C8", "EXERCISE_ROLE": "DIRECT_APPLICATION", "EXERCISE_ROLES": ["DIRECT_APPLICATION", "CONTEXT_VARIATION", "REASONING"], "DIFFICULTY": 1, "AUTHORING_REASON": "aucun exercice ne portait cette capacite : l'eleve consommait des modules existants sans jamais en ecrire un, ni constater ce que le garde-fou du nom principal empeche au moment de l'import", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% import types
+% source = '''"""Conversions de temperatures.
+%
+% Ce module regroupe les conversions utilisees par la station meteo.
+% """
+%
+% ZERO_ABSOLU_CELSIUS = -273.15
+%
+%
+% def celsius_vers_fahrenheit(temperature):
+%     """Convertit des degres Celsius en degres Fahrenheit.
+%
+%     Precondition : temperature >= ZERO_ABSOLU_CELSIUS.
+%     """
+%     if temperature < ZERO_ABSOLU_CELSIUS:
+%         raise ValueError("temperature sous le zero absolu")
+%     return temperature * 9 / 5 + 32
+%
+%
+% def fahrenheit_vers_celsius(temperature):
+%     """Convertit des degres Fahrenheit en degres Celsius."""
+%     return (temperature - 32) * 5 / 9
+%
+%
+% TRACE = []
+% if __name__ == "__main__":
+%     TRACE.append("tests")
+%     assert celsius_vers_fahrenheit(100) == 212
+% '''
+% meteo = types.ModuleType("meteo")
+% meteo.__name__ = "meteo"
+% exec(compile(source, "meteo.py", "exec"), meteo.__dict__)
+% assert meteo.celsius_vers_fahrenheit(0) == 32
+% assert meteo.celsius_vers_fahrenheit(100) == 212
+% assert meteo.fahrenheit_vers_celsius(212) == 100
+% assert meteo.fahrenheit_vers_celsius(32) == 0
+% assert meteo.ZERO_ABSOLU_CELSIUS == -273.15
+% assert meteo.__doc__.startswith("Conversions de temperatures.")
+% assert "Precondition" in meteo.celsius_vers_fahrenheit.__doc__
+% assert meteo.fahrenheit_vers_celsius.__doc__ is not None
+% # Importe, le module n'execute pas son bloc de tests.
+% assert meteo.TRACE == []
+% refus = False
+% try:
+%     meteo.celsius_vers_fahrenheit(-300)
+% except ValueError:
+%     refus = True
+% assert refus
+% # Execute comme programme principal, il l'execute.
+% principal = types.ModuleType("__main__")
+% exec(compile(source, "meteo.py", "exec"), principal.__dict__)
+% assert principal.TRACE == ["tests"]
+% assert abs(meteo.fahrenheit_vers_celsius(meteo.celsius_vers_fahrenheit(37)) - 37) < 1e-9
+% END-VERIFY
+\begin{exercice}{TNSI-LANG-EX-007}{1}{20}
+On veut écrire un petit module \lstinline{meteo.py} regroupant les conversions
+de température de la station.
+\begin{enumerate}
+  \item Écrire ce module. Il doit contenir : une chaîne de documentation en tête
+    de fichier, la constante \lstinline{ZERO_ABSOLU_CELSIUS} valant
+    $-273{,}15$, et les deux fonctions
+    \lstinline{celsius_vers_fahrenheit(temperature)} et
+    \lstinline{fahrenheit_vers_celsius(temperature)}, chacune documentée.
+  \item La première fonction a une précondition : la température ne peut pas être
+    inférieure au zéro absolu. L'écrire dans la documentation \textbf{et} la
+    faire respecter en levant une \lstinline{ValueError}.
+  \item Ajouter à la fin du module un bloc de tests protégé par
+    \lstinline{if __name__ == "__main__":}, contenant au moins l'assertion
+    \lstinline{celsius_vers_fahrenheit(100) == 212}.
+  \item Depuis un autre fichier, importer le module et appeler les deux
+    fonctions sur $0\,^\circ$C et $212\,^\circ$F. Les assertions du bloc de tests
+    s'exécutent-elles à ce moment-là ? Justifier.
+  \item Que se passerait-il si l'on retirait la ligne
+    \lstinline{if __name__ == "__main__":} en laissant les tests ? Donner un cas
+    où cela poserait un problème concret.
+  \item Vérifier que les deux conversions sont réciproques : partir de
+    $37\,^\circ$C, convertir, reconvertir, et commenter le résultat obtenu.
+\end{enumerate}
+\end{exercice}
