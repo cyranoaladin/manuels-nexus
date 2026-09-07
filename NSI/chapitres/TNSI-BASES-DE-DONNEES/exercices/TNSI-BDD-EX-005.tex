@@ -1,0 +1,65 @@
+% META: {"id": "TNSI-BDD-EX-005", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "exercice", "capacites": ["T-BDD-01B", "T-BDD-03A"], "capacites_codes": ["C2", "C5"], "methodes": [], "parcours": 1, "competences": ["analyser", "programmer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-BASES-DE-DONNEES/exercices/TNSI-BDD-EX-005.tex", "corrige_tex": "chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-005.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-354F77D8CB17", "PEDAGOGICAL_GAP_IDS": ["GAP-354F77D8CB17", "GAP-B76B97E057D0", "GAP-B0D4B0099447", "GAP-D6F161ECA561"], "CAPACITY_ID": "C2", "CAPACITY_IDS": ["C2", "C5"], "EXERCISE_ROLE": "DIRECT_APPLICATION", "EXERCISE_ROLES": ["DIRECT_APPLICATION", "CONTEXT_VARIATION", "REASONING"], "DIFFICULTY": 1, "AUTHORING_REASON": "deux capacites du contrat n'avaient aucun exercice ; les eleves ecrivaient des requetes sans avoir jamais nomme leurs composants, et manipulaient des tables sans que la difference entre le schema et les lignes ait ete faite une seule fois", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Emprunt(id INTEGER PRIMARY KEY, lecteur TEXT, cote TEXT, jours INTEGER)")
+% conn.executemany("INSERT INTO Emprunt VALUES (?,?,?,?)", [
+%     (1, "Amine", "843.9 DIO", 12),
+%     (2, "Lina", "004 KAN", 30),
+%     (3, "Omar", "843.9 DIO", 5),
+%     (4, "Sara", "510 BEN", 21),
+% ])
+% conn.commit()
+% colonnes = [c[1] for c in conn.execute("PRAGMA table_info(Emprunt)")]
+% assert colonnes == ["id", "lecteur", "cote", "jours"]
+% types = [c[2] for c in conn.execute("PRAGMA table_info(Emprunt)")]
+% assert types == ["INTEGER", "TEXT", "TEXT", "INTEGER"]
+% cles = [c[1] for c in conn.execute("PRAGMA table_info(Emprunt)") if c[5]]
+% assert cles == ["id"]
+% assert conn.execute("SELECT COUNT(*) FROM Emprunt").fetchone()[0] == 4
+% requete = "SELECT lecteur, jours FROM Emprunt WHERE jours > 10 ORDER BY jours DESC"
+% resultat = conn.execute(requete).fetchall()
+% assert resultat == [("Lina", 30), ("Sara", 21), ("Amine", 12)]
+% assert len(resultat) == 3
+% # La requete ne touche ni au schema ni aux lignes.
+% assert [c[1] for c in conn.execute("PRAGMA table_info(Emprunt)")] == colonnes
+% assert conn.execute("SELECT COUNT(*) FROM Emprunt").fetchone()[0] == 4
+% conn.execute("ALTER TABLE Emprunt ADD COLUMN rendu INTEGER")
+% assert [c[1] for c in conn.execute("PRAGMA table_info(Emprunt)")] == colonnes + ["rendu"]
+% assert conn.execute("SELECT COUNT(*) FROM Emprunt").fetchone()[0] == 4
+% conn.execute("DELETE FROM Emprunt WHERE jours < 10")
+% assert conn.execute("SELECT COUNT(*) FROM Emprunt").fetchone()[0] == 3
+% assert len([c[1] for c in conn.execute("PRAGMA table_info(Emprunt)")]) == 5
+% END-VERIFY
+\begin{exercice}{TNSI-BDD-EX-005}{1}{20}
+Une médiathèque suit ses prêts avec le script suivant.
+\begin{sql}
+CREATE TABLE Emprunt(id INTEGER PRIMARY KEY, lecteur TEXT, cote TEXT, jours INTEGER);
+INSERT INTO Emprunt VALUES (1, 'Amine', '843.9 DIO', 12);
+INSERT INTO Emprunt VALUES (2, 'Lina', '004 KAN', 30);
+INSERT INTO Emprunt VALUES (3, 'Omar', '843.9 DIO', 5);
+INSERT INTO Emprunt VALUES (4, 'Sara', '510 BEN', 21);
+\end{sql}
+\begin{enumerate}
+  \item Séparer les instructions de ce script en deux groupes : celles qui
+    définissent la \textbf{structure} de la base, et celles qui y placent du
+    \textbf{contenu}.
+  \item Décrire la structure : citer les attributs, le domaine de chacun, et la
+    clé primaire. Décrire ensuite le contenu : combien la table compte-t-elle de
+    lignes après le script ?
+  \item On considère la requête
+    \begin{sql}
+SELECT lecteur, jours FROM Emprunt WHERE jours > 10 ORDER BY jours DESC;
+    \end{sql}
+    Nommer chacun de ses quatre composants et dire à quoi il sert. Donner le
+    résultat exact de la requête.
+  \item Cette requête modifie-t-elle la structure ? Le contenu ? Justifier.
+  \item Classer chacune des deux instructions suivantes comme modification de
+    structure ou de contenu, et indiquer ce que devient le nombre de lignes et
+    le nombre de colonnes après chacune :
+    \begin{sql}
+ALTER TABLE Emprunt ADD COLUMN rendu INTEGER;
+DELETE FROM Emprunt WHERE jours < 10;
+    \end{sql}
+\end{enumerate}
+\end{exercice}

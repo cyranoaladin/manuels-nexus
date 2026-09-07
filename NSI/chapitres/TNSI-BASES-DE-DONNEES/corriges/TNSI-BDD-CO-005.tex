@@ -1,0 +1,86 @@
+% META: {"id": "TNSI-BDD-CO-005", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "corrige", "exercice_ref": "TNSI-BDD-EX-005", "capacites": ["T-BDD-01B", "T-BDD-03A"], "capacites_codes": ["C2", "C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Emprunt(id INTEGER PRIMARY KEY, lecteur TEXT, cote TEXT, jours INTEGER)")
+% conn.executemany("INSERT INTO Emprunt VALUES (?,?,?,?)", [
+%     (1, "Amine", "843.9 DIO", 12), (2, "Lina", "004 KAN", 30),
+%     (3, "Omar", "843.9 DIO", 5), (4, "Sara", "510 BEN", 21),
+% ])
+% conn.commit()
+% info = list(conn.execute("PRAGMA table_info(Emprunt)"))
+% assert [c[1] for c in info] == ["id", "lecteur", "cote", "jours"]
+% assert [c[2] for c in info] == ["INTEGER", "TEXT", "TEXT", "INTEGER"]
+% assert [c[1] for c in info if c[5]] == ["id"]
+% assert conn.execute("SELECT COUNT(*) FROM Emprunt").fetchone()[0] == 4
+% attendu = [("Lina", 30), ("Sara", 21), ("Amine", 12)]
+% assert conn.execute(
+%     "SELECT lecteur, jours FROM Emprunt WHERE jours > 10 ORDER BY jours DESC"
+% ).fetchall() == attendu
+% assert ("Omar", 5) not in attendu
+% conn.execute("ALTER TABLE Emprunt ADD COLUMN rendu INTEGER")
+% assert len(list(conn.execute("PRAGMA table_info(Emprunt)"))) == 5
+% assert conn.execute("SELECT COUNT(*) FROM Emprunt").fetchone()[0] == 4
+% assert conn.execute("SELECT rendu FROM Emprunt").fetchall() == [(None,)] * 4
+% conn.execute("DELETE FROM Emprunt WHERE jours < 10")
+% assert conn.execute("SELECT COUNT(*) FROM Emprunt").fetchone()[0] == 3
+% assert len(list(conn.execute("PRAGMA table_info(Emprunt)"))) == 5
+% END-VERIFY
+\begin{corrige}{TNSI-BDD-EX-005}
+\textbf{1.} L'instruction \lstinline{CREATE TABLE} définit la structure ; les
+quatre \lstinline{INSERT INTO} placent du contenu. Une seule instruction
+structure la base, quatre la remplissent — proportion qui ne fera que s'accentuer
+avec le temps, et qui explique qu'on ne récrive presque jamais un schéma une fois
+la base en service.
+
+\textbf{2.} La structure comporte quatre attributs :
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+attribut & domaine & rôle \\
+\hline
+\lstinline{id} & \lstinline{INTEGER} & clé primaire \\
+\lstinline{lecteur} & \lstinline{TEXT} & \\
+\lstinline{cote} & \lstinline{TEXT} & \\
+\lstinline{jours} & \lstinline{INTEGER} & \\
+\hline
+\end{tabular}
+\end{center}
+
+Le contenu est fait de $4$ lignes. Rien dans la structure ne dit combien il y en
+aura : c'est justement ce qui les distingue.
+
+\textbf{3.} La requête a quatre composants :
+\begin{center}
+\begin{tabular}{ll}
+\hline
+composant & rôle \\
+\hline
+\lstinline{SELECT lecteur, jours} & les attributs à afficher (la projection) \\
+\lstinline{FROM Emprunt} & la relation où les chercher \\
+\lstinline{WHERE jours > 10} & la condition de sélection des lignes \\
+\lstinline{ORDER BY jours DESC} & l'ordre d'affichage du résultat \\
+\hline
+\end{tabular}
+\end{center}
+Le résultat est
+\lstinline{('Lina', 30)}, \lstinline{('Sara', 21)}, \lstinline{('Amine', 12)} :
+trois lignes. Celle d'Omar, à $5$ jours, ne satisfait pas la condition.
+
+\textbf{4.} Ni l'une ni l'autre. \lstinline{SELECT} ne fait que \emph{lire} : la
+table conserve ses quatre colonnes et ses quatre lignes. Le tableau affiché n'est
+pas une nouvelle table stockée, c'est un résultat calculé à la demande — et c'est
+pourquoi il peut être trié différemment à chaque appel sans que la base bouge.
+
+\textbf{5.} \lstinline{ALTER TABLE ... ADD COLUMN} modifie la
+\textbf{structure} : la table passe à $5$ colonnes et garde ses $4$ lignes, la
+nouvelle colonne valant \lstinline{NULL} partout.
+\lstinline{DELETE FROM ... WHERE} modifie le \textbf{contenu} : la ligne d'Omar
+disparaît, la table tombe à $3$ lignes et conserve ses $5$ colonnes.
+
+Les deux instructions se ressemblent — un mot-clé, un nom de table, une
+précision — mais l'une touche à ce que la base \emph{peut} contenir, l'autre à ce
+qu'elle contient. Seule la première oblige à reprendre les programmes qui
+interrogent la base.
+\end{corrige}

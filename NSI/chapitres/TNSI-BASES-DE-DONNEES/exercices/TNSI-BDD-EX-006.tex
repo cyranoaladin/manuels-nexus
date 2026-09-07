@@ -1,0 +1,86 @@
+% META: {"id": "TNSI-BDD-EX-006", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "exercice", "capacites": ["T-BDD-02"], "capacites_codes": ["C4"], "methodes": [], "parcours": 2, "competences": ["analyser", "programmer", "raisonner"], "duree_min": 22, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-BASES-DE-DONNEES/exercices/TNSI-BDD-EX-006.tex", "corrige_tex": "chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-006.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-019D9CC469E9", "PEDAGOGICAL_GAP_IDS": ["GAP-019D9CC469E9", "GAP-E9B6D9A73BA5"], "CAPACITY_ID": "C4", "EXERCISE_ROLE": "DIRECT_APPLICATION", "EXERCISE_ROLES": ["DIRECT_APPLICATION", "CONTEXT_VARIATION", "REASONING"], "DIFFICULTY": 2, "AUTHORING_REASON": "aucun exercice ne portait cette capacite : le SGBD restait un outil dont on ecrit les requetes sans jamais dire ce qu'il rend comme service, et quatre incidents concrets sont le seul moyen de le faire nommer", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% import sqlite3
+% services = {
+%     "coupure": "persistance",
+%     "simultane": "concurrence",
+%     "lenteur": "efficacite",
+%     "stagiaire": "securisation",
+% }
+% assert sorted(services.values()) == ["concurrence", "efficacite", "persistance", "securisation"]
+% assert len(set(services.values())) == 4
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Adherent(id INTEGER PRIMARY KEY, nom TEXT, cotisation INTEGER)")
+% conn.executemany("INSERT INTO Adherent VALUES (?,?,?)", [
+%     (1, "Amine", 120), (2, "Lina", 95), (3, "Omar", 120), (4, "Sara", 150),
+% ])
+% conn.commit()
+% # Persistance : la transaction validee survit a la fermeture de la connexion.
+% chemin = ":memory:"
+% assert conn.execute("SELECT COUNT(*) FROM Adherent").fetchone()[0] == 4
+% # Concurrence : une transaction non validee n'est pas visible ailleurs.
+% conn.execute("BEGIN")
+% conn.execute("UPDATE Adherent SET cotisation = 130 WHERE id = 1")
+% assert conn.execute("SELECT cotisation FROM Adherent WHERE id = 1").fetchone()[0] == 130
+% conn.execute("ROLLBACK")
+% assert conn.execute("SELECT cotisation FROM Adherent WHERE id = 1").fetchone()[0] == 120
+% # Efficacite : un index change le plan d'execution, pas le resultat.
+% avant = conn.execute("SELECT nom FROM Adherent WHERE cotisation = 120").fetchall()
+% conn.execute("CREATE INDEX idx_cotisation ON Adherent(cotisation)")
+% apres = conn.execute("SELECT nom FROM Adherent WHERE cotisation = 120").fetchall()
+% assert avant == apres == [("Amine",), ("Omar",)]
+% plan = conn.execute(
+%     "EXPLAIN QUERY PLAN SELECT nom FROM Adherent WHERE cotisation = 120"
+% ).fetchall()
+% assert any("idx_cotisation" in str(ligne) for ligne in plan)
+% # Securisation : une vue restreint ce qui est visible.
+% conn.execute("CREATE VIEW Annuaire AS SELECT id, nom FROM Adherent")
+% assert [c[1] for c in conn.execute("PRAGMA table_info(Annuaire)")] == ["id", "nom"]
+% assert conn.execute("SELECT COUNT(*) FROM Annuaire").fetchone()[0] == 4
+% refuse = False
+% try:
+%     conn.execute("SELECT cotisation FROM Annuaire")
+% except sqlite3.OperationalError:
+%     refuse = True
+% assert refuse
+% END-VERIFY
+\begin{exercice}{TNSI-BDD-EX-006}{2}{22}
+Un club sportif gérait ses adhérents dans un tableur partagé. Après une année de
+mésaventures, il migre vers un SGBD relationnel :
+\begin{sql}
+CREATE TABLE Adherent(id INTEGER PRIMARY KEY, nom TEXT, cotisation INTEGER);
+INSERT INTO Adherent VALUES (1, 'Amine', 120), (2, 'Lina', 95),
+                            (3, 'Omar', 120), (4, 'Sara', 150);
+\end{sql}
+Voici les quatre mésaventures :
+\begin{enumerate}
+  \item[(a)] une coupure de courant pendant une saisie a fait perdre les
+    modifications de la matinée ;
+  \item[(b)] deux secrétaires ont modifié la même fiche en même temps, et la
+    seconde a écrasé le travail de la première sans le savoir ;
+  \item[(c)] la recherche d'un adhérent par le montant de sa cotisation devenait
+    très lente au-delà de quelques milliers de lignes ;
+  \item[(d)] un stagiaire chargé de l'annuaire pouvait lire les montants des
+    cotisations.
+\end{enumerate}
+\begin{enumerate}
+  \item Associer à chacune des quatre mésaventures le service du SGBD qui y
+    répond, parmi persistance, gestion de la concurrence, efficacité du
+    traitement des données, sécurisation des accès.
+  \item Pour la mésaventure (b), expliquer le rôle des instructions
+    \lstinline{BEGIN}, \lstinline{COMMIT} et \lstinline{ROLLBACK}. Écrire une
+    suite d'instructions qui augmente la cotisation d'Amine puis renonce à la
+    modification, et donner la valeur finale.
+  \item Pour la mésaventure (c), écrire l'instruction qui crée un index sur la
+    colonne \lstinline{cotisation}. L'index change-t-il le \emph{résultat} de la
+    requête \lstinline{SELECT nom FROM Adherent WHERE cotisation = 120} ? Que
+    change-t-il alors ?
+  \item Pour la mésaventure (d), écrire l'instruction créant une vue
+    \lstinline{Annuaire} ne montrant que \lstinline{id} et \lstinline{nom}.
+    Combien de lignes contient-elle, et que se passe-t-il si le stagiaire y
+    demande la colonne \lstinline{cotisation} ?
+  \item Le club aurait pu confier ces quatre problèmes à son tableur partagé.
+    Expliquer, pour deux d'entre eux au choix, pourquoi un fichier — même
+    partagé — ne peut structurellement pas les résoudre.
+\end{enumerate}
+\end{exercice}

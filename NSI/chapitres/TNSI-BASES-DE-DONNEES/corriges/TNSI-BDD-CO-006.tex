@@ -1,0 +1,104 @@
+% META: {"id": "TNSI-BDD-CO-006", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "corrige", "exercice_ref": "TNSI-BDD-EX-006", "capacites": ["T-BDD-02"], "capacites_codes": ["C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Adherent(id INTEGER PRIMARY KEY, nom TEXT, cotisation INTEGER)")
+% conn.executemany("INSERT INTO Adherent VALUES (?,?,?)", [
+%     (1, "Amine", 120), (2, "Lina", 95), (3, "Omar", 120), (4, "Sara", 150)])
+% conn.commit()
+% conn.execute("BEGIN")
+% conn.execute("UPDATE Adherent SET cotisation = 130 WHERE id = 1")
+% assert conn.execute("SELECT cotisation FROM Adherent WHERE id = 1").fetchone()[0] == 130
+% conn.execute("ROLLBACK")
+% assert conn.execute("SELECT cotisation FROM Adherent WHERE id = 1").fetchone()[0] == 120
+% conn.execute("BEGIN")
+% conn.execute("UPDATE Adherent SET cotisation = 130 WHERE id = 1")
+% conn.execute("COMMIT")
+% assert conn.execute("SELECT cotisation FROM Adherent WHERE id = 1").fetchone()[0] == 130
+% conn.execute("UPDATE Adherent SET cotisation = 120 WHERE id = 1")
+% conn.commit()
+% avant = conn.execute("SELECT nom FROM Adherent WHERE cotisation = 120").fetchall()
+% conn.execute("CREATE INDEX idx_cotisation ON Adherent(cotisation)")
+% assert conn.execute("SELECT nom FROM Adherent WHERE cotisation = 120").fetchall() == avant
+% assert avant == [("Amine",), ("Omar",)]
+% plan = str(conn.execute(
+%     "EXPLAIN QUERY PLAN SELECT nom FROM Adherent WHERE cotisation = 120").fetchall())
+% assert "idx_cotisation" in plan
+% conn.execute("CREATE VIEW Annuaire AS SELECT id, nom FROM Adherent")
+% assert [c[1] for c in conn.execute("PRAGMA table_info(Annuaire)")] == ["id", "nom"]
+% assert conn.execute("SELECT COUNT(*) FROM Annuaire").fetchone()[0] == 4
+% refuse = False
+% try:
+%     conn.execute("SELECT cotisation FROM Annuaire")
+% except sqlite3.OperationalError:
+%     refuse = True
+% assert refuse
+% END-VERIFY
+\begin{corrige}{TNSI-BDD-EX-006}
+\textbf{1.} L'association se fait sans ambiguïté :
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+mésaventure & service du SGBD \\
+\hline
+(a) coupure de courant & persistance \\
+(b) modifications simultanées & gestion de la concurrence \\
+(c) recherche lente & efficacité du traitement des données \\
+(d) stagiaire voyant les cotisations & sécurisation des accès \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{2.} \lstinline{BEGIN} ouvre une \emph{transaction} : les modifications
+qui suivent sont provisoires et invisibles des autres utilisateurs.
+\lstinline{COMMIT} les valide toutes d'un coup ; \lstinline{ROLLBACK} les annule
+toutes. Le SGBD garantit qu'une transaction est indivisible : ou bien tout est
+appliqué, ou bien rien.
+\begin{sql}
+BEGIN;
+UPDATE Adherent SET cotisation = 130 WHERE id = 1;
+ROLLBACK;
+\end{sql}
+Après le \lstinline{ROLLBACK}, la cotisation d'Amine vaut de nouveau $120$. Entre
+le \lstinline{BEGIN} et le \lstinline{ROLLBACK}, la connexion qui a fait la
+modification lit bien $130$ — mais elle est seule à la voir. C'est exactement ce
+qui manquait au tableur : la seconde secrétaire y écrasait un travail dont rien
+ne lui signalait l'existence.
+
+\textbf{3.} \lstinline{CREATE INDEX idx_cotisation ON Adherent(cotisation);}
+
+L'index ne change \textbf{pas} le résultat : la requête renvoie
+\lstinline{Amine} et \lstinline{Omar} avant comme après. Il change le
+\emph{chemin} suivi pour l'obtenir. Sans index, le SGBD parcourt toute la table ;
+avec index, il consulte une structure ordonnée et va directement aux lignes
+concernées. On peut le vérifier avec \lstinline{EXPLAIN QUERY PLAN}, qui
+mentionne alors \lstinline{idx_cotisation}.
+
+C'est un point de méthode important : optimiser, ici, ne consiste pas à réécrire
+la requête, mais à donner au SGBD un moyen supplémentaire de la satisfaire. Le
+programme qui interroge la base n'a pas une ligne à changer.
+
+\textbf{4.} \lstinline{CREATE VIEW Annuaire AS SELECT id, nom FROM Adherent;}
+
+La vue contient les $4$ lignes de la table — elle ne filtre pas les lignes, mais
+les colonnes. Si le stagiaire demande \lstinline{SELECT cotisation FROM Annuaire},
+le SGBD refuse : la colonne n'existe pas dans la vue. Il ne s'agit donc pas d'un
+affichage masqué, mais d'une donnée hors de portée.
+
+\textbf{5.} Deux exemples suffisent.
+
+Pour (a), un fichier est écrit par le système d'exploitation : si la machine
+s'arrête au milieu d'une écriture, le fichier reste dans un état intermédiaire, à
+moitié ancien et à moitié nouveau, et rien ne permet de savoir lequel. Un SGBD
+tient un \emph{journal} des transactions avant de toucher aux données : au
+redémarrage, il rejoue ce qui était validé et annule le reste. Cette garantie ne
+peut pas être ajoutée par-dessus un fichier ordinaire, elle doit être présente au
+moment de l'écriture.
+
+Pour (d), un fichier partagé se donne en entier ou pas du tout : les droits du
+système portent sur le fichier, pas sur une colonne. Restreindre la vue du
+stagiaire supposerait de maintenir une seconde copie sans les cotisations — donc
+deux vérités à garder synchronisées, ce qui est précisément le problème que la
+base était censée résoudre.
+\end{corrige}
