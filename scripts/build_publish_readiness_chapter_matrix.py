@@ -83,6 +83,7 @@ def _capacity_truth(
     *,
     alignment: dict[str, Any] | None = None,
     role_applicability: dict[str, Any] | None = None,
+    identity_validation: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Vérité capacité d'un chapitre, dérivée de producteurs cohérents.
 
@@ -209,10 +210,34 @@ def _capacity_truth(
         for cell in semantically_unvalidated_ids
         if dispositions.get(cell) == "DEFAUT_ETABLI"
     }
+    # La validation d'identité declaree recalcule un condense semantique
+    # depuis le corps de chaque objet creditant. Une cellule dont la
+    # DECLARATION est prouvee saine n'est plus « inclassable par la machine » :
+    # la machine vient de la classer. Elle reste due a la revue humaine, qui
+    # porte sur l'ADEQUATION pedagogique -- ne pas confondre absence de revue
+    # et absence d'approbation. Une declaration refutee, elle, est un defaut.
+    identity_verdicts = {
+        f"{row['canonical_capacity_uid']}::{row['role']}": str(row["VERDICT"])
+        for row in (identity_validation or {}).get("cells", [])
+        if row.get("chapter") == chapter
+    }
+    identity_proven = {
+        cell for cell in semantically_unvalidated_ids
+        if identity_verdicts.get(cell) in (
+            "PROVEN_EXACT_SEMANTIC_IDENTITY", "SEMANTIC_DELTA"
+        )
+    }
+    identity_refuted = {
+        cell for cell in semantically_unvalidated_ids
+        if identity_verdicts.get(cell) == "INVALID_IDENTITY_DECLARATION"
+    }
+    routed_defect = routed_defect | identity_refuted
     unclassified_ids = sorted(
         cell
         for cell in semantically_unvalidated_ids
-        if cell not in routed_human and cell not in routed_defect
+        if cell not in routed_human
+        and cell not in routed_defect
+        and cell not in identity_proven
     )
 
     marker = f"/chapitres/{chapter}/"
@@ -259,6 +284,8 @@ def _capacity_truth(
                 semantically_unvalidated_ids
             ),
             "routed_to_human": len(routed_human),
+            "declared_identity_proven": len(identity_proven),
+            "declared_identity_refuted": len(identity_refuted),
             "defects": len(routed_defect),
             "defect_ids": sorted(routed_defect),
             "machine_unclassified": len(unclassified_ids),
@@ -690,7 +717,14 @@ def _oracle(directory: Path, dispositions: dict[str, Any] | None = None) -> dict
     if directory is None:
         return {"pass": None, "manual_review": None, "fail": None, "status": "NO_SOURCE"}
     verdicts: Counter = Counter()
-    for receipt in sorted((directory / "validations").glob("*.sympy.json")):
+    # Les deux corpus ne nomment pas leur reçu de la même façon : le gate
+    # SymPy des maths écrit `<objet>.sympy.json`, le gate d'exécution NSI
+    # écrit `<objet>.execution.json`. N'en lire qu'un déclarait dix-sept
+    # chapitres NSI « sans aucun reçu » alors qu'ils en portent un par objet.
+    recus = sorted((directory / "validations").glob("*.sympy.json")) + sorted(
+        (directory / "validations").glob("*.execution.json")
+    )
+    for receipt in recus:
         try:
             verdicts[json.loads(receipt.read_text(encoding="utf-8"))["verdict"]] += 1
         except (json.JSONDecodeError, KeyError, OSError):
@@ -1204,6 +1238,16 @@ def build_matrix(
             encoding="utf-8"
         )
     )
+    # La validation d'identité déclarée : elle recalcule un condensé sémantique
+    # depuis le corps des objets créditants et dit, cellule par cellule, si la
+    # déclaration tient. Elle est lue dans son artefact pour la même raison que
+    # le registre d'alignement — elle dérive de la couverture, et la recalculer
+    # ici créerait un cycle.
+    identity_validation = json.loads(
+        (ROOT / "audit/DECLARED_IDENTITY_VALIDATION.json").read_text(
+            encoding="utf-8"
+        )
+    )
     for name, current, path in (
         ("NSI_CROSS_DISCIPLINE_CONTENT_LEDGER", cross_discipline, cross_path),
         ("COURSE_BODY_OWNERSHIP_MAP", course_ownership, course_path),
@@ -1227,6 +1271,7 @@ def build_matrix(
         "ex_co_graph": _payload_digest(ex_co_graph),
         "chapter_richness": _payload_digest(richness),
         "semantic_alignment_ledger": _payload_digest(alignment_ledger),
+        "declared_identity_validation": _payload_digest(identity_validation),
         "pedagogical_role_applicability": _payload_digest(role_applicability),
         "human_review_queue": _payload_digest(human_queue),
         "official_programme_sources": _set_digest(
@@ -1301,7 +1346,8 @@ def build_matrix(
             }
             capacity_truth = _capacity_truth(
                 chapter, coverage, clone_ledger, alignment=alignment_ledger,
-                role_applicability=role_applicability
+                role_applicability=role_applicability,
+                identity_validation=identity_validation,
             )
             row.update(capacity_truth)
             row["cross_discipline_content"] = _cross_discipline_truth(

@@ -47,8 +47,17 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 OUTPUT = ROOT / "audit/1SPE_MANUAL_REVIEW_DISPOSITION_LEDGER.json"
-CHAPTERS = ROOT / "Mathematiques" / "manuel-maths" / "chapitres"
-SCOPE_PREFIX = "1SPE-"
+#: Les deux corpus. Les règles de disposition ci-dessous ne nomment aucun
+#: chapitre, aucun objet, aucune valeur attendue : elles lisent le corps et
+#: décident. Les restreindre à `1SPE-` laissait donc quarante-deux chapitres
+#: dont les reçus `manual_review` n'étaient routés par personne — leur axe
+#: `oracle` restait rouge sans que rien ne dise ce qu'il fallait faire.
+CHAPTER_ROOTS = (
+    ROOT / "Mathematiques" / "manuel-maths" / "chapitres",
+    ROOT / "NSI" / "chapitres",
+)
+CHAPTERS = CHAPTER_ROOTS[0]
+SCOPE_PREFIX = ""
 
 MATH = re.compile(r"\$[^$]+\$|\\\[.*?\\\]", re.S)
 RELATION = re.compile(r"(=|\\leq|\\geq|\\neq|\\approx|<|>)")
@@ -79,15 +88,25 @@ def _meta(text: str) -> dict[str, Any]:
 def build_ledger() -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
     unclassified: list[str] = []
-    for chapter in sorted(p for p in CHAPTERS.iterdir() if p.name.startswith(SCOPE_PREFIX)):
+    chapitres = sorted(
+        (chemin for racine in CHAPTER_ROOTS if racine.is_dir()
+         for chemin in racine.iterdir()
+         if chemin.is_dir() and chemin.name.startswith(SCOPE_PREFIX)),
+        key=lambda chemin: chemin.name,
+    )
+    for chapter in chapitres:
         validations = chapter / "validations"
         if not validations.is_dir():
             continue
-        for receipt_path in sorted(validations.glob("*.sympy.json")):
+        recus = sorted(validations.glob("*.sympy.json")) + sorted(
+            validations.glob("*.execution.json")
+        )
+        for receipt_path in recus:
             receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
             if receipt.get("verdict") != "manual_review":
                 continue
-            stem = receipt_path.name[: -len(".sympy.json")]
+            suffixe = ".sympy.json" if receipt_path.name.endswith(".sympy.json") else ".execution.json"
+            stem = receipt_path.name[: -len(suffixe)]
             source = next((p for p in chapter.rglob(stem + ".tex")), None)
             if source is None:
                 # Un recu qui survit a son objet : c'est un defaut de preuve,

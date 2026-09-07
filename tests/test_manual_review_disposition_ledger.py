@@ -70,10 +70,32 @@ def test_a_claimless_object_is_cleared_and_a_claiming_one_is_not(producer) -> No
 
 
 def test_the_ledger_names_no_object_identifier_in_its_rules(producer) -> None:
-    """Aucune liste blanche : le code ne cite aucun identifiant d'objet."""
+    """Aucune liste blanche : les règles ne citent aucun identifiant d'objet.
+
+    Le commentaire de portée peut nommer un manuel — il explique pourquoi le
+    registre couvrait autrefois `1SPE-` seul. Ce qui est interdit, c'est
+    qu'une RÈGLE en dépende : on inspecte donc le code exécutable, commentaires
+    et docstrings retirés.
+    """
+    import io
+    import tokenize
+
     source = Path(producer.__file__).read_text(encoding="utf-8")
     rules = source.split("def build_ledger", 1)[0]
-    assert "1SPE-" not in rules.replace('SCOPE_PREFIX = "1SPE-"', "")
+    code: list[str] = []
+    precedent = None
+    for jeton in tokenize.generate_tokens(io.StringIO(rules).readline):
+        if jeton.type == tokenize.COMMENT:
+            continue
+        if jeton.type == tokenize.STRING and precedent in (
+            None, tokenize.NEWLINE, tokenize.NL, tokenize.INDENT, tokenize.DEDENT,
+        ):
+            continue  # docstring
+        code.append(jeton.string)
+        precedent = jeton.type
+    executable = " ".join(code)
+    assert "1SPE-" not in executable
+    assert producer.SCOPE_PREFIX == ""
 
 
 def test_a_human_queue_smaller_than_the_raw_review_set(committed) -> None:
