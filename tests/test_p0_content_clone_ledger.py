@@ -112,6 +112,8 @@ def test_the_body_definition_keeps_the_pedagogical_content(ledger: dict) -> None
     definition = ledger["body_definition"]
     assert definition["excluded"] == [
         "% META: identity line",
+        "declared object identity inside the body (id, exercice_ref, "
+        "evaluation_ref)",
         "trailing and edge whitespace",
     ]
     for retained in ("enonce", "code", "solution", "diagnostic", "remediation"):
@@ -797,3 +799,80 @@ def test_the_founding_case_and_hostless_sheets_stay_untouched(ledger: dict) -> N
             assert rule != "SATELLITE_WITH_DISTINCT_HOST", group["clone_group_id"]
         if all(not row["host_refs"] for row in members):
             assert rule != "SATELLITE_WITH_DISTINCT_HOST", group["clone_group_id"]
+
+
+# ---------------------------------------------------------------------------
+# L'identite ne se cache pas dans le corps
+#
+# La definition du corps retirait la ligne `% META:` et rien d'autre, en
+# affirmant que « deux objets dont seul le META differe sont donc detectes ».
+# Le corps portait pourtant une SECONDE ligne d'identite : l'argument de
+# `\begin{exercice}{<id>}`. Deux copies rigoureusement identiques logees dans
+# deux chapitres differents portaient donc deux digests differents, et aucun
+# groupe ne se formait. Le detecteur ne mesurait pas ce qu'il declarait
+# mesurer.
+# ---------------------------------------------------------------------------
+
+
+def _objet(identifiant: str, enonce: str, *, reference: str | None = None) -> str:
+    meta = {"id": identifiant, "type_objet": "exercice"}
+    if reference:
+        meta["exercice_ref"] = reference
+    return (
+        "% META: " + json.dumps(meta, ensure_ascii=False) + "\n"
+        "\\begin{exercice}{" + identifiant + "}{1}{10}\n"
+        + enonce
+        + "\n\\end{exercice}\n"
+    )
+
+
+def test_the_identity_argument_never_hides_a_clone(producer) -> None:
+    """Deux copies exactes ne se distinguent plus par leur seul identifiant."""
+
+    enonce = "Étudier les variations de $f(x) = x^3 - 3x^2 + 2$ sur $\\mathbb{R}$."
+    premier = producer.pedagogical_body(_objet("TEXP-ARI-EX-010", enonce))
+    second = producer.pedagogical_body(_objet("TCOMPL-AIR-EX-010", enonce))
+
+    assert premier == second, (
+        "le corps garde encore une identite : deux copies exactes restent "
+        "invisibles au detecteur"
+    )
+
+
+def test_a_genuine_difference_survives_identity_neutralisation(producer) -> None:
+    """La neutralisation ne fabrique pas de faux clones."""
+
+    a = producer.pedagogical_body(_objet("A-EX-001", "Calculer $2+2$."))
+    b = producer.pedagogical_body(_objet("B-EX-001", "Calculer $3+3$."))
+    assert a != b
+
+
+def test_a_reference_to_another_object_stays_in_the_body(producer) -> None:
+    """Seule l'identite de l'objet est retiree, pas ce qu'il cite.
+
+    Un enonce qui renvoie a un autre exercice parle de contenu : deux objets
+    qui renvoient a des exercices differents ne sont pas des copies.
+    """
+
+    a = producer.pedagogical_body(
+        _objet("A-EX-001", "Reprendre la question 2 de \\ref{1SPE-EXPO-EX-003}.")
+    )
+    b = producer.pedagogical_body(
+        _objet("B-EX-001", "Reprendre la question 2 de \\ref{1SPE-EXPO-EX-007}.")
+    )
+    assert a != b
+
+
+def test_a_corrective_sheet_is_compared_without_the_exercise_it_serves(
+    producer,
+) -> None:
+    """Le corrige porte l'identite de son exercice : elle n'est pas du contenu."""
+
+    solution = "\\begin{corrige}{REF}\nOn derive : $f'(x) = 3x^2 - 6x$.\n\\end{corrige}"
+    a = producer.pedagogical_body(
+        _objet("A-CO-010", solution.replace("REF", "A-EX-010"), reference="A-EX-010")
+    )
+    b = producer.pedagogical_body(
+        _objet("B-CO-010", solution.replace("REF", "B-EX-010"), reference="B-EX-010")
+    )
+    assert a == b

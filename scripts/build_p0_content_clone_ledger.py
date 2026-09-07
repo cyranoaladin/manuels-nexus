@@ -67,10 +67,50 @@ def manual_of(chapter: str) -> str:
     return "UNKNOWN"
 
 
+#: Champs de META qui portent une IDENTITE et non du contenu : celle de
+#: l'objet lui-meme, et celle de l'objet qu'il sert. Un corrige nomme son
+#: exercice ; une correction d'evaluation nomme son evaluation. Les
+#: references au programme, elles, sont du contenu et restent.
+IDENTITY_FIELDS = ("id", "exercice_ref", "evaluation_ref")
+
+#: Ce que devient une identite une fois neutralisee dans le corps.
+IDENTITY_PLACEHOLDER = "{OBJECT_IDENTITY}"
+
+
+def identity_tokens(meta: dict[str, Any]) -> list[str]:
+    """Les identifiants portes par l'objet, du plus long au plus court.
+
+    L'ordre importe : `X-EX-001-CDP` doit etre neutralise avant `X-EX-001`,
+    sinon le suffixe survivrait seul et distinguerait deux copies.
+    """
+
+    tokens = set()
+    for field in IDENTITY_FIELDS:
+        value = meta.get(field)
+        if isinstance(value, str) and value.strip():
+            tokens.add(value.strip())
+    return sorted(tokens, key=len, reverse=True)
+
+
 def pedagogical_body(text: str) -> str:
-    return "\n".join(
+    """Le corps pedagogique, identite retiree.
+
+    L'identite ne tient pas dans la seule ligne `% META:`. Le corps la porte
+    une seconde fois, dans l'argument de `\\begin{exercice}{<id>}` ou de
+    `\\begin{corrige}{<ref>}`. Tant qu'elle y restait, deux copies
+    rigoureusement identiques logees dans deux chapitres differents portaient
+    deux digests differents : le detecteur ne pouvait structurellement pas
+    voir un clone inter-chapitre, alors que c'est exactement ce qu'il declare
+    mesurer. On neutralise donc les identifiants declares par l'objet -- les
+    siens, jamais ceux qu'il cite, qui sont du contenu.
+    """
+
+    body = "\n".join(
         line.rstrip() for line in text.splitlines() if not META_LINE.match(line)
-    ).strip()
+    )
+    for token in identity_tokens(read_meta(text)):
+        body = body.replace(token, IDENTITY_PLACEHOLDER)
+    return body.strip()
 
 
 def payload_only(body: str) -> str:
@@ -531,7 +571,12 @@ def build_ledger() -> dict[str, Any]:
         "finding": "P0_PEDAGOGICAL_CONTENT_CLONING_AND_CAPACITY_MISREPRESENTATION",
         "publication_blocker": True,
         "body_definition": {
-            "excluded": ["% META: identity line", "trailing and edge whitespace"],
+            "excluded": [
+                "% META: identity line",
+                "declared object identity inside the body (id, exercice_ref, "
+                "evaluation_ref)",
+                "trailing and edge whitespace",
+            ],
             "retained": [
                 "enonce",
                 "mathematiques",

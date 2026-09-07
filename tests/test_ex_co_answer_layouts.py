@@ -110,7 +110,14 @@ def test_remediation_objects_are_not_subject_to_the_cardinality_rule() -> None:
     """Une remédiation n'exige pas de corrigé : elle n'est pas un exercice orphelin."""
     graph = json.loads((ROOT / "audit/EX_CO_GRAPH.json").read_text(encoding="utf-8"))
     assert graph["exercise_cardinality_counts"].get("ORPHAN_EX", 0) == 0
-    assert set(graph["exercise_cardinality_counts"]) == {"MATCH"}
+    # Un exercice n'est classe hors MATCH que pour une raison nommee. La
+    # seule admise ici : son corrige existe et le nomme, mais le credit
+    # pedagogique de la paire n'est pas etabli (P0 de clonage). Toute autre
+    # classe -- orpheline, cardinalite multiple, inconnue -- fait echouer.
+    assert set(graph["exercise_cardinality_counts"]) <= {
+        "MATCH",
+        "CORRECTION_ON_INDETERMINATE_CREDIT",
+    }, graph["exercise_cardinality_counts"]
 
 
 def test_an_unrecognised_layout_is_no_longer_tolerated_by_the_chapter_matrix() -> None:

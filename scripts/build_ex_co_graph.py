@@ -171,6 +171,11 @@ def build_graph(
 
     relations: list[dict[str, Any]] = []
     linked: dict[str, list[str]] = collections.defaultdict(list)
+    # Ce que chaque exercice s'est vu NOMMER, quel que soit le verdict. Sans
+    # cette trace, un exercice dont le corrige existe mais dont le credit est
+    # indetermine tombait dans ORPHAN_EX -- « il n'a pas de corrige » --, ce
+    # qui est faux : il en a un, c'est son credit qui n'est pas etabli.
+    named: dict[str, list[list[str]]] = collections.defaultdict(list)
     for correction in sorted(corrections, key=lambda row: row["path"]):
         meta = correction["meta"]
         references = sorted(
@@ -224,8 +229,10 @@ def build_graph(
                 classes.append("MISMATCHED_CAPACITY")
             if correction["is_clone_candidate"] or exercise["is_clone_candidate"]:
                 classes.append("CLONE")
-        if exercise is not None and not classes:
-            linked[exercise["id"]].append(correction["id"])
+        if exercise is not None:
+            named[exercise["id"]].append(sorted(classes))
+            if not classes:
+                linked[exercise["id"]].append(correction["id"])
         structural_status = "FAIL" if classes else "MATCH"
         if not classes:
             # Identity, cardinality and scope do not prove that the correction
@@ -309,13 +316,18 @@ def build_graph(
         if exercise.get("answerable_role") != "exercices":
             continue
         correction_ids = sorted(linked.get(exercise_id, []))
-        classification = (
-            "ORPHAN_EX"
-            if not correction_ids
-            else "MATCH"
-            if len(correction_ids) == 1
-            else "MISMATCHED_CONTENT"
-        )
+        if correction_ids:
+            classification = (
+                "MATCH" if len(correction_ids) == 1 else "MISMATCHED_CONTENT"
+            )
+        elif any(classes == ["CLONE"] for classes in named.get(exercise_id, [])):
+            # Un corrige le nomme, et ne lui est refuse QUE parce que le
+            # credit pedagogique de la paire est indetermine. Le compter comme
+            # orphelin reviendrait a declarer absent un objet present, et a
+            # gonfler la cardinalite d'un defaut qui n'est pas le sien.
+            classification = "CORRECTION_ON_INDETERMINATE_CREDIT"
+        else:
+            classification = "ORPHAN_EX"
         cardinality.append(
             {
                 "exercise_id": exercise_id,

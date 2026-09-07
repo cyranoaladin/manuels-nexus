@@ -78,5 +78,23 @@ def test_an_unknown_object_type_is_not_indexed(tmp_path: Path) -> None:
 
 
 def test_real_corrections_are_still_linked(graph) -> None:
-    established = graph["relation_counts"].get("ANSWER_COVERAGE_ESTABLISHED", 0)
-    assert established >= 1200, "la reclassification ne doit pas casser les liens réels"
+    """Aucun lien reel ne se perd -- sauf pour un defaut nomme.
+
+    Le seuil brut « au moins 1200 liens etablis » datait d'une mesure ou le
+    clonage inter-chapitre etait invisible : l'identite de l'objet vivait
+    dans le corps compare, donc deux copies exactes ne se rencontraient
+    jamais. La mesure corrigee retire 504 paires du lien etabli -- non parce
+    que le corrige a disparu, mais parce que le credit pedagogique de la
+    paire n'est pas etabli. Abaisser le seuil aurait masque cela ; on
+    verifie donc la conservation : rien ne se perd ailleurs que dans CLONE.
+    """
+
+    counts = graph["relation_counts"]
+    established = counts.get("ANSWER_COVERAGE_ESTABLISHED", 0)
+    indeterminate = counts.get("CLONE", 0)
+    assert established + indeterminate >= 1200, (
+        "la reclassification ne doit pas casser les liens réels : "
+        f"{established} etablis + {indeterminate} a credit indetermine"
+    )
+    cardinality = graph["exercise_cardinality_counts"]
+    assert cardinality.get("ORPHAN_EX", 0) == 0
