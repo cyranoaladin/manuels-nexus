@@ -1,19 +1,42 @@
-% META: {"id": "TSPE-GEOESPACE-EV-B", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C7", "C8", "C11", "C12", "C13", "C15"], "competences": ["calculer", "raisonner", "communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TSPE-GEOESPACE-EV-B", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3", "C4", "C5", "C6", "C9", "C10", "C14", "C16"], "competences": ["representer", "calculer", "raisonner", "communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
-% from sympy import Matrix, symbols, solve, Eq, sqrt, simplify
+% from sympy import Matrix, Rational, simplify, sqrt, solve, symbols
+% A = Matrix([0, 0, 0]); B = Matrix([1, 0, 0]); C = Matrix([1, 1, 0]); D = Matrix([0, 1, 0])
+% E = Matrix([0, 0, 1]); F = Matrix([1, 0, 1]); G = Matrix([1, 1, 1]); H = Matrix([0, 1, 1])
+% AB, AD, AE = B - A, D - A, E - A
+% # (AB, AD, AE) est une base : les trois vecteurs ne sont pas coplanaires.
+% assert Matrix.hstack(AB, AD, AE).det() == 1 != 0
+% # Coordonnees et decompositions dans cette base.
+% assert G - A == AB + AD + AE
+% assert F - A == AB + AE
+% assert H - B == -AB + AD + AE
+% # Position relative de (AG) et du plan (BDE) : x + y + z = 1, normal (1,1,1).
 % t = symbols('t')
-% A=Matrix([2,1,0]); u=Matrix([1,-2,3])
-% assert A+2*u == Matrix([4,-3,6])
-% assert A+2*u != Matrix([4,-3,5])
-% P=Matrix([1,2,-1]); n=Matrix([3,-1,2])
-% assert -(n.dot(P)) == 1 and n.dot(P)+1 == 0
-% a=Matrix([0,1,1]); b=Matrix([2,0,3]); c=Matrix([1,3,0])
-% assert (b-a).dot(c-a) == -2
-% n2=Matrix([2,-1,2]); O=Matrix([0,0,0])
-% assert simplify(abs(n2.dot(O)-9)/n2.norm() - 3) == 0
-% n3=Matrix([1,1,1]); u3=Matrix([1,-1,0]); Q=Matrix([0,0,1])
-% assert n3.dot(u3) == 0 and n3.dot(Q)-3 != 0
-% assert solve(Eq(n3.dot(Q+t*u3)-3, 0), t) == []
+% normale = Matrix([1, 1, 1])
+% assert normale.dot(B) == 1 and normale.dot(D) == 1 and normale.dot(E) == 1
+% assert simplify(normale.cross(G - A).norm()) == 0        # (AG) est normale au plan
+% intersection = solve(normale.dot(A + t * (G - A)) - 1, t)
+% assert intersection == [Rational(1, 3)]
+% # Configuration : A, C, F, H ne sont pas coplanaires ; (AC) et (EG) le sont.
+% assert Matrix.hstack(C - A, F - A, H - A).det() == -2 != 0
+% assert G - E == C - A
+% # Equation cartesienne demontree, projete orthogonal de A sur (BDE).
+% projete = A + Rational(1, 3) * normale
+% assert projete == Matrix([Rational(1, 3)] * 3)
+% assert normale.dot(projete) - 1 == 0
+% assert simplify((projete - A).cross(normale).norm()) == 0
+% # Longueurs, aire, volume.
+% AC, AF, AH = C - A, F - A, H - A
+% aire = sqrt((AC.norm() ** 2) * (AF.norm() ** 2) - AC.dot(AF) ** 2) / 2
+% assert simplify(aire - sqrt(3) / 2) == 0
+% volume = abs(Matrix.hstack(AC, AF, AH).det()) / 6
+% assert volume == Rational(1, 3)
+% # Lieu des points M tels que vec(MA) . vec(MG) = 0 : sphere de diametre [AG].
+% assert (A - B).dot(G - B) == 0                           # B appartient au lieu
+% assert (A - D).dot(G - D) == 0                           # D aussi
+% centre = Rational(1, 2) * (A + G)
+% assert (A - centre).dot(G - centre) == Rational(-3, 4)   # le centre n'y est pas
+% assert simplify((A - centre).norm() - sqrt(3) / 2) == 0
 % END-VERIFY
 
 %---------------------------------------------------------------
@@ -22,60 +45,72 @@
 
 \begin{evaluation}{TSPE-GEOESPACE-EV-B}{55}
 
-\begin{exercice}{TSPE-GEOESPACE-EV-B-EX1}{2}{12}
-\textbf{Exercice 1} (5 points) — \textit{Capacité C12}
+\noindent
+\textit{Dans tout le sujet, $ABCDEFGH$ est un cube d'arête $1$. On travaille dans le
+repère orthonormé $\left(A\,;\vec{AB},\vec{AD},\vec{AE}\right)$, dans lequel
+$A(0;0;0)$, $B(1;0;0)$, $C(1;1;0)$, $D(0;1;0)$, $E(0;0;1)$, $F(1;0;1)$,
+$G(1;1;1)$ et $H(0;1;1)$.}
+
+\begin{exercice}{TSPE-GEOESPACE-EV-B-EX1}{2}{15}
+\textbf{Exercice 1} (5 points) — \textit{Capacités C1, C2, C4, C5}
 
 \medskip
 
-Soit $\mathcal{D}$ la droite passant par $A(2;1;0)$ et de vecteur directeur
-$\vec{u}\begin{pmatrix}1\\-2\\3\end{pmatrix}$.
 \begin{enumerate}
-  \item (2 pts) Écrire une représentation paramétrique de $\mathcal{D}$.
-  \item (3 pts) Le point $M(4;-3;6)$ appartient-il à $\mathcal{D}$ ? Et le
-        point $N(4;-3;5)$ ? Justifier dans les deux cas.
+  \item (1 pt) Justifier que $\left(\vec{AB},\vec{AD},\vec{AE}\right)$ est une base
+        de l'espace, puis lire sur la figure les coordonnées de $\vec{AG}$ dans
+        cette base.
+  \item (2 pts) Décomposer $\vec{AF}$ et $\vec{BH}$ comme combinaisons linéaires de
+        $\vec{AB}$, $\vec{AD}$ et $\vec{AE}$.
+  \item (2 pts) On pose $\vec{w}=\vec{AB}+\tfrac12\vec{AD}$. Placer sur la figure le
+        point $M$ tel que $\vec{AM}=\vec{w}$, et décrire en une phrase la
+        construction graphique qui donne $\vec{w}$ à partir de $\vec{AB}$ et
+        $\vec{AD}$.
 \end{enumerate}
 \end{exercice}
 
-\begin{exercice}{TSPE-GEOESPACE-EV-B-EX2}{2}{12}
-\textbf{Exercice 2} (5 points) — \textit{Capacité C13}
+\begin{exercice}{TSPE-GEOESPACE-EV-B-EX2}{2}{15}
+\textbf{Exercice 2} (5 points) — \textit{Capacités C3, C6}
 
 \medskip
 
 \begin{enumerate}
-  \item (3 pts) Déterminer une équation cartésienne du plan $\mathcal{P}$
-        passant par $A(1;2;-1)$ et de vecteur normal
-        $\vec{n}\begin{pmatrix}3\\-1\\2\end{pmatrix}$, en détaillant le calcul.
-  \item (2 pts) Le vecteur $\vec{v}(1;1;-1)$ dirige-t-il $\mathcal{P}$ ?
-        Justifier.
+  \item (2 pts) Déterminer la position relative de la droite $(AG)$ et du plan
+        $(BDE)$. On précisera s'il y a intersection, et de quelle nature.
+  \item (2 pts) Les points $A$, $C$, $F$ et $H$ sont-ils coplanaires ? Justifier par
+        un calcul.
+  \item (1 pt) Les vecteurs $\vec{AC}$ et $\vec{EG}$ sont-ils colinéaires ? Qu'en
+        déduit-on pour le quadrilatère $ACGE$ ?
 \end{enumerate}
 \end{exercice}
 
-\begin{exercice}{TSPE-GEOESPACE-EV-B-EX3}{2}{16}
-\textbf{Exercice 3} (6 points) — \textit{Capacités C7 et C8}
+\begin{exercice}{TSPE-GEOESPACE-EV-B-EX3}{3}{15}
+\textbf{Exercice 3} (5 points) — \textit{Capacités C16, C14}
 
 \medskip
 
-Dans un repère orthonormé, $A(0;1;1)$, $B(2;0;3)$ et $C(1;3;0)$.
 \begin{enumerate}
-  \item (3 pts) Calculer $\vec{AB}\cdot\vec{AC}$. Le triangle $ABC$ est-il
-        rectangle en $A$ ? Justifier.
-  \item (3 pts) Calculer la distance du point $O(0;0;0)$ au plan
-        $\mathcal{Q}:\ 2x-y+2z-9=0$.
+  \item (3 pts) Démontrer que le plan passant par un point $A_0(x_0;y_0;z_0)$ et de
+        vecteur normal $\vec{n}(a;b;c)$ non nul a pour équation cartésienne
+        $ax+by+cz+d=0$, avec $d=-(ax_0+by_0+cz_0)$. Appliquer au plan $(BDE)$,
+        dont on admettra que $\vec{n}(1;1;1)$ est un vecteur normal.
+  \item (2 pts) Calculer les coordonnées du projeté orthogonal de $A$ sur le plan
+        $(BDE)$.
 \end{enumerate}
 \end{exercice}
 
 \begin{exercice}{TSPE-GEOESPACE-EV-B-EX4}{3}{15}
-\textbf{Exercice 4} (4 points) — \textit{Capacités C15 et C11}
+\textbf{Exercice 4} (5 points) — \textit{Capacités C9, C10}
 
 \medskip
 
 \begin{enumerate}
-  \item (2 pts) Étudier l'intersection du plan $\mathcal{R}:\ x+y+z-3=0$ et de
-        la droite $\Delta$ définie par $x=t$, $y=-t$, $z=1$. Interpréter
-        géométriquement le résultat obtenu.
-  \item (2 pts) Soit $H$ le projeté orthogonal d'un point $M$ sur un plan
-        $\mathcal{S}$, et $N$ un point de $\mathcal{S}$ distinct de $H$.
-        Démontrer que $MN>MH$.
+  \item (2 pts) Calculer l'aire du triangle $ACF$, puis le volume du tétraèdre
+        $ACFH$.
+  \item (2 pts) Déterminer l'ensemble $\mathcal{E}$ des points $M$ de l'espace tels
+        que $\vec{MA}\cdot\vec{MG}=0$. Préciser sa nature, son centre et son rayon.
+  \item (1 pt) Le point $B$ appartient-il à $\mathcal{E}$ ? Et le centre du cube ?
+        Justifier par le calcul.
 \end{enumerate}
 \end{exercice}
 

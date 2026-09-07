@@ -20,10 +20,10 @@ graphe = {
 \begin{enumerate}
   \item (2 pts) Donner l'ordre de visite des sommets par un parcours en largeur (BFS) depuis \texttt{"P"}, en supposant que les voisins sont explorés dans l'ordre où ils apparaissent dans la liste.
   \item (2 pts) Donner l'ordre de visite par un parcours en \textbf{profondeur} (DFS) depuis
-  \texttt{"P"}, avec la meme convention, et dire quelle structure de donnees distingue les
+  \texttt{"P"}, avec la même convention, et dire quelle structure de donnees distingue les
   deux parcours.
   \item (2 pts) Ce graphe contient-il un cycle ? Justifier en citant un cycle si oui.
-  \item (1 pt) Ecrire une fonction \lstinline{existe_chemin(graphe, depart, arrivee)} qui dit
+  \item (1 pt) Écrire une fonction \lstinline{existe_chemin(graphe, depart, arrivee)} qui dit
   s'il existe un chemin entre deux sommets, et donner un chemin de \texttt{"P"} a
   \texttt{"S"}.
 \end{enumerate}
@@ -99,10 +99,10 @@ On veut calculer le $n$-ieme terme de la suite de Fibonacci ($F_0=0$, $F_1=1$,
 $F_{n}=F_{n-1}+F_{n-2}$).
 
 \begin{enumerate}
-  \item (1 pt) Expliquer pourquoi l'ecriture recursive naive recalcule un tres grand nombre
-  de fois les memes termes.
-  \item (2 pts) Ecrire une version par \textbf{programmation dynamique} qui memorise les
-  resultats deja calcules, et donner $F_{30}$.
+  \item (1 pt) Expliquer pourquoi l'ecriture recursive naive recalcule un très grand nombre
+  de fois les mêmes termes.
+  \item (2 pts) Écrire une version par \textbf{programmation dynamique} qui memorise les
+  résultats deja calcules, et donner $F_{30}$.
   \item (1 pt) Comparer le nombre d'appels des deux versions pour $n=20$, et dire ce que la
   memorisation echange contre ce gain.
 \end{enumerate}
@@ -143,10 +143,10 @@ $F_{n}=F_{n-1}+F_{n-2}$).
 
 \begin{enumerate}
   \item (2 pts) Expliquer le principe de l'algorithme de Boyer-Moore : dans quel sens les
-  caracteres du motif sont-ils compares, et que permet la regle du \textbf{mauvais
+  caracteres du motif sont-ils compares, et que permet la règle du \textbf{mauvais
   caractere} lorsqu'une comparaison echoue ?
   \item (1 pt) On cherche le motif \lstinline{"NSI"} dans le texte
-  \lstinline{"BACNSIBAC"}. Indiquer de combien de positions le motif peut etre decale apres
+  \lstinline{"BACNSIBAC"}. Indiquer de combien de positions le motif peut être decale après
   le premier echec, et pourquoi cela fait moins de comparaisons qu'une recherche naive.
 \end{enumerate}
 

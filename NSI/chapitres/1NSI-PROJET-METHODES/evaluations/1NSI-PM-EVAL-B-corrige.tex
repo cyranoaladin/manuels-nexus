@@ -72,7 +72,7 @@ aussi clairement qu'un message d'assertion rédigé pour ce cas précis.
 \end{corrige}
 
 \begin{corrige}{1NSI-PM-EVAL-B-EX3}
-\textbf{1.} La docstring nomme le role, les parametres avec leur type, la valeur renvoyee
+\textbf{1.} La docstring nomme le role, les paramètres avec leur type, la valeur renvoyee
 et la precondition, et l'assertion la fait respecter :
 
 \begin{python}
@@ -94,13 +94,13 @@ def moyenne(notes, coefficients):
 \end{python}
 
 Sans cette precondition, un appel \lstinline{moyenne([10], [0])} echoue sur une division par
-zero, dont le message ne dit rien du probleme reel.
+zero, dont le message ne dit rien du probleme réel.
 
 \textbf{2.} Plan possible en trois points, chacun avec son argument principal :
 \begin{itemize}
   \item \textbf{Le probleme et le besoin.} Argument : montrer a qui sert le programme et
   ce qu'il remplace, pour que le jury comprenne l'enjeu avant le code.
-  \item \textbf{Une demonstration courte.} Argument : une execution reelle sur un jeu de
+  \item \textbf{Une démonstration courte.} Argument : une execution réelle sur un jeu de
   donnees prepare prouve que le programme fonctionne, ce qu'aucune description ne remplace.
   \item \textbf{Un choix technique justifie.} Argument : par exemple, avoir choisi une
   \textbf{precondition} plutot qu'un \lstinline{try/except} parce qu'une somme de

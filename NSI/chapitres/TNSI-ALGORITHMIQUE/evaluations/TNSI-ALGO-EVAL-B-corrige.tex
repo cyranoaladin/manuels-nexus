@@ -97,7 +97,7 @@ def somme_dpr(liste):
 
 \begin{corrige}{TNSI-ALGO-EVAL-B-EX3}
 \textbf{Q1.} L'ecriture naive appelle \lstinline{fibonacci(n-1)} et \lstinline{fibonacci(n-2)},
-qui recalculent chacune les memes sous-termes : l'arbre des appels contient
+qui recalculent chacune les mêmes sous-termes : l'arbre des appels contient
 \lstinline{fibonacci(n-2)} deux fois, \lstinline{fibonacci(n-3)} trois fois, et ainsi de
 suite. Le nombre d'appels croit exponentiellement alors qu'il n'y a que $n$ valeurs
 distinctes a connaitre.
@@ -125,7 +125,7 @@ rang, ce que la version naive ne fait pas.
 \begin{corrige}{TNSI-ALGO-EVAL-B-EX4}
 \textbf{Q1.} Boyer-Moore compare les caracteres du motif au texte \textbf{de la droite vers
 la gauche}, alors que le motif progresse de la gauche vers la droite. Quand une comparaison
-echoue sur un caractere du texte, la regle du \textbf{mauvais caractere} regarde si ce
+echoue sur un caractere du texte, la règle du \textbf{mauvais caractere} regarde si ce
 caractere apparait dans le motif : s'il n'y figure pas, aucun alignement chevauchant ne peut
 convenir et le motif saute entierement ; s'il y figure, on l'aligne sur sa derniere
 occurrence dans le motif. C'est ce saut, souvent de plusieurs positions, qui rend
@@ -134,7 +134,7 @@ l'algorithme rapide.
 \textbf{Q2.} Motif \lstinline{"NSI"} aligne en position $0$ du texte
 \lstinline{"BACNSIBAC"} : on compare d'abord \lstinline{texte[2]}, qui vaut \lstinline{"C"},
 au dernier caractere du motif, \lstinline{"I"}. L'echec porte sur \lstinline{"C"}, qui
-n'apparait pas dans \lstinline{"NSI"} : le motif peut donc etre decale de \textbf{trois}
+n'apparait pas dans \lstinline{"NSI"} : le motif peut donc être decale de \textbf{trois}
 positions d'un coup. Il se retrouve aligne en position $3$, ou il correspond exactement. Au
 total quatre comparaisons de caracteres, la ou une recherche naive testerait sept
 alignements successifs.

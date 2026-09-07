@@ -82,7 +82,7 @@ enregistrees. Une inscription supplementaire ajoute une ligne : elle change le
 \begin{itemize}
   \item \textbf{redondance et anomalie de mise a jour} : l'email d'un adherent est repete a
   chacune de ses inscriptions. Corriger l'email sur une seule ligne laisse la base avec deux
-  emails differents pour la meme personne ;
+  emails différents pour la même personne ;
   \item \textbf{anomalie de suppression} : supprimer la derniere inscription d'un adherent
   efface aussi son nom et son email, seule trace de son existence dans la base.
 \end{itemize}
@@ -107,13 +107,13 @@ participations.
 \textbf{Q3.} Composant par composant :
 \begin{itemize}
   \item \lstinline{SELECT activite, COUNT(*)} : la \textbf{projection}, qui dit quelles
-  colonnes composent le resultat -- ici l'activite et un comptage ;
+  colonnes composent le résultat -- ici l'activite et un comptage ;
   \item \lstinline{FROM Inscription} : la \textbf{source} des lignes ;
   \item \lstinline{WHERE tarif > 20} : le \textbf{filtre}, applique aux lignes
   \textbf{avant} tout regroupement ;
   \item \lstinline{GROUP BY activite} : le \textbf{regroupement}, qui rassemble les lignes
   restantes par activite pour que \lstinline{COUNT(*)} compte a l'interieur de chaque groupe ;
-  \item \lstinline{ORDER BY activite} : le \textbf{tri} du resultat final.
+  \item \lstinline{ORDER BY activite} : le \textbf{tri} du résultat final.
 \end{itemize}
 Sans le \lstinline{WHERE}, l'activite \og Echecs \fg{} apparaitrait aussi : le filtre agit
 bien avant le regroupement.

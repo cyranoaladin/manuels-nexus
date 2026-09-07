@@ -102,14 +102,14 @@ def ventilation_active(co2, seuil=800):
 
 \textbf{2.} Trois cas de test suffisent a couvrir les trois modes :
 \begin{itemize}
-  \item apres \lstinline{traiter_commande("AUTO")}, \lstinline{ventilation_active(1000)}
+  \item après \lstinline{traiter_commande("AUTO")}, \lstinline{ventilation_active(1000)}
   vaut \lstinline{True} et \lstinline{ventilation_active(500)} vaut \lstinline{False} :
   la decision revient bien au capteur, de part et d'autre du seuil ;
-  \item apres \lstinline{traiter_commande("ON")}, \lstinline{ventilation_active(500)} vaut
+  \item après \lstinline{traiter_commande("ON")}, \lstinline{ventilation_active(500)} vaut
   \lstinline{True} : le forcage l'emporte sur un taux bas ;
-  \item apres \lstinline{traiter_commande("OFF")}, \lstinline{ventilation_active(1000)}
+  \item après \lstinline{traiter_commande("OFF")}, \lstinline{ventilation_active(1000)}
   vaut \lstinline{False} : l'interdiction l'emporte sur un taux eleve.
 \end{itemize}
-On y ajoutera utilement le refus de \lstinline{traiter_commande("MAX")}, qui verifie la
+On y ajoutera utilement le refus de \lstinline{traiter_commande("MAX")}, qui vérifie la
 derniere ligne du cahier des charges.
 \end{corrige}

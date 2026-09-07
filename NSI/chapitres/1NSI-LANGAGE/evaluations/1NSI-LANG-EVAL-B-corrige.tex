@@ -78,7 +78,7 @@ def produit_negatifs(liste):
 
 \begin{corrige}{1NSI-LANG-EVAL-B-EX3}
 \textbf{1.} Prototype : \lstinline{indice_max(nombres)} ; \lstinline{nombres} est une liste
-de nombres ; la fonction renvoie un entier, l'indice du plus grand element.
+de nombres ; la fonction renvoie un entier, l'indice du plus grand élément.
 \textbf{Precondition :} la liste est non vide -- sans elle, il n'existe aucun indice a
 renvoyer.
 
@@ -86,7 +86,7 @@ renvoyer.
 \begin{itemize}
   \item l'indice renvoye est un indice valide : \lstinline{0 <= k < len(nombres)} ;
   \item aucune valeur ne depasse celle a cet indice, et aucun indice plus petit ne porte
-  deja ce maximum -- ce qui exprime la regle « le plus petit indice en cas d'egalite ».
+  deja ce maximum -- ce qui exprime la règle « le plus petit indice en cas d'égalité ».
 \end{itemize}
 
 \begin{python}
@@ -107,10 +107,10 @@ assert all(essai[j] < essai[k] for j in range(k))
 \end{python}
 
 La comparaison stricte \lstinline{>} est ce qui garantit la seconde postcondition : avec
-\lstinline{>=}, une egalite ferait avancer l'indice retenu.
+\lstinline{>=}, une égalité ferait avancer l'indice retenu.
 
 \textbf{3.} \textbf{Trait commun :} les deux langages ont des fonctions nommees, des
-variables, une boucle qui parcourt les indices, et la meme logique de comparaison --
+variables, une boucle qui parcourt les indices, et la même logique de comparaison --
 l'algorithme s'ecrit a l'identique. \textbf{Trait particulier a Python :} les blocs sont
 delimites par l'\textbf{indentation}, et \lstinline{range} engendre les indices.
 \textbf{Trait particulier a JavaScript :} les blocs sont delimites par des \textbf{accolades},

@@ -1,94 +1,142 @@
-% META: {"id": "TSPE-GEOESPACE-EV-B-corrige", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-GEOESPACE-EV-B", "version": "B", "capacites_codes": ["C7", "C8", "C11", "C12", "C13", "C15"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TSPE-GEOESPACE-EV-B-corrige", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-GEOESPACE-EV-B", "version": "B", "capacites_codes": ["C1", "C2", "C3", "C4", "C5", "C6", "C9", "C10", "C14", "C16"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, simplify, sqrt, solve, symbols
+% A = Matrix([0, 0, 0]); B = Matrix([1, 0, 0]); C = Matrix([1, 1, 0]); D = Matrix([0, 1, 0])
+% E = Matrix([0, 0, 1]); F = Matrix([1, 0, 1]); G = Matrix([1, 1, 1]); H = Matrix([0, 1, 1])
+% AB, AD, AE = B - A, D - A, E - A
+% assert Matrix.hstack(AB, AD, AE).det() == 1
+% assert G - A == AB + AD + AE
+% assert F - A == AB + AE
+% assert H - B == -AB + AD + AE
+% M = A + AB + Rational(1, 2) * AD
+% assert M == Matrix([1, Rational(1, 2), 0])
+% assert M == Rational(1, 2) * (B + C)                 # M est le milieu de [BC]
+% t = symbols('t')
+% normale = Matrix([1, 1, 1])
+% assert normale.dot(B) == normale.dot(D) == normale.dot(E) == 1
+% assert simplify(normale.cross(G - A).norm()) == 0
+% assert solve(normale.dot(A + t * (G - A)) - 1, t) == [Rational(1, 3)]
+% assert Matrix.hstack(C - A, F - A, H - A).det() == -2
+% assert G - E == C - A
+% projete = A + Rational(1, 3) * normale
+% assert normale.dot(projete) - 1 == 0
+% assert simplify((projete - A).cross(normale).norm()) == 0
+% AC, AF, AH = C - A, F - A, H - A
+% assert simplify(sqrt((AC.norm()**2)*(AF.norm()**2) - AC.dot(AF)**2)/2 - sqrt(3)/2) == 0
+% assert abs(Matrix.hstack(AC, AF, AH).det())/6 == Rational(1, 3)
+% assert (A - B).dot(G - B) == 0
+% centre = Rational(1, 2) * (A + G)
+% assert (A - centre).dot(G - centre) == Rational(-3, 4)
+% assert simplify((A - centre).norm() - sqrt(3)/2) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-GEOESPACE-EV-B-EX1}
 
-\begin{corrige}{TSPE-GEOESPACE-EV-B}
+\textbf{1.} Les trois vecteurs $\vec{AB}$, $\vec{AD}$ et $\vec{AE}$ portent trois arêtes
+du cube issues du même sommet $A$ : ils ne sont pas coplanaires, puisque $E$ n'appartient
+pas au plan $(ABD)$. Trois vecteurs non coplanaires de l'espace en forment une base. Le
+déterminant le confirme : $\det\left(\vec{AB},\vec{AD},\vec{AE}\right)=1\neq0$.
 
-\textbf{Exercice 1 — C12.}
+En allant de $A$ à $G$ on parcourt une arête dans chacune des trois directions, donc
+$\vec{AG}=\vec{AB}+\vec{AD}+\vec{AE}$ : les coordonnées de $\vec{AG}$ dans cette base sont
+$(1\,;1\,;1)$.
 
-\textbf{1.} $x=2+t$, $y=1-2t$, $z=3t$, avec $t\in\mathbb{R}$.
-\hfill\textit{(2 pts)}
+\textbf{2.} $\vec{AF}=\vec{AB}+\vec{AE}$, de coordonnées $(1\,;0\,;1)$ : on va de $A$ à $B$,
+puis on monte d'une arête.
 
-\textbf{2.} Pour $M(4;-3;6)$~: $4=2+t$ donne $t=2$~; on vérifie
-$y=1-4=-3$ et $z=6$. Les trois équations sont satisfaites par la même valeur,
-donc $M\in\mathcal{D}$.
-Pour $N(4;-3;5)$~: $t=2$ conviendrait pour $x$ et $y$, mais la troisième
-équation donnerait $5=6$. Donc $N\notin\mathcal{D}$. \hfill\textit{(3 pts)}
+Pour $\vec{BH}$, on passe par $A$ : $\vec{BH}=\vec{BA}+\vec{AH}=-\vec{AB}+\left(\vec{AD}+\vec{AE}\right)$,
+soit $\vec{BH}=-\vec{AB}+\vec{AD}+\vec{AE}$, de coordonnées $(-1\,;1\,;1)$.
 
-\medskip
-\textbf{Exercice 2 — C13.}
-
-\textbf{1.} $\vec{AM}\cdot\vec{n}=0$ s'écrit $3(x-1)-1(y-2)+2(z+1)=0$, soit
-$3x-3-y+2+2z+2=0$ et enfin $3x-y+2z+1=0$. Contrôle~:
-$3\times1-2+2\times(-1)+1=0$. \hfill\textit{(3 pts)}
-
-\textbf{2.} $\vec{n}\cdot\vec{v}=3\times1+(-1)\times1+2\times(-1)=0$~: oui,
-$\vec{v}$ dirige $\mathcal{P}$. \hfill\textit{(2 pts)}
-
-\medskip
-\textbf{Exercice 3 — C7 et C8.}
-
-\textbf{1.} $\vec{AB}(2;-1;2)$ et $\vec{AC}(1;2;-1)$, donc
-$\vec{AB}\cdot\vec{AC}=2-2-2=-2\neq0$. Le triangle n'est pas rectangle en
-$A$. \hfill\textit{(3 pts)}
-
-\textbf{2.} $\vec{n}(2;-1;2)$ et $\lVert\vec{n}\rVert=\sqrt{4+1+4}=3$, donc
-$d(O,\mathcal{Q})=\dfrac{\lvert 0-0+0-9\rvert}{3}=\dfrac{9}{3}=3$.
-\hfill\textit{(3 pts)}
-
-\medskip
-\textbf{Exercice 4 — C15 et C11.}
-
-\textbf{1.} En reportant~: $t+(-t)+1-3=0$, soit $-2=0$. Le système n'a aucune
-solution. Ce n'est pas une erreur~: $\Delta$ est \emph{strictement parallèle}
-à $\mathcal{R}$. On le confirme par $\vec{n}\cdot\vec{u}=1-1+0=0$ et par le
-fait que $(0;0;1)$ ne vérifie pas l'équation du plan. \hfill\textit{(2 pts)}
-
-\textbf{2.} $H$ et $N$ appartiennent à $\mathcal{S}$, donc $\vec{HN}$ est un
-vecteur de $\mathcal{S}$. Comme $(MH)$ est orthogonale à $\mathcal{S}$, on a
-$\vec{MH}\cdot\vec{HN}=0$~: le triangle $MHN$ est rectangle en $H$. Par
-Pythagore, $MN^2=MH^2+HN^2$. Or $N\neq H$ donc $HN^2>0$, d'où $MN^2>MH^2$ et,
-les longueurs étant positives, $MN>MH$. \hfill\textit{(2 pts)}
+\textbf{3.} $\vec{w}=\vec{AB}+\tfrac12\vec{AD}$ a pour coordonnées
+$\left(1\,;\tfrac12\,;0\right)$ : le point $M$ est le \textbf{milieu de $[BC]$}.
+Graphiquement, on reporte $\vec{AB}$ depuis $A$, ce qui donne $B$ ; puis, depuis $B$, on
+reporte la moitié de $\vec{AD}$ — c'est-à-dire qu'on avance d'une demi-arête dans la
+direction de $\vec{AD}$. La construction d'une combinaison linéaire est toujours cette mise
+bout à bout des vecteurs, chacun multiplié par son coefficient.
 
 \end{corrige}
 
-% BEGIN-VERIFY
-% from sympy import symbols, solve, sqrt, simplify, Rational
-%
-% t = symbols('t', real=True)
-%
-% def rang_du_point(parametrique, cible):
-%     """Le parametre qui place le point courant sur la cible, s'il existe."""
-%     return solve([parametrique[n] - cible[n] for n in range(3)], t, dict=True)
-%
-% # Ex1 : representation parametrique et appartenance.
-% point = (2 + t, 1 - 2*t, 3*t)
-% M, N = (4, -3, 6), (4, -3, 5)
-% assert rang_du_point(point, M) == [{t: 2}]
-% assert rang_du_point(point, N) == []
-% # Deux equations sur trois ne suffisent pas : elles donnent bien t = 2
-% # pour N, et c'est la troisieme qui refuse.
-% assert solve([point[0] - N[0], point[1] - N[1]], t, dict=True) == [{t: 2}]
-% assert point[2].subs(t, 2) != N[2]
-%
-% # Ex2 : equation cartesienne du plan par vecteur normal.
-% A, n = (1, 2, -1), (3, -1, 2)
-% d = -sum(n[i]*A[i] for i in range(3))
-% assert d == 1
-% assert sum(n[i]*A[i] for i in range(3)) + d == 0
-% v = (1, 1, -1)
-% assert sum(n[i]*v[i] for i in range(3)) == 0        # v dirige le plan
-%
-% # Ex3 : produit scalaire et distance a un plan.
-% AB, AC = (2, -1, 2), (1, 2, -1)
-% assert sum(AB[i]*AC[i] for i in range(3)) == -2 != 0
-% normale = (2, -1, 2)
-% assert simplify(sqrt(sum(c**2 for c in normale)) - 3) == 0
-% assert Rational(abs(0 - 0 + 0 - 9)) / 3 == 3
-%
-% # Ex4 : intersection vide, droite strictement parallele au plan.
-% direction, origine = (1, -1, 0), (0, 0, 1)
-% plan = lambda p: p[0] + p[1] + p[2] - 3
-% assert sum(direction[i]*(1, 1, 1)[i] for i in range(3)) == 0   # n . u = 0
-% assert plan(origine) != 0                                       # hors du plan
-% courant = tuple(origine[i] + t*direction[i] for i in range(3))
-% assert solve(plan(courant), t) == []
-% END-VERIFY
+\begin{corrige}{TSPE-GEOESPACE-EV-B-EX2}
+
+\textbf{1.} Le plan $(BDE)$ admet $\vec{n}(1;1;1)$ pour vecteur normal et passe par
+$B(1;0;0)$ : son équation est $x+y+z-1=0$ (on vérifie que $D$ et $E$ la satisfont).
+La droite $(AG)$ est dirigée par $\vec{AG}(1;1;1)$, qui est \textbf{colinéaire à $\vec{n}$} :
+la droite est donc \textbf{orthogonale au plan}. Elle n'est pas parallèle à celui-ci et le
+coupe en un unique point. En remplaçant $M(t;t;t)$ dans l'équation : $3t-1=0$, donc
+$t=\tfrac13$ et le point d'intersection est $\left(\tfrac13;\tfrac13;\tfrac13\right)$.
+
+\textbf{2.} $\vec{AC}(1;1;0)$, $\vec{AF}(1;0;1)$ et $\vec{AH}(0;1;1)$. Leur déterminant vaut
+\[
+  \det\left(\vec{AC},\vec{AF},\vec{AH}\right)
+  = 1\times(0\times1-1\times1) - 1\times(1\times1-1\times0) + 0
+  = -1-1 = -2 \neq 0 .
+\]
+Les trois vecteurs ne sont donc pas coplanaires : les points $A$, $C$, $F$ et $H$
+\textbf{ne sont pas coplanaires}. Ils forment les sommets d'un tétraèdre régulier inscrit
+dans le cube.
+
+\textbf{3.} $\vec{EG}=(1;1;1)-(0;0;1)=(1;1;0)=\vec{AC}$. Les deux vecteurs sont
+\textbf{égaux}, donc colinéaires. Un quadrilatère dont deux côtés opposés sont portés par
+des vecteurs égaux est un \textbf{parallélogramme} : $ACGE$ en est un.
+
+\end{corrige}
+
+\begin{corrige}{TSPE-GEOESPACE-EV-B-EX3}
+
+\textbf{1.} Soit $M(x;y;z)$. Le point $M$ appartient au plan passant par $A_0$ et de vecteur
+normal $\vec{n}$ si et seulement si $\vec{A_0M}$ est orthogonal à $\vec{n}$, c'est-à-dire
+$\vec{n}\cdot\vec{A_0M}=0$. En coordonnées :
+\[
+  a(x-x_0)+b(y-y_0)+c(z-z_0)=0
+  \iff ax+by+cz-\left(ax_0+by_0+cz_0\right)=0 .
+\]
+C'est bien une équation de la forme $ax+by+cz+d=0$ avec $d=-(ax_0+by_0+cz_0)$.
+Réciproquement, tout point vérifiant cette équation donne $\vec{n}\cdot\vec{A_0M}=0$, donc
+appartient au plan : l'équivalence est établie.
+
+Pour le plan $(BDE)$, avec $\vec{n}(1;1;1)$ et $B(1;0;0)$ :
+$d=-(1\times1+1\times0+1\times0)=-1$, donc $(BDE):\ x+y+z-1=0$.
+
+\textbf{2.} Le projeté orthogonal $H'$ de $A$ sur $(BDE)$ est le point du plan tel que
+$\vec{AH'}$ soit colinéaire à $\vec{n}$ : on cherche donc $H'=A+t\vec{n}=(t;t;t)$ vérifiant
+l'équation du plan. On obtient $3t-1=0$, soit $t=\tfrac13$ et
+\[
+  H'\left(\tfrac13\,;\tfrac13\,;\tfrac13\right).
+\]
+On retrouve le point d'intersection de $(AG)$ et de $(BDE)$ de l'exercice $2$, ce qui est
+cohérent : $(AG)$ est précisément la perpendiculaire au plan issue de $A$.
+
+\end{corrige}
+
+\begin{corrige}{TSPE-GEOESPACE-EV-B-EX4}
+
+\textbf{1.} $\vec{AC}(1;1;0)$ et $\vec{AF}(1;0;1)$ ont pour normes $\sqrt2$ et pour produit
+scalaire $\vec{AC}\cdot\vec{AF}=1$. L'aire du triangle vaut
+\[
+  \mathcal{A}=\frac12\sqrt{\|\vec{AC}\|^2\|\vec{AF}\|^2-\left(\vec{AC}\cdot\vec{AF}\right)^2}
+  =\frac12\sqrt{2\times2-1}=\frac{\sqrt3}{2}.
+\]
+(De façon équivalente : $\cos\widehat{CAF}=\tfrac12$, l'angle vaut $60^\circ$, et
+$\mathcal{A}=\tfrac12\times\sqrt2\times\sqrt2\times\sin60^\circ=\tfrac{\sqrt3}{2}$.)
+
+Le volume du tétraèdre $ACFH$ est le sixième de la valeur absolue du déterminant calculé à
+l'exercice $2$ :
+\[
+  V=\frac{\left|\det\left(\vec{AC},\vec{AF},\vec{AH}\right)\right|}{6}=\frac{2}{6}=\frac13 .
+\]
+Le tétraèdre occupe donc le tiers du cube, dont le volume vaut $1$.
+
+\textbf{2.} $\vec{MA}\cdot\vec{MG}=0$ signifie que le triangle $AMG$ est rectangle en $M$,
+ou que $M$ est confondu avec $A$ ou $G$. L'ensemble $\mathcal{E}$ est donc la
+\textbf{sphère de diamètre $[AG]$} : son centre est le milieu
+$\Omega\left(\tfrac12;\tfrac12;\tfrac12\right)$ — le centre du cube — et son rayon vaut
+$\dfrac{AG}{2}=\dfrac{\sqrt3}{2}$.
+
+\textbf{3.} Pour $B$ : $\vec{BA}=(-1;0;0)$ et $\vec{BG}=(0;1;1)$, donc
+$\vec{BA}\cdot\vec{BG}=0$ : le point $B$ \textbf{appartient} à $\mathcal{E}$ (le triangle
+$ABG$ est rectangle en $B$).
+
+Pour le centre $\Omega$ du cube : $\vec{\Omega A}$ et $\vec{\Omega G}$ sont opposés, et
+$\vec{\Omega A}\cdot\vec{\Omega G}=-\dfrac34\neq0$. Le centre \textbf{n'appartient pas} à
+$\mathcal{E}$ — ce qui est attendu : il en est le centre, pas un point de la sphère.
+
+\end{corrige}

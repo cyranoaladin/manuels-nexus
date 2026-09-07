@@ -98,18 +98,18 @@ ne porte que le chemin du script de traitement.
 \begin{corrige}{1NSI-WEB-EVAL-B-EX3}
 \textbf{1.} Trois associations possibles :
 \begin{itemize}
-  \item champ de texte \lstinline{"recherche"} : evenement de \textbf{saisie}, declenche a
+  \item champ de texte \lstinline{"recherche"} : événement de \textbf{saisie}, declenche a
   chaque frappe -- on filtre la liste affichee au fur et a mesure ;
-  \item menu deroulant \lstinline{"tri"} : evenement de \textbf{changement de selection} --
+  \item menu deroulant \lstinline{"tri"} : événement de \textbf{changement de selection} --
   on reordonne la liste selon le critere choisi ;
-  \item bouton \lstinline{"valider"} : evenement de \textbf{clic} -- on envoie la requete au
+  \item bouton \lstinline{"valider"} : événement de \textbf{clic} -- on envoie la requete au
   serveur.
 \end{itemize}
-Sans fonction associee, le composant reste inerte : le HTML decrit l'apparence, il ne decrit
+Sans fonction associee, le composant reste inerte : le HTML décrit l'apparence, il ne décrit
 aucun traitement.
 
-\textbf{2.} L'evenement de saisie se declenche \textbf{plusieurs fois}, a chaque caractere,
-et sert a un retour immediat sans quitter la page ; l'evenement de validation se declenche
+\textbf{2.} L'événement de saisie se declenche \textbf{plusieurs fois}, a chaque caractere,
+et sert a un retour immediat sans quitter la page ; l'événement de validation se declenche
 \textbf{une seule fois} et engage une action couteuse ou definitive, comme l'envoi au
 serveur. Confondre les deux ferait envoyer une requete a chaque lettre tapee.
 \end{corrige}
@@ -117,9 +117,9 @@ serveur. Confondre les deux ferait envoyer une requete a chaque lettre tapee.
 \begin{corrige}{1NSI-WEB-EVAL-B-EX4}
 \textbf{1.} Dans l'ordre :
 \begin{itemize}
-  \item \textbf{Authentification} : le \textbf{client} affiche le formulaire et verifie
-  eventuellement que les champs sont remplis ; le \textbf{serveur} verifie l'identifiant et
-  le mot de passe, car lui seul detient les donnees de reference.
+  \item \textbf{Authentification} : le \textbf{client} affiche le formulaire et vérifie
+  eventuellement que les champs sont remplis ; le \textbf{serveur} vérifie l'identifiant et
+  le mot de passe, car lui seul detient les donnees de référence.
   \item \textbf{Affichage des places} : le \textbf{serveur} consulte la base et envoie
   l'etat des places ; le \textbf{client} met en forme et gere les interactions locales
   (survol, selection).
@@ -133,9 +133,9 @@ ainsi que l'etat d'affichage courant. C'est cet identifiant qui est \textbf{retr
 chaque requete} : le mot de passe, lui, ne circule qu'une fois, a la connexion, et n'est pas
 conserve cote client.
 
-\textbf{3.} Le chiffrement est indispensable \textbf{des la premiere etape}, celle qui
-transporte le mot de passe, et il doit ensuite etre maintenu car le jeton de session
+\textbf{3.} Le chiffrement est indispensable \textbf{des la première étape}, celle qui
+transporte le mot de passe, et il doit ensuite être maintenu car le jeton de session
 circule a chaque requete : intercepte, il vaudrait le mot de passe. Le chiffrement protege
 la \textbf{confidentialite} et l'\textbf{integrite} de ce qui transite entre le navigateur
-et le serveur ; il ne protege ni le poste de l'utilisateur, ni le serveur lui-meme.
+et le serveur ; il ne protege ni le poste de l'utilisateur, ni le serveur lui-même.
 \end{corrige}

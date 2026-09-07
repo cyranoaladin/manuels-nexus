@@ -90,14 +90,14 @@ serie = [4, 8, 6, 10]
 print(statistics.mean(serie))    # 7
 print(statistics.median(serie))  # 7
 \end{python}
-La serie comptant un nombre pair de valeurs, la mediane est la moyenne des deux valeurs
+La serie comptant un nombre pair de valeurs, la médiane est la moyenne des deux valeurs
 centrales, $6$ et $8$, soit $7$ : elle coincide ici avec la moyenne, ce qui n'est pas une
-regle generale.
+règle generale.
 
-\textbf{Q2.} Il faut \lstinline{pstdev} : l'enonce demande de decrire \textbf{exactement les
+\textbf{Q2.} Il faut \lstinline{pstdev} : l'énoncé demande de decrire \textbf{exactement les
 quatre valeurs mesurees}, c'est-a-dire la population entiere. La documentation indique que
 \lstinline{pstdev} divise par $n$, tandis que \lstinline{stdev} divise par $n-1$ parce qu'il
-\textbf{estime} l'ecart-type d'une population plus large a partir d'un echantillon. C'est
+\textbf{estime} l'ecart-type d'une population plus large a partir d'un échantillon. C'est
 pour cela que \lstinline{stdev} rend ici une valeur strictement plus grande.
 
 \textbf{Q3.} \lstinline{stdev([5])} leve une \lstinline{StatisticsError}. La documentation le
@@ -108,14 +108,14 @@ valeur, le diviseur $n-1$ vaudrait zero.
 \begin{corrige}{TNSI-LANG-EVAL-B-EX4}
 \textbf{Q1.} La phrase confond \textbf{calculabilite} et \textbf{commodite ou performance}.
 Un probleme calculable l'est dans n'importe quel langage Turing-complet : Python, C, OCaml
-ou un autre calculent exactement le meme ensemble de fonctions. Ce qui change d'un langage a
+ou un autre calculent exactement le même ensemble de fonctions. Ce qui change d'un langage a
 l'autre, c'est la vitesse d'execution, la facilite d'ecriture ou les bibliotheques
 disponibles -- jamais la frontiere de ce qui est calculable. Un probleme non calculable, comme
 le probleme de l'arret, ne le devient pas davantage en C.
 
 \textbf{Q2.} Pour une \textbf{interface graphique}, le paradigme \textbf{objet} (ou
 evenementiel) convient : chaque composant a un etat qui evolue et des methodes qui reagissent
-aux evenements, ce que l'encapsulation exprime naturellement. Pour \textbf{filtrer et
+aux événements, ce que l'encapsulation exprime naturellement. Pour \textbf{filtrer et
 transformer une longue liste de mesures}, le paradigme \textbf{fonctionnel} convient : la
 transformation s'ecrit en une expression sans etat mutable, plus courte et plus sure a relire.
 \end{corrige}

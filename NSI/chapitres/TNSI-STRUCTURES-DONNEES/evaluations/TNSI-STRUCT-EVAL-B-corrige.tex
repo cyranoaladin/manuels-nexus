@@ -81,27 +81,27 @@ matrice = [
 
 \begin{corrige}{TNSI-STRUCT-EVAL-B-EX3}
 \textbf{Q1.} Le \textbf{dictionnaire}. Chercher un identifiant dans une liste de couples
-oblige a parcourir les elements jusqu'a le trouver : dans le pire cas, les $10\,000$ couples
+oblige a parcourir les éléments jusqu'a le trouver : dans le pire cas, les $10\,000$ couples
 sont compares, et en moyenne la moitie. Le dictionnaire donne un \textbf{acces direct} par
-cle, dont le cout ne depend pas du nombre d'eleves. Sur une operation faite tres souvent,
+cle, dont le coût ne depend pas du nombre d'eleves. Sur une opération faite très souvent,
 l'ecart est decisif.
 
 \textbf{Q2.} Oui : lorsque l'ordre compte ou qu'on parcourt systematiquement toutes les
 donnees. Par exemple pour afficher les eleves dans leur ordre d'inscription, ou pour trier
 la promotion : la liste conserve un ordre, la recherche par cle n'apporte rien, et le
-parcours complet coute la meme chose dans les deux structures.
+parcours complet coute la même chose dans les deux structures.
 
 \end{corrige}
 
 \begin{corrige}{TNSI-STRUCT-EVAL-B-EX4}
 \textbf{Q1.} Deux situations :
 \begin{itemize}
-  \item une \textbf{arborescence de fichiers} : la hierarchie represente l'inclusion, un
+  \item une \textbf{arborescence de fichiers} : la hierarchie représente l'inclusion, un
   dossier contenant des fichiers et d'autres dossiers ; une liste plate perdrait cette
   relation ;
-  \item un \textbf{tournoi a elimination directe} : la hierarchie represente les
+  \item un \textbf{tournoi a elimination directe} : la hierarchie représente les
   qualifications successives, chaque noeud etant le vainqueur des deux sous-arbres qui le
-  precedent.
+  précédent.
 \end{itemize}
 
 \textbf{Q2.} L'arbre a pour racine $1$, avec a gauche $2$ (dont le seul enfant est $4$) et a
@@ -109,10 +109,10 @@ droite $3$ (d'enfants $5$ et $6$).
 \begin{itemize}
   \item \textbf{Taille} $=6$ : on compte les noeuds $1, 2, 3, 4, 5, 6$ ;
   \item \textbf{Hauteur} $=2$ : le plus long chemin de la racine a une feuille passe par
-  deux aretes, par exemple $1\to2\to4$ ;
+  deux arêtes, par exemple $1\to2\to4$ ;
   \item \textbf{Feuilles} $=3$ : ce sont $4$, $5$ et $6$, seuls noeuds sans aucun enfant. Le
-  noeud $2$ n'en est pas une : il a un enfant gauche, meme s'il n'a pas d'enfant droit.
+  noeud $2$ n'en est pas une : il a un enfant gauche, même s'il n'a pas d'enfant droit.
 \end{itemize}
-On verifie la borne connue : un arbre binaire de hauteur $h$ a au plus $2^{h+1}-1$ noeuds,
+On vérifie la borne connue : un arbre binaire de hauteur $h$ a au plus $2^{h+1}-1$ noeuds,
 soit ici au plus $7$, et l'arbre en a $6$.
 \end{corrige}

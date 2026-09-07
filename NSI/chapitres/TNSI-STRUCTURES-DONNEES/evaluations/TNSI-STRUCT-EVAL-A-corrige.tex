@@ -63,18 +63,18 @@ class Rectangle:
 \begin{corrige}{TNSI-STRUCT-EVAL-A-EX2}
 \textbf{Q1.} Specification par l'interface, sans aucun code :
 \begin{itemize}
-  \item \lstinline{est_vide()} : sans parametre, renvoie un booleen indiquant si la pile ne
-  contient aucun element ; aucune precondition ;
+  \item \lstinline{est_vide()} : sans paramètre, renvoie un booleen indiquant si la pile ne
+  contient aucun élément ; aucune precondition ;
   \item \lstinline{empiler(valeur)} : prend la valeur a placer au sommet, ne renvoie rien,
   modifie la pile ; aucune precondition ;
-  \item \lstinline{depiler()} : sans parametre, retire et renvoie la valeur du sommet ;
+  \item \lstinline{depiler()} : sans paramètre, retire et renvoie la valeur du sommet ;
   \textbf{precondition} : la pile n'est pas vide.
 \end{itemize}
-Principe LIFO : le dernier element empile est le premier depile.
+Principe LIFO : le dernier élément empile est le premier depile.
 
 \textbf{Q2.} Après avoir empile $5,3,8,1$, la pile est $[5,3,8,1]$ (du bas vers le sommet). Depiler trois fois retire $1$, puis $8$, puis $3$ (LIFO) : il reste $[5]$.
 
-\textbf{Q3.} Deux implementations de la meme interface :
+\textbf{Q3.} Deux implementations de la même interface :
 
 \begin{python}
 class PileListe:
@@ -110,11 +110,11 @@ class PileChainee:
 \end{python}
 
 \textbf{Q4.} Pour le code utilisateur, \textbf{rien ne change} : il appelle
-\lstinline{empiler}, \lstinline{depiler} et \lstinline{est_vide} et obtient les memes
-resultats, parce que l'\textbf{interface} -- les operations et leur comportement -- est
+\lstinline{empiler}, \lstinline{depiler} et \lstinline{est_vide} et obtient les mêmes
+résultats, parce que l'\textbf{interface} -- les opérations et leur comportement -- est
 identique. Ce qui change est l'\textbf{implementation} : une liste redimensionnable d'un
-cote, un chainage de couples de l'autre, avec des couts memoire differents. C'est
+cote, un chainage de couples de l'autre, avec des coûts memoire différents. C'est
 exactement la distinction : l'interface est le contrat que l'utilisateur lit ;
-l'implementation est la maniere de le tenir, et elle peut etre remplacee sans reecrire une
+l'implementation est la maniere de le tenir, et elle peut être remplacee sans reecrire une
 seule ligne du code appelant.
 \end{corrige}
