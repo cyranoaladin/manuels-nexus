@@ -750,12 +750,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C4"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "1NSI-ARCHOS-EVAL-A",
           "1NSI-ARCHOS-EVAL-B"
@@ -766,7 +764,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:73c16ed8b5b407453657b50cd771d541848c98eb99fb8c548df819d0b22b9d36",
+        "cell_state_set_digest": "sha256:99b268013b2e082a80a4f7680c8ace280c87b9491c3d74681ab9398e9f6224af",
         "cells": 35,
         "status": "COMPLETE",
         "unknown": 0,
@@ -842,8 +840,8 @@
       ],
       "diacritics": {
         "ambiguous": 69,
-        "status": "COMPLETE",
-        "unambiguous": 0
+        "status": "GAP",
+        "unambiguous": 1
       },
       "evidence_routing": {
         "carried_forward": 0,
@@ -891,12 +889,12 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_AUDITED",
-        "diacritics": "COMPLETE",
+        "diacritics": "GAP",
         "evidence_routing": "COMPLETE",
         "ex_co_graph": "COMPLETE",
         "oracle": "NO_RECEIPTS",
@@ -918,7 +916,7 @@
         "status": "NO_RECEIPTS"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:bd0978efa4a98e37672345a768ee65fa3bdef63004c0e74f8b9c59b5f999bd09",
+        "capacities_digest": "sha256:26c76a2b26a3015c4f1975bc43c2748f98dac4e92f549805c3eab8c29c3ad71b",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 4,
@@ -933,7 +931,7 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 28,
+        "machine_unclassified": 29,
         "machine_unclassified_ids": [
           "1NSI::1NSI-ARCHITECTURE-OS::C1::corriges",
           "1NSI::1NSI-ARCHITECTURE-OS::C1::cours",
@@ -953,6 +951,7 @@
           "1NSI::1NSI-ARCHITECTURE-OS::C3::qcm",
           "1NSI::1NSI-ARCHITECTURE-OS::C4::corriges",
           "1NSI::1NSI-ARCHITECTURE-OS::C4::cours",
+          "1NSI::1NSI-ARCHITECTURE-OS::C4::evaluations",
           "1NSI::1NSI-ARCHITECTURE-OS::C4::exercices",
           "1NSI::1NSI-ARCHITECTURE-OS::C4::methodes",
           "1NSI::1NSI-ARCHITECTURE-OS::C4::qcm",
@@ -967,9 +966,9 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 7,
+        "raw_missing": 6,
         "routed_to_human": 0,
-        "semantically_unvalidated": 28,
+        "semantically_unvalidated": 29,
         "semantically_unvalidated_ids": [
           "1NSI::1NSI-ARCHITECTURE-OS::C1::corriges",
           "1NSI::1NSI-ARCHITECTURE-OS::C1::cours",
@@ -989,6 +988,7 @@
           "1NSI::1NSI-ARCHITECTURE-OS::C3::qcm",
           "1NSI::1NSI-ARCHITECTURE-OS::C4::corriges",
           "1NSI::1NSI-ARCHITECTURE-OS::C4::cours",
+          "1NSI::1NSI-ARCHITECTURE-OS::C4::evaluations",
           "1NSI::1NSI-ARCHITECTURE-OS::C4::exercices",
           "1NSI::1NSI-ARCHITECTURE-OS::C4::methodes",
           "1NSI::1NSI-ARCHITECTURE-OS::C4::qcm",
@@ -1000,7 +1000,7 @@
           "1NSI::1NSI-ARCHITECTURE-OS::C5::qcm",
           "1NSI::1NSI-ARCHITECTURE-OS::C5::remediation"
         ],
-        "semantically_unvalidated_set_digest": "sha256:93bf0aa28956e4baa651a5675db53175aabe9c3347d3595ff57f46623f97df7c",
+        "semantically_unvalidated_set_digest": "sha256:f723c1f9e2c3c365210909c8264aab775281742cfb9a861d94277ad5dc9af550",
         "status": "GAP",
         "triaged_ids": [
           "1NSI::1NSI-ARCHITECTURE-OS::C1::methodes",
@@ -1008,10 +1008,9 @@
           "1NSI::1NSI-ARCHITECTURE-OS::C2::remediation",
           "1NSI::1NSI-ARCHITECTURE-OS::C3::methodes",
           "1NSI::1NSI-ARCHITECTURE-OS::C3::remediation",
-          "1NSI::1NSI-ARCHITECTURE-OS::C4::evaluations",
           "1NSI::1NSI-ARCHITECTURE-OS::C4::remediation"
         ],
-        "triaged_not_a_gap": 7
+        "triaged_not_a_gap": 6
       },
       "programme": {
         "mandatory_atoms": 7,
@@ -1072,7 +1071,7 @@
         "questions": 6,
         "status": "COMPLETE"
       },
-      "risk_score": 1880,
+      "risk_score": 1907,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -1088,14 +1087,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C2",
-          "C3",
-          "C7"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "1NSI-LANG-EVAL-A",
           "1NSI-LANG-EVAL-B"
@@ -1106,7 +1101,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:b632934751a98a64be635916e5aed1846ce99b54a5721d8cd5579b3499816557",
+        "cell_state_set_digest": "sha256:3f04cb15e6fd1dd267862a39965f88bfca49ea0bc9510a0bb50ae585598378c5",
         "cells": 49,
         "status": "COMPLETE",
         "unknown": 0,
@@ -1181,9 +1176,9 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 72,
-        "status": "COMPLETE",
-        "unambiguous": 0
+        "ambiguous": 76,
+        "status": "GAP",
+        "unambiguous": 12
       },
       "evidence_routing": {
         "carried_forward": 0,
@@ -1232,12 +1227,12 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_AUDITED",
-        "diacritics": "COMPLETE",
+        "diacritics": "GAP",
         "evidence_routing": "COMPLETE",
         "ex_co_graph": "COMPLETE",
         "oracle": "NO_RECEIPTS",
@@ -1259,7 +1254,7 @@
         "status": "NO_RECEIPTS"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:f153b4473327119da057b11316ea238764dc62ce8de0d7fc29d476c9314076e8",
+        "capacities_digest": "sha256:30238b5399cd636810a5de79dc92c3f648bf2f811ca565a49b3757adb4f91485",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 6,
@@ -1274,7 +1269,7 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 38,
+        "machine_unclassified": 41,
         "machine_unclassified_ids": [
           "1NSI::1NSI-LANGAGE::C1::corriges",
           "1NSI::1NSI-LANGAGE::C1::cours",
@@ -1283,10 +1278,12 @@
           "1NSI::1NSI-LANGAGE::C1::qcm",
           "1NSI::1NSI-LANGAGE::C2::corriges",
           "1NSI::1NSI-LANGAGE::C2::cours",
+          "1NSI::1NSI-LANGAGE::C2::evaluations",
           "1NSI::1NSI-LANGAGE::C2::exercices",
           "1NSI::1NSI-LANGAGE::C2::qcm",
           "1NSI::1NSI-LANGAGE::C3::corriges",
           "1NSI::1NSI-LANGAGE::C3::cours",
+          "1NSI::1NSI-LANGAGE::C3::evaluations",
           "1NSI::1NSI-LANGAGE::C3::exercices",
           "1NSI::1NSI-LANGAGE::C3::methodes",
           "1NSI::1NSI-LANGAGE::C3::qcm",
@@ -1311,6 +1308,7 @@
           "1NSI::1NSI-LANGAGE::C6::qcm",
           "1NSI::1NSI-LANGAGE::C7::corriges",
           "1NSI::1NSI-LANGAGE::C7::cours",
+          "1NSI::1NSI-LANGAGE::C7::evaluations",
           "1NSI::1NSI-LANGAGE::C7::exercices",
           "1NSI::1NSI-LANGAGE::C7::methodes",
           "1NSI::1NSI-LANGAGE::C7::qcm"
@@ -1318,9 +1316,9 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 11,
+        "raw_missing": 8,
         "routed_to_human": 0,
-        "semantically_unvalidated": 38,
+        "semantically_unvalidated": 41,
         "semantically_unvalidated_ids": [
           "1NSI::1NSI-LANGAGE::C1::corriges",
           "1NSI::1NSI-LANGAGE::C1::cours",
@@ -1329,10 +1327,12 @@
           "1NSI::1NSI-LANGAGE::C1::qcm",
           "1NSI::1NSI-LANGAGE::C2::corriges",
           "1NSI::1NSI-LANGAGE::C2::cours",
+          "1NSI::1NSI-LANGAGE::C2::evaluations",
           "1NSI::1NSI-LANGAGE::C2::exercices",
           "1NSI::1NSI-LANGAGE::C2::qcm",
           "1NSI::1NSI-LANGAGE::C3::corriges",
           "1NSI::1NSI-LANGAGE::C3::cours",
+          "1NSI::1NSI-LANGAGE::C3::evaluations",
           "1NSI::1NSI-LANGAGE::C3::exercices",
           "1NSI::1NSI-LANGAGE::C3::methodes",
           "1NSI::1NSI-LANGAGE::C3::qcm",
@@ -1357,26 +1357,24 @@
           "1NSI::1NSI-LANGAGE::C6::qcm",
           "1NSI::1NSI-LANGAGE::C7::corriges",
           "1NSI::1NSI-LANGAGE::C7::cours",
+          "1NSI::1NSI-LANGAGE::C7::evaluations",
           "1NSI::1NSI-LANGAGE::C7::exercices",
           "1NSI::1NSI-LANGAGE::C7::methodes",
           "1NSI::1NSI-LANGAGE::C7::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:3e3f86e48b9d0fbc29b84061c32a27039a1c3abe7dfeac51e8983220081b362d",
+        "semantically_unvalidated_set_digest": "sha256:16f895fac96be7bf05e40460c7492532e49fbb4ffde1a644157eb49325d80f28",
         "status": "GAP",
         "triaged_ids": [
           "1NSI::1NSI-LANGAGE::C1::methodes",
           "1NSI::1NSI-LANGAGE::C1::remediation",
-          "1NSI::1NSI-LANGAGE::C2::evaluations",
           "1NSI::1NSI-LANGAGE::C2::methodes",
           "1NSI::1NSI-LANGAGE::C2::remediation",
-          "1NSI::1NSI-LANGAGE::C3::evaluations",
           "1NSI::1NSI-LANGAGE::C3::remediation",
           "1NSI::1NSI-LANGAGE::C5::remediation",
           "1NSI::1NSI-LANGAGE::C6::remediation",
-          "1NSI::1NSI-LANGAGE::C7::evaluations",
           "1NSI::1NSI-LANGAGE::C7::remediation"
         ],
-        "triaged_not_a_gap": 11
+        "triaged_not_a_gap": 8
       },
       "programme": {
         "mandatory_atoms": 12,
@@ -1445,7 +1443,7 @@
         "questions": 8,
         "status": "COMPLETE"
       },
-      "risk_score": 2560,
+      "risk_score": 2699,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -1461,12 +1459,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C4"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "1NSI-PM-EVAL-A",
           "1NSI-PM-EVAL-B"
@@ -1477,7 +1473,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:2869bd8bec61dfcdeacc98d076eb85a3a2db49cc709c8548276ff197d97809de",
+        "cell_state_set_digest": "sha256:79b794f5982befe2dc1dd4c30538b6eabadf1cedc698f38317f77d2c77e1a74d",
         "cells": 28,
         "status": "COMPLETE",
         "unknown": 0,
@@ -1552,9 +1548,9 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 53,
-        "status": "COMPLETE",
-        "unambiguous": 0
+        "ambiguous": 59,
+        "status": "GAP",
+        "unambiguous": 5
       },
       "evidence_routing": {
         "carried_forward": 0,
@@ -1601,12 +1597,12 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_AUDITED",
-        "diacritics": "COMPLETE",
+        "diacritics": "GAP",
         "evidence_routing": "COMPLETE",
         "ex_co_graph": "COMPLETE",
         "oracle": "NO_RECEIPTS",
@@ -1628,7 +1624,7 @@
         "status": "NO_RECEIPTS"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:13b373ae819717783be73d5d1efd2d9996f893b22792c1e625e323f8e7c24095",
+        "capacities_digest": "sha256:e923c4e96f3592271d4a4a24b7232101573436501585faa020ea02cf17c9c4fa",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 4,
@@ -1643,7 +1639,7 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 22,
+        "machine_unclassified": 23,
         "machine_unclassified_ids": [
           "1NSI::1NSI-PROJET-METHODES::C1::corriges",
           "1NSI::1NSI-PROJET-METHODES::C1::cours",
@@ -1664,6 +1660,7 @@
           "1NSI::1NSI-PROJET-METHODES::C3::remediation",
           "1NSI::1NSI-PROJET-METHODES::C4::corriges",
           "1NSI::1NSI-PROJET-METHODES::C4::cours",
+          "1NSI::1NSI-PROJET-METHODES::C4::evaluations",
           "1NSI::1NSI-PROJET-METHODES::C4::exercices",
           "1NSI::1NSI-PROJET-METHODES::C4::methodes",
           "1NSI::1NSI-PROJET-METHODES::C4::qcm"
@@ -1671,9 +1668,9 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 6,
+        "raw_missing": 5,
         "routed_to_human": 0,
-        "semantically_unvalidated": 22,
+        "semantically_unvalidated": 23,
         "semantically_unvalidated_ids": [
           "1NSI::1NSI-PROJET-METHODES::C1::corriges",
           "1NSI::1NSI-PROJET-METHODES::C1::cours",
@@ -1694,21 +1691,21 @@
           "1NSI::1NSI-PROJET-METHODES::C3::remediation",
           "1NSI::1NSI-PROJET-METHODES::C4::corriges",
           "1NSI::1NSI-PROJET-METHODES::C4::cours",
+          "1NSI::1NSI-PROJET-METHODES::C4::evaluations",
           "1NSI::1NSI-PROJET-METHODES::C4::exercices",
           "1NSI::1NSI-PROJET-METHODES::C4::methodes",
           "1NSI::1NSI-PROJET-METHODES::C4::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:bac8b7f2d0dd81825902aad7a5b1603017191112c8bd29241b7a3764b9b7eb51",
+        "semantically_unvalidated_set_digest": "sha256:65d51a4ef679b994c314a1a9197679b50bddf17b7bb1e2a16156d8831a442c42",
         "status": "GAP",
         "triaged_ids": [
           "1NSI::1NSI-PROJET-METHODES::C1::methodes",
           "1NSI::1NSI-PROJET-METHODES::C1::remediation",
           "1NSI::1NSI-PROJET-METHODES::C2::remediation",
           "1NSI::1NSI-PROJET-METHODES::C3::methodes",
-          "1NSI::1NSI-PROJET-METHODES::C4::evaluations",
           "1NSI::1NSI-PROJET-METHODES::C4::remediation"
         ],
-        "triaged_not_a_gap": 6
+        "triaged_not_a_gap": 5
       },
       "programme": {
         "mandatory_atoms": 3,
@@ -1764,7 +1761,7 @@
         "questions": 6,
         "status": "COMPLETE"
       },
-      "risk_score": 1610,
+      "risk_score": 1645,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -1780,12 +1777,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C5"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "1NSI-RES-EVAL-A",
           "1NSI-RES-EVAL-B"
@@ -1796,7 +1791,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:dd8c51727e1e07c1a283b027a8ebfcc071ff4d4246d951d1cd5beec8fbee8618",
+        "cell_state_set_digest": "sha256:403b0f7570d50c1187c9f67c2d1f05dbd88048b5bd6541c51585584f95f434e8",
         "cells": 35,
         "status": "COMPLETE",
         "unknown": 0,
@@ -1871,9 +1866,9 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 79,
-        "status": "COMPLETE",
-        "unambiguous": 0
+        "ambiguous": 85,
+        "status": "GAP",
+        "unambiguous": 8
       },
       "evidence_routing": {
         "carried_forward": 0,
@@ -1920,12 +1915,12 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_AUDITED",
-        "diacritics": "COMPLETE",
+        "diacritics": "GAP",
         "evidence_routing": "COMPLETE",
         "ex_co_graph": "COMPLETE",
         "oracle": "NO_RECEIPTS",
@@ -1947,7 +1942,7 @@
         "status": "NO_RECEIPTS"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:3d8775e7eea448a443247b076e3a58b7aaf957b1aab8a4f6bf39b47ef611795f",
+        "capacities_digest": "sha256:b41eb4a337be21c75a232f0a8c4f37d70565b7ba5678db4f179c335606bf9e52",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 5,
@@ -1962,7 +1957,7 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 28,
+        "machine_unclassified": 29,
         "machine_unclassified_ids": [
           "1NSI::1NSI-RESEAUX::C1::corriges",
           "1NSI::1NSI-RESEAUX::C1::cours",
@@ -1989,6 +1984,7 @@
           "1NSI::1NSI-RESEAUX::C4::qcm",
           "1NSI::1NSI-RESEAUX::C5::corriges",
           "1NSI::1NSI-RESEAUX::C5::cours",
+          "1NSI::1NSI-RESEAUX::C5::evaluations",
           "1NSI::1NSI-RESEAUX::C5::exercices",
           "1NSI::1NSI-RESEAUX::C5::methodes",
           "1NSI::1NSI-RESEAUX::C5::qcm"
@@ -1996,9 +1992,9 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 7,
+        "raw_missing": 6,
         "routed_to_human": 0,
-        "semantically_unvalidated": 28,
+        "semantically_unvalidated": 29,
         "semantically_unvalidated_ids": [
           "1NSI::1NSI-RESEAUX::C1::corriges",
           "1NSI::1NSI-RESEAUX::C1::cours",
@@ -2025,11 +2021,12 @@
           "1NSI::1NSI-RESEAUX::C4::qcm",
           "1NSI::1NSI-RESEAUX::C5::corriges",
           "1NSI::1NSI-RESEAUX::C5::cours",
+          "1NSI::1NSI-RESEAUX::C5::evaluations",
           "1NSI::1NSI-RESEAUX::C5::exercices",
           "1NSI::1NSI-RESEAUX::C5::methodes",
           "1NSI::1NSI-RESEAUX::C5::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:e8661bf6de0d9c5b8ebc281b4fec66f00b484fc79fd08382db93ba5af9e650d7",
+        "semantically_unvalidated_set_digest": "sha256:c78765a83890d34287d59bdf2cfad44830bd5881856e7572f0eabfeb15ff1be2",
         "status": "GAP",
         "triaged_ids": [
           "1NSI::1NSI-RESEAUX::C1::methodes",
@@ -2037,10 +2034,9 @@
           "1NSI::1NSI-RESEAUX::C3::remediation",
           "1NSI::1NSI-RESEAUX::C4::methodes",
           "1NSI::1NSI-RESEAUX::C4::remediation",
-          "1NSI::1NSI-RESEAUX::C5::evaluations",
           "1NSI::1NSI-RESEAUX::C5::remediation"
         ],
-        "triaged_not_a_gap": 7
+        "triaged_not_a_gap": 6
       },
       "programme": {
         "mandatory_atoms": 7,
@@ -2101,7 +2097,7 @@
         "questions": 6,
         "status": "COMPLETE"
       },
-      "risk_score": 1950,
+      "risk_score": 1991,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -3124,16 +3120,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C2",
-          "C4",
-          "C5",
-          "C6",
-          "C7"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "1NSI-WEB-EVAL-A",
           "1NSI-WEB-EVAL-B"
@@ -3144,7 +3134,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:2c965fb025f8d2d59d308abf3e20ba0ae5a80b07b2156e7de57dba6727c67fe5",
+        "cell_state_set_digest": "sha256:59be9c3863db41a9f65fd4fec2e613721389b1a419682d0cb3db164b9ecf7daf",
         "cells": 63,
         "status": "COMPLETE",
         "unknown": 0,
@@ -3219,9 +3209,9 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 92,
-        "status": "COMPLETE",
-        "unambiguous": 0
+        "ambiguous": 103,
+        "status": "GAP",
+        "unambiguous": 21
       },
       "evidence_routing": {
         "carried_forward": 0,
@@ -3272,12 +3262,12 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_AUDITED",
-        "diacritics": "COMPLETE",
+        "diacritics": "GAP",
         "evidence_routing": "COMPLETE",
         "ex_co_graph": "COMPLETE",
         "oracle": "NO_RECEIPTS",
@@ -3299,7 +3289,7 @@
         "status": "NO_RECEIPTS"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:c1c9970231c65c3de9f6c6a8e5612f081ed9408efc2fb7ce72bc94dbc8f9019f",
+        "capacities_digest": "sha256:2e13292ab1accf6bf5c31a45d340cee67ee54c316f9f0604ace33eaee9135d99",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 8,
@@ -3314,7 +3304,7 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 45,
+        "machine_unclassified": 50,
         "machine_unclassified_ids": [
           "1NSI::1NSI-WEB-IHM::C1::corriges",
           "1NSI::1NSI-WEB-IHM::C1::cours",
@@ -3323,6 +3313,7 @@
           "1NSI::1NSI-WEB-IHM::C1::qcm",
           "1NSI::1NSI-WEB-IHM::C2::corriges",
           "1NSI::1NSI-WEB-IHM::C2::cours",
+          "1NSI::1NSI-WEB-IHM::C2::evaluations",
           "1NSI::1NSI-WEB-IHM::C2::exercices",
           "1NSI::1NSI-WEB-IHM::C2::qcm",
           "1NSI::1NSI-WEB-IHM::C3::corriges",
@@ -3333,18 +3324,22 @@
           "1NSI::1NSI-WEB-IHM::C3::qcm",
           "1NSI::1NSI-WEB-IHM::C4::corriges",
           "1NSI::1NSI-WEB-IHM::C4::cours",
+          "1NSI::1NSI-WEB-IHM::C4::evaluations",
           "1NSI::1NSI-WEB-IHM::C4::exercices",
           "1NSI::1NSI-WEB-IHM::C4::qcm",
           "1NSI::1NSI-WEB-IHM::C5::corriges",
           "1NSI::1NSI-WEB-IHM::C5::cours",
+          "1NSI::1NSI-WEB-IHM::C5::evaluations",
           "1NSI::1NSI-WEB-IHM::C5::exercices",
           "1NSI::1NSI-WEB-IHM::C5::qcm",
           "1NSI::1NSI-WEB-IHM::C6::corriges",
           "1NSI::1NSI-WEB-IHM::C6::cours",
+          "1NSI::1NSI-WEB-IHM::C6::evaluations",
           "1NSI::1NSI-WEB-IHM::C6::exercices",
           "1NSI::1NSI-WEB-IHM::C6::qcm",
           "1NSI::1NSI-WEB-IHM::C7::corriges",
           "1NSI::1NSI-WEB-IHM::C7::cours",
+          "1NSI::1NSI-WEB-IHM::C7::evaluations",
           "1NSI::1NSI-WEB-IHM::C7::exercices",
           "1NSI::1NSI-WEB-IHM::C7::methodes",
           "1NSI::1NSI-WEB-IHM::C7::qcm",
@@ -3365,9 +3360,9 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 18,
+        "raw_missing": 13,
         "routed_to_human": 0,
-        "semantically_unvalidated": 45,
+        "semantically_unvalidated": 50,
         "semantically_unvalidated_ids": [
           "1NSI::1NSI-WEB-IHM::C1::corriges",
           "1NSI::1NSI-WEB-IHM::C1::cours",
@@ -3376,6 +3371,7 @@
           "1NSI::1NSI-WEB-IHM::C1::qcm",
           "1NSI::1NSI-WEB-IHM::C2::corriges",
           "1NSI::1NSI-WEB-IHM::C2::cours",
+          "1NSI::1NSI-WEB-IHM::C2::evaluations",
           "1NSI::1NSI-WEB-IHM::C2::exercices",
           "1NSI::1NSI-WEB-IHM::C2::qcm",
           "1NSI::1NSI-WEB-IHM::C3::corriges",
@@ -3386,18 +3382,22 @@
           "1NSI::1NSI-WEB-IHM::C3::qcm",
           "1NSI::1NSI-WEB-IHM::C4::corriges",
           "1NSI::1NSI-WEB-IHM::C4::cours",
+          "1NSI::1NSI-WEB-IHM::C4::evaluations",
           "1NSI::1NSI-WEB-IHM::C4::exercices",
           "1NSI::1NSI-WEB-IHM::C4::qcm",
           "1NSI::1NSI-WEB-IHM::C5::corriges",
           "1NSI::1NSI-WEB-IHM::C5::cours",
+          "1NSI::1NSI-WEB-IHM::C5::evaluations",
           "1NSI::1NSI-WEB-IHM::C5::exercices",
           "1NSI::1NSI-WEB-IHM::C5::qcm",
           "1NSI::1NSI-WEB-IHM::C6::corriges",
           "1NSI::1NSI-WEB-IHM::C6::cours",
+          "1NSI::1NSI-WEB-IHM::C6::evaluations",
           "1NSI::1NSI-WEB-IHM::C6::exercices",
           "1NSI::1NSI-WEB-IHM::C6::qcm",
           "1NSI::1NSI-WEB-IHM::C7::corriges",
           "1NSI::1NSI-WEB-IHM::C7::cours",
+          "1NSI::1NSI-WEB-IHM::C7::evaluations",
           "1NSI::1NSI-WEB-IHM::C7::exercices",
           "1NSI::1NSI-WEB-IHM::C7::methodes",
           "1NSI::1NSI-WEB-IHM::C7::qcm",
@@ -3415,29 +3415,24 @@
           "1NSI::1NSI-WEB-IHM::C9::qcm",
           "1NSI::1NSI-WEB-IHM::C9::remediation"
         ],
-        "semantically_unvalidated_set_digest": "sha256:aafb1dbeb4f090ada9ec70552dc1ec5b000a78d04620e0685de8e5533335c8b8",
+        "semantically_unvalidated_set_digest": "sha256:c99560dc7da8a27f6aef37b94aa773b670a31cb0f60aa1e9160f42a61906d25b",
         "status": "GAP",
         "triaged_ids": [
           "1NSI::1NSI-WEB-IHM::C1::methodes",
           "1NSI::1NSI-WEB-IHM::C1::remediation",
-          "1NSI::1NSI-WEB-IHM::C2::evaluations",
           "1NSI::1NSI-WEB-IHM::C2::methodes",
           "1NSI::1NSI-WEB-IHM::C2::remediation",
           "1NSI::1NSI-WEB-IHM::C3::remediation",
-          "1NSI::1NSI-WEB-IHM::C4::evaluations",
           "1NSI::1NSI-WEB-IHM::C4::methodes",
           "1NSI::1NSI-WEB-IHM::C4::remediation",
-          "1NSI::1NSI-WEB-IHM::C5::evaluations",
           "1NSI::1NSI-WEB-IHM::C5::methodes",
           "1NSI::1NSI-WEB-IHM::C5::remediation",
-          "1NSI::1NSI-WEB-IHM::C6::evaluations",
           "1NSI::1NSI-WEB-IHM::C6::methodes",
           "1NSI::1NSI-WEB-IHM::C6::remediation",
-          "1NSI::1NSI-WEB-IHM::C7::evaluations",
           "1NSI::1NSI-WEB-IHM::C7::remediation",
           "1NSI::1NSI-WEB-IHM::C8::remediation"
         ],
-        "triaged_not_a_gap": 18
+        "triaged_not_a_gap": 13
       },
       "programme": {
         "mandatory_atoms": 13,
@@ -3513,7 +3508,7 @@
         "questions": 10,
         "status": "COMPLETE"
       },
-      "risk_score": 3105,
+      "risk_score": 3352,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -11516,17 +11511,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C10",
-          "C12",
-          "C13",
-          "C3",
-          "C4",
-          "C8"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "TNSI-ALGO-EVAL-A",
           "TNSI-ALGO-EVAL-B"
@@ -11537,7 +11525,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:de09ad9d20df524a4175fb577f179bf5029192131042e0cc6227ec7954669619",
+        "cell_state_set_digest": "sha256:ffb7d91b8f127ecce26fb3acecc0a77e8cc758c90a8eeb81ea9229a3b287e4e6",
         "cells": 91,
         "status": "COMPLETE",
         "unknown": 0,
@@ -11622,9 +11610,9 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 140,
-        "status": "COMPLETE",
-        "unambiguous": 0
+        "ambiguous": 154,
+        "status": "GAP",
+        "unambiguous": 15
       },
       "evidence_routing": {
         "carried_forward": 0,
@@ -11678,12 +11666,12 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_AUDITED",
-        "diacritics": "COMPLETE",
+        "diacritics": "GAP",
         "evidence_routing": "COMPLETE",
         "ex_co_graph": "COMPLETE",
         "oracle": "NO_RECEIPTS",
@@ -11705,7 +11693,7 @@
         "status": "NO_RECEIPTS"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:03048d101ace5f0ad7e278147f0f7f0b95359c86c475bdc1cfb2970c2ba145d9",
+        "capacities_digest": "sha256:c4aa33e05adb315a394949f7be98e4cff169291dc87c4d1c5d41ce9614f05f8d",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 12,
@@ -11720,10 +11708,11 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 56,
+        "machine_unclassified": 62,
         "machine_unclassified_ids": [
           "TNSI::TNSI-ALGORITHMIQUE::C10::corriges",
           "TNSI::TNSI-ALGORITHMIQUE::C10::cours",
+          "TNSI::TNSI-ALGORITHMIQUE::C10::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C10::exercices",
           "TNSI::TNSI-ALGORITHMIQUE::C10::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C11::corriges",
@@ -11734,11 +11723,13 @@
           "TNSI::TNSI-ALGORITHMIQUE::C11::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C12::corriges",
           "TNSI::TNSI-ALGORITHMIQUE::C12::cours",
+          "TNSI::TNSI-ALGORITHMIQUE::C12::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C12::exercices",
           "TNSI::TNSI-ALGORITHMIQUE::C12::methodes",
           "TNSI::TNSI-ALGORITHMIQUE::C12::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C12::remediation",
           "TNSI::TNSI-ALGORITHMIQUE::C13::cours",
+          "TNSI::TNSI-ALGORITHMIQUE::C13::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C13::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C1::corriges",
           "TNSI::TNSI-ALGORITHMIQUE::C1::cours",
@@ -11750,10 +11741,12 @@
           "TNSI::TNSI-ALGORITHMIQUE::C2::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C3::corriges",
           "TNSI::TNSI-ALGORITHMIQUE::C3::cours",
+          "TNSI::TNSI-ALGORITHMIQUE::C3::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C3::exercices",
           "TNSI::TNSI-ALGORITHMIQUE::C3::methodes",
           "TNSI::TNSI-ALGORITHMIQUE::C3::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C4::cours",
+          "TNSI::TNSI-ALGORITHMIQUE::C4::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C4::methodes",
           "TNSI::TNSI-ALGORITHMIQUE::C4::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C5::corriges",
@@ -11773,6 +11766,7 @@
           "TNSI::TNSI-ALGORITHMIQUE::C7::methodes",
           "TNSI::TNSI-ALGORITHMIQUE::C7::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C8::cours",
+          "TNSI::TNSI-ALGORITHMIQUE::C8::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C8::methodes",
           "TNSI::TNSI-ALGORITHMIQUE::C8::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C9::cours",
@@ -11782,12 +11776,13 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 35,
+        "raw_missing": 29,
         "routed_to_human": 0,
-        "semantically_unvalidated": 56,
+        "semantically_unvalidated": 62,
         "semantically_unvalidated_ids": [
           "TNSI::TNSI-ALGORITHMIQUE::C10::corriges",
           "TNSI::TNSI-ALGORITHMIQUE::C10::cours",
+          "TNSI::TNSI-ALGORITHMIQUE::C10::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C10::exercices",
           "TNSI::TNSI-ALGORITHMIQUE::C10::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C11::corriges",
@@ -11798,11 +11793,13 @@
           "TNSI::TNSI-ALGORITHMIQUE::C11::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C12::corriges",
           "TNSI::TNSI-ALGORITHMIQUE::C12::cours",
+          "TNSI::TNSI-ALGORITHMIQUE::C12::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C12::exercices",
           "TNSI::TNSI-ALGORITHMIQUE::C12::methodes",
           "TNSI::TNSI-ALGORITHMIQUE::C12::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C12::remediation",
           "TNSI::TNSI-ALGORITHMIQUE::C13::cours",
+          "TNSI::TNSI-ALGORITHMIQUE::C13::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C13::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C1::corriges",
           "TNSI::TNSI-ALGORITHMIQUE::C1::cours",
@@ -11814,10 +11811,12 @@
           "TNSI::TNSI-ALGORITHMIQUE::C2::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C3::corriges",
           "TNSI::TNSI-ALGORITHMIQUE::C3::cours",
+          "TNSI::TNSI-ALGORITHMIQUE::C3::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C3::exercices",
           "TNSI::TNSI-ALGORITHMIQUE::C3::methodes",
           "TNSI::TNSI-ALGORITHMIQUE::C3::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C4::cours",
+          "TNSI::TNSI-ALGORITHMIQUE::C4::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C4::methodes",
           "TNSI::TNSI-ALGORITHMIQUE::C4::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C5::corriges",
@@ -11837,22 +11836,20 @@
           "TNSI::TNSI-ALGORITHMIQUE::C7::methodes",
           "TNSI::TNSI-ALGORITHMIQUE::C7::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C8::cours",
+          "TNSI::TNSI-ALGORITHMIQUE::C8::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C8::methodes",
           "TNSI::TNSI-ALGORITHMIQUE::C8::qcm",
           "TNSI::TNSI-ALGORITHMIQUE::C9::cours",
           "TNSI::TNSI-ALGORITHMIQUE::C9::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C9::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:886cfd3643fd21a2fa3186ad596635bdc22bb2eb04413ed218a5b74346523ba5",
+        "semantically_unvalidated_set_digest": "sha256:e97f5ec72bd17fc218e4f7ea5760952b7a8d145509811238f398a5e9f10a7e96",
         "status": "GAP",
         "triaged_ids": [
-          "TNSI::TNSI-ALGORITHMIQUE::C10::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C10::methodes",
           "TNSI::TNSI-ALGORITHMIQUE::C10::remediation",
           "TNSI::TNSI-ALGORITHMIQUE::C11::remediation",
-          "TNSI::TNSI-ALGORITHMIQUE::C12::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C13::corriges",
-          "TNSI::TNSI-ALGORITHMIQUE::C13::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C13::exercices",
           "TNSI::TNSI-ALGORITHMIQUE::C13::methodes",
           "TNSI::TNSI-ALGORITHMIQUE::C13::remediation",
@@ -11862,10 +11859,8 @@
           "TNSI::TNSI-ALGORITHMIQUE::C2::exercices",
           "TNSI::TNSI-ALGORITHMIQUE::C2::methodes",
           "TNSI::TNSI-ALGORITHMIQUE::C2::remediation",
-          "TNSI::TNSI-ALGORITHMIQUE::C3::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C3::remediation",
           "TNSI::TNSI-ALGORITHMIQUE::C4::corriges",
-          "TNSI::TNSI-ALGORITHMIQUE::C4::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C4::exercices",
           "TNSI::TNSI-ALGORITHMIQUE::C4::remediation",
           "TNSI::TNSI-ALGORITHMIQUE::C5::methodes",
@@ -11874,7 +11869,6 @@
           "TNSI::TNSI-ALGORITHMIQUE::C6::remediation",
           "TNSI::TNSI-ALGORITHMIQUE::C7::remediation",
           "TNSI::TNSI-ALGORITHMIQUE::C8::corriges",
-          "TNSI::TNSI-ALGORITHMIQUE::C8::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C8::exercices",
           "TNSI::TNSI-ALGORITHMIQUE::C8::remediation",
           "TNSI::TNSI-ALGORITHMIQUE::C9::corriges",
@@ -11882,7 +11876,7 @@
           "TNSI::TNSI-ALGORITHMIQUE::C9::methodes",
           "TNSI::TNSI-ALGORITHMIQUE::C9::remediation"
         ],
-        "triaged_not_a_gap": 35
+        "triaged_not_a_gap": 29
       },
       "programme": {
         "mandatory_atoms": 14,
@@ -11974,7 +11968,7 @@
         "questions": 13,
         "status": "COMPLETE"
       },
-      "risk_score": 4015,
+      "risk_score": 4295,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -12360,14 +12354,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C2",
-          "C3",
-          "C5"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "TNSI-BDD-EVAL-A",
           "TNSI-BDD-EVAL-B"
@@ -12378,7 +12368,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:ef494d256c5f57288029ee292ce0bfeafb153469e4eef9d2785e70b8d8805dc5",
+        "cell_state_set_digest": "sha256:8f11d8c4cd441815bf5fdf2782010cf224c1bc3fe7a3c062c26b91e5c1732050",
         "cells": 84,
         "status": "COMPLETE",
         "unknown": 0,
@@ -12463,9 +12453,9 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 112,
-        "status": "COMPLETE",
-        "unambiguous": 0
+        "ambiguous": 121,
+        "status": "GAP",
+        "unambiguous": 5
       },
       "evidence_routing": {
         "carried_forward": 0,
@@ -12518,12 +12508,12 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_AUDITED",
-        "diacritics": "COMPLETE",
+        "diacritics": "GAP",
         "evidence_routing": "COMPLETE",
         "ex_co_graph": "COMPLETE",
         "oracle": "NO_RECEIPTS",
@@ -12545,7 +12535,7 @@
         "status": "NO_RECEIPTS"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:d2bde6fec3b9ba1c64e49d7f89ca6e186bb9c8b9e9b521f55c59133907f03428",
+        "capacities_digest": "sha256:c19f4179d6c9a4732299c31f6b31be2c9db752705b07924be339ca077522c1d5",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 12,
@@ -12560,7 +12550,7 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 57,
+        "machine_unclassified": 60,
         "machine_unclassified_ids": [
           "TNSI::TNSI-BASES-DE-DONNEES::C10::corriges",
           "TNSI::TNSI-BASES-DE-DONNEES::C10::cours",
@@ -12584,9 +12574,11 @@
           "TNSI::TNSI-BASES-DE-DONNEES::C1::exercices",
           "TNSI::TNSI-BASES-DE-DONNEES::C1::qcm",
           "TNSI::TNSI-BASES-DE-DONNEES::C2::cours",
+          "TNSI::TNSI-BASES-DE-DONNEES::C2::evaluations",
           "TNSI::TNSI-BASES-DE-DONNEES::C2::qcm",
           "TNSI::TNSI-BASES-DE-DONNEES::C3::corriges",
           "TNSI::TNSI-BASES-DE-DONNEES::C3::cours",
+          "TNSI::TNSI-BASES-DE-DONNEES::C3::evaluations",
           "TNSI::TNSI-BASES-DE-DONNEES::C3::exercices",
           "TNSI::TNSI-BASES-DE-DONNEES::C3::methodes",
           "TNSI::TNSI-BASES-DE-DONNEES::C3::qcm",
@@ -12594,6 +12586,7 @@
           "TNSI::TNSI-BASES-DE-DONNEES::C4::evaluations",
           "TNSI::TNSI-BASES-DE-DONNEES::C4::qcm",
           "TNSI::TNSI-BASES-DE-DONNEES::C5::cours",
+          "TNSI::TNSI-BASES-DE-DONNEES::C5::evaluations",
           "TNSI::TNSI-BASES-DE-DONNEES::C5::qcm",
           "TNSI::TNSI-BASES-DE-DONNEES::C6::corriges",
           "TNSI::TNSI-BASES-DE-DONNEES::C6::cours",
@@ -12623,9 +12616,9 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 27,
+        "raw_missing": 24,
         "routed_to_human": 0,
-        "semantically_unvalidated": 57,
+        "semantically_unvalidated": 60,
         "semantically_unvalidated_ids": [
           "TNSI::TNSI-BASES-DE-DONNEES::C10::corriges",
           "TNSI::TNSI-BASES-DE-DONNEES::C10::cours",
@@ -12649,9 +12642,11 @@
           "TNSI::TNSI-BASES-DE-DONNEES::C1::exercices",
           "TNSI::TNSI-BASES-DE-DONNEES::C1::qcm",
           "TNSI::TNSI-BASES-DE-DONNEES::C2::cours",
+          "TNSI::TNSI-BASES-DE-DONNEES::C2::evaluations",
           "TNSI::TNSI-BASES-DE-DONNEES::C2::qcm",
           "TNSI::TNSI-BASES-DE-DONNEES::C3::corriges",
           "TNSI::TNSI-BASES-DE-DONNEES::C3::cours",
+          "TNSI::TNSI-BASES-DE-DONNEES::C3::evaluations",
           "TNSI::TNSI-BASES-DE-DONNEES::C3::exercices",
           "TNSI::TNSI-BASES-DE-DONNEES::C3::methodes",
           "TNSI::TNSI-BASES-DE-DONNEES::C3::qcm",
@@ -12659,6 +12654,7 @@
           "TNSI::TNSI-BASES-DE-DONNEES::C4::evaluations",
           "TNSI::TNSI-BASES-DE-DONNEES::C4::qcm",
           "TNSI::TNSI-BASES-DE-DONNEES::C5::cours",
+          "TNSI::TNSI-BASES-DE-DONNEES::C5::evaluations",
           "TNSI::TNSI-BASES-DE-DONNEES::C5::qcm",
           "TNSI::TNSI-BASES-DE-DONNEES::C6::corriges",
           "TNSI::TNSI-BASES-DE-DONNEES::C6::cours",
@@ -12685,7 +12681,7 @@
           "TNSI::TNSI-BASES-DE-DONNEES::C9::methodes",
           "TNSI::TNSI-BASES-DE-DONNEES::C9::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:134e264be1afb0a56430ee8bc67194eafa14fd4354d0073a8aa1f6d90b9611f6",
+        "semantically_unvalidated_set_digest": "sha256:8a06b67f3b733300fa8312b77921ab820fcde40c1feeeb75324c5b35a99d0a0a",
         "status": "GAP",
         "triaged_ids": [
           "TNSI::TNSI-BASES-DE-DONNEES::C10::methodes",
@@ -12696,18 +12692,15 @@
           "TNSI::TNSI-BASES-DE-DONNEES::C1::methodes",
           "TNSI::TNSI-BASES-DE-DONNEES::C1::remediation",
           "TNSI::TNSI-BASES-DE-DONNEES::C2::corriges",
-          "TNSI::TNSI-BASES-DE-DONNEES::C2::evaluations",
           "TNSI::TNSI-BASES-DE-DONNEES::C2::exercices",
           "TNSI::TNSI-BASES-DE-DONNEES::C2::methodes",
           "TNSI::TNSI-BASES-DE-DONNEES::C2::remediation",
-          "TNSI::TNSI-BASES-DE-DONNEES::C3::evaluations",
           "TNSI::TNSI-BASES-DE-DONNEES::C3::remediation",
           "TNSI::TNSI-BASES-DE-DONNEES::C4::corriges",
           "TNSI::TNSI-BASES-DE-DONNEES::C4::exercices",
           "TNSI::TNSI-BASES-DE-DONNEES::C4::methodes",
           "TNSI::TNSI-BASES-DE-DONNEES::C4::remediation",
           "TNSI::TNSI-BASES-DE-DONNEES::C5::corriges",
-          "TNSI::TNSI-BASES-DE-DONNEES::C5::evaluations",
           "TNSI::TNSI-BASES-DE-DONNEES::C5::exercices",
           "TNSI::TNSI-BASES-DE-DONNEES::C5::methodes",
           "TNSI::TNSI-BASES-DE-DONNEES::C5::remediation",
@@ -12716,7 +12709,7 @@
           "TNSI::TNSI-BASES-DE-DONNEES::C8::remediation",
           "TNSI::TNSI-BASES-DE-DONNEES::C9::remediation"
         ],
-        "triaged_not_a_gap": 27
+        "triaged_not_a_gap": 24
       },
       "programme": {
         "mandatory_atoms": 11,
@@ -12803,7 +12796,7 @@
         "questions": 12,
         "status": "COMPLETE"
       },
-      "risk_score": 4015,
+      "risk_score": 4140,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -13101,15 +13094,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C10",
-          "C2",
-          "C6",
-          "C7"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "TNSI-LANG-EVAL-A",
           "TNSI-LANG-EVAL-B"
@@ -13120,7 +13108,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:4319d0828af2b440d8e7a1fc55ae918e758ba33d622a8238c3100e357e13257c",
+        "cell_state_set_digest": "sha256:4ffd773ff6908d30f94c43899c7bf557ba6a01a659e6dab0d3d88760d98eb964",
         "cells": 77,
         "status": "COMPLETE",
         "unknown": 0,
@@ -13205,9 +13193,9 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 98,
-        "status": "COMPLETE",
-        "unambiguous": 0
+        "ambiguous": 108,
+        "status": "GAP",
+        "unambiguous": 10
       },
       "evidence_routing": {
         "carried_forward": 0,
@@ -13260,12 +13248,12 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_AUDITED",
-        "diacritics": "COMPLETE",
+        "diacritics": "GAP",
         "evidence_routing": "COMPLETE",
         "ex_co_graph": "COMPLETE",
         "oracle": "NO_RECEIPTS",
@@ -13287,7 +13275,7 @@
         "status": "NO_RECEIPTS"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:532c6d86cd4f2c2206b02ca079eb6d5b3ad9066916fdba4eecf197453c3aba87",
+        "capacities_digest": "sha256:6e6e8378547a8778baa5e77d5595c3f2214b5fe8b6bf0b1df3f23cfe5839f3c0",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 11,
@@ -13302,10 +13290,11 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 46,
+        "machine_unclassified": 50,
         "machine_unclassified_ids": [
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::corriges",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::cours",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::evaluations",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::exercices",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::qcm",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C11::corriges",
@@ -13318,6 +13307,7 @@
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C1::evaluations",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C1::qcm",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::cours",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::evaluations",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::qcm",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C3::cours",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C3::evaluations",
@@ -13336,10 +13326,12 @@
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C5::qcm",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::corriges",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::cours",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::evaluations",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::exercices",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::qcm",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::corriges",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::cours",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::evaluations",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::exercices",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::qcm",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C8::cours",
@@ -13354,12 +13346,13 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 31,
+        "raw_missing": 27,
         "routed_to_human": 0,
-        "semantically_unvalidated": 46,
+        "semantically_unvalidated": 50,
         "semantically_unvalidated_ids": [
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::corriges",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::cours",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::evaluations",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::exercices",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::qcm",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C11::corriges",
@@ -13372,6 +13365,7 @@
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C1::evaluations",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C1::qcm",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::cours",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::evaluations",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::qcm",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C3::cours",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C3::evaluations",
@@ -13390,10 +13384,12 @@
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C5::qcm",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::corriges",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::cours",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::evaluations",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::exercices",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::qcm",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::corriges",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::cours",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::evaluations",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::exercices",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::qcm",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C8::cours",
@@ -13405,10 +13401,9 @@
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C9::exercices",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C9::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:d9d7422376e36a28fcc4db59abb90ea8971efd7f843c6b197dd5fb1d5fe726a4",
+        "semantically_unvalidated_set_digest": "sha256:8129c4b76648d8dda7bd6ef6d9863e810938add565121444885005ce0e0707b2",
         "status": "GAP",
         "triaged_ids": [
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::evaluations",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::methodes",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::remediation",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C11::methodes",
@@ -13417,7 +13412,6 @@
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C1::methodes",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C1::remediation",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::corriges",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::evaluations",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::exercices",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::methodes",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::remediation",
@@ -13427,10 +13421,8 @@
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C3::remediation",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C4::remediation",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C5::remediation",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::evaluations",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::methodes",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::remediation",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::evaluations",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::methodes",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::remediation",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C8::corriges",
@@ -13440,7 +13432,7 @@
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C9::methodes",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C9::remediation"
         ],
-        "triaged_not_a_gap": 31
+        "triaged_not_a_gap": 27
       },
       "programme": {
         "mandatory_atoms": 18,
@@ -13525,7 +13517,7 @@
         "questions": 12,
         "status": "COMPLETE"
       },
-      "risk_score": 3450,
+      "risk_score": 3630,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -13800,19 +13792,10 @@
         "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
-        "missing_capacities": [
-          "C1",
-          "C10",
-          "C13",
-          "C2",
-          "C3",
-          "C7",
-          "C8",
-          "C9"
-        ],
+        "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "TNSI-STRUCT-EVAL-A",
           "TNSI-STRUCT-EVAL-B"
@@ -13823,7 +13806,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:c2d2e8636c11edad8d297a63ba779a01a754482435869f18c15ebafef50f5c5b",
+        "cell_state_set_digest": "sha256:70d7a337ba6bb5e6910285a6f05905696a99c77abf84f1f2d4006dd51f803fd5",
         "cells": 98,
         "status": "COMPLETE",
         "unknown": 0,
@@ -13908,9 +13891,9 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 162,
-        "status": "COMPLETE",
-        "unambiguous": 0
+        "ambiguous": 173,
+        "status": "GAP",
+        "unambiguous": 31
       },
       "evidence_routing": {
         "carried_forward": 0,
@@ -13964,12 +13947,12 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_AUDITED",
-        "diacritics": "COMPLETE",
+        "diacritics": "GAP",
         "evidence_routing": "COMPLETE",
         "ex_co_graph": "COMPLETE",
         "oracle": "NO_RECEIPTS",
@@ -13991,7 +13974,7 @@
         "status": "NO_RECEIPTS"
       },
       "pedagogical_richness": {
-        "capacities_digest": "sha256:a2ac870c6f8ed7e3419ab6e305226acbb966c6b2ac1d86ac552eabfc8b2ed164",
+        "capacities_digest": "sha256:8dabd839641d5e5fa88929ce75eafee4e581168d5a4a4c94cd08b69184606d78",
         "capacity_identity_blockers": 0,
         "excluded_credit_objects": 0,
         "insufficient": 14,
@@ -14006,10 +13989,11 @@
         "indeterminate": 0,
         "indeterminate_ids": [],
         "indeterminate_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "machine_unclassified": 56,
+        "machine_unclassified": 64,
         "machine_unclassified_ids": [
           "TNSI::TNSI-STRUCTURES-DONNEES::C10::corriges",
           "TNSI::TNSI-STRUCTURES-DONNEES::C10::cours",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C10::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C10::exercices",
           "TNSI::TNSI-STRUCTURES-DONNEES::C10::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C11::cours",
@@ -14023,6 +14007,7 @@
           "TNSI::TNSI-STRUCTURES-DONNEES::C12::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C13::corriges",
           "TNSI::TNSI-STRUCTURES-DONNEES::C13::cours",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C13::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C13::exercices",
           "TNSI::TNSI-STRUCTURES-DONNEES::C13::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C14::corriges",
@@ -14032,11 +14017,14 @@
           "TNSI::TNSI-STRUCTURES-DONNEES::C14::methodes",
           "TNSI::TNSI-STRUCTURES-DONNEES::C14::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C1::cours",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C1::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C1::methodes",
           "TNSI::TNSI-STRUCTURES-DONNEES::C1::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C2::cours",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C2::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C2::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C3::cours",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C3::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C3::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C4::corriges",
           "TNSI::TNSI-STRUCTURES-DONNEES::C4::cours",
@@ -14056,24 +14044,28 @@
           "TNSI::TNSI-STRUCTURES-DONNEES::C6::remediation",
           "TNSI::TNSI-STRUCTURES-DONNEES::C7::corriges",
           "TNSI::TNSI-STRUCTURES-DONNEES::C7::cours",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C7::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C7::exercices",
           "TNSI::TNSI-STRUCTURES-DONNEES::C7::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C8::cours",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C8::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C8::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C9::corriges",
           "TNSI::TNSI-STRUCTURES-DONNEES::C9::cours",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C9::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C9::exercices",
           "TNSI::TNSI-STRUCTURES-DONNEES::C9::qcm"
         ],
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "raw_missing": 42,
+        "raw_missing": 34,
         "routed_to_human": 0,
-        "semantically_unvalidated": 56,
+        "semantically_unvalidated": 64,
         "semantically_unvalidated_ids": [
           "TNSI::TNSI-STRUCTURES-DONNEES::C10::corriges",
           "TNSI::TNSI-STRUCTURES-DONNEES::C10::cours",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C10::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C10::exercices",
           "TNSI::TNSI-STRUCTURES-DONNEES::C10::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C11::cours",
@@ -14087,6 +14079,7 @@
           "TNSI::TNSI-STRUCTURES-DONNEES::C12::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C13::corriges",
           "TNSI::TNSI-STRUCTURES-DONNEES::C13::cours",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C13::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C13::exercices",
           "TNSI::TNSI-STRUCTURES-DONNEES::C13::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C14::corriges",
@@ -14096,11 +14089,14 @@
           "TNSI::TNSI-STRUCTURES-DONNEES::C14::methodes",
           "TNSI::TNSI-STRUCTURES-DONNEES::C14::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C1::cours",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C1::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C1::methodes",
           "TNSI::TNSI-STRUCTURES-DONNEES::C1::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C2::cours",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C2::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C2::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C3::cours",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C3::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C3::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C4::corriges",
           "TNSI::TNSI-STRUCTURES-DONNEES::C4::cours",
@@ -14120,19 +14116,21 @@
           "TNSI::TNSI-STRUCTURES-DONNEES::C6::remediation",
           "TNSI::TNSI-STRUCTURES-DONNEES::C7::corriges",
           "TNSI::TNSI-STRUCTURES-DONNEES::C7::cours",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C7::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C7::exercices",
           "TNSI::TNSI-STRUCTURES-DONNEES::C7::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C8::cours",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C8::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C8::qcm",
           "TNSI::TNSI-STRUCTURES-DONNEES::C9::corriges",
           "TNSI::TNSI-STRUCTURES-DONNEES::C9::cours",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C9::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C9::exercices",
           "TNSI::TNSI-STRUCTURES-DONNEES::C9::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:9b5055e680264a1e1ce1e275e809d1691be6e00130a662ff62013d066d700248",
+        "semantically_unvalidated_set_digest": "sha256:70fdd5d751886a0eb91e16ea01153e4eb2c3be430fb452547c5f80356df6dee2",
         "status": "GAP",
         "triaged_ids": [
-          "TNSI::TNSI-STRUCTURES-DONNEES::C10::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C10::methodes",
           "TNSI::TNSI-STRUCTURES-DONNEES::C10::remediation",
           "TNSI::TNSI-STRUCTURES-DONNEES::C11::corriges",
@@ -14140,21 +14138,17 @@
           "TNSI::TNSI-STRUCTURES-DONNEES::C11::remediation",
           "TNSI::TNSI-STRUCTURES-DONNEES::C12::methodes",
           "TNSI::TNSI-STRUCTURES-DONNEES::C12::remediation",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C13::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C13::methodes",
           "TNSI::TNSI-STRUCTURES-DONNEES::C13::remediation",
           "TNSI::TNSI-STRUCTURES-DONNEES::C14::remediation",
           "TNSI::TNSI-STRUCTURES-DONNEES::C1::corriges",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C1::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C1::exercices",
           "TNSI::TNSI-STRUCTURES-DONNEES::C1::remediation",
           "TNSI::TNSI-STRUCTURES-DONNEES::C2::corriges",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C2::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C2::exercices",
           "TNSI::TNSI-STRUCTURES-DONNEES::C2::methodes",
           "TNSI::TNSI-STRUCTURES-DONNEES::C2::remediation",
           "TNSI::TNSI-STRUCTURES-DONNEES::C3::corriges",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C3::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C3::exercices",
           "TNSI::TNSI-STRUCTURES-DONNEES::C3::methodes",
           "TNSI::TNSI-STRUCTURES-DONNEES::C3::remediation",
@@ -14163,19 +14157,16 @@
           "TNSI::TNSI-STRUCTURES-DONNEES::C5::methodes",
           "TNSI::TNSI-STRUCTURES-DONNEES::C5::remediation",
           "TNSI::TNSI-STRUCTURES-DONNEES::C6::methodes",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C7::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C7::methodes",
           "TNSI::TNSI-STRUCTURES-DONNEES::C7::remediation",
           "TNSI::TNSI-STRUCTURES-DONNEES::C8::corriges",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C8::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C8::exercices",
           "TNSI::TNSI-STRUCTURES-DONNEES::C8::methodes",
           "TNSI::TNSI-STRUCTURES-DONNEES::C8::remediation",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C9::evaluations",
           "TNSI::TNSI-STRUCTURES-DONNEES::C9::methodes",
           "TNSI::TNSI-STRUCTURES-DONNEES::C9::remediation"
         ],
-        "triaged_not_a_gap": 42
+        "triaged_not_a_gap": 34
       },
       "programme": {
         "mandatory_atoms": 21,
@@ -14271,7 +14262,7 @@
         "questions": 14,
         "status": "COMPLETE"
       },
-      "risk_score": 4200,
+      "risk_score": 4602,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -17070,15 +17061,13 @@
         "duplicate_correction_targets": [],
         "duplicate_ids": [],
         "duplicate_variants": [],
-        "invalid_status": [
-          "TSPE-PROBA-EV-B-corrige"
-        ],
+        "invalid_status": [],
         "invalid_variants": [],
         "mismatched_capacity": [],
         "missing_capacities": [],
         "missing_variants": [],
         "orphan_corrections": [],
-        "status": "GAP",
+        "status": "COMPLETE",
         "subjects": [
           "TSPE-PROBA-EV-A",
           "TSPE-PROBA-EV-B"
@@ -17216,7 +17205,7 @@
       },
       "human_closure_status": "PENDING",
       "machine_dimensions": {
-        "assessments": "GAP",
+        "assessments": "COMPLETE",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "COMPLETE",
         "course_assembly_truth": "COMPLETE",
@@ -17478,7 +17467,7 @@
         "questions": 10,
         "status": "COMPLETE"
       },
-      "risk_score": 3339,
+      "risk_score": 3319,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -18131,7 +18120,7 @@
   "generated_by": "scripts/build_publish_readiness_chapter_matrix.py",
   "input_digests": {
     "capacity_alias_map": "sha256:3e4f302650f04f0a80acf302a3fae6a246662b9055a27b01952dce2619346261",
-    "chapter_richness": "sha256:4e7d57159c2f330d0d3148472a6744c25050316258f08e6b056fd17e5346036d",
+    "chapter_richness": "sha256:b3038d0a04b413a7e95b36f7c88ca4d0c6e25c6bcb8ba7e9f10e62109e788bb9",
     "clone_ledger": "sha256:255d43c0098205aa247df44feb07f4306e192b1e583f4c5f6607c087cb70d69c",
     "course_body_ownership_map": "sha256:030c328435a18d7fbd346b2b70591e637e2dcd236bd1cdef4371cba8f32e2fbd",
     "cross_discipline_ledger": "sha256:80770d18a4a04f8480587d9b8ee646fa83729c72a4e2b79b5a35794512a3f714",
@@ -18140,7 +18129,7 @@
     "official_programme_sources": "sha256:bf20d6ba7001dae939b572bff8d4d368d99b179bb419d33d240eb98aeeb4fcad",
     "pedagogical_role_applicability": "sha256:d0b74c7910d3786b53aa7fb2bd16cd81762d94fd53d649da2ee417f8125f13c0",
     "semantic_alignment_ledger": "sha256:5806101d48561b4c45b99fea70d41524e14a834c74bd58c6f968d940c4af589b",
-    "true_coverage": "sha256:1c641a76e641468729f9ecca9421ee48d172acd544fa8ddead5394a74a9f13e7"
+    "true_coverage": "sha256:a3552ec50974f876c11e77e57cf83ddfb3ee885dfc9d590027451d7aabbde2b6"
   },
   "manuals": [
     "1NSI",
@@ -18159,22 +18148,22 @@
     {
       "chapter": "TNSI-STRUCTURES-DONNEES",
       "manual": "TNSI",
-      "risk_score": 4200
+      "risk_score": 4602
     },
     {
       "chapter": "TNSI-ALGORITHMIQUE",
       "manual": "TNSI",
-      "risk_score": 4015
+      "risk_score": 4295
     },
     {
       "chapter": "TNSI-BASES-DE-DONNEES",
       "manual": "TNSI",
-      "risk_score": 4015
+      "risk_score": 4140
     },
     {
       "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
       "manual": "TNSI",
-      "risk_score": 3450
+      "risk_score": 3630
     },
     {
       "chapter": "TEXP-ARITHMETIQUE",
@@ -18182,19 +18171,19 @@
       "risk_score": 3390
     },
     {
+      "chapter": "1NSI-WEB-IHM",
+      "manual": "1NSI",
+      "risk_score": 3352
+    },
+    {
       "chapter": "TSPE-PROBABILITES",
       "manual": "TSPE_2026_2027",
-      "risk_score": 3339
+      "risk_score": 3319
     },
     {
       "chapter": "1SPE-SECOND-DEGRE",
       "manual": "1SPE",
       "risk_score": 3200
-    },
-    {
-      "chapter": "1NSI-WEB-IHM",
-      "manual": "1NSI",
-      "risk_score": 3105
     },
     {
       "chapter": "TSPE-SUITES-LIMITES",
@@ -18207,6 +18196,11 @@
       "risk_score": 2860
     },
     {
+      "chapter": "1NSI-LANGAGE",
+      "manual": "1NSI",
+      "risk_score": 2699
+    },
+    {
       "chapter": "TCOMPL-TEMPS-ATTENTE",
       "manual": "TCOMPL",
       "risk_score": 2595
@@ -18215,11 +18209,6 @@
       "chapter": "TCOMPL-MODELES-FONCTION",
       "manual": "TCOMPL",
       "risk_score": 2570
-    },
-    {
-      "chapter": "1NSI-LANGAGE",
-      "manual": "1NSI",
-      "risk_score": 2560
     },
     {
       "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
@@ -18267,19 +18256,19 @@
       "risk_score": 2045
     },
     {
+      "chapter": "1NSI-RESEAUX",
+      "manual": "1NSI",
+      "risk_score": 1991
+    },
+    {
       "chapter": "1NSI-TYPES-BASE",
       "manual": "1NSI",
       "risk_score": 1975
     },
     {
-      "chapter": "1NSI-RESEAUX",
-      "manual": "1NSI",
-      "risk_score": 1950
-    },
-    {
       "chapter": "1NSI-ARCHITECTURE-OS",
       "manual": "1NSI",
-      "risk_score": 1880
+      "risk_score": 1907
     },
     {
       "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
@@ -18319,7 +18308,7 @@
     {
       "chapter": "1NSI-PROJET-METHODES",
       "manual": "1NSI",
-      "risk_score": 1610
+      "risk_score": 1645
     },
     {
       "chapter": "TSPE-PRIMITIVES-EQDIFF",
