@@ -1,0 +1,754 @@
+{
+  "artifact_type": "method_sheet_requirement_audit",
+  "schema_version": 2,
+  "generated_by": "scripts/build_method_sheet_requirement_audit.py",
+  "decision_table": "scripts/method_sheet_decisions.py",
+  "approves_nothing": true,
+  "summary": {
+    "CHAPTERS_AUDITED": 10,
+    "METHOD_SHEET_REQUIRED": 7,
+    "METHOD_ALREADY_EXISTS_NOT_ASSEMBLED": 3,
+    "METHOD_NOT_PEDAGOGICALLY_JUSTIFIED": 0,
+    "TRANSVERSAL_METHOD_ALREADY_COVERS": 0,
+    "PROCEDURAL_CAPACITIES_UNCOVERED": 24,
+    "DECLARATIVE_CAPACITIES": 14,
+    "PROCEDURAL_CAPACITIES_ALREADY_COVERED": 15,
+    "SHEETS_PLANNED": 20,
+    "SHEETS_STILL_TO_AUTHOR": 20,
+    "METHOD_BOOKLET_FILLER_OBJECTS": 0
+  },
+  "chapters": [
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "titre": "Algorithmique 2 : dichotomie, algorithmes gloutons, k plus proches voisins",
+      "verdict": "METHOD_ALREADY_EXISTS_NOT_ASSEMBLED",
+      "existing_method_objects": [
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-001.tex",
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-002.tex",
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-003.tex"
+      ],
+      "planned_sheets": [],
+      "sheets_still_to_author": [],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais écrire une recherche dichotomique dans un tableau trié et prouver sa terminaison à l'aide d'un variant de boucle.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Chapitre deja pourvu de trois fiches methode.",
+          "covered_by": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes"
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais résoudre un problème grâce à un algorithme glouton.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Chapitre deja pourvu de trois fiches methode.",
+          "covered_by": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes"
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais écrire un algorithme qui prédit la classe d'un élément à partir de la classe majoritaire de ses k plus proches voisins.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Chapitre deja pourvu de trois fiches methode.",
+          "covered_by": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes"
+        }
+      ]
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "titre": "Algorithmique 1 : parcours et tris",
+      "verdict": "METHOD_ALREADY_EXISTS_NOT_ASSEMBLED",
+      "existing_method_objects": [
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-001.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-002.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-003.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-004.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-005.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-006.tex"
+      ],
+      "planned_sheets": [],
+      "sheets_still_to_author": [],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais écrire un algorithme de recherche d'une occurrence dans un tableau.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Chapitre deja pourvu de six fiches methode.",
+          "covered_by": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes"
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais écrire un algorithme de recherche d'un extremum ou de calcul d'une moyenne.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Chapitre deja pourvu de six fiches methode.",
+          "covered_by": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes"
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais écrire l'algorithme du tri par insertion.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Chapitre deja pourvu de six fiches methode.",
+          "covered_by": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes"
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais décrire un invariant de boucle qui prouve la correction du tri par insertion.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Chapitre deja pourvu de six fiches methode.",
+          "covered_by": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes"
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais écrire l'algorithme du tri par sélection.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Chapitre deja pourvu de six fiches methode.",
+          "covered_by": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes"
+        },
+        {
+          "code": "C6",
+          "libelle_eleve": "Je sais décrire un invariant de boucle qui prouve la correction du tri par sélection.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Chapitre deja pourvu de six fiches methode.",
+          "covered_by": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes"
+        }
+      ]
+    },
+    {
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "titre": "Architecture de von Neumann et systèmes d'exploitation",
+      "verdict": "METHOD_SHEET_REQUIRED",
+      "existing_method_objects": [],
+      "planned_sheets": [
+        {
+          "sheet_id": "M1",
+          "titre": "Derouler une sequence d'instructions machine dans un tableau de trace",
+          "covers": [
+            "C2"
+          ],
+          "path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M1.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M2",
+          "titre": "Se reperer et agir en ligne de commande",
+          "covers": [
+            "C4"
+          ],
+          "path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M2.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M3",
+          "titre": "Lire et poser des droits en notation octale",
+          "covers": [
+            "C5"
+          ],
+          "path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M3.tex",
+          "authored": false
+        }
+      ],
+      "sheets_still_to_author": [
+        "M1",
+        "M2",
+        "M3"
+      ],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais distinguer les rôles et les caractéristiques des constituants d'une machine (architecture de von Neumann).",
+          "verdict": "DECLARATIVE",
+          "evidence": "Distinguer les roles des constituants d'une machine est un savoir de structure.",
+          "covered_by": null
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais dérouler l'exécution d'une séquence d'instructions simples de type langage machine.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Derouler une sequence d'instructions machine se fait dans un tableau de trace, registre par registre, cycle par cycle. Le cours enonce le principe sans donner le tableau.",
+          "covered_by": null
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais identifier les fonctions d'un système d'exploitation.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Identifier les fonctions d'un systeme d'exploitation est un savoir a enoncer.",
+          "covered_by": null
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais utiliser les commandes de base en ligne de commande.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Se reperer et agir en ligne de commande suit toujours le meme ordre : ou suis-je, que contient ce dossier, comment m'y deplacer, comment agir sans casser.",
+          "covered_by": null
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais gérer les droits et permissions d'accès aux fichiers.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Lire et poser des droits en notation octale est un calcul : trois triplets, une somme par triplet.",
+          "covered_by": null
+        }
+      ]
+    },
+    {
+      "chapter": "1NSI-LANGAGE",
+      "titre": "Langages et programmation",
+      "verdict": "METHOD_SHEET_REQUIRED",
+      "existing_method_objects": [],
+      "planned_sheets": [
+        {
+          "sheet_id": "M1",
+          "titre": "Specifier une fonction : prototype, preconditions, postconditions",
+          "covers": [
+            "C3",
+            "C6",
+            "C7"
+          ],
+          "path": "NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M1.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M2",
+          "titre": "Construire un jeu de tests qui trouve les bugs",
+          "covers": [
+            "C4"
+          ],
+          "path": "NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M2.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M3",
+          "titre": "Trouver une fonction dans la documentation d'une bibliotheque",
+          "covers": [
+            "C5"
+          ],
+          "path": "NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M3.tex",
+          "authored": false
+        }
+      ],
+      "sheets_still_to_author": [
+        "M1",
+        "M2",
+        "M3"
+      ],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais identifier les constructions élémentaires communes aux langages de programmation (séquences, affectation, conditionnelles, boucles, appels de fonction).",
+          "verdict": "DECLARATIVE",
+          "evidence": "Identifier les constructions elementaires communes aux langages est un savoir de reconnaissance.",
+          "covered_by": null
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais repérer, dans un nouveau langage, les traits communs et les traits particuliers par rapport à ce que je connais déjà.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Reperer traits communs et particuliers d'un nouveau langage est une lecture comparative.",
+          "covered_by": null
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais prototyper une fonction.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Prototyper une fonction, avec ses preconditions et postconditions, se fait dans un ordre : signature, ce qu'on exige, ce qu'on garantit. Sert C3, C6 et C7 ensemble.",
+          "covered_by": null
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais mettre au point un programme à l'aide de jeux de tests.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Construire un jeu de tests suit une methode : cas nominal, bornes, cas d'erreur. Le cours enonce ce qu'est un bon jeu de tests sans dire comment l'obtenir.",
+          "covered_by": null
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais utiliser la documentation d'une bibliothèque pour trouver et employer une fonction.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Trouver une fonction dans une documentation est une recherche guidee : module, signature, valeur de retour, exemple.",
+          "covered_by": null
+        },
+        {
+          "code": "C6",
+          "libelle_eleve": "Je sais décrire les préconditions sur les arguments d'une fonction.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Decrire les preconditions : meme demarche que C3, servie par la meme fiche.",
+          "covered_by": null
+        },
+        {
+          "code": "C7",
+          "libelle_eleve": "Je sais décrire les postconditions sur les résultats d'une fonction.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Decrire les postconditions : meme demarche que C3, servie par la meme fiche.",
+          "covered_by": null
+        }
+      ]
+    },
+    {
+      "chapter": "1NSI-PROJET-METHODES",
+      "titre": "Projet et méthodes",
+      "verdict": "METHOD_SHEET_REQUIRED",
+      "existing_method_objects": [],
+      "planned_sheets": [
+        {
+          "sheet_id": "M1",
+          "titre": "Decouper un projet en jalons",
+          "covers": [
+            "C2"
+          ],
+          "path": "NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-M1.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M2",
+          "titre": "Documenter son code et preparer l'oral",
+          "covers": [
+            "C4"
+          ],
+          "path": "NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-M2.tex",
+          "authored": false
+        }
+      ],
+      "sheets_still_to_author": [
+        "M1",
+        "M2"
+      ],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais situer dans le temps les principaux événements de l'histoire de l'informatique et leurs protagonistes.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Situer les evenements de l'histoire de l'informatique est un savoir de reperes.",
+          "covered_by": null
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais structurer un projet informatique en jalons, avec un cahier des charges et un travail en équipe.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Decouper un projet en jalons se fait dans un ordre : besoin, livrables, jalons dates, repartition. Le cours enonce le principe du decoupage sans le derouler.",
+          "covered_by": null
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais déboguer méthodiquement un programme, en lisant un message d'erreur et en localisant la cause du bug.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "La demarche methodique de debogage est deja ecrite pas a pas, en liste numerotee, dans le cours du chapitre. Une fiche la recopierait.",
+          "covered_by": "NSI/chapitres/1NSI-PROJET-METHODES/cours/1NSI-PM-COURS-C3.tex"
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais documenter mon code et préparer une présentation orale argumentée d'un projet informatique.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Documenter son code puis preparer l'oral suit une demarche : ce qu'on ecrit dans le code, ce qu'on ecrit a cote, ce qu'on dit et dans quel ordre.",
+          "covered_by": null
+        }
+      ]
+    },
+    {
+      "chapter": "1NSI-RESEAUX",
+      "titre": "Réseaux : transmission de données",
+      "verdict": "METHOD_SHEET_REQUIRED",
+      "existing_method_objects": [],
+      "planned_sheets": [
+        {
+          "sheet_id": "M1",
+          "titre": "Derouler le protocole du bit alterne",
+          "covers": [
+            "C2"
+          ],
+          "path": "NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-M1.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M2",
+          "titre": "Determiner si deux machines peuvent communiquer",
+          "covers": [
+            "C3"
+          ],
+          "path": "NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-M2.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M3",
+          "titre": "Realiser une IHM a partir d'un cahier des charges",
+          "covers": [
+            "C5"
+          ],
+          "path": "NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-M3.tex",
+          "authored": false
+        }
+      ],
+      "sheets_still_to_author": [
+        "M1",
+        "M2",
+        "M3"
+      ],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais expliquer l'intérêt du découpage en paquets et de l'encapsulation.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Expliquer l'interet du decoupage en paquets est un savoir a enoncer.",
+          "covered_by": null
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais dérouler le fonctionnement d'un protocole simple de récupération de perte de paquets (bit alterné).",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Derouler le protocole du bit alterne se fait par un tableau d'echanges, avec les pertes simulees a chaque tour.",
+          "covered_by": null
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais simuler un réseau simple et déterminer si deux machines peuvent communiquer.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Determiner si deux machines communiquent est un calcul : masque, adresse reseau des deux cotes, comparaison.",
+          "covered_by": null
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais identifier le rôle des capteurs et des actionneurs.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Identifier le role des capteurs et actionneurs est un savoir de reconnaissance.",
+          "covered_by": null
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais réaliser par programmation une IHM répondant à un cahier des charges donné.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Realiser une IHM repondant a un cahier des charges suit une demarche : lire l'exigence, poser les composants, brancher les evenements, verifier point par point.",
+          "covered_by": null
+        }
+      ]
+    },
+    {
+      "chapter": "1NSI-TABLES",
+      "titre": "Traitement de données en tables",
+      "verdict": "METHOD_SHEET_REQUIRED",
+      "existing_method_objects": [],
+      "planned_sheets": [
+        {
+          "sheet_id": "M1",
+          "titre": "Importer une table depuis un fichier CSV",
+          "covers": [
+            "C1"
+          ],
+          "path": "NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-M1.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M2",
+          "titre": "Selectionner les lignes qui verifient un critere",
+          "covers": [
+            "C2"
+          ],
+          "path": "NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-M2.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M3",
+          "titre": "Trier une table suivant une colonne",
+          "covers": [
+            "C3"
+          ],
+          "path": "NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-M3.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M4",
+          "titre": "Fusionner deux tables par une cle commune",
+          "covers": [
+            "C4"
+          ],
+          "path": "NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-M4.tex",
+          "authored": false
+        }
+      ],
+      "sheets_still_to_author": [
+        "M1",
+        "M2",
+        "M3",
+        "M4"
+      ],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais importer une table depuis un fichier texte tabulé ou un fichier CSV.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Importer un CSV suit un enchainement fixe : ouvrir, lire l'en-tete, construire les dictionnaires, refermer. Chaque etape a son piege.",
+          "covered_by": null
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais rechercher les lignes d'une table vérifiant des critères exprimés en logique propositionnelle, et détecter des doublons.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Rechercher des lignes selon un critere en logique propositionnelle se pose : ecrire le predicat, le tester, le composer.",
+          "covered_by": null
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais trier une table suivant une colonne.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Trier suivant une colonne demande de choisir une cle, un sens, et de decider entre `sort` et `sorted`.",
+          "covered_by": null
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais construire une nouvelle table en combinant les données de deux tables.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Fusionner deux tables par cle commune est une demarche en trois temps : indexer, apparier, projeter.",
+          "covered_by": null
+        }
+      ]
+    },
+    {
+      "chapter": "1NSI-TYPES-BASE",
+      "titre": "Représentation des données : types et valeurs de base",
+      "verdict": "METHOD_SHEET_REQUIRED",
+      "existing_method_objects": [],
+      "planned_sheets": [
+        {
+          "sheet_id": "M1",
+          "titre": "Convertir un entier entre les bases 2, 10 et 16",
+          "covers": [
+            "C1"
+          ],
+          "path": "NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-M1.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M2",
+          "titre": "Compter les bits et ecrire en complement a deux",
+          "covers": [
+            "C2"
+          ],
+          "path": "NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-M2.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M3",
+          "titre": "Dresser la table de verite d'une expression booleenne",
+          "covers": [
+            "C4"
+          ],
+          "path": "NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-M3.tex",
+          "authored": false
+        }
+      ],
+      "sheets_still_to_author": [
+        "M1",
+        "M2",
+        "M3"
+      ],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais passer de la représentation d'un entier positif dans une base à une autre (bases 2, 10, 16).",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Convertir entre bases 2, 10 et 16 se fait par divisions successives ou par regroupement de bits : une suite d'etapes que l'eleve execute. Le cours enonce les deux proprietes de conversion sans les derouler.",
+          "covered_by": null
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais évaluer le nombre de bits nécessaires à l'écriture d'un entier en base 2, et utiliser le complément à 2 pour représenter un entier relatif.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Compter les bits necessaires et ecrire un entier en complement a deux sont deux calculs poses, avec un piege de signe a chaque etape.",
+          "covered_by": null
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais expliquer pourquoi la représentation des nombres flottants est approximative et pourquoi il ne faut pas tester leur égalité directement.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Expliquer pourquoi les flottants sont approximatifs est un savoir a enoncer ; il n'y a pas de resultat a construire.",
+          "covered_by": null
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais dresser la table de vérité d'une expression booléenne construite avec and, or, not.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Dresser une table de verite se fait ligne par ligne, dans un ordre precis. Le cours donne les tables de `and` et `or` mais pas la demarche de construction.",
+          "covered_by": null
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais identifier l'intérêt de différents systèmes d'encodage de texte (ASCII, ISO-8859-1, Unicode) et convertir un texte d'un encodage à un autre.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Identifier l'interet de differents encodages est comparatif : rien a executer.",
+          "covered_by": null
+        }
+      ]
+    },
+    {
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "titre": "Types construits : p-uplets, tableaux, dictionnaires",
+      "verdict": "METHOD_ALREADY_EXISTS_NOT_ASSEMBLED",
+      "existing_method_objects": [
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M1.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M2.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M3.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M4.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M5.tex"
+      ],
+      "planned_sheets": [],
+      "sheets_still_to_author": [],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais utiliser des p-uplets et écrire une fonction qui renvoie plusieurs valeurs.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Chapitre deja pourvu de cinq fiches methode.",
+          "covered_by": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes"
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais lire, modifier et construire des tableaux, y compris en compréhension.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Chapitre deja pourvu de cinq fiches methode.",
+          "covered_by": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes"
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais représenter et parcourir une grille avec un tableau de tableaux.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Chapitre deja pourvu de cinq fiches methode.",
+          "covered_by": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes"
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais créer, modifier et parcourir un dictionnaire.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Chapitre deja pourvu de cinq fiches methode.",
+          "covered_by": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes"
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais prévoir l'effet d'une affectation sur un objet mutable.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Chapitre deja pourvu de cinq fiches methode.",
+          "covered_by": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes"
+        }
+      ]
+    },
+    {
+      "chapter": "1NSI-WEB-IHM",
+      "titre": "Interactions entre l'homme et la machine sur le Web",
+      "verdict": "METHOD_SHEET_REQUIRED",
+      "existing_method_objects": [],
+      "planned_sheets": [
+        {
+          "sheet_id": "M1",
+          "titre": "Analyser et modifier ce qui s'execute au clic d'un bouton",
+          "covers": [
+            "C3"
+          ],
+          "path": "NSI/chapitres/1NSI-WEB-IHM/methodes/1NSI-WEB-M1.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M2",
+          "titre": "Lire un formulaire et choisir entre GET et POST",
+          "covers": [
+            "C7",
+            "C8",
+            "C9"
+          ],
+          "path": "NSI/chapitres/1NSI-WEB-IHM/methodes/1NSI-WEB-M2.tex",
+          "authored": false
+        }
+      ],
+      "sheets_still_to_author": [
+        "M1",
+        "M2"
+      ],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais identifier les composants graphiques permettant d'interagir avec une application Web.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Identifier les composants graphiques est un savoir de reconnaissance.",
+          "covered_by": null
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais identifier les événements que les fonctions associées aux composants graphiques peuvent traiter.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Identifier les evenements traitables est un savoir de reconnaissance.",
+          "covered_by": null
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais analyser et modifier les méthodes exécutées lors d'un clic sur un bouton d'une page Web.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Analyser puis modifier le gestionnaire d'un clic suit un chemin fixe : trouver le composant, trouver l'ecouteur, lire la fonction, modifier, reverifier.",
+          "covered_by": null
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais distinguer ce qui est exécuté sur le client ou sur le serveur, et dans quel ordre.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Distinguer ce qui s'execute cote client ou serveur est un savoir de structure.",
+          "covered_by": null
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais distinguer ce qui est mémorisé dans le client et retransmis au serveur.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Distinguer ce qui est memorise et retransmis est un savoir de structure.",
+          "covered_by": null
+        },
+        {
+          "code": "C6",
+          "libelle_eleve": "Je sais reconnaître quand et pourquoi une transmission est chiffrée.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Reconnaitre quand une transmission est chiffree est un savoir de reconnaissance.",
+          "covered_by": null
+        },
+        {
+          "code": "C7",
+          "libelle_eleve": "Je sais analyser le fonctionnement d'un formulaire Web simple.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Analyser un formulaire se fait champ par champ : nom, methode, destination, puis ce qui arrive cote serveur. La meme lecture decide GET ou POST, donc sert C7, C8 et C9.",
+          "covered_by": null
+        },
+        {
+          "code": "C8",
+          "libelle_eleve": "Je sais distinguer les transmissions de paramètres par requêtes POST ou GET.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Distinguer POST et GET dans un formulaire reel : meme lecture que C7, servie par la meme fiche.",
+          "covered_by": null
+        },
+        {
+          "code": "C9",
+          "libelle_eleve": "Je sais discuter du choix du type de requête selon les valeurs à transmettre et leur confidentialité.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Choisir le type de requete selon la confidentialite : meme lecture que C7, servie par la meme fiche.",
+          "covered_by": null
+        }
+      ]
+    }
+  ],
+  "freshness": {
+    "EVIDENCE_HEAD": "0d8331252553580bd67aacd4e3cbd9910b721c41",
+    "INPUT_PATHS": [
+      "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/contrat.yaml",
+      "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/contrat.yaml",
+      "NSI/chapitres/1NSI-ARCHITECTURE-OS/contrat.yaml",
+      "NSI/chapitres/1NSI-LANGAGE/contrat.yaml",
+      "NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml",
+      "NSI/chapitres/1NSI-RESEAUX/contrat.yaml",
+      "NSI/chapitres/1NSI-TABLES/contrat.yaml",
+      "NSI/chapitres/1NSI-TYPES-BASE/contrat.yaml",
+      "NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml",
+      "NSI/chapitres/1NSI-WEB-IHM/contrat.yaml"
+    ],
+    "INPUT_DIGEST": "sha256:cfc1d4b2a7182691316d4ab4321e09cbb7783c17c332044b399fb034049ed218"
+  }
+}
