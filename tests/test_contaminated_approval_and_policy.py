@@ -103,9 +103,12 @@ def test_the_prior_human_directive_is_reported_not_hidden(policy: dict) -> None:
     ]
     assert owner, "la directive du prompt de mission doit rester visible"
     assert all(trace["verified_in_tree"] for trace in owner)
+    # Depuis la decision du 2026-09-07, le statut canonique est nomme par le
+    # Release Owner lui-meme ; la directive reste visible et non appliquee.
     assert policy["summary"]["FIFTY_EXERCISES_RELEASE_REQUIREMENT"] == (
-        "SUPERSEDED_EXPLICIT_REQUIREMENT"
+        "SUPERSEDED_EDITORIAL_VOLUME_TARGET"
     )
+    assert policy["summary"]["HISTORICAL_REQUIREMENT_EXISTED"] is True
     assert "jamais la cible" in policy["current_authority"]
 
 
