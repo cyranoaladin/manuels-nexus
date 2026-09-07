@@ -1,0 +1,28 @@
+% META: {"id": "TEXP-ARI-CO-015", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-015", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% def est_premier(n):
+%     if n < 2:
+%         return False
+%     for p in range(2, int(math.isqrt(n)) + 1):
+%         if n % p == 0:
+%             return False
+%     return True
+% assert math.isqrt(2027) == 45
+% assert est_premier(2027) is True
+% assert 2021 == 43 * 47 and est_premier(2021) is False
+% assert 2027 % 3 == 2 and 2027 % 7 == 4 and 2027 % 43 == 6
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-015}
+\textbf{1.} Si $n=ab$ avec $1<a\leq b<n$, alors $a^2\leq ab=n$ donc
+$a\leq\sqrt{n}$. Tout diviseur non trivial admet donc un facteur premier
+$\leq\sqrt{n}$ : si aucun premier $\leq\sqrt{n}$ ne divise $n$, $n$ est premier.
+
+\textbf{2.} $\sqrt{2027}\approx45{,}0$. On teste les premiers jusqu'à $43$ :
+$2,3,5,7,11,13,17,19,23,29,31,37,41,43$. Aucun ne divise $2\,027$ (par
+exemple $2027=3\times675+2$, $2027=7\times289+4$, $2027=43\times47+6$).
+Donc $2\,027$ est premier.
+
+\textbf{3.} $2\,021=43\times47$ : il n'est pas premier. Le test s'arrête dès
+$p=43$.
+\end{corrige}

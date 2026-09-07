@@ -1,0 +1,22 @@
+% META: {"id": "TEXP-ARI-CO-006", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-006", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% diviseurs = [d for d in range(1, 85) if 84 % d == 0]
+% assert diviseurs == [1, 2, 3, 4, 6, 7, 12, 14, 21, 28, 42, 84]
+% assert len(diviseurs) == 12
+% assert len(diviseurs) % 2 == 0 and len(diviseurs) // 2 == 6
+% assert 120 == 1 * 84 + 36 and 84 == 2 * 36 + 12 and 36 == 3 * 12 + 0
+% assert math.gcd(84, 120) == 12
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-006}
+\textbf{1.} $84=2^2\times3\times7$, donc ses diviseurs positifs sont
+$1,2,3,4,6,7,12,14,21,28,42,84$ : il y en a $12$.
+
+\textbf{2.} Un rangement rectangulaire $a\times b$ correspond à un couple de
+diviseurs de produit $84$. Les $12$ diviseurs se groupent en $6$ paires
+$\{a\,;\,b\}$ : $\{1;84\},\{2;42\},\{3;28\},\{4;21\},\{6;14\},\{7;12\}$.
+Il y a donc $6$ rangements à l'ordre près.
+
+\textbf{3.} $120=1\times84+36$, puis $84=2\times36+12$, puis $36=3\times12+0$.
+Le dernier reste non nul est $12$, donc $\mathrm{PGCD}(84\,;\,120)=12$.
+\end{corrige}

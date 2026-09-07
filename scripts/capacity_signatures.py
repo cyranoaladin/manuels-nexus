@@ -41,7 +41,7 @@ SIGNATURES: dict[str, dict[str, dict[str, list]]] = {
         "C2": {
             "required": [
                 [r"\bcongruen", r"\bmodulo\b", r"\\equiv", r"\\bmod\b"],
-                [r"\binverse\b", r"\bcongruen", r"\\equiv"],
+                [r"\binvers", r"\bcongruen", r"\\equiv", r"\\bmod\b"],
             ],
         },
         "C3": {
@@ -52,11 +52,28 @@ SIGNATURES: dict[str, dict[str, dict[str, list]]] = {
             "forbidden": [r"\\ln\b", r"convexit", r"tableau de variations"],
         },
         "C4": {
+            # Une equation diophantienne se reconnait a sa FORME : deux
+            # inconnues entieres, coefficients entiers, second membre entier.
+            # Exiger le mot « diophantienne » dans l'enonce reviendrait a
+            # demander a l'exercice de se nommer lui-meme.
             "required": [
-                [r"\bdiophantienne\b", r"ax\s*\+\s*by", r"\bB[ée]zout\b"],
+                [
+                    r"\bdiophantienne\b",
+                    r"\bB[ée]zout\b",
+                    r"\d+\s*x\s*\+\s*\d+\s*y\s*=",
+                    r"a\s*x\s*\+\s*b\s*y",
+                ],
+                # « entieres » porte un accent : un marqueur qui l'ignore ne
+                # verrait pas la moitie des enonces du corpus.
+                [r"enti[eèé]r", r"\\mathbb\{Z\}"],
             ],
         },
-        "C5": {"required": [[r"\bB[ée]zout\b"], [r"D[ée]montrer|Montrer|Prouver"]]},
+        "C5": {
+            "required": [
+                [r"\bB[ée]zout\b", r"au\s*\+\s*bv", r"\bPGCD\b"],
+                [r"D[ée]montrer|Montrer|Prouver|d[ée]duire"],
+            ],
+        },
         "C6": {"required": [[r"\bGauss\b"], [r"D[ée]montrer|Montrer|Prouver"]]},
         "C7": {
             "required": [

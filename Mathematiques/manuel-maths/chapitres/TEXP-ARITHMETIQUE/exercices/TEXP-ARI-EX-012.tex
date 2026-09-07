@@ -1,0 +1,18 @@
+% META: {"id": "TEXP-ARI-EX-012", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["modeliser", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-012.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-012.tex", "status": "generated"}
+% BEGIN-VERIFY
+% assert (17 * 19) % 23 == 1
+% assert 3 * 23 - 4 * 17 == 1
+% solutions = [x for x in range(23) if (17 * x + 5) % 23 == 0]
+% assert solutions == [20]
+% assert 17 * 20 + 5 == 345 == 23 * 15
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-012}{2}{15}
+Un entrepôt reçoit des caisses de $17$ unités. Le stock initial est de
+$5$ unités, et l'on veut atteindre exactement un multiple de $23$.
+\begin{enumerate}
+  \item Traduire le problème par une congruence d'inconnue le nombre $x$ de
+        caisses reçues.
+  \item Déterminer l'inverse de $17$ modulo $23$.
+  \item Résoudre et donner le plus petit nombre de caisses convenant.
+\end{enumerate}
+\end{exercice}

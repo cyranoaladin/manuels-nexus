@@ -1,0 +1,17 @@
+% META: {"id": "TEXP-ARI-CO-026", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-026", "capacites_codes": ["C8"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% assert pow(2, 340, 341) == 1
+% assert 341 == 11 * 31
+% assert pow(3, 340, 341) == 56
+% assert pow(3, 340, 341) != 1
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-026}
+\textbf{1.} Un calcul d'exponentiation modulaire donne $2^{340}\equiv1\ [341]$.
+
+\textbf{2.} $341=11\times31$ : il n'est pas premier.
+
+\textbf{3.} La réciproque est fausse : passer le test de Fermat en base $2$ ne
+prouve pas la primalité. Un tel nombre est dit pseudo-premier de base $2$. En
+base $3$, en revanche, $3^{340}\equiv56\not\equiv1\ [341]$ : la base $3$ est un
+témoin de non-primalité.
+\end{corrige}

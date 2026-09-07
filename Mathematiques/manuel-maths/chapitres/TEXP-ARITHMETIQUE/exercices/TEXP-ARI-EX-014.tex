@@ -1,0 +1,21 @@
+% META: {"id": "TEXP-ARI-EX-014", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-014.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-014.tex", "status": "generated"}
+% BEGIN-VERIFY
+% for k in range(0, 12):
+%     assert (10 ** k) % 9 == 1
+% def somme_chiffres(n):
+%     return sum(int(c) for c in str(n))
+% for n in (758241, 9081673, 12345, 999, 1000):
+%     assert n % 9 == somme_chiffres(n) % 9
+% assert somme_chiffres(758241) == 27 and 758241 % 9 == 0
+% assert somme_chiffres(9081673) == 34 and 9081673 % 9 == 7
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-014}{1}{12}
+On veut établir un test de divisibilité par $9$.
+\begin{enumerate}
+  \item Montrer que $10\equiv1\ [9]$, puis que $10^k\equiv1\ [9]$ pour tout
+        entier naturel $k$.
+  \item En déduire qu'un entier est divisible par $9$ si et seulement si la
+        somme de ses chiffres l'est.
+  \item Appliquer le test à $758\,241$ puis à $9\,081\,673$.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,20 @@
+% META: {"id": "TEXP-ARI-CO-025", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-025", "capacites_codes": ["C8"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% assert pow(3, 6, 7) == 1
+% assert 100 == 6 * 16 + 4
+% assert pow(3, 100, 7) == 4 and 81 % 7 == 4
+% assert pow(2, 12, 13) == 1
+% assert 2026 == 12 * 168 + 10
+% assert pow(2, 2026, 13) == 10
+% assert 1024 == 78 * 13 + 10
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-025}
+\textbf{1.} Si $p$ est premier et $p\nmid a$, alors $a^{p-1}\equiv1\ [p]$.
+
+\textbf{2.} $7$ est premier et $7\nmid3$, donc $3^6\equiv1\ [7]$. Or
+$100=6\times16+4$, d'où $3^{100}\equiv3^4=81\equiv4\ [7]$.
+
+\textbf{3.} $13$ est premier et $13\nmid2$, donc $2^{12}\equiv1\ [13]$. Comme
+$2026=12\times168+10$, on a $2^{2026}\equiv2^{10}=1024\equiv10\ [13]$ (car
+$1024=78\times13+10$).
+\end{corrige}

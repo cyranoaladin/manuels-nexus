@@ -1,0 +1,18 @@
+% META: {"id": "TEXP-ARI-EX-025", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C8"], "capacites_codes": ["C8"], "methodes": ["M8"], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-025.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-025.tex", "status": "generated"}
+% BEGIN-VERIFY
+% assert pow(3, 6, 7) == 1
+% assert 100 == 6 * 16 + 4
+% assert pow(3, 100, 7) == 4 and 81 % 7 == 4
+% assert pow(2, 12, 13) == 1
+% assert 2026 == 12 * 168 + 10
+% assert pow(2, 2026, 13) == 10
+% assert 1024 == 78 * 13 + 10
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-025}{2}{15}
+\begin{enumerate}
+  \item Énoncer le petit théorème de Fermat pour un premier $p$ et un entier
+        $a$ non divisible par $p$.
+  \item Calculer $3^{100}\bmod 7$ en utilisant ce théorème.
+  \item Calculer le reste de $2^{2026}$ dans la division par $13$.
+\end{enumerate}
+\end{exercice}

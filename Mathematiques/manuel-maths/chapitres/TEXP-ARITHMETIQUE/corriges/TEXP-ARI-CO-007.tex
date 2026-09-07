@@ -1,0 +1,21 @@
+% META: {"id": "TEXP-ARI-CO-007", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-007", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% assert 252 == 1 * 198 + 54 and 198 == 3 * 54 + 36
+% assert 54 == 1 * 36 + 18 and 36 == 2 * 18 + 0
+% g = math.gcd(252, 198)
+% assert g == 18
+% assert 252 // g == 14 and 198 // g == 11
+% assert [d for d in range(1, g + 1) if g % d == 0] == [1, 2, 3, 6, 9, 18]
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-007}
+\textbf{1.} Le nombre de bouquets divise $252$ et $198$ : il est maximal
+lorsqu'il vaut $\mathrm{PGCD}(252\,;\,198)$. Algorithme d'Euclide :
+$252=1\times198+54$, $198=3\times54+36$, $54=1\times36+18$, $36=2\times18+0$.
+Donc $\mathrm{PGCD}(252\,;\,198)=18$ : au plus $18$ bouquets.
+
+\textbf{2.} Chaque bouquet contient $252/18=14$ roses et $198/18=11$ tulipes.
+
+\textbf{3.} Tout diviseur commun convient : il y a autant de compositions que
+de diviseurs de $18$, soit $6$ ($1,2,3,6,9,18$).
+\end{corrige}

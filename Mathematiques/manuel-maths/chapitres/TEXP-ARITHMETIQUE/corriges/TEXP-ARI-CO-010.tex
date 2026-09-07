@@ -1,0 +1,19 @@
+% META: {"id": "TEXP-ARI-CO-010", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-010", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% table = [(5 * k) % 12 for k in range(12)]
+% assert table == [0, 5, 10, 3, 8, 1, 6, 11, 4, 9, 2, 7]
+% assert (5 * 5) % 12 == 1
+% assert [x for x in range(12) if (5 * x) % 12 == 3] == [3]
+% assert (5 * (3 + 12 * 4)) % 12 == 3
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-010}
+\textbf{1.} Les restes de $5k$ modulo $12$ pour $k=0,\dots,11$ sont
+$0,5,10,3,8,1,6,11,4,9,2,7$.
+
+\textbf{2.} La table donne $5\times5=25\equiv1\ [12]$ : $5$ est son propre
+inverse modulo $12$.
+
+\textbf{3.} En multipliant $5x\equiv3\ [12]$ par $5$ : $25x\equiv15\ [12]$,
+soit $x\equiv3\ [12]$ car $25\equiv1$ et $15\equiv3$. L'ensemble des solutions
+est $\{3+12k,\ k\in\mathbb{Z}\}$.
+\end{corrige}

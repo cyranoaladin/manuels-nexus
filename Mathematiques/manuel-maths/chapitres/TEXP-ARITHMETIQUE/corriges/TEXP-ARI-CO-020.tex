@@ -1,0 +1,24 @@
+% META: {"id": "TEXP-ARI-CO-020", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-020", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% assert math.gcd(12, 18) == 6
+% atteintes = {12 * x + 18 * y for x in range(-30, 31) for y in range(-30, 31)}
+% assert all(v % 6 == 0 for v in atteintes)
+% assert 30 in atteintes and 15 not in atteintes
+% assert 12 * 1 + 18 * 1 == 30
+% for k in range(-5, 6):
+%     assert 12 * (1 + 3 * k) + 18 * (1 - 2 * k) == 30
+% assert not [(x, y) for x in range(-50, 51) for y in range(-50, 51) if 12 * x + 18 * y == 15]
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-020}
+\textbf{1.} $\mathrm{PGCD}(12\,;\,18)=6$ divise $12x+18y$ pour tous entiers
+$x,y$ : si $(F)$ a une solution, $6$ divise $c$.
+
+\textbf{2.} Pour $c=30$, on divise par $6$ : $2x+3y=5$. Une solution
+particulière est $(1\,;\,1)$. Comme $\mathrm{PGCD}(2\,;\,3)=1$, les solutions
+sont $x=1+3k$, $y=1-2k$, $k\in\mathbb{Z}$.
+
+\textbf{3.} Pour $c=15$, $6$ ne divise pas $15$ : l'ensemble des solutions est
+vide. Le PGCD des coefficients est exactement l'ensemble des valeurs
+atteignables : $12x+18y$ décrit les multiples de $6$, et rien d'autre.
+\end{corrige}

@@ -1,0 +1,18 @@
+% META: {"id": "TEXP-ARI-EX-024", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C7"], "capacites_codes": ["C7"], "methodes": ["M7"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-024.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-024.tex", "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% from sympy import factorint, divisor_count
+% assert factorint(360) == {2: 3, 3: 2, 5: 1}
+% assert factorint(2520) == {2: 3, 3: 2, 5: 1, 7: 1}
+% assert divisor_count(360) == 24
+% assert divisor_count(2520) == 48
+% assert math.gcd(360, 2520) == 360
+% assert 2520 % 360 == 0
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-024}{1}{12}
+\begin{enumerate}
+  \item Décomposer $360$ et $2\,520$ en produits de facteurs premiers.
+  \item En déduire le nombre de diviseurs positifs de chacun.
+  \item Retrouver $\mathrm{PGCD}(360\,;\,2520)$ à partir des décompositions.
+\end{enumerate}
+\end{exercice}

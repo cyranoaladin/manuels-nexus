@@ -1,0 +1,37 @@
+% META: {"id": "TEXP-ARI-CO-027", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-027", "capacites_codes": ["C9"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% 
+% def pgcd(a, b):
+%     while b:
+%         a, b = b, a % b
+%     return a
+% 
+% def crible(n):
+%     marque = [True] * (n + 1)
+%     marque[0] = marque[1] = False
+%     for p in range(2, int(math.isqrt(n)) + 1):
+%         if marque[p]:
+%             for multiple in range(p * p, n + 1, p):
+%                 marque[multiple] = False
+%     return [i for i, ok in enumerate(marque) if ok]
+% 
+% assert pgcd(84, 120) == 12
+% assert pgcd(0, 5) == 5 and pgcd(7, 0) == 7
+% for a in range(0, 40):
+%     for b in range(0, 40):
+%         assert pgcd(a, b) == math.gcd(a, b)
+% assert crible(30) == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-027}
+\textbf{1.} \texttt{def pgcd(a, b): while b: a, b = b, a \% b ; return a}.
+La boucle remplace $(a,b)$ par $(b,\ a\bmod b)$ jusqu'à ce que $b$ s'annule ;
+la valeur restante est le PGCD.
+
+\textbf{2.} On part de la liste des entiers de $2$ à $n$ marqués premiers, puis
+pour chaque $p$ jusqu'à $\sqrt{n}$ encore marqué, on démarque ses multiples
+à partir de $p^2$.
+
+\textbf{3.} \texttt{pgcd(84, 120)} vaut $12$, et \texttt{crible(30)} renvoie
+$[2,3,5,7,11,13,17,19,23,29]$.
+\end{corrige}

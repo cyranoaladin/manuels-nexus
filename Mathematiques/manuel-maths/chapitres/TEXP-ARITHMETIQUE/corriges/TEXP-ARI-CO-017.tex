@@ -1,0 +1,27 @@
+% META: {"id": "TEXP-ARI-CO-017", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-017", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math, collections
+% A_ORD = ord('A')
+% def chiffrer(m):
+%     return (13 * m + 4) % 26
+% assert chiffrer(0) == chiffrer(2) == chiffrer(4) == 4
+% assert math.gcd(13, 26) == 13
+% image = sorted({chiffrer(m) for m in range(26)})
+% assert image == [4, 17]
+% assert [chr(v + A_ORD) for v in image] == ['E', 'R']
+% compte = collections.Counter(chiffrer(m) for m in range(26))
+% assert set(compte.values()) == {13}
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-017}
+\textbf{1.} $A=0\mapsto4=E$ ; $C=2\mapsto13\times2+4=30\equiv4\ [26]$, soit
+$E$ également ; $E=4\mapsto13\times4+4=56\equiv4\ [26]$, encore $E$. Trois
+lettres claires distinctes donnent le même chiffré.
+
+\textbf{2.} $\mathrm{PGCD}(13\,;\,26)=13\neq1$ : $13$ n'est pas inversible
+modulo $26$. La fonction $m\mapsto13m+4$ n'est pas injective ; $13m$ ne prend
+que les valeurs $0$ et $13$ selon la parité de $m$.
+
+\textbf{3.} L'image ne contient que deux valeurs, $4$ et $17$ : le chiffré
+n'utilise que les lettres $E$ et $R$. Le message est irrémédiablement perdu,
+chaque chiffré ayant $13$ antécédents.
+\end{corrige}

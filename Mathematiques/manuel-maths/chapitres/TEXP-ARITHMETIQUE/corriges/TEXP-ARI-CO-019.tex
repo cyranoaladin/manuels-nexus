@@ -1,0 +1,28 @@
+% META: {"id": "TEXP-ARI-CO-019", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-019", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% assert math.gcd(23, 17) == 1
+% assert 3 * 23 - 4 * 17 == 1
+% assert 23 * 3000 + 17 * (-4000) == 1000
+% positives = [(3000 - 17 * k, -4000 + 23 * k) for k in range(170, 180)]
+% positives = [(x, y) for x, y in positives if x >= 0 and y >= 0]
+% assert positives == [(42, 2), (25, 25), (8, 48)]
+% for x, y in positives:
+%     assert 23 * x + 17 * y == 1000
+% force_brute = [(x, y) for x in range(0, 44) for y in range(0, 60) if 23 * x + 17 * y == 1000]
+% assert sorted(force_brute) == sorted(positives)
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-019}
+\textbf{1.} Avec $x$ billets à $23$ et $y$ billets à $17$ :
+$23x+17y=1000$. Comme $\mathrm{PGCD}(23\,;\,17)=1$ divise $1\,000$, il y a des
+solutions entières.
+
+\textbf{2.} $23=1\times17+6$, $17=2\times6+5$, $6=1\times5+1$, d'où
+$1=6-5=6-(17-2\times6)=3\times6-17=3(23-17)-17=3\times23-4\times17$.
+En multipliant par $1\,000$ : $x_0=3000$, $y_0=-4000$. Les solutions sont
+$x=3000-17k$, $y=-4000+23k$, $k\in\mathbb{Z}$.
+
+\textbf{3.} $x\geq0$ donne $k\leq176{,}4$ et $y\geq0$ donne $k\geq173{,}9$ :
+$k\in\{174,175,176\}$, soit $(x\,;\,y)\in\{(42\,;\,2),(25\,;\,25),(8\,;\,48)\}$.
+Vérification : $23\times42+17\times2=1000$.
+\end{corrige}

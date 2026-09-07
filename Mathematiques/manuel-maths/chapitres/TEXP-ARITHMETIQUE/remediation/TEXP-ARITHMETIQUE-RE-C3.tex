@@ -1,0 +1,37 @@
+% META: {"id": "TEXP-ARITHMETIQUE-RE-C3", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "remediation", "capacites_codes": ["C3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : primalite et chiffrement affine
+%---------------------------------------------------------------
+
+\subsection*{Rappel -- Tests de divisibilite, primalite, chiffrement}
+
+\textbf{Erreur 1 :} tester tous les entiers jusqu'à $n-1$ pour décider si $n$
+est premier. Il suffit de tester les premiers $p\leq\sqrt{n}$ : un diviseur
+non trivial en fournit toujours un.
+
+\textbf{Erreur 2 :} conclure qu'un chiffrement affine $m\mapsto am+b$ est
+déchiffrable sans vérifier $\mathrm{PGCD}(a\,;\,26)=1$. Avec $a=13$, treize
+lettres claires donnent le même chiffré.
+
+\textbf{Erreur 3 :} déchiffrer en calculant $(c-b)/a$ dans $\mathbb{R}$. Il
+faut multiplier par l'\emph{inverse de $a$ modulo $26$}, pas diviser.
+
+% BEGIN-VERIFY
+% import math
+% assert math.isqrt(2027) == 45
+% assert all(2027 % p for p in range(2, 46))
+% assert 2021 == 43 * 47
+% assert math.gcd(13, 26) == 13
+% assert len({(13 * m + 4) % 26 for m in range(26)}) == 2
+% assert (7 * 15) % 26 == 1
+% END-VERIFY
+
+\begin{exercice}{TEXP-ARITHMETIQUE-RE-C3-EX1}{1}{10}
+\begin{enumerate}
+  \item Combien de divisions faut-il au plus pour décider que $2\,027$ est
+        premier ? Comparer avec le test naïf.
+  \item Un élève chiffre avec $a=13$, $b=4$. Montrer que son message est
+        indéchiffrable.
+\end{enumerate}
+\end{exercice}

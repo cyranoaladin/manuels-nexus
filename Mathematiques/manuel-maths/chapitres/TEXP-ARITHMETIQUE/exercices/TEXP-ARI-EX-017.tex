@@ -1,0 +1,24 @@
+% META: {"id": "TEXP-ARI-EX-017", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 3, "competences": ["raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-017.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-017.tex", "status": "generated"}
+% BEGIN-VERIFY
+% import math, collections
+% A_ORD = ord('A')
+% def chiffrer(m):
+%     return (13 * m + 4) % 26
+% assert chiffrer(0) == chiffrer(2) == chiffrer(4) == 4
+% assert math.gcd(13, 26) == 13
+% image = sorted({chiffrer(m) for m in range(26)})
+% assert image == [4, 17]
+% assert [chr(v + A_ORD) for v in image] == ['E', 'R']
+% compte = collections.Counter(chiffrer(m) for m in range(26))
+% assert set(compte.values()) == {13}
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-017}{3}{20}
+On étudie la fragilité d'un chiffrement affine mal paramétré, avec $a=13$ et
+$b=4$ modulo $26$.
+\begin{enumerate}
+  \item Chiffrer les lettres $A$, $C$ et $E$. Que constate-t-on ?
+  \item Expliquer ce phénomène à l'aide de $\mathrm{PGCD}(13\,;\,26)$.
+  \item Combien de lettres distinctes le chiffré peut-il contenir au maximum ?
+        Le message est-il déchiffrable ?
+\end{enumerate}
+\end{exercice}

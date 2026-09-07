@@ -1,0 +1,30 @@
+% META: {"id": "TEXP-ARI-EX-022", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C6"], "capacites_codes": ["C6"], "methodes": ["M6"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-022.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-022.tex", "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% def gauss(a, b, c):
+%     return (b * c) % a == 0 and math.gcd(a, b) == 1
+% for a in range(2, 25):
+%     for b in range(1, 25):
+%         for c in range(1, 25):
+%             if gauss(a, b, c):
+%                 assert c % a == 0
+% assert (4 * 3) % 6 == 0 and 3 % 6 != 0 and math.gcd(6, 4) == 2
+% def premier(n):
+%     return n > 1 and all(n % k for k in range(2, int(math.isqrt(n)) + 1))
+% for p in [p for p in range(2, 30) if premier(p)]:
+%     for b in range(1, 20):
+%         for c in range(1, 20):
+%             if (b * c) % p == 0:
+%                 assert b % p == 0 or c % p == 0
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-022}{2}{15}
+\begin{enumerate}
+  \item Soient $a$, $b$, $c$ des entiers tels que $a$ divise $bc$ et
+        $\mathrm{PGCD}(a\,;\,b)=1$. En partant d'une identité de Bézout
+        $au+bv=1$, démontrer que $a$ divise $c$.
+  \item Montrer sur un exemple que l'hypothèse $\mathrm{PGCD}(a\,;\,b)=1$ est
+        indispensable.
+  \item En déduire que si un nombre premier $p$ divise un produit $bc$, alors
+        $p$ divise $b$ ou $p$ divise $c$.
+\end{enumerate}
+\end{exercice}

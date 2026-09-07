@@ -1,0 +1,22 @@
+% META: {"id": "TEXP-ARI-CO-012", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-012", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% assert (17 * 19) % 23 == 1
+% assert 3 * 23 - 4 * 17 == 1
+% solutions = [x for x in range(23) if (17 * x + 5) % 23 == 0]
+% assert solutions == [20]
+% assert 17 * 20 + 5 == 345 == 23 * 15
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-012}
+\textbf{1.} Après $x$ caisses le stock vaut $17x+5$ ; on veut
+$17x+5\equiv0\ [23]$, c'est-à-dire $17x\equiv-5\equiv18\ [23]$.
+
+\textbf{2.} On cherche $u$ tel que $17u\equiv1\ [23]$. En testant, ou par
+l'algorithme d'Euclide étendu ($23=1\times17+6$, $17=2\times6+5$,
+$6=1\times5+1$), on remonte : $1=6-5=6-(17-2\times6)=3\times6-17
+=3(23-17)-17=3\times23-4\times17$, donc $-4\times17\equiv1\ [23]$ et
+$u\equiv-4\equiv19\ [23]$.
+
+\textbf{3.} $x\equiv19\times18\equiv342\equiv20\ [23]$. Le plus petit nombre
+de caisses convenant est $20$ : le stock vaut alors
+$17\times20+5=345=23\times15$.
+\end{corrige}

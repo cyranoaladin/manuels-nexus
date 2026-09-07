@@ -1,0 +1,22 @@
+% META: {"id": "TEXP-ARI-CO-024", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-024", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% from sympy import factorint, divisor_count
+% assert factorint(360) == {2: 3, 3: 2, 5: 1}
+% assert factorint(2520) == {2: 3, 3: 2, 5: 1, 7: 1}
+% assert divisor_count(360) == 24
+% assert divisor_count(2520) == 48
+% assert math.gcd(360, 2520) == 360
+% assert 2520 % 360 == 0
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-024}
+\textbf{1.} $360=2^3\times3^2\times5$ et $2\,520=2^3\times3^2\times5\times7$.
+
+\textbf{2.} Le nombre de diviseurs est le produit des exposants augmentés de
+$1$ : pour $360$, $(3+1)(2+1)(1+1)=24$ ; pour $2\,520$,
+$(3+1)(2+1)(1+1)(1+1)=48$.
+
+\textbf{3.} Le PGCD s'obtient en prenant, pour chaque premier, le plus petit
+exposant : $2^3\times3^2\times5=360$. Comme $360$ divise $2\,520$, c'est
+cohérent.
+\end{corrige}

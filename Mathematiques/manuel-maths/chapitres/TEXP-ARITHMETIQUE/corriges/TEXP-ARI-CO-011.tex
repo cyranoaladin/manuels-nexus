@@ -1,0 +1,24 @@
+% META: {"id": "TEXP-ARI-CO-011", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-011", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% assert math.gcd(6, 15) == 3
+% assert not any((6 * u) % 15 == 1 for u in range(15))
+% for b in range(15):
+%     a_des_solutions = any((6 * x) % 15 == b for x in range(15))
+%     assert a_des_solutions == (b % 3 == 0)
+% assert [x for x in range(15) if (6 * x) % 15 == 9] == [4, 9, 14]
+% assert (2 * 3) % 5 == 1
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-011}
+\textbf{1.} $\mathrm{PGCD}(6\,;\,15)=3\neq1$ : $6$ n'est pas inversible
+modulo $15$, car un inverse $u$ vérifierait $6u-15v=1$, impossible puisque $3$
+divise le membre de gauche.
+
+\textbf{2.} Si $6x\equiv b\ [15]$, alors $b=6x-15k$ pour un entier $k$, et $3$
+divise $6x-15k$ : donc $3$ divise $b$.
+
+\textbf{3.} $3$ divise $9$ : il y a des solutions. En divisant tout par $3$,
+la congruence équivaut à $2x\equiv3\ [5]$. Comme $2\times3=6\equiv1\ [5]$,
+l'inverse de $2$ modulo $5$ est $3$, d'où $x\equiv9\equiv4\ [5]$. Modulo $15$,
+cela donne trois classes : $x\in\{4,9,14\}$.
+\end{corrige}

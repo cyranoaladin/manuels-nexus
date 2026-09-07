@@ -1,0 +1,21 @@
+% META: {"id": "TEXP-ARI-EX-011", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-011.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-011.tex", "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% assert math.gcd(6, 15) == 3
+% assert not any((6 * u) % 15 == 1 for u in range(15))
+% for b in range(15):
+%     a_des_solutions = any((6 * x) % 15 == b for x in range(15))
+%     assert a_des_solutions == (b % 3 == 0)
+% assert [x for x in range(15) if (6 * x) % 15 == 9] == [4, 9, 14]
+% assert (2 * 3) % 5 == 1
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-011}{2}{15}
+On considère la congruence $6x\equiv b\ [15]$.
+\begin{enumerate}
+  \item Calculer $\mathrm{PGCD}(6\,;\,15)$. Le nombre $6$ admet-il un inverse
+        modulo $15$ ?
+  \item Montrer que la congruence n'a de solution que si $3$ divise $b$.
+  \item Résoudre $6x\equiv9\ [15]$ et préciser le nombre de solutions
+        modulo $15$.
+\end{enumerate}
+\end{exercice}

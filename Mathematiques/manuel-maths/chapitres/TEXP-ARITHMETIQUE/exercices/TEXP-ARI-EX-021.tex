@@ -1,0 +1,27 @@
+% META: {"id": "TEXP-ARI-EX-021", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 2, "competences": ["raisonner"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-021.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-021.tex", "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% def plus_petit_positif(a, b, borne=60):
+%     valeurs = {a * u + b * v for u in range(-borne, borne + 1) for v in range(-borne, borne + 1)}
+%     return min(v for v in valeurs if v > 0)
+% for a, b in [(84, 120), (7, 11), (12, 18), (23, 17), (0, 5), (9, 0)]:
+%     assert plus_petit_positif(a, b) == math.gcd(a, b)
+% a, b = 84, 120
+% d = math.gcd(a, b)
+% u, v = next((u, v) for u in range(-60, 61) for v in range(-60, 61) if a * u + b * v == d)
+% assert a * u + b * v == d
+% assert a % d == 0 and b % d == 0
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-021}{2}{18}
+Soient $a$ et $b$ deux entiers naturels non tous nuls. On note
+$S=\{au+bv\ ;\ u,v\in\mathbb{Z}\}$ et $d$ le plus petit élément strictement
+positif de $S$.
+\begin{enumerate}
+  \item Justifier que $S$ contient un entier strictement positif, donc que $d$
+        existe.
+  \item Montrer que $d$ divise $a$ et $b$. (Effectuer la division euclidienne
+        de $a$ par $d$ et observer le reste.)
+  \item En déduire que $d=\mathrm{PGCD}(a\,;\,b)$, et donc qu'il existe $u,v$
+        tels que $au+bv=\mathrm{PGCD}(a\,;\,b)$.
+\end{enumerate}
+\end{exercice}

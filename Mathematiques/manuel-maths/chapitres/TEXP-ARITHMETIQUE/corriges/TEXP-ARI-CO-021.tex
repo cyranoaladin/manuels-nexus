@@ -1,0 +1,30 @@
+% META: {"id": "TEXP-ARI-CO-021", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-021", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% def plus_petit_positif(a, b, borne=60):
+%     valeurs = {a * u + b * v for u in range(-borne, borne + 1) for v in range(-borne, borne + 1)}
+%     return min(v for v in valeurs if v > 0)
+% for a, b in [(84, 120), (7, 11), (12, 18), (23, 17), (0, 5), (9, 0)]:
+%     assert plus_petit_positif(a, b) == math.gcd(a, b)
+% a, b = 84, 120
+% d = math.gcd(a, b)
+% u, v = next((u, v) for u in range(-60, 61) for v in range(-60, 61) if a * u + b * v == d)
+% assert a * u + b * v == d
+% assert a % d == 0 and b % d == 0
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-021}
+\textbf{1.} $a=a\times1+b\times0\in S$ et $-a\in S$ : l'un des deux est
+strictement positif puisque $a$ et $b$ ne sont pas tous deux nuls. Toute partie
+non vide de $\mathbb{N}^*$ admet un plus petit élément, donc $d$ existe.
+
+\textbf{2.} Écrivons $d=au_0+bv_0$ et effectuons la division euclidienne
+$a=qd+r$ avec $0\leq r<d$. Alors
+$r=a-qd=a(1-qu_0)+b(-qv_0)\in S$. Si $r>0$, on contredirait la minimalité de
+$d$ ; donc $r=0$ et $d$ divise $a$. Le même raisonnement avec $b$ donne
+$d\mid b$.
+
+\textbf{3.} $d$ est un diviseur commun de $a$ et $b$. Réciproquement, tout
+diviseur commun $c$ de $a$ et $b$ divise $au_0+bv_0=d$, donc $c\leq d$. Ainsi
+$d=\mathrm{PGCD}(a\,;\,b)$, et l'écriture $d=au_0+bv_0$ est l'identité de
+Bézout.
+\end{corrige}

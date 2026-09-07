@@ -1,0 +1,31 @@
+% META: {"id": "TEXP-ARI-CO-023", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-023", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% def premier(n):
+%     return n > 1 and all(n % k for k in range(2, int(math.isqrt(n)) + 1))
+% premiers = [p for p in range(2, 60) if premier(p)]
+% for r in range(1, 7):
+%     produit = 1
+%     for p in premiers[:r]:
+%         produit *= p
+%     N = produit + 1
+%     for p in premiers[:r]:
+%         assert N % p != 0
+% assert 2 * 3 * 5 * 7 + 1 == 211 and premier(211)
+% assert 2 * 3 * 5 * 7 * 11 * 13 + 1 == 30031 == 59 * 509
+% assert not premier(30031)
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-023}
+\textbf{1.} $p_i$ divise le produit $p_1\cdots p_r$. S'il divisait $N$, il
+diviserait la différence $N-p_1\cdots p_r=1$, ce qui est impossible pour
+$p_i\geq2$.
+
+\textbf{2.} $N\geq3$ admet au moins un diviseur premier, qui ne peut être
+aucun des $p_i$ : la liste $p_1,\dots,p_r$ n'était donc pas exhaustive.
+L'ensemble des nombres premiers est infini.
+
+\textbf{3.} Avec $2,3,5,7$ : $N=2\times3\times5\times7+1=211$, qui est premier
+($\sqrt{211}<15$ et aucun de $2,3,5,7,11,13$ ne le divise). Attention : $N$
+n'est pas toujours premier, par exemple
+$2\times3\times5\times7\times11\times13+1=30031=59\times509$.
+\end{corrige}

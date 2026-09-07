@@ -1,0 +1,29 @@
+% META: {"id": "TEXP-ARI-CO-016", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-016", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% A_ORD = ord('A')
+% def chiffrer(lettre):
+%     return chr((7 * (ord(lettre) - A_ORD) + 3) % 26 + A_ORD)
+% def dechiffrer(lettre):
+%     return chr((15 * ((ord(lettre) - A_ORD) - 3)) % 26 + A_ORD)
+% assert "".join(chiffrer(l) for l in "MATH") == "JDGA"
+% assert math.gcd(7, 26) == 1
+% assert (7 * 15) % 26 == 1
+% assert "".join(dechiffrer(l) for l in "SVX") == "RKO"
+% for lettre in map(chr, range(A_ORD, A_ORD + 26)):
+%     assert dechiffrer(chiffrer(lettre)) == lettre
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-016}
+\textbf{1.} $M=12$, $A=0$, $T=19$, $H=7$. On obtient
+$7\times12+3=87\equiv9\ [26]$ soit $J$ ; $7\times0+3=3$ soit $D$ ;
+$7\times19+3=136\equiv6\ [26]$ soit $G$ ; $7\times7+3=52\equiv0\ [26]$ soit
+$A$. \og MATH \fg{} devient \og JDGA \fg.
+
+\textbf{2.} $\mathrm{PGCD}(7\,;\,26)=1$, donc $7$ est inversible modulo $26$ :
+$7\times15=105=4\times26+1$, l'inverse est $15$. De $c\equiv7m+3$ on tire
+$m\equiv15(c-3)\ [26]$.
+
+\textbf{3.} $S=18$ : $15\times15=225\equiv17\ [26]$ soit $R$.
+$V=21$ : $15\times18=270\equiv10\ [26]$ soit $K$.
+$X=23$ : $15\times20=300\equiv14\ [26]$ soit $O$. On lit \og RKO \fg.
+\end{corrige}

@@ -1,0 +1,19 @@
+% META: {"id": "TEXP-ARI-EX-006", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-006.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-006.tex", "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% diviseurs = [d for d in range(1, 85) if 84 % d == 0]
+% assert diviseurs == [1, 2, 3, 4, 6, 7, 12, 14, 21, 28, 42, 84]
+% assert len(diviseurs) == 12
+% assert len(diviseurs) % 2 == 0 and len(diviseurs) // 2 == 6
+% assert 120 == 1 * 84 + 36 and 84 == 2 * 36 + 12 and 36 == 3 * 12 + 0
+% assert math.gcd(84, 120) == 12
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-006}{1}{12}
+\begin{enumerate}
+  \item Dresser la liste des diviseurs positifs de $84$.
+  \item En déduire le nombre de façons de ranger $84$ jetons en un rectangle
+        de $a$ lignes et $b$ colonnes, à l'ordre près des deux dimensions.
+  \item Déterminer $\mathrm{PGCD}(84\,;\,120)$ par l'algorithme d'Euclide, en
+        écrivant chaque division euclidienne.
+\end{enumerate}
+\end{exercice}

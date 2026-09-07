@@ -1,0 +1,26 @@
+% META: {"id": "TEXP-ARI-CO-013", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-013", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% def inversibles(n):
+%     return [a for a in range(1, n + 1) if any((a * u) % n == 1 for u in range(n))]
+% assert inversibles(12) == [1, 5, 7, 11]
+% assert len(inversibles(12)) == 4
+% assert inversibles(13) == list(range(1, 13))
+% assert len(inversibles(13)) == 12
+% for n in (12, 13, 20):
+%     assert inversibles(n) == [a for a in range(1, n + 1) if math.gcd(a, n) == 1]
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-013}
+\textbf{1.} Si $au\equiv1\ [n]$, il existe $v$ tel que $au-nv=1$. Tout
+diviseur commun de $a$ et $n$ divise alors $1$, donc
+$\mathrm{PGCD}(a\,;\,n)=1$.
+
+\textbf{2.} Si $\mathrm{PGCD}(a\,;\,n)=1$, le théorème de Bézout fournit $u,v$
+tels que $au+nv=1$, d'où $au\equiv1\ [n]$ : $u$ est un inverse de $a$.
+
+\textbf{3.} Modulo $12$, les inversibles sont les entiers premiers avec $12$ :
+$1,5,7,11$, soit $4$. Modulo $13$, qui est premier, tous les entiers de $1$ à
+$12$ sont inversibles, soit $12$. Un modulo premier maximise le nombre
+d'inversibles : c'est ce qui rend les modulos premiers commodes en
+cryptographie.
+\end{corrige}

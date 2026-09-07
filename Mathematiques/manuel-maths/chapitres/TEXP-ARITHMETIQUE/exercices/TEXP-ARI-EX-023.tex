@@ -1,0 +1,28 @@
+% META: {"id": "TEXP-ARI-EX-023", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C7"], "capacites_codes": ["C7"], "methodes": ["M7"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-023.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-023.tex", "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% def premier(n):
+%     return n > 1 and all(n % k for k in range(2, int(math.isqrt(n)) + 1))
+% premiers = [p for p in range(2, 60) if premier(p)]
+% for r in range(1, 7):
+%     produit = 1
+%     for p in premiers[:r]:
+%         produit *= p
+%     N = produit + 1
+%     for p in premiers[:r]:
+%         assert N % p != 0
+% assert 2 * 3 * 5 * 7 + 1 == 211 and premier(211)
+% assert 2 * 3 * 5 * 7 * 11 * 13 + 1 == 30031 == 59 * 509
+% assert not premier(30031)
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-023}{2}{15}
+On reprend la démonstration d'Euclide de l'infinitude des nombres premiers.
+\begin{enumerate}
+  \item Supposons qu'il n'existe qu'un nombre fini de premiers
+        $p_1,\dots,p_r$. On pose $N=p_1p_2\cdots p_r+1$. Montrer qu'aucun $p_i$
+        ne divise $N$.
+  \item En déduire une contradiction, et conclure.
+  \item Appliquer la construction aux quatre premiers nombres premiers : que
+        vaut $N$ ? Est-il premier ?
+\end{enumerate}
+\end{exercice}

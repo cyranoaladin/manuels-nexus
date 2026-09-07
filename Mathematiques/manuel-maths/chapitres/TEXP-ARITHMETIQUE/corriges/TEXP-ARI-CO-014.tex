@@ -1,0 +1,23 @@
+% META: {"id": "TEXP-ARI-CO-014", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-014", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% for k in range(0, 12):
+%     assert (10 ** k) % 9 == 1
+% def somme_chiffres(n):
+%     return sum(int(c) for c in str(n))
+% for n in (758241, 9081673, 12345, 999, 1000):
+%     assert n % 9 == somme_chiffres(n) % 9
+% assert somme_chiffres(758241) == 27 and 758241 % 9 == 0
+% assert somme_chiffres(9081673) == 34 and 9081673 % 9 == 7
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-014}
+\textbf{1.} $10-1=9$ donc $10\equiv1\ [9]$. Par produit de congruences,
+$10^k\equiv1^k=1\ [9]$ pour tout $k\geq0$.
+
+\textbf{2.} Si $N=\sum_k c_k10^k$ avec $c_k$ les chiffres de $N$, alors
+$N\equiv\sum_k c_k\times1=\sum_k c_k\ [9]$. Donc $9\mid N$ si et seulement si
+$9$ divise la somme des chiffres.
+
+\textbf{3.} $7+5+8+2+4+1=27$, divisible par $9$ : $758\,241$ l'est aussi.
+$9+0+8+1+6+7+3=34$, non divisible par $9$ : $9\,081\,673$ ne l'est pas
+(le reste est celui de $34$, soit $7$).
+\end{corrige}

@@ -1,0 +1,25 @@
+% META: {"id": "TEXP-ARI-EX-019", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 2, "competences": ["modeliser", "raisonner"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-019.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-019.tex", "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% assert math.gcd(23, 17) == 1
+% assert 3 * 23 - 4 * 17 == 1
+% assert 23 * 3000 + 17 * (-4000) == 1000
+% positives = [(3000 - 17 * k, -4000 + 23 * k) for k in range(170, 180)]
+% positives = [(x, y) for x, y in positives if x >= 0 and y >= 0]
+% assert positives == [(42, 2), (25, 25), (8, 48)]
+% for x, y in positives:
+%     assert 23 * x + 17 * y == 1000
+% force_brute = [(x, y) for x in range(0, 44) for y in range(0, 60) if 23 * x + 17 * y == 1000]
+% assert sorted(force_brute) == sorted(positives)
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-019}{2}{18}
+Une billetterie vend deux tarifs : $23$ euros et $17$ euros. La recette d'une
+soirée s'élève à $1\,000$ euros.
+\begin{enumerate}
+  \item Écrire l'équation diophantienne correspondante et justifier qu'elle
+        admet des solutions entières.
+  \item Déterminer toutes les solutions entières.
+  \item En déduire les répartitions possibles avec des nombres de billets
+        positifs ou nuls.
+\end{enumerate}
+\end{exercice}

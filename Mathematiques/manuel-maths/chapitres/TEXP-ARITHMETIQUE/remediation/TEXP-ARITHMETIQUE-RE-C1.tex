@@ -1,0 +1,32 @@
+% META: {"id": "TEXP-ARITHMETIQUE-RE-C1", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : l'algorithme d'Euclide s'arrete sur le DERNIER reste non nul
+%---------------------------------------------------------------
+
+\subsection*{Rappel -- Diviseurs et algorithme d'Euclide}
+
+\textbf{Erreur 1 :} annoncer comme PGCD le dernier reste calculé, qui vaut $0$.
+Le PGCD est le \emph{dernier reste non nul}, c'est-à-dire le diviseur de la
+dernière division.
+
+\textbf{Erreur 2 :} arrêter l'algorithme dès qu'un reste « paraît » être le
+PGCD. Tant que le reste n'est pas nul, on continue.
+
+\textbf{Erreur 3 :} oublier que $\mathrm{PGCD}(n\,;\,0)=n$. C'est précisément
+le cas d'arrêt.
+
+% BEGIN-VERIFY
+% import math
+% assert math.gcd(84, 120) == 12
+% assert math.gcd(12, 0) == 12
+% END-VERIFY
+
+\begin{exercice}{TEXP-ARITHMETIQUE-RE-C1-EX1}{1}{10}
+Un élève écrit : \og $120=1\times84+36$, $84=2\times36+12$, $36=3\times12+0$,
+donc $\mathrm{PGCD}(84\,;\,120)=0$ \fg.
+\begin{enumerate}
+  \item Où est l'erreur ?
+  \item Donner la valeur correcte, et vérifier qu'elle divise bien $84$ et $120$.
+\end{enumerate}
+\end{exercice}

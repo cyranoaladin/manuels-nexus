@@ -1,0 +1,33 @@
+% META: {"id": "TEXP-ARITHMETIQUE-RE-C2", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "remediation", "capacites_codes": ["C2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : on ne « divise » pas une congruence
+%---------------------------------------------------------------
+
+\subsection*{Rappel -- Congruences et inverse modulaire}
+
+\textbf{Erreur 1 :} simplifier $6x\equiv9\ [15]$ en $2x\equiv3\ [15]$ en
+divisant seulement les deux membres. Diviser par $3$ oblige à diviser aussi le
+modulo : $2x\equiv3\ [5]$.
+
+\textbf{Erreur 2 :} chercher un inverse de $a$ modulo $n$ sans vérifier
+$\mathrm{PGCD}(a\,;\,n)=1$. Sans cette condition, l'inverse n'existe pas.
+
+\textbf{Erreur 3 :} donner une seule solution alors que la congruence en admet
+plusieurs modulo $n$ lorsque $\mathrm{PGCD}(a\,;\,n)=d>1$ : il y en a $d$.
+
+% BEGIN-VERIFY
+% import math
+% assert [x for x in range(15) if (6 * x) % 15 == 9] == [4, 9, 14]
+% assert [x for x in range(5) if (2 * x) % 5 == 3] == [4]
+% assert math.gcd(6, 15) == 3 and len([x for x in range(15) if (6 * x) % 15 == 9]) == 3
+% assert not any((6 * u) % 15 == 1 for u in range(15))
+% END-VERIFY
+
+\begin{exercice}{TEXP-ARITHMETIQUE-RE-C2-EX1}{1}{10}
+\begin{enumerate}
+  \item Expliquer pourquoi $6$ n'a pas d'inverse modulo $15$.
+  \item Résoudre correctement $6x\equiv9\ [15]$ et compter les solutions
+        modulo $15$.
+\end{enumerate}
+\end{exercice}
