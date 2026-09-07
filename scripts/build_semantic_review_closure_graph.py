@@ -309,8 +309,24 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         row for row in unrendered if row["category"] == "OBJECT_REVIEW"
     ]
 
+    # §10 : la reduction ne vaut que si elle couvre TOUTE la file. Un graphe
+    # qui oublierait un item le rendrait invisible au lieu de le reduire.
+    queue = json.loads((root / QUEUE).read_text(encoding="utf-8"))
+    attendus = {
+        unit_id
+        for item in queue["items"]
+        for unit_id in item["unit_ids"]
+    }
+    couverts = {row["REVIEW_ITEM_ID"] for row in closed}
+    par_categorie: dict[str, int] = {}
+    for row in closed:
+        par_categorie[row["category"]] = par_categorie.get(row["category"], 0) + 1
+
     summary = {
         "RAW_REVIEW_ITEMS": len(closed),
+        "REVIEW_ITEM_COVERAGE": f"{len(couverts & attendus)}/{len(attendus)}",
+        "REVIEW_ITEMS_NOT_COVERED": sorted(attendus - couverts)[:20],
+        "OBJECT_REVIEW_ITEMS_COVERED": par_categorie.get("OBJECT_REVIEW", 0),
         "CANONICAL_SEMANTIC_UNITS": len(canonical_bodies),
         "EXACT_DERIVED_DUPLICATES": derivations.get("EXACT_COPY", 0),
         "SEMANTIC_DELTA_VARIANTS": derivations.get("NUMERIC_DELTA", 0),
