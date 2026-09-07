@@ -17166,15 +17166,9 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 3
+            "targeted_practice": 2
           },
           "practice": [
-            {
-              "duree_min": 14,
-              "id": "TSPE-PROBA-EX-003",
-              "parcours": 2,
-              "questions_for_this_capacity": null
-            },
             {
               "duree_min": 15,
               "id": "TSPE-PROBA-EX-061",
@@ -17194,7 +17188,6 @@
           "reasoning_paths": [
             "calcul",
             "comparer_algorithmes",
-            "modelisation",
             "synthese",
             "traiter_cas_limite"
           ],
@@ -17221,9 +17214,15 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
+            {
+              "duree_min": 14,
+              "id": "TSPE-PROBA-EX-003",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
             {
               "duree_min": 8,
               "id": "TSPE-PROBA-EX-004",
@@ -17234,7 +17233,10 @@
           "raw_missing_function": [
             "NO_REMEDIATION"
           ],
-          "reasoning_paths": [],
+          "reasoning_paths": [
+            "calcul",
+            "modelisation"
+          ],
           "semantic_validation_status": "UNKNOWN",
           "status": "CANDIDATE_NON_SEMANTIC"
         },
@@ -17449,7 +17451,7 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:fe9e133110e0605977896cb81f0bf2d16e7b5242bff2d918a2455100e0b71618",
+      "capacities_digest": "sha256:8ca5d742e1d071d5713bbf512ee696d41ebb0e7c219a91a28a98acfde39278f8",
       "capacity_identity_blockers": [],
       "chapter": "TSPE-PROBABILITES",
       "counts": {
@@ -18123,7 +18125,7 @@
       "unknown": 0
     }
   },
-  "chapters_digest": "sha256:39bfe9a510ad7b603e17972bde601d02e877d58d007912a77e1e1728ad8fda39",
+  "chapters_digest": "sha256:41e150c909a059482e0464f56f832888637d4f02b07ad34a223da7d39c0e4065",
   "generated_by": "scripts/build_chapter_richness_matrix.py",
   "incomplete_chapters": [],
   "machine_status": "COMPLETE",
