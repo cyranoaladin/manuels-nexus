@@ -134,26 +134,83 @@ def functions_of(body: str, meta: dict[str, Any]) -> list[str]:
     return sorted(trouvees)
 
 
-def diversity_verdict(par_exercice: list[list[str]]) -> dict[str, Any]:
+#: Une capacite dont l'enonce EST un raisonnement -- « je sais demontrer des
+#: inegalites », « je sais expliquer pourquoi » -- n'a pas d'application
+#: directe separee : le geste de base y est la demonstration. Exiger un
+#: exercice calculatoire en plus ferait voir une lacune la ou le programme
+#: n'en demande pas.
+_CAPACITE_RAISONNEMENT = re.compile(
+    r"\bd[ée]montrer\b|\bprouver\b|\bjustifier\b|\bexpliquer\b|"
+    r"\b[ée]tablir\b|\binterpr[ée]ter\b|\bcritiquer\b",
+    re.I,
+)
+#: Une capacite qui nomme UN resultat precis -- le theoreme de Gauss, le petit
+#: theoreme de Fermat -- n'a qu'une instance. Lui reclamer une seconde
+#: situation serait un quota, pas une exigence de diversite.
+_CAPACITE_SINGULIERE = re.compile(
+    r"le (?:petit )?th[ée]or[èe]me d[eu]\b|la propri[ée]t[ée] d[eu]\b|"
+    r"l'?identit[ée] d[eu]\b|le lemme d[eu]\b|la formule d[eu]\b|"
+    r"le crit[èe]re d[eu]\b|l'?algorithme d'Euclide\b",
+    re.I,
+)
+
+
+def capacity_entry_function(libelle: str) -> str:
+    """Le geste de base de CETTE capacite, lu dans son enonce officiel."""
+
+    return REASONING if _CAPACITE_RAISONNEMENT.search(libelle or "") else DIRECT
+
+
+def is_singular_capacity(libelle: str) -> bool:
+    """La capacite ne porte-t-elle que sur un unique resultat nomme ?"""
+
+    return bool(_CAPACITE_SINGULIERE.search(libelle or ""))
+
+
+def diversity_verdict(
+    par_exercice: list[list[str]], libelle: str = ""
+) -> dict[str, Any]:
     """Une capacite est-elle suffisamment entrainee ?
 
-    Il faut une application directe ET au moins une fonction de transfert.
-    Le nombre d'exercices n'entre pas dans la regle : c'est ce que la cible
-    de cinquante avait fait croire, et c'est ce qu'on ne refera pas.
+    Deux conditions, et AUCUNE n'est un effectif :
+
+    1. le GESTE DE BASE de la capacite est present -- application directe pour
+       une capacite calculatoire, demonstration pour une capacite de
+       raisonnement, selon ce que l'enonce officiel reclame ;
+    2. au moins une AUTRE fonction pedagogique est presente, faute de quoi
+       l'eleve repete un seul mode.
+
+    On a essaye d'y ajouter « au moins deux exercices », au motif qu'une
+    variation entre une seule situation n'existe pas. C'etait la regle « une
+    capacite -> deux exercices » deguisee : elle declarait une lacune sur un
+    exercice en cinq questions qui installait le geste, changeait de contexte,
+    imposait un autre chemin et demandait une justification. Ce que compte ce
+    contrat, ce sont les fonctions, pas les fichiers.
+
+    Une capacite servie par deux exercices bien choisis le satisfait ; une
+    capacite servie par dix applications directes ne le satisfait pas.
     """
 
+    entree = capacity_entry_function(libelle)
+    singuliere = is_singular_capacity(libelle)
     presentes = {f for fonctions in par_exercice for f in fonctions}
-    a_direct = DIRECT in presentes
+    a_entree = entree in presentes
+    autres = sorted(presentes - {entree})
     transferts = sorted(presentes & TRANSFER_FUNCTIONS)
-    suffisant = bool(a_direct and transferts)
     manque = []
-    if not a_direct:
-        manque.append("aucune application directe")
-    if not transferts:
-        manque.append("aucune situation de transfert")
+    if not a_entree:
+        manque.append(
+            "aucune demonstration" if entree == REASONING
+            else "aucune application directe"
+        )
+    if not autres:
+        manque.append("un seul mode d'exercice")
+
     return {
         "functions_present": sorted(presentes),
+        "entry_function": entree,
+        "singular_capacity": singuliere,
         "transfer_functions": transferts,
-        "verdict": "DIVERSITY_SUFFICIENT" if suffisant else "REAL_DIVERSITY_GAP",
+        "verdict": "DIVERSITY_SUFFICIENT" if not manque else "REAL_DIVERSITY_GAP",
         "missing": manque,
     }

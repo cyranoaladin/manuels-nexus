@@ -100,7 +100,9 @@ def _objects(directory: Path) -> list[dict[str, Any]]:
     return objets
 
 
-def _analyse_capacite(code: str, objets: list[dict[str, Any]]) -> dict[str, Any]:
+def _analyse_capacite(
+    code: str, objets: list[dict[str, Any]], libelle: str = ""
+) -> dict[str, Any]:
     """Ce dont cette capacite dispose reellement pour entrainer au transfert.
 
     La sortie nomme les fonctions presentes et le manque. Elle ne prescrit
@@ -109,32 +111,40 @@ def _analyse_capacite(code: str, objets: list[dict[str, Any]]) -> dict[str, Any]
     """
 
     fonctions = [functions_of(o.get("_body") or "", o) for o in objets]
-    verdict = diversity_verdict(fonctions)
+    verdict = diversity_verdict(fonctions, libelle)
     natures = collections.Counter(f for liste in fonctions for f in liste)
     parcours = sorted({o.get("parcours") for o in objets if o.get("parcours")})
     variation = sum(1 for liste in fonctions if set(liste) & TRANSFER_FUNCTIONS)
     raisonnement = sum(1 for liste in fonctions if F_REASONING in liste)
     synthese = sum(1 for liste in fonctions if F_SYNTHESIS in liste)
 
+    geste = verdict["entry_function"]
     if not objets:
         raison = "aucun exercice ne porte cette capacite : rien n'entraine a rien"
     elif verdict["verdict"] == "DIVERSITY_SUFFICIENT":
         raison = (
-            "l'eleve dispose d'une application directe et de "
-            + ", ".join(verdict["transfer_functions"]).lower()
-            + " : le transfert est travaille, ajouter des exercices n'ajouterait"
-            " pas de diversite"
+            f"le geste de base ({geste.lower()}) est installe et l'eleve"
+            " rencontre la capacite sous "
+            + ", ".join(f.lower() for f in verdict["functions_present"] if f != geste)
+            + " : le transfert est travaille, ajouter des exercices"
+            " n'ajouterait pas de diversite"
         )
-    elif DIRECT not in natures:
+    elif geste not in natures:
         raison = (
-            "aucun exercice n'installe le geste de base ; l'eleve rencontre la"
-            " capacite d'emblee en situation"
+            f"aucun exercice n'installe le geste de base ({geste.lower()}) que"
+            " l'enonce de la capacite reclame ; l'eleve la rencontre d'emblee"
+            " en situation"
+        )
+    elif len(objets) < 2:
+        raison = (
+            "un exercice unique ne fait varier aucune situation : l'eleve voit"
+            " la capacite une fois, sous un seul angle"
         )
     else:
         raison = (
-            f"les {len(objets)} exercices repetent l'application directe ; aucun"
-            " ne change de contexte, de strategie ni de registre, donc l'eleve"
-            " apprend une procedure et non une competence"
+            f"les {len(objets)} exercices repetent le meme mode ({geste.lower()}) ;"
+            " aucun ne change de contexte, de strategie ni de registre, donc"
+            " l'eleve apprend une procedure et non une competence"
         )
 
     return {
@@ -145,6 +155,9 @@ def _analyse_capacite(code: str, objets: list[dict[str, Any]]) -> dict[str, Any]
         "CURRENT_REASONING": raisonnement,
         "CURRENT_SYNTHESIS": synthese,
         "DIFFICULTY_SPREAD": parcours,
+        "CAPACITY_STATEMENT": libelle,
+        "ENTRY_FUNCTION": verdict["entry_function"],
+        "SINGULAR_CAPACITY": verdict["singular_capacity"],
         "DIVERSITY_VERDICT": verdict["verdict"],
         "REAL_DIVERSITY_GAP": verdict["verdict"] == "REAL_DIVERSITY_GAP",
         "MISSING_FUNCTIONS": verdict["missing"],
@@ -175,6 +188,19 @@ def audit(chapter: str) -> dict[str, Any]:
         raise ValueError(f"chapitre inconnu : {chapter}")
     contrat = yaml.safe_load((racine / "contrat.yaml").read_text(encoding="utf-8")) or {}
     capacites = [c["code"] for c in contrat.get("capacites", [])]
+    # Deux cles nomment la meme chose : `capacites_codes` porte le code local
+    # du contrat, `capacites` porte la reference du programme. Les chapitres
+    # NSI n'utilisent que la seconde. Ne lire que la premiere donnait « aucun
+    # exercice ne porte cette capacite » sur des chapitres integralement
+    # rattaches -- une lacune inventee par le lecteur, pas par le manuel.
+    libelles = {
+        c["code"]: c.get("libelle_eleve", "") for c in contrat.get("capacites", [])
+    }
+    par_reference = {
+        c["ref_capacite"]: c["code"]
+        for c in contrat.get("capacites", [])
+        if c.get("ref_capacite")
+    }
 
     exercices = _objects(racine / "exercices")
     corriges = _objects(racine / "corriges")
@@ -183,9 +209,23 @@ def audit(chapter: str) -> dict[str, Any]:
     methodes = _objects(racine / "methodes")
     cours = _objects(racine / "cours") + _objects(racine / "projet")
 
+    def codes_de(objet: dict[str, Any]) -> list[str]:
+        codes = list(objet.get("capacites_codes") or [])
+        codes += [
+            par_reference[ref]
+            for ref in (objet.get("capacites") or [])
+            if ref in par_reference
+        ]
+        return sorted(set(codes))
+
+    # On normalise une fois pour toutes : la suite du producteur, et la
+    # taxonomie des fonctions qu'elle appelle, ne connaissent plus qu'une cle.
+    for objet in exercices + evaluations:
+        objet["capacites_codes"] = codes_de(objet)
+
     par_capacite: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
     for objet in exercices:
-        for code in objet.get("capacites_codes") or []:
+        for code in objet["capacites_codes"]:
             par_capacite[code].append(objet)
 
     # Neuf chapitres NSI laissent la majorite de leurs exercices sans capacite
@@ -197,7 +237,7 @@ def audit(chapter: str) -> dict[str, Any]:
     # separement le rattachement manquant. Le seuil est la majorite : tant
     # qu'une majorite d'exercices est rattachee, la lecture par capacite reste
     # evidente et c'est elle qui fait foi.
-    rattaches = [o for o in exercices if o.get("capacites_codes")]
+    rattaches = [o for o in exercices if o["capacites_codes"]]
     non_rattaches = len(exercices) - len(rattaches)
     rattachement_absent = bool(exercices) and non_rattaches > len(rattaches)
     if rattachement_absent:
@@ -212,7 +252,8 @@ def audit(chapter: str) -> dict[str, Any]:
         per_capacity = [globale]
     else:
         per_capacity = [
-            _analyse_capacite(code, par_capacite.get(code, [])) for code in capacites
+            _analyse_capacite(code, par_capacite.get(code, []), libelles.get(code, ""))
+            for code in capacites
         ]
     lacunes = [a["CAPACITY_ID"] for a in per_capacity if a["REAL_DIVERSITY_GAP"]]
 
@@ -234,7 +275,7 @@ def audit(chapter: str) -> dict[str, Any]:
     ]
     synthese = (
         any(o.get("parcours") == 3 for o in exercices)
-        or any(len(o.get("capacites_codes") or []) >= 2 for o in evaluations + exercices)
+        or any(len(o["capacites_codes"]) >= 2 for o in evaluations + exercices)
     )
     parcours = sorted({o.get("parcours") for o in exercices if o.get("parcours")})
     fonctions_chapitre = sorted(

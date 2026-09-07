@@ -156,21 +156,71 @@ def test_a_project_assessed_chapter_is_measured_on_its_project(payload: dict) ->
     assert min(valeurs, key=lambda v: ordre[v]) == "WEAK"
 
 
-def test_the_capacity_assignment_defect_is_not_read_as_a_diversity_gap(
-    payload: dict,
-) -> None:
-    """Neuf chapitres NSI n'attachent pas leurs exercices a une capacite.
+def test_a_programme_reference_counts_as_a_capacity_attachment(payload: dict) -> None:
+    """Deux cles nomment la meme chose, et n'en lire qu'une invente des lacunes.
 
-    Leurs exercices existent et sont varies ; c'est le rattachement qui
-    manque. Les compter comme « diversite insuffisante » enverrait ecrire des
-    exercices la ou il faut ecrire six lignes de META.
+    Les chapitres NSI rattachent leurs exercices par la reference du
+    programme (`P-BASE-01`), les chapitres de mathematiques par le code local
+    du contrat (`C1`). Un lecteur qui n'ouvre que `capacites_codes` voit neuf
+    chapitres « sans aucun rattachement » alors qu'ils sont rattaches a cent
+    pour cent -- et enverrait ecrire des exercices la ou il n'en manque
+    aucun. Le producteur doit resoudre les deux.
     """
 
-    concernes = [
+    nsi = [
         r for r in payload["chapters"]
-        if r["coverage"]["CAPACITY_ASSIGNMENT_MISSING"]
+        if r["CHAPTER_ID"].endswith(
+            ("TYPES-BASE", "RESEAUX", "TABLES", "WEB-IHM", "ARCHITECTURE-OS")
+        )
     ]
-    assert concernes, "le defaut doit rester visible tant qu'il existe"
-    for row in concernes:
-        assert row["CAPACITY_ASSIGNMENT"] == "WEAK", row["CHAPTER_ID"]
-        assert [a["CAPACITY_ID"] for a in row["per_capacity"]] == ["CHAPTER_POOL"]
+    assert nsi, "les chapitres NSI de reference doivent etre audites"
+    for row in nsi:
+        assert not row["coverage"]["CAPACITY_ASSIGNMENT_MISSING"], row["CHAPTER_ID"]
+        assert row["coverage"]["EXERCISES_WITHOUT_CAPACITY"] == 0, row["CHAPTER_ID"]
+        assert any(
+            a["CURRENT_EXERCISES"] for a in row["per_capacity"]
+        ), row["CHAPTER_ID"]
+
+
+def test_the_pooled_reading_activates_when_the_attachment_is_mostly_absent(
+    producer, tmp_path, monkeypatch,
+) -> None:
+    """Le repli existe, meme si le corpus n'en a plus besoin aujourd'hui.
+
+    Une population vide ne prouve pas qu'un detecteur fonctionne : on le
+    verifie donc sur un chapitre fabrique, ou la majorite des exercices ne
+    declare aucune capacite. La diversite doit alors se lire sur le vivier
+    entier et le rattachement etre signale a part -- jamais l'inverse.
+    """
+
+    chapitre = tmp_path / "corpus" / "TEST-RATTACHEMENT"
+    (chapitre / "exercices").mkdir(parents=True)
+    (chapitre / "contrat.yaml").write_text(
+        "capacites:\n"
+        "  - { code: C1, ref_capacite: P-T-01, libelle_eleve: \"Je sais calculer.\" }\n",
+        encoding="utf-8",
+    )
+    enonces = [
+        ('{"id": "T-EX-1", "capacites_codes": ["C1"], "parcours": 1}',
+         "Calculer $2+2$."),
+        ('{"id": "T-EX-2", "parcours": 1}', "Calculer $3+3$."),
+        ('{"id": "T-EX-3", "parcours": 2}',
+         "Une usine produit des pieces. Demontrer que la cadence est stable."),
+    ]
+    for index, (meta, corps) in enumerate(enonces, start=1):
+        (chapitre / "exercices" / f"T-EX-{index}.tex").write_text(
+            f"% META: {meta}\n{corps}\n", encoding="utf-8"
+        )
+
+    monkeypatch.setattr(producer, "ROOT", tmp_path)
+    monkeypatch.setattr(producer, "CORPORA", ("corpus",))
+    row = producer.audit("TEST-RATTACHEMENT")
+
+    assert row["coverage"]["CAPACITY_ASSIGNMENT_MISSING"] is True
+    assert row["coverage"]["EXERCISES_WITHOUT_CAPACITY"] == 2
+    assert row["CAPACITY_ASSIGNMENT"] == "WEAK"
+    # Le vivier entier porte une application directe ET une situation de
+    # transfert : la diversite ne doit donc PAS etre declaree en defaut.
+    assert [a["CAPACITY_ID"] for a in row["per_capacity"]] == ["CHAPTER_POOL"]
+    assert row["per_capacity"][0]["REAL_DIVERSITY_GAP"] is False
+    assert row["EXERCISE_DIVERSITY"] in {"STRONG", "ADEQUATE"}
