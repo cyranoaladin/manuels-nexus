@@ -3130,3 +3130,1345 @@ def _tsd_q14(options):
         options,
         lambda texte: "indices des colonnes" in texte and "vaut $1$" in texte,
     )
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# TNSI-LANGAGES-ET-PROGRAMMATION
+# ══════════════════════════════════════════════════════════════════════════
+
+_TLANG = "TNSI-LANGAGES-ET-PROGRAMMATION"
+_TLANG_CALCUL = "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/10_C01_programme_donnee.tex"
+_TLANG_RECURSION = "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/11_C02_recursivite.tex"
+_TLANG_API = "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/12_C03_api_modules.tex"
+_TLANG_PARADIGMES = "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/13_C04_paradigmes.tex"
+_TLANG_DEBUG = "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/14_C05_debug.tex"
+
+conceptuelle(
+    _TLANG, "Q1", reponse="A",
+    raisonnement=(
+        "Un programme est une suite de caractères ou d'octets : rien ne le "
+        "distingue matériellement d'une donnée. Il peut donc être stocké, "
+        "transmis, transformé — et surtout LU ET EXÉCUTÉ par un autre "
+        "programme, ce que fait tout interpréteur ou compilateur."
+    ),
+    source_cours=_TLANG_CALCUL,
+    source_programme="TNSI-LANGAGES-ET-PROGRAMMATION::C1",
+    refutations={
+        "B": (
+            "L'absence d'effet n'a rien à voir : un programme-donnée produit "
+            "évidemment des effets quand un interpréteur l'exécute."
+        ),
+        "C": (
+            "L'égalité des tailles est fausse et sans rapport : un programme "
+            "d'une ligne peut traiter un fichier de plusieurs gigaoctets."
+        ),
+        "D": (
+            "L'origine de l'écriture — humaine ou machine — ne change rien à la "
+            "nature du programme comme suite de symboles."
+        ),
+    },
+)
+
+conceptuelle(
+    _TLANG, "Q2", reponse="B",
+    raisonnement=(
+        "L'indépendance de la calculabilité vis-à-vis du langage dit que "
+        "l'ENSEMBLE des fonctions calculables est le même pour tous les "
+        "langages universels. Un problème résoluble en Python l'est en C, en "
+        "OCaml, sur une machine de Turing — la difficulté d'écriture varie, la "
+        "possibilité non."
+    ),
+    source_cours=_TLANG_CALCUL,
+    source_programme="TNSI-LANGAGES-ET-PROGRAMMATION::C2",
+    refutations={
+        "A": (
+            "Les vitesses diffèrent considérablement : un même algorithme peut "
+            "être cent fois plus rapide en C qu'en Python. La calculabilité ne "
+            "parle pas de vitesse."
+        ),
+        "C": (
+            "Les syntaxes sont manifestement différentes : c'est même ce qui "
+            "distingue les langages entre eux."
+        ),
+        "D": (
+            "C'est exactement la négation de l'énoncé : si un algorithme "
+            "n'était écrivable que dans un langage, la calculabilité "
+            "dépendrait du langage."
+        ),
+    },
+)
+
+conceptuelle(
+    _TLANG, "Q3", reponse="C",
+    raisonnement=(
+        "L'indécidabilité porte sur l'existence d'un programme UNIQUE et "
+        "UNIVERSEL : aucun ne peut répondre correctement pour tout couple "
+        "(programme, entrée). L'énoncé quantifie sur tous les cas ; c'est cette "
+        "universalité qui est impossible."
+    ),
+    source_cours=_TLANG_CALCUL,
+    source_programme="TNSI-LANGAGES-ET-PROGRAMMATION::C3",
+    refutations={
+        "A": (
+            "Beaucoup de programmes s'arrêtent : la boucle `for i in range(3)` "
+            "se termine toujours. L'indécidabilité ne dit rien sur les "
+            "programmes eux-mêmes."
+        ),
+        "B": (
+            "On prouve au cas par cas la terminaison de nombreux programmes — "
+            "c'est ce que fait un variant de boucle. Ce qui est impossible est "
+            "de le faire automatiquement pour TOUS."
+        ),
+        "D": (
+            "Le résultat est indépendant du langage : il vaut pour tout "
+            "formalisme universel, et il précède l'existence de Python de "
+            "plusieurs décennies."
+        ),
+    },
+)
+
+conceptuelle(
+    _TLANG, "Q4", reponse="D",
+    raisonnement=(
+        "Le cas de base est la branche qui renvoie une valeur SANS effectuer "
+        "d'appel récursif. C'est le seul point où la chaîne d'appels s'arrête ; "
+        "sans lui, la récursion se poursuit jusqu'à épuisement de la pile."
+    ),
+    source_cours=_TLANG_RECURSION,
+    source_programme="TNSI-LANGAGES-ET-PROGRAMMATION::C4",
+    refutations={
+        "A": (
+            "Le cas de base ne fait rien gagner en vitesse : il rend la "
+            "terminaison possible. Une fonction sans cas de base n'est pas "
+            "lente, elle est fausse."
+        ),
+        "B": (
+            "La déclaration des variables locales n'a aucun rapport, et Python "
+            "ne déclare pas ses variables."
+        ),
+        "C": (
+            "La vérification des types est un contrôle facultatif, qu'on place "
+            "en tête de fonction ; le cas de base traite une VALEUR "
+            "particulière, pas un type."
+        ),
+    },
+)
+
+conceptuelle(
+    _TLANG, "Q5", reponse="A",
+    raisonnement=(
+        "Un arbre d'appels volumineux signifie que chaque branche atteint bien "
+        "un cas de base — sinon il n'y aurait pas d'arbre fini — mais qu'elles "
+        "sont très nombreuses. La fonction termine donc, et le problème est le "
+        "COÛT. `fib(30)` naïf en est l'exemple : plus de deux millions "
+        "d'appels, et une réponse correcte au bout."
+    ),
+    source_cours=_TLANG_RECURSION,
+    source_programme="TNSI-LANGAGES-ET-PROGRAMMATION::C5",
+    refutations={
+        "B": (
+            "Un coût élevé n'est pas une erreur de programmation : "
+            "l'algorithme peut être correct et simplement inefficace, ce qui "
+            "appelle une mémoïsation, pas une correction."
+        ),
+        "C": (
+            "La non-terminaison donnerait un arbre INFINI et une erreur de "
+            "profondeur de récursion, pas un grand nombre d'appels achevés."
+        ),
+        "D": (
+            "Un cas de base mal écrit provoquerait une non-terminaison ou un "
+            "résultat faux, pas une multiplication des appels qui aboutissent."
+        ),
+    },
+)
+
+conceptuelle(
+    _TLANG, "Q6", reponse="B",
+    raisonnement=(
+        "L'API est l'ensemble de ce que la bibliothèque EXPOSE : noms des "
+        "fonctions, paramètres attendus, valeurs renvoyées. C'est ce qu'il faut "
+        "connaître pour l'utiliser, et c'est indépendant de la manière dont "
+        "elle est écrite à l'intérieur."
+    ),
+    source_cours=_TLANG_API,
+    source_programme="TNSI-LANGAGES-ET-PROGRAMMATION::C6",
+    refutations={
+        "A": (
+            "Le code source est l'implémentation. Une bibliothèque peut être "
+            "utilisée sans qu'on en lise une ligne — et parfois sans qu'elle "
+            "soit disponible."
+        ),
+        "C": (
+            "Le nom de l'auteur est une métadonnée : elle n'aide personne à "
+            "appeler une fonction."
+        ),
+        "D": (
+            "La vitesse est une propriété mesurée à l'exécution, qui varie avec "
+            "la machine et les données. Elle ne figure pas dans une interface."
+        ),
+    },
+)
+
+conceptuelle(
+    _TLANG, "Q7", reponse="C",
+    raisonnement=(
+        "La documentation annonce un cas de retour particulier : `None` quand "
+        "la clé est absente. Utiliser la valeur sans distinguer ce cas conduit "
+        "à opérer sur `None`, donc à une exception à l'exécution. Le contrat "
+        "impose donc de tester avant d'utiliser."
+    ),
+    source_cours=_TLANG_API,
+    source_programme="TNSI-LANGAGES-ET-PROGRAMMATION::C7",
+    refutations={
+        "A": (
+            "Modifier la bibliothèque pour changer son contrat casse tous ses "
+            "autres appelants, et fige une version qui ne recevra plus les "
+            "corrections."
+        ),
+        "B": (
+            "La documentation s'adresse précisément aux appelants : c'est le "
+            "contrat qu'ils doivent respecter."
+        ),
+        "D": (
+            "Supposer la clé toujours présente contredit la documentation, et "
+            "le programme échouera au premier cas contraire — souvent en "
+            "production."
+        ),
+    },
+)
+
+
+@mecanique(_TLANG, "Q8", PYTHON)
+def _tlang_q8(options):
+    """On exécute le même fichier comme script, puis comme module importé."""
+    import runpy
+    import tempfile
+    from pathlib import Path as _Path
+
+    source = (
+        "TRACE = []\n"
+        "def utile():\n"
+        "    return 42\n"
+        'if __name__ == "__main__":\n'
+        "    TRACE.append('demo')\n"
+    )
+    with tempfile.TemporaryDirectory() as dossier:
+        fichier = _Path(dossier) / "sonde.py"
+        fichier.write_text(source, encoding="utf-8")
+        comme_script = runpy.run_path(str(fichier), run_name="__main__")
+        comme_module = runpy.run_path(str(fichier), run_name="sonde")
+
+    # Le code du bloc ne s'exécute QUE lancé directement.
+    assert comme_script["TRACE"] == ["demo"]
+    assert comme_module["TRACE"] == []
+    # Dans les deux cas, la fonction utile est bien définie et exportée.
+    assert comme_script["utile"]() == comme_module["utile"]() == 42
+    return _lettre(
+        options,
+        lambda texte: "lancé directement" in texte and "que si" in texte,
+    )
+
+
+conceptuelle(
+    _TLANG, "Q9", reponse="A",
+    raisonnement=(
+        "Python n'impose aucun paradigme : un même fichier peut contenir une "
+        "boucle qui modifie un état — impératif —, une compréhension sans effet "
+        "de bord — fonctionnel — et une classe — objet. Le paradigme est un "
+        "choix de conception, pas une contrainte du langage."
+    ),
+    source_cours=_TLANG_PARADIGMES,
+    source_programme="TNSI-LANGAGES-ET-PROGRAMMATION::C9",
+    refutations={
+        "B": (
+            "Restreindre Python à l'objet est faux : une fonction au niveau du "
+            "module n'appartient à aucune classe."
+        ),
+        "C": (
+            "Aucune contrainte du langage n'impose un paradigme unique ; c'est "
+            "même l'un de ses traits caractéristiques."
+        ),
+        "D": (
+            "Tout programme relève d'un ou plusieurs paradigmes identifiables : "
+            "la question est de savoir lesquels, pas s'il y en a."
+        ),
+    },
+)
+
+
+@mecanique(_TLANG, "Q10", PYTHON)
+def _tlang_q10(options):
+    """Quel style transforme SANS modifier la liste de départ ? On mesure."""
+    depart = [1, 2, 3]
+
+    # Style impératif, sur place : la liste de départ est modifiée.
+    imperative = list(depart)
+    for indice in range(len(imperative)):
+        imperative[indice] = imperative[indice] * 2
+    modifie_la_source = imperative != depart
+
+    # Style fonctionnel : une nouvelle liste, la source intacte.
+    source = list(depart)
+    fonctionnelle = [valeur * 2 for valeur in source]
+    assert fonctionnelle == [2, 4, 6]
+    assert source == depart          # inchangée
+    assert fonctionnelle is not source
+    assert modifie_la_source          # le style impératif, lui, a modifié
+    return _lettre(
+        options,
+        lambda texte: "fonctionnel" in texte and "nouvelle liste" in texte,
+    )
+
+
+@mecanique(_TLANG, "Q11", PYTHON)
+def _tlang_q11(options):
+    """La comparaison de flottants échoue-t-elle, et pourquoi ?"""
+    assert (0.1 + 0.2 == 0.3) is False
+    # Ce n'est pas une interdiction : la comparaison s'évalue sans erreur.
+    assert isinstance(0.1 + 0.2 == 0.3, bool)
+    # Ce n'est pas réservé aux entiers : elle fonctionne entre flottants.
+    assert (0.5 + 0.25 == 0.75) is True
+    # Et tous les flottants ne sont pas égaux entre eux.
+    assert (1.0 == 2.0) is False
+    # La cause est la représentation : 0.1 n'est pas exactement 1/10.
+    from decimal import Decimal
+    assert Decimal(0.1) != Decimal("0.1")
+    return _lettre(
+        options,
+        lambda texte: "ne représentent pas exactement" in texte,
+    )
+
+
+@mecanique(_TLANG, "Q12", PYTHON)
+def _tlang_q12(options):
+    """`b = a` : copie ou alias ? On mute et on regarde."""
+    a = [1, 2]
+    b = a
+    assert b is a
+    b.append(3)
+    assert a == [1, 2, 3]        # a a bougé : ce n'est pas une copie
+    assert a != []               # a n'a pas été vidée
+    return _lettre(
+        options,
+        lambda texte: "le même objet" in texte,
+    )
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# TNSI-ARCHITECTURES-MATERIELLES-SY
+# ══════════════════════════════════════════════════════════════════════════
+
+_TARCH = "TNSI-ARCHITECTURES-MATERIELLES-SY"
+_TARCH_SOC = "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/10_C01_systeme_sur_puce.tex"
+_TARCH_PROC = "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/11_C02_processus.tex"
+_TARCH_ROUTAGE = "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/12_C03_routage.tex"
+_TARCH_CHIFFRE = "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/13_C04_chiffrement.tex"
+
+conceptuelle(
+    _TARCH, "Q1", reponse="A",
+    raisonnement=(
+        "L'intégration fait gagner sur les trois autres tableaux — compacité, "
+        "consommation, coût — précisément parce que tout est sur une seule "
+        "puce. Ce qu'elle coûte est la MODULARITÉ : une mémoire ou un modem "
+        "défaillant ne se remplace plus séparément, c'est toute la puce qu'il "
+        "faut changer."
+    ),
+    source_cours=_TARCH_SOC,
+    source_programme="TNSI-ARCHITECTURES-MATERIELLES-SY::C1",
+    refutations={
+        "B": (
+            "La consommation BAISSE : les distances entre composants sont plus "
+            "courtes, donc les pertes de communication moindres."
+        ),
+        "C": (
+            "L'encombrement diminue : c'est le premier argument de "
+            "l'intégration, et ce qui rend un smartphone possible."
+        ),
+        "D": (
+            "Le coût de fabrication en grande série est généralement plus "
+            "faible qu'un assemblage de composants distincts."
+        ),
+    },
+)
+
+conceptuelle(
+    _TARCH, "Q2", reponse="B",
+    raisonnement=(
+        "Créer un processus, pour le système, c'est lui allouer un espace "
+        "mémoire, y charger le code, initialiser son état, et l'inscrire dans "
+        "la liste des processus que l'ordonnanceur pourra élire. C'est une "
+        "opération d'exécution, pas de traduction."
+    ),
+    source_cours=_TARCH_PROC,
+    source_programme="TNSI-ARCHITECTURES-MATERIELLES-SY::C2",
+    refutations={
+        "A": (
+            "La compilation traduit le source en code machine, avant "
+            "l'exécution et souvent sur une autre machine. Un programme "
+            "interprété n'est pas compilé et donne pourtant des processus."
+        ),
+        "C": (
+            "Arrêter les autres processus serait le contraire du "
+            "multitâche : plusieurs processus coexistent."
+        ),
+        "D": (
+            "Une adresse IP identifie une interface réseau, pas un processus. "
+            "Un programme sans réseau a bien un processus."
+        ),
+    },
+)
+
+conceptuelle(
+    _TARCH, "Q3", reponse="C",
+    raisonnement=(
+        "L'ordonnanceur arbitre l'accès à une ressource unique : le processeur. "
+        "Il choisit, parmi les processus PRÊTS, lequel s'exécute et pendant "
+        "quelle durée. C'est cet arbitrage répété qui donne l'illusion du "
+        "parallélisme sur un cœur unique."
+    ),
+    source_cours=_TARCH_PROC,
+    source_programme="TNSI-ARCHITECTURES-MATERIELLES-SY::C3",
+    refutations={
+        "A": (
+            "Le tri des fichiers relève du système de fichiers, une tout autre "
+            "fonction du système d'exploitation."
+        ),
+        "B": (
+            "La compilation est faite par un compilateur, avant le lancement, "
+            "et pas par l'ordonnanceur."
+        ),
+        "D": (
+            "La libération des ressources d'un processus terminé fait partie de "
+            "la gestion des processus, mais « et rien d'autre » exclut "
+            "l'arbitrage, qui est justement le rôle de l'ordonnanceur."
+        ),
+    },
+)
+
+conceptuelle(
+    _TARCH, "Q4", reponse="A",
+    raisonnement=(
+        "Dans le graphe d'attente, chaque processus pointe vers la ressource "
+        "qu'il attend et chaque ressource vers le processus qui la retient. Un "
+        "interblocage est un groupe de processus qui s'attendent mutuellement : "
+        "en suivant les flèches, on revient au point de départ, c'est-à-dire "
+        "qu'on parcourt un CYCLE."
+    ),
+    source_cours=_TARCH_PROC,
+    source_programme="TNSI-ARCHITECTURES-MATERIELLES-SY::C4",
+    refutations={
+        "B": (
+            "Un arbre est sans cycle : chaque attente y aboutit à une ressource "
+            "libre, et le groupe finit par progresser."
+        ),
+        "C": (
+            "Un graphe sans arête décrit des processus qui n'attendent rien : "
+            "c'est la situation la plus saine possible."
+        ),
+        "D": (
+            "Un sommet isolé est un processus qui n'attend ni ne retient rien ; "
+            "il ne peut bloquer personne."
+        ),
+    },
+)
+
+conceptuelle(
+    _TARCH, "Q5", reponse="B",
+    raisonnement=(
+        "RIP est un protocole à vecteur de distance dont la métrique est le "
+        "NOMBRE DE SAUTS : il retient la route traversant le moins de "
+        "routeurs, sans considération de débit ni de charge. C'est ce qui le "
+        "distingue d'OSPF."
+    ),
+    source_cours=_TARCH_ROUTAGE,
+    source_programme="TNSI-ARCHITECTURES-MATERIELLES-SY::C5",
+    refutations={
+        "A": (
+            "Le coût cumulé est la métrique d'OSPF. Les deux protocoles "
+            "choisissent des routes différentes dès qu'une liaison courte est "
+            "coûteuse."
+        ),
+        "C": (
+            "La latence mesurée en temps réel n'est la métrique d'aucun des "
+            "deux protocoles au programme : elle varie trop vite pour être "
+            "stable."
+        ),
+        "D": (
+            "Le nombre d'utilisateurs connectés n'est pas une propriété du "
+            "chemin et n'entre dans aucune table de routage."
+        ),
+    },
+)
+
+conceptuelle(
+    _TARCH, "Q6", reponse="C",
+    raisonnement=(
+        "Le chiffrement asymétrique repose sur une PAIRE de clés liées "
+        "mathématiquement : ce qui est chiffré avec la publique ne se déchiffre "
+        "qu'avec la privée. C'est ce qui permet d'échanger sans secret "
+        "préalable, la clé publique pouvant être diffusée librement."
+    ),
+    source_cours=_TARCH_CHIFFRE,
+    source_programme="TNSI-ARCHITECTURES-MATERIELLES-SY::C6",
+    refutations={
+        "A": (
+            "Une unique clé secrète partagée est le chiffrement SYMÉTRIQUE : "
+            "c'est justement l'échange préalable de ce secret que "
+            "l'asymétrique évite."
+        ),
+        "B": (
+            "Sans clé, aucun secret : n'importe qui déchiffrerait le message "
+            "en appliquant l'algorithme, qui est public."
+        ),
+        "D": (
+            "Une clé par caractère décrit un masque jetable, technique "
+            "symétrique, et n'a rien à voir avec la paire publique/privée."
+        ),
+    },
+)
+
+conceptuelle(
+    _TARCH, "Q7", reponse="D",
+    raisonnement=(
+        "L'asymétrique est lent : il serait inutilisable sur le volume d'une "
+        "session. HTTPS ne s'en sert donc qu'au DÉBUT, pour convenir en sûreté "
+        "d'une clé symétrique de session ; toute la suite des échanges est "
+        "chiffrée avec cette clé symétrique, bien plus rapide."
+    ),
+    source_cours=_TARCH_CHIFFRE,
+    source_programme="TNSI-ARCHITECTURES-MATERIELLES-SY::C7",
+    refutations={
+        "A": (
+            "Chiffrer toute la session en asymétrique serait beaucoup trop "
+            "lent : c'est précisément le problème que la clé de session "
+            "résout."
+        ),
+        "B": (
+            "La compression est une opération distincte, sans lien avec le "
+            "chiffrement, et souvent appliquée avant lui."
+        ),
+        "C": (
+            "Le cadenas est un indicateur affiché par le navigateur : c'est une "
+            "conséquence visible, pas la fonction du chiffrement."
+        ),
+    },
+)
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# TNSI-HISTOIRE-INFORMATIQUE
+# ══════════════════════════════════════════════════════════════════════════
+
+_THIST = "TNSI-HISTOIRE-INFORMATIQUE"
+_THIST_REPERES = "NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/cours/10_C1_evenements_cles.tex"
+_THIST_EVOLUTION = "NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/cours/11_C2_evolution_logiciel_materiel.tex"
+
+conceptuelle(
+    _THIST, "Q1", reponse="A",
+    raisonnement=(
+        "L'article de Turing « On Computable Numbers » paraît en 1936 : il y "
+        "définit la machine qui porte son nom et la machine universelle capable "
+        "de simuler n'importe laquelle des autres. C'est le repère chronologique "
+        "que le programme fixe pour l'entrée dans l'informatique théorique."
+    ),
+    source_cours=_THIST_REPERES,
+    source_programme="TNSI-HISTOIRE-INFORMATIQUE::C1",
+    refutations={
+        "B": (
+            "1948 est la date des premiers ordinateurs électroniques à "
+            "programme enregistré — la réalisation, douze ans après la "
+            "théorie."
+        ),
+        "C": (
+            "1969 est la mise en service d'ARPANET : un réseau, pas un modèle "
+            "de calcul."
+        ),
+        "D": (
+            "1991 correspond aux débuts publics du Web, plus d'un demi-siècle "
+            "après."
+        ),
+    },
+)
+
+conceptuelle(
+    _THIST, "Q2", reponse="B",
+    raisonnement=(
+        "ARPANET est mis en service en 1969, avec ses premiers nœuds "
+        "universitaires américains. C'est l'ancêtre direct d'Internet, dont il "
+        "inaugure la commutation de paquets à l'échelle d'un réseau de réseaux."
+    ),
+    source_cours=_THIST_REPERES,
+    source_programme="TNSI-HISTOIRE-INFORMATIQUE::C1",
+    refutations={
+        "A": (
+            "1948 est celle des premiers ordinateurs à programme enregistré, "
+            "vingt ans avant tout réseau de ce type."
+        ),
+        "C": (
+            "1989 est l'année de la proposition du Web par Tim Berners-Lee, "
+            "qui suppose Internet déjà existant."
+        ),
+        "D": (
+            "En 2000, Internet est déjà mondial et grand public : la date est "
+            "trop tardive de trente ans."
+        ),
+    },
+)
+
+conceptuelle(
+    _THIST, "Q3", reponse="C",
+    raisonnement=(
+        "L'évolution va du matériel spécialisé — machines câblées pour une "
+        "tâche — vers un matériel GÉNÉRIQUE, dont le comportement particulier "
+        "est déterminé par le logiciel qu'il exécute. Un même smartphone "
+        "devient calculatrice, appareil photo ou lecteur de musique selon "
+        "l'application lancée."
+    ),
+    source_cours=_THIST_EVOLUTION,
+    source_programme="TNSI-HISTOIRE-INFORMATIQUE::C2",
+    refutations={
+        "A": (
+            "C'est le mouvement inverse de celui observé : la spécialisation "
+            "caractérise les machines des débuts, pas celles d'aujourd'hui."
+        ),
+        "B": (
+            "Le matériel ne disparaît pas : aucun logiciel ne s'exécute sans "
+            "processeur ni mémoire. C'est son RÔLE qui a changé."
+        ),
+        "D": (
+            "L'évolution est considérable, et elle est précisément l'objet de "
+            "la capacité évaluée."
+        ),
+    },
+)
+
+conceptuelle(
+    _THIST, "Q4", reponse="D",
+    raisonnement=(
+        "Internet est l'infrastructure : un réseau de réseaux qui achemine des "
+        "paquets. Le Web est l'un des services qui l'utilisent, au même titre "
+        "que le courrier électronique — il est donc AU-DESSUS d'Internet, et "
+        "postérieur de vingt ans."
+    ),
+    source_cours=_THIST_REPERES,
+    source_programme="TNSI-HISTOIRE-INFORMATIQUE::C2",
+    refutations={
+        "A": (
+            "Ce ne sont pas deux noms de la même chose : le courrier "
+            "électronique passe par Internet sans passer par le Web, ce qui "
+            "suffit à les distinguer."
+        ),
+        "B": (
+            "Le Web n'est pas un réseau physique : il n'a ni câbles ni "
+            "routeurs propres, il emploie ceux d'Internet."
+        ),
+        "C": (
+            "La relation est inversée : c'est le Web qui repose sur Internet, "
+            "et non l'inverse. Internet existait vingt ans avant le Web."
+        ),
+    },
+)
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# TNSI-PROJET
+# ══════════════════════════════════════════════════════════════════════════
+
+_TPROJ = "TNSI-PROJET"
+_TPROJ_ANNUEL = "NSI/chapitres/TNSI-PROJET/projet/TNSI-PROJET-ANNUEL.tex"
+
+conceptuelle(
+    _TPROJ, "Q1", reponse="A",
+    raisonnement=(
+        "Un problème de projet n'est utilisable que s'il est formulé de façon "
+        "explicite ET assorti de critères observables : sans eux, personne ne "
+        "peut dire si le projet est terminé, et l'évaluation devient une "
+        "affaire d'impression."
+    ),
+    source_cours=_TPROJ_ANNUEL,
+    source_programme="TNSI-PROJET::C1",
+    refutations={
+        "B": (
+            "Une formulation la plus large possible rend le périmètre "
+            "indéfini : on ne sait ni quoi construire ni quand s'arrêter."
+        ),
+        "C": (
+            "Formuler le problème après coup revient à décrire ce qu'on a fait, "
+            "pas à conduire un projet : les choix ne peuvent plus être "
+            "justifiés par une exigence."
+        ),
+        "D": (
+            "L'appropriation du problème par l'équipe fait partie du travail "
+            "attendu ; un énoncé entièrement imposé prive le projet de ses "
+            "choix de conception."
+        ),
+    },
+)
+
+conceptuelle(
+    _TPROJ, "Q2", reponse="B",
+    raisonnement=(
+        "Répartir suppose deux décisions liées : qui prend quelle partie, et "
+        "comment ces parties s'assembleront — quelles interfaces, quels "
+        "formats d'échange. Sans la seconde, les parties ne s'emboîtent pas à "
+        "la fin, quel que soit le soin apporté à chacune."
+    ),
+    source_cours=_TPROJ_ANNUEL,
+    source_programme="TNSI-PROJET::C1",
+    refutations={
+        "A": (
+            "Écrire le même code chacun de son côté n'est pas une répartition : "
+            "c'est une duplication, qui ne fait avancer le projet que d'une "
+            "seule part."
+        ),
+        "C": (
+            "Une seule personne qui programme laisse les autres sans "
+            "apprentissage ni contribution : ce n'est pas un travail d'équipe."
+        ),
+        "D": (
+            "Le tirage au sort ignore les compétences et les dépendances entre "
+            "tâches, alors que certaines doivent être faites avant d'autres."
+        ),
+    },
+)
+
+conceptuelle(
+    _TPROJ, "Q3", reponse="C",
+    raisonnement=(
+        "Un point d'étape sert à décider de la suite ; il doit donc porter sur "
+        "des faits vérifiables : ce qui fonctionne, ce qui est testé, ce qui "
+        "reste. Ces trois éléments permettent d'ajuster le périmètre en "
+        "connaissance de cause."
+    ),
+    source_cours=_TPROJ_ANNUEL,
+    source_programme="TNSI-PROJET::C2",
+    refutations={
+        "A": (
+            "Le nombre de lignes ne mesure pas l'avancement : une correction "
+            "importante peut en retirer, et du code écrit mais non testé "
+            "n'avance rien."
+        ),
+        "B": (
+            "L'impression générale n'est pas observable : deux membres peuvent "
+            "l'avoir opposée sur le même état du projet."
+        ),
+        "D": (
+            "La date de rendu est connue depuis le début : la rappeler "
+            "n'apporte aucune information sur l'état d'avancement."
+        ),
+    },
+)
+
+conceptuelle(
+    _TPROJ, "Q4", reponse="D",
+    raisonnement=(
+        "À mi-parcours, le temps restant est une contrainte fixe. La seule "
+        "conduite qui produise un résultat exploitable est de réduire le "
+        "périmètre — en accord avec l'enseignant, puisque c'est lui qui évalue "
+        "— et de livrer un ensemble COHÉRENT ET TESTÉ, plutôt qu'un ensemble "
+        "complet et cassé."
+    ),
+    source_cours=_TPROJ_ANNUEL,
+    source_programme="TNSI-PROJET::C2",
+    refutations={
+        "A": (
+            "Conserver le périmètre en sachant qu'il ne sera pas tenu garantit "
+            "un rendu inachevé : la décision est prise par omission au lieu "
+            "d'être prise."
+        ),
+        "B": (
+            "Recommencer à mi-parcours perd tout le travail fait et laisse "
+            "encore moins de temps qu'au départ."
+        ),
+        "C": (
+            "Ajouter des membres en cours de route coûte du temps "
+            "d'explication à ceux qui avancent : le renfort ralentit d'abord "
+            "avant d'aider, si tant est qu'il aide."
+        ),
+    },
+)
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# TSPE-GEOMETRIE-ESPACE — cinq questions se calculent
+# ══════════════════════════════════════════════════════════════════════════
+
+_GEO = "TSPE-GEOMETRIE-ESPACE"
+_GEO_VECTEURS = "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/10_C1_C2_C4_C5_vecteurs_espace.tex"
+_GEO_POSITIONS = "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/11_C3_C6_positions_relatives.tex"
+_GEO_SCALAIRE = "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/12_C7_produit_scalaire.tex"
+_GEO_PLAN = "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/14_C13_C16_equation_cartesienne_plan.tex"
+_GEO_PROJECTION = "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/15_C8_C11_C14_projection_orthogonale.tex"
+_GEO_SYSTEMES = "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/16_C10_C15_systemes_lieux.tex"
+
+conceptuelle(
+    _GEO, "Q6", reponse="B",
+    raisonnement=(
+        "Deux vecteurs non colinéaires engendrent un sous-espace de dimension "
+        "2. L'ensemble de leurs combinaisons linéaires est donc un PLAN "
+        "vectoriel — celui qu'ils dirigent. Il faudrait un troisième vecteur "
+        "non coplanaire pour engendrer l'espace tout entier."
+    ),
+    source_cours=_GEO_VECTEURS,
+    source_programme="TSPE-GEOMETRIE-ESPACE::C1",
+    refutations={
+        "A": (
+            "Décrire tout l'espace exigerait trois vecteurs non coplanaires : "
+            "avec deux, un vecteur hors du plan engendré n'est jamais atteint."
+        ),
+        "C": (
+            "Une droite serait engendrée par un seul vecteur, ou par deux "
+            "vecteurs colinéaires — précisément ce que l'énoncé exclut."
+        ),
+        "D": (
+            "Un seul point correspondrait à $a=b=0$ uniquement ; ici $a$ et $b$ "
+            "parcourent tous les réels."
+        ),
+    },
+)
+
+
+@mecanique(_GEO, "Q7", SYMBOLIC)
+def _geo_q7(options):
+    """Décomposition de EC dans la base (AB, AD, AE), par coordonnées du cube."""
+    A = (0, 0, 0)
+    B, D, E = (1, 0, 0), (0, 1, 0), (0, 0, 1)
+    C = tuple(B[i] + D[i] for i in range(3))          # C = A + AB + AD
+    EC = tuple(C[i] - E[i] for i in range(3))
+    assert EC == (1, 1, -1)
+    # EC = 1·AB + 1·AD − 1·AE : on cherche l'option qui écrit ces trois signes.
+    return _lettre(
+        options,
+        lambda texte: texte.replace(" ", "")
+        == "$\\vec{AB}+\\vec{AD}-\\vec{AE}$",
+    )
+
+
+conceptuelle(
+    _GEO, "Q8", reponse="D",
+    raisonnement=(
+        "Non colinéaires deux à deux interdit seulement qu'un vecteur soit "
+        "multiple d'un autre. Trois vecteurs peuvent parfaitement vérifier cela "
+        "tout en appartenant à un même plan : $(1,0,0)$, $(0,1,0)$ et $(1,1,0)$ "
+        "en sont un exemple. Ils PEUVENT donc être coplanaires."
+    ),
+    source_cours=_GEO_VECTEURS,
+    source_programme="TSPE-GEOMETRIE-ESPACE::C4",
+    refutations={
+        "A": (
+            "Former une base exige d'être non COPLANAIRES, condition plus forte "
+            "que non colinéaires deux à deux : le contre-exemple ci-dessus la "
+            "met en défaut."
+        ),
+        "B": (
+            "« Toujours » est faux dans l'autre sens : les trois vecteurs de la "
+            "base canonique sont non colinéaires deux à deux et non "
+            "coplanaires."
+        ),
+        "C": (
+            "L'orthogonalité est une propriété métrique, sans rapport avec la "
+            "colinéarité : deux vecteurs non colinéaires peuvent faire un "
+            "angle quelconque."
+        ),
+    },
+)
+
+conceptuelle(
+    _GEO, "Q9", reponse="A",
+    raisonnement=(
+        "Les coordonnées suffisent toujours à écrire le vecteur comme "
+        "combinaison des vecteurs de base : c'est leur définition. En revanche "
+        "la formule $\\sqrt{x^2+y^2+z^2}$ suppose la base ORTHONORMÉE ; dans une "
+        "base quelconque, la norme dépend aussi des normes des vecteurs de base "
+        "et des angles entre eux, que les coordonnées ne donnent pas."
+    ),
+    source_cours=_GEO_VECTEURS,
+    source_programme="TSPE-GEOMETRIE-ESPACE::C5",
+    refutations={
+        "B": (
+            "$\\sqrt{3}$ n'est la norme que dans une base orthonormée. Avec des "
+            "vecteurs de base de longueur 2, le même triplet donnerait $2\\sqrt3$."
+        ),
+        "C": (
+            "Être unitaire est une propriété de norme : elle est hors d'atteinte "
+            "pour la même raison."
+        ),
+        "D": (
+            "Les coordonnées $(1;1;1)$ ne disent rien des angles ; elles "
+            "n'établissent aucune orthogonalité."
+        ),
+    },
+)
+
+conceptuelle(
+    _GEO, "Q10", reponse="B",
+    raisonnement=(
+        "Quatre points sont coplanaires lorsque le quatrième appartient au plan "
+        "défini par les trois premiers. En termes vectoriels, cela s'écrit "
+        "exactement : $\\vec{AD}$ est combinaison linéaire de $\\vec{AB}$ et "
+        "$\\vec{AC}$ — à condition que ces deux-là ne soient pas colinéaires, "
+        "sans quoi ils ne définissent pas de plan."
+    ),
+    source_cours=_GEO_POSITIONS,
+    source_programme="TSPE-GEOMETRIE-ESPACE::C6",
+    refutations={
+        "A": (
+            "Trois points sont TOUJOURS coplanaires : la condition est vide et "
+            "ne dit rien du quatrième."
+        ),
+        "C": (
+            "Si $\\vec{AB}$ et $\\vec{AC}$ sont colinéaires, les trois premiers "
+            "points sont alignés et ne définissent aucun plan unique : la "
+            "condition ne conclut rien sur $D$."
+        ),
+        "D": (
+            "Quatre points deux à deux distincts peuvent former un tétraèdre, "
+            "cas typiquement non coplanaire."
+        ),
+    },
+)
+
+
+@mecanique(_GEO, "Q11", SYMBOLIC)
+def _geo_q11(options):
+    """Distance d'un point à un plan, par la formule et par minimisation."""
+    from sympy import Rational, sqrt, symbols, solve, diff, simplify
+
+    a, b, c, d = 1, 2, 2, -6
+    M = (1, 2, 3)
+    numerateur = abs(a * M[0] + b * M[1] + c * M[2] + d)
+    norme = sqrt(a ** 2 + b ** 2 + c ** 2)
+    distance = Rational(numerateur, 1) / norme
+    assert simplify(distance - Rational(5, 3)) == 0
+
+    # Contrôle indépendant : on minimise la distance au carré sous contrainte,
+    # sans réutiliser la formule.
+    x, y, t = symbols("x y t", real=True)
+    z = (6 - x - 2 * y) / 2                     # point courant du plan
+    carre = (x - 1) ** 2 + (y - 2) ** 2 + (z - 3) ** 2
+    solution = solve([diff(carre, x), diff(carre, y)], [x, y], dict=True)[0]
+    minimum = carre.subs(solution)
+    assert simplify(minimum - Rational(25, 9)) == 0
+    assert simplify(sqrt(minimum) - Rational(5, 3)) == 0
+
+    return _lettre(options, lambda texte: "\\dfrac{5}{3}" in texte)
+
+
+@mecanique(_GEO, "Q12", SYMBOLIC)
+def _geo_q12(options):
+    """Angle BAC par le produit scalaire, en repère orthonormé."""
+    from sympy import acos, pi, sqrt, simplify, Rational
+
+    A, B, C = (0, 0, 0), (1, 0, 0), (1, 1, 0)
+    AB = tuple(B[i] - A[i] for i in range(3))
+    AC = tuple(C[i] - A[i] for i in range(3))
+    scalaire = sum(AB[i] * AC[i] for i in range(3))
+    normes = sqrt(sum(v ** 2 for v in AB)) * sqrt(sum(v ** 2 for v in AC))
+    angle = acos(Rational(scalaire, 1) / normes)
+    assert simplify(angle - pi / 4) == 0
+    return _lettre(options, lambda texte: "\\dfrac{\\pi}{4}" in texte)
+
+
+conceptuelle(
+    _GEO, "Q13", reponse="A",
+    raisonnement=(
+        "Une droite est orthogonale à un plan quand son vecteur directeur est "
+        "orthogonal à TOUT vecteur du plan. Il suffit de le vérifier sur deux "
+        "vecteurs non colinéaires du plan : tout autre vecteur du plan en est "
+        "une combinaison linéaire, et le produit scalaire étant linéaire, "
+        "l'orthogonalité se transmet."
+    ),
+    source_cours=_GEO_SCALAIRE,
+    source_programme="TSPE-GEOMETRIE-ESPACE::C10",
+    refutations={
+        "B": (
+            "Une seule droite ne suffit pas : un vecteur peut être orthogonal à "
+            "une direction du plan sans l'être au plan — il est alors dans le "
+            "plan lui-même."
+        ),
+        "C": (
+            "Être orthogonal au vecteur NORMAL signifie au contraire être "
+            "PARALLÈLE au plan, ou contenu dedans : c'est l'exact opposé."
+        ),
+        "D": (
+            "Aucun vecteur non nul n'est orthogonal à toutes les directions de "
+            "l'espace : il serait orthogonal à lui-même, donc nul."
+        ),
+    },
+)
+
+
+@mecanique(_GEO, "Q14", SYMBOLIC)
+def _geo_q14(options):
+    """Projeté orthogonal : on le calcule, puis on vérifie ses deux propriétés."""
+    from sympy import Rational, symbols, solve
+
+    M = (3, 3, 3)
+    normal = (1, 1, 1)
+    d = -3                                    # plan x + y + z − 3 = 0
+    t = symbols("t", real=True)
+    point = tuple(M[i] + t * normal[i] for i in range(3))
+    valeur = solve(sum(point) + d, t)[0]
+    projete = tuple(coord.subs(t, valeur) for coord in point)
+    assert projete == (1, 1, 1)
+    # Il appartient au plan, et MP est colinéaire à la normale.
+    assert sum(projete) - 3 == 0
+    MP = tuple(projete[i] - M[i] for i in range(3))
+    assert MP == (-2, -2, -2)
+    assert all(Rational(MP[i], normal[i]) == Rational(MP[0], normal[0])
+               for i in range(3))
+    return _lettre(options, lambda texte: texte.strip() == "$(1;1;1)$")
+
+
+conceptuelle(
+    _GEO, "Q15", reponse="C",
+    raisonnement=(
+        "En substituant la représentation paramétrique de la droite dans "
+        "l'équation du plan, on obtient une équation en le paramètre. "
+        "L'aboutissement $0 = 5$ est une contradiction : AUCUNE valeur du "
+        "paramètre ne convient, donc la droite ne rencontre pas le plan. Sans "
+        "point commun et de direction parallèle au plan, elle lui est "
+        "strictement parallèle."
+    ),
+    source_cours=_GEO_SYSTEMES,
+    source_programme="TSPE-GEOMETRIE-ESPACE::C15",
+    refutations={
+        "A": (
+            "Une contradiction n'est pas une erreur : c'est un résultat, et "
+            "c'est même le seul moyen algébrique de constater un parallélisme "
+            "strict."
+        ),
+        "B": (
+            "Une droite incluse dans le plan donnerait une identité du type "
+            "$0 = 0$, vérifiée pour TOUT paramètre — l'inverse exact."
+        ),
+        "D": (
+            "Une intersection en un point donnerait une équation admettant une "
+            "solution unique en le paramètre."
+        ),
+    },
+)
+
+
+@mecanique(_GEO, "Q16", SYMBOLIC)
+def _geo_q16(options):
+    """L'équation cartésienne du plan : on la construit, puis on la teste."""
+    A = (2, -1, 3)
+    n = (1, 4, -2)
+    d = -sum(n[i] * A[i] for i in range(3))
+    assert d == 8                                   # x + 4y − 2z + 8 = 0
+
+    def verifie(equation) -> bool:
+        return equation(*A) == 0
+
+    assert verifie(lambda x, y, z: x + 4 * y - 2 * z + d)
+    # Les autres candidats ne passent pas par A, ou n'ont pas la bonne normale.
+    assert (A[0] + 4 * A[1] - 2 * A[2]) != 0                    # option A
+    assert (A[0] + 4 * A[1] - 2 * A[2] - 8) != 0                # option B
+    assert (2 * A[0] - A[1] + 3 * A[2] + 8) != 0                # option C
+    return _lettre(options, lambda texte: "x+4y-2z+8=0" in texte.replace(" ", ""))
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# TSPE-SUITES-LIMITES
+# ══════════════════════════════════════════════════════════════════════════
+
+_SUITES = "TSPE-SUITES-LIMITES"
+_SUITES_CONV = "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/cours/10_C1_convergence_divergence.tex"
+_SUITES_MODEL = "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/cours/12_C3_modelisation.tex"
+_SUITES_CROISSANTE = "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/cours/13_C4_suite_croissante_non_majoree.tex"
+_SUITES_COMPARAISON = "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/cours/15_C6_comparaison.tex"
+
+
+@mecanique(_SUITES, "Q1", SYMBOLIC)
+def _suites_q1(options):
+    """Limite d'un quotient de degré 1 sur degré 1, calculée et contrôlée."""
+    from sympy import symbols, limit, oo, Rational, simplify
+
+    n = symbols("n", positive=True, integer=True)
+    valeur = limit((5 * n - 1) / (2 * n + 3), n, oo)
+    assert simplify(valeur - Rational(5, 2)) == 0
+    # Contrôle numérique : la suite s'en approche.
+    assert abs((5 * 10**6 - 1) / (2 * 10**6 + 3) - 2.5) < 1e-5
+    return _lettre(options, lambda texte: texte.strip() == "$5/2$")
+
+
+@mecanique(_SUITES, "Q6", SYMBOLIC)
+def _suites_q6(options):
+    """Raison de la suite auxiliaire, calculée à partir de la récurrence."""
+    from sympy import Rational, simplify, symbols
+
+    u = symbols("u", real=True)
+    suivant = Rational(7, 10) * u + 9
+    v_courant = u - 30
+    v_suivant = simplify(suivant - 30)
+    raison = simplify(v_suivant / v_courant)
+    assert raison == Rational(7, 10)
+    # Contrôle numérique sur plusieurs rangs.
+    valeur = 5.0
+    for _ in range(10):
+        precedent = valeur - 30
+        valeur = 0.7 * valeur + 9
+        assert abs((valeur - 30) - 0.7 * precedent) < 1e-9
+    return _lettre(options, lambda texte: texte.strip() in ("0,7", "$0,7$"))
+
+
+conceptuelle(
+    _SUITES, "Q7", reponse="D",
+    raisonnement=(
+        "Le théorème de la limite monotone énonce qu'une suite croissante ET "
+        "majorée converge. Les deux hypothèses sont nécessaires : la croissance "
+        "donne le sens, la majoration empêche la fuite vers l'infini. C'est "
+        "l'énoncé exact de l'option D."
+    ),
+    source_cours=_SUITES_CROISSANTE,
+    source_programme="TSPE-SUITES-LIMITES::C4",
+    refutations={
+        "A": (
+            "Une suite croissante peut converger : $u_n = 1 - 1/n$ croît et "
+            "tend vers 1. La croissance seule ne dit rien."
+        ),
+        "B": (
+            "L'implication est dans le mauvais sens et fausse : la suite "
+            "$(-1)^n/n$ converge vers 0 sans être croissante."
+        ),
+        "C": (
+            "Majorée ne suffit pas : $(-1)^n$ est majorée par 1 et ne converge "
+            "pas. Il manque la monotonie."
+        ),
+    },
+)
+
+
+@mecanique(_SUITES, "Q12", SYMBOLIC)
+def _suites_q12(options):
+    """Théorème de comparaison : on le vérifie sur des cas, et on le réfute pas."""
+    from sympy import symbols, limit, oo, sqrt
+
+    n = symbols("n", positive=True, integer=True)
+    # u_n minore v_n et tend vers +infini : v_n aussi, quelles que soient les
+    # formes essayées.
+    for majorante in (n, n + 1, n ** 2, n + sqrt(n)):
+        assert limit(majorante, n, oo) == oo
+    for k in range(1, 500):
+        assert k <= k + 1 <= k ** 2 + 1
+    # Aucune suite majorant n ne peut converger ni rester bornée.
+    assert limit(n, n, oo) == oo
+    return _lettre(options, lambda texte: "+\\infty" in texte and "lim" in texte)
+
+
+conceptuelle(
+    _SUITES, "Q13", reponse="B",
+    raisonnement=(
+        "Le théorème des gendarmes conclut que la suite encadrée converge vers "
+        "la limite COMMUNE des deux encadrantes. Si elles n'ont pas la même "
+        "limite, la suite encadrée peut prendre n'importe quel comportement "
+        "entre les deux, et le théorème ne s'applique pas."
+    ),
+    source_cours=_SUITES_COMPARAISON,
+    source_programme="TSPE-SUITES-LIMITES::C6",
+    refutations={
+        "A": (
+            "Des limites différentes ne concluent rien : $-1 \\leq (-1)^n \\leq 1$ "
+            "est un encadrement valide d'une suite qui n'a pas de limite."
+        ),
+        "C": (
+            "Une seule limite ne suffit pas : il faut un encadrement des DEUX "
+            "côtés, sans quoi la suite peut s'échapper de l'autre côté."
+        ),
+        "D": (
+            "La divergence des encadrantes relève du théorème de comparaison, "
+            "pas de celui des gendarmes, qui conclut à une convergence."
+        ),
+    },
+)
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# TSPE-CONTINUITE
+# ══════════════════════════════════════════════════════════════════════════
+
+_CONT = "TSPE-CONTINUITE"
+_CONT_TVI = "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/cours/10_C1_continuite_tvi.tex"
+_CONT_SUITES = "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/cours/11_C2_suites_recurrentes.tex"
+
+conceptuelle(
+    _CONT, "Q5", reponse="B",
+    raisonnement=(
+        "La fonction croît strictement de $-1$ à $4$, puis décroît strictement "
+        "de $4$ à $2$ : son maximum sur $[0\\,;6]$ vaut donc $4$. La valeur $5$ "
+        "n'est jamais atteinte, et l'équation $f(x)=5$ n'a AUCUNE solution. Le "
+        "théorème des valeurs intermédiaires ne s'applique que dans "
+        "l'intervalle image, ici $[-1\\,;4]$."
+    ),
+    source_cours=_CONT_TVI,
+    source_programme="TSPE-CONTINUITE::C1",
+    refutations={
+        "A": (
+            "Une solution unique correspondrait à une valeur atteinte une seule "
+            "fois — le cas de $4$, le maximum, ou d'une valeur de $]2\\,;4[$ "
+            "sur la seule branche croissante."
+        ),
+        "C": (
+            "Deux solutions correspondraient à une valeur strictement comprise "
+            "entre $2$ et $4$, atteinte une fois sur chaque branche. $5$ est "
+            "au-dessus du maximum."
+        ),
+        "D": (
+            "Le nombre de solutions se détermine parfaitement à partir des "
+            "variations et des valeurs aux bornes : c'est même l'objet de "
+            "l'exercice."
+        ),
+    },
+)
+
+conceptuelle(
+    _CONT, "Q9", reponse="B",
+    raisonnement=(
+        "Si $u_n \\to \\ell$ et $f$ est continue en $\\ell$, alors "
+        "$f(u_n) \\to f(\\ell)$. Or $f(u_n) = u_{n+1}$, qui tend vers $\\ell$ "
+        "aussi puisque c'est la même suite décalée d'un rang. Par unicité de la "
+        "limite, $f(\\ell) = \\ell$ : la limite est un point fixe de $f$."
+    ),
+    source_cours=_CONT_SUITES,
+    source_programme="TSPE-CONTINUITE::C2",
+    refutations={
+        "A": (
+            "$f(\\ell)=0$ ferait de $\\ell$ une racine de $f$, ce qui n'a aucune "
+            "raison d'être : pour $f(x)=x/2+1$, la limite est 2 et $f(2)=2$, pas 0."
+        ),
+        "C": (
+            "$\\ell=0$ n'a pas lieu d'être : la même suite converge vers 2."
+        ),
+        "D": (
+            "La croissance de $f$ n'est pas requise : le raisonnement n'utilise "
+            "que la continuité et l'unicité de la limite."
+        ),
+    },
+)
+
+conceptuelle(
+    _CONT, "Q11", reponse="D",
+    raisonnement=(
+        "Le théorème de la limite monotone garantit la CONVERGENCE d'une suite "
+        "croissante majorée, sans identifier la limite. Celle-ci est la borne "
+        "supérieure de l'ensemble des termes, qui n'a aucune raison d'être le "
+        "majorant qu'on avait choisi."
+    ),
+    source_cours=_CONT_SUITES,
+    source_programme="TSPE-CONTINUITE::C2",
+    refutations={
+        "A": (
+            "La limite n'est pas le majorant : $u_n = 1 - 1/n$ est majorée par "
+            "$10$ et converge vers $1$."
+        ),
+        "B": (
+            "Rien n'impose une forme géométrique : $u_n = 1 - 1/n$ croît, est "
+            "majorée, et n'est pas géométrique."
+        ),
+        "C": (
+            "Diverger vers $+\\infty$ contredit la majoration : la suite "
+            "dépasserait son majorant."
+        ),
+    },
+)
+
+
+@mecanique(_CONT, "Q14", SYMBOLIC)
+def _cont_q14(options):
+    """Contraction de rapport 1/2 : on itère la majoration depuis |u0 − l| = 4."""
+    from sympy import Rational
+
+    borne = Rational(4)
+    for _ in range(5):
+        borne = borne / 2
+    assert borne == Rational(1, 8)
+    assert float(borne) == 0.125
+    # Contrôle : la majoration est bien 4 × (1/2)^5.
+    assert borne == 4 * Rational(1, 2) ** 5
+    return _lettre(
+        options,
+        lambda texte: texte.strip() in ("$0{,}125$", "$0,125$"),
+    )
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# TSPE-LIMITES-FONCTIONS
+# ══════════════════════════════════════════════════════════════════════════
+
+_LIMF = "TSPE-LIMITES-FONCTIONS"
+_LIMF_LIMITES = "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/cours/10_C1_limites_fonctions.tex"
+_LIMF_ASYMPTOTES = "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/cours/11_C2_asymptotes.tex"
+
+
+@mecanique(_LIMF, "Q2", SYMBOLIC)
+def _limf_q2(options):
+    """Limite d'un polynôme de degré 2 en +infini."""
+    from sympy import symbols, limit, oo
+
+    x = symbols("x", real=True)
+    valeur = limit(x ** 2 - 3 * x + 1, x, oo)
+    assert valeur == oo
+    # Contrôle numérique : la fonction dépasse tout seuil.
+    assert (10 ** 6) ** 2 - 3 * 10 ** 6 + 1 > 10 ** 11
+    return _lettre(options, lambda texte: texte.strip() == "$+\\infty$")
+
+
+conceptuelle(
+    _LIMF, "Q3", reponse="C",
+    raisonnement=(
+        "$\\frac{\\infty}{\\infty}$ ne détermine aucune valeur : selon les "
+        "fonctions, la limite peut être nulle, finie non nulle, ou infinie. "
+        "$\\frac{x}{x^2} \\to 0$, $\\frac{2x}{x} \\to 2$, "
+        "$\\frac{x^2}{x} \\to +\\infty$. C'est précisément la définition d'une "
+        "forme indéterminée : il faut transformer l'écriture avant de conclure."
+    ),
+    source_cours=_LIMF_LIMITES,
+    source_programme="TSPE-LIMITES-FONCTIONS::C1",
+    refutations={
+        "A": (
+            "Une valeur de 1 supposerait que les deux infinis « se simplifient », "
+            "ce que $\\frac{x^2}{x}$ dément immédiatement."
+        ),
+        "B": (
+            "$+\\infty$ n'est qu'un des trois comportements possibles, réalisé "
+            "seulement quand le numérateur l'emporte."
+        ),
+        "D": (
+            "0 est aussi un cas particulier, réalisé quand le dénominateur "
+            "l'emporte — et il exclut les deux autres."
+        ),
+    },
+)
+
+
+@mecanique(_LIMF, "Q4", SYMBOLIC)
+def _limf_q4(options):
+    """Limite de 1/x en 0 par valeurs supérieures."""
+    from sympy import symbols, limit
+
+    x = symbols("x", real=True)
+    valeur = limit(1 / x, x, 0, "+")
+    assert str(valeur) == "oo"
+    # Contrôle numérique : la fonction dépasse tout seuil quand x décroît.
+    assert 1 / 1e-9 > 1e8
+    return _lettre(options, lambda texte: texte.strip() == "$+\\infty$")
+
+
+@mecanique(_LIMF, "Q9", SYMBOLIC)
+def _limf_q9(options):
+    """Asymptotes de e^{-x} + 3 : on calcule les deux limites et le domaine."""
+    from sympy import symbols, limit, exp, oo
+
+    x = symbols("x", real=True)
+    f = exp(-x) + 3
+    en_plus = limit(f, x, oo)
+    en_moins = limit(f, x, -oo)
+    assert en_plus == 3            # asymptote horizontale y = 3 en +infini
+    assert en_moins == oo          # aucune asymptote horizontale en −infini
+    # La fonction est définie sur tout R : pas d'asymptote verticale.
+    assert all(f.subs(x, valeur).is_finite for valeur in (-5, 0, 5, 100))
+    return _lettre(
+        options,
+        lambda texte: "AH $y=3$ en $+\\infty$" in texte and "pas d'AV" in texte,
+    )
