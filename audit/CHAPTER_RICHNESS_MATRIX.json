@@ -7780,8 +7780,8 @@
             "TCOMPL-AIR-EV-B"
           ],
           "capacity_type": "PROCEDURAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
               "missing_function": "NO_REMEDIATION",
@@ -7789,24 +7789,28 @@
             }
           ],
           "libelle_eleve": "Je sais définir l'intégrale d'une fonction continue positive comme aire sous la courbe, et utiliser la relation de Chasles.",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 1
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 12,
+              "id": "TCOMPL-AIR-EX-005",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            }
+          ],
           "raw_missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION"
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C2": {
           "assessed_by": [
@@ -7828,13 +7832,19 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-AIR-EX-004",
               "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-AIR-EX-006",
+              "parcours": 2,
               "questions_for_this_capacity": null
             }
           ],
@@ -7866,7 +7876,7 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 2
+            "targeted_practice": 3
           },
           "practice": [
             {
@@ -7878,6 +7888,12 @@
             {
               "duree_min": 20,
               "id": "TCOMPL-AIR-EX-003",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-AIR-EX-007",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -7904,12 +7920,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 1,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 10,
               "id": "TCOMPL-AIR-EX-001",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TCOMPL-AIR-EX-008",
               "parcours": 1,
               "questions_for_this_capacity": null
             }
@@ -7924,8 +7946,8 @@
             "TCOMPL-AIR-EV-A"
           ],
           "capacity_type": "CONCEPTUAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
               "missing_function": "NO_REMEDIATION",
@@ -7933,32 +7955,36 @@
             }
           ],
           "libelle_eleve": "Je sais démontrer que deux primitives d'une même fonction continue sur un intervalle diffèrent d'une constante.",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 1
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-AIR-EX-009",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            }
+          ],
           "raw_missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION"
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C6": {
           "assessed_by": [
             "TCOMPL-AIR-EV-B"
           ],
           "capacity_type": "CONCEPTUAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
               "missing_function": "NO_REMEDIATION",
@@ -7966,32 +7992,35 @@
             }
           ],
           "libelle_eleve": "Je sais démontrer que la fonction intégrale $F(x)=\\int_a^x f(t)\\,dt$ a pour dérivée $f$, lorsque $f$ est continue, positive et croissante.",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 1
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 18,
+              "id": "TCOMPL-AIR-EX-010",
+              "parcours": 3,
+              "questions_for_this_capacity": null
+            }
+          ],
           "raw_missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION"
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:b5488b67f144963937cc773fdf4316dfcc8979ac18ababc66b4f431c7a88b89f",
+      "capacities_digest": "sha256:88206498501a8635a22d48000c7ab40ecd51d3ca128db11496020503bc69b3fc",
       "capacity_identity_blockers": [],
       "chapter": "TCOMPL-CALCULS-AIRES",
       "counts": {
-        "CANDIDATE_NON_SEMANTIC": 3,
-        "INSUFFICIENT": 3
+        "CANDIDATE_NON_SEMANTIC": 6
       },
       "declarative_diversity_status": "INSUFFICIENT",
       "distinct_reasoning_paths": [],
@@ -7999,12 +8028,8 @@
       "diversity_status": "INSUFFICIENT",
       "excluded_credit_objects": [],
       "generated_by": "scripts/build_chapter_richness_matrix.py",
-      "insufficient": [
-        "C1",
-        "C5",
-        "C6"
-      ],
-      "machine_status": "GAP",
+      "insufficient": [],
+      "machine_status": "COMPLETE",
       "routed_to_human": 6,
       "rule": "la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers",
       "schema_version": 1,
@@ -8034,12 +8059,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-CORR-EX-001",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TCOMPL-CORR-EX-006",
               "parcours": 1,
               "questions_for_this_capacity": null
             }
@@ -8071,13 +8102,19 @@
             "method": 1,
             "qcm": 2,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-CORR-EX-001",
               "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-CORR-EX-007",
+              "parcours": 2,
               "questions_for_this_capacity": null
             }
           ],
@@ -8108,12 +8145,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 20,
               "id": "TCOMPL-CORR-EX-003",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 18,
+              "id": "TCOMPL-CORR-EX-008",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -8145,12 +8188,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-CORR-EX-002",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-CORR-EX-009",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -8177,13 +8226,19 @@
             "method": 1,
             "qcm": 2,
             "remediation": 1,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 10,
               "id": "TCOMPL-CORR-EX-004",
               "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-CORR-EX-010",
+              "parcours": 2,
               "questions_for_this_capacity": null
             }
           ],
@@ -8193,7 +8248,7 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:4917655987df9b425ff78a8267f7bc142d1e330541aba915256e0ace2b6f4af3",
+      "capacities_digest": "sha256:bb545aa411b77ad5ce94ff0fba82527bd25200026063c20782db0387323eb91e",
       "capacity_identity_blockers": [],
       "chapter": "TCOMPL-CORRELATION-CAUSALITE",
       "counts": {
@@ -8236,12 +8291,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-ECH-EX-001",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TCOMPL-ECH-EX-005",
               "parcours": 1,
               "questions_for_this_capacity": null
             }
@@ -8273,12 +8334,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 10,
               "id": "TCOMPL-ECH-EX-002",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TCOMPL-ECH-EX-006",
               "parcours": 1,
               "questions_for_this_capacity": null
             }
@@ -8305,13 +8372,19 @@
             "method": 1,
             "qcm": 1,
             "remediation": 1,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-ECH-EX-001",
               "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-ECH-EX-007",
+              "parcours": 2,
               "questions_for_this_capacity": null
             }
           ],
@@ -8362,8 +8435,8 @@
             "TCOMPL-ECH-EV-B"
           ],
           "capacity_type": "PROCEDURAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
               "missing_function": "NO_REMEDIATION",
@@ -8371,24 +8444,28 @@
             }
           ],
           "libelle_eleve": "Je sais simuler en Python un échantillon de taille n d'une variable aléatoire, et calculer la série des moyennes de N échantillons.",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 1
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-ECH-EX-008",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            }
+          ],
           "raw_missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION"
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C6": {
           "assessed_by": [
@@ -8410,12 +8487,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-ECH-EX-004",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-ECH-EX-009",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -8476,12 +8559,11 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:860a3ef9079b1997a940e408cc3f1058fd3596d4b837ecaee073561525b09306",
+      "capacities_digest": "sha256:98167e49875c49a6dec95a3097489089c36ff03ad9d104370ed1d86d33fa50aa",
       "capacity_identity_blockers": [],
       "chapter": "TCOMPL-ECHANTILLONNAGE",
       "counts": {
-        "CANDIDATE_NON_SEMANTIC": 6,
-        "INSUFFICIENT": 1
+        "CANDIDATE_NON_SEMANTIC": 7
       },
       "declarative_diversity_status": "INSUFFICIENT",
       "distinct_reasoning_paths": [],
@@ -8489,10 +8571,8 @@
       "diversity_status": "INSUFFICIENT",
       "excluded_credit_objects": [],
       "generated_by": "scripts/build_chapter_richness_matrix.py",
-      "insufficient": [
-        "C5"
-      ],
-      "machine_status": "GAP",
+      "insufficient": [],
+      "machine_status": "COMPLETE",
       "routed_to_human": 7,
       "rule": "la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers",
       "schema_version": 1,
@@ -8522,13 +8602,19 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 20,
               "id": "TCOMPL-INEG-EX-003",
               "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TCOMPL-INEG-EX-005",
+              "parcours": 1,
               "questions_for_this_capacity": null
             }
           ],
@@ -8559,13 +8645,19 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 10,
               "id": "TCOMPL-INEG-EX-004",
               "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-INEG-EX-006",
+              "parcours": 2,
               "questions_for_this_capacity": null
             }
           ],
@@ -8591,7 +8683,7 @@
             "method": 1,
             "qcm": 1,
             "remediation": 1,
-            "targeted_practice": 2
+            "targeted_practice": 3
           },
           "practice": [
             {
@@ -8603,6 +8695,12 @@
             {
               "duree_min": 20,
               "id": "TCOMPL-INEG-EX-003",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-INEG-EX-008",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -8670,13 +8768,19 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-INEG-EX-002",
               "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 18,
+              "id": "TCOMPL-INEG-EX-007",
+              "parcours": 3,
               "questions_for_this_capacity": null
             }
           ],
@@ -8688,7 +8792,7 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:aceaee13f9737b9e9c886e6a8a88a42b056446d4d6101a1105ebcad326ced9aa",
+      "capacities_digest": "sha256:73d1a2bf916d243dbf816128e2b082cc646f9ff161de0e1c56264faf1112b8cd",
       "capacity_identity_blockers": [],
       "chapter": "TCOMPL-INEGALITES",
       "counts": {
@@ -8716,8 +8820,8 @@
             "TCOMPL-BAYES-EV-A"
           ],
           "capacity_type": "PROCEDURAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
               "missing_function": "NO_REMEDIATION",
@@ -8725,24 +8829,28 @@
             }
           ],
           "libelle_eleve": "Je sais calculer des probabilités dans des situations faisant intervenir des probabilités conditionnelles.",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 2,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 1
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 12,
+              "id": "TCOMPL-BAYES-EX-005",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            }
+          ],
           "raw_missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION"
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C2": {
           "assessed_by": [
@@ -8759,13 +8867,19 @@
             "method": 1,
             "qcm": 1,
             "remediation": 1,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-BAYES-EX-001",
               "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-BAYES-EX-006",
+              "parcours": 2,
               "questions_for_this_capacity": null
             }
           ],
@@ -8794,13 +8908,19 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 10,
               "id": "TCOMPL-BAYES-EX-002",
               "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-BAYES-EX-007",
+              "parcours": 2,
               "questions_for_this_capacity": null
             }
           ],
@@ -8831,13 +8951,19 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-BAYES-EX-003",
               "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TCOMPL-BAYES-EX-008",
+              "parcours": 1,
               "questions_for_this_capacity": null
             }
           ],
@@ -8868,13 +8994,19 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-BAYES-EX-004",
               "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 18,
+              "id": "TCOMPL-BAYES-EX-009",
+              "parcours": 3,
               "questions_for_this_capacity": null
             }
           ],
@@ -8886,12 +9018,11 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:74995d5b0a0fdd9b4da90f430e78c5ef858a1fac48bd4ed6f2390121971d013c",
+      "capacities_digest": "sha256:fa2df4de9f5290982c3a9e5e632d555d842c2f39dd291c5b43b2ad86a12bf36e",
       "capacity_identity_blockers": [],
       "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
       "counts": {
-        "CANDIDATE_NON_SEMANTIC": 4,
-        "INSUFFICIENT": 1
+        "CANDIDATE_NON_SEMANTIC": 5
       },
       "declarative_diversity_status": "INSUFFICIENT",
       "distinct_reasoning_paths": [],
@@ -8899,10 +9030,8 @@
       "diversity_status": "INSUFFICIENT",
       "excluded_credit_objects": [],
       "generated_by": "scripts/build_chapter_richness_matrix.py",
-      "insufficient": [
-        "C1"
-      ],
-      "machine_status": "GAP",
+      "insufficient": [],
+      "machine_status": "COMPLETE",
       "routed_to_human": 5,
       "rule": "la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers",
       "schema_version": 1,
@@ -8917,8 +9046,8 @@
             "TCOMPL-LOG-EV-B"
           ],
           "capacity_type": "PROCEDURAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
               "missing_function": "NO_REMEDIATION",
@@ -8926,24 +9055,28 @@
             }
           ],
           "libelle_eleve": "Je sais présenter la fonction logarithme népérien comme réciproque de l'exponentielle : limites, représentation graphique, équation fonctionnelle, dérivée.",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 2,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 1
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 12,
+              "id": "TCOMPL-LOG-EX-005",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            }
+          ],
           "raw_missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION"
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C2": {
           "assessed_by": [
@@ -8965,12 +9098,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-LOG-EX-002",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-LOG-EX-006",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -8997,12 +9136,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 1,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-LOG-EX-003",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-LOG-EX-007",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -9088,12 +9233,11 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:3047754a85fa31143ccfac6e5a1e98221bd652b4e9b791c95b47e9ab8a374961",
+      "capacities_digest": "sha256:9f0fad4e84c7e96c9a91f3aefc2a5a64756f750fded194c0a517d14cc7fff305",
       "capacity_identity_blockers": [],
       "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
       "counts": {
-        "CANDIDATE_NON_SEMANTIC": 4,
-        "INSUFFICIENT": 1
+        "CANDIDATE_NON_SEMANTIC": 5
       },
       "declarative_diversity_status": "INSUFFICIENT",
       "distinct_reasoning_paths": [],
@@ -9101,10 +9245,8 @@
       "diversity_status": "INSUFFICIENT",
       "excluded_credit_objects": [],
       "generated_by": "scripts/build_chapter_richness_matrix.py",
-      "insufficient": [
-        "C1"
-      ],
-      "machine_status": "GAP",
+      "insufficient": [],
+      "machine_status": "COMPLETE",
       "routed_to_human": 5,
       "rule": "la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers",
       "schema_version": 1,
@@ -9134,12 +9276,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-ME-EX-004",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TCOMPL-ME-EX-005",
               "parcours": 1,
               "questions_for_this_capacity": null
             }
@@ -9171,13 +9319,19 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 10,
               "id": "TCOMPL-ME-EX-001",
               "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-ME-EX-007",
+              "parcours": 2,
               "questions_for_this_capacity": null
             }
           ],
@@ -9208,13 +9362,19 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-ME-EX-004",
               "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-ME-EX-006",
+              "parcours": 2,
               "questions_for_this_capacity": null
             }
           ],
@@ -9336,7 +9496,7 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:f97b5a42bb5b3eb4f04993fc80b7945a32142a51092d2511285beb337f20a3ff",
+      "capacities_digest": "sha256:f8cb59b1085738018398aef79e59269b23ee0f4aee5ca371f5c55f259f3905ca",
       "capacity_identity_blockers": [],
       "chapter": "TCOMPL-MODELES-EVOLUTION",
       "counts": {
@@ -9374,12 +9534,18 @@
             "method": 1,
             "qcm": 3,
             "remediation": 1,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-MF-EX-001",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TCOMPL-MF-EX-005",
               "parcours": 1,
               "questions_for_this_capacity": null
             }
@@ -9409,12 +9575,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-MF-EX-002",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-MF-EX-006",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -9431,8 +9603,8 @@
             "TCOMPL-MF-EV-A"
           ],
           "capacity_type": "PROCEDURAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
               "missing_function": "NO_REMEDIATION",
@@ -9440,32 +9612,36 @@
             }
           ],
           "libelle_eleve": "Je sais déterminer une valeur approchée ou un encadrement d'une solution d'une équation f(x) = k, par balayage ou dichotomie.",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 1
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-MF-EX-007",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            }
+          ],
           "raw_missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION"
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C4": {
           "assessed_by": [
             "TCOMPL-MF-EV-B"
           ],
           "capacity_type": "PROCEDURAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
               "missing_function": "NO_REMEDIATION",
@@ -9473,24 +9649,28 @@
             }
           ],
           "libelle_eleve": "Je sais reconnaître graphiquement une fonction convexe, concave, ou un point d'inflexion.",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 1
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 12,
+              "id": "TCOMPL-MF-EX-008",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            }
+          ],
           "raw_missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION"
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C5": {
           "assessed_by": [
@@ -9507,12 +9687,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 1,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-MF-EX-003",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-MF-EX-009",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -9564,8 +9750,8 @@
             "TCOMPL-MF-EV-B"
           ],
           "capacity_type": "PROCEDURAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
               "missing_function": "NO_REMEDIATION",
@@ -9573,32 +9759,35 @@
             }
           ],
           "libelle_eleve": "Je sais déterminer une droite de régression à l'aide d'un logiciel ou par calcul.",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 1
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-MF-EX-010",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            }
+          ],
           "raw_missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION"
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:537e599becbb70334d09937fce03271dc5413e8ceae4ebb649d7ec3cd67fdd1c",
+      "capacities_digest": "sha256:87e93e720432591e2790f4b68578757241c02815c9bbeb04be50c5f7f79a376d",
       "capacity_identity_blockers": [],
       "chapter": "TCOMPL-MODELES-FONCTION",
       "counts": {
-        "CANDIDATE_NON_SEMANTIC": 4,
-        "INSUFFICIENT": 3
+        "CANDIDATE_NON_SEMANTIC": 7
       },
       "declarative_diversity_status": "INSUFFICIENT",
       "distinct_reasoning_paths": [],
@@ -9606,12 +9795,8 @@
       "diversity_status": "INSUFFICIENT",
       "excluded_credit_objects": [],
       "generated_by": "scripts/build_chapter_richness_matrix.py",
-      "insufficient": [
-        "C3",
-        "C4",
-        "C7"
-      ],
-      "machine_status": "GAP",
+      "insufficient": [],
+      "machine_status": "COMPLETE",
       "routed_to_human": 7,
       "rule": "la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers",
       "schema_version": 1,
@@ -9641,12 +9826,18 @@
             "method": 1,
             "qcm": 2,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 10,
               "id": "TCOMPL-ATT-EX-001",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TCOMPL-ATT-EX-005",
               "parcours": 1,
               "questions_for_this_capacity": null
             }
@@ -9715,12 +9906,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-ATT-EX-002",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-ATT-EX-006",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -9737,8 +9934,8 @@
             "TCOMPL-ATT-EV-B"
           ],
           "capacity_type": "PROCEDURAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
               "missing_function": "NO_REMEDIATION",
@@ -9746,24 +9943,28 @@
             }
           ],
           "libelle_eleve": "Je sais définir la loi exponentielle (densité, fonction de répartition, espérance) et sa propriété d'absence de mémoire.",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 1
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-ATT-EX-007",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            }
+          ],
           "raw_missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION"
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C5": {
           "assessed_by": [
@@ -9815,12 +10016,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TCOMPL-ATT-EX-004",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TCOMPL-ATT-EX-008",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -9876,12 +10083,11 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:c90062ef2b40b2f47622eee99567e3b526f8593b4547dcd5957be51cb9445bb8",
+      "capacities_digest": "sha256:f6f0bea0f59585082daf3e964d128e996b3d6acde183ae69630e41828c4e6813",
       "capacity_identity_blockers": [],
       "chapter": "TCOMPL-TEMPS-ATTENTE",
       "counts": {
-        "CANDIDATE_NON_SEMANTIC": 6,
-        "INSUFFICIENT": 1
+        "CANDIDATE_NON_SEMANTIC": 7
       },
       "declarative_diversity_status": "INSUFFICIENT",
       "distinct_reasoning_paths": [],
@@ -9889,10 +10095,8 @@
       "diversity_status": "INSUFFICIENT",
       "excluded_credit_objects": [],
       "generated_by": "scripts/build_chapter_richness_matrix.py",
-      "insufficient": [
-        "C4"
-      ],
-      "machine_status": "GAP",
+      "insufficient": [],
+      "machine_status": "COMPLETE",
       "routed_to_human": 7,
       "rule": "la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers",
       "schema_version": 1,
@@ -9917,13 +10121,37 @@
             "method": 1,
             "qcm": 3,
             "remediation": 1,
-            "targeted_practice": 1
+            "targeted_practice": 5
           },
           "practice": [
             {
               "duree_min": 10,
               "id": "TEXP-ARI-EX-001",
               "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TEXP-ARI-EX-006",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-ARI-EX-007",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-ARI-EX-008",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 18,
+              "id": "TEXP-ARI-EX-009",
+              "parcours": 3,
               "questions_for_this_capacity": null
             }
           ],
@@ -9947,13 +10175,37 @@
             "method": 1,
             "qcm": 1,
             "remediation": 1,
-            "targeted_practice": 1
+            "targeted_practice": 5
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TEXP-ARI-EX-002",
               "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TEXP-ARI-EX-010",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-ARI-EX-011",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-ARI-EX-012",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 18,
+              "id": "TEXP-ARI-EX-013",
+              "parcours": 3,
               "questions_for_this_capacity": null
             }
           ],
@@ -9967,19 +10219,17 @@
             "TEXP-ARI-EV-A"
           ],
           "capacity_type": "COMPOSITE_REASONING",
-          "declarative_status": "INSUFFICIENT",
+          "declarative_status": "SUFFICIENT",
           "distinct_opportunities": 5,
           "excused_by_applicability": [],
           "libelle_eleve": "Je sais établir et utiliser des tests de divisibilité, étudier la primalité d'un nombre, et étudier des problèmes de chiffrement simples.",
-          "missing_function": [
-            "SINGLE_REASONING_PATH_FOR_COMPOSITE_CAPACITY"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 1,
-            "targeted_practice": 1
+            "targeted_practice": 5
           },
           "practice": [
             {
@@ -9987,12 +10237,44 @@
               "id": "TEXP-ARI-EX-005",
               "parcours": 2,
               "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TEXP-ARI-EX-014",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-ARI-EX-015",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 18,
+              "id": "TEXP-ARI-EX-016",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 20,
+              "id": "TEXP-ARI-EX-017",
+              "parcours": 3,
+              "questions_for_this_capacity": null
             }
           ],
           "raw_missing_function": [],
-          "reasoning_paths": [],
+          "reasoning_paths": [
+            "calcul",
+            "construire_contre_exemple",
+            "distinguer_notions",
+            "modelisation",
+            "preuve",
+            "raisonnement_par_congruence",
+            "traiter_cas_limite"
+          ],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C4": {
           "assessed_by": [
@@ -10009,13 +10291,31 @@
             "method": 1,
             "qcm": 1,
             "remediation": 1,
-            "targeted_practice": 1
+            "targeted_practice": 4
           },
           "practice": [
             {
               "duree_min": 20,
               "id": "TEXP-ARI-EX-003",
               "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-ARI-EX-018",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 18,
+              "id": "TEXP-ARI-EX-019",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 18,
+              "id": "TEXP-ARI-EX-020",
+              "parcours": 3,
               "questions_for_this_capacity": null
             }
           ],
@@ -10029,8 +10329,8 @@
             "TEXP-ARI-EV-A"
           ],
           "capacity_type": "CONCEPTUAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
               "missing_function": "NO_REMEDIATION",
@@ -10038,32 +10338,36 @@
             }
           ],
           "libelle_eleve": "Je sais démontrer le théorème de Bézout : le PGCD de a et b s'écrit ax+by pour des entiers x,y.",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 1
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 18,
+              "id": "TEXP-ARI-EX-021",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            }
+          ],
           "raw_missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION"
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C6": {
           "assessed_by": [
             "TEXP-ARI-EV-B"
           ],
           "capacity_type": "CONCEPTUAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
               "missing_function": "NO_REMEDIATION",
@@ -10071,32 +10375,36 @@
             }
           ],
           "libelle_eleve": "Je sais démontrer le théorème de Gauss (si a divise bc et a est premier avec b, alors a divise c).",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 1
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 15,
+              "id": "TEXP-ARI-EX-022",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            }
+          ],
           "raw_missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION"
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C7": {
           "assessed_by": [
             "TEXP-ARI-EV-B"
           ],
           "capacity_type": "CONCEPTUAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
               "missing_function": "NO_REMEDIATION",
@@ -10104,24 +10412,34 @@
             }
           ],
           "libelle_eleve": "Je sais démontrer que l'ensemble des nombres premiers est infini, et utiliser la décomposition en facteurs premiers.",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 2
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 15,
+              "id": "TEXP-ARI-EX-023",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TEXP-ARI-EX-024",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            }
+          ],
           "raw_missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION"
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C8": {
           "assessed_by": [
@@ -10143,13 +10461,25 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 3
           },
           "practice": [
             {
               "duree_min": 10,
               "id": "TEXP-ARI-EX-004",
               "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-ARI-EX-025",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 18,
+              "id": "TEXP-ARI-EX-026",
+              "parcours": 3,
               "questions_for_this_capacity": null
             }
           ],
@@ -10165,8 +10495,8 @@
             "TEXP-ARI-EV-B"
           ],
           "capacity_type": "PROCEDURAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
               "missing_function": "NO_REMEDIATION",
@@ -10174,47 +10504,66 @@
             }
           ],
           "libelle_eleve": "Je sais programmer l'algorithme d'Euclide (PGCD et couple de Bézout), le crible d'Ératosthène, et la décomposition en facteurs premiers.",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 2
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 15,
+              "id": "TEXP-ARI-EX-027",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 18,
+              "id": "TEXP-ARI-EX-028",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            }
+          ],
           "raw_missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION"
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:25a57f4f0d5d3c5208ad6816f2551cd7fe86b96a9f2c3c3ebfff0919a65ad490",
+      "capacities_digest": "sha256:f9408397bc2462d3757bb3c3bf67e7ca94baf267927420d71418f2f4e5004bf4",
       "capacity_identity_blockers": [],
       "chapter": "TEXP-ARITHMETIQUE",
       "counts": {
-        "CANDIDATE_NON_SEMANTIC": 4,
-        "INSUFFICIENT": 5
+        "CANDIDATE_NON_SEMANTIC": 9
       },
-      "declarative_diversity_status": "INSUFFICIENT",
-      "distinct_reasoning_paths": [],
-      "diversity_profile": {},
-      "diversity_status": "INSUFFICIENT",
+      "declarative_diversity_status": "SUFFICIENT",
+      "distinct_reasoning_paths": [
+        "calcul",
+        "construire_contre_exemple",
+        "distinguer_notions",
+        "modelisation",
+        "preuve",
+        "raisonnement_par_congruence",
+        "traiter_cas_limite"
+      ],
+      "diversity_profile": {
+        "calcul": 3,
+        "construire_contre_exemple": 1,
+        "distinguer_notions": 1,
+        "modelisation": 1,
+        "preuve": 1,
+        "raisonnement_par_congruence": 2,
+        "traiter_cas_limite": 1
+      },
+      "diversity_status": "CANDIDATE_NON_SEMANTIC",
       "excluded_credit_objects": [],
       "generated_by": "scripts/build_chapter_richness_matrix.py",
-      "insufficient": [
-        "C3",
-        "C5",
-        "C6",
-        "C7",
-        "C9"
-      ],
-      "machine_status": "GAP",
+      "insufficient": [],
+      "machine_status": "COMPLETE",
       "routed_to_human": 9,
       "rule": "la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers",
       "schema_version": 1,
@@ -10229,27 +10578,36 @@
             "TEXP-CAG-EV-A"
           ],
           "capacity_type": "PROCEDURAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 4,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 5,
           "excused_by_applicability": [],
           "libelle_eleve": "Je sais effectuer des calculs algébriques avec des nombres complexes (somme, produit, conjugué, inverse).",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 2,
             "remediation": 1,
-            "targeted_practice": 0
+            "targeted_practice": 2
           },
-          "practice": [],
-          "raw_missing_function": [
-            "NO_TARGETED_PRACTICE"
+          "practice": [
+            {
+              "duree_min": 12,
+              "id": "TEXP-CAG-EX-005",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-CAG-EX-006",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            }
           ],
+          "raw_missing_function": [],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C2": {
           "assessed_by": [
@@ -10271,7 +10629,7 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 2
+            "targeted_practice": 3
           },
           "practice": [
             {
@@ -10283,6 +10641,12 @@
             {
               "duree_min": 15,
               "id": "TEXP-CAG-EX-002",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-CAG-EX-007",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -10314,12 +10678,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TEXP-CAG-EX-004",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-CAG-EX-008",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -10351,12 +10721,18 @@
             "method": 1,
             "qcm": 2,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 10,
               "id": "TEXP-CAG-EX-003",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TEXP-CAG-EX-009",
               "parcours": 1,
               "questions_for_this_capacity": null
             }
@@ -10373,8 +10749,8 @@
             "TEXP-CAG-EV-B"
           ],
           "capacity_type": "CONCEPTUAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
               "missing_function": "NO_REMEDIATION",
@@ -10382,32 +10758,35 @@
             }
           ],
           "libelle_eleve": "Je sais démontrer la formule $|z|^2=z\\bar z$ et les propriétés du module d'un produit et d'une puissance.",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 1
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 15,
+              "id": "TEXP-CAG-EX-010",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            }
+          ],
           "raw_missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION"
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:70dfbb81fed13d827e8f93dfda4e39e4993c6f26af1352e83b3ab6220260ce2a",
+      "capacities_digest": "sha256:1cab65efb6cb7b59a546ce387ca38159ce8f57920e8c7a5b5f3e6c6ba1d87b51",
       "capacity_identity_blockers": [],
       "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
       "counts": {
-        "CANDIDATE_NON_SEMANTIC": 3,
-        "INSUFFICIENT": 2
+        "CANDIDATE_NON_SEMANTIC": 5
       },
       "declarative_diversity_status": "INSUFFICIENT",
       "distinct_reasoning_paths": [],
@@ -10415,11 +10794,8 @@
       "diversity_status": "INSUFFICIENT",
       "excluded_credit_objects": [],
       "generated_by": "scripts/build_chapter_richness_matrix.py",
-      "insufficient": [
-        "C1",
-        "C5"
-      ],
-      "machine_status": "GAP",
+      "insufficient": [],
+      "machine_status": "COMPLETE",
       "routed_to_human": 5,
       "rule": "la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers",
       "schema_version": 1,
@@ -10444,12 +10820,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 1,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 10,
               "id": "TEXP-CTP-EX-001",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TEXP-CTP-EX-005",
               "parcours": 1,
               "questions_for_this_capacity": null
             }
@@ -10479,12 +10861,18 @@
             "method": 1,
             "qcm": 2,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 20,
               "id": "TEXP-CTP-EX-002",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-CTP-EX-006",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -10501,8 +10889,8 @@
             "TEXP-CTP-EV-A"
           ],
           "capacity_type": "CONCEPTUAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
               "missing_function": "NO_REMEDIATION",
@@ -10510,24 +10898,28 @@
             }
           ],
           "libelle_eleve": "Je sais démontrer une formule d'addition trigonométrique à partir du produit scalaire.",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 1
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 15,
+              "id": "TEXP-CTP-EX-007",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            }
+          ],
           "raw_missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION"
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C4": {
           "assessed_by": [
@@ -10549,12 +10941,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 20,
               "id": "TEXP-CTP-EX-003",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-CTP-EX-008",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -10571,8 +10969,8 @@
             "TEXP-CTP-EV-B"
           ],
           "capacity_type": "CONCEPTUAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 3,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
               "missing_function": "NO_REMEDIATION",
@@ -10580,24 +10978,28 @@
             }
           ],
           "libelle_eleve": "Je sais démontrer la factorisation de $z^n-a^n$ par $z-a$, celle de $P(z)$ par $z-a$ si $P(a)=0$, et que le nombre de racines d'un polynôme est majoré par son degré.",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 0
+            "targeted_practice": 1
           },
-          "practice": [],
+          "practice": [
+            {
+              "duree_min": 18,
+              "id": "TEXP-CTP-EX-009",
+              "parcours": 3,
+              "questions_for_this_capacity": null
+            }
+          ],
           "raw_missing_function": [
-            "NO_TARGETED_PRACTICE",
             "NO_REMEDIATION"
           ],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C6": {
           "assessed_by": [
@@ -10641,35 +11043,37 @@
             "TEXP-CTP-EV-B"
           ],
           "capacity_type": "PROCEDURAL",
-          "declarative_status": "INSUFFICIENT",
-          "distinct_opportunities": 4,
+          "declarative_status": "SUFFICIENT",
+          "distinct_opportunities": 5,
           "excused_by_applicability": [],
           "libelle_eleve": "Je sais déterminer l'ensemble des racines n-ièmes de l'unité et les utiliser pour étudier des polygones réguliers.",
-          "missing_function": [
-            "NO_TARGETED_PRACTICE"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 1,
-            "targeted_practice": 0
+            "targeted_practice": 1
           },
-          "practice": [],
-          "raw_missing_function": [
-            "NO_TARGETED_PRACTICE"
+          "practice": [
+            {
+              "duree_min": 18,
+              "id": "TEXP-CTP-EX-010",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            }
           ],
+          "raw_missing_function": [],
           "reasoning_paths": [],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:258e8d6ec62071dc5ac495d6041840b7e9d5302685b6628484beda7ae11e7f1f",
+      "capacities_digest": "sha256:b50aa40c83005bf826fe89e500e9a8c9882d217fc0ede12827d821b553e15c05",
       "capacity_identity_blockers": [],
       "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
       "counts": {
-        "CANDIDATE_NON_SEMANTIC": 4,
-        "INSUFFICIENT": 3
+        "CANDIDATE_NON_SEMANTIC": 7
       },
       "declarative_diversity_status": "INSUFFICIENT",
       "distinct_reasoning_paths": [],
@@ -10677,12 +11081,8 @@
       "diversity_status": "INSUFFICIENT",
       "excluded_credit_objects": [],
       "generated_by": "scripts/build_chapter_richness_matrix.py",
-      "insufficient": [
-        "C3",
-        "C5",
-        "C7"
-      ],
-      "machine_status": "GAP",
+      "insufficient": [],
+      "machine_status": "COMPLETE",
       "routed_to_human": 7,
       "rule": "la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers",
       "schema_version": 1,
@@ -10713,13 +11113,25 @@
             "method": 1,
             "qcm": 2,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 3
           },
           "practice": [
             {
               "duree_min": 12,
               "id": "TEXP-GRA-EX-001",
               "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TEXP-GRA-EX-006",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-GRA-EX-011",
+              "parcours": 2,
               "questions_for_this_capacity": null
             }
           ],
@@ -10750,13 +11162,25 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 3
           },
           "practice": [
             {
               "duree_min": 12,
               "id": "TEXP-GRA-EX-002",
               "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-GRA-EX-007",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 18,
+              "id": "TEXP-GRA-EX-012",
+              "parcours": 3,
               "questions_for_this_capacity": null
             }
           ],
@@ -10788,12 +11212,24 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 3
           },
           "practice": [
             {
               "duree_min": 12,
               "id": "TEXP-GRA-EX-003",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TEXP-GRA-EX-008",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-GRA-EX-013",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -10821,13 +11257,25 @@
             "method": 1,
             "qcm": 1,
             "remediation": 1,
-            "targeted_practice": 1
+            "targeted_practice": 3
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TEXP-GRA-EX-004",
               "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-GRA-EX-009",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 18,
+              "id": "TEXP-GRA-EX-014",
+              "parcours": 3,
               "questions_for_this_capacity": null
             }
           ],
@@ -10857,13 +11305,25 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 3
           },
           "practice": [
             {
               "duree_min": 18,
               "id": "TEXP-GRA-EX-005",
               "parcours": 3,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 18,
+              "id": "TEXP-GRA-EX-010",
+              "parcours": 3,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-GRA-EX-015",
+              "parcours": 2,
               "questions_for_this_capacity": null
             }
           ],
@@ -10875,7 +11335,7 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:fa672bd2c36acfdbd89787e0a93eecd065d7d77429da1c7fbc13eaa453c70d63",
+      "capacities_digest": "sha256:f09b31b2c70cb5c9c4bfc2f7c5a758b8e5ed9dc3cc40976170e7fd5cd5a12eca",
       "capacity_identity_blockers": [],
       "chapter": "TEXP-GRAPHES",
       "counts": {
@@ -10914,12 +11374,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 1,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 12,
               "id": "TEXP-MAT-EX-001",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 12,
+              "id": "TEXP-MAT-EX-008",
               "parcours": 1,
               "questions_for_this_capacity": null
             }
@@ -10949,13 +11415,19 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 12,
               "id": "TEXP-MAT-EX-002",
               "parcours": 1,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-MAT-EX-009",
+              "parcours": 2,
               "questions_for_this_capacity": null
             }
           ],
@@ -10986,12 +11458,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TEXP-MAT-EX-003",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 18,
+              "id": "TEXP-MAT-EX-010",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -11024,13 +11502,19 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TEXP-MAT-EX-004",
               "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-MAT-EX-011",
+              "parcours": 1,
               "questions_for_this_capacity": null
             }
           ],
@@ -11057,12 +11541,18 @@
             "method": 1,
             "qcm": 1,
             "remediation": 1,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 15,
               "id": "TEXP-MAT-EX-005",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-MAT-EX-012",
               "parcours": 2,
               "questions_for_this_capacity": null
             }
@@ -11093,13 +11583,19 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 18,
               "id": "TEXP-MAT-EX-006",
               "parcours": 3,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TEXP-MAT-EX-013",
+              "parcours": 2,
               "questions_for_this_capacity": null
             }
           ],
@@ -11131,13 +11627,19 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
             {
               "duree_min": 18,
               "id": "TEXP-MAT-EX-006",
               "parcours": 3,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 18,
+              "id": "TEXP-MAT-EX-014",
+              "parcours": 2,
               "questions_for_this_capacity": null
             }
           ],
@@ -11149,7 +11651,7 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:421dd956156b8f49e15adaede5f9d6b2bdfd8a489bde51cd4005d4bfd8485525",
+      "capacities_digest": "sha256:580f007b63525281790270518513b79f8a23a9c36786b3bffb03b5fafb3cc5a5",
       "capacity_identity_blockers": [],
       "chapter": "TEXP-MATRICES-MARKOV",
       "counts": {
@@ -16643,7 +17145,7 @@
             "TSPE-PROBA-EV-B"
           ],
           "capacity_type": "COMPOSITE_REASONING",
-          "declarative_status": "INSUFFICIENT",
+          "declarative_status": "SUFFICIENT",
           "distinct_opportunities": 4,
           "excused_by_applicability": [
             {
@@ -16652,15 +17154,13 @@
             }
           ],
           "libelle_eleve": "Je sais utiliser la loi binomiale pour résoudre des problèmes de seuil, comparaison ou optimisation.",
-          "missing_function": [
-            "SINGLE_REASONING_PATH_FOR_COMPOSITE_CAPACITY"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 1,
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 3
           },
           "practice": [
             {
@@ -16668,14 +17168,32 @@
               "id": "TSPE-PROBA-EX-003",
               "parcours": 2,
               "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TSPE-PROBA-EX-061",
+              "parcours": 2,
+              "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 18,
+              "id": "TSPE-PROBA-EX-062",
+              "parcours": 3,
+              "questions_for_this_capacity": null
             }
           ],
           "raw_missing_function": [
             "NO_REMEDIATION"
           ],
-          "reasoning_paths": [],
+          "reasoning_paths": [
+            "calcul",
+            "comparer_algorithmes",
+            "modelisation",
+            "synthese",
+            "traiter_cas_limite"
+          ],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C4": {
           "assessed_by": [
@@ -16925,23 +17443,32 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:cd1edef9a47a8f3a6ad41ca50322fcea560a7a73f1d8ae85c0262f7a2d43ae45",
+      "capacities_digest": "sha256:fe9e133110e0605977896cb81f0bf2d16e7b5242bff2d918a2455100e0b71618",
       "capacity_identity_blockers": [],
       "chapter": "TSPE-PROBABILITES",
       "counts": {
-        "CANDIDATE_NON_SEMANTIC": 9,
-        "INSUFFICIENT": 1
+        "CANDIDATE_NON_SEMANTIC": 10
       },
-      "declarative_diversity_status": "INSUFFICIENT",
-      "distinct_reasoning_paths": [],
-      "diversity_profile": {},
-      "diversity_status": "INSUFFICIENT",
+      "declarative_diversity_status": "SUFFICIENT",
+      "distinct_reasoning_paths": [
+        "calcul",
+        "comparer_algorithmes",
+        "modelisation",
+        "synthese",
+        "traiter_cas_limite"
+      ],
+      "diversity_profile": {
+        "calcul": 2,
+        "comparer_algorithmes": 1,
+        "modelisation": 1,
+        "synthese": 1,
+        "traiter_cas_limite": 1
+      },
+      "diversity_status": "CANDIDATE_NON_SEMANTIC",
       "excluded_credit_objects": [],
       "generated_by": "scripts/build_chapter_richness_matrix.py",
-      "insufficient": [
-        "C3"
-      ],
-      "machine_status": "GAP",
+      "insufficient": [],
+      "machine_status": "COMPLETE",
       "routed_to_human": 10,
       "rule": "la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers",
       "schema_version": 1,
@@ -17480,7 +18007,7 @@
             "method": 1,
             "qcm": 1,
             "remediation": 1,
-            "targeted_practice": 4
+            "targeted_practice": 5
           },
           "practice": [
             {
@@ -17506,6 +18033,12 @@
               "id": "TSPE-TRIGO-EX-006",
               "parcours": 3,
               "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 15,
+              "id": "TSPE-TRIGO-EX-020",
+              "parcours": 2,
+              "questions_for_this_capacity": null
             }
           ],
           "raw_missing_function": [],
@@ -17529,7 +18062,7 @@
             "method": 1,
             "qcm": 4,
             "remediation": 1,
-            "targeted_practice": 5
+            "targeted_practice": 6
           },
           "practice": [
             {
@@ -17561,6 +18094,12 @@
               "id": "TSPE-TRIGO-EX-019",
               "parcours": 3,
               "questions_for_this_capacity": null
+            },
+            {
+              "duree_min": 18,
+              "id": "TSPE-TRIGO-EX-021",
+              "parcours": 3,
+              "questions_for_this_capacity": null
             }
           ],
           "raw_missing_function": [],
@@ -17569,7 +18108,7 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:065752fa1f9c3f76bd8ab5d7e0e82f773bce591797537111a71001af5253559f",
+      "capacities_digest": "sha256:415809f681e22fa0f1055fa31410a136f0e5994761c333ee2fdbbc6bde28863f",
       "capacity_identity_blockers": [],
       "chapter": "TSPE-TRIGONOMETRIE",
       "counts": {
@@ -17590,21 +18129,10 @@
       "unknown": 0
     }
   },
-  "chapters_digest": "sha256:1251fa52f7a20b7829ab66541a1f47352c93bc7cc22246a757d42be346ef8c1a",
+  "chapters_digest": "sha256:238ed3f35ababf601754c87a3d55e8ffd7a51650fe97de6b15ce484f8d76efe6",
   "generated_by": "scripts/build_chapter_richness_matrix.py",
-  "incomplete_chapters": [
-    "TCOMPL-CALCULS-AIRES",
-    "TCOMPL-ECHANTILLONNAGE",
-    "TCOMPL-INFERENCE-BAYESIENNE",
-    "TCOMPL-LOGARITHME-HISTORIQUE",
-    "TCOMPL-MODELES-FONCTION",
-    "TCOMPL-TEMPS-ATTENTE",
-    "TEXP-ARITHMETIQUE",
-    "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
-    "TEXP-COMPLEXES-TRIGO-POLYNOMES",
-    "TSPE-PROBABILITES"
-  ],
-  "machine_status": "GAP",
+  "incomplete_chapters": [],
+  "machine_status": "COMPLETE",
   "schema_version": 1,
   "semantic_claim": "les declarations fournissent une mesure candidate; aucune richesse semantique n'est complete sans preuve separee",
   "unknown": 0

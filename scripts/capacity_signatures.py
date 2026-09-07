@@ -54,7 +54,11 @@ SIGNATURES: dict[str, dict[str, dict[str, list]]] = {
                 [r"\bdivisibilit", r"\bpremier", r"\bprimalit", r"\bchiffr",
                  r"\bcrypt"],
             ],
-            "forbidden": [r"\\ln\b", r"convexit", r"tableau de variations"],
+            # Ces marqueurs ne manquent pas : ils PROUVENT un contenu
+            # d'analyse. C'est exactement ce que le remplissage avait loge
+            # sous cette capacite.
+            "forbidden": [r"\\ln\b", r"convexit", r"variations de",
+                          r"tableau de variations", r"point d'inflexion"],
         },
         "C4": {
             # Une equation diophantienne se reconnait a sa FORME : deux
@@ -266,6 +270,81 @@ SIGNATURES: dict[str, dict[str, dict[str, list]]] = {
                 [r"polygone", r"\bcercle\b", r"\bsomme\b", r"r[ée]guli"],
             ],
         },
+    },
+    "TCOMPL-CALCULS-AIRES": {
+        "C1": {"required": [[r"int[ée]grale", r"\\int"], [r"\baire\b", r"Chasles", r"sous la courbe"]]},
+        "C2": {"required": [[r"encadr", r"estimer", r"rectangle"], [r"int[ée]grale", r"\\int", r"valeur moyenne"]]},
+        "C3": {"required": [[r"\\int", r"int[ée]grale", r"valeur moyenne"], [r"Calculer", r"\baire\b"]]},
+        "C4": {"required": [[r"primitive"], [r"forme usuelle", r"D[ée]terminer", r"reconnaissant", r"\bf\(x\)"]]},
+        "C5": {"required": [[r"primitives?\b"], [r"constante", r"D[ée]montrer|Montrer|d[ée]duire"]]},
+        "C6": {"required": [[r"\bF\(x\)", r"fonction int[ée]grale", r"\\int_a\^x"], [r"d[ée]riv", r"F'"]]},
+    },
+    "TCOMPL-CORRELATION-CAUSALITE": {
+        "C1": {"required": [[r"nuage", r"point moyen"], [r"coordonn[ée]es", r"repr[ée]senter", r"\bG\b"]]},
+        "C2": {"required": [[r"moindres carr[ée]s", r"r[ée]gression", r"corr[ée]lation"], [r"droite", r"covariance", r"coefficient"]]},
+        "C3": {"required": [[r"changement de variable", r"\\ln", r"\bz\s*=\s*\\ln"], [r"ajustement", r"affine", r"mod[èe]le"]]},
+        "C4": {"required": [[r"interpol", r"extrapol", r"estimer"], [r"ajustement", r"droite", r"\by\s*=\s*\d"]]},
+        "C5": {"required": [[r"causalit[ée]", r"cause", r"corr[ée]lation"], [r"prouve|preuve|conclure|expliquer|variable tierce"]]},
+    },
+    "TCOMPL-ECHANTILLONNAGE": {
+        "C1": {"required": [[r"Bernoulli", r"binomiale"], [r"situation", r"reconna[îi]tre", r"variable al[ée]atoire", r"loi\b"]]},
+        "C2": {"required": [[r"Pascal", r"binomial"], [r"triangle", r"coefficient", r"\\binom"]]},
+        "C3": {"required": [[r"P\(X", r"binomiale"], [r"Calculer", r"probabilit"]]},
+        "C4": {"required": [[r"fluctuation", r"intervalle"], [r"binomiale", r"P\(X"]]},
+        "C5": {"required": [[r"simul", r"Python", r"\\texttt"], [r"[ée]chantillon", r"moyenne"]]},
+        "C6": {"required": [[r"esp[ée]rance"], [r"D[ée]montrer|Montrer|calculer|d[ée]duire"]]},
+        "C7": {"required": [[r"uniforme"], [r"esp[ée]rance", r"loi\b"]]},
+    },
+    "TCOMPL-INEGALITES": {
+        "C1": {"required": [[r"Lorenz"], [r"courbe", r"construire", r"quantile", r"r[ée]partition"]]},
+        "C2": {"required": [[r"Lorenz", r"L\(x\)"], [r"convexe", r"bissectrice", r"mod[ée]lis"]]},
+        "C3": {"required": [[r"Gini"], [r"indice", r"in[ée]galit"]]},
+        "C4": {"required": [[r"convexit[ée]", r"d[ée]riv[ée]e seconde", r"L''"], [r"Lorenz", r"L\(x\)", r"convexe"]]},
+        "C5": {"required": [[r"\\int", r"int[ée]grale", r"aire"], [r"Gini", r"bissectrice", r"Lorenz"]]},
+    },
+    "TCOMPL-INFERENCE-BAYESIENNE": {
+        "C1": {"required": [[r"probabilit"], [r"conditionnelle", r"arbre", r"sans remise", r"P\("]]},
+        "C2": {"required": [[r"Bayes", r"a posteriori", r"P_\{?T"], [r"probabilit", r"test", r"pr[ée]valence"]]},
+        "C3": {"required": [[r"P_M", r"P_\{?T", r"a posteriori", r"conditionnement"], [r"distinguer|erreur|diff[ée]ren|sensibilit"]]},
+        "C4": {"required": [[r"sensibilit[ée]", r"sp[ée]cificit[ée]", r"valeur pr[ée]dictive"], [r"test", r"probabilit", r"conditionnelle"]]},
+        "C5": {"required": [[r"pr[ée]valence"], [r"valeur pr[ée]dictive", r"V\(p\)", r"d[ée]pistage"]]},
+    },
+    "TCOMPL-LOGARITHME-HISTORIQUE": {
+        "C1": {"required": [[r"\\ln", r"logarithme"], [r"r[ée]ciproque", r"limite", r"d[ée]riv", r"exponentielle"]]},
+        "C2": {"required": [[r"\\ln", r"logarithme"], [r"[ée]quation", r"in[ée]quation", r"[ée]quation fonctionnelle", r"Simplifier|R[ée]soudre"]]},
+        "C3": {"required": [[r"seuil", r"\\ln", r"logarithme"], [r"g[ée]om[ée]trique", r"capital", r"placement", r"\bn\b"]]},
+        "C4": {"required": [[r"D[ée]montrer|Montrer"], [r"\\ln\(ab\)", r"[ée]quation fonctionnelle", r"\\ln"]]},
+        "C5": {"required": [[r"D[ée]montrer|Montrer"], [r"d[ée]riv", r"1/x", r"\\dfrac\{1\}\{x\}"]]},
+    },
+    "TCOMPL-MODELES-EVOLUTION": {
+        "C1": {"required": [[r"suite"], [r"mod[ée]lis", r"r[ée]currence", r"explicit"]]},
+        "C2": {"required": [[r"g[ée]om[ée]trique"], [r"limite", r"somme", r"raison"]]},
+        "C3": {"required": [[r"u_\{?n\+1\}?\s*=\s*f", r"r[ée]currente"], [r"graphi", r"conjectur", r"point fixe"]]},
+        "C4": {"required": [[r"arithm[ée]tico", r"solution constante"], [r"suite", r"r[ée]soudre|r[ée]solution"]]},
+        "C5": {"required": [[r"y'\s*=\s*ay", r"[ée]quation diff[ée]rentielle"], [r"solution", r"r[ée]soudre"]]},
+        "C6": {"required": [[r"limite"], [r"suite", r"gendarmes", r"in[ée]galit"]]},
+    },
+    "TCOMPL-MODELES-FONCTION": {
+        "C1": {"required": [[r"d[ée]riv"], [r"variation", r"limite", r"tableau"]]},
+        "C2": {"required": [[r"tableau de variation", r"f\(x\)\s*=\s*k", r"solutions"], [r"[ée]quation", r"in[ée]quation", r"nombre de solutions"]]},
+        "C3": {"required": [[r"balayage", r"dichotomie", r"encadrement", r"valeur approch"], [r"solution", r"[ée]quation"]]},
+        "C4": {"required": [[r"convexe", r"concave", r"inflexion"], [r"graphi", r"courbe", r"reconna[îi]tre", r"lecture"]]},
+        "C5": {"required": [[r"convexit[ée]", r"concavit[ée]", r"f''", r"d[ée]riv[ée]e seconde"], [r"[ée]tudier|Etudier|d[ée]duire"]]},
+        "C6": {"required": [[r"nuage", r"point moyen"], [r"coordonn[ée]es", r"repr[ée]senter"]]},
+        "C7": {"required": [[r"r[ée]gression", r"moindres carr[ée]s"], [r"droite", r"calcul", r"logiciel"]]},
+    },
+    "TCOMPL-TEMPS-ATTENTE": {
+        "C1": {"required": [[r"g[ée]om[ée]trique"], [r"esp[ée]rance", r"m[ée]moire", r"loi\b"]]},
+        "C2": {"required": [[r"g[ée]om[ée]trique", r"P\(X"], [r"Calculer", r"probabilit"]]},
+        "C3": {"required": [[r"m[ée]moire"], [r"g[ée]om[ée]trique", r"P_\{?X", r"caract[ée]ris"]]},
+        "C4": {"required": [[r"exponentielle"], [r"densit[ée]", r"r[ée]partition", r"esp[ée]rance", r"m[ée]moire"]]},
+        "C5": {"required": [[r"densit[ée]"], [r"v[ée]rifier|probabilit|calculer"]]},
+        "C6": {"required": [[r"esp[ée]rance"], [r"exponentielle", r"int[ée]grale", r"\\int"]]},
+        "C7": {"required": [[r"uniforme"], [r"densit[ée]", r"r[ée]partition", r"esp[ée]rance", r"variance"]]},
+    },
+    "TSPE-TRIGONOMETRIE": {
+        "C1": {"required": [[r"\\cos", r"\\sin"], [r"[ée]quation", r"in[ée]quation", r"R[ée]soudre"]]},
+        "C2": {"required": [[r"\\cos", r"\\sin"], [r"variation", r"optimum", r"maximum", r"[ée]tudier|Etudier"]]},
     },
 }
 

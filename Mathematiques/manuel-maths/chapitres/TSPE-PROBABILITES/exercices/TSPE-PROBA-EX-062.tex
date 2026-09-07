@@ -1,0 +1,27 @@
+% META: {"id": "TSPE-PROBA-EX-062", "chapitre": "TSPE-PROBABILITES", "type_objet": "exercice", "capacites": ["TSPE-PROBA-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 3, "competences": ["raisonner"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-062.tex", "corrige_tex": "chapitres/TSPE-PROBABILITES/corriges/TSPE-PROBA-CO-062.tex", "status": "generated", "gestes": ["comparer_algorithmes", "synthese"]}
+% BEGIN-VERIFY
+% from sympy import binomial, Rational, N
+% def rejet(n, seuil, p):
+%     return 1 - sum(binomial(n, k) * p ** k * (1 - p) ** (n - k) for k in range(seuil))
+% p8 = Rational(8, 100)
+% a8, b8 = rejet(20, 2, p8), rejet(30, 3, p8)
+% assert abs(float(N(a8)) - 0.4831) < 0.0005
+% assert abs(float(N(b8)) - 0.4346) < 0.0005
+% assert float(N(a8)) > float(N(b8))
+% p2 = Rational(2, 100)
+% a2, b2 = rejet(20, 2, p2), rejet(30, 3, p2)
+% assert abs(float(N(a2)) - 0.0599) < 0.0005
+% assert abs(float(N(b2)) - 0.0217) < 0.0005
+% assert float(N(b2)) < float(N(a2))
+% END-VERIFY
+\begin{exercice}{TSPE-PROBA-EX-062}{3}{18}
+Deux stratégies de contrôle sont comparées. La stratégie A teste $20$ pièces
+et rejette le lot dès $2$ défauts ; la stratégie B teste $30$ pièces et
+rejette dès $3$ défauts. Le taux réel de défauts est $p=0{,}08$.
+\begin{enumerate}
+  \item Pour chaque stratégie, calculer la probabilité de rejeter le lot.
+  \item Laquelle rejette le plus souvent un lot à $8\,\%$ de défauts ?
+  \item Reprendre la comparaison pour un lot sain à $p=0{,}02$. Quelle
+        stratégie déclenche le moins de fausses alertes ?
+\end{enumerate}
+\end{exercice}

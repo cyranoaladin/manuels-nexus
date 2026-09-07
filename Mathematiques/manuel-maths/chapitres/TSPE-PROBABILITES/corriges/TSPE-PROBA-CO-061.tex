@@ -1,0 +1,27 @@
+% META: {"id": "TSPE-PROBA-CO-061", "chapitre": "TSPE-PROBABILITES", "type_objet": "corrige", "exercice_ref": "TSPE-PROBA-EX-061", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, log, N
+% import math
+% q = Rational(96, 100)
+% assert abs(float(N(q ** 50)) - 0.1299) < 0.0005
+% seuil = Rational(5, 100)
+% n_exact = float(N(log(seuil) / log(q)))
+% assert 73.3 < n_exact < 73.5
+% n = math.ceil(n_exact)
+% assert n == 74
+% assert float(N(q ** 73)) > 0.05 > float(N(q ** 74))
+% assert abs(float(N(q ** 73)) - 0.0508) < 0.0005
+% END-VERIFY
+\begin{corrige}{TSPE-PROBA-EX-061}
+\textbf{1.} Le prélèvement est assimilé à $n$ épreuves de Bernoulli
+indépendantes de paramètre $p=0{,}04$, et $X$ compte les succès :
+$X\sim\mathcal{B}(n\,;\,0{,}04)$.
+
+\textbf{2.} $P(X=0)=0{,}96^{50}\approx0{,}1299$.
+
+\textbf{3.} $P(X\geq1)=1-0{,}96^{\,n}>0{,}95$ équivaut à
+$0{,}96^{\,n}<0{,}05$, soit $n\ln0{,}96<\ln0{,}05$. Comme $\ln0{,}96<0$, on
+obtient $n>\dfrac{\ln0{,}05}{\ln0{,}96}\approx73{,}4$ : le plus petit entier
+est $n=74$. Vérification : $0{,}96^{73}\approx0{,}0508>0{,}05$ et
+$0{,}96^{74}\approx0{,}0488<0{,}05$.
+\end{corrige}

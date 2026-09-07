@@ -1,0 +1,40 @@
+% META: {"id": "TEXP-COMPLEXES-TRIGO-POLYNOMES-RE-C1", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : passer d'une forme a l'autre
+%---------------------------------------------------------------
+
+\subsection*{Rappel -- Formes algebrique, trigonometrique, exponentielle}
+
+\textbf{Erreur 1 :} calculer l'argument par $\arctan\left(\frac{b}{a}\right)$
+sans regarder le quadrant. Pour $z=-1+\mathrm{i}$, cette formule donne
+$-\frac{\pi}{4}$ alors que l'argument est $\frac{3\pi}{4}$ : le point est dans
+le deuxième quadrant.
+
+\textbf{Erreur 2 :} oublier le module en repassant à la forme algébrique.
+$3\mathrm{e}^{\mathrm{i}\pi/6}$ vaut
+$3\cos\frac{\pi}{6}+3\mathrm{i}\sin\frac{\pi}{6}$, pas
+$\cos\frac{\pi}{6}+\mathrm{i}\sin\frac{\pi}{6}$.
+
+\textbf{Erreur 3 :} additionner les modules dans un produit. Dans un produit
+les modules se \emph{multiplient} et seuls les arguments s'additionnent.
+
+% BEGIN-VERIFY
+% from sympy import I, sqrt, Abs, arg, pi, exp, simplify, Rational
+% z = -1 + I
+% assert arg(z) == 3 * pi / 4
+% assert arg(z) != -pi / 4
+% w = 3 * exp(I * pi / 6)
+% assert simplify(w.rewrite('cos') - (3 * sqrt(3) / 2 + Rational(3, 2) * I)) == 0
+% assert simplify(Abs(z * w) - 3 * sqrt(2)) == 0
+% assert Abs(z * w) != Abs(z) + Abs(w)
+% END-VERIFY
+
+\begin{exercice}{TEXP-COMPLEXES-TRIGO-POLYNOMES-RE-C1-EX1}{1}{10}
+\begin{enumerate}
+  \item Déterminer un argument de $z=-1+\mathrm{i}$ en plaçant le point, puis
+        expliquer pourquoi $\arctan(-1)$ ne donne pas la bonne valeur.
+  \item Calculer $|z\times 3\mathrm{e}^{\mathrm{i}\pi/6}|$ et vérifier que ce
+        n'est pas $|z|+3$.
+\end{enumerate}
+\end{exercice}

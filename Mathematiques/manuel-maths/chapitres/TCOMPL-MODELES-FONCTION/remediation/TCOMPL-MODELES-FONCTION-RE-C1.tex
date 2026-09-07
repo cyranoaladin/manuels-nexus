@@ -1,0 +1,38 @@
+% META: {"id": "TCOMPL-MODELES-FONCTION-RE-C1", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : deriver un quotient et lire une limite
+%---------------------------------------------------------------
+
+\subsection*{Rappel -- Derivee, limites, tableau de variations}
+
+\textbf{Erreur 1 :} dériver un quotient en dérivant séparément le numérateur
+et le dénominateur. La formule est
+$\left(\dfrac{u}{v}\right)'=\dfrac{u'v-uv'}{v^2}$, et l'ordre des termes du
+numérateur compte.
+
+\textbf{Erreur 2 :} conclure au signe de $f'$ sans regarder le dénominateur.
+Un carré au dénominateur est toujours strictement positif : c'est le
+numérateur seul qui donne le signe.
+
+\textbf{Erreur 3 :} annoncer une limite infinie en un point sans préciser le
+côté. En $-3$, la fonction $\dfrac{2x+1}{x+3}$ tend vers $-\infty$ à droite et
+vers $+\infty$ à gauche : le tableau doit distinguer les deux.
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, simplify, limit, oo
+% x = symbols('x')
+% f = (2 * x + 1) / (x + 3)
+% assert simplify(diff(f, x)) == 5 / (x + 3) ** 2
+% assert simplify(diff(f, x)) != 2 / 1
+% assert limit(f, x, -3, '+') == -oo
+% assert limit(f, x, -3, '-') == oo
+% END-VERIFY
+
+\begin{exercice}{TCOMPL-MODELES-FONCTION-RE-C1-EX1}{1}{10}
+Un élève écrit : \og la dérivée de $\dfrac{2x+1}{x+3}$ est $\dfrac{2}{1}=2$ \fg.
+\begin{enumerate}
+  \item Corriger en appliquant la formule du quotient.
+  \item En déduire le signe de $f'$ et le sens de variation.
+\end{enumerate}
+\end{exercice}

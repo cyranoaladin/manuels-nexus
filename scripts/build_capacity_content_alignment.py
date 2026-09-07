@@ -46,8 +46,9 @@ GENERATED_BY = "scripts/build_capacity_content_alignment.py"
 
 ALIGNED = "ALIGNED"
 MISALIGNED = "CAPACITY_CONTENT_MISALIGNMENT"
+NOT_EVIDENCED = "NOT_EVIDENCED_BY_SIGNATURE"
 UNVERIFIED = "NO_SIGNATURE_DECLARED"
-STATES = (ALIGNED, MISALIGNED, UNVERIFIED)
+STATES = (ALIGNED, MISALIGNED, NOT_EVIDENCED, UNVERIFIED)
 
 #: En dessous de cette longueur, une suite de codes ne prouve aucune rotation :
 #: deux exercices qui se suivent sur C1 puis C2 sont une progression normale.
@@ -160,7 +161,21 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                             etat, detail = UNVERIFIED, None
                         else:
                             detail = evaluate_signature(corps, signature)
-                            etat = ALIGNED if detail["aligned"] else MISALIGNED
+                            # UN MARQUEUR INTERDIT EST UNE PREUVE ; UN MARQUEUR
+                            # REQUIS ABSENT N'EN EST PAS UNE. Le premier montre
+                            # que le corps parle d'un autre domaine -- c'est le
+                            # desalignement. Le second dit seulement que la
+                            # signature n'a pas vu ce qu'elle cherchait : un
+                            # enonce peut demander une derivee en ecrivant
+                            # `f'(x)` sans jamais employer le mot. Compter cela
+                            # comme un desalignement ferait crier au loup, et
+                            # le gate finirait desarme a force de faux cris.
+                            if detail["forbidden_markers_found"]:
+                                etat = MISALIGNED
+                            elif detail["missing_required_groups"]:
+                                etat = NOT_EVIDENCED
+                            else:
+                                etat = ALIGNED
                         objets.append({
                             "object_id": meta.get("id"),
                             "path": str(chemin.relative_to(root)),
@@ -193,8 +208,12 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         par_chapitre[objet["chapter"]][objet["state"]] += 1
     for chapitre, info in chapitres.items():
         compte = par_chapitre.get(chapitre, collections.Counter())
-        corrobore = compte.get(ALIGNED, 0) > 0 and compte.get(MISALIGNED, 0) == 0 \
+        corrobore = (
+            compte.get(ALIGNED, 0) > 0
+            and compte.get(MISALIGNED, 0) == 0
+            and compte.get(NOT_EVIDENCED, 0) == 0
             and compte.get(UNVERIFIED, 0) == 0
+        )
         info["content_corroborated"] = corrobore
         info["round_robin_unexplained"] = (
             info["round_robin"]["detected"] and not corrobore
@@ -243,6 +262,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- `CAPACITY_CONTENT_MISALIGNMENT` : `{s['CAPACITY_CONTENT_MISALIGNMENT']}`",
         f"- `ROUND_ROBIN_CAPACITY_ASSIGNMENT` : `{s['ROUND_ROBIN_CAPACITY_ASSIGNMENT']}`",
         f"- attributions examinees : `{s['CAPACITY_ASSIGNMENTS_EXAMINED']}`",
+        f"- non attestees par leur signature : `{s[NOT_EVIDENCED]}`",
         f"- non verifiees faute de signature : `{s[UNVERIFIED]}`",
         "",
     ]

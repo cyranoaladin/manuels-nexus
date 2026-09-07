@@ -96,7 +96,10 @@ def test_a_convexity_exercise_declared_arithmetic_is_refused(producer) -> None:
     assert signature is not None
     verdict = producer.evaluate_signature(corps, signature)
     assert verdict["aligned"] is False
-    assert verdict["missing_required_groups"] or verdict["forbidden_markers_found"]
+    # Un marqueur INTERDIT doit avoir parle : c'est la preuve positive d'un
+    # contenu d'analyse. Un simple marqueur requis manquant ne prouverait
+    # rien, et ne suffirait pas a fonder un desalignement.
+    assert verdict["forbidden_markers_found"], verdict
 
 
 def test_a_genuine_arithmetic_exercise_is_accepted(producer) -> None:
@@ -109,6 +112,28 @@ def test_a_genuine_arithmetic_exercise_is_accepted(producer) -> None:
     signature = producer.signatures.signature_for("TEXP-ARITHMETIQUE", "C3")
     verdict = producer.evaluate_signature(corps, signature)
     assert verdict["aligned"] is True, verdict
+
+
+def test_a_missing_marker_is_not_a_misalignment(producer) -> None:
+    """Ne pas crier au loup : l'absence d'un marqueur n'est pas une preuve.
+
+    Un enonce peut demander une derivee en ecrivant `f'(x)` sans employer le
+    mot, ou une limite de suite geometrique sans ecrire « geometrique ». La
+    signature ne voit alors rien, mais rien ne dit que la capacite est
+    fausse. Compter cela comme un desalignement desarmerait le gate a force
+    de faux cris -- et le vrai desalignement passerait avec eux.
+    """
+
+    corps = (
+        "\\begin{exercice}{X}{1}{12}\n"
+        "On chiffre par $c=(3m+5)\\bmod26$ ; calculer $c$ pour $m=1$.\n"
+        "\\end{exercice}"
+    )
+    signature = {"required": [[r"marqueur_absent_du_corpus"]], "forbidden": []}
+    verdict = producer.evaluate_signature(corps, signature)
+    assert verdict["aligned"] is False
+    assert verdict["missing_required_groups"]
+    assert verdict["forbidden_markers_found"] == []
 
 
 def test_an_unsigned_capacity_is_declared_unverified_not_aligned(

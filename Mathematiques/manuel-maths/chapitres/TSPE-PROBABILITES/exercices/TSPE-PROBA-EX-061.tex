@@ -1,0 +1,26 @@
+% META: {"id": "TSPE-PROBA-EX-061", "chapitre": "TSPE-PROBABILITES", "type_objet": "exercice", "capacites": ["TSPE-PROBA-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["raisonner", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-061.tex", "corrige_tex": "chapitres/TSPE-PROBABILITES/corriges/TSPE-PROBA-CO-061.tex", "status": "generated", "gestes": ["calcul", "traiter_cas_limite"]}
+% BEGIN-VERIFY
+% from sympy import Rational, log, N
+% import math
+% q = Rational(96, 100)
+% assert abs(float(N(q ** 50)) - 0.1299) < 0.0005
+% seuil = Rational(5, 100)
+% n_exact = float(N(log(seuil) / log(q)))
+% assert 73.3 < n_exact < 73.5
+% n = math.ceil(n_exact)
+% assert n == 74
+% assert float(N(q ** 73)) > 0.05 > float(N(q ** 74))
+% assert abs(float(N(q ** 73)) - 0.0508) < 0.0005
+% END-VERIFY
+\begin{exercice}{TSPE-PROBA-EX-061}{2}{15}
+Une usine produit des pièces dont $4\,\%$ sont défectueuses. On prélève un lot
+de $n$ pièces, assimilé à un tirage avec remise, et $X$ compte les pièces
+défectueuses.
+\begin{enumerate}
+  \item Justifier que $X$ suit une loi binomiale et donner ses paramètres.
+  \item Pour $n=50$, calculer la probabilité qu'aucune pièce ne soit
+        défectueuse.
+  \item Déterminer le plus petit $n$ tel que la probabilité d'avoir au moins
+        une pièce défectueuse dépasse $0{,}95$.
+\end{enumerate}
+\end{exercice}

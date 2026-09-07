@@ -1,0 +1,38 @@
+% META: {"id": "TEXP-MATRICES-MARKOV-RE-C1", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : le produit de matrices n'est pas commutatif
+%---------------------------------------------------------------
+
+\subsection*{Rappel -- Operations sur les matrices}
+
+\textbf{Erreur 1 :} écrire $AB=BA$. Le produit matriciel n'est pas
+commutatif : pour $A=\begin{pmatrix}2&1\\0&3\end{pmatrix}$ et
+$B=\begin{pmatrix}1&-1\\4&2\end{pmatrix}$, $AB$ et $BA$ diffèrent.
+
+\textbf{Erreur 2 :} calculer $A^2$ en élevant chaque coefficient au carré.
+$A^2=A\times A$ se calcule ligne par colonne.
+
+\textbf{Erreur 3 :} inverser une matrice sans vérifier que son déterminant est
+non nul. Une matrice de déterminant nul n'a pas d'inverse.
+
+% BEGIN-VERIFY
+% from sympy import Matrix, eye
+% A = Matrix([[2, 1], [0, 3]])
+% B = Matrix([[1, -1], [4, 2]])
+% assert A * B != B * A
+% assert A ** 2 != Matrix([[4, 1], [0, 9]])
+% assert A ** 2 == Matrix([[4, 5], [0, 9]])
+% assert A.det() == 6 and A * A.inv() == eye(2)
+% S = Matrix([[1, 2], [2, 4]])
+% assert S.det() == 0
+% END-VERIFY
+
+\begin{exercice}{TEXP-MATRICES-MARKOV-RE-C1-EX1}{1}{10}
+\begin{enumerate}
+  \item Calculer $AB$ et $BA$ pour les matrices ci-dessus et conclure.
+  \item Calculer $A^2$ et comparer avec la matrice obtenue en élevant chaque
+        coefficient de $A$ au carré.
+  \item La matrice $\begin{pmatrix}1&2\\2&4\end{pmatrix}$ est-elle inversible ?
+\end{enumerate}
+\end{exercice}

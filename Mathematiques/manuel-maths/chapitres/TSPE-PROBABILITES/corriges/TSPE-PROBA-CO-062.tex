@@ -1,0 +1,31 @@
+% META: {"id": "TSPE-PROBA-CO-062", "chapitre": "TSPE-PROBABILITES", "type_objet": "corrige", "exercice_ref": "TSPE-PROBA-EX-062", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial, Rational, N
+% def rejet(n, seuil, p):
+%     return 1 - sum(binomial(n, k) * p ** k * (1 - p) ** (n - k) for k in range(seuil))
+% p8 = Rational(8, 100)
+% a8, b8 = rejet(20, 2, p8), rejet(30, 3, p8)
+% assert abs(float(N(a8)) - 0.4831) < 0.0005
+% assert abs(float(N(b8)) - 0.4346) < 0.0005
+% assert float(N(a8)) > float(N(b8))
+% p2 = Rational(2, 100)
+% a2, b2 = rejet(20, 2, p2), rejet(30, 3, p2)
+% assert abs(float(N(a2)) - 0.0599) < 0.0005
+% assert abs(float(N(b2)) - 0.0217) < 0.0005
+% assert float(N(b2)) < float(N(a2))
+% END-VERIFY
+\begin{corrige}{TSPE-PROBA-EX-062}
+\textbf{1.} Pour A, $X_A\sim\mathcal{B}(20\,;\,0{,}08)$ et
+$P(X_A\geq2)=1-P(X_A=0)-P(X_A=1)\approx0{,}4831$. Pour B,
+$X_B\sim\mathcal{B}(30\,;\,0{,}08)$ et
+$P(X_B\geq3)\approx0{,}4346$.
+
+\textbf{2.} La stratégie A rejette plus souvent un lot à $8\,\%$ de défauts :
+$0{,}483$ contre $0{,}435$. Elle est plus sensible.
+
+\textbf{3.} À $p=0{,}02$ : $P(X_A\geq2)\approx0{,}0599$ et
+$P(X_B\geq3)\approx0{,}0217$. La stratégie B déclenche donc moins de fausses
+alertes sur un lot sain. Chaque stratégie améliore un critère au détriment de
+l'autre : il n'y a pas de choix universellement meilleur, seulement un
+arbitrage entre sensibilité et fausses alertes.
+\end{corrige}

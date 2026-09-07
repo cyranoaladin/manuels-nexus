@@ -24,7 +24,7 @@
   },
   "canonical_selection_counts": {
     "AMBIGUOUS": 0,
-    "LEGITIMATE_SHARED_CANONICAL": 6,
+    "LEGITIMATE_SHARED_CANONICAL": 11,
     "SEMANTIC_CANONICAL": 0,
     "UNKNOWN": 0
   },
@@ -33,13 +33,276 @@
   "capacity_identity_blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "dispositions": {
     "REDUNDANT_SAME_CAPACITY": {
-      "excess_objects": 14,
-      "groups": 6
+      "excess_objects": 27,
+      "groups": 11
     }
   },
   "finding": "P0_PEDAGOGICAL_CONTENT_CLONING_AND_CAPACITY_MISREPRESENTATION",
   "generated_by": "scripts/build_p0_content_clone_ledger.py",
   "groups": [
+    {
+      "canonical_body_digest": "sha256:2d0afea490aa80b69445403f0bed13f50cb71da5e768f85a4e00970ea62890b6",
+      "canonical_selection": {
+        "canonical_paths": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-041-CDP.tex",
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-042-CDP.tex"
+        ],
+        "evidence_rule": "SATELLITE_WITH_DISTINCT_HOST",
+        "false_copy_paths": [],
+        "reason": "chaque membre est un satellite sans capacité déclarée, rattaché à un hôte unique, existant, de son propre chapitre, et deux membres n'assistent jamais le même hôte : aucun crédit n'est en jeu et aucun hôte ne serait privé",
+        "status": "LEGITIMATE_SHARED_CANONICAL"
+      },
+      "clone_group_id": "CG-0001",
+      "disposition": "REDUNDANT_SAME_CAPACITY",
+      "excess_object_count": 1,
+      "members": [
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:2d0afea490aa80b69445403f0bed13f50cb71da5e768f85a4e00970ea62890b6",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-041"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:c17b8ef1741f9c32c3656739c04519da8a4ed2f608ecb53d4e5e1fbf58aca3fe",
+          "object_id": "1SPE-PRODSCAL-EX-041-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-041-CDP.tex",
+          "payload_chars": 186,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-041",
+          "source_type": "exercices",
+          "status": "generated"
+        },
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:2d0afea490aa80b69445403f0bed13f50cb71da5e768f85a4e00970ea62890b6",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-042"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:c17b8ef1741f9c32c3656739c04519da8a4ed2f608ecb53d4e5e1fbf58aca3fe",
+          "object_id": "1SPE-PRODSCAL-EX-042-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-042-CDP.tex",
+          "payload_chars": 186,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-042",
+          "source_type": "exercices",
+          "status": "generated"
+        }
+      ],
+      "normalized_body_digest": "sha256:c17b8ef1741f9c32c3656739c04519da8a4ed2f608ecb53d4e5e1fbf58aca3fe",
+      "object_count": 2,
+      "same_capacity": true,
+      "same_chapter": true,
+      "same_manual": true
+    },
+    {
+      "canonical_body_digest": "sha256:2edd5e7d6a58bce5ce633b18a313cd5cc9adfdf6cfe1a1bb6f24ae959773eaf3",
+      "canonical_selection": {
+        "canonical_paths": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-001-CDP.tex",
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-002-CDP.tex",
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-003-CDP.tex",
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-004-CDP.tex"
+        ],
+        "evidence_rule": "SATELLITE_WITH_DISTINCT_HOST",
+        "false_copy_paths": [],
+        "reason": "chaque membre est un satellite sans capacité déclarée, rattaché à un hôte unique, existant, de son propre chapitre, et deux membres n'assistent jamais le même hôte : aucun crédit n'est en jeu et aucun hôte ne serait privé",
+        "status": "LEGITIMATE_SHARED_CANONICAL"
+      },
+      "clone_group_id": "CG-0002",
+      "disposition": "REDUNDANT_SAME_CAPACITY",
+      "excess_object_count": 3,
+      "members": [
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:2edd5e7d6a58bce5ce633b18a313cd5cc9adfdf6cfe1a1bb6f24ae959773eaf3",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-001"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:916f4afcf288d04d42f2b7c757b1682fd267ef9f98155b6095e5b2ad47afd917",
+          "object_id": "1SPE-PRODSCAL-EX-001-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-001-CDP.tex",
+          "payload_chars": 258,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-001",
+          "source_type": "exercices",
+          "status": "generated"
+        },
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:2edd5e7d6a58bce5ce633b18a313cd5cc9adfdf6cfe1a1bb6f24ae959773eaf3",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-002"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:916f4afcf288d04d42f2b7c757b1682fd267ef9f98155b6095e5b2ad47afd917",
+          "object_id": "1SPE-PRODSCAL-EX-002-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-002-CDP.tex",
+          "payload_chars": 258,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-002",
+          "source_type": "exercices",
+          "status": "generated"
+        },
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:2edd5e7d6a58bce5ce633b18a313cd5cc9adfdf6cfe1a1bb6f24ae959773eaf3",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-003"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:916f4afcf288d04d42f2b7c757b1682fd267ef9f98155b6095e5b2ad47afd917",
+          "object_id": "1SPE-PRODSCAL-EX-003-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-003-CDP.tex",
+          "payload_chars": 258,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-003",
+          "source_type": "exercices",
+          "status": "generated"
+        },
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:2edd5e7d6a58bce5ce633b18a313cd5cc9adfdf6cfe1a1bb6f24ae959773eaf3",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-004"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:916f4afcf288d04d42f2b7c757b1682fd267ef9f98155b6095e5b2ad47afd917",
+          "object_id": "1SPE-PRODSCAL-EX-004-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-004-CDP.tex",
+          "payload_chars": 258,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-004",
+          "source_type": "exercices",
+          "status": "generated"
+        }
+      ],
+      "normalized_body_digest": "sha256:916f4afcf288d04d42f2b7c757b1682fd267ef9f98155b6095e5b2ad47afd917",
+      "object_count": 4,
+      "same_capacity": true,
+      "same_chapter": true,
+      "same_manual": true
+    },
+    {
+      "canonical_body_digest": "sha256:337835858c7ec81de7fc15334c64583f7f0bd3ee29528983deb9afbaee00b031",
+      "canonical_selection": {
+        "canonical_paths": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-021-CDP.tex",
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-022-CDP.tex",
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-023-CDP.tex",
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-024-CDP.tex"
+        ],
+        "evidence_rule": "SATELLITE_WITH_DISTINCT_HOST",
+        "false_copy_paths": [],
+        "reason": "chaque membre est un satellite sans capacité déclarée, rattaché à un hôte unique, existant, de son propre chapitre, et deux membres n'assistent jamais le même hôte : aucun crédit n'est en jeu et aucun hôte ne serait privé",
+        "status": "LEGITIMATE_SHARED_CANONICAL"
+      },
+      "clone_group_id": "CG-0003",
+      "disposition": "REDUNDANT_SAME_CAPACITY",
+      "excess_object_count": 3,
+      "members": [
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:337835858c7ec81de7fc15334c64583f7f0bd3ee29528983deb9afbaee00b031",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-021"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:437c989f7487985dce77f6aed5c3b4cd812f288c93f7c47fa5de8f4c0c67e33a",
+          "object_id": "1SPE-PRODSCAL-EX-021-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-021-CDP.tex",
+          "payload_chars": 217,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-021",
+          "source_type": "exercices",
+          "status": "generated"
+        },
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:337835858c7ec81de7fc15334c64583f7f0bd3ee29528983deb9afbaee00b031",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-022"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:437c989f7487985dce77f6aed5c3b4cd812f288c93f7c47fa5de8f4c0c67e33a",
+          "object_id": "1SPE-PRODSCAL-EX-022-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-022-CDP.tex",
+          "payload_chars": 217,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-022",
+          "source_type": "exercices",
+          "status": "generated"
+        },
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:337835858c7ec81de7fc15334c64583f7f0bd3ee29528983deb9afbaee00b031",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-023"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:437c989f7487985dce77f6aed5c3b4cd812f288c93f7c47fa5de8f4c0c67e33a",
+          "object_id": "1SPE-PRODSCAL-EX-023-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-023-CDP.tex",
+          "payload_chars": 217,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-023",
+          "source_type": "exercices",
+          "status": "generated"
+        },
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:337835858c7ec81de7fc15334c64583f7f0bd3ee29528983deb9afbaee00b031",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-024"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:437c989f7487985dce77f6aed5c3b4cd812f288c93f7c47fa5de8f4c0c67e33a",
+          "object_id": "1SPE-PRODSCAL-EX-024-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-024-CDP.tex",
+          "payload_chars": 217,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-024",
+          "source_type": "exercices",
+          "status": "generated"
+        }
+      ],
+      "normalized_body_digest": "sha256:437c989f7487985dce77f6aed5c3b4cd812f288c93f7c47fa5de8f4c0c67e33a",
+      "object_count": 4,
+      "same_capacity": true,
+      "same_chapter": true,
+      "same_manual": true
+    },
     {
       "canonical_body_digest": "sha256:39248edf7d191e1e8aea0ecef12d85d4b11ea073421ffc22f9894dc2cd89e57c",
       "canonical_selection": {
@@ -52,7 +315,7 @@
         "reason": "chaque membre est un satellite sans capacité déclarée, rattaché à un hôte unique, existant, de son propre chapitre, et deux membres n'assistent jamais le même hôte : aucun crédit n'est en jeu et aucun hôte ne serait privé",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0001",
+      "clone_group_id": "CG-0004",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 1,
       "members": [
@@ -115,7 +378,7 @@
         "reason": "chaque membre est un satellite sans capacité déclarée, rattaché à un hôte unique, existant, de son propre chapitre, et deux membres n'assistent jamais le même hôte : aucun crédit n'est en jeu et aucun hôte ne serait privé",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0002",
+      "clone_group_id": "CG-0005",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 3,
       "members": [
@@ -214,7 +477,7 @@
         "reason": "chaque membre est un satellite sans capacité déclarée, rattaché à un hôte unique, existant, de son propre chapitre, et deux membres n'assistent jamais le même hôte : aucun crédit n'est en jeu et aucun hôte ne serait privé",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0003",
+      "clone_group_id": "CG-0006",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 1,
       "members": [
@@ -277,7 +540,7 @@
         "reason": "chaque membre est un satellite sans capacité déclarée, rattaché à un hôte unique, existant, de son propre chapitre, et deux membres n'assistent jamais le même hôte : aucun crédit n'est en jeu et aucun hôte ne serait privé",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0004",
+      "clone_group_id": "CG-0007",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 3,
       "members": [
@@ -365,6 +628,107 @@
       "same_manual": true
     },
     {
+      "canonical_body_digest": "sha256:b675788d18ecb090330aac566f9863de1f997993368fc1c76a1d8ce3c0584732",
+      "canonical_selection": {
+        "canonical_paths": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-011-CDP.tex",
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-012-CDP.tex",
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-013-CDP.tex",
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-014-CDP.tex"
+        ],
+        "evidence_rule": "SATELLITE_WITH_DISTINCT_HOST",
+        "false_copy_paths": [],
+        "reason": "chaque membre est un satellite sans capacité déclarée, rattaché à un hôte unique, existant, de son propre chapitre, et deux membres n'assistent jamais le même hôte : aucun crédit n'est en jeu et aucun hôte ne serait privé",
+        "status": "LEGITIMATE_SHARED_CANONICAL"
+      },
+      "clone_group_id": "CG-0008",
+      "disposition": "REDUNDANT_SAME_CAPACITY",
+      "excess_object_count": 3,
+      "members": [
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:b675788d18ecb090330aac566f9863de1f997993368fc1c76a1d8ce3c0584732",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-011"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:f3bb89d1e59fc6f977fe13fe702be56f68f34f87b852afe79c983d69c894423d",
+          "object_id": "1SPE-PRODSCAL-EX-011-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-011-CDP.tex",
+          "payload_chars": 192,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-011",
+          "source_type": "exercices",
+          "status": "generated"
+        },
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:b675788d18ecb090330aac566f9863de1f997993368fc1c76a1d8ce3c0584732",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-012"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:f3bb89d1e59fc6f977fe13fe702be56f68f34f87b852afe79c983d69c894423d",
+          "object_id": "1SPE-PRODSCAL-EX-012-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-012-CDP.tex",
+          "payload_chars": 192,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-012",
+          "source_type": "exercices",
+          "status": "generated"
+        },
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:b675788d18ecb090330aac566f9863de1f997993368fc1c76a1d8ce3c0584732",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-013"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:f3bb89d1e59fc6f977fe13fe702be56f68f34f87b852afe79c983d69c894423d",
+          "object_id": "1SPE-PRODSCAL-EX-013-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-013-CDP.tex",
+          "payload_chars": 192,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-013",
+          "source_type": "exercices",
+          "status": "generated"
+        },
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:b675788d18ecb090330aac566f9863de1f997993368fc1c76a1d8ce3c0584732",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-014"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:f3bb89d1e59fc6f977fe13fe702be56f68f34f87b852afe79c983d69c894423d",
+          "object_id": "1SPE-PRODSCAL-EX-014-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-014-CDP.tex",
+          "payload_chars": 192,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-014",
+          "source_type": "exercices",
+          "status": "generated"
+        }
+      ],
+      "normalized_body_digest": "sha256:f3bb89d1e59fc6f977fe13fe702be56f68f34f87b852afe79c983d69c894423d",
+      "object_count": 4,
+      "same_capacity": true,
+      "same_chapter": true,
+      "same_manual": true
+    },
+    {
       "canonical_body_digest": "sha256:c8b71ea71d9bca6b0546e3563f77846016908cb777aab83383c83d9a4561d070",
       "canonical_selection": {
         "canonical_paths": [
@@ -378,7 +742,7 @@
         "reason": "chaque membre est un satellite sans capacité déclarée, rattaché à un hôte unique, existant, de son propre chapitre, et deux membres n'assistent jamais le même hôte : aucun crédit n'est en jeu et aucun hôte ne serait privé",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0005",
+      "clone_group_id": "CG-0009",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 3,
       "members": [
@@ -479,7 +843,7 @@
         "reason": "chaque membre est un satellite sans capacité déclarée, rattaché à un hôte unique, existant, de son propre chapitre, et deux membres n'assistent jamais le même hôte : aucun crédit n'est en jeu et aucun hôte ne serait privé",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0006",
+      "clone_group_id": "CG-0010",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 3,
       "members": [
@@ -565,16 +929,117 @@
       "same_capacity": true,
       "same_chapter": true,
       "same_manual": true
+    },
+    {
+      "canonical_body_digest": "sha256:e012cf0a578b04377ba381e85d087cf685da850e523c073e515c091d3708cc5e",
+      "canonical_selection": {
+        "canonical_paths": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-031-CDP.tex",
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-032-CDP.tex",
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-033-CDP.tex",
+          "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-034-CDP.tex"
+        ],
+        "evidence_rule": "SATELLITE_WITH_DISTINCT_HOST",
+        "false_copy_paths": [],
+        "reason": "chaque membre est un satellite sans capacité déclarée, rattaché à un hôte unique, existant, de son propre chapitre, et deux membres n'assistent jamais le même hôte : aucun crédit n'est en jeu et aucun hôte ne serait privé",
+        "status": "LEGITIMATE_SHARED_CANONICAL"
+      },
+      "clone_group_id": "CG-0011",
+      "disposition": "REDUNDANT_SAME_CAPACITY",
+      "excess_object_count": 3,
+      "members": [
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:e012cf0a578b04377ba381e85d087cf685da850e523c073e515c091d3708cc5e",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-031"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:c2adfa6e0ce933620692149d3e105bbaa0ee03cd47e91b7af63ddcb32d764892",
+          "object_id": "1SPE-PRODSCAL-EX-031-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-031-CDP.tex",
+          "payload_chars": 226,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-031",
+          "source_type": "exercices",
+          "status": "generated"
+        },
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:e012cf0a578b04377ba381e85d087cf685da850e523c073e515c091d3708cc5e",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-032"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:c2adfa6e0ce933620692149d3e105bbaa0ee03cd47e91b7af63ddcb32d764892",
+          "object_id": "1SPE-PRODSCAL-EX-032-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-032-CDP.tex",
+          "payload_chars": 226,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-032",
+          "source_type": "exercices",
+          "status": "generated"
+        },
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:e012cf0a578b04377ba381e85d087cf685da850e523c073e515c091d3708cc5e",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-033"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:c2adfa6e0ce933620692149d3e105bbaa0ee03cd47e91b7af63ddcb32d764892",
+          "object_id": "1SPE-PRODSCAL-EX-033-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-033-CDP.tex",
+          "payload_chars": 226,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-033",
+          "source_type": "exercices",
+          "status": "generated"
+        },
+        {
+          "canonical_object_status": "LEGITIMATE_SHARED_CANONICAL",
+          "chapter": "1SPE-PRODUIT-SCALAIRE",
+          "declared_capacity": [],
+          "declared_capacity_uids": [],
+          "exact_body_digest": "sha256:e012cf0a578b04377ba381e85d087cf685da850e523c073e515c091d3708cc5e",
+          "host_refs": [
+            "1SPE-PRODSCAL-EX-034"
+          ],
+          "manual": "1SPE",
+          "normalized_body_digest": "sha256:c2adfa6e0ce933620692149d3e105bbaa0ee03cd47e91b7af63ddcb32d764892",
+          "object_id": "1SPE-PRODSCAL-EX-034-CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-034-CDP.tex",
+          "payload_chars": 226,
+          "payload_empty": false,
+          "resolved_host_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::1SPE-PRODSCAL-EX-034",
+          "source_type": "exercices",
+          "status": "generated"
+        }
+      ],
+      "normalized_body_digest": "sha256:c2adfa6e0ce933620692149d3e105bbaa0ee03cd47e91b7af63ddcb32d764892",
+      "object_count": 4,
+      "same_capacity": true,
+      "same_chapter": true,
+      "same_manual": true
     }
   ],
   "inventory": {
     "ambiguous_canonical_groups": 0,
     "capacity_identity_blockers": 0,
-    "clone_groups": 6,
-    "distinct_bodies": 3210,
-    "excess_objects": 14,
+    "clone_groups": 11,
+    "distinct_bodies": 3321,
+    "excess_objects": 27,
     "objects_on_invalid_credit": 0,
-    "objects_scanned": 3224,
+    "objects_scanned": 3348,
     "objects_with_indeterminate_credit": 0,
     "unknown_canonical_groups": 0
   },
