@@ -601,7 +601,11 @@ def test_ex_co_unknown_or_structural_failure_blocks_machine_dimension(producer) 
     }
     truth = producer._ex_co_truth("1NSI-X", graph)
     assert truth["unknown"] == 1
-    assert truth["structural_failures"] == 1
+    # DEUX échecs structurels, pas un : `UNKNOWN` en est un depuis que le
+    # classifieur connaît toutes les conventions du corpus, et qu'une
+    # disposition non reconnue est redevenue un signal plutôt qu'une
+    # tolérance. Ce test attendait encore l'ancienne règle.
+    assert truth["structural_failures"] == 2
     assert truth["cardinality_failures"] == 1
     assert truth["status"] == "GAP"
 
@@ -1143,3 +1147,54 @@ def test_la_dette_humaine_de_richesse_reste_visible_sur_un_axe_vert(
     assert truth["status"] == "COMPLETE"
     assert truth["routed_to_human"] == 7
     assert truth["semantic_validation_status"] == "ROUTED_TO_HUMAN"
+
+
+def test_a_missing_cell_is_a_gap_only_if_the_triage_says_so(producer) -> None:
+    """§22 : le gate consomme `REAL_PEDAGOGICAL_GAP`, pas la population brute.
+
+    Une cellule vide a cinq causes possibles et une seule appelle de
+    l'écriture. Compter les cinq reviendrait à lire « 408 cellules vides »
+    comme « 408 objets à écrire », ce que le triage réfute explicitement.
+    """
+    coverage, clone_ledger = _fixtures(producer)
+    coverage["rows"] = [
+        {"manual": "1NSI", "chapter": "1NSI-X", "capacity": "C1",
+         "canonical_capacity_uid": "U1", "role": "cours", "state": "MISSING"},
+        {"manual": "1NSI", "chapter": "1NSI-X", "capacity": "C2",
+         "canonical_capacity_uid": "U2", "role": "methodes",
+         "state": "MISSING"},
+    ]
+    triage = {
+        "units": [
+            {"CHAPTER": "1NSI-X", "canonical_capacity_uid": "U1",
+             "ROLE": "cours",
+             "APPLICABILITY_VERDICT": "SATISFIED_TRANSVERSALLY"},
+            {"CHAPTER": "1NSI-X", "canonical_capacity_uid": "U2",
+             "ROLE": "methodes",
+             "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP"},
+        ]
+    }
+
+    truth = producer._capacity_truth(
+        "1NSI-X", coverage, clone_ledger, role_applicability=triage
+    )
+    role = truth["pedagogical_role_coverage"]
+    assert role["raw_missing"] == 2
+    assert role["triaged_not_a_gap"] == 1
+    assert role["missing"] == 1
+    assert role["missing_ids"] == ["U2::methodes"]
+
+
+def test_a_cell_the_triage_never_judged_stays_a_gap(producer) -> None:
+    """Le verdict par défaut est la lacune : l'omission n'exempte pas."""
+    coverage, clone_ledger = _fixtures(producer)
+    coverage["rows"] = [
+        {"manual": "1NSI", "chapter": "1NSI-X", "capacity": "C9",
+         "canonical_capacity_uid": "U9", "role": "cours", "state": "MISSING"},
+    ]
+    truth = producer._capacity_truth(
+        "1NSI-X", coverage, clone_ledger, role_applicability={"units": []}
+    )
+    role = truth["pedagogical_role_coverage"]
+    assert role["missing"] == 1
+    assert role["triaged_not_a_gap"] == 0

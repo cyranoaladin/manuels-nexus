@@ -82,6 +82,7 @@ def _capacity_truth(
     clone_ledger: dict[str, Any],
     *,
     alignment: dict[str, Any] | None = None,
+    role_applicability: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Vérité capacité d'un chapitre, dérivée de producteurs cohérents.
 
@@ -147,11 +148,29 @@ def _capacity_truth(
         and all(row.get("canonical_capacity_uid") for row in rows)
     )
 
-    missing_ids = sorted(
+    # Une cellule MISSING n'est une lacune que si le triage d'applicabilité
+    # la juge `REAL_PEDAGOGICAL_GAP`. Les quatre autres verdicts — satisfaite
+    # par un objet, satisfaite transversalement, mal cartographiée, rôle non
+    # applicable — sont des jugements DÉPOSÉS, chacun avec sa règle et les
+    # objets qu'il désigne. Compter la population brute reviendrait à lire
+    # « 408 cellules vides » comme « 408 objets à écrire », ce que le triage
+    # réfute.
+    verdicts = {
+        f"{unit['canonical_capacity_uid']}::{unit['ROLE']}":
+            unit["APPLICABILITY_VERDICT"]
+        for unit in (role_applicability or {}).get("units", [])
+        if unit.get("CHAPTER") == chapter
+    }
+    brutes = sorted(
         f"{row['canonical_capacity_uid']}::{row['role']}"
         for row in rows
         if row["state"] == "MISSING"
     )
+    missing_ids = [
+        cell for cell in brutes
+        if verdicts.get(cell, "REAL_PEDAGOGICAL_GAP") == "REAL_PEDAGOGICAL_GAP"
+    ]
+    triaged_ids = [cell for cell in brutes if cell not in missing_ids]
     indeterminate_ids = sorted(
         f"{row['canonical_capacity_uid']}::{row['role']}"
         for row in rows
@@ -225,6 +244,9 @@ def _capacity_truth(
             "status": "COMPLETE" if identity_complete else "GAP",
         },
         "pedagogical_role_coverage": {
+            "raw_missing": len(brutes),
+            "triaged_not_a_gap": len(triaged_ids),
+            "triaged_ids": triaged_ids,
             "missing": len(missing_ids),
             "missing_ids": missing_ids,
             "missing_set_digest": _set_digest(missing_ids),
@@ -1167,6 +1189,13 @@ def build_matrix(
     alignment_ledger = json.loads(
         SEMANTIC_ALIGNMENT_LEDGER.read_text(encoding="utf-8")
     )
+    # Le triage d'applicabilité des rôles : il dit, cellule par cellule, si
+    # une case vide est une lacune réelle ou l'un des quatre autres verdicts.
+    role_applicability = json.loads(
+        (ROOT / "audit/PEDAGOGICAL_ROLE_APPLICABILITY_AUDIT.json").read_text(
+            encoding="utf-8"
+        )
+    )
     for name, current, path in (
         ("NSI_CROSS_DISCIPLINE_CONTENT_LEDGER", cross_discipline, cross_path),
         ("COURSE_BODY_OWNERSHIP_MAP", course_ownership, course_path),
@@ -1190,6 +1219,7 @@ def build_matrix(
         "ex_co_graph": _payload_digest(ex_co_graph),
         "chapter_richness": _payload_digest(richness),
         "semantic_alignment_ledger": _payload_digest(alignment_ledger),
+        "pedagogical_role_applicability": _payload_digest(role_applicability),
         "human_review_queue": _payload_digest(human_queue),
         "official_programme_sources": _set_digest(
             {
@@ -1262,7 +1292,8 @@ def build_matrix(
                 },
             }
             capacity_truth = _capacity_truth(
-                chapter, coverage, clone_ledger, alignment=alignment_ledger
+                chapter, coverage, clone_ledger, alignment=alignment_ledger,
+                role_applicability=role_applicability
             )
             row.update(capacity_truth)
             row["cross_discipline_content"] = _cross_discipline_truth(

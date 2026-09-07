@@ -263,6 +263,7 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 0,
         "routed_to_human": 0,
         "semantically_unvalidated": 21,
         "semantically_unvalidated_ids": [
@@ -289,7 +290,9 @@
           "1NSI::1NSI-ALGO-DICHO-GLOUTON-KNN::C3::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:2870ca19084b372a388a1e5acdc7eab882f22cff1c19919ac35e8c8889acfbba",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [],
+        "triaged_not_a_gap": 0
       },
       "programme": {
         "mandatory_atoms": 6,
@@ -633,6 +636,7 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 0,
         "routed_to_human": 0,
         "semantically_unvalidated": 42,
         "semantically_unvalidated_ids": [
@@ -680,7 +684,9 @@
           "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:fd76a734fb7a7d7dd847f79241d8c571ff04580657a760e28b28ba4d56c40b6b",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [],
+        "triaged_not_a_gap": 0
       },
       "programme": {
         "mandatory_atoms": 6,
@@ -985,17 +991,10 @@
           "1NSI::1NSI-ARCHITECTURE-OS::C5::qcm",
           "1NSI::1NSI-ARCHITECTURE-OS::C5::remediation"
         ],
-        "missing": 7,
-        "missing_ids": [
-          "1NSI::1NSI-ARCHITECTURE-OS::C1::methodes",
-          "1NSI::1NSI-ARCHITECTURE-OS::C1::remediation",
-          "1NSI::1NSI-ARCHITECTURE-OS::C2::remediation",
-          "1NSI::1NSI-ARCHITECTURE-OS::C3::methodes",
-          "1NSI::1NSI-ARCHITECTURE-OS::C3::remediation",
-          "1NSI::1NSI-ARCHITECTURE-OS::C4::evaluations",
-          "1NSI::1NSI-ARCHITECTURE-OS::C4::remediation"
-        ],
-        "missing_set_digest": "sha256:7e0162e805b42bd22ae96ed491eeb9c5b5ad74468e7c2d1d91cc1b0baf2831fa",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 7,
         "routed_to_human": 0,
         "semantically_unvalidated": 28,
         "semantically_unvalidated_ids": [
@@ -1029,7 +1028,17 @@
           "1NSI::1NSI-ARCHITECTURE-OS::C5::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:93bf0aa28956e4baa651a5675db53175aabe9c3347d3595ff57f46623f97df7c",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "1NSI::1NSI-ARCHITECTURE-OS::C1::methodes",
+          "1NSI::1NSI-ARCHITECTURE-OS::C1::remediation",
+          "1NSI::1NSI-ARCHITECTURE-OS::C2::remediation",
+          "1NSI::1NSI-ARCHITECTURE-OS::C3::methodes",
+          "1NSI::1NSI-ARCHITECTURE-OS::C3::remediation",
+          "1NSI::1NSI-ARCHITECTURE-OS::C4::evaluations",
+          "1NSI::1NSI-ARCHITECTURE-OS::C4::remediation"
+        ],
+        "triaged_not_a_gap": 7
       },
       "programme": {
         "mandatory_atoms": 7,
@@ -1090,7 +1099,7 @@
         "questions": 6,
         "status": "COMPLETE"
       },
-      "risk_score": 2440,
+      "risk_score": 1880,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -1344,21 +1353,10 @@
           "1NSI::1NSI-LANGAGE::C7::methodes",
           "1NSI::1NSI-LANGAGE::C7::qcm"
         ],
-        "missing": 11,
-        "missing_ids": [
-          "1NSI::1NSI-LANGAGE::C1::methodes",
-          "1NSI::1NSI-LANGAGE::C1::remediation",
-          "1NSI::1NSI-LANGAGE::C2::evaluations",
-          "1NSI::1NSI-LANGAGE::C2::methodes",
-          "1NSI::1NSI-LANGAGE::C2::remediation",
-          "1NSI::1NSI-LANGAGE::C3::evaluations",
-          "1NSI::1NSI-LANGAGE::C3::remediation",
-          "1NSI::1NSI-LANGAGE::C5::remediation",
-          "1NSI::1NSI-LANGAGE::C6::remediation",
-          "1NSI::1NSI-LANGAGE::C7::evaluations",
-          "1NSI::1NSI-LANGAGE::C7::remediation"
-        ],
-        "missing_set_digest": "sha256:07730e97c87a26d70d87d87a88be7cf695a0b1b0fac9eb3a6221882c5f19fb2a",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 11,
         "routed_to_human": 0,
         "semantically_unvalidated": 38,
         "semantically_unvalidated_ids": [
@@ -1402,7 +1400,21 @@
           "1NSI::1NSI-LANGAGE::C7::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:3e3f86e48b9d0fbc29b84061c32a27039a1c3abe7dfeac51e8983220081b362d",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "1NSI::1NSI-LANGAGE::C1::methodes",
+          "1NSI::1NSI-LANGAGE::C1::remediation",
+          "1NSI::1NSI-LANGAGE::C2::evaluations",
+          "1NSI::1NSI-LANGAGE::C2::methodes",
+          "1NSI::1NSI-LANGAGE::C2::remediation",
+          "1NSI::1NSI-LANGAGE::C3::evaluations",
+          "1NSI::1NSI-LANGAGE::C3::remediation",
+          "1NSI::1NSI-LANGAGE::C5::remediation",
+          "1NSI::1NSI-LANGAGE::C6::remediation",
+          "1NSI::1NSI-LANGAGE::C7::evaluations",
+          "1NSI::1NSI-LANGAGE::C7::remediation"
+        ],
+        "triaged_not_a_gap": 11
       },
       "programme": {
         "mandatory_atoms": 12,
@@ -1471,7 +1483,7 @@
         "questions": 8,
         "status": "COMPLETE"
       },
-      "risk_score": 3440,
+      "risk_score": 2560,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -1705,16 +1717,10 @@
           "1NSI::1NSI-PROJET-METHODES::C4::methodes",
           "1NSI::1NSI-PROJET-METHODES::C4::qcm"
         ],
-        "missing": 6,
-        "missing_ids": [
-          "1NSI::1NSI-PROJET-METHODES::C1::methodes",
-          "1NSI::1NSI-PROJET-METHODES::C1::remediation",
-          "1NSI::1NSI-PROJET-METHODES::C2::remediation",
-          "1NSI::1NSI-PROJET-METHODES::C3::methodes",
-          "1NSI::1NSI-PROJET-METHODES::C4::evaluations",
-          "1NSI::1NSI-PROJET-METHODES::C4::remediation"
-        ],
-        "missing_set_digest": "sha256:ec453a9245991a04f8708ebee429c6e56d96401d20d2917617e98ce6bd062dac",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 6,
         "routed_to_human": 0,
         "semantically_unvalidated": 22,
         "semantically_unvalidated_ids": [
@@ -1742,7 +1748,16 @@
           "1NSI::1NSI-PROJET-METHODES::C4::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:bac8b7f2d0dd81825902aad7a5b1603017191112c8bd29241b7a3764b9b7eb51",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "1NSI::1NSI-PROJET-METHODES::C1::methodes",
+          "1NSI::1NSI-PROJET-METHODES::C1::remediation",
+          "1NSI::1NSI-PROJET-METHODES::C2::remediation",
+          "1NSI::1NSI-PROJET-METHODES::C3::methodes",
+          "1NSI::1NSI-PROJET-METHODES::C4::evaluations",
+          "1NSI::1NSI-PROJET-METHODES::C4::remediation"
+        ],
+        "triaged_not_a_gap": 6
       },
       "programme": {
         "mandatory_atoms": 3,
@@ -1798,7 +1813,7 @@
         "questions": 6,
         "status": "COMPLETE"
       },
-      "risk_score": 2090,
+      "risk_score": 1610,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -2038,17 +2053,10 @@
           "1NSI::1NSI-RESEAUX::C5::methodes",
           "1NSI::1NSI-RESEAUX::C5::qcm"
         ],
-        "missing": 7,
-        "missing_ids": [
-          "1NSI::1NSI-RESEAUX::C1::methodes",
-          "1NSI::1NSI-RESEAUX::C2::remediation",
-          "1NSI::1NSI-RESEAUX::C3::remediation",
-          "1NSI::1NSI-RESEAUX::C4::methodes",
-          "1NSI::1NSI-RESEAUX::C4::remediation",
-          "1NSI::1NSI-RESEAUX::C5::evaluations",
-          "1NSI::1NSI-RESEAUX::C5::remediation"
-        ],
-        "missing_set_digest": "sha256:751994c2ee49a355be8d1c3366c6174b9bee4f4cf1b93c641a405177458bb4f4",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 7,
         "routed_to_human": 0,
         "semantically_unvalidated": 28,
         "semantically_unvalidated_ids": [
@@ -2082,7 +2090,17 @@
           "1NSI::1NSI-RESEAUX::C5::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:e8661bf6de0d9c5b8ebc281b4fec66f00b484fc79fd08382db93ba5af9e650d7",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "1NSI::1NSI-RESEAUX::C1::methodes",
+          "1NSI::1NSI-RESEAUX::C2::remediation",
+          "1NSI::1NSI-RESEAUX::C3::remediation",
+          "1NSI::1NSI-RESEAUX::C4::methodes",
+          "1NSI::1NSI-RESEAUX::C4::remediation",
+          "1NSI::1NSI-RESEAUX::C5::evaluations",
+          "1NSI::1NSI-RESEAUX::C5::remediation"
+        ],
+        "triaged_not_a_gap": 7
       },
       "programme": {
         "mandatory_atoms": 7,
@@ -2143,7 +2161,7 @@
         "questions": 6,
         "status": "COMPLETE"
       },
-      "risk_score": 2510,
+      "risk_score": 1950,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -2378,13 +2396,10 @@
           "1NSI::1NSI-TABLES::C4::methodes",
           "1NSI::1NSI-TABLES::C4::qcm"
         ],
-        "missing": 3,
-        "missing_ids": [
-          "1NSI::1NSI-TABLES::C1::remediation",
-          "1NSI::1NSI-TABLES::C3::remediation",
-          "1NSI::1NSI-TABLES::C4::remediation"
-        ],
-        "missing_set_digest": "sha256:d7eb2938e4d72bbfb3cf021624b33c21e51381e3d5c69b0499985dcf15e16521",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 3,
         "routed_to_human": 0,
         "semantically_unvalidated": 25,
         "semantically_unvalidated_ids": [
@@ -2415,7 +2430,13 @@
           "1NSI::1NSI-TABLES::C4::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:38aad7414da65d75f5eb2bddb9aed89c76f02bbaa9e48afe3a1dbfd0f0b46249",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "1NSI::1NSI-TABLES::C1::remediation",
+          "1NSI::1NSI-TABLES::C3::remediation",
+          "1NSI::1NSI-TABLES::C4::remediation"
+        ],
+        "triaged_not_a_gap": 3
       },
       "programme": {
         "mandatory_atoms": 8,
@@ -2473,7 +2494,7 @@
         "questions": 6,
         "status": "COMPLETE"
       },
-      "risk_score": 1915,
+      "risk_score": 1675,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -2712,16 +2733,10 @@
           "1NSI::1NSI-TYPES-BASE::C5::exercices",
           "1NSI::1NSI-TYPES-BASE::C5::qcm"
         ],
-        "missing": 6,
-        "missing_ids": [
-          "1NSI::1NSI-TYPES-BASE::C1::remediation",
-          "1NSI::1NSI-TYPES-BASE::C2::remediation",
-          "1NSI::1NSI-TYPES-BASE::C3::methodes",
-          "1NSI::1NSI-TYPES-BASE::C4::remediation",
-          "1NSI::1NSI-TYPES-BASE::C5::methodes",
-          "1NSI::1NSI-TYPES-BASE::C5::remediation"
-        ],
-        "missing_set_digest": "sha256:0c866988359bf705bb7eaee70afcc0eb2c572835af5dd90590c5ce8b0eb9a2ce",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 6,
         "routed_to_human": 0,
         "semantically_unvalidated": 29,
         "semantically_unvalidated_ids": [
@@ -2756,7 +2771,16 @@
           "1NSI::1NSI-TYPES-BASE::C5::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:14e9c01d31009506ab529cdee1cb662f3f9305cb27b2eb672e53b374993ac652",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "1NSI::1NSI-TYPES-BASE::C1::remediation",
+          "1NSI::1NSI-TYPES-BASE::C2::remediation",
+          "1NSI::1NSI-TYPES-BASE::C3::methodes",
+          "1NSI::1NSI-TYPES-BASE::C4::remediation",
+          "1NSI::1NSI-TYPES-BASE::C5::methodes",
+          "1NSI::1NSI-TYPES-BASE::C5::remediation"
+        ],
+        "triaged_not_a_gap": 6
       },
       "programme": {
         "mandatory_atoms": 15,
@@ -2817,7 +2841,7 @@
         "questions": 6,
         "status": "COMPLETE"
       },
-      "risk_score": 2475,
+      "risk_score": 1995,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -3064,6 +3088,7 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 0,
         "routed_to_human": 0,
         "semantically_unvalidated": 35,
         "semantically_unvalidated_ids": [
@@ -3104,7 +3129,9 @@
           "1NSI::1NSI-TYPES-CONSTRUITS::C5::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:98daa70b2b8f516166cecacb98a02cb5d49d3a236acbe7809c3ea2c844ba7e9a",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [],
+        "triaged_not_a_gap": 0
       },
       "programme": {
         "mandatory_atoms": 10,
@@ -3439,28 +3466,10 @@
           "1NSI::1NSI-WEB-IHM::C9::qcm",
           "1NSI::1NSI-WEB-IHM::C9::remediation"
         ],
-        "missing": 18,
-        "missing_ids": [
-          "1NSI::1NSI-WEB-IHM::C1::methodes",
-          "1NSI::1NSI-WEB-IHM::C1::remediation",
-          "1NSI::1NSI-WEB-IHM::C2::evaluations",
-          "1NSI::1NSI-WEB-IHM::C2::methodes",
-          "1NSI::1NSI-WEB-IHM::C2::remediation",
-          "1NSI::1NSI-WEB-IHM::C3::remediation",
-          "1NSI::1NSI-WEB-IHM::C4::evaluations",
-          "1NSI::1NSI-WEB-IHM::C4::methodes",
-          "1NSI::1NSI-WEB-IHM::C4::remediation",
-          "1NSI::1NSI-WEB-IHM::C5::evaluations",
-          "1NSI::1NSI-WEB-IHM::C5::methodes",
-          "1NSI::1NSI-WEB-IHM::C5::remediation",
-          "1NSI::1NSI-WEB-IHM::C6::evaluations",
-          "1NSI::1NSI-WEB-IHM::C6::methodes",
-          "1NSI::1NSI-WEB-IHM::C6::remediation",
-          "1NSI::1NSI-WEB-IHM::C7::evaluations",
-          "1NSI::1NSI-WEB-IHM::C7::remediation",
-          "1NSI::1NSI-WEB-IHM::C8::remediation"
-        ],
-        "missing_set_digest": "sha256:591bec545c5f1355ee899b1d7c3c225f43675ab6e01c61ccaf725eba682c8071",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 18,
         "routed_to_human": 0,
         "semantically_unvalidated": 45,
         "semantically_unvalidated_ids": [
@@ -3511,7 +3520,28 @@
           "1NSI::1NSI-WEB-IHM::C9::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:aafb1dbeb4f090ada9ec70552dc1ec5b000a78d04620e0685de8e5533335c8b8",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "1NSI::1NSI-WEB-IHM::C1::methodes",
+          "1NSI::1NSI-WEB-IHM::C1::remediation",
+          "1NSI::1NSI-WEB-IHM::C2::evaluations",
+          "1NSI::1NSI-WEB-IHM::C2::methodes",
+          "1NSI::1NSI-WEB-IHM::C2::remediation",
+          "1NSI::1NSI-WEB-IHM::C3::remediation",
+          "1NSI::1NSI-WEB-IHM::C4::evaluations",
+          "1NSI::1NSI-WEB-IHM::C4::methodes",
+          "1NSI::1NSI-WEB-IHM::C4::remediation",
+          "1NSI::1NSI-WEB-IHM::C5::evaluations",
+          "1NSI::1NSI-WEB-IHM::C5::methodes",
+          "1NSI::1NSI-WEB-IHM::C5::remediation",
+          "1NSI::1NSI-WEB-IHM::C6::evaluations",
+          "1NSI::1NSI-WEB-IHM::C6::methodes",
+          "1NSI::1NSI-WEB-IHM::C6::remediation",
+          "1NSI::1NSI-WEB-IHM::C7::evaluations",
+          "1NSI::1NSI-WEB-IHM::C7::remediation",
+          "1NSI::1NSI-WEB-IHM::C8::remediation"
+        ],
+        "triaged_not_a_gap": 18
       },
       "programme": {
         "mandatory_atoms": 13,
@@ -3587,7 +3617,7 @@
         "questions": 10,
         "status": "COMPLETE"
       },
-      "risk_score": 4545,
+      "risk_score": 3105,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -3766,6 +3796,7 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 0,
         "routed_to_human": 35,
         "semantically_unvalidated": 35,
         "semantically_unvalidated_ids": [
@@ -3806,7 +3837,9 @@
           "1SPE::1SPE-DERIVATION-GLOBAL::C5::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:b4ddad7f12058518e19094e4ca57baf9ecb19d0c8d297afcdd9c5b0d63242c0f",
-        "status": "COMPLETE"
+        "status": "COMPLETE",
+        "triaged_ids": [],
+        "triaged_not_a_gap": 0
       },
       "programme": {
         "mandatory_atoms": 16,
@@ -4055,6 +4088,7 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 0,
         "routed_to_human": 35,
         "semantically_unvalidated": 35,
         "semantically_unvalidated_ids": [
@@ -4095,7 +4129,9 @@
           "1SPE::1SPE-DERIVATION-LOCAL::C5::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:0d3b2e2b4e2f673148fceb08967df6c03a78c2c7a20c8c86ed59d814a75708be",
-        "status": "COMPLETE"
+        "status": "COMPLETE",
+        "triaged_ids": [],
+        "triaged_not_a_gap": 0
       },
       "programme": {
         "mandatory_atoms": 10,
@@ -4364,6 +4400,7 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 0,
         "routed_to_human": 35,
         "semantically_unvalidated": 35,
         "semantically_unvalidated_ids": [
@@ -4404,7 +4441,9 @@
           "1SPE::1SPE-EXPONENTIELLE::C5::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:fdcc747022d7d2f76f5f4e4be756918073570003161a1aa67ca4818d62898969",
-        "status": "COMPLETE"
+        "status": "COMPLETE",
+        "triaged_ids": [],
+        "triaged_not_a_gap": 0
       },
       "programme": {
         "mandatory_atoms": 7,
@@ -4653,6 +4692,7 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 0,
         "routed_to_human": 35,
         "semantically_unvalidated": 35,
         "semantically_unvalidated_ids": [
@@ -4693,7 +4733,9 @@
           "1SPE::1SPE-GEOMETRIE-REPEREE::C5::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:11a651f7ad72ddfea5984ef2e79a6739805757df79c5897858ff044c679087bf",
-        "status": "COMPLETE"
+        "status": "COMPLETE",
+        "triaged_ids": [],
+        "triaged_not_a_gap": 0
       },
       "programme": {
         "mandatory_atoms": 9,
@@ -4944,6 +4986,7 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 0,
         "routed_to_human": 35,
         "semantically_unvalidated": 35,
         "semantically_unvalidated_ids": [
@@ -4984,7 +5027,9 @@
           "1SPE::1SPE-PROBA-COND::C5::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:e4734f04cf8436804482238b18a5560115d2465ca4a92b5e6c5bab7727cb7744",
-        "status": "COMPLETE"
+        "status": "COMPLETE",
+        "triaged_ids": [],
+        "triaged_not_a_gap": 0
       },
       "programme": {
         "mandatory_atoms": 8,
@@ -5245,6 +5290,7 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 0,
         "routed_to_human": 35,
         "semantically_unvalidated": 35,
         "semantically_unvalidated_ids": [
@@ -5285,7 +5331,9 @@
           "1SPE::1SPE-PRODUIT-SCALAIRE::C5::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:407310c154b24109bcced320760eb798b9ff507e2ed71a8eea2d3cc973a20d15",
-        "status": "COMPLETE"
+        "status": "COMPLETE",
+        "triaged_ids": [],
+        "triaged_not_a_gap": 0
       },
       "programme": {
         "mandatory_atoms": 9,
@@ -5554,18 +5602,10 @@
           "1SPE::1SPE-SECOND-DEGRE::C8::cours",
           "1SPE::1SPE-SECOND-DEGRE::C8::exercices"
         ],
-        "missing": 8,
-        "missing_ids": [
-          "1SPE::1SPE-SECOND-DEGRE::C7::evaluations",
-          "1SPE::1SPE-SECOND-DEGRE::C7::methodes",
-          "1SPE::1SPE-SECOND-DEGRE::C7::qcm",
-          "1SPE::1SPE-SECOND-DEGRE::C7::remediation",
-          "1SPE::1SPE-SECOND-DEGRE::C8::evaluations",
-          "1SPE::1SPE-SECOND-DEGRE::C8::methodes",
-          "1SPE::1SPE-SECOND-DEGRE::C8::qcm",
-          "1SPE::1SPE-SECOND-DEGRE::C8::remediation"
-        ],
-        "missing_set_digest": "sha256:1ff933fecfef53100ec9de69e1f9ff5ca54eb69e1365101136cb0d530b902537",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 8,
         "routed_to_human": 42,
         "semantically_unvalidated": 48,
         "semantically_unvalidated_ids": [
@@ -5619,7 +5659,18 @@
           "1SPE::1SPE-SECOND-DEGRE::C8::exercices"
         ],
         "semantically_unvalidated_set_digest": "sha256:e5c02e888dc475ae12b594295ef6a40493d8a5926e8d3827d857624cbb435be1",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "1SPE::1SPE-SECOND-DEGRE::C7::evaluations",
+          "1SPE::1SPE-SECOND-DEGRE::C7::methodes",
+          "1SPE::1SPE-SECOND-DEGRE::C7::qcm",
+          "1SPE::1SPE-SECOND-DEGRE::C7::remediation",
+          "1SPE::1SPE-SECOND-DEGRE::C8::evaluations",
+          "1SPE::1SPE-SECOND-DEGRE::C8::methodes",
+          "1SPE::1SPE-SECOND-DEGRE::C8::qcm",
+          "1SPE::1SPE-SECOND-DEGRE::C8::remediation"
+        ],
+        "triaged_not_a_gap": 8
       },
       "programme": {
         "mandatory_atoms": 10,
@@ -5697,7 +5748,7 @@
         "questions": 18,
         "status": "GAP"
       },
-      "risk_score": 3870,
+      "risk_score": 3230,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -5892,6 +5943,7 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 0,
         "routed_to_human": 56,
         "semantically_unvalidated": 56,
         "semantically_unvalidated_ids": [
@@ -5953,7 +6005,9 @@
           "1SPE::1SPE-SUITES::C8::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:a6edb3dec1df2e572481562097db2240c2124940b63fb535f5a5e70940b30304",
-        "status": "COMPLETE"
+        "status": "COMPLETE",
+        "triaged_ids": [],
+        "triaged_not_a_gap": 0
       },
       "programme": {
         "mandatory_atoms": 15,
@@ -6226,6 +6280,7 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 0,
         "routed_to_human": 14,
         "semantically_unvalidated": 14,
         "semantically_unvalidated_ids": [
@@ -6245,7 +6300,9 @@
           "1SPE::1SPE-TRIGONOMETRIE::C2::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:8a00e53710130549caefedc2b7846826916393487939c8c29cdc8041f02007ce",
-        "status": "COMPLETE"
+        "status": "COMPLETE",
+        "triaged_ids": [],
+        "triaged_not_a_gap": 0
       },
       "programme": {
         "mandatory_atoms": 6,
@@ -6521,6 +6578,7 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 0,
         "routed_to_human": 49,
         "semantically_unvalidated": 49,
         "semantically_unvalidated_ids": [
@@ -6575,7 +6633,9 @@
           "1SPE::1SPE-VARIABLES-ALEATOIRES::C7::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:8194dd53dfa45df71d44cce840de83c68096963700bcfc0b163909c09871b2e5",
-        "status": "COMPLETE"
+        "status": "COMPLETE",
+        "triaged_ids": [],
+        "triaged_not_a_gap": 0
       },
       "programme": {
         "mandatory_atoms": 17,
@@ -6878,16 +6938,10 @@
           "TCOMPL::TCOMPL-CALCULS-AIRES::C6::methodes",
           "TCOMPL::TCOMPL-CALCULS-AIRES::C6::qcm"
         ],
-        "missing": 6,
-        "missing_ids": [
-          "TCOMPL::TCOMPL-CALCULS-AIRES::C1::evaluations",
-          "TCOMPL::TCOMPL-CALCULS-AIRES::C1::remediation",
-          "TCOMPL::TCOMPL-CALCULS-AIRES::C2::remediation",
-          "TCOMPL::TCOMPL-CALCULS-AIRES::C3::remediation",
-          "TCOMPL::TCOMPL-CALCULS-AIRES::C5::remediation",
-          "TCOMPL::TCOMPL-CALCULS-AIRES::C6::remediation"
-        ],
-        "missing_set_digest": "sha256:2d4edcf5bdcbcf5079ded9fe785094004f1d3e874a0da78e558417b04d1305be",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 6,
         "routed_to_human": 0,
         "semantically_unvalidated": 36,
         "semantically_unvalidated_ids": [
@@ -6929,7 +6983,16 @@
           "TCOMPL::TCOMPL-CALCULS-AIRES::C6::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:0ba6a3788b78438d959d29e9d2ade18659d97cfe3fd0ec51b8e8580d0f07e33d",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TCOMPL::TCOMPL-CALCULS-AIRES::C1::evaluations",
+          "TCOMPL::TCOMPL-CALCULS-AIRES::C1::remediation",
+          "TCOMPL::TCOMPL-CALCULS-AIRES::C2::remediation",
+          "TCOMPL::TCOMPL-CALCULS-AIRES::C3::remediation",
+          "TCOMPL::TCOMPL-CALCULS-AIRES::C5::remediation",
+          "TCOMPL::TCOMPL-CALCULS-AIRES::C6::remediation"
+        ],
+        "triaged_not_a_gap": 6
       },
       "programme": {
         "mandatory_atoms": 13,
@@ -6993,7 +7056,7 @@
         "questions": 6,
         "status": "COMPLETE"
       },
-      "risk_score": 2500,
+      "risk_score": 2020,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -7208,14 +7271,10 @@
           "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C5::qcm",
           "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C5::remediation"
         ],
-        "missing": 4,
-        "missing_ids": [
-          "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C1::remediation",
-          "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C2::remediation",
-          "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C3::remediation",
-          "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C4::remediation"
-        ],
-        "missing_set_digest": "sha256:572a4630df109c5632d4e408d158e385c41777d31b9298d011e470cd293ec5ad",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 4,
         "routed_to_human": 0,
         "semantically_unvalidated": 31,
         "semantically_unvalidated_ids": [
@@ -7252,7 +7311,14 @@
           "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C5::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:0ce301de2e2e60735002501f63853c47a0ebc1d3acfac86272cd2731ef3c74f4",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C1::remediation",
+          "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C2::remediation",
+          "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C3::remediation",
+          "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C4::remediation"
+        ],
+        "triaged_not_a_gap": 4
       },
       "programme": {
         "mandatory_atoms": 9,
@@ -7314,7 +7380,7 @@
         "questions": 7,
         "status": "COMPLETE"
       },
-      "risk_score": 2165,
+      "risk_score": 1845,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -7547,20 +7613,10 @@
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::cours",
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::exercices"
         ],
-        "missing": 10,
-        "missing_ids": [
-          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C1::remediation",
-          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C2::remediation",
-          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C4::remediation",
-          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C5::remediation",
-          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C6::qcm",
-          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C6::remediation",
-          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::evaluations",
-          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::methodes",
-          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::qcm",
-          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::remediation"
-        ],
-        "missing_set_digest": "sha256:e2c236cb8134a68d91ec9f49af1db0ee45217fce52df40a08ecf6a8a45430df0",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 10,
         "routed_to_human": 0,
         "semantically_unvalidated": 39,
         "semantically_unvalidated_ids": [
@@ -7605,7 +7661,20 @@
           "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::exercices"
         ],
         "semantically_unvalidated_set_digest": "sha256:2f06b74bb8214a043e7b86082f6eaee8a2700681b0ebbee46e02b854e722ee8f",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C1::remediation",
+          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C2::remediation",
+          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C4::remediation",
+          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C5::remediation",
+          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C6::qcm",
+          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C6::remediation",
+          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::evaluations",
+          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::methodes",
+          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::qcm",
+          "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7::remediation"
+        ],
+        "triaged_not_a_gap": 10
       },
       "programme": {
         "mandatory_atoms": 12,
@@ -7672,7 +7741,7 @@
         "questions": 5,
         "status": "GAP"
       },
-      "risk_score": 3115,
+      "risk_score": 2315,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -7885,14 +7954,10 @@
           "TCOMPL::TCOMPL-INEGALITES::C5::methodes",
           "TCOMPL::TCOMPL-INEGALITES::C5::qcm"
         ],
-        "missing": 4,
-        "missing_ids": [
-          "TCOMPL::TCOMPL-INEGALITES::C1::remediation",
-          "TCOMPL::TCOMPL-INEGALITES::C2::remediation",
-          "TCOMPL::TCOMPL-INEGALITES::C4::remediation",
-          "TCOMPL::TCOMPL-INEGALITES::C5::remediation"
-        ],
-        "missing_set_digest": "sha256:cfafd34ec6c83731e2042820b78c8f4f04489fda22d63bb098e31909b71b9f67",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 4,
         "routed_to_human": 0,
         "semantically_unvalidated": 31,
         "semantically_unvalidated_ids": [
@@ -7929,7 +7994,14 @@
           "TCOMPL::TCOMPL-INEGALITES::C5::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:e6c698f9770f3925f0decf60f9edaf89937e9d579054d293ae36f74f3c0f92ee",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TCOMPL::TCOMPL-INEGALITES::C1::remediation",
+          "TCOMPL::TCOMPL-INEGALITES::C2::remediation",
+          "TCOMPL::TCOMPL-INEGALITES::C4::remediation",
+          "TCOMPL::TCOMPL-INEGALITES::C5::remediation"
+        ],
+        "triaged_not_a_gap": 4
       },
       "programme": {
         "mandatory_atoms": 1,
@@ -7989,7 +8061,7 @@
         "questions": 5,
         "status": "COMPLETE"
       },
-      "risk_score": 2045,
+      "risk_score": 1725,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -8201,15 +8273,10 @@
           "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C5::exercices",
           "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C5::methodes"
         ],
-        "missing": 5,
-        "missing_ids": [
-          "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C1::remediation",
-          "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C3::remediation",
-          "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C4::remediation",
-          "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C5::qcm",
-          "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C5::remediation"
-        ],
-        "missing_set_digest": "sha256:6de9afb0e5f6166ff1f5f80be32da3546c7ee81699047efd8e959853e3ecf534",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 5,
         "routed_to_human": 0,
         "semantically_unvalidated": 30,
         "semantically_unvalidated_ids": [
@@ -8245,7 +8312,15 @@
           "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C5::methodes"
         ],
         "semantically_unvalidated_set_digest": "sha256:1e6510d791dc686b189fb9683cd6574b7f21f2683b2f7914ab6cfd8771106c72",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C1::remediation",
+          "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C3::remediation",
+          "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C4::remediation",
+          "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C5::qcm",
+          "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C5::remediation"
+        ],
+        "triaged_not_a_gap": 5
       },
       "programme": {
         "mandatory_atoms": 2,
@@ -8306,7 +8381,7 @@
         "questions": 5,
         "status": "GAP"
       },
-      "risk_score": 2115,
+      "risk_score": 1715,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -8518,15 +8593,10 @@
           "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C5::methodes",
           "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C5::qcm"
         ],
-        "missing": 5,
-        "missing_ids": [
-          "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C1::remediation",
-          "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C2::remediation",
-          "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C4::qcm",
-          "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C4::remediation",
-          "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C5::remediation"
-        ],
-        "missing_set_digest": "sha256:15a637b936c01c5c5d7b6665f2e24dd050ee2b3a19b95db83a7e554326342b3a",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 5,
         "routed_to_human": 0,
         "semantically_unvalidated": 30,
         "semantically_unvalidated_ids": [
@@ -8562,7 +8632,15 @@
           "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C5::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:dc15c881e28f413c372371b02496cc98547a0f015338c76e18ba0d8808068a4a",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C1::remediation",
+          "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C2::remediation",
+          "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C4::qcm",
+          "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C4::remediation",
+          "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C5::remediation"
+        ],
+        "triaged_not_a_gap": 5
       },
       "programme": {
         "mandatory_atoms": 4,
@@ -8623,7 +8701,7 @@
         "questions": 5,
         "status": "GAP"
       },
-      "risk_score": 2115,
+      "risk_score": 1715,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -8851,18 +8929,10 @@
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::exercices",
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::methodes"
         ],
-        "missing": 8,
-        "missing_ids": [
-          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C1::remediation",
-          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C2::remediation",
-          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C3::qcm",
-          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C3::remediation",
-          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C4::remediation",
-          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::evaluations",
-          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::qcm",
-          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::remediation"
-        ],
-        "missing_set_digest": "sha256:905fc18377af716ee5a56b413b3617db0101f7850cfb45b25cae83a71581d189",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 8,
         "routed_to_human": 0,
         "semantically_unvalidated": 34,
         "semantically_unvalidated_ids": [
@@ -8902,7 +8972,18 @@
           "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::methodes"
         ],
         "semantically_unvalidated_set_digest": "sha256:7464f79d3e28afbc7e7df87a3e89c87d9e2462651cbbbecdb3369963b816354c",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C1::remediation",
+          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C2::remediation",
+          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C3::qcm",
+          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C3::remediation",
+          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C4::remediation",
+          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::evaluations",
+          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::qcm",
+          "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6::remediation"
+        ],
+        "triaged_not_a_gap": 8
       },
       "programme": {
         "mandatory_atoms": 13,
@@ -8966,7 +9047,7 @@
         "questions": 5,
         "status": "GAP"
       },
-      "risk_score": 2674,
+      "risk_score": 2034,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -9188,19 +9269,10 @@
           "TCOMPL::TCOMPL-MODELES-FONCTION::C7::exercices",
           "TCOMPL::TCOMPL-MODELES-FONCTION::C7::methodes"
         ],
-        "missing": 9,
-        "missing_ids": [
-          "TCOMPL::TCOMPL-MODELES-FONCTION::C2::qcm",
-          "TCOMPL::TCOMPL-MODELES-FONCTION::C2::remediation",
-          "TCOMPL::TCOMPL-MODELES-FONCTION::C3::qcm",
-          "TCOMPL::TCOMPL-MODELES-FONCTION::C3::remediation",
-          "TCOMPL::TCOMPL-MODELES-FONCTION::C4::remediation",
-          "TCOMPL::TCOMPL-MODELES-FONCTION::C6::qcm",
-          "TCOMPL::TCOMPL-MODELES-FONCTION::C6::remediation",
-          "TCOMPL::TCOMPL-MODELES-FONCTION::C7::qcm",
-          "TCOMPL::TCOMPL-MODELES-FONCTION::C7::remediation"
-        ],
-        "missing_set_digest": "sha256:71d1daa3dc4059814f595e3b3f4cf780200749697c1e0adf8322f234386b1632",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 9,
         "routed_to_human": 0,
         "semantically_unvalidated": 40,
         "semantically_unvalidated_ids": [
@@ -9246,7 +9318,19 @@
           "TCOMPL::TCOMPL-MODELES-FONCTION::C7::methodes"
         ],
         "semantically_unvalidated_set_digest": "sha256:d1070bb97208b02a8e44214b08d2c6a692dee7ae8b1b7e828264f718271170e6",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TCOMPL::TCOMPL-MODELES-FONCTION::C2::qcm",
+          "TCOMPL::TCOMPL-MODELES-FONCTION::C2::remediation",
+          "TCOMPL::TCOMPL-MODELES-FONCTION::C3::qcm",
+          "TCOMPL::TCOMPL-MODELES-FONCTION::C3::remediation",
+          "TCOMPL::TCOMPL-MODELES-FONCTION::C4::remediation",
+          "TCOMPL::TCOMPL-MODELES-FONCTION::C6::qcm",
+          "TCOMPL::TCOMPL-MODELES-FONCTION::C6::remediation",
+          "TCOMPL::TCOMPL-MODELES-FONCTION::C7::qcm",
+          "TCOMPL::TCOMPL-MODELES-FONCTION::C7::remediation"
+        ],
+        "triaged_not_a_gap": 9
       },
       "programme": {
         "mandatory_atoms": 15,
@@ -9313,7 +9397,7 @@
         "questions": 5,
         "status": "GAP"
       },
-      "risk_score": 3090,
+      "risk_score": 2370,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -9545,21 +9629,10 @@
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::exercices",
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::methodes"
         ],
-        "missing": 11,
-        "missing_ids": [
-          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C1::remediation",
-          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C2::remediation",
-          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C3::remediation",
-          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C4::qcm",
-          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C4::remediation",
-          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C5::qcm",
-          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C6::qcm",
-          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C6::remediation",
-          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::evaluations",
-          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::qcm",
-          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::remediation"
-        ],
-        "missing_set_digest": "sha256:44cf02af5dca58be51763dd794097a3ac21855fa4f4e1cf59bf8ef0be2cef52d",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 11,
         "routed_to_human": 0,
         "semantically_unvalidated": 38,
         "semantically_unvalidated_ids": [
@@ -9603,7 +9676,21 @@
           "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::methodes"
         ],
         "semantically_unvalidated_set_digest": "sha256:9285995ec0b8602bc0e9c24b173fbb8059480e9d54d560c9b39b5451701dc7f3",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C1::remediation",
+          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C2::remediation",
+          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C3::remediation",
+          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C4::qcm",
+          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C4::remediation",
+          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C5::qcm",
+          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C6::qcm",
+          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C6::remediation",
+          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::evaluations",
+          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::qcm",
+          "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7::remediation"
+        ],
+        "triaged_not_a_gap": 11
       },
       "programme": {
         "mandatory_atoms": 12,
@@ -9670,7 +9757,7 @@
         "questions": 5,
         "status": "GAP"
       },
-      "risk_score": 3318,
+      "risk_score": 2438,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -9905,24 +9992,10 @@
           "TEXPERTES::TEXP-ARITHMETIQUE::C9::exercices",
           "TEXPERTES::TEXP-ARITHMETIQUE::C9::methodes"
         ],
-        "missing": 14,
-        "missing_ids": [
-          "TEXPERTES::TEXP-ARITHMETIQUE::C2::evaluations",
-          "TEXPERTES::TEXP-ARITHMETIQUE::C3::evaluations",
-          "TEXPERTES::TEXP-ARITHMETIQUE::C3::qcm",
-          "TEXPERTES::TEXP-ARITHMETIQUE::C4::qcm",
-          "TEXPERTES::TEXP-ARITHMETIQUE::C5::remediation",
-          "TEXPERTES::TEXP-ARITHMETIQUE::C6::qcm",
-          "TEXPERTES::TEXP-ARITHMETIQUE::C6::remediation",
-          "TEXPERTES::TEXP-ARITHMETIQUE::C7::qcm",
-          "TEXPERTES::TEXP-ARITHMETIQUE::C7::remediation",
-          "TEXPERTES::TEXP-ARITHMETIQUE::C8::qcm",
-          "TEXPERTES::TEXP-ARITHMETIQUE::C8::remediation",
-          "TEXPERTES::TEXP-ARITHMETIQUE::C9::evaluations",
-          "TEXPERTES::TEXP-ARITHMETIQUE::C9::qcm",
-          "TEXPERTES::TEXP-ARITHMETIQUE::C9::remediation"
-        ],
-        "missing_set_digest": "sha256:72e745f17a183b1f81153e1598e2f5ca3a8ce657da29ab7084f595fba1c2548a",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 14,
         "routed_to_human": 0,
         "semantically_unvalidated": 49,
         "semantically_unvalidated_ids": [
@@ -9977,7 +10050,24 @@
           "TEXPERTES::TEXP-ARITHMETIQUE::C9::methodes"
         ],
         "semantically_unvalidated_set_digest": "sha256:50151cab2071ba1036023095c3db706bc10453930d011d39cc19329e79b59afe",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TEXPERTES::TEXP-ARITHMETIQUE::C2::evaluations",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C3::evaluations",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C3::qcm",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C4::qcm",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C5::remediation",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C6::qcm",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C6::remediation",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C7::qcm",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C7::remediation",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C8::qcm",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C8::remediation",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C9::evaluations",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C9::qcm",
+          "TEXPERTES::TEXP-ARITHMETIQUE::C9::remediation"
+        ],
+        "triaged_not_a_gap": 14
       },
       "programme": {
         "mandatory_atoms": 17,
@@ -10050,7 +10140,7 @@
         "questions": 5,
         "status": "GAP"
       },
-      "risk_score": 4135,
+      "risk_score": 3015,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -10261,16 +10351,10 @@
           "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C5::exercices",
           "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C5::methodes"
         ],
-        "missing": 6,
-        "missing_ids": [
-          "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C2::qcm",
-          "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C2::remediation",
-          "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C3::remediation",
-          "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C4::remediation",
-          "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C5::qcm",
-          "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C5::remediation"
-        ],
-        "missing_set_digest": "sha256:207f4f278cc0ec1076b1354b3e857822ad8681ac659eab4b1bb3de5c5ec17a88",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 6,
         "routed_to_human": 0,
         "semantically_unvalidated": 29,
         "semantically_unvalidated_ids": [
@@ -10305,7 +10389,16 @@
           "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C5::methodes"
         ],
         "semantically_unvalidated_set_digest": "sha256:9811969a83174fe242076ddc2f8812e69fbce8057e1e461a323b0ec79cd299ec",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C2::qcm",
+          "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C2::remediation",
+          "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C3::remediation",
+          "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C4::remediation",
+          "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C5::qcm",
+          "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C5::remediation"
+        ],
+        "triaged_not_a_gap": 6
       },
       "programme": {
         "mandatory_atoms": 18,
@@ -10366,7 +10459,7 @@
         "questions": 5,
         "status": "GAP"
       },
-      "risk_score": 2185,
+      "risk_score": 1705,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -10590,21 +10683,10 @@
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C7::qcm",
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C7::remediation"
         ],
-        "missing": 11,
-        "missing_ids": [
-          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C1::evaluations",
-          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C2::remediation",
-          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::evaluations",
-          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::qcm",
-          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::remediation",
-          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C4::qcm",
-          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C4::remediation",
-          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::evaluations",
-          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::remediation",
-          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C6::qcm",
-          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C6::remediation"
-        ],
-        "missing_set_digest": "sha256:0c9f234f527961eacefd1c7a0c52ac9bb418eb6c72debcaf5bccd0a2ce7c27e4",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 11,
         "routed_to_human": 0,
         "semantically_unvalidated": 38,
         "semantically_unvalidated_ids": [
@@ -10648,7 +10730,21 @@
           "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C7::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:215561d894367b1c0de9b5c29fbcc8f34bea72cba37223fa724ee64881d693fd",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C1::evaluations",
+          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C2::remediation",
+          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::evaluations",
+          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::qcm",
+          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3::remediation",
+          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C4::qcm",
+          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C4::remediation",
+          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::evaluations",
+          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5::remediation",
+          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C6::qcm",
+          "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C6::remediation"
+        ],
+        "triaged_not_a_gap": 11
       },
       "programme": {
         "mandatory_atoms": 22,
@@ -10715,7 +10811,7 @@
         "questions": 5,
         "status": "GAP"
       },
-      "risk_score": 3095,
+      "risk_score": 2215,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -10928,16 +11024,10 @@
           "TEXPERTES::TEXP-GRAPHES::C5::methodes",
           "TEXPERTES::TEXP-GRAPHES::C5::qcm"
         ],
-        "missing": 6,
-        "missing_ids": [
-          "TEXPERTES::TEXP-GRAPHES::C1::remediation",
-          "TEXPERTES::TEXP-GRAPHES::C2::evaluations",
-          "TEXPERTES::TEXP-GRAPHES::C2::qcm",
-          "TEXPERTES::TEXP-GRAPHES::C2::remediation",
-          "TEXPERTES::TEXP-GRAPHES::C3::remediation",
-          "TEXPERTES::TEXP-GRAPHES::C5::remediation"
-        ],
-        "missing_set_digest": "sha256:35dffebc6c66008e72e78831cc83bf74f8f80468c05e036f78dee6b9ffefe488",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 6,
         "routed_to_human": 0,
         "semantically_unvalidated": 29,
         "semantically_unvalidated_ids": [
@@ -10972,7 +11062,16 @@
           "TEXPERTES::TEXP-GRAPHES::C5::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:898e3a5bf751342951b7f8b6fc72ed8e9632b6cc546db77ec5b7700d705ba361",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TEXPERTES::TEXP-GRAPHES::C1::remediation",
+          "TEXPERTES::TEXP-GRAPHES::C2::evaluations",
+          "TEXPERTES::TEXP-GRAPHES::C2::qcm",
+          "TEXPERTES::TEXP-GRAPHES::C2::remediation",
+          "TEXPERTES::TEXP-GRAPHES::C3::remediation",
+          "TEXPERTES::TEXP-GRAPHES::C5::remediation"
+        ],
+        "triaged_not_a_gap": 6
       },
       "programme": {
         "mandatory_atoms": 6,
@@ -11033,7 +11132,7 @@
         "questions": 5,
         "status": "GAP"
       },
-      "risk_score": 2150,
+      "risk_score": 1670,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -11258,19 +11357,10 @@
           "TEXPERTES::TEXP-MATRICES-MARKOV::C7::methodes",
           "TEXPERTES::TEXP-MATRICES-MARKOV::C7::qcm"
         ],
-        "missing": 9,
-        "missing_ids": [
-          "TEXPERTES::TEXP-MATRICES-MARKOV::C2::evaluations",
-          "TEXPERTES::TEXP-MATRICES-MARKOV::C2::qcm",
-          "TEXPERTES::TEXP-MATRICES-MARKOV::C2::remediation",
-          "TEXPERTES::TEXP-MATRICES-MARKOV::C3::evaluations",
-          "TEXPERTES::TEXP-MATRICES-MARKOV::C3::remediation",
-          "TEXPERTES::TEXP-MATRICES-MARKOV::C4::remediation",
-          "TEXPERTES::TEXP-MATRICES-MARKOV::C6::qcm",
-          "TEXPERTES::TEXP-MATRICES-MARKOV::C6::remediation",
-          "TEXPERTES::TEXP-MATRICES-MARKOV::C7::remediation"
-        ],
-        "missing_set_digest": "sha256:0244f3f2ba9dc6d951e579eca18344b91d3d8a56d7149c50c070cd25dafb1159",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 9,
         "routed_to_human": 0,
         "semantically_unvalidated": 40,
         "semantically_unvalidated_ids": [
@@ -11316,7 +11406,19 @@
           "TEXPERTES::TEXP-MATRICES-MARKOV::C7::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:3f77df5195b3f706ab10ec7d76db3d2bc909c0f0a90bd5c64d80ebb43bb38ff9",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TEXPERTES::TEXP-MATRICES-MARKOV::C2::evaluations",
+          "TEXPERTES::TEXP-MATRICES-MARKOV::C2::qcm",
+          "TEXPERTES::TEXP-MATRICES-MARKOV::C2::remediation",
+          "TEXPERTES::TEXP-MATRICES-MARKOV::C3::evaluations",
+          "TEXPERTES::TEXP-MATRICES-MARKOV::C3::remediation",
+          "TEXPERTES::TEXP-MATRICES-MARKOV::C4::remediation",
+          "TEXPERTES::TEXP-MATRICES-MARKOV::C6::qcm",
+          "TEXPERTES::TEXP-MATRICES-MARKOV::C6::remediation",
+          "TEXPERTES::TEXP-MATRICES-MARKOV::C7::remediation"
+        ],
+        "triaged_not_a_gap": 9
       },
       "programme": {
         "mandatory_atoms": 13,
@@ -11383,7 +11485,7 @@
         "questions": 5,
         "status": "GAP"
       },
-      "risk_score": 2990,
+      "risk_score": 2270,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -11673,45 +11775,10 @@
           "TNSI::TNSI-ALGORITHMIQUE::C9::evaluations",
           "TNSI::TNSI-ALGORITHMIQUE::C9::qcm"
         ],
-        "missing": 35,
-        "missing_ids": [
-          "TNSI::TNSI-ALGORITHMIQUE::C10::evaluations",
-          "TNSI::TNSI-ALGORITHMIQUE::C10::methodes",
-          "TNSI::TNSI-ALGORITHMIQUE::C10::remediation",
-          "TNSI::TNSI-ALGORITHMIQUE::C11::remediation",
-          "TNSI::TNSI-ALGORITHMIQUE::C12::evaluations",
-          "TNSI::TNSI-ALGORITHMIQUE::C13::corriges",
-          "TNSI::TNSI-ALGORITHMIQUE::C13::evaluations",
-          "TNSI::TNSI-ALGORITHMIQUE::C13::exercices",
-          "TNSI::TNSI-ALGORITHMIQUE::C13::methodes",
-          "TNSI::TNSI-ALGORITHMIQUE::C13::remediation",
-          "TNSI::TNSI-ALGORITHMIQUE::C1::methodes",
-          "TNSI::TNSI-ALGORITHMIQUE::C1::remediation",
-          "TNSI::TNSI-ALGORITHMIQUE::C2::corriges",
-          "TNSI::TNSI-ALGORITHMIQUE::C2::exercices",
-          "TNSI::TNSI-ALGORITHMIQUE::C2::methodes",
-          "TNSI::TNSI-ALGORITHMIQUE::C2::remediation",
-          "TNSI::TNSI-ALGORITHMIQUE::C3::evaluations",
-          "TNSI::TNSI-ALGORITHMIQUE::C3::remediation",
-          "TNSI::TNSI-ALGORITHMIQUE::C4::corriges",
-          "TNSI::TNSI-ALGORITHMIQUE::C4::evaluations",
-          "TNSI::TNSI-ALGORITHMIQUE::C4::exercices",
-          "TNSI::TNSI-ALGORITHMIQUE::C4::remediation",
-          "TNSI::TNSI-ALGORITHMIQUE::C5::methodes",
-          "TNSI::TNSI-ALGORITHMIQUE::C5::remediation",
-          "TNSI::TNSI-ALGORITHMIQUE::C6::methodes",
-          "TNSI::TNSI-ALGORITHMIQUE::C6::remediation",
-          "TNSI::TNSI-ALGORITHMIQUE::C7::remediation",
-          "TNSI::TNSI-ALGORITHMIQUE::C8::corriges",
-          "TNSI::TNSI-ALGORITHMIQUE::C8::evaluations",
-          "TNSI::TNSI-ALGORITHMIQUE::C8::exercices",
-          "TNSI::TNSI-ALGORITHMIQUE::C8::remediation",
-          "TNSI::TNSI-ALGORITHMIQUE::C9::corriges",
-          "TNSI::TNSI-ALGORITHMIQUE::C9::exercices",
-          "TNSI::TNSI-ALGORITHMIQUE::C9::methodes",
-          "TNSI::TNSI-ALGORITHMIQUE::C9::remediation"
-        ],
-        "missing_set_digest": "sha256:0779c3601d24512458f6bca7f2f72791e790c7b6b1675883944a97279d142895",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 35,
         "routed_to_human": 0,
         "semantically_unvalidated": 56,
         "semantically_unvalidated_ids": [
@@ -11773,7 +11840,45 @@
           "TNSI::TNSI-ALGORITHMIQUE::C9::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:886cfd3643fd21a2fa3186ad596635bdc22bb2eb04413ed218a5b74346523ba5",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TNSI::TNSI-ALGORITHMIQUE::C10::evaluations",
+          "TNSI::TNSI-ALGORITHMIQUE::C10::methodes",
+          "TNSI::TNSI-ALGORITHMIQUE::C10::remediation",
+          "TNSI::TNSI-ALGORITHMIQUE::C11::remediation",
+          "TNSI::TNSI-ALGORITHMIQUE::C12::evaluations",
+          "TNSI::TNSI-ALGORITHMIQUE::C13::corriges",
+          "TNSI::TNSI-ALGORITHMIQUE::C13::evaluations",
+          "TNSI::TNSI-ALGORITHMIQUE::C13::exercices",
+          "TNSI::TNSI-ALGORITHMIQUE::C13::methodes",
+          "TNSI::TNSI-ALGORITHMIQUE::C13::remediation",
+          "TNSI::TNSI-ALGORITHMIQUE::C1::methodes",
+          "TNSI::TNSI-ALGORITHMIQUE::C1::remediation",
+          "TNSI::TNSI-ALGORITHMIQUE::C2::corriges",
+          "TNSI::TNSI-ALGORITHMIQUE::C2::exercices",
+          "TNSI::TNSI-ALGORITHMIQUE::C2::methodes",
+          "TNSI::TNSI-ALGORITHMIQUE::C2::remediation",
+          "TNSI::TNSI-ALGORITHMIQUE::C3::evaluations",
+          "TNSI::TNSI-ALGORITHMIQUE::C3::remediation",
+          "TNSI::TNSI-ALGORITHMIQUE::C4::corriges",
+          "TNSI::TNSI-ALGORITHMIQUE::C4::evaluations",
+          "TNSI::TNSI-ALGORITHMIQUE::C4::exercices",
+          "TNSI::TNSI-ALGORITHMIQUE::C4::remediation",
+          "TNSI::TNSI-ALGORITHMIQUE::C5::methodes",
+          "TNSI::TNSI-ALGORITHMIQUE::C5::remediation",
+          "TNSI::TNSI-ALGORITHMIQUE::C6::methodes",
+          "TNSI::TNSI-ALGORITHMIQUE::C6::remediation",
+          "TNSI::TNSI-ALGORITHMIQUE::C7::remediation",
+          "TNSI::TNSI-ALGORITHMIQUE::C8::corriges",
+          "TNSI::TNSI-ALGORITHMIQUE::C8::evaluations",
+          "TNSI::TNSI-ALGORITHMIQUE::C8::exercices",
+          "TNSI::TNSI-ALGORITHMIQUE::C8::remediation",
+          "TNSI::TNSI-ALGORITHMIQUE::C9::corriges",
+          "TNSI::TNSI-ALGORITHMIQUE::C9::exercices",
+          "TNSI::TNSI-ALGORITHMIQUE::C9::methodes",
+          "TNSI::TNSI-ALGORITHMIQUE::C9::remediation"
+        ],
+        "triaged_not_a_gap": 35
       },
       "programme": {
         "mandatory_atoms": 14,
@@ -11865,7 +11970,7 @@
         "questions": 13,
         "status": "COMPLETE"
       },
-      "risk_score": 6815,
+      "risk_score": 4015,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -12117,27 +12222,10 @@
           "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C7::evaluations",
           "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C7::qcm"
         ],
-        "missing": 17,
-        "missing_ids": [
-          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C1::corriges",
-          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C1::exercices",
-          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C1::methodes",
-          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C1::remediation",
-          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C2::corriges",
-          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C2::exercices",
-          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C2::methodes",
-          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C2::remediation",
-          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C4::methodes",
-          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C4::remediation",
-          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C5::remediation",
-          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C6::methodes",
-          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C6::remediation",
-          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C7::corriges",
-          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C7::exercices",
-          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C7::methodes",
-          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C7::remediation"
-        ],
-        "missing_set_digest": "sha256:dedfcdc0e126e17e36cfd4cffce5bfe18e7f79a4ec0c582ffe6e7da7de16ef8d",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 17,
         "routed_to_human": 0,
         "semantically_unvalidated": 32,
         "semantically_unvalidated_ids": [
@@ -12175,7 +12263,27 @@
           "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C7::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:eb202318f34fbf073dfecbc760a7c345ea9f1ef6c65c195a5519ab420ab468ae",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C1::corriges",
+          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C1::exercices",
+          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C1::methodes",
+          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C1::remediation",
+          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C2::corriges",
+          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C2::exercices",
+          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C2::methodes",
+          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C2::remediation",
+          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C4::methodes",
+          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C4::remediation",
+          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C5::remediation",
+          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C6::methodes",
+          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C6::remediation",
+          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C7::corriges",
+          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C7::exercices",
+          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C7::methodes",
+          "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C7::remediation"
+        ],
+        "triaged_not_a_gap": 17
       },
       "programme": {
         "mandatory_atoms": 10,
@@ -12243,7 +12351,7 @@
         "questions": 7,
         "status": "COMPLETE"
       },
-      "risk_score": 3605,
+      "risk_score": 2245,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -12530,37 +12638,10 @@
           "TNSI::TNSI-BASES-DE-DONNEES::C9::methodes",
           "TNSI::TNSI-BASES-DE-DONNEES::C9::qcm"
         ],
-        "missing": 27,
-        "missing_ids": [
-          "TNSI::TNSI-BASES-DE-DONNEES::C10::methodes",
-          "TNSI::TNSI-BASES-DE-DONNEES::C10::remediation",
-          "TNSI::TNSI-BASES-DE-DONNEES::C11::methodes",
-          "TNSI::TNSI-BASES-DE-DONNEES::C11::remediation",
-          "TNSI::TNSI-BASES-DE-DONNEES::C12::methodes",
-          "TNSI::TNSI-BASES-DE-DONNEES::C1::methodes",
-          "TNSI::TNSI-BASES-DE-DONNEES::C1::remediation",
-          "TNSI::TNSI-BASES-DE-DONNEES::C2::corriges",
-          "TNSI::TNSI-BASES-DE-DONNEES::C2::evaluations",
-          "TNSI::TNSI-BASES-DE-DONNEES::C2::exercices",
-          "TNSI::TNSI-BASES-DE-DONNEES::C2::methodes",
-          "TNSI::TNSI-BASES-DE-DONNEES::C2::remediation",
-          "TNSI::TNSI-BASES-DE-DONNEES::C3::evaluations",
-          "TNSI::TNSI-BASES-DE-DONNEES::C3::remediation",
-          "TNSI::TNSI-BASES-DE-DONNEES::C4::corriges",
-          "TNSI::TNSI-BASES-DE-DONNEES::C4::exercices",
-          "TNSI::TNSI-BASES-DE-DONNEES::C4::methodes",
-          "TNSI::TNSI-BASES-DE-DONNEES::C4::remediation",
-          "TNSI::TNSI-BASES-DE-DONNEES::C5::corriges",
-          "TNSI::TNSI-BASES-DE-DONNEES::C5::evaluations",
-          "TNSI::TNSI-BASES-DE-DONNEES::C5::exercices",
-          "TNSI::TNSI-BASES-DE-DONNEES::C5::methodes",
-          "TNSI::TNSI-BASES-DE-DONNEES::C5::remediation",
-          "TNSI::TNSI-BASES-DE-DONNEES::C6::remediation",
-          "TNSI::TNSI-BASES-DE-DONNEES::C7::remediation",
-          "TNSI::TNSI-BASES-DE-DONNEES::C8::remediation",
-          "TNSI::TNSI-BASES-DE-DONNEES::C9::remediation"
-        ],
-        "missing_set_digest": "sha256:05eb831098eef885fd5db3266e94d09bacbedd787900a5126776b39f5c05f809",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 27,
         "routed_to_human": 0,
         "semantically_unvalidated": 57,
         "semantically_unvalidated_ids": [
@@ -12623,7 +12704,37 @@
           "TNSI::TNSI-BASES-DE-DONNEES::C9::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:134e264be1afb0a56430ee8bc67194eafa14fd4354d0073a8aa1f6d90b9611f6",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TNSI::TNSI-BASES-DE-DONNEES::C10::methodes",
+          "TNSI::TNSI-BASES-DE-DONNEES::C10::remediation",
+          "TNSI::TNSI-BASES-DE-DONNEES::C11::methodes",
+          "TNSI::TNSI-BASES-DE-DONNEES::C11::remediation",
+          "TNSI::TNSI-BASES-DE-DONNEES::C12::methodes",
+          "TNSI::TNSI-BASES-DE-DONNEES::C1::methodes",
+          "TNSI::TNSI-BASES-DE-DONNEES::C1::remediation",
+          "TNSI::TNSI-BASES-DE-DONNEES::C2::corriges",
+          "TNSI::TNSI-BASES-DE-DONNEES::C2::evaluations",
+          "TNSI::TNSI-BASES-DE-DONNEES::C2::exercices",
+          "TNSI::TNSI-BASES-DE-DONNEES::C2::methodes",
+          "TNSI::TNSI-BASES-DE-DONNEES::C2::remediation",
+          "TNSI::TNSI-BASES-DE-DONNEES::C3::evaluations",
+          "TNSI::TNSI-BASES-DE-DONNEES::C3::remediation",
+          "TNSI::TNSI-BASES-DE-DONNEES::C4::corriges",
+          "TNSI::TNSI-BASES-DE-DONNEES::C4::exercices",
+          "TNSI::TNSI-BASES-DE-DONNEES::C4::methodes",
+          "TNSI::TNSI-BASES-DE-DONNEES::C4::remediation",
+          "TNSI::TNSI-BASES-DE-DONNEES::C5::corriges",
+          "TNSI::TNSI-BASES-DE-DONNEES::C5::evaluations",
+          "TNSI::TNSI-BASES-DE-DONNEES::C5::exercices",
+          "TNSI::TNSI-BASES-DE-DONNEES::C5::methodes",
+          "TNSI::TNSI-BASES-DE-DONNEES::C5::remediation",
+          "TNSI::TNSI-BASES-DE-DONNEES::C6::remediation",
+          "TNSI::TNSI-BASES-DE-DONNEES::C7::remediation",
+          "TNSI::TNSI-BASES-DE-DONNEES::C8::remediation",
+          "TNSI::TNSI-BASES-DE-DONNEES::C9::remediation"
+        ],
+        "triaged_not_a_gap": 27
       },
       "programme": {
         "mandatory_atoms": 11,
@@ -12710,7 +12821,7 @@
         "questions": 12,
         "status": "COMPLETE"
       },
-      "risk_score": 6175,
+      "risk_score": 4015,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -12927,14 +13038,10 @@
           "TNSI::TNSI-HISTOIRE-INFORMATIQUE::C2::exercices",
           "TNSI::TNSI-HISTOIRE-INFORMATIQUE::C2::qcm"
         ],
-        "missing": 4,
-        "missing_ids": [
-          "TNSI::TNSI-HISTOIRE-INFORMATIQUE::C1::methodes",
-          "TNSI::TNSI-HISTOIRE-INFORMATIQUE::C1::remediation",
-          "TNSI::TNSI-HISTOIRE-INFORMATIQUE::C2::methodes",
-          "TNSI::TNSI-HISTOIRE-INFORMATIQUE::C2::remediation"
-        ],
-        "missing_set_digest": "sha256:b6b6a1fdbab2c648a840aa2cf620476918fef52ca16c8c488bcdd2605a7d605c",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 4,
         "routed_to_human": 0,
         "semantically_unvalidated": 10,
         "semantically_unvalidated_ids": [
@@ -12950,7 +13057,14 @@
           "TNSI::TNSI-HISTOIRE-INFORMATIQUE::C2::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:1b83804a705f702af3c03cf2f90483c8143db3354d12f1cea04d4c95c810818d",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TNSI::TNSI-HISTOIRE-INFORMATIQUE::C1::methodes",
+          "TNSI::TNSI-HISTOIRE-INFORMATIQUE::C1::remediation",
+          "TNSI::TNSI-HISTOIRE-INFORMATIQUE::C2::methodes",
+          "TNSI::TNSI-HISTOIRE-INFORMATIQUE::C2::remediation"
+        ],
+        "triaged_not_a_gap": 4
       },
       "programme": {
         "mandatory_atoms": 3,
@@ -13000,7 +13114,7 @@
         "questions": 4,
         "status": "COMPLETE"
       },
-      "risk_score": 1160,
+      "risk_score": 840,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -13277,41 +13391,10 @@
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C9::exercices",
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C9::qcm"
         ],
-        "missing": 31,
-        "missing_ids": [
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::evaluations",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::methodes",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::remediation",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C11::methodes",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C1::corriges",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C1::exercices",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C1::methodes",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C1::remediation",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::corriges",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::evaluations",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::exercices",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::methodes",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::remediation",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C3::corriges",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C3::exercices",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C3::methodes",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C3::remediation",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C4::remediation",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C5::remediation",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::evaluations",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::methodes",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::remediation",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::evaluations",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::methodes",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::remediation",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C8::corriges",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C8::exercices",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C8::methodes",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C8::remediation",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C9::methodes",
-          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C9::remediation"
-        ],
-        "missing_set_digest": "sha256:e97c3e5ce38d873e8fa66c58857ad72ccb80cf42e5728cdb76d63b51b34a9ae9",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 31,
         "routed_to_human": 0,
         "semantically_unvalidated": 46,
         "semantically_unvalidated_ids": [
@@ -13363,7 +13446,41 @@
           "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C9::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:d9d7422376e36a28fcc4db59abb90ea8971efd7f843c6b197dd5fb1d5fe726a4",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::evaluations",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::methodes",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10::remediation",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C11::methodes",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C1::corriges",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C1::exercices",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C1::methodes",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C1::remediation",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::corriges",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::evaluations",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::exercices",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::methodes",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2::remediation",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C3::corriges",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C3::exercices",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C3::methodes",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C3::remediation",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C4::remediation",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C5::remediation",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::evaluations",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::methodes",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6::remediation",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::evaluations",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::methodes",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7::remediation",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C8::corriges",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C8::exercices",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C8::methodes",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C8::remediation",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C9::methodes",
+          "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C9::remediation"
+        ],
+        "triaged_not_a_gap": 31
       },
       "programme": {
         "mandatory_atoms": 18,
@@ -13448,7 +13565,7 @@
         "questions": 12,
         "status": "COMPLETE"
       },
-      "risk_score": 5930,
+      "risk_score": 3450,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -13631,8 +13748,19 @@
           "TNSI::TNSI-PROJET::C1::qcm",
           "TNSI::TNSI-PROJET::C2::qcm"
         ],
-        "missing": 12,
-        "missing_ids": [
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 12,
+        "routed_to_human": 0,
+        "semantically_unvalidated": 2,
+        "semantically_unvalidated_ids": [
+          "TNSI::TNSI-PROJET::C1::qcm",
+          "TNSI::TNSI-PROJET::C2::qcm"
+        ],
+        "semantically_unvalidated_set_digest": "sha256:4447e1fce86fa2bfd868adce95e473d2718bf6fcfe477248c1fd93a97a90eab3",
+        "status": "GAP",
+        "triaged_ids": [
           "TNSI::TNSI-PROJET::C1::corriges",
           "TNSI::TNSI-PROJET::C1::cours",
           "TNSI::TNSI-PROJET::C1::evaluations",
@@ -13646,15 +13774,7 @@
           "TNSI::TNSI-PROJET::C2::methodes",
           "TNSI::TNSI-PROJET::C2::remediation"
         ],
-        "missing_set_digest": "sha256:bc20d7dc212b650e7ada4d956593ccce904a96e9fa796824684a1767c451d6de",
-        "routed_to_human": 0,
-        "semantically_unvalidated": 2,
-        "semantically_unvalidated_ids": [
-          "TNSI::TNSI-PROJET::C1::qcm",
-          "TNSI::TNSI-PROJET::C2::qcm"
-        ],
-        "semantically_unvalidated_set_digest": "sha256:4447e1fce86fa2bfd868adce95e473d2718bf6fcfe477248c1fd93a97a90eab3",
-        "status": "GAP"
+        "triaged_not_a_gap": 12
       },
       "programme": {
         "mandatory_atoms": 1,
@@ -13704,7 +13824,7 @@
         "questions": 4,
         "status": "COMPLETE"
       },
-      "risk_score": 1420,
+      "risk_score": 460,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -13996,52 +14116,10 @@
           "TNSI::TNSI-STRUCTURES-DONNEES::C9::exercices",
           "TNSI::TNSI-STRUCTURES-DONNEES::C9::qcm"
         ],
-        "missing": 42,
-        "missing_ids": [
-          "TNSI::TNSI-STRUCTURES-DONNEES::C10::evaluations",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C10::methodes",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C10::remediation",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C11::corriges",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C11::exercices",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C11::remediation",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C12::methodes",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C12::remediation",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C13::evaluations",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C13::methodes",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C13::remediation",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C14::remediation",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C1::corriges",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C1::evaluations",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C1::exercices",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C1::remediation",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C2::corriges",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C2::evaluations",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C2::exercices",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C2::methodes",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C2::remediation",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C3::corriges",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C3::evaluations",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C3::exercices",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C3::methodes",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C3::remediation",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C4::methodes",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C4::remediation",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C5::methodes",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C5::remediation",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C6::methodes",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C7::evaluations",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C7::methodes",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C7::remediation",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C8::corriges",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C8::evaluations",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C8::exercices",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C8::methodes",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C8::remediation",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C9::evaluations",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C9::methodes",
-          "TNSI::TNSI-STRUCTURES-DONNEES::C9::remediation"
-        ],
-        "missing_set_digest": "sha256:55aeed3316163e71741a6081ec598ec5f20d7176d2ec6adc5f279b2dcdeaa141",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 42,
         "routed_to_human": 0,
         "semantically_unvalidated": 56,
         "semantically_unvalidated_ids": [
@@ -14103,7 +14181,52 @@
           "TNSI::TNSI-STRUCTURES-DONNEES::C9::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:9b5055e680264a1e1ce1e275e809d1691be6e00130a662ff62013d066d700248",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TNSI::TNSI-STRUCTURES-DONNEES::C10::evaluations",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C10::methodes",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C10::remediation",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C11::corriges",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C11::exercices",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C11::remediation",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C12::methodes",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C12::remediation",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C13::evaluations",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C13::methodes",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C13::remediation",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C14::remediation",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C1::corriges",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C1::evaluations",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C1::exercices",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C1::remediation",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C2::corriges",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C2::evaluations",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C2::exercices",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C2::methodes",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C2::remediation",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C3::corriges",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C3::evaluations",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C3::exercices",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C3::methodes",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C3::remediation",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C4::methodes",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C4::remediation",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C5::methodes",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C5::remediation",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C6::methodes",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C7::evaluations",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C7::methodes",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C7::remediation",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C8::corriges",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C8::evaluations",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C8::exercices",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C8::methodes",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C8::remediation",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C9::evaluations",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C9::methodes",
+          "TNSI::TNSI-STRUCTURES-DONNEES::C9::remediation"
+        ],
+        "triaged_not_a_gap": 42
       },
       "programme": {
         "mandatory_atoms": 21,
@@ -14199,7 +14322,7 @@
         "questions": 14,
         "status": "COMPLETE"
       },
-      "risk_score": 7560,
+      "risk_score": 4200,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -14424,27 +14547,10 @@
           "TSPE::TSPE-CALCUL-INTEGRAL::C8::exercices",
           "TSPE::TSPE-CALCUL-INTEGRAL::C8::remediation"
         ],
-        "missing": 17,
-        "missing_ids": [
-          "TSPE::TSPE-CALCUL-INTEGRAL::C1::remediation",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C3::evaluations",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C3::remediation",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C4::qcm",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C4::remediation",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C5::qcm",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C5::remediation",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C6::evaluations",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C6::methodes",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C6::qcm",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C6::remediation",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C7::evaluations",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C7::methodes",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C7::qcm",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C7::remediation",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C8::methodes",
-          "TSPE::TSPE-CALCUL-INTEGRAL::C8::qcm"
-        ],
-        "missing_set_digest": "sha256:5181b9e47f8d1227396226bea9b1ce7eb66fb9120f8a061625bad74ac9f1cbca",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 17,
         "routed_to_human": 0,
         "semantically_unvalidated": 39,
         "semantically_unvalidated_ids": [
@@ -14489,7 +14595,27 @@
           "TSPE::TSPE-CALCUL-INTEGRAL::C8::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:b191bc81b2753c021a0719f0e65e467efd93fe34b71301439aa1919cd3f60a48",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TSPE::TSPE-CALCUL-INTEGRAL::C1::remediation",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C3::evaluations",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C3::remediation",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C4::qcm",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C4::remediation",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C5::qcm",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C5::remediation",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C6::evaluations",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C6::methodes",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C6::qcm",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C6::remediation",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C7::evaluations",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C7::methodes",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C7::qcm",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C7::remediation",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C8::methodes",
+          "TSPE::TSPE-CALCUL-INTEGRAL::C8::qcm"
+        ],
+        "triaged_not_a_gap": 17
       },
       "programme": {
         "mandatory_atoms": 16,
@@ -14559,7 +14685,7 @@
         "questions": 5,
         "status": "GAP"
       },
-      "risk_score": 3830,
+      "risk_score": 2470,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -14755,16 +14881,10 @@
           "TSPE::TSPE-COMBINATOIRE::C4::exercices",
           "TSPE::TSPE-COMBINATOIRE::C4::qcm"
         ],
-        "missing": 6,
-        "missing_ids": [
-          "TSPE::TSPE-COMBINATOIRE::C1::evaluations",
-          "TSPE::TSPE-COMBINATOIRE::C1::remediation",
-          "TSPE::TSPE-COMBINATOIRE::C3::methodes",
-          "TSPE::TSPE-COMBINATOIRE::C3::remediation",
-          "TSPE::TSPE-COMBINATOIRE::C4::methodes",
-          "TSPE::TSPE-COMBINATOIRE::C4::remediation"
-        ],
-        "missing_set_digest": "sha256:e31c5ef902dc9d14b775a0f2337d19b7de95f6f22d5ae17c71856a48b054bd27",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 6,
         "routed_to_human": 0,
         "semantically_unvalidated": 22,
         "semantically_unvalidated_ids": [
@@ -14792,7 +14912,16 @@
           "TSPE::TSPE-COMBINATOIRE::C4::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:e4efb2f50b7d0e1fbf75978b1bfda8130e81ba544ce31fa9fc5d4180258f508f",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TSPE::TSPE-COMBINATOIRE::C1::evaluations",
+          "TSPE::TSPE-COMBINATOIRE::C1::remediation",
+          "TSPE::TSPE-COMBINATOIRE::C3::methodes",
+          "TSPE::TSPE-COMBINATOIRE::C3::remediation",
+          "TSPE::TSPE-COMBINATOIRE::C4::methodes",
+          "TSPE::TSPE-COMBINATOIRE::C4::remediation"
+        ],
+        "triaged_not_a_gap": 6
       },
       "programme": {
         "mandatory_atoms": 14,
@@ -14849,7 +14978,7 @@
         "questions": 5,
         "status": "COMPLETE"
       },
-      "risk_score": 1730,
+      "risk_score": 1250,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -15058,6 +15187,7 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 0,
         "routed_to_human": 0,
         "semantically_unvalidated": 14,
         "semantically_unvalidated_ids": [
@@ -15077,7 +15207,9 @@
           "TSPE::TSPE-CONTINUITE::C2::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:1268e768256bea95143b37c31645965f9cf1c3e917e3c6e8cd8c922eb13895bf",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [],
+        "triaged_not_a_gap": 0
       },
       "programme": {
         "mandatory_atoms": 5,
@@ -15375,6 +15507,7 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 0,
         "routed_to_human": 0,
         "semantically_unvalidated": 42,
         "semantically_unvalidated_ids": [
@@ -15422,7 +15555,9 @@
           "TSPE::TSPE-DERIVATION-CONVEXITE::C6::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:147018d7f1ebed5526d37b741023e5b96f6a130a02d6d98833dcf72619e2e08c",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [],
+        "triaged_not_a_gap": 0
       },
       "programme": {
         "mandatory_atoms": 10,
@@ -15831,20 +15966,10 @@
           "TSPE::TSPE-GEOMETRIE-ESPACE::C9::qcm",
           "TSPE::TSPE-GEOMETRIE-ESPACE::C9::remediation"
         ],
-        "missing": 10,
-        "missing_ids": [
-          "TSPE::TSPE-GEOMETRIE-ESPACE::C10::evaluations",
-          "TSPE::TSPE-GEOMETRIE-ESPACE::C14::evaluations",
-          "TSPE::TSPE-GEOMETRIE-ESPACE::C16::evaluations",
-          "TSPE::TSPE-GEOMETRIE-ESPACE::C1::evaluations",
-          "TSPE::TSPE-GEOMETRIE-ESPACE::C2::evaluations",
-          "TSPE::TSPE-GEOMETRIE-ESPACE::C3::evaluations",
-          "TSPE::TSPE-GEOMETRIE-ESPACE::C4::evaluations",
-          "TSPE::TSPE-GEOMETRIE-ESPACE::C5::evaluations",
-          "TSPE::TSPE-GEOMETRIE-ESPACE::C6::evaluations",
-          "TSPE::TSPE-GEOMETRIE-ESPACE::C9::evaluations"
-        ],
-        "missing_set_digest": "sha256:ce1311862ceafba23f680eafb63eed135e017d155d36afbd0205d4163c24578d",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 10,
         "routed_to_human": 0,
         "semantically_unvalidated": 102,
         "semantically_unvalidated_ids": [
@@ -15952,7 +16077,20 @@
           "TSPE::TSPE-GEOMETRIE-ESPACE::C9::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:2d530d2cfb929be0fb6d9872b54636d8c048b06a040c2930fd137239caaca382",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TSPE::TSPE-GEOMETRIE-ESPACE::C10::evaluations",
+          "TSPE::TSPE-GEOMETRIE-ESPACE::C14::evaluations",
+          "TSPE::TSPE-GEOMETRIE-ESPACE::C16::evaluations",
+          "TSPE::TSPE-GEOMETRIE-ESPACE::C1::evaluations",
+          "TSPE::TSPE-GEOMETRIE-ESPACE::C2::evaluations",
+          "TSPE::TSPE-GEOMETRIE-ESPACE::C3::evaluations",
+          "TSPE::TSPE-GEOMETRIE-ESPACE::C4::evaluations",
+          "TSPE::TSPE-GEOMETRIE-ESPACE::C5::evaluations",
+          "TSPE::TSPE-GEOMETRIE-ESPACE::C6::evaluations",
+          "TSPE::TSPE-GEOMETRIE-ESPACE::C9::evaluations"
+        ],
+        "triaged_not_a_gap": 10
       },
       "programme": {
         "mandatory_atoms": 33,
@@ -16056,7 +16194,7 @@
         "questions": 16,
         "status": "COMPLETE"
       },
-      "risk_score": 6025,
+      "risk_score": 5225,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -16272,6 +16410,7 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 0,
         "routed_to_human": 0,
         "semantically_unvalidated": 21,
         "semantically_unvalidated_ids": [
@@ -16298,7 +16437,9 @@
           "TSPE::TSPE-LIMITES-FONCTIONS::C3::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:1e070ede08f77154ffa3f6f7b9bc04cb64a5f859675e14e09c934407942163d4",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [],
+        "triaged_not_a_gap": 0
       },
       "programme": {
         "mandatory_atoms": 7,
@@ -16571,13 +16712,10 @@
           "TSPE::TSPE-LOGARITHME::C4::methodes",
           "TSPE::TSPE-LOGARITHME::C4::qcm"
         ],
-        "missing": 3,
-        "missing_ids": [
-          "TSPE::TSPE-LOGARITHME::C2::methodes",
-          "TSPE::TSPE-LOGARITHME::C2::remediation",
-          "TSPE::TSPE-LOGARITHME::C4::remediation"
-        ],
-        "missing_set_digest": "sha256:a1265476c90cbb6eef480228daf1724c10e16ed9459e7a1119136585697578c8",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 3,
         "routed_to_human": 0,
         "semantically_unvalidated": 25,
         "semantically_unvalidated_ids": [
@@ -16608,7 +16746,13 @@
           "TSPE::TSPE-LOGARITHME::C4::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:1005ebc75e306825eeab4e451684da1788375717bfa678e670074e9a890c0687",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TSPE::TSPE-LOGARITHME::C2::methodes",
+          "TSPE::TSPE-LOGARITHME::C2::remediation",
+          "TSPE::TSPE-LOGARITHME::C4::remediation"
+        ],
+        "triaged_not_a_gap": 3
       },
       "programme": {
         "mandatory_atoms": 9,
@@ -16665,7 +16809,7 @@
         "questions": 5,
         "status": "COMPLETE"
       },
-      "risk_score": 1585,
+      "risk_score": 1345,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -16877,15 +17021,10 @@
           "TSPE::TSPE-PRIMITIVES-EQDIFF::C5::exercices",
           "TSPE::TSPE-PRIMITIVES-EQDIFF::C5::qcm"
         ],
-        "missing": 5,
-        "missing_ids": [
-          "TSPE::TSPE-PRIMITIVES-EQDIFF::C3::remediation",
-          "TSPE::TSPE-PRIMITIVES-EQDIFF::C4::methodes",
-          "TSPE::TSPE-PRIMITIVES-EQDIFF::C4::remediation",
-          "TSPE::TSPE-PRIMITIVES-EQDIFF::C5::methodes",
-          "TSPE::TSPE-PRIMITIVES-EQDIFF::C5::remediation"
-        ],
-        "missing_set_digest": "sha256:169fa0321606b527f66d5e391a75206b6c4d6f9a824179bb8eda59a545dbe815",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 5,
         "routed_to_human": 0,
         "semantically_unvalidated": 30,
         "semantically_unvalidated_ids": [
@@ -16921,7 +17060,15 @@
           "TSPE::TSPE-PRIMITIVES-EQDIFF::C5::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:74c2a810178caf482522d8658ba4379276a0d2a5c3dbed6a7ad3f9c6181387e3",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TSPE::TSPE-PRIMITIVES-EQDIFF::C3::remediation",
+          "TSPE::TSPE-PRIMITIVES-EQDIFF::C4::methodes",
+          "TSPE::TSPE-PRIMITIVES-EQDIFF::C4::remediation",
+          "TSPE::TSPE-PRIMITIVES-EQDIFF::C5::methodes",
+          "TSPE::TSPE-PRIMITIVES-EQDIFF::C5::remediation"
+        ],
+        "triaged_not_a_gap": 5
       },
       "programme": {
         "mandatory_atoms": 8,
@@ -16981,7 +17128,7 @@
         "questions": 5,
         "status": "COMPLETE"
       },
-      "risk_score": 2040,
+      "risk_score": 1640,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -17226,33 +17373,10 @@
           "TSPE::TSPE-PROBABILITES::C9::exercices",
           "TSPE::TSPE-PROBABILITES::C9::qcm"
         ],
-        "missing": 23,
-        "missing_ids": [
-          "TSPE::TSPE-PROBABILITES::C10::methodes",
-          "TSPE::TSPE-PROBABILITES::C10::remediation",
-          "TSPE::TSPE-PROBABILITES::C1::qcm",
-          "TSPE::TSPE-PROBABILITES::C1::remediation",
-          "TSPE::TSPE-PROBABILITES::C2::evaluations",
-          "TSPE::TSPE-PROBABILITES::C3::qcm",
-          "TSPE::TSPE-PROBABILITES::C3::remediation",
-          "TSPE::TSPE-PROBABILITES::C4::evaluations",
-          "TSPE::TSPE-PROBABILITES::C4::qcm",
-          "TSPE::TSPE-PROBABILITES::C4::remediation",
-          "TSPE::TSPE-PROBABILITES::C5::methodes",
-          "TSPE::TSPE-PROBABILITES::C5::remediation",
-          "TSPE::TSPE-PROBABILITES::C6::evaluations",
-          "TSPE::TSPE-PROBABILITES::C6::methodes",
-          "TSPE::TSPE-PROBABILITES::C6::qcm",
-          "TSPE::TSPE-PROBABILITES::C6::remediation",
-          "TSPE::TSPE-PROBABILITES::C7::evaluations",
-          "TSPE::TSPE-PROBABILITES::C7::methodes",
-          "TSPE::TSPE-PROBABILITES::C7::remediation",
-          "TSPE::TSPE-PROBABILITES::C8::methodes",
-          "TSPE::TSPE-PROBABILITES::C8::remediation",
-          "TSPE::TSPE-PROBABILITES::C9::methodes",
-          "TSPE::TSPE-PROBABILITES::C9::remediation"
-        ],
-        "missing_set_digest": "sha256:3dcfa651802b3b3b8acea849fba43b221d9de4c85722ce8be52d2d6ac23914cd",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 23,
         "routed_to_human": 0,
         "semantically_unvalidated": 47,
         "semantically_unvalidated_ids": [
@@ -17305,7 +17429,33 @@
           "TSPE::TSPE-PROBABILITES::C9::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:2718487b216463036a787d797baa1a8a9d9d5d96fb47224f9e40f806c50a76cb",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TSPE::TSPE-PROBABILITES::C10::methodes",
+          "TSPE::TSPE-PROBABILITES::C10::remediation",
+          "TSPE::TSPE-PROBABILITES::C1::qcm",
+          "TSPE::TSPE-PROBABILITES::C1::remediation",
+          "TSPE::TSPE-PROBABILITES::C2::evaluations",
+          "TSPE::TSPE-PROBABILITES::C3::qcm",
+          "TSPE::TSPE-PROBABILITES::C3::remediation",
+          "TSPE::TSPE-PROBABILITES::C4::evaluations",
+          "TSPE::TSPE-PROBABILITES::C4::qcm",
+          "TSPE::TSPE-PROBABILITES::C4::remediation",
+          "TSPE::TSPE-PROBABILITES::C5::methodes",
+          "TSPE::TSPE-PROBABILITES::C5::remediation",
+          "TSPE::TSPE-PROBABILITES::C6::evaluations",
+          "TSPE::TSPE-PROBABILITES::C6::methodes",
+          "TSPE::TSPE-PROBABILITES::C6::qcm",
+          "TSPE::TSPE-PROBABILITES::C6::remediation",
+          "TSPE::TSPE-PROBABILITES::C7::evaluations",
+          "TSPE::TSPE-PROBABILITES::C7::methodes",
+          "TSPE::TSPE-PROBABILITES::C7::remediation",
+          "TSPE::TSPE-PROBABILITES::C8::methodes",
+          "TSPE::TSPE-PROBABILITES::C8::remediation",
+          "TSPE::TSPE-PROBABILITES::C9::methodes",
+          "TSPE::TSPE-PROBABILITES::C9::remediation"
+        ],
+        "triaged_not_a_gap": 23
       },
       "programme": {
         "mandatory_atoms": 21,
@@ -17382,7 +17532,7 @@
         "questions": 6,
         "status": "GAP"
       },
-      "risk_score": 4775,
+      "risk_score": 2935,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -17616,12 +17766,10 @@
           "TSPE::TSPE-SUITES-LIMITES::C7::methodes",
           "TSPE::TSPE-SUITES-LIMITES::C7::qcm"
         ],
-        "missing": 2,
-        "missing_ids": [
-          "TSPE::TSPE-SUITES-LIMITES::C6::remediation",
-          "TSPE::TSPE-SUITES-LIMITES::C7::remediation"
-        ],
-        "missing_set_digest": "sha256:df20fadb6152b38ff1091341a0589ed9df76fe676430d98b487fde2ef328323b",
+        "missing": 0,
+        "missing_ids": [],
+        "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 2,
         "routed_to_human": 0,
         "semantically_unvalidated": 47,
         "semantically_unvalidated_ids": [
@@ -17674,7 +17822,12 @@
           "TSPE::TSPE-SUITES-LIMITES::C7::qcm"
         ],
         "semantically_unvalidated_set_digest": "sha256:f7f144702a2d2b9d0aef47324f149a6e512ba7e1b6d10a5cfb5d3ced43ee967c",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [
+          "TSPE::TSPE-SUITES-LIMITES::C6::remediation",
+          "TSPE::TSPE-SUITES-LIMITES::C7::remediation"
+        ],
+        "triaged_not_a_gap": 2
       },
       "programme": {
         "mandatory_atoms": 14,
@@ -17750,7 +17903,7 @@
         "questions": 15,
         "status": "COMPLETE"
       },
-      "risk_score": 3420,
+      "risk_score": 3260,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -17949,6 +18102,7 @@
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_missing": 0,
         "routed_to_human": 0,
         "semantically_unvalidated": 14,
         "semantically_unvalidated_ids": [
@@ -17968,7 +18122,9 @@
           "TSPE::TSPE-TRIGONOMETRIE::C2::remediation"
         ],
         "semantically_unvalidated_set_digest": "sha256:c69468459743fbcc0ddc3e4f8764aaacab3835d7733db0e9131e278ce4bd2308",
-        "status": "GAP"
+        "status": "GAP",
+        "triaged_ids": [],
+        "triaged_not_a_gap": 0
       },
       "programme": {
         "mandatory_atoms": 3,
@@ -18041,6 +18197,7 @@
     "ex_co_graph": "sha256:cec55ea26701ea5372411bd27d6820a7bb42193b47534bd0447090f54646261d",
     "human_review_queue": "sha256:1ec7a248d07f9d87d91469502ecf0c5d291cbe210adf6602c7a3a5fa44016f86",
     "official_programme_sources": "sha256:bf20d6ba7001dae939b572bff8d4d368d99b179bb419d33d240eb98aeeb4fcad",
+    "pedagogical_role_applicability": "sha256:d0b74c7910d3786b53aa7fb2bd16cd81762d94fd53d649da2ee417f8125f13c0",
     "semantic_alignment_ledger": "sha256:5806101d48561b4c45b99fea70d41524e14a834c74bd58c6f968d940c4af589b",
     "true_coverage": "sha256:45a0a56f1564e852d4e23f2e45ccde4e24c82993301fe8ba366fc3a851b88faf"
   },
@@ -18054,99 +18211,54 @@
   ],
   "next_by_risk": [
     {
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "manual": "TSPE_2026_2027",
+      "risk_score": 5225
+    },
+    {
       "chapter": "TNSI-STRUCTURES-DONNEES",
       "manual": "TNSI",
-      "risk_score": 7560
+      "risk_score": 4200
     },
     {
       "chapter": "TNSI-ALGORITHMIQUE",
       "manual": "TNSI",
-      "risk_score": 6815
+      "risk_score": 4015
     },
     {
       "chapter": "TNSI-BASES-DE-DONNEES",
       "manual": "TNSI",
-      "risk_score": 6175
-    },
-    {
-      "chapter": "TSPE-GEOMETRIE-ESPACE",
-      "manual": "TSPE_2026_2027",
-      "risk_score": 6025
+      "risk_score": 4015
     },
     {
       "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
       "manual": "TNSI",
-      "risk_score": 5930
-    },
-    {
-      "chapter": "TSPE-PROBABILITES",
-      "manual": "TSPE_2026_2027",
-      "risk_score": 4775
-    },
-    {
-      "chapter": "1NSI-WEB-IHM",
-      "manual": "1NSI",
-      "risk_score": 4545
-    },
-    {
-      "chapter": "TEXP-ARITHMETIQUE",
-      "manual": "TEXPERTES",
-      "risk_score": 4135
-    },
-    {
-      "chapter": "1SPE-SECOND-DEGRE",
-      "manual": "1SPE",
-      "risk_score": 3870
-    },
-    {
-      "chapter": "TSPE-CALCUL-INTEGRAL",
-      "manual": "TSPE_2026_2027",
-      "risk_score": 3830
-    },
-    {
-      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
-      "manual": "TNSI",
-      "risk_score": 3605
-    },
-    {
-      "chapter": "1NSI-LANGAGE",
-      "manual": "1NSI",
-      "risk_score": 3440
+      "risk_score": 3450
     },
     {
       "chapter": "TSPE-SUITES-LIMITES",
       "manual": "TSPE_2026_2027",
-      "risk_score": 3420
+      "risk_score": 3260
     },
     {
-      "chapter": "TCOMPL-TEMPS-ATTENTE",
-      "manual": "TCOMPL",
-      "risk_score": 3318
+      "chapter": "1SPE-SECOND-DEGRE",
+      "manual": "1SPE",
+      "risk_score": 3230
     },
     {
-      "chapter": "TCOMPL-ECHANTILLONNAGE",
-      "manual": "TCOMPL",
-      "risk_score": 3115
+      "chapter": "1NSI-WEB-IHM",
+      "manual": "1NSI",
+      "risk_score": 3105
     },
     {
-      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "chapter": "TEXP-ARITHMETIQUE",
       "manual": "TEXPERTES",
-      "risk_score": 3095
+      "risk_score": 3015
     },
     {
-      "chapter": "TCOMPL-MODELES-FONCTION",
-      "manual": "TCOMPL",
-      "risk_score": 3090
-    },
-    {
-      "chapter": "TEXP-MATRICES-MARKOV",
-      "manual": "TEXPERTES",
-      "risk_score": 2990
-    },
-    {
-      "chapter": "TCOMPL-MODELES-EVOLUTION",
-      "manual": "TCOMPL",
-      "risk_score": 2674
+      "chapter": "TSPE-PROBABILITES",
+      "manual": "TSPE_2026_2027",
+      "risk_score": 2935
     },
     {
       "chapter": "TSPE-DERIVATION-CONVEXITE",
@@ -18154,24 +18266,24 @@
       "risk_score": 2570
     },
     {
-      "chapter": "1NSI-RESEAUX",
+      "chapter": "1NSI-LANGAGE",
       "manual": "1NSI",
-      "risk_score": 2510
+      "risk_score": 2560
     },
     {
-      "chapter": "TCOMPL-CALCULS-AIRES",
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "manual": "TSPE_2026_2027",
+      "risk_score": 2470
+    },
+    {
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
       "manual": "TCOMPL",
-      "risk_score": 2500
+      "risk_score": 2438
     },
     {
-      "chapter": "1NSI-TYPES-BASE",
-      "manual": "1NSI",
-      "risk_score": 2475
-    },
-    {
-      "chapter": "1NSI-ARCHITECTURE-OS",
-      "manual": "1NSI",
-      "risk_score": 2440
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "manual": "TCOMPL",
+      "risk_score": 2370
     },
     {
       "chapter": "1NSI-TYPES-CONSTRUITS",
@@ -18179,59 +18291,79 @@
       "risk_score": 2365
     },
     {
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "manual": "TCOMPL",
+      "risk_score": 2315
+    },
+    {
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "manual": "TEXPERTES",
+      "risk_score": 2270
+    },
+    {
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "manual": "TNSI",
+      "risk_score": 2245
+    },
+    {
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
       "manual": "1NSI",
       "risk_score": 2230
     },
     {
-      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
       "manual": "TEXPERTES",
-      "risk_score": 2185
+      "risk_score": 2215
+    },
+    {
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "manual": "TCOMPL",
+      "risk_score": 2034
+    },
+    {
+      "chapter": "TCOMPL-CALCULS-AIRES",
+      "manual": "TCOMPL",
+      "risk_score": 2020
+    },
+    {
+      "chapter": "1NSI-TYPES-BASE",
+      "manual": "1NSI",
+      "risk_score": 1995
+    },
+    {
+      "chapter": "1NSI-RESEAUX",
+      "manual": "1NSI",
+      "risk_score": 1950
+    },
+    {
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "manual": "1NSI",
+      "risk_score": 1880
     },
     {
       "chapter": "TCOMPL-CORRELATION-CAUSALITE",
       "manual": "TCOMPL",
-      "risk_score": 2165
-    },
-    {
-      "chapter": "TEXP-GRAPHES",
-      "manual": "TEXPERTES",
-      "risk_score": 2150
-    },
-    {
-      "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
-      "manual": "TCOMPL",
-      "risk_score": 2115
-    },
-    {
-      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
-      "manual": "TCOMPL",
-      "risk_score": 2115
-    },
-    {
-      "chapter": "1NSI-PROJET-METHODES",
-      "manual": "1NSI",
-      "risk_score": 2090
+      "risk_score": 1845
     },
     {
       "chapter": "TCOMPL-INEGALITES",
       "manual": "TCOMPL",
-      "risk_score": 2045
+      "risk_score": 1725
     },
     {
-      "chapter": "TSPE-PRIMITIVES-EQDIFF",
-      "manual": "TSPE_2026_2027",
-      "risk_score": 2040
+      "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+      "manual": "TCOMPL",
+      "risk_score": 1715
     },
     {
-      "chapter": "1NSI-TABLES",
-      "manual": "1NSI",
-      "risk_score": 1915
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "manual": "TCOMPL",
+      "risk_score": 1715
     },
     {
-      "chapter": "TSPE-COMBINATOIRE",
-      "manual": "TSPE_2026_2027",
-      "risk_score": 1730
+      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "manual": "TEXPERTES",
+      "risk_score": 1705
     },
     {
       "chapter": "TSPE-LIMITES-FONCTIONS",
@@ -18239,9 +18371,24 @@
       "risk_score": 1685
     },
     {
-      "chapter": "TSPE-LOGARITHME",
+      "chapter": "1NSI-TABLES",
+      "manual": "1NSI",
+      "risk_score": 1675
+    },
+    {
+      "chapter": "TEXP-GRAPHES",
+      "manual": "TEXPERTES",
+      "risk_score": 1670
+    },
+    {
+      "chapter": "TSPE-PRIMITIVES-EQDIFF",
       "manual": "TSPE_2026_2027",
-      "risk_score": 1585
+      "risk_score": 1640
+    },
+    {
+      "chapter": "1NSI-PROJET-METHODES",
+      "manual": "1NSI",
+      "risk_score": 1610
     },
     {
       "chapter": "TSPE-CONTINUITE",
@@ -18249,9 +18396,9 @@
       "risk_score": 1460
     },
     {
-      "chapter": "TNSI-PROJET",
-      "manual": "TNSI",
-      "risk_score": 1420
+      "chapter": "TSPE-LOGARITHME",
+      "manual": "TSPE_2026_2027",
+      "risk_score": 1345
     },
     {
       "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
@@ -18259,14 +18406,24 @@
       "risk_score": 1285
     },
     {
+      "chapter": "TSPE-COMBINATOIRE",
+      "manual": "TSPE_2026_2027",
+      "risk_score": 1250
+    },
+    {
       "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
       "manual": "TNSI",
-      "risk_score": 1160
+      "risk_score": 840
     },
     {
       "chapter": "TSPE-TRIGONOMETRIE",
       "manual": "TSPE_2026_2027",
       "risk_score": 680
+    },
+    {
+      "chapter": "TNSI-PROJET",
+      "manual": "TNSI",
+      "risk_score": 460
     }
   ],
   "schema_version": 1
