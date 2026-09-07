@@ -52,7 +52,18 @@ from method_sheet_decisions import (  # noqa: E402
 
 OUTPUT_JSON = ROOT / "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json"
 OUTPUT_MD = ROOT / "audit/METHOD_SHEET_REQUIREMENT_AUDIT.md"
-CHAPTERS_DIR = Path("NSI/chapitres")
+
+#: Les chapitres ne vivent pas tous sous la même racine. La table de décision
+#: couvre désormais les six manuels ; le producteur doit donc résoudre le
+#: chapitre avant de le lire, et refuser s'il ne le trouve pas.
+CHAPTER_ROOTS = (Path("NSI/chapitres"), Path("Mathematiques/manuel-maths/chapitres"))
+
+
+def chapter_directory(chapter: str) -> Path:
+    for base in CHAPTER_ROOTS:
+        if (ROOT / base / chapter / "contrat.yaml").is_file():
+            return base / chapter
+    raise ValueError(f"chapitre introuvable: {chapter}")
 
 REQUIRED = "METHOD_SHEET_REQUIRED"
 ALREADY_EXISTS = "METHOD_ALREADY_EXISTS_NOT_ASSEMBLED"
@@ -123,9 +134,12 @@ def audit_chapter(root: Path, chapter_dir: Path) -> dict[str, Any]:
             "sheet_id": sheet_id,
             "titre": title,
             "covers": list(covers),
-            "path": f"{CHAPTERS_DIR}/{chapter}/methodes/{_object_id(chapter, sheet_id)}.tex",
+            "path": (
+                f"{chapter_directory(chapter).as_posix()}/methodes/"
+                f"{_object_id(chapter, sheet_id)}.tex"
+            ),
             "authored": (
-                root / CHAPTERS_DIR / chapter / "methodes"
+                root / chapter_directory(chapter) / "methodes"
                 / f"{_object_id(chapter, sheet_id)}.tex"
             ).is_file(),
         })
@@ -138,7 +152,24 @@ def audit_chapter(root: Path, chapter_dir: Path) -> dict[str, Any]:
         for p in (chapter_dir / "methodes").glob("*.tex")
     ) if (chapter_dir / "methodes").is_dir() else []
     planned_paths = {sheet["path"] for sheet in sheets}
-    filler = [path for path in existing if path not in planned_paths and planned]
+    # Une fiche est du remplissage si elle ne sert NI une capacite qui appelait
+    # une fiche, NI une capacite deja jugee couverte qui la nomme. La premiere
+    # version ne connaissait que le premier cas : elle suffisait a 1NSI, dont
+    # les chapitres a plan ne portaient encore aucune fiche. Elle aurait
+    # declare « remplissage » les deux fiches existantes de TSPE-INTEG, qui
+    # couvrent nommement C2 et C4.
+    couvrantes = {
+        capacity["covered_by"]
+        for capacity in capacities
+        if capacity["verdict"] == PROCEDURAL_COVERED and capacity["covered_by"]
+    }
+    filler = [
+        path for path in existing
+        if path not in planned_paths
+        and path not in couvrantes
+        and not any(path.startswith(f"{prefix.rstrip('/')}/") for prefix in couvrantes)
+        and planned
+    ]
 
     if not uncovered:
         verdict = (
@@ -166,8 +197,11 @@ def audit_chapter(root: Path, chapter_dir: Path) -> dict[str, Any]:
 def _object_id(chapter: str, sheet_id: str) -> str:
     """Identifiant d'objet, sur le modele du chapitre deja pourvu.
 
-    `1NSI-TYPES-CONSTRUITS` nomme ses fiches `1NSI-TC-M1`. Le prefixe court
-    est repris du prefixe des objets existants du chapitre.
+    `1NSI-TYPES-CONSTRUITS` nomme ses fiches `1NSI-TC-M1` ; les chapitres de
+    maths les nomment `TSPE-INTEG-ME-003`. Le prefixe court ET la forme du
+    suffixe sont donc repris de ce que le chapitre porte deja : la table des
+    fiches planifiees ecrit `M1` la ou le manuel ecrit `M1`, et `ME-003` la
+    ou il ecrit `ME-003`.
     """
     return f"{SHORT_PREFIX[chapter]}-{sheet_id}"
 
@@ -183,17 +217,29 @@ SHORT_PREFIX = {
     "1NSI-TYPES-BASE": "1NSI-TB",
     "1NSI-TYPES-CONSTRUITS": "1NSI-TC",
     "1NSI-WEB-IHM": "1NSI-WEB",
+    "TNSI-ALGORITHMIQUE": "TNSI-ALGO",
+    "TNSI-ARCHITECTURES-MATERIELLES-SY": "TNSI-ARCH",
+    "TNSI-BASES-DE-DONNEES": "TNSI-BDD",
+    "TNSI-HISTOIRE-INFORMATIQUE": "TNSI-HIST",
+    "TNSI-LANGAGES-ET-PROGRAMMATION": "TNSI-LANG",
+    "TNSI-STRUCTURES-DONNEES": "TNSI-STRUCT",
+    "1SPE-SECOND-DEGRE": "1SPE-SECDEG",
+    "TCOMPL-ECHANTILLONNAGE": "TCOMPL-ECH",
+    "TCOMPL-MODELES-EVOLUTION": "TCOMPL-ME",
+    "TCOMPL-TEMPS-ATTENTE": "TCOMPL-ATT",
+    "TSPE-CALCUL-INTEGRAL": "TSPE-INTEG",
+    "TSPE-COMBINATOIRE": "TSPE-COMBI",
+    "TSPE-LOGARITHME": "TSPE-LOG",
+    "TSPE-PRIMITIVES-EQDIFF": "TSPE-PRIMEQ",
+    "TSPE-PROBABILITES": "TSPE-PROBA",
 }
 
 
 def build(root: Path = ROOT) -> dict[str, Any]:
     chapters = []
     inputs: list[str] = []
-    for chapter_dir in sorted((root / CHAPTERS_DIR).iterdir()):
-        if not chapter_dir.name.startswith("1NSI-"):
-            continue
-        if not (chapter_dir / "contrat.yaml").is_file():
-            continue
+    for chapter in sorted(CAPACITY_VERDICTS):
+        chapter_dir = root / chapter_directory(chapter)
         chapters.append(audit_chapter(root, chapter_dir))
         inputs.append((chapter_dir / "contrat.yaml").relative_to(root).as_posix())
 
@@ -242,7 +288,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
 def render_markdown(payload: dict[str, Any]) -> str:
     s = payload["summary"]
     lines = [
-        "# Fiches méthode 1NSI : ce qui manque vraiment",
+        "# Fiches méthode : ce qui manque vraiment, capacité par capacité",
         "",
         f"- `METHOD_SHEET_REQUIRED` : `{s['METHOD_SHEET_REQUIRED']}`",
         f"- `METHOD_ALREADY_EXISTS_NOT_ASSEMBLED` : `{s['METHOD_ALREADY_EXISTS_NOT_ASSEMBLED']}`",

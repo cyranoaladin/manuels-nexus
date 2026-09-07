@@ -23,13 +23,13 @@
     "METHOD": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition."
   },
   "summary": {
-    "PEDAGOGICAL_ROLE_UNITS_TOTAL": 441,
-    "SATISFIED_BY_EXISTING_CONTENT": 1,
-    "SATISFIED_TRANSVERSALLY": 268,
+    "PEDAGOGICAL_ROLE_UNITS_TOTAL": 432,
+    "SATISFIED_BY_EXISTING_CONTENT": 39,
+    "SATISFIED_TRANSVERSALLY": 274,
     "BAD_MAPPING": 0,
-    "ROLE_NOT_APPLICABLE": 78,
-    "REAL_PEDAGOGICAL_GAP": 94,
-    "CATEGORIES_SUM": 441,
+    "ROLE_NOT_APPLICABLE": 95,
+    "REAL_PEDAGOGICAL_GAP": 24,
+    "CATEGORIES_SUM": 432,
     "NO_ITEM_LOST": true
   },
   "units": [
@@ -1321,9 +1321,9 @@
         "1SPE-SECDEG-ME-005",
         "1SPE-SECDEG-ME-006"
       ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours pose le théorème — les fonctions s'annulant en deux réels distincts sont exactement les $a(x-x_1)(x-x_2)$ — le démontre dans les deux sens, et le déroule sur un exemple chiffré. Une fiche recopierait ce passage.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -1425,9 +1425,9 @@
         "1SPE-SECDEG-ME-005",
         "1SPE-SECDEG-ME-006"
       ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Étudier le signe d'un trinôme DÉJÀ factorisé est l'étape 3 de la fiche M4, qui dresse le tableau de signes à partir des racines et de la règle du signe de $a$. Le cas factorisé est le même travail, sans le calcul du discriminant.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -1852,135 +1852,20 @@
       "MANUAL": "TCOMPL",
       "CHAPTER": "TCOMPL-ECHANTILLONNAGE",
       "CAPACITY": "C7",
-      "ROLE": "corriges",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [
-        "TCOMPL-ECH-CO-001",
-        "TCOMPL-ECH-CO-002",
-        "TCOMPL-ECH-CO-003",
-        "TCOMPL-ECH-CO-004",
-        "TCOMPL-ECH-CO-005",
-        "TCOMPL-ECH-CO-006",
-        "TCOMPL-ECH-CO-007",
-        "TCOMPL-ECH-CO-008",
-        "TCOMPL-ECH-CO-009",
-        "TCOMPL-ECH-CO-010",
-        "TCOMPL-ECH-CO-011",
-        "TCOMPL-ECH-CO-012",
-        "TCOMPL-ECH-CO-013",
-        "TCOMPL-ECH-CO-014",
-        "TCOMPL-ECH-CO-015",
-        "TCOMPL-ECH-CO-016",
-        "TCOMPL-ECH-CO-017",
-        "TCOMPL-ECH-CO-018",
-        "TCOMPL-ECH-CO-019",
-        "TCOMPL-ECH-CO-020",
-        "TCOMPL-ECH-CO-021",
-        "TCOMPL-ECH-CO-022",
-        "TCOMPL-ECH-CO-023",
-        "TCOMPL-ECH-CO-024",
-        "TCOMPL-ECH-CO-025",
-        "TCOMPL-ECH-CO-026",
-        "TCOMPL-ECH-CO-027",
-        "TCOMPL-ECH-CO-028",
-        "TCOMPL-ECH-CO-029",
-        "TCOMPL-ECH-CO-030",
-        "TCOMPL-ECH-CO-031",
-        "TCOMPL-ECH-CO-032",
-        "TCOMPL-ECH-CO-033",
-        "TCOMPL-ECH-CO-034",
-        "TCOMPL-ECH-CO-035",
-        "TCOMPL-ECH-CO-036"
-      ],
-      "REQUIREMENT_SOURCE": "décision humaine §5 CORRECTION",
-      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
-      "RATIONALE": "CORRECTION — exigée seulement lorsqu'il existe un exercice ou une évaluation nécessitant une correction. Pas de corrigé artificiel sans objet source.",
-      "capacity_covered_by_roles": [],
-      "canonical_capacity_uid": "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7"
-    },
-    {
-      "MANUAL": "TCOMPL",
-      "CHAPTER": "TCOMPL-ECHANTILLONNAGE",
-      "CAPACITY": "C7",
-      "ROLE": "cours",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [
-        "TCOMPL-ECH-COURS-07-FR",
-        "TCOMPL-ECH-COURS-07-TC",
-        "TCOMPL-ECH-CR-010",
-        "TCOMPL-ECH-CR-011",
-        "TCOMPL-ECH-CR-012"
-      ],
-      "REQUIREMENT_SOURCE": "ORPHAN_CAPACITY",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "COURSE — plusieurs capacités peuvent être enseignées dans un même objet de cours ; un fichier distinct par capacité n'est pas requis. Aucun objet du chapitre ne déclare cette capacité, tous rôles confondus : la transversalité couvre une déclaration incomplète, pas une absence de contenu. La capacité est au contrat et n'est enseignée nulle part.",
-      "capacity_covered_by_roles": [],
-      "canonical_capacity_uid": "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7"
-    },
-    {
-      "MANUAL": "TCOMPL",
-      "CHAPTER": "TCOMPL-ECHANTILLONNAGE",
-      "CAPACITY": "C7",
       "ROLE": "evaluations",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
         "TCOMPL-ECH-EV-A",
         "TCOMPL-ECH-EV-B"
       ],
-      "REQUIREMENT_SOURCE": "ORPHAN_CAPACITY",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "ASSESSMENT — l'évaluation peut être écrite, pratique, projet, QCM ou synthèse selon le contrat pédagogique ; pas nécessairement un objet séparé par capacité. Aucun objet du chapitre ne déclare cette capacité, tous rôles confondus : la transversalité couvre une déclaration incomplète, pas une absence de contenu. La capacité est au contrat et n'est enseignée nulle part.",
-      "capacity_covered_by_roles": [],
-      "canonical_capacity_uid": "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7"
-    },
-    {
-      "MANUAL": "TCOMPL",
-      "CHAPTER": "TCOMPL-ECHANTILLONNAGE",
-      "CAPACITY": "C7",
-      "ROLE": "exercices",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [
-        "TCOMPL-ECH-EX-001",
-        "TCOMPL-ECH-EX-002",
-        "TCOMPL-ECH-EX-003",
-        "TCOMPL-ECH-EX-004",
-        "TCOMPL-ECH-EX-005",
-        "TCOMPL-ECH-EX-006",
-        "TCOMPL-ECH-EX-007",
-        "TCOMPL-ECH-EX-008",
-        "TCOMPL-ECH-EX-009",
-        "TCOMPL-ECH-EX-010",
-        "TCOMPL-ECH-EX-011",
-        "TCOMPL-ECH-EX-012",
-        "TCOMPL-ECH-EX-013",
-        "TCOMPL-ECH-EX-014",
-        "TCOMPL-ECH-EX-015",
-        "TCOMPL-ECH-EX-016",
-        "TCOMPL-ECH-EX-017",
-        "TCOMPL-ECH-EX-018",
-        "TCOMPL-ECH-EX-019",
-        "TCOMPL-ECH-EX-020",
-        "TCOMPL-ECH-EX-021",
-        "TCOMPL-ECH-EX-022",
-        "TCOMPL-ECH-EX-023",
-        "TCOMPL-ECH-EX-024",
-        "TCOMPL-ECH-EX-025",
-        "TCOMPL-ECH-EX-026",
-        "TCOMPL-ECH-EX-027",
-        "TCOMPL-ECH-EX-028",
-        "TCOMPL-ECH-EX-029",
-        "TCOMPL-ECH-EX-030",
-        "TCOMPL-ECH-EX-031",
-        "TCOMPL-ECH-EX-032",
-        "TCOMPL-ECH-EX-033",
-        "TCOMPL-ECH-EX-034",
-        "TCOMPL-ECH-EX-035",
-        "TCOMPL-ECH-EX-036"
+      "REQUIREMENT_SOURCE": "décision humaine §5 EVALUATIONS",
+      "APPLICABILITY_VERDICT": "SATISFIED_TRANSVERSALLY",
+      "RATIONALE": "ASSESSMENT — l'évaluation peut être écrite, pratique, projet, QCM ou synthèse selon le contrat pédagogique ; pas nécessairement un objet séparé par capacité. Le chapitre porte 2 objet(s) de ce rôle.",
+      "capacity_covered_by_roles": [
+        "corriges",
+        "cours",
+        "exercices"
       ],
-      "REQUIREMENT_SOURCE": "ORPHAN_CAPACITY",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "EXERCISE — un même exercice peut travailler plusieurs capacités. Aucun objet du chapitre ne déclare cette capacité, tous rôles confondus : la transversalité couvre une déclaration incomplète, pas une absence de contenu. La capacité est au contrat et n'est enseignée nulle part.",
-      "capacity_covered_by_roles": [],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7"
     },
     {
@@ -1997,10 +1882,14 @@
         "TCOMPL-ECH-ME-005",
         "TCOMPL-ECH-ME-006"
       ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [],
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : La loi uniforme sur un ensemble fini tient en une définition et un calcul d'espérance, tous deux écrits dans le cours neuf avec leur démonstration par la somme des $n$ premiers entiers. Il n'y a pas de démarche transposable au-delà de ce calcul.",
+      "capacity_covered_by_roles": [
+        "corriges",
+        "cours",
+        "exercices"
+      ],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7"
     },
     {
@@ -2019,7 +1908,11 @@
       "REQUIREMENT_SOURCE": "audit/QCM_POLICY_ORIGIN.md",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "QCM — non obligatoire par capacité hors politique canonique explicite. La politique déposée (audit/QCM_POLICY_ORIGIN.md) fixe PEDAGOGICALLY_REQUIRED_QCM_GAPS = 0 et atteste une couverture d'auto-évaluation de 52/52 chapitres : le QCM diagnostique le chapitre, il n'atomise pas ses capacités.",
-      "capacity_covered_by_roles": [],
+      "capacity_covered_by_roles": [
+        "corriges",
+        "cours",
+        "exercices"
+      ],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7"
     },
     {
@@ -2031,10 +1924,14 @@
       "TRANSVERSAL_OBJECTS": [
         "TCOMPL-ECHANTILLONNAGE-RE-C3"
       ],
-      "REQUIREMENT_SOURCE": "ORPHAN_CAPACITY",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "REMEDIATION — une remédiation transversale peut couvrir plusieurs capacités. Aucun objet du chapitre ne déclare cette capacité, tous rôles confondus : la transversalité couvre une déclaration incomplète, pas une absence de contenu. La capacité est au contrat et n'est enseignée nulle part.",
-      "capacity_covered_by_roles": [],
+      "REQUIREMENT_SOURCE": "décision humaine §5 REMEDIATION",
+      "APPLICABILITY_VERDICT": "SATISFIED_TRANSVERSALLY",
+      "RATIONALE": "REMEDIATION — une remédiation transversale peut couvrir plusieurs capacités. Le chapitre porte 1 objet(s) de ce rôle.",
+      "capacity_covered_by_roles": [
+        "corriges",
+        "cours",
+        "exercices"
+      ],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7"
     },
     {
@@ -2465,121 +2362,20 @@
       "MANUAL": "TCOMPL",
       "CHAPTER": "TCOMPL-MODELES-EVOLUTION",
       "CAPACITY": "C6",
-      "ROLE": "corriges",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [
-        "TCOMPL-ME-CO-001",
-        "TCOMPL-ME-CO-002",
-        "TCOMPL-ME-CO-003",
-        "TCOMPL-ME-CO-004",
-        "TCOMPL-ME-CO-005",
-        "TCOMPL-ME-CO-006",
-        "TCOMPL-ME-CO-007",
-        "TCOMPL-ME-CO-008",
-        "TCOMPL-ME-CO-009",
-        "TCOMPL-ME-CO-010",
-        "TCOMPL-ME-CO-011",
-        "TCOMPL-ME-CO-012",
-        "TCOMPL-ME-CO-013",
-        "TCOMPL-ME-CO-014",
-        "TCOMPL-ME-CO-015",
-        "TCOMPL-ME-CO-016",
-        "TCOMPL-ME-CO-017",
-        "TCOMPL-ME-CO-018",
-        "TCOMPL-ME-CO-019",
-        "TCOMPL-ME-CO-020",
-        "TCOMPL-ME-CO-021",
-        "TCOMPL-ME-CO-022",
-        "TCOMPL-ME-CO-023",
-        "TCOMPL-ME-CO-024",
-        "TCOMPL-ME-CO-025",
-        "TCOMPL-ME-CO-026",
-        "TCOMPL-ME-CO-027",
-        "TCOMPL-ME-CO-028",
-        "TCOMPL-ME-CO-029",
-        "TCOMPL-ME-CO-030"
-      ],
-      "REQUIREMENT_SOURCE": "décision humaine §5 CORRECTION",
-      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
-      "RATIONALE": "CORRECTION — exigée seulement lorsqu'il existe un exercice ou une évaluation nécessitant une correction. Pas de corrigé artificiel sans objet source.",
-      "capacity_covered_by_roles": [],
-      "canonical_capacity_uid": "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6"
-    },
-    {
-      "MANUAL": "TCOMPL",
-      "CHAPTER": "TCOMPL-MODELES-EVOLUTION",
-      "CAPACITY": "C6",
-      "ROLE": "cours",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [
-        "TCOMPL-ME-CR-010",
-        "TCOMPL-ME-CR-011",
-        "TCOMPL-ME-CR-012"
-      ],
-      "REQUIREMENT_SOURCE": "ORPHAN_CAPACITY",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "COURSE — plusieurs capacités peuvent être enseignées dans un même objet de cours ; un fichier distinct par capacité n'est pas requis. Aucun objet du chapitre ne déclare cette capacité, tous rôles confondus : la transversalité couvre une déclaration incomplète, pas une absence de contenu. La capacité est au contrat et n'est enseignée nulle part.",
-      "capacity_covered_by_roles": [],
-      "canonical_capacity_uid": "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6"
-    },
-    {
-      "MANUAL": "TCOMPL",
-      "CHAPTER": "TCOMPL-MODELES-EVOLUTION",
-      "CAPACITY": "C6",
       "ROLE": "evaluations",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
         "TCOMPL-ME-EV-A",
         "TCOMPL-ME-EV-B"
       ],
-      "REQUIREMENT_SOURCE": "ORPHAN_CAPACITY",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "ASSESSMENT — l'évaluation peut être écrite, pratique, projet, QCM ou synthèse selon le contrat pédagogique ; pas nécessairement un objet séparé par capacité. Aucun objet du chapitre ne déclare cette capacité, tous rôles confondus : la transversalité couvre une déclaration incomplète, pas une absence de contenu. La capacité est au contrat et n'est enseignée nulle part.",
-      "capacity_covered_by_roles": [],
-      "canonical_capacity_uid": "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6"
-    },
-    {
-      "MANUAL": "TCOMPL",
-      "CHAPTER": "TCOMPL-MODELES-EVOLUTION",
-      "CAPACITY": "C6",
-      "ROLE": "exercices",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [
-        "TCOMPL-ME-EX-001",
-        "TCOMPL-ME-EX-002",
-        "TCOMPL-ME-EX-003",
-        "TCOMPL-ME-EX-004",
-        "TCOMPL-ME-EX-005",
-        "TCOMPL-ME-EX-006",
-        "TCOMPL-ME-EX-007",
-        "TCOMPL-ME-EX-008",
-        "TCOMPL-ME-EX-009",
-        "TCOMPL-ME-EX-010",
-        "TCOMPL-ME-EX-011",
-        "TCOMPL-ME-EX-012",
-        "TCOMPL-ME-EX-013",
-        "TCOMPL-ME-EX-014",
-        "TCOMPL-ME-EX-015",
-        "TCOMPL-ME-EX-016",
-        "TCOMPL-ME-EX-017",
-        "TCOMPL-ME-EX-018",
-        "TCOMPL-ME-EX-019",
-        "TCOMPL-ME-EX-020",
-        "TCOMPL-ME-EX-021",
-        "TCOMPL-ME-EX-022",
-        "TCOMPL-ME-EX-023",
-        "TCOMPL-ME-EX-024",
-        "TCOMPL-ME-EX-025",
-        "TCOMPL-ME-EX-026",
-        "TCOMPL-ME-EX-027",
-        "TCOMPL-ME-EX-028",
-        "TCOMPL-ME-EX-029",
-        "TCOMPL-ME-EX-030"
+      "REQUIREMENT_SOURCE": "décision humaine §5 EVALUATIONS",
+      "APPLICABILITY_VERDICT": "SATISFIED_TRANSVERSALLY",
+      "RATIONALE": "ASSESSMENT — l'évaluation peut être écrite, pratique, projet, QCM ou synthèse selon le contrat pédagogique ; pas nécessairement un objet séparé par capacité. Le chapitre porte 2 objet(s) de ce rôle.",
+      "capacity_covered_by_roles": [
+        "corriges",
+        "cours",
+        "exercices"
       ],
-      "REQUIREMENT_SOURCE": "ORPHAN_CAPACITY",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "EXERCISE — un même exercice peut travailler plusieurs capacités. Aucun objet du chapitre ne déclare cette capacité, tous rôles confondus : la transversalité couvre une déclaration incomplète, pas une absence de contenu. La capacité est au contrat et n'est enseignée nulle part.",
-      "capacity_covered_by_roles": [],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6"
     },
     {
@@ -2598,7 +2394,11 @@
       "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
       "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [],
+      "capacity_covered_by_roles": [
+        "corriges",
+        "cours",
+        "exercices"
+      ],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6"
     },
     {
@@ -2617,7 +2417,11 @@
       "REQUIREMENT_SOURCE": "audit/QCM_POLICY_ORIGIN.md",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "QCM — non obligatoire par capacité hors politique canonique explicite. La politique déposée (audit/QCM_POLICY_ORIGIN.md) fixe PEDAGOGICALLY_REQUIRED_QCM_GAPS = 0 et atteste une couverture d'auto-évaluation de 52/52 chapitres : le QCM diagnostique le chapitre, il n'atomise pas ses capacités.",
-      "capacity_covered_by_roles": [],
+      "capacity_covered_by_roles": [
+        "corriges",
+        "cours",
+        "exercices"
+      ],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6"
     },
     {
@@ -2629,10 +2433,14 @@
       "TRANSVERSAL_OBJECTS": [
         "TCOMPL-MODELES-EVOLUTION-RE-C5"
       ],
-      "REQUIREMENT_SOURCE": "ORPHAN_CAPACITY",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "REMEDIATION — une remédiation transversale peut couvrir plusieurs capacités. Aucun objet du chapitre ne déclare cette capacité, tous rôles confondus : la transversalité couvre une déclaration incomplète, pas une absence de contenu. La capacité est au contrat et n'est enseignée nulle part.",
-      "capacity_covered_by_roles": [],
+      "REQUIREMENT_SOURCE": "décision humaine §5 REMEDIATION",
+      "APPLICABILITY_VERDICT": "SATISFIED_TRANSVERSALLY",
+      "RATIONALE": "REMEDIATION — une remédiation transversale peut couvrir plusieurs capacités. Le chapitre porte 1 objet(s) de ce rôle.",
+      "capacity_covered_by_roles": [
+        "corriges",
+        "cours",
+        "exercices"
+      ],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6"
     },
     {
@@ -3034,134 +2842,20 @@
       "MANUAL": "TCOMPL",
       "CHAPTER": "TCOMPL-TEMPS-ATTENTE",
       "CAPACITY": "C7",
-      "ROLE": "corriges",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [
-        "TCOMPL-ATT-CO-001",
-        "TCOMPL-ATT-CO-002",
-        "TCOMPL-ATT-CO-003",
-        "TCOMPL-ATT-CO-004",
-        "TCOMPL-ATT-CO-005",
-        "TCOMPL-ATT-CO-006",
-        "TCOMPL-ATT-CO-007",
-        "TCOMPL-ATT-CO-008",
-        "TCOMPL-ATT-CO-009",
-        "TCOMPL-ATT-CO-010",
-        "TCOMPL-ATT-CO-011",
-        "TCOMPL-ATT-CO-012",
-        "TCOMPL-ATT-CO-013",
-        "TCOMPL-ATT-CO-014",
-        "TCOMPL-ATT-CO-015",
-        "TCOMPL-ATT-CO-016",
-        "TCOMPL-ATT-CO-017",
-        "TCOMPL-ATT-CO-018",
-        "TCOMPL-ATT-CO-019",
-        "TCOMPL-ATT-CO-020",
-        "TCOMPL-ATT-CO-021",
-        "TCOMPL-ATT-CO-022",
-        "TCOMPL-ATT-CO-023",
-        "TCOMPL-ATT-CO-024",
-        "TCOMPL-ATT-CO-025",
-        "TCOMPL-ATT-CO-026",
-        "TCOMPL-ATT-CO-027",
-        "TCOMPL-ATT-CO-028",
-        "TCOMPL-ATT-CO-029",
-        "TCOMPL-ATT-CO-030",
-        "TCOMPL-ATT-CO-031",
-        "TCOMPL-ATT-CO-032",
-        "TCOMPL-ATT-CO-033",
-        "TCOMPL-ATT-CO-034",
-        "TCOMPL-ATT-CO-035",
-        "TCOMPL-ATT-CO-036"
-      ],
-      "REQUIREMENT_SOURCE": "décision humaine §5 CORRECTION",
-      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
-      "RATIONALE": "CORRECTION — exigée seulement lorsqu'il existe un exercice ou une évaluation nécessitant une correction. Pas de corrigé artificiel sans objet source.",
-      "capacity_covered_by_roles": [],
-      "canonical_capacity_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7"
-    },
-    {
-      "MANUAL": "TCOMPL",
-      "CHAPTER": "TCOMPL-TEMPS-ATTENTE",
-      "CAPACITY": "C7",
-      "ROLE": "cours",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [
-        "TCOMPL-ATT-COURS-07-FR",
-        "TCOMPL-ATT-COURS-07-TC",
-        "TCOMPL-ATT-CR-010",
-        "TCOMPL-ATT-CR-011"
-      ],
-      "REQUIREMENT_SOURCE": "ORPHAN_CAPACITY",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "COURSE — plusieurs capacités peuvent être enseignées dans un même objet de cours ; un fichier distinct par capacité n'est pas requis. Aucun objet du chapitre ne déclare cette capacité, tous rôles confondus : la transversalité couvre une déclaration incomplète, pas une absence de contenu. La capacité est au contrat et n'est enseignée nulle part.",
-      "capacity_covered_by_roles": [],
-      "canonical_capacity_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7"
-    },
-    {
-      "MANUAL": "TCOMPL",
-      "CHAPTER": "TCOMPL-TEMPS-ATTENTE",
-      "CAPACITY": "C7",
       "ROLE": "evaluations",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
         "TCOMPL-ATT-EV-A",
         "TCOMPL-ATT-EV-B"
       ],
-      "REQUIREMENT_SOURCE": "ORPHAN_CAPACITY",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "ASSESSMENT — l'évaluation peut être écrite, pratique, projet, QCM ou synthèse selon le contrat pédagogique ; pas nécessairement un objet séparé par capacité. Aucun objet du chapitre ne déclare cette capacité, tous rôles confondus : la transversalité couvre une déclaration incomplète, pas une absence de contenu. La capacité est au contrat et n'est enseignée nulle part.",
-      "capacity_covered_by_roles": [],
-      "canonical_capacity_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7"
-    },
-    {
-      "MANUAL": "TCOMPL",
-      "CHAPTER": "TCOMPL-TEMPS-ATTENTE",
-      "CAPACITY": "C7",
-      "ROLE": "exercices",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [
-        "TCOMPL-ATT-EX-001",
-        "TCOMPL-ATT-EX-002",
-        "TCOMPL-ATT-EX-003",
-        "TCOMPL-ATT-EX-004",
-        "TCOMPL-ATT-EX-005",
-        "TCOMPL-ATT-EX-006",
-        "TCOMPL-ATT-EX-007",
-        "TCOMPL-ATT-EX-008",
-        "TCOMPL-ATT-EX-009",
-        "TCOMPL-ATT-EX-010",
-        "TCOMPL-ATT-EX-011",
-        "TCOMPL-ATT-EX-012",
-        "TCOMPL-ATT-EX-013",
-        "TCOMPL-ATT-EX-014",
-        "TCOMPL-ATT-EX-015",
-        "TCOMPL-ATT-EX-016",
-        "TCOMPL-ATT-EX-017",
-        "TCOMPL-ATT-EX-018",
-        "TCOMPL-ATT-EX-019",
-        "TCOMPL-ATT-EX-020",
-        "TCOMPL-ATT-EX-021",
-        "TCOMPL-ATT-EX-022",
-        "TCOMPL-ATT-EX-023",
-        "TCOMPL-ATT-EX-024",
-        "TCOMPL-ATT-EX-025",
-        "TCOMPL-ATT-EX-026",
-        "TCOMPL-ATT-EX-027",
-        "TCOMPL-ATT-EX-028",
-        "TCOMPL-ATT-EX-029",
-        "TCOMPL-ATT-EX-030",
-        "TCOMPL-ATT-EX-031",
-        "TCOMPL-ATT-EX-032",
-        "TCOMPL-ATT-EX-033",
-        "TCOMPL-ATT-EX-034",
-        "TCOMPL-ATT-EX-035",
-        "TCOMPL-ATT-EX-036"
+      "REQUIREMENT_SOURCE": "décision humaine §5 EVALUATIONS",
+      "APPLICABILITY_VERDICT": "SATISFIED_TRANSVERSALLY",
+      "RATIONALE": "ASSESSMENT — l'évaluation peut être écrite, pratique, projet, QCM ou synthèse selon le contrat pédagogique ; pas nécessairement un objet séparé par capacité. Le chapitre porte 2 objet(s) de ce rôle.",
+      "capacity_covered_by_roles": [
+        "corriges",
+        "cours",
+        "exercices"
       ],
-      "REQUIREMENT_SOURCE": "ORPHAN_CAPACITY",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "EXERCISE — un même exercice peut travailler plusieurs capacités. Aucun objet du chapitre ne déclare cette capacité, tous rôles confondus : la transversalité couvre une déclaration incomplète, pas une absence de contenu. La capacité est au contrat et n'est enseignée nulle part.",
-      "capacity_covered_by_roles": [],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7"
     },
     {
@@ -3181,7 +2875,11 @@
       "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
       "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [],
+      "capacity_covered_by_roles": [
+        "corriges",
+        "cours",
+        "exercices"
+      ],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7"
     },
     {
@@ -3200,7 +2898,11 @@
       "REQUIREMENT_SOURCE": "audit/QCM_POLICY_ORIGIN.md",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "QCM — non obligatoire par capacité hors politique canonique explicite. La politique déposée (audit/QCM_POLICY_ORIGIN.md) fixe PEDAGOGICALLY_REQUIRED_QCM_GAPS = 0 et atteste une couverture d'auto-évaluation de 52/52 chapitres : le QCM diagnostique le chapitre, il n'atomise pas ses capacités.",
-      "capacity_covered_by_roles": [],
+      "capacity_covered_by_roles": [
+        "corriges",
+        "cours",
+        "exercices"
+      ],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7"
     },
     {
@@ -3212,10 +2914,14 @@
       "TRANSVERSAL_OBJECTS": [
         "TCOMPL-TEMPS-ATTENTE-RE-C5"
       ],
-      "REQUIREMENT_SOURCE": "ORPHAN_CAPACITY",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "REMEDIATION — une remédiation transversale peut couvrir plusieurs capacités. Aucun objet du chapitre ne déclare cette capacité, tous rôles confondus : la transversalité couvre une déclaration incomplète, pas une absence de contenu. La capacité est au contrat et n'est enseignée nulle part.",
-      "capacity_covered_by_roles": [],
+      "REQUIREMENT_SOURCE": "décision humaine §5 REMEDIATION",
+      "APPLICABILITY_VERDICT": "SATISFIED_TRANSVERSALLY",
+      "RATIONALE": "REMEDIATION — une remédiation transversale peut couvrir plusieurs capacités. Le chapitre porte 1 objet(s) de ce rôle.",
+      "capacity_covered_by_roles": [
+        "corriges",
+        "cours",
+        "exercices"
+      ],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7"
     },
     {
@@ -4281,9 +3987,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours enonce le schema recursif lui-meme — cas de base l'arbre vide, cas general combinant les deux sous-arbres — puis le deroule sur la taille. La demarche est ecrite, pas seulement son resultat.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -4342,9 +4048,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : La definition EST la demarche : memoriser le predecesseur de chaque sommet atteint, puis remonter la chaine depuis l'arrivee, en traitant explicitement l'absence de chemin.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -4524,9 +4230,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : La capacite demande d'EXPLIQUER le principe de Boyer-Moore, pas de le derouler ni de l'ecrire. Le cours expose la comparaison de droite a gauche et la regle du mauvais caractere : c'est un savoir a enoncer.",
       "capacity_covered_by_roles": [
         "cours",
         "qcm"
@@ -4604,9 +4310,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Meme schema recursif, ecrit dans le meme appui de marge et applique a la hauteur avec sa convention $-1$ pour l'arbre vide.",
       "capacity_covered_by_roles": [
         "cours",
         "evaluations",
@@ -4796,9 +4502,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours ecrit la descente comparaison par comparaison, et son cout en fonction de la hauteur. Rien a formaliser de plus.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -4836,9 +4542,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : L'insertion est enoncee comme une procedure — descendre comme pour une recherche jusqu'a un sous-arbre vide, y placer une feuille — avec le piege de la reaffectation nomme.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -5059,9 +4765,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le critere est ecrit exactement : un sommet deja visite qui n'est pas le parent direct. Le cours nomme aussi le faux positif — revenir sur ses pas n'est pas un cycle.",
       "capacity_covered_by_roles": [
         "cours",
         "evaluations",
@@ -5139,9 +4845,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Identifier les composants d'un systeme sur puce et les avantages de l'integration est un savoir a enoncer.",
       "capacity_covered_by_roles": [
         "cours",
         "evaluations",
@@ -5219,9 +4925,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Decrire la creation d'un processus — allouer, charger, inscrire, puis `fork` et `exec` — est un savoir a restituer.",
       "capacity_covered_by_roles": [
         "cours",
         "evaluations",
@@ -5275,9 +4981,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : La demarche est ecrite comme propriete : construire le graphe d'attente — chaque processus pointe vers la ressource attendue, chaque ressource vers le processus qui la retient — et y chercher un cycle.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -5355,9 +5061,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Decrire les deux familles de chiffrement, leurs cles et leurs couts, est un savoir a enoncer.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -5439,9 +5145,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Decrire l'echange d'une cle symetrique par un protocole asymetrique est un savoir a restituer ; le cours precise que le detail de TLS n'est pas exigible.",
       "capacity_covered_by_roles": [
         "cours",
         "evaluations",
@@ -5475,9 +5181,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Nommer relation, attribut, domaine, schema, cle primaire et cle etrangere est un savoir de vocabulaire.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -5515,9 +5221,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : INSERT INTO ... VALUES est une syntaxe, donnee avec son exemple.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -5555,9 +5261,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours donne la syntaxe d'UPDATE et, surtout, la precaution qui en fait une demarche : executer d'abord le SELECT portant la meme clause WHERE pour voir quels tuples seront touches.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -5595,9 +5301,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Meme chose pour DELETE, avec l'avertissement sur l'absence de WHERE ecrit noir sur blanc.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -5676,9 +5382,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Distinguer la structure, stable, du contenu, qui evolue, est un savoir enonce comme propriete dans le cours.",
       "capacity_covered_by_roles": [
         "cours",
         "qcm"
@@ -5813,9 +5519,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Enumerer les quatre services d'un SGBD — persistance, concurrence, efficacite, securisation — est un savoir a enoncer.",
       "capacity_covered_by_roles": [
         "cours",
         "evaluations",
@@ -5910,9 +5616,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Identifier les clauses d'une requete est de la reconnaissance : SELECT, FROM, WHERE sont nommees et definies.",
       "capacity_covered_by_roles": [
         "cours",
         "qcm"
@@ -6104,9 +5810,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Situer les evenements de l'histoire de l'informatique est un savoir de reperes chronologiques.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -6147,9 +5853,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Identifier l'evolution des roles du logiciel et du materiel est une lecture historique, pas une demarche a executer.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -6234,9 +5940,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Comprendre qu'un programme est une donnee est une idee a enoncer, illustree par l'interpreteur du cours.",
       "capacity_covered_by_roles": [
         "cours",
         "evaluations",
@@ -6291,9 +5997,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : La propriete « Choisir un paradigme selon le contexte » est une regle de decision ecrite, suivie de l'avertissement qu'un projet reel les combine.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -6329,9 +6035,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Identifier les causes typiques de bugs est de la reconnaissance : le cours enumere les quatre familles — flottants, effets de bord, inegalites, nommage — chacune avec son exemple.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -6410,9 +6116,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : L'independance de la calculabilite vis-a-vis du langage est enoncee comme propriete.",
       "capacity_covered_by_roles": [
         "cours",
         "qcm"
@@ -6488,9 +6194,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Expliquer l'indecidabilite de l'arret sans formalisme est un raisonnement a restituer ; l'argument par le programme paradoxal est ecrit en entier.",
       "capacity_covered_by_roles": [
         "cours",
         "evaluations",
@@ -6625,9 +6331,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours importe une bibliotheque standard et appelle trois de ses fonctions : l'usage est montre.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -6684,9 +6390,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : La propriete « Exploiter la documentation » EST la demarche : nom et ordre des parametres, types attendus, valeur renvoyee, exemples, et `help` pour l'obtenir.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -6766,9 +6472,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours ecrit un module complet avec ses docstrings et enonce la regle qui les gouverne : documenter ce que fait la fonction, pas comment elle le fait.",
       "capacity_covered_by_roles": [
         "cours",
         "evaluations",
@@ -6802,9 +6508,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Distinguer les trois paradigmes sur des exemples est une reconnaissance ; le cours donne le meme calcul ecrit trois fois.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -7138,9 +6844,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Taille, hauteur et nombre de feuilles sont calcules dans le cours, en code puis a la main sur un arbre nomme, avec les trois valeurs justifiees.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -7256,9 +6962,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : La regle de remplissage est ecrite — la case $(i,j)$ vaut 1 s'il existe une arete de $i$ vers $j$ — et appliquee sur un graphe nomme.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -7317,9 +7023,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours donne la representation par listes de successeurs du meme graphe, et nomme le piege du sommet sans successeur qui doit rester present avec une liste vide.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -7456,9 +7162,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Distinguer interface et implementation est un savoir a enoncer ; il n'y a pas de resultat a construire.",
       "capacity_covered_by_roles": [
         "cours",
         "qcm"
@@ -7551,9 +7257,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours ecrit DEUX implementations completes de la meme pile — par liste Python et par liste chainee — et enonce la discipline qui les relie : tester le comportement observable, pas les details internes.",
       "capacity_covered_by_roles": [
         "cours",
         "qcm"
@@ -7585,9 +7291,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Ecrire une classe est une syntaxe, pas une demarche : le cours en donne le modele complet (constructeur, attributs, methodes) et nomme le piege de `self`. Une fiche recopierait le squelette.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -7625,9 +7331,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : L'acces `objet.attribut` et l'appel `objet.methode(...)` sont montres sur l'exemple file, avec le vocabulaire attribut/methode/instance pose a cote.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -7665,9 +7371,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Distinguer FIFO et LIFO par le jeu des methodes est un savoir de reconnaissance.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -7706,9 +7412,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : La regle de decision est ecrite comme telle : identifier les operations dominantes de la situation, puis lire la correspondance operation -> structure que le cours dresse.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -7805,9 +7511,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Comparer la recherche dans une liste et dans un dictionnaire est un savoir de cout, enonce en marge du cours.",
       "capacity_covered_by_roles": [
         "cours",
         "qcm"
@@ -7860,9 +7566,9 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Identifier une situation arborescente est une reconnaissance : hierarchie, ou processus recursif par nature.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -8141,9 +7847,9 @@
         "TSPE-INTEG-ME-001",
         "TSPE-INTEG-ME-002"
       ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours interprète l'intégrale d'une vitesse en distance et la valeur moyenne en vitesse moyenne, puis généralise en marge : débit vers volume, puissance vers énergie, densité vers masse. L'interprétation est un savoir, pas un calcul à conduire.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -8224,9 +7930,9 @@
         "TSPE-INTEG-ME-001",
         "TSPE-INTEG-ME-002"
       ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Démonstration exigible, écrite en entier dans le cours.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -8287,9 +7993,9 @@
         "TSPE-INTEG-ME-001",
         "TSPE-INTEG-ME-002"
       ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Démonstration exigible de la formule d'intégration par parties, écrite en entier dans le cours.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -8376,9 +8082,9 @@
       "TRANSVERSAL_OBJECTS": [
         "TSPE-COMBI-ME-001"
       ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Démonstration exigible. Le cours compte les parties d'un ensemble de deux façons, nomme la technique — preuve par double dénombrement — et avertit contre le réflexe de calculer chaque coefficient.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -8418,9 +8124,9 @@
       "TRANSVERSAL_OBJECTS": [
         "TSPE-COMBI-ME-001"
       ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Démonstration exigible, écrite DEUX fois dans le cours comme le programme le demande : par le calcul factoriel, puis par le dénombrement selon l'appartenance d'un élément fixé.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -8691,9 +8397,9 @@
         "TSPE-LOG-ME-001",
         "TSPE-LOG-ME-002"
       ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Résoudre un problème contextuel revient à isoler le terme exponentiel puis à appliquer $\\ln$ — la démarche que la fiche M1 pose en cinq étapes, domaine compris. Le cours l'applique à la demi-vie et au seuil de 10 %.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -8781,9 +8487,9 @@
         "TSPE-PRIMEQ-ME-001",
         "TSPE-PRIMEQ-ME-002"
       ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Démonstration exigible : le cours pose $g = G - F$, montre $g' = 0$, invoque la propriété admise et traite la réciproque. Il avertit même que le résultat suppose un intervalle.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -8825,9 +8531,9 @@
         "TSPE-PRIMEQ-ME-001",
         "TSPE-PRIMEQ-ME-002"
       ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Démonstration exigible de la résolution complète de $y'=ay$, écrite dans les deux sens, avec la technique — multiplier par $\\mathrm{e}^{-ax}$ — nommée en marge comme transposable à $y'=ay+b$.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -8933,9 +8639,9 @@
       "TRANSVERSAL_OBJECTS": [
         "TSPE-PROBA-ME-001"
       ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours applique Bienaymé-Tchebychev à l'échantillonnage, majore $p(1-p)$ par $1/4$ pour s'affranchir d'un $p$ inconnu, et déroule le calcul complet d'une taille d'échantillon jusqu'au nombre.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -9111,9 +8817,9 @@
       "TRANSVERSAL_OBJECTS": [
         "TSPE-PROBA-ME-001"
       ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Démonstration exigible de $P(X=k)$ dans le schéma de Bernoulli, écrite dans le cours.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -9173,9 +8879,9 @@
       "TRANSVERSAL_OBJECTS": [
         "TSPE-PROBA-ME-001"
       ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours écrit la décomposition en somme de variables de Bernoulli comme propriété, puis la déroule sur trois dés : décomposer, calculer chaque espérance, sommer.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -9256,9 +8962,9 @@
       "TRANSVERSAL_OBJECTS": [
         "TSPE-PROBA-ME-001"
       ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Même passage : la linéarité est appliquée pas à pas sur l'exemple, avec l'avertissement qu'elle ne demande aucune indépendance.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -9296,9 +9002,9 @@
       "TRANSVERSAL_OBJECTS": [
         "TSPE-PROBA-ME-001"
       ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours donne l'additivité, la variance d'une Bernoulli, un exemple chiffré, et le contre-exemple $X$ et $-X$ qui montre pourquoi l'indépendance est requise.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -9338,9 +9044,9 @@
       "TRANSVERSAL_OBJECTS": [
         "TSPE-PROBA-ME-001"
       ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
+      "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
+      "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
+      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Démonstration exigible des formules de l'espérance et de la variance de la loi binomiale, écrite dans le cours.",
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
@@ -9425,12 +9131,12 @@
     }
   ],
   "freshness": {
-    "EVIDENCE_HEAD": "611443f03f0b13e080ba96b55d76f5fe454af559",
+    "EVIDENCE_HEAD": "7138137233b2bd761f58dd52774c5ae9086daf65",
     "INPUT_PATHS": [
       "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "audit/QCM_POLICY_ORIGIN.md",
       "audit/TRUE_PEDAGOGICAL_COVERAGE.json"
     ],
-    "INPUT_DIGEST": "sha256:d26ba8e90eea4533318d2d8e5eeed3f2e83632d28215d2d49df81ddc7320f3ba"
+    "INPUT_DIGEST": "sha256:9f8490de449dca6fba65e728cb781d60abf9741f7c8180226ee916d4a0b10a88"
   }
 }

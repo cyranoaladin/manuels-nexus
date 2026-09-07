@@ -34,10 +34,19 @@ def payload():
     return json.loads(ARTIFACT.read_text(encoding="utf-8"))
 
 
+def test_the_audit_covers_every_chapter_that_owes_a_method(payload) -> None:
+    """Vingt-cinq chapitres, pas dix : les cinq autres manuels sont jugés."""
+    juges = {row["chapter"] for row in payload["chapters"]}
+    assert juges == set(decisions.CAPACITY_VERDICTS)
+    assert len(juges) == 25
+    manuels = {c.split("-")[0] for c in juges}
+    assert manuels == {"1NSI", "TNSI", "1SPE", "TCOMPL", "TSPE"}
+
+
 def test_every_declared_capacity_has_a_verdict(payload) -> None:
     for row in payload["chapters"]:
         contract = yaml.safe_load(
-            (ROOT / "NSI/chapitres" / row["chapter"] / "contrat.yaml")
+            (ROOT / audit.chapter_directory(row["chapter"]) / "contrat.yaml")
             .read_text(encoding="utf-8")
         )
         declared = {c["code"] for c in contract["capacites"]}

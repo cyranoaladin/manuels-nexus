@@ -152,7 +152,9 @@ def test_a_capacity_taught_nowhere_is_not_covered_transversally(payload) -> None
     orphelines = [
         u for u in payload["units"] if not u["capacity_covered_by_roles"]
     ]
-    assert orphelines, "la règle doit porter sur des cellules réelles"
+    # La règle se retire d'elle-même : depuis que les trois capacités TCOMPL
+    # sont enseignées, plus aucune cellule n'est orpheline. Le test vérifie
+    # donc l'invariant, pas la présence d'une population.
     for unit in orphelines:
         assert unit["APPLICABILITY_VERDICT"] != "SATISFIED_TRANSVERSALLY", unit
         if unit["ROLE"] in {"cours", "exercices", "evaluations", "remediation"}:

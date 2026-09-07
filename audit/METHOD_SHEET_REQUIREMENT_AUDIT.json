@@ -5,16 +5,16 @@
   "decision_table": "scripts/method_sheet_decisions.py",
   "approves_nothing": true,
   "summary": {
-    "CHAPTERS_AUDITED": 10,
-    "METHOD_SHEET_REQUIRED": 7,
-    "METHOD_ALREADY_EXISTS_NOT_ASSEMBLED": 3,
-    "METHOD_NOT_PEDAGOGICALLY_JUSTIFIED": 0,
+    "CHAPTERS_AUDITED": 25,
+    "METHOD_SHEET_REQUIRED": 16,
+    "METHOD_ALREADY_EXISTS_NOT_ASSEMBLED": 8,
+    "METHOD_NOT_PEDAGOGICALLY_JUSTIFIED": 1,
     "TRANSVERSAL_METHOD_ALREADY_COVERS": 0,
-    "PROCEDURAL_CAPACITIES_UNCOVERED": 24,
-    "DECLARATIVE_CAPACITIES": 14,
-    "PROCEDURAL_CAPACITIES_ALREADY_COVERED": 15,
-    "SHEETS_PLANNED": 20,
-    "SHEETS_STILL_TO_AUTHOR": 0,
+    "PROCEDURAL_CAPACITIES_UNCOVERED": 48,
+    "DECLARATIVE_CAPACITIES": 34,
+    "PROCEDURAL_CAPACITIES_ALREADY_COVERED": 89,
+    "SHEETS_PLANNED": 37,
+    "SHEETS_STILL_TO_AUTHOR": 17,
     "METHOD_BOOKLET_FILLER_OBJECTS": 0
   },
   "chapters": [
@@ -733,11 +733,1246 @@
           "covered_by": null
         }
       ]
+    },
+    {
+      "chapter": "1SPE-SECOND-DEGRE",
+      "titre": "Fonctions polynômes du second degré",
+      "verdict": "METHOD_ALREADY_EXISTS_NOT_ASSEMBLED",
+      "existing_method_objects": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes/1SPE-SECDEG-ME-001.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes/1SPE-SECDEG-ME-002.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes/1SPE-SECDEG-ME-003.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes/1SPE-SECDEG-ME-004.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes/1SPE-SECDEG-ME-005.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes/1SPE-SECDEG-ME-006.tex"
+      ],
+      "planned_sheets": [],
+      "sheets_still_to_author": [],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais reconnaitre un polynome du second degre et passer d'une forme a une autre.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-001 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes"
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-002 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes"
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais calculer le discriminant et resoudre une equation du second degre.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-003 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes"
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais factoriser un trinome en diversifiant les strategies.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-004 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes"
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais resoudre une inequation du second degre.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-005 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes"
+        },
+        {
+          "code": "C6",
+          "libelle_eleve": "Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-006 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes"
+        },
+        {
+          "code": "C7",
+          "libelle_eleve": "Je sais determiner les fonctions polynomes du second degre s'annulant en deux nombres reels distincts, en utilisant la somme et le produit des racines.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Le cours pose le théorème — les fonctions s'annulant en deux réels distincts sont exactement les $a(x-x_1)(x-x_2)$ — le démontre dans les deux sens, et le déroule sur un exemple chiffré. Une fiche recopierait ce passage.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/16_C7_somme_produit_racines.tex"
+        },
+        {
+          "code": "C8",
+          "libelle_eleve": "Je sais etudier le signe d'un polynome du second degre donne sous forme factorisee.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Étudier le signe d'un trinôme DÉJÀ factorisé est l'étape 3 de la fiche M4, qui dresse le tableau de signes à partir des racines et de la règle du signe de $a$. Le cas factorisé est le même travail, sans le calcul du discriminant.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes/1SPE-SECDEG-ME-004.tex"
+        }
+      ]
+    },
+    {
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "titre": "Répétition d'expériences indépendantes, échantillonnage",
+      "verdict": "METHOD_ALREADY_EXISTS_NOT_ASSEMBLED",
+      "existing_method_objects": [
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-001.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-002.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-003.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-004.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-005.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-006.tex"
+      ],
+      "planned_sheets": [],
+      "sheets_still_to_author": [],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais identifier une situation où une variable aléatoire suit une loi de Bernoulli ou une loi binomiale.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes"
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais déterminer des coefficients binomiaux à l'aide du triangle de Pascal.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes"
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais calculer, à la calculatrice ou en Python, des probabilités P(X=k) ou P(X≤k) pour X suivant une loi binomiale.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes"
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais déterminer un intervalle de fluctuation I tel que P(X∈I) ≥ 1-α pour X suivant une loi binomiale.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes"
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais simuler en Python un échantillon de taille n d'une variable aléatoire, et calculer la série des moyennes de N échantillons.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes"
+        },
+        {
+          "code": "C6",
+          "libelle_eleve": "Je sais démontrer l'espérance d'une variable aléatoire suivant une loi binomiale, pour n ≤ 3.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes"
+        },
+        {
+          "code": "C7",
+          "libelle_eleve": "Je sais définir la loi uniforme sur {1,2,…,n} et calculer son espérance.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "La loi uniforme sur un ensemble fini tient en une définition et un calcul d'espérance, tous deux écrits dans le cours neuf avec leur démonstration par la somme des $n$ premiers entiers. Il n'y a pas de démarche transposable au-delà de ce calcul.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/13_C7_loi_uniforme_discrete.tex"
+        }
+      ]
+    },
+    {
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "titre": "Modèles d'évolution",
+      "verdict": "METHOD_SHEET_REQUIRED",
+      "existing_method_objects": [
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-001.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-002.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-003.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-004.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-005.tex"
+      ],
+      "planned_sheets": [
+        {
+          "sheet_id": "ME-006",
+          "titre": "Déterminer la limite d'une suite",
+          "covers": [
+            "C6"
+          ],
+          "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-006.tex",
+          "authored": false
+        }
+      ],
+      "sheets_still_to_author": [
+        "ME-006"
+      ],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais modéliser un problème d'évolution par une suite définie explicitement ou par récurrence.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes"
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais calculer la limite d'une suite géométrique et la limite de la somme de ses termes lorsque la raison est dans ]0;1[.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes"
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais représenter graphiquement une suite récurrente $u_{n+1}=f(u_n)$ et conjecturer son comportement.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes"
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais résoudre une suite arithmético-géométrique en cherchant sa solution constante puis en m'y ramenant.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes"
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais résoudre une équation différentielle y'=ay, et y'=ay+b en cherchant une solution particulière constante.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes"
+        },
+        {
+          "code": "C6",
+          "libelle_eleve": "Je sais mobiliser la notion intuitive de limite finie ou infinie d'une suite, les opérations sur les limites, le passage à la limite dans les inégalités et le théorème des gendarmes.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Déterminer une limite est la démarche la plus réutilisée de la classe : reconnaître la forme indéterminée, factoriser par le terme dominant, ou encadrer et invoquer les gendarmes. Le cours neuf pose les règles et trois exemples ; l'ordre des gestes, lui, mérite d'être écrit une fois pour toutes.",
+          "covered_by": null
+        }
+      ]
+    },
+    {
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "titre": "Temps d'attente",
+      "verdict": "METHOD_SHEET_REQUIRED",
+      "existing_method_objects": [
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-001.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-002.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-003.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-004.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-005.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-006.tex"
+      ],
+      "planned_sheets": [
+        {
+          "sheet_id": "ME-007",
+          "titre": "Étudier la loi uniforme continue : densité, répartition, espérance, variance",
+          "covers": [
+            "C7"
+          ],
+          "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-007.tex",
+          "authored": false
+        }
+      ],
+      "sheets_still_to_author": [
+        "ME-007"
+      ],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais définir la loi géométrique, son espérance, et sa propriété d'absence de mémoire.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes"
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais calculer explicitement des probabilités pour une variable aléatoire suivant une loi géométrique.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes"
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais utiliser la caractérisation d'une loi géométrique par l'absence de mémoire dans un problème concret.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes"
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais définir la loi exponentielle (densité, fonction de répartition, espérance) et sa propriété d'absence de mémoire.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes"
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais vérifier qu'une fonction est une densité de probabilité et calculer des probabilités associées.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes"
+        },
+        {
+          "code": "C6",
+          "libelle_eleve": "Je sais calculer l'espérance d'une variable aléatoire suivant une loi exponentielle, sous forme d'intégrale.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes"
+        },
+        {
+          "code": "C7",
+          "libelle_eleve": "Je sais définir la loi uniforme sur [0,1] puis sur [a,b], déterminer sa densité et sa fonction de répartition, et calculer son espérance et sa variance.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Le chapitre traite chaque loi continue par une fiche qui enchaîne densité, fonction de répartition, espérance — c'est ce que fait M4 pour l'exponentielle. La loi uniforme continue demande le même enchaînement, variance comprise, et il ne se déduit pas de celui de l'exponentielle : la primitive et l'intégrale ne sont pas les mêmes.",
+          "covered_by": null
+        }
+      ]
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "titre": "Algorithmes sur les arbres et les graphes",
+      "verdict": "METHOD_SHEET_REQUIRED",
+      "existing_method_objects": [],
+      "planned_sheets": [
+        {
+          "sheet_id": "M1",
+          "titre": "Dérouler à la main les parcours d'un arbre binaire",
+          "covers": [
+            "C3",
+            "C4"
+          ],
+          "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/methodes/TNSI-ALGO-M1.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M2",
+          "titre": "Dérouler à la main un parcours de graphe",
+          "covers": [
+            "C7",
+            "C8"
+          ],
+          "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/methodes/TNSI-ALGO-M2.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M3",
+          "titre": "Structurer un algorithme diviser pour régner",
+          "covers": [
+            "C11"
+          ],
+          "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/methodes/TNSI-ALGO-M3.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M4",
+          "titre": "Passer d'une récursion naïve à une version mémoïsée",
+          "covers": [
+            "C12"
+          ],
+          "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/methodes/TNSI-ALGO-M4.tex",
+          "authored": false
+        }
+      ],
+      "sheets_still_to_author": [
+        "M1",
+        "M2",
+        "M3",
+        "M4"
+      ],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais calculer la taille d'un arbre.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Le cours enonce le schema recursif lui-meme — cas de base l'arbre vide, cas general combinant les deux sous-arbres — puis le deroule sur la taille. La demarche est ecrite, pas seulement son resultat.",
+          "covered_by": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/10_C01_arbres_parcours.tex"
+        },
+        {
+          "code": "C10",
+          "libelle_eleve": "Je sais chercher un chemin dans un graphe.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "La definition EST la demarche : memoriser le predecesseur de chaque sommet atteint, puis remonter la chaine depuis l'arrivee, en traitant explicitement l'absence de chemin.",
+          "covered_by": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/13_C04_graphes_cycle_chemin.tex"
+        },
+        {
+          "code": "C11",
+          "libelle_eleve": "Je sais écrire un algorithme utilisant la méthode diviser pour régner.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Le cours enonce les trois mots — diviser, regner, combiner — et les illustre sur le tri fusion. Passer d'un probleme NEUF a sa structure diviser pour regner (que divise-t-on, quel est le cas de base, comment recoller) reste a formaliser.",
+          "covered_by": null
+        },
+        {
+          "code": "C12",
+          "libelle_eleve": "Je sais utiliser la programmation dynamique pour écrire un algorithme.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Le cours montre une version naive puis une version memoisee du rendu de monnaie. La transformation elle-meme — reperer le recoupement, choisir la cle du dictionnaire, ou lire et ou ecrire — s'applique a tout autre probleme et n'est ecrite nulle part.",
+          "covered_by": null
+        },
+        {
+          "code": "C13",
+          "libelle_eleve": "Je sais expliquer le principe de l'algorithme de Boyer-Moore pour la recherche d'un motif dans un texte.",
+          "verdict": "DECLARATIVE",
+          "evidence": "La capacite demande d'EXPLIQUER le principe de Boyer-Moore, pas de le derouler ni de l'ecrire. Le cours expose la comparaison de droite a gauche et la regle du mauvais caractere : c'est un savoir a enoncer.",
+          "covered_by": null
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais calculer la hauteur d'un arbre.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Meme schema recursif, ecrit dans le meme appui de marge et applique a la hauteur avec sa convention $-1$ pour l'arbre vide.",
+          "covered_by": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/10_C01_arbres_parcours.tex"
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais parcourir un arbre en ordres infixe, préfixe ou suffixe.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Donner les trois ordres d'un arbre DESSINE se fait a la main, en marquant chaque noeud a son passage. Le cours definit les trois ordres et ne montre le code que de l'infixe : le trace pas a pas, celui que l'epreuve demande, n'est ecrit nulle part.",
+          "covered_by": null
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais parcourir un arbre en largeur d'abord.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Le parcours en largeur se deroule a la main en tenant l'etat de la file a chaque tour. Meme demarche de trace que C3, servie par la meme fiche.",
+          "covered_by": null
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais rechercher une clé dans un arbre de recherche.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Le cours ecrit la descente comparaison par comparaison, et son cout en fonction de la hauteur. Rien a formaliser de plus.",
+          "covered_by": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/11_C02_arbres_recherche.tex"
+        },
+        {
+          "code": "C6",
+          "libelle_eleve": "Je sais insérer une clé dans un arbre de recherche.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "L'insertion est enoncee comme une procedure — descendre comme pour une recherche jusqu'a un sous-arbre vide, y placer une feuille — avec le piege de la reaffectation nomme.",
+          "covered_by": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/11_C02_arbres_recherche.tex"
+        },
+        {
+          "code": "C7",
+          "libelle_eleve": "Je sais parcourir un graphe en largeur d'abord.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Sur un graphe, le parcours en largeur demande de tenir DEUX etats a la main : la file et l'ensemble des sommets deja vus. L'ordre de visite depend de l'ordre des voisins ; le cours donne le code, pas le tableau de trace.",
+          "covered_by": null
+        },
+        {
+          "code": "C8",
+          "libelle_eleve": "Je sais parcourir un graphe en profondeur d'abord.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Le parcours en profondeur se deroule avec la pile d'appels. Meme demarche de trace que C7, servie par la meme fiche.",
+          "covered_by": null
+        },
+        {
+          "code": "C9",
+          "libelle_eleve": "Je sais repérer la présence d'un cycle dans un graphe.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Le critere est ecrit exactement : un sommet deja visite qui n'est pas le parent direct. Le cours nomme aussi le faux positif — revenir sur ses pas n'est pas un cycle.",
+          "covered_by": "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/13_C04_graphes_cycle_chemin.tex"
+        }
+      ]
+    },
+    {
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "titre": "Architectures matérielles, systèmes d'exploitation et réseaux",
+      "verdict": "METHOD_SHEET_REQUIRED",
+      "existing_method_objects": [],
+      "planned_sheets": [
+        {
+          "sheet_id": "M1",
+          "titre": "Dérouler un ordonnancement de processus",
+          "covers": [
+            "C3"
+          ],
+          "path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/methodes/TNSI-ARCH-M1.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M2",
+          "titre": "Déterminer la route empruntée selon la métrique du protocole",
+          "covers": [
+            "C5"
+          ],
+          "path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/methodes/TNSI-ARCH-M2.tex",
+          "authored": false
+        }
+      ],
+      "sheets_still_to_author": [
+        "M1",
+        "M2"
+      ],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais identifier les principaux composants d'un système sur puce et les avantages de leur intégration.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Identifier les composants d'un systeme sur puce et les avantages de l'integration est un savoir a enoncer.",
+          "covered_by": null
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais décrire la création d'un processus.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Decrire la creation d'un processus — allouer, charger, inscrire, puis `fork` et `exec` — est un savoir a restituer.",
+          "covered_by": null
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais décrire l'ordonnancement de plusieurs processus.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "L'epreuve demande le CHRONOGRAMME : qui occupe le processeur, pendant combien de temps, dans quel ordre, avec quel temps restant. Le cours donne le code du tourniquet ; derouler l'ordonnancement a la main, tableau en main, n'est pas ecrit.",
+          "covered_by": null
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais mettre en évidence le risque d'interblocage.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "La demarche est ecrite comme propriete : construire le graphe d'attente — chaque processus pointe vers la ressource attendue, chaque ressource vers le processus qui la retient — et y chercher un cycle.",
+          "covered_by": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/11_C02_processus.tex"
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais identifier, selon le protocole de routage utilisé, la route empruntée par un paquet.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Determiner la route empruntee demande d'enumerer les chemins, de calculer la metrique du protocole considere — nombre de sauts pour RIP, somme des couts pour OSPF — puis de comparer. Le cours compare sur un exemple ; la marche a suivre, transposable a un autre reseau, n'est pas posee.",
+          "covered_by": null
+        },
+        {
+          "code": "C6",
+          "libelle_eleve": "Je sais décrire les principes du chiffrement symétrique et asymétrique.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Decrire les deux familles de chiffrement, leurs cles et leurs couts, est un savoir a enoncer.",
+          "covered_by": null
+        },
+        {
+          "code": "C7",
+          "libelle_eleve": "Je sais décrire l'échange d'une clé symétrique avec un protocole asymétrique pour sécuriser HTTPS.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Decrire l'echange d'une cle symetrique par un protocole asymetrique est un savoir a restituer ; le cours precise que le detail de TLS n'est pas exigible.",
+          "covered_by": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/13_C04_chiffrement.tex"
+        }
+      ]
+    },
+    {
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "titre": "Bases de données relationnelles",
+      "verdict": "METHOD_SHEET_REQUIRED",
+      "existing_method_objects": [],
+      "planned_sheets": [
+        {
+          "sheet_id": "M1",
+          "titre": "Repérer les anomalies d'un schéma relationnel",
+          "covers": [
+            "C3"
+          ],
+          "path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/methodes/TNSI-BDD-M1.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M2",
+          "titre": "Traduire une question en requête SQL",
+          "covers": [
+            "C6",
+            "C7",
+            "C8",
+            "C9"
+          ],
+          "path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/methodes/TNSI-BDD-M2.tex",
+          "authored": false
+        }
+      ],
+      "sheets_still_to_author": [
+        "M1",
+        "M2"
+      ],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais identifier les concepts définissant le modèle relationnel (relation, attribut, domaine, clé, schéma).",
+          "verdict": "DECLARATIVE",
+          "evidence": "Nommer relation, attribut, domaine, schema, cle primaire et cle etrangere est un savoir de vocabulaire.",
+          "covered_by": null
+        },
+        {
+          "code": "C10",
+          "libelle_eleve": "Je sais construire des requêtes d'insertion avec INSERT.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "INSERT INTO ... VALUES est une syntaxe, donnee avec son exemple.",
+          "covered_by": "NSI/chapitres/TNSI-BASES-DE-DONNEES/cours/14_C05_insert_update_delete.tex"
+        },
+        {
+          "code": "C11",
+          "libelle_eleve": "Je sais construire des requêtes de mise à jour avec UPDATE.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Le cours donne la syntaxe d'UPDATE et, surtout, la precaution qui en fait une demarche : executer d'abord le SELECT portant la meme clause WHERE pour voir quels tuples seront touches.",
+          "covered_by": "NSI/chapitres/TNSI-BASES-DE-DONNEES/cours/14_C05_insert_update_delete.tex"
+        },
+        {
+          "code": "C12",
+          "libelle_eleve": "Je sais construire des requêtes de suppression avec DELETE.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Meme chose pour DELETE, avec l'avertissement sur l'absence de WHERE ecrit noir sur blanc.",
+          "covered_by": "NSI/chapitres/TNSI-BASES-DE-DONNEES/cours/14_C05_insert_update_delete.tex"
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais distinguer structure et contenu d'une base de données.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Distinguer la structure, stable, du contenu, qui evolue, est un savoir enonce comme propriete dans le cours.",
+          "covered_by": null
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais repérer les anomalies dans le schéma d'une base de données.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Reperer les anomalies d'un schema est une lecture methodique : chercher l'information stockee deux fois, verifier que chaque relation a une cle primaire, verifier que chaque reference est une cle etrangere. Le cours montre UNE anomalie dans un encadre d'erreur frequente ; il ne donne pas la grille de lecture.",
+          "covered_by": null
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais identifier les services rendus par un SGBD relationnel (persistance, concurrence, efficacité, sécurisation).",
+          "verdict": "DECLARATIVE",
+          "evidence": "Enumerer les quatre services d'un SGBD — persistance, concurrence, efficacite, securisation — est un savoir a enoncer.",
+          "covered_by": null
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais identifier les composants d'une requête SQL.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Identifier les clauses d'une requete est de la reconnaissance : SELECT, FROM, WHERE sont nommees et definies.",
+          "covered_by": null
+        },
+        {
+          "code": "C6",
+          "libelle_eleve": "Je sais construire des requêtes d'interrogation avec SELECT et FROM.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Le cours donne la syntaxe de chaque clause separement. Traduire une question posee en francais — quelles colonnes, quelles tables, faut-il croiser et sur quelle egalite de cles, quelle condition, quel tri — est la demarche que l'epreuve demande, et elle traverse les quatre clauses a la fois.",
+          "covered_by": null
+        },
+        {
+          "code": "C7",
+          "libelle_eleve": "Je sais construire des requêtes d'interrogation avec WHERE.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "La clause WHERE fait partie de la meme traduction : elle est servie par la meme fiche que C6.",
+          "covered_by": null
+        },
+        {
+          "code": "C8",
+          "libelle_eleve": "Je sais construire des requêtes d'interrogation avec JOIN.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Decider qu'il faut un JOIN, et sur quelle egalite cle etrangere = cle primaire, est l'etape la plus difficile de cette traduction : meme fiche que C6.",
+          "covered_by": null
+        },
+        {
+          "code": "C9",
+          "libelle_eleve": "Je sais construire des requêtes d'interrogation avec ORDER BY.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Le tri ORDER BY ferme la meme requete, et sa place apres WHERE fait partie de la demarche : meme fiche que C6.",
+          "covered_by": null
+        }
+      ]
+    },
+    {
+      "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
+      "titre": "Histoire de l'informatique",
+      "verdict": "METHOD_NOT_PEDAGOGICALLY_JUSTIFIED",
+      "existing_method_objects": [],
+      "planned_sheets": [],
+      "sheets_still_to_author": [],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais situer dans le temps les principaux événements de l'histoire de l'informatique et leurs protagonistes.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Situer les evenements de l'histoire de l'informatique est un savoir de reperes chronologiques.",
+          "covered_by": null
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais identifier l'évolution des rôles relatifs des logiciels et des matériels.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Identifier l'evolution des roles du logiciel et du materiel est une lecture historique, pas une demarche a executer.",
+          "covered_by": null
+        }
+      ]
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "titre": "Langages, récursivité et paradigmes de programmation",
+      "verdict": "METHOD_SHEET_REQUIRED",
+      "existing_method_objects": [],
+      "planned_sheets": [
+        {
+          "sheet_id": "M1",
+          "titre": "Écrire une fonction récursive et dérouler son arbre d'appels",
+          "covers": [
+            "C4",
+            "C5"
+          ],
+          "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/methodes/TNSI-LANG-M1.tex",
+          "authored": false
+        }
+      ],
+      "sheets_still_to_author": [
+        "M1"
+      ],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je comprends que tout programme est aussi une donnée.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Comprendre qu'un programme est une donnee est une idee a enoncer, illustree par l'interpreteur du cours.",
+          "covered_by": null
+        },
+        {
+          "code": "C10",
+          "libelle_eleve": "Je sais choisir un paradigme adapté au champ d'application.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "La propriete « Choisir un paradigme selon le contexte » est une regle de decision ecrite, suivie de l'avertissement qu'un projet reel les combine.",
+          "covered_by": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/13_C04_paradigmes.tex"
+        },
+        {
+          "code": "C11",
+          "libelle_eleve": "Je sais identifier les causes typiques de bugs dans un programme.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Identifier les causes typiques de bugs est de la reconnaissance : le cours enumere les quatre familles — flottants, effets de bord, inegalites, nommage — chacune avec son exemple.",
+          "covered_by": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/14_C05_debug.tex"
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je comprends que la calculabilité ne dépend pas du langage utilisé.",
+          "verdict": "DECLARATIVE",
+          "evidence": "L'independance de la calculabilite vis-a-vis du langage est enoncee comme propriete.",
+          "covered_by": null
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais expliquer, sans formalisme théorique, pourquoi le problème de l'arrêt est indécidable.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Expliquer l'indecidabilite de l'arret sans formalisme est un raisonnement a restituer ; l'argument par le programme paradoxal est ecrit en entier.",
+          "covered_by": null
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais écrire un programme récursif.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Ecrire une fonction recursive NEUVE demande de choisir le cas de base, de verifier que le cas general se ramene strictement a une instance plus petite, et de s'assurer de la terminaison. Le cours donne la definition et deux exemples ; la demarche de construction n'est pas ecrite.",
+          "covered_by": null
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais analyser le fonctionnement d'un programme récursif.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Analyser demande de dessiner l'arbre d'appels et de compter. Le cours LIT un arbre d'appels deja decrit ; le construire soi-meme, appel apres retour, est la meme demarche que C4 vue dans l'autre sens, et la meme fiche les sert.",
+          "covered_by": null
+        },
+        {
+          "code": "C6",
+          "libelle_eleve": "Je sais utiliser des API ou bibliothèques.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Le cours importe une bibliotheque standard et appelle trois de ses fonctions : l'usage est montre.",
+          "covered_by": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/12_C03_api_modules.tex"
+        },
+        {
+          "code": "C7",
+          "libelle_eleve": "Je sais exploiter la documentation d'une API ou bibliothèque.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "La propriete « Exploiter la documentation » EST la demarche : nom et ordre des parametres, types attendus, valeur renvoyee, exemples, et `help` pour l'obtenir.",
+          "covered_by": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/12_C03_api_modules.tex"
+        },
+        {
+          "code": "C8",
+          "libelle_eleve": "Je sais créer des modules simples et les documenter.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Le cours ecrit un module complet avec ses docstrings et enonce la regle qui les gouverne : documenter ce que fait la fonction, pas comment elle le fait.",
+          "covered_by": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/12_C03_api_modules.tex"
+        },
+        {
+          "code": "C9",
+          "libelle_eleve": "Je sais distinguer, sur des exemples, les paradigmes impératif, fonctionnel et objet.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Distinguer les trois paradigmes sur des exemples est une reconnaissance ; le cours donne le meme calcul ecrit trois fois.",
+          "covered_by": null
+        }
+      ]
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "titre": "Structures de données",
+      "verdict": "METHOD_SHEET_REQUIRED",
+      "existing_method_objects": [],
+      "planned_sheets": [
+        {
+          "sheet_id": "M1",
+          "titre": "Spécifier une structure de données par son interface",
+          "covers": [
+            "C1"
+          ],
+          "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/methodes/TNSI-STRUCT-M1.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M2",
+          "titre": "Modéliser une situation par un graphe",
+          "covers": [
+            "C11"
+          ],
+          "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/methodes/TNSI-STRUCT-M2.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "M3",
+          "titre": "Passer d'une représentation de graphe à l'autre",
+          "covers": [
+            "C14"
+          ],
+          "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/methodes/TNSI-STRUCT-M3.tex",
+          "authored": false
+        }
+      ],
+      "sheets_still_to_author": [
+        "M1",
+        "M2",
+        "M3"
+      ],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais spécifier une structure de données par son interface.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Le cours DEFINIT ce qu'est une interface et en montre une, celle de la pile. Produire l'interface d'une structure qu'on decouvre — lister les operations, dire ce que chacune exige et ce qu'elle garantit, decider des cas limites — est une demarche a part entiere, et elle n'est pas ecrite.",
+          "covered_by": null
+        },
+        {
+          "code": "C10",
+          "libelle_eleve": "Je sais évaluer quelques mesures des arbres binaires (taille, hauteur, feuilles).",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Taille, hauteur et nombre de feuilles sont calcules dans le cours, en code puis a la main sur un arbre nomme, avec les trois valeurs justifiees.",
+          "covered_by": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/13_C04_arbres_binaires.tex"
+        },
+        {
+          "code": "C11",
+          "libelle_eleve": "Je sais modéliser des situations sous forme de graphes.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Modeliser demande de choisir ce que sont les sommets, ce que sont les aretes, et si le graphe est oriente ou pondere. Le cours donne trois modelisations deja faites ; il ne dit pas comment on arrive a en produire une.",
+          "covered_by": null
+        },
+        {
+          "code": "C12",
+          "libelle_eleve": "Je sais écrire l'implémentation d'un graphe par matrice d'adjacence.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "La regle de remplissage est ecrite — la case $(i,j)$ vaut 1 s'il existe une arete de $i$ vers $j$ — et appliquee sur un graphe nomme.",
+          "covered_by": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/14_C05_graphes.tex"
+        },
+        {
+          "code": "C13",
+          "libelle_eleve": "Je sais écrire l'implémentation d'un graphe par listes de successeurs.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Le cours donne la representation par listes de successeurs du meme graphe, et nomme le piege du sommet sans successeur qui doit rester present avec une liste vide.",
+          "covered_by": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/14_C05_graphes.tex"
+        },
+        {
+          "code": "C14",
+          "libelle_eleve": "Je sais passer d'une représentation de graphe à une autre.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Le cours convertit dans UN sens, matrice vers listes, par une comprehension. Le sens inverse, et surtout la conversion a la main sur un graphe non oriente ou la symetrie se perd facilement, ne sont pas traites.",
+          "covered_by": null
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais distinguer interface et implémentation.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Distinguer interface et implementation est un savoir a enoncer ; il n'y a pas de resultat a construire.",
+          "covered_by": null
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais écrire plusieurs implémentations d'une même structure de données.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Le cours ecrit DEUX implementations completes de la meme pile — par liste Python et par liste chainee — et enonce la discipline qui les relie : tester le comportement observable, pas les details internes.",
+          "covered_by": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/10_C01_interface_implementation.tex"
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais écrire la définition d'une classe.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Ecrire une classe est une syntaxe, pas une demarche : le cours en donne le modele complet (constructeur, attributs, methodes) et nomme le piege de `self`. Une fiche recopierait le squelette.",
+          "covered_by": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/11_C02_classes.tex"
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais accéder aux attributs et méthodes d'une classe.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "L'acces `objet.attribut` et l'appel `objet.methode(...)` sont montres sur l'exemple file, avec le vocabulaire attribut/methode/instance pose a cote.",
+          "covered_by": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/11_C02_classes.tex"
+        },
+        {
+          "code": "C6",
+          "libelle_eleve": "Je sais distinguer des structures par le jeu des méthodes qui les caractérisent (FIFO et LIFO).",
+          "verdict": "DECLARATIVE",
+          "evidence": "Distinguer FIFO et LIFO par le jeu des methodes est un savoir de reconnaissance.",
+          "covered_by": null
+        },
+        {
+          "code": "C7",
+          "libelle_eleve": "Je sais choisir une structure de données adaptée à la situation à modéliser.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "La regle de decision est ecrite comme telle : identifier les operations dominantes de la situation, puis lire la correspondance operation -> structure que le cours dresse.",
+          "covered_by": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/12_C03_piles_files_choix.tex"
+        },
+        {
+          "code": "C8",
+          "libelle_eleve": "Je sais distinguer la recherche d'une valeur dans une liste et dans un dictionnaire.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Comparer la recherche dans une liste et dans un dictionnaire est un savoir de cout, enonce en marge du cours.",
+          "covered_by": null
+        },
+        {
+          "code": "C9",
+          "libelle_eleve": "Je sais identifier des situations nécessitant une structure de données arborescente.",
+          "verdict": "DECLARATIVE",
+          "evidence": "Identifier une situation arborescente est une reconnaissance : hierarchie, ou processus recursif par nature.",
+          "covered_by": null
+        }
+      ]
+    },
+    {
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "titre": "Calcul intégral",
+      "verdict": "METHOD_SHEET_REQUIRED",
+      "existing_method_objects": [
+        "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/methodes/TSPE-INTEG-ME-001.tex",
+        "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/methodes/TSPE-INTEG-ME-002.tex"
+      ],
+      "planned_sheets": [
+        {
+          "sheet_id": "ME-003",
+          "titre": "Encadrer ou comparer une intégrale sans la calculer",
+          "covers": [
+            "C1",
+            "C3"
+          ],
+          "path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/methodes/TSPE-INTEG-ME-003.tex",
+          "authored": false
+        },
+        {
+          "sheet_id": "ME-004",
+          "titre": "Étudier une suite d'intégrales",
+          "covers": [
+            "C5"
+          ],
+          "path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/methodes/TSPE-INTEG-ME-004.tex",
+          "authored": false
+        }
+      ],
+      "sheets_still_to_author": [
+        "ME-003",
+        "ME-004"
+      ],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais estimer graphiquement ou encadrer une intégrale et une valeur moyenne.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Encadrer une intégrale sans la calculer demande d'abord d'étudier les variations pour obtenir le minimum et le maximum EXACTS, puis d'appliquer $m(b-a) \\leq I \\leq M(b-a)$. Le cours donne la propriété et un exemple où l'encadrement est fourni ; l'étape qui coûte — trouver $m$ et $M$ — n'est nommée que dans un encadré d'erreur fréquente.",
+          "covered_by": null
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais calculer une intégrale en utilisant une primitive ou une intégration par parties.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-001 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/methodes/TSPE-INTEG-ME-001.tex"
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais majorer ou minorer une intégrale en comparant les fonctions intégrées.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Majorer ou minorer par comparaison des fonctions intégrées est la même démarche que C1 vue par l'autre bout : établir l'inégalité entre fonctions sur l'intervalle, puis l'intégrer. Une seule fiche les sert.",
+          "covered_by": null
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais calculer l'aire comprise entre deux courbes à l'aide d'intégrales.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-002 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/methodes/TSPE-INTEG-ME-002.tex"
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais étudier une suite d'intégrales, notamment en établissant une relation de récurrence.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Une suite d'intégrales s'étudie toujours dans le même ordre : signe, monotonie en comparant les intégrandes, relation de récurrence par parties, puis limite par encadrement. Le cours déroule le signe et la récurrence sur un exemple ; la monotonie et la limite, que l'épreuve demande, n'y sont pas.",
+          "covered_by": null
+        },
+        {
+          "code": "C6",
+          "libelle_eleve": "Je sais interpréter une intégrale ou une valeur moyenne dans un contexte concret.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Le cours interprète l'intégrale d'une vitesse en distance et la valeur moyenne en vitesse moyenne, puis généralise en marge : débit vers volume, puissance vers énergie, densité vers masse. L'interprétation est un savoir, pas un calcul à conduire.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/16_C6_applications.tex"
+        },
+        {
+          "code": "C7",
+          "libelle_eleve": "Je sais démontrer que la fonction intégrale d'une fonction positive croissante est une primitive, et en déduire $\\int_a^b f = F(b) - F(a)$.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Démonstration exigible, écrite en entier dans le cours.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/11_C7_fonction_integrale.tex"
+        },
+        {
+          "code": "C8",
+          "libelle_eleve": "Je sais démontrer la formule d'intégration par parties.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Démonstration exigible de la formule d'intégration par parties, écrite en entier dans le cours.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/13_C8_integration_par_parties.tex"
+        }
+      ]
+    },
+    {
+      "chapter": "TSPE-COMBINATOIRE",
+      "titre": "Combinatoire et dénombrement",
+      "verdict": "METHOD_ALREADY_EXISTS_NOT_ASSEMBLED",
+      "existing_method_objects": [
+        "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/methodes/TSPE-COMBI-ME-001.tex"
+      ],
+      "planned_sheets": [],
+      "sheets_still_to_author": [],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais choisir une représentation adaptée (ensemble, arbre, tableau, diagramme) pour résoudre un problème de dénombrement.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-001 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/methodes/TSPE-COMBI-ME-001.tex"
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais effectuer des dénombrements simples en utilisant les principes additif et multiplicatif, les permutations et les combinaisons.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-001 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/methodes/TSPE-COMBI-ME-001.tex"
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais démontrer par dénombrement que la somme des (n parmi k) pour k de 0 à n vaut 2 puissance n.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Démonstration exigible. Le cours compte les parties d'un ensemble de deux façons, nomme la technique — preuve par double dénombrement — et avertit contre le réflexe de calculer chaque coefficient.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/cours/12_C3_somme_coefficients_binomiaux.tex"
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais démontrer la relation de Pascal par le calcul et par une méthode combinatoire.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Démonstration exigible, écrite DEUX fois dans le cours comme le programme le demande : par le calcul factoriel, puis par le dénombrement selon l'appartenance d'un élément fixé.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/cours/13_C4_relation_pascal.tex"
+        }
+      ]
+    },
+    {
+      "chapter": "TSPE-LOGARITHME",
+      "titre": "Fonction logarithme népérien",
+      "verdict": "METHOD_ALREADY_EXISTS_NOT_ASSEMBLED",
+      "existing_method_objects": [
+        "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/methodes/TSPE-LOG-ME-001.tex",
+        "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/methodes/TSPE-LOG-ME-002.tex"
+      ],
+      "planned_sheets": [],
+      "sheets_still_to_author": [],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais utiliser les propriétés algébriques du logarithme et de l'exponentielle pour transformer des expressions, résoudre des équations et inéquations.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-001 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/methodes/TSPE-LOG-ME-001.tex"
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais mobiliser les propriétés de l'exponentielle et du logarithme dans le cadre de la résolution de problèmes.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Résoudre un problème contextuel revient à isoler le terme exponentiel puis à appliquer $\\ln$ — la démarche que la fiche M1 pose en cinq étapes, domaine compris. Le cours l'applique à la demi-vie et au seuil de 10 %.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/methodes/TSPE-LOG-ME-001.tex"
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais démontrer que la dérivée de ln est x ↦ 1/x, en admettant la dérivabilité.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-002 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/methodes/TSPE-LOG-ME-002.tex"
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais démontrer que la limite de x ln(x) quand x tend vers 0 est 0.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-002 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/methodes/TSPE-LOG-ME-002.tex"
+        }
+      ]
+    },
+    {
+      "chapter": "TSPE-PRIMITIVES-EQDIFF",
+      "titre": "Primitives et équations différentielles",
+      "verdict": "METHOD_ALREADY_EXISTS_NOT_ASSEMBLED",
+      "existing_method_objects": [
+        "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/methodes/TSPE-PRIMEQ-ME-001.tex",
+        "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/methodes/TSPE-PRIMEQ-ME-002.tex"
+      ],
+      "planned_sheets": [],
+      "sheets_still_to_author": [],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais calculer une primitive en utilisant les primitives de référence et la forme (v' ∘ u) × u'.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-001 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/methodes/TSPE-PRIMEQ-ME-001.tex"
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais résoudre une équation différentielle y' = ay + b en trouvant la solution particulière constante puis toutes les solutions.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-002 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/methodes/TSPE-PRIMEQ-ME-002.tex"
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais, à partir d'une solution particulière donnée de y' = ay + f, déterminer toutes les solutions.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-002 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/methodes/TSPE-PRIMEQ-ME-002.tex"
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais démontrer que deux primitives d'une même fonction continue diffèrent d'une constante.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Démonstration exigible : le cours pose $g = G - F$, montre $g' = 0$, invoque la propriété admise et traite la réciproque. Il avertit même que le résultat suppose un intervalle.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/cours/10_C4_primitives_constante.tex"
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais démontrer la résolution complète de l'équation différentielle y' = ay.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Démonstration exigible de la résolution complète de $y'=ay$, écrite dans les deux sens, avec la technique — multiplier par $\\mathrm{e}^{-ax}$ — nommée en marge comme transposable à $y'=ay+b$.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/cours/12_C5_equation_yprime_ay.tex"
+        }
+      ]
+    },
+    {
+      "chapter": "TSPE-PROBABILITES",
+      "titre": "Probabilités : succession d'épreuves, loi binomiale, concentration",
+      "verdict": "METHOD_SHEET_REQUIRED",
+      "existing_method_objects": [
+        "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/methodes/TSPE-PROBA-ME-001.tex"
+      ],
+      "planned_sheets": [
+        {
+          "sheet_id": "ME-002",
+          "titre": "Modéliser par un arbre pondéré et calculer une probabilité",
+          "covers": [
+            "C1"
+          ],
+          "path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/methodes/TSPE-PROBA-ME-002.tex",
+          "authored": false
+        }
+      ],
+      "sheets_still_to_author": [
+        "ME-002"
+      ],
+      "filler_candidates": [],
+      "capacities": [
+        {
+          "code": "C1",
+          "libelle_eleve": "Je sais modéliser une situation par une succession d'épreuves indépendantes, la représenter par un arbre et calculer des probabilités.",
+          "verdict": "PROCEDURAL_UNCOVERED",
+          "evidence": "Modéliser une succession d'épreuves demande de décider ce qu'est une épreuve, si les tirages sont avec ou sans remise, puis de construire l'arbre et d'y appliquer les trois règles. Le cours énonce les règles et traite une urne ; la fiche M1 du chapitre commence à la loi binomiale, en aval. L'arbre lui-même n'a pas sa démarche.",
+          "covered_by": null
+        },
+        {
+          "code": "C10",
+          "libelle_eleve": "Je sais appliquer l'inégalité de Bienaymé-Tchebychev pour déterminer une taille d'échantillon en fonction de la précision et du risque.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Le cours applique Bienaymé-Tchebychev à l'échantillonnage, majore $p(1-p)$ par $1/4$ pour s'affranchir d'un $p$ inconnu, et déroule le calcul complet d'une taille d'échantillon jusqu'au nombre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/16_CONCLGN_bienayme_tchebychev.tex"
+        },
+        {
+          "code": "C2",
+          "libelle_eleve": "Je sais reconnaître et modéliser une situation par un schéma de Bernoulli et une loi binomiale.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-001 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/methodes/TSPE-PROBA-ME-001.tex"
+        },
+        {
+          "code": "C3",
+          "libelle_eleve": "Je sais utiliser la loi binomiale pour résoudre des problèmes de seuil, comparaison ou optimisation.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-001 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/methodes/TSPE-PROBA-ME-001.tex"
+        },
+        {
+          "code": "C4",
+          "libelle_eleve": "Je sais calculer numériquement des probabilités binomiales et chercher un intervalle de probabilité donnée.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Fiche méthode ME-001 du chapitre.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/methodes/TSPE-PROBA-ME-001.tex"
+        },
+        {
+          "code": "C5",
+          "libelle_eleve": "Je sais démontrer l'expression de la probabilité de k succès dans le schéma de Bernoulli, à l'aide des coefficients binomiaux.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Démonstration exigible de $P(X=k)$ dans le schéma de Bernoulli, écrite dans le cours.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/11_C2_C5_schema_bernoulli_binomiale.tex"
+        },
+        {
+          "code": "C6",
+          "libelle_eleve": "Je sais décomposer une variable aléatoire en somme de variables aléatoires plus simples.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Le cours écrit la décomposition en somme de variables de Bernoulli comme propriété, puis la déroule sur trois dés : décomposer, calculer chaque espérance, sommer.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/13_C6_C7_esperance_linearite.tex"
+        },
+        {
+          "code": "C7",
+          "libelle_eleve": "Je sais calculer l'espérance d'une variable aléatoire en utilisant la linéarité de l'espérance.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Même passage : la linéarité est appliquée pas à pas sur l'exemple, avec l'avertissement qu'elle ne demande aucune indépendance.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/13_C6_C7_esperance_linearite.tex"
+        },
+        {
+          "code": "C8",
+          "libelle_eleve": "Je sais calculer la variance d'une variable aléatoire en utilisant l'additivité de la variance pour des variables indépendantes.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Le cours donne l'additivité, la variance d'une Bernoulli, un exemple chiffré, et le contre-exemple $X$ et $-X$ qui montre pourquoi l'indépendance est requise.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/14_C8_variance.tex"
+        },
+        {
+          "code": "C9",
+          "libelle_eleve": "Je sais démontrer les formules de l'espérance et de la variance de la loi binomiale.",
+          "verdict": "PROCEDURAL_COVERED",
+          "evidence": "Démonstration exigible des formules de l'espérance et de la variance de la loi binomiale, écrite dans le cours.",
+          "covered_by": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/15_C9_esperance_variance_binomiale.tex"
+        }
+      ]
     }
   ],
   "freshness": {
-    "EVIDENCE_HEAD": "b86edf06a47cbc78dfef9de66b055043b2a325c7",
+    "EVIDENCE_HEAD": "7138137233b2bd761f58dd52774c5ae9086daf65",
     "INPUT_PATHS": [
+      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml",
+      "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/contrat.yaml",
+      "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/contrat.yaml",
+      "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/contrat.yaml",
+      "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/contrat.yaml",
+      "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/contrat.yaml",
+      "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/contrat.yaml",
+      "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/contrat.yaml",
+      "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/contrat.yaml",
       "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/contrat.yaml",
       "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/contrat.yaml",
       "NSI/chapitres/1NSI-ARCHITECTURE-OS/contrat.yaml",
@@ -747,8 +1982,14 @@
       "NSI/chapitres/1NSI-TABLES/contrat.yaml",
       "NSI/chapitres/1NSI-TYPES-BASE/contrat.yaml",
       "NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml",
-      "NSI/chapitres/1NSI-WEB-IHM/contrat.yaml"
+      "NSI/chapitres/1NSI-WEB-IHM/contrat.yaml",
+      "NSI/chapitres/TNSI-ALGORITHMIQUE/contrat.yaml",
+      "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/contrat.yaml",
+      "NSI/chapitres/TNSI-BASES-DE-DONNEES/contrat.yaml",
+      "NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/contrat.yaml",
+      "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/contrat.yaml",
+      "NSI/chapitres/TNSI-STRUCTURES-DONNEES/contrat.yaml"
     ],
-    "INPUT_DIGEST": "sha256:cfc1d4b2a7182691316d4ab4321e09cbb7783c17c332044b399fb034049ed218"
+    "INPUT_DIGEST": "sha256:db8f2d261a0120ff52e64fa95b77bb07bb5a61e9cc8eae6c53a51bc44e5bf472"
   }
 }

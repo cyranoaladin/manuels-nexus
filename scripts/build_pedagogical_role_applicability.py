@@ -190,13 +190,13 @@ def _remediation_verdict(unit: dict[str, Any]) -> tuple[str, str] | None:
 
 
 def _method_verdict(unit: dict[str, Any]) -> tuple[str, str] | None:
-    """Verdict éditorial déjà rendu pour les fiches méthode de 1NSI.
+    """Verdict éditorial déjà rendu pour les fiches méthode.
 
-    L'audit `METHOD_SHEET_REQUIREMENT_AUDIT` a jugé les 53 capacités du manuel
-    une par une. Le refaire ici en dupliquerait la décision ; on la lit.
+    L'audit `METHOD_SHEET_REQUIREMENT_AUDIT` a jugé une par une les capacités
+    des vingt-cinq chapitres qui portent une exigence de méthode — d'abord les
+    53 de 1NSI, puis les 118 des seize chapitres que ce triage avait laissés
+    sans verdict. Le refaire ici en dupliquerait la décision ; on la lit.
     """
-    if unit["manual"] != "1NSI":
-        return None
     try:
         from method_sheet_decisions import (  # noqa: PLC0415
             CAPACITY_VERDICTS, DECLARATIVE, PROCEDURAL_COVERED,
