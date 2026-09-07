@@ -48,7 +48,13 @@ def test_the_project_chapter_is_excused_on_its_actual_content(payload) -> None:
         if r["chapter"] == "TNSI-PROJET" and r["rubric"] == "remediation"
     )
     assert record["verdict"] == applicability.NOT_REQUIRED
-    assert set(record["chapter_object_types"]) <= {"projet", "qcm"}
+    # L'exemption tient à ce que le chapitre NE PORTE PAS : ni cours, ni
+    # exercice. Énumérer ce qu'il porte cassait le test dès qu'on lui ajoutait
+    # un objet — l'extrait aménagé, par exemple — alors que la raison de
+    # l'exemption n'avait pas bougé d'un pouce.
+    assert "cours" not in record["chapter_object_types"]
+    assert "exercice" not in record["chapter_object_types"]
+    assert record["chapter_object_types"].get("projet", 0) >= 1
 
 
 def test_a_declared_method_gap_is_always_a_teaching_chapter(payload) -> None:
