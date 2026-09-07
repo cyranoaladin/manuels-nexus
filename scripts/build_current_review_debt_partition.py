@@ -86,6 +86,29 @@ def _file_digest(path: Path) -> str:
     return "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+#: Champs qui nomment le commit auquel un artefact a été gelé, et non son
+#: contenu. Les inclure dans une empreinte de PREUVE crée un cycle : le
+#: producteur amont se regèle à chaque commit, ce qui périme ce rapport, dont
+#: le commit regèle l'amont. Les deux ne pouvaient plus être courants
+#: ensemble — et ils ne l'étaient plus.
+FREEZE_FIELDS = ("forensic_source_sha",)
+
+
+def _content_digest_without_freeze(path: Path) -> str:
+    """Empreinte du CONTENU d'un artefact, sa marque de gel retirée.
+
+    Ce qui est vérifié ici est que les faits n'ont pas bougé, pas que l'amont
+    a été régénéré au même commit que ce rapport.
+    """
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if isinstance(payload, dict):
+        payload = {k: v for k, v in payload.items() if k not in FREEZE_FIELDS}
+    return "sha256:" + hashlib.sha256(
+        json.dumps(payload, ensure_ascii=False, sort_keys=True,
+                   separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+
+
 def _anomalies_by_fingerprint(
     inventory: Mapping[str, Any],
 ) -> dict[str, dict[str, Any]]:
@@ -460,9 +483,11 @@ def build_partition(root: Path = ROOT) -> dict[str, Any]:
         "unknown_count": 0,
         "evidence": {
             str(INVENTORY): _file_digest(root / INVENTORY),
-            str(ALGEBRA): _file_digest(root / ALGEBRA),
+            str(ALGEBRA): _content_digest_without_freeze(root / ALGEBRA),
             str(METHOD_REQUALIFICATION): _file_digest(root / METHOD_REQUALIFICATION),
-            str(RESIDUAL_FORENSICS): _file_digest(root / RESIDUAL_FORENSICS),
+            str(RESIDUAL_FORENSICS): _content_digest_without_freeze(
+                root / RESIDUAL_FORENSICS
+            ),
             **ledger_evidence,
         },
     }
