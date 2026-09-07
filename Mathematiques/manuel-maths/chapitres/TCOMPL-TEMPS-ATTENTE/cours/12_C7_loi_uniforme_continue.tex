@@ -18,10 +18,10 @@ Plus generalement, $X$ suit la \textbf{loi uniforme sur $[a\,;b]$} (avec $a<b$) 
 }
 
 \margeAppui{
-La hauteur $\dfrac{1}{b-a}$ n'est pas choisie au hasard : c'est la seule valeur constante qui donne au rectangle de base $[a\,;b]$ une aire egale a $1$, condition sans laquelle $f$ ne serait pas une densite.
+La hauteur $\dfrac{1}{b-a}$ n'est pas choisie au hasard : c'est la seule valeur constante qui donne au rectangle de base $[a\,;b]$ une aire égale a $1$, condition sans laquelle $f$ ne serait pas une densite.
 }
 
-\propriete[Verification]{
+\propriete[Vérification]{
 La fonction $f$ ci-dessus est bien une densite : elle est positive, et
 \[
   \int_a^b \frac{1}{b-a}\,\mathrm{d}x = \frac{1}{b-a}\,\big[x\big]_a^b = \frac{b-a}{b-a} = 1 .
@@ -45,10 +45,10 @@ En particulier, pour $a \leq c \leq d \leq b$ : $P(c \leq X \leq d) = \dfrac{d-c
 }
 
 \margeAppui{
-La probabilite d'un intervalle ne depend que de sa \textbf{longueur}, pas de sa position dans $[a\,;b]$ : attendre entre $0$ et $5$ minutes ou entre $10$ et $15$ minutes a la même probabilite.
+La probabilité d'un intervalle ne depend que de sa \textbf{longueur}, pas de sa position dans $[a\,;b]$ : attendre entre $0$ et $5$ minutes ou entre $10$ et $15$ minutes a la même probabilité.
 }
 
-\propriete[Esperance et variance]{
+\propriete[Espérance et variance]{
 Si $X$ suit la loi uniforme sur $[a\,;b]$, alors
 \[
   E(X) = \frac{a+b}{2} \qquad \text{et} \qquad V(X) = \frac{(b-a)^2}{12}.
@@ -56,7 +56,7 @@ Si $X$ suit la loi uniforme sur $[a\,;b]$, alors
 }
 
 \demonstration{
-Pour l'esperance :
+Pour l'espérance :
 \[
   E(X) = \int_a^b x\,\frac{1}{b-a}\,\mathrm{d}x = \frac{1}{b-a}\left[\frac{x^2}{2}\right]_a^b = \frac{b^2-a^2}{2(b-a)} = \frac{(b-a)(b+a)}{2(b-a)} = \frac{a+b}{2}.
 \]
@@ -75,9 +75,9 @@ Un bus passe a un arret toutes les $20$ minutes. Un voyageur arrive sans connait
 
 Attente moyenne : $E(X) = \dfrac{0+20}{2} = 10$ minutes.
 
-Probabilite d'attendre moins de $5$ minutes : $P(X \leq 5) = \dfrac{5-0}{20} = 0{,}25$.
+Probabilité d'attendre moins de $5$ minutes : $P(X \leq 5) = \dfrac{5-0}{20} = 0{,}25$.
 
-Probabilite d'attendre entre $8$ et $12$ minutes : $\dfrac{12-8}{20} = 0{,}2$.
+Probabilité d'attendre entre $8$ et $12$ minutes : $\dfrac{12-8}{20} = 0{,}2$.
 }
 
 % BEGIN-VERIFY
@@ -108,5 +108,5 @@ Probabilite d'attendre entre $8$ et $12$ minutes : $\dfrac{12-8}{20} = 0{,}2$.
 % END-VERIFY
 
 \erreurFrequente{
-\textbf{Ecrire $V(X) = \dfrac{b-a}{12}$ au lieu de $\dfrac{(b-a)^2}{12}$.} La variance est homogene au \emph{carre} de la grandeur : si $X$ est un temps en minutes, $V(X)$ s'exprime en minutes carrees, et c'est l'ecart-type $\sqrt{V(X)} = \dfrac{b-a}{2\sqrt{3}}$ qui se compare a $E(X)$.
+\textbf{Écrire $V(X) = \dfrac{b-a}{12}$ au lieu de $\dfrac{(b-a)^2}{12}$.} La variance est homogene au \emph{carre} de la grandeur : si $X$ est un temps en minutes, $V(X)$ s'exprime en minutes carrees, et c'est l'ecart-type $\sqrt{V(X)} = \dfrac{b-a}{2\sqrt{3}}$ qui se compare a $E(X)$.
 }

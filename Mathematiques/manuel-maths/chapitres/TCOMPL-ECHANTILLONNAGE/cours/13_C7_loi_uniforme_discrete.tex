@@ -7,14 +7,14 @@
 % ============================================================
 
 \definition[1]{
-Soit $n$ un entier naturel non nul. Une variable aleatoire $X$ suit la \textbf{loi uniforme} sur $\{1,2,\ldots,n\}$ lorsque ses $n$ valeurs possibles ont toutes la \textbf{même} probabilite :
+Soit $n$ un entier naturel non nul. Une variable aleatoire $X$ suit la \textbf{loi uniforme} sur $\{1,2,\ldots,n\}$ lorsque ses $n$ valeurs possibles ont toutes la \textbf{même} probabilité :
 \[
   P(X=k) = \frac{1}{n} \qquad \text{pour tout } k \in \{1,2,\ldots,n\}.
 \]
 }
 
 \margeAppui{
-C'est la traduction de l'equiprobabilite : aucune valeur n'est privilegiee. La somme des probabilites vaut bien $n \times \dfrac{1}{n} = 1$, comme l'exige toute loi de probabilite.
+C'est la traduction de l'equiprobabilite : aucune valeur n'est privilegiee. La somme des probabilités vaut bien $n \times \dfrac{1}{n} = 1$, comme l'exige toute loi de probabilité.
 }
 
 \exemple{
@@ -25,7 +25,7 @@ Le lancer d'un de equilibre a six faces : $X$ est le numero obtenu, $P(X=k) = \d
 % STRATE 2 — Esperance
 % ============================================================
 
-\propriete[Esperance de la loi uniforme]{
+\propriete[Espérance de la loi uniforme]{
 Si $X$ suit la loi uniforme sur $\{1,2,\ldots,n\}$, alors
 \[
   E(X) = \frac{n+1}{2}.
@@ -33,7 +33,7 @@ Si $X$ suit la loi uniforme sur $\{1,2,\ldots,n\}$, alors
 }
 
 \demonstration{
-Par definition de l'esperance d'une variable aleatoire finie :
+Par définition de l'espérance d'une variable aléatoire finie :
 \[
   E(X) = \sum_{k=1}^{n} k\,P(X=k) = \sum_{k=1}^{n} k \times \frac{1}{n} = \frac{1}{n}\sum_{k=1}^{n} k .
 \]
@@ -44,7 +44,7 @@ La somme des $n$ premiers entiers vaut $\displaystyle\sum_{k=1}^{n} k = \frac{n(
 }
 
 \margeAppui{
-$\dfrac{n+1}{2}$ est le milieu de $1$ et de $n$ : pour une loi uniforme, l'esperance est le \textbf{centre} de l'intervalle des valeurs, ce qui est coherent avec l'idee de symetrie.
+$\dfrac{n+1}{2}$ est le milieu de $1$ et de $n$ : pour une loi uniforme, l'espérance est le \textbf{centre} de l'intervalle des valeurs, ce qui est coherent avec l'idee de symetrie.
 }
 
 \exemple{
@@ -68,5 +68,5 @@ Pour le de a six faces, $E(X) = \dfrac{6+1}{2} = 3{,}5$ : sur un grand nombre de
 % END-VERIFY
 
 \erreurFrequente{
-\textbf{Confondre la loi uniforme sur $\{1,\ldots,n\}$ avec la loi uniforme sur $\{0,1,\ldots,n\}$.} La premiere porte sur $n$ valeurs et a pour esperance $\dfrac{n+1}{2}$ ; la seconde porte sur $n+1$ valeurs et a pour esperance $\dfrac{n}{2}$. Toujours compter les valeurs possibles avant d'appliquer une formule.
+\textbf{Confondre la loi uniforme sur $\{1,\ldots,n\}$ avec la loi uniforme sur $\{0,1,\ldots,n\}$.} La première porte sur $n$ valeurs et a pour espérance $\dfrac{n+1}{2}$ ; la seconde porte sur $n+1$ valeurs et a pour espérance $\dfrac{n}{2}$. Toujours compter les valeurs possibles avant d'appliquer une formule.
 }

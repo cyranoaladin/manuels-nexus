@@ -1,17 +1,17 @@
 % META: {"id": "TCOMPL-ME-CR-013", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "cours", "capacites_codes": ["C6"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "needs_review"}
 
-\section{Limite d'une suite : notion, operations, comparaison}
+\section{Limite d'une suite : notion, opérations, comparaison}
 
 % ============================================================
 % STRATE 1 — Notion intuitive
 % ============================================================
 
 \definition[1]{
-Soit $(u_n)$ une suite de nombres reels.
+Soit $(u_n)$ une suite de nombres réels.
 
 $\bullet$ $(u_n)$ a pour \textbf{limite finie} $\ell$ lorsque les termes $u_n$ finissent par s'accumuler autour de $\ell$, aussi pres qu'on le souhaite, des que $n$ est assez grand. On note $\displaystyle\lim_{n \to +\infty} u_n = \ell$ et l'on dit que la suite \textbf{converge} vers $\ell$.
 
-$\bullet$ $(u_n)$ a pour \textbf{limite} $+\infty$ lorsque $u_n$ finit par depasser n'importe quel nombre fixe a l'avance, des que $n$ est assez grand. On note $\displaystyle\lim_{n \to +\infty} u_n = +\infty$, et l'on dit que la suite \textbf{diverge} vers $+\infty$ (definition analogue pour $-\infty$).
+$\bullet$ $(u_n)$ a pour \textbf{limite} $+\infty$ lorsque $u_n$ finit par depasser n'importe quel nombre fixe a l'avance, des que $n$ est assez grand. On note $\displaystyle\lim_{n \to +\infty} u_n = +\infty$, et l'on dit que la suite \textbf{diverge} vers $+\infty$ (définition analogue pour $-\infty$).
 }
 
 \margeAppui{
@@ -19,15 +19,15 @@ Une suite qui ne converge pas ne tend pas forcement vers l'infini : la suite $u_
 }
 
 \exemple{
-La suite recurrente $u_{n+1} = 0{,}5\,u_n + 3$ avec $u_0=0$, resolue plus haut, a pour terme general $u_n = 6 - 6\times0{,}5^n$. Comme $0{,}5^n$ tend vers $0$, la suite converge vers sa valeur d'equilibre $6$ : le modele se stabilise.
+La suite recurrente $u_{n+1} = 0{,}5\,u_n + 3$ avec $u_0=0$, resolue plus haut, a pour terme general $u_n = 6 - 6\times0{,}5^n$. Comme $0{,}5^n$ tend vers $0$, la suite converge vers sa valeur d'equilibre $6$ : le modèle se stabilise.
 }
 
 % ============================================================
 % STRATE 2 — Operations sur les limites
 % ============================================================
 
-\propriete[Operations sur les limites]{
-Soit $(u_n)$ et $(v_n)$ deux suites de limites respectives $\ell$ et $\ell'$ (finies ou infinies). Lorsque le resultat n'est pas une forme indeterminee :
+\propriete[Opérations sur les limites]{
+Soit $(u_n)$ et $(v_n)$ deux suites de limites respectives $\ell$ et $\ell'$ (finies ou infinies). Lorsque le résultat n'est pas une forme indeterminee :
 \begin{itemize}
   \item \textbf{Somme} : $u_n+v_n$ tend vers $\ell+\ell'$. Cas infini : $\ell$ fini et $\ell'=+\infty$ donnent $+\infty$.
   \item \textbf{Produit} : $u_n\,v_n$ tend vers $\ell\times\ell'$. Cas infini : $\ell>0$ et $\ell'=+\infty$ donnent $+\infty$.
@@ -36,11 +36,11 @@ Soit $(u_n)$ et $(v_n)$ deux suites de limites respectives $\ell$ et $\ell'$ (fi
 }
 
 \margeAppui{
-Quatre situations echappent a ces regles et s'appellent \textbf{formes indeterminees} : $(+\infty)+(-\infty)$, $0\times\infty$, $\dfrac{\infty}{\infty}$ et $\dfrac{0}{0}$. Il faut alors transformer l'ecriture — factoriser par le terme dominant, par exemple — avant de conclure.
+Quatre situations echappent a ces règles et s'appellent \textbf{formes indeterminees} : $(+\infty)+(-\infty)$, $0\times\infty$, $\dfrac{\infty}{\infty}$ et $\dfrac{0}{0}$. Il faut alors transformer l'ecriture — factoriser par le terme dominant, par exemple — avant de conclure.
 }
 
 \exemple{
-$u_n = \dfrac{3n+5}{n+2}$ presente la forme indeterminee $\dfrac{\infty}{\infty}$. En factorisant par $n$ au numerateur et au denominateur :
+$u_n = \dfrac{3n+5}{n+2}$ presente la forme indeterminee $\dfrac{\infty}{\infty}$. En factorisant par $n$ au numérateur et au dénominateur :
 \[
   u_n = \frac{n\left(3+\frac{5}{n}\right)}{n\left(1+\frac{2}{n}\right)} = \frac{3+\frac{5}{n}}{1+\frac{2}{n}} \xrightarrow[n \to +\infty]{} \frac{3+0}{1+0} = 3 .
 \]
@@ -50,15 +50,15 @@ $u_n = \dfrac{3n+5}{n+2}$ presente la forme indeterminee $\dfrac{\infty}{\infty}
 % STRATE 3 — Comparaison et gendarmes
 % ============================================================
 
-\propriete[Passage a la limite dans les inegalites]{
+\propriete[Passage a la limite dans les inégalités]{
 Si $u_n \leq v_n$ pour tout $n$ assez grand, et si $(u_n)$ et $(v_n)$ convergent vers $\ell$ et $\ell'$, alors $\ell \leq \ell'$.
 }
 
 \margeAppui{
-Attention : une inegalite \textbf{stricte} entre les termes ne se transmet pas a la limite. On a $\dfrac{1}{n+1} < \dfrac{1}{n}$ pour tout $n \geq 1$, et pourtant les deux suites ont la \emph{même} limite $0$ : le passage a la limite ne conserve que l'inegalite large.
+Attention : une inégalité \textbf{stricte} entre les termes ne se transmet pas a la limite. On a $\dfrac{1}{n+1} < \dfrac{1}{n}$ pour tout $n \geq 1$, et pourtant les deux suites ont la \emph{même} limite $0$ : le passage a la limite ne conserve que l'inégalité large.
 }
 
-\theoreme[Theoreme des gendarmes]{
+\theoreme[Théorème des gendarmes]{
 Si $u_n \leq w_n \leq v_n$ pour tout $n$ assez grand, et si $(u_n)$ et $(v_n)$ convergent vers la \textbf{même} limite $\ell$, alors $(w_n)$ converge aussi vers $\ell$.
 }
 
@@ -67,7 +67,7 @@ Soit $w_n = \dfrac{\sin n}{n}$ pour $n \geq 1$. Comme $-1 \leq \sin n \leq 1$, o
 \[
   -\frac{1}{n} \leq w_n \leq \frac{1}{n}.
 \]
-Les deux suites encadrantes tendent vers $0$ : d'apres le theoreme des gendarmes, $w_n$ tend vers $0$.
+Les deux suites encadrantes tendent vers $0$ : d'après le théorème des gendarmes, $w_n$ tend vers $0$.
 }
 
 % BEGIN-VERIFY
@@ -99,5 +99,5 @@ Les deux suites encadrantes tendent vers $0$ : d'apres le theoreme des gendarmes
 % END-VERIFY
 
 \erreurFrequente{
-\textbf{Appliquer le theoreme des gendarmes avec deux limites differentes.} L'encadrement $-\dfrac{2}{n} \leq w_n \leq \dfrac{1}{n}$ suffit a conclure car les deux bornes tendent vers $0$ ; mais un encadrement $1-\dfrac{1}{n} \leq w_n \leq 2+\dfrac{1}{n}$ ne permet rien de conclure : les gendarmes tendent vers $1$ et vers $2$, et la suite encadree peut osciller entre les deux.
+\textbf{Appliquer le théorème des gendarmes avec deux limites différentes.} L'encadrement $-\dfrac{2}{n} \leq w_n \leq \dfrac{1}{n}$ suffit a conclure car les deux bornes tendent vers $0$ ; mais un encadrement $1-\dfrac{1}{n} \leq w_n \leq 2+\dfrac{1}{n}$ ne permet rien de conclure : les gendarmes tendent vers $1$ et vers $2$, et la suite encadree peut osciller entre les deux.
 }
