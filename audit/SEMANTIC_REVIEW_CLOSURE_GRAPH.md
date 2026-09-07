@@ -27,5 +27,5 @@ Les 2552 vérifications d'adéquation restent dues, une par item. Présenter 253
 
 ## Fraîcheur
 
-- `EVIDENCE_HEAD` : `4eb3be564e780a4286666940a7bbc91800e674bb`
+- `EVIDENCE_HEAD` : `fd47bc83bced06979bfe6e44b15ccf01b934851d`
 - `INPUT_DIGEST` : `sha256:dbf27df1311f1cb1760987215692a3e18b22bbc18c0b42cabd0d7ce6b3bd5f39`
