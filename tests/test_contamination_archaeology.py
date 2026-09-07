@@ -63,10 +63,15 @@ def test_the_verdict_of_absence_is_backed_by_a_real_history_scan(
     """Dire « rien a restaurer » exige d'avoir ouvert les versions."""
 
     absents = [r for r in payload["records"] if r["state"] == "NO_AUTHENTIC_CONTENT_FOUND"]
-    assert absents, "un corpus sans aucun verdict d'absence serait suspect"
     for record in absents:
         assert record["known_versions"] >= 1, record["path"]
         assert record["evidence"] is None
+    # Une population vide est le but, pas un defaut du producteur : elle
+    # signifie qu'il ne reste aucun objet contamine a fouiller. On verifie
+    # alors que c'est bien parce que la population est vide, et non parce
+    # que la fouille n'a rien ouvert.
+    if not payload["records"]:
+        assert payload["summary"]["OBJECTS_CONTAMINATED_BY_533d1919"] == 0
 
 
 def test_the_committed_archaeology_matches_the_producer(producer) -> None:

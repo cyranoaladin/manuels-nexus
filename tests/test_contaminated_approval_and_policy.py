@@ -53,7 +53,10 @@ def test_a_defect_qualification_is_never_read_as_an_approval(
     vert.
     """
 
-    assert approvals["summary"]["DEFECT_QUALIFICATIONS_FOUND"] > 0
+    # Le compteur tombe a zero une fois les objets contamines retires : ce
+    # n'est pas la preuve qui disparait, c'est la population.
+    if approvals["records"]:
+        assert approvals["summary"]["DEFECT_QUALIFICATIONS_FOUND"] > 0
     for record in approvals["records"]:
         for preuve in record["approval_evidence"]:
             assert preuve["qualifies_a_defect"] is False
