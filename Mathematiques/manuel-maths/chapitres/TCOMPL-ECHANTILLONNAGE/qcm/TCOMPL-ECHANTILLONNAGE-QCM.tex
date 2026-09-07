@@ -59,6 +59,26 @@
     \item sum(random() < p for \_ in range(n)) / n
   \end{enumerate}
 
+\item[] \textbf{Capacité C6}
+
+\item \textbf{[Q6]} Soit $X$ suivant $\mathcal B(3;\tfrac12)$. Le calcul direct $E(X)=\sum_{k=0}^{3} k\,P(X=k)$ donne :
+  \begin{enumerate}[label=\Alph*.]
+    \item $\tfrac12$
+    \item $\tfrac32$
+    \item $3$
+    \item $\tfrac34$
+  \end{enumerate}
+
+\item[] \textbf{Capacité C7}
+
+\item \textbf{[Q7]} Si $X$ suit la loi uniforme sur $\{1;2;\dots;n\}$, son espérance vaut :
+  \begin{enumerate}[label=\Alph*.]
+    \item $\tfrac1n$
+    \item $\tfrac n2$
+    \item $\tfrac{n+1}2$
+    \item $n$
+  \end{enumerate}
+
 \end{enumerate}
 
 % NEXUS-QCM-TEACHER-ONLY-BEGIN
@@ -76,6 +96,8 @@ Q2 & C2 & \textbf{A} \\
 Q3 & C3 & \textbf{B} \\
 Q4 & C4 & \textbf{C} \\
 Q5 & C5 & \textbf{D} \\
+Q6 & C6 & \textbf{B} \\
+Q7 & C7 & \textbf{C} \\
 \hline
 \end{tabular}
 \end{center}
@@ -112,6 +134,18 @@ Q5 & C5 & \textbf{D} \\
     \item \textbf{A} — La somme des indices ne simule aucune variable de Bernoulli et la division par $p$ n'a pas de sens statistique. La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n. \emph{Renvoi : C5.}
     \item \textbf{B} — Cette expression renvoie le nombre de succès, mais oublie la division par la taille $n$ nécessaire pour obtenir la moyenne. La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n. \emph{Renvoi : C5.}
     \item \textbf{C} — Cette expression ne simule qu'une seule épreuve et modifie en plus sa probabilité en utilisant $p/n$. La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n. \emph{Renvoi : C5.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — La valeur $1/2$ est la probabilité de succès $p$, pas une moyenne du nombre de succès. Le calcul direct donne $E(X)=0\times\tfrac18+1\times\tfrac38+2\times\tfrac38+3\times\tfrac18=\tfrac{12}8=\tfrac32$, soit $np$. \emph{Renvoi : C6.}
+    \item \textbf{C} — La valeur $3$ est le nombre de répétitions $n$ : ce serait l'espérance si chaque répétition était un succès certain. Le calcul direct donne $E(X)=\tfrac{12}8=\tfrac32$, soit $np$. \emph{Renvoi : C6.}
+    \item \textbf{D} — La valeur $3/4$ est la variance $np(1-p)$, qui mesure la dispersion et non la moyenne. Le calcul direct donne $E(X)=\tfrac{12}8=\tfrac32$, soit $np$. \emph{Renvoi : C6.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — La valeur $1/n$ est la probabilité de chacune des $n$ valeurs, pas la moyenne de ces valeurs. L'espérance vaut $\tfrac1n\sum_{k=1}^{n}k=\tfrac1n\times\tfrac{n(n+1)}2=\tfrac{n+1}2$. \emph{Renvoi : C7.}
+    \item \textbf{B} — La valeur $n/2$ serait la moyenne des entiers de $0$ à $n$ ; ici la plus petite valeur est $1$, pas $0$. L'espérance vaut $\tfrac1n\times\tfrac{n(n+1)}2=\tfrac{n+1}2$. \emph{Renvoi : C7.}
+    \item \textbf{D} — La valeur $n$ est la plus grande valeur prise par $X$, pas sa moyenne : une moyenne ne peut pas égaler le maximum quand plusieurs valeurs distinctes sont possibles. L'espérance vaut $\tfrac{n+1}2$. \emph{Renvoi : C7.}
   \end{itemize}
 \end{itemize}
 \fi

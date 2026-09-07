@@ -131,6 +131,32 @@
           "renvoi": "C3"
         }
       }
+    },
+    {
+      "capacite": "C4",
+      "enonce": "On admet l'équation fonctionnelle $\\ln(ab)=\\ln a+\\ln b$ pour tous $a,b>0$. Pour en déduire $\\ln\\!\\left(\\tfrac1a\\right)=-\\ln a$, il suffit de l'appliquer à :",
+      "correcte": "B",
+      "options": {
+        "A": "$b=a$",
+        "B": "$b=\\tfrac1a$, puis d'utiliser $\\ln 1=0$",
+        "C": "$b=0$",
+        "D": "$a=1$ et $b=1$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Prendre $b=a$ donne $\\ln(a^2)=2\\ln a$ : une identité vraie, mais où $\\tfrac1a$ n'apparaît jamais. Avec $b=\\tfrac1a$ on obtient $\\ln 1=\\ln a+\\ln\\tfrac1a$, d'où $\\ln\\tfrac1a=-\\ln a$.",
+          "renvoi": "C4"
+        },
+        "C": {
+          "erreur": "La valeur $0$ n'appartient pas au domaine de $\\ln$, défini sur $]0;+\\infty[$ : l'équation fonctionnelle ne s'y applique pas. Le bon choix est $b=\\tfrac1a$.",
+          "renvoi": "C4"
+        },
+        "D": {
+          "erreur": "Avec $a=b=1$ l'équation donne $\\ln 1=2\\ln 1$, donc $\\ln 1=0$ : c'est un préliminaire utile, mais il ne fait pas apparaître $\\tfrac1a$. Il faut ensuite poser $b=\\tfrac1a$.",
+          "renvoi": "C4"
+        }
+      },
+      "id": "Q6"
     }
   ]
 }

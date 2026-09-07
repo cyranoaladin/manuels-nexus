@@ -59,6 +59,46 @@
     \item 5 d'essais
   \end{enumerate}
 
+\item[] \textbf{Capacité C4}
+
+\item \textbf{[Q6]} La loi exponentielle de paramètre $\lambda>0$ est dite « sans mémoire » parce que, pour tous $s,t\geq0$ :
+  \begin{enumerate}[label=\Alph*.]
+    \item $P(X>s+t)=P(X>s)+P(X>t)$
+    \item $P_{X>s}(X>s+t)=P(X>t)$
+    \item $P(X>t)=1-e^{-\lambda t}$
+    \item $E(X)=\lambda$
+  \end{enumerate}
+
+\item[] \textbf{Capacité C5}
+
+\item \textbf{[Q7]} Pour que la fonction $f$ définie par $f(x)=k\,e^{-2x}$ sur $[0;+\infty[$ et nulle ailleurs soit une densité de probabilité, il faut :
+  \begin{enumerate}[label=\Alph*.]
+    \item $k=1$
+    \item $k=\tfrac12$
+    \item $k=2$
+    \item n'importe quel $k>0$
+  \end{enumerate}
+
+\item[] \textbf{Capacité C6}
+
+\item \textbf{[Q8]} Pour $X$ de loi exponentielle de paramètre $\lambda$, l'espérance s'écrit :
+  \begin{enumerate}[label=\Alph*.]
+    \item $\displaystyle\int_0^{+\infty} x\,e^{-\lambda x}\,dx$
+    \item $\displaystyle\int_{-\infty}^{+\infty} \lambda x\,e^{-\lambda x}\,dx$
+    \item $\displaystyle\int_0^{+\infty} \lambda e^{-\lambda x}\,dx$
+    \item $\displaystyle\int_0^{+\infty} x\,\lambda e^{-\lambda x}\,dx$, qui vaut $\tfrac1\lambda$
+  \end{enumerate}
+
+\item[] \textbf{Capacité C7}
+
+\item \textbf{[Q9]} Si $X$ suit la loi uniforme sur $[a;b]$ (avec $a<b$), alors :
+  \begin{enumerate}[label=\Alph*.]
+    \item $E(X)=\tfrac{a+b}2$ et $V(X)=\tfrac{(b-a)^2}{12}$
+    \item $E(X)=\tfrac{b-a}2$ et $V(X)=\tfrac{(b-a)^2}{12}$
+    \item $E(X)=\tfrac{a+b}2$ et $V(X)=\tfrac{b-a}{12}$
+    \item sa densité vaut $\tfrac1b$ sur $[a;b]$
+  \end{enumerate}
+
 \end{enumerate}
 
 % NEXUS-QCM-TEACHER-ONLY-BEGIN
@@ -76,6 +116,10 @@ Q2 & C2 & \textbf{A} \\
 Q3 & C3 & \textbf{B} \\
 Q4 & C2 & \textbf{C} \\
 Q5 & C1 & \textbf{D} \\
+Q6 & C4 & \textbf{B} \\
+Q7 & C5 & \textbf{C} \\
+Q8 & C6 & \textbf{D} \\
+Q9 & C7 & \textbf{A} \\
 \hline
 \end{tabular}
 \end{center}
@@ -112,6 +156,30 @@ Q5 & C1 & \textbf{D} \\
     \item \textbf{A} — Calcul 1/0.5. Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais. \emph{Renvoi : C1.}
     \item \textbf{B} — Calcul (1-p)/p = 0.8/0.2 = 4. Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais. \emph{Renvoi : C1.}
     \item \textbf{C} — Calcul 1/(0.2\textasciicircum{}2). Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — Les probabilités de survie se multiplient : $e^{-\lambda(s+t)}=e^{-\lambda s}e^{-\lambda t}$. C'est ce produit qui, une fois divisé par $P(X>s)$, donne l'absence de mémoire. \emph{Renvoi : C4.}
+    \item \textbf{C} — $1-e^{-\lambda t}$ est la fonction de répartition $P(X\leq t)$ ; la probabilité de survie vaut $P(X>t)=e^{-\lambda t}$. Et une formule de répartition n'exprime pas, à elle seule, l'absence de mémoire. \emph{Renvoi : C4.}
+    \item \textbf{D} — L'espérance vaut $\tfrac1\lambda$ et non $\lambda$ ; surtout, une espérance ne dit rien du conditionnement par $\{X>s\}$. \emph{Renvoi : C4.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — Avec $k=1$, $\int_0^{+\infty}e^{-2x}\,dx=\tfrac12\neq1$. La condition $\int f=1$ impose $\tfrac k2=1$, donc $k=2$. \emph{Renvoi : C5.}
+    \item \textbf{B} — Avec $k=\tfrac12$ l'intégrale vaut $\tfrac14$. Le facteur cherché est l'inverse de $\int_0^{+\infty}e^{-2x}\,dx=\tfrac12$, soit $k=2$. \emph{Renvoi : C5.}
+    \item \textbf{D} — La positivité ne suffit pas : une densité doit aussi avoir une intégrale égale à $1$ sur $\mathbb{R}$, ce qui fixe $k=2$. \emph{Renvoi : C5.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{A} — Le facteur $\lambda$ de la densité a été oublié : cette intégrale vaut $\tfrac1{\lambda^2}$, pas $\tfrac1\lambda$. L'espérance intègre $x$ contre la densité $\lambda e^{-\lambda x}$. \emph{Renvoi : C6.}
+    \item \textbf{B} — La densité est nulle sur $]-\infty;0[$ : l'intégrale doit partir de $0$. Écrite de $-\infty$ à $+\infty$ avec $\lambda x e^{-\lambda x}$, elle diverge. \emph{Renvoi : C6.}
+    \item \textbf{C} — C'est l'intégrale de la densité seule : elle vaut $1$, la masse totale de probabilité. L'espérance pondère chaque valeur $x$ par cette densité. \emph{Renvoi : C6.}
+  \end{itemize}
+  \item \textbf{Q9}
+  \begin{itemize}
+    \item \textbf{B} — $\tfrac{b-a}2$ est la demi-longueur de l'intervalle, pas son milieu : sur $[2;6]$ elle vaudrait $2$, alors que le centre est $4=\tfrac{2+6}2$. \emph{Renvoi : C7.}
+    \item \textbf{C} — Une variance est homogène au carré de la variable : elle vaut $\tfrac{(b-a)^2}{12}$. La forme $\tfrac{b-a}{12}$ changerait de valeur avec l'unité choisie. \emph{Renvoi : C7.}
+    \item \textbf{D} — La densité est constante égale à $\tfrac1{b-a}$ sur $[a;b]$, seule valeur donnant une intégrale égale à $1$ ; $\tfrac1b$ ne convient que si $a=0$. \emph{Renvoi : C7.}
   \end{itemize}
 \end{itemize}
 \fi

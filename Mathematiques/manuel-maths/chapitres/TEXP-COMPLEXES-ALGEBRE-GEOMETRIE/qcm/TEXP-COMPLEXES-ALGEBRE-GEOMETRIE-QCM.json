@@ -131,6 +131,58 @@
           "renvoi": "C3"
         }
       }
+    },
+    {
+      "capacite": "C2",
+      "enonce": "La solution de l'équation $(2+i)z=5$ est :",
+      "correcte": "B",
+      "options": {
+        "A": "$2+i$",
+        "B": "$2-i$",
+        "C": "$\\tfrac52$",
+        "D": "$1-2i$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "En multipliant numérateur et dénominateur par le conjugué : $z=\\dfrac{5(2-i)}{(2+i)(2-i)}=\\dfrac{5(2-i)}{5}=2-i$. Garder $+i$ revient à ne pas conjuguer.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Diviser seulement les parties réelles ignore la partie imaginaire du dénominateur : $(2+i)\\times\\tfrac52=5+\\tfrac52i\\neq5$.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Les parties réelle et imaginaire ont été échangées : $(2+i)(1-2i)=4-3i\\neq5$, alors que $(2+i)(2-i)=5$.",
+          "renvoi": "C2"
+        }
+      },
+      "id": "Q6"
+    },
+    {
+      "capacite": "C5",
+      "enonce": "Pour démontrer $|z|^2=z\\bar z$, on pose $z=a+ib$ et on calcule :",
+      "correcte": "C",
+      "options": {
+        "A": "$z\\bar z=(a+ib)^2=a^2-b^2+2iab$",
+        "B": "$z\\bar z=a^2-b^2$",
+        "C": "$z\\bar z=(a+ib)(a-ib)=a^2+b^2$",
+        "D": "$z\\bar z=|z|$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "C'est $z^2$ et non $z\\bar z$ : le conjugué change le signe de la partie imaginaire, ce qui fait disparaître le terme en $i$.",
+          "renvoi": "C5"
+        },
+        "B": {
+          "erreur": "$a^2-b^2$ est la partie réelle de $z^2$. L'identité $(a+ib)(a-ib)=a^2-(ib)^2$ donne $a^2+b^2$, puisque $(ib)^2=-b^2$.",
+          "renvoi": "C5"
+        },
+        "D": {
+          "erreur": "Le produit $z\\bar z$ vaut le module au \\textbf{carré} : $|z|=\\sqrt{a^2+b^2}$, tandis que $z\\bar z=a^2+b^2$. Les deux ne coïncident que si $|z|\\in\\{0;1\\}$.",
+          "renvoi": "C5"
+        }
+      },
+      "id": "Q7"
     }
   ]
 }

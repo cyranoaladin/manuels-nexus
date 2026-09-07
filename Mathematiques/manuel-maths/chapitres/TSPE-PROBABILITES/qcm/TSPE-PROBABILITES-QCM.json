@@ -157,6 +157,110 @@
           "renvoi": "C10, inégalité de Bienaymé-Tchebychev"
         }
       }
+    },
+    {
+      "capacite": "C1",
+      "enonce": "On répète trois fois, de façon indépendante, une épreuve dont la probabilité de succès est $0{,}2$. La probabilité d'obtenir au moins un succès vaut :",
+      "correcte": "C",
+      "options": {
+        "A": "$0{,}2$",
+        "B": "$0{,}6$",
+        "C": "$0{,}488$",
+        "D": "$0{,}512$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "$0{,}2$ est la probabilité de succès d'\\textbf{une} épreuve. Sur trois répétitions, on passe par l'événement contraire : $1-0{,}8^3=0{,}488$.",
+          "renvoi": "C1"
+        },
+        "B": {
+          "erreur": "$3\\times0{,}2=0{,}6$ additionne les probabilités de trois événements qui ne sont pas incompatibles : les succès peuvent se produire ensemble, et la somme surestime.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "$0{,}512=0{,}8^3$ est la probabilité de n'obtenir \\textbf{aucun} succès. La réponse cherchée en est le complément : $1-0{,}512=0{,}488$.",
+          "renvoi": "C1"
+        }
+      },
+      "id": "Q7"
+    },
+    {
+      "capacite": "C3",
+      "enonce": "Une machine produit $2\\%$ de pièces défectueuses, indépendamment les unes des autres. Le plus petit nombre $n$ de pièces à prélever pour que la probabilité d'en obtenir au moins une défectueuse atteigne $0{,}5$ est :",
+      "correcte": "D",
+      "options": {
+        "A": "$n=25$",
+        "B": "$n=50$",
+        "C": "$n=2$",
+        "D": "$n=35$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Avec $n=25$, $1-0{,}98^{25}\\approx0{,}397$, encore inférieur à $0{,}5$. Il faut résoudre $0{,}98^{\\,n}\\leq0{,}5$, soit $n\\geq\\tfrac{\\ln0{,}5}{\\ln0{,}98}\\approx34{,}3$.",
+          "renvoi": "C3"
+        },
+        "B": {
+          "erreur": "$n=50$ convient ($\\approx0{,}636$) mais ce n'est pas le plus petit : dès $n=35$ la probabilité vaut environ $0{,}507$.",
+          "renvoi": "C3"
+        },
+        "C": {
+          "erreur": "Avec $n=2$, $1-0{,}98^2\\approx0{,}040$ : la probabilité croît lentement, il faut des dizaines de pièces pour atteindre une chance sur deux.",
+          "renvoi": "C3"
+        }
+      },
+      "id": "Q8"
+    },
+    {
+      "capacite": "C4",
+      "enonce": "Pour $X\\sim\\mathcal B(50;0{,}3)$, déterminer le plus petit intervalle $[a;b]$ tel que $P(a\\leq X\\leq b)\\geq0{,}95$ se fait :",
+      "correcte": "A",
+      "options": {
+        "A": "en cumulant numériquement les $P(X=k)$ autour de l'espérance, à la calculatrice ou en Python",
+        "B": "en résolvant une équation du second degré",
+        "C": "en prenant $[0;50]$, le seul intervalle sûr",
+        "D": "en prenant $E(X)\\pm\\sigma$"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "$P(X=k)=\\binom{50}{k}0{,}3^k0{,}7^{50-k}$ n'est pas polynomiale du second degré en $k$ : aucune résolution algébrique fermée ne donne les bornes, on les cherche numériquement.",
+          "renvoi": "C4"
+        },
+        "C": {
+          "erreur": "$[0;50]$ a bien une probabilité de $1$, mais l'énoncé demande le \\textbf{plus petit} intervalle : c'est la minimalité qui fait l'intérêt de la recherche.",
+          "renvoi": "C4"
+        },
+        "D": {
+          "erreur": "Un intervalle d'un écart-type autour de la moyenne couvre environ $68\\%$ des cas dans le modèle normal, très loin des $95\\%$ demandés.",
+          "renvoi": "C4"
+        }
+      },
+      "id": "Q9"
+    },
+    {
+      "capacite": "C6",
+      "enonce": "Pour calculer l'espérance du nombre $X$ de faces obtenues en dix lancers d'une pièce équilibrée, la décomposition utile est :",
+      "correcte": "B",
+      "options": {
+        "A": "$X=10X_1$",
+        "B": "$X=X_1+\\dots+X_{10}$, où $X_i$ vaut $1$ si le $i$-ème lancer donne face et $0$ sinon",
+        "C": "$X=\\max(X_1;\\dots;X_{10})$",
+        "D": "aucune décomposition n'est possible : il faut la loi complète de $X$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Cette écriture ferait de $X$ une variable ne prenant que les valeurs $0$ et $10$ : elle suppose les dix lancers identiques au premier, alors qu'ils sont indépendants et peuvent différer.",
+          "renvoi": "C6"
+        },
+        "C": {
+          "erreur": "Le maximum vaut $1$ dès qu'une face apparaît : il détecte l'existence d'un succès, il n'en compte pas le nombre.",
+          "renvoi": "C6"
+        },
+        "D": {
+          "erreur": "C'est justement ce que la linéarité de l'espérance permet d'éviter : $E(X)=\\sum E(X_i)=10\\times\\tfrac12=5$, sans écrire un seul coefficient binomial.",
+          "renvoi": "C6"
+        }
+      },
+      "id": "Q10"
     }
   ]
 }

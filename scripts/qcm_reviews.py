@@ -4472,3 +4472,1030 @@ def _limf_q9(options):
         options,
         lambda texte: "AH $y=3$ en $+\\infty$" in texte and "pas d'AV" in texte,
     )
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# Questions ajoutées pour couvrir les capacités laissées sans QCM
+#
+# Le gate `qcm` refusait quatorze chapitres dont une capacité du contrat
+# n'était évaluée par aucune question. Les questions écrites pour les couvrir
+# entrent dans la même chaîne de preuve que les autres : le solveur générique
+# les a routées en `HUMAN_REVIEW_REQUIRED`, elles sont fermées ici.
+# ══════════════════════════════════════════════════════════════════════════
+
+_MATHS_CH = "Mathematiques/manuel-maths/chapitres"
+
+
+def _cours_maths(chapitre: str, fichier: str) -> str:
+    return f"{_MATHS_CH}/{chapitre}/cours/{fichier}"
+
+
+# ── 1SPE-SECOND-DEGRE ─────────────────────────────────────────────────────
+_SECDEG = "1SPE-SECOND-DEGRE"
+
+
+@mecanique(_SECDEG, "Q19", SYMBOLIC)
+def _secdeg_q19(options):
+    """Somme et produit des racines de a(x+1)(x-4), calculés puis rapprochés."""
+    from sympy import Poly, Rational, expand, symbols
+
+    x, a = symbols("x a")
+    polynome = Poly(expand(a * (x + 1) * (x - 4)), x)
+    coefficients = polynome.all_coeffs()          # [a2, a1, a0]
+    somme = -coefficients[1] / coefficients[0]
+    produit = coefficients[2] / coefficients[0]
+    assert somme == 3 and produit == -4
+    # Les quatre options sont rendues AVANT de savoir laquelle est vraie : la
+    # dérivation choisit celle qui porte le couple calculé.
+    rendus = {
+        (3, -4): "$S=3$ et $P=-4$",
+        (3, 4): "$S=3$ et $P=4$",
+        (-3, -4): "$S=-3$ et $P=-4$",
+        (-3, 4): "$S=-3$ et $P=4$",
+    }
+    attendu = rendus[(int(somme), int(produit))]
+    assert Rational(int(somme)) == somme
+    return _lettre(options, lambda texte: texte.strip() == attendu)
+
+
+@mecanique(_SECDEG, "Q20", SYMBOLIC)
+def _secdeg_q20(options):
+    """Signe de -2(x-1)(x+3) : l'ensemble de positivité est résolu sur R."""
+    from sympy import Interval, S, solveset, symbols
+
+    x = symbols("x", real=True)
+    f = -2 * (x - 1) * (x + 3)
+    positif = solveset(f > 0, x, domain=S.Reals)
+    assert positif == Interval.open(-3, 1)
+    assert positif != S.Reals and positif != S.EmptySet
+    # L'extérieur des racines est l'autre candidat : on vérifie qu'il est faux.
+    assert f.subs(x, 2) < 0 and f.subs(x, -4) < 0 and f.subs(x, 0) > 0
+    return _lettre(options, lambda texte: texte.strip() == "pour $-3<x<1$")
+
+
+# ── TCOMPL-ECHANTILLONNAGE ────────────────────────────────────────────────
+_ECH = "TCOMPL-ECHANTILLONNAGE"
+
+
+@mecanique(_ECH, "Q6", SYMBOLIC)
+def _ech_q6(options):
+    """E(X) pour X ~ B(3,1/2), par la somme définissant l'espérance."""
+    from sympy import Rational, binomial
+
+    p = Rational(1, 2)
+    esperance = sum(k * binomial(3, k) * p**k * (1 - p) ** (3 - k) for k in range(4))
+    assert esperance == Rational(3, 2)
+    variance = 3 * p * (1 - p)
+    assert variance == Rational(3, 4) and variance != esperance
+    rendus = {
+        Rational(1, 2): "$\\tfrac12$",
+        Rational(3, 2): "$\\tfrac32$",
+        Rational(3, 1): "$3$",
+        Rational(3, 4): "$\\tfrac34$",
+    }
+    return _lettre(options, lambda texte: texte.strip() == rendus[esperance])
+
+
+@mecanique(_ECH, "Q7", SYMBOLIC)
+def _ech_q7(options):
+    """Espérance de la loi uniforme sur {1,...,n}, calculée symboliquement."""
+    from sympy import Rational, Sum, simplify, symbols
+
+    n, k = symbols("n k", positive=True, integer=True)
+    esperance = simplify(Sum(k * Rational(1, 1) / n, (k, 1, n)).doit())
+    assert simplify(esperance - (n + 1) / 2) == 0
+    assert simplify(esperance - n / 2) != 0
+    rendus = {"(n + 1)/2": "$\\tfrac{n+1}2$", "n/2": "$\\tfrac n2$"}
+    return _lettre(options, lambda texte: texte.strip() == rendus["(n + 1)/2"])
+
+
+# ── TCOMPL-TEMPS-ATTENTE ──────────────────────────────────────────────────
+_ATT = "TCOMPL-TEMPS-ATTENTE"
+
+
+@mecanique(_ATT, "Q7", SYMBOLIC)
+def _att_q7(options):
+    """Constante de normalisation d'une densité exponentielle."""
+    from sympy import Rational, Symbol, exp, integrate, oo, solve, symbols
+
+    x = Symbol("x", positive=True)
+    k = symbols("k")
+    masse = integrate(k * exp(-2 * x), (x, 0, oo))
+    solutions = solve(masse - 1, k)
+    assert solutions == [2]
+    assert integrate(exp(-2 * x), (x, 0, oo)) == Rational(1, 2)
+    rendus = {1: "$k=1$", 2: "$k=2$", Rational(1, 2): "$k=\\tfrac12$"}
+    return _lettre(options, lambda texte: texte.strip() == rendus[solutions[0]])
+
+
+@mecanique(_ATT, "Q9", SYMBOLIC)
+def _att_q9(options):
+    """Espérance et variance de la loi uniforme continue sur [a;b]."""
+    from sympy import Symbol, integrate, simplify, symbols
+
+    x = Symbol("x")
+    a, b = symbols("a b", real=True, positive=True)
+    densite = 1 / (b - a)
+    esperance = simplify(integrate(x * densite, (x, a, b)))
+    variance = simplify(integrate((x - esperance) ** 2 * densite, (x, a, b)))
+    assert simplify(esperance - (a + b) / 2) == 0
+    assert simplify(variance - (b - a) ** 2 / 12) == 0
+    assert simplify(esperance - (b - a) / 2) != 0
+    assert simplify(variance - (b - a) / 12) != 0
+    attendu = "$E(X)=\\tfrac{a+b}2$ et $V(X)=\\tfrac{(b-a)^2}{12}$"
+    return _lettre(options, lambda texte: texte.strip() == attendu)
+
+
+# ── TEXP-ARITHMETIQUE ─────────────────────────────────────────────────────
+_ARITH = "TEXP-ARITHMETIQUE"
+
+
+@mecanique(_ARITH, "Q6", SYMBOLIC)
+def _arith_q6(options):
+    """Le plus petit facteur premier de 221 dépasse 7 mais pas la racine."""
+    from sympy import factorint, isprime, primerange, sqrt
+
+    facteurs = sorted(factorint(221))
+    assert facteurs == [13, 17]
+    assert not isprime(221)
+    petits = [p for p in primerange(2, 8)]
+    assert all(221 % p for p in petits)           # 2,3,5,7 ne suffisent pas
+    borne = max(p for p in primerange(2, 222) if p * p <= 221)
+    assert borne == 13 and sqrt(221) < 15
+    return _lettre(
+        options,
+        lambda texte: f"$p^2\\leq221$" in texte and f"jusqu'à ${borne}$" in texte,
+    )
+
+
+@mecanique(_ARITH, "Q7", SYMBOLIC)
+def _arith_q7(options):
+    """6x+9y=5 : le critère de Bézout est évalué, pas invoqué."""
+    from sympy import gcd
+    from sympy.solvers.diophantine.diophantine import diop_linear
+    from sympy.abc import x, y
+
+    d = gcd(6, 9)
+    assert d == 3 and 5 % d != 0
+    # `diop_linear` renvoie un couple de paramétrages, ou `(None, None)`
+    # lorsqu'il n'existe aucune solution entière.
+    assert diop_linear(6 * x + 9 * y - 5) == (None, None)
+    # Contrôle : la même équation avec un second membre multiple de 3 en a.
+    assert diop_linear(6 * x + 9 * y - 3) != (None, None)
+    return _lettre(options, lambda texte: texte.startswith("n'admet aucune solution"))
+
+
+@mecanique(_ARITH, "Q10", SYMBOLIC)
+def _arith_q10(options):
+    """Les quatre congruences proposées sont testées sur des cas concrets."""
+    from sympy import primerange
+
+    couples = [(a, p) for p in primerange(3, 20) for a in range(2, 10) if a % p]
+    universelles = {
+        "$a^{p-1}\\equiv1 \\pmod p$": all(pow(a, p - 1, p) == 1 for a, p in couples),
+        "$a^{p}\\equiv1 \\pmod p$": all(pow(a, p, p) == 1 for a, p in couples),
+        "$a^p\\equiv a \\pmod{p-1}$": all(
+            pow(a, p, p - 1) == a % (p - 1) for a, p in couples
+        ),
+        "$p^{a-1}\\equiv1 \\pmod a$": all(
+            pow(p, a - 1, a) == 1 for a, p in couples if a > 1
+        ),
+    }
+    vraies = [texte for texte, valeur in universelles.items() if valeur]
+    assert len(vraies) == 1
+    return _lettre(options, lambda texte: texte.strip() == vraies[0])
+
+
+# ── TEXP-COMPLEXES-ALGEBRE-GEOMETRIE ──────────────────────────────────────
+_CPLXA = "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE"
+
+
+@mecanique(_CPLXA, "Q6", SYMBOLIC)
+def _cplxa_q6(options):
+    """(2+i)z = 5 : l'équation est résolue, pas devinée."""
+    from sympy import I, Symbol, simplify, solve
+
+    z = Symbol("z")
+    solutions = solve((2 + I) * z - 5, z)
+    assert len(solutions) == 1
+    racine = simplify(solutions[0])
+    assert racine == 2 - I
+    assert simplify((2 + I) * (1 - 2 * I)) == 4 - 3 * I    # le distracteur D
+    rendus = {2 - I: "$2-i$", 2 + I: "$2+i$", 1 - 2 * I: "$1-2i$"}
+    return _lettre(options, lambda texte: texte.strip() == rendus[racine])
+
+
+# ── TEXP-COMPLEXES-TRIGO-POLYNOMES ────────────────────────────────────────
+_CPLXT = "TEXP-COMPLEXES-TRIGO-POLYNOMES"
+
+
+@mecanique(_CPLXT, "Q7", SYMBOLIC)
+def _cplxt_q7(options):
+    """Chaque factorisation proposée est développée et comparée à P."""
+    from sympy import Symbol, expand, simplify
+
+    z = Symbol("z")
+    P = z**3 - 3 * z**2 + 4 * z - 2
+    candidats = {
+        "$(z-1)(z^2-2z-2)$": (z - 1) * (z**2 - 2 * z - 2),
+        "$(z-1)(z^2+2z+2)$": (z - 1) * (z**2 + 2 * z + 2),
+        "$(z-1)(z^2-2z+2)$": (z - 1) * (z**2 - 2 * z + 2),
+        "$(z-1)^3$": (z - 1) ** 3,
+    }
+    egaux = [texte for texte, forme in candidats.items()
+             if simplify(expand(forme) - P) == 0]
+    assert len(egaux) == 1
+    return _lettre(options, lambda texte: texte.strip() == egaux[0])
+
+
+# ── TSPE-CALCUL-INTEGRAL ──────────────────────────────────────────────────
+_INTEG = "TSPE-CALCUL-INTEGRAL"
+
+
+@mecanique(_INTEG, "Q6", SYMBOLIC)
+def _integ_q6(options):
+    """Aire entre y = x et y = x^2 sur [0;1], intégrée symboliquement."""
+    from sympy import Rational, Symbol, integrate
+
+    x = Symbol("x")
+    aire = integrate(x - x**2, (x, 0, 1))
+    assert aire == Rational(1, 6)
+    assert integrate(x, (x, 0, 1)) == Rational(1, 2)
+    assert integrate(x**2, (x, 0, 1)) == Rational(1, 3)
+    rendus = {
+        Rational(1, 2): "$\\tfrac12$",
+        Rational(1, 6): "$\\tfrac16$",
+        Rational(1, 3): "$\\tfrac13$",
+        Rational(5, 6): "$\\tfrac56$",
+    }
+    return _lettre(options, lambda texte: texte.strip() == rendus[aire])
+
+
+@mecanique(_INTEG, "Q7", SYMBOLIC)
+def _integ_q7(options):
+    """Les quatre relations de récurrence sont confrontées aux valeurs de I_n."""
+    from sympy import E, Symbol, integrate, simplify
+
+    x = Symbol("x")
+    I = [integrate(x**n * E**x, (x, 0, 1)) for n in range(5)]
+    relations = {
+        "$I_n=e+nI_{n-1}$": lambda n: E + n * I[n - 1],
+        "$I_n=nI_{n-1}-e$": lambda n: n * I[n - 1] - E,
+        "$I_n=e-nI_{n-1}$": lambda n: E - n * I[n - 1],
+        "$I_n=I_{n-1}$": lambda n: I[n - 1],
+    }
+    valides = [
+        texte
+        for texte, formule in relations.items()
+        if all(simplify(I[n] - formule(n)) == 0 for n in range(1, 5))
+    ]
+    assert len(valides) == 1
+    return _lettre(options, lambda texte: texte.strip() == valides[0])
+
+
+# ── TSPE-PROBABILITES ─────────────────────────────────────────────────────
+_PROBA = "TSPE-PROBABILITES"
+
+
+@mecanique(_PROBA, "Q7", SYMBOLIC)
+def _proba_q7(options):
+    """P(au moins un succès) sur trois épreuves de probabilité 0,2."""
+    from sympy import Rational, nsimplify
+
+    p = Rational(2, 10)
+    aucun = (1 - p) ** 3
+    au_moins_un = 1 - aucun
+    assert aucun == nsimplify("0.512")
+    assert au_moins_un == nsimplify("0.488")
+    rendus = {
+        nsimplify("0.2"): "$0{,}2$",
+        nsimplify("0.6"): "$0{,}6$",
+        nsimplify("0.488"): "$0{,}488$",
+        nsimplify("0.512"): "$0{,}512$",
+    }
+    return _lettre(options, lambda texte: texte.strip() == rendus[au_moins_un])
+
+
+@mecanique(_PROBA, "Q8", SYMBOLIC)
+def _proba_q8(options):
+    """Le plus petit n tel que 1 - 0,98^n >= 0,5, cherché par énumération."""
+    from sympy import Rational
+
+    q = Rational(98, 100)
+    seuil = Rational(1, 2)
+    n = next(n for n in range(1, 500) if 1 - q**n >= seuil)
+    assert n == 35
+    assert 1 - q ** (n - 1) < seuil                 # minimalité
+    assert 1 - q**50 >= seuil                       # 50 convient mais n'est pas minimal
+    rendus = {2: "$n=2$", 25: "$n=25$", 35: "$n=35$", 50: "$n=50$"}
+    return _lettre(options, lambda texte: texte.strip() == rendus[n])
+
+
+# ── Revues conceptuelles des questions ajoutées ───────────────────────────
+_BAYES = "TCOMPL-INFERENCE-BAYESIENNE"
+_LOGH = "TCOMPL-LOGARITHME-HISTORIQUE"
+_EVOL = "TCOMPL-MODELES-EVOLUTION"
+_FONC = "TCOMPL-MODELES-FONCTION"
+_GRAPHES = "TEXP-GRAPHES"
+_MARKOV = "TEXP-MATRICES-MARKOV"
+
+conceptuelle(
+    _BAYES, "Q6", reponse="B",
+    raisonnement=(
+        "La valeur prédictive positive est la probabilité conditionnelle "
+        "P(malade | test positif), que la formule de Bayes exprime par "
+        "se·p / (se·p + (1−sp)(1−p)). Le seul terme qui varie ici est la "
+        "prévalence p. Avec se = sp = 0,99, elle vaut 0,099/0,108 ≈ 0,92 pour "
+        "p = 0,1 et 0,00099/0,01098 ≈ 0,09 pour p = 0,001. La chute vient de "
+        "ce que le 1 % de faux positifs s'applique à une population saine "
+        "presque entière : en population très saine, les faux positifs "
+        "deviennent majoritaires parmi les tests positifs."
+    ),
+    source_cours=_cours_maths(_BAYES, "11_C2_tests_depistage.tex"),
+    source_programme=f"{_BAYES}::C5",
+    refutations={
+        "A": (
+            "Sensibilité et spécificité sont des probabilités conditionnelles "
+            "SACHANT l'état de santé ; la VPP conditionne dans l'autre sens et "
+            "fait donc intervenir la loi a priori, c'est-à-dire la prévalence. "
+            "Le calcul le montre : 0,92 puis 0,09 pour un test inchangé."
+        ),
+        "C": (
+            "L'affirmation inverse le sens de variation. Quand p décroît, le "
+            "numérateur se·p décroît proportionnellement à p, tandis que le "
+            "terme de faux positifs (1−sp)(1−p) tend vers 1−sp, constant non "
+            "nul : le quotient décroît."
+        ),
+        "D": (
+            "La VPP reste strictement positive tant que la sensibilité et la "
+            "prévalence le sont : elle vaut environ 0,09, soit à peu près un "
+            "test positif sur onze correspondant à un vrai malade."
+        ),
+    },
+)
+
+conceptuelle(
+    _LOGH, "Q6", reponse="B",
+    raisonnement=(
+        "L'équation fonctionnelle ln(ab) = ln a + ln b vaut pour tous a, b "
+        "strictement positifs. Le choix b = 1/a est licite puisque 1/a > 0, et "
+        "il donne ln(a × 1/a) = ln a + ln(1/a), c'est-à-dire ln 1 = ln a + "
+        "ln(1/a). Comme ln 1 = 0, on conclut ln(1/a) = −ln a. C'est le seul "
+        "choix parmi les quatre qui fasse apparaître 1/a dans l'équation."
+    ),
+    source_cours=_cours_maths(_LOGH, "11_C2_equation_fonctionnelle.tex"),
+    source_programme=f"{_LOGH}::C4",
+    refutations={
+        "A": (
+            "b = a donne ln(a²) = 2 ln a, une identité correcte mais où 1/a "
+            "n'apparaît jamais : aucune substitution ultérieure n'en fera "
+            "sortir l'inverse."
+        ),
+        "C": (
+            "b = 0 sort du domaine de définition de ln, qui est ]0 ; +∞[. "
+            "L'équation fonctionnelle n'y est pas énoncée et ne peut donc pas "
+            "y être appliquée."
+        ),
+        "D": (
+            "a = b = 1 donne ln 1 = 2 ln 1, donc ln 1 = 0. C'est un "
+            "préliminaire utile — il sert d'ailleurs à conclure — mais pris "
+            "seul il ne dit rien de ln(1/a)."
+        ),
+    },
+)
+
+conceptuelle(
+    _EVOL, "Q6", reponse="B",
+    raisonnement=(
+        "La construction graphique des termes d'une suite récurrente doit "
+        "transformer une ordonnée en abscisse : on lit u_{n+1} = f(u_n) sur "
+        "l'axe des ordonnées, et il faut le reporter sur l'axe des abscisses "
+        "pour appliquer f de nouveau. La droite d'équation y = x est "
+        "exactement l'outil de ce report, puisqu'un point de cette droite a "
+        "des coordonnées égales. D'où la construction en escalier ou en "
+        "escargot, qui laisse conjecturer monotonie et limite éventuelle."
+    ),
+    source_cours=_cours_maths(_EVOL, "11_C2_recurrence_arithmetico_geometrique.tex"),
+    source_programme=f"{_EVOL}::C3",
+    refutations={
+        "A": (
+            "L'axe des abscisses, d'équation y = 0, ne relie pas une ordonnée "
+            "à une abscisse : il ne permet aucun report. Il ne sert qu'à "
+            "situer le premier terme."
+        ),
+        "C": (
+            "La tangente en u_0 approche f localement. Elle intervient dans "
+            "l'étude de la vitesse de convergence, pas dans la construction "
+            "des termes, qui sont exacts et non approchés."
+        ),
+        "D": (
+            "La verticale x = u_0 donne le point (u_0 ; u_1) et rien de plus : "
+            "sans y = x, l'ordonnée u_1 ne redescend jamais sur l'axe des "
+            "abscisses et l'itération s'arrête au premier pas."
+        ),
+    },
+)
+
+conceptuelle(
+    _EVOL, "Q7", reponse="C",
+    raisonnement=(
+        "En ajoutant 2 aux trois membres, l'hypothèse s'écrit "
+        "2 − 1/n ≤ u_n ≤ 2 + 1/n pour tout n ≥ 1. Les deux suites encadrantes "
+        "convergent vers 2, puisque 1/n tend vers 0. Le théorème des gendarmes "
+        "conclut alors que (u_n) converge, et que sa limite est 2."
+    ),
+    source_cours=_cours_maths(_EVOL, "13_C6_limites_suites.tex"),
+    source_programme=f"{_EVOL}::C6",
+    refutations={
+        "A": (
+            "Une suite encadrée par deux suites convergentes de même limite ne "
+            "peut pas diverger : au-delà d'un rang, tous ses termes sont dans "
+            "un intervalle aussi petit qu'on veut autour de 2."
+        ),
+        "B": (
+            "C'est l'écart u_n − 2 qui tend vers 0, ce que dit littéralement "
+            "l'encadrement. La suite elle-même tend donc vers 2, pas vers 0."
+        ),
+        "D": (
+            "Le théorème des gendarmes sert précisément à conclure sans "
+            "expression explicite : l'encadrement suffit, et c'est tout son "
+            "intérêt pour les suites définies par récurrence."
+        ),
+    },
+)
+
+conceptuelle(
+    _FONC, "Q6", reponse="B",
+    raisonnement=(
+        "f est continue sur [0 ; 5] et 2 est compris entre f(0) = −3 et "
+        "f(5) = 7 : le théorème des valeurs intermédiaires donne au moins une "
+        "solution. La stricte croissance donne l'unicité, car deux antécédents "
+        "distincts x₁ < x₂ entraîneraient f(x₁) < f(x₂), donc deux images "
+        "différentes. Existence et unicité : exactement une solution."
+    ),
+    source_cours=_cours_maths(_FONC, "10_C1_etude_fonction.tex"),
+    source_programme=f"{_FONC}::C2",
+    refutations={
+        "A": (
+            "L'image de [0 ; 5] par une fonction continue est un intervalle "
+            "contenant −3 et 7, donc contenant 2. Nier l'existence contredit "
+            "le théorème des valeurs intermédiaires."
+        ),
+        "C": (
+            "Deux solutions distinctes contrediraient la stricte croissance, "
+            "qui interdit à f de prendre deux fois la même valeur."
+        ),
+        "D": (
+            "Une infinité de solutions supposerait f constante égale à 2 sur "
+            "tout un intervalle : impossible pour une fonction strictement "
+            "croissante."
+        ),
+    },
+)
+
+conceptuelle(
+    _FONC, "Q7", reponse="C",
+    raisonnement=(
+        "La dichotomie remplace une borne de l'intervalle par son milieu, en "
+        "conservant la moitié aux extrémités de laquelle f change de signe. "
+        "Ici f(0) = −1 < 0, f(1) = 1 > 0 et f(0,5) = −0,375 < 0 : le "
+        "changement de signe se produit entre 0,5 et 1. L'intervalle retenu "
+        "est donc [0,5 ; 1], moitié droite de [0 ; 1]."
+    ),
+    source_cours=_cours_maths(_FONC, "10_C1_etude_fonction.tex"),
+    source_programme=f"{_FONC}::C3",
+    refutations={
+        "A": (
+            "Sur [0 ; 0,5], f vaut −1 puis −0,375 : elle reste négative aux "
+            "deux bornes, donc aucun changement de signe n'y est garanti et "
+            "cette moitié est celle qu'on élimine."
+        ),
+        "B": (
+            "[0,5 ; 0,75] est le résultat de deux coupes successives. Une "
+            "étape de dichotomie ne remplace qu'une seule borne."
+        ),
+        "D": (
+            "[0,25 ; 0,75] n'est pas une moitié de [0 ; 1] : la dichotomie "
+            "supprime une moitié, elle ne recentre pas l'intervalle autour du "
+            "milieu."
+        ),
+    },
+)
+
+conceptuelle(
+    _FONC, "Q8", reponse="D",
+    raisonnement=(
+        "Le point moyen d'un nuage est défini par les moyennes arithmétiques "
+        "des deux coordonnées : G(x̄ ; ȳ). Cette définition est celle qui rend "
+        "les calculs de covariance et de régression cohérents, puisque les "
+        "écarts se mesurent ensuite par rapport à ce point."
+    ),
+    source_cours=_cours_maths(_FONC, "12_C3_statistique_deux_variables.tex"),
+    source_programme=f"{_FONC}::C6",
+    refutations={
+        "A": (
+            "Le couple des maxima est un point extrême du nuage, souvent hors "
+            "du nuage lui-même, et entièrement déterminé par une seule "
+            "observation. Ce n'est pas une position moyenne."
+        ),
+        "B": (
+            "Médiane et moyenne coïncident seulement pour une distribution "
+            "symétrique. Le point moyen est défini par les moyennes, seules "
+            "compatibles avec la suite du calcul statistique."
+        ),
+        "C": (
+            "Un nuage n'est centré à l'origine qu'après soustraction des "
+            "moyennes. Sur les données brutes, le point moyen n'a aucune "
+            "raison d'être l'origine."
+        ),
+    },
+)
+
+conceptuelle(
+    _FONC, "Q9", reponse="D",
+    raisonnement=(
+        "La droite des moindres carrés minimise la somme des carrés des écarts "
+        "verticaux. L'annulation de la dérivée par rapport à l'ordonnée à "
+        "l'origine donne exactement ȳ = a x̄ + b, c'est-à-dire que le point "
+        "moyen appartient à la droite. Son équation s'écrit donc "
+        "y − ȳ = a(x − x̄), quelle que soit la pente a."
+    ),
+    source_cours=_cours_maths(_FONC, "12_C3_statistique_deux_variables.tex"),
+    source_programme=f"{_FONC}::C7",
+    refutations={
+        "A": (
+            "Passer par tous les points supposerait le nuage déjà aligné. "
+            "Sinon aucune droite ne le peut, et c'est précisément pourquoi on "
+            "minimise un écart plutôt que de l'annuler."
+        ),
+        "B": (
+            "La méthode minimise les carrés des écarts VERTICAUX y_i − (ax_i + b). "
+            "Minimiser des distances perpendiculaires donnerait une autre "
+            "droite, et rendrait indiscernables les régressions de y en x et "
+            "de x en y, qui sont pourtant distinctes."
+        ),
+        "C": (
+            "L'appartenance du point moyen n'est pas un cas particulier : elle "
+            "découle de la condition d'optimalité sur b, donc vaut toujours."
+        ),
+    },
+)
+
+conceptuelle(
+    _ATT, "Q6", reponse="B",
+    raisonnement=(
+        "L'absence de mémoire est une propriété de probabilité "
+        "CONDITIONNELLE : sachant que l'attente a déjà duré s, la loi de "
+        "l'attente restante est la loi initiale. Elle s'écrit "
+        "P(X > s + t | X > s) = P(X > t). Le calcul la confirme : "
+        "P(X > s+t)/P(X > s) = e^{−λ(s+t)}/e^{−λs} = e^{−λt} = P(X > t)."
+    ),
+    source_cours=_cours_maths(_ATT, "11_C2_loi_exponentielle.tex"),
+    source_programme=f"{_ATT}::C4",
+    refutations={
+        "A": (
+            "Les probabilités de survie se multiplient, elles ne s'ajoutent "
+            "pas : e^{−λ(s+t)} = e^{−λs} × e^{−λt}. Une somme dépasserait "
+            "d'ailleurs 1 pour s et t petits."
+        ),
+        "C": (
+            "1 − e^{−λt} est la fonction de répartition P(X ≤ t). C'est une "
+            "formule vraie, mais elle décrit la loi, pas le conditionnement "
+            "qui définit l'absence de mémoire."
+        ),
+        "D": (
+            "L'espérance vaut 1/λ et non λ ; surtout, une espérance ne dit "
+            "rien d'un conditionnement par l'événement {X > s}."
+        ),
+    },
+)
+
+conceptuelle(
+    _ATT, "Q8", reponse="D",
+    raisonnement=(
+        "L'espérance d'une variable à densité est l'intégrale de x contre la "
+        "densité, sur le support de la loi. La densité exponentielle vaut "
+        "λe^{−λx} sur [0 ; +∞[ et 0 ailleurs : l'espérance s'écrit donc "
+        "∫₀^{+∞} x λ e^{−λx} dx, et une intégration par parties en donne la "
+        "valeur 1/λ."
+    ),
+    source_cours=_cours_maths(_ATT, "11_C2_loi_exponentielle.tex"),
+    source_programme=f"{_ATT}::C6",
+    refutations={
+        "A": (
+            "Le facteur λ de la densité manque : cette intégrale vaut 1/λ², "
+            "qui n'a pas la même dimension que l'espérance et n'en est donc "
+            "jamais la valeur, sauf si λ = 1."
+        ),
+        "B": (
+            "La densité est nulle sur ]−∞ ; 0[ ; intégrer x λ e^{−λx} depuis "
+            "−∞ ne correspond à aucune loi, et l'intégrale diverge."
+        ),
+        "C": (
+            "∫₀^{+∞} λ e^{−λx} dx vaut 1 : c'est la masse totale de la "
+            "densité, la condition de normalisation, pas une moyenne."
+        ),
+    },
+)
+
+conceptuelle(
+    _ARITH, "Q8", reponse="A",
+    raisonnement=(
+        "Le théorème de Gauss énonce que si a divise bc et si a est premier "
+        "avec b, alors a divise c. L'hypothèse de primalité relative entre a "
+        "et b remplace la primalité de a exigée par le lemme d'Euclide, et "
+        "c'est ce qui en fait un outil applicable à des entiers quelconques."
+    ),
+    source_cours=_cours_maths(_ARITH, "12_C3_bezout_gauss.tex"),
+    source_programme=f"{_ARITH}::C6",
+    refutations={
+        "B": (
+            "Cette conclusion caractérise les nombres PREMIERS (lemme "
+            "d'Euclide) et tombe sans cette hypothèse : 6 divise 4 × 3 = 12 "
+            "sans diviser 4 ni 3."
+        ),
+        "C": (
+            "« a divise b et a divise c donc a divise bc » découle "
+            "immédiatement de la définition, sans hypothèse de primalité "
+            "relative, et ne permet de conclure sur rien de nouveau."
+        ),
+        "D": (
+            "La primalité relative n'entraîne aucune divisibilité de ce type : "
+            "4 est premier avec 9 et ne divise pas 10."
+        ),
+    },
+)
+
+conceptuelle(
+    _ARITH, "Q9", reponse="D",
+    raisonnement=(
+        "N = p₁p₂⋯p_k + 1 laisse le reste 1 dans la division par chacun des "
+        "p_i. Aucun p_i ne divise donc N. Or tout entier supérieur à 1 admet "
+        "au moins un facteur premier : ce facteur n'est pas dans la liste, qui "
+        "n'était donc pas complète. La contradiction établit l'infinité."
+    ),
+    source_cours=_cours_maths(_ARITH, "13_C4_nombres_premiers.tex"),
+    source_programme=f"{_ARITH}::C7",
+    refutations={
+        "A": (
+            "N n'est pas toujours premier : 2·3·5·7·11·13 + 1 = 30031 = "
+            "59 × 509. L'argument ne repose pas sur la primalité de N mais sur "
+            "l'existence d'un facteur premier hors de la liste."
+        ),
+        "B": (
+            "La division de N par p₁ laisse précisément le reste 1 : c'est "
+            "l'inverse de ce que l'option affirme, et c'est ce reste qui fait "
+            "toute la démonstration."
+        ),
+        "C": (
+            "Si 2 figure dans la liste, le produit est pair et N est impair. "
+            "La parité de N n'intervient d'ailleurs pas dans l'argument."
+        ),
+    },
+)
+
+conceptuelle(
+    _ARITH, "Q11", reponse="C",
+    raisonnement=(
+        "L'algorithme d'Euclide repose sur l'égalité PGCD(a ; b) = "
+        "PGCD(b ; a mod b) : tout diviseur commun de a et b divise le reste "
+        "a − qb, et réciproquement. Le couple (b ; a mod b) a une seconde "
+        "composante strictement plus petite que b, ce qui fait décroître "
+        "l'algorithme jusqu'à un reste nul."
+    ),
+    source_cours=_cours_maths(_ARITH, "10_C1_divisibilite_pgcd.tex"),
+    source_programme=f"{_ARITH}::C9",
+    refutations={
+        "A": (
+            "L'égalité PGCD(a ; b) = PGCD(a − b ; b) est vraie sans aucune "
+            "condition : c'est la variante par soustractions successives. La "
+            "restriction « seulement lorsque b divise a » la rend inutilisable "
+            "alors qu'elle est générale."
+        ),
+        "B": (
+            "Les rôles de a et b sont inversés : comme a > b, on a "
+            "b mod a = b, le couple est inchangé et l'algorithme ne progresse "
+            "jamais."
+        ),
+        "D": (
+            "a mod b est le reste d'une seule division. Il ne vaut le PGCD que "
+            "par coïncidence ; le PGCD est le dernier reste NON NUL de la "
+            "suite des divisions."
+        ),
+    },
+)
+
+conceptuelle(
+    _CPLXA, "Q7", reponse="C",
+    raisonnement=(
+        "En posant z = a + ib, le conjugué est z̄ = a − ib et le produit se "
+        "calcule par l'identité remarquable : (a + ib)(a − ib) = a² − (ib)² = "
+        "a² + b², puisque i² = −1. Or |z| = √(a² + b²), donc |z|² = a² + b² = "
+        "z z̄."
+    ),
+    source_cours=_cours_maths(_CPLXA, "11_C2_geometrie.tex"),
+    source_programme=f"{_CPLXA}::C5",
+    refutations={
+        "A": (
+            "(a + ib)² est le carré de z, pas le produit de z par son "
+            "conjugué : le conjugué change le signe de la partie imaginaire, "
+            "ce qui élimine le terme en i au lieu de le doubler."
+        ),
+        "B": (
+            "a² − b² est la partie réelle de z². Le calcul correct fait "
+            "apparaître −(ib)² = +b², d'où la somme a² + b²."
+        ),
+        "D": (
+            "z z̄ vaut le module au CARRÉ : les deux ne coïncident que si "
+            "|z| vaut 0 ou 1."
+        ),
+    },
+)
+
+conceptuelle(
+    _CPLXT, "Q6", reponse="B",
+    raisonnement=(
+        "Les vecteurs u(cos a ; sin a) et v(cos b ; sin b) sont unitaires et "
+        "font entre eux l'angle a − b. Le produit scalaire se calcule de deux "
+        "manières : par les coordonnées, il vaut cos a cos b + sin a sin b ; "
+        "par la formule ‖u‖‖v‖cos(u ; v), il vaut cos(a − b). L'égalité des "
+        "deux expressions est exactement la formule d'addition."
+    ),
+    source_cours=_cours_maths(_CPLXT, "11_C2_equations_polynomiales.tex"),
+    source_programme=f"{_CPLXT}::C3",
+    refutations={
+        "A": (
+            "Le produit vectoriel n'est pas défini pour deux vecteurs du plan, "
+            "et la grandeur analogue ferait apparaître sin(a − b), donc une "
+            "autre formule."
+        ),
+        "C": (
+            "Le produit scalaire somme les PRODUITS des coordonnées de même "
+            "rang, non les coordonnées elles-mêmes. La somme des coordonnées "
+            "n'est même pas invariante par rotation."
+        ),
+        "D": (
+            "La dérivation de cosinus relève de l'analyse et donne cos′ = "
+            "−sin. Elle ne fait intervenir aucun angle entre deux vecteurs."
+        ),
+    },
+)
+
+conceptuelle(
+    _CPLXT, "Q8", reponse="D",
+    raisonnement=(
+        "|z − 2| est la distance du point d'affixe z au point A d'affixe 2, et "
+        "|z + 2i| = |z − (−2i)| sa distance au point B d'affixe −2i. L'égalité "
+        "des deux distances caractérise les points équidistants de A et B, "
+        "c'est-à-dire la médiatrice du segment [AB]."
+    ),
+    source_cours=_cours_maths(_CPLXT, "12_C3_geometrie_racines_unite.tex"),
+    source_programme=f"{_CPLXT}::C6",
+    refutations={
+        "A": (
+            "Un cercle est le lieu des points à distance CONSTANTE d'un point "
+            "fixe. Ici deux distances variables sont égalées entre elles, ce "
+            "qui donne une droite, non un cercle."
+        ),
+        "B": (
+            "Le segment est l'ensemble des points situés entre A et B ; ses "
+            "points ne sont équidistants qu'en son milieu. La médiatrice lui "
+            "est perpendiculaire."
+        ),
+        "C": (
+            "L'axe des réels ne convient pas : pour z = 1, |1 − 2| = 1 alors "
+            "que |1 + 2i| = √5. Il contient d'ailleurs A, qui est à distance "
+            "nulle de lui-même."
+        ),
+    },
+)
+
+conceptuelle(
+    _GRAPHES, "Q6", reponse="B",
+    raisonnement=(
+        "Modéliser, c'est choisir ce que représentent sommets et arêtes. Les "
+        "objets reliés sont les villes : elles deviennent les sommets. La "
+        "relation « être reliées par une route » est symétrique, puisque les "
+        "routes sont à double sens : les arêtes sont donc non orientées, une "
+        "par route."
+    ),
+    source_cours=_cours_maths(_GRAPHES, "10_C1_vocabulaire_graphes.tex"),
+    source_programme=f"{_GRAPHES}::C2",
+    refutations={
+        "A": (
+            "Orienter puis doubler chaque arête n'ajoute aucune information et "
+            "fausse la lecture des degrés, sur laquelle reposent les "
+            "raisonnements de parcours."
+        ),
+        "C": (
+            "Prendre les routes comme sommets construit un autre graphe, utile "
+            "pour des questions de parcours d'arêtes. La question porte sur "
+            "les liaisons entre villes."
+        ),
+        "D": (
+            "Un arbre suppose l'absence de cycle et exactement cinq arêtes "
+            "pour six sommets. Rien ne l'assure ici, et un réseau routier en "
+            "comporte presque toujours."
+        ),
+    },
+)
+
+conceptuelle(
+    _MARKOV, "Q6", reponse="B",
+    raisonnement=(
+        "La situation associe un nombre à chaque COUPLE (atelier de départ, "
+        "atelier d'arrivée) : la structure adaptée est un tableau à double "
+        "entrée, c'est-à-dire une matrice carrée 3 × 3 dont le coefficient de "
+        "la ligne i et de la colonne j est m_ij. Le sens de lecture "
+        "ligne = départ, colonne = arrivée est celui qui rend le produit "
+        "matriciel interprétable comme une composition de transferts."
+    ),
+    source_cours=_cours_maths(_MARKOV, "11_C2C3_suites_matricielles.tex"),
+    source_programme=f"{_MARKOV}::C2",
+    refutations={
+        "A": (
+            "Trois totaux ne conservent pas l'information de flux : deux "
+            "situations très différentes peuvent donner les mêmes totaux par "
+            "atelier."
+        ),
+        "C": (
+            "Rien n'impose m_ij = m_ji. Imposer la symétrie contraindrait le "
+            "modèle à des transferts réciproques, ce que l'énoncé n'affirme "
+            "pas."
+        ),
+        "D": (
+            "Une matrice ligne ne code que trois nombres, alors que la "
+            "situation en comporte neuf."
+        ),
+    },
+)
+
+conceptuelle(
+    _MARKOV, "Q7", reponse="C",
+    raisonnement=(
+        "Avec une distribution écrite en ligne, une transition s'écrit "
+        "π_{n+1} = π_n T. Une récurrence immédiate donne π_n = π₀ Tⁿ : "
+        "l'initialisation est π₀ = π₀ T⁰, et l'hérédité résulte de "
+        "π_{n+1} = π_n T = (π₀ Tⁿ) T = π₀ T^{n+1}. C'est la démonstration "
+        "attendue par la capacité."
+    ),
+    source_cours=_cours_maths(
+        _MARKOV, "13_C6C7_demonstration_distribution_invariante.tex"),
+    source_programme=f"{_MARKOV}::C6",
+    refutations={
+        "A": (
+            "Le produit Tⁿπ₀ n'est pas défini avec π₀ écrite en ligne : les "
+            "dimensions ne se composent pas. C'est la convention colonne qui "
+            "donnerait cette écriture."
+        ),
+        "B": (
+            "Une distribution et une matrice de transition ne s'additionnent "
+            "pas : la somme des coefficients d'une distribution vaut 1, une "
+            "propriété que l'addition d'une matrice détruit."
+        ),
+        "D": (
+            "Multiplier par n ferait sortir la somme des coefficients de 1. Le "
+            "nombre de transitions intervient en PUISSANCE de T, par itération "
+            "de la relation de récurrence."
+        ),
+    },
+)
+
+conceptuelle(
+    _INTEG, "Q8", reponse="D",
+    raisonnement=(
+        "∫₀^{60} v(t) dt est la distance parcourue, en mètres. La diviser par "
+        "la durée 60 s donne la valeur moyenne de v sur [0 ; 60], c'est-à-dire "
+        "la vitesse moyenne, en m·s⁻¹. C'est la définition même de la valeur "
+        "moyenne d'une fonction sur un intervalle."
+    ),
+    source_cours=_cours_maths(_INTEG, "16_C6_applications.tex"),
+    source_programme=f"{_INTEG}::C6",
+    refutations={
+        "A": (
+            "La distance est l'intégrale SEULE. Le facteur 1/60 change l'unité "
+            "de mètres en m·s⁻¹ : ce n'est plus une longueur."
+        ),
+        "B": (
+            "L'accélération moyenne est (v(60) − v(0))/60, une variation de "
+            "vitesse rapportée au temps, obtenue par différence et non par "
+            "intégration."
+        ),
+        "C": (
+            "Une valeur moyenne est comprise entre le minimum et le maximum de "
+            "la fonction, et n'égale le maximum que si v est constante."
+        ),
+    },
+)
+
+conceptuelle(
+    _INTEG, "Q9", reponse="A",
+    raisonnement=(
+        "Pour h > 0, F(x + h) − F(x) = ∫_x^{x+h} f(t) dt. Comme f est "
+        "croissante, f(x) ≤ f(t) ≤ f(x + h) sur [x ; x + h] ; en intégrant ces "
+        "inégalités sur un intervalle de longueur h, on obtient "
+        "h f(x) ≤ F(x + h) − F(x) ≤ h f(x + h). En divisant par h et en "
+        "faisant tendre h vers 0, la continuité de f donne F′(x) = f(x)."
+    ),
+    source_cours=_cours_maths(_INTEG, "11_C7_fonction_integrale.tex"),
+    source_programme=f"{_INTEG}::C7",
+    refutations={
+        "B": (
+            "L'encadrement est inversé. f croissante donne f(x) ≤ f(t) sur "
+            "[x ; x + h] : c'est le rectangle de hauteur f(x) qui minore "
+            "l'aire, pas celui de hauteur f(x + h)."
+        ),
+        "C": (
+            "L'égalité ne vaut que si f est constante sur [x ; x + h]. C'est "
+            "le passage à la limite, non l'aire elle-même, qui rétablit "
+            "l'égalité."
+        ),
+        "D": (
+            "f est positive, donc F est croissante et la différence "
+            "F(x + h) − F(x) est positive : elle est même minorée par h f(x)."
+        ),
+    },
+)
+
+conceptuelle(
+    _INTEG, "Q10", reponse="B",
+    raisonnement=(
+        "En intégrant l'identité (uv)′ = u′v + uv′ entre a et b, le membre de "
+        "gauche donne [uv]_a^b et le membre de droite ∫u′v + ∫uv′. En isolant "
+        "∫u′v, on obtient ∫_a^b u′v = [uv]_a^b − ∫_a^b uv′ : c'est exactement "
+        "la formule d'intégration par parties."
+    ),
+    source_cours=_cours_maths(_INTEG, "13_C8_integration_par_parties.tex"),
+    source_programme=f"{_INTEG}::C8",
+    refutations={
+        "A": (
+            "La dérivée d'un quotient conduit à une autre formule et exige que "
+            "v ne s'annule pas. La formule cherchée porte sur un produit."
+        ),
+        "C": (
+            "La dérivée d'un produit n'est pas le produit des dérivées : avec "
+            "u = v = x, (x²)′ = 2x alors que u′v′ = 1."
+        ),
+        "D": (
+            "La dérivation d'une composée donne la technique du changement de "
+            "variable, une autre méthode d'intégration."
+        ),
+    },
+)
+
+conceptuelle(
+    _PROBA, "Q9", reponse="A",
+    raisonnement=(
+        "La loi binomiale n'a pas de fonction de répartition inversible en "
+        "forme close : la recherche du plus petit intervalle de probabilité au "
+        "moins 0,95 se fait en cumulant les P(X = k) de part et d'autre de "
+        "l'espérance, jusqu'à atteindre le seuil. C'est un calcul numérique, "
+        "conduit à la calculatrice ou en Python."
+    ),
+    source_cours=_cours_maths(_PROBA, "12_C3_C4_utilisation_binomiale.tex"),
+    source_programme=f"{_PROBA}::C4",
+    refutations={
+        "B": (
+            "P(X = k) fait intervenir un coefficient binomial et des "
+            "puissances de k : ce n'est pas une expression du second degré, et "
+            "aucune résolution algébrique fermée ne fournit les bornes."
+        ),
+        "C": (
+            "[0 ; 50] a bien une probabilité égale à 1, mais l'énoncé demande "
+            "le PLUS PETIT intervalle : la minimalité est toute la question."
+        ),
+        "D": (
+            "E(X) ± σ couvre environ 68 % des cas dans le modèle normal "
+            "approchant, très loin des 95 % demandés."
+        ),
+    },
+)
+
+conceptuelle(
+    _PROBA, "Q10", reponse="B",
+    raisonnement=(
+        "En posant X_i = 1 si le i-ème lancer donne face et 0 sinon, on a "
+        "X = X₁ + … + X₁₀, chaque X_i étant une variable de Bernoulli "
+        "d'espérance 1/2. La linéarité de l'espérance donne alors "
+        "E(X) = 10 × 1/2 = 5, sans écrire la loi de X ni aucun coefficient "
+        "binomial."
+    ),
+    source_cours=_cours_maths(_PROBA, "13_C6_C7_esperance_linearite.tex"),
+    source_programme=f"{_PROBA}::C6",
+    refutations={
+        "A": (
+            "X = 10X₁ ne prendrait que les valeurs 0 et 10 : cette écriture "
+            "suppose les dix lancers identiques au premier, alors qu'ils sont "
+            "indépendants."
+        ),
+        "C": (
+            "Le maximum vaut 1 dès qu'une face apparaît : il détecte "
+            "l'existence d'un succès, il n'en compte pas le nombre."
+        ),
+        "D": (
+            "C'est précisément ce que la linéarité permet d'éviter : elle vaut "
+            "sans hypothèse d'indépendance et évite le calcul de la loi "
+            "complète."
+        ),
+    },
+)

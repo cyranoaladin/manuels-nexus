@@ -131,6 +131,58 @@
           "renvoi": "C1"
         }
       }
+    },
+    {
+      "capacite": "C2",
+      "enonce": "Une usine compte trois ateliers ; on note $m_{ij}$ le nombre de pièces transférées de l'atelier $i$ vers l'atelier $j$. Modéliser cette situation par une matrice, c'est :",
+      "correcte": "B",
+      "options": {
+        "A": "écrire la matrice colonne des totaux produits par chaque atelier",
+        "B": "écrire la matrice carrée $3\\times3$ dont le coefficient de la ligne $i$ et de la colonne $j$ est $m_{ij}$",
+        "C": "écrire une matrice $3\\times3$ nécessairement symétrique",
+        "D": "écrire la matrice ligne des trois ateliers"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Trois totaux ne retiennent pas qui transfère vers qui : l'information de flux, qui est justement l'objet du modèle, est perdue.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Rien n'impose $m_{ij}=m_{ji}$ : les transferts n'ont aucune raison d'être réciproques. Imposer la symétrie fausserait le modèle.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Une matrice ligne ne code que trois nombres, alors que la situation en comporte neuf, un par couple d'ateliers.",
+          "renvoi": "C2"
+        }
+      },
+      "id": "Q6"
+    },
+    {
+      "capacite": "C6",
+      "enonce": "Pour une chaîne de Markov de matrice de transition $T$ et de distribution initiale $\\pi_0$ écrite en ligne, la distribution après $n$ transitions vaut :",
+      "correcte": "C",
+      "options": {
+        "A": "$T^n\\pi_0$",
+        "B": "$\\pi_0+nT$",
+        "C": "$\\pi_0T^n$",
+        "D": "$n\\pi_0T$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Avec une distribution écrite en ligne, ce produit n'est même pas défini. La récurrence $\\pi_{n+1}=\\pi_nT$ se déroule en $\\pi_n=\\pi_0T^n$ ; c'est la convention colonne qui donnerait $T^n\\pi_0$.",
+          "renvoi": "C6"
+        },
+        "B": {
+          "erreur": "Une distribution et une matrice de transition ne s'additionnent pas : elles ne décrivent pas les mêmes objets, et la somme des coefficients cesserait de valoir $1$.",
+          "renvoi": "C6"
+        },
+        "D": {
+          "erreur": "Multiplier par $n$ ferait sortir la somme des coefficients de $1$. Le nombre de transitions intervient en \\textbf{puissance} de $T$, par itération de $\\pi_{n+1}=\\pi_nT$.",
+          "renvoi": "C6"
+        }
+      },
+      "id": "Q7"
     }
   ]
 }

@@ -131,6 +131,110 @@
           "renvoi": "C1"
         }
       }
+    },
+    {
+      "capacite": "C2",
+      "enonce": "Une fonction $f$ continue est strictement croissante sur $[0;5]$, avec $f(0)=-3$ et $f(5)=7$. Sur $[0;5]$, l'équation $f(x)=2$ admet :",
+      "correcte": "B",
+      "options": {
+        "A": "aucune solution",
+        "B": "exactement une solution",
+        "C": "exactement deux solutions",
+        "D": "une infinité de solutions"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "La valeur $2$ appartient à $[-3;7]$, image de $[0;5]$ par une fonction continue : le théorème des valeurs intermédiaires garantit au moins une solution.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Une fonction strictement croissante ne prend jamais deux fois la même valeur : deux antécédents distincts $x_1<x_2$ donneraient $f(x_1)<f(x_2)$. La solution est unique.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Une infinité de solutions supposerait $f$ constante égale à $2$ sur tout un intervalle, ce qu'interdit la stricte croissance. La solution est unique.",
+          "renvoi": "C2"
+        }
+      },
+      "id": "Q6"
+    },
+    {
+      "capacite": "C3",
+      "enonce": "On cherche par dichotomie la solution de $x^3+x-1=0$ sur $[0;1]$, où $f(0)=-1$ et $f(1)=1$. Après avoir calculé $f(0{,}5)=-0{,}375$, l'intervalle retenu à l'étape suivante est :",
+      "correcte": "C",
+      "options": {
+        "A": "$[0;0{,}5]$",
+        "B": "$[0{,}5;0{,}75]$",
+        "C": "$[0{,}5;1]$",
+        "D": "$[0{,}25;0{,}75]$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Sur $[0;0{,}5]$ la fonction reste négative aux deux bornes ($f(0)=-1$ et $f(0{,}5)=-0{,}375$) : aucun changement de signe, donc aucune solution. La dichotomie retient la moitié où les signes diffèrent.",
+          "renvoi": "C3"
+        },
+        "B": {
+          "erreur": "C'est le résultat de \\textbf{deux} étapes, pas d'une seule : la dichotomie remplace une borne par le milieu, ici $[0{,}5;1]$. La coupe suivante donnera $[0{,}5;0{,}75]$.",
+          "renvoi": "C3"
+        },
+        "D": {
+          "erreur": "Cet intervalle n'est pas une moitié de $[0;1]$ : la dichotomie ne recentre pas l'intervalle autour du milieu, elle en supprime une moitié.",
+          "renvoi": "C3"
+        }
+      },
+      "id": "Q7"
+    },
+    {
+      "capacite": "C6",
+      "enonce": "Le point moyen d'un nuage de points $(x_i;y_i)$ a pour coordonnées :",
+      "correcte": "D",
+      "options": {
+        "A": "$(\\max x_i;\\max y_i)$",
+        "B": "la médiane des $x_i$ et la médiane des $y_i$",
+        "C": "$(0;0)$, le nuage étant centré d'office",
+        "D": "$(\\bar x;\\bar y)$, moyennes des abscisses et des ordonnées"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Le maximum est une valeur extrême, pas une valeur centrale : un seul point aberrant le déplacerait entièrement. Le point moyen est $(\\bar x;\\bar y)$.",
+          "renvoi": "C6"
+        },
+        "B": {
+          "erreur": "Médiane et moyenne coïncident seulement pour une distribution symétrique ; le point moyen est défini par les moyennes $(\\bar x;\\bar y)$, seules compatibles avec les calculs de covariance qui suivent.",
+          "renvoi": "C6"
+        },
+        "C": {
+          "erreur": "Le nuage n'est centré qu'après avoir retranché les moyennes à chaque coordonnée ; sur les données brutes le point moyen est $(\\bar x;\\bar y)$, qui n'a aucune raison d'être l'origine.",
+          "renvoi": "C6"
+        }
+      },
+      "id": "Q8"
+    },
+    {
+      "capacite": "C7",
+      "enonce": "La droite de régression de $y$ en $x$ obtenue par la méthode des moindres carrés :",
+      "correcte": "D",
+      "options": {
+        "A": "passe par tous les points du nuage",
+        "B": "minimise la somme des distances perpendiculaires aux points",
+        "C": "ne passe pas par le point moyen, sauf cas particulier",
+        "D": "passe toujours par le point moyen $(\\bar x;\\bar y)$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Elle ne passe par tous les points que si le nuage est déjà aligné ; sinon aucune droite ne le peut, et c'est justement pourquoi on minimise un écart.",
+          "renvoi": "C7"
+        },
+        "B": {
+          "erreur": "Elle minimise la somme des carrés des écarts \\textbf{verticaux} $y_i-(ax_i+b)$. Minimiser les distances perpendiculaires donnerait une autre droite, et la régression de $y$ en $x$ ne serait plus distincte de celle de $x$ en $y$.",
+          "renvoi": "C7"
+        },
+        "C": {
+          "erreur": "Son équation s'écrit $y-\\bar y=a(x-\\bar x)$ : le point moyen y appartient toujours, quelle que soit la pente.",
+          "renvoi": "C7"
+        }
+      },
+      "id": "Q9"
     }
   ]
 }

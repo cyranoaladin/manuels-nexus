@@ -57,6 +57,16 @@
     \item car $\sum_k(M^n)_{ik}M_{kj}$ classe les chemins selon l'avant-dernier sommet $k$
   \end{enumerate}
 
+\item[] \textbf{Capacité C2}
+
+\item \textbf{[Q6]} On veut modéliser par un graphe un réseau de six villes reliées par des routes à double sens. Le modèle adapté est :
+  \begin{enumerate}[label=\Alph*.]
+    \item un graphe orienté, avec une arête par sens de circulation
+    \item un graphe non orienté, un sommet par ville et une arête par route
+    \item un graphe dont les sommets sont les routes
+    \item un arbre, puisqu'il y a six villes
+  \end{enumerate}
+
 \end{enumerate}
 
 % NEXUS-QCM-TEACHER-ONLY-BEGIN
@@ -74,6 +84,7 @@ Q2 & C1 & \textbf{A} \\
 Q3 & C3 & \textbf{B} \\
 Q4 & C4 & \textbf{C} \\
 Q5 & C5 & \textbf{D} \\
+Q6 & C2 & \textbf{B} \\
 \hline
 \end{tabular}
 \end{center}
@@ -110,6 +121,12 @@ Q5 & C5 & \textbf{D} \\
     \item \textbf{A} — Une matrice d'adjacence contient aussi des zéros ; le comptage vient du produit matriciel, pas de coefficients tous égaux à 1. La formule (M\textasciicircum{}(n+1))\_(i,j)=somme\_k (M\textasciicircum{}n)\_(i,k)M\_(k,j) classe les chemins selon leur avant-dernier sommet k. \emph{Renvoi : C5.}
     \item \textbf{B} — Une puissance matricielle est obtenue par produits successifs et ne se réduit pas à une addition scalaire. La formule (M\textasciicircum{}(n+1))\_(i,j)=somme\_k (M\textasciicircum{}n)\_(i,k)M\_(k,j) classe les chemins selon leur avant-dernier sommet k. \emph{Renvoi : C5.}
     \item \textbf{C} — Un graphe peut avoir zéro, un ou plusieurs chemins entre deux sommets ; l'unicité n'est pas une propriété générale. La formule (M\textasciicircum{}(n+1))\_(i,j)=somme\_k (M\textasciicircum{}n)\_(i,k)M\_(k,j) classe les chemins selon leur avant-dernier sommet k. \emph{Renvoi : C5.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — Une route à double sens n'impose aucune orientation. Doubler les arcs n'ajoute rien et fausse la lecture des degrés, donc les raisonnements de parcours. \emph{Renvoi : C2.}
+    \item \textbf{C} — Prendre les routes comme sommets construit un autre graphe, qui répond aux questions de parcours d'arêtes. La question porte sur les liaisons entre villes : ce sont les villes qui sont les sommets. \emph{Renvoi : C2.}
+    \item \textbf{D} — Un arbre suppose l'absence de cycle et exactement cinq arêtes pour six sommets. Rien ne l'assure : un réseau routier comporte presque toujours des cycles. \emph{Renvoi : C2.}
   \end{itemize}
 \end{itemize}
 \fi

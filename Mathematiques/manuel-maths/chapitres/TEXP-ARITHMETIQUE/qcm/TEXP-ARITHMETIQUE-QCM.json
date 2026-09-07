@@ -131,6 +131,162 @@
           "renvoi": "C2"
         }
       }
+    },
+    {
+      "capacite": "C3",
+      "enonce": "Pour établir que $221$ n'est pas premier par divisions successives, il suffit de tester la divisibilité par les nombres premiers :",
+      "correcte": "B",
+      "options": {
+        "A": "$2$, $3$, $5$ et $7$ seulement",
+        "B": "tous les premiers $p$ tels que $p^2\\leq221$, c'est-à-dire jusqu'à $13$",
+        "C": "tous les entiers de $2$ à $220$",
+        "D": "$2$, puis $221/2$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "S'arrêter à $7$ laisse passer $221=13\\times17$. Il faut aller jusqu'au plus grand premier dont le carré ne dépasse pas $221$, soit $13$ puisque $13^2=169\\leq221<17^2$.",
+          "renvoi": "C3"
+        },
+        "C": {
+          "erreur": "Le test est correct mais inutilement coûteux : si $n=ab$ avec $a\\leq b$, alors $a\\leq\\sqrt n$. Tester jusqu'à $\\sqrt{221}<15$ suffit.",
+          "renvoi": "C3"
+        },
+        "D": {
+          "erreur": "$221/2$ n'est pas entier, et tester le seul diviseur $2$ ne prouve rien sur les diviseurs impairs. Il faut parcourir les premiers jusqu'à $\\sqrt{221}$.",
+          "renvoi": "C3"
+        }
+      },
+      "id": "Q6"
+    },
+    {
+      "capacite": "C4",
+      "enonce": "L'équation diophantienne $6x+9y=5$ :",
+      "correcte": "C",
+      "options": {
+        "A": "admet une infinité de solutions entières",
+        "B": "admet exactement une solution entière",
+        "C": "n'admet aucune solution entière, car $\\mathrm{PGCD}(6;9)=3$ ne divise pas $5$",
+        "D": "admet des solutions justement parce que $6$ et $9$ ne sont pas premiers entre eux"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Toute valeur de $6x+9y$ est un multiple de $3$ ; $5$ n'en est pas un. Le théorème de Bézout donne des solutions si et seulement si le PGCD divise le second membre.",
+          "renvoi": "C4"
+        },
+        "B": {
+          "erreur": "Quand une équation $ax+by=c$ a une solution, elle en a une infinité ; ici elle n'en a aucune, puisque $3$ ne divise pas $5$.",
+          "renvoi": "C4"
+        },
+        "D": {
+          "erreur": "C'est l'inverse : ne pas être premiers entre eux impose au second membre d'être multiple du PGCD. Si $6$ et $9$ étaient premiers entre eux, l'équation aurait des solutions pour tout $c$.",
+          "renvoi": "C4"
+        }
+      },
+      "id": "Q7"
+    },
+    {
+      "capacite": "C6",
+      "enonce": "Le théorème de Gauss affirme que :",
+      "correcte": "A",
+      "options": {
+        "A": "si $a$ divise $bc$ et si $a$ est premier avec $b$, alors $a$ divise $c$",
+        "B": "si $a$ divise $bc$, alors $a$ divise $b$ ou $a$ divise $c$",
+        "C": "si $a$ divise $b$ et si $a$ divise $c$, alors $a$ divise $bc$",
+        "D": "si $a$ est premier avec $b$, alors $a$ divise $b+1$"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Cette conclusion demande que $a$ soit premier (lemme d'Euclide). Sans cette hypothèse elle tombe : $6$ divise $4\\times3=12$ sans diviser ni $4$ ni $3$. Gauss remplace la primalité de $a$ par la primalité relative de $a$ et $b$.",
+          "renvoi": "C6"
+        },
+        "C": {
+          "erreur": "C'est une conséquence immédiate de la définition de la divisibilité, sans aucune hypothèse de primalité relative : ce n'est pas le théorème de Gauss, dont l'intérêt est de conclure sur $c$ à partir d'une divisibilité du produit.",
+          "renvoi": "C6"
+        },
+        "D": {
+          "erreur": "Rien de tel : $4$ est premier avec $9$ et ne divise pas $10$. La primalité relative se lit dans le PGCD, elle n'entraîne aucune divisibilité de ce type.",
+          "renvoi": "C6"
+        }
+      },
+      "id": "Q8"
+    },
+    {
+      "capacite": "C7",
+      "enonce": "Dans la démonstration d'Euclide de l'infinité des nombres premiers, on suppose la liste $p_1,\\dots,p_k$ complète et on considère $N=p_1p_2\\cdots p_k+1$. On conclut parce que :",
+      "correcte": "D",
+      "options": {
+        "A": "$N$ est nécessairement premier",
+        "B": "$N$ est divisible par $p_1$",
+        "C": "$N$ est pair",
+        "D": "aucun $p_i$ ne divise $N$, donc $N$ admet un facteur premier hors de la liste"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "$N$ n'est pas toujours premier : $2\\times3\\times5\\times7\\times11\\times13+1=30031=59\\times509$. La contradiction vient de l'existence d'un facteur premier nouveau, pas de la primalité de $N$.",
+          "renvoi": "C7"
+        },
+        "B": {
+          "erreur": "La division de $N$ par $p_1$ laisse précisément le reste $1$ : c'est ce reste qui empêche tout $p_i$ de diviser $N$.",
+          "renvoi": "C7"
+        },
+        "C": {
+          "erreur": "Dès que $2$ figure dans la liste, le produit est pair et $N$ est impair. La parité n'intervient pas dans l'argument.",
+          "renvoi": "C7"
+        }
+      },
+      "id": "Q9"
+    },
+    {
+      "capacite": "C8",
+      "enonce": "Le petit théorème de Fermat affirme que, si $p$ est premier et si $p$ ne divise pas $a$ :",
+      "correcte": "B",
+      "options": {
+        "A": "$a^p\\equiv a \\pmod{p-1}$",
+        "B": "$a^{p-1}\\equiv1 \\pmod p$",
+        "C": "$a^{p}\\equiv1 \\pmod p$",
+        "D": "$p^{a-1}\\equiv1 \\pmod a$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Le module est $p$, pas $p-1$ : $p-1$ est l'exposant. Confondre les deux fait perdre tout le contenu du théorème.",
+          "renvoi": "C8"
+        },
+        "C": {
+          "erreur": "On a $a^{p}\\equiv a\\pmod p$ ; l'exposant $p-1$ est nécessaire pour obtenir $1$. Avec $p=5$ et $a=2$ : $2^5=32\\equiv2$, tandis que $2^4=16\\equiv1$.",
+          "renvoi": "C8"
+        },
+        "D": {
+          "erreur": "Les rôles de $a$ et de $p$ sont échangés, et l'énoncé devient faux : avec $a=4$ et $p=3$, $3^{3}=27\\equiv3\\pmod4$, pas $1$.",
+          "renvoi": "C8"
+        }
+      },
+      "id": "Q10"
+    },
+    {
+      "capacite": "C9",
+      "enonce": "Dans l'algorithme d'Euclide calculant $\\mathrm{PGCD}(a;b)$ avec $a>b>0$, l'égalité utilisée à chaque étape est :",
+      "correcte": "C",
+      "options": {
+        "A": "$\\mathrm{PGCD}(a;b)=\\mathrm{PGCD}(a-b;b)$, mais seulement lorsque $b$ divise $a$",
+        "B": "$\\mathrm{PGCD}(a;b)=\\mathrm{PGCD}(a;b \\bmod a)$",
+        "C": "$\\mathrm{PGCD}(a;b)=\\mathrm{PGCD}(b;a \\bmod b)$",
+        "D": "$\\mathrm{PGCD}(a;b)=a \\bmod b$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "L'égalité $\\mathrm{PGCD}(a;b)=\\mathrm{PGCD}(a-b;b)$ est vraie sans aucune condition : c'est la variante par soustractions successives. La restriction ajoutée la vide de son usage.",
+          "renvoi": "C9"
+        },
+        "B": {
+          "erreur": "Les rôles de $a$ et $b$ sont inversés : comme $a>b$, on a $b \\bmod a=b$ et le couple ne change pas — la boucle ne se terminerait jamais.",
+          "renvoi": "C9"
+        },
+        "D": {
+          "erreur": "$a \\bmod b$ est le reste d'une seule division, pas le PGCD. Il faut itérer jusqu'à un reste nul ; le PGCD est alors le dernier reste non nul.",
+          "renvoi": "C9"
+        }
+      },
+      "id": "Q11"
     }
   ]
 }

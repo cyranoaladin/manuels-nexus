@@ -131,6 +131,58 @@
           "renvoi": "C5"
         }
       }
+    },
+    {
+      "id": "Q6",
+      "capacite": "C6",
+      "enonce": "Soit $X$ suivant $\\mathcal B(3;\\tfrac12)$. Le calcul direct $E(X)=\\sum_{k=0}^{3} k\\,P(X=k)$ donne :",
+      "correcte": "B",
+      "options": {
+        "A": "$\\tfrac12$",
+        "B": "$\\tfrac32$",
+        "C": "$3$",
+        "D": "$\\tfrac34$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "La valeur $1/2$ est la probabilité de succès $p$, pas une moyenne du nombre de succès. Le calcul direct donne $E(X)=0\\times\\tfrac18+1\\times\\tfrac38+2\\times\\tfrac38+3\\times\\tfrac18=\\tfrac{12}8=\\tfrac32$, soit $np$.",
+          "renvoi": "C6"
+        },
+        "C": {
+          "erreur": "La valeur $3$ est le nombre de répétitions $n$ : ce serait l'espérance si chaque répétition était un succès certain. Le calcul direct donne $E(X)=\\tfrac{12}8=\\tfrac32$, soit $np$.",
+          "renvoi": "C6"
+        },
+        "D": {
+          "erreur": "La valeur $3/4$ est la variance $np(1-p)$, qui mesure la dispersion et non la moyenne. Le calcul direct donne $E(X)=\\tfrac{12}8=\\tfrac32$, soit $np$.",
+          "renvoi": "C6"
+        }
+      }
+    },
+    {
+      "id": "Q7",
+      "capacite": "C7",
+      "enonce": "Si $X$ suit la loi uniforme sur $\\{1;2;\\dots;n\\}$, son espérance vaut :",
+      "correcte": "C",
+      "options": {
+        "A": "$\\tfrac1n$",
+        "B": "$\\tfrac n2$",
+        "C": "$\\tfrac{n+1}2$",
+        "D": "$n$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "La valeur $1/n$ est la probabilité de chacune des $n$ valeurs, pas la moyenne de ces valeurs. L'espérance vaut $\\tfrac1n\\sum_{k=1}^{n}k=\\tfrac1n\\times\\tfrac{n(n+1)}2=\\tfrac{n+1}2$.",
+          "renvoi": "C7"
+        },
+        "B": {
+          "erreur": "La valeur $n/2$ serait la moyenne des entiers de $0$ à $n$ ; ici la plus petite valeur est $1$, pas $0$. L'espérance vaut $\\tfrac1n\\times\\tfrac{n(n+1)}2=\\tfrac{n+1}2$.",
+          "renvoi": "C7"
+        },
+        "D": {
+          "erreur": "La valeur $n$ est la plus grande valeur prise par $X$, pas sa moyenne : une moyenne ne peut pas égaler le maximum quand plusieurs valeurs distinctes sont possibles. L'espérance vaut $\\tfrac{n+1}2$.",
+          "renvoi": "C7"
+        }
+      }
     }
   ]
 }

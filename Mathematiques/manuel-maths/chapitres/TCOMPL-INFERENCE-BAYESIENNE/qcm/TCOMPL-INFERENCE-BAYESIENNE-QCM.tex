@@ -57,6 +57,16 @@
     \item Faible (inférieure à 10\%) car la maladie est rare
   \end{enumerate}
 
+\item[] \textbf{Capacité C5}
+
+\item \textbf{[Q6]} Un test de dépistage a une sensibilité de $0{,}99$ et une spécificité de $0{,}99$. Lorsque la prévalence de la maladie passe de $10\%$ à $0{,}1\%$, sa valeur prédictive positive :
+  \begin{enumerate}[label=\Alph*.]
+    \item reste inchangée, car elle ne dépend que des qualités du test
+    \item chute fortement, car les faux positifs deviennent majoritaires parmi les tests positifs
+    \item augmente, car la maladie est devenue plus rare
+    \item devient nulle
+  \end{enumerate}
+
 \end{enumerate}
 
 % NEXUS-QCM-TEACHER-ONLY-BEGIN
@@ -74,6 +84,7 @@ Q2 & C1 & \textbf{C} \\
 Q3 & C1 & \textbf{A} \\
 Q4 & C3 & \textbf{B} \\
 Q5 & C4 & \textbf{D} \\
+Q6 & C5 & \textbf{B} \\
 \hline
 \end{tabular}
 \end{center}
@@ -110,6 +121,12 @@ Q5 & C4 & \textbf{D} \\
     \item \textbf{A} — Confusion avec la specificite. La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 \%, donc moins de 10 \%. \emph{Renvoi : C4.}
     \item \textbf{B} — Oubli de l'effet du biais de rarete (paradoxe du faux positif). La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 \%, donc moins de 10 \%. \emph{Renvoi : C4.}
     \item \textbf{C} — Valeur arbitraire. La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 \%, donc moins de 10 \%. \emph{Renvoi : C4.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — La formule de Bayes fait intervenir la prévalence : $\mathrm{VPP}=\frac{se\,p}{se\,p+(1-sp)(1-p)}$. Avec $p=0{,}1$ elle vaut $\frac{0{,}099}{0{,}108}\approx0{,}92$ ; avec $p=0{,}001$ elle vaut $\frac{0{,}00099}{0{,}01098}\approx0{,}09$. Sensibilité et spécificité seules ne déterminent pas la VPP. \emph{Renvoi : C5.}
+    \item \textbf{C} — C'est l'inverse : plus la maladie est rare, plus les $1\%$ de faux positifs prélevés sur une population saine très nombreuse écrasent les vrais positifs. La VPP passe de $0{,}92$ à $0{,}09$. \emph{Renvoi : C5.}
+    \item \textbf{D} — Elle diminue fortement mais reste strictement positive : $\frac{0{,}00099}{0{,}01098}\approx0{,}09$, soit environ un test positif sur onze qui correspond à un vrai malade. \emph{Renvoi : C5.}
   \end{itemize}
 \end{itemize}
 \fi

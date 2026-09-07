@@ -57,6 +57,36 @@
     \item $z-a$ divise $P(z)$
   \end{enumerate}
 
+\item[] \textbf{Capacité C3}
+
+\item \textbf{[Q6]} Pour démontrer $\cos(a-b)=\cos a\cos b+\sin a\sin b$ à partir du produit scalaire, on considère $\vec u(\cos a;\sin a)$ et $\vec v(\cos b;\sin b)$ et on calcule $\vec u\cdot\vec v$ :
+  \begin{enumerate}[label=\Alph*.]
+    \item par la norme d'un produit vectoriel
+    \item une fois par les coordonnées, une fois par $\|\vec u\|\,\|\vec v\|\cos(\vec u;\vec v)$
+    \item par la somme des coordonnées des deux vecteurs
+    \item en dérivant la fonction cosinus
+  \end{enumerate}
+
+\item[] \textbf{Capacité C4}
+
+\item \textbf{[Q7]} On sait que $1$ est racine de $P(z)=z^3-3z^2+4z-2$. La factorisation de $P$ est :
+  \begin{enumerate}[label=\Alph*.]
+    \item $(z-1)(z^2-2z-2)$
+    \item $(z-1)(z^2+2z+2)$
+    \item $(z-1)(z^2-2z+2)$
+    \item $(z-1)^3$
+  \end{enumerate}
+
+\item[] \textbf{Capacité C6}
+
+\item \textbf{[Q8]} Dans le plan complexe, l'ensemble des points d'affixe $z$ vérifiant $|z-2|=|z+2i|$ est :
+  \begin{enumerate}[label=\Alph*.]
+    \item un cercle de centre l'origine
+    \item le segment joignant les points d'affixes $2$ et $-2i$
+    \item l'axe des réels
+    \item la médiatrice du segment joignant les points d'affixes $2$ et $-2i$
+  \end{enumerate}
+
 \end{enumerate}
 
 % NEXUS-QCM-TEACHER-ONLY-BEGIN
@@ -74,6 +104,9 @@ Q2 & C2 & \textbf{A} \\
 Q3 & C2 & \textbf{B} \\
 Q4 & C7 & \textbf{C} \\
 Q5 & C5 & \textbf{D} \\
+Q6 & C3 & \textbf{B} \\
+Q7 & C4 & \textbf{C} \\
+Q8 & C6 & \textbf{D} \\
 \hline
 \end{tabular}
 \end{center}
@@ -110,6 +143,24 @@ Q5 & C5 & \textbf{D} \\
     \item \textbf{A} — La factorisation par $z-a$ n'interdit pas d'autres facteurs et donc d'autres racines. Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z). \emph{Renvoi : C5.}
     \item \textbf{B} — La racine $a$ fournit le facteur $z-a$ ; le facteur $z+a$ correspondrait à la racine $-a$. Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z). \emph{Renvoi : C5.}
     \item \textbf{C} — Un polynôme non nul peut avoir des racines ; l'annulation en un point n'implique pas l'annulation identique. Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z). \emph{Renvoi : C5.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — Le produit vectoriel n'est pas défini dans le plan, et sa norme ferait apparaître un sinus, pas le cosinus cherché. La démonstration repose sur les deux expressions du produit scalaire. \emph{Renvoi : C3.}
+    \item \textbf{C} — La somme des coordonnées n'est pas un produit scalaire : celui-ci somme les \textbf{produits} des coordonnées de même rang, $\cos a\cos b+\sin a\sin b$. \emph{Renvoi : C3.}
+    \item \textbf{D} — La dérivation donne $\cos'=-\sin$, un résultat d'analyse. La formule d'addition porte sur l'angle entre deux vecteurs unitaires, qui vaut ici $a-b$. \emph{Renvoi : C3.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — En développant, $(z-1)(z^2-2z-2)=z^3-3z^2+2$ : le terme en $z$ a disparu et le terme constant a changé de signe. La division de $P$ par $z-1$ donne $z^2-2z+2$. \emph{Renvoi : C4.}
+    \item \textbf{B} — En développant, $(z-1)(z^2+2z+2)=z^3+z^2-2$, qui ne coïncide avec $P$ ni en $z^2$ ni en $z$. Les signes du quotient ont été inversés. \emph{Renvoi : C4.}
+    \item \textbf{D} — $(z-1)^3=z^3-3z^2+3z-1$ : ni le terme en $z$ ni le terme constant ne conviennent. Les deux autres racines de $P$ sont $1+i$ et $1-i$, non réelles, donc distinctes de $1$. \emph{Renvoi : C4.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{A} — Un cercle est le lieu des points à distance \textbf{constante} d'un point fixe. Ici deux distances à deux points fixes sont égalées, ce qui caractérise une médiatrice. \emph{Renvoi : C6.}
+    \item \textbf{B} — Le segment est l'ensemble des points situés \textbf{entre} les deux points ; l'égalité des distances les caractérise au contraire sur une droite perpendiculaire au segment, en son milieu. \emph{Renvoi : C6.}
+    \item \textbf{C} — L'axe des réels ne convient pas : pour $z=1$, $|1-2|=1$ alors que $|1+2i|=\sqrt5$. Il contient d'ailleurs le point d'affixe $2$, qui n'est pas équidistant. \emph{Renvoi : C6.}
   \end{itemize}
 \end{itemize}
 \fi

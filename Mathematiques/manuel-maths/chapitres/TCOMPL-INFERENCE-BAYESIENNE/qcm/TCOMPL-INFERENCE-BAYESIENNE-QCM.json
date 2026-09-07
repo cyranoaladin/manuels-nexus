@@ -131,6 +131,32 @@
           "renvoi": "C4"
         }
       }
+    },
+    {
+      "capacite": "C5",
+      "enonce": "Un test de dépistage a une sensibilité de $0{,}99$ et une spécificité de $0{,}99$. Lorsque la prévalence de la maladie passe de $10\\%$ à $0{,}1\\%$, sa valeur prédictive positive :",
+      "correcte": "B",
+      "options": {
+        "A": "reste inchangée, car elle ne dépend que des qualités du test",
+        "B": "chute fortement, car les faux positifs deviennent majoritaires parmi les tests positifs",
+        "C": "augmente, car la maladie est devenue plus rare",
+        "D": "devient nulle"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "La formule de Bayes fait intervenir la prévalence : $\\mathrm{VPP}=\\frac{se\\,p}{se\\,p+(1-sp)(1-p)}$. Avec $p=0{,}1$ elle vaut $\\frac{0{,}099}{0{,}108}\\approx0{,}92$ ; avec $p=0{,}001$ elle vaut $\\frac{0{,}00099}{0{,}01098}\\approx0{,}09$. Sensibilité et spécificité seules ne déterminent pas la VPP.",
+          "renvoi": "C5"
+        },
+        "C": {
+          "erreur": "C'est l'inverse : plus la maladie est rare, plus les $1\\%$ de faux positifs prélevés sur une population saine très nombreuse écrasent les vrais positifs. La VPP passe de $0{,}92$ à $0{,}09$.",
+          "renvoi": "C5"
+        },
+        "D": {
+          "erreur": "Elle diminue fortement mais reste strictement positive : $\\frac{0{,}00099}{0{,}01098}\\approx0{,}09$, soit environ un test positif sur onze qui correspond à un vrai malade.",
+          "renvoi": "C5"
+        }
+      },
+      "id": "Q6"
     }
   ]
 }

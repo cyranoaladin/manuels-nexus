@@ -55,6 +55,66 @@
     \item $n$ divise $a-b$
   \end{enumerate}
 
+\item[] \textbf{Capacité C3}
+
+\item \textbf{[Q6]} Pour établir que $221$ n'est pas premier par divisions successives, il suffit de tester la divisibilité par les nombres premiers :
+  \begin{enumerate}[label=\Alph*.]
+    \item $2$, $3$, $5$ et $7$ seulement
+    \item tous les premiers $p$ tels que $p^2\leq221$, c'est-à-dire jusqu'à $13$
+    \item tous les entiers de $2$ à $220$
+    \item $2$, puis $221/2$
+  \end{enumerate}
+
+\item[] \textbf{Capacité C4}
+
+\item \textbf{[Q7]} L'équation diophantienne $6x+9y=5$ :
+  \begin{enumerate}[label=\Alph*.]
+    \item admet une infinité de solutions entières
+    \item admet exactement une solution entière
+    \item n'admet aucune solution entière, car $\mathrm{PGCD}(6;9)=3$ ne divise pas $5$
+    \item admet des solutions justement parce que $6$ et $9$ ne sont pas premiers entre eux
+  \end{enumerate}
+
+\item[] \textbf{Capacité C6}
+
+\item \textbf{[Q8]} Le théorème de Gauss affirme que :
+  \begin{enumerate}[label=\Alph*.]
+    \item si $a$ divise $bc$ et si $a$ est premier avec $b$, alors $a$ divise $c$
+    \item si $a$ divise $bc$, alors $a$ divise $b$ ou $a$ divise $c$
+    \item si $a$ divise $b$ et si $a$ divise $c$, alors $a$ divise $bc$
+    \item si $a$ est premier avec $b$, alors $a$ divise $b+1$
+  \end{enumerate}
+
+\item[] \textbf{Capacité C7}
+
+\item \textbf{[Q9]} Dans la démonstration d'Euclide de l'infinité des nombres premiers, on suppose la liste $p_1,\dots,p_k$ complète et on considère $N=p_1p_2\cdots p_k+1$. On conclut parce que :
+  \begin{enumerate}[label=\Alph*.]
+    \item $N$ est nécessairement premier
+    \item $N$ est divisible par $p_1$
+    \item $N$ est pair
+    \item aucun $p_i$ ne divise $N$, donc $N$ admet un facteur premier hors de la liste
+  \end{enumerate}
+
+\item[] \textbf{Capacité C8}
+
+\item \textbf{[Q10]} Le petit théorème de Fermat affirme que, si $p$ est premier et si $p$ ne divise pas $a$ :
+  \begin{enumerate}[label=\Alph*.]
+    \item $a^p\equiv a \pmod{p-1}$
+    \item $a^{p-1}\equiv1 \pmod p$
+    \item $a^{p}\equiv1 \pmod p$
+    \item $p^{a-1}\equiv1 \pmod a$
+  \end{enumerate}
+
+\item[] \textbf{Capacité C9}
+
+\item \textbf{[Q11]} Dans l'algorithme d'Euclide calculant $\mathrm{PGCD}(a;b)$ avec $a>b>0$, l'égalité utilisée à chaque étape est :
+  \begin{enumerate}[label=\Alph*.]
+    \item $\mathrm{PGCD}(a;b)=\mathrm{PGCD}(a-b;b)$, mais seulement lorsque $b$ divise $a$
+    \item $\mathrm{PGCD}(a;b)=\mathrm{PGCD}(a;b \bmod a)$
+    \item $\mathrm{PGCD}(a;b)=\mathrm{PGCD}(b;a \bmod b)$
+    \item $\mathrm{PGCD}(a;b)=a \bmod b$
+  \end{enumerate}
+
 \end{enumerate}
 
 % NEXUS-QCM-TEACHER-ONLY-BEGIN
@@ -72,6 +132,12 @@ Q2 & C1 & \textbf{A} \\
 Q3 & C1 & \textbf{A} \\
 Q4 & C5 & \textbf{C} \\
 Q5 & C2 & \textbf{D} \\
+Q6 & C3 & \textbf{B} \\
+Q7 & C4 & \textbf{C} \\
+Q8 & C6 & \textbf{A} \\
+Q9 & C7 & \textbf{D} \\
+Q10 & C8 & \textbf{B} \\
+Q11 & C9 & \textbf{C} \\
 \hline
 \end{tabular}
 \end{center}
@@ -108,6 +174,42 @@ Q5 & C2 & \textbf{D} \\
     \item \textbf{A} — Somme au lieu de difference. La congruence a équivalent à b modulo n signifie exactement que n divise a-b. \emph{Renvoi : C2.}
     \item \textbf{B} — Sens du diviseur inverse. La congruence a équivalent à b modulo n signifie exactement que n divise a-b. \emph{Renvoi : C2.}
     \item \textbf{C} — Égalité non nécessaire. La congruence a équivalent à b modulo n signifie exactement que n divise a-b. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — S'arrêter à $7$ laisse passer $221=13\times17$. Il faut aller jusqu'au plus grand premier dont le carré ne dépasse pas $221$, soit $13$ puisque $13^2=169\leq221<17^2$. \emph{Renvoi : C3.}
+    \item \textbf{C} — Le test est correct mais inutilement coûteux : si $n=ab$ avec $a\leq b$, alors $a\leq\sqrt n$. Tester jusqu'à $\sqrt{221}<15$ suffit. \emph{Renvoi : C3.}
+    \item \textbf{D} — $221/2$ n'est pas entier, et tester le seul diviseur $2$ ne prouve rien sur les diviseurs impairs. Il faut parcourir les premiers jusqu'à $\sqrt{221}$. \emph{Renvoi : C3.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — Toute valeur de $6x+9y$ est un multiple de $3$ ; $5$ n'en est pas un. Le théorème de Bézout donne des solutions si et seulement si le PGCD divise le second membre. \emph{Renvoi : C4.}
+    \item \textbf{B} — Quand une équation $ax+by=c$ a une solution, elle en a une infinité ; ici elle n'en a aucune, puisque $3$ ne divise pas $5$. \emph{Renvoi : C4.}
+    \item \textbf{D} — C'est l'inverse : ne pas être premiers entre eux impose au second membre d'être multiple du PGCD. Si $6$ et $9$ étaient premiers entre eux, l'équation aurait des solutions pour tout $c$. \emph{Renvoi : C4.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{B} — Cette conclusion demande que $a$ soit premier (lemme d'Euclide). Sans cette hypothèse elle tombe : $6$ divise $4\times3=12$ sans diviser ni $4$ ni $3$. Gauss remplace la primalité de $a$ par la primalité relative de $a$ et $b$. \emph{Renvoi : C6.}
+    \item \textbf{C} — C'est une conséquence immédiate de la définition de la divisibilité, sans aucune hypothèse de primalité relative : ce n'est pas le théorème de Gauss, dont l'intérêt est de conclure sur $c$ à partir d'une divisibilité du produit. \emph{Renvoi : C6.}
+    \item \textbf{D} — Rien de tel : $4$ est premier avec $9$ et ne divise pas $10$. La primalité relative se lit dans le PGCD, elle n'entraîne aucune divisibilité de ce type. \emph{Renvoi : C6.}
+  \end{itemize}
+  \item \textbf{Q9}
+  \begin{itemize}
+    \item \textbf{A} — $N$ n'est pas toujours premier : $2\times3\times5\times7\times11\times13+1=30031=59\times509$. La contradiction vient de l'existence d'un facteur premier nouveau, pas de la primalité de $N$. \emph{Renvoi : C7.}
+    \item \textbf{B} — La division de $N$ par $p_1$ laisse précisément le reste $1$ : c'est ce reste qui empêche tout $p_i$ de diviser $N$. \emph{Renvoi : C7.}
+    \item \textbf{C} — Dès que $2$ figure dans la liste, le produit est pair et $N$ est impair. La parité n'intervient pas dans l'argument. \emph{Renvoi : C7.}
+  \end{itemize}
+  \item \textbf{Q10}
+  \begin{itemize}
+    \item \textbf{A} — Le module est $p$, pas $p-1$ : $p-1$ est l'exposant. Confondre les deux fait perdre tout le contenu du théorème. \emph{Renvoi : C8.}
+    \item \textbf{C} — On a $a^{p}\equiv a\pmod p$ ; l'exposant $p-1$ est nécessaire pour obtenir $1$. Avec $p=5$ et $a=2$ : $2^5=32\equiv2$, tandis que $2^4=16\equiv1$. \emph{Renvoi : C8.}
+    \item \textbf{D} — Les rôles de $a$ et de $p$ sont échangés, et l'énoncé devient faux : avec $a=4$ et $p=3$, $3^{3}=27\equiv3\pmod4$, pas $1$. \emph{Renvoi : C8.}
+  \end{itemize}
+  \item \textbf{Q11}
+  \begin{itemize}
+    \item \textbf{A} — L'égalité $\mathrm{PGCD}(a;b)=\mathrm{PGCD}(a-b;b)$ est vraie sans aucune condition : c'est la variante par soustractions successives. La restriction ajoutée la vide de son usage. \emph{Renvoi : C9.}
+    \item \textbf{B} — Les rôles de $a$ et $b$ sont inversés : comme $a>b$, on a $b \bmod a=b$ et le couple ne change pas — la boucle ne se terminerait jamais. \emph{Renvoi : C9.}
+    \item \textbf{D} — $a \bmod b$ est le reste d'une seule division, pas le PGCD. Il faut itérer jusqu'à un reste nul ; le PGCD est alors le dernier reste non nul. \emph{Renvoi : C9.}
   \end{itemize}
 \end{itemize}
 \fi

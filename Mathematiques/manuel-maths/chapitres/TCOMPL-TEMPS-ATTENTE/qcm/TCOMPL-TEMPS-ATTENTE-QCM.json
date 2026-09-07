@@ -131,6 +131,110 @@
           "renvoi": "C1"
         }
       }
+    },
+    {
+      "capacite": "C4",
+      "enonce": "La loi exponentielle de paramètre $\\lambda>0$ est dite « sans mémoire » parce que, pour tous $s,t\\geq0$ :",
+      "correcte": "B",
+      "options": {
+        "A": "$P(X>s+t)=P(X>s)+P(X>t)$",
+        "B": "$P_{X>s}(X>s+t)=P(X>t)$",
+        "C": "$P(X>t)=1-e^{-\\lambda t}$",
+        "D": "$E(X)=\\lambda$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Les probabilités de survie se multiplient : $e^{-\\lambda(s+t)}=e^{-\\lambda s}e^{-\\lambda t}$. C'est ce produit qui, une fois divisé par $P(X>s)$, donne l'absence de mémoire.",
+          "renvoi": "C4"
+        },
+        "C": {
+          "erreur": "$1-e^{-\\lambda t}$ est la fonction de répartition $P(X\\leq t)$ ; la probabilité de survie vaut $P(X>t)=e^{-\\lambda t}$. Et une formule de répartition n'exprime pas, à elle seule, l'absence de mémoire.",
+          "renvoi": "C4"
+        },
+        "D": {
+          "erreur": "L'espérance vaut $\\tfrac1\\lambda$ et non $\\lambda$ ; surtout, une espérance ne dit rien du conditionnement par $\\{X>s\\}$.",
+          "renvoi": "C4"
+        }
+      },
+      "id": "Q6"
+    },
+    {
+      "capacite": "C5",
+      "enonce": "Pour que la fonction $f$ définie par $f(x)=k\\,e^{-2x}$ sur $[0;+\\infty[$ et nulle ailleurs soit une densité de probabilité, il faut :",
+      "correcte": "C",
+      "options": {
+        "A": "$k=1$",
+        "B": "$k=\\tfrac12$",
+        "C": "$k=2$",
+        "D": "n'importe quel $k>0$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Avec $k=1$, $\\int_0^{+\\infty}e^{-2x}\\,dx=\\tfrac12\\neq1$. La condition $\\int f=1$ impose $\\tfrac k2=1$, donc $k=2$.",
+          "renvoi": "C5"
+        },
+        "B": {
+          "erreur": "Avec $k=\\tfrac12$ l'intégrale vaut $\\tfrac14$. Le facteur cherché est l'inverse de $\\int_0^{+\\infty}e^{-2x}\\,dx=\\tfrac12$, soit $k=2$.",
+          "renvoi": "C5"
+        },
+        "D": {
+          "erreur": "La positivité ne suffit pas : une densité doit aussi avoir une intégrale égale à $1$ sur $\\mathbb{R}$, ce qui fixe $k=2$.",
+          "renvoi": "C5"
+        }
+      },
+      "id": "Q7"
+    },
+    {
+      "capacite": "C6",
+      "enonce": "Pour $X$ de loi exponentielle de paramètre $\\lambda$, l'espérance s'écrit :",
+      "correcte": "D",
+      "options": {
+        "A": "$\\displaystyle\\int_0^{+\\infty} x\\,e^{-\\lambda x}\\,dx$",
+        "B": "$\\displaystyle\\int_{-\\infty}^{+\\infty} \\lambda x\\,e^{-\\lambda x}\\,dx$",
+        "C": "$\\displaystyle\\int_0^{+\\infty} \\lambda e^{-\\lambda x}\\,dx$",
+        "D": "$\\displaystyle\\int_0^{+\\infty} x\\,\\lambda e^{-\\lambda x}\\,dx$, qui vaut $\\tfrac1\\lambda$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Le facteur $\\lambda$ de la densité a été oublié : cette intégrale vaut $\\tfrac1{\\lambda^2}$, pas $\\tfrac1\\lambda$. L'espérance intègre $x$ contre la densité $\\lambda e^{-\\lambda x}$.",
+          "renvoi": "C6"
+        },
+        "B": {
+          "erreur": "La densité est nulle sur $]-\\infty;0[$ : l'intégrale doit partir de $0$. Écrite de $-\\infty$ à $+\\infty$ avec $\\lambda x e^{-\\lambda x}$, elle diverge.",
+          "renvoi": "C6"
+        },
+        "C": {
+          "erreur": "C'est l'intégrale de la densité seule : elle vaut $1$, la masse totale de probabilité. L'espérance pondère chaque valeur $x$ par cette densité.",
+          "renvoi": "C6"
+        }
+      },
+      "id": "Q8"
+    },
+    {
+      "capacite": "C7",
+      "enonce": "Si $X$ suit la loi uniforme sur $[a;b]$ (avec $a<b$), alors :",
+      "correcte": "A",
+      "options": {
+        "A": "$E(X)=\\tfrac{a+b}2$ et $V(X)=\\tfrac{(b-a)^2}{12}$",
+        "B": "$E(X)=\\tfrac{b-a}2$ et $V(X)=\\tfrac{(b-a)^2}{12}$",
+        "C": "$E(X)=\\tfrac{a+b}2$ et $V(X)=\\tfrac{b-a}{12}$",
+        "D": "sa densité vaut $\\tfrac1b$ sur $[a;b]$"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "$\\tfrac{b-a}2$ est la demi-longueur de l'intervalle, pas son milieu : sur $[2;6]$ elle vaudrait $2$, alors que le centre est $4=\\tfrac{2+6}2$.",
+          "renvoi": "C7"
+        },
+        "C": {
+          "erreur": "Une variance est homogène au carré de la variable : elle vaut $\\tfrac{(b-a)^2}{12}$. La forme $\\tfrac{b-a}{12}$ changerait de valeur avec l'unité choisie.",
+          "renvoi": "C7"
+        },
+        "D": {
+          "erreur": "La densité est constante égale à $\\tfrac1{b-a}$ sur $[a;b]$, seule valeur donnant une intégrale égale à $1$ ; $\\tfrac1b$ ne convient que si $a=0$.",
+          "renvoi": "C7"
+        }
+      },
+      "id": "Q9"
     }
   ]
 }

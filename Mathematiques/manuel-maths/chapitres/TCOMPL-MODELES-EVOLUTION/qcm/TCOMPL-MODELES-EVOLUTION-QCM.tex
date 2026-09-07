@@ -57,6 +57,26 @@
     \item $50$
   \end{enumerate}
 
+\item[] \textbf{Capacité C3}
+
+\item \textbf{[Q6]} Pour représenter graphiquement la suite définie par $u_{n+1}=f(u_n)$ et conjecturer son comportement, on trace la courbe de $f$ et :
+  \begin{enumerate}[label=\Alph*.]
+    \item l'axe des abscisses, d'équation $y=0$
+    \item la droite d'équation $y=x$
+    \item la tangente à la courbe au point d'abscisse $u_0$
+    \item la seule droite verticale d'équation $x=u_0$
+  \end{enumerate}
+
+\item[] \textbf{Capacité C6}
+
+\item \textbf{[Q7]} Soit $(u_n)$ telle que $-\tfrac1n\leq u_n-2\leq\tfrac1n$ pour tout $n\geq1$. On peut conclure que :
+  \begin{enumerate}[label=\Alph*.]
+    \item $(u_n)$ diverge
+    \item $(u_n)$ tend vers $0$
+    \item $(u_n)$ tend vers $2$
+    \item rien, tant que l'expression de $u_n$ n'est pas connue
+  \end{enumerate}
+
 \end{enumerate}
 
 % NEXUS-QCM-TEACHER-ONLY-BEGIN
@@ -74,6 +94,8 @@ Q2 & C2 & \textbf{A} \\
 Q3 & C5 & \textbf{B} \\
 Q4 & C5 & \textbf{C} \\
 Q5 & C4 & \textbf{D} \\
+Q6 & C3 & \textbf{B} \\
+Q7 & C6 & \textbf{C} \\
 \hline
 \end{tabular}
 \end{center}
@@ -110,6 +132,18 @@ Q5 & C4 & \textbf{D} \\
     \item \textbf{A} — La constante additive 10 n'est pas le point fixe, car $0{,}8*10+10=18$. Une solution constante de u\_(n+1)=0,8u\_n+10 vérifie ell=0,8ell+10, donc ell=50. \emph{Renvoi : C4.}
     \item \textbf{B} — La valeur 40 ne satisfait pas l'équation fixe : $0{,}8*40+10=42$. Une solution constante de u\_(n+1)=0,8u\_n+10 vérifie ell=0,8ell+10, donc ell=50. \emph{Renvoi : C4.}
     \item \textbf{C} — La valeur 80 ne satisfait pas l'équation fixe : $0{,}8*80+10=74$. Une solution constante de u\_(n+1)=0,8u\_n+10 vérifie ell=0,8ell+10, donc ell=50. \emph{Renvoi : C4.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — L'axe des abscisses ne permet pas de reporter l'ordonnée obtenue en abscisse. C'est la droite $y=x$ qui transforme $u_{n+1}$ lu en ordonnée en une abscisse, d'où la construction en escalier ou en escargot. \emph{Renvoi : C3.}
+    \item \textbf{C} — La tangente approche $f$ au voisinage de $u_0$ ; elle ne construit aucun des termes suivants. Le report d'un terme au suivant se fait par la droite $y=x$. \emph{Renvoi : C3.}
+    \item \textbf{D} — La verticale $x=u_0$ donne le premier point $(u_0;u_1)$, mais sans la droite $y=x$ on ne peut pas itérer : rien ne ramène $u_1$ sur l'axe des abscisses. \emph{Renvoi : C3.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — L'encadrement place $u_n$ entre $2-\tfrac1n$ et $2+\tfrac1n$, deux suites convergeant vers $2$ : le théorème des gendarmes impose la convergence. \emph{Renvoi : C6.}
+    \item \textbf{B} — C'est l'écart $u_n-2$ qui tend vers $0$, pas $u_n$. En ajoutant $2$ aux trois membres, on lit $u_n\to2$. \emph{Renvoi : C6.}
+    \item \textbf{D} — C'est précisément l'intérêt du théorème des gendarmes : un encadrement par deux suites de même limite suffit, sans expression explicite de $u_n$. \emph{Renvoi : C6.}
   \end{itemize}
 \end{itemize}
 \fi

@@ -131,6 +131,136 @@
           "renvoi": "C2"
         }
       }
+    },
+    {
+      "capacite": "C4",
+      "enonce": "Sur $[0;1]$, l'aire du domaine compris entre les courbes de $f(x)=x$ et $g(x)=x^2$ vaut :",
+      "correcte": "B",
+      "options": {
+        "A": "$\\tfrac12$",
+        "B": "$\\tfrac16$",
+        "C": "$\\tfrac13$",
+        "D": "$\\tfrac56$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "$\\tfrac12$ est l'aire sous la seule courbe de $f$. L'aire entre deux courbes intègre leur \\textbf{différence} : $\\int_0^1(x-x^2)\\,dx=\\tfrac12-\\tfrac13=\\tfrac16$.",
+          "renvoi": "C4"
+        },
+        "C": {
+          "erreur": "$\\tfrac13$ est l'aire sous la seule courbe de $g$. Il faut retrancher cette aire de celle sous $f$, soit $\\tfrac12-\\tfrac13=\\tfrac16$.",
+          "renvoi": "C4"
+        },
+        "D": {
+          "erreur": "$\\tfrac12+\\tfrac13=\\tfrac56$ additionne les deux aires au lieu de les soustraire ; sur $[0;1]$ on a $x^2\\leq x$, et le domaine entre les courbes est leur différence.",
+          "renvoi": "C4"
+        }
+      },
+      "id": "Q6"
+    },
+    {
+      "capacite": "C5",
+      "enonce": "Soit $I_n=\\displaystyle\\int_0^1 x^n e^x\\,dx$ pour $n\\geq1$. Une intégration par parties donne la relation de récurrence :",
+      "correcte": "C",
+      "options": {
+        "A": "$I_n=e+nI_{n-1}$",
+        "B": "$I_n=nI_{n-1}-e$",
+        "C": "$I_n=e-nI_{n-1}$",
+        "D": "$I_n=I_{n-1}$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "La formule d'intégration par parties retranche l'intégrale restante : $I_n=[x^ne^x]_0^1-\\int_0^1 nx^{n-1}e^x\\,dx=e-nI_{n-1}$.",
+          "renvoi": "C5"
+        },
+        "B": {
+          "erreur": "Les deux signes sont inversés. Le crochet $[x^ne^x]_0^1$ vaut $e$ et arrive en tête avec le signe $+$ ; l'intégrale restante est retranchée.",
+          "renvoi": "C5"
+        },
+        "D": {
+          "erreur": "La suite n'est pas constante : $I_0=e-1\\approx1{,}718$ et $I_1=1$. La relation $I_1=e-1\\times I_0=e-(e-1)=1$ le confirme.",
+          "renvoi": "C5"
+        }
+      },
+      "id": "Q7"
+    },
+    {
+      "capacite": "C6",
+      "enonce": "Un véhicule roule à la vitesse $v(t)$, en m$\\cdot$s$^{-1}$, entre $t=0$ et $t=60$ s. La quantité $\\dfrac1{60}\\displaystyle\\int_0^{60}v(t)\\,dt$ représente :",
+      "correcte": "D",
+      "options": {
+        "A": "la distance parcourue, en mètres",
+        "B": "l'accélération moyenne",
+        "C": "la vitesse maximale atteinte",
+        "D": "la vitesse moyenne sur la minute, en m$\\cdot$s$^{-1}$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "La distance est l'intégrale seule, $\\int_0^{60}v(t)\\,dt$. La division par la durée transforme cette distance en une moyenne, et change l'unité de mètres en m$\\cdot$s$^{-1}$.",
+          "renvoi": "C6"
+        },
+        "B": {
+          "erreur": "L'accélération moyenne est $\\dfrac{v(60)-v(0)}{60}$ : une variation de vitesse rapportée au temps, pas une moyenne de la vitesse elle-même.",
+          "renvoi": "C6"
+        },
+        "C": {
+          "erreur": "Une moyenne ne dépasse jamais le maximum et ne l'atteint que si $v$ est constante. Sur un trajet réel, la vitesse moyenne est strictement inférieure à la vitesse maximale.",
+          "renvoi": "C6"
+        }
+      },
+      "id": "Q8"
+    },
+    {
+      "capacite": "C7",
+      "enonce": "Soit $f$ continue, positive et croissante sur $[a;b]$, et $F(x)=\\displaystyle\\int_a^x f(t)\\,dt$. Pour démontrer $F'(x)=f(x)$, l'encadrement utilisé pour $h>0$ est :",
+      "correcte": "A",
+      "options": {
+        "A": "$h\\,f(x)\\leq F(x+h)-F(x)\\leq h\\,f(x+h)$",
+        "B": "$h\\,f(x+h)\\leq F(x+h)-F(x)\\leq h\\,f(x)$",
+        "C": "$F(x+h)-F(x)=h\\,f(x)$",
+        "D": "$F(x+h)-F(x)\\leq0$"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "L'encadrement est inversé : $f$ croissante donne $f(x)\\leq f(t)\\leq f(x+h)$ pour $t\\in[x;x+h]$, donc l'aire est comprise entre les deux rectangles, le petit d'abord.",
+          "renvoi": "C7"
+        },
+        "C": {
+          "erreur": "L'égalité ne vaut que si $f$ est constante sur $[x;x+h]$ : l'aire sous la courbe n'est pas exactement celle d'un rectangle. C'est le passage à la limite qui rétablit l'égalité.",
+          "renvoi": "C7"
+        },
+        "D": {
+          "erreur": "$f$ est positive, donc $F$ est croissante : la différence $F(x+h)-F(x)$ est positive. Elle est même minorée par $h\\,f(x)$.",
+          "renvoi": "C7"
+        }
+      },
+      "id": "Q9"
+    },
+    {
+      "capacite": "C8",
+      "enonce": "La formule $\\displaystyle\\int_a^b u'v=[uv]_a^b-\\int_a^b uv'$ se démontre en intégrant entre $a$ et $b$ :",
+      "correcte": "B",
+      "options": {
+        "A": "la dérivée du quotient $\\tfrac uv$",
+        "B": "la relation $(uv)'=u'v+uv'$",
+        "C": "la relation $(uv)'=u'v'$",
+        "D": "la formule de dérivation d'une fonction composée"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Le quotient conduit à une autre formule et suppose $v$ ne s'annulant pas. La formule cherchée porte sur un produit, et vient de la dérivée d'un produit.",
+          "renvoi": "C8"
+        },
+        "C": {
+          "erreur": "La dérivée d'un produit n'est pas le produit des dérivées : avec $u=v=x$, $(x^2)'=2x$ alors que $u'v'=1$.",
+          "renvoi": "C8"
+        },
+        "D": {
+          "erreur": "La dérivation d'une composée fournit le changement de variable, une autre technique d'intégration. L'intégration par parties vient de la dérivée du produit.",
+          "renvoi": "C8"
+        }
+      },
+      "id": "Q10"
     }
   ]
 }

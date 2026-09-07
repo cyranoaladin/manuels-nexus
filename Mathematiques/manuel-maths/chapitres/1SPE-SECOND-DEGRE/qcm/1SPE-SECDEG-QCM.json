@@ -469,6 +469,58 @@
           "renvoi": "C6, abscisse du sommet"
         }
       }
+    },
+    {
+      "capacite": "C7",
+      "enonce": "Les fonctions polynômes du second degré qui s'annulent exactement en $-1$ et $4$ sont les $f(x)=a(x+1)(x-4)$, $a\\neq0$. Pour chacune d'elles, la somme $S$ et le produit $P$ des racines valent :",
+      "correcte": "C",
+      "options": {
+        "A": "$S=-3$ et $P=-4$",
+        "B": "$S=3$ et $P=4$",
+        "C": "$S=3$ et $P=-4$",
+        "D": "$S=-3$ et $P=4$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "La somme est $-1+4=3$, pas $-3$ : le signe de la racine $4$ a été changé. Le produit, lui, est bien $-1\\times4=-4$.",
+          "renvoi": "C7"
+        },
+        "B": {
+          "erreur": "Le produit de deux nombres de signes contraires est négatif : $-1\\times4=-4$. La somme $3$ est correcte.",
+          "renvoi": "C7"
+        },
+        "D": {
+          "erreur": "Les deux valeurs sont fausses : $S=-1+4=3$ et $P=-1\\times4=-4$. Les signes des racines ont été inversés dans les deux calculs.",
+          "renvoi": "C7"
+        }
+      },
+      "id": "Q19"
+    },
+    {
+      "capacite": "C8",
+      "enonce": "Soit $f(x)=-2(x-1)(x+3)$. On a $f(x)>0$ :",
+      "correcte": "D",
+      "options": {
+        "A": "pour tout réel $x$",
+        "B": "pour $x<-3$ ou $x>1$",
+        "C": "pour aucun réel $x$",
+        "D": "pour $-3<x<1$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Un trinôme change de signe en franchissant chacune de ses racines : $f(2)=-2\\times1\\times5=-10<0$.",
+          "renvoi": "C8"
+        },
+        "B": {
+          "erreur": "C'est l'extérieur des racines, où le produit $(x-1)(x+3)$ est positif ; multiplié par $a=-2$, il y rend $f$ négative. Le signe de $f$ est celui de $a$ à l'extérieur des racines.",
+          "renvoi": "C8"
+        },
+        "C": {
+          "erreur": "Entre les racines, $f$ est du signe contraire de $a$, donc positive : $f(0)=-2\\times(-1)\\times3=6>0$.",
+          "renvoi": "C8"
+        }
+      },
+      "id": "Q20"
     }
   ]
 }

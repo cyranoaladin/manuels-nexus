@@ -69,6 +69,46 @@
     \item P(|Y-mu|>=delta)
   \end{enumerate}
 
+\item[] \textbf{Capacité C1}
+
+\item \textbf{[Q7]} On répète trois fois, de façon indépendante, une épreuve dont la probabilité de succès est $0{,}2$. La probabilité d'obtenir au moins un succès vaut :
+  \begin{enumerate}[label=\Alph*.]
+    \item $0{,}2$
+    \item $0{,}6$
+    \item $0{,}488$
+    \item $0{,}512$
+  \end{enumerate}
+
+\item[] \textbf{Capacité C3}
+
+\item \textbf{[Q8]} Une machine produit $2\%$ de pièces défectueuses, indépendamment les unes des autres. Le plus petit nombre $n$ de pièces à prélever pour que la probabilité d'en obtenir au moins une défectueuse atteigne $0{,}5$ est :
+  \begin{enumerate}[label=\Alph*.]
+    \item $n=25$
+    \item $n=50$
+    \item $n=2$
+    \item $n=35$
+  \end{enumerate}
+
+\item[] \textbf{Capacité C4}
+
+\item \textbf{[Q9]} Pour $X\sim\mathcal B(50;0{,}3)$, déterminer le plus petit intervalle $[a;b]$ tel que $P(a\leq X\leq b)\geq0{,}95$ se fait :
+  \begin{enumerate}[label=\Alph*.]
+    \item en cumulant numériquement les $P(X=k)$ autour de l'espérance, à la calculatrice ou en Python
+    \item en résolvant une équation du second degré
+    \item en prenant $[0;50]$, le seul intervalle sûr
+    \item en prenant $E(X)\pm\sigma$
+  \end{enumerate}
+
+\item[] \textbf{Capacité C6}
+
+\item \textbf{[Q10]} Pour calculer l'espérance du nombre $X$ de faces obtenues en dix lancers d'une pièce équilibrée, la décomposition utile est :
+  \begin{enumerate}[label=\Alph*.]
+    \item $X=10X_1$
+    \item $X=X_1+\dots+X_{10}$, où $X_i$ vaut $1$ si le $i$-ème lancer donne face et $0$ sinon
+    \item $X=\max(X_1;\dots;X_{10})$
+    \item aucune décomposition n'est possible : il faut la loi complète de $X$
+  \end{enumerate}
+
 \end{enumerate}
 
 % NEXUS-QCM-TEACHER-ONLY-BEGIN
@@ -87,6 +127,10 @@ Q3 & C7 & \textbf{A} \\
 Q4 & C8 & \textbf{B} \\
 Q5 & C9 & \textbf{C} \\
 Q6 & C10 & \textbf{D} \\
+Q7 & C1 & \textbf{C} \\
+Q8 & C3 & \textbf{D} \\
+Q9 & C4 & \textbf{A} \\
+Q10 & C6 & \textbf{B} \\
 \hline
 \end{tabular}
 \end{center}
@@ -129,6 +173,30 @@ Q6 & C10 & \textbf{D} \\
     \item \textbf{A} — Bienayme-Tchebychev concerne l'événement $|Y-\mu|\geq\delta$, pas la probabilité ponctuelle que $Y$ soit exactement égal a $\mu$. \emph{Renvoi : C10, inégalité de Bienaymé-Tchebychev.}
     \item \textbf{B} — L'espérance $E(Y)$ est le centre de l'événement de deviation ; l'inégalité ne cherche pas a majorer cette valeur. \emph{Renvoi : C10, inégalité de Bienaymé-Tchebychev.}
     \item \textbf{C} — La variance intervient dans le majorant $V(Y)/\delta^2$, mais la quantité majorée est la probabilité d'un ecart a la moyenne. \emph{Renvoi : C10, inégalité de Bienaymé-Tchebychev.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — $0{,}2$ est la probabilité de succès d'\textbf{une} épreuve. Sur trois répétitions, on passe par l'événement contraire : $1-0{,}8^3=0{,}488$. \emph{Renvoi : C1.}
+    \item \textbf{B} — $3\times0{,}2=0{,}6$ additionne les probabilités de trois événements qui ne sont pas incompatibles : les succès peuvent se produire ensemble, et la somme surestime. \emph{Renvoi : C1.}
+    \item \textbf{D} — $0{,}512=0{,}8^3$ est la probabilité de n'obtenir \textbf{aucun} succès. La réponse cherchée en est le complément : $1-0{,}512=0{,}488$. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{A} — Avec $n=25$, $1-0{,}98^{25}\approx0{,}397$, encore inférieur à $0{,}5$. Il faut résoudre $0{,}98^{\,n}\leq0{,}5$, soit $n\geq\tfrac{\ln0{,}5}{\ln0{,}98}\approx34{,}3$. \emph{Renvoi : C3.}
+    \item \textbf{B} — $n=50$ convient ($\approx0{,}636$) mais ce n'est pas le plus petit : dès $n=35$ la probabilité vaut environ $0{,}507$. \emph{Renvoi : C3.}
+    \item \textbf{C} — Avec $n=2$, $1-0{,}98^2\approx0{,}040$ : la probabilité croît lentement, il faut des dizaines de pièces pour atteindre une chance sur deux. \emph{Renvoi : C3.}
+  \end{itemize}
+  \item \textbf{Q9}
+  \begin{itemize}
+    \item \textbf{B} — $P(X=k)=\binom{50}{k}0{,}3^k0{,}7^{50-k}$ n'est pas polynomiale du second degré en $k$ : aucune résolution algébrique fermée ne donne les bornes, on les cherche numériquement. \emph{Renvoi : C4.}
+    \item \textbf{C} — $[0;50]$ a bien une probabilité de $1$, mais l'énoncé demande le \textbf{plus petit} intervalle : c'est la minimalité qui fait l'intérêt de la recherche. \emph{Renvoi : C4.}
+    \item \textbf{D} — Un intervalle d'un écart-type autour de la moyenne couvre environ $68\%$ des cas dans le modèle normal, très loin des $95\%$ demandés. \emph{Renvoi : C4.}
+  \end{itemize}
+  \item \textbf{Q10}
+  \begin{itemize}
+    \item \textbf{A} — Cette écriture ferait de $X$ une variable ne prenant que les valeurs $0$ et $10$ : elle suppose les dix lancers identiques au premier, alors qu'ils sont indépendants et peuvent différer. \emph{Renvoi : C6.}
+    \item \textbf{C} — Le maximum vaut $1$ dès qu'une face apparaît : il détecte l'existence d'un succès, il n'en compte pas le nombre. \emph{Renvoi : C6.}
+    \item \textbf{D} — C'est justement ce que la linéarité de l'espérance permet d'éviter : $E(X)=\sum E(X_i)=10\times\tfrac12=5$, sans écrire un seul coefficient binomial. \emph{Renvoi : C6.}
   \end{itemize}
 \end{itemize}
 \fi

@@ -131,6 +131,32 @@
           "renvoi": "C5"
         }
       }
+    },
+    {
+      "capacite": "C2",
+      "enonce": "On veut modéliser par un graphe un réseau de six villes reliées par des routes à double sens. Le modèle adapté est :",
+      "correcte": "B",
+      "options": {
+        "A": "un graphe orienté, avec une arête par sens de circulation",
+        "B": "un graphe non orienté, un sommet par ville et une arête par route",
+        "C": "un graphe dont les sommets sont les routes",
+        "D": "un arbre, puisqu'il y a six villes"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Une route à double sens n'impose aucune orientation. Doubler les arcs n'ajoute rien et fausse la lecture des degrés, donc les raisonnements de parcours.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Prendre les routes comme sommets construit un autre graphe, qui répond aux questions de parcours d'arêtes. La question porte sur les liaisons entre villes : ce sont les villes qui sont les sommets.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Un arbre suppose l'absence de cycle et exactement cinq arêtes pour six sommets. Rien ne l'assure : un réseau routier comporte presque toujours des cycles.",
+          "renvoi": "C2"
+        }
+      },
+      "id": "Q6"
     }
   ]
 }

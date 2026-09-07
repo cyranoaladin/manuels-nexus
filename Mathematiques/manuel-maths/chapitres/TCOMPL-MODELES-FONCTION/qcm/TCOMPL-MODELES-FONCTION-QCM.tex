@@ -57,6 +57,46 @@
     \item $\frac{2}{2x+1}$
   \end{enumerate}
 
+\item[] \textbf{Capacité C2}
+
+\item \textbf{[Q6]} Une fonction $f$ continue est strictement croissante sur $[0;5]$, avec $f(0)=-3$ et $f(5)=7$. Sur $[0;5]$, l'équation $f(x)=2$ admet :
+  \begin{enumerate}[label=\Alph*.]
+    \item aucune solution
+    \item exactement une solution
+    \item exactement deux solutions
+    \item une infinité de solutions
+  \end{enumerate}
+
+\item[] \textbf{Capacité C3}
+
+\item \textbf{[Q7]} On cherche par dichotomie la solution de $x^3+x-1=0$ sur $[0;1]$, où $f(0)=-1$ et $f(1)=1$. Après avoir calculé $f(0{,}5)=-0{,}375$, l'intervalle retenu à l'étape suivante est :
+  \begin{enumerate}[label=\Alph*.]
+    \item $[0;0{,}5]$
+    \item $[0{,}5;0{,}75]$
+    \item $[0{,}5;1]$
+    \item $[0{,}25;0{,}75]$
+  \end{enumerate}
+
+\item[] \textbf{Capacité C6}
+
+\item \textbf{[Q8]} Le point moyen d'un nuage de points $(x_i;y_i)$ a pour coordonnées :
+  \begin{enumerate}[label=\Alph*.]
+    \item $(\max x_i;\max y_i)$
+    \item la médiane des $x_i$ et la médiane des $y_i$
+    \item $(0;0)$, le nuage étant centré d'office
+    \item $(\bar x;\bar y)$, moyennes des abscisses et des ordonnées
+  \end{enumerate}
+
+\item[] \textbf{Capacité C7}
+
+\item \textbf{[Q9]} La droite de régression de $y$ en $x$ obtenue par la méthode des moindres carrés :
+  \begin{enumerate}[label=\Alph*.]
+    \item passe par tous les points du nuage
+    \item minimise la somme des distances perpendiculaires aux points
+    \item ne passe pas par le point moyen, sauf cas particulier
+    \item passe toujours par le point moyen $(\bar x;\bar y)$
+  \end{enumerate}
+
 \end{enumerate}
 
 % NEXUS-QCM-TEACHER-ONLY-BEGIN
@@ -74,6 +114,10 @@ Q2 & C5 & \textbf{A} \\
 Q3 & C4 & \textbf{B} \\
 Q4 & C1 & \textbf{C} \\
 Q5 & C1 & \textbf{D} \\
+Q6 & C2 & \textbf{B} \\
+Q7 & C3 & \textbf{C} \\
+Q8 & C6 & \textbf{D} \\
+Q9 & C7 & \textbf{D} \\
 \hline
 \end{tabular}
 \end{center}
@@ -110,6 +154,30 @@ Q5 & C1 & \textbf{D} \\
     \item \textbf{A} — Oubli de la dérivée de u(x) = 2x+1. Pour u=2x+1, la règle (ln u)'=u'/u donne 2/(2x+1) sur le domaine de définition. \emph{Renvoi : C1.}
     \item \textbf{B} — Multiplication au lieu de dérivation. Pour u=2x+1, la règle (ln u)'=u'/u donne 2/(2x+1) sur le domaine de définition. \emph{Renvoi : C1.}
     \item \textbf{C} — Simplification abusive. Pour u=2x+1, la règle (ln u)'=u'/u donne 2/(2x+1) sur le domaine de définition. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — La valeur $2$ appartient à $[-3;7]$, image de $[0;5]$ par une fonction continue : le théorème des valeurs intermédiaires garantit au moins une solution. \emph{Renvoi : C2.}
+    \item \textbf{C} — Une fonction strictement croissante ne prend jamais deux fois la même valeur : deux antécédents distincts $x_1<x_2$ donneraient $f(x_1)<f(x_2)$. La solution est unique. \emph{Renvoi : C2.}
+    \item \textbf{D} — Une infinité de solutions supposerait $f$ constante égale à $2$ sur tout un intervalle, ce qu'interdit la stricte croissance. La solution est unique. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — Sur $[0;0{,}5]$ la fonction reste négative aux deux bornes ($f(0)=-1$ et $f(0{,}5)=-0{,}375$) : aucun changement de signe, donc aucune solution. La dichotomie retient la moitié où les signes diffèrent. \emph{Renvoi : C3.}
+    \item \textbf{B} — C'est le résultat de \textbf{deux} étapes, pas d'une seule : la dichotomie remplace une borne par le milieu, ici $[0{,}5;1]$. La coupe suivante donnera $[0{,}5;0{,}75]$. \emph{Renvoi : C3.}
+    \item \textbf{D} — Cet intervalle n'est pas une moitié de $[0;1]$ : la dichotomie ne recentre pas l'intervalle autour du milieu, elle en supprime une moitié. \emph{Renvoi : C3.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{A} — Le maximum est une valeur extrême, pas une valeur centrale : un seul point aberrant le déplacerait entièrement. Le point moyen est $(\bar x;\bar y)$. \emph{Renvoi : C6.}
+    \item \textbf{B} — Médiane et moyenne coïncident seulement pour une distribution symétrique ; le point moyen est défini par les moyennes $(\bar x;\bar y)$, seules compatibles avec les calculs de covariance qui suivent. \emph{Renvoi : C6.}
+    \item \textbf{C} — Le nuage n'est centré qu'après avoir retranché les moyennes à chaque coordonnée ; sur les données brutes le point moyen est $(\bar x;\bar y)$, qui n'a aucune raison d'être l'origine. \emph{Renvoi : C6.}
+  \end{itemize}
+  \item \textbf{Q9}
+  \begin{itemize}
+    \item \textbf{A} — Elle ne passe par tous les points que si le nuage est déjà aligné ; sinon aucune droite ne le peut, et c'est justement pourquoi on minimise un écart. \emph{Renvoi : C7.}
+    \item \textbf{B} — Elle minimise la somme des carrés des écarts \textbf{verticaux} $y_i-(ax_i+b)$. Minimiser les distances perpendiculaires donnerait une autre droite, et la régression de $y$ en $x$ ne serait plus distincte de celle de $x$ en $y$. \emph{Renvoi : C7.}
+    \item \textbf{C} — Son équation s'écrit $y-\bar y=a(x-\bar x)$ : le point moyen y appartient toujours, quelle que soit la pente. \emph{Renvoi : C7.}
   \end{itemize}
 \end{itemize}
 \fi
