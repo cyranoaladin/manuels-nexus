@@ -54,3 +54,37 @@ P(R_1 \cap R_2) + P(R_1 \cap V_2) + P(V_1 \cap R_2) + P(V_1 \cap V_2)
 &= \frac{3}{10} + \frac{3}{10} + \frac{3}{10} + \frac{1}{10} = 1. \checkmark
 \end{align*}
 }
+
+% BEGIN-VERIFY
+% from sympy import Rational
+%
+% # L'urne de l'exemple : 3 rouges, 2 vertes, deux tirages SANS remise.
+% P_R1, P_V1 = Rational(3, 5), Rational(2, 5)
+% assert P_R1 + P_V1 == 1                       # regle de la somme au noeud
+%
+% P_R2_si_R1, P_V2_si_R1 = Rational(2, 4), Rational(2, 4)
+% P_R2_si_V1, P_V2_si_V1 = Rational(3, 4), Rational(1, 4)
+% assert P_R2_si_R1 + P_V2_si_R1 == 1
+% assert P_R2_si_V1 + P_V2_si_V1 == 1
+%
+% # Regle du produit le long d'un chemin : rouge puis vert.
+% assert P_R1 * P_V2_si_R1 == Rational(3, 10)
+%
+% # Les quatre chemins couvrent l'univers : leur somme vaut 1.
+% chemins = {
+%     ("R", "R"): P_R1 * P_R2_si_R1,
+%     ("R", "V"): P_R1 * P_V2_si_R1,
+%     ("V", "R"): P_V1 * P_R2_si_V1,
+%     ("V", "V"): P_V1 * P_V2_si_V1,
+% }
+% assert sum(chemins.values()) == 1
+%
+% # Controle independant par denombrement exhaustif des tirages ordonnes.
+% boules = ["R", "R", "R", "V", "V"]
+% tirages = [(i, j) for i in range(5) for j in range(5) if i != j]
+% assert len(tirages) == 20
+% for couple, probabilite in chemins.items():
+%     favorables = [t for t in tirages
+%                   if (boules[t[0]], boules[t[1]]) == couple]
+%     assert Rational(len(favorables), len(tirages)) == probabilite, couple
+% END-VERIFY

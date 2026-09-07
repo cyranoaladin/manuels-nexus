@@ -63,3 +63,39 @@ $P(A) \times P(B) = \dfrac{1}{2} \times \dfrac{1}{13} = \dfrac{1}{26}$. Donc $A$
 
 Vérification : $P(A \cap \overline{B}) = \dfrac{24}{52} = \dfrac{12}{26}$ et $P(A) \times P(\overline{B}) = \dfrac{1}{2} \times \dfrac{12}{13} = \dfrac{12}{26}$. \checkmark
 }
+
+% BEGIN-VERIFY
+% from sympy import Rational
+%
+% faces = [1, 2, 3, 4, 5, 6]
+% def proba(evenement):
+%     return Rational(len([f for f in faces if evenement(f)]), len(faces))
+%
+% # L'exemple : A = "pair", B = ">= 5".
+% A = lambda f: f % 2 == 0
+% Bev = lambda f: f >= 5
+% P_A, P_B = proba(A), proba(Bev)
+% P_inter = proba(lambda f: A(f) and Bev(f))
+% assert P_A == Rational(1, 2) and P_B == Rational(1, 3)
+% assert P_inter == Rational(1, 6)
+% assert P_inter == P_A * P_B                       # independants
+%
+% # La caracterisation equivalente : P_A(B) = P(B).
+% assert P_inter / P_A == P_B
+%
+% # Le contre-exemple du cours : independance n'est pas incompatibilite.
+% C = lambda f: f <= 2
+% D = lambda f: f >= 5
+% assert proba(lambda f: C(f) and D(f)) == 0        # incompatibles
+% assert proba(C) * proba(D) != 0                   # donc NON independants
+% assert P_inter != 0                               # les independants ci-dessus
+%                                                   # ne sont pas incompatibles
+%
+% # Un troisieme cas, ni l'un ni l'autre : A = "pair", E = ">= 4".
+% E = lambda f: f >= 4
+% P_E = proba(E)
+% P_A_inter_E = proba(lambda f: A(f) and E(f))
+% assert P_A_inter_E == Rational(1, 3)
+% assert P_A_inter_E != P_A * P_E                   # dependants
+% assert P_A_inter_E != 0                           # et compatibles
+% END-VERIFY

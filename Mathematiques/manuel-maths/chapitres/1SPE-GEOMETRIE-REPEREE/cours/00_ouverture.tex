@@ -47,3 +47,35 @@ Un ingénieur cartographe travaille sur un plan quadrillé (repère orthonormé)
 \end{itemize}
 
 Cette situation sera entièrement résolue au Temps~7 (TD fil rouge), avec les outils du chapitre.
+
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt, symbols, solve, simplify
+%
+% # La situation d'accroche : le cable A(1;7)-B(9;1) traverse-t-il le disque
+% # interdit de centre (5;2) et de rayon 3 ?
+% A, B, centre, rayon = (1, 7), (9, 1), (5, 2), 3
+%
+% t = symbols('t', real=True)
+% point = (A[0] + t*(B[0] - A[0]), A[1] + t*(B[1] - A[1]))
+% distance_carre = (point[0] - centre[0])**2 + (point[1] - centre[1])**2
+%
+% racines = solve(distance_carre - rayon**2, t)
+% dans_segment = [r for r in racines if r.is_real and 0 <= r <= 1]
+% assert len(dans_segment) == 2, dans_segment
+%
+% # Le cable traverse donc la zone : la reponse de l'accroche est OUI.
+% milieu = sum(dans_segment) / 2
+% assert distance_carre.subs(t, milieu) < rayon**2
+%
+% # Controle independant : la distance du centre a la DROITE (AB) est plus
+% # petite que le rayon. Droite AB : 6x + 8y - 62 = 0, verifiee sur A et B.
+% for sommet in (A, B):
+%     assert 6*sommet[0] + 8*sommet[1] - 62 == 0
+% distance_droite = Rational(abs(6*centre[0] + 8*centre[1] - 62)) / sqrt(6**2 + 8**2)
+% assert simplify(distance_droite - Rational(8, 5)) == 0
+% assert distance_droite < rayon
+%
+% # Les deux pylones sont hors du disque : c'est bien une traversee.
+% for sommet in (A, B):
+%     assert (sommet[0]-centre[0])**2 + (sommet[1]-centre[1])**2 > rayon**2
+% END-VERIFY

@@ -188,3 +188,33 @@ $r^2 + r^2 + h$ (volume fixé), on obtient le même résultat sans dérivation.
 Les deux approches sont complémentaires : la dérivation donne la valeur exacte
 du minimum et prouve son unicité.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, simplify, Rational
+%
+% x = symbols('x', positive=True)
+%
+% # Exemple redige : rectangle de perimetre 20, aire a maximiser.
+% largeur = 10 - x                      # deduit de 2x + 2l = 20
+% aire = x * largeur
+% assert simplify(aire - (10*x - x**2)) == 0
+%
+% # Etape 5 : le point critique.
+% assert solve(diff(aire, x), x) == [5]
+% # Etape 2 : il appartient au domaine ]0 ; 10[.
+% assert 0 < 5 < 10
+% # Etape 6 : maximum GLOBAL sur l'intervalle, et non seulement local.
+% valeur = aire.subs(x, 5)
+% assert valeur == 25
+% for essai in (Rational(1, 10), 1, Rational(5, 2), Rational(49, 10),
+%               Rational(51, 10), Rational(15, 2), 9, Rational(99, 10)):
+%     assert aire.subs(x, essai) <= valeur
+% # Le rectangle optimal est le carre de cote 5.
+% assert largeur.subs(x, 5) == 5
+%
+% # L'erreur frequente nommee par le cours : un point critique hors du domaine.
+% # Sous la contrainte x >= 6, le maximum est atteint AU BORD, pas en 5.
+% au_bord = max(aire.subs(x, Rational(k, 10)) for k in range(60, 100))
+% assert au_bord == aire.subs(x, 6) == 24
+% assert au_bord < valeur
+% END-VERIFY

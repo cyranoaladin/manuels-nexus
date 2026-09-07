@@ -67,3 +67,39 @@ Confondre le taux de variation avec $f(b)-f(a)$. Cette dernière quantité est u
 \approfondissement{
 Pour une position $d(t)$ exprimée en mètres, le taux de variation entre deux instants est $\dfrac{d(t_2)-d(t_1)}{t_2-t_1}$, une vitesse moyenne en mètres par seconde. Lorsque l'intervalle de temps se resserre autour d'un instant, ces vitesses moyennes préparent la notion de vitesse instantanée étudiée dans la section suivante.
 }
+
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+%
+% # Definition : le taux de variation de f entre a et b.
+% def taux(f, a, b):
+%     assert a != b, "deux abscisses distinctes sont exigees"
+%     return Rational(f(b) - f(a), b - a)
+%
+% carre = lambda t: t**2
+%
+% # L'exemple redige : entre 1 et 3, le taux vaut 4.
+% assert taux(carre, 1, 3) == 4
+%
+% # Le contre-exemple du cours : a == b n'est pas un taux de variation.
+% try:
+%     taux(carre, 2, 2)
+% except AssertionError:
+%     pass
+% else:
+%     raise AssertionError("un denominateur nul aurait du etre refuse")
+%
+% # La secante par A(1;1) et B(3;9) a pour coefficient directeur ce meme taux.
+% A, B = (1, carre(1)), (3, carre(3))
+% pente = Rational(B[1] - A[1], B[0] - A[0])
+% assert pente == 4
+% # Son equation reduite est y = 4x - 3 : elle passe par les deux points.
+% ordonnee = A[1] - pente * A[0]
+% assert ordonnee == -3
+% for point in (A, B):
+%     assert pente * point[0] + ordonnee == point[1]
+%
+% # Le taux depend de l'intervalle : entre 0 et 1 il vaut 1, pas 4.
+% assert taux(carre, 0, 1) == 1
+% assert taux(carre, 1, 3) != taux(carre, 0, 1)
+% END-VERIFY

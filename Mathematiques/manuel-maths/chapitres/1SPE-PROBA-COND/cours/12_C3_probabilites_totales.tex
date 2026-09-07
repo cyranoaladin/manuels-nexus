@@ -73,3 +73,38 @@ $\{C_1, C_2\}$ est une partition de $\Omega$.
 
 La probabilité qu'une piece soit defectueuse est $\dfrac{19}{500} = 3{,}8\,\%$.
 }
+
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+%
+% # La formule est une decomposition de P(A) selon la partition : on la
+% # verifie sur un univers fini explicite, ou P(A) se compte directement.
+% # 1000 individus, B en compte 400, A vaut 120 dans B et 180 hors B.
+% n, nB, nA_dans_B, nA_hors_B = 1000, 400, 120, 180
+% P_B = Rational(nB, n)
+% P_A_si_B = Rational(nA_dans_B, nB)
+% P_A_si_nonB = Rational(nA_hors_B, n - nB)
+% P_A_directe = Rational(nA_dans_B + nA_hors_B, n)
+% assert P_B*P_A_si_B + (1 - P_B)*P_A_si_nonB == P_A_directe == Rational(3, 10)
+%
+% # Une partition a TROIS classes se traite de meme, et le total se recompte.
+% effectifs = [(500, 100), (300, 30), (200, 50)]     # (taille, dont A)
+% assert sum(taille for taille, _ in effectifs) == n
+% poids = [(Rational(taille, n), Rational(dedans, taille))
+%          for taille, dedans in effectifs]
+% assert sum(p for p, _ in poids) == 1
+% P_A_partition = sum(p*c for p, c in poids)
+% P_A_comptee = Rational(sum(dedans for _, dedans in effectifs), n)
+% assert P_A_partition == P_A_comptee == Rational(9, 50)
+%
+% # Une famille qui n'est PAS une partition ne couvre plus l'univers : la
+% # somme des poids tombe sous 1, et le total sous-estime P(A).
+% incomplete = poids[:2]
+% assert sum(p for p, _ in incomplete) == Rational(4, 5) < 1
+% assert sum(p*c for p, c in incomplete) < P_A_comptee
+%
+% # Deux classes qui se CHEVAUCHENT ne forment pas non plus une partition :
+% # la somme des poids depasse 1 et le total surestime P(A).
+% chevauchantes = [(Rational(1, 2), Rational(1, 5)), (Rational(3, 5), Rational(1, 10))]
+% assert sum(p for p, _ in chevauchantes) > 1
+% END-VERIFY

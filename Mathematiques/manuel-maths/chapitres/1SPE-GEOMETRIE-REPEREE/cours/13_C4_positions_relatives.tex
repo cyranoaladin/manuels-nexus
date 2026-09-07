@@ -94,3 +94,52 @@ Substituer $y$ dans l'équation du cercle : le discriminant donne le nombre de s
 \erreurFrequente{
 \textbf{Confusion tangente/sécante.} Une droite tangente touche le cercle en un seul point ($d = r$), une droite sécante coupe le cercle en deux points ($d < r$).
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, sqrt, Rational, simplify, Abs
+%
+% x, y = symbols('x y', real=True)
+%
+% def determinant(d1, d2):
+%     (a1, b1, _), (a2, b2, _) = d1, d2
+%     return a1*b2 - a2*b1
+%
+% def distance(point, droite):
+%     a, b, c = droite
+%     return Abs(a*point[0] + b*point[1] + c) / sqrt(a**2 + b**2)
+%
+% # Exemple 1 : droites strictement paralleles.
+% D1, D2 = (2, 3, -1), (4, 6, 5)
+% assert determinant(D1, D2) == 0
+% assert D2[0] == 2*D1[0] and D2[1] == 2*D1[1] and D2[2] != 2*D1[2]
+% assert solve([2*x + 3*y - 1, 4*x + 6*y + 5], [x, y]) == []
+%
+% # Exemple 2 : droites secantes, intersection (1 ; 2).
+% E1, E2 = (1, -2, 3), (3, 1, -5)
+% assert determinant(E1, E2) == 7 != 0
+% assert solve([x - 2*y + 3, 3*x + y - 5], [x, y]) == {x: 1, y: 2}
+%
+% # Distance : l'exemple du cours, P(1;3) a la droite 3x-4y+2=0.
+% assert simplify(distance((1, 3), (3, -4, 2)) - Rational(7, 5)) == 0
+% # L'erreur frequente nommee : sans valeur absolue, on obtiendrait -7/5.
+% assert Rational(3*1 - 4*3 + 2, 5) == Rational(-7, 5)
+% assert distance((1, 3), (3, -4, 2)) > 0
+%
+% # Position droite / cercle : l'exemple, d = 9/5 < 5 = r, donc deux points.
+% centre, rayon = (2, 1), 5
+% droite = (3, 4, -1)
+% d = distance(centre, droite)
+% assert simplify(d - Rational(9, 5)) == 0 and d < rayon
+% cercle = (x - centre[0])**2 + (y - centre[1])**2 - rayon**2
+% assert len(solve([cercle, 3*x + 4*y - 1], [x, y])) == 2
+%
+% # Les deux autres cas du critere, construits pour tomber juste.
+% tangente = (3, 4, -(3*centre[0] + 4*centre[1]) - 25)      # d = 5 = r
+% assert simplify(distance(centre, tangente) - 5) == 0
+% assert len(solve([cercle,
+%                   tangente[0]*x + tangente[1]*y + tangente[2]], [x, y])) == 1
+% exterieure = (3, 4, -(3*centre[0] + 4*centre[1]) - 50)    # d = 10 > r
+% assert simplify(distance(centre, exterieure) - 10) == 0
+% assert solve([cercle, exterieure[0]*x + exterieure[1]*y + exterieure[2]],
+%              [x, y], dict=True) == []
+% END-VERIFY

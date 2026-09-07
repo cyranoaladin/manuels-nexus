@@ -150,3 +150,32 @@ minimum local ; si $f''(a)<0$, c'est un maximum local. Si $f''(a)=0$, on ne
 peut pas conclure directement (cas de $x^3$ en $0$). Ce critère de la dérivée
 seconde est étudié en terminale.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+%
+% x = symbols('x', real=True)
+%
+% # Condition necessaire : en un extremum local d'une fonction derivable, f'=0.
+% f = x**2 - 4*x + 1                    # minimum en x = 2
+% assert solve(diff(f, x), x) == [2]
+% assert all(f.subs(x, 2) <= f.subs(x, v) for v in (1.5, 1.9, 2.1, 2.5))
+%
+% # La RECIPROQUE est fausse, et le cours le dit : x^3 annule sa derivee en 0
+% # sans y admettre d'extremum.
+% g = x**3
+% assert solve(diff(g, x), x) == [0]
+% assert g.subs(x, -0.1) < g.subs(x, 0) < g.subs(x, 0.1)
+%
+% # Critere du changement de signe : f' passe de - a + en 2 ; g' ne change pas.
+% assert diff(f, x).subs(x, 1) < 0 < diff(f, x).subs(x, 3)
+% assert diff(g, x).subs(x, -1) > 0 and diff(g, x).subs(x, 1) > 0
+%
+% # Local n'est pas global : sur [-3;3], x^3-3x a un maximum local en -1 que le
+% # bord depasse.
+% h = x**3 - 3*x
+% assert sorted(solve(diff(h, x), x)) == [-1, 1]
+% local = h.subs(x, -1)
+% assert all(local >= h.subs(x, v) for v in (-1.3, -1.1, -0.9, -0.7))
+% assert h.subs(x, 3) > local
+% END-VERIFY

@@ -69,3 +69,33 @@ Si $P(A) > 0$, alors la fonction $B \mapsto P_A(B)$ vérifie les axiomes d'une p
   \item $P_A(\overline{B}) = 1 - P_A(B)$.
 \end{itemize}
 }
+
+% BEGIN-VERIFY
+% from sympy import Rational, zoo, nan
+%
+% # L'exemple du lycee, recalcule depuis les EFFECTIFS et non depuis les
+% # fractions annoncees : 500 eleves, 200 en Premiere, 80 d'entre eux en Maths.
+% total, premiere, premiere_maths = 500, 200, 80
+% P_A = Rational(premiere, total)
+% P_A_inter_B = Rational(premiere_maths, total)
+% assert P_A == Rational(2, 5)
+% assert P_A_inter_B == Rational(4, 25)
+%
+% P_B_sachant_A = P_A_inter_B / P_A
+% assert P_B_sachant_A == Rational(2, 5)
+% # Controle direct : c'est la proportion de matheux PARMI les premieres.
+% assert P_B_sachant_A == Rational(premiere_maths, premiere)
+%
+% # Le contre-exemple : P_A(B) n'est pas P_B(A). Il faut connaitre P(B).
+% maths = 150
+% P_B = Rational(maths, total)
+% P_A_sachant_B = P_A_inter_B / P_B
+% assert P_A_sachant_B == Rational(8, 15)
+% assert P_A_sachant_B != P_B_sachant_A
+%
+% # La definition exige P(A) > 0 : avec P(A) = 0 le quotient n'est pas un
+% # nombre. sympy le signale en renvoyant l'infini complexe plutot qu'une
+% # valeur exploitable.
+% assert Rational(1, 10) / Rational(0) == zoo
+% assert not (Rational(1, 10) / Rational(0)).is_finite
+% END-VERIFY

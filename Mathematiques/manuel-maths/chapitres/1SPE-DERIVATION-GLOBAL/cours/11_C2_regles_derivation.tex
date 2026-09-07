@@ -19,9 +19,9 @@ f'(x) = 3 \times 4x^3 - 5 \times 2x + 7 \times 1 - 0 = 12x^3 - 10x + 7.
 }
 
 \exemple{
-Soit $g(x) = \dfrac{2}{\sqrt{x}} - \dfrac{1}{x} + 4$ pour $x > 0$.
+Soit $g(x) = 2\sqrt{x} - \dfrac{1}{x} + 4$ pour $x > 0$.
 
-On réécrit $\dfrac{2}{\sqrt{x}} = 2\varphi(x)$ avec $\varphi'(x) = \dfrac{1}{2\sqrt{x}}$, et $\dfrac{1}{x} = h(x)$ avec $h'(x) = -\dfrac{1}{x^2}$. Ainsi :
+On réécrit $2\sqrt{x} = 2\varphi(x)$ avec $\varphi(x)=\sqrt{x}$, donc $\varphi'(x) = \dfrac{1}{2\sqrt{x}}$, et $\dfrac{1}{x} = h(x)$ avec $h'(x) = -\dfrac{1}{x^2}$. Ainsi :
 \[
 g'(x) = 2 \times \frac{1}{2\sqrt{x}} - \left(-\frac{1}{x^2}\right) + 0 = \frac{1}{\sqrt{x}} + \frac{1}{x^2}.
 \]
@@ -107,3 +107,49 @@ Inverser l'ordre au numérateur de la règle du quotient : c'est $u'v - uv'$ (av
 }
 
 \margeAppui{Mémo de la règle du quotient : « dérivée du haut fois le bas, moins le haut fois la dérivée du bas, le tout sur le bas au carré ».}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, simplify, sqrt, Rational
+% x = symbols('x', positive=True)
+%
+% # Les trois regles enoncees, verifiees formellement sur des fonctions
+% # quelconques plutot que sur les seuls exemples.
+% u = x**3 - 2*x
+% v = 5*x**2 + 1
+% lam = Rational(7, 2)
+% assert simplify(diff(u + v, x) - (diff(u, x) + diff(v, x))) == 0
+% assert simplify(diff(lam * u, x) - lam * diff(u, x)) == 0
+% assert simplify(diff(u * v, x) - (diff(u, x) * v + u * diff(v, x))) == 0
+% assert simplify(diff(u / v, x) - (diff(u, x)*v - u*diff(v, x)) / v**2) == 0
+%
+% # Exemple 1 : f(x) = 3x^4 - 5x^2 + 7x - 2.
+% f = 3*x**4 - 5*x**2 + 7*x - 2
+% assert simplify(diff(f, x) - (12*x**3 - 10*x + 7)) == 0
+%
+% # Exemple 2 : g(x) = 2*sqrt(x) - 1/x + 4 sur x > 0.
+% g = 2*sqrt(x) - 1/x + 4
+% assert simplify(diff(g, x) - (1/sqrt(x) + 1/x**2)) == 0
+% # Controle du piege : la derivee de 2/sqrt(x) N'EST PAS 1/sqrt(x).
+% assert simplify(diff(2/sqrt(x), x) - (1/sqrt(x))) != 0
+% assert simplify(diff(2/sqrt(x), x) + 1/x**Rational(3, 2)) == 0
+%
+% # Exemple 3 : produit (2x+1)(x^3-3).
+% h = (2*x + 1) * (x**3 - 3)
+% assert simplify(diff(h, x) - (2*(x**3 - 3) + (2*x + 1)*3*x**2)) == 0
+%
+% # Exemple 4 : produit x^2*sqrt(x), resultat annonce 5x*sqrt(x)/2.
+% k = x**2 * sqrt(x)
+% assert simplify(diff(k, x) - 5*x*sqrt(x)/2) == 0
+%
+% # Exemple 5 : quotient sqrt(x)/(x+1), resultat annonce (1-x)/(2 sqrt(x) (x+1)^2).
+% q = sqrt(x) / (x + 1)
+% assert simplify(diff(q, x) - (1 - x)/(2*sqrt(x)*(x + 1)**2)) == 0
+%
+% # Controle numerique independant de sympy, par taux de variation centre.
+% def derivee_approchee(fonction, a, pas=1e-6):
+%     return (fonction(a + pas) - fonction(a - pas)) / (2 * pas)
+% assert abs(derivee_approchee(lambda t: 3*t**4 - 5*t**2 + 7*t - 2, 1.5)
+%            - (12*1.5**3 - 10*1.5 + 7)) < 1e-4
+% assert abs(derivee_approchee(lambda t: 2*t**0.5 - 1/t + 4, 4)
+%            - (1/2 + 1/16)) < 1e-6
+% END-VERIFY

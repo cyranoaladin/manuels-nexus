@@ -63,3 +63,44 @@ La piece est defectueuse : d'ou vient-elle probablement ?
   P_D(M_3) = \frac{P(M_3) \times P_{M_3}(D)}{P(D)} = \frac{0{,}2 \times 0{,}05}{0{,}029} = \frac{0{,}01}{0{,}029} \approx 0{,}345.
 \]
 }
+
+% BEGIN-VERIFY
+% from sympy import Rational, N
+%
+% # Exemple 1 : le test medical.
+% P_M = Rational(1, 100)
+% P_T_si_M = Rational(95, 100)
+% P_T_si_nonM = 1 - Rational(97, 100)
+% assert P_T_si_nonM == Rational(3, 100)
+%
+% P_T = P_M*P_T_si_M + (1 - P_M)*P_T_si_nonM
+% assert P_T == Rational(392, 10000) == Rational(49, 1250)
+%
+% # Valeur predictive positive.
+% P_M_si_T = (P_M*P_T_si_M) / P_T
+% assert P_M_si_T == Rational(95, 392)
+% assert abs(float(N(P_M_si_T)) - 0.242) < 0.001
+%
+% # Le resultat contre-intuitif est reel : malgre 95 % de sensibilite, un test
+% # positif ne signale la maladie que dans un quart des cas environ, parce que
+% # les faux positifs viennent d'une population 99 fois plus nombreuse.
+% faux_positifs = (1 - P_M)*P_T_si_nonM
+% vrais_positifs = P_M*P_T_si_M
+% assert faux_positifs > vrais_positifs * 3
+% assert P_M_si_T < Rational(1, 3)
+%
+% # Exemple 2 : le controle qualite, trois machines.
+% machines = [(Rational(1, 2), Rational(2, 100)),
+%             (Rational(3, 10), Rational(3, 100)),
+%             (Rational(1, 5), Rational(5, 100))]
+% assert sum(part for part, _ in machines) == 1
+% P_D = sum(part*defaut for part, defaut in machines)
+% assert P_D == Rational(29, 1000)
+%
+% P_M3_si_D = (machines[2][0]*machines[2][1]) / P_D
+% assert P_M3_si_D == Rational(10, 29)
+% assert abs(float(N(P_M3_si_D)) - 0.345) < 0.001
+% # La machine 3 produit un cinquieme des pieces et plus d'un tiers des
+% # defauts : la probabilite a posteriori a bien augmente.
+% assert P_M3_si_D > machines[2][0]
+% END-VERIFY

@@ -43,3 +43,38 @@ Cette approximation utilise l'ordonnée de la tangente au voisinage de $a$.}
 \erreurFrequente{\textbf{Copie fautive :} $f(a+h)=f(a)+f'(a)h$. \textbf{Correction :} écrire $\approx$ ; l'écart exact n'est pas étudié dans ce chapitre.}
 \erreurFrequente{\textbf{Copie fautive :} $f(a+h)\approx f(a)+f'(a)$. \textbf{Correction :} la variation dépend de $h$ ; il faut multiplier la pente par l'écart horizontal.}
 \approfondissement{Sur la courbe de $f$, le point d'abscisse $a+h$ est proche du point de la tangente d'abscisse $a+h$. Cette lecture géométrique explique le signe : si $f'(a)<0$ et $h>0$, l'estimation est inférieure à $f(a)$.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational
+%
+% x = symbols('x', real=True)
+%
+% def approche(f, a, h):
+%     return f.subs(x, a) + diff(f, x).subs(x, a) * h
+%
+% carre = x**2
+%
+% # L'exemple redige : f(3,02) approche par 9 + 6 x 0,02 = 9,12.
+% assert approche(carre, 3, Rational(2, 100)) == Rational(912, 100)
+%
+% # Le contre-exemple : ce n'est PAS une egalite. 3,02^2 = 9,1204.
+% exact = Rational(302, 100)**2
+% assert exact == Rational(91204, 10000)
+% assert exact != Rational(912, 100)
+% assert abs(exact - Rational(912, 100)) == Rational(4, 10000)
+%
+% # La propriete du choix de h : pour la fonction carre, l'ecart vaut
+% # exactement h^2. Il croit donc vite, et l'approximation cesse d'etre
+% # pertinente loin de a.
+% increments = [Rational(1, 100), Rational(1, 10), Rational(1), Rational(6)]
+% ecarts = []
+% for h in increments:
+%     ecart = (3 + h)**2 - approche(carre, 3, h)
+%     assert ecart == h**2
+%     ecarts.append(ecart)
+% assert ecarts == sorted(ecarts)
+% assert ecarts[0] < Rational(1, 1000) and ecarts[-1] == 36
+%
+% # Le choix annonce pour f(4,03) au voisinage de 4 : h = 0,03.
+% assert Rational(403, 100) - 4 == Rational(3, 100)
+% END-VERIFY

@@ -33,3 +33,45 @@
 \erreurFrequente{\textbf{Copie fautive :} « $f'(a)=f(a)$. » \textbf{Correction :} $f(a)$ est l'ordonnée du point de la courbe ; $f'(a)$ est la pente de la tangente en ce point.}
 \erreurFrequente{\textbf{Copie fautive :} « La vitesse instantanée est la distance parcourue. » \textbf{Correction :} si $d$ est une distance, $d'(t)$ est une vitesse ; l'unité est par exemple m/s.}
 \approfondissement{Pour $f(x)=x^2$, $\frac{f(a+h)-f(a)}h=\frac{(a+h)^2-a^2}h=2a+h$ pour $h\ne0$. Ces nombres sont aussi proches que l'on veut de $2a$ lorsque $h$ se rapproche de $0$. Ainsi $f'(a)=2a$ ; ce calcul éclaire l'intuition sans imposer une définition formelle de limite.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, limit, diff, Rational
+%
+% h, x = symbols('h x', real=True)
+%
+% # L'exemple redige : pour la fonction carre, f'(2) = 4.
+% carre = x**2
+% quotient = ((2 + h)**2 - 2**2) / h
+% assert limit(quotient, h, 0) == 4
+% assert diff(carre, x).subs(x, 2) == 4
+%
+% # Le contre-exemple : on ne calcule PAS f'(2) en remplacant h par 0.
+% try:
+%     quotient.subs(h, 0)
+% except Exception:
+%     pass
+% else:
+%     # sympy renvoie nan plutot que de lever : on le constate explicitement.
+%     assert str(quotient.subs(h, 0)) == 'nan'
+%
+% # Les taux de variation s'approchent de 4 quand h approche 0.
+% approches = [float(quotient.subs(h, Rational(1, 10**k))) for k in range(1, 6)]
+% assert all(abs(v - 4) < 10**(-k) * 2 for k, v in enumerate(approches, start=1))
+% assert abs(approches[-1] - 4) < abs(approches[0] - 4)
+%
+% # Interpretation geometrique : f'(a) est la pente de la tangente. Sur la
+% # figure du cours, f(x) = 0.5 x^2 et la tangente en 2 a pour pente 2.
+% demi = Rational(1, 2) * x**2
+% assert diff(demi, x).subs(x, 2) == 2
+% # Les secantes de la figure (h = 2, 1, 0.5) ont bien les pentes annoncees.
+% def pente_secante(fonction, a, pas):
+%     return (fonction(a + pas) - fonction(a)) / pas
+% f = lambda t: Rational(1, 2) * t**2
+% assert pente_secante(f, 2, 2) == 3
+% assert pente_secante(f, 2, 1) == Rational(5, 2)
+% assert pente_secante(f, 2, Rational(1, 2)) == Rational(9, 4)
+%
+% # L'erreur frequente nommee : f'(a) n'est pas f(a).
+% assert demi.subs(x, 2) == 2 and diff(demi, x).subs(x, 2) == 2   # egalite fortuite
+% assert carre.subs(x, 3) != diff(carre, x).subs(x, 3)            # 9 != 6
+% END-VERIFY

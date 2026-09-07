@@ -91,3 +91,38 @@ $a_1 a_2 + b_1 b_2 = 2 \times 3 + 3 \times (-2) = 6 - 6 = 0$.
 
 Donc $\mathcal{D}_1 \perp \mathcal{D}_2$.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, Rational
+%
+% x, y = symbols('x y', real=True)
+%
+% def normale_et_directeur(a, b):
+%     return (a, b), (-b, a)
+%
+% # La propriete, verifiee formellement : pour toute droite ax+by+c=0, le
+% # vecteur (a,b) est orthogonal a tout vecteur joignant deux de ses points.
+% a, b, c = symbols('a b c', real=True)
+% x1, y1, x2, y2 = symbols('x1 y1 x2 y2', real=True)
+% # On suppose les deux points sur la droite, et on soustrait les equations.
+% relation = (a*x2 + b*y2 + c) - (a*x1 + b*y1 + c)
+% assert simplify(relation - (a*(x2 - x1) + b*(y2 - y1))) == 0
+% # a(x2-x1) + b(y2-y1) est exactement le produit scalaire de (a,b) par MM'.
+%
+% # L'exemple : 3x - 2y + 5 = 0.
+% n, u = normale_et_directeur(3, -2)
+% assert n == (3, -2) and u == (2, 3)
+% assert n[0]*u[0] + n[1]*u[1] == 0
+%
+% # Le directeur dirige bien la droite : deux points de la droite different
+% # d'un multiple de u.
+% D = 3*x - 2*y + 5
+% P = (1, 4)
+% assert D.subs({x: P[0], y: P[1]}) == 0
+% for k in (-3, Rational(1, 2), 2):
+%     Q = (P[0] + k*u[0], P[1] + k*u[1])
+%     assert simplify(D.subs({x: Q[0], y: Q[1]})) == 0
+%
+% # Le piege symetrique : (a, b) n'est PAS un vecteur directeur.
+% assert simplify(D.subs({x: P[0] + n[0], y: P[1] + n[1]})) != 0
+% END-VERIFY
