@@ -1,4 +1,4 @@
-% META: {"id": "1NSI-WEB-EVAL-B-corrige", "chapitre": "1NSI-WEB-IHM", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-WEB-EVAL-B", "capacites": ["P-IHM-01A", "P-IHM-02", "P-IHM-04B", "P-IHM-04C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% META: {"id": "1NSI-WEB-EVAL-B-corrige", "chapitre": "1NSI-WEB-IHM", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-WEB-EVAL-B", "capacites": ["P-IHM-01A", "P-IHM-01B", "P-IHM-02", "P-IHM-03A", "P-IHM-03B", "P-IHM-03C", "P-IHM-04A", "P-IHM-04B", "P-IHM-04C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
 % BEGIN-VERIFY
 % gestionnaires = {}
 % def ajouter_gestionnaire(id_composant, fonction):
@@ -18,6 +18,42 @@
 % params = {"ville": "Sousse", "type": "appartement"}
 % url = "https://immo.fr/recherche?" + urlencode(params)
 % assert url == "https://immo.fr/recherche?ville=Sousse&type=appartement"
+% gestionnaires = {}
+% journal = []
+% def ajouter_gestionnaire(id_composant, evenement, fonction):
+%     gestionnaires[(id_composant, evenement)] = fonction
+% def declencher(id_composant, evenement, *args):
+%     cle = (id_composant, evenement)
+%     if cle in gestionnaires:
+%         return gestionnaires[cle](*args)
+%     return None
+% ajouter_gestionnaire("recherche", "saisie", lambda texte: journal.append(("filtre", texte)))
+% ajouter_gestionnaire("tri", "changement", lambda choix: journal.append(("tri", choix)))
+% ajouter_gestionnaire("valider", "clic", lambda: journal.append(("envoi", None)))
+% declencher("recherche", "saisie", "alg")
+% declencher("tri", "changement", "prix")
+% declencher("valider", "clic")
+% assert journal == [("filtre", "alg"), ("tri", "prix"), ("envoi", None)]
+% assert declencher("recherche", "clic") is None
+% journal.clear()
+% for lettre in "abc":
+%     declencher("recherche", "saisie", lettre)
+% declencher("valider", "clic")
+% assert [e[0] for e in journal] == ["filtre", "filtre", "filtre", "envoi"]
+% session = {}
+% def connexion(identifiant, mot_de_passe, chiffre):
+%     assert chiffre, "le mot de passe ne doit pas circuler en clair"
+%     session["jeton"] = "jeton-" + identifiant
+%     return session["jeton"]
+% connexion("eleve", "secret", chiffre=True)
+% assert session == {"jeton": "jeton-eleve"}
+% assert "secret" not in session
+% try:
+%     connexion("eleve", "secret", chiffre=False)
+% except AssertionError as e:
+%     assert "clair" in str(e)
+% else:
+%     raise AssertionError("une connexion non chiffree aurait du etre refusee")
 % END-VERIFY
 \begin{corrige}{1NSI-WEB-EVAL-B-EX1}
 \textbf{1.} Non. Le HTML décrit uniquement la structure et le contenu des composants ; sans code
@@ -51,6 +87,55 @@ print(url)
 \textbf{2.} Oui, GET est adapté : les critères de recherche (ville, type de bien) ne sont
 pas confidentiels, et l'URL résultante peut être partagée ou mise en favori.
 
-\textbf{3.} Il faut privilégier \textbf{POST} : le nom, l'email et le message d'un
-visiteur sont des données à caractère personnel qui ne doivent pas apparaître dans l'URL.
+\textbf{3.} Le formulaire comporte trois champs saisis par le visiteur : le nom, l'email
+et le message. Il faut privilégier \textbf{POST} : ces données à caractère personnel ne
+doivent pas apparaître dans l'URL, où elles seraient visibles, mises en favori et
+enregistrées dans l'historique et les journaux du serveur. Avec POST, le serveur reçoit
+une requête dont le \textbf{corps} contient les trois couples champ/valeur ; l'URL, elle,
+ne porte que le chemin du script de traitement.
+\end{corrige}
+
+\begin{corrige}{1NSI-WEB-EVAL-B-EX3}
+\textbf{1.} Trois associations possibles :
+\begin{itemize}
+  \item champ de texte \lstinline{"recherche"} : evenement de \textbf{saisie}, declenche a
+  chaque frappe -- on filtre la liste affichee au fur et a mesure ;
+  \item menu deroulant \lstinline{"tri"} : evenement de \textbf{changement de selection} --
+  on reordonne la liste selon le critere choisi ;
+  \item bouton \lstinline{"valider"} : evenement de \textbf{clic} -- on envoie la requete au
+  serveur.
+\end{itemize}
+Sans fonction associee, le composant reste inerte : le HTML decrit l'apparence, il ne decrit
+aucun traitement.
+
+\textbf{2.} L'evenement de saisie se declenche \textbf{plusieurs fois}, a chaque caractere,
+et sert a un retour immediat sans quitter la page ; l'evenement de validation se declenche
+\textbf{une seule fois} et engage une action couteuse ou definitive, comme l'envoi au
+serveur. Confondre les deux ferait envoyer une requete a chaque lettre tapee.
+\end{corrige}
+
+\begin{corrige}{1NSI-WEB-EVAL-B-EX4}
+\textbf{1.} Dans l'ordre :
+\begin{itemize}
+  \item \textbf{Authentification} : le \textbf{client} affiche le formulaire et verifie
+  eventuellement que les champs sont remplis ; le \textbf{serveur} verifie l'identifiant et
+  le mot de passe, car lui seul detient les donnees de reference.
+  \item \textbf{Affichage des places} : le \textbf{serveur} consulte la base et envoie
+  l'etat des places ; le \textbf{client} met en forme et gere les interactions locales
+  (survol, selection).
+  \item \textbf{Enregistrement} : le \textbf{client} envoie la place choisie ; le
+  \textbf{serveur} enregistre la reservation -- lui seul peut garantir qu'une place n'est pas
+  attribuee deux fois.
+\end{itemize}
+
+\textbf{2.} Le navigateur memorise un \textbf{identifiant de session} (cookie ou jeton),
+ainsi que l'etat d'affichage courant. C'est cet identifiant qui est \textbf{retransmis a
+chaque requete} : le mot de passe, lui, ne circule qu'une fois, a la connexion, et n'est pas
+conserve cote client.
+
+\textbf{3.} Le chiffrement est indispensable \textbf{des la premiere etape}, celle qui
+transporte le mot de passe, et il doit ensuite etre maintenu car le jeton de session
+circule a chaque requete : intercepte, il vaudrait le mot de passe. Le chiffrement protege
+la \textbf{confidentialite} et l'\textbf{integrite} de ce qui transite entre le navigateur
+et le serveur ; il ne protege ni le poste de l'utilisateur, ni le serveur lui-meme.
 \end{corrige}

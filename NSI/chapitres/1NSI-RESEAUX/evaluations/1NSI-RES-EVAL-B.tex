@@ -1,20 +1,20 @@
-% META: {"id": "1NSI-RES-EVAL-B", "chapitre": "1NSI-RESEAUX", "type_objet": "evaluation", "version": "B", "capacites": ["P-ARCH-02A", "P-ARCH-02B", "P-ARCH-02C", "P-ARCH-04A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
+% META: {"id": "1NSI-RES-EVAL-B", "chapitre": "1NSI-RESEAUX", "type_objet": "evaluation", "version": "B", "capacites": ["P-ARCH-02A", "P-ARCH-02B", "P-ARCH-02C", "P-ARCH-04A", "P-ARCH-04B"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
 \section*{Évaluation B --- Réseaux}
 \textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
 
-\baremeIndicatif{Ex. 1 : 10 pts (paquets, bit alterné) ; Ex. 2 : 10 pts (réseau, capteurs)}
+\baremeIndicatif{Ex. 1 : 8 pts (paquets, bit alterné) ; Ex. 2 : 8 pts (réseau, capteurs) ; Ex. 3 : 4 pts (IHM sur cahier des charges)}
 
 \bigskip
 
-\textbf{Exercice 1} --- \textit{Paquets et bit alterné} \hfill (10 points)
+\textbf{Exercice 1} --- \textit{Paquets et bit alterné} \hfill (8 points)
 
 \begin{enumerate}
-  \item (4 pts) Découper le message suivant en paquets de taille maximale $5$ avec
+  \item (3 pts) Découper le message suivant en paquets de taille maximale $5$ avec
   \lstinline{decouper_en_paquets} du cours :
   \begin{center}\lstinline{"PAQUETSRESEAU"}\end{center}
   Combien de paquets sont créés, et que contiennent-ils ?
   \item (3 pts) On envoie les messages \lstinline{["M", "N", "O"]} avec le protocole du bit alterné ; la deuxième tentative globale échoue. Dérouler l'envoi et donner la liste finale des messages reçus, avec leur bit.
-  \item (3 pts) Pourquoi un seul bit (0 ou 1) suffit-il à distinguer un nouveau paquet d'une retransmission, dans ce protocole ?
+  \item (2 pts) Pourquoi un seul bit (0 ou 1) suffit-il à distinguer un nouveau paquet d'une retransmission, dans ce protocole ?
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -50,15 +50,15 @@
 
 \bigskip
 
-\textbf{Exercice 2} --- \textit{Réseau et capteurs} \hfill (10 points)
+\textbf{Exercice 2} --- \textit{Réseau et capteurs} \hfill (8 points)
 
 \begin{enumerate}
-  \item (4 pts) On donne le réseau suivant :
+  \item (3 pts) On donne le réseau suivant :
   \begin{center}\lstinline|{"X": ["Y"], "Y": ["X", "Z"], "Z": ["Y"]}|\end{center}
   En utilisant \lstinline{peuvent_communiquer} du cours, vérifier que \lstinline{"X"}
   et \lstinline{"Z"} peuvent communiquer.
   \item (3 pts) Écrire une fonction \lstinline{decider_ventilation(co2, seuil=800)} qui renvoie \lstinline{True} si le taux de CO2 (en ppm) dépasse le seuil (la ventilation doit s'activer).
-  \item (3 pts) Tester cette fonction pour un taux de $1000$ ppm et de $500$ ppm. Identifier, dans ce système, le capteur et l'actionneur.
+  \item (2 pts) Tester cette fonction pour un taux de $1000$ ppm et de $500$ ppm. Identifier, dans ce système, le capteur et l'actionneur.
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -78,4 +78,57 @@
 %     return co2 > seuil
 % assert decider_ventilation(1000) is True
 % assert decider_ventilation(500) is False
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{IHM repondant a un cahier des charges} \hfill (4 points)
+
+\textit{Cahier des charges.} Un local est equipe d'un capteur de CO2. L'IHM recoit une
+commande textuelle parmi \lstinline{"AUTO"}, \lstinline{"ON"} et \lstinline{"OFF"} :
+\lstinline{"ON"} force la ventilation, \lstinline{"OFF"} l'interdit, et \lstinline{"AUTO"}
+rend la decision au capteur (ventilation si le taux depasse $800$ ppm). Toute autre commande
+doit etre refusee par une erreur explicite.
+
+\begin{enumerate}
+  \item (3 pts) Ecrire les fonctions \lstinline{traiter_commande(commande)} et
+  \lstinline{ventilation_active(co2)} realisant ce cahier des charges, sur le modele du
+  thermostat du cours.
+  \item (1 pt) Donner trois cas de test qui, ensemble, couvrent les trois modes, et dire ce
+  que chacun verifie.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% COMMANDES = {"AUTO": None, "ON": True, "OFF": False}
+% etat = {"override_manuel": None}
+%
+% def traiter_commande(commande):
+%     commande = commande.strip().upper()
+%     if commande not in COMMANDES:
+%         raise ValueError("commande attendue : AUTO, ON ou OFF")
+%     etat["override_manuel"] = COMMANDES[commande]
+%
+% def ventilation_active(co2, seuil=800):
+%     if etat["override_manuel"] is not None:
+%         return etat["override_manuel"]
+%     return co2 > seuil
+%
+% # Mode AUTO : la decision revient au capteur, de part et d'autre du seuil.
+% traiter_commande("auto")
+% assert ventilation_active(1000) is True
+% assert ventilation_active(500) is False
+% assert ventilation_active(800) is False        # le seuil lui-meme ne declenche pas
+% # Mode ON : la ventilation est forcee malgre un taux bas.
+% traiter_commande("ON")
+% assert ventilation_active(500) is True
+% # Mode OFF : la ventilation est interdite malgre un taux eleve.
+% traiter_commande("OFF")
+% assert ventilation_active(1000) is False
+% # Une commande hors cahier des charges est refusee explicitement.
+% try:
+%     traiter_commande("MAX")
+% except ValueError as e:
+%     assert "AUTO" in str(e)
+% else:
+%     raise AssertionError("la commande invalide n'a pas ete refusee")
 % END-VERIFY

@@ -1,16 +1,16 @@
-% META: {"id": "1NSI-PM-EVAL-B", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "evaluation", "version": "B", "capacites": ["P-HIST-01", "BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
+% META: {"id": "1NSI-PM-EVAL-B", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "evaluation", "version": "B", "capacites": ["P-HIST-01", "BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE", "BO-PREAMBULE-COMPETENCES-ORALES"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
 \section*{Évaluation B --- Projet et méthodes}
 \textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
 
-\baremeIndicatif{Ex. 1 : 10 pts (histoire, démarche de projet) ; Ex. 2 : 10 pts (débogage)}
+\baremeIndicatif{Ex. 1 : 8 pts (histoire, démarche de projet) ; Ex. 2 : 8 pts (débogage) ; Ex. 3 : 4 pts (documentation et oral)}
 
 \bigskip
 
-\textbf{Exercice 1} --- \textit{Histoire et gestion de projet} \hfill (10 points)
+\textbf{Exercice 1} --- \textit{Histoire et gestion de projet} \hfill (8 points)
 
 \begin{enumerate}
-  \item (4 pts) En utilisant \lstinline{evenements_entre} du cours sur la chronologie \lstinline{[(1936, ...), (1969, ...), (1991, ...)]}, lister les événements situés entre 1960 et 1991.
-  \item (3 pts) Un projet est découpé en $5$ jalons, dont $3$ sont terminés. Calculer son avancement avec \lstinline{avancement} du cours.
+  \item (3 pts) En utilisant \lstinline{evenements_entre} du cours sur la chronologie \lstinline{[(1936, ...), (1969, ...), (1991, ...)]}, lister les événements situés entre 1960 et 1991.
+  \item (2 pts) Un projet est découpé en $5$ jalons, dont $3$ sont terminés. Calculer son avancement avec \lstinline{avancement} du cours.
   \item (3 pts) Le programme officiel précise que les professeurs veillent à ce que les projets restent « d'une ambition raisonnable ». Pourquoi cette recommandation est-elle importante pour une équipe de $2$ à $4$ élèves ?
 \end{enumerate}
 
@@ -38,7 +38,7 @@
 
 \bigskip
 
-\textbf{Exercice 2} --- \textit{Débogage} \hfill (10 points)
+\textbf{Exercice 2} --- \textit{Débogage} \hfill (8 points)
 
 \begin{python}
 def acceder_element_bugue(liste, indice):
@@ -49,8 +49,8 @@ acceder_element_bugue([1, 2, 3], 5)
 
 \begin{enumerate}
   \item (3 pts) Quel type d'erreur ce programme provoque-t-il ? Quel est le message exact ?
-  \item (4 pts) Écrire une version corrigée \lstinline{acceder_element(liste, indice)} qui utilise une précondition (\lstinline{assert}) pour vérifier que l'indice est valide, avec un message clair.
-  \item (3 pts) Pourquoi une précondition explicite est-elle préférable à laisser l'erreur native (\lstinline{IndexError}) se produire sans explication ?
+  \item (3 pts) Écrire une version corrigée \lstinline{acceder_element(liste, indice)} qui utilise une précondition (\lstinline{assert}) pour vérifier que l'indice est valide, avec un message clair.
+  \item (2 pts) Pourquoi une précondition explicite est-elle préférable à laisser l'erreur native (\lstinline{IndexError}) se produire sans explication ?
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -74,4 +74,61 @@ acceder_element_bugue([1, 2, 3], 5)
 % except AssertionError:
 %     erreur_precondition = True
 % assert erreur_precondition is True
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{Documentation et presentation orale} \hfill (4 points)
+
+On donne cette fonction, ecrite pour un projet de gestion de notes :
+
+\begin{python}
+def moyenne(notes, coefficients):
+    total = 0
+    poids = 0
+    for note, coefficient in zip(notes, coefficients):
+        total += note * coefficient
+        poids += coefficient
+    return total / poids
+\end{python}
+
+\begin{enumerate}
+  \item (2 pts) Ajouter a cette fonction une docstring conforme aux usages du cours : role,
+  parametres avec leur type, valeur renvoyee, et la precondition qui evite la division par
+  zero. On ecrira la fonction complete.
+  \item (2 pts) Vous presentez ce projet a l'oral en trois minutes. Rediger le plan de votre
+  intervention en trois points, et indiquer pour chacun l'argument principal que vous
+  avancerez. Un des trois points devra justifier un choix technique et non le decrire.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def moyenne(notes, coefficients):
+%     """Renvoie la moyenne ponderee des notes.
+%
+%     notes : liste de nombres, les notes obtenues.
+%     coefficients : liste de nombres positifs, de meme longueur que notes.
+%     Renvoie un nombre : la moyenne ponderee.
+%     Precondition : la somme des coefficients est strictement positive.
+%     """
+%     assert sum(coefficients) > 0, "la somme des coefficients doit etre non nulle"
+%     total = 0
+%     poids = 0
+%     for note, coefficient in zip(notes, coefficients):
+%         total += note * coefficient
+%         poids += coefficient
+%     return total / poids
+%
+% assert moyenne([10, 20], [1, 1]) == 15
+% assert moyenne([12, 8], [3, 1]) == 11
+% # La docstring est bien presente et nomme les quatre elements attendus.
+% doc = moyenne.__doc__
+% for attendu in ("notes", "coefficients", "Renvoie", "Precondition"):
+%     assert attendu in doc
+% # La precondition transforme une division par zero en message explicite.
+% try:
+%     moyenne([10], [0])
+% except AssertionError as e:
+%     assert "coefficients" in str(e)
+% else:
+%     raise AssertionError("la precondition n'a pas ete declenchee")
 % END-VERIFY

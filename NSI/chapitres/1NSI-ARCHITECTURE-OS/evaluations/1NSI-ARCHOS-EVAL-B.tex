@@ -1,17 +1,17 @@
-% META: {"id": "1NSI-ARCHOS-EVAL-B", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "evaluation", "version": "B", "capacites": ["P-ARCH-01A", "P-ARCH-01B", "P-ARCH-03A", "P-ARCH-03C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
+% META: {"id": "1NSI-ARCHOS-EVAL-B", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "evaluation", "version": "B", "capacites": ["P-ARCH-01A", "P-ARCH-01B", "P-ARCH-03A", "P-ARCH-03B", "P-ARCH-03C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
 \section*{Évaluation B --- Architecture et systèmes d'exploitation}
 \textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
 
-\baremeIndicatif{Ex. 1 : 10 pts (von Neumann, instructions) ; Ex. 2 : 10 pts (OS, permissions)}
+\baremeIndicatif{Ex. 1 : 8 pts (von Neumann, instructions) ; Ex. 2 : 8 pts (OS, permissions) ; Ex. 3 : 4 pts (ligne de commande)}
 
 \bigskip
 
-\textbf{Exercice 1} --- \textit{Von Neumann et instructions machine} \hfill (10 points)
+\textbf{Exercice 1} --- \textit{Von Neumann et instructions machine} \hfill (8 points)
 
 \begin{enumerate}
   \item (3 pts) Nommer les quatre constituants principaux de l'architecture de von Neumann, et préciser lequel exécute les instructions.
-  \item (4 pts) On ajoute au simulateur \lstinline{executer} du cours l'instruction \lstinline{("SUB", reg_dest, reg_src)} (soustraction : \lstinline{reg_dest <- reg_dest - reg_src}). Écrire le code de cette instruction.
-  \item (3 pts) Dérouler l'exécution de ce programme et donner l'état final de \lstinline{memoire} :
+  \item (3 pts) On ajoute au simulateur \lstinline{executer} du cours l'instruction \lstinline{("SUB", reg_dest, reg_src)} (soustraction : \lstinline{reg_dest <- reg_dest - reg_src}). Écrire le code de cette instruction.
+  \item (2 pts) Dérouler l'exécution de ce programme et donner l'état final de \lstinline{memoire} :
 \begin{python}
 memoire = [20, 8, 0]
 programme = [
@@ -55,12 +55,12 @@ programme = [
 
 \bigskip
 
-\textbf{Exercice 2} --- \textit{Système d'exploitation et permissions} \hfill (10 points)
+\textbf{Exercice 2} --- \textit{Système d'exploitation et permissions} \hfill (8 points)
 
 \begin{enumerate}
   \item (3 pts) Citer deux fonctions assurées par un système d'exploitation.
-  \item (4 pts) Un fichier a les permissions \lstinline{"rw-rw-r--"}. En utilisant \lstinline{droit_accorde} du cours, déterminer si le propriétaire peut y écrire, si le groupe peut y écrire, et si les autres peuvent y écrire.
-  \item (3 pts) Convertir ces permissions en notation octale avec \lstinline{permissions_vers_octal}.
+  \item (3 pts) Un fichier a les permissions \lstinline{"rw-rw-r--"}. En utilisant \lstinline{droit_accorde} du cours, déterminer si le propriétaire peut y écrire, si le groupe peut y écrire, et si les autres peuvent y écrire.
+  \item (2 pts) Convertir ces permissions en notation octale avec \lstinline{permissions_vers_octal}.
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -81,4 +81,44 @@ programme = [
 % assert droit_accorde(perm, "groupe", "ecriture") is True
 % assert droit_accorde(perm, "autres", "ecriture") is False
 % assert permissions_vers_octal(perm) == "664"
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{Ligne de commande} \hfill (4 points)
+
+Un utilisateur se trouve dans son dossier personnel, qui contient un dossier \lstinline{tp}
+et un fichier \lstinline{notes.txt}.
+
+\begin{enumerate}
+  \item (2 pts) Écrire, dans l'ordre, les commandes qui créent un dossier \lstinline{tp/rendu},
+  s'y déplacent, y créent un fichier vide \lstinline{reponses.txt}, puis listent le contenu
+  du dossier courant.
+  \item (1 pt) Quelle commande affiche le contenu de \lstinline{notes.txt} sans l'ouvrir dans
+  un éditeur ? Depuis \lstinline{tp/rendu}, quel chemin faut-il lui donner ?
+  \item (1 pt) Expliquer en une phrase pourquoi \lstinline{rm} est la commande la plus
+  dangereuse de cette liste.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% import os, subprocess, tempfile
+% # Les commandes attendues sont executees dans un dossier temporaire : la
+% # sequence doit reellement produire l'arborescence decrite.
+% with tempfile.TemporaryDirectory() as racine:
+%     os.makedirs(os.path.join(racine, "tp"))
+%     open(os.path.join(racine, "notes.txt"), "w").close()
+%     subprocess.run(["mkdir", "tp/rendu"], cwd=racine, check=True)
+%     rendu = os.path.join(racine, "tp", "rendu")
+%     assert os.path.isdir(rendu)
+%     subprocess.run(["touch", "reponses.txt"], cwd=rendu, check=True)
+%     listing = subprocess.run(["ls"], cwd=rendu, capture_output=True, text=True, check=True)
+%     assert listing.stdout.split() == ["reponses.txt"]
+%     # Depuis tp/rendu, notes.txt se trouve deux niveaux au-dessus.
+%     lecture = subprocess.run(["cat", "../../notes.txt"], cwd=rendu,
+%                              capture_output=True, text=True, check=True)
+%     assert lecture.returncode == 0
+%     assert os.path.relpath(os.path.join(racine, "notes.txt"), rendu) == "../../notes.txt"
+%     # rm supprime sans corbeille : le fichier n'existe plus apres coup.
+%     subprocess.run(["rm", "reponses.txt"], cwd=rendu, check=True)
+%     assert not os.path.exists(os.path.join(rendu, "reponses.txt"))
 % END-VERIFY

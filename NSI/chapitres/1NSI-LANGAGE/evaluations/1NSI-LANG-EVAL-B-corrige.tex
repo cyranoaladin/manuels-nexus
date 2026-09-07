@@ -1,4 +1,4 @@
-% META: {"id": "1NSI-LANG-EVAL-B-corrige", "chapitre": "1NSI-LANGAGE", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-LANG-EVAL-B", "capacites": ["P-LANG-01", "P-LANG-03B", "P-LANG-04", "P-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% META: {"id": "1NSI-LANG-EVAL-B-corrige", "chapitre": "1NSI-LANGAGE", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-LANG-EVAL-B", "capacites": ["P-LANG-01", "P-LANG-02", "P-LANG-03A", "P-LANG-03B", "P-LANG-03C", "P-LANG-04", "P-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
 % BEGIN-VERIFY
 % def moyenne_ponderee(valeurs, poids):
 %     assert len(valeurs) == len(poids)
@@ -17,6 +17,26 @@
 % assert produit_negatifs_bugue([-2, -3, -4]) == 0
 % import math
 % assert math.gcd(60, 48) == 12
+% def indice_max(nombres):
+%     assert len(nombres) > 0, "la liste doit etre non vide"
+%     meilleur = 0
+%     for i in range(1, len(nombres)):
+%         if nombres[i] > nombres[meilleur]:
+%             meilleur = i
+%     return meilleur
+% for essai in ([3], [1, 5, 2], [4, 4, 1], [-3, -1, -7], [2, 9, 9, 1]):
+%     k = indice_max(essai)
+%     assert 0 <= k < len(essai)
+%     assert all(valeur <= essai[k] for valeur in essai)
+%     assert all(essai[j] < essai[k] for j in range(k))
+% assert indice_max([4, 4, 1]) == 0
+% assert indice_max([2, 9, 9, 1]) == 1
+% try:
+%     indice_max([])
+% except AssertionError as e:
+%     assert "non vide" in str(e)
+% else:
+%     raise AssertionError("la precondition n'a pas ete declenchee")
 % END-VERIFY
 \begin{corrige}{1NSI-LANG-EVAL-B-EX1}
 \textbf{1.} Précondition : \lstinline{valeurs} et \lstinline{poids} ont la même longueur,
@@ -54,4 +74,46 @@ def produit_negatifs(liste):
 \end{python}
 
 \textbf{3.} \lstinline{import math} puis \lstinline{math.gcd(60, 48)}, qui renvoie $12$.
+\end{corrige}
+
+\begin{corrige}{1NSI-LANG-EVAL-B-EX3}
+\textbf{1.} Prototype : \lstinline{indice_max(nombres)} ; \lstinline{nombres} est une liste
+de nombres ; la fonction renvoie un entier, l'indice du plus grand element.
+\textbf{Precondition :} la liste est non vide -- sans elle, il n'existe aucun indice a
+renvoyer.
+
+\textbf{2.} Deux postconditions verifiables :
+\begin{itemize}
+  \item l'indice renvoye est un indice valide : \lstinline{0 <= k < len(nombres)} ;
+  \item aucune valeur ne depasse celle a cet indice, et aucun indice plus petit ne porte
+  deja ce maximum -- ce qui exprime la regle « le plus petit indice en cas d'egalite ».
+\end{itemize}
+
+\begin{python}
+def indice_max(nombres):
+    assert len(nombres) > 0, "la liste doit etre non vide"
+    meilleur = 0
+    for i in range(1, len(nombres)):
+        if nombres[i] > nombres[meilleur]:
+            meilleur = i
+    return meilleur
+
+
+essai = [2, 9, 9, 1]
+k = indice_max(essai)
+assert 0 <= k < len(essai)
+assert all(valeur <= essai[k] for valeur in essai)
+assert all(essai[j] < essai[k] for j in range(k))
+\end{python}
+
+La comparaison stricte \lstinline{>} est ce qui garantit la seconde postcondition : avec
+\lstinline{>=}, une egalite ferait avancer l'indice retenu.
+
+\textbf{3.} \textbf{Trait commun :} les deux langages ont des fonctions nommees, des
+variables, une boucle qui parcourt les indices, et la meme logique de comparaison --
+l'algorithme s'ecrit a l'identique. \textbf{Trait particulier a Python :} les blocs sont
+delimites par l'\textbf{indentation}, et \lstinline{range} engendre les indices.
+\textbf{Trait particulier a JavaScript :} les blocs sont delimites par des \textbf{accolades},
+et la boucle \lstinline{for} declare explicitement son initialisation, sa condition d'arret
+et son increment.
 \end{corrige}

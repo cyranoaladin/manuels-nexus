@@ -1,4 +1,4 @@
-% META: {"id": "1NSI-ARCHOS-EVAL-B-corrige", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-ARCHOS-EVAL-B", "capacites": ["P-ARCH-01A", "P-ARCH-01B", "P-ARCH-03A", "P-ARCH-03C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% META: {"id": "1NSI-ARCHOS-EVAL-B-corrige", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-ARCHOS-EVAL-B", "capacites": ["P-ARCH-01A", "P-ARCH-01B", "P-ARCH-03A", "P-ARCH-03B", "P-ARCH-03C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
 % BEGIN-VERIFY
 % def executer(programme, memoire):
 %     registres = {}
@@ -39,6 +39,16 @@
 %         valeurs.append(v)
 %     return "".join(str(v) for v in valeurs)
 % assert permissions_vers_octal("rw-rw-r--") == "664"
+% import os, subprocess, tempfile
+% with tempfile.TemporaryDirectory() as racine:
+%     os.makedirs(os.path.join(racine, "tp"))
+%     open(os.path.join(racine, "notes.txt"), "w").close()
+%     subprocess.run(["mkdir", "tp/rendu"], cwd=racine, check=True)
+%     rendu = os.path.join(racine, "tp", "rendu")
+%     subprocess.run(["touch", "reponses.txt"], cwd=rendu, check=True)
+%     listing = subprocess.run(["ls"], cwd=rendu, capture_output=True, text=True, check=True)
+%     assert listing.stdout.split() == ["reponses.txt"]
+%     assert os.path.relpath(os.path.join(racine, "notes.txt"), rendu) == "../../notes.txt"
 % END-VERIFY
 \begin{corrige}{1NSI-ARCHOS-EVAL-B-EX1}
 \textbf{1.} Processeur, mémoire, entrées, sorties. Le \textbf{processeur} exécute les
@@ -78,4 +88,16 @@ et gestion des fichiers (organiser le stockage sur disque).
 
 \textbf{3.} \lstinline{rw-}=$6$, \lstinline{rw-}=$6$, \lstinline{r--}=$4$ : notation
 octale \lstinline{664}.
+\end{corrige}
+
+\begin{corrige}{1NSI-ARCHOS-EVAL-B-EX3}
+\textbf{1.} Dans l'ordre : \lstinline{mkdir tp/rendu}, puis \lstinline{cd tp/rendu},
+puis \lstinline{touch reponses.txt}, puis \lstinline{ls}. La derniere commande affiche
+\lstinline{reponses.txt}, seul contenu du dossier.
+
+\textbf{2.} \lstinline{cat} affiche le contenu d'un fichier dans le terminal. Depuis
+\lstinline{tp/rendu}, le fichier se trouve deux niveaux au-dessus : \lstinline{cat ../../notes.txt}.
+
+\textbf{3.} \lstinline{rm} supprime immediatement et definitivement, sans passer par une
+corbeille : une erreur de nom ou de chemin est irreversible.
 \end{corrige}

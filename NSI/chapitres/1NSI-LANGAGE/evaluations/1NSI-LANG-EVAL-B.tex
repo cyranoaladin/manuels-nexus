@@ -1,17 +1,17 @@
-% META: {"id": "1NSI-LANG-EVAL-B", "chapitre": "1NSI-LANGAGE", "type_objet": "evaluation", "version": "B", "capacites": ["P-LANG-01", "P-LANG-03B", "P-LANG-04", "P-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
+% META: {"id": "1NSI-LANG-EVAL-B", "chapitre": "1NSI-LANGAGE", "type_objet": "evaluation", "version": "B", "capacites": ["P-LANG-01", "P-LANG-02", "P-LANG-03A", "P-LANG-03B", "P-LANG-03C", "P-LANG-04", "P-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
 \section*{Évaluation B --- Langages et programmation}
 \textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
 
-\baremeIndicatif{Ex. 1 : 10 pts (constructions, spécification) ; Ex. 2 : 10 pts (mise au point, bibliothèque)}
+\baremeIndicatif{Ex. 1 : 8 pts (constructions, spécification) ; Ex. 2 : 7 pts (mise au point, bibliothèque) ; Ex. 3 : 5 pts (prototype, postconditions, autre langage)}
 
 \bigskip
 
-\textbf{Exercice 1} --- \textit{Moyenne pondérée} \hfill (10 points)
+\textbf{Exercice 1} --- \textit{Moyenne pondérée} \hfill (8 points)
 
 \begin{enumerate}
   \item (2 pts) Proposer une précondition pour une fonction \lstinline{moyenne_ponderee(valeurs, poids)} calculant une moyenne pondérée.
-  \item (5 pts) Écrire cette fonction, avec les \lstinline{assert} correspondants, en utilisant une boucle \lstinline{for} bornée.
-  \item (3 pts) Calculer \lstinline{moyenne_ponderee([8, 12, 16], [1, 1, 2])} à la main, puis vérifier avec le code.
+  \item (4 pts) Écrire cette fonction, avec les \lstinline{assert} correspondants, en utilisant une boucle \lstinline{for} bornée.
+  \item (2 pts) Calculer \lstinline{moyenne_ponderee([8, 12, 16], [1, 1, 2])} à la main, puis vérifier avec le code.
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -27,7 +27,7 @@
 
 \bigskip
 
-\textbf{Exercice 2} --- \textit{Mise au point et bibliothèque} \hfill (10 points)
+\textbf{Exercice 2} --- \textit{Mise au point et bibliothèque} \hfill (7 points)
 
 Un élève écrit la fonction suivante, censée renvoyer le produit des éléments strictement
 négatifs d'une liste :
@@ -41,9 +41,9 @@ def produit_negatifs_bugue(liste):
 \end{python}
 
 \begin{enumerate}
-  \item (3 pts) Que renvoie \lstinline{produit_negatifs_bugue([-2, -3, -4])} ? Quel est le résultat attendu ?
-  \item (4 pts) Identifier précisément l'erreur dans le code, et proposer une version corrigée.
-  \item (3 pts) En utilisant le module \lstinline{math}, calculer le PGCD de $60$ et $48$ (indiquer le nom de la fonction utilisée).
+  \item (2 pts) Que renvoie \lstinline{produit_negatifs_bugue([-2, -3, -4])} ? Quel est le résultat attendu ?
+  \item (3 pts) Identifier précisément l'erreur dans le code, et proposer une version corrigée.
+  \item (2 pts) En utilisant le module \lstinline{math}, calculer le PGCD de $60$ et $48$ (indiquer le nom de la fonction utilisée).
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -63,4 +63,50 @@ def produit_negatifs_bugue(liste):
 % assert produit_negatifs([-2, -3, -4]) == -24
 % import math
 % assert math.gcd(60, 48) == 12
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{Prototype, postconditions, autre langage} \hfill (5 points)
+
+On veut une fonction qui renvoie l'indice du plus grand element d'une liste non vide de
+nombres, et le plus petit indice en cas d'egalite.
+
+\begin{enumerate}
+  \item (2 pts) Donner le \textbf{prototype} de cette fonction : nom, parametres avec leur
+  type, type de la valeur renvoyee, et precondition. Ne pas ecrire le corps.
+  \item (2 pts) Enoncer deux \textbf{postconditions} portant sur le resultat, formulees de
+  facon verifiable par une assertion, puis ecrire la fonction et ces assertions.
+  \item (1 pt) En JavaScript, la meme fonction s'ecrirait
+  \lstinline{function indiceMax(liste) { ... }} et une boucle
+  \lstinline{for (let i = 0; i < liste.length; i++)}. Citer un trait \textbf{commun} avec
+  Python et un trait \textbf{particulier} a chacun des deux langages.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def indice_max(nombres):
+%     assert len(nombres) > 0, "la liste doit etre non vide"
+%     meilleur = 0
+%     for i in range(1, len(nombres)):
+%         if nombres[i] > nombres[meilleur]:
+%             meilleur = i
+%     return meilleur
+%
+% # Postcondition 1 : l'indice renvoye est un indice valide de la liste.
+% # Postcondition 2 : aucune valeur de la liste ne depasse celle a cet indice,
+% # et aucun indice plus petit ne porte cette meme valeur maximale.
+% for essai in ([3], [1, 5, 2], [4, 4, 1], [-3, -1, -7], [2, 9, 9, 1]):
+%     k = indice_max(essai)
+%     assert 0 <= k < len(essai)
+%     assert all(valeur <= essai[k] for valeur in essai)
+%     assert all(essai[j] < essai[k] for j in range(k))
+% assert indice_max([4, 4, 1]) == 0        # egalite : le plus petit indice
+% assert indice_max([2, 9, 9, 1]) == 1
+% # La precondition refuse la liste vide au lieu de lever IndexError.
+% try:
+%     indice_max([])
+% except AssertionError as e:
+%     assert "non vide" in str(e)
+% else:
+%     raise AssertionError("la precondition n'a pas ete declenchee")
 % END-VERIFY

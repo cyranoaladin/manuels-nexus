@@ -1,4 +1,4 @@
-% META: {"id": "1NSI-RES-EVAL-B-corrige", "chapitre": "1NSI-RESEAUX", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-RES-EVAL-B", "capacites": ["P-ARCH-02A", "P-ARCH-02B", "P-ARCH-02C", "P-ARCH-04A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% META: {"id": "1NSI-RES-EVAL-B-corrige", "chapitre": "1NSI-RESEAUX", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-RES-EVAL-B", "capacites": ["P-ARCH-02A", "P-ARCH-02B", "P-ARCH-02C", "P-ARCH-04A", "P-ARCH-04B"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
 % BEGIN-VERIFY
 % def decouper_en_paquets(message, taille_max):
 %     nb_paquets = (len(message) + taille_max - 1) // taille_max
@@ -21,6 +21,31 @@
 %             return True
 %     return False
 % assert peuvent_communiquer(reseau, "X", "Z") is True
+% COMMANDES = {"AUTO": None, "ON": True, "OFF": False}
+% etat = {"override_manuel": None}
+% def traiter_commande(commande):
+%     commande = commande.strip().upper()
+%     if commande not in COMMANDES:
+%         raise ValueError("commande attendue : AUTO, ON ou OFF")
+%     etat["override_manuel"] = COMMANDES[commande]
+% def ventilation_active(co2, seuil=800):
+%     if etat["override_manuel"] is not None:
+%         return etat["override_manuel"]
+%     return co2 > seuil
+% traiter_commande("auto")
+% assert ventilation_active(1000) is True
+% assert ventilation_active(500) is False
+% assert ventilation_active(800) is False
+% traiter_commande("ON")
+% assert ventilation_active(500) is True
+% traiter_commande("OFF")
+% assert ventilation_active(1000) is False
+% try:
+%     traiter_commande("MAX")
+% except ValueError as e:
+%     assert "AUTO" in str(e)
+% else:
+%     raise AssertionError("la commande invalide n'a pas ete refusee")
 % END-VERIFY
 \begin{corrige}{1NSI-RES-EVAL-B-EX1}
 \textbf{1.} $3$ paquets sont créés : \lstinline{"PAQUE"} (numéro 0), \lstinline{"TSRES"}
@@ -51,4 +76,40 @@ def decider_ventilation(co2, seuil=800):
 faut ventiler) ; \lstinline{decider_ventilation(500)} vaut \lstinline{False} (air
 correct). Le \textbf{capteur} est le capteur de CO2 ; l'\textbf{actionneur} est le système
 de ventilation.
+\end{corrige}
+
+\begin{corrige}{1NSI-RES-EVAL-B-EX3}
+\textbf{1.} L'etat retient le mode courant ; la decision consulte d'abord ce mode, et ne
+revient au capteur que si aucun forcage n'est actif.
+
+\begin{python}
+COMMANDES = {"AUTO": None, "ON": True, "OFF": False}
+etat = {"override_manuel": None}
+
+
+def traiter_commande(commande):
+    commande = commande.strip().upper()
+    if commande not in COMMANDES:
+        raise ValueError("commande attendue : AUTO, ON ou OFF")
+    etat["override_manuel"] = COMMANDES[commande]
+
+
+def ventilation_active(co2, seuil=800):
+    if etat["override_manuel"] is not None:
+        return etat["override_manuel"]
+    return co2 > seuil
+\end{python}
+
+\textbf{2.} Trois cas de test suffisent a couvrir les trois modes :
+\begin{itemize}
+  \item apres \lstinline{traiter_commande("AUTO")}, \lstinline{ventilation_active(1000)}
+  vaut \lstinline{True} et \lstinline{ventilation_active(500)} vaut \lstinline{False} :
+  la decision revient bien au capteur, de part et d'autre du seuil ;
+  \item apres \lstinline{traiter_commande("ON")}, \lstinline{ventilation_active(500)} vaut
+  \lstinline{True} : le forcage l'emporte sur un taux bas ;
+  \item apres \lstinline{traiter_commande("OFF")}, \lstinline{ventilation_active(1000)}
+  vaut \lstinline{False} : l'interdiction l'emporte sur un taux eleve.
+\end{itemize}
+On y ajoutera utilement le refus de \lstinline{traiter_commande("MAX")}, qui verifie la
+derniere ligne du cahier des charges.
 \end{corrige}

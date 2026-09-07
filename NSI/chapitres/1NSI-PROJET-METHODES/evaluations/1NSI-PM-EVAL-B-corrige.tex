@@ -1,4 +1,4 @@
-% META: {"id": "1NSI-PM-EVAL-B-corrige", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-PM-EVAL-B", "capacites": ["P-HIST-01", "BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% META: {"id": "1NSI-PM-EVAL-B-corrige", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-PM-EVAL-B", "capacites": ["P-HIST-01", "BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE", "BO-PREAMBULE-COMPETENCES-ORALES"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
 % BEGIN-VERIFY
 % evenements = [
 %     (1936, "Concept de machine universelle", "Alan Turing"),
@@ -13,6 +13,32 @@
 %     assert 0 <= indice < len(liste), "indice hors des bornes de la liste"
 %     return liste[indice]
 % assert acceder_element([1, 2, 3], 1) == 2
+% def moyenne(notes, coefficients):
+%     """Renvoie la moyenne ponderee des notes.
+%
+%     notes : liste de nombres, les notes obtenues.
+%     coefficients : liste de nombres positifs, de meme longueur que notes.
+%     Renvoie un nombre : la moyenne ponderee.
+%     Precondition : la somme des coefficients est strictement positive.
+%     """
+%     assert sum(coefficients) > 0, "la somme des coefficients doit etre non nulle"
+%     total = 0
+%     poids = 0
+%     for note, coefficient in zip(notes, coefficients):
+%         total += note * coefficient
+%         poids += coefficient
+%     return total / poids
+%
+% assert moyenne([10, 20], [1, 1]) == 15
+% assert moyenne([12, 8], [3, 1]) == 11
+% for attendu in ("notes", "coefficients", "Renvoie", "Precondition"):
+%     assert attendu in moyenne.__doc__
+% try:
+%     moyenne([10], [0])
+% except AssertionError as e:
+%     assert "coefficients" in str(e)
+% else:
+%     raise AssertionError("la precondition n'a pas ete declenchee")
 % END-VERIFY
 \begin{corrige}{1NSI-PM-EVAL-B-EX1}
 \textbf{1.} Entre 1960 et 1991 : les débuts du réseau Internet (1969) et la première
@@ -43,4 +69,42 @@ nécessaire (un indice valide) avec un message personnalisé et compréhensible.
 native \lstinline{IndexError} arrête aussi le programme, mais sans expliquer la
 \textbf{cause métier} du problème (ici, un indice incohérent avec la taille de la liste)
 aussi clairement qu'un message d'assertion rédigé pour ce cas précis.
+\end{corrige}
+
+\begin{corrige}{1NSI-PM-EVAL-B-EX3}
+\textbf{1.} La docstring nomme le role, les parametres avec leur type, la valeur renvoyee
+et la precondition, et l'assertion la fait respecter :
+
+\begin{python}
+def moyenne(notes, coefficients):
+    """Renvoie la moyenne ponderee des notes.
+
+    notes : liste de nombres, les notes obtenues.
+    coefficients : liste de nombres positifs, de meme longueur que notes.
+    Renvoie un nombre : la moyenne ponderee.
+    Precondition : la somme des coefficients est strictement positive.
+    """
+    assert sum(coefficients) > 0, "la somme des coefficients doit etre non nulle"
+    total = 0
+    poids = 0
+    for note, coefficient in zip(notes, coefficients):
+        total += note * coefficient
+        poids += coefficient
+    return total / poids
+\end{python}
+
+Sans cette precondition, un appel \lstinline{moyenne([10], [0])} echoue sur une division par
+zero, dont le message ne dit rien du probleme reel.
+
+\textbf{2.} Plan possible en trois points, chacun avec son argument principal :
+\begin{itemize}
+  \item \textbf{Le probleme et le besoin.} Argument : montrer a qui sert le programme et
+  ce qu'il remplace, pour que le jury comprenne l'enjeu avant le code.
+  \item \textbf{Une demonstration courte.} Argument : une execution reelle sur un jeu de
+  donnees prepare prouve que le programme fonctionne, ce qu'aucune description ne remplace.
+  \item \textbf{Un choix technique justifie.} Argument : par exemple, avoir choisi une
+  \textbf{precondition} plutot qu'un \lstinline{try/except} parce qu'une somme de
+  coefficients nulle revele une erreur de saisie en amont, qu'il vaut mieux signaler que
+  rattraper silencieusement. C'est ce point qui \textbf{justifie} au lieu de decrire.
+\end{itemize}
 \end{corrige}

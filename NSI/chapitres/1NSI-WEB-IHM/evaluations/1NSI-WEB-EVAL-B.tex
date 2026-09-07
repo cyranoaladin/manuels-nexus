@@ -1,12 +1,12 @@
-% META: {"id": "1NSI-WEB-EVAL-B", "chapitre": "1NSI-WEB-IHM", "type_objet": "evaluation", "version": "B", "capacites": ["P-IHM-01A", "P-IHM-02", "P-IHM-04B", "P-IHM-04C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
+% META: {"id": "1NSI-WEB-EVAL-B", "chapitre": "1NSI-WEB-IHM", "type_objet": "evaluation", "version": "B", "capacites": ["P-IHM-01A", "P-IHM-01B", "P-IHM-02", "P-IHM-03A", "P-IHM-03B", "P-IHM-03C", "P-IHM-04A", "P-IHM-04B", "P-IHM-04C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
 \section*{Évaluation B --- Interactions homme-machine sur le Web}
 \textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
 
-\baremeIndicatif{Ex. 1 : 10 pts (composants, gestionnaire d'événement) ; Ex. 2 : 10 pts (GET/POST)}
+\baremeIndicatif{Ex. 1 : 7 pts (composants, gestionnaire d'événement) ; Ex. 2 : 6 pts (formulaire, GET/POST) ; Ex. 3 : 3 pts (événements traitables) ; Ex. 4 : 4 pts (client, serveur, chiffrement)}
 
 \bigskip
 
-\textbf{Exercice 1} --- \textit{Bouton « retirer des favoris »} \hfill (10 points)
+\textbf{Exercice 1} --- \textit{Bouton « retirer des favoris »} \hfill (7 points)
 
 On donne le code HTML suivant, sur une page listant $3$ favoris :
 \begin{console}
@@ -16,8 +16,8 @@ On donne le code HTML suivant, sur une page listant $3$ favoris :
 
 \begin{enumerate}
   \item (2 pts) Ce code HTML seul suffit-il à décrémenter le compteur lors d'un clic ? Justifier.
-  \item (5 pts) En reprenant le modèle du cours, écrire une fonction \lstinline{retirer_favori()} qui décrémente \lstinline{favoris["articles"]} (initialisé à $3$) et renvoie la nouvelle valeur, puis l'associer à \lstinline{"bouton_retirer"}.
-  \item (3 pts) Simuler $2$ clics successifs. Quelle est la séquence de valeurs renvoyées ?
+  \item (3 pts) En reprenant le modèle du cours, écrire une fonction \lstinline{retirer_favori()} qui décrémente \lstinline{favoris["articles"]} (initialisé à $3$) et renvoie la nouvelle valeur, puis l'associer à \lstinline{"bouton_retirer"}.
+  \item (2 pts) Simuler $2$ clics successifs. Quelle est la séquence de valeurs renvoyées ?
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -39,12 +39,12 @@ On donne le code HTML suivant, sur une page listant $3$ favoris :
 
 \bigskip
 
-\textbf{Exercice 2} --- \textit{Choisir GET ou POST} \hfill (10 points)
+\textbf{Exercice 2} --- \textit{Analyser un formulaire : GET ou POST} \hfill (6 points)
 
 \begin{enumerate}
-  \item (4 pts) Un formulaire de recherche immobilière transmet les paramètres \lstinline|{"ville": "Sousse", "type": "appartement"}|. Construire, avec \lstinline{urlencode}, l'URL de la requête GET correspondante (base : \lstinline{"https://immo.fr/recherche"}).
-  \item (3 pts) Cette recherche peut-elle raisonnablement utiliser GET ? Justifier en citant la nature des données.
-  \item (3 pts) Un autre formulaire du même site transmet le nom, l'email et le message d'un visiteur souhaitant être recontacté. Quelle méthode privilégier, et pourquoi ?
+  \item (2 pts) Un formulaire de recherche immobilière transmet les paramètres \lstinline|{"ville": "Sousse", "type": "appartement"}|. Construire, avec \lstinline{urlencode}, l'URL de la requête GET correspondante (base : \lstinline{"https://immo.fr/recherche"}).
+  \item (2 pts) Cette recherche peut-elle raisonnablement utiliser GET ? Justifier en citant la nature des données.
+  \item (2 pts) Un autre formulaire du même site transmet le nom, l'email et le message d'un visiteur souhaitant être recontacté. Décrire son fonctionnement complet : quels champs sont saisis, quelle méthode privilégier et pourquoi, et ce que le serveur reçoit exactement.
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -52,4 +52,85 @@ On donne le code HTML suivant, sur une page listant $3$ favoris :
 % params = {"ville": "Sousse", "type": "appartement"}
 % url = "https://immo.fr/recherche?" + urlencode(params)
 % assert url == "https://immo.fr/recherche?ville=Sousse&type=appartement"
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{Evenements traitables par un composant} \hfill (3 points)
+
+Un formulaire comporte un champ de texte \lstinline{"recherche"}, un menu deroulant
+\lstinline{"tri"} et un bouton \lstinline{"valider"}.
+
+\begin{enumerate}
+  \item (2 pts) Pour chacun de ces trois composants, citer un evenement que la fonction
+  associee peut traiter, et dire ce qu'on ferait a cette occasion.
+  \item (1 pt) Un evenement declenche a chaque frappe dans le champ de texte et un evenement
+  declenche a la validation ne servent pas au meme usage. Expliquer la difference en une
+  phrase.
+\end{enumerate}
+
+\bigskip
+
+\textbf{Exercice 4} --- \textit{Client, serveur, memorisation et chiffrement} \hfill (4 points)
+
+Un site de reservation demande d'abord un identifiant et un mot de passe, puis affiche les
+places disponibles, puis enregistre la reservation.
+
+\begin{enumerate}
+  \item (2 pts) Pour chacune des trois etapes, dire ce qui est execute \textbf{sur le client}
+  et ce qui l'est \textbf{sur le serveur}, et dans quel ordre.
+  \item (1 pt) Qu'est-ce qui reste memorise dans le navigateur entre deux pages, et qu'est-ce
+  qui est retransmis au serveur a chaque requete ?
+  \item (1 pt) A quelle etape le chiffrement de la transmission est-il indispensable, et
+  pourquoi ? Que protege-t-il exactement ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% # Les evenements cites sont ceux que le modele du cours sait associer a un
+% # composant : on verifie que chaque association est effectivement traitee.
+% gestionnaires = {}
+% journal = []
+%
+% def ajouter_gestionnaire(id_composant, evenement, fonction):
+%     gestionnaires[(id_composant, evenement)] = fonction
+%
+% def declencher(id_composant, evenement, *args):
+%     cle = (id_composant, evenement)
+%     if cle in gestionnaires:
+%         return gestionnaires[cle](*args)
+%     return None
+%
+% ajouter_gestionnaire("recherche", "saisie", lambda texte: journal.append(("filtre", texte)))
+% ajouter_gestionnaire("tri", "changement", lambda choix: journal.append(("tri", choix)))
+% ajouter_gestionnaire("valider", "clic", lambda: journal.append(("envoi", None)))
+%
+% declencher("recherche", "saisie", "alg")
+% declencher("tri", "changement", "prix")
+% declencher("valider", "clic")
+% assert journal == [("filtre", "alg"), ("tri", "prix"), ("envoi", None)]
+% # Un evenement non associe ne declenche rien : c'est le HTML seul, sans code.
+% assert declencher("recherche", "clic") is None
+% # La saisie se declenche a chaque frappe, la validation une seule fois.
+% journal.clear()
+% for lettre in "abc":
+%     declencher("recherche", "saisie", lettre)
+% declencher("valider", "clic")
+% assert [e[0] for e in journal] == ["filtre", "filtre", "filtre", "envoi"]
+%
+% # Ce qui circule : un identifiant de session est memorise cote client puis
+% # retransmis, le mot de passe ne circule qu'une fois, a la connexion.
+% session = {}
+% def connexion(identifiant, mot_de_passe, chiffre):
+%     assert chiffre, "le mot de passe ne doit pas circuler en clair"
+%     session["jeton"] = "jeton-" + identifiant
+%     return session["jeton"]
+% jeton = connexion("eleve", "secret", chiffre=True)
+% assert session == {"jeton": "jeton-eleve"}
+% assert "secret" not in session          # le mot de passe n'est pas memorise
+% try:
+%     connexion("eleve", "secret", chiffre=False)
+% except AssertionError as e:
+%     assert "clair" in str(e)
+% else:
+%     raise AssertionError("une connexion non chiffree aurait du etre refusee")
 % END-VERIFY
