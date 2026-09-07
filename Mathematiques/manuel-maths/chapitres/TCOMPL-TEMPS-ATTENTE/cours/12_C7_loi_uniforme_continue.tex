@@ -1,0 +1,112 @@
+% META: {"id": "TCOMPL-ATT-CR-012", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "cours", "capacites_codes": ["C7"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "needs_review"}
+
+\section{La loi uniforme continue}
+
+% ============================================================
+% STRATE 1 — Densite sur [0,1] puis sur [a,b]
+% ============================================================
+
+\definition[1]{
+Une variable aleatoire $X$ suit la \textbf{loi uniforme sur $[0\,;1]$} lorsqu'elle admet pour densite la fonction
+\[
+  f(x) = 1 \quad \text{si } x \in [0\,;1], \qquad f(x) = 0 \quad \text{sinon.}
+\]
+Plus generalement, $X$ suit la \textbf{loi uniforme sur $[a\,;b]$} (avec $a<b$) lorsque sa densite est
+\[
+  f(x) = \frac{1}{b-a} \quad \text{si } x \in [a\,;b], \qquad f(x) = 0 \quad \text{sinon.}
+\]
+}
+
+\margeAppui{
+La hauteur $\dfrac{1}{b-a}$ n'est pas choisie au hasard : c'est la seule valeur constante qui donne au rectangle de base $[a\,;b]$ une aire egale a $1$, condition sans laquelle $f$ ne serait pas une densite.
+}
+
+\propriete[Verification]{
+La fonction $f$ ci-dessus est bien une densite : elle est positive, et
+\[
+  \int_a^b \frac{1}{b-a}\,\mathrm{d}x = \frac{1}{b-a}\,\big[x\big]_a^b = \frac{b-a}{b-a} = 1 .
+\]
+}
+
+% ============================================================
+% STRATE 2 — Fonction de repartition, esperance, variance
+% ============================================================
+
+\propriete[Fonction de repartition]{
+Si $X$ suit la loi uniforme sur $[a\,;b]$, sa fonction de repartition est
+\[
+  F(x) = P(X \leq x) = \begin{cases}
+    0 & \text{si } x < a,\\[2pt]
+    \dfrac{x-a}{b-a} & \text{si } a \leq x \leq b,\\[6pt]
+    1 & \text{si } x > b.
+  \end{cases}
+\]
+En particulier, pour $a \leq c \leq d \leq b$ : $P(c \leq X \leq d) = \dfrac{d-c}{b-a}$.
+}
+
+\margeAppui{
+La probabilite d'un intervalle ne depend que de sa \textbf{longueur}, pas de sa position dans $[a\,;b]$ : attendre entre $0$ et $5$ minutes ou entre $10$ et $15$ minutes a la même probabilite.
+}
+
+\propriete[Esperance et variance]{
+Si $X$ suit la loi uniforme sur $[a\,;b]$, alors
+\[
+  E(X) = \frac{a+b}{2} \qquad \text{et} \qquad V(X) = \frac{(b-a)^2}{12}.
+\]
+}
+
+\demonstration{
+Pour l'esperance :
+\[
+  E(X) = \int_a^b x\,\frac{1}{b-a}\,\mathrm{d}x = \frac{1}{b-a}\left[\frac{x^2}{2}\right]_a^b = \frac{b^2-a^2}{2(b-a)} = \frac{(b-a)(b+a)}{2(b-a)} = \frac{a+b}{2}.
+\]
+Pour la variance, on calcule d'abord
+\[
+  E(X^2) = \int_a^b x^2\,\frac{1}{b-a}\,\mathrm{d}x = \frac{b^3-a^3}{3(b-a)} = \frac{a^2+ab+b^2}{3},
+\]
+en utilisant $b^3-a^3 = (b-a)(a^2+ab+b^2)$. Alors
+\[
+  V(X) = E(X^2) - \big(E(X)\big)^2 = \frac{a^2+ab+b^2}{3} - \frac{(a+b)^2}{4} = \frac{4(a^2+ab+b^2) - 3(a+b)^2}{12} = \frac{a^2-2ab+b^2}{12} = \frac{(b-a)^2}{12}.
+\]
+}
+
+\exemple{
+Un bus passe a un arret toutes les $20$ minutes. Un voyageur arrive sans connaitre l'horaire : son temps d'attente $X$ suit la loi uniforme sur $[0\,;20]$.
+
+Attente moyenne : $E(X) = \dfrac{0+20}{2} = 10$ minutes.
+
+Probabilite d'attendre moins de $5$ minutes : $P(X \leq 5) = \dfrac{5-0}{20} = 0{,}25$.
+
+Probabilite d'attendre entre $8$ et $12$ minutes : $\dfrac{12-8}{20} = 0{,}2$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, simplify, Rational, expand
+% x, a, b = symbols('x a b', real=True)
+% densite = 1 / (b - a)
+% # La densite integre bien a 1 sur [a, b].
+% assert simplify(integrate(densite, (x, a, b)) - 1) == 0
+% # Esperance et variance, calculees sans reutiliser les formules annoncees.
+% esperance = simplify(integrate(x * densite, (x, a, b)))
+% assert simplify(esperance - (a + b) / 2) == 0
+% moment2 = simplify(integrate(x**2 * densite, (x, a, b)))
+% variance = simplify(moment2 - esperance**2)
+% assert simplify(variance - (b - a)**2 / 12) == 0
+% # Fonction de repartition : F(a) = 0, F(b) = 1, et F croissante au milieu.
+% t = symbols('t', real=True)
+% F = simplify(integrate(densite, (x, a, t)))
+% assert simplify(F - (t - a) / (b - a)) == 0
+% # Cas numerique du bus : [0, 20].
+% num = {a: 0, b: 20}
+% assert esperance.subs(num) == 10
+% assert variance.subs(num) == Rational(100, 3)
+% assert F.subs(num).subs(t, 5) == Rational(1, 4)
+% # Une probabilite ne depend que de la longueur de l'intervalle.
+% p_08_12 = (F.subs(num).subs(t, 12) - F.subs(num).subs(t, 8))
+% p_00_04 = (F.subs(num).subs(t, 4) - F.subs(num).subs(t, 0))
+% assert simplify(p_08_12 - p_00_04) == 0
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Ecrire $V(X) = \dfrac{b-a}{12}$ au lieu de $\dfrac{(b-a)^2}{12}$.} La variance est homogene au \emph{carre} de la grandeur : si $X$ est un temps en minutes, $V(X)$ s'exprime en minutes carrees, et c'est l'ecart-type $\sqrt{V(X)} = \dfrac{b-a}{2\sqrt{3}}$ qui se compare a $E(X)$.
+}

@@ -1,0 +1,19 @@
+% META: {"id": "TCOMPL-ME-EX-031", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "exercice", "capacites": ["TCOMPL-ME-C6"], "capacites_codes": ["C6"], "methodes": [], "parcours": 1, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-MODELES-EVOLUTION/exercices/TCOMPL-ME-EX-031.tex", "corrige_tex": "chapitres/TCOMPL-MODELES-EVOLUTION/corriges/TCOMPL-ME-CO-031.tex", "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, limit, oo, Rational, simplify
+% n = symbols('n', positive=True, integer=True)
+% assert limit((2*n - 7) / (5*n + 1), n, oo) == Rational(2, 5)
+% assert limit(3 * Rational(1, 4)**n + 2, n, oo) == 2
+% assert limit(n**2 - 4*n, n, oo) == oo
+% # La factorisation par le terme dominant est bien licite : meme valeur en n=100.
+% assert simplify(((2*100 - 7) / (5*100 + 1)) - Rational(193, 501)) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-ME-EX-031}{1}{15}
+Déterminer, en justifiant, la limite de chacune des suites suivantes.
+\begin{enumerate}
+  \item $u_n = \dfrac{2n-7}{5n+1}$ pour $n \geq 0$.
+  \item $v_n = 3\times0{,}25^n + 2$ pour $n \geq 0$.
+  \item $w_n = n^2 - 4n$ pour $n \geq 0$.
+\end{enumerate}
+Pour chacune, préciser la forme indéterminée éventuellement rencontrée et la transformation qui permet de la lever.
+\end{exercice}

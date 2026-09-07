@@ -1,0 +1,24 @@
+% META: {"id": "TCOMPL-ECH-CO-038", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ECH-EX-038", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% from collections import Counter
+% assert Rational(20 + 1, 2) == Rational(21, 2)
+% loi = Counter(a + b for a in range(1, 7) for b in range(1, 7))
+% assert Rational(loi[2], 36) == Rational(1, 36)
+% assert Rational(loi[7], 36) == Rational(1, 6)
+% assert sum(Rational(v * c, 36) for v, c in loi.items()) == 7
+% END-VERIFY
+\begin{corrige}{TCOMPL-ECH-EX-038}
+\textbf{1.} Pour une loi uniforme sur $\{1,\ldots,n\}$, $E(X)=\dfrac{n+1}{2}$. On résout
+\[
+  \frac{n+1}{2} = 10{,}5 \iff n+1 = 21 \iff n = 20 .
+\]
+
+\textbf{2.} La somme $S=2$ ne s'obtient que d'une seule façon ($1+1$), alors que $S=7$ s'obtient de six façons ($1+6$, $2+5$, $3+4$, $4+3$, $5+2$, $6+1$). Sur les $36$ issues équiprobables :
+\[
+  P(S=2) = \frac{1}{36} \qquad \text{et} \qquad P(S=7) = \frac{6}{36} = \frac{1}{6}.
+\]
+Ces deux probabilités diffèrent, donc $S$ ne suit pas une loi uniforme : l'uniformité de chaque dé ne se transmet pas à leur somme.
+
+\textbf{3.} Par linéarité de l'espérance, $E(S) = E(X_1)+E(X_2) = 3{,}5+3{,}5 = 7$, ce qui est bien le double de l'espérance d'un dé, et correspond à la valeur centrale de $S$.
+\end{corrige}

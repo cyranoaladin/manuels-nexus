@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-ATT-EX-037", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "exercice", "capacites": ["TCOMPL-ATT-C7"], "capacites_codes": ["C7"], "methodes": [], "parcours": 1, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-037.tex", "corrige_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-037.tex", "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational, simplify
+% x = symbols('x', real=True)
+% a, b = 0, 15
+% f = Rational(1, b - a)
+% assert integrate(f, (x, a, b)) == 1
+% assert integrate(x * f, (x, a, b)) == Rational(15, 2)
+% moment2 = integrate(x**2 * f, (x, a, b))
+% assert simplify(moment2 - Rational(15, 2)**2) == Rational(75, 4)
+% assert simplify(Rational((b - a)**2, 12) - Rational(75, 4)) == 0
+% assert integrate(f, (x, 0, 5)) == Rational(1, 3)
+% assert integrate(f, (x, 10, 15)) == Rational(1, 3)
+% END-VERIFY
+\begin{exercice}{TCOMPL-ATT-EX-037}{1}{15}
+Un métro passe toutes les $15$ minutes. Un voyageur arrive à la station sans connaître l'horaire : son temps d'attente $X$, en minutes, suit la loi uniforme sur $[0\,;15]$.
+\begin{enumerate}
+  \item Donner la densité de $X$ et vérifier qu'il s'agit bien d'une densité de probabilité.
+  \item Déterminer la fonction de répartition $F$ de $X$ sur $[0\,;15]$.
+  \item Calculer $P(X \leq 5)$ puis $P(10 \leq X \leq 15)$. Que remarque-t-on ?
+  \item Calculer $E(X)$ et $V(X)$, et interpréter $E(X)$.
+\end{enumerate}
+\end{exercice}

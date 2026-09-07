@@ -1,0 +1,26 @@
+% META: {"id": "TCOMPL-ME-CO-031", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-ME-EX-031", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, limit, oo, Rational
+% n = symbols('n', positive=True, integer=True)
+% assert limit((2*n - 7) / (5*n + 1), n, oo) == Rational(2, 5)
+% assert limit(3 * Rational(1, 4)**n + 2, n, oo) == 2
+% assert limit(n**2 - 4*n, n, oo) == oo
+% assert limit(n * (n - 4), n, oo) == oo
+% END-VERIFY
+\begin{corrige}{TCOMPL-ME-EX-031}
+\textbf{1.} Numérateur et dénominateur tendent vers $+\infty$ : c'est la forme indéterminée $\dfrac{\infty}{\infty}$. On factorise par $n$, le terme dominant :
+\[
+  u_n = \frac{n\left(2-\frac{7}{n}\right)}{n\left(5+\frac{1}{n}\right)} = \frac{2-\frac{7}{n}}{5+\frac{1}{n}} \xrightarrow[n\to+\infty]{} \frac{2}{5} = 0{,}4 .
+\]
+
+\textbf{2.} Aucune indétermination ici : $0{,}25 \in\ ]{-1}\,;1[$, donc $0{,}25^n$ tend vers $0$. Par opérations sur les limites (produit puis somme) :
+\[
+  v_n = 3\times0{,}25^n + 2 \xrightarrow[n\to+\infty]{} 3\times0 + 2 = 2 .
+\]
+
+\textbf{3.} $n^2$ tend vers $+\infty$ et $-4n$ tend vers $-\infty$ : c'est la forme indéterminée $(+\infty)+(-\infty)$. On factorise par $n$ :
+\[
+  w_n = n(n-4).
+\]
+Le facteur $n$ tend vers $+\infty$ et le facteur $n-4$ tend vers $+\infty$, donc, par produit, $w_n$ tend vers $+\infty$.
+\end{corrige}

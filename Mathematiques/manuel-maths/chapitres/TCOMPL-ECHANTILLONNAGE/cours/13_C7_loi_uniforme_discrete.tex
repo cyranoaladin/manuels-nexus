@@ -1,0 +1,72 @@
+% META: {"id": "TCOMPL-ECH-CR-013", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "cours", "capacites_codes": ["C7"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "needs_review"}
+
+\section{La loi uniforme sur $\{1,2,\ldots,n\}$}
+
+% ============================================================
+% STRATE 1 — Definition
+% ============================================================
+
+\definition[1]{
+Soit $n$ un entier naturel non nul. Une variable aleatoire $X$ suit la \textbf{loi uniforme} sur $\{1,2,\ldots,n\}$ lorsque ses $n$ valeurs possibles ont toutes la \textbf{même} probabilite :
+\[
+  P(X=k) = \frac{1}{n} \qquad \text{pour tout } k \in \{1,2,\ldots,n\}.
+\]
+}
+
+\margeAppui{
+C'est la traduction de l'equiprobabilite : aucune valeur n'est privilegiee. La somme des probabilites vaut bien $n \times \dfrac{1}{n} = 1$, comme l'exige toute loi de probabilite.
+}
+
+\exemple{
+Le lancer d'un de equilibre a six faces : $X$ est le numero obtenu, $P(X=k) = \dfrac{1}{6}$ pour $k$ de $1$ a $6$.
+}
+
+% ============================================================
+% STRATE 2 — Esperance
+% ============================================================
+
+\propriete[Esperance de la loi uniforme]{
+Si $X$ suit la loi uniforme sur $\{1,2,\ldots,n\}$, alors
+\[
+  E(X) = \frac{n+1}{2}.
+\]
+}
+
+\demonstration{
+Par definition de l'esperance d'une variable aleatoire finie :
+\[
+  E(X) = \sum_{k=1}^{n} k\,P(X=k) = \sum_{k=1}^{n} k \times \frac{1}{n} = \frac{1}{n}\sum_{k=1}^{n} k .
+\]
+La somme des $n$ premiers entiers vaut $\displaystyle\sum_{k=1}^{n} k = \frac{n(n+1)}{2}$. Donc
+\[
+  E(X) = \frac{1}{n} \times \frac{n(n+1)}{2} = \frac{n+1}{2}.
+\]
+}
+
+\margeAppui{
+$\dfrac{n+1}{2}$ est le milieu de $1$ et de $n$ : pour une loi uniforme, l'esperance est le \textbf{centre} de l'intervalle des valeurs, ce qui est coherent avec l'idee de symetrie.
+}
+
+\exemple{
+Pour le de a six faces, $E(X) = \dfrac{6+1}{2} = 3{,}5$ : sur un grand nombre de lancers, la moyenne des numeros obtenus s'approche de $3{,}5$.
+}
+
+% BEGIN-VERIFY
+% from sympy import Rational, summation, symbols, simplify
+% k, n = symbols('k n', positive=True, integer=True)
+% # L'esperance calculee terme a terme redonne bien (n+1)/2.
+% formule = simplify(summation(k * Rational(1, 1) / n, (k, 1, n)))
+% assert simplify(formule - (n + 1) / 2) == 0
+% # Cas du de a six faces, calcule sans la formule.
+% valeurs = list(range(1, 7))
+% esperance_de = sum(Rational(v, 6) for v in valeurs)
+% assert esperance_de == Rational(7, 2)
+% # Les probabilites somment bien a 1.
+% assert sum(Rational(1, 6) for _ in valeurs) == 1
+% # Un cas asymetrique de controle : n = 5 donne 3, pas 2.5.
+% assert sum(Rational(v, 5) for v in range(1, 6)) == 3
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Confondre la loi uniforme sur $\{1,\ldots,n\}$ avec la loi uniforme sur $\{0,1,\ldots,n\}$.} La premiere porte sur $n$ valeurs et a pour esperance $\dfrac{n+1}{2}$ ; la seconde porte sur $n+1$ valeurs et a pour esperance $\dfrac{n}{2}$. Toujours compter les valeurs possibles avant d'appliquer une formule.
+}

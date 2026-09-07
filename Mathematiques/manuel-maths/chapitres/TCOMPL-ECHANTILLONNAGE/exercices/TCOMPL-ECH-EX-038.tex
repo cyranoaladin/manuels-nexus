@@ -1,0 +1,25 @@
+% META: {"id": "TCOMPL-ECH-EX-038", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "exercice", "capacites": ["TCOMPL-ECH-C7"], "capacites_codes": ["C7"], "methodes": [], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/exercices/TCOMPL-ECH-EX-038.tex", "corrige_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-038.tex", "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Rational, solve, symbols
+% # Une uniforme sur {1..n} d'esperance 10.5 : on resout (n+1)/2 = 10.5.
+% n = symbols('n', positive=True, integer=True)
+% assert solve(Rational(1, 2) * (n + 1) - Rational(21, 2), n) == [20]
+% # Verification directe pour n = 20.
+% assert sum(Rational(k, 20) for k in range(1, 21)) == Rational(21, 2)
+% # Contre-controle : n = 21 donnerait 11, pas 10.5.
+% assert sum(Rational(k, 21) for k in range(1, 22)) == 11
+% # Somme des deux des : la loi de la somme n'est pas uniforme.
+% from collections import Counter
+% loi = Counter(a + b for a in range(1, 7) for b in range(1, 7))
+% assert loi[7] == 6 and loi[2] == 1
+% assert len(set(loi.values())) > 1
+% esperance_somme = sum(Rational(v * c, 36) for v, c in loi.items())
+% assert esperance_somme == 7
+% END-VERIFY
+\begin{exercice}{TCOMPL-ECH-EX-038}{2}{15}
+\begin{enumerate}
+  \item Une variable aléatoire $X$ suit la loi uniforme sur $\{1,2,\ldots,n\}$ et son espérance vaut $10{,}5$. Déterminer $n$.
+  \item On lance deux dés équilibrés à six faces et on note $S$ la somme des deux numéros. Un élève affirme : « chaque dé suit une loi uniforme, donc $S$ aussi ». Réfuter cette affirmation en comparant $P(S=2)$ et $P(S=7)$.
+  \item Calculer $E(S)$ et vérifier la cohérence avec l'espérance d'un seul dé.
+\end{enumerate}
+\end{exercice}

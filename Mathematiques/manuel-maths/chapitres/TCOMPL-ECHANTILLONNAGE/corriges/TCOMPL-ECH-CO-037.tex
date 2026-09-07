@@ -1,0 +1,25 @@
+% META: {"id": "TCOMPL-ECH-CO-037", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ECH-EX-037", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% n = 12
+% esperance = sum(Rational(k, n) for k in range(1, n + 1))
+% assert esperance == Rational(13, 2)
+% assert sum(Rational(1, n) for k in (10, 11, 12)) == Rational(1, 4)
+% END-VERIFY
+\begin{corrige}{TCOMPL-ECH-EX-037}
+\textbf{1.} Le tirage est équiprobable sur les $12$ valeurs possibles : aucune n'est privilégiée, donc $X$ suit la loi uniforme sur $\{1,2,\ldots,12\}$ et
+\[
+  P(X=k) = \frac{1}{12} \qquad \text{pour tout } k \in \{1,\ldots,12\}.
+\]
+
+\textbf{2.} Par définition de l'espérance :
+\[
+  E(X) = \sum_{k=1}^{12} k \times \frac{1}{12} = \frac{1}{12}\times\frac{12\times13}{2} = \frac{13}{2} = 6{,}5 .
+\]
+On retrouve bien $\dfrac{n+1}{2}$ avec $n=12$, c'est-à-dire le milieu de $1$ et de $12$.
+
+\textbf{3.} Les trois derniers mois correspondent aux valeurs $10$, $11$ et $12$ :
+\[
+  P(X \geq 10) = 3 \times \frac{1}{12} = \frac{1}{4} = 0{,}25 .
+\]
+\end{corrige}

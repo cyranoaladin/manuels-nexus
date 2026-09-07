@@ -1,0 +1,28 @@
+% META: {"id": "TCOMPL-ATT-CO-038", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ATT-EX-038", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational, simplify
+% x = symbols('x', real=True)
+% f = Rational(1, 6)
+% assert integrate(x * f, (x, 2, 8)) == 5
+% assert integrate(x**2 * f, (x, 2, 8)) - 25 == 3
+% survie = lambda s: integrate(f, (x, s, 8))
+% assert survie(5) == Rational(1, 2)
+% assert simplify(survie(7) / survie(4)) == Rational(1, 4)
+% assert survie(3) == Rational(5, 6)
+% END-VERIFY
+\begin{corrige}{TCOMPL-ATT-EX-038}
+\textbf{1.} $E(X) = \dfrac{2+8}{2} = 5$ minutes et $V(X) = \dfrac{(8-2)^2}{12} = \dfrac{36}{12} = 3$.
+
+\textbf{2.} $P(X>5) = \dfrac{8-5}{8-2} = \dfrac{3}{6} = \dfrac{1}{2}$.
+
+\textbf{3.} Par définition d'une probabilité conditionnelle, et puisque $(X>7) \subset (X>4)$ :
+\[
+  P_{(X>4)}(X>7) = \frac{P(X>7)}{P(X>4)} = \frac{\frac{8-7}{6}}{\frac{8-4}{6}} = \frac{1}{4}.
+\]
+
+\textbf{4.} Si la loi était sans mémoire, cette probabilité conditionnelle devrait être égale à $P(X>3)$, c'est-à-dire à la probabilité de durer encore $3$ minutes à partir de zéro :
+\[
+  P(X>3) = \frac{8-3}{6} = \frac{5}{6} \neq \frac{1}{4}.
+\]
+La loi uniforme est bornée : plus le temps passe, plus la borne $8$ se rapproche, donc l'attente restante se réduit. L'exponentielle, elle, n'a pas de borne supérieure, et sa probabilité de survie $\mathrm{e}^{-\lambda t}$ vérifie exactement $\dfrac{\mathrm{e}^{-\lambda(s+t)}}{\mathrm{e}^{-\lambda s}} = \mathrm{e}^{-\lambda t}$ : c'est là toute la différence.
+\end{corrige}

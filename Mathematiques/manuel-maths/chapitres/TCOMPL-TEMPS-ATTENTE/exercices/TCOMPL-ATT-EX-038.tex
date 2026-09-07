@@ -1,0 +1,31 @@
+% META: {"id": "TCOMPL-ATT-EX-038", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "exercice", "capacites": ["TCOMPL-ATT-C7"], "capacites_codes": ["C7"], "methodes": [], "parcours": 2, "competences": ["raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-038.tex", "corrige_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-038.tex", "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational, exp, simplify, N
+% x = symbols('x', real=True)
+% # Uniforme sur [2, 8] : esperance 5, variance 3.
+% f = Rational(1, 6)
+% assert integrate(f, (x, 2, 8)) == 1
+% assert integrate(x * f, (x, 2, 8)) == 5
+% assert integrate(x**2 * f, (x, 2, 8)) - 25 == 3
+% assert Rational((8 - 2)**2, 12) == 3
+% # Absence de memoire : elle est VRAIE pour l'exponentielle, FAUSSE ici.
+% t = symbols('t', positive=True)
+% lam = Rational(1, 5)
+% survie_exp = exp(-lam * 3) 
+% cond_exp = exp(-lam * 6) / exp(-lam * 3)
+% assert simplify(cond_exp - survie_exp) == 0
+% # Pour l'uniforme sur [2,8] : P(X>5) vaut 1/2, mais P(X>7 | X>4) vaut 1/4.
+% survie = lambda s: integrate(f, (x, s, 8))
+% assert survie(5) == Rational(1, 2)
+% assert simplify(survie(7) / survie(4)) == Rational(1, 4)
+% assert survie(7) / survie(4) != survie(3)
+% END-VERIFY
+\begin{exercice}{TCOMPL-ATT-EX-038}{2}{20}
+La durée $X$ d'un trajet en navette, en minutes, suit la loi uniforme sur $[2\,;8]$.
+\begin{enumerate}
+  \item Calculer $E(X)$ et $V(X)$.
+  \item Calculer $P(X>5)$.
+  \item On sait que le trajet dure déjà depuis plus de $4$ minutes. Calculer la probabilité qu'il dure plus de $7$ minutes, c'est-à-dire $P_{(X>4)}(X>7)$.
+  \item En comparant le résultat de la question \textbf{3} à $P(X>3)$, expliquer pourquoi la loi uniforme, contrairement à la loi exponentielle, n'est pas sans mémoire.
+\end{enumerate}
+\end{exercice}

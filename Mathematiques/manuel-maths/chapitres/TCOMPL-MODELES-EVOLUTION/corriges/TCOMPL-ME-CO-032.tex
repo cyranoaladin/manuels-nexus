@@ -1,0 +1,22 @@
+% META: {"id": "TCOMPL-ME-CO-032", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-ME-EX-032", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, limit, oo, cos
+% import math
+% n = symbols('n', positive=True, integer=True)
+% for k in range(1, 300):
+%     assert -1 <= math.cos(k) <= 1
+%     assert 2 - 1/k <= 2 + math.cos(k)/k <= 2 + 1/k
+% assert limit(2 + cos(n)/n, n, oo) == 2
+% assert limit(1/(n + 1), n, oo) == limit(1/n, n, oo)
+% END-VERIFY
+\begin{corrige}{TCOMPL-ME-EX-032}
+\textbf{1.} Pour tout entier $n \geq 1$, $-1 \leq \cos n \leq 1$. En divisant par $n>0$, qui ne change pas le sens des inégalités :
+\[
+  -\frac{1}{n} \leq \frac{\cos n}{n} \leq \frac{1}{n},
+\]
+puis en ajoutant $2$ aux trois membres : $2-\dfrac{1}{n} \leq t_n \leq 2+\dfrac{1}{n}$.
+
+\textbf{2.} Les deux suites encadrantes $\left(2-\dfrac{1}{n}\right)$ et $\left(2+\dfrac{1}{n}\right)$ convergent toutes deux vers $2$, puisque $\dfrac{1}{n}$ tend vers $0$. D'après le \textbf{théorème des gendarmes}, $(t_n)$ converge vers $2$.
+
+\textbf{3.} L'affirmation confond l'ordre des termes et l'ordre des limites. Le passage à la limite ne conserve que l'inégalité \emph{large} : de $\dfrac{1}{n+1} < \dfrac{1}{n}$ on ne peut déduire que $\displaystyle\lim \frac{1}{n+1} \leq \lim \frac{1}{n}$. Ici les deux limites valent $0$ : l'inégalité stricte entre les termes est bien réelle à chaque rang, et disparaît pourtant à la limite.
+\end{corrige}

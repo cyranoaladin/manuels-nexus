@@ -1,0 +1,32 @@
+% META: {"id": "TCOMPL-ATT-CO-037", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ATT-EX-037", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational, simplify
+% x = symbols('x', real=True)
+% f = Rational(1, 15)
+% assert integrate(f, (x, 0, 15)) == 1
+% assert integrate(x * f, (x, 0, 15)) == Rational(15, 2)
+% variance = integrate(x**2 * f, (x, 0, 15)) - Rational(15, 2)**2
+% assert variance == Rational(75, 4)
+% assert integrate(f, (x, 0, 5)) == integrate(f, (x, 10, 15))
+% END-VERIFY
+\begin{corrige}{TCOMPL-ATT-EX-037}
+\textbf{1.} La densité est constante sur $[0\,;15]$ : $f(x) = \dfrac{1}{15-0} = \dfrac{1}{15}$ pour $x \in [0\,;15]$, et $f(x)=0$ ailleurs. Elle est positive, et
+\[
+  \int_0^{15} \frac{1}{15}\,\mathrm{d}x = \frac{1}{15}\times 15 = 1 .
+\]
+C'est bien une densité de probabilité.
+
+\textbf{2.} Pour $x \in [0\,;15]$ :
+\[
+  F(x) = P(X\leq x) = \int_0^{x} \frac{1}{15}\,\mathrm{d}t = \frac{x}{15}.
+\]
+On a bien $F(0)=0$ et $F(15)=1$.
+
+\textbf{3.} $P(X\leq5) = \dfrac{5}{15} = \dfrac{1}{3}$ et $P(10\leq X\leq 15) = \dfrac{15-10}{15} = \dfrac{1}{3}$. Les deux probabilités sont égales : pour une loi uniforme, seule la \emph{longueur} de l'intervalle compte, pas sa position.
+
+\textbf{4.} $E(X) = \dfrac{0+15}{2} = 7{,}5$ minutes : c'est l'attente moyenne d'un voyageur arrivant au hasard, soit la moitié de l'intervalle entre deux métros. Et
+\[
+  V(X) = \frac{(15-0)^2}{12} = \frac{225}{12} = 18{,}75 \ \text{(minutes}^2\text{)},
+\]
+soit un écart-type d'environ $4{,}33$ minutes.
+\end{corrige}
