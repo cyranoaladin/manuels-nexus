@@ -90,9 +90,18 @@ def _fixture_root(tmp_path: Path, *, copies: int) -> Path:
     """Rejoue la contamination : un corps canonique recopie sous N identites."""
 
     root = tmp_path / "root"
-    body = "\\begin{exercice}{CH-EX-001}{1}{10}\n" + ("Enonce authentique. " * 12) + "\n\\end{exercice}"
+    # Le remplissage reel reecrit l'argument d'identite dans chaque copie :
+    # le diff de deux exemplaires ne porte que sur cette ligne. La fixture le
+    # reproduit, sans quoi elle testerait un mecanisme qui n'a pas eu lieu.
+    enonce = "Enonce authentique. " * 12
     for index in range(1, copies + 1):
-        _write(root, f"chapitres/CH/exercices/CH-EX-{index:03d}.tex", f"CH-EX-{index:03d}", body)
+        identifiant = f"CH-EX-{index:03d}"
+        body = (
+            "\\begin{exercice}{" + identifiant + "}{1}{10}\n"
+            + enonce
+            + "\n\\end{exercice}"
+        )
+        _write(root, f"chapitres/CH/exercices/{identifiant}.tex", identifiant, body)
     inventory = {
         "canonical_targets": [
             {
@@ -173,3 +182,43 @@ def test_no_true_product_clone_remains_open(ledger):
     """
 
     assert ledger["summary"]["TRUE_PRODUCT_CLONES_OPEN"] == 0
+
+
+def test_the_identity_argument_never_downgrades_a_clone_to_a_near_clone(
+    ledger_module, tmp_path: Path
+) -> None:
+    """Deux copies exactes ne sont pas des « quasi-clones ».
+
+    `SOURCE_CLONE_WITH_DISTINCT_IDS` existe pour nommer exactement ce cas :
+    des corps identiques presentes comme des objets distincts. Il lisait zero
+    parce que le corps compare portait encore l'identite -- l'argument de
+    `\\begin{exercice}{<id>}` --, si bien que chaque copie etait unique par
+    construction et tombait dans la classe plus faible des quasi-clones.
+    """
+
+    enonce = "Etudier les variations de $f(x) = x^3 - 3x^2 + 2$ sur $\\mathbb{R}$."
+    a = tmp_path / "a.tex"
+    b = tmp_path / "b.tex"
+    a.write_text(
+        '% META: {"id": "TEXP-ARI-EX-010", "chapitre": "TEXP-ARITHMETIQUE"}\n'
+        "\\begin{exercice}{TEXP-ARI-EX-010}{1}{12}\n" + enonce + "\n"
+        "\\end{exercice}\n",
+        encoding="utf-8",
+    )
+    b.write_text(
+        '% META: {"id": "TCOMPL-AIR-EX-010", "chapitre": "TCOMPL-CALCULS-AIRES"}\n'
+        "\\begin{exercice}{TCOMPL-AIR-EX-010}{1}{12}\n" + enonce + "\n"
+        "\\end{exercice}\n",
+        encoding="utf-8",
+    )
+    assert ledger_module._body(a) == ledger_module._body(b)
+
+    c = tmp_path / "c.tex"
+    c.write_text(
+        '% META: {"id": "TCOMPL-AIR-EX-011", "chapitre": "TCOMPL-CALCULS-AIRES"}\n'
+        "\\begin{exercice}{TCOMPL-AIR-EX-011}{1}{12}\n"
+        "Etudier les variations de $f(x) = x^3 - 3x^2 + 5$ sur $\\mathbb{R}$.\n"
+        "\\end{exercice}\n",
+        encoding="utf-8",
+    )
+    assert ledger_module._body(a) != ledger_module._body(c)

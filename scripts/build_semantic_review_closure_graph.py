@@ -56,6 +56,7 @@ from __future__ import annotations
 import argparse
 import collections
 import hashlib
+import importlib.util
 import json
 import re
 import sys
@@ -83,18 +84,52 @@ def _digest(text: str) -> str:
     return "sha256:" + hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
+_CLONE_LEDGER = None
+
+
+def _clone_ledger():
+    """La definition de l'identite d'un objet vit a un seul endroit.
+
+    Deux producteurs qui comparent des corps doivent retirer la meme chose,
+    sinon l'un voit un clone que l'autre declare unique.
+    """
+
+    global _CLONE_LEDGER
+    if _CLONE_LEDGER is None:
+        spec = importlib.util.spec_from_file_location(
+            "p0_clone_identity", ROOT / "scripts/build_p0_content_clone_ledger.py"
+        )
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        _CLONE_LEDGER = module
+    return _CLONE_LEDGER
+
+
 def canonical_body(path: Path) -> str:
-    """Le corps de l'objet, sans sa ligne META et sans variation d'espaces.
+    """Le corps de l'objet, sans son identite ni variation d'espaces.
 
     La ligne META porte l'identite (id, chapitre, capacites) : deux objets qui
     ne different que par elle sont deux objets differents portant le meme
     texte. C'est exactement la situation qu'on veut voir, donc on la retire du
     corps au lieu de la laisser masquer l'egalite.
+
+    Le corps la porte une SECONDE fois, dans l'argument de
+    `\\begin{exercice}{<id>}` ou de `\\begin{corrige}{<ref>}`. Tant qu'elle y
+    restait, deux copies exactes logees dans deux chapitres differents
+    comptaient pour deux unites semantiques distinctes, et la reduction
+    annoncait un corpus plus riche qu'il n'est. On neutralise donc les
+    identifiants que l'objet DECLARE -- les siens, jamais ceux qu'il cite.
     """
-    lines = path.read_text(encoding="utf-8", errors="replace").split("\n")
+    text = path.read_text(encoding="utf-8", errors="replace")
+    lines = text.split("\n")
+    meta: dict[str, Any] = {}
     if lines and lines[0].lstrip().startswith("% META:"):
+        meta = _clone_ledger().read_meta(text)
         lines = lines[1:]
-    return " ".join("\n".join(lines).split())
+    body = "\n".join(lines)
+    for token in _clone_ledger().identity_tokens(meta):
+        body = body.replace(token, _clone_ledger().IDENTITY_PLACEHOLDER)
+    return " ".join(body.split())
 
 
 def numeric_skeleton(body: str) -> str:

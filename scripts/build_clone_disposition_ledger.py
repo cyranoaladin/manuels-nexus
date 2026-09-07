@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 import collections
 import hashlib
+import importlib.util
 import json
 import re
 import subprocess
@@ -49,9 +50,46 @@ def _meta(path: Path) -> dict[str, Any]:
         return {}
 
 
+_CLONE_IDENTITY = None
+
+
+def _identity_rule():
+    """La definition de l'identite d'un objet vit a un seul endroit.
+
+    Deux producteurs qui comparent des corps doivent retirer la meme chose,
+    sinon l'un voit un clone la ou l'autre declare deux objets distincts.
+    """
+
+    global _CLONE_IDENTITY
+    if _CLONE_IDENTITY is None:
+        spec = importlib.util.spec_from_file_location(
+            "clone_identity_rule",
+            Path(__file__).resolve().parent / "build_p0_content_clone_ledger.py",
+        )
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        _CLONE_IDENTITY = module
+    return _CLONE_IDENTITY
+
+
 def _body(path: Path) -> str:
-    lines = path.read_text(encoding="utf-8", errors="ignore").splitlines()
-    return "\n".join(line for line in lines[1:] if line.strip())
+    """Le corps de l'objet, ligne META et identite declaree retirees.
+
+    Retirer la seule ligne `% META:` ne suffisait pas : le corps nomme l'objet
+    une seconde fois, dans l'argument de `\\begin{exercice}{<id>}`. Chaque
+    copie etait donc unique par construction, et
+    `SOURCE_CLONE_WITH_DISTINCT_IDS` -- la disposition ecrite pour ce cas
+    precis -- ne pouvait jamais s'appliquer : les copies exactes tombaient
+    dans la classe plus faible des quasi-clones.
+    """
+
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    lines = text.splitlines()
+    body = "\n".join(line for line in lines[1:] if line.strip())
+    rule = _identity_rule()
+    for token in rule.identity_tokens(_meta(path)):
+        body = body.replace(token, rule.IDENTITY_PLACEHOLDER)
+    return body
 
 
 def _normalised_body(body: str) -> str:

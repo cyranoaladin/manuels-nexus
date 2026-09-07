@@ -147,3 +147,42 @@ def test_the_graph_declares_its_freshness(payload) -> None:
 
     assessment = freshness.assess(payload["freshness"])
     assert assessment["FRESHNESS_STATUS"] == freshness.CURRENT
+
+
+def test_the_identity_argument_never_hides_a_copy(tmp_path: Path) -> None:
+    """Le corps porte l'identite une seconde fois, dans l'environnement.
+
+    Retirer la ligne META ne suffit pas : `\\begin{exercice}{<id>}` nomme
+    l'objet a nouveau. Tant qu'elle y restait, deux copies exactes logees dans
+    deux chapitres differents comptaient pour deux unites semantiques
+    distinctes, et la reduction annoncait un corpus plus riche qu'il n'est.
+    """
+
+    a = tmp_path / "a.tex"
+    b = tmp_path / "b.tex"
+    enonce = "Etudier les variations de $f(x) = x^3 - 3x^2 + 2$."
+    a.write_text(
+        '% META: {"id":"TEXP-ARI-EX-010"}\n'
+        "\\begin{exercice}{TEXP-ARI-EX-010}{1}{12}\n" + enonce + "\n"
+        "\\end{exercice}\n",
+        encoding="utf-8",
+    )
+    b.write_text(
+        '% META: {"id":"TCOMPL-AIR-EX-010"}\n'
+        "\\begin{exercice}{TCOMPL-AIR-EX-010}{1}{12}\n" + enonce + "\n"
+        "\\end{exercice}\n",
+        encoding="utf-8",
+    )
+    assert graph.canonical_body(a) == graph.canonical_body(b)
+
+    # Et la neutralisation ne fabrique pas d'egalite : deux enonces
+    # differents restent differents.
+    c = tmp_path / "c.tex"
+    c.write_text(
+        '% META: {"id":"TCOMPL-AIR-EX-011"}\n'
+        "\\begin{exercice}{TCOMPL-AIR-EX-011}{1}{12}\n"
+        "Etudier les variations de $f(x) = x^3 - 3x^2 + 5$.\n"
+        "\\end{exercice}\n",
+        encoding="utf-8",
+    )
+    assert graph.canonical_body(a) != graph.canonical_body(c)
