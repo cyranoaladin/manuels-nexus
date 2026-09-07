@@ -97,3 +97,31 @@ La différence entre les deux : la fonction affine est définie sur $\mathbb{R}$
 
 Ce parallèle est utile en modélisation : un capital qui augmente d'une somme fixe chaque mois est modélisé par une suite arithmétique, dont le terme général est une fonction affine de $n$ (voir situation d'accroche du chapitre — Offre A).
 }
+
+% BEGIN-VERIFY
+% # L'exemple : u_0 = 2, u_{n+1} = u_n + 5.
+% u, termes = 2, []
+% for _ in range(4):
+%     termes.append(u)
+%     u = u + 5
+% assert termes == [2, 7, 12, 17]
+% # La difference est constante, ce qui est la definition.
+% assert {termes[i+1] - termes[i] for i in range(3)} == {5}
+%
+% # Terme general : u_n = u_0 + n*r.
+% assert all(2 + 5*n == valeur for n, valeur in enumerate(termes))
+%
+% # Le contre-exemple : v_0 = 1, v_{n+1} = 2 v_n n'est pas arithmetique.
+% v, suite_v = 1, []
+% for _ in range(4):
+%     suite_v.append(v)
+%     v = 2 * v
+% assert suite_v == [1, 2, 4, 8]
+% differences = {suite_v[i+1] - suite_v[i] for i in range(3)}
+% assert differences == {1, 2, 4}
+% assert len(differences) > 1                  # donc pas de raison constante
+%
+% # Une suite constante est arithmetique de raison 0 : le cas limite tient.
+% constante = [7] * 5
+% assert {constante[i+1] - constante[i] for i in range(4)} == {0}
+% END-VERIFY

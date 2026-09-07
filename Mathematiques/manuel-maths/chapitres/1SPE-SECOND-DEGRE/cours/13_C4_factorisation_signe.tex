@@ -104,3 +104,37 @@ Entre $x_1$ et $x_2$, le signe de $f(x)$ est \emph{opposé} au signe de $a$. C'e
 
 \textbf{Test rapide :} calculer $f\!\left(\dfrac{x_1+x_2}{2}\right)$ (valeur entre les racines) et vérifier son signe. Si $a > 0$ et que ce test donne un résultat négatif, c'est cohérent.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify, solve, Rational, discriminant, factor
+%
+% x = symbols('x', real=True)
+%
+% # Delta > 0 : factorisation a(x-x1)(x-x2).
+% f = 2*x**2 - 5*x + 3
+% assert discriminant(f, x) == 1
+% x1, x2 = sorted(solve(f, x))
+% assert simplify(expand(2*(x - x1)*(x - x2)) - f) == 0
+%
+% # Signe : du signe de a a l'exterieur des racines, oppose entre elles.
+% for essai in (-5, 0, Rational(99, 100)):
+%     assert f.subs(x, essai) > 0            # a = 2 > 0, exterieur
+% for essai in (Rational(11, 10), Rational(5, 4), Rational(14, 10)):
+%     assert f.subs(x, essai) < 0            # entre 1 et 3/2
+% for essai in (Rational(3, 2), 1):
+%     assert f.subs(x, essai) == 0
+%
+% # Delta = 0 : carre parfait, signe de a partout sauf en la racine double.
+% g = -3*(x - 2)**2
+% assert discriminant(expand(g), x) == 0
+% for essai in (-1, 0, 1, 3, 5):
+%     assert g.subs(x, essai) < 0            # a = -3 < 0
+% assert g.subs(x, 2) == 0
+%
+% # Delta < 0 : pas de factorisation reelle, signe constant.
+% h = x**2 + x + 1
+% assert discriminant(h, x) == -3
+% assert factor(h) == h                      # irreductible sur les rationnels
+% for essai in (-100, -1, 0, 1, 100):
+%     assert h.subs(x, essai) > 0
+% END-VERIFY

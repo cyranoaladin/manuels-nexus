@@ -58,3 +58,34 @@ Un établissement bancaire propose deux formules d'épargne :
 \end{itemize}
 
 Cette situation sera entièrement résolue au Temps~7 (TD fil rouge), avec les outils du chapitre et un programme Python calculant le seuil de dépassement.
+
+% BEGIN-VERIFY
+% from sympy import Rational
+%
+% # Les deux offres de l'accroche.
+% def offre_A(mois):
+%     return 200 * mois                       # versement fixe, sans interets
+%
+% def offre_B(mois):
+%     return 1000 * (1 + Rational(4, 1000))**mois   # 0,4 % par mois
+%
+% # Les quatre premiers mois, arrondis a l'euro pres pour la lecture.
+% premiers = [(mois, offre_A(mois), float(offre_B(mois))) for mois in range(1, 5)]
+% assert [a for _, a, _ in premiers] == [200, 400, 600, 800]
+% assert abs(premiers[0][2] - 1004.0) < 0.5
+% assert abs(premiers[3][2] - 1016.1) < 0.5
+%
+% # Question 2 : quand A rattrape-t-elle B pour la premiere fois ?
+% rattrapage = next(m for m in range(1, 500) if offre_A(m) >= offre_B(m))
+% assert rattrapage == 6
+% assert offre_A(5) < offre_B(5) and offre_A(6) >= offre_B(6)
+%
+% # Question 3 : B reprend-elle l'avantage plus tard ? L'exponentielle finit
+% # toujours par depasser la lineaire.
+% reprise = next(m for m in range(rattrapage + 1, 5000) if offre_B(m) > offre_A(m))
+% assert reprise > rattrapage
+% assert offre_B(reprise) > offre_A(reprise)
+% # Et l'avantage ne se reperd plus ensuite, sur un large horizon.
+% for m in range(reprise, reprise + 200):
+%     assert offre_B(m) > offre_A(m)
+% END-VERIFY

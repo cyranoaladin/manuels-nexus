@@ -110,3 +110,38 @@ invraisemblables :
 Une prévision numérique ne vaut donc que dans les hypothèses et sur la période
 où le modèle reste pertinent.
 }
+
+% BEGIN-VERIFY
+% from sympy import Rational
+%
+% # Modele arithmetique : variation ABSOLUE constante.
+% def arithmetique(u0, r, n):
+%     return u0 + n*r
+% valeurs = [arithmetique(1000, 50, n) for n in range(6)]
+% assert valeurs == [1000, 1050, 1100, 1150, 1200, 1250]
+% assert {valeurs[i+1] - valeurs[i] for i in range(5)} == {50}
+% # Le TAUX, lui, n'est pas constant : c'est ce qui distingue les deux modeles.
+% taux = {Rational(valeurs[i+1] - valeurs[i], valeurs[i]) for i in range(5)}
+% assert len(taux) > 1
+%
+% # Modele geometrique : taux de variation constant, q = 1 + t.
+% def geometrique(u0, q, n):
+%     return u0 * q**n
+% t = Rational(5, 100)
+% q = 1 + t
+% assert q == Rational(21, 20)
+% croissance = [geometrique(1000, q, n) for n in range(6)]
+% assert {Rational(croissance[i+1] - croissance[i], croissance[i])
+%         for i in range(5)} == {t}
+% # Et la variation absolue, elle, augmente.
+% absolues = [croissance[i+1] - croissance[i] for i in range(5)]
+% assert absolues == sorted(absolues) and absolues[0] < absolues[-1]
+%
+% # Une baisse de 20 % correspond a q = 0,8 — et non a q = -0,2.
+% baisse = 1 + Rational(-20, 100)
+% assert baisse == Rational(4, 5)
+% apres_deux_baisses = geometrique(100, baisse, 2)
+% assert apres_deux_baisses == 64
+% # Deux baisses de 20 % ne font pas une baisse de 40 %.
+% assert apres_deux_baisses != 100 * (1 - Rational(40, 100))
+% END-VERIFY

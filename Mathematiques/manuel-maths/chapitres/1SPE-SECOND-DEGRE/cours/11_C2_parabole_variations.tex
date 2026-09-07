@@ -132,3 +132,36 @@ Les racines sont $x_1 = \dfrac{2 - 2\sqrt{3}}{4} = \dfrac{1 - \sqrt{3}}{2}$ et $
 
 Sur $]x_1\,;\,x_2[$, $h(x) < 0$ donc $f(x) < g(x)$ : la parabole de $f$ est en dessous de celle de $g$.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify, Rational, diff, solve
+%
+% x = symbols('x', real=True)
+% a, b, c = symbols('a b c', real=True, nonzero=True)
+%
+% # Le sommet annonce : alpha = -b/(2a), beta = f(alpha).
+% f = a*x**2 + b*x + c
+% alpha = -b/(2*a)
+% assert simplify(diff(f, x).subs(x, alpha)) == 0
+%
+% # La forme canonique redonne bien la forme developpee.
+% beta = f.subs(x, alpha)
+% assert simplify(expand(a*(x - alpha)**2 + beta) - expand(f)) == 0
+%
+% # Symetrie par rapport a x = alpha : f(alpha + t) = f(alpha - t).
+% t = symbols('t', real=True)
+% assert simplify(f.subs(x, alpha + t) - f.subs(x, alpha - t)) == 0
+%
+% # a > 0 : minimum. a < 0 : maximum. Verifie sur deux trinomes concrets.
+% monte = 2*x**2 - 8*x + 5             # alpha = 2
+% descend = -3*x**2 + 12*x - 1         # alpha = 2
+% for trinome, sens in ((monte, +1), (descend, -1)):
+%     sommet = solve(diff(trinome, x), x)[0]
+%     assert sommet == 2
+%     valeur = trinome.subs(x, sommet)
+%     for essai in (-3, 0, Rational(3, 2), Rational(5, 2), 4, 7):
+%         if sens > 0:
+%             assert trinome.subs(x, essai) >= valeur
+%         else:
+%             assert trinome.subs(x, essai) <= valeur
+% END-VERIFY

@@ -129,3 +129,43 @@ En prenant la racine carrée (en tenant compte des deux signes) :
 \]
 D'où $x = \dfrac{-b \pm \sqrt{\Delta}}{2a}$, ce qui donne les deux racines $x_1$ et $x_2$. \hfill $\square$
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, sqrt, simplify, expand, solve, Rational, discriminant
+%
+% x = symbols('x', real=True)
+% a, b, c = symbols('a b c', real=True)
+%
+% # Le theoreme, verifie formellement : les deux racines annoncees annulent
+% # bien le trinome quand Delta > 0.
+% Delta = b**2 - 4*a*c
+% x1 = (-b - sqrt(Delta)) / (2*a)
+% x2 = (-b + sqrt(Delta)) / (2*a)
+% for racine in (x1, x2):
+%     assert simplify(expand((a*x**2 + b*x + c).subs(x, racine))) == 0
+%
+% # Cas Delta = 0 : la racine double est -b/(2a), et c'est bien le sommet.
+% trinome_double = x**2 - 6*x + 9
+% assert discriminant(trinome_double, x) == 0
+% assert solve(trinome_double, x) == [3]
+% assert simplify(expand((x - 3)**2) - trinome_double) == 0
+%
+% # Cas Delta > 0 : deux racines distinctes, sur un exemple chiffre.
+% trinome = 2*x**2 - 5*x + 3
+% assert discriminant(trinome, x) == 1
+% racines = sorted(solve(trinome, x))
+% assert racines == [1, Rational(3, 2)]
+%
+% # Cas Delta < 0 : aucune racine reelle.
+% sans_racine = x**2 + x + 1
+% assert discriminant(sans_racine, x) == -3
+% assert solve(sans_racine, x, domain='R') == [] or all(
+%     not r.is_real for r in solve(sans_racine, x))
+% # Et le trinome garde alors le signe de a partout.
+% for essai in (-10, -1, 0, Rational(1, 2), 3, 100):
+%     assert sans_racine.subs(x, essai) > 0
+%
+% # Somme et produit des racines, quand elles existent.
+% assert sum(racines) == Rational(5, 2)
+% assert racines[0] * racines[1] == Rational(3, 2)
+% END-VERIFY

@@ -156,3 +156,34 @@ On retrouve bien $f(x) = a(x - \alpha)^2 + \beta$.
 \]
 Sommet : $S(-1\,;\,-4)$.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify, Rational, degree, Poly
+%
+% x = symbols('x', real=True)
+%
+% # L'exemple : f(x) = 2x^2 - 5x + 3, et les trois images annoncees.
+% f = 2*x**2 - 5*x + 3
+% assert f.subs(x, 0) == 3
+% assert f.subs(x, 1) == 0
+% assert f.subs(x, 2) == 1
+% assert Poly(f, x).degree() == 2
+% assert Poly(f, x).all_coeffs() == [2, -5, 3]
+%
+% # Les contre-exemples : 3x + 7 est de degre 1, x^3 - 2x^2 + 1 de degre 3.
+% assert Poly(3*x + 7, x).degree() == 1
+% assert Poly(x**3 - 2*x**2 + 1, x).degree() == 3
+%
+% # a != 0 est la condition qui fait le second degre : avec a = 0 la forme
+% # canonique n'a plus de sens (division par 2a).
+% a, b, c = symbols('a b c', real=True)
+% canonique = a*(x + b/(2*a))**2 + (c - b**2/(4*a))
+% assert simplify(expand(canonique) - (a*x**2 + b*x + c)) == 0
+%
+% # Les trois formes du meme trinome coincident, sur f = 2x^2 - 5x + 3.
+% alpha = Rational(5, 4)
+% beta = f.subs(x, alpha)
+% assert beta == Rational(-1, 8)
+% assert simplify(expand(2*(x - alpha)**2 + beta) - f) == 0
+% assert simplify(expand(2*(x - 1)*(x - Rational(3, 2))) - f) == 0
+% END-VERIFY

@@ -93,3 +93,37 @@ La question « Quel est le bénéfice maximal ? » attend $\beta = f(\alpha)$.
 
 Ces deux réponses sont distinctes et doivent toutes les deux figurer dans la conclusion.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify, Rational, diff, solve
+%
+% x = symbols('x', real=True)
+%
+% # Exemple 1 : l'enclos le long d'un mur, 120 m de cloture.
+% aire = x * (120 - 2*x)
+% assert simplify(expand(aire) - (-2*x**2 + 120*x)) == 0
+% alpha = solve(diff(aire, x), x)[0]
+% assert alpha == 30 and 0 < alpha < 60
+% assert aire.subs(x, alpha) == 1800
+% # Maximum global sur le domaine, verifie par balayage.
+% for k in range(1, 600):
+%     assert aire.subs(x, Rational(k, 10)) <= 1800
+% # Les dimensions annoncees : 30 m perpendiculaires, 60 m paralleles.
+% assert 120 - 2*30 == 60 and 30*60 == 1800
+%
+% # Exemple 2 : la recette d'une entreprise.
+% q = symbols('q', real=True)
+% recette = q * (-Rational(1, 2)*q + 100)
+% assert simplify(expand(recette) - (-Rational(1, 2)*q**2 + 100*q)) == 0
+% alpha_q = solve(diff(recette, q), q)[0]
+% assert alpha_q == 100 and 0 <= alpha_q <= 200
+% assert recette.subs(q, 100) == 5000
+% for k in range(0, 201):
+%     assert recette.subs(q, k) <= 5000
+%
+% # La reserve du cours : si le sommet sort du domaine, l'extremum est au bord.
+% # Sur [120 ; 200], le sommet q = 100 n'est plus admissible.
+% valeurs = {k: recette.subs(q, k) for k in range(120, 201)}
+% assert max(valeurs, key=valeurs.get) == 120
+% assert valeurs[120] < 5000
+% END-VERIFY

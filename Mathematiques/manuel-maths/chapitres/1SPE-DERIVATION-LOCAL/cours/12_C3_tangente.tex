@@ -38,3 +38,34 @@
 \erreurFrequente{\textbf{Copie fautive :} lecture de l'ordonnée de $A$ comme nombre dérivé. \textbf{Correction :} l'ordonnée est $f(a)$ ; le nombre dérivé est la pente de la droite tangente.}
 \erreurFrequente{\textbf{Copie fautive :} droite « à peu près parallèle » ne passant pas par $A$. \textbf{Correction :} une tangente doit passer exactement par son point de contact.}
 \approfondissement{Procédé graphique complet : 1. repérer le point de contact ; 2. tracer ou identifier la tangente ; 3. choisir deux intersections nettes de cette droite avec le quadrillage ; 4. calculer le rapport des déplacements en conservant leur signe ; 5. pour la construction, placer depuis $A$ un second point par le même déplacement, puis relier les deux points.}
+
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, diff
+%
+% # La lecture graphique de l'exemple : une tangente passant par (1;2) et (3;3).
+% A, B_pt = (1, 2), (3, 3)
+% pente = Rational(B_pt[1] - A[1], B_pt[0] - A[0])
+% assert pente == Rational(1, 2)
+%
+% # Le contre-exemple : deux points de la COURBE donnent la pente d'une
+% # secante, pas le nombre derive. Sur f(x) = x^2, entre 1 et 3 :
+% carre = lambda t: t**2
+% pente_secante = Rational(carre(3) - carre(1), 3 - 1)
+% x = symbols('x', real=True)
+% nombre_derive = diff(x**2, x).subs(x, 1)
+% assert pente_secante == 4 and nombre_derive == 2
+% assert pente_secante != nombre_derive
+%
+% # Une secante coupe la courbe en deux points ; la tangente en touche un.
+% # Sur f(x)=x^2, la droite y = 4x - 3 rencontre la courbe en 1 et 3.
+% rencontres = [t for t in (-3, -1, 0, 1, 2, 3, 4) if carre(t) == 4*t - 3]
+% assert rencontres == [1, 3]
+% # La tangente en 1, y = 2x - 1, ne la rencontre qu'en 1.
+% tangentes = [t for t in (-3, -1, 0, 1, 2, 3, 4) if carre(t) == 2*t - 1]
+% assert tangentes == [1]
+%
+% # L'erreur frequente nommee : l'ordonnee de A n'est pas le nombre derive.
+% # En a = 2 sur la fonction carre, f(2) = 4 et f'(2) = 4 coincident par
+% # hasard ; en a = 3 elles different, ce qui suffit a les distinguer.
+% assert carre(3) == 9 and diff(x**2, x).subs(x, 3) == 6
+% END-VERIFY

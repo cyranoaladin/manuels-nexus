@@ -109,3 +109,55 @@ mobilisées ici.
 \textit{Remarque.} L'étude formelle du coût des algorithmes d'exponentiation
 dépasse le programme de première.
 }
+
+% BEGIN-VERIFY
+% import pathlib
+% from sympy import Rational
+%
+% # Les trois programmes du chapitre sont executes, et leurs sorties comparees
+% # a un calcul independant.
+% racine = pathlib.Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python")
+%
+% def charge(nom):
+%     espace = {}
+%     source = (racine / nom).read_text(encoding="utf-8")
+%     # On retire les appels d'affichage : on veut les fonctions, pas la trace.
+%     lignes = [l for l in source.splitlines() if not l.startswith("print")
+%               and not l.startswith("n, val")]
+%     exec(compile("\n".join(lignes), nom, "exec"), espace)
+%     return espace
+%
+% # Programme 1 : terme d'une suite recurrente u_{n+1} = 2 u_n + 1.
+% terme = charge("1SPE-SUITES-CR-016-TERME.py")["terme"]
+% attendu, u = None, 3
+% for _ in range(5):
+%     u = 2*u + 1
+% attendu = u
+% assert terme(3, 5) == attendu == 127
+% assert terme(3, 0) == 3                     # zero iteration : le terme initial
+%
+% # Programme 2 : somme geometrique.
+% somme = charge("1SPE-SUITES-CR-016-SOMME.py")["somme"]
+% assert somme(2, 3, 4) == sum(2 * 3**i for i in range(5)) == 242
+% # Elle coincide avec la formule fermee.
+% assert somme(2, 3, 4) == 2 * Rational(1 - 3**5, 1 - 3)
+%
+% # Programme 3 : recherche de seuil.
+% seuil = charge("1SPE-SUITES-CR-016-SEUIL.py")["seuil_geometrique"]
+% rang, valeur = seuil(1, 1.05, 2)
+% assert rang == 15 and valeur > 2
+% # Le rang precedent ne depasse pas le seuil : c'est bien le PLUS PETIT.
+% assert 1 * 1.05**(rang - 1) <= 2 < 1 * 1.05**rang
+%
+% # Les gardes du programme refusent les cas ou la boucle ne terminerait pas.
+% for mauvais in ((0, 1.05, 2), (1, 1.0, 2), (1, 0.5, 2)):
+%     try:
+%         seuil(*mauvais)
+%     except ValueError:
+%         pass
+%     else:
+%         raise AssertionError(f"{mauvais} aurait du etre refuse")
+%
+% # La remarque sur q = 0 et n = 0 : 0**0 vaut 1 en Python, ce qui redonne u_0.
+% assert 0**0 == 1
+% END-VERIFY

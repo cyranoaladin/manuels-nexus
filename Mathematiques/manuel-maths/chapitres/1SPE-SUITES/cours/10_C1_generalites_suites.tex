@@ -121,3 +121,30 @@ un programme, construire un tableau de valeurs et observer leur évolution. Il
 n'est donc pas nécessaire de connaître une expression $u_n=f(n)$ pour étudier
 des exemples de suites en Première.
 }
+
+% BEGIN-VERIFY
+% from sympy import sqrt, I
+%
+% # L'exemple : u_n = 2n + 1.
+% u = lambda n: 2*n + 1
+% assert [u(n) for n in range(4)] == [1, 3, 5, 7]
+%
+% # Le contre-exemple : sqrt(-n) n'est pas reel pour n >= 1.
+% assert sqrt(-1) == I
+% assert not sqrt(-1).is_real
+% assert sqrt(0).is_real                       # seul n = 0 donnerait un reel
+%
+% # Une suite est bien une fonction de N dans R : chaque rang a une image, et
+% # une seule.
+% images = {n: u(n) for n in range(10)}
+% assert len(images) == 10
+% assert all(isinstance(v, int) for v in images.values())
+%
+% # Formule explicite et recurrence peuvent decrire la MEME suite : ici
+% # v_0 = 1 et v_{n+1} = v_n + 2 redonne u.
+% v, valeurs = 1, []
+% for _ in range(10):
+%     valeurs.append(v)
+%     v = v + 2
+% assert valeurs == [u(n) for n in range(10)]
+% END-VERIFY

@@ -149,3 +149,40 @@ exponentielle discrète}.
 Ces observations illustrent l'approche intuitive de la capacité C8 et restent
 sans preuve formelle en Première.
 }
+
+% BEGIN-VERIFY
+% from sympy import Rational, nan
+%
+% # L'exemple : u_0 = 2, u_{n+1} = 3 u_n.
+% u, termes = 2, []
+% for _ in range(5):
+%     termes.append(u)
+%     u = 3 * u
+% assert termes == [2, 6, 18, 54, 162]
+% assert {Rational(termes[i+1], termes[i]) for i in range(4)} == {3}
+% assert all(2 * 3**n == valeur for n, valeur in enumerate(termes))
+%
+% # La remarque du cours : q = 0 est autorise.
+% w, suite_w = 5, []
+% for _ in range(4):
+%     suite_w.append(w)
+%     w = 0 * w
+% assert suite_w == [5, 0, 0, 0]
+%
+% # La suite identiquement nulle est geometrique pour TOUT reel q.
+% nulle = [0] * 5
+% for q in (0, 1, -3, Rational(7, 2)):
+%     assert all(nulle[i+1] == q * nulle[i] for i in range(4))
+%
+% # Le quotient u_{n+1}/u_n n'est donc PAS la definition generale : sur la
+% # suite nulle il ne designe aucun nombre.
+% assert Rational(nulle[1], nulle[0]) is nan
+%
+% # Il redevient une caracterisation des que les termes sont non nuls.
+% assert all(Rational(termes[i+1], termes[i]) == 3 for i in range(4))
+%
+% # Une suite arithmetique non constante n'est pas geometrique.
+% arithmetique = [2, 7, 12, 17]
+% quotients = {Rational(arithmetique[i+1], arithmetique[i]) for i in range(3)}
+% assert len(quotients) > 1
+% END-VERIFY

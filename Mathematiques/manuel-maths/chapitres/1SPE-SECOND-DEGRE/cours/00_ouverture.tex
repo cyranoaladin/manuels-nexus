@@ -50,3 +50,36 @@ On découpe quatre carrés identiques de côté $x$ (en cm) aux coins d'une feui
 On obtient $V(x) = x(30 - 2x)(20 - 2x)$, qui se développe en un polynôme de degré 3. En pratique, on étudie souvent la version simplifiée $V(x) \approx 4x^3 - 100x^2 + 600x$ sur $]0\,;\,10[$, et on cherche le maximum. Les outils de ce chapitre — forme canonique, discriminant, tableau de variations — permettent de résoudre ce type de problème d'optimisation.
 
 Cette situation sera entièrement traitée au Temps~7 (TD fil rouge), une fois les capacités C1 à C6 acquises.
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, diff, solve, Rational, simplify
+%
+% x = symbols('x', real=True)
+%
+% # La situation d'accroche : boite obtenue en decoupant quatre carres de cote
+% # x aux coins d'un carton 30 x 20, puis en relevant les bords.
+% volume = x * (30 - 2*x) * (20 - 2*x)
+% assert simplify(expand(volume) - (4*x**3 - 100*x**2 + 600*x)) == 0
+%
+% # Domaine : il faut x > 0 et les deux dimensions restantes positives.
+% assert 30 - 2*x != 0
+% domaine = (0, 10)                        # 20 - 2x > 0 impose x < 10
+% assert volume.subs(x, 0) == 0 and volume.subs(x, 10) == 0
+%
+% # Le maximum se trouve en annulant la derivee, et il est bien dans ]0;10[.
+% critiques = [r for r in solve(diff(volume, x), x) if r.is_real]
+% dans_domaine = [r for r in critiques if domaine[0] < r < domaine[1]]
+% assert len(dans_domaine) == 1
+% optimal = dans_domaine[0]
+% assert Rational(39, 10) < optimal < Rational(41, 10)
+%
+% # C'est un maximum GLOBAL sur le domaine, verifie par balayage.
+% meilleur = volume.subs(x, optimal)
+% for k in range(1, 100):
+%     essai = Rational(k, 10)
+%     assert volume.subs(x, essai) <= meilleur
+%
+% # La boite est bien ouverte : sa hauteur est x, sa base (30-2x)(20-2x).
+% hauteur, base = optimal, (30 - 2*optimal) * (20 - 2*optimal)
+% assert simplify(hauteur * base - meilleur) == 0
+% END-VERIFY

@@ -116,3 +116,38 @@ u_1=\frac12,\qquad u_{10}=\frac{10}{11},\qquad u_{100}=\frac{100}{101}.
 Ces trois valeurs sont inférieures à $1$ et de plus en plus proches de $1$.
 On conjecture que les termes se rapprochent de $1$ lorsque $n$ devient grand. Cette observation ne constitue pas une preuve.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, simplify
+%
+% x = symbols('x', real=True)
+%
+% # Methode 1 : signe de u_{n+1} - u_n, sur u_n = 3n + 1.
+% u = lambda k: 3*k + 1
+% assert all(u(k + 1) - u(k) == 3 for k in range(20))
+% assert all(u(k + 1) > u(k) for k in range(20))
+%
+% # Methode 2 : rapport v_{n+1}/v_n, sur v_n = 5*(1/2)^n.
+% v = lambda k: 5 * Rational(1, 2)**k
+% assert all(v(k) > 0 for k in range(20))
+% assert all(v(k + 1) / v(k) == Rational(1, 2) for k in range(20))
+% assert all(v(k + 1) < v(k) for k in range(20))
+%
+% # Methode 3 : comparaison a une fonction, sur w_n = n^2 - 4n + 1.
+% f = x**2 - 4*x + 1
+% fp = diff(f, x)
+% assert simplify(fp - (2*x - 4)) == 0
+% assert fp.subs(x, 2) == 0
+% assert all(fp.subs(x, t) < 0 for t in (0, 1, Rational(3, 2)))
+% assert all(fp.subs(x, t) > 0 for t in (Rational(5, 2), 3, 10))
+% w = lambda k: k**2 - 4*k + 1
+% assert w(0) > w(1) > w(2)
+% assert w(2) < w(3) < w(4) < w(5)
+%
+% # Le piege que la methode 2 impose d'eviter : le rapport ne conclut que si
+% # les termes gardent un signe constant. Sur (-1)^n il vaut -1, et la suite
+% # n'est ni croissante ni decroissante.
+% alterne = lambda k: (-1)**k
+% assert all(Rational(alterne(k + 1), alterne(k)) == -1 for k in range(10))
+% assert alterne(1) < alterne(0) and alterne(2) > alterne(1)
+% END-VERIFY

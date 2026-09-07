@@ -124,3 +124,37 @@ L'ensemble des solutions est $\{-2\,;\,-1\,;\,1\,;\,2\}$.
 \medskip
 \textbf{Piège fréquent.} Si l'équation en $u$ donne une solution $u < 0$, on la rejette car $x^2 \geq 0$.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, solveset, S, Interval, Union, Rational, discriminant
+%
+% x = symbols('x', real=True)
+%
+% # L'exemple : x^2 - x - 6 > 0.
+% f = x**2 - x - 6
+% assert discriminant(f, x) == 25
+% assert sorted(solve(f, x)) == [-2, 3]
+%
+% # La solution annoncee est la reunion des deux intervalles ouverts exterieurs.
+% solution = solveset(f > 0, x, S.Reals)
+% attendue = Union(Interval.open(S.NegativeInfinity, -2),
+%                  Interval.open(3, S.Infinity))
+% assert solution == attendue
+%
+% # Controle point par point : le trinome est positif dehors, negatif dedans.
+% for essai in (-10, -3, Rational(-21, 10), Rational(31, 10), 4, 50):
+%     assert f.subs(x, essai) > 0
+% for essai in (Rational(-19, 10), 0, 1, Rational(29, 10)):
+%     assert f.subs(x, essai) < 0
+% for essai in (-2, 3):
+%     assert f.subs(x, essai) == 0
+%
+% # L'inegalite LARGE ajoute les racines : la solution change.
+% large = solveset(f >= 0, x, S.Reals)
+% assert large != solution
+% assert -2 in large and -2 not in solution
+%
+% # Une inequation non ramenee a zero doit l'etre d'abord : x^2 > x + 6 a la
+% # meme solution que x^2 - x - 6 > 0.
+% assert solveset(x**2 > x + 6, x, S.Reals) == solution
+% END-VERIFY
