@@ -130,3 +130,60 @@ def test_the_corpus_carries_no_rotation_and_no_misalignment(payload: dict) -> No
 
 def test_the_committed_alignment_matches_the_producer(producer) -> None:
     assert producer.main(["--check"]) == 0
+
+
+def test_a_periodic_pattern_is_still_published_when_content_explains_it(
+    payload: dict,
+) -> None:
+    """La forme de la suite reste visible, meme quand elle s'explique.
+
+    Un chapitre equilibre -- autant d'exercices par capacite, ecrits dans
+    l'ordre du contrat -- produit naturellement une suite periodique. La
+    regle structurelle existait faute de preuve de contenu ; quand chaque
+    attribution du chapitre est corroboree par sa signature, la periodicite
+    n'est plus un soupcon. Elle n'est pas effacee pour autant : le motif est
+    publie, et l'ecart entre les deux compteurs dit exactement ce qui a ete
+    disculpe et par quoi.
+    """
+
+    summary = payload["summary"]
+    assert summary["ROUND_ROBIN_PATTERN_CHAPTERS"] >= summary[
+        "ROUND_ROBIN_CAPACITY_ASSIGNMENT"
+    ]
+    assert (
+        summary["ROUND_ROBIN_EXPLAINED_BY_CONTENT"]
+        == summary["ROUND_ROBIN_PATTERN_CHAPTERS"]
+        - summary["ROUND_ROBIN_CAPACITY_ASSIGNMENT"]
+    )
+    for chapitre in payload["round_robin_pattern_chapters"]:
+        info = payload["chapters"][chapitre]
+        assert info["round_robin"]["detected"] is True
+        if not info["round_robin_unexplained"]:
+            assert info["content_corroborated"] is True
+
+
+def test_a_rotation_without_content_proof_is_never_excused(producer) -> None:
+    """Sans signature, une rotation reste une rotation.
+
+    C'est l'etat exact du corpus au moment du remplissage : aucune signature
+    declaree, et une suite engendree par un compteur. La disculpe ne doit
+    jamais s'appliquer par defaut.
+    """
+
+    chapitres = {
+        "SANS_PREUVE": {
+            "round_robin": {"detected": True},
+            "content_corroborated": False,
+        }
+    }
+    assert chapitres["SANS_PREUVE"]["round_robin"]["detected"]
+    assert not chapitres["SANS_PREUVE"]["content_corroborated"]
+    # Sur le corpus : un chapitre sans signature ne peut pas etre corrobore.
+    payload = producer.build()
+    for chapitre, info in payload["chapters"].items():
+        if info.get("content_corroborated"):
+            assignations = [
+                a for a in payload["assignments"] if a["chapter"] == chapitre
+            ]
+            assert assignations
+            assert all(a["state"] == "ALIGNED" for a in assignations)

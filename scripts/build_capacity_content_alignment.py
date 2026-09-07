@@ -177,12 +177,38 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             }
 
     par_etat = collections.Counter(o["state"] for o in objets)
-    rotations = [ch for ch, info in chapitres.items() if info["round_robin"]["detected"]]
+
+    # LA PREUVE DE CONTENU L'EMPORTE SUR LA FORME DE LA SUITE. La regle
+    # structurelle existe parce qu'aucune preuve de contenu n'etait
+    # disponible : une suite periodique trahissait alors un compteur. Quand
+    # chaque attribution du chapitre est corroboree par sa signature, la
+    # periodicite s'explique autrement -- un chapitre equilibre, ou chaque
+    # capacite recoit le meme nombre d'exercices, produit naturellement une
+    # suite periodique. On publie donc les deux : le motif observe, et le
+    # soupcon qui subsiste apres corroboration.
+    par_chapitre: dict[str, collections.Counter] = collections.defaultdict(
+        collections.Counter
+    )
+    for objet in objets:
+        par_chapitre[objet["chapter"]][objet["state"]] += 1
+    for chapitre, info in chapitres.items():
+        compte = par_chapitre.get(chapitre, collections.Counter())
+        corrobore = compte.get(ALIGNED, 0) > 0 and compte.get(MISALIGNED, 0) == 0 \
+            and compte.get(UNVERIFIED, 0) == 0
+        info["content_corroborated"] = corrobore
+        info["round_robin_unexplained"] = (
+            info["round_robin"]["detected"] and not corrobore
+        )
+
+    motifs = [ch for ch, info in chapitres.items() if info["round_robin"]["detected"]]
+    rotations = [ch for ch, info in chapitres.items() if info["round_robin_unexplained"]]
     summary = {etat: par_etat.get(etat, 0) for etat in STATES}
     summary.update({
         "CAPACITY_ASSIGNMENTS_EXAMINED": len(objets),
         "CAPACITY_CONTENT_MISALIGNMENT": par_etat.get(MISALIGNED, 0),
         "ROUND_ROBIN_CAPACITY_ASSIGNMENT": len(rotations),
+        "ROUND_ROBIN_PATTERN_CHAPTERS": len(motifs),
+        "ROUND_ROBIN_EXPLAINED_BY_CONTENT": len(motifs) - len(rotations),
         "CHAPTERS_WITH_DECLARED_SIGNATURES": len(signatures.declared_chapters()),
         "STATES_SUM_EQUALS_TOTAL": sum(par_etat.values()) == len(objets),
         "APPROVES_NOTHING": True,
@@ -201,6 +227,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         ),
         "summary": summary,
         "round_robin_chapters": sorted(rotations),
+        "round_robin_pattern_chapters": sorted(motifs),
         "chapters": chapitres,
         "assignments": objets,
     }
