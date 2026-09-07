@@ -18,6 +18,13 @@ from typing import Any, Iterable, Mapping
 
 
 ROOT = Path(__file__).resolve().parents[1]
+# Le module importe un producteur voisin pour en lire la liste autoritative de
+# registres. Lance en script, `scripts/` est deja sur le chemin ; charge par
+# un test qui le prend par son fichier, il ne l'est pas -- et l'import
+# echouait alors, faisant tomber trois tests pour une raison sans rapport avec
+# ce qu'ils mesurent. Le module rend donc son propre dossier importable.
+if str(Path(__file__).resolve().parent) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
 OUTPUT = ROOT / "audit" / "CURRENT_REVIEW_DEBT_PARTITION.json"
 INVENTORY = Path("audit/INVENTAIRE_COLLECTION.json")
 ALGEBRA = Path("audit/CURRENT_ANOMALY_SET_ALGEBRA_RESIDUAL.json")

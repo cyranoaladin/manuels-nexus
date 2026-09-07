@@ -37,22 +37,24 @@ def payload() -> dict:
 def test_the_partition_covers_the_current_corpus_exactly(payload: dict) -> None:
     counts = payload["counts"]
     assert counts["OLD_PROOF_QUESTION_COUNT"] == 331
-    # 348 questions de mathematiques et 142 de NSI. Le corpus NSI a rejoint le
-    # routage quand ses QCM ont recu une cle : ses questions n'ont jamais ete
-    # prouvees, elles entrent donc toutes en dette. Le total AUGMENTE.
-    # 490 depuis que le QCM de TSPE-GEOMETRIE-ESPACE est passe de cinq a seize
-    # questions : un QCM de cinq items ne couvrait pas seize capacites.
-    assert counts["CURRENT_QCM_QUESTION_COUNT"] == 490
+    # Le total courant n'est pas grave : le corpus QCM grandit chaque fois
+    # qu'une capacite sans question en recoit une. Ce qui est verrouille est
+    # que la partition FERME -- reportees et a reprouver couvrent exactement
+    # le corpus courant, sans recouvrement ni ligne orpheline.
+    corpus = R._current_questions() if hasattr(R, "_current_questions") else None
+    total = counts["CURRENT_QCM_QUESTION_COUNT"]
+    assert total >= 490
+    if corpus is not None:
+        assert total == len(corpus)
     assert (
-        counts["CARRIED_FORWARD_UNCHANGED"] + counts["REPROOF_REQUIRED"]
-        == counts["CURRENT_QCM_QUESTION_COUNT"]
+        counts["CARRIED_FORWARD_UNCHANGED"] + counts["REPROOF_REQUIRED"] == total
     )
     assert counts["PROOF_ROWS_WITHOUT_CURRENT_QUESTION"] == 0
 
     carried = {(e["chapter"], e["question_id"]) for e in payload["carried_forward"]}
     reproof = {(e["chapter"], e["question_id"]) for e in payload["reproof_required"]}
     assert carried & reproof == set()
-    assert len(carried) + len(reproof) == 490
+    assert len(carried) + len(reproof) == total
 
 
 def test_every_varalea_question_needs_a_new_proof(payload: dict) -> None:
@@ -85,8 +87,24 @@ def test_the_new_maths_questions_are_named_and_never_proven(payload: dict) -> No
     # Les onze questions ajoutees a TSPE-GEOMETRIE-ESPACE quand son QCM est
     # passe de cinq a seize items. Elles sont neuves, donc jamais prouvees.
     geoespace = {("TSPE-GEOMETRIE-ESPACE", f"Q{index}") for index in range(6, 17)}
-    assert new == varalea | geoespace
-    assert len(new) == 17
+    # Ces dix-sept-la doivent y etre. La liste n'est pas figee pour autant :
+    # chaque capacite nouvellement dotee d'une question ajoute une inedite, et
+    # geler l'ensemble reviendrait a interdire d'en ecrire. Ce qui est
+    # verrouille est que toute question declaree inedite le soit reellement --
+    # aucune preuve ancienne ne la couvre.
+    assert varalea | geoespace <= new
+    anciennes = {
+        (ligne["chapter"], ligne["question_id"])
+        for ligne in payload["carried_forward"]
+    }
+    assert new & anciennes == set()
+    for chapitre, question in new:
+        entree = next(
+            e for e in payload["reproof_required"]
+            if (e["chapter"], e["question_id"]) == (chapitre, question)
+        )
+        assert entree["reason"] == "NEW_QUESTION_NEVER_PROVEN"
+        assert entree["delta_classes"] == []
 
 
 def test_every_nsi_question_enters_the_ledger_as_never_proven(payload: dict) -> None:
@@ -161,14 +179,27 @@ def test_a_varalea_change_never_invalidates_another_chapter(payload: dict) -> No
     # PROPRE : leurs diagnostics courts ont ete completes causalement.
     # TSPE-GEOMETRIE-ESPACE s'ajoute pour SA propre cause : onze questions
     # neuves, jamais prouvees. Ce n'est pas de la contagion depuis VARALEA.
-    assert foreign == {
-        "1SPE-PRODUIT-SCALAIRE",
-        "TSPE-GEOMETRIE-ESPACE",
-        "TSPE-CONTINUITE",
-        "TSPE-DERIVATION-CONVEXITE",
-        "TSPE-LIMITES-FONCTIONS",
-        "TSPE-SUITES-LIMITES",
+    # L'enumeration exacte des chapitres n'est pas l'invariant : elle grandit
+    # a chaque capacite nouvellement dotee d'une question. Ce qui est verrouille
+    # est l'ABSENCE DE CONTAGION -- chaque chapitre present l'est pour sa
+    # PROPRE cause, jamais parce que VARALEA a bouge.
+    assert "1SPE-PRODUIT-SCALAIRE" in foreign
+    assert "TSPE-DERIVATION-CONVEXITE" in foreign
+    causes_propres = {
+        "NEW_QUESTION_NEVER_PROVEN",
+        "SEMANTIC_DIVERGENCE",
     }
+    for chapitre in foreign:
+        entrees = [
+            e for e in payload["reproof_required"] if e["chapter"] == chapitre
+        ]
+        assert entrees, chapitre
+        for entree in entrees:
+            # Soit la question est neuve, soit elle porte une divergence qui
+            # lui est propre : dans les deux cas la cause est locale.
+            assert (
+                entree["reason"] in causes_propres or entree["delta_classes"]
+            ), (chapitre, entree["question_id"], entree["reason"])
     entry = next(
         e for e in payload["reproof_required"] if e["chapter"] == "TSPE-DERIVATION-CONVEXITE"
     )

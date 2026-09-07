@@ -275,6 +275,48 @@ def _machine_verification(entries: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def _deja_declares() -> frozenset[str]:
+    """Empreintes deja portees par un autre registre de dette bloquante.
+
+    La liste des registres est celle de `build_residual_true_new_forensics`,
+    qui en est l'autorite : trois copies d'une meme liste finissent par
+    diverger.
+    """
+    scripts = str(Path(__file__).resolve().parent)
+    if scripts not in sys.path:
+        sys.path.insert(0, scripts)
+    forensics = __import__("importlib").import_module(
+        "build_residual_true_new_forensics"
+    )
+    empreintes: set[str] = set()
+    # L'algebre historique declare deja la dette qui SURVIT a la ligne de
+    # base sous une identite inchangee. Le lot couple existe pour declarer ce
+    # que sa reconstruction a cree ou reecrit, pas pour redeclarer cette
+    # dette-la : la revendiquer une seconde fois romprait la disjonction que
+    # la partition exige.
+    algebre = ROOT / "audit/CURRENT_ANOMALY_SET_ALGEBRA_RESIDUAL.json"
+    if algebre.is_file():
+        historique = json.loads(algebre.read_text(encoding="utf-8"))
+        ensembles = historique["full_current_algebra"]["sets"]
+        for classe in ("UNCHANGED", "APPROVED_TRANSITION_NEW", "TRUE_NEW"):
+            for empreinte in ensembles.get(classe) or []:
+                empreintes.add(str(empreinte))
+    for relative in forensics.DECLARED_DEBT_LEDGERS:
+        if Path(relative).name == OUTPUT.name:
+            continue
+        chemin = ROOT / relative
+        if not chemin.is_file():
+            continue
+        charge = json.loads(chemin.read_text(encoding="utf-8"))
+        for valeur in charge.values() if isinstance(charge, dict) else []:
+            if not isinstance(valeur, list):
+                continue
+            for ligne in valeur:
+                if isinstance(ligne, dict) and ligne.get("fingerprint"):
+                    empreintes.add(str(ligne["fingerprint"]))
+    return frozenset(empreintes)
+
+
 def build_ledger() -> dict[str, Any]:
     clone = _clone_module()
     inventory_module = _inventory_module()
@@ -327,6 +369,14 @@ def build_ledger() -> dict[str, Any]:
             fingerprint = fingerprint_by_path.get(relative)
             if fingerprint is None:
                 # Objet sans anomalie bloquante : rien a declarer ici.
+                continue
+            if fingerprint in _deja_declares():
+                # Un objet ecrit apres la decision qui a ouvert ce lot est
+                # deja porte par le registre de sa propre campagne. Le
+                # reclamer ici le compterait DEUX fois, et la partition de
+                # dette -- qui exige des composants disjoints -- refuserait
+                # de se construire. Le registre du lot couple ne revendique
+                # donc que ce qu'aucun autre registre bloquant ne declare.
                 continue
             source_sha256 = _sha256_text(current)
             execution_evidence = _execution_evidence(base, path, source_sha256)

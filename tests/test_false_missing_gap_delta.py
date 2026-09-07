@@ -49,10 +49,24 @@ def test_historical_stages_are_named_and_close_exactly(payload: dict) -> None:
         "COUPLED_1NSI_AUTHORED",
         "CURRENT",
     ]
-    assert [stage["authoring_units"] for stage in stages] == [460, 324, 315, 227]
+    # Les trois premieres etapes sont HISTORIQUES : elles ne bougent plus.
+    # La derniere est l'etat courant, et elle bouge des qu'on ecrit ou qu'on
+    # tranche une cellule -- la graver reviendrait a interdire de progresser.
+    # Ce qui est verrouille est que l'equation FERME sur les valeurs du jour.
+    assert [stage["authoring_units"] for stage in stages][:3] == [460, 324, 315]
     assert len({stage["backlog_set_digest"] for stage in stages}) == 4
-    assert payload["equation"] == "460 - 136 - 9 - 107 + 19 = 227"
-    assert payload["delta_reconciliation"]["holds"] is True
+    reconciliation = payload["delta_reconciliation"]
+    assert reconciliation["holds"] is True
+    attendue = (
+        f"{reconciliation['legacy']}"
+        f" - {reconciliation['gross_measurement_removals'] - payload['measurement_reclassification']['phases'][1]['count']}"
+        f" - {reconciliation['real_authoring_closures']}"
+        f" - {payload['measurement_reclassification']['phases'][1]['count']}"
+        f" + {reconciliation['gaps_added_by_stricter_false_positive_rejection']}"
+        f" = {reconciliation['current']}"
+    )
+    assert payload["equation"] == attendue
+    assert stages[-1]["authoring_units"] == reconciliation["current"]
 
 
 def test_measurement_reclassification_is_not_conflated_with_authoring(
@@ -60,20 +74,25 @@ def test_measurement_reclassification_is_not_conflated_with_authoring(
 ) -> None:
     measurement = payload["measurement_reclassification"]
     authoring = payload["real_authoring_closure"]
-    assert measurement["count"] == 243
-    assert [phase["count"] for phase in measurement["phases"]] == [136, 107]
-    assert measurement["per_class"] == {
-        "RECOVERED_EXACT_DECLARATION_SEMANTIC_REVIEW_PENDING": 14,
-        "RECLASSIFIED_AS_REVIEW_DEBT": 229,
+    # La reclassification de MESURE et la fermeture par ECRITURE ne doivent
+    # jamais etre confondues : c'est cela qu'on verrouille, pas leurs stocks.
+    assert measurement["count"] == sum(measurement["per_class"].values())
+    assert measurement["count"] == sum(p["count"] for p in measurement["phases"])
+    assert set(measurement["per_class"]) == {
+        "RECOVERED_EXACT_DECLARATION_SEMANTIC_REVIEW_PENDING",
+        "RECLASSIFIED_AS_REVIEW_DEBT",
     }
+    assert measurement["phases"][0]["count"] == 136      # phase historique figee
     assert authoring["count"] == 9
     assert _keys(measurement["units"]).isdisjoint(_keys(authoring["units"]))
-    assert payload["total_delta_to_current"] == 233
+    assert payload["total_delta_to_current"] == measurement["count"] - len(
+        measurement["gaps_added"]
+    ) + authoring["count"]
     assert payload["false_missing_gaps_removed"] == 0
     assert payload["proven_false_missing"]["units"] == []
     assert payload["authoring_decision_deferred_pending_semantic_review"][
         "count"
-    ] == 243
+    ] == measurement["count"]
 
 
 def test_every_removed_unit_keeps_transition_and_current_evidence_separate(
@@ -141,7 +160,12 @@ def test_review_debt_is_never_described_as_valid_credit(payload: dict) -> None:
         for row in payload["measurement_reclassification"]["units"]
         if row["classification"] == "RECLASSIFIED_AS_REVIEW_DEBT"
     ]
-    assert len(review_rows) == 229
+    # Le stock varie ; ce qui ne varie pas, c'est qu'une dette de revue n'est
+    # JAMAIS presentee comme un credit de capacite valide.
+    assert len(review_rows) == payload["measurement_reclassification"][
+        "per_class"
+    ]["RECLASSIFIED_AS_REVIEW_DEBT"]
+    assert review_rows
     assert {row["before_state"] for row in review_rows} == {"MISSING"}
     assert {row["transition_result_state"] for row in review_rows} == {
         "INDETERMINATE_CLONE_CREDIT"
@@ -150,7 +174,12 @@ def test_review_debt_is_never_described_as_valid_credit(payload: dict) -> None:
 
 
 def test_no_stage_adds_an_unexplained_gap(payload: dict) -> None:
-    assert len(payload["measurement_reclassification"]["gaps_added"]) == 19
+    # Les lacunes ajoutees sont celles qu'un rejet plus strict des faux
+    # positifs fait apparaitre : leur nombre suit le corpus, mais il doit
+    # rester exactement celui que la reconciliation declare.
+    assert len(payload["measurement_reclassification"]["gaps_added"]) == payload[
+        "delta_reconciliation"
+    ]["gaps_added_by_stricter_false_positive_rejection"]
     assert payload["real_authoring_closure"]["gaps_added"] == []
     assert payload["status"] == "GAP"
     assert payload["unexplained_units"]

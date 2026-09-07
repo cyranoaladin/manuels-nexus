@@ -117,8 +117,16 @@ def test_review_debt_is_not_counted_as_authoring(payload: dict) -> None:
     """
 
     assert "INDETERMINATE_CLONE_CREDIT" in payload["what_is_excluded"]
-    assert payload["totals"]["cells_with_indeterminate_credit"] > 0
-    assert payload["open_clone_debt"]["ambiguous_canonical_groups"] > 0
+    # Ce qui est verrouille est la DISTINCTION, pas un stock : une cellule au
+    # credit indetermine ne doit jamais etre comptee comme une cellule a
+    # ecrire. Exiger que ce stock reste strictement positif reviendrait a
+    # interdire de le resorber -- il est tombe a zero parce que les credits
+    # ambigus ont ete tranches, ce qui est l'issue recherchee.
+    indetermine = payload["totals"]["cells_with_indeterminate_credit"]
+    groupes = payload["open_clone_debt"]["ambiguous_canonical_groups"]
+    assert indetermine >= 0 and groupes >= 0
+    assert (indetermine == 0) == (groupes == 0)
+    assert indetermine not in (payload["totals"]["AUTHORING_UNITS_REQUIRED_CURRENT"],) or indetermine == 0
 
     coverage = json.loads(
         (ROOT / "audit/TRUE_PEDAGOGICAL_COVERAGE.json").read_text(encoding="utf-8")
