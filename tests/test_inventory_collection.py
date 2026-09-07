@@ -3849,6 +3849,7 @@ DECLARED_DEBT_LEDGERS = (
     "audit/TNSI_PROJET_QCM_REVIEW_DEBT_1.json",
     "audit/TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_45.json",
     "audit/NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT.json",
+    "audit/T3_AUTHORED_REVIEW_DEBT.json",
 )
 
 
@@ -11480,9 +11481,13 @@ def test_live_nsi_manual_declaration_covers_1nsi_and_tnsi(
         for manual in manifest_chapters
     }
 
+    # Neuf variantes, pas sept : les deux banques TNSI — écrite et pratique —
+    # ont rejoint la table depuis que l'assembleur NSI les produit. Le test
+    # pinçait un décompte périmé ; il pince maintenant l'ensemble déclaré, qui
+    # dit lequel manque si l'un disparaît.
     assert {manual: len(items) for manual, items in assemblies_by_manual.items()} == {
-        "1NSI": 7,
-        "TNSI": 7,
+        "1NSI": 9,
+        "TNSI": 9,
     }
     for manual, assemblies in assemblies_by_manual.items():
         assert {assembly["variant"] for assembly in assemblies} == {
@@ -11493,6 +11498,8 @@ def test_live_nsi_manual_declaration_covers_1nsi_and_tnsi(
             "amenagee",
             "evaluations",
             "projets",
+            "banque_ecrite",
+            "banque_pratique",
         }
         assert all(
             assembly["chapters"] == manifest_chapters[manual]
@@ -15449,7 +15456,12 @@ def test_release_strict_collection_contract_manual_eligibility_changes_only_for_
     monkeypatch.setattr(
         inventory_module,
         "_manual_blockers",
-        lambda inventory, manual_id, specification: list(synthetic_blockers),
+        # `root` a rejoint la signature quand les contrats de conformité sont
+        # passés dans `audit/` : le doublon doit l'accepter, sinon il teste une
+        # fonction qui n'existe plus.
+        lambda inventory, manual_id, specification, root=None: list(
+            synthetic_blockers
+        ),
     )
 
     before = inventory_module.build_deliverable_matrix(inventory)["manuals"]["1SPE"]
