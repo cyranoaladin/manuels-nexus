@@ -80,6 +80,35 @@ TRANSVERSAL_ROLES = {
     ),
 }
 
+#: Une capacite qu'AUCUN objet du chapitre ne declare, tous roles confondus.
+#: La transversalite couvre une declaration incomplete — un cours qui enseigne
+#: la capacite sans la nommer dans son META. Elle ne peut pas couvrir une
+#: capacite dont le chapitre ne porte aucune trace : il n'y a alors aucun objet
+#: a designer, et le verdict « transversal » ne renverrait a rien de
+#: verifiable.
+#:
+#: Le depot en compte trois, toutes dans TCOMPL, et je les ai lues avant de
+#: poser la regle :
+#:
+#:   TCOMPL-ECHANTILLONNAGE::C7  loi uniforme sur {1..n} et son esperance. Le
+#:       seul « uniforme » du chapitre est le tirage `random` sur [0,1] servant
+#:       a simuler une epreuve de Bernoulli : la loi n'est jamais definie.
+#:   TCOMPL-MODELES-EVOLUTION::C6  limites de suites, operations sur les
+#:       limites, passage a la limite dans les inegalites, theoreme des
+#:       gendarmes. Le cours n'enonce que la limite d'une suite geometrique.
+#:   TCOMPL-TEMPS-ATTENTE::C7  loi uniforme sur [0,1] puis [a,b], densite,
+#:       fonction de repartition, esperance et variance. Le chapitre traite la
+#:       loi geometrique et la loi exponentielle ; « uniforme » n'apparait que
+#:       dans le contrat.
+#:
+#: La regle se retire d'elle-meme : des qu'un objet declare la capacite, la
+#: cellule n'est plus orpheline et les regles ordinaires reprennent.
+ORPHAN_RULE = (
+    "Aucun objet du chapitre ne déclare cette capacité, tous rôles confondus : "
+    "la transversalité couvre une déclaration incomplète, pas une absence de "
+    "contenu. La capacité est au contrat et n'est enseignée nulle part."
+)
+
 QCM_POLICY = (
     "QCM — non obligatoire par capacité hors politique canonique explicite. "
     "La politique déposée (audit/QCM_POLICY_ORIGIN.md) fixe "
@@ -202,6 +231,9 @@ def classify(unit: dict[str, Any], index: dict[str, Any]) -> dict[str, Any]:
     elif (manual, chapter) in PROJECT_ASSESSED and role in PROJECT_ROLES:
         verdict, rationale = NOT_APPLICABLE, PROJECT_ASSESSED[(manual, chapter)]
         source = "audit/TNSI_PROJET_ASSESSMENT_MODE.json"
+    elif role in TRANSVERSAL_ROLES and not autres_roles:
+        rationale = f"{TRANSVERSAL_ROLES[role]} {ORPHAN_RULE}"
+        source = "ORPHAN_CAPACITY"
     elif role == "remediation" and _remediation_verdict(unit) is not None:
         verdict, rationale = _remediation_verdict(unit)
         source = "audit/AUXILIARY_RUBRIC_APPLICABILITY.json"

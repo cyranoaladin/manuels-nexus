@@ -136,7 +136,36 @@ def test_the_remaining_gaps_are_concentrated_and_nameable(payload) -> None:
     ]
     assert gaps, "un triage qui ne laisse rien n'aurait rien jugé"
     roles = collections.Counter(u["ROLE"] for u in gaps)
-    assert set(roles) <= {"methodes"}, dict(roles)
+    assert set(roles) <= {"methodes", "cours", "exercices", "evaluations",
+                          "remediation"}, dict(roles)
+    chapitres = {u["CHAPTER"] for u in gaps}
+    assert len(chapitres) <= 20, sorted(chapitres)
+
+
+def test_a_capacity_taught_nowhere_is_not_covered_transversally(payload) -> None:
+    """La transversalité couvre une déclaration incomplète, pas une absence.
+
+    Les trois capacités concernées sont au contrat de leur chapitre et
+    n'apparaissent dans aucun objet. Les créditer « transversalement » aurait
+    désigné des objets qui ne les traitent pas.
+    """
+    orphelines = [
+        u for u in payload["units"] if not u["capacity_covered_by_roles"]
+    ]
+    assert orphelines, "la règle doit porter sur des cellules réelles"
+    for unit in orphelines:
+        assert unit["APPLICABILITY_VERDICT"] != "SATISFIED_TRANSVERSALLY", unit
+        if unit["ROLE"] in {"cours", "exercices", "evaluations", "remediation"}:
+            assert unit["APPLICABILITY_VERDICT"] == "REAL_PEDAGOGICAL_GAP"
+            assert unit["REQUIREMENT_SOURCE"] == "ORPHAN_CAPACITY"
+
+
+def test_a_transversal_verdict_never_rests_on_an_empty_chapter(payload) -> None:
+    """Aucun verdict transversal ne peut porter sur une capacité orpheline."""
+    for unit in payload["units"]:
+        if unit["APPLICABILITY_VERDICT"] != "SATISFIED_TRANSVERSALLY":
+            continue
+        assert unit["capacity_covered_by_roles"], unit
 
 
 def test_the_audit_declares_its_freshness(payload) -> None:
