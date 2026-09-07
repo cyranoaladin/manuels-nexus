@@ -1,0 +1,245 @@
+% META: {"id": "TNSI-ECRIT-S1-EX2", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S1", "rang": 2, "capacites": ["T-ALGO-02A", "T-ALGO-02D"], "capacites_codes": ["C7", "C10"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% from collections import deque
+% reseau = {
+%     "S1": ["S2", "S3"],
+%     "S2": ["S1", "S4"],
+%     "S3": ["S1", "S4", "S5"],
+%     "S4": ["S2", "S3", "S6"],
+%     "S5": ["S3"],
+%     "S6": ["S4"],
+%     "S7": [],
+% }
+% # le graphe est bien non oriente : chaque arete apparait des deux cotes
+% for s, voisins in reseau.items():
+%     for v in voisins:
+%         assert s in reseau[v], (s, v)
+% def parcours_largeur(graphe, depart):
+%     vus = {depart}
+%     ordre = [depart]
+%     file = deque([depart])
+%     while file:
+%         courant = file.popleft()
+%         for voisin in graphe[courant]:
+%             if voisin not in vus:
+%                 vus.add(voisin)
+%                 ordre.append(voisin)
+%                 file.append(voisin)
+%     return ordre
+% # Q1 : ordre de decouverte depuis S1
+% assert parcours_largeur(reseau, "S1") == ["S1", "S2", "S3", "S4", "S5", "S6"]
+% assert "S7" not in parcours_largeur(reseau, "S1")
+% def distances(graphe, depart):
+%     d = {depart: 0}
+%     file = deque([depart])
+%     while file:
+%         courant = file.popleft()
+%         for voisin in graphe[courant]:
+%             if voisin not in d:
+%                 d[voisin] = d[courant] + 1
+%                 file.append(voisin)
+%     return d
+% # Q2 : distances depuis S1
+% assert distances(reseau, "S1") == {"S1": 0, "S2": 1, "S3": 1, "S4": 2, "S5": 2, "S6": 3}
+% # Q3 : S7 est injoignable ; il n'apparait dans aucune des deux sorties
+% assert "S7" not in distances(reseau, "S1")
+% assert len(distances(reseau, "S1")) == 6 and len(reseau) == 7
+% # Q4 : un parcours en profondeur ne donne PAS le plus court chemin
+% def parcours_profondeur(graphe, depart, vus=None):
+%     if vus is None:
+%         vus = []
+%     vus.append(depart)
+%     for voisin in graphe[depart]:
+%         if voisin not in vus:
+%             parcours_profondeur(graphe, voisin, vus)
+%     return vus
+% profondeur = parcours_profondeur(reseau, "S1")
+% assert profondeur == ["S1", "S2", "S4", "S3", "S5", "S6"]
+% assert profondeur != parcours_largeur(reseau, "S1")
+% assert set(profondeur) == set(parcours_largeur(reseau, "S1"))
+% # Q5 : ajouter l'arete S5-S6 raccourcit la distance de S6
+% enrichi = {k: list(v) for k, v in reseau.items()}
+% enrichi["S5"].append("S6")
+% enrichi["S6"].append("S5")
+% assert distances(enrichi, "S1")["S6"] == 3
+% enrichi2 = {k: list(v) for k, v in reseau.items()}
+% enrichi2["S1"].append("S6")
+% enrichi2["S6"].append("S1")
+% assert distances(enrichi2, "S1")["S6"] == 1
+% END-VERIFY
+\section*{Sujet S1 --- Exercice 2 : parcours en largeur d'un réseau de capteurs}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+Sept capteurs communiquent entre eux. Deux capteurs reliés peuvent échanger
+directement ; sinon, le message transite par des capteurs intermédiaires. Le
+réseau est décrit par un dictionnaire de listes de voisins :
+
+\begin{python}
+reseau = {
+    "S1": ["S2", "S3"],
+    "S2": ["S1", "S4"],
+    "S3": ["S1", "S4", "S5"],
+    "S4": ["S2", "S3", "S6"],
+    "S5": ["S3"],
+    "S6": ["S4"],
+    "S7": [],
+}
+\end{python}
+
+\begin{enumerate}
+  \item Écrire une fonction \lstinline{est_non_oriente(graphe)} qui renvoie
+    \lstinline{True} si, pour toute arête, les deux extrémités se citent
+    mutuellement. Vérifier que \lstinline{reseau} satisfait cette propriété.
+
+  \item Écrire \lstinline{parcours_largeur(graphe, depart)} qui renvoie la
+    liste des capteurs \textbf{dans leur ordre de découverte}, en utilisant une
+    file. Donner le résultat pour un départ en \lstinline{"S1"}. Les voisins
+    sont examinés dans l'ordre où ils apparaissent dans la liste.
+
+  \item Modifier le parcours pour qu'il renvoie, au lieu de l'ordre de
+    découverte, un dictionnaire associant à chaque capteur atteint sa
+    \textbf{distance} en nombre de liaisons depuis le départ. Donner le
+    dictionnaire obtenu depuis \lstinline{"S1"}.
+
+  \item Le capteur \lstinline{"S7"} n'apparaît dans aucune des deux sorties
+    précédentes. Expliquer pourquoi, et dire ce que cela signifie
+    concrètement pour le réseau.
+
+  \item On dispose aussi d'un parcours en profondeur, qui depuis
+    \lstinline{"S1"} découvre les capteurs dans l'ordre
+    $[\text{S1}, \text{S2}, \text{S4}, \text{S3}, \text{S5}, \text{S6}]$.
+    Comparer avec la question 2. Lequel des deux parcours permet de conclure
+    que \lstinline{"S6"} est à trois liaisons de \lstinline{"S1"} ? Justifier.
+
+  \item On veut que \lstinline{"S6"} soit joignable en une seule liaison depuis
+    \lstinline{"S1"}. Quelle arête faut-il ajouter ? Vérifier votre réponse en
+    donnant la nouvelle distance. Ajouter l'arête entre \lstinline{"S5"} et
+    \lstinline{"S6"} suffirait-il ? Justifier.
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(3 points)}
+
+\begin{python}
+def est_non_oriente(graphe):
+    for sommet, voisins in graphe.items():
+        for voisin in voisins:
+            if sommet not in graphe[voisin]:
+                return False
+    return True
+\end{python}
+
+\lstinline{reseau} satisfait la propriété : chaque arête y figure deux fois.
+
+\medskip
+\textbf{Question 2.} \emph{(5 points)}
+
+\begin{python}
+from collections import deque
+
+def parcours_largeur(graphe, depart):
+    vus = {depart}
+    ordre = [depart]
+    file = deque([depart])
+    while file:
+        courant = file.popleft()
+        for voisin in graphe[courant]:
+            if voisin not in vus:
+                vus.add(voisin)
+                ordre.append(voisin)
+                file.append(voisin)
+    return ordre
+\end{python}
+
+Résultat : $[\text{S1}, \text{S2}, \text{S3}, \text{S4}, \text{S5},
+\text{S6}]$.
+
+\medskip
+\emph{Barème :} $2$ points pour la file, $2$ pour le marquage à
+l'\textbf{enfilement} et non au défilement, $1$ pour le résultat.
+
+\medskip
+\textbf{Question 3.} \emph{(4 points)}
+
+\begin{python}
+def distances(graphe, depart):
+    d = {depart: 0}
+    file = deque([depart])
+    while file:
+        courant = file.popleft()
+        for voisin in graphe[courant]:
+            if voisin not in d:
+                d[voisin] = d[courant] + 1
+                file.append(voisin)
+    return d
+\end{python}
+
+Résultat : \lstinline!{"S1": 0, "S2": 1, "S3": 1, "S4": 2, "S5": 2, "S6": 3}!.
+Le dictionnaire remplace ici le tableau des sommets vus : y figurer, c'est
+avoir été découvert.
+
+\medskip
+\textbf{Question 4.} \emph{(3 points)}
+
+\lstinline{"S7"} n'a aucun voisin : il forme une \textbf{composante connexe} à
+lui seul. Aucun message venant de \lstinline{"S1"} ne peut l'atteindre, et
+aucun message qu'il émettrait ne sortirait. Le réseau n'est pas connexe.
+
+\medskip
+\textbf{Question 5.} \emph{(3 points)}
+
+Les deux parcours visitent les mêmes six capteurs, mais dans des ordres
+différents. Seul le parcours en \textbf{largeur} permet de conclure sur la
+distance : il découvre les sommets par couches, donc le premier chemin trouvé
+vers un sommet est le plus court. Le parcours en profondeur atteint
+\lstinline{"S6"} après \lstinline{"S4"}, en quatrième position, ce qui ne dit
+rien de la distance.
+
+\medskip
+\textbf{Question 6.} \emph{(2 points)}
+
+Il faut ajouter l'arête \lstinline{"S1"}--\lstinline{"S6"} : la distance passe
+alors à $1$. Ajouter \lstinline{"S5"}--\lstinline{"S6"} ne suffit
+\textbf{pas} : \lstinline{"S5"} est déjà à distance $2$, donc
+\lstinline{"S6"} passerait de $3$ à $3$ — le chemin par \lstinline{"S5"} n'est
+pas plus court que celui par \lstinline{"S4"}.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Marquer au défilement.} C'est l'erreur la plus fréquente : un
+    sommet marqué seulement quand on le sort de la file peut être enfilé
+    plusieurs fois. Sur ce réseau, \lstinline{"S4"} serait enfilé deux fois, par
+    \lstinline{"S2"} et par \lstinline{"S3"}, et apparaîtrait deux fois dans
+    l'ordre.
+  \item \textbf{Confondre file et pile.} \lstinline{pop()} au lieu de
+    \lstinline{popleft()} transforme silencieusement le parcours en profondeur,
+    et les distances de la question 3 deviennent fausses sans qu'aucune erreur
+    ne soit levée.
+  \item \textbf{La question 6 piège l'intuition.} Relier \lstinline{"S5"} et
+    \lstinline{"S6"} semble « rapprocher » S6 ; le calcul montre que non. Un
+    candidat qui répond sans recalculer la distance perd les deux points.
+  \item \textbf{« S7 est une erreur du sujet ».} Non : son isolement est le
+    contenu de la question 4. Un graphe non connexe est un cas normal, pas une
+    faute de frappe.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice sépare nettement ce que le parcours en largeur \emph{fait} — visiter
+tout ce qui est atteignable — de ce qu'il \emph{garantit} — la minimalité des
+distances. Cette distinction est ce que la question 5 vient chercher, et elle
+n'est accessible qu'après avoir écrit les deux versions.
+
+La question 1 est un échauffement volontaire : elle rapporte trois points sans
+récursivité ni file, et donne au candidat une lecture attentive de la structure
+de données avant de la parcourir. La question 6 est la seule qui demande
+d'anticiper un résultat plutôt que de le produire.

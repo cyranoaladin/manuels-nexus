@@ -1,0 +1,272 @@
+% META: {"id": "TNSI-ECRIT-S2-EX1", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S2", "rang": 1, "capacites": ["T-STRUCT-03A", "T-STRUCT-03B"], "capacites_codes": ["C6", "C7"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% class Pile:
+%     def __init__(self):
+%         self._contenu = []
+%     def est_vide(self):
+%         return self._contenu == []
+%     def empiler(self, v):
+%         self._contenu.append(v)
+%     def depiler(self):
+%         assert not self.est_vide(), "depiler une pile vide"
+%         return self._contenu.pop()
+%     def sommet(self):
+%         assert not self.est_vide(), "sommet d'une pile vide"
+%         return self._contenu[-1]
+%     def taille(self):
+%         return len(self._contenu)
+% # Q1 : l'interface ne laisse voir que le sommet
+% p = Pile()
+% assert p.est_vide() and p.taille() == 0
+% for v in (3, 5, 8):
+%     p.empiler(v)
+% assert p.sommet() == 8 and p.taille() == 3
+% assert p.depiler() == 8 and p.sommet() == 5
+% # Q2 : evaluation d'une expression postfixee
+% def evaluer(expression):
+%     pile = Pile()
+%     for jeton in expression.split():
+%         if jeton in "+-*":
+%             droite = pile.depiler()
+%             gauche = pile.depiler()
+%             if jeton == "+":
+%                 pile.empiler(gauche + droite)
+%             elif jeton == "-":
+%                 pile.empiler(gauche - droite)
+%             else:
+%                 pile.empiler(gauche * droite)
+%         else:
+%             pile.empiler(int(jeton))
+%     resultat = pile.depiler()
+%     assert pile.est_vide(), "jetons en trop"
+%     return resultat
+% assert evaluer("3 5 +") == 8
+% assert evaluer("3 5 + 2 *") == 16
+% assert evaluer("7 2 3 * -") == 1
+% # Q3 : l'ordre de depilement compte pour les operateurs non commutatifs
+% assert evaluer("9 4 -") == 5
+% assert evaluer("4 9 -") == -5
+% # depiler dans le mauvais ordre donnerait -5 au lieu de 5
+% def evaluer_inverse(expression):
+%     pile = Pile()
+%     for jeton in expression.split():
+%         if jeton in "+-*":
+%             gauche = pile.depiler()
+%             droite = pile.depiler()
+%             pile.empiler(gauche - droite if jeton == "-" else
+%                          gauche + droite if jeton == "+" else gauche * droite)
+%         else:
+%             pile.empiler(int(jeton))
+%     return pile.depiler()
+% assert evaluer_inverse("9 4 -") == -5
+% assert evaluer_inverse("9 4 +") == evaluer("9 4 +")
+% # Q4 : une expression mal formee est detectee, pas devinee
+% for mauvaise in ("3 +", "+", "3 4"):
+%     detecte = False
+%     try:
+%         evaluer(mauvaise)
+%     except AssertionError:
+%         detecte = True
+%     assert detecte, mauvaise
+% # Q5 : la hauteur maximale atteinte par la pile
+% def hauteur_max(expression):
+%     pile, maxi = Pile(), 0
+%     for jeton in expression.split():
+%         if jeton in "+-*":
+%             pile.depiler(); pile.depiler()
+%             pile.empiler(0)
+%         else:
+%             pile.empiler(0)
+%         maxi = max(maxi, pile.taille())
+%     return maxi
+% assert hauteur_max("3 5 + 2 *") == 2
+% assert hauteur_max("1 2 3 4 + + +") == 4
+% END-VERIFY
+\section*{Sujet S2 --- Exercice 1 : une pile pour évaluer une expression postfixée}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+En notation \textbf{postfixée}, l'opérateur suit ses deux opérandes : $3\ 5\ +$
+vaut $8$, et $3\ 5\ +\ 2\ *$ vaut $16$. Cette notation n'a besoin d'aucune
+parenthèse.
+
+\begin{enumerate}
+  \item On veut une classe \lstinline{Pile} dont l'\textbf{interface} est
+    \lstinline{est_vide}, \lstinline{empiler}, \lstinline{depiler},
+    \lstinline{sommet} et \lstinline{taille}. Écrire cette classe en utilisant
+    une liste Python comme implémentation. Expliquer en une phrase pourquoi
+    l'attribut qui porte la liste est nommé \lstinline{_contenu} et n'apparaît
+    pas dans l'interface.
+
+  \item Écrire \lstinline{evaluer(expression)}, qui reçoit une chaîne de jetons
+    séparés par des espaces et renvoie la valeur de l'expression postfixée. On
+    se limite aux opérateurs $+$, $-$ et $*$ sur des entiers. Dérouler le
+    contenu de la pile, jeton par jeton, pour $3\ 5\ +\ 2\ *$.
+
+  \item Évaluer $9\ 4\ -$ puis $4\ 9\ -$. Un élève dépile d'abord l'opérande de
+    gauche puis celle de droite. Quel résultat obtient-il pour $9\ 4\ -$ ?
+    Pourquoi son erreur reste-t-elle invisible sur $9\ 4\ +$ ?
+
+  \item Que doit faire votre fonction sur les expressions $3\ +$, $+$ et
+    $3\ 4$ ? Pour chacune, dire ce qui manque ou ce qui est en trop, et où
+    votre code s'en aperçoit.
+
+  \item Écrire \lstinline{hauteur_max(expression)}, qui renvoie le nombre
+    maximal de valeurs présentes simultanément dans la pile. Donner sa valeur
+    pour $3\ 5\ +\ 2\ *$ et pour $1\ 2\ 3\ 4\ +\ +\ +$. Que mesure cette
+    quantité ?
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(4 points)}
+
+\begin{python}
+class Pile:
+    def __init__(self):
+        self._contenu = []
+    def est_vide(self):
+        return self._contenu == []
+    def empiler(self, valeur):
+        self._contenu.append(valeur)
+    def depiler(self):
+        assert not self.est_vide(), "depiler une pile vide"
+        return self._contenu.pop()
+    def sommet(self):
+        assert not self.est_vide(), "sommet d'une pile vide"
+        return self._contenu[-1]
+    def taille(self):
+        return len(self._contenu)
+\end{python}
+
+Le préfixe \lstinline{_} signale que l'attribut relève de
+l'\textbf{implémentation}, pas de l'interface : on doit pouvoir remplacer la
+liste par autre chose sans qu'aucun utilisateur de la pile ait à changer une
+ligne.
+
+\medskip
+\textbf{Question 2.} \emph{(6 points)}
+
+\begin{python}
+def evaluer(expression):
+    pile = Pile()
+    for jeton in expression.split():
+        if jeton in "+-*":
+            droite = pile.depiler()
+            gauche = pile.depiler()
+            if jeton == "+":
+                pile.empiler(gauche + droite)
+            elif jeton == "-":
+                pile.empiler(gauche - droite)
+            else:
+                pile.empiler(gauche * droite)
+        else:
+            pile.empiler(int(jeton))
+    resultat = pile.depiler()
+    assert pile.est_vide(), "jetons en trop"
+    return resultat
+\end{python}
+
+Déroulé de $3\ 5\ +\ 2\ *$ :
+
+\begin{center}
+\begin{tabular}{|c|l|c|}
+\hline
+\textbf{Jeton} & \textbf{Action} & \textbf{Pile après} \\
+\hline
+$3$ & empiler & $[3]$ \\
+\hline
+$5$ & empiler & $[3, 5]$ \\
+\hline
+$+$ & dépiler $5$ puis $3$, empiler $8$ & $[8]$ \\
+\hline
+$2$ & empiler & $[8, 2]$ \\
+\hline
+$*$ & dépiler $2$ puis $8$, empiler $16$ & $[16]$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{Question 3.} \emph{(4 points)}
+
+$9\ 4\ - = 5$ et $4\ 9\ - = -5$. L'élève qui dépile dans l'autre ordre calcule
+$4 - 9$ et obtient $\mathbf{-5}$ pour $9\ 4\ -$. Son erreur reste invisible sur
+$9\ 4\ +$ parce que l'addition est \textbf{commutative} : l'ordre des opérandes
+n'y change rien. Seul un opérateur non commutatif la révèle.
+
+\medskip
+\textbf{Question 4.} \emph{(4 points)}
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Expression} & \textbf{Défaut} & \textbf{Où on le voit} \\
+\hline
+$3\ +$ & une opérande manque & second \lstinline{depiler}, pile vide \\
+\hline
+$+$ & les deux manquent & premier \lstinline{depiler}, pile vide \\
+\hline
+$3\ 4$ & un opérateur manque & \lstinline{assert} final, pile non vide \\
+\hline
+\end{tabular}
+\end{center}
+
+Les deux premiers cas sont détectés \textbf{pendant} le parcours, le troisième
+seulement \textbf{à la fin} : c'est pourquoi l'assertion finale est
+nécessaire. Sans elle, $3\ 4$ renverrait $4$, un résultat plausible et faux.
+
+\medskip
+\textbf{Question 5.} \emph{(2 points)}
+
+\begin{python}
+def hauteur_max(expression):
+    pile, maxi = Pile(), 0
+    for jeton in expression.split():
+        if jeton in "+-*":
+            pile.depiler()
+            pile.depiler()
+            pile.empiler(0)
+        else:
+            pile.empiler(0)
+        maxi = max(maxi, pile.taille())
+    return maxi
+\end{python}
+
+$3\ 5\ +\ 2\ *$ donne $\mathbf{2}$ ; $1\ 2\ 3\ 4\ +\ +\ +$ donne $\mathbf{4}$.
+Cette quantité mesure la \textbf{mémoire} nécessaire à l'évaluation : deux
+expressions de même longueur peuvent exiger des piles très différentes.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{L'ordre de dépilement.} C'est le cœur de l'exercice, et la
+    question 3 est construite pour que le candidat découvre que son test sur
+    une addition ne prouvait rien.
+  \item \textbf{L'assertion finale.} La plupart des copies l'omettent. Le cas
+    $3\ 4$ est justement celui qui ne lève aucune erreur naturelle : la
+    fonction renvoie un nombre, et le nombre est faux.
+  \item \textbf{Exposer \lstinline{_contenu}.} Un candidat qui écrit
+    \lstinline{pile._contenu[-1]} dans \lstinline{evaluer} contourne son
+    interface. Le code fonctionne, mais la classe ne sert plus à rien.
+  \item \textbf{La question 5 n'est pas décorative.} Elle demande de raisonner
+    sur la pile sans évaluer l'expression : les valeurs empilées y sont
+    arbitraires, seule la hauteur compte.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice fait la démonstration, en un seul objet, de ce que sépare
+interface et implémentation : la classe de la question 1 est utilisée quatre
+fois ensuite sans que sa liste interne réapparaisse.
+
+La progression va du contenant à ce qu'il permet, puis à ce qu'il détecte. Les
+questions 3 et 4 portent la même leçon sous deux formes : un programme qui
+donne un résultat plausible n'est pas un programme correct. C'est la raison
+d'être des deux assertions.

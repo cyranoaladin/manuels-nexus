@@ -1,0 +1,254 @@
+% META: {"id": "TNSI-ECRIT-S3-EX1", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S3", "rang": 1, "capacites": ["T-ALGO-02B", "T-ALGO-02C"], "capacites_codes": ["C8", "C9"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% taches = {
+%     "compiler": ["tester"],
+%     "tester": ["publier"],
+%     "publier": [],
+%     "documenter": ["publier"],
+%     "relire": ["documenter"],
+% }
+% # Q1 : parcours en profondeur, ordre de decouverte
+% def profondeur(graphe, depart, vus=None):
+%     if vus is None:
+%         vus = []
+%     vus.append(depart)
+%     for suivant in graphe[depart]:
+%         if suivant not in vus:
+%             profondeur(graphe, suivant, vus)
+%     return vus
+% assert profondeur(taches, "compiler") == ["compiler", "tester", "publier"]
+% assert profondeur(taches, "relire") == ["relire", "documenter", "publier"]
+% # Q2 : detection de cycle par couleurs
+% def contient_cycle(graphe):
+%     BLANC, GRIS, NOIR = 0, 1, 2
+%     couleur = {s: BLANC for s in graphe}
+%     def visiter(s):
+%         couleur[s] = GRIS
+%         for suivant in graphe[s]:
+%             if couleur[suivant] == GRIS:
+%                 return True
+%             if couleur[suivant] == BLANC and visiter(suivant):
+%                 return True
+%         couleur[s] = NOIR
+%         return False
+%     return any(visiter(s) for s in graphe if couleur[s] == BLANC)
+% assert contient_cycle(taches) is False
+% # Q3 : ajouter publier -> compiler cree un cycle
+% boucle = {k: list(v) for k, v in taches.items()}
+% boucle["publier"].append("compiler")
+% assert contient_cycle(boucle) is True
+% # une detection naive « deja vu » declarerait un cycle a tort
+% def cycle_naif(graphe):
+%     vus = set()
+%     def visiter(s):
+%         if s in vus:
+%             return True
+%         vus.add(s)
+%         return any(visiter(x) for x in graphe[s])
+%     return any(visiter(s) for s in graphe)
+% # sur le graphe SANS cycle, la version naive se trompe : publier est atteint
+% # deux fois, par tester et par documenter
+% assert cycle_naif(taches) is True
+% assert contient_cycle(taches) is False
+% # Q4 : tri topologique par parcours en profondeur postfixe
+% def tri_topologique(graphe):
+%     vus, ordre = set(), []
+%     def visiter(s):
+%         vus.add(s)
+%         for suivant in graphe[s]:
+%             if suivant not in vus:
+%                 visiter(suivant)
+%         ordre.append(s)
+%     for s in sorted(graphe):
+%         if s not in vus:
+%             visiter(s)
+%     return ordre[::-1]
+% ordre = tri_topologique(taches)
+% position = {t: i for i, t in enumerate(ordre)}
+% for tache, suivantes in taches.items():
+%     for suivante in suivantes:
+%         assert position[tache] < position[suivante], (tache, suivante)
+% assert len(ordre) == len(taches) == 5
+% # Q5 : sur un graphe cyclique, aucun ordre ne peut satisfaire la contrainte
+% ordre_boucle = tri_topologique(boucle)
+% pos = {t: i for i, t in enumerate(ordre_boucle)}
+% viole = [(a, b) for a, bs in boucle.items() for b in bs if pos[a] >= pos[b]]
+% assert viole != []
+% END-VERIFY
+\section*{Sujet S3 --- Exercice 1 : détecter un cycle dans un graphe de dépendances}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+Une chaîne de production logicielle enchaîne des tâches. Une flèche
+$a \rightarrow b$ signifie « $a$ doit être terminée avant $b$ ».
+
+\begin{python}
+taches = {
+    "compiler":   ["tester"],
+    "tester":     ["publier"],
+    "publier":    [],
+    "documenter": ["publier"],
+    "relire":     ["documenter"],
+}
+\end{python}
+
+\begin{enumerate}
+  \item Écrire \lstinline{profondeur(graphe, depart)}, parcours en profondeur
+    renvoyant l'ordre de découverte. Donner le résultat depuis
+    \lstinline{"compiler"} puis depuis \lstinline{"relire"}. Aucune des deux
+    listes ne contient les cinq tâches : expliquer pourquoi.
+
+  \item On veut savoir si la chaîne contient une dépendance circulaire. Un élève
+    propose : « si le parcours revient sur un sommet déjà vu, il y a un cycle ».
+    Montrer sur \lstinline{taches} que ce critère est \textbf{faux}, en nommant
+    le sommet concerné et les deux chemins qui y mènent.
+
+  \item Écrire \lstinline{contient_cycle(graphe)} avec un marquage à trois
+    états : \textbf{blanc} (jamais visité), \textbf{gris} (en cours de visite,
+    donc dans le chemin courant), \textbf{noir} (terminé). Expliquer pourquoi
+    seul un sommet \textbf{gris} rencontré signale un cycle. Vérifier que la
+    fonction répond \lstinline{False} sur \lstinline{taches}, et
+    \lstinline{True} après ajout de la dépendance
+    \lstinline{"publier"} $\rightarrow$ \lstinline{"compiler"}.
+
+  \item Écrire \lstinline{tri_topologique(graphe)} qui renvoie un ordre
+    d'exécution respectant toutes les dépendances. On empilera chaque sommet
+    \textbf{après} avoir visité tous ses successeurs, puis on inversera la
+    liste. Donner un ordre valide pour \lstinline{taches}, et énoncer la
+    propriété que doit vérifier tout ordre correct.
+
+  \item Appliquer votre tri topologique au graphe cyclique de la question 3.
+    Montrer qu'au moins une dépendance est violée, quel que soit l'ordre
+    renvoyé. Qu'en conclure sur ce qu'un ordonnanceur doit vérifier avant de
+    lancer la chaîne ?
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(3 points)}
+
+\begin{python}
+def profondeur(graphe, depart, vus=None):
+    if vus is None:
+        vus = []
+    vus.append(depart)
+    for suivant in graphe[depart]:
+        if suivant not in vus:
+            profondeur(graphe, suivant, vus)
+    return vus
+\end{python}
+
+Depuis \lstinline{"compiler"} : $[\text{compiler}, \text{tester},
+\text{publier}]$. Depuis \lstinline{"relire"} : $[\text{relire},
+\text{documenter}, \text{publier}]$.
+
+Les deux listes ont ici la même longueur mais pas le même contenu : un parcours
+ne découvre que ce qui est \textbf{atteignable depuis son départ}. Aucun des
+deux ne voit les cinq tâches.
+
+\medskip
+\textbf{Question 2.} \emph{(4 points)}
+
+\lstinline{"publier"} est atteint depuis \lstinline{"tester"} \textbf{et}
+depuis \lstinline{"documenter"}. Un parcours global le rencontre donc deux
+fois, sans qu'aucun cycle n'existe : le graphe reste acyclique. « Déjà vu » ne
+distingue pas un sommet \textbf{revisité} d'un sommet \textbf{réatteint}.
+
+\medskip
+\textbf{Question 3.} \emph{(6 points)}
+
+\begin{python}
+def contient_cycle(graphe):
+    BLANC, GRIS, NOIR = 0, 1, 2
+    couleur = {sommet: BLANC for sommet in graphe}
+
+    def visiter(sommet):
+        couleur[sommet] = GRIS
+        for suivant in graphe[sommet]:
+            if couleur[suivant] == GRIS:
+                return True
+            if couleur[suivant] == BLANC and visiter(suivant):
+                return True
+        couleur[sommet] = NOIR
+        return False
+
+    return any(visiter(s) for s in graphe if couleur[s] == BLANC)
+\end{python}
+
+Un sommet \textbf{gris} est en cours de visite : il est donc sur le chemin
+courant, entre la racine de l'exploration et le sommet actuel. Y revenir ferme
+une boucle. Un sommet \textbf{noir} est terminé, il n'est plus sur ce chemin :
+le réatteindre ne prouve rien.
+
+Sur \lstinline{taches} : \lstinline{False}. Avec
+\lstinline{"publier"} $\rightarrow$ \lstinline{"compiler"} : \lstinline{True}.
+
+\medskip
+\textbf{Question 4.} \emph{(5 points)}
+
+\begin{python}
+def tri_topologique(graphe):
+    vus, ordre = set(), []
+
+    def visiter(sommet):
+        vus.add(sommet)
+        for suivant in graphe[sommet]:
+            if suivant not in vus:
+                visiter(suivant)
+        ordre.append(sommet)
+
+    for sommet in sorted(graphe):
+        if sommet not in vus:
+            visiter(sommet)
+    return ordre[::-1]
+\end{python}
+
+Un ordre valide : \lstinline{relire}, \lstinline{documenter},
+\lstinline{compiler}, \lstinline{tester}, \lstinline{publier}. La propriété
+exigée : pour toute flèche $a \rightarrow b$, $a$ apparaît \textbf{avant} $b$.
+
+\medskip
+\textbf{Question 5.} \emph{(2 points)}
+
+Sur le graphe cyclique, la fonction renvoie bien une liste de cinq tâches, mais
+au moins une flèche est violée — la vérification de la question 4 échoue. C'est
+inévitable : un ordre total sur un cycle placerait chaque tâche avant celle qui
+la précède.
+
+Un ordonnanceur doit donc \textbf{détecter le cycle avant} de produire un
+ordre. Un tri topologique appliqué sans vérification préalable renvoie une
+réponse d'apparence normale, et fausse.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Le cœur de l'exercice est la question 2.} Elle démolit un
+    critère intuitif avant de demander le bon. Un candidat qui la traite trop
+    vite écrit ensuite un marquage à deux états et ne voit pas son erreur : sa
+    fonction déclare un cycle là où il n'y en a pas.
+  \item \textbf{Le gris et le noir.} Beaucoup de copies confondent « visité » et
+    « terminé ». La couleur noire n'existe que pour cette distinction.
+  \item \textbf{La question 5 n'attend pas un code.} Elle attend le constat
+    qu'un résultat plausible peut être faux, et la conséquence : vérifier avant
+    de trier, pas après.
+  \item \textbf{L'ordre renvoyé n'est pas unique.} Plusieurs ordres valides
+    existent ; le corrigé en donne un et énonce la propriété, qui est le vrai
+    critère de correction.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice enseigne une seule idée, sous trois angles : atteindre un sommet
+n'est pas y revenir. Elle est fausse en question 2, corrigée en question 3,
+exploitée en question 4, et sa violation observée en question 5.
+
+Il s'adresse à un candidat à l'aise avec les parcours et cherche à évaluer sa
+rigueur plutôt que sa vitesse. Les trois premières questions valent treize
+points sur vingt : un candidat qui s'arrête après la détection de cycle obtient
+une note honorable.

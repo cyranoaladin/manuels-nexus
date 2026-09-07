@@ -1,0 +1,265 @@
+% META: {"id": "TNSI-ECRIT-S4-EX2", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S4", "rang": 2, "capacites": ["T-ALGO-03", "T-ALGO-04"], "capacites_codes": ["C11", "C12"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% # Q1 : recherche du point de bascule par dichotomie
+% comparaisons = {"n": 0}
+% def bascule(tableau):
+%     """Plus petit indice i tel que tableau[i] >= 0, ou len(tableau)."""
+%     gauche, droite = 0, len(tableau)
+%     while gauche < droite:
+%         milieu = (gauche + droite) // 2
+%         comparaisons["n"] += 1
+%         if tableau[milieu] < 0:
+%             gauche = milieu + 1
+%         else:
+%             droite = milieu
+%     return gauche
+% t = [-9, -4, -1, 0, 3, 8, 12]
+% assert bascule(t) == 3 and t[3] == 0
+% assert bascule([-3, -2, -1]) == 3
+% assert bascule([0, 1, 2]) == 0
+% assert bascule([]) == 0
+% # Q2 : nombre de comparaisons sur 7 puis 1000 elements
+% comparaisons["n"] = 0
+% bascule(t)
+% assert comparaisons["n"] == 3
+% grand = list(range(-500, 500))
+% comparaisons["n"] = 0
+% assert bascule(grand) == 500
+% assert comparaisons["n"] == 9
+% # 9 est le compte POUR CETTE bascule ; le pire cas sur 1000 valeurs vaut 10,
+% # et c'est lui que borne la puissance de deux.
+% pires = []
+% for k in range(len(grand) + 1):
+%     comparaisons["n"] = 0
+%     bascule([-1] * k + [0] * (1000 - k))
+%     pires.append(comparaisons["n"])
+% assert min(pires) == 9 and max(pires) == 10
+% import math
+% assert max(pires) == math.ceil(math.log2(1000 + 1))
+% assert 2 ** 10 >= 1000 > 2 ** 9
+% # Q3 : l'invariant de boucle
+% def bascule_verifiee(tableau):
+%     gauche, droite = 0, len(tableau)
+%     while gauche < droite:
+%         # invariant : la reponse est dans [gauche, droite]
+%         assert 0 <= gauche <= droite <= len(tableau)
+%         assert all(v < 0 for v in tableau[:gauche])
+%         assert all(v >= 0 for v in tableau[droite:])
+%         milieu = (gauche + droite) // 2
+%         if tableau[milieu] < 0:
+%             gauche = milieu + 1
+%         else:
+%             droite = milieu
+%     assert gauche == droite
+%     return gauche
+% assert bascule_verifiee(t) == 3
+% assert bascule_verifiee(grand) == 500
+% # Q4 : fusion de deux tableaux tries, diviser pour regner
+% def fusionner(a, b):
+%     resultat, i, j = [], 0, 0
+%     while i < len(a) and j < len(b):
+%         if a[i] <= b[j]:
+%             resultat.append(a[i]); i += 1
+%         else:
+%             resultat.append(b[j]); j += 1
+%     return resultat + a[i:] + b[j:]
+% def tri_fusion(tableau):
+%     if len(tableau) <= 1:
+%         return list(tableau)
+%     milieu = len(tableau) // 2
+%     return fusionner(tri_fusion(tableau[:milieu]), tri_fusion(tableau[milieu:]))
+% assert fusionner([1, 4, 9], [2, 3]) == [1, 2, 3, 4, 9]
+% assert tri_fusion([5, 2, 9, 1, 7]) == [1, 2, 5, 7, 9]
+% assert tri_fusion([]) == [] and tri_fusion([3]) == [3]
+% # la fusion est stable : a valeur egale, l'element de gauche passe d'abord
+% gauche = [("a", 1), ("b", 2)]
+% droite = [("c", 1)]
+% fusion_stable = []
+% i = j = 0
+% while i < len(gauche) and j < len(droite):
+%     if gauche[i][1] <= droite[j][1]:
+%         fusion_stable.append(gauche[i]); i += 1
+%     else:
+%         fusion_stable.append(droite[j]); j += 1
+% fusion_stable += gauche[i:] + droite[j:]
+% assert fusion_stable == [("a", 1), ("c", 1), ("b", 2)]
+% # avec < strict au lieu de <=, la stabilite tombe
+% fusion_instable = []
+% i = j = 0
+% while i < len(gauche) and j < len(droite):
+%     if gauche[i][1] < droite[j][1]:
+%         fusion_instable.append(gauche[i]); i += 1
+%     else:
+%         fusion_instable.append(droite[j]); j += 1
+% fusion_instable += gauche[i:] + droite[j:]
+% assert fusion_instable == [("c", 1), ("a", 1), ("b", 2)]
+% # Q5 : la dichotomie exige un tableau trie
+% desordre = [3, -1, 5, -2]
+% assert bascule(desordre) != 1
+% assert sorted(desordre) == [-2, -1, 3, 5]
+% assert bascule(sorted(desordre)) == 2
+% END-VERIFY
+\section*{Sujet S4 --- Exercice 2 : diviser pour régner sur un tableau trié}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+Un capteur enregistre des écarts de température, rangés par ordre croissant.
+On veut trouver le \textbf{point de bascule} : le plus petit indice à partir
+duquel les valeurs cessent d'être négatives.
+
+Exemple : sur $[-9, -4, -1, 0, 3, 8, 12]$, la bascule est à l'indice $3$.
+
+\begin{enumerate}
+  \item Écrire \lstinline{bascule(tableau)} par dichotomie. La fonction renvoie
+    \lstinline{len(tableau)} si toutes les valeurs sont négatives, et $0$ si
+    aucune ne l'est. Vérifier sur $[-9, -4, -1, 0, 3, 8, 12]$,
+    $[-3, -2, -1]$, $[0, 1, 2]$ et le tableau vide.
+
+  \item Compter le nombre de comparaisons effectuées sur le tableau de sept
+    valeurs, puis sur un tableau de mille valeurs allant de $-500$ à $499$.
+    Donner ensuite le nombre de comparaisons dans le \textbf{pire cas} sur
+    mille valeurs, et relier cette borne à une puissance de $2$.
+
+  \item À chaque tour de boucle, deux propriétés restent vraies : toutes les
+    valeurs strictement avant \lstinline{gauche} sont négatives, et toutes
+    celles à partir de \lstinline{droite} sont positives ou nulles. Écrire ces
+    deux propriétés sous forme d'assertions dans la boucle. Expliquer ce
+    qu'elles garantissent au moment où la boucle s'arrête.
+
+  \item Écrire \lstinline{fusionner(a, b)}, qui fusionne deux tableaux triés en
+    un seul, puis \lstinline{tri_fusion(tableau)} par la méthode diviser pour
+    régner. Vérifier sur $[5, 2, 9, 1, 7]$. Un élève écrit
+    \lstinline{if a[i] < b[j]} au lieu de \lstinline{<=} : le tri reste-t-il
+    correct ? Que perd-on ?
+
+  \item Appliquer \lstinline{bascule} à $[3, -1, 5, -2]$. Le résultat est-il le
+    bon ? La fonction signale-t-elle un problème ? Que faut-il vérifier avant
+    d'appeler une recherche dichotomique, et pourquoi cette vérification n'est
+    généralement pas faite dans la fonction elle-même ?
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(5 points)}
+
+\begin{python}
+def bascule(tableau):
+    gauche, droite = 0, len(tableau)
+    while gauche < droite:
+        milieu = (gauche + droite) // 2
+        if tableau[milieu] < 0:
+            gauche = milieu + 1
+        else:
+            droite = milieu
+    return gauche
+\end{python}
+
+Résultats : $3$, $3$, $0$, $0$.
+
+\medskip
+\emph{Barème :} $2$ points pour l'encadrement \lstinline{[gauche, droite[},
+$2$ pour les deux mises à jour, $1$ pour les quatre cas.
+
+\medskip
+\textbf{Question 2.} \emph{(4 points)}
+
+Sept valeurs : $\mathbf{3}$ comparaisons. Mille valeurs, bascule au milieu :
+$\mathbf{9}$.
+
+Attention à ne pas confondre ce compte avec la borne. L'intervalle est
+\textbf{divisé par deux} à chaque tour, donc le nombre de tours est au plus le
+plus petit $k$ tel que $2^{k} \geqslant n + 1$. Pour $n = 1000$, cela donne
+$k = 10$, puisque $2^{9} = 512 < 1001 \leqslant 1024 = 2^{10}$. Selon la
+position de la bascule, on observe $9$ ou $10$ comparaisons : $9$ ici, $10$
+dans le pire cas.
+
+\medskip
+\textbf{Question 3.} \emph{(4 points)}
+
+\begin{python}
+while gauche < droite:
+    assert all(v < 0 for v in tableau[:gauche])
+    assert all(v >= 0 for v in tableau[droite:])
+    ...
+\end{python}
+
+Quand la boucle s'arrête, \lstinline{gauche == droite}. Les deux propriétés
+disent alors : tout ce qui est avant cet indice est négatif, tout ce qui est à
+partir de cet indice ne l'est pas. C'est exactement la définition du point de
+bascule — l'invariant \textbf{prouve} le résultat, il ne se contente pas de le
+suggérer.
+
+\medskip
+\textbf{Question 4.} \emph{(5 points)}
+
+\begin{python}
+def fusionner(a, b):
+    resultat, i, j = [], 0, 0
+    while i < len(a) and j < len(b):
+        if a[i] <= b[j]:
+            resultat.append(a[i]); i += 1
+        else:
+            resultat.append(b[j]); j += 1
+    return resultat + a[i:] + b[j:]
+
+def tri_fusion(tableau):
+    if len(tableau) <= 1:
+        return list(tableau)
+    milieu = len(tableau) // 2
+    return fusionner(tri_fusion(tableau[:milieu]),
+                     tri_fusion(tableau[milieu:]))
+\end{python}
+
+$[5, 2, 9, 1, 7]$ donne $[1, 2, 5, 7, 9]$.
+
+Avec \lstinline{<} strict, le tri reste \textbf{correct} : les valeurs sont
+toujours triées. On perd la \textbf{stabilité} — à valeur égale, l'élément
+venu de la moitié gauche ne passe plus en premier. Sur des couples
+$(\text{a}, 1), (\text{b}, 2)$ et $(\text{c}, 1)$, on obtient
+$\text{c}, \text{a}, \text{b}$ au lieu de $\text{a}, \text{c}, \text{b}$.
+
+\medskip
+\textbf{Question 5.} \emph{(2 points)}
+
+Sur $[3, -1, 5, -2]$, la fonction renvoie une valeur, et cette valeur n'a
+aucun sens : le tableau n'est pas trié, donc le « point de bascule » n'existe
+pas. Aucun problème n'est signalé.
+
+Il faut vérifier que le tableau est trié. Cette vérification n'est pas faite
+dans la fonction parce qu'elle coûterait un parcours complet — soit
+exactement ce que la dichotomie évite. Elle relève de la
+\textbf{précondition} : c'est à l'appelant de la garantir.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{L'encadrement.} Écrire \lstinline{droite = len(tableau) - 1}
+    change tout : le cas « aucune valeur positive » n'est plus atteignable, et
+    la fonction renvoie un indice au lieu de \lstinline{len(tableau)}.
+  \item \textbf{\lstinline{droite = milieu - 1}.} Erreur classique et
+    silencieuse : elle saute la valeur du milieu, qui est justement candidate.
+    Les quatre cas de la question 1 la démasquent.
+  \item \textbf{Confondre correction et stabilité.} La question 4 attend les
+    deux mots. Un tri instable n'est pas faux ; il est inutilisable dès qu'on
+    trie en deux passes.
+  \item \textbf{La question 5 récompense la retenue.} Ajouter la vérification
+    dans la fonction est tentant et ruinerait son intérêt. L'attendu est de
+    nommer la précondition, pas de la coder.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice réunit les deux usages de la division par deux : la recherche, qui
+divise l'\emph{espace} du problème, et le tri, qui divise les \emph{données}.
+Les mêmes trois lignes — couper, traiter, recoller — servent aux deux.
+
+La question 3 est celle qui distingue un candidat qui code d'un candidat qui
+prouve : l'invariant n'est pas une vérification supplémentaire, c'est la raison
+pour laquelle l'algorithme est correct. La question 5 ferme l'exercice sur la
+limite du procédé, et sur qui en porte la responsabilité.

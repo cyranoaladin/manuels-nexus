@@ -88,6 +88,8 @@ ORDER = [
     ("projet", "*"),
     ("qcm", "*"),
     ("evaluations", "*"),
+    ("banque_ecrite", "*"),
+    ("banque_pratique", "*"),
     ("ece", "*"),
     ("remediation", "*"),
     ("amenagee", "*"),
@@ -102,6 +104,8 @@ VARIANTS = [
     "amenagee",
     "evaluations",
     "projets",
+    "banque_ecrite",
+    "banque_pratique",
 ]
 VARIANT_ORDERS = {
     "eleve": [
@@ -131,6 +135,8 @@ VARIANT_ORDERS = {
         ("projet", "*"),
         ("qcm", "*"),
         ("evaluations", "*"),
+        ("banque_ecrite", "*"),
+        ("banque_pratique", "*"),
         ("ece", "*"),
         ("remediation", "*"),
         ("amenagee", "*"),
@@ -142,6 +148,8 @@ VARIANT_ORDERS = {
     "amenagee": [("amenagee", "*")],
     "evaluations": [("evaluations", "*")],
     "projets": [("projet", "*")],
+    "banque_ecrite": [("banque_ecrite", "*")],
+    "banque_pratique": [("banque_pratique", "*")],
 }
 ELEVE_VARIANTS = ["eleve", "methodes", "remediation", "amenagee", "projets"]
 ELEVE_ALLOWED_TYPES = [
@@ -169,6 +177,8 @@ VARIANT_LABELS = {
     "remediation": "livret remédiation",
     "amenagee": "version aménagée",
     "evaluations": "banque d'évaluations",
+    "banque_ecrite": "banque écrite",
+    "banque_pratique": "banque pratique",
     "projets": "livret projets",
 }
 REPRODUCIBILITY_CONFIG = (

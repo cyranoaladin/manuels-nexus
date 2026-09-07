@@ -5489,6 +5489,11 @@ COUNT_KEYS: tuple[str, ...] = (
     "td",
     "evaluations",
     "projets",
+    # Les deux banques d'epreuve TNSI (MENE2516123N) comptent separement des
+    # evaluations de chapitre : une evaluation mesure un chapitre, un sujet de
+    # banque prepare une epreuve nationale qui en traverse plusieurs.
+    "banque_ecrite",
+    "banque_pratique",
 )
 
 REQUIRED_META_FIELDS: tuple[str, ...] = (

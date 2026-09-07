@@ -1,0 +1,229 @@
+% META: {"id": "TNSI-ECRIT-S4-EX1", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S4", "rang": 1, "capacites": ["T-STRUCT-03C", "T-STRUCT-02A"], "capacites_codes": ["C8", "C4"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% class FileDeuxPiles:
+%     """File FIFO construite sur deux piles LIFO."""
+%     def __init__(self):
+%         self._entree = []
+%         self._sortie = []
+%     def est_vide(self):
+%         return not self._entree and not self._sortie
+%     def enfiler(self, v):
+%         self._entree.append(v)
+%     def _transferer(self):
+%         if not self._sortie:
+%             while self._entree:
+%                 self._sortie.append(self._entree.pop())
+%     def defiler(self):
+%         self._transferer()
+%         assert self._sortie, "defiler une file vide"
+%         return self._sortie.pop()
+%     def taille(self):
+%         return len(self._entree) + len(self._sortie)
+% # Q1 : l'ordre FIFO est respecte
+% f = FileDeuxPiles()
+% assert f.est_vide()
+% for v in "ABC":
+%     f.enfiler(v)
+% assert f.taille() == 3
+% assert [f.defiler() for _ in range(3)] == ["A", "B", "C"]
+% assert f.est_vide()
+% # Q2 : entrelacement enfiler/defiler
+% f = FileDeuxPiles()
+% for v in "AB":
+%     f.enfiler(v)
+% assert f.defiler() == "A"
+% f.enfiler("C")
+% assert [f.defiler(), f.defiler()] == ["B", "C"]
+% assert f.est_vide()
+% # Q3 : le transfert ne doit avoir lieu que si la pile de sortie est vide
+% class FileFautive(FileDeuxPiles):
+%     def _transferer(self):
+%         while self._entree:            # transfert inconditionnel
+%             self._sortie.append(self._entree.pop())
+% g = FileFautive()
+% for v in "AB":
+%     g.enfiler(v)
+% assert g.defiler() == "A"
+% g.enfiler("C")
+% assert g.defiler() == "C"              # faux : « B » etait arrive avant
+% # Q4 : cout amorti, chaque element est transfere au plus une fois
+% transferts = {"n": 0}
+% class FileComptee(FileDeuxPiles):
+%     def _transferer(self):
+%         if not self._sortie:
+%             while self._entree:
+%                 transferts["n"] += 1
+%                 self._sortie.append(self._entree.pop())
+% h = FileComptee()
+% for v in range(100):
+%     h.enfiler(v)
+% assert [h.defiler() for _ in range(100)] == list(range(100))
+% assert transferts["n"] == 100
+% transferts["n"] = 0
+% h = FileComptee()
+% for v in range(50):
+%     h.enfiler(v)
+%     assert h.defiler() == v
+% assert transferts["n"] == 50
+% # Q5 : defiler une file vide est refuse, pas devine
+% vide = FileDeuxPiles()
+% refuse = False
+% try:
+%     vide.defiler()
+% except AssertionError:
+%     refuse = True
+% assert refuse
+% END-VERIFY
+\section*{Sujet S4 --- Exercice 1 : une file d'attente à deux piles}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+On dispose d'une bibliothèque qui ne fournit que des \textbf{piles} (dernier
+entré, premier sorti). On veut en construire une \textbf{file} (premier entré,
+premier sorti), dont l'interface est \lstinline{est_vide},
+\lstinline{enfiler}, \lstinline{defiler} et \lstinline{taille}.
+
+L'idée : deux piles. On empile les arrivées dans une pile d'\textbf{entrée} ;
+pour servir, on bascule toute l'entrée dans une pile de \textbf{sortie} — ce
+qui inverse l'ordre — et on sert depuis celle-ci.
+
+\begin{enumerate}
+  \item Écrire la classe \lstinline{FileDeuxPiles}. Vérifier sur la séquence
+    « enfiler A, B, C puis défiler trois fois » que l'ordre obtenu est bien
+    A, B, C.
+
+  \item Dérouler, en donnant le contenu des deux piles à chaque étape, la
+    séquence : enfiler A, enfiler B, défiler, enfiler C, défiler, défiler.
+    Quelles valeurs sont servies, et dans quel ordre ?
+
+  \item Un élève déclenche le transfert à chaque appel de \lstinline{defiler},
+    sans vérifier que la pile de sortie est vide. Sur la séquence de la question
+    2, quelle valeur est servie au deuxième \lstinline{defiler} ? Expliquer
+    précisément pourquoi c'est faux.
+
+  \item On compte le nombre total de valeurs transférées d'une pile à l'autre.
+    Donner ce nombre pour cent enfilements suivis de cent défilements, puis pour
+    cinquante fois la séquence « enfiler, défiler ». Justifier par une phrase
+    portant sur le nombre de transferts que subit \textbf{une} valeur donnée.
+
+  \item Que doit faire \lstinline{defiler} sur une file vide ? Justifier ce
+    choix par comparaison avec l'alternative « renvoyer \lstinline{None} ».
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(5 points)}
+
+\begin{python}
+class FileDeuxPiles:
+    def __init__(self):
+        self._entree = []
+        self._sortie = []
+    def est_vide(self):
+        return not self._entree and not self._sortie
+    def enfiler(self, valeur):
+        self._entree.append(valeur)
+    def _transferer(self):
+        if not self._sortie:
+            while self._entree:
+                self._sortie.append(self._entree.pop())
+    def defiler(self):
+        self._transferer()
+        assert self._sortie, "defiler une file vide"
+        return self._sortie.pop()
+    def taille(self):
+        return len(self._entree) + len(self._sortie)
+\end{python}
+
+Les trois défilements donnent A, B, C.
+
+\medskip
+\textbf{Question 2.} \emph{(5 points)}
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Opération} & \textbf{Entrée} & \textbf{Sortie} & \textbf{Servi} \\
+\hline
+enfiler A & $[A]$ & $[\,]$ & \\
+\hline
+enfiler B & $[A, B]$ & $[\,]$ & \\
+\hline
+défiler & $[\,]$ & $[B]$ & A \\
+\hline
+enfiler C & $[C]$ & $[B]$ & \\
+\hline
+défiler & $[C]$ & $[\,]$ & B \\
+\hline
+défiler & $[\,]$ & $[\,]$ & C \\
+\hline
+\end{tabular}
+\end{center}
+
+Ordre servi : A, B, C — l'ordre d'arrivée.
+
+\medskip
+\textbf{Question 3.} \emph{(5 points)}
+
+Au deuxième \lstinline{defiler}, la version fautive rebascule C \textbf{par
+dessus} B dans la pile de sortie. Elle sert donc \textbf{C}, alors que B était
+arrivé avant.
+
+Le transfert inverse l'ordre : l'appliquer à une pile de sortie non vide
+mélange deux générations d'arrivées, et l'inversion ne joue plus que sur la
+plus récente. La condition « seulement si la sortie est vide » est ce qui
+garantit le FIFO.
+
+\medskip
+\textbf{Question 4.} \emph{(3 points)}
+
+Cent enfilements puis cent défilements : $\mathbf{100}$ transferts. Cinquante
+fois « enfiler, défiler » : $\mathbf{50}$ transferts.
+
+Dans les deux cas, chaque valeur est transférée \textbf{exactement une fois} :
+elle passe de l'entrée à la sortie, et n'y revient jamais. Le coût total est
+donc proportionnel au nombre de valeurs, quelle que soit la façon dont
+enfilements et défilements s'entrelacent.
+
+\medskip
+\textbf{Question 5.} \emph{(2 points)}
+
+\lstinline{defiler} doit \textbf{échouer} — ici par une assertion. Renvoyer
+\lstinline{None} rendrait indiscernables « la file est vide » et « la file
+contenait \lstinline{None} », et repousserait l'erreur loin de son origine :
+l'appelant manipulerait un \lstinline{None} sans savoir d'où il vient.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Le transfert inconditionnel.} C'est l'erreur centrale, et elle
+    ne se voit pas sur la séquence de la question 1 : tant qu'on n'entrelace pas
+    enfilements et défilements, les deux versions coïncident. La question 2
+    construit exactement l'entrelacement qui les sépare.
+  \item \textbf{Compter deux transferts par valeur.} Un candidat qui répond
+    $200$ à la question 4 n'a pas vu qu'une valeur ne retourne jamais dans la
+    pile d'entrée.
+  \item \textbf{Vider l'entrée dans \lstinline{est_vide}.} La file est vide si
+    les \textbf{deux} piles le sont ; ne tester que la sortie ferait déclarer
+    vide une file qui vient de recevoir une valeur.
+  \item \textbf{« Renvoyer \lstinline{None} est plus souple ».} La question 5
+    demande une justification, pas une préférence : l'argument attendu est
+    l'ambiguïté du résultat, pas le confort d'écriture.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice montre qu'une structure peut être \emph{construite} à partir d'une
+autre, et que la correction de la construction tient à une condition d'une
+ligne. C'est un cas rare où l'erreur est à la fois minuscule et totale : le
+`if` retiré, la file n'est plus une file.
+
+La question 4 introduit l'idée de coût amorti sans en prononcer le nom : on ne
+demande pas une complexité, on demande combien de fois une valeur donnée est
+déplacée. La réponse — une seule — suffit à conclure.

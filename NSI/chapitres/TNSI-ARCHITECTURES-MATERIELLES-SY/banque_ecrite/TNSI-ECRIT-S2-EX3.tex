@@ -1,0 +1,218 @@
+% META: {"id": "TNSI-ECRIT-S2-EX3", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S2", "rang": 3, "capacites": ["T-ARCH-02A", "T-ARCH-02B"], "capacites_codes": ["C2", "C3"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% from collections import deque
+% # Q1 : tourniquet, quantum de 2, arrivees simultanees
+% def tourniquet(besoins, quantum):
+%     """besoins : dict nom -> tranches necessaires. Renvoie (trace, fins)."""
+%     file = deque(sorted(besoins))
+%     restant = dict(besoins)
+%     trace, fins, horloge = [], {}, 0
+%     while file:
+%         nom = file.popleft()
+%         tranches = min(quantum, restant[nom])
+%         for _ in range(tranches):
+%             horloge += 1
+%             trace.append((horloge, nom))
+%         restant[nom] -= tranches
+%         if restant[nom] == 0:
+%             fins[nom] = horloge
+%         else:
+%             file.append(nom)
+%     return trace, fins
+% besoins = {"P1": 5, "P2": 2, "P3": 3}
+% trace, fins = tourniquet(besoins, 2)
+% assert [nom for _, nom in trace] == [
+%     "P1","P1","P2","P2","P3","P3","P1","P1","P3","P1"]
+% assert fins == {"P2": 4, "P3": 9, "P1": 10}
+% assert len(trace) == sum(besoins.values()) == 10
+% # Q2 : un quantum plus grand favorise le plus long
+% trace4, fins4 = tourniquet(besoins, 4)
+% assert [nom for _, nom in trace4] == [
+%     "P1","P1","P1","P1","P2","P2","P3","P3","P3","P1"]
+% assert fins4 == {"P2": 6, "P3": 9, "P1": 10}
+% assert fins4["P2"] > fins["P2"]
+% # le dernier a finir est le meme, mais P2 attend plus longtemps
+% assert max(fins.values()) == max(fins4.values()) == 10
+% # Q3 : temps d'attente moyen
+% def attente_moyenne(besoins, fins):
+%     return sum(fins[n] - besoins[n] for n in besoins) / len(besoins)
+% assert attente_moyenne(besoins, fins) == (5 + 2 + 6) / 3
+% assert attente_moyenne(besoins, fins4) == (5 + 4 + 6) / 3
+% assert attente_moyenne(besoins, fins) < attente_moyenne(besoins, fins4)
+% # Q4 : interblocage, detecte par un cycle dans le graphe d'attente
+% attente = {"P1": "R2", "P2": "R3", "P3": "R1"}
+% retenue_par = {"R1": "P1", "R2": "P2", "R3": "P3"}
+% def cycle_attente(attente, retenue_par, depart):
+%     vus, courant = [], depart
+%     while courant is not None and courant not in vus:
+%         vus.append(courant)
+%         ressource = attente.get(courant)
+%         courant = retenue_par.get(ressource) if ressource else None
+%     return vus if courant is not None else None
+% assert cycle_attente(attente, retenue_par, "P1") == ["P1", "P2", "P3"]
+% # Q5 : liberer une ressource brise le cycle
+% sans_cycle = dict(attente)
+% del sans_cycle["P3"]
+% assert cycle_attente(sans_cycle, retenue_par, "P1") is None
+% assert cycle_attente(sans_cycle, retenue_par, "P2") is None
+% END-VERIFY
+\section*{Sujet S2 --- Exercice 3 : ordonnancement de trois processus}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+Trois processus arrivent en même temps sur un processeur unique. Ils ont besoin
+de $5$, $2$ et $3$ tranches de temps :
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Processus} & \textbf{Tranches nécessaires} \\
+\hline
+\texttt{P1} & $5$ \\
+\hline
+\texttt{P2} & $2$ \\
+\hline
+\texttt{P3} & $3$ \\
+\hline
+\end{tabular}
+\end{center}
+
+L'ordonnanceur utilise un \textbf{tourniquet} : il donne à chaque processus au
+plus \emph{quantum} tranches consécutives, puis le remet en fin de file s'il
+n'a pas terminé. La file initiale est \texttt{P1}, \texttt{P2}, \texttt{P3}.
+
+\begin{enumerate}
+  \item Avec un quantum de $2$, donner la suite des processus exécutés, tranche
+    par tranche, ainsi que l'instant de fin de chacun. On compte les instants à
+    partir de $1$.
+
+  \item Refaire la question 1 avec un quantum de $4$. Le dernier processus à
+    terminer est-il le même ? Quel processus voit sa fin retardée, et pourquoi ?
+
+  \item Le \textbf{temps d'attente} d'un processus est la différence entre son
+    instant de fin et le nombre de tranches dont il avait besoin. Calculer le
+    temps d'attente moyen pour les deux quanta. Lequel est préférable ici ?
+    Cette conclusion vaut-elle pour tout jeu de processus ?
+
+  \item Les trois processus se partagent maintenant trois ressources :
+    \texttt{P1} retient \texttt{R1} et attend \texttt{R2} ; \texttt{P2} retient
+    \texttt{R2} et attend \texttt{R3} ; \texttt{P3} retient \texttt{R3} et
+    attend \texttt{R1}. Écrire une fonction qui, partant d'un processus, suit la
+    chaîne « attend une ressource retenue par ». Que renvoie-t-elle depuis
+    \texttt{P1} ? Comment reconnaît-on un interblocage ?
+
+  \item Le système décide que \texttt{P3} abandonne sa demande sur \texttt{R1}.
+    Montrer qu'il n'y a plus d'interblocage. Le tourniquet de la question 1
+    aurait-il pu, à lui seul, éviter la situation de la question 4 ? Justifier.
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(5 points)}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Instant} & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ \\
+\hline
+\textbf{Processus} & P1 & P1 & P2 & P2 & P3 & P3 & P1 & P1 & P3 & P1 \\
+\hline
+\end{tabular}
+\end{center}
+
+Fins : \texttt{P2} à $4$, \texttt{P3} à $9$, \texttt{P1} à $10$.
+
+\medskip
+\textbf{Question 2.} \emph{(4 points)}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Instant} & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ \\
+\hline
+\textbf{Processus} & P1 & P1 & P1 & P1 & P2 & P2 & P3 & P3 & P3 & P1 \\
+\hline
+\end{tabular}
+\end{center}
+
+Fins : \texttt{P2} à $6$, \texttt{P3} à $9$, \texttt{P1} à $10$. Le dernier à
+terminer reste \texttt{P1} — le total de travail n'a pas changé. C'est
+\texttt{P2}, le plus court, dont la fin est retardée de $4$ à $6$ : un quantum
+plus grand fait attendre les processus courts derrière les longs.
+
+\medskip
+\textbf{Question 3.} \emph{(5 points)}
+
+Quantum $2$ : $(10-5) + (4-2) + (9-3) = 5 + 2 + 6 = 13$, soit
+$13/3 \approx 4{,}33$.
+
+Quantum $4$ : $(10-5) + (6-2) + (9-3) = 5 + 4 + 6 = 15$, soit $5$.
+
+Le quantum $2$ est préférable \textbf{ici}. La conclusion ne se généralise pas :
+un quantum plus petit multiplie les changements de contexte, dont le coût est
+ignoré dans ce modèle. Avec un coût de commutation non nul, un quantum trop
+petit dégrade tout.
+
+\medskip
+\textbf{Question 4.} \emph{(4 points)}
+
+\begin{python}
+def cycle_attente(attente, retenue_par, depart):
+    vus, courant = [], depart
+    while courant is not None and courant not in vus:
+        vus.append(courant)
+        ressource = attente.get(courant)
+        courant = retenue_par.get(ressource) if ressource else None
+    return vus if courant is not None else None
+\end{python}
+
+Depuis \texttt{P1} : $[\texttt{P1}, \texttt{P2}, \texttt{P3}]$, puis on revient
+sur \texttt{P1}. La chaîne \textbf{boucle} : c'est exactement la définition d'un
+interblocage. Aucun des trois ne pourra jamais avancer, car chacun attend une
+ressource que le suivant ne libérera pas.
+
+\medskip
+\textbf{Question 5.} \emph{(2 points)}
+
+Sans la demande de \texttt{P3} sur \texttt{R1}, la chaîne partant de
+\texttt{P1} s'arrête sur \texttt{P3}, qui n'attend plus rien : la fonction
+renvoie \lstinline{None}. \texttt{P3} termine, libère \texttt{R3},
+\texttt{P2} avance, et ainsi de suite.
+
+Le tourniquet n'aurait \textbf{rien} changé : il répartit le \emph{processeur},
+pas les \emph{ressources}. Un processus qui attend une ressource ne consomme
+aucune tranche ; lui en donner davantage ne le débloque pas.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Compter les instants à partir de $0$.} L'énoncé le fixe pour
+    éviter deux corrigés également défendables sur les instants de fin.
+  \item \textbf{Croire qu'un quantum plus grand est toujours pire.} La question
+    3 demande explicitement si la conclusion se généralise ; le modèle ignore le
+    coût de commutation, et c'est ce coût qui renverse la comparaison.
+  \item \textbf{Confondre famine et interblocage.} Un processus qui n'obtient
+    jamais le processeur est affamé mais pourrait avancer ; un processus
+    interbloqué ne le pourrait pas, même seul sur la machine.
+  \item \textbf{La question 5 est un piège de niveau.} Ordonnancement et
+    ressources sont deux mécanismes distincts, et l'exercice les met côte à côte
+    pour que le candidat ne les confonde pas.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice sépare deux choses qu'un système d'exploitation fait toutes les
+deux, et qu'on résume souvent en un seul mot « gestion » : partager le temps,
+et arbitrer l'accès aux ressources. Les trois premières questions travaillent
+la première, les deux dernières la seconde, et la question 5 exige de dire
+pourquoi l'une ne résout pas l'autre.
+
+Le déroulé tranche par tranche des questions 1 et 2 est volontairement
+mécanique : c'est le tableau, pas le raisonnement, qui fait apparaître le
+retard de \texttt{P2}.

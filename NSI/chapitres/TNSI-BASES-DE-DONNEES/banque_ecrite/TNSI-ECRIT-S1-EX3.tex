@@ -1,0 +1,257 @@
+% META: {"id": "TNSI-ECRIT-S1-EX3", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S1", "rang": 3, "capacites": ["T-BDD-03A", "T-BDD-03F"], "capacites_codes": ["C5", "C10"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% import sqlite3
+% # isolation_level = None : sans cela, le module ouvre une transaction
+% # implicite, et PRAGMA foreign_keys y est ignore en silence.
+% cx = sqlite3.connect(":memory:", isolation_level=None)
+% cx.executescript("""
+% CREATE TABLE Machine(id INTEGER PRIMARY KEY, nom TEXT NOT NULL, salle TEXT NOT NULL);
+% CREATE TABLE Evenement(
+%     id INTEGER PRIMARY KEY,
+%     id_machine INTEGER NOT NULL,
+%     gravite TEXT NOT NULL,
+%     jour TEXT NOT NULL,
+%     FOREIGN KEY (id_machine) REFERENCES Machine(id));
+% INSERT INTO Machine VALUES (1,'poste-01','A'),(2,'poste-02','A'),(3,'serveur','B');
+% INSERT INTO Evenement VALUES
+%   (1,1,'info','2026-03-02'),(2,1,'alerte','2026-03-02'),(3,1,'alerte','2026-03-03'),
+%   (4,2,'info','2026-03-02'),(5,3,'critique','2026-03-03'),(6,3,'alerte','2026-03-03'),
+%   (7,3,'critique','2026-03-04');
+% """)
+% q = lambda s: cx.execute(s).fetchall()
+% # Q1 : les alertes de la salle A, par jour
+% assert q("""SELECT M.nom, E.jour FROM Evenement E
+%             JOIN Machine M ON M.id = E.id_machine
+%             WHERE E.gravite = 'alerte' AND M.salle = 'A'
+%             ORDER BY E.jour, M.nom""") == [('poste-01','2026-03-02'),('poste-01','2026-03-03')]
+% # Q2 : nombre d'evenements par machine
+% assert q("""SELECT M.nom, COUNT(*) FROM Evenement E
+%             JOIN Machine M ON M.id = E.id_machine
+%             GROUP BY M.id ORDER BY M.nom""") == [('poste-01',3),('poste-02',1),('serveur',3)]
+% # Q3 : machines ayant au moins deux evenements critiques ou alerte
+% assert q("""SELECT M.nom, COUNT(*) AS n FROM Evenement E
+%             JOIN Machine M ON M.id = E.id_machine
+%             WHERE E.gravite IN ('alerte','critique')
+%             GROUP BY M.id HAVING n >= 2 ORDER BY M.nom""") == [('poste-01',2),('serveur',3)]
+% # WHERE filtre les lignes, HAVING filtre les groupes : les deux ne sont pas interchangeables
+% try:
+%     q("SELECT M.nom FROM Evenement E JOIN Machine M ON M.id=E.id_machine WHERE COUNT(*) >= 2 GROUP BY M.id")
+%     agrege_dans_where = False
+% except sqlite3.OperationalError:
+%     agrege_dans_where = True
+% assert agrege_dans_where
+% # Q4 : poste-02 n'a aucune alerte ; une jointure interne le fait disparaitre
+% interne = q("""SELECT M.nom FROM Machine M JOIN Evenement E ON M.id = E.id_machine
+%                WHERE E.gravite = 'alerte' GROUP BY M.id ORDER BY M.nom""")
+% assert interne == [('poste-01',),('serveur',)]
+% externe = q("""SELECT M.nom, COUNT(E.id) FROM Machine M
+%                LEFT JOIN Evenement E ON M.id = E.id_machine AND E.gravite = 'alerte'
+%                GROUP BY M.id ORDER BY M.nom""")
+% assert externe == [('poste-01',2),('poste-02',0),('serveur',1)]
+% # Q5 : la cle etrangere refuse un evenement sur une machine inexistante
+% cx.execute("PRAGMA foreign_keys = ON")
+% refuse = False
+% try:
+%     cx.execute("INSERT INTO Evenement VALUES (8, 99, 'info', '2026-03-05')")
+% except sqlite3.IntegrityError:
+%     refuse = True
+% assert refuse
+% # sans la contrainte activee, la ligne orpheline passe
+% cx.execute("PRAGMA foreign_keys = OFF")
+% assert cx.execute("PRAGMA foreign_keys").fetchall() == [(0,)]
+% cx.execute("INSERT INTO Evenement VALUES (8, 99, 'info', '2026-03-05')")
+% assert q("SELECT COUNT(*) FROM Evenement WHERE id_machine = 99") == [(1,)]
+% # et elle disparait de tout comptage par jointure interne : le total des
+% # comptages par machine ne vaut plus le nombre de lignes de la table
+% total = sum(n for _, n in q("""SELECT M.nom, COUNT(*) FROM Evenement E
+%              JOIN Machine M ON M.id = E.id_machine GROUP BY M.id"""))
+% assert total == 7
+% assert q("SELECT COUNT(*) FROM Evenement") == [(8,)]
+% END-VERIFY
+\section*{Sujet S1 --- Exercice 3 : journal d'événements et requêtes d'agrégat}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+Un établissement journalise les événements de son parc informatique.
+
+\begin{sql}
+CREATE TABLE Machine(
+    id INTEGER PRIMARY KEY,
+    nom TEXT NOT NULL,
+    salle TEXT NOT NULL);
+
+CREATE TABLE Evenement(
+    id INTEGER PRIMARY KEY,
+    id_machine INTEGER NOT NULL,
+    gravite TEXT NOT NULL,      -- 'info', 'alerte' ou 'critique'
+    jour TEXT NOT NULL,
+    FOREIGN KEY (id_machine) REFERENCES Machine(id));
+\end{sql}
+
+\begin{center}
+\begin{tabular}{|c|l|c|}
+\hline
+\textbf{id} & \textbf{nom} & \textbf{salle} \\
+\hline
+$1$ & poste-01 & A \\
+\hline
+$2$ & poste-02 & A \\
+\hline
+$3$ & serveur & B \\
+\hline
+\end{tabular}
+\qquad
+\begin{tabular}{|c|c|l|c|}
+\hline
+\textbf{id} & \textbf{machine} & \textbf{gravité} & \textbf{jour} \\
+\hline
+$1$ & $1$ & info & 03-02 \\
+\hline
+$2$ & $1$ & alerte & 03-02 \\
+\hline
+$3$ & $1$ & alerte & 03-03 \\
+\hline
+$4$ & $2$ & info & 03-02 \\
+\hline
+$5$ & $3$ & critique & 03-03 \\
+\hline
+$6$ & $3$ & alerte & 03-03 \\
+\hline
+$7$ & $3$ & critique & 03-04 \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+  \item Écrire la requête qui affiche le nom de la machine et le jour, pour tous
+    les événements de gravité \lstinline{'alerte'} survenus en salle A, classés
+    par jour puis par nom. Donner le résultat.
+
+  \item Écrire la requête qui affiche, pour chaque machine, son nom et son
+    \textbf{nombre total} d'événements. Donner le résultat.
+
+  \item Écrire la requête qui affiche les machines ayant au moins deux
+    événements de gravité \lstinline{'alerte'} ou \lstinline{'critique'}, avec
+    ce nombre. Donner le résultat. Expliquer pourquoi la condition « au moins
+    deux » ne peut pas s'écrire dans la clause \lstinline{WHERE}.
+
+  \item La requête de la question 3 ne mentionne jamais \lstinline{poste-02}.
+    Est-ce parce qu'il a zéro alerte, ou parce qu'il n'existe pas ? Écrire une
+    requête qui affiche \textbf{toutes} les machines avec leur nombre
+    d'alertes, y compris celles qui n'en ont aucune. Donner le résultat.
+
+  \item Un script tente d'insérer un événement sur la machine d'identifiant
+    $99$, qui n'existe pas. Que se passe-t-il, et pourquoi ? Sous quelle
+    condition cette insertion réussirait-elle malgré tout ? Que deviendrait
+    alors le résultat de la question 2 ?
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(3 points)}
+
+\begin{sql}
+SELECT M.nom, E.jour
+FROM Evenement E JOIN Machine M ON M.id = E.id_machine
+WHERE E.gravite = 'alerte' AND M.salle = 'A'
+ORDER BY E.jour, M.nom;
+\end{sql}
+
+Résultat : \lstinline{(poste-01, 03-02)} et \lstinline{(poste-01, 03-03)}.
+
+\medskip
+\textbf{Question 2.} \emph{(3 points)}
+
+\begin{sql}
+SELECT M.nom, COUNT(*)
+FROM Evenement E JOIN Machine M ON M.id = E.id_machine
+GROUP BY M.id ORDER BY M.nom;
+\end{sql}
+
+Résultat : poste-01 $\rightarrow 3$, poste-02 $\rightarrow 1$, serveur
+$\rightarrow 3$.
+
+\medskip
+\textbf{Question 3.} \emph{(5 points)}
+
+\begin{sql}
+SELECT M.nom, COUNT(*) AS n
+FROM Evenement E JOIN Machine M ON M.id = E.id_machine
+WHERE E.gravite IN ('alerte', 'critique')
+GROUP BY M.id HAVING n >= 2 ORDER BY M.nom;
+\end{sql}
+
+Résultat : poste-01 $\rightarrow 2$, serveur $\rightarrow 3$.
+
+\lstinline{WHERE} filtre les \textbf{lignes} avant tout regroupement : à ce
+moment-là, aucun comptage n'existe encore. \lstinline{HAVING} filtre les
+\textbf{groupes} après agrégation. Écrire \lstinline{WHERE COUNT(*) >= 2}
+provoque une erreur.
+
+\medskip
+\textbf{Question 4.} \emph{(6 points)}
+
+\lstinline{poste-02} existe : il a zéro alerte. Une jointure interne écarte les
+machines sans ligne correspondante, ce qui rend « zéro » indiscernable de
+« absent ». Il faut une jointure externe, et déplacer la condition de gravité
+\textbf{dans} la jointure :
+
+\begin{sql}
+SELECT M.nom, COUNT(E.id)
+FROM Machine M
+LEFT JOIN Evenement E ON M.id = E.id_machine AND E.gravite = 'alerte'
+GROUP BY M.id ORDER BY M.nom;
+\end{sql}
+
+Résultat : poste-01 $\rightarrow 2$, poste-02 $\rightarrow \mathbf{0}$, serveur
+$\rightarrow 1$. On compte \lstinline{E.id} et non \lstinline{*} : sur une
+ligne sans correspondance, \lstinline{E.id} vaut \lstinline{NULL} et n'est pas
+compté, alors que \lstinline{COUNT(*)} compterait la ligne et renverrait $1$.
+
+\medskip
+\textbf{Question 5.} \emph{(3 points)}
+
+La clé étrangère \lstinline{id_machine} référence \lstinline{Machine(id)} :
+l'insertion est \textbf{refusée}, la contrainte d'intégrité référentielle
+n'étant pas satisfaite. Elle réussirait si la vérification des clés étrangères
+était désactivée. La ligne orpheline n'apparaîtrait alors dans \textbf{aucun}
+résultat de la question 2 : la jointure interne ne trouve aucune machine
+d'identifiant $99$, et l'événement disparaît des comptages sans le moindre
+message.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{\lstinline{WHERE} contre \lstinline{HAVING}.} C'est la
+    confusion la plus courante, et la question 3 la rend explicite plutôt que
+    de la sanctionner en silence.
+  \item \textbf{\lstinline{COUNT(*)} dans une jointure externe.} L'erreur est
+    invisible : elle donne $1$ au lieu de $0$, un nombre plausible. Seul
+    \lstinline{COUNT} d'une colonne de la table jointe donne le bon compte.
+  \item \textbf{Déplacer la condition de gravité.} La mettre en
+    \lstinline{WHERE} après un \lstinline{LEFT JOIN} annule l'effet de la
+    jointure externe : les lignes \lstinline{NULL} sont éliminées, et
+    \lstinline{poste-02} disparaît de nouveau. C'est le vrai piège de la
+    question 4.
+  \item \textbf{« zéro » et « absent ».} La question 4 est posée en français
+    avant d'être posée en SQL, parce que c'est la lecture du résultat, pas la
+    syntaxe, qui pose problème.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice construit une progression courte et stricte : filtrer, regrouper,
+filtrer un regroupement, puis découvrir qu'un regroupement peut effacer ce
+qu'on cherchait à compter. Les trois premières questions sont accessibles à
+tout candidat ayant pratiqué les requêtes de base ; la quatrième sépare ceux
+qui lisent un résultat de ceux qui l'acceptent.
+
+La question 5 relie la base à ce qui la protège : une contrainte d'intégrité
+n'est pas une formalité de création de table, c'est ce qui empêche un comptage
+de mentir.

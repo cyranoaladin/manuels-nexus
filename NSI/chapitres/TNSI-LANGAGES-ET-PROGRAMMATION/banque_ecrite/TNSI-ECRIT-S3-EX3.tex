@@ -1,0 +1,200 @@
+% META: {"id": "TNSI-ECRIT-S3-EX3", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S3", "rang": 3, "capacites": ["T-LANG-05", "T-LANG-04A"], "capacites_codes": ["C11", "C9"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% # Q1 : la fonction fautive modifie son argument
+% def normaliser_bugue(releves, minimum=0):
+%     for i in range(len(releves)):
+%         if releves[i] < minimum:
+%             releves[i] = minimum
+%     return releves
+% mesures = [3, -2, 7, -5]
+% resultat = normaliser_bugue(mesures)
+% assert resultat == [3, 0, 7, 0]
+% assert mesures == [3, 0, 7, 0]      # l'original a ete ecrase
+% assert resultat is mesures          # et c'est le MEME objet
+% # Q2 : version sans effet de bord
+% def normaliser(releves, minimum=0):
+%     return [minimum if v < minimum else v for v in releves]
+% mesures = [3, -2, 7, -5]
+% resultat = normaliser(mesures)
+% assert resultat == [3, 0, 7, 0]
+% assert mesures == [3, -2, 7, -5]
+% assert resultat is not mesures
+% # Q3 : le bug ne se voit pas si l'on ne relit pas l'original
+% historique = [[1, -1], [2, -2]]
+% copie_attendue = [list(l) for l in historique]
+% for ligne in historique:
+%     normaliser(ligne)
+% assert historique == copie_attendue
+% for ligne in historique:
+%     normaliser_bugue(ligne)
+% assert historique != copie_attendue
+% assert historique == [[1, 0], [2, 0]]
+% # Q4 : la copie superficielle ne suffit pas sur une liste de listes
+% import copy
+% original = [[1, -1], [2, -2]]
+% superficielle = list(original)
+% profonde = copy.deepcopy(original)
+% normaliser_bugue(superficielle[0])
+% assert original[0] == [1, 0]        # la copie superficielle partage les sous-listes
+% original2 = [[1, -1], [2, -2]]
+% profonde = copy.deepcopy(original2)
+% normaliser_bugue(profonde[0])
+% assert original2[0] == [1, -1]      # la copie profonde protege
+% # Q5 : jeu de tests qui demasque l'effet de bord
+% def test_normalisation(fonction):
+%     entree = [3, -2]
+%     temoin = list(entree)
+%     sortie = fonction(entree)
+%     return sortie == [3, 0] and entree == temoin
+% assert test_normalisation(normaliser) is True
+% assert test_normalisation(normaliser_bugue) is False
+% # un test qui ne verifie que la sortie ne voit rien
+% def test_faible(fonction):
+%     return fonction([3, -2]) == [3, 0]
+% assert test_faible(normaliser) is True
+% assert test_faible(normaliser_bugue) is True
+% END-VERIFY
+\section*{Sujet S3 --- Exercice 3 : un effet de bord qui fausse un résultat}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+Une station relève des températures. On veut « normaliser » une série en
+ramenant à $0$ toute valeur négative, \textbf{sans} perdre la série d'origine.
+Un élève écrit :
+
+\begin{python}
+def normaliser_bugue(releves, minimum=0):
+    for i in range(len(releves)):
+        if releves[i] < minimum:
+            releves[i] = minimum
+    return releves
+\end{python}
+
+\begin{enumerate}
+  \item On exécute \lstinline{mesures = [3, -2, 7, -5]} puis
+    \lstinline{resultat = normaliser_bugue(mesures)}. Donner la valeur de
+    \lstinline{resultat} \textbf{et} celle de \lstinline{mesures}. Que renvoie
+    \lstinline{resultat is mesures} ? Interpréter.
+
+  \item Réécrire la fonction pour qu'elle renvoie une \textbf{nouvelle} liste
+    sans modifier son argument. Vérifier sur le même exemple que
+    \lstinline{mesures} est intact.
+
+  \item Un programme applique la normalisation à chaque ligne d'un historique
+    \lstinline{[[1, -1], [2, -2]]}, puis compare l'historique à une copie prise
+    avant. Dire ce que donne la comparaison avec chacune des deux fonctions, et
+    expliquer pourquoi le défaut est resté invisible tant qu'on ne relisait pas
+    l'original.
+
+  \item L'élève propose de se protéger en écrivant
+    \lstinline{copie = list(original)} avant d'appeler sa fonction sur
+    \lstinline{copie[0]}. Montrer que cela ne suffit pas. Quelle copie faut-il ?
+    Expliquer la différence en une phrase.
+
+  \item Écrire une fonction de test qui, appliquée à l'une ou l'autre version,
+    renvoie \lstinline{True} pour la bonne et \lstinline{False} pour la fautive.
+    Écrire ensuite un test qui, lui, ne fait pas la différence, et dire ce qui
+    lui manque.
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(4 points)}
+
+\lstinline{resultat} vaut $[3, 0, 7, 0]$, et \lstinline{mesures} vaut
+\textbf{aussi} $[3, 0, 7, 0]$ : la série d'origine a été écrasée.
+\lstinline{resultat is mesures} renvoie \lstinline{True} — ce ne sont pas deux
+listes égales, c'est \textbf{une seule} liste, désignée par deux noms.
+
+\medskip
+\textbf{Question 2.} \emph{(3 points)}
+
+\begin{python}
+def normaliser(releves, minimum=0):
+    return [minimum if valeur < minimum else valeur for valeur in releves]
+\end{python}
+
+\lstinline{mesures} reste $[3, -2, 7, -5]$, et
+\lstinline{resultat is mesures} renvoie \lstinline{False}.
+
+\medskip
+\textbf{Question 3.} \emph{(4 points)}
+
+Avec \lstinline{normaliser}, l'historique est inchangé : la comparaison réussit.
+Avec \lstinline{normaliser_bugue}, il devient $[[1, 0], [2, 0]]$ : la
+comparaison échoue.
+
+Le défaut est resté invisible parce que la \textbf{valeur renvoyée} est
+correcte dans les deux cas. Tant qu'on ne regarde que la sortie, les deux
+fonctions se comportent identiquement ; la différence n'apparaît qu'en relisant
+l'entrée.
+
+\medskip
+\textbf{Question 4.} \emph{(5 points)}
+
+\lstinline{list(original)} construit une nouvelle liste \textbf{extérieure},
+mais ses cases pointent vers les \textbf{mêmes} sous-listes. Modifier
+\lstinline{copie[0]} modifie donc \lstinline{original[0]}.
+
+Il faut une copie \textbf{profonde}, \lstinline{copy.deepcopy(original)}, qui
+duplique aussi les sous-listes. En une phrase : une copie superficielle copie
+les références, une copie profonde copie ce qu'elles désignent.
+
+\medskip
+\textbf{Question 5.} \emph{(4 points)}
+
+\begin{python}
+def test_normalisation(fonction):
+    entree = [3, -2]
+    temoin = list(entree)
+    sortie = fonction(entree)
+    return sortie == [3, 0] and entree == temoin
+\end{python}
+
+\lstinline{True} pour \lstinline{normaliser}, \lstinline{False} pour
+\lstinline{normaliser_bugue}.
+
+Le test qui ne fait pas la différence :
+
+\begin{python}
+def test_faible(fonction):
+    return fonction([3, -2]) == [3, 0]
+\end{python}
+
+Il renvoie \lstinline{True} pour les deux. Il lui manque le \textbf{témoin} :
+sans conserver l'entrée avant l'appel, on ne peut pas constater qu'elle a
+changé.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Confondre \lstinline{==} et \lstinline{is}.} La question 1 les
+    oppose délibérément. Deux listes peuvent être égales sans être la même ; ici
+    elles sont la même, et c'est tout le problème.
+  \item \textbf{Croire qu'un test qui passe suffit.} La question 5 construit
+    l'exemple minimal d'un test vert sur une fonction fautive. C'est la leçon la
+    plus transférable de l'exercice.
+  \item \textbf{La copie superficielle.} Elle protège l'apparence — la longueur,
+    l'ordre — mais pas le contenu imbriqué. L'erreur est fréquente et
+    silencieuse.
+  \item \textbf{Un effet de bord n'est pas toujours un défaut.} L'énoncé exige
+    de \emph{ne pas} perdre la série d'origine : c'est cette exigence, pas la
+    mutation en soi, qui rend la première version fausse.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice traite l'effet de bord comme un problème de \textbf{spécification},
+pas de style : la fonction est fausse parce qu'elle viole une exigence écrite,
+et la question 5 montre qu'un jeu de tests mal conçu ne le verra jamais.
+
+Il ne demande aucune structure de données avancée : tout tient en listes de
+listes. Ce qu'il évalue, c'est la capacité à distinguer ce qu'une fonction
+\emph{renvoie} de ce qu'elle \emph{fait}, et à concevoir un test qui observe la
+seconde.

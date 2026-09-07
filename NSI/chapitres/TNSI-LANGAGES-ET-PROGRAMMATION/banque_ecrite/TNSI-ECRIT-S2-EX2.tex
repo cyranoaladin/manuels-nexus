@@ -1,0 +1,232 @@
+% META: {"id": "TNSI-ECRIT-S2-EX2", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S2", "rang": 2, "capacites": ["T-LANG-02A", "T-LANG-02B"], "capacites_codes": ["C4", "C5"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% import sys
+% # Q1 : la version recursive naive
+% appels = {"n": 0}
+% def chemins(largeur, hauteur):
+%     appels["n"] += 1
+%     if largeur == 0 or hauteur == 0:
+%         return 1
+%     return chemins(largeur - 1, hauteur) + chemins(largeur, hauteur - 1)
+% assert chemins(0, 5) == 1 and chemins(3, 0) == 1
+% assert chemins(1, 1) == 2
+% assert chemins(2, 2) == 6
+% assert chemins(3, 3) == 20
+% # Q2 : le nombre d'appels explose
+% appels["n"] = 0
+% chemins(3, 3)
+% appels_3 = appels["n"]
+% appels["n"] = 0
+% chemins(5, 5)
+% appels_5 = appels["n"]
+% assert appels_3 == 39
+% assert appels_5 == 503
+% assert appels_5 > 10 * appels_3
+% # Q3 : memoisation
+% def chemins_memo(largeur, hauteur, memo=None):
+%     if memo is None:
+%         memo = {}
+%     if largeur == 0 or hauteur == 0:
+%         return 1
+%     if (largeur, hauteur) in memo:
+%         return memo[(largeur, hauteur)]
+%     resultat = (chemins_memo(largeur - 1, hauteur, memo)
+%                 + chemins_memo(largeur, hauteur - 1, memo))
+%     memo[(largeur, hauteur)] = resultat
+%     return resultat
+% for a in range(6):
+%     for b in range(6):
+%         assert chemins_memo(a, b) == chemins(a, b)
+% # le nombre d'entrees memorisees est borne par le nombre de couples
+% memo = {}
+% chemins_memo(5, 5, memo)
+% assert len(memo) == 25
+% # Q4 : le piege du dictionnaire par defaut partage
+% def chemins_partage(largeur, hauteur, memo={}):
+%     if largeur == 0 or hauteur == 0:
+%         return 1
+%     if (largeur, hauteur) in memo:
+%         return memo[(largeur, hauteur)]
+%     resultat = (chemins_partage(largeur - 1, hauteur, memo)
+%                 + chemins_partage(largeur, hauteur - 1, memo))
+%     memo[(largeur, hauteur)] = resultat
+%     return resultat
+% assert chemins_partage(2, 2) == 6
+% assert chemins_partage.__defaults__[0] != {}
+% assert (2, 2) in chemins_partage.__defaults__[0]
+% # le defaut None, lui, reste vide entre deux appels
+% assert chemins_memo.__defaults__[0] is None
+% # Q5 : version iterative, memoire lineaire
+% def chemins_iteratif(largeur, hauteur):
+%     ligne = [1] * (hauteur + 1)
+%     for _ in range(largeur):
+%         for j in range(1, hauteur + 1):
+%             ligne[j] = ligne[j] + ligne[j - 1]
+%     return ligne[hauteur]
+% for a in range(7):
+%     for b in range(7):
+%         assert chemins_iteratif(a, b) == chemins_memo(a, b)
+% assert chemins_iteratif(10, 10) == 184756
+% # la version naive ne tiendrait pas : elle ferait des centaines de milliers d'appels
+% assert sys.getrecursionlimit() >= 1000
+% END-VERIFY
+\section*{Sujet S2 --- Exercice 2 : récursivité et coût d'un calcul répété}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+Un robot part du coin inférieur gauche d'une grille et doit rejoindre le coin
+supérieur droit. Il ne peut avancer que d'une case vers la droite ou d'une case
+vers le haut. On note $C(\ell, h)$ le nombre de chemins possibles sur une
+grille de $\ell$ pas horizontaux et $h$ pas verticaux.
+
+\begin{enumerate}
+  \item Justifier que $C(\ell, 0) = C(0, h) = 1$, puis que pour $\ell > 0$ et
+    $h > 0$ on a $C(\ell, h) = C(\ell - 1, h) + C(\ell, h - 1)$. Écrire la
+    fonction récursive \lstinline{chemins(largeur, hauteur)} correspondante, et
+    donner $C(2, 2)$ et $C(3, 3)$.
+
+  \item On instrumente la fonction pour compter ses appels. On obtient $39$
+    appels pour $C(3, 3)$ et $503$ pour $C(5, 5)$. Expliquer d'où vient cette
+    croissance, en montrant sur $C(2, 2)$ qu'un même couple est calculé
+    plusieurs fois.
+
+  \item Écrire \lstinline{chemins_memo} qui mémorise les résultats déjà
+    calculés dans un dictionnaire. Vérifier qu'elle donne les mêmes valeurs que
+    la question 1. Combien d'entrées ce dictionnaire contient-il après le calcul
+    de $C(5, 5)$ ? Justifier ce nombre.
+
+  \item Un élève écrit la signature \lstinline{def chemins_memo(largeur, hauteur, memo={})}.
+    Le calcul reste juste, mais quelque chose change entre deux appels
+    successifs de la fonction. Quoi, et pourquoi ? Dire si c'est souhaitable
+    ici, et ce que la signature \lstinline{memo=None} change.
+
+  \item Écrire une version \textbf{itérative} \lstinline{chemins_iteratif} qui
+    n'utilise qu'une seule liste de taille $h + 1$. Vérifier qu'elle coïncide
+    avec les précédentes, puis donner $C(10, 10)$. Comparer les trois versions
+    sur ce que chacune consomme.
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(4 points)}
+
+Si $h = 0$, le robot ne peut qu'avancer tout droit : un seul chemin. Même
+raisonnement si $\ell = 0$. Sinon, le \textbf{dernier} pas est soit horizontal,
+soit vertical, et ces deux cas sont disjoints et couvrent tout : d'où la somme.
+
+\begin{python}
+def chemins(largeur, hauteur):
+    if largeur == 0 or hauteur == 0:
+        return 1
+    return chemins(largeur - 1, hauteur) + chemins(largeur, hauteur - 1)
+\end{python}
+
+$C(2, 2) = 6$ et $C(3, 3) = 20$.
+
+\medskip
+\textbf{Question 2.} \emph{(4 points)}
+
+$C(2,2)$ appelle $C(1,2)$ et $C(2,1)$ ; chacun appelle $C(1,1)$. Le couple
+$(1,1)$ est donc calculé \textbf{deux fois}, entièrement, sans que rien ne
+retienne le premier résultat. Le phénomène se répète à chaque niveau : le
+nombre d'appels croît comme le nombre de \emph{chemins}, pas comme le nombre de
+\emph{couples}.
+
+\medskip
+\textbf{Question 3.} \emph{(5 points)}
+
+\begin{python}
+def chemins_memo(largeur, hauteur, memo=None):
+    if memo is None:
+        memo = {}
+    if largeur == 0 or hauteur == 0:
+        return 1
+    if (largeur, hauteur) in memo:
+        return memo[(largeur, hauteur)]
+    resultat = (chemins_memo(largeur - 1, hauteur, memo)
+                + chemins_memo(largeur, hauteur - 1, memo))
+    memo[(largeur, hauteur)] = resultat
+    return resultat
+\end{python}
+
+Après $C(5,5)$, le dictionnaire contient $\mathbf{25}$ entrées : les couples
+$(\ell, h)$ avec $1 \leqslant \ell \leqslant 5$ et $1 \leqslant h \leqslant 5$.
+Les cas de base ne sont pas mémorisés, puisqu'ils sont renvoyés avant.
+
+\medskip
+\textbf{Question 4.} \emph{(4 points)}
+
+Un argument par défaut est évalué \textbf{une seule fois}, à la définition de
+la fonction. Le dictionnaire est donc \textbf{partagé} par tous les appels :
+après \lstinline{chemins_memo(2, 2)}, il contient déjà des entrées, et le
+prochain appel les réutilise.
+
+Ici, le résultat reste juste — $C$ ne dépend que de ses arguments — donc le
+partage accélère. Mais c'est une chance, pas une propriété : dès que la
+fonction dépendrait d'autre chose, le cache resservirait des valeurs périmées.
+La forme \lstinline{memo=None} crée un dictionnaire \textbf{neuf} à chaque
+appel externe, et le partage devient un choix explicite de l'appelant.
+
+\medskip
+\textbf{Question 5.} \emph{(3 points)}
+
+\begin{python}
+def chemins_iteratif(largeur, hauteur):
+    ligne = [1] * (hauteur + 1)
+    for _ in range(largeur):
+        for j in range(1, hauteur + 1):
+            ligne[j] = ligne[j] + ligne[j - 1]
+    return ligne[hauteur]
+\end{python}
+
+$C(10, 10) = \mathbf{184\,756}$.
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Version} & \textbf{Appels ou tours} & \textbf{Mémoire} \\
+\hline
+naïve & croît comme le résultat & pile d'appels \\
+\hline
+mémoïsée & un par couple & un couple par case \\
+\hline
+itérative & un par case & une seule ligne \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{« La récursivité est lente ».} C'est faux tel quel : la version
+    mémoïsée est récursive et rapide. Ce qui coûte, c'est le recalcul, pas la
+    récursion. La question 3 sert précisément à séparer les deux.
+  \item \textbf{Mémoriser les cas de base.} Un candidat qui les mémorise obtient
+    $35$ entrées au lieu de $25$ à la question 3, et une justification qui ne
+    tient plus. Le compte demandé oblige à décrire exactement ce qui est stocké.
+  \item \textbf{L'argument par défaut mutable.} Le piège est classique et
+    l'exercice le pose là où il ne casse rien : le candidat doit expliquer un
+    danger qu'il ne voit pas se réaliser. C'est plus exigeant que de constater
+    un bug.
+  \item \textbf{La version itérative « de droite à gauche ».} Parcourir
+    \lstinline{j} en sens inverse casserait la récurrence : \lstinline{ligne[j-1]}
+    doit être la valeur \textbf{déjà mise à jour} du tour courant.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice traite le coût d'un calcul comme une propriété observable, pas comme
+une formule à réciter : on compte des appels, on compte des entrées de
+dictionnaire, on compare des mémoires. Aucune notation asymptotique n'est
+demandée, et c'est délibéré — la question 5 fait constater les trois régimes
+plutôt que de les nommer.
+
+La question 4 est la seule à porter sur le langage lui-même plutôt que sur
+l'algorithme. Elle vaut quatre points parce qu'elle demande d'expliquer un
+mécanisme dont l'effet, ici, est invisible.

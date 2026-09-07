@@ -1,0 +1,209 @@
+% META: {"id": "TNSI-ECRIT-S1-EX1", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S1", "rang": 1, "capacites": ["T-STRUCT-04A", "T-STRUCT-04B"], "capacites_codes": ["C9", "C10"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droite = droite
+% def inserer(arbre, mesure):
+%     if arbre is None:
+%         return Noeud(mesure)
+%     if mesure < arbre.valeur:
+%         arbre.gauche = inserer(arbre.gauche, mesure)
+%     elif mesure > arbre.valeur:
+%         arbre.droite = inserer(arbre.droite, mesure)
+%     return arbre
+% racine = None
+% for m in [18, 7, 25, 3, 12, 21, 30]:
+%     racine = inserer(racine, m)
+% def taille(a):
+%     return 0 if a is None else 1 + taille(a.gauche) + taille(a.droite)
+% def hauteur(a):
+%     return -1 if a is None else 1 + max(hauteur(a.gauche), hauteur(a.droite))
+% assert taille(racine) == 7
+% assert hauteur(racine) == 2
+% # Q1 : l'arbre obtenu est parfaitement equilibre pour cet ordre d'insertion
+% assert racine.valeur == 18
+% assert racine.gauche.valeur == 7 and racine.droite.valeur == 25
+% assert [racine.gauche.gauche.valeur, racine.gauche.droite.valeur] == [3, 12]
+% # Q2 : le parcours infixe d'un ABR rend les valeurs triees
+% def infixe(a):
+%     return [] if a is None else infixe(a.gauche) + [a.valeur] + infixe(a.droite)
+% assert infixe(racine) == [3, 7, 12, 18, 21, 25, 30]
+% assert infixe(racine) == sorted([18, 7, 25, 3, 12, 21, 30])
+% # Q3 : inserer en ordre croissant degenere l'arbre en peigne
+% degenere = None
+% for m in [3, 7, 12, 18, 21, 25, 30]:
+%     degenere = inserer(degenere, m)
+% assert taille(degenere) == 7
+% assert hauteur(degenere) == 6
+% assert infixe(degenere) == infixe(racine)
+% # Q4 : le nombre de comparaisons pour chercher 30 suit la hauteur
+% def comparaisons(a, cle):
+%     n = 0
+%     while a is not None:
+%         n += 1
+%         if cle == a.valeur:
+%             return n
+%         a = a.gauche if cle < a.valeur else a.droite
+%     return n
+% assert comparaisons(racine, 30) == 3
+% assert comparaisons(degenere, 30) == 7
+% # Q5 : une insertion en double ne change rien
+% avant = taille(racine)
+% racine = inserer(racine, 12)
+% assert taille(racine) == avant
+% END-VERIFY
+\section*{Sujet S1 --- Exercice 1 : un arbre binaire de recherche de mesures}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+Une station météorologique enregistre des relevés de température entiers. Pour
+retrouver rapidement une valeur, on les range dans un \textbf{arbre binaire de
+recherche} : à chaque nœud, toutes les valeurs du sous-arbre gauche sont
+strictement inférieures à celle du nœud, toutes celles du sous-arbre droit
+strictement supérieures.
+
+\begin{python}
+class Noeud:
+    def __init__(self, valeur, gauche=None, droite=None):
+        self.valeur = valeur
+        self.gauche = gauche
+        self.droite = droite
+\end{python}
+
+Les relevés arrivent dans cet ordre : $18$, $7$, $25$, $3$, $12$, $21$, $30$.
+
+\begin{enumerate}
+  \item Écrire la fonction récursive \lstinline{inserer(arbre, mesure)} qui
+    renvoie l'arbre après insertion. Une valeur déjà présente ne doit pas être
+    insérée une seconde fois. Dessiner ensuite l'arbre obtenu après les sept
+    insertions, puis donner sa \textbf{taille} et sa \textbf{hauteur} (la
+    hauteur d'un arbre réduit à sa racine vaut $0$).
+
+  \item Écrire la fonction récursive \lstinline{infixe(arbre)} qui renvoie la
+    liste des valeurs par parcours infixe. Donner le résultat pour l'arbre de
+    la question 1, et expliquer en une phrase ce que ce parcours garantit sur
+    un arbre binaire de recherche.
+
+  \item Les mêmes sept relevés arrivent maintenant dans l'ordre croissant.
+    Dessiner l'arbre obtenu et donner sa hauteur. Le parcours infixe est-il
+    modifié ? Justifier.
+
+  \item Écrire \lstinline{comparaisons(arbre, cle)}, qui renvoie le nombre de
+    nœuds examinés pour retrouver \lstinline{cle}. Donner sa valeur pour la clé
+    $30$ dans chacun des deux arbres des questions 1 et 3. Que peut-on en
+    conclure sur l'intérêt d'un arbre équilibré ?
+
+  \item Un capteur défaillant renvoie deux fois la valeur $12$. Quelle est la
+    taille de l'arbre après cette seconde insertion ? Justifier à partir de
+    votre code de la question 1.
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(4 points)}
+
+\begin{python}
+def inserer(arbre, mesure):
+    if arbre is None:
+        return Noeud(mesure)
+    if mesure < arbre.valeur:
+        arbre.gauche = inserer(arbre.gauche, mesure)
+    elif mesure > arbre.valeur:
+        arbre.droite = inserer(arbre.droite, mesure)
+    return arbre        # mesure deja presente : rien a faire
+\end{python}
+
+L'arbre obtenu a $18$ pour racine, $7$ et $25$ pour fils, puis $3$ et $12$ sous
+le $7$, $21$ et $30$ sous le $25$. \textbf{Taille $7$, hauteur $2$.}
+
+\medskip
+\emph{Barème :} $2$ points pour la récursion correcte, $1$ pour le traitement
+du doublon, $1$ pour l'arbre et ses deux mesures.
+
+\medskip
+\textbf{Question 2.} \emph{(3 points)}
+
+\begin{python}
+def infixe(arbre):
+    if arbre is None:
+        return []
+    return infixe(arbre.gauche) + [arbre.valeur] + infixe(arbre.droite)
+\end{python}
+
+Résultat : $[3, 7, 12, 18, 21, 25, 30]$. Le parcours infixe d'un arbre binaire
+de recherche rend toujours les valeurs \textbf{dans l'ordre croissant}.
+
+\medskip
+\textbf{Question 3.} \emph{(4 points)}
+
+Chaque nouvelle valeur étant supérieure à toutes les précédentes, elle descend
+systématiquement à droite : l'arbre dégénère en \textbf{peigne} de hauteur
+$\mathbf{6}$. Le parcours infixe est \textbf{inchangé} : $[3, 7, 12, 18, 21,
+25, 30]$. Deux arbres de formes très différentes peuvent porter le même
+ensemble de valeurs.
+
+\medskip
+\textbf{Question 4.} \emph{(6 points)}
+
+\begin{python}
+def comparaisons(arbre, cle):
+    n = 0
+    while arbre is not None:
+        n += 1
+        if cle == arbre.valeur:
+            return n
+        arbre = arbre.gauche if cle < arbre.valeur else arbre.droite
+    return n
+\end{python}
+
+Arbre équilibré : $\mathbf{3}$ comparaisons. Arbre en peigne :
+$\mathbf{7}$. Le coût d'une recherche suit la \textbf{hauteur}, pas la taille.
+Sur un arbre équilibré de $n$ valeurs, la hauteur est de l'ordre de
+$\log_2 n$ ; sur un peigne, elle vaut $n - 1$, et la recherche ne vaut pas
+mieux qu'un parcours de liste.
+
+\medskip
+\textbf{Question 5.} \emph{(3 points)}
+
+La taille reste $\mathbf{7}$. Dans \lstinline{inserer}, le cas
+\lstinline{mesure == arbre.valeur} ne tombe ni dans le \lstinline{if} ni dans
+le \lstinline{elif} : l'arbre est renvoyé inchangé.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Le piège de la question 3.} Beaucoup de candidats répondent que
+    le parcours infixe change parce que l'arbre change. C'est l'inverse : la
+    forme dépend de l'ordre d'insertion, l'ordre infixe n'en dépend pas.
+  \item \textbf{La hauteur d'un arbre réduit à sa racine.} L'énoncé la fixe à
+    $0$ parce que les deux conventions circulent. Sans cette précision, la
+    question 1 aurait deux réponses également défendables.
+  \item \textbf{Le doublon oublié.} Un \lstinline{else} à la place du
+    \lstinline{elif} insérerait $12$ une seconde fois à droite, et casserait
+    l'invariant de l'arbre sans que rien ne le signale. C'est exactement ce que
+    la question 5 vient tester.
+  \item \textbf{Répondre « $\log n$ » sans condition.} Le coût logarithmique
+    suppose l'équilibre. La question 4 est construite pour que le candidat
+    constate le cas dégénéré avant de conclure.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice fait travailler ensemble deux choses qu'on enseigne souvent
+séparément : l'écriture d'une insertion récursive, et le lien entre la forme
+d'une structure et le coût des opérations qu'on y fait. La progression est
+volontairement lente sur les trois premières questions — construire, parcourir,
+recommencer autrement — pour que la question 4 se réponde par observation
+plutôt que par récitation.
+
+Il s'adresse à un candidat qui maîtrise la récursivité simple. La question 5 est
+courte et rapporte trois points : elle permet à un candidat en difficulté sur le
+coût de ne pas terminer l'exercice à vide.

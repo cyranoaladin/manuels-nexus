@@ -1,0 +1,236 @@
+% META: {"id": "TNSI-ECRIT-S3-EX2", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S3", "rang": 2, "capacites": ["T-BDD-01B", "T-BDD-03D"], "capacites_codes": ["C2", "C8"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% import sqlite3
+% cx = sqlite3.connect(":memory:", isolation_level=None)
+% cx.execute("PRAGMA foreign_keys = ON")
+% cx.executescript("""
+% CREATE TABLE Auteur(id INTEGER PRIMARY KEY, nom TEXT NOT NULL UNIQUE);
+% CREATE TABLE Article(
+%     id INTEGER PRIMARY KEY,
+%     titre TEXT NOT NULL,
+%     id_auteur INTEGER NOT NULL,
+%     annee INTEGER NOT NULL,
+%     FOREIGN KEY (id_auteur) REFERENCES Auteur(id));
+% INSERT INTO Auteur VALUES (1,'Bahri'),(2,'Cherif'),(3,'Dridi');
+% INSERT INTO Article VALUES
+%   (1,'Tri par tas',1,2024),(2,'Graphes creux',1,2025),
+%   (3,'Index et jointures',2,2025);
+% """)
+% q = lambda s: cx.execute(s).fetchall()
+% # Q1 : la contrainte UNIQUE refuse un homonyme
+% refuse_unique = False
+% try:
+%     cx.execute("INSERT INTO Auteur VALUES (4, 'Bahri')")
+% except sqlite3.IntegrityError:
+%     refuse_unique = True
+% assert refuse_unique
+% # Q2 : jointure interne, articles avec leur auteur
+% assert q("""SELECT A.nom, R.titre FROM Article R
+%             JOIN Auteur A ON A.id = R.id_auteur
+%             ORDER BY A.nom, R.titre""") == [
+%     ('Bahri','Graphes creux'),('Bahri','Tri par tas'),('Cherif','Index et jointures')]
+% # Q3 : Dridi n'a aucun article ; jointure externe pour le voir
+% assert q("""SELECT A.nom, COUNT(R.id) FROM Auteur A
+%             LEFT JOIN Article R ON A.id = R.id_auteur
+%             GROUP BY A.id ORDER BY A.nom""") == [('Bahri',2),('Cherif',1),('Dridi',0)]
+% # Q4 : suppression d'un auteur reference
+% refuse_delete = False
+% try:
+%     cx.execute("DELETE FROM Auteur WHERE nom = 'Bahri'")
+% except sqlite3.IntegrityError:
+%     refuse_delete = True
+% assert refuse_delete
+% # un auteur non reference se supprime
+% cx.execute("DELETE FROM Auteur WHERE nom = 'Dridi'")
+% assert q("SELECT COUNT(*) FROM Auteur") == [(2,)]
+% # Q5 : auteurs ayant publie en 2025, sans doublon
+% assert q("""SELECT DISTINCT A.nom FROM Auteur A
+%             JOIN Article R ON A.id = R.id_auteur
+%             WHERE R.annee = 2025 ORDER BY A.nom""") == [('Bahri',),('Cherif',)]
+% # sans DISTINCT sur une annee ou un auteur publie deux fois, il apparaitrait deux fois
+% cx.execute("INSERT INTO Article VALUES (4,'Arbres equilibres',1,2025)")
+% assert q("""SELECT A.nom FROM Auteur A JOIN Article R ON A.id = R.id_auteur
+%             WHERE R.annee = 2025 ORDER BY A.nom""") == [
+%     ('Bahri',),('Bahri',),('Cherif',)]
+% assert q("""SELECT DISTINCT A.nom FROM Auteur A JOIN Article R ON A.id = R.id_auteur
+%             WHERE R.annee = 2025 ORDER BY A.nom""") == [('Bahri',),('Cherif',)]
+% END-VERIFY
+\section*{Sujet S3 --- Exercice 2 : deux tables, une jointure, une contrainte}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+Une revue scientifique gère ses articles et ses auteurs.
+
+\begin{sql}
+CREATE TABLE Auteur(
+    id INTEGER PRIMARY KEY,
+    nom TEXT NOT NULL UNIQUE);
+
+CREATE TABLE Article(
+    id INTEGER PRIMARY KEY,
+    titre TEXT NOT NULL,
+    id_auteur INTEGER NOT NULL,
+    annee INTEGER NOT NULL,
+    FOREIGN KEY (id_auteur) REFERENCES Auteur(id));
+\end{sql}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\textbf{id} & \textbf{nom} \\
+\hline
+$1$ & Bahri \\
+\hline
+$2$ & Cherif \\
+\hline
+$3$ & Dridi \\
+\hline
+\end{tabular}
+\qquad
+\begin{tabular}{|c|l|c|c|}
+\hline
+\textbf{id} & \textbf{titre} & \textbf{auteur} & \textbf{année} \\
+\hline
+$1$ & Tri par tas & $1$ & $2024$ \\
+\hline
+$2$ & Graphes creux & $1$ & $2025$ \\
+\hline
+$3$ & Index et jointures & $2$ & $2025$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+  \item Nommer les trois contraintes déclarées sur la table
+    \lstinline{Auteur} et dire, pour chacune, ce qu'elle interdit. Que se
+    passe-t-il si l'on tente d'insérer un second auteur nommé
+    \lstinline{'Bahri'} ?
+
+  \item Écrire la requête affichant, pour chaque article, le nom de son auteur
+    et son titre, classés par nom puis par titre. Donner le résultat.
+
+  \item La requête précédente ne mentionne pas \lstinline{Dridi}. Écrire une
+    requête affichant \textbf{tous} les auteurs avec leur nombre d'articles, y
+    compris ceux qui n'en ont aucun. Donner le résultat, et préciser quelle
+    colonne il faut compter et pourquoi.
+
+  \item On tente de supprimer l'auteur \lstinline{'Bahri'}. Que se passe-t-il, et
+    pourquoi ? Et si l'on supprime \lstinline{'Dridi'} ? En déduire ce que la
+    clé étrangère protège exactement.
+
+  \item Écrire la requête affichant les noms des auteurs ayant publié en
+    $2025$, chaque nom une seule fois. On ajoute ensuite un quatrième article de
+    \lstinline{'Bahri'} en $2025$. Montrer, en donnant les deux résultats, ce
+    que devient la requête sans le mot-clé qui supprime les doublons.
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(4 points)}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Contrainte} & \textbf{Ce qu'elle interdit} \\
+\hline
+\lstinline{PRIMARY KEY} & deux auteurs de même identifiant, et un identifiant vide \\
+\hline
+\lstinline{NOT NULL} & un auteur sans nom \\
+\hline
+\lstinline{UNIQUE} & deux auteurs de même nom \\
+\hline
+\end{tabular}
+\end{center}
+
+L'insertion d'un second \lstinline{'Bahri'} est \textbf{refusée} : la
+contrainte d'unicité n'est pas satisfaite.
+
+\medskip
+\textbf{Question 2.} \emph{(3 points)}
+
+\begin{sql}
+SELECT A.nom, R.titre
+FROM Article R JOIN Auteur A ON A.id = R.id_auteur
+ORDER BY A.nom, R.titre;
+\end{sql}
+
+Résultat : \lstinline{(Bahri, Graphes creux)}, \lstinline{(Bahri, Tri par tas)},
+\lstinline{(Cherif, Index et jointures)}.
+
+\medskip
+\textbf{Question 3.} \emph{(5 points)}
+
+\begin{sql}
+SELECT A.nom, COUNT(R.id)
+FROM Auteur A LEFT JOIN Article R ON A.id = R.id_auteur
+GROUP BY A.id ORDER BY A.nom;
+\end{sql}
+
+Résultat : Bahri $\rightarrow 2$, Cherif $\rightarrow 1$, Dridi
+$\rightarrow \mathbf{0}$.
+
+Il faut compter \lstinline{R.id}, colonne de la table \textbf{jointe}. Pour
+Dridi, la jointure externe produit une ligne où toutes les colonnes de
+\lstinline{Article} valent \lstinline{NULL} ; \lstinline{COUNT} ignore les
+\lstinline{NULL} et renvoie $0$. \lstinline{COUNT(*)} compterait la ligne
+elle-même et renverrait $1$.
+
+\medskip
+\textbf{Question 4.} \emph{(5 points)}
+
+Supprimer \lstinline{'Bahri'} est \textbf{refusé} : deux articles le
+référencent, et les supprimer laisserait des lignes pointant vers un auteur
+inexistant. Supprimer \lstinline{'Dridi'} \textbf{réussit} : aucun article ne
+le référence.
+
+La clé étrangère ne protège pas les auteurs, elle protège les
+\textbf{références} : elle garantit que toute valeur de
+\lstinline{Article.id_auteur} désigne une ligne réellement présente dans
+\lstinline{Auteur}.
+
+\medskip
+\textbf{Question 5.} \emph{(3 points)}
+
+\begin{sql}
+SELECT DISTINCT A.nom
+FROM Auteur A JOIN Article R ON A.id = R.id_auteur
+WHERE R.annee = 2025 ORDER BY A.nom;
+\end{sql}
+
+Avant l'ajout : \lstinline{Bahri}, \lstinline{Cherif} dans les deux versions.
+Après l'ajout du quatrième article, \textbf{sans} \lstinline{DISTINCT} :
+\lstinline{Bahri}, \lstinline{Bahri}, \lstinline{Cherif}. La jointure produit
+une ligne par article, pas par auteur.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{\lstinline{COUNT(*)} dans une jointure externe.} L'erreur donne
+    $1$ au lieu de $0$ : un nombre parfaitement crédible, que rien ne signale.
+    C'est le piège central de la question 3.
+  \item \textbf{« La clé étrangère protège l'auteur ».} Formulation courante et
+    inexacte. Ce qui est protégé, c'est l'article : il ne doit jamais désigner
+    un auteur absent. La question 4 est posée dans les deux sens pour cela.
+  \item \textbf{\lstinline{DISTINCT} avant l'exemple.} Beaucoup de candidats
+    l'écrivent par réflexe sans savoir ce qu'il évite. La question 5 attend
+    précisément qu'ils montrent le doublon, pas qu'ils l'anticipent.
+  \item \textbf{Confondre \lstinline{PRIMARY KEY} et \lstinline{UNIQUE}.} Les
+    deux imposent l'unicité ; seule la première désigne l'identifiant de la
+    ligne, et une table n'en a qu'une.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice tient sur deux tables et cinq lignes de données, volontairement : il
+n'y a rien à déchiffrer, tout est dans ce que les requêtes révèlent ou cachent.
+
+Les questions 3 et 5 posent la même leçon à deux endroits différents — une
+jointure change ce qu'on croit compter — une fois en effaçant une ligne
+attendue, une fois en en dupliquant une. La question 4 relie les deux au
+mécanisme qui, seul, garde la base cohérente pendant qu'on la modifie.

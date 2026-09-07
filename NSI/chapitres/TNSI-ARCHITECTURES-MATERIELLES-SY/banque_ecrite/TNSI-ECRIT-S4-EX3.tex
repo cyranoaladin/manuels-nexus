@@ -1,0 +1,260 @@
+% META: {"id": "TNSI-ECRIT-S4-EX3", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S4", "rang": 3, "capacites": ["T-ARCH-03", "T-ARCH-04A", "T-ARCH-04B"], "capacites_codes": ["C5", "C6", "C7"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% import heapq
+% reseau = {
+%     "A": {"B": 2, "C": 9},
+%     "B": {"A": 2, "C": 3, "D": 7},
+%     "C": {"A": 9, "B": 3, "D": 1},
+%     "D": {"B": 7, "C": 1},
+% }
+% # le graphe pondere est symetrique
+% for s, voisins in reseau.items():
+%     for v, cout in voisins.items():
+%         assert reseau[v][s] == cout
+% # Q1 : le chemin le moins couteux n'est pas le plus court en sauts
+% def cout_chemin(chemin):
+%     return sum(reseau[chemin[i]][chemin[i + 1]] for i in range(len(chemin) - 1))
+% assert cout_chemin(["A", "C"]) == 9
+% assert cout_chemin(["A", "B", "C"]) == 5
+% assert len(["A", "C"]) < len(["A", "B", "C"])
+% # Q2 : Dijkstra
+% def plus_courts(graphe, depart):
+%     distances = {depart: 0}
+%     precedent = {}
+%     tas = [(0, depart)]
+%     regles = set()
+%     while tas:
+%         d, courant = heapq.heappop(tas)
+%         if courant in regles:
+%             continue
+%         regles.add(courant)
+%         for voisin, cout in graphe[courant].items():
+%             candidat = d + cout
+%             if voisin not in distances or candidat < distances[voisin]:
+%                 distances[voisin] = candidat
+%                 precedent[voisin] = courant
+%                 heapq.heappush(tas, (candidat, voisin))
+%     return distances, precedent
+% distances, precedent = plus_courts(reseau, "A")
+% assert distances == {"A": 0, "B": 2, "C": 5, "D": 6}
+% # Q3 : reconstruire le chemin
+% def chemin(precedent, depart, arrivee):
+%     route = [arrivee]
+%     while route[-1] != depart:
+%         route.append(precedent[route[-1]])
+%     return route[::-1]
+% assert chemin(precedent, "A", "D") == ["A", "B", "C", "D"]
+% assert cout_chemin(chemin(precedent, "A", "D")) == distances["D"]
+% assert cout_chemin(["A", "B", "D"]) == 9 > distances["D"]
+% # Q4 : un cout negatif sur une liaison bidirectionnelle cree un cycle negatif
+% piege = {k: dict(v) for k, v in reseau.items()}
+% piege["A"]["C"] = -5
+% piege["C"]["A"] = -5
+% # aller-retour A -> C -> A : -10, et on peut le refaire indefiniment
+% assert piege["A"]["C"] + piege["C"]["A"] == -10 < 0
+% d2, _ = plus_courts(piege, "A")
+% # la table renvoyee est incoherente : le depart est a distance negative de
+% # lui-meme, ce qu'aucune notion de plus court chemin n'autorise
+% assert d2["A"] == -10
+% assert d2["A"] != 0
+% # les autres valeurs heritent de cette absurdite
+% assert d2 == {"A": -10, "B": -2, "C": -5, "D": -4}
+% # sur le reseau d'origine, le depart est bien a distance nulle de lui-meme
+% assert distances["A"] == 0
+% # Q5 : chiffrement symetrique par XOR, et ce qu'il ne protege pas
+% def xor(message, cle):
+%     return bytes(o ^ cle[i % len(cle)] for i, o in enumerate(message))
+% clair = b"ROUTAGE"
+% cle = b"NSI"
+% chiffre = xor(clair, cle)
+% assert chiffre != clair
+% assert xor(chiffre, cle) == clair
+% assert len(chiffre) == len(clair)
+% # deux messages identiques donnent le meme chiffre : la confidentialite du
+% # contenu n'entraine pas celle du motif
+% assert xor(b"AAAA", cle) == xor(b"AAAA", cle)
+% # et une modification d'un octet passe inapercue sans controle d'integrite
+% altere = bytearray(chiffre); altere[0] ^= 1
+% assert xor(bytes(altere), cle) != clair
+% assert len(xor(bytes(altere), cle)) == len(clair)
+% END-VERIFY
+\section*{Sujet S4 --- Exercice 3 : routage, coût d'un chemin et confidentialité}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+Quatre routeurs sont reliés par des liaisons dont le coût est indiqué :
+
+\begin{python}
+reseau = {
+    "A": {"B": 2, "C": 9},
+    "B": {"A": 2, "C": 3, "D": 7},
+    "C": {"A": 9, "B": 3, "D": 1},
+    "D": {"B": 7, "C": 1},
+}
+\end{python}
+
+\begin{enumerate}
+  \item Écrire \lstinline{cout_chemin(chemin)}, qui somme les coûts des
+    liaisons successives. Calculer le coût de $A \rightarrow C$ puis de
+    $A \rightarrow B \rightarrow C$. Qu'en conclure sur la différence entre
+    « le moins de sauts » et « le moins coûteux » ?
+
+  \item Écrire \lstinline{plus_courts(graphe, depart)} qui renvoie, pour chaque
+    routeur, le coût minimal depuis le départ, en explorant toujours le sommet
+    non réglé de plus petit coût connu. Donner les quatre coûts depuis $A$.
+
+  \item Faire renvoyer à votre fonction, en plus des coûts, le prédécesseur de
+    chaque routeur sur le meilleur chemin. Reconstruire le chemin de $A$ à $D$
+    et vérifier que son coût vaut bien le coût minimal trouvé. Comparer avec le
+    coût de $A \rightarrow B \rightarrow D$.
+
+  \item On remplace le coût de la liaison $A$--$C$ par $-5$. Calculer le coût
+    de l'aller-retour $A \rightarrow C \rightarrow A$. Exécuter votre fonction
+    et lire la valeur obtenue pour $A$ lui-même. En quoi cette valeur montre-t-
+    elle que la question posée n'a plus de réponse ? Que faudrait-il vérifier
+    avant d'appliquer l'algorithme ?
+
+  \item Les routeurs chiffrent leurs messages par un XOR octet à octet avec une
+    clé répétée. Écrire \lstinline{xor(message, cle)}, et vérifier qu'appliquée
+    deux fois elle redonne le message. Citer ensuite \textbf{deux} propriétés
+    que ce chiffrement ne garantit pas, en donnant pour chacune une observation
+    qui le montre.
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(3 points)}
+
+\begin{python}
+def cout_chemin(chemin):
+    return sum(reseau[chemin[i]][chemin[i + 1]]
+               for i in range(len(chemin) - 1))
+\end{python}
+
+$A \rightarrow C$ coûte $\mathbf{9}$ en un saut ;
+$A \rightarrow B \rightarrow C$ coûte $2 + 3 = \mathbf{5}$ en deux sauts. Le
+chemin le plus court en nombre de liaisons n'est \textbf{pas} le moins coûteux :
+compter les sauts revient à supposer tous les coûts égaux.
+
+\medskip
+\textbf{Question 2.} \emph{(6 points)}
+
+\begin{python}
+import heapq
+
+def plus_courts(graphe, depart):
+    distances, precedent = {depart: 0}, {}
+    tas, regles = [(0, depart)], set()
+    while tas:
+        cout, courant = heapq.heappop(tas)
+        if courant in regles:
+            continue
+        regles.add(courant)
+        for voisin, poids in graphe[courant].items():
+            candidat = cout + poids
+            if voisin not in distances or candidat < distances[voisin]:
+                distances[voisin] = candidat
+                precedent[voisin] = courant
+                heapq.heappush(tas, (candidat, voisin))
+    return distances, precedent
+\end{python}
+
+Depuis $A$ : $A \rightarrow 0$, $B \rightarrow 2$, $C \rightarrow 5$,
+$D \rightarrow 6$.
+
+\medskip
+\textbf{Question 3.} \emph{(4 points)}
+
+\begin{python}
+def chemin(precedent, depart, arrivee):
+    route = [arrivee]
+    while route[-1] != depart:
+        route.append(precedent[route[-1]])
+    return route[::-1]
+\end{python}
+
+$A \rightarrow B \rightarrow C \rightarrow D$, de coût $2 + 3 + 1 = 6$, égal au
+coût minimal. Le chemin $A \rightarrow B \rightarrow D$, plus court en sauts,
+coûte $2 + 7 = 9$.
+
+\medskip
+\textbf{Question 4.} \emph{(4 points)}
+
+La liaison étant bidirectionnelle, l'aller-retour $A \rightarrow C \rightarrow A$
+coûte $-5 + (-5) = \mathbf{-10}$. On peut le parcourir autant de fois qu'on
+veut, en diminuant le coût à chaque tour : c'est un \textbf{cycle de coût
+négatif}.
+
+La fonction renvoie $A \rightarrow \mathbf{-10}$ : le point de départ serait à
+distance négative de lui-même. Or la distance d'un sommet à lui-même vaut $0$
+par définition — le chemin vide. Cette valeur ne signale pas une erreur de
+programmation : elle montre que la \textbf{question} n'a plus de réponse. Dès
+qu'un cycle négatif existe, il n'y a pas de coût minimal, seulement des coûts
+qui décroissent sans fin.
+
+Il faut donc vérifier, avant d'appliquer l'algorithme, qu'aucun coût n'est
+négatif. C'est une hypothèse sur les données, pas une propriété du code.
+
+\medskip
+\textbf{Question 5.} \emph{(3 points)}
+
+\begin{python}
+def xor(message, cle):
+    return bytes(octet ^ cle[i % len(cle)]
+                 for i, octet in enumerate(message))
+\end{python}
+
+\lstinline{xor(xor(m, k), k) == m} : l'opération est son propre inverse.
+
+Deux propriétés non garanties :
+
+\begin{itemize}
+  \item \textbf{L'indistinguabilité.} Deux messages identiques chiffrés avec la
+    même clé donnent le même résultat. Un observateur qui voit deux fois la même
+    suite d'octets sait que le même message a été envoyé, sans le déchiffrer.
+  \item \textbf{L'intégrité.} Modifier un octet du message chiffré produit un
+    déchiffrement différent, de même longueur, que rien ne signale. Le
+    destinataire n'a aucun moyen de savoir que le message a été altéré.
+\end{itemize}
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Confondre distance et coût.} La question 1 est là pour cela, et
+    la question 3 y revient : le chemin en deux sauts bat le chemin en un saut,
+    puis le chemin en trois sauts bat celui en deux.
+  \item \textbf{Régler un sommet deux fois.} Sans l'ensemble
+    \lstinline{regles}, un sommet extrait plusieurs fois du tas relance des
+    explorations inutiles. Le résultat reste juste, le coût non.
+  \item \textbf{« Dijkstra ne marche pas avec des coûts négatifs ».} La formule
+    est juste et l'explication attendue va plus loin : sur une liaison
+    bidirectionnelle, un coût négatif ne rend pas seulement l'algorithme faux,
+    il rend la question sans objet. Un candidat qui cherche « la bonne réponse »
+    à la question 4 cherche quelque chose qui n'existe pas.
+  \item \textbf{Croire que chiffrer suffit.} La question 5 sépare
+    confidentialité, indistinguabilité et intégrité. Un candidat qui répond
+    « le message est protégé » n'a nommé aucune des trois.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice suit une même idée dans deux domaines : une garantie n'existe que
+sous ses hypothèses. Le plus court chemin suppose des coûts positifs ; le
+chiffrement XOR assure la confidentialité du contenu et rien d'autre. Dans les
+deux cas, la question demande de nommer l'hypothèse, pas seulement de constater
+l'échec.
+
+La question 4 va un cran plus loin que « l'algorithme se trompe » : elle fait
+lire au candidat une valeur — le départ à distance $-10$ de lui-même — dont
+l'absurdité prouve que l'énoncé du problème s'est effondré avec l'hypothèse.
+
+Les questions 1 à 3 sont progressives et rapportent treize points : un candidat
+qui maîtrise le routage sans aborder la cryptographie obtient une note
+convenable. La question 5 est indépendante des quatre précédentes, ce qui la
+rend accessible même après un échec sur l'algorithme.
