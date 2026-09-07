@@ -234,10 +234,10 @@ manuals:
   TCOMPL:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '226'
+      detail: '309'
       source: anomalies.blocking_statuses
     - code: statuts_non_approuves
-      detail: objets=217; contrats=9
+      detail: objets=300; contrats=9
       source: manuals.TCOMPL.statuses
     current:
       artifacts:
@@ -255,24 +255,23 @@ manuals:
       - TCOMPL-MODELES-FONCTION
       - TCOMPL-TEMPS-ATTENTE
       statuses:
-        approved: 575
-        generated: 150
+        generated: 233
         needs_review: 67
       totals:
         banque_ecrite: 0
         banque_pratique: 0
         capacites: 53
-        corriges: 324
+        corriges: 101
         coups_de_pouce: 0
         diagnostics: 0
         evaluations: 18
-        exercices_principaux: 306
+        exercices_principaux: 83
         methodes: 52
         projets: 0
         qcm: 9
-        remediations: 50
+        remediations: 10
         sections_cours: 27
-        td: 6
+        td: 0
     objective:
       directive: docs/11_perimetre_terminale_complementaires.md
       target_chapters: 9
@@ -308,10 +307,10 @@ manuals:
   TEXPERTES:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '131'
+      detail: '240'
       source: anomalies.blocking_statuses
     - code: statuts_non_approuves
-      detail: objets=126; contrats=5
+      detail: objets=235; contrats=5
       source: manuals.TEXPERTES.statuses
     current:
       artifacts:
@@ -325,24 +324,23 @@ manuals:
       - TEXP-GRAPHES
       - TEXP-MATRICES-MARKOV
       statuses:
-        approved: 374
-        generated: 93
+        generated: 202
         needs_review: 33
       totals:
         banque_ecrite: 0
         banque_pratique: 0
         capacites: 33
-        corriges: 204
+        corriges: 86
         coups_de_pouce: 0
         diagnostics: 0
         evaluations: 10
-        exercices_principaux: 194
+        exercices_principaux: 76
         methodes: 33
         projets: 0
         qcm: 5
-        remediations: 33
+        remediations: 10
         sections_cours: 15
-        td: 6
+        td: 0
     objective:
       directive: docs/12_perimetre_terminale_expertes.md
       target_chapters: 5
@@ -499,8 +497,11 @@ manuals:
   TSPE_2026_2027:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '59'
+      detail: '67'
       source: anomalies.blocking_statuses
+    - code: anomalie:broken_meta_references
+      detail: '2'
+      source: anomalies.broken_meta_references
     - code: livrable_non_compile
       detail: declared
       source: deliverable_matrix.TSPE_2026_2027.variants.livret_methodes
@@ -508,7 +509,7 @@ manuals:
       detail: declared
       source: deliverable_matrix.TSPE_2026_2027.variants.livret_remediation
     - code: statuts_non_approuves
-      detail: objets=59; contrats=0
+      detail: objets=67; contrats=0
       source: manuals.TSPE_2026_2027.statuses
     current:
       artifacts:
@@ -528,18 +529,18 @@ manuals:
       - TSPE-SUITES-LIMITES
       - TSPE-TRIGONOMETRIE
       statuses:
-        approved: 780
-        generated: 56
+        approved: 756
+        generated: 64
         needs_review: 3
       totals:
         banque_ecrite: 0
         banque_pratique: 0
         capacites: 67
-        corriges: 299
+        corriges: 291
         coups_de_pouce: 67
         diagnostics: 0
         evaluations: 22
-        exercices_principaux: 277
+        exercices_principaux: 269
         methodes: 41
         projets: 0
         qcm: 11
@@ -561,6 +562,7 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
+    - anomalie:broken_meta_references
     - statuts_non_approuves
     structural_compile_ready: false
     variants:
@@ -597,12 +599,12 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:0c6f191f0ecb5a8d82429d6924464e692dcd40182258450f51898341f2349d9b
+model_digest: sha256:1bce93bc00381a4432ae36ae9112f7d1a67920749adeb67c4a99e394b62009e9
 provenance:
   branch: null
   dirty: false
   errors: []
-  generated_at_utc: '2026-09-07T13:05:00Z'
+  generated_at_utc: '2026-09-07T18:50:14Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:79b255deeddfa4b483a9a5a9f568bdc143defd7b2a69e8b8a704f4afdd35d6bf
     scripts/build_manifest.py: sha256:62d4f5da9454aaa2923041db777b759e3e4b672e7c2f33b59a62e07afc76de26
@@ -614,7 +616,7 @@ provenance:
   generator_sha256: sha256:f932fe8c33273bdba8f5f9230ed39a824111f74177310dc1c4ea7c529714d065
   generator_version: 1
   git_available: true
-  head_sha: f697b6ceefa8854d5743e80f4a286f077d39a4ef
+  head_sha: abd37d2823ca5638e42c37fd98e9e38c8d1bb659
   modified_tracked: []
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
@@ -626,4 +628,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:0b65b22b513bd7fcf60f3db1e86de1da48375d7d0744518131f34e32994623bd
+source_digest: sha256:71127deab7e5de4c28848c2a1d3c1b2eda1db9f38bf094c01f80ab5e278c0048
