@@ -215,7 +215,6 @@
         "status": "WEAK",
         "uncovered": {
           "direct_application": [
-            "C1",
             "C2",
             "C3"
           ],
@@ -224,11 +223,14 @@
             "C2",
             "C3"
           ],
-          "variation": []
+          "variation": [
+            "C1",
+            "C3"
+          ]
         },
         "verdict": "WEAK",
         "weak_axes": [
-          "CAPACITY_ASSIGNMENT"
+          "EXERCISE_DIVERSITY"
         ]
       },
       "pedagogical_richness": {
@@ -907,8 +909,6 @@
         "status": "WEAK",
         "uncovered": {
           "direct_application": [
-            "C1",
-            "C2",
             "C3",
             "C4",
             "C5"
@@ -920,11 +920,14 @@
             "C4",
             "C5"
           ],
-          "variation": []
+          "variation": [
+            "C2",
+            "C4"
+          ]
         },
         "verdict": "WEAK",
         "weak_axes": [
-          "CAPACITY_ASSIGNMENT"
+          "EXERCISE_DIVERSITY"
         ]
       },
       "pedagogical_richness": {
@@ -1243,8 +1246,6 @@
         "status": "WEAK",
         "uncovered": {
           "direct_application": [
-            "C1",
-            "C2",
             "C3",
             "C4",
             "C5",
@@ -1260,11 +1261,14 @@
             "C6",
             "C7"
           ],
-          "variation": []
+          "variation": [
+            "C1",
+            "C2"
+          ]
         },
         "verdict": "WEAK",
         "weak_axes": [
-          "CAPACITY_ASSIGNMENT"
+          "EXERCISE_DIVERSITY"
         ]
       },
       "pedagogical_richness": {
@@ -1603,8 +1607,6 @@
         "status": "WEAK",
         "uncovered": {
           "direct_application": [
-            "C1",
-            "C2",
             "C3",
             "C4"
           ],
@@ -1614,11 +1616,13 @@
             "C3",
             "C4"
           ],
-          "variation": []
+          "variation": [
+            "C4"
+          ]
         },
         "verdict": "WEAK",
         "weak_axes": [
-          "CAPACITY_ASSIGNMENT"
+          "EXERCISE_DIVERSITY"
         ]
       },
       "pedagogical_richness": {
@@ -1923,8 +1927,6 @@
         "status": "WEAK",
         "uncovered": {
           "direct_application": [
-            "C1",
-            "C2",
             "C3",
             "C4",
             "C5"
@@ -1936,11 +1938,15 @@
             "C4",
             "C5"
           ],
-          "variation": []
+          "variation": [
+            "C1",
+            "C2",
+            "C3"
+          ]
         },
         "verdict": "WEAK",
         "weak_axes": [
-          "CAPACITY_ASSIGNMENT"
+          "EXERCISE_DIVERSITY"
         ]
       },
       "pedagogical_richness": {
@@ -2257,8 +2263,6 @@
         "status": "WEAK",
         "uncovered": {
           "direct_application": [
-            "C1",
-            "C2",
             "C3",
             "C4"
           ],
@@ -2268,11 +2272,15 @@
             "C3",
             "C4"
           ],
-          "variation": []
+          "variation": [
+            "C1",
+            "C3",
+            "C4"
+          ]
         },
         "verdict": "WEAK",
         "weak_axes": [
-          "CAPACITY_ASSIGNMENT"
+          "EXERCISE_DIVERSITY"
         ]
       },
       "pedagogical_richness": {
@@ -2579,8 +2587,6 @@
         "status": "WEAK",
         "uncovered": {
           "direct_application": [
-            "C1",
-            "C2",
             "C3",
             "C4",
             "C5"
@@ -2592,11 +2598,16 @@
             "C4",
             "C5"
           ],
-          "variation": []
+          "variation": [
+            "C1",
+            "C2",
+            "C3",
+            "C5"
+          ]
         },
         "verdict": "WEAK",
         "weak_axes": [
-          "CAPACITY_ASSIGNMENT"
+          "EXERCISE_DIVERSITY"
         ]
       },
       "pedagogical_richness": {
@@ -2879,7 +2890,7 @@
         "evidence_routing": "COMPLETE",
         "ex_co_graph": "COMPLETE",
         "oracle": "COMPLETE",
-        "pedagogical_quality": "WEAK",
+        "pedagogical_quality": "COMPLETE",
         "pedagogical_richness": "COMPLETE",
         "pedagogical_role_coverage": "COMPLETE",
         "programme": "COMPLETE",
@@ -2899,14 +2910,9 @@
       },
       "pedagogical_quality": {
         "assessment_mode": "WRITTEN_ASSESSMENT",
-        "status": "WEAK",
+        "status": "COMPLETE",
         "uncovered": {
-          "direct_application": [
-            "C1",
-            "C2",
-            "C3",
-            "C4"
-          ],
+          "direct_application": [],
           "reasoning": [
             "C1",
             "C2",
@@ -2916,10 +2922,8 @@
           ],
           "variation": []
         },
-        "verdict": "WEAK",
-        "weak_axes": [
-          "CAPACITY_ASSIGNMENT"
-        ]
+        "verdict": "ADEQUATE",
+        "weak_axes": []
       },
       "pedagogical_richness": {
         "capacities_digest": "sha256:edb568f216022a4a5330844db241eeafeef1120a91365f959bb67eb1620c3d04",
@@ -3059,7 +3063,7 @@
       },
       "risk_score": 2445,
       "unassembled_object_ids": [],
-      "vertical_machine_status": "INCOMPLETE"
+      "vertical_machine_status": "MACHINE_REVIEW_COMPLETE"
     },
     {
       "assessments": {
@@ -3247,9 +3251,6 @@
         "status": "WEAK",
         "uncovered": {
           "direct_application": [
-            "C1",
-            "C2",
-            "C3",
             "C4",
             "C5",
             "C6",
@@ -3268,11 +3269,21 @@
             "C8",
             "C9"
           ],
-          "variation": []
+          "variation": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C6",
+            "C7",
+            "C8",
+            "C9"
+          ]
         },
         "verdict": "WEAK",
         "weak_axes": [
-          "CAPACITY_ASSIGNMENT"
+          "EXERCISE_DIVERSITY"
         ]
       },
       "pedagogical_richness": {
@@ -6841,8 +6852,7 @@
             "C4"
           ],
           "variation": [
-            "C4",
-            "C6"
+            "C4"
           ]
         },
         "verdict": "WEAK",
@@ -7162,8 +7172,7 @@
             "C3"
           ],
           "variation": [
-            "C4",
-            "C5"
+            "C4"
           ]
         },
         "verdict": "WEAK",
@@ -8441,8 +8450,7 @@
             "C2"
           ],
           "variation": [
-            "C1",
-            "C4"
+            "C1"
           ]
         },
         "verdict": "WEAK",
@@ -9773,7 +9781,7 @@
         "evidence_routing": "COMPLETE",
         "ex_co_graph": "COMPLETE",
         "oracle": "COMPLETE",
-        "pedagogical_quality": "WEAK",
+        "pedagogical_quality": "COMPLETE",
         "pedagogical_richness": "COMPLETE",
         "pedagogical_role_coverage": "COMPLETE",
         "programme": "COMPLETE",
@@ -9793,21 +9801,17 @@
       },
       "pedagogical_quality": {
         "assessment_mode": "WRITTEN_ASSESSMENT",
-        "status": "WEAK",
+        "status": "COMPLETE",
         "uncovered": {
           "direct_application": [
             "C5",
             "C6"
           ],
           "reasoning": [],
-          "variation": [
-            "C6"
-          ]
+          "variation": []
         },
-        "verdict": "WEAK",
-        "weak_axes": [
-          "EXERCISE_DIVERSITY"
-        ]
+        "verdict": "ADEQUATE",
+        "weak_axes": []
       },
       "pedagogical_richness": {
         "capacities_digest": "sha256:f9408397bc2462d3757bb3c3bf67e7ca94baf267927420d71418f2f4e5004bf4",
@@ -9984,7 +9988,7 @@
       },
       "risk_score": 2910,
       "unassembled_object_ids": [],
-      "vertical_machine_status": "INCOMPLETE"
+      "vertical_machine_status": "MACHINE_REVIEW_COMPLETE"
     },
     {
       "assessments": {
@@ -10486,8 +10490,7 @@
             "C4"
           ],
           "variation": [
-            "C1",
-            "C5"
+            "C1"
           ]
         },
         "verdict": "WEAK",
@@ -11139,7 +11142,8 @@
             "C5"
           ],
           "variation": [
-            "C1"
+            "C1",
+            "C5"
           ]
         },
         "verdict": "WEAK",
@@ -15117,7 +15121,7 @@
         "evidence_routing": "COMPLETE",
         "ex_co_graph": "COMPLETE",
         "oracle": "COMPLETE",
-        "pedagogical_quality": "WEAK",
+        "pedagogical_quality": "COMPLETE",
         "pedagogical_richness": "COMPLETE",
         "pedagogical_role_coverage": "COMPLETE",
         "programme": "COMPLETE",
@@ -15137,18 +15141,14 @@
       },
       "pedagogical_quality": {
         "assessment_mode": "WRITTEN_ASSESSMENT",
-        "status": "WEAK",
+        "status": "COMPLETE",
         "uncovered": {
           "direct_application": [],
           "reasoning": [],
-          "variation": [
-            "C3"
-          ]
+          "variation": []
         },
-        "verdict": "WEAK",
-        "weak_axes": [
-          "EXERCISE_DIVERSITY"
-        ]
+        "verdict": "ADEQUATE",
+        "weak_axes": []
       },
       "pedagogical_richness": {
         "capacities_digest": "sha256:58640f19e20c34c8a325b91d8dfdad4559382a6c0131264e05baea19c79617b8",
@@ -15298,7 +15298,7 @@
       },
       "risk_score": 2370,
       "unassembled_object_ids": [],
-      "vertical_machine_status": "INCOMPLETE"
+      "vertical_machine_status": "MACHINE_REVIEW_COMPLETE"
     },
     {
       "assessments": {
@@ -15505,7 +15505,6 @@
           ],
           "variation": [
             "C2",
-            "C11",
             "C12"
           ]
         },
@@ -17602,8 +17601,8 @@
   "counts": {
     "chapters": 52,
     "human_closed": 0,
-    "machine_review_complete": 22,
-    "machine_review_incomplete": 30,
+    "machine_review_complete": 25,
+    "machine_review_incomplete": 27,
     "manuals": 6
   },
   "generated_by": "scripts/build_publish_readiness_chapter_matrix.py",
@@ -17651,11 +17650,6 @@
       "risk_score": 3270
     },
     {
-      "chapter": "TEXP-ARITHMETIQUE",
-      "manual": "TEXPERTES",
-      "risk_score": 2910
-    },
-    {
       "chapter": "1NSI-WEB-IHM",
       "manual": "1NSI",
       "risk_score": 2820
@@ -17666,17 +17660,7 @@
       "risk_score": 2790
     },
     {
-      "chapter": "1NSI-TYPES-CONSTRUITS",
-      "manual": "1NSI",
-      "risk_score": 2445
-    },
-    {
       "chapter": "TSPE-CALCUL-INTEGRAL",
-      "manual": "TSPE_2026_2027",
-      "risk_score": 2370
-    },
-    {
-      "chapter": "TSPE-DERIVATION-CONVEXITE",
       "manual": "TSPE_2026_2027",
       "risk_score": 2370
     },

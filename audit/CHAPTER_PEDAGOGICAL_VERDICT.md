@@ -4,16 +4,16 @@ Chaque verdict est derive des competences et parcours declares par les exercices
 
 | chapitre | cours | ex | co | eval | rem | diversite | progression | verdict |
 | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
-| 1NSI-ALGO-DICHO-GLOUTON-KNN | 3 | 5 | 8 | 4 | 3 | STRONG | STRONG | **WEAK** |
+| 1NSI-ALGO-DICHO-GLOUTON-KNN | 3 | 5 | 8 | 4 | 3 | WEAK | STRONG | **WEAK** |
 | 1NSI-ALGO-PARCOURS-TRIS | 3 | 6 | 12 | 4 | 6 | WEAK | ADEQUATE | **WEAK** |
-| 1NSI-ARCHITECTURE-OS | 3 | 5 | 6 | 4 | 1 | STRONG | STRONG | **WEAK** |
-| 1NSI-LANGAGE | 5 | 5 | 6 | 4 | 1 | STRONG | STRONG | **WEAK** |
-| 1NSI-PROJET-METHODES | 4 | 5 | 6 | 4 | 1 | STRONG | STRONG | **WEAK** |
-| 1NSI-RESEAUX | 3 | 5 | 6 | 4 | 1 | STRONG | STRONG | **WEAK** |
-| 1NSI-TABLES | 4 | 5 | 6 | 4 | 1 | STRONG | STRONG | **WEAK** |
-| 1NSI-TYPES-BASE | 5 | 5 | 6 | 4 | 1 | STRONG | STRONG | **WEAK** |
-| 1NSI-TYPES-CONSTRUITS | 8 | 55 | 55 | 4 | 1 | STRONG | STRONG | **WEAK** |
-| 1NSI-WEB-IHM | 3 | 5 | 6 | 4 | 1 | ADEQUATE | STRONG | **WEAK** |
+| 1NSI-ARCHITECTURE-OS | 3 | 5 | 6 | 4 | 1 | WEAK | STRONG | **WEAK** |
+| 1NSI-LANGAGE | 5 | 5 | 6 | 4 | 1 | WEAK | STRONG | **WEAK** |
+| 1NSI-PROJET-METHODES | 4 | 5 | 6 | 4 | 1 | WEAK | STRONG | **WEAK** |
+| 1NSI-RESEAUX | 3 | 5 | 6 | 4 | 1 | WEAK | STRONG | **WEAK** |
+| 1NSI-TABLES | 4 | 5 | 6 | 4 | 1 | WEAK | STRONG | **WEAK** |
+| 1NSI-TYPES-BASE | 5 | 5 | 6 | 4 | 1 | WEAK | STRONG | **WEAK** |
+| 1NSI-TYPES-CONSTRUITS | 8 | 55 | 55 | 4 | 1 | STRONG | STRONG | **ADEQUATE** |
+| 1NSI-WEB-IHM | 3 | 5 | 6 | 4 | 1 | WEAK | STRONG | **WEAK** |
 | 1SPE-DERIVATION-GLOBAL | 7 | 71 | 53 | 4 | 10 | STRONG | STRONG | **ADEQUATE** |
 | 1SPE-DERIVATION-LOCAL | 7 | 68 | 50 | 4 | 10 | STRONG | STRONG | **ADEQUATE** |
 | 1SPE-EXPONENTIELLE | 8 | 68 | 50 | 4 | 10 | STRONG | STRONG | **ADEQUATE** |
@@ -33,7 +33,7 @@ Chaque verdict est derive des competences et parcours declares par les exercices
 | TCOMPL-MODELES-EVOLUTION | 4 | 9 | 9 | 4 | 1 | STRONG | ADEQUATE | **ADEQUATE** |
 | TCOMPL-MODELES-FONCTION | 3 | 10 | 10 | 4 | 2 | WEAK | ADEQUATE | **WEAK** |
 | TCOMPL-TEMPS-ATTENTE | 3 | 10 | 10 | 4 | 1 | WEAK | ADEQUATE | **WEAK** |
-| TEXP-ARITHMETIQUE | 4 | 28 | 28 | 4 | 4 | WEAK | STRONG | **WEAK** |
+| TEXP-ARITHMETIQUE | 4 | 28 | 28 | 4 | 4 | STRONG | STRONG | **ADEQUATE** |
 | TEXP-COMPLEXES-ALGEBRE-GEOMETRIE | 2 | 10 | 10 | 4 | 1 | WEAK | ADEQUATE | **WEAK** |
 | TEXP-COMPLEXES-TRIGO-POLYNOMES | 3 | 10 | 10 | 4 | 2 | WEAK | STRONG | **WEAK** |
 | TEXP-GRAPHES | 2 | 15 | 15 | 4 | 1 | STRONG | STRONG | **ADEQUATE** |
@@ -48,7 +48,7 @@ Chaque verdict est derive des competences et parcours declares par les exercices
 | TSPE-CALCUL-INTEGRAL | 7 | 8 | 8 | 4 | 2 | WEAK | STRONG | **WEAK** |
 | TSPE-COMBINATOIRE | 4 | 7 | 7 | 4 | 1 | WEAK | STRONG | **WEAK** |
 | TSPE-CONTINUITE | 4 | 70 | 50 | 4 | 2 | STRONG | STRONG | **ADEQUATE** |
-| TSPE-DERIVATION-CONVEXITE | 8 | 67 | 52 | 4 | 10 | WEAK | STRONG | **WEAK** |
+| TSPE-DERIVATION-CONVEXITE | 8 | 67 | 52 | 4 | 10 | STRONG | STRONG | **ADEQUATE** |
 | TSPE-GEOMETRIE-ESPACE | 8 | 15 | 15 | 4 | 16 | WEAK | STRONG | **WEAK** |
 | TSPE-LIMITES-FONCTIONS | 5 | 64 | 50 | 4 | 8 | STRONG | STRONG | **ADEQUATE** |
 | TSPE-LOGARITHME | 6 | 8 | 8 | 4 | 2 | STRONG | STRONG | **ADEQUATE** |
