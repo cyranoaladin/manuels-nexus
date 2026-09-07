@@ -2,21 +2,13 @@
 
 Le plan ne prescrit que des fonctions pedagogiques absentes ; aucun effectif cible n'y figure, et aucune entree ne peut avoir pour motif un compteur.
 
-67 objets a ecrire sur 14 chapitres.
+58 fonctions a produire sur 12 chapitres.
 
 ## 1NSI-ALGO-DICHO-GLOUTON-KNN
 
 | lacune | capacite | role | parcours | motif |
 | --- | --- | --- | ---: | --- |
-| `GAP-F0AA6280C2A8` | C1 | REASONING | 1 | l'eleve rencontre « Je sais écrire une recherche dichotomique dans un tableau trié et prouver sa terminaison à l'aide d'un variant de boucle. » sans avoir jamais eu a demontrer seul : le geste de base n'est installe nulle part |
 | `GAP-92EEC5BDEBDE` | C3 | DIRECT_APPLICATION | 1 | l'eleve rencontre « Je sais écrire un algorithme qui prédit la classe d'un élément à partir de la classe majoritaire de ses k plus proches voisins. » sans avoir jamais eu a executer le calcul seul : le geste de base n'est installe nulle part |
-
-## 1NSI-ALGO-PARCOURS-TRIS
-
-| lacune | capacite | role | parcours | motif |
-| --- | --- | --- | ---: | --- |
-| `GAP-C92F966AA71D` | C2 | CONTEXT_VARIATION | 2 | « Je sais écrire un algorithme de recherche d'un extremum ou de calcul d'une moyenne. » n'est travaille que sous un seul mode (direct_application) : l'eleve apprend une procedure et ne peut pas la transferer |
-| `GAP-8A86DE22F984` | C4 | DIRECT_APPLICATION | 1 | l'eleve rencontre « Je sais décrire un invariant de boucle qui prouve la correction du tri par insertion. » sans avoir jamais eu a executer le calcul seul : le geste de base n'est installe nulle part |
 
 ## 1NSI-ARCHITECTURE-OS
 
@@ -30,13 +22,6 @@ Le plan ne prescrit que des fonctions pedagogiques absentes ; aucun effectif cib
 | --- | --- | --- | ---: | --- |
 | `GAP-1A47026CA5F7` | C1 | CONTEXT_VARIATION | 2 | « Je sais identifier les constructions élémentaires communes aux langages de programmation (séquences, affectation, conditionnelles, boucles, appels de fonction). » n'est travaille que sous un seul mode (direct_application) : l'eleve apprend une procedure et ne peut pas la transferer |
 
-## 1NSI-RESEAUX
-
-| lacune | capacite | role | parcours | motif |
-| --- | --- | --- | ---: | --- |
-| `GAP-59A6A0C96EE5` | C1 | REASONING | 1 | l'eleve rencontre « Je sais expliquer l'intérêt du découpage en paquets et de l'encapsulation. » sans avoir jamais eu a demontrer seul : le geste de base n'est installe nulle part |
-| `GAP-8FE5DF3FA8E5` | C2 | CONTEXT_VARIATION | 2 | « Je sais dérouler le fonctionnement d'un protocole simple de récupération de perte de paquets (bit alterné). » n'est travaille que sous un seul mode (direct_application) : l'eleve apprend une procedure et ne peut pas la transferer |
-
 ## 1NSI-TABLES
 
 | lacune | capacite | role | parcours | motif |
@@ -49,15 +34,12 @@ Le plan ne prescrit que des fonctions pedagogiques absentes ; aucun effectif cib
 | --- | --- | --- | ---: | --- |
 | `GAP-D62DCD28A419` | C1 | CONTEXT_VARIATION | 2 | « Je sais passer de la représentation d'un entier positif dans une base à une autre (bases 2, 10, 16). » n'est travaille que sous un seul mode (direct_application) : l'eleve apprend une procedure et ne peut pas la transferer |
 | `GAP-7F4BD9AF646F` | C2 | CONTEXT_VARIATION | 2 | « Je sais évaluer le nombre de bits nécessaires à l'écriture d'un entier en base 2, et utiliser le complément à 2 pour représenter un entier relatif. » n'est travaille que sous un seul mode (direct_application) : l'eleve apprend une procedure et ne peut pas la transferer |
-| `GAP-70626B74B81A` | C3 | REASONING | 1 | l'eleve rencontre « Je sais expliquer pourquoi la représentation des nombres flottants est approximative et pourquoi il ne faut pas tester leur égalité directement. » sans avoir jamais eu a demontrer seul : le geste de base n'est installe nulle part |
 | `GAP-70251B29402C` | C5 | DIRECT_APPLICATION | 1 | l'eleve rencontre « Je sais identifier l'intérêt de différents systèmes d'encodage de texte (ASCII, ISO-8859-1, Unicode) et convertir un texte d'un encodage à un autre. » sans avoir jamais eu a executer le calcul seul : le geste de base n'est installe nulle part |
 
 ## 1NSI-WEB-IHM
 
 | lacune | capacite | role | parcours | motif |
 | --- | --- | --- | ---: | --- |
-| `GAP-6685A1698D0F` | C1 | DIRECT_APPLICATION | 1 | l'eleve rencontre « Je sais identifier les composants graphiques permettant d'interagir avec une application Web. » sans avoir jamais eu a executer le calcul seul : le geste de base n'est installe nulle part |
-| `GAP-6A15F848B229` | C2 | DIRECT_APPLICATION | 1 | l'eleve rencontre « Je sais identifier les événements que les fonctions associées aux composants graphiques peuvent traiter. » sans avoir jamais eu a executer le calcul seul : le geste de base n'est installe nulle part |
 | `GAP-83573B657523` | C3 | CONTEXT_VARIATION | 2 | « Je sais analyser et modifier les méthodes exécutées lors d'un clic sur un bouton d'une page Web. » n'est travaille que sous un seul mode (direct_application) : l'eleve apprend une procedure et ne peut pas la transferer |
 | `GAP-02C5DA8D1175` | C4 | DIRECT_APPLICATION | 1 | l'eleve rencontre « Je sais distinguer ce qui est exécuté sur le client ou sur le serveur, et dans quel ordre. » sans avoir jamais eu a executer le calcul seul : le geste de base n'est installe nulle part |
 | `GAP-3E2E338356BD` | C5 | DIRECT_APPLICATION | 1 | l'eleve rencontre « Je sais distinguer ce qui est mémorisé dans le client et retransmis au serveur. » sans avoir jamais eu a executer le calcul seul : le geste de base n'est installe nulle part |
@@ -89,7 +71,6 @@ Le plan ne prescrit que des fonctions pedagogiques absentes ; aucun effectif cib
 | `GAP-A037DEC9A05B` | C2 | CONTEXT_VARIATION | 2 | aucun exercice n'entraine « Je sais décrire la création d'un processus. » : l'eleve n'a jamais l'occasion de l'exercer |
 | `GAP-2A556873FD17` | C3 | CONTEXT_VARIATION | 2 | « Je sais décrire l'ordonnancement de plusieurs processus. » n'est travaille que sous un seul mode (direct_application) : l'eleve apprend une procedure et ne peut pas la transferer |
 | `GAP-588EF2681E56` | C5 | DIRECT_APPLICATION | 1 | l'eleve rencontre « Je sais identifier, selon le protocole de routage utilisé, la route empruntée par un paquet. » sans avoir jamais eu a executer le calcul seul : le geste de base n'est installe nulle part |
-| `GAP-B80DEE0E6D43` | C6 | CONTEXT_VARIATION | 2 | « Je sais décrire les principes du chiffrement symétrique et asymétrique. » n'est travaille que sous un seul mode (direct_application) : l'eleve apprend une procedure et ne peut pas la transferer |
 | `GAP-3E6F83C1BEC7` | C7 | DIRECT_APPLICATION | 1 | aucun exercice n'entraine « Je sais décrire l'échange d'une clé symétrique avec un protocole asymétrique pour sécuriser HTTPS. » : l'eleve n'a jamais l'occasion de l'exercer |
 | `GAP-102FFED16FF5` | C7 | CONTEXT_VARIATION | 2 | aucun exercice n'entraine « Je sais décrire l'échange d'une clé symétrique avec un protocole asymétrique pour sécuriser HTTPS. » : l'eleve n'a jamais l'occasion de l'exercer |
 

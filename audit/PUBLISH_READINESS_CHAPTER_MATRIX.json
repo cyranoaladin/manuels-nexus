@@ -224,7 +224,6 @@
             "C3"
           ],
           "variation": [
-            "C1",
             "C3"
           ]
         },
@@ -543,7 +542,7 @@
         "evidence_routing": "COMPLETE",
         "ex_co_graph": "COMPLETE",
         "oracle": "COMPLETE",
-        "pedagogical_quality": "WEAK",
+        "pedagogical_quality": "COMPLETE",
         "pedagogical_richness": "COMPLETE",
         "pedagogical_role_coverage": "COMPLETE",
         "programme": "COMPLETE",
@@ -563,7 +562,7 @@
       },
       "pedagogical_quality": {
         "assessment_mode": "WRITTEN_ASSESSMENT",
-        "status": "WEAK",
+        "status": "COMPLETE",
         "uncovered": {
           "direct_application": [
             "C4",
@@ -575,15 +574,10 @@
             "C3",
             "C5"
           ],
-          "variation": [
-            "C2",
-            "C4"
-          ]
+          "variation": []
         },
-        "verdict": "WEAK",
-        "weak_axes": [
-          "EXERCISE_DIVERSITY"
-        ]
+        "verdict": "ADEQUATE",
+        "weak_axes": []
       },
       "pedagogical_richness": {
         "capacities_digest": "sha256:b0814ca7a257e4cb51addf5d97b651206330299cda6556d1bb247014ef262eb4",
@@ -724,7 +718,7 @@
       },
       "risk_score": 2190,
       "unassembled_object_ids": [],
-      "vertical_machine_status": "INCOMPLETE"
+      "vertical_machine_status": "MACHINE_REVIEW_COMPLETE"
     },
     {
       "assessments": {
@@ -1898,7 +1892,7 @@
         "evidence_routing": "COMPLETE",
         "ex_co_graph": "COMPLETE",
         "oracle": "COMPLETE",
-        "pedagogical_quality": "WEAK",
+        "pedagogical_quality": "COMPLETE",
         "pedagogical_richness": "COMPLETE",
         "pedagogical_role_coverage": "COMPLETE",
         "programme": "COMPLETE",
@@ -1918,7 +1912,7 @@
       },
       "pedagogical_quality": {
         "assessment_mode": "WRITTEN_ASSESSMENT",
-        "status": "WEAK",
+        "status": "COMPLETE",
         "uncovered": {
           "direct_application": [
             "C3",
@@ -1932,15 +1926,10 @@
             "C4",
             "C5"
           ],
-          "variation": [
-            "C1",
-            "C2"
-          ]
+          "variation": []
         },
-        "verdict": "WEAK",
-        "weak_axes": [
-          "EXERCISE_DIVERSITY"
-        ]
+        "verdict": "ADEQUATE",
+        "weak_axes": []
       },
       "pedagogical_richness": {
         "capacities_digest": "sha256:c774c94acf1d581028100ea1fcf7a2b45c1b5ae66d8600c85d9260b8a6552945",
@@ -2072,7 +2061,7 @@
       },
       "risk_score": 1575,
       "unassembled_object_ids": [],
-      "vertical_machine_status": "INCOMPLETE"
+      "vertical_machine_status": "MACHINE_REVIEW_COMPLETE"
     },
     {
       "assessments": {
@@ -2592,7 +2581,6 @@
           "variation": [
             "C1",
             "C2",
-            "C3",
             "C5"
           ]
         },
@@ -3261,8 +3249,6 @@
             "C9"
           ],
           "variation": [
-            "C1",
-            "C2",
             "C3",
             "C4",
             "C5"
@@ -11912,7 +11898,6 @@
             "C2",
             "C3",
             "C5",
-            "C6",
             "C7"
           ]
         },
@@ -17518,8 +17503,8 @@
   "counts": {
     "chapters": 52,
     "human_closed": 0,
-    "machine_review_complete": 38,
-    "machine_review_incomplete": 14,
+    "machine_review_complete": 40,
+    "machine_review_incomplete": 12,
     "manuals": 6
   },
   "generated_by": "scripts/build_publish_readiness_chapter_matrix.py",
@@ -17577,11 +17562,6 @@
       "risk_score": 2205
     },
     {
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "manual": "1NSI",
-      "risk_score": 2190
-    },
-    {
       "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
       "manual": "TNSI",
       "risk_score": 1785
@@ -17590,11 +17570,6 @@
       "chapter": "1NSI-ARCHITECTURE-OS",
       "manual": "1NSI",
       "risk_score": 1725
-    },
-    {
-      "chapter": "1NSI-RESEAUX",
-      "manual": "1NSI",
-      "risk_score": 1575
     },
     {
       "chapter": "1NSI-TYPES-BASE",

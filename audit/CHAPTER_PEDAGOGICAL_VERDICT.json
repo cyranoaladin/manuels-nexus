@@ -29,7 +29,6 @@
       "coverage": {
         "ASSESSMENT_COVERAGE": 4,
         "CAPACITIES_WITH_REAL_DIVERSITY_GAP": [
-          "C1",
           "C3"
         ],
         "CAPACITY_ASSIGNMENT_MISSING": false,
@@ -49,35 +48,34 @@
         ],
         "REASONING_COVERAGE": "0/3",
         "SYNTHESIS_COVERAGE": "OUI",
-        "VARIATION_COVERAGE": "1/3"
+        "VARIATION_COVERAGE": "2/3"
       },
       "per_capacity": [
         {
           "CAPACITY_ID": "C1",
           "CAPACITY_STATEMENT": "Je sais écrire une recherche dichotomique dans un tableau trié et prouver sa terminaison à l'aide d'un variant de boucle.",
           "CURRENT_EXERCISES": 2,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
             1,
             2
           ],
-          "DIVERSITY_VERDICT": "REAL_DIVERSITY_GAP",
+          "DIVERSITY_VERDICT": "DIVERSITY_SUFFICIENT",
           "ENTRY_FUNCTION": "REASONING",
           "EXERCISE_NATURES": {
             "DIRECT_APPLICATION": 2,
-            "PROBLEM_SOLVING": 1
+            "PROBLEM_SOLVING": 1,
+            "REASONING": 1
           },
-          "MISSING_FUNCTIONS": [
-            "aucune demonstration"
-          ],
+          "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "1NSI-ADGK-EX-001",
             "1NSI-ADGK-EX-002"
           ],
-          "RATIONALE": "aucun exercice n'installe le geste de base (reasoning) que l'enonce de la capacite reclame ; l'eleve la rencontre d'emblee en situation",
-          "REAL_DIVERSITY_GAP": true,
+          "RATIONALE": "le geste de base (reasoning) est installe et l'eleve rencontre la capacite sous direct_application, problem_solving : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
         {
@@ -113,7 +111,7 @@
           "CAPACITY_ID": "C3",
           "CAPACITY_STATEMENT": "Je sais écrire un algorithme qui prédit la classe d'un élément à partir de la classe majoritaire de ses k plus proches voisins.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
@@ -122,7 +120,8 @@
           "DIVERSITY_VERDICT": "REAL_DIVERSITY_GAP",
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
-            "PROBLEM_SOLVING": 1
+            "PROBLEM_SOLVING": 1,
+            "REASONING": 1
           },
           "MISSING_FUNCTIONS": [
             "aucune application directe"
@@ -146,7 +145,6 @@
           "C3"
         ],
         "variation": [
-          "C1",
           "C3"
         ]
       }
@@ -159,7 +157,7 @@
       "CORRECTION_QUALITY": "STRONG",
       "COURSE_COMPLETENESS": "ADEQUATE",
       "DIFFICULTY_PROGRESSION": "ADEQUATE",
-      "EXERCISE_DIVERSITY": "WEAK",
+      "EXERCISE_DIVERSITY": "STRONG",
       "OFFICIAL_CAPACITIES": [
         "C1",
         "C2",
@@ -168,7 +166,7 @@
         "C5",
         "C6"
       ],
-      "PEDAGOGICAL_VERDICT": "WEAK",
+      "PEDAGOGICAL_VERDICT": "ADEQUATE",
       "REMEDIATION": "STRONG",
       "counts": {
         "corriges": 12,
@@ -180,10 +178,7 @@
       },
       "coverage": {
         "ASSESSMENT_COVERAGE": 4,
-        "CAPACITIES_WITH_REAL_DIVERSITY_GAP": [
-          "C2",
-          "C4"
-        ],
+        "CAPACITIES_WITH_REAL_DIVERSITY_GAP": [],
         "CAPACITY_ASSIGNMENT_MISSING": false,
         "DIFFICULTY_PROGRESSION": [
           1,
@@ -201,7 +196,7 @@
         ],
         "REASONING_COVERAGE": "2/6",
         "SYNTHESIS_COVERAGE": "OUI",
-        "VARIATION_COVERAGE": "4/6"
+        "VARIATION_COVERAGE": "6/6"
       },
       "per_capacity": [
         {
@@ -233,25 +228,24 @@
           "CAPACITY_ID": "C2",
           "CAPACITY_STATEMENT": "Je sais écrire un algorithme de recherche d'un extremum ou de calcul d'une moyenne.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
-          "CURRENT_VARIATION": 0,
+          "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
             1
           ],
-          "DIVERSITY_VERDICT": "REAL_DIVERSITY_GAP",
+          "DIVERSITY_VERDICT": "DIVERSITY_SUFFICIENT",
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
-            "DIRECT_APPLICATION": 1
+            "DIRECT_APPLICATION": 1,
+            "REASONING": 1
           },
-          "MISSING_FUNCTIONS": [
-            "un seul mode d'exercice"
-          ],
+          "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "1NSI-APT-EX-102"
           ],
-          "RATIONALE": "un exercice unique ne fait varier aucune situation : l'eleve voit la capacite une fois, sous un seul angle",
-          "REAL_DIVERSITY_GAP": true,
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous reasoning : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
         {
@@ -290,27 +284,26 @@
           "DIFFICULTY_SPREAD": [
             2
           ],
-          "DIVERSITY_VERDICT": "REAL_DIVERSITY_GAP",
+          "DIVERSITY_VERDICT": "DIVERSITY_SUFFICIENT",
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
+            "DIRECT_APPLICATION": 1,
             "PROBLEM_SOLVING": 1,
             "REASONING": 1
           },
-          "MISSING_FUNCTIONS": [
-            "aucune application directe"
-          ],
+          "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "1NSI-APT-EX-104"
           ],
-          "RATIONALE": "aucun exercice n'installe le geste de base (direct_application) que l'enonce de la capacite reclame ; l'eleve la rencontre d'emblee en situation",
-          "REAL_DIVERSITY_GAP": true,
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous problem_solving, reasoning : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
         {
           "CAPACITY_ID": "C5",
           "CAPACITY_STATEMENT": "Je sais écrire l'algorithme du tri par sélection.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
@@ -321,13 +314,14 @@
           "EXERCISE_NATURES": {
             "CONTEXT_VARIATION": 1,
             "DIRECT_APPLICATION": 1,
-            "METHOD_TRANSFER": 1
+            "METHOD_TRANSFER": 1,
+            "REASONING": 1
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "1NSI-APT-EX-105"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous context_variation, method_transfer : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous context_variation, method_transfer, reasoning : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
@@ -368,10 +362,7 @@
           "C3",
           "C5"
         ],
-        "variation": [
-          "C2",
-          "C4"
-        ]
+        "variation": []
       }
     },
     {
@@ -613,6 +604,7 @@
           "EDGE_CASE",
           "MODELLING",
           "PROBLEM_SOLVING",
+          "REASONING",
           "SYNTHESIS"
         ],
         "REASONING_COVERAGE": "0/7",
@@ -698,7 +690,7 @@
           "CAPACITY_ID": "C4",
           "CAPACITY_STATEMENT": "Je sais mettre au point un programme à l'aide de jeux de tests.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
@@ -709,13 +701,14 @@
           "EXERCISE_NATURES": {
             "DIRECT_APPLICATION": 1,
             "EDGE_CASE": 1,
-            "PROBLEM_SOLVING": 1
+            "PROBLEM_SOLVING": 1,
+            "REASONING": 1
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "1NSI-LANG-EX-004"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous edge_case, problem_solving : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous edge_case, problem_solving, reasoning : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
@@ -859,6 +852,7 @@
           "EDGE_CASE",
           "MODELLING",
           "PROBLEM_SOLVING",
+          "REASONING",
           "SYNTHESIS"
         ],
         "REASONING_COVERAGE": "0/4",
@@ -894,7 +888,7 @@
           "CAPACITY_ID": "C2",
           "CAPACITY_STATEMENT": "Je sais structurer un projet informatique en jalons, avec un cahier des charges et un travail en équipe.",
           "CURRENT_EXERCISES": 2,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 2,
           "CURRENT_SYNTHESIS": 1,
           "CURRENT_VARIATION": 2,
           "DIFFICULTY_SPREAD": [
@@ -908,6 +902,7 @@
             "DIRECT_APPLICATION": 2,
             "MODELLING": 1,
             "PROBLEM_SOLVING": 1,
+            "REASONING": 2,
             "SYNTHESIS": 1
           },
           "MISSING_FUNCTIONS": [],
@@ -915,7 +910,7 @@
             "1NSI-PM-EX-002",
             "1NSI-PM-EX-005"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous context_variation, modelling, problem_solving, synthesis : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous context_variation, modelling, problem_solving, reasoning, synthesis : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
@@ -923,7 +918,7 @@
           "CAPACITY_ID": "C3",
           "CAPACITY_STATEMENT": "Je sais déboguer méthodiquement un programme, en lisant un message d'erreur et en localisant la cause du bug.",
           "CURRENT_EXERCISES": 2,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 1,
           "CURRENT_VARIATION": 2,
           "DIFFICULTY_SPREAD": [
@@ -934,9 +929,10 @@
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
             "CONTEXT_VARIATION": 1,
-            "DIRECT_APPLICATION": 1,
+            "DIRECT_APPLICATION": 2,
             "EDGE_CASE": 1,
             "PROBLEM_SOLVING": 2,
+            "REASONING": 1,
             "SYNTHESIS": 1
           },
           "MISSING_FUNCTIONS": [],
@@ -944,7 +940,7 @@
             "1NSI-PM-EX-003",
             "1NSI-PM-EX-005"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous context_variation, edge_case, problem_solving, synthesis : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous context_variation, edge_case, problem_solving, reasoning, synthesis : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
@@ -952,7 +948,7 @@
           "CAPACITY_ID": "C4",
           "CAPACITY_STATEMENT": "Je sais documenter mon code et préparer une présentation orale argumentée d'un projet informatique.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
@@ -962,13 +958,14 @@
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
             "DIRECT_APPLICATION": 1,
-            "PROBLEM_SOLVING": 1
+            "PROBLEM_SOLVING": 1,
+            "REASONING": 1
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "1NSI-PM-EX-004"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous problem_solving : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous problem_solving, reasoning : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         }
@@ -995,7 +992,7 @@
       "CORRECTION_QUALITY": "STRONG",
       "COURSE_COMPLETENESS": "ADEQUATE",
       "DIFFICULTY_PROGRESSION": "STRONG",
-      "EXERCISE_DIVERSITY": "WEAK",
+      "EXERCISE_DIVERSITY": "STRONG",
       "OFFICIAL_CAPACITIES": [
         "C1",
         "C2",
@@ -1003,7 +1000,7 @@
         "C4",
         "C5"
       ],
-      "PEDAGOGICAL_VERDICT": "WEAK",
+      "PEDAGOGICAL_VERDICT": "ADEQUATE",
       "REMEDIATION": "ADEQUATE",
       "counts": {
         "corriges": 6,
@@ -1015,10 +1012,7 @@
       },
       "coverage": {
         "ASSESSMENT_COVERAGE": 4,
-        "CAPACITIES_WITH_REAL_DIVERSITY_GAP": [
-          "C1",
-          "C2"
-        ],
+        "CAPACITIES_WITH_REAL_DIVERSITY_GAP": [],
         "CAPACITY_ASSIGNMENT_MISSING": false,
         "DIFFICULTY_PROGRESSION": [
           1,
@@ -1032,69 +1026,68 @@
           "DIRECT_APPLICATION",
           "METHOD_TRANSFER",
           "MODELLING",
-          "PROBLEM_SOLVING"
+          "PROBLEM_SOLVING",
+          "REASONING"
         ],
         "REASONING_COVERAGE": "0/5",
         "SYNTHESIS_COVERAGE": "OUI",
-        "VARIATION_COVERAGE": "3/5"
+        "VARIATION_COVERAGE": "5/5"
       },
       "per_capacity": [
         {
           "CAPACITY_ID": "C1",
           "CAPACITY_STATEMENT": "Je sais expliquer l'intérêt du découpage en paquets et de l'encapsulation.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
             1
           ],
-          "DIVERSITY_VERDICT": "REAL_DIVERSITY_GAP",
+          "DIVERSITY_VERDICT": "DIVERSITY_SUFFICIENT",
           "ENTRY_FUNCTION": "REASONING",
           "EXERCISE_NATURES": {
             "DIRECT_APPLICATION": 1,
-            "METHOD_TRANSFER": 1
+            "METHOD_TRANSFER": 1,
+            "REASONING": 1
           },
-          "MISSING_FUNCTIONS": [
-            "aucune demonstration"
-          ],
+          "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "1NSI-RES-EX-001"
           ],
-          "RATIONALE": "aucun exercice n'installe le geste de base (reasoning) que l'enonce de la capacite reclame ; l'eleve la rencontre d'emblee en situation",
-          "REAL_DIVERSITY_GAP": true,
+          "RATIONALE": "le geste de base (reasoning) est installe et l'eleve rencontre la capacite sous direct_application, method_transfer : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
         {
           "CAPACITY_ID": "C2",
           "CAPACITY_STATEMENT": "Je sais dérouler le fonctionnement d'un protocole simple de récupération de perte de paquets (bit alterné).",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
-          "CURRENT_VARIATION": 0,
+          "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
             1
           ],
-          "DIVERSITY_VERDICT": "REAL_DIVERSITY_GAP",
+          "DIVERSITY_VERDICT": "DIVERSITY_SUFFICIENT",
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
-            "DIRECT_APPLICATION": 1
+            "DIRECT_APPLICATION": 1,
+            "REASONING": 1
           },
-          "MISSING_FUNCTIONS": [
-            "un seul mode d'exercice"
-          ],
+          "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "1NSI-RES-EX-002"
           ],
-          "RATIONALE": "un exercice unique ne fait varier aucune situation : l'eleve voit la capacite une fois, sous un seul angle",
-          "REAL_DIVERSITY_GAP": true,
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous reasoning : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
         {
           "CAPACITY_ID": "C3",
           "CAPACITY_STATEMENT": "Je sais simuler un réseau simple et déterminer si deux machines peuvent communiquer.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
@@ -1106,13 +1099,14 @@
             "CONTEXT_VARIATION": 1,
             "DIRECT_APPLICATION": 1,
             "MODELLING": 1,
-            "PROBLEM_SOLVING": 1
+            "PROBLEM_SOLVING": 1,
+            "REASONING": 1
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "1NSI-RES-EX-003"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous context_variation, modelling, problem_solving : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous context_variation, modelling, problem_solving, reasoning : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
@@ -1145,7 +1139,7 @@
           "CAPACITY_ID": "C5",
           "CAPACITY_STATEMENT": "Je sais réaliser par programmation une IHM répondant à un cahier des charges donné.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
@@ -1155,13 +1149,14 @@
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
             "DIRECT_APPLICATION": 1,
-            "PROBLEM_SOLVING": 1
+            "PROBLEM_SOLVING": 1,
+            "REASONING": 1
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "1NSI-RES-EX-005"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous problem_solving : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous problem_solving, reasoning : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         }
@@ -1179,10 +1174,7 @@
           "C4",
           "C5"
         ],
-        "variation": [
-          "C1",
-          "C2"
-        ]
+        "variation": []
       }
     },
     {
@@ -1263,7 +1255,7 @@
           "CAPACITY_ID": "C2",
           "CAPACITY_STATEMENT": "Je sais rechercher les lignes d'une table vérifiant des critères exprimés en logique propositionnelle, et détecter des doublons.",
           "CURRENT_EXERCISES": 2,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
@@ -1274,14 +1266,15 @@
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
             "DIRECT_APPLICATION": 2,
-            "PROBLEM_SOLVING": 1
+            "PROBLEM_SOLVING": 1,
+            "REASONING": 1
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "1NSI-TAB-EX-002",
             "1NSI-TAB-EX-003"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous problem_solving : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous problem_solving, reasoning : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
@@ -1314,7 +1307,7 @@
           "CAPACITY_ID": "C4",
           "CAPACITY_STATEMENT": "Je sais construire une nouvelle table en combinant les données de deux tables.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
@@ -1323,7 +1316,8 @@
           "DIVERSITY_VERDICT": "REAL_DIVERSITY_GAP",
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
-            "PROBLEM_SOLVING": 1
+            "PROBLEM_SOLVING": 1,
+            "REASONING": 1
           },
           "MISSING_FUNCTIONS": [
             "aucune application directe"
@@ -1383,7 +1377,6 @@
         "CAPACITIES_WITH_REAL_DIVERSITY_GAP": [
           "C1",
           "C2",
-          "C3",
           "C5"
         ],
         "CAPACITY_ASSIGNMENT_MISSING": false,
@@ -1402,7 +1395,7 @@
         ],
         "REASONING_COVERAGE": "0/5",
         "SYNTHESIS_COVERAGE": "OUI",
-        "VARIATION_COVERAGE": "1/5"
+        "VARIATION_COVERAGE": "2/5"
       },
       "per_capacity": [
         {
@@ -1459,27 +1452,26 @@
           "CAPACITY_ID": "C3",
           "CAPACITY_STATEMENT": "Je sais expliquer pourquoi la représentation des nombres flottants est approximative et pourquoi il ne faut pas tester leur égalité directement.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
             2
           ],
-          "DIVERSITY_VERDICT": "REAL_DIVERSITY_GAP",
+          "DIVERSITY_VERDICT": "DIVERSITY_SUFFICIENT",
           "ENTRY_FUNCTION": "REASONING",
           "EXERCISE_NATURES": {
             "CONTEXT_VARIATION": 1,
             "DIRECT_APPLICATION": 1,
-            "PROBLEM_SOLVING": 1
+            "PROBLEM_SOLVING": 1,
+            "REASONING": 1
           },
-          "MISSING_FUNCTIONS": [
-            "aucune demonstration"
-          ],
+          "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "1NSI-TB-EX-003"
           ],
-          "RATIONALE": "aucun exercice n'installe le geste de base (reasoning) que l'enonce de la capacite reclame ; l'eleve la rencontre d'emblee en situation",
-          "REAL_DIVERSITY_GAP": true,
+          "RATIONALE": "le geste de base (reasoning) est installe et l'eleve rencontre la capacite sous context_variation, direct_application, problem_solving : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
         {
@@ -1550,7 +1542,6 @@
         "variation": [
           "C1",
           "C2",
-          "C3",
           "C5"
         ]
       }
@@ -1650,9 +1641,9 @@
           "CAPACITY_ID": "C2",
           "CAPACITY_STATEMENT": "Je sais lire, modifier et construire des tableaux, y compris en compréhension.",
           "CURRENT_EXERCISES": 11,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 2,
           "CURRENT_SYNTHESIS": 0,
-          "CURRENT_VARIATION": 3,
+          "CURRENT_VARIATION": 5,
           "DIFFICULTY_SPREAD": [
             1,
             2,
@@ -1664,7 +1655,8 @@
             "DIRECT_APPLICATION": 11,
             "METHOD_TRANSFER": 1,
             "MODELLING": 1,
-            "PROBLEM_SOLVING": 2
+            "PROBLEM_SOLVING": 2,
+            "REASONING": 2
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
@@ -1680,7 +1672,7 @@
             "1NSI-TC-EX-023",
             "1NSI-TC-EX-024"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous method_transfer, modelling, problem_solving : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous method_transfer, modelling, problem_solving, reasoning : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
@@ -1688,9 +1680,9 @@
           "CAPACITY_ID": "C3",
           "CAPACITY_STATEMENT": "Je sais représenter et parcourir une grille avec un tableau de tableaux.",
           "CURRENT_EXERCISES": 10,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
-          "CURRENT_VARIATION": 2,
+          "CURRENT_VARIATION": 3,
           "DIFFICULTY_SPREAD": [
             1,
             2,
@@ -1701,7 +1693,8 @@
           "EXERCISE_NATURES": {
             "DIRECT_APPLICATION": 10,
             "MODELLING": 2,
-            "PROBLEM_SOLVING": 2
+            "PROBLEM_SOLVING": 2,
+            "REASONING": 1
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
@@ -1716,7 +1709,7 @@
             "1NSI-TC-EX-033",
             "1NSI-TC-EX-034"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous modelling, problem_solving : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous modelling, problem_solving, reasoning : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
@@ -1724,7 +1717,7 @@
           "CAPACITY_ID": "C4",
           "CAPACITY_STATEMENT": "Je sais créer, modifier et parcourir un dictionnaire.",
           "CURRENT_EXERCISES": 11,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 5,
           "DIFFICULTY_SPREAD": [
@@ -1736,10 +1729,11 @@
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
             "CONTEXT_VARIATION": 2,
-            "DIRECT_APPLICATION": 10,
+            "DIRECT_APPLICATION": 11,
             "EDGE_CASE": 1,
             "MODELLING": 2,
-            "PROBLEM_SOLVING": 2
+            "PROBLEM_SOLVING": 2,
+            "REASONING": 1
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
@@ -1755,7 +1749,7 @@
             "1NSI-TC-EX-044",
             "1NSI-TC-EX-045"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous context_variation, edge_case, modelling, problem_solving : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous context_variation, edge_case, modelling, problem_solving, reasoning : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
@@ -1763,9 +1757,9 @@
           "CAPACITY_ID": "C5",
           "CAPACITY_STATEMENT": "Je sais prévoir l'effet d'une affectation sur un objet mutable.",
           "CURRENT_EXERCISES": 11,
-          "CURRENT_REASONING": 2,
+          "CURRENT_REASONING": 10,
           "CURRENT_SYNTHESIS": 0,
-          "CURRENT_VARIATION": 5,
+          "CURRENT_VARIATION": 10,
           "DIFFICULTY_SPREAD": [
             1,
             2,
@@ -1779,7 +1773,7 @@
             "EDGE_CASE": 1,
             "MODELLING": 2,
             "PROBLEM_SOLVING": 5,
-            "REASONING": 2
+            "REASONING": 10
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
@@ -1845,8 +1839,6 @@
       "coverage": {
         "ASSESSMENT_COVERAGE": 4,
         "CAPACITIES_WITH_REAL_DIVERSITY_GAP": [
-          "C1",
-          "C2",
           "C3",
           "C4",
           "C5"
@@ -1867,7 +1859,7 @@
         ],
         "REASONING_COVERAGE": "0/9",
         "SYNTHESIS_COVERAGE": "OUI",
-        "VARIATION_COVERAGE": "4/9"
+        "VARIATION_COVERAGE": "6/9"
       },
       "per_capacity": [
         {
@@ -1880,20 +1872,19 @@
           "DIFFICULTY_SPREAD": [
             1
           ],
-          "DIVERSITY_VERDICT": "REAL_DIVERSITY_GAP",
+          "DIVERSITY_VERDICT": "DIVERSITY_SUFFICIENT",
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
+            "DIRECT_APPLICATION": 1,
             "REASONING": 1,
             "SYNTHESIS": 1
           },
-          "MISSING_FUNCTIONS": [
-            "aucune application directe"
-          ],
+          "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "1NSI-WEB-EX-001"
           ],
-          "RATIONALE": "aucun exercice n'installe le geste de base (direct_application) que l'enonce de la capacite reclame ; l'eleve la rencontre d'emblee en situation",
-          "REAL_DIVERSITY_GAP": true,
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous reasoning, synthesis : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
         {
@@ -1906,20 +1897,19 @@
           "DIFFICULTY_SPREAD": [
             1
           ],
-          "DIVERSITY_VERDICT": "REAL_DIVERSITY_GAP",
+          "DIVERSITY_VERDICT": "DIVERSITY_SUFFICIENT",
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
+            "DIRECT_APPLICATION": 1,
             "REASONING": 1,
             "SYNTHESIS": 1
           },
-          "MISSING_FUNCTIONS": [
-            "aucune application directe"
-          ],
+          "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "1NSI-WEB-EX-001"
           ],
-          "RATIONALE": "aucun exercice n'installe le geste de base (direct_application) que l'enonce de la capacite reclame ; l'eleve la rencontre d'emblee en situation",
-          "REAL_DIVERSITY_GAP": true,
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous reasoning, synthesis : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
         {
@@ -1951,7 +1941,7 @@
           "CAPACITY_ID": "C4",
           "CAPACITY_STATEMENT": "Je sais distinguer ce qui est exécuté sur le client ou sur le serveur, et dans quel ordre.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 1,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
@@ -1961,6 +1951,7 @@
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
             "PROBLEM_SOLVING": 1,
+            "REASONING": 1,
             "SYNTHESIS": 1
           },
           "MISSING_FUNCTIONS": [
@@ -1977,7 +1968,7 @@
           "CAPACITY_ID": "C5",
           "CAPACITY_STATEMENT": "Je sais distinguer ce qui est mémorisé dans le client et retransmis au serveur.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 1,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
@@ -1987,6 +1978,7 @@
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
             "PROBLEM_SOLVING": 1,
+            "REASONING": 1,
             "SYNTHESIS": 1
           },
           "MISSING_FUNCTIONS": [
@@ -2029,7 +2021,7 @@
           "CAPACITY_ID": "C7",
           "CAPACITY_STATEMENT": "Je sais analyser le fonctionnement d'un formulaire Web simple.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 1,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
@@ -2040,13 +2032,14 @@
           "EXERCISE_NATURES": {
             "DIRECT_APPLICATION": 1,
             "PROBLEM_SOLVING": 1,
+            "REASONING": 1,
             "SYNTHESIS": 1
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "1NSI-WEB-EX-005"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous problem_solving, synthesis : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous problem_solving, reasoning, synthesis : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
@@ -2054,7 +2047,7 @@
           "CAPACITY_ID": "C8",
           "CAPACITY_STATEMENT": "Je sais distinguer les transmissions de paramètres par requêtes POST ou GET.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 1,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
@@ -2065,13 +2058,14 @@
           "EXERCISE_NATURES": {
             "DIRECT_APPLICATION": 1,
             "PROBLEM_SOLVING": 1,
+            "REASONING": 1,
             "SYNTHESIS": 1
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "1NSI-WEB-EX-005"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous problem_solving, synthesis : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous problem_solving, reasoning, synthesis : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
@@ -2123,8 +2117,6 @@
           "C9"
         ],
         "variation": [
-          "C1",
-          "C2",
           "C3",
           "C4",
           "C5"
@@ -2268,7 +2260,7 @@
           "CAPACITY_ID": "C3",
           "CAPACITY_STATEMENT": "Je sais utiliser le signe de la dérivée pour dresser le tableau de variations.",
           "CURRENT_EXERCISES": 14,
-          "CURRENT_REASONING": 7,
+          "CURRENT_REASONING": 9,
           "CURRENT_SYNTHESIS": 3,
           "CURRENT_VARIATION": 11,
           "DIFFICULTY_SPREAD": [
@@ -2283,7 +2275,7 @@
             "DIRECT_APPLICATION": 14,
             "MODELLING": 5,
             "PROBLEM_SOLVING": 9,
-            "REASONING": 7,
+            "REASONING": 9,
             "SYNTHESIS": 3
           },
           "MISSING_FUNCTIONS": [],
@@ -2446,7 +2438,7 @@
           "CAPACITY_ID": "C1",
           "CAPACITY_STATEMENT": "Je sais calculer et interpréter un taux de variation et la pente d'une sécante.",
           "CURRENT_EXERCISES": 12,
-          "CURRENT_REASONING": 6,
+          "CURRENT_REASONING": 8,
           "CURRENT_SYNTHESIS": 2,
           "CURRENT_VARIATION": 8,
           "DIFFICULTY_SPREAD": [
@@ -2461,7 +2453,7 @@
             "DIRECT_APPLICATION": 12,
             "MODELLING": 3,
             "PROBLEM_SOLVING": 8,
-            "REASONING": 6,
+            "REASONING": 8,
             "SYNTHESIS": 2
           },
           "MISSING_FUNCTIONS": [],
@@ -2607,9 +2599,9 @@
           "CAPACITY_ID": "C5",
           "CAPACITY_STATEMENT": "Je sais approcher f(a+h) avec l'approximation linéaire au voisinage de a.",
           "CURRENT_EXERCISES": 11,
-          "CURRENT_REASONING": 8,
+          "CURRENT_REASONING": 10,
           "CURRENT_SYNTHESIS": 2,
-          "CURRENT_VARIATION": 8,
+          "CURRENT_VARIATION": 10,
           "DIFFICULTY_SPREAD": [
             1,
             2,
@@ -2622,7 +2614,7 @@
             "DIRECT_APPLICATION": 11,
             "MODELLING": 3,
             "PROBLEM_SOLVING": 8,
-            "REASONING": 8,
+            "REASONING": 10,
             "SYNTHESIS": 2
           },
           "MISSING_FUNCTIONS": [],
@@ -2848,7 +2840,7 @@
           "CAPACITY_ID": "C5",
           "CAPACITY_STATEMENT": "Je sais représenter et utiliser un modèle de croissance ou de décroissance exponentielle.",
           "CURRENT_EXERCISES": 8,
-          "CURRENT_REASONING": 7,
+          "CURRENT_REASONING": 8,
           "CURRENT_SYNTHESIS": 2,
           "CURRENT_VARIATION": 8,
           "DIFFICULTY_SPREAD": [
@@ -2863,7 +2855,7 @@
             "DIRECT_APPLICATION": 7,
             "MODELLING": 5,
             "PROBLEM_SOLVING": 6,
-            "REASONING": 7,
+            "REASONING": 8,
             "SYNTHESIS": 2
           },
           "MISSING_FUNCTIONS": [],
@@ -4113,7 +4105,7 @@
           "CAPACITY_ID": "C3",
           "CAPACITY_STATEMENT": "Je sais montrer qu'une suite est géométrique et exprimer son terme général.",
           "CURRENT_EXERCISES": 23,
-          "CURRENT_REASONING": 20,
+          "CURRENT_REASONING": 22,
           "CURRENT_SYNTHESIS": 21,
           "CURRENT_VARIATION": 23,
           "DIFFICULTY_SPREAD": [
@@ -4128,7 +4120,7 @@
             "DIRECT_APPLICATION": 23,
             "MODELLING": 17,
             "PROBLEM_SOLVING": 16,
-            "REASONING": 20,
+            "REASONING": 22,
             "SYNTHESIS": 21
           },
           "MISSING_FUNCTIONS": [],
@@ -4207,7 +4199,7 @@
           "CAPACITY_ID": "C5",
           "CAPACITY_STATEMENT": "Je sais étudier le sens de variation d'une suite par la méthode adaptée.",
           "CURRENT_EXERCISES": 21,
-          "CURRENT_REASONING": 20,
+          "CURRENT_REASONING": 21,
           "CURRENT_SYNTHESIS": 19,
           "CURRENT_VARIATION": 21,
           "DIFFICULTY_SPREAD": [
@@ -4222,7 +4214,7 @@
             "DIRECT_APPLICATION": 21,
             "MODELLING": 8,
             "PROBLEM_SOLVING": 16,
-            "REASONING": 20,
+            "REASONING": 21,
             "SYNTHESIS": 19
           },
           "MISSING_FUNCTIONS": [],
@@ -4257,7 +4249,7 @@
           "CAPACITY_ID": "C6",
           "CAPACITY_STATEMENT": "Je sais modéliser une situation concrète par une suite.",
           "CURRENT_EXERCISES": 15,
-          "CURRENT_REASONING": 13,
+          "CURRENT_REASONING": 14,
           "CURRENT_SYNTHESIS": 15,
           "CURRENT_VARIATION": 15,
           "DIFFICULTY_SPREAD": [
@@ -4272,7 +4264,7 @@
             "DIRECT_APPLICATION": 15,
             "MODELLING": 15,
             "PROBLEM_SOLVING": 12,
-            "REASONING": 13,
+            "REASONING": 14,
             "SYNTHESIS": 15
           },
           "MISSING_FUNCTIONS": [],
@@ -5181,7 +5173,7 @@
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
             "CONTEXT_VARIATION": 1,
-            "DIRECT_APPLICATION": 1,
+            "DIRECT_APPLICATION": 3,
             "MODELLING": 1,
             "PROBLEM_SOLVING": 1,
             "REASONING": 3
@@ -5762,7 +5754,7 @@
           "CAPACITY_ID": "C2",
           "CAPACITY_STATEMENT": "Je sais utiliser la formule de Bayes pour calculer une probabilité a posteriori $P_B(A)$ à partir de $P_A(B)$, $P(A)$ et $P(B)$.",
           "CURRENT_EXERCISES": 2,
-          "CURRENT_REASONING": 1,
+          "CURRENT_REASONING": 2,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 2,
           "DIFFICULTY_SPREAD": [
@@ -5775,7 +5767,7 @@
             "CONTEXT_VARIATION": 2,
             "DIRECT_APPLICATION": 2,
             "PROBLEM_SOLVING": 1,
-            "REASONING": 1
+            "REASONING": 2
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
@@ -6004,7 +5996,7 @@
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
             "CONTEXT_VARIATION": 1,
-            "DIRECT_APPLICATION": 1,
+            "DIRECT_APPLICATION": 2,
             "METHOD_TRANSFER": 1,
             "MODELLING": 1,
             "PROBLEM_SOLVING": 1,
@@ -6737,7 +6729,7 @@
           "CAPACITY_ID": "C6",
           "CAPACITY_STATEMENT": "Je sais calculer l'espérance d'une variable aléatoire suivant une loi exponentielle, sous forme d'intégrale.",
           "CURRENT_EXERCISES": 2,
-          "CURRENT_REASONING": 1,
+          "CURRENT_REASONING": 2,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 2,
           "DIFFICULTY_SPREAD": [
@@ -6749,7 +6741,7 @@
             "CONTEXT_VARIATION": 1,
             "DIRECT_APPLICATION": 2,
             "PROBLEM_SOLVING": 1,
-            "REASONING": 1
+            "REASONING": 2
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
@@ -6764,9 +6756,9 @@
           "CAPACITY_ID": "C7",
           "CAPACITY_STATEMENT": "Je sais définir la loi uniforme sur [0,1] puis sur [a,b], déterminer sa densité et sa fonction de répartition, et calculer son espérance et sa variance.",
           "CURRENT_EXERCISES": 2,
-          "CURRENT_REASONING": 1,
+          "CURRENT_REASONING": 2,
           "CURRENT_SYNTHESIS": 0,
-          "CURRENT_VARIATION": 1,
+          "CURRENT_VARIATION": 2,
           "DIFFICULTY_SPREAD": [
             1,
             2
@@ -6776,7 +6768,7 @@
           "EXERCISE_NATURES": {
             "DIRECT_APPLICATION": 2,
             "PROBLEM_SOLVING": 1,
-            "REASONING": 1
+            "REASONING": 2
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
@@ -6969,7 +6961,7 @@
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
             "CONTEXT_VARIATION": 1,
-            "DIRECT_APPLICATION": 3,
+            "DIRECT_APPLICATION": 4,
             "MODELLING": 1,
             "PROBLEM_SOLVING": 3,
             "REASONING": 4
@@ -7216,7 +7208,7 @@
           "DIVERSITY_VERDICT": "DIVERSITY_SUFFICIENT",
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
-            "DIRECT_APPLICATION": 2,
+            "DIRECT_APPLICATION": 3,
             "PROBLEM_SOLVING": 1,
             "REASONING": 1
           },
@@ -7679,7 +7671,7 @@
           "CAPACITY_ID": "C3",
           "CAPACITY_STATEMENT": "Je sais construire la matrice d'adjacence d'un graphe.",
           "CURRENT_EXERCISES": 3,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 2,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 2,
           "DIFFICULTY_SPREAD": [
@@ -7691,7 +7683,8 @@
           "EXERCISE_NATURES": {
             "DIRECT_APPLICATION": 3,
             "MODELLING": 1,
-            "PROBLEM_SOLVING": 2
+            "PROBLEM_SOLVING": 2,
+            "REASONING": 2
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
@@ -7699,7 +7692,7 @@
             "TEXP-GRA-EX-008",
             "TEXP-GRA-EX-013"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous modelling, problem_solving : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous modelling, problem_solving, reasoning : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
@@ -7707,7 +7700,7 @@
           "CAPACITY_ID": "C4",
           "CAPACITY_STATEMENT": "Je sais calculer le nombre de chemins de longueur donnée entre deux sommets d'un graphe à l'aide des puissances de la matrice d'adjacence.",
           "CURRENT_EXERCISES": 3,
-          "CURRENT_REASONING": 2,
+          "CURRENT_REASONING": 3,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 3,
           "DIFFICULTY_SPREAD": [
@@ -7719,7 +7712,7 @@
           "EXERCISE_NATURES": {
             "DIRECT_APPLICATION": 3,
             "PROBLEM_SOLVING": 3,
-            "REASONING": 2
+            "REASONING": 3
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
@@ -7745,7 +7738,7 @@
           "DIVERSITY_VERDICT": "DIVERSITY_SUFFICIENT",
           "ENTRY_FUNCTION": "REASONING",
           "EXERCISE_NATURES": {
-            "DIRECT_APPLICATION": 2,
+            "DIRECT_APPLICATION": 3,
             "METHOD_TRANSFER": 1,
             "PROBLEM_SOLVING": 3,
             "REASONING": 3
@@ -7855,7 +7848,7 @@
           "CAPACITY_ID": "C2",
           "CAPACITY_STATEMENT": "Je sais modéliser une situation par une matrice.",
           "CURRENT_EXERCISES": 2,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 2,
           "DIFFICULTY_SPREAD": [
@@ -7868,14 +7861,15 @@
             "CONTEXT_VARIATION": 1,
             "DIRECT_APPLICATION": 2,
             "MODELLING": 2,
-            "PROBLEM_SOLVING": 1
+            "PROBLEM_SOLVING": 1,
+            "REASONING": 1
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "TEXP-MAT-EX-002",
             "TEXP-MAT-EX-009"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous context_variation, modelling, problem_solving : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous context_variation, modelling, problem_solving, reasoning : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
@@ -7937,7 +7931,7 @@
           "CAPACITY_ID": "C5",
           "CAPACITY_STATEMENT": "Je sais calculer, pour une chaîne de Markov, la distribution après n transitions et interpréter le coefficient (i,j) de la puissance n-ième de la matrice de transition.",
           "CURRENT_EXERCISES": 3,
-          "CURRENT_REASONING": 1,
+          "CURRENT_REASONING": 3,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 3,
           "DIFFICULTY_SPREAD": [
@@ -7951,7 +7945,7 @@
             "DIRECT_APPLICATION": 3,
             "MODELLING": 1,
             "PROBLEM_SOLVING": 2,
-            "REASONING": 1
+            "REASONING": 3
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
@@ -7978,7 +7972,7 @@
           "ENTRY_FUNCTION": "REASONING",
           "EXERCISE_NATURES": {
             "CONTEXT_VARIATION": 1,
-            "DIRECT_APPLICATION": 1,
+            "DIRECT_APPLICATION": 2,
             "PROBLEM_SOLVING": 2,
             "REASONING": 2,
             "SYNTHESIS": 1
@@ -8463,7 +8457,6 @@
           "C2",
           "C3",
           "C5",
-          "C6",
           "C7"
         ],
         "CAPACITY_ASSIGNMENT_MISSING": false,
@@ -8480,7 +8473,7 @@
         ],
         "REASONING_COVERAGE": "0/7",
         "SYNTHESIS_COVERAGE": "OUI",
-        "VARIATION_COVERAGE": "1/7"
+        "VARIATION_COVERAGE": "2/7"
       },
       "per_capacity": [
         {
@@ -8576,7 +8569,7 @@
           "CAPACITY_ID": "C5",
           "CAPACITY_STATEMENT": "Je sais identifier, selon le protocole de routage utilisé, la route empruntée par un paquet.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
@@ -8585,7 +8578,8 @@
           "DIVERSITY_VERDICT": "REAL_DIVERSITY_GAP",
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
-            "CONTEXT_VARIATION": 1
+            "CONTEXT_VARIATION": 1,
+            "REASONING": 1
           },
           "MISSING_FUNCTIONS": [
             "aucune application directe"
@@ -8601,25 +8595,24 @@
           "CAPACITY_ID": "C6",
           "CAPACITY_STATEMENT": "Je sais décrire les principes du chiffrement symétrique et asymétrique.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
-          "CURRENT_VARIATION": 0,
+          "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
             1
           ],
-          "DIVERSITY_VERDICT": "REAL_DIVERSITY_GAP",
+          "DIVERSITY_VERDICT": "DIVERSITY_SUFFICIENT",
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
-            "DIRECT_APPLICATION": 1
+            "DIRECT_APPLICATION": 1,
+            "REASONING": 1
           },
-          "MISSING_FUNCTIONS": [
-            "un seul mode d'exercice"
-          ],
+          "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "TNSI-ARCH-EX-004"
           ],
-          "RATIONALE": "un exercice unique ne fait varier aucune situation : l'eleve voit la capacite une fois, sous un seul angle",
-          "REAL_DIVERSITY_GAP": true,
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous reasoning : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
         {
@@ -8665,7 +8658,6 @@
           "C2",
           "C3",
           "C5",
-          "C6",
           "C7"
         ]
       }
@@ -9088,7 +9080,8 @@
         "EXERCISES_WITHOUT_CAPACITY": 0,
         "EXERCISE_FUNCTIONS_PRESENT": [
           "CONTEXT_VARIATION",
-          "DIRECT_APPLICATION"
+          "DIRECT_APPLICATION",
+          "REASONING"
         ],
         "REASONING_COVERAGE": "0/2",
         "SYNTHESIS_COVERAGE": "OUI",
@@ -9124,7 +9117,7 @@
           "CAPACITY_ID": "C2",
           "CAPACITY_STATEMENT": "Je sais identifier l'évolution des rôles relatifs des logiciels et des matériels.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
@@ -9134,13 +9127,14 @@
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
             "CONTEXT_VARIATION": 1,
-            "DIRECT_APPLICATION": 1
+            "DIRECT_APPLICATION": 1,
+            "REASONING": 1
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "TNSI-HIST-EX-002"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous context_variation : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous context_variation, reasoning : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         }
@@ -9916,7 +9910,7 @@
           "CAPACITY_ID": "C12",
           "CAPACITY_STATEMENT": "Je sais écrire l'implémentation d'un graphe par matrice d'adjacence.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 1,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
@@ -9927,13 +9921,14 @@
           "EXERCISE_NATURES": {
             "DIRECT_APPLICATION": 1,
             "PROBLEM_SOLVING": 1,
+            "REASONING": 1,
             "SYNTHESIS": 1
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "TNSI-STRUCT-EX-004"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous problem_solving, synthesis : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous problem_solving, reasoning, synthesis : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
@@ -9941,7 +9936,7 @@
           "CAPACITY_ID": "C13",
           "CAPACITY_STATEMENT": "Je sais écrire l'implémentation d'un graphe par listes de successeurs.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 1,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
@@ -9952,13 +9947,14 @@
           "EXERCISE_NATURES": {
             "DIRECT_APPLICATION": 1,
             "PROBLEM_SOLVING": 1,
+            "REASONING": 1,
             "SYNTHESIS": 1
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "TNSI-STRUCT-EX-004"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous problem_solving, synthesis : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous problem_solving, reasoning, synthesis : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
@@ -9966,7 +9962,7 @@
           "CAPACITY_ID": "C14",
           "CAPACITY_STATEMENT": "Je sais passer d'une représentation de graphe à une autre.",
           "CURRENT_EXERCISES": 1,
-          "CURRENT_REASONING": 0,
+          "CURRENT_REASONING": 1,
           "CURRENT_SYNTHESIS": 1,
           "CURRENT_VARIATION": 1,
           "DIFFICULTY_SPREAD": [
@@ -9977,13 +9973,14 @@
           "EXERCISE_NATURES": {
             "DIRECT_APPLICATION": 1,
             "PROBLEM_SOLVING": 1,
+            "REASONING": 1,
             "SYNTHESIS": 1
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
             "TNSI-STRUCT-EX-004"
           ],
-          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous problem_solving, synthesis : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (direct_application) est installe et l'eleve rencontre la capacite sous problem_solving, reasoning, synthesis : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         }
@@ -10768,6 +10765,7 @@
           "DIVERSITY_VERDICT": "DIVERSITY_SUFFICIENT",
           "ENTRY_FUNCTION": "REASONING",
           "EXERCISE_NATURES": {
+            "DIRECT_APPLICATION": 1,
             "MODELLING": 2,
             "PROBLEM_SOLVING": 1,
             "REASONING": 8
@@ -10783,7 +10781,7 @@
             "TSPE-DERCONV-EX-026",
             "TSPE-DERCONV-EX-052"
           ],
-          "RATIONALE": "le geste de base (reasoning) est installe et l'eleve rencontre la capacite sous modelling, problem_solving : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
+          "RATIONALE": "le geste de base (reasoning) est installe et l'eleve rencontre la capacite sous direct_application, modelling, problem_solving : le transfert est travaille, ajouter des exercices n'ajouterait pas de diversite",
           "REAL_DIVERSITY_GAP": false,
           "SINGULAR_CAPACITY": false
         },
@@ -10802,7 +10800,7 @@
           "DIVERSITY_VERDICT": "DIVERSITY_SUFFICIENT",
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
-            "DIRECT_APPLICATION": 6,
+            "DIRECT_APPLICATION": 7,
             "MODELLING": 2,
             "PROBLEM_SOLVING": 4,
             "REASONING": 7
@@ -10837,7 +10835,7 @@
           "DIVERSITY_VERDICT": "DIVERSITY_SUFFICIENT",
           "ENTRY_FUNCTION": "DIRECT_APPLICATION",
           "EXERCISE_NATURES": {
-            "DIRECT_APPLICATION": 7,
+            "DIRECT_APPLICATION": 8,
             "MODELLING": 2,
             "PROBLEM_SOLVING": 3,
             "REASONING": 6
@@ -11655,7 +11653,7 @@
           "CAPACITY_ID": "C2",
           "CAPACITY_STATEMENT": "Je sais mobiliser les propriétés de l'exponentielle et du logarithme dans le cadre de la résolution de problèmes.",
           "CURRENT_EXERCISES": 2,
-          "CURRENT_REASONING": 1,
+          "CURRENT_REASONING": 2,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 2,
           "DIFFICULTY_SPREAD": [
@@ -11668,7 +11666,7 @@
             "CONTEXT_VARIATION": 2,
             "DIRECT_APPLICATION": 2,
             "MODELLING": 2,
-            "REASONING": 1
+            "REASONING": 2
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
@@ -12382,7 +12380,7 @@
           "CAPACITY_ID": "C3",
           "CAPACITY_STATEMENT": "Je sais modeliser et etudier un phenomene d'evolution a l'aide d'une suite.",
           "CURRENT_EXERCISES": 7,
-          "CURRENT_REASONING": 6,
+          "CURRENT_REASONING": 7,
           "CURRENT_SYNTHESIS": 0,
           "CURRENT_VARIATION": 7,
           "DIFFICULTY_SPREAD": [
@@ -12397,7 +12395,7 @@
             "DIRECT_APPLICATION": 7,
             "MODELLING": 7,
             "PROBLEM_SOLVING": 4,
-            "REASONING": 6
+            "REASONING": 7
           },
           "MISSING_FUNCTIONS": [],
           "OBJECTS": [
@@ -12527,7 +12525,7 @@
           "DIVERSITY_VERDICT": "DIVERSITY_SUFFICIENT",
           "ENTRY_FUNCTION": "REASONING",
           "EXERCISE_NATURES": {
-            "DIRECT_APPLICATION": 6,
+            "DIRECT_APPLICATION": 7,
             "MODELLING": 1,
             "PROBLEM_SOLVING": 6,
             "REASONING": 7
@@ -12605,7 +12603,7 @@
           "CAPACITY_ID": "C1",
           "CAPACITY_STATEMENT": "Je sais résoudre des équations et inéquations trigonométriques du type cos(x) = a ou cos(x) ≤ a sur [-π,π].",
           "CURRENT_EXERCISES": 5,
-          "CURRENT_REASONING": 2,
+          "CURRENT_REASONING": 3,
           "CURRENT_SYNTHESIS": 1,
           "CURRENT_VARIATION": 4,
           "DIFFICULTY_SPREAD": [
@@ -12620,7 +12618,7 @@
             "DIRECT_APPLICATION": 5,
             "MODELLING": 1,
             "PROBLEM_SOLVING": 3,
-            "REASONING": 2,
+            "REASONING": 3,
             "SYNTHESIS": 1
           },
           "MISSING_FUNCTIONS": [],
@@ -12681,10 +12679,10 @@
   "summary": {
     "CHAPTERS_AUDITED": 52,
     "VERDICTS": {
-      "ADEQUATE": 37,
+      "ADEQUATE": 39,
       "STRONG": 1,
-      "WEAK": 14
+      "WEAK": 12
     },
-    "WEAK_OR_UNUSABLE": 14
+    "WEAK_OR_UNUSABLE": 12
   }
 }

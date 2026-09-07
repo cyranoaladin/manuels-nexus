@@ -5,11 +5,11 @@ Chaque verdict est derive des competences et parcours declares par les exercices
 | chapitre | cours | ex | co | eval | rem | diversite | progression | verdict |
 | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
 | 1NSI-ALGO-DICHO-GLOUTON-KNN | 3 | 5 | 8 | 4 | 3 | WEAK | STRONG | **WEAK** |
-| 1NSI-ALGO-PARCOURS-TRIS | 3 | 6 | 12 | 4 | 6 | WEAK | ADEQUATE | **WEAK** |
+| 1NSI-ALGO-PARCOURS-TRIS | 3 | 6 | 12 | 4 | 6 | STRONG | ADEQUATE | **ADEQUATE** |
 | 1NSI-ARCHITECTURE-OS | 3 | 5 | 6 | 4 | 1 | WEAK | STRONG | **WEAK** |
 | 1NSI-LANGAGE | 5 | 5 | 6 | 4 | 1 | WEAK | STRONG | **WEAK** |
 | 1NSI-PROJET-METHODES | 4 | 5 | 6 | 4 | 1 | STRONG | STRONG | **ADEQUATE** |
-| 1NSI-RESEAUX | 3 | 5 | 6 | 4 | 1 | WEAK | STRONG | **WEAK** |
+| 1NSI-RESEAUX | 3 | 5 | 6 | 4 | 1 | STRONG | STRONG | **ADEQUATE** |
 | 1NSI-TABLES | 4 | 5 | 6 | 4 | 1 | WEAK | STRONG | **WEAK** |
 | 1NSI-TYPES-BASE | 5 | 5 | 6 | 4 | 1 | WEAK | STRONG | **WEAK** |
 | 1NSI-TYPES-CONSTRUITS | 8 | 55 | 55 | 4 | 1 | STRONG | STRONG | **ADEQUATE** |
