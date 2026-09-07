@@ -30,8 +30,9 @@ tourne mal.
 
 \textbf{Exemple :} \texttt{Emprunt(id, titre\_livre, auteur, nom\_usager, date)}.
 
-\emph{Redondance} : \texttt{titre\_livre} et \texttt{auteur} se répètent à chaque emprunt du
-même livre ; \texttt{nom\_usager} à chaque emprunt du même lecteur.
+\emph{Redondance} : les colonnes \texttt{titre\_livre} et \texttt{auteur} se répètent à
+chaque emprunt du même livre, et la colonne \texttt{nom\_usager} se répète à chaque emprunt
+du même lecteur. La même information est donc stockée autant de fois qu'il y a d'emprunts.
 
 \emph{Mise à jour} : corriger « Orwel » en « Orwell » demande de modifier toutes les lignes de
 ce livre. En oublier une laisse deux orthographes dans la base, et une requête sur l'auteur en
@@ -42,8 +43,12 @@ faudrait inventer un emprunt.
 
 \emph{Suppression} : supprimer le seul emprunt d'un livre efface toute trace de ce livre.
 
-\emph{Correction} : \texttt{Livre(id, titre, auteur)}, \texttt{Usager(id, nom)},
-\texttt{Emprunt(id, id\_livre, id\_usager, date)} avec deux clés étrangères.
+\emph{Correction} : trois relations liées par deux clés étrangères.
+\begin{itemize}
+  \item \texttt{Livre(id, titre, auteur)}
+  \item \texttt{Usager(id, nom)}
+  \item \texttt{Emprunt(id, id\_livre, id\_usager, date)}
+\end{itemize}
 
 % BEGIN-VERIFY
 % import sqlite3

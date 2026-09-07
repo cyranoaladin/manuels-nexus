@@ -16,7 +16,7 @@ que tu as déjà.
     lui qui indexera le dictionnaire. Si deux arguments varient, la clé est le couple.
   \item \textbf{Ajoute le dictionnaire en paramètre}, avec la valeur par défaut
     \lstinline{None}, et initialise-le à l'intérieur de la fonction. Jamais
-    \lstinline{memo={}} dans la signature.
+    \lstinline!memo={}! dans la signature.
   \item \textbf{Encadre le corps de deux lignes} : au début, « si la clé est connue, renvoie
     la valeur mémorisée » ; à la fin, « enregistre le résultat avant de le renvoyer ».
   \item \textbf{Contrôle que le résultat n'a pas changé} sur plusieurs valeurs. La mémoïsation
@@ -119,7 +119,7 @@ deux millions d'appels.
   \item \textbf{Mémoïser un algorithme dont les sous-problèmes ne se recoupent pas.} Le tri
     fusion ne rencontre jamais deux fois la même sous-liste : le dictionnaire ne ferait
     qu'occuper de la mémoire. Vérifie le recoupement avant de transformer.
-  \item \textbf{Mettre le dictionnaire par défaut dans la signature.} \lstinline{memo={}} est
+  \item \textbf{Mettre le dictionnaire par défaut dans la signature.} \lstinline!memo={}! est
     créé une seule fois, à la définition, et \textbf{partagé} entre tous les appels : deux
     calculs indépendants se contaminent. Toujours \lstinline{memo=None}.
   \item \textbf{Oublier d'enregistrer avant de renvoyer.} La fonction reste correcte et reste
