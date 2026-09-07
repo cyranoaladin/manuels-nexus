@@ -128,12 +128,22 @@ class DimensionEvidence:
         }
 
 
-def write_evidence(evidence: DimensionEvidence, output: Path) -> dict[str, Any]:
-    payload = {
+def render_evidence(evidence: DimensionEvidence) -> dict[str, Any]:
+    """Le contenu de la preuve, sans la deposer.
+
+    Separer le calcul de la publication n'est pas une elegance : un `build()`
+    qui ecrit publie tout ce qui l'appelle, y compris un test au milieu d'une
+    mutation, et un `--check` qui ecrit efface la derive qu'il mesure.
+    """
+    return {
         "artifact_type": "certification_dimension_evidence",
         "schema_version": 1,
         **evidence.to_payload(),
     }
+
+
+def write_evidence(evidence: DimensionEvidence, output: Path) -> dict[str, Any]:
+    payload = render_evidence(evidence)
     output.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return payload
 

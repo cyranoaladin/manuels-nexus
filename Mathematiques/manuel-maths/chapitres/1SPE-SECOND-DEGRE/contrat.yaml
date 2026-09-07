@@ -7,24 +7,26 @@ statut: draft
 capacites:
   # Autorité 2026 (MENE2602917A, BO n°14 du 2 avril 2026). Le programme énonce
   # quatre capacités attendues et une démonstration là où 2019 en portait six.
-  # `ref_capacite` doit rester un alias un-vers-un : une référence officielle
-  # partagée par deux codes locaux rendrait tout crédit indécidable. Chaque
-  # capacité officielle est donc portée par un seul code local ; les codes qui
-  # en travaillent une facette restent des objectifs pédagogiques sans alias.
+  # `ref_capacite` reste un alias un-vers-un : une reference officielle
+  # partagee par deux codes locaux rendrait tout credit indecidable. Chaque
+  # capacite officielle est donc portee par un seul code local ; les codes qui
+  # en travaillent une facette declarent `sans_alias_officiel` en nommant la
+  # capacite concernee et le code frere qui la porte. Le gate verifie que ce
+  # frere existe et porte bien cette reference : la facette est donc couverte,
+  # et l'absence d'alias est un choix editorial controle, pas une omission.
   # Voir audit/1SPE_SECOND_DEGRE_REFERENTIAL_DIFF.md.
   - { code: C1, ref_capacite: 1SPE-SECOND-DEGRE-2026-C4, libelle_eleve: "Je sais reconnaitre un polynome du second degre et passer d'une forme a une autre." }
-  # Sommet, axe de symétrie et variations : le BO 2026 les traite dans la
-  # rubrique « Variations et courbes représentatives des fonctions ».
-  - { code: C2, libelle_eleve: "Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations." }
+  # Sommet, axe de symetrie et variations : le BO 2026 nomme « variations »
+  # comme l'un des quatre cadres de resolution de 2026-C4, portee par C1.
+  - { code: C2, sans_alias_officiel: { facette_de: 1SPE-SECOND-DEGRE-2026-C4, porte_par: C1 }, libelle_eleve: "Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations." }
   - { code: C3, ref_capacite: 1SPE-SECOND-DEGRE-2026-D1, libelle_eleve: "Je sais calculer le discriminant et resoudre une equation du second degre." }
   - { code: C4, ref_capacite: 1SPE-SECOND-DEGRE-2026-C3, libelle_eleve: "Je sais factoriser un trinome en diversifiant les strategies." }
   # Le BO 2026 scinde l'ancien attendu « factoriser et etudier le signe » :
   # l'etude du signe sous forme factorisee devient une capacite distincte.
   - { code: C8, ref_capacite: 1SPE-SECOND-DEGRE-2026-C1, libelle_eleve: "Je sais etudier le signe d'un polynome du second degre donne sous forme factorisee." }
-  # Inéquation et optimisation sont deux cadres de résolution nommés par la
-  # capacité 2026-C4, portée par C1.
-  - { code: C5, libelle_eleve: "Je sais resoudre une inequation du second degre." }
-  - { code: C6, libelle_eleve: "Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum." }
+  # Inequation et optimisation sont les deux autres cadres nommes par 2026-C4.
+  - { code: C5, sans_alias_officiel: { facette_de: 1SPE-SECOND-DEGRE-2026-C4, porte_par: C1 }, libelle_eleve: "Je sais resoudre une inequation du second degre." }
+  - { code: C6, sans_alias_officiel: { facette_de: 1SPE-SECOND-DEGRE-2026-C4, porte_par: C1 }, libelle_eleve: "Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum." }
   - { code: C7, ref_capacite: 1SPE-SECOND-DEGRE-2026-C2, libelle_eleve: "Je sais determiner les fonctions polynomes du second degre s'annulant en deux nombres reels distincts, en utilisant la somme et le produit des racines." }
 
 prerequis:

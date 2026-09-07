@@ -223,10 +223,17 @@ def build(limit_pages: int | None = None) -> dict[str, Any]:
         ),
     ))
 
-    payload = cd.write_evidence(evidence, OUTPUT)
+    payload = cd.render_evidence(evidence)
     codes = [f.code for f in evidence.findings]
     payload["summary"] = {code: codes.count(code) for code in sorted(set(codes))} or {"NO_FINDINGS": 0}
-    OUTPUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return payload
+
+
+def write(payload: dict[str, Any]) -> dict[str, Any]:
+    """Depose la preuve. Seule etape qui touche le disque."""
+    OUTPUT.write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
     return payload
 
 
@@ -235,6 +242,16 @@ def main() -> int:
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
     payload = build()
+    if args.check:
+        if not OUTPUT.is_file():
+            print("DIMENSION_VISUAL check: MISSING")
+            return 1
+        if json.loads(OUTPUT.read_text(encoding="utf-8")) != payload:
+            print("DIMENSION_VISUAL check: STALE")
+            return 1
+        print("DIMENSION_VISUAL check: OK")
+        return 0
+    write(payload)
     print(json.dumps({"status": payload["status"], **payload["summary"]}, indent=2, ensure_ascii=False))
     return 0
 

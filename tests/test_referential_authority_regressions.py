@@ -116,16 +116,45 @@ def test_a_reworded_official_capacity_no_longer_matches_its_digest(restore_refer
 
 # --- Mutation 5 : capacité sans aucun objet pédagogique ----------------------
 
-def test_a_capacity_without_any_object_is_reported_as_uncovered() -> None:
-    """Fausse couverture impossible : C7 n'a aucun objet et doit ressortir."""
-    payload = regulation.build()
-    uncovered = [
-        f["target"] for f in payload["findings"]
+def test_a_capacity_without_any_object_is_reported_as_uncovered(
+    restore_referential,
+) -> None:
+    """Fausse couverture impossible : une exigence sans objet doit ressortir.
+
+    Ce test visait `2026-C2` tant que cette capacité n'avait aucun contenu.
+    Elle en a désormais — la somme et le produit des racines sont traités par
+    `1SPE-SECOND-DEGRE/cours/16_C7_somme_produit_racines.tex`. Continuer à
+    exiger qu'elle soit signalée reviendrait à vérifier l'état du contenu au
+    lieu du détecteur, et le test deviendrait faux à chaque fois qu'on écrit.
+
+    La mutation porte donc sur le référentiel, comme les quatre précédentes :
+    on y ajoute une exigence officielle qu'aucun objet ne peut couvrir.
+    """
+    baseline = {
+        f["target"] for f in regulation.build()["findings"]
         if f["code"] == "OFFICIAL_REQUIREMENT_UNCOVERED"
-    ]
-    assert "1SPE::1SPE-SECOND-DEGRE-2026-C2" in uncovered, (
-        "l'exigence 2026 nouvelle est déclarée au contrat mais sans contenu : "
-        "elle doit être signalée, pas absorbée"
+    }
+    assert "1SPE::1SPE-SECOND-DEGRE-2026-C2" not in baseline
+
+    payload = json.loads(REFERENTIAL.read_text(encoding="utf-8"))
+    injected = dict(payload["capacites"][0])
+    injected["id"] = "1SPE-SECOND-DEGRE-2026-C99"
+    injected["libelle_bo"] = "Exigence officielle que rien ne couvre."
+    payload["capacites"].append(injected)
+    REFERENTIAL.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+
+    mutated = {
+        f["target"] for f in regulation.build()["findings"]
+        if f["code"] == "OFFICIAL_REQUIREMENT_UNCOVERED"
+    }
+    assert "1SPE::1SPE-SECOND-DEGRE-2026-C99" in mutated, (
+        "une exigence officielle sans aucun objet doit être signalée, "
+        "pas absorbée"
+    )
+    assert mutated - baseline == {"1SPE::1SPE-SECOND-DEGRE-2026-C99"}, (
+        "la mutation ne doit rien perturber d'autre"
     )
 
 

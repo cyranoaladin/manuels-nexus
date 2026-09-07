@@ -274,7 +274,7 @@ def build() -> dict[str, Any]:
         }
 
     evidence.coverage = {"targets_examined": examined, "per_manual": coverage_rows}
-    payload = cd.write_evidence(evidence, OUTPUT)
+    payload = cd.render_evidence(evidence)
     payload["summary"] = {
         "AUTHORITY_DIVERGENCES": sum(
             1 for f in evidence.findings
@@ -294,28 +294,41 @@ def build() -> dict[str, Any]:
             1 for f in evidence.findings if f.code == "UNLABELLED_OUT_OF_PROGRAMME_CONTENT"
         ),
     }
-    OUTPUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return payload
 
 
-def main() -> int:
+def write(payload: dict[str, Any]) -> dict[str, Any]:
+    """Depose la preuve. Seule etape qui touche le disque."""
+    OUTPUT.write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    return payload
+
+
+def main_for_argv(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     if args.check:
         if not OUTPUT.is_file():
             print("DIMENSION_REGULATION check: MISSING")
             return 1
+        # `build()` ne touche plus au disque : la derive constatee ici reste
+        # lisible par le prochain lecteur au lieu d'etre effacee par le
+        # controle lui-meme.
         previous = json.loads(OUTPUT.read_text(encoding="utf-8"))
-        payload = build()
-        if previous == payload:
+        if previous == build():
             print("DIMENSION_REGULATION check: OK")
             return 0
         print("DIMENSION_REGULATION check: STALE")
         return 1
-    payload = build()
+    payload = write(build())
     print(json.dumps({"status": payload["status"], **payload["summary"]}, indent=2, ensure_ascii=False))
     return 0
+
+
+def main() -> int:
+    return main_for_argv()
 
 
 if __name__ == "__main__":

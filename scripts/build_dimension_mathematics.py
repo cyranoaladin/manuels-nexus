@@ -207,7 +207,7 @@ def build() -> dict[str, Any]:
         "maths_manuals_in_scope": sorted(MATHS_MANUALS),
     }
 
-    payload = cd.write_evidence(evidence, OUTPUT)
+    payload = cd.render_evidence(evidence)
     payload["summary"] = {
         "OBJECTS_WITH_VERIFIABLE_ASSERTIONS": objects_with_verify,
         "ASSERTIONS_EXECUTED": assertions_run,
@@ -221,7 +221,14 @@ def build() -> dict[str, Any]:
         "NOT_APPLICABLE_PARTITION": dict(sorted(na_partition.items())),
         "MATHEMATICS_UNKNOWN": na_partition.get("UNKNOWN", 0),
     }
-    OUTPUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return payload
+
+
+def write(payload: dict[str, Any]) -> dict[str, Any]:
+    """Depose la preuve. Seule etape qui touche le disque."""
+    OUTPUT.write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
     return payload
 
 
@@ -231,8 +238,15 @@ def main() -> int:
     args = parser.parse_args()
     payload = build()
     if args.check:
+        if not OUTPUT.is_file():
+            print("DIMENSION_MATHEMATICS check: MISSING")
+            return 1
+        if json.loads(OUTPUT.read_text(encoding="utf-8")) != payload:
+            print("DIMENSION_MATHEMATICS check: STALE")
+            return 1
         print("DIMENSION_MATHEMATICS check: OK")
         return 0
+    write(payload)
     print(json.dumps({"status": payload["status"], **payload["summary"]}, indent=2, ensure_ascii=False))
     return 0
 

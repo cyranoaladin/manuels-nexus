@@ -6293,6 +6293,12 @@ def _build_inventory_with_stable_controls(
                         }
                     )
                 else:
+                    capacities_by_code = {
+                        entry["code"]: entry
+                        for entry in capacities
+                        if isinstance(entry, Mapping)
+                        and isinstance(entry.get("code"), str)
+                    }
                     for index, capacity in enumerate(capacities):
                         if not isinstance(capacity, Mapping):
                             anomalies["invalid_capacities"].append(
@@ -6303,18 +6309,27 @@ def _build_inventory_with_stable_controls(
                                 }
                             )
                             continue
-                        reference = capacity.get("ref_capacite")
-                        if not isinstance(reference, str) or not reference.strip():
+                        verdict = _capacity_alias_verdict(
+                            capacity, capacities_by_code
+                        )
+                        if verdict is not None:
                             anomalies["invalid_capacities"].append(
                                 {
                                     "index": index,
                                     "path": contract_path,
-                                    "reason": "ref_capacite doit etre un texte non vide",
+                                    "reason": verdict,
                                 }
                             )
                             continue
                         valid_capacity = _canonicalize_mapping(capacity)
                         valid_capacities.append(valid_capacity)
+                        reference = capacity.get("ref_capacite")
+                        if not isinstance(reference, str) or not reference.strip():
+                            # Facette declaree et verifiee : la capacite
+                            # officielle est portee par un code frere, ce code
+                            # local ne reclame aucun alias et n'occupe donc
+                            # aucune place dans l'index un-vers-un.
+                            continue
                         capacity_ref_occurrences[reference].append(
                             {
                                 "chapter": chapter_id,
@@ -8343,6 +8358,55 @@ def _fallback_reason_code(
     return semantic if semantic else ""
 
 
+def _capacity_alias_verdict(
+    capacity: Mapping[str, Any],
+    capacities_by_code: Mapping[str, Mapping[str, Any]],
+) -> str | None:
+    """Motif de rejet d'une capacite locale, ou `None` si elle est conforme.
+
+    `ref_capacite` est un alias un-vers-un : `capacity_identity` resout une
+    chaine declaree par EGALITE avec lui, donc deux codes locaux portant la
+    meme reference officielle rendraient le credit ambigu. Un code local qui
+    travaille une facette d'une capacite officielle deja portee par un code
+    frere ne peut donc pas la reclamer aussi.
+
+    Il ne peut pas non plus se taire : l'omission pure ne distingue pas le
+    choix editorial de l'oubli. Il doit declarer `sans_alias_officiel` en
+    nommant la capacite officielle concernee et le code frere qui la porte —
+    et le gate verifie que ce frere existe et porte bien cette reference.
+    """
+    reference = capacity.get("ref_capacite")
+    if isinstance(reference, str) and reference.strip():
+        return None
+
+    declaration = capacity.get("sans_alias_officiel")
+    if not isinstance(declaration, Mapping):
+        return "ref_capacite doit etre un texte non vide"
+
+    official = declaration.get("facette_de")
+    if not isinstance(official, str) or not official.strip():
+        return "sans_alias_officiel.facette_de doit nommer une capacite officielle"
+
+    bearer_code = declaration.get("porte_par")
+    if not isinstance(bearer_code, str) or not bearer_code.strip():
+        return "sans_alias_officiel.porte_par doit nommer un code local frere"
+
+    bearer = capacities_by_code.get(bearer_code)
+    if not isinstance(bearer, Mapping):
+        return (
+            f"sans_alias_officiel.porte_par designe {bearer_code}, "
+            "absent du contrat"
+        )
+
+    borne = bearer.get("ref_capacite")
+    if not isinstance(borne, str) or borne.strip() != official.strip():
+        return (
+            f"{bearer_code} ne porte pas {official} : la facette declaree "
+            "ne serait couverte par aucun code local"
+        )
+    return None
+
+
 def _anomaly_identity_fields(
     item: Mapping[str, Any],
     *,
@@ -8357,7 +8421,7 @@ def _anomaly_identity_fields(
         ),
         "",
     )
-    return {
+    fields = {
         "category": category if category is not None else item.get("category", ""),
         "chapter": item.get("chapter", item.get("chapitre", "")),
         "field": item.get("field", item.get("champ", "")),
@@ -8377,6 +8441,15 @@ def _anomaly_identity_fields(
         ),
         "target_or_id": target,
     }
+    # Certaines anomalies ne se distinguent que par leur position dans le
+    # fichier : trois capacites vides d'un meme contrat.yaml partagent
+    # categorie, source, raison et cible. Sans `index`, elles s'ecrasaient en
+    # une seule unite de revue. Le champ n'est ajoute que lorsqu'il est
+    # present : les empreintes deja inscrites dans les registres de revue ne
+    # doivent pas etre renommees par ce correctif.
+    if "index" in item:
+        fields["index"] = item["index"]
+    return fields
 
 
 def _canonicalize_fingerprint_value(value: Any) -> Any:
