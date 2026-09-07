@@ -1,0 +1,155 @@
+% META: {"id": "TNSI-PRATIQUE-P2", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "banque_pratique", "capacites": ["T-ALGO-02B"], "capacites_codes": ["C8"], "duree_min": 60, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% graphe = {
+%     "A": ["B", "C"],
+%     "B": ["D"],
+%     "C": ["D", "E"],
+%     "D": [],
+%     "E": ["A"],
+%     "F": [],
+% }
+% def profondeur(graphe, depart):
+%     """Parcours en profondeur iteratif, ordre de decouverte.
+%
+%     Precondition  : depart est un sommet du graphe.
+%     Postcondition : renvoie la liste des sommets atteignables depuis
+%                     depart, chacun une seule fois, depart en tete.
+%     """
+%     assert depart in graphe, "sommet inconnu"
+%     vus, ordre, pile = {depart}, [depart], [depart]
+%     while pile:
+%         courant = pile.pop()
+%         for voisin in graphe[courant]:
+%             if voisin not in vus:
+%                 vus.add(voisin)
+%                 ordre.append(voisin)
+%                 pile.append(voisin)
+%     return ordre
+% def atteignables(graphe, depart):
+%     return set(profondeur(graphe, depart))
+% # jeu de tests remis avec le sujet
+% assert profondeur(graphe, "A")[0] == "A"
+% assert atteignables(graphe, "A") == {"A", "B", "C", "D", "E"}
+% assert atteignables(graphe, "D") == {"D"}
+% assert atteignables(graphe, "F") == {"F"}
+% assert atteignables(graphe, "E") == {"E", "A", "B", "C", "D"}
+% # aucun sommet n'est visite deux fois
+% for depart in graphe:
+%     ordre = profondeur(graphe, depart)
+%     assert len(ordre) == len(set(ordre))
+% # le cycle E -> A ne fait pas boucler le parcours
+% assert "A" in graphe["E"] and "C" in graphe["A"]
+% assert len(profondeur(graphe, "E")) == 5
+% # F est isole : il n'atteint personne et personne ne l'atteint
+% assert graphe["F"] == []
+% assert all("F" not in profondeur(graphe, d) for d in graphe if d != "F")
+% # la precondition est refusee
+% refuse = False
+% try:
+%     profondeur(graphe, "Z")
+% except AssertionError:
+%     refuse = True
+% assert refuse
+% END-VERIFY
+\section*{Situation pratique P2 --- parcours en profondeur d'un graphe fourni}
+
+\textit{Durée : 1 heure. Travail sur machine, à partir du document fourni.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Document fourni}
+
+Le fichier \lstinline{parcours.py} contient le graphe, la spécification, et le
+jeu de tests. Ce dernier ne doit pas être modifié.
+
+\begin{python}
+graphe = {
+    "A": ["B", "C"],
+    "B": ["D"],
+    "C": ["D", "E"],
+    "D": [],
+    "E": ["A"],
+    "F": [],
+}
+
+def profondeur(graphe, depart):
+    """Parcours en profondeur iteratif, ordre de decouverte.
+
+    Precondition  : depart est un sommet du graphe.
+    Postcondition : renvoie la liste des sommets atteignables depuis
+                    depart, chacun une seule fois, depart en tete.
+    """
+    ...          # a completer
+
+def atteignables(graphe, depart):
+    ...          # a completer
+\end{python}
+
+\subsection*{Travail demandé}
+
+\begin{enumerate}
+  \item Compléter \lstinline{profondeur} de façon \textbf{itérative}, avec une
+    pile. Aucun appel récursif.
+
+  \item Rendre la précondition exécutable et vérifier qu'un sommet inconnu est
+    refusé.
+
+  \item Compléter \lstinline{atteignables}, qui renvoie l'\textbf{ensemble} des
+    sommets atteignables.
+
+  \item Exécuter le jeu de tests fourni. Il doit passer entièrement.
+
+  \item Répondre par écrit, en commentaire : le graphe contient une flèche
+    $E \rightarrow A$ qui referme un cycle. Pourquoi votre parcours ne boucle-t-
+    il pas indéfiniment ? Quelle ligne exactement l'en empêche ?
+\end{enumerate}
+
+\subsection*{Ce qui est évalué}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Critère} & \textbf{Points} \\
+\hline
+Le jeu de tests fourni passe entièrement & $8$ \\
+\hline
+Le parcours est bien itératif, avec une pile explicite & $3$ \\
+\hline
+La précondition est vérifiée & $3$ \\
+\hline
+La réponse écrite désigne la bonne ligne & $6$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Réponse attendue à la question 5}
+
+Le parcours ne boucle pas grâce au test d'appartenance à l'ensemble des sommets
+déjà vus, avant l'empilement. Quand le parcours atteint $E$ puis considère $A$,
+$A$ est déjà dans \lstinline{vus} : il n'est ni réempilé ni recompté.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Marquer au dépilement.} Un sommet marqué seulement quand on le
+    sort de la pile peut y être empilé plusieurs fois. Ici, $D$ est atteignable
+    par $B$ et par $C$ : il apparaîtrait deux fois dans l'ordre, et le test
+    d'unicité échoue.
+  \item \textbf{Écrire une version récursive.} Elle passerait le jeu de tests,
+    mais la consigne demande explicitement l'itératif — la pile doit être
+    visible dans le code.
+  \item \textbf{Oublier le sommet isolé.} $F$ n'atteint personne et n'est
+    atteint par personne. Un candidat qui parcourt tout le graphe au lieu de
+    partir du sommet donné le verra apparaître à tort.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+La situation demande de transformer un algorithme connu sous forme récursive en
+sa forme itérative, ce qui oblige à rendre explicite la pile que la récursion
+cachait.
+
+La question 5 vaut six points sur vingt : elle ne demande pas de code, mais de
+désigner \emph{une ligne} et de dire ce qu'elle empêche. C'est la différence
+entre un parcours qui marche et un parcours qu'on sait correct.

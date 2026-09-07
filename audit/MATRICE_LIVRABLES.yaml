@@ -47,6 +47,8 @@ manuals:
         needs_review: 210
         verified: 149
       totals:
+        banque_ecrite: 0
+        banque_pratique: 0
         capacites: 53
         corriges: 137
         coups_de_pouce: 24
@@ -167,6 +169,8 @@ manuals:
         needs_review: 9
         verified: 8
       totals:
+        banque_ecrite: 0
+        banque_pratique: 0
         capacites: 55
         corriges: 504
         coups_de_pouce: 180
@@ -258,6 +262,8 @@ manuals:
         generated: 150
         needs_review: 50
       totals:
+        banque_ecrite: 0
+        banque_pratique: 0
         capacites: 53
         corriges: 318
         coups_de_pouce: 0
@@ -326,6 +332,8 @@ manuals:
         generated: 93
         needs_review: 33
       totals:
+        banque_ecrite: 0
+        banque_pratique: 0
         capacites: 33
         corriges: 204
         coups_de_pouce: 0
@@ -373,13 +381,13 @@ manuals:
   TNSI:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '125'
+      detail: '151'
       source: anomalies.blocking_statuses
     - code: livrable_non_compile
-      detail: absent
+      detail: declared
       source: deliverable_matrix.TNSI.variants.banque_ecrite
     - code: livrable_non_compile
-      detail: absent
+      detail: declared
       source: deliverable_matrix.TNSI.variants.banque_pratique
     - code: livrable_non_compile
       detail: declared
@@ -391,7 +399,7 @@ manuals:
       detail: declared
       source: deliverable_matrix.TNSI.variants.version_amenagee
     - code: statuts_non_approuves
-      detail: objets=118; contrats=7
+      detail: objets=144; contrats=7
       source: manuals.TNSI.statuses
     current:
       artifacts:
@@ -407,9 +415,11 @@ manuals:
       - TNSI-PROJET
       - TNSI-STRUCTURES-DONNEES
       statuses:
-        generated: 116
+        generated: 142
         needs_review: 2
       totals:
+        banque_ecrite: 18
+        banque_pratique: 8
         capacites: 61
         corriges: 35
         coups_de_pouce: 0
@@ -443,13 +453,15 @@ manuals:
       banque_ecrite:
         artifacts: []
         declared_chapter_variants: []
-        declared_manual_variants: []
-        state: absent
+        declared_manual_variants:
+        - banque_ecrite
+        state: declared
       banque_pratique:
         artifacts: []
         declared_chapter_variants: []
-        declared_manual_variants: []
-        state: absent
+        declared_manual_variants:
+        - banque_pratique
+        state: declared
       manuel_eleve:
         artifacts:
         - NSI/build/MANUEL_TNSI/MANUEL_TNSI_eleve.pdf
@@ -525,6 +537,8 @@ manuals:
         approved: 780
         generated: 56
       totals:
+        banque_ecrite: 0
+        banque_pratique: 0
         capacites: 67
         corriges: 299
         coups_de_pouce: 67
@@ -588,49 +602,46 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:92f38eeba51045e301ea9f733f7809978ef7b5311718dd484f47c7d0c8c3cc1c
+model_digest: sha256:b0a9e27720e28bc8183e07894a3217f69e6495bcaeaddb4feb45973025f63063
 provenance:
   branch: null
   dirty: true
   errors: []
-  generated_at_utc: '2026-09-07T01:05:51Z'
+  generated_at_utc: '2026-09-07T01:48:44Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:79b255deeddfa4b483a9a5a9f568bdc143defd7b2a69e8b8a704f4afdd35d6bf
     scripts/build_manifest.py: sha256:62d4f5da9454aaa2923041db777b759e3e4b672e7c2f33b59a62e07afc76de26
     scripts/inventory_assembly.py: sha256:8a2eeaaa869413ae29c761b1972787f77bc2d0f4baf49aa653b70af98092dd0e
-    scripts/inventory_collection.py: sha256:8fe292cbefb903a6dae30d66e70e0cb3c75ade973cd4479cfa367bc17e914d28
+    scripts/inventory_collection.py: sha256:622871fa48b6cb4488856a033382822e40f9cfed6c7569cda4473e132543c28d
     scripts/inventory_graph.py: sha256:8589fc6483491413395e8f01afe86cef6b33414906da29e24a9ac070342d4103
     scripts/inventory_pdf.py: sha256:4d87858492b6f00a9eaf48a717a9c2ddfc423cbe533278747cb199ae885d90b8
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:da8c4820fc35b524d87c8c4b0bae32bc71e93f6f12e8332174e7da14ae5d5cf2
+  generator_sha256: sha256:bb6d38889948ffe67559c7e61a23ed502a8bdb37395502c782952e1264bb23e8
   generator_version: 1
   git_available: true
-  head_sha: 64d6d1156010ba3f515fe10d289f3c57bacd6650
+  head_sha: 19ed52e036509ec74118e2cc57dc87908a0b557b
   modified_tracked:
-  - NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M1.tex
-  - NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M1.tex
-  - NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M2.tex
-  - NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M3.tex
-  - NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-M1.tex
-  - NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-M2.tex
-  - NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-M1.tex
-  - NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-M3.tex
-  - NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-M1.tex
-  - NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-M4.tex
-  - NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-M3.tex
-  - NSI/chapitres/1NSI-WEB-IHM/methodes/1NSI-WEB-M1.tex
-  - NSI/chapitres/1NSI-WEB-IHM/methodes/1NSI-WEB-M2.tex
-  - NSI/chapitres/TNSI-ALGORITHMIQUE/amenagee/TNSI-ALGO-AM-EXTRAIT.tex
-  - NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/amenagee/TNSI-ARCH-AM-EXTRAIT.tex
-  - NSI/chapitres/TNSI-BASES-DE-DONNEES/amenagee/TNSI-BDD-AM-EXTRAIT.tex
-  - NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/amenagee/TNSI-HIST-AM-EXTRAIT.tex
-  - NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/amenagee/TNSI-LANG-AM-EXTRAIT.tex
-  - NSI/chapitres/TNSI-PROJET/amenagee/TNSI-PROJET-AM-EXTRAIT.tex
-  - NSI/chapitres/TNSI-STRUCTURES-DONNEES/amenagee/TNSI-STRUCT-AM-EXTRAIT.tex
-  - audit/AMENAGEMENT_DERIVATION_GRAPH.json
-  - audit/AMENAGEMENT_DERIVATION_GRAPH.md
-  - audit/RELEASE_DELIVERABLE_READINESS.json
-  - audit/RELEASE_DELIVERABLE_READINESS.md
+  - NSI/chapitres/TNSI-ALGORITHMIQUE/banque_ecrite/TNSI-ECRIT-S5-EX2.tex
+  - NSI/chapitres/TNSI-ALGORITHMIQUE/banque_pratique/TNSI-PRATIQUE-P2.tex
+  - NSI/chapitres/TNSI-ALGORITHMIQUE/banque_pratique/TNSI-PRATIQUE-P3.tex
+  - NSI/chapitres/TNSI-ALGORITHMIQUE/banque_pratique/TNSI-PRATIQUE-P7.tex
+  - NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/banque_pratique/TNSI-PRATIQUE-P1.tex
+  - NSI/chapitres/TNSI-BASES-DE-DONNEES/banque_ecrite/TNSI-ECRIT-S3-EX2.tex
+  - NSI/chapitres/TNSI-BASES-DE-DONNEES/banque_ecrite/TNSI-ECRIT-S5-EX3.tex
+  - NSI/chapitres/TNSI-BASES-DE-DONNEES/banque_pratique/TNSI-PRATIQUE-P4.tex
+  - NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/banque_ecrite/TNSI-ECRIT-S6-EX3.tex
+  - NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/banque_ecrite/TNSI-ECRIT-S2-EX2.tex
+  - NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/banque_ecrite/TNSI-ECRIT-S6-EX2.tex
+  - NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/banque_pratique/TNSI-PRATIQUE-P5.tex
+  - NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S2-EX1.tex
+  - NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S5-EX1.tex
+  - NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S6-EX1.tex
+  - NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_pratique/TNSI-PRATIQUE-P6.tex
+  - NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_pratique/TNSI-PRATIQUE-P8.tex
+  - NSI/scripts/assemble.py
+  - audit/TNSI_EXAM_BANK_AUDIT.json
+  - audit/TNSI_EXAM_BANK_AUDIT.md
+  - scripts/build_tnsi_exam_bank_audit.py
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
     git: git version 2.43.0
@@ -641,4 +652,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:8a86f3747843a5a46ab27b656bc97ed72c123604ec4acce2e17c7a910ce1ab86
+source_digest: sha256:7295ec810680df3770171f375a6198418a0051ed573ba0eda1034e3c54660a85

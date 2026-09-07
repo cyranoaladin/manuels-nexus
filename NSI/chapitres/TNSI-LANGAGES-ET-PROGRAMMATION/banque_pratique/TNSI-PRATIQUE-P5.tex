@@ -1,0 +1,153 @@
+% META: {"id": "TNSI-PRATIQUE-P5", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "banque_pratique", "capacites": ["T-LANG-02A", "T-LANG-03B"], "capacites_codes": ["C4", "C7"], "duree_min": 60, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% # Version fournie au candidat, volontairement fautive
+% def somme_chiffres_bugue(n):
+%     if n == 0:
+%         return 0
+%     return n % 10 + somme_chiffres_bugue(n % 10)
+% # elle boucle sur tout n >= 1 : le meme argument revient indefiniment
+% import sys
+% profond = False
+% try:
+%     somme_chiffres_bugue(7)
+% except RecursionError:
+%     profond = True
+% assert profond
+% # Version corrigee
+% def somme_chiffres(n):
+%     """Somme des chiffres de n.
+%
+%     Precondition  : n est un entier >= 0.
+%     Postcondition : entier >= 0 ; vaut 0 si et seulement si n vaut 0 ;
+%                     congru a n modulo 9.
+%     """
+%     assert isinstance(n, int) and n >= 0, "entier positif attendu"
+%     if n < 10:
+%         return n
+%     return n % 10 + somme_chiffres(n // 10)
+% # jeu de tests remis avec le sujet
+% assert somme_chiffres(0) == 0
+% assert somme_chiffres(7) == 7
+% assert somme_chiffres(327) == 12
+% assert somme_chiffres(1000) == 1
+% assert somme_chiffres(999999) == 54
+% # la postcondition modulo 9 tient sur une plage entiere
+% for n in range(0, 500):
+%     s = somme_chiffres(n)
+%     assert s >= 0
+%     assert (s == 0) == (n == 0)
+%     assert s % 9 == n % 9
+% # les preconditions sont refusees
+% for mauvais in (-1, 3.5, "12"):
+%     refuse = False
+%     try:
+%         somme_chiffres(mauvais)
+%     except AssertionError:
+%         refuse = True
+%     assert refuse, mauvais
+% # le bug corrige : c'est `// 10` et non `% 10` qui fait decroitre l'argument
+% assert 327 % 10 == 7 and 327 // 10 == 32
+% assert 7 % 10 == 7            # argument inchange : d'ou la boucle
+% END-VERIFY
+\section*{Situation pratique P5 --- corriger une fonction récursive et la tester}
+
+\textit{Durée : 1 heure. Travail sur machine, à partir du document fourni.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Document fourni}
+
+Le fichier \lstinline{chiffres.py} contient une fonction \textbf{fautive} et le
+jeu de tests qui servira à l'évaluation.
+
+\begin{python}
+def somme_chiffres(n):
+    if n == 0:
+        return 0
+    return n % 10 + somme_chiffres(n % 10)
+\end{python}
+
+\subsection*{Travail demandé}
+
+\begin{enumerate}
+  \item Exécuter \lstinline{somme_chiffres(7)}. Décrire précisément ce qui se
+    passe, et pourquoi.
+
+  \item Corriger la fonction. Une seule opération est en cause : dire laquelle,
+    et par quoi la remplacer.
+
+  \item Écrire la spécification en docstring : une précondition et trois
+    postconditions, dont l'une relie la somme des chiffres à $n$ modulo $9$.
+    Rendre la précondition exécutable.
+
+  \item Exécuter le jeu de tests fourni. Il doit passer entièrement, y compris
+    la vérification de la postcondition modulo $9$ sur cinq cents entiers.
+
+  \item Vérifier que les appels \lstinline{somme_chiffres(-1)},
+    \lstinline{somme_chiffres(3.5)} et \lstinline{somme_chiffres("12")} sont
+    tous les trois refusés.
+\end{enumerate}
+
+\subsection*{Ce qui est évalué}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Critère} & \textbf{Points} \\
+\hline
+Le diagnostic de la question 1 est exact & $4$ \\
+\hline
+La correction est minimale et juste & $4$ \\
+\hline
+Les trois postconditions sont écrites, dont celle modulo $9$ & $5$ \\
+\hline
+Le jeu de tests fourni passe entièrement & $4$ \\
+\hline
+Les trois appels fautifs sont refusés & $3$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Réponses attendues}
+
+\textbf{Question 1.} L'appel provoque une \lstinline{RecursionError}. Pour
+$n = 7$, l'expression \lstinline{n % 10} vaut encore $7$ : la fonction
+s'appelle avec le \textbf{même} argument, indéfiniment. Le cas d'arrêt
+\lstinline{n == 0} n'est jamais atteint.
+
+\medskip
+\textbf{Question 2.} L'appel récursif doit porter sur \lstinline{n // 10}, qui
+retire le dernier chiffre, et non sur \lstinline{n % 10}, qui l'isole. Le cas
+d'arrêt devient \lstinline{n < 10}.
+
+\medskip
+\textbf{Question 3.} Précondition : $n$ est un entier positif ou nul.
+Postconditions : le résultat est un entier positif ou nul ; il est nul si et
+seulement si $n$ l'est ; il est congru à $n$ modulo $9$.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Corriger le cas d'arrêt au lieu de l'appel.} Écrire
+    \lstinline{if n < 10} sans changer \lstinline{n % 10} en
+    \lstinline{n // 10} fait renvoyer $n \bmod 10$ à tout coup : la fonction ne
+    plante plus, et elle est fausse. C'est pire qu'avant.
+  \item \textbf{La postcondition modulo $9$.} Elle n'est pas décorative : c'est
+    la seule qui teste le résultat sur cinq cents valeurs sans avoir à les
+    calculer une par une.
+  \item \textbf{Accepter les flottants.} \lstinline{3.5 % 10} vaut $3{,}5$ et ne
+    lève aucune erreur : sans contrôle de type, la fonction renvoie un flottant
+    absurde.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+La situation part d'un code qui \emph{plante} pour aller vers un code
+\emph{spécifié}. Le diagnostic de la question 1 vaut autant que la correction :
+comprendre pourquoi une récursion ne termine pas est plus formateur que
+d'écrire la version juste du premier coup.
+
+La postcondition modulo $9$ introduit l'idée d'une propriété vérifiable en
+masse — un invariant mathématique qui sert de test — sans exiger sa
+démonstration.

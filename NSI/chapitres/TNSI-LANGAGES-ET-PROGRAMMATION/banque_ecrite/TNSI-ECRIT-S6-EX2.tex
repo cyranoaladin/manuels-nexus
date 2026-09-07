@@ -1,0 +1,285 @@
+% META: {"id": "TNSI-ECRIT-S6-EX2", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S6", "rang": 2, "capacites": ["T-LANG-03A", "T-LANG-03C"], "capacites_codes": ["C6", "C8"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% def fusionner(a, b):
+%     """Fusionne deux listes triees croissantes.
+%
+%     Precondition  : a et b sont triees par ordre croissant.
+%     Postcondition : le resultat est trie, contient exactement les elements
+%                     de a et de b avec leurs multiplicites, et a et b ne
+%                     sont pas modifiees.
+%     """
+%     assert a == sorted(a) and b == sorted(b), "entree non triee"
+%     resultat, i, j = [], 0, 0
+%     while i < len(a) and j < len(b):
+%         if a[i] <= b[j]:
+%             resultat.append(a[i]); i += 1
+%         else:
+%             resultat.append(b[j]); j += 1
+%     return resultat + a[i:] + b[j:]
+% # Q2 : le jeu de tests
+% def tests(f):
+%     resultats = {}
+%     resultats["nominal"] = f([1, 4, 9], [2, 3]) == [1, 2, 3, 4, 9]
+%     resultats["a_vide"] = f([], [2, 3]) == [2, 3]
+%     resultats["b_vide"] = f([1, 4], []) == [1, 4]
+%     resultats["deux_vides"] = f([], []) == []
+%     resultats["doublons"] = f([2, 2], [2]) == [2, 2, 2]
+%     resultats["disjoints"] = f([1, 2], [8, 9]) == [1, 2, 8, 9]
+%     resultats["entrelaces"] = f([1, 3, 5], [2, 4, 6]) == [1, 2, 3, 4, 5, 6]
+%     a, b = [1, 4], [2]
+%     f(a, b)
+%     resultats["sans_effet_de_bord"] = (a == [1, 4] and b == [2])
+%     return resultats
+% assert all(tests(fusionner).values())
+% assert len(tests(fusionner)) == 8
+% # Q3 : quatre mutations, chacune tuee par au moins un test
+% def mutant_strict(a, b):
+%     resultat, i, j = [], 0, 0
+%     while i < len(a) and j < len(b):
+%         if a[i] < b[j]:
+%             resultat.append(a[i]); i += 1
+%         else:
+%             resultat.append(b[j]); j += 1
+%     return resultat + a[i:] + b[j:]
+% def mutant_reste_oublie(a, b):
+%     resultat, i, j = [], 0, 0
+%     while i < len(a) and j < len(b):
+%         if a[i] <= b[j]:
+%             resultat.append(a[i]); i += 1
+%         else:
+%             resultat.append(b[j]); j += 1
+%     return resultat
+% def variante_correcte(a, b):
+%     resultat, i, j = [], 0, 0
+%     while i < len(a) or j < len(b):
+%         if j >= len(b) or (i < len(a) and a[i] <= b[j]):
+%             resultat.append(a[i]); i += 1
+%         else:
+%             resultat.append(b[j]); j += 1
+%     return resultat
+% def mutant_mutant(a, b):
+%     resultat, i, j = [], 0, 0
+%     while i < len(a) and j < len(b):
+%         if a[i] <= b[j]:
+%             resultat.append(a.pop(0))
+%         else:
+%             resultat.append(b.pop(0))
+%     return resultat + a + b
+% # le mutant strict n'est PAS tue par ces tests : il reste correct sur des
+% # entiers, ou l'ordre entre valeurs egales est indiscernable
+% assert all(tests(mutant_strict).values())
+% # les trois autres sont tues
+% echecs = lambda f: [k for k, v in tests(f).items() if not v]
+% assert echecs(mutant_reste_oublie) == ["nominal", "a_vide", "b_vide", "doublons", "disjoints", "entrelaces"]
+% # une reecriture de la boucle en `or` reste correcte : ce n'est pas un
+% # mutant, et le jeu de tests ne doit donc PAS la tuer
+% assert echecs(variante_correcte) == []
+% assert echecs(mutant_mutant) == ["sans_effet_de_bord"]
+% # Q4 : la stabilite, seule facon de distinguer <= de <
+% def fusionner_couples(a, b, strict):
+%     resultat, i, j = [], 0, 0
+%     while i < len(a) and j < len(b):
+%         gagne = a[i][1] < b[j][1] if strict else a[i][1] <= b[j][1]
+%         if gagne:
+%             resultat.append(a[i]); i += 1
+%         else:
+%             resultat.append(b[j]); j += 1
+%     return resultat + a[i:] + b[j:]
+% gauche, droite = [("a", 1)], [("b", 1)]
+% assert fusionner_couples(gauche, droite, False) == [("a", 1), ("b", 1)]
+% assert fusionner_couples(gauche, droite, True) == [("b", 1), ("a", 1)]
+% # Q5 : la precondition est verifiee, pas supposee
+% refuse = False
+% try:
+%     fusionner([3, 1], [2])
+% except AssertionError:
+%     refuse = True
+% assert refuse
+% # sans elle, la sortie n'est meme pas triee
+% assert mutant_strict([3, 1], [2]) == [2, 3, 1]
+% assert mutant_strict([3, 1], [2]) != sorted([3, 1, 2])
+% END-VERIFY
+\section*{Sujet S6 --- Exercice 2 : spécifier puis tester une fonction de fusion}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+On veut une fonction \lstinline{fusionner(a, b)} qui reçoit deux listes triées
+par ordre croissant et renvoie une liste triée contenant tous leurs éléments.
+
+\begin{enumerate}
+  \item Écrire la \textbf{spécification} de cette fonction : son prototype, sa
+    précondition, et trois postconditions distinctes. Les rédiger en français,
+    puis les traduire en assertions exécutables quand c'est possible.
+
+  \item Écrire \lstinline{fusionner}, puis un jeu de \textbf{huit} tests
+    couvrant : le cas nominal, chacune des deux listes vide, les deux vides,
+    des doublons, deux listes disjointes, deux listes entrelacées, et l'absence
+    d'effet de bord.
+
+  \item On appelle \emph{mutant} une version volontairement modifiée de la
+    fonction. Pour chacun des trois mutants suivants, dire s'il est tué par
+    votre jeu de tests, et par lequel :
+    \begin{itemize}
+      \item on oublie de concaténer le reste de la liste non épuisée ;
+      \item on consomme les listes avec \lstinline{pop(0)} au lieu d'un indice ;
+      \item on remplace \lstinline{<=} par \lstinline{<}.
+    \end{itemize}
+
+  \item L'un des trois mutants n'est tué par aucun test. Expliquer pourquoi, et
+    construire un jeu de données — non entier — sur lequel la différence devient
+    observable. Quel nom porte la propriété perdue ?
+
+  \item Que doit faire \lstinline{fusionner} si on l'appelle sur $[3, 1]$ et
+    $[2]$ ? Montrer, en donnant la sortie d'une version sans contrôle, pourquoi
+    laisser passer cet appel est pire que l'interdire.
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(4 points)}
+
+\begin{python}
+def fusionner(a, b):
+    """Fusionne deux listes triees croissantes.
+
+    Precondition  : a et b sont triees par ordre croissant.
+    Postcondition : le resultat est trie ;
+                    il contient exactement les elements de a et de b,
+                    avec leurs multiplicites ;
+                    a et b ne sont pas modifiees.
+    """
+    assert a == sorted(a) and b == sorted(b), "entree non triee"
+\end{python}
+
+Les trois postconditions sont toutes vérifiables : \lstinline{r == sorted(r)},
+\lstinline{sorted(r) == sorted(a + b)}, et la comparaison des arguments à un
+témoin pris avant l'appel.
+
+\medskip
+\textbf{Question 2.} \emph{(5 points)}
+
+\begin{python}
+def fusionner(a, b):
+    assert a == sorted(a) and b == sorted(b), "entree non triee"
+    resultat, i, j = [], 0, 0
+    while i < len(a) and j < len(b):
+        if a[i] <= b[j]:
+            resultat.append(a[i]); i += 1
+        else:
+            resultat.append(b[j]); j += 1
+    return resultat + a[i:] + b[j:]
+\end{python}
+
+Les huit tests :
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Cas} & \textbf{Appel} \\
+\hline
+nominal & $([1,4,9],\ [2,3])$ \\
+\hline
+$a$ vide & $([\,],\ [2,3])$ \\
+\hline
+$b$ vide & $([1,4],\ [\,])$ \\
+\hline
+les deux vides & $([\,],\ [\,])$ \\
+\hline
+doublons & $([2,2],\ [2])$ \\
+\hline
+disjointes & $([1,2],\ [8,9])$ \\
+\hline
+entrelacées & $([1,3,5],\ [2,4,6])$ \\
+\hline
+sans effet de bord & comparaison à un témoin après appel \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{Question 3.} \emph{(5 points)}
+
+\begin{center}
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Mutant} & \textbf{Tué ?} & \textbf{Par} \\
+\hline
+reste oublié & oui & six tests sur huit \\
+\hline
+\texttt{pop(0)} & oui & le test d'effet de bord, lui seul \\
+\hline
+\texttt{<} au lieu de \texttt{<=} & \textbf{non} & aucun \\
+\hline
+\end{tabular}
+\end{center}
+
+Le mutant \lstinline{pop(0)} produit \textbf{le bon résultat} : seul le test
+d'effet de bord le démasque, en constatant que $a$ et $b$ ont été vidées.
+
+\medskip
+\textbf{Question 4.} \emph{(4 points)}
+
+Sur des entiers, deux valeurs égales sont \textbf{indiscernables} : peu importe
+laquelle est placée en premier, la liste obtenue est la même. Le mutant reste
+donc correct au sens de la spécification écrite.
+
+La différence apparaît sur des données portant une information supplémentaire,
+par exemple des couples $(\text{étiquette}, \text{clé})$ :
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Comparaison} & \textbf{Fusion de $[(a,1)]$ et $[(b,1)]$} \\
+\hline
+\texttt{<=} & $[(a,1), (b,1)]$ \\
+\hline
+\texttt{<} & $[(b,1), (a,1)]$ \\
+\hline
+\end{tabular}
+\end{center}
+
+La propriété perdue est la \textbf{stabilité} : à clé égale, l'élément venu de
+la liste de gauche doit rester devant.
+
+\medskip
+\textbf{Question 5.} \emph{(2 points)}
+
+L'appel viole la précondition : il doit être \textbf{refusé}. Sans contrôle, la
+fonction renvoie $[2, 3, 1]$ — une liste qui n'est même pas triée, alors que la
+postcondition l'exige. Elle rend donc un résultat d'apparence normale, que
+l'appelant utilisera comme s'il était trié, et l'erreur se manifestera bien plus
+loin, en un point qui n'a plus rien à voir avec sa cause.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Un mutant qui survit n'est pas un échec du jeu de tests.} Il
+    signale que la spécification ne mentionne pas la propriété concernée. La
+    question 4 demande d'enrichir les données, pas seulement d'ajouter un test.
+  \item \textbf{Le test d'effet de bord.} Sept tests sur huit passent sur le
+    mutant \lstinline{pop(0)}. Sans ce huitième, une fonction qui détruit ses
+    arguments serait déclarée correcte.
+  \item \textbf{Écrire la précondition sans la vérifier.} La question 5 montre
+    le coût exact de cette négligence : une sortie non triée, silencieuse, et
+    une erreur diagnostiquée ailleurs.
+  \item \textbf{Confondre « trié » et « contient les mêmes éléments ».} Les deux
+    postconditions sont nécessaires : une fonction qui renvoie
+    \lstinline{sorted(a)} seule satisfait la première et pas la seconde.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice inverse l'ordre habituel : on écrit d'abord ce que la fonction doit
+garantir, ensuite seulement comment elle le fait, et l'on juge le jeu de tests à
+sa capacité à tuer des versions fausses.
+
+La question 4 est la plus formatrice : elle montre qu'un test qui ne détecte
+rien peut signaler un manque dans la spécification plutôt qu'une faiblesse du
+test. C'est ce déplacement — du code vers ce qu'on a promis — que l'exercice
+cherche à installer.

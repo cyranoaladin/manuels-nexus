@@ -131,6 +131,12 @@ RUBRIQUES = {
     # L'ECE est un format d'epreuve : il releve de l'evaluation.
     "evaluations": "Évaluation",
     "ece": "Évaluation",
+    # Les deux banques d'epreuve TNSI (MENE2516123N) sont du materiel
+    # d'epreuve : meme rubrique que les evaluations. Introduire un libelle
+    # neuf sans le declarer a la charte ferait retomber l'onglet sur la
+    # couleur encre — le commentaire en tete de cette table le dit.
+    "banque_ecrite": "Évaluation",
+    "banque_pratique": "Évaluation",
     # La version amenagee est un support de reprise, comme la remediation.
     "remediation": "Remédiation",
     "amenagee": "Remédiation",

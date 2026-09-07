@@ -7,8 +7,8 @@
     "RESTORE_HISTORICAL_ASSEMBLY": 0,
     "DERIVE_FROM_CURRENT_CANONICAL_SOURCES": 4,
     "NEW_ASSEMBLY_REQUIRED": 2,
-    "ASSEMBLIES_NOW_DECLARED": 4,
-    "ASSEMBLIES_STILL_MISSING": 2,
+    "ASSEMBLIES_NOW_DECLARED": 6,
+    "ASSEMBLIES_STILL_MISSING": 0,
     "NEW_MASTERS_WRITTEN": 0
   },
   "deliverables": [
@@ -64,7 +64,7 @@
       "assembly_decision": "NEW_ASSEMBLY_REQUIRED",
       "rationale": "L'assembleur NSI prévoit déjà un répertoire `ece` dans ses ordres `eleve` et `professeur`, mais aucun chapitre TNSI n'en possède : le créneau est déclaré, le contenu n'existe pas. Ce n'est donc pas un assemblage manquant mais du contenu manquant.",
       "assembly_id": "nsi:manual:TNSI:banque_ecrite",
-      "assembly_declared": false
+      "assembly_declared": true
     },
     {
       "deliverable_id": "TNSI::banque_pratique",
@@ -74,7 +74,7 @@
       "assembly_decision": "NEW_ASSEMBLY_REQUIRED",
       "rationale": "Même constat que la banque écrite. Une banque pratique exige en outre un environnement d'exécution, des jeux de données, des cas de test et des corrigés exécutables : elle ne peut pas être dérivée des chapitres existants.",
       "assembly_id": "nsi:manual:TNSI:banque_pratique",
-      "assembly_declared": false
+      "assembly_declared": true
     }
   ]
 }

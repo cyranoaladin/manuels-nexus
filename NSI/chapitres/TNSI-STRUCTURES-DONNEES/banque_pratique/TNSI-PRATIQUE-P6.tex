@@ -1,0 +1,158 @@
+% META: {"id": "TNSI-PRATIQUE-P6", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "banque_pratique", "capacites": ["T-STRUCT-03C"], "capacites_codes": ["C8"], "duree_min": 60, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% class File:
+%     """Interface : est_vide, enfiler, defiler, tete, taille."""
+%     def __init__(self):
+%         self._contenu = []
+%     def est_vide(self):
+%         return self._contenu == []
+%     def enfiler(self, valeur):
+%         self._contenu.append(valeur)
+%     def defiler(self):
+%         assert not self.est_vide(), "defiler une file vide"
+%         return self._contenu.pop(0)
+%     def tete(self):
+%         assert not self.est_vide(), "tete d'une file vide"
+%         return self._contenu[0]
+%     def taille(self):
+%         return len(self._contenu)
+% # jeu de tests remis avec le sujet : il ne touche QUE l'interface
+% f = File()
+% assert f.est_vide() and f.taille() == 0
+% for v in [10, 20, 30]:
+%     f.enfiler(v)
+% assert f.taille() == 3
+% assert f.tete() == 10 and f.taille() == 3       # tete ne retire rien
+% assert f.defiler() == 10
+% assert f.tete() == 20 and f.taille() == 2
+% f.enfiler(40)
+% assert [f.defiler(), f.defiler(), f.defiler()] == [20, 30, 40]
+% assert f.est_vide()
+% # les deux preconditions sont refusees
+% for appel in (f.defiler, f.tete):
+%     refuse = False
+%     try:
+%         appel()
+%     except AssertionError:
+%         refuse = True
+%     assert refuse
+% # ordre FIFO sur cent valeurs
+% g = File()
+% for v in range(100):
+%     g.enfiler(v)
+% assert [g.defiler() for _ in range(100)] == list(range(100))
+% assert g.est_vide()
+% # entrelacement : enfiler pendant qu'on defile ne casse pas l'ordre
+% h = File()
+% attendu = []
+% for k in range(20):
+%     h.enfiler(k); attendu.append(k)
+%     if k % 3 == 0:
+%         assert h.defiler() == attendu.pop(0)
+% assert [h.defiler() for _ in range(h.taille())] == attendu
+% END-VERIFY
+\section*{Situation pratique P6 --- implémenter une file à partir de son interface}
+
+\textit{Durée : 1 heure. Travail sur machine, à partir du document fourni.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Document fourni}
+
+Le fichier \lstinline{file.py} contient la spécification de l'interface et le
+jeu de tests. Aucune implémentation n'est donnée.
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Opération} & \textbf{Effet} \\
+\hline
+\texttt{est\_vide()} & vrai si la file ne contient rien \\
+\hline
+\texttt{enfiler(v)} & ajoute \texttt{v} en fin de file \\
+\hline
+\texttt{defiler()} & retire et renvoie la valeur de tête \\
+\hline
+\texttt{tete()} & renvoie la valeur de tête sans la retirer \\
+\hline
+\texttt{taille()} & nombre de valeurs présentes \\
+\hline
+\end{tabular}
+\end{center}
+
+\lstinline{defiler} et \lstinline{tete} ont pour précondition que la file ne
+soit pas vide.
+
+\subsection*{Travail demandé}
+
+\begin{enumerate}
+  \item Écrire la classe \lstinline{File}. L'attribut qui porte les données doit
+    être préfixé d'un \lstinline{_} et ne doit apparaître nulle part ailleurs
+    que dans les méthodes de la classe.
+
+  \item Rendre les deux préconditions exécutables, et vérifier que
+    \lstinline{defiler} et \lstinline{tete} sur une file vide sont refusés.
+
+  \item Exécuter le jeu de tests fourni. Il doit passer entièrement, y compris
+    le test d'entrelacement où l'on enfile pendant qu'on défile.
+
+  \item Vérifier sur cent valeurs que l'ordre de sortie est exactement l'ordre
+    d'entrée.
+
+  \item Répondre par écrit, en commentaire : votre implémentation utilise-t-elle
+    \lstinline{pop(0)} ? Si oui, dire ce que coûte cette opération sur une liste
+    Python, et nommer une structure de la bibliothèque standard qui n'a pas ce
+    défaut. \textbf{Ne pas} modifier votre code : la question porte sur
+    l'analyse, pas sur l'optimisation.
+\end{enumerate}
+
+\subsection*{Ce qui est évalué}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Critère} & \textbf{Points} \\
+\hline
+Le jeu de tests fourni passe entièrement & $8$ \\
+\hline
+Les deux préconditions sont vérifiées & $4$ \\
+\hline
+L'attribut interne n'est utilisé que dans la classe & $3$ \\
+\hline
+La réponse écrite est juste et nomme une alternative & $5$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Réponse attendue à la question 5}
+
+\lstinline{pop(0)} retire le premier élément d'une liste, ce qui oblige à
+décaler tous les suivants : le coût est proportionnel à la taille de la file, à
+chaque défilement. \lstinline{collections.deque} offre un retrait en tête à coût
+constant.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Confondre \lstinline{tete} et \lstinline{defiler}.} La première
+    ne modifie rien. Le jeu de tests le vérifie explicitement en comparant la
+    taille avant et après.
+  \item \textbf{Enfiler en tête.} \lstinline{insert(0, v)} avec un
+    \lstinline{pop()} en fin donne une file correcte, mais déplace le coût au
+    lieu de le supprimer. La question 5 reste valide dans ce cas, et la réponse
+    doit le refléter.
+  \item \textbf{Modifier son code après la question 5.} La consigne l'interdit :
+    ce qui est évalué est l'analyse d'un coût, pas la capacité à l'éviter.
+  \item \textbf{Exposer \lstinline{_contenu}.} Le jeu de tests ne l'utilise
+    jamais ; un candidat qui s'en sert dans ses propres essais s'écarte de
+    l'interface qu'il a écrite.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+La situation dissocie deux jugements souvent confondus : une implémentation est
+\textbf{correcte} si elle satisfait l'interface, et \textbf{efficace} si son
+coût convient à l'usage. La question 5 demande de reconnaître un défaut
+d'efficacité dans un code par ailleurs juste, sans le corriger — ce qui est
+exactement la posture d'une relecture.

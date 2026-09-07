@@ -1,0 +1,309 @@
+% META: {"id": "TNSI-ECRIT-S5-EX1", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S5", "rang": 1, "capacites": ["T-STRUCT-01A", "T-STRUCT-02B"], "capacites_codes": ["C1", "C5"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% class Stock:
+%     """Interface : ajouter, retirer, quantite, references, est_vide."""
+%     def __init__(self):
+%         self._quantites = {}
+%     def ajouter(self, reference, nombre):
+%         assert nombre > 0, "ajout non strictement positif"
+%         self._quantites[reference] = self._quantites.get(reference, 0) + nombre
+%     def retirer(self, reference, nombre):
+%         assert nombre > 0, "retrait non strictement positif"
+%         disponible = self._quantites.get(reference, 0)
+%         assert nombre <= disponible, "stock insuffisant"
+%         if nombre == disponible:
+%             del self._quantites[reference]
+%         else:
+%             self._quantites[reference] = disponible - nombre
+%     def quantite(self, reference):
+%         return self._quantites.get(reference, 0)
+%     def references(self):
+%         return sorted(self._quantites)
+%     def est_vide(self):
+%         return self._quantites == {}
+% # Q1 : l'interface tient ses promesses
+% s = Stock()
+% assert s.est_vide() and s.references() == [] and s.quantite("cle") == 0
+% s.ajouter("cle", 4)
+% s.ajouter("vis", 10)
+% s.ajouter("cle", 3)
+% assert s.quantite("cle") == 7
+% assert s.references() == ["cle", "vis"]
+% s.retirer("vis", 10)
+% assert s.references() == ["cle"]           # la reference epuisee disparait
+% assert s.quantite("vis") == 0
+% # Q2 : les preconditions sont refusees a l'entree
+% for appel in (lambda: s.ajouter("cle", 0), lambda: s.ajouter("cle", -1),
+%               lambda: s.retirer("cle", 0), lambda: s.retirer("cle", 99),
+%               lambda: s.retirer("absent", 1)):
+%     refuse = False
+%     try:
+%         appel()
+%     except AssertionError:
+%         refuse = True
+%     assert refuse
+% assert s.quantite("cle") == 7              # aucun appel refuse n'a modifie l'etat
+% # Q3 : une seconde implementation, meme interface
+% class StockListe:
+%     def __init__(self):
+%         self._lignes = []                  # liste de [reference, nombre]
+%     def _index(self, reference):
+%         for i, ligne in enumerate(self._lignes):
+%             if ligne[0] == reference:
+%                 return i
+%         return -1
+%     def ajouter(self, reference, nombre):
+%         assert nombre > 0
+%         i = self._index(reference)
+%         if i == -1:
+%             self._lignes.append([reference, nombre])
+%         else:
+%             self._lignes[i][1] += nombre
+%     def retirer(self, reference, nombre):
+%         assert nombre > 0
+%         i = self._index(reference)
+%         assert i != -1 and nombre <= self._lignes[i][1]
+%         self._lignes[i][1] -= nombre
+%         if self._lignes[i][1] == 0:
+%             del self._lignes[i]
+%     def quantite(self, reference):
+%         i = self._index(reference)
+%         return 0 if i == -1 else self._lignes[i][1]
+%     def references(self):
+%         return sorted(ligne[0] for ligne in self._lignes)
+%     def est_vide(self):
+%         return self._lignes == []
+% # Q4 : le meme scenario donne les memes reponses sur les deux implementations
+% def scenario(fabrique):
+%     stock = fabrique()
+%     trace = [stock.est_vide()]
+%     stock.ajouter("cle", 4); stock.ajouter("vis", 10); stock.ajouter("cle", 3)
+%     trace.append((stock.quantite("cle"), stock.references()))
+%     stock.retirer("vis", 10)
+%     trace.append((stock.references(), stock.quantite("vis"), stock.est_vide()))
+%     return trace
+% assert scenario(Stock) == scenario(StockListe)
+% # Q5 : le cout de `quantite` n'est pas le meme
+% lectures = {"n": 0}
+% class StockCompte(StockListe):
+%     def _index(self, reference):
+%         for i, ligne in enumerate(self._lignes):
+%             lectures["n"] += 1
+%             if ligne[0] == reference:
+%                 return i
+%         return -1
+% s2 = StockCompte()
+% for k in range(100):
+%     s2.ajouter("ref%03d" % k, 1)
+% lectures["n"] = 0
+% s2.quantite("ref099")
+% assert lectures["n"] == 100
+% lectures["n"] = 0
+% s2.quantite("ref000")
+% assert lectures["n"] == 1
+% END-VERIFY
+\section*{Sujet S5 --- Exercice 1 : une classe pour un stock, interface et implémentation}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+Un atelier gère un stock de pièces. On spécifie une structure \lstinline{Stock}
+par son \textbf{interface} seule :
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Opération} & \textbf{Effet} \\
+\hline
+\texttt{ajouter(ref, n)} & ajoute $n$ pièces de la référence \\
+\hline
+\texttt{retirer(ref, n)} & retire $n$ pièces de la référence \\
+\hline
+\texttt{quantite(ref)} & quantité disponible, $0$ si absente \\
+\hline
+\texttt{references()} & liste triée des références en stock \\
+\hline
+\texttt{est\_vide()} & vrai si aucune pièce n'est en stock \\
+\hline
+\end{tabular}
+\end{center}
+
+Une référence dont la quantité tombe à zéro \textbf{disparaît} du stock : elle
+n'apparaît plus dans \lstinline{references()}.
+
+\begin{enumerate}
+  \item Écrire une classe \lstinline{Stock} implémentée par un dictionnaire.
+    Dérouler l'état après : ajouter $4$ clés, ajouter $10$ vis, ajouter $3$
+    clés, retirer $10$ vis. Donner à chaque étape \lstinline{references()}.
+
+  \item Écrire les préconditions de \lstinline{ajouter} et de
+    \lstinline{retirer}, et les rendre exécutables. Donner cinq appels qui
+    doivent être refusés, un par précondition violée. Vérifier qu'un appel
+    refusé ne modifie pas le stock.
+
+  \item Écrire une \textbf{seconde} implémentation \lstinline{StockListe} qui
+    n'utilise aucun dictionnaire, mais une liste de couples
+    $[\text{référence}, \text{nombre}]$. L'interface doit rester identique, au
+    caractère près.
+
+  \item Écrire une fonction \lstinline{scenario(fabrique)} qui joue la séquence
+    de la question 1 sur une classe passée en paramètre et renvoie la trace des
+    réponses. Vérifier qu'elle donne le même résultat pour les deux classes.
+    Que prouve exactement cette égalité, et que ne prouve-t-elle pas ?
+
+  \item On compte les lignes examinées par \lstinline{quantite} dans
+    \lstinline{StockListe}, sur un stock de cent références. Donner ce nombre
+    pour la dernière référence ajoutée, puis pour la première. Comparer avec
+    l'implémentation par dictionnaire. Conclure sur ce que l'interface ne dit
+    pas.
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(4 points)}
+
+\begin{python}
+class Stock:
+    def __init__(self):
+        self._quantites = {}
+    def ajouter(self, reference, nombre):
+        assert nombre > 0, "ajout non strictement positif"
+        self._quantites[reference] = self._quantites.get(reference, 0) + nombre
+    def retirer(self, reference, nombre):
+        assert nombre > 0, "retrait non strictement positif"
+        disponible = self._quantites.get(reference, 0)
+        assert nombre <= disponible, "stock insuffisant"
+        if nombre == disponible:
+            del self._quantites[reference]
+        else:
+            self._quantites[reference] = disponible - nombre
+    def quantite(self, reference):
+        return self._quantites.get(reference, 0)
+    def references(self):
+        return sorted(self._quantites)
+    def est_vide(self):
+        return self._quantites == {}
+\end{python}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Après} & \texttt{references()} \\
+\hline
+départ & $[\,]$ \\
+\hline
+$+4$ clés & $[\text{cle}]$ \\
+\hline
+$+10$ vis & $[\text{cle}, \text{vis}]$ \\
+\hline
+$+3$ clés & $[\text{cle}, \text{vis}]$, quantité clé $= 7$ \\
+\hline
+$-10$ vis & $[\text{cle}]$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{Question 2.} \emph{(5 points)}
+
+Préconditions : le nombre ajouté ou retiré est \textbf{strictement positif} ;
+un retrait ne peut excéder la quantité disponible, et une référence absente a
+une quantité de $0$.
+
+Cinq appels refusés : \lstinline{ajouter("cle", 0)},
+\lstinline{ajouter("cle", -1)}, \lstinline{retirer("cle", 0)},
+\lstinline{retirer("cle", 99)}, \lstinline{retirer("absent", 1)}.
+
+Chaque assertion est placée \textbf{avant} toute modification : l'état du stock
+est donc inchangé après un refus.
+
+\medskip
+\textbf{Question 3.} \emph{(5 points)}
+
+\begin{python}
+class StockListe:
+    def __init__(self):
+        self._lignes = []
+    def _index(self, reference):
+        for i, ligne in enumerate(self._lignes):
+            if ligne[0] == reference:
+                return i
+        return -1
+    def ajouter(self, reference, nombre):
+        assert nombre > 0
+        i = self._index(reference)
+        if i == -1:
+            self._lignes.append([reference, nombre])
+        else:
+            self._lignes[i][1] += nombre
+    def retirer(self, reference, nombre):
+        assert nombre > 0
+        i = self._index(reference)
+        assert i != -1 and nombre <= self._lignes[i][1]
+        self._lignes[i][1] -= nombre
+        if self._lignes[i][1] == 0:
+            del self._lignes[i]
+    def quantite(self, reference):
+        i = self._index(reference)
+        return 0 if i == -1 else self._lignes[i][1]
+    def references(self):
+        return sorted(ligne[0] for ligne in self._lignes)
+    def est_vide(self):
+        return self._lignes == []
+\end{python}
+
+\medskip
+\textbf{Question 4.} \emph{(4 points)}
+
+\lstinline{scenario(Stock) == scenario(StockListe)}.
+
+L'égalité prouve que les deux implémentations sont \textbf{indiscernables sur
+ce scénario} : un utilisateur qui ne passe que par l'interface ne peut pas
+dire laquelle il manipule. Elle ne prouve \textbf{pas} qu'elles se comportent
+identiquement sur tous les scénarios, ni qu'elles ont le même coût.
+
+\medskip
+\textbf{Question 5.} \emph{(2 points)}
+
+Dernière référence ajoutée : $\mathbf{100}$ lignes examinées. Première :
+$\mathbf{1}$. Avec le dictionnaire, l'accès ne dépend pas de la position ni du
+nombre de références.
+
+L'interface décrit ce que les opérations \textbf{font}, jamais ce qu'elles
+\textbf{coûtent}. Deux implémentations conformes peuvent être également
+correctes et très inégalement utilisables.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Oublier la disparition à zéro.} C'est une exigence de l'énoncé,
+    pas un détail : une implémentation qui laisse une ligne à $0$ échoue au
+    scénario de la question 4 sur \lstinline{references()}, et l'échec ne dit
+    pas laquelle des deux classes est fautive.
+  \item \textbf{Assertion après modification.} Placer le contrôle de stock après
+    la soustraction laisse une quantité négative en mémoire avant d'échouer. La
+    question 2 exige explicitement de vérifier l'état après un refus.
+  \item \textbf{« Le test passe, donc les deux classes sont équivalentes ».} La
+    question 4 demande la limite de cette conclusion, et c'est là que se joue la
+    différence entre un candidat qui teste et un candidat qui sait ce qu'un test
+    établit.
+  \item \textbf{Accéder à \lstinline{_lignes} depuis \lstinline{scenario}.} Le
+    scénario ne doit utiliser que l'interface, sinon il cesse de valoir pour les
+    deux classes.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice fait écrire \textbf{deux} fois la même structure pour rendre visible
+ce qui, autrement, reste une phrase de cours : l'interface est ce qui survit au
+changement d'implémentation.
+
+La question 4 en donne la vérification pratique — un même scénario, deux
+classes, une même trace — et la question 5 en donne la limite, sans laquelle
+l'idée serait fausse dans l'autre sens : rien, dans une interface, n'oblige
+deux implémentations à être également efficaces.

@@ -11,8 +11,8 @@
     "OPTIONAL_DELIVERABLES": 4,
     "INTERNAL_ONLY_DELIVERABLES": 0,
     "UNKNOWN_DELIVERABLE_REQUIREMENT_ORIGIN": 0,
-    "REQUIRED_DELIVERABLES_WITHOUT_ASSEMBLY": 2,
-    "REQUIRED_DELIVERABLES_WITHOUT_BUILD_TARGET": 2,
+    "REQUIRED_DELIVERABLES_WITHOUT_ASSEMBLY": 0,
+    "REQUIRED_DELIVERABLES_WITHOUT_BUILD_TARGET": 0,
     "REQUIRED_DELIVERABLES_WITHOUT_CURRENT_BUILD_RECEIPT": 24,
     "CURRENT_BUILD_RECEIPTS_EXPECTED_THIS_PHASE": false,
     "REQUIREMENT_STATUS_COUNTS": {
@@ -489,11 +489,11 @@
     {
       "build_profile": {
         "engine": "NSI/scripts/assemble_manuel.py",
-        "assembly_id": "nsi:manual:TNSI:ece",
-        "variant_argument": "ece",
-        "output": "MANUEL_TNSI_ece.pdf"
+        "assembly_id": "nsi:manual:TNSI:banque_ecrite",
+        "variant_argument": "banque_ecrite",
+        "output": "MANUEL_TNSI_banque_ecrite.pdf"
       },
-      "build_target_declared": false,
+      "build_target_declared": true,
       "deliverable_id": "TNSI::banque_ecrite",
       "type": "DECLINAISON",
       "subject": "NSI",
@@ -505,7 +505,7 @@
       "cited_authority_exists_in_repo": false,
       "build_target": "banque_ecrite",
       "expected_output": "TNSI_banque_ecrite",
-      "declared_assembly": false,
+      "declared_assembly": true,
       "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « banque ECE » ; DIRECTIVES_COLLECTION.md#J7",
@@ -518,11 +518,11 @@
     {
       "build_profile": {
         "engine": "NSI/scripts/assemble_manuel.py",
-        "assembly_id": "nsi:manual:TNSI:ece_pratique",
-        "variant_argument": "ece_pratique",
-        "output": "MANUEL_TNSI_ece_pratique.pdf"
+        "assembly_id": "nsi:manual:TNSI:banque_pratique",
+        "variant_argument": "banque_pratique",
+        "output": "MANUEL_TNSI_banque_pratique.pdf"
       },
-      "build_target_declared": false,
+      "build_target_declared": true,
       "deliverable_id": "TNSI::banque_pratique",
       "type": "DECLINAISON",
       "subject": "NSI",
@@ -534,7 +534,7 @@
       "cited_authority_exists_in_repo": false,
       "build_target": "banque_pratique",
       "expected_output": "TNSI_banque_pratique",
-      "declared_assembly": false,
+      "declared_assembly": true,
       "current_build_receipt": false,
       "requirement_status": "AUTHORITATIVE_CURRENT_REQUIREMENT",
       "source_of_requirement": "PROMPT_MISSION_COLLECTION.md#6-budget-et-livrables-finaux « banque ECE » ; DIRECTIVES_COLLECTION.md#J7",

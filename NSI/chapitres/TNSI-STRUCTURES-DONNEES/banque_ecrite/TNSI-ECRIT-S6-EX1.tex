@@ -1,0 +1,236 @@
+% META: {"id": "TNSI-ECRIT-S6-EX1", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S6", "rang": 1, "capacites": ["T-STRUCT-05B", "T-STRUCT-05D"], "capacites_codes": ["C12", "C14"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% matrice = [
+%     [0, 1, 0, 1, 0],
+%     [0, 0, 1, 0, 0],
+%     [0, 0, 0, 0, 1],
+%     [0, 0, 1, 0, 0],
+%     [0, 0, 0, 0, 0],
+% ]
+% # Q1 : aretes et degres
+% def aretes(m):
+%     return [(i, j) for i, ligne in enumerate(m)
+%             for j, v in enumerate(ligne) if v == 1]
+% assert aretes(matrice) == [(0,1),(0,3),(1,2),(2,4),(3,2)]
+% assert len(aretes(matrice)) == 5
+% def degre_sortant(m, i):
+%     return sum(m[i])
+% def degre_entrant(m, j):
+%     return sum(ligne[j] for ligne in m)
+% assert [degre_sortant(matrice, i) for i in range(5)] == [2, 1, 1, 1, 0]
+% assert [degre_entrant(matrice, j) for j in range(5)] == [0, 1, 2, 1, 1]
+% assert sum(degre_sortant(matrice, i) for i in range(5)) == len(aretes(matrice))
+% # Q2 : le graphe n'est pas symetrique, donc oriente
+% assert any(matrice[i][j] != matrice[j][i]
+%            for i in range(5) for j in range(5))
+% assert matrice[0][1] == 1 and matrice[1][0] == 0
+% # Q3 : passage aux listes de successeurs, et retour
+% def matrice_vers_listes(m):
+%     return {i: [j for j, v in enumerate(ligne) if v == 1]
+%             for i, ligne in enumerate(m)}
+% def listes_vers_matrice(listes):
+%     n = len(listes)
+%     m = [[0] * n for _ in range(n)]
+%     for i, successeurs in listes.items():
+%         for j in successeurs:
+%             m[i][j] = 1
+%     return m
+% listes = matrice_vers_listes(matrice)
+% assert listes == {0: [1, 3], 1: [2], 2: [4], 3: [2], 4: []}
+% assert listes_vers_matrice(listes) == matrice
+% # Q4 : cout de la question « i pointe-t-il vers j ? »
+% cases = {"n": 0}
+% def arete_matrice(m, i, j):
+%     cases["n"] += 1
+%     return m[i][j] == 1
+% def arete_listes(listes, i, j):
+%     for successeur in listes[i]:
+%         cases["n"] += 1
+%         if successeur == j:
+%             return True
+%     return False
+% cases["n"] = 0; assert arete_matrice(matrice, 0, 3) is True and cases["n"] == 1
+% cases["n"] = 0; assert arete_listes(listes, 0, 3) is True and cases["n"] == 2
+% cases["n"] = 0; assert arete_matrice(matrice, 4, 0) is False and cases["n"] == 1
+% cases["n"] = 0; assert arete_listes(listes, 4, 0) is False and cases["n"] == 0
+% # Q5 : occupation memoire, graphe creux contre graphe dense
+% def cases_matrice(n):
+%     return n * n
+% def cases_listes(listes):
+%     return sum(len(s) for s in listes.values())
+% assert cases_matrice(5) == 25
+% assert cases_listes(listes) == 5
+% # un graphe complet inverse le rapport
+% complet = {i: [j for j in range(5) if j != i] for i in range(5)}
+% assert cases_listes(complet) == 20 < cases_matrice(5)
+% # et la matrice ne depend pas du nombre d'aretes
+% vide = {i: [] for i in range(5)}
+% assert cases_listes(vide) == 0
+% assert cases_matrice(5) == 25
+% END-VERIFY
+\section*{Sujet S6 --- Exercice 1 : deux représentations d'un même graphe}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+Un graphe orienté à cinq sommets, numérotés de $0$ à $4$, est donné par sa
+matrice d'adjacence. La case ligne $i$, colonne $j$ vaut $1$ s'il existe une
+flèche $i \rightarrow j$.
+
+\begin{python}
+matrice = [
+    [0, 1, 0, 1, 0],
+    [0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 1],
+    [0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 0],
+]
+\end{python}
+
+\begin{enumerate}
+  \item Lister toutes les flèches sous la forme $i \rightarrow j$. Donner, pour
+    chaque sommet, son degré sortant et son degré entrant. Vérifier une relation
+    entre la somme des degrés sortants et le nombre de flèches.
+
+  \item Justifier, en citant deux cases précises, que ce graphe est
+    \textbf{orienté} et non pas non orienté.
+
+  \item Écrire \lstinline{matrice_vers_listes} et \lstinline{listes_vers_matrice}.
+    Donner les listes de successeurs obtenues, et vérifier que la conversion
+    inverse redonne la matrice de départ.
+
+  \item Pour répondre à « le sommet $i$ pointe-t-il vers $j$ ? », on compte le
+    nombre de cases examinées. Donner ce nombre, dans chaque représentation,
+    pour $(0, 3)$ puis pour $(4, 0)$. Commenter le cas $(4, 0)$.
+
+  \item Comparer l'occupation mémoire des deux représentations sur ce graphe,
+    puis sur un graphe complet à cinq sommets, puis sur un graphe sans aucune
+    flèche. En déduire dans quel cas chaque représentation est préférable.
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(4 points)}
+
+Flèches : $0 \rightarrow 1$, $0 \rightarrow 3$, $1 \rightarrow 2$,
+$2 \rightarrow 4$, $3 \rightarrow 2$. Il y en a $5$.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{Sommet} & $0$ & $1$ & $2$ & $3$ & $4$ \\
+\hline
+\textbf{Degré sortant} & $2$ & $1$ & $1$ & $1$ & $0$ \\
+\hline
+\textbf{Degré entrant} & $0$ & $1$ & $2$ & $1$ & $1$ \\
+\hline
+\end{tabular}
+\end{center}
+
+La somme des degrés sortants vaut $5$, soit le nombre de flèches : chaque
+flèche sort d'exactement un sommet. La somme des degrés entrants vaut aussi
+$5$, pour la même raison.
+
+\medskip
+\textbf{Question 2.} \emph{(2 points)}
+
+\lstinline{matrice[0][1]} vaut $1$ et \lstinline{matrice[1][0]} vaut $0$ : la
+matrice n'est pas symétrique. Le sommet $0$ pointe vers $1$ sans que $1$ pointe
+vers $0$.
+
+\medskip
+\textbf{Question 3.} \emph{(5 points)}
+
+\begin{python}
+def matrice_vers_listes(m):
+    return {i: [j for j, valeur in enumerate(ligne) if valeur == 1]
+            for i, ligne in enumerate(m)}
+
+def listes_vers_matrice(listes):
+    n = len(listes)
+    m = [[0] * n for _ in range(n)]
+    for i, successeurs in listes.items():
+        for j in successeurs:
+            m[i][j] = 1
+    return m
+\end{python}
+
+Listes : \lstinline!{0: [1, 3], 1: [2], 2: [4], 3: [2], 4: []}!. La conversion
+inverse redonne exactement la matrice de départ.
+
+\medskip
+\textbf{Question 4.} \emph{(5 points)}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Question} & \textbf{Matrice} & \textbf{Listes} \\
+\hline
+$(0, 3)$ & $1$ case & $2$ cases \\
+\hline
+$(4, 0)$ & $1$ case & $0$ case \\
+\hline
+\end{tabular}
+\end{center}
+
+La matrice répond toujours en une seule lecture, quelle que soit la question.
+Les listes dépendent du degré sortant : pour $(4, 0)$, le sommet $4$ n'a aucun
+successeur, la boucle ne s'exécute pas et la réponse est immédiate. Les listes
+sont donc parfois plus rapides, jamais garanties de l'être.
+
+\medskip
+\textbf{Question 5.} \emph{(4 points)}
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Graphe} & \textbf{Matrice} & \textbf{Listes} \\
+\hline
+celui de l'énoncé ($5$ flèches) & $25$ & $5$ \\
+\hline
+complet ($20$ flèches) & $25$ & $20$ \\
+\hline
+sans flèche & $25$ & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+La matrice occupe $n^2$ cases \textbf{quel que soit} le nombre de flèches ; les
+listes en occupent autant qu'il y a de flèches. Pour un graphe
+\textbf{creux} — peu de flèches devant $n^2$ — les listes sont bien plus
+économiques. Pour un graphe \textbf{dense}, l'écart se referme et la matrice
+reprend l'avantage par la rapidité de son accès.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Lire la matrice en colonnes.} Confondre degré entrant et degré
+    sortant est l'erreur la plus fréquente. La vérification par la somme, en
+    question 1, permet au candidat de s'en apercevoir seul.
+  \item \textbf{Croire les listes toujours meilleures.} La question 4 montre le
+    contraire sur $(0, 3)$ : deux lectures au lieu d'une. Le cas $(4, 0)$ est là
+    pour empêcher la conclusion inverse.
+  \item \textbf{Oublier le sommet isolé dans la conversion.} Le sommet $4$ doit
+    figurer dans les listes avec une liste \textbf{vide}. L'omettre casse la
+    conversion inverse, et la vérification de la question 3 le révèle.
+  \item \textbf{Compter la mémoire en « nombre de listes ».} Ce qui compte est
+    le nombre total de successeurs stockés, pas le nombre d'entrées du
+    dictionnaire — lequel vaut toujours $n$.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice fait constater qu'une même information admet deux représentations
+exactes, et que le choix entre elles ne se juge pas dans l'absolu : il dépend
+de la densité du graphe et de la question qu'on lui pose.
+
+La conversion aller-retour de la question 3 fournit au candidat sa propre
+vérification : si la matrice reconstruite diffère, l'une des deux fonctions est
+fausse, et il le voit sans corrigé. Les questions 4 et 5 séparent deux critères
+qu'on résume souvent en un seul mot « efficace » — le temps d'une requête et
+la place occupée — et montrent qu'ils ne désignent pas le même gagnant.

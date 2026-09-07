@@ -1,0 +1,180 @@
+% META: {"id": "TNSI-PRATIQUE-P8", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "banque_pratique", "capacites": ["T-STRUCT-05C", "T-STRUCT-05D"], "capacites_codes": ["C13", "C14"], "duree_min": 60, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% def matrice_vers_listes(matrice):
+%     """Precondition : matrice carree de 0 et de 1.
+%     Postcondition : dict sommet -> liste croissante de successeurs."""
+%     n = len(matrice)
+%     assert all(len(ligne) == n for ligne in matrice), "matrice non carree"
+%     assert all(v in (0, 1) for ligne in matrice for v in ligne), "valeurs hors 0/1"
+%     return {i: [j for j, v in enumerate(ligne) if v == 1]
+%             for i, ligne in enumerate(matrice)}
+% def listes_vers_matrice(listes):
+%     """Precondition : les successeurs sont des sommets declares."""
+%     n = len(listes)
+%     assert all(0 <= j < n for s in listes.values() for j in s), "successeur inconnu"
+%     matrice = [[0] * n for _ in range(n)]
+%     for i, successeurs in listes.items():
+%         for j in successeurs:
+%             matrice[i][j] = 1
+%     return matrice
+% # jeu de tests remis avec le sujet
+% m = [
+%     [0, 1, 1, 0],
+%     [0, 0, 0, 1],
+%     [0, 0, 0, 1],
+%     [0, 0, 0, 0],
+% ]
+% listes = matrice_vers_listes(m)
+% assert listes == {0: [1, 2], 1: [3], 2: [3], 3: []}
+% assert listes_vers_matrice(listes) == m
+% # aller-retour sur plusieurs matrices, dont les cas extremes
+% vide = [[0] * 4 for _ in range(4)]
+% complet = [[0 if i == j else 1 for j in range(4)] for i in range(4)]
+% boucle = [[1, 0], [0, 1]]
+% for essai in (m, vide, complet, boucle):
+%     assert listes_vers_matrice(matrice_vers_listes(essai)) == essai
+% # les sommets isoles gardent une liste vide, et ne disparaissent pas
+% assert matrice_vers_listes(vide) == {0: [], 1: [], 2: [], 3: []}
+% assert len(matrice_vers_listes(vide)) == 4
+% # comptages
+% def aretes_matrice(matrice):
+%     return sum(sum(ligne) for ligne in matrice)
+% def aretes_listes(listes):
+%     return sum(len(s) for s in listes.values())
+% for essai in (m, vide, complet, boucle):
+%     assert aretes_matrice(essai) == aretes_listes(matrice_vers_listes(essai))
+% assert aretes_matrice(m) == 4
+% assert aretes_matrice(complet) == 12
+% assert aretes_matrice(boucle) == 2      # deux boucles sur soi-meme
+% # les preconditions sont refusees
+% for mauvais in (lambda: matrice_vers_listes([[0, 1], [0]]),
+%                 lambda: matrice_vers_listes([[0, 2], [0, 0]]),
+%                 lambda: listes_vers_matrice({0: [5], 1: []})):
+%     refuse = False
+%     try:
+%         mauvais()
+%     except AssertionError:
+%         refuse = True
+%     assert refuse
+% END-VERIFY
+\section*{Situation pratique P8 --- passer d'une matrice d'adjacence aux listes de successeurs}
+
+\textit{Durée : 1 heure. Travail sur machine, à partir du document fourni.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Document fourni}
+
+Le fichier \lstinline{graphes.py} contient les deux spécifications et le jeu de
+tests.
+
+\begin{python}
+def matrice_vers_listes(matrice):
+    """Precondition : matrice carree de 0 et de 1.
+    Postcondition : dict sommet -> liste croissante de successeurs."""
+    ...
+
+def listes_vers_matrice(listes):
+    """Precondition : les successeurs sont des sommets declares."""
+    ...
+\end{python}
+
+La matrice de travail :
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+ & $0$ & $1$ & $2$ & $3$ \\
+\hline
+$0$ & $0$ & $1$ & $1$ & $0$ \\
+\hline
+$1$ & $0$ & $0$ & $0$ & $1$ \\
+\hline
+$2$ & $0$ & $0$ & $0$ & $1$ \\
+\hline
+$3$ & $0$ & $0$ & $0$ & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Travail demandé}
+
+\begin{enumerate}
+  \item Compléter les deux fonctions. Un sommet sans successeur doit apparaître
+    dans les listes, avec une liste \textbf{vide}.
+
+  \item Rendre les préconditions exécutables : matrice non carrée, valeur autre
+    que $0$ ou $1$, successeur hors des sommets déclarés. Vérifier que les trois
+    sont refusées.
+
+  \item Vérifier l'\textbf{aller-retour} sur quatre graphes : celui de l'énoncé,
+    un graphe sans aucune flèche, un graphe complet à quatre sommets, et un
+    graphe à deux sommets portant chacun une boucle sur lui-même.
+
+  \item Écrire deux fonctions de comptage des flèches, une par représentation,
+    et vérifier qu'elles coïncident sur les quatre graphes.
+
+  \item Répondre par écrit, en commentaire : sur le graphe complet à quatre
+    sommets, combien de cases la matrice occupe-t-elle, et combien de valeurs
+    les listes stockent-elles ? Même question sur le graphe sans flèche.
+    Conclure en une phrase.
+\end{enumerate}
+
+\subsection*{Ce qui est évalué}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Critère} & \textbf{Points} \\
+\hline
+Le jeu de tests fourni passe entièrement & $7$ \\
+\hline
+Les trois préconditions sont refusées & $4$ \\
+\hline
+L'aller-retour est vérifié sur les quatre graphes & $4$ \\
+\hline
+Les deux comptages coïncident & $2$ \\
+\hline
+La réponse écrite donne les quatre nombres et conclut & $3$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Réponse attendue à la question 5}
+
+Graphe complet à quatre sommets : la matrice occupe $16$ cases, les listes
+stockent $12$ valeurs. Graphe sans flèche : la matrice occupe toujours $16$
+cases, les listes n'en stockent aucune.
+
+La matrice occupe $n^2$ cases quel que soit le nombre de flèches ; les listes en
+occupent autant qu'il y a de flèches. L'écart est d'autant plus grand que le
+graphe est creux.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Omettre les sommets isolés.} Une compréhension qui ne garde que
+    les sommets ayant au moins un successeur casse l'aller-retour : la matrice
+    reconstruite est trop petite. Le graphe sans flèche est le test qui le
+    révèle.
+  \item \textbf{Les boucles sur soi-même.} La diagonale peut valoir $1$ ; rien
+    ne l'interdit, et le quatrième graphe est là pour qu'un candidat qui la
+    filtre s'en aperçoive.
+  \item \textbf{Vérifier l'aller-retour dans un seul sens.} Reconstruire la
+    matrice à partir des listes ne suffit pas : il faut comparer à la matrice
+    de départ, pas à une matrice quelconque.
+  \item \textbf{Compter les entrées du dictionnaire.} Elles valent toujours $n$.
+    Ce qui mesure la mémoire est le nombre total de successeurs stockés.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+La situation tient en deux fonctions courtes, et tout l'intérêt est dans les
+cas de test : le graphe vide, le graphe complet, les boucles. C'est en les
+traversant qu'un candidat découvre les hypothèses implicites de son code.
+
+L'aller-retour fournit une vérification que le candidat peut mener seul, sans
+corrigé : si la matrice reconstruite diffère, l'une des deux fonctions est
+fausse. La question 5 relie enfin le choix de représentation à une quantité
+mesurée, pas à une préférence.

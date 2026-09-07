@@ -1,0 +1,242 @@
+% META: {"id": "TNSI-ECRIT-S5-EX3", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S5", "rang": 3, "capacites": ["T-BDD-03E", "T-BDD-03G"], "capacites_codes": ["C9", "C11"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% import sqlite3
+% cx = sqlite3.connect(":memory:", isolation_level=None)
+% cx.executescript("""
+% CREATE TABLE Rayon(id INTEGER PRIMARY KEY, nom TEXT NOT NULL);
+% CREATE TABLE Produit(
+%     id INTEGER PRIMARY KEY, nom TEXT NOT NULL,
+%     id_rayon INTEGER NOT NULL, prix REAL NOT NULL, stock INTEGER,
+%     FOREIGN KEY (id_rayon) REFERENCES Rayon(id));
+% INSERT INTO Rayon VALUES (1,'Papeterie'),(2,'Informatique'),(3,'Mobilier');
+% INSERT INTO Produit VALUES
+%   (1,'Cahier',1,2.5,120),(2,'Stylo',1,1.2,300),(3,'Ramette',1,4.9,NULL),
+%   (4,'Cle USB',2,9.9,45),(5,'Souris',2,14.5,12);
+% """)
+% q = lambda s: cx.execute(s).fetchall()
+% # Q1 : nombre de produits et prix moyen par rayon
+% assert q("""SELECT R.nom, COUNT(*), ROUND(AVG(P.prix), 2)
+%             FROM Produit P JOIN Rayon R ON R.id = P.id_rayon
+%             GROUP BY R.id ORDER BY R.nom""") == [
+%     ('Informatique', 2, 12.2), ('Papeterie', 3, 2.87)]
+% # Mobilier n'apparait pas : aucun produit
+% assert q("SELECT COUNT(*) FROM Rayon") == [(3,)]
+% # Q2 : jointure externe pour voir les rayons vides
+% assert q("""SELECT R.nom, COUNT(P.id)
+%             FROM Rayon R LEFT JOIN Produit P ON R.id = P.id_rayon
+%             GROUP BY R.id ORDER BY R.nom""") == [
+%     ('Informatique', 2), ('Mobilier', 0), ('Papeterie', 3)]
+% # Q3 : NULL n'est pas zero
+% assert q("SELECT COUNT(stock) FROM Produit") == [(4,)]
+% assert q("SELECT COUNT(*) FROM Produit") == [(5,)]
+% assert q("SELECT SUM(stock) FROM Produit") == [(477,)]
+% assert 120 + 300 + 45 + 12 == 477
+% assert q("SELECT AVG(stock) FROM Produit") == [(477 / 4,)]
+% # une comparaison avec NULL n'est ni vraie ni fausse
+% assert q("SELECT COUNT(*) FROM Produit WHERE stock = NULL") == [(0,)]
+% assert q("SELECT COUNT(*) FROM Produit WHERE stock IS NULL") == [(1,)]
+% assert q("SELECT COUNT(*) FROM Produit WHERE stock > 0") == [(4,)]
+% assert q("SELECT COUNT(*) FROM Produit WHERE NOT (stock > 0)") == [(0,)]
+% # Q4 : rayons dont le prix moyen depasse 5
+% assert q("""SELECT R.nom, ROUND(AVG(P.prix), 2) AS moyen
+%             FROM Produit P JOIN Rayon R ON R.id = P.id_rayon
+%             GROUP BY R.id HAVING moyen > 5 ORDER BY R.nom""") == [
+%     ('Informatique', 12.2)]
+% # Q5 : le produit le plus cher de chaque rayon
+% assert q("""SELECT R.nom, P.nom, P.prix FROM Produit P
+%             JOIN Rayon R ON R.id = P.id_rayon
+%             WHERE P.prix = (SELECT MAX(prix) FROM Produit
+%                             WHERE id_rayon = P.id_rayon)
+%             ORDER BY R.nom""") == [
+%     ('Informatique', 'Souris', 14.5), ('Papeterie', 'Ramette', 4.9)]
+% # MAX global ne repond pas a la question posee
+% assert q("SELECT MAX(prix) FROM Produit") == [(14.5,)]
+% END-VERIFY
+\section*{Sujet S5 --- Exercice 3 : agrégats et regroupements sur un catalogue}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+\begin{sql}
+CREATE TABLE Rayon(id INTEGER PRIMARY KEY, nom TEXT NOT NULL);
+
+CREATE TABLE Produit(
+    id INTEGER PRIMARY KEY, nom TEXT NOT NULL,
+    id_rayon INTEGER NOT NULL, prix REAL NOT NULL, stock INTEGER,
+    FOREIGN KEY (id_rayon) REFERENCES Rayon(id));
+\end{sql}
+
+\begin{center}
+\begin{tabular}{|c|l|c|c|c|}
+\hline
+\textbf{id} & \textbf{nom} & \textbf{rayon} & \textbf{prix} & \textbf{stock} \\
+\hline
+$1$ & Cahier & $1$ & $2{,}50$ & $120$ \\
+\hline
+$2$ & Stylo & $1$ & $1{,}20$ & $300$ \\
+\hline
+$3$ & Ramette & $1$ & $4{,}90$ & \texttt{NULL} \\
+\hline
+$4$ & Clé USB & $2$ & $9{,}90$ & $45$ \\
+\hline
+$5$ & Souris & $2$ & $14{,}50$ & $12$ \\
+\hline
+\end{tabular}
+\end{center}
+
+Les rayons sont $1$ Papeterie, $2$ Informatique, $3$ Mobilier.
+
+\begin{enumerate}
+  \item Écrire la requête affichant, pour chaque rayon, son nom, son nombre de
+    produits et le prix moyen arrondi au centime. Donner le résultat. Combien
+    de rayons contient la table, et combien apparaissent dans le résultat ?
+
+  \item Corriger la requête pour que \textbf{tous} les rayons apparaissent, y
+    compris ceux sans produit. Donner le résultat.
+
+  \item Le stock de la ramette est inconnu. Donner les résultats de
+    \lstinline{COUNT(*)}, \lstinline{COUNT(stock)}, \lstinline{SUM(stock)} et
+    \lstinline{AVG(stock)} sur la table \lstinline{Produit}. Puis comparer
+    \lstinline{WHERE stock = NULL}, \lstinline{WHERE stock IS NULL},
+    \lstinline{WHERE stock > 0} et \lstinline{WHERE NOT (stock > 0)}. Expliquer
+    ce que ces quatre comptes révèlent.
+
+  \item Écrire la requête affichant les rayons dont le prix moyen dépasse
+    $5$ euros, avec ce prix moyen. Donner le résultat.
+
+  \item Écrire la requête affichant, pour chaque rayon, le nom et le prix de son
+    produit \textbf{le plus cher}. Donner le résultat. Expliquer pourquoi
+    \lstinline{SELECT R.nom, P.nom, MAX(P.prix)} avec un simple
+    \lstinline{GROUP BY} n'est pas une réponse fiable à cette question.
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(3 points)}
+
+\begin{sql}
+SELECT R.nom, COUNT(*), ROUND(AVG(P.prix), 2)
+FROM Produit P JOIN Rayon R ON R.id = P.id_rayon
+GROUP BY R.id ORDER BY R.nom;
+\end{sql}
+
+Résultat : Informatique $\rightarrow (2 ; 12{,}20)$, Papeterie
+$\rightarrow (3 ; 2{,}87)$. La table compte \textbf{trois} rayons, le résultat
+n'en montre que \textbf{deux} : Mobilier n'a aucun produit.
+
+\medskip
+\textbf{Question 2.} \emph{(3 points)}
+
+\begin{sql}
+SELECT R.nom, COUNT(P.id)
+FROM Rayon R LEFT JOIN Produit P ON R.id = P.id_rayon
+GROUP BY R.id ORDER BY R.nom;
+\end{sql}
+
+Informatique $\rightarrow 2$, Mobilier $\rightarrow \mathbf{0}$, Papeterie
+$\rightarrow 3$.
+
+\medskip
+\textbf{Question 3.} \emph{(7 points)}
+
+\begin{center}
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Expression} & \textbf{Valeur} & \textbf{Pourquoi} \\
+\hline
+\texttt{COUNT(*)} & $5$ & compte les lignes \\
+\hline
+\texttt{COUNT(stock)} & $4$ & ignore les \texttt{NULL} \\
+\hline
+\texttt{SUM(stock)} & $477$ & $120 + 300 + 45 + 12$ \\
+\hline
+\texttt{AVG(stock)} & $477/4$ & divise par $4$, pas par $5$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Filtre} & \textbf{Lignes} \\
+\hline
+\texttt{stock = NULL} & $0$ \\
+\hline
+\texttt{stock IS NULL} & $1$ \\
+\hline
+\texttt{stock > 0} & $4$ \\
+\hline
+\texttt{NOT (stock > 0)} & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\lstinline{NULL} n'est pas une valeur : c'est l'\textbf{absence} de valeur.
+Toute comparaison avec \lstinline{NULL} ne vaut ni vrai ni faux, mais
+\emph{inconnu} — et une clause \lstinline{WHERE} ne retient que ce qui est
+vrai. D'où les deux derniers comptes : la ramette n'est ni dans
+\lstinline{stock > 0}, ni dans sa négation, et $4 + 0 \neq 5$.
+
+\medskip
+\textbf{Question 4.} \emph{(3 points)}
+
+\begin{sql}
+SELECT R.nom, ROUND(AVG(P.prix), 2) AS moyen
+FROM Produit P JOIN Rayon R ON R.id = P.id_rayon
+GROUP BY R.id HAVING moyen > 5 ORDER BY R.nom;
+\end{sql}
+
+Résultat : Informatique $\rightarrow 12{,}20$.
+
+\medskip
+\textbf{Question 5.} \emph{(4 points)}
+
+\begin{sql}
+SELECT R.nom, P.nom, P.prix
+FROM Produit P JOIN Rayon R ON R.id = P.id_rayon
+WHERE P.prix = (SELECT MAX(prix) FROM Produit
+                WHERE id_rayon = P.id_rayon)
+ORDER BY R.nom;
+\end{sql}
+
+Résultat : Informatique $\rightarrow$ Souris à $14{,}50$ ; Papeterie
+$\rightarrow$ Ramette à $4{,}90$.
+
+Avec \lstinline{SELECT R.nom, P.nom, MAX(P.prix) ... GROUP BY R.id}, la valeur
+de \lstinline{MAX(P.prix)} est bien le maximum du groupe, mais
+\lstinline{P.nom} est pris sur une ligne \textbf{arbitraire} du groupe : rien
+ne garantit que ce soit celle du produit le plus cher. Le résultat peut être
+juste par hasard, et faux sans prévenir.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{\lstinline{= NULL}.} Écrite par réflexe, elle ne renvoie jamais
+    rien et ne lève aucune erreur. C'est le piège le plus silencieux de SQL, et
+    la question 3 le met en évidence par le compte, pas par la règle.
+  \item \textbf{$4 + 0 \neq 5$.} Un candidat qui attend que le filtre et sa
+    négation partitionnent la table n'a pas encore admis qu'un troisième cas
+    existe. Le tableau des quatre comptes est là pour l'y forcer.
+  \item \textbf{\lstinline{AVG} et les \lstinline{NULL}.} Diviser par $5$ ou par
+    $4$ change le résultat sans que rien ne le dise. La question demande les
+    deux agrégats côte à côte pour rendre la différence lisible.
+  \item \textbf{Le maximum par groupe.} L'erreur de la question 5 produit
+    souvent la bonne réponse sur de petites tables, ce qui la rend
+    particulièrement tenace.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice porte sur une seule chose : ce que les agrégats font des lignes
+qu'ils ne voient pas. Un rayon sans produit disparaît d'un regroupement ; un
+stock inconnu disparaît d'une moyenne ; un nom de produit accompagne un maximum
+sans lui appartenir. Trois disparitions, trois mécanismes différents.
+
+La question 3 vaut sept points parce qu'elle demande six mesures et une
+explication, et parce qu'elle est celle dont la leçon se transporte au-delà de
+SQL : une valeur absente n'est pas une valeur nulle.

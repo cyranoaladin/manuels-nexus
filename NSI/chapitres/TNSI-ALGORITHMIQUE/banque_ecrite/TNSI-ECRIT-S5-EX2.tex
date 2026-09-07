@@ -1,0 +1,263 @@
+% META: {"id": "TNSI-ECRIT-S5-EX2", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S5", "rang": 2, "capacites": ["T-ALGO-01E", "T-ALGO-01F"], "capacites_codes": ["C5", "C6"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% class Noeud:
+%     def __init__(self, cle, gauche=None, droite=None):
+%         self.cle = cle
+%         self.gauche = gauche
+%         self.droite = droite
+% def inserer(arbre, cle):
+%     if arbre is None:
+%         return Noeud(cle)
+%     if cle < arbre.cle:
+%         arbre.gauche = inserer(arbre.gauche, cle)
+%     elif cle > arbre.cle:
+%         arbre.droite = inserer(arbre.droite, cle)
+%     return arbre
+% def rechercher(arbre, cle):
+%     if arbre is None:
+%         return False
+%     if cle == arbre.cle:
+%         return True
+%     if cle < arbre.cle:
+%         return rechercher(arbre.gauche, cle)
+%     return rechercher(arbre.droite, cle)
+% racine = None
+% for c in [50, 30, 70, 20, 40, 60, 80]:
+%     racine = inserer(racine, c)
+% # Q1 : recherche
+% for present in [50, 30, 70, 20, 40, 60, 80]:
+%     assert rechercher(racine, present) is True
+% for absent in [10, 35, 55, 90]:
+%     assert rechercher(racine, absent) is False
+% # Q2 : le chemin suivi par la recherche
+% def chemin_recherche(arbre, cle):
+%     chemin = []
+%     while arbre is not None:
+%         chemin.append(arbre.cle)
+%         if cle == arbre.cle:
+%             return chemin
+%         arbre = arbre.gauche if cle < arbre.cle else arbre.droite
+%     return chemin
+% assert chemin_recherche(racine, 40) == [50, 30, 40]
+% assert chemin_recherche(racine, 35) == [50, 30, 40]
+% # meme chemin pour une cle presente et une cle absente : c'est l'arret qui differe
+% assert rechercher(racine, 40) != rechercher(racine, 35)
+% # Q3 : validite d'un arbre binaire de recherche, par encadrement
+% def est_abr(arbre, mini=None, maxi=None):
+%     if arbre is None:
+%         return True
+%     if mini is not None and arbre.cle <= mini:
+%         return False
+%     if maxi is not None and arbre.cle >= maxi:
+%         return False
+%     return (est_abr(arbre.gauche, mini, arbre.cle)
+%             and est_abr(arbre.droite, arbre.cle, maxi))
+% assert est_abr(racine) is True
+% # un controle local pere/fils ne suffit pas : ce contre-exemple le passe
+% faux = Noeud(50, Noeud(30, None, Noeud(60)), Noeud(70))
+% def controle_local(arbre):
+%     if arbre is None:
+%         return True
+%     if arbre.gauche is not None and arbre.gauche.cle >= arbre.cle:
+%         return False
+%     if arbre.droite is not None and arbre.droite.cle <= arbre.cle:
+%         return False
+%     return controle_local(arbre.gauche) and controle_local(arbre.droite)
+% assert controle_local(faux) is True
+% assert est_abr(faux) is False
+% # 60 est dans le sous-arbre gauche de 50, alors qu'il lui est superieur
+% assert faux.gauche.droite.cle == 60 > faux.cle
+% # Q4 : suppression d'une feuille et d'un noeud a un seul fils
+% def supprimer(arbre, cle):
+%     if arbre is None:
+%         return None
+%     if cle < arbre.cle:
+%         arbre.gauche = supprimer(arbre.gauche, cle)
+%     elif cle > arbre.cle:
+%         arbre.droite = supprimer(arbre.droite, cle)
+%     else:
+%         if arbre.gauche is None:
+%             return arbre.droite
+%         if arbre.droite is None:
+%             return arbre.gauche
+%         suivant = arbre.droite
+%         while suivant.gauche is not None:
+%             suivant = suivant.gauche
+%         arbre.cle = suivant.cle
+%         arbre.droite = supprimer(arbre.droite, suivant.cle)
+%     return arbre
+% def infixe(a):
+%     return [] if a is None else infixe(a.gauche) + [a.cle] + infixe(a.droite)
+% racine = supprimer(racine, 20)
+% assert infixe(racine) == [30, 40, 50, 60, 70, 80]
+% assert est_abr(racine) is True
+% # Q5 : suppression d'un noeud a deux fils, par le successeur infixe
+% racine = supprimer(racine, 50)
+% assert infixe(racine) == [30, 40, 60, 70, 80]
+% assert est_abr(racine) is True
+% assert racine.cle == 60
+% END-VERIFY
+\section*{Sujet S5 --- Exercice 2 : insertion et recherche dans un arbre binaire de recherche}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+On insère successivement les clés $50$, $30$, $70$, $20$, $40$, $60$, $80$ dans
+un arbre binaire de recherche initialement vide.
+
+\begin{python}
+class Noeud:
+    def __init__(self, cle, gauche=None, droite=None):
+        self.cle = cle
+        self.gauche = gauche
+        self.droite = droite
+\end{python}
+
+\begin{enumerate}
+  \item Dessiner l'arbre obtenu. Écrire \lstinline{rechercher(arbre, cle)},
+    récursive, qui renvoie un booléen. Donner sa valeur pour $40$ et pour $35$.
+
+  \item Écrire \lstinline{chemin_recherche(arbre, cle)} qui renvoie la liste des
+    clés examinées. Donner le chemin pour $40$ puis pour $35$. Les deux chemins
+    sont identiques : expliquer ce qui distingue malgré tout les deux
+    recherches.
+
+  \item On veut vérifier qu'un arbre est bien un arbre binaire de recherche. Un
+    élève propose de contrôler, pour chaque nœud, que son fils gauche lui est
+    inférieur et son fils droit supérieur. Montrer que ce contrôle est
+    \textbf{insuffisant} en construisant un contre-exemple à trois ou quatre
+    nœuds. Écrire ensuite \lstinline{est_abr} par encadrement, en propageant un
+    minimum et un maximum.
+
+  \item Écrire \lstinline{supprimer(arbre, cle)}. Traiter d'abord les deux cas
+    simples : la clé est portée par une feuille, ou par un nœud à un seul fils.
+    Supprimer $20$ et donner le parcours infixe obtenu.
+
+  \item Traiter le cas d'un nœud à \textbf{deux} fils : on remplace sa clé par
+    la plus petite clé de son sous-arbre droit, puis on supprime celle-ci.
+    Supprimer $50$, donner le parcours infixe et la nouvelle racine. Vérifier
+    que l'arbre reste un arbre binaire de recherche.
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(3 points)}
+
+Arbre parfaitement équilibré : racine $50$, fils $30$ et $70$, puis $20$, $40$,
+$60$, $80$ en feuilles.
+
+\begin{python}
+def rechercher(arbre, cle):
+    if arbre is None:
+        return False
+    if cle == arbre.cle:
+        return True
+    if cle < arbre.cle:
+        return rechercher(arbre.gauche, cle)
+    return rechercher(arbre.droite, cle)
+\end{python}
+
+$40 \rightarrow$ \lstinline{True}, $35 \rightarrow$ \lstinline{False}.
+
+\medskip
+\textbf{Question 2.} \emph{(3 points)}
+
+Les deux chemins valent $[50, 30, 40]$. La différence est le \textbf{point
+d'arrêt} : pour $40$, la descente s'arrête sur une égalité ; pour $35$, elle
+continue vers le fils gauche de $40$, qui est \lstinline{None}. Le chemin
+parcouru ne dit donc rien du résultat — seule la raison de l'arrêt le dit.
+
+\medskip
+\textbf{Question 3.} \emph{(6 points)}
+
+Contre-exemple : racine $50$, fils gauche $30$ dont le fils \textbf{droit} vaut
+$60$, fils droit $70$. Le contrôle local passe — $30 < 50$, $60 > 30$,
+$70 > 50$ — alors que $60$ se trouve dans le sous-arbre gauche de $50$ tout en
+lui étant supérieur.
+
+\begin{python}
+def est_abr(arbre, mini=None, maxi=None):
+    if arbre is None:
+        return True
+    if mini is not None and arbre.cle <= mini:
+        return False
+    if maxi is not None and arbre.cle >= maxi:
+        return False
+    return (est_abr(arbre.gauche, mini, arbre.cle)
+            and est_abr(arbre.droite, arbre.cle, maxi))
+\end{python}
+
+La propriété d'un arbre binaire de recherche porte sur \textbf{tout} le
+sous-arbre, pas sur les fils immédiats : l'encadrement transporte cette
+exigence vers le bas.
+
+\medskip
+\textbf{Question 4.} \emph{(4 points)}
+
+\begin{python}
+def supprimer(arbre, cle):
+    if arbre is None:
+        return None
+    if cle < arbre.cle:
+        arbre.gauche = supprimer(arbre.gauche, cle)
+    elif cle > arbre.cle:
+        arbre.droite = supprimer(arbre.droite, cle)
+    else:
+        if arbre.gauche is None:
+            return arbre.droite
+        if arbre.droite is None:
+            return arbre.gauche
+        suivant = arbre.droite
+        while suivant.gauche is not None:
+            suivant = suivant.gauche
+        arbre.cle = suivant.cle
+        arbre.droite = supprimer(arbre.droite, suivant.cle)
+    return arbre
+\end{python}
+
+Après suppression de $20$ : $[30, 40, 50, 60, 70, 80]$.
+
+\medskip
+\textbf{Question 5.} \emph{(4 points)}
+
+$50$ a deux fils. Sa clé est remplacée par $60$, plus petite clé du sous-arbre
+droit, puis $60$ est supprimé de ce sous-arbre. Parcours infixe :
+$[30, 40, 60, 70, 80]$, nouvelle racine $\mathbf{60}$, et
+\lstinline{est_abr} renvoie \lstinline{True}.
+
+Le successeur infixe est le seul choix qui préserve l'ordre : toute clé du
+sous-arbre gauche lui reste inférieure, toute clé restante du sous-arbre droit
+lui reste supérieure.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Le contrôle local.} C'est l'erreur classique sur les arbres
+    binaires de recherche, et la question 3 exige un contre-exemple explicite
+    plutôt qu'une objection de principe.
+  \item \textbf{Le chemin identique.} Beaucoup de candidats croient qu'une
+    recherche infructueuse « part ailleurs ». Elle suit exactement le même
+    chemin ; c'est la fin qui diffère.
+  \item \textbf{Remplacer par le fils gauche.} Dans le cas à deux fils,
+    substituer la clé du fils gauche casse l'ordre. Seuls le maximum du
+    sous-arbre gauche et le minimum du sous-arbre droit conviennent.
+  \item \textbf{Oublier de supprimer le successeur.} Après avoir recopié sa clé,
+    il faut le retirer de son sous-arbre, sans quoi la clé apparaît deux fois.
+    Le parcours infixe de la question 5 le révèle immédiatement.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice traite le même invariant sous trois angles : on l'utilise pour
+chercher, on découvre qu'un contrôle naïf ne le vérifie pas, on doit le
+préserver en supprimant. La question 3 est le pivot — elle transforme une
+propriété apprise en propriété comprise.
+
+Les questions 4 et 5 séparent volontairement les cas simples du cas difficile.
+Un candidat qui traite la question 4 et bute sur la 5 a montré l'essentiel de la
+manipulation d'arbre, et conserve seize points sur vingt.

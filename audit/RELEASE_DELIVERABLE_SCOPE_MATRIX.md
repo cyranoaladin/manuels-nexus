@@ -7,8 +7,8 @@ MISSION_PRIORITAIRE §8..§11 est cité par DELIVERABLE_SPECS mais aucun documen
 - `REQUIRED_AUXILIARY_PRODUCTS` : `12`
 - `OPTIONAL_DELIVERABLES` : `4`
 - `UNKNOWN_DELIVERABLE_REQUIREMENT_ORIGIN` : `0`
-- `REQUIRED_DELIVERABLES_WITHOUT_ASSEMBLY` : `2`
-- `REQUIRED_DELIVERABLES_WITHOUT_BUILD_TARGET` : `2`
+- `REQUIRED_DELIVERABLES_WITHOUT_ASSEMBLY` : `0`
+- `REQUIRED_DELIVERABLES_WITHOUT_BUILD_TARGET` : `0`
 - `REQUIRED_DELIVERABLES_WITHOUT_CURRENT_BUILD_RECEIPT` : `24` (attendu tant que le contenu bouge)
 
 | Livrable | Statut d'exigence | Canonique | Auxiliaire requis | Assemblé | Cible de build |
@@ -29,8 +29,8 @@ MISSION_PRIORITAIRE §8..§11 est cité par DELIVERABLE_SPECS mais aucun documen
 | `TCOMPL::manuel_professeur` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | oui |
 | `TEXPERTES::manuel_eleve` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | oui |
 | `TEXPERTES::manuel_professeur` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | oui |
-| `TNSI::banque_ecrite` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | **non** | **non** |
-| `TNSI::banque_pratique` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | **non** | **non** |
+| `TNSI::banque_ecrite` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | oui | oui |
+| `TNSI::banque_pratique` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | — | oui | oui | oui |
 | `TNSI::manuel_eleve` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | oui |
 | `TNSI::manuel_professeur` | `AUTHORITATIVE_CURRENT_REQUIREMENT` | oui | — | oui | oui |
 | `TNSI::projets` | `PROPOSED_NOT_APPROVED` | — | — | oui | oui |

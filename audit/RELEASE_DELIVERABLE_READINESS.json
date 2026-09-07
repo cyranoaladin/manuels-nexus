@@ -4,14 +4,14 @@
   "generated_by": "scripts/build_release_deliverable_readiness.py",
   "summary": {
     "REQUIRED_RELEASE_DELIVERABLES": 24,
-    "DEVELOPMENT_READY": 22,
-    "ASSEMBLY_READY": 22,
-    "BUILD_TARGET_READY": 22,
-    "DEVELOPMENT_BUILD_PASS": 22,
-    "PEDAGOGICAL_OBJECT_COUNT_TOTAL": 6928,
+    "DEVELOPMENT_READY": 24,
+    "ASSEMBLY_READY": 24,
+    "BUILD_TARGET_READY": 24,
+    "DEVELOPMENT_BUILD_PASS": 24,
+    "PEDAGOGICAL_OBJECT_COUNT_TOTAL": 6980,
     "PROGRAMME_CONFORM": 24,
     "SCIENCE_CONFORM": 24,
-    "CONTENT_COMPLETE": 22,
+    "CONTENT_COMPLETE": 24,
     "RELEASE_READY": 0,
     "CURRENT_BUILD_RECEIPTS_REQUIRED_DURING_DEVELOPMENT": false
   },
@@ -497,25 +497,25 @@
       "manual": "TNSI",
       "kind": "AUXILIAIRE",
       "axes": {
-        "content": false,
-        "assembly": false,
-        "build_target": false,
-        "development_build": false,
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
         "programme": true,
         "science": true
       },
       "content_coverage": {
-        "objects": 0,
-        "chapters_covered": 0,
-        "chapters_total": 7,
-        "complete": false
+        "objects": 18,
+        "chapters_covered": 6,
+        "chapters_total": 6,
+        "complete": true
       },
       "development_build": {
-        "present": false,
-        "path": null,
-        "bytes": 0
+        "present": true,
+        "path": "NSI/build/MANUEL_TNSI/MANUEL_TNSI_banque_ecrite.pdf",
+        "bytes": 360179
       },
-      "development_ready": false,
+      "development_ready": true,
       "release_ready": false,
       "release_ready_blocked_by": [
         "FROZEN_HEAD",
@@ -531,25 +531,25 @@
       "manual": "TNSI",
       "kind": "AUXILIAIRE",
       "axes": {
-        "content": false,
-        "assembly": false,
-        "build_target": false,
-        "development_build": false,
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
         "programme": true,
         "science": true
       },
       "content_coverage": {
-        "objects": 0,
-        "chapters_covered": 0,
-        "chapters_total": 7,
-        "complete": false
+        "objects": 8,
+        "chapters_covered": 5,
+        "chapters_total": 5,
+        "complete": true
       },
       "development_build": {
-        "present": false,
-        "path": null,
-        "bytes": 0
+        "present": true,
+        "path": "NSI/build/MANUEL_TNSI/MANUEL_TNSI_banque_pratique.pdf",
+        "bytes": 195378
       },
-      "development_ready": false,
+      "development_ready": true,
       "release_ready": false,
       "release_ready_blocked_by": [
         "FROZEN_HEAD",
@@ -607,7 +607,7 @@
         "science": true
       },
       "content_coverage": {
-        "objects": 118,
+        "objects": 144,
         "chapters_covered": 7,
         "chapters_total": 7,
         "complete": true

@@ -74,8 +74,13 @@ VARIANT_ALIAS = {
     "livret_evaluations": "evaluations",
     "projets": "projets",
     "banque_evaluations": "evaluations",
-    "banque_ecrite": "ece",
-    "banque_pratique": "ece_pratique",
+    # Ces deux livrables visaient `ece` et `ece_pratique`, des creneaux
+    # d'assemblage jamais pourvus. L'epreuve de specialite TNSI n'est pas une
+    # ECE : MENE2516123N definit un ecrit de 3 h 30 en trois exercices
+    # independants et une epreuve pratique d'une heure. Les deux variantes
+    # portent desormais le nom de ce qu'elles assemblent.
+    "banque_ecrite": "banque_ecrite",
+    "banque_pratique": "banque_pratique",
 }
 
 #: Rattachement de chaque variante à la clause qui la rend obligatoire.

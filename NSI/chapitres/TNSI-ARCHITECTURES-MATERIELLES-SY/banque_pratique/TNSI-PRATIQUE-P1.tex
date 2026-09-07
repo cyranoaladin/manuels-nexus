@@ -1,0 +1,162 @@
+% META: {"id": "TNSI-PRATIQUE-P1", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "banque_pratique", "capacites": ["T-ARCH-02A", "T-ARCH-02B"], "capacites_codes": ["C2", "C3"], "duree_min": 60, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% # Document fourni au candidat : tourniquet.py, incomplet.
+% # Le jeu de tests ci-dessous est celui remis avec le sujet. Il ne depend
+% # d'aucun chemin : il s'execute depuis n'importe quel repertoire.
+% from collections import deque
+%
+% def tourniquet(besoins, quantum):
+%     """Ordonnancement par tourniquet.
+%
+%     Precondition  : besoins est un dict nom -> tranches, toutes > 0 ;
+%                     quantum > 0.
+%     Postcondition : renvoie (trace, fins). `trace` liste les processus
+%                     executes tranche par tranche ; `fins[nom]` est l'instant
+%                     de fin, les instants commencant a 1.
+%     """
+%     assert quantum > 0
+%     assert all(v > 0 for v in besoins.values())
+%     file = deque(sorted(besoins))
+%     restant = dict(besoins)
+%     trace, fins, horloge = [], {}, 0
+%     while file:
+%         nom = file.popleft()
+%         tranches = min(quantum, restant[nom])
+%         for _ in range(tranches):
+%             horloge += 1
+%             trace.append(nom)
+%         restant[nom] -= tranches
+%         if restant[nom] == 0:
+%             fins[nom] = horloge
+%         else:
+%             file.append(nom)
+%     return trace, fins
+%
+% def attente_moyenne(besoins, fins):
+%     return sum(fins[n] - besoins[n] for n in besoins) / len(besoins)
+%
+% # --- jeu de tests remis avec le sujet -----------------------------------
+% besoins = {"P1": 4, "P2": 2, "P3": 3}
+% trace, fins = tourniquet(besoins, 2)
+% assert trace == ["P1","P1","P2","P2","P3","P3","P1","P1","P3"]
+% assert fins == {"P2": 4, "P3": 9, "P1": 8}
+% assert len(trace) == sum(besoins.values()) == 9
+% # chaque processus recoit exactement ce dont il a besoin
+% for nom, besoin in besoins.items():
+%     assert trace.count(nom) == besoin
+% # un quantum superieur au plus grand besoin degenere en « premier arrive,
+% # premier servi » : chaque processus s'execute d'un seul tenant
+% trace10, fins10 = tourniquet(besoins, 10)
+% assert trace10 == ["P1"]*4 + ["P2"]*2 + ["P3"]*3
+% assert fins10 == {"P1": 4, "P2": 6, "P3": 9}
+% # un quantum de 1 alterne au maximum
+% trace1, _ = tourniquet(besoins, 1)
+% assert trace1[:3] == ["P1", "P2", "P3"]
+% # les preconditions sont refusees
+% for mauvais in (lambda: tourniquet(besoins, 0), lambda: tourniquet({"X": 0}, 2)):
+%     refuse = False
+%     try:
+%         mauvais()
+%     except AssertionError:
+%         refuse = True
+%     assert refuse
+% # l'attente moyenne se calcule sur les instants de fin
+% assert attente_moyenne(besoins, fins) == ((8-4) + (4-2) + (9-3)) / 3
+% assert attente_moyenne(besoins, fins10) == ((4-4) + (6-2) + (9-3)) / 3
+% END-VERIFY
+\section*{Situation pratique P1 --- simuler un ordonnancement par tourniquet}
+
+\textit{Durée : 1 heure. Travail sur machine, à partir du document fourni.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Document fourni}
+
+Le fichier \lstinline{tourniquet.py} contient une fonction incomplète et le jeu
+de tests qui servira à l'évaluation. Le jeu de tests ne doit pas être modifié.
+
+\begin{python}
+from collections import deque
+
+def tourniquet(besoins, quantum):
+    """Ordonnancement par tourniquet.
+
+    Precondition  : besoins est un dict nom -> tranches, toutes > 0 ;
+                    quantum > 0.
+    Postcondition : renvoie (trace, fins). `trace` liste les processus
+                    executes tranche par tranche ; `fins[nom]` est
+                    l'instant de fin, les instants commencant a 1.
+    """
+    ...          # a completer
+
+def attente_moyenne(besoins, fins):
+    ...          # a completer
+\end{python}
+
+\subsection*{Travail demandé}
+
+\begin{enumerate}
+  \item Compléter \lstinline{tourniquet}. Les processus entrent dans la file par
+    ordre alphabétique de leur nom. Un processus qui n'a pas terminé après son
+    quantum repart en fin de file.
+
+  \item Rendre les deux préconditions exécutables. Vérifier qu'un quantum nul
+    et qu'un besoin nul sont refusés.
+
+  \item Compléter \lstinline{attente_moyenne}, définie comme la moyenne, sur les
+    processus, de la différence entre l'instant de fin et le besoin.
+
+  \item Exécuter le jeu de tests fourni. Il doit passer entièrement.
+
+  \item Répondre par écrit, dans un commentaire en tête du fichier : que devient
+    l'ordonnancement quand le quantum dépasse le plus grand des besoins ?
+    Vérifier votre réponse en exécutant votre code.
+\end{enumerate}
+
+\subsection*{Ce qui est évalué}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Critère} & \textbf{Points} \\
+\hline
+Le jeu de tests fourni passe entièrement & $8$ \\
+\hline
+Les deux préconditions sont vérifiées, pas seulement écrites & $4$ \\
+\hline
+\texttt{attente\_moyenne} est correcte sur les deux quanta & $4$ \\
+\hline
+La réponse écrite de la question 5 est juste et vérifiée & $4$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Réponse attendue à la question 5}
+
+Quand le quantum dépasse le plus grand besoin, aucun processus n'est jamais
+remis en file : chacun s'exécute d'un seul tenant, dans l'ordre d'entrée. Le
+tourniquet dégénère en « premier arrivé, premier servi ».
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Remettre en file un processus terminé.} La file ne se vide
+    jamais et la boucle ne s'arrête pas. C'est la panne la plus fréquente, et
+    elle se manifeste par un blocage, pas par un résultat faux.
+  \item \textbf{Compter les instants à partir de $0$.} Tous les instants de fin
+    sont alors décalés de $1$, et le jeu de tests échoue en bloc — ce qui est
+    préférable à un échec partiel.
+  \item \textbf{Écrire les préconditions en commentaire.} La question 2 exige
+    qu'elles soient exécutables : un commentaire ne refuse aucun appel.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+La situation tient en une heure parce que la structure est fournie et que le
+jeu de tests dit exactement ce qui est attendu. Le candidat n'a pas à deviner
+le format de sortie : il a à faire fonctionner une mécanique et à en décrire un
+cas limite.
+
+La question 5 est la seule qui demande une phrase. Elle sépare le candidat qui
+a fait passer les tests de celui qui a compris ce que le code fait.

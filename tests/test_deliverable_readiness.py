@@ -53,19 +53,46 @@ def test_a_deliverable_is_ready_only_when_every_axis_is_green(payload) -> None:
         assert row["development_ready"] == all(row["axes"].values()), row["deliverable_id"]
 
 
-def test_the_remaining_gaps_are_content_gaps(payload) -> None:
-    """Chaque livrable non prêt l'est faute de contenu, pas faute d'outil."""
+def test_any_remaining_gap_is_a_content_gap(payload) -> None:
+    """Un livrable non prêt doit l'être faute de contenu, pas faute d'outil.
+
+    Ce test exigeait qu'il reste au moins un livrable incomplet — l'état du
+    jour où il a été écrit. Exiger cela revient à interdire de terminer. Ce qui
+    doit tenir, et qui tient aussi quand il ne reste rien, c'est que les axes
+    outillés soient fermés pour tout le monde et qu'aucune lacune ne vienne
+    d'eux.
+    """
     not_ready = {
         row["deliverable_id"]: [axis for axis, ok in row["axes"].items() if not ok]
         for row in payload["deliverables"] if not row["development_ready"]
     }
-    assert not_ready, "il reste des livrables à compléter"
     for deliverable, missing in not_ready.items():
         assert "content" in missing, deliverable
+
     # Les axes purement outillés sont fermés pour tout le monde.
     for row in payload["deliverables"]:
         assert row["axes"]["programme"], row["deliverable_id"]
         assert row["axes"]["science"], row["deliverable_id"]
+
+    ready = sum(1 for r in payload["deliverables"] if r["development_ready"])
+    assert ready + len(not_ready) == payload["summary"]["REQUIRED_RELEASE_DELIVERABLES"]
+    assert ready == payload["summary"]["DEVELOPMENT_READY"]
+
+
+def test_development_readiness_never_implies_release_readiness(payload) -> None:
+    """24/24 en développement ne rend rien publiable.
+
+    Le gel du HEAD, la construction finale, le manifeste courant, la
+    reproductibilité, le préflight et l'approbation humaine restent dus pour
+    chacun des vingt-quatre livrables.
+    """
+    assert payload["summary"]["RELEASE_READY"] == 0
+    for row in payload["deliverables"]:
+        assert row["release_ready"] is False, row["deliverable_id"]
+        assert set(row["release_ready_blocked_by"]) == {
+            "FROZEN_HEAD", "FINAL_BUILD", "CURRENT_MANIFEST",
+            "REPRODUCIBILITY", "PREFLIGHT", "HUMAN_APPROVAL",
+        }
 
 
 def test_the_build_matcher_ignores_in_progress_work_directories(tmp_path: Path) -> None:

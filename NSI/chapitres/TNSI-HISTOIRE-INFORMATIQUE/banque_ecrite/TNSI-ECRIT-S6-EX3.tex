@@ -1,0 +1,199 @@
+% META: {"id": "TNSI-ECRIT-S6-EX3", "chapitre": "TNSI-HISTOIRE-INFORMATIQUE", "type_objet": "banque_ecrite", "sujet": "TNSI-ECRIT-S6", "rang": 3, "capacites": ["T-HIST-01A", "T-HIST-01B"], "capacites_codes": ["C1", "C2"], "duree_min": 70, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% # Les reperes cites sont des faits publics et dates ; l'oracle verifie la
+% # coherence interne de la chronologie de l'enonce, pas l'histoire elle-meme.
+% reperes = [
+%     (1936, "machine universelle", "modele theorique de calcul"),
+%     (1945, "programme enregistre", "instructions rangees en memoire"),
+%     (1971, "microprocesseur", "unite de traitement sur une seule puce"),
+%     (1989, "web", "documents relies par des liens sur un reseau"),
+% ]
+% # Q1 : la chronologie est strictement croissante
+% annees = [a for a, _, _ in reperes]
+% assert annees == sorted(annees)
+% assert len(set(annees)) == len(annees)
+% # Q2 : ecarts entre reperes successifs
+% ecarts = [annees[i + 1] - annees[i] for i in range(len(annees) - 1)]
+% assert ecarts == [9, 26, 18]
+% assert annees[-1] - annees[0] == 53
+% assert sum(ecarts) == 53
+% # Q3 : le programme enregistre est ANTERIEUR au microprocesseur
+% def annee(nom):
+%     return next(a for a, n, _ in reperes if n == nom)
+% assert annee("programme enregistre") < annee("microprocesseur")
+% assert annee("machine universelle") < annee("programme enregistre")
+% # Q4 : une machine dont le programme est une donnee peut en changer sans
+% # modification materielle. Le modele le rend calculable.
+% memoire = {0: "CHARGER 5", 1: "AJOUTER 3", 2: "AFFICHER"}
+% def executer(memoire):
+%     accumulateur, sortie = 0, []
+%     for adresse in sorted(memoire):
+%         instruction = memoire[adresse]
+%         if instruction.startswith("CHARGER"):
+%             accumulateur = int(instruction.split()[1])
+%         elif instruction.startswith("AJOUTER"):
+%             accumulateur += int(instruction.split()[1])
+%         elif instruction == "AFFICHER":
+%             sortie.append(accumulateur)
+%     return sortie
+% assert executer(memoire) == [8]
+% # changer le PROGRAMME, pas la machine, change le resultat
+% autre = {0: "CHARGER 10", 1: "AJOUTER 7", 2: "AFFICHER"}
+% assert executer(autre) == [17]
+% assert executer.__code__ is executer.__code__      # la machine n'a pas bouge
+% # Q5 : le meme materiel execute deux programmes de natures differentes
+% troisieme = {0: "CHARGER 0", 1: "AFFICHER", 2: "AJOUTER 1", 3: "AFFICHER"}
+% assert executer(troisieme) == [0, 1]
+% assert len({len(executer(m)) for m in (memoire, autre, troisieme)}) == 2
+% END-VERIFY
+\section*{Sujet S6 --- Exercice 3 : situer une évolution technique et ses conséquences}
+
+\textit{Durée conseillée : 70 minutes. Cet exercice est indépendant des deux
+autres du sujet.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Énoncé}
+
+On considère quatre repères de l'histoire de l'informatique :
+
+\begin{center}
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{Année} & \textbf{Repère} & \textbf{Ce qu'il introduit} \\
+\hline
+$1936$ & machine universelle & un modèle théorique du calcul \\
+\hline
+$1945$ & programme enregistré & les instructions rangées en mémoire \\
+\hline
+$1971$ & microprocesseur & le traitement sur une seule puce \\
+\hline
+$1989$ & Web & des documents reliés sur un réseau \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+  \item Classer ces quatre repères du plus ancien au plus récent, et calculer
+    les trois écarts entre repères successifs. Vérifier que la somme de ces
+    écarts vaut l'écart entre le premier et le dernier.
+
+  \item Le principe du \textbf{programme enregistré} consiste à ranger les
+    instructions dans la même mémoire que les données. On donne ci-dessous une
+    machine minimale et son programme :
+
+\begin{python}
+memoire = {0: "CHARGER 5", 1: "AJOUTER 3", 2: "AFFICHER"}
+\end{python}
+
+    Écrire \lstinline{executer(memoire)} qui parcourt les adresses dans l'ordre
+    et renvoie la liste des valeurs affichées. Donner le résultat.
+
+  \item Écrire un second programme qui affiche $17$, \textbf{sans modifier
+    d'une ligne} la fonction \lstinline{executer}. Que faut-il changer, et que
+    ne faut-il pas changer ? Relier votre réponse au repère de $1945$.
+
+  \item Écrire un troisième programme qui affiche deux valeurs au lieu d'une.
+    En quoi cela illustre-t-il l'idée de \textbf{machine universelle} de
+    $1936$ ? Une phrase suffit.
+
+  \item Le microprocesseur ($1971$) est postérieur de $26$ ans au programme
+    enregistré. Expliquer en quelques lignes pourquoi l'ordre inverse aurait
+    été impossible : que fallait-il avoir compris avant de pouvoir graver une
+    unité de traitement complète sur une puce ?
+\end{enumerate}
+
+\subsection*{Corrigé}
+
+\textbf{Question 1.} \emph{(4 points)}
+
+Ordre : $1936$, $1945$, $1971$, $1989$. Écarts : $\mathbf{9}$, $\mathbf{26}$,
+$\mathbf{18}$ ans. Leur somme vaut $53$, soit $1989 - 1936$ : les écarts
+successifs se télescopent.
+
+\medskip
+\textbf{Question 2.} \emph{(5 points)}
+
+\begin{python}
+def executer(memoire):
+    accumulateur, sortie = 0, []
+    for adresse in sorted(memoire):
+        instruction = memoire[adresse]
+        if instruction.startswith("CHARGER"):
+            accumulateur = int(instruction.split()[1])
+        elif instruction.startswith("AJOUTER"):
+            accumulateur += int(instruction.split()[1])
+        elif instruction == "AFFICHER":
+            sortie.append(accumulateur)
+    return sortie
+\end{python}
+
+Résultat : $[8]$.
+
+\medskip
+\textbf{Question 3.} \emph{(4 points)}
+
+\begin{python}
+autre = {0: "CHARGER 10", 1: "AJOUTER 7", 2: "AFFICHER"}
+\end{python}
+
+Il faut changer le \textbf{contenu de la mémoire} ; il ne faut rien changer à
+la fonction \lstinline{executer}, qui joue ici le rôle du matériel. C'est
+exactement le principe de $1945$ : le programme est une \textbf{donnée} rangée
+en mémoire, et non un câblage. Changer de tâche ne demande plus de changer de
+machine.
+
+\medskip
+\textbf{Question 4.} \emph{(3 points)}
+
+\begin{python}
+troisieme = {0: "CHARGER 0", 1: "AFFICHER", 2: "AJOUTER 1", 3: "AFFICHER"}
+\end{python}
+
+Résultat : $[0, 1]$. Une même machine, décrite une fois pour toutes, exécute
+des programmes de longueurs et de comportements différents : c'est l'idée de
+machine universelle — une machine capable de simuler n'importe quelle autre, à
+condition qu'on lui fournisse sa description.
+
+\medskip
+\textbf{Question 5.} \emph{(4 points)}
+
+Un microprocesseur est la \textbf{réalisation matérielle} d'une unité de
+traitement dont le comportement ne dépend pas de la tâche : il lit des
+instructions et les exécute. Cette unité n'a de sens que si les instructions
+existent \textbf{en dehors} d'elle, dans une mémoire — c'est-à-dire si le
+principe du programme enregistré est acquis.
+
+Avant $1945$, une machine était construite pour une tâche : il n'y avait rien à
+graver de général. On peut miniaturiser une unité de traitement universelle ;
+on ne peut pas miniaturiser un câblage spécifique et en attendre l'universalité.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Retenir des dates sans ce qu'elles changent.} L'exercice ne
+    demande jamais une date isolée : chaque question relie un repère à une
+    conséquence observable dans le code.
+  \item \textbf{Modifier \lstinline{executer} à la question 3.} C'est l'erreur
+    qui fait manquer tout le sens : si l'on touche à la machine, on n'a pas
+    illustré le programme enregistré, on l'a contourné.
+  \item \textbf{« L'ordre aurait pu être inversé ».} La question 5 attend un
+    argument de dépendance conceptuelle, pas une opinion sur le progrès
+    technique. Le microprocesseur suppose l'universalité ; l'inverse est faux.
+  \item \textbf{Confondre $1936$ et $1945$.} Le premier est un modèle
+    théorique, le second un principe d'architecture. La question 4 sépare les
+    deux en les faisant illustrer par deux programmes différents.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+L'exercice traite l'histoire de l'informatique comme une \textbf{suite de
+dépendances}, pas comme une liste de dates : chaque repère rend le suivant
+possible, et la question 5 demande de justifier l'ordre plutôt que de le
+réciter.
+
+Le petit interpréteur des questions 2 à 4 rend palpable ce que le cours énonce :
+le programme est une donnée. Un candidat qui ne saurait rien des dates mais qui
+écrit les trois programmes sans toucher à la machine a compris l'essentiel, et
+obtient douze points sur vingt.

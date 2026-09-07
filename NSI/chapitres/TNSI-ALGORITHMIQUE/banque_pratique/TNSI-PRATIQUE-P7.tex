@@ -1,0 +1,168 @@
+% META: {"id": "TNSI-PRATIQUE-P7", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "banque_pratique", "capacites": ["T-ALGO-05"], "capacites_codes": ["C13"], "duree_min": 60, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% from itertools import combinations_with_replacement
+% def rendu_glouton(montant, pieces):
+%     """Rend `montant` en prenant toujours la plus grande piece possible.
+%
+%     Precondition  : montant >= 0, pieces non vide, valeurs > 0.
+%     Postcondition : la somme des pieces rendues vaut montant, ou None si la
+%                     methode n'aboutit pas.
+%     """
+%     assert montant >= 0 and pieces and all(p > 0 for p in pieces)
+%     rendu = []
+%     for piece in sorted(pieces, reverse=True):
+%         while montant >= piece:
+%             rendu.append(piece)
+%             montant -= piece
+%     return rendu if montant == 0 else None
+% def rendu_optimal(montant, pieces):
+%     """Nombre minimal de pieces, par programmation dynamique."""
+%     INF = float("inf")
+%     table = [0] + [INF] * montant
+%     for m in range(1, montant + 1):
+%         for piece in pieces:
+%             if piece <= m and table[m - piece] + 1 < table[m]:
+%                 table[m] = table[m - piece] + 1
+%     return None if table[montant] == INF else table[montant]
+% # systeme usuel : le glouton est optimal
+% usuel = [1, 2, 5, 10, 20, 50]
+% for montant in range(0, 100):
+%     glouton = rendu_glouton(montant, usuel)
+%     assert glouton is not None
+%     assert sum(glouton) == montant
+%     assert len(glouton) == rendu_optimal(montant, usuel)
+% # systeme piege : le glouton n'est plus optimal
+% piege = [1, 3, 4]
+% glouton = rendu_glouton(6, piege)
+% assert glouton == [4, 1, 1] and len(glouton) == 3
+% assert rendu_optimal(6, piege) == 2        # 3 + 3
+% assert 3 + 3 == 6
+% # le glouton reste correct : il rend bien le montant
+% assert sum(glouton) == 6
+% # systeme ou le glouton echoue completement
+% sans_unite = [3, 5]
+% assert rendu_glouton(7, sans_unite) is None
+% assert rendu_optimal(7, sans_unite) is None
+% assert rendu_glouton(4, sans_unite) is None
+% assert rendu_optimal(4, sans_unite) is None
+% assert rendu_glouton(8, sans_unite) == [5, 3]
+% assert rendu_optimal(8, sans_unite) == 2
+% # recherche exhaustive du plus petit contre-exemple pour [1, 3, 4]
+% contre = [m for m in range(1, 30)
+%           if len(rendu_glouton(m, piege)) != rendu_optimal(m, piege)]
+% assert contre[0] == 6
+% END-VERIFY
+\section*{Situation pratique P7 --- un algorithme glouton et son contre-exemple}
+
+\textit{Durée : 1 heure. Travail sur machine, à partir du document fourni.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Document fourni}
+
+Le fichier \lstinline{monnaie.py} contient les deux spécifications et le jeu de
+tests.
+
+\begin{python}
+def rendu_glouton(montant, pieces):
+    """Rend `montant` en prenant toujours la plus grande piece possible.
+
+    Precondition  : montant >= 0, pieces non vide, valeurs > 0.
+    Postcondition : la somme des pieces rendues vaut montant,
+                    ou None si la methode n'aboutit pas.
+    """
+    ...
+
+def rendu_optimal(montant, pieces):
+    """Nombre minimal de pieces, par programmation dynamique."""
+    ...
+\end{python}
+
+\subsection*{Travail demandé}
+
+\begin{enumerate}
+  \item Compléter \lstinline{rendu_glouton}. Rendre la précondition exécutable.
+
+  \item Compléter \lstinline{rendu_optimal} par programmation dynamique : on
+    construit un tableau où la case $m$ contient le nombre minimal de pièces
+    pour rendre $m$.
+
+  \item Vérifier, pour tous les montants de $0$ à $99$ avec le système
+    $[1, 2, 5, 10, 20, 50]$, que le glouton rend le montant exact \textbf{et}
+    qu'il utilise le nombre minimal de pièces.
+
+  \item Avec le système $[1, 3, 4]$, chercher \textbf{par le programme} le plus
+    petit montant pour lequel le glouton n'est pas optimal. Donner ce montant,
+    le rendu glouton, et le nombre minimal de pièces.
+
+  \item Avec le système $[3, 5]$, donner ce que renvoient les deux fonctions
+    pour les montants $4$, $7$ et $8$. Répondre par écrit : quand le glouton
+    renvoie \lstinline{None}, est-ce toujours parce qu'aucune solution
+    n'existe ?
+\end{enumerate}
+
+\subsection*{Ce qui est évalué}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Critère} & \textbf{Points} \\
+\hline
+Le glouton est correct et sa précondition vérifiée & $4$ \\
+\hline
+La programmation dynamique est correcte & $5$ \\
+\hline
+La vérification sur les cent montants passe & $3$ \\
+\hline
+Le contre-exemple est trouvé par le programme & $4$ \\
+\hline
+La réponse écrite de la question 5 est juste & $4$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Réponses attendues}
+
+\textbf{Question 4.} Le plus petit contre-exemple est $\mathbf{6}$. Le glouton
+prend $4 + 1 + 1$, soit \textbf{trois} pièces ; l'optimum est $3 + 3$, soit
+\textbf{deux}.
+
+\medskip
+\textbf{Question 5.} Avec $[3, 5]$ : pour $4$ et $7$, les deux fonctions
+renvoient \lstinline{None} ; pour $8$, le glouton rend $[5, 3]$ et l'optimum
+vaut $2$.
+
+Non, le \lstinline{None} du glouton ne prouve \textbf{pas} l'absence de
+solution en général — il signifie seulement que \emph{sa} stratégie n'aboutit
+pas. Ici, pour $4$ et $7$, aucune solution n'existe effectivement, et c'est
+\lstinline{rendu_optimal} qui l'établit. Seule une méthode exhaustive permet de
+conclure à l'impossibilité.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Confondre correct et optimal.} Sur $[1, 3, 4]$ et un montant de
+    $6$, le glouton rend bien $6$ : il est correct. Il n'est simplement pas
+    minimal. La question 4 sépare les deux notions par la mesure.
+  \item \textbf{Chercher le contre-exemple à la main.} La consigne exige de le
+    trouver \textbf{par le programme}. Un candidat qui écrit $6$ sans balayage
+    n'a rien établi.
+  \item \textbf{Interpréter \lstinline{None} comme « impossible ».} C'est
+    l'erreur visée par la question 5, et elle est fréquente parce que sur les
+    systèmes usuels — qui contiennent la pièce $1$ — le glouton aboutit
+    toujours.
+  \item \textbf{Oublier \lstinline{table[0] = 0}.} Sans ce cas de base, la
+    programmation dynamique ne démarre pas et tout vaut l'infini.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+La situation met face à face deux stratégies sur le même problème et fait
+mesurer leur écart au lieu de l'énoncer. Le glouton est écrit en premier parce
+qu'il est plus simple ; sa limite n'apparaît qu'une fois l'optimum disponible
+pour comparaison.
+
+La question 5 est la plus exigeante : elle demande de ne pas confondre l'échec
+d'une méthode avec l'inexistence d'une solution. C'est une distinction qui
+dépasse largement le rendu de monnaie.

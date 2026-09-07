@@ -1,0 +1,146 @@
+% META: {"id": "TNSI-PRATIQUE-P3", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "banque_pratique", "capacites": ["T-ALGO-01A", "T-ALGO-01B"], "capacites_codes": ["C1", "C2"], "duree_min": 60, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% # Un arbre est None, ou un triplet (valeur, gauche, droite).
+% def taille(arbre):
+%     """Nombre de noeuds. Postcondition : entier >= 0, nul si arbre vide."""
+%     if arbre is None:
+%         return 0
+%     _, gauche, droite = arbre
+%     return 1 + taille(gauche) + taille(droite)
+% def hauteur(arbre):
+%     """Hauteur. Convention : -1 pour l'arbre vide, 0 pour une feuille."""
+%     if arbre is None:
+%         return -1
+%     _, gauche, droite = arbre
+%     return 1 + max(hauteur(gauche), hauteur(droite))
+% def feuilles(arbre):
+%     """Nombre de noeuds sans aucun fils."""
+%     if arbre is None:
+%         return 0
+%     _, gauche, droite = arbre
+%     if gauche is None and droite is None:
+%         return 1
+%     return feuilles(gauche) + feuilles(droite)
+% # jeu de tests remis avec le sujet
+% vide = None
+% feuille = (7, None, None)
+% petit = (1, (2, None, None), (3, None, None))
+% peigne = (1, (2, (3, (4, None, None), None), None), None)
+% assert (taille(vide), hauteur(vide), feuilles(vide)) == (0, -1, 0)
+% assert (taille(feuille), hauteur(feuille), feuilles(feuille)) == (1, 0, 1)
+% assert (taille(petit), hauteur(petit), feuilles(petit)) == (3, 1, 2)
+% assert (taille(peigne), hauteur(peigne), feuilles(peigne)) == (4, 3, 1)
+% # relations verifiees sur les quatre arbres
+% for a in (vide, feuille, petit, peigne):
+%     assert hauteur(a) < taille(a)
+%     assert feuilles(a) <= taille(a)
+%     if taille(a) > 0:
+%         assert taille(a) <= 2 ** (hauteur(a) + 1) - 1
+% # un peigne atteint la borne inferieure : taille == hauteur + 1
+% assert taille(peigne) == hauteur(peigne) + 1
+% # un arbre parfait atteint la borne superieure
+% parfait = (1, (2, (4, None, None), (5, None, None)),
+%               (3, (6, None, None), (7, None, None)))
+% assert taille(parfait) == 7 == 2 ** (hauteur(parfait) + 1) - 1
+% assert feuilles(parfait) == 4
+% END-VERIFY
+\section*{Situation pratique P3 --- taille et hauteur d'un arbre binaire}
+
+\textit{Durée : 1 heure. Travail sur machine, à partir du document fourni.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Document fourni}
+
+Un arbre est représenté par \lstinline{None} ou par un triplet
+\lstinline!(valeur, gauche, droite)!. Le fichier \lstinline{arbres.py} contient
+les spécifications et le jeu de tests, à ne pas modifier.
+
+\begin{python}
+def taille(arbre):
+    """Nombre de noeuds. Postcondition : entier >= 0, nul si vide."""
+    ...
+
+def hauteur(arbre):
+    """Hauteur. Convention : -1 pour l'arbre vide, 0 pour une feuille."""
+    ...
+
+def feuilles(arbre):
+    """Nombre de noeuds sans aucun fils."""
+    ...
+\end{python}
+
+Quatre arbres sont fournis : l'arbre vide, une feuille seule, un arbre à trois
+nœuds, et un « peigne » de quatre nœuds descendant tous à gauche.
+
+\subsection*{Travail demandé}
+
+\begin{enumerate}
+  \item Compléter les trois fonctions, récursivement.
+
+  \item Exécuter le jeu de tests fourni. Il doit passer entièrement, y compris
+    sur l'arbre vide.
+
+  \item Construire, dans le fichier, un arbre \textbf{parfait} à sept nœuds :
+    tous les niveaux sont complets. Donner sa taille, sa hauteur et son nombre
+    de feuilles.
+
+  \item Vérifier par le code, sur les cinq arbres, que
+    $\text{taille} \leqslant 2^{\text{hauteur}+1} - 1$. Sur lequel de vos arbres
+    cette inégalité est-elle une égalité ?
+
+  \item Répondre par écrit, en commentaire : pour une taille donnée, quelle
+    forme d'arbre rend la hauteur \textbf{maximale}, et laquelle la rend
+    \textbf{minimale} ? Illustrer avec deux de vos arbres.
+\end{enumerate}
+
+\subsection*{Ce qui est évalué}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Critère} & \textbf{Points} \\
+\hline
+Le jeu de tests fourni passe entièrement & $8$ \\
+\hline
+L'arbre parfait est correctement construit & $3$ \\
+\hline
+L'inégalité est vérifiée par le code, pas affirmée & $4$ \\
+\hline
+La réponse écrite nomme les deux formes extrêmes & $5$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Réponse attendue à la question 5}
+
+La hauteur est \textbf{maximale} pour un peigne, où chaque nœud n'a qu'un seul
+fils : la hauteur vaut alors $\text{taille} - 1$. Elle est \textbf{minimale}
+pour un arbre parfait, où tous les niveaux sont remplis : la taille vaut alors
+$2^{\text{hauteur}+1} - 1$, soit le maximum de nœuds pour cette hauteur.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{La convention de hauteur.} Elle est imposée par la
+    spécification, et le test sur l'arbre vide en dépend. Un candidat qui prend
+    $0$ pour l'arbre vide échoue partout d'un cran.
+  \item \textbf{Oublier le cas de base dans \lstinline{feuilles}.} Un nœud sans
+    fils doit renvoyer $1$ ; sans ce cas, la fonction renvoie toujours $0$ et
+    passe pourtant le test de l'arbre vide.
+  \item \textbf{Vérifier l'inégalité à la main.} La question 4 demande
+    explicitement une vérification \textbf{par le code}, sur les cinq arbres.
+  \item \textbf{Confondre hauteur et nombre de niveaux.} Ils diffèrent de $1$,
+    et c'est ce décalage que la convention fixe une fois pour toutes.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+Trois fonctions récursives de trois lignes chacune, et une inégalité qui les
+relie : la situation évalue moins l'écriture que la cohérence entre une
+convention, des cas de base et une propriété.
+
+La question 5 fait constater que taille et hauteur sont deux mesures
+indépendantes, dont l'écart caractérise la forme de l'arbre. C'est le
+préalable à toute discussion sur l'équilibrage.

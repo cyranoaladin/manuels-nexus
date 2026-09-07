@@ -1,0 +1,654 @@
+{
+  "artifact_type": "tnsi_exam_bank_audit",
+  "schema_version": 1,
+  "generated_by": "scripts/build_tnsi_exam_bank_audit.py",
+  "approves_nothing": true,
+  "authority": {
+    "official_ref": "MENE2516123N",
+    "bo": "BO n°31 du 21 août 2025",
+    "note_date": "2025-07-04",
+    "applicable_from_session": 2026,
+    "ecrit": {
+      "duree_h": 3.5,
+      "exercices": 3,
+      "raw_scale": 20,
+      "weight": 0.75
+    },
+    "pratique": {
+      "duree_h": 1.0,
+      "raw_scale": 20,
+      "weight": 0.25
+    }
+  },
+  "authoring_steps": [
+    "REDACTION",
+    "ORACLE",
+    "CORRECTION",
+    "CRITIQUE",
+    "PEDAGOGIE"
+  ],
+  "practical_not_applicable": {
+    "TNSI-PROJET": "ASSESSMENT_MODE = PROJECT_ASSESSMENT : le chapitre est évalué par le projet annuel et sa grille critériée.",
+    "TNSI-HISTOIRE-INFORMATIQUE": "L'épreuve pratique est définie par MENE2516123N comme « résolution de problèmes et programmation sur machine ». Les deux capacités du chapitre — situer une évolution dans le temps, en expliquer les conséquences — ne se programment pas. Elles sont évaluées à l'écrit, par TNSI-ECRIT-S6-EX3."
+  },
+  "summary": {
+    "AUTHORITY": "MENE2516123N",
+    "WRITTEN_SUBJECTS": 6,
+    "WRITTEN_EXERCISES_PLANNED": 18,
+    "WRITTEN_EXERCISES_AUTHORED": 18,
+    "WRITTEN_ORACLES_PASSED": 18,
+    "PRACTICAL_SITUATIONS_PLANNED": 8,
+    "PRACTICAL_SITUATIONS_AUTHORED": 8,
+    "PRACTICAL_ORACLES_PASSED": 8,
+    "MISSING_FROM_PLAN": 0,
+    "PRESENT_WITHOUT_PLAN": 0,
+    "CAPACITY_MISMATCH": 0,
+    "SUBJECT_NOT_THREE_EXERCISES": 0,
+    "SUBJECT_DURATION_MISMATCH": 0,
+    "SUBJECT_DOMAINS_NOT_DISTINCT": 0,
+    "EXERCISES_NOT_INDEPENDENT": 0,
+    "MISSING_AUTHORING_STEP": 0,
+    "ORACLE_FAILED": 0,
+    "MISSING_ORIGINALITY_NOTICE": 0,
+    "FRAGILE_TABULAR_MARKUP": 0,
+    "BANK_DEFECTS": 0
+  },
+  "subjects": [
+    {
+      "subject_id": "TNSI-ECRIT-S1",
+      "titre": "Arbres, files de priorité et journal d'événements",
+      "exercices": [
+        "TNSI-ECRIT-S1-EX1",
+        "TNSI-ECRIT-S1-EX2",
+        "TNSI-ECRIT-S1-EX3"
+      ],
+      "duree_totale_min": 210,
+      "domains": [
+        "STRUCTURES",
+        "ALGORITHMIQUE",
+        "BASES_DE_DONNEES"
+      ],
+      "shared_identifiers": [],
+      "findings": []
+    },
+    {
+      "subject_id": "TNSI-ECRIT-S2",
+      "titre": "Piles, récursivité et ordonnancement",
+      "exercices": [
+        "TNSI-ECRIT-S2-EX1",
+        "TNSI-ECRIT-S2-EX2",
+        "TNSI-ECRIT-S2-EX3"
+      ],
+      "duree_totale_min": 210,
+      "domains": [
+        "STRUCTURES",
+        "LANGAGES",
+        "ARCHITECTURE"
+      ],
+      "shared_identifiers": [],
+      "findings": []
+    },
+    {
+      "subject_id": "TNSI-ECRIT-S3",
+      "titre": "Graphes, jointures et effets de bord",
+      "exercices": [
+        "TNSI-ECRIT-S3-EX1",
+        "TNSI-ECRIT-S3-EX2",
+        "TNSI-ECRIT-S3-EX3"
+      ],
+      "duree_totale_min": 210,
+      "domains": [
+        "ALGORITHMIQUE",
+        "BASES_DE_DONNEES",
+        "LANGAGES"
+      ],
+      "shared_identifiers": [],
+      "findings": []
+    },
+    {
+      "subject_id": "TNSI-ECRIT-S4",
+      "titre": "Files, diviser pour régner et adressage",
+      "exercices": [
+        "TNSI-ECRIT-S4-EX1",
+        "TNSI-ECRIT-S4-EX2",
+        "TNSI-ECRIT-S4-EX3"
+      ],
+      "duree_totale_min": 210,
+      "domains": [
+        "STRUCTURES",
+        "ALGORITHMIQUE",
+        "ARCHITECTURE"
+      ],
+      "shared_identifiers": [],
+      "findings": []
+    },
+    {
+      "subject_id": "TNSI-ECRIT-S5",
+      "titre": "Classes, arbres de recherche et agrégats",
+      "exercices": [
+        "TNSI-ECRIT-S5-EX1",
+        "TNSI-ECRIT-S5-EX2",
+        "TNSI-ECRIT-S5-EX3"
+      ],
+      "duree_totale_min": 210,
+      "domains": [
+        "STRUCTURES",
+        "ALGORITHMIQUE",
+        "BASES_DE_DONNEES"
+      ],
+      "shared_identifiers": [],
+      "findings": []
+    },
+    {
+      "subject_id": "TNSI-ECRIT-S6",
+      "titre": "Matrices d'adjacence, tests et repères historiques",
+      "exercices": [
+        "TNSI-ECRIT-S6-EX1",
+        "TNSI-ECRIT-S6-EX2",
+        "TNSI-ECRIT-S6-EX3"
+      ],
+      "duree_totale_min": 210,
+      "domains": [
+        "STRUCTURES",
+        "LANGAGES",
+        "HISTOIRE"
+      ],
+      "shared_identifiers": [],
+      "findings": []
+    }
+  ],
+  "written": [
+    {
+      "exercise_id": "TNSI-ECRIT-S1-EX1",
+      "subject": "TNSI-ECRIT-S1",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "domain": "STRUCTURES",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S1-EX1.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-STRUCT-04A",
+        "T-STRUCT-04B"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [
+        "Noeud",
+        "__init__"
+      ],
+      "findings": []
+    },
+    {
+      "exercise_id": "TNSI-ECRIT-S1-EX2",
+      "subject": "TNSI-ECRIT-S1",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "domain": "ALGORITHMIQUE",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_ecrite/TNSI-ECRIT-S1-EX2.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-ALGO-02A",
+        "T-ALGO-02D"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [
+        "reseau"
+      ],
+      "findings": []
+    },
+    {
+      "exercise_id": "TNSI-ECRIT-S1-EX3",
+      "subject": "TNSI-ECRIT-S1",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "domain": "BASES_DE_DONNEES",
+      "path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/banque_ecrite/TNSI-ECRIT-S1-EX3.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-BDD-03A",
+        "T-BDD-03F"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [],
+      "findings": []
+    },
+    {
+      "exercise_id": "TNSI-ECRIT-S2-EX1",
+      "subject": "TNSI-ECRIT-S2",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "domain": "STRUCTURES",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S2-EX1.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-STRUCT-03A",
+        "T-STRUCT-03B"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [],
+      "findings": []
+    },
+    {
+      "exercise_id": "TNSI-ECRIT-S2-EX2",
+      "subject": "TNSI-ECRIT-S2",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "domain": "LANGAGES",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/banque_ecrite/TNSI-ECRIT-S2-EX2.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-LANG-02A",
+        "T-LANG-02B"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [],
+      "findings": []
+    },
+    {
+      "exercise_id": "TNSI-ECRIT-S2-EX3",
+      "subject": "TNSI-ECRIT-S2",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "domain": "ARCHITECTURE",
+      "path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/banque_ecrite/TNSI-ECRIT-S2-EX3.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-ARCH-02A",
+        "T-ARCH-02B"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [],
+      "findings": []
+    },
+    {
+      "exercise_id": "TNSI-ECRIT-S3-EX1",
+      "subject": "TNSI-ECRIT-S3",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "domain": "ALGORITHMIQUE",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_ecrite/TNSI-ECRIT-S3-EX1.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-ALGO-02B",
+        "T-ALGO-02C"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [
+        "taches"
+      ],
+      "findings": []
+    },
+    {
+      "exercise_id": "TNSI-ECRIT-S3-EX2",
+      "subject": "TNSI-ECRIT-S3",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "domain": "BASES_DE_DONNEES",
+      "path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/banque_ecrite/TNSI-ECRIT-S3-EX2.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-BDD-01B",
+        "T-BDD-03D"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [],
+      "findings": []
+    },
+    {
+      "exercise_id": "TNSI-ECRIT-S3-EX3",
+      "subject": "TNSI-ECRIT-S3",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "domain": "LANGAGES",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/banque_ecrite/TNSI-ECRIT-S3-EX3.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-LANG-04A",
+        "T-LANG-05"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [
+        "normaliser_bugue"
+      ],
+      "findings": []
+    },
+    {
+      "exercise_id": "TNSI-ECRIT-S4-EX1",
+      "subject": "TNSI-ECRIT-S4",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "domain": "STRUCTURES",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S4-EX1.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-STRUCT-02A",
+        "T-STRUCT-03C"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [],
+      "findings": []
+    },
+    {
+      "exercise_id": "TNSI-ECRIT-S4-EX2",
+      "subject": "TNSI-ECRIT-S4",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "domain": "ALGORITHMIQUE",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_ecrite/TNSI-ECRIT-S4-EX2.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-ALGO-03",
+        "T-ALGO-04"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [],
+      "findings": []
+    },
+    {
+      "exercise_id": "TNSI-ECRIT-S4-EX3",
+      "subject": "TNSI-ECRIT-S4",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "domain": "ARCHITECTURE",
+      "path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/banque_ecrite/TNSI-ECRIT-S4-EX3.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-ARCH-03",
+        "T-ARCH-04A",
+        "T-ARCH-04B"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [
+        "reseau"
+      ],
+      "findings": []
+    },
+    {
+      "exercise_id": "TNSI-ECRIT-S5-EX1",
+      "subject": "TNSI-ECRIT-S5",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "domain": "STRUCTURES",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S5-EX1.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-STRUCT-01A",
+        "T-STRUCT-02B"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [],
+      "findings": []
+    },
+    {
+      "exercise_id": "TNSI-ECRIT-S5-EX2",
+      "subject": "TNSI-ECRIT-S5",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "domain": "ALGORITHMIQUE",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_ecrite/TNSI-ECRIT-S5-EX2.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-ALGO-01E",
+        "T-ALGO-01F"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [
+        "Noeud",
+        "__init__"
+      ],
+      "findings": []
+    },
+    {
+      "exercise_id": "TNSI-ECRIT-S5-EX3",
+      "subject": "TNSI-ECRIT-S5",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "domain": "BASES_DE_DONNEES",
+      "path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/banque_ecrite/TNSI-ECRIT-S5-EX3.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-BDD-03E",
+        "T-BDD-03G"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [],
+      "findings": []
+    },
+    {
+      "exercise_id": "TNSI-ECRIT-S6-EX1",
+      "subject": "TNSI-ECRIT-S6",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "domain": "STRUCTURES",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S6-EX1.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-STRUCT-05B",
+        "T-STRUCT-05D"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [
+        "matrice"
+      ],
+      "findings": []
+    },
+    {
+      "exercise_id": "TNSI-ECRIT-S6-EX2",
+      "subject": "TNSI-ECRIT-S6",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "domain": "LANGAGES",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/banque_ecrite/TNSI-ECRIT-S6-EX2.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-LANG-03A",
+        "T-LANG-03C"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [],
+      "findings": []
+    },
+    {
+      "exercise_id": "TNSI-ECRIT-S6-EX3",
+      "subject": "TNSI-ECRIT-S6",
+      "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
+      "domain": "HISTOIRE",
+      "path": "NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/banque_ecrite/TNSI-ECRIT-S6-EX3.tex",
+      "duree_min": 70,
+      "capacites": [
+        "T-HIST-01A",
+        "T-HIST-01B"
+      ],
+      "oracle": {
+        "ran": true,
+        "passed": true,
+        "detail": ""
+      },
+      "defined_names": [
+        "memoire"
+      ],
+      "findings": []
+    }
+  ],
+  "practical": [
+    {
+      "situation_id": "TNSI-PRATIQUE-P1",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "domain": "ARCHITECTURE",
+      "path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/banque_pratique/TNSI-PRATIQUE-P1.tex",
+      "duree_min": 60,
+      "oracle": {
+        "passed": true,
+        "detail": ""
+      },
+      "findings": []
+    },
+    {
+      "situation_id": "TNSI-PRATIQUE-P2",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "domain": "ALGORITHMIQUE",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_pratique/TNSI-PRATIQUE-P2.tex",
+      "duree_min": 60,
+      "oracle": {
+        "passed": true,
+        "detail": ""
+      },
+      "findings": []
+    },
+    {
+      "situation_id": "TNSI-PRATIQUE-P3",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "domain": "ALGORITHMIQUE",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_pratique/TNSI-PRATIQUE-P3.tex",
+      "duree_min": 60,
+      "oracle": {
+        "passed": true,
+        "detail": ""
+      },
+      "findings": []
+    },
+    {
+      "situation_id": "TNSI-PRATIQUE-P4",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "domain": "BASES_DE_DONNEES",
+      "path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/banque_pratique/TNSI-PRATIQUE-P4.tex",
+      "duree_min": 60,
+      "oracle": {
+        "passed": true,
+        "detail": ""
+      },
+      "findings": []
+    },
+    {
+      "situation_id": "TNSI-PRATIQUE-P5",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "domain": "LANGAGES",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/banque_pratique/TNSI-PRATIQUE-P5.tex",
+      "duree_min": 60,
+      "oracle": {
+        "passed": true,
+        "detail": ""
+      },
+      "findings": []
+    },
+    {
+      "situation_id": "TNSI-PRATIQUE-P6",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "domain": "STRUCTURES",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_pratique/TNSI-PRATIQUE-P6.tex",
+      "duree_min": 60,
+      "oracle": {
+        "passed": true,
+        "detail": ""
+      },
+      "findings": []
+    },
+    {
+      "situation_id": "TNSI-PRATIQUE-P7",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "domain": "ALGORITHMIQUE",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_pratique/TNSI-PRATIQUE-P7.tex",
+      "duree_min": 60,
+      "oracle": {
+        "passed": true,
+        "detail": ""
+      },
+      "findings": []
+    },
+    {
+      "situation_id": "TNSI-PRATIQUE-P8",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "domain": "STRUCTURES",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_pratique/TNSI-PRATIQUE-P8.tex",
+      "duree_min": 60,
+      "oracle": {
+        "passed": true,
+        "detail": ""
+      },
+      "findings": []
+    }
+  ],
+  "freshness": {
+    "EVIDENCE_HEAD": "19ed52e036509ec74118e2cc57dc87908a0b557b",
+    "INPUT_PATHS": [
+      "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_ecrite/TNSI-ECRIT-S1-EX2.tex",
+      "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_ecrite/TNSI-ECRIT-S3-EX1.tex",
+      "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_ecrite/TNSI-ECRIT-S4-EX2.tex",
+      "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_ecrite/TNSI-ECRIT-S5-EX2.tex",
+      "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_pratique/TNSI-PRATIQUE-P2.tex",
+      "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_pratique/TNSI-PRATIQUE-P3.tex",
+      "NSI/chapitres/TNSI-ALGORITHMIQUE/banque_pratique/TNSI-PRATIQUE-P7.tex",
+      "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/banque_ecrite/TNSI-ECRIT-S2-EX3.tex",
+      "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/banque_ecrite/TNSI-ECRIT-S4-EX3.tex",
+      "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/banque_pratique/TNSI-PRATIQUE-P1.tex",
+      "NSI/chapitres/TNSI-BASES-DE-DONNEES/banque_ecrite/TNSI-ECRIT-S1-EX3.tex",
+      "NSI/chapitres/TNSI-BASES-DE-DONNEES/banque_ecrite/TNSI-ECRIT-S3-EX2.tex",
+      "NSI/chapitres/TNSI-BASES-DE-DONNEES/banque_ecrite/TNSI-ECRIT-S5-EX3.tex",
+      "NSI/chapitres/TNSI-BASES-DE-DONNEES/banque_pratique/TNSI-PRATIQUE-P4.tex",
+      "NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/banque_ecrite/TNSI-ECRIT-S6-EX3.tex",
+      "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/banque_ecrite/TNSI-ECRIT-S2-EX2.tex",
+      "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/banque_ecrite/TNSI-ECRIT-S3-EX3.tex",
+      "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/banque_ecrite/TNSI-ECRIT-S6-EX2.tex",
+      "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/banque_pratique/TNSI-PRATIQUE-P5.tex",
+      "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S1-EX1.tex",
+      "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S2-EX1.tex",
+      "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S4-EX1.tex",
+      "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S5-EX1.tex",
+      "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_ecrite/TNSI-ECRIT-S6-EX1.tex",
+      "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_pratique/TNSI-PRATIQUE-P6.tex",
+      "NSI/chapitres/TNSI-STRUCTURES-DONNEES/banque_pratique/TNSI-PRATIQUE-P8.tex",
+      "scripts/tnsi_exam_bank_blueprint.py"
+    ],
+    "INPUT_DIGEST": "sha256:c8287dee7e4fb6b8b8a2082854dd144cfd3711527cd19b998905eb3b94ec402c"
+  }
+}

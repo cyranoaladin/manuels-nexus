@@ -4,10 +4,10 @@
 reçu de build final. `RELEASE_READY` conserve toutes ses exigences et
 reste faux pendant la phase de contenu.
 
-- `DEVELOPMENT_READY` : `22/24`
-- `ASSEMBLY_READY` : `22/24`
-- `BUILD_TARGET_READY` : `22/24`
-- `DEVELOPMENT_BUILD_PASS` : `22/24`
+- `DEVELOPMENT_READY` : `24/24`
+- `ASSEMBLY_READY` : `24/24`
+- `BUILD_TARGET_READY` : `24/24`
+- `DEVELOPMENT_BUILD_PASS` : `24/24`
 - `RELEASE_READY` : `0` (attendu pendant cette phase)
 
 | Livrable | Type | Contenu | Assemblage | Cible | Build dev | Programme | Science | Dev ready |
@@ -26,8 +26,8 @@ reste faux pendant la phase de contenu.
 | `TCOMPL::manuel_professeur` | MANUEL | oui | oui | oui | oui | oui | oui | oui |
 | `TEXPERTES::manuel_eleve` | MANUEL | oui | oui | oui | oui | oui | oui | oui |
 | `TEXPERTES::manuel_professeur` | MANUEL | oui | oui | oui | oui | oui | oui | oui |
-| `TNSI::banque_ecrite` | AUXILIAIRE | **non** | **non** | **non** | **non** | oui | oui | **non** |
-| `TNSI::banque_pratique` | AUXILIAIRE | **non** | **non** | **non** | **non** | oui | oui | **non** |
+| `TNSI::banque_ecrite` | AUXILIAIRE | oui | oui | oui | oui | oui | oui | oui |
+| `TNSI::banque_pratique` | AUXILIAIRE | oui | oui | oui | oui | oui | oui | oui |
 | `TNSI::manuel_eleve` | MANUEL | oui | oui | oui | oui | oui | oui | oui |
 | `TNSI::manuel_professeur` | MANUEL | oui | oui | oui | oui | oui | oui | oui |
 | `TNSI::remediations` | AUXILIAIRE | oui | oui | oui | oui | oui | oui | oui |

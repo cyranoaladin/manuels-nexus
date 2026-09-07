@@ -1,0 +1,168 @@
+% META: {"id": "TNSI-PRATIQUE-P4", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "banque_pratique", "capacites": ["T-BDD-03B", "T-BDD-03C"], "capacites_codes": ["C6", "C7"], "duree_min": 60, "autorite": "MENE2516123N", "mode_creation": "ex_nihilo", "sources_inspiration": [], "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT", "status": "generated"}
+% BEGIN-VERIFY
+% import sqlite3
+% # La base est reconstruite en memoire par le script fourni : aucun fichier a
+% # ouvrir, donc aucune dependance a un chemin.
+% def base():
+%     cx = sqlite3.connect(":memory:", isolation_level=None)
+%     cx.executescript("""
+%     CREATE TABLE Commune(id INTEGER PRIMARY KEY, nom TEXT NOT NULL,
+%                          departement TEXT NOT NULL, habitants INTEGER NOT NULL);
+%     CREATE TABLE Station(id INTEGER PRIMARY KEY, nom TEXT NOT NULL,
+%                          id_commune INTEGER NOT NULL, altitude INTEGER,
+%                          FOREIGN KEY (id_commune) REFERENCES Commune(id));
+%     INSERT INTO Commune VALUES
+%       (1,'Ariana','Ariana',114000),(2,'Sousse','Sousse',271000),
+%       (3,'Tozeur','Tozeur',37000),(4,'Kef','Kef',45000);
+%     INSERT INTO Station VALUES
+%       (1,'Ariana-Nord',1,25),(2,'Ariana-Sud',1,31),
+%       (3,'Sousse-Port',2,4),(4,'Tozeur-Oasis',3,NULL);
+%     """)
+%     return cx
+% cx = base()
+% q = lambda s: cx.execute(s).fetchall()
+% # R1 : communes de plus de 100 000 habitants, par population decroissante
+% assert q("""SELECT nom, habitants FROM Commune
+%             WHERE habitants > 100000
+%             ORDER BY habitants DESC""") == [('Sousse',271000),('Ariana',114000)]
+% # R2 : chaque commune avec son nombre de stations, y compris zero
+% assert q("""SELECT C.nom, COUNT(S.id) FROM Commune C
+%             LEFT JOIN Station S ON C.id = S.id_commune
+%             GROUP BY C.id ORDER BY C.nom""") == [
+%     ('Ariana',2),('Kef',0),('Sousse',1),('Tozeur',1)]
+% # R3 : altitude moyenne des stations dont l'altitude est connue
+% assert q("SELECT COUNT(*) FROM Station") == [(4,)]
+% assert q("SELECT COUNT(altitude) FROM Station") == [(3,)]
+% assert q("SELECT ROUND(AVG(altitude), 2) FROM Station") == [(20.0,)]
+% assert round((25 + 31 + 4) / 3, 2) == 20.0
+% # le NULL n'est ni compte ni sommé
+% assert q("SELECT SUM(altitude) FROM Station") == [(60,)]
+% assert q("SELECT COUNT(*) FROM Station WHERE altitude IS NULL") == [(1,)]
+% assert q("SELECT COUNT(*) FROM Station WHERE altitude = NULL") == [(0,)]
+% # une jointure interne ferait disparaitre Kef, qui n'a aucune station
+% assert q("""SELECT C.nom FROM Commune C JOIN Station S ON C.id = S.id_commune
+%             GROUP BY C.id ORDER BY C.nom""") == [('Ariana',),('Sousse',),('Tozeur',)]
+% END-VERIFY
+\section*{Situation pratique P4 --- trois requêtes sur une base fournie}
+
+\textit{Durée : 1 heure. Travail sur machine, à partir du document fourni.}
+
+\medskip
+\textit{Contenu original Nexus --- ce n'est pas un sujet officiel d'examen.}
+
+\subsection*{Document fourni}
+
+Le fichier \lstinline{stations.py} construit la base \textbf{en mémoire} et
+appelle vos trois requêtes. Rien n'est à ouvrir sur le disque.
+
+\begin{sql}
+CREATE TABLE Commune(id INTEGER PRIMARY KEY, nom TEXT NOT NULL,
+                     departement TEXT NOT NULL, habitants INTEGER NOT NULL);
+
+CREATE TABLE Station(id INTEGER PRIMARY KEY, nom TEXT NOT NULL,
+                     id_commune INTEGER NOT NULL, altitude INTEGER,
+                     FOREIGN KEY (id_commune) REFERENCES Commune(id));
+\end{sql}
+
+\begin{center}
+\begin{tabular}{|c|l|l|c|}
+\hline
+\textbf{id} & \textbf{commune} & \textbf{département} & \textbf{habitants} \\
+\hline
+$1$ & Ariana & Ariana & $114\,000$ \\
+\hline
+$2$ & Sousse & Sousse & $271\,000$ \\
+\hline
+$3$ & Tozeur & Tozeur & $37\,000$ \\
+\hline
+$4$ & Kef & Kef & $45\,000$ \\
+\hline
+\end{tabular}
+\qquad
+\begin{tabular}{|c|l|c|c|}
+\hline
+\textbf{id} & \textbf{station} & \textbf{comm.} & \textbf{altitude} \\
+\hline
+$1$ & Ariana-Nord & $1$ & $25$ \\
+\hline
+$2$ & Ariana-Sud & $1$ & $31$ \\
+\hline
+$3$ & Sousse-Port & $2$ & $4$ \\
+\hline
+$4$ & Tozeur-Oasis & $3$ & \texttt{NULL} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Travail demandé}
+
+Écrire trois requêtes, chacune dans une variable du fichier fourni.
+
+\begin{enumerate}
+  \item \lstinline{R1} : les communes de plus de $100\,000$ habitants, avec
+    leur population, de la plus peuplée à la moins peuplée.
+
+  \item \lstinline{R2} : \textbf{chaque} commune avec son nombre de stations,
+    y compris les communes qui n'en ont aucune.
+
+  \item \lstinline{R3} : l'altitude moyenne des stations, arrondie au
+    centième.
+
+  \item Exécuter le script fourni : les trois résultats attendus y figurent, et
+    la comparaison doit réussir.
+
+  \item Répondre par écrit, en commentaire : la station de Tozeur a une
+    altitude inconnue. Combien de valeurs la moyenne de \lstinline{R3}
+    prend-elle en compte, et pourquoi ? Que renverrait
+    \lstinline{WHERE altitude = NULL} ?
+\end{enumerate}
+
+\subsection*{Ce qui est évalué}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Critère} & \textbf{Points} \\
+\hline
+\texttt{R1} exacte, tri compris & $4$ \\
+\hline
+\texttt{R2} fait apparaître la commune sans station & $6$ \\
+\hline
+\texttt{R3} exacte & $3$ \\
+\hline
+La réponse écrite explique le traitement du \texttt{NULL} & $7$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Réponse attendue à la question 5}
+
+La moyenne porte sur \textbf{trois} valeurs, pas quatre : les agrégats ignorent
+les \lstinline{NULL}. Elle vaut $(25 + 31 + 4)/3 = 20{,}00$.
+
+\lstinline{WHERE altitude = NULL} ne renvoie \textbf{aucune} ligne : une
+comparaison avec \lstinline{NULL} n'est ni vraie ni fausse, et
+\lstinline{WHERE} ne retient que ce qui est vrai. Il faut écrire
+\lstinline{IS NULL}.
+
+\subsection*{Critique}
+
+\begin{itemize}
+  \item \textbf{Jointure interne pour \lstinline{R2}.} Kef n'a aucune station et
+    disparaît. Le résultat compte trois communes au lieu de quatre, et rien ne
+    signale la perte.
+  \item \textbf{\lstinline{COUNT(*)} après une jointure externe.} Kef obtiendrait
+    $1$ au lieu de $0$. Il faut compter une colonne de la table jointe.
+  \item \textbf{Diviser par quatre.} Un candidat qui calcule la moyenne « à la
+    main » sur les quatre stations obtient une valeur différente de celle de
+    \lstinline{AVG}, sans comprendre laquelle est juste.
+\end{itemize}
+
+\subsection*{Portée pédagogique}
+
+La situation évalue trois requêtes de difficulté croissante, dont une seule
+— \lstinline{R2} — demande une jointure externe. Le barème le reflète.
+
+La question 5 vaut plus de points que \lstinline{R3} : sur une base réelle, les
+valeurs manquantes sont la première cause de résultats faux qui n'ont pas l'air
+faux. La reconnaître vaut mieux que d'écrire une requête de plus.

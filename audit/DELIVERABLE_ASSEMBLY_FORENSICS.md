@@ -3,7 +3,7 @@
 - Livrables investigués : `6`
 - Dérivés des sources canoniques : `4`
 - Nouveaux assemblages requis : `2`
-- Assemblages désormais déclarés : `4`
+- Assemblages désormais déclarés : `6`
 - Masters rédigés de zéro : `0`
 
 | Livrable | Décision | Assemblage déclaré |
@@ -12,8 +12,8 @@
 | `1SPE::livret_remediation` | `DERIVE_FROM_CURRENT_CANONICAL_SOURCES` | oui |
 | `TSPE_2026_2027::livret_methodes` | `DERIVE_FROM_CURRENT_CANONICAL_SOURCES` | oui |
 | `TSPE_2026_2027::livret_remediation` | `DERIVE_FROM_CURRENT_CANONICAL_SOURCES` | oui |
-| `TNSI::banque_ecrite` | `NEW_ASSEMBLY_REQUIRED` | **non** |
-| `TNSI::banque_pratique` | `NEW_ASSEMBLY_REQUIRED` | **non** |
+| `TNSI::banque_ecrite` | `NEW_ASSEMBLY_REQUIRED` | oui |
+| `TNSI::banque_pratique` | `NEW_ASSEMBLY_REQUIRED` | oui |
 
 ## Justifications
 
