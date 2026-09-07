@@ -190,6 +190,25 @@ REVIEWS = [
           why="l'enonce conduit la demonstration par « ecrire », « deriver », "
               "« en deduire » sans employer le verbe « demontrer »",
           action="marqueur `en deduire` ajoute au groupe des verbes de preuve"),
+    revue("TSPE-PROBA-EX-003", "TSPE-PROBABILITES", "C3", MISALIGNED,
+          content="calcule P(X=0) puis P(X>=1) pour un tireur, application "
+                  "directe de la loi binomiale",
+          expected="resoudre un probleme de seuil, de comparaison ou "
+                   "d'optimisation avec la loi binomiale",
+          why="l'exercice calcule des probabilites sans resoudre aucun "
+              "probleme de seuil ni comparer deux situations : c'est le calcul "
+              "numerique de C4, pas la resolution de probleme de C3",
+          action="capacite corrigee C3 -> C4", corrected="C4"),
+    revue("TSPE-PROBA-EX-062", "TSPE-PROBABILITES", "C3", PARTIAL,
+          content="compare deux strategies de controle par leur probabilite "
+                  "de rejet, a deux taux de defauts",
+          expected="mobiliser la loi binomiale pour comparer",
+          why="la comparaison est bien la, mais l'enonce ne demandait jamais "
+              "d'identifier la loi : l'eleve pouvait comparer deux nombres "
+              "sans reconnaitre le modele que la capacite exige de mobiliser",
+          action="enonce complete d'une premiere question qui fait justifier "
+                 "la loi binomiale et preciser ses parametres ; corrige "
+                 "renumerote en consequence"),
 ]
 
 

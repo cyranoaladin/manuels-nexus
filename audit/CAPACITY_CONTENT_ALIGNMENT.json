@@ -8334,7 +8334,7 @@
       "state": "NO_SIGNATURE_DECLARED"
     },
     {
-      "capacity": "C3",
+      "capacity": "C4",
       "chapter": "TSPE-PROBABILITES",
       "evidence": null,
       "object_id": "TSPE-PROBA-EX-003",
@@ -8400,18 +8400,26 @@
     {
       "capacity": "C3",
       "chapter": "TSPE-PROBABILITES",
-      "evidence": null,
+      "evidence": {
+        "aligned": true,
+        "forbidden_markers_found": [],
+        "missing_required_groups": []
+      },
       "object_id": "TSPE-PROBA-EX-061",
       "path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-061.tex",
-      "state": "NO_SIGNATURE_DECLARED"
+      "state": "ALIGNED"
     },
     {
       "capacity": "C3",
       "chapter": "TSPE-PROBABILITES",
-      "evidence": null,
+      "evidence": {
+        "aligned": true,
+        "forbidden_markers_found": [],
+        "missing_required_groups": []
+      },
       "object_id": "TSPE-PROBA-EX-062",
       "path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-062.tex",
-      "state": "NO_SIGNATURE_DECLARED"
+      "state": "ALIGNED"
     },
     {
       "capacity": "C1",
@@ -10540,6 +10548,28 @@
       "object_id": "TCOMPL-LOG-EX-009",
       "verdict": "SEMANTICALLY_ALIGNED",
       "why_signature_missed_it": "l'enonce conduit la demonstration par « ecrire », « deriver », « en deduire » sans employer le verbe « demontrer »"
+    },
+    {
+      "action_taken": "capacite corrigee C3 -> C4",
+      "actual_content": "calcule P(X=0) puis P(X>=1) pour un tireur, application directe de la loi binomiale",
+      "chapter": "TSPE-PROBABILITES",
+      "corrected_capacity": "C4",
+      "declared_capacity": "C3",
+      "expected_signature": "resoudre un probleme de seuil, de comparaison ou d'optimisation avec la loi binomiale",
+      "object_id": "TSPE-PROBA-EX-003",
+      "verdict": "MISALIGNED",
+      "why_signature_missed_it": "l'exercice calcule des probabilites sans resoudre aucun probleme de seuil ni comparer deux situations : c'est le calcul numerique de C4, pas la resolution de probleme de C3"
+    },
+    {
+      "action_taken": "enonce complete d'une premiere question qui fait justifier la loi binomiale et preciser ses parametres ; corrige renumerote en consequence",
+      "actual_content": "compare deux strategies de controle par leur probabilite de rejet, a deux taux de defauts",
+      "chapter": "TSPE-PROBABILITES",
+      "corrected_capacity": null,
+      "declared_capacity": "C3",
+      "expected_signature": "mobiliser la loi binomiale pour comparer",
+      "object_id": "TSPE-PROBA-EX-062",
+      "verdict": "PARTIALLY_ALIGNED",
+      "why_signature_missed_it": "la comparaison est bien la, mais l'enonce ne demandait jamais d'identifier la loi : l'eleve pouvait comparer deux nombres sans reconnaitre le modele que la capacite exige de mobiliser"
     }
   ],
   "signature_table": "scripts/capacity_signatures.py",
@@ -10550,23 +10580,23 @@
     "NO_SIGNATURE_DECLARED"
   ],
   "summary": {
-    "ALIGNED": 176,
+    "ALIGNED": 178,
     "APPROVES_NOTHING": true,
     "CAPACITY_ASSIGNMENTS_EXAMINED": 1073,
-    "CAPACITY_ASSIGNMENTS_SEMANTICALLY_PROVEN": 176,
+    "CAPACITY_ASSIGNMENTS_SEMANTICALLY_PROVEN": 178,
     "CAPACITY_ASSIGNMENTS_TOTAL": 1073,
     "CAPACITY_ASSIGNMENTS_WITHOUT_EVIDENCE": 0,
     "CAPACITY_CONTENT_MISALIGNMENT": 0,
-    "CHAPTERS_WITH_DECLARED_SIGNATURES": 15,
+    "CHAPTERS_WITH_DECLARED_SIGNATURES": 16,
     "NOT_EVIDENCED_BY_SIGNATURE": 0,
-    "NO_SIGNATURE_DECLARED": 897,
+    "NO_SIGNATURE_DECLARED": 895,
     "ROUND_ROBIN_CAPACITY_ASSIGNMENT": 0,
     "ROUND_ROBIN_EXPLAINED_BY_CONTENT": 1,
     "ROUND_ROBIN_PATTERN_CHAPTERS": 1,
-    "SEMANTIC_REVIEWS_RECORDED": 22,
+    "SEMANTIC_REVIEWS_RECORDED": 24,
     "SEMANTIC_REVIEW_VERDICTS": {
-      "MISALIGNED": 5,
-      "PARTIALLY_ALIGNED": 2,
+      "MISALIGNED": 6,
+      "PARTIALLY_ALIGNED": 3,
       "SEMANTICALLY_ALIGNED": 15
     },
     "STATES_SUM_EQUALS_TOTAL": true

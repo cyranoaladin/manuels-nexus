@@ -345,6 +345,16 @@ SIGNATURES: dict[str, dict[str, dict[str, list]]] = {
         "C6": {"required": [[r"esp[ée]rance", r"E\(X\)"], [r"exponentielle", r"int[ée]grale", r"\\int"]]},
         "C7": {"required": [[r"uniforme"], [r"densit[ée]", r"r[ée]partition", r"esp[ée]rance", r"variance"]]},
     },
+    "TSPE-PROBABILITES": {
+        "C3": {
+            "required": [
+                [r"binomiale", r"\\mathcal\{B\}", r"P\(X"],
+                [r"seuil", r"comparer|comparaison", r"optimis", r"plus petit",
+                 r"strat[ée]gie"],
+            ],
+            "forbidden": [r"convexit", r"point d'inflexion"],
+        },
+    },
     "TSPE-TRIGONOMETRIE": {
         "C1": {"required": [[r"\\cos", r"\\sin"], [r"[ée]quation", r"in[ée]quation", r"R[ée]soudre", r"D[ée]terminer les instants", r"sup[ée]rieure ou [ée]gale", r"inf[ée]rieure ou [ée]gale"]]},
         "C2": {"required": [[r"\\cos", r"\\sin"], [r"variation", r"optimum", r"maximum", r"[ée]tudier|Etudier"]]},

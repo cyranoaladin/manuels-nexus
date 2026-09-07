@@ -15,15 +15,20 @@
 % assert float(N(b2)) < float(N(a2))
 % END-VERIFY
 \begin{corrige}{TSPE-PROBA-EX-062}
-\textbf{1.} Pour A, $X_A\sim\mathcal{B}(20\,;\,0{,}08)$ et
+\textbf{1.} Chaque pièce testée est une épreuve de Bernoulli de paramètre
+$p=0{,}08$, et les tests sont indépendants : le nombre de défauts suit
+$\mathcal{B}(20\,;\,0{,}08)$ pour la stratégie A et
+$\mathcal{B}(30\,;\,0{,}08)$ pour la stratégie B.
+
+\textbf{2.} Pour A, $X_A\sim\mathcal{B}(20\,;\,0{,}08)$ et
 $P(X_A\geq2)=1-P(X_A=0)-P(X_A=1)\approx0{,}4831$. Pour B,
 $X_B\sim\mathcal{B}(30\,;\,0{,}08)$ et
 $P(X_B\geq3)\approx0{,}4346$.
 
-\textbf{2.} La stratégie A rejette plus souvent un lot à $8\,\%$ de défauts :
+\textbf{3.} La stratégie A rejette plus souvent un lot à $8\,\%$ de défauts :
 $0{,}483$ contre $0{,}435$. Elle est plus sensible.
 
-\textbf{3.} À $p=0{,}02$ : $P(X_A\geq2)\approx0{,}0599$ et
+\textbf{4.} À $p=0{,}02$ : $P(X_A\geq2)\approx0{,}0599$ et
 $P(X_B\geq3)\approx0{,}0217$. La stratégie B déclenche donc moins de fausses
 alertes sur un lot sain. Chaque stratégie améliore un critère au détriment de
 l'autre : il n'y a pas de choix universellement meilleur, seulement un
