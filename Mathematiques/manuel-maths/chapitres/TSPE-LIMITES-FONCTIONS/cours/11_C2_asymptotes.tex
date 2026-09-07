@@ -104,3 +104,31 @@ Une courbe peut \emph{couper} son asymptote horizontale. Par exemple, $f(x) = \d
 
 En une valeur interdite, les limites a gauche et a droite peuvent être différentes ($+\infty$ et $-\infty$). Il faut étudier le signe du dénominateur de chaque cote.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, limit, oo, simplify, Rational
+%
+% x = symbols('x', real=True)
+%
+% # L'exemple : f(x) = (2x+1)/(x-3).
+% f = (2*x + 1) / (x - 3)
+% assert limit(f, x, oo) == 2
+% assert limit(f, x, -oo) == 2
+% # La droite y = 2 est donc asymptote horizontale des deux cotes.
+% for grand in (10**3, 10**6, -10**3, -10**6):
+%     assert abs(float(f.subs(x, grand)) - 2) < 0.01
+%
+% # La reecriture du cours est licite pour x != 0 : les deux formes coincident.
+% reecrite = (2 + 1/x) / (1 - 3/x)
+% for essai in (Rational(1, 2), 5, 100, -7):
+%     assert simplify(f.subs(x, essai) - reecrite.subs(x, essai)) == 0
+%
+% # En x = 3 la fonction n'est pas definie, et l'asymptote est VERTICALE.
+% assert limit(f, x, 3, '+') == oo
+% assert limit(f, x, 3, '-') == -oo
+% # Les deux limites laterales different : la courbe part des deux cotes.
+% assert limit(f, x, 3, '+') != limit(f, x, 3, '-')
+%
+% # Une fonction peut n'avoir aucune asymptote horizontale.
+% assert limit(x**2, x, oo) == oo
+% END-VERIFY

@@ -100,3 +100,31 @@ Si $u_n \to 0$ et $w_n \to 1$ avec $u_n \leq v_n \leq w_n$, on ne peut \emph{pas
 
 Le théorème de comparaison etablit une \emph{divergence} ($v_n \to +\infty$). Le théorème des gendarmes etablit une \emph{convergence} ($v_n \to \ell$). Ce sont deux outils distincts.
 }
+
+% BEGIN-VERIFY
+% from sympy import Rational
+%
+% # Le theoreme : u_n <= v_n a partir d'un rang, et u_n -> +infini, donc
+% # v_n -> +infini. On rejoue la demonstration : pour tout A, on construit
+% # N = max(N1, N2) et on verifie la conclusion.
+% u = lambda k: k - 10                 # -> +infini
+% v = lambda k: k + 5                  # majore u a partir du rang 0
+% assert all(u(k) <= v(k) for k in range(0, 500))
+% for A in (0, 100, 10**4):
+%     N1 = next(k for k in range(10**5) if u(k) >= A)
+%     N2 = 0                            # u <= v des le rang 0
+%     N = max(N1, N2)
+%     assert all(v(k) >= u(k) >= A for k in range(N, N + 60))
+%
+% # L'inegalite n'est requise qu'A PARTIR d'un rang : une suite qui la viole
+% # au debut ne gene pas la conclusion.
+% w = lambda k: (k - 10) if k >= 20 else -1000
+% assert w(0) < u(0)                    # violee au rang 0
+% assert all(u(k) <= w(k) + 0 for k in range(20, 200))
+%
+% # Le theoreme ne vaut PAS dans l'autre sens : v_n -> +infini n'entraine rien
+% # sur u_n, qui peut rester borne.
+% borne = lambda k: Rational(1, k + 1)
+% assert all(borne(k) <= v(k) for k in range(500))
+% assert all(borne(k) <= 1 for k in range(500))
+% END-VERIFY

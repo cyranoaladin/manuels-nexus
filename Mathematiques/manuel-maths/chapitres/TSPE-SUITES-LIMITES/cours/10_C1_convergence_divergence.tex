@@ -125,3 +125,34 @@ La suite $u_n = n - n = 0$ a une limite evidente ($0$), mais $v_n = n^2 - n = n(
 \approfondissement{
 \textbf{Suites de Cauchy.} Une suite $(u_n)$ de réels est dite de Cauchy si, pour tout $\varepsilon > 0$, il existe $N$ tel que pour tous $p, q \geq N$, $|u_p - u_q| \leq \varepsilon$. Dans $\mathbb{R}$, une suite est convergente si et seulement si elle est de Cauchy (completude de $\mathbb{R}$).
 }
+
+% BEGIN-VERIFY
+% from sympy import Rational, floor, symbols, limit, oo
+%
+% # L'exemple : u_n = 1/(n+1) converge vers 0, avec le rang N annonce.
+% u = lambda n: Rational(1, n + 1)
+% for epsilon in (Rational(1, 10), Rational(1, 100), Rational(1, 3),
+%                 Rational(1, 1000)):
+%     N = int(floor(1/epsilon))
+%     # A partir de ce rang, l'ecart a la limite est bien sous epsilon.
+%     for n in range(N, N + 60):
+%         assert abs(u(n) - 0) <= epsilon, (epsilon, n)
+%     # Et le rang est utile : pour un rang trop petit, l'inegalite peut tomber.
+%     if N > 0:
+%         assert u(0) > epsilon or epsilon >= 1
+%
+% n = symbols('n', positive=True, integer=True)
+% assert limit(1/(n + 1), n, oo) == 0
+%
+% # Divergence vers +infini : pour tout seuil A, un rang finit par le depasser
+% # et tous les suivants aussi.
+% v = lambda k: k**2
+% for A in (10, 1000, 10**6):
+%     N = next(k for k in range(1, 10**4) if v(k) >= A)
+%     assert all(v(k) >= A for k in range(N, N + 50))
+%
+% # Une suite bornee sans limite n'entre dans aucune des deux definitions.
+% w = lambda k: (-1)**k
+% assert all(abs(w(k)) <= 1 for k in range(500))
+% assert {w(k) for k in range(500)} == {-1, 1}
+% END-VERIFY

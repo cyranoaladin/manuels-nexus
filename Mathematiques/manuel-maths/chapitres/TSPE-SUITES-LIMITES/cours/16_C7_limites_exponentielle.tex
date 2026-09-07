@@ -93,3 +93,30 @@ La fonction exponentielle est toujours strictement positive. En $-\infty$, $\mat
 
 La limite de $\dfrac{\mathrm{e}^x}{x^2}$ en $+\infty$ est $+\infty$ (et non une forme indeterminee « $\dfrac{\infty}{\infty}$ » sans conclusion). L'exponentielle « l'emporte » sur tout polynôme.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, limit, oo, E, floor, Rational
+%
+% x = symbols('x', real=True)
+% n = symbols('n', positive=True, integer=True)
+%
+% # Les deux limites du cours.
+% assert limit(exp(x), x, oo) == oo
+% assert limit(exp(x), x, -oo) == 0
+%
+% # La demonstration passe par la suite geometrique u_n = e^n, de raison e > 1.
+% assert float(E) > 1
+% suite = [E**k for k in range(0, 12)]
+% assert all(suite[i+1] == E*suite[i] for i in range(11))
+% assert limit(E**n, n, oo) == oo
+%
+% # L'encadrement e^x >= e^{floor(x)} pour x >= 0, verifie sur des valeurs.
+% for valeur in (Rational(1, 2), 1, Rational(7, 3), 5, Rational(41, 4)):
+%     assert exp(valeur) >= E**int(floor(valeur))
+%
+% # La croissance stricte de l'exponentielle, qui fonde l'encadrement.
+% echantillon = [Rational(k, 4) for k in range(-20, 21)]
+% valeurs = [exp(t) for t in echantillon]
+% assert all(valeurs[i] < valeurs[i+1] for i in range(len(valeurs) - 1))
+% assert all(v > 0 for v in valeurs)
+% END-VERIFY

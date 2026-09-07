@@ -89,3 +89,36 @@ Pour prouver qu'une suite vérifie $u_n \leq M$ pour tout $n$, on ne remplace pa
 \approfondissement{
 \textbf{Récurrence forte.} Dans la récurrence forte (ou complete), l'hypothèse d'heredite suppose que $\mathcal{P}(k)$ est vraie pour \emph{tous} les entiers $k$ avec $n_0 \leq k \leq n$, et on démontré $\mathcal{P}(n+1)$. Elle est utile lorsque $u_{n+1}$ depend de plusieurs termes precedents.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, summation, simplify
+%
+% n, k = symbols('n k', positive=True, integer=True)
+%
+% # La propriete demontree par recurrence dans le cours.
+% def P(rang):
+%     return sum(range(1, rang + 1)) == rang*(rang + 1)//2
+%
+% # Initialisation.
+% assert P(1)
+% # Heredite, verifiee sur un large intervalle : si P(n) vaut, P(n+1) aussi.
+% for rang in range(1, 300):
+%     assert P(rang)
+%     gauche = sum(range(1, rang + 2))
+%     droite = (rang + 1)*(rang + 2)//2
+%     assert gauche == sum(range(1, rang + 1)) + (rang + 1)
+%     assert gauche == droite
+% # Conclusion, etablie formellement.
+% assert simplify(summation(k, (k, 1, n)) - n*(n + 1)/2) == 0
+%
+% # L'initialisation n'est pas une formalite : une propriete peut etre
+% # hereditaire sans jamais etre vraie. « n = n + 1 » se transmet de n a n+1
+% # et n'est vraie pour aucun n.
+% def hereditaire_mais_fausse(rang):
+%     return rang == rang + 1
+% assert not any(hereditaire_mais_fausse(r) for r in range(100))
+% # L'heredite formelle : si n = n+1 alors (n+1) = (n+2), ce qui est vrai
+% # par ajout de 1 aux deux membres.
+% m = symbols('m', integer=True)
+% assert simplify((m + 1) - (m + 2) - ((m) - (m + 1))) == 0
+% END-VERIFY

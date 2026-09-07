@@ -174,3 +174,34 @@ $\dfrac{\infty}{\infty}$ est une forme indeterminee, pas un résultat. Par exemp
 
 La limite en $a$ peut exister même si $f(a)$ n'est pas défini. Par exemple, $\lim_{x \to 0} \dfrac{\sin x}{x} = 1$ mais $\dfrac{\sin 0}{0}$ n'existe pas.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, limit, oo, sqrt, exp, log, Rational
+%
+% x = symbols('x', positive=True)
+% y = symbols('y', real=True)
+%
+% # Les limites usuelles du tableau du cours.
+% assert limit(y**2, y, oo) == oo
+% assert limit(y**3, y, -oo) == -oo
+% assert limit(sqrt(x), x, oo) == oo
+% assert limit(1/x, x, oo) == 0
+% assert limit(1/x, x, 0, '+') == oo
+% assert limit(exp(y), y, oo) == oo
+% assert limit(exp(y), y, -oo) == 0
+% assert limit(log(x), x, oo) == oo
+% assert limit(log(x), x, 0, '+') == -oo
+%
+% # La definition en +infini, verifiee numeriquement : pour tout A, f depasse A
+% # a partir d'un rang.
+% f = lambda t: t**2
+% for A in (10, 10**4, 10**8):
+%     seuil = next(t for t in range(1, 10**5) if f(t) > A)
+%     assert all(f(t) > A for t in range(seuil, seuil + 50))
+%
+% # Et la definition d'une limite finie : l'ecart devient arbitrairement petit.
+% g = lambda t: 1/t
+% for epsilon in (Rational(1, 10), Rational(1, 10**4)):
+%     seuil = next(t for t in range(1, 10**6) if abs(g(t)) <= epsilon)
+%     assert all(abs(g(t)) <= epsilon for t in range(seuil, seuil + 50))
+% END-VERIFY

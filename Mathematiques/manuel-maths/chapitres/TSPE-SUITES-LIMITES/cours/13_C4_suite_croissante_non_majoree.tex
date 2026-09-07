@@ -75,3 +75,28 @@ La limite $\ell$ vérifie $\ell = \sqrt{2 + \ell}$, soit $\ell^2 = 2 + \ell$, d'
 
 La suite $u_n = (-1)^n \cdot n$ n'est pas majorée, mais elle n'est pas croissante. Le théorème ne s'applique que si la suite est \emph{a la fois} croissante \emph{et} non majorée.
 }
+
+% BEGIN-VERIFY
+% from sympy import Rational
+%
+% # Le theoreme : croissante et non majoree entraine divergence vers +infini.
+% # On l'instancie et on rejoue la demonstration : pour tout A, on exhibe le
+% # rang N et on verifie que TOUS les rangs suivants depassent A.
+% u = lambda k: k + Rational(1, k + 1)          # croissante, non majoree
+% assert all(u(k) < u(k + 1) for k in range(300))
+% for A in (5, 50, 500, 5000):
+%     N = next(k for k in range(0, 10**5) if u(k) > A)
+%     assert all(u(k) >= A for k in range(N, N + 80))
+%
+% # Les deux hypotheses sont necessaires, et separement.
+% # Croissante mais MAJOREE : elle converge, elle ne diverge pas.
+% bornee = lambda k: 1 - Rational(1, k + 1)
+% assert all(bornee(k) < bornee(k + 1) for k in range(300))
+% assert all(bornee(k) < 1 for k in range(300))
+% # Non majoree mais NON croissante : elle ne tend pas vers +infini, car elle
+% # repasse indefiniment par des valeurs negatives.
+% oscillante = lambda k: k * (-1)**k
+% assert max(abs(oscillante(k)) for k in range(200)) > 100
+% assert any(oscillante(k) < 0 for k in range(200, 300))
+% assert not all(oscillante(k) >= 100 for k in range(200, 300))
+% END-VERIFY

@@ -115,3 +115,30 @@ La limite $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x^n} = +\infty$ est un rés
 
 Les croissances comparees donnent le comportement du \emph{rapport}, pas de la difference. Pour la difference $\mathrm{e}^x - x^n$, il faut factoriser par $\mathrm{e}^x$ et utiliser $\dfrac{x^n}{\mathrm{e}^x} \to 0$.
 }
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, limit, oo, Rational, diff, simplify
+%
+% x = symbols('x', positive=True)
+%
+% # Le theoreme, pour plusieurs exposants.
+% for n in range(0, 6):
+%     assert limit(exp(x)/x**n, x, oo) == oo
+%     assert limit(x**n/exp(x), x, oo) == 0
+%
+% # L'inegalite auxiliaire e^x >= 1 + x pour x >= 0, et sa preuve : g'(x) >= 0
+% # et g(0) = 0.
+% g = exp(x) - 1 - x
+% assert simplify(diff(g, x) - (exp(x) - 1)) == 0
+% assert g.subs(x, 0) == 0
+% for essai in (Rational(1, 10), 1, 3, 10):
+%     assert (exp(essai) - 1).evalf() >= 0
+%     assert g.subs(x, essai).evalf() >= 0
+%
+% # Etape 1 du cours : e^x / x tend vers l'infini.
+% assert limit(exp(x)/x, x, oo) == oo
+% # Verification numerique de la domination, sur des valeurs croissantes.
+% valeurs = [(t, float(exp(t)/t**3)) for t in (5, 10, 20, 40)]
+% assert [v for _, v in valeurs] == sorted(v for _, v in valeurs)
+% assert valeurs[-1][1] > 10**6
+% END-VERIFY

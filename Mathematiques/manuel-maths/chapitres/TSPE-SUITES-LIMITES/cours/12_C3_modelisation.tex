@@ -97,3 +97,27 @@ Cette méthode ne s'applique qu'aux suites de la forme $u_{n+1} = a\,u_n + b$ av
 \approfondissement{
 \textbf{Piste Grand Oral.} « Un medicament pris regulierement finit-il toujours par se stabiliser dans l'organisme ? » La reponse depend du coefficient d'elimination : si le corps elimine une fraction strictement positive a chaque période, le modèle arithmetico-géométrique garantit la convergence. On peut étudier l'impact du dosage et de la frequence sur la concentration d'équilibré.
 }
+
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, limit, oo, simplify
+%
+% # L'exemple : u_0 = 5, u_{n+1} = u_n/2 + 3, et v_n = u_n - 6.
+% u, suite = Rational(5), []
+% for _ in range(12):
+%     suite.append(u)
+%     u = u/2 + 3
+% # La suite auxiliaire est geometrique de raison 1/2 et de premier terme -1.
+% v = [terme - 6 for terme in suite]
+% assert v[0] == -1
+% assert all(simplify(v[i+1] - Rational(1, 2)*v[i]) == 0 for i in range(11))
+%
+% # Terme general annonce : u_n = 6 - (1/2)^n.
+% for rang, terme in enumerate(suite):
+%     assert simplify(terme - (6 - Rational(1, 2)**rang)) == 0
+%
+% # Limite : 6.
+% n = symbols('n', positive=True, integer=True)
+% assert limit(6 - Rational(1, 2)**n, n, oo) == 6
+% # La convergence se fait par valeurs inferieures, en croissant.
+% assert all(suite[i] < suite[i+1] < 6 for i in range(11))
+% END-VERIFY
