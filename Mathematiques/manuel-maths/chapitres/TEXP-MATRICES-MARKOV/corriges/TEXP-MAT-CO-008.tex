@@ -1,0 +1,30 @@
+% META: {"id": "TEXP-MAT-CO-008", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige", "exercice_ref": "TEXP-MAT-EX-008", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, eye
+% A = Matrix([[2, 1], [0, 3]])
+% B = Matrix([[1, -1], [4, 2]])
+% assert A + B == Matrix([[3, 0], [4, 5]])
+% assert A * B == Matrix([[6, 0], [12, 6]])
+% assert B * A == Matrix([[2, -2], [8, 10]])
+% assert A * B != B * A
+% assert A ** 2 == Matrix([[4, 5], [0, 9]])
+% assert A ** 3 == Matrix([[8, 19], [0, 27]])
+% assert (A ** 3)[0, 0] == 2 ** 3 and (A ** 3)[1, 1] == 3 ** 3
+% assert A.det() == 6
+% assert A.inv() == Rational(1, 6) * Matrix([[3, -1], [0, 2]])
+% assert A * A.inv() == eye(2)
+% END-VERIFY
+\begin{corrige}{TEXP-MAT-EX-008}
+\textbf{1.} $A+B=\begin{pmatrix}3&0\\4&5\end{pmatrix}$,
+$AB=\begin{pmatrix}6&0\\12&6\end{pmatrix}$,
+$BA=\begin{pmatrix}2&-2\\8&10\end{pmatrix}$. Le produit matriciel n'est pas
+commutatif : $AB\neq BA$.
+
+\textbf{2.} $A^2=\begin{pmatrix}4&5\\0&9\end{pmatrix}$ et
+$A^3=\begin{pmatrix}8&19\\0&27\end{pmatrix}$. La matrice étant triangulaire,
+les coefficients diagonaux sont les puissances $2^n$ et $3^n$.
+
+\textbf{3.} $\det A=2\times3-1\times0=6\neq0$ : $A$ est inversible et
+$A^{-1}=\dfrac{1}{6}\begin{pmatrix}3&-1\\0&2\end{pmatrix}$. Le produit
+$AA^{-1}$ vaut bien $I_2$.
+\end{corrige}

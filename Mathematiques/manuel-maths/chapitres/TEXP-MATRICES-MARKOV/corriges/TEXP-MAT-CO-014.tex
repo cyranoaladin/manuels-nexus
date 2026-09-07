@@ -1,0 +1,33 @@
+% META: {"id": "TEXP-MAT-CO-014", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige", "exercice_ref": "TEXP-MAT-EX-014", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, symbols, solve, nsimplify
+% T = Matrix([[Rational(7, 10), Rational(3, 10)], [Rational(4, 10), Rational(6, 10)]])
+% a, b = symbols('a b')
+% pi = Matrix([[a, b]])
+% sol = solve(list(pi * T - pi) + [a + b - 1], [a, b], dict=True)[0]
+% assert sol[a] == Rational(4, 7) and sol[b] == Rational(3, 7)
+% pi20 = Matrix([[1, 0]]) * T ** 20
+% assert abs(float(pi20[0] - Rational(4, 7))) < 1e-6
+% assert abs(float(pi20[1] - Rational(3, 7))) < 1e-6
+% S = Matrix([[Rational(1, 2), Rational(1, 2), 0],
+%             [0, Rational(1, 2), Rational(1, 2)],
+%             [Rational(1, 2), 0, Rational(1, 2)]])
+% x, y, z = symbols('x y z')
+% p = Matrix([[x, y, z]])
+% sol3 = solve(list(p * S - p) + [x + y + z - 1], [x, y, z], dict=True)[0]
+% assert sol3[x] == sol3[y] == sol3[z] == Rational(1, 3)
+% END-VERIFY
+\begin{corrige}{TEXP-MAT-EX-014}
+\textbf{1.} $\pi T=\pi$ donne $0{,}7a+0{,}4b=a$, soit $0{,}4b=0{,}3a$ et
+$b=\tfrac34a$. Avec $a+b=1$ : $a=\tfrac47$, $b=\tfrac37$. La distribution
+invariante est $\begin{pmatrix}4/7&3/7\end{pmatrix}\approx
+\begin{pmatrix}0{,}571&0{,}429\end{pmatrix}$.
+
+\textbf{2.} $\pi_{20}\approx\begin{pmatrix}0{,}5714&0{,}4286\end{pmatrix}$ :
+la distribution s'est stabilisée sur $\begin{pmatrix}4/7&3/7\end{pmatrix}$,
+indépendamment de l'état initial.
+
+\textbf{3.} Pour $S$, la symétrie du graphe suggère l'uniforme ; la résolution
+de $\pi S=\pi$ avec somme $1$ donne bien
+$\pi=\begin{pmatrix}1/3&1/3&1/3\end{pmatrix}$.
+\end{corrige}

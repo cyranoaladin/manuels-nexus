@@ -1,0 +1,27 @@
+% META: {"id": "TEXP-MAT-CO-012", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige", "exercice_ref": "TEXP-MAT-EX-012", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational
+% T = Matrix([[Rational(7, 10), Rational(3, 10)], [Rational(4, 10), Rational(6, 10)]])
+% pi0 = Matrix([[1, 0]])
+% pi1, pi2, pi3 = pi0 * T, pi0 * T ** 2, pi0 * T ** 3
+% assert pi1 == Matrix([[Rational(7, 10), Rational(3, 10)]])
+% assert pi2 == Matrix([[Rational(61, 100), Rational(39, 100)]])
+% assert pi3 == Matrix([[Rational(583, 1000), Rational(417, 1000)]])
+% T2 = T ** 2
+% assert T2 == Matrix([[Rational(61, 100), Rational(39, 100)],
+%                      [Rational(52, 100), Rational(48, 100)]])
+% assert T2[0, 1] == Rational(39, 100)
+% assert pi2 == T2.row(0)
+% END-VERIFY
+\begin{corrige}{TEXP-MAT-EX-012}
+\textbf{1.} $\pi_1=\pi_0T=\begin{pmatrix}0{,}7&0{,}3\end{pmatrix}$,
+$\pi_2=\begin{pmatrix}0{,}61&0{,}39\end{pmatrix}$,
+$\pi_3=\begin{pmatrix}0{,}583&0{,}417\end{pmatrix}$.
+
+\textbf{2.} $T^2=\begin{pmatrix}0{,}61&0{,}39\\0{,}52&0{,}48\end{pmatrix}$.
+Le coefficient $(1\,;\,2)$ vaut $0{,}39$ : c'est la probabilité d'être au
+centre au bout de deux jours en partant de la gare.
+
+\textbf{3.} $\pi_2$ est égale à la première ligne de $T^2$. C'est normal :
+$\pi_0$ sélectionne la première ligne, et $\pi_2=\pi_0T^2$.
+\end{corrige}

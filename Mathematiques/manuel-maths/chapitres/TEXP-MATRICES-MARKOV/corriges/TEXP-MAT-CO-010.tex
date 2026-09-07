@@ -1,0 +1,38 @@
+% META: {"id": "TEXP-MAT-CO-010", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige", "exercice_ref": "TEXP-MAT-EX-010", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, eye, limit, symbols, oo
+% A = Matrix([[Rational(1, 2), 0], [0, Rational(1, 3)]])
+% C = Matrix([[1], [2]])
+% U = Matrix([[0], [0]])
+% suite = [U]
+% for _ in range(3):
+%     U = A * U + C
+%     suite.append(U)
+% assert suite[1] == Matrix([[1], [2]])
+% assert suite[2] == Matrix([[Rational(3, 2)], [Rational(8, 3)]])
+% assert suite[3] == Matrix([[Rational(7, 4)], [Rational(26, 9)]])
+% X = (eye(2) - A).inv() * C
+% assert X == Matrix([[2], [3]])
+% assert A * X + C == X
+% V0 = suite[0] - X
+% for n in (5, 12, 30):
+%     Vn = (A ** n) * V0
+%     Un = Vn + X
+%     assert Un == (lambda u: u)(Un)
+%     assert abs(float(Un[0] - 2)) < 2 ** (-n + 2)
+%     assert abs(float(Un[1] - 3)) < 3 ** (-n + 2)
+% END-VERIFY
+\begin{corrige}{TEXP-MAT-EX-010}
+\textbf{1.} $U_1=C=\begin{pmatrix}1\\2\end{pmatrix}$,
+$U_2=\begin{pmatrix}3/2\\8/3\end{pmatrix}$,
+$U_3=\begin{pmatrix}7/4\\26/9\end{pmatrix}$.
+
+\textbf{2.} $X=AX+C$ donne $(I-A)X=C$, soit
+$\begin{pmatrix}1/2&0\\0&2/3\end{pmatrix}X=\begin{pmatrix}1\\2\end{pmatrix}$
+d'où $X=\begin{pmatrix}2\\3\end{pmatrix}$.
+
+\textbf{3.} $V_{n+1}=U_{n+1}-X=AU_n+C-(AX+C)=A(U_n-X)=AV_n$. Donc
+$V_n=A^nV_0$ avec $V_0=-X$. Comme $A$ est diagonale de coefficients
+$1/2$ et $1/3$, strictement compris entre $0$ et $1$, $A^n$ tend vers la
+matrice nulle : $V_n\to0$ et $U_n\to X=\begin{pmatrix}2\\3\end{pmatrix}$.
+\end{corrige}

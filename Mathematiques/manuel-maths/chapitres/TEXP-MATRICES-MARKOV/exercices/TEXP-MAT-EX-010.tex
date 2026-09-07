@@ -1,0 +1,35 @@
+% META: {"id": "TEXP-MAT-EX-010", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "exercice", "capacites": ["TEXP-MAT-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-010.tex", "corrige_tex": "chapitres/TEXP-MATRICES-MARKOV/corriges/TEXP-MAT-CO-010.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, eye, limit, symbols, oo
+% A = Matrix([[Rational(1, 2), 0], [0, Rational(1, 3)]])
+% C = Matrix([[1], [2]])
+% U = Matrix([[0], [0]])
+% suite = [U]
+% for _ in range(3):
+%     U = A * U + C
+%     suite.append(U)
+% assert suite[1] == Matrix([[1], [2]])
+% assert suite[2] == Matrix([[Rational(3, 2)], [Rational(8, 3)]])
+% assert suite[3] == Matrix([[Rational(7, 4)], [Rational(26, 9)]])
+% X = (eye(2) - A).inv() * C
+% assert X == Matrix([[2], [3]])
+% assert A * X + C == X
+% V0 = suite[0] - X
+% for n in (5, 12, 30):
+%     Vn = (A ** n) * V0
+%     Un = Vn + X
+%     assert Un == (lambda u: u)(Un)
+%     assert abs(float(Un[0] - 2)) < 2 ** (-n + 2)
+%     assert abs(float(Un[1] - 3)) < 3 ** (-n + 2)
+% END-VERIFY
+\begin{exercice}{TEXP-MAT-EX-010}{2}{18}
+On étudie la suite de matrices colonnes définie par
+$U_{n+1}=AU_n+C$ avec $A=\begin{pmatrix}\tfrac12&0\\0&\tfrac13\end{pmatrix}$,
+$C=\begin{pmatrix}1\\2\end{pmatrix}$ et $U_0=\begin{pmatrix}0\\0\end{pmatrix}$.
+\begin{enumerate}
+  \item Calculer $U_1$, $U_2$ et $U_3$.
+  \item Déterminer la matrice colonne constante $X$ vérifiant $X=AX+C$.
+  \item Montrer que $V_n=U_n-X$ vérifie $V_{n+1}=AV_n$, et en déduire la
+        limite de $U_n$.
+\end{enumerate}
+\end{exercice}

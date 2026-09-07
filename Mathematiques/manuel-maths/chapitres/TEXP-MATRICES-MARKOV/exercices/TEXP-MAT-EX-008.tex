@@ -1,0 +1,26 @@
+% META: {"id": "TEXP-MAT-EX-008", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "exercice", "capacites": ["TEXP-MAT-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-008.tex", "corrige_tex": "chapitres/TEXP-MATRICES-MARKOV/corriges/TEXP-MAT-CO-008.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, eye
+% A = Matrix([[2, 1], [0, 3]])
+% B = Matrix([[1, -1], [4, 2]])
+% assert A + B == Matrix([[3, 0], [4, 5]])
+% assert A * B == Matrix([[6, 0], [12, 6]])
+% assert B * A == Matrix([[2, -2], [8, 10]])
+% assert A * B != B * A
+% assert A ** 2 == Matrix([[4, 5], [0, 9]])
+% assert A ** 3 == Matrix([[8, 19], [0, 27]])
+% assert (A ** 3)[0, 0] == 2 ** 3 and (A ** 3)[1, 1] == 3 ** 3
+% assert A.det() == 6
+% assert A.inv() == Rational(1, 6) * Matrix([[3, -1], [0, 2]])
+% assert A * A.inv() == eye(2)
+% END-VERIFY
+\begin{exercice}{TEXP-MAT-EX-008}{1}{12}
+Soient $A=\begin{pmatrix}2&1\\0&3\end{pmatrix}$ et
+$B=\begin{pmatrix}1&-1\\4&2\end{pmatrix}$.
+\begin{enumerate}
+  \item Calculer $A+B$, $AB$ et $BA$. Que constate-t-on ?
+  \item Calculer $A^2$ et $A^3$.
+  \item $A$ est-elle inversible ? Si oui, donner $A^{-1}$ et vérifier
+        $AA^{-1}=I_2$.
+\end{enumerate}
+\end{exercice}

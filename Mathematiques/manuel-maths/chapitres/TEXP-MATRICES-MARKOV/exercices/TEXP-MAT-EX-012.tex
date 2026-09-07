@@ -1,0 +1,25 @@
+% META: {"id": "TEXP-MAT-EX-012", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "exercice", "capacites": ["TEXP-MAT-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-012.tex", "corrige_tex": "chapitres/TEXP-MATRICES-MARKOV/corriges/TEXP-MAT-CO-012.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational
+% T = Matrix([[Rational(7, 10), Rational(3, 10)], [Rational(4, 10), Rational(6, 10)]])
+% pi0 = Matrix([[1, 0]])
+% pi1, pi2, pi3 = pi0 * T, pi0 * T ** 2, pi0 * T ** 3
+% assert pi1 == Matrix([[Rational(7, 10), Rational(3, 10)]])
+% assert pi2 == Matrix([[Rational(61, 100), Rational(39, 100)]])
+% assert pi3 == Matrix([[Rational(583, 1000), Rational(417, 1000)]])
+% T2 = T ** 2
+% assert T2 == Matrix([[Rational(61, 100), Rational(39, 100)],
+%                      [Rational(52, 100), Rational(48, 100)]])
+% assert T2[0, 1] == Rational(39, 100)
+% assert pi2 == T2.row(0)
+% END-VERIFY
+\begin{exercice}{TEXP-MAT-EX-012}{2}{15}
+On reprend la chaîne de matrice
+$T=\begin{pmatrix}0{,}7&0{,}3\\0{,}4&0{,}6\end{pmatrix}$ et
+$\pi_0=\begin{pmatrix}1&0\end{pmatrix}$.
+\begin{enumerate}
+  \item Calculer $\pi_1$, $\pi_2$ et $\pi_3$.
+  \item Calculer $T^2$ et interpréter son coefficient $(1\,;\,2)$.
+  \item Comparer $\pi_2$ et la première ligne de $T^2$. Expliquer.
+\end{enumerate}
+\end{exercice}

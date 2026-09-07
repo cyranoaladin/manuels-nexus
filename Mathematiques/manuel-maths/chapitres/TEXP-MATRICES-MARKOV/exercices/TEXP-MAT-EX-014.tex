@@ -1,0 +1,31 @@
+% META: {"id": "TEXP-MAT-EX-014", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "exercice", "capacites": ["TEXP-MAT-C7"], "capacites_codes": ["C7"], "methodes": ["M7"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-014.tex", "corrige_tex": "chapitres/TEXP-MATRICES-MARKOV/corriges/TEXP-MAT-CO-014.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, symbols, solve, nsimplify
+% T = Matrix([[Rational(7, 10), Rational(3, 10)], [Rational(4, 10), Rational(6, 10)]])
+% a, b = symbols('a b')
+% pi = Matrix([[a, b]])
+% sol = solve(list(pi * T - pi) + [a + b - 1], [a, b], dict=True)[0]
+% assert sol[a] == Rational(4, 7) and sol[b] == Rational(3, 7)
+% pi20 = Matrix([[1, 0]]) * T ** 20
+% assert abs(float(pi20[0] - Rational(4, 7))) < 1e-6
+% assert abs(float(pi20[1] - Rational(3, 7))) < 1e-6
+% S = Matrix([[Rational(1, 2), Rational(1, 2), 0],
+%             [0, Rational(1, 2), Rational(1, 2)],
+%             [Rational(1, 2), 0, Rational(1, 2)]])
+% x, y, z = symbols('x y z')
+% p = Matrix([[x, y, z]])
+% sol3 = solve(list(p * S - p) + [x + y + z - 1], [x, y, z], dict=True)[0]
+% assert sol3[x] == sol3[y] == sol3[z] == Rational(1, 3)
+% END-VERIFY
+\begin{exercice}{TEXP-MAT-EX-014}{2}{18}
+On cherche les distributions invariantes.
+\begin{enumerate}
+  \item Déterminer $\pi=\begin{pmatrix}a&b\end{pmatrix}$ vérifiant $\pi T=\pi$
+        et $a+b=1$, pour
+        $T=\begin{pmatrix}0{,}7&0{,}3\\0{,}4&0{,}6\end{pmatrix}$.
+  \item Vérifier que $\pi_n$ converge vers cette distribution, en calculant
+        $\pi_{20}$ à partir de $\pi_0=\begin{pmatrix}1&0\end{pmatrix}$.
+  \item Même question pour la chaîne à trois états de matrice
+        $S=\begin{pmatrix}0{,}5&0{,}5&0\\0&0{,}5&0{,}5\\0{,}5&0&0{,}5\end{pmatrix}$.
+\end{enumerate}
+\end{exercice}

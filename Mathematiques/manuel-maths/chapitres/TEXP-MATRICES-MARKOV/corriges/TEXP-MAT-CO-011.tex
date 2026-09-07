@@ -1,0 +1,20 @@
+% META: {"id": "TEXP-MAT-CO-011", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige", "exercice_ref": "TEXP-MAT-EX-011", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational
+% T = Matrix([[Rational(7, 10), Rational(3, 10)], [Rational(4, 10), Rational(6, 10)]])
+% for i in range(2):
+%     assert sum(T.row(i)) == 1
+% assert all(T[i, j] >= 0 for i in range(2) for j in range(2))
+% pi0 = Matrix([[1, 0]])
+% assert sum(pi0) == 1
+% assert (pi0 * T) == Matrix([[Rational(7, 10), Rational(3, 10)]])
+% END-VERIFY
+\begin{corrige}{TEXP-MAT-EX-011}
+\textbf{1.} Deux sommets $G$ et $C$ ; arcs $G\to G$ de poids $0{,}7$,
+$G\to C$ de poids $0{,}3$, $C\to G$ de poids $0{,}4$, $C\to C$ de poids
+$0{,}6$. La somme des poids sortant de chaque sommet vaut $1$.
+
+\textbf{2.} $T=\begin{pmatrix}0{,}7&0{,}3\\0{,}4&0{,}6\end{pmatrix}$.
+
+\textbf{3.} $\pi_0=\begin{pmatrix}1&0\end{pmatrix}$.
+\end{corrige}

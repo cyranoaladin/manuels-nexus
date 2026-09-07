@@ -1,0 +1,22 @@
+% META: {"id": "TEXP-MAT-EX-011", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "exercice", "capacites": ["TEXP-MAT-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 1, "competences": ["modeliser"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-011.tex", "corrige_tex": "chapitres/TEXP-MATRICES-MARKOV/corriges/TEXP-MAT-CO-011.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational
+% T = Matrix([[Rational(7, 10), Rational(3, 10)], [Rational(4, 10), Rational(6, 10)]])
+% for i in range(2):
+%     assert sum(T.row(i)) == 1
+% assert all(T[i, j] >= 0 for i in range(2) for j in range(2))
+% pi0 = Matrix([[1, 0]])
+% assert sum(pi0) == 1
+% assert (pi0 * T) == Matrix([[Rational(7, 10), Rational(3, 10)]])
+% END-VERIFY
+\begin{exercice}{TEXP-MAT-EX-011}{1}{15}
+Chaque jour, un vélo en libre-service est soit à la gare (état $G$), soit au
+centre (état $C$). S'il est à la gare, il y reste avec probabilité $0{,}7$ ;
+s'il est au centre, il rejoint la gare avec probabilité $0{,}4$.
+\begin{enumerate}
+  \item Représenter la chaîne de Markov par un graphe orienté pondéré.
+  \item Écrire la matrice de transition $T$ en ordonnant les états $(G\,;\,C)$.
+  \item Le vélo est à la gare au jour $0$. Écrire la distribution initiale
+        $\pi_0$ sous forme de matrice ligne.
+\end{enumerate}
+\end{exercice}

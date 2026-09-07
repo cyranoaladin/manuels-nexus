@@ -128,6 +128,57 @@ SIGNATURES: dict[str, dict[str, dict[str, list]]] = {
             ],
         },
     },
+    "TEXP-MATRICES-MARKOV": {
+        "C1": {
+            "required": [
+                [r"\bmatrices?\b", r"\\begin\{pmatrix\}"],
+                [r"\bproduit\b", r"\bsomme\b", r"\binverse", r"puissance",
+                 r"\bA\^", r"\bAB\b"],
+            ],
+            "forbidden": [r"convexit", r"tableau de variations"],
+        },
+        "C2": {
+            "required": [
+                [r"\bmod[ée]lis", r"\bmatrice"],
+                [r"\bmatrice", r"\\begin\{pmatrix\}"],
+            ],
+        },
+        "C3": {
+            "required": [
+                [r"U_\{?n", r"suite de matrices", r"AU_n", r"A\s*U_n"],
+                [r"\bsuite\b", r"r[ée]current", r"constante"],
+            ],
+        },
+        "C4": {
+            "required": [
+                [r"\bMarkov\b", r"transition"],
+                [r"\b[ée]tats?\b", r"graphe", r"distribution"],
+            ],
+        },
+        "C5": {
+            "required": [
+                [r"\bMarkov\b", r"transition", r"\bT\^", r"\\pi_"],
+                # La distribution se note `\pi_1`, `\pi_2`, `\pi_n` : exiger
+                # l'indice `n` refuserait les enonces qui calculent des rangs.
+                [r"distribution", r"\\pi_", r"transitions"],
+            ],
+        },
+        "C6": {
+            # « Rappeler pourquoi » demande la demonstration aussi surement
+            # que « demontrer » : le corpus emploie les deux.
+            "required": [
+                [r"D[ée]montrer|Montrer|r[ée]currence|Justifier|Rappeler "
+                 r"pourquoi|principe de la d[ée]monstration"],
+                [r"\\pi_", r"distribution", r"transition"],
+            ],
+        },
+        "C7": {
+            "required": [
+                [r"invariante?s?\b", r"\\pi\s*T\s*=\s*\\pi"],
+                [r"distribution", r"\\pi"],
+            ],
+        },
+    },
 }
 
 
