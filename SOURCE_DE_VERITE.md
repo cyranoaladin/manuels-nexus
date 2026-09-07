@@ -286,3 +286,31 @@ plus). Squelette vide `chapitres/TSPE-SUITES-LIMITES/` a la racine supprime
 **GitHub.** `manuels-nexus` public, 7 branches distantes conformes aux refs
 locales. Amont corpus `cyranoaladin/NSI` : `main` = `52bcfdea` = commit epingle
 du subtree — aucun ecart.
+
+## Critère de richesse pédagogique (2026-09-07)
+
+`Historical target: >=50 exercises/chapter`
+`Status: superseded`
+`Current release criterion: qualitative pedagogical completeness`
+
+La directive `PROMPT_MISSION_COLLECTION.md §3.4` — « matrice ≥2 ex/case et
+≥50 ex/chapitre » — reste dans le dépôt et dans l'historique. Elle n'est plus
+un critère bloquant de release. Statut canonique :
+`SUPERSEDED_EDITORIAL_VOLUME_TARGET`, décidé le 2026-09-07 par `abenrhouma`.
+
+Motifs : ce nombre n'est pas issu des programmes officiels ; il ne mesure ni
+couverture, ni diversité, ni qualité ; il a créé une incitation directe au
+remplissage synthétique, dont le commit `533d1919` est la démonstration
+empirique — 973 objets recopiés dans quinze chapitres, chacun satisfaisant un
+compteur et aucun un élève.
+
+Le critère courant est qualitatif et mesuré par chapitre : programme
+intégralement enseigné, entraînement suffisant par capacité, variété des
+exercices, progressivité, corrigés fiables, évaluabilité, remédiation quand
+elle est pédagogiquement pertinente. Il est porté par
+`audit/CHAPTER_RICHNESS_MATRIX.json`, jamais par un `exercise_count >= N`.
+
+`tests/test_no_fixed_exercise_quota.py` interdit statiquement le retour d'un
+seuil numérique dans un gate de release : il faut une nouvelle décision
+humaine explicite pour cela. Un tableau de bord qui déclare lui-même n'être
+pas autoritaire pour la release peut garder un seuil indicatif.

@@ -1,7 +1,7 @@
 # Origine de la cible « cinquante exercices par chapitre »
 
 - `FIFTY_EXERCISES_POLICY_ORIGIN` : `EDITORIAL_GUIDELINE, EXPLICIT_RELEASE_OWNER_REQUIREMENT, GENERATOR_ASSUMPTION`
-- `FIFTY_EXERCISES_RELEASE_REQUIREMENT` : `SUPERSEDED_EXPLICIT_REQUIREMENT`
+- `FIFTY_EXERCISES_RELEASE_REQUIREMENT` : `SUPERSEDED_EDITORIAL_VOLUME_TARGET`
 - gates de release imposant cinquante : `0`
 
 ## Traces
@@ -23,6 +23,19 @@ Un seuil interne a un tableau de bord que son propre en-tete declare « non auto
 > Ratio 40/40/20 exactement conforme à E5/F01
 
 Un compte rendu de production qui atteint cinquante pour un chapitre donne ; il documente une realisation, il n'edicte rien.
+
+## Supersession
+
+- origine historique : PROMPT_MISSION_COLLECTION.md §3.4, 2026-07-16, « matrice >=2 ex/case et >=50 ex/chapitre »
+- statut : `SUPERSEDED_EDITORIAL_VOLUME_TARGET`
+- decidee le 2026-09-07 par abenrhouma
+- motifs :
+  - ce nombre n'est pas issu des programmes officiels
+  - il ne mesure ni couverture, ni diversite, ni qualite
+  - il a cree une incitation directe au remplissage synthetique
+  - le commit 533d1919 demontre empiriquement le risque de satisfaire une metrique quantitative au detriment du fond
+  - l'objectif est de produire des manuels complets et rigoureux, sans filler
+- critere courant : completude pedagogique qualitative : programme, entrainement, variete, progressivite, corriges, evaluation, remediation
 
 ## Autorite courante
 

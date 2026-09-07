@@ -24,6 +24,33 @@ JSON_TARGET = ROOT / "audit/FIFTY_EXERCISES_POLICY_ORIGIN.json"
 MD_TARGET = ROOT / "audit/FIFTY_EXERCISES_POLICY_ORIGIN.md"
 GENERATED_BY = "scripts/build_fifty_exercises_policy_origin.py"
 
+#: LA DECISION HUMAINE QUI RETIRE A CE NOMBRE SON POUVOIR BLOQUANT.
+#: L'ancien prompt n'est pas supprime -- on n'efface pas une directive, on
+#: dit ce qu'elle est devenue et pourquoi.
+SUPERSESSION = {
+    "HISTORICAL_REQUIREMENT_ORIGIN": (
+        "PROMPT_MISSION_COLLECTION.md §3.4, 2026-07-16, « matrice >=2 ex/case "
+        "et >=50 ex/chapitre »"
+    ),
+    "NEW_STATUS": "SUPERSEDED_EDITORIAL_VOLUME_TARGET",
+    "SUPERSESSION_DATE": "2026-09-07",
+    "SUPERSEDED_BY_RELEASE_OWNER": "abenrhouma",
+    "SUPERSESSION_REASON": [
+        "ce nombre n'est pas issu des programmes officiels",
+        "il ne mesure ni couverture, ni diversite, ni qualite",
+        "il a cree une incitation directe au remplissage synthetique",
+        "le commit 533d1919 demontre empiriquement le risque de satisfaire "
+        "une metrique quantitative au detriment du fond",
+        "l'objectif est de produire des manuels complets et rigoureux, "
+        "sans filler",
+    ],
+    "CURRENT_RELEASE_CRITERION": (
+        "completude pedagogique qualitative : programme, entrainement, "
+        "variete, progressivite, corriges, evaluation, remediation"
+    ),
+    "HISTORICAL_PROMPT_PRESERVED": True,
+}
+
 OWNER = "EXPLICIT_RELEASE_OWNER_REQUIREMENT"
 GUIDELINE = "EDITORIAL_GUIDELINE"
 GENERATOR = "GENERATOR_ASSUMPTION"
@@ -114,12 +141,11 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         "FIFTY_EXERCISES_POLICY_ORIGIN": sorted(
             {t["classification"] for t in traces if t["verified_in_tree"]}
         ),
-        "FIFTY_EXERCISES_RELEASE_REQUIREMENT": (
-            "SUPERSEDED_EXPLICIT_REQUIREMENT" if exigence_release
-            else "NOT_A_RELEASE_REQUIREMENT"
-        ),
+        "FIFTY_EXERCISES_RELEASE_REQUIREMENT": SUPERSESSION["NEW_STATUS"],
+        "HISTORICAL_REQUIREMENT_EXISTED": exigence_release,
         "TRACES_FOUND": sum(1 for t in traces if t["verified_in_tree"]),
         "RELEASE_GATES_ENFORCING_FIFTY": len(gates),
+        "FIXED_EXERCISE_COUNT_RELEASE_GATES": len(gates),
         "APPROVES_NOTHING": True,
     }
     return {
@@ -128,6 +154,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         "generated_by": GENERATED_BY,
         "classes": list(CLASSES),
         "summary": summary,
+        "supersession": SUPERSESSION,
         "traces": traces,
         "release_gates_enforcing_fifty": gates,
         "current_authority": (
@@ -163,7 +190,22 @@ def render_markdown(payload: dict[str, Any]) -> str:
             trace["why"].capitalize() + ".",
             "",
         ]
-    lignes += ["## Autorite courante", "", payload["current_authority"], ""]
+    lignes += ["## Supersession", ""]
+    lignes.append(
+        f"- origine historique : {payload['supersession']['HISTORICAL_REQUIREMENT_ORIGIN']}"
+    )
+    lignes.append(f"- statut : `{payload['supersession']['NEW_STATUS']}`")
+    lignes.append(
+        f"- decidee le {payload['supersession']['SUPERSESSION_DATE']} par "
+        f"{payload['supersession']['SUPERSEDED_BY_RELEASE_OWNER']}"
+    )
+    lignes.append("- motifs :")
+    for motif in payload["supersession"]["SUPERSESSION_REASON"]:
+        lignes.append(f"  - {motif}")
+    lignes.append(
+        f"- critere courant : {payload['supersession']['CURRENT_RELEASE_CRITERION']}"
+    )
+    lignes += ["", "## Autorite courante", "", payload["current_authority"], ""]
     return "\n".join(lignes)
 
 
