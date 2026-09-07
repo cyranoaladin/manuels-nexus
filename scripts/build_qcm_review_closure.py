@@ -158,6 +158,26 @@ def _evaluer_conceptuelle(question, revue, root: Path) -> dict[str, Any]:
     }
 
 
+def _corpus_totals(root: Path) -> dict[str, int]:
+    """Ce que le corpus courant contient, et par quelle route il est prouve.
+
+    La cloture ne juge que les questions routees vers une revue humaine. La
+    couverture, elle, se mesure sur TOUTES les questions : les reporter
+    d'identite et les recalculs mecaniques comptent, sinon on annoncerait une
+    couverture de 100 % sur un echantillon de 39 %.
+    """
+
+    evidence = json.loads((root / EVIDENCE.relative_to(ROOT)).read_text("utf-8"))
+    counts = evidence["counts"]
+    return {
+        "total": int(counts["question_count"]),
+        "carried_forward": int(counts["CARRIED_FORWARD_IDENTICAL"]),
+        "machine": int(counts["MACHINE_RECALCULATED"]),
+        "routed_to_review": int(counts["HUMAN_REVIEW_REQUIRED"]),
+        "unrouted": int(counts["UNKNOWN"]),
+    }
+
+
 def build(root: Path = ROOT) -> dict[str, Any]:
     resultats = []
     for question in _questions(root):
@@ -207,6 +227,31 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         "QCM_DERIVATION_FAILURES": etats[BROKEN],
         "QCM_REVIEW_CLOSED": etats[PROVEN] + etats[REVIEWED],
     }
+
+    # ABSENCE DE REVUE ET ABSENCE D'APPROBATION SONT DEUX DETTES DISTINCTES.
+    # Les confondre autorise deux mensonges symetriques : declarer close une
+    # dette scientifique parce que personne n'a encore approuve, ou declarer
+    # approuve un contenu parce que la revue a ete faite. On publie donc les
+    # deux, et aucun ne se deduit de l'autre.
+    totaux = _corpus_totals(root)
+    scientifique_en_attente = (
+        etats[OPEN] + etats[DISAGREEMENT] + etats[BROKEN] + totaux["unrouted"]
+    )
+    couvertes = totaux["total"] - scientifique_en_attente
+    summary.update({
+        "QCM_TOTAL_CURRENT": totaux["total"],
+        "QCM_PROOF_ROUTES": {
+            "CARRIED_FORWARD_IDENTICAL": totaux["carried_forward"],
+            "MACHINE_RECALCULATED": totaux["machine"],
+            "ROUTED_TO_SCIENTIFIC_REVIEW": totaux["routed_to_review"],
+        },
+        "QCM_PROOF_COVERAGE": f"{couvertes}/{totaux['total']}",
+        "QCM_SCIENTIFIC_REVIEW_PENDING": scientifique_en_attente,
+        # Aucun recu d'approbation humaine n'existe pour un QCM, et aucun
+        # agent n'en cree : la dette d'approbation reste entiere.
+        "QCM_HUMAN_APPROVAL_PENDING": totaux["total"],
+        "REVIEW_IS_NOT_APPROVAL": True,
+    })
     if sum(etats.values()) != total:
         raise ValueError("items perdus dans la clôture QCM")
 
@@ -252,6 +297,15 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- `QCM_REVIEW_OPEN` : `{s['QCM_REVIEW_OPEN']}`",
         f"- `QCM_KEY_DISAGREEMENTS` : `{s['QCM_KEY_DISAGREEMENTS']}`",
         f"- `QCM_DERIVATION_FAILURES` : `{s['QCM_DERIVATION_FAILURES']}`",
+        "",
+        f"- `QCM_TOTAL_CURRENT` : `{s['QCM_TOTAL_CURRENT']}`",
+        f"- `QCM_PROOF_COVERAGE` : `{s['QCM_PROOF_COVERAGE']}` "
+        f"({s['QCM_PROOF_ROUTES']})",
+        f"- `QCM_SCIENTIFIC_REVIEW_PENDING` : `{s['QCM_SCIENTIFIC_REVIEW_PENDING']}`",
+        f"- `QCM_HUMAN_APPROVAL_PENDING` : `{s['QCM_HUMAN_APPROVAL_PENDING']}`",
+        "",
+        "Une revue faite n'est pas une approbation : les deux dettes sont "
+        "comptees separement, et aucune ne se deduit de l'autre.",
         "",
     ]
     ennuis = [

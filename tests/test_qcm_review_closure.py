@@ -176,3 +176,58 @@ def test_the_closure_is_reproducible(payload) -> None:
     reconstruit = closure.build()
     assert reconstruit["closure_digest"] == payload["closure_digest"]
     assert reconstruit["summary"] == payload["summary"]
+
+
+# ---------------------------------------------------------------------------
+# Absence de revue et absence d'approbation ne sont pas la meme dette
+# ---------------------------------------------------------------------------
+
+
+def test_scientific_review_and_human_approval_are_counted_separately() -> None:
+    """Une revue faite ne vaut pas une approbation, et l'inverse non plus.
+
+    Confondre les deux permet deux mensonges symetriques : declarer close une
+    dette scientifique parce que personne n'a encore approuve, ou declarer
+    approuve un contenu parce que la revue a ete faite. Les deux compteurs
+    existent donc separement, et aucun ne se deduit de l'autre.
+    """
+
+    payload = json.loads(
+        (ROOT / "audit/QCM_REVIEW_CLOSURE.json").read_text(encoding="utf-8")
+    )
+    summary = payload["summary"]
+    assert "QCM_SCIENTIFIC_REVIEW_PENDING" in summary
+    assert "QCM_HUMAN_APPROVAL_PENDING" in summary
+    assert summary["QCM_SCIENTIFIC_REVIEW_PENDING"] != summary[
+        "QCM_HUMAN_APPROVAL_PENDING"
+    ] or summary["QCM_TOTAL_CURRENT"] == 0
+
+
+def test_the_proof_coverage_spans_the_whole_current_corpus() -> None:
+    """La couverture se mesure sur toutes les questions, pas sur l'echantillon."""
+
+    payload = json.loads(
+        (ROOT / "audit/QCM_REVIEW_CLOSURE.json").read_text(encoding="utf-8")
+    )
+    summary = payload["summary"]
+    evidence = json.loads(
+        (ROOT / "audit/QCM_INDEPENDENT_EVIDENCE_V2.json").read_text(encoding="utf-8")
+    )
+    total = evidence["counts"]["question_count"]
+    assert summary["QCM_TOTAL_CURRENT"] == total
+    couvertes, _, declare = summary["QCM_PROOF_COVERAGE"].partition("/")
+    assert int(declare) == total
+    assert int(couvertes) == total - summary["QCM_SCIENTIFIC_REVIEW_PENDING"]
+
+
+def test_no_qcm_question_is_declared_approved() -> None:
+    """Aucun agent n'approuve : la dette d'approbation reste entiere."""
+
+    payload = json.loads(
+        (ROOT / "audit/QCM_REVIEW_CLOSURE.json").read_text(encoding="utf-8")
+    )
+    assert payload["approves_nothing"] is True
+    assert (
+        payload["summary"]["QCM_HUMAN_APPROVAL_PENDING"]
+        == payload["summary"]["QCM_TOTAL_CURRENT"]
+    )
