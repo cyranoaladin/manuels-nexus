@@ -1,0 +1,48 @@
+% META: {"id": "TSPE-COMBI-EX-008", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "exercice", "capacites": ["TSPE-COMBINATOIRE-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["representer", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-COMBINATOIRE/exercices/TSPE-COMBI-EX-008.tex", "corrige_tex": "chapitres/TSPE-COMBINATOIRE/corriges/TSPE-COMBI-CO-008.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-889EB3571843", "CAPACITY_ID": "C1", "EXERCISE_ROLE": "DIRECT_APPLICATION", "DIFFICULTY": 1, "AUTHORING_REASON": "la capacite porte sur le CHOIX d'une representation parmi quatre, et le seul exercice rattache imposait l'arbre ; l'eleve n'avait donc jamais a construire un tableau ni un diagramme, ni a dire pourquoi l'un convient mieux que l'autre", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% from itertools import product
+% from sympy import Rational
+% lancers = list(product(range(1, 7), repeat=2))
+% assert len(lancers) == 36
+% somme_huit = [c for c in lancers if sum(c) == 8]
+% assert len(somme_huit) == 5
+% assert sorted(somme_huit) == [(2, 6), (3, 5), (4, 4), (5, 3), (6, 2)]
+% assert Rational(len(somme_huit), len(lancers)) == Rational(5, 36)
+% somme_sept = [c for c in lancers if sum(c) == 7]
+% assert len(somme_sept) == 6
+% effectif, anglais, espagnol, deux = 30, 18, 14, 7
+% union = anglais + espagnol - deux
+% assert union == 25
+% assert effectif - union == 5
+% assert union - deux == 18
+% assert (anglais - deux) + (espagnol - deux) == 18
+% assert (anglais - deux) + (espagnol - deux) + deux + (effectif - union) == effectif
+% END-VERIFY
+\begin{exercice}{TSPE-COMBI-EX-008}{1}{15}
+Les deux situations suivantes sont indépendantes.
+
+\medskip
+\textbf{A.} On lance deux dés cubiques équilibrés, l'un rouge et l'un bleu, et on
+s'intéresse à la somme des deux faces obtenues.
+\begin{enumerate}
+  \item Dresser le tableau à double entrée donnant la somme pour chacune des
+    issues.
+  \item Combien d'issues donnent une somme égale à $8$ ? Les énumérer.
+  \item En déduire la probabilité d'obtenir une somme de $8$. Quelle somme est la
+    plus probable, et pourquoi ?
+\end{enumerate}
+
+\medskip
+\textbf{B.} Dans une classe de $30$ élèves, $18$ suivent l'option anglais
+renforcé, $14$ l'option espagnol renforcé, et $7$ suivent les deux.
+\begin{enumerate}
+  \setcounter{enumi}{3}
+  \item Représenter la situation par un diagramme et déterminer le nombre
+    d'élèves qui suivent au moins une des deux options.
+  \item En déduire le nombre d'élèves qui n'en suivent aucune, puis le nombre
+    d'élèves qui en suivent exactement une.
+  \item Pour chacune des deux situations, dire quelle représentation était
+    adaptée, et expliquer pourquoi celle de l'autre situation aurait été
+    maladroite ici.
+\end{enumerate}
+\end{exercice}

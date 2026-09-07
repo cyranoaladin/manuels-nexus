@@ -1,0 +1,54 @@
+% META: {"id": "TSPE-GEOESPACE-EX-059", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "exercice", "capacites": ["TSPE-GEOESPACE-C12"], "capacites_codes": ["C12"], "methodes": ["M5"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-059.tex", "corrige_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-059.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-96F31A2BC138", "CAPACITY_ID": "C12", "EXERCISE_ROLE": "CONTEXT_VARIATION", "DIFFICULTY": 2, "AUTHORING_REASON": "la capacite dit determiner ET exploiter, et le seul exercice rattache s'arretait a l'ecriture puis a un test d'appartenance ; rien ne montrait que le parametre peut porter un sens physique, ni que deux trajectoires secantes ne donnent pas forcement une collision", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Eq, Matrix, Rational, sqrt, simplify, diff, N
+% t, s = symbols('t s', real=True)
+% A = Matrix([1 + 2 * t, 2 + t, 5 - 2 * t])
+% B = Matrix([11 - 3 * s, 2 * s, 7 - 3 * s])
+% P = Matrix([5, 4, 1])
+% assert A.subs(t, 2) == P
+% assert B.subs(s, 2) == P
+% solution = solve([Eq(A[i], B[i]) for i in range(3)], [t, s], dict=True)
+% assert solution == [{t: 2, s: 2}]
+% u = Matrix([2, 1, -2])
+% v = Matrix([-3, 2, -3])
+% assert u.cross(v) != Matrix([0, 0, 0])
+% Bretard = B.subs(s, t - 1)
+% assert Bretard.subs(t, 2) == Matrix([8, 2, 4])
+% assert Bretard.subs(t, 3) == P
+% assert A.subs(t, 3) != P
+% ecart = A - Bretard
+% assert ecart.subs(t, 2) == Matrix([-3, 2, -3])
+% assert simplify(ecart.subs(t, 2).norm() - sqrt(22)) == 0
+% carre = simplify((ecart.T * ecart)[0])
+% assert simplify(carre - (27 * t ** 2 - 148 * t + 210)) == 0
+% instant = solve(Eq(diff(carre, t), 0), t)
+% assert instant == [Rational(74, 27)]
+% assert simplify(carre.subs(t, Rational(74, 27)) - Rational(194, 27)) == 0
+% assert abs(N(sqrt(Rational(194, 27))) - 2.6805) < 0.0001
+% END-VERIFY
+\begin{exercice}{TSPE-GEOESPACE-EX-059}{2}{25}
+Dans un repère orthonormé de l'espace, l'unité valant $100$~m, deux drones se
+déplacent en ligne droite à vitesse constante. Le drone $\mathcal{A}$ part du
+point $A_0(1\,;\,2\,;\,5)$ avec le vecteur vitesse
+$\vec{u}\begin{pmatrix}2\\1\\-2\end{pmatrix}$ (par minute). Le drone
+$\mathcal{B}$ part du point $B_0(11\,;\,0\,;\,7)$ avec le vecteur vitesse
+$\vec{v}\begin{pmatrix}-3\\2\\-3\end{pmatrix}$.
+\begin{enumerate}
+  \item Donner une représentation paramétrique de la trajectoire de chaque drone,
+    en notant $t$ le paramètre pour $\mathcal{A}$ et $s$ celui pour
+    $\mathcal{B}$.
+  \item Vérifier que le point $P(5\,;\,4\,;\,1)$ appartient aux deux
+    trajectoires, et donner les valeurs des paramètres correspondants.
+  \item Les deux trajectoires sont-elles parallèles ? Sont-elles sécantes ?
+    Justifier en résolvant le système, et non seulement en constatant la
+    question précédente.
+  \item Le drone $\mathcal{B}$ décolle une minute après $\mathcal{A}$ : à
+    l'instant $t$ (compté depuis le décollage de $\mathcal{A}$), il est au point
+    de paramètre $s=t-1$. Y a-t-il collision ? Justifier.
+  \item Calculer la distance entre les deux drones à l'instant $t=2$~min. La
+    convertir en mètres.
+  \item Montrer que le carré de la distance entre les deux drones à l'instant
+    $t$ vaut $27t^2-148t+210$, puis déterminer l'instant où ils sont le plus
+    proches et cette distance minimale, arrondie au mètre.
+\end{enumerate}
+\end{exercice}

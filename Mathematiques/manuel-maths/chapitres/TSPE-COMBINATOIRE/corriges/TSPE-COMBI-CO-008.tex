@@ -1,0 +1,68 @@
+% META: {"id": "TSPE-COMBI-CO-008", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "corrige", "exercice_ref": "TSPE-COMBI-EX-008", "capacites_codes": ["C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from itertools import product
+% from collections import Counter
+% from sympy import Rational
+% lancers = list(product(range(1, 7), repeat=2))
+% sommes = Counter(sum(c) for c in lancers)
+% assert len(lancers) == 36
+% assert sommes[8] == 5 and sommes[7] == 6
+% assert max(sommes, key=lambda s: sommes[s]) == 7
+% assert Rational(sommes[8], 36) == Rational(5, 36)
+% assert Rational(sommes[7], 36) == Rational(1, 6)
+% assert abs(float(Rational(5, 36)) - 0.1389) < 0.0001
+% effectif, anglais, espagnol, deux = 30, 18, 14, 7
+% assert anglais + espagnol - deux == 25
+% assert effectif - 25 == 5
+% assert (anglais - deux) == 11 and (espagnol - deux) == 7
+% assert 11 + 7 == 18
+% assert 11 + 7 + deux + 5 == effectif
+% END-VERIFY
+\begin{corrige}{TSPE-COMBI-EX-008}
+\textbf{1.} Le tableau croise les six faces du dé rouge (lignes) et les six du dé
+bleu (colonnes), et porte la somme dans chaque case :
+
+\begin{center}
+\begin{tabular}{c|cccccc}
+ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ \\
+\hline
+$1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ \\
+$2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ \\
+$3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ \\
+$4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ \\
+$5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ \\
+$6$ & $7$ & $8$ & $9$ & $10$ & $11$ & $12$ \\
+\end{tabular}
+\end{center}
+
+\textbf{2.} La somme $8$ apparaît sur une diagonale du tableau, en cinq cases :
+$(2\,;\,6)$, $(3\,;\,5)$, $(4\,;\,4)$, $(5\,;\,3)$ et $(6\,;\,2)$.
+
+\textbf{3.} Le tableau compte $6\times 6=36$ issues équiprobables, donc
+$P(\text{somme}=8)=\dfrac{5}{36}\approx 0{,}139$. La somme la plus probable est
+$7$, avec six cases : c'est la diagonale la plus longue du tableau, la seule qui
+le traverse entièrement. On lit ainsi d'un coup d'\oe{}il que les sommes
+extrêmes ($2$ et $12$) n'ont qu'une case chacune.
+
+\textbf{4.} On dessine deux disques sécants dans un rectangle représentant la
+classe. L'intersection contient $7$ élèves ; la partie « anglais seul » en
+contient $18-7=11$, la partie « espagnol seul » $14-7=7$. Le nombre d'élèves
+suivant au moins une option vaut donc $11+7+7=25$, ce que confirme la formule
+$18+14-7=25$ : on retranche les $7$ élèves comptés deux fois.
+
+\textbf{5.} Il reste $30-25=5$ élèves sans option, placés dans le rectangle hors
+des deux disques. Ceux qui en suivent exactement une sont $11+7=18$, c'est-à-dire
+$25-7$. On vérifie la partition : $11+7+7+5=30$.
+
+\textbf{6.} La situation \textbf{A} croise deux caractères indépendants prenant
+chacun six valeurs : le tableau à double entrée les affiche toutes sans en
+oublier, et rend la lecture des diagonales immédiate. Un arbre aurait eu $36$
+feuilles, illisible, et n'aurait pas fait apparaître les sommes.
+
+La situation \textbf{B} porte au contraire sur des ensembles qui se
+\emph{chevauchent} : ce qui compte n'est pas un croisement de valeurs mais un
+partage en quatre zones. Le diagramme montre ce chevauchement, donc le
+double comptage à corriger. Un tableau à double entrée y serait possible mais
+masquerait la raison du $-7$ ; un arbre supposerait un ordre de choix qui n'existe
+pas ici.
+\end{corrige}

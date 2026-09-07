@@ -1,0 +1,89 @@
+% META: {"id": "TSPE-GEOESPACE-CO-059", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "corrige", "exercice_ref": "TSPE-GEOESPACE-EX-059", "capacites_codes": ["C12"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Eq, Matrix, Rational, sqrt, simplify, diff, N
+% t, s = symbols('t s', real=True)
+% A = Matrix([1 + 2 * t, 2 + t, 5 - 2 * t])
+% B = Matrix([11 - 3 * s, 2 * s, 7 - 3 * s])
+% assert A.subs(t, 2) == Matrix([5, 4, 1]) and B.subs(s, 2) == Matrix([5, 4, 1])
+% assert solve([Eq(A[i], B[i]) for i in range(3)], [t, s], dict=True) == [{t: 2, s: 2}]
+% assert Matrix([2, 1, -2]).cross(Matrix([-3, 2, -3])) == Matrix([1, 12, 7])
+% Bretard = B.subs(s, t - 1)
+% assert Bretard.subs(t, 3) == Matrix([5, 4, 1]) and A.subs(t, 3) == Matrix([7, 5, -1])
+% ecart = A - Bretard
+% assert simplify(ecart.subs(t, 2).norm() - sqrt(22)) == 0
+% assert abs(N(sqrt(22)) - 4.690416) < 1e-6
+% assert round(N(sqrt(22)) * 100) == 469
+% carre = simplify((ecart.T * ecart)[0])
+% assert simplify(carre - (27 * t ** 2 - 148 * t + 210)) == 0
+% assert solve(Eq(diff(carre, t), 0), t) == [Rational(74, 27)]
+% assert simplify(carre.subs(t, Rational(74, 27)) - Rational(194, 27)) == 0
+% assert abs(N(Rational(74, 27)) - 2.7407) < 1e-4
+% assert round(N(sqrt(Rational(194, 27))) * 100) == 268
+% END-VERIFY
+\begin{corrige}{TSPE-GEOESPACE-EX-059}
+\textbf{1.} Une représentation paramétrique s'écrit « point de départ plus
+paramètre fois vecteur directeur » :
+\[
+  \mathcal{A}:\begin{cases}x=1+2t\\ y=2+t\\ z=5-2t\end{cases}(t\in\mathbb{R}),
+  \qquad
+  \mathcal{B}:\begin{cases}x=11-3s\\ y=2s\\ z=7-3s\end{cases}(s\in\mathbb{R}).
+\]
+Ici le paramètre n'est pas un réel abstrait : c'est le temps écoulé, en minutes,
+depuis le décollage du drone concerné.
+
+\textbf{2.} Pour $t=2$ : $(1+4\,;\,2+2\,;\,5-4)=(5\,;\,4\,;\,1)$. Pour $s=2$ :
+$(11-6\,;\,4\,;\,7-6)=(5\,;\,4\,;\,1)$. Le point $P$ appartient donc aux deux
+trajectoires.
+
+\textbf{3.} Les vecteurs $\vec u$ et $\vec v$ ne sont pas colinéaires : de
+$\dfrac{2}{-3}\neq\dfrac{1}{2}$ on conclut déjà qu'aucun réel $k$ ne donne
+$\vec v=k\vec u$. Les droites ne sont pas parallèles. Pour la sécance, on résout
+\[
+  \begin{cases}1+2t=11-3s\\ 2+t=2s\\ 5-2t=7-3s.\end{cases}
+\]
+La deuxième donne $t=2s-2$. En reportant dans la première :
+$1+4s-4=11-3s$, soit $7s=14$ et $s=2$, puis $t=2$. La troisième équation doit
+alors être vérifiée, sans quoi les droites seraient non coplanaires : $5-4=1$ et
+$7-6=1$, elle l'est. Les deux trajectoires sont donc sécantes, en $P$. Répondre à
+partir de la seule question~2 aurait été insuffisant : un point commun exhibé ne
+dit pas qu'il est le seul, et surtout ne prouve pas la compatibilité du système.
+
+\textbf{4.} Non. À l'instant $t$, le drone $\mathcal{B}$ est au point de
+paramètre $s=t-1$. Il passe donc par $P$ lorsque $t-1=2$, c'est-à-dire à
+$t=3$~min ; or $\mathcal{A}$ y était à $t=2$~min et se trouve alors en
+$(7\,;\,5\,;\,-1)$. Les trajectoires se croisent, les drones non : ils passent au
+même endroit à une minute d'intervalle. C'est exactement la distinction que le
+paramètre permet de faire, et qu'une simple étude d'intersection de droites
+manquerait.
+
+\textbf{5.} À $t=2$, $\mathcal{A}$ est en $(5\,;\,4\,;\,1)$ et $\mathcal{B}$ au
+point de paramètre $s=1$, soit $(8\,;\,2\,;\,4)$. Le vecteur qui les joint a pour
+coordonnées $(-3\,;\,2\,;\,-3)$ et
+\[
+  d(2)=\sqrt{9+4+9}=\sqrt{22}\approx 4{,}69,
+\]
+soit environ $469$~m.
+
+\textbf{6.} À l'instant $t$, $\mathcal{B}$ est au point de paramètre $s=t-1$,
+soit $(14-3t\,;\,2t-2\,;\,10-3t)$. Le vecteur joignant les deux drones a donc
+pour coordonnées
+\[
+  \big((1+2t)-(14-3t)\,;\,(2+t)-(2t-2)\,;\,(5-2t)-(10-3t)\big)=(5t-13\,;\,4-t\,;\,t-5).
+\]
+On prendra garde à retrancher les deux \emph{expressions} coordonnée par
+coordonnée : écrire $2t-13$ pour la première, en oubliant le $-3t$ du second
+drone, est l'erreur qui guette ici. D'où
+\[
+  d(t)^2=(5t-13)^2+(4-t)^2+(t-5)^2
+  =25t^2-130t+169+t^2-8t+16+t^2-10t+25=27t^2-148t+210.
+\]
+C'est un trinôme de coefficient dominant $27>0$ : il atteint son minimum en
+$t=\dfrac{148}{2\times 27}=\dfrac{74}{27}\approx 2{,}74$~min. La distance
+minimale vaut alors
+\[
+  \sqrt{27\left(\tfrac{74}{27}\right)^2-148\times\tfrac{74}{27}+210}
+  =\sqrt{\dfrac{194}{27}}\approx 2{,}68,
+\]
+soit environ $268$~m. Les deux drones ne se rencontrent jamais à moins de
+$268$~m l'un de l'autre : le croisement des trajectoires n'était pas dangereux.
+\end{corrige}

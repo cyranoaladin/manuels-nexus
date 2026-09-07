@@ -80,7 +80,8 @@ _CONTEXTE = re.compile(
     re.I,
 )
 _MODELISER = re.compile(
-    r"\bmod[ée]lis|\btraduire\b|\bexprimer\b.{0,40}\ben fonction de\b|"
+    r"\bmod[ée]lis|\btraduire\b|\bexprimer\b.{0,40}\ben fonction d[eu]\b|"
+    r"\ben fonction d[eu]\b.{0,30}\b(?:temps|instant|nombre|quantit)|"
     r"\b[ée]crire\b.{0,30}\bsous la forme\b",
     re.I,
 )
@@ -90,8 +91,10 @@ _DIRECT = re.compile(
     r"\bsimplifier\b|\bd[ée]velopper\b|\bfactoriser\b|\bd[ée]river\b|"
     r"\bex[ée]cuter\b|\b[ée]valuer\b|\bcompl[ée]ter\b|\bdresser\b|"
     r"r[ée]soudre (?:l'|l’)?(?:[ée]quation|in[ée]quation|le syst)|"
-    r"[ée]crire (?:la|une|le) (?:fonction|programme|script|proc[ée]dure)|"
-    r"\br[ée]diger\b|\bconvertir\b|\bcodera?\b|\bd[ée]nombrer\b",
+    r"\b[ée]crire\b|\btraduire\b|\br[ée]diger\b|\bconvertir\b|\bcodera?\b|\bd[ée]nombrer\b|"
+    r"\bd[ée]composer\b|\bconstruire\b|\btracer\b|\bplacer\b|\brepr[ée]senter\b|"
+    r"\bv[ée]rifier que\b|\bencadrer\b|\bmajorer\b|\bminorer\b|\bprimitiver\b|"
+    r"\bint[ée]grer\b|\bsimuler\b|\bexprimer\b",
     re.I,
 )
 _ETAPES = re.compile(r"\\item", re.I)

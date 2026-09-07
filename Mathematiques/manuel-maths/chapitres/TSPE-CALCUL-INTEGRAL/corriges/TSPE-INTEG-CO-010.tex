@@ -1,0 +1,62 @@
+% META: {"id": "TSPE-INTEG-CO-010", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "corrige", "exercice_ref": "TSPE-INTEG-EX-010", "capacites_codes": ["C8"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Function, diff, integrate, simplify, log, exp, sin, cos, pi
+% x = symbols('x')
+% u, v = Function('u')(x), Function('v')(x)
+% assert simplify(diff(u * v, x) - (diff(u, x) * v + u * diff(v, x))) == 0
+% y = symbols('y', positive=True)
+% gauche = integrate(log(y), (y, 1, exp(1)))
+% droite = (y * log(y)).subs(y, exp(1)) - (y * log(y)).subs(y, 1) - integrate(1, (y, 1, exp(1)))
+% assert simplify(gauche - droite) == 0
+% assert simplify(gauche - 1) == 0
+% assert simplify((y * log(y)).subs(y, exp(1)) - exp(1)) == 0
+% assert simplify(integrate(1, (y, 1, exp(1))) - (exp(1) - 1)) == 0
+% verif = integrate(x * cos(x), (x, 0, pi / 2))
+% assert simplify(verif - (pi / 2 - 1)) == 0
+% assert simplify(diff(y * log(y) - y, y) - log(y)) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-INTEG-EX-010}
+\textbf{1.} Le produit de deux fonctions dérivables est dérivable et
+$(uv)'=u'v+uv'$. En posant $w=uv$, on a donc, pour tout $x\in[a\,;\,b]$,
+\[
+  w'(x)=u'(x)v(x)+u(x)v'(x).
+\]
+
+\textbf{2.} Les fonctions $u$ et $v$ sont dérivables donc continues ; $u'$ et
+$v'$ sont continues par hypothèse. Ainsi $w'=u'v+uv'$ est une somme de produits
+de fonctions continues sur $[a\,;\,b]$ : elle est continue. Comme $w$ est
+dérivable de dérivée $w'$, la fonction $w$ est bien une primitive de $w'$ sur
+$[a\,;\,b]$, et
+\[
+  \int_a^b w'(x)\,\mathrm{d}x=w(b)-w(a)=\Big[u(x)v(x)\Big]_a^b.
+\]
+
+\textbf{3.} Intégrons l'égalité de la question~1 entre $a$ et $b$. Les trois
+fonctions en jeu étant continues, chaque intégrale existe, et la linéarité donne
+\[
+  \Big[u(x)v(x)\Big]_a^b=\int_a^b w'(x)\,\mathrm{d}x
+  =\int_a^b u'(x)v(x)\,\mathrm{d}x+\int_a^b u(x)v'(x)\,\mathrm{d}x.
+\]
+En isolant la dernière intégrale :
+\[
+  \int_a^b u(x)v'(x)\,\mathrm{d}x
+  =\Big[u(x)v(x)\Big]_a^b-\int_a^b u'(x)v(x)\,\mathrm{d}x.
+\]
+
+\textbf{4.} Deux fois, et au même endroit logique : c'est la continuité de $u'$
+et de $v'$ qui rend $w'$ continue, donc qui garantit à la fois l'\emph{existence}
+des trois intégrales et le droit d'écrire $\int_a^b w'=w(b)-w(a)$. Sans elle, on
+manipulerait des symboles dont rien n'assure qu'ils désignent un nombre.
+
+\textbf{5.} Posons $u(x)=\ln x$ et $v'(x)=1$, d'où $u'(x)=\dfrac1x$ et
+$v(x)=x$. Ces fonctions sont dérivables à dérivées continues sur
+$[1\,;\,\mathrm{e}]$. Alors
+\[
+  \int_1^{\mathrm{e}}\ln x\,\mathrm{d}x
+  =\Big[x\ln x\Big]_1^{\mathrm{e}}-\int_1^{\mathrm{e}}\dfrac1x\times x\,\mathrm{d}x
+  =\left(\mathrm{e}-0\right)-\Big[x\Big]_1^{\mathrm{e}}
+  =\mathrm{e}-(\mathrm{e}-1)=1.
+\]
+On peut vérifier ce résultat autrement : $x\mapsto x\ln x-x$ a pour dérivée
+$\ln x$, et $(\mathrm{e}-\mathrm{e})-(0-1)=1$.
+\end{corrige}

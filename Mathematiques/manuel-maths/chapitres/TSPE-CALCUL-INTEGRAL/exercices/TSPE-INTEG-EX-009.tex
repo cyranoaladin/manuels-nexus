@@ -1,0 +1,41 @@
+% META: {"id": "TSPE-INTEG-EX-009", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "exercice", "capacites": ["TSPE-INTEG-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner"], "duree_min": 22, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-009.tex", "corrige_tex": "chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-009.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-8273BCB8F9A5", "CAPACITY_ID": "C2", "EXERCISE_ROLE": "CONTEXT_VARIATION", "DIFFICULTY": 2, "AUTHORING_REASON": "le calcul d'integrale n'etait demande que sur des expressions nues, ou le choix de la methode est dicte par la forme ; ici c'est la situation qui impose l'integration par parties et qui donne un sens a la valeur moyenne obtenue", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, integrate, diff, simplify, solve, Eq, N, Rational
+% t = symbols('t', nonnegative=True)
+% p = 20 * t * exp(-t / 4)
+% primitive = -80 * t * exp(-t / 4) - 320 * exp(-t / 4)
+% assert simplify(diff(primitive, t) - p) == 0
+% energie = integrate(p, (t, 0, 8))
+% assert simplify(energie - (320 - 960 * exp(-2))) == 0
+% assert abs(N(energie) - 190.0776) < 0.001
+% moyenne = energie / 8
+% assert simplify(moyenne - (40 - 120 * exp(-2))) == 0
+% assert abs(N(moyenne) - 23.7597) < 0.001
+% derivee = diff(p, t)
+% assert simplify(derivee - 20 * exp(-t / 4) * (1 - t / 4)) == 0
+% instants = solve(Eq(derivee, 0), t)
+% assert instants == [4]
+% assert simplify(p.subs(t, 4) - 80 * exp(-1)) == 0
+% assert abs(N(p.subs(t, 4)) - 29.4304) < 0.001
+% assert N(p.subs(t, 4)) > N(moyenne)
+% END-VERIFY
+\begin{exercice}{TSPE-INTEG-EX-009}{2}{22}
+Une presse industrielle démarre à froid. Sa puissance instantanée, en kilowatts,
+est modélisée sur $[0\,;\,8]$ (le temps $t$ étant en heures) par
+\[
+  p(t)=20\,t\,\mathrm{e}^{-t/4}.
+\]
+L'énergie consommée sur une période est l'intégrale de la puissance sur cette
+période, exprimée en kilowattheures.
+\begin{enumerate}
+  \item Expliquer pourquoi une primitive de $p$ ne s'obtient pas en reconnaissant
+    une forme usuelle, et indiquer la méthode à employer.
+  \item Vérifier que $P(t)=-80t\,\mathrm{e}^{-t/4}-320\,\mathrm{e}^{-t/4}$ est une
+    primitive de $p$ sur $[0\,;\,8]$.
+  \item Calculer, par une intégration par parties, l'énergie consommée pendant
+    les huit heures. Donner la valeur exacte, puis un arrondi au dixième de kWh.
+  \item En déduire la puissance moyenne de la presse sur ces huit heures.
+  \item Déterminer l'instant où la puissance instantanée est maximale, et sa
+    valeur. Comparer à la puissance moyenne et expliquer l'écart.
+\end{enumerate}
+\end{exercice}
