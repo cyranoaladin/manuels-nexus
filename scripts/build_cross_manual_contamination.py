@@ -563,10 +563,29 @@ def _reconcile(summary: dict[str, Any], contamines: list[dict[str, Any]]) -> dic
             g["member_count"] for g in contamines
         ),
     }
+    # Apres la decontamination, la population mesuree est vide par
+    # construction : l'ecart avec le rapport d'alerte n'est plus un desaccord
+    # de mesure mais le RESULTAT du retrait. Le registre des objets retires
+    # en porte la trace, et c'est lui qui explique alors la difference.
+    registre = ROOT / "audit/RETIRED_SYNTHETIC_OBJECT_IDS.json"
+    retires = 0
+    if registre.is_file():
+        retires = json.loads(registre.read_text(encoding="utf-8"))["summary"][
+            "RETIRED_OBJECTS"
+        ]
+    decontamine = (
+        retires > 0 and summary["CROSS_CHAPTER_CONTAMINATION_GROUPS"] == 0
+    )
+
     lignes = []
     for cle, annonce in sorted(REPORTED.items()):
         mesure = mesures.get(cle)
         explication = DEFINITIONAL_DELTAS.get(cle)
+        if decontamine and mesure is not None and mesure < annonce:
+            explication = (
+                f"population retiree par la decontamination : {retires} objets "
+                "sont enregistres dans audit/RETIRED_SYNTHETIC_OBJECT_IDS.json"
+            )
         lignes.append({
             "metric": cle,
             "reported_in_alert": annonce,
@@ -578,6 +597,8 @@ def _reconcile(summary: dict[str, Any], contamines: list[dict[str, Any]]) -> dic
         })
     return {
         "rule": "aucun nombre n'est repris du rapport : chacun est recalcule",
+        "post_decontamination": decontamine,
+        "retired_objects": retires,
         "metrics": lignes,
         "ALL_REPORTED_NUMBERS_REPRODUCED": all(
             l["agrees"] for l in lignes
