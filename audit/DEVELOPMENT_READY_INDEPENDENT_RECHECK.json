@@ -1,0 +1,1379 @@
+{
+  "artifact_type": "development_ready_independent_recheck",
+  "schema_version": 1,
+  "generated_by": "scripts/build_development_ready_independent_recheck.py",
+  "authority_note": "Vérification indépendante de `DEVELOPMENT_READY`. Ne vaut ni approbation humaine, ni reçu de build, ni `RELEASE_READY`.",
+  "summary": {
+    "REQUIRED_RELEASE_DELIVERABLES": 24,
+    "DEVELOPMENT_READY_INDEPENDENT_RECHECK": 24,
+    "RECHECK_SATISFIED": true,
+    "OBJECTS_COLLECTED_BY_ENGINE_TOTAL": 7041,
+    "ORACLE_ASSERTIONS_RE_EXECUTED": 14624,
+    "ORACLE_FAILURES": 0,
+    "MISSING_ORACLE": 0,
+    "INVENTORY_DIVERGENCE_DELIVERABLES": 0,
+    "NAMING_NORMALISATION_DELIVERABLES": 4,
+    "APPROVES_NOTHING": true
+  },
+  "per_manual": {
+    "1NSI": {
+      "programme": {
+        "verdict": true,
+        "chapters_examined": 10,
+        "chapters_incomplete": [],
+        "unmapped_official_atoms": 0,
+        "wrong_year_atoms": 0,
+        "real_pedagogical_gaps": 0
+      },
+      "science": {
+        "verdict": true,
+        "objects_with_oracle": 287,
+        "assertions_executed": 1007,
+        "assertion_failures": [],
+        "missing_oracle": []
+      }
+    },
+    "1SPE": {
+      "programme": {
+        "verdict": true,
+        "chapters_examined": 10,
+        "chapters_incomplete": [],
+        "unmapped_official_atoms": 0,
+        "wrong_year_atoms": 0,
+        "real_pedagogical_gaps": 0
+      },
+      "science": {
+        "verdict": true,
+        "objects_with_oracle": 1193,
+        "assertions_executed": 5043,
+        "assertion_failures": [],
+        "missing_oracle": []
+      }
+    },
+    "TCOMPL": {
+      "programme": {
+        "verdict": true,
+        "chapters_examined": 9,
+        "chapters_incomplete": [],
+        "unmapped_official_atoms": 0,
+        "wrong_year_atoms": 0,
+        "real_pedagogical_gaps": 0
+      },
+      "science": {
+        "verdict": true,
+        "objects_with_oracle": 779,
+        "assertions_executed": 3192,
+        "assertion_failures": [],
+        "missing_oracle": []
+      }
+    },
+    "TEXPERTES": {
+      "programme": {
+        "verdict": true,
+        "chapters_examined": 5,
+        "chapters_incomplete": [],
+        "unmapped_official_atoms": 0,
+        "wrong_year_atoms": 0,
+        "real_pedagogical_gaps": 0
+      },
+      "science": {
+        "verdict": true,
+        "objects_with_oracle": 495,
+        "assertions_executed": 2130,
+        "assertion_failures": [],
+        "missing_oracle": []
+      }
+    },
+    "TNSI": {
+      "programme": {
+        "verdict": true,
+        "chapters_examined": 7,
+        "chapters_incomplete": [],
+        "unmapped_official_atoms": 0,
+        "wrong_year_atoms": 0,
+        "real_pedagogical_gaps": 0
+      },
+      "science": {
+        "verdict": true,
+        "objects_with_oracle": 133,
+        "assertions_executed": 685,
+        "assertion_failures": [],
+        "missing_oracle": []
+      }
+    },
+    "TSPE_2026_2027": {
+      "programme": {
+        "verdict": true,
+        "chapters_examined": 11,
+        "chapters_incomplete": [],
+        "unmapped_official_atoms": 0,
+        "wrong_year_atoms": 0,
+        "real_pedagogical_gaps": 0
+      },
+      "science": {
+        "verdict": true,
+        "objects_with_oracle": 733,
+        "assertions_executed": 2567,
+        "assertion_failures": [],
+        "missing_oracle": []
+      }
+    }
+  },
+  "deliverables": [
+    {
+      "deliverable_id": "1NSI::evaluations",
+      "manual": "1NSI",
+      "variant": "evaluations",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 40,
+        "chapters_expected": 10,
+        "chapters_covered": 10,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_1NSI_evaluations.pdf",
+        "declared_output": "MANUEL_1NSI_evaluations.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_evaluations.pdf",
+        "bytes": 294735,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 44,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "1NSI::livret_methodes",
+      "manual": "1NSI",
+      "variant": "methodes",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 34,
+        "chapters_expected": 10,
+        "chapters_covered": 10,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_1NSI_methodes.pdf",
+        "declared_output": "MANUEL_1NSI_methodes.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_methodes.pdf",
+        "bytes": 353068,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 47,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "1NSI::manuel_eleve",
+      "manual": "1NSI",
+      "variant": "eleve",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 211,
+        "chapters_expected": 10,
+        "chapters_covered": 10,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_1NSI_eleve.pdf",
+        "declared_output": "MANUEL_1NSI_eleve.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf",
+        "bytes": 841182,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 119,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "1NSI::manuel_professeur",
+      "manual": "1NSI",
+      "variant": "professeur",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 395,
+        "chapters_expected": 10,
+        "chapters_covered": 10,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_1NSI_professeur.pdf",
+        "declared_output": "MANUEL_1NSI_professeur.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.pdf",
+        "bytes": 1356497,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 209,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "1NSI::remediations",
+      "manual": "1NSI",
+      "variant": "remediation",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 17,
+        "chapters_expected": 10,
+        "chapters_covered": 10,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_1NSI_remediation.pdf",
+        "declared_output": "MANUEL_1NSI_remediation.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_remediation.pdf",
+        "bytes": 173600,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 26,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "1NSI::version_amenagee",
+      "manual": "1NSI",
+      "variant": "amenagee",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 10,
+        "chapters_expected": 10,
+        "chapters_covered": 10,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_1NSI_amenagee.pdf",
+        "declared_output": "MANUEL_1NSI_amenagee.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_amenagee.pdf",
+        "bytes": 190895,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 25,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "1SPE::livret_methodes",
+      "manual": "1SPE",
+      "variant": "methodes",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 59,
+        "chapters_expected": 10,
+        "chapters_covered": 10,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [
+          "Mathematiques/manuel-maths/transversal/avant_propos.tex",
+          "Mathematiques/manuel-maths/transversal/formulaire.tex",
+          "Mathematiques/manuel-maths/transversal/index_capacites.tex",
+          "Mathematiques/manuel-maths/transversal/logique_raisonnement.tex",
+          "Mathematiques/manuel-maths/transversal/memo_python.tex",
+          "Mathematiques/manuel-maths/transversal/mode_emploi.tex",
+          "Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex"
+        ],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_1SPE_methodes.pdf",
+        "declared_output": "MANUEL_1SPE_methodes.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_methodes.pdf",
+        "bytes": 719965,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 89,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "1SPE::livret_remediation",
+      "manual": "1SPE",
+      "variant": "remediation",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 100,
+        "chapters_expected": 10,
+        "chapters_covered": 10,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [
+          "Mathematiques/manuel-maths/transversal/avant_propos.tex",
+          "Mathematiques/manuel-maths/transversal/formulaire.tex",
+          "Mathematiques/manuel-maths/transversal/index_capacites.tex",
+          "Mathematiques/manuel-maths/transversal/logique_raisonnement.tex",
+          "Mathematiques/manuel-maths/transversal/memo_python.tex",
+          "Mathematiques/manuel-maths/transversal/mode_emploi.tex",
+          "Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex"
+        ],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_1SPE_remediation.pdf",
+        "declared_output": "MANUEL_1SPE_remediation.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_remediation.pdf",
+        "bytes": 739888,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 95,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "1SPE::manuel_eleve",
+      "manual": "1SPE",
+      "variant": "eleve",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 937,
+        "chapters_expected": 10,
+        "chapters_covered": 10,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [
+          "Mathematiques/manuel-maths/transversal/avant_propos.tex",
+          "Mathematiques/manuel-maths/transversal/formulaire.tex",
+          "Mathematiques/manuel-maths/transversal/index_capacites.tex",
+          "Mathematiques/manuel-maths/transversal/logique_raisonnement.tex",
+          "Mathematiques/manuel-maths/transversal/memo_python.tex",
+          "Mathematiques/manuel-maths/transversal/mode_emploi.tex",
+          "Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex"
+        ],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_1SPE_eleve.pdf",
+        "declared_output": "MANUEL_1SPE_eleve.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf",
+        "bytes": 2816703,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 371,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "1SPE::manuel_professeur",
+      "manual": "1SPE",
+      "variant": "professeur",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 1441,
+        "chapters_expected": 10,
+        "chapters_covered": 10,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [
+          "Mathematiques/manuel-maths/transversal/avant_propos.tex",
+          "Mathematiques/manuel-maths/transversal/formulaire.tex",
+          "Mathematiques/manuel-maths/transversal/index_capacites.tex",
+          "Mathematiques/manuel-maths/transversal/logique_raisonnement.tex",
+          "Mathematiques/manuel-maths/transversal/memo_python.tex",
+          "Mathematiques/manuel-maths/transversal/mode_emploi.tex",
+          "Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex"
+        ],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_1SPE_professeur.pdf",
+        "declared_output": "MANUEL_1SPE_professeur.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf",
+        "bytes": 5449750,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 645,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "TCOMPL::manuel_eleve",
+      "manual": "TCOMPL",
+      "variant": "eleve",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 468,
+        "chapters_expected": 9,
+        "chapters_covered": 9,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [
+          "Mathematiques/manuel-maths/transversal/avant_propos.tex",
+          "Mathematiques/manuel-maths/transversal/formulaire.tex",
+          "Mathematiques/manuel-maths/transversal/index_capacites.tex",
+          "Mathematiques/manuel-maths/transversal/logique_raisonnement.tex",
+          "Mathematiques/manuel-maths/transversal/memo_python.tex",
+          "Mathematiques/manuel-maths/transversal/mode_emploi.tex",
+          "Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex"
+        ],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_TCOMPL_eleve.pdf",
+        "declared_output": "MANUEL_TCOMPL_eleve.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf",
+        "bytes": 1321481,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 145,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "TCOMPL::manuel_professeur",
+      "manual": "TCOMPL",
+      "variant": "professeur",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 792,
+        "chapters_expected": 9,
+        "chapters_covered": 9,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [
+          "Mathematiques/manuel-maths/transversal/avant_propos.tex",
+          "Mathematiques/manuel-maths/transversal/formulaire.tex",
+          "Mathematiques/manuel-maths/transversal/index_capacites.tex",
+          "Mathematiques/manuel-maths/transversal/logique_raisonnement.tex",
+          "Mathematiques/manuel-maths/transversal/memo_python.tex",
+          "Mathematiques/manuel-maths/transversal/mode_emploi.tex",
+          "Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex"
+        ],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_TCOMPL_professeur.pdf",
+        "declared_output": "MANUEL_TCOMPL_professeur.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.pdf",
+        "bytes": 2361797,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 229,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "TEXPERTES::manuel_eleve",
+      "manual": "TEXPERTES",
+      "variant": "eleve",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 296,
+        "chapters_expected": 5,
+        "chapters_covered": 5,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [
+          "Mathematiques/manuel-maths/transversal/avant_propos.tex",
+          "Mathematiques/manuel-maths/transversal/formulaire.tex",
+          "Mathematiques/manuel-maths/transversal/index_capacites.tex",
+          "Mathematiques/manuel-maths/transversal/logique_raisonnement.tex",
+          "Mathematiques/manuel-maths/transversal/memo_python.tex",
+          "Mathematiques/manuel-maths/transversal/mode_emploi.tex",
+          "Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex"
+        ],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_TEXPERTES_eleve.pdf",
+        "declared_output": "MANUEL_TEXPERTES_eleve.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_eleve.pdf",
+        "bytes": 910162,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 92,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "TEXPERTES::manuel_professeur",
+      "manual": "TEXPERTES",
+      "variant": "professeur",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 500,
+        "chapters_expected": 5,
+        "chapters_covered": 5,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [
+          "Mathematiques/manuel-maths/transversal/avant_propos.tex",
+          "Mathematiques/manuel-maths/transversal/formulaire.tex",
+          "Mathematiques/manuel-maths/transversal/index_capacites.tex",
+          "Mathematiques/manuel-maths/transversal/logique_raisonnement.tex",
+          "Mathematiques/manuel-maths/transversal/memo_python.tex",
+          "Mathematiques/manuel-maths/transversal/mode_emploi.tex",
+          "Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex"
+        ],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_TEXPERTES_professeur.pdf",
+        "declared_output": "MANUEL_TEXPERTES_professeur.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_professeur.pdf",
+        "bytes": 1574609,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 144,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "TNSI::banque_ecrite",
+      "manual": "TNSI",
+      "variant": "banque_ecrite",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 18,
+        "chapters_expected": 6,
+        "chapters_covered": 6,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_TNSI_banque_ecrite.pdf",
+        "declared_output": "MANUEL_TNSI_banque_ecrite.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "NSI/build/MANUEL_TNSI/MANUEL_TNSI_banque_ecrite.pdf",
+        "bytes": 360179,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 48,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "TNSI::banque_pratique",
+      "manual": "TNSI",
+      "variant": "banque_pratique",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 8,
+        "chapters_expected": 5,
+        "chapters_covered": 5,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_TNSI_banque_pratique.pdf",
+        "declared_output": "MANUEL_TNSI_banque_pratique.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "NSI/build/MANUEL_TNSI/MANUEL_TNSI_banque_pratique.pdf",
+        "bytes": 195378,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 20,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "TNSI::manuel_eleve",
+      "manual": "TNSI",
+      "variant": "eleve",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 71,
+        "chapters_expected": 7,
+        "chapters_covered": 7,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_TNSI_eleve.pdf",
+        "declared_output": "MANUEL_TNSI_eleve.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "NSI/build/MANUEL_TNSI/MANUEL_TNSI_eleve.pdf",
+        "bytes": 490980,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 70,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "TNSI::manuel_professeur",
+      "manual": "TNSI",
+      "variant": "professeur",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 156,
+        "chapters_expected": 7,
+        "chapters_covered": 7,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_TNSI_professeur.pdf",
+        "declared_output": "MANUEL_TNSI_professeur.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "NSI/build/MANUEL_TNSI/MANUEL_TNSI_professeur.pdf",
+        "bytes": 968094,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 158,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "TNSI::remediations",
+      "manual": "TNSI",
+      "variant": "remediation",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 5,
+        "chapters_expected": 5,
+        "chapters_covered": 5,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_TNSI_remediation.pdf",
+        "declared_output": "MANUEL_TNSI_remediation.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "NSI/build/MANUEL_TNSI/MANUEL_TNSI_remediation.pdf",
+        "bytes": 114679,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 14,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "TNSI::version_amenagee",
+      "manual": "TNSI",
+      "variant": "amenagee",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 7,
+        "chapters_expected": 7,
+        "chapters_covered": 7,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_TNSI_amenagee.pdf",
+        "declared_output": "MANUEL_TNSI_amenagee.pdf",
+        "naming_normalisation_applied": false
+      },
+      "development_build": {
+        "path": "NSI/build/MANUEL_TNSI/MANUEL_TNSI_amenagee.pdf",
+        "bytes": 163985,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 19,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "TSPE_2026_2027::livret_methodes",
+      "manual": "TSPE_2026_2027",
+      "variant": "methodes",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 41,
+        "chapters_expected": 11,
+        "chapters_covered": 11,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [
+          "Mathematiques/manuel-maths/transversal/avant_propos.tex",
+          "Mathematiques/manuel-maths/transversal/formulaire.tex",
+          "Mathematiques/manuel-maths/transversal/index_capacites.tex",
+          "Mathematiques/manuel-maths/transversal/logique_raisonnement.tex",
+          "Mathematiques/manuel-maths/transversal/memo_python.tex",
+          "Mathematiques/manuel-maths/transversal/mode_emploi.tex",
+          "Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex"
+        ],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_TSPE_2026-2027_methodes.pdf",
+        "declared_output": "MANUEL_TSPE_2026_2027_methodes.pdf",
+        "naming_normalisation_applied": true
+      },
+      "development_build": {
+        "path": "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_methodes.pdf",
+        "bytes": 456879,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 55,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "TSPE_2026_2027::livret_remediation",
+      "manual": "TSPE_2026_2027",
+      "variant": "remediation",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 56,
+        "chapters_expected": 11,
+        "chapters_covered": 11,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [
+          "Mathematiques/manuel-maths/transversal/avant_propos.tex",
+          "Mathematiques/manuel-maths/transversal/formulaire.tex",
+          "Mathematiques/manuel-maths/transversal/index_capacites.tex",
+          "Mathematiques/manuel-maths/transversal/logique_raisonnement.tex",
+          "Mathematiques/manuel-maths/transversal/memo_python.tex",
+          "Mathematiques/manuel-maths/transversal/mode_emploi.tex",
+          "Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex"
+        ],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_TSPE_2026-2027_remediation.pdf",
+        "declared_output": "MANUEL_TSPE_2026_2027_remediation.pdf",
+        "naming_normalisation_applied": true
+      },
+      "development_build": {
+        "path": "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_remediation.pdf",
+        "bytes": 432781,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 55,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "TSPE_2026_2027::manuel_eleve",
+      "manual": "TSPE_2026_2027",
+      "variant": "eleve",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 540,
+        "chapters_expected": 11,
+        "chapters_covered": 11,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [
+          "Mathematiques/manuel-maths/transversal/avant_propos.tex",
+          "Mathematiques/manuel-maths/transversal/formulaire.tex",
+          "Mathematiques/manuel-maths/transversal/index_capacites.tex",
+          "Mathematiques/manuel-maths/transversal/logique_raisonnement.tex",
+          "Mathematiques/manuel-maths/transversal/memo_python.tex",
+          "Mathematiques/manuel-maths/transversal/mode_emploi.tex",
+          "Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex"
+        ],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_TSPE_2026-2027_eleve.pdf",
+        "declared_output": "MANUEL_TSPE_2026_2027_eleve.pdf",
+        "naming_normalisation_applied": true
+      },
+      "development_build": {
+        "path": "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_eleve.pdf",
+        "bytes": 1678871,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 207,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    },
+    {
+      "deliverable_id": "TSPE_2026_2027::manuel_professeur",
+      "manual": "TSPE_2026_2027",
+      "variant": "professeur",
+      "axes": {
+        "content": true,
+        "assembly": true,
+        "build_target": true,
+        "development_build": true,
+        "programme": true,
+        "science": true
+      },
+      "content": {
+        "verdict": true,
+        "objects_collected_by_engine": 839,
+        "chapters_expected": 11,
+        "chapters_covered": 11,
+        "chapters_uncovered": [],
+        "declared_outside_chapters": [
+          "Mathematiques/manuel-maths/transversal/avant_propos.tex",
+          "Mathematiques/manuel-maths/transversal/formulaire.tex",
+          "Mathematiques/manuel-maths/transversal/index_capacites.tex",
+          "Mathematiques/manuel-maths/transversal/logique_raisonnement.tex",
+          "Mathematiques/manuel-maths/transversal/memo_python.tex",
+          "Mathematiques/manuel-maths/transversal/mode_emploi.tex",
+          "Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex"
+        ],
+        "inventory_divergence": {
+          "declared_not_collected": [],
+          "declared_not_collected_count": 0,
+          "collected_not_declared": [],
+          "collected_not_declared_count": 0
+        }
+      },
+      "assembly": {
+        "verdict": true,
+        "variant_known_to_engine": true,
+        "assembly_declared_in_inventory": true
+      },
+      "build_target": {
+        "verdict": true,
+        "engine_output": "MANUEL_TSPE_2026-2027_professeur.pdf",
+        "declared_output": "MANUEL_TSPE_2026_2027_professeur.pdf",
+        "naming_normalisation_applied": true
+      },
+      "development_build": {
+        "path": "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_professeur.pdf",
+        "bytes": 2793559,
+        "header_ok": true,
+        "trailer_ok": true,
+        "pages": 311,
+        "first_page_has_text": true,
+        "verdict": true
+      },
+      "development_ready_independent": true
+    }
+  ],
+  "agreement_with_primary": {
+    "primary_artifact_present": true,
+    "PRIMARY_DEVELOPMENT_READY": 24,
+    "INDEPENDENT_DEVELOPMENT_READY": 24,
+    "DISAGREEMENTS": 0,
+    "disagreements": []
+  }
+}
