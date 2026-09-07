@@ -1,4 +1,4 @@
-% META: {"id": "TSPE-PROBA-EV-B", "chapitre": "TSPE-PROBABILITES", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C3", "C8", "C10"], "competences": ["calculer", "raisonner", "modeliser"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% META: {"id": "TSPE-PROBA-EV-B", "chapitre": "TSPE-PROBABILITES", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C3", "C6", "C7", "C8", "C10"], "competences": ["calculer", "raisonner", "modeliser"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
 % from sympy import Rational
 % p = Rational(1,10)
@@ -31,20 +31,21 @@ Une chaine de production a un taux de defaut de $10\%$. On preleve $15$ pieces (
 \end{exercice}
 
 \begin{exercice}{TSPE-PROBA-EV-B-EX2}{2}{20}
-\textbf{Exercice 2} (7 points) — \textit{Capacité C8}
+\textbf{Exercice 2} (8 points) — \textit{Capacités C6, C7, C8}
 
 \medskip
 
 $4$ machines indépendantes ont chacune une probabilité $0{,}3$ de tomber en panne dans le mois. Soit $Y_1,\ldots,Y_4$ les variables de Bernoulli associees.
 \begin{enumerate}
   \item (2 pts) Calculer $E(Y_1)$ et $V(Y_1)$.
-  \item (2 pts) Calculer $E(Y_1+\cdots+Y_4)$ (justifier la propriété utilisee).
-  \item (3 pts) Calculer $V(Y_1+\cdots+Y_4)$ (justifier la propriété utilisee, en particulier l'hypothèse nécessaire).
+  \item (2 pts) On note $X$ le nombre total de machines tombees en panne dans le mois. Justifier que $X=Y_1+\cdots+Y_4$, en precisant ce que vaut chaque $Y_i$ et pourquoi la somme compte bien les pannes.
+  \item (2 pts) En deduire $E(X)$, en justifiant la propriété utilisee et en indiquant si elle exige l'independance.
+  \item (2 pts) Calculer $V(Y_1+\cdots+Y_4)$ (justifier la propriété utilisee, en particulier l'hypothèse nécessaire).
 \end{enumerate}
 \end{exercice}
 
 \begin{exercice}{TSPE-PROBA-EV-B-EX3}{2}{15}
-\textbf{Exercice 3} (7 points) — \textit{Capacité C10}
+\textbf{Exercice 3} (6 points) — \textit{Capacité C10}
 
 \medskip
 

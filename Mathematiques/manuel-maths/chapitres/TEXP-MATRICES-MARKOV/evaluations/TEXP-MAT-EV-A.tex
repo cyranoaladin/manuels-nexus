@@ -1,4 +1,4 @@
-% META: {"id": "TEXP-MAT-EV-A", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C4", "C5", "C6", "C7"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TEXP-MAT-EV-A", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3", "C4", "C5", "C6", "C7"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Matrix, Rational, eye, symbols, solve
 % A = Matrix([[3,1],[2,1]])
@@ -44,7 +44,7 @@ On donne $A=\begin{pmatrix}3&1\\2&1\end{pmatrix}$ et $B=\begin{pmatrix}1&2\\0&1\
 \end{exercice}
 
 \begin{exercice}{TEXP-MAT-EV-A-EX2}{2}{40}
-\textbf{Exercice 2} (12 points) --- \textit{Capacités C4, C5, C6, C7}
+\textbf{Exercice 2} (9 points) --- \textit{Capacités C4, C5, C6, C7}
 
 \medskip
 
@@ -52,9 +52,22 @@ Une machine est chaque jour soit en fonctionnement (F), soit en panne (P). Si el
 
 \begin{enumerate}
   \item (2 pts) Donner la matrice de transition $P$ (en numérotant $1=$F, $2=$P) et la distribution initiale $\pi_0$.
-  \item (3 pts) Calculer $\pi_2=\pi_0P^2$, et donner la probabilité que la machine fonctionne au jour $2$.
-  \item (3 pts) Justifier, en citant le principe de la démonstration du cours, que $\pi_n=\pi_0P^n$ pour tout $n$.
-  \item (4 pts) Déterminer la distribution invariante de cette chaîne, et interpréter le résultat.
+  \item (2 pts) Calculer $\pi_2=\pi_0P^2$, et donner la probabilité que la machine fonctionne au jour $2$.
+  \item (2 pts) Justifier, en citant le principe de la démonstration du cours, que $\pi_n=\pi_0P^n$ pour tout $n$.
+  \item (3 pts) Déterminer la distribution invariante de cette chaîne, et interpréter le résultat.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TEXP-MAT-EV-A-EX3}{2}{20}
+\textbf{Exercice 3} (3 points) --- \textit{Capacités C2, C3}
+
+\medskip
+
+Un atelier suit deux stocks, en tonnes : $x_n$ de matière première et $y_n$ de produit fini au début du mois $n$. Chaque mois, $80\%$ de la matière première restante est conservée, $20\%$ est transformée en produit fini ; $70\%$ du produit fini est conservé, le reste est expédié. L'atelier reçoit en outre $5$ tonnes de matière première par mois. Au début du mois $0$ : $x_0=10$ et $y_0=0$.
+
+\begin{enumerate}
+  \item (1 pt) Modéliser la situation par une écriture matricielle $U_{n+1}=AU_n+C$, en précisant $U_n$, $A$ et $C$ et en justifiant la place de chaque coefficient.
+  \item (2 pts) Déterminer l'état stable $U$ vérifiant $U=AU+C$, en résolvant le système linéaire correspondant, et interpréter le résultat.
 \end{enumerate}
 \end{exercice}
 

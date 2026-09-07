@@ -1,4 +1,4 @@
-% META: {"id": "TEXP-CTP-EV-A-corrige", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige_evaluation", "evaluation_ref": "TEXP-CTP-EV-A", "capacites_codes": ["C2", "C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TEXP-CTP-EV-A-corrige", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige_evaluation", "evaluation_ref": "TEXP-CTP-EV-A", "capacites_codes": ["C1", "C2", "C3", "C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import symbols, cos, simplify, Rational, solve, factor, I
 % theta = symbols('theta', real=True)
@@ -9,6 +9,21 @@
 % assert P.subs(z, 1) == 0
 % assert factor(P) == (z-1)*(z**2-2*z+2)
 % assert set(solve(P, z)) == {1, 1-I, 1+I}
+%
+% from sympy import sqrt, pi, exp, Abs, arg, sin, expand, expand_trig
+% w = 1 + I*sqrt(3)
+% assert Abs(w) == 2
+% assert arg(w) == pi/3
+% # La forme exponentielle redonne exactement la forme algebrique. SymPy
+% # laisse `exp(I*pi/3)` sous forme de racine cubique de -1 : on repasse
+% # explicitement par cos et sin, ce qui est justement le pont demande.
+% assert simplify(expand((2*exp(I*pi/3)).rewrite(cos)) - w) == 0
+% assert simplify(2*(cos(pi/3) + I*sin(pi/3)) - w) == 0
+% # Formule d'addition : les deux expressions du produit scalaire coincident.
+% a, b = symbols('a b', real=True)
+% par_coordonnees = cos(a)*cos(b) + sin(a)*sin(b)
+% par_angle = cos(a - b)
+% assert simplify(expand_trig(par_angle) - par_coordonnees) == 0
 % END-VERIFY
 \begin{corrige}{TEXP-CTP-EV-A-EX1}
 $\cos\theta = \dfrac{\mathrm{e}^{i\theta}+\mathrm{e}^{-i\theta}}{2}$, donc $\cos^3\theta = \dfrac{(\mathrm{e}^{i\theta}+\mathrm{e}^{-i\theta})^3}{8}$. En développant $(A+B)^3=A^3+3A^2B+3AB^2+B^3$ avec $A=\mathrm{e}^{i\theta}$, $B=\mathrm{e}^{-i\theta}$ (et $AB=1$) :
@@ -24,4 +39,18 @@ D'où $\cos^3\theta = \dfrac{2\cos(3\theta)+6\cos\theta}{8} = \dfrac{1}{4}\cos(3
 \textbf{2.} $Q(z)=z^2-2z+2$, et on vérifie $(z-1)(z^2-2z+2) = z^3-2z^2+2z-z^2+2z-2 = z^3-3z^2+4z-2=P(z)$.
 
 \textbf{3.} $P(z)=0 \iff z=1$ ou $z^2-2z+2=0$. Pour cette dernière : $\Delta=4-8=-4<0$, solutions $z=\dfrac{2\pm i2}{2}=1\pm i$. Donc $S=\{1,\ 1-i,\ 1+i\}$.
+\end{corrige}
+
+\begin{corrige}{TEXP-CTP-EV-A-EX3}
+\textbf{1.} $|z|=\sqrt{1^2+(\sqrt3)^2}=\sqrt4=2$. On factorise :
+$z=2\left(\dfrac12+i\dfrac{\sqrt3}{2}\right)=2\left(\cos\dfrac{\pi}{3}+i\sin\dfrac{\pi}{3}\right)=2\mathrm{e}^{i\pi/3}$.
+Réciproquement, $2\mathrm{e}^{i\pi/3}=2\cos\dfrac{\pi}{3}+2i\sin\dfrac{\pi}{3}=1+i\sqrt3$ : on retrouve bien la forme algébrique.
+
+\textbf{2.} Par les coordonnées, $\vec u\cdot\vec v=\cos a\cos b+\sin a\sin b$.
+Par la définition géométrique, $\vec u\cdot\vec v=\|\vec u\|\,\|\vec v\|\cos(\vec u\,;\vec v)$ ;
+les deux vecteurs étant unitaires et l'angle orienté valant $a-b$, cela donne $\cos(a-b)$.
+Le produit scalaire ne dépendant pas de la façon de le calculer, les deux résultats sont égaux :
+\[
+  \cos(a-b)=\cos a\cos b+\sin a\sin b .
+\]
 \end{corrige}

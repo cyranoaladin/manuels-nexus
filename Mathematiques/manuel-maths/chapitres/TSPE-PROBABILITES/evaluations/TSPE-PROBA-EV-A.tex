@@ -1,4 +1,4 @@
-% META: {"id": "TSPE-PROBA-EV-A", "chapitre": "TSPE-PROBABILITES", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C5", "C9"], "competences": ["calculer", "raisonner", "modeliser"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% META: {"id": "TSPE-PROBA-EV-A", "chapitre": "TSPE-PROBABILITES", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C4", "C5", "C9"], "competences": ["calculer", "raisonner", "modeliser"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
 % from sympy import Rational, binomial
 % p1 = Rational(5,8)*Rational(3,7) + Rational(3,8)*Rational(5,7)
@@ -29,7 +29,7 @@ Une urne contient $5$ boules rouges et $3$ boules bleues. On tire successivement
 \end{exercice}
 
 \begin{exercice}{TSPE-PROBA-EV-A-EX2}{2}{20}
-\textbf{Exercice 2} (7 points) — \textit{Capacité C5}
+\textbf{Exercice 2} (5 points) — \textit{Capacité C5}
 
 \medskip
 
@@ -37,11 +37,24 @@ Soit $X \sim \mathcal{B}(4,\,0{,}25)$. En redigeant la démonstration du cours (
 \end{exercice}
 
 \begin{exercice}{TSPE-PROBA-EV-A-EX3}{2}{15}
-\textbf{Exercice 3} (7 points) — \textit{Capacité C9}
+\textbf{Exercice 3} (4 points) — \textit{Capacité C9}
 
 \medskip
 
 Soit $X \sim \mathcal{B}(25,\,0{,}6)$. En utilisant les formules du cours (sans redemontrer), calculer $E(X)$ et $V(X)$.
+\end{exercice}
+
+\begin{exercice}{TSPE-PROBA-EV-A-EX4}{2}{20}
+\textbf{Exercice 4} (5 points) — \textit{Capacités C2, C4}
+
+\medskip
+
+Un questionnaire comporte $20$ questions indépendantes à quatre réponses possibles, dont une seule est correcte. Un candidat répond au hasard à chacune. On note $X$ le nombre de réponses correctes.
+\begin{enumerate}
+  \item (2 pts) Justifier que la situation est un schéma de Bernoulli et préciser la loi de $X$ : on identifiera l'épreuve, le succès, sa probabilité, et l'hypothèse qui autorise la répétition.
+  \item (2 pts) Calculer $P(X=5)$ et $P(X\leq5)$ à la calculatrice ou en Python, à $10^{-4}$ près.
+  \item (1 pt) Déterminer le plus petit entier $k$ tel que $P(X\leq k)\geq0{,}95$, et interpréter ce seuil pour la note de ce candidat.
+\end{enumerate}
 \end{exercice}
 
 \end{evaluation}

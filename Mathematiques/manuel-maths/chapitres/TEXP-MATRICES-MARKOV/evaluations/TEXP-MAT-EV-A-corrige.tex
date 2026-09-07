@@ -1,4 +1,4 @@
-% META: {"id": "TEXP-MAT-EV-A-corrige", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige_evaluation", "evaluation_ref": "TEXP-MAT-EV-A", "capacites_codes": ["C1", "C4", "C5", "C6", "C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TEXP-MAT-EV-A-corrige", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige_evaluation", "evaluation_ref": "TEXP-MAT-EV-A", "capacites_codes": ["C1", "C2", "C3", "C4", "C5", "C6", "C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Matrix, Rational, eye, symbols, solve
 % A = Matrix([[3,1],[2,1]])
@@ -18,6 +18,22 @@
 % sol = solve([eq[0], eq[1], a + b - 1], [a, b])
 % assert sol[a] == Rational(4,5)
 % assert sol[b] == Rational(1,5)
+%
+% # Suite matricielle U_{n+1} = A U_n + C : la matrice se lit colonne par
+% # colonne sur les flux mensuels, et l'etat stable resout U = AU + C.
+% Aat = Matrix([[Rational(8,10), 0], [Rational(2,10), Rational(7,10)]])
+% C = Matrix([[5], [0]])
+% U0 = Matrix([[10], [0]])
+% U1 = Aat*U0 + C
+% assert U1 == Matrix([[13], [2]])
+% x, y = symbols('x y')
+% U = Matrix([[x], [y]])
+% stable = solve(list(Aat*U + C - U), [x, y])
+% assert stable[x] == 25
+% assert stable[y] == Rational(50, 3)
+% # L'etat stable est bien un point fixe de la recurrence.
+% Ustable = Matrix([[stable[x]], [stable[y]]])
+% assert Aat*Ustable + C == Ustable
 % END-VERIFY
 \begin{corrige}{TEXP-MAT-EV-A-EX1}
 \textbf{1.} $A+B=\begin{pmatrix}4&3\\2&2\end{pmatrix}$ et $AB=\begin{pmatrix}3&7\\2&5\end{pmatrix}$.
@@ -38,4 +54,24 @@ eq0$ : $A$ est inversible.
 \textbf{3.} Par définition de la chaîne, $\pi_{k+1}=\pi_kP$ pour tout $k$. Une récurrence immédiate donne alors $\pi_n=\pi_0P^n$ : vrai au rang $0$ ($\pi_0P^0=\pi_0$), et si vrai au rang $n$, $\pi_{n+1}=\pi_nP=(\pi_0P^n)P=\pi_0P^{n+1}$, donc vrai au rang $n+1$.
 
 \textbf{4.} On résout $\pi P=\pi$ avec $\pi=\begin{pmatrix}a&b\end{pmatrix}$, $a+b=1$ : $0{,}9a+0{,}4b=a\iff0{,}1a=0{,}4b\iff a=4b$ ; avec $a+b=1$ : $5b=1$, donc $b=\dfrac{1}{5}$, $a=\dfrac{4}{5}$. La distribution invariante est $\begin{pmatrix}\tfrac{4}{5}&\tfrac{1}{5}\end{pmatrix}$ : sur le long terme, la machine fonctionne environ $80\,\%$ du temps.
+\end{corrige}
+
+\begin{corrige}{TEXP-MAT-EV-A-EX3}
+\textbf{1.} On pose $U_n=\begin{pmatrix}x_n\\y_n\end{pmatrix}$. La matière première conservée donne $0{,}8x_n$ ; la part transformée, $0{,}2x_n$, alimente le produit fini, dont $0{,}7y_n$ est conservé. Les $5$ tonnes reçues n'entrent que dans la première ligne. D'où
+\[
+  U_{n+1}=AU_n+C,\qquad
+  A=\begin{pmatrix}0{,}8&0\\0{,}2&0{,}7\end{pmatrix},\qquad
+  C=\begin{pmatrix}5\\0\end{pmatrix}.
+\]
+Le coefficient d'indice $(i,j)$ dit quelle part du stock $j$ se retrouve dans le stock $i$ : le $0$ en première ligne, deuxième colonne, traduit qu'aucun produit fini ne redevient matière première.
+
+\textbf{2.} L'état stable $U=\begin{pmatrix}x\\y\end{pmatrix}$ vérifie $U=AU+C$, soit
+\[
+  \begin{cases} x = 0{,}8x + 5 \\ y = 0{,}2x + 0{,}7y \end{cases}
+  \iff
+  \begin{cases} 0{,}2x = 5 \\ 0{,}3y = 0{,}2x \end{cases}
+  \iff
+  \begin{cases} x = 25 \\ y = \dfrac{50}{3}\approx16{,}7 \end{cases}
+\]
+À long terme, les stocks se stabilisent autour de $25$ tonnes de matière première et $\dfrac{50}{3}$ tonnes de produit fini : les entrées mensuelles compensent exactement les sorties.
 \end{corrige}

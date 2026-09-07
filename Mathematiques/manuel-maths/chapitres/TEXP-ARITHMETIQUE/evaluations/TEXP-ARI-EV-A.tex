@@ -1,4 +1,4 @@
-% META: {"id": "TEXP-ARI-EV-A", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C4", "C5"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TEXP-ARI-EV-A", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3", "C4", "C5"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % import math
 % assert math.gcd(198, 72) == 18
@@ -17,7 +17,7 @@
 \begin{evaluation}{TEXP-ARI-EV-A}{55}
 
 \begin{exercice}{TEXP-ARI-EV-A-EX1}{2}{20}
-\textbf{Exercice 1} (8 points) --- \textit{Capacité C1}
+\textbf{Exercice 1} (6 points) --- \textit{Capacité C1}
 
 \medskip
 
@@ -25,14 +25,26 @@ Calculer $\mathrm{PGCD}(198,72)$ à l'aide de l'algorithme d'Euclide, en détail
 \end{exercice}
 
 \begin{exercice}{TEXP-ARI-EV-A-EX2}{2}{40}
-\textbf{Exercice 2} (12 points) --- \textit{Capacités C4, C5}
+\textbf{Exercice 2} (9 points) --- \textit{Capacités C4, C5}
 
 \medskip
 
 \begin{enumerate}
-  \item (4 pts) Démontrer le théorème de Bézout (on pourra s'appuyer sur l'ensemble $E=\{au+bv>0,\ u,v\in\mathbb{Z}\}$).
-  \item (4 pts) En remontant l'algorithme d'Euclide de l'exercice 1, exprimer $18$ sous la forme $198x+72y$.
-  \item (4 pts) L'équation $198x+72y=54$ admet-elle des solutions entières ? Si oui, en donner une.
+  \item (3 pts) Démontrer le théorème de Bézout (on pourra s'appuyer sur l'ensemble $E=\{au+bv>0,\ u,v\in\mathbb{Z}\}$).
+  \item (3 pts) En remontant l'algorithme d'Euclide de l'exercice 1, exprimer $18$ sous la forme $198x+72y$.
+  \item (3 pts) L'équation $198x+72y=54$ admet-elle des solutions entières ? Si oui, en donner une.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TEXP-ARI-EV-A-EX3}{2}{20}
+\textbf{Exercice 3} (5 points) --- \textit{Capacités C2, C3}
+
+\medskip
+
+\begin{enumerate}
+  \item (1 pt) Justifier que $7$ admet un inverse modulo $26$, puis le déterminer.
+  \item (2 pts) En déduire la résolution de la congruence $7x\equiv3\ [26]$.
+  \item (2 pts) Un message est chiffré par $y\equiv7x+3\ [26]$, où $x$ est le rang de la lettre claire ($A=0$, $\dots$, $Z=25$). Écrire la fonction de déchiffrement, et déchiffrer la lettre de rang $10$.
 \end{enumerate}
 \end{exercice}
 

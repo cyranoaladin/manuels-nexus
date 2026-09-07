@@ -1,10 +1,25 @@
-% META: {"id": "TSPE-PROBA-EV-A-corrige", "chapitre": "TSPE-PROBABILITES", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-PROBA-EV-A", "version": "A", "capacites_codes": ["C1", "C5", "C9"], "sources_inspiration": [], "status": "approved"}
+% META: {"id": "TSPE-PROBA-EV-A-corrige", "chapitre": "TSPE-PROBABILITES", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-PROBA-EV-A", "version": "A", "capacites_codes": ["C1", "C2", "C4", "C5", "C9"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
 % from sympy import Rational, binomial
 % p1 = Rational(5,8)*Rational(3,7) + Rational(3,8)*Rational(5,7)
 % assert p1 == Rational(15, 28)
 % p2 = binomial(4,1)*Rational(1,4)**1*Rational(3,4)**3
 % assert p2 == Rational(27, 64)
+%
+% from sympy import N
+% # Schema de Bernoulli : 20 epreuves independantes, succes de probabilite 1/4.
+% n, p = 20, Rational(1, 4)
+% def P_egal(k):
+%     return binomial(n, k) * p**k * (1 - p)**(n - k)
+% assert sum(P_egal(k) for k in range(n + 1)) == 1
+% assert abs(N(P_egal(5)) - 0.2023) < 0.0001
+% cumul = sum(P_egal(k) for k in range(6))
+% assert abs(N(cumul) - 0.6172) < 0.0001
+% # Plus petit seuil a 95 %.
+% seuil = next(k for k in range(n + 1)
+%              if sum(P_egal(j) for j in range(k + 1)) >= Rational(95, 100))
+% assert seuil == 8
+% assert sum(P_egal(j) for j in range(seuil)) < Rational(95, 100)
 % END-VERIFY
 \begin{corrige}{TSPE-PROBA-EV-A-EX1}
 \textbf{Q1.} Premier tirage : $P(R)=\dfrac{5}{8}$, $P(B)=\dfrac{3}{8}$. Deuxième tirage (sans remise) : si $R$ au premier tirage, $P_R(B)=\dfrac{3}{7}$ ; si $B$, $P_B(R)=\dfrac{5}{7}$.
@@ -22,4 +37,13 @@ Les chemins avec exactement $1$ succès parmi $4$ epreuves sont au nombre de $\d
 
 \begin{corrige}{TSPE-PROBA-EV-A-EX3}
 $E(X) = np = 25\times0{,}6 = \boxed{15}$. $V(X) = np(1-p) = 25\times0{,}6\times0{,}4 = \boxed{6}$.
+\end{corrige}
+
+\begin{corrige}{TSPE-PROBA-EV-A-EX4}
+\textbf{Q1.} L'épreuve est « répondre à une question » ; le succès est « la réponse est correcte », de probabilité $p=\dfrac14$ puisque le candidat choisit au hasard parmi quatre réponses dont une seule convient. Les questions sont \textbf{indépendantes} et de même probabilité de succès : c'est un schéma de Bernoulli à $n=20$ épreuves, donc $X\sim\mathcal{B}\left(20\,;\dfrac14\right)$.
+
+\textbf{Q2.} $P(X=5)=\dbinom{20}{5}\left(\dfrac14\right)^5\left(\dfrac34\right)^{15}\approx0{,}2023$, et
+$P(X\leq5)=\displaystyle\sum_{k=0}^{5}P(X=k)\approx0{,}6172$.
+
+\textbf{Q3.} En cumulant, $P(X\leq7)\approx0{,}898<0{,}95$ tandis que $P(X\leq8)\approx0{,}959\geq0{,}95$ : le plus petit entier est $k=8$. Autrement dit, un candidat répondant entièrement au hasard obtient au plus $8$ bonnes réponses sur $20$ dans $95\%$ des cas : dépasser ce seuil est peu compatible avec le seul hasard.
 \end{corrige}

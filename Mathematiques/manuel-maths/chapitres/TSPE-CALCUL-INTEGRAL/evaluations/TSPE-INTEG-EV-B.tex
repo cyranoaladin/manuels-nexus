@@ -1,4 +1,4 @@
-% META: {"id": "TSPE-INTEG-EV-B", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C2", "C5", "C8"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% META: {"id": "TSPE-INTEG-EV-B", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C2", "C5", "C7", "C8"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
 % from sympy import symbols, integrate, cos, ln, exp, simplify, pi, log
 % x = symbols('x')
@@ -24,7 +24,7 @@ Calculer $\displaystyle\int_0^{\pi/2} \cos(x)\,\mathrm{d}x$.
 \end{exercice}
 
 \begin{exercice}{TSPE-INTEG-EV-B-EX2}{2}{20}
-\textbf{Exercice 2} (8 points) — \textit{Capacité C8}
+\textbf{Exercice 2} (6 points) — \textit{Capacité C8}
 
 \medskip
 
@@ -32,7 +32,7 @@ Calculer $\displaystyle\int_1^2 \ln(x)\,\mathrm{d}x$ par integration par parties
 \end{exercice}
 
 \begin{exercice}{TSPE-INTEG-EV-B-EX3}{2}{20}
-\textbf{Exercice 3} (7 points) — \textit{Capacité C5}
+\textbf{Exercice 3} (5 points) — \textit{Capacité C5}
 
 \medskip
 
@@ -40,7 +40,21 @@ Pour $n \in \mathbb{N}$, on pose $K_n = \displaystyle\int_0^1 x^n \mathrm{e}^x\,
 \begin{enumerate}
   \item (2 pts) Calculer $K_0$.
   \item (2 pts) Justifier que $K_n \geq 0$ pour tout $n$.
-  \item (3 pts) A l'aide d'une integration par parties (avec $u(x)=x^n$, $v'(x)=\mathrm{e}^x$), etablir une relation entre $K_n$ et $K_{n-1}$ pour $n\geq 1$.
+  \item (1 pt) A l'aide d'une integration par parties (avec $u(x)=x^n$, $v'(x)=\mathrm{e}^x$), etablir une relation entre $K_n$ et $K_{n-1}$ pour $n\geq 1$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TSPE-INTEG-EV-B-EX4}{2}{20}
+\textbf{Exercice 4} (4 points) — \textit{Capacité C7}
+
+\medskip
+
+Soit $f$ continue, positive et croissante sur $[a\,;b]$, et $F$ la fonction définie sur $[a\,;b]$ par $F(x)=\displaystyle\int_a^x f(t)\,\mathrm{d}t$.
+\begin{enumerate}
+  \item (2 pts) Soit $x\in[a\,;b[$ et $h>0$ tel que $x+h\leq b$. Encadrer l'aire $F(x+h)-F(x)$ par deux rectangles, et en déduire
+  $f(x)\leq\dfrac{F(x+h)-F(x)}{h}\leq f(x+h)$.
+  \item (1 pt) Conclure que $F$ est dérivable en $x$ et que $F'(x)=f(x)$ ; on précisera l'hypothèse utilisée dans le passage à la limite.
+  \item (1 pt) En déduire que, si $G$ est une primitive quelconque de $f$ sur $[a\,;b]$, alors $\displaystyle\int_a^b f = G(b)-G(a)$.
 \end{enumerate}
 \end{exercice}
 

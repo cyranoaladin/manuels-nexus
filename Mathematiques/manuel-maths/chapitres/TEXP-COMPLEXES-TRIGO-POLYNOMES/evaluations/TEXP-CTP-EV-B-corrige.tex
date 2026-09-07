@@ -1,4 +1,4 @@
-% META: {"id": "TEXP-CTP-EV-B-corrige", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige_evaluation", "evaluation_ref": "TEXP-CTP-EV-B", "capacites_codes": ["C6", "C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TEXP-CTP-EV-B-corrige", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige_evaluation", "evaluation_ref": "TEXP-CTP-EV-B", "capacites_codes": ["C5", "C6", "C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import I, simplify, re, exp, pi
 % a, b, c = 0, 3, 3*I
@@ -7,6 +7,25 @@
 % n = 5
 % racines = set(simplify(exp(2*I*k*pi/n)) for k in range(n))
 % assert len(racines) == 5
+%
+% from sympy import symbols, expand, factor, div, Poly, solve
+% z, u = symbols('z u')
+% P = z**3 - 2*z**2 - 5*z + 6
+% assert P.subs(z, 1) == 0
+% # Division exacte par z - 1 : le reste est nul, le quotient est z^2 - z - 6.
+% quotient, reste = div(P, z - 1, z)
+% assert reste == 0
+% assert expand(quotient - (z**2 - z - 6)) == 0
+% assert factor(P) == (z - 1)*(z - 3)*(z + 2)
+% assert sorted(solve(P, z)) == [-2, 1, 3]
+% # z^k - a^k est bien divisible par z - a, quel que soit k : c'est le lemme
+% # sur lequel repose la factorisation par une racine.
+% for k in range(1, 6):
+%     _, r = div(z**k - u**k, z - u, z)
+%     assert expand(r) == 0
+% # Un polynome de degre 3 a au plus 3 racines.
+% assert Poly(P, z).degree() == 3
+% assert len(solve(P, z)) <= 3
 % END-VERIFY
 \begin{corrige}{TEXP-CTP-EV-B-EX1}
 \textbf{1.} $\dfrac{c-a}{b-a} = \dfrac{3i-0}{3-0} = \dfrac{3i}{3} = i$.
@@ -20,4 +39,21 @@
 \textbf{2.} Pour $k$ et $k'$ dans $\{0,\dots,4\}$ distincts, les arguments $\dfrac{2k\pi}{5}$ et $\dfrac{2k'\pi}{5}$ diffèrent d'un multiple non nul de $\dfrac{2\pi}{5}$, strictement inférieur à $2\pi$ en valeur absolue : ils ne peuvent donc pas être égaux modulo $2\pi$, ce qui garantit $5$ nombres complexes deux à deux distincts.
 
 \textbf{3.} Ces $5$ points, tous de module $1$ et régulièrement espacés d'un angle de $\dfrac{2\pi}{5}$, forment les sommets d'un \textbf{pentagone régulier} inscrit dans le cercle trigonométrique.
+\end{corrige}
+
+\begin{corrige}{TEXP-CTP-EV-B-EX3}
+\textbf{1.} $P(1)=1-2-5+6=0$ : $1$ est bien racine. Cas général : si $P(a)=0$, alors
+$P(z)=P(z)-P(a)=\sum_k c_k\left(z^k-a^k\right)$. Or, pour tout $k\geq1$,
+\[
+  z^k-a^k=(z-a)\left(z^{k-1}+az^{k-2}+\dots+a^{k-1}\right),
+\]
+donc chaque terme de la somme est divisible par $z-a$, et $P(z)$ aussi.
+
+\textbf{2.} La division de $P$ par $z-1$ donne $P(z)=(z-1)(z^2-z-6)$. Le trinôme
+$z^2-z-6$ a pour discriminant $1+24=25$, donc pour racines $\dfrac{1\pm5}{2}$, soit $3$ et $-2$ :
+\[
+  P(z)=(z-1)(z-3)(z+2).
+\]
+
+\textbf{3.} Chaque racine $a$ fait apparaître un facteur $z-a$ ; à chaque facteur extrait, le degré du quotient baisse de $1$. Après $n$ extractions, le quotient est de degré $0$, donc constant non nul, et n'admet plus de racine. Un polynôme non nul de degré $n$ a donc au plus $n$ racines.
 \end{corrige}

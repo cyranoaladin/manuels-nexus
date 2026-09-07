@@ -1,4 +1,4 @@
-% META: {"id": "TSPE-INTEG-EV-A-corrige", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-INTEG-EV-A", "version": "A", "capacites_codes": ["C1", "C4", "C8"], "sources_inspiration": [], "status": "approved"}
+% META: {"id": "TSPE-INTEG-EV-A-corrige", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-INTEG-EV-A", "version": "A", "capacites_codes": ["C1", "C3", "C4", "C6", "C8"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
 % from sympy import symbols, integrate, exp, simplify, sqrt, Rational
 % x = symbols('x')
@@ -6,6 +6,23 @@
 % assert simplify(I2 - (1 - 3*exp(-2))) == 0
 % A3 = integrate((3-x**2)-(x**2-1), (x, -sqrt(2), sqrt(2)))
 % assert simplify(A3 - Rational(16,3)*sqrt(2)) == 0
+%
+% from sympy import pi, N, atan
+% # Comparaison de fonctions integrees sur [0;1] : 1/2 <= 1/(1+x^2) <= 1.
+% for point in (0, Rational(1,4), Rational(1,2), Rational(3,4), 1):
+%     valeur = 1/(1 + point**2)
+%     assert Rational(1,2) <= valeur <= 1
+% arc = integrate(1/(1 + x**2), (x, 0, 1))
+% assert simplify(arc - pi/4) == 0
+% assert Rational(1,2) <= N(arc) <= 1
+% # Interpretation concrete : energie en kWh, puissance moyenne en kW.
+% t = symbols('t')
+% p_kW = 3 - Rational(1,2)*t
+% energie = integrate(p_kW, (t, 0, 4))
+% assert energie == 8
+% moyenne = energie / 4
+% assert moyenne == 2
+% assert moyenne == p_kW.subs(t, 2)      # atteinte au milieu, p etant affine
 % END-VERIFY
 \begin{corrige}{TSPE-INTEG-EV-A-EX1}
 $f$ est décroissante sur $[1,2]$ (fonction inverse). Minimum : $f(2)=\dfrac{1}{2}$. Maximum : $f(1)=1$.
@@ -26,4 +43,15 @@ $u(x)=x$, $u'(x)=1$ ; $v'(x)=\mathrm{e}^{-x}$, $v(x)=-\mathrm{e}^{-x}$.
 \textbf{Q2.} $f(x)-g(x) = 4-2x^2$. En $x=0$ : $4>0$, et $4-2x^2 \geq 0 \iff x^2 \leq 2$, donc $f \geq g$ sur $[-\sqrt{2},\sqrt{2}]$.
 
 \textbf{Q3.} $\mathcal{A} = \displaystyle\int_{-\sqrt{2}}^{\sqrt{2}} (4-2x^2)\,\mathrm{d}x = \left[4x-\dfrac{2x^3}{3}\right]_{-\sqrt{2}}^{\sqrt{2}} = \dfrac{20\sqrt{2}}{3}$ unités d'aire.
+\end{corrige}
+
+\begin{corrige}{TSPE-INTEG-EV-A-EX4}
+\textbf{1.} Pour $x\in[0\,;1]$, $0\leq x^2\leq1$ donc $1\leq1+x^2\leq2$, et en passant aux inverses (fonction décroissante sur les réels strictement positifs) :
+$\dfrac12\leq\dfrac{1}{1+x^2}\leq1$. En intégrant ces inégalités sur $[0\,;1]$, de longueur $1$ :
+\[
+  \frac12 \leq \int_0^1\frac{\mathrm{d}x}{1+x^2} \leq 1 .
+\]
+La valeur exacte est $\dfrac{\pi}{4}\approx0{,}785$, qui appartient bien à $\left[\dfrac12\,;1\right]$.
+
+\textbf{2.} $\displaystyle\int_0^4 p(t)\,\mathrm{d}t=\left[3t-\frac{t^2}{4}\right]_0^4=12-4=8$ : c'est l'\textbf{énergie} consommée en quatre heures, en kW$\cdot$h. La quantité $\dfrac14\times8=2$ est la \textbf{puissance moyenne} sur ces quatre heures, en kW — celle d'un appareil qui consommerait autant en fonctionnant de façon constante.
 \end{corrige}

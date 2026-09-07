@@ -1,4 +1,4 @@
-% META: {"id": "TSPE-PROBA-EV-B-corrige", "chapitre": "TSPE-PROBABILITES", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-PROBA-EV-B", "version": "B", "capacites_codes": ["C3", "C8", "C10"], "sources_inspiration": [], "status": "approved"}
+% META: {"id": "TSPE-PROBA-EV-B-corrige", "chapitre": "TSPE-PROBABILITES", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-PROBA-EV-B", "version": "B", "capacites_codes": ["C3", "C6", "C7", "C8", "C10"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
 % from sympy import Rational
 % p = Rational(1,10)
@@ -6,6 +6,25 @@
 % assert round(float(P0), 4) == 0.2059
 % n_min = 1 / (4 * Rational(1,10)**2 * Rational(5,100))
 % assert n_min == 500
+%
+% from itertools import product
+% # Decomposition X = Y1 + ... + Y4 : sur les 16 issues possibles, la somme
+% # des indicatrices compte exactement les machines en panne.
+% q = Rational(3, 10)
+% issues = list(product([0, 1], repeat=4))
+% loi = {}
+% for issue in issues:
+%     proba = 1
+%     for yi in issue:
+%         proba *= q if yi else (1 - q)
+%     loi[issue] = proba
+% assert sum(loi.values()) == 1
+% assert all(sum(issue) == len([y for y in issue if y == 1]) for issue in issues)
+% esperance = sum(sum(issue) * proba for issue, proba in loi.items())
+% assert esperance == 4 * q == Rational(6, 5)
+% carre = sum(sum(issue)**2 * proba for issue, proba in loi.items())
+% variance = carre - esperance**2
+% assert variance == 4 * q * (1 - q) == Rational(21, 25)
 % END-VERIFY
 \begin{corrige}{TSPE-PROBA-EV-B-EX1}
 \textbf{Q1.} $X \sim \mathcal{B}(15,\,0{,}1)$.
@@ -16,9 +35,11 @@
 \begin{corrige}{TSPE-PROBA-EV-B-EX2}
 \textbf{Q1.} $E(Y_1)=p=0{,}3$. $V(Y_1)=p(1-p)=0{,}3\times0{,}7=0{,}21$.
 
-\textbf{Q2.} Par linéarité de l'espérance (valable sans hypothèse d'indépendance) : $E(Y_1+\cdots+Y_4) = 4\times0{,}3 = \boxed{1{,}2}$.
+\textbf{Q2.} Chaque $Y_i$ vaut $1$ si la machine $i$ tombe en panne et $0$ sinon. La somme $Y_1+\cdots+Y_4$ ajoute donc un $1$ par machine en panne et un $0$ par machine intacte : elle compte exactement le nombre de machines tombees en panne, c'est-a-dire $X$. D'ou $X=Y_1+\cdots+Y_4$.
 
-\textbf{Q3.} Les $4$ machines sont indépendantes (donne dans l'énoncé), donc l'additivite de la variance s'applique : $V(Y_1+\cdots+Y_4) = 4\times0{,}21 = \boxed{0{,}84}$.
+\textbf{Q3.} Par linéarité de l'espérance (valable \textbf{sans} hypothèse d'indépendance) : $E(X)=E(Y_1)+\cdots+E(Y_4) = 4\times0{,}3 = \boxed{1{,}2}$.
+
+\textbf{Q4.} Les $4$ machines sont indépendantes (donne dans l'énoncé), donc l'additivite de la variance s'applique : $V(Y_1+\cdots+Y_4) = 4\times0{,}21 = \boxed{0{,}84}$.
 \end{corrige}
 
 \begin{corrige}{TSPE-PROBA-EV-B-EX3}

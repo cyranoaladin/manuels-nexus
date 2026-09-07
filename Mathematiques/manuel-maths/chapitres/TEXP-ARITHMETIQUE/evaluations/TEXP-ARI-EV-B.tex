@@ -1,4 +1,4 @@
-% META: {"id": "TEXP-ARI-EV-B", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C6", "C7", "C8"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TEXP-ARI-EV-B", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C6", "C7", "C8", "C9"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % assert pow(7, 12, 13) == 1
 % premiers = [2, 3, 5]
@@ -34,14 +34,25 @@
 \end{exercice}
 
 \begin{exercice}{TEXP-ARI-EV-B-EX2}{2}{40}
-\textbf{Exercice 2} (12 points) --- \textit{Capacités C7, C8}
+\textbf{Exercice 2} (9 points) --- \textit{Capacités C7, C8}
 
 \medskip
 
 \begin{enumerate}
-  \item (5 pts) Démontrer que l'ensemble des nombres premiers est infini (raisonnement par l'absurde en considérant $N=p_1\times\dots\times p_n+1$).
-  \item (3 pts) Vérifier, en appliquant ce raisonnement à $\{2,3,5\}$, que $N=2\times3\times5+1=31$ n'est divisible par aucun de $2,3,5$.
-  \item (4 pts) Énoncer le petit théorème de Fermat, et calculer directement le reste de $7^{12}$ dans la division par $13$.
+  \item (4 pts) Démontrer que l'ensemble des nombres premiers est infini (raisonnement par l'absurde en considérant $N=p_1\times\dots\times p_n+1$).
+  \item (2 pts) Vérifier, en appliquant ce raisonnement à $\{2,3,5\}$, que $N=2\times3\times5+1=31$ n'est divisible par aucun de $2,3,5$.
+  \item (3 pts) Énoncer le petit théorème de Fermat, et calculer directement le reste de $7^{12}$ dans la division par $13$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TEXP-ARI-EV-B-EX3}{2}{20}
+\textbf{Exercice 3} (3 points) --- \textit{Capacité C9}
+
+\medskip
+
+\begin{enumerate}
+  \item (2 pts) Écrire en Python une fonction \texttt{crible(n)} qui renvoie la liste des nombres premiers inférieurs ou égaux à $n$ par le crible d'Ératosthène. On précisera pourquoi il suffit de barrer les multiples de $p$ à partir de $p^2$, et pourquoi la boucle peut s'arrêter dès que $p^2>n$.
+  \item (1 pt) Écrire une fonction \texttt{decomposer(n)} qui renvoie la liste des facteurs premiers de $n$ avec répétition, et donner ce qu'elle renvoie pour $n=360$.
 \end{enumerate}
 \end{exercice}
 

@@ -1,4 +1,4 @@
-% META: {"id": "TEXP-CTP-EV-A", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "evaluation", "version": "A", "duree_min": 50, "bareme_total": 20, "capacites_codes": ["C2", "C4"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TEXP-CTP-EV-A", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "evaluation", "version": "A", "duree_min": 50, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3", "C4"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import symbols, cos, simplify, Rational, solve, factor, I
 % theta = symbols('theta', real=True)
@@ -18,7 +18,7 @@
 \begin{evaluation}{TEXP-CTP-EV-A}{50}
 
 \begin{exercice}{TEXP-CTP-EV-A-EX1}{2}{20}
-\textbf{Exercice 1} (8 points) --- \textit{Capacité C2}
+\textbf{Exercice 1} (6 points) --- \textit{Capacité C2}
 
 \medskip
 
@@ -26,15 +26,27 @@ En utilisant la formule d'Euler pour $\cos\theta$, linéariser $\cos^3\theta$ (l
 \end{exercice}
 
 \begin{exercice}{TEXP-CTP-EV-A-EX2}{2}{30}
-\textbf{Exercice 2} (12 points) --- \textit{Capacité C4}
+\textbf{Exercice 2} (9 points) --- \textit{Capacité C4}
 
 \medskip
 
 Soit $P(z)=z^3-3z^2+4z-2$.
 \begin{enumerate}
   \item (2 pts) Vérifier que $1$ est racine de $P$.
-  \item (4 pts) Déterminer $Q(z)$ tel que $P(z)=(z-1)Q(z)$.
-  \item (6 pts) Résoudre $P(z)=0$ dans $\mathbb{C}$.
+  \item (3 pts) Déterminer $Q(z)$ tel que $P(z)=(z-1)Q(z)$.
+  \item (4 pts) Résoudre $P(z)=0$ dans $\mathbb{C}$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TEXP-CTP-EV-A-EX3}{2}{20}
+\textbf{Exercice 3} (5 points) --- \textit{Capacités C1, C3}
+
+\medskip
+
+\begin{enumerate}
+  \item (2 pts) Écrire $z=1+i\sqrt3$ sous forme trigonométrique puis exponentielle. Retrouver ensuite la forme algébrique à partir de la forme exponentielle obtenue.
+  \item (3 pts) Soient $\vec u(\cos a\,;\sin a)$ et $\vec v(\cos b\,;\sin b)$ deux vecteurs unitaires. Calculer $\vec u\cdot\vec v$ de deux façons, et en déduire la formule
+  $\cos(a-b)=\cos a\cos b+\sin a\sin b$.
 \end{enumerate}
 \end{exercice}
 

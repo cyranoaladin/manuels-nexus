@@ -1,4 +1,4 @@
-% META: {"id": "TSPE-INTEG-EV-A", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C4", "C8"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% META: {"id": "TSPE-INTEG-EV-A", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C3", "C4", "C6", "C8"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
 % from sympy import symbols, integrate, exp, simplify, Rational, sqrt, Eq, solve
 % x = symbols('x')
@@ -28,7 +28,7 @@ Soit $f(x)=\dfrac{1}{x}$ sur $[1,2]$. Déterminer le minimum et le maximum de $f
 \end{exercice}
 
 \begin{exercice}{TSPE-INTEG-EV-A-EX2}{2}{20}
-\textbf{Exercice 2} (8 points) — \textit{Capacité C8}
+\textbf{Exercice 2} (6 points) — \textit{Capacité C8}
 
 \medskip
 
@@ -36,7 +36,7 @@ Calculer $\displaystyle\int_0^2 x\,\mathrm{e}^{-x}\,\mathrm{d}x$ par integration
 \end{exercice}
 
 \begin{exercice}{TSPE-INTEG-EV-A-EX3}{2}{20}
-\textbf{Exercice 3} (7 points) — \textit{Capacité C4}
+\textbf{Exercice 3} (5 points) — \textit{Capacité C4}
 
 \medskip
 
@@ -44,7 +44,18 @@ On considere $f(x)=3-x^2$ et $g(x)=x^2-1$.
 \begin{enumerate}
   \item (2 pts) Déterminer les points d'intersection des deux courbes.
   \item (2 pts) Justifier que $f \geq g$ entre ces deux points.
-  \item (3 pts) Calculer l'aire entre les deux courbes sur cet intervalle.
+  \item (1 pt) Calculer l'aire entre les deux courbes sur cet intervalle.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TSPE-INTEG-EV-A-EX4}{2}{20}
+\textbf{Exercice 4} (4 points) — \textit{Capacités C3, C6}
+
+\medskip
+
+\begin{enumerate}
+  \item (2 pts) Montrer que, pour tout $x\in[0\,;1]$, $\dfrac12\leq\dfrac{1}{1+x^2}\leq1$. En déduire un encadrement de $\displaystyle\int_0^1\frac{\mathrm{d}x}{1+x^2}$, puis vérifier que la valeur exacte $\dfrac{\pi}{4}$ le respecte.
+  \item (2 pts) La puissance consommée par un appareil, en kW, est $p(t)=3-0{,}5t$ pour $t$ en heures, $t\in[0\,;4]$. Calculer $\displaystyle\int_0^4 p(t)\,\mathrm{d}t$ et $\dfrac14\displaystyle\int_0^4 p(t)\,\mathrm{d}t$, puis dire ce que chacune de ces deux quantités représente, avec son unité.
 \end{enumerate}
 \end{exercice}
 
