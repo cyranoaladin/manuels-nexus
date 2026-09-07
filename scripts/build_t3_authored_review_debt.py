@@ -41,14 +41,17 @@ LEDGER_ID = "T3_AUTHORED_REVIEW_DEBT"
 BASELINE_SHA = "58f23b71"
 
 #: Registres déjà déposés. Une empreinte déclarée ailleurs n'est pas redéclarée
-#: ici : le test d'union exige des ensembles disjoints.
-OTHER_LEDGERS = (
-    "audit/VARALEA_C6C7_REVIEW_DEBT_12.json",
-    "audit/EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1.json",
-    "audit/NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2.json",
-    "audit/TNSI_PROJET_QCM_REVIEW_DEBT_1.json",
-    "audit/TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_45.json",
-    "audit/NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT.json",
+#: ici : les consommateurs exigent des ensembles DISJOINTS, et une empreinte
+#: comptée deux fois gonflerait la dette sans qu'aucun objet ne soit ajouté.
+#:
+#: Cette liste est celle de `build_residual_true_new_forensics.py`, qui est
+#: l'autorité : une première version n'en reprenait que six, celles que le
+#: test d'inventaire citait, et redéclarait donc les entrées des cinq autres.
+OTHER_LEDGERS = tuple(
+    str(path) for path in __import__(
+        "importlib"
+    ).import_module("build_residual_true_new_forensics").DECLARED_DEBT_LEDGERS
+    if str(path) != "audit/T3_AUTHORED_REVIEW_DEBT.json"
 )
 
 ROLE_OF_DIRECTORY = {

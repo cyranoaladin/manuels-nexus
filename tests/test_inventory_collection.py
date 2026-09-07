@@ -3842,14 +3842,15 @@ def test_repository_baseline_is_frozen_schema_valid_and_gate_green(
 
 #: Un registre par chapitre qui cree des objets. La campagne en ajoute au fil
 #: des fermetures verticales ; ils restent des ensembles SEPARES.
-DECLARED_DEBT_LEDGERS = (
-    "audit/VARALEA_C6C7_REVIEW_DEBT_12.json",
-    "audit/EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1.json",
-    "audit/NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2.json",
-    "audit/TNSI_PROJET_QCM_REVIEW_DEBT_1.json",
-    "audit/TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_45.json",
-    "audit/NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT.json",
-    "audit/T3_AUTHORED_REVIEW_DEBT.json",
+# La liste des registres de dette déclarée est celle de
+# `build_residual_true_new_forensics.py`, qui est l'autorité et exige qu'ils
+# soient disjoints. Ce test en citait six sur onze : l'union qu'il pinçait
+# était donc incomplète, et un registre pouvait redéclarer les entrées d'un
+# autre sans que rien ne le voie.
+DECLARED_DEBT_LEDGERS = tuple(
+    str(path) for path in __import__("importlib").import_module(
+        "build_residual_true_new_forensics"
+    ).DECLARED_DEBT_LEDGERS
 )
 
 
