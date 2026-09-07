@@ -3,43 +3,43 @@
   "schema_version": 3,
   "generated_by": "scripts/build_release_raw_reasons.py",
   "freshness": {
-    "EVIDENCE_HEAD": "89f794548907067eff330dbda8c484d01e23f12c",
+    "EVIDENCE_HEAD": "e2fa660c6e8958b77ebd7aece6c19f62c9d3198a",
     "INPUT_PATHS": [
-      "/tmp/claude-1000/-home-alaeddine-Documents-Manuels-Nexus--worktrees-t3-publish-readiness/b7c14542-4323-4f78-84a5-ba5913bf8ea4/scratchpad/gate_a621987a.json"
+      "audit/gate_observations/release-strict-e2fa660c.json"
     ],
-    "INPUT_DIGEST": "sha256:3150e5a77fa76f41d637158372aa8f91316857ee8605972efc3c866c56c491cd",
+    "INPUT_DIGEST": "sha256:58a4284403cd77ecac7b896b193354cf6e00e4e0d84c99531c45dadcc0d0e6ec",
     "WHOLE_REPOSITORY_INPUT": true,
     "OBSERVATION_HEADS": [
-      "a621987a00000000000000000000000000000000"
+      "e2fa660c6e8958b77ebd7aece6c19f62c9d3198a"
     ]
   },
   "gate_observations": [
     {
-      "observation_id": "release-strict-a621987a",
+      "observation_id": "release-strict-e2fa660c",
       "gate": "release-strict",
       "exit_code": 7,
       "success": false,
-      "reason_count": 481
+      "reason_count": 451
     }
   ],
   "summary": {
-    "RAW_REASON_COUNT": 478,
+    "RAW_REASON_COUNT": 451,
     "ROOT_BLOCKER_COUNT": 20,
-    "UNMAPPED_RAW_REASONS": 3,
+    "UNMAPPED_RAW_REASONS": 0,
     "DUPLICATE_REASON_IDS": 0,
     "BLOCKER_CLASSIFICATION_CONFLICTS": 0,
     "PRODUCT_P0": 0,
-    "PRODUCT_P1": 8,
+    "PRODUCT_P1": 7,
     "PRODUCT_P2": 1,
-    "CERTIFICATION_BLOCKERS": 9,
+    "CERTIFICATION_BLOCKERS": 10,
     "RELEASE_POLICY_BLOCKERS": 1,
     "GOVERNANCE_BLOCKERS": 1,
     "RAW_REASONS_BY_TAXONOMY": {
-      "CERTIFICATION_BLOCKER": 255,
+      "CERTIFICATION_BLOCKER": 257,
       "GOVERNANCE_BLOCKER": 12,
-      "PRODUCT_P1": 176,
+      "PRODUCT_P1": 146,
       "RELEASE_POLICY_BLOCKER": 1,
-      "PRODUCT_P2": 34
+      "PRODUCT_P2": 35
     }
   },
   "root_blockers": [
@@ -63,13 +63,13 @@
         "RSN-366bf2aef37422d1",
         "RSN-4807f9cb16d786a8",
         "RSN-4c0d4f051fe3534b",
-        "RSN-4c9c09a1930fc9b6",
         "RSN-51b447f21813a2ca",
         "RSN-52075a3ac77b2f55",
         "RSN-56d6506af8603cf9",
         "RSN-67463d98fa418331",
         "RSN-6d0a71f68a54c372",
         "RSN-71d1ea2894f157bc",
+        "RSN-766f0b26e0a6b19a",
         "RSN-7d33e3ccc0d3c29d",
         "RSN-8b167a8c832c1db6",
         "RSN-8c6eda3bb4af69b7",
@@ -149,7 +149,7 @@
       "root_blocker_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "title": "Variantes déclarées jamais construites",
       "taxonomy": "PRODUCT_P1",
-      "dependent_reason_count": 24,
+      "dependent_reason_count": 26,
       "dependent_reason_ids": [
         "RSN-02023e6f61cbee19",
         "RSN-0cc7c98e8018f7f3",
@@ -163,6 +163,7 @@
         "RSN-46002f4e6ac1f5d5",
         "RSN-4c16c7611fd74f65",
         "RSN-4c38c6a4da58cbe8",
+        "RSN-6def6345f10db8b4",
         "RSN-721166773fc7e9ed",
         "RSN-83f4fe36619ddbf1",
         "RSN-8c729c7e45eea659",
@@ -170,6 +171,7 @@
         "RSN-9b9e6ad9a3b47df2",
         "RSN-9d6b554b08977e3d",
         "RSN-b1a142de9d0d196d",
+        "RSN-bb9cf7763cb54580",
         "RSN-e0aca017e6cb4a8e",
         "RSN-e9fb7a88504ba261",
         "RSN-ed47cf9ba118f0fb",
@@ -184,17 +186,17 @@
       "dependent_reason_count": 16,
       "dependent_reason_ids": [
         "RSN-1ee71001c51c08b9",
+        "RSN-261b9d70243d6399",
         "RSN-276d09faf398443b",
         "RSN-3218bbd88cdf22c0",
         "RSN-5b18c5320c5eca4a",
         "RSN-5f6ebbac0a7cec33",
-        "RSN-76a5aff7d1712194",
         "RSN-7c849d4d0128b0b2",
         "RSN-7fee018ef7d52d66",
         "RSN-840ff1166a475bd9",
         "RSN-93ede7fd0ba49f2c",
         "RSN-a3c5f1a0590d8e54",
-        "RSN-a95b72f71a1b4fda",
+        "RSN-d00b70121b3a009e",
         "RSN-d0334bda10e6be87",
         "RSN-d31c7891c77bf6fa",
         "RSN-f9828c9818764355",
@@ -205,52 +207,20 @@
       "root_blocker_id": "ROOT-DELIVERABLE-NOT-DECLARED",
       "title": "Assemblages de variantes non déclarés",
       "taxonomy": "PRODUCT_P1",
-      "dependent_reason_count": 4,
+      "dependent_reason_count": 2,
       "dependent_reason_ids": [
-        "RSN-32e2c321bde0ea84",
         "RSN-4d5a8b8c992d00b9",
-        "RSN-da584fa871457d5a",
-        "RSN-f6a8301aa37f4882"
+        "RSN-da584fa871457d5a"
       ]
     },
     {
-      "root_blocker_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "title": "Graphe exercice/corrigé incomplet",
-      "taxonomy": "PRODUCT_P1",
-      "dependent_reason_count": 32,
+      "root_blocker_id": "ROOT-DIMENSION-NOT-COVERED",
+      "title": "Dimensions de certification sans preuve",
+      "taxonomy": "CERTIFICATION_BLOCKER",
+      "dependent_reason_count": 2,
       "dependent_reason_ids": [
-        "RSN-063e3fba9e549922",
-        "RSN-28b6ff6f9676cf2a",
-        "RSN-2943cfad43548384",
-        "RSN-3711bb77b27ccd8a",
-        "RSN-431a6b479ee5b15f",
-        "RSN-46ef8df751a90fe5",
-        "RSN-58a6b4323ae7710c",
-        "RSN-5ab40dcfdcc5bc08",
-        "RSN-628ec6d5cee3882c",
-        "RSN-6a283b23c2130cac",
-        "RSN-75747e27eaccb4c6",
-        "RSN-759f6be02e6e3949",
-        "RSN-76ef63bdb10981d5",
-        "RSN-7eac63a295661269",
-        "RSN-7eee3dd1e71d3e21",
-        "RSN-813a0b12b9ee26a4",
-        "RSN-8e556bb3f65780eb",
-        "RSN-931628eb92918539",
-        "RSN-9d8b0b0bc86d09bf",
-        "RSN-a84b31bfeedddbac",
-        "RSN-ae3377b121c1d71b",
-        "RSN-b8e5cd777da7b4e2",
-        "RSN-bad916479a3a36c1",
-        "RSN-bdfeb130f963453c",
-        "RSN-c09317e1af58d427",
-        "RSN-c1196d624efeba4d",
-        "RSN-c9bc64f3bc197139",
-        "RSN-cd6f8453e5906be7",
-        "RSN-d7571ecd9bbeea4d",
-        "RSN-db94d68760b0ee04",
-        "RSN-ed24dae5b1241820",
-        "RSN-f1f1a5213d1a63b0"
+        "RSN-385435dc89962e35",
+        "RSN-9ad95a20a28a08c0"
       ]
     },
     {
@@ -284,6 +254,7 @@
         "RSN-4a9beb5f60fb1ac5",
         "RSN-4dfaf838b4c6c209",
         "RSN-4f1772e1b5c6ab7a",
+        "RSN-55414f44ac289767",
         "RSN-58972a139c295fe5",
         "RSN-602639bb3755539a",
         "RSN-65223fd9479bee41",
@@ -306,7 +277,6 @@
         "RSN-bb9f108abe108c31",
         "RSN-bbafc1e09c32e41f",
         "RSN-bd0c40d89e675b68",
-        "RSN-bfb3fcca60534e84",
         "RSN-c6a7852fc13cdabc",
         "RSN-c719d405c63d60e6",
         "RSN-c886387255554d3e",
@@ -331,11 +301,11 @@
       "dependent_reason_ids": [
         "RSN-302b461039a6c905",
         "RSN-46094e70aab2a0dc",
-        "RSN-586372bea334206c",
-        "RSN-5dcef3d743f66115",
-        "RSN-83a7471cd5a2a468",
-        "RSN-939208beb4318fd1",
+        "RSN-7a6b0954401662cd",
+        "RSN-7f48341d57aa2b48",
+        "RSN-8bf353452e20ac74",
         "RSN-a27dc36e44e4961e",
+        "RSN-aa4b7ff5845168fc",
         "RSN-aa4ca31e6c1853bf",
         "RSN-b58f7e4e0b242959",
         "RSN-e9b8c64d0a0d642b",
@@ -397,7 +367,7 @@
       "root_blocker_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "title": "Richesse pédagogique insuffisante",
       "taxonomy": "PRODUCT_P2",
-      "dependent_reason_count": 34,
+      "dependent_reason_count": 35,
       "dependent_reason_ids": [
         "RSN-03fa11f3b6c7a13a",
         "RSN-07fd8ec119b34c44",
@@ -420,6 +390,7 @@
         "RSN-b06153a6b15acb85",
         "RSN-b15da2b28f6b7103",
         "RSN-b8b888c70b5bd802",
+        "RSN-c13feca67c8154c6",
         "RSN-c2aedbb82b9dc448",
         "RSN-c6d6fbdd79c77f68",
         "RSN-ccdc67ef21d59b71",
@@ -439,7 +410,7 @@
       "root_blocker_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "title": "Rôles pédagogiques non couverts",
       "taxonomy": "PRODUCT_P1",
-      "dependent_reason_count": 42,
+      "dependent_reason_count": 43,
       "dependent_reason_ids": [
         "RSN-03c3bcc6e1bed8a4",
         "RSN-03e3142c8abc1c22",
@@ -456,6 +427,7 @@
         "RSN-3bf52c9b751faef6",
         "RSN-3d48c389a4579517",
         "RSN-4581dd592deaae0b",
+        "RSN-4a5b4c4d1481b658",
         "RSN-4ac5f9134b5fda8c",
         "RSN-4e02fe72b59bc2d3",
         "RSN-634c39011aaf4913",
@@ -489,16 +461,15 @@
       "root_blocker_id": "ROOT-PRODUCER-STALE",
       "title": "Producteurs de preuve stale ou rouges",
       "taxonomy": "CERTIFICATION_BLOCKER",
-      "dependent_reason_count": 11,
+      "dependent_reason_count": 10,
       "dependent_reason_ids": [
         "RSN-16caed16674c847b",
-        "RSN-1d57c2e5f0fa5052",
+        "RSN-2b3bf0280fc72f12",
         "RSN-3e60facdb2acfbd5",
         "RSN-5d32d5dc4f08c301",
         "RSN-745d2ec64d56190d",
         "RSN-8b256cdd8c834836",
         "RSN-8ba903dab9e557d7",
-        "RSN-adbb8d7f908b4f12",
         "RSN-b658a7036e7ea4e0",
         "RSN-dc90fa82930fe714",
         "RSN-e65d25c529d7ae3a"
@@ -517,8 +488,9 @@
       "root_blocker_id": "ROOT-QCM-COVERAGE",
       "title": "Couverture QCM incomplète",
       "taxonomy": "PRODUCT_P1",
-      "dependent_reason_count": 13,
+      "dependent_reason_count": 14,
       "dependent_reason_ids": [
+        "RSN-02a377c75ac9725a",
         "RSN-0438a7eaa45be675",
         "RSN-210e0693b6b679f9",
         "RSN-349e43dabcbb528f",
@@ -635,7 +607,7 @@
       "root_blocker_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "title": "Chaîne machine verticale incomplète",
       "taxonomy": "CERTIFICATION_BLOCKER",
-      "dependent_reason_count": 42,
+      "dependent_reason_count": 43,
       "dependent_reason_ids": [
         "RSN-0f2fe2cf6c04f3bb",
         "RSN-1d3c4d1071c6cfc8",
@@ -670,6 +642,7 @@
         "RSN-abdb79f9919b5f8e",
         "RSN-b06c6b5f5129f524",
         "RSN-ba20fadb40df128e",
+        "RSN-d09e6ed08e4cecec",
         "RSN-d363f95e5c6b4ed2",
         "RSN-d3f0d78c23c343e6",
         "RSN-d4dd9321fd1d9d02",
@@ -682,11 +655,7 @@
       ]
     }
   ],
-  "unmapped_raw_reasons": [
-    "1SPE:anomalie:broken_meta_references:anomalies.broken_meta_references:110",
-    "1SPE:anomalie:invalid_capacities:anomalies.invalid_capacities:3",
-    "1SPE:anomalie:unclassified_types:anomalies.unclassified_types:1"
-  ],
+  "unmapped_raw_reasons": [],
   "raw_reasons": [
     {
       "reason_id": "RSN-2a65844f31227e9f",
@@ -698,7 +667,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -711,7 +680,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -724,7 +693,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -737,7 +706,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -750,7 +719,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -763,7 +732,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -776,7 +745,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -789,7 +758,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -802,7 +771,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -815,7 +784,20 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
+      ]
+    },
+    {
+      "reason_id": "RSN-766f0b26e0a6b19a",
+      "producer": "build_publish_readiness_chapter_matrix",
+      "target": "1SPE-SECOND-DEGRE",
+      "object_id": null,
+      "category": "PRODUCT_P1",
+      "evidence": "CONTENT:1SPE-SECOND-DEGRE:assessments:GAP",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
+      "observed_in": [
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -828,7 +810,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -841,7 +823,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -854,7 +836,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -867,7 +849,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -880,7 +862,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -893,7 +875,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -906,7 +888,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -919,7 +901,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -932,7 +914,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -945,7 +927,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -958,7 +940,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -971,7 +953,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -984,7 +966,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -997,7 +979,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1010,7 +992,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1023,7 +1005,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1036,7 +1018,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1049,7 +1031,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1062,20 +1044,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-4c9c09a1930fc9b6",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TNSI-PROJET",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-PROJET:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1088,7 +1057,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1101,7 +1070,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1114,7 +1083,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1127,7 +1096,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1140,7 +1109,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1153,7 +1122,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1166,7 +1135,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1179,7 +1148,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1192,7 +1161,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1205,7 +1174,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1218,7 +1187,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1231,7 +1200,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-BUILD-RECEIPT-NOT-INTEGRATED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1244,7 +1213,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CONTENT-MATRIX-INCOMPLETE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1257,7 +1226,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-COURSE-ASSEMBLY",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1270,7 +1239,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-COURSE-ASSEMBLY",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1283,7 +1252,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-COURSE-ASSEMBLY",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1296,7 +1265,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-COURSE-ASSEMBLY",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1309,7 +1278,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1322,7 +1291,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1335,7 +1304,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1348,7 +1317,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1361,7 +1330,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1374,7 +1343,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1387,7 +1356,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1400,7 +1369,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1413,7 +1382,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1426,7 +1395,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1439,7 +1408,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1452,7 +1421,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1465,7 +1434,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1478,7 +1447,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1491,7 +1460,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1504,7 +1473,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1517,7 +1486,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1530,7 +1499,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1543,7 +1512,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1556,7 +1525,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1569,7 +1538,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1582,7 +1551,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1595,7 +1564,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1608,7 +1577,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1621,7 +1590,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1634,7 +1603,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1647,7 +1616,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1660,7 +1629,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1673,7 +1642,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1686,7 +1655,33 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
+      ]
+    },
+    {
+      "reason_id": "RSN-bb9cf7763cb54580",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TNSI",
+      "object_id": null,
+      "category": "PRODUCT_P1",
+      "evidence": "TNSI:build_observé_absent:banque_ecrite",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
+      "observed_in": [
+        "release-strict-e2fa660c"
+      ]
+    },
+    {
+      "reason_id": "RSN-6def6345f10db8b4",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TNSI",
+      "object_id": null,
+      "category": "PRODUCT_P1",
+      "evidence": "TNSI:build_observé_absent:banque_pratique",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
+      "observed_in": [
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1699,7 +1694,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1712,7 +1707,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1725,7 +1720,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1738,7 +1733,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1751,7 +1746,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1764,7 +1759,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1777,7 +1772,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1790,7 +1785,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1803,7 +1798,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1816,7 +1811,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1829,7 +1824,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1842,7 +1837,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1855,7 +1850,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1868,7 +1863,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1881,7 +1876,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1894,7 +1889,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1907,33 +1902,33 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
-      "reason_id": "RSN-76a5aff7d1712194",
+      "reason_id": "RSN-261b9d70243d6399",
       "producer": "inventory_collection.deliverable_matrix",
       "target": "TNSI",
       "object_id": null,
       "category": "PRODUCT_P1",
-      "evidence": "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.banque_ecrite:absent",
+      "evidence": "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.banque_ecrite:declared",
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
-      "reason_id": "RSN-a95b72f71a1b4fda",
+      "reason_id": "RSN-d00b70121b3a009e",
       "producer": "inventory_collection.deliverable_matrix",
       "target": "TNSI",
       "object_id": null,
       "category": "PRODUCT_P1",
-      "evidence": "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.banque_pratique:absent",
+      "evidence": "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.banque_pratique:declared",
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1946,7 +1941,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1959,7 +1954,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1972,7 +1967,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1985,7 +1980,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -1998,7 +1993,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2011,7 +2006,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2024,33 +2019,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-DECLARED",
       "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-f6a8301aa37f4882",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "TNSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TNSI:assemblage_déclaré_absent:banque_ecrite",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-DECLARED",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-32e2c321bde0ea84",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "TNSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TNSI:assemblage_déclaré_absent:banque_pratique",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-DECLARED",
-      "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2063,423 +2032,33 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-DECLARED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
-      "reason_id": "RSN-bdfeb130f963453c",
-      "producer": "build_ex_co_graph",
-      "target": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "reason_id": "RSN-385435dc89962e35",
+      "producer": "inventory_collection.gate_dimensions",
+      "target": "mathematics",
       "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-ALGO-DICHO-GLOUTON-KNN:ex_co_graph:GAP",
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "dimension_non_couverte:mathematics",
       "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
+      "root_cause_id": "ROOT-DIMENSION-NOT-COVERED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
-      "reason_id": "RSN-46ef8df751a90fe5",
-      "producer": "build_ex_co_graph",
-      "target": "1NSI-ALGO-PARCOURS-TRIS",
+      "reason_id": "RSN-9ad95a20a28a08c0",
+      "producer": "inventory_collection.gate_dimensions",
+      "target": "regulation",
       "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-ALGO-PARCOURS-TRIS:ex_co_graph:GAP",
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "dimension_non_couverte:regulation",
       "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
+      "root_cause_id": "ROOT-DIMENSION-NOT-COVERED",
       "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-c9bc64f3bc197139",
-      "producer": "build_ex_co_graph",
-      "target": "1NSI-ARCHITECTURE-OS",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-ARCHITECTURE-OS:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-759f6be02e6e3949",
-      "producer": "build_ex_co_graph",
-      "target": "1NSI-LANGAGE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-LANGAGE:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-bad916479a3a36c1",
-      "producer": "build_ex_co_graph",
-      "target": "1NSI-PROJET-METHODES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-PROJET-METHODES:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-c1196d624efeba4d",
-      "producer": "build_ex_co_graph",
-      "target": "1NSI-RESEAUX",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-RESEAUX:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-ae3377b121c1d71b",
-      "producer": "build_ex_co_graph",
-      "target": "1NSI-TABLES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-TABLES:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-813a0b12b9ee26a4",
-      "producer": "build_ex_co_graph",
-      "target": "1NSI-TYPES-BASE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-TYPES-BASE:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-db94d68760b0ee04",
-      "producer": "build_ex_co_graph",
-      "target": "1NSI-WEB-IHM",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-WEB-IHM:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-2943cfad43548384",
-      "producer": "build_ex_co_graph",
-      "target": "TCOMPL-CALCULS-AIRES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-CALCULS-AIRES:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-931628eb92918539",
-      "producer": "build_ex_co_graph",
-      "target": "TCOMPL-ECHANTILLONNAGE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-ECHANTILLONNAGE:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-a84b31bfeedddbac",
-      "producer": "build_ex_co_graph",
-      "target": "TCOMPL-MODELES-FONCTION",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-MODELES-FONCTION:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-3711bb77b27ccd8a",
-      "producer": "build_ex_co_graph",
-      "target": "TCOMPL-TEMPS-ATTENTE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-TEMPS-ATTENTE:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-063e3fba9e549922",
-      "producer": "build_ex_co_graph",
-      "target": "TEXP-ARITHMETIQUE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-ARITHMETIQUE:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-5ab40dcfdcc5bc08",
-      "producer": "build_ex_co_graph",
-      "target": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-COMPLEXES-TRIGO-POLYNOMES:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-75747e27eaccb4c6",
-      "producer": "build_ex_co_graph",
-      "target": "TEXP-MATRICES-MARKOV",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-MATRICES-MARKOV:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-c09317e1af58d427",
-      "producer": "build_ex_co_graph",
-      "target": "TNSI-ALGORITHMIQUE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-ALGORITHMIQUE:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-f1f1a5213d1a63b0",
-      "producer": "build_ex_co_graph",
-      "target": "TNSI-ARCHITECTURES-MATERIELLES-SY",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-ARCHITECTURES-MATERIELLES-SY:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-58a6b4323ae7710c",
-      "producer": "build_ex_co_graph",
-      "target": "TNSI-BASES-DE-DONNEES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-BASES-DE-DONNEES:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-b8e5cd777da7b4e2",
-      "producer": "build_ex_co_graph",
-      "target": "TNSI-HISTOIRE-INFORMATIQUE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-HISTOIRE-INFORMATIQUE:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-ed24dae5b1241820",
-      "producer": "build_ex_co_graph",
-      "target": "TNSI-LANGAGES-ET-PROGRAMMATION",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-LANGAGES-ET-PROGRAMMATION:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-7eac63a295661269",
-      "producer": "build_ex_co_graph",
-      "target": "TNSI-STRUCTURES-DONNEES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-STRUCTURES-DONNEES:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-9d8b0b0bc86d09bf",
-      "producer": "build_ex_co_graph",
-      "target": "TSPE-CALCUL-INTEGRAL",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-CALCUL-INTEGRAL:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-cd6f8453e5906be7",
-      "producer": "build_ex_co_graph",
-      "target": "TSPE-COMBINATOIRE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-COMBINATOIRE:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-628ec6d5cee3882c",
-      "producer": "build_ex_co_graph",
-      "target": "TSPE-CONTINUITE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-CONTINUITE:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-431a6b479ee5b15f",
-      "producer": "build_ex_co_graph",
-      "target": "TSPE-DERIVATION-CONVEXITE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-DERIVATION-CONVEXITE:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-76ef63bdb10981d5",
-      "producer": "build_ex_co_graph",
-      "target": "TSPE-GEOMETRIE-ESPACE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-GEOMETRIE-ESPACE:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-7eee3dd1e71d3e21",
-      "producer": "build_ex_co_graph",
-      "target": "TSPE-LOGARITHME",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-LOGARITHME:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-d7571ecd9bbeea4d",
-      "producer": "build_ex_co_graph",
-      "target": "TSPE-PRIMITIVES-EQDIFF",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-PRIMITIVES-EQDIFF:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-8e556bb3f65780eb",
-      "producer": "build_ex_co_graph",
-      "target": "TSPE-PROBABILITES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-PROBABILITES:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-6a283b23c2130cac",
-      "producer": "build_ex_co_graph",
-      "target": "TSPE-SUITES-LIMITES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-SUITES-LIMITES:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-28b6ff6f9676cf2a",
-      "producer": "build_ex_co_graph",
-      "target": "TSPE-TRIGONOMETRIE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-TRIGONOMETRIE:ex_co_graph:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH",
-      "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2492,7 +2071,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH-NOT-AUDITED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2505,7 +2084,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2518,7 +2097,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2531,7 +2110,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2544,7 +2123,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2557,7 +2136,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2570,7 +2149,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2583,7 +2162,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2596,7 +2175,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2609,7 +2188,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2622,7 +2201,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2635,7 +2214,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2648,7 +2227,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2661,7 +2240,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2674,7 +2253,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2687,7 +2266,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2700,7 +2279,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2713,7 +2292,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2726,7 +2305,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2739,7 +2318,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2752,7 +2331,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2765,7 +2344,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2778,7 +2357,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2791,7 +2370,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2804,7 +2383,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2817,7 +2396,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2830,7 +2409,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2843,7 +2422,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2856,7 +2435,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2869,7 +2448,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2882,7 +2461,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2895,7 +2474,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2908,7 +2487,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2921,7 +2500,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2934,7 +2513,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2947,7 +2526,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2960,7 +2539,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2973,7 +2552,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2986,7 +2565,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -2999,7 +2578,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3012,7 +2591,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3025,7 +2604,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3038,7 +2617,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3051,7 +2630,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3064,7 +2643,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3077,7 +2656,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3090,7 +2669,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3103,7 +2682,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3116,7 +2695,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3129,7 +2708,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3142,7 +2721,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3155,7 +2734,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3168,46 +2747,46 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
-      "reason_id": "RSN-bfb3fcca60534e84",
+      "reason_id": "RSN-55414f44ac289767",
       "producer": "build_human_review_queue",
       "target": "COLLECTION",
       "object_id": null,
       "category": "CERTIFICATION_BLOCKER",
-      "evidence": "HUMAN_REVIEW_QUEUE_OPEN:2533",
+      "evidence": "HUMAN_REVIEW_QUEUE_OPEN:2599",
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
-      "reason_id": "RSN-939208beb4318fd1",
+      "reason_id": "RSN-aa4b7ff5845168fc",
       "producer": "inventory_collection.anomalies",
       "target": "1NSI",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "1NSI:anomalie:blocking_statuses:anomalies.blocking_statuses:376",
+      "evidence": "1NSI:anomalie:blocking_statuses:anomalies.blocking_statuses:405",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
-      "reason_id": "RSN-586372bea334206c",
+      "reason_id": "RSN-7a6b0954401662cd",
       "producer": "inventory_collection.statuses",
       "target": "1NSI",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "1NSI:statuts_non_approuves:manuals.1NSI.statuses:objets=366; contrats=10",
+      "evidence": "1NSI:statuts_non_approuves:manuals.1NSI.statuses:objets=395; contrats=10",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3220,7 +2799,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3233,7 +2812,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3246,7 +2825,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3259,7 +2838,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3272,7 +2851,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3285,33 +2864,33 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
-      "reason_id": "RSN-5dcef3d743f66115",
+      "reason_id": "RSN-8bf353452e20ac74",
       "producer": "inventory_collection.anomalies",
       "target": "TNSI",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TNSI:anomalie:blocking_statuses:anomalies.blocking_statuses:118",
+      "evidence": "TNSI:anomalie:blocking_statuses:anomalies.blocking_statuses:151",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
-      "reason_id": "RSN-83a7471cd5a2a468",
+      "reason_id": "RSN-7f48341d57aa2b48",
       "producer": "inventory_collection.statuses",
       "target": "TNSI",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TNSI:statuts_non_approuves:manuals.TNSI.statuses:objets=111; contrats=7",
+      "evidence": "TNSI:statuts_non_approuves:manuals.TNSI.statuses:objets=144; contrats=7",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3324,7 +2903,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3337,7 +2916,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3350,7 +2929,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3363,7 +2942,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3376,7 +2955,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3389,7 +2968,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3402,7 +2981,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3415,7 +2994,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3428,7 +3007,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3441,7 +3020,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3454,7 +3033,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3467,7 +3046,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3480,7 +3059,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3493,7 +3072,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3506,7 +3085,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3519,7 +3098,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3532,7 +3111,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3545,7 +3124,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3558,7 +3137,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3571,7 +3150,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3584,7 +3163,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3597,7 +3176,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3610,7 +3189,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3623,7 +3202,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3636,7 +3215,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3649,7 +3228,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3662,7 +3241,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3675,7 +3254,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3688,7 +3267,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3701,7 +3280,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3714,7 +3293,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3727,7 +3306,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3740,7 +3319,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3753,7 +3332,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3766,7 +3345,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3779,7 +3358,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3792,7 +3371,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3805,7 +3384,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3818,7 +3397,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3831,7 +3410,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3844,7 +3423,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3857,7 +3436,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3870,7 +3449,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3883,7 +3462,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3896,7 +3475,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3909,7 +3488,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3922,7 +3501,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3935,7 +3514,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3948,7 +3527,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3961,7 +3540,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3974,7 +3553,20 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
+      ]
+    },
+    {
+      "reason_id": "RSN-c13feca67c8154c6",
+      "producer": "build_chapter_richness_matrix",
+      "target": "1SPE-SECOND-DEGRE",
+      "object_id": null,
+      "category": "PRODUCT_P2",
+      "evidence": "CONTENT:1SPE-SECOND-DEGRE:pedagogical_richness:GAP",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
+      "observed_in": [
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -3987,7 +3579,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4000,7 +3592,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4013,7 +3605,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4026,7 +3618,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4039,7 +3631,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4052,7 +3644,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4065,7 +3657,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4078,7 +3670,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4091,7 +3683,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4104,7 +3696,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4117,7 +3709,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4130,7 +3722,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4143,7 +3735,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4156,7 +3748,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4169,7 +3761,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4182,7 +3774,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4195,7 +3787,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4208,7 +3800,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4221,7 +3813,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4234,7 +3826,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4247,7 +3839,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4260,7 +3852,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4273,7 +3865,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4286,7 +3878,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4299,7 +3891,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4312,7 +3904,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4325,7 +3917,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4338,7 +3930,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4351,7 +3943,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4364,7 +3956,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4377,7 +3969,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4390,7 +3982,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4403,7 +3995,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4416,7 +4008,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4429,7 +4021,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4442,7 +4034,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4455,7 +4047,20 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
+      ]
+    },
+    {
+      "reason_id": "RSN-4a5b4c4d1481b658",
+      "producer": "build_true_pedagogical_coverage",
+      "target": "1SPE-SECOND-DEGRE",
+      "object_id": null,
+      "category": "PRODUCT_P1",
+      "evidence": "CONTENT:1SPE-SECOND-DEGRE:pedagogical_role_coverage:GAP",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
+      "observed_in": [
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4468,7 +4073,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4481,7 +4086,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4494,7 +4099,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4507,7 +4112,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4520,7 +4125,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4533,7 +4138,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4546,7 +4151,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4559,7 +4164,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4572,7 +4177,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4585,7 +4190,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4598,7 +4203,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4611,7 +4216,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4624,7 +4229,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4637,7 +4242,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4650,7 +4255,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4663,7 +4268,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4676,7 +4281,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4689,7 +4294,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4702,7 +4307,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4715,7 +4320,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4728,7 +4333,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4741,7 +4346,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4754,7 +4359,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4767,7 +4372,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4780,7 +4385,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4793,7 +4398,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4806,7 +4411,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4819,7 +4424,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4832,7 +4437,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4845,7 +4450,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4858,7 +4463,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4871,7 +4476,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4884,7 +4489,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4897,7 +4502,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4910,20 +4515,20 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
-      "reason_id": "RSN-1d57c2e5f0fa5052",
+      "reason_id": "RSN-2b3bf0280fc72f12",
       "producer": "inventory_collection.content_integrity",
-      "target": "scripts/build_human_review_queue.py",
+      "target": "scripts/build_ex_co_graph.py",
       "object_id": null,
       "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_human_review_queue.py:rc=1",
+      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_ex_co_graph.py:rc=1",
       "status": "OPEN",
       "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4936,7 +4541,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4949,7 +4554,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4962,7 +4567,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4975,7 +4580,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -4988,20 +4593,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
-        "release-strict-a621987a"
-      ]
-    },
-    {
-      "reason_id": "RSN-adbb8d7f908b4f12",
-      "producer": "inventory_collection.content_integrity",
-      "target": "scripts/capacity_identity.py",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/capacity_identity.py:rc=1",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PRODUCER-STALE",
-      "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5014,7 +4606,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5027,7 +4619,20 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PUBLICATION-SNAPSHOT-UNDECIDED",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
+      ]
+    },
+    {
+      "reason_id": "RSN-02a377c75ac9725a",
+      "producer": "build_qcm_gap_metrics",
+      "target": "1SPE-SECOND-DEGRE",
+      "object_id": null,
+      "category": "PRODUCT_P1",
+      "evidence": "CONTENT:1SPE-SECOND-DEGRE:qcm:GAP",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-QCM-COVERAGE",
+      "observed_in": [
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5040,7 +4645,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5053,7 +4658,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5066,7 +4671,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5079,7 +4684,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5092,7 +4697,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5105,7 +4710,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5118,7 +4723,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5131,7 +4736,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5144,7 +4749,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5157,7 +4762,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5170,7 +4775,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5183,7 +4788,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5196,7 +4801,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5209,7 +4814,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5222,7 +4827,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5235,7 +4840,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5248,7 +4853,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5261,7 +4866,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5274,7 +4879,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5287,7 +4892,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5300,7 +4905,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5313,7 +4918,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5326,7 +4931,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5339,7 +4944,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5352,7 +4957,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5365,7 +4970,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5378,7 +4983,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5391,7 +4996,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5404,7 +5009,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5417,7 +5022,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5430,7 +5035,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5443,7 +5048,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5456,7 +5061,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5469,7 +5074,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5482,7 +5087,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5495,7 +5100,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5508,7 +5113,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5521,7 +5126,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5534,7 +5139,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5547,7 +5152,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5560,7 +5165,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5573,7 +5178,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5586,7 +5191,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5599,7 +5204,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5612,7 +5217,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5625,7 +5230,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5638,7 +5243,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5651,7 +5256,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5664,7 +5269,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5677,7 +5282,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5690,7 +5295,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5703,7 +5308,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5716,7 +5321,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5729,7 +5334,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5742,7 +5347,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5755,7 +5360,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5768,7 +5373,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5781,7 +5386,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5794,7 +5399,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5807,7 +5412,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5820,7 +5425,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5833,7 +5438,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5846,7 +5451,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5859,7 +5464,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5872,7 +5477,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5885,7 +5490,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5898,7 +5503,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5911,7 +5516,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5924,7 +5529,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5937,7 +5542,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5950,7 +5555,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5963,7 +5568,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5976,7 +5581,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -5989,7 +5594,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6002,7 +5607,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6015,7 +5620,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6028,7 +5633,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6041,7 +5646,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6054,7 +5659,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6067,7 +5672,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6080,7 +5685,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6093,7 +5698,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6106,7 +5711,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6119,7 +5724,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6132,7 +5737,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6145,7 +5750,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6158,7 +5763,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6171,7 +5776,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6184,7 +5789,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6197,7 +5802,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6210,7 +5815,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6223,7 +5828,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6236,7 +5841,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6249,7 +5854,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6262,7 +5867,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6275,7 +5880,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6288,7 +5893,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6301,7 +5906,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6314,7 +5919,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6327,7 +5932,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6340,7 +5945,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6353,7 +5958,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6366,7 +5971,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6379,7 +5984,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6392,7 +5997,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6405,7 +6010,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6418,7 +6023,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6431,7 +6036,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6444,7 +6049,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6457,7 +6062,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6470,7 +6075,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6483,7 +6088,20 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
+      ]
+    },
+    {
+      "reason_id": "RSN-d09e6ed08e4cecec",
+      "producer": "build_publish_readiness_chapter_matrix",
+      "target": "1SPE-SECOND-DEGRE",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "CONTENT:1SPE-SECOND-DEGRE:vertical_machine_status:INCOMPLETE",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
+      "observed_in": [
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6496,7 +6114,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6509,7 +6127,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6522,7 +6140,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6535,7 +6153,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6548,7 +6166,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6561,7 +6179,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6574,7 +6192,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6587,7 +6205,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6600,7 +6218,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6613,7 +6231,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6626,7 +6244,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6639,7 +6257,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6652,7 +6270,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6665,7 +6283,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6678,7 +6296,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6691,7 +6309,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6704,7 +6322,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6717,7 +6335,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6730,7 +6348,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6743,7 +6361,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6756,7 +6374,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6769,7 +6387,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6782,7 +6400,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6795,7 +6413,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6808,7 +6426,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6821,7 +6439,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6834,7 +6452,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6847,7 +6465,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6860,7 +6478,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6873,7 +6491,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6886,7 +6504,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     },
     {
@@ -6899,7 +6517,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-a621987a"
+        "release-strict-e2fa660c"
       ]
     }
   ]
