@@ -8942,6 +8942,88 @@ def _render_inventory_artifacts(
     return payloads
 
 
+#: Champs dont la valeur EST le HEAD du calcul. Committer l'artefact avance le
+#: HEAD : le fichier commite nomme alors son propre parent, et la regeneration
+#: suivante differe d'un octet. La liste est fermee — on ne tolere pas « tout
+#: ce qui ressemble a une date » — et chaque entree est un champ que le
+#: producteur remplit lui-meme a partir de `git`.
+PROVENANCE_FIELDS = ("generated_at_utc", "head_sha")
+
+#: Meme information dans le tableau de bord Markdown, ou elle est ecrite en
+#: toutes lettres plutot qu'en champ structure.
+_MARKDOWN_PROVENANCE = re.compile(r"^- SHA Git: `[0-9a-f]{7,40}`$")
+
+
+def _provenance_line(line: str) -> bool:
+    """La ligne porte-t-elle un champ de provenance, et lui seul ?"""
+    if _MARKDOWN_PROVENANCE.match(line.strip()):
+        return True
+    stripped = line.strip().lstrip('"').lstrip()
+    for field in PROVENANCE_FIELDS:
+        if stripped.startswith(f"{field}:") or stripped.startswith(f'{field}":'):
+            return True
+    return False
+
+
+def _difference_is_only_provenance(
+    relative_path: Path,
+    rendered: str,
+    current: str,
+) -> bool:
+    """Les deux versions ne different-elles que par leur provenance ?
+
+    La comparaison reste ligne a ligne et exacte : on n'ignore pas les champs,
+    on exige que TOUTES les lignes qui different soient des lignes de
+    provenance, des deux cotes. Une ligne ajoutee, retiree ou deplacee ailleurs
+    fait echouer la reconnaissance, et la derive redevient bloquante.
+    """
+    gauche = rendered.splitlines()
+    droite = current.splitlines()
+    if len(gauche) != len(droite):
+        return False
+    differences = [
+        (a, b) for a, b in zip(gauche, droite) if a != b
+    ]
+    if not differences:
+        return True
+    return all(
+        _provenance_line(a) and _provenance_line(b) for a, b in differences
+    )
+
+
+def _named_head_is_usable(root: Path, named: str) -> bool:
+    """Le HEAD nomme par l'artefact est-il un ancetre du HEAD courant ?
+
+    Un artefact qui nomme un commit hors de la lignee ne decrit pas ce depot :
+    la tolerance ne s'applique pas.
+    """
+    if not re.fullmatch(r"[0-9a-f]{7,40}", named or ""):
+        return False
+    completed = subprocess.run(
+        ["git", "-C", str(root), "merge-base", "--is-ancestor", named, "HEAD"],
+        capture_output=True,
+    )
+    return completed.returncode == 0
+
+
+def _only_generated_artifacts_changed_since(root: Path, named: str) -> bool:
+    """Depuis le HEAD nomme, seuls les artefacts generes ont-ils bouge ?
+
+    C'est la condition qui empeche la tolerance de devenir une echappatoire.
+    Si une source a change depuis, l'artefact est REELLEMENT perime : son
+    contenu decrit un depot qui n'existe plus, et le gate doit rester rouge.
+    """
+    completed = subprocess.run(
+        ["git", "-C", str(root), "diff", "--name-only", named, "HEAD"],
+        capture_output=True,
+        text=True,
+    )
+    if completed.returncode != 0:
+        return False
+    changed = {line for line in completed.stdout.splitlines() if line}
+    return changed <= set(DEFAULT_MANAGED_OUTPUT_PATHS)
+
+
 def _compare_rendered_artifacts(
     root: Path,
     rendered_artifacts: dict[Path, str],
@@ -8954,9 +9036,49 @@ def _compare_rendered_artifacts(
             mismatches.append(f"manquant: {relative_path}")
             continue
         current = absolute.read_bytes()
-        if existing != current:
-            mismatches.append(f"diff: {relative_path}")
+        if existing == current:
+            continue
+        if _drift_is_only_self_reference(root, relative_path, content, current):
+            continue
+        mismatches.append(f"diff: {relative_path}")
     return mismatches
+
+
+def _drift_is_only_self_reference(
+    root: Path,
+    relative_path: Path,
+    rendered: str,
+    current_bytes: bytes,
+) -> bool:
+    """L'ecart se reduit-il au HEAD que l'artefact ne peut pas connaitre ?
+
+    Trois conditions, toutes necessaires :
+
+    * les seules lignes qui different portent un champ de provenance ;
+    * le HEAD nomme par la version deposee est un ancetre du HEAD courant ;
+    * entre ce HEAD et le HEAD courant, seuls les artefacts generes ont bouge.
+
+    La troisieme est celle qui garde le gate honnete. Sans elle, un artefact
+    calcule il y a cent commits passerait pour courant.
+    """
+    try:
+        current = current_bytes.decode("utf-8")
+    except UnicodeDecodeError:
+        return False
+    if not _difference_is_only_provenance(relative_path, rendered, current):
+        return False
+    named = ""
+    for line in current.splitlines():
+        match = re.search(r"[0-9a-f]{40}", line)
+        if match and _provenance_line(line):
+            named = match.group(0)
+            break
+    if not named:
+        return False
+    return (
+        _named_head_is_usable(root, named)
+        and _only_generated_artifacts_changed_since(root, named)
+    )
 
 
 def _stat_identity(value: os.stat_result) -> tuple[int, int]:
