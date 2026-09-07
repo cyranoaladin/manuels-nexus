@@ -1,0 +1,62 @@
+% META: {"id": "1NSI-WEB-EX-006", "chapitre": "1NSI-WEB-IHM", "type_objet": "exercice", "capacites": ["P-IHM-02"], "parcours": 2, "competences": ["analyser", "programmer", "valider"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-006.tex", "corrige_tex": "chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-006.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-83573B657523", "CAPACITY_ID": "C3", "EXERCISE_ROLE": "CONTEXT_VARIATION", "DIFFICULTY": 2, "AUTHORING_REASON": "la capacite dit analyser ET MODIFIER, et le seul exercice rattache faisait ecrire un gestionnaire depuis rien ; ici l'eleve recoit un gestionnaire deja en place, doit expliquer un comportement observe puis le corriger sans le reecrire entierement", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% gestionnaires = {}
+% def ajouter_gestionnaire(id_composant, fonction):
+%     gestionnaires[id_composant] = fonction
+% def declencher_clic(id_composant):
+%     if id_composant in gestionnaires:
+%         return gestionnaires[id_composant]()
+% panier = {"articles": 0}
+% def ajouter_article():
+%     panier["articles"] = panier["articles"] + 1
+%     return panier["articles"]
+% ajouter_gestionnaire("bouton_ajouter", ajouter_article)
+% assert [declencher_clic("bouton_ajouter") for _ in range(3)] == [1, 2, 3]
+% assert panier["articles"] == 3
+% # Le defaut observe : le stock n'est jamais consulte.
+% stock = {"articles": 5}
+% panier["articles"] = 0
+% def ajouter_si_stock():
+%     if panier["articles"] >= stock["articles"]:
+%         return panier["articles"]
+%     panier["articles"] = panier["articles"] + 1
+%     return panier["articles"]
+% ajouter_gestionnaire("bouton_ajouter", ajouter_si_stock)
+% assert [declencher_clic("bouton_ajouter") for _ in range(7)] == [1, 2, 3, 4, 5, 5, 5]
+% assert panier["articles"] == 5 == stock["articles"]
+% # Un seul gestionnaire par composant : le second remplace le premier.
+% assert len(gestionnaires) == 1
+% assert gestionnaires["bouton_ajouter"] is ajouter_si_stock
+% assert declencher_clic("bouton_inconnu") is None
+% END-VERIFY
+\begin{exercice}{1NSI-WEB-EX-006}{2}{20}
+On reprend le modèle de gestionnaires du cours. Une boutique en ligne a déjà mis
+en place le bouton \lstinline{"bouton_ajouter"} de sa fiche produit :
+\begin{python}
+panier = {"articles": 0}
+
+def ajouter_article():
+    panier["articles"] = panier["articles"] + 1
+    return panier["articles"]
+
+ajouter_gestionnaire("bouton_ajouter", ajouter_article)
+\end{python}
+Le service après-vente signale que des clients commandent plus d'exemplaires
+qu'il n'y en a en stock. Le stock est disponible dans
+\lstinline!stock = {"articles": 5}!.
+\begin{enumerate}
+  \item Simuler trois clics successifs et donner la séquence des valeurs
+    renvoyées.
+  \item Expliquer, en analysant le gestionnaire existant, pourquoi le défaut
+    signalé se produit. Le bouton est-il en cause ?
+  \item Modifier le gestionnaire en \lstinline{ajouter_si_stock} pour qu'il
+    refuse d'ajouter un article au-delà du stock, sans lever d'erreur et en
+    renvoyant toujours le contenu du panier.
+  \item Associer le nouveau gestionnaire au même bouton, puis simuler sept clics
+    successifs. Donner la séquence des valeurs renvoyées.
+  \item Après cette association, combien d'entrées contient le dictionnaire
+    \lstinline{gestionnaires} ? Qu'est devenu \lstinline{ajouter_article}, et
+    quelle conséquence cela aurait-il si les deux comportements devaient
+    coexister ?
+\end{enumerate}
+\end{exercice}

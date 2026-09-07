@@ -1,0 +1,66 @@
+% META: {"id": "1NSI-WEB-CO-006", "chapitre": "1NSI-WEB-IHM", "type_objet": "corrige", "exercice_ref": "1NSI-WEB-EX-006", "capacites": ["P-IHM-02"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% gestionnaires = {}
+% def ajouter_gestionnaire(id_composant, fonction):
+%     gestionnaires[id_composant] = fonction
+% def declencher_clic(id_composant):
+%     if id_composant in gestionnaires:
+%         return gestionnaires[id_composant]()
+% panier, stock = {"articles": 0}, {"articles": 5}
+% def ajouter_article():
+%     panier["articles"] = panier["articles"] + 1
+%     return panier["articles"]
+% ajouter_gestionnaire("bouton_ajouter", ajouter_article)
+% assert [declencher_clic("bouton_ajouter") for _ in range(3)] == [1, 2, 3]
+% assert panier["articles"] == 3 > 0
+% panier["articles"] = 0
+% def ajouter_si_stock():
+%     if panier["articles"] >= stock["articles"]:
+%         return panier["articles"]
+%     panier["articles"] = panier["articles"] + 1
+%     return panier["articles"]
+% ajouter_gestionnaire("bouton_ajouter", ajouter_si_stock)
+% assert [declencher_clic("bouton_ajouter") for _ in range(7)] == [1, 2, 3, 4, 5, 5, 5]
+% assert panier["articles"] == 5
+% assert len(gestionnaires) == 1 and gestionnaires["bouton_ajouter"] is ajouter_si_stock
+% assert ajouter_article not in gestionnaires.values()
+% END-VERIFY
+\begin{corrige}{1NSI-WEB-EX-006}
+\textbf{1.} Chaque clic incrémente le compteur : la séquence renvoyée est
+$1$, $2$, $3$, et \lstinline{panier["articles"]} vaut $3$.
+
+\textbf{2.} Le gestionnaire \lstinline{ajouter_article} incrémente le panier
+sans jamais consulter \lstinline{stock}. Rien, dans le code exécuté au clic, ne
+peut donc arrêter le client. Le bouton n'y est pour rien : il se contente de
+déclencher la fonction qu'on lui a associée. Le défaut est dans la
+\emph{méthode exécutée}, et c'est là qu'il faut le corriger — pas en désactivant
+le bouton, ce qui empêcherait aussi les ajouts légitimes.
+
+\textbf{3.} On ajoute la condition manquante, en gardant la même signature et
+le même type de retour :
+\begin{python}
+def ajouter_si_stock():
+    if panier["articles"] >= stock["articles"]:
+        return panier["articles"]
+    panier["articles"] = panier["articles"] + 1
+    return panier["articles"]
+\end{python}
+Renvoyer le contenu du panier même en cas de refus permet à l'appelant
+d'afficher l'état courant sans avoir à distinguer les deux cas.
+
+\textbf{4.} \lstinline{ajouter_gestionnaire("bouton_ajouter", ajouter_si_stock)}
+puis sept clics donnent $1$, $2$, $3$, $4$, $5$, $5$, $5$ : le panier plafonne à
+la valeur du stock.
+
+\textbf{5.} Le dictionnaire \lstinline{gestionnaires} contient toujours
+\textbf{une} entrée. La fonction \lstinline{ajouter_article} n'a pas été
+appelée à nouveau : elle a été \emph{remplacée}, car
+\lstinline{gestionnaires[id_composant] = fonction} écrase la valeur précédente.
+
+Si les deux comportements devaient coexister — par exemple journaliser chaque
+clic \emph{et} vérifier le stock — ce modèle ne le permettrait pas : il faudrait
+soit écrire une fonction qui appelle les deux, soit stocker une \emph{liste} de
+gestionnaires par composant. C'est d'ailleurs ce que font les navigateurs réels,
+dont \lstinline{addEventListener} empile les gestionnaires au lieu de les
+remplacer.
+\end{corrige}

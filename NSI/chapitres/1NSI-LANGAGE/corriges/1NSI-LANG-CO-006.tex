@@ -1,0 +1,76 @@
+% META: {"id": "1NSI-LANG-CO-006", "chapitre": "1NSI-LANGAGE", "type_objet": "corrige", "exercice_ref": "1NSI-LANG-EX-006", "capacites": ["P-LANG-01"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def total_panier(prix):
+%     total = 0
+%     for i in range(len(prix)):
+%         if prix[i] > 0:
+%             total = total + prix[i]
+%     return round(total * 100) / 100
+% assert total_panier([3.5, -1, 2.0, 4.25]) == 9.75
+% assert total_panier([]) == 0
+% assert total_panier([-2, -8]) == 0
+% assert 3.5 + 2.0 + 4.25 == 9.75
+% def total_avec_while(prix):
+%     total, i = 0, 0
+%     while i < len(prix):
+%         if prix[i] > 0:
+%             total = total + prix[i]
+%         i = i + 1
+%     return round(total * 100) / 100
+% assert total_avec_while([3.5, -1, 2.0, 4.25]) == total_panier([3.5, -1, 2.0, 4.25])
+% assert round(0.1 * 3 * 100) / 100 == 0.3
+% END-VERIFY
+\begin{corrige}{1NSI-LANG-EX-006}
+\textbf{1.} Les cinq constructions sont toutes présentes :
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+construction & occurrence \\
+\hline
+séquence & les trois instructions du corps, exécutées l'une après l'autre \\
+affectation & \lstinline{let total = 0;} et \lstinline{total = total + prix[i];} \\
+boucle bornée & \lstinline{for (let i = 0; i < prix.length; i = i + 1)} \\
+conditionnelle & \lstinline{if (prix[i] > 0)} \\
+appel de fonction & \lstinline{Math.round(total * 100)} \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{2.} La traduction ne change que l'habillage :
+\begin{python}
+def total_panier(prix):
+    total = 0
+    for i in range(len(prix)):
+        if prix[i] > 0:
+            total = total + prix[i]
+    return round(total * 100) / 100
+\end{python}
+
+\textbf{3.} Sur \lstinline{[3.5, -1, 2.0, 4.25]}, la fonction additionne
+$3{,}5+2{,}0+4{,}25=9{,}75$. Sur la liste vide comme sur
+\lstinline{[-2, -8]}, elle renvoie $0$ : la boucle ne fait aucun tour dans le
+premier cas, et la conditionnelle est fausse à chaque tour dans le second.
+
+Pour une caisse, ces deux zéros ne veulent pourtant pas dire la même chose : un
+panier vide est normal, un panier composé uniquement de montants négatifs est
+un remboursement, et l'afficher comme un total de $0$ euro serait une erreur
+commerciale. La fonction est correcte au sens du calcul, insuffisante au sens du
+métier — c'est une distinction qu'aucun test de valeur de retour ne fera à notre
+place.
+
+\textbf{4.} C'est une différence de \textbf{syntaxe}. Les deux codes emploient
+exactement les mêmes constructions, dans le même ordre ; seule change la façon
+de les écrire — accolades et point-virgules d'un côté, indentation de l'autre.
+C'est précisément ce que veut dire « constructions communes aux langages de
+programmation » : ce qui se traduit d'un langage à l'autre sans rien
+réorganiser.
+
+\textbf{5.} La \textbf{boucle non bornée} (\lstinline{while}) est absente : ici
+le nombre de tours est connu d'avance, c'est le nombre d'articles. La caisse en
+aurait besoin, par exemple, pour redemander un code-barres tant que la saisie
+est invalide : on ne sait pas à l'avance combien de fois le client s'y
+reprendra. On peut d'ailleurs réécrire la même fonction avec un
+\lstinline{while} et un compteur explicite, et vérifier qu'elle donne le même
+total — mais rien n'y gagne en clarté, car le nombre de tours, lui, reste connu.
+\end{corrige}

@@ -1,0 +1,78 @@
+% META: {"id": "1NSI-ARCHOS-EX-006", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "exercice", "capacites": ["P-ARCH-01B"], "parcours": 2, "competences": ["analyser", "programmer", "valider"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-006.tex", "corrige_tex": "chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-006.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-C598ACAD5781", "CAPACITY_ID": "C2", "EXERCISE_ROLE": "CONTEXT_VARIATION", "DIFFICULTY": 2, "AUTHORING_REASON": "le deroulement d'un programme machine n'etait demande que sur un programme sans destination, ecrit pour l'exercice ; ici les cases memoire portent des mesures et un seuil, et la trace sert a repondre a une question de la station, pas a remplir un tableau", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% def executer(programme, memoire):
+%     registres = {}
+%     memoire = list(memoire)
+%     trace = []
+%     for instruction in programme:
+%         op = instruction[0]
+%         if op == "LOAD":
+%             _, reg, adresse = instruction
+%             registres[reg] = memoire[adresse]
+%         elif op == "ADD":
+%             _, dest, src = instruction
+%             registres[dest] = registres[dest] + registres[src]
+%         elif op == "SUB":
+%             _, dest, src = instruction
+%             registres[dest] = registres[dest] - registres[src]
+%         elif op == "STORE":
+%             _, reg, adresse = instruction
+%             memoire[adresse] = registres[reg]
+%         elif op == "HALT":
+%             break
+%         trace.append(dict(registres))
+%     return memoire, registres, trace
+% programme = [
+%     ("LOAD", "R0", 0), ("LOAD", "R1", 1), ("ADD", "R0", "R1"),
+%     ("LOAD", "R1", 2), ("ADD", "R0", "R1"), ("STORE", "R0", 4),
+%     ("LOAD", "R2", 3), ("SUB", "R0", "R2"), ("STORE", "R0", 5),
+%     ("HALT",),
+% ]
+% memoire, registres, trace = executer(programme, [18, 21, 24, 60, 0, 0])
+% assert memoire == [18, 21, 24, 60, 63, 3]
+% assert registres == {"R0": 3, "R1": 24, "R2": 60}
+% assert [t.get("R0") for t in trace] == [18, 18, 39, 39, 63, 63, 63, 3, 3]
+% assert [t.get("R1") for t in trace] == [None, 21, 21, 24, 24, 24, 24, 24, 24]
+% assert memoire[4] > memoire[3] and memoire[5] > 0
+% froid, _, _ = executer(programme, [18, 21, 15, 60, 0, 0])
+% assert froid == [18, 21, 15, 60, 54, -6]
+% assert froid[4] < froid[3] and froid[5] < 0
+% END-VERIFY
+\begin{exercice}{1NSI-ARCHOS-EX-006}{2}{20}
+Une station météo enregistre trois relevés de température, en degrés, et doit
+déclencher une alerte lorsque leur somme dépasse un seuil. Son microcontrôleur
+n'exécute que le jeu d'instructions du cours, augmenté de
+\lstinline{("SUB", reg_dest, reg_src)}.
+
+La mémoire contient, dans cet ordre : les trois relevés, le seuil, puis deux
+cases libres.
+\begin{python}
+memoire = [18, 21, 24, 60, 0, 0]
+programme = [
+    ("LOAD", "R0", 0),
+    ("LOAD", "R1", 1),
+    ("ADD", "R0", "R1"),
+    ("LOAD", "R1", 2),
+    ("ADD", "R0", "R1"),
+    ("STORE", "R0", 4),
+    ("LOAD", "R2", 3),
+    ("SUB", "R0", "R2"),
+    ("STORE", "R0", 5),
+    ("HALT",),
+]
+\end{python}
+\begin{enumerate}
+  \item Dérouler l'exécution instruction par instruction, en donnant l'état des
+    registres après chacune. Présenter le résultat dans un tableau.
+  \item Que contiennent \lstinline{memoire[4]} et \lstinline{memoire[5]} à la
+    fin ? Que représente chacune de ces deux valeurs pour la station ?
+  \item Sur quelle condition portant sur \lstinline{memoire[5]} la station
+    doit-elle déclencher l'alerte ? Est-elle remplie ici ?
+  \item Un matin, le troisième relevé vaut $15$ au lieu de $24$. Refaire le
+    calcul et donner les nouvelles valeurs de \lstinline{memoire[4]} et
+    \lstinline{memoire[5]}. L'alerte se déclenche-t-elle ?
+  \item Le programme réutilise \lstinline{R1} pour le troisième relevé au lieu
+    d'employer un registre supplémentaire. Quel est l'intérêt de ce choix sur un
+    microcontrôleur, et qu'a-t-on définitivement perdu en le faisant ?
+\end{enumerate}
+\end{exercice}

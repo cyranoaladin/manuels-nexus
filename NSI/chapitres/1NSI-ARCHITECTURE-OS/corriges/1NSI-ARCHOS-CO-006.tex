@@ -1,0 +1,86 @@
+% META: {"id": "1NSI-ARCHOS-CO-006", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "corrige", "exercice_ref": "1NSI-ARCHOS-EX-006", "capacites": ["P-ARCH-01B"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def executer(programme, memoire):
+%     registres, memoire = {}, list(memoire)
+%     for instruction in programme:
+%         op = instruction[0]
+%         if op == "LOAD":
+%             _, reg, adresse = instruction
+%             registres[reg] = memoire[adresse]
+%         elif op == "ADD":
+%             _, dest, src = instruction
+%             registres[dest] = registres[dest] + registres[src]
+%         elif op == "SUB":
+%             _, dest, src = instruction
+%             registres[dest] = registres[dest] - registres[src]
+%         elif op == "STORE":
+%             _, reg, adresse = instruction
+%             memoire[adresse] = registres[reg]
+%         elif op == "HALT":
+%             break
+%     return memoire, registres
+% programme = [
+%     ("LOAD", "R0", 0), ("LOAD", "R1", 1), ("ADD", "R0", "R1"),
+%     ("LOAD", "R1", 2), ("ADD", "R0", "R1"), ("STORE", "R0", 4),
+%     ("LOAD", "R2", 3), ("SUB", "R0", "R2"), ("STORE", "R0", 5),
+%     ("HALT",),
+% ]
+% chaud = executer(programme, [18, 21, 24, 60, 0, 0])
+% assert chaud[0] == [18, 21, 24, 60, 63, 3]
+% assert chaud[1] == {"R0": 3, "R1": 24, "R2": 60}
+% assert 18 + 21 + 24 == 63 and 63 - 60 == 3
+% froid = executer(programme, [18, 21, 15, 60, 0, 0])
+% assert froid[0] == [18, 21, 15, 60, 54, -6]
+% assert 18 + 21 + 15 == 54 and 54 - 60 == -6
+% assert chaud[0][5] > 0 and froid[0][5] < 0
+% assert chaud[1]["R1"] == 24
+% END-VERIFY
+\begin{corrige}{1NSI-ARCHOS-EX-006}
+\textbf{1.} Chaque ligne donne l'état des registres \emph{après} l'instruction.
+Une case vide signifie que le registre n'existe pas encore.
+
+\begin{center}
+\begin{tabular}{llccc}
+\hline
+ & instruction & \lstinline{R0} & \lstinline{R1} & \lstinline{R2} \\
+\hline
+1 & \lstinline{LOAD R0, 0}   & $18$ & & \\
+2 & \lstinline{LOAD R1, 1}   & $18$ & $21$ & \\
+3 & \lstinline{ADD R0, R1}   & $39$ & $21$ & \\
+4 & \lstinline{LOAD R1, 2}   & $39$ & $24$ & \\
+5 & \lstinline{ADD R0, R1}   & $63$ & $24$ & \\
+6 & \lstinline{STORE R0, 4}  & $63$ & $24$ & \\
+7 & \lstinline{LOAD R2, 3}   & $63$ & $24$ & $60$ \\
+8 & \lstinline{SUB R0, R2}   & $3$  & $24$ & $60$ \\
+9 & \lstinline{STORE R0, 5}  & $3$  & $24$ & $60$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{2.} À la fin, \lstinline{memoire = [18, 21, 24, 60, 63, 3]}. La case
+$4$ contient $63$, la \emph{somme des trois relevés} ; la case $5$ contient
+$3$, l'\emph{écart entre cette somme et le seuil}. Le programme n'a pas
+seulement calculé un total : il a rangé les deux informations dont la station a
+besoin.
+
+\textbf{3.} L'alerte doit se déclencher lorsque la somme dépasse le seuil,
+c'est-à-dire lorsque \lstinline{memoire[5]} est \emph{strictement positif}. Ici
+$3>0$ : l'alerte se déclenche. Tester le signe d'une différence plutôt que
+comparer deux nombres est la façon habituelle de procéder en langage machine,
+où l'unité arithmétique positionne un indicateur de signe après chaque
+soustraction.
+
+\textbf{4.} La somme devient $18+21+15=54$, donc \lstinline{memoire[4] = 54} et
+\lstinline{memoire[5] = 54-60 = -6}. L'écart est négatif : l'alerte ne se
+déclenche pas.
+
+\textbf{5.} Réutiliser \lstinline{R1} économise un registre, et les registres
+sont la ressource la plus rare d'un microcontrôleur : ils se comptent souvent
+sur les doigts d'une main, alors que la mémoire se compte en milliers de cases.
+Le prix de cette économie est que la valeur $21$, le deuxième relevé, est
+définitivement perdue à l'instruction $4$ : elle a été écrasée. Si le programme
+devait ensuite afficher le relevé le plus élevé, il faudrait le recharger depuis
+la mémoire — ce qui coûte une instruction de plus. Économiser un registre, c'est
+accepter de relire la mémoire ; c'est ce compromis qui structure la
+programmation en langage machine.
+\end{corrige}

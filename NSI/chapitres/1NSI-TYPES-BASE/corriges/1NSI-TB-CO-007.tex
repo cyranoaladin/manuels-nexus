@@ -1,0 +1,59 @@
+% META: {"id": "1NSI-TB-CO-007", "chapitre": "1NSI-TYPES-BASE", "type_objet": "corrige", "exercice_ref": "1NSI-TB-EX-007", "capacites": ["P-BASE-02"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% assert 85 - (-40) + 1 == 126
+% assert (-(2 ** 6), 2 ** 6 - 1) == (-64, 63)
+% assert (-(2 ** 7), 2 ** 7 - 1) == (-128, 127)
+% assert 85 > 63 and 85 <= 127 and -40 >= -128
+% assert format(85, "08b") == "01010101"
+% assert format(40, "08b") == "00101000"
+% assert "".join("1" if c == "0" else "0" for c in "00101000") == "11010111"
+% assert format(int("11010111", 2) + 1, "08b") == "11011000"
+% assert int("11011000", 2) == 216 and 216 - 256 == -40
+% assert 2 ** 8 == 256
+% assert (-(2 ** 9), 2 ** 9 - 1) == (-512, 511)
+% assert (-(2 ** 10), 2 ** 10 - 1) == (-1024, 1023)
+% assert 1000 > 511 and 1000 <= 1023 and -273 >= -1024
+% assert 126 <= 2 ** 7 and 1274 <= 2 ** 11
+% END-VERIFY
+\begin{corrige}{1NSI-TB-EX-007}
+\textbf{1.} De $-40$ à $85$ inclus, il y a $85-(-40)+1=126$ valeurs entières.
+
+\textbf{2.} Sur $n$ bits, le complément à $2$ couvre $[-2^{n-1}\,;\,2^{n-1}-1]$.
+Pour $n=7$ : $[-64\,;\,63]$. La borne $-40$ y tient, mais pas $85$, qui dépasse
+$63$. Pour $n=8$ : $[-128\,;\,127]$, qui contient les deux bornes. Il faut donc
+$8$ bits.
+
+Remarquer que compter les $126$ valeurs ne suffisait pas à conclure : $126$ tient
+dans $2^7=128$ combinaisons. Ce n'est pas le \emph{nombre} de valeurs qui décide,
+mais leur \emph{position} : le complément à $2$ impose un intervalle centré sur
+zéro, et $[-40\,;\,85]$ ne l'est pas.
+
+\textbf{3.} $85$ est positif, on l'écrit directement en binaire :
+$85=64+16+4+1$, donc $85=01010101_2$.
+
+Pour $-40$, la méthode a trois étapes :
+\begin{enumerate}
+  \item écrire $40$ sur $8$ bits : $40=32+8$, donc $00101000$ ;
+  \item inverser tous les bits : $11010111$ ;
+  \item ajouter $1$ : $11011000$.
+\end{enumerate}
+Donc $-40=11011000_2$ en complément à $2$ sur $8$ bits. Le bit de poids fort
+vaut $1$, ce qui est cohérent : il signale un nombre négatif.
+
+\textbf{4.} Lu comme un entier non signé, $11011000_2$ vaut
+$128+64+16+8=216$. L'écart avec la valeur attendue est
+$216-(-40)=256=2^8$.
+
+Cet écart vaut toujours $2^8$ pour un nombre négatif lu sur $8$ bits, parce que
+c'est la définition même du codage : le motif écrit pour $x<0$ est celui de
+$2^8+x$. Lire ce motif sans tenir compte de la convention, c'est lire
+$2^8+x$ au lieu de $x$. Une température de $-40\,^\circ$C devient $216\,^\circ$C
+— une valeur qui n'a rien d'absurde pour un four, et qu'aucun contrôle de plage
+ne rejetterait.
+
+\textbf{5.} Il faut couvrir $-273$ et $1000$. Sur $10$ bits, l'intervalle est
+$[-512\,;\,511]$ : $1000$ n'y tient pas. Sur $11$ bits, il est
+$[-1024\,;\,1023]$, qui contient les deux bornes. Le nombre minimal est donc
+$11$ bits — soit, en pratique, deux octets, car les mémoires ne se découpent pas
+en tranches de onze.
+\end{corrige}

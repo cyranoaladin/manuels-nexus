@@ -1,0 +1,70 @@
+% META: {"id": "1NSI-TB-CO-008", "chapitre": "1NSI-TYPES-BASE", "type_objet": "corrige", "exercice_ref": "1NSI-TB-EX-008", "capacites": ["P-BASE-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% assert "café".encode("utf-8").hex().upper() == "636166C3A9"
+% assert "café".encode("latin-1").hex().upper() == "636166E9"
+% assert (len("café".encode("utf-8")), len("café".encode("latin-1"))) == (5, 4)
+% def convertir(octets, source, cible):
+%     return octets.decode(source).encode(cible)
+% assert convertir(b"caf\xe9", "latin-1", "utf-8") == b"caf\xc3\xa9"
+% assert convertir(b"caf\xc3\xa9", "utf-8", "latin-1") == b"caf\xe9"
+% assert "café".encode("utf-8").decode("latin-1") == "cafÃ©"
+% assert bytes([0xC3]).decode("latin-1") == "Ã" and bytes([0xA9]).decode("latin-1") == "©"
+% assert ord("é") == 0xE9 == 233
+% refus = False
+% try:
+%     "café".encode("ascii")
+% except UnicodeEncodeError:
+%     refus = True
+% assert refus
+% assert "ete".encode("ascii") == b"ete" == "ete".encode("utf-8")
+% assert len(("x" * 1000).encode("utf-8")) == 1000
+% assert all(ord(c) < 128 for c in "ete")
+% END-VERIFY
+\begin{corrige}{1NSI-TB-EX-008}
+\textbf{1.} Les trois premières lettres sont dans la table ASCII et se codent de
+la même façon partout : \lstinline{63 61 66}. Le \lstinline{é} diffère.
+\begin{center}
+\begin{tabular}{lll}
+\hline
+encodage & octets (hexadécimal) & taille \\
+\hline
+UTF-8 & \lstinline{63 61 66 C3 A9} & $5$ octets \\
+ISO-8859-1 & \lstinline{63 61 66 E9} & $4$ octets \\
+\hline
+\end{tabular}
+\end{center}
+Le mot compte $4$ caractères mais $5$ octets en UTF-8 : caractère et octet ne se
+confondent plus dès qu'on sort de l'ASCII.
+
+\textbf{2.} Une conversion se fait toujours en deux temps — décoder vers du
+texte, puis réencoder :
+\begin{python}
+def convertir(octets, source, cible):
+    return octets.decode(source).encode(cible)
+
+assert convertir(b"caf\xe9", "latin-1", "utf-8") == b"caf\xc3\xa9"
+assert convertir(b"caf\xc3\xa9", "utf-8", "latin-1") == b"caf\xe9"
+\end{python}
+Il n'existe pas de conversion directe d'octets à octets : il faut passer par la
+signification, c'est-à-dire par les caractères.
+
+\textbf{3.} Le logiciel affiche \lstinline{cafÃ©}. Les trois premiers octets
+donnent \lstinline{caf} comme prévu. Ensuite, ISO-8859-1 fait correspondre un
+caractère à \emph{chaque} octet : \lstinline{C3} devient \lstinline{Ã} et
+\lstinline{A9} devient \lstinline{©}. Le \lstinline{é}, codé sur deux octets en
+UTF-8, est lu comme deux caractères. C'est l'origine des \og{} caractères
+bizarres \fg{} qu'on rencontre sur les pages mal configurées.
+
+\textbf{4.} \lstinline{"café".encode("ascii")} lève une
+\lstinline{UnicodeEncodeError} : la table ASCII ne contient que $128$
+caractères, et \lstinline{é}, de code $233$, n'en fait pas partie. En revanche
+\lstinline{"ete".encode("ascii")} réussit et donne \lstinline{b"ete"} —
+exactement les mêmes octets qu'en UTF-8.
+
+\textbf{5.} Le fichier fait $1\,000$ octets. C'est l'argument décisif en faveur
+d'UTF-8 : il code chaque caractère ASCII sur un seul octet, avec la même valeur
+qu'en ASCII, et n'utilise plusieurs octets que pour les caractères qui en
+sortent. Un texte anglais n'y perd rien, un texte français y perd un octet par
+accent, et un texte arabe ou chinois devient représentable — ce qu'aucun des
+encodages nationaux à un octet ne permettait.
+\end{corrige}

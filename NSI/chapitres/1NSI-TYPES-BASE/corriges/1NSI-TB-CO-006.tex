@@ -1,0 +1,45 @@
+% META: {"id": "1NSI-TB-CO-006", "chapitre": "1NSI-TYPES-BASE", "type_objet": "corrige", "exercice_ref": "1NSI-TB-EX-006", "capacites": ["P-BASE-01"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% assert 2 * 16 + 15 == 47
+% assert 8 * 16 + 0 == 128
+% assert 14 * 16 + 13 == 237
+% assert [format(c, "08b") for c in (47, 128, 237)] == ["00101111", "10000000", "11101101"]
+% assert [c // 2 for c in (47, 128, 237)] == [23, 64, 118]
+% assert format(23, "02X") == "17" and format(64, "02X") == "40" and format(118, "02X") == "76"
+% assert "".join(format(c, "02X") for c in (23, 64, 118)) == "174076"
+% assert 2 ** 24 == 16 ** 6 == 16777216
+% assert 16 ** 2 == 256
+% assert 10 ** 2 == 100 and 100 < 256
+% assert 47 == int("2F", 16) and 128 == int("80", 16) and 237 == int("ED", 16)
+% END-VERIFY
+\begin{corrige}{1NSI-TB-EX-006}
+\textbf{1.} On développe en puissances de $16$ :
+\[
+  \text{2F}_{16}=2\times 16+15=47,\qquad
+  \text{80}_{16}=8\times 16+0=128,\qquad
+  \text{ED}_{16}=14\times 16+13=237.
+\]
+La couleur a donc pour composantes $(47\,;\,128\,;\,237)$ : peu de rouge,
+beaucoup de bleu — c'est un bleu franc.
+
+\textbf{2.} $47=00101111_2$, $128=10000000_2$, $237=11101101_2$. Chaque
+composante tient exactement sur $8$ bits, c'est-à-dire un octet.
+
+\textbf{3.} $47\div 2=23$, $128\div 2=64$, $237\div 2=118$ (divisions
+entières). En hexadécimal : $23=\text{17}_{16}$, $64=\text{40}_{16}$,
+$118=\text{76}_{16}$. Le nouveau code est \lstinline{#174076}.
+
+\textbf{4.} Chaque composante occupe $8$ bits, soit $24$ bits en tout :
+$2^{24}=16\,777\,216$ couleurs. Autrement : chaque composante s'écrit avec
+$2$ chiffres hexadécimaux, soit $6$ chiffres, et $16^6=16\,777\,216$. Les deux
+comptes coïncident parce que $16=2^4$, donc $16^6=2^{24}$.
+
+\textbf{5.} Deux chiffres hexadécimaux couvrent $16^2=256$ valeurs, c'est-à-dire
+\emph{exactement} l'étendue d'un octet, de $0$ à $255$ : chaque composante
+occupe deux chiffres, ni plus ni moins, et la lecture d'un code couleur se fait
+en découpant la chaîne par paires. Deux chiffres décimaux ne couvrent que $100$
+valeurs, insuffisant, et trois en couvrent $1000$, plus qu'il n'en faut : le
+découpage ne tomberait plus juste et une composante s'écrirait tantôt sur deux
+chiffres, tantôt sur trois. L'hexadécimal est choisi parce qu'un chiffre y vaut
+exactement quatre bits.
+\end{corrige}

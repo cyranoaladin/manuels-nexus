@@ -1,0 +1,54 @@
+% META: {"id": "1NSI-ADGK-EX-006", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "exercice", "capacites": ["P-ALGO-03"], "parcours": 1, "competences": ["programmer", "valider"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-006.tex", "corrige_tex": "chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-006.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-92EEC5BDEBDE", "CAPACITY_ID": "C3", "EXERCISE_ROLE": "DIRECT_APPLICATION", "DIFFICULTY": 1, "AUTHORING_REASON": "la capacite dit ECRIRE l'algorithme des k plus proches voisins, et le seul exercice rattache appelait la fonction du cours sans jamais la faire construire ; l'eleve pouvait valider la capacite sans avoir ecrit une ligne de l'algorithme", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% from collections import Counter
+% def distance(p, q):
+%     return ((p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2) ** 0.5
+% def k_plus_proches(base, point, k):
+%     return sorted(base, key=lambda e: distance((e[0], e[1]), point))[:k]
+% def classe_majoritaire(voisins):
+%     return Counter(v[2] for v in voisins).most_common(1)[0][0]
+% def predire(base, point, k):
+%     return classe_majoritaire(k_plus_proches(base, point, k))
+% base = [(1.5, 0.5, "A"), (1.0, 0.5, "A"), (1.5, 1.0, "A"),
+%         (4.5, 1.5, "B"), (5.0, 1.5, "B"), (4.5, 2.0, "B")]
+% point = (3.0, 1.0)
+% carres = [(e[0] - 3.0) ** 2 + (e[1] - 1.0) ** 2 for e in base]
+% assert carres == [2.5, 4.25, 2.25, 2.5, 4.25, 3.25]
+% # Les valeurs sont des multiples de 0.5 : leurs ecarts sont exacts en
+% # binaire, l'egalite des deux distances est donc une egalite, pas un arrondi.
+% assert distance((1.5, 0.5), point) == distance((4.5, 1.5), point)
+% assert predire(base, point, 1) == "A"
+% assert [v[2] for v in k_plus_proches(base, point, 3)] == ["A", "A", "B"]
+% assert predire(base, point, 3) == "A"
+% assert [v[2] for v in k_plus_proches(base, point, 2)] == ["A", "A"]
+% assert Counter(["A", "B"]).most_common(1)[0][1] == 1
+% assert len(set(Counter(["A", "B"]).values())) == 1
+% assert predire(base, (1.5, 0.75), 3) == "A"
+% assert predire(base, (4.75, 1.75), 3) == "B"
+% END-VERIFY
+\begin{exercice}{1NSI-ADGK-EX-006}{1}{20}
+On veut écrire soi-même l'algorithme des $k$ plus proches voisins, sans utiliser
+la fonction du cours. Chaque individu de la base est un triplet
+\lstinline{(x, y, classe)}, où \lstinline{x} et \lstinline{y} sont deux mesures
+numériques.
+\begin{python}
+base = [
+    (1.5, 0.5, "A"), (1.0, 0.5, "A"), (1.5, 1.0, "A"),
+    (4.5, 1.5, "B"), (5.0, 1.5, "B"), (4.5, 2.0, "B"),
+]
+\end{python}
+\begin{enumerate}
+  \item Écrire \lstinline{distance(p, q)} qui renvoie la distance euclidienne
+    entre deux couples de mesures.
+  \item Écrire \lstinline{k_plus_proches(base, point, k)} qui renvoie la liste
+    des $k$ individus de la base les plus proches de \lstinline{point}.
+  \item Écrire \lstinline{classe_majoritaire(voisins)} qui renvoie la classe la
+    plus représentée dans une liste de voisins.
+  \item Assembler les trois fonctions en \lstinline{predire(base, point, k)}.
+    Tester avec \lstinline{point = (3.0, 1.0)} et $k=1$, puis $k=3$.
+  \item Deux individus de la base sont \textbf{exactement} à la même distance de
+    \lstinline{(3.0, 1.0)} : les identifier. Que devient la prédiction pour
+    $k=2$ selon celui des deux que l'algorithme retient en deuxième position ?
+    Que faudrait-il préciser dans la spécification de la fonction ?
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,58 @@
+% META: {"id": "1NSI-WEB-EX-007", "chapitre": "1NSI-WEB-IHM", "type_objet": "exercice", "capacites": ["P-IHM-03A", "P-IHM-03B"], "parcours": 1, "competences": ["analyser", "programmer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-007.tex", "corrige_tex": "chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-007.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-02C5DA8D1175", "SECOND_PEDAGOGICAL_GAP_ID": "GAP-3E2E338356BD", "CAPACITY_ID": "C4", "SECOND_CAPACITY_ID": "C5", "EXERCISE_ROLE": "DIRECT_APPLICATION", "DIFFICULTY": 1, "AUTHORING_REASON": "les deux capacites n'etaient servies que par un scenario de commerce electronique a derouler ; aucun enonce ne demandait le geste de base, classer des actions entre client et serveur puis les ordonner, ni dire ce que le client conserve entre deux requetes", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% actions = [
+%     ("verification du format de l'adresse e-mail saisie", "client"),
+%     ("envoi de la requete HTTP", "client"),
+%     ("recherche du compte dans la base de donnees", "serveur"),
+%     ("verification du mot de passe", "serveur"),
+%     ("creation du cookie de session", "serveur"),
+%     ("memorisation du cookie de session", "client"),
+%     ("affichage de la page d'accueil personnalisee", "client"),
+% ]
+% assert len(actions) == 7
+% assert [a[1] for a in actions] == ["client", "client", "serveur", "serveur",
+%                                    "serveur", "client", "client"]
+% assert sum(1 for a in actions if a[1] == "client") == 4
+% assert sum(1 for a in actions if a[1] == "serveur") == 3
+% cookies_client = {}
+% def serveur_definit_cookie(nom, valeur):
+%     cookies_client[nom] = valeur
+% def client_envoie_requete_avec_cookies(url):
+%     return {"url": url, "cookies": dict(cookies_client)}
+% assert client_envoie_requete_avec_cookies("/connexion") == {"url": "/connexion", "cookies": {}}
+% serveur_definit_cookie("id_session", "a7f3")
+% assert client_envoie_requete_avec_cookies("/profil") == {
+%     "url": "/profil", "cookies": {"id_session": "a7f3"}}
+% assert "mot_de_passe" not in cookies_client
+% assert client_envoie_requete_avec_cookies("/deconnexion")["cookies"] == {"id_session": "a7f3"}
+% cookies_client.clear()
+% assert client_envoie_requete_avec_cookies("/profil")["cookies"] == {}
+% END-VERIFY
+\begin{exercice}{1NSI-WEB-EX-007}{1}{15}
+Un utilisateur se connecte à un site. Voici, dans le désordre, sept actions qui
+se produisent :
+\begin{enumerate}
+  \item[(a)] recherche du compte dans la base de données ;
+  \item[(b)] mémorisation du cookie de session ;
+  \item[(c)] vérification du format de l'adresse e-mail saisie ;
+  \item[(d)] création du cookie de session ;
+  \item[(e)] affichage de la page d'accueil personnalisée ;
+  \item[(f)] vérification du mot de passe ;
+  \item[(g)] envoi de la requête HTTP.
+\end{enumerate}
+\begin{enumerate}
+  \item Dresser un tableau à deux colonnes, \emph{client} et \emph{serveur}, et y
+    placer chacune des sept actions. Combien en compte chaque colonne ?
+  \item Remettre les sept actions dans leur ordre d'exécution.
+  \item En reprenant le modèle de cookies du cours, écrire les deux appels qui
+    simulent la création du cookie \lstinline{"id_session"} de valeur
+    \lstinline{"a7f3"} par le serveur, puis la requête suivante vers
+    \lstinline{/profil}. Donner le dictionnaire renvoyé.
+  \item Donner le dictionnaire renvoyé par une requête vers
+    \lstinline{/connexion} envoyée \emph{avant} toute connexion. Qu'est-ce qui
+    distingue les deux résultats ?
+  \item Le mot de passe est-il mémorisé dans le client et retransmis à chaque
+    requête ? Vérifier sur le contenu de \lstinline{cookies_client}, et dire
+    quelle serait la conséquence si c'était le cas.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,50 @@
+% META: {"id": "1NSI-LANG-EX-006", "chapitre": "1NSI-LANGAGE", "type_objet": "exercice", "capacites": ["P-LANG-01"], "parcours": 2, "competences": ["analyser", "programmer", "valider"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-006.tex", "corrige_tex": "chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-006.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-1A47026CA5F7", "CAPACITY_ID": "C1", "EXERCISE_ROLE": "CONTEXT_VARIATION", "DIFFICULTY": 2, "AUTHORING_REASON": "les constructions elementaires n'etaient reperees que dans du code Python ecrit par l'eleve lui-meme, ou il les reconnait parce qu'il vient de les taper ; la capacite dit COMMUNES aux langages, ce qui suppose de les retrouver dans une syntaxe qu'on n'a pas ecrite", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% def total_panier(prix):
+%     total = 0
+%     for i in range(len(prix)):
+%         if prix[i] > 0:
+%             total = total + prix[i]
+%     return round(total * 100) / 100
+% assert total_panier([3.5, -1, 2.0, 4.25]) == 9.75
+% assert total_panier([]) == 0
+% assert total_panier([-2, -8]) == 0
+% assert total_panier([1.005, 1.005]) == 2.01
+% # La boucle est BORNEE : son nombre de tours est connu avant d'entrer.
+% assert len(range(len([3.5, -1, 2.0, 4.25]))) == 4
+% def total_sans_conditionnelle(prix):
+%     return round(sum(p for p in prix if p > 0) * 100) / 100
+% assert total_sans_conditionnelle([3.5, -1, 2.0, 4.25]) == 9.75
+% END-VERIFY
+\begin{exercice}{1NSI-LANG-EX-006}{2}{20}
+Une caisse automatique est programmée dans un langage à accolades, différent de
+Python. Voici la fonction qui calcule le total d'un panier en ignorant les
+lignes de montant négatif (retours d'articles saisis à part) :
+\begin{console}
+function totalPanier(prix) {
+    let total = 0;
+    for (let i = 0; i < prix.length; i = i + 1) {
+        if (prix[i] > 0) {
+            total = total + prix[i];
+        }
+    }
+    return Math.round(total * 100) / 100;
+}
+\end{console}
+\begin{enumerate}
+  \item Repérer dans ce code une occurrence de chacune des constructions
+    élémentaires suivantes : séquence, affectation, boucle bornée,
+    conditionnelle, appel de fonction. Citer la ligne concernée à chaque fois.
+  \item Traduire cette fonction en Python, sous le nom
+    \lstinline{total_panier(prix)}.
+  \item Tester la traduction sur \lstinline{[3.5, -1, 2.0, 4.25]} (résultat
+    attendu : $9{,}75$), puis sur la liste vide et sur
+    \lstinline{[-2, -8]}. Que renvoie-t-elle dans ces deux derniers cas, et
+    est-ce le comportement souhaitable pour une caisse ?
+  \item Le langage d'origine impose \lstinline{let} et des accolades, Python
+    utilise l'indentation. S'agit-il d'une différence de \emph{construction} ou
+    de \emph{syntaxe} ? Justifier en une phrase.
+  \item Parmi les constructions élémentaires du cours, laquelle n'apparaît pas
+    dans ce code ? Donner un cas où la caisse en aurait besoin.
+\end{enumerate}
+\end{exercice}

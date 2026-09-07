@@ -1,0 +1,40 @@
+% META: {"id": "1NSI-TB-EX-008", "chapitre": "1NSI-TYPES-BASE", "type_objet": "exercice", "capacites": ["P-BASE-05"], "parcours": 1, "competences": ["programmer", "valider"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-008.tex", "corrige_tex": "chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-008.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-70251B29402C", "CAPACITY_ID": "C5", "EXERCISE_ROLE": "DIRECT_APPLICATION", "DIFFICULTY": 1, "AUTHORING_REASON": "la capacite dit CONVERTIR un texte d'un encodage a un autre, et l'unique exercice rattache faisait raisonner sur les encodages sans jamais faire produire une suite d'octets ni ecrire une conversion", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% assert "café".encode("utf-8") == b"caf\xc3\xa9"
+% assert "café".encode("latin-1") == b"caf\xe9"
+% assert len("café") == 4
+% assert len("café".encode("utf-8")) == 5
+% assert len("café".encode("latin-1")) == 4
+% assert "café".encode("utf-8").decode("latin-1") == "cafÃ©"
+% assert "café".encode("latin-1").decode("latin-1") == "café"
+% def convertir(octets, source, cible):
+%     return octets.decode(source).encode(cible)
+% assert convertir(b"caf\xe9", "latin-1", "utf-8") == b"caf\xc3\xa9"
+% assert convertir(b"caf\xc3\xa9", "utf-8", "latin-1") == b"caf\xe9"
+% erreur = False
+% try:
+%     "café".encode("ascii")
+% except UnicodeEncodeError:
+%     erreur = True
+% assert erreur
+% assert "ete".encode("ascii") == "ete".encode("utf-8") == b"ete"
+% assert len(("a" * 1000).encode("utf-8")) == 1000
+% END-VERIFY
+\begin{exercice}{1NSI-TB-EX-008}{1}{15}
+On travaille sur le mot \lstinline{"café"}, qui compte quatre caractères.
+\begin{enumerate}
+  \item Donner la suite d'octets qui code ce mot en UTF-8, puis en
+    ISO-8859-1. On donnera chaque octet en hexadécimal. Combien d'octets dans
+    chaque cas ?
+  \item Écrire une fonction \lstinline{convertir(octets, source, cible)} qui
+    convertit une suite d'octets d'un encodage vers un autre. La tester dans les
+    deux sens entre ISO-8859-1 et UTF-8.
+  \item Un logiciel lit les octets UTF-8 de \lstinline{"café"} en croyant qu'il
+    s'agit d'ISO-8859-1. Quelle chaîne affiche-t-il ? Expliquer octet par octet.
+  \item Que se passe-t-il si on tente d'encoder \lstinline{"café"} en ASCII ?
+    Et \lstinline{"ete"} ?
+  \item Un fichier contient $1\,000$ caractères, tous dans la table ASCII. Quelle
+    est sa taille en octets s'il est encodé en UTF-8 ? En quoi est-ce l'argument
+    principal en faveur d'UTF-8 ?
+\end{enumerate}
+\end{exercice}

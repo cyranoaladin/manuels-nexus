@@ -1,0 +1,77 @@
+% META: {"id": "1NSI-WEB-CO-007", "chapitre": "1NSI-WEB-IHM", "type_objet": "corrige", "exercice_ref": "1NSI-WEB-EX-007", "capacites": ["P-IHM-03A", "P-IHM-03B"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% ordre = ["c", "g", "a", "f", "d", "b", "e"]
+% cote = {"c": "client", "g": "client", "a": "serveur", "f": "serveur",
+%         "d": "serveur", "b": "client", "e": "client"}
+% assert len(ordre) == 7 and sorted(ordre) == sorted("abcdefg")
+% assert sum(1 for x in ordre if cote[x] == "client") == 4
+% assert sum(1 for x in ordre if cote[x] == "serveur") == 3
+% assert [cote[x] for x in ordre] == ["client", "client", "serveur", "serveur",
+%                                     "serveur", "client", "client"]
+% cookies_client = {}
+% def serveur_definit_cookie(nom, valeur):
+%     cookies_client[nom] = valeur
+% def client_envoie_requete_avec_cookies(url):
+%     return {"url": url, "cookies": dict(cookies_client)}
+% avant = client_envoie_requete_avec_cookies("/connexion")
+% assert avant == {"url": "/connexion", "cookies": {}}
+% serveur_definit_cookie("id_session", "a7f3")
+% apres = client_envoie_requete_avec_cookies("/profil")
+% assert apres == {"url": "/profil", "cookies": {"id_session": "a7f3"}}
+% assert avant["cookies"] == {} and apres["cookies"] != {}
+% assert "mot_de_passe" not in cookies_client
+% assert list(cookies_client) == ["id_session"]
+% END-VERIFY
+\begin{corrige}{1NSI-WEB-EX-007}
+\textbf{1.} Le partage se lit à une question : cette action a-t-elle besoin de
+la base de données du site, ou seulement de ce que le navigateur a sous la main ?
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+client & serveur \\
+\hline
+(c) vérification du format de l'e-mail & (a) recherche du compte \\
+(g) envoi de la requête HTTP & (f) vérification du mot de passe \\
+(b) mémorisation du cookie & (d) création du cookie de session \\
+(e) affichage de la page & \\
+\hline
+\end{tabular}
+\end{center}
+
+Le client en compte $4$, le serveur $3$. La vérification du format de l'e-mail
+est côté client : il suffit de regarder la chaîne saisie. La vérification du mot
+de passe est côté serveur : elle exige la base — et la faire côté client
+supposerait de lui envoyer le mot de passe enregistré, ce qui reviendrait à le
+publier.
+
+\textbf{2.} L'ordre d'exécution est
+(c), (g), (a), (f), (d), (b), (e) : contrôle local, envoi, traitement serveur en
+trois temps, mémorisation par le client, affichage. La séquence passe une fois
+du client au serveur, puis une fois du serveur au client.
+
+\textbf{3.} Deux appels suffisent :
+\begin{python}
+serveur_definit_cookie("id_session", "a7f3")
+client_envoie_requete_avec_cookies("/profil")
+\end{python}
+La requête renvoie
+\lstinline!{'url': '/profil', 'cookies': {'id_session': 'a7f3'}}!.
+
+\textbf{4.} Avant toute connexion, la requête vers \lstinline{/connexion} renvoie
+\lstinline!{'url': '/connexion', 'cookies': {}}!. La différence tient au champ
+\lstinline{cookies} : vide dans un cas, portant l'identifiant de session dans
+l'autre. C'est exactement ce que le client a mémorisé entre les deux requêtes —
+et c'est tout ce qui permet au serveur de reconnaître le visiteur, HTTP ne
+gardant lui-même aucune mémoire d'une requête à la suivante.
+
+\textbf{5.} Non : \lstinline{cookies_client} ne contient que
+\lstinline{"id_session"}. Le mot de passe n'est transmis qu'une fois, au moment
+de la connexion, et n'est jamais stocké côté client.
+
+S'il l'était, il repartirait dans \emph{chaque} requête, y compris vers des pages
+qui n'en ont aucun besoin, et il resterait sur la machine après la fermeture du
+navigateur. C'est toute la raison d'être de l'identifiant de session : il
+remplace le mot de passe par un jeton que le serveur peut révoquer, et dont la
+capture n'apprend pas le mot de passe.
+\end{corrige}

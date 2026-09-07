@@ -1,0 +1,65 @@
+% META: {"id": "1NSI-TAB-EX-006", "chapitre": "1NSI-TABLES", "type_objet": "exercice", "capacites": ["P-TABLE-04"], "parcours": 1, "competences": ["programmer", "valider"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-006.tex", "corrige_tex": "chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-006.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-810B51368004", "CAPACITY_ID": "C4", "EXERCISE_ROLE": "DIRECT_APPLICATION", "DIFFICULTY": 1, "AUTHORING_REASON": "la capacite dit CONSTRUIRE une table en combinant deux tables, et le seul exercice rattache appelait la fonction du cours puis demandait de proposer une modification en francais ; l'eleve n'ecrivait jamais la combinaison lui-meme", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% livres = [
+%     {"isbn": "A1", "titre": "Le Rivage", "auteur": "Diop"},
+%     {"isbn": "A2", "titre": "Nuits blanches", "auteur": "Kane"},
+%     {"isbn": "A3", "titre": "Sable", "auteur": "Diop"},
+% ]
+% emprunts = [
+%     {"isbn": "A1", "mois": "09"}, {"isbn": "A1", "mois": "10"},
+%     {"isbn": "A3", "mois": "09"},
+% ]
+% def nombre_emprunts(emprunts):
+%     comptes = {}
+%     for ligne in emprunts:
+%         comptes[ligne["isbn"]] = comptes.get(ligne["isbn"], 0) + 1
+%     return comptes
+% assert nombre_emprunts(emprunts) == {"A1": 2, "A3": 1}
+% def table_popularite(livres, emprunts):
+%     comptes = nombre_emprunts(emprunts)
+%     return [
+%         {"titre": l["titre"], "auteur": l["auteur"],
+%          "emprunts": comptes.get(l["isbn"], 0)}
+%         for l in livres
+%     ]
+% table = table_popularite(livres, emprunts)
+% assert len(table) == len(livres) == 3
+% assert table[0] == {"titre": "Le Rivage", "auteur": "Diop", "emprunts": 2}
+% assert table[1] == {"titre": "Nuits blanches", "auteur": "Kane", "emprunts": 0}
+% assert table[2] == {"titre": "Sable", "auteur": "Diop", "emprunts": 1}
+% classement = sorted(table, key=lambda l: l["emprunts"], reverse=True)
+% assert [l["titre"] for l in classement] == ["Le Rivage", "Sable", "Nuits blanches"]
+% assert sum(l["emprunts"] for l in table if l["auteur"] == "Diop") == 3
+% assert sum(l["emprunts"] for l in table) == len(emprunts)
+% END-VERIFY
+\begin{exercice}{1NSI-TAB-EX-006}{1}{18}
+Une bibliothèque conserve deux tables : le catalogue et le journal des emprunts.
+\begin{python}
+livres = [
+    {"isbn": "A1", "titre": "Le Rivage", "auteur": "Diop"},
+    {"isbn": "A2", "titre": "Nuits blanches", "auteur": "Kane"},
+    {"isbn": "A3", "titre": "Sable", "auteur": "Diop"},
+]
+emprunts = [
+    {"isbn": "A1", "mois": "09"},
+    {"isbn": "A1", "mois": "10"},
+    {"isbn": "A3", "mois": "09"},
+]
+\end{python}
+\begin{enumerate}
+  \item Écrire \lstinline{nombre_emprunts(emprunts)} qui renvoie un dictionnaire
+    associant à chaque ISBN son nombre d'emprunts. Donner le résultat obtenu.
+  \item Écrire \lstinline{table_popularite(livres, emprunts)} qui construit une
+    nouvelle table dont chaque ligne a les colonnes \lstinline{titre},
+    \lstinline{auteur} et \lstinline{emprunts}. Un livre jamais emprunté doit y
+    figurer avec $0$.
+  \item Donner la table obtenue, et vérifier qu'elle a autant de lignes que le
+    catalogue.
+  \item Trier cette table par nombre d'emprunts décroissant et donner l'ordre
+    des titres.
+  \item Combien d'emprunts totalisent les ouvrages de l'auteur Diop ? Vérifier
+    que la somme de la colonne \lstinline{emprunts} est égale au nombre de
+    lignes du journal, et expliquer pourquoi cette égalité doit toujours être
+    vraie.
+\end{enumerate}
+\end{exercice}

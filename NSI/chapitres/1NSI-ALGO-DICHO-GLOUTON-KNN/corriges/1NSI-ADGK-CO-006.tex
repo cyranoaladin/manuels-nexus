@@ -1,0 +1,85 @@
+% META: {"id": "1NSI-ADGK-CO-006", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "corrige", "exercice_ref": "1NSI-ADGK-EX-006", "capacites": ["P-ALGO-03"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from collections import Counter
+% def distance(p, q):
+%     return ((p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2) ** 0.5
+% def k_plus_proches(base, point, k):
+%     return sorted(base, key=lambda e: distance((e[0], e[1]), point))[:k]
+% def classe_majoritaire(voisins):
+%     return Counter(v[2] for v in voisins).most_common(1)[0][0]
+% def predire(base, point, k):
+%     return classe_majoritaire(k_plus_proches(base, point, k))
+% base = [(1.5, 0.5, "A"), (1.0, 0.5, "A"), (1.5, 1.0, "A"),
+%         (4.5, 1.5, "B"), (5.0, 1.5, "B"), (4.5, 2.0, "B")]
+% point = (3.0, 1.0)
+% assert distance((1.5, 1.0), point) == 1.5
+% assert distance((1.5, 0.5), point) == distance((4.5, 1.5), point)
+% assert abs(distance((1.5, 0.5), point) - 1.5811388) < 1e-7
+% assert abs(distance((4.5, 2.0), point) - 1.8027756) < 1e-7
+% assert abs(distance((1.0, 0.5), point) - 2.0615528) < 1e-7
+% assert distance((1.0, 0.5), point) == distance((5.0, 1.5), point)
+% assert predire(base, point, 1) == "A"
+% assert [v[2] for v in k_plus_proches(base, point, 3)] == ["A", "A", "B"]
+% assert predire(base, point, 3) == "A"
+% assert [v[2] for v in k_plus_proches(base, point, 2)] == ["A", "A"]
+% assert Counter(["A", "B"]).most_common(1)[0][1] == 1
+% assert sorted(Counter(["A", "B"]).values()) == [1, 1]
+% END-VERIFY
+\begin{corrige}{1NSI-ADGK-EX-006}
+\textbf{1.} On applique le théorème de Pythagore aux deux mesures :
+\begin{python}
+def distance(p, q):
+    return ((p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2) ** 0.5
+\end{python}
+
+\textbf{2.} On trie la base selon la distance au point, puis on garde les $k$
+premiers :
+\begin{python}
+def k_plus_proches(base, point, k):
+    tries = sorted(base, key=lambda e: distance((e[0], e[1]), point))
+    return tries[:k]
+\end{python}
+Trier la base entière coûte plus cher que nécessaire quand $k$ est petit, mais
+c'est la version la plus lisible et la plus facile à justifier.
+
+\textbf{3.} On compte les classes et on renvoie la plus fréquente :
+\begin{python}
+from collections import Counter
+
+def classe_majoritaire(voisins):
+    comptes = Counter(v[2] for v in voisins)
+    return comptes.most_common(1)[0][0]
+\end{python}
+
+\textbf{4.} L'assemblage tient en une ligne, et c'est le signe que la
+décomposition était la bonne :
+\begin{python}
+def predire(base, point, k):
+    return classe_majoritaire(k_plus_proches(base, point, k))
+\end{python}
+Les carrés des distances au point $(3{,}0\,;\,1{,}0)$ valent $2{,}25$ pour
+$(1{,}5\,;\,1{,}0)$, $2{,}5$ pour $(1{,}5\,;\,0{,}5)$ et pour
+$(4{,}5\,;\,1{,}5)$, $3{,}25$ pour $(4{,}5\,;\,2{,}0)$, et $4{,}25$ pour les
+deux derniers. Pour $k=1$, le plus proche voisin est $(1{,}5\,;\,1{,}0)$ : la
+prédiction est \lstinline{"A"}. Pour $k=3$, on obtient deux A et un B : encore
+\lstinline{"A"}.
+
+\textbf{5.} Les individus $(1{,}5\,;\,0{,}5)$ et $(4{,}5\,;\,1{,}5)$ sont tous
+deux à la distance $\sqrt{2{,}5}\approx 1{,}581$ du point : leurs écarts valent
+$1{,}5$ et $0{,}5$ dans les deux cas, au signe près. Toutes les coordonnées
+étant des multiples de $0{,}5$, ces écarts sont exacts en binaire : l'égalité
+des deux distances n'est pas un effet d'arrondi.
+
+Si l'algorithme retient le premier en deuxième position, les deux voisins sont
+tous deux de classe A et la prédiction est \lstinline{"A"}. S'il retient le
+second, on obtient un A et un B : il n'y a plus de classe majoritaire, et
+\lstinline{most_common} renvoie alors l'une des deux selon l'ordre de rencontre
+— un résultat qui dépend de l'ordre du fichier de données, pas des données
+elles-mêmes.
+
+La spécification doit donc dire ce qu'on fait des ex \ae quo : soit une règle de
+départage explicite (le premier dans l'ordre de la base, le plus proche du
+centre de sa classe...), soit l'interdiction des $k$ pairs, qui est la
+précaution la plus simple. Une fonction qui ne le dit pas n'est pas déterministe
+pour son utilisateur.
+\end{corrige}

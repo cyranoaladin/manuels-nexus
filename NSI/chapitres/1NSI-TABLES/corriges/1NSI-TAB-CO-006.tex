@@ -1,0 +1,89 @@
+% META: {"id": "1NSI-TAB-CO-006", "chapitre": "1NSI-TABLES", "type_objet": "corrige", "exercice_ref": "1NSI-TAB-EX-006", "capacites": ["P-TABLE-04"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% livres = [
+%     {"isbn": "A1", "titre": "Le Rivage", "auteur": "Diop"},
+%     {"isbn": "A2", "titre": "Nuits blanches", "auteur": "Kane"},
+%     {"isbn": "A3", "titre": "Sable", "auteur": "Diop"},
+% ]
+% emprunts = [
+%     {"isbn": "A1", "mois": "09"}, {"isbn": "A1", "mois": "10"},
+%     {"isbn": "A3", "mois": "09"},
+% ]
+% def nombre_emprunts(emprunts):
+%     comptes = {}
+%     for ligne in emprunts:
+%         comptes[ligne["isbn"]] = comptes.get(ligne["isbn"], 0) + 1
+%     return comptes
+% def table_popularite(livres, emprunts):
+%     comptes = nombre_emprunts(emprunts)
+%     return [{"titre": l["titre"], "auteur": l["auteur"],
+%              "emprunts": comptes.get(l["isbn"], 0)} for l in livres]
+% assert nombre_emprunts(emprunts) == {"A1": 2, "A3": 1}
+% assert "A2" not in nombre_emprunts(emprunts)
+% table = table_popularite(livres, emprunts)
+% assert [l["emprunts"] for l in table] == [2, 0, 1]
+% assert len(table) == 3
+% assert [l["titre"] for l in sorted(table, key=lambda l: l["emprunts"], reverse=True)] == [
+%     "Le Rivage", "Sable", "Nuits blanches"]
+% assert sum(l["emprunts"] for l in table if l["auteur"] == "Diop") == 3
+% assert sum(l["emprunts"] for l in table) == len(emprunts) == 3
+% END-VERIFY
+\begin{corrige}{1NSI-TAB-EX-006}
+\textbf{1.} On parcourt le journal en incrémentant un compteur par ISBN :
+\begin{python}
+def nombre_emprunts(emprunts):
+    comptes = {}
+    for ligne in emprunts:
+        comptes[ligne["isbn"]] = comptes.get(ligne["isbn"], 0) + 1
+    return comptes
+\end{python}
+On obtient \lstinline!{"A1": 2, "A3": 1}!. L'ISBN \lstinline{"A2"} n'y figure
+pas du tout : c'est le point délicat de la question suivante.
+
+\textbf{2.} On parcourt le \emph{catalogue}, et non le journal, pour que chaque
+livre donne une ligne. La méthode \lstinline{get} avec valeur par défaut fournit
+le $0$ attendu pour les livres absents du journal :
+\begin{python}
+def table_popularite(livres, emprunts):
+    comptes = nombre_emprunts(emprunts)
+    return [
+        {"titre": l["titre"], "auteur": l["auteur"],
+         "emprunts": comptes.get(l["isbn"], 0)}
+        for l in livres
+    ]
+\end{python}
+
+\textbf{3.} La table obtenue est
+
+\begin{center}
+\begin{tabular}{llr}
+\hline
+titre & auteur & emprunts \\
+\hline
+Le Rivage & Diop & $2$ \\
+Nuits blanches & Kane & $0$ \\
+Sable & Diop & $1$ \\
+\hline
+\end{tabular}
+\end{center}
+
+Elle a bien $3$ lignes, comme le catalogue : parcourir le catalogue garantit
+cette propriété, alors que parcourir le journal aurait perdu
+\lstinline{"Nuits blanches"}.
+
+\textbf{4.} \lstinline{sorted(table, key=lambda l: l["emprunts"], reverse=True)}
+donne l'ordre \lstinline{Le Rivage}, \lstinline{Sable},
+\lstinline{Nuits blanches}.
+
+\textbf{5.} Diop totalise $2+1=3$ emprunts. La somme de la colonne
+\lstinline{emprunts} vaut $2+0+1=3$, soit exactement le nombre de lignes du
+journal.
+
+Cette égalité doit toujours être vraie, et pour une raison précise : chaque
+ligne du journal est comptée une fois et une seule, dans le compteur de son
+ISBN, et chaque compteur est reporté une fois et une seule dans la table
+finale. Elle cesserait d'être vraie si le journal contenait l'emprunt d'un ISBN
+absent du catalogue : cet emprunt disparaîtrait de la table sans que rien ne le
+signale. Vérifier cette somme est donc le contrôle le plus simple de la
+combinaison de deux tables.
+\end{corrige}
