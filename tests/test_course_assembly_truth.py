@@ -160,3 +160,63 @@ def test_conflicting_meta_capacity_fields_fail_closed(
             "1NSI-X",
             {"capacites_codes": ["C1"], "capacites": ["REF-C2"]},
         )
+
+
+# ---------------------------------------------------------------------------
+# Un chapitre de projet enseigne par son cadrage, pas par un cours absent
+# ---------------------------------------------------------------------------
+
+
+def test_a_project_framing_document_serves_its_capacities() -> None:
+    """`TNSI-PROJET` n'a pas de repertoire `cours`, et n'en a pas besoin.
+
+    Son document de cadrage porte le contrat horaire, les prerequis, le
+    perimetre, les jalons, les livrables, la grille d'evaluation, quatre
+    dossiers de projets et le guide de pilotage. Il est assemble dans les
+    variantes eleve et professeur. Le compter absent revenait a declarer
+    manquant un document imprime.
+    """
+
+    payload = json.loads(
+        (ROOT / "audit/COURSE_BODY_OWNERSHIP_MAP.json").read_text(encoding="utf-8")
+    )
+    chapitre = payload["chapters"]["TNSI-PROJET"]
+    assert chapitre["missing_expected_course_capacities"] == []
+    chemins = chapitre["variant_assembly"]["eleve"]["paths"]
+    assert any("projet/TNSI-PROJET-ANNUEL.tex" in c for c in chemins)
+
+
+def test_practice_objects_never_serve_a_capacity_in_this_map() -> None:
+    """Le garde qui empeche la regle de se dissoudre.
+
+    Si un exercice pouvait servir une capacite ici, un chapitre sans aucun
+    cours passerait pour complet des lors qu'il propose des exercices -- soit
+    exactement le defaut que ce producteur existe pour voir.
+    """
+
+    import importlib.util
+    import sys
+
+    spec = importlib.util.spec_from_file_location(
+        "assembly_truth_roles", ROOT / "scripts/build_course_assembly_truth.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    sys.modules["assembly_truth_roles"] = module
+    spec.loader.exec_module(module)
+    assert set(module.EXPOSITORY_ROLES) == {"cours", "projet"}
+    payload = json.loads(
+        (ROOT / "audit/COURSE_BODY_OWNERSHIP_MAP.json").read_text(encoding="utf-8")
+    )
+    for chapitre in payload["chapters"].values():
+        for corps in chapitre["assembled_bodies"]:
+            role = corps["path"].split("/")[-2]
+            assert role in module.EXPOSITORY_ROLES, corps["path"]
+
+
+def test_no_expected_course_capacity_is_left_unserved() -> None:
+    payload = json.loads(
+        (ROOT / "audit/COURSE_BODY_OWNERSHIP_MAP.json").read_text(encoding="utf-8")
+    )
+    assert payload["totals"]["MISSING_EXPECTED_COURSE_BODY"] == 0
+    assert payload["totals"]["FOREIGN_COURSE_BODY"] == 0
+    assert payload["totals"]["DUPLICATED_COURSE_BODY"] == 0

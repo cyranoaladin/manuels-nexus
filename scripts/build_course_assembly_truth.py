@@ -66,8 +66,20 @@ def _resolve_course_capacities(resolver, chapter: str, meta: dict[str, Any]):
     return resolver.resolve_meta_codes(chapter, meta)
 
 
+#: LES ROLES QUI EXPOSENT LE COURS. Un chapitre enseigne par son cours ; un
+#: chapitre de projet enseigne par son document de cadrage, qui porte le
+#: contrat horaire, les jalons, les livrables et la grille. Les deux sont des
+#: corps EXPOSITIFS, et l'assembleur les imprime tous deux avant la pratique.
+#:
+#: Les roles de PRATIQUE en sont exclus, et doivent le rester : si un exercice
+#: pouvait servir une capacite ici, un chapitre sans aucun cours passerait
+#: pour complet des lors qu'il propose des exercices. C'est exactement le
+#: defaut que ce producteur existe pour voir.
+EXPOSITORY_ROLES = ("cours", "projet")
+
+
 def _nsi_variant_assembly() -> dict[str, dict[str, list[tuple[int, Path]]]]:
-    """Observed course objects in the exact canonical assembler order."""
+    """Observed expository objects in the exact canonical assembler order."""
 
     assembler = importlib.import_module("NSI.scripts.assemble_manuel")
     observed: dict[str, dict[str, list[tuple[int, Path]]]] = {}
@@ -80,7 +92,7 @@ def _nsi_variant_assembly() -> dict[str, dict[str, list[tuple[int, Path]]]]:
                 for position, path in enumerate(
                     assembler.collect_variant_objects(variant), start=1
                 ):
-                    if path.parent.name != "cours":
+                    if path.parent.name not in EXPOSITORY_ROLES:
                         continue
                     chapter = path.parent.parent.name
                     by_chapter[chapter].append((position, path))
@@ -117,7 +129,7 @@ def _maths_variant_assembly(assembler, directory: Path):
         for position, path in enumerate(
             assembler.collect_chapter(directory, variant), start=1
         ):
-            if path.parent.name == "cours":
+            if path.parent.name in EXPOSITORY_ROLES:
                 ordered.append((position, path))
         rows[variant] = ordered
     return rows

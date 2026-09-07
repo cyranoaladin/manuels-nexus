@@ -7,7 +7,7 @@
   "totals": {
     "FOREIGN_COURSE_BODY": 0,
     "DUPLICATED_COURSE_BODY": 0,
-    "MISSING_EXPECTED_COURSE_BODY": 2,
+    "MISSING_EXPECTED_COURSE_BODY": 0,
     "AMBIGUOUS_COURSE_BODY": 0,
     "UNKNOWN_COURSE_BODY": 0
   },
@@ -863,7 +863,8 @@
             "NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C4.tex",
             "NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C5.tex",
             "NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/07_td1_station_meteo.tex",
-            "NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/07_td2_classement_esport.tex"
+            "NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/07_td2_classement_esport.tex",
+            "NSI/chapitres/1NSI-TYPES-CONSTRUITS/projet/1NSI-TC-PROJET.tex"
           ],
           "positions": [
             15,
@@ -872,9 +873,10 @@
             18,
             19,
             104,
-            105
+            105,
+            106
           ],
-          "path_set_digest": "sha256:9afbf9c8c1f32014184906e1a1ee9ca233083fc8cde3ace013e55b2e19ce10cd"
+          "path_set_digest": "sha256:56f86f07c2c3a74accd1c63cd1e5eb386811aea8d54ebe4382fb3427eb815708"
         },
         "professeur": {
           "paths": [
@@ -884,7 +886,8 @@
             "NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C4.tex",
             "NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C5.tex",
             "NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/07_td1_station_meteo.tex",
-            "NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/07_td2_classement_esport.tex"
+            "NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/07_td2_classement_esport.tex",
+            "NSI/chapitres/1NSI-TYPES-CONSTRUITS/projet/1NSI-TC-PROJET.tex"
           ],
           "positions": [
             27,
@@ -893,9 +896,10 @@
             30,
             31,
             116,
-            117
+            117,
+            118
           ],
-          "path_set_digest": "sha256:9afbf9c8c1f32014184906e1a1ee9ca233083fc8cde3ace013e55b2e19ce10cd"
+          "path_set_digest": "sha256:56f86f07c2c3a74accd1c63cd1e5eb386811aea8d54ebe4382fb3427eb815708"
         }
       },
       "expected_capacities": [
@@ -1003,6 +1007,22 @@
           "declared_capacities": [
             "C2",
             "C3",
+            "C4",
+            "C5"
+          ],
+          "semantic_owner_chapter": "1NSI-TYPES-CONSTRUITS",
+          "is_foreign": false,
+          "ownership_proven": true,
+          "ownership_status": "SOURCE_SCOPED_UNIQUE_BODY",
+          "toc_titles": []
+        },
+        {
+          "assembly_position": 118,
+          "path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/projet/1NSI-TC-PROJET.tex",
+          "body_digest": "sha256:349dcc2ff9527c183a00b1e66732f13c01e5932fd5cf4f5d940b99e891e153cc",
+          "declared_capacities": [
+            "C1",
+            "C2",
             "C4",
             "C5"
           ],
@@ -4982,28 +5002,50 @@
       "assembly_authority": "CANONICAL_NSI_ASSEMBLER",
       "variant_assembly": {
         "eleve": {
-          "paths": [],
-          "positions": [],
-          "path_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          "paths": [
+            "NSI/chapitres/TNSI-PROJET/projet/TNSI-PROJET-ANNUEL.tex"
+          ],
+          "positions": [
+            70
+          ],
+          "path_set_digest": "sha256:3f7eb3a7d808fb6bbe4c69e8e3c559804bb502ba707a0f02a48196de0034fdb4"
         },
         "professeur": {
-          "paths": [],
-          "positions": [],
-          "path_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          "paths": [
+            "NSI/chapitres/TNSI-PROJET/projet/TNSI-PROJET-ANNUEL.tex"
+          ],
+          "positions": [
+            154
+          ],
+          "path_set_digest": "sha256:3f7eb3a7d808fb6bbe4c69e8e3c559804bb502ba707a0f02a48196de0034fdb4"
         }
       },
       "expected_capacities": [
         "C1",
         "C2"
       ],
-      "assembled_bodies": [],
+      "assembled_bodies": [
+        {
+          "assembly_position": 154,
+          "path": "NSI/chapitres/TNSI-PROJET/projet/TNSI-PROJET-ANNUEL.tex",
+          "body_digest": "sha256:3ece0e59668bbb20638cf44abf4eb23fdc5a50c84bb6296191edfd5469a0de1e",
+          "declared_capacities": [
+            "C1",
+            "C2"
+          ],
+          "semantic_owner_chapter": "TNSI-PROJET",
+          "is_foreign": false,
+          "ownership_proven": true,
+          "ownership_status": "SOURCE_SCOPED_UNIQUE_BODY",
+          "toc_titles": [
+            "Conduire un projet informatique en Terminale"
+          ]
+        }
+      ],
       "foreign_course_bodies": [],
       "duplicated_course_body_digests": [],
       "duplicated_course_body_count": 0,
-      "missing_expected_course_capacities": [
-        "C1",
-        "C2"
-      ]
+      "missing_expected_course_capacities": []
     },
     "TNSI-STRUCTURES-DONNEES": {
       "assembly_authority": "CANONICAL_NSI_ASSEMBLER",
