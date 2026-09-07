@@ -301,6 +301,43 @@ MODEL_ARTIFACTS: Mapping[str, str] = MappingProxyType(
         "audit/MATRICE_LIVRABLES.yaml": "matrice_livrables",
     }
 )
+#: Livrables que le Release Owner a explicitement retires du perimetre requis
+#: de la release 2026-2027, sans les supprimer ni les construire.
+#:
+#: La matrice de perimetre les classait deja `PROPOSED_NOT_APPROVED`,
+#: `optional: true`, `a_valider_humain: true`, sans clause de mission
+#: correspondante — et le gate les comptait pourtant comme des blocages
+#: `PRODUCT_P1`. La decision humaine tranche : elles ne sont pas requises pour
+#: cette release, et cessent donc de bloquer.
+#:
+#: La cle est le COUPLE (manuel, variante), jamais le seul nom de variante :
+#: `banque_evaluations` reste requis partout ailleurs. L'exemption est
+#: nominative, et un test presente le meme nom sur un autre manuel pour
+#: verifier qu'elle ne deborde pas.
+NOT_REQUIRED_FOR_2026_2027_RELEASE: dict[tuple[str, str], str] = {
+    ("1SPE", "banque_evaluations"): (
+        "Decision Release Owner abenrhouma : NOT_REQUIRED_FOR_2026_2027_RELEASE "
+        "— PROPOSED_NOT_APPROVED, optional, aucune clause de mission. "
+        "Voir audit/HUMAN_DECISION_OPTIONAL_MATHS_EVALUATION_BANKS.md"
+    ),
+    ("TSPE_2026_2027", "banque_evaluations"): (
+        "Decision Release Owner abenrhouma : NOT_REQUIRED_FOR_2026_2027_RELEASE "
+        "— PROPOSED_NOT_APPROVED, optional, aucune clause de mission. "
+        "Voir audit/HUMAN_DECISION_OPTIONAL_MATHS_EVALUATION_BANKS.md"
+    ),
+}
+
+
+def _variant_is_required(manual_id: str, variant: str) -> bool:
+    """La variante est-elle requise pour la release 2026-2027 ?
+
+    Tout est requis par defaut. Seul un couple (manuel, variante) explicitement
+    retire par une decision humaine ne l'est pas : l'exemption ne se deduit
+    d'aucun motif, d'aucun suffixe, d'aucune heuristique.
+    """
+    return (str(manual_id), str(variant)) not in NOT_REQUIRED_FOR_2026_2027_RELEASE
+
+
 DEFAULT_MANAGED_OUTPUT_PATHS = frozenset(
     {
         "ETAT_COLLECTION.md",
@@ -6021,14 +6058,19 @@ def build_deliverable_matrix(
             for variant_id, aliases in sorted(specification["variants"].items())
         }
         for variant_id, variant in variants.items():
-            if variant["state"] != "compiled":
-                blockers.append(
-                    {
-                        "code": "livrable_non_compile",
-                        "detail": variant["state"],
-                        "source": f"deliverable_matrix.{manual_id}.variants.{variant_id}",
-                    }
-                )
+            if variant["state"] == "compiled":
+                continue
+            if not _variant_is_required(manual_id, variant_id):
+                # Retiree du perimetre requis par decision humaine : ne pas la
+                # construire est le comportement attendu, pas une dette.
+                continue
+            blockers.append(
+                {
+                    "code": "livrable_non_compile",
+                    "detail": variant["state"],
+                    "source": f"deliverable_matrix.{manual_id}.variants.{variant_id}",
+                }
+            )
         blockers.sort(key=lambda item: (item["code"], item["source"], item["detail"]))
         structural_blockers = {
             blocker["code"]
@@ -13102,6 +13144,10 @@ def _release_strict_gate(
             else {}
         )
         for variant in sorted(manual["variants"]):
+            if not _variant_is_required(manual_id, variant):
+                # Retiree du perimetre requis par decision humaine : son
+                # absence n'est pas une dette de publication.
+                continue
             coverage = (
                 variant_coverage.get(variant, {})
                 if isinstance(variant_coverage, Mapping)

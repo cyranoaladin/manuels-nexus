@@ -183,6 +183,28 @@ def _classify(manual: str, variant: str) -> dict[str, Any]:
     }
 
 
+def _optional_counted_as_required() -> int:
+    """Livrables exemptés par décision humaine que le gate compte quand même.
+
+    On ne relit pas un rapport : on interroge la fonction que le gate lui-même
+    utilise. Si l'un des deux changeait sans l'autre, ce compteur le dirait.
+    """
+    import importlib.util  # noqa: PLC0415
+
+    spec = importlib.util.spec_from_file_location(
+        "inventory_collection_for_scope_matrix",
+        ROOT / "scripts/inventory_collection.py",
+    )
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return sum(
+        1
+        for manual, variant in module.NOT_REQUIRED_FOR_2026_2027_RELEASE
+        if module._variant_is_required(manual, variant)
+    )
+
+
 def build() -> dict[str, Any]:
     specs = _deliverable_specs()
     inventory = json.loads(INVENTORY.read_text(encoding="utf-8"))
@@ -263,6 +285,11 @@ def build() -> dict[str, Any]:
             1 for r in required if not r["current_build_receipt"]
         ),
         "CURRENT_BUILD_RECEIPTS_EXPECTED_THIS_PHASE": False,
+        # Un livrable que la décision humaine a retiré du périmètre requis ne
+        # doit plus produire de blocage. Ce compteur mesure l'écart entre la
+        # décision et ce que le gate compte réellement : il vaut zéro tant que
+        # les deux disent la même chose.
+        "OPTIONAL_DELIVERABLE_COUNTED_AS_REQUIRED": _optional_counted_as_required(),
         "REQUIREMENT_STATUS_COUNTS": dict(status),
         "APPROVES_NOTHING": True,
     }

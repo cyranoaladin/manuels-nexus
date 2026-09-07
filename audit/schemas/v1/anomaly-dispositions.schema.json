@@ -1,237 +1,437 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:nexus:audit:schema:v1:anomaly-dispositions",
-  "title": "Nexus anomaly dispositions control file v1",
-  "type": "object",
-  "additionalProperties": false,
-  "required": [
-    "artifact_type",
-    "control_digest",
-    "dispositions",
-    "fingerprint_schema_version",
-    "schema_ref",
-    "schema_version"
-  ],
-  "properties": {
-    "artifact_type": { "const": "anomaly_dispositions" },
-    "control_digest": {
-      "type": "string",
-      "pattern": "^sha256:[0-9a-f]{64}$"
-    },
-    "dispositions": {
-      "type": "object",
-      "additionalProperties": { "$ref": "#/$defs/disposition" }
-    },
-    "fingerprint_schema_version": { "type": "integer", "minimum": 1 },
-    "schema_ref": { "const": "audit/schemas/v1/anomaly-dispositions.schema.json" },
-    "schema_version": { "const": 1 }
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:nexus:audit:schema:v1:anomaly-dispositions",
+ "title": "Nexus anomaly dispositions control file v1",
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "artifact_type",
+  "control_digest",
+  "dispositions",
+  "fingerprint_schema_version",
+  "schema_ref",
+  "schema_version"
+ ],
+ "properties": {
+  "artifact_type": {
+   "const": "anomaly_dispositions"
   },
-  "$defs": {
+  "control_digest": {
+   "type": "string",
+   "pattern": "^sha256:[0-9a-f]{64}$"
+  },
+  "dispositions": {
+   "type": "object",
+   "additionalProperties": {
+    "$ref": "#/$defs/disposition"
+   }
+  },
+  "fingerprint_schema_version": {
+   "type": "integer",
+   "minimum": 1
+  },
+  "schema_ref": {
+   "const": "audit/schemas/v1/anomaly-dispositions.schema.json"
+  },
+  "schema_version": {
+   "const": 1
+  }
+ },
+ "$defs": {
+  "disposition": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "approved_by",
+    "decision_ref",
+    "disposition",
+    "fingerprint",
+    "justification",
+    "owner"
+   ],
+   "properties": {
+    "approved_by": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "author": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "blocking": {
+     "type": "boolean"
+    },
+    "date": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "decision_ref": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "decision_reference": {
+     "$ref": "#/$defs/non_empty_string"
+    },
     "disposition": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "approved_by",
-        "decision_ref",
-        "disposition",
-        "fingerprint",
-        "justification",
-        "owner"
-      ],
-      "properties": {
-        "approved_by": { "$ref": "#/$defs/non_empty_string" },
-        "author": { "$ref": "#/$defs/non_empty_string" },
-        "blocking": { "type": "boolean" },
-        "date": { "$ref": "#/$defs/non_empty_string" },
-        "decision_ref": { "$ref": "#/$defs/non_empty_string" },
-        "decision_reference": { "$ref": "#/$defs/non_empty_string" },
-        "disposition": {
-          "enum": [
-            "open_debt",
-            "false_positive",
-            "generated_dependency",
-            "harvest_candidate",
-            "intentional_reuse",
-            "accepted_exception",
-            "fixed"
-          ]
-        },
-        "evidence": { "$ref": "#/$defs/evidence" },
-        "expires_at": { "$ref": "#/$defs/non_empty_string" },
-        "expiry": { "$ref": "#/$defs/non_empty_string" },
-        "fingerprint": {
-          "type": "string",
-          "pattern": "^[0-9a-f]{16,64}$"
-        },
-        "baseline_sha": {
-          "type": "string",
-          "pattern": "^[0-9a-f]{40}$"
-        },
-        "category": { "$ref": "#/$defs/non_empty_string" },
-        "chapter": { "type": ["string", "null"] },
-        "fingerprint_schema_version": { "type": "integer", "minimum": 1 },
-        "justification": { "$ref": "#/$defs/non_empty_string" },
-        "manual": { "type": ["string", "null"] },
-        "owner": { "$ref": "#/$defs/non_empty_string" },
-        "policy_rule": { "$ref": "#/$defs/non_empty_string" },
-        "proof": { "$ref": "#/$defs/evidence" },
-        "qualification_policy_digest": {
-          "type": "string",
-          "pattern": "^sha256:[0-9a-f]{64}$"
-        },
-        "qualification_digest": {
-          "type": "string",
-          "pattern": "^sha256:[0-9a-f]{64}$"
-        },
-        "policy_id": { "$ref": "#/$defs/non_empty_string" },
-        "object_id": { "$ref": "#/$defs/non_empty_string" },
-        "extension_code": { "$ref": "#/$defs/non_empty_string" },
-        "method_source_sha": {
-          "type": "string",
-          "pattern": "^[0-9a-f]{64}$"
-        },
-        "capacity_id": { "$ref": "#/$defs/non_empty_string" },
-        "capacity_ref": { "type": ["string", "null"] },
-        "review_packet": { "$ref": "#/$defs/non_empty_string" },
-        "review_packet_sha": {
-          "type": "string",
-          "pattern": "^[0-9a-f]{64}$"
-        },
-        "historical_review_packet": { "$ref": "#/$defs/non_empty_string" },
-        "historical_review_packet_sha": {
-          "type": "string",
-          "pattern": "^[0-9a-f]{64}$"
-        },
-        "qualification_reason": { "$ref": "#/$defs/non_empty_string" },
-        "reason": { "$ref": "#/$defs/non_empty_string" },
-        "release_blocking": { "type": "boolean" },
-        "review_condition": { "$ref": "#/$defs/non_empty_string" },
-        "severity": {
-          "enum": ["info", "warning", "error", "blocking", "regression"]
-        },
-        "source": { "type": ["string", "null"] },
-        "scope": { "$ref": "#/$defs/scope" }
-      },
-      "allOf": [
-        {
-          "if": {
-            "properties": {
-              "decision_ref": {
-                "const": "audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19"
-              }
-            },
-            "required": ["decision_ref"]
-          },
-          "then": {
-            "required": [
-              "policy_id",
-              "qualification_policy_digest",
-              "method_source_sha",
-              "capacity_id",
-              "review_packet",
-              "review_packet_sha",
-              "qualification_reason"
-            ]
-          }
-        },
-        {
-          "if": {
-            "anyOf": [
-              { "required": ["qualification_policy_digest"] },
-              {
-                "required": ["policy_rule"],
-                "properties": {
-                  "policy_rule": { "not": { "const": "historical-evidence" } }
-                }
-              }
-            ]
-          },
-          "then": {
-            "required": [
-              "baseline_sha",
-              "category",
-              "chapter",
-              "fingerprint_schema_version",
-              "manual",
-              "policy_rule",
-              "qualification_digest",
-              "qualification_policy_digest",
-              "reason",
-              "release_blocking",
-              "severity",
-              "source"
-            ]
-          }
-        },
-        {
-          "if": {
-            "properties": { "disposition": { "const": "accepted_exception" } },
-            "required": ["disposition"]
-          },
-          "then": {
-            "required": ["author", "blocking", "scope"],
-            "allOf": [
-              {
-                "anyOf": [
-                  { "required": ["evidence"] },
-                  { "required": ["proof"] }
-                ]
-              },
-              {
-                "anyOf": [
-                  { "required": ["expires_at"] },
-                  { "required": ["expiry"] },
-                  { "required": ["review_condition"] }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "disposition": {
-                "enum": [
-                  "false_positive",
-                  "generated_dependency",
-                  "intentional_reuse",
-                  "fixed"
-                ]
-              }
-            },
-            "required": ["disposition"]
-          },
-          "then": {
-            "anyOf": [
-              { "required": ["evidence"] },
-              { "required": ["proof"] }
-            ]
-          }
-        }
-      ]
+     "enum": [
+      "open_debt",
+      "false_positive",
+      "generated_dependency",
+      "harvest_candidate",
+      "intentional_reuse",
+      "accepted_exception",
+      "fixed"
+     ]
     },
     "evidence": {
-      "oneOf": [
-        { "$ref": "#/$defs/non_empty_string" },
-        {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/non_empty_string" }
-        },
-        { "type": "object", "minProperties": 1 }
-      ]
+     "$ref": "#/$defs/evidence"
     },
-    "non_empty_string": { "type": "string", "minLength": 1 },
+    "expires_at": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "expiry": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "fingerprint": {
+     "type": "string",
+     "pattern": "^[0-9a-f]{16,64}$"
+    },
+    "baseline_sha": {
+     "type": "string",
+     "pattern": "^[0-9a-f]{40}$"
+    },
+    "category": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "chapter": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "fingerprint_schema_version": {
+     "type": "integer",
+     "minimum": 1
+    },
+    "justification": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "manual": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "owner": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "policy_rule": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "proof": {
+     "$ref": "#/$defs/evidence"
+    },
+    "qualification_policy_digest": {
+     "type": "string",
+     "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "qualification_digest": {
+     "type": "string",
+     "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "policy_id": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "object_id": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "extension_code": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "method_source_sha": {
+     "type": "string",
+     "pattern": "^[0-9a-f]{64}$"
+    },
+    "capacity_id": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "capacity_ref": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "review_packet": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "review_packet_sha": {
+     "type": "string",
+     "pattern": "^[0-9a-f]{64}$"
+    },
+    "historical_review_packet": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "historical_review_packet_sha": {
+     "type": "string",
+     "pattern": "^[0-9a-f]{64}$"
+    },
+    "qualification_reason": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "reason": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "release_blocking": {
+     "type": "boolean"
+    },
+    "review_condition": {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    "severity": {
+     "enum": [
+      "info",
+      "warning",
+      "error",
+      "blocking",
+      "regression"
+     ]
+    },
+    "source": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
     "scope": {
-      "oneOf": [
-        { "$ref": "#/$defs/non_empty_string" },
-        {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/non_empty_string" }
-        },
-        { "type": "object", "minProperties": 1 }
-      ]
+     "$ref": "#/$defs/scope"
+    },
+    "requalification": {
+     "type": "object",
+     "additionalProperties": false,
+     "required": [
+      "receipt",
+      "decision",
+      "reviewer_identity",
+      "previous_method_source_sha",
+      "change_class"
+     ],
+     "description": "Re-liaison d'une qualification existante au texte courant, sous une décision humaine nommée. Ne promeut aucun statut et n'approuve aucun contenu : l'objet reste dans la dette de revue. L'empreinte précédente est conservée pour que la neutralité du changement reste vérifiable après coup.",
+     "properties": {
+      "receipt": {
+       "$ref": "#/$defs/non_empty_string"
+      },
+      "decision": {
+       "$ref": "#/$defs/non_empty_string"
+      },
+      "reviewer_identity": {
+       "$ref": "#/$defs/non_empty_string"
+      },
+      "previous_method_source_sha": {
+       "type": "string",
+       "pattern": "^[0-9a-f]{64}$"
+      },
+      "change_class": {
+       "enum": [
+        "ACCENT_ONLY",
+        "SUBSTANTIVE_CHANGE"
+       ]
+      },
+      "regression_test_digest": {
+       "type": "string",
+       "pattern": "^sha256:[0-9a-f]{64}$"
+      },
+      "scientific_evidence_digest": {
+       "type": "string",
+       "pattern": "^[0-9a-f]{64}$"
+      }
+     }
     }
+   },
+   "allOf": [
+    {
+     "if": {
+      "properties": {
+       "decision_ref": {
+        "const": "audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19"
+       }
+      },
+      "required": [
+       "decision_ref"
+      ]
+     },
+     "then": {
+      "required": [
+       "policy_id",
+       "qualification_policy_digest",
+       "method_source_sha",
+       "capacity_id",
+       "review_packet",
+       "review_packet_sha",
+       "qualification_reason"
+      ]
+     }
+    },
+    {
+     "if": {
+      "anyOf": [
+       {
+        "required": [
+         "qualification_policy_digest"
+        ]
+       },
+       {
+        "required": [
+         "policy_rule"
+        ],
+        "properties": {
+         "policy_rule": {
+          "not": {
+           "const": "historical-evidence"
+          }
+         }
+        }
+       }
+      ]
+     },
+     "then": {
+      "required": [
+       "baseline_sha",
+       "category",
+       "chapter",
+       "fingerprint_schema_version",
+       "manual",
+       "policy_rule",
+       "qualification_digest",
+       "qualification_policy_digest",
+       "reason",
+       "release_blocking",
+       "severity",
+       "source"
+      ]
+     }
+    },
+    {
+     "if": {
+      "properties": {
+       "disposition": {
+        "const": "accepted_exception"
+       }
+      },
+      "required": [
+       "disposition"
+      ]
+     },
+     "then": {
+      "required": [
+       "author",
+       "blocking",
+       "scope"
+      ],
+      "allOf": [
+       {
+        "anyOf": [
+         {
+          "required": [
+           "evidence"
+          ]
+         },
+         {
+          "required": [
+           "proof"
+          ]
+         }
+        ]
+       },
+       {
+        "anyOf": [
+         {
+          "required": [
+           "expires_at"
+          ]
+         },
+         {
+          "required": [
+           "expiry"
+          ]
+         },
+         {
+          "required": [
+           "review_condition"
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "if": {
+      "properties": {
+       "disposition": {
+        "enum": [
+         "false_positive",
+         "generated_dependency",
+         "intentional_reuse",
+         "fixed"
+        ]
+       }
+      },
+      "required": [
+       "disposition"
+      ]
+     },
+     "then": {
+      "anyOf": [
+       {
+        "required": [
+         "evidence"
+        ]
+       },
+       {
+        "required": [
+         "proof"
+        ]
+       }
+      ]
+     }
+    }
+   ]
+  },
+  "evidence": {
+   "oneOf": [
+    {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    {
+     "type": "array",
+     "minItems": 1,
+     "items": {
+      "$ref": "#/$defs/non_empty_string"
+     }
+    },
+    {
+     "type": "object",
+     "minProperties": 1
+    }
+   ]
+  },
+  "non_empty_string": {
+   "type": "string",
+   "minLength": 1
+  },
+  "scope": {
+   "oneOf": [
+    {
+     "$ref": "#/$defs/non_empty_string"
+    },
+    {
+     "type": "array",
+     "minItems": 1,
+     "items": {
+      "$ref": "#/$defs/non_empty_string"
+     }
+    },
+    {
+     "type": "object",
+     "minProperties": 1
+    }
+   ]
   }
+ }
 }

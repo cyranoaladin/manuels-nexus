@@ -15627,25 +15627,27 @@ counts:
   claims_contredits: 31
   claims_ouverts: 53
 generated_by: inventory_collection.py
-model_digest: sha256:a85630f4235b8ba078e39177bda427432a5e66d0df62b13d80f2fa2efed46908
+model_digest: sha256:49a38014152687659b60066dacfa5a93726f1f77e4167514cd8404afcf3860e0
 provenance:
   branch: null
-  dirty: false
+  dirty: true
   errors: []
-  generated_at_utc: '2026-09-07T02:46:25Z'
+  generated_at_utc: '2026-09-07T06:00:27Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:79b255deeddfa4b483a9a5a9f568bdc143defd7b2a69e8b8a704f4afdd35d6bf
     scripts/build_manifest.py: sha256:62d4f5da9454aaa2923041db777b759e3e4b672e7c2f33b59a62e07afc76de26
     scripts/inventory_assembly.py: sha256:8a2eeaaa869413ae29c761b1972787f77bc2d0f4baf49aa653b70af98092dd0e
-    scripts/inventory_collection.py: sha256:c82525e8b051c39fa18f316f25764ea09a156c116ac16586c8f545d8f1020e44
+    scripts/inventory_collection.py: sha256:32062f419025236436070dd540f475d4ade36d735a4a6374ef5690a40ec1cc28
     scripts/inventory_graph.py: sha256:8589fc6483491413395e8f01afe86cef6b33414906da29e24a9ac070342d4103
     scripts/inventory_pdf.py: sha256:4d87858492b6f00a9eaf48a717a9c2ddfc423cbe533278747cb199ae885d90b8
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:d0c1036a35967b009d141790a598e632e9699df43fc3c7a4b0371a1b3b6593f2
+  generator_sha256: sha256:f932fe8c33273bdba8f5f9230ed39a824111f74177310dc1c4ea7c529714d065
   generator_version: 1
   git_available: true
-  head_sha: 6bd6bb5a2f6c6511723b5b7c376c0b757b0bdfde
-  modified_tracked: []
+  head_sha: 5818f510cfbe55c49c756655b5a25ab0adbc89fc
+  modified_tracked:
+  - audit/schemas/v1/anomaly-dispositions.schema.json
+  - scripts/inventory_collection.py
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
     git: git version 2.43.0
@@ -15653,7 +15655,8 @@ provenance:
     pdfinfo: pdfinfo version 24.02.0
     python: Python 3.12.3
     texlive: pdfTeX 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian)
-  untracked_relevant: []
+  untracked_relevant:
+  - audit/HUMAN_DECISION_OPTIONAL_MATHS_EVALUATION_BANKS.md
 schema_ref: audit/schemas/v1/ecarts-et-contradictions.schema.json
 schema_version: 1
-source_digest: sha256:2e879679c8576fa4c11059daf9787a17bbafc6c1618d8c36ea516c110da91c34
+source_digest: sha256:15e2858432e28678ac768858f6320b0f95c39fcc61d0cb07177a59722f95758c
