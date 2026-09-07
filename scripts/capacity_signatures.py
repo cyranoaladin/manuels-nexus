@@ -90,6 +90,44 @@ SIGNATURES: dict[str, dict[str, dict[str, list]]] = {
             ],
         },
     },
+    "TEXP-GRAPHES": {
+        "C1": {
+            "required": [
+                [r"\bsommet", r"\bar[êe]te", r"\bdegr[ée]", r"\bgraphe\b"],
+                [r"\bdegr[ée]", r"\bconnexe", r"\bcomplet", r"\bordre\b",
+                 r"\bcha[îi]ne"],
+            ],
+            "forbidden": [r"convexit", r"tableau de variations"],
+        },
+        "C2": {
+            "required": [
+                [r"\bmod[ée]lis", r"\bgraphe\b"],
+                [r"\bsommet", r"\bar[êe]te", r"\brencontre", r"\bliaison"],
+            ],
+        },
+        "C3": {
+            "required": [
+                [r"matrice d'adjacence", r"\bmatrice\b"],
+                [r"\badjacen", r"\bgraphe\b", r"\bsommet"],
+            ],
+        },
+        "C4": {
+            "required": [
+                [r"\bchemins?\b", r"\blongueur\b"],
+                [r"\bM\^?\{?[23n]", r"puissance", r"\bM\^2", r"matrice"],
+            ],
+        },
+        "C5": {
+            # Le corpus dit « chaine » aussi bien que « chemin », et note le
+            # coefficient $(M^n)_{ij}$ sans employer le mot. Exiger le mot
+            # reviendrait a refuser la notation mathematique.
+            "required": [
+                [r"D[ée]montrer|Montrer|r[ée]currence|V[ée]rifier"],
+                [r"\bchemins?\b", r"\bcha[îi]nes?\b", r"coefficient",
+                 r"\(M\^\{?\d*n?\}?\)_"],
+            ],
+        },
+    },
 }
 
 

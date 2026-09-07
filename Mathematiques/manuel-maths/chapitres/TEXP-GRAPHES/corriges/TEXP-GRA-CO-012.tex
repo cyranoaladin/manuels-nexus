@@ -1,0 +1,24 @@
+% META: {"id": "TEXP-GRA-CO-012", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige", "exercice_ref": "TEXP-GRA-EX-012", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% aretes = [(i, (i + 1) % 6) for i in range(6)] + [(0, 3), (1, 4), (2, 5)]
+% assert len(aretes) == 9
+% degre = [sum(s in a for a in aretes) for s in range(6)]
+% assert degre == [3, 3, 3, 3, 3, 3]
+% assert sum(degre) == 2 * len(aretes) == 18
+% assert len(set(map(frozenset, aretes))) == 9
+% assert (5 * 3) % 2 == 1
+% END-VERIFY
+\begin{corrige}{TEXP-GRA-EX-012}
+\textbf{1.} Sommets = équipes, arêtes = rencontres. Chaque sommet est de degré
+$3$, donc la somme des degrés vaut $6\times3=18$ et le nombre d'arêtes est
+$18/2=9$ : neuf rencontres.
+
+\textbf{2.} En numérotant les équipes $0$ à $5$, on peut prendre le graphe
+formé du cycle $0-1-2-3-4-5-0$ auquel on ajoute les trois « diagonales »
+$\{0,3\}$, $\{1,4\}$, $\{2,5\}$. Chaque sommet a bien deux voisins sur le
+cycle et un en diagonale.
+
+\textbf{3.} Avec cinq équipes de degré $3$, la somme des degrés vaudrait
+$15$, un nombre impair : c'est impossible, la somme des degrés étant toujours
+paire.
+\end{corrige}

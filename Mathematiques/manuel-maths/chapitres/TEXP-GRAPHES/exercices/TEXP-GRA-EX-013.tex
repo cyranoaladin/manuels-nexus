@@ -1,0 +1,22 @@
+% META: {"id": "TEXP-GRA-EX-013", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["calculer", "modeliser"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-013.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-013.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% arcs = [(1, 2), (2, 3), (3, 1), (3, 4), (4, 2)]
+% A = Matrix(4, 4, lambda i, j: 1 if (i + 1, j + 1) in arcs else 0)
+% assert A == Matrix([[0, 1, 0, 0], [0, 0, 1, 0], [1, 0, 0, 1], [0, 1, 0, 0]])
+% assert A != A.T
+% assert A[0, 1] == 1 and A[1, 0] == 0
+% assert sum(A.row(2)) == 2
+% assert sum(A.col(1)) == 2
+% END-VERIFY
+\begin{exercice}{TEXP-GRA-EX-013}{2}{15}
+Un graphe \emph{orienté} modélise un réseau de rues à sens unique entre quatre
+carrefours $1,2,3,4$ : $1\to2$, $2\to3$, $3\to1$, $3\to4$, $4\to2$.
+\begin{enumerate}
+  \item Construire la matrice d'adjacence $A$ de ce graphe orienté.
+  \item $A$ est-elle symétrique ? Expliquer la différence avec le cas non
+        orienté.
+  \item Calculer la somme de la ligne $3$ et celle de la colonne $2$.
+        Qu'expriment-elles ?
+\end{enumerate}
+\end{exercice}

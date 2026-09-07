@@ -1,0 +1,21 @@
+% META: {"id": "TEXP-GRA-EX-012", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 3, "competences": ["modeliser", "raisonner"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-012.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-012.tex", "status": "generated"}
+% BEGIN-VERIFY
+% aretes = [(i, (i + 1) % 6) for i in range(6)] + [(0, 3), (1, 4), (2, 5)]
+% assert len(aretes) == 9
+% degre = [sum(s in a for a in aretes) for s in range(6)]
+% assert degre == [3, 3, 3, 3, 3, 3]
+% assert sum(degre) == 2 * len(aretes) == 18
+% assert len(set(map(frozenset, aretes))) == 9
+% assert (5 * 3) % 2 == 1
+% END-VERIFY
+\begin{exercice}{TEXP-GRA-EX-012}{3}{18}
+Six équipes doivent s'affronter dans un tournoi : chacune rencontre exactement
+trois adversaires.
+\begin{enumerate}
+  \item Modéliser par un graphe et déterminer le nombre de rencontres.
+  \item Proposer un tel calendrier explicite, en donnant la liste des
+        rencontres.
+  \item Pourquoi le même raisonnement échoue-t-il si chaque équipe doit
+        rencontrer exactement trois adversaires parmi \emph{cinq} équipes ?
+\end{enumerate}
+\end{exercice}

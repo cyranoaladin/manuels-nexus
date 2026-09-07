@@ -1,0 +1,33 @@
+% META: {"id": "TEXP-GRA-EX-010", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 3, "competences": ["raisonner"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-010.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-010.tex", "status": "generated"}
+% BEGIN-VERIFY
+% import itertools
+% from sympy import Matrix
+% aretes = [(1, 2), (2, 3), (3, 4), (1, 4), (1, 3)]
+% p = 4
+% M = Matrix(p, p, lambda i, j: 1 if (i + 1, j + 1) in aretes or (j + 1, i + 1) in aretes else 0)
+% 
+% def compte(i, j, n):
+%     total = 0
+%     for milieu in itertools.product(range(p), repeat=n - 1):
+%         chemin = (i,) + milieu + (j,)
+%         if all(M[chemin[k], chemin[k + 1]] for k in range(n)):
+%             total += 1
+%     return total
+% 
+% for n in range(1, 5):
+%     Mn = M ** n
+%     for i in range(p):
+%         for j in range(p):
+%             assert Mn[i, j] == compte(i, j, n)
+% END-VERIFY
+\begin{exercice}{TEXP-GRA-EX-010}{3}{18}
+Soit $M$ la matrice d'adjacence d'un graphe à $p$ sommets. On note $m^{(n)}_{ij}$
+le coefficient $(i\,;\,j)$ de $M^n$.
+\begin{enumerate}
+  \item Vérifier la propriété pour $n=1$ : que compte $m^{(1)}_{ij}$ ?
+  \item En écrivant $M^{n+1}=M^n\times M$, montrer que si $m^{(n)}_{ij}$ compte
+        les chemins de longueur $n$ de $i$ à $j$, alors $m^{(n+1)}_{ij}$ compte
+        ceux de longueur $n+1$.
+  \item Conclure par récurrence.
+\end{enumerate}
+\end{exercice}

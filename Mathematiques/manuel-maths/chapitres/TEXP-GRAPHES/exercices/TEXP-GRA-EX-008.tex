@@ -1,0 +1,25 @@
+% META: {"id": "TEXP-GRA-EX-008", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-008.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-008.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% aretes = [(1, 2), (2, 3), (3, 4), (1, 4), (1, 3)]
+% M = Matrix(4, 4, lambda i, j: 1 if (i + 1, j + 1) in aretes or (j + 1, i + 1) in aretes else 0)
+% assert M == Matrix([[0, 1, 1, 1], [1, 0, 1, 0], [1, 1, 0, 1], [1, 0, 1, 0]])
+% assert M == M.T
+% assert all(M[i, i] == 0 for i in range(4))
+% assert sum(M.row(0)) == 3
+% degres = [sum(M.row(i)) for i in range(4)]
+% assert degres == [3, 2, 3, 2]
+% assert sum(degres) == 2 * len(aretes)
+% END-VERIFY
+\begin{exercice}{TEXP-GRA-EX-008}{1}{12}
+Soit le graphe de sommets $1,2,3,4$ et d'arêtes $\{1,2\}$, $\{2,3\}$,
+$\{3,4\}$, $\{1,4\}$, $\{1,3\}$.
+\begin{enumerate}
+  \item Construire la matrice d'adjacence $M$ en ordonnant les sommets
+        $1,2,3,4$.
+  \item Vérifier que $M$ est symétrique et de diagonale nulle. Que traduisent
+        ces deux propriétés ?
+  \item Calculer la somme des coefficients de la première ligne. Que
+        représente-t-elle ?
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,36 @@
+% META: {"id": "TEXP-GRA-CO-010", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige", "exercice_ref": "TEXP-GRA-EX-010", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import itertools
+% from sympy import Matrix
+% aretes = [(1, 2), (2, 3), (3, 4), (1, 4), (1, 3)]
+% p = 4
+% M = Matrix(p, p, lambda i, j: 1 if (i + 1, j + 1) in aretes or (j + 1, i + 1) in aretes else 0)
+% 
+% def compte(i, j, n):
+%     total = 0
+%     for milieu in itertools.product(range(p), repeat=n - 1):
+%         chemin = (i,) + milieu + (j,)
+%         if all(M[chemin[k], chemin[k + 1]] for k in range(n)):
+%             total += 1
+%     return total
+% 
+% for n in range(1, 5):
+%     Mn = M ** n
+%     for i in range(p):
+%         for j in range(p):
+%             assert Mn[i, j] == compte(i, j, n)
+% END-VERIFY
+\begin{corrige}{TEXP-GRA-EX-010}
+\textbf{1.} $m^{(1)}_{ij}$ vaut $1$ si $i$ et $j$ sont adjacents, $0$ sinon :
+c'est bien le nombre de chemins de longueur $1$ de $i$ à $j$.
+
+\textbf{2.} Le produit matriciel donne
+$m^{(n+1)}_{ij}=\sum_{k=1}^{p}m^{(n)}_{ik}\,m_{kj}$. Un chemin de longueur
+$n+1$ de $i$ à $j$ se décompose de manière unique en un chemin de longueur $n$
+de $i$ à un sommet $k$, suivi d'une arête de $k$ à $j$. Le terme
+$m^{(n)}_{ik}m_{kj}$ compte exactement les chemins passant par ce $k$, et la
+somme sur $k$ les compte tous, une seule fois chacun.
+
+\textbf{3.} La propriété est vraie au rang $1$ et héréditaire : elle est vraie
+pour tout $n\geq1$.
+\end{corrige}

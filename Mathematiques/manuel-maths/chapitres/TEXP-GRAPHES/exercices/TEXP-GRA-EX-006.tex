@@ -1,0 +1,29 @@
+% META: {"id": "TEXP-GRA-EX-006", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-006.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-006.tex", "status": "generated"}
+% BEGIN-VERIFY
+% sommets = ["A", "B", "C", "D", "E"]
+% aretes = [("A", "B"), ("A", "C"), ("B", "C"), ("C", "D"), ("D", "E")]
+% degre = {s: sum(s in a for a in aretes) for s in sommets}
+% assert degre == {"A": 2, "B": 2, "C": 3, "D": 2, "E": 1}
+% assert sum(degre.values()) == 2 * len(aretes) == 10
+% assert len(sommets) == 5
+% voisins = {s: set() for s in sommets}
+% for u, v in aretes:
+%     voisins[u].add(v); voisins[v].add(u)
+% vus, pile = set(), ["E"]
+% while pile:
+%     s = pile.pop()
+%     if s in vus:
+%         continue
+%     vus.add(s); pile.extend(voisins[s] - vus)
+% assert vus == set(sommets)
+% assert len(aretes) != 5 * 4 // 2
+% END-VERIFY
+\begin{exercice}{TEXP-GRA-EX-006}{1}{12}
+On considère le graphe $G$ d'ordre $5$, de sommets $A,B,C,D,E$ et d'arêtes
+$\{A,B\}$, $\{A,C\}$, $\{B,C\}$, $\{C,D\}$, $\{D,E\}$.
+\begin{enumerate}
+  \item Donner l'ordre de $G$ et le degré de chaque sommet.
+  \item Vérifier la relation entre la somme des degrés et le nombre d'arêtes.
+  \item $G$ est-il connexe ? complet ? Justifier.
+\end{enumerate}
+\end{exercice}

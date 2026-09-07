@@ -1,0 +1,28 @@
+% META: {"id": "TEXP-GRA-CO-011", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige", "exercice_ref": "TEXP-GRA-EX-011", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import itertools
+% def degres(p, aretes):
+%     return [sum(s in a for a in aretes) for s in range(p)]
+% for p in range(2, 6):
+%     for k in range(0, p * (p - 1) // 2 + 1):
+%         for aretes in itertools.islice(itertools.combinations(list(itertools.combinations(range(p), 2)), k), 40):
+%             d = degres(p, aretes)
+%             assert sum(d) % 2 == 0
+%             assert len([x for x in d if x % 2]) % 2 == 0
+% assert sum([1, 2, 3, 4, 5]) == 15 and 15 % 2 == 1
+% assert max([1, 2, 3, 4, 5]) == 5 > 5 - 1
+% END-VERIFY
+\begin{corrige}{TEXP-GRA-EX-011}
+\textbf{1.} Chaque arête contribue $1$ au degré de chacune de ses deux
+extrémités : la somme des degrés vaut donc $2a$ où $a$ est le nombre
+d'arêtes. Elle est paire.
+
+\textbf{2.} Séparons la somme en degrés pairs et impairs. La somme totale est
+paire, la somme des degrés pairs l'est aussi, donc la somme des degrés impairs
+est paire : le nombre de termes impairs est nécessairement pair.
+
+\textbf{3.} Non. D'une part la somme $1+2+3+4+5=15$ est impaire, ce qui
+contredit la question 1. D'autre part, un sommet de degré $5$ dans un graphe à
+$5$ sommets devrait être relié aux quatre autres et à lui-même, ce qu'une
+arête simple ne permet pas.
+\end{corrige}

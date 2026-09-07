@@ -1,0 +1,33 @@
+% META: {"id": "TEXP-GRA-CO-007", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige", "exercice_ref": "TEXP-GRA-EX-007", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import collections
+% aretes = [("U", "R"), ("U", "L"), ("R", "C"), ("L", "C"), ("C", "P")]
+% voisins = collections.defaultdict(set)
+% for u, v in aretes:
+%     voisins[u].add(v); voisins[v].add(u)
+% degre = {s: len(v) for s, v in voisins.items()}
+% assert degre == {"U": 2, "R": 2, "L": 2, "C": 3, "P": 1}
+% assert max(degre, key=degre.get) == "C"
+% distance = {"U": 0}
+% file = collections.deque(["U"])
+% while file:
+%     s = file.popleft()
+%     for t in voisins[s]:
+%         if t not in distance:
+%             distance[t] = distance[s] + 1
+%             file.append(t)
+% assert distance["P"] == 3
+% END-VERIFY
+\begin{corrige}{TEXP-GRA-EX-007}
+\textbf{1.} Les sommets sont les cinq services ; une arête relie deux services
+entre lesquels une liaison directe existe. Le graphe est non orienté, car une
+liaison fonctionne dans les deux sens.
+
+\textbf{2.} Oui : Urgences--Radiologie--Chirurgie--Pharmacie, soit trois
+étapes. Aucune chaîne plus courte n'existe, la Pharmacie n'étant reliée qu'à
+la Chirurgie, elle-même non adjacente aux Urgences.
+
+\textbf{3.} Les degrés valent $2$ pour Urgences, Radiologie et Laboratoire,
+$1$ pour Pharmacie, et $3$ pour Chirurgie. La Chirurgie est le sommet de degré
+maximal : c'est le service le plus sollicité comme intermédiaire.
+\end{corrige}

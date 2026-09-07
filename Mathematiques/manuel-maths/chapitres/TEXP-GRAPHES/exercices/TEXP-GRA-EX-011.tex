@@ -1,0 +1,22 @@
+% META: {"id": "TEXP-GRA-EX-011", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-011.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-011.tex", "status": "generated"}
+% BEGIN-VERIFY
+% import itertools
+% def degres(p, aretes):
+%     return [sum(s in a for a in aretes) for s in range(p)]
+% for p in range(2, 6):
+%     for k in range(0, p * (p - 1) // 2 + 1):
+%         for aretes in itertools.islice(itertools.combinations(list(itertools.combinations(range(p), 2)), k), 40):
+%             d = degres(p, aretes)
+%             assert sum(d) % 2 == 0
+%             assert len([x for x in d if x % 2]) % 2 == 0
+% assert sum([1, 2, 3, 4, 5]) == 15 and 15 % 2 == 1
+% assert max([1, 2, 3, 4, 5]) == 5 > 5 - 1
+% END-VERIFY
+\begin{exercice}{TEXP-GRA-EX-011}{2}{15}
+\begin{enumerate}
+  \item Démontrer que dans tout graphe, la somme des degrés est paire.
+  \item En déduire que le nombre de sommets de degré impair est pair.
+  \item Peut-il exister un graphe à $5$ sommets dont les degrés seraient
+        $1,2,3,4,5$ ? Justifier de deux façons.
+\end{enumerate}
+\end{exercice}

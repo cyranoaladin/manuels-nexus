@@ -1,0 +1,33 @@
+% META: {"id": "TEXP-GRA-EX-007", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["modeliser"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-007.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-007.tex", "status": "generated"}
+% BEGIN-VERIFY
+% import collections
+% aretes = [("U", "R"), ("U", "L"), ("R", "C"), ("L", "C"), ("C", "P")]
+% voisins = collections.defaultdict(set)
+% for u, v in aretes:
+%     voisins[u].add(v); voisins[v].add(u)
+% degre = {s: len(v) for s, v in voisins.items()}
+% assert degre == {"U": 2, "R": 2, "L": 2, "C": 3, "P": 1}
+% assert max(degre, key=degre.get) == "C"
+% distance = {"U": 0}
+% file = collections.deque(["U"])
+% while file:
+%     s = file.popleft()
+%     for t in voisins[s]:
+%         if t not in distance:
+%             distance[t] = distance[s] + 1
+%             file.append(t)
+% assert distance["P"] == 3
+% END-VERIFY
+\begin{exercice}{TEXP-GRA-EX-007}{2}{15}
+Cinq services d'un hôpital doivent se transmettre des dossiers. Les liaisons
+directes existantes sont : Urgences--Radiologie, Urgences--Laboratoire,
+Radiologie--Chirurgie, Laboratoire--Chirurgie, Chirurgie--Pharmacie.
+\begin{enumerate}
+  \item Modéliser la situation par un graphe : préciser ce que représentent les
+        sommets et les arêtes.
+  \item Un dossier peut-il aller des Urgences à la Pharmacie ? En combien
+        d'étapes au minimum ?
+  \item Quel service est le plus sollicité comme intermédiaire ? Justifier par
+        les degrés.
+\end{enumerate}
+\end{exercice}

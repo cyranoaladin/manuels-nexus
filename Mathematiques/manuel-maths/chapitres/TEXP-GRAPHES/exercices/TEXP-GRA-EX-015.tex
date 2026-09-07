@@ -1,0 +1,24 @@
+% META: {"id": "TEXP-GRA-EX-015", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-015.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-015.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% def complet(p):
+%     return Matrix(p, p, lambda i, j: 0 if i == j else 1)
+% M = complet(3)
+% assert M ** 2 == Matrix([[2, 1, 1], [1, 2, 1], [1, 1, 2]])
+% assert M ** 3 == Matrix([[2, 3, 3], [3, 2, 3], [3, 3, 2]])
+% assert (M ** 2)[0, 0] == 2
+% for p in range(2, 7):
+%     Mp = complet(p)
+%     for i in range(p):
+%         assert (Mp ** 2)[i, i] == p - 1
+% END-VERIFY
+\begin{exercice}{TEXP-GRA-EX-015}{2}{15}
+On veut vérifier expérimentalement, puis expliquer, le théorème de comptage des
+chemins.
+\begin{enumerate}
+  \item Sur le graphe complet $K_3$ (trois sommets deux à deux adjacents),
+        calculer $M$, $M^2$ et $M^3$.
+  \item Vérifier que $m^{(2)}_{11}=2$ et retrouver ce résultat par énumération.
+  \item Expliquer pourquoi, sur $K_p$, on a $m^{(2)}_{ii}=p-1$ pour tout $i$.
+\end{enumerate}
+\end{exercice}

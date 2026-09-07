@@ -1,0 +1,26 @@
+% META: {"id": "TEXP-GRA-CO-015", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige", "exercice_ref": "TEXP-GRA-EX-015", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% def complet(p):
+%     return Matrix(p, p, lambda i, j: 0 if i == j else 1)
+% M = complet(3)
+% assert M ** 2 == Matrix([[2, 1, 1], [1, 2, 1], [1, 1, 2]])
+% assert M ** 3 == Matrix([[2, 3, 3], [3, 2, 3], [3, 3, 2]])
+% assert (M ** 2)[0, 0] == 2
+% for p in range(2, 7):
+%     Mp = complet(p)
+%     for i in range(p):
+%         assert (Mp ** 2)[i, i] == p - 1
+% END-VERIFY
+\begin{corrige}{TEXP-GRA-EX-015}
+\textbf{1.} $M=\begin{pmatrix}0&1&1\\1&0&1\\1&1&0\end{pmatrix}$,
+$M^2=\begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix}$,
+$M^3=\begin{pmatrix}2&3&3\\3&2&3\\3&3&2\end{pmatrix}$.
+
+\textbf{2.} $m^{(2)}_{11}=2$. Par énumération, les chemins de longueur $2$ de
+$1$ vers $1$ sont $1-2-1$ et $1-3-1$ : il y en a bien deux.
+
+\textbf{3.} Un chemin fermé de longueur $2$ issu de $i$ consiste à rejoindre un
+voisin puis à revenir. Dans $K_p$, le sommet $i$ a exactement $p-1$ voisins,
+d'où $m^{(2)}_{ii}=p-1$. C'est le degré de $i$, conformément au théorème.
+\end{corrige}

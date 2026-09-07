@@ -1,0 +1,33 @@
+% META: {"id": "TEXP-GRA-CO-006", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige", "exercice_ref": "TEXP-GRA-EX-006", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% sommets = ["A", "B", "C", "D", "E"]
+% aretes = [("A", "B"), ("A", "C"), ("B", "C"), ("C", "D"), ("D", "E")]
+% degre = {s: sum(s in a for a in aretes) for s in sommets}
+% assert degre == {"A": 2, "B": 2, "C": 3, "D": 2, "E": 1}
+% assert sum(degre.values()) == 2 * len(aretes) == 10
+% assert len(sommets) == 5
+% voisins = {s: set() for s in sommets}
+% for u, v in aretes:
+%     voisins[u].add(v); voisins[v].add(u)
+% vus, pile = set(), ["E"]
+% while pile:
+%     s = pile.pop()
+%     if s in vus:
+%         continue
+%     vus.add(s); pile.extend(voisins[s] - vus)
+% assert vus == set(sommets)
+% assert len(aretes) != 5 * 4 // 2
+% END-VERIFY
+\begin{corrige}{TEXP-GRA-EX-006}
+\textbf{1.} L'ordre est $5$. Degrés : $\deg(A)=2$, $\deg(B)=2$, $\deg(C)=3$,
+$\deg(D)=2$, $\deg(E)=1$.
+
+\textbf{2.} La somme des degrés vaut $2+2+3+2+1=10$, soit deux fois le nombre
+d'arêtes ($5$) : chaque arête est comptée une fois à chacune de ses deux
+extrémités.
+
+\textbf{3.} $G$ est connexe : la chaîne $E-D-C-A-B$ atteint tous les sommets.
+Il n'est pas complet : un graphe complet d'ordre $5$ aurait
+$\binom{5}{2}=10$ arêtes, il n'en a que $5$ (par exemple $A$ et $E$ ne sont pas
+adjacents).
+\end{corrige}
