@@ -61,7 +61,7 @@ _RAISONNER = re.compile(
     r"\bd[ée]montrer\b|\bmontrer\b|\bprouver\b|\bjustifier\b|"
     r"\ben d[ée]duire\b|\br[ée]currence\b|\bconclure\b|\bexpliquer\b|"
     r"\binterpr[ée]ter\b|\bpourquoi\b|\bcomparer\b|\bcommenter\b|"
-    r"\bargumenter\b|\bcritiquer\b",
+    r"\bargumenter\b|\bcritiquer\b|\bconjecturer\b",
     re.I,
 )
 _TRANSFERT = re.compile(
@@ -103,7 +103,11 @@ _DIRECT = re.compile(
     r"\bint[ée]grer\b|\bsimuler\b|\bexprimer\b|\b[ée]tudier\b|"
     r"\bidentifier\b|\btester\b|\br[ée]{1,2}crire\b|\bestimer\b|"
     r"\breconna[îi]tre\b|\brappeler\b|\besquisser\b|\bmodifier\b|"
-    r"\bmettre\b.{0,25}\bsous (?:la|cette) forme\b",
+    r"\bmettre\b.{0,25}\bsous (?:la|cette) forme\b|\bpr[ée]ciser\b|"
+    r"\bcombien\b|\bciter\b|\bindiquer\b|\bnommer\b|\bsituer\b|\bclasser\b|"
+    r"\branger\b|\bordonner\b|\bremettre\b|\blister\b|\brelever\b|"
+    r"\bassocier\b|\brelier\b|\bdistinguer\b|\brep[ée]rer\b|\bchoisir\b|"
+    r"\bextraire\b|\bcompter\b|\bs[ée]lectionner\b",
     re.I,
 )
 _ETAPES = re.compile(r"\\item", re.I)
