@@ -6,10 +6,10 @@
 - Digest source: `sha256:2e879679c8576fa4c11059daf9787a17bbafc6c1618d8c36ea516c110da91c34`
 - Digest modèle: `sha256:a85630f4235b8ba078e39177bda427432a5e66d0df62b13d80f2fa2efed46908`
 - Fichiers scannés: 4798
-- Gate `release-strict`: ROUGE (361 bloqueurs)
+- Gate `release-strict`: ROUGE (362 bloqueurs)
 
 ## Provenance synthétique
-- SHA Git: `7585c8d8cfa1e2fa78733302afa313146d0ec1ef`
+- SHA Git: `6bd6bb5a2f6c6511723b5b7c376c0b757b0bdfde`
 - Branche observée: **non enregistrée** — le nom de branche ne lie aucun contenu
 - Dépôt sale: non
 
