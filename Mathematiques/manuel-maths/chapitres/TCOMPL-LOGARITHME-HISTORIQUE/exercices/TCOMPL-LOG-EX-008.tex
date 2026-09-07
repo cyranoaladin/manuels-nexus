@@ -1,0 +1,22 @@
+% META: {"id": "TCOMPL-LOG-EX-008", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "exercice", "capacites": ["TCOMPL-LOG-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/exercices/TCOMPL-LOG-EX-008.tex", "corrige_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/corriges/TCOMPL-LOG-CO-008.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, log, simplify, expand_log
+% a, b = symbols('a b', positive=True)
+% assert simplify(expand_log(log(a * b), force=True) - (log(a) + log(b))) == 0
+% assert simplify(expand_log(log(1 / a), force=True) + log(a)) == 0
+% assert simplify(expand_log(log(a / b), force=True) - (log(a) - log(b))) == 0
+% assert log(1) == 0
+% for n in range(1, 8):
+%     assert simplify(expand_log(log(a ** n), force=True) - n * log(a)) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-LOG-EX-008}{2}{15}
+On admet l'équation fonctionnelle : pour tous réels $a>0$ et $b>0$,
+$\ln(ab)=\ln a+\ln b$.
+\begin{enumerate}
+  \item Démontrer que $\ln\!\left(\dfrac{1}{a}\right)=-\ln a$ pour tout
+        $a>0$.
+  \item En déduire que $\ln\!\left(\dfrac{a}{b}\right)=\ln a-\ln b$.
+  \item Démontrer par récurrence que $\ln(a^{\,n})=n\ln a$ pour tout entier
+        $n\geq1$.
+\end{enumerate}
+\end{exercice}

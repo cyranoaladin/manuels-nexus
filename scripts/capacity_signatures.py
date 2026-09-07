@@ -314,7 +314,10 @@ SIGNATURES: dict[str, dict[str, dict[str, list]]] = {
         "C2": {"required": [[r"\\ln", r"logarithme"], [r"[ée]quation", r"in[ée]quation", r"[ée]quation fonctionnelle", r"Simplifier|R[ée]soudre"]]},
         "C3": {"required": [[r"seuil", r"\\ln", r"logarithme"], [r"g[ée]om[ée]trique", r"capital", r"placement", r"\bn\b"]]},
         "C4": {"required": [[r"D[ée]montrer|Montrer"], [r"\\ln\(ab\)", r"[ée]quation fonctionnelle", r"\\ln"]]},
-        "C5": {"required": [[r"D[ée]montrer|Montrer"], [r"d[ée]riv", r"1/x", r"\\dfrac\{1\}\{x\}"]]},
+        # « En deduire » a partir d'une relation admise EST une demarche de
+        # demonstration : c'est la formulation ordinaire d'une deduction en
+        # francais, et la capacite porte sur la preuve, pas sur le mot.
+        "C5": {"required": [[r"D[ée]montrer|Montrer|[Ee]n d[ée]duire"], [r"d[ée]riv", r"1/x", r"\\dfrac\{1\}\{x\}"]]},
     },
     "TCOMPL-MODELES-EVOLUTION": {
         "C1": {"required": [[r"suite"], [r"mod[ée]lis", r"r[ée]currence", r"explicit", r"u_\{?n\s*\+\s*1\}?\s*="]]},

@@ -183,6 +183,13 @@ REVIEWS = [
               "capacite que le contrat de ce chapitre ne comporte pas : la "
               "reference vient d'un autre contrat",
           action="rattache au prerequis R1, capacite retiree", corrected=None),
+    revue("TCOMPL-LOG-EX-009", "TCOMPL-LOGARITHME-HISTORIQUE", "C5", ALIGNED,
+          content="derive exp(ln x) = x membre a membre et en deduit ln'(x) = 1/x, "
+                  "puis verifie sur ln(5x) par deux chemins",
+          expected="demontrer que la derivee de ln est 1/x",
+          why="l'enonce conduit la demonstration par « ecrire », « deriver », "
+              "« en deduire » sans employer le verbe « demontrer »",
+          action="marqueur `en deduire` ajoute au groupe des verbes de preuve"),
 ]
 
 

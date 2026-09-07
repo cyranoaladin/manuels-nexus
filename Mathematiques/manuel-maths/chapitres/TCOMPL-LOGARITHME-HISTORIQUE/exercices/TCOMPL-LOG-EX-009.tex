@@ -1,0 +1,22 @@
+% META: {"id": "TCOMPL-LOG-EX-009", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "exercice", "capacites": ["TCOMPL-LOG-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/exercices/TCOMPL-LOG-EX-009.tex", "corrige_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/corriges/TCOMPL-LOG-CO-009.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, log, exp, diff, simplify, expand_log
+% x = symbols('x', positive=True)
+% assert simplify(exp(log(x)) - x) == 0
+% assert simplify(diff(log(x), x) - 1 / x) == 0
+% assert simplify(diff(exp(log(x)), x) - 1) == 0
+% assert simplify(diff(log(5 * x), x) - 1 / x) == 0
+% assert simplify(expand_log(log(5 * x), force=True) - (log(5) + log(x))) == 0
+% assert simplify(diff(log(5) + log(x), x) - 1 / x) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-LOG-EX-009}{2}{15}
+On admet que la fonction $\ln$ est dérivable sur $\left]0\,;\,+\infty\right[$
+et que $\exp$ est sa réciproque, de dérivée $\exp$.
+\begin{enumerate}
+  \item Écrire la relation $\exp(\ln x)=x$ pour $x>0$, puis la dériver membre
+        à membre.
+  \item En déduire l'expression de $\ln'(x)$.
+  \item Vérifier le résultat en calculant la dérivée de $x\mapsto\ln(5x)$ de
+        deux façons.
+\end{enumerate}
+\end{exercice}

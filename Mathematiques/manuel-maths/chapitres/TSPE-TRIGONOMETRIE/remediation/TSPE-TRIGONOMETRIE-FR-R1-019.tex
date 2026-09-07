@@ -1,0 +1,44 @@
+% META: {"id": "TSPE-TRIGONOMETRIE-FR-R1-019", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "remediation", "prerequis_testes": ["R1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU -- R1 : angles associes -- passer de cosinus a sinus
+%---------------------------------------------------------------
+
+\subsection*{Rappel -- angles associes -- passer de cosinus a sinus}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% # cos(pi/2 - x) = sin(x)
+% assert trigsimp(cos(pi/2 - x) - sin(x)) == 0
+% # sin(pi/2 - x) = cos(x)
+% assert trigsimp(sin(pi/2 - x) - cos(x)) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-TRIGONOMETRIE-FR-R1-019-EX1}{2}{12}
+\begin{enumerate}
+  \item A l'aide des formules d'addition (vues en C3) ou a l'aide du cercle trigonométrique, démontrer que :
+  \[
+    \cos\!\left(\frac{\pi}{2} - x\right) = \sin x \quad \text{et} \quad \sin\!\left(\frac{\pi}{2} - x\right) = \cos x.
+  \]
+  \item En déduire que $\cos\!\left(\frac{\pi}{2} + x\right) = -\sin x$ et $\sin\!\left(\frac{\pi}{2} + x\right) = \cos x$.
+  \item Application : calculer $\cos\!\left(\dfrac{\pi}{2} + \dfrac{\pi}{6}\right)$ et $\sin\!\left(\dfrac{\pi}{2} - \dfrac{\pi}{3}\right)$.
+\end{enumerate}
+\end{exercice}
+
+\medskip
+\noindent\textbf{Corrigé.}
+
+\textbf{1.} Par la formule d'addition :
+$\cos\!\left(\dfrac{\pi}{2} - x\right) = \cos\dfrac{\pi}{2}\cos x + \sin\dfrac{\pi}{2}\sin x = 0 \cdot \cos x + 1 \cdot \sin x = \sin x$.
+
+$\sin\!\left(\dfrac{\pi}{2} - x\right) = \sin\dfrac{\pi}{2}\cos x - \cos\dfrac{\pi}{2}\sin x = 1 \cdot \cos x - 0 \cdot \sin x = \cos x$.
+
+\textbf{2.} En remplacant $x$ par $-x$ dans $\cos\!\left(\dfrac{\pi}{2} - x\right) = \sin x$ :
+$\cos\!\left(\dfrac{\pi}{2} + x\right) = \sin(-x) = -\sin x$.
+
+En remplacant $x$ par $-x$ dans $\sin\!\left(\dfrac{\pi}{2} - x\right) = \cos x$ :
+$\sin\!\left(\dfrac{\pi}{2} + x\right) = \cos(-x) = \cos x$.
+
+\textbf{3.} $\cos\!\left(\dfrac{\pi}{2} + \dfrac{\pi}{6}\right) = -\sin\dfrac{\pi}{6} = -\dfrac{1}{2}$.
+
+$\sin\!\left(\dfrac{\pi}{2} - \dfrac{\pi}{3}\right) = \cos\dfrac{\pi}{3} = \dfrac{1}{2}$.

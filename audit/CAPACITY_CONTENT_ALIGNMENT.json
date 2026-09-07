@@ -5374,6 +5374,30 @@
       "state": "ALIGNED"
     },
     {
+      "capacity": "C4",
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "evidence": {
+        "aligned": true,
+        "forbidden_markers_found": [],
+        "missing_required_groups": []
+      },
+      "object_id": "TCOMPL-LOG-EX-008",
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/exercices/TCOMPL-LOG-EX-008.tex",
+      "state": "ALIGNED"
+    },
+    {
+      "capacity": "C5",
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "evidence": {
+        "aligned": true,
+        "forbidden_markers_found": [],
+        "missing_required_groups": []
+      },
+      "object_id": "TCOMPL-LOG-EX-009",
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/exercices/TCOMPL-LOG-EX-009.tex",
+      "state": "ALIGNED"
+    },
+    {
       "capacity": "C2",
       "chapter": "TCOMPL-MODELES-EVOLUTION",
       "evidence": {
@@ -9737,7 +9761,7 @@
         "C4",
         "C5"
       ],
-      "exercise_count": 7,
+      "exercise_count": 9,
       "round_robin": {
         "detected": false,
         "from_index": null,
@@ -10256,7 +10280,7 @@
         "C1",
         "C2"
       ],
-      "exercise_count": 10,
+      "exercise_count": 8,
       "round_robin": {
         "detected": false,
         "from_index": null,
@@ -10505,6 +10529,17 @@
       "object_id": "TSPE-TRIGO-EX-019",
       "verdict": "MISALIGNED",
       "why_signature_missed_it": "meme cause, et l'enonce renvoie explicitement a « C3 », une capacite que le contrat de ce chapitre ne comporte pas : la reference vient d'un autre contrat"
+    },
+    {
+      "action_taken": "marqueur `en deduire` ajoute au groupe des verbes de preuve",
+      "actual_content": "derive exp(ln x) = x membre a membre et en deduit ln'(x) = 1/x, puis verifie sur ln(5x) par deux chemins",
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "corrected_capacity": null,
+      "declared_capacity": "C5",
+      "expected_signature": "demontrer que la derivee de ln est 1/x",
+      "object_id": "TCOMPL-LOG-EX-009",
+      "verdict": "SEMANTICALLY_ALIGNED",
+      "why_signature_missed_it": "l'enonce conduit la demonstration par « ecrire », « deriver », « en deduire » sans employer le verbe « demontrer »"
     }
   ],
   "signature_table": "scripts/capacity_signatures.py",
@@ -10515,11 +10550,11 @@
     "NO_SIGNATURE_DECLARED"
   ],
   "summary": {
-    "ALIGNED": 174,
+    "ALIGNED": 176,
     "APPROVES_NOTHING": true,
-    "CAPACITY_ASSIGNMENTS_EXAMINED": 1071,
-    "CAPACITY_ASSIGNMENTS_SEMANTICALLY_PROVEN": 174,
-    "CAPACITY_ASSIGNMENTS_TOTAL": 1071,
+    "CAPACITY_ASSIGNMENTS_EXAMINED": 1073,
+    "CAPACITY_ASSIGNMENTS_SEMANTICALLY_PROVEN": 176,
+    "CAPACITY_ASSIGNMENTS_TOTAL": 1073,
     "CAPACITY_ASSIGNMENTS_WITHOUT_EVIDENCE": 0,
     "CAPACITY_CONTENT_MISALIGNMENT": 0,
     "CHAPTERS_WITH_DECLARED_SIGNATURES": 15,
@@ -10528,11 +10563,11 @@
     "ROUND_ROBIN_CAPACITY_ASSIGNMENT": 0,
     "ROUND_ROBIN_EXPLAINED_BY_CONTENT": 1,
     "ROUND_ROBIN_PATTERN_CHAPTERS": 1,
-    "SEMANTIC_REVIEWS_RECORDED": 21,
+    "SEMANTIC_REVIEWS_RECORDED": 22,
     "SEMANTIC_REVIEW_VERDICTS": {
       "MISALIGNED": 5,
       "PARTIALLY_ALIGNED": 2,
-      "SEMANTICALLY_ALIGNED": 14
+      "SEMANTICALLY_ALIGNED": 15
     },
     "STATES_SUM_EQUALS_TOTAL": true
   }

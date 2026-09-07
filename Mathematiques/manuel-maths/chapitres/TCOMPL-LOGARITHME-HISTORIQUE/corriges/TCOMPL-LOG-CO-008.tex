@@ -1,0 +1,25 @@
+% META: {"id": "TCOMPL-LOG-CO-008", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "corrige", "exercice_ref": "TCOMPL-LOG-EX-008", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, log, simplify, expand_log
+% a, b = symbols('a b', positive=True)
+% assert simplify(expand_log(log(a * b), force=True) - (log(a) + log(b))) == 0
+% assert simplify(expand_log(log(1 / a), force=True) + log(a)) == 0
+% assert simplify(expand_log(log(a / b), force=True) - (log(a) - log(b))) == 0
+% assert log(1) == 0
+% for n in range(1, 8):
+%     assert simplify(expand_log(log(a ** n), force=True) - n * log(a)) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-LOG-EX-008}
+\textbf{1.} Appliquons l'équation fonctionnelle à $a$ et $\tfrac1a$ :
+$\ln\!\left(a\times\tfrac1a\right)=\ln a+\ln\!\left(\tfrac1a\right)$. Or
+$a\times\tfrac1a=1$ et $\ln1=0$ (l'équation fonctionnelle appliquée à
+$a=b=1$ donne $\ln1=2\ln1$, donc $\ln1=0$). D'où
+$\ln\!\left(\tfrac1a\right)=-\ln a$.
+
+\textbf{2.} $\ln\!\left(\tfrac ab\right)=\ln\!\left(a\times\tfrac1b\right)
+=\ln a+\ln\!\left(\tfrac1b\right)=\ln a-\ln b$ d'après 1.
+
+\textbf{3.} Au rang $1$, $\ln(a^1)=1\times\ln a$. Si $\ln(a^n)=n\ln a$, alors
+$\ln(a^{n+1})=\ln(a^n\times a)=\ln(a^n)+\ln a=n\ln a+\ln a=(n+1)\ln a$. La
+propriété est héréditaire, donc vraie pour tout $n\geq1$.
+\end{corrige}

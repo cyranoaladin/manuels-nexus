@@ -8602,15 +8602,9 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 2
+            "targeted_practice": 1
           },
           "practice": [
-            {
-              "duree_min": 20,
-              "id": "TCOMPL-INEG-EX-003",
-              "parcours": 2,
-              "questions_for_this_capacity": null
-            },
             {
               "duree_min": 12,
               "id": "TCOMPL-INEG-EX-005",
@@ -8792,7 +8786,7 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:73d1a2bf916d243dbf816128e2b082cc646f9ff161de0e1c56264faf1112b8cd",
+      "capacities_digest": "sha256:aab7deafbb647aa6b4538960226d4149919a91af15321537c6735acbca1aaeea",
       "capacity_identity_blockers": [],
       "chapter": "TCOMPL-INEGALITES",
       "counts": {
@@ -9061,9 +9055,15 @@
             "method": 1,
             "qcm": 2,
             "remediation": 0,
-            "targeted_practice": 1
+            "targeted_practice": 2
           },
           "practice": [
+            {
+              "duree_min": 10,
+              "id": "TCOMPL-LOG-EX-004",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
             {
               "duree_min": 12,
               "id": "TCOMPL-LOG-EX-005",
@@ -9098,9 +9098,15 @@
             "method": 1,
             "qcm": 1,
             "remediation": 0,
-            "targeted_practice": 2
+            "targeted_practice": 3
           },
           "practice": [
+            {
+              "duree_min": 10,
+              "id": "TCOMPL-LOG-EX-001",
+              "parcours": 1,
+              "questions_for_this_capacity": null
+            },
             {
               "duree_min": 15,
               "id": "TCOMPL-LOG-EX-002",
@@ -9182,9 +9188,9 @@
           },
           "practice": [
             {
-              "duree_min": 10,
-              "id": "TCOMPL-LOG-EX-001",
-              "parcours": 1,
+              "duree_min": 15,
+              "id": "TCOMPL-LOG-EX-008",
+              "parcours": 2,
               "questions_for_this_capacity": null
             }
           ],
@@ -9219,9 +9225,9 @@
           },
           "practice": [
             {
-              "duree_min": 10,
-              "id": "TCOMPL-LOG-EX-004",
-              "parcours": 1,
+              "duree_min": 15,
+              "id": "TCOMPL-LOG-EX-009",
+              "parcours": 2,
               "questions_for_this_capacity": null
             }
           ],
@@ -9233,7 +9239,7 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:9f0fad4e84c7e96c9a91f3aefc2a5a64756f750fded194c0a517d14cc7fff305",
+      "capacities_digest": "sha256:8f38f6258c3ffb56bc56894365c826d1d924e19269d2a52700431a0c2b741e7a",
       "capacity_identity_blockers": [],
       "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
       "counts": {
@@ -18062,7 +18068,7 @@
             "method": 1,
             "qcm": 4,
             "remediation": 1,
-            "targeted_practice": 6
+            "targeted_practice": 4
           },
           "practice": [
             {
@@ -18084,18 +18090,6 @@
               "questions_for_this_capacity": null
             },
             {
-              "duree_min": 12,
-              "id": "TSPE-TRIGO-EX-016",
-              "parcours": 2,
-              "questions_for_this_capacity": null
-            },
-            {
-              "duree_min": 15,
-              "id": "TSPE-TRIGO-EX-019",
-              "parcours": 3,
-              "questions_for_this_capacity": null
-            },
-            {
               "duree_min": 18,
               "id": "TSPE-TRIGO-EX-021",
               "parcours": 3,
@@ -18108,7 +18102,7 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:415809f681e22fa0f1055fa31410a136f0e5994761c333ee2fdbbc6bde28863f",
+      "capacities_digest": "sha256:8bf145b6bb11e9ad4617f921c0ba920513a9b2334825c9d4453d2d26e9d1fc64",
       "capacity_identity_blockers": [],
       "chapter": "TSPE-TRIGONOMETRIE",
       "counts": {
@@ -18129,7 +18123,7 @@
       "unknown": 0
     }
   },
-  "chapters_digest": "sha256:238ed3f35ababf601754c87a3d55e8ffd7a51650fe97de6b15ce484f8d76efe6",
+  "chapters_digest": "sha256:39bfe9a510ad7b603e17972bde601d02e877d58d007912a77e1e1728ad8fda39",
   "generated_by": "scripts/build_chapter_richness_matrix.py",
   "incomplete_chapters": [],
   "machine_status": "COMPLETE",

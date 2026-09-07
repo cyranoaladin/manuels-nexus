@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-LOG-CO-009", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "corrige", "exercice_ref": "TCOMPL-LOG-EX-009", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, log, exp, diff, simplify, expand_log
+% x = symbols('x', positive=True)
+% assert simplify(exp(log(x)) - x) == 0
+% assert simplify(diff(log(x), x) - 1 / x) == 0
+% assert simplify(diff(exp(log(x)), x) - 1) == 0
+% assert simplify(diff(log(5 * x), x) - 1 / x) == 0
+% assert simplify(expand_log(log(5 * x), force=True) - (log(5) + log(x))) == 0
+% assert simplify(diff(log(5) + log(x), x) - 1 / x) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-LOG-EX-009}
+\textbf{1.} Pour tout $x>0$, $\exp(\ln x)=x$. En dérivant les deux membres et
+en appliquant la dérivée d'une composée :
+$\ln'(x)\times\exp(\ln x)=1$.
+
+\textbf{2.} Or $\exp(\ln x)=x$, donc $\ln'(x)\times x=1$ et, puisque $x>0$,
+$\ln'(x)=\dfrac1x$.
+
+\textbf{3.} D'une part $\ln(5x)=\ln5+\ln x$, de dérivée $\dfrac1x$. D'autre
+part, par la dérivée d'une composée, $\big(\ln(5x)\big)'=\dfrac{5}{5x}
+=\dfrac1x$. Les deux calculs coïncident.
+\end{corrige}
