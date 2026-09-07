@@ -104,10 +104,8 @@
 ### duplicate_ids (0)
 - Aucune.
 
-### invalid_capacities (3)
-- path=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml, reason=ref_capacite doit etre un texte non vide, index=1
-- path=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml, reason=ref_capacite doit etre un texte non vide, index=5
-- path=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml, reason=ref_capacite doit etre un texte non vide, index=6
+### invalid_capacities (0)
+- Aucune.
 
 ### invalid_meta_references (0)
 - Aucune.

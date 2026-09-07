@@ -7,7 +7,7 @@
 | ID | Manuel | Matière | Niveau | Édition | Chapitres | Capacités | Exercices | Fichiers contenu | Objets | Variantes compilées |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1NSI | NSI Première | NSI | Premiere | courante | 10 | 53 | 101 | 366 | 366 | manual |
-| 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 52 | 484 | 1446 | 1446 | manual |
+| 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 55 | 484 | 1446 | 1446 | manual |
 | TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 53 | 300 | 775 | 775 | manual |
 | TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 194 | 500 | 500 | manual |
 | TNSI | NSI Terminale | NSI | Terminale | courante | 7 | 61 | 23 | 111 | 111 | manual |
@@ -19,7 +19,6 @@
 |---|---|
 | blocking_statuses | 2330 |
 | broken_meta_references | 110 |
-| invalid_capacities | 3 |
 | unclassified_types | 1 |
 
 ### Échantillon déterministe
@@ -33,9 +32,6 @@
 - broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-006.tex, cible=C2, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
 - broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-013.tex, cible=C5, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
 - broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-014.tex, cible=C5, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
-- invalid_capacities: path=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml, reason=ref_capacite doit etre un texte non vide, index=1
-- invalid_capacities: path=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml, reason=ref_capacite doit etre un texte non vide, index=5
-- invalid_capacities: path=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml, reason=ref_capacite doit etre un texte non vide, index=6
 - unclassified_types: path=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/16_C7_somme_produit_racines.tex, id=1SPE-SECDEG-CR-016, source_subtype=notion, source_type=cours
 
 ## Réconciliation des rapports

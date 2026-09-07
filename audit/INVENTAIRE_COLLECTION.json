@@ -19314,23 +19314,7 @@
     "duplicate_assembly_objects": [],
     "duplicate_capacity_refs": [],
     "duplicate_ids": [],
-    "invalid_capacities": [
-      {
-        "index": 1,
-        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml",
-        "reason": "ref_capacite doit etre un texte non vide"
-      },
-      {
-        "index": 5,
-        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml",
-        "reason": "ref_capacite doit etre un texte non vide"
-      },
-      {
-        "index": 6,
-        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml",
-        "reason": "ref_capacite doit etre un texte non vide"
-      }
-    ],
+    "invalid_capacities": [],
     "invalid_meta_references": [],
     "invalid_statuses": [],
     "latex_cycles": [],
@@ -19859,22 +19843,6 @@
       "release_blocking": true,
       "severity": "blocking",
       "source": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-018.tex"
-    },
-    "026f4a5f28fd10c9": {
-      "blocking": true,
-      "categories": [
-        "invalid_capacities"
-      ],
-      "category": "invalid_capacities",
-      "disposition": "open_debt",
-      "fingerprint": "026f4a5f28fd10c9",
-      "occurrence_count": 3,
-      "qualified": false,
-      "raw_identities": [
-        "0aecfc06fa520e5ac755ea6596149e134ea0002d5677630cfd12d9538b8559ec",
-        "6d25fad2dacc441c8e9529b8c98c06391ab846879d7642854f05f940ecfa5631",
-        "6fc24c384b73a51a8146968b5fff577b67d6087257410801ed8606ee27e3ec91"
-      ]
     },
     "027672357d75b9bb": {
       "approved_by": "Alaeddine Ben Rhouma",
@@ -172138,11 +172106,6 @@
             "source": "anomalies.broken_meta_references"
           },
           {
-            "code": "anomalie:invalid_capacities",
-            "detail": "3",
-            "source": "anomalies.invalid_capacities"
-          },
-          {
             "code": "anomalie:unclassified_types",
             "detail": "1",
             "source": "anomalies.unclassified_types"
@@ -172193,7 +172156,7 @@
             "verified": 8
           },
           "totals": {
-            "capacites": 52,
+            "capacites": 55,
             "corriges": 504,
             "coups_de_pouce": 180,
             "diagnostics": 5,
@@ -172225,7 +172188,6 @@
         "structural_blockers": [
           "anomalie:blocking_statuses",
           "anomalie:broken_meta_references",
-          "anomalie:invalid_capacities",
           "anomalie:unclassified_types",
           "statuts_non_approuves"
         ],
@@ -208341,6 +208303,14 @@
               "ref_capacite": "1SPE-SECOND-DEGRE-2026-C4"
             },
             {
+              "code": "C2",
+              "libelle_eleve": "Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations.",
+              "sans_alias_officiel": {
+                "facette_de": "1SPE-SECOND-DEGRE-2026-C4",
+                "porte_par": "C1"
+              }
+            },
+            {
               "code": "C3",
               "libelle_eleve": "Je sais calculer le discriminant et resoudre une equation du second degre.",
               "ref_capacite": "1SPE-SECOND-DEGRE-2026-D1"
@@ -208354,6 +208324,22 @@
               "code": "C8",
               "libelle_eleve": "Je sais etudier le signe d'un polynome du second degre donne sous forme factorisee.",
               "ref_capacite": "1SPE-SECOND-DEGRE-2026-C1"
+            },
+            {
+              "code": "C5",
+              "libelle_eleve": "Je sais resoudre une inequation du second degre.",
+              "sans_alias_officiel": {
+                "facette_de": "1SPE-SECOND-DEGRE-2026-C4",
+                "porte_par": "C1"
+              }
+            },
+            {
+              "code": "C6",
+              "libelle_eleve": "Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum.",
+              "sans_alias_officiel": {
+                "facette_de": "1SPE-SECOND-DEGRE-2026-C4",
+                "porte_par": "C1"
+              }
             },
             {
               "code": "C7",
@@ -208377,7 +208363,11 @@
               },
               {
                 "code": "C2",
-                "libelle_eleve": "Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations."
+                "libelle_eleve": "Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations.",
+                "sans_alias_officiel": {
+                  "facette_de": "1SPE-SECOND-DEGRE-2026-C4",
+                  "porte_par": "C1"
+                }
               },
               {
                 "code": "C3",
@@ -208396,11 +208386,19 @@
               },
               {
                 "code": "C5",
-                "libelle_eleve": "Je sais resoudre une inequation du second degre."
+                "libelle_eleve": "Je sais resoudre une inequation du second degre.",
+                "sans_alias_officiel": {
+                  "facette_de": "1SPE-SECOND-DEGRE-2026-C4",
+                  "porte_par": "C1"
+                }
               },
               {
                 "code": "C6",
-                "libelle_eleve": "Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum."
+                "libelle_eleve": "Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum.",
+                "sans_alias_officiel": {
+                  "facette_de": "1SPE-SECOND-DEGRE-2026-C4",
+                  "porte_par": "C1"
+                }
               },
               {
                 "code": "C7",
@@ -208451,7 +208449,7 @@
           "contract_status": "draft",
           "contract_status_valid": true,
           "counts": {
-            "capacites": 5,
+            "capacites": 8,
             "corriges": 54,
             "coups_de_pouce": 20,
             "diagnostics": 1,
@@ -225527,7 +225525,7 @@
         ]
       },
       "edition": "2026-2027",
-      "editorial_object_count": 52,
+      "editorial_object_count": 55,
       "level": "Premiere specialite",
       "object_count": 1446,
       "objects_by_status": {
@@ -225558,7 +225556,7 @@
       },
       "subject": "Mathematiques",
       "totals": {
-        "capacites": 52,
+        "capacites": 55,
         "corriges": 504,
         "coups_de_pouce": 180,
         "diagnostics": 5,
@@ -293920,7 +293918,7 @@
       }
     }
   },
-  "model_digest": "sha256:fac99a327558fd69c09f2de6f4fac0fbf07dd2b3afff7e012d892cc1d1c432d8",
+  "model_digest": "sha256:8eb256b7dd6549cf5b6b9bc19ba9b4f81c85909e4daf6c8881ed7940973dddad",
   "observed_build_coverage": {
     "1NSI": {
       "observed_build_ready": false,
@@ -294774,79 +294772,23 @@
   ],
   "provenance": {
     "branch": null,
-    "dirty": true,
+    "dirty": false,
     "errors": [],
-    "generated_at_utc": "2026-09-06T21:23:48Z",
+    "generated_at_utc": "2026-09-07T00:19:01Z",
     "generator_files": {
       "scripts/baseline_qualification.py": "sha256:79b255deeddfa4b483a9a5a9f568bdc143defd7b2a69e8b8a704f4afdd35d6bf",
       "scripts/build_manifest.py": "sha256:62d4f5da9454aaa2923041db777b759e3e4b672e7c2f33b59a62e07afc76de26",
       "scripts/inventory_assembly.py": "sha256:8a2eeaaa869413ae29c761b1972787f77bc2d0f4baf49aa653b70af98092dd0e",
-      "scripts/inventory_collection.py": "sha256:184cee05f96faf87fae6a15cb13d2f4b255cc64fb12957a685f551e9d17dd83e",
+      "scripts/inventory_collection.py": "sha256:47a002bf0cc6fc8153f25102ed3d0425dbd59fe8e6d29cddc74c059e68971c6b",
       "scripts/inventory_graph.py": "sha256:8589fc6483491413395e8f01afe86cef6b33414906da29e24a9ac070342d4103",
       "scripts/inventory_pdf.py": "sha256:4d87858492b6f00a9eaf48a717a9c2ddfc423cbe533278747cb199ae885d90b8",
       "scripts/inventory_reports.py": "sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce"
     },
-    "generator_sha256": "sha256:f571e10178353b5079ce3cab9ef0e52eeea80f9d2aae93f6adccb65e4be221ea",
+    "generator_sha256": "sha256:a39a362c6b362f5550c778b2df29847deea876d0e2c3e154def30754ce089194",
     "generator_version": 1,
     "git_available": true,
-    "head_sha": "6075b1e1d1404acd198696776a0bbd2059141bc0",
-    "modified_tracked": [
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-025.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/13_C4_factorisation_signe.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-001.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-002.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-003.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-004.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-005.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-006.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-007.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-008.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-009.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-010.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-011.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-012.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-013.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-014.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-015.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-016.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-017.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-018.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-019.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-020.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-021.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-022.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-023.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-024.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-025.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-026.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-027.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-028.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-029.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-030.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-031.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-032.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-033.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-034.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-035.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-036.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-037.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-038.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-039.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-040.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-041.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-042.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-043.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-044.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-045.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-046.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-047.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-048.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-049.tex",
-      "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-050.tex",
-      "audit/DIMENSION_REGULATION.json",
-      "audit/EX_CO_GRAPH.json"
-    ],
+    "head_sha": "b3d8dfa5b64503a9704c1d233200c0525e82dafb",
+    "modified_tracked": [],
     "pdf_artifact_registry_digest": "sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c",
     "tool_versions": {
       "git": "git version 2.43.0",
@@ -382396,7 +382338,7 @@
   },
   "schema_ref": "audit/schemas/v1/inventory-collection.schema.json",
   "schema_version": 1,
-  "source_digest": "sha256:e213ff2cc99316d3de82e8b1b478b16b623318581b4e8e33104fa30f0b885b3a",
+  "source_digest": "sha256:e537ab2ddb2f3f84316766e8baaed1c3f628d826f630d2dabba6f5c36fe1d3d8",
   "source_file_count": 4736,
   "source_files": [
     "MANUELS_PDF_PUBLICATION/01_Maths_1re_Spe_Eleve.pdf",
