@@ -499,9 +499,6 @@ manuals:
     - code: anomalie:blocking_statuses
       detail: '69'
       source: anomalies.blocking_statuses
-    - code: anomalie:broken_meta_references
-      detail: '2'
-      source: anomalies.broken_meta_references
     - code: livrable_non_compile
       detail: declared
       source: deliverable_matrix.TSPE_2026_2027.variants.livret_methodes
@@ -562,7 +559,6 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
-    - anomalie:broken_meta_references
     - statuts_non_approuves
     structural_compile_ready: false
     variants:
@@ -599,12 +595,12 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:42676f51b6db527d45bb95ecf40b983710209dcd019c9378af18db1475677370
+model_digest: sha256:289e13c489367bebc52b5288840fcde68b70d0e530e302feb82ed2cf3001ca75
 provenance:
   branch: null
-  dirty: false
+  dirty: true
   errors: []
-  generated_at_utc: '2026-09-07T19:53:06Z'
+  generated_at_utc: '2026-09-07T19:57:45Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:79b255deeddfa4b483a9a5a9f568bdc143defd7b2a69e8b8a704f4afdd35d6bf
     scripts/build_manifest.py: sha256:62d4f5da9454aaa2923041db777b759e3e4b672e7c2f33b59a62e07afc76de26
@@ -616,8 +612,12 @@ provenance:
   generator_sha256: sha256:f932fe8c33273bdba8f5f9230ed39a824111f74177310dc1c4ea7c529714d065
   generator_version: 1
   git_available: true
-  head_sha: 77023090a5c70c251f74ed92d9473630a6e9e502
-  modified_tracked: []
+  head_sha: d812c220a2e30ceb3a75f6fe9490944b39345af9
+  modified_tracked:
+  - Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-061.tex
+  - Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-062.tex
+  - audit/RELEASE_RAW_REASONS.json
+  - audit/RELEASE_RAW_REASONS.md
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
     git: git version 2.43.0
@@ -625,7 +625,8 @@ provenance:
     pdfinfo: pdfinfo version 24.02.0
     python: Python 3.12.3
     texlive: pdfTeX 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian)
-  untracked_relevant: []
+  untracked_relevant:
+  - audit/gate_observations/d812c220a2e30ceb3a75f6fe9490944b39345af9/release-strict.json
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:e60534a704950a73b739f7d1beecdfe4daff50ac4e99665f4535c0c1a14680d0
+source_digest: sha256:273099c6aafcee634b86957bf532478871b621b57e78daaa21d2a512eca702d9

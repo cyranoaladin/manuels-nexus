@@ -50,9 +50,8 @@
 ### broken_latex_references (0)
 - Aucune.
 
-### broken_meta_references (2)
-- source=Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-061.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-062.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
+### broken_meta_references (0)
+- Aucune.
 
 ### chapters_not_in_manual (0)
 - Aucune.

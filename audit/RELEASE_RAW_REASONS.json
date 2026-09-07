@@ -3,14 +3,14 @@
   "schema_version": 3,
   "generated_by": "scripts/build_release_raw_reasons.py",
   "freshness": {
-    "EVIDENCE_HEAD": "f54149a5b486fa1a1532f60630a6589741b7e965",
+    "EVIDENCE_HEAD": "d812c220a2e30ceb3a75f6fe9490944b39345af9",
     "INPUT_PATHS": [
-      "audit/gate_observations/0eebd5426b5c74a4bc0d4d69dc5e594d22fd2bc8/release-strict.json"
+      "audit/gate_observations/d812c220a2e30ceb3a75f6fe9490944b39345af9/release-strict.json"
     ],
-    "INPUT_DIGEST": "sha256:c890e129a80679f65a0622d0335c581abdae34cfdfeecb2fd1c3c0b3e88aca03",
+    "INPUT_DIGEST": "sha256:bce6c90fb135fd18d77560dc42f19174112f53f0b8da658944897fa29059e48d",
     "WHOLE_REPOSITORY_INPUT": true,
     "OBSERVATION_HEADS": [
-      "0eebd5426b5c74a4bc0d4d69dc5e594d22fd2bc8"
+      "d812c220a2e30ceb3a75f6fe9490944b39345af9"
     ]
   },
   "gate_observations": [
@@ -19,26 +19,25 @@
       "gate": "release-strict",
       "exit_code": 7,
       "success": false,
-      "reason_count": 148
+      "reason_count": 119
     }
   ],
   "summary": {
-    "RAW_REASON_COUNT": 147,
-    "ROOT_BLOCKER_COUNT": 13,
+    "RAW_REASON_COUNT": 118,
+    "ROOT_BLOCKER_COUNT": 8,
     "UNMAPPED_RAW_REASONS": 1,
     "DUPLICATE_REASON_IDS": 0,
     "BLOCKER_CLASSIFICATION_CONFLICTS": 0,
     "PRODUCT_P0": 0,
-    "PRODUCT_P1": 1,
+    "PRODUCT_P1": 0,
     "PRODUCT_P2": 0,
-    "CERTIFICATION_BLOCKERS": 9,
+    "CERTIFICATION_BLOCKERS": 5,
     "RELEASE_POLICY_BLOCKERS": 2,
     "GOVERNANCE_BLOCKERS": 1,
     "RAW_REASONS_BY_TAXONOMY": {
       "GOVERNANCE_BLOCKER": 12,
-      "CERTIFICATION_BLOCKER": 129,
-      "RELEASE_POLICY_BLOCKER": 5,
-      "PRODUCT_P1": 1
+      "CERTIFICATION_BLOCKER": 101,
+      "RELEASE_POLICY_BLOCKER": 5
     }
   },
   "root_blockers": [
@@ -52,47 +51,6 @@
       ]
     },
     {
-      "root_blocker_id": "ROOT-CONTENT-MATRIX-INCOMPLETE",
-      "title": "Matrice de contenu machine incomplète",
-      "taxonomy": "CERTIFICATION_BLOCKER",
-      "dependent_reason_count": 1,
-      "dependent_reason_ids": [
-        "RSN-943b38c58cccf46f"
-      ]
-    },
-    {
-      "root_blocker_id": "ROOT-COURSE-ASSEMBLY",
-      "title": "Assemblage de cours incomplet",
-      "taxonomy": "PRODUCT_P1",
-      "dependent_reason_count": 1,
-      "dependent_reason_ids": [
-        "RSN-6a7e84cf524a7e5d"
-      ]
-    },
-    {
-      "root_blocker_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
-      "title": "Contenu inter-disciplinaire non audité",
-      "taxonomy": "CERTIFICATION_BLOCKER",
-      "dependent_reason_count": 15,
-      "dependent_reason_ids": [
-        "RSN-01e8381938bc0522",
-        "RSN-11c47d7ca9460319",
-        "RSN-16f19f698382433c",
-        "RSN-1c645bfb0b26aa02",
-        "RSN-1c8b63ddf60d85e3",
-        "RSN-39ffc43002b17519",
-        "RSN-4229d4fca15eb4d9",
-        "RSN-4544a25836ae9fd4",
-        "RSN-5665f06bba7f7717",
-        "RSN-5eb39b82af5d8b73",
-        "RSN-a47946242ed23fd6",
-        "RSN-a7ddeda3bb4dbabf",
-        "RSN-c733ef8c1304dd30",
-        "RSN-e8f4840704941a4a",
-        "RSN-ee5fbfe8ee9f6e06"
-      ]
-    },
-    {
       "root_blocker_id": "ROOT-DIMENSION-NOT-COVERED",
       "title": "Dimensions de certification sans preuve",
       "taxonomy": "CERTIFICATION_BLOCKER",
@@ -100,15 +58,6 @@
       "dependent_reason_ids": [
         "RSN-385435dc89962e35",
         "RSN-9ad95a20a28a08c0"
-      ]
-    },
-    {
-      "root_blocker_id": "ROOT-EXERCISE-CORRECTION-GRAPH-NOT-AUDITED",
-      "title": "Graphe exercice/corrigé non audité",
-      "taxonomy": "CERTIFICATION_BLOCKER",
-      "dependent_reason_count": 1,
-      "dependent_reason_ids": [
-        "RSN-05ef488d6a3414b1"
       ]
     },
     {
@@ -222,18 +171,18 @@
       "taxonomy": "GOVERNANCE_BLOCKER",
       "dependent_reason_count": 12,
       "dependent_reason_ids": [
-        "RSN-0d783b67681e0601",
+        "RSN-188e6b97815d608d",
+        "RSN-34095bbc632a74aa",
         "RSN-4ba69b2db98124f6",
         "RSN-6b634ff929041975",
         "RSN-7a6b0954401662cd",
+        "RSN-94a171e72d12cbdc",
+        "RSN-9746b78e569e7259",
         "RSN-9796c7a4e9eb47cf",
         "RSN-a27dc36e44e4961e",
         "RSN-aa4b7ff5845168fc",
-        "RSN-b8ebfb1ad19e34e8",
         "RSN-c298974c70e4aabe",
-        "RSN-d3b2989e49fc9b52",
-        "RSN-fec8187a1229ea49",
-        "RSN-ffd4c998b59001b7"
+        "RSN-fec8187a1229ea49"
       ]
     },
     {
@@ -252,13 +201,17 @@
       "root_blocker_id": "ROOT-PRODUCER-STALE",
       "title": "Producteurs de preuve stale ou rouges",
       "taxonomy": "CERTIFICATION_BLOCKER",
-      "dependent_reason_count": 5,
+      "dependent_reason_count": 9,
       "dependent_reason_ids": [
         "RSN-16caed16674c847b",
+        "RSN-2b3bf0280fc72f12",
         "RSN-3e60facdb2acfbd5",
         "RSN-745d2ec64d56190d",
         "RSN-8b256cdd8c834836",
-        "RSN-dc90fa82930fe714"
+        "RSN-8ba903dab9e557d7",
+        "RSN-b658a7036e7ea4e0",
+        "RSN-dc90fa82930fe714",
+        "RSN-e65d25c529d7ae3a"
       ]
     },
     {
@@ -268,29 +221,6 @@
       "dependent_reason_count": 1,
       "dependent_reason_ids": [
         "RSN-5122e254d7baf012"
-      ]
-    },
-    {
-      "root_blocker_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "title": "Chaîne machine verticale incomplète",
-      "taxonomy": "CERTIFICATION_BLOCKER",
-      "dependent_reason_count": 15,
-      "dependent_reason_ids": [
-        "RSN-2f1a3540cf7b61fc",
-        "RSN-381eab0621863b18",
-        "RSN-3f257ec053e695f3",
-        "RSN-4529623ffbeb6210",
-        "RSN-600eabb62ee3903d",
-        "RSN-7d21d71d32443c64",
-        "RSN-86fee4983a669ee5",
-        "RSN-8dfb24dd0444e2c9",
-        "RSN-914f99c9dafc940d",
-        "RSN-969ae511c4e345ed",
-        "RSN-a22ab92c7e1ea912",
-        "RSN-abdb79f9919b5f8e",
-        "RSN-b06c6b5f5129f524",
-        "RSN-ba20fadb40df128e",
-        "RSN-d81cd8a83fbc3174"
       ]
     }
   ],
@@ -307,227 +237,6 @@
       "evidence": "build_receipt_producteurs_non_intégrés",
       "status": "OPEN",
       "root_cause_id": "ROOT-BUILD-RECEIPT-NOT-INTEGRATED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-943b38c58cccf46f",
-      "producer": "inventory_collection.content_integrity",
-      "target": "ALL_MACHINE_CONTENT_COMPLETE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT_MATRIX:ALL_MACHINE_CONTENT_COMPLETE:false",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-CONTENT-MATRIX-INCOMPLETE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-6a7e84cf524a7e5d",
-      "producer": "build_course_assembly_truth",
-      "target": "TNSI-PROJET",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-PROJET:course_assembly_truth:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-COURSE-ASSEMBLY",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-5665f06bba7f7717",
-      "producer": "build_nsi_cross_discipline_ledger",
-      "target": "1NSI-ARCHITECTURE-OS",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-ARCHITECTURE-OS:cross_discipline_content:NOT_AUDITED",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-a7ddeda3bb4dbabf",
-      "producer": "build_nsi_cross_discipline_ledger",
-      "target": "1NSI-LANGAGE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-LANGAGE:cross_discipline_content:NOT_AUDITED",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-5eb39b82af5d8b73",
-      "producer": "build_nsi_cross_discipline_ledger",
-      "target": "1NSI-PROJET-METHODES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-PROJET-METHODES:cross_discipline_content:NOT_AUDITED",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-a47946242ed23fd6",
-      "producer": "build_nsi_cross_discipline_ledger",
-      "target": "1NSI-RESEAUX",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-RESEAUX:cross_discipline_content:NOT_AUDITED",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-01e8381938bc0522",
-      "producer": "build_nsi_cross_discipline_ledger",
-      "target": "1NSI-TABLES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-TABLES:cross_discipline_content:NOT_AUDITED",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-11c47d7ca9460319",
-      "producer": "build_nsi_cross_discipline_ledger",
-      "target": "1NSI-TYPES-BASE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-TYPES-BASE:cross_discipline_content:NOT_AUDITED",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-39ffc43002b17519",
-      "producer": "build_nsi_cross_discipline_ledger",
-      "target": "1NSI-TYPES-CONSTRUITS",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-TYPES-CONSTRUITS:cross_discipline_content:NOT_AUDITED",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-1c8b63ddf60d85e3",
-      "producer": "build_nsi_cross_discipline_ledger",
-      "target": "1NSI-WEB-IHM",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-WEB-IHM:cross_discipline_content:NOT_AUDITED",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-c733ef8c1304dd30",
-      "producer": "build_nsi_cross_discipline_ledger",
-      "target": "TNSI-ALGORITHMIQUE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-ALGORITHMIQUE:cross_discipline_content:NOT_AUDITED",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-16f19f698382433c",
-      "producer": "build_nsi_cross_discipline_ledger",
-      "target": "TNSI-ARCHITECTURES-MATERIELLES-SY",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-ARCHITECTURES-MATERIELLES-SY:cross_discipline_content:NOT_AUDITED",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-ee5fbfe8ee9f6e06",
-      "producer": "build_nsi_cross_discipline_ledger",
-      "target": "TNSI-BASES-DE-DONNEES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-BASES-DE-DONNEES:cross_discipline_content:NOT_AUDITED",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-4229d4fca15eb4d9",
-      "producer": "build_nsi_cross_discipline_ledger",
-      "target": "TNSI-HISTOIRE-INFORMATIQUE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-HISTOIRE-INFORMATIQUE:cross_discipline_content:NOT_AUDITED",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-4544a25836ae9fd4",
-      "producer": "build_nsi_cross_discipline_ledger",
-      "target": "TNSI-LANGAGES-ET-PROGRAMMATION",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-LANGAGES-ET-PROGRAMMATION:cross_discipline_content:NOT_AUDITED",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-1c645bfb0b26aa02",
-      "producer": "build_nsi_cross_discipline_ledger",
-      "target": "TNSI-PROJET",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-PROJET:cross_discipline_content:NOT_AUDITED",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-e8f4840704941a4a",
-      "producer": "build_nsi_cross_discipline_ledger",
-      "target": "TNSI-STRUCTURES-DONNEES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-STRUCTURES-DONNEES:cross_discipline_content:NOT_AUDITED",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
         "release-strict"
       ]
@@ -554,19 +263,6 @@
       "evidence": "dimension_non_couverte:regulation",
       "status": "OPEN",
       "root_cause_id": "ROOT-DIMENSION-NOT-COVERED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-05ef488d6a3414b1",
-      "producer": "build_ex_co_graph",
-      "target": "TNSI-PROJET",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-PROJET:ex_co_graph:NOT_AUDITED",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH-NOT-AUDITED",
       "observed_in": [
         "release-strict"
       ]
@@ -1997,12 +1693,12 @@
       ]
     },
     {
-      "reason_id": "RSN-ffd4c998b59001b7",
+      "reason_id": "RSN-188e6b97815d608d",
       "producer": "inventory_collection.anomalies",
       "target": "TCOMPL",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TCOMPL:anomalie:blocking_statuses:anomalies.blocking_statuses:309",
+      "evidence": "TCOMPL:anomalie:blocking_statuses:anomalies.blocking_statuses:313",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
@@ -2010,12 +1706,12 @@
       ]
     },
     {
-      "reason_id": "RSN-b8ebfb1ad19e34e8",
+      "reason_id": "RSN-94a171e72d12cbdc",
       "producer": "inventory_collection.statuses",
       "target": "TCOMPL",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TCOMPL:statuts_non_approuves:manuals.TCOMPL.statuses:objets=300; contrats=9",
+      "evidence": "TCOMPL:statuts_non_approuves:manuals.TCOMPL.statuses:objets=304; contrats=9",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
@@ -2075,12 +1771,12 @@
       ]
     },
     {
-      "reason_id": "RSN-0d783b67681e0601",
+      "reason_id": "RSN-34095bbc632a74aa",
       "producer": "inventory_collection.anomalies",
       "target": "TSPE_2026_2027",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TSPE_2026_2027:anomalie:blocking_statuses:anomalies.blocking_statuses:67",
+      "evidence": "TSPE_2026_2027:anomalie:blocking_statuses:anomalies.blocking_statuses:69",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
@@ -2088,12 +1784,12 @@
       ]
     },
     {
-      "reason_id": "RSN-d3b2989e49fc9b52",
+      "reason_id": "RSN-9746b78e569e7259",
       "producer": "inventory_collection.statuses",
       "target": "TSPE_2026_2027",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TSPE_2026_2027:statuts_non_approuves:manuals.TSPE_2026_2027.statuses:objets=67; contrats=0",
+      "evidence": "TSPE_2026_2027:statuts_non_approuves:manuals.TSPE_2026_2027.statuses:objets=69; contrats=0",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
@@ -2177,6 +1873,19 @@
       }
     },
     {
+      "reason_id": "RSN-b658a7036e7ea4e0",
+      "producer": "inventory_collection.content_integrity",
+      "target": "scripts/build_chapter_richness_matrix.py",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_chapter_richness_matrix.py:rc=1",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-PRODUCER-STALE",
+      "observed_in": [
+        "release-strict"
+      ]
+    },
+    {
       "reason_id": "RSN-3e60facdb2acfbd5",
       "producer": "inventory_collection.content_integrity",
       "target": "scripts/build_current_review_debt_partition.py",
@@ -2190,12 +1899,38 @@
       ]
     },
     {
+      "reason_id": "RSN-2b3bf0280fc72f12",
+      "producer": "inventory_collection.content_integrity",
+      "target": "scripts/build_ex_co_graph.py",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_ex_co_graph.py:rc=1",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-PRODUCER-STALE",
+      "observed_in": [
+        "release-strict"
+      ]
+    },
+    {
       "reason_id": "RSN-16caed16674c847b",
       "producer": "inventory_collection.content_integrity",
       "target": "scripts/build_p0_content_clone_ledger.py",
       "object_id": null,
       "category": "CERTIFICATION_BLOCKER",
       "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_p0_content_clone_ledger.py:rc=1",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-PRODUCER-STALE",
+      "observed_in": [
+        "release-strict"
+      ]
+    },
+    {
+      "reason_id": "RSN-e65d25c529d7ae3a",
+      "producer": "inventory_collection.content_integrity",
+      "target": "scripts/build_publish_readiness_chapter_matrix.py",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_publish_readiness_chapter_matrix.py:rc=1",
       "status": "OPEN",
       "root_cause_id": "ROOT-PRODUCER-STALE",
       "observed_in": [
@@ -2229,6 +1964,19 @@
       ]
     },
     {
+      "reason_id": "RSN-8ba903dab9e557d7",
+      "producer": "inventory_collection.content_integrity",
+      "target": "scripts/build_true_pedagogical_coverage.py",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_true_pedagogical_coverage.py:rc=1",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-PRODUCER-STALE",
+      "observed_in": [
+        "release-strict"
+      ]
+    },
+    {
       "reason_id": "RSN-8b256cdd8c834836",
       "producer": "inventory_collection.content_integrity",
       "target": "scripts/collection_dashboard.py",
@@ -2250,201 +1998,6 @@
       "evidence": "COLLECTION:publication_snapshots:stale_undecided:12",
       "status": "OPEN",
       "root_cause_id": "ROOT-PUBLICATION-SNAPSHOT-UNDECIDED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-914f99c9dafc940d",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-ARCHITECTURE-OS",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-ARCHITECTURE-OS:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-86fee4983a669ee5",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-LANGAGE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-LANGAGE:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-969ae511c4e345ed",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-PROJET-METHODES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-PROJET-METHODES:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-ba20fadb40df128e",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-RESEAUX",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-RESEAUX:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-d81cd8a83fbc3174",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-TABLES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-TABLES:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-a22ab92c7e1ea912",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-TYPES-BASE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-TYPES-BASE:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-b06c6b5f5129f524",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-TYPES-CONSTRUITS",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-TYPES-CONSTRUITS:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-3f257ec053e695f3",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-WEB-IHM",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:1NSI-WEB-IHM:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-8dfb24dd0444e2c9",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TNSI-ALGORITHMIQUE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-ALGORITHMIQUE:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-7d21d71d32443c64",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TNSI-ARCHITECTURES-MATERIELLES-SY",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-ARCHITECTURES-MATERIELLES-SY:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-381eab0621863b18",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TNSI-BASES-DE-DONNEES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-BASES-DE-DONNEES:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-4529623ffbeb6210",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TNSI-HISTOIRE-INFORMATIQUE",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-HISTOIRE-INFORMATIQUE:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-600eabb62ee3903d",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TNSI-LANGAGES-ET-PROGRAMMATION",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-LANGAGES-ET-PROGRAMMATION:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-abdb79f9919b5f8e",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TNSI-PROJET",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-PROJET:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-2f1a3540cf7b61fc",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TNSI-STRUCTURES-DONNEES",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT:TNSI-STRUCTURES-DONNEES:vertical_machine_status:INCOMPLETE",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
         "release-strict"
       ]
