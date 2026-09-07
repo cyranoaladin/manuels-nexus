@@ -3,14 +3,14 @@
   "schema_version": 3,
   "generated_by": "scripts/build_release_raw_reasons.py",
   "freshness": {
-    "EVIDENCE_HEAD": "f9d975740c5cc4b9ab110b37931cca9cfbdb8483",
+    "EVIDENCE_HEAD": "3233bd5020448dafeebde37fae5a8f860aaee845",
     "INPUT_PATHS": [
-      "audit/gate_observations/release-strict-f9d97574.json"
+      "audit/gate_observations/release-strict-3233bd50.json"
     ],
-    "INPUT_DIGEST": "sha256:cad499f05beaa5db716a65ac349a597809f564fe295cd03332e916c7949c8f53",
+    "INPUT_DIGEST": "sha256:27a04f578739dd165c22477547b21ccece3e635091a376bd621b0ea1ac325e05",
     "WHOLE_REPOSITORY_INPUT": true,
     "OBSERVATION_HEADS": [
-      "f9d975740c5cc4b9ab110b37931cca9cfbdb8483"
+      "3233bd5020448dafeebde37fae5a8f860aaee845"
     ]
   },
   "gate_observations": [
@@ -19,17 +19,17 @@
       "gate": "release-strict",
       "exit_code": 7,
       "success": false,
-      "reason_count": 348
+      "reason_count": 293
     }
   ],
   "summary": {
-    "RAW_REASON_COUNT": 348,
-    "ROOT_BLOCKER_COUNT": 18,
+    "RAW_REASON_COUNT": 293,
+    "ROOT_BLOCKER_COUNT": 16,
     "UNMAPPED_RAW_REASONS": 0,
     "DUPLICATE_REASON_IDS": 0,
     "BLOCKER_CLASSIFICATION_CONFLICTS": 0,
     "PRODUCT_P0": 0,
-    "PRODUCT_P1": 6,
+    "PRODUCT_P1": 4,
     "PRODUCT_P2": 1,
     "CERTIFICATION_BLOCKERS": 9,
     "RELEASE_POLICY_BLOCKERS": 1,
@@ -37,61 +37,12 @@
     "RAW_REASONS_BY_TAXONOMY": {
       "CERTIFICATION_BLOCKER": 161,
       "GOVERNANCE_BLOCKER": 12,
-      "PRODUCT_P1": 139,
+      "PRODUCT_P1": 84,
       "RELEASE_POLICY_BLOCKER": 1,
       "PRODUCT_P2": 35
     }
   },
   "root_blockers": [
-    {
-      "root_blocker_id": "ROOT-ASSESSMENT-COVERAGE",
-      "title": "Couverture d'évaluations incomplète",
-      "taxonomy": "PRODUCT_P1",
-      "dependent_reason_count": 41,
-      "dependent_reason_ids": [
-        "RSN-0265406f48937173",
-        "RSN-078370a3568c7881",
-        "RSN-08a226e207ad242e",
-        "RSN-09617df8a4baebda",
-        "RSN-18c0be3ae3e579a5",
-        "RSN-194b664afba9eeab",
-        "RSN-19db9598a14ad40c",
-        "RSN-1d3a68808a4f7757",
-        "RSN-289fcc8c272b2bb7",
-        "RSN-2a65844f31227e9f",
-        "RSN-2a67149417d36a24",
-        "RSN-366bf2aef37422d1",
-        "RSN-4807f9cb16d786a8",
-        "RSN-4c0d4f051fe3534b",
-        "RSN-51b447f21813a2ca",
-        "RSN-52075a3ac77b2f55",
-        "RSN-56d6506af8603cf9",
-        "RSN-67463d98fa418331",
-        "RSN-6d0a71f68a54c372",
-        "RSN-71d1ea2894f157bc",
-        "RSN-766f0b26e0a6b19a",
-        "RSN-7d33e3ccc0d3c29d",
-        "RSN-8b167a8c832c1db6",
-        "RSN-8c6eda3bb4af69b7",
-        "RSN-8d39c632339408d0",
-        "RSN-8d71e8fedce1f78c",
-        "RSN-a25afc3624ffc03c",
-        "RSN-a4af88e151735977",
-        "RSN-ad2ad1c2deb21541",
-        "RSN-b0541424c39a2c24",
-        "RSN-b08f7d4c92030644",
-        "RSN-b279e751b90c8476",
-        "RSN-bbb931f3cc10efff",
-        "RSN-bbc37bf6c8e41604",
-        "RSN-be6713f6305522a9",
-        "RSN-ce63021dbe834f45",
-        "RSN-cee5a664562896b5",
-        "RSN-ed469189cf94f117",
-        "RSN-fb65d6eb202c584b",
-        "RSN-fc03961f92048ead",
-        "RSN-ffdd5ed2a0dfc8c9"
-      ]
-    },
     {
       "root_blocker_id": "ROOT-BUILD-RECEIPT-NOT-INTEGRATED",
       "title": "Reçus de build non intégrés",
@@ -239,6 +190,7 @@
         "RSN-4a9beb5f60fb1ac5",
         "RSN-4dfaf838b4c6c209",
         "RSN-4f1772e1b5c6ab7a",
+        "RSN-536b42a407514f1e",
         "RSN-58972a139c295fe5",
         "RSN-602639bb3755539a",
         "RSN-65223fd9479bee41",
@@ -249,7 +201,6 @@
         "RSN-84556c20495c523e",
         "RSN-85595cd409eeb88b",
         "RSN-8e4d091241426fe1",
-        "RSN-94bc3afdf49404e5",
         "RSN-98c48c17de4116c5",
         "RSN-a1af566a5eeee3e1",
         "RSN-a4f2289efe473102",
@@ -452,28 +403,6 @@
       ]
     },
     {
-      "root_blocker_id": "ROOT-QCM-COVERAGE",
-      "title": "Couverture QCM incomplète",
-      "taxonomy": "PRODUCT_P1",
-      "dependent_reason_count": 14,
-      "dependent_reason_ids": [
-        "RSN-02a377c75ac9725a",
-        "RSN-0438a7eaa45be675",
-        "RSN-210e0693b6b679f9",
-        "RSN-349e43dabcbb528f",
-        "RSN-38274e9257b63fd8",
-        "RSN-486cec3b8bd09d87",
-        "RSN-4bb9615a1a4bd762",
-        "RSN-687f9d1da531b15a",
-        "RSN-75037c19044ee00d",
-        "RSN-9c4ddf59800f1941",
-        "RSN-c5aa4a95cdf3af0a",
-        "RSN-dcf74e14680ddbd7",
-        "RSN-ea0a9af05b827825",
-        "RSN-fafb682f43e1b6d5"
-      ]
-    },
-    {
       "root_blocker_id": "ROOT-QUALIFICATION-STALE",
       "title": "Qualifications dérivées invalidées par une mutation de source",
       "taxonomy": "CERTIFICATION_BLOCKER",
@@ -538,539 +467,6 @@
   ],
   "unmapped_raw_reasons": [],
   "raw_reasons": [
-    {
-      "reason_id": "RSN-2a65844f31227e9f",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-ALGO-DICHO-GLOUTON-KNN:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-1d3a68808a4f7757",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-ALGO-PARCOURS-TRIS",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-ALGO-PARCOURS-TRIS:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-289fcc8c272b2bb7",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-ARCHITECTURE-OS",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-ARCHITECTURE-OS:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-bbb931f3cc10efff",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-LANGAGE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-LANGAGE:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-2a67149417d36a24",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-PROJET-METHODES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-PROJET-METHODES:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-194b664afba9eeab",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-RESEAUX",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-RESEAUX:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-ed469189cf94f117",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-TABLES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-TABLES:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-ce63021dbe834f45",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-TYPES-BASE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-TYPES-BASE:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-ad2ad1c2deb21541",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-TYPES-CONSTRUITS",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-TYPES-CONSTRUITS:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-4807f9cb16d786a8",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1NSI-WEB-IHM",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1NSI-WEB-IHM:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-766f0b26e0a6b19a",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "1SPE-SECOND-DEGRE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1SPE-SECOND-DEGRE:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-b0541424c39a2c24",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-CALCULS-AIRES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-CALCULS-AIRES:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-51b447f21813a2ca",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-CORRELATION-CAUSALITE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-CORRELATION-CAUSALITE:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-08a226e207ad242e",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-ECHANTILLONNAGE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-ECHANTILLONNAGE:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-a4af88e151735977",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-INEGALITES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-INEGALITES:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-fb65d6eb202c584b",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-INFERENCE-BAYESIENNE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-INFERENCE-BAYESIENNE:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-52075a3ac77b2f55",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-LOGARITHME-HISTORIQUE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-LOGARITHME-HISTORIQUE:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-b279e751b90c8476",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-MODELES-EVOLUTION",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-MODELES-EVOLUTION:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-8d71e8fedce1f78c",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-MODELES-FONCTION",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-MODELES-FONCTION:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-71d1ea2894f157bc",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TCOMPL-TEMPS-ATTENTE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-TEMPS-ATTENTE:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-18c0be3ae3e579a5",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TEXP-ARITHMETIQUE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-ARITHMETIQUE:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-b08f7d4c92030644",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-COMPLEXES-ALGEBRE-GEOMETRIE:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-ffdd5ed2a0dfc8c9",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-COMPLEXES-TRIGO-POLYNOMES:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-67463d98fa418331",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TEXP-GRAPHES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-GRAPHES:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-7d33e3ccc0d3c29d",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TEXP-MATRICES-MARKOV",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-MATRICES-MARKOV:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-a25afc3624ffc03c",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TNSI-ALGORITHMIQUE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-ALGORITHMIQUE:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-8b167a8c832c1db6",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TNSI-ARCHITECTURES-MATERIELLES-SY",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-ARCHITECTURES-MATERIELLES-SY:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-cee5a664562896b5",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TNSI-BASES-DE-DONNEES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-BASES-DE-DONNEES:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-19db9598a14ad40c",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TNSI-HISTOIRE-INFORMATIQUE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-HISTOIRE-INFORMATIQUE:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-078370a3568c7881",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TNSI-LANGAGES-ET-PROGRAMMATION",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-LANGAGES-ET-PROGRAMMATION:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-8d39c632339408d0",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TNSI-STRUCTURES-DONNEES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TNSI-STRUCTURES-DONNEES:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-fc03961f92048ead",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-CALCUL-INTEGRAL",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-CALCUL-INTEGRAL:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-6d0a71f68a54c372",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-COMBINATOIRE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-COMBINATOIRE:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-be6713f6305522a9",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-CONTINUITE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-CONTINUITE:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-8c6eda3bb4af69b7",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-DERIVATION-CONVEXITE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-DERIVATION-CONVEXITE:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-bbc37bf6c8e41604",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-GEOMETRIE-ESPACE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-GEOMETRIE-ESPACE:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-0265406f48937173",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-LIMITES-FONCTIONS",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-LIMITES-FONCTIONS:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-366bf2aef37422d1",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-LOGARITHME",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-LOGARITHME:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-09617df8a4baebda",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-PRIMITIVES-EQDIFF",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-PRIMITIVES-EQDIFF:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-56d6506af8603cf9",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-PROBABILITES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-PROBABILITES:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-4c0d4f051fe3534b",
-      "producer": "build_publish_readiness_chapter_matrix",
-      "target": "TSPE-TRIGONOMETRIE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-TRIGONOMETRIE:assessments:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
     {
       "reason_id": "RSN-145b39f80a963ded",
       "producer": "inventory_collection.observed_build_integration",
@@ -2541,12 +1937,12 @@
       ]
     },
     {
-      "reason_id": "RSN-94bc3afdf49404e5",
+      "reason_id": "RSN-536b42a407514f1e",
       "producer": "build_human_review_queue",
       "target": "COLLECTION",
       "object_id": null,
       "category": "CERTIFICATION_BLOCKER",
-      "evidence": "HUMAN_REVIEW_QUEUE_OPEN:2631",
+      "evidence": "HUMAN_REVIEW_QUEUE_OPEN:2552",
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
@@ -4278,188 +3674,6 @@
       "evidence": "COLLECTION:publication_snapshots:stale_undecided:12",
       "status": "OPEN",
       "root_cause_id": "ROOT-PUBLICATION-SNAPSHOT-UNDECIDED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-02a377c75ac9725a",
-      "producer": "build_qcm_gap_metrics",
-      "target": "1SPE-SECOND-DEGRE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:1SPE-SECOND-DEGRE:qcm:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QCM-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-210e0693b6b679f9",
-      "producer": "build_qcm_gap_metrics",
-      "target": "TCOMPL-ECHANTILLONNAGE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-ECHANTILLONNAGE:qcm:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QCM-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-38274e9257b63fd8",
-      "producer": "build_qcm_gap_metrics",
-      "target": "TCOMPL-INFERENCE-BAYESIENNE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-INFERENCE-BAYESIENNE:qcm:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QCM-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-dcf74e14680ddbd7",
-      "producer": "build_qcm_gap_metrics",
-      "target": "TCOMPL-LOGARITHME-HISTORIQUE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-LOGARITHME-HISTORIQUE:qcm:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QCM-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-687f9d1da531b15a",
-      "producer": "build_qcm_gap_metrics",
-      "target": "TCOMPL-MODELES-EVOLUTION",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-MODELES-EVOLUTION:qcm:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QCM-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-486cec3b8bd09d87",
-      "producer": "build_qcm_gap_metrics",
-      "target": "TCOMPL-MODELES-FONCTION",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-MODELES-FONCTION:qcm:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QCM-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-0438a7eaa45be675",
-      "producer": "build_qcm_gap_metrics",
-      "target": "TCOMPL-TEMPS-ATTENTE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-TEMPS-ATTENTE:qcm:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QCM-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-4bb9615a1a4bd762",
-      "producer": "build_qcm_gap_metrics",
-      "target": "TEXP-ARITHMETIQUE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-ARITHMETIQUE:qcm:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QCM-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-75037c19044ee00d",
-      "producer": "build_qcm_gap_metrics",
-      "target": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-COMPLEXES-ALGEBRE-GEOMETRIE:qcm:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QCM-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-349e43dabcbb528f",
-      "producer": "build_qcm_gap_metrics",
-      "target": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-COMPLEXES-TRIGO-POLYNOMES:qcm:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QCM-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-c5aa4a95cdf3af0a",
-      "producer": "build_qcm_gap_metrics",
-      "target": "TEXP-GRAPHES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-GRAPHES:qcm:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QCM-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-ea0a9af05b827825",
-      "producer": "build_qcm_gap_metrics",
-      "target": "TEXP-MATRICES-MARKOV",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TEXP-MATRICES-MARKOV:qcm:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QCM-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-9c4ddf59800f1941",
-      "producer": "build_qcm_gap_metrics",
-      "target": "TSPE-CALCUL-INTEGRAL",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-CALCUL-INTEGRAL:qcm:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QCM-COVERAGE",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-fafb682f43e1b6d5",
-      "producer": "build_qcm_gap_metrics",
-      "target": "TSPE-PROBABILITES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TSPE-PROBABILITES:qcm:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
         "release-strict"
       ]
