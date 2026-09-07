@@ -162,13 +162,44 @@ def machine_status_of(matrix: dict[str, Any]) -> str:
     return "COMPLETE"
 
 
+#: Verdicts d'applicabilité qui excusent une absence : le rôle n'était pas dû,
+#: ou il est déjà servi. `REAL_PEDAGOGICAL_GAP` et `BAD_MAPPING` n'excusent
+#: rien — le premier est une vraie lacune, le second un défaut de mappage.
+NOT_A_GAP_VERDICTS = frozenset({
+    "ROLE_NOT_APPLICABLE",
+    "SATISFIED_TRANSVERSALLY",
+    "SATISFIED_BY_EXISTING_CONTENT",
+})
+APPLICABILITY_AUDIT = ROOT / "audit/PEDAGOGICAL_ROLE_APPLICABILITY_AUDIT.json"
+
+
+def applicability_index(
+    audit: dict[str, Any] | None = None,
+) -> dict[tuple[str, str, str], str]:
+    """(chapitre, capacité, rôle) -> verdict d'applicabilité."""
+    if audit is None:
+        if not APPLICABILITY_AUDIT.is_file():
+            return {}
+        audit = json.loads(APPLICABILITY_AUDIT.read_text(encoding="utf-8"))
+    return {
+        (str(unite["CHAPTER"]), str(unite["CAPACITY"]), str(unite["ROLE"])):
+            str(unite["APPLICABILITY_VERDICT"])
+        for unite in audit.get("units", [])
+    }
+
+
 def build_matrix(
     chapter: str,
     *,
     chapter_root: Path | None = None,
     resolver=None,
     clone_ledger: dict[str, Any] | None = None,
+    applicability_verdicts: dict[tuple[str, str, str], str] | None = None,
 ) -> dict[str, Any]:
+    applicability_verdicts = (
+        applicability_index() if applicability_verdicts is None
+        else applicability_verdicts
+    )
     clone = _clone_module()
     identity = _identity_module()
     roots = (chapter_root,) if chapter_root is not None else CHAPTER_ROOTS
@@ -343,15 +374,29 @@ def build_matrix(
             "remediation": remediation[code],
             "method": methods[code],
         }
-        missing = []
+        # Une absence brute n'est pas une lacune. Le triage d'applicabilité
+        # dit, capacité par capacité et rôle par rôle, si le rôle manquant
+        # était seulement dû : une méthode qui ne ferait que répéter une
+        # définition n'est pas nécessaire, une remédiation servie
+        # transversalement l'est déjà. Compter ces absences comme des lacunes
+        # fabriquerait exactement le remplissage que la campagne combat.
+        brut = []
         if not practice[code]:
-            missing.append("NO_TARGETED_PRACTICE")
+            brut.append(("NO_TARGETED_PRACTICE", "exercices"))
         if not remediation[code]:
-            missing.append("NO_REMEDIATION")
+            brut.append(("NO_REMEDIATION", "remediation"))
         if not methods[code]:
-            missing.append("NO_METHOD")
+            brut.append(("NO_METHOD", "methodes"))
         if not qcm[code]:
-            missing.append("NO_QCM")
+            brut.append(("NO_QCM", "qcm"))
+        missing = []
+        excused = []
+        for motif, role in brut:
+            verdict = applicability_verdicts.get((chapter, code, role))
+            if verdict in NOT_A_GAP_VERDICTS:
+                excused.append({"missing_function": motif, "verdict": verdict})
+            else:
+                missing.append(motif)
         if kind in MULTI_GESTURE_TYPES and len(paths) < 2:
             missing.append("SINGLE_REASONING_PATH_FOR_COMPOSITE_CAPACITY")
         declarative_status = "SUFFICIENT" if not missing else "INSUFFICIENT"
@@ -369,6 +414,8 @@ def build_matrix(
             "practice": practice[code],
             "assessed_by": assessed[code],
             "missing_function": missing,
+            "raw_missing_function": [motif for motif, _ in brut],
+            "excused_by_applicability": excused,
             "declarative_status": declarative_status,
             "semantic_validation_status": "UNKNOWN",
             "status": status,
@@ -435,11 +482,13 @@ def build_collection(*, resolver=None, clone_ledger: dict[str, Any] | None = Non
     identity = _identity_module()
     resolver = resolver or identity.CapacityIdentityResolver.from_corpora(CHAPTER_ROOTS)
     clone_ledger = clone_ledger or json.loads(CLONE_LEDGER.read_text(encoding="utf-8"))
+    verdicts = applicability_index()
     chapters = {
         chapter: build_matrix(
             chapter,
             resolver=resolver,
             clone_ledger=clone_ledger,
+            applicability_verdicts=verdicts,
         )
         for chapter in resolver.chapters
     }
