@@ -23,6 +23,17 @@ PARTITION = ROOT / "audit/CURRENT_REVIEW_DEBT_PARTITION.json"
 EVIDENCE = ROOT / "audit/QCM_INDEPENDENT_EVIDENCE_V2.json"
 RECONCILIATION = ROOT / "audit/QCM_REVIEW_PROOF_RECONCILIATION.json"
 DECISION = ROOT / "audit/TNSI_PROJET_ASSESSMENT_MODE.json"
+CLOSURE = ROOT / "audit/QCM_REVIEW_CLOSURE.json"
+RENVOI_AUDIT = ROOT / "audit/QCM_DIAGNOSTIC_RENVOI_AUDIT.json"
+
+#: États de fermeture QCM qui retirent une question de la file HUMAINE.
+#: Une dérivation mécanique calcule la réponse sans jamais voir la clé : c'est
+#: une preuve, pas un avis, et elle vaut `VALIDATED_BY_EVIDENCE`. Une revue
+#: conceptuelle est un raisonnement écrit par un agent : elle informe l'humain,
+#: elle ne le remplace pas. Les deux régimes sont donc traités différemment,
+#: et aucune unité n'est perdue : ce qui ne ferme pas reste dans la file.
+MACHINE_PROVEN_STATES = frozenset({"MECHANICALLY_PROVEN"})
+AGENT_REVIEWED_STATES = frozenset({"CONCEPTUALLY_REVIEWED"})
 
 
 def _read(path: Path) -> dict[str, Any]:
@@ -81,17 +92,76 @@ def _chapter_buckets(rows: Iterable[tuple[str, str]]) -> dict[str, dict[str, Any
     }
 
 
+def _closed_by_machine_proof(closure: dict[str, Any]) -> set[str]:
+    """Questions QCM dont la réponse est ÉTABLIE par une dérivation exécutée.
+
+    On n'accepte que les états de preuve mécanique, et seulement si la
+    fermeture ne rapporte ni désaccord de clé ni échec de dérivation : une
+    fermeture qui contient un désaccord ne ferme rien du tout.
+    """
+    if closure.get("artifact_type") != "qcm_review_closure":
+        raise ValueError("fermeture QCM schema invalide")
+    resume = closure.get("summary") or {}
+    if resume.get("QCM_KEY_DISAGREEMENTS") or resume.get("QCM_DERIVATION_FAILURES"):
+        raise ValueError("fermeture QCM avec désaccord ou échec de dérivation")
+    return {
+        f"{row['chapter']}/{row['question_id']}"
+        for row in closure.get("questions") or []
+        if row.get("state") in MACHINE_PROVEN_STATES
+    }
+
+
+def _agent_reviewed(closure: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    """Questions QCM couvertes par une revue conceptuelle écrite.
+
+    Elles ne quittent pas la file : la revue est une pièce versée au dossier
+    de l'humain, pas une approbation. Elle est jointe à l'unité pour être lue.
+    """
+    return {
+        f"{row['chapter']}/{row['question_id']}": {
+            "source_cours": row.get("source_cours"),
+            "source_programme": row.get("source_programme"),
+            "reponse_etablie": row.get("computed"),
+        }
+        for row in closure.get("questions") or []
+        if row.get("state") in AGENT_REVIEWED_STATES
+    }
+
+
+def _renvois_resolus(audit: dict[str, Any]) -> set[str]:
+    """Questions dont TOUS les renvois de diagnostic sont résolus.
+
+    La résolution est mécanique : chaque renvoi est confronté aux objets du
+    chapitre. Un seul renvoi non résolu, et la question reste ouverte.
+    """
+    if audit.get("artifact_type") != "qcm_diagnostic_renvoi_audit":
+        raise ValueError("audit de renvois QCM schema invalide")
+    resume = audit.get("summary") or {}
+    if resume.get("BROKEN_REMEDIATION_REFERENCES") or resume.get("QCM_DIAGNOSTIC_MISMATCH"):
+        raise ValueError("audit de renvois QCM avec renvoi casse ou incoherent")
+    par_question: dict[str, bool] = {}
+    for ligne in audit.get("renvois") or []:
+        identite = f"{ligne['chapter']}/{ligne['question_id']}"
+        resolu = ligne.get("state") == "RESOLVED"
+        par_question[identite] = par_question.get(identite, True) and resolu
+    return {identite for identite, resolu in par_question.items() if resolu}
+
+
 def build_queue(
     *,
     partition: dict[str, Any] | None = None,
     evidence: dict[str, Any] | None = None,
     reconciliation: dict[str, Any] | None = None,
     decision: dict[str, Any] | None = None,
+    closure: dict[str, Any] | None = None,
+    renvoi_audit: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     partition = partition or _read(PARTITION)
     evidence = evidence or _read(EVIDENCE)
     reconciliation = reconciliation or _read(RECONCILIATION)
     decision = decision or _read(DECISION)
+    closure = closure or _read(CLOSURE)
+    renvoi_audit = renvoi_audit or _read(RENVOI_AUDIT)
 
     if (
         partition.get("artifact_type") != "current_review_debt_partition"
@@ -224,14 +294,32 @@ def build_queue(
         for row in human_questions
     ):
         raise ValueError("QCM HUMAN_REVIEW_REQUIRED non bloquant ou contradictoire")
-    qcm_units = sorted(f"QCM_ANSWER_SEMANTICS::{value}" for value in qcm_identities)
-    qcm_chapters = Counter(row["chapter"] for row in human_questions)
+    # La fermeture QCM est confrontee a la population : une question prouvee
+    # mecaniquement quitte la file humaine ; une question seulement relue par
+    # un agent y reste, sa revue jointe. Rien n'est retire sans preuve, rien
+    # n'est perdu sans trace.
+    prouvees = _closed_by_machine_proof(closure)
+    relues = _agent_reviewed(closure)
+    non_couvertes = sorted(set(qcm_identities) - prouvees - set(relues))
+    if non_couvertes:
+        raise ValueError(
+            f"questions QCM sans fermeture declaree : {non_couvertes[:3]}"
+        )
+    ouvertes = [row for row in human_questions
+                if f"{row['chapter']}/{row['question_id']}" not in prouvees]
+    fermees = sorted(f"QCM_ANSWER_SEMANTICS::{value}"
+                     for value in set(qcm_identities) & prouvees)
+    qcm_units = sorted(
+        f"QCM_ANSWER_SEMANTICS::{row['chapter']}/{row['question_id']}"
+        for row in ouvertes
+    )
+    qcm_chapters = Counter(row["chapter"] for row in ouvertes)
     qcm_by_chapter = _chapter_buckets(
         (
             str(row["chapter"]),
             f"QCM_ANSWER_SEMANTICS::{row['chapter']}/{row['question_id']}",
         )
-        for row in human_questions
+        for row in ouvertes
     )
     items.append(
         {
@@ -242,6 +330,16 @@ def build_queue(
             "set_digest": _set_digest(qcm_units),
             "chapters": dict(sorted(qcm_chapters.items())),
             "units_by_chapter": qcm_by_chapter,
+            "population": len(qcm_identities),
+            "closed_by_machine_proof": len(fermees),
+            "closed_unit_ids": fermees,
+            "closed_set_digest": _set_digest(fermees),
+            "closure_evidence": "audit/QCM_REVIEW_CLOSURE.json",
+            "agent_review_attached": sum(
+                1 for row in ouvertes
+                if f"{row['chapter']}/{row['question_id']}" in relues
+            ),
+            "agent_review_is_not_an_approval": True,
             **_reviewer_fields(qcm_chapters),
             "distinct_humans_required": True,
             "release_blocking": True,
@@ -264,16 +362,27 @@ def build_queue(
         raise ValueError("champ de preuve QCM inconnu")
     if len(set(renvoi_identities)) != len(renvoi_identities):
         raise ValueError("identité de renvoi QCM dupliquée")
-    renvoi_units = sorted(
-        f"QCM_DIAGNOSTIC_RENVOI_SEMANTICS::{value}" for value in renvoi_identities
+    # La resolution d'un renvoi est mecanique : chaque renvoi est confronte
+    # aux objets du chapitre, et un seul renvoi non resolu laisse la question
+    # ouverte. Ce qui est resolu quitte donc la file ; le reste y demeure.
+    resolus = _renvois_resolus(renvoi_audit)
+    gaps_ouverts = [row for row in gaps
+                    if f"{row['chapter']}/{row['question_id']}" not in resolus]
+    renvois_fermes = sorted(
+        f"QCM_DIAGNOSTIC_RENVOI_SEMANTICS::{value}"
+        for value in set(renvoi_identities) & resolus
     )
-    renvoi_chapters = Counter(str(row.get("chapter")) for row in gaps)
+    renvoi_units = sorted(
+        f"QCM_DIAGNOSTIC_RENVOI_SEMANTICS::{row['chapter']}/{row['question_id']}"
+        for row in gaps_ouverts
+    )
+    renvoi_chapters = Counter(str(row.get("chapter")) for row in gaps_ouverts)
     renvoi_by_chapter = _chapter_buckets(
         (
             str(row["chapter"]),
             f"QCM_DIAGNOSTIC_RENVOI_SEMANTICS::{row['chapter']}/{row['question_id']}",
         )
-        for row in gaps
+        for row in gaps_ouverts
     )
     items.append(
         {
@@ -284,6 +393,11 @@ def build_queue(
             "set_digest": _set_digest(renvoi_units),
             "chapters": dict(sorted(renvoi_chapters.items())),
             "units_by_chapter": renvoi_by_chapter,
+            "population": len(renvoi_identities),
+            "closed_by_machine_resolution": len(renvois_fermes),
+            "closed_unit_ids": renvois_fermes,
+            "closed_set_digest": _set_digest(renvois_fermes),
+            "closure_evidence": "audit/QCM_DIAGNOSTIC_RENVOI_AUDIT.json",
             **_reviewer_fields(renvoi_chapters),
             "distinct_humans_required": True,
             "release_blocking": True,
@@ -375,6 +489,8 @@ def build_queue(
             str(EVIDENCE.relative_to(ROOT)): _file_digest(EVIDENCE),
             str(RECONCILIATION.relative_to(ROOT)): _file_digest(RECONCILIATION),
             str(DECISION.relative_to(ROOT)): _file_digest(DECISION),
+            str(CLOSURE.relative_to(ROOT)): _file_digest(CLOSURE),
+            str(RENVOI_AUDIT.relative_to(ROOT)): _file_digest(RENVOI_AUDIT),
         },
         "counts": ordered_counts,
         "queue_digest": _set_digest(all_units),
