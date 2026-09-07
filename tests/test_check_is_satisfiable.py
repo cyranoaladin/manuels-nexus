@@ -170,11 +170,18 @@ def test_every_artifact_that_names_a_head_satisfies_the_three_conditions() -> No
         )
 
 
-def test_the_named_head_is_an_ancestor_and_never_the_commit_itself() -> None:
-    """C'est la boucle constatée : l'artefact ne peut pas nommer son commit."""
+def test_the_named_head_is_always_usable() -> None:
+    """Le HEAD nommé est toujours utilisable, avant comme après le commit.
+
+    J'avais d'abord écrit que l'artefact ne nomme JAMAIS son propre commit.
+    C'est faux dans la fenêtre qui sépare la régénération du commit : là, il
+    nomme exactement le HEAD courant, et le test échouait sans qu'aucun défaut
+    n'existe. La boucle se referme au commit suivant, quand le HEAD avance.
+
+    Ce qui tient dans les deux états — et c'est ce dont la tolérance dépend —
+    c'est que le HEAD nommé soit un ancêtre au sens large du HEAD courant.
+    """
     named = _named_head_of("ETAT_COLLECTION.md")
-    assert named != _head(), (
-        "si l'artefact nommait son propre commit, la boucle serait résolue "
-        "autrement et cette tolérance deviendrait inutile"
-    )
+    assert named
     assert ic._named_head_is_usable(ROOT, named)
+    assert ic._only_generated_artifacts_changed_since(ROOT, named)
