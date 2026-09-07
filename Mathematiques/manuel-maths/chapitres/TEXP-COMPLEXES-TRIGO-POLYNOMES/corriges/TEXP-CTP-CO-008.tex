@@ -1,0 +1,22 @@
+% META: {"id": "TEXP-CTP-CO-008", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige", "exercice_ref": "TEXP-CTP-EX-008", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, symbols, solve, expand, factor, Poly
+% z = symbols('z')
+% assert set(solve(z ** 2 - 2 * z + 5, z)) == {1 + 2 * I, 1 - 2 * I}
+% P = z ** 3 - 3 * z ** 2 + 4 * z - 2
+% assert P.subs(z, 1) == 0
+% assert expand((z - 1) * (z ** 2 - 2 * z + 2)) == P
+% assert set(solve(P, z)) == {1, 1 + I, 1 - I}
+% assert set(solve(z ** 2 - 2 * z + 2, z)) == {1 + I, 1 - I}
+% END-VERIFY
+\begin{corrige}{TEXP-CTP-EX-008}
+\textbf{1.} $\Delta=4-20=-16<0$ : les racines sont
+$z=\dfrac{2\pm4\mathrm{i}}{2}=1\pm2\mathrm{i}$.
+
+\textbf{2.} $P(1)=1-3+4-2=0$ : $1$ est racine, donc $z-1$ divise $P$. La
+division donne $P(z)=(z-1)(z^2-2z+2)$.
+
+\textbf{3.} $z^2-2z+2=0$ a pour discriminant $-4$, donc pour racines
+$1\pm\mathrm{i}$. Les trois racines de $P$ sont $1$, $1+\mathrm{i}$ et
+$1-\mathrm{i}$.
+\end{corrige}

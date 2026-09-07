@@ -1,0 +1,34 @@
+% META: {"id": "TEXP-CAG-CO-010", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "corrige", "exercice_ref": "TEXP-CAG-EX-010", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, symbols, Abs, conjugate, simplify, sqrt, expand
+% a, b, c, d = symbols('a b c d', real=True)
+% z, w = a + I * b, c + I * d
+% assert simplify(z * conjugate(z) - (a ** 2 + b ** 2)) == 0
+% assert simplify(Abs(z) ** 2 - z * conjugate(z)) == 0
+% # |zw|^2 = |z|^2 |w|^2 se demontre symboliquement ; l'egalite des modules
+% # s'en deduit par positivite. SymPy ne simplifie pas Abs(z**n) sur des
+% # symboles, on verifie donc l'identite au carre, puis numeriquement.
+% assert simplify(expand((z * w) * conjugate(z * w))
+%                 - (z * conjugate(z)) * (w * conjugate(w))) == 0
+% for va in (-3, -1, 0, 2, 5):
+%     for vb in (-2, 0, 1, 4):
+%         if (va, vb) == (0, 0):
+%             continue
+%         zz = va + I * vb
+%         for n in range(1, 7):
+%             assert simplify(Abs(zz ** n) - Abs(zz) ** n) == 0
+% assert Abs(1 + I) == sqrt(2)
+% assert Abs((1 + I) ** 12) == 64
+% assert expand((sqrt(2)) ** 12) == 64
+% END-VERIFY
+\begin{corrige}{TEXP-CAG-EX-010}
+\textbf{1.} Avec $z=a+\mathrm{i}b$ :
+$z\overline{z}=(a+\mathrm{i}b)(a-\mathrm{i}b)=a^2+b^2=|z|^2$.
+
+\textbf{2.} $|zz'|^2=zz'\overline{zz'}=z\overline{z}\,z'\overline{z'}
+=|z|^2|z'|^2$. Les modules étant positifs, on obtient $|zz'|=|z||z'|$.
+
+\textbf{3.} La récurrence est immédiate à partir de 2 :
+$|z^{n+1}|=|z^n||z|=|z|^n|z|=|z|^{n+1}$. Comme $|1+\mathrm{i}|=\sqrt2$,
+$\left|(1+\mathrm{i})^{12}\right|=(\sqrt2)^{12}=2^6=64$.
+\end{corrige}

@@ -1,0 +1,29 @@
+% META: {"id": "TEXP-CTP-CO-009", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige", "exercice_ref": "TEXP-CTP-EX-009", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify, Sum, div, Poly, I
+% z, a = symbols('z a')
+% for n in range(1, 8):
+%     somme = sum(z ** k * a ** (n - 1 - k) for k in range(n))
+%     assert expand((z - a) * somme) == expand(z ** n - a ** n)
+% P = z ** 3 - 3 * z ** 2 + 4 * z - 2
+% assert P.subs(z, 1) == 0
+% quotient, reste = div(P, z - 1, z)
+% assert reste == 0 and expand(quotient) == expand(z ** 2 - 2 * z + 2)
+% assert len(Poly(P, z).all_roots()) <= 3
+% assert Poly(z ** 4 - 1, z).degree() == 4
+% END-VERIFY
+\begin{corrige}{TEXP-CTP-EX-009}
+\textbf{1.} En développant, $(z-a)\sum_{k=0}^{n-1}z^ka^{n-1-k}
+=\sum_{k=0}^{n-1}z^{k+1}a^{n-1-k}-\sum_{k=0}^{n-1}z^ka^{n-k}$. Les deux sommes
+se télescopent : il ne reste que $z^n$ dans la première et $-a^n$ dans la
+seconde.
+
+\textbf{2.} Écrivons $P(z)=\sum_{j}c_jz^j$. Alors
+$P(z)=P(z)-P(a)=\sum_j c_j(z^j-a^j)$, et chaque $z^j-a^j$ est divisible par
+$z-a$ d'après 1. Donc $z-a$ divise $P(z)$.
+
+\textbf{3.} Par récurrence sur $n$. Un polynôme de degré $0$ non nul n'a pas
+de racine. Si $P$ de degré $n$ admet une racine $a$, alors $P=(z-a)Q$ avec
+$\deg Q=n-1$ ; toute autre racine de $P$ est racine de $Q$, qui en a au plus
+$n-1$. Donc $P$ en a au plus $n$.
+\end{corrige}

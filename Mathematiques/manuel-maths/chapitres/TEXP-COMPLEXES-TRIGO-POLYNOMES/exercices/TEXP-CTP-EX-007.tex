@@ -1,0 +1,24 @@
+% META: {"id": "TEXP-CTP-EX-007", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "exercice", "capacites": ["TEXP-CTP-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-007.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-007.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, cos, sin, simplify, expand_trig
+% a, b = symbols('a b', real=True)
+% u = (cos(a), sin(a))
+% v = (cos(b), sin(b))
+% assert simplify(u[0] ** 2 + u[1] ** 2 - 1) == 0
+% assert simplify(v[0] ** 2 + v[1] ** 2 - 1) == 0
+% produit = u[0] * v[0] + u[1] * v[1]
+% assert simplify(produit - cos(a - b)) == 0
+% assert simplify(cos(a + b) - (cos(a) * cos(b) - sin(a) * sin(b))) == 0
+% assert simplify(cos(-b) - cos(b)) == 0 and simplify(sin(-b) + sin(b)) == 0
+% END-VERIFY
+\begin{exercice}{TEXP-CTP-EX-007}{2}{15}
+On veut démontrer $\cos(a-b)=\cos a\cos b+\sin a\sin b$ par le produit
+scalaire.
+\begin{enumerate}
+  \item Soient $\vec{u}$ et $\vec{v}$ les vecteurs unitaires d'angles polaires
+        $a$ et $b$. Donner leurs coordonnées.
+  \item Calculer $\vec{u}\cdot\vec{v}$ de deux façons : par les coordonnées,
+        puis par la formule $\|\vec u\|\|\vec v\|\cos(\vec u,\vec v)$.
+  \item Conclure, puis en déduire $\cos(a+b)$.
+\end{enumerate}
+\end{exercice}

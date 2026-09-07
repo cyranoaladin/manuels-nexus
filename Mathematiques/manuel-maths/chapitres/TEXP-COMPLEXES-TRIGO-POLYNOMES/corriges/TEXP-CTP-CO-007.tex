@@ -1,0 +1,27 @@
+% META: {"id": "TEXP-CTP-CO-007", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige", "exercice_ref": "TEXP-CTP-EX-007", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, cos, sin, simplify, expand_trig
+% a, b = symbols('a b', real=True)
+% u = (cos(a), sin(a))
+% v = (cos(b), sin(b))
+% assert simplify(u[0] ** 2 + u[1] ** 2 - 1) == 0
+% assert simplify(v[0] ** 2 + v[1] ** 2 - 1) == 0
+% produit = u[0] * v[0] + u[1] * v[1]
+% assert simplify(produit - cos(a - b)) == 0
+% assert simplify(cos(a + b) - (cos(a) * cos(b) - sin(a) * sin(b))) == 0
+% assert simplify(cos(-b) - cos(b)) == 0 and simplify(sin(-b) + sin(b)) == 0
+% END-VERIFY
+\begin{corrige}{TEXP-CTP-EX-007}
+\textbf{1.} $\vec u(\cos a\,;\,\sin a)$ et $\vec v(\cos b\,;\,\sin b)$, tous
+deux de norme $1$.
+
+\textbf{2.} Par les coordonnées :
+$\vec u\cdot\vec v=\cos a\cos b+\sin a\sin b$. Par la formule d'angle, comme
+les normes valent $1$ et que l'angle de $\vec v$ vers $\vec u$ mesure $a-b$ :
+$\vec u\cdot\vec v=\cos(a-b)$.
+
+\textbf{3.} Les deux expressions du même produit scalaire donnent
+$\cos(a-b)=\cos a\cos b+\sin a\sin b$. En remplaçant $b$ par $-b$ et en
+utilisant $\cos(-b)=\cos b$, $\sin(-b)=-\sin b$ :
+$\cos(a+b)=\cos a\cos b-\sin a\sin b$.
+\end{corrige}

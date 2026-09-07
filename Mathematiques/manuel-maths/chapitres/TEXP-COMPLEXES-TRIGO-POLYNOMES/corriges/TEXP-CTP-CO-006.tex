@@ -1,0 +1,29 @@
+% META: {"id": "TEXP-CTP-CO-006", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige", "exercice_ref": "TEXP-CTP-EX-006", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, symbols, cos, sin, exp, simplify, expand_trig, sqrt, pi, Rational, expand
+% theta = symbols('theta', real=True)
+% assert simplify(((exp(I * theta) + exp(-I * theta)) / 2).rewrite('cos')
+%                 - cos(theta)) == 0
+% assert simplify(((exp(I * theta) - exp(-I * theta)) / (2 * I)).rewrite('sin')
+%                 - sin(theta)) == 0
+% assert simplify(cos(theta) ** 3 - (cos(3 * theta) + 3 * cos(theta)) / 4) == 0
+% assert simplify((sqrt(2) * exp(I * pi / 4)).rewrite('cos') - (1 + I)) == 0
+% assert expand((1 + I) ** 8) == 16
+% assert simplify(((sqrt(2)) ** 8 * exp(2 * I * pi)).rewrite('cos') - 16) == 0
+% END-VERIFY
+\begin{corrige}{TEXP-CTP-EX-006}
+\textbf{1.} $\cos\theta=\dfrac{\mathrm{e}^{\mathrm{i}\theta}
++\mathrm{e}^{-\mathrm{i}\theta}}{2}$ et
+$\sin\theta=\dfrac{\mathrm{e}^{\mathrm{i}\theta}
+-\mathrm{e}^{-\mathrm{i}\theta}}{2\mathrm{i}}$.
+
+\textbf{2.} $\cos^3\theta
+=\left(\dfrac{\mathrm{e}^{\mathrm{i}\theta}+\mathrm{e}^{-\mathrm{i}\theta}}{2}
+\right)^3=\dfrac{1}{8}\left(\mathrm{e}^{3\mathrm{i}\theta}
++3\mathrm{e}^{\mathrm{i}\theta}+3\mathrm{e}^{-\mathrm{i}\theta}
++\mathrm{e}^{-3\mathrm{i}\theta}\right)
+=\dfrac{\cos3\theta+3\cos\theta}{4}$.
+
+\textbf{3.} $1+\mathrm{i}=\sqrt2\,\mathrm{e}^{\mathrm{i}\pi/4}$, donc
+$(1+\mathrm{i})^8=(\sqrt2)^8\mathrm{e}^{2\mathrm{i}\pi}=16$.
+\end{corrige}

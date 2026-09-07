@@ -1,0 +1,20 @@
+% META: {"id": "TEXP-CTP-EX-006", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "exercice", "capacites": ["TEXP-CTP-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-006.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-006.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, symbols, cos, sin, exp, simplify, expand_trig, sqrt, pi, Rational, expand
+% theta = symbols('theta', real=True)
+% assert simplify(((exp(I * theta) + exp(-I * theta)) / 2).rewrite('cos')
+%                 - cos(theta)) == 0
+% assert simplify(((exp(I * theta) - exp(-I * theta)) / (2 * I)).rewrite('sin')
+%                 - sin(theta)) == 0
+% assert simplify(cos(theta) ** 3 - (cos(3 * theta) + 3 * cos(theta)) / 4) == 0
+% assert simplify((sqrt(2) * exp(I * pi / 4)).rewrite('cos') - (1 + I)) == 0
+% assert expand((1 + I) ** 8) == 16
+% assert simplify(((sqrt(2)) ** 8 * exp(2 * I * pi)).rewrite('cos') - 16) == 0
+% END-VERIFY
+\begin{exercice}{TEXP-CTP-EX-006}{2}{15}
+\begin{enumerate}
+  \item Rappeler les formules d'Euler donnant $\cos\theta$ et $\sin\theta$.
+  \item Linéariser $\cos^3\theta$.
+  \item Calculer $(1+\mathrm{i})^{8}$ à l'aide de la formule de Moivre.
+\end{enumerate}
+\end{exercice}

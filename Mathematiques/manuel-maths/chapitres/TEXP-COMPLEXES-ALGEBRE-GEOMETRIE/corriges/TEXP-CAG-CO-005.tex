@@ -1,0 +1,27 @@
+% META: {"id": "TEXP-CAG-CO-005", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "corrige", "exercice_ref": "TEXP-CAG-EX-005", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, Rational, simplify, conjugate, expand
+% z1 = 3 + 2 * I
+% z2 = 1 - 4 * I
+% assert expand(z1 + z2) == 4 - 2 * I
+% assert expand(z1 * z2) == 11 - 10 * I
+% assert conjugate(z1) == 3 - 2 * I
+% assert simplify(1 / z2 - (Rational(1, 17) + Rational(4, 17) * I)) == 0
+% assert simplify(z1 / z2 - (Rational(-5, 17) + Rational(14, 17) * I)) == 0
+% assert expand((1 - 4 * I) * (1 + 4 * I)) == 17
+% END-VERIFY
+\begin{corrige}{TEXP-CAG-EX-005}
+\textbf{1.} $z_1+z_2=4-2\mathrm{i}$. Pour le produit :
+$(3+2\mathrm{i})(1-4\mathrm{i})=3-12\mathrm{i}+2\mathrm{i}-8\mathrm{i}^2
+=3-10\mathrm{i}+8=11-10\mathrm{i}$. Enfin
+$\overline{z_1}=3-2\mathrm{i}$.
+
+\textbf{2.} On multiplie par le conjugué :
+$\dfrac{1}{1-4\mathrm{i}}=\dfrac{1+4\mathrm{i}}{(1-4\mathrm{i})(1+4\mathrm{i})}
+=\dfrac{1+4\mathrm{i}}{17}=\dfrac{1}{17}+\dfrac{4}{17}\mathrm{i}$.
+
+\textbf{3.} $\dfrac{z_1}{z_2}=z_1\times\dfrac{1}{z_2}
+=(3+2\mathrm{i})\dfrac{1+4\mathrm{i}}{17}
+=\dfrac{3+12\mathrm{i}+2\mathrm{i}-8}{17}
+=\dfrac{-5+14\mathrm{i}}{17}=-\dfrac{5}{17}+\dfrac{14}{17}\mathrm{i}$.
+\end{corrige}

@@ -1,0 +1,20 @@
+% META: {"id": "TEXP-CTP-EX-005", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "exercice", "capacites": ["TEXP-CTP-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-005.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-005.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, sqrt, Abs, arg, pi, exp, simplify, Rational
+% z = -1 + I
+% assert Abs(z) == sqrt(2)
+% assert arg(z) == 3 * pi / 4
+% # La forme exponentielle rejoint la forme algebrique par cos et sin.
+% assert simplify((sqrt(2) * exp(I * 3 * pi / 4)).rewrite('cos') - z) == 0
+% w = 3 * exp(I * pi / 6)
+% assert simplify(w.rewrite('cos') - (3 * sqrt(3) / 2 + Rational(3, 2) * I)) == 0
+% assert simplify(Abs(z * w) - 3 * sqrt(2)) == 0
+% assert simplify(arg(z * w) - 11 * pi / 12) == 0
+% END-VERIFY
+\begin{exercice}{TEXP-CTP-EX-005}{1}{12}
+\begin{enumerate}
+  \item Écrire $z=-1+\mathrm{i}$ sous forme trigonométrique puis exponentielle.
+  \item Écrire $w=3\mathrm{e}^{\mathrm{i}\pi/6}$ sous forme algébrique.
+  \item Calculer $zw$ sous forme exponentielle.
+\end{enumerate}
+\end{exercice}

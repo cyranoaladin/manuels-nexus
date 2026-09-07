@@ -27,6 +27,11 @@ NON VERIFIEE, et le registre le dit.
 
 from __future__ import annotations
 
+#: L'unite imaginaire s'ecrit de deux facons dans le corpus : `\mathrm{i}`
+#: dans les chapitres recents, `i` tout court ailleurs. Un marqueur qui n'en
+#: connait qu'une refuserait la moitie des enonces.
+UNITE_IMAGINAIRE = r"\\mathrm\{i\}|(?<![A-Za-z\\])i(?![A-Za-z])"
+
 #: chapitre -> code de capacite -> {"required": [[alternatives], ...],
 #:                                  "forbidden": [marqueurs]}
 SIGNATURES: dict[str, dict[str, dict[str, list]]] = {
@@ -176,6 +181,89 @@ SIGNATURES: dict[str, dict[str, dict[str, list]]] = {
             "required": [
                 [r"invariante?s?\b", r"\\pi\s*T\s*=\s*\\pi"],
                 [r"distribution", r"\\pi"],
+            ],
+        },
+    },
+    "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE": {
+        "C1": {
+            "required": [
+                [UNITE_IMAGINAIRE, r"complexes?\b"],
+                [r"\bcalculer\b", r"\bconjugu", r"\bproduit\b",
+                 r"forme alg[ée]brique", r"partie r[ée]elle"],
+            ],
+            "forbidden": [r"convexit", r"tableau de variations"],
+        },
+        "C2": {
+            "required": [
+                [r"R[ée]soudre", r"\b[ée]quation", r"v[ée]rifiant"],
+                [r"\bz\b", r"\\overline\{z\}", r"\\bar\s*z", UNITE_IMAGINAIRE],
+            ],
+        },
+        "C3": {
+            "required": [
+                [r"D[ée]montrer|Montrer|r[ée]currence|D[ée]duire|"
+                 r"d[ée]velopper|formule du bin[ôo]me"],
+                [r"\\overline", r"conjugu", r"bin[ôo]me"],
+            ],
+        },
+        "C4": {
+            "required": [
+                [r"\bmodule\b", r"\bargument\b", r"\baffixe\b"],
+                [UNITE_IMAGINAIRE, r"complexe", r"\bOM\b"],
+            ],
+        },
+        "C5": {
+            "required": [
+                [r"D[ée]montrer|Montrer|d[ée]duire"],
+                [r"\bmodule\b", r"\|z\|", r"z\\overline\{z\}"],
+            ],
+        },
+    },
+    "TEXP-COMPLEXES-TRIGO-POLYNOMES": {
+        "C1": {
+            "required": [
+                [r"forme trigonom", r"forme exponentielle", r"\\mathrm\{e\}\^",
+                 r"\bexponentielle\b"],
+                [r"\bmodule\b", r"\bargument\b", r"forme alg[ée]brique",
+                 UNITE_IMAGINAIRE],
+            ],
+            "forbidden": [r"convexit", r"tableau de variations"],
+        },
+        "C2": {
+            "required": [
+                [r"\bEuler\b", r"\bMoivre\b"],
+                [r"lin[ée]aris", r"puissance", r"\bcos\b", r"\bsin\b"],
+            ],
+        },
+        "C3": {
+            "required": [
+                [r"D[ée]montrer|Montrer"],
+                [r"produit scalaire", r"\\cos\(a", r"formule d'addition"],
+            ],
+        },
+        "C4": {
+            "required": [
+                [r"R[ée]soudre", r"factoris", r"racine"],
+                [r"\bz\^2", r"\bz\^3", r"polyn[ôo]me", r"degr[ée]"],
+            ],
+        },
+        "C5": {
+            "required": [
+                [r"D[ée]montrer|Montrer|d[ée]duire"],
+                [r"factoris", r"z\^n\s*-\s*a\^n", r"racines?\b"],
+            ],
+        },
+        "C6": {
+            "required": [
+                [r"align", r"orthogonal", r"configuration", r"ensemble de points",
+                 r"\baffixe"],
+                [r"complexe", UNITE_IMAGINAIRE, r"\bz_", r"\baffixe"],
+            ],
+        },
+        "C7": {
+            "required": [
+                [r"racines? [a-zé]+i?[èe]mes? de l'unit[ée]", r"de l'unit[ée]"],
+                [r"polygone", r"\bcercle\b", r"\bsomme\b", r"r[ée]guli"],
             ],
         },
     },

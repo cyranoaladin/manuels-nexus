@@ -1,0 +1,28 @@
+% META: {"id": "TEXP-CTP-CO-005", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige", "exercice_ref": "TEXP-CTP-EX-005", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, sqrt, Abs, arg, pi, exp, simplify, Rational
+% z = -1 + I
+% assert Abs(z) == sqrt(2)
+% assert arg(z) == 3 * pi / 4
+% # La forme exponentielle rejoint la forme algebrique par cos et sin.
+% assert simplify((sqrt(2) * exp(I * 3 * pi / 4)).rewrite('cos') - z) == 0
+% w = 3 * exp(I * pi / 6)
+% assert simplify(w.rewrite('cos') - (3 * sqrt(3) / 2 + Rational(3, 2) * I)) == 0
+% assert simplify(Abs(z * w) - 3 * sqrt(2)) == 0
+% assert simplify(arg(z * w) - 11 * pi / 12) == 0
+% END-VERIFY
+\begin{corrige}{TEXP-CTP-EX-005}
+\textbf{1.} $|z|=\sqrt{1+1}=\sqrt2$ et
+$z=\sqrt2\left(-\tfrac{\sqrt2}{2}+\mathrm{i}\tfrac{\sqrt2}{2}\right)$, donc un
+argument est $\tfrac{3\pi}{4}$ :
+$z=\sqrt2\left(\cos\tfrac{3\pi}{4}+\mathrm{i}\sin\tfrac{3\pi}{4}\right)
+=\sqrt2\,\mathrm{e}^{\mathrm{i}3\pi/4}$.
+
+\textbf{2.} $w=3\left(\cos\tfrac{\pi}{6}+\mathrm{i}\sin\tfrac{\pi}{6}\right)
+=3\left(\tfrac{\sqrt3}{2}+\tfrac{\mathrm{i}}{2}\right)
+=\tfrac{3\sqrt3}{2}+\tfrac{3}{2}\mathrm{i}$.
+
+\textbf{3.} Les modules se multiplient et les arguments s'ajoutent :
+$zw=3\sqrt2\,\mathrm{e}^{\mathrm{i}(3\pi/4+\pi/6)}
+=3\sqrt2\,\mathrm{e}^{\mathrm{i}11\pi/12}$.
+\end{corrige}

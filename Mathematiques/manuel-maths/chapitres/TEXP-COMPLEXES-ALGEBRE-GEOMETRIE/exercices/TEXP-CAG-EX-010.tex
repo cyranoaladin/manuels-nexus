@@ -1,0 +1,31 @@
+% META: {"id": "TEXP-CAG-EX-010", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "exercice", "capacites": ["TEXP-CAG-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/exercices/TEXP-CAG-EX-010.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/corriges/TEXP-CAG-CO-010.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, symbols, Abs, conjugate, simplify, sqrt, expand
+% a, b, c, d = symbols('a b c d', real=True)
+% z, w = a + I * b, c + I * d
+% assert simplify(z * conjugate(z) - (a ** 2 + b ** 2)) == 0
+% assert simplify(Abs(z) ** 2 - z * conjugate(z)) == 0
+% # |zw|^2 = |z|^2 |w|^2 se demontre symboliquement ; l'egalite des modules
+% # s'en deduit par positivite. SymPy ne simplifie pas Abs(z**n) sur des
+% # symboles, on verifie donc l'identite au carre, puis numeriquement.
+% assert simplify(expand((z * w) * conjugate(z * w))
+%                 - (z * conjugate(z)) * (w * conjugate(w))) == 0
+% for va in (-3, -1, 0, 2, 5):
+%     for vb in (-2, 0, 1, 4):
+%         if (va, vb) == (0, 0):
+%             continue
+%         zz = va + I * vb
+%         for n in range(1, 7):
+%             assert simplify(Abs(zz ** n) - Abs(zz) ** n) == 0
+% assert Abs(1 + I) == sqrt(2)
+% assert Abs((1 + I) ** 12) == 64
+% assert expand((sqrt(2)) ** 12) == 64
+% END-VERIFY
+\begin{exercice}{TEXP-CAG-EX-010}{2}{15}
+\begin{enumerate}
+  \item Démontrer que pour tout complexe $z$, $|z|^2=z\overline{z}$.
+  \item En déduire que $|zz'|=|z||z'|$ pour tous complexes $z$ et $z'$.
+  \item En déduire par récurrence que $|z^n|=|z|^n$, et calculer
+        $\left|(1+\mathrm{i})^{12}\right|$.
+\end{enumerate}
+\end{exercice}

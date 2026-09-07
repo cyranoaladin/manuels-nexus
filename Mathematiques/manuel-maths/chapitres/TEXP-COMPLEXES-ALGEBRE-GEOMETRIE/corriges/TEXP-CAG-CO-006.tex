@@ -1,0 +1,24 @@
+% META: {"id": "TEXP-CAG-CO-006", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "corrige", "exercice_ref": "TEXP-CAG-EX-006", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, expand, re, im
+% assert I ** 2 == -1 and I ** 3 == -I and I ** 4 == 1
+% assert 2026 % 4 == 2 and I ** 2026 == -1
+% assert expand((2 + I) ** 3) == 2 + 11 * I
+% assert re(expand((2 + I) ** 3)) == 2 and im(expand((2 + I) ** 3)) == 11
+% assert expand((1 + I) ** 2) == 2 * I
+% assert expand((1 + I) ** 10) == 32 * I
+% assert expand((2 * I) ** 5) == 32 * I
+% END-VERIFY
+\begin{corrige}{TEXP-CAG-EX-006}
+\textbf{1.} $\mathrm{i}^2=-1$, $\mathrm{i}^3=-\mathrm{i}$, $\mathrm{i}^4=1$.
+Les puissances sont périodiques de période $4$ ; comme
+$2026=4\times506+2$, on a $\mathrm{i}^{2026}=\mathrm{i}^2=-1$.
+
+\textbf{2.} $(2+\mathrm{i})^3=(2+\mathrm{i})(3+4\mathrm{i})
+=6+8\mathrm{i}+3\mathrm{i}-4=2+11\mathrm{i}$ : partie réelle $2$, partie
+imaginaire $11$.
+
+\textbf{3.} $(1+\mathrm{i})^2=1+2\mathrm{i}-1=2\mathrm{i}$. Donc
+$(1+\mathrm{i})^{10}=\big((1+\mathrm{i})^2\big)^5=(2\mathrm{i})^5
+=32\,\mathrm{i}^5=32\mathrm{i}$.
+\end{corrige}

@@ -1,0 +1,22 @@
+% META: {"id": "TEXP-CAG-EX-008", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "exercice", "capacites": ["TEXP-CAG-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/exercices/TEXP-CAG-EX-008.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/corriges/TEXP-CAG-CO-008.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, symbols, conjugate, expand, simplify
+% a, b, c, d = symbols('a b c d', real=True)
+% z, w = a + I * b, c + I * d
+% assert simplify(conjugate(z * w) - conjugate(z) * conjugate(w)) == 0
+% for n in range(1, 7):
+%     assert simplify(conjugate(z ** n) - conjugate(z) ** n) == 0
+% assert simplify(conjugate(1 / z) - 1 / conjugate(z)) == 0
+% assert expand(z * w) == expand((a * c - b * d) + I * (a * d + b * c))
+% END-VERIFY
+\begin{exercice}{TEXP-CAG-EX-008}{2}{15}
+Soient $z$ et $z'$ deux nombres complexes.
+\begin{enumerate}
+  \item Démontrer que $\overline{zz'}=\overline{z}\,\overline{z'}$ en posant
+        $z=a+\mathrm{i}b$ et $z'=a'+\mathrm{i}b'$.
+  \item En déduire par récurrence que $\overline{z^n}=\overline{z}^{\,n}$ pour
+        tout entier $n\geq1$.
+  \item Démontrer que si $z\neq0$, $\overline{\left(\frac{1}{z}\right)}
+        =\frac{1}{\overline{z}}$.
+\end{enumerate}
+\end{exercice}

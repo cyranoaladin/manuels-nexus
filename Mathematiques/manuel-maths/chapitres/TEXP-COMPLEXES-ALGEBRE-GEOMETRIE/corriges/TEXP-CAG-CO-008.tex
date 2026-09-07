@@ -1,0 +1,26 @@
+% META: {"id": "TEXP-CAG-CO-008", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "corrige", "exercice_ref": "TEXP-CAG-EX-008", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, symbols, conjugate, expand, simplify
+% a, b, c, d = symbols('a b c d', real=True)
+% z, w = a + I * b, c + I * d
+% assert simplify(conjugate(z * w) - conjugate(z) * conjugate(w)) == 0
+% for n in range(1, 7):
+%     assert simplify(conjugate(z ** n) - conjugate(z) ** n) == 0
+% assert simplify(conjugate(1 / z) - 1 / conjugate(z)) == 0
+% assert expand(z * w) == expand((a * c - b * d) + I * (a * d + b * c))
+% END-VERIFY
+\begin{corrige}{TEXP-CAG-EX-008}
+\textbf{1.} $zz'=(aa'-bb')+\mathrm{i}(ab'+a'b)$ donc
+$\overline{zz'}=(aa'-bb')-\mathrm{i}(ab'+a'b)$. Par ailleurs
+$\overline{z}\,\overline{z'}=(a-\mathrm{i}b)(a'-\mathrm{i}b')
+=(aa'-bb')-\mathrm{i}(ab'+a'b)$. Les deux coïncident.
+
+\textbf{2.} Au rang $1$ c'est immédiat. Si $\overline{z^n}=\overline{z}^{\,n}$,
+alors $\overline{z^{n+1}}=\overline{z^n\cdot z}
+=\overline{z^n}\cdot\overline{z}=\overline{z}^{\,n}\overline{z}
+=\overline{z}^{\,n+1}$ d'après la question 1.
+
+\textbf{3.} De $z\times\frac1z=1$ on tire, en conjuguant et en utilisant la
+question 1, $\overline{z}\times\overline{\left(\frac1z\right)}=\overline{1}=1$,
+donc $\overline{\left(\frac1z\right)}=\frac{1}{\overline{z}}$.
+\end{corrige}

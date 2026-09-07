@@ -1,0 +1,23 @@
+% META: {"id": "TEXP-CAG-EX-009", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "exercice", "capacites": ["TEXP-CAG-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/exercices/TEXP-CAG-EX-009.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/corriges/TEXP-CAG-CO-009.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, sqrt, Abs, arg, pi, simplify, exp, expand, conjugate
+% z = 1 + I * sqrt(3)
+% assert Abs(z) == 2
+% assert arg(z) == pi / 3
+% assert Abs(conjugate(z)) == 2 and Abs(-z) == 2
+% assert conjugate(z) == 1 - I * sqrt(3)
+% # La forme exponentielle se ramene a la forme algebrique par cos et sin :
+% # c'est exactement le passage demande dans l'enonce.
+% m = 2 * exp(I * 3 * pi / 4)
+% assert simplify(m.rewrite('cos') - (-sqrt(2) + I * sqrt(2))) == 0
+% assert simplify(Abs(m) - 2) == 0
+% END-VERIFY
+\begin{exercice}{TEXP-CAG-EX-009}{1}{12}
+\begin{enumerate}
+  \item Déterminer le module et un argument de $z=1+\mathrm{i}\sqrt{3}$.
+  \item Placer dans le plan complexe les points d'affixes $z$, $\overline{z}$
+        et $-z$, et donner leurs modules.
+  \item Déterminer l'affixe du point $M$ tel que $OM=2$ et
+        $(\vec{u},\overrightarrow{OM})=\dfrac{3\pi}{4}$.
+\end{enumerate}
+\end{exercice}

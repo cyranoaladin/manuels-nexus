@@ -1,0 +1,29 @@
+% META: {"id": "TEXP-CTP-EX-010", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "exercice", "capacites": ["TEXP-CTP-C7"], "capacites_codes": ["C7"], "methodes": ["M7"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-010.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-010.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, exp, pi, simplify, expand, symbols, Abs, arg, N, Poly
+% z_sym = symbols('z_sym')
+% racines = [exp(2 * I * k * pi / 5) for k in range(5)]
+% for w in racines:
+%     assert simplify(w ** 5 - 1) == 0
+%     assert simplify(Abs(w) - 1) == 0
+% # La somme est nulle par Vieta : dans z^5 - 1, le coefficient de z^4
+% # est nul, et c'est l'oppose de la somme des racines. On le lit sur le
+% # polynome, et on le confirme numeriquement a haute precision.
+% assert Poly(z_sym ** 5 - 1, z_sym).all_coeffs()[1] == 0
+% assert abs(complex(N(sum(racines), 50))) < 1e-40
+% z = symbols('z')
+% assert expand((z - 1) * (z ** 4 + z ** 3 + z ** 2 + z + 1)) == expand(z ** 5 - 1)
+% # L'ecart angulaire constant se lit sur le QUOTIENT de deux racines
+% # consecutives, qui vaut exactement exp(2 i pi / 5) : c'est exact, la ou
+% # une soustraction d'arguments depend de la determination choisie.
+% for k in range(4):
+%     assert simplify(racines[k + 1] / racines[k] - exp(2 * I * pi / 5)) == 0
+% END-VERIFY
+\begin{exercice}{TEXP-CTP-EX-010}{2}{18}
+\begin{enumerate}
+  \item Déterminer les racines cinquièmes de l'unité sous forme exponentielle.
+  \item Vérifier que leur somme est nulle, et l'expliquer à l'aide de la
+        factorisation de $z^5-1$.
+  \item Que représentent ces cinq points dans le plan complexe ?
+\end{enumerate}
+\end{exercice}

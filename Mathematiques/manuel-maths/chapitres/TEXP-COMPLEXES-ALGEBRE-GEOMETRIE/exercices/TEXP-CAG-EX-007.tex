@@ -1,0 +1,20 @@
+% META: {"id": "TEXP-CAG-EX-007", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "exercice", "capacites": ["TEXP-CAG-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/exercices/TEXP-CAG-EX-007.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/corriges/TEXP-CAG-CO-007.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, Rational, symbols, solve, simplify, conjugate, re, im
+% z = (5 - I) / (2 + I)
+% assert simplify(z - (Rational(9, 5) - Rational(7, 5) * I)) == 0
+% x, y = symbols('x y', real=True)
+% w = x + I * y
+% sol = solve([re(w + 2 * conjugate(w)) - 6, im(w + 2 * conjugate(w)) + 3], [x, y], dict=True)[0]
+% assert sol[x] == 2 and sol[y] == 3
+% sol2 = solve([x ** 2 + y ** 2 - 4, 2 * x - 4], [x, y], dict=True)
+% assert all(s[x] == 2 and s[y] == 0 for s in sol2)
+% END-VERIFY
+\begin{exercice}{TEXP-CAG-EX-007}{2}{15}
+Résoudre dans $\mathbb{C}$ les équations suivantes.
+\begin{enumerate}
+  \item $(2+\mathrm{i})z=5-\mathrm{i}$.
+  \item $z+2\overline{z}=6-3\mathrm{i}$.
+  \item $z\overline{z}=4$ et $z+\overline{z}=4$ simultanément.
+\end{enumerate}
+\end{exercice}

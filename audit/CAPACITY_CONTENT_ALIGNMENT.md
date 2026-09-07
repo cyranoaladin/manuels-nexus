@@ -4,8 +4,8 @@ Une capacite se derive du contenu : une suite periodique de codes vient d'un com
 
 - `CAPACITY_CONTENT_MISALIGNMENT` : `0`
 - `ROUND_ROBIN_CAPACITY_ASSIGNMENT` : `1`
-- attributions examinees : `1017`
-- non verifiees faute de signature : `960`
+- attributions examinees : `1029`
+- non verifiees faute de signature : `952`
 
 ## Chapitres a attribution periodique
 

@@ -1,0 +1,19 @@
+% META: {"id": "TEXP-CTP-EX-008", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "exercice", "capacites": ["TEXP-CTP-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-008.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-008.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, symbols, solve, expand, factor, Poly
+% z = symbols('z')
+% assert set(solve(z ** 2 - 2 * z + 5, z)) == {1 + 2 * I, 1 - 2 * I}
+% P = z ** 3 - 3 * z ** 2 + 4 * z - 2
+% assert P.subs(z, 1) == 0
+% assert expand((z - 1) * (z ** 2 - 2 * z + 2)) == P
+% assert set(solve(P, z)) == {1, 1 + I, 1 - I}
+% assert set(solve(z ** 2 - 2 * z + 2, z)) == {1 + I, 1 - I}
+% END-VERIFY
+\begin{exercice}{TEXP-CTP-EX-008}{2}{15}
+\begin{enumerate}
+  \item Résoudre dans $\mathbb{C}$ l'équation $z^2-2z+5=0$.
+  \item Vérifier que $1$ est racine de $P(z)=z^3-3z^2+4z-2$, puis factoriser
+        $P$.
+  \item En déduire toutes les racines de $P$ dans $\mathbb{C}$.
+\end{enumerate}
+\end{exercice}

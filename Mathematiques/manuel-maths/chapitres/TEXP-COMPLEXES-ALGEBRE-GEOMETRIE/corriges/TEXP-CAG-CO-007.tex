@@ -1,0 +1,23 @@
+% META: {"id": "TEXP-CAG-CO-007", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "corrige", "exercice_ref": "TEXP-CAG-EX-007", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, Rational, symbols, solve, simplify, conjugate, re, im
+% z = (5 - I) / (2 + I)
+% assert simplify(z - (Rational(9, 5) - Rational(7, 5) * I)) == 0
+% x, y = symbols('x y', real=True)
+% w = x + I * y
+% sol = solve([re(w + 2 * conjugate(w)) - 6, im(w + 2 * conjugate(w)) + 3], [x, y], dict=True)[0]
+% assert sol[x] == 2 and sol[y] == 3
+% sol2 = solve([x ** 2 + y ** 2 - 4, 2 * x - 4], [x, y], dict=True)
+% assert all(s[x] == 2 and s[y] == 0 for s in sol2)
+% END-VERIFY
+\begin{corrige}{TEXP-CAG-EX-007}
+\textbf{1.} $z=\dfrac{5-\mathrm{i}}{2+\mathrm{i}}
+=\dfrac{(5-\mathrm{i})(2-\mathrm{i})}{5}=\dfrac{9-7\mathrm{i}}{5}$.
+
+\textbf{2.} Posons $z=x+\mathrm{i}y$. Alors
+$z+2\overline{z}=3x-\mathrm{i}y$. L'identification donne $3x=6$ et $-y=-3$,
+soit $x=2$ et $y=3$ : $z=2+3\mathrm{i}$.
+
+\textbf{3.} Avec $z=x+\mathrm{i}y$ : $z\overline{z}=x^2+y^2=4$ et
+$z+\overline{z}=2x=4$, donc $x=2$ puis $y^2=0$ : l'unique solution est $z=2$.
+\end{corrige}
