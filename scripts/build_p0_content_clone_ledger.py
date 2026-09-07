@@ -87,17 +87,29 @@ def manual_of(chapter: str) -> str:
 #: l'objet lui-meme, et celle de l'objet qu'il sert. Un corrige nomme son
 #: exercice ; une correction d'evaluation nomme son evaluation. Les
 #: references au programme, elles, sont du contenu et restent.
-IDENTITY_FIELDS = ("id", "exercice_ref", "evaluation_ref")
+IDENTITY_FIELDS = ("id", "exercice_ref", "evaluation_ref", "chapitre")
 
 #: Ce que devient une identite une fois neutralisee dans le corps.
 IDENTITY_PLACEHOLDER = "{OBJECT_IDENTITY}"
 
 
-def identity_tokens(meta: dict[str, Any]) -> list[str]:
+#: Un identifiant d'objet du corpus : au moins trois segments majuscules.
+OBJECT_ID_TOKEN = re.compile(r"\b[A-Z0-9]+(?:-[A-Z0-9]+){2,}\b")
+
+
+def identity_tokens(meta: dict[str, Any], body: str = "") -> list[str]:
     """Les identifiants portes par l'objet, du plus long au plus court.
 
     L'ordre importe : `X-EX-001-CDP` doit etre neutralise avant `X-EX-001`,
     sinon le suffixe survivrait seul et distinguerait deux copies.
+
+    Le corps ne nomme pas seulement l'objet : il nomme aussi ses SOUS-OBJETS.
+    Une fiche de remediation contient ses propres exercices, dont les
+    identifiants portent le prefixe du chapitre -- `TEXP-ARI-FR-R4-EX1`. Ces
+    jetons sont de l'identite, pas du contenu : tant qu'ils restaient, la
+    meme fiche recopiee dans quinze chapitres portait quinze empreintes. On
+    neutralise donc aussi les identifiants du corps qui partagent le prefixe
+    de l'objet -- jamais ceux d'un autre chapitre, qui sont des references.
     """
 
     tokens = set()
@@ -105,7 +117,65 @@ def identity_tokens(meta: dict[str, Any]) -> list[str]:
         value = meta.get(field)
         if isinstance(value, str) and value.strip():
             tokens.add(value.strip())
+
+    chapitre = str(meta.get("chapitre") or "")
+    if chapitre and body:
+        for jeton in OBJECT_ID_TOKEN.findall(body):
+            if belongs_to_chapter(jeton, chapitre):
+                tokens.add(jeton)
     return sorted(tokens, key=len, reverse=True)
+
+
+def belongs_to_chapter(token: str, chapter: str) -> bool:
+    """Ce jeton nomme-t-il un objet DE CE chapitre ?
+
+    Le corpus abrege les chapitres de deux facons, et les deux se lisent :
+    par troncature d'un mot -- `TEXP-ARI` pour `TEXP-ARITHMETIQUE`, `TCOMPL-ECH`
+    pour `TCOMPL-ECHANTILLONNAGE` -- ou par initiales -- `TCOMPL-MF` pour
+    `TCOMPL-MODELES-FONCTION`. Un renvoi vers un AUTRE chapitre du meme manuel
+    ne passe ni l'une ni l'autre : `TEXP-GRA` n'est ni un prefixe d'un mot de
+    `TEXP-ARITHMETIQUE`, ni ses initiales. Ce renvoi est du contenu, et il
+    survit.
+    """
+
+    segments = token.split("-")
+    mots = chapter.split("-")
+    if len(segments) < 2 or len(mots) < 2 or segments[0] != mots[0]:
+        return False
+    return _abbreviates(segments[1], mots[1:])
+
+
+def _abbreviates(abbreviation: str, words: list[str]) -> bool:
+    """`abbreviation` abrege-t-elle ces mots de chapitre ?
+
+    Le corpus abrege de quatre facons au moins : troncature d'un mot (`ARI`
+    pour `ARITHMETIQUE`), initiales (`MF` pour `MODELES-FONCTION`),
+    concatenation de troncatures (`DERCONV` pour `DERIVATION-CONVEXITE`), et
+    squelette consonantique (`LIMFCT` pour `LIMITES-FONCTIONS`). Les quatre
+    sont le meme mecanisme : les lettres de l'abreviation apparaissent dans
+    l'ordre, a partir d'un mot dont elle reprend l'initiale.
+
+    L'ancrage sur l'initiale est ce qui empeche l'accident : `ARI` est bien
+    une sous-suite de `MATRICES-MARKOV` (A-R-I dans « m-A-t-R-I-ces »), mais
+    aucun mot n'y commence par A. Un renvoi de l'un vers l'autre reste donc
+    du contenu.
+    """
+
+    if not abbreviation:
+        return True
+    for index, mot in enumerate(words):
+        if not mot.startswith(abbreviation[0]):
+            continue
+        lettres = "".join(words[index:])
+        position = 0
+        for lettre in abbreviation:
+            position = lettres.find(lettre, position)
+            if position < 0:
+                break
+            position += 1
+        else:
+            return True
+    return False
 
 
 def pedagogical_body(text: str) -> str:
@@ -124,7 +194,7 @@ def pedagogical_body(text: str) -> str:
     body = "\n".join(
         line.rstrip() for line in text.splitlines() if not META_LINE.match(line)
     )
-    for token in identity_tokens(read_meta(text)):
+    for token in identity_tokens(read_meta(text), body):
         body = body.replace(token, IDENTITY_PLACEHOLDER)
     return body.strip()
 

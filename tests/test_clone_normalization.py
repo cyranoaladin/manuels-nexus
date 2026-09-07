@@ -81,3 +81,49 @@ def test_the_bench_is_not_empty_and_covers_both_directions() -> None:
     libelles = " ".join(row[0] for row in fixtures.MUST_DIFFER)
     for exigee in exigees:
         assert exigee in libelles, f"le banc ne couvre pas : {exigee}"
+
+
+# ---------------------------------------------------------------------------
+# L'identite vit aussi dans les sous-objets
+# ---------------------------------------------------------------------------
+
+
+@pytest.fixture(scope="module")
+def ledger():
+    return _module("clone_norm_ledger_ident", "scripts/build_p0_content_clone_ledger.py")
+
+
+@pytest.mark.parametrize(
+    "token,chapter",
+    [
+        ("TSPE-DERCONV-FR-R1", "TSPE-DERIVATION-CONVEXITE"),
+        ("TSPE-LIMFCT-EX-001", "TSPE-LIMITES-FONCTIONS"),
+        ("TEXP-ARI-FR-R4-EX1", "TEXP-ARITHMETIQUE"),
+        ("TCOMPL-MF-RE-C06", "TCOMPL-MODELES-FONCTION"),
+        ("TEXP-CAG-ME-001", "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE"),
+        ("TCOMPL-BAYES-EX-001", "TCOMPL-INFERENCE-BAYESIENNE"),
+        ("1SPE-SECDEG-EX-001", "1SPE-SECOND-DEGRE"),
+    ],
+)
+def test_an_abbreviation_of_the_chapter_is_identity(ledger, token, chapter) -> None:
+    """Quatre styles d'abreviation coexistent, et tous nomment le chapitre."""
+
+    assert ledger.belongs_to_chapter(token, chapter) is True
+
+
+@pytest.mark.parametrize(
+    "token,chapter",
+    [
+        # `ARI` est bien une sous-suite de `MATRICES-MARKOV` -- A-R-I dans
+        # « m-A-t-R-I-ces » -- mais aucun mot n'y commence par A.
+        ("TEXP-ARI-ME-001", "TEXP-MATRICES-MARKOV"),
+        ("TEXP-GRA-ME-001", "TEXP-ARITHMETIQUE"),
+        ("TSPE-DERCONV-ME-001", "TEXP-ARITHMETIQUE"),
+        ("TCOMPL-BAYES-EX-001", "TCOMPL-CALCULS-AIRES"),
+        ("TCOMPL-ECH-EX-001", "TCOMPL-INEGALITES"),
+    ],
+)
+def test_a_reference_to_another_chapter_is_content(ledger, token, chapter) -> None:
+    """Un renvoi vers un autre chapitre doit survivre a la normalisation."""
+
+    assert ledger.belongs_to_chapter(token, chapter) is False

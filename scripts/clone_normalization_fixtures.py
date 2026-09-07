@@ -199,3 +199,42 @@ MUST_DIFFER: tuple[tuple[str, str, str], ...] = (
         ),
     ),
 )
+
+
+#: Les sous-objets d'une fiche portent aussi le prefixe du chapitre. Ces
+#: jetons sont de l'identite ; une reference a un objet d'un AUTRE chapitre
+#: est du contenu, et doit survivre.
+FICHE_A = objet(
+    "TEXP-ARI-RE-C04",
+    "\\begin{exercice}{TEXP-ARI-FR-R4-EX1}{1}{10}\n"
+    "Déterminer $\\lim_{x \\to +\\infty} \\dfrac{x^3}{\\mathrm{e}^x}$.\n"
+    "\\end{exercice}",
+    chapitre="TEXP-ARITHMETIQUE",
+    environnement="remediation",
+)
+FICHE_B = objet(
+    "TCOMPL-ECH-RE-C04",
+    "\\begin{exercice}{TCOMPL-ECH-FR-R4-EX1}{1}{10}\n"
+    "Déterminer $\\lim_{x \\to +\\infty} \\dfrac{x^3}{\\mathrm{e}^x}$.\n"
+    "\\end{exercice}",
+    chapitre="TCOMPL-ECHANTILLONNAGE",
+    environnement="remediation",
+)
+MUST_MATCH = MUST_MATCH + (
+    ("meme fiche, sous-objets renommes au prefixe du chapitre", FICHE_A, FICHE_B),
+)
+MUST_DIFFER = MUST_DIFFER + (
+    (
+        "une reference a un objet d'un autre chapitre est du contenu",
+        objet(
+            "A-EX-030",
+            "Reprendre la methode de \\ref{TSPE-DERCONV-ME-001}.",
+            chapitre="CH-A",
+        ),
+        objet(
+            "A-EX-031",
+            "Reprendre la methode de \\ref{TSPE-LIMFCT-ME-004}.",
+            chapitre="CH-A",
+        ),
+    ),
+)

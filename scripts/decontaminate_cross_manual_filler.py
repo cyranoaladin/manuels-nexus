@@ -36,6 +36,16 @@ RECEIPT_SUFFIXES = (".sympy.json", ".execution.json")
 
 
 def plan(root: Path = ROOT) -> dict[str, Any]:
+    """Le retrait courant, CUMULE avec les vagues precedentes.
+
+    La detection s'est affinee en cours de route : les copies d'exercices se
+    voyaient des que l'identite de l'objet quittait le corps compare, celles
+    des fiches de remediation seulement quand les identifiants de leurs
+    SOUS-objets l'ont quittee aussi. Le registre garde les deux vagues : un
+    identifiant retire ne doit jamais disparaitre de la trace parce qu'une
+    vague ulterieure ne le voit plus.
+    """
+
     matrice = json.loads(MATRIX.read_text(encoding="utf-8"))
     approbations = {
         r["path"]: r for r in json.loads(APPROVALS.read_text(encoding="utf-8"))["records"]
@@ -75,6 +85,12 @@ def plan(root: Path = ROOT) -> dict[str, Any]:
                 "du chapitre, pas sur le nombre de fichiers retires"
             ),
         })
+
+    if REGISTRY.is_file():
+        deja = json.loads(REGISTRY.read_text(encoding="utf-8")).get("retired", [])
+        connus = {e["path"] for e in entrees}
+        entrees.extend(e for e in deja if e["path"] not in connus)
+        entrees.sort(key=lambda e: e["path"])
 
     par_chapitre: dict[str, collections.Counter] = collections.defaultdict(
         collections.Counter

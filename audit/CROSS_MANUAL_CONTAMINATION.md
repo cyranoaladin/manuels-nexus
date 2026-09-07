@@ -6,15 +6,15 @@ Un exercice d'analyse imprime comme exercice d'arithmetique ou d'inference bayes
 
 ## Population canonique
 
-- `CLONE_GROUPS_TOTAL` : `6`
-- `CLONED_OBJECTS_TOTAL` : `20`
-- `EXACT_CLONES` : `20`
+- `CLONE_GROUPS_TOTAL` : `11`
+- `CLONED_OBJECTS_TOTAL` : `38`
+- `EXACT_CLONES` : `38`
 - `NEAR_CLONES` : `0`
 - `CROSS_MANUAL_CONTAMINATION_GROUPS` : `0`
 - `CROSS_MANUAL_CONTAMINATION_OBJECTS` : `0`
 - `CAPACITY_MISREPRESENTING_GROUPS` : `0`
 - `CONTAMINATED_APPROVED_OBJECTS` : `0`
-- `GROUPS_WITHOUT_CANONICAL_SOURCE` : `6`
+- `GROUPS_WITHOUT_CANONICAL_SOURCE` : `11`
 - `UNSCANNED_CANONICAL_CHAPTERS` : `0`
 
 ## Preuve de normalisation
@@ -27,8 +27,8 @@ Un exercice d'analyse imprime comme exercice d'arithmetique ou d'inference bayes
 | metrique | annonce | recalcule | accord |
 | --- | --- | --- | --- |
 | `CAPACITY_MISREPRESENTING_GROUPS` | 92 | 0 | NON |
-| `CLONED_OBJECTS_TOTAL` | 917 | 20 | NON |
-| `CLONE_GROUPS_TOTAL` | 124 | 6 | NON |
+| `CLONED_OBJECTS_TOTAL` | 917 | 38 | NON |
+| `CLONE_GROUPS_TOTAL` | 124 | 11 | NON |
 | `CONTAMINATED_OBJECTS_TOTAL` | 1021 | 0 | NON |
 | `CONTAMINATED_OBJECTS_WITH_APPROVED_STATUS` | 997 | 0 | NON |
 | `CROSS_MANUAL_CONTAMINATION_OBJECTS` | 903 | 0 | NON |
