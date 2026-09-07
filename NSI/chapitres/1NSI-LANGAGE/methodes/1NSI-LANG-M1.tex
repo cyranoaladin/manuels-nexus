@@ -1,0 +1,85 @@
+% META: {"id": "1NSI-LANG-M1", "chapitre": "1NSI-LANGAGE", "type_objet": "methode", "capacites": ["P-LANG-03A", "P-LANG-03B", "P-LANG-03C"], "capacites_codes": ["C3", "C6", "C7"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M1}{Spécifier une fonction : prototype, préconditions, postconditions}
+\textbf{Quand l'utiliser ?} \textbf{Avant} d'écrire le corps d'une fonction. Spécifier
+d'abord, c'est décider ce que la fonction promet ; coder ensuite, c'est tenir la promesse.
+Faire l'inverse revient à découvrir ce qu'on voulait après l'avoir écrit.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Le prototype.} Choisis un nom qui dit l'action, puis les paramètres dans
+    l'ordre où on les cite naturellement. Écris la ligne \lstinline{def} et rien d'autre.
+  \item \textbf{Les préconditions} — ce que la fonction \textbf{exige} de l'appelant.
+    Demande-toi : quelles valeurs feraient perdre son sens à la fonction ? Types, bornes,
+    relations entre paramètres (« les deux listes ont la même longueur »).
+  \item \textbf{Les postconditions} — ce que la fonction \textbf{garantit} en retour, quand
+    les préconditions sont respectées. Que vaut le résultat, dans quel intervalle, et
+    qu'est-ce qui n'a pas été modifié.
+  \item \textbf{Écris la docstring} en trois temps : ce que fait la fonction, ce qu'elle
+    exige, ce qu'elle garantit.
+  \item \textbf{Rends les préconditions exécutables} avec des \lstinline{assert}. Une
+    précondition écrite en commentaire n'arrête personne ; un \lstinline{assert} arrête au
+    premier appel fautif, à l'endroit où la faute a été commise.
+\end{enumerate}
+
+\textbf{Exemple :}
+\begin{python}
+def moyenne_ponderee(valeurs, poids):
+    """Moyenne de `valeurs` ponderee par `poids`.
+
+    Precondition  : meme longueur, non vides, somme des poids non nulle.
+    Postcondition : le resultat est compris entre min(valeurs) et max(valeurs) ;
+                    ni `valeurs` ni `poids` ne sont modifiees.
+    """
+    assert len(valeurs) == len(poids), "listes de longueurs differentes"
+    assert len(valeurs) > 0, "listes vides"
+    assert sum(poids) != 0, "somme des poids nulle"
+    total = sum(v * p for v, p in zip(valeurs, poids))
+    return total / sum(poids)
+\end{python}
+
+% BEGIN-VERIFY
+% def moyenne_ponderee(valeurs, poids):
+%     assert len(valeurs) == len(poids), "listes de longueurs differentes"
+%     assert len(valeurs) > 0, "listes vides"
+%     assert sum(poids) != 0, "somme des poids nulle"
+%     total = sum(v * p for v, p in zip(valeurs, poids))
+%     return total / sum(poids)
+% # la postcondition annoncee tient
+% valeurs, poids = [12, 15, 18], [1, 2, 1]
+% m = moyenne_ponderee(valeurs, poids)
+% assert min(valeurs) <= m <= max(valeurs)
+% assert m == 15.0
+% # les arguments ne sont pas modifies
+% assert valeurs == [12, 15, 18] and poids == [1, 2, 1]
+% # chaque precondition violee est refusee a l'entree, pas plus loin
+% for args in ([[12, 15, 18], [1, 2]], [[], []], [[1, 2], [1, -1]]):
+%     refuse = False
+%     try:
+%         moyenne_ponderee(*args)
+%     except AssertionError:
+%         refuse = True
+%     assert refuse, args
+% # sans assert, la longueur inegale ne planterait pas : zip tronque en silence
+% assert list(zip([12, 15, 18], [1, 2])) == [(12, 1), (15, 2)]
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Confondre exiger et garantir.} « Les listes ont la même longueur » est une
+    exigence sur l'appelant. « Le résultat est entre le minimum et le maximum » est une
+    promesse de la fonction. Les intervertir rend la spécification inutilisable.
+  \item Écrire une précondition qu'on ne vérifie pas. Ici, sans les \lstinline{assert},
+    \lstinline{zip} tronque silencieusement à la plus courte des deux listes et la fonction
+    renvoie un nombre — un nombre faux.
+  \item Spécifier après avoir codé : on décrit alors ce que le code fait, y compris ses
+    bugs, au lieu de ce qu'il devait faire.
+  \item Oublier de dire ce qui \textbf{n'est pas} modifié. « Ne modifie pas ses arguments »
+    est une postcondition à part entière, et l'appelant en dépend.
+\end{itemize}
+
+\textbf{Vérifier :} pour chaque précondition, écris un appel qui la viole et vérifie qu'il
+est refusé. Pour la postcondition, écris un appel valide et vérifie que la promesse est
+tenue.
+
+\textbf{S'entraîner :} exercices C3, C6 et C7 du chapitre.
+\end{fichemethode}

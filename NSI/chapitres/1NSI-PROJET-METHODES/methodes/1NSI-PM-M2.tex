@@ -1,0 +1,80 @@
+% META: {"id": "1NSI-PM-M2", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "methode", "capacites": ["BO-PREAMBULE-COMPETENCES-ORALES"], "capacites_codes": ["C4"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M2}{Documenter son code et préparer l'oral}
+\textbf{Quand l'utiliser ?} Dans les derniers jours d'un projet — mais la documentation, elle,
+s'écrit au fur et à mesure. Documenter n'est pas raconter ce que fait le code : le code le
+dit déjà. C'est écrire ce que le code ne peut pas dire.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Dans le code : une docstring par fonction.} Ce qu'elle fait, ce qu'elle
+    exige, ce qu'elle garantit. Trois lignes suffisent, et elles servent au premier lecteur
+    — qui sera toi, dans trois semaines.
+  \item \textbf{Dans le code : commenter le \emph{pourquoi}, jamais le \emph{quoi}.}
+    \lstinline{i = i + 1  # on incremente i} n'apprend rien.
+    \lstinline{# on saute l'en-tete, deja lue plus haut} apprend quelque chose.
+  \item \textbf{À côté du code : un fichier \lstinline{README}.} Quatre points, dans cet
+    ordre : à quoi sert le programme, comment l'installer, comment le lancer, ce qui ne
+    marche pas encore. Le dernier point est le plus utile et le plus souvent omis.
+  \item \textbf{Pour l'oral : choisis un fil.} Le problème, la solution, une difficulté
+    rencontrée, ce que tu ferais autrement. Pas un tour du code fonction par fonction —
+    personne ne suit.
+  \item \textbf{Prépare une démonstration qui marche}, sur un jeu de données que tu as
+    testé. Et prévois ce que tu diras si elle échoue quand même : expliquer un échec
+    calmement vaut mieux que le masquer.
+  \item \textbf{Répète à voix haute, en temps réel, au moins une fois.} On découvre alors
+    qu'on parle trois minutes de l'introduction et trente secondes du résultat.
+\end{enumerate}
+
+\textbf{Exemple de \lstinline{README} :}
+
+\begin{console}
+# Carnet de notes
+
+Calcule les moyennes d'une classe a partir d'un fichier CSV.
+
+## Installer
+Python 3.10 ou plus. Aucune bibliotheque externe.
+
+## Lancer
+    python3 carnet.py eleves.csv
+
+## Limites connues
+- Une note manquante fait echouer l'import (message clair, pas de plantage).
+- Les coefficients sont figes dans le code, pas encore parametrables.
+\end{console}
+
+\textbf{Plan d'oral en cinq minutes :}
+\begin{center}
+\begin{tabular}{c|l|l}
+temps & partie & ce qu'on y met \\
+\hline
+$30$ s & le problème & pourquoi ce programme existe \\
+$1$ min & la solution & le principe, pas le code \\
+$1$ min $30$ & démonstration & un cas nominal, un cas d'erreur \\
+$1$ min & une difficulté & ce qui a coincé, comment c'est résolu \\
+$1$ min & recul & ce qui manque, ce que je referais autrement \\
+\end{tabular}
+\end{center}
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Documenter à la fin.} On ne se souvient plus des raisons, et on paraphrase le
+    code au lieu de l'expliquer.
+  \item \textbf{Cacher les limites.} Un \lstinline{README} qui annonce ce qui ne marche pas
+    inspire confiance ; un jury découvre toujours les limites, et mieux vaut que ce soit toi
+    qui les nommes.
+  \item Lire ses diapositives. Elles portent des mots-clés et des images, pas le texte de
+    l'exposé.
+  \item Dérouler le code fonction par fonction : c'est le plan du fichier, pas celui d'un
+    exposé. Le jury veut le raisonnement, pas l'inventaire.
+  \item Ne pas répéter en temps réel : c'est la seule façon de découvrir qu'on a préparé
+    douze minutes pour un créneau de cinq.
+\end{itemize}
+
+\textbf{Vérifier :} donne ton \lstinline{README} à quelqu'un qui n'a pas travaillé sur le
+projet et demande-lui de lancer le programme sans autre aide. S'il n'y arrive pas, ce n'est
+pas lui qui a un problème. Pour l'oral, chronomètre-toi : dépasser, c'est se faire couper
+avant la conclusion.
+
+\textbf{S'entraîner :} exercices C4 du chapitre.
+\end{fichemethode}

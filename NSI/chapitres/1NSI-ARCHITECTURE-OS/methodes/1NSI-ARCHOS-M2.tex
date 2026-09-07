@@ -1,0 +1,68 @@
+% META: {"id": "1NSI-ARCHOS-M2", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "methode", "capacites": ["P-ARCH-03B"], "capacites_codes": ["C4"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M2}{Se repérer et agir en ligne de commande}
+\textbf{Quand l'utiliser ?} Chaque fois que tu ouvres un terminal. La ligne de commande n'a
+pas de fenêtre pour te dire où tu es : c'est à toi de le demander, et l'ordre des questions
+est toujours le même.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Où suis-je ?} \lstinline{pwd} affiche le chemin absolu du dossier courant.
+    Pose cette question \textbf{avant} toute commande qui modifie quelque chose.
+  \item \textbf{Que contient ce dossier ?} \lstinline{ls} liste les noms ;
+    \lstinline{ls -l} ajoute droits, propriétaire et taille ; \lstinline{ls -a} montre les
+    fichiers cachés, dont le nom commence par un point.
+  \item \textbf{Comment m'y déplacer ?} \lstinline{cd nom} descend d'un cran,
+    \lstinline{cd ..} remonte, \lstinline{cd} seul ramène au dossier personnel. Après chaque
+    \lstinline{cd}, refais \lstinline{pwd}.
+  \item \textbf{Agir.} \lstinline{mkdir} crée un dossier, \lstinline{cp source destination}
+    copie, \lstinline{mv} déplace ou renomme, \lstinline{rm} supprime. Avant une commande
+    destructrice, refais \lstinline{ls} pour voir sur quoi elle va porter.
+  \item \textbf{En cas de doute sur une commande}, lis sa page de manuel :
+    \lstinline{man ls}. Le manuel est sur la machine, pas besoin d'Internet.
+\end{enumerate}
+
+\textbf{Exemple :} créer un dossier de projet et y déposer une copie d'un fichier.
+
+\begin{console}
+$ pwd
+/home/eleve
+$ ls
+notes.txt  photos
+$ mkdir projet-nsi
+$ cp notes.txt projet-nsi/
+$ cd projet-nsi
+$ pwd
+/home/eleve/projet-nsi
+$ ls -l
+-rw-r--r-- 1 eleve eleve 148 sep  7 09:12 notes.txt
+$ cd ..
+$ pwd
+/home/eleve
+\end{console}
+
+\textbf{Chemins :} un chemin qui commence par \lstinline{/} est \textbf{absolu} — il part de
+la racine et vaut depuis n'importe où. Sinon il est \textbf{relatif} : il part du dossier
+courant, donc il ne veut rien dire tant que tu n'as pas fait \lstinline{pwd}.
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Lancer une commande sans savoir où l'on est.} \lstinline{rm notes.txt}
+    supprime un fichier différent selon le dossier courant. \lstinline{pwd} coûte une
+    seconde.
+  \item \textbf{Oublier que \lstinline{rm} est définitif.} Il n'y a pas de corbeille en
+    ligne de commande. \lstinline{rm -r} sur un dossier emporte tout son contenu, sans
+    confirmation.
+  \item Un espace dans un nom de fichier : \lstinline{cd mon dossier} est lu comme deux
+    arguments. Écris \lstinline{cd "mon dossier"} ou \lstinline{cd mon\_dossier}.
+  \item Confondre \lstinline{cp} et \lstinline{mv} : le premier laisse l'original en place,
+    le second le fait disparaître de son ancien emplacement.
+  \item Croire que \lstinline{ls} montre tout : les fichiers de configuration commencent
+    par un point et n'apparaissent qu'avec \lstinline{ls -a}.
+\end{itemize}
+
+\textbf{Vérifier :} après chaque commande qui modifie quelque chose, refais \lstinline{ls}
+et lis le résultat. La ligne de commande ne dit pas qu'elle a réussi : le silence
+\textbf{est} le succès, et c'est \lstinline{ls} qui te le confirme.
+
+\textbf{S'entraîner :} exercices C4 du chapitre.
+\end{fichemethode}

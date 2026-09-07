@@ -1,0 +1,77 @@
+% META: {"id": "1NSI-WEB-M2", "chapitre": "1NSI-WEB-IHM", "type_objet": "methode", "capacites": ["P-IHM-04A", "P-IHM-04B", "P-IHM-04C"], "capacites_codes": ["C7", "C8", "C9"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M2}{Lire un formulaire et choisir entre GET et POST}
+\textbf{Quand l'utiliser ?} Quand on te montre un formulaire et qu'on te demande ce qui est
+transmis, à qui, et comment — ou quand tu dois décider de la méthode à employer dans un
+formulaire que tu écris. Une seule lecture répond aux trois questions.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Lis la balise \lstinline{<form>}.} Deux attributs seulement comptent :
+    \lstinline{action}, qui dit \textbf{à qui} la requête est envoyée, et
+    \lstinline{method}, qui dit \textbf{comment}. Sans \lstinline{method}, c'est
+    \lstinline{GET} par défaut.
+  \item \textbf{Relève chaque champ} et note son attribut \lstinline{name} : c'est ce nom,
+    pas l'étiquette affichée, qui voyage jusqu'au serveur. Un champ sans \lstinline{name}
+    n'est pas transmis du tout.
+  \item \textbf{Déduis la requête.} En \lstinline{GET}, les couples nom-valeur sont collés à
+    l'URL après un \lstinline{?}, séparés par des \lstinline{&} :
+    \lstinline{/recherche?ville=Tunis&jours=3}. En \lstinline{POST}, ils voyagent dans le
+    corps de la requête, invisibles dans la barre d'adresse.
+  \item \textbf{Choisis la méthode} avec deux questions. La requête ne fait-elle que
+    \textbf{lire} ? \lstinline{GET} : l'URL est partageable, marquable en favori,
+    rechargeable sans dommage. Modifie-t-elle quelque chose, ou transporte-t-elle une donnée
+    qu'on ne veut pas voir écrite ? \lstinline{POST}.
+  \item \textbf{Retiens ce que \lstinline{POST} ne fait pas.} Il n'est pas chiffré. Ce qui
+    chiffre, c'est \lstinline{HTTPS}, et lui seul — il protège aussi bien l'URL d'un
+    \lstinline{GET} que le corps d'un \lstinline{POST}.
+\end{enumerate}
+
+\textbf{Exemple :}
+
+\begin{console}
+<form action="/recherche" method="get">
+  <label>Ville  <input type="text" name="ville"></label>
+  <label>Jours  <input type="number" name="jours"></label>
+  <button type="submit">Chercher</button>
+</form>
+\end{console}
+
+Saisie « Tunis » et « 3 » : le navigateur demande
+\lstinline{/recherche?ville=Tunis&jours=3}. Le choix de \lstinline{GET} est correct — la
+requête ne fait que consulter, et l'URL obtenue peut être partagée telle quelle.
+
+Le même formulaire avec un champ \lstinline{name="motdepasse"} devrait passer en
+\lstinline{POST} : en \lstinline{GET}, le mot de passe s'inscrirait dans la barre d'adresse,
+dans l'historique du navigateur et dans les journaux du serveur.
+
+\begin{center}
+\begin{tabular}{l|l|l}
+& \lstinline{GET} & \lstinline{POST} \\
+\hline
+où voyagent les données & dans l'URL & dans le corps \\
+visible dans l'historique & oui & non \\
+URL partageable & oui & non \\
+rechargement sans risque & oui & redemande l'envoi \\
+chiffré & \multicolumn{2}{c}{seulement si HTTPS} \\
+\end{tabular}
+\end{center}
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Croire que \lstinline{POST} chiffre.} Il cache seulement les données de la
+    barre d'adresse ; sur le réseau, sans HTTPS, elles circulent en clair tout autant.
+  \item Prendre l'étiquette affichée pour le nom transmis. C'est \lstinline{name} qui part,
+    et un champ sans \lstinline{name} ne part pas — d'où des valeurs manquantes côté serveur
+    sans le moindre message d'erreur.
+  \item Employer \lstinline{GET} pour une action qui modifie : le rechargement de la page la
+    rejoue, et un lien partagé la déclenche chez quelqu'un d'autre.
+  \item Oublier que \lstinline{GET} est la valeur par défaut : un \lstinline{<form>} sans
+    \lstinline{method} met tout dans l'URL, y compris ce qu'on croyait discret.
+\end{itemize}
+
+\textbf{Vérifier :} soumets le formulaire et lis la barre d'adresse. Si tu vois tes valeurs,
+c'est un \lstinline{GET} — et il faut alors se demander si l'une d'elles n'aurait pas dû
+rester hors de l'URL.
+
+\textbf{S'entraîner :} exercices C7, C8 et C9 du chapitre.
+\end{fichemethode}

@@ -1,0 +1,84 @@
+% META: {"id": "1NSI-TB-M3", "chapitre": "1NSI-TYPES-BASE", "type_objet": "methode", "capacites": ["P-BASE-04"], "capacites_codes": ["C4"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M3}{Dresser la table de vérité d'une expression booléenne}
+\textbf{Quand l'utiliser ?} Quand on te demande si deux expressions sont équivalentes, quand
+une condition dans un programme se comporte autrement que prévu, ou quand tu dois prouver
+qu'une expression est toujours vraie.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item Repère les \textbf{variables} de l'expression. S'il y en a $n$, la table aura
+    $2^{n}$ lignes — et pas une de moins : une ligne manquante, c'est un cas non examiné.
+  \item Remplis les colonnes des variables de façon \textbf{systématique}. La colonne la plus
+    à droite alterne $0,1,0,1,\dots$ ; la suivante par paquets de deux ; la suivante par
+    paquets de quatre. Ainsi aucune combinaison n'est oubliée ni écrite deux fois.
+  \item Ajoute une colonne par \textbf{sous-expression}, de la plus intérieure à la plus
+    extérieure. N'essaie pas d'évaluer l'expression entière d'un coup.
+  \item Remplis ligne par ligne, en n'utilisant que les colonnes déjà calculées.
+  \item Conclus : lis la dernière colonne. Que des $1$ ? l'expression est toujours vraie.
+    Que des $0$ ? toujours fausse. Pour comparer deux expressions, compare leurs deux
+    colonnes finales, ligne à ligne.
+\end{enumerate}
+
+\textbf{Exemple :} montrer que \lstinline{not (a and b)} équivaut à
+\lstinline{(not a) or (not b)}.
+
+\begin{center}
+\begin{tabular}{cc|c|c|cc|c}
+$a$ & $b$ & \lstinline{a and b} & \lstinline{not (a and b)} & \lstinline{not a} & \lstinline{not b} & \lstinline{(not a) or (not b)} \\
+\hline
+$0$ & $0$ & $0$ & $1$ & $1$ & $1$ & $1$ \\
+$0$ & $1$ & $0$ & $1$ & $1$ & $0$ & $1$ \\
+$1$ & $0$ & $0$ & $1$ & $0$ & $1$ & $1$ \\
+$1$ & $1$ & $1$ & $0$ & $0$ & $0$ & $0$ \\
+\end{tabular}
+\end{center}
+
+Les deux dernières colonnes coïncident sur les quatre lignes : les expressions sont
+équivalentes. C'est l'une des deux lois de De Morgan.
+
+\begin{python}
+from itertools import product
+
+for a, b in product([False, True], repeat=2):
+    gauche = not (a and b)
+    droite = (not a) or (not b)
+    print(int(a), int(b), int(gauche), int(droite))
+\end{python}
+
+% BEGIN-VERIFY
+% from itertools import product
+% # la table a bien 2^n lignes
+% lignes = list(product([False, True], repeat=2))
+% assert len(lignes) == 4
+% # De Morgan, verifiee ligne a ligne
+% for a, b in lignes:
+%     assert (not (a and b)) == ((not a) or (not b))
+%     assert (not (a or b)) == ((not a) and (not b))
+% # la colonne finale de not (a and b) est exactement 1,1,1,0
+% colonne = [int(not (a and b)) for a, b in lignes]
+% assert colonne == [1, 1, 1, 0]
+% # trois variables : huit lignes, aucune repetee
+% triplets = list(product([False, True], repeat=3))
+% assert len(triplets) == 8 and len(set(triplets)) == 8
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item Oublier des lignes. Avec trois variables il en faut \textbf{huit}. Une table
+    incomplète peut faire conclure à une équivalence qui n'existe pas.
+  \item Remplir les colonnes de variables « au hasard » : on écrit deux fois la même
+    combinaison et on en oublie une autre sans s'en apercevoir. L'alternance
+    $1,2,4,\dots$ garantit qu'on les a toutes.
+  \item Évaluer \lstinline{not a and b} comme \lstinline{not (a and b)} : \lstinline{not}
+    est prioritaire, cette expression signifie \lstinline{(not a) and b}. En cas de doute,
+    mets les parenthèses.
+  \item Conclure d'une seule ligne. Une ligne où les deux expressions coïncident ne prouve
+    rien : il faut les $2^{n}$.
+\end{itemize}
+
+\textbf{Vérifier :} compte tes lignes ($2^{n}$), puis vérifie qu'aucune combinaison n'est
+écrite deux fois. Si tu as accès à un interpréteur, la boucle ci-dessus reconstruit la table
+et confirme ta lecture.
+
+\textbf{S'entraîner :} exercices C4 du chapitre.
+\end{fichemethode}

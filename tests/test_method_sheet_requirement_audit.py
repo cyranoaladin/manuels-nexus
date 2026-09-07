@@ -90,20 +90,33 @@ def test_a_coverage_claim_must_name_a_file_that_exists(monkeypatch) -> None:
         audit.audit_chapter(ROOT, ROOT / "NSI/chapitres/1NSI-PROJET-METHODES")
 
 
-def test_the_only_coverage_claim_is_the_debugging_procedure(payload) -> None:
-    """Une seule capacité est dite déjà couverte hors chapitres pourvus."""
+def test_every_coverage_claim_points_at_a_written_procedure(payload) -> None:
+    """« Déjà couvert » doit désigner un objet qui écrit vraiment la démarche.
+
+    Ce test visait la seule revendication hors des chapitres pourvus, tant que
+    les sept autres chapitres étaient vides. Ils ne le sont plus. Il vérifie
+    donc la règle : toute revendication nomme un chemin existant, et la
+    revendication qui porte sur un objet précis — la démarche de débogage —
+    désigne un fichier où la suite d'étapes est réellement écrite.
+    """
     claims = [
         (row["chapter"], c["code"], c["covered_by"])
         for row in payload["chapters"]
         for c in row["capacities"]
         if c["verdict"] == decisions.PROCEDURAL_COVERED
-        and not row["existing_method_objects"]
     ]
-    assert claims == [(
-        "1NSI-PROJET-METHODES", "C3",
-        "NSI/chapitres/1NSI-PROJET-METHODES/cours/1NSI-PM-COURS-C3.tex",
-    )]
-    text = (ROOT / claims[0][2]).read_text(encoding="utf-8")
+    assert claims, "aucune revendication : le test ne prouverait rien"
+    for _, _, covered_by in claims:
+        assert covered_by, "une couverture sans objet nommé serait gratuite"
+        assert (ROOT / covered_by).exists(), covered_by
+
+    debugging = next(
+        c for chapter, code, c in claims
+        if (chapter, code) == ("1NSI-PROJET-METHODES", "C3")
+    )
+    assert debugging == \
+        "NSI/chapitres/1NSI-PROJET-METHODES/cours/1NSI-PM-COURS-C3.tex"
+    text = (ROOT / debugging).read_text(encoding="utf-8")
     assert "Démarche méthodique de débogage" in text
     assert "\\begin{enumerate}" in text
 

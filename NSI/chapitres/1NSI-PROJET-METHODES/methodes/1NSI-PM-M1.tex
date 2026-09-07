@@ -1,0 +1,65 @@
+% META: {"id": "1NSI-PM-M1", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "methode", "capacites": ["BO-PREAMBULE-DEMARCHE-DE-PROJET"], "capacites_codes": ["C2"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M1}{Découper un projet en jalons}
+\textbf{Quand l'utiliser ?} Au démarrage d'un projet, avant d'écrire la moindre ligne. Un
+projet qui commence par du code se termine par une veille de rendu ; un projet qui commence
+par des jalons se termine à l'heure, même incomplet — et un projet incomplet mais qui
+fonctionne vaut mieux qu'un projet entier qui ne compile pas.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Écris le besoin en une phrase.} « Une application qui permet à un
+    utilisateur de \dots ». Si la phrase ne tient pas en une ligne, le projet n'est pas
+    encore compris.
+  \item \textbf{Liste les livrables} : ce qui sera effectivement remis. Un programme, un
+    jeu de tests, une documentation, une présentation. Un livrable est une chose qu'on peut
+    déposer, pas une intention.
+  \item \textbf{Découpe en jalons.} Un jalon, c'est une \textbf{date} et un
+    \textbf{état vérifiable} — « le 12 mars, l'import du fichier fonctionne et ses tests
+    passent ». « Avancer sur l'import » n'est pas un jalon : on ne peut pas dire s'il est
+    atteint.
+  \item \textbf{Ordonne par dépendance, pas par envie.} Ce qui bloque le reste passe
+    d'abord. Le premier jalon doit produire quelque chose qui \textbf{tourne}, même minuscule.
+  \item \textbf{Répartis les rôles} en nommant, pour chaque jalon, qui en répond. Un jalon
+    sans responsable est un jalon que personne ne fait.
+  \item \textbf{Prévois une marge.} Le dernier jalon n'est jamais la date de rendu : garde au
+    moins un quart du temps pour l'assemblage, les tests et l'imprévu.
+\end{enumerate}
+
+\textbf{Exemple :} un carnet de notes de classe, à rendre le $30$ mars.
+
+\begin{center}
+\begin{tabular}{c|l|l|c}
+jalon & date & état vérifiable & qui \\
+\hline
+J1 & 5 mars & le CSV s'importe, \lstinline{len(table)} est correct & Ines \\
+J2 & 12 mars & filtre et tri fonctionnent, tests écrits & Karim \\
+J3 & 19 mars & moyennes calculées, cas limites testés & Ines \\
+J4 & 23 mars & interface minimale, tous les jalons assemblés & les deux \\
+J5 & 27 mars & documentation écrite, oral répété une fois & les deux \\
+& \textbf{30 mars} & \textbf{rendu} & \\
+\end{tabular}
+\end{center}
+
+Trois jours de marge entre J5 et le rendu. Ce n'est pas du temps perdu : c'est le seul temps
+qui reste quand un jalon dérape.
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Des jalons non vérifiables.} « Travailler sur l'interface » ne se coche pas.
+    Un jalon se formule de sorte qu'un tiers puisse dire oui ou non.
+  \item \textbf{Placer le plus difficile en dernier.} Ce qui fait peur doit passer tôt :
+    c'est là que se cachent les surprises, et on veut les découvrir quand il reste du temps.
+  \item Découper par personne au lieu de découper par livrable : chacun avance seul, et rien
+    ne s'assemble.
+  \item \textbf{Ne pas garder de marge.} Le premier retard mange alors le rendu. Une marge
+    inutilisée n'est pas une erreur d'estimation, c'est une réussite.
+  \item Ne jamais revoir le plan. Un jalon manqué se constate le jour dit, et on réduit
+    aussitôt la suite — on ne rattrape pas en travaillant plus vite.
+\end{itemize}
+
+\textbf{Vérifier :} relis chaque jalon et demande-toi « comment saurai-je, ce jour-là, qu'il
+est atteint ? ». Si tu ne sais pas répondre, reformule-le. Vérifie aussi que le premier
+jalon produit quelque chose d'exécutable : c'est le meilleur remède contre l'effet tunnel.
+
+\textbf{S'entraîner :} exercices C2 du chapitre.
+\end{fichemethode}

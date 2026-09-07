@@ -1,0 +1,77 @@
+% META: {"id": "1NSI-LANG-M3", "chapitre": "1NSI-LANGAGE", "type_objet": "methode", "capacites": ["P-LANG-05"], "capacites_codes": ["C5"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M3}{Trouver une fonction dans la documentation d'une bibliothèque}
+\textbf{Quand l'utiliser ?} Quand tu as besoin d'une opération que tu ne veux pas
+reprogrammer — trier, tirer au hasard, lire une date — et que tu supposes qu'elle existe
+déjà. Aucune connaissance exhaustive des bibliothèques n'est exigée : savoir chercher
+remplace savoir par cœur.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Nomme ton besoin en une phrase} : « tirer un entier au hasard entre deux
+    bornes ». Les mots de cette phrase sont tes mots-clés.
+  \item \textbf{Devine le module.} Le hasard, c'est \lstinline{random} ; les maths,
+    \lstinline{math} ; les dates, \lstinline{datetime} ; les fichiers tabulés,
+    \lstinline{csv}. En cas de doute, \lstinline{help("modules")} les liste.
+  \item \textbf{Liste ce que le module offre} avec \lstinline{dir(module)}, et repère les
+    noms proches de ton besoin.
+  \item \textbf{Lis la fiche de la fonction} avec \lstinline{help(module.fonction)}. Trois
+    choses seulement t'intéressent : les \textbf{paramètres} et leur ordre, la
+    \textbf{valeur de retour}, et les \textbf{bornes} — incluses ou exclues ?
+  \item \textbf{Essaie sur un cas dont tu connais la réponse} avant de l'employer pour de
+    bon. Une fonction mal comprise est pire qu'une fonction absente : elle ne plante pas.
+\end{enumerate}
+
+\textbf{Exemple :} « tirer un entier au hasard entre $1$ et $6$ ».
+
+\begin{python}
+import random
+
+[n for n in dir(random) if "int" in n]   # ['getrandbits', 'randint', 'randrange']
+help(random.randint)
+# randint(a, b) -> Return random integer in range [a, b], including both end points.
+\end{python}
+
+La fiche dit \textbf{including both end points} : les deux bornes sont possibles.
+\lstinline{random.randint(1, 6)} convient. Attention, \lstinline{random.randrange(1, 6)}
+n'atteint jamais $6$ : la borne haute y est exclue, comme dans \lstinline{range}.
+
+% BEGIN-VERIFY
+% import random
+% # randint : les deux bornes sont atteignables
+% random.seed(2026)
+% tirages = [random.randint(1, 6) for _ in range(2000)]
+% assert min(tirages) == 1 and max(tirages) == 6
+% assert set(tirages) == {1, 2, 3, 4, 5, 6}
+% # randrange : la borne haute est exclue, comme range
+% random.seed(2026)
+% autres = [random.randrange(1, 6) for _ in range(2000)]
+% assert max(autres) == 5 and 6 not in autres
+% # la docstring dit exactement cela, et c'est elle qui tranche
+% assert "including both end points" in random.randint.__doc__
+% # le module expose bien ces noms : dir() permet de les trouver
+% assert "randint" in dir(random) and "randrange" in dir(random)
+% # une graine fixee rend le tirage reproductible : indispensable pour tester
+% random.seed(1); premier = random.randint(1, 6)
+% random.seed(1); assert random.randint(1, 6) == premier
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Supposer les bornes.} \lstinline{randint(1, 6)} atteint $6$,
+    \lstinline{randrange(1, 6)} ne l'atteint jamais, \lstinline{range(1, 6)} non plus. Un
+    dé programmé avec \lstinline{randrange} ne fait jamais $6$, et le programme ne signale
+    rien.
+  \item Recopier un exemple trouvé en ligne sans lire la fiche : l'ordre des paramètres ou
+    la valeur de retour peuvent différer d'une version à l'autre.
+  \item Réécrire une fonction qui existe déjà : plus longue à écrire, et plus sûrement
+    fausse.
+  \item Ne pas fixer de graine quand on teste du hasard : le test passe une fois sur deux,
+    et personne ne sait pourquoi. \lstinline{random.seed(...)} rend le tirage reproductible.
+\end{itemize}
+
+\textbf{Vérifier :} tire mille valeurs et regarde le minimum et le maximum obtenus. Ils
+doivent être exactement les bornes que tu attends. C'est le contrôle qui démasque une borne
+exclue prise pour incluse.
+
+\textbf{S'entraîner :} exercices C5 du chapitre.
+\end{fichemethode}

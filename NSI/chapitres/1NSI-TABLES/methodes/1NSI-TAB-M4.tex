@@ -1,0 +1,90 @@
+% META: {"id": "1NSI-TAB-M4", "chapitre": "1NSI-TABLES", "type_objet": "methode", "capacites": ["P-TABLE-04"], "capacites_codes": ["C4"], "methodes": ["M4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M4}{Fusionner deux tables par une clé commune}
+\textbf{Quand l'utiliser ?} Quand l'information est répartie sur deux fichiers et qu'une
+question porte sur les deux à la fois : les notes d'un côté, les coordonnées de l'autre,
+reliées par un identifiant.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Identifie la clé commune} : la colonne présente dans les deux tables et qui
+    désigne la même chose. Vérifie qu'elle est bien \textbf{unique} dans au moins l'une des
+    deux — sinon la fusion multipliera les lignes.
+  \item \textbf{Indexe la seconde table} par cette clé, dans un dictionnaire
+    \lstinline{{valeur_de_cle: ligne}}. C'est l'étape qui fait tout : sans elle, on
+    reparcourt la seconde table pour chaque ligne de la première.
+  \item \textbf{Parcours la première table} et, pour chaque ligne, va chercher la ligne
+    correspondante dans l'index.
+  \item \textbf{Décide du sort des lignes sans correspondance} : les écarter, ou les garder
+    avec des champs vides. Ce choix change le résultat — écris-le noir sur blanc.
+  \item \textbf{Projette} : construis la ligne fusionnée en ne gardant que les colonnes
+    utiles, et sans écraser deux colonnes de même nom.
+\end{enumerate}
+
+\textbf{Exemple :}
+\begin{python}
+def fusionner(gauche, droite, cle):
+    """Joint deux tables sur `cle`. Les lignes sans correspondance sont ecartees."""
+    index = {ligne[cle]: ligne for ligne in droite}
+    resultat = []
+    for ligne in gauche:
+        appariee = index.get(ligne[cle])
+        if appariee is not None:
+            resultat.append({**ligne, **appariee})
+    return resultat
+\end{python}
+
+% BEGIN-VERIFY
+% notes = [
+%     {"id": "e1", "points": 17},
+%     {"id": "e2", "points": 9},
+%     {"id": "e9", "points": 12},
+% ]
+% eleves = [
+%     {"id": "e1", "nom": "Ines"},
+%     {"id": "e2", "nom": "Karim"},
+%     {"id": "e3", "nom": "Lou"},
+% ]
+% def fusionner(gauche, droite, cle):
+%     index = {ligne[cle]: ligne for ligne in droite}
+%     resultat = []
+%     for ligne in gauche:
+%         appariee = index.get(ligne[cle])
+%         if appariee is not None:
+%             resultat.append({**ligne, **appariee})
+%     return resultat
+% jointe = fusionner(notes, eleves, "id")
+% assert [l["nom"] for l in jointe] == ["Ines", "Karim"]
+% assert jointe[0] == {"id": "e1", "points": 17, "nom": "Ines"}
+% # e9 n'a pas d'eleve, e3 n'a pas de note : les deux disparaissent
+% assert len(jointe) == 2 < min(len(notes), len(eleves)) + 1
+% assert "e9" not in [l["id"] for l in jointe]
+% assert "Lou" not in [l["nom"] for l in jointe]
+% # une cle dupliquee a droite : l'index n'en garde qu'une, silencieusement
+% doublons = [{"id": "e1", "nom": "Ines"}, {"id": "e1", "nom": "Autre"}]
+% index = {l["id"]: l for l in doublons}
+% assert len(index) == 1 and index["e1"]["nom"] == "Autre"
+% # colonnes homonymes : la droite ecrase la gauche
+% assert {**{"x": 1}, **{"x": 2}} == {"x": 2}
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Une clé dupliquée dans la table indexée.} Le dictionnaire n'en garde que la
+    dernière, sans le moindre message. Contrôle d'abord :
+    \lstinline{len(index) == len(droite)}.
+  \item \textbf{Ne pas décider du sort des lignes orphelines.} Ici elles sont écartées, donc
+    la table fusionnée est plus courte que les deux. Si on attendait toutes les lignes de
+    gauche, le résultat est silencieusement amputé.
+  \item \textbf{Deux colonnes de même nom dans les deux tables.} Avec
+    \lstinline{{**gauche, **droite}}, celle de droite écrase celle de gauche. Renomme avant
+    de fusionner si les deux comptent.
+  \item Comparer des clés de types différents : \lstinline{"12"} et \lstinline{12} ne
+    s'apparient jamais. C'est encore la conversion oubliée à l'import.
+\end{itemize}
+
+\textbf{Vérifier :} compare \lstinline{len(jointe)} au nombre de clés réellement communes.
+Si la fusion est plus \textbf{longue} que les deux tables, une clé est dupliquée ; si elle
+est plus courte que prévu, des lignes n'ont pas trouvé de correspondance.
+
+\textbf{S'entraîner :} exercices C4 du chapitre.
+\end{fichemethode}

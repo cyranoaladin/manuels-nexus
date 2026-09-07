@@ -1,0 +1,83 @@
+% META: {"id": "1NSI-TAB-M1", "chapitre": "1NSI-TABLES", "type_objet": "methode", "capacites": ["P-TABLE-01"], "capacites_codes": ["C1"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M1}{Importer une table depuis un fichier CSV}
+\textbf{Quand l'utiliser ?} Au tout début de chaque traitement de données : avant de
+filtrer, de trier ou de fusionner, il faut amener le fichier en mémoire sous une forme
+exploitable — une liste de dictionnaires, un dictionnaire par ligne.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Ouvre d'abord le fichier dans un éditeur de texte.} Repère le séparateur
+    (virgule, point-virgule, tabulation), la présence d'une ligne d'en-tête, et l'encodage.
+    Cette lecture de trente secondes évite la moitié des erreurs.
+  \item Ouvre le fichier avec \lstinline{open(chemin, encoding="utf-8", newline="")} dans un
+    bloc \lstinline{with} : le fichier se refermera tout seul, même en cas d'erreur.
+  \item Construis un \lstinline{csv.DictReader}. Il lit la première ligne comme en-tête et
+    fabrique un dictionnaire par ligne, dont les clés sont les noms de colonnes.
+  \item \textbf{Matérialise la table} avec \lstinline{list(...)}. Un lecteur ne se parcourt
+    qu'une fois ; une liste se reparcourt autant qu'on veut.
+  \item \textbf{Convertis les colonnes numériques.} Tout ce qui sort d'un CSV est une
+    \textbf{chaîne}. Sans conversion, \lstinline{"9" > "10"} est vrai et tous tes tris
+    seront faux.
+\end{enumerate}
+
+\textbf{Exemple :}
+\begin{python}
+import csv
+
+def importer(chemin, entiers=()):
+    """Renvoie la table du fichier CSV, colonnes `entiers` converties en int."""
+    with open(chemin, encoding="utf-8", newline="") as f:
+        table = list(csv.DictReader(f))
+    for ligne in table:
+        for colonne in entiers:
+            ligne[colonne] = int(ligne[colonne])
+    return table
+
+# eleves.csv :  nom,classe,points
+#               Ines,1G2,17
+#               Karim,1G1,9
+table = importer("eleves.csv", entiers=("points",))
+table[0]["nom"]       # 'Ines'
+table[0]["points"]    # 17, un entier, pas '17'
+\end{python}
+
+% BEGIN-VERIFY
+% import csv, io
+% contenu = "nom,classe,points\nInes,1G2,17\nKarim,1G1,9\nLou,1G2,10\n"
+% table = list(csv.DictReader(io.StringIO(contenu)))
+% assert len(table) == 3
+% assert list(table[0].keys()) == ["nom", "classe", "points"]
+% assert table[0]["nom"] == "Ines"
+% # sans conversion, tout est chaine
+% assert table[0]["points"] == "17" and isinstance(table[0]["points"], str)
+% # et la comparaison lexicographique est fausse pour des nombres
+% assert "9" > "10"
+% for ligne in table:
+%     ligne["points"] = int(ligne["points"])
+% assert table[0]["points"] == 17
+% assert not (table[1]["points"] > table[2]["points"])
+% # un lecteur ne se parcourt qu'une fois : la seconde lecture est vide
+% lecteur = csv.DictReader(io.StringIO(contenu))
+% assert len(list(lecteur)) == 3 and len(list(lecteur)) == 0
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Oublier la conversion.} C'est l'erreur la plus fréquente et la plus
+    silencieuse : le programme ne plante pas, il trie mal. Contrôle systématiquement le
+    \lstinline{type} d'une valeur après import.
+  \item Parcourir deux fois le \lstinline{DictReader} : la seconde boucle ne fait rien, et
+    on croit la table vide. D'où le \lstinline{list(...)}.
+  \item Se tromper de séparateur : le fichier se lit sans erreur, mais chaque ligne n'a
+    qu'une seule colonne dont le nom contient tous les autres. Si
+    \lstinline{len(table[0]) == 1}, c'est le symptôme.
+  \item Oublier \lstinline{encoding="utf-8"} : les accents deviennent illisibles selon la
+    machine, et le même programme donne deux résultats différents.
+\end{itemize}
+
+\textbf{Vérifier :} affiche \lstinline{len(table)} — le compte doit valoir le nombre de
+lignes du fichier \textbf{moins l'en-tête} — puis \lstinline{table[0]} en entier, et
+contrôle le type des colonnes numériques.
+
+\textbf{S'entraîner :} exercices C1 du chapitre.
+\end{fichemethode}

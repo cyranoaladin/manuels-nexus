@@ -1,0 +1,84 @@
+% META: {"id": "1NSI-RES-M2", "chapitre": "1NSI-RESEAUX", "type_objet": "methode", "capacites": ["P-ARCH-02C"], "capacites_codes": ["C3"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M2}{Déterminer si deux machines peuvent communiquer}
+\textbf{Quand l'utiliser ?} Quand on te donne deux adresses IP avec leur masque et qu'on te
+demande si les machines se parlent directement. La réponse ne se lit pas sur les adresses :
+elle se calcule.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Écris le masque en binaire.} Un masque \lstinline{/n} est fait de $n$ bits à
+    $1$ suivis de $32-n$ bits à $0$. \lstinline{/24} donne
+    \lstinline{255.255.255.0}, \lstinline{/26} donne \lstinline{255.255.255.192}.
+  \item \textbf{Calcule l'adresse réseau de la première machine} : bit à bit,
+    \lstinline{adresse ET masque}. En pratique, les octets couverts par des $1$ sont
+    recopiés, ceux couverts par des $0$ deviennent $0$, et l'octet à cheval se calcule en
+    binaire.
+  \item \textbf{Fais le même calcul pour la seconde machine}, avec \textbf{son} masque.
+  \item \textbf{Compare les deux adresses réseau.} Identiques : les machines sont sur le
+    même réseau et communiquent directement. Différentes : il leur faut un routeur.
+  \item \textbf{Vérifie que les masques sont les mêmes.} Deux machines du même réseau
+    configurées avec des masques différents ne se voient pas forcément l'une l'autre — la
+    situation est asymétrique, et c'est une panne classique.
+\end{enumerate}
+
+\textbf{Exemple :} \lstinline{192.168.1.130/26} et \lstinline{192.168.1.190/26}
+communiquent-elles ?
+
+Masque \lstinline{/26} : \lstinline{255.255.255.192}, soit \lstinline{11000000} sur le
+dernier octet.
+
+$130 = (10000010)_2$, et $10000010 \text{ ET } 11000000 = 10000000 = 128$.
+
+$190 = (10111110)_2$, et $10111110 \text{ ET } 11000000 = 10000000 = 128$.
+
+Les deux adresses réseau valent \lstinline{192.168.1.128} : \textbf{oui}, elles
+communiquent. En revanche \lstinline{192.168.1.200/26} donnerait
+$200 = (11001000)_2$, donc $11000000 = 192$, soit le réseau
+\lstinline{192.168.1.192} — un autre réseau.
+
+% BEGIN-VERIFY
+% def octets(adresse):
+%     return [int(o) for o in adresse.split(".")]
+% def masque_binaire(n):
+%     bits = "1" * n + "0" * (32 - n)
+%     return [int(bits[i:i+8], 2) for i in range(0, 32, 8)]
+% def adresse_reseau(adresse, n):
+%     return [a & m for a, m in zip(octets(adresse), masque_binaire(n))]
+% # le masque /26 vaut bien 255.255.255.192
+% assert masque_binaire(26) == [255, 255, 255, 192]
+% assert masque_binaire(24) == [255, 255, 255, 0]
+% # les deux premieres machines partagent le reseau 192.168.1.128
+% a = adresse_reseau("192.168.1.130", 26)
+% b = adresse_reseau("192.168.1.190", 26)
+% assert a == b == [192, 168, 1, 128]
+% # la troisieme est sur un autre reseau
+% c = adresse_reseau("192.168.1.200", 26)
+% assert c == [192, 168, 1, 192] and c != a
+% # avec un /24, les trois seraient sur le meme reseau : le masque decide, pas l'adresse
+% for machine in ("192.168.1.130", "192.168.1.190", "192.168.1.200"):
+%     assert adresse_reseau(machine, 24) == [192, 168, 1, 0]
+% # un /26 decoupe l'octet en quatre plages de 64
+% assert [adresse_reseau("192.168.1.%d" % k, 26)[3] for k in (0, 63, 64, 127, 128, 191, 192, 255)] \
+%     == [0, 0, 64, 64, 128, 128, 192, 192]
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Comparer les adresses au lieu des adresses réseau.} \lstinline{192.168.1.190}
+    et \lstinline{192.168.1.200} se ressemblent beaucoup et ne sont pourtant pas sur le même
+    réseau en \lstinline{/26}. C'est le masque qui décide, jamais l'apparence.
+  \item Croire qu'un masque tombe toujours sur une frontière d'octet. \lstinline{/26} coupe
+    au milieu du dernier octet : il faut passer en binaire pour cet octet-là.
+  \item Oublier de refaire le calcul pour la seconde machine avec \textbf{son} masque : s'ils
+    diffèrent, la relation n'est pas symétrique.
+  \item Confondre l'adresse réseau (tous les bits d'hôte à $0$) et l'adresse de diffusion
+    (tous à $1$) : aucune des deux ne peut être attribuée à une machine.
+\end{itemize}
+
+\textbf{Vérifier :} contrôle que ton adresse réseau est bien \textbf{inférieure ou égale} à
+l'adresse de la machine, et que la taille du réseau est cohérente : un \lstinline{/26}
+découpe le dernier octet en quatre plages de $64$, donc les adresses réseau possibles se
+terminent par $0$, $64$, $128$ ou $192$ — et rien d'autre.
+
+\textbf{S'entraîner :} exercices C3 du chapitre.
+\end{fichemethode}

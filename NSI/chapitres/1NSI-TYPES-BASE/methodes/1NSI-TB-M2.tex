@@ -1,0 +1,75 @@
+% META: {"id": "1NSI-TB-M2", "chapitre": "1NSI-TYPES-BASE", "type_objet": "methode", "capacites": ["P-BASE-02"], "capacites_codes": ["C2"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M2}{Compter les bits et écrire en complément à deux}
+\textbf{Quand l'utiliser ?} Quand on te demande combien de bits il faut pour stocker un
+entier, ou quand tu dois écrire un entier \textbf{négatif} sur un nombre de bits imposé.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Combien de bits pour un entier positif $n$ ?} Cherche la plus petite
+    puissance de $2$ strictement supérieure à $n$. Si $2^{k-1} \leqslant n < 2^{k}$, il faut
+    $k$ bits. Autrement dit : compte les chiffres de l'écriture binaire.
+  \item \textbf{Combien de valeurs sur $k$ bits ?} $2^{k}$ valeurs. Non signées :
+    de $0$ à $2^{k}-1$. Signées en complément à deux : de $-2^{k-1}$ à $2^{k-1}-1$ —
+    remarque l'asymétrie, il y a un négatif de plus que de positifs.
+  \item \textbf{Écrire $-n$ en complément à deux sur $k$ bits.} Écris $n$ en binaire sur
+    $k$ bits, inverse tous les bits, ajoute $1$.
+  \item \textbf{Lire un motif signé.} Regarde le bit de gauche. S'il vaut $0$, le nombre est
+    positif : lis-le normalement. S'il vaut $1$, il est négatif : inverse tous les bits,
+    ajoute $1$, lis la valeur obtenue, mets un signe moins devant.
+\end{enumerate}
+
+\textbf{Exemple :} écrire $-42$ sur $8$ bits.
+
+$42 = (00101010)_2$. Inversion : $11010101$. Plus $1$ : $\mathbf{11010110}$.
+
+Contrôle par l'addition : $00101010 + 11010110 = 1\,00000000$. Sur $8$ bits, la retenue
+sortante est perdue et il reste $00000000$, c'est-à-dire $0$. C'est bien l'opposé.
+
+\begin{python}
+def complement_a_deux(n, bits):
+    """Ecriture signee de n sur `bits` bits, en complement a deux."""
+    return format(n & (2**bits - 1), "0%db" % bits)
+
+complement_a_deux(42, 8)    # '00101010'
+complement_a_deux(-42, 8)   # '11010110'
+\end{python}
+
+% BEGIN-VERIFY
+% def complement_a_deux(n, bits):
+%     return format(n & (2**bits - 1), "0%db" % bits)
+% assert complement_a_deux(42, 8) == "00101010"
+% assert complement_a_deux(-42, 8) == "11010110"
+% # inverser puis ajouter 1 redonne bien l'oppose
+% motif = int(complement_a_deux(42, 8), 2)
+% oppose = ((~motif) + 1) & 0xFF
+% assert format(oppose, "08b") == "11010110"
+% # la somme d'un nombre et de son oppose est nulle sur 8 bits
+% assert (motif + oppose) & 0xFF == 0
+% # bornes signees sur 8 bits : -128 a 127, un negatif de plus
+% assert complement_a_deux(-128, 8) == "10000000"
+% assert complement_a_deux(127, 8) == "01111111"
+% # 2026 tient sur 11 bits, pas 10
+% assert 2**10 <= 2026 < 2**11
+% assert len(bin(2026)) - 2 == 11
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item Confondre « $k$ bits suffisent pour $n$ » et « $n$ vaut $2^{k}$ ». Pour $n = 8$ il
+    faut $4$ bits ($1000$), pas $3$ : c'est $2^{3} \leqslant 8$, donc $8$ ne tient pas sur
+    $3$ bits.
+  \item Inverser les bits et oublier le $+1$ : on obtient le complément à \textbf{un}, qui
+    possède deux écritures de zéro et ne se comporte pas comme un opposé.
+  \item Écrire $n$ sur moins de bits que demandé avant d'inverser : l'inversion doit porter
+    sur les $k$ bits, zéros de tête compris.
+  \item Croire que le bit de gauche « vaut $-$ » : il ne signale pas un signe collé devant
+    la valeur, il pèse $-2^{k-1}$ dans la somme. C'est pourquoi $10000000$ vaut $-128$ et
+    non $-0$.
+\end{itemize}
+
+\textbf{Vérifier :} additionne ton résultat au nombre de départ. Sur $k$ bits, la somme doit
+donner tous les bits à zéro. Si ce n'est pas le cas, l'erreur est presque toujours le $+1$
+oublié ou une inversion incomplète.
+
+\textbf{S'entraîner :} exercices C2 du chapitre.
+\end{fichemethode}

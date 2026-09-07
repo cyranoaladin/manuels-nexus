@@ -1,0 +1,92 @@
+% META: {"id": "1NSI-ARCHOS-M3", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "methode", "capacites": ["P-ARCH-03C"], "capacites_codes": ["C5"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M3}{Lire et poser des droits en notation octale}
+\textbf{Quand l'utiliser ?} Quand \lstinline{ls -l} affiche une suite de lettres que tu dois
+interpréter, ou quand on te demande de rendre un fichier exécutable, privé, ou lisible par
+un groupe. La notation octale n'est pas un code à retenir : c'est une addition.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Découpe en trois triplets.} Les neuf caractères après le premier se lisent
+    par groupes de trois : \textbf{propriétaire}, \textbf{groupe}, \textbf{autres}. Le
+    caractère de tête n'est pas un droit : \lstinline{-} pour un fichier, \lstinline{d} pour
+    un dossier.
+  \item \textbf{Pèse chaque droit} dans un triplet : lecture \lstinline{r} vaut $4$,
+    écriture \lstinline{w} vaut $2$, exécution \lstinline{x} vaut $1$, un tiret vaut $0$.
+  \item \textbf{Additionne à l'intérieur de chaque triplet.} Le résultat est un chiffre de
+    $0$ à $7$ : c'est pourquoi la notation est octale.
+  \item \textbf{Écris les trois chiffres dans l'ordre} propriétaire, groupe, autres. C'est
+    l'argument de \lstinline{chmod}.
+  \item \textbf{Pour poser des droits}, fais le chemin inverse : décide qui doit pouvoir
+    quoi, écris les trois triplets, convertis, applique.
+\end{enumerate}
+
+\textbf{Exemple :} lire \lstinline{-rwxr-x---}.
+
+\begin{center}
+\begin{tabular}{l|ccc|c}
+& $r$ & $w$ & $x$ & chiffre \\
+\hline
+propriétaire & $4$ & $2$ & $1$ & $\mathbf{7}$ \\
+groupe & $4$ & $0$ & $1$ & $\mathbf{5}$ \\
+autres & $0$ & $0$ & $0$ & $\mathbf{0}$ \\
+\end{tabular}
+\end{center}
+
+Donc \lstinline{chmod 750 fichier}. Le propriétaire peut tout, le groupe peut lire et
+exécuter mais pas modifier, les autres n'ont aucun accès.
+
+\begin{console}
+$ ls -l script.sh
+-rw-r--r-- 1 eleve eleve 512 sep  7 09:30 script.sh
+$ chmod 750 script.sh
+$ ls -l script.sh
+-rwxr-x--- 1 eleve eleve 512 sep  7 09:30 script.sh
+\end{console}
+
+% BEGIN-VERIFY
+% POIDS = {"r": 4, "w": 2, "x": 1, "-": 0}
+% def octal(lettres):
+%     """Traduit neuf caracteres de droits en trois chiffres octaux."""
+%     assert len(lettres) == 9
+%     triplets = [lettres[0:3], lettres[3:6], lettres[6:9]]
+%     return "".join(str(sum(POIDS[c] for c in t)) for t in triplets)
+% assert octal("rwxr-x---") == "750"
+% assert octal("rw-r--r--") == "644"
+% assert octal("rwxrwxrwx") == "777"
+% assert octal("---------") == "000"
+% assert octal("r--------") == "400"
+% # 644 est bien le droit par defaut d'un fichier ordinaire
+% assert octal("rw-r--r--") == "644"
+% # et le chemin inverse redonne les lettres
+% def lettres(chiffres):
+%     ordre = [("r", 4), ("w", 2), ("x", 1)]
+%     out = ""
+%     for c in chiffres:
+%         n = int(c)
+%         out += "".join(l if n & p else "-" for l, p in ordre)
+%     return out
+% for motif in ("rwxr-x---", "rw-r--r--", "rwxrwxrwx", "r--------"):
+%     assert lettres(octal(motif)) == motif
+% # chaque chiffre tient entre 0 et 7 : c'est pourquoi la notation est octale
+% assert all(0 <= int(c) <= 7 for c in octal("rwxrwxrwx"))
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Compter le premier caractère} comme un droit. \lstinline{-rwxr-x---} fait
+    dix caractères : le premier dit le type, les neuf suivants sont les droits.
+  \item Intervertir $2$ et $1$ : \lstinline{w} vaut $2$, \lstinline{x} vaut $1$. Un
+    \lstinline{chmod 700} donné pour \lstinline{600} laisse un fichier exécutable qui ne
+    devrait pas l'être.
+  \item \textbf{Poser $777$ « pour que ça marche ».} Cela autorise n'importe qui à modifier
+    le fichier. Le bon réflexe est de chercher quel droit manque, pas de tous les donner.
+  \item Oublier qu'un \textbf{dossier} a besoin du droit \lstinline{x} pour être traversé :
+    un dossier lisible mais non exécutable ne laisse pas entrer dans son contenu.
+\end{itemize}
+
+\textbf{Vérifier :} refais \lstinline{ls -l} après le \lstinline{chmod} et retraduis les
+lettres obtenues en octal. Tu dois retrouver exactement les trois chiffres demandés — c'est
+le contrôle par le chemin inverse.
+
+\textbf{S'entraîner :} exercices C5 du chapitre.
+\end{fichemethode}

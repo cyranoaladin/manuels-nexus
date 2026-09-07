@@ -124,15 +124,40 @@ def test_content_is_measured_by_real_objects_not_declared_files() -> None:
 
 
 def test_a_booklet_covering_part_of_its_chapters_is_not_complete() -> None:
-    inventory = json.loads((ROOT / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8"))
-    partial = readiness.content_coverage(inventory, "nsi:manual:1NSI:methodes", "1NSI")
-    assert partial["objects"] > 0
-    assert partial["chapters_covered"] < partial["chapters_total"]
-    assert partial["complete"] is False
+    """Couvrir une partie des chapitres ne suffit pas.
 
-    full = readiness.content_coverage(inventory, "math:manual:1SPE:methodes", "1SPE")
+    Ce test prenait `1NSI::livret_methodes` comme exemple vivant d'un livret
+    partiel. Il ne l'est plus : les vingt fiches justifiées ont été écrites.
+    Continuer à l'exiger partiel reviendrait à interdire de le compléter.
+
+    La partialité est donc fabriquée : on retire d'un inventaire complet les
+    objets d'un chapitre, et on vérifie que la couverture le voit.
+    """
+    inventory = json.loads((ROOT / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8"))
+
+    full = readiness.content_coverage(inventory, "nsi:manual:1NSI:methodes", "1NSI")
     assert full["chapters_covered"] == full["chapters_total"]
     assert full["complete"] is True
+
+    amputated = json.loads(json.dumps(inventory))
+    for manual in amputated["manuals"].values():
+        manual["chapters"].pop("1NSI-TABLES", None)
+        for chapter_id, chapter in manual["chapters"].items():
+            if chapter_id != "1NSI-RESEAUX":
+                continue
+            for key, items in list(chapter.items()):
+                if isinstance(items, list):
+                    chapter[key] = [
+                        o for o in items
+                        if not (isinstance(o, dict) and o.get("source_type") == "methode")
+                    ]
+    partial = readiness.content_coverage(amputated, "nsi:manual:1NSI:methodes", "1NSI")
+    assert partial["objects"] > 0
+    assert partial["chapters_covered"] < full["chapters_covered"]
+    assert partial["complete"] is False
+
+    reference = readiness.content_coverage(inventory, "math:manual:1SPE:methodes", "1SPE")
+    assert reference["complete"] is True
 
 
 def test_an_unknown_assembly_is_never_complete() -> None:

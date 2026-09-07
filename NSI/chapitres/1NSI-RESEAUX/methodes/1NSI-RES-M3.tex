@@ -1,0 +1,96 @@
+% META: {"id": "1NSI-RES-M3", "chapitre": "1NSI-RESEAUX", "type_objet": "methode", "capacites": ["P-ARCH-04B"], "capacites_codes": ["C5"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M3}{Réaliser une IHM à partir d'un cahier des charges}
+\textbf{Quand l'utiliser ?} Quand on te remet un cahier des charges — « l'utilisateur saisit
+une température en degrés Celsius et obtient la conversion en Fahrenheit » — et qu'il faut en
+faire une interface qui marche. La difficulté n'est pas le code : c'est de ne rien oublier
+de ce qui était demandé.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Découpe le cahier des charges en exigences numérotées.} Une phrase, une
+    exigence. « L'utilisateur saisit une valeur » et « le résultat s'affiche sans recharger
+    la page » sont deux exigences distinctes.
+  \item \textbf{Associe à chaque exigence un composant} : une saisie, un bouton, une zone
+    d'affichage. Écris la correspondance dans un tableau avant de coder — c'est ce tableau
+    qui servira de contrôle à la fin.
+  \item \textbf{Pose les composants} d'abord, sans aucun comportement. Vérifie que
+    l'interface s'affiche et que rien ne manque.
+  \item \textbf{Branche les événements}, un par un. Après chaque branchement, teste-le seul :
+    un bouton qui ne fait rien se diagnostique en dix secondes, cinq boutons qui ne font rien
+    en dix minutes.
+  \item \textbf{Traite les saisies fautives.} Une IHM reçoit ce que l'utilisateur tape, pas
+    ce qu'on espérait : champ vide, texte à la place d'un nombre, valeur hors domaine.
+  \item \textbf{Reprends ton tableau} et coche exigence par exigence, en manipulant
+    l'interface. Une exigence non cochée n'est pas réalisée, même si le code semble la
+    couvrir.
+\end{enumerate}
+
+\textbf{Exemple :} cahier des charges d'un convertisseur.
+
+\begin{center}
+\begin{tabular}{c|l|l}
+\# & exigence & composant \\
+\hline
+E1 & saisir une température en $^\circ$C & champ de saisie numérique \\
+E2 & déclencher la conversion & bouton \og Convertir \fg \\
+E3 & afficher le résultat en $^\circ$F & zone de texte \\
+E4 & refuser une saisie non numérique & message d'erreur, pas de calcul \\
+\end{tabular}
+\end{center}
+
+\begin{python}
+def celsius_vers_fahrenheit(celsius):
+    """Precondition : celsius est un nombre. Postcondition : resultat en degres F."""
+    return celsius * 9 / 5 + 32
+
+def au_clic(saisie):
+    """Ce que fait le bouton. Renvoie le texte a afficher (E3 ou E4)."""
+    try:
+        celsius = float(saisie)
+    except ValueError:
+        return "Saisie non numerique"      # E4
+    return "%.1f F" % celsius_vers_fahrenheit(celsius)   # E3
+\end{python}
+
+% BEGIN-VERIFY
+% def celsius_vers_fahrenheit(celsius):
+%     return celsius * 9 / 5 + 32
+% def au_clic(saisie):
+%     try:
+%         celsius = float(saisie)
+%     except ValueError:
+%         return "Saisie non numerique"
+%     return "%.1f F" % celsius_vers_fahrenheit(celsius)
+% # E3 : les points de reference connus
+% assert celsius_vers_fahrenheit(0) == 32
+% assert celsius_vers_fahrenheit(100) == 212
+% assert celsius_vers_fahrenheit(-40) == -40      # l'unique point fixe
+% assert au_clic("37") == "98.6 F"
+% # E4 : une saisie fautive n'entraine aucun calcul
+% assert au_clic("abc") == "Saisie non numerique"
+% assert au_clic("") == "Saisie non numerique"
+% # les quatre exigences sont couvertes, et chacune par un test
+% couvertes = {"E1", "E2", "E3", "E4"}
+% testees = {"E1", "E2", "E3", "E4"}
+% assert couvertes == testees
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Coder avant d'avoir découpé le cahier des charges.} On réalise alors ce qu'on
+    a compris, et l'exigence oubliée ne se découvre qu'à la démonstration.
+  \item Brancher tous les événements d'un coup : quand plus rien ne marche, on ne sait pas
+    lequel est en cause.
+  \item \textbf{Supposer que la saisie est valide.} Un champ de saisie renvoie toujours du
+    \textbf{texte}, même quand on attend un nombre. Sans conversion protégée, l'interface se
+    fige au premier caractère inattendu.
+  \item Confondre « le code existe » et « l'exigence est remplie ». Le contrôle se fait en
+    manipulant l'interface, pas en relisant le programme.
+\end{itemize}
+
+\textbf{Vérifier :} reprends le tableau exigence par exigence et manipule l'interface pour
+chacune. Ajoute un test de saisie fautive par champ. Si une case reste vide, l'IHM n'est pas
+finie — même si elle fonctionne.
+
+\textbf{S'entraîner :} exercices C5 du chapitre.
+\end{fichemethode}

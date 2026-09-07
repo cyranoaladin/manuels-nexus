@@ -1,0 +1,92 @@
+% META: {"id": "1NSI-LANG-M2", "chapitre": "1NSI-LANGAGE", "type_objet": "methode", "capacites": ["P-LANG-04"], "capacites_codes": ["C4"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M2}{Construire un jeu de tests qui trouve les bugs}
+\textbf{Quand l'utiliser ?} Dès qu'une fonction est spécifiée, et \textbf{avant} de la
+déclarer terminée. Un jeu de tests n'est pas là pour rassurer : il est là pour faire
+échouer le programme pendant que c'est encore réparable.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Le cas nominal.} Un appel ordinaire, dont tu calcules le résultat
+    \textbf{à la main} avant de lancer le programme. Si tu ne sais pas ce que la fonction
+    doit renvoyer, tu ne peux pas la tester.
+  \item \textbf{Les bornes.} Le plus petit cas possible : liste vide, liste à un seul
+    élément, valeur nulle. C'est là que se cachent les erreurs d'indice et les divisions
+    par zéro.
+  \item \textbf{Les frontières de chaque condition.} Pour un seuil à $10$, teste $9$, $10$
+    et $11$. Un \lstinline{>} écrit à la place d'un \lstinline{>=} ne se voit qu'en $10$.
+  \item \textbf{Les cas d'erreur.} Chaque précondition doit avoir son test : un appel qui la
+    viole doit être refusé, et le test le vérifie.
+  \item \textbf{Écris chaque test en \lstinline{assert}}, et fais-les tourner tous ensemble à
+    chaque modification. Un test qu'on relance à la main sera oublié.
+\end{enumerate}
+
+\textbf{Exemple :} tester une fonction qui indique si un élève est reçu.
+
+\begin{python}
+def est_recu(points):
+    """Vrai si `points` atteint la barre de 10. Precondition : 0 <= points <= 20."""
+    assert 0 <= points <= 20
+    return points >= 10
+
+# nominal
+assert est_recu(15) is True
+assert est_recu(4) is False
+# frontieres du seuil : 9, 10, 11
+assert est_recu(9) is False
+assert est_recu(10) is True      # ce test seul distingue > de >=
+assert est_recu(11) is True
+# bornes du domaine
+assert est_recu(0) is False
+assert est_recu(20) is True
+\end{python}
+
+% BEGIN-VERIFY
+% def est_recu(points):
+%     assert 0 <= points <= 20
+%     return points >= 10
+% assert est_recu(15) is True and est_recu(4) is False
+% assert est_recu(9) is False and est_recu(10) is True and est_recu(11) is True
+% assert est_recu(0) is False and est_recu(20) is True
+% # la precondition est refusee hors domaine
+% for mauvais in (-1, 21):
+%     refuse = False
+%     try:
+%         est_recu(mauvais)
+%     except AssertionError:
+%         refuse = True
+%     assert refuse
+% # une version buguee, avec > au lieu de >= : seul le test en 10 la demasque
+% def est_recu_bugue(points):
+%     return points > 10
+% assert est_recu_bugue(15) == est_recu(15)
+% assert est_recu_bugue(9) == est_recu(9)
+% assert est_recu_bugue(10) != est_recu(10)
+% # un jeu de tests reussi ne prouve pas la correction
+% def toujours_vrai(points):
+%     return True
+% assert toujours_vrai(15) == est_recu(15)
+% assert toujours_vrai(20) == est_recu(20)
+% assert toujours_vrai(4) != est_recu(4)
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Ne tester que ce qui marche.} Trois appels au milieu du domaine passent
+    toujours ; ils ne trouvent rien. Le test en $10$ est le seul qui distingue
+    \lstinline{>} de \lstinline{>=}.
+  \item \textbf{Prendre le résultat du programme comme référence.} Si tu lances la fonction
+    pour savoir quoi mettre dans l'\lstinline{assert}, tu ne testes plus rien : tu écris que
+    le programme fait ce qu'il fait.
+  \item Oublier le cas vide. La liste vide fait tomber plus de fonctions que tous les autres
+    cas réunis.
+  \item \textbf{Croire qu'un jeu de tests réussi prouve la correction.} Il prouve seulement
+    que la fonction est correcte \textbf{sur ces cas-là}. La fonction qui renvoie toujours
+    \lstinline{True} passe deux des trois tests ci-dessus.
+\end{itemize}
+
+\textbf{Vérifier :} introduis volontairement un bug — change un \lstinline{>=} en
+\lstinline{>}, un \lstinline{+} en \lstinline{-} — et vérifie qu'\textbf{au moins un} test
+échoue. Si tous passent encore, le jeu de tests est trop faible.
+
+\textbf{S'entraîner :} exercices C4 du chapitre.
+\end{fichemethode}

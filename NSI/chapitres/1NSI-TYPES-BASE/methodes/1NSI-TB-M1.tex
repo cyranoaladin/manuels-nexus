@@ -1,0 +1,70 @@
+% META: {"id": "1NSI-TB-M1", "chapitre": "1NSI-TYPES-BASE", "type_objet": "methode", "capacites": ["P-BASE-01"], "capacites_codes": ["C1"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M1}{Convertir un entier entre les bases 2, 10 et 16}
+\textbf{Quand l'utiliser ?} Quand on te donne un entier positif écrit dans une base et
+qu'on te le demande dans une autre. Trois chemins seulement, et un raccourci.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Vers la base 10.} Écris les chiffres de droite à gauche, affecte à chacun la
+    puissance $b^0, b^1, b^2, \dots$, multiplie, additionne. En base 16, les chiffres
+    \lstinline{A} à \lstinline{F} valent $10$ à $15$.
+  \item \textbf{Depuis la base 10.} Divise par $b$, note le \textbf{reste}, recommence sur le
+    quotient jusqu'à obtenir $0$. Les restes, lus \textbf{du dernier au premier}, forment
+    l'écriture cherchée.
+  \item \textbf{Entre 2 et 16 : ne passe pas par 10.} Un chiffre hexadécimal vaut exactement
+    quatre bits. Regroupe les bits par paquets de quatre \textbf{en partant de la droite},
+    complète le paquet de gauche par des zéros, traduis chaque paquet.
+  \item Relis ton résultat dans l'autre sens pour vérifier : c'est l'étape 1 qui contrôle
+    l'étape 2.
+\end{enumerate}
+
+\textbf{Exemple :} convertir $2026$ en base 2, puis en base 16.
+
+Divisions successives par $2$ : $2026 = 2 \times 1013 + \mathbf{0}$, $1013 = 2 \times 506 + \mathbf{1}$,
+$506 = 2 \times 253 + \mathbf{0}$, $253 = 2 \times 126 + \mathbf{1}$, $126 = 2 \times 63 + \mathbf{0}$,
+$63 = 2 \times 31 + \mathbf{1}$, $31 = 2 \times 15 + \mathbf{1}$, $15 = 2 \times 7 + \mathbf{1}$,
+$7 = 2 \times 3 + \mathbf{1}$, $3 = 2 \times 1 + \mathbf{1}$, $1 = 2 \times 0 + \mathbf{1}$.
+
+Restes lus du dernier au premier : $2026 = (11111101010)_2$.
+
+Regroupement par quatre depuis la droite : $\underline{111}\,\underline{1110}\,\underline{1010}$,
+soit $0111\,1110\,1010$, donc $7$, $\text{E}$, $\text{A}$ : $2026 = (\text{7EA})_{16}$.
+
+\begin{python}
+bin(2026)   # '0b11111101010'
+hex(2026)   # '0x7ea'
+int("7EA", 16)   # 2026
+int("11111101010", 2)   # 2026
+\end{python}
+
+% BEGIN-VERIFY
+% assert bin(2026) == "0b11111101010"
+% assert hex(2026) == "0x7ea"
+% assert int("7EA", 16) == 2026
+% assert int("11111101010", 2) == 2026
+% # le regroupement par quatre bits est exactement l'ecriture hexadecimale
+% bits = bin(2026)[2:].zfill(12)
+% paquets = [bits[i:i+4] for i in range(0, 12, 4)]
+% assert paquets == ["0111", "1110", "1010"]
+% assert "".join("%X" % int(p, 2) for p in paquets) == "7EA"
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item Lire les restes \textbf{dans l'ordre où on les a écrits} : on obtient le nombre à
+    l'envers. Le premier reste calculé est le chiffre de \textbf{droite}.
+  \item Regrouper les bits en partant de la \textbf{gauche} : $11\,1111\,01010$ ne veut rien
+    dire. Les paquets se forment depuis la droite, et c'est le paquet de gauche qu'on
+    complète par des zéros.
+  \item Oublier qu'en base 16 un chiffre n'est pas forcément un caractère de $0$ à $9$ :
+    $(\text{7EA})_{16}$ a trois chiffres, pas cinq.
+  \item Écrire \lstinline{bin(2026)} et recopier \lstinline{0b} dans la réponse : le préfixe
+    dit la base, il ne fait pas partie de l'écriture.
+\end{itemize}
+
+\textbf{Vérifier :} reconvertis dans l'autre sens et compare au nombre de départ. Contrôle
+aussi l'ordre de grandeur : $2026 < 2^{11} = 2048$, donc son écriture binaire a bien $11$
+chiffres, pas $10$ ni $12$.
+
+\textbf{S'entraîner :} exercices C1 du chapitre.
+\end{fichemethode}

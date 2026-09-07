@@ -51,17 +51,24 @@ def test_the_project_chapter_is_excused_on_its_actual_content(payload) -> None:
     assert set(record["chapter_object_types"]) <= {"projet", "qcm"}
 
 
-def test_the_seven_method_gaps_are_real(payload) -> None:
-    """Sept chapitres 1NSI enseignent des procédures sans fiche méthode."""
-    gaps = sorted(
-        r["chapter"] for r in payload["chapters"]
+def test_a_declared_method_gap_is_always_a_teaching_chapter(payload) -> None:
+    """Une lacune de fiche méthode ne se déclare que là où l'on s'entraîne.
+
+    Ce test comptait les sept chapitres 1NSI dépourvus de fiche. Ils en ont
+    désormais — `METHOD_SHEET_REQUIREMENT_AUDIT` a jugé les 53 capacités du
+    manuel et les vingt fiches justifiées sont écrites. Compter sept
+    reviendrait à exiger que le défaut subsiste.
+
+    La règle, elle, ne bouge pas : un chapitre déclaré en lacune doit porter
+    des exercices. Un chapitre sans exercice ne réclame aucune fiche.
+    """
+    gaps = [
+        r for r in payload["chapters"]
         if r["rubric"] == "methodes" and r["verdict"] == applicability.REAL_GAP
-    )
-    assert len(gaps) == 7
-    for chapter in gaps:
-        record = next(r for r in payload["chapters"] if r["chapter"] == chapter)
-        # Un chapitre sans exercice ne réclamerait pas de fiche méthode.
-        assert record["chapter_object_types"].get("exercice", 0) > 0, chapter
+    ]
+    for record in gaps:
+        assert record["chapter_object_types"].get("exercice", 0) > 0, \
+            record["chapter"]
 
 
 def test_applicable_chapters_removes_only_excused_ones() -> None:

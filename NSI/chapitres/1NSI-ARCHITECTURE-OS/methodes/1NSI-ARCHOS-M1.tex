@@ -1,0 +1,98 @@
+% META: {"id": "1NSI-ARCHOS-M1", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "methode", "capacites": ["P-ARCH-01B"], "capacites_codes": ["C2"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M1}{Dérouler une séquence d'instructions machine dans un tableau de trace}
+\textbf{Quand l'utiliser ?} Quand on te donne une suite d'instructions de type langage
+machine et qu'on te demande ce qu'elle calcule, ou l'état final des registres. Ne lis pas
+la séquence « dans ta tête » : elle est faite de petits pas et c'est justement ce qui la
+rend piégeuse.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Dessine le tableau} avant tout. Une colonne par élément d'état : le compteur
+    ordinal \lstinline{CO}, chaque registre, chaque case mémoire utilisée. Une ligne par
+    instruction exécutée — pas par instruction écrite.
+  \item \textbf{Remplis la ligne initiale} : valeurs de départ, \lstinline{CO} sur la
+    première instruction.
+  \item \textbf{Exécute une seule instruction}, puis recopie \textbf{toute} la ligne
+    précédente en ne changeant que ce que cette instruction modifie. Recopier l'état complet
+    est ce qui rend les erreurs visibles.
+  \item \textbf{Fais avancer \lstinline{CO}} : à l'instruction suivante d'ordinaire, à
+    l'adresse indiquée si c'est un saut. Un saut conditionnel se décide sur l'état de la
+    ligne \textbf{courante}.
+  \item \textbf{Arrête-toi} sur \lstinline{HALT}, ou dès qu'une ligne reproduit exactement
+    une ligne antérieure : la séquence boucle sans fin.
+\end{enumerate}
+
+\textbf{Exemple :} que calcule cette séquence ?
+
+\begin{console}
+0: LOAD  R1, 3
+1: LOAD  R2, 0
+2: ADD   R2, R2, R1
+3: SUB   R1, R1, 1
+4: JNZ   R1, 2
+5: HALT
+\end{console}
+
+\begin{center}
+\begin{tabular}{c|c|c|c}
+étape & \lstinline{CO} & \lstinline{R1} & \lstinline{R2} \\
+\hline
+initial & $0$ & $?$ & $?$ \\
+1 & $1$ & $3$ & $?$ \\
+2 & $2$ & $3$ & $0$ \\
+3 & $3$ & $3$ & $3$ \\
+4 & $4$ & $2$ & $3$ \\
+5 & $2$ & $2$ & $3$ \\
+6 & $3$ & $2$ & $5$ \\
+7 & $4$ & $1$ & $5$ \\
+8 & $2$ & $1$ & $5$ \\
+9 & $3$ & $1$ & $6$ \\
+10 & $4$ & $0$ & $6$ \\
+11 & $5$ & $0$ & $6$ \\
+\end{tabular}
+\end{center}
+
+La séquence calcule $3 + 2 + 1 = 6$ : la somme des entiers de $1$ à $3$.
+
+% BEGIN-VERIFY
+% # Simulation fidele de la sequence, instruction par instruction.
+% CO, R1, R2 = 0, None, None
+% trace = []
+% for _ in range(100):
+%     trace.append((CO, R1, R2))
+%     if CO == 0:   R1 = 3;            CO = 1
+%     elif CO == 1: R2 = 0;            CO = 2
+%     elif CO == 2: R2 = R2 + R1;      CO = 3
+%     elif CO == 3: R1 = R1 - 1;       CO = 4
+%     elif CO == 4: CO = 2 if R1 != 0 else 5
+%     elif CO == 5: break
+% assert (R1, R2) == (0, 6)
+% assert R2 == 3 + 2 + 1 == sum(range(1, 4))
+% # onze etapes avant HALT, comme dans le tableau
+% assert len(trace) == 12 and trace[-1][0] == 5
+% assert trace[1] == (1, 3, None) and trace[5] == (2, 2, 3)
+% # le saut se decide sur R1 de la ligne courante : a R1 == 0 il ne saute plus
+% assert trace[-2][:2] == (4, 0)
+% # aucune ligne ne se repete : la sequence ne boucle pas indefiniment
+% assert len(set(trace)) == len(trace)
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Ne pas recopier l'état complet} à chaque ligne. En ne notant que ce qui
+    change, on perd la valeur d'un registre trois lignes plus loin et on invente une valeur.
+  \item Faire avancer \lstinline{CO} après un saut : un saut \textbf{remplace} l'avancement,
+    il ne s'y ajoute pas.
+  \item Décider un saut conditionnel sur l'état d'\textbf{après} l'instruction suivante.
+    Ici, \lstinline{JNZ R1, 2} regarde le \lstinline{R1} déjà décrémenté par la ligne $3$.
+  \item Confondre une valeur et une adresse. \lstinline{LOAD R1, 3} charge le nombre $3$ ;
+    charger \textbf{le contenu de la case} $3$ serait une autre instruction.
+\end{itemize}
+
+\textbf{Vérifier :} relis la dernière ligne et demande-toi si le résultat a un sens
+arithmétique — ici $6$ est bien $3+2+1$. Contrôle aussi qu'aucune ligne n'est identique à
+une précédente : si c'était le cas, la séquence bouclerait sans fin et tu aurais fait une
+erreur de saut.
+
+\textbf{S'entraîner :} exercices C2 du chapitre.
+\end{fichemethode}

@@ -6,7 +6,7 @@
 
 | ID | Manuel | Matière | Niveau | Édition | Chapitres | Capacités | Exercices | Fichiers contenu | Objets | Variantes compilées |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1NSI | NSI Première | NSI | Premiere | courante | 10 | 53 | 101 | 366 | 366 | manual |
+| 1NSI | NSI Première | NSI | Premiere | courante | 10 | 53 | 101 | 386 | 386 | manual |
 | 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 55 | 484 | 1446 | 1446 | manual |
 | TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 53 | 300 | 775 | 775 | manual |
 | TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 194 | 500 | 500 | manual |
@@ -17,7 +17,7 @@
 
 | Catégorie | Nombre |
 |---|---|
-| blocking_statuses | 2330 |
+| blocking_statuses | 2350 |
 
 ### Échantillon déterministe
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft

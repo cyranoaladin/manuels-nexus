@@ -1,0 +1,92 @@
+% META: {"id": "1NSI-RES-M1", "chapitre": "1NSI-RESEAUX", "type_objet": "methode", "capacites": ["P-ARCH-02B"], "capacites_codes": ["C2"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M1}{Dérouler le protocole du bit alterné}
+\textbf{Quand l'utiliser ?} Quand on te décrit une suite de pertes — « le paquet $2$ est
+perdu, l'accusé du paquet $3$ est perdu » — et qu'on te demande ce qui est effectivement
+reçu, ou combien d'envois ont lieu. Le protocole est court, mais aucun cas ne se devine :
+il se déroule.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Dessine deux colonnes}, émetteur et récepteur, et une ligne par
+    \textbf{événement} : un envoi, une réception, un accusé, une expiration de délai.
+  \item \textbf{Note l'état de chaque côté} : le bit attendu par le récepteur, le bit
+    courant de l'émetteur. Ces deux bits sont tout l'état du protocole.
+  \item \textbf{Émission.} L'émetteur envoie le message marqué de son bit, puis attend.
+  \item \textbf{Réception.} Si le bit reçu \textbf{est} celui attendu, le récepteur accepte
+    le message et bascule son bit. S'il ne l'est pas, c'est un doublon : le récepteur
+    \textbf{jette} le message mais renvoie quand même un accusé — sans quoi l'émetteur
+    réémettrait indéfiniment.
+  \item \textbf{Accusé.} S'il arrive, l'émetteur bascule son bit et passe au message
+    suivant. S'il se perd, le délai expire et l'émetteur \textbf{réémet le même message avec
+    le même bit}.
+  \item Poursuis jusqu'au dernier message, puis compte les envois.
+\end{enumerate}
+
+\textbf{Exemple :} trois messages $A$, $B$, $C$ ; l'accusé de $A$ est perdu, puis tout passe.
+
+\begin{center}
+\begin{tabular}{c|l|c|c|l}
+\# & événement & bit émis & bit attendu & effet \\
+\hline
+1 & envoi $A$ (bit $0$) & $0$ & $0$ & $A$ accepté, attendu passe à $1$ \\
+2 & accusé $0$ \textbf{perdu} & $0$ & $1$ & l'émetteur attend en vain \\
+3 & délai expiré, réémission $A$ (bit $0$) & $0$ & $1$ & doublon : jeté, accusé renvoyé \\
+4 & accusé $0$ reçu & $1$ & $1$ & l'émetteur bascule, passe à $B$ \\
+5 & envoi $B$ (bit $1$) & $1$ & $1$ & $B$ accepté, attendu passe à $0$ \\
+6 & accusé $1$ reçu & $0$ & $0$ & passe à $C$ \\
+7 & envoi $C$ (bit $0$) & $0$ & $0$ & $C$ accepté \\
+\end{tabular}
+\end{center}
+
+Quatre envois pour trois messages, et le récepteur a délivré $A$, $B$, $C$ une seule fois
+chacun. C'est exactement ce que le protocole promet.
+
+% BEGIN-VERIFY
+% def bit_alterne(messages, accuses_perdus):
+%     """Deroule le protocole. `accuses_perdus` = numeros d'envoi dont l'accuse se perd."""
+%     bit_emetteur, bit_attendu = 0, 0
+%     envois, delivres = 0, []
+%     for message in messages:
+%         while True:
+%             envois += 1
+%             if bit_emetteur == bit_attendu:
+%                 delivres.append(message)
+%                 bit_attendu = 1 - bit_attendu
+%             if envois in accuses_perdus:
+%                 continue          # delai expire : on reemet le meme bit
+%             bit_emetteur = 1 - bit_emetteur
+%             break
+%     return envois, delivres
+% # l'accuse du premier envoi se perd
+% envois, delivres = bit_alterne(["A", "B", "C"], {1})
+% assert delivres == ["A", "B", "C"]
+% assert envois == 4
+% # sans perte : un envoi par message
+% assert bit_alterne(["A", "B", "C"], set()) == (3, ["A", "B", "C"])
+% # le doublon est jete : jamais de message delivre deux fois
+% envois, delivres = bit_alterne(["A", "B"], {1, 2})
+% assert delivres == ["A", "B"] and len(delivres) == len(set(delivres))
+% # un seul bit suffit : il n'a que deux valeurs, et elles alternent
+% assert {0, 1} == {0, 1 - 0}
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Ne pas renvoyer d'accusé pour un doublon.} Le récepteur jette le message
+    mais doit accuser : sans cela l'émetteur réémet sans fin, et le protocole se bloque.
+  \item \textbf{Basculer le bit en réémettant.} Une réémission porte le \textbf{même} bit :
+    c'est ce qui permet au récepteur de reconnaître un doublon.
+  \item Confondre « message perdu » et « accusé perdu ». Vu de l'émetteur, les deux se
+    ressemblent — le délai expire dans les deux cas — mais le récepteur, lui, a déjà délivré
+    le message dans le second.
+  \item Croire qu'un seul bit ne suffit pas. Il suffit parce que l'émetteur n'a jamais plus
+    d'un message en attente : il n'y a que deux cas à distinguer, « celui que j'attends » et
+    « celui d'avant ».
+\end{itemize}
+
+\textbf{Vérifier :} compte les messages délivrés par le récepteur. Ils doivent être
+exactement ceux envoyés, une fois chacun, dans le bon ordre. Le nombre d'\textbf{envois},
+lui, peut être plus grand : c'est le prix des pertes.
+
+\textbf{S'entraîner :} exercices C2 du chapitre.
+\end{fichemethode}

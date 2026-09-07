@@ -1,0 +1,79 @@
+% META: {"id": "1NSI-TAB-M2", "chapitre": "1NSI-TABLES", "type_objet": "methode", "capacites": ["P-TABLE-02"], "capacites_codes": ["C2"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M2}{Sélectionner les lignes qui vérifient un critère}
+\textbf{Quand l'utiliser ?} Dès qu'une question porte sur « les lignes telles que \dots » :
+les élèves de telle classe, ceux qui ont plus de tant de points, ceux qui remplissent deux
+conditions à la fois.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Écris le critère en français}, avec ses « et », ses « ou », ses « pas ». Une
+    phrase ambiguë donne un programme faux : « les 1G2 et les 1G1 » désigne une réunion,
+    donc un \lstinline{or}, pas un \lstinline{and}.
+  \item \textbf{Traduis chaque condition élémentaire} en une comparaison sur une clé de la
+    ligne : \lstinline{ligne["classe"] == "1G2"}.
+  \item \textbf{Compose} avec \lstinline{and}, \lstinline{or}, \lstinline{not}, en mettant
+    les parenthèses dès qu'il y a plus d'un connecteur.
+  \item \textbf{Filtre} par compréhension de liste :
+    \lstinline{[l for l in table if critère]}. Le résultat est une nouvelle table, de même
+    forme, qu'on peut à son tour trier ou filtrer.
+  \item \textbf{Teste sur les bords} : le critère doit être vérifié sur une ligne qui passe,
+    une qui ne passe pas, et une qui est exactement à la limite.
+\end{enumerate}
+
+\textbf{Exemple :} les élèves de 1G2 ayant au moins $10$ points.
+
+\begin{python}
+def selection(table, critere):
+    return [ligne for ligne in table if critere(ligne)]
+
+recus_1g2 = selection(
+    table,
+    lambda l: l["classe"] == "1G2" and l["points"] >= 10,
+)
+\end{python}
+
+% BEGIN-VERIFY
+% table = [
+%     {"nom": "Ines", "classe": "1G2", "points": 17},
+%     {"nom": "Karim", "classe": "1G1", "points": 9},
+%     {"nom": "Lou", "classe": "1G2", "points": 10},
+%     {"nom": "Theo", "classe": "1G2", "points": 4},
+% ]
+% def selection(table, critere):
+%     return [ligne for ligne in table if critere(ligne)]
+% recus = selection(table, lambda l: l["classe"] == "1G2" and l["points"] >= 10)
+% assert [l["nom"] for l in recus] == ["Ines", "Lou"]
+% # Lou est exactement a la limite : >= la garde, > la perdrait
+% stricts = selection(table, lambda l: l["classe"] == "1G2" and l["points"] > 10)
+% assert [l["nom"] for l in stricts] == ["Ines"]
+% # « les 1G2 et les 1G1 » est une reunion : or, pas and
+% reunion = selection(table, lambda l: l["classe"] == "1G2" or l["classe"] == "1G1")
+% assert len(reunion) == 4
+% intersection = selection(table, lambda l: l["classe"] == "1G2" and l["classe"] == "1G1")
+% assert intersection == []
+% # la negation est le complementaire exact
+% autres = selection(table, lambda l: not (l["classe"] == "1G2"))
+% assert len(autres) + len([l for l in table if l["classe"] == "1G2"]) == len(table)
+% # filtrer ne modifie pas la table d'origine
+% assert len(table) == 4
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Confondre « et » du français et \lstinline{and} de la logique.} « Les élèves
+    de 1G1 et de 1G2 » veut dire \lstinline{or} : aucune ligne n'a deux classes à la fois,
+    et le \lstinline{and} renverrait une table vide. Une sélection vide doit toujours faire
+    relire le critère.
+  \item Comparer un nombre à une chaîne parce que la conversion a été oubliée à l'import :
+    \lstinline{l["points"] >= 10} lève alors une \lstinline{TypeError}.
+  \item Se tromper de borne : « au moins $10$ » s'écrit \lstinline{>= 10}, « plus de $10$ »
+    s'écrit \lstinline{> 10}. Une ligne à exactement $10$ points distingue les deux.
+  \item Modifier \lstinline{table} pendant qu'on la parcourt. Construis une nouvelle liste,
+    ne supprime jamais dans celle qu'on lit.
+\end{itemize}
+
+\textbf{Vérifier :} compte les lignes sélectionnées, puis compte celles qui \textbf{ne} le
+sont pas avec le critère nié : les deux totaux doivent redonner la taille de la table.
+
+\textbf{S'entraîner :} exercices C2 du chapitre.
+\end{fichemethode}

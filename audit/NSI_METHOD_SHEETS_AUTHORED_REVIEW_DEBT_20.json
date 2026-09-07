@@ -1,0 +1,415 @@
+{
+  "artifact_type": "BLOCKING_REVIEW_DEBT_LEDGER",
+  "ledger_id": "NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20",
+  "schema_version": 1,
+  "source_sha": "b86edf06a47cbc78dfef9de66b055043b2a325c7",
+  "chapter": "1NSI (sept chapitres)",
+  "count": 20,
+  "fingerprint_set_digest": "sha256:636681e135a71500c800db7d35f64ff7bf18a2994d9417360a107352ba2c712b",
+  "human_review_required": true,
+  "release_blocking": true,
+  "release_acceptance": false,
+  "in_approved_baseline": false,
+  "is_baseline_qualification": false,
+  "is_gate_exception": false,
+  "semantics": "Registre d'observation. Il n'inscrit rien dans la baseline approuvee, ne materialise aucune qualification, et ne doit rendre vert ni validate-model ni fail-on-new. La fermeture doit venir du cycle de statut apres revue humaine.",
+  "why_created": "Sept chapitres de 1NSI n'avaient aucune fiche methode : le livret etait a 3/10. L'audit METHOD_SHEET_REQUIREMENT_AUDIT a juge les 53 capacites du manuel une par une : 24 appellent une demarche que personne n'a ecrite, 14 sont declaratives, 15 sont deja couvertes. Ces vingt fiches servent les 24 capacites restantes — le regroupement suit la demarche, pas le compteur. Elles sont neuves, aucun humain ne les a relues, et leur statut `generated` reste bloquant jusque-la.",
+  "authoring_provenance": {
+    "mode": "NEXUS_ORIGINAL_AUTHORING",
+    "notice": "ORIGINAL_NEXUS_TRAINING_MATERIAL_NOT_OFFICIAL_EXAM_CONTENT",
+    "decision_table": "scripts/method_sheet_decisions.py",
+    "audit": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json"
+  },
+  "expected_gate_behaviour": {
+    "check": "rc 0",
+    "validate-model": "rouge sur ces vingt empreintes",
+    "fail-on-new": "rouge sur ces vingt empreintes",
+    "release-strict": "rouge"
+  },
+  "entries": [
+    {
+      "object_id": "1NSI-ARCHOS-M1",
+      "path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M1.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "a0f6bbe48c19edc5",
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "titre": "Derouler une sequence d'instructions machine dans un tableau de trace",
+      "covers": [
+        "C2"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-ARCHOS-M2",
+      "path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M2.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "8aafd5876ec72121",
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "titre": "Se reperer et agir en ligne de commande",
+      "covers": [
+        "C4"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-ARCHOS-M3",
+      "path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M3.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "042463a9af62be29",
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "titre": "Lire et poser des droits en notation octale",
+      "covers": [
+        "C5"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-LANG-M1",
+      "path": "NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M1.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "7a85f67acec08625",
+      "chapter": "1NSI-LANGAGE",
+      "titre": "Specifier une fonction : prototype, preconditions, postconditions",
+      "covers": [
+        "C3",
+        "C6",
+        "C7"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-LANG-M2",
+      "path": "NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M2.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "c4cdaca4f65539d5",
+      "chapter": "1NSI-LANGAGE",
+      "titre": "Construire un jeu de tests qui trouve les bugs",
+      "covers": [
+        "C4"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-LANG-M3",
+      "path": "NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M3.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "823934aaf3cc6364",
+      "chapter": "1NSI-LANGAGE",
+      "titre": "Trouver une fonction dans la documentation d'une bibliotheque",
+      "covers": [
+        "C5"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-PM-M1",
+      "path": "NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-M1.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "97a9229435efeaf5",
+      "chapter": "1NSI-PROJET-METHODES",
+      "titre": "Decouper un projet en jalons",
+      "covers": [
+        "C2"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-PM-M2",
+      "path": "NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-M2.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "3001cb9418fd1e30",
+      "chapter": "1NSI-PROJET-METHODES",
+      "titre": "Documenter son code et preparer l'oral",
+      "covers": [
+        "C4"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-RES-M1",
+      "path": "NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-M1.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "5605699ea6d692bf",
+      "chapter": "1NSI-RESEAUX",
+      "titre": "Derouler le protocole du bit alterne",
+      "covers": [
+        "C2"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-RES-M2",
+      "path": "NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-M2.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "0cee19302faa3b35",
+      "chapter": "1NSI-RESEAUX",
+      "titre": "Determiner si deux machines peuvent communiquer",
+      "covers": [
+        "C3"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-RES-M3",
+      "path": "NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-M3.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "f30af1c3e43a8e91",
+      "chapter": "1NSI-RESEAUX",
+      "titre": "Realiser une IHM a partir d'un cahier des charges",
+      "covers": [
+        "C5"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-TAB-M1",
+      "path": "NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-M1.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "727c7454d53a18c3",
+      "chapter": "1NSI-TABLES",
+      "titre": "Importer une table depuis un fichier CSV",
+      "covers": [
+        "C1"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-TAB-M2",
+      "path": "NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-M2.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "9b980ed1adf5b21f",
+      "chapter": "1NSI-TABLES",
+      "titre": "Selectionner les lignes qui verifient un critere",
+      "covers": [
+        "C2"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-TAB-M3",
+      "path": "NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-M3.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "d4fd791daff8ca98",
+      "chapter": "1NSI-TABLES",
+      "titre": "Trier une table suivant une colonne",
+      "covers": [
+        "C3"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-TAB-M4",
+      "path": "NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-M4.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "687f30c09c8e3b7e",
+      "chapter": "1NSI-TABLES",
+      "titre": "Fusionner deux tables par une cle commune",
+      "covers": [
+        "C4"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-TB-M1",
+      "path": "NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-M1.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "8398d944920f9a7d",
+      "chapter": "1NSI-TYPES-BASE",
+      "titre": "Convertir un entier entre les bases 2, 10 et 16",
+      "covers": [
+        "C1"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-TB-M2",
+      "path": "NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-M2.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "421075be9489bbba",
+      "chapter": "1NSI-TYPES-BASE",
+      "titre": "Compter les bits et ecrire en complement a deux",
+      "covers": [
+        "C2"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-TB-M3",
+      "path": "NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-M3.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "a0b1b78b20c05afd",
+      "chapter": "1NSI-TYPES-BASE",
+      "titre": "Dresser la table de verite d'une expression booleenne",
+      "covers": [
+        "C4"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-WEB-M1",
+      "path": "NSI/chapitres/1NSI-WEB-IHM/methodes/1NSI-WEB-M1.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "688fefec1218a5b2",
+      "chapter": "1NSI-WEB-IHM",
+      "titre": "Analyser et modifier ce qui s'execute au clic d'un bouton",
+      "covers": [
+        "C3"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    },
+    {
+      "object_id": "1NSI-WEB-M2",
+      "path": "NSI/chapitres/1NSI-WEB-IHM/methodes/1NSI-WEB-M2.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "f85cef1f904baec3",
+      "chapter": "1NSI-WEB-IHM",
+      "titre": "Lire un formulaire et choisir entre GET et POST",
+      "covers": [
+        "C7",
+        "C8",
+        "C9"
+      ],
+      "logical_owner": "direction_editoriale_pedagogique",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false
+    }
+  ]
+}

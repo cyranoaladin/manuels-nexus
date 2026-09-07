@@ -1,0 +1,75 @@
+% META: {"id": "1NSI-WEB-M1", "chapitre": "1NSI-WEB-IHM", "type_objet": "methode", "capacites": ["P-IHM-02"], "capacites_codes": ["C3"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M1}{Analyser et modifier ce qui s'exécute au clic d'un bouton}
+\textbf{Quand l'utiliser ?} Quand on te donne une page Web et qu'on te demande ce que fait
+un bouton, ou de changer son comportement. Le chemin est toujours le même, et il se remonte
+dans un seul sens : du bouton vers la fonction.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Trouve le composant} dans le HTML. Repère son identifiant :
+    \lstinline{<button id="convertir">}. C'est cet identifiant qui relie les deux fichiers.
+  \item \textbf{Trouve l'écouteur} dans le JavaScript : cherche cet identifiant. Il apparaît
+    dans un \lstinline{addEventListener("click", ...)}, ou dans un attribut
+    \lstinline{onclick} du HTML.
+  \item \textbf{Lis la fonction associée}, et elle seule. Note trois choses : d'où elle lit
+    ses données, ce qu'elle calcule, où elle écrit son résultat.
+  \item \textbf{Modifie} — et une seule chose à la fois. Change le calcul, ou la source, ou
+    la destination, pas les trois.
+  \item \textbf{Recharge la page et reclique.} Le navigateur garde souvent l'ancienne version
+    en mémoire : si rien ne change, recharge en forçant avant de conclure que ta
+    modification est fausse.
+\end{enumerate}
+
+\textbf{Exemple :}
+
+\begin{console}
+<!-- page.html -->
+<input id="celsius" type="text">
+<button id="convertir">Convertir</button>
+<p id="resultat"></p>
+\end{console}
+
+\begin{console}
+// page.js
+document.getElementById("convertir").addEventListener("click", function () {
+    const c = Number(document.getElementById("celsius").value);
+    const f = c * 9 / 5 + 32;
+    document.getElementById("resultat").textContent = f + " F";
+});
+\end{console}
+
+Lecture : la fonction lit le champ \lstinline{celsius} \emph{(source)}, calcule
+$c \times 9/5 + 32$ \emph{(traitement)}, écrit dans le paragraphe \lstinline{resultat}
+\emph{(destination)}. Pour convertir en Kelvin, seule la ligne du calcul change.
+
+\textbf{Trois questions, trois endroits :}
+\begin{center}
+\begin{tabular}{l|l|l}
+question & où regarder & ce qu'on y trouve \\
+\hline
+quel composant ? & HTML & \lstinline{id="convertir"} \\
+quel événement ? & JavaScript & \lstinline{addEventListener("click", …)} \\
+quel traitement ? & corps de la fonction & source, calcul, destination \\
+\end{tabular}
+\end{center}
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Chercher la fonction avant le composant.} Une page contient plusieurs
+    écouteurs ; c'est l'identifiant qui dit lequel te concerne.
+  \item Confondre \lstinline{value} et \lstinline{textContent} :
+    \lstinline{value} lit ce qu'un utilisateur a saisi dans un champ,
+    \lstinline{textContent} lit ou écrit le texte affiché d'un élément.
+  \item \textbf{Oublier que \lstinline{value} renvoie du texte.} Sans
+    \lstinline{Number(...)}, \lstinline{"20" * 9} donne bien $180$ mais
+    \lstinline{"20" + 32} donne \lstinline{"2032"} : l'addition concatène.
+  \item Modifier trois choses puis tester : quand le résultat est faux, on ne sait plus
+    laquelle est en cause.
+\end{itemize}
+
+\textbf{Vérifier :} clique avec une valeur dont tu connais la réponse — $0\,^\circ$C doit
+donner $32$, $100\,^\circ$C doit donner $212$. Puis clique avec le champ vide, pour voir ce
+que la page fait d'une saisie absente.
+
+\textbf{S'entraîner :} exercices C3 du chapitre.
+\end{fichemethode}

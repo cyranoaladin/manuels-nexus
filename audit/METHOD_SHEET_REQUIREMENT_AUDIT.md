@@ -6,20 +6,20 @@
 - `TRANSVERSAL_METHOD_ALREADY_COVERS` : `0`
 - `METHOD_BOOKLET_FILLER_OBJECTS` : `0`
 
-Sur 53 capacités jugées : 24 appellent une démarche non écrite, 14 sont déclaratives, 15 sont déjà couvertes. 20 fiches planifiées, dont 20 restent à écrire.
+Sur 53 capacités jugées : 24 appellent une démarche non écrite, 14 sont déclaratives, 15 sont déjà couvertes. 20 fiches planifiées, dont 0 restent à écrire.
 
 | Chapitre | Verdict | Fiches planifiées | Restent à écrire |
 |---|---|---|---|
 | `1NSI-ALGO-DICHO-GLOUTON-KNN` | `METHOD_ALREADY_EXISTS_NOT_ASSEMBLED` | 0 | — |
 | `1NSI-ALGO-PARCOURS-TRIS` | `METHOD_ALREADY_EXISTS_NOT_ASSEMBLED` | 0 | — |
-| `1NSI-ARCHITECTURE-OS` | `METHOD_SHEET_REQUIRED` | 3 | M1, M2, M3 |
-| `1NSI-LANGAGE` | `METHOD_SHEET_REQUIRED` | 3 | M1, M2, M3 |
-| `1NSI-PROJET-METHODES` | `METHOD_SHEET_REQUIRED` | 2 | M1, M2 |
-| `1NSI-RESEAUX` | `METHOD_SHEET_REQUIRED` | 3 | M1, M2, M3 |
-| `1NSI-TABLES` | `METHOD_SHEET_REQUIRED` | 4 | M1, M2, M3, M4 |
-| `1NSI-TYPES-BASE` | `METHOD_SHEET_REQUIRED` | 3 | M1, M2, M3 |
+| `1NSI-ARCHITECTURE-OS` | `METHOD_SHEET_REQUIRED` | 3 | — |
+| `1NSI-LANGAGE` | `METHOD_SHEET_REQUIRED` | 3 | — |
+| `1NSI-PROJET-METHODES` | `METHOD_SHEET_REQUIRED` | 2 | — |
+| `1NSI-RESEAUX` | `METHOD_SHEET_REQUIRED` | 3 | — |
+| `1NSI-TABLES` | `METHOD_SHEET_REQUIRED` | 4 | — |
+| `1NSI-TYPES-BASE` | `METHOD_SHEET_REQUIRED` | 3 | — |
 | `1NSI-TYPES-CONSTRUITS` | `METHOD_ALREADY_EXISTS_NOT_ASSEMBLED` | 0 | — |
-| `1NSI-WEB-IHM` | `METHOD_SHEET_REQUIRED` | 2 | M1, M2 |
+| `1NSI-WEB-IHM` | `METHOD_SHEET_REQUIRED` | 2 | — |
 
 ## Capacités jugées déclaratives ou déjà couvertes
 

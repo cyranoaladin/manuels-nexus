@@ -4,14 +4,14 @@
   "generated_by": "scripts/build_release_deliverable_readiness.py",
   "summary": {
     "REQUIRED_RELEASE_DELIVERABLES": 24,
-    "DEVELOPMENT_READY": 19,
+    "DEVELOPMENT_READY": 20,
     "ASSEMBLY_READY": 22,
     "BUILD_TARGET_READY": 22,
     "DEVELOPMENT_BUILD_PASS": 21,
-    "PEDAGOGICAL_OBJECT_COUNT_TOTAL": 6836,
+    "PEDAGOGICAL_OBJECT_COUNT_TOTAL": 6896,
     "PROGRAMME_CONFORM": 24,
     "SCIENCE_CONFORM": 24,
-    "CONTENT_COMPLETE": 19,
+    "CONTENT_COMPLETE": 20,
     "RELEASE_READY": 0,
     "CURRENT_BUILD_RECEIPTS_REQUIRED_DURING_DEVELOPMENT": false
   },
@@ -55,7 +55,7 @@
       "manual": "1NSI",
       "kind": "AUXILIAIRE",
       "axes": {
-        "content": false,
+        "content": true,
         "assembly": true,
         "build_target": true,
         "development_build": true,
@@ -63,17 +63,17 @@
         "science": true
       },
       "content_coverage": {
-        "objects": 14,
-        "chapters_covered": 3,
+        "objects": 34,
+        "chapters_covered": 10,
         "chapters_total": 10,
-        "complete": false
+        "complete": true
       },
       "development_build": {
         "present": true,
         "path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_methodes.pdf",
         "bytes": 209674
       },
-      "development_ready": false,
+      "development_ready": true,
       "release_ready": false,
       "release_ready_blocked_by": [
         "FROZEN_HEAD",
@@ -97,7 +97,7 @@
         "science": true
       },
       "content_coverage": {
-        "objects": 191,
+        "objects": 211,
         "chapters_covered": 10,
         "chapters_total": 10,
         "complete": true
@@ -131,7 +131,7 @@
         "science": true
       },
       "content_coverage": {
-        "objects": 366,
+        "objects": 386,
         "chapters_covered": 10,
         "chapters_total": 10,
         "complete": true
