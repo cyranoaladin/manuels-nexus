@@ -14,19 +14,19 @@ présentation. Trier n'ajoute aucune information : cela réorganise, et cela seu
     \lstinline{sorted(table, ...)} renvoie une \textbf{nouvelle} table et laisse l'originale
     intacte ; \lstinline{table.sort(...)} réordonne sur place et \textbf{ne renvoie rien}.
     Préfère \lstinline{sorted} : tu gardes l'ordre d'origine si tu en as besoin ensuite.
-  \item Passe la clé sous forme de fonction : \lstinline{key=lambda l: l["points"]}.
+  \item Passe la clé sous forme de fonction : \lstinline{key=lambda ligne: ligne["points"]}.
   \item \textbf{Pour trier sur deux colonnes}, renvoie un \textbf{tuple} :
-    \lstinline{key=lambda l: (l["classe"], -l["points"])} classe par classe croissante, puis
+    \lstinline{key=lambda ligne: (ligne["classe"], -ligne["points"])} classe par classe croissante, puis
     par points décroissants à l'intérieur de chaque classe.
 \end{enumerate}
 
 \textbf{Exemple :}
 \begin{python}
 # du meilleur au moins bon, sans toucher a la table d'origine
-classement = sorted(table, key=lambda l: l["points"], reverse=True)
+classement = sorted(table, key=lambda ligne: ligne["points"], reverse=True)
 
 # par classe, puis du meilleur au moins bon dans chaque classe
-par_classe = sorted(table, key=lambda l: (l["classe"], -l["points"]))
+par_classe = sorted(table, key=lambda ligne: (ligne["classe"], -ligne["points"]))
 \end{python}
 
 % BEGIN-VERIFY
@@ -36,24 +36,24 @@ par_classe = sorted(table, key=lambda l: (l["classe"], -l["points"]))
 %     {"nom": "Lou", "classe": "1G2", "points": 10},
 %     {"nom": "Theo", "classe": "1G1", "points": 100},
 % ]
-% classement = sorted(table, key=lambda l: l["points"], reverse=True)
-% assert [l["nom"] for l in classement] == ["Theo", "Ines", "Lou", "Karim"]
-% # sorted ne touche pas a l'originale
-% assert [l["nom"] for l in table] == ["Ines", "Karim", "Lou", "Theo"]
+% classement = sorted(table, key=lambda ligne: ligne["points"], reverse=True)
+% assert [ligne["nom"] for ligne in classement] == ["Theo", "Ines", "Lou", "Karim"]
+% # sorted ne touche pas a ligne'originale
+% assert [ligne["nom"] for ligne in table] == ["Ines", "Karim", "Lou", "Theo"]
 % # .sort() reordonne sur place et ne renvoie rien
 % copie = list(table)
-% assert copie.sort(key=lambda l: l["points"]) is None
-% assert [l["nom"] for l in copie] == ["Karim", "Lou", "Ines", "Theo"]
+% assert copie.sort(key=lambda ligne: ligne["points"]) is None
+% assert [ligne["nom"] for ligne in copie] == ["Karim", "Lou", "Ines", "Theo"]
 % # tri lexicographique sur des nombres restes en chaines : faux
-% en_chaines = [{"p": str(l["points"])} for l in table]
-% lexico = sorted(en_chaines, key=lambda l: l["p"])
-% assert [l["p"] for l in lexico] == ["10", "100", "17", "9"]
+% en_chaines = [{"p": str(ligne["points"])} for ligne in table]
+% lexico = sorted(en_chaines, key=lambda ligne: ligne["p"])
+% assert [ligne["p"] for ligne in lexico] == ["10", "100", "17", "9"]
 % # deux colonnes : classe croissante, points decroissants
-% par_classe = sorted(table, key=lambda l: (l["classe"], -l["points"]))
-% assert [l["nom"] for l in par_classe] == ["Theo", "Karim", "Ines", "Lou"]
-% # le tri est stable : a cle egale, l'ordre d'origine est conserve
+% par_classe = sorted(table, key=lambda ligne: (ligne["classe"], -ligne["points"]))
+% assert [ligne["nom"] for ligne in par_classe] == ["Theo", "Karim", "Ines", "Lou"]
+% # le tri est stable : a cle egale, ligne'ordre d'origine est conserve
 % egaux = [{"n": "a", "k": 1}, {"n": "b", "k": 1}, {"n": "c", "k": 0}]
-% assert [l["n"] for l in sorted(egaux, key=lambda l: l["k"])] == ["c", "a", "b"]
+% assert [ligne["n"] for ligne in sorted(egaux, key=lambda ligne: ligne["k"])] == ["c", "a", "b"]
 % END-VERIFY
 
 \textbf{Pièges :}

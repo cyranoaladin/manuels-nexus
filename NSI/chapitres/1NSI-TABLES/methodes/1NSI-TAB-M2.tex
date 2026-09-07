@@ -14,7 +14,7 @@ conditions à la fois.
   \item \textbf{Compose} avec \lstinline{and}, \lstinline{or}, \lstinline{not}, en mettant
     les parenthèses dès qu'il y a plus d'un connecteur.
   \item \textbf{Filtre} par compréhension de liste :
-    \lstinline{[l for l in table if critère]}. Le résultat est une nouvelle table, de même
+    \lstinline{[ligne for ligne in table if critère]}. Le résultat est une nouvelle table, de même
     forme, qu'on peut à son tour trier ou filtrer.
   \item \textbf{Teste sur les bords} : le critère doit être vérifié sur une ligne qui passe,
     une qui ne passe pas, et une qui est exactement à la limite.
@@ -28,7 +28,7 @@ def selection(table, critere):
 
 recus_1g2 = selection(
     table,
-    lambda l: l["classe"] == "1G2" and l["points"] >= 10,
+    lambda ligne: ligne["classe"] == "1G2" and ligne["points"] >= 10,
 )
 \end{python}
 
@@ -41,19 +41,19 @@ recus_1g2 = selection(
 % ]
 % def selection(table, critere):
 %     return [ligne for ligne in table if critere(ligne)]
-% recus = selection(table, lambda l: l["classe"] == "1G2" and l["points"] >= 10)
-% assert [l["nom"] for l in recus] == ["Ines", "Lou"]
+% recus = selection(table, lambda ligne: ligne["classe"] == "1G2" and ligne["points"] >= 10)
+% assert [ligne["nom"] for ligne in recus] == ["Ines", "Lou"]
 % # Lou est exactement a la limite : >= la garde, > la perdrait
-% stricts = selection(table, lambda l: l["classe"] == "1G2" and l["points"] > 10)
-% assert [l["nom"] for l in stricts] == ["Ines"]
+% stricts = selection(table, lambda ligne: ligne["classe"] == "1G2" and ligne["points"] > 10)
+% assert [ligne["nom"] for ligne in stricts] == ["Ines"]
 % # « les 1G2 et les 1G1 » est une reunion : or, pas and
-% reunion = selection(table, lambda l: l["classe"] == "1G2" or l["classe"] == "1G1")
+% reunion = selection(table, lambda ligne: ligne["classe"] == "1G2" or ligne["classe"] == "1G1")
 % assert len(reunion) == 4
-% intersection = selection(table, lambda l: l["classe"] == "1G2" and l["classe"] == "1G1")
+% intersection = selection(table, lambda ligne: ligne["classe"] == "1G2" and ligne["classe"] == "1G1")
 % assert intersection == []
 % # la negation est le complementaire exact
-% autres = selection(table, lambda l: not (l["classe"] == "1G2"))
-% assert len(autres) + len([l for l in table if l["classe"] == "1G2"]) == len(table)
+% autres = selection(table, lambda ligne: not (ligne["classe"] == "1G2"))
+% assert len(autres) + len([ligne for ligne in table if ligne["classe"] == "1G2"]) == len(table)
 % # filtrer ne modifie pas la table d'origine
 % assert len(table) == 4
 % END-VERIFY
@@ -65,7 +65,7 @@ recus_1g2 = selection(
     et le \lstinline{and} renverrait une table vide. Une sélection vide doit toujours faire
     relire le critère.
   \item Comparer un nombre à une chaîne parce que la conversion a été oubliée à l'import :
-    \lstinline{l["points"] >= 10} lève alors une \lstinline{TypeError}.
+    \lstinline{ligne["points"] >= 10} lève alors une \lstinline{TypeError}.
   \item Se tromper de borne : « au moins $10$ » s'écrit \lstinline{>= 10}, « plus de $10$ »
     s'écrit \lstinline{> 10}. Une ligne à exactement $10$ points distingue les deux.
   \item Modifier \lstinline{table} pendant qu'on la parcourt. Construis une nouvelle liste,

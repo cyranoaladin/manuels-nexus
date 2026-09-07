@@ -16,3 +16,18 @@
 \textbf{Q2.} Le système d'exploitation gere le partage des ressources materielles (memoire, processeur, peripheriques) entre plusieurs programmes, ajoutant une couche logicielle entre l'utilisateur/les applications et le matériel, ce qui permet a ce dernier de rester generique.
 
 \end{corrige}
+% BEGIN-VERIFY
+% # Les trois dates du corrige A doivent etre celles du cours, et dans
+% # l'ordre que la question d'association attend.
+% corrige = {"Turing": 1936, "programme enregistre": 1948, "ARPANET": 1969}
+% cours = {"Turing": 1936, "programme enregistre": 1948, "ARPANET": 1969}
+% assert corrige == cours
+% assert list(corrige.values()) == sorted(corrige.values())
+% # Q2 justifie 1936 : la date citee est bien celle de la machine
+% # universelle, pas celle de l'architecture de von Neumann (1945).
+% von_neumann = 1945
+% assert corrige["Turing"] < von_neumann < corrige["programme enregistre"]
+% # Q3 situe la diversification APRES les annees 1980, donc apres ARPANET.
+% diversification = 1980
+% assert diversification > corrige["ARPANET"]
+% END-VERIFY

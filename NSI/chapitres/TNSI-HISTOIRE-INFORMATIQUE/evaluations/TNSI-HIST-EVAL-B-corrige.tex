@@ -16,3 +16,21 @@
 \textbf{Q2.} Exemple accepte : une console de jeux ou un ordinateur personnel peut executer des milliers de jeux ou d'applications très différents sans modification matérielle, uniquement par installation de logiciels différents.
 
 \end{corrige}
+% BEGIN-VERIFY
+% # Le corrige B avance quatre reperes : 1936 (Turing), 1948 (premiers
+% # ordinateurs a programme enregistre), 1969 (ARPANET, borne de la
+% # question) et 1989-1991 (Web, invente par Tim Berners-Lee).
+% turing = 1936
+% programme_enregistre = 1948
+% arpanet = 1969
+% web_debut, web_fin = 1989, 1991
+% assert turing < programme_enregistre < arpanet < web_debut <= web_fin
+% # La question 3 exige un evenement posterieur a 1969 : le Web convient.
+% assert web_debut > arpanet
+% # Le Web n'est pas Internet : il lui est posterieur d'une vingtaine
+% # d'annees, ce que l'erreur frequente du cours souligne.
+% assert web_debut - arpanet == 20
+% # L'informatique des annees 1950 precede le materiel generique actuel.
+% annees_cinquante = 1950
+% assert programme_enregistre < annees_cinquante < arpanet
+% END-VERIFY

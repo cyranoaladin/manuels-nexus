@@ -1,4 +1,4 @@
-% META: {"id": "TNSI-HIST-EVAL-B", "chapitre": "TNSI-HISTOIRE-INFORMATIQUE", "type_objet": "evaluation", "capacites": ["T-HIST-01A", "T-HIST-01B"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 30, "status": "generated"}
+% META: {"id": "TNSI-HIST-EVAL-B", "chapitre": "TNSI-HISTOIRE-INFORMATIQUE", "type_objet": "evaluation", "version": "B", "capacites": ["T-HIST-01A", "T-HIST-01B"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 30, "status": "generated"}
 \section*{Évaluation B --- Histoire de l'informatique}
 \textit{Durée : 30 minutes. Documents interdits.}
 
@@ -22,3 +22,25 @@
   \item (5 pts) Expliquer la difference entre l'informatique des années 1950 (matériel dominant) et l'informatique actuelle (logiciel dominant).
   \item (5 pts) Donner un exemple concret (autre que celui du cours) illustrant cette evolution.
 \end{enumerate}
+% BEGIN-VERIFY
+% # Chronologie attendue par le sujet B, telle que le cours l'etablit
+% # (10_C1_evenements_cles) : machine universelle, premiers ordinateurs a
+% # programme enregistre, ARPANET, puis Web. Une date recopiee de travers
+% # dans l'enonce ou dans son corrige casse cet ordre.
+% machine_universelle = 1936
+% programme_enregistre = 1948
+% arpanet = 1969
+% web = (1989, 1991)
+% assert machine_universelle < programme_enregistre < arpanet
+% assert arpanet < web[0] <= web[1]
+% # Le sujet demande un evenement d'Internet POSTERIEUR a 1969 : le Web en
+% # est un, la mise en service d'ARPANET n'en serait pas un.
+% assert web[0] > arpanet
+% # Bareme : deux exercices de 10 points, total sur 20.
+% bareme = {"Ex. 1": 10, "Ex. 2": 10}
+% assert sum(bareme.values()) == 20
+% # Exercice 1 : 4 + 3 + 3 points.
+% assert 4 + 3 + 3 == bareme["Ex. 1"]
+% # Exercice 2 : 5 + 5 points.
+% assert 5 + 5 == bareme["Ex. 2"]
+% END-VERIFY

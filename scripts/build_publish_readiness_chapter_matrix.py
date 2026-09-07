@@ -732,22 +732,30 @@ def _machine_science_current(source: Path, chapter_dir: Path) -> bool:
 
     Un objet dont le recu est absent, delie, perime ou orphelin n'est pas
     prouve, quel que soit le `status` inscrit dans sa META.
+
+    Les deux corpus ne nomment pas leur recu de la meme facon : le gate SymPy
+    des maths ecrit `<objet>.sympy.json`, le gate d'execution NSI ecrit
+    `<objet>.execution.json`. N'accepter que le premier reclamait d'un chapitre
+    NSI une preuve que sa chaine ne produit pas, et aucune evaluation NSI ne
+    pouvait etre prouvee, quel que soit le travail accompli. On accepte donc le
+    recu du corpus -- sans rien relacher : il faut toujours qu'il nomme la
+    source, corresponde a son contenu actuel, et porte le verdict `pass`.
     """
 
-    receipt_path = chapter_dir / "validations" / f"{source.stem}.sympy.json"
-    if not receipt_path.is_file():
-        return False
-    try:
-        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return False
-    if receipt.get("verdict") != "pass":
-        return False
-    declared = receipt.get("source_sha256")
-    if not declared:
-        return False
     digest = "sha256:" + hashlib.sha256(source.read_bytes()).hexdigest()
-    return digest == declared
+    for suffix in ("sympy", "execution"):
+        receipt_path = chapter_dir / "validations" / f"{source.stem}.{suffix}.json"
+        if not receipt_path.is_file():
+            continue
+        try:
+            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if receipt.get("verdict") != "pass":
+            continue
+        if receipt.get("source_sha256") == digest:
+            return True
+    return False
 
 
 def _relative_to_root(path: Path) -> str:

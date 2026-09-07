@@ -14,6 +14,7 @@ Verdicts (validation.schema.json) écrits dans chapitres/{CHAP}/validations/ :
 """
 import argparse
 import datetime
+import hashlib
 import re
 import subprocess
 import sys
@@ -103,11 +104,20 @@ def main(chap: str, no_ruff: bool, check: bool = False) -> int:
     for sub in SUBDIRS:
         for tex in sorted((chap_dir / sub).glob("*.tex")):
             result = check_object(tex, no_ruff)
+            # Un recu qui ne nomme pas la source qu'il atteste ne peut pas
+            # PERIMER : un « pass » d'il y a trois mois continue de certifier
+            # un contenu reecrit depuis. Le gate de couverture d'evaluations
+            # exige d'ailleurs cette liaison, et faute de la trouver ici il
+            # refusait chaque evaluation NSI sans qu'aucun defaut ne l'explique.
+            # Le recu porte donc le chemin et le digest du contenu exact
+            # qu'il a execute, comme le fait deja le gate SymPy des maths.
             record = {
                 "objet_id": tex.stem, "gate": "sympy",  # champ 'gate' du schéma : exécution
                 "verdict": "pass" if result["verdict"] == "verified" else result["verdict"],
                 "details": {"checks": result["checks"]},
                 "reviewer": "verify_python.py",
+                "source_path": str(tex.relative_to(ROOT)),
+                "source_sha256": "sha256:" + hashlib.sha256(tex.read_bytes()).hexdigest(),
                 "created_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
             }
             record["gate"] = "sympy"  # compat schéma ; sémantique : gate d'exécution

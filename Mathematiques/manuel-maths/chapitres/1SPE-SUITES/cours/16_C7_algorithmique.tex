@@ -116,7 +116,19 @@ dépasse le programme de première.
 %
 % # Les trois programmes du chapitre sont executes, et leurs sorties comparees
 % # a un calcul independant.
-% racine = pathlib.Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python")
+% # Le repertoire est retrouve en remontant depuis le dossier courant : le
+% # bloc est execute tantot depuis la racine du depot, tantot depuis le projet
+% # Mathematiques, et un chemin relatif ecrit en dur ne resout que dans l'un
+% # des deux -- l'oracle echouait alors sans qu'aucune mathematique ne soit en
+% # cause.
+% depart = pathlib.Path.cwd().resolve()
+% relatif = "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python"
+% racine = None
+% for candidat in [depart, *depart.parents]:
+%     if (candidat / relatif).is_dir():
+%         racine = candidat / relatif
+%         break
+% assert racine is not None, "repertoire python du chapitre introuvable"
 %
 % def charge(nom):
 %     espace = {}
