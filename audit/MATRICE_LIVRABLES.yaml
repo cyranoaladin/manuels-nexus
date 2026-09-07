@@ -234,10 +234,10 @@ manuals:
   TCOMPL:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '209'
+      detail: '226'
       source: anomalies.blocking_statuses
     - code: statuts_non_approuves
-      detail: objets=200; contrats=9
+      detail: objets=217; contrats=9
       source: manuals.TCOMPL.statuses
     current:
       artifacts:
@@ -257,21 +257,21 @@ manuals:
       statuses:
         approved: 575
         generated: 150
-        needs_review: 50
+        needs_review: 67
       totals:
         banque_ecrite: 0
         banque_pratique: 0
         capacites: 53
-        corriges: 318
+        corriges: 324
         coups_de_pouce: 0
         diagnostics: 0
         evaluations: 18
-        exercices_principaux: 300
-        methodes: 50
+        exercices_principaux: 306
+        methodes: 52
         projets: 0
         qcm: 9
         remediations: 50
-        sections_cours: 24
+        sections_cours: 27
         td: 6
     objective:
       directive: docs/11_perimetre_terminale_complementaires.md
@@ -378,7 +378,7 @@ manuals:
   TNSI:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '151'
+      detail: '163'
       source: anomalies.blocking_statuses
     - code: livrable_non_compile
       detail: declared
@@ -396,7 +396,7 @@ manuals:
       detail: declared
       source: deliverable_matrix.TNSI.variants.version_amenagee
     - code: statuts_non_approuves
-      detail: objets=144; contrats=7
+      detail: objets=156; contrats=7
       source: manuals.TNSI.statuses
     current:
       artifacts:
@@ -413,7 +413,7 @@ manuals:
       - TNSI-STRUCTURES-DONNEES
       statuses:
         generated: 142
-        needs_review: 2
+        needs_review: 14
       totals:
         banque_ecrite: 18
         banque_pratique: 8
@@ -423,7 +423,7 @@ manuals:
         diagnostics: 0
         evaluations: 12
         exercices_principaux: 23
-        methodes: 0
+        methodes: 12
         projets: 1
         qcm: 7
         remediations: 5
@@ -499,7 +499,7 @@ manuals:
   TSPE_2026_2027:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '56'
+      detail: '59'
       source: anomalies.blocking_statuses
     - code: livrable_non_compile
       detail: declared
@@ -508,7 +508,7 @@ manuals:
       detail: declared
       source: deliverable_matrix.TSPE_2026_2027.variants.livret_remediation
     - code: statuts_non_approuves
-      detail: objets=56; contrats=0
+      detail: objets=59; contrats=0
       source: manuals.TSPE_2026_2027.statuses
     current:
       artifacts:
@@ -530,6 +530,7 @@ manuals:
       statuses:
         approved: 780
         generated: 56
+        needs_review: 3
       totals:
         banque_ecrite: 0
         banque_pratique: 0
@@ -539,7 +540,7 @@ manuals:
         diagnostics: 0
         evaluations: 22
         exercices_principaux: 277
-        methodes: 38
+        methodes: 41
         projets: 0
         qcm: 11
         remediations: 56
@@ -596,12 +597,12 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:49a38014152687659b60066dacfa5a93726f1f77e4167514cd8404afcf3860e0
+model_digest: sha256:e3d5ba271ff81ac83e7ab2b7d7026e438e65b844443cc3325a665e9ceb3a33d0
 provenance:
   branch: null
   dirty: false
   errors: []
-  generated_at_utc: '2026-09-07T06:07:37Z'
+  generated_at_utc: '2026-09-07T08:20:32Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:79b255deeddfa4b483a9a5a9f568bdc143defd7b2a69e8b8a704f4afdd35d6bf
     scripts/build_manifest.py: sha256:62d4f5da9454aaa2923041db777b759e3e4b672e7c2f33b59a62e07afc76de26
@@ -613,7 +614,7 @@ provenance:
   generator_sha256: sha256:f932fe8c33273bdba8f5f9230ed39a824111f74177310dc1c4ea7c529714d065
   generator_version: 1
   git_available: true
-  head_sha: 82d63cc9b0379da7f3aa1406d5d897941c0816a4
+  head_sha: ce8dadfa5af526db351035f7cd8d2f12ad8920c6
   modified_tracked: []
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
@@ -625,4 +626,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:15e2858432e28678ac768858f6320b0f95c39fcc61d0cb07177a59722f95758c
+source_digest: sha256:a24d757091a6e93c169e2469a8bab7158dbab7a78b08e5b816df73c3bbb2c204

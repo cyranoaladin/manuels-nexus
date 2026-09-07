@@ -8,16 +8,16 @@
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1NSI | NSI Première | NSI | Premiere | courante | 10 | 53 | 101 | 395 | 395 | manual |
 | 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 55 | 484 | 1446 | 1446 | manual |
-| TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 53 | 300 | 775 | 775 | manual |
+| TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 53 | 306 | 792 | 792 | manual |
 | TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 194 | 500 | 500 | manual |
-| TNSI | NSI Terminale | NSI | Terminale | courante | 7 | 61 | 23 | 144 | 144 | manual |
-| TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 11 | 67 | 277 | 836 | 836 | manual |
+| TNSI | NSI Terminale | NSI | Terminale | courante | 7 | 61 | 23 | 156 | 156 | manual |
+| TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 11 | 67 | 277 | 839 | 839 | manual |
 
 ## Anomalies détectées
 
 | Catégorie | Nombre |
 |---|---|
-| blocking_statuses | 2392 |
+| blocking_statuses | 2424 |
 
 ### Échantillon déterministe
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
