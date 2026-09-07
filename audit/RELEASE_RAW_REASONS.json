@@ -3,7 +3,7 @@
   "schema_version": 3,
   "generated_by": "scripts/build_release_raw_reasons.py",
   "freshness": {
-    "EVIDENCE_HEAD": "3233bd5020448dafeebde37fae5a8f860aaee845",
+    "EVIDENCE_HEAD": "51f0717b53ca97014aecb5931b47411d720892f2",
     "INPUT_PATHS": [
       "audit/gate_observations/release-strict-3233bd50.json"
     ],
@@ -29,16 +29,16 @@
     "DUPLICATE_REASON_IDS": 0,
     "BLOCKER_CLASSIFICATION_CONFLICTS": 0,
     "PRODUCT_P0": 0,
-    "PRODUCT_P1": 4,
+    "PRODUCT_P1": 2,
     "PRODUCT_P2": 1,
-    "CERTIFICATION_BLOCKERS": 9,
-    "RELEASE_POLICY_BLOCKERS": 1,
+    "CERTIFICATION_BLOCKERS": 10,
+    "RELEASE_POLICY_BLOCKERS": 2,
     "GOVERNANCE_BLOCKERS": 1,
     "RAW_REASONS_BY_TAXONOMY": {
-      "CERTIFICATION_BLOCKER": 161,
+      "CERTIFICATION_BLOCKER": 197,
       "GOVERNANCE_BLOCKER": 12,
-      "PRODUCT_P1": 84,
-      "RELEASE_POLICY_BLOCKER": 1,
+      "RELEASE_POLICY_BLOCKER": 5,
+      "PRODUCT_P1": 44,
       "PRODUCT_P2": 35
     }
   },
@@ -94,62 +94,6 @@
       ]
     },
     {
-      "root_blocker_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "title": "Variantes déclarées jamais construites",
-      "taxonomy": "PRODUCT_P1",
-      "dependent_reason_count": 26,
-      "dependent_reason_ids": [
-        "RSN-02023e6f61cbee19",
-        "RSN-0cc7c98e8018f7f3",
-        "RSN-23af4f1064b162e8",
-        "RSN-2b3674e20ca098b0",
-        "RSN-387a42e783320c70",
-        "RSN-3b3f6ef3b0ebb702",
-        "RSN-3ff4aa7afde7d296",
-        "RSN-400d21e552547541",
-        "RSN-41106933249fd1a6",
-        "RSN-46002f4e6ac1f5d5",
-        "RSN-4c16c7611fd74f65",
-        "RSN-4c38c6a4da58cbe8",
-        "RSN-6def6345f10db8b4",
-        "RSN-721166773fc7e9ed",
-        "RSN-83f4fe36619ddbf1",
-        "RSN-8c729c7e45eea659",
-        "RSN-971d7f66948ee446",
-        "RSN-9b9e6ad9a3b47df2",
-        "RSN-9d6b554b08977e3d",
-        "RSN-b1a142de9d0d196d",
-        "RSN-bb9cf7763cb54580",
-        "RSN-e0aca017e6cb4a8e",
-        "RSN-e9fb7a88504ba261",
-        "RSN-ed47cf9ba118f0fb",
-        "RSN-f2bbad663d001791",
-        "RSN-fd2b2f5403a96885"
-      ]
-    },
-    {
-      "root_blocker_id": "ROOT-DELIVERABLE-NOT-COMPILED",
-      "title": "Livrables déclarés non compilés",
-      "taxonomy": "PRODUCT_P1",
-      "dependent_reason_count": 14,
-      "dependent_reason_ids": [
-        "RSN-1ee71001c51c08b9",
-        "RSN-261b9d70243d6399",
-        "RSN-276d09faf398443b",
-        "RSN-3218bbd88cdf22c0",
-        "RSN-5b18c5320c5eca4a",
-        "RSN-5f6ebbac0a7cec33",
-        "RSN-7fee018ef7d52d66",
-        "RSN-840ff1166a475bd9",
-        "RSN-93ede7fd0ba49f2c",
-        "RSN-d00b70121b3a009e",
-        "RSN-d0334bda10e6be87",
-        "RSN-d31c7891c77bf6fa",
-        "RSN-f9828c9818764355",
-        "RSN-fd19c784082520a4"
-      ]
-    },
-    {
       "root_blocker_id": "ROOT-DIMENSION-NOT-COVERED",
       "title": "Dimensions de certification sans preuve",
       "taxonomy": "CERTIFICATION_BLOCKER",
@@ -166,6 +110,50 @@
       "dependent_reason_count": 1,
       "dependent_reason_ids": [
         "RSN-05ef488d6a3414b1"
+      ]
+    },
+    {
+      "root_blocker_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "title": "Preuve de build final absente (attend le gel)",
+      "taxonomy": "CERTIFICATION_BLOCKER",
+      "dependent_reason_count": 36,
+      "dependent_reason_ids": [
+        "RSN-02023e6f61cbee19",
+        "RSN-0cc7c98e8018f7f3",
+        "RSN-1ee71001c51c08b9",
+        "RSN-23af4f1064b162e8",
+        "RSN-261b9d70243d6399",
+        "RSN-276d09faf398443b",
+        "RSN-2b3674e20ca098b0",
+        "RSN-3218bbd88cdf22c0",
+        "RSN-387a42e783320c70",
+        "RSN-3b3f6ef3b0ebb702",
+        "RSN-3ff4aa7afde7d296",
+        "RSN-400d21e552547541",
+        "RSN-41106933249fd1a6",
+        "RSN-46002f4e6ac1f5d5",
+        "RSN-4c16c7611fd74f65",
+        "RSN-4c38c6a4da58cbe8",
+        "RSN-5b18c5320c5eca4a",
+        "RSN-6def6345f10db8b4",
+        "RSN-721166773fc7e9ed",
+        "RSN-7fee018ef7d52d66",
+        "RSN-83f4fe36619ddbf1",
+        "RSN-840ff1166a475bd9",
+        "RSN-971d7f66948ee446",
+        "RSN-9d6b554b08977e3d",
+        "RSN-b1a142de9d0d196d",
+        "RSN-bb9cf7763cb54580",
+        "RSN-d00b70121b3a009e",
+        "RSN-d0334bda10e6be87",
+        "RSN-d31c7891c77bf6fa",
+        "RSN-e0aca017e6cb4a8e",
+        "RSN-e9fb7a88504ba261",
+        "RSN-ed47cf9ba118f0fb",
+        "RSN-f2bbad663d001791",
+        "RSN-f9828c9818764355",
+        "RSN-fd19c784082520a4",
+        "RSN-fd2b2f5403a96885"
       ]
     },
     {
@@ -247,6 +235,18 @@
         "RSN-c298974c70e4aabe",
         "RSN-ca3f478e66d9c874",
         "RSN-fec8187a1229ea49"
+      ]
+    },
+    {
+      "root_blocker_id": "ROOT-OPTIONAL-DELIVERABLE-NOT-APPROVED",
+      "title": "Livrable facultatif seulement proposé",
+      "taxonomy": "RELEASE_POLICY_BLOCKER",
+      "dependent_reason_count": 4,
+      "dependent_reason_ids": [
+        "RSN-5f6ebbac0a7cec33",
+        "RSN-8c729c7e45eea659",
+        "RSN-93ede7fd0ba49f2c",
+        "RSN-9b9e6ad9a3b47df2"
       ]
     },
     {
@@ -702,526 +702,6 @@
       ]
     },
     {
-      "reason_id": "RSN-400d21e552547541",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "1NSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1NSI:build_observé_absent:evaluations",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-e9fb7a88504ba261",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "1NSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1NSI:build_observé_absent:livret_methodes",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-b1a142de9d0d196d",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "1NSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1NSI:build_observé_absent:manuel_eleve",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-3b3f6ef3b0ebb702",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "1NSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1NSI:build_observé_absent:manuel_professeur",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-9b9e6ad9a3b47df2",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "1NSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1NSI:build_observé_absent:projets",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-83f4fe36619ddbf1",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "1NSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1NSI:build_observé_absent:remediations",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-46002f4e6ac1f5d5",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "1NSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1NSI:build_observé_absent:version_amenagee",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-4c38c6a4da58cbe8",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "1SPE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1SPE:build_observé_absent:livret_methodes",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-387a42e783320c70",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "1SPE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1SPE:build_observé_absent:livret_remediation",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-ed47cf9ba118f0fb",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "1SPE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1SPE:build_observé_absent:manuel_eleve",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-41106933249fd1a6",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "1SPE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1SPE:build_observé_absent:manuel_professeur",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-23af4f1064b162e8",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "TCOMPL",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TCOMPL:build_observé_absent:manuel_eleve",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-971d7f66948ee446",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "TCOMPL",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TCOMPL:build_observé_absent:manuel_professeur",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-e0aca017e6cb4a8e",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "TEXPERTES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TEXPERTES:build_observé_absent:manuel_eleve",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-3ff4aa7afde7d296",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "TEXPERTES",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TEXPERTES:build_observé_absent:manuel_professeur",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-bb9cf7763cb54580",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "TNSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TNSI:build_observé_absent:banque_ecrite",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-6def6345f10db8b4",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "TNSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TNSI:build_observé_absent:banque_pratique",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-2b3674e20ca098b0",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "TNSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TNSI:build_observé_absent:manuel_eleve",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-4c16c7611fd74f65",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "TNSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TNSI:build_observé_absent:manuel_professeur",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-8c729c7e45eea659",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "TNSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TNSI:build_observé_absent:projets",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-f2bbad663d001791",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "TNSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TNSI:build_observé_absent:remediations",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-0cc7c98e8018f7f3",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "TNSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TNSI:build_observé_absent:version_amenagee",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-fd2b2f5403a96885",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "TSPE_2026_2027",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TSPE_2026_2027:build_observé_absent:livret_methodes",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-02023e6f61cbee19",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "TSPE_2026_2027",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TSPE_2026_2027:build_observé_absent:livret_remediation",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-9d6b554b08977e3d",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "TSPE_2026_2027",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TSPE_2026_2027:build_observé_absent:manuel_eleve",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-721166773fc7e9ed",
-      "producer": "inventory_collection.observed_build_coverage",
-      "target": "TSPE_2026_2027",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TSPE_2026_2027:build_observé_absent:manuel_professeur",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-840ff1166a475bd9",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "1NSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.evaluations:declared",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-7fee018ef7d52d66",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "1NSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.livret_methodes:declared",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-5f6ebbac0a7cec33",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "1NSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.projets:declared",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-d0334bda10e6be87",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "1NSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.remediations:declared",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-f9828c9818764355",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "1NSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.version_amenagee:declared",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-276d09faf398443b",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "1SPE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1SPE:livrable_non_compile:deliverable_matrix.1SPE.variants.livret_methodes:declared",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-1ee71001c51c08b9",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "1SPE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1SPE:livrable_non_compile:deliverable_matrix.1SPE.variants.livret_remediation:declared",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-261b9d70243d6399",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "TNSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.banque_ecrite:declared",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-d00b70121b3a009e",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "TNSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.banque_pratique:declared",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-93ede7fd0ba49f2c",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "TNSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.projets:declared",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-3218bbd88cdf22c0",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "TNSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.remediations:declared",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-fd19c784082520a4",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "TNSI",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.version_amenagee:declared",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-d31c7891c77bf6fa",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "TSPE_2026_2027",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TSPE_2026_2027:livrable_non_compile:deliverable_matrix.TSPE_2026_2027.variants.livret_methodes:declared",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
-      "reason_id": "RSN-5b18c5320c5eca4a",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "TSPE_2026_2027",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TSPE_2026_2027:livrable_non_compile:deliverable_matrix.TSPE_2026_2027.variants.livret_remediation:declared",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
-      "observed_in": [
-        "release-strict"
-      ]
-    },
-    {
       "reason_id": "RSN-385435dc89962e35",
       "producer": "inventory_collection.gate_dimensions",
       "target": "mathematics",
@@ -1259,6 +739,690 @@
       "observed_in": [
         "release-strict"
       ]
+    },
+    {
+      "reason_id": "RSN-400d21e552547541",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "1NSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "1NSI:build_observé_absent:evaluations",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-e9fb7a88504ba261",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "1NSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "1NSI:build_observé_absent:livret_methodes",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-b1a142de9d0d196d",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "1NSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "1NSI:build_observé_absent:manuel_eleve",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-3b3f6ef3b0ebb702",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "1NSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "1NSI:build_observé_absent:manuel_professeur",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-83f4fe36619ddbf1",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "1NSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "1NSI:build_observé_absent:remediations",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-46002f4e6ac1f5d5",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "1NSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "1NSI:build_observé_absent:version_amenagee",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-840ff1166a475bd9",
+      "producer": "inventory_collection.deliverable_matrix",
+      "target": "1NSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.evaluations:declared",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-7fee018ef7d52d66",
+      "producer": "inventory_collection.deliverable_matrix",
+      "target": "1NSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.livret_methodes:declared",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-d0334bda10e6be87",
+      "producer": "inventory_collection.deliverable_matrix",
+      "target": "1NSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.remediations:declared",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-f9828c9818764355",
+      "producer": "inventory_collection.deliverable_matrix",
+      "target": "1NSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.version_amenagee:declared",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-4c38c6a4da58cbe8",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "1SPE",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "1SPE:build_observé_absent:livret_methodes",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-387a42e783320c70",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "1SPE",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "1SPE:build_observé_absent:livret_remediation",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-ed47cf9ba118f0fb",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "1SPE",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "1SPE:build_observé_absent:manuel_eleve",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-41106933249fd1a6",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "1SPE",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "1SPE:build_observé_absent:manuel_professeur",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-276d09faf398443b",
+      "producer": "inventory_collection.deliverable_matrix",
+      "target": "1SPE",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "1SPE:livrable_non_compile:deliverable_matrix.1SPE.variants.livret_methodes:declared",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-1ee71001c51c08b9",
+      "producer": "inventory_collection.deliverable_matrix",
+      "target": "1SPE",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "1SPE:livrable_non_compile:deliverable_matrix.1SPE.variants.livret_remediation:declared",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-23af4f1064b162e8",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TCOMPL",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TCOMPL:build_observé_absent:manuel_eleve",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-971d7f66948ee446",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TCOMPL",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TCOMPL:build_observé_absent:manuel_professeur",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-e0aca017e6cb4a8e",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TEXPERTES",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TEXPERTES:build_observé_absent:manuel_eleve",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-3ff4aa7afde7d296",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TEXPERTES",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TEXPERTES:build_observé_absent:manuel_professeur",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-bb9cf7763cb54580",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TNSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TNSI:build_observé_absent:banque_ecrite",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-6def6345f10db8b4",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TNSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TNSI:build_observé_absent:banque_pratique",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-2b3674e20ca098b0",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TNSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TNSI:build_observé_absent:manuel_eleve",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-4c16c7611fd74f65",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TNSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TNSI:build_observé_absent:manuel_professeur",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-f2bbad663d001791",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TNSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TNSI:build_observé_absent:remediations",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-0cc7c98e8018f7f3",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TNSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TNSI:build_observé_absent:version_amenagee",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-261b9d70243d6399",
+      "producer": "inventory_collection.deliverable_matrix",
+      "target": "TNSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.banque_ecrite:declared",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-d00b70121b3a009e",
+      "producer": "inventory_collection.deliverable_matrix",
+      "target": "TNSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.banque_pratique:declared",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-3218bbd88cdf22c0",
+      "producer": "inventory_collection.deliverable_matrix",
+      "target": "TNSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.remediations:declared",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-fd19c784082520a4",
+      "producer": "inventory_collection.deliverable_matrix",
+      "target": "TNSI",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.version_amenagee:declared",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-fd2b2f5403a96885",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TSPE_2026_2027",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TSPE_2026_2027:build_observé_absent:livret_methodes",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-02023e6f61cbee19",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TSPE_2026_2027",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TSPE_2026_2027:build_observé_absent:livret_remediation",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-9d6b554b08977e3d",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TSPE_2026_2027",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TSPE_2026_2027:build_observé_absent:manuel_eleve",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-721166773fc7e9ed",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TSPE_2026_2027",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TSPE_2026_2027:build_observé_absent:manuel_professeur",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-d31c7891c77bf6fa",
+      "producer": "inventory_collection.deliverable_matrix",
+      "target": "TSPE_2026_2027",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TSPE_2026_2027:livrable_non_compile:deliverable_matrix.TSPE_2026_2027.variants.livret_methodes:declared",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
+    },
+    {
+      "reason_id": "RSN-5b18c5320c5eca4a",
+      "producer": "inventory_collection.deliverable_matrix",
+      "target": "TSPE_2026_2027",
+      "object_id": null,
+      "category": "CERTIFICATION_BLOCKER",
+      "evidence": "TSPE_2026_2027:livrable_non_compile:deliverable_matrix.TSPE_2026_2027.variants.livret_remediation:declared",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": true,
+        "DEVELOPMENT_BUILD_PASS": true,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "FINAL_RELEASE_BUILD_EVIDENCE"
+      }
     },
     {
       "reason_id": "RSN-eca46be4b5c1bd26",
@@ -2104,6 +2268,82 @@
       "observed_in": [
         "release-strict"
       ]
+    },
+    {
+      "reason_id": "RSN-9b9e6ad9a3b47df2",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "1NSI",
+      "object_id": null,
+      "category": "RELEASE_POLICY_BLOCKER",
+      "evidence": "1NSI:build_observé_absent:projets",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-OPTIONAL-DELIVERABLE-NOT-APPROVED",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": false,
+        "DEVELOPMENT_BUILD_PASS": false,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "OPTIONAL_DELIVERABLE_NOT_APPROVED"
+      }
+    },
+    {
+      "reason_id": "RSN-5f6ebbac0a7cec33",
+      "producer": "inventory_collection.deliverable_matrix",
+      "target": "1NSI",
+      "object_id": null,
+      "category": "RELEASE_POLICY_BLOCKER",
+      "evidence": "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.projets:declared",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-OPTIONAL-DELIVERABLE-NOT-APPROVED",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": false,
+        "DEVELOPMENT_BUILD_PASS": false,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "OPTIONAL_DELIVERABLE_NOT_APPROVED"
+      }
+    },
+    {
+      "reason_id": "RSN-8c729c7e45eea659",
+      "producer": "inventory_collection.observed_build_coverage",
+      "target": "TNSI",
+      "object_id": null,
+      "category": "RELEASE_POLICY_BLOCKER",
+      "evidence": "TNSI:build_observé_absent:projets",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-OPTIONAL-DELIVERABLE-NOT-APPROVED",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": false,
+        "DEVELOPMENT_BUILD_PASS": false,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "OPTIONAL_DELIVERABLE_NOT_APPROVED"
+      }
+    },
+    {
+      "reason_id": "RSN-93ede7fd0ba49f2c",
+      "producer": "inventory_collection.deliverable_matrix",
+      "target": "TNSI",
+      "object_id": null,
+      "category": "RELEASE_POLICY_BLOCKER",
+      "evidence": "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.projets:declared",
+      "status": "OPEN",
+      "root_cause_id": "ROOT-OPTIONAL-DELIVERABLE-NOT-APPROVED",
+      "observed_in": [
+        "release-strict"
+      ],
+      "build_classification": {
+        "DEVELOPMENT_BUILD_EXISTS": false,
+        "DEVELOPMENT_BUILD_PASS": false,
+        "FINAL_RELEASE_RECEIPT_EXISTS": false,
+        "CLASSIFICATION": "OPTIONAL_DELIVERABLE_NOT_APPROVED"
+      }
     },
     {
       "reason_id": "RSN-c236a3852b70d07a",

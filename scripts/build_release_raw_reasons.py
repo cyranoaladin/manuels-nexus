@@ -133,6 +133,9 @@ ROOT_BLOCKER_TITLES = {
     "ROOT-HUMAN-REVIEW-QUEUE": "File de revue humaine ouverte",
     "ROOT-MISSING-CHAPTERS": "Chapitres attendus absents de l'inventaire",
     "ROOT-DELIVERABLE-NOT-COMPILED": "Livrables déclarés non compilés",
+    "ROOT-FINAL-RELEASE-BUILD-EVIDENCE": "Preuve de build final absente (attend le gel)",
+    "ROOT-DEVELOPMENT-BUILD-MISSING": "Build de développement absent ou invalide",
+    "ROOT-OPTIONAL-DELIVERABLE-NOT-APPROVED": "Livrable facultatif seulement proposé",
     "ROOT-DELIVERABLE-NOT-DECLARED": "Assemblages de variantes non déclarés",
     "ROOT-DELIVERABLE-NOT-BUILT": "Variantes déclarées jamais construites",
     "ROOT-NON-APPROVED-STATUSES": "Objets et contrats non approuvés",
@@ -173,6 +176,57 @@ def classify(reason: str) -> dict[str, Any] | None:
     return None
 
 
+#: Racines de build, réécrites sur preuve. Le libellé d'un motif dit ce que le
+#: gate a constaté ; il ne dit pas ce que ce constat SIGNIFIE. « Variante
+#: jamais construite » recouvre trois situations très différentes : un
+#: livrable requis sans build de développement — une dette produit ; un
+#: livrable requis dont le build passe mais dont le reçu final n'existe pas
+#: encore — une exigence de certification que le gel lèvera ; un livrable
+#: seulement proposé — une question de périmètre. Les fondre sous
+#: `PRODUCT_P1` faisait porter à l'équipe produit un blocage qu'aucun travail
+#: produit ne pouvait lever.
+BUILD_REASON_ROOTS = {
+    "DEVELOPMENT_BUILD": "ROOT-DEVELOPMENT-BUILD-MISSING",
+    "FINAL_RELEASE_BUILD_EVIDENCE": "ROOT-FINAL-RELEASE-BUILD-EVIDENCE",
+    "OPTIONAL_DELIVERABLE_NOT_APPROVED": "ROOT-OPTIONAL-DELIVERABLE-NOT-APPROVED",
+}
+BUILD_ROOTS_TO_RECLASSIFY = frozenset(
+    {"ROOT-DELIVERABLE-NOT-BUILT", "ROOT-DELIVERABLE-NOT-COMPILED"}
+)
+
+
+def _reclassify_build_reasons(raw_reasons: list[dict[str, Any]]) -> None:
+    """Réécrit taxonomie et racine des motifs de build, sur preuve.
+
+    La preuve est recalculée depuis le disque — le PDF existe-t-il, s'ouvre-t-il,
+    un reçu est-il intégré — jamais lue depuis la taxonomie qu'elle corrige.
+    """
+    concernes = [
+        entry for entry in raw_reasons
+        if entry.get("root_cause_id") in BUILD_ROOTS_TO_RECLASSIFY
+    ]
+    if not concernes:
+        return
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import build_build_blocker_classification as builds  # noqa: PLC0415
+
+    for entry in concernes:
+        couple = builds.parse_build_reason(str(entry.get("evidence", "")))
+        if couple is None:
+            raise SystemExit(
+                f"BUILD_REASON_UNPARSED: {entry.get('evidence')}"
+            )
+        verdict = builds.classification_for(*couple)
+        entry["category"] = verdict["expected_taxonomy"]
+        entry["root_cause_id"] = BUILD_REASON_ROOTS[verdict["CLASSIFICATION"]]
+        entry["build_classification"] = {
+            "DEVELOPMENT_BUILD_EXISTS": verdict["DEVELOPMENT_BUILD_EXISTS"],
+            "DEVELOPMENT_BUILD_PASS": verdict["DEVELOPMENT_BUILD_PASS"],
+            "FINAL_RELEASE_RECEIPT_EXISTS": verdict["FINAL_RELEASE_RECEIPT_EXISTS"],
+            "CLASSIFICATION": verdict["CLASSIFICATION"],
+        }
+
+
 def build(gate_payloads: list[dict[str, Any]],
           gate_input_paths: list[str] | None = None) -> dict[str, Any]:
     """Union des motifs observés, chaque motif gardant sa provenance.
@@ -201,6 +255,8 @@ def build(gate_payloads: list[dict[str, Any]],
             entry["observed_in"] = [provenance]
             seen[entry["reason_id"]] = entry
             raw_reasons.append(entry)
+
+    _reclassify_build_reasons(raw_reasons)
 
     ids = Counter(entry["reason_id"] for entry in raw_reasons)
     duplicates = sorted(rid for rid, count in ids.items() if count > 1)

@@ -11,10 +11,10 @@ Dérivé intégralement du gate `release-strict`. Aucun compte n'est écrit en d
 | Taxonomie | Bloqueurs racines |
 |---|---|
 | `PRODUCT_P0` | 0 |
-| `PRODUCT_P1` | 4 |
+| `PRODUCT_P1` | 2 |
 | `PRODUCT_P2` | 1 |
-| `CERTIFICATION_BLOCKER` | 9 |
-| `RELEASE_POLICY_BLOCKER` | 1 |
+| `CERTIFICATION_BLOCKER` | 10 |
+| `RELEASE_POLICY_BLOCKER` | 2 |
 | `GOVERNANCE_BLOCKER` | 1 |
 
 ## Bloqueurs racines
@@ -25,12 +25,12 @@ Dérivé intégralement du gate `release-strict`. Aucun compte n'est écrit en d
 | `ROOT-CONTENT-MATRIX-INCOMPLETE` | `CERTIFICATION_BLOCKER` | Matrice de contenu machine incomplète | 1 |
 | `ROOT-COURSE-ASSEMBLY` | `PRODUCT_P1` | Assemblage de cours incomplet | 1 |
 | `ROOT-CROSS-DISCIPLINE-AUDIT` | `CERTIFICATION_BLOCKER` | Contenu inter-disciplinaire non audité | 15 |
-| `ROOT-DELIVERABLE-NOT-BUILT` | `PRODUCT_P1` | Variantes déclarées jamais construites | 26 |
-| `ROOT-DELIVERABLE-NOT-COMPILED` | `PRODUCT_P1` | Livrables déclarés non compilés | 14 |
 | `ROOT-DIMENSION-NOT-COVERED` | `CERTIFICATION_BLOCKER` | Dimensions de certification sans preuve | 2 |
 | `ROOT-EXERCISE-CORRECTION-GRAPH-NOT-AUDITED` | `CERTIFICATION_BLOCKER` | Graphe exercice/corrigé non audité | 1 |
+| `ROOT-FINAL-RELEASE-BUILD-EVIDENCE` | `CERTIFICATION_BLOCKER` | Preuve de build final absente (attend le gel) | 36 |
 | `ROOT-HUMAN-REVIEW-QUEUE` | `CERTIFICATION_BLOCKER` | File de revue humaine ouverte | 53 |
 | `ROOT-NON-APPROVED-STATUSES` | `GOVERNANCE_BLOCKER` | Objets et contrats non approuvés | 12 |
+| `ROOT-OPTIONAL-DELIVERABLE-NOT-APPROVED` | `RELEASE_POLICY_BLOCKER` | Livrable facultatif seulement proposé | 4 |
 | `ROOT-ORACLE-EVIDENCE` | `CERTIFICATION_BLOCKER` | Preuve oracle QCM absente | 42 |
 | `ROOT-PEDAGOGICAL-RICHNESS` | `PRODUCT_P2` | Richesse pédagogique insuffisante | 35 |
 | `ROOT-PEDAGOGICAL-ROLE-COVERAGE` | `PRODUCT_P1` | Rôles pédagogiques non couverts | 43 |
