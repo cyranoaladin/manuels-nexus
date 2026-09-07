@@ -1,0 +1,135 @@
+% META: {"id": "1NSI-TAB-AM-EXTRAIT", "chapitre": "1NSI-TABLES", "type_objet": "amenagee", "capacites": ["P-TABLE-01", "P-TABLE-02", "P-TABLE-03"], "capacites_codes": ["C1", "C2", "C3"], "derive_de": ["1NSI-TAB-EX-001", "1NSI-TAB-EX-002", "1NSI-TAB-EX-004"], "profil_amenagement": ["SEQUENCAGE", "ALLEGEMENT_ENONCE", "REPONSE_FERMEE", "AERATION", "AMORCE_FOURNIE", "RETRAIT_DOUBLE_TACHE"], "mode_creation": "adaptation", "sources_inspiration": [], "status": "generated"}
+\section*{Version aménagée --- Extrait Traitement de données en tables}
+\textit{Consignes séquencées, mise en page aérée, énoncés allégés.}
+
+\bigskip
+
+\subsection*{Exercice 1 --- Lire un fichier CSV (C1)}
+
+Voici le début du fichier \texttt{livres.csv} :
+
+\begin{console}
+titre,auteur,prix,stock
+Le Petit Prince,Saint-Exupery,7.90,12
+Germinal,Zola,9.50,4
+\end{console}
+
+\bigskip
+
+\textbf{Étape 1.} Complète le tableau. Une case à la fois.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Question} & \textbf{Réponse} \\
+\hline
+Nombre de colonnes & \dotfill \\
+\hline
+Nom de la 3\ieme{} colonne & \dotfill \\
+\hline
+Nombre de livres (hors en-tête) & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} Complète l'import. Le début est donné.
+
+\begin{python}
+import csv
+
+with open("livres.csv", encoding="utf-8", newline="") as f:
+    table = ______(csv.DictReader(f))
+\end{python}
+
+\medskip
+Le mot manquant : \fbox{\texttt{list}} \qquad ou \qquad \fbox{\texttt{print}}
+
+\bigskip
+
+\textbf{Étape 3.} Après l'import, que vaut \lstinline{table[0]["prix"]} ?
+
+\medskip
+\begin{center}
+\fbox{le nombre $7{,}90$} \qquad ou \qquad \fbox{le texte \texttt{"7.90"}}
+\end{center}
+
+\medskip
+\textit{Aide :} tout ce qui sort d'un fichier CSV est du texte.
+
+\bigskip
+\bigskip
+
+\subsection*{Exercice 2 --- Sélectionner des lignes (C2)}
+
+On dispose de la table \texttt{notes} :
+
+\begin{python}
+notes = [
+    {"nom": "Amine", "matiere": "Maths", "note": 14},
+    {"nom": "Lina",  "matiere": "NSI",   "note": 17},
+    {"nom": "Sami",  "matiere": "Maths", "note": 8},
+    {"nom": "Nour",  "matiere": "NSI",   "note": 10},
+]
+\end{python}
+
+\bigskip
+
+\textbf{Étape 1.} Entoure les lignes qui vérifient : matière NSI \textbf{et} note $\geqslant 10$.
+
+\medskip
+\begin{center}
+\fbox{Amine} \qquad \fbox{Lina} \qquad \fbox{Sami} \qquad \fbox{Nour}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} Complète le critère. Un trou à la fois.
+
+\begin{python}
+resultat = [l for l in notes
+            if l["matiere"] == "______" ______ l["note"] >= ______]
+\end{python}
+
+\medskip
+Pour le deuxième trou : \fbox{\texttt{and}} \qquad ou \qquad \fbox{\texttt{or}}
+
+\bigskip
+
+\textbf{Étape 3.} Combien de lignes contient \texttt{resultat} ?
+
+\medskip
+\dotfill
+
+\bigskip
+\bigskip
+
+\subsection*{Exercice 3 --- Trier la table (C3)}
+
+\textbf{Étape 1.} Complète l'instruction qui trie de la meilleure note à la moins bonne.
+
+\begin{python}
+classement = sorted(notes, key=lambda l: l["______"], reverse=______)
+\end{python}
+
+\bigskip
+
+\textbf{Étape 2.} Écris le premier nom du classement obtenu :
+
+\medskip
+\dotfill
+
+\bigskip
+
+\textbf{Étape 3.} Après ce tri, la table \texttt{notes} est-elle modifiée ?
+
+\medskip
+\begin{center}
+\fbox{Oui} \qquad \fbox{Non}
+\end{center}
+
+\medskip
+\textit{Aide :} \lstinline{sorted} construit une nouvelle liste.

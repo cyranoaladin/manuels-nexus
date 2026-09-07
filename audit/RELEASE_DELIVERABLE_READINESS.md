@@ -4,7 +4,7 @@
 reçu de build final. `RELEASE_READY` conserve toutes ses exigences et
 reste faux pendant la phase de contenu.
 
-- `DEVELOPMENT_READY` : `20/24`
+- `DEVELOPMENT_READY` : `21/24`
 - `ASSEMBLY_READY` : `22/24`
 - `BUILD_TARGET_READY` : `22/24`
 - `DEVELOPMENT_BUILD_PASS` : `21/24`
@@ -17,7 +17,7 @@ reste faux pendant la phase de contenu.
 | `1NSI::manuel_eleve` | MANUEL | oui | oui | oui | oui | oui | oui | oui |
 | `1NSI::manuel_professeur` | MANUEL | oui | oui | oui | oui | oui | oui | oui |
 | `1NSI::remediations` | AUXILIAIRE | oui | oui | oui | oui | oui | oui | oui |
-| `1NSI::version_amenagee` | AUXILIAIRE | **non** | oui | oui | oui | oui | oui | **non** |
+| `1NSI::version_amenagee` | AUXILIAIRE | oui | oui | oui | oui | oui | oui | oui |
 | `1SPE::livret_methodes` | AUXILIAIRE | oui | oui | oui | oui | oui | oui | oui |
 | `1SPE::livret_remediation` | AUXILIAIRE | oui | oui | oui | oui | oui | oui | oui |
 | `1SPE::manuel_eleve` | MANUEL | oui | oui | oui | oui | oui | oui | oui |

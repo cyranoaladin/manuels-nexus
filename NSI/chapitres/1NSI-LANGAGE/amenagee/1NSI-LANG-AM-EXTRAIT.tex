@@ -1,0 +1,109 @@
+% META: {"id": "1NSI-LANG-AM-EXTRAIT", "chapitre": "1NSI-LANGAGE", "type_objet": "amenagee", "capacites": ["P-LANG-03A", "P-LANG-03B", "P-LANG-03C", "P-LANG-04"], "capacites_codes": ["C3", "C4", "C6", "C7"], "derive_de": ["1NSI-LANG-EX-003", "1NSI-LANG-EX-004"], "profil_amenagement": ["SEQUENCAGE", "ALLEGEMENT_ENONCE", "REPONSE_FERMEE", "AERATION", "AMORCE_FOURNIE", "RETRAIT_DOUBLE_TACHE"], "mode_creation": "adaptation", "sources_inspiration": [], "status": "generated"}
+\section*{Version aménagée --- Extrait Langages et programmation}
+\textit{Consignes séquencées, mise en page aérée, énoncés allégés.}
+
+\bigskip
+
+\subsection*{Exercice 1 --- Spécifier une fonction (C3, C6, C7)}
+
+On veut une fonction qui calcule le périmètre d'un rectangle.
+
+\bigskip
+
+\textbf{Étape 1.} Complète le prototype. Deux paramètres.
+
+\begin{python}
+def perimetre_rectangle(______, ______):
+\end{python}
+
+\bigskip
+
+\textbf{Étape 2.} La \textbf{précondition} dit ce que la fonction \textbf{exige}.
+Coche celles qui conviennent.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\textbf{Cocher} & \textbf{Proposition} \\
+\hline
+\dotfill & Les deux longueurs sont des nombres. \\
+\hline
+\dotfill & Les deux longueurs sont strictement positives. \\
+\hline
+\dotfill & Le résultat est un nombre positif. \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textit{Aide :} la troisième proposition décrit le \textbf{résultat}. Ce n'est donc pas
+une exigence sur l'appelant.
+
+\bigskip
+
+\textbf{Étape 3.} Écris la précondition en Python. Le début est donné.
+
+\begin{python}
+    assert largeur > 0 and ______ > 0
+\end{python}
+
+\bigskip
+
+\textbf{Étape 4.} La \textbf{postcondition} dit ce que la fonction \textbf{garantit}.
+Entoure la bonne.
+
+\medskip
+\begin{center}
+\fbox{le résultat vaut $2 \times (l + L)$} \qquad \fbox{le résultat vaut $l \times L$}
+\end{center}
+
+\bigskip
+\bigskip
+
+\subsection*{Exercice 2 --- Un jeu de tests trop faible (C4)}
+
+Un élève teste sa fonction \lstinline{est_premier} sur $7$ seulement.
+
+\bigskip
+
+\textbf{Étape 1.} Sa fonction renvoie \lstinline{True} pour $7$. Le test passe.
+Cela prouve-t-il que la fonction est correcte ?
+
+\medskip
+\begin{center}
+\fbox{Oui} \qquad \fbox{Non}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} Voici une fonction volontairement fausse :
+
+\begin{python}
+def est_premier_faux(n):
+    return True
+\end{python}
+
+\medskip
+Passe-t-elle le test sur $7$ ? \fbox{Oui} \qquad \fbox{Non}
+
+\bigskip
+
+\textbf{Étape 3.} Propose \textbf{une seule} valeur qui démasquerait cette fonction.
+
+\medskip
+$n = $\,\dotfill
+
+\medskip
+\textit{Aide :} choisis un nombre qui n'est \textbf{pas} premier.
+
+\bigskip
+
+\textbf{Étape 4.} Complète le jeu de tests. Une ligne à la fois.
+
+\begin{python}
+assert est_premier(7) == True
+assert est_premier(______) == False    # un nombre non premier
+assert est_premier(______) == False    # le plus petit cas
+\end{python}

@@ -1,0 +1,137 @@
+% META: {"id": "1NSI-ADGK-AM-EXTRAIT", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "amenagee", "capacites": ["P-ALGO-04", "P-ALGO-05"], "capacites_codes": ["C1", "C2"], "derive_de": ["1NSI-ADGK-EX-001", "1NSI-ADGK-EX-002", "1NSI-ADGK-EX-003"], "profil_amenagement": ["SEQUENCAGE", "ALLEGEMENT_ENONCE", "REPONSE_FERMEE", "AERATION", "AMORCE_FOURNIE", "RETRAIT_DOUBLE_TACHE"], "mode_creation": "adaptation", "sources_inspiration": [], "status": "generated"}
+\section*{Version aménagée --- Extrait Dichotomie, glouton, k plus proches voisins}
+\textit{Consignes séquencées, mise en page aérée, énoncés allégés.}
+
+\bigskip
+
+\subsection*{Exercice 1 --- La recherche dichotomique (C1)}
+
+On cherche $16$ dans le tableau trié :
+
+\medskip
+\texttt{[2, 5, 8, 12, 16, 23, 38, 56]} \qquad (indices $0$ à $7$)
+
+\bigskip
+
+\textbf{Étape 1.} Complète le premier tour. Le milieu est donné.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Tour} & \textbf{Début} & \textbf{Fin} & \textbf{Milieu} & \textbf{Valeur au milieu} \\
+\hline
+$1$ & $0$ & $7$ & $3$ & $12$ \\
+\hline
+$2$ & \dotfill & \dotfill & \dotfill & \dotfill \\
+\hline
+$3$ & \dotfill & \dotfill & \dotfill & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textit{Aide :} le milieu se calcule par $(\text{début} + \text{fin}) \div 2$,
+arrondi vers le bas.
+
+\bigskip
+
+\textbf{Étape 2.} Au tour $1$, la valeur du milieu vaut $12$. On cherche $16$.
+Où continue-t-on ?
+
+\medskip
+\begin{center}
+\fbox{à gauche du milieu} \qquad \fbox{à droite du milieu}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 3.} Combien de tours au total ?
+
+\medskip
+\dotfill
+
+\bigskip
+\bigskip
+
+\subsection*{Exercice 2 --- Pourquoi le tableau doit être trié (C1)}
+
+Un élève applique la dichotomie au tableau \texttt{[23, 5, 42, 8, 16]},
+qui n'est \textbf{pas} trié.
+
+\bigskip
+
+\textbf{Étape 1.} Ce tableau est-il trié ? Entoure.
+
+\medskip
+\begin{center}
+\fbox{Oui} \qquad \fbox{Non}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} La fonction va-t-elle afficher un message d'erreur ?
+
+\medskip
+\begin{center}
+\fbox{Oui, elle plante} \qquad \fbox{Non, elle répond quand même}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 3.} Complète la phrase :
+
+\medskip
+La dichotomie appliquée à un tableau non trié donne une réponse
+\dotfill\ sans prévenir.
+
+\medskip
+\textit{Mots proposés :} correcte --- fausse --- lente
+
+\bigskip
+\bigskip
+
+\subsection*{Exercice 3 --- Rendre la monnaie (C2)}
+
+Système de pièces : $1$, $2$, $5$, $10$, $20$, $50$ euros. On rend $63$ euros.
+
+\bigskip
+
+\textbf{Étape 1.} La méthode gloutonne prend toujours la \textbf{plus grande}
+pièce possible. Complète.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Reste à rendre} & \textbf{Pièce prise} & \textbf{Nouveau reste} \\
+\hline
+$63$ & $50$ & $13$ \\
+\hline
+$13$ & \dotfill & \dotfill \\
+\hline
+\dotfill & \dotfill & \dotfill \\
+\hline
+\dotfill & \dotfill & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} Combien de pièces au total ?
+
+\medskip
+\dotfill
+
+\bigskip
+
+\textbf{Étape 3.} La méthode gloutonne donne-t-elle toujours le moins de pièces
+possible ?
+
+\medskip
+\begin{center}
+\fbox{Oui, toujours} \qquad \fbox{Non, cela dépend du système de pièces}
+\end{center}

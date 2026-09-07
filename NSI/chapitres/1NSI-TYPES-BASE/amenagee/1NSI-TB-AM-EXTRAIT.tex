@@ -1,0 +1,148 @@
+% META: {"id": "1NSI-TB-AM-EXTRAIT", "chapitre": "1NSI-TYPES-BASE", "type_objet": "amenagee", "capacites": ["P-BASE-01", "P-BASE-02", "P-BASE-04"], "capacites_codes": ["C1", "C2", "C4"], "derive_de": ["1NSI-TB-EX-001", "1NSI-TB-EX-002", "1NSI-TB-EX-004"], "profil_amenagement": ["SEQUENCAGE", "ALLEGEMENT_ENONCE", "REPONSE_FERMEE", "AERATION", "AMORCE_FOURNIE", "RETRAIT_DOUBLE_TACHE"], "mode_creation": "adaptation", "sources_inspiration": [], "status": "generated"}
+\section*{Version aménagée --- Extrait Types et valeurs de base}
+\textit{Consignes séquencées, mise en page aérée, énoncés allégés.}
+
+\bigskip
+
+\subsection*{Exercice 1 --- Convertir $156$ en base 2 (C1)}
+
+\textbf{Étape 1.} Complète les divisions par $2$. Une ligne à la fois.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Nombre} & \textbf{Quotient} & \textbf{Reste} \\
+\hline
+$156$ & $78$ & $\mathbf{0}$ \\
+\hline
+$78$ & $39$ & \dotfill \\
+\hline
+$39$ & \dotfill & \dotfill \\
+\hline
+$19$ & \dotfill & \dotfill \\
+\hline
+$9$ & \dotfill & \dotfill \\
+\hline
+$4$ & \dotfill & \dotfill \\
+\hline
+$2$ & \dotfill & \dotfill \\
+\hline
+$1$ & $0$ & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} Recopie les restes \textbf{du bas vers le haut} :
+
+\medskip
+$156 = ($\,\dotfill\,$)_2$
+
+\bigskip
+
+\textbf{Étape 3.} Entoure le bon nombre de chiffres binaires :
+
+\medskip
+\begin{center}
+\fbox{$7$ chiffres} \qquad \fbox{$8$ chiffres} \qquad \fbox{$9$ chiffres}
+\end{center}
+
+\medskip
+\textit{Aide :} $128 = 2^7$ et $256 = 2^8$. Où se situe $156$ ?
+
+\bigskip
+\bigskip
+
+\subsection*{Exercice 2 --- Écrire $-20$ en complément à deux (C2)}
+
+\textbf{Étape 1.} Écris $20$ en binaire sur $8$ bits. Le début est donné.
+
+\begin{python}
+20 = 16 + 4
+20 = 0 0 0 1 _ 1 _ _
+\end{python}
+
+\bigskip
+
+\textbf{Étape 2.} Inverse chaque bit. Un bit à la fois.
+
+\medskip
+\dotfill
+
+\bigskip
+
+\textbf{Étape 3.} Ajoute $1$ au résultat de l'étape 2.
+
+\medskip
+$-20 = $\,\dotfill
+
+\bigskip
+
+\textbf{Étape 4.} Contrôle. Additionne l'écriture de $20$ et celle de $-20$.
+
+\medskip
+Sur $8$ bits, tu dois obtenir : \fbox{$00000000$} \qquad ou \qquad \fbox{$11111111$}
+
+\bigskip
+\bigskip
+
+\subsection*{Exercice 3 --- Table de vérité d'une alarme (C4)}
+
+Une alarme se déclenche si $(a \text{ ou } b)$ \textbf{et} $(\text{non } c)$.
+
+\medskip
+$a$ = capteur porte, $b$ = capteur fenêtre, $c$ = mode vacances.
+
+\bigskip
+
+\textbf{Étape 1.} Combien de lignes aura la table ? Entoure.
+
+\medskip
+\begin{center}
+\fbox{$3$} \qquad \fbox{$6$} \qquad \fbox{$8$}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} Complète colonne par colonne, de gauche à droite.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$a$ & $b$ & $c$ & $a$ ou $b$ & non $c$ & \textbf{alarme} \\
+\hline
+$0$ & $0$ & $0$ & $0$ & $1$ & $\mathbf{0}$ \\
+\hline
+$0$ & $0$ & $1$ & \dotfill & \dotfill & \dotfill \\
+\hline
+$0$ & $1$ & $0$ & \dotfill & \dotfill & \dotfill \\
+\hline
+$0$ & $1$ & $1$ & \dotfill & \dotfill & \dotfill \\
+\hline
+$1$ & $0$ & $0$ & \dotfill & \dotfill & \dotfill \\
+\hline
+$1$ & $0$ & $1$ & \dotfill & \dotfill & \dotfill \\
+\hline
+$1$ & $1$ & $0$ & \dotfill & \dotfill & \dotfill \\
+\hline
+$1$ & $1$ & $1$ & \dotfill & \dotfill & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 3.} En mode vacances ($c = 1$), l'alarme peut-elle sonner ?
+
+\medskip
+\begin{center}
+\fbox{Oui} \qquad \fbox{Non}
+\end{center}
+
+\medskip
+Justifie en une phrase : \dotfill

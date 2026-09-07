@@ -1,0 +1,598 @@
+{
+  "artifact_type": "amenagement_derivation_graph",
+  "schema_version": 1,
+  "generated_by": "scripts/build_amenagement_derivation_graph.py",
+  "approves_nothing": true,
+  "summary": {
+    "AMENAGED_OBJECTS": 10,
+    "CHAPTERS_COVERED": 10,
+    "CHAPTERS_TOTAL": 17,
+    "AMENAGED_WITHOUT_SOURCE": 0,
+    "AMENAGEMENT_MOVES_THE_TARGET": 0,
+    "AMENAGEMENT_DROPS_THE_TARGET": 0,
+    "PROFILE_DECLARED_NOT_APPLIED": 0,
+    "FRAGILE_TABULAR_MARKUP": 0,
+    "DERIVATION_DEFECTS": 0
+  },
+  "by_manual": {
+    "1NSI": {
+      "chapters_total": 10,
+      "chapters_covered": 10
+    },
+    "TNSI": {
+      "chapters_total": 7,
+      "chapters_covered": 0
+    }
+  },
+  "profiles": {
+    "AERATION": "Espacement vertical explicite, une tache par bloc visuel, tableaux plutot que paragraphes.",
+    "ALLEGEMENT_ENONCE": "Les phrases sont courtes et portent une information chacune. Le contexte narratif non necessaire a la tache est retire.",
+    "AMORCE_FOURNIE": "Le debut du code ou du raisonnement est donne. L'eleve poursuit au lieu de demarrer sur une page blanche.",
+    "REPONSE_FERMEE": "La production libre devient un choix entre reponses proposees, un texte a trous ou un tableau a completer. Ce qui est evalue reste la meme decision ; c'est sa forme d'expression qui est allegee.",
+    "RETRAIT_DOUBLE_TACHE": "Une seule operation cognitive a la fois : on ne demande pas de lire un programme ET de le modifier dans la meme question.",
+    "SEQUENCAGE": "L'enonce est decoupe en etapes numerotees, une consigne par etape. L'eleve n'a jamais a tenir plusieurs consignes en memoire."
+  },
+  "chapters": [
+    {
+      "manual": "1NSI",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "amenaged_objects": 1,
+      "covered": true,
+      "findings": []
+    },
+    {
+      "manual": "1NSI",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "amenaged_objects": 1,
+      "covered": true,
+      "findings": []
+    },
+    {
+      "manual": "1NSI",
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "amenaged_objects": 1,
+      "covered": true,
+      "findings": []
+    },
+    {
+      "manual": "1NSI",
+      "chapter": "1NSI-LANGAGE",
+      "amenaged_objects": 1,
+      "covered": true,
+      "findings": []
+    },
+    {
+      "manual": "1NSI",
+      "chapter": "1NSI-PROJET-METHODES",
+      "amenaged_objects": 1,
+      "covered": true,
+      "findings": []
+    },
+    {
+      "manual": "1NSI",
+      "chapter": "1NSI-RESEAUX",
+      "amenaged_objects": 1,
+      "covered": true,
+      "findings": []
+    },
+    {
+      "manual": "1NSI",
+      "chapter": "1NSI-TABLES",
+      "amenaged_objects": 1,
+      "covered": true,
+      "findings": []
+    },
+    {
+      "manual": "1NSI",
+      "chapter": "1NSI-TYPES-BASE",
+      "amenaged_objects": 1,
+      "covered": true,
+      "findings": []
+    },
+    {
+      "manual": "1NSI",
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "amenaged_objects": 1,
+      "covered": true,
+      "findings": []
+    },
+    {
+      "manual": "1NSI",
+      "chapter": "1NSI-WEB-IHM",
+      "amenaged_objects": 1,
+      "covered": true,
+      "findings": []
+    },
+    {
+      "manual": "TNSI",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "amenaged_objects": 0,
+      "covered": false,
+      "findings": []
+    },
+    {
+      "manual": "TNSI",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "amenaged_objects": 0,
+      "covered": false,
+      "findings": []
+    },
+    {
+      "manual": "TNSI",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "amenaged_objects": 0,
+      "covered": false,
+      "findings": []
+    },
+    {
+      "manual": "TNSI",
+      "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
+      "amenaged_objects": 0,
+      "covered": false,
+      "findings": []
+    },
+    {
+      "manual": "TNSI",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "amenaged_objects": 0,
+      "covered": false,
+      "findings": []
+    },
+    {
+      "manual": "TNSI",
+      "chapter": "TNSI-PROJET",
+      "amenaged_objects": 0,
+      "covered": false,
+      "findings": []
+    },
+    {
+      "manual": "TNSI",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "amenaged_objects": 0,
+      "covered": false,
+      "findings": []
+    }
+  ],
+  "records": [
+    {
+      "object_id": "1NSI-ADGK-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/amenagee/1NSI-ADGK-AM-EXTRAIT.tex",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "status": "generated",
+      "CANONICAL_OBJECT": [
+        "1NSI-ADGK-EX-001",
+        "1NSI-ADGK-EX-002",
+        "1NSI-ADGK-EX-003"
+      ],
+      "canonical_resolved": [
+        "1NSI-ADGK-EX-001",
+        "1NSI-ADGK-EX-002",
+        "1NSI-ADGK-EX-003"
+      ],
+      "AMENAGEMENT_PROFILE": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "profiles_observed": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "capacity_codes": [
+        "P-ALGO-04",
+        "P-ALGO-05"
+      ],
+      "source_capacity_codes": [
+        "P-ALGO-04",
+        "P-ALGO-05"
+      ],
+      "findings": []
+    },
+    {
+      "object_id": "1NSI-APT-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/amenagee/1NSI-APT-AM-EXTRAIT.tex",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "status": "generated",
+      "CANONICAL_OBJECT": [
+        "1NSI-APT-EX-101",
+        "1NSI-APT-EX-102",
+        "1NSI-APT-EX-103"
+      ],
+      "canonical_resolved": [
+        "1NSI-APT-EX-101",
+        "1NSI-APT-EX-102",
+        "1NSI-APT-EX-103"
+      ],
+      "AMENAGEMENT_PROFILE": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "profiles_observed": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "capacity_codes": [
+        "P-ALGO-01A",
+        "P-ALGO-01B",
+        "P-ALGO-02A"
+      ],
+      "source_capacity_codes": [
+        "P-ALGO-01A",
+        "P-ALGO-01B",
+        "P-ALGO-02A"
+      ],
+      "findings": []
+    },
+    {
+      "object_id": "1NSI-ARCHOS-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/amenagee/1NSI-ARCHOS-AM-EXTRAIT.tex",
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "status": "generated",
+      "CANONICAL_OBJECT": [
+        "1NSI-ARCHOS-EX-001",
+        "1NSI-ARCHOS-EX-004",
+        "1NSI-ARCHOS-EX-005"
+      ],
+      "canonical_resolved": [
+        "1NSI-ARCHOS-EX-001",
+        "1NSI-ARCHOS-EX-004",
+        "1NSI-ARCHOS-EX-005"
+      ],
+      "AMENAGEMENT_PROFILE": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "profiles_observed": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "capacity_codes": [
+        "P-ARCH-01A",
+        "P-ARCH-03B",
+        "P-ARCH-03C"
+      ],
+      "source_capacity_codes": [
+        "P-ARCH-01A",
+        "P-ARCH-03B",
+        "P-ARCH-03C"
+      ],
+      "findings": []
+    },
+    {
+      "object_id": "1NSI-LANG-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-LANGAGE/amenagee/1NSI-LANG-AM-EXTRAIT.tex",
+      "chapter": "1NSI-LANGAGE",
+      "status": "generated",
+      "CANONICAL_OBJECT": [
+        "1NSI-LANG-EX-003",
+        "1NSI-LANG-EX-004"
+      ],
+      "canonical_resolved": [
+        "1NSI-LANG-EX-003",
+        "1NSI-LANG-EX-004"
+      ],
+      "AMENAGEMENT_PROFILE": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "profiles_observed": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "capacity_codes": [
+        "P-LANG-03A",
+        "P-LANG-03B",
+        "P-LANG-03C",
+        "P-LANG-04"
+      ],
+      "source_capacity_codes": [
+        "P-LANG-03A",
+        "P-LANG-03B",
+        "P-LANG-03C",
+        "P-LANG-04"
+      ],
+      "findings": []
+    },
+    {
+      "object_id": "1NSI-PM-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-PROJET-METHODES/amenagee/1NSI-PM-AM-EXTRAIT.tex",
+      "chapter": "1NSI-PROJET-METHODES",
+      "status": "generated",
+      "CANONICAL_OBJECT": [
+        "1NSI-PM-EX-002",
+        "1NSI-PM-EX-003"
+      ],
+      "canonical_resolved": [
+        "1NSI-PM-EX-002",
+        "1NSI-PM-EX-003"
+      ],
+      "AMENAGEMENT_PROFILE": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "profiles_observed": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "capacity_codes": [
+        "BO-PREAMBULE-COMPETENCES-METHODE",
+        "BO-PREAMBULE-DEMARCHE-DE-PROJET"
+      ],
+      "source_capacity_codes": [
+        "BO-PREAMBULE-COMPETENCES-METHODE",
+        "BO-PREAMBULE-DEMARCHE-DE-PROJET"
+      ],
+      "findings": []
+    },
+    {
+      "object_id": "1NSI-RES-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-RESEAUX/amenagee/1NSI-RES-AM-EXTRAIT.tex",
+      "chapter": "1NSI-RESEAUX",
+      "status": "generated",
+      "CANONICAL_OBJECT": [
+        "1NSI-RES-EX-001",
+        "1NSI-RES-EX-002",
+        "1NSI-RES-EX-004"
+      ],
+      "canonical_resolved": [
+        "1NSI-RES-EX-001",
+        "1NSI-RES-EX-002",
+        "1NSI-RES-EX-004"
+      ],
+      "AMENAGEMENT_PROFILE": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "profiles_observed": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "capacity_codes": [
+        "P-ARCH-02A",
+        "P-ARCH-02B",
+        "P-ARCH-04A"
+      ],
+      "source_capacity_codes": [
+        "P-ARCH-02A",
+        "P-ARCH-02B",
+        "P-ARCH-04A"
+      ],
+      "findings": []
+    },
+    {
+      "object_id": "1NSI-TAB-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-TABLES/amenagee/1NSI-TAB-AM-EXTRAIT.tex",
+      "chapter": "1NSI-TABLES",
+      "status": "generated",
+      "CANONICAL_OBJECT": [
+        "1NSI-TAB-EX-001",
+        "1NSI-TAB-EX-002",
+        "1NSI-TAB-EX-004"
+      ],
+      "canonical_resolved": [
+        "1NSI-TAB-EX-001",
+        "1NSI-TAB-EX-002",
+        "1NSI-TAB-EX-004"
+      ],
+      "AMENAGEMENT_PROFILE": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "profiles_observed": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "capacity_codes": [
+        "P-TABLE-01",
+        "P-TABLE-02",
+        "P-TABLE-03"
+      ],
+      "source_capacity_codes": [
+        "P-TABLE-01",
+        "P-TABLE-02",
+        "P-TABLE-03"
+      ],
+      "findings": []
+    },
+    {
+      "object_id": "1NSI-TB-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-TYPES-BASE/amenagee/1NSI-TB-AM-EXTRAIT.tex",
+      "chapter": "1NSI-TYPES-BASE",
+      "status": "generated",
+      "CANONICAL_OBJECT": [
+        "1NSI-TB-EX-001",
+        "1NSI-TB-EX-002",
+        "1NSI-TB-EX-004"
+      ],
+      "canonical_resolved": [
+        "1NSI-TB-EX-001",
+        "1NSI-TB-EX-002",
+        "1NSI-TB-EX-004"
+      ],
+      "AMENAGEMENT_PROFILE": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "profiles_observed": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "capacity_codes": [
+        "P-BASE-01",
+        "P-BASE-02",
+        "P-BASE-04"
+      ],
+      "source_capacity_codes": [
+        "P-BASE-01",
+        "P-BASE-02",
+        "P-BASE-04"
+      ],
+      "findings": []
+    },
+    {
+      "object_id": "1NSI-TC-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/amenagee/1NSI-TC-AM-EXTRAIT.tex",
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "status": "needs_review",
+      "CANONICAL_OBJECT": [
+        "1NSI-TC-EX-002",
+        "1NSI-TC-EX-014",
+        "1NSI-TC-EX-001"
+      ],
+      "canonical_resolved": [
+        "1NSI-TC-EX-002",
+        "1NSI-TC-EX-014",
+        "1NSI-TC-EX-001"
+      ],
+      "AMENAGEMENT_PROFILE": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "profiles_observed": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "capacity_codes": [
+        "1NSI-TYPES-CONSTRUITS-C1",
+        "1NSI-TYPES-CONSTRUITS-C2",
+        "1NSI-TYPES-CONSTRUITS-C5"
+      ],
+      "source_capacity_codes": [
+        "1NSI-TYPES-CONSTRUITS-C1",
+        "1NSI-TYPES-CONSTRUITS-C2",
+        "1NSI-TYPES-CONSTRUITS-C5"
+      ],
+      "findings": []
+    },
+    {
+      "object_id": "1NSI-WEB-AM-EXTRAIT",
+      "path": "NSI/chapitres/1NSI-WEB-IHM/amenagee/1NSI-WEB-AM-EXTRAIT.tex",
+      "chapter": "1NSI-WEB-IHM",
+      "status": "generated",
+      "CANONICAL_OBJECT": [
+        "1NSI-WEB-EX-001",
+        "1NSI-WEB-EX-005"
+      ],
+      "canonical_resolved": [
+        "1NSI-WEB-EX-001",
+        "1NSI-WEB-EX-005"
+      ],
+      "AMENAGEMENT_PROFILE": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "profiles_observed": [
+        "AERATION",
+        "ALLEGEMENT_ENONCE",
+        "AMORCE_FOURNIE",
+        "REPONSE_FERMEE",
+        "RETRAIT_DOUBLE_TACHE",
+        "SEQUENCAGE"
+      ],
+      "capacity_codes": [
+        "P-IHM-01A",
+        "P-IHM-01B",
+        "P-IHM-04A",
+        "P-IHM-04B"
+      ],
+      "source_capacity_codes": [
+        "P-IHM-01A",
+        "P-IHM-01B",
+        "P-IHM-04A",
+        "P-IHM-04B"
+      ],
+      "findings": []
+    }
+  ],
+  "freshness": {
+    "EVIDENCE_HEAD": "05a92d3d529d1bcda260b816761d772d1a733831",
+    "INPUT_PATHS": [
+      "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/amenagee/1NSI-ADGK-AM-EXTRAIT.tex",
+      "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/amenagee/1NSI-APT-AM-EXTRAIT.tex",
+      "NSI/chapitres/1NSI-ARCHITECTURE-OS/amenagee/1NSI-ARCHOS-AM-EXTRAIT.tex",
+      "NSI/chapitres/1NSI-LANGAGE/amenagee/1NSI-LANG-AM-EXTRAIT.tex",
+      "NSI/chapitres/1NSI-PROJET-METHODES/amenagee/1NSI-PM-AM-EXTRAIT.tex",
+      "NSI/chapitres/1NSI-RESEAUX/amenagee/1NSI-RES-AM-EXTRAIT.tex",
+      "NSI/chapitres/1NSI-TABLES/amenagee/1NSI-TAB-AM-EXTRAIT.tex",
+      "NSI/chapitres/1NSI-TYPES-BASE/amenagee/1NSI-TB-AM-EXTRAIT.tex",
+      "NSI/chapitres/1NSI-TYPES-CONSTRUITS/amenagee/1NSI-TC-AM-EXTRAIT.tex",
+      "NSI/chapitres/1NSI-WEB-IHM/amenagee/1NSI-WEB-AM-EXTRAIT.tex"
+    ],
+    "INPUT_DIGEST": "sha256:bfbb48a73be2eab271517337fbdf32c063b7f5f560b827dfcdf005304931472d"
+  }
+}

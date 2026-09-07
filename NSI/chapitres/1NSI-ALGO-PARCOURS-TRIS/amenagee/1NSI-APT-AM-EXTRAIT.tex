@@ -1,0 +1,140 @@
+% META: {"id": "1NSI-APT-AM-EXTRAIT", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "amenagee", "capacites": ["P-ALGO-01A", "P-ALGO-01B", "P-ALGO-02A"], "capacites_codes": ["C1", "C2", "C3"], "derive_de": ["1NSI-APT-EX-101", "1NSI-APT-EX-102", "1NSI-APT-EX-103"], "profil_amenagement": ["SEQUENCAGE", "ALLEGEMENT_ENONCE", "REPONSE_FERMEE", "AERATION", "AMORCE_FOURNIE", "RETRAIT_DOUBLE_TACHE"], "mode_creation": "adaptation", "sources_inspiration": [], "status": "generated"}
+\section*{Version aménagée --- Extrait Parcours et tris}
+\textit{Consignes séquencées, mise en page aérée, énoncés allégés.}
+
+\bigskip
+
+\subsection*{Exercice 1 --- Chercher une valeur (C1)}
+
+On cherche la valeur $7$ dans le tableau \texttt{[12, 7, 30, 7, 4, 30]}.
+
+\medskip
+Les indices vont de $0$ à $5$.
+
+\bigskip
+
+\textbf{Étape 1.} Complète le parcours. Une case à la fois, de gauche à droite.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Indice} & \textbf{Valeur} & \textbf{Égale à 7 ?} \\
+\hline
+$0$ & $12$ & non \\
+\hline
+$1$ & \dotfill & \dotfill \\
+\hline
+$2$ & \dotfill & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} À quel indice la recherche s'arrête-t-elle ?
+
+\medskip
+\dotfill
+
+\bigskip
+
+\textbf{Étape 3.} Le $7$ apparaît deux fois. Lequel est renvoyé ?
+
+\medskip
+\begin{center}
+\fbox{le premier trouvé} \qquad \fbox{le dernier}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 4.} Que renvoie la fonction si on cherche $99$ ?
+
+\medskip
+\dotfill
+
+\bigskip
+\bigskip
+
+\subsection*{Exercice 2 --- Un maximum mal initialisé (C2)}
+
+Un élève écrit :
+
+\begin{python}
+def maximum_bugue(tableau):
+    plus_grand = 0
+    for valeur in tableau:
+        if valeur > plus_grand:
+            plus_grand = valeur
+    return plus_grand
+\end{python}
+
+\bigskip
+
+\textbf{Étape 1.} Teste sur \texttt{[3, 9, 5]}. Que renvoie la fonction ?
+
+\medskip
+\dotfill \qquad Est-ce correct ? \fbox{Oui} \qquad \fbox{Non}
+
+\bigskip
+
+\textbf{Étape 2.} Teste maintenant sur \texttt{[-3, -9, -5]}.
+
+\medskip
+La fonction renvoie : \dotfill
+
+\medskip
+Le vrai maximum est : \dotfill
+
+\bigskip
+
+\textbf{Étape 3.} Corrige l'initialisation. Une seule ligne change.
+
+\begin{python}
+    plus_grand = ______
+\end{python}
+
+\medskip
+\begin{center}
+\fbox{\texttt{tableau[0]}} \qquad \fbox{\texttt{0}} \qquad \fbox{\texttt{-1}}
+\end{center}
+
+\bigskip
+\bigskip
+
+\subsection*{Exercice 3 --- Le tri par insertion (C3)}
+
+On trie \texttt{[5, 2, 9, 1, 7]} par insertion.
+
+\bigskip
+
+\textbf{Étape 1.} Complète l'état du tableau après chaque insertion.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Après} & \textbf{Tableau} \\
+\hline
+insertion de $2$ & \texttt{[2, 5, 9, 1, 7]} \\
+\hline
+insertion de $9$ & \dotfill \\
+\hline
+insertion de $1$ & \dotfill \\
+\hline
+insertion de $7$ & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} Combien d'insertions au total pour $5$ éléments ?
+
+\medskip
+\dotfill
+
+\medskip
+\textit{Aide :} le premier élément est déjà en place.

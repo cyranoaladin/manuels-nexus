@@ -1,0 +1,123 @@
+% META: {"id": "1NSI-PM-AM-EXTRAIT", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "amenagee", "capacites": ["BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE"], "capacites_codes": ["C2", "C3"], "derive_de": ["1NSI-PM-EX-002", "1NSI-PM-EX-003"], "profil_amenagement": ["SEQUENCAGE", "ALLEGEMENT_ENONCE", "REPONSE_FERMEE", "AERATION", "AMORCE_FOURNIE", "RETRAIT_DOUBLE_TACHE"], "mode_creation": "adaptation", "sources_inspiration": [], "status": "generated"}
+\section*{Version aménagée --- Extrait Projet et méthodes}
+\textit{Consignes séquencées, mise en page aérée, énoncés allégés.}
+
+\bigskip
+
+\subsection*{Exercice 1 --- Reconnaître un bon jalon (C2)}
+
+Une équipe de trois élèves développe un petit jeu. Voici quatre propositions.
+
+\bigskip
+
+\textbf{Étape 1.} Pour chaque proposition, coche si c'est un vrai jalon.
+
+\medskip
+\textit{Rappel :} un jalon a une \textbf{date} et un \textbf{état vérifiable}.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Proposition} & \textbf{Vrai jalon ?} \\
+\hline
+« Avancer sur les graphismes » & \dotfill \\
+\hline
+« Le 12 mars, le joueur peut se déplacer » & \dotfill \\
+\hline
+« Travailler dur cette semaine » & \dotfill \\
+\hline
+« Le 19 mars, les tests du score passent » & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} Pourquoi « Avancer sur les graphismes » n'est-il pas un jalon ?
+
+\medskip
+\begin{center}
+\fbox{on ne peut pas dire s'il est atteint} \qquad \fbox{c'est trop difficile}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 3.} Le rendu est le $30$ mars. Le dernier jalon doit-il tomber ce jour-là ?
+
+\medskip
+\begin{center}
+\fbox{Oui} \qquad \fbox{Non, il faut garder une marge}
+\end{center}
+
+\bigskip
+\bigskip
+
+\subsection*{Exercice 2 --- Lire une erreur (C3)}
+
+Ce programme plante :
+
+\begin{python}
+notes = {"Alice": 15, "Bob": 12}
+
+def afficher_note(notes, eleve):
+    print(notes[eleve])
+
+afficher_note(notes, "Chloe")
+\end{python}
+
+\medskip
+
+\begin{console}
+Traceback (most recent call last):
+  File "programme.py", line 6, in <module>
+    afficher_note(notes, "Chloe")
+  File "programme.py", line 4, in afficher_note
+    print(notes[eleve])
+KeyError: 'Chloe'
+\end{console}
+
+\bigskip
+
+\textbf{Étape 1.} Complète le tableau. Lis le message de bas en haut.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Question} & \textbf{Réponse} \\
+\hline
+Type de l'erreur & \dotfill \\
+\hline
+Ligne où elle se produit & \dotfill \\
+\hline
+Clé qui pose problème & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} Quelle est la cause ? Entoure.
+
+\medskip
+\begin{center}
+\fbox{« Chloe » n'est pas dans le dictionnaire} \qquad \fbox{le dictionnaire est vide}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 3.} Complète la correction. Une seule ligne à ajouter.
+
+\begin{python}
+def afficher_note(notes, eleve):
+    if eleve ______ notes:
+        print(notes[eleve])
+    else:
+        print("eleve inconnu")
+\end{python}
+
+\medskip
+Le mot manquant : \fbox{\texttt{in}} \qquad ou \qquad \fbox{\texttt{==}}

@@ -1,0 +1,121 @@
+% META: {"id": "1NSI-WEB-AM-EXTRAIT", "chapitre": "1NSI-WEB-IHM", "type_objet": "amenagee", "capacites": ["P-IHM-01A", "P-IHM-01B", "P-IHM-04A", "P-IHM-04B"], "capacites_codes": ["C1", "C2", "C7", "C8"], "derive_de": ["1NSI-WEB-EX-001", "1NSI-WEB-EX-005"], "profil_amenagement": ["SEQUENCAGE", "ALLEGEMENT_ENONCE", "REPONSE_FERMEE", "AERATION", "AMORCE_FOURNIE", "RETRAIT_DOUBLE_TACHE"], "mode_creation": "adaptation", "sources_inspiration": [], "status": "generated"}
+\section*{Version aménagée --- Extrait Interactions Web}
+\textit{Consignes séquencées, mise en page aérée, énoncés allégés.}
+
+\bigskip
+
+\subsection*{Exercice 1 --- Repérer les composants (C1, C2)}
+
+On donne cet extrait de page Web :
+
+\begin{console}
+<form id="formulaire_avis">
+  <input type="text" id="champ_pseudo" name="pseudo">
+  <button id="bouton_envoi">Envoyer</button>
+</form>
+\end{console}
+
+\bigskip
+
+\textbf{Étape 1.} Complète le tableau. Une ligne à la fois.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Question} & \textbf{Réponse} \\
+\hline
+Identifiant du formulaire & \texttt{formulaire\_avis} \\
+\hline
+Identifiant du champ de saisie & \dotfill \\
+\hline
+Identifiant du bouton & \dotfill \\
+\hline
+Nom transmis au serveur & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textit{Aide :} c'est l'attribut \texttt{name}, pas \texttt{id}, qui voyage.
+
+\bigskip
+
+\textbf{Étape 2.} Quel événement attend-on d'un bouton ? Entoure.
+
+\medskip
+\begin{center}
+\fbox{\texttt{click}} \qquad \fbox{\texttt{load}} \qquad \fbox{\texttt{submit}}
+\end{center}
+
+\bigskip
+\bigskip
+
+\subsection*{Exercice 2 --- Lire un formulaire (C7, C8)}
+
+\begin{console}
+<form action="/recherche" method="GET">
+  <input type="text" name="ville">
+  <input type="number" name="jours">
+  <button type="submit">Chercher</button>
+</form>
+\end{console}
+
+\bigskip
+
+\textbf{Étape 1.} Relève les deux attributs de la balise \texttt{form}.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Attribut} & \textbf{Valeur} \\
+\hline
+Nom de la balise & \texttt{form} \\
+\hline
+\texttt{action} (à qui) & \dotfill \\
+\hline
+\texttt{method} (comment) & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} L'utilisateur tape « Tunis » et « 3 ». Complète l'URL obtenue.
+
+\medskip
+\texttt{/recherche?ville=}\dotfill\texttt{\&jours=}\dotfill
+
+\bigskip
+
+\textbf{Étape 3.} Ces valeurs apparaissent-elles dans la barre d'adresse ?
+
+\medskip
+\begin{center}
+\fbox{Oui} \qquad \fbox{Non}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 4.} On ajoute maintenant un champ \texttt{motdepasse}.
+Quelle méthode faut-il choisir ?
+
+\medskip
+\begin{center}
+\fbox{\texttt{GET}} \qquad \fbox{\texttt{POST}}
+\end{center}
+
+\medskip
+Justifie en une phrase : \dotfill
+
+\bigskip
+
+\textbf{Étape 5.} La méthode choisie chiffre-t-elle le mot de passe ?
+
+\medskip
+\begin{center}
+\fbox{Oui} \qquad \fbox{Non, seul HTTPS chiffre}
+\end{center}
