@@ -158,3 +158,92 @@ def test_structured_and_python_sources_cannot_hide_calculus(
     assert row["calculus_evidence"]
     assert row["source_kind"] == source_kind
     assert row["sha256"].startswith("sha256:")
+
+
+# ---------------------------------------------------------------------------
+# L'audit couvre TOUT le corpus NSI, et distingue la fonction de l'adjectif
+# ---------------------------------------------------------------------------
+
+
+def test_every_nsi_chapter_is_audited(payload) -> None:
+    """« Non audite » n'est pas « propre ».
+
+    L'audit ne portait que sur les deux chapitres ou le defaut avait ete
+    decouvert ; quinze autres restaient hors de sa portee, et le gate les
+    comptait comme bloqueurs faute d'avoir ete regardes.
+    """
+
+    corpus = ROOT / "NSI/chapitres"
+    attendus = {
+        d.name for d in corpus.iterdir() if (d / "contrat.yaml").is_file()
+    }
+    audites = {row["chapter"] for row in payload["objects"]}
+    assert attendus - audites == set()
+    assert payload["unknown"] == 0
+
+
+def test_the_founding_case_is_still_condemned(producer) -> None:
+    """La fiche « Deriver une fonction composee » dans un chapitre de tris.
+
+    C'est le cas qui a fonde ce registre. Aucun assouplissement des marqueurs
+    ne doit le laisser passer.
+    """
+
+    from pathlib import Path as _Path
+
+    fiche = (
+        "\\begin{fichemethode}{M1}{Deriver une fonction composee}\n"
+        "La derivee de $f(x)=\\mathrm{e}^{x^2-3x}$ vaut "
+        "$f'(x)=(2x-3)\\mathrm{e}^{x^2-3x}$.\n"
+        "On dresse ensuite le tableau de variations de $f$.\n"
+        "\\end{fichemethode}"
+    )
+    row = producer._surface_row(
+        chapter="1NSI-ALGO-PARCOURS-TRIS", role="methodes",
+        path=_Path("fixture.tex"), source_kind="LATEX_OBJECT",
+        text=fiche, pointers=["$"], meta={"id": "X", "status": "approved"},
+    )
+    assert row["verdict"] == "CROSS_DISCIPLINE_TERMINALE_MATHS"
+    assert "derivation" in row["calculus_evidence"]
+
+
+def test_complexity_vocabulary_is_not_analysis(producer) -> None:
+    """« Croissance exponentielle » et « O(log n) » sont de la NSI.
+
+    Le programme exige ce vocabulaire pour parler de cout. Le condamner
+    faisait deux faux positifs -- la programmation dynamique et la loi de
+    Moore -- et aurait pousse a retirer du contenu exige.
+    """
+
+    from pathlib import Path as _Path
+
+    texte = (
+        "Le nombre d'appels recursifs croit de facon exponentielle avec n.\n"
+        "La recherche dichotomique a un cout en O(log n).\n"
+        "La loi de Moore decrit une evolution exponentielle du nombre de "
+        "transistors."
+    )
+    row = producer._surface_row(
+        chapter="TNSI-ALGORITHMIQUE", role="cours", path=_Path("fixture.tex"),
+        source_kind="LATEX_OBJECT", text=texte, pointers=["$"], meta={"id": "Y"},
+    )
+    assert row["verdict"] == "NSI_NATIVE"
+    assert row["calculus_evidence"] == []
+
+
+def test_the_named_function_is_still_analysis(producer) -> None:
+    """L'adjectif est innocente ; la FONCTION ne l'est pas."""
+
+    from pathlib import Path as _Path
+
+    texte = "Etudier la fonction exponentielle et sa derivee sur $\\mathbb{R}$."
+    row = producer._surface_row(
+        chapter="1NSI-TABLES", role="cours", path=_Path("fixture.tex"),
+        source_kind="LATEX_OBJECT", text=texte, pointers=["$"], meta={"id": "Z"},
+    )
+    assert row["verdict"] == "CROSS_DISCIPLINE_TERMINALE_MATHS"
+
+
+def test_no_nsi_object_remains_unadjudicated(payload) -> None:
+    assert payload["counts"].get("REQUIRES_EXPLICIT_ADJUDICATION", 0) == 0
+    assert payload["condemned_count"] == 0

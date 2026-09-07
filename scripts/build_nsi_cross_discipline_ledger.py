@@ -41,7 +41,25 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "audit/NSI_CROSS_DISCIPLINE_CONTENT_LEDGER.json"
-CHAPTERS = ("1NSI-ALGO-DICHO-GLOUTON-KNN", "1NSI-ALGO-PARCOURS-TRIS")
+#: TOUS les chapitres NSI, pas seulement ceux ou le defaut a ete decouvert.
+#: Restreindre l'audit aux deux chapitres qui l'avaient revele laissait quinze
+#: chapitres NON AUDITES -- et « non audite » n'est pas « propre ».
+NSI_CORPUS = ROOT / "NSI/chapitres"
+
+
+def _all_chapters() -> tuple[str, ...]:
+    if not NSI_CORPUS.is_dir():
+        return ()
+    return tuple(
+        sorted(
+            directory.name
+            for directory in NSI_CORPUS.iterdir()
+            if (directory / "contrat.yaml").is_file()
+        )
+    )
+
+
+CHAPTERS = _all_chapters()
 ROLES = ("cours", "methodes", "exercices", "corriges", "remediation", "evaluations", "qcm")
 
 #: Analyse de Terminale. Absente du programme de Premiere NSI, donc
@@ -52,7 +70,15 @@ CALCULUS = {
     "variations": r"\bvariations? de\b|tableau de (?:signes|variations)",
     "limite": r"\blimite?s? (?:de|en|quand)\b|\\lim|\blimit\(",
     "primitive_integrale": r"\bprimitives?\b|\bint[ée]grales?\b|\\int\b|integrate\(",
-    "exp_log": r"\\mathrm\{e\}\^|\\ln\b|\blogarithme\b|\bexponentielle\b",
+    # « exponentielle » et « logarithmique » sont AUSSI des adjectifs de
+    # complexite, et le programme de NSI les exige : « le nombre d'appels
+    # croit de facon exponentielle », « la loi de Moore », « O(log n) ». Le
+    # marqueur ne retient donc que la FONCTION -- sa notation, ou son nom
+    # explicite -- et non l'adjectif qui decrit une croissance.
+    "exp_log": (
+        r"\\mathrm\{e\}\^|\\ln\b|\be\^\{?-?x|"
+        r"\bfonctions? (?:exponentielle|logarithme)"
+    ),
     "convexite": r"\bconvexit|\bconcavit|point d'inflexion",
     "asymptote": r"\basymptote",
     "sympy_analyse": r"\bdiff\(|\bsolve\(\s*fp|\boo\b",
@@ -66,6 +92,42 @@ COMPUTING = {
     "structures": r"\btableau\b|\bliste\b|\bindice\b|\bparcours\b",
     "chapitre": r"\btri (?:par )?(?:insertion|selection|s[ée]lection)|\bdichotom|\bglouton|plus proches voisins|\bk-?NN\b",
     "code_python": r"\bfrom \w+(?:\.\w+)* import\b|\bimport \w+|\breturn\b|\bfor \w+ in\b|\bwhile\b",
+    # LE PROGRAMME DE NSI NE SE REDUIT PAS A L'ALGORITHMIQUE. Ses autres
+    # domaines -- representation des donnees, architectures materielles et
+    # systemes, reseaux, web et IHM, bases de donnees, histoire de
+    # l'informatique -- ont leur vocabulaire propre, et un objet qui les
+    # mobilise est de la NSI meme sans une ligne de Python. Ces marqueurs
+    # viennent des intitules du programme officiel, pas des objets qu'ils
+    # doivent juger : sans eux, vingt-quatre objets authentiques restaient
+    # « a arbitrer » faute de reconnaitre leur discipline.
+    "representation": (
+        # « en base $2$ » : le corpus ecrit le chiffre en mode mathematique.
+        r"\bbase\s*\$?(?:2|16|10|deux|seize)\$?\b|\bbinaire\b|\bhexad[ée]cimal|"
+        r"\bbits?\b|\boctets?\b|\bencodage\b|\bUTF-8\b|\bASCII\b|"
+        r"\bflottants?\b|\bcomplement a deux\b"
+    ),
+    "architecture_systeme": (
+        r"\bvon Neumann\b|\bprocesseur\b|\bm[ée]moire vive\b|\bRAM\b|"
+        r"\bsyst[èe]me d'exploitation\b|\bnoyau\b|\bordonnance|\bc[œo]urs?\b|"
+        r"\bcircuit\b|\btransistor|\bsysteme sur puce\b|\bmultiprocesseur"
+    ),
+    "reseaux": (
+        r"\bprotocole\b|\bTCP\b|\bIP\b|\brouteur\b|\bpaquets?\b|"
+        r"\bcommutation\b|\bARPANET\b|\badresse (?:IP|MAC)\b|\bDNS\b"
+    ),
+    "web_ihm": (
+        r"\bHTML\b|\bCSS\b|\bJavaScript\b|\bformulaire\b|\bnavigateur\b|"
+        r"\brequ[êe]te (?:GET|POST)\b|\bserveur\b|\b[ée]v[ée]nement\b|\bIHM\b"
+    ),
+    "bases_de_donnees": (
+        r"\bSQL\b|\brelation(?:nel|nelle)?\b|\bcl[ée] (?:primaire|[ée]trang[èe]re)\b|"
+        r"\battributs?\b|\bSELECT\b|\bJOIN\b|\btable\b|\bsch[ée]ma relationnel\b"
+    ),
+    "histoire": (
+        r"\bTuring\b|\bmachine universelle\b|\bLovelace\b|\bENIAC\b|"
+        r"\bloi de Moore\b|\bchronologi|\bhistoire de l'informatique\b|"
+        r"\bprogramme enregistr"
+    ),
 }
 
 

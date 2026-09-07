@@ -1198,3 +1198,67 @@ def test_a_cell_the_triage_never_judged_stays_a_gap(producer) -> None:
     role = truth["pedagogical_role_coverage"]
     assert role["missing"] == 1
     assert role["triaged_not_a_gap"] == 0
+
+
+# ---------------------------------------------------------------------------
+# « Non audite » n'est pas « sans objet »
+# ---------------------------------------------------------------------------
+
+
+def test_a_project_assessed_chapter_has_no_exercise_pairs_by_design() -> None:
+    """`TNSI-PROJET` est evalue par son projet et sa grille criteriee.
+
+    Decision du Release Owner du 2026-09-06, inscrite dans le contrat sous
+    `assessment_mode: PROJECT_ASSESSMENT`. Le chapitre n'a pas de paires
+    exercice/corrige et n'en attend pas : « non audite » y serait faux, il
+    n'y a rien a auditer.
+    """
+
+    import yaml
+
+    contrat = yaml.safe_load(
+        (ROOT / "NSI/chapitres/TNSI-PROJET/contrat.yaml").read_text(encoding="utf-8")
+    )
+    assert contrat["assessment_mode"] == "PROJECT_ASSESSMENT"
+
+    payload = json.loads(
+        (ROOT / "audit/PUBLISH_READINESS_CHAPTER_MATRIX.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    rows = (
+        payload["chapters"]
+        if isinstance(payload["chapters"], list)
+        else list(payload["chapters"].values())
+    )
+    ligne = next(
+        r for r in rows if (r.get("chapter") or r.get("chapitre")) == "TNSI-PROJET"
+    )
+    assert ligne["ex_co_graph"]["status"] == "NOT_APPLICABLE"
+    assert ligne["ex_co_graph"]["exercises"] == 0
+
+
+def test_a_chapter_without_the_declaration_stays_unaudited() -> None:
+    """La dispense vient du CONTRAT, jamais de l'absence d'exercices.
+
+    Sans la declaration, un chapitre vide reste non audite -- c'est le signal
+    correct, et c'est ce qui empeche la regle de blanchir tout chapitre
+    depeuple.
+    """
+
+    import importlib.util
+    import sys
+
+    spec = importlib.util.spec_from_file_location(
+        "readiness_project_mode",
+        ROOT / "scripts/build_publish_readiness_chapter_matrix.py",
+    )
+    module = importlib.util.module_from_spec(spec)
+    sys.modules["readiness_project_mode"] = module
+    spec.loader.exec_module(module)
+
+    assert module._project_assessed("TNSI-PROJET") is True
+    assert module._project_assessed("TNSI-ALGORITHMIQUE") is False
+    assert module._project_assessed("CHAPITRE-INEXISTANT") is False
+    vide = module._ex_co_truth("TNSI-ALGORITHMIQUE", {"relations": [], "exercise_cardinality": []})
+    assert vide["status"] == "NOT_AUDITED"

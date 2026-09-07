@@ -413,6 +413,30 @@ def _richness_truth(chapter: str, matrix: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _project_assessed(chapter: str) -> bool:
+    """Le contrat declare-t-il une evaluation PAR PROJET ?
+
+    Un chapitre de demarche de projet est evalue par son projet et sa grille
+    criteriee, decision du Release Owner du 2026-09-06 inscrite dans le
+    contrat sous `assessment_mode: PROJECT_ASSESSMENT`. Il n'a pas de paires
+    exercice/corrige, et n'en attend pas. « Non audite » y serait faux : il
+    n'y a rien a auditer, et c'est voulu.
+
+    La declaration doit etre DANS le contrat : sans elle, un chapitre sans
+    exercices reste non audite, ce qui est le signal correct.
+    """
+
+    for corpus in (
+        ROOT / "NSI/chapitres",
+        ROOT / "Mathematiques/manuel-maths/chapitres",
+    ):
+        contrat = corpus / chapter / "contrat.yaml"
+        if contrat.is_file():
+            declare = yaml.safe_load(contrat.read_text(encoding="utf-8")) or {}
+            return declare.get("assessment_mode") == "PROJECT_ASSESSMENT"
+    return False
+
+
 def _ex_co_truth(chapter: str, graph: dict[str, Any]) -> dict[str, Any]:
     relations = [
         row
@@ -462,6 +486,8 @@ def _ex_co_truth(chapter: str, graph: dict[str, Any]) -> dict[str, Any]:
             if not structural_failures and not cardinality_failures and not unknown
             else "GAP"
         )
+    elif _project_assessed(chapter):
+        status = "NOT_APPLICABLE"
     else:
         status = "NOT_AUDITED"
     relation_ids = sorted(
