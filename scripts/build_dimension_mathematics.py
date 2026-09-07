@@ -32,7 +32,8 @@ import certification_dimensions as cd  # noqa: E402
 
 ROOT = cd.ROOT
 OUTPUT = ROOT / "audit/DIMENSION_MATHEMATICS.json"
-PRODUCER_VERSION = "1.0.0"
+NON_FORMALIZABLE_CLOSURE = ROOT / "audit/NON_FORMALIZABLE_REVIEW_CLOSURE.json"
+PRODUCER_VERSION = "2.0.0"
 
 VERIFY_BLOCK = re.compile(r"^% BEGIN-VERIFY\s*$(.*?)^% END-VERIFY\s*$", re.S | re.M)
 COMMENT_LINE = re.compile(r"^%[ \t]?(.*)$")
@@ -214,6 +215,51 @@ def build() -> dict[str, Any]:
             target="ALL", code="MATHEMATICS_UNKNOWN_CLASSIFICATION",
             detail=f"{na_partition['UNKNOWN']} objet(s) non classés",
         ))
+    # QUATRIÈME CONDITION. Un objet mathématique sans oracle n'est pas hors
+    # champ : il est simplement hors de portée du calcul. Tant que personne
+    # n'a établi son exactitude autrement, la dimension ne sait rien de lui —
+    # et une dimension qui passe en ignorant ce qu'elle ne sait pas ne prouve
+    # rien. Le rouge que cette condition produit est sain : il dit ce qui
+    # reste à faire au lieu de le taire.
+    non_formalizable_pending = None
+    if NON_FORMALIZABLE_CLOSURE.is_file():
+        closure = json.loads(
+            NON_FORMALIZABLE_CLOSURE.read_text(encoding="utf-8")
+        )
+        resume = closure.get("summary") or {}
+        non_formalizable_pending = int(
+            resume.get("MATHEMATICAL_NON_FORMALIZABLE_REVIEW_PENDING", -1)
+        )
+        inputs.append(NON_FORMALIZABLE_CLOSURE)
+        if not resume.get("STATES_SUM_EQUALS_TOTAL"):
+            evidence.findings.append(cd.Finding(
+                target="ALL", code="NON_FORMALIZABLE_CLOSURE_INCOHERENT",
+                detail=(
+                    "la fermeture des objets non formalisables ne totalise pas "
+                    "sa propre population : elle ne peut rien établir"
+                ),
+            ))
+        if non_formalizable_pending:
+            evidence.findings.append(cd.Finding(
+                target="ALL", code="MATHEMATICAL_NON_FORMALIZABLE_REVIEW_PENDING",
+                detail=(
+                    f"{non_formalizable_pending} objet(s) mathématiques sans "
+                    "oracle possible n'ont reçu aucune revue mathématique : "
+                    "leur exactitude n'est établie ni par le calcul ni par un "
+                    "raisonnement écrit. La dimension ne peut pas passer en "
+                    "ignorant ce qu'elle n'a pas examiné."
+                ),
+            ))
+    else:
+        non_formalizable_pending = -1
+        evidence.findings.append(cd.Finding(
+            target="ALL", code="NON_FORMALIZABLE_CLOSURE_MISSING",
+            detail=(
+                "audit/NON_FORMALIZABLE_REVIEW_CLOSURE.json absent : la "
+                "quatrième condition de la dimension ne peut pas être évaluée"
+            ),
+        ))
+
     if na_partition.get("MISSING_ORACLE"):
         evidence.findings.append(cd.Finding(
             target="ALL", code="MATHEMATICAL_CONTENT_WITHOUT_ORACLE",
@@ -246,6 +292,13 @@ def build() -> dict[str, Any]:
         "OBJECTS_NOT_APPLICABLE": not_applicable,
         "NOT_APPLICABLE_PARTITION": dict(sorted(na_partition.items())),
         "MATHEMATICS_UNKNOWN": na_partition.get("UNKNOWN", 0),
+        "MATHEMATICAL_NON_FORMALIZABLE_REVIEW_PENDING": non_formalizable_pending,
+        "PASS_CONDITIONS": [
+            "MATHEMATICAL_ASSERTION_FAILURES = 0",
+            "MISSING_ORACLE = 0",
+            "MATHEMATICS_UNKNOWN = 0",
+            "MATHEMATICAL_NON_FORMALIZABLE_REVIEW_PENDING = 0",
+        ],
     }
     return payload
 
