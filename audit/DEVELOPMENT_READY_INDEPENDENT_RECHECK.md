@@ -5,7 +5,7 @@ vérification interroge les moteurs d'assemblage, ouvre les PDF et
 **ré-exécute** les oracles au contenu courant, puis compare.
 
 - `DEVELOPMENT_READY_INDEPENDENT_RECHECK` : `24/24`
-- Assertions ré-exécutées : `14639` (échecs : `0`)
+- Assertions ré-exécutées : `14810` (échecs : `0`)
 - `MISSING_ORACLE` : `0`
 - Désaccords avec le compteur primaire : `0`
 
