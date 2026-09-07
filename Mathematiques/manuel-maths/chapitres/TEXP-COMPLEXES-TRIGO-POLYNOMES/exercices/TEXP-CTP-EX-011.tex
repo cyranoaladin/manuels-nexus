@@ -1,0 +1,44 @@
+% META: {"id": "TEXP-CTP-EX-011", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "exercice", "capacites": ["TEXP-CTP-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-011.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-011.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-EBCF245C7E60", "CAPACITY_ID": "C1", "EXERCISE_ROLE": "CONTEXT_VARIATION", "DIFFICULTY": 2, "AUTHORING_REASON": "les conversions etaient demandees pour elles-memes, sur des complexes isoles ; ici c'est la situation qui impose de changer de forme deux fois, l'addition se faisant en algebrique et l'amplitude se lisant en exponentielle", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, exp, pi, sqrt, simplify, Abs, arg, cos, sin, solve, Eq, symbols, N, Rational
+% def somme(phi):
+%     return (4 + 4 * exp(I * phi)).rewrite(cos)
+% s1 = somme(2 * pi / 3)
+% assert simplify(s1 - (2 + 2 * sqrt(3) * I)) == 0
+% assert simplify(Abs(s1) - 4) == 0
+% assert simplify(arg(s1) - pi / 3) == 0
+% assert simplify(s1 - 4 * exp(I * pi / 3).rewrite(cos)) == 0
+% s2 = somme(pi)
+% assert simplify(s2) == 0
+% s3 = somme(pi / 2)
+% assert simplify(s3 - (4 + 4 * I)) == 0
+% assert simplify(Abs(s3) - 4 * sqrt(2)) == 0
+% assert simplify(arg(s3) - pi / 4) == 0
+% assert abs(N(Abs(s3)) - 5.656854) < 1e-6
+% phi = symbols('phi', real=True)
+% carre = simplify(Abs(4 + 4 * exp(I * phi)) ** 2)
+% assert simplify(carre - (32 + 32 * cos(phi))) == 0
+% solutions = solve(Eq(32 + 32 * cos(phi), 48), phi)
+% assert simplify(cos(solutions[0]) - Rational(1, 2)) == 0
+% assert simplify(Abs(somme(pi / 3)) - 4 * sqrt(3)) == 0
+% assert simplify(Abs(somme(0)) - 8) == 0
+% END-VERIFY
+\begin{exercice}{TEXP-CTP-EX-011}{2}{25}
+Deux haut-parleurs émettent le même son pur. On représente chaque onde par une
+\emph{amplitude complexe} : le premier haut-parleur par $A_1=4$, le second par
+$A_2=4\mathrm{e}^{\mathrm{i}\varphi}$, où $\varphi$ est le déphasage entre les
+deux sources. En un point d'écoute, l'onde résultante a pour amplitude complexe
+$A=A_1+A_2$, et le niveau sonore perçu est proportionnel à $|A|$.
+\begin{enumerate}
+  \item Pour $\varphi=\dfrac{2\pi}{3}$, écrire $A_2$ sous forme algébrique, en
+    déduire celle de $A$, puis remettre $A$ sous forme exponentielle.
+  \item Que vaut alors $|A|$ ? Commenter : deux sources d'amplitude $4$ chacune
+    produisent-elles nécessairement un son plus fort qu'une seule ?
+  \item Traiter de même les cas $\varphi=\pi$ et $\varphi=\dfrac{\pi}{2}$. Donner
+    à chaque fois la forme exponentielle de $A$ et la valeur de $|A|$.
+  \item Montrer que, pour tout $\varphi$, $|A|^2=32+32\cos\varphi$.
+  \item En déduire les déphasages pour lesquels l'amplitude résultante vaut
+    $4\sqrt3$, puis ceux pour lesquels elle est maximale et ceux pour lesquels
+    elle est nulle.
+\end{enumerate}
+\end{exercice}

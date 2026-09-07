@@ -1,0 +1,51 @@
+% META: {"id": "TEXP-MAT-EX-015", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "exercice", "capacites": ["TEXP-MAT-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-015.tex", "corrige_tex": "chapitres/TEXP-MATRICES-MARKOV/corriges/TEXP-MAT-CO-015.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-E92D4ABEEFC9", "CAPACITY_ID": "C1", "EXERCISE_ROLE": "CONTEXT_VARIATION", "DIFFICULTY": 2, "AUTHORING_REASON": "les deux enonces existants donnent deux matrices sans provenance et demandent la meme liste d'operations ; ici les coefficients ont une unite, l'inverse sert a remonter d'une consommation a une production, et la derniere question demande si une operation licite a encore un sens", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, eye
+% A = Matrix([[2, 5], [3, 4]])
+% X = Matrix([[40], [30]])
+% B = A * X
+% assert B == Matrix([[230], [240]])
+% assert A.det() == -7
+% inverse = A.inv()
+% assert inverse == Matrix([[Rational(-4, 7), Rational(5, 7)], [Rational(3, 7), Rational(-2, 7)]])
+% assert A * inverse == eye(2)
+% assert inverse * B == X
+% Xprime = Matrix([[80], [30]])
+% assert A * Xprime == Matrix([[310], [360]])
+% D = Matrix([[0, 1], [1, 0]])
+% Aprime = A + D
+% assert Aprime == Matrix([[2, 6], [4, 4]])
+% assert Aprime * X == Matrix([[260], [280]])
+% assert A ** 2 == Matrix([[19, 30], [18, 31]])
+% assert A * Matrix([[1], [0]]) == Matrix([[2], [3]])
+% END-VERIFY
+\begin{exercice}{TEXP-MAT-EX-015}{2}{25}
+Un atelier fabrique deux modèles de vélo, $V_1$ et $V_2$. Chaque $V_1$ demande
+$2$~heures-machine et $3$~kg d'aluminium ; chaque $V_2$ demande $5$~heures-machine
+et $4$~kg d'aluminium. On note
+\[
+  A=\begin{pmatrix}2&5\\3&4\end{pmatrix},
+  \qquad
+  X=\begin{pmatrix}x_1\\x_2\end{pmatrix},
+\]
+où $x_1$ et $x_2$ sont les nombres de vélos de chaque modèle produits en une
+semaine.
+\begin{enumerate}
+  \item Expliquer ce que représentent les deux coefficients de la matrice $AX$,
+    en précisant leurs unités.
+  \item Une semaine, l'atelier a consommé $230$~heures-machine et $240$~kg
+    d'aluminium. Écrire l'équation matricielle correspondante.
+  \item Calculer $\det(A)$, puis $A^{-1}$. Vérifier que $AA^{-1}=I_2$.
+  \item Résoudre l'équation de la question~2 à l'aide de $A^{-1}$ et donner le
+    nombre de vélos de chaque modèle.
+  \item La semaine suivante, l'atelier double la production de $V_1$ sans changer
+    celle de $V_2$. Calculer la nouvelle consommation.
+  \item Un changement de fournisseur fait passer $V_2$ à $6$~heures-machine et
+    $V_1$ à $4$~kg d'aluminium. Écrire la nouvelle matrice $A'$ comme une somme
+    $A+D$, puis calculer la consommation correspondant à la production de la
+    question~4.
+  \item Le produit $A^2$ se calcule sans difficulté ; le faire. Ce résultat
+    a-t-il une signification pour l'atelier ? Justifier en raisonnant sur les
+    unités.
+\end{enumerate}
+\end{exercice}

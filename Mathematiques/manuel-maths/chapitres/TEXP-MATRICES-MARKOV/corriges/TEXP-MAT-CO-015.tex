@@ -1,0 +1,61 @@
+% META: {"id": "TEXP-MAT-CO-015", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige", "exercice_ref": "TEXP-MAT-EX-015", "capacites_codes": ["C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, eye
+% A = Matrix([[2, 5], [3, 4]])
+% X = Matrix([[40], [30]])
+% assert A * X == Matrix([[230], [240]])
+% assert A.det() == -7 and A.det() != 0
+% inverse = A.inv()
+% assert inverse == Matrix([[Rational(-4, 7), Rational(5, 7)], [Rational(3, 7), Rational(-2, 7)]])
+% assert A * inverse == eye(2) and inverse * A == eye(2)
+% assert inverse * Matrix([[230], [240]]) == X
+% assert A * Matrix([[80], [30]]) == Matrix([[310], [360]])
+% Aprime = A + Matrix([[0, 1], [1, 0]])
+% assert Aprime == Matrix([[2, 6], [4, 4]])
+% assert Aprime * X == Matrix([[260], [280]])
+% assert A ** 2 == Matrix([[19, 30], [18, 31]])
+% assert (A ** 2) * X == Matrix([[1660], [1650]])
+% END-VERIFY
+\begin{corrige}{TEXP-MAT-EX-015}
+\textbf{1.} $AX=\begin{pmatrix}2x_1+5x_2\\3x_1+4x_2\end{pmatrix}$. Le premier
+coefficient est le nombre total d'heures-machine consommées, le second la masse
+totale d'aluminium en kilogrammes. Chaque ligne de $A$ est une ressource, chaque
+colonne un modèle.
+
+\textbf{2.} $\begin{pmatrix}2&5\\3&4\end{pmatrix}\begin{pmatrix}x_1\\x_2\end{pmatrix}
+=\begin{pmatrix}230\\240\end{pmatrix}$.
+
+\textbf{3.} $\det(A)=2\times4-5\times3=8-15=-7\neq 0$, donc $A$ est inversible et
+\[
+  A^{-1}=\dfrac{1}{-7}\begin{pmatrix}4&-5\\-3&2\end{pmatrix}
+  =\begin{pmatrix}-\tfrac47&\tfrac57\\[2pt]\tfrac37&-\tfrac27\end{pmatrix}.
+\]
+On vérifie $AA^{-1}=I_2$.
+
+\textbf{4.} $X=A^{-1}\begin{pmatrix}230\\240\end{pmatrix}
+=\begin{pmatrix}-\tfrac{920}{7}+\tfrac{1200}{7}\\[2pt]\tfrac{690}{7}-\tfrac{480}{7}\end{pmatrix}
+=\begin{pmatrix}40\\30\end{pmatrix}$ : $40$ vélos $V_1$ et $30$ vélos $V_2$.
+
+\textbf{5.} La production devient $\begin{pmatrix}80\\30\end{pmatrix}$ et
+$A\begin{pmatrix}80\\30\end{pmatrix}=\begin{pmatrix}310\\360\end{pmatrix}$ :
+$310$~heures-machine et $360$~kg d'aluminium.
+
+\textbf{6.} Seuls deux coefficients changent, de $1$ chacun :
+\[
+  A'=A+D \quad\text{avec}\quad D=\begin{pmatrix}0&1\\1&0\end{pmatrix},
+  \qquad A'=\begin{pmatrix}2&6\\4&4\end{pmatrix}.
+\]
+Alors $A'X=\begin{pmatrix}260\\280\end{pmatrix}$ : $260$~heures-machine et
+$280$~kg pour la même production qu'à la question~4.
+
+\textbf{7.} $A^2=\begin{pmatrix}19&30\\18&31\end{pmatrix}$. Ce calcul est
+parfaitement licite, mais il n'a aucune signification ici. Les lignes de $A$ sont
+des ressources et ses colonnes des modèles : multiplier $A$ par $A$ reviendrait à
+composer « ressource par modèle » avec « ressource par modèle », ce qui
+additionnerait des heures et des kilogrammes. Le coefficient $19$ vaut
+$2\times2+5\times3$, c'est-à-dire des heures multipliées par des heures ajoutées
+à des heures multipliées par des kilogrammes : la quantité n'a pas d'unité
+possible. Un produit matriciel n'a de sens que si les colonnes du premier facteur
+désignent la même chose que les lignes du second — c'était le cas pour $AX$, ce ne
+l'est pas pour $A^2$.
+\end{corrige}

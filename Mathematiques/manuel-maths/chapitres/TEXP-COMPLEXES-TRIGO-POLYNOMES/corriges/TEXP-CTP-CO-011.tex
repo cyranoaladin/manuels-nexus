@@ -1,0 +1,56 @@
+% META: {"id": "TEXP-CTP-CO-011", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige", "exercice_ref": "TEXP-CTP-EX-011", "capacites_codes": ["C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, exp, pi, sqrt, simplify, Abs, arg, cos, solve, Eq, symbols, N
+% def somme(phi):
+%     return (4 + 4 * exp(I * phi)).rewrite(cos)
+% assert simplify(somme(2 * pi / 3) - (2 + 2 * sqrt(3) * I)) == 0
+% assert simplify(Abs(somme(2 * pi / 3)) - 4) == 0
+% assert simplify(arg(somme(2 * pi / 3)) - pi / 3) == 0
+% assert simplify(somme(pi)) == 0
+% assert simplify(somme(pi / 2) - (4 + 4 * I)) == 0
+% assert simplify(Abs(somme(pi / 2)) - 4 * sqrt(2)) == 0
+% assert abs(N(4 * sqrt(2)) - 5.6569) < 1e-4
+% phi = symbols('phi', real=True)
+% assert simplify(Abs(4 + 4 * exp(I * phi)) ** 2 - (32 + 32 * cos(phi))) == 0
+% assert simplify((32 + 32 * cos(pi / 3)) - 48) == 0
+% assert simplify(Abs(somme(pi / 3)) - 4 * sqrt(3)) == 0
+% assert simplify(Abs(somme(-pi / 3)) - 4 * sqrt(3)) == 0
+% assert simplify(Abs(somme(0)) - 8) == 0
+% assert abs(N(4 * sqrt(3)) - 6.9282) < 1e-4
+% END-VERIFY
+\begin{corrige}{TEXP-CTP-EX-011}
+\textbf{1.} $\mathrm{e}^{\mathrm{i}2\pi/3}=\cos\dfrac{2\pi}{3}+\mathrm{i}\sin\dfrac{2\pi}{3}
+=-\dfrac12+\mathrm{i}\dfrac{\sqrt3}{2}$, donc $A_2=-2+2\mathrm{i}\sqrt3$ et
+\[
+  A=4+(-2+2\mathrm{i}\sqrt3)=2+2\mathrm{i}\sqrt3.
+\]
+Son module vaut $\sqrt{4+12}=4$ et $A=4\left(\dfrac12+\mathrm{i}\dfrac{\sqrt3}{2}\right)$,
+d'où $A=4\mathrm{e}^{\mathrm{i}\pi/3}$.
+
+\textbf{2.} $|A|=4$ : exactement le niveau d'une seule source. Deux sources ne
+s'additionnent en amplitude que si elles sont en phase ; ici le déphasage de
+$\dfrac{2\pi}{3}$ fait que la seconde annule autant qu'elle apporte. C'est
+l'interférence, et c'est la forme exponentielle qui la rend lisible : le module
+de la somme n'est pas la somme des modules.
+
+\textbf{3.} Pour $\varphi=\pi$ : $A_2=-4$ et $A=0$. Les deux ondes s'annulent —
+interférence destructive, le silence. Pour $\varphi=\dfrac{\pi}{2}$ :
+$A_2=4\mathrm{i}$ et $A=4+4\mathrm{i}=4\sqrt2\,\mathrm{e}^{\mathrm{i}\pi/4}$, donc
+$|A|=4\sqrt2\approx 5{,}66$.
+
+\textbf{4.} Pour tout $\varphi$,
+$A=4+4\mathrm{e}^{\mathrm{i}\varphi}=(4+4\cos\varphi)+4\mathrm{i}\sin\varphi$, donc
+\[
+  |A|^2=(4+4\cos\varphi)^2+(4\sin\varphi)^2
+  =16+32\cos\varphi+16\cos^2\varphi+16\sin^2\varphi
+  =32+32\cos\varphi,
+\]
+en utilisant $\cos^2\varphi+\sin^2\varphi=1$.
+
+\textbf{5.} $|A|=4\sqrt3$ équivaut à $|A|^2=48$, soit $32+32\cos\varphi=48$,
+c'est-à-dire $\cos\varphi=\dfrac12$ : $\varphi=\pm\dfrac{\pi}{3}$ modulo $2\pi$.
+L'amplitude est maximale quand $\cos\varphi=1$, soit $\varphi=0$ : on obtient
+$|A|=8$, le double d'une source. Elle est nulle quand $\cos\varphi=-1$, soit
+$\varphi=\pi$ : c'est le cas déjà rencontré. Toute l'échelle des niveaux
+perçus, de $0$ à $8$, est donc parcourue par le seul déphasage.
+\end{corrige}

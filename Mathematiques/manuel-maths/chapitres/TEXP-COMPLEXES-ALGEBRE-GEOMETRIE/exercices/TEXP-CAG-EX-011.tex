@@ -1,0 +1,43 @@
+% META: {"id": "TEXP-CAG-EX-011", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "exercice", "capacites": ["TEXP-CAG-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner"], "duree_min": 22, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/exercices/TEXP-CAG-EX-011.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/corriges/TEXP-CAG-CO-011.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-5914C0DCDEFD", "CAPACITY_ID": "C4", "EXERCISE_ROLE": "CONTEXT_VARIATION", "DIFFICULTY": 2, "AUTHORING_REASON": "module et argument n'etaient demandes que sur des complexes donnes tels quels ; aucun enonce ne les faisait produire par une situation, alors que c'est la que la forme exponentielle devient utile plutot qu'imposee", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, exp, pi, sqrt, simplify, Abs, arg, atan, N, cos
+% # `simplify` seul ne reduit pas exp(i pi / 4) : on repasse en cos/sin, comme
+% # le fait l'eleve quand il ecrit la forme algebrique.
+% z1 = (3 * exp(I * pi / 4)).rewrite(cos)
+% z2 = (2 * exp(I * 3 * pi / 4)).rewrite(cos)
+% assert simplify(z1 - 3 * sqrt(2) / 2 * (1 + I)) == 0
+% assert simplify(z2 - sqrt(2) * (-1 + I)) == 0
+% z = simplify(z1 + z2)
+% assert simplify(z - (sqrt(2) / 2 + 5 * sqrt(2) / 2 * I)) == 0
+% assert simplify(Abs(z) ** 2 - 13) == 0
+% assert simplify(Abs(z) - sqrt(13)) == 0
+% assert simplify(arg(z) - atan(5)) == 0
+% assert abs(N(atan(5)) - 1.373401) < 1e-6
+% assert abs(N(Abs(z)) - 3.605551) < 1e-6
+% assert N(Abs(z)) < 5
+% aligne = (3 * exp(I * pi / 4) + 2 * exp(I * pi / 4)).rewrite(cos)
+% assert simplify(Abs(aligne) - 5) == 0
+% oppose = (3 * exp(I * pi / 4) + 2 * exp(I * (pi / 4 + pi))).rewrite(cos)
+% assert simplify(Abs(oppose) - 1) == 0
+% END-VERIFY
+\begin{exercice}{TEXP-CAG-EX-011}{2}{22}
+Un bras robotisé plan est formé de deux segments articulés. Le premier part de
+l'origine $O$ du plan complexe ; son extrémité a pour affixe
+$z_1=3\mathrm{e}^{\mathrm{i}\pi/4}$. Le second segment, de longueur $2$, part de
+cette extrémité et fait un quart de tour supplémentaire dans le sens direct :
+son déplacement a pour affixe $z_2=2\mathrm{e}^{\mathrm{i}3\pi/4}$. L'affixe de la
+pince est $z=z_1+z_2$.
+\begin{enumerate}
+  \item Écrire $z_1$ et $z_2$ sous forme algébrique.
+  \item En déduire la forme algébrique de $z$, puis placer les trois points
+    concernés sur une figure.
+  \item Déterminer le module de $z$ sous forme exacte. À quelle grandeur du
+    problème correspond-il ?
+  \item Déterminer un argument de $z$. Donner une valeur approchée en degrés,
+    à $0{,}1^{\circ}$ près.
+  \item La pince est-elle à $5$ unités de $O$, comme le suggérerait l'addition
+    des longueurs $3$ et $2$ ? Expliquer l'écart.
+  \item Pour quelle valeur de l'argument de $z_2$ la distance $OM$ serait-elle
+    maximale ? Minimale ? Calculer ces deux distances.
+\end{enumerate}
+\end{exercice}

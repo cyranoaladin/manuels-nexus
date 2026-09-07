@@ -1,0 +1,70 @@
+% META: {"id": "TEXP-MAT-CO-016", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige", "exercice_ref": "TEXP-MAT-EX-016", "capacites_codes": ["C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational
+% P = Matrix([[Rational(6, 10), Rational(3, 10), Rational(1, 10)],
+%             [Rational(2, 10), Rational(5, 10), Rational(3, 10)],
+%             [Rational(1, 10), Rational(4, 10), Rational(5, 10)]])
+% P2 = P ** 2
+% assert P2[0, 2] == Rational(2, 10) and float(P2[0, 2]) == 0.2
+% assert P2[2, 0] == Rational(19, 100) and float(P2[2, 0]) == 0.19
+% assert sum(P[0, k] * P[k, 2] for k in range(3)) == P2[0, 2]
+% assert sum(P[2, k] * P[k, 0] for k in range(3)) == P2[2, 0]
+% assert all(sum(P2.row(i)) == 1 for i in range(3))
+% assert all(sum((P ** 3).row(i)) == 1 for i in range(3))
+% pi0 = Matrix([[1, 0, 0]])
+% assert pi0 * P2 == P2.row(0)
+% assert (pi0 * P2)[2] == Rational(2, 10)
+% assert P2 * Matrix([[1], [0], [0]]) == P2.col(0)
+% assert P2.col(0).T != P2.row(0)
+% END-VERIFY
+\begin{corrige}{TEXP-MAT-EX-016}
+\textbf{1.} La ligne $i$ de $P$ est la liste des probabilités de transition
+depuis l'état $i$ : $p_{i1}$, $p_{i2}$, $p_{i3}$. Ces trois événements sont deux à
+deux incompatibles et couvrent tous les cas — le lendemain, il fait
+nécessairement l'un des trois temps. Leur somme vaut donc $1$. On vérifie :
+$0{,}6+0{,}3+0{,}1=1$, $0{,}2+0{,}5+0{,}3=1$, $0{,}1+0{,}4+0{,}5=1$.
+
+\textbf{2.} Partons d'un jour de soleil (état $1$) et cherchons la probabilité
+qu'il pleuve (état $3$) le surlendemain. Le temps du jour intermédiaire est
+soleil, nuageux ou pluie : ces trois événements forment une partition. La formule
+des probabilités totales donne
+\[
+  P(\text{pluie en }2\text{ jours})=\sum_{k=1}^{3} p_{1k}\,p_{k3}
+  =0{,}6\times0{,}1+0{,}3\times0{,}3+0{,}1\times0{,}5.
+\]
+Or ce nombre est exactement le produit de la ligne $1$ de $P$ par la colonne $3$
+de $P$, c'est-à-dire le coefficient $(1\,;\,3)$ de $P^2$. Sa valeur est
+$0{,}06+0{,}09+0{,}05=0{,}20$.
+
+\textbf{3.} Par le même raisonnement, le coefficient $(3\,;\,1)$ de $P^2$ est la
+probabilité d'observer du soleil deux jours après un jour de pluie :
+\[
+  0{,}1\times0{,}6+0{,}4\times0{,}2+0{,}5\times0{,}1=0{,}06+0{,}08+0{,}05=0{,}19.
+\]
+Il n'y avait aucune raison qu'il soit égal à $0{,}20$ : « pleuvoir deux jours
+après un jour de soleil » et « faire soleil deux jours après un jour de pluie »
+sont deux événements différents. Une matrice de transition n'a aucune raison
+d'être symétrique, et celle-ci ne l'est pas.
+
+\textbf{4.} Notons $L_i$ la somme des coefficients de la ligne $i$ de $P^2$ :
+\[
+  L_i=\sum_{j=1}^{3}\sum_{k=1}^{3}p_{ik}p_{kj}
+  =\sum_{k=1}^{3}p_{ik}\left(\sum_{j=1}^{3}p_{kj}\right)
+  =\sum_{k=1}^{3}p_{ik}\times 1=1,
+\]
+puisque chaque ligne de $P$ somme à $1$. Le même échange de sommes s'applique de
+$P^{n}$ à $P^{n+1}$ : par récurrence, toutes les puissances de $P$ ont leurs
+lignes de somme $1$. C'est cohérent : la ligne $i$ de $P^n$ est une distribution
+de probabilité, celle de l'état au bout de $n$ jours partant de $i$.
+
+\textbf{5.} Ici $\pi_0$ est une matrice \emph{ligne} $1\times 3$ et $P$ une
+matrice $3\times 3$ : le produit $\pi_0P^2$ est défini et donne une matrice
+ligne, tandis que $P^2\pi_0$ ne l'est pas avec cette convention. Le sens n'est pas
+qu'une affaire de format : dans $\pi_0 P$, le coefficient $j$ vaut
+$\sum_k (\pi_0)_k\,p_{kj}$, soit bien la somme sur l'état de départ pondérée par
+sa probabilité. Avec $\pi_0=\begin{pmatrix}1&0&0\end{pmatrix}$, on obtient
+$\pi_2=\pi_0P^2=$ la \emph{première ligne} de $P^2$, dont le troisième
+coefficient est le $0{,}20$ de la question~2. Écrire $P^2\pi_0$ avec $\pi_0$ en
+colonne sélectionnerait la première \emph{colonne}, c'est-à-dire les probabilités
+d'\emph{arriver} au soleil depuis chaque état : l'autre question.
+\end{corrige}
