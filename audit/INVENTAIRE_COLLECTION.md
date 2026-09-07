@@ -18,8 +18,6 @@
 | Catégorie | Nombre |
 |---|---|
 | blocking_statuses | 2330 |
-| broken_meta_references | 110 |
-| unclassified_types | 1 |
 
 ### Échantillon déterministe
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
@@ -27,12 +25,6 @@
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-003, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-004, scope=object
-- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-004.tex, cible=C2, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
-- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-005.tex, cible=C2, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
-- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-006.tex, cible=C2, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
-- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-013.tex, cible=C5, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
-- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-014.tex, cible=C5, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
-- unclassified_types: path=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/16_C7_somme_produit_racines.tex, id=1SPE-SECDEG-CR-016, source_subtype=notion, source_type=cours
 
 ## Réconciliation des rapports
 

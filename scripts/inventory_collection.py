@@ -6755,6 +6755,13 @@ def _add_reference_graph(
         objects_by_id[item["id"]].append(item)
     capacity_refs: dict[str, set[str]] = defaultdict(set)
     capacity_codes: dict[str, dict[str, str]] = defaultdict(dict)
+    # Un code local qui declare `sans_alias_officiel` est une capacite du
+    # chapitre comme une autre : un objet peut la citer. Mais il ne porte
+    # aucune reference officielle, donc il ne doit pas entrer dans
+    # `capacity_refs`, qui sert au credit de couverture — l'y mettre
+    # crediterait une exigence que personne ne porte. Sa cible de resolution
+    # est son identite locale scopee, sur le modele des prerequis.
+    capacity_facet_codes: dict[str, set[str]] = defaultdict(set)
     optional_extension_codes: dict[str, set[str]] = defaultdict(set)
     prerequisite_codes: dict[str, set[str]] = defaultdict(set)
     for manual in inventory["manuals"].values():
@@ -6766,6 +6773,10 @@ def _add_reference_graph(
                     capacity_refs[chapter_id].add(reference)
                     if isinstance(code, str):
                         capacity_codes[chapter_id][code] = reference
+                elif isinstance(code, str) and isinstance(
+                    capacity.get("sans_alias_officiel"), Mapping
+                ):
+                    capacity_facet_codes[chapter_id].add(code)
             contract = chapter.get("contract")
             optional_extensions = (
                 contract.get("extensions_facultatives", [])
@@ -6897,6 +6908,16 @@ def _add_reference_graph(
                 if not isinstance(value, str) or not value:
                     continue
                 field = f"capacites[{index}]"
+                if value in capacity_facet_codes[chapter_id]:
+                    _append_reference(
+                        inventory,
+                        source=item["path"],
+                        target=f"{chapter_id}:capacite:{value}",
+                        field=field,
+                        kind="capacity_facet",
+                        resolved=True,
+                    )
+                    continue
                 target = capacity_codes[chapter_id].get(value, value)
                 if target not in capacity_refs[chapter_id] and value.startswith(
                     f"{chapter_id}-"
@@ -6962,6 +6983,10 @@ def _add_reference_graph(
                         resolved = True
                     elif value in capacity_refs[chapter_id]:
                         kind = "capacity"
+                        resolved = True
+                    elif value in capacity_facet_codes[chapter_id]:
+                        target = f"{chapter_id}:capacite:{value}"
+                        kind = "capacity_facet"
                         resolved = True
                     elif value in prerequisite_codes[chapter_id]:
                         target = f"{chapter_id}:prerequis:{value}"

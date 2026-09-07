@@ -14,6 +14,7 @@ déclaration est contrôlée, pas crue sur parole.
 
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 
@@ -119,3 +120,65 @@ def test_the_gate_accepts_a_fully_justified_declaration() -> None:
         "sans_alias_officiel": {"facette_de": "X-2026-C4", "porte_par": "C1"},
     }
     assert ic._capacity_alias_verdict(capacity, {"C1": bearer, "C9": capacity}) is None
+
+
+# --- Résolution : une facette est une capacité du chapitre ------------------
+
+def test_an_object_may_declare_a_facet_code() -> None:
+    """Un code local sans alias officiel reste une capacité du chapitre.
+
+    L'index de résolution n'était alimenté que par les capacités porteuses
+    d'un `ref_capacite`. Les objets qui déclarent `C2`, `C5` ou `C6` de
+    `1SPE-SECOND-DEGRE` — le sommet, l'inéquation, l'optimisation — voyaient
+    donc leur référence déclarée « absente ou ambiguë », alors que le contrat
+    les définit. 110 objets étaient concernés, tous dans ce seul chapitre.
+    """
+    payload = json.loads(
+        (ROOT / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8")
+    )
+    broken = payload["anomalies"]["broken_meta_references"]
+    facets = [
+        row for row in broken
+        if row.get("cible") in {"C2", "C5", "C6"}
+        and "1SPE-SECOND-DEGRE" in str(row.get("source", ""))
+    ]
+    assert facets == [], f"{len(facets)} objets déclarent une facette non résolue"
+
+
+def test_a_facet_code_does_not_earn_official_coverage() -> None:
+    """Résoudre n'est pas créditer : la facette ne vaut aucune couverture.
+
+    Si un code de facette entrait dans l'index des références officielles, il
+    créditerait une exigence que personne ne porte. La résolution le reconnaît
+    comme capacité locale du chapitre ; le crédit officiel reste au code frère.
+    """
+    import build_dimension_regulation as regulation
+
+    uncovered = {
+        f["target"] for f in regulation.build()["findings"]
+        if f["code"] == "OFFICIAL_REQUIREMENT_UNCOVERED"
+    }
+    assert uncovered == set()
+
+    payload = json.loads(
+        (ROOT / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8")
+    )
+    graph = payload.get("reference_graph") or []
+    facet_targets = {
+        row["target"] for row in graph
+        if isinstance(row, dict)
+        and str(row.get("target", "")).startswith("1SPE-SECOND-DEGRE:capacite:")
+    }
+    assert facet_targets <= {
+        "1SPE-SECOND-DEGRE:capacite:C2",
+        "1SPE-SECOND-DEGRE:capacite:C5",
+        "1SPE-SECOND-DEGRE:capacite:C6",
+    }
+    official = {
+        c["ref_capacite"]
+        for c in _capacities(
+            ROOT / "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml"
+        )
+        if c.get("ref_capacite")
+    }
+    assert not (facet_targets & official)
