@@ -4,10 +4,28 @@
 % u0, q = 200, Rational(1, 4)
 % limite = u0 / (1 - q)
 % assert limite == Rational(800, 3)
+% # La nouvelle question 1 demande la STRUCTURE : la somme partielle
+% # doit valoir la formule de la somme geometrique, pas seulement sa limite.
+% from sympy import symbols as _sym, summation as _sum, simplify as _simp
+% _k, _n = _sym('k n', integer=True, nonnegative=True)
+% _S = _sum(200 * Rational(1, 4) ** _k, (_k, 0, _n))
+% assert _simp(_S - 200 * (1 - Rational(1, 4) ** (_n + 1)) / (1 - Rational(1, 4))) == 0
 % END-VERIFY
 \begin{corrige}{TCOMPL-ME-EX-001}
-Chaque jour, $25\%$ du polluant présent subsiste : c'est une suite géométrique de raison $q=0{,}25$. La quantité totale accumulée après $n$ jours est la somme des apports successifs, chacun dégradé au fil du temps, qui tend vers :
+\textbf{1.} L'apport du jour $0$ vaut $200$ kg ; au bout de $k$ jours il n'en
+subsiste que $200\times0{,}25^{\,k}$. En sommant les apports successifs, la
+quantité présente au bout de $n$ jours vaut
 \[
-  \frac{200}{1-0{,}25} = \frac{200}{0{,}75} = \frac{800}{3} \approx 266{,}7 \text{ kg}.
+  q_n = \sum_{k=0}^{n} 200\times0{,}25^{\,k},
+\]
+somme des termes d'une suite géométrique de premier terme $200$ et de raison
+$0{,}25$.
+
+\textbf{2.} La raison $0{,}25$ appartient à $\left]0\,;\,1\right[$, donc
+$0{,}25^{\,n+1}\to0$ et la somme converge :
+\[
+  q_n = 200\times\frac{1-0{,}25^{\,n+1}}{1-0{,}25}
+  \xrightarrow[n\to+\infty]{} \frac{200}{0{,}75}
+  = \frac{800}{3} \approx 266{,}7 \text{ kg}.
 \]
 \end{corrige}

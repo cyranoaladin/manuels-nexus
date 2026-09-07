@@ -212,3 +212,71 @@ def test_a_rotation_without_content_proof_is_never_excused(producer) -> None:
             ]
             assert assignations
             assert all(a["state"] == "ALIGNED" for a in assignations)
+
+
+# ---------------------------------------------------------------------------
+# Les attributions non attestees sont LUES, pas laissees en suspens
+# ---------------------------------------------------------------------------
+
+
+def test_no_assignment_is_left_without_evidence(payload: dict) -> None:
+    """`NOT_EVIDENCED_BY_SIGNATURE` n'est ni un PASS ni un FAIL.
+
+    Laisser une attribution dans cet etat reviendrait a compter une question
+    ouverte comme un resultat.
+    """
+
+    assert payload["summary"]["CAPACITY_ASSIGNMENTS_WITHOUT_EVIDENCE"] == 0
+    assert payload["summary"][NOT_EVIDENCED_STATE] == 0
+
+
+NOT_EVIDENCED_STATE = "NOT_EVIDENCED_BY_SIGNATURE"
+
+
+def test_every_semantic_review_names_what_it_read(payload: dict) -> None:
+    """Une revue sans contenu lu ni motif ne vaut pas mieux qu'un verdict nu."""
+
+    for review in payload["semantic_reviews"]:
+        assert review["actual_content"], review["object_id"]
+        assert review["why_signature_missed_it"], review["object_id"]
+        assert review["action_taken"], review["object_id"]
+        assert review["verdict"] in {
+            "SEMANTICALLY_ALIGNED", "MISALIGNED",
+            "PARTIALLY_ALIGNED", "AMBIGUOUS",
+        }
+
+
+def test_a_misaligned_review_corrects_the_mapping_not_the_signature(
+    payload: dict,
+) -> None:
+    """Quand le contenu sert une AUTRE capacite, on ne dilate pas la signature.
+
+    Elargir le marqueur pour faire passer un contenu etranger reviendrait a
+    supprimer le detecteur en pretendant l'ajuster.
+    """
+
+    for review in payload["semantic_reviews"]:
+        if review["verdict"] != "MISALIGNED":
+            continue
+        action = review["action_taken"].lower()
+        assert "marqueur" not in action or "retir" in action, review["object_id"]
+        assert "capacite corrigee" in action or "prerequis" in action, review[
+            "object_id"
+        ]
+
+
+def test_an_aligned_review_widens_from_the_capacity_not_the_exercise(
+    payload: dict,
+) -> None:
+    """Le marqueur ajoute vient du LIBELLE de la capacite, pas de l'enonce.
+
+    Le tirer de l'exercice reviendrait a lui faire signer son propre
+    certificat : n'importe quel contenu passerait, puisque le marqueur serait
+    copie sur lui.
+    """
+
+    for review in payload["semantic_reviews"]:
+        if review["verdict"] != "SEMANTICALLY_ALIGNED":
+            continue
+        assert review["expected_signature"], review["object_id"]
+        assert review["actual_content"] != review["expected_signature"]

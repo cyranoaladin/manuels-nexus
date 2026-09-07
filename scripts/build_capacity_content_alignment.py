@@ -34,6 +34,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
+import capacity_evidence_reviews as evidence_reviews  # noqa: E402
 import capacity_signatures as signatures  # noqa: E402
 
 CORPORA = (
@@ -222,7 +223,19 @@ def build(root: Path = ROOT) -> dict[str, Any]:
     motifs = [ch for ch, info in chapitres.items() if info["round_robin"]["detected"]]
     rotations = [ch for ch, info in chapitres.items() if info["round_robin_unexplained"]]
     summary = {etat: par_etat.get(etat, 0) for etat in STATES}
+    # LES REVUES SEMANTIQUES SONT PUBLIEES AVEC LEUR VERDICT. Une attribution
+    # que la signature n'attestait pas a ete LUE : le registre porte ce qu'on
+    # a lu, pourquoi la signature ne le voyait pas, et ce qu'on en a fait.
+    revues = evidence_reviews.by_object()
+    sans_preuve = par_etat.get(NOT_EVIDENCED, 0)
     summary.update({
+        "CAPACITY_ASSIGNMENTS_TOTAL": len(objets),
+        "CAPACITY_ASSIGNMENTS_SEMANTICALLY_PROVEN": par_etat.get(ALIGNED, 0),
+        "CAPACITY_ASSIGNMENTS_WITHOUT_EVIDENCE": sans_preuve,
+        "SEMANTIC_REVIEWS_RECORDED": len(evidence_reviews.REVIEWS),
+        "SEMANTIC_REVIEW_VERDICTS": dict(sorted(
+            collections.Counter(r["verdict"] for r in evidence_reviews.REVIEWS).items()
+        )),
         "CAPACITY_ASSIGNMENTS_EXAMINED": len(objets),
         "CAPACITY_CONTENT_MISALIGNMENT": par_etat.get(MISALIGNED, 0),
         "ROUND_ROBIN_CAPACITY_ASSIGNMENT": len(rotations),
@@ -245,6 +258,8 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             "rachetee par la declaration"
         ),
         "summary": summary,
+        "semantic_reviews": evidence_reviews.REVIEWS,
+        "semantic_review_table": "scripts/capacity_evidence_reviews.py",
         "round_robin_chapters": sorted(rotations),
         "round_robin_pattern_chapters": sorted(motifs),
         "chapters": chapitres,

@@ -7,7 +7,15 @@
 % assert I == Rational(7, 18)
 % G = 1 - 2*I
 % assert G == Rational(2, 9)
+% aire = integrate(x - L, (x, 0, 1))
+% assert aire == Rational(1, 9)
+% assert 2 * aire == Rational(2, 9)
 % END-VERIFY
 \begin{exercice}{TCOMPL-INEG-EX-002}{2}{15}
-On reprend le modèle $L(x) = \dfrac{2x^2+x}{3}$ de l'exercice précédent. Calculer l'indice de Gini associé à ce modèle.
+On reprend le modèle $L(x) = \dfrac{2x^2+x}{3}$ de l'exercice précédent.
+\begin{enumerate}
+  \item Calculer, par une intégrale, l'aire comprise entre la première
+        bissectrice et la courbe de $L$ sur $[0\,;\,1]$.
+  \item En déduire l'indice de Gini associé à ce modèle.
+\end{enumerate}
 \end{exercice}
