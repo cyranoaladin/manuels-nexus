@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-MF-EX-007", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "exercice", "capacites": ["TCOMPL-MF-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-007.tex", "corrige_tex": "chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-007.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, nsolve, Rational
+% x = symbols('x')
+% f = x ** 3 + x - 3
+% assert diff(f, x) == 3 * x ** 2 + 1
+% assert all(diff(f, x).subs(x, v) > 0 for v in (-5, 0, 5))
+% assert f.subs(x, 1) == -1 and f.subs(x, 2) == 7
+% alpha = float(nsolve(f, x, 1.5))
+% assert 1 < alpha < 2
+% assert 1.21 < alpha < 1.22
+% assert float(f.subs(x, Rational(121, 100))) < 0 < float(f.subs(x, Rational(122, 100)))
+% END-VERIFY
+\begin{exercice}{TCOMPL-MF-EX-007}{2}{15}
+Soit $f(x)=x^3+x-3$ sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Montrer que $f$ est strictement croissante.
+  \item Justifier que $f(x)=0$ a une unique solution $\alpha$, et l'encadrer
+        entre deux entiers consécutifs.
+  \item Donner un encadrement de $\alpha$ d'amplitude $10^{-2}$ par
+        dichotomie ou balayage.
+\end{enumerate}
+\end{exercice}

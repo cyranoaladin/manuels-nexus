@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-MF-CO-008", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-MF-EX-008", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x', real=True)
+% f = x ** 3 - 3 * x
+% assert diff(f, x) == 3 * x ** 2 - 3
+% assert diff(f, x, 2) == 6 * x
+% assert solve(diff(f, x, 2), x) == [0]
+% assert diff(f, x, 2).subs(x, -1) < 0
+% assert diff(f, x, 2).subs(x, 1) > 0
+% assert f.subs(x, 0) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-MF-EX-008}
+\textbf{1.} La courbe tourne sa concavité vers le bas sur $[-2\,;\,0]$ (elle
+y est concave) et vers le haut sur $[0\,;\,2]$ (convexe).
+
+\textbf{2.} Le changement de courbure a lieu en $x=0$ : c'est le point
+d'inflexion, de coordonnées $(0\,;\,0)$.
+
+\textbf{3.} $f'(x)=3x^2-3$ et $f''(x)=6x$, qui s'annule en changeant de signe
+en $x=0$ : négatif avant (concavité), positif après (convexité). Le calcul
+confirme la lecture graphique.
+\end{corrige}

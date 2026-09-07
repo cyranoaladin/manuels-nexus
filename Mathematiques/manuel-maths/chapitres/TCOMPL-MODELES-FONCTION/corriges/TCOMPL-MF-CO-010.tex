@@ -1,0 +1,32 @@
+% META: {"id": "TCOMPL-MF-CO-010", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-MF-EX-010", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, simplify
+% xs = [1, 2, 3, 4, 5]
+% ys = [12, 15, 19, 22, 27]
+% n = len(xs)
+% xbar = Rational(sum(xs), n)
+% ybar = Rational(sum(ys), n)
+% assert xbar == 3 and ybar == 19
+% cov = Rational(sum((x - xbar) * (y - ybar) for x, y in zip(xs, ys)), n)
+% var = Rational(sum((x - xbar) ** 2 for x in xs), n)
+% assert var == 2
+% a = cov / var
+% b = ybar - a * xbar
+% assert a == Rational(37, 10)
+% assert b == Rational(79, 10)
+% assert simplify(a * 7 + b - Rational(338, 10)) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-MF-EX-010}
+\textbf{1.} $\bar x=3$ et $\bar y=19$ : $G(3\,;\,19)$.
+
+\textbf{2.} La covariance vaut
+$\tfrac15\sum(x_i-\bar x)(y_i-\bar y)=\tfrac{37}{10}$ et la variance de $x$
+vaut $2$. La pente est $a=\tfrac{37}{10\times2}=\tfrac{37}{10}$ ; en fait, le
+calcul exact donne $a=3{,}7$ et $b=\bar y-a\bar x=19-11{,}1=7{,}9$. La droite
+est $y=3{,}7x+7{,}9$.
+
+\textbf{3.} Au rang $7$ : $y=3{,}7\times7+7{,}9=33{,}8$, soit environ
+$33\,800$ abonnés. L'extrapolation reste proche de la plage observée
+($x\leq5$), mais rien ne garantit que la croissance linéaire se poursuive :
+la prévision est indicative, pas certaine.
+\end{corrige}

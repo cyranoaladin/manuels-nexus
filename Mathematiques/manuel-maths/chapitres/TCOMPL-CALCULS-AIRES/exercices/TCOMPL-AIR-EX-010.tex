@@ -1,0 +1,24 @@
+% META: {"id": "TCOMPL-AIR-EX-010", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "exercice", "capacites": ["TCOMPL-AIR-C6"], "capacites_codes": ["C6"], "methodes": ["M6"], "parcours": 3, "competences": ["raisonner"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-010.tex", "corrige_tex": "chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-010.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, diff, simplify, Rational
+% t, x = symbols('t x', positive=True)
+% for expr in (t, t ** 2, t ** 3 + t):
+%     F = integrate(expr, (t, 1, x))
+%     assert simplify(diff(F, x) - expr.subs(t, x)) == 0
+% h = Rational(1, 100)
+% f = lambda u: u ** 2
+% a = 2
+% gauche = h * f(a)
+% milieu = integrate(t ** 2, (t, a, a + h))
+% droite = h * f(a + h)
+% assert gauche <= milieu <= droite
+% END-VERIFY
+\begin{exercice}{TCOMPL-AIR-EX-010}{3}{18}
+Soit $f$ continue, positive et croissante sur $[a\,;\,b]$, et
+$F(x)=\displaystyle\int_a^x f(t)\,\mathrm{d}t$.
+\begin{enumerate}
+  \item Pour $h>0$, encadrer $F(x+h)-F(x)$ par deux aires de rectangles.
+  \item En déduire un encadrement de $\dfrac{F(x+h)-F(x)}{h}$.
+  \item Conclure que $F'(x)=f(x)$.
+\end{enumerate}
+\end{exercice}

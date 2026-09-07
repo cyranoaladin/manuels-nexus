@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-MF-EX-006", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "exercice", "capacites": ["TCOMPL-MF-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-006.tex", "corrige_tex": "chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-006.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, diff, oo, limit
+% x = symbols('x', real=True)
+% f = (x - 1) ** 2 - 4
+% assert diff(f, x).subs(x, 1) == 0
+% assert f.subs(x, 1) == -4
+% assert limit(f, x, oo) == oo and limit(f, x, -oo) == oo
+% assert len(solve(f, x)) == 2
+% assert solve(f + 4, x) == [1]
+% assert solve(f + 5, x) == []
+% assert [s for s in solve(f + 4, x)] == [1]
+% END-VERIFY
+\begin{exercice}{TCOMPL-MF-EX-006}{2}{15}
+On donne le tableau de variations de $f$ sur $\mathbb{R}$ : $f$ décroît de
+$+\infty$ à $-4$ sur $\left]-\infty\,;\,1\right]$, puis croît de $-4$ à
+$+\infty$ sur $\left[1\,;\,+\infty\right[$.
+\begin{enumerate}
+  \item Combien l'équation $f(x)=0$ admet-elle de solutions ?
+  \item Et l'équation $f(x)=-4$ ? $f(x)=-5$ ?
+  \item Résoudre l'inéquation $f(x)\leq-4$.
+\end{enumerate}
+\end{exercice}

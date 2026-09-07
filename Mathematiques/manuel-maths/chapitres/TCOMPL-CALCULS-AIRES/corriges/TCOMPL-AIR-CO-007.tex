@@ -1,0 +1,21 @@
+% META: {"id": "TCOMPL-AIR-CO-007", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "corrige", "exercice_ref": "TCOMPL-AIR-EX-007", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, exp, log, Rational, simplify
+% x = symbols('x')
+% assert integrate(2 * x + 1, (x, 1, 3)) == 10
+% assert integrate(x - x ** 2, (x, 0, 1)) == Rational(1, 6)
+% assert integrate(exp(x), (x, 0, log(2))) == 1
+% assert simplify(integrate(exp(x), (x, 0, log(2))) / log(2) - 1 / log(2)) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-AIR-EX-007}
+\textbf{1.} Une primitive de $2x+1$ est $x^2+x$, d'où
+$\int_1^3(2x+1)\,\mathrm{d}x=(9+3)-(1+1)=10$.
+
+\textbf{2.} Sur $[0\,;\,1]$, $x\geq x^2$, donc l'aire vaut
+$\int_0^1(x-x^2)\,\mathrm{d}x=\left[\tfrac{x^2}{2}-\tfrac{x^3}{3}\right]_0^1
+=\tfrac12-\tfrac13=\tfrac16$.
+
+\textbf{3.} $\int_0^{\ln2}\mathrm{e}^x\,\mathrm{d}x=\mathrm{e}^{\ln2}-1=1$,
+et la longueur de l'intervalle est $\ln2$ : la valeur moyenne vaut
+$\dfrac{1}{\ln2}$.
+\end{corrige}

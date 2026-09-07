@@ -1,0 +1,30 @@
+% META: {"id": "TCOMPL-MF-EX-010", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "exercice", "capacites": ["TCOMPL-MF-C7"], "capacites_codes": ["C7"], "methodes": ["M7"], "parcours": 2, "competences": ["calculer", "modeliser"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-010.tex", "corrige_tex": "chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-010.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, simplify
+% xs = [1, 2, 3, 4, 5]
+% ys = [12, 15, 19, 22, 27]
+% n = len(xs)
+% xbar = Rational(sum(xs), n)
+% ybar = Rational(sum(ys), n)
+% assert xbar == 3 and ybar == 19
+% cov = Rational(sum((x - xbar) * (y - ybar) for x, y in zip(xs, ys)), n)
+% var = Rational(sum((x - xbar) ** 2 for x in xs), n)
+% assert var == 2
+% a = cov / var
+% b = ybar - a * xbar
+% assert a == Rational(37, 10)
+% assert b == Rational(79, 10)
+% assert simplify(a * 7 + b - Rational(338, 10)) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-MF-EX-010}{2}{15}
+Le tableau donne, pour cinq années, le nombre $y$ d'abonnés (en milliers)
+d'un service, avec $x$ le rang de l'année :
+$(1\,;\,12)$, $(2\,;\,15)$, $(3\,;\,19)$, $(4\,;\,22)$, $(5\,;\,27)$.
+\begin{enumerate}
+  \item Calculer les coordonnées du point moyen $G$.
+  \item Déterminer la droite de régression de $y$ en $x$ par la méthode des
+        moindres carrés.
+  \item Estimer le nombre d'abonnés au rang $7$, et dire si l'extrapolation
+        est raisonnable.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,24 @@
+% META: {"id": "TCOMPL-MF-CO-007", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-MF-EX-007", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, nsolve, Rational
+% x = symbols('x')
+% f = x ** 3 + x - 3
+% assert diff(f, x) == 3 * x ** 2 + 1
+% assert all(diff(f, x).subs(x, v) > 0 for v in (-5, 0, 5))
+% assert f.subs(x, 1) == -1 and f.subs(x, 2) == 7
+% alpha = float(nsolve(f, x, 1.5))
+% assert 1 < alpha < 2
+% assert 1.21 < alpha < 1.22
+% assert float(f.subs(x, Rational(121, 100))) < 0 < float(f.subs(x, Rational(122, 100)))
+% END-VERIFY
+\begin{corrige}{TCOMPL-MF-EX-007}
+\textbf{1.} $f'(x)=3x^2+1>0$ pour tout $x$ : $f$ est strictement croissante
+sur $\mathbb{R}$.
+
+\textbf{2.} $f$ est continue, strictement croissante, de limites $-\infty$ et
+$+\infty$ : l'équation $f(x)=0$ a une unique solution $\alpha$. Comme
+$f(1)=-1<0$ et $f(2)=7>0$, on a $1<\alpha<2$.
+
+\textbf{3.} Par balayage au pas $0{,}01$ : $f(1{,}21)\approx-0{,}018<0$ et
+$f(1{,}22)\approx0{,}036>0$, donc $1{,}21<\alpha<1{,}22$.
+\end{corrige}

@@ -1,0 +1,25 @@
+% META: {"id": "TCOMPL-MF-CO-006", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-MF-EX-006", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, diff, oo, limit
+% x = symbols('x', real=True)
+% f = (x - 1) ** 2 - 4
+% assert diff(f, x).subs(x, 1) == 0
+% assert f.subs(x, 1) == -4
+% assert limit(f, x, oo) == oo and limit(f, x, -oo) == oo
+% assert len(solve(f, x)) == 2
+% assert solve(f + 4, x) == [1]
+% assert solve(f + 5, x) == []
+% assert [s for s in solve(f + 4, x)] == [1]
+% END-VERIFY
+\begin{corrige}{TCOMPL-MF-EX-006}
+\textbf{1.} Sur chaque branche $f$ est continue et strictement monotone, et
+$0$ est compris entre les valeurs extrêmes : le théorème des valeurs
+intermédiaires donne exactement une solution par branche, soit deux
+solutions.
+
+\textbf{2.} $f(x)=-4$ n'a qu'une solution, $x=1$, atteinte au minimum.
+$f(x)=-5$ n'a aucune solution, car $-5$ est strictement inférieur au minimum.
+
+\textbf{3.} Le minimum vaut $-4$, donc $f(x)\leq-4$ équivaut à $f(x)=-4$ :
+l'ensemble solution est $\{1\}$.
+\end{corrige}

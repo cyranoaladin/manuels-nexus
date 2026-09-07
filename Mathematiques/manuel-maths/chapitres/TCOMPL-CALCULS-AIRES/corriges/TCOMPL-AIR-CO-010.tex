@@ -1,0 +1,28 @@
+% META: {"id": "TCOMPL-AIR-CO-010", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "corrige", "exercice_ref": "TCOMPL-AIR-EX-010", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, diff, simplify, Rational
+% t, x = symbols('t x', positive=True)
+% for expr in (t, t ** 2, t ** 3 + t):
+%     F = integrate(expr, (t, 1, x))
+%     assert simplify(diff(F, x) - expr.subs(t, x)) == 0
+% h = Rational(1, 100)
+% f = lambda u: u ** 2
+% a = 2
+% gauche = h * f(a)
+% milieu = integrate(t ** 2, (t, a, a + h))
+% droite = h * f(a + h)
+% assert gauche <= milieu <= droite
+% END-VERIFY
+\begin{corrige}{TCOMPL-AIR-EX-010}
+\textbf{1.} $F(x+h)-F(x)=\int_x^{x+h}f(t)\,\mathrm{d}t$ est l'aire sous la
+courbe entre $x$ et $x+h$. Comme $f$ est croissante, sur cet intervalle
+$f(x)\leq f(t)\leq f(x+h)$, d'où
+$h\,f(x)\leq F(x+h)-F(x)\leq h\,f(x+h)$.
+
+\textbf{2.} En divisant par $h>0$ :
+$f(x)\leq\dfrac{F(x+h)-F(x)}{h}\leq f(x+h)$.
+
+\textbf{3.} $f$ étant continue, $f(x+h)\to f(x)$ quand $h\to0^+$. Le théorème
+des gendarmes donne $\dfrac{F(x+h)-F(x)}{h}\to f(x)$ : $F$ est dérivable en
+$x$ et $F'(x)=f(x)$.
+\end{corrige}

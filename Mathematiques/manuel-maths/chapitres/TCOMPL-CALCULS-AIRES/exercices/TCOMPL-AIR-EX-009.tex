@@ -1,0 +1,21 @@
+% META: {"id": "TCOMPL-AIR-EX-009", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "exercice", "capacites": ["TCOMPL-AIR-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-009.tex", "corrige_tex": "chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-009.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, simplify, Function, integrate
+% x = symbols('x')
+% F, G = x ** 2, x ** 2 + 7
+% assert simplify(diff(F, x) - 2 * x) == 0
+% assert simplify(diff(G, x) - 2 * x) == 0
+% assert simplify(diff(F - G, x)) == 0
+% assert simplify(F - G) == -7
+% for c in (-3, 0, 5):
+%     assert simplify(diff(x ** 2 + c, x) - 2 * x) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-AIR-EX-009}{2}{15}
+Soient $F$ et $G$ deux primitives d'une même fonction $f$ continue sur un
+intervalle $I$.
+\begin{enumerate}
+  \item Calculer la dérivée de $F-G$ sur $I$.
+  \item En déduire que $F-G$ est constante sur $I$.
+  \item Illustrer avec $f(x)=2x$ : donner deux primitives et vérifier.
+\end{enumerate}
+\end{exercice}

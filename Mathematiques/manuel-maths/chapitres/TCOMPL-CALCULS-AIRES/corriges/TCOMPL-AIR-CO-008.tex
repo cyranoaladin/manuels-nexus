@@ -1,0 +1,16 @@
+% META: {"id": "TCOMPL-AIR-CO-008", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "corrige", "exercice_ref": "TCOMPL-AIR-EX-008", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, exp, log, simplify
+% x = symbols('x', positive=True)
+% assert simplify(diff(x ** 3 - 2 * x ** 2 + 5 * x, x) - (3 * x ** 2 - 4 * x + 5)) == 0
+% assert simplify(diff(log(x), x) - 1 / x) == 0
+% assert simplify(diff(exp(x ** 2), x) - 2 * x * exp(x ** 2)) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-AIR-EX-008}
+\textbf{1.} $F(x)=x^3-2x^2+5x$, car on primitive terme à terme.
+
+\textbf{2.} $G(x)=\ln x$ sur $\left]0\,;\,+\infty\right[$.
+
+\textbf{3.} On reconnaît la forme $u'\mathrm{e}^{u}$ avec $u(x)=x^2$ :
+$H(x)=\mathrm{e}^{x^2}$.
+\end{corrige}
