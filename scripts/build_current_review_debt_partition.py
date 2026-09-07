@@ -21,18 +21,15 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "audit" / "CURRENT_REVIEW_DEBT_PARTITION.json"
 INVENTORY = Path("audit/INVENTAIRE_COLLECTION.json")
 ALGEBRA = Path("audit/CURRENT_ANOMALY_SET_ALGEBRA_RESIDUAL.json")
-LEDGERS = (
-    Path("audit/VARALEA_C6C7_REVIEW_DEBT_12.json"),
-    Path("audit/EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1.json"),
-    Path("audit/NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2.json"),
-    Path("audit/TNSI_PROJET_QCM_REVIEW_DEBT_1.json"),
-    Path("audit/TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_45.json"),
-    Path("audit/NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT.json"),
-    Path("audit/SECOND_DEGRE_C7_AUTHORED_REVIEW_DEBT_5.json"),
-    Path("audit/NSI_METHOD_SHEETS_AUTHORED_REVIEW_DEBT_20.json"),
-    Path("audit/NSI_AMENAGEE_AUTHORED_REVIEW_DEBT_9.json"),
-    Path("audit/TNSI_AMENAGEE_AUTHORED_REVIEW_DEBT_7.json"),
-    Path("audit/TNSI_EXAM_BANKS_AUTHORED_REVIEW_DEBT_26.json"),
+#: Registres de dette bloquante. La liste est celle de
+#: `build_residual_true_new_forensics.py`, qui est l'autorité : trois copies
+#: de la même liste finissent par diverger, et l'une d'elles avait divergé.
+#: Le contrôle d'inventaire fermé ci-dessous reste entier — il exige que les
+#: registres découverts dans `audit/` soient exactement ceux déclarés.
+LEDGERS = tuple(
+    __import__("importlib").import_module(
+        "build_residual_true_new_forensics"
+    ).DECLARED_DEBT_LEDGERS
 )
 METHOD_REQUALIFICATION = Path("audit/METHOD_REQUALIFICATION_QUEUE.json")
 RESIDUAL_FORENSICS = Path("audit/RESIDUAL_TRUE_NEW_FORENSICS.json")
