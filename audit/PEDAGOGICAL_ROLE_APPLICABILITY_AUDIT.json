@@ -23,13 +23,13 @@
     "METHOD": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition."
   },
   "summary": {
-    "PEDAGOGICAL_ROLE_UNITS_TOTAL": 432,
+    "PEDAGOGICAL_ROLE_UNITS_TOTAL": 408,
     "SATISFIED_BY_EXISTING_CONTENT": 39,
     "SATISFIED_TRANSVERSALLY": 274,
     "BAD_MAPPING": 0,
     "ROLE_NOT_APPLICABLE": 95,
-    "REAL_PEDAGOGICAL_GAP": 24,
-    "CATEGORIES_SUM": 432,
+    "REAL_PEDAGOGICAL_GAP": 0,
+    "CATEGORIES_SUM": 408,
     "NO_ITEM_LOST": true
   },
   "units": [
@@ -495,8 +495,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "1NSI-PM-M1",
-        "1NSI-PM-M2"
+        "NSI/chapitres/1NSI-PROJET-METHODES/cours/1NSI-PM-COURS-C3.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -1314,12 +1313,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "1SPE-SECDEG-ME-001",
-        "1SPE-SECDEG-ME-002",
-        "1SPE-SECDEG-ME-003",
-        "1SPE-SECDEG-ME-004",
-        "1SPE-SECDEG-ME-005",
-        "1SPE-SECDEG-ME-006"
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/16_C7_somme_produit_racines.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -1418,12 +1412,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "1SPE-SECDEG-ME-001",
-        "1SPE-SECDEG-ME-002",
-        "1SPE-SECDEG-ME-003",
-        "1SPE-SECDEG-ME-004",
-        "1SPE-SECDEG-ME-005",
-        "1SPE-SECDEG-ME-006"
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes/1SPE-SECDEG-ME-004.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -1875,12 +1864,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "TCOMPL-ECH-ME-001",
-        "TCOMPL-ECH-ME-002",
-        "TCOMPL-ECH-ME-003",
-        "TCOMPL-ECH-ME-004",
-        "TCOMPL-ECH-ME-005",
-        "TCOMPL-ECH-ME-006"
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/13_C7_loi_uniforme_discrete.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -2374,30 +2358,8 @@
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
-        "exercices"
-      ],
-      "canonical_capacity_uid": "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6"
-    },
-    {
-      "MANUAL": "TCOMPL",
-      "CHAPTER": "TCOMPL-MODELES-EVOLUTION",
-      "CAPACITY": "C6",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [
-        "TCOMPL-ME-ME-001",
-        "TCOMPL-ME-ME-002",
-        "TCOMPL-ME-ME-003",
-        "TCOMPL-ME-ME-004",
-        "TCOMPL-ME-ME-005"
-      ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "exercices"
+        "exercices",
+        "methodes"
       ],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6"
     },
@@ -2420,7 +2382,8 @@
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
-        "exercices"
+        "exercices",
+        "methodes"
       ],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6"
     },
@@ -2439,7 +2402,8 @@
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
-        "exercices"
+        "exercices",
+        "methodes"
       ],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6"
     },
@@ -2854,31 +2818,8 @@
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
-        "exercices"
-      ],
-      "canonical_capacity_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7"
-    },
-    {
-      "MANUAL": "TCOMPL",
-      "CHAPTER": "TCOMPL-TEMPS-ATTENTE",
-      "CAPACITY": "C7",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [
-        "TCOMPL-ATT-ME-001",
-        "TCOMPL-ATT-ME-002",
-        "TCOMPL-ATT-ME-003",
-        "TCOMPL-ATT-ME-004",
-        "TCOMPL-ATT-ME-005",
-        "TCOMPL-ATT-ME-006"
-      ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "exercices"
+        "exercices",
+        "methodes"
       ],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7"
     },
@@ -2901,7 +2842,8 @@
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
-        "exercices"
+        "exercices",
+        "methodes"
       ],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7"
     },
@@ -2920,7 +2862,8 @@
       "capacity_covered_by_roles": [
         "corriges",
         "cours",
-        "exercices"
+        "exercices",
+        "methodes"
       ],
       "canonical_capacity_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7"
     },
@@ -3986,7 +3929,9 @@
       "CAPACITY": "C1",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/10_C01_arbres_parcours.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours enonce le schema recursif lui-meme — cas de base l'arbre vide, cas general combinant les deux sous-arbres — puis le deroule sur la taille. La demarche est ecrite, pas seulement son resultat.",
@@ -4047,7 +3992,9 @@
       "CAPACITY": "C10",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/13_C04_graphes_cycle_chemin.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : La definition EST la demarche : memoriser le predecesseur de chaque sommet atteint, puis remonter la chaine depuis l'arrivee, en traitant explicitement l'absence de chemin.",
@@ -4083,25 +4030,6 @@
       "MANUAL": "TNSI",
       "CHAPTER": "TNSI-ALGORITHMIQUE",
       "CAPACITY": "C11",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "evaluations",
-        "exercices",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C11"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-ALGORITHMIQUE",
-      "CAPACITY": "C11",
       "ROLE": "remediation",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
@@ -4115,6 +4043,7 @@
         "cours",
         "evaluations",
         "exercices",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C11"
@@ -4136,25 +4065,7 @@
         "corriges",
         "cours",
         "exercices",
-        "qcm",
-        "remediation"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C12"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-ALGORITHMIQUE",
-      "CAPACITY": "C12",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "exercices",
+        "methodes",
         "qcm",
         "remediation"
       ],
@@ -4229,7 +4140,12 @@
       "CAPACITY": "C13",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-ALGO-M1",
+        "TNSI-ALGO-M2",
+        "TNSI-ALGO-M3",
+        "TNSI-ALGO-M4"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : La capacite demande d'EXPLIQUER le principe de Boyer-Moore, pas de le derouler ni de l'ecrire. Le cours expose la comparaison de droite a gauche et la regle du mauvais caractere : c'est un savoir a enoncer.",
@@ -4309,7 +4225,9 @@
       "CAPACITY": "C2",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/10_C01_arbres_parcours.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Meme schema recursif, ecrit dans le meme appui de marge et applique a la hauteur avec sa convention $-1$ pour l'arbre vide.",
@@ -4356,24 +4274,7 @@
         "corriges",
         "cours",
         "exercices",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C3"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-ALGORITHMIQUE",
-      "CAPACITY": "C3",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "exercices",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C3"
@@ -4394,6 +4295,7 @@
         "corriges",
         "cours",
         "exercices",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C3"
@@ -4416,6 +4318,7 @@
       "RATIONALE": "CORRECTION — exigée seulement lorsqu'il existe un exercice ou une évaluation nécessitant une correction. Pas de corrigé artificiel sans objet source.",
       "capacity_covered_by_roles": [
         "cours",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C4"
@@ -4435,6 +4338,7 @@
       "RATIONALE": "ASSESSMENT — l'évaluation peut être écrite, pratique, projet, QCM ou synthèse selon le contrat pédagogique ; pas nécessairement un objet séparé par capacité. Le chapitre porte 2 objet(s) de ce rôle.",
       "capacity_covered_by_roles": [
         "cours",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C4"
@@ -4457,22 +4361,7 @@
       "RATIONALE": "EXERCISE — un même exercice peut travailler plusieurs capacités. Le chapitre porte 5 objet(s) de ce rôle.",
       "capacity_covered_by_roles": [
         "cours",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C4"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-ALGORITHMIQUE",
-      "CAPACITY": "C4",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "cours",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C4"
@@ -4491,6 +4380,7 @@
       "RATIONALE": "REMEDIATION — une remédiation transversale peut couvrir plusieurs capacités. Le chapitre porte 1 objet(s) de ce rôle.",
       "capacity_covered_by_roles": [
         "cours",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C4"
@@ -4501,7 +4391,9 @@
       "CAPACITY": "C5",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/11_C02_arbres_recherche.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours ecrit la descente comparaison par comparaison, et son cout en fonction de la hauteur. Rien a formaliser de plus.",
@@ -4541,7 +4433,9 @@
       "CAPACITY": "C6",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/11_C02_arbres_recherche.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : L'insertion est enoncee comme une procedure — descendre comme pour une recherche jusqu'a un sous-arbre vide, y placer une feuille — avec le piege de la reaffectation nomme.",
@@ -4579,25 +4473,6 @@
       "MANUAL": "TNSI",
       "CHAPTER": "TNSI-ALGORITHMIQUE",
       "CAPACITY": "C7",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "evaluations",
-        "exercices",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C7"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-ALGORITHMIQUE",
-      "CAPACITY": "C7",
       "ROLE": "remediation",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
@@ -4611,6 +4486,7 @@
         "cours",
         "evaluations",
         "exercices",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C7"
@@ -4633,6 +4509,7 @@
       "RATIONALE": "CORRECTION — exigée seulement lorsqu'il existe un exercice ou une évaluation nécessitant une correction. Pas de corrigé artificiel sans objet source.",
       "capacity_covered_by_roles": [
         "cours",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C8"
@@ -4652,6 +4529,7 @@
       "RATIONALE": "ASSESSMENT — l'évaluation peut être écrite, pratique, projet, QCM ou synthèse selon le contrat pédagogique ; pas nécessairement un objet séparé par capacité. Le chapitre porte 2 objet(s) de ce rôle.",
       "capacity_covered_by_roles": [
         "cours",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C8"
@@ -4674,22 +4552,7 @@
       "RATIONALE": "EXERCISE — un même exercice peut travailler plusieurs capacités. Le chapitre porte 5 objet(s) de ce rôle.",
       "capacity_covered_by_roles": [
         "cours",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C8"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-ALGORITHMIQUE",
-      "CAPACITY": "C8",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "cours",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C8"
@@ -4708,6 +4571,7 @@
       "RATIONALE": "REMEDIATION — une remédiation transversale peut couvrir plusieurs capacités. Le chapitre porte 1 objet(s) de ce rôle.",
       "capacity_covered_by_roles": [
         "cours",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-ALGORITHMIQUE::C8"
@@ -4764,7 +4628,9 @@
       "CAPACITY": "C9",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-ALGORITHMIQUE/cours/13_C04_graphes_cycle_chemin.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le critere est ecrit exactement : un sommet deja visite qui n'est pas le parent direct. Le cours nomme aussi le faux positif — revenir sur ses pas n'est pas un cycle.",
@@ -4844,7 +4710,10 @@
       "CAPACITY": "C1",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-ARCH-M1",
+        "TNSI-ARCH-M2"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Identifier les composants d'un systeme sur puce et les avantages de l'integration est un savoir a enoncer.",
@@ -4924,7 +4793,10 @@
       "CAPACITY": "C2",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-ARCH-M1",
+        "TNSI-ARCH-M2"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Decrire la creation d'un processus — allouer, charger, inscrire, puis `fork` et `exec` — est un savoir a restituer.",
@@ -4957,30 +4829,12 @@
     {
       "MANUAL": "TNSI",
       "CHAPTER": "TNSI-ARCHITECTURES-MATERIELLES-SY",
-      "CAPACITY": "C3",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "evaluations",
-        "exercices",
-        "qcm",
-        "remediation"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C3"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-ARCHITECTURES-MATERIELLES-SY",
       "CAPACITY": "C4",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/cours/11_C02_processus.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : La demarche est ecrite comme propriete : construire le graphe d'attente — chaque processus pointe vers la ressource attendue, chaque ressource vers le processus qui la retient — et y chercher un cycle.",
@@ -5018,25 +4872,6 @@
       "MANUAL": "TNSI",
       "CHAPTER": "TNSI-ARCHITECTURES-MATERIELLES-SY",
       "CAPACITY": "C5",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "evaluations",
-        "exercices",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C5"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-ARCHITECTURES-MATERIELLES-SY",
-      "CAPACITY": "C5",
       "ROLE": "remediation",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
@@ -5050,6 +4885,7 @@
         "cours",
         "evaluations",
         "exercices",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C5"
@@ -5060,7 +4896,10 @@
       "CAPACITY": "C6",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-ARCH-M1",
+        "TNSI-ARCH-M2"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Decrire les deux familles de chiffrement, leurs cles et leurs couts, est un savoir a enoncer.",
@@ -5144,7 +4983,10 @@
       "CAPACITY": "C7",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-ARCH-M1",
+        "TNSI-ARCH-M2"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Decrire l'echange d'une cle symetrique par un protocole asymetrique est un savoir a restituer ; le cours precise que le detail de TLS n'est pas exigible.",
@@ -5180,7 +5022,10 @@
       "CAPACITY": "C1",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-BDD-M1",
+        "TNSI-BDD-M2"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Nommer relation, attribut, domaine, schema, cle primaire et cle etrangere est un savoir de vocabulaire.",
@@ -5220,7 +5065,9 @@
       "CAPACITY": "C10",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-BASES-DE-DONNEES/cours/14_C05_insert_update_delete.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : INSERT INTO ... VALUES est une syntaxe, donnee avec son exemple.",
@@ -5260,7 +5107,9 @@
       "CAPACITY": "C11",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-BASES-DE-DONNEES/cours/14_C05_insert_update_delete.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours donne la syntaxe d'UPDATE et, surtout, la precaution qui en fait une demarche : executer d'abord le SELECT portant la meme clause WHERE pour voir quels tuples seront touches.",
@@ -5300,7 +5149,9 @@
       "CAPACITY": "C12",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-BASES-DE-DONNEES/cours/14_C05_insert_update_delete.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Meme chose pour DELETE, avec l'avertissement sur l'absence de WHERE ecrit noir sur blanc.",
@@ -5381,7 +5232,10 @@
       "CAPACITY": "C2",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-BDD-M1",
+        "TNSI-BDD-M2"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Distinguer la structure, stable, du contenu, qui evolue, est un savoir enonce comme propriete dans le cours.",
@@ -5426,24 +5280,7 @@
         "corriges",
         "cours",
         "exercices",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-BASES-DE-DONNEES::C3"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-BASES-DE-DONNEES",
-      "CAPACITY": "C3",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "exercices",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-BASES-DE-DONNEES::C3"
@@ -5464,6 +5301,7 @@
         "corriges",
         "cours",
         "exercices",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-BASES-DE-DONNEES::C3"
@@ -5518,7 +5356,10 @@
       "CAPACITY": "C4",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-BDD-M1",
+        "TNSI-BDD-M2"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Enumerer les quatre services d'un SGBD — persistance, concurrence, efficacite, securisation — est un savoir a enoncer.",
@@ -5615,7 +5456,10 @@
       "CAPACITY": "C5",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-BDD-M1",
+        "TNSI-BDD-M2"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Identifier les clauses d'une requete est de la reconnaissance : SELECT, FROM, WHERE sont nommees et definies.",
@@ -5647,25 +5491,6 @@
       "MANUAL": "TNSI",
       "CHAPTER": "TNSI-BASES-DE-DONNEES",
       "CAPACITY": "C6",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "evaluations",
-        "exercices",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-BASES-DE-DONNEES::C6"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-BASES-DE-DONNEES",
-      "CAPACITY": "C6",
       "ROLE": "remediation",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
@@ -5679,6 +5504,7 @@
         "cours",
         "evaluations",
         "exercices",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-BASES-DE-DONNEES::C6"
@@ -5687,25 +5513,6 @@
       "MANUAL": "TNSI",
       "CHAPTER": "TNSI-BASES-DE-DONNEES",
       "CAPACITY": "C7",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "evaluations",
-        "exercices",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-BASES-DE-DONNEES::C7"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-BASES-DE-DONNEES",
-      "CAPACITY": "C7",
       "ROLE": "remediation",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
@@ -5719,6 +5526,7 @@
         "cours",
         "evaluations",
         "exercices",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-BASES-DE-DONNEES::C7"
@@ -5727,25 +5535,6 @@
       "MANUAL": "TNSI",
       "CHAPTER": "TNSI-BASES-DE-DONNEES",
       "CAPACITY": "C8",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "evaluations",
-        "exercices",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-BASES-DE-DONNEES::C8"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-BASES-DE-DONNEES",
-      "CAPACITY": "C8",
       "ROLE": "remediation",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
@@ -5759,28 +5548,10 @@
         "cours",
         "evaluations",
         "exercices",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-BASES-DE-DONNEES::C8"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-BASES-DE-DONNEES",
-      "CAPACITY": "C9",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "evaluations",
-        "exercices",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-BASES-DE-DONNEES::C9"
     },
     {
       "MANUAL": "TNSI",
@@ -5799,6 +5570,7 @@
         "cours",
         "evaluations",
         "exercices",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-BASES-DE-DONNEES::C9"
@@ -5939,7 +5711,9 @@
       "CAPACITY": "C1",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-LANG-M1"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Comprendre qu'un programme est une donnee est une idee a enoncer, illustree par l'interpreteur du cours.",
@@ -5996,7 +5770,9 @@
       "CAPACITY": "C10",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/13_C04_paradigmes.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : La propriete « Choisir un paradigme selon le contexte » est une regle de decision ecrite, suivie de l'avertissement qu'un projet reel les combine.",
@@ -6034,7 +5810,9 @@
       "CAPACITY": "C11",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-LANG-M1"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Identifier les causes typiques de bugs est de la reconnaissance : le cours enumere les quatre familles — flottants, effets de bord, inegalites, nommage — chacune avec son exemple.",
@@ -6115,7 +5893,9 @@
       "CAPACITY": "C2",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-LANG-M1"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : L'independance de la calculabilite vis-a-vis du langage est enoncee comme propriete.",
@@ -6193,7 +5973,9 @@
       "CAPACITY": "C3",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-LANG-M1"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Expliquer l'indecidabilite de l'arret sans formalisme est un raisonnement a restituer ; l'argument par le programme paradoxal est ecrit en entier.",
@@ -6227,25 +6009,6 @@
       "MANUAL": "TNSI",
       "CHAPTER": "TNSI-LANGAGES-ET-PROGRAMMATION",
       "CAPACITY": "C4",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "evaluations",
-        "exercices",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C4"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-LANGAGES-ET-PROGRAMMATION",
-      "CAPACITY": "C4",
       "ROLE": "remediation",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
@@ -6259,28 +6022,10 @@
         "cours",
         "evaluations",
         "exercices",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C4"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-LANGAGES-ET-PROGRAMMATION",
-      "CAPACITY": "C5",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "evaluations",
-        "exercices",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C5"
     },
     {
       "MANUAL": "TNSI",
@@ -6299,6 +6044,7 @@
         "cours",
         "evaluations",
         "exercices",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C5"
@@ -6330,7 +6076,9 @@
       "CAPACITY": "C6",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/12_C03_api_modules.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours importe une bibliotheque standard et appelle trois de ses fonctions : l'usage est montre.",
@@ -6389,7 +6137,9 @@
       "CAPACITY": "C7",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/12_C03_api_modules.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : La propriete « Exploiter la documentation » EST la demarche : nom et ordre des parametres, types attendus, valeur renvoyee, exemples, et `help` pour l'obtenir.",
@@ -6471,7 +6221,9 @@
       "CAPACITY": "C8",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/cours/12_C03_api_modules.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours ecrit un module complet avec ses docstrings et enonce la regle qui les gouverne : documenter ce que fait la fonction, pas comment elle le fait.",
@@ -6507,7 +6259,9 @@
       "CAPACITY": "C9",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-LANG-M1"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Distinguer les trois paradigmes sur des exemples est une reconnaissance ; le cours donne le meme calcul ecrit trois fois.",
@@ -6738,6 +6492,7 @@
       "RATIONALE": "CORRECTION — exigée seulement lorsqu'il existe un exercice ou une évaluation nécessitant une correction. Pas de corrigé artificiel sans objet source.",
       "capacity_covered_by_roles": [
         "cours",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C1"
@@ -6757,6 +6512,7 @@
       "RATIONALE": "ASSESSMENT — l'évaluation peut être écrite, pratique, projet, QCM ou synthèse selon le contrat pédagogique ; pas nécessairement un objet séparé par capacité. Le chapitre porte 2 objet(s) de ce rôle.",
       "capacity_covered_by_roles": [
         "cours",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C1"
@@ -6778,22 +6534,7 @@
       "RATIONALE": "EXERCISE — un même exercice peut travailler plusieurs capacités. Le chapitre porte 4 objet(s) de ce rôle.",
       "capacity_covered_by_roles": [
         "cours",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C1"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-STRUCTURES-DONNEES",
-      "CAPACITY": "C1",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "cours",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C1"
@@ -6812,6 +6553,7 @@
       "RATIONALE": "REMEDIATION — une remédiation transversale peut couvrir plusieurs capacités. Le chapitre porte 1 objet(s) de ce rôle.",
       "capacity_covered_by_roles": [
         "cours",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C1"
@@ -6843,7 +6585,9 @@
       "CAPACITY": "C10",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/13_C04_arbres_binaires.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Taille, hauteur et nombre de feuilles sont calcules dans le cours, en code puis a la main sur un arbre nomme, avec les trois valeurs justifiees.",
@@ -6893,6 +6637,7 @@
       "capacity_covered_by_roles": [
         "cours",
         "evaluations",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C11"
@@ -6915,23 +6660,7 @@
       "capacity_covered_by_roles": [
         "cours",
         "evaluations",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C11"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-STRUCTURES-DONNEES",
-      "CAPACITY": "C11",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "cours",
-        "evaluations",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C11"
@@ -6951,6 +6680,7 @@
       "capacity_covered_by_roles": [
         "cours",
         "evaluations",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C11"
@@ -6961,7 +6691,9 @@
       "CAPACITY": "C12",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/14_C05_graphes.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : La regle de remplissage est ecrite — la case $(i,j)$ vaut 1 s'il existe une arete de $i$ vers $j$ — et appliquee sur un graphe nomme.",
@@ -7022,7 +6754,9 @@
       "CAPACITY": "C13",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/14_C05_graphes.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours donne la representation par listes de successeurs du meme graphe, et nomme le piege du sommet sans successeur qui doit rester present avec une liste vide.",
@@ -7058,25 +6792,6 @@
       "MANUAL": "TNSI",
       "CHAPTER": "TNSI-STRUCTURES-DONNEES",
       "CAPACITY": "C14",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "evaluations",
-        "exercices",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C14"
-    },
-    {
-      "MANUAL": "TNSI",
-      "CHAPTER": "TNSI-STRUCTURES-DONNEES",
-      "CAPACITY": "C14",
       "ROLE": "remediation",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
@@ -7090,6 +6805,7 @@
         "cours",
         "evaluations",
         "exercices",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C14"
@@ -7161,7 +6877,11 @@
       "CAPACITY": "C2",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-STRUCT-M1",
+        "TNSI-STRUCT-M2",
+        "TNSI-STRUCT-M3"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Distinguer interface et implementation est un savoir a enoncer ; il n'y a pas de resultat a construire.",
@@ -7256,7 +6976,9 @@
       "CAPACITY": "C3",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/10_C01_interface_implementation.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Le cours ecrit DEUX implementations completes de la meme pile — par liste Python et par liste chainee — et enonce la discipline qui les relie : tester le comportement observable, pas les details internes.",
@@ -7290,7 +7012,9 @@
       "CAPACITY": "C4",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/11_C02_classes.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Ecrire une classe est une syntaxe, pas une demarche : le cours en donne le modele complet (constructeur, attributs, methodes) et nomme le piege de `self`. Une fiche recopierait le squelette.",
@@ -7330,7 +7054,9 @@
       "CAPACITY": "C5",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/11_C02_classes.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : L'acces `objet.attribut` et l'appel `objet.methode(...)` sont montres sur l'exemple file, avec le vocabulaire attribut/methode/instance pose a cote.",
@@ -7370,7 +7096,11 @@
       "CAPACITY": "C6",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-STRUCT-M1",
+        "TNSI-STRUCT-M2",
+        "TNSI-STRUCT-M3"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Distinguer FIFO et LIFO par le jeu des methodes est un savoir de reconnaissance.",
@@ -7411,7 +7141,9 @@
       "CAPACITY": "C7",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "NSI/chapitres/TNSI-STRUCTURES-DONNEES/cours/12_C03_piles_files_choix.tex"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : La regle de decision est ecrite comme telle : identifier les operations dominantes de la situation, puis lire la correspondance operation -> structure que le cours dresse.",
@@ -7510,7 +7242,11 @@
       "CAPACITY": "C8",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-STRUCT-M1",
+        "TNSI-STRUCT-M2",
+        "TNSI-STRUCT-M3"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Comparer la recherche dans une liste et dans un dictionnaire est un savoir de cout, enonce en marge du cours.",
@@ -7565,7 +7301,11 @@
       "CAPACITY": "C9",
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [],
+      "TRANSVERSAL_OBJECTS": [
+        "TNSI-STRUCT-M1",
+        "TNSI-STRUCT-M2",
+        "TNSI-STRUCT-M3"
+      ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "ROLE_NOT_APPLICABLE",
       "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Verdict déposé : Identifier une situation arborescente est une reconnaissance : hierarchie, ou processus recursif par nature.",
@@ -7601,28 +7341,6 @@
       "MANUAL": "TSPE",
       "CHAPTER": "TSPE-CALCUL-INTEGRAL",
       "CAPACITY": "C1",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [
-        "TSPE-INTEG-ME-001",
-        "TSPE-INTEG-ME-002"
-      ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "evaluations",
-        "exercices",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TSPE::TSPE-CALCUL-INTEGRAL::C1"
-    },
-    {
-      "MANUAL": "TSPE",
-      "CHAPTER": "TSPE-CALCUL-INTEGRAL",
-      "CAPACITY": "C1",
       "ROLE": "remediation",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
@@ -7637,6 +7355,7 @@
         "cours",
         "evaluations",
         "exercices",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TSPE::TSPE-CALCUL-INTEGRAL::C1"
@@ -7658,27 +7377,7 @@
         "corriges",
         "cours",
         "exercices",
-        "qcm"
-      ],
-      "canonical_capacity_uid": "TSPE::TSPE-CALCUL-INTEGRAL::C3"
-    },
-    {
-      "MANUAL": "TSPE",
-      "CHAPTER": "TSPE-CALCUL-INTEGRAL",
-      "CAPACITY": "C3",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [
-        "TSPE-INTEG-ME-001",
-        "TSPE-INTEG-ME-002"
-      ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "exercices",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TSPE::TSPE-CALCUL-INTEGRAL::C3"
@@ -7700,6 +7399,7 @@
         "corriges",
         "cours",
         "exercices",
+        "methodes",
         "qcm"
       ],
       "canonical_capacity_uid": "TSPE::TSPE-CALCUL-INTEGRAL::C3"
@@ -7755,27 +7455,6 @@
       "MANUAL": "TSPE",
       "CHAPTER": "TSPE-CALCUL-INTEGRAL",
       "CAPACITY": "C5",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [
-        "TSPE-INTEG-ME-001",
-        "TSPE-INTEG-ME-002"
-      ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "evaluations",
-        "exercices"
-      ],
-      "canonical_capacity_uid": "TSPE::TSPE-CALCUL-INTEGRAL::C5"
-    },
-    {
-      "MANUAL": "TSPE",
-      "CHAPTER": "TSPE-CALCUL-INTEGRAL",
-      "CAPACITY": "C5",
       "ROLE": "qcm",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
@@ -7792,7 +7471,8 @@
         "corriges",
         "cours",
         "evaluations",
-        "exercices"
+        "exercices",
+        "methodes"
       ],
       "canonical_capacity_uid": "TSPE::TSPE-CALCUL-INTEGRAL::C5"
     },
@@ -7813,7 +7493,8 @@
         "corriges",
         "cours",
         "evaluations",
-        "exercices"
+        "exercices",
+        "methodes"
       ],
       "canonical_capacity_uid": "TSPE::TSPE-CALCUL-INTEGRAL::C5"
     },
@@ -7844,8 +7525,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "TSPE-INTEG-ME-001",
-        "TSPE-INTEG-ME-002"
+        "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/16_C6_applications.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -7927,8 +7607,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "TSPE-INTEG-ME-001",
-        "TSPE-INTEG-ME-002"
+        "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/11_C7_fonction_integrale.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -7990,8 +7669,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "TSPE-INTEG-ME-001",
-        "TSPE-INTEG-ME-002"
+        "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/13_C8_integration_par_parties.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -8080,7 +7758,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "TSPE-COMBI-ME-001"
+        "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/cours/12_C3_somme_coefficients_binomiaux.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -8122,7 +7800,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "TSPE-COMBI-ME-001"
+        "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/cours/13_C4_relation_pascal.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -8394,8 +8072,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "TSPE-LOG-ME-001",
-        "TSPE-LOG-ME-002"
+        "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/methodes/TSPE-LOG-ME-001.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -8484,8 +8161,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "TSPE-PRIMEQ-ME-001",
-        "TSPE-PRIMEQ-ME-002"
+        "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/cours/10_C4_primitives_constante.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -8528,8 +8204,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "TSPE-PRIMEQ-ME-001",
-        "TSPE-PRIMEQ-ME-002"
+        "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/cours/12_C5_equation_yprime_ay.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -8569,26 +8244,6 @@
       "MANUAL": "TSPE",
       "CHAPTER": "TSPE-PROBABILITES",
       "CAPACITY": "C1",
-      "ROLE": "methodes",
-      "CURRENT_OBJECTS": [],
-      "TRANSVERSAL_OBJECTS": [
-        "TSPE-PROBA-ME-001"
-      ],
-      "REQUIREMENT_SOURCE": "TRUE_PEDAGOGICAL_COVERAGE",
-      "APPLICABILITY_VERDICT": "REAL_PEDAGOGICAL_GAP",
-      "RATIONALE": "METHOD — nécessaire seulement lorsqu'il existe une démarche réutilisable qui mérite d'être formalisée. Pas de fiche méthode pour répéter une définition. Aucun verdict éditorial n'a été rendu pour cette capacité : elle reste une lacune tant que l'absence n'est pas justifiée.",
-      "capacity_covered_by_roles": [
-        "corriges",
-        "cours",
-        "evaluations",
-        "exercices"
-      ],
-      "canonical_capacity_uid": "TSPE::TSPE-PROBABILITES::C1"
-    },
-    {
-      "MANUAL": "TSPE",
-      "CHAPTER": "TSPE-PROBABILITES",
-      "CAPACITY": "C1",
       "ROLE": "qcm",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
@@ -8606,7 +8261,8 @@
         "corriges",
         "cours",
         "evaluations",
-        "exercices"
+        "exercices",
+        "methodes"
       ],
       "canonical_capacity_uid": "TSPE::TSPE-PROBABILITES::C1"
     },
@@ -8626,7 +8282,8 @@
         "corriges",
         "cours",
         "evaluations",
-        "exercices"
+        "exercices",
+        "methodes"
       ],
       "canonical_capacity_uid": "TSPE::TSPE-PROBABILITES::C1"
     },
@@ -8637,7 +8294,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "TSPE-PROBA-ME-001"
+        "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/16_CONCLGN_bienayme_tchebychev.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -8815,7 +8472,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "TSPE-PROBA-ME-001"
+        "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/11_C2_C5_schema_bernoulli_binomiale.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -8877,7 +8534,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "TSPE-PROBA-ME-001"
+        "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/13_C6_C7_esperance_linearite.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -8960,7 +8617,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "TSPE-PROBA-ME-001"
+        "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/13_C6_C7_esperance_linearite.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -9000,7 +8657,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "TSPE-PROBA-ME-001"
+        "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/14_C8_variance.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -9042,7 +8699,7 @@
       "ROLE": "methodes",
       "CURRENT_OBJECTS": [],
       "TRANSVERSAL_OBJECTS": [
-        "TSPE-PROBA-ME-001"
+        "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/15_C9_esperance_variance_binomiale.tex"
       ],
       "REQUIREMENT_SOURCE": "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "APPLICABILITY_VERDICT": "SATISFIED_BY_EXISTING_CONTENT",
@@ -9131,12 +8788,12 @@
     }
   ],
   "freshness": {
-    "EVIDENCE_HEAD": "7138137233b2bd761f58dd52774c5ae9086daf65",
+    "EVIDENCE_HEAD": "2adfcb5513a82b2b814a6e209bcb0ab86dbbdd20",
     "INPUT_PATHS": [
       "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json",
       "audit/QCM_POLICY_ORIGIN.md",
       "audit/TRUE_PEDAGOGICAL_COVERAGE.json"
     ],
-    "INPUT_DIGEST": "sha256:9f8490de449dca6fba65e728cb781d60abf9741f7c8180226ee916d4a0b10a88"
+    "INPUT_DIGEST": "sha256:70b45e2add7bb76b5f29706370ab6989edb52ba8639bcc9bd83f26d860e59e46"
   }
 }

@@ -1,0 +1,137 @@
+% META: {"id": "TNSI-BDD-M2", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "methode", "capacites": ["T-BDD-03B", "T-BDD-03C", "T-BDD-03D", "T-BDD-03E"], "capacites_codes": ["C6", "C7", "C8", "C9"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M2}{Traduire une question en requête SQL}
+\textbf{Quand l'utiliser ?} Dès qu'un énoncé pose une question en français — « quels sont les
+titres des livres empruntés par Ada, du plus récent au plus ancien ? » — et attend une
+requête. Le cours donne la syntaxe de chaque clause ; ce qui se travaille ici, c'est l'ordre
+dans lequel on décide.
+
+\textbf{Pas à pas — décide dans cet ordre, écris dans l'ordre de SQL :}
+\begin{enumerate}
+  \item \textbf{Quelles colonnes veut-on VOIR ?} Souligne-les dans la question. Elles iront
+    après \texttt{SELECT}. « Les titres » : une seule colonne, \texttt{titre}.
+  \item \textbf{Dans quelles relations vivent-elles ?} Si toutes les colonnes — celles
+    affichées \textbf{et} celles qui servent aux conditions — sont dans une seule relation,
+    tu n'as pas besoin de \texttt{JOIN}. Sinon, liste les relations nécessaires.
+  \item \textbf{Comment se raccordent-elles ?} Cherche le couple clé étrangère / clé primaire
+    qui les relie, et écris-le tel quel :
+    \texttt{JOIN Livre ON Emprunt.id\_livre = Livre.id}. Une jointure sans condition produit
+    \textbf{toutes} les combinaisons, ce qui n'est presque jamais ce qu'on veut.
+  \item \textbf{Quelle condition filtre les lignes ?} Traduis chaque contrainte de la question
+    en comparaison, et relie-les par \texttt{AND} ou \texttt{OR}. Les chaînes de caractères
+    prennent des apostrophes simples.
+  \item \textbf{Y a-t-il un ordre demandé ?} « du plus récent au plus ancien » donne
+    \texttt{ORDER BY date DESC}. Sans consigne, ne trie pas.
+  \item \textbf{Écris la requête dans l'ordre de SQL} — \texttt{SELECT}, \texttt{FROM},
+    \texttt{JOIN}, \texttt{WHERE}, \texttt{ORDER BY} — puis relis-la à côté de la question,
+    membre par membre.
+\end{enumerate}
+
+\textbf{Exemple :} « les titres des livres empruntés par Ada, du plus récent au plus ancien ».
+
+\emph{Colonnes vues} : \texttt{titre}. \emph{Relations} : \texttt{titre} est dans
+\texttt{Livre}, mais « empruntés par Ada » exige \texttt{Emprunt} et \texttt{Usager} : trois
+relations. \emph{Raccords} : \texttt{Emprunt.id\_livre = Livre.id} et
+\texttt{Emprunt.id\_usager = Usager.id}. \emph{Condition} : \texttt{Usager.nom = 'Ada'}.
+\emph{Ordre} : \texttt{Emprunt.date DESC}.
+
+\begin{verbatim}
+SELECT Livre.titre
+FROM Emprunt
+JOIN Livre ON Emprunt.id_livre = Livre.id
+JOIN Usager ON Emprunt.id_usager = Usager.id
+WHERE Usager.nom = 'Ada'
+ORDER BY Emprunt.date DESC;
+\end{verbatim}
+
+% BEGIN-VERIFY
+% import sqlite3
+% base = sqlite3.connect(":memory:")
+% base.executescript("""
+% CREATE TABLE Livre(id INTEGER PRIMARY KEY, titre TEXT, annee INTEGER);
+% CREATE TABLE Usager(id INTEGER PRIMARY KEY, nom TEXT);
+% CREATE TABLE Emprunt(id INTEGER PRIMARY KEY, id_livre INTEGER,
+%                      id_usager INTEGER, date TEXT);
+% INSERT INTO Livre VALUES (1,'1984',1949),(2,'La Peste',1947),(3,'Fahrenheit 451',1953);
+% INSERT INTO Usager VALUES (1,'Ada'),(2,'Alan');
+% INSERT INTO Emprunt VALUES (1,1,1,'2026-02-01'),(2,3,1,'2026-02-10'),(3,2,2,'2026-02-05');
+% """)
+%
+% requete = """
+% SELECT Livre.titre
+% FROM Emprunt
+% JOIN Livre ON Emprunt.id_livre = Livre.id
+% JOIN Usager ON Emprunt.id_usager = Usager.id
+% WHERE Usager.nom = 'Ada'
+% ORDER BY Emprunt.date DESC
+% """
+% resultat = [r[0] for r in base.execute(requete)]
+% assert resultat == ["Fahrenheit 451", "1984"], resultat
+%
+% # Etape 5 : sans ORDER BY, l'ordre n'est pas celui demande.
+% sans_tri = [r[0] for r in base.execute(requete.replace(
+%     "ORDER BY Emprunt.date DESC", ""))]
+% assert sorted(sans_tri) == sorted(resultat)
+% assert sans_tri == ["1984", "Fahrenheit 451"]      # ordre d'insertion, pas le bon
+%
+% # Etape 3 : une jointure SANS condition produit toutes les combinaisons.
+% (croise,) = base.execute(
+%     "SELECT COUNT(*) FROM Emprunt, Livre").fetchone()
+% assert croise == 3 * 3 == 9
+% (joint,) = base.execute(
+%     "SELECT COUNT(*) FROM Emprunt JOIN Livre ON Emprunt.id_livre = Livre.id"
+% ).fetchone()
+% assert joint == 3
+%
+% # Etape 4 : les apostrophes. Sans elles, SQL cherche une COLONNE nommee Ada.
+% try:
+%     base.execute("SELECT * FROM Usager WHERE nom = Ada").fetchall()
+% except sqlite3.OperationalError:
+%     pass
+% else:
+%     raise AssertionError("une chaine sans apostrophes aurait du echouer")
+%
+% # Etape 2 : quand tout tient dans une relation, le JOIN est inutile.
+% recents = [r[0] for r in base.execute(
+%     "SELECT titre FROM Livre WHERE annee > 1948 ORDER BY annee")]
+% assert recents == ["1984", "Fahrenheit 451"]
+%
+% # Le piege du AND/OR : « les livres de 1949 ou 1953 » n'est pas
+% # « annee = 1949 AND annee = 1953 », qui ne renvoie rien.
+% ou = [r[0] for r in base.execute(
+%     "SELECT titre FROM Livre WHERE annee = 1949 OR annee = 1953 ORDER BY annee")]
+% et = [r[0] for r in base.execute(
+%     "SELECT titre FROM Livre WHERE annee = 1949 AND annee = 1953")]
+% assert ou == ["1984", "Fahrenheit 451"]
+% assert et == []
+%
+% # Un JOIN sur la mauvaise egalite de cles donne un resultat non vide et FAUX.
+% faux = [r[0] for r in base.execute(
+%     "SELECT Livre.titre FROM Emprunt JOIN Livre ON Emprunt.id = Livre.id "
+%     "JOIN Usager ON Emprunt.id_usager = Usager.id WHERE Usager.nom = 'Ada'")]
+% assert faux and faux != resultat
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Joindre sur la mauvaise égalité de clés.} \texttt{ON Emprunt.id = Livre.id}
+    au lieu de \texttt{ON Emprunt.id\_livre = Livre.id} donne un résultat \textbf{non vide} et
+    faux : rien ne signale l'erreur, il faut relire la condition.
+  \item \textbf{Oublier la condition de jointure.} \texttt{FROM Emprunt, Livre} sans
+    \texttt{ON} produit le produit de toutes les lignes — ici $9$ au lieu de $3$.
+  \item \textbf{Traduire « ou » par \texttt{AND}.} « Les livres de 1949 ou de 1953 » s'écrit
+    avec \texttt{OR} ; avec \texttt{AND}, aucune ligne ne peut satisfaire les deux, et le
+    résultat est vide.
+  \item \textbf{Oublier les apostrophes autour d'un texte.} \texttt{WHERE nom = Ada} fait
+    chercher à SQL une colonne appelée \texttt{Ada}, et la requête échoue.
+  \item \textbf{Trier sans qu'on l'ait demandé, ou l'inverse.} \texttt{ORDER BY} se place
+    après \texttt{WHERE}, et « du plus récent au plus ancien » impose \texttt{DESC}.
+\end{itemize}
+
+\textbf{Vérifier :} relis ta requête à côté de la question, morceau par morceau — chaque
+membre du \texttt{SELECT} correspond à un mot de la question, chaque \texttt{JOIN} à une
+relation traversée, chaque \texttt{WHERE} à une contrainte. Puis compte les lignes attendues
+sur les données de l'énoncé : un résultat dix fois trop grand est presque toujours une
+jointure sans condition.
+
+\textbf{S'entraîner :} exercices C6 à C9 du chapitre.
+\end{fichemethode}

@@ -1,0 +1,130 @@
+% META: {"id": "TNSI-ARCH-M2", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "methode", "capacites": ["T-ARCH-03"], "capacites_codes": ["C5"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M2}{Déterminer la route empruntée selon la métrique du protocole}
+\textbf{Quand l'utiliser ?} Quand l'énoncé donne un réseau de routeurs, éventuellement avec des
+coûts de liaison, et demande quelle route un paquet emprunte « avec RIP » ou « avec OSPF ». La
+question n'est pas « quel est le chemin le plus court » : c'est « que minimise ce
+protocole-là ».
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Écris la métrique du protocole, en toutes lettres.} RIP minimise le
+    \textbf{nombre de sauts}, c'est-à-dire le nombre de liaisons traversées, sans regarder les
+    coûts. OSPF minimise la \textbf{somme des coûts} des liaisons traversées, sans regarder le
+    nombre de sauts.
+  \item \textbf{Énumère les routes possibles} du départ à l'arrivée, sans repasser deux fois
+    par le même routeur. Sur les réseaux des exercices, elles sont peu nombreuses : liste-les
+    toutes plutôt que d'en deviner une.
+  \item \textbf{Calcule la métrique de chaque route}, dans une colonne par protocole demandé.
+    Pour RIP, compte les liaisons — pas les routeurs. Pour OSPF, additionne les coûts.
+  \item \textbf{Choisis le minimum}, protocole par protocole. Si deux routes sont à égalité,
+    dis-le : l'énoncé attend alors le critère de départage qu'il aura précisé, ou la mention
+    des deux routes.
+  \item \textbf{Compare les deux réponses.} Quand elles diffèrent, explique pourquoi : c'est
+    exactement ce que la question cherche à faire dire.
+\end{enumerate}
+
+\textbf{Exemple :} réseau $A$, $B$, $C$, $D$. Liaisons et coûts : $A\!-\!B$ de coût $1$,
+$B\!-\!D$ de coût $1$, $A\!-\!C$ de coût $5$, $C\!-\!D$ de coût $1$, et une liaison directe
+$A\!-\!D$ de coût $3$. Quelle route de $A$ vers $D$ ?
+
+Routes possibles : $A\!-\!D$ ($1$ saut, coût $3$), $A\!-\!B\!-\!D$ ($2$ sauts, coût $2$),
+$A\!-\!C\!-\!D$ ($2$ sauts, coût $6$).
+
+\emph{RIP} minimise les sauts : il choisit $A\!-\!D$, un seul saut, alors que cette liaison
+coûte $3$.
+
+\emph{OSPF} minimise le coût : il choisit $A\!-\!B\!-\!D$, coût $2$, bien qu'elle traverse un
+routeur de plus.
+
+Les deux protocoles donnent des routes \textbf{différentes} sur le même réseau, et aucune
+n'est « fausse » : chacune est optimale pour sa métrique.
+
+% BEGIN-VERIFY
+% import itertools
+%
+% couts = {("A", "B"): 1, ("B", "D"): 1, ("A", "C"): 5, ("C", "D"): 1, ("A", "D"): 3}
+% liaisons = {}
+% for (u, v), c in couts.items():
+%     liaisons.setdefault(u, {})[v] = c
+%     liaisons.setdefault(v, {})[u] = c
+%
+% def routes(depart, arrivee):
+%     trouvees = []
+%     def explorer(chemin):
+%         courant = chemin[-1]
+%         if courant == arrivee:
+%             trouvees.append(list(chemin))
+%             return
+%         for voisin in liaisons[courant]:
+%             if voisin not in chemin:
+%                 explorer(chemin + [voisin])
+%     explorer([depart])
+%     return trouvees
+%
+% def sauts(route):
+%     return len(route) - 1
+%
+% def cout(route):
+%     return sum(liaisons[u][v] for u, v in zip(route, route[1:]))
+%
+% toutes = routes("A", "D")
+% # Etape 2 : les trois routes annoncees sont bien toutes les routes simples.
+% assert sorted(toutes) == sorted([["A", "D"], ["A", "B", "D"], ["A", "C", "D"]])
+%
+% # Etape 3 : les metriques annoncees.
+% mesures = {tuple(r): (sauts(r), cout(r)) for r in toutes}
+% assert mesures[("A", "D")] == (1, 3)
+% assert mesures[("A", "B", "D")] == (2, 2)
+% assert mesures[("A", "C", "D")] == (2, 6)
+%
+% # Etape 4 : chaque protocole choisit son minimum.
+% rip = min(toutes, key=sauts)
+% ospf = min(toutes, key=cout)
+% assert rip == ["A", "D"]
+% assert ospf == ["A", "B", "D"]
+% # Etape 5 : elles different, et chacune est optimale POUR SA metrique.
+% assert rip != ospf
+% assert sauts(rip) <= min(sauts(r) for r in toutes)
+% assert cout(ospf) <= min(cout(r) for r in toutes)
+% # La route de RIP coute plus cher, celle d'OSPF fait plus de sauts.
+% assert cout(rip) > cout(ospf)
+% assert sauts(ospf) > sauts(rip)
+%
+% # Le piege : compter les ROUTEURS au lieu des LIAISONS decale tout de un.
+% def sauts_faux(route):
+%     return len(route)
+% assert sauts_faux(["A", "B", "D"]) == 3 and sauts(["A", "B", "D"]) == 2
+% # Ici l'erreur ne change pas le classement, mais elle change la reponse chiffree.
+% assert min(toutes, key=sauts_faux) == rip
+%
+% # Sans la liaison directe A-D, les deux protocoles se rejoignent : la
+% # divergence vient du reseau, pas d'une propriete generale des protocoles.
+% del liaisons["A"]["D"]
+% del liaisons["D"]["A"]
+% toutes2 = routes("A", "D")
+% assert min(toutes2, key=sauts) == min(toutes2, key=cout) == ["A", "B", "D"]
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Chercher « le chemin le plus court » sans dire au sens de quoi.} La question
+    n'a pas de réponse tant que la métrique n'est pas fixée : RIP et OSPF choisissent ici deux
+    routes différentes sur le même réseau.
+  \item \textbf{Compter les routeurs au lieu des liaisons.} $A\!-\!B\!-\!D$ traverse $3$
+    routeurs mais fait $2$ sauts. Le décalage d'une unité passe souvent inaperçu au classement
+    et fausse la réponse chiffrée.
+  \item \textbf{Croire qu'une route à moins de sauts coûte forcément moins cher.} C'est
+    justement le contre-exemple de l'énoncé : la liaison directe est la plus courte en sauts
+    et la plus chère en coût.
+  \item \textbf{Généraliser la divergence.} Sans la liaison directe, les deux protocoles
+    choisissent la même route. La divergence vient du réseau donné, pas d'une opposition de
+    principe entre les protocoles.
+\end{itemize}
+
+\textbf{Vérifier :} contrôle que tu as bien listé \textbf{toutes} les routes sans répétition de
+routeur, puis que la route retenue a la plus petite valeur dans sa colonne — et seulement dans
+la sienne. Si les deux protocoles donnent la même route, dis-le : c'est une réponse, pas un
+échec.
+
+\textbf{S'entraîner :} exercices C5 du chapitre.
+\end{fichemethode}

@@ -1,0 +1,152 @@
+% META: {"id": "TSPE-INTEG-ME-004", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "methode", "capacites_codes": ["C5"], "methodes": ["M4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M4}{Étudier une suite d'intégrales}
+
+\quandUtiliser{%
+  Utiliser cette méthode dès qu'un exercice définit
+  $I_n = \displaystyle\int_a^b f_n(x)\,\mathrm{d}x$ et enchaîne les questions :
+  signe, sens de variation, relation de récurrence, limite. C'est un exercice
+  type du baccalauréat, et ses quatre questions se traitent toujours dans le
+  même ordre.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Le signe, sans calcul.} Si $f_n(x) \geq 0$ sur $[a\,;b]$ avec
+      $a<b$, alors $I_n \geq 0$ par positivité de l'intégrale. Cette question
+      ouvre presque toujours l'exercice et ne demande aucun calcul.
+    \item \textbf{Le sens de variation, en comparant les INTÉGRANDES.} Étudier
+      le signe de $f_{n+1}(x)-f_n(x)$ sur $[a\,;b]$, puis intégrer
+      l'inégalité. Sur $[0\,;1]$, $x^{n+1} \leq x^n$, donc la suite est
+      décroissante : on n'a jamais eu besoin de calculer $I_n$.
+    \item \textbf{La relation de récurrence, par intégration par parties.}
+      Choisir $u$ et $v'$ de sorte que l'intégrale restante soit
+      $I_{n-1}$ — c'est ce choix qui fait tout le travail. Poser
+      $u = x^n$ dérive vers $nx^{n-1}$ et fait bien apparaître le rang
+      précédent.
+    \item \textbf{Le premier terme.} Calculer $I_0$ (ou $I_1$) directement :
+      la récurrence ne sert à rien sans son point de départ.
+    \item \textbf{La limite, par encadrement.} Majorer $f_n(x)$ sur $[a\,;b]$
+      par une quantité qui tend vers $0$, intégrer, puis conclure par les
+      gendarmes avec la minoration $I_n \geq 0$ de l'étape 1.
+    \item \textbf{Contrôler la cohérence} : une suite positive et décroissante
+      converge, et sa limite est $\geq 0$. Une limite négative trouvée à
+      l'étape 5 signale une erreur de signe en amont.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Pour $n \in \mathbb{N}$, $I_n = \displaystyle\int_0^1 x^n\,\mathrm{e}^{x}
+  \,\mathrm{d}x$.
+
+  \medskip
+  \commentaireMarge{Étape 1 : positivité, sans calcul.}%
+  Sur $[0\,;1]$, $x^n \geq 0$ et $\mathrm{e}^x > 0$, donc $I_n \geq 0$.
+
+  \commentaireMarge{Étape 2 : comparer les intégrandes.}%
+  Pour $x \in [0\,;1]$, $x^{n+1} \leq x^n$, donc
+  $x^{n+1}\mathrm{e}^x \leq x^n\mathrm{e}^x$ et $I_{n+1} \leq I_n$ : la suite
+  est décroissante.
+
+  \commentaireMarge{Étape 3 : $u=x^n$, $v'=\mathrm{e}^x$.}%
+  Avec $u(x)=x^n$, $u'(x)=nx^{n-1}$, $v'(x)=\mathrm{e}^x$, $v(x)=\mathrm{e}^x$ :
+  \[
+    I_n = \big[x^n\mathrm{e}^x\big]_0^1 - \int_0^1 nx^{n-1}\mathrm{e}^x
+    \,\mathrm{d}x = \mathrm{e} - n\,I_{n-1} \quad (n \geq 1).
+  \]
+
+  \commentaireMarge{Étape 4 : le point de départ.}%
+  $I_0 = \displaystyle\int_0^1 \mathrm{e}^x\,\mathrm{d}x = \mathrm{e}-1$, d'où
+  $I_1 = \mathrm{e} - (\mathrm{e}-1) = 1$.
+
+  \commentaireMarge{Étape 5 : encadrement puis gendarmes.}%
+  Sur $[0\,;1]$, $\mathrm{e}^x \leq \mathrm{e}$, donc
+  $0 \leq I_n \leq \mathrm{e}\displaystyle\int_0^1 x^n\,\mathrm{d}x
+  = \dfrac{\mathrm{e}}{n+1}$, qui tend vers $0$. Par le théorème des
+  gendarmes, $I_n \to 0$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, integrate, Rational, simplify, N, E
+% x = symbols('x', real=True)
+%
+% def I(n):
+%     return integrate(x**n * exp(x), (x, 0, 1))
+%
+% # Etape 1 : positivite.
+% for n in range(0, 9):
+%     assert N(I(n)) > 0
+%
+% # Etape 2 : decroissance, et la comparaison des integrandes qui la fonde.
+% for n in range(0, 9):
+%     assert N(I(n + 1)) <= N(I(n))
+% for k in range(0, 101):
+%     t = Rational(k, 100)
+%     for n in range(0, 5):
+%         assert t**(n + 1) <= t**n
+%
+% # Etape 3 : la relation de recurrence annoncee, verifiee formellement.
+% for n in range(1, 9):
+%     assert simplify(I(n) - (E - n * I(n - 1))) == 0
+%
+% # Etape 4 : les deux premiers termes.
+% assert simplify(I(0) - (E - 1)) == 0
+% assert simplify(I(1) - 1) == 0
+%
+% # Etape 5 : l'encadrement 0 <= I_n <= e/(n+1), et sa limite.
+% for n in range(0, 12):
+%     assert 0 <= N(I(n)) <= N(E / (n + 1))
+% assert N(E / 201) < 0.014
+% # Le majorant e/(n+1) tend vers 0 : au rang 200 il vaut deja moins de 0,014.
+% # (On ne calcule pas I(200) formellement : l'expression exacte est une
+% # difference d'entiers geants ou la precision flottante s'effondre. On
+% # integre numeriquement.)
+% import mpmath
+% valeur_200 = mpmath.quad(lambda t: t**200 * mpmath.e**t, [0, 1])
+% assert 0 < valeur_200 < 0.014
+% assert valeur_200 < float(N(E / 201))
+%
+% # Etape 6 : coherence — positive, decroissante, limite nulle par valeurs
+% # superieures.
+% valeurs = [N(I(n)) for n in range(0, 10)]
+% assert all(v > 0 for v in valeurs)
+% assert valeurs == sorted(valeurs, reverse=True)
+%
+% # Piege : la relation de recurrence n'est PAS une formule close.
+% # I_n = e - n I_{n-1} ne donne pas I_n en fonction de n seul.
+% assert simplify(I(3) - (E - 3 * I(2))) == 0
+% assert simplify(I(3) - (E - 3 * (E - 2 * I(1)))) == 0
+%
+% # Piege : un mauvais choix dans l'IPP ne fait pas apparaitre I_{n-1}.
+% # Avec u = e^x et v' = x^n, on obtient une integrale au rang n+1.
+% n_test = 3
+% u, vprime = exp(x), x**n_test
+% v = x**(n_test + 1) / (n_test + 1)
+% reste = integrate(exp(x) * v, (x, 0, 1))
+% assert simplify(reste - I(n_test + 1) / (n_test + 1)) == 0   # rang n+1, pas n-1
+% END-VERIFY
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Vouloir calculer $I_n$ pour montrer qu'il est
+      positif ou que la suite décroît. Les deux se démontrent sans aucun
+      calcul, en comparant les intégrandes.
+    \item \textbf{Piège 2.} Choisir $u$ et $v'$ à l'envers dans l'intégration
+      par parties. Avec $u=\mathrm{e}^x$ et $v'=x^n$, l'intégrale restante est
+      au rang $n+1$ : on s'éloigne au lieu de descendre.
+    \item \textbf{Piège 3.} Confondre relation de récurrence et formule close.
+      $I_n = \mathrm{e}-n\,I_{n-1}$ exprime $I_n$ à partir du rang précédent, pas
+      en fonction de $n$ seul.
+    \item \textbf{Piège 4.} Oublier de calculer le premier terme. Sans $I_0$,
+      la récurrence ne produit aucune valeur.
+  \end{itemize}
+}
+
+\verifier{%
+  Calcule $I_0$, $I_1$ et $I_2$ par la récurrence, puis $I_2$ directement : les
+  deux valeurs doivent coïncider. Et contrôle la cohérence globale — une suite
+  positive et décroissante ne peut pas avoir une limite négative.
+}
+
+\sEntrainer{\refExos{M4}}
+
+\end{fichemethode}

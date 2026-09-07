@@ -1,0 +1,137 @@
+% META: {"id": "TNSI-ALGO-M4", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "methode", "capacites": ["T-ALGO-04"], "capacites_codes": ["C12"], "methodes": ["M4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M4}{Passer d'une récursion naïve à une version mémoïsée}
+\textbf{Quand l'utiliser ?} Quand l'énoncé demande de « résoudre par programmation dynamique »
+ou signale qu'une fonction récursive est « trop lente ». La programmation dynamique n'est pas
+un nouvel algorithme à inventer : c'est une transformation mécanique d'un algorithme récursif
+que tu as déjà.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Écris d'abord la version naïve}, même si tu sais qu'elle sera lente. Sans
+    elle, tu n'as rien à transformer, et c'est elle qui porte la logique du problème.
+  \item \textbf{Vérifie que les sous-problèmes se RECOUPENT.} Déroule deux niveaux d'appels :
+    si le même argument revient dans deux branches différentes, la mémoïsation servira. S'il
+    ne revient jamais — comme dans le tri fusion — elle ne gagnerait rien.
+  \item \textbf{Identifie la clé} : quel argument détermine entièrement le résultat ? C'est
+    lui qui indexera le dictionnaire. Si deux arguments varient, la clé est le couple.
+  \item \textbf{Ajoute le dictionnaire en paramètre}, avec la valeur par défaut
+    \lstinline{None}, et initialise-le à l'intérieur de la fonction. Jamais
+    \lstinline{memo={}} dans la signature.
+  \item \textbf{Encadre le corps de deux lignes} : au début, « si la clé est connue, renvoie
+    la valeur mémorisée » ; à la fin, « enregistre le résultat avant de le renvoyer ».
+  \item \textbf{Contrôle que le résultat n'a pas changé} sur plusieurs valeurs. La mémoïsation
+    accélère ; elle ne doit rien calculer d'autre.
+\end{enumerate}
+
+\textbf{Exemple :} la suite de Fibonacci.
+
+Version naïve : \lstinline{fib(n) = fib(n-1) + fib(n-2)}, avec \lstinline{fib(0)=0} et
+\lstinline{fib(1)=1}.
+
+Recoupement : \lstinline{fib(5)} appelle \lstinline{fib(4)} et \lstinline{fib(3)} ; mais
+\lstinline{fib(4)} rappelle \lstinline{fib(3)}. Le même sous-problème est calculé deux fois,
+et ce doublement se répète à chaque niveau.
+
+Clé : l'entier $n$ suffit.
+
+Après transformation, \lstinline{fib(30)} demande $31$ calculs distincts au lieu de plus de
+deux millions d'appels.
+
+% BEGIN-VERIFY
+% appels_naifs = 0
+% def fib_naif(n):
+%     global appels_naifs
+%     appels_naifs += 1
+%     if n <= 1:
+%         return n
+%     return fib_naif(n - 1) + fib_naif(n - 2)
+%
+% calculs_memo = 0
+% def fib_memo(n, memo=None):
+%     global calculs_memo
+%     if memo is None:
+%         memo = {}
+%     if n in memo:
+%         return memo[n]
+%     calculs_memo += 1
+%     resultat = n if n <= 1 else fib_memo(n - 1, memo) + fib_memo(n - 2, memo)
+%     memo[n] = resultat
+%     return resultat
+%
+% # Etape 6 : la transformation ne change AUCUN resultat.
+% for n in range(0, 25):
+%     assert fib_naif(n) == fib_memo(n)
+%
+% # Etape 2 : le recoupement est reel — fib(3) est calcule deux fois dans fib(5).
+% appels = {}
+% def fib_trace(n):
+%     appels[n] = appels.get(n, 0) + 1
+%     if n <= 1:
+%         return n
+%     return fib_trace(n - 1) + fib_trace(n - 2)
+% fib_trace(5)
+% assert appels[3] == 2
+% assert appels[2] == 3
+%
+% # Le gain annonce : 31 calculs distincts pour n = 30.
+% calculs_memo = 0
+% fib_memo(30)
+% assert calculs_memo == 31
+% appels_naifs = 0
+% fib_naif(20)
+% assert appels_naifs > 10000     # deja explosif a n = 20
+%
+% # Etape 4 : le dictionnaire par defaut mutable partage l'etat entre appels.
+% def fib_memo_partage(n, memo={0: 0, 1: 1}):
+%     if n in memo:
+%         return memo[n]
+%     memo[n] = fib_memo_partage(n - 1, memo) + fib_memo_partage(n - 2, memo)
+%     return memo[n]
+% fib_memo_partage(10)
+% # Le dictionnaire par defaut a garde les valeurs du premier appel :
+% defaut = fib_memo_partage.__defaults__[0]
+% assert len(defaut) > 2, "l'etat a fuite entre deux appels independants"
+% # Avec memo=None, rien ne fuite.
+% assert fib_memo.__defaults__ == (None,)
+%
+% # Etape 2, contre-exemple : le tri fusion ne recoupe pas ses sous-problemes.
+% vus = []
+% def tri_fusion(liste):
+%     vus.append(tuple(liste))
+%     if len(liste) <= 1:
+%         return liste
+%     m = len(liste) // 2
+%     g, d = tri_fusion(liste[:m]), tri_fusion(liste[m:])
+%     resultat = []
+%     i = j = 0
+%     while i < len(g) and j < len(d):
+%         if g[i] <= d[j]:
+%             resultat.append(g[i]); i += 1
+%         else:
+%             resultat.append(d[j]); j += 1
+%     return resultat + g[i:] + d[j:]
+% tri_fusion([5, 3, 8, 1, 9, 2, 7])
+% assert len(vus) == len(set(vus)), "aucun sous-probleme ne se repete"
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Mémoïser un algorithme dont les sous-problèmes ne se recoupent pas.} Le tri
+    fusion ne rencontre jamais deux fois la même sous-liste : le dictionnaire ne ferait
+    qu'occuper de la mémoire. Vérifie le recoupement avant de transformer.
+  \item \textbf{Mettre le dictionnaire par défaut dans la signature.} \lstinline{memo={}} est
+    créé une seule fois, à la définition, et \textbf{partagé} entre tous les appels : deux
+    calculs indépendants se contaminent. Toujours \lstinline{memo=None}.
+  \item \textbf{Oublier d'enregistrer avant de renvoyer.} La fonction reste correcte et reste
+    lente : c'est le pire cas, parce que rien ne le signale.
+  \item \textbf{Choisir une clé incomplète.} Si deux arguments influencent le résultat et que
+    la clé n'en retient qu'un, la mémoïsation renvoie la valeur d'un autre sous-problème :
+    l'algorithme devient faux, pas seulement lent.
+\end{itemize}
+
+\textbf{Vérifier :} compare naïve et mémoïsée sur toutes les valeurs jusqu'à $20$ — elles
+doivent coïncider exactement — puis compte les entrées du dictionnaire : il doit y en avoir
+autant que de sous-problèmes distincts, pas davantage.
+
+\textbf{S'entraîner :} exercices C12 du chapitre.
+\end{fichemethode}

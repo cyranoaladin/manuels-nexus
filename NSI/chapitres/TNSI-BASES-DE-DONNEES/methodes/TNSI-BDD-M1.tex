@@ -1,0 +1,147 @@
+% META: {"id": "TNSI-BDD-M1", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "methode", "capacites": ["T-BDD-01C"], "capacites_codes": ["C3"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M1}{Repérer les anomalies d'un schéma relationnel}
+\textbf{Quand l'utiliser ?} Quand l'énoncé donne un schéma — une ou plusieurs relations avec
+leurs attributs — et demande de « repérer les anomalies » ou de « critiquer la conception ».
+Ce n'est pas une question d'opinion : chaque anomalie se montre en exhibant une opération qui
+tourne mal.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Cherche l'information stockée deux fois.} Passe chaque attribut en revue et
+    demande-toi : cette valeur peut-elle apparaître à l'identique sur plusieurs lignes ? Le
+    titre d'un livre répété à chaque emprunt est le cas d'école.
+  \item \textbf{Nomme l'anomalie que la redondance provoque}, en trois temps. \emph{Mise à
+    jour} : corriger une faute dans le titre oblige à modifier toutes les lignes, et en
+    oublier une rend la base incohérente. \emph{Insertion} : on ne peut pas enregistrer un
+    livre tant que personne ne l'a emprunté. \emph{Suppression} : supprimer le dernier
+    emprunt efface aussi le livre.
+  \item \textbf{Vérifie que chaque relation a une clé primaire}, et qu'elle identifie bien
+    \textbf{un seul} tuple. Une relation sans clé primaire autorise les doublons parfaits,
+    qu'aucune requête ne peut ensuite distinguer.
+  \item \textbf{Vérifie que chaque référence est une clé étrangère} pointant vers une clé
+    primaire existante. Un attribut qui contient un numéro « par convention », sans contrainte
+    déclarée, laisse entrer des références vers rien.
+  \item \textbf{Traque les attributs à valeurs multiples} : un attribut \texttt{auteurs} qui
+    contiendrait « Orwell, Huxley » n'est pas interrogeable — aucune requête ne peut chercher
+    proprement un auteur là-dedans.
+  \item \textbf{Propose la correction} : sortir l'information répétée dans sa propre relation,
+    lui donner une clé primaire, et la référencer par une clé étrangère.
+\end{enumerate}
+
+\textbf{Exemple :} \texttt{Emprunt(id, titre\_livre, auteur, nom\_usager, date)}.
+
+\emph{Redondance} : \texttt{titre\_livre} et \texttt{auteur} se répètent à chaque emprunt du
+même livre ; \texttt{nom\_usager} à chaque emprunt du même lecteur.
+
+\emph{Mise à jour} : corriger « Orwel » en « Orwell » demande de modifier toutes les lignes de
+ce livre. En oublier une laisse deux orthographes dans la base, et une requête sur l'auteur en
+manquera une partie.
+
+\emph{Insertion} : on ne peut pas enregistrer un livre acquis mais jamais emprunté — il
+faudrait inventer un emprunt.
+
+\emph{Suppression} : supprimer le seul emprunt d'un livre efface toute trace de ce livre.
+
+\emph{Correction} : \texttt{Livre(id, titre, auteur)}, \texttt{Usager(id, nom)},
+\texttt{Emprunt(id, id\_livre, id\_usager, date)} avec deux clés étrangères.
+
+% BEGIN-VERIFY
+% import sqlite3
+%
+% # Le schema plat de l'exemple, avec la faute d'orthographe sur une seule ligne.
+% plat = sqlite3.connect(":memory:")
+% plat.execute("CREATE TABLE Emprunt(id INTEGER PRIMARY KEY, titre TEXT, "
+%              "auteur TEXT, usager TEXT, date TEXT)")
+% plat.executemany("INSERT INTO Emprunt VALUES (?,?,?,?,?)", [
+%     (1, "1984", "Orwell", "Ada", "2026-02-01"),
+%     (2, "1984", "Orwel",  "Alan", "2026-02-03"),
+%     (3, "1984", "Orwell", "Grace", "2026-02-05"),
+% ])
+%
+% # Anomalie de mise a jour : l'auteur du MEME livre a deux orthographes.
+% auteurs = [r[0] for r in plat.execute(
+%     "SELECT DISTINCT auteur FROM Emprunt WHERE titre = '1984'")]
+% assert sorted(auteurs) == ["Orwel", "Orwell"], auteurs
+% # Une requete par auteur en manque donc une partie.
+% (compte,) = plat.execute(
+%     "SELECT COUNT(*) FROM Emprunt WHERE auteur = 'Orwell'").fetchone()
+% assert compte == 2      # et non 3
+%
+% # Anomalie de suppression : effacer les emprunts efface le livre.
+% plat.execute("DELETE FROM Emprunt WHERE titre = '1984'")
+% (restant,) = plat.execute(
+%     "SELECT COUNT(*) FROM Emprunt WHERE titre = '1984'").fetchone()
+% assert restant == 0     # plus aucune trace du livre
+%
+% # Le schema corrige : trois relations, deux cles etrangeres.
+% corrige = sqlite3.connect(":memory:")
+% corrige.execute("PRAGMA foreign_keys = ON")
+% corrige.execute("CREATE TABLE Livre(id INTEGER PRIMARY KEY, titre TEXT, auteur TEXT)")
+% corrige.execute("CREATE TABLE Usager(id INTEGER PRIMARY KEY, nom TEXT)")
+% corrige.execute("CREATE TABLE Emprunt(id INTEGER PRIMARY KEY, id_livre INTEGER, "
+%                 "id_usager INTEGER, date TEXT, "
+%                 "FOREIGN KEY(id_livre) REFERENCES Livre(id), "
+%                 "FOREIGN KEY(id_usager) REFERENCES Usager(id))")
+% corrige.execute("INSERT INTO Livre VALUES (1, '1984', 'Orwell')")
+% corrige.executemany("INSERT INTO Usager VALUES (?,?)",
+%                     [(1, "Ada"), (2, "Alan"), (3, "Grace")])
+% corrige.executemany("INSERT INTO Emprunt VALUES (?,?,?,?)", [
+%     (1, 1, 1, "2026-02-01"), (2, 1, 2, "2026-02-03"), (3, 1, 3, "2026-02-05")])
+%
+% # L'auteur n'existe qu'a UN endroit : une correction suffit.
+% corrige.execute("UPDATE Livre SET auteur = 'Blair' WHERE id = 1")
+% assert [r[0] for r in corrige.execute("SELECT DISTINCT auteur FROM Livre")] == ["Blair"]
+%
+% # Insertion : un livre jamais emprunte s'enregistre sans probleme.
+% corrige.execute("INSERT INTO Livre VALUES (2, 'La Peste', 'Camus')")
+% (livres,) = corrige.execute("SELECT COUNT(*) FROM Livre").fetchone()
+% assert livres == 2
+%
+% # Suppression : effacer les emprunts laisse le livre en place.
+% corrige.execute("DELETE FROM Emprunt WHERE id_livre = 1")
+% (livres,) = corrige.execute("SELECT COUNT(*) FROM Livre").fetchone()
+% assert livres == 2
+%
+% # Etape 4 : la cle etrangere refuse une reference vers rien.
+% try:
+%     corrige.execute("INSERT INTO Emprunt VALUES (9, 999, 1, '2026-03-01')")
+%     corrige.commit()
+% except sqlite3.IntegrityError:
+%     pass
+% else:
+%     raise AssertionError("la cle etrangere n'a pas ete verifiee")
+%
+% # Etape 3 : sans cle primaire, deux doublons parfaits entrent et sont
+% # indiscernables.
+% sans_cle = sqlite3.connect(":memory:")
+% sans_cle.execute("CREATE TABLE Note(eleve TEXT, valeur INTEGER)")
+% sans_cle.executemany("INSERT INTO Note VALUES (?,?)", [("Ada", 15), ("Ada", 15)])
+% (n,) = sans_cle.execute("SELECT COUNT(*) FROM Note").fetchone()
+% assert n == 2
+% lignes = sans_cle.execute("SELECT rowid, eleve, valeur FROM Note").fetchall()
+% assert lignes[0][1:] == lignes[1][1:]   # rien dans les donnees ne les distingue
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Confondre redondance et répétition légitime.} Une date qui revient parce que
+    deux emprunts ont eu lieu le même jour n'est pas une anomalie : la valeur se répète, mais
+    elle décrit deux faits différents. L'anomalie, c'est de répéter la description d'un
+    \textbf{même} objet.
+  \item \textbf{S'arrêter au constat de redondance.} Dire « c'est redondant » ne vaut pas
+    réponse : il faut exhiber l'opération qui tourne mal — mise à jour partielle, insertion
+    impossible, suppression collatérale.
+  \item \textbf{Oublier de vérifier les clés.} Une relation sans clé primaire et un attribut
+    de référence sans contrainte sont deux anomalies distinctes de la redondance.
+  \item \textbf{Proposer une correction qui déplace le problème.} Sortir le titre dans une
+    relation \texttt{Titre} sans clé primaire ne corrige rien : la nouvelle relation hérite du
+    même défaut.
+\end{itemize}
+
+\textbf{Vérifier :} pour chaque anomalie annoncée, écris la requête ou l'opération qui la
+manifeste — un \texttt{SELECT DISTINCT} qui renvoie deux orthographes du même auteur est une
+preuve, pas une impression. Puis vérifie que ta correction fait passer les trois opérations
+que l'ancien schéma ratait.
+
+\textbf{S'entraîner :} exercices C3 du chapitre.
+\end{fichemethode}

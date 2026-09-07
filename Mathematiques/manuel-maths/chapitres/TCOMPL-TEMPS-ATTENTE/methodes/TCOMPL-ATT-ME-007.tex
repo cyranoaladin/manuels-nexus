@@ -1,0 +1,126 @@
+% META: {"id": "TCOMPL-ATT-ME-007", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "methode", "capacites_codes": ["C7"], "methodes": ["M7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M7}{Étudier la loi uniforme continue sur $[a\,;b]$}
+
+\quandUtiliser{%
+  Utiliser cette méthode dès qu'une durée, une position ou un instant est tiré
+  « au hasard » sur un intervalle, sans qu'aucune valeur ne soit privilégiée :
+  l'heure d'arrivée d'un voyageur qui ne consulte pas les horaires, le point de
+  rupture d'un câble, l'instant d'un appel dans une plage horaire.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Repérer l'intervalle} $[a\,;b]$ sur lequel la variable prend
+      ses valeurs, et vérifier que $a < b$.
+    \item \textbf{Écrire la densité} : $f(x) = \dfrac{1}{b-a}$ pour
+      $x \in [a\,;b]$, et $f(x) = 0$ ailleurs. La hauteur n'est pas un choix :
+      c'est la seule valeur constante dont le rectangle a une aire égale à $1$.
+    \item \textbf{Vérifier que $f$ est une densité} : elle est positive, et
+      $\displaystyle\int_a^b \frac{1}{b-a}\,\mathrm{d}x
+      = \frac{1}{b-a}\big[x\big]_a^b = 1$.
+    \item \textbf{Écrire la fonction de répartition} : pour
+      $x \in [a\,;b]$, $F(x) = \displaystyle\int_a^x \frac{1}{b-a}\,\mathrm{d}t
+      = \frac{x-a}{b-a}$ ; $F(x)=0$ avant $a$, $F(x)=1$ après $b$.
+    \item \textbf{Calculer les probabilités par différence} :
+      $P(c \leq X \leq d) = F(d)-F(c) = \dfrac{d-c}{b-a}$. Seule la
+      \textbf{longueur} de l'intervalle intervient, jamais sa position.
+    \item \textbf{Calculer l'espérance} :
+      $E(X) = \displaystyle\int_a^b x\,\frac{1}{b-a}\,\mathrm{d}x
+      = \frac{b^2-a^2}{2(b-a)} = \frac{a+b}{2}$, le milieu de l'intervalle.
+    \item \textbf{Calculer la variance} par
+      $V(X) = E(X^2) - \big(E(X)\big)^2$, avec
+      $E(X^2) = \dfrac{b^3-a^3}{3(b-a)} = \dfrac{a^2+ab+b^2}{3}$, ce qui donne
+      $V(X) = \dfrac{(b-a)^2}{12}$.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Un métro passe toutes les $12$ minutes ; un voyageur arrive sans consulter
+  l'horaire. Son attente $X$ suit la loi uniforme sur $[0\,;12]$.
+
+  \medskip
+  Densité : $f(x) = \dfrac{1}{12}$ sur $[0\,;12]$.
+
+  Répartition : $F(x) = \dfrac{x}{12}$ sur $[0\,;12]$.
+
+  Probabilité d'attendre moins de $3$ minutes :
+  $F(3) = \dfrac{3}{12} = 0{,}25$.
+
+  Probabilité d'attendre entre $9$ et $12$ minutes :
+  $\dfrac{12-9}{12} = 0{,}25$ — la même, car l'intervalle a la même longueur.
+
+  Attente moyenne : $E(X) = \dfrac{0+12}{2} = 6$ minutes.
+
+  Variance : $V(X) = \dfrac{12^2}{12} = 12$, soit un écart-type de
+  $2\sqrt{3} \approx 3{,}46$ minutes.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, simplify, Rational, sqrt, N
+% x, t, a, b = symbols('x t a b', real=True)
+%
+% # Les formules generales, recalculees sans reutiliser le resultat annonce.
+% densite = 1 / (b - a)
+% assert simplify(integrate(densite, (x, a, b)) - 1) == 0
+% F = simplify(integrate(densite, (x, a, t)))
+% assert simplify(F - (t - a) / (b - a)) == 0
+% esperance = simplify(integrate(x * densite, (x, a, b)))
+% assert simplify(esperance - (a + b) / 2) == 0
+% moment2 = simplify(integrate(x**2 * densite, (x, a, b)))
+% assert simplify(moment2 - (a**2 + a*b + b**2) / 3) == 0
+% variance = simplify(moment2 - esperance**2)
+% assert simplify(variance - (b - a)**2 / 12) == 0
+%
+% # L'exemple redige, chiffre par chiffre.
+% num = {a: 0, b: 12}
+% assert esperance.subs(num) == 6
+% assert variance.subs(num) == 12
+% assert simplify(sqrt(variance.subs(num)) - 2 * sqrt(3)) == 0
+% assert abs(N(sqrt(variance.subs(num))) - 3.4641) < 0.001
+% Fnum = F.subs(num)
+% assert Fnum.subs(t, 3) == Rational(1, 4)
+% assert simplify((Fnum.subs(t, 12) - Fnum.subs(t, 9)) - Rational(1, 4)) == 0
+%
+% # Etape 5 : seule la longueur compte. Trois intervalles de longueur 3.
+% longueurs = [(0, 3), (4, 7), (9, 12)]
+% probas = {simplify(Fnum.subs(t, d) - Fnum.subs(t, c)) for c, d in longueurs}
+% assert probas == {Rational(1, 4)}
+%
+% # Piege : la variance n'est PAS (b-a)/12.
+% assert variance.subs(num) == 12 and Rational(12 - 0, 12) == 1
+% assert variance.subs(num) != Rational(12 - 0, 12)
+%
+% # Piege : la loi uniforme n'est pas sans memoire, contrairement a l'exponentielle.
+% survie = lambda s: simplify(1 - Fnum.subs(t, s))
+% conditionnelle = simplify(survie(9) / survie(6))
+% assert conditionnelle == Rational(1, 2)
+% assert survie(3) == Rational(3, 4)
+% assert conditionnelle != survie(3)
+% END-VERIFY
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Écrire $V(X) = \dfrac{b-a}{12}$ au lieu de
+      $\dfrac{(b-a)^2}{12}$. La variance est homogène au \emph{carré} de la
+      grandeur ; sur $[0\,;12]$ la vraie valeur est $12$, pas $1$.
+    \item \textbf{Piège 2.} Croire que la probabilité dépend de la position de
+      l'intervalle. $P(0 \leq X \leq 3)$, $P(4 \leq X \leq 7)$ et
+      $P(9 \leq X \leq 12)$ valent toutes $0{,}25$.
+    \item \textbf{Piège 3.} Transposer l'absence de mémoire de la loi
+      exponentielle. Elle est \textbf{fausse} ici : sur $[0\,;12]$,
+      $P_{(X>6)}(X>9) = \frac{1}{2}$ alors que $P(X>3) = \frac{3}{4}$. La loi
+      uniforme est bornée : plus le temps passe, moins il en reste.
+    \item \textbf{Piège 4.} Oublier que $f$ est nulle hors de $[a\,;b]$ et
+      intégrer sur $\mathbb{R}$ tout entier.
+  \end{itemize}
+}
+
+\verifier{%
+  Contrôle que $F(a)=0$ et $F(b)=1$, que toute probabilité trouvée est dans
+  $[0\,;1]$, et que $E(X)$ tombe bien au milieu de l'intervalle — pour une loi
+  symétrique, une espérance décentrée est nécessairement une erreur de calcul.
+}
+
+\sEntrainer{\refExos{M7}}
+
+\end{fichemethode}

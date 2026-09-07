@@ -1,0 +1,125 @@
+% META: {"id": "TNSI-STRUCT-M3", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "methode", "capacites": ["T-STRUCT-05D"], "capacites_codes": ["C14"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M3}{Passer d'une représentation de graphe à l'autre}
+\textbf{Quand l'utiliser ?} Quand l'énoncé donne une matrice d'adjacence et demande les listes
+de successeurs, ou l'inverse, ou quand un algorithme fourni attend l'autre représentation que
+celle de l'énoncé. La conversion est mécanique, mais deux détails la font rater : l'ordre des
+sommets, et les sommets sans voisin.
+
+\textbf{Pas à pas — de la matrice vers les listes :}
+\begin{enumerate}
+  \item \textbf{Numérote les sommets} et écris la correspondance numéro $\leftrightarrow$ nom.
+    La ligne $i$ et la colonne $i$ désignent le \textbf{même} sommet : si tu changes l'ordre
+    en route, tout est faux.
+  \item \textbf{Parcours la ligne $i$}, de gauche à droite. Chaque $1$ en colonne $j$ donne un
+    successeur $j$ du sommet $i$.
+  \item \textbf{Écris la liste de la ligne $i$}, même vide. Un sommet sans successeur doit
+    apparaître avec une liste \textbf{vide}, pas disparaître.
+  \item \textbf{Recommence pour chaque ligne.} Tu dois obtenir autant d'entrées que la matrice
+    a de lignes.
+\end{enumerate}
+
+\textbf{Pas à pas — des listes vers la matrice :}
+\begin{enumerate}
+  \item \textbf{Compte les sommets} : ce sont les clés, plus tout sommet qui n'apparaît que
+    comme voisin. Oublier ces derniers donne une matrice trop petite.
+  \item \textbf{Pose une matrice $n \times n$ remplie de $0$}, sommets rangés dans l'ordre
+    choisi à l'étape précédente.
+  \item \textbf{Pour chaque successeur $v$ de $u$, mets un $1$ en ligne $u$, colonne $v$} —
+    dans cet ordre, jamais l'inverse.
+  \item \textbf{Si le graphe est non orienté}, mets aussi le $1$ symétrique. La matrice d'un
+    graphe non orienté est \textbf{symétrique} : c'est ton contrôle.
+\end{enumerate}
+
+\textbf{Exemple :} graphe orienté à trois sommets, $0 \to 1$, $0 \to 2$, $1 \to 2$.
+
+Matrice, lignes et colonnes dans l'ordre $0, 1, 2$ :
+
+ligne $0$ : $0\ 1\ 1$ ; ligne $1$ : $0\ 0\ 1$ ; ligne $2$ : $0\ 0\ 0$.
+
+Listes : $\{0: [1, 2],\ 1: [2],\ 2: []\}$. Le sommet $2$ est un \textbf{puits} : sa liste est
+vide, et il figure quand même.
+
+Retour aux listes vers la matrice : la ligne $2$ ne contient que des $0$, ce qui est
+cohérent. La matrice n'est \textbf{pas} symétrique, et c'est normal : le graphe est orienté.
+
+% BEGIN-VERIFY
+% def matrice_vers_listes(matrice):
+%     n = len(matrice)
+%     return {i: [j for j in range(n) if matrice[i][j] == 1] for i in range(n)}
+%
+% def listes_vers_matrice(listes):
+%     sommets = sorted(set(listes) | {v for voisins in listes.values() for v in voisins})
+%     index = {s: k for k, s in enumerate(sommets)}
+%     n = len(sommets)
+%     matrice = [[0] * n for _ in range(n)]
+%     for u, voisins in listes.items():
+%         for v in voisins:
+%             matrice[index[u]][index[v]] = 1
+%     return matrice
+%
+% M = [[0, 1, 1], [0, 0, 1], [0, 0, 0]]
+% L = {0: [1, 2], 1: [2], 2: []}
+%
+% # Les deux conversions annoncees par la fiche.
+% assert matrice_vers_listes(M) == L
+% assert listes_vers_matrice(L) == M
+% # Elles sont reciproques l'une de l'autre.
+% assert matrice_vers_listes(listes_vers_matrice(L)) == L
+% assert listes_vers_matrice(matrice_vers_listes(M)) == M
+%
+% # Etape 3 : le puits garde sa ligne, et sa liste vide.
+% assert L[2] == [] and 2 in L
+% assert M[2] == [0, 0, 0]
+%
+% # Etape 1 (sens inverse) : oublier un sommet qui n'apparait que comme voisin
+% # produit une matrice trop petite.
+% partielles = {0: [1, 2], 1: [2]}          # le sommet 2 n'est pas une cle
+% assert len(listes_vers_matrice(partielles)) == 3
+% naif = {u: v for u, v in partielles.items()}
+% assert len(naif) == 2 < 3
+%
+% # Etape 4 : un graphe non oriente donne une matrice symetrique.
+% carre = {0: [1, 2], 1: [0, 3], 2: [0, 3], 3: [1, 2]}
+% Mc = listes_vers_matrice(carre)
+% assert all(Mc[i][j] == Mc[j][i] for i in range(4) for j in range(4))
+% # Et le graphe oriente de l'exemple, lui, n'est pas symetrique.
+% assert any(M[i][j] != M[j][i] for i in range(3) for j in range(3))
+%
+% # Etape 3 (sens listes -> matrice) : inverser ligne et colonne transpose le
+% # graphe, ce qui inverse le sens de toutes les aretes.
+% def listes_vers_matrice_inversee(listes):
+%     sommets = sorted(set(listes) | {v for vs in listes.values() for v in vs})
+%     index = {s: k for k, s in enumerate(sommets)}
+%     n = len(sommets)
+%     matrice = [[0] * n for _ in range(n)]
+%     for u, voisins in listes.items():
+%         for v in voisins:
+%             matrice[index[v]][index[u]] = 1      # ligne et colonne echangees
+%     return matrice
+% faux = listes_vers_matrice_inversee(L)
+% assert faux != M
+% assert faux == [list(colonne) for colonne in zip(*M)]   # c'est la transposee
+% # Sur le graphe non oriente, l'erreur ne se voit pas : la matrice est symetrique.
+% assert listes_vers_matrice_inversee(carre) == Mc
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Échanger ligne et colonne.} Mettre le $1$ en ligne $v$, colonne $u$ construit
+    la \textbf{transposée} : toutes les arêtes sont inversées. Sur un graphe non orienté,
+    l'erreur est invisible — la matrice est symétrique — et elle apparaîtra plus tard, sur un
+    graphe orienté, sans que rien ne l'annonce.
+  \item \textbf{Faire disparaître un sommet sans successeur.} Un puits doit rester dans le
+    dictionnaire avec une liste vide, sinon un parcours l'ignore.
+  \item \textbf{Oublier un sommet qui n'apparaît que comme voisin.} Il n'est clé de rien, mais
+    il compte dans la taille de la matrice.
+  \item \textbf{Changer l'ordre des sommets entre lignes et colonnes.} La correspondance
+    numéro $\leftrightarrow$ nom doit être écrite une fois, et servir aux deux dimensions.
+\end{itemize}
+
+\textbf{Vérifier :} refais la conversion \textbf{dans l'autre sens} et compare au point de
+départ — les deux conversions sont réciproques. Et pour un graphe non orienté, contrôle que la
+matrice est symétrique : c'est immédiat à l'œil.
+
+\textbf{S'entraîner :} exercices C14 du chapitre.
+\end{fichemethode}

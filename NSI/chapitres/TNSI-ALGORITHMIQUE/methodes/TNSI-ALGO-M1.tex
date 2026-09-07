@@ -1,0 +1,120 @@
+% META: {"id": "TNSI-ALGO-M1", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "methode", "capacites": ["T-ALGO-01C", "T-ALGO-01D"], "capacites_codes": ["C3", "C4"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M1}{Dérouler à la main les parcours d'un arbre binaire}
+\textbf{Quand l'utiliser ?} Quand l'énoncé donne un arbre \textbf{dessiné} et demande la
+liste des valeurs dans l'ordre préfixe, infixe, suffixe, ou en largeur. Le code du cours ne
+t'aide pas ici : c'est toi la machine, et c'est l'ordre de tes gestes qui décide du résultat.
+
+\textbf{Pas à pas — les trois parcours en profondeur :}
+\begin{enumerate}
+  \item \textbf{Choisis ta place autour du nœud.} Préfixe : on écrit la racine \textbf{avant}
+    de descendre. Infixe : on écrit la racine \textbf{entre} les deux descentes. Suffixe : on
+    écrit la racine \textbf{après} les deux descentes.
+  \item \textbf{Descends toujours à gauche d'abord}, jusqu'à un sous-arbre vide. Un
+    sous-arbre vide ne produit rien : on remonte immédiatement.
+  \item \textbf{Remonte et applique la règle de l'étape 1} au nœud d'où tu viens.
+  \item \textbf{Descends ensuite à droite}, avec la même règle, jusqu'à épuisement.
+  \item \textbf{Compte tes valeurs.} La liste finale doit contenir \textbf{exactement} autant
+    de valeurs que l'arbre a de nœuds : c'est le premier contrôle à faire.
+\end{enumerate}
+
+\textbf{Pas à pas — le parcours en largeur :} tiens un tableau à deux colonnes, l'état de la
+file et la valeur qu'on sort.
+\begin{enumerate}
+  \item \textbf{Enfile la racine.}
+  \item \textbf{Défile le nœud de tête}, écris sa valeur dans le résultat.
+  \item \textbf{Enfile ses enfants non vides}, gauche puis droite, à la \textbf{fin} de la
+    file.
+  \item \textbf{Recommence} tant que la file n'est pas vide.
+\end{enumerate}
+
+\textbf{Exemple :} l'arbre de racine $1$, de fils gauche $2$ (lui-même de fils $4$ et $5$) et
+de fils droit $3$.
+
+Préfixe : on écrit $1$, on descend à gauche, on écrit $2$, on descend à gauche, on écrit $4$
+(pas d'enfants), on remonte, on descend à droite, on écrit $5$, on remonte deux fois, on
+descend à droite, on écrit $3$. Résultat : $1, 2, 4, 5, 3$.
+
+Infixe : la même descente, mais la racine s'écrit entre les deux : $4, 2, 5, 1, 3$.
+
+Suffixe : la racine après les deux : $4, 5, 2, 3, 1$.
+
+Largeur : file $[1]$ ; on sort $1$, on enfile $2$ et $3$ ; file $[2, 3]$ ; on sort $2$, on
+enfile $4$ et $5$ ; file $[3, 4, 5]$ ; on sort $3$, $4$, $5$. Résultat : $1, 2, 3, 4, 5$.
+
+% BEGIN-VERIFY
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droite = droite
+%
+% arbre = Noeud(1, Noeud(2, Noeud(4), Noeud(5)), Noeud(3))
+%
+% def prefixe(a):
+%     return [] if a is None else [a.valeur] + prefixe(a.gauche) + prefixe(a.droite)
+% def infixe(a):
+%     return [] if a is None else infixe(a.gauche) + [a.valeur] + infixe(a.droite)
+% def suffixe(a):
+%     return [] if a is None else suffixe(a.gauche) + suffixe(a.droite) + [a.valeur]
+% def largeur(a):
+%     if a is None:
+%         return []
+%     resultat, file = [], [a]
+%     while file:
+%         noeud = file.pop(0)
+%         resultat.append(noeud.valeur)
+%         if noeud.gauche is not None:
+%             file.append(noeud.gauche)
+%         if noeud.droite is not None:
+%             file.append(noeud.droite)
+%     return resultat
+%
+% # Les quatre resultats annonces par la fiche, verifies.
+% assert prefixe(arbre) == [1, 2, 4, 5, 3]
+% assert infixe(arbre) == [4, 2, 5, 1, 3]
+% assert suffixe(arbre) == [4, 5, 2, 3, 1]
+% assert largeur(arbre) == [1, 2, 3, 4, 5]
+%
+% # Le controle de la fiche : autant de valeurs que de noeuds, pour les quatre.
+% def taille(a):
+%     return 0 if a is None else 1 + taille(a.gauche) + taille(a.droite)
+% for parcours in (prefixe, infixe, suffixe, largeur):
+%     assert len(parcours(arbre)) == taille(arbre) == 5
+%     assert sorted(parcours(arbre)) == [1, 2, 3, 4, 5]
+%
+% # Le piege 1 : sur un ABR, l'infixe est croissant, les autres non.
+% abr = Noeud(5, Noeud(2, Noeud(1), Noeud(3)), Noeud(8))
+% assert infixe(abr) == sorted(infixe(abr))
+% assert prefixe(abr) != sorted(prefixe(abr))
+%
+% # Le piege 2 : prefixe et largeur coincident sur un peigne gauche...
+% peigne = Noeud(1, Noeud(2, Noeud(3)))
+% assert prefixe(peigne) == largeur(peigne) == [1, 2, 3]
+% # ... et different des que l'arbre se ramifie.
+% assert prefixe(arbre) != largeur(arbre)
+%
+% # L'arbre vide ne produit rien, et une feuille produit une seule valeur.
+% for parcours in (prefixe, infixe, suffixe, largeur):
+%     assert parcours(None) == []
+%     assert parcours(Noeud(7)) == [7]
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Confondre préfixe et largeur.} Sur un arbre en peigne, les deux donnent la
+    même liste ; dès que l'arbre se ramifie, elles diffèrent. Ne conclus jamais d'un exemple
+    dégénéré.
+  \item \textbf{Écrire la racine trop tôt en infixe.} L'infixe n'écrit la racine qu'\emph{une
+    fois le sous-arbre gauche entièrement terminé}, pas au moment où on l'atteint.
+  \item \textbf{Enfiler les enfants au début de la file.} Une file se remplit par la fin : les
+    enfiler au début en ferait une pile, et tu obtiendrais un parcours en profondeur.
+  \item \textbf{Oublier un sous-arbre vide.} Un nœud à un seul enfant a bien un côté vide, qui
+    ne produit rien mais ne dispense pas de remonter.
+\end{itemize}
+
+\textbf{Vérifier :} compte les valeurs — il en faut autant que de nœuds, sans répétition. Et
+si l'arbre est un arbre binaire de recherche, l'infixe doit sortir \textbf{croissant} : c'est
+le contrôle le plus rapide qui existe.
+
+\textbf{S'entraîner :} exercices C3 et C4 du chapitre.
+\end{fichemethode}

@@ -1,0 +1,144 @@
+% META: {"id": "TSPE-INTEG-ME-003", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "methode", "capacites_codes": ["C1", "C3"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M3}{Encadrer ou comparer une intégrale sans la calculer}
+
+\quandUtiliser{%
+  Utiliser cette méthode quand l'énoncé demande d'encadrer, de majorer ou de
+  minorer une intégrale, ou quand la primitive de la fonction n'est pas
+  accessible — $\mathrm{e}^{-x^2}$, $\frac{\sin x}{x}$, $\ln(1+x^n)$. On ne
+  calcule alors pas l'intégrale : on l'encadre.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Identifier l'intervalle} $[a\,;b]$ et vérifier $a<b$ : sans
+      cela, le sens des inégalités s'inverse et tout le raisonnement bascule.
+    \item \textbf{Encadrer la FONCTION sur l'intervalle}, pas l'intégrale.
+      Chercher $m$ et $M$ tels que $m \leq f(x) \leq M$ pour tout
+      $x \in [a\,;b]$. Si $f$ est monotone, $m$ et $M$ sont les valeurs aux
+      bornes ; sinon, il faut étudier les variations.
+    \item \textbf{Intégrer l'encadrement} : la positivité de l'intégrale donne
+      \[
+        m(b-a) \leq \int_a^b f(x)\,\mathrm{d}x \leq M(b-a).
+      \]
+    \item \textbf{Pour une comparaison de deux intégrales}, établir d'abord
+      $f(x) \leq g(x)$ sur $[a\,;b]$ — par étude du signe de $g-f$ — puis
+      conclure $\displaystyle\int_a^b f \leq \int_a^b g$.
+    \item \textbf{Pour une valeur moyenne}, diviser tout l'encadrement par
+      $b-a$, ce qui redonne simplement $m \leq \mu \leq M$.
+    \item \textbf{Contrôler la finesse}. Si l'encadrement obtenu est trop
+      large pour conclure, c'est que $m$ et $M$ ne sont pas les extremums
+      exacts : reprendre l'étape 2 avec une étude de variations.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Encadrer $I = \displaystyle\int_0^1 \mathrm{e}^{-x^2}\,\mathrm{d}x$, dont on
+  ne sait pas calculer de primitive.
+
+  \medskip
+  \commentaireMarge{Étudier les variations de $f$ sur $[0\,;1]$.}%
+  $f(x)=\mathrm{e}^{-x^2}$ a pour dérivée $-2x\,\mathrm{e}^{-x^2}$, négative sur
+  $[0\,;1]$ : $f$ est décroissante. Son maximum est $f(0)=1$, son minimum
+  $f(1)=\mathrm{e}^{-1}$.
+
+  \commentaireMarge{Intégrer l'encadrement sur un intervalle de longueur $1$.}%
+  \[
+    \mathrm{e}^{-1} \times 1 \leq I \leq 1 \times 1,
+    \qquad\text{soit}\qquad 0{,}367 \leq I \leq 1 .
+  \]
+
+  \medskip
+  \textbf{Comparaison.} Sur $[0\,;1]$, $x^2 \leq x$, donc
+  $-x^2 \geq -x$ et, l'exponentielle étant croissante,
+  $\mathrm{e}^{-x^2} \geq \mathrm{e}^{-x}$. En intégrant :
+  \[
+    I \geq \int_0^1 \mathrm{e}^{-x}\,\mathrm{d}x = 1-\mathrm{e}^{-1}
+      \approx 0{,}632 .
+  \]
+  Cette minoration est bien meilleure que la précédente : la valeur exacte est
+  $\approx 0{,}747$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, integrate, diff, N, Rational, oo, simplify
+% x = symbols('x', real=True)
+%
+% f = exp(-x**2)
+% # Etape 2 : f est decroissante sur [0, 1] — sa derivee y est negative.
+% fp = diff(f, x)
+% assert fp == -2*x*exp(-x**2)
+% for k in range(1, 101):
+%     assert N(fp.subs(x, Rational(k, 100))) < 0
+% m, M = f.subs(x, 1), f.subs(x, 0)
+% assert M == 1 and m == exp(-1)
+%
+% # La valeur exacte de I, pour verifier tous les encadrements annonces.
+% I = integrate(f, (x, 0, 1))
+% valeur = N(I)
+% assert abs(valeur - 0.7468) < 0.001
+%
+% # Etape 3 : l'encadrement grossier est vrai, et large.
+% assert N(m) <= valeur <= N(M)
+% assert abs(N(m) - 0.3679) < 0.001
+%
+% # Etape 4 : la comparaison x^2 <= x sur [0, 1], puis son integration.
+% for k in range(0, 101):
+%     t = Rational(k, 100)
+%     assert t**2 <= t
+%     assert N(exp(-t**2)) >= N(exp(-t))
+% J = integrate(exp(-x), (x, 0, 1))
+% assert simplify(J - (1 - exp(-1))) == 0
+% assert N(J) <= valeur
+% assert abs(N(J) - 0.6321) < 0.001
+% # La minoration par comparaison est bien plus fine que celle par le minimum.
+% assert N(J) > N(m)
+%
+% # Etape 5 : la valeur moyenne sur un intervalle de longueur 1 vaut I.
+% moyenne = I / (1 - 0)
+% assert simplify(moyenne - I) == 0
+% assert N(m) <= N(moyenne) <= N(M)
+%
+% # Etape 1, controle : sur [a, b] avec a > b l'encadrement s'inverse.
+% assert integrate(f, (x, 1, 0)) == -I
+%
+% # Piege : un encadrement grossier peut ne pas permettre de conclure.
+% # Ici, savoir seulement 0.367 <= I <= 1 ne permet pas de decider si I > 0.7.
+% assert N(m) < 0.7 < N(M)
+% # Alors que la comparaison, elle, le permet presque : 0.632 < 0.7.
+% assert N(J) < 0.7
+% # Une comparaison plus fine y parvient : e^{-x^2} >= 1 - x^2 sur [0, 1].
+% for k in range(0, 101):
+%     t = Rational(k, 100)
+%     assert N(exp(-t**2)) >= N(1 - t**2)
+% K = integrate(1 - x**2, (x, 0, 1))
+% assert K == Rational(2, 3)
+% assert N(K) <= valeur
+% END-VERIFY
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Encadrer l'intégrale au jugé au lieu d'encadrer la
+      fonction. L'encadrement porte sur $f(x)$ pour \emph{tout} $x$ de
+      l'intervalle ; c'est l'intégration qui le transporte sur l'intégrale.
+    \item \textbf{Piège 2.} Prendre $m$ et $M$ aux bornes sans vérifier la
+      monotonie. Sur un intervalle où $f$ passe par un extremum intérieur, les
+      valeurs aux bornes ne sont ni le minimum ni le maximum.
+    \item \textbf{Piège 3.} Se contenter d'un encadrement trop large. Savoir
+      $0{,}367 \leq I \leq 1$ ne permet pas de décider si $I > 0{,}7$ : il faut
+      une comparaison plus fine.
+    \item \textbf{Piège 4.} Oublier le facteur $b-a$. L'encadrement de
+      l'intégrale est $m(b-a) \leq I \leq M(b-a)$ ; sans ce facteur, on encadre
+      la valeur \emph{moyenne}, pas l'intégrale.
+  \end{itemize}
+}
+
+\verifier{%
+  Contrôle que la largeur de ton encadrement vaut bien $(M-m)(b-a)$, et que les
+  deux bornes ont le bon ordre. Puis teste ton encadrement sur une fonction dont
+  tu sais calculer l'intégrale : si la valeur exacte n'y tombe pas, c'est
+  l'encadrement de la fonction qu'il faut reprendre.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

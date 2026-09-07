@@ -189,7 +189,9 @@ def _remediation_verdict(unit: dict[str, Any]) -> tuple[str, str] | None:
     return None
 
 
-def _method_verdict(unit: dict[str, Any]) -> tuple[str, str] | None:
+def _method_verdict(
+    unit: dict[str, Any],
+) -> tuple[str, str, str | None] | None:
     """Verdict éditorial déjà rendu pour les fiches méthode.
 
     L'audit `METHOD_SHEET_REQUIREMENT_AUDIT` a jugé une par une les capacités
@@ -206,11 +208,14 @@ def _method_verdict(unit: dict[str, Any]) -> tuple[str, str] | None:
     decision = CAPACITY_VERDICTS.get(unit["chapter"], {}).get(unit["capacity"])
     if decision is None:
         return None
-    verdict, raison, _ = decision
+    verdict, raison, couvrant = decision
     if verdict == DECLARATIVE:
-        return NOT_APPLICABLE, f"{METHOD_RULE} Verdict déposé : {raison}"
+        return NOT_APPLICABLE, f"{METHOD_RULE} Verdict déposé : {raison}", None
     if verdict == PROCEDURAL_COVERED:
-        return SATISFIED, f"{METHOD_RULE} Verdict déposé : {raison}"
+        # L'objet qui couvre est un cours, une fiche existante ou un
+        # répertoire : il n'est pas de ce rôle-ci, mais il doit être NOMMÉ,
+        # sans quoi le verdict ne renvoie à rien de vérifiable.
+        return SATISFIED, f"{METHOD_RULE} Verdict déposé : {raison}", couvrant
     return None
 
 
@@ -274,8 +279,10 @@ def classify(unit: dict[str, Any], index: dict[str, Any]) -> dict[str, Any]:
     elif role == "methodes":
         depose = _method_verdict(unit)
         if depose is not None:
-            verdict, rationale = depose
+            verdict, rationale, couvrant = depose
             source = "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json"
+            if couvrant:
+                role_objects = [couvrant]
         else:
             rationale = (
                 f"{METHOD_RULE} Aucun verdict éditorial n'a été rendu pour "

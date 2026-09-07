@@ -1,0 +1,133 @@
+% META: {"id": "TNSI-ALGO-M3", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "methode", "capacites": ["T-ALGO-03"], "capacites_codes": ["C11"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M3}{Structurer un algorithme diviser pour régner}
+\textbf{Quand l'utiliser ?} Quand on te demande d'écrire un algorithme « en utilisant la
+méthode diviser pour régner » sur un problème que le cours n'a pas traité. Le tri fusion ne
+te servira pas de modèle à recopier : c'est sa \textbf{structure} qu'il faut retrouver sur
+ton problème.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Écris d'abord le cas de base}, avant tout le reste. Quelle est la plus petite
+    instance que tu sais résoudre sans rien découper ? Une liste vide, une liste à un
+    élément, un intervalle réduit à un point. Sans ce cas, la récursion ne s'arrête jamais.
+  \item \textbf{Dis comment tu divises}, et vérifie que les sous-instances sont
+    \textbf{strictement plus petites}. Couper en deux moitiés, retirer un élément, diviser
+    l'exposant par deux : peu importe, pourvu que la taille décroisse à chaque appel.
+  \item \textbf{Formule l'appel récursif} en supposant qu'il fonctionne. C'est l'étape qui
+    demande de la confiance : tu n'as pas à dérouler la récursion, tu as à écrire ce que tu
+    ferais si la réponse aux sous-problèmes t'était donnée.
+  \item \textbf{Écris la combinaison.} Comment reconstitue-t-on la réponse du problème entier
+    à partir des réponses partielles ? C'est là que se trouve le vrai travail — fusionner deux
+    listes triées, additionner deux comptes, prendre un maximum.
+  \item \textbf{Vérifie la couverture des cas.} Le cas de base et le cas général doivent
+    couvrir toutes les tailles possibles, sans trou ni recouvrement.
+  \item \textbf{Estime le coût} : combien de sous-problèmes par appel, de quelle taille, et
+    combien coûte la combinaison. Deux moitiés plus une combinaison linéaire donnent
+    $n\log_2 n$.
+\end{enumerate}
+
+\textbf{Exemple :} compter les occurrences d'une valeur dans une liste, par diviser pour
+régner.
+
+\emph{Cas de base} : une liste vide contient $0$ occurrence ; une liste à un élément en
+contient $1$ si c'est la valeur cherchée, $0$ sinon.
+
+\emph{Division} : on coupe en deux moitiés au milieu ; chacune est strictement plus courte
+dès que la liste a au moins deux éléments.
+
+\emph{Récursion} : on suppose savoir compter dans chaque moitié.
+
+\emph{Combinaison} : le compte total est la \textbf{somme} des deux comptes — aucune
+occurrence n'est à cheval, puisqu'une occurrence est un élément et qu'un élément est dans une
+moitié ou dans l'autre.
+
+\emph{Coût} : deux sous-problèmes de taille $n/2$ et une combinaison en temps constant, donc
+un coût proportionnel à $n$ — le même qu'un parcours simple. Diviser pour régner ne rend pas
+tout plus rapide, et le dire fait partie de la réponse.
+
+% BEGIN-VERIFY
+% def compter(liste, valeur):
+%     if len(liste) == 0:
+%         return 0
+%     if len(liste) == 1:
+%         return 1 if liste[0] == valeur else 0
+%     milieu = len(liste) // 2
+%     return compter(liste[:milieu], valeur) + compter(liste[milieu:], valeur)
+%
+% # Correction contre l'oracle natif, sur des cas varies.
+% import random
+% random.seed(11)
+% for _ in range(2000):
+%     n = random.randint(0, 12)
+%     donnees = [random.randint(0, 3) for _ in range(n)]
+%     cible = random.randint(0, 3)
+%     assert compter(donnees, cible) == donnees.count(cible)
+%
+% # Etape 1 : les deux cas de base annonces.
+% assert compter([], 5) == 0
+% assert compter([5], 5) == 1 and compter([4], 5) == 0
+%
+% # Etape 2 : la division fait strictement decroitre la taille des le rang 2.
+% for n in range(2, 40):
+%     milieu = n // 2
+%     assert 0 < milieu < n and 0 < n - milieu < n
+%
+% # Etape 5 : les deux moitiés partitionnent la liste, sans trou ni recouvrement.
+% for n in range(0, 30):
+%     liste = list(range(n))
+%     milieu = n // 2
+%     assert liste[:milieu] + liste[milieu:] == liste
+%
+% # Etape 6 : le nombre d'appels est bien lineaire, pas n log n.
+% appels = 0
+% def compter_instrumente(liste, valeur):
+%     global appels
+%     appels += 1
+%     if len(liste) <= 1:
+%         return 1 if liste[:1] == [valeur] else 0
+%     milieu = len(liste) // 2
+%     return (compter_instrumente(liste[:milieu], valeur)
+%             + compter_instrumente(liste[milieu:], valeur))
+%
+% appels = 0
+% compter_instrumente(list(range(64)), 7)
+% appels_64 = appels
+% appels = 0
+% compter_instrumente(list(range(128)), 7)
+% appels_128 = appels
+% # Doubler la taille double le nombre d'appels (a une unite pres) : c'est lineaire.
+% assert abs(appels_128 - 2 * appels_64) <= 1
+%
+% # Le piege : oublier le cas de base fait exploser la recursion. On le montre
+% # avec une profondeur bornee plutot qu'en laissant Python lever l'erreur.
+% def sans_cas_de_base(liste, profondeur=0):
+%     if profondeur > 50:
+%         return "NON_TERMINE"
+%     milieu = len(liste) // 2
+%     if sans_cas_de_base(liste[:milieu], profondeur + 1) == "NON_TERMINE":
+%         return "NON_TERMINE"
+%     return "TERMINE"
+% assert sans_cas_de_base([1, 2, 3]) == "NON_TERMINE"
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Écrire la division avant le cas de base.} C'est l'ordre qui fait oublier le
+    cas de base, et une récursion sans cas de base ne termine pas : couper une liste vide en
+    deux donne deux listes vides, indéfiniment.
+  \item \textbf{Une division qui ne fait pas décroître la taille.} Couper « la liste et
+    elle-même », ou traiter $n$ puis $n$, boucle. La décroissance stricte est ce qui garantit
+    d'atteindre le cas de base.
+  \item \textbf{Vouloir dérouler la récursion dans sa tête.} On écrit un algorithme
+    récursif en supposant les appels corrects, pas en simulant trois niveaux.
+  \item \textbf{Croire que diviser pour régner accélère toujours.} Ici le coût reste linéaire.
+    Le gain du tri fusion vient de ce que la combinaison remplace un travail quadratique, pas
+    du découpage lui-même.
+\end{itemize}
+
+\textbf{Vérifier :} teste ton algorithme sur les trois tailles qui cassent tout — $0$, $1$, et
+$2$ éléments — puis compare-le à une méthode directe sur une dizaine de cas au hasard. Si les
+deux divergent une seule fois, c'est la combinaison qu'il faut relire.
+
+\textbf{S'entraîner :} exercices C11 du chapitre.
+\end{fichemethode}

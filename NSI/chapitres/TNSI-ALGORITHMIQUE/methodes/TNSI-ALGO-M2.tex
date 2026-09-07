@@ -1,0 +1,127 @@
+% META: {"id": "TNSI-ALGO-M2", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "methode", "capacites": ["T-ALGO-02A", "T-ALGO-02B"], "capacites_codes": ["C7", "C8"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M2}{Dérouler à la main un parcours de graphe}
+\textbf{Quand l'utiliser ?} Quand l'énoncé donne un graphe et demande l'ordre de visite des
+sommets en largeur ou en profondeur. Contrairement à un arbre, un graphe a des cycles : sans
+mémoire des sommets déjà vus, tu tournes en rond. Deux états sont donc à tenir, pas un.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Fixe l'ordre des voisins} et écris-le. C'est presque toujours l'ordre du
+    dictionnaire donné par l'énoncé. Sans cette convention, deux réponses différentes sont
+    également défendables, et la correction ne peut pas trancher.
+  \item \textbf{Prépare deux colonnes} : la structure d'attente, et la liste des visités.
+    Largeur : une \textbf{file}, on prend au début, on ajoute à la fin. Profondeur : une
+    \textbf{pile}, on prend et on ajoute du même côté — ou la récursion, qui est la même pile.
+  \item \textbf{Marque le sommet de départ comme visité} au moment où tu l'ajoutes, pas au
+    moment où tu le sors. Marquer trop tard laisse un sommet entrer deux fois.
+  \item \textbf{Sors un sommet, écris-le dans le résultat}, puis passe ses voisins en revue
+    \textbf{dans l'ordre fixé} : tout voisin non visité est marqué et ajouté.
+  \item \textbf{Recommence} tant que la structure n'est pas vide.
+  \item \textbf{Si des sommets restent non visités}, c'est que le graphe n'est pas connexe :
+    l'énoncé demande alors de relancer depuis un sommet non visité, ou de conclure.
+\end{enumerate}
+
+\textbf{Exemple :} $G = \{0: [1, 2],\ 1: [0, 3],\ 2: [0, 3],\ 3: [1, 2]\}$, départ $0$.
+
+En largeur : visités $\{0\}$, file $[0]$. On sort $0$, voisins $1$ puis $2$ : les deux sont
+neufs, on les marque et on les enfile. File $[1, 2]$. On sort $1$, voisins $0$ (déjà vu) et
+$3$ (neuf, marqué, enfilé). File $[2, 3]$. On sort $2$ : $0$ et $3$ sont déjà vus. On sort
+$3$. Résultat : $0, 1, 2, 3$.
+
+En profondeur (récursive) : on visite $0$, on part sur $1$, de $1$ on part sur $3$, de $3$ on
+part sur $2$ — car $1$ est déjà visité — et de $2$ tout est vu. Résultat : $0, 1, 3, 2$.
+
+Les deux listes contiennent les mêmes sommets et \textbf{pas} dans le même ordre : c'est
+normal, et c'est même tout l'intérêt de la question.
+
+% BEGIN-VERIFY
+% G = {0: [1, 2], 1: [0, 3], 2: [0, 3], 3: [1, 2]}
+%
+% def bfs(graphe, depart):
+%     visites = [depart]
+%     file = [depart]
+%     while file:
+%         sommet = file.pop(0)
+%         for voisin in graphe[sommet]:
+%             if voisin not in visites:
+%                 visites.append(voisin)
+%                 file.append(voisin)
+%     return visites
+%
+% def dfs(graphe, sommet, visites=None):
+%     if visites is None:
+%         visites = []
+%     visites.append(sommet)
+%     for voisin in graphe[sommet]:
+%         if voisin not in visites:
+%             dfs(graphe, voisin, visites)
+%     return visites
+%
+% # Les deux ordres annonces par la fiche.
+% assert bfs(G, 0) == [0, 1, 2, 3]
+% assert dfs(G, 0) == [0, 1, 3, 2]
+% # Memes sommets, ordres differents : c'est le point de la fiche.
+% assert sorted(bfs(G, 0)) == sorted(dfs(G, 0)) == [0, 1, 2, 3]
+% assert bfs(G, 0) != dfs(G, 0)
+%
+% # Etape 1 : l'ordre des voisins change le resultat. Meme graphe, listes inversees.
+% G_inverse = {s: list(reversed(v)) for s, v in G.items()}
+% assert bfs(G_inverse, 0) == [0, 2, 1, 3]
+% assert bfs(G_inverse, 0) != bfs(G, 0)
+%
+% # Etape 3 : marquer a la sortie au lieu de l'entree fait entrer un sommet deux fois.
+% def bfs_marque_trop_tard(graphe, depart):
+%     visites, file = [], [depart]
+%     entrees = 0
+%     while file:
+%         sommet = file.pop(0)
+%         if sommet in visites:
+%             continue
+%         visites.append(sommet)
+%         for voisin in graphe[sommet]:
+%             if voisin not in visites:
+%                 file.append(voisin)
+%                 entrees += 1
+%     return visites, entrees
+%
+% ordre, entrees = bfs_marque_trop_tard(G, 0)
+% assert ordre == [0, 1, 2, 3]
+% assert entrees > len(G) - 1   # des sommets sont entres plusieurs fois dans la file
+%
+% # Etape 6 : un graphe non connexe laisse des sommets non visites.
+% H = {0: [1], 1: [0], 2: [3], 3: [2]}
+% assert bfs(H, 0) == [0, 1]
+% assert set(H) - set(bfs(H, 0)) == {2, 3}
+%
+% # Sans memoire des visites, le cycle ferait boucler : on le montre avec une borne.
+% def bfs_sans_memoire(graphe, depart, budget=50):
+%     file, sorties = [depart], 0
+%     while file and sorties < budget:
+%         sommet = file.pop(0)
+%         sorties += 1
+%         for voisin in graphe[sommet]:
+%             file.append(voisin)
+%     return sorties
+% assert bfs_sans_memoire(G, 0) == 50   # le budget est epuise : il n'a pas termine
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Ne pas fixer l'ordre des voisins.} L'ordre de visite en dépend entièrement :
+    en inversant les listes du même graphe, le parcours en largeur donne $0, 2, 1, 3$ au lieu
+    de $0, 1, 2, 3$.
+  \item \textbf{Marquer un sommet au moment où on le sort.} Il a alors pu être ajouté
+    plusieurs fois entre-temps. L'ordre final peut rester bon, mais la structure gonfle, et
+    sur un graphe dense la copie manuscrite devient fausse.
+  \item \textbf{Oublier la mémoire des visités.} Le cycle $0-1-3-2-0$ suffit à faire boucler
+    l'algorithme indéfiniment.
+  \item \textbf{Croire qu'un parcours visite tout.} Il ne visite que la composante connexe du
+    départ. Les sommets restants doivent être mentionnés.
+\end{itemize}
+
+\textbf{Vérifier :} chaque sommet apparaît \textbf{une seule fois} dans le résultat, et le
+premier est le sommet de départ. En largeur, contrôle en plus que les sommets sortent par
+distance croissante au départ : d'abord les voisins directs, puis leurs voisins.
+
+\textbf{S'entraîner :} exercices C7 et C8 du chapitre.
+\end{fichemethode}

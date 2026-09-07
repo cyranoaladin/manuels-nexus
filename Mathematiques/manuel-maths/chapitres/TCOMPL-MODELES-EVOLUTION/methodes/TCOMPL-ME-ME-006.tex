@@ -1,0 +1,137 @@
+% META: {"id": "TCOMPL-ME-ME-006", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "methode", "capacites_codes": ["C6"], "methodes": ["M6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M6}{Déterminer la limite d'une suite}
+
+\quandUtiliser{%
+  Utiliser cette méthode chaque fois qu'un modèle d'évolution demande « vers
+  quoi tend la population », « la suite converge-t-elle », ou « quel est le
+  comportement à long terme ». C'est la question finale de presque tous les
+  exercices de suites.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Reconnaître la forme.} Si la suite est géométrique de raison
+      $q$, la limite se lit : $0$ si $|q|<1$, $+\infty$ si $q>1$, et pas de
+      limite si $q \leq -1$. C'est le cas le plus fréquent des modèles
+      d'évolution.
+    \item \textbf{Appliquer les opérations sur les limites} si la suite est une
+      somme, un produit ou un quotient de suites dont on connaît les limites.
+      Conclure directement quand le résultat n'est pas indéterminé.
+    \item \textbf{Repérer l'indétermination}, le cas échéant. Quatre formes
+      seulement : $(+\infty)+(-\infty)$, $0\times\infty$,
+      $\dfrac{\infty}{\infty}$ et $\dfrac{0}{0}$. Les nommer avant de
+      transformer, c'est ce qui montre qu'on sait pourquoi on transforme.
+    \item \textbf{Lever l'indétermination par factorisation} du terme
+      dominant, au numérateur et au dénominateur. Les rapports $\frac{c}{n}$
+      tendent vers $0$, ce qui découvre la limite.
+    \item \textbf{Si la suite n'a pas de forme exploitable, encadrer.} Majorer
+      et minorer par deux suites de \textbf{même} limite, puis invoquer le
+      théorème des gendarmes. C'est la seule issue quand un $\cos n$ ou un
+      $(-1)^n$ empêche tout calcul direct.
+    \item \textbf{Rédiger la conclusion} en nommant le théorème utilisé. « Par
+      opérations sur les limites », « par le théorème des gendarmes » : la
+      justification fait partie de la réponse.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{a)} $u_n = \dfrac{4n+3}{2n-1}$.
+
+  \commentaireMarge{Numérateur et dénominateur tendent vers $+\infty$.}%
+  Forme indéterminée $\dfrac{\infty}{\infty}$. On factorise par $n$ :
+  \[
+    u_n = \frac{n\left(4+\frac{3}{n}\right)}{n\left(2-\frac{1}{n}\right)}
+        = \frac{4+\frac{3}{n}}{2-\frac{1}{n}}
+        \xrightarrow[n\to+\infty]{} \frac{4}{2} = 2 .
+  \]
+
+  \medskip
+  \textbf{b)} $v_n = 5\times0{,}9^n - 3$.
+
+  \commentaireMarge{$|0{,}9|<1$ : aucune indétermination.}%
+  $0{,}9^n \to 0$, donc par opérations sur les limites $v_n \to 5\times0-3=-3$.
+
+  \medskip
+  \textbf{c)} $w_n = \dfrac{(-1)^n}{n}$ pour $n \geq 1$.
+
+  \commentaireMarge{$(-1)^n$ n'a pas de limite : le calcul direct est fermé.}%
+  Pour tout $n \geq 1$, $-\dfrac{1}{n} \leq w_n \leq \dfrac{1}{n}$, et les deux
+  bornes tendent vers $0$. Par le théorème des gendarmes, $w_n \to 0$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, limit, oo, Rational, simplify
+% n = symbols('n', positive=True, integer=True)
+%
+% # Les trois limites de l'exemple redige.
+% assert limit((4*n + 3) / (2*n - 1), n, oo) == 2
+% assert limit(5 * Rational(9, 10)**n - 3, n, oo) == -3
+% # (-1)^n interdit le calcul symbolique de limite : c'est justement pourquoi
+% # la fiche passe par l'encadrement. On le verifie donc par encadrement.
+% for k in range(1, 5000):
+%     assert abs((-1)**k / k) <= 1/k
+% assert 1/5000 < 1e-3
+%
+% # Etape 1 : la regle sur les suites geometriques, sur plusieurs raisons.
+% assert limit(Rational(1, 2)**n, n, oo) == 0
+% assert limit(Rational(3, 2)**n, n, oo) == oo
+% # Raison negative : meme raison, on encadre par la valeur absolue.
+% for k in range(1, 200):
+%     assert abs(Rational(-1, 2)**k) == Rational(1, 2)**k
+% assert limit(Rational(1, 2)**n, n, oo) == 0
+% # Pour q <= -1, la suite oscille : ses sous-suites divergent.
+% assert (-2)**10 > 0 and (-2)**11 < 0
+% assert abs((-2)**20) > abs((-2)**10)
+%
+% # Etape 4 : la factorisation ne change pas la suite, elle change l'ecriture.
+% for k in range(1, 200):
+%     gauche = (4*k + 3) / (2*k - 1)
+%     droite = (4 + 3/k) / (2 - 1/k)
+%     assert abs(gauche - droite) < 1e-12
+%
+% # Etape 5 : l'encadrement des gendarmes est vrai terme a terme.
+% for k in range(1, 500):
+%     assert -1/k <= (-1)**k / k <= 1/k
+% assert limit(-1/n, n, oo) == limit(1/n, n, oo) == 0
+%
+% # Piege : deux gendarmes de limites DIFFERENTES ne concluent rien. La suite
+% # (-1)^n reste dans [-1, 1] et n'a pourtant aucune limite.
+% for k in range(1, 200):
+%     assert -1 <= (-1)**k <= 1
+% assert {(-1)**k for k in range(100)} == {-1, 1}
+%
+% # Piege : q = -1 exactement. La suite oscille sans converger.
+% assert {(-1)**k for k in range(1, 50)} == {-1, 1}
+%
+% # Controle numerique de la convergence annoncee en a) et b).
+% assert abs((4*10**6 + 3) / (2*10**6 - 1) - 2) < 1e-5
+% assert abs(5 * 0.9**300 - 3 - (-3)) < 1e-9
+% END-VERIFY
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Conclure sans nommer l'indétermination. Écrire
+      directement $\frac{4n}{2n}=2$ donne la bonne valeur pour une mauvaise
+      raison, et la même désinvolture donnera un faux résultat dès que les
+      degrés différeront.
+    \item \textbf{Piège 2.} Appliquer les gendarmes avec deux limites
+      différentes. $-1 \leq (-1)^n \leq 1$ est vrai et ne prouve rien : les
+      bornes valent $-1$ et $1$, et la suite n'a pas de limite.
+    \item \textbf{Piège 3.} Oublier le cas $q \leq -1$. Une suite géométrique
+      de raison $-1$ oscille entre deux valeurs : elle ne converge pas, et ne
+      tend pas non plus vers l'infini.
+    \item \textbf{Piège 4.} Croire qu'une inégalité stricte entre deux suites
+      se transmet à leurs limites. $\frac{1}{n+1} < \frac{1}{n}$ pour tout $n$,
+      et les deux limites sont égales à $0$.
+  \end{itemize}
+}
+
+\verifier{%
+  Calcule quelques termes de rang élevé : $u_{1000}$ doit être visiblement
+  proche de la limite annoncée. Si la valeur numérique s'en éloigne, c'est la
+  factorisation qu'il faut relire, pas la calculatrice.
+}
+
+\sEntrainer{\refExos{M6}}
+
+\end{fichemethode}

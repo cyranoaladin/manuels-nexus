@@ -1,0 +1,119 @@
+% META: {"id": "TNSI-LANG-M1", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "methode", "capacites": ["T-LANG-02A", "T-LANG-02B"], "capacites_codes": ["C4", "C5"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M1}{Écrire une fonction récursive et dérouler son arbre d'appels}
+\textbf{Quand l'utiliser ?} Dans les deux sens : quand on te demande d'écrire une fonction
+récursive sur un problème neuf, et quand on te donne une fonction récursive et qu'on demande
+ce qu'elle renvoie, combien d'appels elle fait, ou si elle termine. Écrire et dérouler sont la
+même démarche prise par les deux bouts.
+
+\textbf{Pas à pas — écrire :}
+\begin{enumerate}
+  \item \textbf{Écris le cas de base en premier}, avant toute autre ligne. Quelle est la plus
+    petite entrée pour laquelle tu connais la réponse sans réfléchir ? La liste vide, la
+    chaîne vide, $n = 0$.
+  \item \textbf{Écris comment le cas général se RAMÈNE à plus petit.} Une seule règle compte :
+    l'argument de l'appel récursif doit être \textbf{strictement} plus proche du cas de base.
+    Note cette quantité qui décroît — c'est ta preuve de terminaison.
+  \item \textbf{Suppose l'appel récursif correct} et écris la ligne qui combine son résultat
+    avec le travail du niveau courant. C'est la ligne la plus courte et la plus difficile.
+  \item \textbf{Relis la terminaison} : est-ce que tout chemin d'exécution atteint le cas de
+    base ? Une branche qui rappelle la fonction avec le même argument suffit à tout casser.
+\end{enumerate}
+
+\textbf{Pas à pas — dérouler :}
+\begin{enumerate}
+  \item \textbf{Écris l'appel initial}, puis, sous lui et décalés vers la droite, les appels
+    qu'il déclenche, dans l'ordre du code.
+  \item \textbf{Descends jusqu'aux cas de base} : ce sont les feuilles de l'arbre, les seules
+    qui renvoient sans rappeler.
+  \item \textbf{Remonte en écrivant les valeurs de retour}, feuille par feuille, en appliquant
+    la ligne de combinaison.
+  \item \textbf{Compte.} Le nombre d'appels est le nombre de nœuds de l'arbre. Repère si un
+    même argument apparaît dans deux branches : c'est le signe qu'une mémoïsation ferait
+    gagner (voir la fiche du chapitre Algorithmique).
+\end{enumerate}
+
+\textbf{Exemple :} \lstinline{somme_chiffres(n)}, somme des chiffres d'un entier positif.
+
+\emph{Cas de base} : si $n < 10$, la somme est $n$ lui-même.
+
+\emph{Réduction} : $n$ vaut \lstinline{n // 10} avec un chiffre en moins ; la quantité qui
+décroît strictement est le nombre de chiffres.
+
+\emph{Combinaison} : \lstinline{n % 10 + somme_chiffres(n // 10)}.
+
+\emph{Déroulé de} \lstinline{somme_chiffres(507)} : $7 + \text{s}(50)$, puis
+$0 + \text{s}(5)$, puis $5$ — cas de base. On remonte : $5$, puis $0+5=5$, puis $7+5=12$.
+Trois appels, un seul par niveau : l'arbre est une chaîne, aucune mémoïsation à espérer.
+
+% BEGIN-VERIFY
+% def somme_chiffres(n):
+%     if n < 10:
+%         return n
+%     return n % 10 + somme_chiffres(n // 10)
+%
+% # Correction contre un oracle independant.
+% for n in range(0, 3000):
+%     assert somme_chiffres(n) == sum(int(c) for c in str(n))
+% assert somme_chiffres(507) == 12
+%
+% # Etape 2 : la quantite qui decroit est le nombre de chiffres, strictement.
+% for n in range(10, 5000):
+%     assert len(str(n // 10)) < len(str(n))
+%
+% # Le deroule annonce : trois appels pour 507, un seul par niveau.
+% trace = []
+% def somme_tracee(n):
+%     trace.append(n)
+%     if n < 10:
+%         return n
+%     return n % 10 + somme_tracee(n // 10)
+% assert somme_tracee(507) == 12
+% assert trace == [507, 50, 5]
+% assert len(trace) == len(set(trace)) == 3   # aucun argument repete
+%
+% # Contraste : un arbre d'appels qui SE RECOUPE, ou la memoisation servirait.
+% appels = {}
+% def fib(n):
+%     appels[n] = appels.get(n, 0) + 1
+%     if n <= 1:
+%         return n
+%     return fib(n - 1) + fib(n - 2)
+% assert fib(5) == 5
+% assert appels[3] == 2 and appels[2] == 3    # memes arguments, plusieurs branches
+% assert sum(appels.values()) == 15           # 15 noeuds dans l'arbre d'appels
+%
+% # Etape 4 : une recursion qui ne reduit pas ne termine pas. On le montre avec
+% # une profondeur bornee plutot qu'en laissant Python lever RecursionError.
+% def sans_reduction(n, profondeur=0):
+%     if profondeur > 60:
+%         return "NON_TERMINE"
+%     if n < 10:
+%         return n
+%     return sans_reduction(n, profondeur + 1)   # n ne change jamais
+% assert sans_reduction(507) == "NON_TERMINE"
+%
+% # Un grand nombre d'appels n'est PAS une non-terminaison : fib termine.
+% assert fib(18) == 2584
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Écrire le cas général avant le cas de base.} C'est l'ordre qui fait oublier le
+    cas de base, et sans lui rien ne s'arrête.
+  \item \textbf{Un appel récursif qui ne réduit rien.} \lstinline{f(n)} qui rappelle
+    \lstinline{f(n)} ne termine jamais, même si le cas de base existe. Nomme toujours la
+    quantité qui décroît.
+  \item \textbf{Confondre « beaucoup d'appels » et « ne termine pas ».}
+    \lstinline{fib(30)} fait plus de deux millions d'appels et termine parfaitement. Le
+    problème est le coût, pas la terminaison, et la réponse n'est pas la même.
+  \item \textbf{Dérouler dans le désordre.} L'arbre d'appels se lit dans l'ordre du code :
+    l'appel écrit à gauche se déclenche en premier, et sa valeur revient en premier.
+\end{itemize}
+
+\textbf{Vérifier :} teste ta fonction sur le cas de base, sur le cas juste au-dessus, et sur
+un cas moyen comparé à une méthode directe. Pour un déroulé, compte les feuilles : elles
+doivent toutes être des cas de base, et aucun nœud interne ne doit avoir la même valeur de
+retour qu'un de ses enfants sans qu'une raison l'explique.
+
+\textbf{S'entraîner :} exercices C4 et C5 du chapitre.
+\end{fichemethode}

@@ -1,0 +1,144 @@
+% META: {"id": "TSPE-PROBA-ME-002", "chapitre": "TSPE-PROBABILITES", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M2}{Modéliser par un arbre pondéré et calculer une probabilité}
+
+\quandUtiliser{%
+  Utiliser cette méthode dès qu'une expérience se déroule en plusieurs étapes :
+  deux tirages successifs, un test médical passé après un dépistage, deux
+  machines qui produisent la même pièce. L'arbre est l'outil qui empêche
+  d'oublier un chemin.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Découper l'expérience en étapes} et nommer les événements de
+      chaque étape. Une étape par niveau de l'arbre, jamais deux.
+    \item \textbf{Décider si les étapes sont indépendantes.} Tirage
+      \textbf{avec} remise : les probabilités sont identiques à chaque étape.
+      Tirage \textbf{sans} remise : elles changent, et le dénominateur diminue.
+      C'est la seule question qui distingue vraiment les deux modèles.
+    \item \textbf{Dessiner l'arbre} et pondérer chaque branche. Les branches
+      issues d'un même nœud portent des probabilités de somme $1$ : c'est le
+      premier contrôle, à faire nœud par nœud.
+    \item \textbf{Multiplier le long d'un chemin} pour obtenir la probabilité
+      de ce chemin.
+    \item \textbf{Additionner les chemins} qui réalisent l'événement demandé.
+      Repérer d'abord tous ces chemins, puis sommer : l'oubli d'un chemin est
+      l'erreur la plus fréquente.
+    \item \textbf{Contrôler} que la somme des probabilités de \textbf{tous} les
+      chemins vaut $1$, et que le résultat trouvé est dans $[0\,;1]$.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Une urne contient $3$ boules rouges et $2$ vertes. On tire deux boules
+  successivement, \textbf{sans remise}. Probabilité d'obtenir deux couleurs
+  différentes ?
+
+  \medskip
+  \commentaireMarge{Étape 1 : deux étapes, donc deux niveaux.}%
+  Niveau 1 : couleur de la première boule. Niveau 2 : couleur de la seconde.
+
+  \commentaireMarge{Étape 2 : sans remise, les probabilités changent.}%
+  $P(R_1)=\dfrac{3}{5}$ et $P(V_1)=\dfrac{2}{5}$. Après une rouge, il reste
+  $2$ rouges et $2$ vertes sur $4$ : $P_{R_1}(V_2)=\dfrac{2}{4}$. Après une
+  verte, il reste $3$ rouges et $1$ verte : $P_{V_1}(R_2)=\dfrac{3}{4}$.
+
+  \commentaireMarge{Étapes 4 et 5 : deux chemins réalisent l'événement.}%
+  \[
+    P = \frac{3}{5}\times\frac{2}{4} + \frac{2}{5}\times\frac{3}{4}
+      = \frac{6}{20}+\frac{6}{20} = \frac{12}{20} = \frac{3}{5}.
+  \]
+
+  \medskip
+  \commentaireMarge{Comparaison : avec remise, le modèle change.}%
+  \textbf{Avec} remise, les mêmes chemins donneraient
+  $\frac{3}{5}\times\frac{2}{5}+\frac{2}{5}\times\frac{3}{5}=\frac{12}{25}$,
+  soit $0{,}48$ au lieu de $0{,}6$. Les deux modèles ne se valent pas.
+}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% from itertools import product
+%
+% # Sans remise : les quatre chemins de l'arbre, avec leurs poids.
+% sans_remise = {
+%     ("R", "R"): Rational(3, 5) * Rational(2, 4),
+%     ("R", "V"): Rational(3, 5) * Rational(2, 4),
+%     ("V", "R"): Rational(2, 5) * Rational(3, 4),
+%     ("V", "V"): Rational(2, 5) * Rational(1, 4),
+% }
+% # Etape 6 : la somme de TOUS les chemins vaut 1.
+% assert sum(sans_remise.values()) == 1
+% # Etape 3 : les branches issues d'un meme noeud somment a 1.
+% assert Rational(3, 5) + Rational(2, 5) == 1
+% assert Rational(2, 4) + Rational(2, 4) == 1
+% assert Rational(3, 4) + Rational(1, 4) == 1
+%
+% # Etape 5 : les deux chemins de couleurs differentes.
+% differentes = sans_remise[("R", "V")] + sans_remise[("V", "R")]
+% assert differentes == Rational(3, 5)
+% assert 0 <= differentes <= 1
+%
+% # Verification par denombrement exhaustif, independamment de l'arbre :
+% # on numerote les boules R1 R2 R3 V1 V2 et on enumere les tirages ordonnes.
+% boules = ["R", "R", "R", "V", "V"]
+% tirages = [(i, j) for i in range(5) for j in range(5) if i != j]
+% assert len(tirages) == 20
+% favorables = [t for t in tirages if boules[t[0]] != boules[t[1]]]
+% assert Rational(len(favorables), len(tirages)) == Rational(3, 5)
+%
+% # Avec remise : autre modele, autre resultat.
+% avec_remise = {
+%     (a, b): (Rational(3, 5) if a == "R" else Rational(2, 5))
+%             * (Rational(3, 5) if b == "R" else Rational(2, 5))
+%     for a, b in product("RV", repeat=2)
+% }
+% assert sum(avec_remise.values()) == 1
+% diff_remise = avec_remise[("R", "V")] + avec_remise[("V", "R")]
+% assert diff_remise == Rational(12, 25)
+% assert diff_remise != differentes
+% assert float(diff_remise) == 0.48 and float(differentes) == 0.6
+%
+% # Meme verification exhaustive pour le tirage avec remise.
+% tirages_r = [(i, j) for i in range(5) for j in range(5)]
+% assert len(tirages_r) == 25
+% fav_r = [t for t in tirages_r if boules[t[0]] != boules[t[1]]]
+% assert Rational(len(fav_r), len(tirages_r)) == Rational(12, 25)
+%
+% # Piege : n'additionner qu'UN chemin donne la moitie du resultat.
+% assert sans_remise[("R", "V")] == Rational(3, 10)
+% assert sans_remise[("R", "V")] != differentes
+%
+% # Piege : garder les probabilites du premier niveau au second, sans remise,
+% # revient a traiter le tirage comme s'il etait avec remise.
+% assert Rational(3, 5) * Rational(2, 5) != Rational(3, 5) * Rational(2, 4)
+% END-VERIFY
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Oublier un chemin. « Deux couleurs différentes » se
+      réalise par \emph{rouge puis verte} \textbf{et} par \emph{verte puis
+      rouge} : n'en compter qu'un donne $0{,}3$ au lieu de $0{,}6$, soit
+      exactement la moitié.
+    \item \textbf{Piège 2.} Garder les probabilités du premier niveau au
+      second dans un tirage sans remise. Le dénominateur passe de $5$ à $4$ :
+      l'oublier revient à modéliser un tirage avec remise.
+    \item \textbf{Piège 3.} Additionner le long d'un chemin et multiplier entre
+      chemins. C'est l'inverse : on multiplie \emph{le long}, on additionne
+      \emph{entre}.
+    \item \textbf{Piège 4.} Mélanger deux étapes sur un même niveau. Chaque
+      niveau correspond à une seule étape de l'expérience.
+  \end{itemize}
+}
+
+\verifier{%
+  Additionne les probabilités de \textbf{tous} les chemins de l'arbre : le total
+  doit valoir exactement $1$. Si ce n'est pas le cas, une branche est mal
+  pondérée ou un chemin manque. Et vérifie que ta réponse tombe dans
+  $[0\,;1]$ : une probabilité supérieure à $1$ signale presque toujours une
+  addition là où il fallait multiplier.
+}
+
+\sEntrainer{\refExos{M2}}
+
+\end{fichemethode}

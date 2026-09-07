@@ -1,0 +1,112 @@
+% META: {"id": "TNSI-STRUCT-M2", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "methode", "capacites": ["T-STRUCT-05A"], "capacites_codes": ["C11"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M2}{Modéliser une situation par un graphe}
+\textbf{Quand l'utiliser ?} Quand l'énoncé décrit un réseau, des relations, des dépendances ou
+des déplacements, et demande de « modéliser la situation par un graphe ». La difficulté n'est
+pas de dessiner : elle est de décider ce que sont les sommets, et surtout de s'y tenir.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Choisis les sommets} : ce sont les \textbf{objets} entre lesquels une relation
+    existe. Écris la phrase « un sommet est un\ldots ». Si tu n'arrives pas à finir la phrase
+    avec un nom unique, ton choix est mauvais.
+  \item \textbf{Choisis les arêtes} : ce sont les \textbf{relations}. Écris la phrase « il y a
+    une arête entre $u$ et $v$ lorsque\ldots ». Cette phrase doit être vérifiable sur
+    l'énoncé, sans interprétation.
+  \item \textbf{Décide de l'orientation.} La relation est-elle symétrique ? « être ami avec »
+    l'est, « suivre sur un réseau social » ne l'est pas, « précéder dans un enchaînement de
+    tâches » non plus. Un graphe orienté à tort double le nombre d'arêtes ; un graphe non
+    orienté à tort efface l'information du sens.
+  \item \textbf{Décide de la pondération.} Si l'énoncé donne des durées, des distances ou des
+    coûts, ils vont \textbf{sur les arêtes}. S'il n'en donne pas, ne pondère pas.
+  \item \textbf{Écris la représentation} : dictionnaire de listes de successeurs, ou matrice
+    d'adjacence. Pour un graphe non orienté, chaque arête doit apparaître \textbf{deux fois},
+    une dans chaque sens.
+  \item \textbf{Relis la question posée.} Elle se traduit presque toujours en un terme du
+    cours : « peut-on aller de $A$ à $B$ » est une recherche de chemin, « peut-on tout
+    visiter » est une question de connexité, « y a-t-il une boucle de dépendances » est une
+    détection de cycle.
+\end{enumerate}
+
+\textbf{Exemple :} « Quatre stations de métro. La ligne 1 relie $A$ et $B$, et $B$ et $C$. La
+ligne 2 relie $C$ et $D$. Peut-on aller de $A$ à $D$ ? »
+
+\emph{Sommets} : un sommet est une \textbf{station}. Quatre sommets : $A$, $B$, $C$, $D$.
+
+\emph{Arêtes} : il y a une arête entre deux stations lorsqu'une ligne les relie
+directement.
+
+\emph{Orientation} : le métro se parcourt dans les deux sens, la relation est symétrique :
+graphe \textbf{non orienté}.
+
+\emph{Pondération} : l'énoncé ne donne aucune durée : aucune pondération.
+
+\emph{Représentation} : $\{A: [B],\ B: [A, C],\ C: [B, D],\ D: [C]\}$ — chaque arête figure
+bien deux fois.
+
+\emph{Traduction de la question} : « peut-on aller de $A$ à $D$ » est une recherche de chemin.
+Un parcours depuis $A$ atteint $D$ : oui.
+
+% BEGIN-VERIFY
+% metro = {"A": ["B"], "B": ["A", "C"], "C": ["B", "D"], "D": ["C"]}
+%
+% # Etape 5 : dans un graphe non oriente, toute arete figure dans les deux sens.
+% for sommet, voisins in metro.items():
+%     for voisin in voisins:
+%         assert sommet in metro[voisin], (sommet, voisin)
+%
+% # Le nombre d'aretes est bien la moitie du nombre de couples stockes.
+% assert sum(len(v) for v in metro.values()) == 6
+% aretes = {frozenset((s, v)) for s, voisins in metro.items() for v in voisins}
+% assert len(aretes) == 3
+%
+% def accessibles(graphe, depart):
+%     vus, file = [depart], [depart]
+%     while file:
+%         sommet = file.pop(0)
+%         for voisin in graphe[sommet]:
+%             if voisin not in vus:
+%                 vus.append(voisin)
+%                 file.append(voisin)
+%     return vus
+%
+% # Etape 6 : la question se traduit en accessibilite, et la reponse est oui.
+% assert "D" in accessibles(metro, "A")
+% assert set(accessibles(metro, "A")) == set(metro)   # le graphe est connexe
+%
+% # Etape 3, controle : orienter a tort une relation symetrique casse le modele.
+% metro_mal_oriente = {"A": ["B"], "B": ["C"], "C": ["D"], "D": []}
+% assert "A" not in accessibles(metro_mal_oriente, "D")
+% assert "D" in accessibles(metro, "A") and "A" in accessibles(metro, "D")
+%
+% # Etape 3, l'autre sens : une relation ASYMETRIQUE mal rendue symetrique
+% # invente des trajets. « suivre » sur un reseau social :
+% suit = {"Ada": ["Alan"], "Alan": [], "Grace": ["Ada"]}
+% suit_symetrise = {"Ada": ["Alan", "Grace"], "Alan": ["Ada"], "Grace": ["Ada"]}
+% assert "Grace" not in accessibles(suit, "Alan")
+% assert "Grace" in accessibles(suit_symetrise, "Alan")   # trajet invente
+%
+% # Etape 1, controle : prendre les LIGNES comme sommets ne repond pas a la
+% # question posee, qui porte sur des stations.
+% lignes = {"L1": ["L2"], "L2": ["L1"]}
+% assert "A" not in lignes and "D" not in lignes
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Prendre pour sommets ce que la question ne demande pas.} Ici, modéliser les
+    \emph{lignes} comme sommets donne un graphe correct mais qui ne peut pas répondre à une
+    question portant sur des stations.
+  \item \textbf{Orienter une relation symétrique.} Le modèle devient asymétrique : on peut
+    aller de $A$ à $D$ mais plus de $D$ à $A$, ce qu'aucun métro ne fait.
+  \item \textbf{Symétriser une relation qui ne l'est pas.} « Alan suit Ada » ne veut pas dire
+    « Ada suit Alan » : symétriser invente des trajets qui n'existent pas.
+  \item \textbf{N'écrire l'arête que dans un sens} dans un dictionnaire censé être non
+    orienté. Le parcours devient faux, et rien ne le signale.
+\end{itemize}
+
+\textbf{Vérifier :} pour un graphe non orienté, contrôle que chaque voisin te renvoie
+l'ascenseur — si $v$ figure chez $u$, $u$ doit figurer chez $v$. Puis relis les deux phrases
+de l'étape 1 et 2 à côté de l'énoncé : elles doivent se vérifier ligne à ligne.
+
+\textbf{S'entraîner :} exercices C11 du chapitre.
+\end{fichemethode}

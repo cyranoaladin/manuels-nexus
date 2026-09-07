@@ -1,0 +1,153 @@
+% META: {"id": "TNSI-STRUCT-M1", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "methode", "capacites": ["T-STRUCT-01A"], "capacites_codes": ["C1"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M1}{Spécifier une structure de données par son interface}
+\textbf{Quand l'utiliser ?} Quand l'énoncé décrit un besoin en français — « on veut gérer une
+file d'attente de patients », « on veut un annuaire consultable » — et demande de
+\textbf{spécifier} la structure avant de l'implémenter. Spécifier, c'est dire ce que la
+structure fait, jamais comment elle le fait.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Liste les opérations} que le texte demande, une par verbe : ajouter,
+    retirer, consulter, compter, tester la vacuité. Si un verbe n'apparaît pas dans l'énoncé,
+    ne l'invente pas : une interface minimale se défend mieux qu'une interface bavarde.
+  \item \textbf{Donne à chacune sa signature} : son nom, ses paramètres, et ce qu'elle
+    renvoie. Distingue nettement celles qui \textbf{renvoient} une valeur de celles qui
+    \textbf{modifient} la structure.
+  \item \textbf{Écris ce que chaque opération exige} — sa précondition. Dépiler exige une pile
+    non vide ; consulter le premier exige au moins un élément.
+  \item \textbf{Écris ce que chaque opération garantit} — sa postcondition, en reliant l'état
+    d'après à l'état d'avant. Après \lstinline{empiler(v)}, la structure contient un élément de
+    plus et son sommet vaut \lstinline{v}.
+  \item \textbf{Décide des cas limites} explicitement : structure vide, un seul élément,
+    élément absent. Une spécification qui ne dit rien du cas vide est incomplète.
+  \item \textbf{Relis en interdisant tout mot d'implémentation.} Si ta spécification parle de
+    liste, d'indice, de maillon ou de \lstinline{append}, elle a déjà choisi
+    l'implémentation : réécris-la.
+\end{enumerate}
+
+\textbf{Exemple :} « on veut gérer une file d'attente de patients : on inscrit un patient, on
+appelle le suivant, et on veut savoir s'il reste quelqu'un ».
+
+\emph{Opérations} : \lstinline{inscrire(patient)}, \lstinline{appeler()},
+\lstinline{est_vide()}.
+
+\emph{Signatures} : \lstinline{inscrire} prend un patient et ne renvoie rien ;
+\lstinline{appeler} ne prend rien et renvoie un patient ; \lstinline{est_vide} ne prend rien
+et renvoie un booléen.
+
+\emph{Préconditions} : \lstinline{appeler} exige une file non vide. Les deux autres n'exigent
+rien.
+
+\emph{Postconditions} : après \lstinline{inscrire(p)}, la file contient un patient de plus et
+\lstinline{est_vide()} est faux. \lstinline{appeler} renvoie le patient inscrit \textbf{le
+plus anciennement} et le retire.
+
+C'est cette dernière phrase — le plus anciennement — qui fait de la structure une file et non
+une pile. Elle appartient à la spécification, pas à l'implémentation.
+
+% BEGIN-VERIFY
+% # La specification est testable : on l'ecrit comme un jeu de tests, puis on
+% # verifie que DEUX implementations differentes la satisfont toutes les deux.
+% def contrat(fabrique):
+%     f = fabrique()
+%     assert f.est_vide() is True
+%     f.inscrire("Ada")
+%     assert f.est_vide() is False
+%     f.inscrire("Alan")
+%     f.inscrire("Grace")
+%     # Postcondition : on appelle le plus ancien inscrit.
+%     assert f.appeler() == "Ada"
+%     assert f.appeler() == "Alan"
+%     assert f.appeler() == "Grace"
+%     assert f.est_vide() is True
+%     # Precondition : appeler sur une file vide n'est pas defini.
+%     try:
+%         f.appeler()
+%     except Exception:
+%         pass
+%     else:
+%         raise AssertionError("la precondition de appeler n'est pas tenue")
+%     return True
+%
+% class FileListe:
+%     def __init__(self):
+%         self._donnees = []
+%     def inscrire(self, patient):
+%         self._donnees.append(patient)
+%     def appeler(self):
+%         return self._donnees.pop(0)
+%     def est_vide(self):
+%         return len(self._donnees) == 0
+%
+% class Maillon:
+%     def __init__(self, valeur, suivant=None):
+%         self.valeur = valeur
+%         self.suivant = suivant
+%
+% class FileChainee:
+%     def __init__(self):
+%         self._tete = None
+%         self._queue = None
+%     def inscrire(self, patient):
+%         maillon = Maillon(patient)
+%         if self._queue is None:
+%             self._tete = self._queue = maillon
+%         else:
+%             self._queue.suivant = maillon
+%             self._queue = maillon
+%     def appeler(self):
+%         if self._tete is None:
+%             raise IndexError("file vide")
+%         valeur = self._tete.valeur
+%         self._tete = self._tete.suivant
+%         if self._tete is None:
+%             self._queue = None
+%         return valeur
+%     def est_vide(self):
+%         return self._tete is None
+%
+% # Le meme contrat vaut pour les deux : c'est la preuve qu'il ne parle que de
+% # l'interface, jamais de l'implementation.
+% assert contrat(FileListe)
+% assert contrat(FileChainee)
+%
+% # Etape 6, controle negatif : une PILE ne satisfait pas ce contrat, parce que
+% # la postcondition « le plus anciennement inscrit » la refuse.
+% class Pile:
+%     def __init__(self):
+%         self._donnees = []
+%     def inscrire(self, patient):
+%         self._donnees.append(patient)
+%     def appeler(self):
+%         return self._donnees.pop()
+%     def est_vide(self):
+%         return len(self._donnees) == 0
+%
+% try:
+%     contrat(Pile)
+% except AssertionError:
+%     pass
+% else:
+%     raise AssertionError("le contrat ne distingue pas une file d'une pile")
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Décrire l'implémentation en croyant spécifier.} « On stocke dans une liste et
+    on retire avec \lstinline{pop(0)} » n'est pas une interface : c'est déjà un choix, et il
+    ferme la porte à toute autre implémentation.
+  \item \textbf{Oublier la précondition du cas vide.} C'est le seul cas où la structure ne
+    peut pas répondre, et c'est celui que l'énoncé teste.
+  \item \textbf{Confondre renvoyer et modifier.} Une opération qui consulte sans retirer et
+    une opération qui retire sont deux opérations différentes, avec deux postconditions.
+  \item \textbf{Une spécification qui ne distingue pas file et pile.} Si ton contrat est
+    satisfait aussi bien par une pile que par une file, c'est qu'il ne dit pas dans quel
+    ordre les éléments sortent — la phrase la plus importante manque.
+\end{itemize}
+
+\textbf{Vérifier :} écris ton contrat sous forme de jeu de tests, puis fais-le passer par
+\textbf{deux} implémentations aux données internes différentes. S'il passe les deux, il ne
+parle bien que de l'interface. S'il échoue sur l'une, c'est qu'il a déjà choisi.
+
+\textbf{S'entraîner :} exercices C1 du chapitre.
+\end{fichemethode}

@@ -1,0 +1,119 @@
+% META: {"id": "TNSI-ARCH-M1", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "methode", "capacites": ["T-ARCH-02B"], "capacites_codes": ["C3"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M1}{Dérouler un ordonnancement de processus}
+\textbf{Quand l'utiliser ?} Quand l'énoncé donne des processus avec leurs durées, une politique
+d'ordonnancement et parfois un quantum, puis demande le chronogramme, l'ordre d'exécution, ou
+un temps d'attente. Le code du cours ne se déroule pas dans la tête : il faut un tableau.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Relève les données} : chaque processus avec sa durée totale, sa date d'arrivée
+    si l'énoncé en donne une, et le quantum s'il y en a un. Une date d'arrivée non précisée
+    vaut $0$.
+  \item \textbf{Trace un tableau} à quatre colonnes : instant, processus élu, durée
+    consommée, temps restant de chacun. Une ligne par tranche, jamais par processus.
+  \item \textbf{Applique la politique pour élire.} Tourniquet : le premier de la file, et le
+    processus qui vient de s'exécuter repart \textbf{à la fin} s'il lui reste du travail.
+    Plus court d'abord : celui dont le temps restant est le plus petit parmi les arrivés.
+  \item \textbf{Consomme le minimum entre le quantum et le temps restant.} Un processus à qui
+    il reste $1$ ms avec un quantum de $3$ ms ne consomme que $1$ ms : il libère le
+    processeur en avance.
+  \item \textbf{Remets à jour la file} avant la ligne suivante — les arrivées d'abord, le
+    processus préempté ensuite. Cet ordre change le résultat.
+  \item \textbf{Recommence} jusqu'à ce que tous les temps restants soient nuls, puis réponds à
+    la question posée : ordre d'exécution, instant de fin de chacun, ou temps d'attente.
+\end{enumerate}
+
+\textbf{Exemple :} trois processus arrivés en même temps, tourniquet de quantum $2$.
+$P_1$ dure $5$, $P_2$ dure $3$, $P_3$ dure $1$.
+
+File $[P_1, P_2, P_3]$. $P_1$ prend $2$ (reste $3$) et repart derrière : $[P_2, P_3, P_1]$.
+$P_2$ prend $2$ (reste $1$) : $[P_3, P_1, P_2]$. $P_3$ prend $1$ et \textbf{termine} — il ne
+consomme pas les deux : $[P_1, P_2]$. $P_1$ prend $2$ (reste $1$) : $[P_2, P_1]$. $P_2$ prend
+son dernier $1$ et termine. $P_1$ prend son dernier $1$ et termine.
+
+Chronogramme : $P_1(2), P_2(2), P_3(1), P_1(2), P_2(1), P_1(1)$. Total $9$, ce qui est bien
+$5+3+1$ : aucun temps n'est créé ni perdu.
+
+$P_3$, le plus court, termine à l'instant $5$ ; $P_1$, le plus long, à l'instant $9$.
+
+% BEGIN-VERIFY
+% def tourniquet(durees, quantum):
+%     restant = dict(durees)
+%     file = list(durees)
+%     chronogramme = []
+%     fins = {}
+%     instant = 0
+%     while file:
+%         p = file.pop(0)
+%         tranche = min(quantum, restant[p])
+%         chronogramme.append((p, tranche))
+%         instant += tranche
+%         restant[p] -= tranche
+%         if restant[p] > 0:
+%             file.append(p)
+%         else:
+%             fins[p] = instant
+%     return chronogramme, fins
+%
+% durees = {"P1": 5, "P2": 3, "P3": 1}
+% chrono, fins = tourniquet(durees, 2)
+%
+% # Le chronogramme annonce par la fiche.
+% assert chrono == [("P1", 2), ("P2", 2), ("P3", 1), ("P1", 2), ("P2", 1), ("P1", 1)]
+% # Etape 6 : aucun temps cree ni perdu.
+% assert sum(t for _, t in chrono) == sum(durees.values()) == 9
+% # Chaque processus recoit exactement sa duree.
+% for p, d in durees.items():
+%     assert sum(t for q, t in chrono if q == p) == d
+%
+% # Les instants de fin annonces.
+% assert fins == {"P3": 5, "P2": 8, "P1": 9}
+%
+% # Etape 4 : un processus a qui il reste moins que le quantum libere en avance.
+% assert ("P3", 1) in chrono and ("P3", 2) not in chrono
+%
+% # Etape 3, controle : ne PAS remettre le processus a la fin transforme le
+% # tourniquet en « premier arrive premier servi ».
+% def sans_rotation(durees, quantum):
+%     chrono = []
+%     for p, d in durees.items():
+%         chrono.append((p, d))
+%     return chrono
+% assert sans_rotation(durees, 2) == [("P1", 5), ("P2", 3), ("P3", 1)]
+% assert sans_rotation(durees, 2) != chrono
+% # Et le plus court finit alors beaucoup plus tard : 9 au lieu de 5.
+% assert 5 + 3 + 1 == 9
+%
+% # Un quantum au moins egal a la plus longue duree annule la rotation.
+% chrono_grand, fins_grand = tourniquet(durees, 5)
+% assert chrono_grand == [("P1", 5), ("P2", 3), ("P3", 1)]
+% assert fins_grand["P3"] == 9      # le plus court attend tout le monde
+%
+% # Un quantum de 1 donne le tour de role le plus fin.
+% chrono_1, _ = tourniquet(durees, 1)
+% assert chrono_1[:3] == [("P1", 1), ("P2", 1), ("P3", 1)]
+% assert sum(t for _, t in chrono_1) == 9
+% END-VERIFY
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item \textbf{Faire consommer le quantum entier à un processus presque fini.} $P_3$ ne
+    consomme que $1$ ms, pas $2$ : le total du chronogramme doit valoir exactement la somme
+    des durées, ni plus ni moins.
+  \item \textbf{Oublier de remettre le processus préempté à la fin de la file.} Le tourniquet
+    devient un « premier arrivé premier servi », et le processus le plus court attend la fin
+    de tous les autres.
+  \item \textbf{Placer le processus préempté avant les nouvelles arrivées.} Quand l'énoncé
+    donne des dates d'arrivée, l'ordre d'insertion change le chronogramme : les arrivants
+    d'abord.
+  \item \textbf{Croire qu'un grand quantum est toujours meilleur.} Avec un quantum supérieur à
+    la plus longue durée, il n'y a plus de rotation du tout, et les processus courts attendent
+    le maximum.
+\end{itemize}
+
+\textbf{Vérifier :} additionne les tranches de ton chronogramme — le total doit être
+exactement la somme des durées. Puis vérifie que chaque processus a reçu sa durée complète,
+ni plus ni moins. Ces deux contrôles attrapent presque toutes les erreurs de recopie.
+
+\textbf{S'entraîner :} exercices C3 du chapitre.
+\end{fichemethode}

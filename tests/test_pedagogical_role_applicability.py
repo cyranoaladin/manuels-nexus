@@ -129,17 +129,67 @@ def test_the_method_verdicts_are_read_not_recomputed(payload) -> None:
 
 
 def test_the_remaining_gaps_are_concentrated_and_nameable(payload) -> None:
-    """Ce qui reste doit être petit, localisé, et attribuable."""
+    """Ce qui reste doit être petit, localisé, et attribuable.
+
+    Une version antérieure exigeait qu'il RESTE des lacunes, pour attraper un
+    triage qui exempterait tout. Elles sont maintenant toutes fermées — par
+    jugement éditorial pour la plupart, par écriture pour les autres — et cette
+    exigence n'a plus de sens. La pression qu'elle exerçait est reprise par les
+    deux tests suivants, qui vérifient que chaque exemption s'appuie sur une
+    preuve nommée.
+    """
     gaps = [
         u for u in payload["units"]
         if u["APPLICABILITY_VERDICT"] == "REAL_PEDAGOGICAL_GAP"
     ]
-    assert gaps, "un triage qui ne laisse rien n'aurait rien jugé"
     roles = collections.Counter(u["ROLE"] for u in gaps)
     assert set(roles) <= {"methodes", "cours", "exercices", "evaluations",
                           "remediation"}, dict(roles)
     chapitres = {u["CHAPTER"] for u in gaps}
     assert len(chapitres) <= 20, sorted(chapitres)
+
+
+def test_no_verdict_exempts_without_naming_its_ground(payload) -> None:
+    """Une exemption sans preuve nommée est une exemption fabriquée."""
+    for unit in payload["units"]:
+        verdict = unit["APPLICABILITY_VERDICT"]
+        if verdict == "REAL_PEDAGOGICAL_GAP":
+            continue
+        assert unit["RATIONALE"], unit
+        assert unit["REQUIREMENT_SOURCE"], unit
+        if verdict == "SATISFIED_BY_EXISTING_CONTENT":
+            assert unit["CURRENT_OBJECTS"] or unit["TRANSVERSAL_OBJECTS"], unit
+        if verdict == "SATISFIED_TRANSVERSALLY":
+            assert unit["TRANSVERSAL_OBJECTS"], unit
+
+
+def test_every_method_exemption_rests_on_a_deposited_editorial_verdict(
+    payload,
+) -> None:
+    """Aucune fiche méthode n'est excusée sans verdict écrit.
+
+    C'est ici que se joue le risque d'exemption facile : déclarer une capacité
+    « non applicable » pour n'avoir pas à écrire la fiche. Chaque exemption doit
+    renvoyer à un verdict déposé, et chaque couverture doit nommer un fichier
+    qui existe.
+    """
+    from method_sheet_decisions import (
+        CAPACITY_VERDICTS, DECLARATIVE, PROCEDURAL_COVERED,
+    )
+
+    exemptees = [
+        u for u in payload["units"]
+        if u["ROLE"] == "methodes"
+        and u["REQUIREMENT_SOURCE"] == "audit/METHOD_SHEET_REQUIREMENT_AUDIT.json"
+    ]
+    assert exemptees, "le triage doit lire les verdicts déposés"
+    for unit in exemptees:
+        verdict, _, couvrant = CAPACITY_VERDICTS[unit["CHAPTER"]][unit["CAPACITY"]]
+        if unit["APPLICABILITY_VERDICT"] == "ROLE_NOT_APPLICABLE":
+            assert verdict == DECLARATIVE, unit
+        else:
+            assert verdict == PROCEDURAL_COVERED, unit
+            assert couvrant and (ROOT / couvrant).exists(), unit
 
 
 def test_a_capacity_taught_nowhere_is_not_covered_transversally(payload) -> None:
