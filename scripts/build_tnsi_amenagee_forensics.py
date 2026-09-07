@@ -57,6 +57,27 @@ def _variant_state(manual: str, chapters: set[str]) -> dict[str, Any]:
     }
 
 
+def _readiness_agrees(inventory: dict[str, Any], tnsi: dict[str, Any] | None) -> bool:
+    """La maturite compte-t-elle les memes objets que ce forensique ?
+
+    C'est la seule question qui reste ouverte. La reponse se recalcule contre
+    le producteur de maturite lui-meme ; elle n'est pas recopiee d'un rapport.
+    """
+    import importlib.util  # noqa: PLC0415
+
+    spec = importlib.util.spec_from_file_location(
+        "readiness_for_amenagee_forensics",
+        ROOT / "scripts/build_release_deliverable_readiness.py",
+    )
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    coverage = module.content_coverage(
+        inventory, "nsi:manual:TNSI:amenagee", "TNSI"
+    )
+    return coverage["objects"] == (tnsi["source_objects"] if tnsi else 0)
+
+
 def build() -> dict[str, Any]:
     inventory = json.loads(INVENTORY.read_text(encoding="utf-8"))
     states = [
@@ -69,11 +90,23 @@ def build() -> dict[str, Any]:
         "TNSI_AMENAGEE_SOURCE_OBJECTS": tnsi["source_objects"] if tnsi else 0,
         "TNSI_AMENAGEE_ACTUAL_CONTENT_COVERAGE": tnsi["coverage_ratio"] if tnsi else "0/0",
         "TNSI_AMENAGEE_CLASSIFICATION": tnsi["classification"] if tnsi else EMPTY_VARIANT,
-        "READINESS_METRIC_WAS_WRONG": True,
-        "WHY": (
-            "La maturité lisait included_files, qui compte les contrat.yaml des "
-            "ouvertures de chapitre : une variante vide y déclarait sept fichiers."
+        # Le defaut historique — la maturite lisait `included_files`, qui
+        # compte les `contrat.yaml` des ouvertures de chapitre, si bien qu'une
+        # variante vide en declarait sept — est corrige. L'affirmer encore au
+        # present serait presenter une metrique perimee comme courante. On le
+        # recalcule donc, au lieu de le repeter.
+        "READINESS_METRIC_AGREES_WITH_OBJECTS": (
+            _readiness_agrees(inventory, tnsi)
         ),
+        "HISTORICAL_DEFECT": {
+            "what": (
+                "La maturite lisait `included_files`, qui compte les "
+                "`contrat.yaml` des ouvertures de chapitre : une variante sans "
+                "le moindre objet en declarait sept."
+            ),
+            "corrected_by": "scripts/build_release_deliverable_readiness.py",
+            "still_present": not _readiness_agrees(inventory, tnsi),
+        },
     }
     return {
         "artifact_type": "amenagee_variant_forensics",
@@ -92,8 +125,16 @@ def render_md(payload: dict[str, Any]) -> str:
         f"- `TNSI_AMENAGEE_SOURCE_OBJECTS` : `{s['TNSI_AMENAGEE_SOURCE_OBJECTS']}`",
         f"- `TNSI_AMENAGEE_ACTUAL_CONTENT_COVERAGE` : `{s['TNSI_AMENAGEE_ACTUAL_CONTENT_COVERAGE']}`",
         f"- Classification : `{s['TNSI_AMENAGEE_CLASSIFICATION']}`",
+        f"- `READINESS_METRIC_AGREES_WITH_OBJECTS` : "
+        f"`{s['READINESS_METRIC_AGREES_WITH_OBJECTS']}`",
         "",
-        s["WHY"],
+        "## Défaut historique",
+        "",
+        s["HISTORICAL_DEFECT"]["what"],
+        "",
+        f"Corrigé par `{s['HISTORICAL_DEFECT']['corrected_by']}`. "
+        f"Encore présent : `{s['HISTORICAL_DEFECT']['still_present']}` — "
+        "recalculé contre le producteur de maturité, pas recopié.",
         "",
         "| Manuel | Objets | Chapitres couverts | Classification |",
         "|---|---|---|---|",

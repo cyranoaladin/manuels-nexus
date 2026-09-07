@@ -209,10 +209,34 @@ def test_the_amenagee_forensics_agree_with_the_readiness_metric() -> None:
     coverage = readiness.content_coverage(inventory, "nsi:manual:TNSI:amenagee", "TNSI")
 
     assert payload["summary"]["TNSI_AMENAGEE_SOURCE_OBJECTS"] == coverage["objects"]
+    assert payload["summary"]["READINESS_METRIC_AGREES_WITH_OBJECTS"] is True
     if coverage["objects"] == 0:
         assert payload["summary"]["TNSI_AMENAGEE_CLASSIFICATION"] == "EMPTY_VARIANT"
     else:
         assert payload["summary"]["TNSI_AMENAGEE_CLASSIFICATION"] != "EMPTY_VARIANT"
+
+
+def test_a_corrected_defect_is_not_asserted_in_the_present_tense() -> None:
+    """Un défaut réparé ne doit pas rester affirmé comme courant.
+
+    Le forensique inscrivait `READINESS_METRIC_WAS_WRONG: true` en dur. C'était
+    vrai le jour où il a été écrit ; il l'a répété longtemps après la
+    correction. Une métrique périmée présentée comme courante est exactement ce
+    qu'on cherche à ne plus produire.
+    """
+    import build_tnsi_amenagee_forensics as forensics
+
+    source = (ROOT / "scripts/build_tnsi_amenagee_forensics.py").read_text(
+        encoding="utf-8"
+    )
+    assert '"READINESS_METRIC_WAS_WRONG": True' not in source
+
+    payload = forensics.build()
+    historical = payload["summary"]["HISTORICAL_DEFECT"]
+    assert historical["still_present"] is not None
+    assert historical["still_present"] == (
+        not payload["summary"]["READINESS_METRIC_AGREES_WITH_OBJECTS"]
+    )
 
 
 # --- Garde de vérité : le contenu se compte en objets déclarés ---------------
