@@ -12,9 +12,9 @@ croisees avec les capacites du contrat :
 
 `DIRECT_APPLICATION_COVERAGE`  une capacite dispose d'un exercice de parcours 1
                                ou d'un exercice de competence « calculer » ;
-`VARIATION_COVERAGE`           elle dispose d'au moins deux exercices dont les
-                               contextes different -- mesure par la diversite
-                               des competences declarees ;
+`VARIATION_COVERAGE`           elle dispose d'au moins une SITUATION DE
+                               TRANSFERT au sens de la taxonomie des fonctions
+                               pedagogiques -- pas d'un simple second exercice ;
 `REASONING_COVERAGE`           elle dispose d'un exercice « raisonner » ;
 `SYNTHESIS_COVERAGE`           le chapitre propose au moins un exercice de
                                parcours 3, ou une evaluation qui croise
@@ -22,6 +22,21 @@ croisees avec les capacites du contrat :
 
 Un chapitre dont une capacite substantielle n'a que de l'application directe
 n'est pas ADEQUATE : il entraine a reproduire, pas a transferer.
+
+LA DIVERSITE SE LIT DANS LES ENONCES, PAS DANS LES COMPTEURS. Chaque capacite
+recoit une analyse individuelle (`per_capacity`) qui nomme les fonctions
+pedagogiques reellement presentes et conclut `DIVERSITY_SUFFICIENT` ou
+`REAL_DIVERSITY_GAP`. Aucune regle du type « une capacite -> deux nouveaux
+exercices » n'existe ici : une capacite deja pourvue d'une application et
+d'une situation de transfert est suffisante, quel que soit son effectif, et
+une capacite pourvue de dix applications directes ne l'est pas.
+
+UN CHAPITRE EVALUE PAR PROJET N'EST PAS UN CHAPITRE SANS QUALITE. Lorsque le
+contrat porte `assessment_mode: PROJECT_ASSESSMENT`, les axes qui presupposent
+une banque d'exercices sont declares `NOT_APPLICABLE_PROJECT_ASSESSMENT` et
+remplaces par les axes que ce mode exige reellement : un cahier des charges,
+une grille criteriee, une version amenagee, un controle des connaissances.
+L'exemption change ce qu'on mesure ; elle n'abaisse pas l'exigence.
 """
 
 from __future__ import annotations
@@ -29,10 +44,21 @@ from __future__ import annotations
 import argparse
 import collections
 import json
+import sys
 from pathlib import Path
 from typing import Any
 
 import yaml
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from exercise_function_taxonomy import (  # noqa: E402
+    DIRECT,
+    REASONING as F_REASONING,
+    SYNTHESIS as F_SYNTHESIS,
+    TRANSFER_FUNCTIONS,
+    diversity_verdict,
+    functions_of,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 CORPORA = ("Mathematiques/manuel-maths/chapitres", "NSI/chapitres")
@@ -42,6 +68,7 @@ GENERATED_BY = "scripts/build_chapter_pedagogical_verdict.py"
 
 STRONG, ADEQUATE, WEAK, UNUSABLE = "STRONG", "ADEQUATE", "WEAK", "UNUSABLE"
 VERDICTS = (STRONG, ADEQUATE, WEAK, UNUSABLE)
+NOT_APPLICABLE = "NOT_APPLICABLE_PROJECT_ASSESSMENT"
 
 
 def _meta(path: Path) -> dict[str, Any]:
@@ -55,11 +82,83 @@ def _meta(path: Path) -> dict[str, Any]:
 
 
 def _objects(directory: Path) -> list[dict[str, Any]]:
+    """Le META ET le corps : la diversite se lit dans ce que l'enonce demande."""
+
     if not directory.is_dir():
         return []
-    return [
-        dict(_meta(p), _path=str(p.relative_to(ROOT))) for p in sorted(p for p in directory.glob("*.tex"))
-    ]
+    objets = []
+    for chemin in sorted(directory.glob("*.tex")):
+        texte = chemin.read_text(encoding="utf-8", errors="replace")
+        corps = texte.split("\n", 1)[1] if texte.startswith("% META:") else texte
+        objets.append(
+            dict(
+                _meta(chemin),
+                _path=str(chemin.relative_to(ROOT)),
+                _body=corps,
+            )
+        )
+    return objets
+
+
+def _analyse_capacite(code: str, objets: list[dict[str, Any]]) -> dict[str, Any]:
+    """Ce dont cette capacite dispose reellement pour entrainer au transfert.
+
+    La sortie nomme les fonctions presentes et le manque. Elle ne prescrit
+    aucun effectif : le mandat refuse explicitement toute regle implicite
+    « une capacite -> deux nouveaux exercices ».
+    """
+
+    fonctions = [functions_of(o.get("_body") or "", o) for o in objets]
+    verdict = diversity_verdict(fonctions)
+    natures = collections.Counter(f for liste in fonctions for f in liste)
+    parcours = sorted({o.get("parcours") for o in objets if o.get("parcours")})
+    variation = sum(1 for liste in fonctions if set(liste) & TRANSFER_FUNCTIONS)
+    raisonnement = sum(1 for liste in fonctions if F_REASONING in liste)
+    synthese = sum(1 for liste in fonctions if F_SYNTHESIS in liste)
+
+    if not objets:
+        raison = "aucun exercice ne porte cette capacite : rien n'entraine a rien"
+    elif verdict["verdict"] == "DIVERSITY_SUFFICIENT":
+        raison = (
+            "l'eleve dispose d'une application directe et de "
+            + ", ".join(verdict["transfer_functions"]).lower()
+            + " : le transfert est travaille, ajouter des exercices n'ajouterait"
+            " pas de diversite"
+        )
+    elif DIRECT not in natures:
+        raison = (
+            "aucun exercice n'installe le geste de base ; l'eleve rencontre la"
+            " capacite d'emblee en situation"
+        )
+    else:
+        raison = (
+            f"les {len(objets)} exercices repetent l'application directe ; aucun"
+            " ne change de contexte, de strategie ni de registre, donc l'eleve"
+            " apprend une procedure et non une competence"
+        )
+
+    return {
+        "CAPACITY_ID": code,
+        "CURRENT_EXERCISES": len(objets),
+        "EXERCISE_NATURES": dict(sorted(natures.items())),
+        "CURRENT_VARIATION": variation,
+        "CURRENT_REASONING": raisonnement,
+        "CURRENT_SYNTHESIS": synthese,
+        "DIFFICULTY_SPREAD": parcours,
+        "DIVERSITY_VERDICT": verdict["verdict"],
+        "REAL_DIVERSITY_GAP": verdict["verdict"] == "REAL_DIVERSITY_GAP",
+        "MISSING_FUNCTIONS": verdict["missing"],
+        "RATIONALE": raison,
+        "OBJECTS": [o.get("id") for o in objets if o.get("id")],
+    }
+
+
+def _has_files(directory: Path) -> bool:
+    return directory.is_dir() and any(directory.iterdir())
+
+
+def _project_assessed(contrat: dict[str, Any]) -> bool:
+    return contrat.get("assessment_mode") == "PROJECT_ASSESSMENT"
 
 
 def _chapter_root(chapter: str) -> Path | None:
@@ -89,8 +188,33 @@ def audit(chapter: str) -> dict[str, Any]:
         for code in objet.get("capacites_codes") or []:
             par_capacite[code].append(objet)
 
-    def competences(objets):
-        return {c for o in objets for c in (o.get("competences") or [])}
+    # Neuf chapitres NSI laissent la majorite de leurs exercices sans capacite
+    # declaree -- huit n'en declarent aucune, un seul sur cinquante-cinq. Les
+    # exercices existent et sont riches ; c'est le rattachement qui manque.
+    # Conclure « diversite insuffisante » serait un faux positif : le defaut
+    # est editorial, pas pedagogique, et il porte son propre nom. On evalue
+    # alors la diversite sur le vivier entier du chapitre, et on signale
+    # separement le rattachement manquant. Le seuil est la majorite : tant
+    # qu'une majorite d'exercices est rattachee, la lecture par capacite reste
+    # evidente et c'est elle qui fait foi.
+    rattaches = [o for o in exercices if o.get("capacites_codes")]
+    non_rattaches = len(exercices) - len(rattaches)
+    rattachement_absent = bool(exercices) and non_rattaches > len(rattaches)
+    if rattachement_absent:
+        globale = _analyse_capacite("*", exercices)
+        globale["CAPACITY_ID"] = "CHAPTER_POOL"
+        globale["RATIONALE"] = (
+            "aucun exercice ne declare de capacite : la diversite est mesuree"
+            " sur le vivier entier du chapitre, et le rattachement manquant"
+            " est reporte comme defaut editorial distinct -- "
+            + globale["RATIONALE"]
+        )
+        per_capacity = [globale]
+    else:
+        per_capacity = [
+            _analyse_capacite(code, par_capacite.get(code, [])) for code in capacites
+        ]
+    lacunes = [a["CAPACITY_ID"] for a in per_capacity if a["REAL_DIVERSITY_GAP"]]
 
     directe = [
         code for code in capacites
@@ -99,11 +223,11 @@ def audit(chapter: str) -> dict[str, Any]:
             for o in par_capacite.get(code, [])
         )
     ]
-    variation = [
-        code for code in capacites
-        if len(par_capacite.get(code, [])) >= 2
-        and len(competences(par_capacite.get(code, []))) >= 2
-    ]
+    variation = (
+        capacites if rattachement_absent and not lacunes else
+        [] if rattachement_absent else
+        [a["CAPACITY_ID"] for a in per_capacity if not a["REAL_DIVERSITY_GAP"]]
+    )
     raisonnement = [
         code for code in capacites
         if any("raisonner" in (o.get("competences") or []) for o in par_capacite.get(code, []))
@@ -113,9 +237,9 @@ def audit(chapter: str) -> dict[str, Any]:
         or any(len(o.get("capacites_codes") or []) >= 2 for o in evaluations + exercices)
     )
     parcours = sorted({o.get("parcours") for o in exercices if o.get("parcours")})
-
-    def part(liste):
-        return len(liste) / len(capacites) if capacites else 0.0
+    fonctions_chapitre = sorted(
+        {f for a in per_capacity for f in a["EXERCISE_NATURES"]}
+    )
 
     couverture = {
         "DIRECT_APPLICATION_COVERAGE": f"{len(directe)}/{len(capacites)}",
@@ -124,16 +248,21 @@ def audit(chapter: str) -> dict[str, Any]:
         "SYNTHESIS_COVERAGE": "OUI" if synthese else "NON",
         "DIFFICULTY_PROGRESSION": parcours,
         "ASSESSMENT_COVERAGE": len(evaluations),
+        "EXERCISE_FUNCTIONS_PRESENT": fonctions_chapitre,
+        "CAPACITIES_WITH_REAL_DIVERSITY_GAP": lacunes,
+        "CAPACITY_ASSIGNMENT_MISSING": rattachement_absent,
+        "EXERCISES_WITHOUT_CAPACITY": non_rattaches,
     }
 
     axes = {
+        "CAPACITY_ASSIGNMENT": WEAK if rattachement_absent else STRONG,
         "COURSE_COMPLETENESS": STRONG if len(cours) >= len(capacites) else (
             ADEQUATE if cours else WEAK
         ),
         "EXERCISE_DIVERSITY": (
-            STRONG if part(variation) >= 0.8 else
-            ADEQUATE if part(variation) >= 0.5 else
-            WEAK if part(directe) == 1.0 else UNUSABLE
+            UNUSABLE if not exercices else
+            WEAK if lacunes else
+            STRONG if len(fonctions_chapitre) >= 4 else ADEQUATE
         ),
         "DIFFICULTY_PROGRESSION": (
             STRONG if len(parcours) >= 3 else
@@ -152,12 +281,33 @@ def audit(chapter: str) -> dict[str, Any]:
             ADEQUATE if remediations else WEAK
         ),
     }
-    if part(directe) < 1.0:
-        axes["EXERCISE_DIVERSITY"] = WEAK
+
+    # Un chapitre evalue par projet n'a pas de banque d'exercices, et ce n'est
+    # pas un defaut : c'est la decision du 2026-09-06 inscrite au contrat. Les
+    # quatre axes qui presupposent cette banque sont donc hors-sujet, et on les
+    # remplace par ce que le mode PROJET exige vraiment. Neutraliser sans
+    # remplacer serait une exemption ; remplacer, c'est mesurer autre chose.
+    if _project_assessed(contrat) and not exercices:
+        for axe in ("EXERCISE_DIVERSITY", "DIFFICULTY_PROGRESSION",
+                    "CORRECTION_QUALITY", "REMEDIATION"):
+            axes[axe] = NOT_APPLICABLE
+        axes["PROJECT_BRIEF"] = STRONG if cours else UNUSABLE
+        axes["PROJECT_CRITERIA_GRID"] = (
+            STRONG if _has_files(racine / "validations") else WEAK
+        )
+        axes["PROJECT_KNOWLEDGE_CHECK"] = (
+            STRONG if _has_files(racine / "qcm") else WEAK
+        )
+        axes["PROJECT_ADAPTED_VERSION"] = (
+            STRONG if _has_files(racine / "amenagee") else WEAK
+        )
+
     ordre = {STRONG: 3, ADEQUATE: 2, WEAK: 1, UNUSABLE: 0}
-    pire = min(axes.values(), key=lambda v: ordre[v])
+    applicables = [v for v in axes.values() if v != NOT_APPLICABLE]
+    pire = min(applicables, key=lambda v: ordre[v])
     return {
         "CHAPTER_ID": chapter,
+        "ASSESSMENT_MODE": contrat.get("assessment_mode") or "WRITTEN_ASSESSMENT",
         "OFFICIAL_CAPACITIES": capacites,
         "counts": {
             "cours": len(cours), "methodes": len(methodes),
@@ -170,6 +320,7 @@ def audit(chapter: str) -> dict[str, Any]:
             "variation": [c for c in capacites if c not in variation],
             "reasoning": [c for c in capacites if c not in raisonnement],
         },
+        "per_capacity": per_capacity,
         **axes,
         "PEDAGOGICAL_VERDICT": pire,
     }
@@ -229,11 +380,32 @@ def render_markdown(payload: dict[str, Any]) -> str:
     return "\n".join(lignes)
 
 
+def all_chapters() -> list[str]:
+    """TOUS les chapitres du corpus, pas seulement ceux qu'on a reconstruits.
+
+    Restreindre la revue aux quatorze chapitres touches laisserait
+    trente-huit chapitres NON AUDITES -- et « non audite » n'est pas
+    « adequat ». Le gate exige un verdict pour chacun.
+    """
+
+    chapitres: list[str] = []
+    for corpus in CORPORA:
+        racine = ROOT / corpus
+        if not racine.is_dir():
+            continue
+        chapitres.extend(
+            sorted(
+                d.name for d in racine.iterdir() if (d / "contrat.yaml").is_file()
+            )
+        )
+    return sorted(chapitres)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args(argv)
-    payload = build(TCOMPL + TEXPERTES)
+    payload = build(all_chapters())
     rendus = {
         JSON_TARGET: json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
         MD_TARGET: render_markdown(payload),

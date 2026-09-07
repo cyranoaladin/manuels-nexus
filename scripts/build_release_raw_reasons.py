@@ -66,6 +66,19 @@ RULES: tuple[tuple[str, str, str, str], ...] = (
      "PRODUCT_P1", "build_true_pedagogical_coverage", "ROOT-PEDAGOGICAL-ROLE-COVERAGE"),
     (r"^CONTENT:(?P<chapter>[^:]+):pedagogical_richness:GAP$",
      "PRODUCT_P2", "build_chapter_richness_matrix", "ROOT-PEDAGOGICAL-RICHNESS"),
+    # Un chapitre canonique juge WEAK sur une dimension pedagogique
+    # substantielle EST un defaut produit. Le laisser hors taxonomie donnait
+    # « douze chapitres faibles et PRODUCT_P2 = 0 » : une contradiction, pas
+    # une mesure. On corrige l'agregation, jamais le verdict.
+    (r"^CONTENT:(?P<chapter>[^:]+):pedagogical_quality:WEAK$",
+     "PRODUCT_P2", "build_chapter_pedagogical_verdict", "ROOT-PEDAGOGICAL-QUALITY-WEAK"),
+    # UNUSABLE n'est pas un WEAK plus grave : le chapitre n'entraine a rien.
+    # Il bloque au meme titre qu'une couverture d'evaluation absente.
+    (r"^CONTENT:(?P<chapter>[^:]+):pedagogical_quality:UNUSABLE$",
+     "PRODUCT_P1", "build_chapter_pedagogical_verdict", "ROOT-PEDAGOGICAL-QUALITY-UNUSABLE"),
+    (r"^CONTENT:(?P<chapter>[^:]+):pedagogical_quality:NOT_AUDITED$",
+     "CERTIFICATION_BLOCKER", "build_chapter_pedagogical_verdict",
+     "ROOT-PEDAGOGICAL-QUALITY-NOT-AUDITED"),
     (r"^CONTENT:(?P<chapter>[^:]+):course_assembly_truth:GAP$",
      "PRODUCT_P1", "build_course_assembly_truth", "ROOT-COURSE-ASSEMBLY"),
     (r"^CONTENT:(?P<chapter>[^:]+):oracle:GAP$",
@@ -124,6 +137,9 @@ ROOT_BLOCKER_TITLES = {
     "ROOT-EXERCISE-CORRECTION-GRAPH-NOT-AUDITED": "Graphe exercice/corrigé non audité",
     "ROOT-PEDAGOGICAL-ROLE-COVERAGE": "Rôles pédagogiques non couverts",
     "ROOT-PEDAGOGICAL-RICHNESS": "Richesse pédagogique insuffisante",
+    "ROOT-PEDAGOGICAL-QUALITY-WEAK": "Qualité pédagogique faible sur un axe substantiel",
+    "ROOT-PEDAGOGICAL-QUALITY-UNUSABLE": "Chapitre pédagogiquement inexploitable",
+    "ROOT-PEDAGOGICAL-QUALITY-NOT-AUDITED": "Qualité pédagogique non auditée",
     "ROOT-COURSE-ASSEMBLY": "Assemblage de cours incomplet",
     "ROOT-ORACLE-EVIDENCE": "Preuve oracle QCM absente",
     "ROOT-CROSS-DISCIPLINE-AUDIT": "Contenu inter-disciplinaire non audité",
@@ -146,6 +162,52 @@ ROOT_BLOCKER_TITLES = {
     "ROOT-GATE-CHECK-ERROR": "Erreur fatale de contrôle du gate",
     "ROOT-INVENTORY-UNAVAILABLE": "Inventaire indisponible",
 }
+
+
+#: Ce que la taxonomie DOIT faire d'un verdict pedagogique.
+PEDAGOGICAL_QUALITY_EXPECTED_TAXONOMY = {
+    "WEAK": "PRODUCT_P2",
+    "UNUSABLE": "PRODUCT_P1",
+}
+
+
+def _pedagogical_quality_conflicts(
+    raw_reasons: list[dict[str, Any]],
+) -> list[dict[str, str]]:
+    """Un chapitre faible sans blocker produit est une contradiction, pas un zero.
+
+    On relit le verdict pedagogique a la source et on exige que chaque
+    chapitre WEAK ou UNUSABLE apparaisse dans la taxonomie avec la severite
+    due. Compter les blockers ne suffit pas : c'est precisement en ne
+    regardant que le compteur qu'on a pu afficher douze chapitres faibles et
+    `PRODUCT_P2 = 0`.
+    """
+
+    verdicts = ROOT / "audit/CHAPTER_PEDAGOGICAL_VERDICT.json"
+    if not verdicts.is_file():
+        return [{"chapter": "*", "verdict": "ARTIFACT_ABSENT",
+                 "expected": "PRODUCT_P2", "observed": "NO_VERDICT_SOURCE"}]
+    payload = json.loads(verdicts.read_text(encoding="utf-8"))
+    classe = {
+        entry["target"]: entry["category"]
+        for entry in raw_reasons
+        if entry["root_cause_id"].startswith("ROOT-PEDAGOGICAL-QUALITY-")
+    }
+    conflits = []
+    for row in payload.get("chapters", []):
+        verdict = row.get("PEDAGOGICAL_VERDICT")
+        attendu = PEDAGOGICAL_QUALITY_EXPECTED_TAXONOMY.get(verdict)
+        if attendu is None:
+            continue
+        observe = classe.get(row["CHAPTER_ID"])
+        if observe != attendu:
+            conflits.append({
+                "chapter": row["CHAPTER_ID"],
+                "verdict": verdict,
+                "expected": attendu,
+                "observed": observe or "ABSENT_FROM_TAXONOMY",
+            })
+    return conflits
 
 
 def classify(reason: str) -> dict[str, Any] | None:
@@ -284,6 +346,7 @@ def build(gate_payloads: list[dict[str, Any]],
 
     per_taxonomy = Counter(b["taxonomy"] for b in root_blockers)
     conflicts = [b for b in root_blockers if b["taxonomy"] not in TAXONOMIES]
+    taxonomy_conflicts = _pedagogical_quality_conflicts(raw_reasons)
 
     summary = {
         "RAW_REASON_COUNT": len(raw_reasons),
@@ -291,6 +354,8 @@ def build(gate_payloads: list[dict[str, Any]],
         "UNMAPPED_RAW_REASONS": len(unmapped),
         "DUPLICATE_REASON_IDS": len(duplicates),
         "BLOCKER_CLASSIFICATION_CONFLICTS": len(conflicts),
+        "PEDAGOGICAL_QUALITY_TAXONOMY_CONFLICTS": len(taxonomy_conflicts),
+        "PEDAGOGICAL_QUALITY_TAXONOMY_CONFLICT_DETAIL": taxonomy_conflicts,
         "PRODUCT_P0": per_taxonomy.get("PRODUCT_P0", 0),
         "PRODUCT_P1": per_taxonomy.get("PRODUCT_P1", 0),
         "PRODUCT_P2": per_taxonomy.get("PRODUCT_P2", 0),

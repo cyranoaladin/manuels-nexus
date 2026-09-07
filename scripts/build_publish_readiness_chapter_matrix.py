@@ -437,6 +437,44 @@ def _project_assessed(chapter: str) -> bool:
     return False
 
 
+#: LA COMPLETUDE STRUCTURELLE N'EST PAS LA QUALITE PEDAGOGIQUE.
+#: `pedagogical_richness` mesure qu'aucune capacite ne reste sans occasion :
+#: c'est une completude de STRUCTURE. `pedagogical_quality` mesure si l'eleve
+#: dispose d'assez de situations DIFFERENTES pour transferer. Un chapitre peut
+#: etre structurellement complet et pedagogiquement faible -- douze le sont --
+#: et le gate doit exiger les deux.
+PEDAGOGICAL_VERDICT = ROOT / "audit/CHAPTER_PEDAGOGICAL_VERDICT.json"
+
+
+def _pedagogical_quality(chapter: str) -> dict[str, Any]:
+    if not PEDAGOGICAL_VERDICT.is_file():
+        return {"status": "NOT_AUDITED", "verdict": None}
+    payload = json.loads(PEDAGOGICAL_VERDICT.read_text(encoding="utf-8"))
+    ligne = next(
+        (r for r in payload["chapters"] if r["CHAPTER_ID"] == chapter), None
+    )
+    if ligne is None:
+        return {"status": "NOT_AUDITED", "verdict": None}
+    verdict = ligne["PEDAGOGICAL_VERDICT"]
+    return {
+        "status": "COMPLETE" if verdict in {"STRONG", "ADEQUATE"} else verdict,
+        "verdict": verdict,
+        "assessment_mode": ligne.get("ASSESSMENT_MODE"),
+        # Les axes sont lus dans la ligne, pas dans une liste figee : un
+        # chapitre evalue par projet en porte d'autres, et une liste en dur
+        # les rendrait invisibles.
+        "weak_axes": sorted(
+            axe
+            for axe, valeur in ligne.items()
+            if axe.isupper()
+            and axe != "PEDAGOGICAL_VERDICT"
+            and isinstance(valeur, str)
+            and valeur in {"WEAK", "UNUSABLE"}
+        ),
+        "uncovered": ligne["uncovered"],
+    }
+
+
 def _ex_co_truth(chapter: str, graph: dict[str, Any]) -> dict[str, Any]:
     relations = [
         row
@@ -1384,6 +1422,7 @@ def build_matrix(
             )
             row["ex_co_graph"] = _ex_co_truth(chapter, ex_co_graph)
             row["pedagogical_richness"] = _richness_truth(chapter, richness)
+            row["pedagogical_quality"] = _pedagogical_quality(chapter)
             row["machine_dimensions"] = {
                 "programme": row["programme"]["status"],
                 "oracle": row["oracle"]["status"],
@@ -1402,6 +1441,7 @@ def build_matrix(
                     "status"
                 ],
                 "course_assembly_truth": row["course_assembly_truth"]["status"],
+                "pedagogical_quality": row["pedagogical_quality"]["status"],
                 "ex_co_graph": row["ex_co_graph"]["status"],
                 "pedagogical_richness": row["pedagogical_richness"]["status"],
             }

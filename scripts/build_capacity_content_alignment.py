@@ -228,8 +228,30 @@ def build(root: Path = ROOT) -> dict[str, Any]:
     # a lu, pourquoi la signature ne le voyait pas, et ce qu'on en a fait.
     revues = evidence_reviews.by_object()
     sans_preuve = par_etat.get(NOT_EVIDENCED, 0)
+    # QUATRE CLASSES DE PREUVE, DISJOINTES, DONT L'UNION EST LE TOTAL.
+    #
+    # `PROVEN_BY_STRUCTURE` ne prouve PAS que le contenu sert la capacite : il
+    # prouve que le code declare existe au contrat du chapitre et s'y resout
+    # sans ambiguite. C'est une preuve d'IDENTITE, pas d'adequation. La
+    # confondre avec une preuve de contenu serait exactement le raccourci qui
+    # a laisse passer neuf cents exercices d'analyse sous des capacites
+    # d'arithmetique : eux aussi declaraient des codes valides.
+    #
+    # `PROVEN_BY_SEMANTIC_REVIEW` est la preuve de contenu : la signature
+    # declaree pour cette capacite est satisfaite par le corps de l'objet.
+    #
+    # `UNPROVEN_BY_CONTENT` compte donc ce qui n'a QUE la preuve structurelle.
+    # Il ne tombera a zero que par l'ecriture des signatures manquantes,
+    # jamais par un changement de nom.
+    structurel = len(objets) - par_etat.get(ALIGNED, 0)
     summary.update({
         "CAPACITY_ASSIGNMENTS_TOTAL": len(objets),
+        "PROVEN_BY_SEMANTIC_REVIEW": par_etat.get(ALIGNED, 0),
+        "PROVEN_BY_STRUCTURE_ONLY": structurel,
+        "UNPROVEN_BY_CONTENT": structurel,
+        "PROOF_CLASSES_PARTITION_EXACT": (
+            par_etat.get(ALIGNED, 0) + structurel == len(objets)
+        ),
         "CAPACITY_ASSIGNMENTS_SEMANTICALLY_PROVEN": par_etat.get(ALIGNED, 0),
         "CAPACITY_ASSIGNMENTS_WITHOUT_EVIDENCE": sans_preuve,
         "SEMANTIC_REVIEWS_RECORDED": len(evidence_reviews.REVIEWS),
