@@ -1,4 +1,4 @@
-% META: {"id": "TEXP-GRA-EV-B-corrige", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige_evaluation", "evaluation_ref": "TEXP-GRA-EV-B", "capacites_codes": ["C1", "C3", "C4", "C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TEXP-GRA-EV-B-corrige", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige_evaluation", "evaluation_ref": "TEXP-GRA-EV-B", "capacites_codes": ["C1", "C2", "C3", "C4", "C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Matrix
 % MB = Matrix([
@@ -16,6 +16,19 @@
 % assert MB2[0,3] == 0
 % assert MB3[0,3] == 3
 % assert MB2[0,0] * MB[0,3] == 3
+%
+% # Modelisation : les couples de clubs ayant un membre commun donnent
+% # exactement les aretes de G, et la relation est symetrique.
+% couples = {frozenset(c) for c in (("W","X"),("W","Y"),("W","Z"),("X","Y"))}
+% sommets = ["W","X","Y","Z"]
+% construite = Matrix(4, 4, lambda i, j:
+%     1 if frozenset((sommets[i], sommets[j])) in couples else 0)
+% assert construite == MB
+% assert construite == construite.T          # la contrainte est symetrique
+% assert all(construite[i, i] == 0 for i in range(4))
+% degres = dict(zip(sommets, deg))
+% assert max(degres, key=degres.get) == "W"
+% assert min(degres, key=degres.get) == "Z"
 % END-VERIFY
 \begin{corrige}{TEXP-GRA-EV-B-EX1}
 \textbf{1.} Le graphe a $4$ sommets : il est d'\textbf{ordre 4}.
@@ -34,4 +47,10 @@ $(M^2)_{W,Z}=0$ : il n'existe aucune chaîne de longueur $2$ entre $W$ et $Z$. E
 \textbf{2.} $(M^{n+1})_{ij}=\displaystyle\sum_{k}(M^n)_{ik}\times m_{kj}$. Cette relation traduit le fait que toute chaîne de longueur $n+1$ de $i$ à $j$ se décompose de façon unique en une chaîne de longueur $n$ de $i$ à un sommet $k$ adjacent à $j$, suivie de l'arête $\{k,j\}$.
 
 \textbf{3.} $Z$ n'a qu'un seul voisin : $W$. Dans la somme $(M^3)_{W,Z}=\sum_k(M^2)_{W,k}\times m_{k,Z}$, seul le terme $k=W$ est non nul. Donc $(M^3)_{W,Z}=(M^2)_{W,W}\times m_{W,Z}=3\times1=3$. (On peut vérifier que ces $3$ chaînes sont $W\text{-}X\text{-}W\text{-}Z$, $W\text{-}Y\text{-}W\text{-}Z$ et $W\text{-}Z\text{-}W\text{-}Z$.)
+\end{corrige}
+
+\begin{corrige}{TEXP-GRA-EV-B-EX3}
+\textbf{1.} Les objets à distinguer sont les clubs : ils deviennent les \textbf{sommets}. La relation à représenter est « avoir un membre commun », donc « ne pas pouvoir se réunir en même temps » : chaque couple concerné donne une \textbf{arête}. Cette relation est symétrique — si $A$ a un membre commun avec $B$, alors $B$ en a un avec $A$ — donc le graphe est \textbf{non orienté}. Les quatre couples donnés sont $\{W,X\}$, $\{W,Y\}$, $\{W,Z\}$ et $\{X,Y\}$ : ce sont exactement les arêtes du graphe $G$ de l'exercice $1$.
+
+\textbf{2.} Les degrés valent $\deg(W)=3$, $\deg(X)=\deg(Y)=2$ et $\deg(Z)=1$. Le club $W$ est en conflit avec les trois autres : il impose la contrainte la plus forte, et son créneau doit être choisi en premier. Le club $Z$, de degré $1$, n'est en conflit qu'avec $W$ : il est le plus libre.
 \end{corrige}

@@ -1,4 +1,4 @@
-% META: {"id": "TCOMPL-AIR-EV-B", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "evaluation", "version": "B", "duree_min": 50, "bareme_total": 20, "capacites_codes": ["C2", "C3", "C6"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TCOMPL-AIR-EV-B", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "evaluation", "version": "B", "duree_min": 50, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3", "C6"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import symbols, solve, Eq, integrate, Rational
 % x = symbols('x')
@@ -17,7 +17,7 @@
 \begin{evaluation}{TCOMPL-AIR-EV-B}{50}
 
 \begin{exercice}{TCOMPL-AIR-EV-B-EX1}{2}{30}
-\textbf{Exercice 1} (12 points) --- \textit{Capacité C3}
+\textbf{Exercice 1} (10 points) --- \textit{Capacité C3}
 
 \medskip
 
@@ -25,7 +25,7 @@ Soit $f(x) = -x^2+6x$ et $g(x)=2x$.
 \begin{enumerate}
   \item (4 pts) Déterminer les abscisses des points d'intersection des courbes de $f$ et $g$.
   \item (3 pts) Justifier que $f\geq g$ entre ces deux abscisses.
-  \item (5 pts) Calculer l'aire comprise entre les deux courbes.
+  \item (3 pts) Calculer l'aire comprise entre les deux courbes.
 \end{enumerate}
 \end{exercice}
 
@@ -37,6 +37,19 @@ Soit $f(x) = -x^2+6x$ et $g(x)=2x$.
 \begin{enumerate}
   \item (4 pts) Énoncer le théorème donnant la dérivée de la fonction $F(x)=\displaystyle\int_a^x f(t)\,\mathrm{d}t$ pour $f$ continue, positive et croissante.
   \item (4 pts) Pour $f(x)=\sqrt{x}$ sur $[0,4]$ et $n=4$ rectangles, écrire (sans calculer) l'encadrement de $\displaystyle\int_0^4 \sqrt{x}\,\mathrm{d}x$ par la méthode des rectangles.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TCOMPL-AIR-EV-B-EX3}{2}{15}
+\textbf{Exercice 3} (2 points) --- \textit{Capacité C1}
+
+\medskip
+
+Soit $h$ la fonction continue et positive définie sur $[0\,;6]$ par $h(x)=x$.
+\begin{enumerate}
+  \item (1 pt) Interpréter $\displaystyle\int_0^4 h(x)\,\mathrm{d}x$ comme une aire, puis la calculer par une considération géométrique élémentaire, sans primitive.
+  \item (1 pt) Calculer $\displaystyle\int_4^6 h(x)\,\mathrm{d}x$ de la même façon, puis vérifier la relation de Chasles
+  $\displaystyle\int_0^6 h = \int_0^4 h + \int_4^6 h$.
 \end{enumerate}
 \end{exercice}
 

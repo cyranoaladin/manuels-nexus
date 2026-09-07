@@ -1,4 +1,4 @@
-% META: {"id": "TEXP-GRA-EV-B", "chapitre": "TEXP-GRAPHES", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C3", "C4", "C5"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TEXP-GRA-EV-B", "chapitre": "TEXP-GRAPHES", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3", "C4", "C5"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Matrix
 % MB = Matrix([
@@ -37,7 +37,7 @@ On considère le graphe $G$ à $4$ sommets $W,X,Y,Z$, d'arêtes $\{W,X\}$, $\{W,
 \end{exercice}
 
 \begin{exercice}{TEXP-GRA-EV-B-EX2}{2}{40}
-\textbf{Exercice 2} (12 points) --- \textit{Capacités C4, C5}
+\textbf{Exercice 2} (10 points) --- \textit{Capacités C4, C5}
 
 \medskip
 
@@ -46,7 +46,20 @@ On reprend le graphe $G$ et sa matrice $M$ de l'exercice 1.
 \begin{enumerate}
   \item (4 pts) Calculer $M^2$. Que vaut $(M^2)_{W,Z}$ ? Justifier ce résultat en observant les voisins de $Z$.
   \item (4 pts) Rappeler la relation de récurrence liant $(M^{n+1})_{ij}$ à $(M^n)_{ik}$ et $m_{kj}$, et justifier brièvement (en une phrase) pourquoi elle est vraie.
-  \item (4 pts) Le sommet $Z$ n'a qu'un seul voisin. En utilisant cette information, la relation de récurrence et $(M^2)_{W,W}$, déterminer $(M^3)_{W,Z}$ \textbf{sans calculer entièrement} le produit $M^2\times M$.
+  \item (2 pts) Le sommet $Z$ n'a qu'un seul voisin. En utilisant cette information, la relation de récurrence et $(M^2)_{W,W}$, déterminer $(M^3)_{W,Z}$ \textbf{sans calculer entièrement} le produit $M^2\times M$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TEXP-GRA-EV-B-EX3}{2}{15}
+\textbf{Exercice 3} (2 points) --- \textit{Capacité C2}
+
+\medskip
+
+Dans un établissement, quatre clubs $W$, $X$, $Y$ et $Z$ se réunissent le mercredi. Deux clubs ne peuvent pas se réunir en même temps s'ils ont au moins un membre commun. Les couples de clubs ayant un membre commun sont exactement : $W$ et $X$, $W$ et $Y$, $W$ et $Z$, $X$ et $Y$.
+
+\begin{enumerate}
+  \item (1 pt) Modéliser la situation par un graphe : préciser ce que représentent les sommets, ce que représente une arête, et pourquoi le graphe est non orienté. Vérifier qu'on retrouve le graphe $G$ de l'exercice $1$.
+  \item (1 pt) En déduire, à l'aide des degrés calculés à l'exercice $1$, quel club impose la contrainte la plus forte sur l'organisation des créneaux, et lequel en impose le moins.
 \end{enumerate}
 \end{exercice}
 

@@ -1,8 +1,22 @@
-% META: {"id": "TSPE-COMBI-EV-B-corrige", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-COMBI-EV-B", "version": "B", "capacites_codes": ["C2", "C3", "C4"], "sources_inspiration": [], "status": "approved"}
+% META: {"id": "TSPE-COMBI-EV-B-corrige", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-COMBI-EV-B", "version": "B", "capacites_codes": ["C1", "C2", "C3", "C4"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
 % from sympy import binomial
 % assert binomial(12, 4) == 495
 % assert sum(binomial(6,k) for k in range(7)) == 64
+%
+% # Tirages successifs sans remise de deux jetons parmi trois : l'arbre
+% # enumere exactement les couples ordonnes d'elements distincts.
+% from itertools import permutations
+% jetons = ("R", "V", "B")
+% tirages = list(permutations(jetons, 2))
+% assert len(tirages) == 6
+% assert len(set(tirages)) == len(tirages)
+% assert all(a != b for a, b in tirages)
+% # Denombrement : 3 choix pour le premier, 2 pour le second.
+% assert len(tirages) == 3 * 2
+% # Avec remise il y en aurait neuf : la distinction se lit sur l'arbre.
+% from itertools import product
+% assert len(list(product(jetons, repeat=2))) == 9
 % END-VERIFY
 \begin{corrige}{TSPE-COMBI-EV-B-EX1}
 \textbf{Q1.} Non : c'est un groupe (ensemble), l'ordre de selection des $4$ eleves n'a pas d'importance.
@@ -25,4 +39,14 @@ Soit $E$ un ensemble a $n$ éléments, $a \in E$ fixe. On classe les parties a $
   \item parties ne contenant pas $a$ : choisir les $k$ éléments parmi les $n-1$ restants, soit $\dbinom{n-1}{k}$.
 \end{itemize}
 Ces deux categories sont disjointes et couvrent toutes les parties a $k$ éléments : par le principe additif, $\dbinom{n}{k} = \dbinom{n-1}{k-1}+\dbinom{n-1}{k}$.
+\end{corrige}
+
+\begin{corrige}{TSPE-COMBI-EV-B-EX4}
+\textbf{Q1.} L'arbre est la representation adaptee : le tirage se fait en deux etapes successives, et l'arbre montre que le second choix depend du premier (le jeton deja tire n'est plus disponible). Un tableau a double entree ferait apparaitre les couples impossibles $(R,R)$, $(V,V)$, $(B,B)$ ; une liste non structuree n'offrirait aucune garantie d'exhaustivite.
+
+\textbf{Q2.} L'arbre a trois branches au premier niveau ($R$, $V$, $B$) et deux branches sous chacune :
+\[
+  (R,V)\;(R,B)\;(V,R)\;(V,B)\;(B,R)\;(B,V),
+\]
+soit $\boxed{6}$ tirages. Par le denombrement : $3$ choix pour le premier jeton, puis $2$ pour le second, donc $3\times2=6$. Avec remise, il y en aurait $3\times3=9$ : c'est exactement l'ecart que l'arbre rend visible.
 \end{corrige}

@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SECDEG-EV-B-corrige", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-SECDEG-EV-B", "version": "B", "capacites_codes": ["C1","C2","C3","C4","C5","C6"], "sources_inspiration": [], "parametres_sympy": {"a": 3, "b": -12, "c": 9, "a2": -2, "b2": 8, "c2": -6}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-B-corrige.tex", "status": "generated"}
+% META: {"id": "1SPE-SECDEG-EV-B-corrige", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-SECDEG-EV-B", "version": "B", "capacites_codes": ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"], "sources_inspiration": [], "parametres_sympy": {"a": 3, "b": -12, "c": 9, "a2": -2, "b2": 8, "c2": -6}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-B-corrige.tex", "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import symbols, Rational, expand, solve
 % x = symbols('x')
@@ -16,6 +16,16 @@
 % assert x1 == 1
 % assert x2 == 3
 % assert expand(3*(x-1)*(x-3)) == f
+% # Somme et produit des racines lus sur les coefficients (C7).
+% S = Rational(-b, a)
+% P = Rational(c, a)
+% assert S == 4 and P == 3
+% assert x1 + x2 == S and x1 * x2 == P
+% # Le signe se lit sur la forme factorisee (C8) : positif hors des racines,
+% # negatif entre elles, nul en 1 et en 3.
+% assert f.subs(x, 0) > 0 and f.subs(x, 4) > 0
+% assert f.subs(x, 2) < 0
+% assert f.subs(x, x1) == 0 and f.subs(x, x2) == 0
 % g = -2*x**2 + 8*x - 6
 % assert expand(-2*(x-2)**2 + 2) == g
 % assert g.subs(x, 2) == 2
@@ -126,15 +136,29 @@ $g(x)$ & $-\infty$ & $\nearrow$ & $2$ & $\searrow$ & $-\infty$ \\
 L'axe de symetrie de la parabole a pour équation $x = \alpha = 2$.
 
 %===============================================================
-\section*{Exercice 3 \hfill (4 points) — C4, C5}
+\section*{Exercice 3 \hfill (4 points) — C4, C5, C7, C8}
 %===============================================================
 
-\baremeIndicatif{Q1 : 2 pts (calculer, représenter) ; Q2 : 1 pt (calculer) ; Q3 : 1 pt (calculer)}
+\baremeIndicatif{Q1 : 1 pt (calculer, raisonner) ; Q2 : 1 pt (calculer, représenter) ; Q3 : 1 pt (calculer) ; Q4 : 1 pt (calculer)}
 
 \bigskip
-\textbf{Question 1 — Tableau de signes.}
+\textbf{Question 1 — Somme et produit des racines.}
 
-\commentaireMarge{On utilise la forme factorisee $f(x) = 3(x-1)(x-3)$.}
+\commentaireMarge{$S = -b/a$ et $P = c/a$ : deux quotients lus sur les coefficients, sans aucun discriminant.}
+
+Pour $f(x) = 3x^2 - 12x + 9$, on a $a = 3$, $b = -12$ et $c = 9$, donc
+\[
+  S = -\frac{b}{a} = \frac{12}{3} = 4
+  \qquad\text{et}\qquad
+  P = \frac{c}{a} = \frac{9}{3} = 3.
+\]
+Deux entiers de somme $4$ et de produit $3$ : ce sont $1$ et $3$. Vérification :
+$1 + 3 = 4$ et $1 \times 3 = 3$. Les racines sont donc $x_1 = 1$ et $x_2 = 3$.
+
+\medskip
+\textbf{Question 2 — Tableau de signes à partir de la forme factorisée.}
+
+\commentaireMarge{Le facteur constant $3$ est positif : il ne change aucun signe, mais il doit figurer dans le tableau.}
 
 $f(x) = 3(x-1)(x-3)$.
 
@@ -153,12 +177,12 @@ $f(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ & \\
 \end{center}
 
 \medskip
-\textbf{Question 2 — Résolution de $f(x) \leq 0$.}
+\textbf{Question 3 — Résolution de $f(x) \leq 0$.}
 
 D'après le tableau de signes : $\boxed{\mathcal{S} = [1\,;\,3]}$.
 
 \medskip
-\textbf{Question 3 — Résolution de $f(x) > 0$.}
+\textbf{Question 4 — Résolution de $f(x) > 0$.}
 
 $\boxed{\mathcal{S} = \,]-\infty\,;\,1[ \cup \,]3\,;\,+\infty[}$.
 

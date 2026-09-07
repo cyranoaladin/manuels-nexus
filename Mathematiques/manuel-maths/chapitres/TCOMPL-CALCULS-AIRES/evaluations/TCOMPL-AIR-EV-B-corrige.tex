@@ -1,4 +1,4 @@
-% META: {"id": "TCOMPL-AIR-EV-B-corrige", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-AIR-EV-B", "capacites_codes": ["C2", "C3", "C6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TCOMPL-AIR-EV-B-corrige", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-AIR-EV-B", "capacites_codes": ["C1", "C2", "C3", "C6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import symbols, solve, Eq, integrate, Rational
 % x = symbols('x')
@@ -8,6 +8,17 @@
 % assert inter == [0, 4]
 % aire = integrate(f - g, (x, 0, 4))
 % assert aire == Rational(32, 3)
+%
+% # Aire sous h(x) = x : les valeurs geometriques et l'integrale coincident,
+% # et la relation de Chasles est verifiee sur le decoupage 0 | 4 | 6.
+% h = x
+% aire_0_4 = integrate(h, (x, 0, 4))
+% aire_4_6 = integrate(h, (x, 4, 6))
+% aire_0_6 = integrate(h, (x, 0, 6))
+% assert aire_0_4 == 8            # triangle de base 4 et de hauteur 4
+% assert aire_4_6 == 10           # trapeze de bases 4 et 6, de hauteur 2
+% assert aire_0_6 == 18           # triangle de base 6 et de hauteur 6
+% assert aire_0_6 == aire_0_4 + aire_4_6
 % END-VERIFY
 \begin{corrige}{TCOMPL-AIR-EV-B-EX1}
 \textbf{1.} $f(x)=g(x) \iff -x^2+6x=2x \iff -x^2+4x=0 \iff x(4-x)=0 \iff x=0$ ou $x=4$.
@@ -27,4 +38,14 @@
 \[
   1\times\big(\sqrt{0}+\sqrt{1}+\sqrt{2}+\sqrt{3}\big) \ \leq\ \int_0^4 \sqrt{x}\,\mathrm{d}x \ \leq\ 1\times\big(\sqrt{1}+\sqrt{2}+\sqrt{3}+\sqrt{4}\big).
 \]
+\end{corrige}
+
+\begin{corrige}{TCOMPL-AIR-EV-B-EX3}
+\textbf{1.} $h$ est continue et positive sur $[0\,;4]$ : $\displaystyle\int_0^4 h(x)\,\mathrm{d}x$ est l'aire, en unités d'aire, du domaine compris entre la courbe de $h$, l'axe des abscisses et les droites $x=0$ et $x=4$. Ce domaine est le triangle rectangle de sommets $(0;0)$, $(4;0)$ et $(4;4)$, d'aire $\dfrac{4\times4}{2}=8$.
+
+\textbf{2.} Sur $[4\,;6]$, le domaine est le trapèze de hauteur $6-4=2$ et de bases $h(4)=4$ et $h(6)=6$, d'aire $\dfrac{(4+6)\times2}{2}=10$. Le domaine sur $[0\,;6]$ est le triangle de sommets $(0;0)$, $(6;0)$ et $(6;6)$, d'aire $\dfrac{6\times6}{2}=18$. On vérifie bien
+\[
+  \int_0^6 h = 18 = 8 + 10 = \int_0^4 h + \int_4^6 h,
+\]
+ce qui est la relation de Chasles : découper le domaine en $x=4$ découpe l'aire en deux parts qui se rajoutent.
 \end{corrige}

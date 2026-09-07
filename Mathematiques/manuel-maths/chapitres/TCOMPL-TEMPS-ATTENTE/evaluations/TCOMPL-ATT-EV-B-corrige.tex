@@ -1,4 +1,4 @@
-% META: {"id": "TCOMPL-ATT-EV-B-corrige", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-ATT-EV-B", "capacites_codes": ["C4", "C5", "C6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TCOMPL-ATT-EV-B-corrige", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-ATT-EV-B", "capacites_codes": ["C4", "C5", "C6", "C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import symbols, exp, integrate, oo, Rational, N, simplify
 % x = symbols('x', positive=True)
@@ -10,6 +10,21 @@
 % assert E == 15
 % P = 1 - exp(-lam*10)
 % assert abs(N(P) - 0.4866) < 0.0001
+%
+% # Loi uniforme sur [0;20] : densite constante, repartition affine.
+% t = symbols('t', positive=True)
+% a, b = 0, 20
+% densite = Rational(1, b - a)
+% assert integrate(densite, (t, a, b)) == 1
+% F = integrate(densite, (t, a, t))
+% assert simplify(F - t / 20) == 0
+% assert integrate(densite, (t, 0, 5)) == Rational(1, 4)
+% assert integrate(densite, (t, 8, 12)) == Rational(1, 5)
+% esperance = integrate(t * densite, (t, a, b))
+% assert esperance == 10 == Rational(a + b, 2)
+% variance = integrate((t - esperance)**2 * densite, (t, a, b))
+% assert variance == Rational((b - a)**2, 12)
+% assert variance == Rational(100, 3)
 % END-VERIFY
 \begin{corrige}{TCOMPL-ATT-EV-B-EX1}
 \textbf{1.} $f(x)=\frac{1}{15}\mathrm{e}^{-x/15}\geq0$ pour tout $x\geq0$, et $\displaystyle\int_0^{+\infty}\frac{1}{15}\mathrm{e}^{-x/15}\,\mathrm{d}x = \Big[-\mathrm{e}^{-x/15}\Big]_0^{+\infty} = 0-(-1)=1$. $f$ est bien une densité.
@@ -19,4 +34,19 @@
 \textbf{3.} $E(X) = \displaystyle\int_0^{+\infty} x\times\frac{1}{15}\mathrm{e}^{-x/15}\,\mathrm{d}x = \dfrac{1}{1/15} = 15$ minutes.
 
 \textbf{4.} $P_{X>s}(X>s+t) = P(X>t)$ pour tous $s,t\geq0$ : le temps déjà écoulé sans nouveau client ne change rien à la loi du temps d'attente restant. C'est réaliste ici car les arrivées de clients sont indépendantes les unes des autres, sans effet de \og fatigue \fg{} ou d'\og imminence \fg{} après une longue attente.
+\end{corrige}
+
+\begin{corrige}{TCOMPL-ATT-EV-B-EX2}
+\textbf{1.} La densité est constante sur $[0\,;20]$ et nulle ailleurs ; pour que son intégrale vaille $1$, elle vaut $\dfrac{1}{20-0}=\dfrac1{20}$. Pour $t\in[0\,;20]$ :
+\[
+  F(t)=P(T\leq t)=\int_0^t \frac1{20}\,\mathrm{d}u=\frac{t}{20}.
+\]
+
+\textbf{2.} $P(T\leq5)=F(5)=\dfrac{5}{20}=\dfrac14=0{,}25$ et
+$P(8\leq T\leq12)=F(12)-F(8)=\dfrac{12-8}{20}=\dfrac15=0{,}2$.
+
+\textbf{3.} $E(T)=\dfrac{a+b}{2}=\dfrac{0+20}{2}=10$ minutes et
+$V(T)=\dfrac{(b-a)^2}{12}=\dfrac{400}{12}=\dfrac{100}{3}\approx33{,}3$.
+Un voyageur qui arrive au hasard attend en moyenne $10$ minutes, soit la moitié
+de l'intervalle entre deux bus : aucune heure d'arrivée n'est privilégiée.
 \end{corrige}

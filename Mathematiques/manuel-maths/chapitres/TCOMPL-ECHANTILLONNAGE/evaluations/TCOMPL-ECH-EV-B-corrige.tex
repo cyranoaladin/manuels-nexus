@@ -1,4 +1,4 @@
-% META: {"id": "TCOMPL-ECH-EV-B-corrige", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-ECH-EV-B", "capacites_codes": ["C4", "C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TCOMPL-ECH-EV-B-corrige", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-ECH-EV-B", "capacites_codes": ["C4", "C5", "C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from math import comb
 % def P_egal(n, p, k):
@@ -29,6 +29,18 @@
 % resultat = simuler_moyennes(10, 50, 0.3)
 % assert len(resultat) == 10
 % assert all(0 <= m <= 1 for m in resultat)
+%
+% from fractions import Fraction
+% # Loi uniforme sur {1,...,8} : chaque numero a la probabilite 1/8.
+% n = 8
+% loi = {k: Fraction(1, n) for k in range(1, n + 1)}
+% assert sum(loi.values()) == 1
+% esperance = sum(k * loi[k] for k in loi)
+% assert esperance == Fraction(9, 2)
+% assert esperance == Fraction(n + 1, 2)
+% # L'esperance n'est pas une valeur prise par X : elle n'est pas entiere.
+% assert esperance.denominator != 1
+% assert esperance not in loi
 % END-VERIFY
 \begin{corrige}{TCOMPL-ECH-EV-B-EX1}
 \textbf{1.} On trouve $I=[29,51]$ : $P(X\in[29,51]) \geq 0{,}95$.
@@ -47,4 +59,15 @@ def simuler_moyennes(N, n, p):
         moyennes.append(sum(echantillon) / n)
     return moyennes
 \end{python}
+\end{corrige}
+
+\begin{corrige}{TCOMPL-ECH-EV-B-EX3}
+\textbf{1.} Les huit jetons sont indiscernables au toucher : le tirage au hasard donne à chaque numéro la même probabilité. $X$ suit donc la loi uniforme sur $\{1\,;2\,;\dots;8\}$, et $P(X=k)=\dfrac18$ pour tout $k$ de $1$ à $8$.
+
+\textbf{2.} Par définition de l'espérance :
+\[
+  E(X)=\sum_{k=1}^{8} k\times\frac18=\frac18\sum_{k=1}^{8}k=\frac18\times\frac{8\times9}{2}=\frac{36}{8}=\frac92=4{,}5.
+\]
+
+\textbf{3.} La formule générale donne $\dfrac{n+1}{2}=\dfrac{8+1}{2}=\dfrac92$, ce qui confirme le calcul. L'espérance vaut $4{,}5$ : ce n'est pas un entier, donc ce n'est aucune des valeurs prises par $X$. Une espérance est une moyenne théorique, pas une valeur observable du tirage.
 \end{corrige}
