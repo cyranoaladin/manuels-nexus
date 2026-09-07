@@ -1,4 +1,4 @@
-% META: {"id": "TNSI-BDD-EVAL-A-corrige", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "corrige_evaluation", "evaluation_ref": "TNSI-BDD-EVAL-A", "capacites": ["T-BDD-01A", "T-BDD-03B", "T-BDD-03C", "T-BDD-03F"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TNSI-BDD-EVAL-A-corrige", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "corrige_evaluation", "evaluation_ref": "TNSI-BDD-EVAL-A", "capacites": ["T-BDD-01A", "T-BDD-01B", "T-BDD-01C", "T-BDD-03A", "T-BDD-03B", "T-BDD-03C", "T-BDD-03F"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % import sqlite3
 % conn = sqlite3.connect(":memory:")
@@ -14,6 +14,39 @@
 % conn.execute("INSERT INTO Produit(nom, categorie, prix) VALUES ('Gomme', 'Papeterie', 0.60)")
 % conn.commit()
 % assert conn.execute("SELECT COUNT(*) FROM Produit").fetchone()[0] == 4
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Inscription(nom TEXT, email TEXT, activite TEXT, tarif REAL)")
+% conn.executemany("INSERT INTO Inscription VALUES (?,?,?,?)", [
+%     ("Ines", "ines@club.fr", "Judo", 30.0),
+%     ("Ines", "ines@club.fr", "Echecs", 15.0),
+%     ("Karim", "karim@club.fr", "Judo", 30.0),
+% ])
+% conn.commit()
+% doublons = conn.execute(
+%     "SELECT email, COUNT(*) FROM Inscription GROUP BY email HAVING COUNT(*) > 1"
+% ).fetchall()
+% assert doublons == [("ines@club.fr", 2)]
+% conn.execute("CREATE TABLE Adherent(id INTEGER PRIMARY KEY, nom TEXT, email TEXT)")
+% conn.execute(
+%     "CREATE TABLE Participation(id INTEGER PRIMARY KEY, id_adherent INTEGER, "
+%     "activite TEXT, tarif REAL, FOREIGN KEY(id_adherent) REFERENCES Adherent(id))"
+% )
+% conn.execute("INSERT INTO Adherent VALUES (1, 'Ines', 'ines@club.fr')")
+% conn.executemany("INSERT INTO Participation VALUES (?,?,?,?)",
+%                  [(1, 1, "Judo", 30.0), (2, 1, "Echecs", 15.0)])
+% conn.commit()
+% assert conn.execute("SELECT COUNT(*) FROM Adherent WHERE nom = 'Ines'").fetchone()[0] == 1
+% assert conn.execute("SELECT COUNT(*) FROM Participation WHERE id_adherent = 1").fetchone()[0] == 2
+% lignes = conn.execute(
+%     "SELECT activite, COUNT(*) FROM Inscription WHERE tarif > 20 "
+%     "GROUP BY activite ORDER BY activite"
+% ).fetchall()
+% assert lignes == [("Judo", 2)]
+% sans_filtre = conn.execute(
+%     "SELECT activite, COUNT(*) FROM Inscription GROUP BY activite ORDER BY activite"
+% ).fetchall()
+% assert sans_filtre == [("Echecs", 1), ("Judo", 2)]
 % END-VERIFY
 \begin{corrige}{TNSI-BDD-EVAL-A-EX1}
 \textbf{Q1.} Une \textbf{relation} est une table regroupant des tuples décrits par les mêmes attributs. Un \textbf{attribut} est une colonne de la relation, définie sur un domaine. Une \textbf{clé primaire} est un attribut (ou groupe d'attributs) dont la valeur identifie de façon unique chaque tuple.
@@ -36,4 +69,52 @@ SELECT nom FROM Produit WHERE prix < 2.00;
 \begin{sql}
 INSERT INTO Produit(nom, categorie, prix) VALUES ('Gomme', 'Papeterie', 0.60);
 \end{sql}
+\end{corrige}
+
+\begin{corrige}{TNSI-BDD-EVAL-A-EX3}
+\textbf{Q1.} La \textbf{structure} est le schema : la table \lstinline{Inscription} et ses
+quatre attributs avec leurs types. Le \textbf{contenu} est l'ensemble des lignes
+enregistrees. Une inscription supplementaire ajoute une ligne : elle change le
+\textbf{contenu}, pas la structure. Changer la structure demanderait un
+\lstinline{ALTER TABLE} ou un \lstinline{CREATE TABLE}.
+
+\textbf{Q2.} Deux anomalies :
+\begin{itemize}
+  \item \textbf{redondance et anomalie de mise a jour} : l'email d'un adherent est repete a
+  chacune de ses inscriptions. Corriger l'email sur une seule ligne laisse la base avec deux
+  emails differents pour la meme personne ;
+  \item \textbf{anomalie de suppression} : supprimer la derniere inscription d'un adherent
+  efface aussi son nom et son email, seule trace de son existence dans la base.
+\end{itemize}
+Le schema corrige separe les deux entites :
+\begin{sql}
+CREATE TABLE Adherent(
+  id INTEGER PRIMARY KEY,
+  nom TEXT,
+  email TEXT
+);
+CREATE TABLE Participation(
+  id INTEGER PRIMARY KEY,
+  id_adherent INTEGER,
+  activite TEXT,
+  tarif REAL,
+  FOREIGN KEY(id_adherent) REFERENCES Adherent(id)
+);
+\end{sql}
+L'email n'est alors stocke qu'une fois, et un adherent survit a la suppression de toutes ses
+participations.
+
+\textbf{Q3.} Composant par composant :
+\begin{itemize}
+  \item \lstinline{SELECT activite, COUNT(*)} : la \textbf{projection}, qui dit quelles
+  colonnes composent le resultat -- ici l'activite et un comptage ;
+  \item \lstinline{FROM Inscription} : la \textbf{source} des lignes ;
+  \item \lstinline{WHERE tarif > 20} : le \textbf{filtre}, applique aux lignes
+  \textbf{avant} tout regroupement ;
+  \item \lstinline{GROUP BY activite} : le \textbf{regroupement}, qui rassemble les lignes
+  restantes par activite pour que \lstinline{COUNT(*)} compte a l'interieur de chaque groupe ;
+  \item \lstinline{ORDER BY activite} : le \textbf{tri} du resultat final.
+\end{itemize}
+Sans le \lstinline{WHERE}, l'activite \og Echecs \fg{} apparaitrait aussi : le filtre agit
+bien avant le regroupement.
 \end{corrige}

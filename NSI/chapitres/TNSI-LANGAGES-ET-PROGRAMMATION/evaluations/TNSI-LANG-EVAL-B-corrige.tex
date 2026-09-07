@@ -1,4 +1,4 @@
-% META: {"id": "TNSI-LANG-EVAL-B-corrige", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "corrige_evaluation", "evaluation_ref": "TNSI-LANG-EVAL-B", "capacites": ["T-LANG-03C", "T-LANG-04A", "T-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TNSI-LANG-EVAL-B-corrige", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "corrige_evaluation", "evaluation_ref": "TNSI-LANG-EVAL-B", "capacites": ["T-LANG-01B", "T-LANG-03A", "T-LANG-03B", "T-LANG-03C", "T-LANG-04A", "T-LANG-04B", "T-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % def est_premier(n):
 %     """Indique si l'entier n (n > 1) est premier."""
@@ -16,6 +16,38 @@
 %
 % resultat = 0.3 - 0.2
 % assert resultat != 0.1
+% import statistics
+% serie = [4, 8, 6, 10]
+% assert statistics.mean(serie) == 7
+% assert statistics.median(serie) == 7
+% assert statistics.pstdev(serie) < statistics.stdev(serie)
+% assert abs(statistics.pstdev(serie) - 5 ** 0.5) < 1e-12
+% try:
+%     statistics.stdev([5])
+% except statistics.StatisticsError:
+%     pass
+% else:
+%     raise AssertionError("stdev sur une seule valeur aurait du echouer")
+% def puissance_imperative(base, exposant):
+%     resultat = 1
+%     for _ in range(exposant):
+%         resultat *= base
+%     return resultat
+% def puissance_recursive(base, exposant):
+%     if exposant == 0:
+%         return 1
+%     return base * puissance_recursive(base, exposant - 1)
+% for base in range(1, 5):
+%     for exposant in range(0, 6):
+%         attendu = base ** exposant
+%         assert puissance_imperative(base, exposant) == attendu
+%         assert puissance_recursive(base, exposant) == attendu
+% mesures = [12, -3, 7, 0, 25]
+% imperatif = []
+% for m in mesures:
+%     if m > 0:
+%         imperatif.append(m * 2)
+% assert imperatif == [m * 2 for m in mesures if m > 0] == [24, 14, 50]
 % END-VERIFY
 \begin{corrige}{TNSI-LANG-EVAL-B-EX1}
 \begin{python}
@@ -45,4 +77,45 @@ def carres_positifs_fonctionnel(valeurs):
 \textbf{Q2.} La fonction native masquée est \lstinline{sum}. Le code fonctionne malgré tout \textbf{ici} car la variable locale \lstinline{sum} n'est utilisée que comme accumulateur, sans jamais appeler la fonction native \lstinline{sum(...)} dans le reste de la fonction. Le risque apparaîtrait si l'on avait besoin d'appeler \lstinline{sum(...)} plus loin dans le même bloc : l'appel échouerait car \lstinline{sum} désignerait alors un entier, plus une fonction.
 
 \textbf{Q3.} \lstinline{resultat == 0.1} renvoie \lstinline{False} : à cause des arrondis internes de la représentation binaire des flottants, \lstinline{0.3 - 0.2} ne vaut pas exactement \lstinline{0.1} (l'écart est de l'ordre de $10^{-17}$). Comparer deux flottants avec \lstinline{==} est risqué pour cette raison ; il faut comparer leur écart à une tolérance près : \lstinline{abs(resultat - 0.1) < 1e-9}.
+\end{corrige}
+
+\begin{corrige}{TNSI-LANG-EVAL-B-EX3}
+\textbf{Q1.} On importe le module et on appelle ses fonctions plutot que de reecrire les
+formules :
+
+\begin{python}
+import statistics
+
+serie = [4, 8, 6, 10]
+print(statistics.mean(serie))    # 7
+print(statistics.median(serie))  # 7
+\end{python}
+La serie comptant un nombre pair de valeurs, la mediane est la moyenne des deux valeurs
+centrales, $6$ et $8$, soit $7$ : elle coincide ici avec la moyenne, ce qui n'est pas une
+regle generale.
+
+\textbf{Q2.} Il faut \lstinline{pstdev} : l'enonce demande de decrire \textbf{exactement les
+quatre valeurs mesurees}, c'est-a-dire la population entiere. La documentation indique que
+\lstinline{pstdev} divise par $n$, tandis que \lstinline{stdev} divise par $n-1$ parce qu'il
+\textbf{estime} l'ecart-type d'une population plus large a partir d'un echantillon. C'est
+pour cela que \lstinline{stdev} rend ici une valeur strictement plus grande.
+
+\textbf{Q3.} \lstinline{stdev([5])} leve une \lstinline{StatisticsError}. La documentation le
+dit sans qu'il faille executer : \og{} exige au moins 2 valeurs \fg{} -- avec une seule
+valeur, le diviseur $n-1$ vaudrait zero.
+\end{corrige}
+
+\begin{corrige}{TNSI-LANG-EVAL-B-EX4}
+\textbf{Q1.} La phrase confond \textbf{calculabilite} et \textbf{commodite ou performance}.
+Un probleme calculable l'est dans n'importe quel langage Turing-complet : Python, C, OCaml
+ou un autre calculent exactement le meme ensemble de fonctions. Ce qui change d'un langage a
+l'autre, c'est la vitesse d'execution, la facilite d'ecriture ou les bibliotheques
+disponibles -- jamais la frontiere de ce qui est calculable. Un probleme non calculable, comme
+le probleme de l'arret, ne le devient pas davantage en C.
+
+\textbf{Q2.} Pour une \textbf{interface graphique}, le paradigme \textbf{objet} (ou
+evenementiel) convient : chaque composant a un etat qui evolue et des methodes qui reagissent
+aux evenements, ce que l'encapsulation exprime naturellement. Pour \textbf{filtrer et
+transformer une longue liste de mesures}, le paradigme \textbf{fonctionnel} convient : la
+transformation s'ecrit en une expression sans etat mutable, plus courte et plus sure a relire.
 \end{corrige}

@@ -1,4 +1,4 @@
-% META: {"id": "TNSI-ALGO-EVAL-B-corrige", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "corrige_evaluation", "evaluation_ref": "TNSI-ALGO-EVAL-B", "capacites": ["T-ALGO-02A", "T-ALGO-02C", "T-ALGO-03"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TNSI-ALGO-EVAL-B-corrige", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "corrige_evaluation", "evaluation_ref": "TNSI-ALGO-EVAL-B", "capacites": ["T-ALGO-02A", "T-ALGO-02B", "T-ALGO-02C", "T-ALGO-02D", "T-ALGO-03", "T-ALGO-04", "T-ALGO-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % def bfs(graphe, depart):
 %     visites = [depart]
@@ -20,11 +20,66 @@
 %     milieu = len(liste) // 2
 %     return somme_dpr(liste[:milieu]) + somme_dpr(liste[milieu:])
 % assert somme_dpr([1, 2, 3, 4, 5]) == 15
+% def dfs(graphe, sommet, visites=None):
+%     if visites is None:
+%         visites = []
+%     visites.append(sommet)
+%     for voisin in graphe[sommet]:
+%         if voisin not in visites:
+%             dfs(graphe, voisin, visites)
+%     return visites
+% graphe = {"P": ["Q", "R"], "Q": ["P", "S"], "R": ["P", "S"], "S": ["Q", "R"]}
+% assert dfs(graphe, "P") == ["P", "Q", "S", "R"]
+% def existe_chemin(graphe, depart, arrivee):
+%     return arrivee in dfs(graphe, depart)
+% assert existe_chemin(graphe, "P", "S") is True
+% appels = {"naif": 0, "dynamique": 0}
+% def fibonacci_naif(n):
+%     appels["naif"] += 1
+%     if n < 2:
+%         return n
+%     return fibonacci_naif(n - 1) + fibonacci_naif(n - 2)
+% def fibonacci_dynamique(n, memo=None):
+%     if memo is None:
+%         memo = {}
+%     appels["dynamique"] += 1
+%     if n < 2:
+%         return n
+%     if n not in memo:
+%         memo[n] = fibonacci_dynamique(n - 1, memo) + fibonacci_dynamique(n - 2, memo)
+%     return memo[n]
+% assert fibonacci_dynamique(30) == 832040
+% appels["naif"] = appels["dynamique"] = 0
+% assert fibonacci_naif(20) == fibonacci_dynamique(20) == 6765
+% assert appels["naif"] > 13000
+% assert appels["dynamique"] < 60
+% def table_mauvais_caractere(motif):
+%     return {lettre: indice for indice, lettre in enumerate(motif)}
+% motif, texte = "NSI", "BACNSIBAC"
+% assert table_mauvais_caractere(motif) == {"N": 0, "S": 1, "I": 2}
+% assert texte[2] == "C" and "C" not in table_mauvais_caractere(motif)
+% assert texte[3:6] == motif
 % END-VERIFY
 \begin{corrige}{TNSI-ALGO-EVAL-B-EX1}
 \textbf{Q1.} Depuis \texttt{"P"} : on enfile \texttt{"P"}, on le défile et on enfile ses voisins \texttt{"Q"} puis \texttt{"R"} ; on défile \texttt{"Q"}, son voisin \texttt{"S"} n'est pas encore visité, on l'enfile ; on défile \texttt{"R"}, son voisin \texttt{"S"} est déjà visité. Ordre de visite : \texttt{P, Q, R, S}.
 
-\textbf{Q2.} Oui : \texttt{P} $\to$ \texttt{Q} $\to$ \texttt{S} $\to$ \texttt{R} $\to$ \texttt{P} est un cycle (chaque arête utilisée existe bien dans le graphe, et on revient au sommet de départ sans repasser par une même arête).
+\textbf{Q2.} Depuis \texttt{"P"}, le parcours en profondeur descend d'abord dans
+\texttt{"Q"}, puis dans son voisin \texttt{"S"}, puis dans \texttt{"R"} : ordre de visite
+\texttt{P, Q, S, R}. C'est la structure auxiliaire qui distingue les deux parcours : une
+\textbf{file} pour le parcours en largeur, une \textbf{pile} -- explicite, ou celle des
+appels recursifs -- pour le parcours en profondeur.
+
+\textbf{Q3.} Oui : \texttt{P} $\to$ \texttt{Q} $\to$ \texttt{S} $\to$ \texttt{R} $\to$ \texttt{P} est un cycle (chaque arête utilisée existe bien dans le graphe, et on revient au sommet de départ sans repasser par une même arête).
+
+\textbf{Q4.} Un chemin existe entre deux sommets si et seulement si l'arrivee figure parmi
+les sommets atteints par un parcours partant du depart :
+
+\begin{python}
+def existe_chemin(graphe, depart, arrivee):
+    return arrivee in dfs(graphe, depart)
+\end{python}
+De \texttt{"P"} a \texttt{"S"}, un chemin est \texttt{P} $\to$ \texttt{Q} $\to$ \texttt{S}
+(un autre est \texttt{P} $\to$ \texttt{R} $\to$ \texttt{S}).
 \end{corrige}
 
 \begin{corrige}{TNSI-ALGO-EVAL-B-EX2}
@@ -38,4 +93,49 @@ def somme_dpr(liste):
     milieu = len(liste) // 2
     return somme_dpr(liste[:milieu]) + somme_dpr(liste[milieu:])
 \end{python}
+\end{corrige}
+
+\begin{corrige}{TNSI-ALGO-EVAL-B-EX3}
+\textbf{Q1.} L'ecriture naive appelle \lstinline{fibonacci(n-1)} et \lstinline{fibonacci(n-2)},
+qui recalculent chacune les memes sous-termes : l'arbre des appels contient
+\lstinline{fibonacci(n-2)} deux fois, \lstinline{fibonacci(n-3)} trois fois, et ainsi de
+suite. Le nombre d'appels croit exponentiellement alors qu'il n'y a que $n$ valeurs
+distinctes a connaitre.
+
+\textbf{Q2.} La programmation dynamique memorise chaque terme des qu'il est calcule :
+
+\begin{python}
+def fibonacci_dynamique(n, memo=None):
+    if memo is None:
+        memo = {}
+    if n < 2:
+        return n
+    if n not in memo:
+        memo[n] = fibonacci_dynamique(n - 1, memo) + fibonacci_dynamique(n - 2, memo)
+    return memo[n]
+\end{python}
+On obtient $F_{30} = 832\,040$.
+
+\textbf{Q3.} Pour $n=20$, la version naive fait plus de treize mille appels ; la version
+memorisee en fait moins de soixante, soit un rapport superieur a deux cents. Ce gain de
+\textbf{temps} est paye par de la \textbf{memoire} : le dictionnaire conserve un terme par
+rang, ce que la version naive ne fait pas.
+\end{corrige}
+
+\begin{corrige}{TNSI-ALGO-EVAL-B-EX4}
+\textbf{Q1.} Boyer-Moore compare les caracteres du motif au texte \textbf{de la droite vers
+la gauche}, alors que le motif progresse de la gauche vers la droite. Quand une comparaison
+echoue sur un caractere du texte, la regle du \textbf{mauvais caractere} regarde si ce
+caractere apparait dans le motif : s'il n'y figure pas, aucun alignement chevauchant ne peut
+convenir et le motif saute entierement ; s'il y figure, on l'aligne sur sa derniere
+occurrence dans le motif. C'est ce saut, souvent de plusieurs positions, qui rend
+l'algorithme rapide.
+
+\textbf{Q2.} Motif \lstinline{"NSI"} aligne en position $0$ du texte
+\lstinline{"BACNSIBAC"} : on compare d'abord \lstinline{texte[2]}, qui vaut \lstinline{"C"},
+au dernier caractere du motif, \lstinline{"I"}. L'echec porte sur \lstinline{"C"}, qui
+n'apparait pas dans \lstinline{"NSI"} : le motif peut donc etre decale de \textbf{trois}
+positions d'un coup. Il se retrouve aligne en position $3$, ou il correspond exactement. Au
+total quatre comparaisons de caracteres, la ou une recherche naive testerait sept
+alignements successifs.
 \end{corrige}

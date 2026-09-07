@@ -1,20 +1,20 @@
-% META: {"id": "TNSI-ALGO-EVAL-A", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "evaluation", "version": "A", "capacites": ["T-ALGO-01A", "T-ALGO-01B", "T-ALGO-01E", "T-ALGO-01F"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
+% META: {"id": "TNSI-ALGO-EVAL-A", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "evaluation", "version": "A", "capacites": ["T-ALGO-01A", "T-ALGO-01B", "T-ALGO-01C", "T-ALGO-01D", "T-ALGO-01E", "T-ALGO-01F"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
 \section*{Évaluation A --- Arbres binaires}
 \textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
 
-\baremeIndicatif{Ex. 1 : 8 pts (taille, hauteur) ; Ex. 2 : 12 pts (arbre de recherche)}
+\baremeIndicatif{Ex. 1 : 6 pts (taille, hauteur) ; Ex. 2 : 8 pts (arbre de recherche) ; Ex. 3 : 6 pts (parcours)}
 
 \bigskip
 
-\textbf{Exercice 1} --- \textit{Taille et hauteur} \hfill (8 points)
+\textbf{Exercice 1} --- \textit{Taille et hauteur} \hfill (6 points)
 
 On donne la classe \lstinline{Noeud} du cours (attributs \lstinline{valeur}, \lstinline{gauche}, \lstinline{droite}) et l'arbre :
 \begin{python}
 arbre = Noeud(10, Noeud(5, Noeud(2), Noeud(7)), Noeud(15))
 \end{python}
 \begin{enumerate}
-  \item (4 pts) Sans exécuter de code, donner la taille et la hauteur de cet arbre en justifiant (convention : hauteur d'une feuille = $0$).
-  \item (4 pts) Écrire une fonction \lstinline{est_feuille(arbre)} qui renvoie \lstinline{True} si et seulement si \lstinline{arbre} est un nœud sans aucun enfant.
+  \item (3 pts) Sans exécuter de code, donner la taille et la hauteur de cet arbre en justifiant (convention : hauteur d'une feuille = $0$).
+  \item (3 pts) Écrire une fonction \lstinline{est_feuille(arbre)} qui renvoie \lstinline{True} si et seulement si \lstinline{arbre} est un nœud sans aucun enfant.
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -42,11 +42,11 @@ arbre = Noeud(10, Noeud(5, Noeud(2), Noeud(7)), Noeud(15))
 
 \bigskip
 
-\textbf{Exercice 2} --- \textit{Arbre binaire de recherche} \hfill (12 points)
+\textbf{Exercice 2} --- \textit{Arbre binaire de recherche} \hfill (8 points)
 
 \begin{enumerate}
-  \item (6 pts) En utilisant \lstinline{inserer} du cours, construire un ABR à partir des valeurs $10, 5, 15, 3, 7, 12$ insérées dans cet ordre.
-  \item (6 pts) Écrire une fonction \lstinline{minimum(arbre)} qui renvoie la plus petite valeur d'un ABR non vide (indication : la plus petite valeur d'un ABR se trouve toujours tout en bas à gauche).
+  \item (4 pts) En utilisant \lstinline{inserer} du cours, construire un ABR à partir des valeurs $10, 5, 15, 3, 7, 12$ insérées dans cet ordre.
+  \item (4 pts) Écrire une fonction \lstinline{minimum(arbre)} qui renvoie la plus petite valeur d'un ABR non vide (indication : la plus petite valeur d'un ABR se trouve toujours tout en bas à gauche).
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -71,4 +71,83 @@ arbre = Noeud(10, Noeud(5, Noeud(2), Noeud(7)), Noeud(15))
 %         arbre = arbre.gauche
 %     return arbre.valeur
 % assert minimum(abr) == 3
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{Parcours d'un arbre} \hfill (6 points)
+
+On reprend l'arbre binaire de recherche de l'exercice $2$, construit a partir des valeurs
+$10, 5, 15, 3, 7, 12$ inserees dans cet ordre.
+
+\begin{enumerate}
+  \item (3 pts) Donner la suite des valeurs visitees par les parcours \textbf{prefixe},
+  \textbf{infixe} et \textbf{suffixe}. Que constate-t-on sur le parcours infixe d'un arbre
+  binaire de recherche, et pourquoi ?
+  \item (2 pts) Ecrire la fonction \lstinline{parcours_largeur(arbre)}, qui renvoie la liste
+  des valeurs niveau par niveau, de la gauche vers la droite. On precisera la structure de
+  donnees auxiliaire utilisee.
+  \item (1 pt) Pourquoi le parcours en largeur ne peut-il pas s'ecrire naturellement de
+  facon recursive comme les trois autres ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from collections import deque
+%
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droite = droite
+%
+% def inserer(arbre, cle):
+%     if arbre is None:
+%         return Noeud(cle)
+%     if cle < arbre.valeur:
+%         arbre.gauche = inserer(arbre.gauche, cle)
+%     elif cle > arbre.valeur:
+%         arbre.droite = inserer(arbre.droite, cle)
+%     return arbre
+%
+% abr = None
+% for v in (10, 5, 15, 3, 7, 12):
+%     abr = inserer(abr, v)
+%
+% def prefixe(arbre):
+%     if arbre is None:
+%         return []
+%     return [arbre.valeur] + prefixe(arbre.gauche) + prefixe(arbre.droite)
+%
+% def infixe(arbre):
+%     if arbre is None:
+%         return []
+%     return infixe(arbre.gauche) + [arbre.valeur] + infixe(arbre.droite)
+%
+% def suffixe(arbre):
+%     if arbre is None:
+%         return []
+%     return suffixe(arbre.gauche) + suffixe(arbre.droite) + [arbre.valeur]
+%
+% def parcours_largeur(arbre):
+%     if arbre is None:
+%         return []
+%     valeurs, file = [], deque([arbre])
+%     while file:
+%         noeud = file.popleft()
+%         valeurs.append(noeud.valeur)
+%         if noeud.gauche is not None:
+%             file.append(noeud.gauche)
+%         if noeud.droite is not None:
+%             file.append(noeud.droite)
+%     return valeurs
+%
+% assert prefixe(abr) == [10, 5, 3, 7, 15, 12]
+% assert infixe(abr) == [3, 5, 7, 10, 12, 15]
+% assert suffixe(abr) == [3, 7, 5, 12, 15, 10]
+% # L'infixe d'un ABR est trie : c'est la propriete caracteristique.
+% assert infixe(abr) == sorted(infixe(abr))
+% assert prefixe(abr) != sorted(prefixe(abr))
+% assert parcours_largeur(abr) == [10, 5, 15, 3, 7, 12]
+% # Le parcours en largeur n'est pas l'un des trois parcours en profondeur.
+% assert parcours_largeur(abr) not in (prefixe(abr), infixe(abr), suffixe(abr))
 % END-VERIFY

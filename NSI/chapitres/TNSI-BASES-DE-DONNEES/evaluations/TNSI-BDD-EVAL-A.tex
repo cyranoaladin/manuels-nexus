@@ -1,21 +1,21 @@
-% META: {"id": "TNSI-BDD-EVAL-A", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "evaluation", "version": "A", "capacites": ["T-BDD-01A", "T-BDD-03B", "T-BDD-03C", "T-BDD-03F"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
+% META: {"id": "TNSI-BDD-EVAL-A", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "evaluation", "version": "A", "capacites": ["T-BDD-01A", "T-BDD-01B", "T-BDD-01C", "T-BDD-03A", "T-BDD-03B", "T-BDD-03C", "T-BDD-03F"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
 \section*{Évaluation A --- Bases de données}
 \textit{Durée : 45 minutes. Ordinateur avec un SGBD (SQLite ou équivalent) autorisé.}
 
-\baremeIndicatif{Ex. 1 : 8 pts (modèle relationnel) ; Ex. 2 : 12 pts (SELECT, WHERE, INSERT)}
+\baremeIndicatif{Ex. 1 : 6 pts (modèle relationnel) ; Ex. 2 : 9 pts (SELECT, WHERE, INSERT) ; Ex. 3 : 5 pts (structure, anomalies, composants d'une requête)}
 
 \bigskip
 
-\textbf{Exercice 1} --- \textit{Modélisation} \hfill (8 points)
+\textbf{Exercice 1} --- \textit{Modélisation} \hfill (6 points)
 
 \begin{enumerate}
-  \item (4 pts) Définir, en une phrase chacun, les termes \textit{relation}, \textit{attribut} et \textit{clé primaire}.
-  \item (4 pts) Donner un exemple de clé étrangère dans le schéma \texttt{Commande(id, id\_client, date)} / \texttt{Client(id, nom)}, et expliquer à quoi elle sert.
+  \item (3 pts) Définir, en une phrase chacun, les termes \textit{relation}, \textit{attribut} et \textit{clé primaire}.
+  \item (3 pts) Donner un exemple de clé étrangère dans le schéma \texttt{Commande(id, id\_client, date)} / \texttt{Client(id, nom)}, et expliquer à quoi elle sert.
 \end{enumerate}
 
 \bigskip
 
-\textbf{Exercice 2} --- \textit{SELECT, WHERE, INSERT} \hfill (12 points)
+\textbf{Exercice 2} --- \textit{SELECT, WHERE, INSERT} \hfill (9 points)
 
 On donne la table :
 \begin{sql}
@@ -26,9 +26,9 @@ INSERT INTO Produit VALUES
   (3, 'Casque audio', 25.00, 'Electronique');
 \end{sql}
 \begin{enumerate}
-  \item (4 pts) Écrire la requête affichant le nom des produits de catégorie \texttt{'Papeterie'}.
-  \item (4 pts) Écrire la requête affichant le nom des produits dont le prix est strictement inférieur à $2.00$.
-  \item (4 pts) Écrire la requête ajoutant un produit \texttt{'Gomme'}, catégorie \texttt{'Papeterie'}, prix $0.60$.
+  \item (3 pts) Écrire la requête affichant le nom des produits de catégorie \texttt{'Papeterie'}.
+  \item (3 pts) Écrire la requête affichant le nom des produits dont le prix est strictement inférieur à $2.00$.
+  \item (3 pts) Écrire la requête ajoutant un produit \texttt{'Gomme'}, catégorie \texttt{'Papeterie'}, prix $0.60$.
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -46,4 +46,82 @@ INSERT INTO Produit VALUES
 % conn.execute("INSERT INTO Produit(nom, categorie, prix) VALUES ('Gomme', 'Papeterie', 0.60)")
 % conn.commit()
 % assert conn.execute("SELECT COUNT(*) FROM Produit").fetchone()[0] == 4
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{Structure, anomalies et composants d'une requete} \hfill (5 points)
+
+Un club enregistre ses adherents et leurs inscriptions dans une seule table :
+
+\begin{sql}
+CREATE TABLE Inscription(
+  nom TEXT, email TEXT, activite TEXT, tarif REAL
+);
+\end{sql}
+Un meme adherent s'inscrit a plusieurs activites, et son email est donc repete.
+
+\begin{enumerate}
+  \item (1 pt) Distinguer, sur cet exemple, la \textbf{structure} de la base et son
+  \textbf{contenu}. Laquelle des deux change quand un adherent s'inscrit a une activite de
+  plus ?
+  \item (2 pts) Reperer deux \textbf{anomalies} de ce schema, en disant pour chacune ce qui
+  se passe concretement lors d'une mise a jour ou d'une suppression. Proposer un schema
+  corrige en deux tables, avec cle primaire et cle etrangere.
+  \item (2 pts) Dans la requete
+  \lstinline{SELECT activite, COUNT(*) FROM Inscription WHERE tarif > 20 GROUP BY activite ORDER BY activite},
+  nommer chaque composant et dire ce qu'il fait.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Inscription(nom TEXT, email TEXT, activite TEXT, tarif REAL)")
+% conn.executemany("INSERT INTO Inscription VALUES (?,?,?,?)", [
+%     ("Ines", "ines@club.fr", "Judo", 30.0),
+%     ("Ines", "ines@club.fr", "Echecs", 15.0),
+%     ("Karim", "karim@club.fr", "Judo", 30.0),
+% ])
+% conn.commit()
+% # Anomalie de redondance : le meme email est stocke plusieurs fois.
+% doublons = conn.execute(
+%     "SELECT email, COUNT(*) FROM Inscription GROUP BY email HAVING COUNT(*) > 1"
+% ).fetchall()
+% assert doublons == [("ines@club.fr", 2)]
+% # Anomalie de mise a jour : corriger l'email d'une seule ligne rend la base
+% # incoherente -- deux emails pour la meme personne.
+% conn.execute("UPDATE Inscription SET email = 'ines@nouveau.fr' WHERE activite = 'Judo' AND nom = 'Ines'")
+% emails_ines = conn.execute("SELECT DISTINCT email FROM Inscription WHERE nom = 'Ines'").fetchall()
+% assert len(emails_ines) == 2
+% conn.execute("UPDATE Inscription SET email = 'ines@club.fr' WHERE nom = 'Ines'")
+% # Anomalie de suppression : retirer la derniere inscription de Karim efface
+% # aussi la seule trace de son existence.
+% conn.execute("DELETE FROM Inscription WHERE nom = 'Karim'")
+% assert conn.execute("SELECT COUNT(*) FROM Inscription WHERE nom = 'Karim'").fetchone()[0] == 0
+% conn.execute("INSERT INTO Inscription VALUES ('Karim', 'karim@club.fr', 'Judo', 30.0)")
+% conn.commit()
+% # Le schema corrige separe l'adherent de ses inscriptions.
+% conn.execute("CREATE TABLE Adherent(id INTEGER PRIMARY KEY, nom TEXT, email TEXT)")
+% conn.execute(
+%     "CREATE TABLE Participation(id INTEGER PRIMARY KEY, id_adherent INTEGER, "
+%     "activite TEXT, tarif REAL, FOREIGN KEY(id_adherent) REFERENCES Adherent(id))"
+% )
+% conn.execute("INSERT INTO Adherent VALUES (1, 'Ines', 'ines@club.fr')")
+% conn.executemany("INSERT INTO Participation VALUES (?,?,?,?)",
+%                  [(1, 1, "Judo", 30.0), (2, 1, "Echecs", 15.0)])
+% conn.commit()
+% # L'email n'est plus stocke qu'une fois, quel que soit le nombre d'activites.
+% assert conn.execute("SELECT COUNT(*) FROM Adherent WHERE nom = 'Ines'").fetchone()[0] == 1
+% assert conn.execute("SELECT COUNT(*) FROM Participation WHERE id_adherent = 1").fetchone()[0] == 2
+% # La requete d'analyse : projection, filtre, regroupement, tri.
+% lignes = conn.execute(
+%     "SELECT activite, COUNT(*) FROM Inscription WHERE tarif > 20 "
+%     "GROUP BY activite ORDER BY activite"
+% ).fetchall()
+% assert lignes == [("Judo", 2)]
+% # Sans le WHERE, Echecs apparaitrait aussi : le filtre agit avant le regroupement.
+% sans_filtre = conn.execute(
+%     "SELECT activite, COUNT(*) FROM Inscription GROUP BY activite ORDER BY activite"
+% ).fetchall()
+% assert sans_filtre == [("Echecs", 1), ("Judo", 2)]
 % END-VERIFY

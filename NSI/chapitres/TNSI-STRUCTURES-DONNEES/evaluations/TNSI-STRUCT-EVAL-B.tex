@@ -1,31 +1,34 @@
-% META: {"id": "TNSI-STRUCT-EVAL-B", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "evaluation", "version": "B", "capacites": ["T-STRUCT-05A", "T-STRUCT-05B", "T-STRUCT-05D"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
+% META: {"id": "TNSI-STRUCT-EVAL-B", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "evaluation", "version": "B", "capacites": ["T-STRUCT-03B", "T-STRUCT-03C", "T-STRUCT-04A", "T-STRUCT-04B", "T-STRUCT-05A", "T-STRUCT-05B", "T-STRUCT-05C", "T-STRUCT-05D"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
 \section*{Évaluation B --- Structures de données}
 \textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
 
-\baremeIndicatif{Ex. 1 : 8 pts (modélisation) ; Ex. 2 : 12 pts (graphes, conversion)}
+\baremeIndicatif{Ex. 1 : 6 pts (modélisation) ; Ex. 2 : 8 pts (graphes, conversion) ; Ex. 3 : 3 pts (choix de structure, recherche) ; Ex. 4 : 3 pts (arbres : situations et mesures)}
 
 \bigskip
 
-\textbf{Exercice 1} --- \textit{Modélisation} \hfill (8 points)
+\textbf{Exercice 1} --- \textit{Modélisation} \hfill (6 points)
 
 Un reseau de transport relie des stations par des lignes directes.
 \begin{enumerate}
-  \item (4 pts) Justifier qu'un graphe est une structure adaptee pour modeliser ce reseau.
-  \item (4 pts) Ce graphe doit-il être oriente ou non oriente si les lignes fonctionnent dans les deux sens ? Justifier.
+  \item (3 pts) Justifier qu'un graphe est une structure adaptee pour modeliser ce reseau.
+  \item (3 pts) Ce graphe doit-il être oriente ou non oriente si les lignes fonctionnent dans les deux sens ? Justifier.
 \end{enumerate}
 
 \bigskip
 
-\textbf{Exercice 2} --- \textit{Graphes, conversion} \hfill (12 points)
+\textbf{Exercice 2} --- \textit{Graphes, conversion} \hfill (8 points)
 
 On donne un graphe oriente a $3$ sommets ($0,1,2$) par ses listes de successeurs :
 \begin{python}
 successeurs = {0: [1, 2], 1: [], 2: [0]}
 \end{python}
 \begin{enumerate}
-  \item (4 pts) Lister toutes les arêtes de ce graphe.
-  \item (4 pts) Le sommet $1$ a-t-il des successeurs ? Qu'est-ce que cela signifie ?
-  \item (4 pts) Donner la matrice d'adjacence correspondant a ce graphe.
+  \item (2 pts) Lister toutes les arêtes de ce graphe.
+  \item (2 pts) Le sommet $1$ a-t-il des successeurs ? Qu'est-ce que cela signifie ?
+  \item (2 pts) Donner la matrice d'adjacence correspondant a ce graphe.
+  \item (2 pts) Ecrire la classe \lstinline{GrapheSuccesseurs}, implementation d'un graphe
+  oriente par listes de successeurs, avec \lstinline{ajouter_sommet}, \lstinline{ajouter_arete}
+  et \lstinline{voisins}. Verifier qu'elle reconstruit le graphe donne.
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -33,4 +36,120 @@ successeurs = {0: [1, 2], 1: [], 2: [0]}
 % n = 3
 % matrice = [[1 if j in successeurs[i] else 0 for j in range(n)] for i in range(n)]
 % assert matrice == [[0,1,1],[0,0,0],[1,0,0]]
+%
+% class GrapheSuccesseurs:
+%     def __init__(self):
+%         self._successeurs = {}
+%     def ajouter_sommet(self, sommet):
+%         self._successeurs.setdefault(sommet, [])
+%     def ajouter_arete(self, depart, arrivee):
+%         self.ajouter_sommet(depart)
+%         self.ajouter_sommet(arrivee)
+%         if arrivee not in self._successeurs[depart]:
+%             self._successeurs[depart].append(arrivee)
+%     def voisins(self, sommet):
+%         return list(self._successeurs[sommet])
+%
+% graphe = GrapheSuccesseurs()
+% for sommet in range(3):
+%     graphe.ajouter_sommet(sommet)
+% for depart, arrivees in successeurs.items():
+%     for arrivee in arrivees:
+%         graphe.ajouter_arete(depart, arrivee)
+% assert graphe.voisins(0) == [1, 2]
+% assert graphe.voisins(1) == []
+% assert graphe.voisins(2) == [0]
+% # L'orientation compte : 0 -> 1 n'entraine pas 1 -> 0.
+% assert 1 in graphe.voisins(0) and 0 not in graphe.voisins(1)
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{Choisir une structure, chercher une valeur} \hfill (3 points)
+
+Une application doit retrouver tres souvent le nom d'un eleve a partir de son numero
+d'identifiant, sur un fichier de $10\,000$ eleves.
+
+\begin{enumerate}
+  \item (2 pts) Entre une \textbf{liste} de couples $(identifiant, nom)$ et un
+  \textbf{dictionnaire} associant l'identifiant au nom, quelle structure choisir ? Justifier
+  en comparant le \textbf{cout de la recherche} dans les deux cas.
+  \item (1 pt) Existe-t-il une situation ou la liste redevient preferable ? En citer une.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% # Recherche dans une liste : on parcourt jusqu'a trouver, donc jusqu'a n
+% # comparaisons. Recherche dans un dictionnaire : un acces direct par cle.
+% eleves_liste = [(numero, "eleve%d" % numero) for numero in range(10000)]
+% eleves_dico = dict(eleves_liste)
+%
+% comparaisons = {"liste": 0}
+% def chercher_dans_liste(couples, identifiant):
+%     for numero, nom in couples:
+%         comparaisons["liste"] += 1
+%         if numero == identifiant:
+%             return nom
+%     return None
+%
+% assert chercher_dans_liste(eleves_liste, 9999) == "eleve9999"
+% assert comparaisons["liste"] == 10000        # pire cas : tout le parcours
+% assert eleves_dico[9999] == "eleve9999"      # acces direct, sans parcours
+% # Les deux structures donnent la meme reponse : c'est le cout qui differe.
+% comparaisons["liste"] = 0
+% for identifiant in (0, 5000, 9999):
+%     assert chercher_dans_liste(eleves_liste, identifiant) == eleves_dico[identifiant]
+% assert comparaisons["liste"] == 1 + 5001 + 10000
+% # La liste conserve l'ordre d'insertion, ce qu'un dictionnaire par cle ne
+% # garantit pas comme critere de tri.
+% assert [numero for numero, _ in eleves_liste[:3]] == [0, 1, 2]
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 4} --- \textit{Arbres : situations et mesures} \hfill (3 points)
+
+\begin{enumerate}
+  \item (1 pt) Citer deux situations concretes qui appellent naturellement une structure
+  \textbf{arborescente} plutot qu'une liste, en disant a chaque fois ce que la hierarchie
+  represente.
+  \item (2 pts) Pour l'arbre binaire ci-dessous, donner sa \textbf{taille}, sa
+  \textbf{hauteur} (convention : hauteur d'une feuille $=0$) et son nombre de
+  \textbf{feuilles}, en justifiant chaque valeur.
+\begin{python}
+arbre = Noeud(1, Noeud(2, Noeud(4), None), Noeud(3, Noeud(5), Noeud(6)))
+\end{python}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droite = droite
+%
+% def taille(arbre):
+%     if arbre is None:
+%         return 0
+%     return 1 + taille(arbre.gauche) + taille(arbre.droite)
+%
+% def hauteur(arbre):
+%     if arbre is None:
+%         return -1
+%     return 1 + max(hauteur(arbre.gauche), hauteur(arbre.droite))
+%
+% def feuilles(arbre):
+%     if arbre is None:
+%         return 0
+%     if arbre.gauche is None and arbre.droite is None:
+%         return 1
+%     return feuilles(arbre.gauche) + feuilles(arbre.droite)
+%
+% arbre = Noeud(1, Noeud(2, Noeud(4), None), Noeud(3, Noeud(5), Noeud(6)))
+% assert taille(arbre) == 6
+% assert hauteur(arbre) == 2
+% assert feuilles(arbre) == 3            # 4, 5 et 6
+% # Le noeud 2 n'a qu'un enfant : ce n'est donc pas une feuille.
+% assert arbre.gauche.droite is None and feuilles(arbre.gauche) == 1
+% # Un arbre binaire de hauteur h a au plus 2^(h+1) - 1 noeuds.
+% assert taille(arbre) <= 2 ** (hauteur(arbre) + 1) - 1
 % END-VERIFY

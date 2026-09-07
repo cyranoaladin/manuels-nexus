@@ -1,4 +1,4 @@
-% META: {"id": "TNSI-STRUCT-EVAL-A-corrige", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "corrige_evaluation", "evaluation_ref": "TNSI-STRUCT-EVAL-A", "capacites": ["T-STRUCT-02A", "T-STRUCT-02B", "T-STRUCT-03A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TNSI-STRUCT-EVAL-A-corrige", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "corrige_evaluation", "evaluation_ref": "TNSI-STRUCT-EVAL-A", "capacites": ["T-STRUCT-01A", "T-STRUCT-01B", "T-STRUCT-01C", "T-STRUCT-02A", "T-STRUCT-02B", "T-STRUCT-03A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % class Rectangle:
 %     def __init__(self, largeur, hauteur):
@@ -14,6 +14,36 @@
 % pile = [5, 3, 8, 1]
 % pile.pop(); pile.pop(); pile.pop()
 % assert pile == [5]
+% class PileListe:
+%     def __init__(self):
+%         self._elements = []
+%     def est_vide(self):
+%         return len(self._elements) == 0
+%     def empiler(self, valeur):
+%         self._elements.append(valeur)
+%     def depiler(self):
+%         assert not self.est_vide(), "depiler sur une pile vide"
+%         return self._elements.pop()
+% class PileChainee:
+%     def __init__(self):
+%         self._sommet = None
+%     def est_vide(self):
+%         return self._sommet is None
+%     def empiler(self, valeur):
+%         self._sommet = (valeur, self._sommet)
+%     def depiler(self):
+%         assert not self.est_vide(), "depiler sur une pile vide"
+%         valeur, suivante = self._sommet
+%         self._sommet = suivante
+%         return valeur
+% for Pile in (PileListe, PileChainee):
+%     pile = Pile()
+%     assert pile.est_vide() is True
+%     for valeur in (5, 3, 8, 1):
+%         pile.empiler(valeur)
+%     assert [pile.depiler() for _ in range(3)] == [1, 8, 3]
+%     assert pile.depiler() == 5
+%     assert pile.est_vide() is True
 % END-VERIFY
 \begin{corrige}{TNSI-STRUCT-EVAL-A-EX1}
 \begin{python}
@@ -31,7 +61,60 @@ class Rectangle:
 \end{corrige}
 
 \begin{corrige}{TNSI-STRUCT-EVAL-A-EX2}
-\textbf{Q1.} Interface : \lstinline{empiler(v)}, \lstinline{depiler()}, \lstinline{est_vide()}. Principe LIFO : le dernier élément empile est le premier depile.
+\textbf{Q1.} Specification par l'interface, sans aucun code :
+\begin{itemize}
+  \item \lstinline{est_vide()} : sans parametre, renvoie un booleen indiquant si la pile ne
+  contient aucun element ; aucune precondition ;
+  \item \lstinline{empiler(valeur)} : prend la valeur a placer au sommet, ne renvoie rien,
+  modifie la pile ; aucune precondition ;
+  \item \lstinline{depiler()} : sans parametre, retire et renvoie la valeur du sommet ;
+  \textbf{precondition} : la pile n'est pas vide.
+\end{itemize}
+Principe LIFO : le dernier element empile est le premier depile.
 
 \textbf{Q2.} Après avoir empile $5,3,8,1$, la pile est $[5,3,8,1]$ (du bas vers le sommet). Depiler trois fois retire $1$, puis $8$, puis $3$ (LIFO) : il reste $[5]$.
+
+\textbf{Q3.} Deux implementations de la meme interface :
+
+\begin{python}
+class PileListe:
+    def __init__(self):
+        self._elements = []
+
+    def est_vide(self):
+        return len(self._elements) == 0
+
+    def empiler(self, valeur):
+        self._elements.append(valeur)
+
+    def depiler(self):
+        assert not self.est_vide(), "depiler sur une pile vide"
+        return self._elements.pop()
+
+
+class PileChainee:
+    def __init__(self):
+        self._sommet = None
+
+    def est_vide(self):
+        return self._sommet is None
+
+    def empiler(self, valeur):
+        self._sommet = (valeur, self._sommet)
+
+    def depiler(self):
+        assert not self.est_vide(), "depiler sur une pile vide"
+        valeur, suivante = self._sommet
+        self._sommet = suivante
+        return valeur
+\end{python}
+
+\textbf{Q4.} Pour le code utilisateur, \textbf{rien ne change} : il appelle
+\lstinline{empiler}, \lstinline{depiler} et \lstinline{est_vide} et obtient les memes
+resultats, parce que l'\textbf{interface} -- les operations et leur comportement -- est
+identique. Ce qui change est l'\textbf{implementation} : une liste redimensionnable d'un
+cote, un chainage de couples de l'autre, avec des couts memoire differents. C'est
+exactement la distinction : l'interface est le contrat que l'utilisateur lit ;
+l'implementation est la maniere de le tenir, et elle peut etre remplacee sans reecrire une
+seule ligne du code appelant.
 \end{corrige}

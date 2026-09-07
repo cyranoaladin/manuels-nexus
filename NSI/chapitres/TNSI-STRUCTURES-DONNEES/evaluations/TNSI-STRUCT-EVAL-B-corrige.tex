@@ -1,9 +1,62 @@
-% META: {"id": "TNSI-STRUCT-EVAL-B-corrige", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "corrige_evaluation", "evaluation_ref": "TNSI-STRUCT-EVAL-B", "capacites": ["T-STRUCT-05A", "T-STRUCT-05B", "T-STRUCT-05D"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TNSI-STRUCT-EVAL-B-corrige", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "corrige_evaluation", "evaluation_ref": "TNSI-STRUCT-EVAL-B", "capacites": ["T-STRUCT-03B", "T-STRUCT-03C", "T-STRUCT-04A", "T-STRUCT-04B", "T-STRUCT-05A", "T-STRUCT-05B", "T-STRUCT-05C", "T-STRUCT-05D"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % successeurs = {0: [1, 2], 1: [], 2: [0]}
 % n = 3
 % matrice = [[1 if j in successeurs[i] else 0 for j in range(n)] for i in range(n)]
 % assert matrice == [[0,1,1],[0,0,0],[1,0,0]]
+% class GrapheSuccesseurs:
+%     def __init__(self):
+%         self._successeurs = {}
+%     def ajouter_sommet(self, sommet):
+%         self._successeurs.setdefault(sommet, [])
+%     def ajouter_arete(self, depart, arrivee):
+%         self.ajouter_sommet(depart)
+%         self.ajouter_sommet(arrivee)
+%         if arrivee not in self._successeurs[depart]:
+%             self._successeurs[depart].append(arrivee)
+%     def voisins(self, sommet):
+%         return list(self._successeurs[sommet])
+% graphe = GrapheSuccesseurs()
+% for sommet in range(3):
+%     graphe.ajouter_sommet(sommet)
+% for depart, arrivees in {0: [1, 2], 1: [], 2: [0]}.items():
+%     for arrivee in arrivees:
+%         graphe.ajouter_arete(depart, arrivee)
+% assert graphe.voisins(0) == [1, 2]
+% assert graphe.voisins(1) == []
+% assert graphe.voisins(2) == [0]
+% eleves_liste = [(numero, "eleve%d" % numero) for numero in range(10000)]
+% eleves_dico = dict(eleves_liste)
+% comparaisons = {"liste": 0}
+% def chercher_dans_liste(couples, identifiant):
+%     for numero, nom in couples:
+%         comparaisons["liste"] += 1
+%         if numero == identifiant:
+%             return nom
+%     return None
+% assert chercher_dans_liste(eleves_liste, 9999) == eleves_dico[9999]
+% assert comparaisons["liste"] == 10000
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droite = droite
+% def taille(arbre):
+%     if arbre is None:
+%         return 0
+%     return 1 + taille(arbre.gauche) + taille(arbre.droite)
+% def hauteur(arbre):
+%     if arbre is None:
+%         return -1
+%     return 1 + max(hauteur(arbre.gauche), hauteur(arbre.droite))
+% def feuilles(arbre):
+%     if arbre is None:
+%         return 0
+%     if arbre.gauche is None and arbre.droite is None:
+%         return 1
+%     return feuilles(arbre.gauche) + feuilles(arbre.droite)
+% arbre = Noeud(1, Noeud(2, Noeud(4), None), Noeud(3, Noeud(5), Noeud(6)))
+% assert (taille(arbre), hauteur(arbre), feuilles(arbre)) == (6, 2, 3)
 % END-VERIFY
 \begin{corrige}{TNSI-STRUCT-EVAL-B-EX1}
 \textbf{Q1.} Un graphe modélisé naturellement des éléments (stations) en relation (lignes directes) : les stations sont les sommets, les lignes directes les arêtes.
@@ -24,4 +77,42 @@ matrice = [
     [1, 0, 0],
 ]
 \end{python}
+\end{corrige}
+
+\begin{corrige}{TNSI-STRUCT-EVAL-B-EX3}
+\textbf{Q1.} Le \textbf{dictionnaire}. Chercher un identifiant dans une liste de couples
+oblige a parcourir les elements jusqu'a le trouver : dans le pire cas, les $10\,000$ couples
+sont compares, et en moyenne la moitie. Le dictionnaire donne un \textbf{acces direct} par
+cle, dont le cout ne depend pas du nombre d'eleves. Sur une operation faite tres souvent,
+l'ecart est decisif.
+
+\textbf{Q2.} Oui : lorsque l'ordre compte ou qu'on parcourt systematiquement toutes les
+donnees. Par exemple pour afficher les eleves dans leur ordre d'inscription, ou pour trier
+la promotion : la liste conserve un ordre, la recherche par cle n'apporte rien, et le
+parcours complet coute la meme chose dans les deux structures.
+
+\end{corrige}
+
+\begin{corrige}{TNSI-STRUCT-EVAL-B-EX4}
+\textbf{Q1.} Deux situations :
+\begin{itemize}
+  \item une \textbf{arborescence de fichiers} : la hierarchie represente l'inclusion, un
+  dossier contenant des fichiers et d'autres dossiers ; une liste plate perdrait cette
+  relation ;
+  \item un \textbf{tournoi a elimination directe} : la hierarchie represente les
+  qualifications successives, chaque noeud etant le vainqueur des deux sous-arbres qui le
+  precedent.
+\end{itemize}
+
+\textbf{Q2.} L'arbre a pour racine $1$, avec a gauche $2$ (dont le seul enfant est $4$) et a
+droite $3$ (d'enfants $5$ et $6$).
+\begin{itemize}
+  \item \textbf{Taille} $=6$ : on compte les noeuds $1, 2, 3, 4, 5, 6$ ;
+  \item \textbf{Hauteur} $=2$ : le plus long chemin de la racine a une feuille passe par
+  deux aretes, par exemple $1\to2\to4$ ;
+  \item \textbf{Feuilles} $=3$ : ce sont $4$, $5$ et $6$, seuls noeuds sans aucun enfant. Le
+  noeud $2$ n'en est pas une : il a un enfant gauche, meme s'il n'a pas d'enfant droit.
+\end{itemize}
+On verifie la borne connue : un arbre binaire de hauteur $h$ a au plus $2^{h+1}-1$ noeuds,
+soit ici au plus $7$, et l'arbre en a $6$.
 \end{corrige}

@@ -1,12 +1,12 @@
-% META: {"id": "TNSI-ALGO-EVAL-B", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "evaluation", "version": "B", "capacites": ["T-ALGO-02A", "T-ALGO-02C", "T-ALGO-03"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
+% META: {"id": "TNSI-ALGO-EVAL-B", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "evaluation", "version": "B", "capacites": ["T-ALGO-02A", "T-ALGO-02B", "T-ALGO-02C", "T-ALGO-02D", "T-ALGO-03", "T-ALGO-04", "T-ALGO-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
 \section*{Évaluation B --- Graphes et diviser pour régner}
 \textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
 
-\baremeIndicatif{Ex. 1 : 10 pts (parcours et cycle) ; Ex. 2 : 10 pts (diviser pour régner)}
+\baremeIndicatif{Ex. 1 : 7 pts (parcours, cycle, chemin) ; Ex. 2 : 6 pts (diviser pour régner) ; Ex. 3 : 4 pts (programmation dynamique) ; Ex. 4 : 3 pts (Boyer-Moore)}
 
 \bigskip
 
-\textbf{Exercice 1} --- \textit{Parcours et cycle} \hfill (10 points)
+\textbf{Exercice 1} --- \textit{Parcours, cycle et chemin} \hfill (7 points)
 
 On donne le graphe non orienté :
 \begin{python}
@@ -18,8 +18,14 @@ graphe = {
 }
 \end{python}
 \begin{enumerate}
-  \item (5 pts) Donner l'ordre de visite des sommets par un parcours en largeur (BFS) depuis \texttt{"P"}, en supposant que les voisins sont explorés dans l'ordre où ils apparaissent dans la liste.
-  \item (5 pts) Ce graphe contient-il un cycle ? Justifier en citant un cycle si oui.
+  \item (2 pts) Donner l'ordre de visite des sommets par un parcours en largeur (BFS) depuis \texttt{"P"}, en supposant que les voisins sont explorés dans l'ordre où ils apparaissent dans la liste.
+  \item (2 pts) Donner l'ordre de visite par un parcours en \textbf{profondeur} (DFS) depuis
+  \texttt{"P"}, avec la meme convention, et dire quelle structure de donnees distingue les
+  deux parcours.
+  \item (2 pts) Ce graphe contient-il un cycle ? Justifier en citant un cycle si oui.
+  \item (1 pt) Ecrire une fonction \lstinline{existe_chemin(graphe, depart, arrivee)} qui dit
+  s'il existe un chemin entre deux sommets, et donner un chemin de \texttt{"P"} a
+  \texttt{"S"}.
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -47,15 +53,32 @@ graphe = {
 %             return True
 %     return False
 % assert a_un_cycle(graphe, "P", [], None) is True
+% def dfs(graphe, sommet, visites=None):
+%     if visites is None:
+%         visites = []
+%     visites.append(sommet)
+%     for voisin in graphe[sommet]:
+%         if voisin not in visites:
+%             dfs(graphe, voisin, visites)
+%     return visites
+% assert dfs(graphe, "P") == ["P", "Q", "S", "R"]
+% assert dfs(graphe, "P") != bfs(graphe, "P")
+% def existe_chemin(graphe, depart, arrivee):
+%     return arrivee in dfs(graphe, depart)
+% assert existe_chemin(graphe, "P", "S") is True
+% # Un sommet isole n'est atteignable depuis aucun autre.
+% graphe_isole = dict(graphe)
+% graphe_isole["T"] = []
+% assert existe_chemin(graphe_isole, "P", "T") is False
 % END-VERIFY
 
 \bigskip
 
-\textbf{Exercice 2} --- \textit{Diviser pour régner} \hfill (10 points)
+\textbf{Exercice 2} --- \textit{Diviser pour régner} \hfill (6 points)
 
 \begin{enumerate}
-  \item (4 pts) Rappeler les trois étapes de la méthode diviser pour régner.
-  \item (6 pts) Écrire une fonction récursive \lstinline{somme_dpr(liste)} qui calcule la somme des éléments d'une liste non vide par diviser pour régner (diviser en deux moitiés, additionner récursivement, puis combiner par addition).
+  \item (2 pts) Rappeler les trois étapes de la méthode diviser pour régner.
+  \item (4 pts) Écrire une fonction récursive \lstinline{somme_dpr(liste)} qui calcule la somme des éléments d'une liste non vide par diviser pour régner (diviser en deux moitiés, additionner récursivement, puis combiner par addition).
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -66,4 +89,87 @@ graphe = {
 %     return somme_dpr(liste[:milieu]) + somme_dpr(liste[milieu:])
 % assert somme_dpr([1, 2, 3, 4, 5]) == 15
 % assert somme_dpr([7]) == 7
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{Programmation dynamique} \hfill (4 points)
+
+On veut calculer le $n$-ieme terme de la suite de Fibonacci ($F_0=0$, $F_1=1$,
+$F_{n}=F_{n-1}+F_{n-2}$).
+
+\begin{enumerate}
+  \item (1 pt) Expliquer pourquoi l'ecriture recursive naive recalcule un tres grand nombre
+  de fois les memes termes.
+  \item (2 pts) Ecrire une version par \textbf{programmation dynamique} qui memorise les
+  resultats deja calcules, et donner $F_{30}$.
+  \item (1 pt) Comparer le nombre d'appels des deux versions pour $n=20$, et dire ce que la
+  memorisation echange contre ce gain.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% appels = {"naif": 0, "dynamique": 0}
+%
+% def fibonacci_naif(n):
+%     appels["naif"] += 1
+%     if n < 2:
+%         return n
+%     return fibonacci_naif(n - 1) + fibonacci_naif(n - 2)
+%
+% def fibonacci_dynamique(n, memo=None):
+%     if memo is None:
+%         memo = {}
+%     appels["dynamique"] += 1
+%     if n < 2:
+%         return n
+%     if n not in memo:
+%         memo[n] = fibonacci_dynamique(n - 1, memo) + fibonacci_dynamique(n - 2, memo)
+%     return memo[n]
+%
+% assert fibonacci_dynamique(30) == 832040
+% assert fibonacci_dynamique(0) == 0 and fibonacci_dynamique(1) == 1
+% appels["naif"] = appels["dynamique"] = 0
+% assert fibonacci_naif(20) == fibonacci_dynamique(20) == 6765
+% # Le naif fait des milliers d'appels la ou la version memorisee en fait
+% # quelques dizaines.
+% assert appels["naif"] > 13000
+% assert appels["dynamique"] < 60
+% assert appels["naif"] > 200 * appels["dynamique"]
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 4} --- \textit{Recherche d'un motif : Boyer-Moore} \hfill (3 points)
+
+\begin{enumerate}
+  \item (2 pts) Expliquer le principe de l'algorithme de Boyer-Moore : dans quel sens les
+  caracteres du motif sont-ils compares, et que permet la regle du \textbf{mauvais
+  caractere} lorsqu'une comparaison echoue ?
+  \item (1 pt) On cherche le motif \lstinline{"NSI"} dans le texte
+  \lstinline{"BACNSIBAC"}. Indiquer de combien de positions le motif peut etre decale apres
+  le premier echec, et pourquoi cela fait moins de comparaisons qu'une recherche naive.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% # Table du mauvais caractere : derniere position de chaque lettre du motif.
+% def table_mauvais_caractere(motif):
+%     return {lettre: indice for indice, lettre in enumerate(motif)}
+%
+% motif, texte = "NSI", "BACNSIBAC"
+% table = table_mauvais_caractere(motif)
+% assert table == {"N": 0, "S": 1, "I": 2}
+% # Premiere comparaison : le motif est aligne en 0, on compare par la DROITE,
+% # donc texte[2] = "C" contre motif[2] = "I". "C" n'est pas dans le motif :
+% # le motif peut sauter entierement, soit un decalage de 3.
+% assert texte[2] == "C" and motif[2] == "I"
+% assert "C" not in table
+% decalage = len(motif)
+% assert decalage == 3
+% # Le motif est alors aligne en 3, ou il correspond exactement.
+% assert texte[3:6] == motif
+% # Comparaisons faites : 1 (echec) puis 3 (succes), soit 4 -- contre 5
+% # alignements testes par la recherche naive.
+% naives = sum(1 for depart in range(len(texte) - len(motif) + 1))
+% assert naives == 7
+% assert 4 < naives
 % END-VERIFY

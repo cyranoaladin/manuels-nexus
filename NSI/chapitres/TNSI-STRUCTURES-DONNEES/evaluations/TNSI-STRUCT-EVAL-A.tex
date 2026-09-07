@@ -1,17 +1,17 @@
-% META: {"id": "TNSI-STRUCT-EVAL-A", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "evaluation", "version": "A", "capacites": ["T-STRUCT-02A", "T-STRUCT-02B", "T-STRUCT-03A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
+% META: {"id": "TNSI-STRUCT-EVAL-A", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "evaluation", "version": "A", "capacites": ["T-STRUCT-01A", "T-STRUCT-01B", "T-STRUCT-01C", "T-STRUCT-02A", "T-STRUCT-02B", "T-STRUCT-03A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
 \section*{Évaluation A --- Structures de données}
 \textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
 
-\baremeIndicatif{Ex. 1 : 10 pts (programmer une classe) ; Ex. 2 : 10 pts (pile, LIFO)}
+\baremeIndicatif{Ex. 1 : 8 pts (programmer une classe) ; Ex. 2 : 12 pts (pile : interface, implementations)}
 
 \bigskip
 
-\textbf{Exercice 1} --- \textit{Classe Rectangle} \hfill (10 points)
+\textbf{Exercice 1} --- \textit{Classe Rectangle} \hfill (8 points)
 
 \begin{enumerate}
   \item (4 pts) Écrire une classe \lstinline{Rectangle} avec un constructeur prenant \lstinline{largeur} et \lstinline{hauteur}.
-  \item (3 pts) Ajouter une méthode \lstinline{aire()} qui renvoie l'aire du rectangle.
-  \item (3 pts) Ajouter une méthode \lstinline{perimetre()} qui renvoie le perimetre du rectangle.
+  \item (2 pts) Ajouter une méthode \lstinline{aire()} qui renvoie l'aire du rectangle.
+  \item (2 pts) Ajouter une méthode \lstinline{perimetre()} qui renvoie le perimetre du rectangle.
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -30,9 +30,63 @@
 
 \bigskip
 
-\textbf{Exercice 2} --- \textit{Pile} \hfill (10 points)
+\textbf{Exercice 2} --- \textit{Pile : interface et implementations} \hfill (12 points)
 
 \begin{enumerate}
-  \item (4 pts) Rappeler l'interface d'une pile (trois methodes) et le principe LIFO.
-  \item (6 pts) On empile successivement $5, 3, 8, 1$, puis on depile trois fois. Donner, en le justifiant, le contenu final de la pile.
+  \item (3 pts) \textbf{Specifier} la pile par son interface : donner les trois operations,
+  avec pour chacune ses parametres, sa valeur de retour et sa precondition eventuelle. On
+  n'ecrira aucun code.
+  \item (3 pts) On empile successivement $5, 3, 8, 1$, puis on depile trois fois. Donner, en
+  le justifiant par le principe LIFO, le contenu final de la pile.
+  \item (3 pts) Ecrire une premiere implementation \lstinline{PileListe} utilisant une liste
+  Python, puis une seconde \lstinline{PileChainee} utilisant un chainage de cellules
+  \lstinline{(valeur, suivante)}.
+  \item (3 pts) Expliquer ce que change le passage de l'une a l'autre pour le \textbf{code
+  qui utilise} la pile, et ce que cela illustre de la distinction entre interface et
+  implementation.
 \end{enumerate}
+
+% BEGIN-VERIFY
+% class PileListe:
+%     def __init__(self):
+%         self._elements = []
+%     def est_vide(self):
+%         return len(self._elements) == 0
+%     def empiler(self, valeur):
+%         self._elements.append(valeur)
+%     def depiler(self):
+%         assert not self.est_vide(), "depiler sur une pile vide"
+%         return self._elements.pop()
+%
+% class PileChainee:
+%     def __init__(self):
+%         self._sommet = None
+%     def est_vide(self):
+%         return self._sommet is None
+%     def empiler(self, valeur):
+%         self._sommet = (valeur, self._sommet)
+%     def depiler(self):
+%         assert not self.est_vide(), "depiler sur une pile vide"
+%         valeur, suivante = self._sommet
+%         self._sommet = suivante
+%         return valeur
+%
+% # Les deux implementations sont interchangeables : meme interface, memes
+% # resultats sur la meme suite d'operations.
+% for Pile in (PileListe, PileChainee):
+%     pile = Pile()
+%     assert pile.est_vide() is True
+%     for valeur in (5, 3, 8, 1):
+%         pile.empiler(valeur)
+%     assert pile.est_vide() is False
+%     depilees = [pile.depiler() for _ in range(3)]
+%     assert depilees == [1, 8, 3]          # LIFO : dernier entre, premier sorti
+%     assert pile.depiler() == 5
+%     assert pile.est_vide() is True
+%     try:
+%         pile.depiler()
+%     except AssertionError as e:
+%         assert "vide" in str(e)
+%     else:
+%         raise AssertionError("depiler sur une pile vide aurait du echouer")
+% END-VERIFY

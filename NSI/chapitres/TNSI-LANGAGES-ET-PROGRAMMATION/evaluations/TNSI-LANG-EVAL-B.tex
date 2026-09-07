@@ -1,16 +1,16 @@
-% META: {"id": "TNSI-LANG-EVAL-B", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "evaluation", "version": "B", "capacites": ["T-LANG-03C", "T-LANG-04A", "T-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
+% META: {"id": "TNSI-LANG-EVAL-B", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "evaluation", "version": "B", "capacites": ["T-LANG-01B", "T-LANG-03A", "T-LANG-03B", "T-LANG-03C", "T-LANG-04A", "T-LANG-04B", "T-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
 \section*{Évaluation B --- Modules, paradigmes et débogage}
 \textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
 
-\baremeIndicatif{Ex. 1 : 8 pts (module documenté) ; Ex. 2 : 12 pts (paradigmes, débogage)}
+\baremeIndicatif{Ex. 1 : 6 pts (module documenté) ; Ex. 2 : 8 pts (paradigmes, débogage) ; Ex. 3 : 4 pts (API et documentation) ; Ex. 4 : 2 pts (calculabilité, choix de paradigme)}
 
 \bigskip
 
-\textbf{Exercice 1} --- \textit{Créer un module documenté} \hfill (8 points)
+\textbf{Exercice 1} --- \textit{Créer un module documenté} \hfill (6 points)
 
 \begin{enumerate}
-  \item (5 pts) Écrire une fonction \lstinline{est_premier(n)}, destinée à un module \lstinline{arithmetique.py}, qui renvoie \lstinline{True} si l'entier \lstinline{n} (supérieur à $1$) est premier, \lstinline{False} sinon. Ajouter une docstring décrivant son rôle, son paramètre et sa valeur de retour.
-  \item (3 pts) Tester la fonction sur $n=7$ (premier) et $n=8$ (non premier).
+  \item (4 pts) Écrire une fonction \lstinline{est_premier(n)}, destinée à un module \lstinline{arithmetique.py}, qui renvoie \lstinline{True} si l'entier \lstinline{n} (supérieur à $1$) est premier, \lstinline{False} sinon. Ajouter une docstring décrivant son rôle, son paramètre et sa valeur de retour.
+  \item (2 pts) Tester la fonction sur $n=7$ (premier) et $n=8$ (non premier).
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -28,10 +28,10 @@
 
 \bigskip
 
-\textbf{Exercice 2} --- \textit{Paradigmes et débogage} \hfill (12 points)
+\textbf{Exercice 2} --- \textit{Paradigmes et débogage} \hfill (8 points)
 
 \begin{enumerate}
-  \item (4 pts) Réécrire en style fonctionnel (une liste en compréhension) la fonction impérative suivante :
+  \item (3 pts) Réécrire en style fonctionnel (une liste en compréhension) la fonction impérative suivante :
 \begin{python}
 def carres_positifs_imperatif(valeurs):
     resultat = []
@@ -40,7 +40,7 @@ def carres_positifs_imperatif(valeurs):
             resultat.append(v ** 2)
     return resultat
 \end{python}
-  \item (4 pts) Le code suivant contient un bug de nommage :
+  \item (3 pts) Le code suivant contient un bug de nommage :
 \begin{python}
 def calculer_moyenne(notes):
     sum = 0
@@ -49,7 +49,7 @@ def calculer_moyenne(notes):
     return sum / len(notes)
 \end{python}
     Quelle fonction native est masquée ? Ce code fonctionne-t-il malgré tout pour calculer une moyenne simple ? Justifier.
-  \item (4 pts) Le code suivant compare deux résultats de calculs flottants avec \lstinline{==}. Que renvoie-t-il, pourquoi est-ce risqué de comparer ainsi, et comment corriger ?
+  \item (2 pts) Le code suivant compare deux résultats de calculs flottants avec \lstinline{==}. Que renvoie-t-il, pourquoi est-ce risqué de comparer ainsi, et comment corriger ?
 \begin{python}
 resultat = 0.3 - 0.2
 print(resultat == 0.1)
@@ -79,4 +79,96 @@ print(resultat == 0.1)
 % resultat = 0.3 - 0.2
 % assert resultat != 0.1
 % assert abs(resultat - 0.1) < 1e-9
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{Utiliser une API et sa documentation} \hfill (4 points)
+
+On utilise le module standard \lstinline{statistics}, dont la documentation indique :
+
+\begin{console}
+statistics.mean(data)      -> moyenne arithmetique ; leve StatisticsError si data est vide
+statistics.median(data)    -> mediane ; pour un nombre pair de valeurs, moyenne des deux centrales
+statistics.pstdev(data)    -> ecart-type de population (diviseur n)
+statistics.stdev(data)     -> ecart-type d'echantillon (diviseur n-1) ; exige au moins 2 valeurs
+\end{console}
+
+\begin{enumerate}
+  \item (2 pts) Ecrire le code qui, pour la serie \lstinline{[4, 8, 6, 10]}, affiche la
+  moyenne et la mediane en utilisant cette bibliotheque plutot qu'en les recalculant.
+  \item (1 pt) La documentation distingue \lstinline{pstdev} et \lstinline{stdev}. Laquelle
+  faut-il choisir pour decrire exactement les quatre valeurs mesurees, et pourquoi ?
+  \item (1 pt) Que se passe-t-il si l'on appelle \lstinline{stdev([5])} ? Citer la phrase de
+  la documentation qui permet de le prevoir sans executer le code.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% import statistics
+% serie = [4, 8, 6, 10]
+% assert statistics.mean(serie) == 7
+% # Nombre pair de valeurs : la mediane est la moyenne des deux centrales, 6 et 8.
+% assert statistics.median(serie) == 7
+% assert sorted(serie)[1:3] == [6, 8]
+% # pstdev decrit la population observee, stdev estime une population plus large.
+% assert statistics.pstdev(serie) != statistics.stdev(serie)
+% assert statistics.pstdev(serie) < statistics.stdev(serie)
+% assert abs(statistics.pstdev(serie) - 5 ** 0.5) < 1e-12
+% # La documentation annonce l'erreur : stdev exige au moins deux valeurs.
+% try:
+%     statistics.stdev([5])
+% except statistics.StatisticsError:
+%     pass
+% else:
+%     raise AssertionError("stdev sur une seule valeur aurait du echouer")
+% # mean sur une serie vide leve la meme famille d'erreur.
+% try:
+%     statistics.mean([])
+% except statistics.StatisticsError:
+%     pass
+% else:
+%     raise AssertionError("mean sur une serie vide aurait du echouer")
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 4} --- \textit{Calculabilite et choix d'un paradigme} \hfill (2 points)
+
+\begin{enumerate}
+  \item (1 pt) Un eleve affirme : \og{} Ce probleme n'est pas calculable en Python, il
+  faudrait le programmer en C. \fg{} Expliquer pourquoi cette phrase confond deux choses
+  differentes.
+  \item (1 pt) Pour ecrire l'interface graphique d'une application, puis pour transformer une
+  longue liste de mesures en une liste filtree et transformee, quel paradigme choisiriez-vous
+  dans chaque cas ? Justifier en une phrase par cas.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% # La calculabilite ne depend pas du langage : les deux ecritures, imperative
+% # et fonctionnelle, calculent la meme chose, et un langage en vaut un autre
+% # des lors qu'il est Turing-complet.
+% def puissance_imperative(base, exposant):
+%     resultat = 1
+%     for _ in range(exposant):
+%         resultat *= base
+%     return resultat
+%
+% def puissance_recursive(base, exposant):
+%     if exposant == 0:
+%         return 1
+%     return base * puissance_recursive(base, exposant - 1)
+%
+% for base in range(1, 5):
+%     for exposant in range(0, 6):
+%         attendu = base ** exposant
+%         assert puissance_imperative(base, exposant) == attendu
+%         assert puissance_recursive(base, exposant) == attendu
+% # Le paradigme change l'ecriture, pas le resultat.
+% mesures = [12, -3, 7, 0, 25]
+% imperatif = []
+% for m in mesures:
+%     if m > 0:
+%         imperatif.append(m * 2)
+% fonctionnel = [m * 2 for m in mesures if m > 0]
+% assert imperatif == fonctionnel == [24, 14, 50]
 % END-VERIFY

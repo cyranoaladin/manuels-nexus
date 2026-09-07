@@ -1,4 +1,4 @@
-% META: {"id": "TNSI-ALGO-EVAL-A-corrige", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "corrige_evaluation", "evaluation_ref": "TNSI-ALGO-EVAL-A", "capacites": ["T-ALGO-01A", "T-ALGO-01B", "T-ALGO-01E", "T-ALGO-01F"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TNSI-ALGO-EVAL-A-corrige", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "corrige_evaluation", "evaluation_ref": "TNSI-ALGO-EVAL-A", "capacites": ["T-ALGO-01A", "T-ALGO-01B", "T-ALGO-01C", "T-ALGO-01D", "T-ALGO-01E", "T-ALGO-01F"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % class Noeud:
 %     def __init__(self, valeur, gauche=None, droite=None):
@@ -32,6 +32,52 @@
 %         arbre = arbre.gauche
 %     return arbre.valeur
 % assert minimum(abr) == 3
+% from collections import deque
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droite = droite
+% def inserer(arbre, cle):
+%     if arbre is None:
+%         return Noeud(cle)
+%     if cle < arbre.valeur:
+%         arbre.gauche = inserer(arbre.gauche, cle)
+%     elif cle > arbre.valeur:
+%         arbre.droite = inserer(arbre.droite, cle)
+%     return arbre
+% abr = None
+% for v in (10, 5, 15, 3, 7, 12):
+%     abr = inserer(abr, v)
+% def prefixe(arbre):
+%     if arbre is None:
+%         return []
+%     return [arbre.valeur] + prefixe(arbre.gauche) + prefixe(arbre.droite)
+% def infixe(arbre):
+%     if arbre is None:
+%         return []
+%     return infixe(arbre.gauche) + [arbre.valeur] + infixe(arbre.droite)
+% def suffixe(arbre):
+%     if arbre is None:
+%         return []
+%     return suffixe(arbre.gauche) + suffixe(arbre.droite) + [arbre.valeur]
+% def parcours_largeur(arbre):
+%     if arbre is None:
+%         return []
+%     valeurs, file = [], deque([arbre])
+%     while file:
+%         noeud = file.popleft()
+%         valeurs.append(noeud.valeur)
+%         if noeud.gauche is not None:
+%             file.append(noeud.gauche)
+%         if noeud.droite is not None:
+%             file.append(noeud.droite)
+%     return valeurs
+% assert prefixe(abr) == [10, 5, 3, 7, 15, 12]
+% assert infixe(abr) == [3, 5, 7, 10, 12, 15]
+% assert suffixe(abr) == [3, 7, 5, 12, 15, 10]
+% assert infixe(abr) == sorted(infixe(abr))
+% assert parcours_largeur(abr) == [10, 5, 15, 3, 7, 12]
 % END-VERIFY
 \begin{corrige}{TNSI-ALGO-EVAL-A-EX1}
 \textbf{Q1.} L'arbre a $5$ nœuds ($10, 5, 15, 2, 7$) : taille $= 5$. Le plus long chemin racine-feuille est $10 \to 5 \to 2$ (ou $10 \to 5 \to 7$), soit $2$ arêtes : hauteur $= 2$.
@@ -54,4 +100,45 @@ def minimum(arbre):
     return arbre.valeur
 \end{python}
 Dans un ABR, chaque descente à gauche mène vers des valeurs plus petites ; la plus petite valeur est donc atteinte lorsqu'il n'y a plus de sous-arbre gauche.
+\end{corrige}
+
+\begin{corrige}{TNSI-ALGO-EVAL-A-EX3}
+\textbf{Q1.} Sur l'ABR de racine $10$ :
+\begin{itemize}
+  \item \textbf{prefixe} (racine, gauche, droite) : $10, 5, 3, 7, 15, 12$ ;
+  \item \textbf{infixe} (gauche, racine, droite) : $3, 5, 7, 10, 12, 15$ ;
+  \item \textbf{suffixe} (gauche, droite, racine) : $3, 7, 5, 12, 15, 10$.
+\end{itemize}
+Le parcours infixe donne les valeurs \textbf{triees dans l'ordre croissant}. C'est la
+propriete caracteristique de l'arbre binaire de recherche : tout ce qui est a gauche d'un
+noeud lui est inferieur, tout ce qui est a droite lui est superieur, et l'infixe visite
+justement le sous-arbre gauche, puis le noeud, puis le sous-arbre droit.
+
+\textbf{Q2.} Le parcours en largeur utilise une \textbf{file} (structure premier entre,
+premier sorti) : on defile un noeud, on l'enregistre, puis on enfile ses deux enfants.
+
+\begin{python}
+from collections import deque
+
+
+def parcours_largeur(arbre):
+    if arbre is None:
+        return []
+    valeurs, file = [], deque([arbre])
+    while file:
+        noeud = file.popleft()
+        valeurs.append(noeud.valeur)
+        if noeud.gauche is not None:
+            file.append(noeud.gauche)
+        if noeud.droite is not None:
+            file.append(noeud.droite)
+    return valeurs
+\end{python}
+Sur l'arbre de l'exercice : $10, 5, 15, 3, 7, 12$.
+
+\textbf{Q3.} Les trois parcours en profondeur descendent completement dans un sous-arbre
+avant de passer a l'autre : c'est exactement ce que fait la pile d'appels recursifs. Le
+parcours en largeur, lui, doit revenir a des noeuds \textbf{voisins} avant de descendre,
+ce que la pile d'appels ne permet pas ; il faut une file explicite, qui memorise les noeuds
+dans l'ordre inverse de celui d'une pile.
 \end{corrige}
