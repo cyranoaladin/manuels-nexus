@@ -234,10 +234,10 @@ manuals:
   TCOMPL:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '309'
+      detail: '313'
       source: anomalies.blocking_statuses
     - code: statuts_non_approuves
-      detail: objets=300; contrats=9
+      detail: objets=304; contrats=9
       source: manuals.TCOMPL.statuses
     current:
       artifacts:
@@ -255,17 +255,17 @@ manuals:
       - TCOMPL-MODELES-FONCTION
       - TCOMPL-TEMPS-ATTENTE
       statuses:
-        generated: 233
+        generated: 237
         needs_review: 67
       totals:
         banque_ecrite: 0
         banque_pratique: 0
         capacites: 53
-        corriges: 101
+        corriges: 103
         coups_de_pouce: 0
         diagnostics: 0
         evaluations: 18
-        exercices_principaux: 83
+        exercices_principaux: 85
         methodes: 52
         projets: 0
         qcm: 9
@@ -497,7 +497,7 @@ manuals:
   TSPE_2026_2027:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '67'
+      detail: '69'
       source: anomalies.blocking_statuses
     - code: anomalie:broken_meta_references
       detail: '2'
@@ -509,7 +509,7 @@ manuals:
       detail: declared
       source: deliverable_matrix.TSPE_2026_2027.variants.livret_remediation
     - code: statuts_non_approuves
-      detail: objets=67; contrats=0
+      detail: objets=69; contrats=0
       source: manuals.TSPE_2026_2027.statuses
     current:
       artifacts:
@@ -529,22 +529,22 @@ manuals:
       - TSPE-SUITES-LIMITES
       - TSPE-TRIGONOMETRIE
       statuses:
-        approved: 756
-        generated: 64
+        approved: 752
+        generated: 66
         needs_review: 3
       totals:
         banque_ecrite: 0
         banque_pratique: 0
         capacites: 67
-        corriges: 291
+        corriges: 289
         coups_de_pouce: 67
         diagnostics: 0
         evaluations: 22
-        exercices_principaux: 269
+        exercices_principaux: 267
         methodes: 41
         projets: 0
         qcm: 11
-        remediations: 56
+        remediations: 58
         sections_cours: 58
         td: 8
     objective:
@@ -599,12 +599,12 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:1bce93bc00381a4432ae36ae9112f7d1a67920749adeb67c4a99e394b62009e9
+model_digest: sha256:44d5cd125797181717955136f38720282a29e08664c629bb95eef4ad049f02f2
 provenance:
   branch: null
-  dirty: false
+  dirty: true
   errors: []
-  generated_at_utc: '2026-09-07T18:51:28Z'
+  generated_at_utc: '2026-09-07T19:37:16Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:79b255deeddfa4b483a9a5a9f568bdc143defd7b2a69e8b8a704f4afdd35d6bf
     scripts/build_manifest.py: sha256:62d4f5da9454aaa2923041db777b759e3e4b672e7c2f33b59a62e07afc76de26
@@ -616,8 +616,9 @@ provenance:
   generator_sha256: sha256:f932fe8c33273bdba8f5f9230ed39a824111f74177310dc1c4ea7c529714d065
   generator_version: 1
   git_available: true
-  head_sha: e9fc76c0448514320857fd56e1103e8de100be44
-  modified_tracked: []
+  head_sha: 8d5455766628c82612566cdf8111a422b90fe6ac
+  modified_tracked:
+  - audit/NON_FORMALIZABLE_REVIEW_CLOSURE.json
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
     git: git version 2.43.0
@@ -628,4 +629,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:71127deab7e5de4c28848c2a1d3c1b2eda1db9f38bf094c01f80ab5e278c0048
+source_digest: sha256:bb803a44c9284a2e67f41ded8f3b5e8d88a274eae0199e227c9db7dc236d1f95

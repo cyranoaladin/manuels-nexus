@@ -9711,6 +9711,18 @@ anomalies:
     scope: object
     status: generated
   - chapter: TCOMPL-LOGARITHME-HISTORIQUE
+    id: TCOMPL-LOG-CO-008
+    manual: TCOMPL
+    path: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/corriges/TCOMPL-LOG-CO-008.tex
+    scope: object
+    status: generated
+  - chapter: TCOMPL-LOGARITHME-HISTORIQUE
+    id: TCOMPL-LOG-CO-009
+    manual: TCOMPL
+    path: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/corriges/TCOMPL-LOG-CO-009.tex
+    scope: object
+    status: generated
+  - chapter: TCOMPL-LOGARITHME-HISTORIQUE
     id: TCOMPL-LOG-CR-010
     manual: TCOMPL
     path: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/cours/10_C1_definition_ln.tex
@@ -9792,6 +9804,18 @@ anomalies:
     id: TCOMPL-LOG-EX-007
     manual: TCOMPL
     path: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/exercices/TCOMPL-LOG-EX-007.tex
+    scope: object
+    status: generated
+  - chapter: TCOMPL-LOGARITHME-HISTORIQUE
+    id: TCOMPL-LOG-EX-008
+    manual: TCOMPL
+    path: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/exercices/TCOMPL-LOG-EX-008.tex
+    scope: object
+    status: generated
+  - chapter: TCOMPL-LOGARITHME-HISTORIQUE
+    id: TCOMPL-LOG-EX-009
+    manual: TCOMPL
+    path: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/exercices/TCOMPL-LOG-EX-009.tex
     scope: object
     status: generated
   - chapter: TCOMPL-LOGARITHME-HISTORIQUE
@@ -12336,6 +12360,18 @@ anomalies:
     id: TSPE-TRIGONOMETRIE-QCM
     manual: TSPE_2026_2027
     path: Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/qcm/TSPE-TRIGONOMETRIE-QCM.tex
+    scope: object
+    status: generated
+  - chapter: TSPE-TRIGONOMETRIE
+    id: TSPE-TRIGONOMETRIE-FR-R1-016
+    manual: TSPE_2026_2027
+    path: Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/remediation/TSPE-TRIGONOMETRIE-FR-R1-016.tex
+    scope: object
+    status: generated
+  - chapter: TSPE-TRIGONOMETRIE
+    id: TSPE-TRIGONOMETRIE-FR-R1-019
+    manual: TSPE_2026_2027
+    path: Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/remediation/TSPE-TRIGONOMETRIE-FR-R1-019.tex
     scope: object
     status: generated
   - chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN
@@ -16211,7 +16247,7 @@ claims:
     path: Mathematiques/manuel-maths/ETAT_COLLECTION.md
     raw: 'Completion E5/F01 : Suites 49→50 exercices + 21 coups de pouce (0→21) ;'
     scope: manual:TSPE_2026_2027
-  - calculated: 269
+  - calculated: 267
     declared: 50
     etat: contredit
     evidence: manuals.TSPE_2026_2027.totals.exercices_principaux
@@ -16229,7 +16265,7 @@ claims:
     path: Mathematiques/manuel-maths/ETAT_COLLECTION.md
     raw: Second degre 42→50 exercices + 20 coups de pouce (0→20). Couverture
     scope: manual:TSPE_2026_2027
-  - calculated: 269
+  - calculated: 267
     declared: 50
     etat: contredit
     evidence: manuals.TSPE_2026_2027.totals.exercices_principaux
@@ -17027,12 +17063,12 @@ counts:
   claims_contredits: 31
   claims_ouverts: 53
 generated_by: inventory_collection.py
-model_digest: sha256:1bce93bc00381a4432ae36ae9112f7d1a67920749adeb67c4a99e394b62009e9
+model_digest: sha256:44d5cd125797181717955136f38720282a29e08664c629bb95eef4ad049f02f2
 provenance:
   branch: null
-  dirty: false
+  dirty: true
   errors: []
-  generated_at_utc: '2026-09-07T18:51:28Z'
+  generated_at_utc: '2026-09-07T19:37:16Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:79b255deeddfa4b483a9a5a9f568bdc143defd7b2a69e8b8a704f4afdd35d6bf
     scripts/build_manifest.py: sha256:62d4f5da9454aaa2923041db777b759e3e4b672e7c2f33b59a62e07afc76de26
@@ -17044,8 +17080,9 @@ provenance:
   generator_sha256: sha256:f932fe8c33273bdba8f5f9230ed39a824111f74177310dc1c4ea7c529714d065
   generator_version: 1
   git_available: true
-  head_sha: e9fc76c0448514320857fd56e1103e8de100be44
-  modified_tracked: []
+  head_sha: 8d5455766628c82612566cdf8111a422b90fe6ac
+  modified_tracked:
+  - audit/NON_FORMALIZABLE_REVIEW_CLOSURE.json
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
     git: git version 2.43.0
@@ -17056,4 +17093,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/ecarts-et-contradictions.schema.json
 schema_version: 1
-source_digest: sha256:71127deab7e5de4c28848c2a1d3c1b2eda1db9f38bf094c01f80ab5e278c0048
+source_digest: sha256:bb803a44c9284a2e67f41ded8f3b5e8d88a274eae0199e227c9db7dc236d1f95
