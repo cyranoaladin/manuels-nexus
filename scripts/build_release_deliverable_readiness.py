@@ -140,7 +140,7 @@ def content_coverage(inventory: dict[str, Any], assembly_id: str | None,
     # Un chapitre où la rubrique n'est pas pédagogiquement attendue ne compte
     # pas dans le dénominateur : exiger 10/10 partout produirait du remplissage.
     rubric = (assembly_id or "").rsplit(":", 1)[-1]
-    if rubric in {"methodes", "remediation"}:
+    if rubric in {"methodes", "remediation", "banque_ecrite", "banque_pratique"}:
         chapters = applicability.applicable_chapters(manual, rubric, chapters)
     assemblies = {a["assembly_id"]: a for a in inventory.get("declared_assemblies", [])}
     assembly = assemblies.get(assembly_id or "")

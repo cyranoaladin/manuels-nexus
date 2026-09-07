@@ -52,6 +52,32 @@ VERDICTS: dict[tuple[str, str], dict[str, str]] = {
             "d'évaluation. Une fiche de remédiation y serait sans objet."
         ),
     },
+    ("TNSI-PROJET", "banque_ecrite"): {
+        "verdict": NOT_REQUIRED,
+        "evidence": (
+            "ASSESSMENT_MODE = PROJECT_ASSESSMENT, décision humaine du "
+            "2026-09-06. L'épreuve écrite de spécialité ne demande à personne "
+            "de conduire un projet sur copie : les deux capacités du chapitre "
+            "sont évaluées par le projet annuel et sa grille critériée."
+        ),
+    },
+    ("TNSI-PROJET", "banque_pratique"): {
+        "verdict": NOT_REQUIRED,
+        "evidence": (
+            "Même raison qu'à l'écrit. Le projet annuel dure l'année ; il ne "
+            "se traite pas en une heure sur machine."
+        ),
+    },
+    ("TNSI-HISTOIRE-INFORMATIQUE", "banque_pratique"): {
+        "verdict": COVERED_ELSEWHERE,
+        "evidence": (
+            "MENE2516123N définit l'épreuve pratique comme « résolution de "
+            "problèmes et programmation sur machine ». Les deux capacités du "
+            "chapitre — situer une évolution dans le temps, en expliquer les "
+            "conséquences — ne se programment pas. Elles sont évaluées à "
+            "l'écrit, par TNSI-ECRIT-S6-EX3."
+        ),
+    },
 }
 
 
@@ -77,7 +103,15 @@ def _object_types(inventory: dict[str, Any], manual: str, chapter: str) -> dict[
     return counts
 
 
-def build(rubrics: tuple[tuple[str, str], ...] = (("1NSI", "methodes"), ("TNSI", "remediation"))) -> dict[str, Any]:
+DEFAULT_RUBRICS = (
+    ("1NSI", "methodes"),
+    ("TNSI", "remediation"),
+    ("TNSI", "banque_ecrite"),
+    ("TNSI", "banque_pratique"),
+)
+
+
+def build(rubrics: tuple[tuple[str, str], ...] = DEFAULT_RUBRICS) -> dict[str, Any]:
     inventory = json.loads(INVENTORY.read_text(encoding="utf-8"))
     records: list[dict[str, Any]] = []
     for manual, rubric in rubrics:

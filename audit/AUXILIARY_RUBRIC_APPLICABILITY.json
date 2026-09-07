@@ -3,10 +3,10 @@
   "schema_version": 1,
   "generated_by": "scripts/build_auxiliary_rubric_applicability.py",
   "summary": {
-    "CHAPTERS_WITHOUT_RUBRIC_OBJECT": 2,
-    "REAL_CONTENT_GAP": 0,
-    "NOT_PEDAGOGICALLY_REQUIRED": 1,
-    "COVERED_BY_ANOTHER_OBJECT": 1,
+    "CHAPTERS_WITHOUT_RUBRIC_OBJECT": 16,
+    "REAL_CONTENT_GAP": 11,
+    "NOT_PEDAGOGICALLY_REQUIRED": 3,
+    "COVERED_BY_ANOTHER_OBJECT": 2,
     "UNJUSTIFIED_ABSENCES_ARE_GAPS": true
   },
   "chapters": [
@@ -15,6 +15,7 @@
       "rubric": "remediation",
       "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
       "chapter_object_types": {
+        "amenagee": 1,
         "corrige": 2,
         "cours": 2,
         "corrige_evaluation": 2,
@@ -30,11 +31,238 @@
       "rubric": "remediation",
       "chapter": "TNSI-PROJET",
       "chapter_object_types": {
+        "amenagee": 1,
         "projet": 1,
         "qcm": 1
       },
       "verdict": "NOT_PEDAGOGICALLY_REQUIRED",
       "evidence": "Le chapitre ne porte ni cours ni exercice : il porte le projet annuel. La remédiation d'un projet passe par ses jalons et sa grille critériée, qui existent et sont vérifiés par le gate d'évaluation. Une fiche de remédiation y serait sans objet."
+    },
+    {
+      "manual": "TNSI",
+      "rubric": "banque_ecrite",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "chapter_object_types": {
+        "amenagee": 1,
+        "corrige": 5,
+        "cours": 7,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 5,
+        "qcm": 1,
+        "remediation": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
+    },
+    {
+      "manual": "TNSI",
+      "rubric": "banque_ecrite",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "chapter_object_types": {
+        "amenagee": 1,
+        "corrige": 4,
+        "cours": 4,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 4,
+        "qcm": 1,
+        "remediation": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
+    },
+    {
+      "manual": "TNSI",
+      "rubric": "banque_ecrite",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "chapter_object_types": {
+        "amenagee": 1,
+        "corrige": 4,
+        "cours": 5,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 4,
+        "qcm": 1,
+        "remediation": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
+    },
+    {
+      "manual": "TNSI",
+      "rubric": "banque_ecrite",
+      "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
+      "chapter_object_types": {
+        "amenagee": 1,
+        "corrige": 2,
+        "cours": 2,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 2,
+        "qcm": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
+    },
+    {
+      "manual": "TNSI",
+      "rubric": "banque_ecrite",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "chapter_object_types": {
+        "amenagee": 1,
+        "corrige": 4,
+        "cours": 5,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 4,
+        "qcm": 1,
+        "remediation": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
+    },
+    {
+      "manual": "TNSI",
+      "rubric": "banque_ecrite",
+      "chapter": "TNSI-PROJET",
+      "chapter_object_types": {
+        "amenagee": 1,
+        "projet": 1,
+        "qcm": 1
+      },
+      "verdict": "NOT_PEDAGOGICALLY_REQUIRED",
+      "evidence": "ASSESSMENT_MODE = PROJECT_ASSESSMENT, décision humaine du 2026-09-06. L'épreuve écrite de spécialité ne demande à personne de conduire un projet sur copie : les deux capacités du chapitre sont évaluées par le projet annuel et sa grille critériée."
+    },
+    {
+      "manual": "TNSI",
+      "rubric": "banque_ecrite",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "chapter_object_types": {
+        "amenagee": 1,
+        "corrige": 4,
+        "cours": 5,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 4,
+        "qcm": 1,
+        "remediation": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
+    },
+    {
+      "manual": "TNSI",
+      "rubric": "banque_pratique",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "chapter_object_types": {
+        "amenagee": 1,
+        "corrige": 5,
+        "cours": 7,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 5,
+        "qcm": 1,
+        "remediation": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
+    },
+    {
+      "manual": "TNSI",
+      "rubric": "banque_pratique",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "chapter_object_types": {
+        "amenagee": 1,
+        "corrige": 4,
+        "cours": 4,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 4,
+        "qcm": 1,
+        "remediation": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
+    },
+    {
+      "manual": "TNSI",
+      "rubric": "banque_pratique",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "chapter_object_types": {
+        "amenagee": 1,
+        "corrige": 4,
+        "cours": 5,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 4,
+        "qcm": 1,
+        "remediation": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
+    },
+    {
+      "manual": "TNSI",
+      "rubric": "banque_pratique",
+      "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
+      "chapter_object_types": {
+        "amenagee": 1,
+        "corrige": 2,
+        "cours": 2,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 2,
+        "qcm": 1
+      },
+      "verdict": "COVERED_BY_ANOTHER_OBJECT",
+      "evidence": "MENE2516123N définit l'épreuve pratique comme « résolution de problèmes et programmation sur machine ». Les deux capacités du chapitre — situer une évolution dans le temps, en expliquer les conséquences — ne se programment pas. Elles sont évaluées à l'écrit, par TNSI-ECRIT-S6-EX3."
+    },
+    {
+      "manual": "TNSI",
+      "rubric": "banque_pratique",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "chapter_object_types": {
+        "amenagee": 1,
+        "corrige": 4,
+        "cours": 5,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 4,
+        "qcm": 1,
+        "remediation": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
+    },
+    {
+      "manual": "TNSI",
+      "rubric": "banque_pratique",
+      "chapter": "TNSI-PROJET",
+      "chapter_object_types": {
+        "amenagee": 1,
+        "projet": 1,
+        "qcm": 1
+      },
+      "verdict": "NOT_PEDAGOGICALLY_REQUIRED",
+      "evidence": "Même raison qu'à l'écrit. Le projet annuel dure l'année ; il ne se traite pas en une heure sur machine."
+    },
+    {
+      "manual": "TNSI",
+      "rubric": "banque_pratique",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "chapter_object_types": {
+        "amenagee": 1,
+        "corrige": 4,
+        "cours": 5,
+        "corrige_evaluation": 2,
+        "evaluation": 2,
+        "exercice": 4,
+        "qcm": 1,
+        "remediation": 1
+      },
+      "verdict": "REAL_CONTENT_GAP",
+      "evidence": "Aucun verdict motivé n'a été rendu : le chapitre est traité comme une lacune tant que l'absence n'est pas justifiée."
     }
   ]
 }
