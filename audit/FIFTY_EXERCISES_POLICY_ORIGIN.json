@@ -1,0 +1,51 @@
+{
+  "artifact_type": "fifty_exercises_policy_origin",
+  "classes": [
+    "EXPLICIT_RELEASE_OWNER_REQUIREMENT",
+    "EDITORIAL_GUIDELINE",
+    "GENERATOR_ASSUMPTION",
+    "SYNTHETIC_FILLER_ARTIFACT",
+    "UNKNOWN"
+  ],
+  "current_authority": "La decision humaine du 2026-09-07 ne fixe aucun nombre : « le volume est une consequence de la qualite, jamais la cible ». Elle est posterieure a la directive du 2026-07-16 et la remplace pour la reconstruction. La directive anterieure est donc remontee comme preuve, sans etre appliquee : aucun objet ne sera cree pour atteindre cinquante.",
+  "generated_by": "scripts/build_fifty_exercises_policy_origin.py",
+  "release_gates_enforcing_fifty": [],
+  "schema_version": 1,
+  "summary": {
+    "APPROVES_NOTHING": true,
+    "FIFTY_EXERCISES_POLICY_ORIGIN": [
+      "EDITORIAL_GUIDELINE",
+      "EXPLICIT_RELEASE_OWNER_REQUIREMENT",
+      "GENERATOR_ASSUMPTION"
+    ],
+    "FIFTY_EXERCISES_RELEASE_REQUIREMENT": "SUPERSEDED_EXPLICIT_REQUIREMENT",
+    "RELEASE_GATES_ENFORCING_FIFTY": 0,
+    "TRACES_FOUND": 3
+  },
+  "traces": [
+    {
+      "classification": "EXPLICIT_RELEASE_OWNER_REQUIREMENT",
+      "locator": "### 3.4 Ce qui NE change PAS",
+      "quote": "matrice ≥2 ex/case et ≥50 ex/chapitre",
+      "source": "PROMPT_MISSION_COLLECTION.md",
+      "verified_in_tree": true,
+      "why": "le prompt de mission ecrit par le Release Owner, dans une section intitulee « Ce qui NE change PAS » : c'est une directive humaine explicite, pas une convention d'outil"
+    },
+    {
+      "classification": "GENERATOR_ASSUMPTION",
+      "locator": "TARGET_EXERCISES = min(50, max(24, 6 * C))",
+      "quote": "TARGET_EXERCISES = min(50, max(24, 6 * C))",
+      "source": "scripts/chapter_readiness.py",
+      "verified_in_tree": true,
+      "why": "un seuil interne a un tableau de bord que son propre en-tete declare « non autoritaire pour la release » ; il derive la cible du nombre de capacites au lieu de l'imposer"
+    },
+    {
+      "classification": "EDITORIAL_GUIDELINE",
+      "locator": "| **Total** | 20 | 20 | 10 | **50** |",
+      "quote": "Ratio 40/40/20 exactement conforme à E5/F01",
+      "source": "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/LOT-4_addendum_seuil_E5.md",
+      "verified_in_tree": true,
+      "why": "un compte rendu de production qui atteint cinquante pour un chapitre donne ; il documente une realisation, il n'edicte rien"
+    }
+  ]
+}
