@@ -1,0 +1,85 @@
+% META: {"id": "TNSI-STRUCT-EX-007", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "exercice", "capacites": ["T-STRUCT-05A"], "capacites_codes": ["C11"], "parcours": 2, "competences": ["modeliser", "representer", "raisonner"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-007.tex", "corrige_tex": "chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-007.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-9FF395973EC7", "PEDAGOGICAL_GAP_IDS": ["GAP-9FF395973EC7", "GAP-EC71A5D3938B"], "CAPACITY_ID": "C11", "EXERCISE_ROLE": "DIRECT_APPLICATION", "EXERCISE_ROLES": ["DIRECT_APPLICATION", "CONTEXT_VARIATION", "MODELLING", "REASONING"], "DIFFICULTY": 2, "AUTHORING_REASON": "aucun exercice ne portait la modelisation : les graphes n'etaient rencontres que deja construits, sous forme de matrice ou de listes de successeurs, si bien que le choix oriente ou non, pondere ou non, n'etait jamais fait par l'eleve", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% arrets = ["A", "B", "C", "D", "E"]
+% liaisons = [("A", "B"), ("A", "C"), ("B", "D"), ("C", "D"), ("D", "E")]
+% def matrice_non_orientee(sommets, aretes):
+%     n = len(sommets)
+%     rang = {s: i for i, s in enumerate(sommets)}
+%     m = [[0] * n for _ in range(n)]
+%     for u, v in aretes:
+%         m[rang[u]][rang[v]] = 1
+%         m[rang[v]][rang[u]] = 1
+%     return m
+% bus = matrice_non_orientee(arrets, liaisons)
+% assert bus == [[0, 1, 1, 0, 0], [1, 0, 0, 1, 0], [1, 0, 0, 1, 0],
+%                [0, 1, 1, 0, 1], [0, 0, 0, 1, 0]]
+% assert all(bus[i][j] == bus[j][i] for i in range(5) for j in range(5))
+% assert [sum(ligne) for ligne in bus] == [2, 2, 2, 3, 1]
+% assert sum(sum(ligne) for ligne in bus) == 2 * len(liaisons) == 10
+% comptes = ["A", "B", "C", "D"]
+% suivis = [("A", "B"), ("B", "A"), ("A", "C"), ("C", "D"), ("D", "A")]
+% def matrice_orientee(sommets, arcs):
+%     rang = {s: i for i, s in enumerate(sommets)}
+%     m = [[0] * len(sommets) for _ in sommets]
+%     for u, v in arcs:
+%         m[rang[u]][rang[v]] = 1
+%     return m
+% reseau = matrice_orientee(comptes, suivis)
+% assert reseau == [[0, 1, 1, 0], [1, 0, 0, 0], [0, 0, 0, 1], [1, 0, 0, 0]]
+% assert not all(reseau[i][j] == reseau[j][i] for i in range(4) for j in range(4))
+% assert reseau[0][1] == 1 and reseau[1][0] == 1
+% assert reseau[2][3] == 1 and reseau[3][2] == 0
+% durees = {("A", "B"): 7, ("A", "C"): 12, ("B", "D"): 5, ("C", "D"): 4, ("D", "E"): 9}
+% def matrice_ponderee(sommets, poids):
+%     rang = {s: i for i, s in enumerate(sommets)}
+%     m = [[0] * len(sommets) for _ in sommets]
+%     for (u, v), p in poids.items():
+%         m[rang[u]][rang[v]] = p
+%         m[rang[v]][rang[u]] = p
+%     return m
+% pondere = matrice_ponderee(arrets, durees)
+% assert pondere[0][1] == 7 and pondere[1][0] == 7
+% assert pondere[0][3] == 0
+% assert sum(durees[c] for c in [("A", "B"), ("B", "D"), ("D", "E")]) == 21
+% assert sum(durees[c] for c in [("A", "C"), ("C", "D"), ("D", "E")]) == 25
+% assert 21 < 25
+% END-VERIFY
+\begin{exercice}{TNSI-STRUCT-EX-007}{2}{25}
+Trois situations, à modéliser chacune par un graphe.
+
+\medskip
+\textbf{A. Un réseau de bus.} Cinq arrêts $A$, $B$, $C$, $D$, $E$. Une ligne
+relie directement $A$ à $B$, $A$ à $C$, $B$ à $D$, $C$ à $D$ et $D$ à $E$. Tous
+les trajets se font dans les deux sens.
+\begin{enumerate}
+  \item Préciser ce que représentent les sommets et les arêtes, et dire si le
+    graphe doit être orienté. Justifier.
+  \item Donner la matrice d'adjacence, les arrêts étant pris dans l'ordre
+    alphabétique.
+  \item Calculer la somme de chaque ligne. Que représente-t-elle ? Vérifier que
+    la somme totale vaut le double du nombre de liaisons, et expliquer pourquoi.
+\end{enumerate}
+
+\medskip
+\textbf{B. Un réseau social.} Quatre comptes $A$, $B$, $C$, $D$. $A$ suit $B$ et
+$C$ ; $B$ suit $A$ ; $C$ suit $D$ ; $D$ suit $A$.
+\begin{enumerate}
+  \setcounter{enumi}{3}
+  \item Donner la matrice d'adjacence de cette situation.
+  \item Cette matrice est-elle symétrique ? Comparer avec celle de la partie
+    \textbf{A} et dire ce que la symétrie traduit sur la situation modélisée.
+\end{enumerate}
+
+\medskip
+\textbf{C. Des durées de trajet.} On reprend le réseau de bus, en ajoutant les
+durées : $A$–$B$ en $7$~min, $A$–$C$ en $12$, $B$–$D$ en $5$, $C$–$D$ en $4$,
+$D$–$E$ en $9$.
+\begin{enumerate}
+  \setcounter{enumi}{5}
+  \item Que devient la matrice d'adjacence ? Quelle convention adopter pour les
+    couples d'arrêts non reliés, et quel inconvénient cette convention
+    présente-t-elle ?
+  \item Comparer les durées des deux trajets de $A$ à $E$ passant respectivement
+    par $B$ et par $C$. Lequel est le plus rapide ?
+\end{enumerate}
+\end{exercice}

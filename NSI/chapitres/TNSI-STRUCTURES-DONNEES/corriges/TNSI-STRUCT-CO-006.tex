@@ -1,0 +1,77 @@
+% META: {"id": "TNSI-STRUCT-CO-006", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "corrige", "exercice_ref": "TNSI-STRUCT-EX-006", "capacites": ["T-STRUCT-03C"], "capacites_codes": ["C8"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def recherche_liste(liste, valeur):
+%     comparaisons = 0
+%     for i in range(len(liste)):
+%         comparaisons = comparaisons + 1
+%         if liste[i] == valeur:
+%             return i, comparaisons
+%     return None, comparaisons
+% badges = ["B07", "B12", "B31", "B44", "B58"]
+% assert recherche_liste(badges, "B07") == (0, 1)
+% assert recherche_liste(badges, "B58") == (4, 5)
+% assert recherche_liste(badges, "B99") == (None, 5)
+% assert recherche_liste(badges, "B99")[1] == len(badges)
+% table = {code: i for i, code in enumerate(badges)}
+% assert table["B58"] == 4 and table.get("B99") is None
+% grand = ["B" + str(i).zfill(4) for i in range(1000)]
+% assert recherche_liste(grand, "absent")[1] == 1000
+% table_grande = {code: i for i, code in enumerate(grand)}
+% assert table_grande.get("absent") is None
+% doublons = ["B07", "B12", "B07"]
+% assert recherche_liste(doublons, "B07") == (0, 1)
+% assert doublons.count("B07") == 2
+% table_doublons = {code: i for i, code in enumerate(doublons)}
+% assert len(table_doublons) == 2 and table_doublons["B07"] == 2
+% assert len(doublons) == 3
+% END-VERIFY
+\begin{corrige}{TNSI-STRUCT-EX-006}
+\textbf{1.} On compte une comparaison par tour de boucle :
+\begin{python}
+def recherche_liste(liste, valeur):
+    comparaisons = 0
+    for i in range(len(liste)):
+        comparaisons = comparaisons + 1
+        if liste[i] == valeur:
+            return i, comparaisons
+    return None, comparaisons
+\end{python}
+
+\textbf{2.} \lstinline{recherche_liste(badges, "B07")} renvoie
+$(0\,;\,1)$, \lstinline{"B58"} donne $(4\,;\,5)$ et \lstinline{"B99"} donne
+$(\text{None}\,;\,5)$. Le maximum de comparaisons est atteint deux fois : pour
+le dernier élément, et pour une valeur \emph{absente} — dans ce dernier cas la
+boucle va nécessairement jusqu'au bout, puisqu'on ne peut conclure à l'absence
+qu'après avoir tout examiné.
+
+\textbf{3.} La table s'obtient par compréhension, et la recherche par
+\lstinline{get} :
+\begin{python}
+table = {code: i for i, code in enumerate(badges)}
+# {'B07': 0, 'B12': 1, 'B31': 2, 'B44': 3, 'B58': 4}
+
+def recherche_dict(table, valeur):
+    return table.get(valeur)
+\end{python}
+
+\textbf{4.} Avec $1\,000$ badges, la recherche d'un badge absent demande
+$1\,000$ comparaisons dans la liste, et \textbf{une seule} consultation dans le
+dictionnaire.
+
+La raison est que le dictionnaire ne compare pas : il \emph{calcule}. La clé est
+transformée en un nombre par une fonction de hachage, ce nombre désigne
+directement l'emplacement où la valeur devrait se trouver, et il suffit alors de
+regarder cet emplacement. Le temps ne dépend donc pas du nombre de badges. La
+liste, elle, n'a d'autre moyen que de parcourir.
+
+\textbf{5.} \lstinline{recherche_liste(["B07", "B12", "B07"], "B07")} renvoie
+$(0\,;\,1)$ : elle s'arrête à la première occurrence et ignore la seconde. Le
+dictionnaire construit à partir de cette liste n'a que \textbf{deux} entrées, et
+\lstinline{table["B07"]} vaut $2$ : la seconde occurrence a écrasé la première.
+
+Les deux structures ne représentent donc pas la même chose. Une liste est une
+suite \emph{ordonnée} qui accepte les doublons ; un dictionnaire est un ensemble
+d'associations à clés \emph{uniques}, sans ordre significatif. Remplacer l'une
+par l'autre pour gagner en rapidité, c'est aussi changer ce que la donnée peut
+dire — et ici, perdre silencieusement un badge.
+\end{corrige}

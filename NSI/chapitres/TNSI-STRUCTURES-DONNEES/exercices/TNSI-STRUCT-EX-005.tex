@@ -1,0 +1,89 @@
+% META: {"id": "TNSI-STRUCT-EX-005", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "exercice", "capacites": ["T-STRUCT-01A", "T-STRUCT-01B", "T-STRUCT-01C"], "capacites_codes": ["C1", "C2", "C3"], "parcours": 2, "competences": ["analyser", "programmer", "valider"], "duree_min": 30, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-005.tex", "corrige_tex": "chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-005.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-DC9A0A9A7FE8", "PEDAGOGICAL_GAP_IDS": ["GAP-DC9A0A9A7FE8", "GAP-D6F0C3FE054A", "GAP-E6FC4FFABF34", "GAP-C81B6504A882", "GAP-EE971180B92A", "GAP-4D6DACADE658"], "CAPACITY_ID": "C1", "CAPACITY_IDS": ["C1", "C2", "C3"], "EXERCISE_ROLE": "DIRECT_APPLICATION", "EXERCISE_ROLES": ["DIRECT_APPLICATION", "METHOD_TRANSFER", "REASONING"], "DIFFICULTY": 2, "AUTHORING_REASON": "trois capacites du contrat -- specifier une interface, la distinguer de l'implementation, en ecrire plusieurs -- n'avaient aucun exercice : l'eleve pouvait terminer le chapitre sans avoir jamais vu deux implementations d'une meme structure ni constate que le code utilisateur ne change pas", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% class FileListe:
+%     def __init__(self):
+%         self.elements = []
+%     def est_vide(self):
+%         return len(self.elements) == 0
+%     def enfiler(self, valeur):
+%         self.elements.append(valeur)
+%     def defiler(self):
+%         if self.est_vide():
+%             raise IndexError("file vide")
+%         return self.elements.pop(0)
+%     def taille(self):
+%         return len(self.elements)
+% class FileDeuxPiles:
+%     def __init__(self):
+%         self.entree, self.sortie = [], []
+%     def est_vide(self):
+%         return not self.entree and not self.sortie
+%     def enfiler(self, valeur):
+%         self.entree.append(valeur)
+%     def defiler(self):
+%         if self.est_vide():
+%             raise IndexError("file vide")
+%         if not self.sortie:
+%             while self.entree:
+%                 self.sortie.append(self.entree.pop())
+%         return self.sortie.pop()
+%     def taille(self):
+%         return len(self.entree) + len(self.sortie)
+% def scenario(file):
+%     trace = []
+%     for lettre in "ABC":
+%         file.enfiler(lettre)
+%     trace.append(file.taille())
+%     trace.append(file.defiler())
+%     file.enfiler("D")
+%     trace.append(file.defiler())
+%     trace.append(file.defiler())
+%     trace.append(file.taille())
+%     trace.append(file.defiler())
+%     trace.append(file.est_vide())
+%     return trace
+% attendu = [3, "A", "B", "C", 1, "D", True]
+% assert scenario(FileListe()) == attendu
+% assert scenario(FileDeuxPiles()) == attendu
+% assert scenario(FileListe()) == scenario(FileDeuxPiles())
+% for classe in (FileListe, FileDeuxPiles):
+%     vide, leve = classe(), False
+%     try:
+%         vide.defiler()
+%     except IndexError:
+%         leve = True
+%     assert leve
+%     assert vide.est_vide()
+% assert set(dir(FileListe)) >= {"enfiler", "defiler", "est_vide", "taille"}
+% assert set(dir(FileDeuxPiles)) >= {"enfiler", "defiler", "est_vide", "taille"}
+% END-VERIFY
+\begin{exercice}{TNSI-STRUCT-EX-005}{2}{30}
+On veut doter le manuel d'une structure de \textbf{file} (premier entré, premier
+sorti).
+\begin{enumerate}
+  \item Spécifier l'interface de cette structure : pour chacune des quatre
+    opérations \lstinline{enfiler}, \lstinline{defiler}, \lstinline{est_vide} et
+    \lstinline{taille}, indiquer ses paramètres, ce qu'elle renvoie, et sa
+    précondition éventuelle. Cette spécification ne doit contenir \textbf{aucune}
+    indication sur la façon dont la file est rangée en mémoire.
+  \item Écrire une première implémentation, la classe \lstinline{FileListe}, qui
+    range les éléments dans une liste Python, \lstinline{enfiler} ajoutant à la
+    fin et \lstinline{defiler} retirant au début.
+  \item Écrire une seconde implémentation, la classe \lstinline{FileDeuxPiles},
+    qui utilise deux listes employées comme des piles : \lstinline{entree} reçoit
+    les nouveaux éléments, et \lstinline{sortie} les restitue. Quand
+    \lstinline{sortie} est vide, on y bascule tout le contenu de
+    \lstinline{entree} en le dépilant.
+  \item Écrire une fonction \lstinline{scenario(file)} qui enfile \lstinline{"A"},
+    \lstinline{"B"}, \lstinline{"C"}, relève la taille, défile une fois, enfile
+    \lstinline{"D"}, défile deux fois, relève la taille, défile une dernière fois
+    et renvoie enfin \lstinline{est_vide()}. Vérifier qu'elle produit la
+    \textbf{même} trace sur les deux implémentations.
+  \item En passant de \lstinline{FileListe} à \lstinline{FileDeuxPiles}, qu'a-t-on
+    changé : l'interface ou l'implémentation ? Quelle partie du code de
+    \lstinline{scenario} a dû être réécrite ?
+  \item Défiler coûte cher dans l'une des deux implémentations et pas dans
+    l'autre. Laquelle, et pourquoi ? On raisonnera sur ce que fait chaque
+    opération quand la file contient $n$ éléments.
+\end{enumerate}
+\end{exercice}

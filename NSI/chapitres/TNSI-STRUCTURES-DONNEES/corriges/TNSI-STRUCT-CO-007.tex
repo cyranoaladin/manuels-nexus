@@ -1,0 +1,92 @@
+% META: {"id": "TNSI-STRUCT-CO-007", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "corrige", "exercice_ref": "TNSI-STRUCT-EX-007", "capacites": ["T-STRUCT-05A"], "capacites_codes": ["C11"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% bus = [[0, 1, 1, 0, 0], [1, 0, 0, 1, 0], [1, 0, 0, 1, 0],
+%        [0, 1, 1, 0, 1], [0, 0, 0, 1, 0]]
+% assert all(bus[i][j] == bus[j][i] for i in range(5) for j in range(5))
+% assert [sum(l) for l in bus] == [2, 2, 2, 3, 1]
+% assert sum(sum(l) for l in bus) == 10 == 2 * 5
+% reseau = [[0, 1, 1, 0], [1, 0, 0, 0], [0, 0, 0, 1], [1, 0, 0, 0]]
+% assert reseau[0][1] == reseau[1][0] == 1
+% assert reseau[2][3] == 1 and reseau[3][2] == 0
+% assert not all(reseau[i][j] == reseau[j][i] for i in range(4) for j in range(4))
+% assert [sum(l) for l in reseau] == [2, 1, 1, 1]
+% assert [sum(reseau[i][j] for i in range(4)) for j in range(4)] == [2, 1, 1, 1]
+% pondere = [[0, 7, 12, 0, 0], [7, 0, 0, 5, 0], [12, 0, 0, 4, 0],
+%            [0, 5, 4, 0, 9], [0, 0, 0, 9, 0]]
+% assert all(pondere[i][j] == pondere[j][i] for i in range(5) for j in range(5))
+% assert 7 + 5 + 9 == 21
+% assert 12 + 4 + 9 == 25
+% assert 21 < 25
+% assert pondere[0][3] == 0 and bus[0][3] == 0
+% END-VERIFY
+\begin{corrige}{TNSI-STRUCT-EX-007}
+\textbf{1.} Les sommets sont les cinq arrêts, les arêtes les liaisons directes
+entre deux arrêts. Le graphe est \textbf{non orienté} : l'énoncé précise que
+tous les trajets se font dans les deux sens, donc « il existe une liaison de $A$
+vers $B$ » et « il en existe une de $B$ vers $A$ » sont la même information. La
+modéliser deux fois serait redondant.
+
+\textbf{2.} Dans l'ordre $A$, $B$, $C$, $D$, $E$ :
+\[
+  \begin{pmatrix}
+    0&1&1&0&0\\
+    1&0&0&1&0\\
+    1&0&0&1&0\\
+    0&1&1&0&1\\
+    0&0&0&1&0
+  \end{pmatrix}
+\]
+
+\textbf{3.} Les sommes des lignes valent $2$, $2$, $2$, $3$, $1$ : c'est le
+nombre de voisins de chaque arrêt, autrement dit son \emph{degré}. L'arrêt $D$
+est le mieux desservi, $E$ est un terminus.
+
+La somme totale vaut $10$, soit le double des $5$ liaisons. C'est nécessaire :
+chaque liaison, étant non orientée, apparaît \emph{deux fois} dans la matrice,
+en position $(i\,;\,j)$ et en position $(j\,;\,i)$. Vérifier cette égalité est
+d'ailleurs le contrôle le plus simple d'une matrice d'adjacence saisie à la
+main.
+
+\textbf{4.} Dans l'ordre $A$, $B$, $C$, $D$, avec un $1$ en $(i\,;\,j)$ quand
+$i$ suit $j$ :
+\[
+  \begin{pmatrix}
+    0&1&1&0\\
+    1&0&0&0\\
+    0&0&0&1\\
+    1&0&0&0
+  \end{pmatrix}
+\]
+
+\textbf{5.} Non, elle n'est pas symétrique : $C$ suit $D$ mais $D$ ne suit pas
+$C$, donc le coefficient $(3\,;\,4)$ vaut $1$ et le coefficient $(4\,;\,3)$ vaut
+$0$. Seuls $A$ et $B$ se suivent mutuellement, ce qui donne la seule paire
+symétrique de la matrice.
+
+La symétrie traduit exactement la \emph{réciprocité} de la relation modélisée.
+Une liaison de bus est réciproque par nature ; « suivre » ne l'est pas. C'est la
+situation, et non le goût du modélisateur, qui décide de l'orientation — et se
+tromper ici ferait dire au modèle que $D$ voit les publications de $C$, ce qui
+est faux.
+
+\textbf{6.} On remplace les $1$ par les durées :
+\[
+  \begin{pmatrix}
+    0&7&12&0&0\\
+    7&0&0&5&0\\
+    12&0&0&4&0\\
+    0&5&4&0&9\\
+    0&0&0&9&0
+  \end{pmatrix}
+\]
+La convention retenue est $0$ pour les couples non reliés. Elle a un
+inconvénient sérieux : $0$ est aussi une durée valide en principe, et rien ne
+distingue plus « pas de liaison » de « liaison instantanée ». Sur un graphe où
+un poids nul aurait un sens — un coût nul, une distance nulle — il faudrait
+utiliser une autre marque, par exemple \lstinline{None} ou l'infini.
+
+\textbf{7.} Par $B$ : $7+5+9=21$~min. Par $C$ : $12+4+9=25$~min. Le trajet par
+$B$ est plus rapide de quatre minutes, alors que les deux comptent le même
+nombre de liaisons. C'est tout l'apport de la pondération : sans elle, les deux
+chemins seraient indiscernables.
+\end{corrige}

@@ -1,0 +1,55 @@
+% META: {"id": "TNSI-STRUCT-EX-006", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "exercice", "capacites": ["T-STRUCT-03C"], "capacites_codes": ["C8"], "parcours": 1, "competences": ["programmer", "analyser", "valider"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-006.tex", "corrige_tex": "chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-006.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-1524F28D6E81", "PEDAGOGICAL_GAP_IDS": ["GAP-1524F28D6E81", "GAP-66F0FF1BCEB0"], "CAPACITY_ID": "C8", "EXERCISE_ROLE": "DIRECT_APPLICATION", "EXERCISE_ROLES": ["DIRECT_APPLICATION", "CONTEXT_VARIATION", "REASONING"], "DIFFICULTY": 1, "AUTHORING_REASON": "aucun exercice ne portait cette capacite : l'eleve pouvait terminer le chapitre en croyant qu'un dictionnaire est une liste plus commode, sans avoir jamais compte les comparaisons de l'une et de l'autre", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% def recherche_liste(liste, valeur):
+%     comparaisons = 0
+%     for i in range(len(liste)):
+%         comparaisons = comparaisons + 1
+%         if liste[i] == valeur:
+%             return i, comparaisons
+%     return None, comparaisons
+% badges = ["B07", "B12", "B31", "B44", "B58"]
+% assert recherche_liste(badges, "B07") == (0, 1)
+% assert recherche_liste(badges, "B58") == (4, 5)
+% assert recherche_liste(badges, "B99") == (None, 5)
+% table = {code: i for i, code in enumerate(badges)}
+% assert table == {"B07": 0, "B12": 1, "B31": 2, "B44": 3, "B58": 4}
+% def recherche_dict(table, valeur):
+%     return table.get(valeur)
+% assert recherche_dict(table, "B07") == 0
+% assert recherche_dict(table, "B58") == 4
+% assert recherche_dict(table, "B99") is None
+% grand = ["B" + str(i).zfill(4) for i in range(1000)]
+% assert recherche_liste(grand, grand[-1])[1] == 1000
+% assert recherche_liste(grand, "absent")[1] == 1000
+% table_grande = {code: i for i, code in enumerate(grand)}
+% assert recherche_dict(table_grande, grand[-1]) == 999
+% assert len(table_grande) == len(grand) == 1000
+% doublons = ["B07", "B12", "B07"]
+% assert recherche_liste(doublons, "B07") == (0, 1)
+% assert len({code: i for i, code in enumerate(doublons)}) == 2
+% END-VERIFY
+\begin{exercice}{TNSI-STRUCT-EX-006}{1}{20}
+Un système de contrôle d'accès reconnaît des badges à partir de leur code. La
+liste des badges autorisés est
+\begin{python}
+badges = ["B07", "B12", "B31", "B44", "B58"]
+\end{python}
+\begin{enumerate}
+  \item Écrire \lstinline{recherche_liste(liste, valeur)} qui renvoie le couple
+    formé de l'indice de la valeur (ou \lstinline{None} si elle est absente) et
+    du \textbf{nombre de comparaisons} effectuées.
+  \item Donner ce que renvoie cette fonction pour \lstinline{"B07"},
+    \lstinline{"B58"} et \lstinline{"B99"}. Dans quel cas le nombre de
+    comparaisons est-il maximal ?
+  \item Construire le dictionnaire \lstinline{table} associant à chaque code sa
+    position dans la liste, puis écrire \lstinline{recherche_dict(table, valeur)}
+    qui renvoie cette position ou \lstinline{None}.
+  \item Le système gère désormais $1\,000$ badges. Combien de comparaisons
+    demande la recherche d'un badge absent avec chacune des deux méthodes ?
+    Justifier en une phrase pour le dictionnaire.
+  \item La liste \lstinline{["B07", "B12", "B07"]} contient un doublon. Que
+    renvoie \lstinline{recherche_liste} pour \lstinline{"B07"} ? Combien
+    d'entrées a le dictionnaire construit à partir de cette liste ? Qu'est-ce
+    que cela révèle sur ce que chaque structure sait représenter ?
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,167 @@
+% META: {"id": "TNSI-STRUCT-CO-005", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "corrige", "exercice_ref": "TNSI-STRUCT-EX-005", "capacites": ["T-STRUCT-01A", "T-STRUCT-01B", "T-STRUCT-01C"], "capacites_codes": ["C1", "C2", "C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% class FileListe:
+%     def __init__(self):
+%         self.elements = []
+%     def est_vide(self):
+%         return len(self.elements) == 0
+%     def enfiler(self, valeur):
+%         self.elements.append(valeur)
+%     def defiler(self):
+%         if self.est_vide():
+%             raise IndexError("file vide")
+%         return self.elements.pop(0)
+%     def taille(self):
+%         return len(self.elements)
+% class FileDeuxPiles:
+%     def __init__(self):
+%         self.entree, self.sortie = [], []
+%     def est_vide(self):
+%         return not self.entree and not self.sortie
+%     def enfiler(self, valeur):
+%         self.entree.append(valeur)
+%     def defiler(self):
+%         if self.est_vide():
+%             raise IndexError("file vide")
+%         if not self.sortie:
+%             while self.entree:
+%                 self.sortie.append(self.entree.pop())
+%         return self.sortie.pop()
+%     def taille(self):
+%         return len(self.entree) + len(self.sortie)
+% def scenario(file):
+%     trace = []
+%     for lettre in "ABC":
+%         file.enfiler(lettre)
+%     trace.append(file.taille())
+%     trace.append(file.defiler())
+%     file.enfiler("D")
+%     trace.append(file.defiler())
+%     trace.append(file.defiler())
+%     trace.append(file.taille())
+%     trace.append(file.defiler())
+%     trace.append(file.est_vide())
+%     return trace
+% assert scenario(FileListe()) == [3, "A", "B", "C", 1, "D", True]
+% assert scenario(FileDeuxPiles()) == [3, "A", "B", "C", 1, "D", True]
+% # Le basculement n'a lieu que lorsque la pile de sortie est vide : chaque
+% # element bascule une fois et une seule sur toute la vie de la file.
+% f = FileDeuxPiles()
+% for lettre in "ABC":
+%     f.enfiler(lettre)
+% assert (f.entree, f.sortie) == (["A", "B", "C"], [])
+% assert f.defiler() == "A"
+% assert (f.entree, f.sortie) == ([], ["C", "B"])
+% f.enfiler("D")
+% assert (f.entree, f.sortie) == (["D"], ["C", "B"])
+% assert f.defiler() == "B" and f.defiler() == "C"
+% assert (f.entree, f.sortie) == (["D"], [])
+% assert f.defiler() == "D" and f.est_vide()
+% END-VERIFY
+\begin{corrige}{TNSI-STRUCT-EX-005}
+\textbf{1.} L'interface décrit ce que la structure \emph{promet}, sans dire
+comment elle le tient :
+
+\begin{center}
+\begin{tabular}{llll}
+\hline
+opération & paramètres & renvoie & précondition \\
+\hline
+\lstinline{enfiler} & une valeur & rien & aucune \\
+\lstinline{defiler} & aucun & la valeur la plus anciennement enfilée & la file n'est pas vide \\
+\lstinline{est_vide} & aucun & un booléen & aucune \\
+\lstinline{taille} & aucun & un entier positif ou nul & aucune \\
+\hline
+\end{tabular}
+\end{center}
+
+Aucune de ces lignes ne mentionne de liste, de pile ni d'indice : c'est ce qui
+en fait une \emph{spécification} et non une description de code.
+
+\textbf{2.} La première implémentation range tout dans une liste :
+\begin{python}
+class FileListe:
+    def __init__(self):
+        self.elements = []
+
+    def est_vide(self):
+        return len(self.elements) == 0
+
+    def enfiler(self, valeur):
+        self.elements.append(valeur)
+
+    def defiler(self):
+        if self.est_vide():
+            raise IndexError("file vide")
+        return self.elements.pop(0)
+
+    def taille(self):
+        return len(self.elements)
+\end{python}
+
+\textbf{3.} La seconde n'utilise que des opérations de pile :
+\begin{python}
+class FileDeuxPiles:
+    def __init__(self):
+        self.entree, self.sortie = [], []
+
+    def est_vide(self):
+        return not self.entree and not self.sortie
+
+    def enfiler(self, valeur):
+        self.entree.append(valeur)
+
+    def defiler(self):
+        if self.est_vide():
+            raise IndexError("file vide")
+        if not self.sortie:
+            while self.entree:
+                self.sortie.append(self.entree.pop())
+        return self.sortie.pop()
+
+    def taille(self):
+        return len(self.entree) + len(self.sortie)
+\end{python}
+Le basculement inverse l'ordre une fois ; le sommet de \lstinline{sortie} est
+donc bien le plus ancien élément.
+
+\textbf{4.} Le scénario s'écrit sans jamais nommer les attributs internes :
+\begin{python}
+def scenario(file):
+    trace = []
+    for lettre in "ABC":
+        file.enfiler(lettre)
+    trace.append(file.taille())
+    trace.append(file.defiler())
+    file.enfiler("D")
+    trace.append(file.defiler())
+    trace.append(file.defiler())
+    trace.append(file.taille())
+    trace.append(file.defiler())
+    trace.append(file.est_vide())
+    return trace
+\end{python}
+Les deux implémentations donnent la même trace :
+\lstinline!, "A", "B", "C", 1, "D", True]! précédé de $3$.
+
+\textbf{5.} On a changé l'\textbf{implémentation}, pas l'interface. Et
+\lstinline{scenario} n'a pas eu \textbf{une seule ligne} à réécrire : c'est
+précisément la propriété qu'on cherchait. Un code écrit contre l'interface
+survit au changement d'implémentation ; un code qui aurait manipulé
+\lstinline{file.elements} directement aurait cassé, et aurait révélé qu'il
+dépendait d'un détail qu'on ne lui avait rien promis.
+
+\textbf{6.} C'est \lstinline{FileListe} qui coûte cher. Son
+\lstinline{defiler} appelle \lstinline{pop(0)} : retirer le premier élément
+d'une liste Python oblige à décaler tous les autres d'un cran, soit $n-1$
+déplacements pour une file de $n$ éléments.
+
+Dans \lstinline{FileDeuxPiles}, \lstinline{defiler} ne fait le plus souvent
+qu'un \lstinline{pop()} en fin de liste, immédiat. Le basculement, lui, coûte
+$n$ opérations — mais il ne se produit que lorsque \lstinline{sortie} est vide,
+et chaque élément n'y passe qu'une fois dans toute sa vie. Réparti sur
+l'ensemble des appels, le coût de \lstinline{defiler} reste donc constant en
+moyenne. Deux implémentations de la même interface, et un rapport de $n$ entre
+leurs coûts : c'est la raison pour laquelle spécifier ne dispense jamais de
+choisir.
+\end{corrige}
