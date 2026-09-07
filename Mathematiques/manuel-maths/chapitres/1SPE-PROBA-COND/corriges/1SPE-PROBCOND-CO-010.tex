@@ -1,10 +1,28 @@
 % META: {"id": "1SPE-PROBCOND-CO-010", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-010", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational
-% P_AinterB = Rational(3, 10)
-% P_A_B = Rational(1, 2)
-% P_B_A = Rational(3, 5)
-% P_Abar_B = Rational(1, 2)
+% # Enonce : P(A) = 3/5, P(B) = 1/2, P(A union B) = 4/5.
+% P_A = Rational(3, 5)
+% P_B = Rational(1, 2)
+% P_AuB = Rational(4, 5)
+% # 1. formule du crible
+% P_AinterB = P_A + P_B - P_AuB
+% assert P_AinterB == Rational(3, 10)
+% # 2. les deux probabilites conditionnelles
+% P_A_B = P_AinterB / P_A
+% P_B_A = P_AinterB / P_B
+% assert P_A_B == Rational(1, 2)
+% assert P_B_A == Rational(3, 5)
+% # 3. l'evenement contraire
+% P_Abar = 1 - P_A
+% P_AbarInterB = P_B - P_AinterB
+% assert P_Abar == Rational(2, 5)
+% assert P_AbarInterB == Rational(1, 5)
+% P_Abar_B = P_AbarInterB / P_Abar
+% assert P_Abar_B == Rational(1, 2)
+% # 4. l'independance : conditionner par A ne change rien
+% assert P_A_B == P_Abar_B == P_B
+% assert P_AinterB == P_A * P_B
 % END-VERIFY
 \begin{corrige}{1SPE-PROBCOND-EX-010}
 

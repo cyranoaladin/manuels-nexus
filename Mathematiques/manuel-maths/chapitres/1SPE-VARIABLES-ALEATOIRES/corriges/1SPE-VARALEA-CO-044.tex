@@ -1,9 +1,19 @@
 % META: {"id": "1SPE-VARALEA-CO-044", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-044", "capacites_codes": [], "extension_codes": ["X1"], "programme_alignment": "OPTIONAL_EXTENSION", "extension_label": "Approfondissement — Vers la Terminale", "sources_inspiration": [], "status": "generated"}
 \begin{center}\textbf{Approfondissement — Vers la Terminale}\end{center}
 % BEGIN-VERIFY
-% from sympy import Rational
-% P0 = Rational(97,100)**5
+% from sympy import binomial, Rational
+% # X ~ B(5, 3/100) : nombre de pieces defectueuses dans l'echantillon
+% p, n = Rational(3, 100), 5
+% P0 = binomial(n, 0) * p**0 * (1 - p)**n
+% assert P0 == Rational(97, 100)**5
+% # 2. le lot est accepte si aucune piece n'est defectueuse
+% assert abs(float(P0) - 0.859) < 5e-4
+% # 3. refus par l'evenement contraire
 % P_refus = 1 - P0
+% assert abs(float(P_refus) - 0.141) < 5e-4
+% assert P0 + P_refus == 1
+% # la loi somme a 1
+% assert sum(binomial(n, k) * p**k * (1 - p)**(n - k) for k in range(n + 1)) == 1
 % END-VERIFY
 \begin{corrige}{1SPE-VARALEA-EX-044}
 

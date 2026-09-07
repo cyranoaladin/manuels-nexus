@@ -1,11 +1,22 @@
 % META: {"id": "1SPE-VARALEA-CO-026", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-026", "capacites_codes": [], "extension_codes": ["X1"], "programme_alignment": "OPTIONAL_EXTENSION", "extension_label": "Approfondissement — Vers la Terminale", "sources_inspiration": [], "status": "generated"}
 \begin{center}\textbf{Approfondissement — Vers la Terminale}\end{center}
 % BEGIN-VERIFY
-% from sympy import binomial, Rational
-% p = Rational(1,20); n = 10
-% P0 = Rational(19,20)**10
-% P1 = 10*Rational(1,20)*Rational(19,20)**9
+% from sympy import binomial, Rational, nsimplify
+% # X ~ B(10, 1/20) : tirages independants, meme probabilite
+% p, n = Rational(1, 20), 10
+% P0 = binomial(n, 0) * p**0 * (1 - p)**n
+% P1 = binomial(n, 1) * p**1 * (1 - p)**(n - 1)
+% assert P0 == Rational(19, 20)**10
+% assert P1 == 10 * Rational(1, 20) * Rational(19, 20)**9
+% # 2. et 3. valeurs annoncees au corrige, arrondies au millieme
+% assert abs(float(P0) - 0.599) < 5e-4
+% assert abs(float(P1) - 0.315) < 5e-4
+% # 4. au plus une piece defectueuse
 % Ple1 = P0 + P1
+% assert abs(float(Ple1) - 0.914) < 5e-4
+% # controle de coherence : la loi somme bien a 1
+% total = sum(binomial(n, k) * p**k * (1 - p)**(n - k) for k in range(n + 1))
+% assert total == 1
 % END-VERIFY
 \begin{corrige}{1SPE-VARALEA-EX-026}
 

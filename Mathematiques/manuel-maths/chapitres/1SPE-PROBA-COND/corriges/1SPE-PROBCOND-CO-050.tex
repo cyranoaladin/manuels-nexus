@@ -1,7 +1,22 @@
 % META: {"id": "1SPE-PROBCOND-CO-050", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-050", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
-% from sympy import Rational
-% seuil = Rational(2, 21)
+% from sympy import Rational, symbols, solve, simplify
+% p = symbols('p', positive=True)
+% sens = Rational(95, 100)
+% faux = Rational(10, 100)
+% # 1. Bayes en fonction de la prevalence
+% P_M_T = simplify(p * sens / (p * sens + (1 - p) * faux))
+% assert simplify(P_M_T - 95 * p / (85 * p + 10)) == 0
+% # 2. le seuil au-dela duquel le test devient predictif
+% seuil = solve(P_M_T - Rational(1, 2), p)
+% assert seuil == [Rational(2, 21)]
+% # verification directe des deux cotes du seuil
+% assert P_M_T.subs(p, Rational(2, 21)) == Rational(1, 2)
+% assert P_M_T.subs(p, Rational(1, 100)) < Rational(1, 2)
+% assert P_M_T.subs(p, Rational(1, 5)) > Rational(1, 2)
+% # 3. une prevalence faible rend le test peu predictif malgre sa sensibilite
+% assert sens > Rational(9, 10)
+% assert P_M_T.subs(p, Rational(1, 1000)) < Rational(1, 10)
 % END-VERIFY
 \begin{corrige}{1SPE-PROBCOND-EX-050}
 

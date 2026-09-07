@@ -2,11 +2,24 @@
 \begin{center}\textbf{Approfondissement — Vers la Terminale}\end{center}
 % BEGIN-VERIFY
 % from sympy import binomial, Rational
-% p = Rational(1,3); q = Rational(2,3); n = 8
-% P0 = q**8; P1 = 8*p*q**7; P2 = binomial(8,2)*p**2*q**6
-% P3 = binomial(8,3)*p**3*q**5
-% Ple2 = P0+P1+P2
+% p, q, n = Rational(1, 3), Rational(2, 3), 8
+% P0 = binomial(n, 0) * q**8
+% P1 = binomial(n, 1) * p * q**7
+% P2 = binomial(n, 2) * p**2 * q**6
+% assert P0 == Rational(256, 6561)
+% assert P1 == Rational(1024, 6561)
+% assert P2 == Rational(1792, 6561)
+% # les trois valeurs approchees du corrige
+% assert abs(float(P0) - 0.039) < 5e-4
+% assert abs(float(P1) - 0.156) < 5e-4
+% assert abs(float(P2) - 0.273) < 5e-4
+% # au moins trois succes, par l'evenement contraire
+% Ple2 = P0 + P1 + P2
 % Pge3 = 1 - Ple2
+% assert Ple2 == Rational(3072, 6561)
+% assert Pge3 == 1 - Rational(3072, 6561)
+% # la loi somme a 1
+% assert sum(binomial(n, k) * p**k * q**(n - k) for k in range(n + 1)) == 1
 % END-VERIFY
 \begin{corrige}{1SPE-VARALEA-EX-027}
 

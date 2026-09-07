@@ -36,7 +36,26 @@ PRODUCER_VERSION = "1.0.0"
 
 VERIFY_BLOCK = re.compile(r"^% BEGIN-VERIFY\s*$(.*?)^% END-VERIFY\s*$", re.S | re.M)
 COMMENT_LINE = re.compile(r"^%[ \t]?(.*)$")
-ASSERT_LINE = re.compile(r"^\s*assert\b")
+def assertion_count(programme: str) -> int | None:
+    """Nombre d'assertions du programme, ou `None` s'il ne compile pas.
+
+    Le detecteur precedent cherchait `^\\s*assert` : il ne voyait pas
+    `E = p; assert E == Rational(3, 10)`, ou l'assertion suit un point-virgule.
+    Quatorze objets sur les vingt-deux signales « bloc present mais sans
+    assertion executable » en contenaient pourtant. Un motif textuel se
+    tromperait aussi sur le mot `assert` dans une chaine ou un commentaire.
+
+    Python sait analyser du Python : on compte des noeuds `ast.Assert`, pas des
+    lignes qui y ressemblent. Un bloc qui ne compile pas ne renvoie pas zero —
+    ce serait le confondre avec un bloc vide, alors que c'est un autre defaut.
+    """
+    import ast  # noqa: PLC0415
+
+    try:
+        tree = ast.parse(programme)
+    except SyntaxError:
+        return None
+    return sum(1 for node in ast.walk(tree) if isinstance(node, ast.Assert))
 
 MATHS_MANUALS = frozenset({"1SPE", "TSPE_2026_2027", "TCOMPL", "TEXPERTES"})
 
@@ -157,7 +176,14 @@ def build() -> dict[str, Any]:
                 inputs.append(path)
                 objects_with_verify += 1
                 lines = extract_program(block.group(1))
-                if not any(ASSERT_LINE.match(line) for line in lines):
+                compte = assertion_count("\n".join(lines))
+                if compte is None:
+                    evidence.findings.append(cd.Finding(
+                        target=obj["id"], code="UNPARSABLE_VERIFY_BLOCK",
+                        detail="bloc % VERIFY présent mais syntaxiquement invalide",
+                        blocking=False,
+                    ))
+                elif compte == 0:
                     evidence.findings.append(cd.Finding(
                         target=obj["id"], code="EMPTY_VERIFY_BLOCK",
                         detail="bloc % VERIFY présent mais sans assertion exécutable",
@@ -165,7 +191,7 @@ def build() -> dict[str, Any]:
                     ))
                     continue
                 examined.append(obj["id"])
-                assertions_run += sum(1 for line in lines if ASSERT_LINE.match(line))
+                assertions_run += compte
                 ok, detail = _run_assertions(lines)
                 if not ok:
                     evidence.findings.append(cd.Finding(

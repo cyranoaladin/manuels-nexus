@@ -6,8 +6,8 @@
   "producer": "scripts/build_dimension_mathematics.py",
   "producer_version": "1.0.0",
   "status": "failed",
-  "evidence_head": "5a7c43b44e52ebde0eeee4956c6653d52c79879d",
-  "input_digest": "sha256:d3edeb13f5d5613f5d02d78ee8d45cf3076f34c1d924ce9ec09da6797aac4f4a",
+  "evidence_head": "e373eb9f4a8f4ff1a1b69dbbb2c38abca5f68684",
+  "input_digest": "sha256:95eb55ea6e018df96d72395df2b35ef75b7c64b7bced8ab13c48d1a561329f8c",
   "input_paths": [
     "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex",
     "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex",
@@ -3975,6 +3975,7 @@
       "1SPE-DERLOCAL-EX-003",
       "1SPE-DERLOCAL-EX-004",
       "1SPE-DERLOCAL-EX-005",
+      "1SPE-DERLOCAL-EX-006",
       "1SPE-DERLOCAL-EX-007",
       "1SPE-DERLOCAL-EX-008",
       "1SPE-DERLOCAL-EX-009",
@@ -4277,8 +4278,10 @@
       "1SPE-PROBCOND-CO-007",
       "1SPE-PROBCOND-CO-008",
       "1SPE-PROBCOND-CO-009",
+      "1SPE-PROBCOND-CO-010",
       "1SPE-PROBCOND-CO-011",
       "1SPE-PROBCOND-CO-012",
+      "1SPE-PROBCOND-CO-013",
       "1SPE-PROBCOND-CO-014",
       "1SPE-PROBCOND-CO-015",
       "1SPE-PROBCOND-CO-016",
@@ -4291,6 +4294,7 @@
       "1SPE-PROBCOND-CO-023",
       "1SPE-PROBCOND-CO-024",
       "1SPE-PROBCOND-CO-025",
+      "1SPE-PROBCOND-CO-026",
       "1SPE-PROBCOND-CO-027",
       "1SPE-PROBCOND-CO-028",
       "1SPE-PROBCOND-CO-029",
@@ -4313,6 +4317,8 @@
       "1SPE-PROBCOND-CO-046",
       "1SPE-PROBCOND-CO-047",
       "1SPE-PROBCOND-CO-048",
+      "1SPE-PROBCOND-CO-049",
+      "1SPE-PROBCOND-CO-050",
       "1SPE-PROBCOND-CR-001",
       "1SPE-PROBCOND-TD-001",
       "1SPE-PROBCOND-TD-002",
@@ -4818,28 +4824,36 @@
       "1SPE-VARALEA-CO-017",
       "1SPE-VARALEA-CO-018",
       "1SPE-VARALEA-CO-019",
+      "1SPE-VARALEA-CO-020",
       "1SPE-VARALEA-CO-021",
       "1SPE-VARALEA-CO-022",
+      "1SPE-VARALEA-CO-023",
       "1SPE-VARALEA-CO-024",
       "1SPE-VARALEA-CO-025",
+      "1SPE-VARALEA-CO-026",
+      "1SPE-VARALEA-CO-027",
       "1SPE-VARALEA-CO-028",
       "1SPE-VARALEA-CO-029",
       "1SPE-VARALEA-CO-030",
       "1SPE-VARALEA-CO-031",
       "1SPE-VARALEA-CO-032",
       "1SPE-VARALEA-CO-033",
+      "1SPE-VARALEA-CO-034",
       "1SPE-VARALEA-CO-035",
       "1SPE-VARALEA-CO-036",
       "1SPE-VARALEA-CO-037",
+      "1SPE-VARALEA-CO-038",
       "1SPE-VARALEA-CO-039",
       "1SPE-VARALEA-CO-040",
       "1SPE-VARALEA-CO-041",
       "1SPE-VARALEA-CO-042",
       "1SPE-VARALEA-CO-043",
+      "1SPE-VARALEA-CO-044",
       "1SPE-VARALEA-CO-045",
       "1SPE-VARALEA-CO-046",
       "1SPE-VARALEA-CO-047",
       "1SPE-VARALEA-CO-048",
+      "1SPE-VARALEA-CO-049",
       "1SPE-VARALEA-CO-050",
       "1SPE-VARALEA-CO-051",
       "1SPE-VARALEA-CO-052",
@@ -4880,16 +4894,24 @@
       "1SPE-VARALEA-EX-026",
       "1SPE-VARALEA-EX-027",
       "1SPE-VARALEA-EX-028",
+      "1SPE-VARALEA-EX-029",
       "1SPE-VARALEA-EX-030",
+      "1SPE-VARALEA-EX-031",
+      "1SPE-VARALEA-EX-032",
       "1SPE-VARALEA-EX-033",
+      "1SPE-VARALEA-EX-034",
       "1SPE-VARALEA-EX-035",
+      "1SPE-VARALEA-EX-036",
+      "1SPE-VARALEA-EX-037",
       "1SPE-VARALEA-EX-038",
       "1SPE-VARALEA-EX-039",
+      "1SPE-VARALEA-EX-040",
       "1SPE-VARALEA-EX-041",
       "1SPE-VARALEA-EX-042",
       "1SPE-VARALEA-EX-043",
       "1SPE-VARALEA-EX-044",
       "1SPE-VARALEA-EX-045",
+      "1SPE-VARALEA-EX-046",
       "1SPE-VARALEA-EX-047",
       "1SPE-VARALEA-EX-048",
       "1SPE-VARALEA-EX-049",
@@ -6987,7 +7009,7 @@
       "TSPE-TRIGONOMETRIE-RE-C2"
     ],
     "objects_with_verify_block": 3497,
-    "assertions_executed": 13512,
+    "assertions_executed": 13627,
     "objects_not_applicable": 599,
     "maths_manuals_in_scope": [
       "1SPE",
@@ -7006,138 +7028,6 @@
   "blocking_findings": 1,
   "findings": [
     {
-      "target": "1SPE-DERLOCAL-EX-006",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-PROBCOND-CO-010",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-PROBCOND-CO-013",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-PROBCOND-CO-026",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-PROBCOND-CO-049",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-PROBCOND-CO-050",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-VARALEA-CO-020",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-VARALEA-CO-023",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-VARALEA-CO-026",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-VARALEA-CO-027",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-VARALEA-CO-034",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-VARALEA-CO-038",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-VARALEA-CO-044",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-VARALEA-CO-049",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-VARALEA-EX-029",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-VARALEA-EX-031",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-VARALEA-EX-032",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-VARALEA-EX-034",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-VARALEA-EX-036",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-VARALEA-EX-037",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-VARALEA-EX-040",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
-      "target": "1SPE-VARALEA-EX-046",
-      "code": "EMPTY_VERIFY_BLOCK",
-      "detail": "bloc % VERIFY présent mais sans assertion exécutable",
-      "blocking": false
-    },
-    {
       "target": "ALL",
       "code": "MATHEMATICAL_CONTENT_WITHOUT_ORACLE",
       "detail": "91 objet(s) mathématiques d'un type qui pourrait porter un bloc % BEGIN-VERIFY n'en portent pas : leur exactitude n'est pas mécaniquement établie. Un objet qu'on *pourrait* vérifier et qu'on ne vérifie pas n'est pas hors champ : la dimension ne peut donc pas passer.",
@@ -7146,9 +7036,9 @@
   ],
   "summary": {
     "OBJECTS_WITH_VERIFIABLE_ASSERTIONS": 3497,
-    "ASSERTIONS_EXECUTED": 13512,
+    "ASSERTIONS_EXECUTED": 13627,
     "MATHEMATICAL_ASSERTION_FAILURES": 0,
-    "EMPTY_VERIFY_BLOCKS": 22,
+    "EMPTY_VERIFY_BLOCKS": 0,
     "OBJECTS_NOT_APPLICABLE": 599,
     "NOT_APPLICABLE_PARTITION": {
       "MATHEMATICAL_NON_FORMALIZABLE": 417,

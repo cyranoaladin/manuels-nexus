@@ -1,8 +1,24 @@
 % META: {"id": "1SPE-PROBCOND-CO-026", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-026", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational
-% P_T = Rational(447, 10000)
-% P_M_T = Rational(49, 447)
+% # 1. les donnees de l'enonce
+% P_M = Rational(5, 1000)
+% P_T_M = Rational(98, 100)
+% P_T_Mbar = 1 - Rational(96, 100)
+% assert P_T_Mbar == Rational(4, 100)
+% # 2. probabilites totales
+% P_MinterT = P_M * P_T_M
+% P_MbarInterT = (1 - P_M) * P_T_Mbar
+% P_T = P_MinterT + P_MbarInterT
+% assert P_MinterT == Rational(490, 100000)
+% assert P_MbarInterT == Rational(3980, 100000)
+% assert P_T == Rational(447, 10000)
+% # 3. formule de Bayes
+% P_M_T = P_MinterT / P_T
+% assert P_M_T == Rational(49, 447)
+% # un test tres sensible peut rester peu predictif : moins de 12 %
+% assert P_M_T < Rational(12, 100)
+% assert P_T_M > Rational(97, 100)
 % END-VERIFY
 \begin{corrige}{1SPE-PROBCOND-EX-026}
 

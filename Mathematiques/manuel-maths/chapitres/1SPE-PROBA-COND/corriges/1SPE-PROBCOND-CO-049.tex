@@ -1,10 +1,26 @@
 % META: {"id": "1SPE-PROBCOND-CO-049", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-049", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational
-% P_T1 = Rational(29, 250)
-% P_M_T1 = Rational(9, 58)
-% P_T1T2 = Rational(11, 500)
-% P_M_T1T2 = Rational(171, 220)
+% P_M = Rational(2, 100)
+% sens1, faux1 = Rational(9, 10), Rational(1, 10)
+% sens2, faux2 = Rational(19, 20), Rational(1, 20)
+% # 1. premier test
+% P_MinterT1 = P_M * sens1
+% P_T1 = P_MinterT1 + (1 - P_M) * faux1
+% assert P_MinterT1 == Rational(18, 1000)
+% assert P_T1 == Rational(116, 1000) == Rational(29, 250)
+% # 2. Bayes apres un seul test
+% P_M_T1 = P_MinterT1 / P_T1
+% assert P_M_T1 == Rational(9, 58)
+% # 3. deux tests positifs, conditionnellement independants
+% P_MinterT1T2 = P_M * sens1 * sens2
+% P_T1T2 = P_MinterT1T2 + (1 - P_M) * faux1 * faux2
+% assert P_T1T2 == Rational(11, 500)
+% # 4. Bayes apres deux tests
+% P_M_T1T2 = P_MinterT1T2 / P_T1T2
+% assert P_M_T1T2 == Rational(171, 220)
+% # repeter le test fait bondir la valeur predictive positive
+% assert P_M_T1T2 > 4 * P_M_T1
 % END-VERIFY
 \begin{corrige}{1SPE-PROBCOND-EX-049}
 
