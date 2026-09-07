@@ -322,7 +322,20 @@ def main(argv: list[str] | None = None) -> int:
     report = build_report()
     payload = json.dumps(report, indent=2, ensure_ascii=False) + "\n"
     if args.check:
-        if not OUTPUT.is_file() or OUTPUT.read_text(encoding="utf-8") != payload:
+        # `observed_source_sha` est un CONSTAT, pas une condition de
+        # fraicheur : l'artefact le dit lui-meme, et l'autorite declaree est
+        # `source_digest`. Le comparer octet a octet rendait ce rapport
+        # perime par le commit qui le publie — il ne pouvait donc jamais
+        # etre courant, et le gate le signalait rouge en permanence.
+        if not OUTPUT.is_file():
+            print(f"STALE: {OUTPUT.relative_to(ROOT)}")
+            return 1
+        depose = json.loads(OUTPUT.read_text(encoding="utf-8"))
+        courant = dict(report)
+        for cle in ("observed_source_sha",):
+            depose.pop(cle, None)
+            courant.pop(cle, None)
+        if depose != courant:
             print(f"STALE: {OUTPUT.relative_to(ROOT)}")
             return 1
         print(f"current: {OUTPUT.relative_to(ROOT)}")
