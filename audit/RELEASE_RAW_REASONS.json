@@ -3,41 +3,41 @@
   "schema_version": 3,
   "generated_by": "scripts/build_release_raw_reasons.py",
   "freshness": {
-    "EVIDENCE_HEAD": "e2fa660c6e8958b77ebd7aece6c19f62c9d3198a",
+    "EVIDENCE_HEAD": "f9d975740c5cc4b9ab110b37931cca9cfbdb8483",
     "INPUT_PATHS": [
-      "audit/gate_observations/release-strict-e2fa660c.json"
+      "audit/gate_observations/release-strict-f9d97574.json"
     ],
-    "INPUT_DIGEST": "sha256:58a4284403cd77ecac7b896b193354cf6e00e4e0d84c99531c45dadcc0d0e6ec",
+    "INPUT_DIGEST": "sha256:cad499f05beaa5db716a65ac349a597809f564fe295cd03332e916c7949c8f53",
     "WHOLE_REPOSITORY_INPUT": true,
     "OBSERVATION_HEADS": [
-      "e2fa660c6e8958b77ebd7aece6c19f62c9d3198a"
+      "f9d975740c5cc4b9ab110b37931cca9cfbdb8483"
     ]
   },
   "gate_observations": [
     {
-      "observation_id": "release-strict-e2fa660c",
+      "observation_id": "release-strict",
       "gate": "release-strict",
       "exit_code": 7,
       "success": false,
-      "reason_count": 451
+      "reason_count": 348
     }
   ],
   "summary": {
-    "RAW_REASON_COUNT": 451,
-    "ROOT_BLOCKER_COUNT": 20,
+    "RAW_REASON_COUNT": 348,
+    "ROOT_BLOCKER_COUNT": 18,
     "UNMAPPED_RAW_REASONS": 0,
     "DUPLICATE_REASON_IDS": 0,
     "BLOCKER_CLASSIFICATION_CONFLICTS": 0,
     "PRODUCT_P0": 0,
-    "PRODUCT_P1": 7,
+    "PRODUCT_P1": 6,
     "PRODUCT_P2": 1,
-    "CERTIFICATION_BLOCKERS": 10,
+    "CERTIFICATION_BLOCKERS": 9,
     "RELEASE_POLICY_BLOCKERS": 1,
     "GOVERNANCE_BLOCKERS": 1,
     "RAW_REASONS_BY_TAXONOMY": {
-      "CERTIFICATION_BLOCKER": 257,
+      "CERTIFICATION_BLOCKER": 161,
       "GOVERNANCE_BLOCKER": 12,
-      "PRODUCT_P1": 146,
+      "PRODUCT_P1": 139,
       "RELEASE_POLICY_BLOCKER": 1,
       "PRODUCT_P2": 35
     }
@@ -114,12 +114,9 @@
       "root_blocker_id": "ROOT-COURSE-ASSEMBLY",
       "title": "Assemblage de cours incomplet",
       "taxonomy": "PRODUCT_P1",
-      "dependent_reason_count": 4,
+      "dependent_reason_count": 1,
       "dependent_reason_ids": [
-        "RSN-1fe391c7aeae4e04",
-        "RSN-6a7e84cf524a7e5d",
-        "RSN-769ce58853dfa410",
-        "RSN-85a780763ad0755c"
+        "RSN-6a7e84cf524a7e5d"
       ]
     },
     {
@@ -183,7 +180,7 @@
       "root_blocker_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "title": "Livrables déclarés non compilés",
       "taxonomy": "PRODUCT_P1",
-      "dependent_reason_count": 16,
+      "dependent_reason_count": 14,
       "dependent_reason_ids": [
         "RSN-1ee71001c51c08b9",
         "RSN-261b9d70243d6399",
@@ -191,26 +188,14 @@
         "RSN-3218bbd88cdf22c0",
         "RSN-5b18c5320c5eca4a",
         "RSN-5f6ebbac0a7cec33",
-        "RSN-7c849d4d0128b0b2",
         "RSN-7fee018ef7d52d66",
         "RSN-840ff1166a475bd9",
         "RSN-93ede7fd0ba49f2c",
-        "RSN-a3c5f1a0590d8e54",
         "RSN-d00b70121b3a009e",
         "RSN-d0334bda10e6be87",
         "RSN-d31c7891c77bf6fa",
         "RSN-f9828c9818764355",
         "RSN-fd19c784082520a4"
-      ]
-    },
-    {
-      "root_blocker_id": "ROOT-DELIVERABLE-NOT-DECLARED",
-      "title": "Assemblages de variantes non déclarés",
-      "taxonomy": "PRODUCT_P1",
-      "dependent_reason_count": 2,
-      "dependent_reason_ids": [
-        "RSN-4d5a8b8c992d00b9",
-        "RSN-da584fa871457d5a"
       ]
     },
     {
@@ -254,7 +239,6 @@
         "RSN-4a9beb5f60fb1ac5",
         "RSN-4dfaf838b4c6c209",
         "RSN-4f1772e1b5c6ab7a",
-        "RSN-55414f44ac289767",
         "RSN-58972a139c295fe5",
         "RSN-602639bb3755539a",
         "RSN-65223fd9479bee41",
@@ -265,6 +249,7 @@
         "RSN-84556c20495c523e",
         "RSN-85595cd409eeb88b",
         "RSN-8e4d091241426fe1",
+        "RSN-94bc3afdf49404e5",
         "RSN-98c48c17de4116c5",
         "RSN-a1af566a5eeee3e1",
         "RSN-a4f2289efe473102",
@@ -299,17 +284,17 @@
       "taxonomy": "GOVERNANCE_BLOCKER",
       "dependent_reason_count": 12,
       "dependent_reason_ids": [
-        "RSN-302b461039a6c905",
-        "RSN-46094e70aab2a0dc",
+        "RSN-2a34d93718ad0cd4",
+        "RSN-2ace443e173bdbf1",
+        "RSN-6747c7c7d8e80eb4",
         "RSN-7a6b0954401662cd",
-        "RSN-7f48341d57aa2b48",
-        "RSN-8bf353452e20ac74",
+        "RSN-9796c7a4e9eb47cf",
         "RSN-a27dc36e44e4961e",
         "RSN-aa4b7ff5845168fc",
         "RSN-aa4ca31e6c1853bf",
         "RSN-b58f7e4e0b242959",
-        "RSN-e9b8c64d0a0d642b",
-        "RSN-f5adb8607b8946bf",
+        "RSN-c298974c70e4aabe",
+        "RSN-ca3f478e66d9c874",
         "RSN-fec8187a1229ea49"
       ]
     },
@@ -458,24 +443,6 @@
       ]
     },
     {
-      "root_blocker_id": "ROOT-PRODUCER-STALE",
-      "title": "Producteurs de preuve stale ou rouges",
-      "taxonomy": "CERTIFICATION_BLOCKER",
-      "dependent_reason_count": 10,
-      "dependent_reason_ids": [
-        "RSN-16caed16674c847b",
-        "RSN-2b3bf0280fc72f12",
-        "RSN-3e60facdb2acfbd5",
-        "RSN-5d32d5dc4f08c301",
-        "RSN-745d2ec64d56190d",
-        "RSN-8b256cdd8c834836",
-        "RSN-8ba903dab9e557d7",
-        "RSN-b658a7036e7ea4e0",
-        "RSN-dc90fa82930fe714",
-        "RSN-e65d25c529d7ae3a"
-      ]
-    },
-    {
       "root_blocker_id": "ROOT-PUBLICATION-SNAPSHOT-UNDECIDED",
       "title": "Snapshots de publication non arbitrés",
       "taxonomy": "RELEASE_POLICY_BLOCKER",
@@ -510,97 +477,11 @@
       "root_blocker_id": "ROOT-QUALIFICATION-STALE",
       "title": "Qualifications dérivées invalidées par une mutation de source",
       "taxonomy": "CERTIFICATION_BLOCKER",
-      "dependent_reason_count": 89,
+      "dependent_reason_count": 3,
       "dependent_reason_ids": [
-        "RSN-002bbfb6fdbbbb76",
-        "RSN-004641885486413a",
-        "RSN-0b7f46f268d2aab4",
-        "RSN-0d319a0094856878",
-        "RSN-0e15dc0d11a54d71",
-        "RSN-1099bf38b5077e9d",
-        "RSN-148dd84b589412a2",
-        "RSN-1c98a6161bba1191",
-        "RSN-2b5f8c57b5c2ae41",
-        "RSN-2c72a26b0fafc9f4",
-        "RSN-30295675c9a71b34",
-        "RSN-317c2b4e0924be05",
-        "RSN-338c682494390551",
-        "RSN-367b12210fafff7d",
-        "RSN-3748500e80f135c6",
-        "RSN-3fc1078db18ae0df",
-        "RSN-423ab667168abc28",
-        "RSN-441ffc2337c7db54",
-        "RSN-46bdb1a2295d4ba2",
-        "RSN-471cc20745596189",
-        "RSN-47df6279c94cf0cc",
-        "RSN-4ae5006d63bf3402",
-        "RSN-4b16bd67909cf11a",
-        "RSN-4b360158e7b9cf15",
-        "RSN-4c15f1f6a38dcc4f",
-        "RSN-540e226dff3d9a8e",
         "RSN-544cc838584bb34a",
-        "RSN-562dfdf154d84362",
-        "RSN-5bb1e91935671792",
-        "RSN-5fb81d3d606d3f93",
-        "RSN-65d96f204371822c",
-        "RSN-66d95904fa1c0e96",
-        "RSN-6b38168312d94c79",
-        "RSN-6ece264bf63b515d",
         "RSN-7000535f919be60f",
-        "RSN-70a840de47453d90",
-        "RSN-725f5e987a270bd0",
-        "RSN-77f16a718c02c43b",
-        "RSN-7adc90954459aa63",
-        "RSN-7fa0253281c0b927",
-        "RSN-808ab2673692ed11",
-        "RSN-81347cc0a208150f",
-        "RSN-83b60872a54470b3",
-        "RSN-8476bcecee48b4dc",
-        "RSN-859d5aa5cc343f90",
-        "RSN-888bf00dd05b49f5",
-        "RSN-8b2a1d575f4680e2",
-        "RSN-8be4f76068287b18",
-        "RSN-8c7956cea2a1af0e",
-        "RSN-91c0a3fbb027e4b1",
-        "RSN-9285f8d7e1876321",
-        "RSN-94dbf54765de22eb",
-        "RSN-9606feae39530678",
-        "RSN-9a9f39a51bcda4e4",
-        "RSN-9f0e27304cdbf9c6",
-        "RSN-a411f7c21fb89c02",
-        "RSN-a6e5ad049e64482e",
-        "RSN-aa0b261fdff642a4",
-        "RSN-ab515345d4d3649e",
-        "RSN-acead4f42468b7cd",
-        "RSN-b54ecc2a7fe57337",
-        "RSN-b60953d4c36631ab",
-        "RSN-b901e663c91837ba",
-        "RSN-bdb843e48a3f0547",
-        "RSN-bea9b93e3d676683",
-        "RSN-c0da1fec6cf009bd",
-        "RSN-c16153c080a67e0a",
-        "RSN-c1e6c6606a93177f",
-        "RSN-c2b263a4c170d191",
-        "RSN-c3841c310ce81768",
-        "RSN-c7ea99f7933e216e",
-        "RSN-c84e16c67800c865",
-        "RSN-c970768307e1cfd4",
-        "RSN-cd4eb321619e6ccf",
-        "RSN-ce8f72a62aa496b6",
-        "RSN-d2141773f7fa5ad9",
-        "RSN-d39c9338e39d2f08",
-        "RSN-d8641e15a57480ea",
-        "RSN-da4a065e93ae2e67",
-        "RSN-dbff7444852d1047",
-        "RSN-e4ba6da402a53983",
-        "RSN-e9968b829f142d78",
-        "RSN-f52550adcede64ef",
-        "RSN-fa5d85f92b9673a4",
-        "RSN-faf3ad92317dc6b3",
-        "RSN-fdf4c8eda40799d0",
-        "RSN-fed9945e4ea99e5a",
-        "RSN-ff1d483e9adfb626",
-        "RSN-ff58f5aad1d9fc00"
+        "RSN-c84e16c67800c865"
       ]
     },
     {
@@ -667,7 +548,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -680,7 +561,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -693,7 +574,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -706,7 +587,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -719,7 +600,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -732,7 +613,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -745,7 +626,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -758,7 +639,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -771,7 +652,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -784,7 +665,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -797,7 +678,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -810,7 +691,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -823,7 +704,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -836,7 +717,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -849,7 +730,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -862,7 +743,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -875,7 +756,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -888,7 +769,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -901,7 +782,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -914,7 +795,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -927,7 +808,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -940,7 +821,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -953,7 +834,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -966,7 +847,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -979,7 +860,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -992,7 +873,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1005,7 +886,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1018,7 +899,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1031,7 +912,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1044,7 +925,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1057,7 +938,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1070,7 +951,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1083,7 +964,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1096,7 +977,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1109,7 +990,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1122,7 +1003,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1135,7 +1016,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1148,7 +1029,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1161,7 +1042,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1174,7 +1055,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1187,7 +1068,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ASSESSMENT-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1200,7 +1081,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-BUILD-RECEIPT-NOT-INTEGRATED",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1213,46 +1094,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CONTENT-MATRIX-INCOMPLETE",
       "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-1fe391c7aeae4e04",
-      "producer": "build_course_assembly_truth",
-      "target": "TCOMPL-ECHANTILLONNAGE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-ECHANTILLONNAGE:course_assembly_truth:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-COURSE-ASSEMBLY",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-85a780763ad0755c",
-      "producer": "build_course_assembly_truth",
-      "target": "TCOMPL-MODELES-EVOLUTION",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-MODELES-EVOLUTION:course_assembly_truth:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-COURSE-ASSEMBLY",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-769ce58853dfa410",
-      "producer": "build_course_assembly_truth",
-      "target": "TCOMPL-TEMPS-ATTENTE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "CONTENT:TCOMPL-TEMPS-ATTENTE:course_assembly_truth:GAP",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-COURSE-ASSEMBLY",
-      "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1265,7 +1107,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-COURSE-ASSEMBLY",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1278,7 +1120,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1291,7 +1133,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1304,7 +1146,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1317,7 +1159,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1330,7 +1172,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1343,7 +1185,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1356,7 +1198,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1369,7 +1211,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1382,7 +1224,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1395,7 +1237,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1408,7 +1250,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1421,7 +1263,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1434,7 +1276,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1447,7 +1289,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1460,7 +1302,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-CROSS-DISCIPLINE-AUDIT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1473,7 +1315,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1486,7 +1328,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1499,7 +1341,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1512,7 +1354,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1525,7 +1367,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1538,7 +1380,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1551,7 +1393,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1564,7 +1406,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1577,7 +1419,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1590,7 +1432,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1603,7 +1445,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1616,7 +1458,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1629,7 +1471,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1642,7 +1484,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1655,7 +1497,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1668,7 +1510,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1681,7 +1523,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1694,7 +1536,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1707,7 +1549,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1720,7 +1562,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1733,7 +1575,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1746,7 +1588,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1759,7 +1601,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1772,7 +1614,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1785,7 +1627,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1798,7 +1640,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-BUILT",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1811,7 +1653,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1824,7 +1666,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1837,7 +1679,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1850,7 +1692,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1863,20 +1705,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-a3c5f1a0590d8e54",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "1SPE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1SPE:livrable_non_compile:deliverable_matrix.1SPE.variants.banque_evaluations:absent",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
-      "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1889,7 +1718,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1902,7 +1731,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1915,7 +1744,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1928,7 +1757,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1941,7 +1770,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1954,7 +1783,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1967,20 +1796,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-7c849d4d0128b0b2",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "TSPE_2026_2027",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TSPE_2026_2027:livrable_non_compile:deliverable_matrix.TSPE_2026_2027.variants.banque_evaluations:absent",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
-      "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -1993,7 +1809,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2006,33 +1822,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DELIVERABLE-NOT-COMPILED",
       "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-da584fa871457d5a",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "1SPE",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "1SPE:assemblage_déclaré_absent:banque_evaluations",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-DECLARED",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-4d5a8b8c992d00b9",
-      "producer": "inventory_collection.deliverable_matrix",
-      "target": "TSPE_2026_2027",
-      "object_id": null,
-      "category": "PRODUCT_P1",
-      "evidence": "TSPE_2026_2027:assemblage_déclaré_absent:banque_evaluations",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-DELIVERABLE-NOT-DECLARED",
-      "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2045,7 +1835,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DIMENSION-NOT-COVERED",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2058,7 +1848,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-DIMENSION-NOT-COVERED",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2071,7 +1861,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-EXERCISE-CORRECTION-GRAPH-NOT-AUDITED",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2084,7 +1874,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2097,7 +1887,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2110,7 +1900,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2123,7 +1913,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2136,7 +1926,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2149,7 +1939,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2162,7 +1952,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2175,7 +1965,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2188,7 +1978,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2201,7 +1991,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2214,7 +2004,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2227,7 +2017,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2240,7 +2030,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2253,7 +2043,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2266,7 +2056,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2279,7 +2069,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2292,7 +2082,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2305,7 +2095,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2318,7 +2108,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2331,7 +2121,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2344,7 +2134,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2357,7 +2147,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2370,7 +2160,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2383,7 +2173,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2396,7 +2186,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2409,7 +2199,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2422,7 +2212,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2435,7 +2225,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2448,7 +2238,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2461,7 +2251,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2474,7 +2264,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2487,7 +2277,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2500,7 +2290,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2513,7 +2303,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2526,7 +2316,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2539,7 +2329,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2552,7 +2342,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2565,7 +2355,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2578,7 +2368,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2591,7 +2381,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2604,7 +2394,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2617,7 +2407,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2630,7 +2420,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2643,7 +2433,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2656,7 +2446,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2669,7 +2459,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2682,7 +2472,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2695,7 +2485,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2708,7 +2498,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2721,7 +2511,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2734,7 +2524,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2747,20 +2537,20 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
-      "reason_id": "RSN-55414f44ac289767",
+      "reason_id": "RSN-94bc3afdf49404e5",
       "producer": "build_human_review_queue",
       "target": "COLLECTION",
       "object_id": null,
       "category": "CERTIFICATION_BLOCKER",
-      "evidence": "HUMAN_REVIEW_QUEUE_OPEN:2599",
+      "evidence": "HUMAN_REVIEW_QUEUE_OPEN:2631",
       "status": "OPEN",
       "root_cause_id": "ROOT-HUMAN-REVIEW-QUEUE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2773,7 +2563,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2786,7 +2576,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2799,7 +2589,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2812,33 +2602,33 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
-      "reason_id": "RSN-46094e70aab2a0dc",
+      "reason_id": "RSN-2a34d93718ad0cd4",
       "producer": "inventory_collection.anomalies",
       "target": "TCOMPL",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TCOMPL:anomalie:blocking_statuses:anomalies.blocking_statuses:209",
+      "evidence": "TCOMPL:anomalie:blocking_statuses:anomalies.blocking_statuses:226",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
-      "reason_id": "RSN-302b461039a6c905",
+      "reason_id": "RSN-6747c7c7d8e80eb4",
       "producer": "inventory_collection.statuses",
       "target": "TCOMPL",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TCOMPL:statuts_non_approuves:manuals.TCOMPL.statuses:objets=200; contrats=9",
+      "evidence": "TCOMPL:statuts_non_approuves:manuals.TCOMPL.statuses:objets=217; contrats=9",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2851,7 +2641,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2864,59 +2654,59 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
-      "reason_id": "RSN-8bf353452e20ac74",
+      "reason_id": "RSN-c298974c70e4aabe",
       "producer": "inventory_collection.anomalies",
       "target": "TNSI",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TNSI:anomalie:blocking_statuses:anomalies.blocking_statuses:151",
+      "evidence": "TNSI:anomalie:blocking_statuses:anomalies.blocking_statuses:163",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
-      "reason_id": "RSN-7f48341d57aa2b48",
+      "reason_id": "RSN-9796c7a4e9eb47cf",
       "producer": "inventory_collection.statuses",
       "target": "TNSI",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TNSI:statuts_non_approuves:manuals.TNSI.statuses:objets=144; contrats=7",
+      "evidence": "TNSI:statuts_non_approuves:manuals.TNSI.statuses:objets=156; contrats=7",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
-      "reason_id": "RSN-e9b8c64d0a0d642b",
+      "reason_id": "RSN-2ace443e173bdbf1",
       "producer": "inventory_collection.anomalies",
       "target": "TSPE_2026_2027",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TSPE_2026_2027:anomalie:blocking_statuses:anomalies.blocking_statuses:56",
+      "evidence": "TSPE_2026_2027:anomalie:blocking_statuses:anomalies.blocking_statuses:59",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
-      "reason_id": "RSN-f5adb8607b8946bf",
+      "reason_id": "RSN-ca3f478e66d9c874",
       "producer": "inventory_collection.statuses",
       "target": "TSPE_2026_2027",
       "object_id": null,
       "category": "GOVERNANCE_BLOCKER",
-      "evidence": "TSPE_2026_2027:statuts_non_approuves:manuals.TSPE_2026_2027.statuses:objets=56; contrats=0",
+      "evidence": "TSPE_2026_2027:statuts_non_approuves:manuals.TSPE_2026_2027.statuses:objets=59; contrats=0",
       "status": "OPEN",
       "root_cause_id": "ROOT-NON-APPROVED-STATUSES",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2929,7 +2719,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2942,7 +2732,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2955,7 +2745,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2968,7 +2758,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2981,7 +2771,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -2994,7 +2784,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3007,7 +2797,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3020,7 +2810,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3033,7 +2823,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3046,7 +2836,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3059,7 +2849,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3072,7 +2862,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3085,7 +2875,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3098,7 +2888,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3111,7 +2901,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3124,7 +2914,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3137,7 +2927,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3150,7 +2940,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3163,7 +2953,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3176,7 +2966,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3189,7 +2979,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3202,7 +2992,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3215,7 +3005,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3228,7 +3018,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3241,7 +3031,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3254,7 +3044,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3267,7 +3057,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3280,7 +3070,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3293,7 +3083,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3306,7 +3096,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3319,7 +3109,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3332,7 +3122,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3345,7 +3135,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3358,7 +3148,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3371,7 +3161,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3384,7 +3174,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3397,7 +3187,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3410,7 +3200,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3423,7 +3213,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3436,7 +3226,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3449,7 +3239,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3462,7 +3252,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-ORACLE-EVIDENCE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3475,7 +3265,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3488,7 +3278,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3501,7 +3291,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3514,7 +3304,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3527,7 +3317,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3540,7 +3330,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3553,7 +3343,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3566,7 +3356,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3579,7 +3369,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3592,7 +3382,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3605,7 +3395,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3618,7 +3408,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3631,7 +3421,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3644,7 +3434,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3657,7 +3447,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3670,7 +3460,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3683,7 +3473,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3696,7 +3486,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3709,7 +3499,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3722,7 +3512,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3735,7 +3525,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3748,7 +3538,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3761,7 +3551,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3774,7 +3564,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3787,7 +3577,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3800,7 +3590,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3813,7 +3603,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3826,7 +3616,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3839,7 +3629,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3852,7 +3642,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3865,7 +3655,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3878,7 +3668,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3891,7 +3681,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3904,7 +3694,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3917,7 +3707,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-RICHNESS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3930,7 +3720,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3943,7 +3733,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3956,7 +3746,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3969,7 +3759,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3982,7 +3772,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -3995,7 +3785,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4008,7 +3798,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4021,7 +3811,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4034,7 +3824,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4047,7 +3837,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4060,7 +3850,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4073,7 +3863,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4086,7 +3876,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4099,7 +3889,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4112,7 +3902,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4125,7 +3915,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4138,7 +3928,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4151,7 +3941,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4164,7 +3954,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4177,7 +3967,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4190,7 +3980,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4203,7 +3993,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4216,7 +4006,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4229,7 +4019,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4242,7 +4032,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4255,7 +4045,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4268,7 +4058,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4281,7 +4071,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4294,7 +4084,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4307,7 +4097,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4320,7 +4110,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4333,7 +4123,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4346,7 +4136,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4359,7 +4149,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4372,7 +4162,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4385,7 +4175,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4398,7 +4188,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4411,7 +4201,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4424,7 +4214,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4437,7 +4227,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4450,7 +4240,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4463,7 +4253,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4476,137 +4266,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PEDAGOGICAL-ROLE-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-b658a7036e7ea4e0",
-      "producer": "inventory_collection.content_integrity",
-      "target": "scripts/build_chapter_richness_matrix.py",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_chapter_richness_matrix.py:rc=1",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PRODUCER-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-5d32d5dc4f08c301",
-      "producer": "inventory_collection.content_integrity",
-      "target": "scripts/build_course_assembly_truth.py",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_course_assembly_truth.py:rc=1",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PRODUCER-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-3e60facdb2acfbd5",
-      "producer": "inventory_collection.content_integrity",
-      "target": "scripts/build_current_review_debt_partition.py",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_current_review_debt_partition.py:rc=1",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PRODUCER-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-2b3bf0280fc72f12",
-      "producer": "inventory_collection.content_integrity",
-      "target": "scripts/build_ex_co_graph.py",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_ex_co_graph.py:rc=1",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PRODUCER-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-16caed16674c847b",
-      "producer": "inventory_collection.content_integrity",
-      "target": "scripts/build_p0_content_clone_ledger.py",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_p0_content_clone_ledger.py:rc=1",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PRODUCER-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-e65d25c529d7ae3a",
-      "producer": "inventory_collection.content_integrity",
-      "target": "scripts/build_publish_readiness_chapter_matrix.py",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_publish_readiness_chapter_matrix.py:rc=1",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PRODUCER-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-dc90fa82930fe714",
-      "producer": "inventory_collection.content_integrity",
-      "target": "scripts/build_qcm_capacity_coverage_debt.py",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_qcm_capacity_coverage_debt.py:rc=1",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PRODUCER-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-745d2ec64d56190d",
-      "producer": "inventory_collection.content_integrity",
-      "target": "scripts/build_qcm_gap_metrics.py",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_qcm_gap_metrics.py:rc=1",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PRODUCER-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-8ba903dab9e557d7",
-      "producer": "inventory_collection.content_integrity",
-      "target": "scripts/build_true_pedagogical_coverage.py",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/build_true_pedagogical_coverage.py:rc=1",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PRODUCER-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-8b256cdd8c834836",
-      "producer": "inventory_collection.content_integrity",
-      "target": "scripts/collection_dashboard.py",
-      "object_id": null,
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "CONTENT_PRODUCER_STALE_OR_RED:scripts/collection_dashboard.py:rc=1",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-PRODUCER-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4619,7 +4279,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-PUBLICATION-SNAPSHOT-UNDECIDED",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4632,7 +4292,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4645,7 +4305,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4658,7 +4318,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4671,7 +4331,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4684,7 +4344,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4697,7 +4357,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4710,7 +4370,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4723,7 +4383,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4736,7 +4396,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4749,7 +4409,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4762,7 +4422,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4775,7 +4435,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4788,7 +4448,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -4801,501 +4461,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QCM-COVERAGE",
       "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-317c2b4e0924be05",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "0030282f546d3d82",
-      "object_id": "0030282f546d3d82",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:0030282f546d3d82:fiche méthode modifiée après qualification (STALE) fp=0030282f546d3d82: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/methodes/TCOMPL-LOG-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-004641885486413a",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "01533128b52c0fa0",
-      "object_id": "01533128b52c0fa0",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:01533128b52c0fa0:fiche méthode modifiée après qualification (STALE) fp=01533128b52c0fa0: Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/methodes/TCOMPL-INEG-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-6ece264bf63b515d",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "021c56e25a132dd7",
-      "object_id": "021c56e25a132dd7",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:021c56e25a132dd7:fiche méthode modifiée après qualification (STALE) fp=021c56e25a132dd7: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/methodes/TCOMPL-LOG-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-2c72a26b0fafc9f4",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "06710621e974eafb",
-      "object_id": "06710621e974eafb",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:06710621e974eafb:fiche méthode modifiée après qualification (STALE) fp=06710621e974eafb: Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/methodes/TCOMPL-BAYES-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-83b60872a54470b3",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "06c9d10c3a3f09ef",
-      "object_id": "06c9d10c3a3f09ef",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:06c9d10c3a3f09ef:fiche méthode modifiée après qualification (STALE) fp=06c9d10c3a3f09ef: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/methodes/TCOMPL-LOG-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-f52550adcede64ef",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "0ae21dd0da220747",
-      "object_id": "0ae21dd0da220747",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:0ae21dd0da220747:fiche méthode modifiée après qualification (STALE) fp=0ae21dd0da220747: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/methodes/TEXP-CAG-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-b901e663c91837ba",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "0c52237e59af9cc2",
-      "object_id": "0c52237e59af9cc2",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:0c52237e59af9cc2:fiche méthode modifiée après qualification (STALE) fp=0c52237e59af9cc2: Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/methodes/TEXP-GRA-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-148dd84b589412a2",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "0c7cf3afe9c32860",
-      "object_id": "0c7cf3afe9c32860",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:0c7cf3afe9c32860:fiche méthode modifiée après qualification (STALE) fp=0c7cf3afe9c32860: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-c2b263a4c170d191",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "0f1068a9fbddd4f5",
-      "object_id": "0f1068a9fbddd4f5",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:0f1068a9fbddd4f5:fiche méthode modifiée après qualification (STALE) fp=0f1068a9fbddd4f5: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-008.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-e9968b829f142d78",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "0fe136e4e18e572d",
-      "object_id": "0fe136e4e18e572d",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:0fe136e4e18e572d:fiche méthode modifiée après qualification (STALE) fp=0fe136e4e18e572d: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-c970768307e1cfd4",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "11abb6d5bc294fdc",
-      "object_id": "11abb6d5bc294fdc",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:11abb6d5bc294fdc:fiche méthode modifiée après qualification (STALE) fp=11abb6d5bc294fdc: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-007.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-c0da1fec6cf009bd",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "1e07caec5dab3c17",
-      "object_id": "1e07caec5dab3c17",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:1e07caec5dab3c17:fiche méthode modifiée après qualification (STALE) fp=1e07caec5dab3c17: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-808ab2673692ed11",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "1fc241703550a485",
-      "object_id": "1fc241703550a485",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:1fc241703550a485:fiche méthode modifiée après qualification (STALE) fp=1fc241703550a485: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-007.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-367b12210fafff7d",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "209f03089e4e176e",
-      "object_id": "209f03089e4e176e",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:209f03089e4e176e:fiche méthode modifiée après qualification (STALE) fp=209f03089e4e176e: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/methodes/TCOMPL-LOG-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-dbff7444852d1047",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "2650980f52446a6b",
-      "object_id": "2650980f52446a6b",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:2650980f52446a6b:fiche méthode modifiée après qualification (STALE) fp=2650980f52446a6b: Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/methodes/TCOMPL-INEG-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-fa5d85f92b9673a4",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "265da5778de5d423",
-      "object_id": "265da5778de5d423",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:265da5778de5d423:fiche méthode modifiée après qualification (STALE) fp=265da5778de5d423: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-5fb81d3d606d3f93",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "2ee632b82aa10c4a",
-      "object_id": "2ee632b82aa10c4a",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:2ee632b82aa10c4a:fiche méthode modifiée après qualification (STALE) fp=2ee632b82aa10c4a: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-006.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-562dfdf154d84362",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "2f15b92d6ec50f69",
-      "object_id": "2f15b92d6ec50f69",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:2f15b92d6ec50f69:fiche méthode modifiée après qualification (STALE) fp=2f15b92d6ec50f69: Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/methodes/TCOMPL-INEG-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-bea9b93e3d676683",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "3d2d2b1c09cee1c4",
-      "object_id": "3d2d2b1c09cee1c4",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:3d2d2b1c09cee1c4:fiche méthode modifiée après qualification (STALE) fp=3d2d2b1c09cee1c4: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-70a840de47453d90",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "3e69771df38d383f",
-      "object_id": "3e69771df38d383f",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:3e69771df38d383f:fiche méthode modifiée après qualification (STALE) fp=3e69771df38d383f: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-a411f7c21fb89c02",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "3fb4aac030caa40c",
-      "object_id": "3fb4aac030caa40c",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:3fb4aac030caa40c:fiche méthode modifiée après qualification (STALE) fp=3fb4aac030caa40c: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-d2141773f7fa5ad9",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "470fcd9c3b14067f",
-      "object_id": "470fcd9c3b14067f",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:470fcd9c3b14067f:fiche méthode modifiée après qualification (STALE) fp=470fcd9c3b14067f: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/methodes/TEXP-CAG-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-4c15f1f6a38dcc4f",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "4a32199d0e3b5481",
-      "object_id": "4a32199d0e3b5481",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:4a32199d0e3b5481:fiche méthode modifiée après qualification (STALE) fp=4a32199d0e3b5481: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-009.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-c16153c080a67e0a",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "4ad3e114730f28ec",
-      "object_id": "4ad3e114730f28ec",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:4ad3e114730f28ec:fiche méthode modifiée après qualification (STALE) fp=4ad3e114730f28ec: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-AIR-ME-006.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-ab515345d4d3649e",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "4bc68f1fa2bedcd3",
-      "object_id": "4bc68f1fa2bedcd3",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:4bc68f1fa2bedcd3:fiche méthode modifiée après qualification (STALE) fp=4bc68f1fa2bedcd3: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-AIR-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-65d96f204371822c",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "4e2d09feb48084a6",
-      "object_id": "4e2d09feb48084a6",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:4e2d09feb48084a6:fiche méthode modifiée après qualification (STALE) fp=4e2d09feb48084a6: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-8b2a1d575f4680e2",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "4fe9c142ba3cc784",
-      "object_id": "4fe9c142ba3cc784",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:4fe9c142ba3cc784:fiche méthode modifiée après qualification (STALE) fp=4fe9c142ba3cc784: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-81347cc0a208150f",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "55146f6814087378",
-      "object_id": "55146f6814087378",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:55146f6814087378:fiche méthode modifiée après qualification (STALE) fp=55146f6814087378: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-a6e5ad049e64482e",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "581904a3ac5370d2",
-      "object_id": "581904a3ac5370d2",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:581904a3ac5370d2:fiche méthode modifiée après qualification (STALE) fp=581904a3ac5370d2: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-d39c9338e39d2f08",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "590b0a7934abae80",
-      "object_id": "590b0a7934abae80",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:590b0a7934abae80:fiche méthode modifiée après qualification (STALE) fp=590b0a7934abae80: Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/methodes/TCOMPL-CORR-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-da4a065e93ae2e67",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "5bec67f6f3b4f43d",
-      "object_id": "5bec67f6f3b4f43d",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:5bec67f6f3b4f43d:fiche méthode modifiée après qualification (STALE) fp=5bec67f6f3b4f43d: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-0b7f46f268d2aab4",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "5d2c024d6ba0e509",
-      "object_id": "5d2c024d6ba0e509",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:5d2c024d6ba0e509:fiche méthode modifiée après qualification (STALE) fp=5d2c024d6ba0e509: Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/methodes/TCOMPL-BAYES-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-fed9945e4ea99e5a",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "6457bb738aa0a816",
-      "object_id": "6457bb738aa0a816",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:6457bb738aa0a816:fiche méthode modifiée après qualification (STALE) fp=6457bb738aa0a816: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-CALCULS-AIRES-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-540e226dff3d9a8e",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "651dd33093c8cd7e",
-      "object_id": "651dd33093c8cd7e",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:651dd33093c8cd7e:fiche méthode modifiée après qualification (STALE) fp=651dd33093c8cd7e: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-8c7956cea2a1af0e",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "663df7bbf976dcf1",
-      "object_id": "663df7bbf976dcf1",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:663df7bbf976dcf1:fiche méthode modifiée après qualification (STALE) fp=663df7bbf976dcf1: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-006.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-bdb843e48a3f0547",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "6877641e8fa2f62e",
-      "object_id": "6877641e8fa2f62e",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:6877641e8fa2f62e:fiche méthode modifiée après qualification (STALE) fp=6877641e8fa2f62e: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-006.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-725f5e987a270bd0",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "69653e1c3bea2b5e",
-      "object_id": "69653e1c3bea2b5e",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:69653e1c3bea2b5e:fiche méthode modifiée après qualification (STALE) fp=69653e1c3bea2b5e: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-006.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-faf3ad92317dc6b3",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "6ae81a03b6cc436b",
-      "object_id": "6ae81a03b6cc436b",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:6ae81a03b6cc436b:fiche méthode modifiée après qualification (STALE) fp=6ae81a03b6cc436b: Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/methodes/TEXP-GRA-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -5308,371 +4474,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-cd4eb321619e6ccf",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "72442cf47779336b",
-      "object_id": "72442cf47779336b",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:72442cf47779336b:fiche méthode modifiée après qualification (STALE) fp=72442cf47779336b: Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/methodes/TEXP-GRA-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-fdf4c8eda40799d0",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "7268e1fc1b1346b3",
-      "object_id": "7268e1fc1b1346b3",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:7268e1fc1b1346b3:fiche méthode modifiée après qualification (STALE) fp=7268e1fc1b1346b3: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/methodes/TEXP-CAG-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-66d95904fa1c0e96",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "74aacd756bac15f4",
-      "object_id": "74aacd756bac15f4",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:74aacd756bac15f4:fiche méthode modifiée après qualification (STALE) fp=74aacd756bac15f4: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-94dbf54765de22eb",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "7b40f5ed539c5a26",
-      "object_id": "7b40f5ed539c5a26",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:7b40f5ed539c5a26:fiche méthode modifiée après qualification (STALE) fp=7b40f5ed539c5a26: Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/methodes/TEXP-GRA-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-ff1d483e9adfb626",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "7eb525dfe531febe",
-      "object_id": "7eb525dfe531febe",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:7eb525dfe531febe:fiche méthode modifiée après qualification (STALE) fp=7eb525dfe531febe: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-006.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-30295675c9a71b34",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "80d853f9d234f4a5",
-      "object_id": "80d853f9d234f4a5",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:80d853f9d234f4a5:fiche méthode modifiée après qualification (STALE) fp=80d853f9d234f4a5: Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/methodes/TCOMPL-BAYES-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-0d319a0094856878",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "8108bdb51a042101",
-      "object_id": "8108bdb51a042101",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:8108bdb51a042101:fiche méthode modifiée après qualification (STALE) fp=8108bdb51a042101: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-8476bcecee48b4dc",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "83989c3720c75dfe",
-      "object_id": "83989c3720c75dfe",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:83989c3720c75dfe:fiche méthode modifiée après qualification (STALE) fp=83989c3720c75dfe: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-d8641e15a57480ea",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "83dae4249056ea23",
-      "object_id": "83dae4249056ea23",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:83dae4249056ea23:fiche méthode modifiée après qualification (STALE) fp=83dae4249056ea23: Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/methodes/TCOMPL-CORR-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-7fa0253281c0b927",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "84c9ef77925f37c7",
-      "object_id": "84c9ef77925f37c7",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:84c9ef77925f37c7:fiche méthode modifiée après qualification (STALE) fp=84c9ef77925f37c7: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-AIR-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-b54ecc2a7fe57337",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "84db8170cb56eee0",
-      "object_id": "84db8170cb56eee0",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:84db8170cb56eee0:fiche méthode modifiée après qualification (STALE) fp=84db8170cb56eee0: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-4b360158e7b9cf15",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "88b5b9d05ca06bcb",
-      "object_id": "88b5b9d05ca06bcb",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:88b5b9d05ca06bcb:fiche méthode modifiée après qualification (STALE) fp=88b5b9d05ca06bcb: Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/methodes/TCOMPL-BAYES-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-9606feae39530678",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "8eb2eaac657922e4",
-      "object_id": "8eb2eaac657922e4",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:8eb2eaac657922e4:fiche méthode modifiée après qualification (STALE) fp=8eb2eaac657922e4: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-c7ea99f7933e216e",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "931d7cde398a47b3",
-      "object_id": "931d7cde398a47b3",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:931d7cde398a47b3:fiche méthode modifiée après qualification (STALE) fp=931d7cde398a47b3: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-423ab667168abc28",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "9454cca9ee56bf2a",
-      "object_id": "9454cca9ee56bf2a",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:9454cca9ee56bf2a:fiche méthode modifiée après qualification (STALE) fp=9454cca9ee56bf2a: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-471cc20745596189",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "9ce6275a9fbf8c6f",
-      "object_id": "9ce6275a9fbf8c6f",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:9ce6275a9fbf8c6f:fiche méthode modifiée après qualification (STALE) fp=9ce6275a9fbf8c6f: Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/methodes/TCOMPL-BAYES-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-3748500e80f135c6",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "9f4c22f13c2d24c2",
-      "object_id": "9f4c22f13c2d24c2",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:9f4c22f13c2d24c2:fiche méthode modifiée après qualification (STALE) fp=9f4c22f13c2d24c2: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-AIR-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-1c98a6161bba1191",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "9f9231b9f41e4b8b",
-      "object_id": "9f9231b9f41e4b8b",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:9f9231b9f41e4b8b:fiche méthode modifiée après qualification (STALE) fp=9f9231b9f41e4b8b: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-002bbfb6fdbbbb76",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "a0753d0aba4d02a8",
-      "object_id": "a0753d0aba4d02a8",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:a0753d0aba4d02a8:fiche méthode modifiée après qualification (STALE) fp=a0753d0aba4d02a8: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-acead4f42468b7cd",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "a3d1aec470dce9e8",
-      "object_id": "a3d1aec470dce9e8",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:a3d1aec470dce9e8:fiche méthode modifiée après qualification (STALE) fp=a3d1aec470dce9e8: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-e4ba6da402a53983",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "a54fcaaa934aa84d",
-      "object_id": "a54fcaaa934aa84d",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:a54fcaaa934aa84d:fiche méthode modifiée après qualification (STALE) fp=a54fcaaa934aa84d: Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/methodes/TCOMPL-INEG-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-2b5f8c57b5c2ae41",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "a6270d4ed2dba761",
-      "object_id": "a6270d4ed2dba761",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:a6270d4ed2dba761:fiche méthode modifiée après qualification (STALE) fp=a6270d4ed2dba761: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-AIR-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-aa0b261fdff642a4",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "ae6389117fc89d5f",
-      "object_id": "ae6389117fc89d5f",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:ae6389117fc89d5f:fiche méthode modifiée après qualification (STALE) fp=ae6389117fc89d5f: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-007.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-77f16a718c02c43b",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "afcba49c06c9409b",
-      "object_id": "afcba49c06c9409b",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:afcba49c06c9409b:fiche méthode modifiée après qualification (STALE) fp=afcba49c06c9409b: Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/methodes/TCOMPL-INEG-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-3fc1078db18ae0df",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "b0b81c9742c416e1",
-      "object_id": "b0b81c9742c416e1",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:b0b81c9742c416e1:fiche méthode modifiée après qualification (STALE) fp=b0b81c9742c416e1: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-4ae5006d63bf3402",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "b2abd47781d37139",
-      "object_id": "b2abd47781d37139",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:b2abd47781d37139:fiche méthode modifiée après qualification (STALE) fp=b2abd47781d37139: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-859d5aa5cc343f90",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "b488ade29a5828f1",
-      "object_id": "b488ade29a5828f1",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:b488ade29a5828f1:fiche méthode modifiée après qualification (STALE) fp=b488ade29a5828f1: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-c1e6c6606a93177f",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "b82fe87c65ab5b4b",
-      "object_id": "b82fe87c65ab5b4b",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:b82fe87c65ab5b4b:fiche méthode modifiée après qualification (STALE) fp=b82fe87c65ab5b4b: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/methodes/TEXP-CAG-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -5685,176 +4487,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-9a9f39a51bcda4e4",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "bb2cf6d945cb6cd5",
-      "object_id": "bb2cf6d945cb6cd5",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:bb2cf6d945cb6cd5:fiche méthode modifiée après qualification (STALE) fp=bb2cf6d945cb6cd5: Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/methodes/TCOMPL-CORR-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-1099bf38b5077e9d",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "bf30ca02ed1a0de7",
-      "object_id": "bf30ca02ed1a0de7",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:bf30ca02ed1a0de7:fiche méthode modifiée après qualification (STALE) fp=bf30ca02ed1a0de7: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-6b38168312d94c79",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "bf8b8407281f12c7",
-      "object_id": "bf8b8407281f12c7",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:bf8b8407281f12c7:fiche méthode modifiée après qualification (STALE) fp=bf8b8407281f12c7: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-338c682494390551",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "c0db390090910a45",
-      "object_id": "c0db390090910a45",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:c0db390090910a45:fiche méthode modifiée après qualification (STALE) fp=c0db390090910a45: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-7adc90954459aa63",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "c298d72b87aa5543",
-      "object_id": "c298d72b87aa5543",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:c298d72b87aa5543:fiche méthode modifiée après qualification (STALE) fp=c298d72b87aa5543: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-91c0a3fbb027e4b1",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "c728b984c4f7958b",
-      "object_id": "c728b984c4f7958b",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:c728b984c4f7958b:fiche méthode modifiée après qualification (STALE) fp=c728b984c4f7958b: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-9f0e27304cdbf9c6",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "c858f076fae10c27",
-      "object_id": "c858f076fae10c27",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:c858f076fae10c27:fiche méthode modifiée après qualification (STALE) fp=c858f076fae10c27: Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/methodes/TEXP-GRA-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-9285f8d7e1876321",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "caad266bff908115",
-      "object_id": "caad266bff908115",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:caad266bff908115:fiche méthode modifiée après qualification (STALE) fp=caad266bff908115: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-ce8f72a62aa496b6",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "cedc0c971f03a4de",
-      "object_id": "cedc0c971f03a4de",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:cedc0c971f03a4de:fiche méthode modifiée après qualification (STALE) fp=cedc0c971f03a4de: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-47df6279c94cf0cc",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "d6db49d30489ae12",
-      "object_id": "d6db49d30489ae12",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:d6db49d30489ae12:fiche méthode modifiée après qualification (STALE) fp=d6db49d30489ae12: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-006.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-c3841c310ce81768",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "d960733fa0bd1035",
-      "object_id": "d960733fa0bd1035",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:d960733fa0bd1035:fiche méthode modifiée après qualification (STALE) fp=d960733fa0bd1035: Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/methodes/TCOMPL-CORR-ME-004.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-0e15dc0d11a54d71",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "db10ea45bab2b3a2",
-      "object_id": "db10ea45bab2b3a2",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:db10ea45bab2b3a2:fiche méthode modifiée après qualification (STALE) fp=db10ea45bab2b3a2: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-005.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-4b16bd67909cf11a",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "db730bde1c3ed617",
-      "object_id": "db730bde1c3ed617",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:db730bde1c3ed617:fiche méthode modifiée après qualification (STALE) fp=db730bde1c3ed617: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/methodes/TCOMPL-LOG-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -5867,98 +4500,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-QUALIFICATION-STALE",
       "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-ff58f5aad1d9fc00",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "e9cb7ad0c70884b7",
-      "object_id": "e9cb7ad0c70884b7",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:e9cb7ad0c70884b7:fiche méthode modifiée après qualification (STALE) fp=e9cb7ad0c70884b7: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-007.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-5bb1e91935671792",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "ea40b78c1f105bcf",
-      "object_id": "ea40b78c1f105bcf",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:ea40b78c1f105bcf:fiche méthode modifiée après qualification (STALE) fp=ea40b78c1f105bcf: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-003.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-441ffc2337c7db54",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "ed9e59a472a9e4a5",
-      "object_id": "ed9e59a472a9e4a5",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:ed9e59a472a9e4a5:fiche méthode modifiée après qualification (STALE) fp=ed9e59a472a9e4a5: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-46bdb1a2295d4ba2",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "f473b8a850a04afc",
-      "object_id": "f473b8a850a04afc",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:f473b8a850a04afc:fiche méthode modifiée après qualification (STALE) fp=f473b8a850a04afc: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-b60953d4c36631ab",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "f49896a42f0000d4",
-      "object_id": "f49896a42f0000d4",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:f49896a42f0000d4:fiche méthode modifiée après qualification (STALE) fp=f49896a42f0000d4: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-002.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-888bf00dd05b49f5",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "f55beaf4faa24cc5",
-      "object_id": "f55beaf4faa24cc5",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:f55beaf4faa24cc5:fiche méthode modifiée après qualification (STALE) fp=f55beaf4faa24cc5: Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/methodes/TCOMPL-CORR-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
-      ]
-    },
-    {
-      "reason_id": "RSN-8be4f76068287b18",
-      "producer": "inventory_collection.invalid_qualifications",
-      "target": "f7bcb21fb088ddda",
-      "object_id": "f7bcb21fb088ddda",
-      "category": "CERTIFICATION_BLOCKER",
-      "evidence": "qualification_invalide:f7bcb21fb088ddda:fiche méthode modifiée après qualification (STALE) fp=f7bcb21fb088ddda: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/methodes/TEXP-CAG-ME-001.tex",
-      "status": "OPEN",
-      "root_cause_id": "ROOT-QUALIFICATION-STALE",
-      "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -5971,7 +4513,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -5984,7 +4526,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -5997,7 +4539,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6010,7 +4552,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6023,7 +4565,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6036,7 +4578,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6049,7 +4591,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6062,7 +4604,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6075,7 +4617,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6088,7 +4630,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6101,7 +4643,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6114,7 +4656,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6127,7 +4669,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6140,7 +4682,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6153,7 +4695,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6166,7 +4708,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6179,7 +4721,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6192,7 +4734,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6205,7 +4747,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6218,7 +4760,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6231,7 +4773,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6244,7 +4786,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6257,7 +4799,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6270,7 +4812,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6283,7 +4825,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6296,7 +4838,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6309,7 +4851,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6322,7 +4864,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6335,7 +4877,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6348,7 +4890,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6361,7 +4903,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6374,7 +4916,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6387,7 +4929,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6400,7 +4942,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6413,7 +4955,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6426,7 +4968,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6439,7 +4981,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6452,7 +4994,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6465,7 +5007,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6478,7 +5020,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6491,7 +5033,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6504,7 +5046,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     },
     {
@@ -6517,7 +5059,7 @@
       "status": "OPEN",
       "root_cause_id": "ROOT-VERTICAL-MACHINE-STATUS",
       "observed_in": [
-        "release-strict-e2fa660c"
+        "release-strict"
       ]
     }
   ]
