@@ -10129,19 +10129,47 @@ def test_closed_contract_allows_indexed_order_reads(
     ) == []
 
 
-def test_legacy_manual_assembler_remains_valid_without_closed_variant_contract(
+def test_maths_manual_assembler_now_declares_the_closed_variant_contract(
     inventory_module,
 ) -> None:
+    """L'assembleur maths produit quatre variantes : il déclare le contrat.
+
+    Il ne le déclarait pas tant qu'il ne produisait que le manuel élève et le
+    manuel professeur. Depuis qu'il assemble aussi le livret méthodes et le
+    livret remédiation, la table fermée est la seule chose qui empêche une
+    variante d'exister sans ordre déclaré.
+    """
     path = ROOT / "Mathematiques/manuel-maths/scripts/assemble_manuel.py"
 
     analysis = inventory_module.analyze_assembler(path)
 
-    assert "VARIANT_ORDERS" not in analysis["constants"]
-    assert "ELEVE_VARIANTS" not in analysis["constants"]
+    assert "VARIANT_ORDERS" in analysis["constants"]
+    assert "ELEVE_VARIANTS" in analysis["constants"]
     assert inventory_module._assembly_core.validate_analysis(
         "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
         analysis,
     ) == []
+
+
+def test_the_student_manual_order_never_declares_the_corrections(
+    inventory_module,
+) -> None:
+    """Le manuel élève ne porte pas les corrigés — pas même leur rubrique.
+
+    Une première version de la table avait recopié l'ordre `professeur` dans
+    `eleve`, corrigés compris. Les corps étaient neutralisés, mais le titre de
+    rubrique « Corrigés » s'imprimait, et le contrôle de non-fuite refusait le
+    build. La table doit décrire ce qu'elle produit.
+    """
+    path = ROOT / "Mathematiques/manuel-maths/scripts/assemble_manuel.py"
+
+    analysis = inventory_module.analyze_assembler(path)
+    orders = analysis["constants"]["VARIANT_ORDERS"]
+
+    eleve = [tuple(rule) for rule in orders["eleve"]]
+    assert all(rubrique != "corriges" for rubrique, _ in eleve), eleve
+    professeur = [tuple(rule) for rule in orders["professeur"]]
+    assert ("corriges", "*") in professeur, professeur
 
 
 def test_professor_only_manual_assembler_does_not_require_student_filter(

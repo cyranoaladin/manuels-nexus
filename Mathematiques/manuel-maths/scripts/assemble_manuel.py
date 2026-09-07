@@ -161,8 +161,11 @@ VARIANTS = [
     "remediation",
 ]
 
-# `professeur` et `eleve` reprennent ORDER à l'identique : la sélection de ces
-# deux variantes ne change pas. Seules s'ajoutent les deux rubriques autonomes.
+# `professeur` reprend ORDER à l'identique. `eleve` NON : il n'a jamais porté
+# les corrigés, et cette table doit le dire. Une première version l'avait
+# recopié tel quel depuis `professeur` — le manuel élève s'est mis à assembler
+# la rubrique « Corrigés », et le contrôle de non-fuite a refusé le build. Une
+# table qui décrit mal ce qu'elle produit finit par le produire.
 VARIANT_ORDERS = {
     "professeur": [
         ("cours", "00_ouverture"), ("cours", "01_diagnostic"), ("cours", "02_activites"),
@@ -174,11 +177,17 @@ VARIANT_ORDERS = {
         ("cours", "00_ouverture"), ("cours", "01_diagnostic"), ("cours", "02_activites"),
         ("cours", "1*"), ("methodes", "*"), ("exercices", "*"),
         ("cours", "07_td*"), ("qcm", "*"), ("evaluations", "*"), ("remediation", "*"),
-        ("corriges", "*"),
     ],
     "methodes": [("methodes", "*")],
     "remediation": [("remediation", "*")],
 }
+
+#: Variantes assemblées par la sélection générique. Le manuel élève et le
+#: manuel professeur ont leur propre collecte, plus ancienne et plus stricte :
+#: elle écarte `corriges`, écarte les corrigés d'évaluation nommés `-corrige`,
+#: et filtre par type d'objet autorisé. Les router vers la collecte générique
+#: contournait ces trois protections d'un coup.
+AUXILIARY_VARIANTS = {"methodes", "remediation"}
 
 # Livrets destinés aux élèves : ils ne portent jamais de corrigé.
 ELEVE_VARIANTS = ["eleve", "methodes", "remediation"]
@@ -978,7 +987,7 @@ def rubrique_libelle(path: Path) -> str:
 
 
 def collect_chapter(chap_dir: Path, variant: str) -> list[Path]:
-    if variant in VARIANT_ORDERS:
+    if variant in AUXILIARY_VARIANTS:
         return _collect_auxiliary_chapter(chap_dir, variant)
     if variant not in {"eleve", "professeur"}:
         raise AssemblyError("variante inconnue")
