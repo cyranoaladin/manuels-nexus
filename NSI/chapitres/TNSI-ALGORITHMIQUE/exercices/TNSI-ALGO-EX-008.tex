@@ -1,0 +1,60 @@
+% META: {"id": "TNSI-ALGO-EX-008", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "exercice", "capacites": ["T-ALGO-03"], "capacites_codes": ["C11"], "parcours": 3, "competences": ["modeliser", "programmer", "raisonner"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-008.tex", "corrige_tex": "chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-008.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-648B9676DF26", "CAPACITY_ID": "C11", "EXERCISE_ROLE": "CONTEXT_VARIATION", "DIFFICULTY": 3, "AUTHORING_REASON": "le seul exercice rattache faisait ecrire un maximum par diviser pour regner, ou la methode n'apporte rien puisqu'il faut de toute facon examiner chaque element ; ici la structure du profil permet d'ecarter la moitie des donnees a chaque etape, et c'est la que la methode se justifie", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% altitudes = [120, 180, 260, 410, 620, 900, 780, 540, 300, 150]
+% assert len(altitudes) == 10
+% montee = all(altitudes[i] < altitudes[i + 1] for i in range(5))
+% descente = all(altitudes[i] > altitudes[i + 1] for i in range(5, 9))
+% assert montee and descente
+% appels = []
+% def sommet(altitudes, gauche, droite):
+%     appels.append((gauche, droite))
+%     if gauche == droite:
+%         return gauche
+%     milieu = (gauche + droite) // 2
+%     if altitudes[milieu] < altitudes[milieu + 1]:
+%         return sommet(altitudes, milieu + 1, droite)
+%     return sommet(altitudes, gauche, milieu)
+% indice = sommet(altitudes, 0, len(altitudes) - 1)
+% assert indice == 5 and altitudes[indice] == 900
+% assert len(appels) == 5
+% assert appels == [(0, 9), (5, 9), (5, 7), (5, 6), (5, 5)]
+% assert max(altitudes) == 900
+% assert len(altitudes) - 1 == 9
+% assert len(appels) - 1 < len(altitudes) - 1
+% # Un profil a deux sommets brise l'hypothese : l'algorithme rend un maximum local.
+% deux_sommets = [10, 90, 20, 80, 15]
+% appels.clear()
+% trouve = sommet(deux_sommets, 0, len(deux_sommets) - 1)
+% assert deux_sommets[trouve] != max(deux_sommets)
+% assert deux_sommets[trouve] == 80 and max(deux_sommets) == 90
+% assert all(deux_sommets[trouve] >= deux_sommets[k]
+%            for k in (trouve - 1, trouve + 1) if 0 <= k < len(deux_sommets))
+% END-VERIFY
+\begin{exercice}{TNSI-ALGO-EX-008}{3}{25}
+Un relevé GPS donne les altitudes, de mètre en mètre, le long d'un sentier de
+randonnée qui monte jusqu'à un col unique puis redescend :
+\begin{python}
+altitudes = [120, 180, 260, 410, 620, 900, 780, 540, 300, 150]
+\end{python}
+On cherche l'indice du point culminant.
+\begin{enumerate}
+  \item Vérifier que ce relevé monte strictement jusqu'à un indice puis descend
+    strictement. Combien de comparaisons demanderait un parcours de la liste
+    entière pour trouver le maximum ?
+  \item On veut faire mieux en exploitant cette structure. Écrire la fonction
+    récursive \lstinline{sommet(altitudes, gauche, droite)} qui, en comparant
+    l'élément du milieu à son \textbf{successeur}, décide dans laquelle des deux
+    moitiés se trouve le point culminant, et ne poursuit que dans celle-là.
+  \item Justifier que la comparaison de la question précédente suffit : si
+    \lstinline{altitudes[m] < altitudes[m+1]}, pourquoi le sommet ne peut-il pas
+    se trouver avant l'indice $m+1$ ?
+  \item Appliquer la fonction au relevé et donner l'indice trouvé, l'altitude
+    correspondante, et le nombre d'appels effectués. Comparer au nombre de
+    comparaisons de la question~1.
+  \item En quoi cet emploi de diviser pour régner diffère-t-il de la recherche
+    du maximum d'une liste quelconque, où l'on divise également en deux moitiés ?
+  \item Appliquer la fonction au relevé \lstinline{[10, 90, 20, 80, 15]}, qui
+    comporte deux sommets. Le résultat est-il le maximum de la liste ? Que
+    renvoie-t-elle alors, et que faut-il en conclure sur l'hypothèse de départ ?
+\end{enumerate}
+\end{exercice}

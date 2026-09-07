@@ -1,0 +1,76 @@
+% META: {"id": "TNSI-ALGO-EX-006", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "exercice", "capacites": ["T-ALGO-01B", "T-ALGO-01D"], "capacites_codes": ["C2", "C4"], "parcours": 2, "competences": ["programmer", "analyser", "raisonner"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-006.tex", "corrige_tex": "chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-006.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-45B3812C820E", "PEDAGOGICAL_GAP_IDS": ["GAP-45B3812C820E", "GAP-44EDF1507A4D", "GAP-8915F3636CE7", "GAP-E410747A77E1"], "CAPACITY_ID": "C2", "CAPACITY_IDS": ["C2", "C4"], "EXERCISE_ROLE": "DIRECT_APPLICATION", "EXERCISE_ROLES": ["DIRECT_APPLICATION", "CONTEXT_VARIATION", "REASONING"], "DIFFICULTY": 2, "AUTHORING_REASON": "deux capacites du contrat n'avaient aucun exercice ; la hauteur et le parcours en largeur etaient definis dans le cours puis jamais calcules, alors que ce sont eux qui decident du temps d'acces a un fichier et de l'ordre d'affichage d'une arborescence", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droite = droite
+% def hauteur(arbre):
+%     if arbre is None:
+%         return -1
+%     return 1 + max(hauteur(arbre.gauche), hauteur(arbre.droite))
+% def taille(arbre):
+%     if arbre is None:
+%         return 0
+%     return 1 + taille(arbre.gauche) + taille(arbre.droite)
+% def parcours_largeur(arbre):
+%     if arbre is None:
+%         return []
+%     file, vus = [arbre], []
+%     while file:
+%         noeud = file.pop(0)
+%         vus.append(noeud.valeur)
+%         if noeud.gauche is not None:
+%             file.append(noeud.gauche)
+%         if noeud.droite is not None:
+%             file.append(noeud.droite)
+%     return vus
+% disque = Noeud("racine",
+%                Noeud("documents", Noeud("cours"), Noeud("projets")),
+%                Noeud("images", None, Noeud("2026")))
+% assert hauteur(disque) == 2
+% assert taille(disque) == 6
+% assert hauteur(None) == -1
+% assert hauteur(Noeud("seul")) == 0
+% assert parcours_largeur(disque) == ["racine", "documents", "images",
+%                                     "cours", "projets", "2026"]
+% assert parcours_largeur(None) == []
+% peigne = Noeud(1, Noeud(2, Noeud(3, Noeud(4))))
+% assert taille(peigne) == 4 and hauteur(peigne) == 3
+% assert hauteur(peigne) == taille(peigne) - 1
+% assert parcours_largeur(peigne) == [1, 2, 3, 4]
+% equilibre = Noeud(1, Noeud(2, Noeud(4), Noeud(5)), Noeud(3, Noeud(6), Noeud(7)))
+% assert taille(equilibre) == 7 and hauteur(equilibre) == 2
+% assert parcours_largeur(equilibre) == [1, 2, 3, 4, 5, 6, 7]
+% assert 2 ** (hauteur(equilibre) + 1) - 1 == taille(equilibre)
+% END-VERIFY
+\begin{exercice}{TNSI-ALGO-EX-006}{2}{25}
+Une arborescence de fichiers est représentée par la classe \lstinline{Noeud} du
+cours, un dossier étant un n\oe{}ud et un fichier une feuille :
+\begin{python}
+disque = Noeud("racine",
+               Noeud("documents", Noeud("cours"), Noeud("projets")),
+               Noeud("images", None, Noeud("2026")))
+\end{python}
+\begin{enumerate}
+  \item Écrire la fonction récursive \lstinline{hauteur(arbre)}, en convenant
+    qu'un arbre vide a pour hauteur $-1$. Donner la hauteur de
+    \lstinline{disque}, ainsi que celle d'un arbre réduit à un seul n\oe{}ud.
+  \item Que représente cette hauteur pour l'utilisateur du disque ?
+  \item Écrire \lstinline{parcours_largeur(arbre)}, qui renvoie la liste des
+    valeurs niveau par niveau, en s'aidant d'une file. Donner le parcours de
+    \lstinline{disque}.
+  \item On construit maintenant deux arbres de structures opposées :
+    \begin{python}
+peigne = Noeud(1, Noeud(2, Noeud(3, Noeud(4))))
+equilibre = Noeud(1, Noeud(2, Noeud(4), Noeud(5)), Noeud(3, Noeud(6), Noeud(7)))
+    \end{python}
+    Donner pour chacun sa taille et sa hauteur, puis son parcours en largeur.
+  \item Comparer les deux hauteurs obtenues. Pour un arbre de taille $n$, quelle
+    est la plus grande hauteur possible ? La plus petite ? Vérifier la relation
+    entre taille et hauteur sur \lstinline{equilibre}.
+  \item Un explorateur de fichiers affiche l'arborescence en largeur d'abord.
+    Quel intérêt cela présente-t-il par rapport à un parcours en profondeur,
+    pour un disque dont la hauteur est grande ?
+\end{enumerate}
+\end{exercice}

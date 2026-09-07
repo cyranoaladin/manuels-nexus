@@ -1,0 +1,102 @@
+% META: {"id": "TNSI-ALGO-CO-006", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "corrige", "exercice_ref": "TNSI-ALGO-EX-006", "capacites": ["T-ALGO-01B", "T-ALGO-01D"], "capacites_codes": ["C2", "C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur, self.gauche, self.droite = valeur, gauche, droite
+% def hauteur(arbre):
+%     if arbre is None:
+%         return -1
+%     return 1 + max(hauteur(arbre.gauche), hauteur(arbre.droite))
+% def taille(arbre):
+%     if arbre is None:
+%         return 0
+%     return 1 + taille(arbre.gauche) + taille(arbre.droite)
+% def parcours_largeur(arbre):
+%     if arbre is None:
+%         return []
+%     file, vus = [arbre], []
+%     while file:
+%         noeud = file.pop(0)
+%         vus.append(noeud.valeur)
+%         if noeud.gauche is not None:
+%             file.append(noeud.gauche)
+%         if noeud.droite is not None:
+%             file.append(noeud.droite)
+%     return vus
+% disque = Noeud("racine", Noeud("documents", Noeud("cours"), Noeud("projets")),
+%                Noeud("images", None, Noeud("2026")))
+% assert hauteur(disque) == 2 and taille(disque) == 6
+% assert hauteur(Noeud("seul")) == 0 and hauteur(None) == -1
+% assert parcours_largeur(disque) == ["racine", "documents", "images", "cours", "projets", "2026"]
+% peigne = Noeud(1, Noeud(2, Noeud(3, Noeud(4))))
+% equilibre = Noeud(1, Noeud(2, Noeud(4), Noeud(5)), Noeud(3, Noeud(6), Noeud(7)))
+% assert (taille(peigne), hauteur(peigne)) == (4, 3)
+% assert (taille(equilibre), hauteur(equilibre)) == (7, 2)
+% assert parcours_largeur(peigne) == [1, 2, 3, 4]
+% assert parcours_largeur(equilibre) == [1, 2, 3, 4, 5, 6, 7]
+% assert hauteur(peigne) == taille(peigne) - 1
+% assert 2 ** 3 - 1 == 7 == taille(equilibre)
+% assert 2 ** (hauteur(equilibre) + 1) - 1 == taille(equilibre)
+% END-VERIFY
+\begin{corrige}{TNSI-ALGO-EX-006}
+\textbf{1.} La hauteur d'un n\oe{}ud est un de plus que la plus grande des
+hauteurs de ses deux sous-arbres :
+\begin{python}
+def hauteur(arbre):
+    if arbre is None:
+        return -1
+    return 1 + max(hauteur(arbre.gauche), hauteur(arbre.droite))
+\end{python}
+\lstinline{hauteur(disque)} vaut $2$, et un arbre réduit à un n\oe{}ud a pour
+hauteur $0$ — c'est bien $1+\max(-1,-1)$. La convention $-1$ pour l'arbre vide
+n'est pas gratuite : c'est elle qui fait tomber juste le cas du n\oe{}ud isolé.
+
+\textbf{2.} La hauteur est le nombre de dossiers à ouvrir pour atteindre le
+fichier le plus profond, en partant de la racine. C'est la longueur du plus long
+chemin d'accès, donc le pire cas du temps de navigation.
+
+\textbf{3.} Le parcours en largeur utilise une file, qui restitue les n\oe{}uds
+dans l'ordre où ils ont été rencontrés :
+\begin{python}
+def parcours_largeur(arbre):
+    if arbre is None:
+        return []
+    file, vus = [arbre], []
+    while file:
+        noeud = file.pop(0)
+        vus.append(noeud.valeur)
+        if noeud.gauche is not None:
+            file.append(noeud.gauche)
+        if noeud.droite is not None:
+            file.append(noeud.droite)
+    return vus
+\end{python}
+On obtient
+\lstinline{["racine", "documents", "images", "cours", "projets", "2026"]} : la
+racine, puis les deux dossiers de premier niveau, puis leurs contenus.
+
+\textbf{4.} Le peigne a une taille de $4$ et une hauteur de $3$ ; son parcours
+en largeur est \lstinline{[1, 2, 3, 4]}. L'arbre équilibré a une taille de $7$ et
+une hauteur de $2$ ; son parcours est \lstinline{[1, 2, 3, 4, 5, 6, 7]}.
+
+\textbf{5.} Le peigne atteint la hauteur maximale : chaque n\oe{}ud n'ayant
+qu'un enfant, la hauteur vaut $n-1$. L'arbre équilibré atteint la hauteur
+minimale : à chaque niveau le nombre de n\oe{}uds double, si bien qu'un arbre de
+hauteur $h$ complètement rempli contient $2^{h+1}-1$ n\oe{}uds. On vérifie
+$2^{2+1}-1=7$, la taille de \lstinline{equilibre}. Réciproquement, la hauteur
+minimale pour $n$ n\oe{}uds est de l'ordre de $\log_2 n$.
+
+C'est tout l'enjeu de l'équilibrage : entre $n-1$ et $\log_2 n$, l'écart est
+considérable dès que $n$ grandit — pour mille n\oe{}uds, $999$ contre $9$.
+
+\textbf{6.} En largeur d'abord, l'explorateur affiche d'abord tout le premier
+niveau, puis tout le deuxième, et ainsi de suite. L'utilisateur voit donc
+immédiatement les dossiers proches de la racine, qui sont ceux qu'il cherche le
+plus souvent.
+
+Un parcours en profondeur, lui, plongerait jusqu'au fond de la première branche
+avant de remonter : sur un disque de grande hauteur, il afficherait des dizaines
+de dossiers imbriqués d'une seule branche avant de montrer le deuxième dossier de
+la racine. L'ordre du parcours n'est pas un détail d'implémentation, c'est ce que
+l'utilisateur voit.
+\end{corrige}

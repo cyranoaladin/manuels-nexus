@@ -1,0 +1,122 @@
+% META: {"id": "TNSI-ALGO-CO-007", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "corrige", "exercice_ref": "TNSI-ALGO-EX-007", "capacites": ["T-ALGO-02B", "T-ALGO-02C"], "capacites_codes": ["C8", "C9"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% dependances = {
+%     "interface": ["moteur", "journal"], "moteur": ["donnees", "journal"],
+%     "donnees": ["journal"], "journal": [], "tests": ["interface", "moteur"],
+% }
+% def profondeur(graphe, depart):
+%     vus, pile = [], [depart]
+%     while pile:
+%         sommet = pile.pop()
+%         if sommet in vus:
+%             continue
+%         vus.append(sommet)
+%         for voisin in reversed(graphe[sommet]):
+%             if voisin not in vus:
+%                 pile.append(voisin)
+%     return vus
+% def contient_cycle(graphe):
+%     etat = {}
+%     def visiter(sommet):
+%         etat[sommet] = "en cours"
+%         for voisin in graphe[sommet]:
+%             if etat.get(voisin) == "en cours":
+%                 return True
+%             if etat.get(voisin) is None and visiter(voisin):
+%                 return True
+%         etat[sommet] = "fini"
+%         return False
+%     return any(visiter(s) for s in graphe if etat.get(s) is None)
+% assert profondeur(dependances, "tests") == ["tests", "interface", "moteur", "donnees", "journal"]
+% assert profondeur(dependances, "moteur") == ["moteur", "donnees", "journal"]
+% assert profondeur(dependances, "journal") == ["journal"]
+% assert contient_cycle(dependances) is False
+% fautif = {k: list(v) for k, v in dependances.items()}
+% fautif["journal"] = ["interface"]
+% assert contient_cycle(fautif) is True
+% assert profondeur(fautif, "tests") == profondeur(dependances, "tests")
+% assert dependances["journal"] == [] and fautif["journal"] == ["interface"]
+% assert "tests" not in profondeur(dependances, "moteur")
+% assert "moteur" in profondeur(dependances, "tests")
+% END-VERIFY
+\begin{corrige}{TNSI-ALGO-EX-007}
+\textbf{1.} On empile le départ, puis on dépile en marquant les sommets vus :
+\begin{python}
+def profondeur(graphe, depart):
+    vus, pile = [], [depart]
+    while pile:
+        sommet = pile.pop()
+        if sommet in vus:
+            continue
+        vus.append(sommet)
+        for voisin in reversed(graphe[sommet]):
+            if voisin not in vus:
+                pile.append(voisin)
+    return vus
+\end{python}
+Le test \lstinline{if sommet in vus: continue} est indispensable : un même sommet
+peut être empilé plusieurs fois avant d'être dépilé.
+
+\textbf{2.} Depuis \lstinline{"tests"} :
+\lstinline{["tests", "interface", "moteur", "donnees", "journal"]}, soit les cinq
+modules. Depuis \lstinline{"moteur"} :
+\lstinline{["moteur", "donnees", "journal"]}. Depuis \lstinline{"journal"} :
+\lstinline{["journal"]} seul, puisqu'il n'importe rien.
+
+\textbf{3.} La liste obtenue depuis \lstinline{"moteur"} est l'ensemble des
+modules dont \lstinline{moteur} dépend, directement ou indirectement : ce qu'il
+faut compiler ou charger pour qu'il fonctionne.
+
+\lstinline{"tests"} n'y figure pas parce que le graphe est \textbf{orienté} : la
+flèche va de \lstinline{tests} vers \lstinline{moteur}, pas l'inverse. Les tests
+dépendent du moteur, le moteur ignore les tests — et c'est heureux, sans quoi on
+ne pourrait pas livrer le moteur sans sa suite de tests. Un parcours suit les
+flèches ; il ne les remonte pas.
+
+\textbf{4.} La détection distingue trois états. Rencontrer un sommet
+\lstinline{"fini"} est normal — plusieurs modules peuvent dépendre du même. C'est
+rencontrer un sommet \lstinline{"en cours"} qui signale un cycle : on est revenu
+sur un sommet dont la visite n'est pas achevée, donc sur ses propres ancêtres.
+\begin{python}
+def contient_cycle(graphe):
+    etat = {}
+    def visiter(sommet):
+        etat[sommet] = "en cours"
+        for voisin in graphe[sommet]:
+            if etat.get(voisin) == "en cours":
+                return True
+            if etat.get(voisin) is None and visiter(voisin):
+                return True
+        etat[sommet] = "fini"
+        return False
+    return any(visiter(s) for s in graphe if etat.get(s) is None)
+\end{python}
+
+\textbf{5.} Sur le graphe du projet, la fonction renvoie \lstinline{False} : pas
+de cycle. Après l'ajout de l'import de \lstinline{"interface"} dans
+\lstinline{"journal"}, elle renvoie \lstinline{True} : le cycle
+$\text{interface}\to\text{journal}\to\text{interface}$ est apparu.
+
+\textbf{6.} Le parcours depuis \lstinline{"tests"} donne exactement la même
+liste, dans le même ordre, avant et après l'ajout.
+
+La comparaison est instructive : un parcours répond à la question « quels sommets
+puis-je atteindre ? », et cette réponse n'a pas changé — les cinq modules étaient
+déjà tous atteignables. Il ne répond pas à « ce graphe est-il cohérent ? ».
+Constater qu'on visite tout ne dit rien sur la présence d'un cycle, et c'est
+pourquoi la détection demande un algorithme propre, avec sa marque
+\lstinline{"en cours"}.
+
+\textbf{7.} Un cycle rend l'ordre de construction \emph{impossible à définir}.
+Pour compiler \lstinline{interface}, il faut \lstinline{journal} déjà compilé ;
+pour compiler \lstinline{journal}, il faut \lstinline{interface}. Aucun des deux
+ne peut être premier.
+
+Concrètement, un compilateur refuse et signale une dépendance circulaire. Un
+langage à chargement dynamique comme Python, lui, ne refuse pas : il charge
+partiellement le premier module, commence le second, revient au premier — et
+celui-ci trouve un module à moitié initialisé, dont certains noms n'existent pas
+encore. L'erreur survient alors loin de sa cause, sous la forme d'un attribut
+introuvable dans un module pourtant correct. C'est précisément le genre de défaut
+qu'on préfère détecter sur le graphe, avant l'exécution.
+\end{corrige}

@@ -1,0 +1,115 @@
+% META: {"id": "TNSI-ALGO-CO-009", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "corrige", "exercice_ref": "TNSI-ALGO-EX-009", "capacites": ["T-ALGO-04"], "capacites_codes": ["C12"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from math import comb
+% grille = [[1, 3, 1], [1, 5, 1], [4, 2, 1]]
+% def cout_minimal(grille):
+%     lignes, colonnes = len(grille), len(grille[0])
+%     couts = [[0] * colonnes for _ in range(lignes)]
+%     for i in range(lignes):
+%         for j in range(colonnes):
+%             if i == 0 and j == 0:
+%                 couts[i][j] = grille[i][j]
+%             elif i == 0:
+%                 couts[i][j] = couts[i][j - 1] + grille[i][j]
+%             elif j == 0:
+%                 couts[i][j] = couts[i - 1][j] + grille[i][j]
+%             else:
+%                 couts[i][j] = min(couts[i - 1][j], couts[i][j - 1]) + grille[i][j]
+%     return couts
+% couts = cout_minimal(grille)
+% assert couts == [[1, 4, 5], [2, 7, 6], [6, 8, 7]]
+% assert couts[0] == [1, 4, 5] and [ligne[0] for ligne in couts] == [1, 2, 6]
+% assert couts[2][2] == 7 == 1 + 3 + 1 + 1 + 1
+% assert comb(4, 2) == 6 and comb(20, 10) == 184756
+% assert len(grille) * len(grille[0]) == 9
+% def glouton(grille):
+%     i, j, total = 0, 0, grille[0][0]
+%     while i < len(grille) - 1 or j < len(grille[0]) - 1:
+%         bas = grille[i + 1][j] if i + 1 < len(grille) else None
+%         droite = grille[i][j + 1] if j + 1 < len(grille[0]) else None
+%         if droite is None or (bas is not None and bas < droite):
+%             i, total = i + 1, total + bas
+%         else:
+%             j, total = j + 1, total + droite
+%     return total
+% assert glouton(grille) == 9 == 1 + 1 + 4 + 2 + 1
+% assert glouton(grille) - couts[2][2] == 2
+% assert grille[1][0] == 1 < grille[0][1] == 3
+% END-VERIFY
+\begin{corrige}{TNSI-ALGO-EX-009}
+\textbf{1.} Tout trajet comporte exactement $2$ pas vers le bas et $2$ pas vers
+la droite ; il est déterminé par le choix des positions des pas vers le bas parmi
+les $4$, soit $\binom{4}{2}=6$ trajets. Dans une grille $11\times 11$, il faut
+$10$ pas de chaque sorte parmi $20$, soit $\binom{20}{10}=184\,756$ trajets.
+
+Ce nombre croît exponentiellement avec la taille de la grille : énumérer tous les
+trajets est impraticable dès qu'on dépasse une dizaine de cases de côté.
+
+\textbf{2.} Pour atteindre la case $(i,j)$, le drone vient soit du dessus, soit
+de la gauche. Le coût minimal pour y parvenir est donc
+\[
+  C(i,j)=\min\big(C(i-1,j),\,C(i,j-1)\big)+\text{grille}[i][j].
+\]
+Les deux premiers cas sont particuliers : sur la première ligne, il n'existe
+aucune case au-dessus, donc $C(0,j)=C(0,j-1)+\text{grille}[0][j]$ ; sur la
+première colonne, aucune case à gauche, donc
+$C(i,0)=C(i-1,0)+\text{grille}[i][0]$. Le coin de départ vaut sa propre case. Ce
+n'est pas une commodité d'écriture : le minimum entre deux valeurs dont une
+n'existe pas n'aurait pas de sens.
+
+\textbf{3.} On remplit le tableau ligne par ligne, de gauche à droite — ordre qui
+garantit que $C(i-1,j)$ et $C(i,j-1)$ sont déjà calculés quand on en a besoin :
+\begin{python}
+def cout_minimal(grille):
+    lignes, colonnes = len(grille), len(grille[0])
+    couts = [[0] * colonnes for _ in range(lignes)]
+    for i in range(lignes):
+        for j in range(colonnes):
+            if i == 0 and j == 0:
+                couts[i][j] = grille[i][j]
+            elif i == 0:
+                couts[i][j] = couts[i][j - 1] + grille[i][j]
+            elif j == 0:
+                couts[i][j] = couts[i - 1][j] + grille[i][j]
+            else:
+                couts[i][j] = min(couts[i - 1][j], couts[i][j - 1]) + grille[i][j]
+    return couts
+\end{python}
+
+\textbf{4.} Le tableau obtenu est
+\[
+  \begin{pmatrix}1&4&5\\2&7&6\\6&8&7\end{pmatrix}
+\]
+Le coût minimal est $7$. En remontant depuis la case d'arrivée — à chaque étape,
+vers celle des deux cases précédentes qui porte le plus petit coût — on retrouve
+le chemin $1\to 3\to 1\to 1\to 1$, c'est-à-dire droite, droite, bas, bas, dont la
+somme vaut bien $1+3+1+1+1=7$.
+
+\textbf{5.} La méthode résout $3\times 3=9$ sous-problèmes, un par case, et
+chacun \textbf{une seule fois}. C'est là toute la différence avec l'énumération
+des $6$ trajets — et surtout des $184\,756$ de la grille $11\times 11$, qui n'en
+demanderait que $121$ par cette méthode.
+
+Le gain vient de ce que les trajets \emph{partagent} leurs débuts : le coût pour
+atteindre une case donnée ne dépend pas de ce qui viendra ensuite. On calcule
+donc une fois ce que l'énumération recalculerait pour chaque trajet qui passe par
+là. C'est exactement le principe de la programmation dynamique : identifier les
+sous-problèmes communs et ne les résoudre qu'une fois.
+
+\textbf{6.} Le glouton part de la case $1$ et compare ses deux voisines : la
+case du dessous vaut $1$, celle de droite $3$. Il descend. Il compare ensuite $4$
+et $5$, descend encore, puis n'a plus le choix et longe la dernière ligne. Son
+trajet est bas, bas, droite, droite, de coût
+\[
+  1+1+4+2+1=9,
+\]
+contre $7$ pour l'optimum : deux unités de trop, soit près de trente pour cent.
+
+L'erreur se produit dès le premier pas. Descendre paraît meilleur, la case du
+dessous valant $1$ contre $3$ à droite. Mais ce gain de deux unités enferme le
+drone dans la première colonne, dont la suite coûte $4$. Le glouton compare des
+\emph{cases} ; la question porte sur des \emph{trajets entiers}. Un choix
+localement optimal peut fermer l'accès à la meilleure suite — et c'est
+précisément ce qu'évite la programmation dynamique, qui ne décide de rien avant d'avoir évalué
+toutes les fins possibles.
+\end{corrige}

@@ -1,0 +1,74 @@
+% META: {"id": "TNSI-ALGO-EX-009", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "exercice", "capacites": ["T-ALGO-04"], "capacites_codes": ["C12"], "parcours": 3, "competences": ["modeliser", "programmer", "raisonner"], "duree_min": 28, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-009.tex", "corrige_tex": "chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-009.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-46958D02EC2B", "CAPACITY_ID": "C12", "EXERCISE_ROLE": "CONTEXT_VARIATION", "DIFFICULTY": 3, "AUTHORING_REASON": "le seul exercice rattache memoisait une suite recurrente a une variable, ou le tableau des resultats intermediaires est une simple liste ; ici les sous-problemes forment une grille a deux entrees, et l'eleve doit decider lui-meme de quels resultats dependent quels autres", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% from math import comb
+% grille = [[1, 3, 1], [1, 5, 1], [4, 2, 1]]
+% def cout_minimal(grille):
+%     lignes, colonnes = len(grille), len(grille[0])
+%     couts = [[0] * colonnes for _ in range(lignes)]
+%     for i in range(lignes):
+%         for j in range(colonnes):
+%             if i == 0 and j == 0:
+%                 couts[i][j] = grille[i][j]
+%             elif i == 0:
+%                 couts[i][j] = couts[i][j - 1] + grille[i][j]
+%             elif j == 0:
+%                 couts[i][j] = couts[i - 1][j] + grille[i][j]
+%             else:
+%                 couts[i][j] = min(couts[i - 1][j], couts[i][j - 1]) + grille[i][j]
+%     return couts
+% couts = cout_minimal(grille)
+% assert couts == [[1, 4, 5], [2, 7, 6], [6, 8, 7]]
+% assert couts[-1][-1] == 7
+% assert 1 + 3 + 1 + 1 + 1 == 7
+% assert comb(4, 2) == 6
+% def chemins_naifs(lignes, colonnes):
+%     return comb(lignes + colonnes - 2, lignes - 1)
+% assert chemins_naifs(3, 3) == 6
+% assert chemins_naifs(11, 11) == 184756
+% assert len(grille) * len(grille[0]) == 9
+% # Le chemin glouton, qui choisit a chaque pas la case la moins chere, echoue.
+% def glouton(grille):
+%     i, j, total = 0, 0, grille[0][0]
+%     while i < len(grille) - 1 or j < len(grille[0]) - 1:
+%         bas = grille[i + 1][j] if i + 1 < len(grille) else None
+%         droite = grille[i][j + 1] if j + 1 < len(grille[0]) else None
+%         if droite is None or (bas is not None and bas < droite):
+%             i, total = i + 1, total + bas
+%         else:
+%             j, total = j + 1, total + droite
+%     return total
+% assert glouton(grille) == 9
+% assert glouton(grille) > couts[-1][-1]
+% assert glouton(grille) - couts[-1][-1] == 2
+% END-VERIFY
+\begin{exercice}{TNSI-ALGO-EX-009}{3}{28}
+Un drone livreur traverse un quartier découpé en cases. Traverser une case coûte
+un certain temps, donné par la grille suivante. Le drone part du coin supérieur
+gauche, doit atteindre le coin inférieur droit, et ne peut se déplacer que
+\textbf{vers la droite} ou \textbf{vers le bas}.
+\begin{python}
+grille = [[1, 3, 1],
+          [1, 5, 1],
+          [4, 2, 1]]
+\end{python}
+Le coût d'un trajet est la somme des cases traversées, départ et arrivée compris.
+\begin{enumerate}
+  \item Combien de trajets différents mènent du départ à l'arrivée dans cette
+    grille $3\times 3$ ? Et dans une grille $11\times 11$ ? Que peut-on en
+    conclure sur une méthode qui les énumérerait tous ?
+  \item Soit $C(i,j)$ le coût minimal pour atteindre la case $(i,j)$. Exprimer
+    $C(i,j)$ en fonction de $C(i-1,j)$ et $C(i,j-1)$. Traiter séparément la
+    première ligne et la première colonne, et dire pourquoi.
+  \item Écrire \lstinline{cout_minimal(grille)} qui construit et renvoie le
+    tableau complet des $C(i,j)$.
+  \item Donner ce tableau pour la grille de l'énoncé, puis le coût minimal du
+    trajet complet. Retrouver le chemin correspondant.
+  \item Combien de sous-problèmes cette méthode résout-elle, et combien de fois
+    chacun ? Comparer avec le nombre de trajets de la question~1 : d'où vient le
+    gain ?
+  \item Une stratégie gloutonne choisirait à chaque pas la case voisine la moins
+    coûteuse. Calculer le coût du trajet ainsi obtenu et le comparer à
+    l'optimum. Expliquer, sur cette grille, à quel moment la stratégie gloutonne
+    se trompe.
+\end{enumerate}
+\end{exercice}

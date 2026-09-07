@@ -1,0 +1,85 @@
+% META: {"id": "TNSI-ALGO-CO-008", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "corrige", "exercice_ref": "TNSI-ALGO-EX-008", "capacites": ["T-ALGO-03"], "capacites_codes": ["C11"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% altitudes = [120, 180, 260, 410, 620, 900, 780, 540, 300, 150]
+% assert all(altitudes[i] < altitudes[i + 1] for i in range(5))
+% assert all(altitudes[i] > altitudes[i + 1] for i in range(5, 9))
+% appels = []
+% def sommet(altitudes, gauche, droite):
+%     appels.append((gauche, droite))
+%     if gauche == droite:
+%         return gauche
+%     milieu = (gauche + droite) // 2
+%     if altitudes[milieu] < altitudes[milieu + 1]:
+%         return sommet(altitudes, milieu + 1, droite)
+%     return sommet(altitudes, gauche, milieu)
+% assert sommet(altitudes, 0, 9) == 5
+% assert altitudes[5] == 900 == max(altitudes)
+% assert appels == [(0, 9), (5, 9), (5, 7), (5, 6), (5, 5)]
+% assert len(appels) == 5 and 9 > 5
+% assert altitudes[4] < altitudes[5] and altitudes[5] > altitudes[6]
+% appels.clear()
+% deux = [10, 90, 20, 80, 15]
+% trouve = sommet(deux, 0, 4)
+% assert deux[trouve] == 80 and max(deux) == 90
+% assert deux[trouve - 1] < deux[trouve] and deux[trouve + 1] < deux[trouve]
+% assert 2 ** 4 > len(altitudes)
+% END-VERIFY
+\begin{corrige}{TNSI-ALGO-EX-008}
+\textbf{1.} Les cinq premiers écarts sont positifs
+($120<180<260<410<620<900$) et les quatre suivants négatifs
+($900>780>540>300>150$) : le relevé est bien strictement croissant puis
+strictement décroissant. Un parcours complet demanderait $9$ comparaisons, une
+par élément après le premier.
+
+\textbf{2.} La fonction ne conserve qu'une moitié à chaque appel :
+\begin{python}
+def sommet(altitudes, gauche, droite):
+    if gauche == droite:
+        return gauche
+    milieu = (gauche + droite) // 2
+    if altitudes[milieu] < altitudes[milieu + 1]:
+        return sommet(altitudes, milieu + 1, droite)
+    return sommet(altitudes, gauche, milieu)
+\end{python}
+
+\textbf{3.} Si \lstinline{altitudes[m] < altitudes[m+1]}, on est encore dans la
+phase de montée à l'indice $m$. Or le relevé monte strictement \emph{jusqu'au}
+sommet : tant qu'on monte, tout ce qui précède est plus bas que ce qui suit.
+Aucun indice inférieur ou égal à $m$ ne peut donc porter le maximum, et on peut
+écarter toute la première moitié sans l'examiner.
+
+C'est cette propriété — décider avec une seule comparaison quelle moitié jeter —
+qui rend la méthode applicable ici.
+
+\textbf{4.} L'appel \lstinline{sommet(altitudes, 0, 9)} renvoie l'indice $5$,
+d'altitude $900$~m. Il a fallu $5$ appels, correspondant aux intervalles
+$(0\,;\,9)$, $(5\,;\,9)$, $(5\,;\,7)$, $(5\,;\,6)$ et $(5\,;\,5)$ : l'intervalle
+est divisé par deux à chaque étape. Contre $9$ comparaisons pour le parcours
+complet, l'écart est modeste sur dix points, mais il croît comme $n$ contre
+$\log_2 n$ : sur un relevé d'un million de points, ce serait un million contre
+une vingtaine.
+
+\textbf{5.} La différence est essentielle. Pour le maximum d'une liste
+\emph{quelconque}, diviser en deux moitiés oblige à explorer les \textbf{deux} :
+le maximum peut être n'importe où, et on ne peut rien écarter. Le nombre total de
+comparaisons reste de l'ordre de $n$ ; la récursivité ne fait que réorganiser le
+travail.
+
+Ici, l'hypothèse sur la forme du relevé permet d'\emph{éliminer} une moitié.
+Diviser pour régner ne fait gagner que lorsqu'une propriété des données permet de
+ne pas descendre dans les deux branches — c'est ce qui sépare la dichotomie d'un
+simple découpage récursif.
+
+\textbf{6.} Sur \lstinline{[10, 90, 20, 80, 15]}, la fonction renvoie l'indice
+$3$, d'altitude $80$, alors que le maximum de la liste vaut $90$.
+
+Elle n'est pas fautive pour autant : la valeur trouvée est bien supérieure à ses
+deux voisines, c'est un \emph{maximum local}. C'est tout ce que la comparaison de
+la question~3 peut garantir dès lors que le relevé n'a plus une seule montée
+suivie d'une seule descente.
+
+La conclusion est que l'hypothèse de départ n'est pas un ornement de l'énoncé :
+elle fait partie de la spécification de la fonction. Employée hors de son domaine
+de validité, celle-ci rend un résultat plausible et faux — sans lever la moindre
+erreur.
+\end{corrige}

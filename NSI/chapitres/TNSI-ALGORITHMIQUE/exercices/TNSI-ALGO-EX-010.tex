@@ -1,0 +1,82 @@
+% META: {"id": "TNSI-ALGO-EX-010", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "exercice", "capacites": ["T-ALGO-05"], "capacites_codes": ["C13"], "parcours": 2, "competences": ["analyser", "programmer", "raisonner"], "duree_min": 28, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-010.tex", "corrige_tex": "chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-010.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-801E62AB817E", "PEDAGOGICAL_GAP_IDS": ["GAP-801E62AB817E", "GAP-E6F29A218D6E"], "CAPACITY_ID": "C13", "EXERCISE_ROLE": "REASONING", "EXERCISE_ROLES": ["REASONING", "DIRECT_APPLICATION", "CONTEXT_VARIATION"], "DIFFICULTY": 2, "AUTHORING_REASON": "aucun exercice ne portait cette capacite, qui demande d'EXPLIQUER un principe ; le cours donnait le code et l'eleve ne le confrontait a rien, alors que c'est en comptant les comparaisons sur une sequence reelle que le gain se voit et que la regle du mauvais caractere se justifie", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% def table_decalage(motif):
+%     table = {}
+%     for i, c in enumerate(motif):
+%         table[c] = i
+%     return table
+% def naive(texte, motif):
+%     positions, comparaisons = [], 0
+%     for i in range(len(texte) - len(motif) + 1):
+%         correspond = True
+%         for j in range(len(motif)):
+%             comparaisons = comparaisons + 1
+%             if texte[i + j] != motif[j]:
+%                 correspond = False
+%                 break
+%         if correspond:
+%             positions.append(i)
+%     return positions, comparaisons
+% def boyer_moore(texte, motif):
+%     table = table_decalage(motif)
+%     n, m = len(texte), len(motif)
+%     positions, i, comparaisons = [], 0, 0
+%     while i <= n - m:
+%         j = m - 1
+%         while j >= 0:
+%             comparaisons = comparaisons + 1
+%             if texte[i + j] != motif[j]:
+%                 break
+%             j = j - 1
+%         if j < 0:
+%             positions.append(i)
+%             i = i + 1
+%         else:
+%             i = i + max(1, j - table.get(texte[i + j], -1))
+%     return positions, comparaisons
+% texte = "GATTACAGATTACCAGATTACA"
+% assert len(texte) == 22
+% assert table_decalage("GATTACA") == {"G": 0, "A": 6, "T": 3, "C": 5}
+% assert naive(texte, "GATTACA") == ([0, 15], 34)
+% assert boyer_moore(texte, "GATTACA") == ([0, 15], 20)
+% assert naive(texte, "CCA") == ([12], 24)
+% assert boyer_moore(texte, "CCA") == ([12], 16)
+% assert boyer_moore(texte, "GATTACA")[0] == naive(texte, "GATTACA")[0]
+% assert boyer_moore(texte, "CCA")[1] < naive(texte, "CCA")[1]
+% assert 20 < 34 and 16 < 24
+% assert "T" in table_decalage("GATTACA") and table_decalage("GATTACA")["T"] == 3
+% END-VERIFY
+\begin{exercice}{TNSI-ALGO-EX-010}{2}{28}
+On recherche des motifs dans une séquence d'ADN, écrite sur l'alphabet
+\lstinline{A}, \lstinline{C}, \lstinline{G}, \lstinline{T} :
+\begin{python}
+texte = "GATTACAGATTACCAGATTACA"
+\end{python}
+\begin{enumerate}
+  \item Écrire \lstinline{naive(texte, motif)}, qui renvoie les positions du
+    motif et le \textbf{nombre de comparaisons de caractères} effectuées.
+    Appliquer au motif \lstinline{"GATTACA"} : combien de positions, combien de
+    comparaisons ?
+  \item Donner la table de décalage de \lstinline{"GATTACA"} produite par
+    \lstinline{table_decalage} du cours. Pourquoi la lettre \lstinline{A} y
+    est-elle associée à $6$ et non à $1$, alors qu'elle apparaît trois fois dans
+    le motif ?
+  \item L'algorithme compare le motif au texte \textbf{de droite à gauche}.
+    Expliquer en quoi cette direction, à elle seule, ne fait rien gagner :
+    qu'est-ce qui produit le gain ?
+  \item Supposons qu'à une position donnée la comparaison échoue sur un
+    caractère du texte qui n'apparaît \emph{nulle part} dans le motif.
+    Démontrer qu'aucune position de départ située avant ce caractère ne peut
+    convenir, et en déduire de combien on peut décaler le motif d'un coup.
+  \item Écrire \lstinline{boyer_moore(texte, motif)} sur le modèle du cours, en
+    comptant lui aussi les comparaisons. Appliquer aux motifs
+    \lstinline{"GATTACA"} et \lstinline{"CCA"}, et dresser un tableau comparatif
+    des deux algorithmes.
+  \item Les positions trouvées sont-elles les mêmes dans les deux cas ? Ce point
+    était-il acquis d'avance, et pourquoi faut-il le vérifier plutôt que le
+    supposer ?
+  \item Le gain se maintiendrait-il sur un texte binaire, écrit seulement avec
+    \lstinline{0} et \lstinline{1} ? Justifier à partir de ce qui gouverne la
+    taille des décalages.
+\end{enumerate}
+\end{exercice}

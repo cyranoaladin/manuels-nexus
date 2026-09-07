@@ -1,0 +1,156 @@
+% META: {"id": "TNSI-ALGO-CO-010", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "corrige", "exercice_ref": "TNSI-ALGO-EX-010", "capacites": ["T-ALGO-05"], "capacites_codes": ["C13"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def table_decalage(motif):
+%     table = {}
+%     for i, c in enumerate(motif):
+%         table[c] = i
+%     return table
+% def naive(texte, motif):
+%     positions, comparaisons = [], 0
+%     for i in range(len(texte) - len(motif) + 1):
+%         correspond = True
+%         for j in range(len(motif)):
+%             comparaisons = comparaisons + 1
+%             if texte[i + j] != motif[j]:
+%                 correspond = False
+%                 break
+%         if correspond:
+%             positions.append(i)
+%     return positions, comparaisons
+% def boyer_moore(texte, motif):
+%     table = table_decalage(motif)
+%     n, m = len(texte), len(motif)
+%     positions, i, comparaisons = [], 0, 0
+%     while i <= n - m:
+%         j = m - 1
+%         while j >= 0:
+%             comparaisons = comparaisons + 1
+%             if texte[i + j] != motif[j]:
+%                 break
+%             j = j - 1
+%         if j < 0:
+%             positions.append(i)
+%             i = i + 1
+%         else:
+%             i = i + max(1, j - table.get(texte[i + j], -1))
+%     return positions, comparaisons
+% texte = "GATTACAGATTACCAGATTACA"
+% assert table_decalage("GATTACA") == {"G": 0, "A": 6, "T": 3, "C": 5}
+% assert "GATTACA"[6] == "A" and "GATTACA"[1] == "A" and "GATTACA"[4] == "A"
+% assert naive(texte, "GATTACA") == ([0, 15], 34)
+% assert boyer_moore(texte, "GATTACA") == ([0, 15], 20)
+% assert naive(texte, "CCA") == ([12], 24)
+% assert boyer_moore(texte, "CCA") == ([12], 16)
+% assert texte[0:7] == "GATTACA" and texte[15:22] == "GATTACA"
+% assert texte[12:15] == "CCA"
+% assert 34 - 20 == 14 and 24 - 16 == 8
+% assert len(set("ACGT")) == 4 and len(set("01")) == 2
+% END-VERIFY
+\begin{corrige}{TNSI-ALGO-EX-010}
+\textbf{1.} La recherche naïve essaie chaque position de départ et compare
+caractère par caractère :
+\begin{python}
+def naive(texte, motif):
+    positions, comparaisons = [], 0
+    for i in range(len(texte) - len(motif) + 1):
+        correspond = True
+        for j in range(len(motif)):
+            comparaisons = comparaisons + 1
+            if texte[i + j] != motif[j]:
+                correspond = False
+                break
+        if correspond:
+            positions.append(i)
+    return positions, comparaisons
+\end{python}
+Le motif \lstinline{"GATTACA"} est trouvé aux positions $0$ et $15$, au prix de
+$34$ comparaisons.
+
+\textbf{2.} La table vaut
+\lstinline!{"G": 0, "A": 6, "T": 3, "C": 5}!. La boucle du prétraitement écrase
+l'entrée précédente à chaque occurrence : pour \lstinline{A}, elle enregistre
+successivement $1$, puis $4$, puis $6$. C'est la \textbf{dernière} occurrence qui
+subsiste, et c'est voulu : décaler jusqu'à aligner sur une occurrence antérieure
+ferait sauter par-dessus la dernière, donc manquer des correspondances.
+
+\textbf{3.} Comparer de droite à gauche ne change ni le nombre de positions à
+essayer, ni le résultat. Sur une position qui échoue au dernier caractère
+comparé, les deux directions coûtent le même nombre de comparaisons.
+
+Le gain vient du \textbf{décalage} : quand la comparaison échoue à l'indice $j$
+sur un caractère du texte, on sait quel est ce caractère, et la table dit où il
+apparaît pour la dernière fois dans le motif. Commencer par la droite est ce qui
+rend cette information disponible tôt et sur un caractère éloigné du début, donc
+autorise de grands sauts. La direction sert le décalage ; sans lui, elle ne
+servirait à rien.
+
+\textbf{4.} Notons $c$ le caractère du texte qui a fait échouer la comparaison, à
+la position $i+j$, et supposons que $c$ n'apparaît pas dans le motif.
+
+Toute position de départ $i'$ telle que $i'\leqslant i+j < i'+m$ aligne le motif
+sur une portion de texte qui contient $c$. Or aucun caractère du motif ne vaut
+$c$ : cette position ne peut pas convenir. Toutes les positions de départ jusqu'à
+$i+j$ inclus sont donc à écarter, et la première encore possible est $i+j+1$.
+
+On peut ainsi décaler de $j+1$ d'un seul coup — ce que réalise l'expression
+\lstinline{j - table.get(texte[i + j], -1)}, la valeur par défaut $-1$ signifiant
+précisément « ce caractère n'est pas dans le motif ».
+
+\textbf{5.} L'algorithme s'écrit :
+\begin{python}
+def boyer_moore(texte, motif):
+    table = table_decalage(motif)
+    n, m = len(texte), len(motif)
+    positions, i, comparaisons = [], 0, 0
+    while i <= n - m:
+        j = m - 1
+        while j >= 0:
+            comparaisons = comparaisons + 1
+            if texte[i + j] != motif[j]:
+                break
+            j = j - 1
+        if j < 0:
+            positions.append(i)
+            i = i + 1
+        else:
+            i = i + max(1, j - table.get(texte[i + j], -1))
+    return positions, comparaisons
+\end{python}
+
+\begin{center}
+\begin{tabular}{lrrr}
+\hline
+motif & positions & naïve & Boyer-Moore \\
+\hline
+\lstinline{"GATTACA"} & $0$, $15$ & $34$ & $20$ \\
+\lstinline{"CCA"} & $12$ & $24$ & $16$ \\
+\hline
+\end{tabular}
+\end{center}
+
+Le \lstinline{max(1, ...)} n'est pas une précaution décorative : sans lui, un
+caractère dont la dernière occurrence est à droite de $j$ produirait un décalage
+négatif, et l'algorithme reculerait — ou bouclerait indéfiniment.
+
+\textbf{6.} Oui, les positions sont identiques : $0$ et $15$ pour le premier
+motif, $12$ pour le second.
+
+Ce point n'était pas acquis d'avance. Les deux algorithmes n'examinent pas les
+mêmes positions : Boyer-Moore en \emph{saute}, et c'est bien là tout son intérêt.
+Une erreur d'un seul rang dans le calcul du décalage lui ferait manquer une
+occurrence, sans qu'aucune erreur ne se manifeste — il rendrait simplement une
+liste plus courte. Comparer les positions à celles de la version naïve, dont la
+correction est évidente, est le seul contrôle qui vaille. C'est la règle générale
+quand on remplace un algorithme évident par un algorithme rapide.
+
+\textbf{7.} Non, le gain s'effondrerait. La taille des décalages dépend de la
+probabilité qu'un caractère du texte soit \emph{absent} du motif, ou n'y
+apparaisse que loin de la fin.
+
+Sur un alphabet à deux lettres, tout caractère rencontré figure presque
+certainement dans le motif, et souvent près de sa droite : le décalage calculé
+vaut le plus souvent $1$, et l'algorithme se comporte comme la recherche naïve —
+en payant en plus le prétraitement. À l'inverse, plus l'alphabet est grand, plus
+les sauts sont longs : c'est pourquoi Boyer-Moore excelle sur du texte en langue
+naturelle, et reste seulement honorable sur les quatre lettres de l'ADN.
+\end{corrige}

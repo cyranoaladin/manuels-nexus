@@ -1,0 +1,83 @@
+% META: {"id": "TNSI-ALGO-EX-007", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "exercice", "capacites": ["T-ALGO-02B", "T-ALGO-02C"], "capacites_codes": ["C8", "C9"], "parcours": 2, "competences": ["modeliser", "programmer", "raisonner"], "duree_min": 28, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-007.tex", "corrige_tex": "chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-007.tex", "authoring": {"PEDAGOGICAL_GAP_ID": "GAP-41D805BD9962", "PEDAGOGICAL_GAP_IDS": ["GAP-41D805BD9962", "GAP-3E9962D581AF", "GAP-23F3AEFB31D9", "GAP-EAF7D9EC6CF9"], "CAPACITY_ID": "C8", "CAPACITY_IDS": ["C8", "C9"], "EXERCISE_ROLE": "DIRECT_APPLICATION", "EXERCISE_ROLES": ["DIRECT_APPLICATION", "CONTEXT_VARIATION", "REASONING"], "DIFFICULTY": 2, "AUTHORING_REASON": "deux capacites du contrat n'avaient aucun exercice ; le parcours en profondeur et la detection de cycle n'etaient pas seulement absents, ils sont ce qui distingue un graphe utilisable d'un graphe incoherent, et un graphe de dependances le montre mieux qu'un graphe abstrait", "ORIGINALITY_PROVENANCE": "ex_nihilo"}, "status": "generated"}
+% BEGIN-VERIFY
+% dependances = {
+%     "interface": ["moteur", "journal"],
+%     "moteur": ["donnees", "journal"],
+%     "donnees": ["journal"],
+%     "journal": [],
+%     "tests": ["interface", "moteur"],
+% }
+% def profondeur(graphe, depart):
+%     vus, pile = [], [depart]
+%     while pile:
+%         sommet = pile.pop()
+%         if sommet in vus:
+%             continue
+%         vus.append(sommet)
+%         for voisin in reversed(graphe[sommet]):
+%             if voisin not in vus:
+%                 pile.append(voisin)
+%     return vus
+% assert profondeur(dependances, "tests") == ["tests", "interface", "moteur",
+%                                             "donnees", "journal"]
+% assert profondeur(dependances, "moteur") == ["moteur", "donnees", "journal"]
+% assert profondeur(dependances, "journal") == ["journal"]
+% assert len(profondeur(dependances, "tests")) == len(dependances)
+% def contient_cycle(graphe):
+%     etat = {}
+%     def visiter(sommet):
+%         etat[sommet] = "en cours"
+%         for voisin in graphe[sommet]:
+%             if etat.get(voisin) == "en cours":
+%                 return True
+%             if etat.get(voisin) is None and visiter(voisin):
+%                 return True
+%         etat[sommet] = "fini"
+%         return False
+%     return any(visiter(s) for s in graphe if etat.get(s) is None)
+% assert contient_cycle(dependances) is False
+% fautif = {k: list(v) for k, v in dependances.items()}
+% fautif["journal"] = ["interface"]
+% assert contient_cycle(fautif) is True
+% assert profondeur(fautif, "tests") == profondeur(dependances, "tests")
+% assert sorted(profondeur(fautif, "journal")) == ["donnees", "interface", "journal", "moteur"]
+% assert "tests" not in profondeur(dependances, "moteur")
+% END-VERIFY
+\begin{exercice}{TNSI-ALGO-EX-007}{2}{28}
+Un projet logiciel est fait de cinq modules. Chaque module en importe d'autres,
+ce que résume le graphe orienté suivant, où une flèche de $u$ vers $v$ signifie
+« $u$ importe $v$ » :
+\begin{python}
+dependances = {
+    "interface": ["moteur", "journal"],
+    "moteur": ["donnees", "journal"],
+    "donnees": ["journal"],
+    "journal": [],
+    "tests": ["interface", "moteur"],
+}
+\end{python}
+\begin{enumerate}
+  \item Écrire \lstinline{profondeur(graphe, depart)} qui renvoie la liste des
+    sommets atteints depuis \lstinline{depart}, dans l'ordre d'un parcours en
+    profondeur utilisant une pile. On empilera les voisins en ordre inverse pour
+    que le premier voisin déclaré soit visité en premier.
+  \item Donner le parcours depuis \lstinline{"tests"}, puis depuis
+    \lstinline{"moteur"}, puis depuis \lstinline{"journal"}.
+  \item Que représente concrètement la liste obtenue depuis
+    \lstinline{"moteur"} ? Pourquoi \lstinline{"tests"} n'y figure-t-il pas,
+    alors que les deux modules sont bien reliés dans le graphe ?
+  \item Écrire \lstinline{contient_cycle(graphe)} qui détecte la présence d'un
+    cycle. On marquera chaque sommet \lstinline{"en cours"} pendant sa visite et
+    \lstinline{"fini"} après, un cycle étant repéré lorsqu'on rencontre un
+    sommet encore \lstinline{"en cours"}.
+  \item Appliquer la fonction au graphe du projet. Un développeur ajoute ensuite
+    un import de \lstinline{"interface"} dans \lstinline{"journal"}. Refaire le
+    test.
+  \item Vérifier que le parcours en profondeur depuis \lstinline{"tests"} est
+    \emph{inchangé} après cet ajout. Que montre cette comparaison sur ce qu'un
+    parcours seul permet de conclure ?
+  \item Pourquoi un cycle dans un graphe de dépendances est-il un défaut, et non
+    une simple particularité ? Donner une conséquence concrète au moment de la
+    compilation ou du chargement des modules.
+\end{enumerate}
+\end{exercice}
