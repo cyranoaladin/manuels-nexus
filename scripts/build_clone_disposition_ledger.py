@@ -40,6 +40,22 @@ SOURCE_ROOTS = {
 }
 
 
+#: La mesure publiee avant la correction du detecteur est SUPERSEDEE. Elle
+#: reste dans l'historique Git -- on n'efface pas une mesure fausse, on dit
+#: pourquoi elle l'etait -- mais elle ne vaut plus comme mesure courante.
+SUPERSEDED_MEASURE = {
+    "SUPERSEDED_STATUS": "SUPERSEDED_BY_CORRECTED_CLONE_DETECTOR",
+    "SUPERSEDED_BY": "audit/CROSS_MANUAL_CONTAMINATION.json",
+    "SUPERSEDED_REASON": (
+        "la normalisation employee laissait l'identite de l'objet dans le "
+        "corps compare : chaque copie etait unique par construction, et la "
+        "contamination inter-manuels ne pouvait structurellement pas etre vue"
+    ),
+    "HISTORICAL_MEASURE_BEFORE_CORRECTION": {"CLONE_GROUPS_TOTAL": 6, "TRUE_PRODUCT_CLONES_OPEN": 0, "CROSS_MANUAL_GROUPS": 0, "CAPACITY_MISREPRESENTING_GROUPS": 0, "NEAR_CLONES": 131},
+    "HISTORICAL_MEASURE_PRESERVED_IN_GIT": True,
+}
+
+
 def _meta(path: Path) -> dict[str, Any]:
     head = path.read_text(encoding="utf-8", errors="ignore").split("\n", 1)[0]
     if not head.startswith("% META:"):
@@ -312,7 +328,8 @@ def build(root: Path, *, with_history: bool = True) -> dict[str, Any]:
         "artifact_type": "clone_disposition_ledger",
         "schema_version": "1.0.0",
         "generated_by": GENERATED_BY,
-        "body_definition": "fichier moins sa ligne % META, lignes vides retirees",
+        "body_definition": "fichier moins sa ligne % META, identite declaree neutralisee, lignes vides retirees",
+        "superseded_measure": SUPERSEDED_MEASURE,
         "scope": "objets reellement composes dans les 12 cibles canoniques",
         "groups": groups,
         "near_clone_groups": near_groups,

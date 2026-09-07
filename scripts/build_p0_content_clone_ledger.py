@@ -52,6 +52,22 @@ MANUAL_PREFIXES = (
     ("TNSI-", "TNSI"),
 )
 
+#: La mesure publiee avant la correction du detecteur est SUPERSEDEE. Elle
+#: reste dans l'historique Git -- on n'efface pas une mesure fausse, on dit
+#: pourquoi elle l'etait -- mais elle ne vaut plus comme mesure courante.
+SUPERSEDED_MEASURE = {
+    "SUPERSEDED_STATUS": "SUPERSEDED_BY_CORRECTED_CLONE_DETECTOR",
+    "SUPERSEDED_BY": "audit/CROSS_MANUAL_CONTAMINATION.json",
+    "SUPERSEDED_REASON": (
+        "la normalisation employee laissait l'identite de l'objet dans le "
+        "corps compare : chaque copie etait unique par construction, et la "
+        "contamination inter-manuels ne pouvait structurellement pas etre vue"
+    ),
+    "HISTORICAL_MEASURE_BEFORE_CORRECTION": {"clone_groups": 6, "excess_objects": 14, "objects_with_indeterminate_credit": 0},
+    "HISTORICAL_MEASURE_PRESERVED_IN_GIT": True,
+}
+
+
 META_LINE = re.compile(r"^\s*%\s*META:")
 
 #: Un corps dont il ne reste rien une fois les lignes purement structurelles
@@ -570,6 +586,7 @@ def build_ledger() -> dict[str, Any]:
         "generated_by": "scripts/build_p0_content_clone_ledger.py",
         "finding": "P0_PEDAGOGICAL_CONTENT_CLONING_AND_CAPACITY_MISREPRESENTATION",
         "publication_blocker": True,
+        "superseded_measure": SUPERSEDED_MEASURE,
         "body_definition": {
             "excluded": [
                 "% META: identity line",
