@@ -1,0 +1,20 @@
+{
+  "artifact_type": "independent_content_reviews",
+  "schema_version": 1,
+  "approves_nothing": true,
+  "record_contract": {
+    "required_binding": [
+      "review_id",
+      "object_id",
+      "path",
+      "source_sha256",
+      "semantic_digest",
+      "dependency_digest"
+    ],
+    "reviewer": "actor_id, is_human=false, independent_from_author=true",
+    "dimensions": "Named dimensions each carry state VALIDATED_BY_EVIDENCE or PENDING and an actual written rationale.",
+    "scope": "Only the explicitly reviewed dimensions are credited by evidence: programme, science, pedagogy, editorial and applicable specialized checks. Human approvals are consumed exclusively by HUMAN_REVIEW_GOVERNANCE.",
+    "inheritance": "No automatic inheritance. An identical body does not establish identical programme, parent-object or pedagogical review scope."
+  },
+  "reviews": []
+}

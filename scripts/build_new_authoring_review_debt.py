@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Le contenu ecrit pendant la reconstruction est du contenu A RISQUE.
 
-Deux cent huit objets ont ete ecrits pour remplacer ce que la contamination
-avait pris. Ils sont neufs, donc personne ne les a jamais relus. Les blocs
+La population est derivee du corpus courant et de son historique de retrait.
+Les nouveaux objets restent en attente jusqu'a une revue liee a leurs sources. Les blocs
 VERIFY qu'ils portent prouvent une exactitude CALCULABLE ; ils ne prouvent ni
 l'adequation au programme, ni la qualite de l'enonce, ni la justesse du niveau,
 ni le style. Compter un oracle vert comme une revue editoriale reviendrait a
@@ -12,7 +12,7 @@ Ce registre etablit ce qui EST prouve, nomme ce qui ne l'est pas, et verifie
 que le contenu neuf n'a pas recree ce qu'on venait de retirer :
 
 `ORACLE_VERIFIED`             le bloc VERIFY passe le gate SymPy ;
-`CAPACITY_SEMANTICALLY_PROVEN` la capacite declaree est attestee par signature ;
+`CAPACITY_SEMANTICALLY_PROVEN` la capacite declaree est attestee par une revue actuelle ;
 `ANSWER_COVERAGE_ESTABLISHED`  le corrige repond a chaque question ;
 `EDITORIAL_REVIEW_PENDING`     personne n'a relu l'enonce, le niveau, le style.
 
@@ -67,32 +67,30 @@ def _git(args: list[str]) -> str:
     ).stdout
 
 
-def new_objects() -> list[str]:
-    sortie = _git(
-        ["diff", "--name-status", DECONTAMINATION_COMMIT, "HEAD", "--", *CORPORA]
-    )
-    chemins = []
-    for ligne in sortie.splitlines():
-        parts = ligne.split("\t")
-        if len(parts) < 2 or not parts[0].startswith("A"):
-            continue
-        chemin = parts[-1]
-        if chemin.endswith(".tex") and (ROOT / chemin).is_file():
-            chemins.append(chemin)
-    return sorted(chemins)
+def new_objects(root: Path = ROOT) -> list[str]:
+    from build_current_review_index import _new_paths
+    return sorted(_new_paths(root))
 
 
-def _oracle_verdict(chapter: str, stem: str) -> str | None:
+def _oracle_verdict(chapter: str, stem: str, root: Path = ROOT) -> str | None:
+    from scientific_receipt_binding import bind, usable
+    directory = root / _chapter_dir(chapter, root)
     for suffixe in (".sympy.json", ".execution.json"):
-        recu = ROOT / _chapter_dir(chapter) / "validations" / (stem + suffixe)
+        recu = directory / "validations" / (stem + suffixe)
         if recu.is_file():
-            return json.loads(recu.read_text(encoding="utf-8")).get("verdict")
+            record = json.loads(recu.read_text(encoding="utf-8"))
+            binding = bind(record, directory, root)
+            if binding["state"] != "CURRENT_BOUND":
+                return "stale"
+            if not usable(binding):
+                return "untrusted_method"
+            return record.get("verdict")
     return None
 
 
-def _chapter_dir(chapter: str) -> str:
+def _chapter_dir(chapter: str, root: Path = ROOT) -> str:
     for corpus in CORPORA:
-        if (ROOT / corpus / chapter).is_dir():
+        if (root / corpus / chapter).is_dir():
             return f"{corpus}/{chapter}"
     return ""
 
@@ -116,32 +114,14 @@ def _capacity_proof(role, identifiant, codes, meta, prouvees, non_verifiees):
     return all((cible, code) in prouvees for code in codes)
 
 
-def build(root: Path = ROOT) -> dict[str, Any]:
+def build(root: Path = ROOT, *, inventory=None) -> dict[str, Any]:
+    import build_current_review_index as current_review
+    index = current_review.build_fresh(root, inventory)
+    current_by_path = {row["path"]: row for row in index["objects"]}
     clone = _clone_rule()
-    alignement = json.loads(
-        (root / "audit/CAPACITY_CONTENT_ALIGNMENT.json").read_text(encoding="utf-8")
-    )
-    prouvees = {
-        (a["object_id"], a["capacity"])
-        for a in alignement["assignments"]
-        if a["state"] == "ALIGNED"
-    }
-    # Une capacite sans signature declaree n'est ni prouvee ni refutee. La
-    # compter fausse ferait passer un defaut de couverture du registre pour
-    # un defaut du contenu.
-    non_verifiees = {
-        (a["object_id"], a["capacity"])
-        for a in alignement["assignments"]
-        if a["state"] == "NO_SIGNATURE_DECLARED"
-    }
-    graphe = json.loads(
-        (root / "audit/EX_CO_GRAPH.json").read_text(encoding="utf-8")
-    )
-    couverts = {
-        row["exercise_id"]
-        for row in graphe.get("relations", [])
-        if "ANSWER_COVERAGE_ESTABLISHED" in row.get("classifications", [])
-    }
+    # Old aggregate signatures and question counts do not certify current
+    # semantics. Programme and correction reviews bind the actual sources
+    # and dependencies through the single current index.
 
     # Corps normalises de TOUT le corpus, pour le controle d'originalite.
     corpus_bodies: dict[str, list[str]] = collections.defaultdict(list)
@@ -157,17 +137,18 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                     str(chemin.relative_to(root))
                 )
 
-    nouveaux = new_objects()
+    nouveaux = sorted(row["path"] for row in index["objects"] if row["new_authoring"])
     enregistrements: list[dict[str, Any]] = []
     for chemin in nouveaux:
         texte = (root / chemin).read_text(encoding="utf-8", errors="replace")
         meta = clone.read_meta(texte)
         parts = Path(chemin).parts
-        index = parts.index("chapitres") + 1
-        chapitre, role = parts[index], parts[index + 1]
+        chapter_index = parts.index("chapitres") + 1
+        chapitre, role = parts[chapter_index], parts[chapter_index + 1]
         codes = meta.get("capacites_codes") or []
         identifiant = meta.get("id") or Path(chemin).stem
         empreinte = clone.digest(clone.pedagogical_body(texte))
+        reviews = current_by_path[chemin]["reviews"]
         jumeaux = [p for p in corpus_bodies.get(empreinte, []) if p != chemin]
         enregistrements.append({
             "object_id": identifiant,
@@ -177,21 +158,27 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             "declared_capacities": codes,
             "declared_status": meta.get("status"),
             "carries_oracle": bool(VERIFY.search(texte)),
-            "oracle_verdict": _oracle_verdict(chapitre, Path(chemin).stem),
-            # Le registre d'alignement n'examine que les EXERCICES : c'est la
-            # que la capacite se declare et se prouve. Un corrige ou une fiche
-            # de remediation herite de la preuve de l'objet qu'il sert -- et
-            # cet heritage se lit par la reference declaree, jamais par une
-            # ressemblance d'identifiant.
-            "capacity_semantically_proven": _capacity_proof(
-                role, identifiant, codes, meta, prouvees, non_verifiees
+            "oracle_verdict": _oracle_verdict(chapitre, Path(chemin).stem, root),
+            "capacity_semantically_proven": (
+                reviews["PROGRAMME_REVIEW"]["state"] == "VALIDATED_BY_EVIDENCE"
+                if codes else None
             ),
             "answer_coverage_established": (
-                identifiant in couverts if role == "exercices" else None
+                reviews.get("CORRECTION_ALIGNMENT_REVIEW", {}).get("state") == "VALIDATED_BY_EVIDENCE"
+                if "CORRECTION_ALIGNMENT_REVIEW" in current_by_path[chemin]["required_review_dimensions"] else None
             ),
             "body_digest": empreinte,
             "exact_twins": sorted(jumeaux),
-            "editorial_review": "EDITORIAL_REVIEW_PENDING",
+            "source_sha256": current_by_path[chemin]["source_sha256"],
+            "semantic_digest": current_by_path[chemin]["semantic_digest"],
+            "dependency_digest": current_by_path[chemin]["dependency_digest"],
+            "review_state": current_by_path[chemin]["review_state"],
+            "required_review_dimensions": current_by_path[chemin]["required_review_dimensions"],
+            "reviews": current_by_path[chemin]["reviews"],
+            "editorial_review": (
+                "VALIDATED_BY_EVIDENCE" if current_by_path[chemin]["reviews"]["EDITORIAL_REVIEW"]["state"]
+                == "VALIDATED_BY_EVIDENCE" else "EDITORIAL_REVIEW_PENDING"
+            ),
         })
 
     exacts = [r for r in enregistrements if r["exact_twins"]]
@@ -201,7 +188,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
     ]
     oracle_rouge = [
         r for r in enregistrements
-        if r["oracle_verdict"] not in (None, "pass")
+        if r["oracle_verdict"] == "fail"
     ]
     capacite_non_prouvee = [
         r for r in enregistrements if r["capacity_semantically_proven"] is False
@@ -218,34 +205,45 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         "NEW_AUTHORING_BY_CHAPTER": dict(sorted(
             collections.Counter(r["chapter"] for r in enregistrements).items()
         )),
-        "NEW_AUTHORING_REVIEW_PENDING": len(enregistrements),
+        "NEW_AUTHORING_REVIEW_PENDING": sum(row["review_state"] == "PENDING" for row in enregistrements),
         "NEW_AUTHORING_EXACT_CLONES": len(exacts),
-        "NEW_AUTHORING_NEAR_CLONES": 0,
+        "NEW_AUTHORING_NEAR_CLONES": None,
+        "NEAR_CLONE_REVIEW_STATUS": "NOT_COMPUTED_BY_THIS_PRODUCER",
         "ORACLE_VERIFIED": sum(
             1 for r in enregistrements if r["oracle_verdict"] == "pass"
         ),
         "OBJECTS_WITHOUT_ORACLE": len(sans_oracle),
         "ORACLE_FAILURES": len(oracle_rouge),
+        "STALE_OR_UNTRUSTED_ORACLE_EVIDENCE": sum(
+            r["oracle_verdict"] in {"stale", "untrusted_method"} for r in enregistrements
+        ),
+        "MISSING_ORACLE_RECEIPTS": sum(r["carries_oracle"] and r["oracle_verdict"] is None for r in enregistrements),
         "CAPACITY_SEMANTICALLY_PROVEN": sum(
             1 for r in enregistrements if r["capacity_semantically_proven"]
         ),
         "CAPACITY_NOT_PROVEN": len(capacite_non_prouvee),
+        "CAPACITY_REVIEW_PENDING": len(capacite_non_prouvee),
         "ANSWER_COVERAGE_ESTABLISHED": sum(
             1 for r in enregistrements if r["answer_coverage_established"]
         ),
-        "ANSWER_COVERAGE_MISSING": len(sans_couverture),
+        "ANSWER_COVERAGE_MISSING": None,
+        "ANSWER_COVERAGE_REVIEW_PENDING": len(sans_couverture),
+        "FINDING_ASSESSMENT": "NOT_COMPUTED_BY_THIS_PRODUCER",
         "APPROVES_NOTHING": True,
     }
+    current_review.assert_current(root, index)
     return {
         "artifact_type": "new_authoring_review_debt",
+        "current_review_index": current_review.binding(index),
         "schema_version": 1,
         "generated_by": GENERATED_BY,
         "decontamination_commit": DECONTAMINATION_COMMIT,
         "rule": (
             "un bloc VERIFY prouve une exactitude calculable ; il ne prouve ni "
             "l'adequation au programme, ni la qualite de l'enonce, ni le "
-            "niveau, ni le style. Ces objets restent en dette de revue "
-            "editoriale."
+            "niveau, ni le style. Seules les revues independantes liees aux "
+            "sources et dependances courantes ferment la dette determinable ; "
+            "l'approbation humaine reste distincte."
         ),
         "human_review_required": True,
         "release_blocking": True,
@@ -255,7 +253,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         "objects_without_oracle": [r["path"] for r in sans_oracle],
         "oracle_failures": [r["path"] for r in oracle_rouge],
         "capacity_not_proven": [r["path"] for r in capacite_non_prouvee],
-        "answer_coverage_missing": [r["path"] for r in sans_couverture],
+        "answer_coverage_review_pending": [r["path"] for r in sans_couverture],
         "entries": enregistrements,
     }
 
@@ -272,10 +270,12 @@ def render_markdown(payload: dict[str, Any]) -> str:
         "NEW_AUTHORING_OBJECTS", "NEW_AUTHORING_REVIEW_PENDING",
         "NEW_AUTHORING_EXACT_CLONES", "NEW_AUTHORING_NEAR_CLONES",
         "ORACLE_VERIFIED", "OBJECTS_WITHOUT_ORACLE", "ORACLE_FAILURES",
+        "STALE_OR_UNTRUSTED_ORACLE_EVIDENCE", "MISSING_ORACLE_RECEIPTS",
         "CAPACITY_SEMANTICALLY_PROVEN", "CAPACITY_NOT_PROVEN",
-        "ANSWER_COVERAGE_ESTABLISHED", "ANSWER_COVERAGE_MISSING",
+        "ANSWER_COVERAGE_ESTABLISHED", "ANSWER_COVERAGE_REVIEW_PENDING",
     ):
-        lignes.append(f"- `{cle}` : `{s[cle]}`")
+        value = s[cle] if s[cle] is not None else "NON_EVALUE_PAR_CE_REGISTRE"
+        lignes.append(f"- `{cle}` : `{value}`")
     lignes += ["", "## Par chapitre", ""]
     for chapitre, nombre in payload["summary"]["NEW_AUTHORING_BY_CHAPTER"].items():
         lignes.append(f"- {chapitre} : {nombre}")
