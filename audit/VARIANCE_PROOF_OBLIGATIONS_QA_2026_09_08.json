@@ -1,0 +1,112 @@
+{
+  "artifact_type": "development_qa_correction_log",
+  "schema_version": 1,
+  "approves_nothing": true,
+  "observed_head": "73ef32f6461cc6da65e696f7ee51536ae3d6f72c",
+  "worktree_observation": true,
+  "sources": [
+    {
+      "path": "scripts/audit_variance_sigma_consistency.py",
+      "before_head": "c602f506c4a7a23ec581b6a1a272f9e52ea0afcb",
+      "before_sha256": "809398410ce2ee64c3df3895d5e021aacbb7d7853fa38b32be0b10c68819fd96",
+      "after_sha256": "cc985a4c5c537dfc3b9aa4272e88b715ea20483a62df6dcbb34e32f98606e01f"
+    },
+    {
+      "path": "tests/test_variance_sigma_consistency.py",
+      "before_head": "c602f506c4a7a23ec581b6a1a272f9e52ea0afcb",
+      "before_sha256": "c82356b11cd6a10b8c49c73283b677e2a50952dd060be0020aa67fb1b061fd1c",
+      "after_sha256": "413b547d9c80405ef70248722eb33e224ac41291c8a2290d6d9ca17c6eb1a71c"
+    },
+    {
+      "path": "tests/test_variance_proof_obligations.py",
+      "before_head": "c602f506c4a7a23ec581b6a1a272f9e52ea0afcb",
+      "before_sha256": null,
+      "after_sha256": "2a991b20dc79e0f2430d173e08405271781588a3f919b5bd9e9265f58f93f4b2"
+    }
+  ],
+  "finding": {
+    "id": "VARIANCE-PROOF-QA-017",
+    "severity": "PRODUCT_P0_AND_CERTIFICATION_BLOCKER",
+    "status": "LISTED_THREE_DEFECTS_CORRECTED_AND_INDEPENDENTLY_RECHECKED",
+    "before": [
+      "V=4 followed by sigma=sqrt(9) passed because the root branch ignored the given variance.",
+      "A numeric token in an unexecuted BEGIN-VERIFY comment/assertion was treated as proof of sigma. A coincident variance elsewhere in the chapter also replaced missing local evidence.",
+      "The equality chain V=4=9 was accepted by taking its last value; even distinct integers beyond floating precision were not compared exactly."
+    ],
+    "after": [
+      "An explicit sigma root is confronted with the nearest local variance whenever one is supplied.",
+      "Oracle text and unrelated matching numbers grant no evidence. Missing local variance/evidence remains a CERTIFICATION_BLOCKER, without claiming the number is mathematically false.",
+      "Numeric links joined by equality are compared as exact Fractions. Inconsistent chains produce EXACT_EQUALITY_MISMATCH P0 and cannot supply downstream evidence. Approximation separates equality chains."
+    ]
+  },
+  "scientific_argument": [
+    "sqrt(9)=3 differs from sqrt(4)=2, so sigma=sqrt(9) contradicts V=4.",
+    "All terms connected by equality must have the same value; two distinct rational values prove a contradiction even if another intervening term is unreadable. Exact Fraction comparison distinguishes9007199254740992 and9007199254740993.",
+    "Textual occurrence of an assertion does not prove execution or semantic association with the claimed statistic. A matching value elsewhere provides no object/source binding."
+  ],
+  "legacy_test_change": {
+    "preserved_inputs": "The same3946-without-support and printed sqrt(15552000) assertion fixtures are retained.",
+    "changed_expectation": "Both now require the explicit SIGMA_WITHOUT_ORACLE certification blocker. The latter no longer treats an unexecuted source assertion as a receipt; the former no longer calls an unsupported number a demonstrated product error.",
+    "no_gate_weakening": "The CLI still fails on any certification blocker. All existing numeric mismatch tests continue to demand product P0. No skip or xfail added."
+  },
+  "tests": {
+    "red_log": "/tmp/variance-proof-obligations-red.log",
+    "red_sha256": "fab094b8f7db41438f6ef4c35e925c263ac951387af6b8ed935eb2d0336f44f8",
+    "red_failed": 9,
+    "red_passed": 4,
+    "intermediate_junit": "/tmp/variance-proof-obligations-first-green.xml",
+    "intermediate_sha256": "7b4ed722ec70b249560b56b0a034edd8702b7f94edbdcfe71929a2e8c29b3883",
+    "intermediate_failed": 2,
+    "intermediate_reason": "The two historical expectations still conflated missing evidence with product falsehood or unexecuted oracle text with validation.",
+    "green_junit": "/tmp/variance-proof-obligations-targeted.xml",
+    "green_sha256": "5d217ef596173f35ccb5f92349e7515feed90aef059bb0da6ed7a2f86e722e90",
+    "passed": 65,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "deselected": 4,
+    "command": "python -m pytest -q tests/test_variance_proof_obligations.py tests/test_variance_unparsed_claims.py tests/test_variance_sigma_consistency.py tests/test_latex_arith_exact_contract.py -k 'not co_048 and not math_corpus and not covers_every_math' --junitxml=/tmp/variance-proof-obligations-targeted.xml",
+    "scope": "Controlled fixtures only; the four real-corpus tests were not run."
+  },
+  "scope_limits": [
+    "The lexical audit checks the declared consistency class; it does not independently establish every variance from its original probability model.",
+    "Unsupported claims from QA015 remain explicit blockers, including correct irrational radicals outside the Fraction API.",
+    "No complete current-corpus zero-defect claim is supported by these fixture tests.",
+    "No global QCM evidence, historical receipt or human packet has been regenerated.",
+    "Les deux nouveaux défauts reproduits par /root gardent le consommateur ouvert ; aucune clôture globale avant correction et revue fraîche."
+  ],
+  "not_run": [
+    "Global variance corpus audit",
+    "Actual published oracle execution",
+    "Global QCM replay/regeneration",
+    "Full suite"
+  ],
+  "independent_counterreview": {
+    "reviewer": "/root",
+    "human_approval": false,
+    "read_extent": "Diff intégral, fonctions de parsing et de contrôle touchées, tests et manifest lus. Tests conservés avec mêmes inputs ; tout désaccord exact démontré reste P0, absence de preuve bloque sans faux défaut.",
+    "command": "python -m pytest -q tests/test_variance_proof_obligations.py tests/test_variance_unparsed_claims.py tests/test_variance_sigma_consistency.py tests/test_latex_arith_exact_contract.py -k 'not co_048 and not math_corpus and not covers_every_math' --junitxml=/tmp/root-variance-qa017.xml",
+    "passed": 65,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "deselected": 4,
+    "junit_sha256": "0ee30bc7a37fd66954d3a8800b26918efcf5b012bd634ca04c85f32af59087be"
+  },
+  "open_counterreview_findings": [
+    {
+      "id": "VARIANCE-BODY-BEFORE-ORACLE-OMITTED",
+      "severity": "CERTIFICATION_BLOCKER",
+      "status": "OPEN",
+      "root_reproduced": true,
+      "counterexample": "V(X)=4 et sigma(X)=3 avant un bloc BEGIN-VERIFY final : aucune finding, car audit_object conserve seulement le texte après le premier bloc."
+    },
+    {
+      "id": "VARIANCE-EXACT-DECIMAL-TOLERANCE",
+      "severity": "PRODUCT_P0",
+      "status": "OPEN",
+      "root_reproduced": true,
+      "counterexample": "V(X)=4 et sigma(X)=2{,}0000000001 avec signe égal : aucune finding, car les décimales sont traitées comme arrondis et une tolérance flottante est appliquée."
+    }
+  ]
+}

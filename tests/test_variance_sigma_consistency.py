@@ -112,11 +112,11 @@ def test_detects_unit_carried_by_a_variance(tmp_path: Path) -> None:
 
 
 def test_detects_sigma_without_any_oracle(tmp_path: Path) -> None:
-    """Exactement la forme du P0 CO-048 : une valeur approchee sans support."""
+    """Une valeur sans support reste bloquante, sans erreur numerique inventee."""
 
     findings = _audit_text(tmp_path, r"Mais $\sigma \approx 3946$~euros.")
     assert [f.defect_class for f in findings] == ["SIGMA_WITHOUT_ORACLE"]
-    assert findings[0].severity == "P0"
+    assert findings[0].severity == "CERTIFICATION_BLOCKER"
 
 
 def test_two_independent_qcm_questions_are_never_paired(tmp_path: Path) -> None:
@@ -150,13 +150,14 @@ def test_a_root_mismatch_inside_one_question_is_still_detected(tmp_path: Path) -
     assert [f.defect_class for f in findings] == ["ROOT_MISMATCH"]
 
 
-def test_a_sigma_covered_by_the_sympy_oracle_is_accepted(tmp_path: Path) -> None:
+def test_a_printed_sympy_assertion_without_bound_execution_is_not_a_receipt(tmp_path: Path) -> None:
     findings = _audit_text(
         tmp_path,
         r"Mais $\sigma \approx 3944$~euros.",
         verify="% assert round(float(sqrt(15552000))) == 3944\n",
     )
-    assert findings == []
+    assert [f.defect_class for f in findings] == ["SIGMA_WITHOUT_ORACLE"]
+    assert findings[0].severity == "CERTIFICATION_BLOCKER"
 
 
 # --------------------------------------------------------------------------

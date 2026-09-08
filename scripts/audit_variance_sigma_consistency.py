@@ -11,18 +11,17 @@ Defauts recherches :
 * ROOT_MISMATCH              variance etablie mais racine fausse ;
 * ROUNDING_MISMATCH          racine correcte mais arrondi faux ;
 * UNIT_ON_VARIANCE           unite portee par une variance au lieu du carre ;
-* SIGMA_WITHOUT_ORACLE       ecart-type numerique sans variance etablie, sans
-                             assertion dans le bloc BEGIN-VERIFY et sans variance
-                             correspondante ailleurs dans le chapitre ;
-* SIGMA_NOT_SELF_CONTAINED   ecart-type exact mais etabli dans un autre objet du
-                             chapitre : observation non bloquante.
+* EXACT_EQUALITY_MISMATCH    maillons numeriques distincts relies par egalite ;
+* SIGMA_WITHOUT_ORACLE       ecart-type sans variance locale etablie : blocker
+                             de certification. Un nombre dans BEGIN-VERIFY ou
+                             ailleurs dans le chapitre ne constitue pas une
+                             preuve executee et liee a cette affirmation.
 * UNPARSED_MATHEMATICAL_CLAIM / UNVERIFIED_VARIANCE_DEPENDENCY
                             affirmation ou dependance non verifiee : blocker
                             de certification, sans erreur produit inventee.
 
-Le dernier controle est celui qui capture exactement 1SPE-VARALEA-CO-048 : une
-valeur approchee affirmee dans le texte que rien ne rattache ni a une variance
-ecrite, ni a l'oracle sympy de l'objet.
+La presence textuelle d'un oracle n'est pas son execution, ni une preuve de son
+lien semantique avec l'affirmation. Ce lecteur ne certifie aucun tel heritage.
 
 Limite assumee : l'extraction est lexicale et ne comprend que le sous-langage
 arithmetique de scripts/latex_arith.py. Elle ne remplace ni l'execution des
@@ -198,19 +197,24 @@ def _rounds_to(exact: float, stated: float, places: int, approximate: bool) -> b
     return math.isclose(exact, stated, rel_tol=1e-9, abs_tol=1e-9)
 
 
-def _oracle_mentions(verify: str, value: float, places: int) -> bool:
-    """Le bloc BEGIN-VERIFY porte-t-il une trace de cette valeur ?"""
+def _contradictory_equalities(chain: str) -> tuple[str, str] | None:
+    """Two unequal rational values in one equality chain prove a contradiction.
 
-    for token in re.findall(r"\d+(?:\.\d+)?", verify):
-        try:
-            candidate = float(token)
-        except ValueError:
-            continue
-        if abs(candidate - value) <= 0.5 * 10**-places + 1e-9:
-            return True
-        if value > 0 and abs(candidate - value**2) <= max(1.0, value**2 * 1e-9):
-            return True
-    return False
+    Approximation starts another chain. Unreadable links remain unverified;
+    their presence does not make two distinct readable values equal.
+    """
+    for equalities in re.split(r"\\approx", chain):
+        first = None
+        for raw in _segments(equalities):
+            try:
+                value = evaluate(raw)
+            except (UnsupportedExpression, ZeroDivisionError, OverflowError, ValueError):
+                continue
+            if first is None:
+                first = (raw, value)
+            elif first[1] != value:
+                return (first[0], raw)
+    return None
 
 
 def chapter_variance_values(chapter_dir: Path) -> list[float]:
@@ -220,7 +224,7 @@ def chapter_variance_values(chapter_dir: Path) -> list[float]:
     for path in sorted(chapter_dir.rglob("*.tex")):
         text = path.read_text(encoding="utf-8")
         for claim in extract_claims(text):
-            if claim.unparsed_segments:
+            if claim.unparsed_segments or _contradictory_equalities(claim.chain):
                 continue
             if claim.kind == "variance":
                 values.append(claim.exact_value)
@@ -253,7 +257,6 @@ def audit_object(
     meta_match = META_RE.search(text)
     object_id = json.loads(meta_match.group(1))["id"] if meta_match else path.stem
     verify_match = VERIFY_RE.search(text)
-    verify = verify_match.group(1) if verify_match else ""
     body = text[verify_match.end() :] if verify_match else text
 
     claims = extract_claims(body)
@@ -280,6 +283,7 @@ def audit_object(
             )
         )
 
+    contradictory_positions: set[int] = set()
     for claim in claims:
         if claim.unparsed_segments:
             add(
@@ -288,13 +292,30 @@ def audit_object(
                 f"segments hors du lecteur exact {list(claim.unparsed_segments)!r}. "
                 "Aucune valeur de remplacement ni preuve de faussete n'est deduite.",
             )
+        contradiction = _contradictory_equalities(claim.chain)
+        if contradiction:
+            contradictory_positions.add(claim.position)
+            add(
+                "EXACT_EQUALITY_MISMATCH", "P0",
+                f"{claim.kind}({claim.variable or '?'}) : les expressions exactes "
+                f"{contradiction[0]!r} et {contradiction[1]!r} sont reliees par "
+                "egalite mais leurs valeurs rationnelles sont distinctes.",
+            )
 
     variances = [claim for claim in claims if claim.kind == "variance"]
     for sigma in (claim for claim in claims if claim.kind == "sigma"):
-        if sigma.unparsed_segments:
+        if sigma.unparsed_segments or sigma.position in contradictory_positions:
             continue
-        # Une racine explicite est auto-portante : sqrt(radicande) est verifiable.
-        if sigma.sqrt_radicand is not None:
+        scope_start = _scope_start(question_starts, sigma.position)
+        upstream = [
+            claim
+            for claim in variances
+            if scope_start <= claim.position < sigma.position
+            and (sigma.variable is None or claim.variable == sigma.variable)
+        ]
+        # An explicit root can establish its own arithmetic. If a variance is
+        # supplied locally, it must also agree with that variance below.
+        if sigma.sqrt_radicand is not None and not upstream:
             exact = math.sqrt(sigma.sqrt_radicand) if sigma.sqrt_radicand >= 0 else float("nan")
             if not _rounds_to(exact, sigma.stated_value, sigma.decimals, sigma.approximate):
                 add(
@@ -306,40 +327,17 @@ def audit_object(
                 )
             continue
 
-        scope_start = _scope_start(question_starts, sigma.position)
-        upstream = [
-            claim
-            for claim in variances
-            if scope_start <= claim.position < sigma.position
-            and (sigma.variable is None or claim.variable == sigma.variable)
-        ]
         if not upstream:
-            if _oracle_mentions(verify, sigma.stated_value, sigma.decimals):
-                continue
-            elsewhere = any(
-                value >= 0
-                and _rounds_to(math.sqrt(value), sigma.stated_value, sigma.decimals, True)
-                for value in (chapter_variances or [])
+            add(
+                "SIGMA_WITHOUT_ORACLE", "CERTIFICATION_BLOCKER",
+                f"ecart-type {sigma.stated_raw} sans variance locale etablie. "
+                "Un nombre dans BEGIN-VERIFY ou dans un autre objet ne prouve "
+                "ni l'execution ni le lien semantique avec cette affirmation.",
             )
-            if elsewhere:
-                add(
-                    "SIGMA_NOT_SELF_CONTAINED",
-                    "P2",
-                    f"ecart-type {sigma.stated_raw} exact mais etabli dans un autre objet "
-                    f"du chapitre : l'objet ne porte ni variance ecrite ni oracle propre",
-                )
-            else:
-                add(
-                    "SIGMA_WITHOUT_ORACLE",
-                    "P0",
-                    f"ecart-type {sigma.stated_raw} affirme sans variance ecrite, sans "
-                    f"assertion dans le bloc BEGIN-VERIFY et sans variance correspondante "
-                    f"ailleurs dans le chapitre",
-                )
             continue
 
         variance = upstream[-1]
-        if variance.unparsed_segments:
+        if variance.unparsed_segments or variance.position in contradictory_positions:
             add(
                 "UNVERIFIED_VARIANCE_DEPENDENCY", "CERTIFICATION_BLOCKER",
                 f"sigma({sigma.variable or '?'}) = {sigma.stated_raw} depend de "
@@ -414,6 +412,7 @@ def audit_corpus(chapters: list[str] | None = None) -> dict:
             "ROOT_MISMATCH",
             "ROUNDING_MISMATCH",
             "UNIT_ON_VARIANCE",
+            "EXACT_EQUALITY_MISMATCH",
             "SIGMA_WITHOUT_ORACLE",
             "SIGMA_NOT_SELF_CONTAINED",
             "UNPARSED_MATHEMATICAL_CLAIM",
