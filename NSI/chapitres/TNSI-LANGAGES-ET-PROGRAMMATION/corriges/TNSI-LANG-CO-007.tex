@@ -31,7 +31,8 @@
 % assert __name__ != "meteo"
 % END-VERIFY
 \begin{corrige}{TNSI-LANG-EX-007}
-\textbf{1 à 3.} Le module complet :
+\textbf{1.} Le module complet, avec sa documentation de tete et celle de ses
+deux fonctions :
 \begin{python}
 """Conversions de temperatures.
 
@@ -61,10 +62,16 @@ if __name__ == "__main__":
     assert celsius_vers_fahrenheit(0) == 32
     assert fahrenheit_vers_celsius(212) == 100
 \end{python}
-La précondition est écrite deux fois, et ce n'est pas une redondance : la
-documentation la fait connaître au lecteur \emph{avant} l'appel, le
-\lstinline{raise} la fait respecter \emph{pendant}. L'une sans l'autre laisse
+\textbf{2.} La précondition est écrite deux fois, et ce n'est pas une
+redondance : la documentation la fait connaître au lecteur \emph{avant} l'appel,
+le \lstinline{raise} la fait respecter \emph{pendant}. L'une sans l'autre laisse
 soit un contrat non tenu, soit une erreur inexplicable.
+
+\textbf{3.} Le bloc de tests est celui des trois dernières lignes du module,
+protégé par \lstinline{if __name__ == "__main__":}. Il contient les trois
+assertions sur des valeurs remarquables : $100\,^\circ$C valent
+$212\,^\circ$F, $0\,^\circ$C valent $32\,^\circ$F, et la conversion inverse
+de $212\,^\circ$F redonne $100\,^\circ$C.
 
 \textbf{4.} Depuis un autre fichier :
 \begin{python}

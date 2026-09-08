@@ -47,9 +47,14 @@ $50\div 5=10$. La fonction renvoie $8{,}4$, car
 \lstinline{range(1, len(notes))} commence à l'indice $1$ et \emph{saute la
 première note} : elle additionne $12+16+4+10=42$, puis divise par $5$.
 
-La cause est un décalage d'indice. La correction consiste à parcourir depuis $0$ :
+La cause est un décalage d'indice. La correction consiste à parcourir depuis
+$0$ :
 \begin{python}
-for i in range(len(notes)):
+def moyenne(notes):
+    total = 0
+    for i in range(len(notes)):
+        total = total + notes[i]
+    return total / len(notes)
 \end{python}
 On aurait aussi pu écrire \lstinline{for note in notes:}, qui rend l'erreur
 impossible — les décalages d'indice n'existent que là où l'on manipule des
@@ -100,7 +105,8 @@ finie en base $2$, exactement comme $\tfrac13$ n'en a pas en base $10$. Chaque
 addition arrondit, et trois arrondis laissent un écart de l'ordre de $10^{-17}$.
 Le test correct compare à une tolérance :
 \begin{python}
-if abs(total - 0.3) < 1e-9:
+def objectif_atteint(total, objectif, tolerance=1e-9):
+    return abs(total - objectif) < tolerance
 \end{python}
 La règle générale est qu'on ne teste jamais l'égalité de deux nombres à virgule :
 on teste que leur écart est inférieur à une tolérance choisie en fonction de la

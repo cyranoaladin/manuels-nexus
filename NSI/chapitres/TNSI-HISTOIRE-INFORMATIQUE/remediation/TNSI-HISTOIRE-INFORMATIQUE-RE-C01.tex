@@ -1,0 +1,63 @@
+% META: {"id": "TNSI-HISTOIRE-INFORMATIQUE-RE-C01", "chapitre": "TNSI-HISTOIRE-INFORMATIQUE", "type_objet": "remediation", "capacites": ["T-HIST-01A"], "capacites_codes": ["C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C01 : confondre l'idee et la machine
+%---------------------------------------------------------------
+
+\begin{exercice}{TNSI-HIST-RE-C01-EX1}{1}{10}
+Un élève place, sur sa frise, la construction des premiers ordinateurs à
+programme enregistré \textbf{avant} la formalisation de la machine universelle
+par Alan Turing, au motif qu'« il faut bien une machine avant d'avoir une
+théorie ».
+\begin{enumerate}
+  \item Situer chacun des deux événements dans le temps, à la décennie près.
+  \item L'ordre proposé est-il le bon ? Citer un troisième repère, postérieur
+    aux deux premiers, et le placer.
+  \item Expliquer pourquoi une formalisation théorique peut précéder la machine
+    qui la réalise, alors que l'intuition inverse paraît naturelle.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% repere = {
+%     "machine universelle de Turing": 1936,
+%     "premiers ordinateurs a programme enregistre": 1948,
+%     "mise en service d'ARPANET": 1969,
+% }
+% ordre = sorted(repere, key=lambda evenement: repere[evenement])
+% assert ordre == ["machine universelle de Turing",
+%                  "premiers ordinateurs a programme enregistre",
+%                  "mise en service d'ARPANET"]
+% assert repere["machine universelle de Turing"] < repere["premiers ordinateurs a programme enregistre"]
+% assert repere["premiers ordinateurs a programme enregistre"] - repere["machine universelle de Turing"] == 12
+% assert repere["mise en service d'ARPANET"] - repere["premiers ordinateurs a programme enregistre"] == 21
+% assert 1930 <= repere["machine universelle de Turing"] < 1940
+% assert 1940 <= repere["premiers ordinateurs a programme enregistre"] < 1950
+% assert 1960 <= repere["mise en service d'ARPANET"] < 1970
+% END-VERIFY
+
+\begin{corrige}{TNSI-HIST-RE-C01-EX1}
+\textbf{1.} La machine universelle est formalisée par Turing en $1936$, dans les
+années trente ; les premiers ordinateurs à programme enregistré sont construits à
+la fin des années quarante, autour de $1948$.
+
+\textbf{2.} L'ordre proposé est \textbf{faux} : la formalisation précède les
+machines d'une douzaine d'années. Un troisième repère commode est la mise en
+service d'ARPANET, en $1969$, soit une vingtaine d'années après les premières
+machines. La frise correcte est donc : Turing ($1936$), premiers ordinateurs à
+programme enregistré ($1948$), ARPANET ($1969$).
+
+\textbf{3.} L'intuition « la machine d'abord, la théorie ensuite » vient de
+l'expérience courante des objets techniques, où l'on bricole avant de
+comprendre. Elle ne vaut pas ici, et pour une raison précise : Turing ne décrit
+pas un appareil, il décrit ce que \emph{signifie} calculer. Sa machine est un
+objet de papier, destiné à répondre à une question de logique — quels problèmes
+sont mécaniquement décidables — et non à être construite.
+
+Ce qui manquait dans les années trente n'était pas l'idée, mais l'électronique
+capable de la réaliser à une vitesse utile. Quand elle est apparue, les
+concepteurs disposaient déjà du cadre : programme et données logés dans la même
+mémoire, ce qui est exactement l'enseignement de la machine universelle. Retenir
+l'ordre inverse, ce n'est pas seulement se tromper de date, c'est manquer le fait
+que l'informatique est née d'une question de logique.
+\end{corrige}

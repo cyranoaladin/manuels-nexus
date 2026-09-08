@@ -18,19 +18,19 @@
 % def table_popularite(livres, emprunts):
 %     comptes = nombre_emprunts(emprunts)
 %     return [
-%         {"titre": l["titre"], "auteur": l["auteur"],
-%          "emprunts": comptes.get(l["isbn"], 0)}
-%         for l in livres
+%         {"titre": livre["titre"], "auteur": livre["auteur"],
+%          "emprunts": comptes.get(livre["isbn"], 0)}
+%         for livre in livres
 %     ]
 % table = table_popularite(livres, emprunts)
 % assert len(table) == len(livres) == 3
 % assert table[0] == {"titre": "Le Rivage", "auteur": "Diop", "emprunts": 2}
 % assert table[1] == {"titre": "Nuits blanches", "auteur": "Kane", "emprunts": 0}
 % assert table[2] == {"titre": "Sable", "auteur": "Diop", "emprunts": 1}
-% classement = sorted(table, key=lambda l: l["emprunts"], reverse=True)
-% assert [l["titre"] for l in classement] == ["Le Rivage", "Sable", "Nuits blanches"]
-% assert sum(l["emprunts"] for l in table if l["auteur"] == "Diop") == 3
-% assert sum(l["emprunts"] for l in table) == len(emprunts)
+% classement = sorted(table, key=lambda livre: livre["emprunts"], reverse=True)
+% assert [livre["titre"] for livre in classement] == ["Le Rivage", "Sable", "Nuits blanches"]
+% assert sum(livre["emprunts"] for livre in table if livre["auteur"] == "Diop") == 3
+% assert sum(livre["emprunts"] for livre in table) == len(emprunts)
 % END-VERIFY
 \begin{exercice}{1NSI-TAB-EX-006}{1}{18}
 Une bibliothèque conserve deux tables : le catalogue et le journal des emprunts.

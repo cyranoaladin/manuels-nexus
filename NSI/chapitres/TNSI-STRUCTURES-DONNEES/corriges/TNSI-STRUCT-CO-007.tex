@@ -3,13 +3,13 @@
 % bus = [[0, 1, 1, 0, 0], [1, 0, 0, 1, 0], [1, 0, 0, 1, 0],
 %        [0, 1, 1, 0, 1], [0, 0, 0, 1, 0]]
 % assert all(bus[i][j] == bus[j][i] for i in range(5) for j in range(5))
-% assert [sum(l) for l in bus] == [2, 2, 2, 3, 1]
-% assert sum(sum(l) for l in bus) == 10 == 2 * 5
+% assert [sum(ligne) for ligne in bus] == [2, 2, 2, 3, 1]
+% assert sum(sum(ligne) for ligne in bus) == 10 == 2 * 5
 % reseau = [[0, 1, 1, 0], [1, 0, 0, 0], [0, 0, 0, 1], [1, 0, 0, 0]]
 % assert reseau[0][1] == reseau[1][0] == 1
 % assert reseau[2][3] == 1 and reseau[3][2] == 0
 % assert not all(reseau[i][j] == reseau[j][i] for i in range(4) for j in range(4))
-% assert [sum(l) for l in reseau] == [2, 1, 1, 1]
+% assert [sum(ligne) for ligne in reseau] == [2, 1, 1, 1]
 % assert [sum(reseau[i][j] for i in range(4)) for j in range(4)] == [2, 1, 1, 1]
 % pondere = [[0, 7, 12, 0, 0], [7, 0, 0, 5, 0], [12, 0, 0, 4, 0],
 %            [0, 5, 4, 0, 9], [0, 0, 0, 9, 0]]
