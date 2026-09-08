@@ -1,0 +1,201 @@
+{
+  "artifact_type": "PRODSCAL_BOUNDED_LOT_D1_REVIEW",
+  "head_before_changes": "2a9a845c23e0de7c6732bf407875a2a2649631b1",
+  "head_at_recording": "2a9a845c23e0de7c6732bf407875a2a2649631b1",
+  "scope": "Exact working source digests, not a clean-HEAD certification. Three corrected sources only.",
+  "human_approval": false,
+  "independent_counter_review": "VALIDATED_BY_EVIDENCE",
+  "source_reviews": [
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/07_td_fil_rouge.tex",
+      "source_sha256": "sha256:b21914051f49efc1e706915eb261665c353305dc4eddd4c24af0ad2fa85f2f7f",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/07_td_fil_rouge.sympy.json",
+      "receipt_sha256": "sha256:5ba60dc413b402be7e8dbd7d9f4d4e0106a2a8e7d0eb1a7ee1b0101f6492c9a1",
+      "verdict": "pass",
+      "source_read_extent": "Entire current source and all companions actually read",
+      "author": "/root/astra_delta",
+      "independent_counter_review": "VALIDATED_BY_EVIDENCE by /root; no human approval",
+      "human_approval": false,
+      "scientific_reasoning": {
+        "real_gap": "No professor correction existed in the canonical 145-source chapter selection; this is a correction for an existing eleven-question task, not a new task or volume target.",
+        "answers": {
+          "Q1": "BA·BC=5×3cos120°=−15/2km²",
+          "Q2": "||BA+BC||²=25−15+9=19km²",
+          "Q3": "BA−BC=CA; squared norm49km²; AC7km",
+          "Q4": "Al-Kashi:AC²=25+9−30cos120°=49km²; positive length7km",
+          "Q5": "Agreement withQ3; both calculations use norm-square expansion",
+          "Q6": "AB·AC=AB²−BA·BC=65/2km²; divide by AB×AC35km² to obtain13/14",
+          "Q7": "Interior angle arccos(13/14)≈21.7867893°, rounded21.8°",
+          "Q8": "Withu=BA,v=BC,BD=u+v,AC=v−u; bilinear expansion cancelsmixedterms giving||v||²−||u||². Nonnegative lengths imply zero iffAB=BC. Given triangle9−25=−16km², so not orthogonal. Zero-vector case also mechanically probed for the algebraic identity.",
+          "Q9": "InteriorB120° haspositive sine√3/2; area15√3/4km²",
+          "Q10": "Lineheight h=2area/BC=5√3/2km",
+          "Q11": "Projectiont_H=−5/6 outside[0,1]. ForM=B+tBC,t∈[0,1],AM²=25+15t+9t²; differencefrom25 is3t(5+3t)≥0 with equalityonlyt0. UniqueclosestsegmentpointB, distance5km>5√3/2km. This is a proof overtheentiresegment, not numericalsampling."
+        },
+        "pedagogy": "Every printed question receives its own workedresponse. Q8 distinguishes the general equivalence from the particular unequal sides; Q11 distinguishes line from segment. No triangledata, duration or capacityquotas changed.",
+        "correction_routing": "Existing corrige environment bound to the TDobject ID, wrapped in existing ifnxVersionProfesseur; canonical student master also captures/discards corrige bodies. TemporaryactualTeX routingprobe succeeded."
+      }
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-009.tex",
+      "source_sha256": "sha256:dcfb5a870f878fc7955a825603fffcb7aa003c82fe881697b4017ac0cd2f3f85",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-009.sympy.json",
+      "receipt_sha256": "sha256:55325a991dfa66413e5a0d77f0fbb1f61a271f525b494fa1a82b52120e3cf736",
+      "verdict": "pass",
+      "source_read_extent": "Entire current source and all companions actually read",
+      "author": "/root/astra_delta",
+      "independent_counter_review": "VALIDATED_BY_EVIDENCE by /root; no human approval",
+      "human_approval": false,
+      "scientific_reasoning": {
+        "resolution": "A0,0 B6,0 C2,4 in explicitlyorthonormalframe; AB=(6,0),AC=(2,4),BC=(−4,4); products12,−24,8. AtC bothdirectionsnegated, so CA·CB=8. Norms6,2√5,4√2 givecosA1/√5,cosB1/√2,cosC1/√10; allpositive andless1. Angles≈63.4349488°,45°,71.5650512°. Their exactsum isπ bytriangle-angle theorem; numericalcalculation independentlychecked.",
+        "changes": "Read diacritics corrected; oracle nowactuallycomputes allthreevertexcosines and numericalanglechecks. Statementdata unchanged.",
+        "remaining_editorial_finding": "CLOSED_BY_METADATA_ALIGNMENT: duree_min10 equals the already printed10min; root explicitly authorized this metadata-only correction."
+      },
+      "previous_source_sha256": "sha256:d6335733d6126d2e69bcdde5968714c625ad2635fd71b5f54058c3657dba4194"
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-009.tex",
+      "source_sha256": "sha256:b4ace0e27d0472bcbaee989addd87b5067a1f0c7df55b0418f253968bfcebd77",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-009.sympy.json",
+      "receipt_sha256": "sha256:b7b61acb9ed2278f2a89268d84b4434a9704267e838f03524c05b19c0e389b57",
+      "verdict": "pass",
+      "source_read_extent": "Entire current source and all companions actually read",
+      "author": "/root/astra_delta",
+      "independent_counter_review": "VALIDATED_BY_EVIDENCE by /root; no human approval",
+      "human_approval": false,
+      "scientific_reasoning": {
+        "defect": "Printed cosC=−1/√10 falsely negated CA·CB when both vectorshadreversed.",
+        "resolution": "Bothdirectionreversalscancel:CA·CB=(−AC)·(−BC)=AC·BC=8, positive cosC1/√10. The correction nowstates this signreason explicitly.",
+        "pedagogy": "Q3 formerlysaid only Onvérifie. It nowgives allthree interioranglecalculations and checks their rounded sum180°. It distinguishes this numericcheckfromtheexacttheorem, avoiding an invented arctan prerequisite or numericalproof of ageneralclaim."
+      }
+    }
+  ],
+  "verification": {
+    "test": "tests/test_prodscal_td_and_triangle_corrections.py",
+    "test_sha256": "sha256:1e00765b1371f1b2348c3c9d7f7d66b6d1a7f3c011acec8cdb5f79ce90e98255",
+    "red": "8 failures against original sources, after fixing test import; /tmp/prodscal-D1-RED.log",
+    "green": "9 passed after metadata alignment",
+    "mutations": "Three real canonical-oracle mutations rejected: sum instead of difference in BD·AC; single reversal atC in statement/correction.",
+    "targeted_execution": {
+      "execution_root": "/tmp/nexus-prodscal-lot-d1-fresh-4nz0o2_d",
+      "command": [
+        "/usr/bin/python",
+        "/tmp/nexus-prodscal-lot-d1-fresh-4nz0o2_d/Mathematiques/manuel-maths/scripts/verify_sympy.py",
+        "--chap",
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "cwd": "/tmp/nexus-prodscal-lot-d1-fresh-4nz0o2_d",
+      "rc": 0,
+      "stdout": "[OK ] 1SPE-PRODSCAL-CO-009: \n[OK ] 07_td_fil_rouge: \n[OK ] 1SPE-PRODSCAL-EX-009: \n",
+      "stderr": "",
+      "network_denial": {
+        "mechanism": "libseccomp inherited syscall filter",
+        "probe_rc": 0,
+        "probe_stdout": "network syscalls refused for IPv4, IPv6 and Unix sockets\n"
+      },
+      "input_digests": {
+        "chapitres/1SPE-PRODUIT-SCALAIRE/cours/07_td_fil_rouge.tex": "sha256:b21914051f49efc1e706915eb261665c353305dc4eddd4c24af0ad2fa85f2f7f",
+        "chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-009.tex": "sha256:d6335733d6126d2e69bcdde5968714c625ad2635fd71b5f54058c3657dba4194",
+        "chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-009.tex": "sha256:b4ace0e27d0472bcbaee989addd87b5067a1f0c7df55b0418f253968bfcebd77",
+        "scripts/verify_sympy.py": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e",
+        "scripts/common.py": "sha256:f1dd76d4f5f354800fba1dc8ab84dfa3ab5c61b8f8f3093956d146195f520d0c"
+      },
+      "records": [
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/07_td_fil_rouge.tex",
+          "source_sha256": "sha256:b21914051f49efc1e706915eb261665c353305dc4eddd4c24af0ad2fa85f2f7f",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/07_td_fil_rouge.sympy.json",
+          "receipt_sha256": "sha256:5ba60dc413b402be7e8dbd7d9f4d4e0106a2a8e7d0eb1a7ee1b0101f6492c9a1",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-009.tex",
+          "source_sha256": "sha256:d6335733d6126d2e69bcdde5968714c625ad2635fd71b5f54058c3657dba4194",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-009.sympy.json",
+          "receipt_sha256": "sha256:ce0ba0e32760e11377f51f9a2f406eab35bd117193bd6ef391681e6f88084b37",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-009.tex",
+          "source_sha256": "sha256:b4ace0e27d0472bcbaee989addd87b5067a1f0c7df55b0418f253968bfcebd77",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-009.sympy.json",
+          "receipt_sha256": "sha256:b7b61acb9ed2278f2a89268d84b4434a9704267e838f03524c05b19c0e389b57",
+          "verdict": "pass"
+        }
+      ],
+      "human_approval": false,
+      "current_applicability": "Historical first D1 run; its TD and CO009 inputs remain current. EX009 metadata changed subsequently and its receipt is replaced by the explicitly listed metadata-only fresh run."
+    },
+    "tex_routing_development_fixture": {
+      "scope": "Temporary development TeX fixture using actual canonical render_master variant configuration and current full TD source; standard article only. Not a final manual/PDF or visual/hidden-object certification.",
+      "source_sha256": "b21914051f49efc1e706915eb261665c353305dc4eddd4c24af0ad2fa85f2f7f",
+      "assembler_sha256": "0b47740c97e5f6a8ac9a572df53764f3f9438f205f06a24525e5f29d89cd2c24",
+      "workdir": "/tmp/nexus-prodscal-D1-tex-routing-90t0tasq",
+      "observations": [
+        {
+          "variant": "eleve",
+          "rc": 0,
+          "config": "\\nxVersionProfesseurfalse\n\\RenewDocumentEnvironment{corrige}{m +b}{}{}\n\\renewcommand{\\baremeIndicatif}[1]{}\n",
+          "pdf_sha256": "8f9d18a5d56f95f15227f1747f94e5019c58d8ed4c2eb03ad1a7ecc6a9e6b1a0",
+          "correction_marker_present": false,
+          "printed_question8_and11": false
+        },
+        {
+          "variant": "professeur",
+          "rc": 0,
+          "config": "\\nxVersionProfesseurtrue\n",
+          "pdf_sha256": "789c114945e3af95f3d73aa76dff493f68b45797471cba95742ba71449b347b9",
+          "correction_marker_present": true,
+          "printed_question8_and11": true
+        }
+      ]
+    },
+    "lint": "ruff and git diff --check passed",
+    "duration_metadata_red": "One source-facing duration test failed5vs10 beforecorrection; /tmp/prodscal-D1-duration-RED.log",
+    "metadata_only_fresh_execution": {
+      "execution_root": "/tmp/nexus-prodscal-lot-d1-meta-fresh-y1yhgb56",
+      "command": [
+        "/usr/bin/python",
+        "/tmp/nexus-prodscal-lot-d1-meta-fresh-y1yhgb56/Mathematiques/manuel-maths/scripts/verify_sympy.py",
+        "--chap",
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "cwd": "/tmp/nexus-prodscal-lot-d1-meta-fresh-y1yhgb56",
+      "rc": 0,
+      "stdout": "[OK ] 1SPE-PRODSCAL-EX-009: \n",
+      "stderr": "",
+      "network_denial": {
+        "mechanism": "libseccomp inherited syscall filter",
+        "probe_rc": 0,
+        "probe_stdout": "network syscalls refused for IPv4, IPv6 and Unix sockets\n"
+      },
+      "input_digests": {
+        "chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-009.tex": "sha256:dcfb5a870f878fc7955a825603fffcb7aa003c82fe881697b4017ac0cd2f3f85",
+        "scripts/verify_sympy.py": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e",
+        "scripts/common.py": "sha256:f1dd76d4f5f354800fba1dc8ab84dfa3ab5c61b8f8f3093956d146195f520d0c"
+      },
+      "records": [
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-009.tex",
+          "source_sha256": "sha256:dcfb5a870f878fc7955a825603fffcb7aa003c82fe881697b4017ac0cd2f3f85",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-009.sympy.json",
+          "receipt_sha256": "sha256:55325a991dfa66413e5a0d77f0fbb1f61a271f525b494fa1a82b52120e3cf736",
+          "verdict": "pass"
+        }
+      ],
+      "human_approval": false
+    }
+  },
+  "remaining_limits": [
+    "No chapter-level review or capacitymapping closure.",
+    "No finalPDF visual/hidden-content certification or human approval.",
+    "TD navigation and remaining methodological/QCM hypotheses are separate bounded work."
+  ],
+  "counter_reviewer": "/root",
+  "counter_review_basis": "Root independently read all three source texts and eight scientific regressions and confirmed calculations, signs, Q8/Q11 proofs and all11answerbindings. Then explicitly authorized the duration metadata harmonization from5 to10; the displayed duration and all mathematical body text remain unchanged by this follow-up.",
+  "root_final_checks": {
+    "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/07_td_fil_rouge.tex": "Final source digest and canonical receipt binding checked after duration metadata change.",
+    "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-009.tex": "Final source digest and canonical receipt binding checked after duration metadata change.",
+    "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-009.tex": "Final source digest and canonical receipt binding checked after duration metadata change.",
+    "regressions": "9 passed in2.48s by root after final metadata change."
+  }
+}

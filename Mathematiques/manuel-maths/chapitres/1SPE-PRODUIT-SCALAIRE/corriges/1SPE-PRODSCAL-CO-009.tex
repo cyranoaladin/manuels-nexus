@@ -1,11 +1,26 @@
 % META: {"id":"1SPE-PRODSCAL-CO-009","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-009","status":"generated"}
 % BEGIN-VERIFY
-% from sympy import *
-% # A=(0,0), B=(6,0), C=(2,4)
-% # AB.AC = 6*2 + 0*4 = 12
-% assert 6*2 + 0*4 == 12
-% # AB.BC = 6*(-4) + 0*4 = -24
-% assert 6*(-4) + 0*4 == -24
+% from sympy import Matrix, sqrt, Rational, simplify, acos, pi, N
+% A, B, C = Matrix([0,0]), Matrix([6,0]), Matrix([2,4])
+% AB, AC, BC = B-A, C-A, C-B
+% CA, CB = A-C, B-C
+% assert AB.dot(AC) == 12
+% assert AB.dot(BC) == -24
+% assert AC.dot(BC) == 8
+% assert CA.dot(CB) == 8
+% cos_A = AB.dot(AC)/(AB.norm()*AC.norm())
+% cos_B = (-AB).dot(BC)/(AB.norm()*BC.norm())
+% cos_C = CA.dot(CB)/(CA.norm()*CB.norm())
+% assert simplify(cos_A - 1/sqrt(5)) == 0
+% assert simplify(cos_B - 1/sqrt(2)) == 0
+% assert simplify(cos_C - 1/sqrt(10)) == 0
+% assert all(0 < value < 1 for value in (cos_A,cos_B,cos_C))
+% angle_A, angle_B, angle_C = [acos(value) for value in (cos_A,cos_B,cos_C)]
+% assert angle_B == pi/4
+% # The angle sum is exact by the triangle-angle theorem; this checks the numerical calculation.
+% assert abs(N(angle_A+angle_B+angle_C-pi,30)) < Rational(1,10**25)
+% assert Rational(6335,100) < N(angle_A*180/pi,20) < Rational(6345,100)
+% assert Rational(7155,100) < N(angle_C*180/pi,20) < Rational(7165,100)
 % END-VERIFY
 \begin{corrige}{1SPE-PRODSCAL-EX-009}
 \begin{enumerate}
@@ -19,8 +34,19 @@ $\cos\widehat{A} = \dfrac{12}{6 \times 2\sqrt{5}} = \dfrac{1}{\sqrt{5}}$.
 
 $\cos\widehat{B} = \dfrac{\overrightarrow{BA} \cdot \overrightarrow{BC}}{\|\overrightarrow{BA}\| \|\overrightarrow{BC}\|} = \dfrac{24}{6 \times 4\sqrt{2}} = \dfrac{1}{\sqrt{2}}$.
 
-$\cos\widehat{C} = \dfrac{\overrightarrow{CA} \cdot \overrightarrow{CB}}{\|\overrightarrow{CA}\| \|\overrightarrow{CB}\|} = \dfrac{-8}{2\sqrt{5} \times 4\sqrt{2}} = \dfrac{-1}{\sqrt{10}}$.
+$\overrightarrow{CA}\cdot\overrightarrow{CB}
+=\overrightarrow{AC}\cdot\overrightarrow{BC}=8$ : changer le sens des deux vecteurs conserve leur produit scalaire.
 
-\item $\widehat{B} = \dfrac{\pi}{4}$. On vérifie que $\widehat{A} + \widehat{B} + \widehat{C} = \pi$.
+$\cos\widehat{C} = \dfrac{\overrightarrow{CA} \cdot \overrightarrow{CB}}{\|\overrightarrow{CA}\| \|\overrightarrow{CB}\|} = \dfrac{8}{2\sqrt{5} \times 4\sqrt{2}} = \dfrac{1}{\sqrt{10}}$.
+
+\item Les trois angles intérieurs appartiennent à $]0,\pi[$. On obtient
+\[
+\widehat A=\arccos\left(\frac1{\sqrt5}\right)\approx63{,}4^\circ,
+\quad \widehat B=\frac\pi4=45^\circ,
+\quad \widehat C=\arccos\left(\frac1{\sqrt{10}}\right)\approx71{,}6^\circ.
+\]
+La somme des valeurs arrondies est $63{,}4^\circ+45^\circ+71{,}6^\circ=180^\circ$.
+Ces calculs sont cohérents avec la relation exacte
+$\widehat A+\widehat B+\widehat C=\pi$, donnée par le théorème de la somme des angles d'un triangle.
 \end{enumerate}
 \end{corrige}

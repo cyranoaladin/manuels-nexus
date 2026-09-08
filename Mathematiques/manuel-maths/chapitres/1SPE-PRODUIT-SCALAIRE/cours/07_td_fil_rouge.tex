@@ -97,6 +97,11 @@
 % assert simplify(norm_AC**2 - 49) == 0  # AC = 7
 % cos_BAC = ps_AB_AC / (norm_AB * 7)
 % assert simplify(cos_BAC - Rational(13, 14)) == 0
+% x1, y1, x2, y2 = symbols('x1 y1 x2 y2', real=True)
+% u, v = Matrix([x1,y1]), Matrix([x2,y2])
+% bd_dot_ac = (u+v).dot(v-u)
+% assert expand(bd_dot_ac-(v.dot(v)-u.dot(u))) == 0
+% assert bd_dot_ac.subs({x1:5,y1:0,x2:-Rational(3,2),y2:3*sqrt(3)/2}) == -16
 % END-VERIFY
 
 \bigskip
@@ -136,3 +141,110 @@
 % assert (A-B).norm() == 5
 % assert h < 5
 % END-VERIFY
+
+\ifnxVersionProfesseur
+\begin{corrige}{1SPE-PRODSCAL-TD-FIL-ROUGE}
+\textbf{Question 1.}
+La définition géométrique donne
+\[
+\overrightarrow{BA}\cdot\overrightarrow{BC}
+=5\times3\cos\left(\frac{2\pi}{3}\right)
+=-\frac{15}{2}\ \text{km}^2.
+\]
+
+\textbf{Question 2.}
+Par développement de la norme au carré,
+\[
+\|\overrightarrow{BA}+\overrightarrow{BC}\|^2
+=25+2\left(-\frac{15}{2}\right)+9=19\ \text{km}^2.
+\]
+
+\textbf{Question 3.}
+De même,
+\[
+\|\overrightarrow{BA}-\overrightarrow{BC}\|^2
+=25-2\left(-\frac{15}{2}\right)+9=49\ \text{km}^2.
+\]
+Par Chasles, $\overrightarrow{BA}-\overrightarrow{BC}
+=\overrightarrow{CA}$ : la longueur $AC$ vaut donc $7$ km.
+
+\textbf{Question 4.}
+La formule d'Al-Kashi appliquée à l'angle en $B$ donne
+\[
+AC^2=AB^2+BC^2-2AB\times BC\cos\widehat{ABC}
+=25+9-30\left(-\frac12\right)=49\ \text{km}^2.
+\]
+Une longueur étant positive, $AC=7$ km.
+
+\textbf{Question 5.}
+On retrouve $AC^2=49$ km$^2$, comme dans la question 3.
+Les deux méthodes reposent sur le même développement du carré d'une norme.
+
+\textbf{Question 6.}
+Comme $\overrightarrow{AC}=\overrightarrow{AB}+\overrightarrow{BC}$ et
+$\overrightarrow{AB}=-\overrightarrow{BA}$,
+\[
+\overrightarrow{AB}\cdot\overrightarrow{AC}
+=AB^2-\overrightarrow{BA}\cdot\overrightarrow{BC}
+=25+\frac{15}{2}=\frac{65}{2}\ \text{km}^2.
+\]
+Les longueurs $AB$ et $AC$ sont non nulles, d'où
+$\cos\widehat{BAC}=\dfrac{65/2}{5\times7}=\dfrac{13}{14}$.
+
+\textbf{Question 7.}
+L'angle intérieur appartient à $]0,\pi[$. Ainsi,
+\[
+\widehat{BAC}=\arccos\left(\frac{13}{14}\right)
+\approx21{,}8^\circ.
+\]
+
+\textbf{Question 8.}
+Posons $\vec u=\overrightarrow{BA}$ et $\vec v=\overrightarrow{BC}$.
+Alors $\overrightarrow{BD}=\vec u+\vec v$ et
+$\overrightarrow{AC}=\vec v-\vec u$. Par bilinéarité et symétrie,
+\[
+\overrightarrow{BD}\cdot\overrightarrow{AC}
+=(\vec u+\vec v)\cdot(\vec v-\vec u)
+=\|\vec v\|^2-\|\vec u\|^2=BC^2-AB^2.
+\]
+Comme les longueurs sont positives,
+\[
+\overrightarrow{BD}\perp\overrightarrow{AC}
+\iff BC^2=AB^2\iff AB=BC.
+\]
+Dans le triangle donné, ce produit vaut $9-25=-16$ km$^2$ :
+les deux vecteurs ne sont donc pas orthogonaux.
+
+\textbf{Question 9.}
+L'angle intérieur en $B$ a un sinus positif. L'aire vaut
+\[
+\mathcal A=\frac12\times5\times3\sin\left(\frac{2\pi}{3}\right)
+=\frac{15\sqrt3}{4}\ \text{km}^2.
+\]
+
+\textbf{Question 10.}
+La hauteur est la distance de $A$ à la droite $(BC)$.
+Avec $\mathcal A=\frac12 BC\times h$, on obtient
+\[
+h=\frac{2\mathcal A}{BC}=\frac{5\sqrt3}{2}\ \text{km}.
+\]
+
+\textbf{Question 11.}
+Choisissons $B(0;0)$, $A(5;0)$ et
+$C(-3/2;3\sqrt3/2)$ dans le repère orthonormé d'unité 1 km.
+Le pied $H$ s'écrit $B+t_H\overrightarrow{BC}$ avec
+\[
+t_H=\frac{\overrightarrow{BA}\cdot\overrightarrow{BC}}{BC^2}
+=\frac{-15/2}{9}=-\frac{5}{6}<0.
+\]
+Il est donc sur la droite $(BC)$, mais hors du segment $[BC]$.
+Pour un point $M=B+t\overrightarrow{BC}$ du segment, $t\in[0,1]$ et
+\[
+AM^2=25+15t+9t^2,\qquad AM^2-AB^2=3t(5+3t)\geq0.
+\]
+L'égalité a lieu seulement pour $t=0$, donc pour $M=B$.
+Le point du segment le plus proche du refuge est $B$, à une distance de $5$ km.
+Cette distance est strictement supérieure à $h=5\sqrt3/2$ km :
+le pied $H$, qui minimise la distance à la droite, n'est pas sur le sentier.
+\end{corrige}
+\fi
