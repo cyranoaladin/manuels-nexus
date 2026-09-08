@@ -11,12 +11,35 @@
 %     if arbre.gauche is None and arbre.droite is None:
 %         return 1
 %     return compter_feuilles(arbre.gauche) + compter_feuilles(arbre.droite)
+% def taille(arbre):
+%     if arbre is None:
+%         return 0
+%     return 1 + taille(arbre.gauche) + taille(arbre.droite)
+% def prefixe(arbre):
+%     if arbre is None:
+%         return []
+%     return [arbre.valeur] + prefixe(arbre.gauche) + prefixe(arbre.droite)
 % arbre = Noeud(1, Noeud(2, Noeud(4), Noeud(5)), Noeud(3))
 % assert compter_feuilles(arbre) == 3
 % assert compter_feuilles(Noeud(1)) == 1
 % assert compter_feuilles(None) == 0
+% assert taille(arbre) == 5
+% assert taille(Noeud(1)) == 1 and taille(None) == 0
+% assert prefixe(arbre) == [1, 2, 4, 5, 3]
+% # Dans un arbre binaire, feuilles = noeuds a deux enfants + 1.
+% def deux_enfants(arbre):
+%     if arbre is None:
+%         return 0
+%     ici = 1 if arbre.gauche is not None and arbre.droite is not None else 0
+%     return ici + deux_enfants(arbre.gauche) + deux_enfants(arbre.droite)
+% assert deux_enfants(arbre) == 2
+% assert compter_feuilles(arbre) == deux_enfants(arbre) + 1
+% penche = Noeud(1, Noeud(2, Noeud(4), Noeud(5)), None)
+% assert compter_feuilles(penche) == 2 and deux_enfants(penche) == 1
+% assert compter_feuilles(penche) == deux_enfants(penche) + 1
 % END-VERIFY
 \begin{corrige}{TNSI-ALGO-EX-001}
+\textbf{1.} On compte les feuilles par récursion :
 \begin{python}
 def compter_feuilles(arbre):
     if arbre is None:
@@ -25,5 +48,38 @@ def compter_feuilles(arbre):
         return 1
     return compter_feuilles(arbre.gauche) + compter_feuilles(arbre.droite)
 \end{python}
-Cas de base : l'arbre vide n'a aucune feuille. Un nœud sans aucun enfant est lui-même une feuille (on renvoie $1$, sans appel récursif supplémentaire). Sinon, on additionne le nombre de feuilles des deux sous-arbres.
+Cas de base : l'arbre vide n'a aucune feuille. Un n\oe{}ud sans aucun enfant est
+lui-même une feuille (on renvoie $1$, sans appel récursif supplémentaire).
+Sinon, on additionne le nombre de feuilles des deux sous-arbres. Sur l'arbre
+proposé, on obtient $3$ : les n\oe{}uds $4$, $5$ et $3$.
+
+\textbf{2.} La taille compte tous les n\oe{}uds, y compris ceux qui ont des
+enfants :
+\begin{python}
+def taille(arbre):
+    if arbre is None:
+        return 0
+    return 1 + taille(arbre.gauche) + taille(arbre.droite)
+\end{python}
+L'arbre proposé a une taille de $5$.
+
+\textbf{3.} Les deux fonctions traitent le n\oe{}ud courant \textbf{avant} les
+deux appels récursifs — le $1$ de \lstinline{taille} et le test de feuille de
+\lstinline{compter_feuilles} précèdent la descente. C'est donc un parcours
+\textbf{préfixe}, qui visite ici les valeurs dans l'ordre
+$1$, $2$, $4$, $5$, $3$.
+
+Pour un simple comptage l'ordre est indifférent, puisque l'addition est
+commutative. Il cesserait de l'être si l'on construisait la liste des valeurs :
+un parcours infixe donnerait $4$, $2$, $5$, $1$, $3$ — et c'est le seul qui
+restitue un arbre binaire de recherche dans l'ordre croissant.
+
+\textbf{4.} L'arbre proposé a $3$ feuilles et $2$ n\oe{}uds à deux enfants : le
+nombre de feuilles vaut le nombre de n\oe{}uds à deux enfants plus un. Sur
+\lstinline{Noeud(1, Noeud(2, Noeud(4), Noeud(5)), None)}, on trouve $2$ feuilles
+et $1$ n\oe{}ud à deux enfants : la relation tient encore.
+
+Elle est générale pour tout arbre binaire non vide, et se démontre par
+récurrence : ajouter un second enfant à un n\oe{}ud qui n'en avait qu'un crée une
+feuille et un n\oe{}ud à deux enfants, donc préserve l'écart de un.
 \end{corrige}

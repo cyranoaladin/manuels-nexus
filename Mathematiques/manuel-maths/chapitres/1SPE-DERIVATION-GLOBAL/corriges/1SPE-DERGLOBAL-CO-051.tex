@@ -9,6 +9,15 @@
 % h = x**2 + x
 % h_neg = h.subs(x, -x)  # x^2 - x
 % assert h_neg != h and h_neg != -h
+% from sympy import diff, solve, simplify
+% fprime = diff(f, x)
+% assert simplify(fprime - 6*x) == 0
+% assert solve(fprime, x) == [0]
+% assert fprime.subs(x, -1) < 0 and fprime.subs(x, 1) > 0
+% assert f.subs(x, 0) == -5
+% # La derivee d'une fonction paire est impaire : le tableau est symetrique.
+% assert simplify(fprime.subs(x, -x) + fprime) == 0
+% assert f.subs(x, 2) == f.subs(x, -2)
 % END-VERIFY
 \begin{corrige}{1SPE-DERGLOBAL-EX-051}
 Chaque fonction est définie sur $\mathbb{R}$, domaine symétrique par rapport à $0$.
@@ -34,4 +43,25 @@ On a $h(-x) = x^2 - x
 \neq -(x^2 + x) = -x^2 - x = -h(x)$.
 
 Donc $h$ n'est \textbf{ni paire ni impaire}.
+
+\textbf{4.} $f'(x) = 6x$, qui s'annule en $0$, est négatif sur
+$\left]-\infty\,;\,0\right[$ et positif sur $\left]0\,;\,+\infty\right[$. La
+fonction $f$ est donc décroissante sur $\left]-\infty\,;\,0\right]$ puis
+croissante sur $\left[0\,;\,+\infty\right[$, avec un minimum $f(0) = -5$.
+
+\textbf{5.} Oui, le tableau est symétrique par rapport à la colonne de $0$ : la
+décroissance à gauche répond exactement à la croissance à droite, et
+$f(-2) = f(2) = 7$.
+
+Ce n'est pas une coïncidence. Dériver une fonction paire donne une fonction
+impaire : de $f(-x) = f(x)$ on tire, en dérivant les deux membres,
+$-f'(-x) = f'(x)$, c'est-à-dire $f'(-x) = -f'(x)$ — ce qu'on vérifie ici sur
+$f'(x) = 6x$. Le signe de $f'$ s'inverse donc en même temps que celui de $x$,
+et le sens de variation avec lui.
+
+L'économie est réelle : pour une fonction paire, il suffit d'étudier les
+variations sur $\left[0\,;\,+\infty\right[$ et de compléter le tableau par
+symétrie. C'est la moitié du travail — et sur une fonction impaire, le même
+raisonnement montre que le sens de variation, lui, se \emph{conserve} par
+symétrie.
 \end{corrige}

@@ -17,5 +17,20 @@
 % assert compter_feuilles(None) == 0
 % END-VERIFY
 \begin{exercice}{TNSI-ALGO-EX-001}{1}{15}
-Écrire une fonction récursive \lstinline{compter_feuilles(arbre)} qui renvoie le nombre de \textbf{feuilles} (nœuds sans enfant) d'un arbre binaire représenté avec la classe \lstinline{Noeud} du cours. Tester sur l'arbre \lstinline{Noeud(1, Noeud(2, Noeud(4), Noeud(5)), Noeud(3))}, qui possède 3 feuilles.
+On travaille sur l'arbre binaire
+\lstinline{Noeud(1, Noeud(2, Noeud(4), Noeud(5)), Noeud(3))}, représenté avec la
+classe \lstinline{Noeud} du cours.
+\begin{enumerate}
+  \item Écrire une fonction récursive \lstinline{compter_feuilles(arbre)} qui
+    renvoie le nombre de \textbf{feuilles} (n\oe{}uds sans enfant). Vérifier
+    qu'elle renvoie $3$ sur l'arbre ci-dessus.
+  \item Écrire de même \lstinline{taille(arbre)}, qui compte \textbf{tous} les
+    n\oe{}uds. Donner la taille de l'arbre ci-dessus.
+  \item Les deux fonctions visitent exactement les mêmes n\oe{}uds. Dans quel
+    ordre le font-elles — infixe, préfixe ou suffixe ? Justifier à partir de la
+    place du traitement par rapport aux deux appels récursifs.
+  \item Quelle relation lie, pour cet arbre, le nombre de feuilles et le nombre
+    de n\oe{}uds ayant deux enfants ? Vérifier qu'elle tient aussi sur l'arbre
+    \lstinline{Noeud(1, Noeud(2, Noeud(4), Noeud(5)), None)}.
+\end{enumerate}
 \end{exercice}
