@@ -321,31 +321,26 @@ def test_the_chapters_without_official_wording_are_the_ones_we_know(
     assert portant == attendus
 
 
-def test_no_1spe_qcm_question_is_left_to_a_human_any_more(
-    rendered: dict[Path, str],
-) -> None:
-    """Q16 etait la derniere : elle se tranche desormais en executant le code.
+def test_referential_qcm_without_general_proof_remains_in_review() -> None:
+    """Three matching executions do not close a general parameter-role claim.
 
-    La question demandait ce que designe `n` dans `simuler_variable(n, graine)`.
-    Aucune famille mathematique generique ne modelisait cet enonce, et la
-    machine s'en remettait a l'humain. Le chapitre imprime pourtant le
-    programme : l'executer suffit -- pour n valant 3, 5 puis 11, il rend un
-    echantillon de longueur exactement n. Chaque vue doit donc dire qu'elle
-    n'a plus rien a router.
+    Check the exact current question and its route. A stale stored assertion of
+    zero remaining reviews must fail until the evidence/view chain is rebuilt.
+    This scientific debt is separate from final human approval.
     """
+    from scripts import qcm_independent_solver as solver
 
+    chapter = "1SPE-VARIABLES-ALEATOIRES"
+    question_id = "Q16"
+    source = ROOT / "Mathematiques/manuel-maths/chapitres" / chapter / "qcm/1SPE-VARALEA-QCM.json"
+    question = next(q for q in json.loads(source.read_text())["questions"] if q["id"] == question_id)
+    result = solver.solve(solver.sanitize_canonical(question))
+    assert result.status == "NOT_MACHINE_RESOLVABLE"
+    assert result.unique_answer is None
     evidence = json.loads(PRODUCER.QCM_EVIDENCE.read_text(encoding="utf-8"))
-    routed = [
-        question
-        for question in evidence["questions"]
-        if question["chapter"].startswith("1SPE-") and question["human_review_required"]
-    ]
-    assert routed == []
-    for chapter in PRODUCER.chapter_ids():
-        content = rendered[
-            PRODUCER.REVIEWS / chapter / f"view-A-{PRODUCER.ROLE_A}.md"
-        ]
-        assert "Aucune question de ce chapitre n'est routee" in content, chapter
+    rows = [q for q in evidence["questions"] if (q["chapter"], q["question_id"]) == (chapter, question_id)]
+    assert len(rows) == 1
+    assert rows[0]["human_review_required"] is True, "stale code-role proof must not close current scientific review"
 
 
 def test_declared_answer_keys_never_leak_into_a_view(

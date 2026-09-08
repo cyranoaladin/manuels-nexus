@@ -1,0 +1,74 @@
+{
+  "artifact_type": "development_qa_correction_log",
+  "schema_version": 1,
+  "approves_nothing": true,
+  "observed_head": "5d0ee94defa503039734d6c5f84e68ab4c6f2074",
+  "worktree_observation": true,
+  "sources": [
+    {
+      "path": "scripts/qcm_independent_solver.py",
+      "before_head": "5d0ee94defa503039734d6c5f84e68ab4c6f2074",
+      "before_sha256": "940541758499e6c40b0bf1595f06064fa90b1fc05109cff63fb5cdc6b53b489e",
+      "after_sha256": "fc2c46e91d5f1856367c223155108ca64e1b5b5dccb3277d7b560ee66cc42395"
+    },
+    {
+      "path": "tests/test_qcm_published_function_abstention.py",
+      "before_head": "5d0ee94defa503039734d6c5f84e68ab4c6f2074",
+      "before_sha256": null,
+      "after_sha256": "4a3068e39c2b482d647a55eb1649a3e1ae11cfae9ae8dadaba2ce5e47eb483f9"
+    },
+    {
+      "path": "tests/test_human_review_reading_views.py",
+      "before_head": "5d0ee94defa503039734d6c5f84e68ab4c6f2074",
+      "before_sha256": "70eac913f3a7ebbc85e44d56aa7039aa16bc7141606e11b5f660084ed5540fbd",
+      "after_sha256": "1a6721fe4d9758b9484be7387be2d942a6b68b9a2bf9f10c7ffa7665a35848d2"
+    }
+  ],
+  "finding": {
+    "id": "QCM-CURRENT-QA-006",
+    "severity": "PRODUCT_P0",
+    "before": "Global function-name lookup across chapters, no code digest, in-process execution, and a general parameter-role key inferred from three samples.",
+    "after": "Referential family returns NOT_MACHINE_RESOLVABLE with explicit missing context/general argument. No source search or execution occurs; no key or option truth is granted.",
+    "regression_scope": "Temporary homonymous chapter functions; absent context; code mutation with a branch after sample inputs; actual current VARALEA/Q16. RED probes substitute a controlled test callable for exec, so no printed source text is executed.",
+    "status": "CORRECTED_INDEPENDENTLY_VERIFIED_BY_ROOT"
+  },
+  "test_evidence": {
+    "red_log": "/tmp/qcm-published-function-red.log",
+    "red_sha256": "ab1432ae4d78a44b16419112aa577f31a5042675ace8b3d233257cbe2e7a9678",
+    "red_failures": 4,
+    "junit": "/tmp/qcm-published-solver-targeted.xml",
+    "junit_sha256": "4908f8af7b616b944ef7d4059ac7175c85738ae889c2acdf3b9c32492aa54120",
+    "passed": 53,
+    "failed": 0
+  },
+  "expected_stale_failure": {
+    "test": "tests/test_human_review_reading_views.py::test_referential_qcm_without_general_proof_remains_in_review",
+    "result": "FAIL_STALE_AGGREGATE",
+    "reason": "Stored V2 still says human_review_required=false for VARALEA/Q16; current solver has no general proof. No report or human packet was rewritten."
+  },
+  "limits": [
+    "No current source review or human approval is granted.",
+    "No automatic code execution was added. Actual future code review must use the existing confinement and explicit bound sources.",
+    "QCM-CURRENT-QA-010 method/dependency proof binding remains a separate open follow-up."
+  ],
+  "review_status": "BOUNDED_QA_INDEPENDENTLY_REVIEWED; OTHER_SOLVER_FINDINGS_OPEN",
+  "root_counter_review": {
+    "reviewer": "/root",
+    "head": "2c6fc071fc6b386ac9d4a168627e7d2aa01f3b5d",
+    "scope": "Read the complete diff, removed repository-wide lookup and in-process execution, current abstention function, public solve dispatch, all four new regression cases, and the replaced historical zero-review assertion. No usable program provenance is supplied by a function name. A function returning n items at3,5,11 but n+1 at12 is a concrete counterexample to the removed general inference.",
+    "tests": {
+      "command": "python -m pytest -q tests/test_qcm_published_function_abstention.py tests/test_qcm_independent_solver.py",
+      "passed": 53,
+      "failed": 0,
+      "duration_seconds": 1.98
+    },
+    "stale_check": {
+      "command": "python -m pytest -q tests/test_human_review_reading_views.py::test_referential_qcm_without_general_proof_remains_in_review",
+      "rc": 1,
+      "failed": 1,
+      "reason": "Current solver correctly abstains, while stored V2 still declares human_review_required=false. The stale aggregate has not been rewritten."
+    },
+    "limits": "No general certification of other solver families. Method/source binding and the newly detected six-sided-die assumption remain separate open work. The current parameter-role question needs an actual source-bound scientific/code review; no human approval is minted.",
+    "human_approval": false
+  }
+}
