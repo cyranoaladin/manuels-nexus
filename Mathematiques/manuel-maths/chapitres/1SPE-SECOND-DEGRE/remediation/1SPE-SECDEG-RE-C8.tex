@@ -1,0 +1,67 @@
+% META: {"id": "1SPE-SECDEG-RE-C8", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "remediation", "capacites_codes": ["C8"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C8
+% Le signe d'un trinome factorise : la regle porte sur le signe de a
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-RE-C8-EX1}{1}{10}
+Un élève retient la règle sous la forme : « un trinôme est positif à l'extérieur
+des racines et négatif entre les racines ». Il l'applique à
+$f(x) = -2(x - 1)(x + 3)$ et conclut que $f(x) > 0$ pour $x < -3$ ou $x > 1$.
+\begin{enumerate}
+  \item Calculer $f(2)$ et $f(0)$. La conclusion de l'élève tient-elle ?
+  \item Énoncer correctement la règle, en faisant apparaître le coefficient $a$.
+  \item Dresser le tableau de signes de $f$ sur $\mathbb{R}$ et résoudre
+    $f(x) > 0$.
+  \item Appliquer la même méthode à $g(x) = 2(x - 1)(x + 3)$ et comparer les
+    deux ensembles de solutions.
+  \item Dans quel cas la règle de l'élève donne-t-elle malgré tout la bonne
+    réponse ? Pourquoi vaut-il mieux ne pas s'y fier ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solveset, S, Interval, Union, oo
+% x = symbols('x', real=True)
+% f = -2 * (x - 1) * (x + 3)
+% g = 2 * (x - 1) * (x + 3)
+% assert f.subs(x, 2) == -10 and f.subs(x, 0) == 6
+% assert solveset(f > 0, x, domain=S.Reals) == Interval.open(-3, 1)
+% assert solveset(g > 0, x, domain=S.Reals) == Union(
+%     Interval.open(-oo, -3), Interval.open(1, oo))
+% assert solveset(f > 0, x, domain=S.Reals) != solveset(g > 0, x, domain=S.Reals)
+% assert f.subs(x, -3) == 0 and f.subs(x, 1) == 0
+% assert g.subs(x, 0) == -6 and g.subs(x, 2) == 10
+% # La regle de l'eleve ne tombe juste que si a est positif.
+% assert solveset(g > 0, x, domain=S.Reals) == Union(
+%     Interval.open(-oo, -3), Interval.open(1, oo))
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-RE-C8-EX1}
+\textbf{1.} $f(2) = -2 \times 1 \times 5 = -10$, donc $f$ est \emph{négative} en
+$2$, qui est pourtant à l'extérieur des racines. Et
+$f(0) = -2 \times (-1) \times 3 = 6$, donc $f$ est \emph{positive} en $0$, qui
+est entre les racines. La conclusion de l'élève est exactement inversée.
+
+\textbf{2.} La règle correcte est : un trinôme est du \textbf{signe de $a$} à
+l'extérieur des racines, et du \textbf{signe contraire} entre les racines. Le
+mot « positif » n'y figure pas : il n'est vrai que lorsque $a > 0$.
+
+\textbf{3.} Ici $a = -2 < 0$ et les racines sont $-3$ et $1$. Donc $f$ est
+négative sur $\left]-\infty\,;\,-3\right[$, positive sur
+$\left]-3\,;\,1\right[$, négative sur $\left]1\,;\,+\infty\right[$, nulle en
+$-3$ et en $1$. La solution de $f(x) > 0$ est $\left]-3\,;\,1\right[$.
+
+\textbf{4.} Pour $g(x) = 2(x-1)(x+3)$, les racines sont les mêmes mais
+$a = 2 > 0$ : $g$ est positive à l'extérieur des racines, et
+$g(x) > 0$ pour $x < -3$ ou $x > 1$. Les deux ensembles sont
+\emph{complémentaires} l'un de l'autre, aux racines près — et on vérifie
+$g(0) = -6 < 0$ contre $f(0) = 6 > 0$.
+
+\textbf{5.} Elle donne la bonne réponse exactement quand $a > 0$, ce qui est
+fréquent dans les exercices d'entraînement — et c'est précisément ce qui la rend
+dangereuse : elle réussit assez souvent pour paraître vraie, et échoue sans
+prévenir dès qu'un signe moins apparaît devant les parenthèses. Une règle qui
+marche une fois sur deux n'est pas une règle : c'est un pari.
+\end{corrige}

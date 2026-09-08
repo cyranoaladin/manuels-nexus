@@ -118,8 +118,19 @@ def contract_capacities() -> list[dict[str, Any]]:
                 {
                     "chapter": contract.parent.name,
                     "code": capacity["code"],
-                    "id": capacity["ref_capacite"],
-                    "origin": capacity.get("origine", "CAPACITE_OFFICIELLE"),
+                    # UNE CAPACITE PEUT N'AVOIR AUCUNE REFERENCE OFFICIELLE.
+                    # Trois capacites du second degre sont dans ce cas : le
+                    # referentiel local du chapitre ne compte que cinq atomes
+                    # quand le contrat en enseigne huit. Lire la cle sans
+                    # defaut faisait exploser le producteur, ce qui masquait la
+                    # question au lieu de la poser. On la porte donc dans la
+                    # ligne, et la fermeture la comptera pour ce qu'elle est.
+                    "id": capacity.get("ref_capacite"),
+                    "origin": capacity.get(
+                        "origine",
+                        "CAPACITE_OFFICIELLE" if capacity.get("ref_capacite")
+                        else "CAPACITE_SANS_REFERENCE_OFFICIELLE",
+                    ),
                     "libelle_eleve": capacity["libelle_eleve"],
                     "rubrique_officielle": capacity.get("rubrique_officielle"),
                 }

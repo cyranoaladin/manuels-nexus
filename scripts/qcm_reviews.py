@@ -4494,43 +4494,14 @@ def _cours_maths(chapitre: str, fichier: str) -> str:
 _SECDEG = "1SPE-SECOND-DEGRE"
 
 
-@mecanique(_SECDEG, "Q19", SYMBOLIC)
-def _secdeg_q19(options):
-    """Somme et produit des racines de a(x+1)(x-4), calculés puis rapprochés."""
-    from sympy import Poly, Rational, expand, symbols
-
-    x, a = symbols("x a")
-    polynome = Poly(expand(a * (x + 1) * (x - 4)), x)
-    coefficients = polynome.all_coeffs()          # [a2, a1, a0]
-    somme = -coefficients[1] / coefficients[0]
-    produit = coefficients[2] / coefficients[0]
-    assert somme == 3 and produit == -4
-    # Les quatre options sont rendues AVANT de savoir laquelle est vraie : la
-    # dérivation choisit celle qui porte le couple calculé.
-    rendus = {
-        (3, -4): "$S=3$ et $P=-4$",
-        (3, 4): "$S=3$ et $P=4$",
-        (-3, -4): "$S=-3$ et $P=-4$",
-        (-3, 4): "$S=-3$ et $P=4$",
-    }
-    attendu = rendus[(int(somme), int(produit))]
-    assert Rational(int(somme)) == somme
-    return _lettre(options, lambda texte: texte.strip() == attendu)
-
-
-@mecanique(_SECDEG, "Q20", SYMBOLIC)
-def _secdeg_q20(options):
-    """Signe de -2(x-1)(x+3) : l'ensemble de positivité est résolu sur R."""
-    from sympy import Interval, S, solveset, symbols
-
-    x = symbols("x", real=True)
-    f = -2 * (x - 1) * (x + 3)
-    positif = solveset(f > 0, x, domain=S.Reals)
-    assert positif == Interval.open(-3, 1)
-    assert positif != S.Reals and positif != S.EmptySet
-    # L'extérieur des racines est l'autre candidat : on vérifie qu'il est faux.
-    assert f.subs(x, 2) < 0 and f.subs(x, -4) < 0 and f.subs(x, 0) > 0
-    return _lettre(options, lambda texte: texte.strip() == "pour $-3<x<1$")
+# Q19 et Q20 avaient chacune leur derivation ecrite ici, question par
+# question. Deux familles GENERIQUES du solveur independant les couvrent
+# desormais -- `SUM_AND_PRODUCT_OF_ROOTS` et `FACTORED_QUADRATIC_SIGN` --, et
+# une famille generique vaut mieux qu'une derivation sur mesure : la premiere
+# se trompe visiblement sur tout un genre d'enonces, la seconde ne peut se
+# tromper que discretement, sur le sien. Les deux derivations sont donc
+# retirees, non pas parce qu'elles etaient fausses, mais parce qu'une preuve
+# qui ne vaut que pour une question ne prouve pas grand-chose du procede.
 
 
 # ── TCOMPL-ECHANTILLONNAGE ────────────────────────────────────────────────

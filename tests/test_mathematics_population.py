@@ -44,12 +44,29 @@ def test_object_and_chapter_populations_are_not_conflated(summary) -> None:
 
 
 def test_stored_receipts_never_exceed_executed_objects(summary) -> None:
-    """Un reçu conservé suppose une exécution ; l'inverse n'est pas vrai."""
-    assert summary["STORED_SYMPY_RECEIPTS"] <= summary["FORMAL_ASSERTION_OBJECTS"]
-    assert summary["EXECUTED_BUT_UNRECEIPTED"] == (
-        summary["FORMAL_ASSERTION_OBJECTS"] - summary["STORED_SYMPY_RECEIPTS"]
+    """Un reçu conservé suppose une exécution ; l'inverse n'est pas vrai.
+
+    On ne compare que les reçus qui attestent une EXECUTION. Le verificateur
+    depose aussi un reçu `manual_review` pour chaque objet sans bloc de
+    verification : le compter ici ferait passer pour des preuves des objets
+    dont il constate justement qu'ils n'en portent pas.
+    """
+
+    assert summary["EXECUTED_RECEIPTS"] == (
+        summary["RECEIPT_PASS"] + summary["RECEIPT_FAIL"]
     )
-    assert summary["EXECUTED_BUT_UNRECEIPTED"] >= 0
+    assert summary["STORED_SYMPY_RECEIPTS"] == (
+        summary["EXECUTED_RECEIPTS"] + summary["RECEIPT_MANUAL_REVIEW"]
+    )
+    # L'invariant qui compte n'est pas une inegalite entre deux comptages
+    # etablis sur des populations differentes -- l'un par objet d'inventaire,
+    # l'autre par chapitre. C'est qu'AUCUN recu ne survive a sa source :
+    # quatre l'avaient fait, pour des exercices de trigonometrie supprimes,
+    # et ils certifiaient du vide depuis.
+    assert summary["RECEIPTS_WITHOUT_LIVE_SOURCE"] == 0
+    assert summary["EXECUTED_BUT_UNRECEIPTED"] == (
+        summary["FORMAL_ASSERTION_OBJECTS"] - summary["EXECUTED_RECEIPTS"]
+    )
 
 
 def test_receipt_verdicts_add_up(summary) -> None:

@@ -115,39 +115,57 @@ Cet ordre est un fait d'assemblage, pas un jugement : sa pertinence pedagogique 
 
 Le registre `audit/1SPE_MANUAL_REVIEW_DISPOSITION_LEDGER.json` classe chaque objet du manuel. Ceux qui portent la disposition `SCIENCE_HUMAINE_REQUISE` contiennent des affirmations calculables qu'aucune preuve machine n'etablit : ce sont eux que la lecture scientifique doit atteindre en priorite.
 
-7 objets pour ce chapitre, regroupes par famille scientifique — la capacite du referentiel du depot, avec son libelle BO — puis par type d'objet.
+9 objets pour ce chapitre, regroupes par famille scientifique — la capacite du referentiel du depot, avec son libelle BO — puis par type d'objet.
+
+### Famille `C1` — Calculer la dérivée de fonctions de référence : x^n, 1/x, racine(x).
+
+Capacite eleve : « Je sais dériver les fonctions de référence (puissances, inverse, racine carrée). »
+
+1 objet · 14 affirmations calculables sans preuve machine.
+
+- **`methode`** — 1 objet, 14 affirmations a verifier :
+    - `1SPE-DERGLOBAL-ME-001` (14 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-001.tex`
 
 ### Famille `C2` — Calculer la dérivée d'une somme, d'un produit par un réel, d'un produit, d'un quotient de fonctions dérivables.
 
 Capacite eleve : « Je sais utiliser les règles de dérivation (somme, produit, quotient). »
 
-1 objet · 42 affirmations calculables sans preuve machine.
+1 objet · 8 affirmations calculables sans preuve machine.
 
-- **`cours`** — 1 objet, 42 affirmations a verifier :
-    - `1SPE-DERGLOBAL-COURS-C2` (42 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/11_C2_regles_derivation.tex`
+- **`methode`** — 1 objet, 8 affirmations a verifier :
+    - `1SPE-DERGLOBAL-ME-002` (8 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-002.tex`
+
+### Famille `C3` — Exploiter le lien entre le signe de la dérivée et le sens de variation d'une fonction.
+
+Capacite eleve : « Je sais utiliser le signe de la dérivée pour dresser le tableau de variations. »
+
+1 objet · 12 affirmations calculables sans preuve machine.
+
+- **`methode`** — 1 objet, 12 affirmations a verifier :
+    - `1SPE-DERGLOBAL-ME-003` (12 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-003.tex`
 
 ### Famille `C4` — Déterminer les extremums d'une fonction polynôme de degré 3.
 
 Capacite eleve : « Je sais trouver les extremums d'une fonction en annulant sa dérivée. »
 
-5 objets · 32 affirmations calculables sans preuve machine.
+5 objets · 14 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 4 objets, 4 affirmations a verifier :
     - `1SPE-DERGLOBAL-EX-031-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-031-CDP.tex`
     - `1SPE-DERGLOBAL-EX-032-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-032-CDP.tex`
     - `1SPE-DERGLOBAL-EX-033-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-033-CDP.tex`
     - `1SPE-DERGLOBAL-EX-034-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-034-CDP.tex`
-- **`cours`** — 1 objet, 28 affirmations a verifier :
-    - `1SPE-DERGLOBAL-COURS-C4` (28 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/13_C4_extremums.tex`
+- **`methode`** — 1 objet, 10 affirmations a verifier :
+    - `1SPE-DERGLOBAL-ME-004` (10 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-004.tex`
 
 ### Famille `C5` — Résoudre un problème d'optimisation.
 
 Capacite eleve : « Je sais modéliser et résoudre un problème d'optimisation à l'aide de la dérivation. »
 
-1 objet · 28 affirmations calculables sans preuve machine.
+1 objet · 9 affirmations calculables sans preuve machine.
 
-- **`cours`** — 1 objet, 28 affirmations a verifier :
-    - `1SPE-DERGLOBAL-COURS-C5` (28 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/14_C5_optimisation.tex`
+- **`methode`** — 1 objet, 9 affirmations a verifier :
+    - `1SPE-DERGLOBAL-ME-005` (9 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-005.tex`
 
 ## 5. Question de QCM routee vers l'humain
 
@@ -161,7 +179,7 @@ Ces mesures viennent de `audit/PUBLISH_READINESS_CHAPTER_MATRIX.json`. Elles ne 
 | --- | --- |
 | Etat machine vertical | `MACHINE_REVIEW_COMPLETE` |
 | Cloture humaine | `PENDING` |
-| Objets passes par l'oracle | 124 reussites, 0 echecs, 8 en science humaine requise, 22 en revue manuelle |
+| Objets passes par l'oracle | 127 reussites, 0 echecs, 10 en science humaine requise, 24 en revue manuelle |
 | Attendus officiels obligatoires | 16 rattaches sur 16, 0 manquants, 0 hors annee |
 | Sujets d'evaluation | 2 sujets, 2 corriges, statut `COMPLETE` |
 | QCM | 15 questions, capacites evaluees C1, C2, C3, C4, C5 |

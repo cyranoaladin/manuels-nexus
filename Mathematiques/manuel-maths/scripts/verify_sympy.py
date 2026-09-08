@@ -61,7 +61,12 @@ def run_sandbox(script: str, timeout: int = 30) -> tuple[str, str]:
 def verify_chapter(chap: str) -> int:
     chap_dir = ROOT / "chapitres" / chap
     failures = 0
-    tex_dirs = ["exercices", "corriges", "evaluations", "remediation", "cours", "qcm"]
+    # Les fiches methode portent des blocs de verification depuis toujours ;
+    # ce repertoire manquait a la liste, si bien que quatre-vingt-dix-huit
+    # oracles ecrits n'etaient jamais executes. Un oracle qu'on n'execute pas
+    # ne prouve rien -- il rassure, ce qui est pire.
+    tex_dirs = ["exercices", "corriges", "evaluations", "remediation", "cours",
+                "qcm", "methodes"]
     all_tex = []
     for d in tex_dirs:
         sub = chap_dir / d

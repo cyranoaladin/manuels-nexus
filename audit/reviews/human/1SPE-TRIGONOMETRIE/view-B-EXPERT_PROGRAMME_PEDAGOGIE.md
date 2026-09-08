@@ -108,10 +108,10 @@ Libelle BO : Connaître le cercle trigonométrique, la mesure en radian, les ang
 
 | Role pedagogique | Corps rattaches | Objets contributeurs |
 | --- | --- | --- |
-| corriges | 12 | `1SPE-TRIGO-CO-001..010`, `1SPE-TRIGO-CO-021..022` |
+| corriges | 8 | `1SPE-TRIGO-CO-001..006`, `1SPE-TRIGO-CO-021..022` |
 | cours | 1 | `1SPE-TRIGO-CR-010` |
 | evaluations | 2 | `1SPE-TRIGO-EV-A`, `1SPE-TRIGO-EV-B` |
-| exercices | 12 | `1SPE-TRIGO-EX-001..010`, `1SPE-TRIGO-EX-021..022` |
+| exercices | 8 | `1SPE-TRIGO-EX-001..006`, `1SPE-TRIGO-EX-021..022` |
 | methodes | 1 | `1SPE-TRIGO-ME-001` |
 | QCM | 8 | `Q1..3`, `Q7..9`, `Q10`, `Q15` |
 | remediation | 1 | `1SPE-TRIGO-RE-C1` |
@@ -143,10 +143,10 @@ Libelle BO : Connaître et utiliser cos et sin (relation fondamentale, valeurs r
 
 | Role pedagogique | Corps rattaches | Objets contributeurs |
 | --- | --- | --- |
-| corriges | 10 | `1SPE-TRIGO-CO-011..018`, `1SPE-TRIGO-CO-020`, `1SPE-TRIGO-CO-023` |
+| corriges | 2 | `1SPE-TRIGO-CO-016`, `1SPE-TRIGO-CO-023` |
 | cours | 1 | `1SPE-TRIGO-CR-011` |
 | evaluations | 2 | `1SPE-TRIGO-EV-A`, `1SPE-TRIGO-EV-B` |
-| exercices | 10 | `1SPE-TRIGO-EX-011..018`, `1SPE-TRIGO-EX-020`, `1SPE-TRIGO-EX-023` |
+| exercices | 2 | `1SPE-TRIGO-EX-016`, `1SPE-TRIGO-EX-023` |
 | methodes | 1 | `1SPE-TRIGO-ME-002` |
 | QCM | 7 | `Q4..6`, `Q11..14` |
 | remediation | 1 | `1SPE-TRIGO-RE-C2` |

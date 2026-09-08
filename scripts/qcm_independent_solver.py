@@ -936,6 +936,139 @@ def _polynomial_local_extrema(inp: SolverInput) -> SolverResult | None:
     )
 
 
+
+def _factored_quadratic(statement: str):
+    """Le trinome ecrit sous forme factorisee, s'il y en a un.
+
+    Rend le couple (coefficient dominant, racines triees). On ne lit que ce
+    qui est ecrit : un enonce qui donne `-2(x-1)(x+3)` livre son coefficient
+    et ses racines sans qu'aucune reponse n'ait a etre supposee.
+    """
+
+    motif = re.compile(
+        r"(-?\d*)\s*\(\s*x\s*([+-])\s*(\d+)\s*\)\s*\(\s*x\s*([+-])\s*(\d+)\s*\)"
+    )
+    trouve = motif.search(statement.replace("\\,", ""))
+    if trouve is None:
+        return None
+    brut = trouve.group(1)
+    if brut in ("", "+"):
+        coefficient = 1
+    elif brut == "-":
+        coefficient = -1
+    else:
+        coefficient = int(brut)
+    racines = []
+    for signe, valeur in ((trouve.group(2), trouve.group(3)),
+                          (trouve.group(4), trouve.group(5))):
+        racines.append(-int(valeur) if signe == "+" else int(valeur))
+    return coefficient, sorted(racines)
+
+
+def _sum_and_product_of_roots(inp: SolverInput) -> SolverResult | None:
+    """Somme et produit des racines d'un trinome donne sous forme factorisee."""
+
+    texte = _plain(inp.statement)
+    if "somme" not in texte or "produit" not in texte or "racine" not in texte:
+        return None
+    lecture = _factored_quadratic(inp.statement)
+    if lecture is None:
+        return None
+    _, racines = lecture
+    somme = racines[0] + racines[1]
+    produit = racines[0] * racines[1]
+
+    def _annonce(brut: str):
+        # `_math_text` normalise en minuscules : on cherche donc `s=` et `p=`.
+        nombres = re.findall(r"\b([sp])\s*=\s*(-?\d+)", _math_text(brut))
+        annonce = {lettre.upper(): int(valeur) for lettre, valeur in nombres}
+        if set(annonce) != {"S", "P"}:
+            return None
+        return annonce
+
+    verites: dict[str, bool] = {}
+    for lettre, brut in inp.options.items():
+        annonce = _annonce(brut)
+        if annonce is None:
+            return None
+        verites[lettre] = annonce["S"] == somme and annonce["P"] == produit
+    return SolverResult(
+        status="MACHINE_RESOLVED",
+        family="SUM_AND_PRODUCT_OF_ROOTS",
+        option_truths=verites,
+        computed_value=f"S={somme} P={produit}",
+        independent_evidence=(
+            f"les facteurs donnent les racines {racines[0]} et {racines[1]} ; "
+            f"leur somme vaut {somme} et leur produit {produit}"
+        ),
+    )
+
+
+def _factored_quadratic_sign(inp: SolverInput) -> SolverResult | None:
+    """Signe d'un trinome factorise : entre les racines, ou a l'exterieur."""
+
+    texte = _plain(inp.statement)
+    strictement_positif = re.search(r"f\s*\(\s*x\s*\)\s*>\s*0", inp.statement)
+    strictement_negatif = re.search(r"f\s*\(\s*x\s*\)\s*<\s*0", inp.statement)
+    if not strictement_positif and not strictement_negatif:
+        return None
+    if "signe" not in texte and not strictement_positif and not strictement_negatif:
+        return None
+    lecture = _factored_quadratic(inp.statement)
+    if lecture is None:
+        return None
+    coefficient, racines = lecture
+    gauche, droite = racines
+    if gauche == droite:
+        return None
+    # A l'exterieur des racines, le trinome a le signe de son coefficient
+    # dominant ; entre les racines, le signe contraire.
+    positif_entre = coefficient < 0
+    if strictement_positif:
+        attendu = "ENTRE" if positif_entre else "EXTERIEUR"
+    else:
+        attendu = "EXTERIEUR" if positif_entre else "ENTRE"
+
+    def _annonce(brut: str) -> str | None:
+        libelle = _plain(brut)
+        formule = _math_text(brut)
+        if "tout" in libelle and ("reel" in libelle or "réel" in libelle):
+            return "TOUJOURS"
+        if "aucun" in libelle:
+            return "JAMAIS"
+        entre = re.search(r"(-?\d+)\s*<\s*x\s*<\s*(-?\d+)", formule)
+        if entre:
+            bornes = sorted((int(entre.group(1)), int(entre.group(2))))
+            return "ENTRE" if bornes == [gauche, droite] else "AUTRE"
+        exterieur = re.search(
+            r"x\s*<\s*(-?\d+)\s*ou\s*x\s*>\s*(-?\d+)", formule
+        )
+        if exterieur:
+            bornes = sorted((int(exterieur.group(1)), int(exterieur.group(2))))
+            return "EXTERIEUR" if bornes == [gauche, droite] else "AUTRE"
+        return None
+
+    verites: dict[str, bool] = {}
+    for lettre, brut in inp.options.items():
+        annonce = _annonce(brut)
+        if annonce is None:
+            return None
+        verites[lettre] = annonce == attendu
+    sens = "positif" if strictement_positif else "negatif"
+    return SolverResult(
+        status="MACHINE_RESOLVED",
+        family="FACTORED_QUADRATIC_SIGN",
+        option_truths=verites,
+        computed_value=f"{sens} {attendu.lower()} des racines {gauche} et {droite}",
+        independent_evidence=(
+            f"le coefficient dominant vaut {coefficient} ; a l'exterieur des "
+            f"racines {gauche} et {droite} le trinome a son signe, entre elles "
+            f"le signe contraire, donc f est {sens} "
+            f"{'entre' if attendu == 'ENTRE' else 'a l exterieur de'} les racines"
+        ),
+    )
+
+
 def _asked_expression(statement: str) -> tuple[str, str] | None:
     """Ce que l'enonce demande de calculer, et sur quelle expression.
 
@@ -1999,6 +2132,12 @@ FAMILIES: tuple[Callable[[SolverInput], SolverResult | None], ...] = (
     # Ajoutee elle aussi en queue, pour la meme raison : elle etablit le role
     # d'un parametre en EXECUTANT le programme que le chapitre imprime.
     _published_function_parameter_role,
+    # Deux dernieres, en queue elles aussi. Elles lisent un trinome ECRIT sous
+    # forme factorisee et en tirent, l'une la somme et le produit des racines,
+    # l'autre le signe. Deux questions du second degre partaient a la revue
+    # humaine faute de famille : elles se tranchent en lisant les facteurs.
+    _sum_and_product_of_roots,
+    _factored_quadratic_sign,
 )
 
 

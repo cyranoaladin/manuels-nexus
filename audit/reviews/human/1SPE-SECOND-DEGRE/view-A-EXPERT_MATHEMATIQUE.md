@@ -38,12 +38,14 @@ Temps estime declare : parcours 1 : 12 h · parcours 2 : 10 h · parcours 3 : 8 
 
 | Code | Libelle eleve | Libelle BO | Demonstration exigible |
 | --- | --- | --- | --- |
-| `C1` | Je sais reconnaitre un polynome du second degre et passer d'une forme a une autre. | Determiner les fonctions polynomes du second degre definies sur R. Reconnaitre la forme developpee, factorisee et canonique. | non |
-| `C2` | Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations. | Determiner l'axe de symetrie et le sommet de la parabole. Dresser le tableau de variations de la fonction polynome du second degre. | non |
-| `C3` | Je sais calculer le discriminant et resoudre une equation du second degre. | Calculer le discriminant d'une equation du second degre. Determiner les solutions reelles selon le signe du discriminant. | oui — Etablissement des formules donnant les solutions d'une equation du second degre. |
-| `C4` | Je sais factoriser un trinome et etudier son signe. | Factoriser, si possible, un polynome du second degre. Determiner le signe d'un polynome du second degre a partir de ses racines ou du discriminant. | non |
-| `C5` | Je sais resoudre une inequation du second degre. | Resoudre une inequation du second degre. Resoudre une equation ou inequation se ramenant au second degre. | non |
-| `C6` | Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum. | Modeliser un probleme a l'aide d'une fonction polynome du second degre. Problemes d'optimisation. | non |
+| `C1` | Je sais reconnaitre un polynome du second degre et passer d'une forme a une autre. | Choisir une forme adaptée (développée réduite, canonique, factorisée) d’une fonction polynôme du second degré dans le cadre de la résolution d’un problème (équation, inéquation, optimisation, variations). | non |
+| `C2` | Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations. | aucun libelle BO : le referentiel du depot ne declare pas cette capacite | non |
+| `C3` | Je sais calculer le discriminant et resoudre une equation du second degre. | Résolution de l’équation du second degré. | oui |
+| `C4` | Je sais factoriser un trinome en diversifiant les strategies. | Factoriser une fonction polynôme du second degré, en diversifiant les stratégies : racine évidente, détection des racines par leur somme et leur produit, identité remarquable, application des formules générales. | non |
+| `C8` | Je sais etudier le signe d'un polynome du second degre donne sous forme factorisee. | Étudier le signe d’une fonction polynôme du second degré donnée sous forme factorisée. | non |
+| `C5` | Je sais resoudre une inequation du second degre. | aucun libelle BO : le referentiel du depot ne declare pas cette capacite | non |
+| `C6` | Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum. | aucun libelle BO : le referentiel du depot ne declare pas cette capacite | non |
+| `C7` | Je sais determiner les fonctions polynomes du second degre s'annulant en deux nombres reels distincts, en utilisant la somme et le produit des racines. | Déterminer les fonctions polynômes du second degré s’annulant en deux nombres réels distincts. | non |
 
 **Attendus officiels rattaches, capacite par capacite**
 
@@ -61,8 +63,10 @@ Temps estime declare : parcours 1 : 12 h · parcours 2 : 10 h · parcours 3 : 8 
     - `1SPE-OFFICIAL-071` (MANDATORY_CAPACITY, Équations, fonctions polynômes du second degré) : Étudier le signe d’une fonction polynôme du second degré donnée sous forme factorisée.
     - `1SPE-OFFICIAL-072` (MANDATORY_CAPACITY, Équations, fonctions polynômes du second degré) : Déterminer les fonctions polynômes du second degré s’annulant en deux nombres réels distincts.
     - `1SPE-OFFICIAL-073` (MANDATORY_CAPACITY, Équations, fonctions polynômes du second degré) : Factoriser une fonction polynôme du second degré, en diversifiant les stratégies : racine évidente, détection des racines par leur somme et leur produit, identité remarquable, application des formules générales.
+- `C8` : aucun attendu officiel rattache dans `audit/SEMANTIC_ALIGNMENT_LEDGER.json`.
 - `C5` : aucun attendu officiel rattache dans `audit/SEMANTIC_ALIGNMENT_LEDGER.json`.
 - `C6` : aucun attendu officiel rattache dans `audit/SEMANTIC_ALIGNMENT_LEDGER.json`.
+- `C7` : aucun attendu officiel rattache dans `audit/SEMANTIC_ALIGNMENT_LEDGER.json`.
 
 **Prerequis declares par le contrat du chapitre**
 
@@ -82,16 +86,16 @@ L'ordre ci-dessous n'est pas l'ordre alphabetique des repertoires : il est lu ch
 | --- | --- | --- |
 | 1 | Ouverture | 1 |
 | 2 | Diagnostic | 1 |
-| 3 | Cours | 6 |
-| 4 | Méthodes | 6 |
-| 5 | Exercices | 70 |
+| 3 | Cours | 7 |
+| 4 | Méthodes | 8 |
+| 5 | Exercices | 72 |
 | 6 | TD | 2 |
 | 7 | Auto-évaluation | 1 |
 | 8 | Évaluation | 4 |
-| 9 | Remédiation | 11 |
-| 10 | Corrigés | 50 |
+| 9 | Remédiation | 13 |
+| 10 | Corrigés | 52 |
 
-Total assemble : 152 objets en variante professeur, 100 en variante eleve (la variante eleve exclut les corriges et les corriges d'evaluation).
+Total assemble : 161 objets en variante professeur, 107 en variante eleve (la variante eleve exclut les corriges et les corriges d'evaluation).
 
 La page d'ouverture du chapitre est composee par l'assembleur a partir de `contrat.yaml` (titre, capacites, situation d'accroche, temps estime) : elle n'apparait donc pas comme un objet de la sequence.
 
@@ -113,90 +117,81 @@ Cet ordre est un fait d'assemblage, pas un jugement : sa pertinence pedagogique 
 
 Le registre `audit/1SPE_MANUAL_REVIEW_DISPOSITION_LEDGER.json` classe chaque objet du manuel. Ceux qui portent la disposition `SCIENCE_HUMAINE_REQUISE` contiennent des affirmations calculables qu'aucune preuve machine n'etablit : ce sont eux que la lecture scientifique doit atteindre en priorite.
 
-21 objets pour ce chapitre, regroupes par famille scientifique — la capacite du referentiel du depot, avec son libelle BO — puis par type d'objet.
+20 objets pour ce chapitre, regroupes par famille scientifique — la capacite du referentiel du depot, avec son libelle BO — puis par type d'objet.
 
-### Famille `C1` — Determiner les fonctions polynomes du second degre definies sur R. Reconnaitre la forme developpee, factorisee et canonique.
+### Famille `C1` — Choisir une forme adaptée (développée réduite, canonique, factorisée) d’une fonction polynôme du second degré dans le cadre de la résolution d’un problème (équation, inéquation, optimisation, variations).
 
 Capacite eleve : « Je sais reconnaitre un polynome du second degre et passer d'une forme a une autre. »
 
-4 objets · 59 affirmations calculables sans preuve machine.
+4 objets · 27 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 3 objets, 3 affirmations a verifier :
     - `1SPE-SECDEG-EX-001-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-001-CDP.tex`
     - `1SPE-SECDEG-EX-002-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-002-CDP.tex`
     - `1SPE-SECDEG-EX-043-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-043-CDP.tex`
-- **`cours`** — 1 objet, 56 affirmations a verifier :
-    - `1SPE-SECDEG-CR-010` (56 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/10_C1_formes_trinome.tex`
+- **`methode`** — 1 objet, 24 affirmations a verifier :
+    - `1SPE-SECDEG-ME-001` (24 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes/1SPE-SECDEG-ME-001.tex`
 
-### Famille `C2` — Determiner l'axe de symetrie et le sommet de la parabole. Dresser le tableau de variations de la fonction polynome du second degre.
+### Famille `C2` — Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations.
 
 Capacite eleve : « Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations. »
 
-2 objets · 39 affirmations calculables sans preuve machine.
+2 objets · 28 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 1 objet, 1 affirmation a verifier :
     - `1SPE-SECDEG-EX-006-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-006-CDP.tex`
-- **`cours`** — 1 objet, 38 affirmations a verifier :
-    - `1SPE-SECDEG-CR-011` (38 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/11_C2_parabole_variations.tex`
+- **`methode`** — 1 objet, 27 affirmations a verifier :
+    - `1SPE-SECDEG-ME-002` (27 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes/1SPE-SECDEG-ME-002.tex`
 
-### Famille `C3` — Calculer le discriminant d'une equation du second degre. Determiner les solutions reelles selon le signe du discriminant.
+### Famille `C3` — Résolution de l’équation du second degré.
 
 Capacite eleve : « Je sais calculer le discriminant et resoudre une equation du second degre. »
 
-4 objets · 58 affirmations calculables sans preuve machine.
+4 objets · 37 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 3 objets, 7 affirmations a verifier :
     - `1SPE-SECDEG-EX-007-CDP` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-007-CDP.tex`
     - `1SPE-SECDEG-EX-008-CDP` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-008-CDP.tex`
     - `1SPE-SECDEG-EX-009-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-009-CDP.tex`
-- **`cours`** — 1 objet, 51 affirmations a verifier :
-    - `1SPE-SECDEG-CR-012` (51 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/12_C3_discriminant.tex`
+- **`methode`** — 1 objet, 30 affirmations a verifier :
+    - `1SPE-SECDEG-ME-003` (30 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes/1SPE-SECDEG-ME-003.tex`
 
-### Famille `C4` — Factoriser, si possible, un polynome du second degre. Determiner le signe d'un polynome du second degre a partir de ses racines ou du discriminant.
+### Famille `C4` — Factoriser une fonction polynôme du second degré, en diversifiant les stratégies : racine évidente, détection des racines par leur somme et leur produit, identité remarquable, application des formules générales.
 
-Capacite eleve : « Je sais factoriser un trinome et etudier son signe. »
+Capacite eleve : « Je sais factoriser un trinome en diversifiant les strategies. »
 
-4 objets · 51 affirmations calculables sans preuve machine.
+4 objets · 44 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 3 objets, 10 affirmations a verifier :
     - `1SPE-SECDEG-EX-011-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-011-CDP.tex`
     - `1SPE-SECDEG-EX-012-CDP` (4 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-012-CDP.tex`
     - `1SPE-SECDEG-EX-044-CDP` (5 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-044-CDP.tex`
-- **`cours`** — 1 objet, 41 affirmations a verifier :
-    - `1SPE-SECDEG-CR-013` (41 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/13_C4_factorisation_signe.tex`
+- **`methode`** — 1 objet, 34 affirmations a verifier :
+    - `1SPE-SECDEG-ME-004` (34 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes/1SPE-SECDEG-ME-004.tex`
 
-### Famille `C5` — Resoudre une inequation du second degre. Resoudre une equation ou inequation se ramenant au second degre.
+### Famille `C5` — Je sais resoudre une inequation du second degre.
 
 Capacite eleve : « Je sais resoudre une inequation du second degre. »
 
-2 objets · 48 affirmations calculables sans preuve machine.
+2 objets · 35 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 1 objet, 2 affirmations a verifier :
     - `1SPE-SECDEG-EX-015-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-015-CDP.tex`
-- **`cours`** — 1 objet, 46 affirmations a verifier :
-    - `1SPE-SECDEG-CR-014` (46 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/14_C5_inequations.tex`
+- **`methode`** — 1 objet, 33 affirmations a verifier :
+    - `1SPE-SECDEG-ME-005` (33 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes/1SPE-SECDEG-ME-005.tex`
 
-### Famille `C6` — Modeliser un probleme a l'aide d'une fonction polynome du second degre. Problemes d'optimisation.
+### Famille `C6` — Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum.
 
 Capacite eleve : « Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum. »
 
-4 objets · 28 affirmations calculables sans preuve machine.
+4 objets · 26 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 3 objets, 5 affirmations a verifier :
     - `1SPE-SECDEG-EX-016-CDP` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-016-CDP.tex`
     - `1SPE-SECDEG-EX-017-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-017-CDP.tex`
     - `1SPE-SECDEG-EX-018-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-018-CDP.tex`
-- **`cours`** — 1 objet, 23 affirmations a verifier :
-    - `1SPE-SECDEG-CR-015` (23 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/15_C6_optimisation.tex`
-
-### Famille `CAPACITE_NON_DECLAREE_PAR_L_OBJET`
-
-Objets dont ni le META ni l'exercice servi ne declare de capacite du chapitre. Rien n'est devine ici : la famille reste a etablir par lecture.
-
-1 objet · 3 affirmations calculables sans preuve machine.
-
-- **`cours`** — 1 objet, 3 affirmations a verifier :
-    - `1SPE-SECDEG-CR-000` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/00_ouverture.tex`
+- **`methode`** — 1 objet, 21 affirmations a verifier :
+    - `1SPE-SECDEG-ME-006` (21 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/methodes/1SPE-SECDEG-ME-006.tex`
 
 ## 5. Question de QCM routee vers l'humain
 
@@ -210,16 +205,17 @@ Ces mesures viennent de `audit/PUBLISH_READINESS_CHAPTER_MATRIX.json`. Elles ne 
 | --- | --- |
 | Etat machine vertical | `MACHINE_REVIEW_COMPLETE` |
 | Cloture humaine | `PENDING` |
-| Objets passes par l'oracle | 118 reussites, 0 echecs, 22 en science humaine requise, 28 en revue manuelle |
+| Objets passes par l'oracle | 130 reussites, 0 echecs, 21 en science humaine requise, 27 en revue manuelle |
 | Attendus officiels obligatoires | 10 rattaches sur 10, 0 manquants, 0 hors annee |
 | Sujets d'evaluation | 2 sujets, 2 corriges, statut `COMPLETE` |
-| QCM | 18 questions, capacites evaluees C1, C2, C3, C4, C5, C6 |
-| Relation exercice/corrige | ANSWER_COVERAGE_ESTABLISHED : 50 ; 0 echecs de cardinalite |
+| QCM | 20 questions, capacites evaluees C1, C2, C3, C4, C5, C6, C7, C8 |
+| Relation exercice/corrige | ANSWER_COVERAGE_ESTABLISHED : 52 ; 0 echecs de cardinalite |
 
 La relation exercice/corrige n'est etablie que structurellement : une COUVERTURE de reponses n'atteste pas qu'un corrige corrige bien son exercice. Cette fidelite est un point de votre checklist.
 
 Dettes de revue declarees pour ce chapitre :
 
+- `SECOND_DEGRE_C7_AUTHORED_REVIEW_DEBT_5` — 5 unites, categorie `OBJECT_REVIEW`, bloquant : oui.
 - `UNCHANGED` — 153 unites, categorie `OBJECT_REVIEW`, bloquant : oui.
 
 ## 7. Checklist du role `EXPERT_MATHEMATIQUE`

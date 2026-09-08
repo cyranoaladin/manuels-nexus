@@ -106,56 +106,67 @@ Cet ordre est un fait d'assemblage, pas un jugement : sa pertinence pedagogique 
 
 Le registre `audit/1SPE_MANUAL_REVIEW_DISPOSITION_LEDGER.json` classe chaque objet du manuel. Ceux qui portent la disposition `SCIENCE_HUMAINE_REQUISE` contiennent des affirmations calculables qu'aucune preuve machine n'etablit : ce sont eux que la lecture scientifique doit atteindre en priorite.
 
-10 objets pour ce chapitre, regroupes par famille scientifique — la capacite du referentiel du depot, avec son libelle BO — puis par type d'objet.
+16 objets pour ce chapitre, regroupes par famille scientifique — la capacite du referentiel du depot, avec son libelle BO — puis par type d'objet.
 
 ### Famille `C1` — Connaître la définition de la fonction exponentielle comme unique fonction dérivable sur ℝ vérifiant f'=f et f(0)=1.
 
 Capacite eleve : « Je sais que la fonction exponentielle est l'unique fonction égale à sa dérivée valant 1 en 0. »
 
-3 objets · 8 affirmations calculables sans preuve machine.
+4 objets · 18 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 3 objets, 8 affirmations a verifier :
     - `1SPE-EXPO-EX-002-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-002-CDP.tex`
     - `1SPE-EXPO-EX-003-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-003-CDP.tex`
     - `1SPE-EXPO-EX-004-CDP` (4 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-004-CDP.tex`
+- **`methode`** — 1 objet, 10 affirmations a verifier :
+    - `1SPE-EXPO-ME-006` (10 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/methodes/1SPE-EXPO-ME-006.tex`
 
 ### Famille `C2` — Connaître et utiliser les propriétés algébriques de la fonction exponentielle : exp(a+b)=exp(a)exp(b), exp(-a)=1/exp(a), exp(na)=(exp(a))^n.
 
 Capacite eleve : « Je sais utiliser les propriétés algébriques de l'exponentielle (somme, produit, puissance). »
 
-1 objet · 2 affirmations calculables sans preuve machine.
+2 objets · 7 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 1 objet, 2 affirmations a verifier :
     - `1SPE-EXPO-EX-014-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-014-CDP.tex`
+- **`methode`** — 1 objet, 5 affirmations a verifier :
+    - `1SPE-EXPO-ME-001` (5 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/methodes/1SPE-EXPO-ME-001.tex`
 
 ### Famille `C3` — Connaître le signe, le sens de variation et la courbe représentative de la fonction exponentielle ; faire le lien avec les suites géométriques.
 
 Capacite eleve : « Je sais exploiter le signe, la croissance et la courbe de l'exponentielle, en lien avec les suites géométriques. »
 
-2 objets · 3 affirmations calculables sans preuve machine.
+3 objets · 6 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 2 objets, 3 affirmations a verifier :
     - `1SPE-EXPO-EX-022-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-022-CDP.tex`
     - `1SPE-EXPO-EX-024-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-024-CDP.tex`
+- **`methode`** — 1 objet, 3 affirmations a verifier :
+    - `1SPE-EXPO-ME-002` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/methodes/1SPE-EXPO-ME-002.tex`
 
 ### Famille `C4` — Pour a réel, déterminer la dérivée de la fonction t → $e^{at}$.
 
 Capacite eleve : « Je sais dériver la fonction t → $e^{at}$ pour un réel a. »
 
-1 objet · 1 affirmation calculable sans preuve machine.
+2 objets · 6 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 1 objet, 1 affirmation a verifier :
     - `1SPE-EXPO-EX-032-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-032-CDP.tex`
+- **`methode`** — 1 objet, 5 affirmations a verifier :
+    - `1SPE-EXPO-ME-003` (5 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/methodes/1SPE-EXPO-ME-003.tex`
 
 ### Famille `C5` — Pour k strictement positif, représenter t → e^{-kt} et t → e^{kt} ; modéliser une croissance ou une décroissance exponentielle.
 
 Capacite eleve : « Je sais représenter et utiliser un modèle de croissance ou de décroissance exponentielle. »
 
-2 objets · 2 affirmations calculables sans preuve machine.
+4 objets · 8 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 2 objets, 2 affirmations a verifier :
     - `1SPE-EXPO-EX-041-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-041-CDP.tex`
     - `1SPE-EXPO-EX-042-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-042-CDP.tex`
+- **`methode`** — 2 objets, 6 affirmations a verifier :
+    - `1SPE-EXPO-ME-004` (4 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/methodes/1SPE-EXPO-ME-004.tex`
+    - `1SPE-EXPO-ME-005` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/methodes/1SPE-EXPO-ME-005.tex`
 
 ### Famille `CAPACITE_NON_DECLAREE_PAR_L_OBJET`
 
@@ -178,7 +189,7 @@ Ces mesures viennent de `audit/PUBLISH_READINESS_CHAPTER_MATRIX.json`. Elles ne 
 | --- | --- |
 | Etat machine vertical | `MACHINE_REVIEW_COMPLETE` |
 | Cloture humaine | `PENDING` |
-| Objets passes par l'oracle | 122 reussites, 0 echecs, 11 en science humaine requise, 19 en revue manuelle |
+| Objets passes par l'oracle | 122 reussites, 0 echecs, 17 en science humaine requise, 25 en revue manuelle |
 | Attendus officiels obligatoires | 7 rattaches sur 7, 0 manquants, 0 hors annee |
 | Sujets d'evaluation | 2 sujets, 2 corriges, statut `COMPLETE` |
 | QCM | 15 questions, capacites evaluees C1, C2, C3, C4, C5 |

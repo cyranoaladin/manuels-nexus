@@ -4,8 +4,8 @@
 résout exactement dit seulement qu'un nom est bien formé. Le condensé
 sémantique est ici recalculé depuis le corps des objets.
 
-- Cellules examinées : `1992`
-- `PROVEN_EXACT_SEMANTIC_IDENTITY` : `1992`
+- Cellules examinées : `1996`
+- `PROVEN_EXACT_SEMANTIC_IDENTITY` : `1996`
 - `SEMANTIC_DELTA` : `0`
 - `INVALID_IDENTITY_DECLARATION` : `0`
 - `DECLARED_IDENTITY_UNVALIDATED` : `0`

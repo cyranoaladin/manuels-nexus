@@ -33,19 +33,61 @@ def payload() -> dict:
 # ══════════════════════════════════════════════════════════════════════════
 # La fermeture elle-même
 # ══════════════════════════════════════════════════════════════════════════
+ETATS = (
+    "PENDING",
+    "SEMANTICALLY_REVIEWED",
+    "REVIEW_INHERITED_BY_IDENTICAL_CONTENT",
+    "COVERED_BY_QCM_PROOF_CHAIN",
+    "TRULY_NOT_REQUIRING_MATHEMATICAL_REVIEW",
+)
+
+
 def test_the_population_is_partitioned_without_loss(payload: dict) -> None:
+    """Cinq etats, leur somme vaut la population, et rien ne tombe en OTHER."""
+
     resume = payload["summary"]
     assert resume["STATES_SUM_EQUALS_TOTAL"] is True
     assert resume["MATHEMATICAL_NON_FORMALIZABLE_TOTAL"] == len(payload["objects"])
     assert (
         resume["MATHEMATICAL_NON_FORMALIZABLE_REVIEW_PENDING"]
-        + resume["COVERED_BY_QCM_PROOF_CHAIN"]
-        + resume["REVIEWED"]
+        + resume["COVERED_BY_QCM_EVIDENCE"]
+        + resume["SEMANTICALLY_REVIEWED"]
+        + resume["REVIEW_INHERITED_BY_IDENTICAL_CONTENT"]
+        + resume["TRULY_NOT_REQUIRING_MATHEMATICAL_REVIEW"]
         == resume["MATHEMATICAL_NON_FORMALIZABLE_TOTAL"]
     )
-    assert {ligne["state"] for ligne in payload["objects"]} <= {
-        "PENDING", "REVIEWED", "COVERED_BY_QCM_PROOF_CHAIN",
-    }
+    assert resume["OTHER"] == 0
+    assert resume["NON_FORMALIZABLE_POPULATION_UNRECONCILED"] == 0
+    assert {ligne["state"] for ligne in payload["objects"]} <= set(ETATS)
+
+
+def test_an_object_freed_of_review_names_the_proof_that_frees_it(
+    payload: dict,
+) -> None:
+    """Aucun etat de sortie ne se donne sans dire ce qui le fonde.
+
+    `TRULY_NOT_REQUIRING_MATHEMATICAL_REVIEW` n'est pas une dispense mais une
+    preuve de contenance ; `REVIEW_INHERITED_BY_IDENTICAL_CONTENT` nomme
+    l'objet dont il herite et le condense qui le prouve.
+    """
+
+    for ligne in payload["objects"]:
+        if ligne["state"] == "PENDING":
+            continue
+        assert ligne["evidence"], ligne["object_id"]
+        if ligne["state"] == "REVIEW_INHERITED_BY_IDENTICAL_CONTENT":
+            assert ligne["evidence"].startswith("SEMANTIC_DIGEST_IDENTICAL:")
+            assert "identique a" in (ligne["detail"] or "")
+
+
+def test_only_a_satellite_can_be_freed_by_containment(payload: dict) -> None:
+    """Un cours ou une methode enonce ; il ne peut pas etre couvert par autrui."""
+
+    for ligne in payload["objects"]:
+        if ligne["state"] == "TRULY_NOT_REQUIRING_MATHEMATICAL_REVIEW":
+            assert ligne["type_objet"] in {"coup_de_pouce", "amenagee"}, (
+                ligne["object_id"]
+            )
 
 
 def test_the_closure_approves_nothing(payload: dict) -> None:

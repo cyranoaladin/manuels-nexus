@@ -87,7 +87,11 @@ def test_the_bo_wording_is_carried_verbatim_never_written_here(
 def test_no_capacity_was_created_or_removed(payload: dict[str, Any]) -> None:
     """La réparation touche le référentiel, jamais la pédagogie."""
 
-    assert payload["summary"]["CONTRACT_CAPACITIES"] == 53
+    # 55 depuis que le producteur ne s'arrete plus sur une capacite sans
+    # `ref_capacite` : trois capacites du second degre n'en portent pas, et le
+    # producteur explosait au lieu de les compter -- ce qui les rendait
+    # invisibles plutot qu'absentes.
+    assert payload["summary"]["CONTRACT_CAPACITIES"] == 55
     # C6 et C7 ont été écrites une fois ; depuis, elles suivent leur autorité.
     # « Réparée » compte une entrée absente, « rafraîchie » une entrée dérivée
     # dont le texte officiel a changé en amont. Les deux touchent le
@@ -112,10 +116,24 @@ def test_the_closure_is_complete_and_within_the_applicable_year(
 def test_a_capacity_without_direct_credit_is_declared_not_hidden(
     payload: dict[str, Any],
 ) -> None:
-    """Six capacités n'ont pas d'atome en propre : c'est dit, pas effacé."""
+    """Onze capacités n'ont pas d'atome en propre : c'est dit, pas effacé.
 
-    assert payload["summary"]["CAPACITY_WITHOUT_DIRECT_ATOM_CREDIT"] == 6
-    assert len(payload["capacities_without_direct_atom_credit"]) == 6
+    Huit d'entre elles sont celles du second degre -- la totalite du chapitre.
+    Son referentiel local compte cinq atomes, aucun n'est credite a une
+    capacite, et trois capacites du contrat ne portent meme pas de reference.
+    C'est une question editoriale ouverte, remontee au Release Owner : y
+    repondre supposerait d'ecrire du texte officiel, ce qu'un producteur ne
+    fait pas.
+    """
+
+    assert payload["summary"]["CAPACITY_WITHOUT_DIRECT_ATOM_CREDIT"] == 11
+    assert len(payload["capacities_without_direct_atom_credit"]) == 11
+    second_degre = [
+        row for row in payload["capacities_without_direct_atom_credit"]
+        if row["chapter"] == "1SPE-SECOND-DEGRE"
+    ]
+    assert len(second_degre) == 8
+    assert sum(1 for row in second_degre if row["capacity"] is None) == 3
     assert "pas un trou de programme" in (
         payload["why_a_capacity_without_direct_credit_is_not_a_gap"]
     )

@@ -130,34 +130,34 @@ Un objet qui declare plusieurs capacites apparait dans plusieurs familles : 25 o
 
 Capacite eleve : « Je sais calculer les termes d'une suite (explicite/récurrence), à la main et en Python. »
 
-5 objets · 36 affirmations calculables sans preuve machine.
+5 objets · 30 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 4 objets, 6 affirmations a verifier :
     - `1SPE-SUITES-EX-002-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-002-CDP.tex`
     - `1SPE-SUITES-EX-003-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-003-CDP.tex`
     - `1SPE-SUITES-EX-004-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-004-CDP.tex`
     - `1SPE-SUITES-EX-005-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-005-CDP.tex`
-- **`cours`** — 1 objet, 30 affirmations a verifier :
-    - `1SPE-SUITES-CR-010` (30 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/10_C1_generalites_suites.tex`
+- **`methode`** — 1 objet, 24 affirmations a verifier :
+    - `1SPE-SUITES-ME-001` (24 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-001.tex`
 
 ### Famille `C2` — Reconnaître si une suite est arithmétique. Exploiter la relation entre termes, la formule explicite.
 
 Capacite eleve : « Je sais montrer qu'une suite est arithmétique et exprimer son terme général. »
 
-4 objets · 43 affirmations calculables sans preuve machine.
+4 objets · 26 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 3 objets, 7 affirmations a verifier :
     - `1SPE-SUITES-EX-006-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-006-CDP.tex`
     - `1SPE-SUITES-EX-007-CDP` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-007-CDP.tex`
     - `1SPE-SUITES-EX-008-CDP` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-008-CDP.tex`
-- **`cours`** — 1 objet, 36 affirmations a verifier :
-    - `1SPE-SUITES-CR-011` (36 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/11_C2_suites_arithmetiques.tex`
+- **`methode`** — 1 objet, 19 affirmations a verifier :
+    - `1SPE-SUITES-ME-002` (19 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-002.tex`
 
 ### Famille `C3` — Reconnaître si une suite est géométrique. Exploiter la relation entre termes, la formule explicite.
 
 Capacite eleve : « Je sais montrer qu'une suite est géométrique et exprimer son terme général. »
 
-6 objets · 73 affirmations calculables sans preuve machine.
+6 objets · 36 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 5 objets, 9 affirmations a verifier :
     - `1SPE-SUITES-EX-001-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-001-CDP.tex`
@@ -165,66 +165,66 @@ Capacite eleve : « Je sais montrer qu'une suite est géométrique et exprimer s
     - `1SPE-SUITES-EX-010-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-010-CDP.tex`
     - `1SPE-SUITES-EX-012-CDP` (4 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-012-CDP.tex`
     - `1SPE-SUITES-EX-018-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-018-CDP.tex`
-- **`cours`** — 1 objet, 64 affirmations a verifier :
-    - `1SPE-SUITES-CR-012` (64 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/12_C3_suites_geometriques.tex`
+- **`methode`** — 1 objet, 27 affirmations a verifier :
+    - `1SPE-SUITES-ME-003` (27 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-003.tex`
 
 ### Famille `C4` — Calculer la somme des n premiers entiers, la somme des premiers termes d'une suite géométrique.
 
 Capacite eleve : « Je sais calculer la somme des premiers entiers et d'une suite géométrique. »
 
-4 objets · 49 affirmations calculables sans preuve machine.
+4 objets · 39 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 3 objets, 8 affirmations a verifier :
     - `1SPE-SUITES-EX-011-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-011-CDP.tex`
     - `1SPE-SUITES-EX-012-CDP` (4 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-012-CDP.tex`
     - `1SPE-SUITES-EX-013-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-013-CDP.tex`
-- **`cours`** — 1 objet, 41 affirmations a verifier :
-    - `1SPE-SUITES-CR-013` (41 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/13_C4_sommes.tex`
+- **`methode`** — 1 objet, 31 affirmations a verifier :
+    - `1SPE-SUITES-ME-004` (31 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-004.tex`
 
 ### Famille `C5` — Étudier le sens de variation d'une suite : étude du signe de u(n+1)−u(n), ou du quotient si les termes sont strictement positifs, ou utilisation de la fonction associée.
 
 Capacite eleve : « Je sais étudier le sens de variation d'une suite par la méthode adaptée. »
 
-5 objets · 36 affirmations calculables sans preuve machine.
+5 objets · 39 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 4 objets, 8 affirmations a verifier :
     - `1SPE-SUITES-EX-007-CDP` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-007-CDP.tex`
     - `1SPE-SUITES-EX-010-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-010-CDP.tex`
     - `1SPE-SUITES-EX-014-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-014-CDP.tex`
     - `1SPE-SUITES-EX-016-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-016-CDP.tex`
-- **`cours`** — 1 objet, 28 affirmations a verifier :
-    - `1SPE-SUITES-CR-014` (28 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/14_C5_variations.tex`
+- **`methode`** — 1 objet, 31 affirmations a verifier :
+    - `1SPE-SUITES-ME-005` (31 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-005.tex`
 
 ### Famille `C6` — Modéliser un phénomène discret par une suite (évolutions successives, suites arithmétiques et géométriques comme modèles linéaire et exponentiel discrets).
 
 Capacite eleve : « Je sais modéliser une situation concrète par une suite. »
 
-2 objets · 26 affirmations calculables sans preuve machine.
+2 objets · 35 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 1 objet, 1 affirmation a verifier :
     - `1SPE-SUITES-EX-018-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-018-CDP.tex`
-- **`cours`** — 1 objet, 25 affirmations a verifier :
-    - `1SPE-SUITES-CR-015` (25 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/15_C6_modelisation.tex`
+- **`methode`** — 1 objet, 34 affirmations a verifier :
+    - `1SPE-SUITES-ME-006` (34 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-006.tex`
 
 ### Famille `C7` — Écrire et interpréter un programme calculant un terme, une somme de termes, un seuil.
 
 Capacite eleve : « Je sais écrire et lire un programme Python (terme, somme, seuil). »
 
-2 objets · 12 affirmations calculables sans preuve machine.
+2 objets · 11 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 1 objet, 1 affirmation a verifier :
     - `1SPE-SUITES-EX-020-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-020-CDP.tex`
-- **`cours`** — 1 objet, 11 affirmations a verifier :
-    - `1SPE-SUITES-CR-016` (11 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/16_C7_algorithmique.tex`
+- **`methode`** — 1 objet, 10 affirmations a verifier :
+    - `1SPE-SUITES-ME-007` (10 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-007.tex`
 
 ### Famille `C8` — Sensibilisation intuitive à la notion de limite d'une suite : limite finie, limite infinie et absence de limite ; toute formalisation est exclue.
 
 Capacite eleve : « Je sais reconnaître intuitivement une limite finie, une limite infinie ou une absence de limite, sans formalisation. »
 
-1 objet · 3 affirmations calculables sans preuve machine.
+1 objet · 4 affirmations calculables sans preuve machine.
 
-- **`cours`** — 1 objet, 3 affirmations a verifier :
-    - `1SPE-SUITES-CR-017` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/17_C8_limites_intuitives.tex`
+- **`methode`** — 1 objet, 4 affirmations a verifier :
+    - `1SPE-SUITES-ME-008` (4 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-008.tex`
 
 ## 5. Question de QCM routee vers l'humain
 
@@ -238,7 +238,7 @@ Ces mesures viennent de `audit/PUBLISH_READINESS_CHAPTER_MATRIX.json`. Elles ne 
 | --- | --- |
 | Etat machine vertical | `MACHINE_REVIEW_COMPLETE` |
 | Cloture humaine | `PENDING` |
-| Objets passes par l'oracle | 122 reussites, 0 echecs, 26 en science humaine requise, 31 en revue manuelle |
+| Objets passes par l'oracle | 131 reussites, 0 echecs, 26 en science humaine requise, 30 en revue manuelle |
 | Attendus officiels obligatoires | 15 rattaches sur 15, 0 manquants, 0 hors annee |
 | Sujets d'evaluation | 2 sujets, 2 corriges, statut `COMPLETE` |
 | QCM | 21 questions, capacites evaluees C1, C2, C3, C4, C5, C6, C7, C8 |

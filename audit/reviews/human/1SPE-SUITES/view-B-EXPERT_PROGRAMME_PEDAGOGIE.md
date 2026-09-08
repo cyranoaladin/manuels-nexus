@@ -285,7 +285,7 @@ Libelle BO : Étudier le sens de variation d'une suite : étude du signe de u(n+
 **Richesse declaree**
 
 - type de capacite : `PROCEDURAL` ; occasions distinctes : 5 ; statut declaratif : `SUFFICIENT`.
-- occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 21.
+- occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 20.
 - gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.
 - evaluee par : `1SPE-SUITES-EV-A`, `1SPE-SUITES-EV-B`.
 
@@ -293,7 +293,7 @@ Libelle BO : Étudier le sens de variation d'une suite : étude du signe de u(n+
 
 - parcours 1 : 5 exercices (10–10 min) — `1SPE-SUITES-EX-007`, `1SPE-SUITES-EX-010`, `1SPE-SUITES-EX-014..016`
 - parcours 2 : 9 exercices (20–22 min) — `1SPE-SUITES-EX-023`, `1SPE-SUITES-EX-028..033`, `1SPE-SUITES-EX-036..037`
-- parcours 3 : 7 exercices (30–40 min) — `1SPE-SUITES-EX-040`, `1SPE-SUITES-EX-042..043`, `1SPE-SUITES-EX-045`, `1SPE-SUITES-EX-047..049`
+- parcours 3 : 6 exercices (30–40 min) — `1SPE-SUITES-EX-040`, `1SPE-SUITES-EX-043`, `1SPE-SUITES-EX-045`, `1SPE-SUITES-EX-047..049`
 
 **Routage de cette capacite vers l'humain**
 

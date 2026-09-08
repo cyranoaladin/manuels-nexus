@@ -108,53 +108,70 @@ Cet ordre est un fait d'assemblage, pas un jugement : sa pertinence pedagogique 
 
 Le registre `audit/1SPE_MANUAL_REVIEW_DISPOSITION_LEDGER.json` classe chaque objet du manuel. Ceux qui portent la disposition `SCIENCE_HUMAINE_REQUISE` contiennent des affirmations calculables qu'aucune preuve machine n'etablit : ce sont eux que la lecture scientifique doit atteindre en priorite.
 
-14 objets pour ce chapitre, regroupes par famille scientifique — la capacite du referentiel du depot, avec son libelle BO — puis par type d'objet.
+19 objets pour ce chapitre, regroupes par famille scientifique — la capacite du referentiel du depot, avec son libelle BO — puis par type d'objet.
 
 ### Famille `C1` — Définir le produit scalaire de deux vecteurs (définition géométrique, projection orthogonale, expression analytique).
 
 Capacite eleve : « Je sais calculer un produit scalaire (definition geometrique, projection, expression analytique). »
 
-4 objets · 4 affirmations calculables sans preuve machine.
+5 objets · 6 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 4 objets, 4 affirmations a verifier :
     - `1SPE-PRODSCAL-EX-001-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-001-CDP.tex`
     - `1SPE-PRODSCAL-EX-002-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-002-CDP.tex`
     - `1SPE-PRODSCAL-EX-003-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-003-CDP.tex`
     - `1SPE-PRODSCAL-EX-004-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-004-CDP.tex`
+- **`methode`** — 1 objet, 2 affirmations a verifier :
+    - `1SPE-PRODSCAL-ME-001` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-001.tex`
 
 ### Famille `C2` — Connaître et utiliser les propriétés du produit scalaire (bilinéarité, symétrie, norme).
 
 Capacite eleve : « Je sais utiliser les proprietes du produit scalaire (bilinearite, symetrie, norme). »
 
-4 objets · 8 affirmations calculables sans preuve machine.
+5 objets · 19 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 4 objets, 8 affirmations a verifier :
     - `1SPE-PRODSCAL-EX-011-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-011-CDP.tex`
     - `1SPE-PRODSCAL-EX-012-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-012-CDP.tex`
     - `1SPE-PRODSCAL-EX-013-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-013-CDP.tex`
     - `1SPE-PRODSCAL-EX-014-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-014-CDP.tex`
+- **`methode`** — 1 objet, 11 affirmations a verifier :
+    - `1SPE-PRODSCAL-ME-002` (11 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-002.tex`
+
+### Famille `C3` — Utiliser le produit scalaire pour déterminer des angles, des orthogonalités et des longueurs.
+
+Capacite eleve : « Je sais determiner l'orthogonalite de deux vecteurs et calculer un angle. »
+
+1 objet · 7 affirmations calculables sans preuve machine.
+
+- **`methode`** — 1 objet, 7 affirmations a verifier :
+    - `1SPE-PRODSCAL-ME-003` (7 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-003.tex`
 
 ### Famille `C4` — Résoudre des problèmes géométriques à l'aide du produit scalaire.
 
 Capacite eleve : « Je sais utiliser le produit scalaire dans des problemes geometriques (mediatrice, hauteurs, aires). »
 
-4 objets · 8 affirmations calculables sans preuve machine.
+5 objets · 17 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 4 objets, 8 affirmations a verifier :
     - `1SPE-PRODSCAL-EX-031-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-031-CDP.tex`
     - `1SPE-PRODSCAL-EX-032-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-032-CDP.tex`
     - `1SPE-PRODSCAL-EX-033-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-033-CDP.tex`
     - `1SPE-PRODSCAL-EX-034-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-034-CDP.tex`
+- **`methode`** — 1 objet, 9 affirmations a verifier :
+    - `1SPE-PRODSCAL-ME-004` (9 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-004.tex`
 
 ### Famille `C5` — Développer les carrés des normes de la somme et de la différence de deux vecteurs ; connaître et démontrer la formule d'Al-Kashi.
 
 Capacite eleve : « Je sais appliquer la formule d'Al-Kashi et en connais la demonstration. »
 
-2 objets · 2 affirmations calculables sans preuve machine.
+3 objets · 9 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 2 objets, 2 affirmations a verifier :
     - `1SPE-PRODSCAL-EX-041-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-041-CDP.tex`
     - `1SPE-PRODSCAL-EX-042-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-042-CDP.tex`
+- **`methode`** — 1 objet, 7 affirmations a verifier :
+    - `1SPE-PRODSCAL-ME-005` (7 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-005.tex`
 
 ## 5. Question de QCM routee vers l'humain
 
@@ -168,7 +185,7 @@ Ces mesures viennent de `audit/PUBLISH_READINESS_CHAPTER_MATRIX.json`. Elles ne 
 | --- | --- |
 | Etat machine vertical | `MACHINE_REVIEW_COMPLETE` |
 | Cloture humaine | `PENDING` |
-| Objets passes par l'oracle | 121 reussites, 0 echecs, 15 en science humaine requise, 19 en revue manuelle |
+| Objets passes par l'oracle | 121 reussites, 0 echecs, 20 en science humaine requise, 24 en revue manuelle |
 | Attendus officiels obligatoires | 9 rattaches sur 9, 0 manquants, 0 hors annee |
 | Sujets d'evaluation | 2 sujets, 2 corriges, statut `COMPLETE` |
 | QCM | 15 questions, capacites evaluees C1, C2, C3, C4, C5 |
@@ -178,7 +195,6 @@ La relation exercice/corrige n'est etablie que structurellement : une COUVERTURE
 
 Dettes de revue declarees pour ce chapitre :
 
-- `QCM_DIAGNOSTIC_RENVOI_SEMANTICS` — 1 unite, categorie `QCM_DIAGNOSTIC_RENVOI_SEMANTICS`, bloquant : oui.
 - `UNCHANGED` — 146 unites, categorie `OBJECT_REVIEW`, bloquant : oui.
 
 ## 7. Checklist du role `EXPERT_MATHEMATIQUE`

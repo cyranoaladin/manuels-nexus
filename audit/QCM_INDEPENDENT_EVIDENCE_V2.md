@@ -7,10 +7,10 @@ Cet artefact n'approuve rien.
 
 - Questions du corpus : 529
 - Report d'identite : 301
-- Recalcul independant : 23
-- Revue humaine requise : 205
+- Recalcul independant : 25
+- Revue humaine requise : 203
 - UNKNOWN : 0
-- Equation : 529 = 301 + 23 + 205
+- Equation : 529 = 301 + 25 + 203
 - EVIDENCE_ROUTING_COMPLETE : True
 - ALL_QCM_HUMAN_REVIEW_COMPLETE : False
 
@@ -21,6 +21,7 @@ Cet artefact n'approuve rien.
 - `EUCLIDEAN_GRAM_FORM`
 - `EXPECTATION_SIGN_INTERPRETATION`
 - `EXPECTED_PROFIT_OF_A_CONTRACT`
+- `FACTORED_QUADRATIC_SIGN`
 - `INDEPENDENT_BERNOULLI_REPETITION`
 - `INVERSE_TRANSFORM_SAMPLING`
 - `KOENIG_HUYGENS_SECOND_MOMENT`
@@ -32,6 +33,7 @@ Cet artefact n'approuve rien.
 - `SAMPLE_MEAN_FLUCTUATION_MONOTONICITY`
 - `SAMPLE_MEAN_FLUCTUATION_SCALE`
 - `STANDARD_DEVIATION_FROM_VARIANCE`
+- `SUM_AND_PRODUCT_OF_ROOTS`
 - `TWO_SIGMA_COVERAGE_PROPORTION`
 - `UNIFORM_DISCRETE_EXPECTATION`
 - `UNIFORM_DISCRETE_PROBABILITY`
@@ -41,6 +43,8 @@ Cet artefact n'approuve rien.
 | chapitre | question | famille | verite calculee | cle declaree | verdict |
 |---|---|---|---|---|---|
 | 1SPE-PRODUIT-SCALAIRE | Q6 | EUCLIDEAN_GRAM_FORM | C | C | PASS |
+| 1SPE-SECOND-DEGRE | Q19 | SUM_AND_PRODUCT_OF_ROOTS | C | C | PASS |
+| 1SPE-SECOND-DEGRE | Q20 | FACTORED_QUADRATIC_SIGN | D | D | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q1 | UNIFORM_DISCRETE_PROBABILITY | A | A | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q10 | LINEAR_EXPECTATION | A | A | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q11 | LINEAR_EXPECTATION | B | B | PASS |
@@ -146,8 +150,6 @@ Comportement correct du solveur, pas un echec : aucune regle mathematique generi
 | 1NSI-WEB-IHM | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | 1NSI-WEB-IHM | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | 1NSI-WEB-IHM | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
-| 1SPE-SECOND-DEGRE | Q19 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
-| 1SPE-SECOND-DEGRE | Q20 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TCOMPL-ECHANTILLONNAGE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TCOMPL-ECHANTILLONNAGE | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TCOMPL-INFERENCE-BAYESIENNE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |

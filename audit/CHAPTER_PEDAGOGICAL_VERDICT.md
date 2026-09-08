@@ -20,7 +20,7 @@ Chaque verdict est derive des competences et parcours declares par les exercices
 | 1SPE-GEOMETRIE-REPEREE | 9 | 68 | 50 | 4 | 10 | ADEQUATE | STRONG | **ADEQUATE** |
 | 1SPE-PROBA-COND | 9 | 69 | 50 | 4 | 10 | STRONG | STRONG | **ADEQUATE** |
 | 1SPE-PRODUIT-SCALAIRE | 7 | 68 | 50 | 4 | 10 | STRONG | STRONG | **ADEQUATE** |
-| 1SPE-SECOND-DEGRE | 11 | 72 | 52 | 4 | 11 | STRONG | STRONG | **ADEQUATE** |
+| 1SPE-SECOND-DEGRE | 11 | 72 | 52 | 4 | 13 | STRONG | STRONG | **ADEQUATE** |
 | 1SPE-SUITES | 12 | 72 | 51 | 4 | 13 | STRONG | STRONG | **ADEQUATE** |
 | 1SPE-TRIGONOMETRIE | 4 | 36 | 24 | 4 | 4 | STRONG | STRONG | **ADEQUATE** |
 | 1SPE-VARIABLES-ALEATOIRES | 10 | 72 | 54 | 4 | 12 | STRONG | STRONG | **ADEQUATE** |

@@ -279,28 +279,46 @@ def test_capacity_without_official_wording_is_named_as_such(
                 encoding="utf-8"
             )
         )
+        # Une capacite peut n'avoir AUCUNE reference declaree : le contrat
+        # ecrit alors `ref_capacite` absent. Lire la cle sans defaut faisait
+        # planter le test avant qu'il n'ait rien verifie -- et un test qui
+        # plante ne dit rien, pas meme que tout va bien.
         missing = [
             item["code"]
             for item in contract["capacites"]
-            if item["ref_capacite"] not in declared
+            if item.get("ref_capacite") not in declared
         ]
         content = rendered[
             PRODUCER.REVIEWS / chapter / f"view-B-{PRODUCER.ROLE_B}.md"
         ]
         if missing:
-            assert PRODUCER.NO_BO_WORDING in content, chapter
+            assert PRODUCER.NO_BO_WORDING in content, (chapter, missing)
         else:
             assert PRODUCER.NO_BO_WORDING not in content, chapter
-    # Variables aleatoires portait quatre fois ce marqueur : deux capacites
-    # sans entree referentielle, vues deux fois chacune. La revue externe a
-    # montre que ce n'etait pas du hors-programme mais une omission du
-    # referentiel local ; les atomes officiels 175 a 179 leur sont desormais
-    # rattaches, et plus aucun chapitre n'affiche le marqueur.
-    for chapter in PRODUCER.chapter_ids():
-        content = rendered[
-            PRODUCER.REVIEWS / chapter / f"view-B-{PRODUCER.ROLE_B}.md"
-        ]
-        assert PRODUCER.NO_BO_WORDING not in content, chapter
+
+
+def test_the_chapters_without_official_wording_are_the_ones_we_know(
+    rendered: dict[Path, str],
+) -> None:
+    """Le marqueur ne doit apparaitre que la ou une question reste ouverte.
+
+    Variables aleatoires le portait quatre fois : la revue externe a montre
+    qu'il s'agissait d'une omission du referentiel local, reparee depuis.
+    Il subsiste sur 1SPE-SECOND-DEGRE, dont le contrat declare huit capacites
+    quand le referentiel local n'en compte que cinq -- trois d'entre elles
+    n'ont donc pas de libelle officiel a citer. Ce n'est pas un defaut de la
+    vue : c'est une question editoriale ouverte, et la vue a raison de la
+    montrer plutot que de la combler seule.
+    """
+
+    attendus = {"1SPE-SECOND-DEGRE"}
+    portant = {
+        chapter
+        for chapter in PRODUCER.chapter_ids()
+        if PRODUCER.NO_BO_WORDING
+        in rendered[PRODUCER.REVIEWS / chapter / f"view-B-{PRODUCER.ROLE_B}.md"]
+    }
+    assert portant == attendus
 
 
 def test_no_1spe_qcm_question_is_left_to_a_human_any_more(

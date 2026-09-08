@@ -114,10 +114,10 @@ Le registre `audit/1SPE_MANUAL_REVIEW_DISPOSITION_LEDGER.json` classe chaque obj
 
 Capacite eleve : « Je sais calculer une probabilite conditionnelle $P_A(B) = P(A \cap B) / P(A)$. »
 
-1 objet · 12 affirmations calculables sans preuve machine.
+1 objet · 8 affirmations calculables sans preuve machine.
 
-- **`cours`** — 1 objet, 12 affirmations a verifier :
-    - `1SPE-PROBCOND-CR-010` (12 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/cours/10_C1_probabilite_conditionnelle.tex`
+- **`methode`** — 1 objet, 8 affirmations a verifier :
+    - `1SPE-PROBCOND-ME-001` (8 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/methodes/1SPE-PROBCOND-ME-001.tex`
 
 ### Famille `C2` — Construire et exploiter un arbre pondéré.
 
@@ -125,37 +125,37 @@ Capacite eleve : « Je sais construire et lire un arbre pondere. »
 
 1 objet · 7 affirmations calculables sans preuve machine.
 
-- **`cours`** — 1 objet, 7 affirmations a verifier :
-    - `1SPE-PROBCOND-CR-011` (7 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/cours/11_C2_arbre_pondere.tex`
+- **`methode`** — 1 objet, 7 affirmations a verifier :
+    - `1SPE-PROBCOND-ME-002` (7 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/methodes/1SPE-PROBCOND-ME-002.tex`
 
 ### Famille `C3` — Appliquer la formule des probabilités totales.
 
 Capacite eleve : « Je sais appliquer la formule des probabilites totales. »
 
-1 objet · 5 affirmations calculables sans preuve machine.
+1 objet · 8 affirmations calculables sans preuve machine.
 
-- **`cours`** — 1 objet, 5 affirmations a verifier :
-    - `1SPE-PROBCOND-CR-012` (5 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/cours/12_C3_probabilites_totales.tex`
+- **`methode`** — 1 objet, 8 affirmations a verifier :
+    - `1SPE-PROBCOND-ME-003` (8 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/methodes/1SPE-PROBCOND-ME-003.tex`
 
 ### Famille `C4` — Reconnaître et utiliser l'indépendance de deux événements.
 
 Capacite eleve : « Je sais determiner si deux evenements sont independants. »
 
-1 objet · 15 affirmations calculables sans preuve machine.
+1 objet · 6 affirmations calculables sans preuve machine.
 
-- **`cours`** — 1 objet, 15 affirmations a verifier :
-    - `1SPE-PROBCOND-CR-013` (15 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/cours/13_C4_independance.tex`
+- **`methode`** — 1 objet, 6 affirmations a verifier :
+    - `1SPE-PROBCOND-ME-004` (6 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/methodes/1SPE-PROBCOND-ME-004.tex`
 
 ### Famille `C5` — Résoudre des problèmes contextualisés faisant intervenir des probabilités conditionnelles.
 
 Capacite eleve : « Je sais resoudre un probleme contextualise de probabilites conditionnelles. »
 
-2 objets · 11 affirmations calculables sans preuve machine.
+2 objets · 9 affirmations calculables sans preuve machine.
 
 - **`algorithme`** — 1 objet, 3 affirmations a verifier :
     - `1SPE-PROBCOND-ALG-001` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/cours/15_algorithmique_monte_carlo.tex`
-- **`cours`** — 1 objet, 8 affirmations a verifier :
-    - `1SPE-PROBCOND-CR-014` (8 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/cours/14_C5_problemes_contextualises.tex`
+- **`methode`** — 1 objet, 6 affirmations a verifier :
+    - `1SPE-PROBCOND-ME-005` (6 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/methodes/1SPE-PROBCOND-ME-005.tex`
 
 ## 5. Question de QCM routee vers l'humain
 
@@ -169,7 +169,7 @@ Ces mesures viennent de `audit/PUBLISH_READINESS_CHAPTER_MATRIX.json`. Elles ne 
 | --- | --- |
 | Etat machine vertical | `MACHINE_REVIEW_COMPLETE` |
 | Cloture humaine | `PENDING` |
-| Objets passes par l'oracle | 117 reussites, 0 echecs, 7 en science humaine requise, 26 en revue manuelle |
+| Objets passes par l'oracle | 122 reussites, 0 echecs, 7 en science humaine requise, 26 en revue manuelle |
 | Attendus officiels obligatoires | 8 rattaches sur 8, 0 manquants, 0 hors annee |
 | Sujets d'evaluation | 2 sujets, 2 corriges, statut `COMPLETE` |
 | QCM | 18 questions, capacites evaluees C1, C2, C3, C4, C5 |

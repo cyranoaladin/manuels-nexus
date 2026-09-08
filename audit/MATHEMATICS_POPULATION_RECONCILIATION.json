@@ -3,33 +3,35 @@
   "schema_version": 1,
   "generated_by": "scripts/build_mathematics_population_reconciliation.py",
   "freshness": {
-    "EVIDENCE_HEAD": "e373eb9f4a8f4ff1a1b69dbbb2c38abca5f68684",
+    "EVIDENCE_HEAD": "aa2fc74d006abb0843fc7af44d495d0cc79b0b9c",
     "INPUT_PATHS": [
       "audit/DIMENSION_MATHEMATICS.json",
       "audit/INVENTAIRE_COLLECTION.json",
       "audit/PUBLISH_READINESS_CHAPTER_MATRIX.json"
     ],
-    "INPUT_DIGEST": "sha256:b413fef24ddf5bdaac88bd0eb4d03fc2fede19d2d7b0f7b710453259e92a6d20"
+    "INPUT_DIGEST": "sha256:438a599be5f0bc9209fc0a6470532be66382189cff6dca02d5af37298c55e9ab"
   },
   "summary": {
-    "MATHEMATICS_OBJECTS_TOTAL": 4096,
-    "FORMAL_ASSERTION_OBJECTS": 3497,
-    "OBJECTS_MISSING_ORACLE": 91,
+    "MATHEMATICS_OBJECTS_TOTAL": 3441,
+    "FORMAL_ASSERTION_OBJECTS": 2936,
+    "OBJECTS_MISSING_ORACLE": 0,
     "NON_FORMALIZABLE_OBJECTS": 417,
-    "TRULY_NOT_MATHEMATICAL": 91,
+    "TRULY_NOT_MATHEMATICAL": 88,
     "CHAPTERS_TOTAL": 52,
-    "CHAPTER_ORACLE_COMPLETE": 10,
-    "CHAPTER_ORACLE_GAPS": 25,
-    "ORACLE_EVIDENCE_MISSING_RECEIPT": 17,
-    "STORED_SYMPY_RECEIPTS": 3038,
-    "RECEIPT_PASS": 2674,
-    "RECEIPT_MANUAL_REVIEW": 364,
+    "CHAPTER_ORACLE_COMPLETE": 52,
+    "CHAPTER_ORACLE_GAPS": 0,
+    "ORACLE_EVIDENCE_MISSING_RECEIPT": 0,
+    "STORED_SYMPY_RECEIPTS": 3351,
+    "RECEIPT_PASS": 2956,
+    "RECEIPT_MANUAL_REVIEW": 395,
     "RECEIPT_FAIL": 0,
-    "MACHINE_UNCLASSIFIED": 121,
-    "HUMAN_SCIENCE_REQUIRED": 148,
-    "EXECUTED_BUT_UNRECEIPTED": 459,
+    "MACHINE_UNCLASSIFIED": 0,
+    "HUMAN_SCIENCE_REQUIRED": 235,
+    "EXECUTED_RECEIPTS": 2956,
+    "RECEIPTS_WITHOUT_LIVE_SOURCE": 0,
+    "EXECUTED_BUT_UNRECEIPTED": -20,
     "MATHEMATICS_POPULATION_UNRECONCILED": 0,
-    "RECONCILIATION_EQUATION": "3497 exécutés + 91 sans oracle + 417 non formalisables + 91 non mathématiques = 4096 / 4096 objets",
+    "RECONCILIATION_EQUATION": "2936 exécutés + 0 sans oracle + 417 non formalisables + 88 non mathématiques = 3441 / 3441 objets",
     "WHY_THE_TWO_ORACLE_FIGURES_DIFFER": "MISSING_ORACLE compte des objets sans bloc de vérification ; GAP et NO_RECEIPTS comptent des chapitres selon les reçus déposés. Le chapitre exige une preuve conservée, l'objet une preuve exécutable : fermer l'un ne ferme pas l'autre."
   }
 }

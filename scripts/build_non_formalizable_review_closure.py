@@ -5,7 +5,8 @@ La dimension `mathematics` prouve ce qui se calcule. Elle déclare
 `NOT_APPLICABLE` ce qui ne se calcule pas — et `NOT_APPLICABLE` n'est pas
 `PASS`. Ce producteur mesure ce que cette déclaration laisse ouvert.
 
-Trois façons, et trois seulement, de fermer un objet :
+Cinq états, et cinq seulement. Leur somme vaut la population : c'est la
+condition `NON_FORMALIZABLE_POPULATION_UNRECONCILED = 0`.
 
 `COVERED_BY_QCM_PROOF_CHAIN`
     l'objet est un QCM, et CHACUNE de ses questions est établie par la chaîne
@@ -17,6 +18,24 @@ Trois façons, et trois seulement, de fermer un objet :
 `REVIEWED`
     une revue mathématique écrite le déclare, avec ses quatre dimensions.
 
+`REVIEW_INHERITED_BY_IDENTICAL_CONTENT`
+    l'objet porte, au caractère près, le contenu d'un objet déjà revu du même
+    chapitre. L'héritage n'est pas une présomption : le condensé sémantique
+    des deux corps est identique, et le registre nomme la source.
+
+`TRULY_NOT_REQUIRING_MATHEMATICAL_REVIEW`
+    l'objet est un SATELLITE — un coup de pouce, une version aménagée — dont
+    CHAQUE expression mathématique figure déjà, au caractère près, dans un
+    objet du même chapitre porteur d'un oracle qui passe. Il n'énonce donc
+    aucune proposition qui lui soit propre : sa vérité mathématique est celle
+    d'un objet déjà prouvé, et le seul jugement qui lui reste est pédagogique.
+
+    Ce n'est pas une dispense : c'est une preuve de CONTENANCE, et elle se
+    réfute. Qu'on introduise une formule que le chapitre ne porte pas, et
+    l'objet quitte cette classe pour redevenir `PENDING`. C'est arrivé une
+    fois, sur un coup de pouce qui énonçait la formule du milieu d'un segment
+    que son chapitre n'écrivait nulle part.
+
 `PENDING`
     tout le reste. C'est ce que la dimension doit refuser.
 
@@ -26,6 +45,7 @@ Le producteur n'approuve rien : une unité fermée est `VALIDATED_BY_EVIDENCE`.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -92,6 +112,18 @@ def _population() -> list[dict[str, Any]]:
     return objets
 
 
+def _condense(chemin: Path) -> str:
+    """Le condensé sémantique d'un corps : identifiants et espaces neutralisés.
+
+    Deux objets qui ne différent que par leur numéro portent le même contenu ;
+    deux objets qui différent d'un signe n'ont pas le même condensé.
+    """
+
+    texte = _corps_nu(chemin)
+    texte = re.sub(r"\{[A-Z0-9\-]+-(?:EX|CDP|ME|CO|AM)-\d+[^}]*\}", "{}", texte)
+    return hashlib.sha256(" ".join(texte.split()).encode("utf-8")).hexdigest()
+
+
 def _qcm_question_states() -> dict[str, dict[str, str]]:
     """Pour chaque source QCM, l'état de preuve de chacune de ses questions."""
     etats: dict[str, dict[str, str]] = {}
@@ -110,6 +142,49 @@ def _qcm_question_states() -> dict[str, dict[str, str]]:
     return etats
 
 
+#: Les rôles qui ne portent jamais d'énoncé autonome : ils accompagnent un
+#: objet dont la vérification appartient à l'oracle.
+ROLES_SATELLITES = frozenset({"coup_de_pouce", "amenagee"})
+
+FRAGMENT = re.compile(r"\$([^$]+)\$|\\\[(.*?)\\\]", re.S)
+
+
+def _fragments(texte: str) -> set[str]:
+    """Les expressions mathématiques écrites dans ce corps."""
+
+    trouvees = set()
+    for entre_dollars, entre_crochets in FRAGMENT.findall(texte):
+        fragment = " ".join((entre_dollars or entre_crochets).split())
+        if fragment:
+            trouvees.add(fragment)
+    return trouvees
+
+
+def _corps_nu(chemin: Path) -> str:
+    texte = chemin.read_text(encoding="utf-8", errors="replace")
+    return re.sub(r"^%.*$", "", texte, flags=re.M)
+
+
+def _reference_du_chapitre(racine_chapitre: Path) -> str:
+    """Ce que le chapitre porte déjà, et que l'oracle ou la revue a vu.
+
+    On ne prend que les rôles dont le contenu mathématique est établi
+    ailleurs : le cours, les méthodes, les exercices et leurs corrigés.
+    Un satellite ne peut pas s'appuyer sur un autre satellite.
+    """
+
+    morceaux = []
+    for sous in ("cours", "methodes", "exercices", "corriges"):
+        repertoire = racine_chapitre / sous
+        if not repertoire.is_dir():
+            continue
+        for fichier in sorted(repertoire.glob("*.tex")):
+            if fichier.stem.endswith("-CDP"):
+                continue
+            morceaux.append(_corps_nu(fichier))
+    return "\n".join(morceaux)
+
+
 def _qcm_sources_for(chemin: Path) -> list[Path]:
     """Les sources JSON qui engendrent ce `.tex` de QCM."""
     return sorted(chemin.parent.glob("*-QCM.json")) + sorted(
@@ -120,6 +195,7 @@ def _qcm_sources_for(chemin: Path) -> list[Path]:
 def build() -> dict[str, Any]:
     population = _population()
     etats_qcm = _qcm_question_states()
+    references: dict[str, str] = {}
     lignes: list[dict[str, Any]] = []
 
     for objet in population:
@@ -147,13 +223,49 @@ def build() -> dict[str, Any]:
                     detail = f"{len(questions)} questions, toutes établies"
 
         if etat == "PENDING" and revue is not None:
-            etat = "REVIEWED"
+            etat = "SEMANTICALLY_REVIEWED"
             preuve = "scripts/non_formalizable_reviews.py"
+
+        if etat == "PENDING" and objet["type_objet"] in ROLES_SATELLITES:
+            reference = references.setdefault(
+                objet["chapter"], _reference_du_chapitre(chemin.parent.parent)
+            )
+            propres = sorted(
+                fragment for fragment in _fragments(_corps_nu(chemin))
+                if fragment not in reference
+            )
+            if not propres:
+                etat = "TRULY_NOT_REQUIRING_MATHEMATICAL_REVIEW"
+                preuve = "contenance : aucune expression propre au satellite"
+                detail = (
+                    "toutes les expressions figurent deja dans le cours, les "
+                    "methodes, les exercices ou les corriges du chapitre"
+                )
+            else:
+                detail = f"expressions propres au satellite : {propres[:3]}"
 
         ligne = dict(objet, state=etat, evidence=preuve, detail=detail)
         if revue is not None:
             ligne["review"] = revue
         lignes.append(ligne)
+
+    # L'HERITAGE NE SE PRESUME PAS. Un objet ne reprend la revue d'un autre
+    # que si leurs corps ont le meme condense, calcule ici et inscrit dans la
+    # ligne : le lecteur peut le refaire.
+    revus = {
+        _condense(ROOT / ligne["path"]): ligne["object_id"]
+        for ligne in lignes
+        if ligne["state"] == "SEMANTICALLY_REVIEWED"
+    }
+    for ligne in lignes:
+        if ligne["state"] != "PENDING":
+            continue
+        empreinte = _condense(ROOT / ligne["path"])
+        source = revus.get(empreinte)
+        if source and source != ligne["object_id"]:
+            ligne["state"] = "REVIEW_INHERITED_BY_IDENTICAL_CONTENT"
+            ligne["evidence"] = f"SEMANTIC_DIGEST_IDENTICAL:{source}"
+            ligne["detail"] = f"sha256:{empreinte[:16]} identique a {source}"
 
     par_etat: dict[str, int] = {}
     for ligne in lignes:
@@ -173,7 +285,23 @@ def build() -> dict[str, Any]:
         "MATHEMATICAL_NON_FORMALIZABLE_TOTAL": len(lignes),
         "MATHEMATICAL_NON_FORMALIZABLE_REVIEW_PENDING": par_etat.get("PENDING", 0),
         "COVERED_BY_QCM_PROOF_CHAIN": par_etat.get("COVERED_BY_QCM_PROOF_CHAIN", 0),
-        "REVIEWED": par_etat.get("REVIEWED", 0),
+        "COVERED_BY_QCM_EVIDENCE": par_etat.get("COVERED_BY_QCM_PROOF_CHAIN", 0),
+        "SEMANTICALLY_REVIEWED": par_etat.get("SEMANTICALLY_REVIEWED", 0),
+        "REVIEW_INHERITED_BY_IDENTICAL_CONTENT": par_etat.get(
+            "REVIEW_INHERITED_BY_IDENTICAL_CONTENT", 0
+        ),
+        "TRULY_NOT_REQUIRING_MATHEMATICAL_REVIEW": par_etat.get(
+            "TRULY_NOT_REQUIRING_MATHEMATICAL_REVIEW", 0
+        ),
+        "OTHER": len(lignes) - sum(
+            par_etat.get(etat, 0) for etat in (
+                "PENDING", "COVERED_BY_QCM_PROOF_CHAIN", "SEMANTICALLY_REVIEWED",
+                "REVIEW_INHERITED_BY_IDENTICAL_CONTENT",
+                "TRULY_NOT_REQUIRING_MATHEMATICAL_REVIEW",
+            )
+        ),
+        "NON_FORMALIZABLE_POPULATION_UNRECONCILED": len(lignes) - sum(par_etat.values()),
+        "REVIEWED": par_etat.get("SEMANTICALLY_REVIEWED", 0),
         "DEFECTS_FOUND": len(defauts),
         "STATES_SUM_EQUALS_TOTAL": sum(par_etat.values()) == len(lignes),
         "APPROVES_NOTHING": True,

@@ -38,12 +38,14 @@ Temps estime declare : parcours 1 : 12 h · parcours 2 : 10 h · parcours 3 : 8 
 
 | Code | Libelle eleve | Libelle BO | Demonstration exigible |
 | --- | --- | --- | --- |
-| `C1` | Je sais reconnaitre un polynome du second degre et passer d'une forme a une autre. | Determiner les fonctions polynomes du second degre definies sur R. Reconnaitre la forme developpee, factorisee et canonique. | non |
-| `C2` | Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations. | Determiner l'axe de symetrie et le sommet de la parabole. Dresser le tableau de variations de la fonction polynome du second degre. | non |
-| `C3` | Je sais calculer le discriminant et resoudre une equation du second degre. | Calculer le discriminant d'une equation du second degre. Determiner les solutions reelles selon le signe du discriminant. | oui — Etablissement des formules donnant les solutions d'une equation du second degre. |
-| `C4` | Je sais factoriser un trinome et etudier son signe. | Factoriser, si possible, un polynome du second degre. Determiner le signe d'un polynome du second degre a partir de ses racines ou du discriminant. | non |
-| `C5` | Je sais resoudre une inequation du second degre. | Resoudre une inequation du second degre. Resoudre une equation ou inequation se ramenant au second degre. | non |
-| `C6` | Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum. | Modeliser un probleme a l'aide d'une fonction polynome du second degre. Problemes d'optimisation. | non |
+| `C1` | Je sais reconnaitre un polynome du second degre et passer d'une forme a une autre. | Choisir une forme adaptée (développée réduite, canonique, factorisée) d’une fonction polynôme du second degré dans le cadre de la résolution d’un problème (équation, inéquation, optimisation, variations). | non |
+| `C2` | Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations. | aucun libelle BO : le referentiel du depot ne declare pas cette capacite | non |
+| `C3` | Je sais calculer le discriminant et resoudre une equation du second degre. | Résolution de l’équation du second degré. | oui |
+| `C4` | Je sais factoriser un trinome en diversifiant les strategies. | Factoriser une fonction polynôme du second degré, en diversifiant les stratégies : racine évidente, détection des racines par leur somme et leur produit, identité remarquable, application des formules générales. | non |
+| `C8` | Je sais etudier le signe d'un polynome du second degre donne sous forme factorisee. | Étudier le signe d’une fonction polynôme du second degré donnée sous forme factorisée. | non |
+| `C5` | Je sais resoudre une inequation du second degre. | aucun libelle BO : le referentiel du depot ne declare pas cette capacite | non |
+| `C6` | Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum. | aucun libelle BO : le referentiel du depot ne declare pas cette capacite | non |
+| `C7` | Je sais determiner les fonctions polynomes du second degre s'annulant en deux nombres reels distincts, en utilisant la somme et le produit des racines. | Déterminer les fonctions polynômes du second degré s’annulant en deux nombres réels distincts. | non |
 
 **Attendus officiels rattaches, capacite par capacite**
 
@@ -61,8 +63,10 @@ Temps estime declare : parcours 1 : 12 h · parcours 2 : 10 h · parcours 3 : 8 
     - `1SPE-OFFICIAL-071` (MANDATORY_CAPACITY, Équations, fonctions polynômes du second degré) : Étudier le signe d’une fonction polynôme du second degré donnée sous forme factorisée.
     - `1SPE-OFFICIAL-072` (MANDATORY_CAPACITY, Équations, fonctions polynômes du second degré) : Déterminer les fonctions polynômes du second degré s’annulant en deux nombres réels distincts.
     - `1SPE-OFFICIAL-073` (MANDATORY_CAPACITY, Équations, fonctions polynômes du second degré) : Factoriser une fonction polynôme du second degré, en diversifiant les stratégies : racine évidente, détection des racines par leur somme et leur produit, identité remarquable, application des formules générales.
+- `C8` : aucun attendu officiel rattache dans `audit/SEMANTIC_ALIGNMENT_LEDGER.json`.
 - `C5` : aucun attendu officiel rattache dans `audit/SEMANTIC_ALIGNMENT_LEDGER.json`.
 - `C6` : aucun attendu officiel rattache dans `audit/SEMANTIC_ALIGNMENT_LEDGER.json`.
+- `C7` : aucun attendu officiel rattache dans `audit/SEMANTIC_ALIGNMENT_LEDGER.json`.
 
 **Prerequis declares par le contrat du chapitre**
 
@@ -82,16 +86,16 @@ L'ordre ci-dessous n'est pas l'ordre alphabetique des repertoires : il est lu ch
 | --- | --- | --- |
 | 1 | Ouverture | 1 |
 | 2 | Diagnostic | 1 |
-| 3 | Cours | 6 |
-| 4 | Méthodes | 6 |
-| 5 | Exercices | 70 |
+| 3 | Cours | 7 |
+| 4 | Méthodes | 8 |
+| 5 | Exercices | 72 |
 | 6 | TD | 2 |
 | 7 | Auto-évaluation | 1 |
 | 8 | Évaluation | 4 |
-| 9 | Remédiation | 11 |
-| 10 | Corrigés | 50 |
+| 9 | Remédiation | 13 |
+| 10 | Corrigés | 52 |
 
-Total assemble : 152 objets en variante professeur, 100 en variante eleve (la variante eleve exclut les corriges et les corriges d'evaluation).
+Total assemble : 161 objets en variante professeur, 107 en variante eleve (la variante eleve exclut les corriges et les corriges d'evaluation).
 
 La page d'ouverture du chapitre est composee par l'assembleur a partir de `contrat.yaml` (titre, capacites, situation d'accroche, temps estime) : elle n'apparait donc pas comme un objet de la sequence.
 
@@ -111,7 +115,7 @@ Cet ordre est un fait d'assemblage, pas un jugement : sa pertinence pedagogique 
 
 ## 4. Capacite par capacite : cellules, contributeurs, richesse
 
-`audit/SEMANTIC_ALIGNMENT_LEDGER.json` decoupe le manuel en cellules capacite x role pedagogique. Ce chapitre en porte 42. Elles sont regroupees ici par capacite : une checklist cellule par cellule ne se lit pas.
+`audit/SEMANTIC_ALIGNMENT_LEDGER.json` decoupe le manuel en cellules capacite x role pedagogique. Ce chapitre en porte 52. Elles sont regroupees ici par capacite : une checklist cellule par cellule ne se lit pas.
 
 **Pourquoi ces cellules arrivent chez vous.** Seul le META rattache les corps a une capacite ; l'identite declaree est resolue par egalite exacte, et la couverture de reponses n'etablit qu'une COUVERTURE. Etablir qu'un corps SERT la capacite est un jugement pedagogique, pas un calcul : c'est un resultat terminal, pas une lacune de mesure. C'est pourquoi chaque cellule de ce chapitre est routee vers vous.
 
@@ -119,7 +123,7 @@ Chaque capacite rappelle ensuite ce qui lui est propre : le nombre de cellules, 
 
 ### Capacite `C1` — « Je sais reconnaitre un polynome du second degre et passer d'une forme a une autre. »
 
-Libelle BO : Determiner les fonctions polynomes du second degre definies sur R. Reconnaitre la forme developpee, factorisee et canonique.
+Libelle BO : Choisir une forme adaptée (développée réduite, canonique, factorisée) d’une fonction polynôme du second degré dans le cadre de la résolution d’un problème (équation, inéquation, optimisation, variations).
 
 **Roles pedagogiques concernes et objets contributeurs**
 
@@ -154,7 +158,7 @@ Libelle BO : Determiner les fonctions polynomes du second degre definies sur R. 
 
 ### Capacite `C2` — « Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations. »
 
-Libelle BO : Determiner l'axe de symetrie et le sommet de la parabole. Dresser le tableau de variations de la fonction polynome du second degre.
+Libelle BO : aucun libelle BO : le referentiel du depot ne declare pas cette capacite (`Mathematiques/manuel-maths/referentiel/capacites_1SPE_SECOND_DEGRE.json`). Le contrat du chapitre la declare, le referentiel ne lui donne aucun attendu officiel : la rattacher au programme fait partie de votre jugement.
 
 **Roles pedagogiques concernes et objets contributeurs**
 
@@ -189,7 +193,7 @@ Libelle BO : Determiner l'axe de symetrie et le sommet de la parabole. Dresser l
 
 ### Capacite `C3` — « Je sais calculer le discriminant et resoudre une equation du second degre. »
 
-Libelle BO : Calculer le discriminant d'une equation du second degre. Determiner les solutions reelles selon le signe du discriminant.
+Libelle BO : Résolution de l’équation du second degré.
 
 **Roles pedagogiques concernes et objets contributeurs**
 
@@ -222,18 +226,18 @@ Libelle BO : Calculer le discriminant d'une equation du second degre. Determiner
 - aucun artefact de preuve ne contredit ces cellules, et aucun n'atteste non plus qu'elles soient servies.
 - richesse : statut `CANDIDATE_NON_SEMANTIC`, validation semantique `UNKNOWN`.
 
-### Capacite `C4` — « Je sais factoriser un trinome et etudier son signe. »
+### Capacite `C4` — « Je sais factoriser un trinome en diversifiant les strategies. »
 
-Libelle BO : Factoriser, si possible, un polynome du second degre. Determiner le signe d'un polynome du second degre a partir de ses racines ou du discriminant.
+Libelle BO : Factoriser une fonction polynôme du second degré, en diversifiant les stratégies : racine évidente, détection des racines par leur somme et leur produit, identité remarquable, application des formules générales.
 
 **Roles pedagogiques concernes et objets contributeurs**
 
 | Role pedagogique | Corps rattaches | Objets contributeurs |
 | --- | --- | --- |
-| corriges | 13 | `1SPE-SECDEG-CO-010..012`, `1SPE-SECDEG-CO-023..026`, `1SPE-SECDEG-CO-031..032`, `1SPE-SECDEG-CO-036`, `1SPE-SECDEG-CO-038`, `1SPE-SECDEG-CO-041`, `1SPE-SECDEG-CO-044` |
+| corriges | 14 | `1SPE-SECDEG-CO-010..012`, `1SPE-SECDEG-CO-023..026`, `1SPE-SECDEG-CO-031..032`, `1SPE-SECDEG-CO-036`, `1SPE-SECDEG-CO-038`, `1SPE-SECDEG-CO-041`, `1SPE-SECDEG-CO-044`, `1SPE-SECDEG-CO-102` |
 | cours | 2 | `1SPE-SECDEG-CR-000`, `1SPE-SECDEG-CR-013` |
 | evaluations | 2 | `1SPE-SECDEG-EV-A`, `1SPE-SECDEG-EV-B` |
-| exercices | 13 | `1SPE-SECDEG-EX-010..012`, `1SPE-SECDEG-EX-023..026`, `1SPE-SECDEG-EX-031..032`, `1SPE-SECDEG-EX-036`, `1SPE-SECDEG-EX-038`, `1SPE-SECDEG-EX-041`, `1SPE-SECDEG-EX-044` |
+| exercices | 14 | `1SPE-SECDEG-EX-010..012`, `1SPE-SECDEG-EX-023..026`, `1SPE-SECDEG-EX-031..032`, `1SPE-SECDEG-EX-036`, `1SPE-SECDEG-EX-038`, `1SPE-SECDEG-EX-041`, `1SPE-SECDEG-EX-044`, `1SPE-SECDEG-EX-102` |
 | methodes | 1 | `1SPE-SECDEG-ME-004` |
 | QCM | 3 | `Q10..12` |
 | remediation | 1 | `1SPE-SECDEG-RE-C4` |
@@ -241,14 +245,14 @@ Libelle BO : Factoriser, si possible, un polynome du second degre. Determiner le
 **Richesse declaree**
 
 - type de capacite : `PROCEDURAL` ; occasions distinctes : 5 ; statut declaratif : `SUFFICIENT`.
-- occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 13.
+- occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 14.
 - gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.
 - evaluee par : `1SPE-SECDEG-EV-A`, `1SPE-SECDEG-EV-B`.
 
 **Progression de difficulte declaree**
 
 - parcours 1 : 4 exercices (10–12 min) — `1SPE-SECDEG-EX-010..012`, `1SPE-SECDEG-EX-044`
-- parcours 2 : 6 exercices (20–20 min) — `1SPE-SECDEG-EX-023..026`, `1SPE-SECDEG-EX-031..032`
+- parcours 2 : 7 exercices (20–20 min) — `1SPE-SECDEG-EX-023..026`, `1SPE-SECDEG-EX-031..032`, `1SPE-SECDEG-EX-102`
 - parcours 3 : 3 exercices (35–40 min) — `1SPE-SECDEG-EX-036`, `1SPE-SECDEG-EX-038`, `1SPE-SECDEG-EX-041`
 
 **Routage de cette capacite vers l'humain**
@@ -257,9 +261,41 @@ Libelle BO : Factoriser, si possible, un polynome du second degre. Determiner le
 - aucun artefact de preuve ne contredit ces cellules, et aucun n'atteste non plus qu'elles soient servies.
 - richesse : statut `CANDIDATE_NON_SEMANTIC`, validation semantique `UNKNOWN`.
 
+### Capacite `C8` — « Je sais etudier le signe d'un polynome du second degre donne sous forme factorisee. »
+
+Libelle BO : Étudier le signe d’une fonction polynôme du second degré donnée sous forme factorisée.
+
+**Roles pedagogiques concernes et objets contributeurs**
+
+| Role pedagogique | Corps rattaches | Objets contributeurs |
+| --- | --- | --- |
+| corriges | 1 | `1SPE-SECDEG-CO-025` |
+| cours | 1 | `1SPE-SECDEG-CR-013` |
+| evaluations | 1 | `1SPE-SECDEG-EV-B` |
+| exercices | 1 | `1SPE-SECDEG-EX-025` |
+| QCM | 1 | `Q20` |
+
+**Richesse declaree**
+
+- type de capacite : `PROCEDURAL` ; occasions distinctes : 5 ; statut declaratif : `SUFFICIENT`.
+- occasions existantes : assessment : 1 · method : 1 · qcm : 1 · remediation : 1 · targeted_practice : 1.
+- gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.
+- evaluee par : `1SPE-SECDEG-EV-B`.
+
+**Progression de difficulte declaree**
+
+- parcours 2 : 1 exercice (20–20 min) — `1SPE-SECDEG-EX-025`
+- palier sans exercice cible : parcours 1, parcours 3.
+
+**Routage de cette capacite vers l'humain**
+
+- les 5 cellules portent `JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS`.
+- aucun artefact de preuve ne contredit ces cellules, et aucun n'atteste non plus qu'elles soient servies.
+- richesse : statut `CANDIDATE_NON_SEMANTIC`, validation semantique `UNKNOWN`.
+
 ### Capacite `C5` — « Je sais resoudre une inequation du second degre. »
 
-Libelle BO : Resoudre une inequation du second degre. Resoudre une equation ou inequation se ramenant au second degre.
+Libelle BO : aucun libelle BO : le referentiel du depot ne declare pas cette capacite (`Mathematiques/manuel-maths/referentiel/capacites_1SPE_SECOND_DEGRE.json`). Le contrat du chapitre la declare, le referentiel ne lui donne aucun attendu officiel : la rattacher au programme fait partie de votre jugement.
 
 **Roles pedagogiques concernes et objets contributeurs**
 
@@ -294,7 +330,7 @@ Libelle BO : Resoudre une inequation du second degre. Resoudre une equation ou i
 
 ### Capacite `C6` — « Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum. »
 
-Libelle BO : Modeliser un probleme a l'aide d'une fonction polynome du second degre. Problemes d'optimisation.
+Libelle BO : aucun libelle BO : le referentiel du depot ne declare pas cette capacite (`Mathematiques/manuel-maths/referentiel/capacites_1SPE_SECOND_DEGRE.json`). Le contrat du chapitre la declare, le referentiel ne lui donne aucun attendu officiel : la rattacher au programme fait partie de votre jugement.
 
 **Roles pedagogiques concernes et objets contributeurs**
 
@@ -327,6 +363,39 @@ Libelle BO : Modeliser un probleme a l'aide d'une fonction polynome du second de
 - aucun artefact de preuve ne contredit ces cellules, et aucun n'atteste non plus qu'elles soient servies.
 - richesse : statut `CANDIDATE_NON_SEMANTIC`, validation semantique `UNKNOWN`.
 
+### Capacite `C7` — « Je sais determiner les fonctions polynomes du second degre s'annulant en deux nombres reels distincts, en utilisant la somme et le produit des racines. »
+
+Libelle BO : Déterminer les fonctions polynômes du second degré s’annulant en deux nombres réels distincts.
+
+**Roles pedagogiques concernes et objets contributeurs**
+
+| Role pedagogique | Corps rattaches | Objets contributeurs |
+| --- | --- | --- |
+| corriges | 2 | `1SPE-SECDEG-CO-101..102` |
+| cours | 1 | `1SPE-SECDEG-CR-016` |
+| evaluations | 1 | `1SPE-SECDEG-EV-B` |
+| exercices | 2 | `1SPE-SECDEG-EX-101..102` |
+| QCM | 1 | `Q19` |
+
+**Richesse declaree**
+
+- type de capacite : `PROCEDURAL` ; occasions distinctes : 5 ; statut declaratif : `SUFFICIENT`.
+- occasions existantes : assessment : 1 · method : 1 · qcm : 1 · remediation : 1 · targeted_practice : 2.
+- gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.
+- evaluee par : `1SPE-SECDEG-EV-B`.
+
+**Progression de difficulte declaree**
+
+- parcours 1 : 1 exercice (10–10 min) — `1SPE-SECDEG-EX-101`
+- parcours 2 : 1 exercice (20–20 min) — `1SPE-SECDEG-EX-102`
+- palier sans exercice cible : parcours 3.
+
+**Routage de cette capacite vers l'humain**
+
+- les 5 cellules portent `JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS`.
+- aucun artefact de preuve ne contredit ces cellules, et aucun n'atteste non plus qu'elles soient servies.
+- richesse : statut `CANDIDATE_NON_SEMANTIC`, validation semantique `UNKNOWN`.
+
 ## 5. Question de QCM routee vers l'humain
 
 Aucune question de ce chapitre n'est routee vers une revue humaine par `audit/QCM_INDEPENDENT_EVIDENCE_V2.json`.
@@ -335,7 +404,7 @@ Aucune question de ce chapitre n'est routee vers une revue humaine par `audit/QC
 
 - diversite des gestes de raisonnement au niveau du chapitre : `INSUFFICIENT` (declaratif : `INSUFFICIENT`).
 - aucun profil de diversite declare pour ce chapitre : les gestes de raisonnement ne sont pas mesures, ils restent a juger.
-- capacites routees vers l'humain : 6 sur 6.
+- capacites routees vers l'humain : 8 sur 8.
 - attendus officiels obligatoires rattaches : 10 sur 10 ; manquants : 0 ; hors annee : 0.
 - chapitres dont ce chapitre depend par ses prerequis : `2GT`. La coherence au niveau du manuel se juge avec eux.
 

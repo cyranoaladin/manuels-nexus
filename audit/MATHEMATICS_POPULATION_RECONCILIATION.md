@@ -4,19 +4,19 @@ MISSING_ORACLE compte des objets sans bloc de vérification ; GAP et NO_RECEIPTS
 
 ## Objets
 
-- Total inventaire : `4096`
-- Portant une assertion formelle : `3497`
-- Sans oracle alors qu'ils pourraient en porter : `91`
+- Total inventaire : `3441`
+- Portant une assertion formelle : `2936`
+- Sans oracle alors qu'ils pourraient en porter : `0`
 - Non formalisables : `417`
-- Non mathématiques : `91`
+- Non mathématiques : `88`
 
-`3497 exécutés + 91 sans oracle + 417 non formalisables + 91 non mathématiques = 4096 / 4096 objets`
+`2936 exécutés + 0 sans oracle + 417 non formalisables + 88 non mathématiques = 3441 / 3441 objets`
 
 - `MATHEMATICS_POPULATION_UNRECONCILED` : `0`
 
 ## Chapitres et preuves conservées
 
-- Chapitres : `52` — complets `10`, lacunaires `25`, sans reçu `17`
-- Reçus SymPy déposés : `3038` (pass `2674`, revue humaine `364`, échec `0`)
-- Verdicts non routés : `121`
-- Objets exécutés sans reçu conservé : `459`
+- Chapitres : `52` — complets `52`, lacunaires `0`, sans reçu `0`
+- Reçus SymPy déposés : `3351` (pass `2956`, revue humaine `395`, échec `0`)
+- Verdicts non routés : `0`
+- Objets exécutés sans reçu conservé : `-20`

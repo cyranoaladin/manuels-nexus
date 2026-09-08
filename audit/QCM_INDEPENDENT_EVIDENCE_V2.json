@@ -1,19 +1,19 @@
 {
   "ALL_QCM_HUMAN_REVIEW_COMPLETE": false,
   "EVIDENCE_ROUTING_COMPLETE": true,
-  "answer_key_verified_by_independent_computation": 23,
+  "answer_key_verified_by_independent_computation": 25,
   "approves_nothing": true,
   "artifact_type": "qcm_independent_evidence_v2",
   "counts": {
     "CARRIED_FORWARD_IDENTICAL": 301,
-    "HUMAN_REVIEW_REQUIRED": 205,
-    "MACHINE_RECALCULATED": 23,
+    "HUMAN_REVIEW_REQUIRED": 203,
+    "MACHINE_RECALCULATED": 25,
     "UNKNOWN": 0,
     "question_count": 529
   },
   "diagnostic_coverage_findings": [],
   "diagnostic_coverage_is_release_blocking": true,
-  "equation": "529 = 301 + 23 + 205",
+  "equation": "529 = 301 + 25 + 203",
   "evidence_schema_fields": [
     "statement",
     "options",
@@ -101,8 +101,6 @@
     "1NSI-WEB-IHM/Q7",
     "1NSI-WEB-IHM/Q8",
     "1NSI-WEB-IHM/Q9",
-    "1SPE-SECOND-DEGRE/Q19",
-    "1SPE-SECOND-DEGRE/Q20",
     "TCOMPL-ECHANTILLONNAGE/Q6",
     "TCOMPL-ECHANTILLONNAGE/Q7",
     "TCOMPL-INFERENCE-BAYESIENNE/Q6",
@@ -3562,22 +3560,51 @@
     {
       "capacity": "C7",
       "chapter": "1SPE-SECOND-DEGRE",
-      "computed_option_truths": {},
-      "computed_unique_answer": null,
+      "computed_option_truths": {
+        "A": false,
+        "B": false,
+        "C": true,
+        "D": false
+      },
+      "computed_unique_answer": "C",
+      "computed_value": "S=3 P=-4",
       "delta_classes": [],
-      "evidence_digest": "sha256:818966183e5410a7e6246b733c3507978cb4ae2a1aac8fbe64341bfc24ee1c7f",
-      "evidence_status": "HUMAN_REVIEW_REQUIRED",
-      "human_review_required": true,
-      "independent_evidence": "",
+      "evidence_digest": "sha256:10c65e764469b16884c753bab00488e28a49d0c8820ad3060c2c12042923a1c0",
+      "evidence_status": "MACHINE_RECALCULATED",
+      "human_review_required": false,
+      "independent_evidence": "les facteurs donnent les racines -1 et 4 ; leur somme vaut 3 et leur produit -4",
       "question_id": "Q19",
-      "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
-      "release_blocking": true,
       "semantic_question_digest": "sha256:d59330c2b5af147f12bbb198a81d2538486299368d3fbbff5b6e134b6de0f63d",
-      "solver_family": null,
+      "solver_family": "SUM_AND_PRODUCT_OF_ROOTS",
       "solver_input_digest": "sha256:a3bb42b6dfdcd5b404caae83f68e8a2f3af70737bafd65463ece86777220afff",
+      "solver_output_digest": "sha256:e18d02cf5e9bc8c3d3f276070508034fb4c6ff42108406ad6b56b0ccd46b66a1",
       "solver_version": "1.1.0",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/qcm/1SPE-SECDEG-QCM.json",
-      "verification": null
+      "verification": {
+        "answer_key_verdict": "PASS",
+        "capacity": "C7",
+        "capacity_declared": true,
+        "computed_unique_answer": "C",
+        "coverage_verdict": "PASS",
+        "declared_key": "C",
+        "declared_key_matches_computation": true,
+        "diagnostic_coverage": {
+          "complete": true,
+          "diagnostic_on_the_correct_option": [],
+          "distractors": [
+            "A",
+            "B",
+            "D"
+          ],
+          "missing_error_model": [],
+          "missing_remediation_reference": []
+        },
+        "equivalent_option_groups": [],
+        "no_equivalent_options": true,
+        "true_option_count": 1,
+        "unique_true_option": true,
+        "verdict": "PASS"
+      }
     },
     {
       "capacity": "C1",
@@ -3599,22 +3626,51 @@
     {
       "capacity": "C8",
       "chapter": "1SPE-SECOND-DEGRE",
-      "computed_option_truths": {},
-      "computed_unique_answer": null,
+      "computed_option_truths": {
+        "A": false,
+        "B": false,
+        "C": false,
+        "D": true
+      },
+      "computed_unique_answer": "D",
+      "computed_value": "positif entre des racines -3 et 1",
       "delta_classes": [],
-      "evidence_digest": "sha256:f0471582f0fce1e0422ee1cd026c15181ecc4c636ddd9afd11959fdd3edaab05",
-      "evidence_status": "HUMAN_REVIEW_REQUIRED",
-      "human_review_required": true,
-      "independent_evidence": "",
+      "evidence_digest": "sha256:d5e8ba25bfd5fab0afd11798938dc7abe286bedcf6b9700339e2e0aa0ec2b064",
+      "evidence_status": "MACHINE_RECALCULATED",
+      "human_review_required": false,
+      "independent_evidence": "le coefficient dominant vaut -2 ; a l'exterieur des racines -3 et 1 le trinome a son signe, entre elles le signe contraire, donc f est positif entre les racines",
       "question_id": "Q20",
-      "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
-      "release_blocking": true,
       "semantic_question_digest": "sha256:dd78fab9d8e4e88fd1a74ddf7addb0f409a7dd0a8ccbedf271cdb020dc6499f9",
-      "solver_family": null,
+      "solver_family": "FACTORED_QUADRATIC_SIGN",
       "solver_input_digest": "sha256:f465a09a6c32baa6afd5fb80bd8f0acb10f18ed4da4b1c3db90e52595990d9a3",
+      "solver_output_digest": "sha256:49478b1cca7ba291169098cfc4c44993b8cd61334376986537a5192d88e3c205",
       "solver_version": "1.1.0",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/qcm/1SPE-SECDEG-QCM.json",
-      "verification": null
+      "verification": {
+        "answer_key_verdict": "PASS",
+        "capacity": "C8",
+        "capacity_declared": true,
+        "computed_unique_answer": "D",
+        "coverage_verdict": "PASS",
+        "declared_key": "D",
+        "declared_key_matches_computation": true,
+        "diagnostic_coverage": {
+          "complete": true,
+          "diagnostic_on_the_correct_option": [],
+          "distractors": [
+            "A",
+            "B",
+            "C"
+          ],
+          "missing_error_model": [],
+          "missing_remediation_reference": []
+        },
+        "equivalent_option_groups": [],
+        "no_equivalent_options": true,
+        "true_option_count": 1,
+        "unique_true_option": true,
+        "verdict": "PASS"
+      }
     },
     {
       "capacity": "C1",
@@ -10660,13 +10716,14 @@
     }
   ],
   "schema_version": 2,
-  "set_digest": "sha256:8ce40db75d49dbe126dbf36a3de402e13ce5a03471e135db8a99dc3d5f993486",
+  "set_digest": "sha256:b4392b62dd45f5fba772c1833e544b1ff61c1b0d99f011697be7f16d6831d379",
   "solver_families_used": [
     "ALGEBRAIC_GAIN",
     "BINARY_TREE_TERMINAL_PATHS",
     "EUCLIDEAN_GRAM_FORM",
     "EXPECTATION_SIGN_INTERPRETATION",
     "EXPECTED_PROFIT_OF_A_CONTRACT",
+    "FACTORED_QUADRATIC_SIGN",
     "INDEPENDENT_BERNOULLI_REPETITION",
     "INVERSE_TRANSFORM_SAMPLING",
     "KOENIG_HUYGENS_SECOND_MOMENT",
@@ -10678,6 +10735,7 @@
     "SAMPLE_MEAN_FLUCTUATION_MONOTONICITY",
     "SAMPLE_MEAN_FLUCTUATION_SCALE",
     "STANDARD_DEVIATION_FROM_VARIANCE",
+    "SUM_AND_PRODUCT_OF_ROOTS",
     "TWO_SIGMA_COVERAGE_PROPORTION",
     "UNIFORM_DISCRETE_EXPECTATION",
     "UNIFORM_DISCRETE_PROBABILITY"

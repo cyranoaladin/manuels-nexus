@@ -269,7 +269,7 @@ Libelle BO : Pour k strictement positif, représenter t → e^{-kt} et t → e^{
 **Richesse declaree**
 
 - type de capacite : `ATOMIC_SUPPORT` ; occasions distinctes : 5 ; statut declaratif : `SUFFICIENT`.
-- occasions existantes : assessment : 2 · method : 2 · qcm : 3 · remediation : 1 · targeted_practice : 8.
+- occasions existantes : assessment : 2 · method : 2 · qcm : 3 · remediation : 1 · targeted_practice : 6.
 - gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.
 - evaluee par : `1SPE-EXPO-EV-A`, `1SPE-EXPO-EV-B`.
 
@@ -277,7 +277,7 @@ Libelle BO : Pour k strictement positif, représenter t → e^{-kt} et t → e^{
 
 - parcours 1 : 2 exercices (8–8 min) — `1SPE-EXPO-EX-041..042`
 - parcours 2 : 2 exercices (10–12 min) — `1SPE-EXPO-EX-043..044`
-- parcours 3 : 4 exercices (15–15 min) — `1SPE-EXPO-EX-045..046`, `1SPE-EXPO-EX-049..050`
+- parcours 3 : 2 exercices (15–15 min) — `1SPE-EXPO-EX-045..046`
 
 **Routage de cette capacite vers l'humain**
 

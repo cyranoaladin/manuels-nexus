@@ -42,6 +42,40 @@ OUTPUT_JSON = ROOT / "audit/MATHEMATICS_POPULATION_RECONCILIATION.json"
 OUTPUT_MD = ROOT / "audit/MATHEMATICS_POPULATION_RECONCILIATION.md"
 
 
+
+#: Un recu conserve doit designer un contenu qui existe encore ET qui porte
+#: encore un bloc de verification. Un recu qui survit a sa source certifie du
+#: vide : c'est la forme la plus discrete de metrique perimee.
+VERIFY_MARQUEUR = "% BEGIN-VERIFY"
+
+
+def _receipts_without_live_source(root: Path) -> list[str]:
+    stale = []
+    for corpus, base in (
+        (root / "Mathematiques/manuel-maths/chapitres", root / "Mathematiques/manuel-maths"),
+        (root / "NSI/chapitres", root / "NSI"),
+    ):
+        if not corpus.is_dir():
+            continue
+        for fichier in sorted(corpus.glob("*/validations/*.sympy.json")):
+            recu = json.loads(fichier.read_text(encoding="utf-8"))
+            if recu.get("verdict") != "pass":
+                continue
+            declare = recu.get("source_path")
+            if not declare:
+                stale.append(str(fichier.relative_to(root)))
+                continue
+            source = base / declare
+            if not source.is_file():
+                source = root / declare
+            if not source.is_file():
+                stale.append(str(fichier.relative_to(root)))
+            elif VERIFY_MARQUEUR not in source.read_text(
+                encoding="utf-8", errors="replace"
+            ):
+                stale.append(str(fichier.relative_to(root)))
+    return stale
+
 def build() -> dict[str, Any]:
     inventory = json.loads((ROOT / INVENTORY).read_text(encoding="utf-8"))
     maths = json.loads((ROOT / MATHEMATICS).read_text(encoding="utf-8"))["summary"]
@@ -79,6 +113,8 @@ def build() -> dict[str, Any]:
     )
     unreconciled = objects["MATHEMATICS_OBJECTS_TOTAL"] - accounted
 
+    stale_receipts = _receipts_without_live_source(ROOT)
+
     chapters = {
         "CHAPTERS_TOTAL": len(rows),
         "CHAPTER_ORACLE_COMPLETE": statuses.get("COMPLETE", 0),
@@ -92,8 +128,16 @@ def build() -> dict[str, Any]:
         "RECEIPT_FAIL": receipts["fail"],
         "MACHINE_UNCLASSIFIED": receipts["machine_unclassified"],
         "HUMAN_SCIENCE_REQUIRED": receipts["human_science_required"],
+        # UN RECU `manual_review` N'ATTESTE AUCUNE EXECUTION. Le verificateur
+        # en depose un pour chaque objet qu'il rencontre sans bloc de
+        # verification : le compter parmi les preuves ferait croire a trois
+        # cent huit executions qui n'ont jamais eu lieu, et rendait l'ecart
+        # negatif -- plus de recus que d'objets a prouver.
+        "EXECUTED_RECEIPTS": receipts["pass"] + receipts["fail"],
+        "RECEIPTS_WITHOUT_LIVE_SOURCE": len(stale_receipts),
         "EXECUTED_BUT_UNRECEIPTED": (
-            maths["OBJECTS_WITH_VERIFIABLE_ASSERTIONS"] - receipts["receipts"]
+            maths["OBJECTS_WITH_VERIFIABLE_ASSERTIONS"]
+            - (receipts["pass"] + receipts["fail"])
         ),
     }
 

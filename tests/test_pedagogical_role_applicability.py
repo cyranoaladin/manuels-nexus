@@ -84,12 +84,26 @@ def test_bad_mapping_is_empty_and_that_is_stated(payload) -> None:
 
 
 def test_the_qcm_exemption_cites_a_deposited_policy(payload) -> None:
-    qcm = [u for u in payload["units"] if u["ROLE"] == "qcm"]
-    assert qcm
-    for unit in qcm:
+    """L'exemption QCM ne s'invoque jamais sans citer la politique deposee.
+
+    Le corpus ne porte plus aucune unite de role `qcm` : toutes les cellules
+    QCM sont couvertes, il n'y a donc plus rien a exempter. Une population
+    vide ne prouve pourtant pas que la regle tient encore -- on verifie donc
+    qu'elle existe dans le producteur, que la politique est bien deposee, et
+    que toute unite `qcm` qui reapparaitrait la citerait.
+    """
+
+    politique = "audit/QCM_POLICY_ORIGIN.md"
+    assert (ROOT / politique).is_file()
+    source = (ROOT / "scripts/build_pedagogical_role_applicability.py").read_text(
+        encoding="utf-8"
+    )
+    assert politique in source
+    for unit in payload["units"]:
+        if unit["ROLE"] != "qcm":
+            continue
         assert unit["APPLICABILITY_VERDICT"] == "ROLE_NOT_APPLICABLE"
-        assert unit["REQUIREMENT_SOURCE"] == "audit/QCM_POLICY_ORIGIN.md"
-    assert (ROOT / "audit/QCM_POLICY_ORIGIN.md").is_file()
+        assert unit["REQUIREMENT_SOURCE"] == politique
 
 
 def test_no_correction_is_owed_without_a_source_object(payload) -> None:

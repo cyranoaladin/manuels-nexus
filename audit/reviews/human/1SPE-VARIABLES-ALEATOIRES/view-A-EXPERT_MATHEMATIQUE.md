@@ -133,99 +133,81 @@ Le registre `audit/1SPE_MANUAL_REVIEW_DISPOSITION_LEDGER.json` classe chaque obj
 
 19 objets pour ce chapitre, regroupes par famille scientifique — la capacite du referentiel du depot, avec son libelle BO — puis par type d'objet.
 
-Un objet qui declare plusieurs capacites apparait dans plusieurs familles : 19 objets distincts pour 29 rattachements.
+Un objet qui declare plusieurs capacites apparait dans plusieurs familles : 19 objets distincts pour 23 rattachements.
 
 ### Famille `C1` — Interpréter les événements liés à une variable aléatoire et déterminer sa loi de probabilité sur un univers fini.
 
 Capacite eleve : « Je sais interpreter les evenements lies a une variable aleatoire et determiner sa loi de probabilite. »
 
-5 objets · 27 affirmations calculables sans preuve machine.
+4 objets · 16 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 3 objets, 6 affirmations a verifier :
     - `1SPE-VARALEA-EX-001-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-001-CDP.tex`
     - `1SPE-VARALEA-EX-002-CDP` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-002-CDP.tex`
     - `1SPE-VARALEA-EX-005-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-005-CDP.tex`
-- **`cours`** — 2 objets, 21 affirmations a verifier :
-    - `1SPE-VARALEA-CR-000` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/00_ouverture.tex`
-    - `1SPE-VARALEA-CR-010` (18 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/10_C1_loi_probabilite.tex`
+- **`methode`** — 1 objet, 10 affirmations a verifier :
+    - `1SPE-VARALEA-ME-001` (10 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/methodes/1SPE-VARALEA-ME-001.tex`
 
 ### Famille `C2` — Calculer l'espérance, la variance et l'écart type d'une variable aléatoire.
 
 Capacite eleve : « Je sais calculer l'esperance E(X), la variance V(X) et l'ecart type sigma(X) d'une variable aleatoire. »
 
-5 objets · 18 affirmations calculables sans preuve machine.
+4 objets · 14 affirmations calculables sans preuve machine.
 
 - **`algorithme`** — 1 objet, 1 affirmation a verifier :
     - `1SPE-VARALEA-ALG-001` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/15_experimentations.tex`
 - **`coup_de_pouce`** — 2 objets, 3 affirmations a verifier :
     - `1SPE-VARALEA-EX-013-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-013-CDP.tex`
     - `1SPE-VARALEA-EX-017-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-017-CDP.tex`
-- **`cours`** — 2 objets, 14 affirmations a verifier :
-    - `1SPE-VARALEA-CR-000` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/00_ouverture.tex`
-    - `1SPE-VARALEA-CR-011` (11 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/11_C2_esperance_variance.tex`
+- **`methode`** — 1 objet, 10 affirmations a verifier :
+    - `1SPE-VARALEA-ME-002` (10 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/methodes/1SPE-VARALEA-ME-002.tex`
 
 ### Famille `C3` — Pour n ≤ 4, représenter par un arbre la répétition d'épreuves de Bernoulli indépendantes et identiques afin de calculer les probabilités liées au nombre de succès.
 
 Capacite eleve : « Je sais representer par un arbre la repetition de n <= 4 epreuves de Bernoulli independantes et identiques, puis etudier le nombre de succes. »
 
-5 objets · 28 affirmations calculables sans preuve machine.
+3 objets · 6 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 3 objets, 6 affirmations a verifier :
     - `1SPE-VARALEA-EX-002-CDP` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-002-CDP.tex`
     - `1SPE-VARALEA-EX-005-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-005-CDP.tex`
     - `1SPE-VARALEA-EX-017-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-017-CDP.tex`
-- **`cours`** — 2 objets, 22 affirmations a verifier :
-    - `1SPE-VARALEA-CR-000` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/00_ouverture.tex`
-    - `1SPE-VARALEA-CR-012` (19 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/12_C3_repetitions_bernoulli.tex`
 
 ### Famille `C4` — Utiliser la linéarité de l'espérance.
 
 Capacite eleve : « Je sais utiliser la linearite de l'esperance pour calculer E(aX+b). »
 
-3 objets · 10 affirmations calculables sans preuve machine.
+1 objet · 1 affirmation calculable sans preuve machine.
 
 - **`coup_de_pouce`** — 1 objet, 1 affirmation a verifier :
     - `1SPE-VARALEA-EX-017-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-017-CDP.tex`
-- **`cours`** — 2 objets, 9 affirmations a verifier :
-    - `1SPE-VARALEA-CR-000` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/00_ouverture.tex`
-    - `1SPE-VARALEA-CR-013` (6 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/13_C4_transformations_affines.tex`
 
 ### Famille `C5` — Résoudre des problèmes contextualisés faisant intervenir des variables aléatoires.
 
 Capacite eleve : « Je sais resoudre des problemes contextualises (jeux, decisions, assurances) a l'aide de variables aleatoires. »
 
-4 objets · 16 affirmations calculables sans preuve machine.
+3 objets · 13 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 2 objets, 2 affirmations a verifier :
     - `1SPE-VARALEA-EX-041-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-041-CDP.tex`
     - `1SPE-VARALEA-EX-047-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-047-CDP.tex`
-- **`cours`** — 2 objets, 14 affirmations a verifier :
-    - `1SPE-VARALEA-CR-000` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/00_ouverture.tex`
-    - `1SPE-VARALEA-CR-014` (11 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/14_C5_problemes_contextualises.tex`
-
-### Famille `C6` — Le travail expérimental de simulation d’échantillons prolonge celui entrepris en seconde. L’objectif est de faire percevoir le principe de l’estimation de l’espérance d’une variable aléatoire, ou de la moyenne d’une variable statistique dans une population, par une moyenne observée sur un échantillon. Simuler une variable aléatoire avec Python ou un tableur. Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire.
-
-Capacite eleve : « Je sais simuler une variable aleatoire et des echantillons, et lire, comprendre et ecrire une fonction Python renvoyant la moyenne d'un echantillon de taille n. »
-
-1 objet · 3 affirmations calculables sans preuve machine.
-
-- **`cours`** — 1 objet, 3 affirmations a verifier :
-    - `1SPE-VARALEA-CR-000` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/00_ouverture.tex`
+- **`methode`** — 1 objet, 11 affirmations a verifier :
+    - `1SPE-VARALEA-ME-005` (11 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/methodes/1SPE-VARALEA-ME-005.tex`
 
 ### Famille `C7` — Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à 2𝜎/√n.
 
 Capacite eleve : « Je sais etudier experimentalement la fluctuation des moyennes d'echantillons autour de l'esperance, simuler N echantillons et interpreter l'ecart entre moyenne empirique et esperance, notamment au regard de 2 sigma / racine(n). »
 
-1 objet · 3 affirmations calculables sans preuve machine.
+1 objet · 1 affirmation calculable sans preuve machine.
 
-- **`cours`** — 1 objet, 3 affirmations a verifier :
-    - `1SPE-VARALEA-CR-000` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/00_ouverture.tex`
+- **`methode`** — 1 objet, 1 affirmation a verifier :
+    - `1SPE-VARALEA-ME-009` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/methodes/1SPE-VARALEA-ME-009.tex`
 
 ### Famille `CAPACITE_NON_DECLAREE_PAR_L_OBJET`
 
 Objets dont ni le META ni l'exercice servi ne declare de capacite du chapitre. Rien n'est devine ici : la famille reste a etablir par lecture.
 
-5 objets · 8 affirmations calculables sans preuve machine.
+7 objets · 30 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 5 objets, 8 affirmations a verifier :
     - `1SPE-VARALEA-EX-022-CDP` (4 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-022-CDP.tex`
@@ -233,6 +215,9 @@ Objets dont ni le META ni l'exercice servi ne declare de capacite du chapitre. R
     - `1SPE-VARALEA-EX-026-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-026-CDP.tex`
     - `1SPE-VARALEA-EX-031-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-031-CDP.tex`
     - `1SPE-VARALEA-EX-033-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-033-CDP.tex`
+- **`methode`** — 2 objets, 22 affirmations a verifier :
+    - `1SPE-VARALEA-ME-003` (7 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/methodes/1SPE-VARALEA-ME-003.tex`
+    - `1SPE-VARALEA-ME-004` (15 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/methodes/1SPE-VARALEA-ME-004.tex`
 
 ## 5. Question de QCM routee vers l'humain
 
@@ -246,7 +231,7 @@ Ces mesures viennent de `audit/PUBLISH_READINESS_CHAPTER_MATRIX.json`. Elles ne 
 | --- | --- |
 | Etat machine vertical | `MACHINE_REVIEW_COMPLETE` |
 | Cloture humaine | `PENDING` |
-| Objets passes par l'oracle | 127 reussites, 0 echecs, 20 en science humaine requise, 26 en revue manuelle |
+| Objets passes par l'oracle | 133 reussites, 0 echecs, 20 en science humaine requise, 29 en revue manuelle |
 | Attendus officiels obligatoires | 17 rattaches sur 17, 0 manquants, 0 hors annee |
 | Sujets d'evaluation | 2 sujets, 2 corriges, statut `COMPLETE` |
 | QCM | 21 questions, capacites evaluees C1, C2, C3, C4, C5, C6, C7 |
@@ -256,7 +241,6 @@ La relation exercice/corrige n'est etablie que structurellement : une COUVERTURE
 
 Dettes de revue declarees pour ce chapitre :
 
-- `QCM_DIAGNOSTIC_RENVOI_SEMANTICS` — 1 unite, categorie `QCM_DIAGNOSTIC_RENVOI_SEMANTICS`, bloquant : oui.
 - `RESIDUAL_TRUE_NEW_13` — 4 unites, categorie `OBJECT_REVIEW`, bloquant : oui.
 - `UNCHANGED` — 152 unites, categorie `OBJECT_REVIEW`, bloquant : oui.
 - `VARALEA_C6C7_REVIEW_DEBT_12` — 12 unites, categorie `OBJECT_REVIEW`, bloquant : oui.

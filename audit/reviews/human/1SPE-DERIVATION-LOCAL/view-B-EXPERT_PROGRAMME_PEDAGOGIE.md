@@ -132,7 +132,7 @@ Libelle BO : Calculer un taux de variation, la pente d'une sécante.
 **Richesse declaree**
 
 - type de capacite : `PROCEDURAL` ; occasions distinctes : 5 ; statut declaratif : `SUFFICIENT`.
-- occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 12.
+- occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 11.
 - gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.
 - evaluee par : `1SPE-DERLOCAL-EV-A`, `1SPE-DERLOCAL-EV-B`.
 
@@ -140,7 +140,7 @@ Libelle BO : Calculer un taux de variation, la pente d'une sécante.
 
 - parcours 1 : 4 exercices (5–8 min) — `1SPE-DERLOCAL-EX-001..002`, `1SPE-DERLOCAL-EX-031..032`
 - parcours 2 : 4 exercices (12–15 min) — `1SPE-DERLOCAL-EX-003..004`, `1SPE-DERLOCAL-EX-039..040`
-- parcours 3 : 4 exercices (15–25 min) — `1SPE-DERLOCAL-EX-005..006`, `1SPE-DERLOCAL-EX-047`, `1SPE-DERLOCAL-EX-049`
+- parcours 3 : 3 exercices (15–20 min) — `1SPE-DERLOCAL-EX-005..006`, `1SPE-DERLOCAL-EX-047`
 
 **Routage de cette capacite vers l'humain**
 
@@ -272,7 +272,7 @@ Libelle BO : Calculer une valeur approchée de f(a+h).
 **Richesse declaree**
 
 - type de capacite : `PROCEDURAL` ; occasions distinctes : 5 ; statut declaratif : `SUFFICIENT`.
-- occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 11.
+- occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 10.
 - gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.
 - evaluee par : `1SPE-DERLOCAL-EV-A`, `1SPE-DERLOCAL-EV-B`.
 
@@ -280,7 +280,7 @@ Libelle BO : Calculer une valeur approchée de f(a+h).
 
 - parcours 1 : 3 exercices (5–8 min) — `1SPE-DERLOCAL-EX-025..026`, `1SPE-DERLOCAL-EX-038`
 - parcours 2 : 4 exercices (12–15 min) — `1SPE-DERLOCAL-EX-027..028`, `1SPE-DERLOCAL-EX-045..046`
-- parcours 3 : 4 exercices (20–25 min) — `1SPE-DERLOCAL-EX-029..030`, `1SPE-DERLOCAL-EX-048..049`
+- parcours 3 : 3 exercices (20–20 min) — `1SPE-DERLOCAL-EX-029..030`, `1SPE-DERLOCAL-EX-048`
 
 **Routage de cette capacite vers l'humain**
 

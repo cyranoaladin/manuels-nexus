@@ -1,0 +1,84 @@
+% META: {"id": "1SPE-SECDEG-ME-008", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "methode", "capacites_codes": ["C8"], "methodes": ["M8"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solveset, S, Interval, Union, oo
+% x = symbols('x', real=True)
+% f = -2 * (x - 1) * (x + 3)
+% assert f.subs(x, 1) == 0 and f.subs(x, -3) == 0
+% positif = solveset(f > 0, x, domain=S.Reals)
+% assert positif == Interval.open(-3, 1)
+% negatif = solveset(f < 0, x, domain=S.Reals)
+% assert negatif == Union(Interval.open(-oo, -3), Interval.open(1, oo))
+% assert f.subs(x, 0) == 6 and f.subs(x, 2) == -10 and f.subs(x, -4) == -10
+% # Avec un coefficient positif, tout s'inverse : la regle porte sur le signe
+% # de a, jamais sur le mot « positif ».
+% g = 2 * (x - 1) * (x + 3)
+% assert solveset(g > 0, x, domain=S.Reals) == Union(
+%     Interval.open(-oo, -3), Interval.open(1, oo))
+% assert g.subs(x, 0) == -6
+% END-VERIFY
+\begin{fichemethode}{M8}{Étudier le signe d'un trinôme donné sous forme factorisée}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé donne un trinôme \textbf{déjà
+  factorisé}, sous la forme $f(x) = a(x - x_1)(x - x_2)$, et demande d'« étudier
+  son signe », de « dresser le tableau de signes » ou de « résoudre
+  $f(x) > 0$ ». Sur une forme factorisée, le discriminant est inutile : les
+  racines se lisent.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Lire les racines.} Chaque facteur $(x - x_i)$ s'annule en
+      $x_i$. Attention au signe : $(x + 3)$ s'annule en $-3$.
+    \item \textbf{Lire le coefficient $a$.} C'est le facteur devant les
+      parenthèses ; s'il n'y en a pas, $a = 1$.
+    \item \textbf{Ordonner les racines} de la plus petite à la plus grande, et
+      dresser le tableau de signes sur $\mathbb{R}$ avec ces deux valeurs.
+    \item \textbf{Appliquer la règle.} Le trinôme est du signe de $a$
+      \textbf{à l'extérieur} des racines, et du signe contraire
+      \textbf{entre} les racines. Il s'annule en $x_1$ et $x_2$.
+    \item \textbf{Contrôler par une valeur.} Je choisis un point entre les
+      racines, par exemple $0$ s'il convient, et je calcule $f$ en ce point : le
+      signe obtenu doit être celui qu'annonce le tableau.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Étudier le signe de $f(x) = -2(x - 1)(x + 3)$, puis résoudre $f(x) > 0$.
+
+  \medskip
+  \commentaireMarge{Racines et coefficient.}%
+  Les facteurs s'annulent en $1$ et en $-3$ ; le coefficient est $a = -2 < 0$.
+
+  \medskip
+  \commentaireMarge{Tableau de signes.}%
+  Rangées dans l'ordre, les racines sont $-3$ puis $1$. Comme $a < 0$, $f$ est
+  négative sur $\left]-\infty\,;\,-3\right[$, positive sur
+  $\left]-3\,;\,1\right[$, négative sur $\left]1\,;\,+\infty\right[$, et nulle en
+  $-3$ et $1$.
+
+  \medskip
+  \commentaireMarge{Résolution.}%
+  $f(x) > 0$ pour $-3 < x < 1$.
+
+  \medskip
+  \commentaireMarge{Contrôle.}%
+  $f(0) = -2 \times (-1) \times 3 = 6 > 0$ : le point $0$ est bien entre les
+  racines et $f$ y est positive. $f(2) = -2 \times 1 \times 5 = -10 < 0$ :
+  à l'extérieur, $f$ a bien le signe de $a$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Oublier le signe de $a$.} C'est l'erreur la plus fréquente :
+      on récite « positif à l'extérieur » sans regarder que $a$ est négatif. La
+      règle porte sur le \emph{signe de $a$}, pas sur « positif ».
+    \item \textbf{Lire la racine sur le facteur sans changer le signe.}
+      $(x + 3)$ s'annule en $-3$, pas en $3$. Une racine mal lue déplace tout le
+      tableau.
+    \item \textbf{Développer inutilement.} Sur une forme factorisée, calculer
+      $\Delta$ est un détour : on refait un travail déjà fait, avec une occasion
+      d'erreur en plus.
+  \end{itemize}
+}
+\end{fichemethode}

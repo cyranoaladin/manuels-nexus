@@ -16,13 +16,13 @@ Programme applicable : `MENE2602917A`, rentree 2026-2027.
 
 | Metrique | Valeur |
 |---|---:|
-| `CONTRACT_CAPACITIES` | 53 |
-| `CAPACITIES_CLOSED` | 47 |
+| `CONTRACT_CAPACITIES` | 55 |
+| `CAPACITIES_CLOSED` | 44 |
 | `CAPACITIES_REPAIRED` | 0 |
-| `CAPACITIES_REFRESHED_FROM_AUTHORITY` | 1 |
+| `CAPACITIES_REFRESHED_FROM_AUTHORITY` | 0 |
 | `DERIVED_ENTRY_CONTRADICTING_AUTHORITY` | 0 |
 | `CAPACITY_WITHOUT_REFERENTIAL_ENTRY` | 0 |
-| `CAPACITY_WITHOUT_DIRECT_ATOM_CREDIT` | 6 |
+| `CAPACITY_WITHOUT_DIRECT_ATOM_CREDIT` | 11 |
 | `ATOM_OUT_OF_APPLICABLE_YEAR` | 0 |
 | `ATOM_CREDITED_TO_A_FOREIGN_CAPACITY` | 0 |
 | `VARALEA_OFFICIAL_MAPPING_UNKNOWN` | 0 |
@@ -32,7 +32,12 @@ Programme applicable : `MENE2602917A`, rentree 2026-2027.
 
 - `{"chapter": "1SPE-GEOMETRIE-REPEREE", "capacity": "1SPE-GEOMETRIE-REPEREE-C4"}`
 - `{"chapter": "1SPE-PROBA-COND", "capacity": "1SPE-PROBA-COND-C5"}`
-- `{"chapter": "1SPE-SECOND-DEGRE", "capacity": "1SPE-SECOND-DEGRE-C2"}`
-- `{"chapter": "1SPE-SECOND-DEGRE", "capacity": "1SPE-SECOND-DEGRE-C5"}`
-- `{"chapter": "1SPE-SECOND-DEGRE", "capacity": "1SPE-SECOND-DEGRE-C6"}`
+- `{"chapter": "1SPE-SECOND-DEGRE", "capacity": "1SPE-SECOND-DEGRE-2026-C4"}`
+- `{"chapter": "1SPE-SECOND-DEGRE", "capacity": null}`
+- `{"chapter": "1SPE-SECOND-DEGRE", "capacity": "1SPE-SECOND-DEGRE-2026-D1"}`
+- `{"chapter": "1SPE-SECOND-DEGRE", "capacity": "1SPE-SECOND-DEGRE-2026-C3"}`
+- `{"chapter": "1SPE-SECOND-DEGRE", "capacity": "1SPE-SECOND-DEGRE-2026-C1"}`
+- `{"chapter": "1SPE-SECOND-DEGRE", "capacity": null}`
+- `{"chapter": "1SPE-SECOND-DEGRE", "capacity": null}`
+- `{"chapter": "1SPE-SECOND-DEGRE", "capacity": "1SPE-SECOND-DEGRE-2026-C2"}`
 - `{"chapter": "1SPE-SUITES", "capacity": "1SPE-SUITES-C7"}`

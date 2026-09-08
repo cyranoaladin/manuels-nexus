@@ -110,71 +110,62 @@ Cet ordre est un fait d'assemblage, pas un jugement : sa pertinence pedagogique 
 
 Le registre `audit/1SPE_MANUAL_REVIEW_DISPOSITION_LEDGER.json` classe chaque objet du manuel. Ceux qui portent la disposition `SCIENCE_HUMAINE_REQUISE` contiennent des affirmations calculables qu'aucune preuve machine n'etablit : ce sont eux que la lecture scientifique doit atteindre en priorite.
 
-12 objets pour ce chapitre, regroupes par famille scientifique — la capacite du referentiel du depot, avec son libelle BO — puis par type d'objet.
+11 objets pour ce chapitre, regroupes par famille scientifique — la capacite du referentiel du depot, avec son libelle BO — puis par type d'objet.
 
 ### Famille `C1` — Déterminer une équation cartésienne d'une droite dans le plan repéré.
 
 Capacite eleve : « Je sais déterminer une équation cartésienne d'une droite ax+by+c=0 et l'exploiter. »
 
-2 objets · 36 affirmations calculables sans preuve machine.
+2 objets · 12 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 1 objet, 1 affirmation a verifier :
     - `1SPE-GEOREP-EX-003-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-003-CDP.tex`
-- **`cours`** — 1 objet, 35 affirmations a verifier :
-    - `1SPE-GEOREP-CR-010` (35 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/cours/10_C1_equation_cartesienne_droite.tex`
+- **`methode`** — 1 objet, 11 affirmations a verifier :
+    - `1SPE-GEOREP-ME-001` (11 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/methodes/1SPE-GEOREP-ME-001.tex`
 
 ### Famille `C2` — Utiliser un vecteur normal à une droite pour déterminer son équation.
 
 Capacite eleve : « Je sais utiliser un vecteur normal à une droite, passer d'une équation cartésienne à un vecteur directeur/normal et réciproquement. »
 
-3 objets · 21 affirmations calculables sans preuve machine.
+3 objets · 12 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 2 objets, 2 affirmations a verifier :
     - `1SPE-GEOREP-EX-011-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-011-CDP.tex`
     - `1SPE-GEOREP-EX-012-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-012-CDP.tex`
-- **`cours`** — 1 objet, 19 affirmations a verifier :
-    - `1SPE-GEOREP-CR-011` (19 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/cours/11_C2_vecteur_normal.tex`
+- **`methode`** — 1 objet, 10 affirmations a verifier :
+    - `1SPE-GEOREP-ME-002` (10 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/methodes/1SPE-GEOREP-ME-002.tex`
 
 ### Famille `C3` — Déterminer une équation du cercle de centre (a,b) et de rayon r.
 
 Capacite eleve : « Je sais déterminer et exploiter l'équation d'un cercle (x-a)²+(y-b)²=r². »
 
-3 objets · 37 affirmations calculables sans preuve machine.
+3 objets · 17 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 2 objets, 2 affirmations a verifier :
     - `1SPE-GEOREP-EX-021-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-021-CDP.tex`
     - `1SPE-GEOREP-EX-023-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-023-CDP.tex`
-- **`cours`** — 1 objet, 35 affirmations a verifier :
-    - `1SPE-GEOREP-CR-012` (35 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/cours/12_C3_equation_cercle.tex`
+- **`methode`** — 1 objet, 15 affirmations a verifier :
+    - `1SPE-GEOREP-ME-003` (15 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/methodes/1SPE-GEOREP-ME-003.tex`
 
 ### Famille `C4` — Étudier les positions relatives de droites et cercles (parallélisme, intersection, tangence).
 
 Capacite eleve : « Je sais étudier les positions relatives de droites et de cercles (parallélisme, intersection, tangence). »
 
-2 objets · 33 affirmations calculables sans preuve machine.
+2 objets · 14 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 1 objet, 1 affirmation a verifier :
     - `1SPE-GEOREP-EX-033-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-033-CDP.tex`
-- **`cours`** — 1 objet, 32 affirmations a verifier :
-    - `1SPE-GEOREP-CR-013` (32 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/cours/13_C4_positions_relatives.tex`
+- **`methode`** — 1 objet, 13 affirmations a verifier :
+    - `1SPE-GEOREP-ME-004` (13 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/methodes/1SPE-GEOREP-ME-004.tex`
 
 ### Famille `C5` — Résoudre des problèmes de géométrie plane dans un repère orthonormé.
 
 Capacite eleve : « Je sais résoudre des problèmes géométriques dans un repère orthonormé. »
 
-1 objet · 12 affirmations calculables sans preuve machine.
+1 objet · 14 affirmations calculables sans preuve machine.
 
-- **`cours`** — 1 objet, 12 affirmations a verifier :
-    - `1SPE-GEOREP-CR-014` (12 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/cours/14_C5_problemes_repere.tex`
-
-### Famille `CAPACITE_NON_DECLAREE_PAR_L_OBJET`
-
-Objets dont ni le META ni l'exercice servi ne declare de capacite du chapitre. Rien n'est devine ici : la famille reste a etablir par lecture.
-
-1 objet · 2 affirmations calculables sans preuve machine.
-
-- **`cours`** — 1 objet, 2 affirmations a verifier :
-    - `1SPE-GEOREP-COURS-00` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/cours/00_ouverture.tex`
+- **`methode`** — 1 objet, 14 affirmations a verifier :
+    - `1SPE-GEOREP-ME-005` (14 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/methodes/1SPE-GEOREP-ME-005.tex`
 
 ## 5. Question de QCM routee vers l'humain
 
@@ -188,7 +179,7 @@ Ces mesures viennent de `audit/PUBLISH_READINESS_CHAPTER_MATRIX.json`. Elles ne 
 | --- | --- |
 | Etat machine vertical | `MACHINE_REVIEW_COMPLETE` |
 | Cloture humaine | `PENDING` |
-| Objets passes par l'oracle | 117 reussites, 0 echecs, 13 en science humaine requise, 25 en revue manuelle |
+| Objets passes par l'oracle | 123 reussites, 0 echecs, 12 en science humaine requise, 24 en revue manuelle |
 | Attendus officiels obligatoires | 9 rattaches sur 9, 0 manquants, 0 hors annee |
 | Sujets d'evaluation | 2 sujets, 2 corriges, statut `COMPLETE` |
 | QCM | 15 questions, capacites evaluees C1, C2, C3, C4, C5 |

@@ -168,7 +168,7 @@ Libelle BO : Utiliser un vecteur normal à une droite pour déterminer son équa
 **Richesse declaree**
 
 - type de capacite : `PROCEDURAL` ; occasions distinctes : 5 ; statut declaratif : `SUFFICIENT`.
-- occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 10.
+- occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 9.
 - gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.
 - evaluee par : `1SPE-GEOREP-EV-A`, `1SPE-GEOREP-EV-B`.
 
@@ -176,7 +176,7 @@ Libelle BO : Utiliser un vecteur normal à une droite pour déterminer son équa
 
 - parcours 1 : 4 exercices (8–10 min) — `1SPE-GEOREP-EX-011..014`
 - parcours 2 : 4 exercices (12–15 min) — `1SPE-GEOREP-EX-015..018`
-- parcours 3 : 2 exercices (15–15 min) — `1SPE-GEOREP-EX-019..020`
+- parcours 3 : 1 exercice (15–15 min) — `1SPE-GEOREP-EX-019`
 
 **Routage de cette capacite vers l'humain**
 
@@ -273,7 +273,7 @@ Libelle BO : Résoudre des problèmes de géométrie plane dans un repère ortho
 **Richesse declaree**
 
 - type de capacite : `COMPOSITE_REASONING` ; occasions distinctes : 5 ; statut declaratif : `SUFFICIENT`.
-- occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 10.
+- occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 11.
 - gestes de raisonnement declares : `calcul`, `interpretation_geometrique`, `modelisation`, `raisonnement_par_coordonnees`, `raisonnement_vectoriel`, `synthese`.
 - evaluee par : `1SPE-GEOREP-EV-A`, `1SPE-GEOREP-EV-B`.
 
@@ -281,7 +281,7 @@ Libelle BO : Résoudre des problèmes de géométrie plane dans un repère ortho
 
 - parcours 1 : 2 exercices (12–12 min) — `1SPE-GEOREP-EX-041..042`
 - parcours 2 : 4 exercices (15–15 min) — `1SPE-GEOREP-EX-043..046`
-- parcours 3 : 4 exercices (20–25 min) — `1SPE-GEOREP-EX-047..050`
+- parcours 3 : 5 exercices (15–25 min) — `1SPE-GEOREP-EX-020`, `1SPE-GEOREP-EX-047..050`
 
 **Routage de cette capacite vers l'humain**
 
@@ -309,9 +309,7 @@ La politique est fixée : pour chaque question évaluée, des POINTS, un ATTENDU
 
 Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le contenu candidat que votre verdict de chapitre couvre.
 
-### 1SPE-GEOREP-EV-A — **DÉCISION HUMAINE OBLIGATOIRE**
-
-Le sujet ne value aucune question individuellement : répartir son total est un jugement pédagogique, et il vous revient. Le dossier complet — contraintes du sujet, geste de raisonnement, indicateurs observables, proposition et sa justification — est dans `audit/1SPE_ASSESSMENT_BAREME_TRANSCRIPTION.json`.
+### 1SPE-GEOREP-EV-A
 
 **Exercice 1** — 4 points (C1) · 4 question(s) en attente de jugement
 
@@ -345,9 +343,7 @@ Le sujet ne value aucune question individuellement : répartir son total est un 
 - **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
 - **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
 
-### 1SPE-GEOREP-EV-B — **DÉCISION HUMAINE OBLIGATOIRE**
-
-Le sujet ne value aucune question individuellement : répartir son total est un jugement pédagogique, et il vous revient. Le dossier complet — contraintes du sujet, geste de raisonnement, indicateurs observables, proposition et sa justification — est dans `audit/1SPE_ASSESSMENT_BAREME_TRANSCRIPTION.json`.
+### 1SPE-GEOREP-EV-B
 
 **Exercice 1** — 4 points (C1) · 4 question(s) en attente de jugement
 

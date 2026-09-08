@@ -109,62 +109,53 @@ Cet ordre est un fait d'assemblage, pas un jugement : sa pertinence pedagogique 
 
 Le registre `audit/1SPE_MANUAL_REVIEW_DISPOSITION_LEDGER.json` classe chaque objet du manuel. Ceux qui portent la disposition `SCIENCE_HUMAINE_REQUISE` contiennent des affirmations calculables qu'aucune preuve machine n'etablit : ce sont eux que la lecture scientifique doit atteindre en priorite.
 
-12 objets pour ce chapitre, regroupes par famille scientifique — la capacite du referentiel du depot, avec son libelle BO — puis par type d'objet.
+11 objets pour ce chapitre, regroupes par famille scientifique — la capacite du referentiel du depot, avec son libelle BO — puis par type d'objet.
 
 ### Famille `C1` — Calculer un taux de variation, la pente d'une sécante.
 
 Capacite eleve : « Je sais calculer et interpréter un taux de variation et la pente d'une sécante. »
 
-1 objet · 3 affirmations calculables sans preuve machine.
+1 objet · 5 affirmations calculables sans preuve machine.
 
-- **`cours`** — 1 objet, 3 affirmations a verifier :
-    - `1SPE-DERIVATION-LOCAL-CR-010` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/cours/10_C1_taux_variation.tex`
+- **`methode`** — 1 objet, 5 affirmations a verifier :
+    - `1SPE-DERLOCAL-ME-001` (5 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/methodes/1SPE-DERLOCAL-ME-001.tex`
 
 ### Famille `C2` — Interpréter le nombre dérivé en contexte : pente d'une tangente, vitesse instantanée, coût marginal, etc.
 
 Capacite eleve : « Je sais interpréter un nombre dérivé comme une pente ou une vitesse instantanée. »
 
-4 objets · 9 affirmations calculables sans preuve machine.
+4 objets · 5 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 3 objets, 4 affirmations a verifier :
     - `1SPE-DERLOCAL-EX-007-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-007-CDP.tex`
     - `1SPE-DERLOCAL-EX-008-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-008-CDP.tex`
     - `1SPE-DERLOCAL-EX-033-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-033-CDP.tex`
-- **`cours`** — 1 objet, 5 affirmations a verifier :
-    - `1SPE-DERIVATION-LOCAL-CR-011` (5 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/cours/11_C2_nombre_derive.tex`
-
-### Famille `C3` — Déterminer graphiquement un nombre dérivé par la pente de la tangente. Construire la tangente en un point à une courbe représentative connaissant le nombre dérivé.
-
-Capacite eleve : « Je sais lire un nombre dérivé sur un graphique et construire la tangente correspondante. »
-
-1 objet · 3 affirmations calculables sans preuve machine.
-
-- **`cours`** — 1 objet, 3 affirmations a verifier :
-    - `1SPE-DERIVATION-LOCAL-CR-012` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/cours/12_C3_tangente.tex`
+- **`methode`** — 1 objet, 1 affirmation a verifier :
+    - `1SPE-DERLOCAL-ME-002` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/methodes/1SPE-DERLOCAL-ME-002.tex`
 
 ### Famille `C4` — Déterminer l'équation de la tangente en un point à la courbe représentative d'une fonction.
 
 Capacite eleve : « Je sais écrire l'équation d'une tangente à partir de l'abscisse, de l'image et du nombre dérivé. »
 
-3 objets · 14 affirmations calculables sans preuve machine.
+3 objets · 10 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 2 objets, 6 affirmations a verifier :
     - `1SPE-DERLOCAL-EX-019-CDP` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-019-CDP.tex`
     - `1SPE-DERLOCAL-EX-037-CDP` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-037-CDP.tex`
-- **`cours`** — 1 objet, 8 affirmations a verifier :
-    - `1SPE-DERIVATION-LOCAL-CR-013` (8 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/cours/13_C4_equation_tangente.tex`
+- **`methode`** — 1 objet, 4 affirmations a verifier :
+    - `1SPE-DERLOCAL-ME-004` (4 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/methodes/1SPE-DERLOCAL-ME-004.tex`
 
 ### Famille `C5` — Calculer une valeur approchée de f(a+h).
 
 Capacite eleve : « Je sais approcher f(a+h) avec l'approximation linéaire au voisinage de a. »
 
-3 objets · 13 affirmations calculables sans preuve machine.
+3 objets · 12 affirmations calculables sans preuve machine.
 
 - **`coup_de_pouce`** — 2 objets, 6 affirmations a verifier :
     - `1SPE-DERLOCAL-EX-026-CDP` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-026-CDP.tex`
     - `1SPE-DERLOCAL-EX-038-CDP` (4 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-038-CDP.tex`
-- **`cours`** — 1 objet, 7 affirmations a verifier :
-    - `1SPE-DERIVATION-LOCAL-CR-014` (7 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/cours/14_C5_approximation_lineaire.tex`
+- **`methode`** — 1 objet, 6 affirmations a verifier :
+    - `1SPE-DERLOCAL-ME-005` (6 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/methodes/1SPE-DERLOCAL-ME-005.tex`
 
 ## 5. Question de QCM routee vers l'humain
 
@@ -178,7 +169,7 @@ Ces mesures viennent de `audit/PUBLISH_READINESS_CHAPTER_MATRIX.json`. Elles ne 
 | --- | --- |
 | Etat machine vertical | `MACHINE_REVIEW_COMPLETE` |
 | Cloture humaine | `PENDING` |
-| Objets passes par l'oracle | 116 reussites, 0 echecs, 13 en science humaine requise, 24 en revue manuelle |
+| Objets passes par l'oracle | 121 reussites, 0 echecs, 12 en science humaine requise, 24 en revue manuelle |
 | Attendus officiels obligatoires | 10 rattaches sur 10, 0 manquants, 0 hors annee |
 | Sujets d'evaluation | 2 sujets, 2 corriges, statut `COMPLETE` |
 | QCM | 15 questions, capacites evaluees C1, C2, C3, C4, C5 |

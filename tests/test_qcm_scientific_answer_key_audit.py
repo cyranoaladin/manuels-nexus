@@ -67,9 +67,11 @@ def test_the_v1_audit_is_historical_and_no_longer_covers_the_current_corpus() ->
     current = _source_keys()
 
     assert len(historical) == 331
-    # 479 depuis l'entree des 142 questions NSI dans le corpus route, puis 490
-    # quand le QCM de TSPE-GEOMETRIE-ESPACE est passe de cinq a seize items.
-    assert len(current) == 490
+    # 479 depuis l'entree des 142 questions NSI dans le corpus route, 490 quand
+    # le QCM de TSPE-GEOMETRIE-ESPACE est passe de cinq a seize items, puis 529
+    # depuis les trente-neuf questions ecrites pour les capacites qu'aucune
+    # question n'evaluait.
+    assert len(current) == 529
     assert historical < current, "la v1 est un sous-ensemble strict du corpus"
     delta = current - historical
     nsi = {key for key in delta if key[0].startswith(("1NSI", "TNSI"))}
@@ -77,15 +79,33 @@ def test_the_v1_audit_is_historical_and_no_longer_covers_the_current_corpus() ->
     # Le couple (chapitre, question) et non l'identifiant nu : deux chapitres
     # portent chacun un Q16, et les comparer sans leur chapitre confondrait
     # une question neuve avec une question deja couverte par la v1.
-    assert (delta - nsi) == (
-        {("1SPE-VARIABLES-ALEATOIRES", f"Q{i}") for i in range(16, 22)}
-        | {("TSPE-GEOMETRIE-ESPACE", f"Q{i}") for i in range(6, 17)}
-    )
-    hors_v1 = {chapter for chapter, _question in current - historical}
-    assert {c for c in hors_v1 if not c.startswith(("1NSI", "TNSI"))} == {
-        "1SPE-VARIABLES-ALEATOIRES",
-        "TSPE-GEOMETRIE-ESPACE",
+    apres_v1 = {
+        "1SPE-SECOND-DEGRE": (19, 21),
+        "1SPE-VARIABLES-ALEATOIRES": (16, 22),
+        "TCOMPL-ECHANTILLONNAGE": (6, 8),
+        "TCOMPL-INFERENCE-BAYESIENNE": (6, 7),
+        "TCOMPL-LOGARITHME-HISTORIQUE": (6, 7),
+        "TCOMPL-MODELES-EVOLUTION": (6, 8),
+        "TCOMPL-MODELES-FONCTION": (6, 10),
+        "TCOMPL-TEMPS-ATTENTE": (6, 10),
+        "TEXP-ARITHMETIQUE": (6, 12),
+        "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE": (6, 8),
+        "TEXP-COMPLEXES-TRIGO-POLYNOMES": (6, 9),
+        "TEXP-GRAPHES": (6, 7),
+        "TEXP-MATRICES-MARKOV": (6, 8),
+        "TSPE-CALCUL-INTEGRAL": (6, 11),
+        "TSPE-GEOMETRIE-ESPACE": (6, 17),
+        "TSPE-PROBABILITES": (7, 11),
     }
+    assert (delta - nsi) == {
+        (chapitre, f"Q{i}")
+        for chapitre, (debut, fin) in apres_v1.items()
+        for i in range(debut, fin)
+    }
+    hors_v1 = {chapter for chapter, _question in current - historical}
+    assert {c for c in hors_v1 if not c.startswith(("1NSI", "TNSI"))} == set(
+        apres_v1
+    )
     assert len({c for c in hors_v1 if c.startswith(("1NSI", "TNSI"))}) == 17
 
     v2 = V2.build_evidence()
@@ -192,7 +212,7 @@ def test_the_v1_builder_refuses_to_produce_on_a_changed_corpus() -> None:
 def test_the_v2_evidence_accounts_for_every_question_without_unknown() -> None:
     v2 = V2.build_evidence()
     counts = v2["counts"]
-    assert counts["question_count"] == 490
+    assert counts["question_count"] == 529
     assert (
         counts["CARRIED_FORWARD_IDENTICAL"]
         + counts["MACHINE_RECALCULATED"]

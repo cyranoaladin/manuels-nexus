@@ -96,49 +96,31 @@ Cet ordre est un fait d'assemblage, pas un jugement : sa pertinence pedagogique 
 
 Le registre `audit/1SPE_MANUAL_REVIEW_DISPOSITION_LEDGER.json` classe chaque objet du manuel. Ceux qui portent la disposition `SCIENCE_HUMAINE_REQUISE` contiennent des affirmations calculables qu'aucune preuve machine n'etablit : ce sont eux que la lecture scientifique doit atteindre en priorite.
 
-12 objets pour ce chapitre, regroupes par famille scientifique — la capacite du referentiel du depot, avec son libelle BO — puis par type d'objet.
+6 objets pour ce chapitre, regroupes par famille scientifique — la capacite du referentiel du depot, avec son libelle BO — puis par type d'objet.
 
 ### Famille `C1` — Connaître le cercle trigonométrique, la mesure en radian, les angles orientés.
 
 Capacite eleve : « Je sais placer un angle oriente sur le cercle trigonometrique et convertir degres/radians. »
 
-4 objets · 18 affirmations calculables sans preuve machine.
+2 objets · 8 affirmations calculables sans preuve machine.
 
-- **`corrige`** — 2 objets, 5 affirmations a verifier :
-    - `1SPE-TRIGO-CO-021` (4 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-021.tex`
-    - `1SPE-TRIGO-CO-022` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-022.tex`
 - **`coup_de_pouce`** — 1 objet, 1 affirmation a verifier :
     - `1SPE-TRIGO-EX-021-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-021-CDP.tex`
-- **`cours`** — 1 objet, 12 affirmations a verifier :
-    - `1SPE-TRIGO-CR-010` (12 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/cours/10_C1_cercle_trigonometrique.tex`
+- **`methode`** — 1 objet, 7 affirmations a verifier :
+    - `1SPE-TRIGO-ME-001` (7 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/methodes/1SPE-TRIGO-ME-001.tex`
 
 ### Famille `C2` — Connaître et utiliser cos et sin (relation fondamentale, valeurs remarquables, symétries).
 
 Capacite eleve : « Je sais determiner les cosinus et sinus de valeurs remarquables et d'angles associes par lecture du cercle trigonometrique. »
 
-6 objets · 19 affirmations calculables sans preuve machine.
+4 objets · 12 affirmations calculables sans preuve machine.
 
-- **`corrige`** — 1 objet, 3 affirmations a verifier :
-    - `1SPE-TRIGO-CO-023` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-023.tex`
 - **`coup_de_pouce`** — 3 objets, 5 affirmations a verifier :
     - `1SPE-TRIGO-EX-013-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-013-CDP.tex`
     - `1SPE-TRIGO-EX-014-CDP` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-014-CDP.tex`
     - `1SPE-TRIGO-EX-023-CDP` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-023-CDP.tex`
-- **`cours`** — 1 objet, 10 affirmations a verifier :
-    - `1SPE-TRIGO-CR-011` (10 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/cours/11_C2_cosinus_sinus.tex`
-- **`exercice`** — 1 objet, 1 affirmation a verifier :
-    - `1SPE-TRIGO-EX-023` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-023.tex`
-
-### Famille `CAPACITE_NON_DECLAREE_PAR_L_OBJET`
-
-Objets dont ni le META ni l'exercice servi ne declare de capacite du chapitre. Rien n'est devine ici : la famille reste a etablir par lecture.
-
-2 objets · 3 affirmations calculables sans preuve machine.
-
-- **`corrige`** — 1 objet, 2 affirmations a verifier :
-    - `1SPE-TRIGO-CO-024` (2 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-024.tex`
-- **`exercice`** — 1 objet, 1 affirmation a verifier :
-    - `1SPE-TRIGO-EX-024` (1 affirmation) — `Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024.tex`
+- **`methode`** — 1 objet, 7 affirmations a verifier :
+    - `1SPE-TRIGO-ME-002` (7 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/methodes/1SPE-TRIGO-ME-002.tex`
 
 ## 5. Question de QCM routee vers l'humain
 
@@ -152,7 +134,7 @@ Ces mesures viennent de `audit/PUBLISH_READINESS_CHAPTER_MATRIX.json`. Elles ne 
 | --- | --- |
 | Etat machine vertical | `MACHINE_REVIEW_COMPLETE` |
 | Cloture humaine | `PENDING` |
-| Objets passes par l'oracle | 50 reussites, 0 echecs, 13 en science humaine requise, 23 en revue manuelle |
+| Objets passes par l'oracle | 63 reussites, 0 echecs, 7 en science humaine requise, 15 en revue manuelle |
 | Attendus officiels obligatoires | 6 rattaches sur 6, 0 manquants, 0 hors annee |
 | Sujets d'evaluation | 2 sujets, 2 corriges, statut `COMPLETE` |
 | QCM | 15 questions, capacites evaluees C1, C2 |
