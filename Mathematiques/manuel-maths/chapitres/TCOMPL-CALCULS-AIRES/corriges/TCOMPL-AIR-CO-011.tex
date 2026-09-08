@@ -21,12 +21,14 @@
 % assert abs(N(expo_debut + ratio_debut) - N(masse)) < 1e-9
 % END-VERIFY
 \begin{corrige}{TCOMPL-AIR-EX-011}
-\textbf{1.} Pour le premier terme, on pose $u(t)=t^2+4$, de sorte que
+\textbf{1.} On reconnaît deux formes usuelles. Pour le premier terme, on pose
+$u(t)=t^2+4$, de sorte que
 $u'(t)=2t$ et $\dfrac{6t}{t^2+4}=3\,\dfrac{u'(t)}{u(t)}$. Pour le second, on pose
 $u(t)=-\dfrac{t}{2}$, de sorte que $u'(t)=-\dfrac12$ et
 $2\mathrm{e}^{-t/2}=-4\,u'(t)\mathrm{e}^{u(t)}$.
 
-\textbf{2.} Comme $u(t)=t^2+4>0$ sur $[0\,;\,10]$, une primitive de
+\textbf{2.} On détermine une primitive terme à terme. Comme $u(t)=t^2+4>0$ sur
+$[0\,;\,10]$, une primitive de
 $3\dfrac{u'}{u}$ est $3\ln(t^2+4)$ ; une primitive de $-4u'\mathrm{e}^{u}$ est
 $-4\mathrm{e}^{u}$. Donc
 \[
