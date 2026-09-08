@@ -229,7 +229,7 @@ def _required_dimensions(manual: str, meta: dict[str, Any], text: str, dependenc
     return dimensions
 
 
-def _review_evidence(records, objects):
+def _review_evidence(records, objects, read_evidence):
     """Consume only this agent-evidence format; human receipts use their own gate."""
     rejected = []
     seen = set()
@@ -265,6 +265,26 @@ def _review_evidence(records, objects):
             ):
                 if review.get(field) != row[field]:
                     reason = label
+                    break
+        if reason is None:
+            # The review narrative is authoritative only for its named scope.
+            # Supporting artifacts explicitly cited by hash must also survive
+            # unchanged; a current source alone cannot refresh an old receipt.
+            for field in ("evidence_note", "oracle_receipt"):
+                if field not in review:
+                    continue
+                reference = review[field]
+                if (not isinstance(reference, dict)
+                        or not isinstance(reference.get("path"), str)
+                        or not reference["path"]
+                        or not isinstance(reference.get("sha256"), str)):
+                    raise ValueError(f"invalid supporting evidence reference: {field}")
+                try:
+                    actual = sha256(read_evidence(reference["path"]))
+                except FileNotFoundError:
+                    actual = None
+                if actual != reference["sha256"]:
+                    reason = "STALE_SUPPORTING_EVIDENCE"
                     break
         if reason:
             rejected.append({"review_id": review_id, "path": review.get("path"),
@@ -361,7 +381,7 @@ def build(root: Path, inventory: dict[str, Any], *, reviews=None, retired=None,
             "reviews": {name: {"state": "PENDING"} for name in required},
             "historical_versions": historical_by_identity.get((path, obj["id"]), []),
         })
-    rejected = _review_evidence(reviews, objects)
+    rejected = _review_evidence(reviews, objects, read)
     for row in objects:
         row["review_state"] = (
             "VALIDATED_BY_EVIDENCE" if all(row["reviews"][d]["state"] == "VALIDATED_BY_EVIDENCE"

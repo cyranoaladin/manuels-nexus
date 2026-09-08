@@ -112,6 +112,29 @@ def test_digest_bound_review_closes_only_machine_review(gate, corpus):
     assert result["objects"][0]["human_approval"] == "PENDING"
 
 
+@pytest.mark.parametrize("field", ["evidence_note", "oracle_receipt"])
+@pytest.mark.parametrize("mutation", ["changed", "removed"])
+def test_referenced_review_evidence_cannot_change_or_disappear(gate, corpus, field, mutation):
+    root = corpus[0]
+    evidence = root / "audit/read-evidence.json"
+    evidence.parent.mkdir()
+    evidence.write_text('{"scope": "actual independent reading"}')
+    review = review_for(build(gate, corpus))
+    review[field] = {"path": str(evidence.relative_to(root)),
+                     "sha256": gate.sha256(evidence.read_bytes())}
+    valid = build(gate, corpus, reviews=[review])
+    assert valid["summary"]["NEW_AUTHORING_REVIEW_PENDING"] == 0
+    assert valid["input_digests"][str(evidence.relative_to(root))] == review[field]["sha256"]
+    if mutation == "removed":
+        evidence.unlink()
+    else:
+        evidence.write_text('{"scope": "different source, no reading"}')
+    stale = build(gate, corpus, reviews=[review])
+    assert stale["summary"]["NEW_AUTHORING_REVIEW_PENDING"] == 1
+    assert stale["summary"]["CURRENT_REVIEW_INDEX_STALE_EVIDENCE"] == 0
+    assert stale["rejected_review_evidence"][0]["reason"] == "STALE_SUPPORTING_EVIDENCE"
+
+
 @pytest.mark.parametrize("kind", ["td", "cours"])
 def test_embedded_correction_requires_alignment_review(gate, kind):
     dimensions = gate._required_dimensions(
