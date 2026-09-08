@@ -1,0 +1,4167 @@
+{
+  "artifact_type": "astra_delta_matrix",
+  "schema_version": 1,
+  "generated_by": "/tmp/build_astra_delta.py",
+  "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+  "external_documents": {
+    "Rapport_audit_collection.md": {
+      "sha256": "sha256:3062738d70ae22f20ffbb712865fb9e547d95f3ada8ba767aa23708e1d361d7d",
+      "line_count": 309
+    },
+    "Grille_controles_collection.md": {
+      "sha256": "sha256:9cfdf7e8ef5aaf7d5e366dca5eaa98849f3cf78fad0e9552810268c0004506ee",
+      "line_count": 2521
+    },
+    "Constats_structurels.md": {
+      "sha256": "sha256:8a60941f3e63e2cce1772a5c4fb976b8a944a9e760b7fbd27df9cc8a88506504",
+      "line_count": 303
+    },
+    "MISSION_AUDIT_COLLECTION.md": {
+      "sha256": "sha256:da9fd8dea4dd803ab4a44ad1b76c42240b1cb673cdc54fb78f9f265cccdac16d",
+      "line_count": 83
+    },
+    "LISEZMOI.md": {
+      "sha256": "sha256:8d3793f4610e18ab34e9fed56cca72d9572d2cb268677acbb1283595324b1e0b",
+      "line_count": 78
+    },
+    "1SPE.md": {
+      "sha256": "sha256:858b879c2f8fdf855c08fbba63cfa3f21117c653645709c3b8266ff386769296",
+      "line_count": 276
+    },
+    "TSPE.md": {
+      "sha256": "sha256:fa3d17ff94491ddef3e102611041e34b06c0a5e179f8680bb894a273a57ad4e5",
+      "line_count": 320
+    },
+    "TCOMPL.md": {
+      "sha256": "sha256:dc4bfa59eed12f9e4d0a669fca433aa776483dc8e4ab75709698580d83b370ac",
+      "line_count": 214
+    },
+    "TEXPERTES.md": {
+      "sha256": "sha256:58903f0362938a000d22c14eb67f6f8ee5ff867619c58c0c52abd1a803d8f967",
+      "line_count": 139
+    },
+    "1NSI.md": {
+      "sha256": "sha256:d5103d00aeb2439d3229c1de2b5c4ca245887695e806562d21e8b309c2aa1323",
+      "line_count": 278
+    },
+    "TNSI.md": {
+      "sha256": "sha256:42343605f6f24d442238202adc9ee96b756ae2e4915ed6454e239421ca4e3ff9",
+      "line_count": 213
+    }
+  },
+  "external_content_copied": false,
+  "mapping_means": "Every external control has a disposition; MAPPED is not a successful check or scientific coverage.",
+  "approves_nothing": true,
+  "summary": {
+    "ASTRA_CONTROLS_TOTAL": 273,
+    "ASTRA_CONTROLS_MAPPED": 273,
+    "ASTRA_CONTROLS_UNMAPPED": 0,
+    "ASTRA_CONTROLS_COVERED": 1,
+    "ASTRA_CONTROLS_OBSOLETE": 0,
+    "ASTRA_CONTROLS_PARTIAL": 64,
+    "ASTRA_CONTROLS_NOT_COVERED": 179,
+    "ASTRA_CONTROLS_DEFERRED_RELEASE_PHASE": 29,
+    "ASTRA_CONTROLS_NOT_APPLICABLE_JUSTIFIED": 0,
+    "CURRENT_CANONICAL_CHAPTERS": 52,
+    "ASTRA_CHAPTER_DIRS": 51,
+    "CANONICAL_CHAPTER_SET_UNRECONCILED": 0,
+    "CURRENT_CROSS_MANUAL_CONTAMINATION": 0,
+    "CURRENT_CAPACITY_MISREPRESENTATION_DETECTED_BY_CLONES": 0,
+    "RETIRED_SYNTHETIC_BODIES_IN_CURRENT_CHAPTER_SOURCES": 0,
+    "RETIRED_IDENTIFIERS_REUSED_FOR_DIFFERENT_CONTENT": 218,
+    "RETIRED_SYNTHETIC_OBJECTS_STILL_ASSEMBLED": "NON_VERIFIE_RUNTIME",
+    "RETIRED_SYNTHETIC_OBJECTS_STILL_REFERENCED": "218 identifiers reused; historical body generations must be distinguished"
+  },
+  "evidence": {
+    "E01": {
+      "kind": "OBSERVED_GIT_IDENTITY",
+      "result": {
+        "head": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+        "root": "/home/alaeddine/Documents/Manuels_Nexus/.worktrees/t3-publish-readiness",
+        "branch": "codex/t3-publish-readiness-current",
+        "status": {
+          "command": [
+            "git",
+            "status",
+            "--porcelain=v1"
+          ],
+          "rc": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        "upstream": {
+          "command": [
+            "git",
+            "rev-parse",
+            "--abbrev-ref",
+            "--symbolic-full-name",
+            "@{upstream}"
+          ],
+          "rc": 128,
+          "stdout": "",
+          "stderr": "fatal: no upstream configured for branch 'codex/t3-publish-readiness-current'"
+        },
+        "submodule_status": {
+          "command": [
+            "git",
+            "submodule",
+            "status"
+          ],
+          "rc": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        "untracked": {
+          "command": [
+            "git",
+            "ls-files",
+            "--others",
+            "--exclude-standard"
+          ],
+          "rc": 0,
+          "stdout": "",
+          "stderr": ""
+        }
+      },
+      "digest": "sha256:df6a4210ce004fbcec68569d52a9b98e908f555707fdd01f8217b550d67cc06e"
+    },
+    "E02": {
+      "kind": "RECONCILED_DECLARED_CHAPTER_SETS",
+      "source_files": [
+        {
+          "path": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+          "sha256": "sha256:0b47740c97e5f6a8ac9a572df53764f3f9438f205f06a24525e5f29d89cd2c24"
+        },
+        {
+          "path": "NSI/scripts/assemble_manuel.py",
+          "sha256": "sha256:240ab4a124e79efbbe315dd17a829f5cfaaec4a3e40abcab3315d2f2df19b9cd"
+        },
+        {
+          "path": "NSI/manifests/books/1NSI.json",
+          "sha256": "sha256:300fa16fde0c952d3d93a7daee266ed69edfd3457b0d43dc79925a530568b24c"
+        },
+        {
+          "path": "NSI/manifests/books/TNSI.json",
+          "sha256": "sha256:763d53960a6bce4eda80b89b794e19c82541fbf7717d51583ba38304a6a70dd0"
+        },
+        {
+          "path": "NSI/chapitres/TNSI-PROJET/contrat.yaml",
+          "sha256": "sha256:05b5886783c7ff5699202ebb9967c2644e4c0f4c762ac83ada2eb0343f9814ec"
+        }
+      ],
+      "current_contract_set_digest": "sha256:845f3f08b4c3a4405325e056b89b151aff7156858d3e1f052aced0efb91c37d5",
+      "ASTRA_CHAPTER_DIR_SET": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL",
+        "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE",
+        "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND",
+        "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES",
+        "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE",
+        "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE",
+        "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE",
+        "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+        "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES",
+        "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES",
+        "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV",
+        "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL",
+        "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE",
+        "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE",
+        "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE",
+        "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE",
+        "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS",
+        "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME",
+        "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF",
+        "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES",
+        "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES",
+        "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE",
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS",
+        "NSI/chapitres/1NSI-ARCHITECTURE-OS",
+        "NSI/chapitres/1NSI-LANGAGE",
+        "NSI/chapitres/1NSI-PROJET-METHODES",
+        "NSI/chapitres/1NSI-RESEAUX",
+        "NSI/chapitres/1NSI-TABLES",
+        "NSI/chapitres/1NSI-TYPES-BASE",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS",
+        "NSI/chapitres/1NSI-WEB-IHM",
+        "NSI/chapitres/TNSI-ALGORITHMIQUE",
+        "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY",
+        "NSI/chapitres/TNSI-BASES-DE-DONNEES",
+        "NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE",
+        "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION",
+        "NSI/chapitres/TNSI-STRUCTURES-DONNEES"
+      ],
+      "CURRENT_CANONICAL_CHAPTER_SET": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL",
+        "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE",
+        "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND",
+        "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES",
+        "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE",
+        "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE",
+        "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE",
+        "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+        "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES",
+        "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES",
+        "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV",
+        "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL",
+        "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE",
+        "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE",
+        "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE",
+        "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE",
+        "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS",
+        "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME",
+        "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF",
+        "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES",
+        "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES",
+        "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE",
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS",
+        "NSI/chapitres/1NSI-ARCHITECTURE-OS",
+        "NSI/chapitres/1NSI-LANGAGE",
+        "NSI/chapitres/1NSI-PROJET-METHODES",
+        "NSI/chapitres/1NSI-RESEAUX",
+        "NSI/chapitres/1NSI-TABLES",
+        "NSI/chapitres/1NSI-TYPES-BASE",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS",
+        "NSI/chapitres/1NSI-WEB-IHM",
+        "NSI/chapitres/TNSI-ALGORITHMIQUE",
+        "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY",
+        "NSI/chapitres/TNSI-BASES-DE-DONNEES",
+        "NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE",
+        "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION",
+        "NSI/chapitres/TNSI-PROJET",
+        "NSI/chapitres/TNSI-STRUCTURES-DONNEES"
+      ],
+      "ONLY_IN_ASTRA": [],
+      "ONLY_IN_CURRENT": [
+        "NSI/chapitres/TNSI-PROJET"
+      ],
+      "declared_assembly_chapters": [
+        "1NSI-ALGO-DICHO-GLOUTON-KNN",
+        "1NSI-ALGO-PARCOURS-TRIS",
+        "1NSI-ARCHITECTURE-OS",
+        "1NSI-LANGAGE",
+        "1NSI-PROJET-METHODES",
+        "1NSI-RESEAUX",
+        "1NSI-TABLES",
+        "1NSI-TYPES-BASE",
+        "1NSI-TYPES-CONSTRUITS",
+        "1NSI-WEB-IHM",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-SUITES",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-VARIABLES-ALEATOIRES",
+        "TCOMPL-CALCULS-AIRES",
+        "TCOMPL-CORRELATION-CAUSALITE",
+        "TCOMPL-ECHANTILLONNAGE",
+        "TCOMPL-INEGALITES",
+        "TCOMPL-INFERENCE-BAYESIENNE",
+        "TCOMPL-LOGARITHME-HISTORIQUE",
+        "TCOMPL-MODELES-EVOLUTION",
+        "TCOMPL-MODELES-FONCTION",
+        "TCOMPL-TEMPS-ATTENTE",
+        "TEXP-ARITHMETIQUE",
+        "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+        "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+        "TEXP-GRAPHES",
+        "TEXP-MATRICES-MARKOV",
+        "TNSI-ALGORITHMIQUE",
+        "TNSI-ARCHITECTURES-MATERIELLES-SY",
+        "TNSI-BASES-DE-DONNEES",
+        "TNSI-HISTOIRE-INFORMATIQUE",
+        "TNSI-LANGAGES-ET-PROGRAMMATION",
+        "TNSI-PROJET",
+        "TNSI-STRUCTURES-DONNEES",
+        "TSPE-CALCUL-INTEGRAL",
+        "TSPE-COMBINATOIRE",
+        "TSPE-CONTINUITE",
+        "TSPE-DERIVATION-CONVEXITE",
+        "TSPE-GEOMETRIE-ESPACE",
+        "TSPE-LIMITES-FONCTIONS",
+        "TSPE-LOGARITHME",
+        "TSPE-PRIMITIVES-EQDIFF",
+        "TSPE-PROBABILITES",
+        "TSPE-SUITES-LIMITES",
+        "TSPE-TRIGONOMETRIE"
+      ],
+      "ASSEMBLY_CONTRACT_SET_EQUALITY": true,
+      "SEMANTIC_REASON": {
+        "NSI/chapitres/TNSI-PROJET": "Unite de demarche de projet explicitement ajoutee au manifeste TNSI; contrat rattache au preambule, deux capacites pedagogiques, PROJECT_ASSESSMENT. Aucun quota de chapitres induit."
+      },
+      "introduced_commit": "59ace02250cde120ac36911f453b0a3f0da3efaa",
+      "digest": "sha256:7925cc59198e8260786f91a0f2a90501253ba12ea387e031b66ec954a793573d"
+    },
+    "E03": {
+      "kind": "EXECUTED_CURRENT_CONTAMINATION_SCAN",
+      "producer": {
+        "path": "scripts/build_cross_manual_contamination.py",
+        "sha256": "sha256:026440c861637961293f0833c08ee4a21828f30605f91f2a037c931c8c14026c"
+      },
+      "normalization": {
+        "path": "scripts/build_p0_content_clone_ledger.py",
+        "sha256": "sha256:52104c3382242246909250c66f0698a1b1660a58a685727fcd4671ab8d6f56af"
+      },
+      "fixtures": {
+        "path": "scripts/clone_normalization_fixtures.py",
+        "sha256": "sha256:9edc3325b7bf93fb1925170d28ebdc20ee99f31bcf70fa9c39cbfb87b7306bef"
+      },
+      "source_population_digest": "sha256:e540b039b6bebc02af62dbc1509b0b51f42a520adfd9988529b6bf890d28d512",
+      "source_file_count": 3445,
+      "summary": {
+        "CLONE_GROUPS_TOTAL": 11,
+        "CLONED_OBJECTS_TOTAL": 38,
+        "EXACT_CLONES": 38,
+        "NEAR_CLONES": 0,
+        "CROSS_MANUAL_CONTAMINATION_GROUPS": 0,
+        "CROSS_CHAPTER_CONTAMINATION_GROUPS": 0,
+        "CROSS_MANUAL_CONTAMINATION_OBJECTS": 0,
+        "CAPACITY_MISREPRESENTING_GROUPS": 0,
+        "GROUPS_WITHOUT_CANONICAL_SOURCE": 11,
+        "CROSS_CHAPTER_GROUPS_WITHOUT_CANONICAL_SOURCE": 0,
+        "LINEAGE_RULES": {
+          "ALL_MEMBERS_INTRODUCED_BY_THE_SAME_COMMIT": 11
+        },
+        "CONTAMINATED_APPROVED_OBJECTS": 0,
+        "CONTAMINATED_OBJECTS_BY_STATUS": {},
+        "OBJECTS_SCANNED": 3445,
+        "CHAPTERS_SCANNED": 52,
+        "UNSCANNED_CANONICAL_CHAPTERS": 0
+      },
+      "normalization_proof": {
+        "CLONE_NORMALIZATION_FIXTURES_MUST_MATCH": 6,
+        "CLONE_NORMALIZATION_FIXTURES_MUST_DIFFER": 13,
+        "CLONE_NORMALIZATION_FALSE_POSITIVES": 0,
+        "CLONE_NORMALIZATION_FALSE_NEGATIVES": 0,
+        "FALSE_POSITIVE_LABELS": [],
+        "FALSE_NEGATIVE_LABELS": [],
+        "PRESERVED_BY_CONTRACT": [
+          "nombres",
+          "formules",
+          "code",
+          "texte",
+          "donnees",
+          "options de QCM",
+          "references pedagogiques",
+          "figures",
+          "noms de concepts"
+        ],
+        "REMOVED_BY_CONTRACT": [
+          "% META: identity line",
+          "declared object identity (id, exercice_ref, evaluation_ref)",
+          "trailing and edge whitespace"
+        ]
+      },
+      "check": {
+        "command": [
+          "/usr/bin/python",
+          "-B",
+          "scripts/build_cross_manual_contamination.py",
+          "--check"
+        ],
+        "rc": 1,
+        "stdout": "diff: audit/CROSS_MANUAL_CONTAMINATION.json",
+        "stderr": ""
+      },
+      "committed_summary_differences": {
+        "OBJECTS_SCANNED": {
+          "recorded": 3357,
+          "observed": 3445
+        }
+      },
+      "limitation": "Duplicate-body detector only; does not certify semantics of unique authored text or final PDF runtime.",
+      "digest": "sha256:8d36919036df30356900516dd869b7fe3bb1ab9b3a33cf17c800e6172b0f74b5"
+    },
+    "E04": {
+      "kind": "READ_HISTORICAL_GIT_BLOBS_VERSUS_CURRENT_SOURCE_DIGESTS",
+      "registry": {
+        "path": "audit/RETIRED_SYNTHETIC_OBJECT_IDS.json",
+        "sha256": "sha256:0ce16e9a9a0c4fff299bb06541fd3c2a9f2fffe4c244d81661c7d14fef0b6dfc"
+      },
+      "historical_objects_read": 973,
+      "historical_population_digest": "sha256:59d8deac99a94c64db681ca04d2cb4004bd11af40bf08c3078b1b364813fe90f",
+      "current_source_population_digest": "sha256:e540b039b6bebc02af62dbc1509b0b51f42a520adfd9988529b6bf890d28d512",
+      "retired_historical_bodies_reappearing_in_target_chapter": [],
+      "retired_ids_reused_count": 218,
+      "same_old_paths_present": 212,
+      "reused_ids_digest": "sha256:5fd880a981139ae6b6e11868603f1cc71bdf6c7b64e3a1046ea66143a7d0aa11",
+      "reused_id_semantic_matches": 0,
+      "old_str02_paths_existence": {
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_derivee_composee.tex": false,
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_derivee_composee.tex": false,
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/cours/10_C1_derivee_composee.tex": false,
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/cours/10_C1_derivee_composee.tex": false,
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_derivee_composee.tex": false,
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/10_C1_derivee_composee.tex": false,
+        "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/cours/10_C1_derivee_composee.tex": false,
+        "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/cours/10_C1_derivee_composee.tex": false,
+        "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/cours/10_C1_derivee_composee.tex": false,
+        "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/cours/10_C1_derivee_composee.tex": false,
+        "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/cours/10_C1_derivee_composee.tex": false
+      },
+      "limitation": "Retirement is a content-generation identity: 218 identifiers now carry different bodies. Final runtime and historical publication PDF contents remain uninspected.",
+      "digest": "sha256:25b3d4f8e0e82c87a443f6a4d96fbb5539d677847703b8a5f795f9091b014cf9"
+    },
+    "E05": {
+      "kind": "DOCUMENT_AUTHORITY_INSPECTION",
+      "source_files": [
+        {
+          "path": "AGENTS.md",
+          "sha256": "sha256:17bdd4ebabdb94f9a97dd460ad6fff950cca116f37a91bda19d6bfa61db7ec1d"
+        },
+        {
+          "path": "SOURCE_DE_VERITE.md",
+          "sha256": "sha256:79669b5c082bb7a6548ca4cacdd9bef6e91ca3b7ba6a06b62935c75b2981bfda"
+        },
+        {
+          "path": "audit/SOURCE_ROLES.yaml",
+          "sha256": "sha256:a178b9120e7ffbca4658a2c7daa9eff86df8f4d1f94377c3f13aae4c572e90e7"
+        },
+        {
+          "path": "audit/ASSEMBLY_REUSE_CONTRACTS.yaml",
+          "sha256": "sha256:ee3c86d88ce42a83df4269dc9a13d6f7ba589c0fc7d501a3d85e3ce1b83d3eef"
+        },
+        {
+          "path": "audit/HUMAN_REVIEW_GOVERNANCE.yaml",
+          "sha256": "sha256:0a1387214ce6356d02d0d8740949e99e97f45c02b1507f82383f527720296cc8"
+        }
+      ],
+      "limitation": "Documents read for scope only; no blanket authority freshness or all-assertion reconciliation claimed.",
+      "digest": "sha256:53cef77a9d80b9d76ab333636ea93eeb1801d21dbc54201425fecbc2789a2851"
+    }
+  },
+  "rows": [
+    {
+      "ASTRA_CONTROL_ID": "GOV-01",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 9
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E01"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:beecf6840d87229f032a7c7476a857f3417708f27471c97fa7ef77571b3f9c84",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "COVERED_CURRENT_HEAD",
+      "NOTES": "Etat Git courant observe directement; aucune equivalence au distant supposee."
+    },
+    {
+      "ASTRA_CONTROL_ID": "GOV-02",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 17
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "GOV-03",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 25
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E05"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:df1f57d1881198bb72e4fa42bce798ae2dc42c0c43defd26beeb03b7c4827c91",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Hierarchie et decision quota identifiees; reconciliation exhaustive des exigences encore a faire."
+    },
+    {
+      "ASTRA_CONTROL_ID": "GOV-04",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 33
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E03",
+        "E05"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:ef8dfef56316cb48026f4d890eb74358a66f672f2f9a8bc2b8c37c5b6887b16d",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Nature distincte des rapports et preuves; seul producteur contamination effectivement reexecute ici."
+    },
+    {
+      "ASTRA_CONTROL_ID": "GOV-05",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 41
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "GOV-06",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 49
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "GOV-07",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 57
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E03",
+        "E04"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:43ebad48addd0d86fef1367b7cf535bd196c50ba5482f84fa23b14ee99c033d1",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Fraicheur contamination et generations retirees inspectees; autres preuves a reconcilier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "GOV-08",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 65
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "GOV-09",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 73
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E01"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:beecf6840d87229f032a7c7476a857f3417708f27471c97fa7ef77571b3f9c84",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Aucune mutation du depot dans cette sous-mission; coordination inter-agents assuree par agent parent."
+    },
+    {
+      "ASTRA_CONTROL_ID": "GOV-10",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 81
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "INV-01",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 91
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02",
+        "E03"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:7beb77b2827d533e917093a86810e7caa9ee4067ad974d03e73c873630b80fcb",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Population des chapitres et TeX inspectee; inventaire exhaustif hors chapitres non certifie ici."
+    },
+    {
+      "ASTRA_CONTROL_ID": "INV-02",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 99
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "INV-03",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 107
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "INV-04",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 115
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "INV-05",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 123
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "INV-06",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 131
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E03",
+        "E04"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:43ebad48addd0d86fef1367b7cf535bd196c50ba5482f84fa23b14ee99c033d1",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Groupes identiques et anciennes generations reconcilies; dispositions pedagogiques des 11 groupes encore a relire."
+    },
+    {
+      "ASTRA_CONTROL_ID": "INV-07",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 139
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "INV-08",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 147
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "INV-09",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 155
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E03",
+        "E04"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:43ebad48addd0d86fef1367b7cf535bd196c50ba5482f84fa23b14ee99c033d1",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Les 11 chemins cites STR-02 sont absents et aucun corps retire ne subsiste dans les sources de son chapitre cible; PDF finaux a inspecter apres freeze."
+    },
+    {
+      "ASTRA_CONTROL_ID": "INV-10",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 163
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02",
+        "E04"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:d569781c324fe71e036a9b6a78d9fff1ec9a6df2417a365a7ffed2d558fcd5bd",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Ensemble de chapitres et generations retirees reconcilies; autres migrations et packet sets hors cette sous-mission."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PROG-01",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 173
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PROG-02",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 181
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PROG-03",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 189
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PROG-04",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 197
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PROG-05",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 205
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PROG-06",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 213
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PROG-07",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 221
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PROG-08",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 229
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PROG-09",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 237
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PROG-10",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 245
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PED-01",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 255
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PED-02",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 263
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PED-03",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 271
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PED-04",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 279
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PED-05",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 287
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PED-06",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 295
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PED-07",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 303
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PED-08",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 311
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PED-09",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 319
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PED-10",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 327
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "SCI-01",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 337
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "SCI-02",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 345
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "SCI-03",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 353
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "SCI-04",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 361
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "SCI-05",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 369
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "SCI-06",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 377
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "SCI-07",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 385
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "SCI-08",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 393
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "SCI-09",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 401
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "SCI-10",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 409
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "EXO-01",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 419
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "EXO-02",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 427
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "EXO-03",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 435
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "EXO-04",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 443
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "EXO-05",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 451
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "EXO-06",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 459
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "EXO-07",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 467
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "EXO-08",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 475
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "EXO-09",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 483
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "EXO-10",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 491
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CODE-01",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 501
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CODE-02",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 509
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CODE-03",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 517
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CODE-04",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 525
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CODE-05",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 533
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CODE-06",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 541
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CODE-07",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 549
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CODE-08",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 557
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CODE-09",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 565
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CODE-10",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 573
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "ASM-01",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 583
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "ASM-02",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 591
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Liste contractuelle et selection declaree = 52/52; inclusions runtime et sommaires finaux non observes."
+    },
+    {
+      "ASTRA_CONTROL_ID": "ASM-03",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 599
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "ASM-04",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 607
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "ASM-05",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 615
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "ASM-06",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 623
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "ASM-07",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 631
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "ASM-08",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 639
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "ASM-09",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 647
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "ASM-10",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 655
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CHARTE-01",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 665
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CHARTE-02",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 673
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CHARTE-03",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 681
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CHARTE-04",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 689
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CHARTE-05",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 697
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CHARTE-06",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 705
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CHARTE-07",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 713
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CHARTE-08",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 721
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CHARTE-09",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 729
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "CHARTE-10",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 737
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PDF-01",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 747
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PDF-02",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 755
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PDF-03",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 763
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PDF-04",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 771
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PDF-05",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 779
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PDF-06",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 787
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PDF-07",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 795
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PDF-08",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 803
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PDF-09",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 811
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PDF-10",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 819
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "QA-01",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 829
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "QA-02",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 837
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E03"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:3417a1ef87f503ba1385f04043fccb85b90210c9eb6ae1df78a6dcb9623482c3",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "19 mutations de normalisation executees sans erreur; autres gates non eprouves ici."
+    },
+    {
+      "ASTRA_CONTROL_ID": "QA-03",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 845
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "QA-04",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 853
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E03"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:3417a1ef87f503ba1385f04043fccb85b90210c9eb6ae1df78a6dcb9623482c3",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "RC1 sur artefact contamination perime reconnu; aucun fail-on-new assimile a zero defaut."
+    },
+    {
+      "ASTRA_CONTROL_ID": "QA-05",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 861
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E03"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:3417a1ef87f503ba1385f04043fccb85b90210c9eb6ae1df78a6dcb9623482c3",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Population courante du controle contamination recalculee; autres inputs a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "QA-06",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 869
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "QA-07",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 877
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "QA-08",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 885
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "QA-09",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 893
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E03"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:3417a1ef87f503ba1385f04043fccb85b90210c9eb6ae1df78a6dcb9623482c3",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Un rapport contamination perime identifie (3357 contre3445); reconciliation de tous les rapports non terminee."
+    },
+    {
+      "ASTRA_CONTROL_ID": "QA-10",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 901
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PUB-01",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 911
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PUB-02",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 919
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PUB-03",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 927
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PUB-04",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 935
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PUB-05",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 943
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PUB-06",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 951
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PUB-07",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 959
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PUB-08",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 967
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PUB-09",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 975
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "PUB-10",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 983
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_FROZEN_FINAL_CANDIDATE",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "DEFERRED_TO_RELEASE_PHASE",
+      "NOTES": "Depend du candidat final, des builds apres freeze ou de la decision humaine finale; aucun ancien PDF ne vaut candidat courant."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-DERIVATION-GLOBAL-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 993
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-DERIVATION-GLOBAL-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1003
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-DERIVATION-GLOBAL-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1013
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-DERIVATION-LOCAL-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1023
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-DERIVATION-LOCAL-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1033
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-DERIVATION-LOCAL-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1043
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-EXPONENTIELLE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1053
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-EXPONENTIELLE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1063
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-EXPONENTIELLE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1073
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-GEOMETRIE-REPEREE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1083
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-GEOMETRIE-REPEREE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1093
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-GEOMETRIE-REPEREE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1103
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-PROBA-COND-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1113
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-PROBA-COND-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1123
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-PROBA-COND-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1133
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-PRODUIT-SCALAIRE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1143
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-PRODUIT-SCALAIRE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1153
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-PRODUIT-SCALAIRE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1163
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-SECOND-DEGRE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1173
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-SECOND-DEGRE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1183
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-SECOND-DEGRE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1193
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-SUITES-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1203
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-SUITES-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1213
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-SUITES-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1223
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-TRIGONOMETRIE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1233
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-TRIGONOMETRIE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1243
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-TRIGONOMETRIE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1253
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-VARIABLES-ALEATOIRES-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1263
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-VARIABLES-ALEATOIRES-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1273
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1SPE-VARIABLES-ALEATOIRES-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1283
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-CALCULS-AIRES-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1293
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-CALCULS-AIRES-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1303
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-CALCULS-AIRES-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1313
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-CORRELATION-CAUSALITE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1323
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-CORRELATION-CAUSALITE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1333
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-CORRELATION-CAUSALITE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1343
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-ECHANTILLONNAGE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1353
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-ECHANTILLONNAGE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1363
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-ECHANTILLONNAGE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1373
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-INEGALITES-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1383
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-INEGALITES-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1393
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-INEGALITES-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1403
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-INFERENCE-BAYESIENNE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1413
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-INFERENCE-BAYESIENNE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1423
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-INFERENCE-BAYESIENNE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1433
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-LOGARITHME-HISTORIQUE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1443
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-LOGARITHME-HISTORIQUE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1453
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-LOGARITHME-HISTORIQUE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1463
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-MODELES-EVOLUTION-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1473
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-MODELES-EVOLUTION-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1483
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-MODELES-EVOLUTION-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1493
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-MODELES-FONCTION-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1503
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-MODELES-FONCTION-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1513
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-MODELES-FONCTION-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1523
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-TEMPS-ATTENTE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1533
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-TEMPS-ATTENTE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1543
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TCOMPL-TEMPS-ATTENTE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1553
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TEXP-ARITHMETIQUE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1563
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TEXP-ARITHMETIQUE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1573
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TEXP-ARITHMETIQUE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1583
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1593
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1603
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1613
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TEXP-COMPLEXES-TRIGO-POLYNOMES-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1623
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TEXP-COMPLEXES-TRIGO-POLYNOMES-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1633
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TEXP-COMPLEXES-TRIGO-POLYNOMES-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1643
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TEXP-GRAPHES-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1653
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TEXP-GRAPHES-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1663
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TEXP-GRAPHES-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1673
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TEXP-MATRICES-MARKOV-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1683
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TEXP-MATRICES-MARKOV-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1693
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TEXP-MATRICES-MARKOV-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1703
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-CALCUL-INTEGRAL-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1713
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-CALCUL-INTEGRAL-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1723
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-CALCUL-INTEGRAL-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1733
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-COMBINATOIRE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1743
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-COMBINATOIRE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1753
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-COMBINATOIRE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1763
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-CONTINUITE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1773
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-CONTINUITE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1783
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-CONTINUITE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1793
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-DERIVATION-CONVEXITE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1803
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-DERIVATION-CONVEXITE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1813
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-DERIVATION-CONVEXITE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1823
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-GEOMETRIE-ESPACE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1833
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-GEOMETRIE-ESPACE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1843
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-GEOMETRIE-ESPACE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1853
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-LIMITES-FONCTIONS-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1863
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-LIMITES-FONCTIONS-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1873
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-LIMITES-FONCTIONS-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1883
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-LOGARITHME-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1893
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-LOGARITHME-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1903
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-LOGARITHME-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1913
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-PRIMITIVES-EQDIFF-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1923
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-PRIMITIVES-EQDIFF-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1933
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-PRIMITIVES-EQDIFF-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1943
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-PROBABILITES-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1953
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-PROBABILITES-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1963
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-PROBABILITES-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1973
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-SUITES-LIMITES-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1983
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-SUITES-LIMITES-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 1993
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-SUITES-LIMITES-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2003
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-TRIGONOMETRIE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2013
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-TRIGONOMETRIE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2023
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TSPE-TRIGONOMETRIE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2033
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-ALGO-DICHO-GLOUTON-KNN-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2043
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-ALGO-DICHO-GLOUTON-KNN-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2053
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-ALGO-DICHO-GLOUTON-KNN-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2063
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-ALGO-PARCOURS-TRIS-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2073
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-ALGO-PARCOURS-TRIS-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2083
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-ALGO-PARCOURS-TRIS-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2093
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-ARCHITECTURE-OS-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2103
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-ARCHITECTURE-OS-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2113
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-ARCHITECTURE-OS-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2123
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-LANGAGE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2133
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-LANGAGE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2143
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-LANGAGE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2153
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-PROJET-METHODES-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2163
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-PROJET-METHODES-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2173
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-PROJET-METHODES-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2183
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-RESEAUX-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2193
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-RESEAUX-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2203
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-RESEAUX-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2213
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-TABLES-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2223
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-TABLES-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2233
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-TABLES-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2243
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-TYPES-BASE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2253
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-TYPES-BASE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2263
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-TYPES-BASE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2273
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-TYPES-CONSTRUITS-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2283
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-TYPES-CONSTRUITS-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2293
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-TYPES-CONSTRUITS-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2303
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-WEB-IHM-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2313
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-WEB-IHM-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2323
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "1NSI-WEB-IHM-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2333
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-ALGORITHMIQUE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2343
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-ALGORITHMIQUE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2353
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-ALGORITHMIQUE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2363
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-ARCHITECTURES-MATERIELLES-SY-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2373
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-ARCHITECTURES-MATERIELLES-SY-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2383
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-ARCHITECTURES-MATERIELLES-SY-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2393
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-BASES-DE-DONNEES-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2403
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-BASES-DE-DONNEES-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2413
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-BASES-DE-DONNEES-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2423
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-HISTOIRE-INFORMATIQUE-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2433
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-HISTOIRE-INFORMATIQUE-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2443
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-HISTOIRE-INFORMATIQUE-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2453
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-LANGAGES-ET-PROGRAMMATION-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2463
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-LANGAGES-ET-PROGRAMMATION-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2473
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-LANGAGES-ET-PROGRAMMATION-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2483
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-STRUCTURES-DONNEES-REV-1",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2493
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-STRUCTURES-DONNEES-REV-2",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2503
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [],
+      "CURRENT_EVIDENCE_DIGEST": null,
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "NOT_COVERED",
+      "NOTES": "Controle lu; aucune preuve substantielle de sa portee complete verifiee dans cette sous-mission. Les anciens rapports ne sont pas promus."
+    },
+    {
+      "ASTRA_CONTROL_ID": "TNSI-STRUCTURES-DONNEES-REV-3",
+      "ASTRA_OBSERVATION": {
+        "document": "Grille_controles_collection.md",
+        "line": 2513
+      },
+      "CURRENT_APPLICABILITY": "APPLICABLE_TO_CURRENT_CORPUS",
+      "CURRENT_EVIDENCE": [
+        "E02"
+      ],
+      "CURRENT_EVIDENCE_DIGEST": "sha256:1cdc466fa35f4731a0a89a5f53ed9580198cd56f5453da2674e7428952600f08",
+      "CURRENT_HEAD": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+      "STATUS": "PARTIAL",
+      "NOTES": "Chapitre present et selectionne dans la liste canonique declaree; objets, reponses aux sous-questions, parcours et pages finales restent a verifier."
+    }
+  ],
+  "structural_delta": {
+    "STR-02": {
+      "STATUS": "OBSOLETE_BY_CURRENT_HEAD",
+      "evidence": [
+        "E03",
+        "E04"
+      ],
+      "notes": "Les anciens corps et chemins cites sont retires; le controle scientifique des remplacements demeure ouvert."
+    },
+    "STR-05": {
+      "STATUS": "OBSOLETE_BY_CURRENT_HEAD",
+      "evidence": [
+        "E05"
+      ],
+      "notes": "Le seuil numerique de50 exercices ne constitue plus une exigence release; la richesse qualitative reste exigible."
+    }
+  }
+}
