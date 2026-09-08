@@ -1,19 +1,34 @@
 % META: {"id":"1SPE-PRODSCAL-ME-001","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"methode","capacites_codes":["C1"],"status":"generated"}
 \begin{fichemethode}{M1}{Calculer un produit scalaire}
-\quandUtiliser{J'utilise cette méthode lorsque l'énoncé demande de calculer $\vec{u} \cdot \vec{v}$, soit a partir des normes et de l'angle, soit a partir des coordonnées.}
+\quandUtiliser{J'utilise cette méthode lorsque l'énoncé demande de calculer $\vec{u} \cdot \vec{v}$, soit à partir des normes et de l'angle, soit à partir des coordonnées.}
 \pasApas{\begin{enumerate}
-  \item Si je connais les coordonnées de $\vec{u}\begin{pmatrix} x_1 \\ y_1 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} x_2 \\ y_2 \end{pmatrix}$ dans un repere \textbf{orthonorme} : $\vec{u} \cdot \vec{v} = x_1 x_2 + y_1 y_2$.
+  \item Si l'un des vecteurs est nul, le produit scalaire vaut $0$. Dans les étapes suivantes, les deux vecteurs sont non nuls.
+  \item Si je connais les coordonnées de $\vec{u}\begin{pmatrix} x_1 \\ y_1 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} x_2 \\ y_2 \end{pmatrix}$ dans un repère \textbf{orthonormé} : $\vec{u} \cdot \vec{v} = x_1 x_2 + y_1 y_2$.
   \item Si je connais les normes et l'angle : $\vec{u} \cdot \vec{v} = \|\vec{u}\| \times \|\vec{v}\| \times \cos(\vec{u}, \vec{v})$.
-  \item Si je connais une projection : $\vec{u} \cdot \vec{v} = \|\vec{u}\| \times \overline{OH}$ ou $H$ est le projete orthogonal.
+  \item Pour utiliser une projection, je choisis une origine commune $O$, avec $\overrightarrow{OA}=\vec{u}$ et $\overrightarrow{OB}=\vec{v}$. Je projette $B$ orthogonalement en $H$ sur la droite $(OA)$ orientée de $O$ vers $A$. Alors $\vec{u}\cdot\vec{v}=\|\vec{u}\|\times\overline{OH}$. La mesure algébrique $\overline{OH}$ vaut $OH$ sur la demi-droite $[OA)$ ; elle vaut $-OH$ de l'autre côté, et est donc négative. Si $H=O$, elle est nulle.
 \end{enumerate}}
 \exempleRedige{Calculons $\vec{u} \cdot \vec{v}$ avec $\vec{u}\begin{pmatrix} 2 \\ -3 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} 4 \\ 1 \end{pmatrix}$.
-\commentaireMarge{Étape 1 : coordonnées connues, repere orthonorme.}
+\commentaireMarge{Choix : coordonnées connues, repère orthonormé.}
 $\vec{u} \cdot \vec{v} = 2 \times 4 + (-3) \times 1 = 8 - 3 = 5.$}
 \pieges{\begin{itemize}
-  \item Utiliser la formule analytique dans un repere non orthonorme.
+  \item Utiliser la formule analytique dans un repère non orthonormé.
   \item Oublier le cosinus dans la formule géométrique.
   \item Confondre le produit scalaire (nombre réel) avec un vecteur.
 \end{itemize}}
 \verifier{Je vérifie le signe : si l'angle est aigu, le produit scalaire est positif ; si l'angle est obtus, il est négatif.}
 \sEntrainer{\refExos{M1}}
 \end{fichemethode}
+
+% BEGIN-VERIFY
+% from sympy import *
+% assert Matrix([2,-3]).dot(Matrix([4,1])) == 5
+% # Orthonormal frame with first axis along the nonzero vector u.
+% r = symbols('r', positive=True)
+% t, h = symbols('t h', real=True)
+% u, v = Matrix([r,0]), Matrix([t*r,h])
+% signed_OH = t*r
+% assert simplify(r*signed_OH - u.dot(v)) == 0
+% assert (r*signed_OH).subs({r:2,t:-Rational(3,2)}) == -6
+% assert (r*signed_OH).subs({r:2,t:0}) == 0
+% assert Matrix([0,0]).dot(Matrix([4,1])) == 0
+% END-VERIFY

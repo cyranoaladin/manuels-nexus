@@ -1,15 +1,17 @@
 % META: {"id":"1SPE-PRODSCAL-COURS-C3","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"cours","capacites_codes":["C3"],"status":"generated"}
 
-\section{Orthogonalite et calcul d'angles}
+\section{Orthogonalité et calcul d'angles}
 
-\margeAppui{Le produit scalaire fournit un critere algébrique simple pour l'orthogonalite et permet de calculer l'angle entre deux vecteurs sans mesure directe.}
+Le plan est rapporté à un repère orthonormé.
 
-\theoreme[Critere d'orthogonalite]{
+\margeAppui{Le produit scalaire fournit un critère algébrique simple pour l'orthogonalité et permet de calculer l'angle entre deux vecteurs sans mesure directe.}
+
+\theoreme[Critère d'orthogonalité]{
 Deux vecteurs $\vec{u}$ et $\vec{v}$ sont orthogonaux si et seulement si :
 \[
 \vec{u} \cdot \vec{v} = 0.
 \]
-Le vecteur nul est orthogonal a tout vecteur.
+Le vecteur nul est orthogonal à tout vecteur.
 }
 
 % BEGIN-VERIFY
@@ -21,10 +23,12 @@ Le vecteur nul est orthogonal a tout vecteur.
 % END-VERIFY
 
 \propriete[Calcul de l'angle entre deux vecteurs]{
-Soient $\vec{u}$ et $\vec{v}$ deux vecteurs non nuls. L'angle $\theta = (\vec{u}, \vec{v})$ vérifie :
+Soient $\vec{u}$ et $\vec{v}$ deux vecteurs non nuls. Leur angle géométrique $\theta\in[0,\pi]$ vérifie :
 \[
 \cos\theta = \frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \times \|\vec{v}\|}.
 \]
+On obtient cet angle par $\theta=\arccos\!\left(\dfrac{\vec{u}\cdot\vec{v}}{\|\vec{u}\|\|\vec{v}\|}\right)$.
+Le cosinus seul ne détermine pas un angle orienté : des angles opposés ont le même cosinus.
 }
 
 % BEGIN-VERIFY
@@ -36,10 +40,13 @@ Soient $\vec{u}$ et $\vec{v}$ deux vecteurs non nuls. L'angle $\theta = (\vec{u}
 % cos_theta = ps / (norm_u * norm_v)
 % assert simplify(cos_theta - sqrt(2)/2) == 0
 % assert simplify(acos(cos_theta) - pi/4) == 0
+% assert acos(cos(-pi/4)) == pi/4
+% assert acos(1) == 0  # Same direction.
+% assert acos(-1) == pi  # Opposite directions.
 % END-VERIFY
 
 \exemple{
-Soient $\vec{u}\begin{pmatrix} 1 \\ 1 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} 1 \\ 0 \end{pmatrix}$. Calculer l'angle entre $\vec{u}$ et $\vec{v}$.
+Soient $\vec{u}\begin{pmatrix} 1 \\ 1 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} 1 \\ 0 \end{pmatrix}$. Calculer l'angle géométrique entre $\vec{u}$ et $\vec{v}$.
 
 $\vec{u} \cdot \vec{v} = 1 + 0 = 1$, $\|\vec{u}\| = \sqrt{2}$, $\|\vec{v}\| = 1$.
 
@@ -59,8 +66,8 @@ Comme $\vec{u} \cdot \vec{v} = 0$, les vecteurs $\vec{u}$ et $\vec{v}$ sont orth
 % assert 3*4 + (-2)*6 == 0
 % END-VERIFY
 
-\propriete[Orthogonalite de droites]{
-Dans un repere orthonorme, deux droites de vecteurs directeurs $\vec{u}$ et $\vec{v}$ sont perpendiculaires si et seulement si $\vec{u} \cdot \vec{v} = 0$.
+\propriete[Orthogonalité de droites]{
+Dans un repère orthonormé, deux droites de vecteurs directeurs $\vec{u}$ et $\vec{v}$ sont perpendiculaires si et seulement si $\vec{u} \cdot \vec{v} = 0$.
 }
 
 \erreurFrequente{
@@ -70,9 +77,9 @@ Oublier de vérifier que les vecteurs sont non nuls avant de calculer l'angle. L
 }
 
 \erreurFrequente{
-Calculer $\cos\theta$ mais oublier de passer a l'angle $\theta$ par $\theta = \arccos\!\left(\dfrac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \|\vec{v}\|}\right)$.
+Calculer $\cos\theta$ mais oublier de passer à l'angle $\theta$ par $\theta = \arccos\!\left(\dfrac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \|\vec{v}\|}\right)$.
 }
 
 \erreurFrequente{
-Conclure que deux vecteurs sont paralleles quand leur produit scalaire est non nul. Un produit scalaire non nul signifie seulement qu'ils ne sont pas orthogonaux.
+Conclure que deux vecteurs sont parallèles quand leur produit scalaire est non nul. Un produit scalaire non nul signifie seulement qu'ils ne sont pas orthogonaux.
 }

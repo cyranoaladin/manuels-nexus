@@ -1,0 +1,1102 @@
+{
+  "artifact_type": "PRODSCAL_BOUNDED_LOT_C_REVIEW",
+  "head_at_recording": "3a4c3469622e19ec7e3e5e37502dc89f004f079e",
+  "scope": "Seven corrected source digests independently counter-reviewed by /root; source-level dimensional evidence only. Fifteen other files were fully read unchanged, with explicitly listed remaining findings. No chapter or PDF closure.",
+  "reviewer_and_author": "/root/astra_delta",
+  "human_approval": false,
+  "independent_counter_review_status": "VALIDATED_BY_EVIDENCE_WITH_EXPLICIT_OPEN_DIMENSIONS",
+  "source_reviews": [
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/07_td_fil_rouge.tex",
+      "source_sha256": "sha256:d1a506917f5a19557f42f8ea7aaf741477c1c6428b02e9f2ac1539906d97639b",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/07_td_fil_rouge.sympy.json",
+      "receipt_sha256": "sha256:a8d8b6eff6c6e09a7abfca09039e79621caffa7ac155f71f364f1a3a03df4e77",
+      "object_id": "1SPE-PRODSCAL-TD-FIL-ROUGE",
+      "original_source_sha256": "sha256:8b787f58f55c92d985429d766c821a0f22774be6a7346242a7395895967c61e0",
+      "original_independent_resolution": "Using the numeric triangle data, BA·BC=−15/2; ||BA+BC||²=19 and ||BA−BC||²=49. BA−BC=CA, so AC=7. AB·AC=65/2; cos(BAC)=13/14, angle≈21.7867892983°. BD·AC=||BC||²−||BA||²=−16, and in general it vanishes iff AB=BC. Area=15√3/4 km²; height from A to line(BC)=5√3/2 km. However the projection parameter on B+t(C−B) is t=−5/6, outside[0,1]. Distance squared to that segment is25+15t+9t²; for t∈[0,1] it is minimized at B, with distance5km.",
+      "source_read_extent": "Whole source read before correction; all displayed text and all oracle changes reread afterwards.",
+      "correction_author": "/root/astra_delta",
+      "independent_counter_review": "VALIDATED_BY_EVIDENCE; /root read the entire seven-source lot and regression code",
+      "human_approval": false,
+      "changes": "Preserved sides5,3 and angle120°; removed incompatible precise compass-direction labels. Final task now explicitly starts at refugeA, asks whether the altitude foot belongs to[BC], and seeks the actual closest point and minimum on that segment.",
+      "fresh_reasoning": "In frameB=(0,0),A=(5,0),C=(−3/2,3√3/2),the projection has parameter−5/6 and is outside[BC]. ForP(t)=B+t(C−B),distance²=25+15t+9t²; its excess over25 is3t(5+3t),nonnegative for all t∈[0,1],zero only at0. ThereforeB is the unique minimizer and distance5km,greater than line-distanceh=5√3/2. Earlier task results−15/2,19,49,AC7,cosA13/14,BD·AC=−16 andarea15√3/4 remain correct.",
+      "pedagogy": "The false instruction became a genuine comparison of a line and a constrained segment, using the same triangle. No extra exercise object or artificialquota. No full solution was inserted into student-visible TDtext.",
+      "oracle": "Fresh projection-parameter calculation and symbolic nonnegative polynomial; mutated absolute value of the projection parameter is rejected.",
+      "oracle_execution_verdict": "pass",
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "In frameB=(0,0),A=(5,0),C=(−3/2,3√3/2),the projection has parameter−5/6 and is outside[BC]. ForP(t)=B+t(C−B),distance²=25+15t+9t²; its excess over25 is3t(5+3t),nonnegative for all t∈[0,1],zero only at0. ThereforeB is the unique minimizer and distance5km,greater than line-distanceh=5√3/2. Earlier task results−15/2,19,49,AC7,cosA13/14,BD·AC=−16 andarea15√3/4 remain correct."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "PENDING",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "The false instruction became a genuine comparison of a line and a constrained segment, using the same triangle. No extra exercise object or artificialquota. No full solution was inserted into student-visible TDtext.",
+          "reason": "Student task is mathematically coherent, but professor exploitation remains incomplete without its detailed correction."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Read source corrected, then independently counter-reviewed; local hypotheses and displayed wording aligned with its task."
+        },
+        "ORACLE_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Fresh projection-parameter calculation and symbolic nonnegative polynomial; mutated absolute value of the projection parameter is rejected."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "PENDING",
+          "reason": "MISSING_TEACHER_CORRECTION: source has only unprinted SymPy comments. Canonical professor selection has no dedicated correction bound to this TD, including Q8 and Q11."
+        }
+      }
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/12_C3_orthogonalite.tex",
+      "source_sha256": "sha256:6bfd0ef3be66caaed87ced0923644da1e7c06d68e3ad62cc5676af4ad7b754a2",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/12_C3_orthogonalite.sympy.json",
+      "receipt_sha256": "sha256:e7d859a6faef1c69c04866bff81687db575932bc14e58c8d2af6ddc2138b6a27",
+      "object_id": "1SPE-PRODSCAL-COURS-C3",
+      "original_source_sha256": "sha256:a02ab773f4b1c0d3656ea147c6fffe7c07ae63a28e050ffcb1b171c23fd58ad2",
+      "original_independent_resolution": "The orthogonality criterion including zero vectors is mathematically correct. Numeric products: (1,2)·(2,−1)=0; (3,0)·(0,7)=0; (3,−2)·(4,6)=0. For u=(1,1),v=(1,0), dot1,norms√2 and1, geometric angleπ/4. The oriented angle(u,v), however, is−π/4 mod2π; acos cannot recover it from cosine. Nonzero norms are explicitly required for division. Nonzero direction vectors give the perpendicular-line criterion.",
+      "source_read_extent": "Whole source read before correction; all displayed text and all oracle changes reread afterwards.",
+      "correction_author": "/root/astra_delta",
+      "independent_counter_review": "VALIDATED_BY_EVIDENCE; /root read the entire seven-source lot and regression code",
+      "human_approval": false,
+      "changes": "Declared a global orthonormal frame; defined geometricangleθ∈[0,π],explained cosine does not identify orientedangle,and named the workedexamplegeometric.",
+      "fresh_reasoning": "For nonzero vectors the quotient is cosine of the angle; arccos returns its unique geometric representative on[0,π]. For(1,1),(1,0),dot1,norms√2and1,θπ/4 although one orientedmeasureis−π/4. Boundarycoincident/oppositedirections return0/π. Zero vectors remain explicitlyorthogonal toall but excluded fromangledivision. Numericorthogonalityexamplesallgive0.",
+      "pedagogy": "The chosen angle branch and nonzero check are explicit; numericvectorswere preserved.",
+      "oracle": "Original three blocks freshlyexecuted,including addednegative-angle andendpointchecks.",
+      "oracle_execution_verdict": "pass",
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "For nonzero vectors the quotient is cosine of the angle; arccos returns its unique geometric representative on[0,π]. For(1,1),(1,0),dot1,norms√2and1,θπ/4 although one orientedmeasureis−π/4. Boundarycoincident/oppositedirections return0/π. Zero vectors remain explicitlyorthogonal toall but excluded fromangledivision. Numericorthogonalityexamplesallgive0."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "The chosen angle branch and nonzero check are explicit; numericvectorswere preserved."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Read source corrected, then independently counter-reviewed; local hypotheses and displayed wording aligned with its task."
+        },
+        "ORACLE_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Original three blocks freshlyexecuted,including addednegative-angle andendpointchecks."
+        }
+      }
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/14_C5_al_kashi.tex",
+      "source_sha256": "sha256:506cc9a183724c1ebc7beb129bbc8d1ecbbe97f3b66249f930bf6a653deaab11",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/14_C5_al_kashi.sympy.json",
+      "receipt_sha256": "sha256:8dcf487f2276422945758595e3a63ea7f71bf312aff84d4a095a42c9e20ce63a",
+      "object_id": "1SPE-PRODSCAL-COURS-C5",
+      "original_source_sha256": "sha256:9991cb43856b910594b8fe17a15f712dfaf7b007826c72b443fd0753c4948d02",
+      "original_independent_resolution": "All three cyclic cosine-law formulas are correct. The printed proof uses BC=AC−AB, expands the norm-square and substitutes AB·AC=bc cosA. In the right-angle case cosA=0 recovers Pythagoras. Median formula follows from midpoint expansion and gives18 for A=(0,0),B=(4,0),C=(2,6),M=(3,3). Examples:b5,c8,Aπ/3 producea²49,a7; sides7,5,8 producecosA1/2 andAπ/3. Triangular inequalities hold.",
+      "source_read_extent": "Whole source read before correction; all displayed text and all oracle changes reread afterwards.",
+      "correction_author": "/root/astra_delta",
+      "independent_counter_review": "VALIDATED_BY_EVIDENCE; /root read the entire seven-source lot and regression code",
+      "human_approval": false,
+      "changes": "Added a non-right-angle assertion tied to the actualAlKashiexpression. Replaced proof-oracle selfcomparison with coordinatesAB=(c,0),AC=(bcosA,bsinA) and their independent squared difference. Correctedread diacritics.",
+      "fresh_reasoning": "||AC−AB||²=b²sin²A+(bcosA−c)²=b²+c²−2bc cosA for all realA andpositiveb,c. Caseb5,c8,Aπ/3gives49 and exposes wrong+. Cyclicformulas, printed generalproof, medianformula andnumericexamples previouslyindependentlyresolved remaincorrect.",
+      "pedagogy": "Printed geometricproof remains intact and general. No normativeprogramme oroptional-extensionlabel changed.",
+      "oracle": "Both mutations formerlyconcealedbyright-angle-only checks orselfcomparison are nowrejected.",
+      "remaining_dimension": "DOCUMENTARY_HISTORICAL_REVIEW remainsPENDING for thehistoricalparagraph. This executiondoesnotcertifyEuclid/AlKashi attribution.",
+      "oracle_execution_verdict": "pass",
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "||AC−AB||²=b²sin²A+(bcosA−c)²=b²+c²−2bc cosA for all realA andpositiveb,c. Caseb5,c8,Aπ/3gives49 and exposes wrong+. Cyclicformulas, printed generalproof, medianformula andnumericexamples previouslyindependentlyresolved remaincorrect."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Printed geometricproof remains intact and general. No normativeprogramme oroptional-extensionlabel changed."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Read source corrected, then independently counter-reviewed; local hypotheses and displayed wording aligned with its task."
+        },
+        "ORACLE_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Both mutations formerlyconcealedbyright-angle-only checks orselfcomparison are nowrejected."
+        },
+        "DOCUMENTARY_HISTORICAL_REVIEW": {
+          "state": "PENDING",
+          "reason": "Euclid/Al-Kashi attribution paragraph has not been independently established by documentary evidence; SymPy execution has no bearing on attribution."
+        }
+      }
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-001.tex",
+      "source_sha256": "sha256:bb22c76abd05cbb8276d4b1c6988433016d9416cf9089cdabc9797392d621482",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-ME-001.sympy.json",
+      "receipt_sha256": "sha256:a664355b17eae754e50626a0d8509f1624a4d674548e188990a0507a7f19bbed",
+      "object_id": "1SPE-PRODSCAL-ME-001",
+      "original_source_sha256": "sha256:89d6829da25f2f7d8227e47f471acea71eaa2e113df6670d11920879b0e25bf9",
+      "original_independent_resolution": "Coordinate formula is correctly conditioned on an orthonormal frame and the example gives2×4−3×1=5. Geometric formula is valid for nonzero vectors with a defined angle; acute/obtuse sign checks follow from cosine. Projection formula remains ambiguous because neither O, common origin nor orientation of signed OH is defined.",
+      "source_read_extent": "Whole source read before correction; all displayed text and all oracle changes reread afterwards.",
+      "correction_author": "/root/astra_delta",
+      "independent_counter_review": "VALIDATED_BY_EVIDENCE; /root read the entire seven-source lot and regression code",
+      "human_approval": false,
+      "changes": "Separatednullcase,definedcommonoriginO,OA=u,OB=v,projectionHontoOAorientedOtoA andsignedOH. Keptorthonormalcoordinatecondition andexample.",
+      "fresh_reasoning": "Fornonzerou,chooseorthonormalframeu=(r,0),r>0,v=(tr,h). H=(tr,0),signedOH=tr,andr×tr=u·v for all realt,h. Negativeprojectiont=−3/2,r2gives−6;projectionatOandzero-vectorcasegive0. Exampledot2×4−3×1=5.",
+      "pedagogy": "Methodnowdefinesallobjectsandsignsofprojection beforeuse. Coordinateexampleannotationnolongerpretendstobeastepnumber shiftedbythenullcase.",
+      "oracle": "Actualscalarproductexample andgeneral signedprojection identityexecuted;abs(t)mutationrejected.",
+      "oracle_execution_verdict": "pass",
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Fornonzerou,chooseorthonormalframeu=(r,0),r>0,v=(tr,h). H=(tr,0),signedOH=tr,andr×tr=u·v for all realt,h. Negativeprojectiont=−3/2,r2gives−6;projectionatOandzero-vectorcasegive0. Exampledot2×4−3×1=5."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Methodnowdefinesallobjectsandsignsofprojection beforeuse. Coordinateexampleannotationnolongerpretendstobeastepnumber shiftedbythenullcase."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Read source corrected, then independently counter-reviewed; local hypotheses and displayed wording aligned with its task."
+        },
+        "ORACLE_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Actualscalarproductexample andgeneral signedprojection identityexecuted;abs(t)mutationrejected."
+        }
+      }
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-004.tex",
+      "source_sha256": "sha256:4601cc3a51fa691cfaf1325d6b1641fee848329af5e26a91b8ac19397fa61d71",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-ME-004.sympy.json",
+      "receipt_sha256": "sha256:eaa78a6c38d7e3b7ca4f178037e1cb61a4ef2610176aa36d65a340bf579164b9",
+      "object_id": "1SPE-PRODSCAL-ME-004",
+      "original_source_sha256": "sha256:8c3bfb9f743c292d104b9eca17199af2841862d5c604af22bd255970cfc5d964",
+      "original_independent_resolution": "For A≠B the midpoint-normal criterion characterizes the bisector. ExampleI=(3,2),AB=(4,−2),so4(x−3)−2(y−2)=0 gives2x−y=4. A foot must also belong to line(BC). Half norm-product times absolute sine is a triangle area only when the two vectors represent adjacent sides; they are currently undefined. sinθ=√(1−cos²θ) is false for θ=−π/3 and requires a nonnegative-sine branch, normally the triangle interior angle.",
+      "source_read_extent": "Whole source read before correction; all displayed text and all oracle changes reread afterwards.",
+      "correction_author": "/root/astra_delta",
+      "independent_counter_review": "VALIDATED_BY_EVIDENCE; /root read the entire seven-source lot and regression code",
+      "human_approval": false,
+      "changes": "Specifieddistinctsegmentendpoints,nonflattriangle,H∈line(BC),adjacentvectorsAB/ACandinteriorangle. Addedorthonormalframeforcoordinates and correctedABfromdirectionvectorto normalvector. Verificationnowchecksnonzeronormaldirectionaswellasmidpoint.",
+      "fresh_reasoning": "Bisector=IM·AB0 forA≠B. InexampleI3,2,normalAB4,−2 gives2x−y4. Differencema²−mb²=2IM·AB provescriterion. Altitudefootrequiresbothlineincidenceandorthogonality andcanbeoutsideclosedsegment. Area=AB×AC×sin(BAC)/2,withsinpositiveon(0,π),so positivesquarerootvalid. NonzeronormalparallelAB andline throughI are sufficient to identifybisector.",
+      "pedagogy": "Definitionsareattachedtotheactualgeometry;unnamedu,vandunsignedrootbranchremoved.",
+      "oracle": "Actualbisectorconditioncheckedagainstindependentsquareddistanceidentity;generalGramidentitychecked. Mutatednormalvectorrejected. Fullsinebranchargumentwasreadscientifically,notfalselyclaimedprovedbyGramidentityalone.",
+      "oracle_execution_verdict": "pass",
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Bisector=IM·AB0 forA≠B. InexampleI3,2,normalAB4,−2 gives2x−y4. Differencema²−mb²=2IM·AB provescriterion. Altitudefootrequiresbothlineincidenceandorthogonality andcanbeoutsideclosedsegment. Area=AB×AC×sin(BAC)/2,withsinpositiveon(0,π),so positivesquarerootvalid. NonzeronormalparallelAB andline throughI are sufficient to identifybisector."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Definitionsareattachedtotheactualgeometry;unnamedu,vandunsignedrootbranchremoved."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Read source corrected, then independently counter-reviewed; local hypotheses and displayed wording aligned with its task."
+        },
+        "ORACLE_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Actualbisectorconditioncheckedagainstindependentsquareddistanceidentity;generalGramidentitychecked. Mutatednormalvectorrejected. Fullsinebranchargumentwasreadscientifically,notfalselyclaimedprovedbyGramidentityalone."
+        }
+      }
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-005.tex",
+      "source_sha256": "sha256:10029e24c2ffb1f32a2578a00dcff29dc60c1830f12438c06bc7fe35391b8513",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-ME-005.sympy.json",
+      "receipt_sha256": "sha256:5d07bb10c2ef95c18b7a99129f54a3e54cae75dad4ba501e1fb6285553a8505d",
+      "object_id": "1SPE-PRODSCAL-ME-005",
+      "original_source_sha256": "sha256:cecb3b58210aa8f35dbc9ac9dabf9d9ef3a9ae4d17466d110a58c507d0d737a0",
+      "original_independent_resolution": "Cosine law with b4,c6,Aπ/4 gives52−24√2>0. The positive length is4.24957344954123; exact bound4.245<√(52−24√2)<4.255 proves rounding4.25, while printed4.35 is wrong. General isolation of cosA is correct for a nondegenerate triangle with positive sides; angle returns the interior branch.",
+      "source_read_extent": "Whole source read before correction; all displayed text and all oracle changes reread afterwards.",
+      "correction_author": "/root/astra_delta",
+      "independent_counter_review": "VALIDATED_BY_EVIDENCE; /root read the entire seven-source lot and regression code",
+      "human_approval": false,
+      "changes": "Corrected4.35to4.25; addedpositive-length andexactroundingoraclefromindependentcoordinateconstruction.",
+      "fresh_reasoning": "AB=(6,0),AC=(2√2,2√2),squaredBC=52−24√2>0. Exactrationalbound849/200<BC<851/200proves4.25rounding; BC≈4.24957344954. Positiveandoppositesidelabelingcorrect.",
+      "pedagogy": "The workedexample now has a correct numerical conclusion and preserves the exact radical.",
+      "oracle": "Squaredlengthcomputedfromvectorcoordinates,positivityandroundingintervalchecked;negativesquarerootmutationrejected.",
+      "oracle_execution_verdict": "pass",
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "AB=(6,0),AC=(2√2,2√2),squaredBC=52−24√2>0. Exactrationalbound849/200<BC<851/200proves4.25rounding; BC≈4.24957344954. Positiveandoppositesidelabelingcorrect."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "The workedexample now has a correct numerical conclusion and preserves the exact radical."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Read source corrected, then independently counter-reviewed; local hypotheses and displayed wording aligned with its task."
+        },
+        "ORACLE_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Squaredlengthcomputedfromvectorcoordinates,positivityandroundingintervalchecked;negativesquarerootmutationrejected."
+        }
+      }
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/remediation/1SPE-PRODUIT-SCALAIRE-FR-R1.tex",
+      "source_sha256": "sha256:fcce7c27bc5dcaad90e7a6746aa85ff89b8be580844ba1bfdc089a1d4174a15d",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODUIT-SCALAIRE-FR-R1.sympy.json",
+      "receipt_sha256": "sha256:b132a6fcb1f1f992b130bbe62f2806e35899612aaac3551a495b9d7ca9ad34b9",
+      "object_id": "1SPE-PRODUIT-SCALAIRE-FR-R1",
+      "original_source_sha256": "sha256:87941e52f603c4a7fd87184cb3901648976b941de0bf9579edca87123057e4af",
+      "original_independent_resolution": "Coordinate subtraction works in any affine frame: AB=(3,−4). Vector sum=(−1,4), scalar multiple3(−1,4)=(−3,12). All printed answers are correct; the last oracle merely compares the identical constant tuple with itself.",
+      "source_read_extent": "Whole source read before correction; all displayed text and all oracle changes reread afterwards.",
+      "correction_author": "/root/astra_delta",
+      "independent_counter_review": "VALIDATED_BY_EVIDENCE; /root read the entire seven-source lot and regression code",
+      "human_approval": false,
+      "changes": "Replacedconstant-tupletautologywithactual3*Matrix([-1,4])computation. Printedstatementsandcorrectionsunchanged.",
+      "fresh_reasoning": "Differences(3,−4),sum(−1,4),scalarmultiple(−3,12)verifiedindependently. These coordinateoperations hold in any affineframe,so noorthonormalhypothesisisneeded.",
+      "pedagogy": "Originalshortprerequisitepractice anditsanswersremainaligned.",
+      "oracle": "Currentcomputationcomparedtoexpectedvector;factor4mutationrejected.",
+      "oracle_execution_verdict": "pass",
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Differences(3,−4),sum(−1,4),scalarmultiple(−3,12)verifiedindependently. These coordinateoperations hold in any affineframe,so noorthonormalhypothesisisneeded."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Originalshortprerequisitepractice anditsanswersremainaligned."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Read source corrected, then independently counter-reviewed; local hypotheses and displayed wording aligned with its task."
+        },
+        "ORACLE_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "scope": "Entire source text and stated local task; no chapter/PDF certification",
+          "rationale": "Currentcomputationcomparedtoexpectedvector;factor4mutationrejected."
+        }
+      }
+    }
+  ],
+  "unchanged_file_reviews": [
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/07_td_contextualise.tex",
+      "source_sha256": "sha256:e4dcbc593cf2c3305e66b3ca72f4fac46f0440d38afef02a6d89afa3b87f9c68",
+      "source_unchanged_since_full_read": true,
+      "read_extent": "ENTIRE_FILE",
+      "independent_resolution": "u=(4√2,4√2), v=(5√3/2,−5/2), dot=10(√6−√2)=40cos(5π/12). Geometric angle=5π/12 and interior angle at R=7π/12. PQ²=89+20√6−20√2, PQ≈10.474040462410, hence 10.5 km to the nearest tenth. QP has both coordinates negative; cosα=−(4√2+5√3/2)/PQ and sinα=−(4√2−5/2)/PQ. Their squares sum to1 and signs specify the return quadrant.",
+      "dimensions": {
+        "PROGRAMME_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual mathematical content was matched to the read BO2026 product/geometry section lines542–574 or to the explicitly declared R1–R5 chapter prerequisite; this is source-level scope, not whole-capacity coverage."
+        },
+        "SCIENTIFIC_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Actual calculations were independently resolved, but the remaining source finding(s) prevent unconditional scientific closure: NAVIGATION_CARDINAL_LABEL. u=(4√2,4√2), v=(5√3/2,−5/2), dot=10(√6−√2)=40cos(5π/12). Geometric angle=5π/12 and interior angle at R=7π/12. PQ²=89+20√6−20√2, PQ≈10.474040462410, hence 10.5 km to the nearest tenth. QP has both coordinates negative; cosα=−(4√2+5√3/2)/PQ and sinα=−(4√2−5/2)/PQ. Their squares sum to1 and signs specify the return quadrant."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Unresolved domain, geometric-angle, context or QCM wording issues still prevent a dependable learner task. See the per-source resolution and recorded findings."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Read source still needs the missing hypotheses/clarifications and/or displayed diacritics identified in the note; no editorial PASS is inferred from correct arithmetic."
+        },
+        "ORACLE_REVIEW": {
+          "state": "PENDING",
+          "rationale": "All oracle text read; this read-only subtask did not rerun this unchanged object or establish a fresh current receipt. No old mechanical PASS is promoted."
+        }
+      },
+      "remaining_findings": [
+        "NAVIGATION_CARDINAL_LABEL",
+        "NAVIGATION_ROUNDING_ORACLE"
+      ],
+      "dependency_evidence": {
+        "state": "CHAPTER_DEPENDENCY_BINDING_REQUIRES_FRESH_RECOMPUTATION",
+        "reason": "Current review producer hashes chapter source resources. The seven listed dependencies changed; source-byte equality alone cannot carry a prior chapter-scoped review. No specific receipt is labelled stale unless its actual dependency_digest is compared.",
+        "current_unified_ledger_review_ids_for_this_path": []
+      },
+      "human_approval": false
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/11_C2_proprietes.tex",
+      "source_sha256": "sha256:339488bf543cf07a71646865eb8da2d9621606a4fd8fc65a44ca140b0a8b6be4",
+      "source_unchanged_since_full_read": true,
+      "read_extent": "ENTIRE_FILE",
+      "independent_resolution": "Symmetry, first-slot additivity and scalar homogeneity follow by expanding coordinates; symmetry supplies the other slot. u·u=||u||², both norm-square identities and (u+v)·(u−v)=||u||²−||v||² hold including zero vectors. The analytic-expression proof correctly uses an orthonormal basis and kills mixed basis products. Example:u+v=(4,1), squares5,10,dot1,sum-square17,norm√17. The warning about omitting the mixed term is correct, with equality iff u·v=0.",
+      "dimensions": {
+        "PROGRAMME_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The analytic proof’s exigible qualifier needs its current local/institutional authority checked. The BO list is illustrative, so absence alone is not a proof of falsehood."
+        },
+        "SCIENTIFIC_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Actual calculations were independently resolved, but the remaining source finding(s) prevent unconditional scientific closure: ORTHONORMAL_SCOPE. Symmetry, first-slot additivity and scalar homogeneity follow by expanding coordinates; symmetry supplies the other slot. u·u=||u||², both norm-square identities and (u+v)·(u−v)=||u||²−||v||² hold including zero vectors. The analytic-expression proof correctly uses an orthonormal basis and kills mixed basis products. Example:u+v=(4,1), squares5,10,dot1,sum-square17,norm√17. The warning about omitting the mixed term is correct, with equality iff u·v=0."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Unresolved domain, geometric-angle, context or QCM wording issues still prevent a dependable learner task. See the per-source resolution and recorded findings."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Read source still needs the missing hypotheses/clarifications and/or displayed diacritics identified in the note; no editorial PASS is inferred from correct arithmetic."
+        },
+        "ORACLE_REVIEW": {
+          "state": "PENDING",
+          "rationale": "All oracle text read; this read-only subtask did not rerun this unchanged object or establish a fresh current receipt. No old mechanical PASS is promoted."
+        }
+      },
+      "remaining_findings": [
+        "ORTHONORMAL_SCOPE",
+        "EXIGIBLE_AUTHORITY_CHECK"
+      ],
+      "dependency_evidence": {
+        "state": "CHAPTER_DEPENDENCY_BINDING_REQUIRES_FRESH_RECOMPUTATION",
+        "reason": "Current review producer hashes chapter source resources. The seven listed dependencies changed; source-byte equality alone cannot carry a prior chapter-scoped review. No specific receipt is labelled stale unless its actual dependency_digest is compared.",
+        "current_unified_ledger_review_ids_for_this_path": []
+      },
+      "human_approval": false
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-002.tex",
+      "source_sha256": "sha256:43ffb87b61fbf426ab92676d6ba900a4c09554d6184bebec5065babd8b9a5230",
+      "source_unchanged_since_full_read": true,
+      "read_extent": "ENTIRE_FILE",
+      "independent_resolution": "All three vector identities follow by bilinearity and symmetry, including null vectors. Example norms3 and4,dot−6 are realizable (cos=−1/2); sum-square9−12+16=13 and norm√13. Pythagorean check correctly requires orthogonality.",
+      "dimensions": {
+        "PROGRAMME_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual mathematical content was matched to the read BO2026 product/geometry section lines542–574 or to the explicitly declared R1–R5 chapter prerequisite; this is source-level scope, not whole-capacity coverage."
+        },
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "All three vector identities follow by bilinearity and symmetry, including null vectors. Example norms3 and4,dot−6 are realizable (cos=−1/2); sum-square9−12+16=13 and norm√13. Pythagorean check correctly requires orthogonality."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The exact local task, example and correction were read together: the practice supports its declared prerequisite/capacity and the derivation is coherent. This does not certify the whole remediation route or chapter quality."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Read source still needs the missing hypotheses/clarifications and/or displayed diacritics identified in the note; no editorial PASS is inferred from correct arithmetic."
+        }
+      },
+      "remaining_findings": [],
+      "dependency_evidence": {
+        "state": "CHAPTER_DEPENDENCY_BINDING_REQUIRES_FRESH_RECOMPUTATION",
+        "reason": "Current review producer hashes chapter source resources. The seven listed dependencies changed; source-byte equality alone cannot carry a prior chapter-scoped review. No specific receipt is labelled stale unless its actual dependency_digest is compared.",
+        "current_unified_ledger_review_ids_for_this_path": []
+      },
+      "human_approval": false
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-003.tex",
+      "source_sha256": "sha256:eb6f5920cb9cdce9e8b6da85aae8bcebf7ee18d004477a4777259518ec8d37fb",
+      "source_unchanged_since_full_read": true,
+      "read_extent": "ENTIRE_FILE",
+      "independent_resolution": "The example dot3×(−4)+2×6=0 proves orthogonality in an orthonormal basis. Angle quotient is meaningful only for nonzero vectors; checking this after the division step is poor procedure ordering. arccos returns the geometric angle in[0,π], not a general oriented angle. A quick sketch is not a proof of orthogonality.",
+      "dimensions": {
+        "PROGRAMME_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual mathematical content was matched to the read BO2026 product/geometry section lines542–574 or to the explicitly declared R1–R5 chapter prerequisite; this is source-level scope, not whole-capacity coverage."
+        },
+        "SCIENTIFIC_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Actual calculations were independently resolved, but the remaining source finding(s) prevent unconditional scientific closure: ORIENTED_VS_GEOMETRIC_ANGLE, ORTHONORMAL_SCOPE. The example dot3×(−4)+2×6=0 proves orthogonality in an orthonormal basis. Angle quotient is meaningful only for nonzero vectors; checking this after the division step is poor procedure ordering. arccos returns the geometric angle in[0,π], not a general oriented angle. A quick sketch is not a proof of orthogonality."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Unresolved domain, geometric-angle, context or QCM wording issues still prevent a dependable learner task. See the per-source resolution and recorded findings."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Read source still needs the missing hypotheses/clarifications and/or displayed diacritics identified in the note; no editorial PASS is inferred from correct arithmetic."
+        }
+      },
+      "remaining_findings": [
+        "ORIENTED_VS_GEOMETRIC_ANGLE",
+        "ORTHONORMAL_SCOPE"
+      ],
+      "dependency_evidence": {
+        "state": "CHAPTER_DEPENDENCY_BINDING_REQUIRES_FRESH_RECOMPUTATION",
+        "reason": "Current review producer hashes chapter source resources. The seven listed dependencies changed; source-byte equality alone cannot carry a prior chapter-scoped review. No specific receipt is labelled stale unless its actual dependency_digest is compared.",
+        "current_unified_ledger_review_ids_for_this_path": []
+      },
+      "human_approval": false
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/remediation/1SPE-PRODUIT-SCALAIRE-FR-R2.tex",
+      "source_sha256": "sha256:4f57b8053a591d44fd7d4d5f3b91138a887a3837f3aca2f2c84b3ddd3602afd1",
+      "source_unchanged_since_full_read": true,
+      "read_extent": "ENTIRE_FILE",
+      "independent_resolution": "In an orthonormal frame, norm and distance formulas are correct and the three answers are5,√5,5. Without that hypothesis, take basis vectors(2,0),(0,1): coordinates(3,4) describe geometric vector(6,4), of norm√52 rather than5.",
+      "dimensions": {
+        "PROGRAMME_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual mathematical content was matched to the read BO2026 product/geometry section lines542–574 or to the explicitly declared R1–R5 chapter prerequisite; this is source-level scope, not whole-capacity coverage."
+        },
+        "SCIENTIFIC_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Actual calculations were independently resolved, but the remaining source finding(s) prevent unconditional scientific closure: ORTHONORMAL_SCOPE. In an orthonormal frame, norm and distance formulas are correct and the three answers are5,√5,5. Without that hypothesis, take basis vectors(2,0),(0,1): coordinates(3,4) describe geometric vector(6,4), of norm√52 rather than5."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Unresolved domain, geometric-angle, context or QCM wording issues still prevent a dependable learner task. See the per-source resolution and recorded findings."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Read source still needs the missing hypotheses/clarifications and/or displayed diacritics identified in the note; no editorial PASS is inferred from correct arithmetic."
+        },
+        "ORACLE_REVIEW": {
+          "state": "PENDING",
+          "rationale": "All oracle text read; this read-only subtask did not rerun this unchanged object or establish a fresh current receipt. No old mechanical PASS is promoted."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Conditional numerical agreement is established, but missing source domain/frame prevents unconditional correction alignment."
+        }
+      },
+      "remaining_findings": [
+        "ORTHONORMAL_SCOPE"
+      ],
+      "dependency_evidence": {
+        "state": "CHAPTER_DEPENDENCY_BINDING_REQUIRES_FRESH_RECOMPUTATION",
+        "reason": "Current review producer hashes chapter source resources. The seven listed dependencies changed; source-byte equality alone cannot carry a prior chapter-scoped review. No specific receipt is labelled stale unless its actual dependency_digest is compared.",
+        "current_unified_ledger_review_ids_for_this_path": []
+      },
+      "human_approval": false
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/remediation/1SPE-PRODUIT-SCALAIRE-FR-R3.tex",
+      "source_sha256": "sha256:27e3c0b0ca40d9a758e5c5df09a49632000e31dd0f03e19be9975ba783f78152",
+      "source_unchanged_since_full_read": true,
+      "read_extent": "ENTIRE_FILE",
+      "independent_resolution": "Entire cosine/sine table checked:cos[0,π/6,π/4,π/3,π/2]=[1,√3/2,√2/2,1/2,0], sin=[0,1/2,√2/2,√3/2,1]. Answers:cosπ/3=1/2,sinπ/3=√3/2;cos2π/3=−1/2,sin2π/3=√3/2;cosπ/4=√2/2.",
+      "dimensions": {
+        "PROGRAMME_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual mathematical content was matched to the read BO2026 product/geometry section lines542–574 or to the explicitly declared R1–R5 chapter prerequisite; this is source-level scope, not whole-capacity coverage."
+        },
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Entire cosine/sine table checked:cos[0,π/6,π/4,π/3,π/2]=[1,√3/2,√2/2,1/2,0], sin=[0,1/2,√2/2,√3/2,1]. Answers:cosπ/3=1/2,sinπ/3=√3/2;cos2π/3=−1/2,sin2π/3=√3/2;cosπ/4=√2/2."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The exact local task, example and correction were read together: the practice supports its declared prerequisite/capacity and the derivation is coherent. This does not certify the whole remediation route or chapter quality."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Entire displayed text read: hypotheses/data are determinate in this source, mathematical notation and answer wording are consistent."
+        },
+        "ORACLE_REVIEW": {
+          "state": "PENDING",
+          "rationale": "All oracle text read; this read-only subtask did not rerun this unchanged object or establish a fresh current receipt. No old mechanical PASS is promoted."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Entire cosine/sine table checked:cos[0,π/6,π/4,π/3,π/2]=[1,√3/2,√2/2,1/2,0], sin=[0,1/2,√2/2,√3/2,1]. Answers:cosπ/3=1/2,sinπ/3=√3/2;cos2π/3=−1/2,sin2π/3=√3/2;cosπ/4=√2/2."
+        }
+      },
+      "remaining_findings": [],
+      "dependency_evidence": {
+        "state": "CHAPTER_DEPENDENCY_BINDING_REQUIRES_FRESH_RECOMPUTATION",
+        "reason": "Current review producer hashes chapter source resources. The seven listed dependencies changed; source-byte equality alone cannot carry a prior chapter-scoped review. No specific receipt is labelled stale unless its actual dependency_digest is compared.",
+        "current_unified_ledger_review_ids_for_this_path": []
+      },
+      "human_approval": false
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/remediation/1SPE-PRODUIT-SCALAIRE-FR-R4.tex",
+      "source_sha256": "sha256:9c4802968fba4c61b6924d251c76b83e3763a17bb8f7dfa94f2bb741b9e50cba",
+      "source_unchanged_since_full_read": true,
+      "read_extent": "ENTIRE_FILE",
+      "independent_resolution": "General scalar identities valid over reals (also complexes). Expansions:(x+3)²=x²+6x+9;(2x−1)²=4x²−4x+1;(x+2)(x−2)=x²−4. No sign, domain or solution-count defect found.",
+      "dimensions": {
+        "PROGRAMME_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual mathematical content was matched to the read BO2026 product/geometry section lines542–574 or to the explicitly declared R1–R5 chapter prerequisite; this is source-level scope, not whole-capacity coverage."
+        },
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "General scalar identities valid over reals (also complexes). Expansions:(x+3)²=x²+6x+9;(2x−1)²=4x²−4x+1;(x+2)(x−2)=x²−4. No sign, domain or solution-count defect found."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The exact local task, example and correction were read together: the practice supports its declared prerequisite/capacity and the derivation is coherent. This does not certify the whole remediation route or chapter quality."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Read source still needs the missing hypotheses/clarifications and/or displayed diacritics identified in the note; no editorial PASS is inferred from correct arithmetic."
+        },
+        "ORACLE_REVIEW": {
+          "state": "PENDING",
+          "rationale": "All oracle text read; this read-only subtask did not rerun this unchanged object or establish a fresh current receipt. No old mechanical PASS is promoted."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "General scalar identities valid over reals (also complexes). Expansions:(x+3)²=x²+6x+9;(2x−1)²=4x²−4x+1;(x+2)(x−2)=x²−4. No sign, domain or solution-count defect found."
+        }
+      },
+      "remaining_findings": [],
+      "dependency_evidence": {
+        "state": "CHAPTER_DEPENDENCY_BINDING_REQUIRES_FRESH_RECOMPUTATION",
+        "reason": "Current review producer hashes chapter source resources. The seven listed dependencies changed; source-byte equality alone cannot carry a prior chapter-scoped review. No specific receipt is labelled stale unless its actual dependency_digest is compared.",
+        "current_unified_ledger_review_ids_for_this_path": []
+      },
+      "human_approval": false
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/remediation/1SPE-PRODUIT-SCALAIRE-FR-R5.tex",
+      "source_sha256": "sha256:7d07d2555e79f96296b77e54b5785da7b798680e0391023f95ba3694b4d27cc1",
+      "source_unchanged_since_full_read": true,
+      "read_extent": "ENTIRE_FILE",
+      "independent_resolution": "Pythagoras and converse correctly place the right angle atC oppositeAB. Answers:√(3²+4²)=5;5²+12²=13² so triangle5,12,13 is right;3²+5²=34≠49 so triangle3,5,7 is not right. Both sets satisfy triangle inequalities.",
+      "dimensions": {
+        "PROGRAMME_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual mathematical content was matched to the read BO2026 product/geometry section lines542–574 or to the explicitly declared R1–R5 chapter prerequisite; this is source-level scope, not whole-capacity coverage."
+        },
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Pythagoras and converse correctly place the right angle atC oppositeAB. Answers:√(3²+4²)=5;5²+12²=13² so triangle5,12,13 is right;3²+5²=34≠49 so triangle3,5,7 is not right. Both sets satisfy triangle inequalities."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The exact local task, example and correction were read together: the practice supports its declared prerequisite/capacity and the derivation is coherent. This does not certify the whole remediation route or chapter quality."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Read source still needs the missing hypotheses/clarifications and/or displayed diacritics identified in the note; no editorial PASS is inferred from correct arithmetic."
+        },
+        "ORACLE_REVIEW": {
+          "state": "PENDING",
+          "rationale": "All oracle text read; this read-only subtask did not rerun this unchanged object or establish a fresh current receipt. No old mechanical PASS is promoted."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Pythagoras and converse correctly place the right angle atC oppositeAB. Answers:√(3²+4²)=5;5²+12²=13² so triangle5,12,13 is right;3²+5²=34≠49 so triangle3,5,7 is not right. Both sets satisfy triangle inequalities."
+        }
+      },
+      "remaining_findings": [],
+      "dependency_evidence": {
+        "state": "CHAPTER_DEPENDENCY_BINDING_REQUIRES_FRESH_RECOMPUTATION",
+        "reason": "Current review producer hashes chapter source resources. The seven listed dependencies changed; source-byte equality alone cannot carry a prior chapter-scoped review. No specific receipt is labelled stale unless its actual dependency_digest is compared.",
+        "current_unified_ledger_review_ids_for_this_path": []
+      },
+      "human_approval": false
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/remediation/1SPE-PRODUIT-SCALAIRE-RE-C1.tex",
+      "source_sha256": "sha256:991e9aed9374406c38bd19200334601f93d91b8ccc5c9eae60d92e70845d9785",
+      "source_unchanged_since_full_read": true,
+      "read_extent": "ENTIRE_FILE",
+      "independent_resolution": "In an orthonormal frame, first dot=2−3=−1. Second dot6×2×cosπ/4=6√2, with positive norms and known angle. Correction aligned with both questions.",
+      "dimensions": {
+        "PROGRAMME_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual mathematical content was matched to the read BO2026 product/geometry section lines542–574 or to the explicitly declared R1–R5 chapter prerequisite; this is source-level scope, not whole-capacity coverage."
+        },
+        "SCIENTIFIC_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Actual calculations were independently resolved, but the remaining source finding(s) prevent unconditional scientific closure: ORTHONORMAL_SCOPE. In an orthonormal frame, first dot=2−3=−1. Second dot6×2×cosπ/4=6√2, with positive norms and known angle. Correction aligned with both questions."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Unresolved domain, geometric-angle, context or QCM wording issues still prevent a dependable learner task. See the per-source resolution and recorded findings."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Read source still needs the missing hypotheses/clarifications and/or displayed diacritics identified in the note; no editorial PASS is inferred from correct arithmetic."
+        },
+        "ORACLE_REVIEW": {
+          "state": "PENDING",
+          "rationale": "All oracle text read; this read-only subtask did not rerun this unchanged object or establish a fresh current receipt. No old mechanical PASS is promoted."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Conditional numerical agreement is established, but missing source domain/frame prevents unconditional correction alignment."
+        }
+      },
+      "remaining_findings": [
+        "ORTHONORMAL_SCOPE"
+      ],
+      "dependency_evidence": {
+        "state": "CHAPTER_DEPENDENCY_BINDING_REQUIRES_FRESH_RECOMPUTATION",
+        "reason": "Current review producer hashes chapter source resources. The seven listed dependencies changed; source-byte equality alone cannot carry a prior chapter-scoped review. No specific receipt is labelled stale unless its actual dependency_digest is compared.",
+        "current_unified_ledger_review_ids_for_this_path": []
+      },
+      "human_approval": false
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/remediation/1SPE-PRODUIT-SCALAIRE-RE-C2.tex",
+      "source_sha256": "sha256:fa00121d0799e3e0d961ded2b6e3faa84ff6595dc7b4840ddcd5055206cd1e9d",
+      "source_unchanged_since_full_read": true,
+      "read_extent": "ENTIRE_FILE",
+      "independent_resolution": "Norm-square=2²+2×4+3²=21; norm√21 is additional correct information. Data realizable with u=(2,0),v=(2,√5), giving required norms and product.",
+      "dimensions": {
+        "PROGRAMME_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual mathematical content was matched to the read BO2026 product/geometry section lines542–574 or to the explicitly declared R1–R5 chapter prerequisite; this is source-level scope, not whole-capacity coverage."
+        },
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Norm-square=2²+2×4+3²=21; norm√21 is additional correct information. Data realizable with u=(2,0),v=(2,√5), giving required norms and product."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The exact local task, example and correction were read together: the practice supports its declared prerequisite/capacity and the derivation is coherent. This does not certify the whole remediation route or chapter quality."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Entire displayed text read: hypotheses/data are determinate in this source, mathematical notation and answer wording are consistent."
+        },
+        "ORACLE_REVIEW": {
+          "state": "PENDING",
+          "rationale": "All oracle text read; this read-only subtask did not rerun this unchanged object or establish a fresh current receipt. No old mechanical PASS is promoted."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Norm-square=2²+2×4+3²=21; norm√21 is additional correct information. Data realizable with u=(2,0),v=(2,√5), giving required norms and product."
+        }
+      },
+      "remaining_findings": [],
+      "dependency_evidence": {
+        "state": "CHAPTER_DEPENDENCY_BINDING_REQUIRES_FRESH_RECOMPUTATION",
+        "reason": "Current review producer hashes chapter source resources. The seven listed dependencies changed; source-byte equality alone cannot carry a prior chapter-scoped review. No specific receipt is labelled stale unless its actual dependency_digest is compared.",
+        "current_unified_ledger_review_ids_for_this_path": []
+      },
+      "human_approval": false
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/remediation/1SPE-PRODUIT-SCALAIRE-RE-C3.tex",
+      "source_sha256": "sha256:6ce4dcbcc9266616b530062afed102e386615319cccd11bc505a337b1c4529b7",
+      "source_unchanged_since_full_read": true,
+      "read_extent": "ENTIRE_FILE",
+      "independent_resolution": "First product4−4=0. Second product1,norms1 and2, geometricangleπ/3 and orientedangle alsoπ/3 for this particular ordered pair in a direct orthonormal frame. The correction is numerically correct under its missing frame hypothesis.",
+      "dimensions": {
+        "PROGRAMME_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual mathematical content was matched to the read BO2026 product/geometry section lines542–574 or to the explicitly declared R1–R5 chapter prerequisite; this is source-level scope, not whole-capacity coverage."
+        },
+        "SCIENTIFIC_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Actual calculations were independently resolved, but the remaining source finding(s) prevent unconditional scientific closure: ORTHONORMAL_SCOPE. First product4−4=0. Second product1,norms1 and2, geometricangleπ/3 and orientedangle alsoπ/3 for this particular ordered pair in a direct orthonormal frame. The correction is numerically correct under its missing frame hypothesis."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Unresolved domain, geometric-angle, context or QCM wording issues still prevent a dependable learner task. See the per-source resolution and recorded findings."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Read source still needs the missing hypotheses/clarifications and/or displayed diacritics identified in the note; no editorial PASS is inferred from correct arithmetic."
+        },
+        "ORACLE_REVIEW": {
+          "state": "PENDING",
+          "rationale": "All oracle text read; this read-only subtask did not rerun this unchanged object or establish a fresh current receipt. No old mechanical PASS is promoted."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Conditional numerical agreement is established, but missing source domain/frame prevents unconditional correction alignment."
+        }
+      },
+      "remaining_findings": [
+        "ORTHONORMAL_SCOPE"
+      ],
+      "dependency_evidence": {
+        "state": "CHAPTER_DEPENDENCY_BINDING_REQUIRES_FRESH_RECOMPUTATION",
+        "reason": "Current review producer hashes chapter source resources. The seven listed dependencies changed; source-byte equality alone cannot carry a prior chapter-scoped review. No specific receipt is labelled stale unless its actual dependency_digest is compared.",
+        "current_unified_ledger_review_ids_for_this_path": []
+      },
+      "human_approval": false
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/remediation/1SPE-PRODUIT-SCALAIRE-RE-C4.tex",
+      "source_sha256": "sha256:3c84ad8bb35668d7b097cffc9f4cb61226f518812408488d0cf63a386b4e2e2c",
+      "source_unchanged_since_full_read": true,
+      "read_extent": "ENTIRE_FILE",
+      "independent_resolution": "I=(2,1),AB=(4,2);4(x−2)+2(y−1)=0 iff2x+y=5. Independent equality of squared distances expands to4(2x+y−5)=0 in an orthonormal frame.",
+      "dimensions": {
+        "PROGRAMME_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual mathematical content was matched to the read BO2026 product/geometry section lines542–574 or to the explicitly declared R1–R5 chapter prerequisite; this is source-level scope, not whole-capacity coverage."
+        },
+        "SCIENTIFIC_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Actual calculations were independently resolved, but the remaining source finding(s) prevent unconditional scientific closure: ORTHONORMAL_SCOPE. I=(2,1),AB=(4,2);4(x−2)+2(y−1)=0 iff2x+y=5. Independent equality of squared distances expands to4(2x+y−5)=0 in an orthonormal frame."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Unresolved domain, geometric-angle, context or QCM wording issues still prevent a dependable learner task. See the per-source resolution and recorded findings."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Read source still needs the missing hypotheses/clarifications and/or displayed diacritics identified in the note; no editorial PASS is inferred from correct arithmetic."
+        },
+        "ORACLE_REVIEW": {
+          "state": "PENDING",
+          "rationale": "All oracle text read; this read-only subtask did not rerun this unchanged object or establish a fresh current receipt. No old mechanical PASS is promoted."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Conditional numerical agreement is established, but missing source domain/frame prevents unconditional correction alignment."
+        }
+      },
+      "remaining_findings": [
+        "ORTHONORMAL_SCOPE"
+      ],
+      "dependency_evidence": {
+        "state": "CHAPTER_DEPENDENCY_BINDING_REQUIRES_FRESH_RECOMPUTATION",
+        "reason": "Current review producer hashes chapter source resources. The seven listed dependencies changed; source-byte equality alone cannot carry a prior chapter-scoped review. No specific receipt is labelled stale unless its actual dependency_digest is compared.",
+        "current_unified_ledger_review_ids_for_this_path": []
+      },
+      "human_approval": false
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/remediation/1SPE-PRODUIT-SCALAIRE-RE-C5.tex",
+      "source_sha256": "sha256:dd00771b8fe5e4ed9f7eaec715e331cddecd3b2d0b99aa474c68e230d0b1e2f2",
+      "source_unchanged_since_full_read": true,
+      "read_extent": "ENTIRE_FILE",
+      "independent_resolution": "BC²=16+36−48cosπ/3=28; BC=2√7≈5.29150262213, correctly rounded5.29. Positive root and opposite-angle side are correct.",
+      "dimensions": {
+        "PROGRAMME_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual mathematical content was matched to the read BO2026 product/geometry section lines542–574 or to the explicitly declared R1–R5 chapter prerequisite; this is source-level scope, not whole-capacity coverage."
+        },
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "BC²=16+36−48cosπ/3=28; BC=2√7≈5.29150262213, correctly rounded5.29. Positive root and opposite-angle side are correct."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The exact local task, example and correction were read together: the practice supports its declared prerequisite/capacity and the derivation is coherent. This does not certify the whole remediation route or chapter quality."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Entire displayed text read: hypotheses/data are determinate in this source, mathematical notation and answer wording are consistent."
+        },
+        "ORACLE_REVIEW": {
+          "state": "PENDING",
+          "rationale": "All oracle text read; this read-only subtask did not rerun this unchanged object or establish a fresh current receipt. No old mechanical PASS is promoted."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "BC²=16+36−48cosπ/3=28; BC=2√7≈5.29150262213, correctly rounded5.29. Positive root and opposite-angle side are correct."
+        }
+      },
+      "remaining_findings": [],
+      "dependency_evidence": {
+        "state": "CHAPTER_DEPENDENCY_BINDING_REQUIRES_FRESH_RECOMPUTATION",
+        "reason": "Current review producer hashes chapter source resources. The seven listed dependencies changed; source-byte equality alone cannot carry a prior chapter-scoped review. No specific receipt is labelled stale unless its actual dependency_digest is compared.",
+        "current_unified_ledger_review_ids_for_this_path": []
+      },
+      "human_approval": false
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/qcm/1SPE-PRODUIT-SCALAIRE-QCM.json",
+      "source_sha256": "sha256:9ab46e044e5614c6cf3b129896bf32c82ec40451f99b3f12c0c59fbc6a8e7098",
+      "source_unchanged_since_full_read": true,
+      "read_extent": "ENTIRE_FILE",
+      "independent_resolution": "All15 stems,60 options,correct labels and45 diagnostics read, not just the answer key. Conditional standard-frame key independently recovered:A,B,C,A,B,C,D,A,B,C,D,A,B,C,D. Detailed question reasoning below.",
+      "dimensions": {
+        "PROGRAMME_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual mathematical content was matched to the read BO2026 product/geometry section lines542–574 or to the explicitly declared R1–R5 chapter prerequisite; this is source-level scope, not whole-capacity coverage."
+        },
+        "SCIENTIFIC_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Actual calculations were independently resolved, but the remaining source finding(s) prevent unconditional scientific closure: ORTHONORMAL_SCOPE, DEGENERATE_BISECTOR_SCOPE, QCM_UNIVERSAL_WORDING. All15 stems,60 options,correct labels and45 diagnostics read, not just the answer key. Conditional standard-frame key independently recovered:A,B,C,A,B,C,D,A,B,C,D,A,B,C,D. Detailed question reasoning below."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Unresolved domain, geometric-angle, context or QCM wording issues still prevent a dependable learner task. See the per-source resolution and recorded findings."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Read source still needs the missing hypotheses/clarifications and/or displayed diacritics identified in the note; no editorial PASS is inferred from correct arithmetic."
+        }
+      },
+      "remaining_findings": [
+        "ORTHONORMAL_SCOPE",
+        "DEGENERATE_BISECTOR_SCOPE",
+        "QCM_UNIVERSAL_WORDING"
+      ],
+      "dependency_evidence": {
+        "state": "CHAPTER_DEPENDENCY_BINDING_REQUIRES_FRESH_RECOMPUTATION",
+        "reason": "Current review producer hashes chapter source resources. The seven listed dependencies changed; source-byte equality alone cannot carry a prior chapter-scoped review. No specific receipt is labelled stale unless its actual dependency_digest is compared.",
+        "current_unified_ledger_review_ids_for_this_path": []
+      },
+      "human_approval": false
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/qcm/1SPE-PRODUIT-SCALAIRE-QCM.tex",
+      "source_sha256": "sha256:6dfdacb71ea4018b49d0d07e2440631709f57dbfbf519df85c8435e5fa35c5dc",
+      "source_unchanged_since_full_read": true,
+      "read_extent": "ENTIRE_FILE",
+      "independent_resolution": "Entire generatedTeX read, including teacher-only key and all diagnostics. It reproduces the15 JSON questions and same key; conditional guard appears around the answer section. This is source-level separation only, not proof about hidden PDF content.",
+      "dimensions": {
+        "PROGRAMME_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual mathematical content was matched to the read BO2026 product/geometry section lines542–574 or to the explicitly declared R1–R5 chapter prerequisite; this is source-level scope, not whole-capacity coverage."
+        },
+        "SCIENTIFIC_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Actual calculations were independently resolved, but the remaining source finding(s) prevent unconditional scientific closure: ORTHONORMAL_SCOPE, DEGENERATE_BISECTOR_SCOPE, QCM_UNIVERSAL_WORDING. Entire generatedTeX read, including teacher-only key and all diagnostics. It reproduces the15 JSON questions and same key; conditional guard appears around the answer section. This is source-level separation only, not proof about hidden PDF content."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Unresolved domain, geometric-angle, context or QCM wording issues still prevent a dependable learner task. See the per-source resolution and recorded findings."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Read source still needs the missing hypotheses/clarifications and/or displayed diacritics identified in the note; no editorial PASS is inferred from correct arithmetic."
+        }
+      },
+      "remaining_findings": [
+        "ORTHONORMAL_SCOPE",
+        "DEGENERATE_BISECTOR_SCOPE",
+        "QCM_UNIVERSAL_WORDING"
+      ],
+      "dependency_evidence": {
+        "state": "CHAPTER_DEPENDENCY_BINDING_REQUIRES_FRESH_RECOMPUTATION",
+        "reason": "Current review producer hashes chapter source resources. The seven listed dependencies changed; source-byte equality alone cannot carry a prior chapter-scoped review. No specific receipt is labelled stale unless its actual dependency_digest is compared.",
+        "current_unified_ledger_review_ids_for_this_path": []
+      },
+      "human_approval": false
+    }
+  ],
+  "changed_chapter_dependencies": [
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/07_td_fil_rouge.tex",
+      "old_sha256": "sha256:8b787f58f55c92d985429d766c821a0f22774be6a7346242a7395895967c61e0",
+      "new_sha256": "sha256:d1a506917f5a19557f42f8ea7aaf741477c1c6428b02e9f2ac1539906d97639b"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/12_C3_orthogonalite.tex",
+      "old_sha256": "sha256:a02ab773f4b1c0d3656ea147c6fffe7c07ae63a28e050ffcb1b171c23fd58ad2",
+      "new_sha256": "sha256:6bfd0ef3be66caaed87ced0923644da1e7c06d68e3ad62cc5676af4ad7b754a2"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/14_C5_al_kashi.tex",
+      "old_sha256": "sha256:9991cb43856b910594b8fe17a15f712dfaf7b007826c72b443fd0753c4948d02",
+      "new_sha256": "sha256:506cc9a183724c1ebc7beb129bbc8d1ecbbe97f3b66249f930bf6a653deaab11"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-001.tex",
+      "old_sha256": "sha256:89d6829da25f2f7d8227e47f471acea71eaa2e113df6670d11920879b0e25bf9",
+      "new_sha256": "sha256:bb22c76abd05cbb8276d4b1c6988433016d9416cf9089cdabc9797392d621482"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-004.tex",
+      "old_sha256": "sha256:8c3bfb9f743c292d104b9eca17199af2841862d5c604af22bd255970cfc5d964",
+      "new_sha256": "sha256:4601cc3a51fa691cfaf1325d6b1641fee848329af5e26a91b8ac19397fa61d71"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-005.tex",
+      "old_sha256": "sha256:cecb3b58210aa8f35dbc9ac9dabf9d9ef3a9ae4d17466d110a58c507d0d737a0",
+      "new_sha256": "sha256:10029e24c2ffb1f32a2578a00dcff29dc60c1830f12438c06bc7fe35391b8513"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/remediation/1SPE-PRODUIT-SCALAIRE-FR-R1.tex",
+      "old_sha256": "sha256:87941e52f603c4a7fd87184cb3901648976b941de0bf9579edca87123057e4af",
+      "new_sha256": "sha256:fcce7c27bc5dcaad90e7a6746aa85ff89b8be580844ba1bfdc089a1d4174a15d"
+    }
+  ],
+  "dependency_policy_evidence": {
+    "path": "scripts/build_current_review_index.py",
+    "sha256": "sha256:46a1299f9bfbbbc76f537a79143942b4f98720bf880ba170ded60c64fbcc65f1",
+    "read_locations": "_dependencies lines150–205; rejected binding comparison lines261–269.",
+    "scope": "Policy read to distinguish unchangedsource from changedchapterdependency. No currentindex or reviewledger was written."
+  },
+  "verification": {
+    "test": "tests/test_prodscal_remaining_scientific_regressions.py",
+    "test_sha256": "sha256:583fbefdc7ca187eae51ab4346c4924f1a10769334fbd4f31342a19da122b8aa",
+    "red": "14failed against originalsources; /tmp/prodscal-lot-c-RED.log",
+    "green": "14passed afterfinalwording; combined four PRODSCALregressionmodules39passed.",
+    "mutations": "Seven automated canonical-gate mutations rejected. One additional copied-fixture expected-vector sign mutation also rejected; the earlier wrong tuple cannot pass the repaired computation.",
+    "isolated_execution": {
+      "execution_root": "/tmp/nexus-prodscal-lot-c-fresh-s6l4rzpr",
+      "command": [
+        "/usr/bin/python",
+        "/tmp/nexus-prodscal-lot-c-fresh-s6l4rzpr/Mathematiques/manuel-maths/scripts/verify_sympy.py",
+        "--chap",
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "cwd": "/tmp/nexus-prodscal-lot-c-fresh-s6l4rzpr",
+      "rc": 0,
+      "stdout": "[OK ] 07_td_fil_rouge: \n[OK ] 12_C3_orthogonalite: \n[OK ] 14_C5_al_kashi: \n[OK ] 1SPE-PRODSCAL-ME-001: \n[OK ] 1SPE-PRODSCAL-ME-004: \n[OK ] 1SPE-PRODSCAL-ME-005: \n[OK ] 1SPE-PRODUIT-SCALAIRE-FR-R1: \n",
+      "stderr": "",
+      "network_denial": {
+        "mechanism": "libseccomp inherited syscall filter",
+        "probe_rc": 0,
+        "probe_stdout": "network syscalls refused for IPv4, IPv6 and Unix sockets\n"
+      },
+      "input_digests": {
+        "chapitres/1SPE-PRODUIT-SCALAIRE/cours/07_td_fil_rouge.tex": "sha256:d1a506917f5a19557f42f8ea7aaf741477c1c6428b02e9f2ac1539906d97639b",
+        "chapitres/1SPE-PRODUIT-SCALAIRE/cours/12_C3_orthogonalite.tex": "sha256:6bfd0ef3be66caaed87ced0923644da1e7c06d68e3ad62cc5676af4ad7b754a2",
+        "chapitres/1SPE-PRODUIT-SCALAIRE/cours/14_C5_al_kashi.tex": "sha256:506cc9a183724c1ebc7beb129bbc8d1ecbbe97f3b66249f930bf6a653deaab11",
+        "chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-001.tex": "sha256:bb22c76abd05cbb8276d4b1c6988433016d9416cf9089cdabc9797392d621482",
+        "chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-004.tex": "sha256:4601cc3a51fa691cfaf1325d6b1641fee848329af5e26a91b8ac19397fa61d71",
+        "chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-005.tex": "sha256:10029e24c2ffb1f32a2578a00dcff29dc60c1830f12438c06bc7fe35391b8513",
+        "chapitres/1SPE-PRODUIT-SCALAIRE/remediation/1SPE-PRODUIT-SCALAIRE-FR-R1.tex": "sha256:fcce7c27bc5dcaad90e7a6746aa85ff89b8be580844ba1bfdc089a1d4174a15d",
+        "scripts/verify_sympy.py": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e",
+        "scripts/common.py": "sha256:f1dd76d4f5f354800fba1dc8ab84dfa3ab5c61b8f8f3093956d146195f520d0c"
+      },
+      "records": [
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/07_td_fil_rouge.tex",
+          "source_sha256": "sha256:d1a506917f5a19557f42f8ea7aaf741477c1c6428b02e9f2ac1539906d97639b",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/07_td_fil_rouge.sympy.json",
+          "receipt_sha256": "sha256:a8d8b6eff6c6e09a7abfca09039e79621caffa7ac155f71f364f1a3a03df4e77",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/12_C3_orthogonalite.tex",
+          "source_sha256": "sha256:6bfd0ef3be66caaed87ced0923644da1e7c06d68e3ad62cc5676af4ad7b754a2",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/12_C3_orthogonalite.sympy.json",
+          "receipt_sha256": "sha256:e7d859a6faef1c69c04866bff81687db575932bc14e58c8d2af6ddc2138b6a27",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/14_C5_al_kashi.tex",
+          "source_sha256": "sha256:506cc9a183724c1ebc7beb129bbc8d1ecbbe97f3b66249f930bf6a653deaab11",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/14_C5_al_kashi.sympy.json",
+          "receipt_sha256": "sha256:8dcf487f2276422945758595e3a63ea7f71bf312aff84d4a095a42c9e20ce63a",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-001.tex",
+          "source_sha256": "sha256:bb22c76abd05cbb8276d4b1c6988433016d9416cf9089cdabc9797392d621482",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-ME-001.sympy.json",
+          "receipt_sha256": "sha256:a664355b17eae754e50626a0d8509f1624a4d674548e188990a0507a7f19bbed",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-004.tex",
+          "source_sha256": "sha256:4601cc3a51fa691cfaf1325d6b1641fee848329af5e26a91b8ac19397fa61d71",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-ME-004.sympy.json",
+          "receipt_sha256": "sha256:eaa78a6c38d7e3b7ca4f178037e1cb61a4ef2610176aa36d65a340bf579164b9",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/methodes/1SPE-PRODSCAL-ME-005.tex",
+          "source_sha256": "sha256:10029e24c2ffb1f32a2578a00dcff29dc60c1830f12438c06bc7fe35391b8513",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-ME-005.sympy.json",
+          "receipt_sha256": "sha256:5d07bb10c2ef95c18b7a99129f54a3e54cae75dad4ba501e1fb6285553a8505d",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/remediation/1SPE-PRODUIT-SCALAIRE-FR-R1.tex",
+          "source_sha256": "sha256:fcce7c27bc5dcaad90e7a6746aa85ff89b8be580844ba1bfdc089a1d4174a15d",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODUIT-SCALAIRE-FR-R1.sympy.json",
+          "receipt_sha256": "sha256:b132a6fcb1f1f992b130bbe62f2806e35899612aaac3551a495b9d7ca9ad34b9",
+          "verdict": "pass"
+        }
+      ],
+      "human_approval": false
+    },
+    "execution_manifest_sha256": "sha256:b1c3d42bf1b77c2c79b8a497173e6288099633427cab1d3b7165009684750fae",
+    "lint": "ruff and gitdiff--checkpassed.",
+    "additional_expected_vector_mutation": [
+      {
+        "source": "remediation/1SPE-PRODUIT-SCALAIRE-FR-R1.tex",
+        "baseline_rc": 0,
+        "mutation_rc": 1,
+        "mutation": {
+          "old": "% assert triple == Matrix([-3,12])",
+          "new": "% assert triple == Matrix([3,12])"
+        },
+        "reason": "The repaired oracle must reject the wrong sign in the claimed scalar-multiple result.",
+        "stdout": "[FAIL] 1SPE-PRODUIT-SCALAIRE-FR-R1: Traceback (most recent call last):\n  File \"<string>\", line 46, in <module>\n  File \"<string>\", line 4\n",
+        "network": "libseccomp syscall filter inherited; no receipt copied to project."
+      }
+    ]
+  },
+  "remaining_limits": [
+    "No fullchapterqualityorcapacityclosure.",
+    "NoQCMorotherremediationsourceedited.",
+    "Historicaldocumentaryclaimincours14remainsunverified.",
+    "No finalPDFrenderingorhiddencontentaudit.",
+    "No humanapproval.",
+    "No publication,freeze,commit,push,mergeorCURRENTpromotionbythisagent.",
+    "TD fil rouge has no assembled teacher correction at this observation; correction alignment and corresponding pedagogical dimension remain open."
+  ],
+  "counter_reviewer": "/root",
+  "counter_review_basis": "Root message after reading the seven sources and fourteen regressions: calculations confirmed; historical attribution in course14 remains pending. Separate source/assembly forensics establishes the missing TD teacher correction.",
+  "td_teacher_correction_forensics": {
+    "head_observed": "3a4c3469622e19ec7e3e5e37502dc89f004f079e",
+    "worktree_sources_scope": true,
+    "assembler_sha256": "0b47740c97e5f6a8ac9a572df53764f3f9438f205f06a24525e5f29d89cd2c24",
+    "canonical_function": "assemble_manuel.collect_chapter(chap,professeur)",
+    "selected_source_count": 145,
+    "selected_types": {
+      "cours": 5,
+      "methode": 5,
+      "exercice": 50,
+      "coup_de_pouce": 18,
+      "td": 2,
+      "qcm": 1,
+      "corrige_evaluation": 2,
+      "evaluation": 2,
+      "remediation": 10,
+      "corrige": 50
+    },
+    "separate_correction_internal_bindings": "50 META.exercice_id and corrige-environment targets: 1SPE-PRODSCAL-EX-001 through EX-050; all fifty correction texts read for the source search, eighteen previously in B1 and thirty-two now. No scientific blanket approval from this lookup.",
+    "embedded_corrections": "10 remediation correction targets FR-R1..R5-EX1 and RE-C1..C5-EX1; the remediation texts were fully read in the separate 22-source review.",
+    "evaluation_bindings": "Two correction evaluation_ref values: EV-A and EV-B; both corrected evaluation texts read; no TD solution.",
+    "nested_source_inputs": 0,
+    "td_source": "cours/07_td_fil_rouge.tex",
+    "td_correction_status": "MISSING_TEACHER_CORRECTION",
+    "td_q8": "No printed proof of BD·AC=BC²−BA² and equivalence with AB=BC.",
+    "td_q11": "No printed solution locating the altitude foot outside segment and proving distance5km instead of height5√3/2km.",
+    "selection_and_render_code": "assemble_manuel.py ORDER117–122; collect_chapter988–1020; wrap_object_input939–947; render_master1103–1138. Those functions load sources without generating TD correction text.",
+    "contract_evidence": "CODEX_CAHIER_DES_CHARGES_MANUEL_1SPE.md76 requires correction-object binding;124 requires detailed teacher corrections. Chapter contrat.yaml and dossier_curation.json contain no alternative TD correction resource.",
+    "limit": "Source/assembly observation only; no current PDF claim. The unprinted SymPy blocks are not teacher correction content."
+  },
+  "additional_open_findings": [
+    {
+      "id": "PRODSCAL_CO009_COSINE_SIGN",
+      "severity": "P0",
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-009.tex",
+      "source_sha256": "sha256:eac484f9d3e4fa6b5f31c3885b1104d10e63cf10243291bf140a6dd924e2fcab",
+      "state": "OPEN",
+      "reason": "The printed correction declares AC·BC=8, then CA·CB=−8, which is false since negating both vectors preserves their product. With its displayed A=(0,0),B=(6,0),C=(2,4), CA=(−2,−4),CB=(4,−4), so CA·CB=8 and cos(C)=+1/√10. The separate exercise statement and its companions must be read before editing and closure.",
+      "discovery_scope": "Whole correction source read while checking whether any of the other 32 correction objects is a hidden TD correction. No blanket review approval of those32.",
+      "required_followup": "Read EX009 and CDP; correct sign and dependent conclusions/oracles; source-facing regression; fresh exact-digest independent review."
+    }
+  ],
+  "root_counter_review": {
+    "reviewer": "/root",
+    "independent_from_correction_author": true,
+    "human_approval": false,
+    "scope": "Seven corrected sources read in full, including all displayed mathematics and oracle blocks; fourteen regression tests read and freshly run by root. The fifteen unchanged-source records are the named agent review and are not relabeled as root reviews.",
+    "scientific_verdict": "VALIDATED_BY_EVIDENCE_FOR_MATHEMATICAL_CLAIMS_IN_SEVEN_SOURCES",
+    "reasoning": "Triangle data BA5 BC3 angle120° yield dot -15/2, norms squared19 and49, AC7, cosine BAC13/14, BD·AC=-16. Area15sqrt(3)/4 and line altitude5sqrt(3)/2 differ from the constrained segment minimum5 at B because projection parameter -5/6 is inadmissible. Geometric acos angle lies in[0,pi], unlike an oriented angle. Cosine law coordinate expansion has the negative cross term; midpoint identity gives the median formula. Signed projection requires the oriented axis and handles negative/zero projections. Bisector normal B-A and midpoint produce2x-y=4; triangle sine is nonnegative on the chosen interior branch. sqrt(52-24sqrt(2)) lies between4.245 and4.255, so4.25 is the correct rounding. Scalar multiplication3(-1,4)=(-3,12) is actually computed by the repaired oracle.",
+    "checks": "14 targeted tests passed in5.67s; all7 current execution receipts independently rebound to their actual source and current verifier digest.",
+    "pending": [
+      "TD correction alignment: no teacher correction found in actual assembly; subsequent lot must provide all11 answers.",
+      "Documentary history in cours14 remains unverified.",
+      "CO009 sign error belongs to a separate uncorrected source at this observation.",
+      "Whole chapter quality, final PDF, visual review and human approval not certified."
+    ]
+  }
+}

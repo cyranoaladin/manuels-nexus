@@ -2,7 +2,7 @@
 
 \section{Formule d'Al-Kashi}
 
-\margeAppui{La formule d'Al-Kashi generalise le théorème de Pythagore a tout triangle, en reliant les longueurs des trois cotes a l'un des angles. Sa démonstration par le produit scalaire est exigible.}
+\margeAppui{La formule d'Al-Kashi généralise le théorème de Pythagore à tout triangle, en reliant les longueurs des trois côtés à l'un des angles. Sa démonstration par le produit scalaire est exigible.}
 
 \theoreme[Formule d'Al-Kashi]{
 Dans un triangle $ABC$, en notant $a = BC$, $b = AC$, $c = AB$ :
@@ -25,6 +25,8 @@ b^2 = a^2 + c^2 - 2ac\,\cos(\widehat{ABC}), \qquad c^2 = a^2 + b^2 - 2ab\,\cos(\
 % # Numerical check: triangle 3-4-5, angle opposite to 5 is pi/2
 % # 5^2 = 3^2 + 4^2 - 2*3*4*cos(pi/2) = 9 + 16 - 0 = 25
 % assert al_kashi.subs([(b, 3), (c, 4), (A_angle, pi/2)]) == 25
+% # A non-right angle exercises the sign of the cosine term.
+% assert simplify(al_kashi.subs({b:5,c:8,A_angle:pi/3}) - 49) == 0
 % # Triangle with a=7, b=5, c=8: cos(A) = (b^2+c^2-a^2)/(2bc)
 % cos_A = Rational(5**2 + 8**2 - 7**2, 2*5*8)
 % assert cos_A == Rational(40, 80)
@@ -51,12 +53,13 @@ Donc $a^2 = b^2 + c^2 - 2bc\,\cos(\widehat{BAC})$.
 
 % BEGIN-VERIFY
 % from sympy import *
-% b, c, A_angle = symbols('b c A', positive=True)
-% # BC = AC - AB, so ||BC||^2 = ||AC||^2 - 2*AB.AC + ||AB||^2
-% # = b^2 + c^2 - 2*c*b*cos(A)
-% a_sq = b**2 + c**2 - 2*b*c*cos(A_angle)
-% # This is the formula
-% assert simplify(a_sq - (b**2 + c**2 - 2*b*c*cos(A_angle))) == 0
+% b, c = symbols('b c', positive=True)
+% A_angle = symbols('A_angle', real=True)
+% # Independent coordinate construction: A is the origin and AB is horizontal.
+% AB = Matrix([c,0])
+% AC = Matrix([b*cos(A_angle),b*sin(A_angle)])
+% a_sq = (AC-AB).dot(AC-AB)
+% assert trigsimp(expand(a_sq - (b**2 + c**2 - 2*b*c*cos(A_angle)))) == 0
 % END-VERIFY
 
 \propriete[Cas particulier : théorème de Pythagore]{
@@ -68,7 +71,7 @@ C'est le théorème de Pythagore.
 }
 
 \begin{center}\textbf{Approfondissement — Vers la Terminale}\end{center}
-\approfondissement{\textbf{Formule de la médiane (consequence, non exigible en Première).}
+\approfondissement{\textbf{Formule de la médiane (conséquence, non exigible en Première).}
 Soit $M$ le milieu de $[BC]$. Alors :
 \[
 AM^2 = \frac{2\,AB^2 + 2\,AC^2 - BC^2}{4}.
@@ -121,7 +124,7 @@ Donc $\widehat{BAC} = \dfrac{\pi}{3}$.
 % END-VERIFY
 
 \erreurFrequente{
-Se tromper dans l'attribution des cotes et des angles dans la formule d'Al-Kashi. Le cote isole au premier membre est \textbf{toujours} le cote oppose a l'angle utilise.
+Se tromper dans l'attribution des côtés et des angles dans la formule d'Al-Kashi. Le côté isolé au premier membre est \textbf{toujours} le côté opposé à l'angle utilisé.
 }
 
 \erreurFrequente{
@@ -133,5 +136,5 @@ Confondre la formule d'Al-Kashi avec la loi des sinus $\dfrac{a}{\sin A} = \dfra
 }
 
 \approfondissement{
-La formule d'Al-Kashi est aussi appelee « loi des cosinus » ou « théorème de la generalisation de Pythagore ». Elle est connue depuis l'Antiquite (Euclide) mais a été systematisee par le mathematicien persan Al-Kashi au XV\textsuperscript{e} siecle.
+La formule d'Al-Kashi est aussi appelée « loi des cosinus » ou « théorème de la généralisation de Pythagore ». Elle est connue depuis l'Antiquité (Euclide) mais a été systématisée par le mathématicien persan Al-Kashi au XV\textsuperscript{e} siècle.
 }

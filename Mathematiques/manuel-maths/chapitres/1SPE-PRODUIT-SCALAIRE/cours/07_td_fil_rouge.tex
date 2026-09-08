@@ -8,7 +8,7 @@
 
 \section*{TD fil rouge — Le randonneur et le triangle de terrain}
 
-\textit{Duree : 50 minutes — Toutes les capacites C1 a C5 sont mobilisees.}
+\textit{Durée : 50 minutes — Toutes les capacités C1 à C5 sont mobilisées.}
 
 \bigskip
 
@@ -16,7 +16,7 @@
 \textbf{Accroche}
 
 \medskip
-\parbox{0.9\textwidth}{Un randonneur part d'un refuge $A$, marche $5$ km vers le nord-est jusqu'a un sommet $B$, puis $3$ km vers le sud-est jusqu'a un lac $C$. L'angle $\widehat{ABC} = \frac{2\pi}{3}$. On munit le plan d'un repere orthonorme d'unité 1 km.}
+\parbox{0.9\textwidth}{Un randonneur part d'un refuge $A$, marche $5$ km jusqu'à un sommet $B$, puis $3$ km jusqu'à un lac $C$. L'angle $\widehat{ABC} = \frac{2\pi}{3}$. On munit le plan d'un repère orthonormé d'unité 1 km.}
 \end{center}
 
 \bigskip
@@ -30,8 +30,8 @@
 %---------------------------------------------------------------
 
 \begin{enumerate}
-  \item Calculer $\overrightarrow{BA} \cdot \overrightarrow{BC}$ a l'aide de la définition géométrique.
-  \item En déduire $\|\overrightarrow{BA} + \overrightarrow{BC}\|^2$ en utilisant l'identite remarquable vectorielle $\|\vec{u} + \vec{v}\|^2 = \|\vec{u}\|^2 + 2\,\vec{u} \cdot \vec{v} + \|\vec{v}\|^2$.
+  \item Calculer $\overrightarrow{BA} \cdot \overrightarrow{BC}$ à l'aide de la définition géométrique.
+  \item En déduire $\|\overrightarrow{BA} + \overrightarrow{BC}\|^2$ en utilisant l'identité remarquable vectorielle $\|\vec{u} + \vec{v}\|^2 = \|\vec{u}\|^2 + 2\,\vec{u} \cdot \vec{v} + \|\vec{v}\|^2$.
   \item Calculer $\|\overrightarrow{BA} - \overrightarrow{BC}\|^2$. Que représente le vecteur $\overrightarrow{BA} - \overrightarrow{BC}$ ?
 \end{enumerate}
 
@@ -72,29 +72,18 @@
 \bigskip
 
 %---------------------------------------------------------------
-\subsection*{Partie C — Angles et orthogonalite (C3) — 15 min}
+\subsection*{Partie C — Angles et orthogonalité (C3) — 15 min}
 %---------------------------------------------------------------
 
 \begin{enumerate}[resume]
-  \item Calculer $\cos(\widehat{BAC})$ a l'aide du produit scalaire $\overrightarrow{AB} \cdot \overrightarrow{AC}$.
+  \item Calculer $\cos(\widehat{BAC})$ à l'aide du produit scalaire $\overrightarrow{AB} \cdot \overrightarrow{AC}$.
   \item En déduire la mesure de l'angle $\widehat{BAC}$.
-  \item On place $D$ tel que $\overrightarrow{BD} = \overrightarrow{BA} + \overrightarrow{BC}$. Montrer que $\overrightarrow{BD}$ est orthogonal a $\overrightarrow{AC}$ si et seulement si $AB = BC$.
+  \item On place $D$ tel que $\overrightarrow{BD} = \overrightarrow{BA} + \overrightarrow{BC}$. Montrer que $\overrightarrow{BD}$ est orthogonal à $\overrightarrow{AC}$ si et seulement si $AB = BC$.
 \end{enumerate}
 
 % BEGIN-VERIFY
 % from sympy import *
-% # Need coordinates. Place B at origin.
-% # BA has norm 5, BC has norm 3, angle(BA,BC) = 2pi/3
-% # Let BA along direction alpha, BC along direction alpha - 2pi/3
-% # Simplify: put BA along x-axis: A = (5, 0)
-% # BC at angle -(2pi/3) from BA, but BA is along +x, so BC at angle -2pi/3?
-% # Actually angle (BA, BC) = 2pi/3 means angle from BA to BC is 2pi/3
-% # B = (0,0), A = (5, 0), C = (3*cos(-2*pi/3), 3*sin(-2*pi/3)) or + direction
-% # Let's use: angle at B = 2pi/3 between BA and BC
-% # BA direction: towards A from B
-% # Take BA = (5, 0), BC = 3*(cos(2*pi/3), sin(2*pi/3)) = (-3/2, 3*sqrt(3)/2)
-% # No wait, if angle between BA and BC is 2pi/3, and BA = (5,0):
-% # BC = 3*(cos(2*pi/3), sin(2*pi/3)) = 3*(-1/2, sqrt(3)/2) = (-3/2, 3*sqrt(3)/2)
+% # Orthonormal frame: B=(0,0), A=(5,0), C=(-3/2,3*sqrt(3)/2).
 % Bx, By = 0, 0
 % Ax, Ay = 5, 0
 % Cx, Cy = Rational(-3, 2), 3*sqrt(3)/2
@@ -117,9 +106,9 @@
 %---------------------------------------------------------------
 
 \begin{enumerate}[resume]
-  \item Calculer l'aire du triangle $ABC$ a l'aide de la formule $\mathcal{A} = \frac{1}{2} \times AB \times BC \times \sin(\widehat{ABC})$.
-  \item En déduire la hauteur $h$ issue de $A$ dans le triangle $ABC$ (hauteur relative au cote $[BC]$).
-  \item Le randonneur souhaite rejoindre le cote $[BC]$ en marchant perpendiculairement. Montrer que la distance minimale est exactement $h$.
+  \item Calculer l'aire du triangle $ABC$ à l'aide de la formule $\mathcal{A} = \frac{1}{2} \times AB \times BC \times \sin(\widehat{ABC})$.
+  \item En déduire la hauteur $h$ issue de $A$ dans le triangle $ABC$ (hauteur relative au côté $[BC]$).
+  \item Depuis le refuge $A$, on cherche le point du segment $[BC]$ le plus proche. Le pied de la hauteur issue de $A$ appartient-il à ce segment ? Déterminer le point le plus proche de $A$ et la distance minimale à parcourir. Comparer cette distance à $h$.
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -130,4 +119,20 @@
 % # h = 2*Aire / BC = 2*(15*sqrt(3)/4) / 3 = 15*sqrt(3)/6 = 5*sqrt(3)/2
 % h = 2*aire / 3
 % assert simplify(h - 5*sqrt(3)/2) == 0
+% # The altitude foot lies on the line (BC), outside the trail segment [BC].
+% A, B, C = Matrix([5,0]), Matrix([0,0]), Matrix([-Rational(3,2),3*sqrt(3)/2])
+% BC = C-B
+% projection_parameter = (A-B).dot(BC)/BC.dot(BC)
+% assert projection_parameter == -Rational(5,6)
+% H = B + projection_parameter*BC
+% assert simplify((A-H).norm() - h) == 0
+% # For every t in [0,1], distance squared is >=25, with equality only at t=0.
+% t = symbols('t', nonnegative=True)
+% distance_sq = expand((B+t*BC-A).dot(B+t*BC-A))
+% assert distance_sq == 25 + 15*t + 9*t**2
+% assert factor(distance_sq-25) == 3*t*(5+3*t)
+% assert (distance_sq-25).is_nonnegative is True
+% assert distance_sq.subs(t,0) == 25
+% assert (A-B).norm() == 5
+% assert h < 5
 % END-VERIFY

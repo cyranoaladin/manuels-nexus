@@ -1,23 +1,34 @@
 % META: {"id":"1SPE-PRODSCAL-ME-005","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"methode","capacites_codes":["C5"],"status":"generated"}
 \begin{fichemethode}{M5}{Appliquer la formule d'Al-Kashi}
-\quandUtiliser{J'utilise cette méthode lorsque l'énoncé donne un triangle avec deux cotes et l'angle compris, ou trois cotes, et demande de calculer un cote ou un angle manquant.}
+\quandUtiliser{J'utilise cette méthode lorsque l'énoncé donne un triangle avec deux côtés et l'angle compris, ou trois côtés, et demande de calculer un côté ou un angle manquant.}
 \pasApas{\begin{enumerate}
-  \item J'identifie les éléments connus : cotes $a$, $b$, $c$ et angles $\widehat{A}$, $\widehat{B}$, $\widehat{C}$ (le cote $a$ est oppose a l'angle $\widehat{A}$).
-  \item \textbf{Pour trouver un cote :} j'applique $a^2 = b^2 + c^2 - 2bc\,\cos\widehat{A}$.
+  \item J'identifie les éléments connus : côtés $a$, $b$, $c$ et angles $\widehat{A}$, $\widehat{B}$, $\widehat{C}$ (le côté $a$ est opposé à l'angle $\widehat{A}$).
+  \item \textbf{Pour trouver un côté :} j'applique $a^2 = b^2 + c^2 - 2bc\,\cos\widehat{A}$.
   \item \textbf{Pour trouver un angle :} j'isole $\cos\widehat{A} = \dfrac{b^2 + c^2 - a^2}{2bc}$ puis $\widehat{A} = \arccos(\ldots)$.
   \item Je simplifie et je donne le résultat exact ou arrondi selon la consigne.
 \end{enumerate}}
 \exempleRedige{Dans le triangle $ABC$, $AB = 6$, $AC = 4$ et $\widehat{BAC} = \dfrac{\pi}{4}$. Calculer $BC$.
-\commentaireMarge{Étape 1 : identification. Cote cherche $a = BC$, oppose a $\widehat{A}$.}
+\commentaireMarge{Étape 1 : identification. Côté cherché $a = BC$, opposé à $\widehat{A}$.}
 \commentaireMarge{Étape 2 : Al-Kashi.}
 $BC^2 = AB^2 + AC^2 - 2 \times AB \times AC \times \cos\!\left(\dfrac{\pi}{4}\right) = 36 + 16 - 48 \times \dfrac{\sqrt{2}}{2} = 52 - 24\sqrt{2}.$
 \commentaireMarge{Étape 4 : résultat.}
-$BC = \sqrt{52 - 24\sqrt{2}} \approx 4{,}35.$}
+$BC = \sqrt{52 - 24\sqrt{2}} \approx 4{,}25.$}
 \pieges{\begin{itemize}
-  \item Se tromper dans l'attribution cote/angle : le cote isole est oppose a l'angle utilise.
+  \item Se tromper dans l'attribution côté/angle : le côté isolé est opposé à l'angle utilisé.
   \item Oublier le signe $-$ dans la formule.
-  \item Oublier de prendre la racine carrée a la fin pour obtenir le cote.
+  \item Oublier de prendre la racine carrée à la fin pour obtenir le côté.
 \end{itemize}}
 \verifier{Si l'angle est droit ($\pi/2$), on doit retrouver le théorème de Pythagore. Vérifier aussi que $\cos\widehat{A}$ est entre $-1$ et $1$.}
 \sEntrainer{\refExos{M5}}
 \end{fichemethode}
+
+% BEGIN-VERIFY
+% from sympy import *
+% AB = Matrix([6,0])
+% AC = Matrix([4*cos(pi/4),4*sin(pi/4)])
+% BC_sq = simplify((AC-AB).dot(AC-AB))
+% assert simplify(BC_sq - (52-24*sqrt(2))) == 0
+% BC = sqrt(BC_sq)
+% assert BC > 0
+% assert Rational(849,200) < BC < Rational(851,200)  # 4.245 < BC < 4.255
+% END-VERIFY
