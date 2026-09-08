@@ -1,35 +1,38 @@
 % META: {"id": "TNSI-HIST-CR-011", "chapitre": "TNSI-HISTOIRE-INFORMATIQUE", "type_objet": "cours", "capacites_codes": ["C2"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
 
+% DOCUMENTARY-SOURCES: Harvard Mark I (1944), IBM 701 (1952), Fortran (1957),
+% GM-NAA (1956), distribution d'applications compatibles (2008).
+% https://chsi.harvard.edu/harvard-ibm-mark-1-function
+% https://chsi.harvard.edu/harvard-ibm-mark-1-use
+% https://www.ibm.com/history/700
+% https://www.ibm.com/history/fortran
+% https://softwarepreservation.computerhistory.org/os/gm.html
+% Ritchie et Thompson, version BSTJ 1978, introduction et sections 3.5/5 :
+% https://www.nokia.com/bell-labs/about/dennis-m-ritchie/cacm.html
+% https://www.apple.com/newsroom/2008/07/14iPhone-App-Store-Downloads-Top-10-Million-in-First-Weekend/
+
 \section{Évolution des rôles du logiciel et du matériel}
 
-% ============================================================
-% STRATE 1 — Repartition matériel/logiciel dans le temps
-% ============================================================
-
-\propriete[Des débuts au logiciel dominant]{
+\propriete[Des programmes aux couches d'abstraction]{
 \begin{itemize}
-  \item Dans les tout premiers ordinateurs (fin des années 1940), le \textbf{matériel} etait predominant : programmer consistait souvent a reconfigurer physiquement des cablages ou a saisir du code machine directement.
-  \item L'apparition des \textbf{langages de programmation} de haut niveau (Fortran 1957, puis de nombreux autres) et des \textbf{compilateurs} deplace progressivement la complexite vers le \textbf{logiciel} : le matériel devient plus generique et reconfigurable par programmation.
-  \item Les \textbf{systèmes d'exploitation} (années 1960-1970) organisent le partage des ressources materielles entre plusieurs programmes, ajoutant une couche logicielle essentielle entre l'utilisateur et la machine.
+  \item Les machines anciennes n'étaient pas toutes dédiées à une seule tâche. Le \textbf{Harvard Mark I}, livré en \textbf{1944}, lit des instructions sur une bande et réalise plusieurs types de calculs. L'\textbf{IBM 701} de \textbf{1952} est également une machine polyvalente, à programme enregistré. Programmer reste alors fortement lié aux caractéristiques de la machine.
+  \item Les \textbf{langages de haut niveau} et leurs \textbf{compilateurs}, comme Fortran commercialisé en \textbf{1957}, permettent d'exprimer les calculs sans écrire directement chaque instruction machine. Le compilateur traduit le programme : la complexité de cette traduction est prise en charge par un logiciel.
+  \item Les \textbf{systèmes d'exploitation} organisent l'exécution des programmes et l'accès aux ressources. Le système GM-NAA, utilisé sur IBM 704 dès \textbf{1956}, enchaîne des travaux. Leur développement dans les années 1960 et 1970 ajoute notamment des services de partage et de protection des ressources.
 \end{itemize}
 }
 
-\propriete[Aujourd'hui : le logiciel omniprésent]{
-Un même matériel (smartphone, ordinateur) execute une multitude de logiciels différents grace a des couches d'abstraction (système d'exploitation, machine virtuelle, navigateur). Le \textbf{coût de developpement logiciel} depasse souvent aujourd'hui le coût du matériel dans de nombreux projets numériques.
+\propriete[Un même matériel, plusieurs usages]{
+Un ordinateur ou un smartphone exécute de nombreux programmes grâce à des couches d'abstraction : système d'exploitation, machine virtuelle, navigateur. Installer une application \textbf{compatible} permet un nouvel usage sans remplacer le processeur. Les possibilités restent limitées par la mémoire, les instructions disponibles et les périphériques : un logiciel ne peut pas créer un capteur absent.
 }
 
 \margeAppui{
-Cette evolution illustre un principe cle de l'informatique : le matériel devient de plus en plus \textbf{generique}, tandis que le logiciel porte une part croissante de la specialisation et de la valeur ajoutee.
+L'évolution ne se résume pas à « une tâche autrefois, toutes les tâches aujourd'hui ». Des machines étaient déjà programmables ; les logiciels ont pris en charge davantage de services et masquent une partie des détails matériels. Des processeurs polyvalents coexistent avec des circuits spécialisés.
 }
 
 \exemple{
-Comparer un four a micro-ondes des années 1980 (circuits electroniques dedies, comportement fige) a un four connecte moderne (matériel generique + logiciel embarque mis a jour a distance) : le second illustre le basculement du role de specialisation vers le logiciel.
+En \textbf{1944}, le Mark I reçoit son programme sur une bande perforée. En \textbf{2008}, des applications sont téléchargées sur des iPhone compatibles, comme le documente Apple lors du lancement de son magasin d'applications. Dans les deux cas, changer les instructions permet des usages différents sans reconstruire la machine. Dans le second, le système d'exploitation et les outils logiciels prennent en charge l'installation et de nombreux services utilisés par les applications. La différence porte sur l'organisation et le niveau d'abstraction de la programmation, pas sur une opposition entre absence et présence de programme.
 }
 
-% ============================================================
-% STRATE 2 — Erreurs frequentes
-% ============================================================
-
 \erreurFrequente{
-\textbf{Croire que le matériel est devenu secondaire.} Le matériel reste indispensable (sans lui, aucun logiciel ne peut s'executer) : c'est son \textbf{role} qui a evolue, passant de porteur de la logique specifique a plateforme generique executant une logique portee par le logiciel.
+\textbf{Croire que le logiciel rend le matériel secondaire ou sans limites.} Un navigateur utilise toujours un processeur, de la mémoire et des interfaces de communication. Une nouvelle application peut nécessiter une version de système particulière, davantage de mémoire ou un périphérique supplémentaire. La polyvalence logicielle ne supprime donc ni les contraintes ni les spécialisations matérielles.
 }

@@ -1,36 +1,35 @@
 % META: {"id": "TNSI-HIST-EVAL-B-corrige", "chapitre": "TNSI-HISTOIRE-INFORMATIQUE", "type_objet": "corrige_evaluation", "evaluation_ref": "TNSI-HIST-EVAL-B", "capacites": ["T-HIST-01A", "T-HIST-01B"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+% DOCUMENTARY-SOURCES: cours C1/C2 et docs/codex/2026-09-08-tnsi-history-software-hardware-review.md.
 \begin{corrige}{TNSI-HIST-EVAL-B-EX1}
 
 \textbf{Q1.} 1936, par Alan Turing.
 
-\textbf{Q2.} 1948.
+\textbf{Q2.} 1948 : le Manchester Baby est un ordinateur électronique à programme enregistré.
 
-\textbf{Q3.} Exemple accepte : invention du World Wide Web par Tim Berners-Lee (1989-1991), qui popularise l'usage grand public d'Internet.
+\textbf{Q3.} Exemple accepté : la proposition du World Wide Web par Tim Berners-Lee au CERN en 1989, suivie de sa mise en œuvre en 1990 et de sa diffusion en 1991. Il s'agit d'un service d'Internet, distinct d'ARPANET mis en service en 1969.
 
 \end{corrige}
 
 \begin{corrige}{TNSI-HIST-EVAL-B-EX2}
 
-\textbf{Q1.} Dans les années 1950, le matériel portait directement la logique de calcul (cablages, code machine) : peu de flexibilite, chaque machine etait quasi dediee a une tache. Aujourd'hui, le matériel est generique (processeurs polyvalents) et c'est le logiciel installe qui déterminé entierement le comportement de la machine, permettant une flexibilite quasi illimitee.
+\textbf{Q1.} La possibilité de changer de programme existe déjà dans les années 1950 : elle ne naît pas avec les applications actuelles. Un compilateur prend en charge la traduction d'un langage de haut niveau vers des instructions exécutables par la machine. Un système d'exploitation organise les ressources et fournit des services aux programmes. Le programmeur peut ainsi s'appuyer sur des couches logicielles au lieu de gérer directement tous les détails matériels. Le matériel continue d'exécuter les instructions et de fixer des limites de mémoire, de vitesse et de périphériques.
 
-\textbf{Q2.} Exemple accepte : une console de jeux ou un ordinateur personnel peut executer des milliers de jeux ou d'applications très différents sans modification matérielle, uniquement par installation de logiciels différents.
+\emph{Attribution indicative des 5 points :} reconnaître la programmabilité ancienne (1), expliquer le compilateur (1,5), expliquer le système d'exploitation (1,5), maintenir le rôle et les contraintes du matériel (1).
+
+\textbf{Q2.} Exemple accepté : sur un ordinateur personnel, on peut remplacer un traitement de texte par un programme de retouche d'images sans changer le processeur. Le logiciel et les données changent ; le processeur et la mémoire installés peuvent rester identiques. Le second programme doit être compatible avec le système et disposer d'assez de mémoire. Une autre réponse correctement justifiée est recevable.
+
+\emph{Attribution indicative des 5 points :} exemple avec deux usages (1), logiciel qui change (1), matériel qui reste identique (1), limite pertinente et expliquée (2). Aucun nombre arbitraire d'applications n'est exigé.
 
 \end{corrige}
+
 % BEGIN-VERIFY
-% # Le corrige B avance quatre reperes : 1936 (Turing), 1948 (premiers
-% # ordinateurs a programme enregistre), 1969 (ARPANET, borne de la
-% # question) et 1989-1991 (Web, invente par Tim Berners-Lee).
-% turing = 1936
-% programme_enregistre = 1948
-% arpanet = 1969
-% web_debut, web_fin = 1989, 1991
-% assert turing < programme_enregistre < arpanet < web_debut <= web_fin
-% # La question 3 exige un evenement posterieur a 1969 : le Web convient.
-% assert web_debut > arpanet
-% # Le Web n'est pas Internet : il lui est posterieur d'une vingtaine
-% # d'annees, ce que l'erreur frequente du cours souligne.
-% assert web_debut - arpanet == 20
-% # L'informatique des annees 1950 precede le materiel generique actuel.
-% annees_cinquante = 1950
-% assert programme_enregistre < annees_cinquante < arpanet
+% # Controle arithmetique des repartitions explicites du bareme, pas preuve
+% # documentaire ni validation automatique des reponses libres.
+% from fractions import Fraction
+% points_q1 = (1, Fraction(3, 2), Fraction(3, 2), 1)
+% points_q2 = (1, 1, 1, 2)
+% assert sum(points_q1) == 5
+% assert sum(points_q2) == 5
+% assert sum(points_q1) + sum(points_q2) == 10
 % END-VERIFY

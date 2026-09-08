@@ -10,8 +10,8 @@
 
 \begin{enumerate}
   \item (4 pts) Quelle année marque la formalisation du concept de machine universelle, et par qui ?
-  \item (3 pts) En quelle année les premiers ordinateurs a programme enregistre sont-ils construits ?
-  \item (3 pts) Citer un événement marquant du developpement d'Internet après 1969 (par exemple lie au World Wide Web).
+  \item (3 pts) En quelle année les premiers ordinateurs électroniques à programme enregistré sont-ils construits ?
+  \item (3 pts) Citer un événement marquant du développement d'Internet après 1969 (par exemple lié au World Wide Web).
 \end{enumerate}
 
 \bigskip
@@ -19,28 +19,15 @@
 \textbf{Exercice 2} --- \textit{Évolution logiciel/matériel} \hfill (10 points)
 
 \begin{enumerate}
-  \item (5 pts) Expliquer la difference entre l'informatique des années 1950 (matériel dominant) et l'informatique actuelle (logiciel dominant).
-  \item (5 pts) Donner un exemple concret (autre que celui du cours) illustrant cette evolution.
+  \item (5 pts) Des ordinateurs des années 1950 étaient déjà programmables et polyvalents. Expliquer ce que les compilateurs et les systèmes d'exploitation ont changé dans la répartition des tâches entre matériel, programmeur et logiciels.
+  \item (5 pts) Donner un autre exemple d'appareil qui permet plusieurs usages par des logiciels différents. Préciser ce qui change, ce qui reste matériellement identique et une limite de cette polyvalence.
 \end{enumerate}
 % BEGIN-VERIFY
-% # Chronologie attendue par le sujet B, telle que le cours l'etablit
-% # (10_C1_evenements_cles) : machine universelle, premiers ordinateurs a
-% # programme enregistre, ARPANET, puis Web. Une date recopiee de travers
-% # dans l'enonce ou dans son corrige casse cet ordre.
-% machine_universelle = 1936
-% programme_enregistre = 1948
-% arpanet = 1969
-% web = (1989, 1991)
-% assert machine_universelle < programme_enregistre < arpanet
-% assert arpanet < web[0] <= web[1]
-% # Le sujet demande un evenement d'Internet POSTERIEUR a 1969 : le Web en
-% # est un, la mise en service d'ARPANET n'en serait pas un.
-% assert web[0] > arpanet
-% # Bareme : deux exercices de 10 points, total sur 20.
-% bareme = {"Ex. 1": 10, "Ex. 2": 10}
-% assert sum(bareme.values()) == 20
-% # Exercice 1 : 4 + 3 + 3 points.
-% assert 4 + 3 + 3 == bareme["Ex. 1"]
-% # Exercice 2 : 5 + 5 points.
-% assert 5 + 5 == bareme["Ex. 2"]
+% # Controle arithmetique du bareme seulement : aucune date ni attribution
+% # historique n'est certifiee par ces calculs.
+% points_exercice_1 = (4, 3, 3)
+% points_exercice_2 = (5, 5)
+% assert sum(points_exercice_1) == 10
+% assert sum(points_exercice_2) == 10
+% assert sum(points_exercice_1) + sum(points_exercice_2) == 20
 % END-VERIFY

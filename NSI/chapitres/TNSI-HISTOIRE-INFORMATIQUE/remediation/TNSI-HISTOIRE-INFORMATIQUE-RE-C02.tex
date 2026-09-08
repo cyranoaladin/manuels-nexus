@@ -1,67 +1,26 @@
 % META: {"id": "TNSI-HISTOIRE-INFORMATIQUE-RE-C02", "chapitre": "TNSI-HISTOIRE-INFORMATIQUE", "type_objet": "remediation", "capacites": ["T-HIST-01B"], "capacites_codes": ["C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 
-%---------------------------------------------------------------
-% FICHE DE REMEDIATION — C02 : croire que le materiel se specialise
-%---------------------------------------------------------------
+% DOCUMENTARY-SOURCES: exemple de programmation ancienne et distribution logicielle.
+% https://chsi.harvard.edu/harvard-ibm-mark-1-function
+% https://chsi.harvard.edu/harvard-ibm-mark-1-use
+% https://www.apple.com/newsroom/2008/07/14iPhone-App-Store-Downloads-Top-10-Million-in-First-Weekend/
+% Aucun oracle de constantes : classement et comparaison relevent d'une revue conceptuelle.
 
 \begin{exercice}{TNSI-HIST-RE-C02-EX1}{1}{12}
-Un élève écrit : « avant, une machine faisait une seule chose ; aujourd'hui les
-machines font tout, donc le matériel est devenu plus spécialisé ». La conclusion
-ne suit pas.
+Un élève écrit : « Les machines anciennes ne faisaient qu'une seule chose ; aujourd'hui une application permet tout, donc le matériel n'impose plus de limite. » Il mélange plusieurs idées.
 \begin{enumerate}
-  \item Classer les cinq éléments suivants en \emph{matériel} ou
-    \emph{logiciel} : le tableau de connexions d'un calculateur des années
-    quarante, un système d'exploitation, un processeur, un navigateur Web, une
-    machine virtuelle.
-  \item Sur un calculateur des années quarante, changer de calcul demandait de
-    recâbler la machine. Sur un téléphone actuel, changer d'usage demande
-    d'installer une application. Dans lequel des deux cas le matériel est-il le
-    plus \emph{général} ?
-  \item Corriger la phrase de l'élève en une seule phrase, en distinguant ce qui
-    s'est spécialisé de ce qui s'est généralisé.
+  \item Classer les cinq éléments suivants en \emph{matériel} ou \emph{logiciel} : le lecteur de bande d'un calculateur, un système d'exploitation, un processeur, un navigateur Web, une machine virtuelle. Ce classement suffit-il à mesurer une évolution historique ?
+  \item Le Mark I de 1944 lit un programme sur bande et réalise différents calculs. En 2008, un iPhone compatible reçoit de nouvelles applications par téléchargement. Expliquer ce que l'on change dans les deux cas, puis citer un rôle des couches logicielles dans le second.
+  \item Corriger la phrase de l'élève en conservant l'idée de polyvalence et en donnant une limite matérielle concrète.
 \end{enumerate}
 \end{exercice}
 
-% BEGIN-VERIFY
-% elements = {
-%     "tableau de connexions": "materiel",
-%     "systeme d'exploitation": "logiciel",
-%     "processeur": "materiel",
-%     "navigateur Web": "logiciel",
-%     "machine virtuelle": "logiciel",
-% }
-% assert len(elements) == 5
-% assert sum(1 for v in elements.values() if v == "materiel") == 2
-% assert sum(1 for v in elements.values() if v == "logiciel") == 3
-% assert elements["tableau de connexions"] == "materiel"
-% assert elements["machine virtuelle"] == "logiciel"
-% # Changer d'usage : nombre d'interventions materielles requises.
-% interventions = {"calculateur 1945": 1, "telephone 2026": 0}
-% assert interventions["calculateur 1945"] > interventions["telephone 2026"]
-% assert interventions["telephone 2026"] == 0
-% END-VERIFY
-
 \begin{corrige}{TNSI-HIST-RE-C02-EX1}
-\textbf{1.} Sont du \textbf{matériel} le tableau de connexions et le
-processeur ; sont du \textbf{logiciel} le système d'exploitation, le navigateur
-Web et la machine virtuelle. Deux d'un côté, trois de l'autre — et c'est déjà un
-indice : la couche logicielle s'est épaissie.
+\textbf{1.} Le lecteur de bande et le processeur sont du \textbf{matériel}. Le système d'exploitation, le navigateur et la machine virtuelle sont des \textbf{logiciels}. Le nombre d'éléments de chaque catégorie dépend de la liste choisie : deux contre trois ne mesure donc aucune évolution historique.
 
-\textbf{2.} C'est le téléphone dont le matériel est le plus \textbf{général}.
-Changer d'usage n'y demande \emph{aucune} intervention matérielle : le processeur
-exécute indifféremment un jeu, un traitement de texte ou un navigateur. Sur le
-calculateur de $1945$, chaque nouveau calcul exigeait un recâblage, c'est-à-dire
-une modification physique : le matériel y était l'expression même du problème
-traité.
+\textbf{2.} Dans les deux cas, on change les instructions du programme, sans reconstruire la machine. Le Mark I était déjà programmable : sa bande lui fournissait des instructions pour plusieurs usages. Sur le téléphone, le système d'exploitation prend notamment en charge l'installation des applications compatibles et leur donne accès à des services et aux ressources. La différence concerne l'organisation et les niveaux d'abstraction de la programmation, pas une frontière entre machine monotâche et machine sans limites.
 
-\textbf{3.} On peut écrire : « le matériel est devenu plus \emph{général}, et
-c'est le logiciel qui porte désormais la spécialisation ».
+\textbf{3.} Exemple de réponse : « Des machines anciennes étaient déjà programmables ; les couches logicielles actuelles facilitent de nombreux usages sur un même matériel, mais une application reste limitée par les ressources et les périphériques disponibles. » Ainsi, un logiciel ne peut pas obtenir une mesure de température ambiante d'un capteur que l'appareil ne possède pas.
 
-Le raisonnement de l'élève confond la variété des \emph{usages} avec la
-spécialisation du \emph{matériel}. Les deux évoluent en sens contraires : plus
-une machine sait faire de choses, moins son matériel est adapté à l'une d'elles
-en particulier. Les accélérateurs graphiques ou les circuits dédiés à
-l'apprentissage automatique sont bien des spécialisations matérielles, mais ce
-sont des exceptions assumées, ajoutées à côté d'un processeur généraliste, et non
-un retour au câblage.
+La variété des usages ne supprime pas les spécialisations matérielles : un processeur généraliste peut coexister avec un accélérateur graphique. Il n'existe pas de règle imposant que toute augmentation des usages rende chaque composant moins spécialisé.
 \end{corrige}

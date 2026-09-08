@@ -63,6 +63,18 @@ REMEDIATION_CAPACITE = re.compile(r"^RE-(C\d+)$")
 #: Chacun est jugé : le distracteur porte une confusion dont la notion est
 #: enseignée ailleurs, et le renvoi doit conduire là où elle l'est.
 CROSS_CAPACITY_JUSTIFICATIONS: dict[tuple[str, str, str], str] = {
+    ("TNSI-HISTOIRE-INFORMATIQUE", "Q4", "B"): (
+        "La question évalue en C2 l'ajout d'un service logiciel sur une "
+        "infrastructure existante. Le distracteur invente un réseau physique "
+        "indépendant : C1 distingue Internet et le Web, puis C2 précise "
+        "l'utilisation des ressources matérielles par les logiciels."
+    ),
+    ("TNSI-HISTOIRE-INFORMATIQUE", "Q4", "C"): (
+        "La question porte sur le rôle logiciel du Web en C2. Le distracteur "
+        "en fait une condition d'apparition d'ARPANET : les repères 1969 et "
+        "1989 en C1 réfutent cette causalité, avant de revenir aux couches "
+        "logicielles étudiées en C2."
+    ),
     ("TSPE-LIMITES-FONCTIONS", "Q5", "C"): (
         "La question calcule une limite (C1), mais le distracteur ignore la "
         "croissance comparée, qui est l'objet de C3. Renvoyer à C1 laisserait "

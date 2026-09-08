@@ -57,52 +57,52 @@
     {
       "id": "Q3",
       "capacite": "C2",
-      "enonce": "Depuis les débuts de l'informatique, le rôle du matériel a évolué vers :",
+      "enonce": "Quel changement illustre le développement des compilateurs et des systèmes d'exploitation depuis les années 1950 ?",
       "options": {
-        "A": "une spécialisation croissante, chaque machine ne traitant qu'une seule tâche.",
-        "B": "une disparition progressive au profit du seul logiciel.",
-        "C": "davantage de généricité, la logique particulière étant portée par le logiciel.",
-        "D": "aucune évolution notable."
+        "A": "Chaque machine est progressivement limitée à une seule tâche.",
+        "B": "Le matériel disparaît au profit du seul logiciel.",
+        "C": "Des tâches de traduction et de gestion des ressources sont prises en charge par des logiciels.",
+        "D": "Tout logiciel devient indépendant du matériel, sans condition de compatibilité."
       },
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "C'est l'inverse du mouvement historique : les premières machines étaient câblées pour une tâche, et le programme enregistré les a rendues polyvalentes.",
-          "renvoi": "C2, rôles relatifs du logiciel et du matériel"
+          "erreur": "Des machines étaient déjà programmables, comme le Mark I de 1944. Compilateurs et systèmes d'exploitation facilitent l'écriture et l'exécution de programmes différents ; ils ne limitent pas chaque machine à une tâche.",
+          "renvoi": "C2, des programmes aux couches d'abstraction"
         },
         "B": {
-          "erreur": "Tout logiciel s'exécute sur du matériel. Sa part relative dans la valeur a crû, mais le support n'a pas disparu.",
-          "renvoi": "C2, rôles relatifs du logiciel et du matériel"
+          "erreur": "Les logiciels utilisent toujours un processeur, de la mémoire et des périphériques. Une couche d'abstraction ne supprime pas son support matériel.",
+          "renvoi": "C2, un même matériel, plusieurs usages"
         },
         "D": {
-          "erreur": "Le déplacement de la logique du câblage vers le logiciel est l'une des évolutions majeures de la discipline.",
-          "renvoi": "C2, rôles relatifs du logiciel et du matériel"
+          "erreur": "Une application doit rester compatible avec le système et les ressources disponibles. L'abstraction masque certains détails matériels sans supprimer leurs contraintes.",
+          "renvoi": "C2, un même matériel, plusieurs usages"
         }
       }
     },
     {
       "id": "Q4",
       "capacite": "C2",
-      "enonce": "Internet et le World Wide Web sont dans le rapport suivant :",
+      "enonce": "En quoi l'apparition du World Wide Web illustre-t-elle le rôle des logiciels par rapport à l'infrastructure existante d'Internet ?",
       "options": {
-        "A": "ce sont deux noms de la même chose.",
-        "B": "ce sont deux réseaux physiques distincts et indépendants.",
-        "C": "Internet est un service qui fonctionne au-dessus du Web.",
-        "D": "le Web est un service qui fonctionne au-dessus du réseau Internet."
+        "A": "Le Web remplace les processeurs et les câbles par des logiciels.",
+        "B": "Le Web exige un réseau physique entièrement distinct de celui d'Internet.",
+        "C": "Le Web était nécessaire à la mise en service d'ARPANET en 1969.",
+        "D": "Le Web ajoute un service logiciel qui utilise l'infrastructure et les protocoles d'Internet."
       },
       "correcte": "D",
       "diagnostics": {
         "A": {
-          "erreur": "Le courriel et bien d'autres services empruntent Internet sans passer par le Web : les deux ne se confondent donc pas.",
-          "renvoi": "C2, Internet et le Web"
+          "erreur": "Les navigateurs et serveurs Web sont des logiciels exécutés sur des machines. Ils ont toujours besoin du matériel et des moyens de communication.",
+          "renvoi": "C2, un même matériel, plusieurs usages"
         },
         "B": {
-          "erreur": "Le Web n'est pas un réseau physique : c'est un ensemble de pages liées, échangées grâce au protocole HTTP.",
-          "renvoi": "C2, Internet et le Web"
+          "erreur": "Le Web utilise Internet pour échanger des documents, comme d'autres services utilisent cette infrastructure. Il ne constitue pas un réseau physique indépendant.",
+          "renvoi": "C1, Internet et le Web ; C2, un même matériel, plusieurs usages"
         },
         "C": {
-          "erreur": "L'élève intervertit les deux niveaux. L'infrastructure est Internet ; le Web est l'un des services qu'elle transporte.",
-          "renvoi": "C2, Internet et le Web"
+          "erreur": "ARPANET est mis en service en 1969 ; Tim Berners-Lee propose le Web en 1989. Ce service apparu plus tard n'était pas une condition de mise en service du réseau.",
+          "renvoi": "C1, repères chronologiques ; C2, des programmes aux couches d'abstraction"
         }
       }
     }
