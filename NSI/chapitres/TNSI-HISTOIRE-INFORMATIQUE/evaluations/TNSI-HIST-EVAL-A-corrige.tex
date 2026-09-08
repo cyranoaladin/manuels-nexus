@@ -1,33 +1,62 @@
 % META: {"id": "TNSI-HIST-EVAL-A-corrige", "chapitre": "TNSI-HISTOIRE-INFORMATIQUE", "type_objet": "corrige_evaluation", "evaluation_ref": "TNSI-HIST-EVAL-A", "capacites": ["T-HIST-01A", "T-HIST-01B"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% DOCUMENTARY-SOURCES : ces documents justifient les reperes ; aucun oracle de dates.
+% Turing 1936, paragraphe 6 : https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf
+% Manchester Baby, 21 juin 1948 : https://curation.cs.manchester.ac.uk/computer50/www.computer50.org/mark1/new.baby.html
+% ARPANET, 1969 : https://www.darpa.mil/news/features/arpanet
+% DOCUMENTARY-SOURCES : les roles et exemples exigent une revue documentaire.
+% Mark I programmable : https://chsi.harvard.edu/harvard-ibm-mark-1-function
+% Applications compatibles en 2008 : https://www.apple.com/newsroom/2008/07/14iPhone-App-Store-Downloads-Top-10-Million-in-First-Weekend/
+% Systeme : https://www.nokia.com/bell-labs/about/dennis-m-ritchie/cacm.html
+% Compilateur : https://www.ibm.com/history/fortran
+% JVM, chapitre 2 et paragraphe 2.1 : https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-2.html
+% Navigateur : https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/What_is_JavaScript
+% Diversification : BO2019_NSI_terminale.txt, rubrique Histoire.
+% Exemple date : https://www.apple.com/newsroom/2007/01/09Apple-Reinvents-the-Phone-with-iPhone/
 \begin{corrige}{TNSI-HIST-EVAL-A-EX1}
 
-\textbf{Q1.} Machine universelle de Turing : 1936. Premiers ordinateurs a programme enregistre : 1948. ARPANET : 1969.
+\textbf{Q1.} Machine universelle de Turing : \textbf{1936}.
+Premier programme du Manchester Baby : \textbf{1948}.
+Mise en service d'ARPANET : \textbf{1969}.
 
-\textbf{Q2.} En 1936, les notions de machine, algorithme, langage et information sont pour la première fois pensees comme un tout coherent (concept de machine universelle, capable d'executer tout algorithme calculable).
+\textbf{Q2.} Le repère de 1936 associe les notions de machine, d'algorithme,
+de langage et d'information : la machine universelle décrite par Turing
+peut reproduire le calcul d'une autre machine à partir de sa description.
+Cette réponse explique le repère du programme ; elle ne confond pas modèle
+théorique et construction d'un ordinateur électronique.
 
-\textbf{Q3.} Exemple accepte : diversification en telephones, tablettes, montres connectees, objets connectes, fermes de calcul (toute reponse coherente avec le cours est valable).
+\textbf{Q3.} Les smartphones constituent un exemple recevable, tel l'iPhone
+présenté en 2007. Il s'agit d'un exemple daté, sans prétendre qu'il s'agit du
+premier smartphone. D'autres formes mentionnées dans le cours sont acceptables
+si l'exemple et sa période sont cohérents.
 
 \end{corrige}
 
 \begin{corrige}{TNSI-HIST-EVAL-A-EX2}
 
-\textbf{Q1.} Aux debuts de l'informatique, le matériel portait directement la logique de calcul (cablages specifiques). Aujourd'hui, un même matériel generique (smartphone, ordinateur) execute des logiques très variees portees par le logiciel : le role du matériel a evolue vers plus de generite.
+\textbf{Q1.} Le Mark I de 1944 utilisait déjà des instructions sur bande
+pour différents calculs. Sur un smartphone compatible, on peut télécharger
+et utiliser différentes applications, comme le documente l'App Store en
+2008. Dans les deux cas, la machine est programmable. Les modalités de
+programmation et de distribution, ainsi que les couches logicielles, ont
+évolué : l'utilisateur d'une application ne décrit pas directement chaque
+opération matérielle. On ne peut pas en déduire que les premières machines
+étaient toutes monotâches. Un autre couple d'exemples correctement situé
+et expliqué est recevable.
 
-\textbf{Q2.} Le système d'exploitation gere le partage des ressources materielles (memoire, processeur, peripheriques) entre plusieurs programmes, ajoutant une couche logicielle entre l'utilisateur/les applications et le matériel, ce qui permet a ce dernier de rester generique.
+\textbf{Q2.} Le système d'exploitation gère et partage des ressources
+comme la mémoire, le processeur et les périphériques ; il fournit des
+services aux applications. Cette abstraction ne supprime pas les contraintes :
+une application doit être compatible avec les interfaces disponibles et
+disposer des ressources nécessaires. Un programme qui mesure une grandeur
+avec un capteur exige la présence de ce capteur. Toute autre contrainte
+exacte et expliquée est recevable.
 
 \end{corrige}
 % BEGIN-VERIFY
-% # Les trois dates du corrige A doivent etre celles du cours, et dans
-% # l'ordre que la question d'association attend.
-% corrige = {"Turing": 1936, "programme enregistre": 1948, "ARPANET": 1969}
-% cours = {"Turing": 1936, "programme enregistre": 1948, "ARPANET": 1969}
-% assert corrige == cours
-% assert list(corrige.values()) == sorted(corrige.values())
-% # Q2 justifie 1936 : la date citee est bien celle de la machine
-% # universelle, pas celle de l'architecture de von Neumann (1945).
-% von_neumann = 1945
-% assert corrige["Turing"] < von_neumann < corrige["programme enregistre"]
-% # Q3 situe la diversification APRES les annees 1980, donc apres ARPANET.
-% diversification = 1980
-% assert diversification > corrige["ARPANET"]
+% # Calcul du bareme seulement, aucune date ou attribution n'est certifiee.
+% points_exercice_1 = (4, 3, 3)
+% points_exercice_2 = (5, 5)
+% assert sum(points_exercice_1) == 10
+% assert sum(points_exercice_2) == 10
+% assert sum(points_exercice_1) + sum(points_exercice_2) == 20
 % END-VERIFY

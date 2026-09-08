@@ -1,8 +1,37 @@
 % META: {"id": "TNSI-HIST-CO-002", "chapitre": "TNSI-HISTOIRE-INFORMATIQUE", "type_objet": "corrige", "exercice_ref": "TNSI-HIST-EX-002", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% DOCUMENTARY-SOURCES : les roles et exemples exigent une revue documentaire.
+% Mark I programmable : https://chsi.harvard.edu/harvard-ibm-mark-1-function
+% Applications compatibles en 2008 : https://www.apple.com/newsroom/2008/07/14iPhone-App-Store-Downloads-Top-10-Million-in-First-Weekend/
+% Systeme : https://www.nokia.com/bell-labs/about/dennis-m-ritchie/cacm.html
+% Compilateur : https://www.ibm.com/history/fortran
+% JVM, chapitre 2 et paragraphe 2.1 : https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-2.html
+% Navigateur : https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/What_is_JavaScript
 \begin{corrige}{TNSI-HIST-EX-002}
 
-\textbf{Q1.} Le matériel (processeur, memoire, ecran) reste identique quelle que soit l'application executee : c'est le logiciel installe qui déterminé le comportement du smartphone, illustrant un matériel devenu generique et polyvalent.
+\textbf{Q1.} Le processeur, la mémoire et l'écran sont les mêmes ; les
+programmes utilisés et les traitements demandés changent. Cela illustre la
+polyvalence de cette machine, mais ne suffit pas à établir une évolution
+historique. Le Mark I de 1944, par exemple, recevait déjà des instructions
+sur bande et pouvait effectuer différents calculs. La programmabilité ne
+naît donc pas avec le smartphone.
 
-\textbf{Q2.} Le \textbf{système d'exploitation} gere l'acces aux ressources materielles (memoire, processeur, peripheriques) et fournit une interface commune aux applications. Le \textbf{navigateur} permet d'executer des applications web (ecrites en HTML/CSS/JavaScript) directement, sans installation dediee, ajoutant une couche d'abstraction supplementaire au-dessus du système d'exploitation.
+\textbf{Q2.} Deux explications parmi les suivantes suffisent :
+\begin{itemize}
+  \item Le \textbf{système d'exploitation} gère l'accès aux ressources
+    matérielles et propose des services communs aux applications.
+  \item Une \textbf{machine virtuelle d'exécution}, comme la JVM, prend en
+    charge un format d'instructions intermédiaire. Une réalisation adaptée
+    à la machine permet de l'exécuter sans exposer directement tous les
+    détails de ce matériel au programme.
+  \item Le \textbf{navigateur} peut afficher une interface décrite en HTML
+    et CSS et exécuter du code JavaScript. Il offre ainsi un environnement
+    pour des applications web compatibles.
+  \item Le \textbf{compilateur} traduit un programme source vers un langage
+    cible, par exemple des instructions machine ou un format intermédiaire.
+\end{itemize}
+Une contrainte reste nécessaire : mémoire suffisante, processeur compatible,
+interface logicielle disponible ou présence du capteur utilisé, par exemple.
+Installer un logiciel ne crée pas un capteur absent. D'autres contraintes
+correctement expliquées sont acceptables.
 
 \end{corrige}
