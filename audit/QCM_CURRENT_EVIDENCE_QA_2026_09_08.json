@@ -1,0 +1,220 @@
+{
+  "artifact_type": "development_qa_correction_log",
+  "schema_version": 1,
+  "approves_nothing": true,
+  "observed_head": "b2b9c6f249c010420550bbc74f14f32fc896dc7b",
+  "worktree_observation": true,
+  "generated_at": "2026-09-08T13:47:20.124784+00:00",
+  "sources": [
+    {
+      "path": "scripts/build_qcm_review_proof_reconciliation.py",
+      "before_head": "b2b9c6f249c010420550bbc74f14f32fc896dc7b",
+      "before_sha256": "baed27670e37c220b5ad31a3a0d9bc9d6add63cb30b7cef305f6df45227df0f5",
+      "after_sha256": "fb18ebd296418b8e0dadfd9ff9c523210df37e5dbc37002c73d5236723e0dae6"
+    },
+    {
+      "path": "scripts/build_qcm_independent_evidence_v2.py",
+      "before_head": "b2b9c6f249c010420550bbc74f14f32fc896dc7b",
+      "before_sha256": "f0730dc57293dbe257bd841027843eba1df1eacb201177f2b81e6618040678bc",
+      "after_sha256": "e2ec87a475ca8fa7a92726816c9af8735737545861c0cfde220b391b8b402bf0"
+    },
+    {
+      "path": "scripts/build_qcm_review_closure.py",
+      "before_head": "b2b9c6f249c010420550bbc74f14f32fc896dc7b",
+      "before_sha256": "a6531405b74b2e90fb69883d113b02abecac1089fef41eff49eebcb8888c94cb",
+      "after_sha256": "67ac92e070cf114727aeb9681ac64a945536b8a03d894035403b486af028a858"
+    },
+    {
+      "path": "tests/test_qcm_current_evidence_guard.py",
+      "before_head": "b2b9c6f249c010420550bbc74f14f32fc896dc7b",
+      "before_sha256": null,
+      "after_sha256": "fafc9b4707f8df3d284b596d07e90b799b1e13f81fa38250ea35cb215f41647e"
+    },
+    {
+      "path": "tests/test_qcm_review_closure.py",
+      "before_head": "b2b9c6f249c010420550bbc74f14f32fc896dc7b",
+      "before_sha256": "c3ac1e6f600a6d42cf2f1351f10ae47ad28cc6ccdcbe3773aa6d33ec278eba46",
+      "after_sha256": "c78f89f9be404d29933aa270af24b8b4a12c069e38cad28a6e11769d4c97634a"
+    },
+    {
+      "path": "tests/test_qcm_review_proof_reconciliation.py",
+      "before_head": "b2b9c6f249c010420550bbc74f14f32fc896dc7b",
+      "before_sha256": "094674b1c64e45fcae638a67eef5751b3052e5a720b2ab130448e05f8a24cd53",
+      "after_sha256": "efc803986d7b5af1d9753e2c96010c1633e4cfaa5b7a5da00629f91febc46692"
+    },
+    {
+      "path": "tests/test_qcm_scientific_answer_key_audit.py",
+      "before_head": "b2b9c6f249c010420550bbc74f14f32fc896dc7b",
+      "before_sha256": "81a6be2b7eefa45280cafdf91c7ea1c8ec829140e660e7a94269c743303e586a",
+      "after_sha256": "a2f8dcd13fb22a6a32decfdff5247d59b0ee1d98b0e452a0880d8c164897df77"
+    }
+  ],
+  "findings": [
+    {
+      "id": "QCM-CURRENT-QA-001",
+      "severity": "PRODUCT_P0",
+      "observation": "Closure reads529questions from a stored V2 artifact although the current source set has528 after Q16 retirement.",
+      "proof": "Real pre-fix assertion529==528 failed; production guard now rejects stale sets, counts, paths and complete question digests before using any route.",
+      "status": "CORRECTED_INDEPENDENTLY_VERIFIED_BY_ROOT"
+    },
+    {
+      "id": "QCM-CURRENT-QA-002",
+      "severity": "PRODUCT_P0",
+      "observation": "A conceptual declaration keyed only by chapter/question remains CONCEPTUALLY_REVIEWED after negating its statement or making another option correct.",
+      "proof": "ADGK/Q1 controlled in-memory mutations reproduced both false validations. Legacy declarations lack recorded bindings and now return REVIEW_OPEN without current scientific credit.",
+      "status": "CORRECTED_INDEPENDENTLY_VERIFIED_BY_ROOT"
+    },
+    {
+      "id": "QCM-CURRENT-QA-003",
+      "severity": "PRODUCT_P0",
+      "observation": "A mechanical declaration executes hardcoded constants independently of the current statement; changing ECHANT/Q6 B(3,1/2) toB(6,1/2) still yielded MECHANICALLY_PROVEN for3/2.",
+      "proof": "Controlled mutation reproduced the false key validation. Production no longer executes the unbound declaration; forensic calculation helper explicitly grants no current credit.",
+      "status": "CORRECTED_INDEPENDENTLY_VERIFIED_BY_ROOT"
+    },
+    {
+      "id": "QCM-CURRENT-QA-004",
+      "severity": "PRODUCT_P2",
+      "observation": "Historical tests assumed all old questions remained CURRENT and imposed frozen529/301counts.",
+      "proof": "Q16 is retained in immutable v1 evidence and explicitly present only in historical_not_current; current/historical intersection, differences and semantic comparisons determine the partition.",
+      "status": "CORRECTED_INDEPENDENTLY_VERIFIED_BY_ROOT"
+    },
+    {
+      "id": "QCM-CURRENT-QA-005",
+      "severity": "PRODUCT_P0",
+      "observation": "The historical semantic digest explicitly excluded remediation refs, but no complete current binding existed.",
+      "proof": "A separate exact current-payload digest includes letters, ordered options, raw diacritics, diagnostics and all remediation references. Mutating any of those invalidates the current binding. The normalized historical semantic digest contract is unchanged.",
+      "status": "CORRECTED_INDEPENDENTLY_VERIFIED_BY_ROOT"
+    },
+    {
+      "id": "QCM-CURRENT-QA-006",
+      "severity": "PRODUCT_P0",
+      "observation": "Generic published-function solver scans all chapters by name, executes the first matching source in-process and omits its digest.",
+      "source": "scripts/qcm_independent_solver.py:_published_function_parameter_role",
+      "status": "OPEN_SEPARATE_FOLLOWUP",
+      "current_scientific_credit": false
+    },
+    {
+      "id": "QCM-CURRENT-QA-007",
+      "severity": "PRODUCT_P0",
+      "observation": "The first proposed current digest reused historical normalization; a coherent letter permutation preserved identity while making a stored computed letter stale. Accents and option order were also ignored.",
+      "proof": "Peer mutations reproduced both missing invalidations before correction. Exact current payload and ordered options now have separate binding.",
+      "status": "CORRECTED_INDEPENDENTLY_VERIFIED_BY_ROOT"
+    },
+    {
+      "id": "QCM-CURRENT-QA-008",
+      "severity": "PRODUCT_P0",
+      "observation": "An unbound historical conceptual answer/refutation could create a current KEY_DISAGREEMENT or DERIVATION_FAILED after the current key changed.",
+      "proof": "Changing ADGK/Q1 key to B reproduced a false current failure. Production now returns REVIEW_OPEN with an explicitly non-authoritative historical observation; structural inspection is a forensic helper only.",
+      "status": "CORRECTED_INDEPENDENTLY_VERIFIED_BY_ROOT"
+    },
+    {
+      "id": "QCM-CURRENT-QA-009",
+      "severity": "PRODUCT_P0",
+      "observation": "Freshness stamped only initial paths and could miss an added QCM file with no questions.",
+      "proof": "A controlled empty QCM file inserted at the final stamp reproduced the omission. Construction now compares initial/final complete source and question sets, reloads current bindings and compares initial/final input digests.",
+      "status": "CORRECTED_INDEPENDENTLY_VERIFIED_BY_ROOT"
+    },
+    {
+      "id": "QCM-CURRENT-QA-010",
+      "severity": "PRODUCT_P0",
+      "observation": "Current closure checks source-question payloads but does not yet bind answer-key routes to the current producer/solver implementation or validate historical normalized identity beyond its previous contract. Method changes can invalidate old key proofs even if a question payload is unchanged.",
+      "status": "OPEN_SEPARATE_FOLLOWUP",
+      "current_scientific_credit": false
+    }
+  ],
+  "tests": [
+    {
+      "junit": "/tmp/qcm-current-qa-targeted.xml",
+      "sha256": "82158c59c57bad4be458124a1293704f35cf65dfb04a38771bca4d906ff4d4d8",
+      "collected_in_selection": 32,
+      "passed": 32,
+      "failed": 0,
+      "scope": "targeted selection; freshness aggregate checks are reported separately"
+    },
+    {
+      "junit": "/tmp/qcm-current-qa-historical.xml",
+      "sha256": "b78abb262350eff9f5303e580435850b0627cb2dabae28c32df80bfeec4c5898",
+      "collected_in_selection": 3,
+      "passed": 3,
+      "failed": 0,
+      "scope": "targeted selection; freshness aggregate checks are reported separately"
+    }
+  ],
+  "red_evidence": {
+    "initial_actual_defects": "/tmp/qcm-stale-consumer-red.log",
+    "initial_new_regressions": "/tmp/qcm-current-evidence-red.log",
+    "actual_probe_failures": 4,
+    "initial_regression_failures": 8,
+    "peer_mutations": {
+      "path": "/tmp/qcm-current-qa-peer-red.log",
+      "sha256": "a3906f094e7123a94dd754a5f16b11e20e7353e5093c35b31aa6f51c05384f17",
+      "failures_observed_before_correction": 4
+    }
+  },
+  "expected_stale_checks": [
+    {
+      "command": "python scripts/build_qcm_review_closure.py --check",
+      "rc": 1,
+      "reason": "stale QCM evidence: current question set differs"
+    },
+    {
+      "test": "tests/test_qcm_review_proof_reconciliation.py::test_the_committed_artifact_is_current",
+      "result": "FAIL_STALE_AGGREGATE",
+      "other_tests_in_file_passed": 13
+    },
+    {
+      "test": "tests/test_qcm_review_closure.py::test_the_closure_is_reproducible",
+      "result": "NOT_RUN_IN_TARGETED_SELECTION; rejects stale V2 before closure construction"
+    }
+  ],
+  "not_run": [
+    "Global V2 generation / tests requiring it: published-code execution family is not yet confined; no silent skip or xfail added.",
+    "Global report regeneration while TNSI QCM sources mutate."
+  ],
+  "immutable_evidence_preserved": [
+    "audit/QCM_SCIENTIFIC_ANSWER_KEY_AUDIT.json",
+    "audit/qcm_review_evidence/*.json",
+    "Historical human queues and receipts",
+    "scripts/qcm_reviews.py"
+  ],
+  "review_semantics": {
+    "answer_key_proof": "Distinct route; never full scientific review by itself",
+    "full_scientific_review": "PENDING until a current independent source/dependency-bound review is consumed",
+    "human_approval": "PENDING, no agent approval"
+  },
+  "scope_limit": "This first fail-closed QA batch does not ingest the independent-review index or ledger. The actual current reviews must be integrated in the next bounded step; unbound legacy declarations are never automatically rebound.",
+  "review_status": "BOUNDED_QA_INDEPENDENTLY_REVIEWED; OPEN_FOLLOWUPS_REMAIN",
+  "root_counter_review": {
+    "reviewer": "/root",
+    "head": "88689dc52592f8e556e87f9291256668287dd149",
+    "scope": "Reviewed all seven code/test diffs and the complete new mutation module. The repaired functions distinguish exact current payload identity from historical normalization and refuse ID-only current review credit. The tests no longer require retired questions or editorial population quotas to remain current. Historical objects are retained without full scientific or human approval credit.",
+    "observed_tests": [
+      {
+        "command": "python -m pytest -q tests/test_qcm_current_evidence_guard.py tests/test_qcm_review_closure.py -k \"not test_the_closure_is_reproducible\"",
+        "rc": 0,
+        "passed": 32,
+        "deselected": 1
+      },
+      {
+        "command": "python -m pytest -q tests/test_qcm_review_proof_reconciliation.py",
+        "rc": 1,
+        "passed": 13,
+        "failed": 1,
+        "failure": "test_the_committed_artifact_is_current: stored historical529=301+228 differs from working528=272+256; no stale artifact was regenerated to mask this."
+      },
+      {
+        "selection": "Three historical audit tests excluding V2 execution",
+        "rc": 0,
+        "passed": 3,
+        "deselected": 8
+      },
+      {
+        "command": "python scripts/build_qcm_review_closure.py --check",
+        "rc": 1,
+        "reason": "stale QCM evidence: current question set differs"
+      }
+    ],
+    "limits": "This is a bounded fail-closed QA repair. Legacy receipts, stored aggregate outputs and human queues remain unchanged. Published-function execution and producer/solver method binding remain open follow-ups. Current review-index ingestion is still required; no complete QCM review closure is claimed.",
+    "human_approval": false
+  }
+}

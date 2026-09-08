@@ -67,9 +67,10 @@ def test_a_derivation_never_sees_the_answer_key() -> None:
         "cle": "A",
         "diagnostics": {"B": {"erreur": "…"}},
     }
-    verdict = closure._evaluer_mecanique(question, declarations.PYTHON, espionne)
+    verdict = closure._calculate_legacy_answer(question, declarations.PYTHON, espionne)
 
-    assert verdict["state"] == "MECHANICALLY_PROVEN"
+    assert verdict["state"] == "LEGACY_DERIVATION_RESULT"
+    assert verdict["current_scientific_credit"] is False
     assert recu["cles"] == ["A", "B"]
     assert recu["valeurs"] == ["faux", "vrai"]
     # Ni la clé ni les diagnostics n'ont pu être lus : ils ne sont pas passés.
@@ -83,14 +84,14 @@ def test_a_derivation_cannot_mutate_the_question() -> None:
         return "A"
 
     question = {"options": {"A": "vrai", "B": "faux"}, "cle": "A"}
-    closure._evaluer_mecanique(question, declarations.PYTHON, vandale)
+    closure._calculate_legacy_answer(question, declarations.PYTHON, vandale)
     assert question["options"]["A"] == "vrai"
 
 
 def test_a_wrong_key_is_reported_not_absorbed() -> None:
     """Si la clé et la dérivation divergent, l'artefact le DIT."""
     question = {"options": {"A": "vrai", "B": "faux"}, "cle": "B"}
-    verdict = closure._evaluer_mecanique(
+    verdict = closure._calculate_legacy_answer(
         question, declarations.PYTHON, lambda options: "A"
     )
     assert verdict["state"] == "KEY_DISAGREEMENT"
@@ -102,7 +103,7 @@ def test_a_derivation_that_does_not_conclude_is_a_failure() -> None:
         raise ValueError("deux options conviennent")
 
     question = {"options": {"A": "vrai", "B": "faux"}, "cle": "A"}
-    verdict = closure._evaluer_mecanique(
+    verdict = closure._calculate_legacy_answer(
         question, declarations.PYTHON, indecise
     )
     assert verdict["state"] == "DERIVATION_FAILED"
@@ -120,7 +121,7 @@ def test_a_review_missing_one_refutation_is_refused() -> None:
         "source_programme": "X::C1",
         "refutations": {"B": "B est faux parce qu'il confond deux notions."},
     }
-    verdict = closure._evaluer_conceptuelle(question, revue, ROOT)
+    verdict = closure._inspect_legacy_conceptual_review(question, revue, ROOT)
     assert verdict["state"] == "DERIVATION_FAILED"
     assert "C" in verdict["detail"]
 
@@ -134,7 +135,7 @@ def test_a_review_naming_an_absent_course_is_refused() -> None:
         "source_programme": "X::C1",
         "refutations": {"B": "B confond la précondition et la postcondition."},
     }
-    verdict = closure._evaluer_conceptuelle(question, revue, ROOT)
+    verdict = closure._inspect_legacy_conceptual_review(question, revue, ROOT)
     assert verdict["state"] == "DERIVATION_FAILED"
     assert "absent du dépôt" in verdict["detail"]
 
@@ -149,7 +150,7 @@ def test_a_review_with_a_token_refutation_is_refused() -> None:
         "source_programme": "X::C1",
         "refutations": {"B": "Faux."},
     }
-    verdict = closure._evaluer_conceptuelle(question, revue, ROOT)
+    verdict = closure._inspect_legacy_conceptual_review(question, revue, ROOT)
     assert verdict["state"] == "DERIVATION_FAILED"
     assert "trop brèves" in verdict["detail"]
 

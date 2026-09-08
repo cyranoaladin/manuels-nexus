@@ -43,13 +43,18 @@ def test_the_partition_covers_the_current_corpus_exactly(payload: dict) -> None:
     # le corpus courant, sans recouvrement ni ligne orpheline.
     corpus = R._current_questions() if hasattr(R, "_current_questions") else None
     total = counts["CURRENT_QCM_QUESTION_COUNT"]
-    assert total >= 490
+    assert total == len(R._load_corpus())
     if corpus is not None:
         assert total == len(corpus)
     assert (
         counts["CARRIED_FORWARD_UNCHANGED"] + counts["REPROOF_REQUIRED"] == total
     )
-    assert counts["PROOF_ROWS_WITHOUT_CURRENT_QUESTION"] == 0
+    old_keys = set(R._load_proof())
+    current_keys = set(R._load_corpus())
+    retired = {(row["chapter"], row["question_id"]) for row in payload["historical_not_current"]}
+    assert retired == old_keys - current_keys
+    assert counts["PROOF_ROWS_WITHOUT_CURRENT_QUESTION"] == len(retired)
+    assert counts["HISTORICAL_QUESTIONS_STILL_CURRENT"] + len(retired) == len(old_keys)
 
     carried = {(e["chapter"], e["question_id"]) for e in payload["carried_forward"]}
     reproof = {(e["chapter"], e["question_id"]) for e in payload["reproof_required"]}
@@ -152,10 +157,18 @@ def test_a_key_that_only_moves_letter_is_not_a_value_change(payload: dict) -> No
     # doit vraiment etre refaite. 11 depuis la completion causale des douze
     # diagnostics courts de la cloture TSPE : huit de ces questions avaient
     # aussi une permutation de cle, et un modele d'erreur modifie se re-prouve.
-    assert len(changed) == 11
-    assert not any(
-        "KEY_VALUE_CHANGED" in e["delta_classes"] for e in payload["reproof_required"]
-    )
+    proof = R._load_proof()
+    corpus = R._load_corpus()
+    for entry in changed:
+        key = (entry["chapter"], entry["question_id"])
+        old = proof[key]
+        question = corpus[key][0]
+        assert R._declared_answer(old) != question["correcte"]
+        assert R._normalise(old["options"][R._declared_answer(old)]) == R._normalise(question["options"][question["correcte"]])
+    # Other questions may legitimately change their options/value semantics.
+    # Each such change must stay explicitly reproof-required, never inherited.
+    assert all(entry["reason"] == "SEMANTIC_CHANGE" for entry in payload["reproof_required"]
+               if "KEY_VALUE_CHANGED" in entry["delta_classes"])
 
 
 # -- Une modification de VARALEA ne perime que VARALEA -----------------------
@@ -211,7 +224,14 @@ def test_a_varalea_change_never_invalidates_another_chapter(payload: dict) -> No
     assert "KEY_VALUE_CHANGED" not in entry["delta_classes"]
 
     carried_chapters = {e["chapter"] for e in payload["carried_forward"]}
-    assert len(carried_chapters) == 34
+    proof = R._load_proof()
+    corpus = R._load_corpus()
+    expected_carried_chapters = {
+        chapter for (chapter, qid), (question, _path) in corpus.items()
+        if (chapter, qid) in proof and chapter not in R.FULL_REPROOF_CHAPTERS
+        and R._semantic_fields_from_proof(proof[(chapter, qid)]) == R._semantic_fields_from_source(question)
+    }
+    assert carried_chapters == expected_carried_chapters
 
 
 # -- Le condense semantique -------------------------------------------------
@@ -265,7 +285,16 @@ def test_uncaptured_renvois_are_reported_not_absorbed(payload: dict) -> None:
     gaps = payload["proof_field_coverage_gaps"]
     # 41 depuis l'entree du corpus NSI dans le routage : la preuve historique
     # n'a jamais capture le champ renvoi, quel que soit le manuel.
-    assert len(gaps) == 41
+    proof = R._load_proof()
+    corpus = R._load_corpus()
+    expected = set()
+    for key in set(proof) & set(corpus):
+        old = R._by_value(proof[key]["options"], R._proof_renvois(proof[key]))
+        question = corpus[key][0]
+        current = R._by_value(question["options"], R._source_renvois(question))
+        if set(current) - set(old):
+            expected.add(key)
+    assert {(gap["chapter"], gap["question_id"]) for gap in gaps} == expected
     assert {gap["field"] for gap in gaps} == {"diagnostics.renvoi"}
     assert all(gap["options"] for gap in gaps)
     assert payload["semantic_digest_contract"]["excluded"] == ["diagnostics.renvoi"]

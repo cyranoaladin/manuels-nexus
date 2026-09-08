@@ -178,6 +178,9 @@ def build_evidence() -> dict[str, Any]:
             "question_id": question_id,
             "source_path": source_path,
             "semantic_question_digest": semantic,
+            "full_question_digest": reconciliation.current_question_digest(question),
+            "scientific_review_state": "PENDING_SOURCE_BOUND_REVIEW",
+            "human_approval": "PENDING",
             "capacity": question.get("capacite"),
         }
 
@@ -185,6 +188,7 @@ def build_evidence() -> dict[str, Any]:
             entry = {
                 **common,
                 "evidence_status": "CARRIED_FORWARD_IDENTICAL",
+                "answer_key_state": "ANSWER_KEY_PROVEN_BY_IDENTICAL_HISTORICAL_EVIDENCE",
                 "solver_family": None,
                 "solver_version": None,
                 "solver_input_digest": None,
@@ -211,6 +215,7 @@ def build_evidence() -> dict[str, Any]:
             entry = {
                 **common,
                 "evidence_status": "HUMAN_REVIEW_REQUIRED",
+                "answer_key_state": "PENDING",
                 "solver_family": None,
                 "solver_version": solver.SOLVER_VERSION,
                 "solver_input_digest": sanitized.digest(),
@@ -249,6 +254,7 @@ def build_evidence() -> dict[str, Any]:
         entry = {
             **common,
             "evidence_status": "MACHINE_RECALCULATED",
+            "answer_key_state": "ANSWER_KEY_PROVEN",
             "solver_family": result.family,
             "solver_version": solver.SOLVER_VERSION,
             "solver_input_digest": sanitized.digest(),
@@ -311,6 +317,8 @@ def build_evidence() -> dict[str, Any]:
         "solver_version": solver.SOLVER_VERSION,
         "supersedes_without_rewriting": "audit/qcm_review_evidence/*.json (v1, HISTORICAL)",
         "approves_nothing": True,
+        "answer_key_proof_is_not_complete_scientific_review": True,
+        "historical_not_current": routing["historical_not_current"],
         "evidence_schema_fields": list(EVIDENCE_SCHEMA_FIELDS),
         "independence_contract": {
             "solver_never_receives": sorted(solver.FORBIDDEN_INPUT_FIELDS),

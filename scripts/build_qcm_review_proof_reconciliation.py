@@ -197,6 +197,19 @@ def semantic_question_digest(fields: dict[str, Any]) -> str:
     return "sha256:" + hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def current_question_digest(question: dict[str, Any]) -> str:
+    """Bind the exact current payload, including letters, order and accents.
+
+    Historical semantic identity deliberately tolerates editorial changes and
+    omits references not captured then. A stored current letter or full review
+    cannot inherit those tolerances. Ordered options remain explicit even when
+    the enclosing JSON object is serialized with sorted keys.
+    """
+    fields = dict(question)
+    fields["options"] = list(question["options"].items())
+    return semantic_question_digest(fields)
+
+
 def proof_row_options(row: dict[str, Any]) -> dict[str, str]:
     return dict(row["options"])
 
@@ -208,6 +221,9 @@ def _classify_delta(
     """Classification exacte du delta, selon les classes de la gouvernance."""
 
     classes: list[str] = []
+
+    if proof_fields["capacity"] != source_fields["capacity"]:
+        classes.append("CAPACITY_CHANGE")
 
     if proof_row["statement"] != question["enonce"]:
         if proof_fields["statement"] == source_fields["statement"]:
@@ -249,14 +265,20 @@ def _load_proof() -> dict[tuple[str, str], dict[str, Any]]:
     return proof
 
 
-def _load_corpus() -> dict[tuple[str, str], tuple[dict[str, Any], str]]:
+def _qcm_sources(root: Path | None = None) -> tuple[Path, ...]:
+    """Inventory every QCM source, including documents with no questions."""
+    roots = QCM_ROOTS if root is None else tuple(root / path.relative_to(ROOT) for path in QCM_ROOTS)
+    return tuple(
+        path for racine in roots for path in sorted(racine.glob("*/qcm/*-QCM.json"))
+    )
+
+
+def _load_corpus(root: Path | None = None) -> dict[tuple[str, str], tuple[dict[str, Any], str]]:
     corpus: dict[tuple[str, str], tuple[dict[str, Any], str]] = {}
-    sources = [
-        path for racine in QCM_ROOTS for path in sorted(racine.glob("*/qcm/*-QCM.json"))
-    ]
-    for path in sources:
+    actual_root = root or ROOT
+    for path in _qcm_sources(root):
         document = json.loads(path.read_text(encoding="utf-8"))
-        relative = path.relative_to(ROOT).as_posix()
+        relative = path.relative_to(actual_root).as_posix()
         for question in document["questions"]:
             key = (document["chapitre"], question["id"])
             if key in corpus:
@@ -270,6 +292,20 @@ def build_reconciliation() -> dict[str, Any]:
     corpus = _load_corpus()
 
     orphan_proof_rows = sorted(f"{c}/{q}" for c, q in set(proof) - set(corpus))
+
+    historical_not_current = [
+        {
+            "chapter": chapter, "question_id": question_id,
+            "source_path": proof[(chapter, question_id)]["source_path"],
+            "proof_semantic_digest": semantic_question_digest(
+                _semantic_fields_from_proof(proof[(chapter, question_id)])
+            ),
+            "state": "HISTORICAL_NOT_CURRENT",
+            "current_scientific_credit": False,
+            "reason": "QUESTION_ABSENT_FROM_CURRENT_CORPUS",
+        }
+        for chapter, question_id in sorted(set(proof) - set(corpus))
+    ]
 
     carried: list[dict[str, Any]] = []
     reproof: list[dict[str, Any]] = []
@@ -376,6 +412,8 @@ def build_reconciliation() -> dict[str, Any]:
         "CARRIED_FORWARD_UNCHANGED": len(carried),
         "REPROOF_REQUIRED": len(reproof),
         "PROOF_ROWS_WITHOUT_CURRENT_QUESTION": len(orphan_proof_rows),
+        "HISTORICAL_QUESTIONS_STILL_CURRENT": len(set(proof) & set(corpus)),
+        "HISTORICAL_QUESTIONS_NOT_CURRENT": len(historical_not_current),
     }
     if counts["CARRIED_FORWARD_UNCHANGED"] + counts["REPROOF_REQUIRED"] != len(corpus):
         raise ReconciliationError("la partition ne couvre pas le corpus courant")
@@ -418,6 +456,7 @@ def build_reconciliation() -> dict[str, Any]:
         ),
         "aggregate_current_set_digest": "sha256:" + aggregate.hexdigest(),
         "proof_rows_without_current_question": orphan_proof_rows,
+        "historical_not_current": historical_not_current,
         "carried_forward": carried,
         "reproof_required": reproof,
         "proof_field_coverage_gaps": coverage_gaps,

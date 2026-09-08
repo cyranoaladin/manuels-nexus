@@ -52,13 +52,10 @@ def _source_digest() -> str:
 
 
 def test_the_v1_audit_is_historical_and_no_longer_covers_the_current_corpus() -> None:
-    """La v1 couvrait 331 questions ; le corpus en porte 337.
+    """The historical331 remain readable, including objects retired since.
 
-    L'ancienne assertion exigeait que la v1 couvre le corpus courant. Elle
-    etait devenue fausse, et la rendre verte en rafraichissant un condense
-    aurait masque six questions jamais prouvees. La v1 est desormais tenue
-    pour ce qu'elle est : un enregistrement HISTORIQUE dont le perimetre est
-    borne, et c'est la v2 qui doit rendre compte des 348.
+    Current evidence must cover exactly the filesystem population. Neither an
+    old total nor set inclusion can establish that identity after retirement.
     """
 
     payload = json.loads(AUDIT.read_text(encoding="utf-8"))
@@ -67,46 +64,10 @@ def test_the_v1_audit_is_historical_and_no_longer_covers_the_current_corpus() ->
     current = _source_keys()
 
     assert len(historical) == 331
-    # 479 depuis l'entree des 142 questions NSI dans le corpus route, 490 quand
-    # le QCM de TSPE-GEOMETRIE-ESPACE est passe de cinq a seize items, puis 529
-    # depuis les trente-neuf questions ecrites pour les capacites qu'aucune
-    # question n'evaluait.
-    assert len(current) == 529
-    assert historical < current, "la v1 est un sous-ensemble strict du corpus"
-    delta = current - historical
-    nsi = {key for key in delta if key[0].startswith(("1NSI", "TNSI"))}
-    assert len(nsi) == 142
-    # Le couple (chapitre, question) et non l'identifiant nu : deux chapitres
-    # portent chacun un Q16, et les comparer sans leur chapitre confondrait
-    # une question neuve avec une question deja couverte par la v1.
-    apres_v1 = {
-        "1SPE-SECOND-DEGRE": (19, 21),
-        "1SPE-VARIABLES-ALEATOIRES": (16, 22),
-        "TCOMPL-ECHANTILLONNAGE": (6, 8),
-        "TCOMPL-INFERENCE-BAYESIENNE": (6, 7),
-        "TCOMPL-LOGARITHME-HISTORIQUE": (6, 7),
-        "TCOMPL-MODELES-EVOLUTION": (6, 8),
-        "TCOMPL-MODELES-FONCTION": (6, 10),
-        "TCOMPL-TEMPS-ATTENTE": (6, 10),
-        "TEXP-ARITHMETIQUE": (6, 12),
-        "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE": (6, 8),
-        "TEXP-COMPLEXES-TRIGO-POLYNOMES": (6, 9),
-        "TEXP-GRAPHES": (6, 7),
-        "TEXP-MATRICES-MARKOV": (6, 8),
-        "TSPE-CALCUL-INTEGRAL": (6, 11),
-        "TSPE-GEOMETRIE-ESPACE": (6, 17),
-        "TSPE-PROBABILITES": (7, 11),
-    }
-    assert (delta - nsi) == {
-        (chapitre, f"Q{i}")
-        for chapitre, (debut, fin) in apres_v1.items()
-        for i in range(debut, fin)
-    }
-    hors_v1 = {chapter for chapter, _question in current - historical}
-    assert {c for c in hors_v1 if not c.startswith(("1NSI", "TNSI"))} == set(
-        apres_v1
-    )
-    assert len({c for c in hors_v1 if c.startswith(("1NSI", "TNSI"))}) == 17
+    retired = historical - current
+    assert retired == {("1SPE-SECOND-DEGRE", "Q16")}
+    assert (historical & current) | (current - historical) == current
+    assert (historical & current) | retired == historical
 
     v2 = V2.build_evidence()
     assert v2["counts"]["question_count"] == len(current)
@@ -156,19 +117,22 @@ def test_every_historical_row_is_accounted_for_by_the_v2_evidence() -> None:
         (entry["chapter"], entry["question_id"]): entry["evidence_status"]
         for entry in v2["questions"]
     }
-    assert observed <= set(states), "aucune ligne historique ne doit disparaitre"
+    retired = {(row["chapter"], row["question_id"]) for row in v2["historical_not_current"]}
+    assert observed == (observed & set(states)) | retired
+    assert retired.isdisjoint(states), "une question retirée ne doit jamais être CURRENT"
     assert all(
         states[key]
         in {"CARRIED_FORWARD_IDENTICAL", "MACHINE_RECALCULATED", "HUMAN_REVIEW_REQUIRED"}
-        for key in observed
+        for key in observed & set(states)
     )
 
-    carried = {key for key in observed if states[key] == "CARRIED_FORWARD_IDENTICAL"}
-    assert len(carried) == 301
+    carried = {key for key in observed & set(states) if states[key] == "CARRIED_FORWARD_IDENTICAL"}
+    routing = V2.reconciliation.build_reconciliation()
+    assert carried == {(row["chapter"], row["question_id"]) for row in routing["carried_forward"]}
     assert not any(chapter == "1SPE-VARIABLES-ALEATOIRES" for chapter, _q in carried)
 
 
-def test_canonical_rows_are_objectively_green_but_not_human_approved() -> None:
+def test_historical_rows_record_their_old_verdicts_without_human_approval() -> None:
     payload = json.loads(AUDIT.read_text(encoding="utf-8"))
     for row in payload["questions"]:
         assert row["answer_key_status"] == "PASS"
@@ -212,7 +176,7 @@ def test_the_v1_builder_refuses_to_produce_on_a_changed_corpus() -> None:
 def test_the_v2_evidence_accounts_for_every_question_without_unknown() -> None:
     v2 = V2.build_evidence()
     counts = v2["counts"]
-    assert counts["question_count"] == 529
+    assert counts["question_count"] == len(_source_keys())
     assert (
         counts["CARRIED_FORWARD_IDENTICAL"]
         + counts["MACHINE_RECALCULATED"]
@@ -275,7 +239,7 @@ def test_human_required_questions_stay_release_blocking() -> None:
         assert entry["computed_unique_answer"] is None
 
 
-def test_three_requested_false_greens_are_closed_in_current_audit() -> None:
+def test_three_old_findings_preserve_their_historical_verdicts() -> None:
     payload = json.loads(AUDIT.read_text(encoding="utf-8"))
     rows = {
         (row["chapter"], row["question_id"]): row for row in payload["questions"]
@@ -288,3 +252,14 @@ def test_three_requested_false_greens_are_closed_in_current_audit() -> None:
         assert rows[key]["answer_key_status"] == "PASS"
         assert rows[key]["unique_correct_option"] == "PASS"
         assert rows[key]["diagnostic_consistency"] == "PASS"
+
+
+def test_historical_second_degree_q16_is_excluded_from_current_evidence():
+    historical = json.loads(AUDIT.read_text(encoding="utf-8"))
+    key = ("1SPE-SECOND-DEGRE", "Q16")
+    row = next(row for row in historical["questions"] if (row["chapter"], row["question_id"]) == key)
+    assert row["answer_key_status"] == "PASS"  # Historical receipt remains untouched.
+    current = V2.build_evidence()
+    assert key not in {(row["chapter"], row["question_id"]) for row in current["questions"]}
+    retired = next(row for row in current["historical_not_current"] if (row["chapter"], row["question_id"]) == key)
+    assert retired["current_scientific_credit"] is False

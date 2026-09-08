@@ -1,23 +1,15 @@
 #!/usr/bin/env python3
-"""Ferme les 166 QCM restés en `HUMAN_REVIEW_REQUIRED`, et le prouve.
+"""Separate current QCM key proofs, full scientific review, and human approval.
 
-Ce producteur ne décide de rien : il EXÉCUTE les dérivations mécaniques
-déclarées dans `qcm_reviews.py`, VÉRIFIE les revues conceptuelles, et
-rapproche le résultat de la clé du QCM.
+Current routing must match the exact current question set and complete semantic
+content, including remediation references. A stale aggregate cannot certify a
+current question or contribute a retired question to current totals.
 
-L'INDÉPENDANCE EST STRUCTURELLE, pas promise. Une dérivation mécanique reçoit
-le dictionnaire des options et rien d'autre : ni la clé, ni les diagnostics,
-ni le champ `correcte`. Elle calcule une valeur, cherche l'option qui la
-décrit, et renvoie une lettre. Le rapprochement avec la clé se fait ici,
-après. Une divergence est un DÉFAUT publié, jamais une valeur ajustée.
-
-Une revue conceptuelle, elle, doit nommer : le raisonnement, l'objet de cours
-qui l'établit — et ce fichier doit exister —, la capacité du programme, et une
-réfutation par distracteur. Le producteur refuse une revue qui laisserait un
-distracteur sans réfutation, ou qui en réfuterait un qui n'existe pas.
-
-Aucun rapprochement par mots-clés : une réfutation absente est absente, et
-aucune ressemblance de vocabulaire ne la remplace.
+The declarations in qcm_reviews.py have no recorded source/dependency binding.
+They remain inspectable historical evidence, and cannot close a current review.
+A new binding must come from an actual independent review; this producer never
+manufactures one by hashing current content after the fact. Generic answer-key
+proofs remain distinct from complete scientific review and human approval.
 """
 
 from __future__ import annotations
@@ -35,6 +27,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import evidence_freshness as freshness  # noqa: E402
 import qcm_reviews as declarations  # noqa: E402
+import build_qcm_review_proof_reconciliation as reconciliation  # noqa: E402
 
 EVIDENCE = ROOT / "audit/QCM_INDEPENDENT_EVIDENCE_V2.json"
 OUTPUT_JSON = ROOT / "audit/QCM_REVIEW_CLOSURE.json"
@@ -47,36 +40,66 @@ DISAGREEMENT = "KEY_DISAGREEMENT"
 BROKEN = "DERIVATION_FAILED"
 
 
-def _questions(root: Path) -> list[dict[str, Any]]:
+def _current_evidence(root: Path) -> dict[str, Any]:
+    """Fail closed before using an old route or count as current evidence."""
     evidence = json.loads((root / EVIDENCE.relative_to(ROOT)).read_text("utf-8"))
-    ouvertes = [
-        q for q in evidence["questions"]
-        if q["evidence_status"] == "HUMAN_REVIEW_REQUIRED"
-    ]
-    corpus: dict[str, Any] = {}
-    enrichies = []
-    for question in ouvertes:
-        chemin = question["source_path"]
-        if chemin not in corpus:
-            corpus[chemin] = json.loads((root / chemin).read_text("utf-8"))
-        brute = next(
-            x for x in corpus[chemin]["questions"]
-            if x["id"] == question["question_id"]
-        )
-        enrichies.append({
-            "chapter": question["chapter"],
-            "question_id": question["question_id"],
-            "capacity": brute.get("capacite"),
-            "source_path": chemin,
-            "enonce": brute["enonce"],
-            "options": dict(brute["options"]),
-            "cle": brute["correcte"],
-            "diagnostics": brute.get("diagnostics") or {},
+    corpus = reconciliation._load_corpus(root)
+    rows = evidence.get("questions") or []
+    keys = [(row.get("chapter"), row.get("question_id")) for row in rows]
+    if len(set(keys)) != len(keys) or set(keys) != set(corpus):
+        raise ValueError("stale QCM evidence: current question set differs")
+    states = {"CARRIED_FORWARD_IDENTICAL", "MACHINE_RECALCULATED", "HUMAN_REVIEW_REQUIRED"}
+    counts = evidence.get("counts") or {}
+    if counts.get("question_count") != len(corpus) or counts.get("UNKNOWN") != 0:
+        raise ValueError("stale QCM evidence: current counts differ")
+    for status in states:
+        if counts.get(status) != sum(row.get("evidence_status") == status for row in rows):
+            raise ValueError(f"stale QCM evidence: count differs for {status}")
+    for row in rows:
+        key = (row["chapter"], row["question_id"])
+        question, source = corpus[key]
+        if (row.get("evidence_status") not in states or row.get("source_path") != source
+                or row.get("full_question_digest") != reconciliation.current_question_digest(question)):
+            raise ValueError(f"stale QCM evidence: current content differs for {key}")
+    return evidence
+
+
+def _questions(root: Path) -> list[dict[str, Any]]:
+    # Every current question needs a full scientific review. A proven answer
+    # key alone does not review its diagnostics, references or programme fit.
+    evidence = _current_evidence(root)
+    corpus = reconciliation._load_corpus(root)
+    enriched = []
+    for row in evidence["questions"]:
+        brute, source = corpus[(row["chapter"], row["question_id"])]
+        enriched.append({
+            "chapter": row["chapter"], "question_id": row["question_id"],
+            "capacity": brute.get("capacite"), "source_path": source,
+            "enonce": brute["enonce"], "options": dict(brute["options"]),
+            "cle": brute["correcte"], "diagnostics": brute.get("diagnostics") or {},
+            "full_question_digest": row["full_question_digest"],
+            "answer_key_state": row.get("answer_key_state", "PENDING"),
+            "historical_route": row["evidence_status"],
         })
-    return enrichies
+    return enriched
 
 
 def _evaluer_mecanique(question, famille, derivation) -> dict[str, Any]:
+    """Legacy ID-only declarations have no binding to their reviewed statement.
+
+    Never manufacture that missing binding from the current source. The old
+    calculation remains inspectable below; a current review belongs to the
+    source/dependency-bound review index, not this declaration table.
+    """
+    return {
+        "state": OPEN, "family": famille, "computed": None,
+        "current_scientific_credit": False,
+        "detail": "legacy mechanical declaration has no recorded current source/dependency binding",
+    }
+
+
+def _calculate_legacy_answer(question, famille, derivation) -> dict[str, Any]:
+    """Forensic helper only: computes a declaration, never current evidence."""
     # La dérivation ne reçoit QUE les options : une copie, pour qu'elle ne
     # puisse pas non plus muter la question.
     options = dict(question["options"])
@@ -107,10 +130,28 @@ def _evaluer_mecanique(question, famille, derivation) -> dict[str, Any]:
                 f"{question['cle']}"
             ),
         }
-    return {"state": PROVEN, "family": famille, "computed": lettre}
+    return {"state": "LEGACY_DERIVATION_RESULT", "family": famille, "computed": lettre,
+            "current_scientific_credit": False}
 
 
 def _evaluer_conceptuelle(question, revue, root: Path) -> dict[str, Any]:
+    """An unbound historical assertion has no authority over a current key."""
+    return {
+        "state": OPEN,
+        "computed": None,
+        "current_scientific_credit": False,
+        "detail": "legacy conceptual review has no recorded current source/dependency binding",
+        "historical_observation": {
+            "declared_answer": revue.get("reponse"),
+            "source_cours": revue.get("source_cours"),
+            "source_programme": revue.get("source_programme"),
+            "current_authority": False,
+        },
+    }
+
+
+def _inspect_legacy_conceptual_review(question, revue, root: Path) -> dict[str, Any]:
+    """Forensic structural comparison only; never a current product verdict."""
     cours = str(revue["source_cours"])
     if not (root / cours).is_file():
         return {
@@ -151,23 +192,19 @@ def _evaluer_conceptuelle(question, revue, root: Path) -> dict[str, Any]:
             ),
         }
     return {
-        "state": REVIEWED,
-        "computed": revue["reponse"],
+        "state": OPEN,
+        "computed": None,
+        "current_scientific_credit": False,
+        "detail": "legacy conceptual review has no recorded current source/dependency binding",
         "source_cours": cours,
         "source_programme": revue["source_programme"],
     }
 
 
 def _corpus_totals(root: Path) -> dict[str, int]:
-    """Ce que le corpus courant contient, et par quelle route il est prouve.
+    """Read validated current routes; these are not full review verdicts."""
 
-    La cloture ne juge que les questions routees vers une revue humaine. La
-    couverture, elle, se mesure sur TOUTES les questions : les reporter
-    d'identite et les recalculs mecaniques comptent, sinon on annoncerait une
-    couverture de 100 % sur un echantillon de 39 %.
-    """
-
-    evidence = json.loads((root / EVIDENCE.relative_to(ROOT)).read_text("utf-8"))
+    evidence = _current_evidence(root)
     counts = evidence["counts"]
     return {
         "total": int(counts["question_count"]),
@@ -179,6 +216,13 @@ def _corpus_totals(root: Path) -> dict[str, int]:
 
 
 def build(root: Path = ROOT) -> dict[str, Any]:
+    source_set = {path.relative_to(root).as_posix() for path in reconciliation._qcm_sources(root)}
+    current = _current_evidence(root)
+    question_set = {(row["chapter"], row["question_id"]) for row in current["questions"]}
+    input_paths = ["audit/QCM_INDEPENDENT_EVIDENCE_V2.json", "scripts/qcm_reviews.py",
+                   "scripts/build_qcm_review_closure.py", "scripts/build_qcm_review_proof_reconciliation.py",
+                   *sorted(source_set)]
+    observed_inputs = freshness.stamp(input_paths, root=root)
     resultats = []
     for question in _questions(root):
         cle = (question["chapter"], question["question_id"])
@@ -205,6 +249,9 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             "source_path": question["source_path"],
             "regime": regime,
             "key": question["cle"],
+            "full_question_digest": question["full_question_digest"],
+            "answer_key_state": question["answer_key_state"],
+            "human_approval": "PENDING",
             **verdict,
         })
 
@@ -219,6 +266,9 @@ def build(root: Path = ROOT) -> dict[str, Any]:
     total = len(resultats)
     summary = {
         "QCM_HUMAN_REVIEW_POPULATION": total,
+        "QCM_SCIENTIFIC_REVIEW_POPULATION": total,
+        "QCM_ANSWER_KEY_PROVEN": sum(r["answer_key_state"] == "ANSWER_KEY_PROVEN" for r in resultats),
+        "QCM_ANSWER_KEY_HISTORICAL_IDENTICAL": sum(r["answer_key_state"] == "ANSWER_KEY_PROVEN_BY_IDENTICAL_HISTORICAL_EVIDENCE" for r in resultats),
         "QCM_MECHANICAL_PROVEN": etats[PROVEN],
         "QCM_MECHANICAL_BY_FAMILY": familles,
         "QCM_CONCEPTUAL_REVIEWED": etats[REVIEWED],
@@ -261,10 +311,12 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         "generated_by": "scripts/build_qcm_review_closure.py",
         "declaration_table": "scripts/qcm_reviews.py",
         "approves_nothing": True,
+        "answer_key_proof_is_not_complete_scientific_review": True,
+        "legacy_declarations_without_recorded_binding_are_not_current_reviews": True,
         "independence_contract": (
-            "Une dérivation mécanique ne reçoit que les options, jamais la clé "
-            "ni les diagnostics. Le rapprochement avec la clé est fait par ce "
-            "producteur, après."
+            "Generic key evidence is source-bound by current question identity. "
+            "Historical declarations without a recorded source/dependency binding "
+            "never close current scientific review; forensic helpers grant no credit."
         ),
         "summary": summary,
         "questions": resultats,
@@ -278,17 +330,23 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             ensure_ascii=False, sort_keys=True, separators=(",", ":"),
         ).encode("utf-8")
     ).hexdigest()
-    payload["freshness"] = freshness.stamp(
-        ["audit/QCM_INDEPENDENT_EVIDENCE_V2.json", "scripts/qcm_reviews.py"],
-        root=root,
-    )
+    final_inputs = freshness.stamp(input_paths, root=root)
+    final_source_set = {path.relative_to(root).as_posix() for path in reconciliation._qcm_sources(root)}
+    if final_source_set != source_set:
+        raise ValueError("QCM source set changed during current review construction")
+    final_current = _current_evidence(root)
+    if {(row["chapter"], row["question_id"]) for row in final_current["questions"]} != question_set:
+        raise ValueError("QCM question set changed during current review construction")
+    if final_inputs != observed_inputs:
+        raise ValueError("QCM inputs or HEAD changed during current review construction")
+    payload["freshness"] = observed_inputs
     return payload
 
 
 def render_markdown(payload: dict[str, Any]) -> str:
     s = payload["summary"]
     lignes = [
-        "# Clôture des QCM restés en revue humaine",
+        "# État courant des preuves et revues QCM",
         "",
         f"- Population : `{s['QCM_HUMAN_REVIEW_POPULATION']}`",
         f"- `QCM_MECHANICAL_PROVEN` : `{s['QCM_MECHANICAL_PROVEN']}` "
