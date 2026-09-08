@@ -1,0 +1,223 @@
+{
+  "approves_nothing": true,
+  "artifact_type": "validation_evidence_takeover_delta",
+  "classification_note": "A current binding authenticates scope and bytes; it does not turn manual_review into pass or an agent into a human.",
+  "consumer_findings": [
+    {
+      "consumer": "scripts/chapter_readiness.py",
+      "finding": "Similarity/adversarial receipts have no scientific credit, but source_sha256 presence was formerly sufficient to count a machine receipt without comparing source bytes.",
+      "repair": "Use scientific_receipt_binding.bind; expose rejected receipts."
+    },
+    {
+      "consumer": "scripts/build_publish_readiness_chapter_matrix.py",
+      "finding": "_oracle formerly summed pass receipts without a source binding. _machine_science_current checked bytes without declared source path/identity.",
+      "repair": "Both consume scientific_receipt_binding.bind."
+    },
+    {
+      "consumer": "scripts/build_new_authoring_review_debt.py",
+      "finding": "ORACLE_VERIFIED formerly depended on a deposited pass string alone.",
+      "repair": "Count only a source-bound receipt."
+    }
+  ],
+  "counter_scope_note": "The 3354 current bindings and the 1431 stale classifications describe only the immutable takeover snapshot. No verdict here is promoted to CURRENT for a later HEAD. Unbound forensic provenance and absent scientific digest are different populations.",
+  "exceptional_bindings": [
+    {
+      "binding": "INTERNAL_CONTRACT_ID_AND_REVIEW_SCOPE",
+      "current_binding_valid": false,
+      "declared_source_path": null,
+      "object_id": "1SPE-DERIVATION-LOCAL-CONTRAT",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/validations/contrat.adversarial.json",
+      "reason": "NO_RECORDED_SOURCE_DIGEST",
+      "receipt_sha256": "sha256:f412a1b57254c0fcd51219f1e1ddb2d1d7581bd8114412bc01169e4b4c097945",
+      "recorded_source_sha256": null,
+      "sources": [
+        {
+          "canonical_object_id": "1SPE-DERIVATION-LOCAL-CONTRAT",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/contrat.yaml",
+          "source_sha256": "sha256:afc82bd969d0832c9c4bb86fd73ff23e36e73a6613e9c49e1ebd7b83d2f41ace"
+        }
+      ],
+      "status": "VALIDATION_STALE",
+      "verdict": "pass"
+    },
+    {
+      "binding": "INTERNAL_CURATION_ID_AND_REVIEW_SCOPE",
+      "current_binding_valid": false,
+      "declared_source_path": null,
+      "object_id": "1SPE-DERIVATION-LOCAL-CURATION",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/validations/curation.adversarial.json",
+      "reason": "NO_RECORDED_SOURCE_DIGEST",
+      "receipt_sha256": "sha256:c2f651a24461ffe12c9e97d6441efa1c55c9aaea4ba9162371eb49d6eb0356bb",
+      "recorded_source_sha256": null,
+      "sources": [
+        {
+          "canonical_object_id": "1SPE-DERIVATION-LOCAL-CURATION",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/dossier_curation.json",
+          "source_sha256": "sha256:a4b20cb973ec0ba6942cbd9e5840eed289e3f0755bd63a7cadb017617a8b2e1e"
+        }
+      ],
+      "status": "VALIDATION_STALE",
+      "verdict": "pass"
+    },
+    {
+      "binding": "INTERNAL_SOURCE_ID_AND_GIT_REMOVAL_HISTORY",
+      "current_binding_valid": false,
+      "declared_source_path": null,
+      "object_id": "14_C5_equations_inequations",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/validations/14_C5_equations_inequations.similarity.json",
+      "reason": "SOURCE_REMOVED_AT_DOCUMENTED_COMMIT",
+      "receipt_sha256": "sha256:23e5a8a9dab0dcfa93da715ef934695fc387b48e2714dc417720d8da011d13e8",
+      "recorded_source_sha256": null,
+      "sources": [
+        {
+          "canonical_object_id": "1SPE-EXPO-COURS-X3",
+          "historical_commit": "b4e3998a1^",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/cours/14_C5_equations_inequations.tex",
+          "source_sha256": "sha256:f04b9b3afd5cdc560ba41a6e58c6a8637c86905f3b5a004dbe4acc4a13fc4269"
+        }
+      ],
+      "status": "VALIDATION_HISTORICAL",
+      "verdict": "pass"
+    },
+    {
+      "binding": "INTERNAL_SOURCE_ID_AND_GIT_REMOVAL_HISTORY",
+      "current_binding_valid": false,
+      "declared_source_path": null,
+      "object_id": "12_C3_bernoulli_binomiale",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/validations/12_C3_bernoulli_binomiale.similarity.json",
+      "reason": "SOURCE_REMOVED_AT_DOCUMENTED_COMMIT",
+      "receipt_sha256": "sha256:8fed340cd8de5227101b6ed75f39df69b37842bda2bb01d8f71787f377e4ca25",
+      "recorded_source_sha256": null,
+      "sources": [
+        {
+          "canonical_object_id": "1SPE-VARALEA-CR-X1",
+          "historical_commit": "b4e3998a1^",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/12_C3_bernoulli_binomiale.tex",
+          "source_sha256": "sha256:c10c27495e4f9d3fb25027a73427f7b61e23a098d4a605f1b75b358e4d3abc50"
+        }
+      ],
+      "status": "VALIDATION_HISTORICAL",
+      "verdict": "pass"
+    },
+    {
+      "binding": "INTERNAL_SOURCE_ID_AND_GIT_REMOVAL_HISTORY",
+      "current_binding_valid": false,
+      "declared_source_path": null,
+      "object_id": "13_C4_esperance_binomiale",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/validations/13_C4_esperance_binomiale.similarity.json",
+      "reason": "SOURCE_REMOVED_AT_DOCUMENTED_COMMIT",
+      "receipt_sha256": "sha256:78d885d9014cfafb79007387570c1b6a1b26d15f11ee30a61572cabfb2c9e0d3",
+      "recorded_source_sha256": null,
+      "sources": [
+        {
+          "canonical_object_id": "1SPE-VARALEA-CR-X2",
+          "historical_commit": "b4e3998a1^",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/13_C4_esperance_binomiale.tex",
+          "source_sha256": "sha256:e98617cd1cc03ae4b81287df1230b44c34f3ee8057d16513d156fd518af3825b"
+        }
+      ],
+      "status": "VALIDATION_HISTORICAL",
+      "verdict": "pass"
+    },
+    {
+      "binding": "EXPLICIT_SOURCE_PATH",
+      "current_binding_valid": false,
+      "declared_source_path": "chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-001.tex",
+      "object_id": "TNSI-ALGO-CO-001",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/validations/TNSI-ALGO-CO-001.execution.json",
+      "reason": "SOURCE_DIGEST_CHANGED",
+      "receipt_sha256": "sha256:b2b75afa190c1fdc2bf85b6346ed9a8bc60785fd86f2d7468e0587e16d872124",
+      "recorded_source_sha256": "sha256:855d518fd1e3d9826f5c54fbe8802789cba883c8fafb4aab82fc372ea964ee97",
+      "sources": [
+        {
+          "canonical_object_id": "TNSI-ALGO-CO-001",
+          "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-001.tex",
+          "source_sha256": "sha256:b2b6843f9a6896b7eac666e191d3f26fd52e3b2ce0d88c51985520b4ff9c7859"
+        }
+      ],
+      "status": "VALIDATION_STALE",
+      "verdict": "pass"
+    }
+  ],
+  "full_report_sha256": "sha256:db05a75115c4ec0cd42fea7e08e2159cbd91d7db06c037f40b7e3e73ec51bbc6",
+  "independent_reproduction": {
+    "command": "python scripts/build_validation_evidence_bindings.py --snapshot 6da7f7637e34a3f7f4aba91eb765ee92ce7fc1d9 --output /tmp/nexus-validation-takeover-parent.json",
+    "full_report_sha256_identical": true,
+    "human_approval": false,
+    "reviewer": "/root",
+    "scope": "Historical snapshot reproduced exactly; no later HEAD counters inferred.",
+    "source_set_digest_identical": true,
+    "summary_identical": true,
+    "tests": {
+      "command": "python -m pytest -q tests/test_validation_evidence_bindings.py",
+      "failed": 0,
+      "passed": 7,
+      "skipped": 0
+    }
+  },
+  "observation": {
+    "base_head": "6da7f7637e34a3f7f4aba91eb765ee92ce7fc1d9",
+    "scope": "IMMUTABLE_GIT_SNAPSHOT",
+    "worktree_dirty": false,
+    "worktree_status": []
+  },
+  "observation_head": "6da7f7637e34a3f7f4aba91eb765ee92ce7fc1d9",
+  "observation_mode": "IMMUTABLE_GIT_SNAPSHOT",
+  "original_four_historical_receipts": [
+    {
+      "historical_commit": "0c7a470fc^",
+      "object_id": "TSPE-TRIGO-CO-016",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/validations/TSPE-TRIGO-CO-016.sympy.json",
+      "present_in_observed_source_set": false,
+      "receipt_evidence_reused_by": [],
+      "receipt_sha256": "sha256:223ee7f06599e579dd35d49b32ec84a581b3fed8f9f679b1b3c503067a9bc8c2",
+      "recorded_source_path": "chapitres/TSPE-TRIGONOMETRIE/corriges/TSPE-TRIGO-CO-016.tex",
+      "recorded_source_sha256": "sha256:8219ff33676d86c5d698aae048c712a123765ebdab7cd715671400f7c0b6ce37"
+    },
+    {
+      "historical_commit": "0c7a470fc^",
+      "object_id": "TSPE-TRIGO-CO-019",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/validations/TSPE-TRIGO-CO-019.sympy.json",
+      "present_in_observed_source_set": false,
+      "receipt_evidence_reused_by": [],
+      "receipt_sha256": "sha256:5527c633243bd741edfeb55e585ed92057e9aaf69e0e9b8ae96e4c3686e35ac6",
+      "recorded_source_path": "chapitres/TSPE-TRIGONOMETRIE/corriges/TSPE-TRIGO-CO-019.tex",
+      "recorded_source_sha256": "sha256:d24fc7830c1957aa9d1e7f1853e1dfde23e8b648bcc23335939be4a9b2a61718"
+    },
+    {
+      "historical_commit": "0c7a470fc^",
+      "object_id": "TSPE-TRIGO-EX-016",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/validations/TSPE-TRIGO-EX-016.sympy.json",
+      "present_in_observed_source_set": false,
+      "receipt_evidence_reused_by": [],
+      "receipt_sha256": "sha256:702b4763a407729fd5b358c6cb6e330cfbd75b226253a04e658d9a280fc98e1f",
+      "recorded_source_path": "chapitres/TSPE-TRIGONOMETRIE/exercices/TSPE-TRIGO-EX-016.tex",
+      "recorded_source_sha256": "sha256:65c67d476943522bcff1fe76327b720e6e19d3958cf8f1e4668f18ce1c564169"
+    },
+    {
+      "historical_commit": "0c7a470fc^",
+      "object_id": "TSPE-TRIGO-EX-019",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/validations/TSPE-TRIGO-EX-019.sympy.json",
+      "present_in_observed_source_set": false,
+      "receipt_evidence_reused_by": [],
+      "receipt_sha256": "sha256:3010664d7face790fd030a32d17730203e8b13dc08e99c4b73b0a07469b05142",
+      "recorded_source_path": "chapitres/TSPE-TRIGONOMETRIE/exercices/TSPE-TRIGO-EX-019.tex",
+      "recorded_source_sha256": "sha256:ef51e3d3f52e9511b952ab4d455466149771463b7c2bc2a7ddb316178f38c320"
+    }
+  ],
+  "population": "All chapter validations/*.json, all six manuals; visual PNG excluded.",
+  "producer_sha256": "sha256:108df6cfd022344d7e088988734e1999e55e9f7ee03c1f6c4899810f7021045e",
+  "reproduce": "python scripts/build_validation_evidence_bindings.py --snapshot 6da7f7637e34a3f7f4aba91eb765ee92ce7fc1d9 --output /tmp/nexus-validation-takeover.json",
+  "schema_version": 1,
+  "source_set_digest": "sha256:98d2290e85846192396ad2048bf5dac944eb2878aad640171bb2548f86046757",
+  "summary": {
+    "ORIGINAL_FOUR_CURRENT_RECEIPTS_REFERENCING_RETIRED_OBJECTS": 0,
+    "ORIGINAL_FOUR_HISTORICAL_RECEIPTS_FOR_RETIRED_OBJECTS": 4,
+    "RECEIPT_EVIDENCE_REUSED_FOR_REPLACEMENT_CONTENT": 0,
+    "VALIDATION_ARTIFACTS_TOTAL": 4788,
+    "VALIDATION_BOUND_CURRENT": 3354,
+    "VALIDATION_HISTORICAL": 3,
+    "VALIDATION_STALE": 1431,
+    "VALIDATION_UNBOUND": 0
+  }
+}
