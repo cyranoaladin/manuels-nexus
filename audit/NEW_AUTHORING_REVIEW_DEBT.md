@@ -9,7 +9,7 @@ Un bloc verify prouve une exactitude calculable ; il ne prouve ni l'adequation a
 - `ORACLE_VERIFIED` : `290`
 - `OBJECTS_WITHOUT_ORACLE` : `0`
 - `ORACLE_FAILURES` : `0`
-- `CAPACITY_SEMANTICALLY_PROVEN` : `220`
+- `CAPACITY_SEMANTICALLY_PROVEN` : `262`
 - `CAPACITY_NOT_PROVEN` : `0`
 - `ANSWER_COVERAGE_ESTABLISHED` : `140`
 - `ANSWER_COVERAGE_MISSING` : `0`
