@@ -109,7 +109,8 @@ def _dead_evidence(rows: list[dict[str, Any]]) -> list[dict[str, str]]:
     for row in rows:
         for field in SOURCE_FIELDS:
             for relative in row.get(field) or []:
-                if not (ROOT / relative).exists():
+                # Une ancre désigne un fragment du fichier, pas son nom.
+                if not (ROOT / relative.split("#", 1)[0]).is_file():
                     morts.append({
                         "atom_id": row["atom_id"],
                         "manual": row.get("manual"),

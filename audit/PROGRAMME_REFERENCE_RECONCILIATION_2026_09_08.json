@@ -1,0 +1,636 @@
+{
+  "head": "6da7f7637e34a3f7f4aba91eb765ee92ce7fc1d9",
+  "read_only": true,
+  "observed_at": "2026-09-08",
+  "metrics": {
+    "PROGRAM_EVIDENCE_MISSING_SOURCE_LEGACY_GATE": 25,
+    "PROGRAM_EVIDENCE_REFERENCING_MISSING_SOURCE": 23,
+    "MISSING_UNIQUE_SOURCE_PATHS": 12,
+    "PROGRAM_ITEMS_REFERENCING_MISSING_SOURCE": 20,
+    "FALSE_MISSING_FRAGMENT_REFERENCES": 2,
+    "SECOND_DEGREE_CONTRACT_CAPACITIES": 8,
+    "SECOND_DEGREE_OFFICIAL_REFERENTIAL_ENTRIES": 5,
+    "SECOND_DEGREE_DIRECT_ALIAS": 5,
+    "SECOND_DEGREE_LOCAL_FACETS": 3,
+    "SECOND_DEGREE_NEW_OFFICIAL_ATOM_CANDIDATES": 0,
+    "HUMAN_NORMATIVE_ARBITRATION_REQUIRED": false
+  },
+  "programme_references": [
+    {
+      "PROGRAM_ITEM": "1SPE-OFFICIAL-053",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json#Q3",
+      "SOURCE_EXISTS": true,
+      "SOURCE_FIELD": "assessment_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json#Q3",
+      "SEMANTICALLY_EQUIVALENT": true,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json#Q3",
+        "sha256": "8b5eb807add869b0268de4293af1415738b599c9c9212063806df58d04c349a7",
+        "fragment_exists": true
+      },
+      "VERDICT": "CURRENT_SOURCE_VALID",
+      "NOTES": "Faux positif Path(relative).exists() exécuté sur un fragment #Q3; aucune source supprimée."
+    },
+    {
+      "PROGRAM_ITEM": "1SPE-OFFICIAL-059",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json#Q3",
+      "SOURCE_EXISTS": true,
+      "SOURCE_FIELD": "assessment_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json#Q3",
+      "SEMANTICALLY_EQUIVALENT": true,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json#Q3",
+        "sha256": "8b5eb807add869b0268de4293af1415738b599c9c9212063806df58d04c349a7",
+        "fragment_exists": true
+      },
+      "VERDICT": "CURRENT_SOURCE_VALID",
+      "NOTES": "Faux positif Path(relative).exists() exécuté sur un fragment #Q3; aucune source supprimée."
+    },
+    {
+      "PROGRAM_ITEM": "TCOMPL-OFFICIAL-002",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/07_td_contextualise.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "course_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex",
+        "sha256": "d3c459f3d284764c5a2b85c0c61580af4557a7b316584c8fd7d7a89ae5f1272c",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Cours substantiel Bernoulli/binomiale: preuve de présence du thème, ne prouve pas à lui seul chaque capacité du chapitre.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TCOMPL-OFFICIAL-002",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/07_td_contextualise.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "course_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex",
+        "sha256": "2fac7dcf980f3256059d7477133e52c2ee89489b976928e15be657cba0416ada",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Etude de x+9/x et dichotomie: présence effective du thème; couverture exhaustive non démontrée.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TCOMPL-OFFICIAL-002",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/07_td_contextualise.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "course_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/11_C2_loi_exponentielle.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/11_C2_loi_exponentielle.tex",
+        "sha256": "8c5bb7a894357105023a108c9958f3f8852a0f26ec0fc524f5efb679d5f26f97",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Densité, répartition, espérance et absence de mémoire: présence effective du thème.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TCOMPL-OFFICIAL-094",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MF-RE-C06.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "remediation_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MODELES-FONCTION-RE-C1.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MODELES-FONCTION-RE-C1.tex",
+        "sha256": "1948274fa36203616fcd850de36e5bf7f89d92a75cee2d3afa8369008b7ff168",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Quotient et limites latérales seulement; pertinente 094/099/100 partiellement, NON pertinente 098 (dérivées de composées).",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TCOMPL-OFFICIAL-098",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MF-RE-C06.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "remediation_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MODELES-FONCTION-RE-C1.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MODELES-FONCTION-RE-C1.tex",
+        "sha256": "1948274fa36203616fcd850de36e5bf7f89d92a75cee2d3afa8369008b7ff168",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Quotient et limites latérales seulement; pertinente 094/099/100 partiellement, NON pertinente 098 (dérivées de composées).",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TCOMPL-OFFICIAL-099",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MF-RE-C06.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "remediation_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MODELES-FONCTION-RE-C1.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MODELES-FONCTION-RE-C1.tex",
+        "sha256": "1948274fa36203616fcd850de36e5bf7f89d92a75cee2d3afa8369008b7ff168",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Quotient et limites latérales seulement; pertinente 094/099/100 partiellement, NON pertinente 098 (dérivées de composées).",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TCOMPL-OFFICIAL-100",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MF-RE-C06.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "remediation_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MODELES-FONCTION-RE-C1.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MODELES-FONCTION-RE-C1.tex",
+        "sha256": "1948274fa36203616fcd850de36e5bf7f89d92a75cee2d3afa8369008b7ff168",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Quotient et limites latérales seulement; pertinente 094/099/100 partiellement, NON pertinente 098 (dérivées de composées).",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TCOMPL-OFFICIAL-160",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-010.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "correction_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-004.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-004.tex",
+        "sha256": "7397fd53466fc3244cf55b515ea68bec0ea3552182da961642aaae89f6591d3f",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Appariement explicite EX-004; intégrale indépendante exacte 20.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TCOMPL-OFFICIAL-160",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-010.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "exercise_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-004.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-004.tex",
+        "sha256": "1315d7926ab4233e3ea97f3d6c6c76b9c24d115be4f6a5e5659de7b67f7f6440",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Espérance loi exponentielle lambda=0,05, intégrale demandée puis E(X)=20; couverture partielle de l’atome global.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TEXPERTES-OFFICIAL-024",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/remediation/TEXP-CTP-RE-C06.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "remediation_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/remediation/TEXP-COMPLEXES-TRIGO-POLYNOMES-RE-C1.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/remediation/TEXP-COMPLEXES-TRIGO-POLYNOMES-RE-C1.tex",
+        "sha256": "4ce992a14f9180be705dcf75fef35ac72e02f1d0206d7180ee7c89d90919c0c0",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Argument/quadrant, module et produit de formes exponentielles: pertinent 024/027; aucune identité sémantique ancienne.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TEXPERTES-OFFICIAL-027",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/remediation/TEXP-CTP-RE-C06.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "remediation_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/remediation/TEXP-COMPLEXES-TRIGO-POLYNOMES-RE-C1.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/remediation/TEXP-COMPLEXES-TRIGO-POLYNOMES-RE-C1.tex",
+        "sha256": "4ce992a14f9180be705dcf75fef35ac72e02f1d0206d7180ee7c89d90919c0c0",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Argument/quadrant, module et produit de formes exponentielles: pertinent 024/027; aucune identité sémantique ancienne.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TEXPERTES-OFFICIAL-053",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARI-RE-C06.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "remediation_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C1.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C1.tex",
+        "sha256": "53718d9edaed507ef9db3da75ff5b4cb9cff6dde47904cf8afcde5ebbf681b1f",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "PGCD/Euclide: partiel pour 053/054/057/063; défaut domaine PGCD(n,0)=n à corriger avant validation scientifique.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TEXPERTES-OFFICIAL-054",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARI-RE-C06.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "remediation_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C1.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C1.tex",
+        "sha256": "53718d9edaed507ef9db3da75ff5b4cb9cff6dde47904cf8afcde5ebbf681b1f",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "PGCD/Euclide: partiel pour 053/054/057/063; défaut domaine PGCD(n,0)=n à corriger avant validation scientifique.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TEXPERTES-OFFICIAL-055",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARI-RE-C07.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "remediation_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C2.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C2.tex",
+        "sha256": "8e56b2843c6c730d93a3255648d0789fc252aa408e760b598bea86d5436286c9",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Congruences/inverse: pertinent 055/064, mais faux dénombrement général (condition d|b absente) bloque validation scientifique.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TEXPERTES-OFFICIAL-057",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARI-RE-C06.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "remediation_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C1.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C1.tex",
+        "sha256": "53718d9edaed507ef9db3da75ff5b4cb9cff6dde47904cf8afcde5ebbf681b1f",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "PGCD/Euclide: partiel pour 053/054/057/063; défaut domaine PGCD(n,0)=n à corriger avant validation scientifique.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TEXPERTES-OFFICIAL-063",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARI-RE-C06.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "remediation_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C1.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C1.tex",
+        "sha256": "53718d9edaed507ef9db3da75ff5b4cb9cff6dde47904cf8afcde5ebbf681b1f",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "PGCD/Euclide: partiel pour 053/054/057/063; défaut domaine PGCD(n,0)=n à corriger avant validation scientifique.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TEXPERTES-OFFICIAL-064",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARI-RE-C07.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "remediation_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C2.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C2.tex",
+        "sha256": "8e56b2843c6c730d93a3255648d0789fc252aa408e760b598bea86d5436286c9",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Congruences/inverse: pertinent 055/064, mais faux dénombrement général (condition d|b absente) bloque validation scientifique.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TEXPERTES-OFFICIAL-065",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARI-RE-C08.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "remediation_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C3.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C3.tex",
+        "sha256": "d56800756ba7a2cd52cf777a801d9a4ffa4492dd68abe18677c9d389cb88ece0",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Primalité et chiffrement affine, pertinent 065; relecture complète des sous-questions avant validation finale.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TEXPERTES-OFFICIAL-088",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/remediation/TEXP-MAT-RE-C06.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "remediation_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/remediation/TEXP-MATRICES-MARKOV-RE-C1.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/remediation/TEXP-MATRICES-MARKOV-RE-C1.tex",
+        "sha256": "e3082250d85507036a8d5059e2b230c9ce8c4f7c9646ddc1281aaeeb8a5ad692",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Produit non commutatif, carré matriciel, inversibilité: pertinent 088/090/099; seulement facette calcul de 100, pas preuve applications Markov/graphes.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TEXPERTES-OFFICIAL-090",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/remediation/TEXP-MAT-RE-C06.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "remediation_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/remediation/TEXP-MATRICES-MARKOV-RE-C1.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/remediation/TEXP-MATRICES-MARKOV-RE-C1.tex",
+        "sha256": "e3082250d85507036a8d5059e2b230c9ce8c4f7c9646ddc1281aaeeb8a5ad692",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Produit non commutatif, carré matriciel, inversibilité: pertinent 088/090/099; seulement facette calcul de 100, pas preuve applications Markov/graphes.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TEXPERTES-OFFICIAL-099",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/remediation/TEXP-MAT-RE-C06.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "remediation_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/remediation/TEXP-MATRICES-MARKOV-RE-C1.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/remediation/TEXP-MATRICES-MARKOV-RE-C1.tex",
+        "sha256": "e3082250d85507036a8d5059e2b230c9ce8c4f7c9646ddc1281aaeeb8a5ad692",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Produit non commutatif, carré matriciel, inversibilité: pertinent 088/090/099; seulement facette calcul de 100, pas preuve applications Markov/graphes.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TEXPERTES-OFFICIAL-100",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/remediation/TEXP-MAT-RE-C06.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "remediation_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/remediation/TEXP-MATRICES-MARKOV-RE-C1.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/remediation/TEXP-MATRICES-MARKOV-RE-C1.tex",
+        "sha256": "e3082250d85507036a8d5059e2b230c9ce8c4f7c9646ddc1281aaeeb8a5ad692",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Produit non commutatif, carré matriciel, inversibilité: pertinent 088/090/099; seulement facette calcul de 100, pas preuve applications Markov/graphes.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    },
+    {
+      "PROGRAM_ITEM": "TSPE-OFFICIAL-132",
+      "OLD_SOURCE_REFERENCE": "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/corriges/TSPE-TRIGO-CO-012.tex",
+      "SOURCE_EXISTS": false,
+      "SOURCE_FIELD": "correction_sources",
+      "REPLACEMENT_CANDIDATE": "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/corriges/TSPE-TRIGO-CO-004.tex",
+      "SEMANTICALLY_EQUIVALENT": false,
+      "CURRENT_VALID_EVIDENCE": {
+        "path": "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/corriges/TSPE-TRIGO-CO-004.tex",
+        "sha256": "4fbafced2c4365c238a3656159708db47d92bf2e14701444d186b41adac2efe0",
+        "scope": "PROGRAMME_RELEVANCE_ONLY_PARTIAL_NOT_GLOBAL_SCIENTIFIC_APPROVAL"
+      },
+      "VERDICT": "SUPERSEDED_HISTORICAL",
+      "NOTES": "Appariement explicite exercice_ref EX-004; résolution indépendante A=4 sin(2x), A'=8cos(2x), maximum 4 en pi/4.",
+      "INDEPENDENT_CURRENT_REVIEW_REQUIRED": true,
+      "REMOVE_FROM_CURRENT_EVIDENCE": true
+    }
+  ],
+  "second_degree_matrix": [
+    {
+      "CONTRACT_CAPACITY": "C1",
+      "CONTRACT_WORDING": "Je sais reconnaitre un polynome du second degre et passer d'une forme a une autre.",
+      "OFFICIAL_PROGRAM_SOURCE": "Mathematiques/manuel-maths/referentiel/capacites_1SPE_SECOND_DEGRE.json::authority",
+      "CURRENT_OFFICIAL_ATOM": "1SPE-SECOND-DEGRE-2026-C4",
+      "COLLECTION_ATOM_ID": "1SPE-OFFICIAL-074",
+      "OFFICIAL_WORDING_VERBATIM": "Choisir une forme adaptée (développée réduite, canonique, factorisée) d’une fonction polynôme du second degré dans le cadre de la résolution d’un problème (équation, inéquation, optimisation, variations).",
+      "MAPPING": {
+        "kind": "DIRECT_ALIAS",
+        "bearer": "C1"
+      },
+      "CONTENT_SUPPORT": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/10_C1_formes_trinome.tex",
+          "sha256": "5f95567c887aff4a465c78c325183cc5acd5128954fdbd3f63b85f5671871ae9"
+        }
+      ],
+      "STATUS": "ALIAS_OR_DECOMPOSITION",
+      "NOTES": "Pas de nouvel atome officiel. Science et programme du corps doivent rester séparés du rattachement."
+    },
+    {
+      "CONTRACT_CAPACITY": "C2",
+      "CONTRACT_WORDING": "Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations.",
+      "OFFICIAL_PROGRAM_SOURCE": "Mathematiques/manuel-maths/referentiel/capacites_1SPE_SECOND_DEGRE.json::authority",
+      "CURRENT_OFFICIAL_ATOM": "1SPE-SECOND-DEGRE-2026-C4",
+      "COLLECTION_ATOM_ID": "1SPE-OFFICIAL-074",
+      "OFFICIAL_WORDING_VERBATIM": "Choisir une forme adaptée (développée réduite, canonique, factorisée) d’une fonction polynôme du second degré dans le cadre de la résolution d’un problème (équation, inéquation, optimisation, variations).",
+      "MAPPING": {
+        "kind": "FACET",
+        "bearer": "C1"
+      },
+      "CONTENT_SUPPORT": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/11_C2_parabole_variations.tex",
+          "sha256": "158f41fdf4054e98972190ed42195f35380ab6a9de36066d4a8bed9649d0c997"
+        }
+      ],
+      "STATUS": "LOCAL_PEDAGOGICAL_SUBCAPACITY",
+      "NOTES": "Pas de nouvel atome officiel. Science et programme du corps doivent rester séparés du rattachement."
+    },
+    {
+      "CONTRACT_CAPACITY": "C3",
+      "CONTRACT_WORDING": "Je sais calculer le discriminant et resoudre une equation du second degre.",
+      "OFFICIAL_PROGRAM_SOURCE": "Mathematiques/manuel-maths/referentiel/capacites_1SPE_SECOND_DEGRE.json::authority",
+      "CURRENT_OFFICIAL_ATOM": "1SPE-SECOND-DEGRE-2026-D1",
+      "COLLECTION_ATOM_ID": "1SPE-OFFICIAL-075",
+      "OFFICIAL_WORDING_VERBATIM": "Résolution de l’équation du second degré.",
+      "MAPPING": {
+        "kind": "DIRECT_ALIAS",
+        "bearer": "C3"
+      },
+      "CONTENT_SUPPORT": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/12_C3_discriminant.tex",
+          "sha256": "9012e4d28f34e0b5c315b1ab42d9a0c6284474bac14b6a61a882e9f537c3712a"
+        }
+      ],
+      "STATUS": "ALIAS_OR_DECOMPOSITION",
+      "NOTES": "Pas de nouvel atome officiel. Science et programme du corps doivent rester séparés du rattachement."
+    },
+    {
+      "CONTRACT_CAPACITY": "C4",
+      "CONTRACT_WORDING": "Je sais factoriser un trinome en diversifiant les strategies.",
+      "OFFICIAL_PROGRAM_SOURCE": "Mathematiques/manuel-maths/referentiel/capacites_1SPE_SECOND_DEGRE.json::authority",
+      "CURRENT_OFFICIAL_ATOM": "1SPE-SECOND-DEGRE-2026-C3",
+      "COLLECTION_ATOM_ID": "1SPE-OFFICIAL-073",
+      "OFFICIAL_WORDING_VERBATIM": "Factoriser une fonction polynôme du second degré, en diversifiant les stratégies : racine évidente, détection des racines par leur somme et leur produit, identité remarquable, application des formules générales.",
+      "MAPPING": {
+        "kind": "DIRECT_ALIAS",
+        "bearer": "C4"
+      },
+      "CONTENT_SUPPORT": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/13_C4_factorisation_signe.tex",
+          "sha256": "2021c1cdf5c0fc06ae1cda11d6f3df3c5de0cbd759d0af9cf97c6de5549ab457"
+        },
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/16_C7_somme_produit_racines.tex",
+          "sha256": "a1b5ab9cdf7d175ec4a87a41cfe4b4241ff5fd93876185b82654ab34f7420b10"
+        }
+      ],
+      "STATUS": "ALIAS_OR_DECOMPOSITION",
+      "NOTES": "Pas de nouvel atome officiel. Science et programme du corps doivent rester séparés du rattachement."
+    },
+    {
+      "CONTRACT_CAPACITY": "C8",
+      "CONTRACT_WORDING": "Je sais etudier le signe d'un polynome du second degre donne sous forme factorisee.",
+      "OFFICIAL_PROGRAM_SOURCE": "Mathematiques/manuel-maths/referentiel/capacites_1SPE_SECOND_DEGRE.json::authority",
+      "CURRENT_OFFICIAL_ATOM": "1SPE-SECOND-DEGRE-2026-C1",
+      "COLLECTION_ATOM_ID": "1SPE-OFFICIAL-071",
+      "OFFICIAL_WORDING_VERBATIM": "Étudier le signe d’une fonction polynôme du second degré donnée sous forme factorisée.",
+      "MAPPING": {
+        "kind": "DIRECT_ALIAS",
+        "bearer": "C8"
+      },
+      "CONTENT_SUPPORT": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/13_C4_factorisation_signe.tex",
+          "sha256": "2021c1cdf5c0fc06ae1cda11d6f3df3c5de0cbd759d0af9cf97c6de5549ab457"
+        }
+      ],
+      "STATUS": "OFFICIAL_ATOM",
+      "NOTES": "Pas de nouvel atome officiel. Science et programme du corps doivent rester séparés du rattachement."
+    },
+    {
+      "CONTRACT_CAPACITY": "C5",
+      "CONTRACT_WORDING": "Je sais resoudre une inequation du second degre.",
+      "OFFICIAL_PROGRAM_SOURCE": "Mathematiques/manuel-maths/referentiel/capacites_1SPE_SECOND_DEGRE.json::authority",
+      "CURRENT_OFFICIAL_ATOM": "1SPE-SECOND-DEGRE-2026-C4",
+      "COLLECTION_ATOM_ID": "1SPE-OFFICIAL-074",
+      "OFFICIAL_WORDING_VERBATIM": "Choisir une forme adaptée (développée réduite, canonique, factorisée) d’une fonction polynôme du second degré dans le cadre de la résolution d’un problème (équation, inéquation, optimisation, variations).",
+      "MAPPING": {
+        "kind": "FACET",
+        "bearer": "C1"
+      },
+      "CONTENT_SUPPORT": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/14_C5_inequations.tex",
+          "sha256": "0eb114cd8f402ab4a0ff021a59fae0163dac2ab0e8fc08ea36ea5bc4101bf402"
+        }
+      ],
+      "STATUS": "LOCAL_PEDAGOGICAL_SUBCAPACITY",
+      "NOTES": "Pas de nouvel atome officiel. Science et programme du corps doivent rester séparés du rattachement."
+    },
+    {
+      "CONTRACT_CAPACITY": "C6",
+      "CONTRACT_WORDING": "Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum.",
+      "OFFICIAL_PROGRAM_SOURCE": "Mathematiques/manuel-maths/referentiel/capacites_1SPE_SECOND_DEGRE.json::authority",
+      "CURRENT_OFFICIAL_ATOM": "1SPE-SECOND-DEGRE-2026-C4",
+      "COLLECTION_ATOM_ID": "1SPE-OFFICIAL-074",
+      "OFFICIAL_WORDING_VERBATIM": "Choisir une forme adaptée (développée réduite, canonique, factorisée) d’une fonction polynôme du second degré dans le cadre de la résolution d’un problème (équation, inéquation, optimisation, variations).",
+      "MAPPING": {
+        "kind": "FACET",
+        "bearer": "C1"
+      },
+      "CONTENT_SUPPORT": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/15_C6_optimisation.tex",
+          "sha256": "cc42dc6be27076b87a4725158858fc5514b2c4da97e846ee7adce11a4b8f0a11"
+        }
+      ],
+      "STATUS": "LOCAL_PEDAGOGICAL_SUBCAPACITY",
+      "NOTES": "Pas de nouvel atome officiel. Science et programme du corps doivent rester séparés du rattachement."
+    },
+    {
+      "CONTRACT_CAPACITY": "C7",
+      "CONTRACT_WORDING": "Je sais determiner les fonctions polynomes du second degre s'annulant en deux nombres reels distincts, en utilisant la somme et le produit des racines.",
+      "OFFICIAL_PROGRAM_SOURCE": "Mathematiques/manuel-maths/referentiel/capacites_1SPE_SECOND_DEGRE.json::authority",
+      "CURRENT_OFFICIAL_ATOM": "1SPE-SECOND-DEGRE-2026-C2",
+      "COLLECTION_ATOM_ID": "1SPE-OFFICIAL-072",
+      "OFFICIAL_WORDING_VERBATIM": "Déterminer les fonctions polynômes du second degré s’annulant en deux nombres réels distincts.",
+      "MAPPING": {
+        "kind": "DIRECT_ALIAS",
+        "bearer": "C7"
+      },
+      "CONTENT_SUPPORT": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/16_C7_somme_produit_racines.tex",
+          "sha256": "a1b5ab9cdf7d175ec4a87a41cfe4b4241ff5fd93876185b82654ab34f7420b10"
+        }
+      ],
+      "STATUS": "OFFICIAL_ATOM",
+      "NOTES": "Pas de nouvel atome officiel. Science et programme du corps doivent rester séparés du rattachement."
+    }
+  ],
+  "root_causes": [
+    "_dead_evidence tests physical path including #Q3 fragment",
+    "coverage rows retain active references to source paths removed by anti-contamination commits 30c029dd7 and 10f01ba68",
+    "referential_capacity_closure joins historical scoped local alias against official 2026 alias instead of capacity_identity canonical uid",
+    "1SPE coverage 071 and 072 still attached to C4, while contract split into C8 and C7"
+  ],
+  "findings": [
+    {
+      "severity": "P0",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml",
+      "claim": "Box volume said to be second degree",
+      "counterexample": "x(30-2x)(20-2x)=4x^3-100x^2+600x",
+      "consumer": "assemble_manuel.ouverture_depuis_contrat"
+    },
+    {
+      "severity": "P0",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/12_C3_discriminant.tex",
+      "claim": "Proof Delta<0 states a(square)>=0 without a>0 assumption",
+      "counterexample": "a=-1,b=0,c=-1 => Delta=-4; at x=1 left side -1"
+    },
+    {
+      "severity": "P0",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/10_C1_formes_trinome.tex",
+      "claim": "General alpha/beta calculation taught as central method; completion of square placed in enrichment",
+      "official_boundary": "BO2026 lines 320-322 simple completion expected; general effective canonical computation not expected"
+    }
+  ],
+  "generated_by": "Independent read-only forensic review on 2026-09-08; not a current release verdict",
+  "approves_nothing": true
+}

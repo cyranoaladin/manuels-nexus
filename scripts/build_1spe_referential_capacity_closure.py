@@ -40,6 +40,7 @@ import yaml
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from manual_source_surface import MATH, ROOT  # noqa: E402
+from capacity_identity import CapacityIdentityResolver, UnresolvedCapacityIdentity  # noqa: E402
 
 JSON_TARGET = ROOT / "audit/1SPE_REFERENTIAL_CAPACITY_CLOSURE.json"
 MD_TARGET = ROOT / "audit/1SPE_REFERENTIAL_CAPACITY_CLOSURE.md"
@@ -88,10 +89,19 @@ def official_atoms() -> dict[str, list[dict[str, Any]]]:
             f"{APPLICABLE_YEAR}"
         )
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    resolver = CapacityIdentityResolver.from_corpora((CHAPTERS,))
     for row in payload["rows"]:
         if row.get("manual") != MANUAL or not row.get("contract_capacity"):
             continue
-        grouped[row["contract_capacity"]].append(
+        alias = row["contract_capacity"]
+        try:
+            identity = resolver.resolve_collection_alias(alias).identity
+            credit_key = identity.official_ref or alias
+        except UnresolvedCapacityIdentity:
+            # Les contrats transversaux ne sont pas des contrats de chapitre.
+            # Leur alias reste visible ; il ne gagne aucun crédit ici.
+            credit_key = alias
+        grouped[credit_key].append(
             {
                 "atom_id": row["atom_id"],
                 "NOR": row["NOR"],
