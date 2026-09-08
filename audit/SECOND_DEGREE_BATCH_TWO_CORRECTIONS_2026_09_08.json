@@ -1,0 +1,431 @@
+{
+  "artifact_type": "development_correction_log",
+  "schema_version": 1,
+  "approves_nothing": true,
+  "observed_head": "bd3ac07705d038039fa3cfd0a6c20aee762edbd1",
+  "worktree_observation": true,
+  "chapter": "1SPE-SECOND-DEGRE",
+  "batch": "B2",
+  "generated_at": "2026-09-08T12:57:19.552465+00:00",
+  "sources": [
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_fil_rouge.tex",
+      "before_head": "bd3ac07705d038039fa3cfd0a6c20aee762edbd1",
+      "before_sha256": "81932d1466e9906cf8fb188e18b47beee11a3ff1ce9e25408aa4eb83f1110979",
+      "after_sha256": "87d3ec69a8654aa3b7e4d3a77295ac477fb7be5a6cf0bd21f32243d0295366d1"
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_contextualise.tex",
+      "before_head": "bd3ac07705d038039fa3cfd0a6c20aee762edbd1",
+      "before_sha256": "8a955aebdcc82f44f79f4bbe45b6ca5b800fcf2facfe2cbbee04895416859230",
+      "after_sha256": "f25c447e845fec9c5923e8cd07bf4f2b441b4f803a73e970b9796193186410bb"
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-027.tex",
+      "before_head": "bd3ac07705d038039fa3cfd0a6c20aee762edbd1",
+      "before_sha256": "a7de5e559b975e6ff963fc062ff4163d191c0828f7709a798010554b37b45e87",
+      "after_sha256": "7000edc2e0deec3a8903e4a08e4f0de3c74e3fe0414cc0c9cd0e3d5887429d12"
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-039.tex",
+      "before_head": "bd3ac07705d038039fa3cfd0a6c20aee762edbd1",
+      "before_sha256": "f88bc793bf985e559cc85ce1a7722e5b37215edbf860a631e022df404f926cd1",
+      "after_sha256": "92979079a1d03aa580e084912ade01a14f5e1240e1d23d97c78d6428eda6eeec"
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-039.tex",
+      "before_head": "bd3ac07705d038039fa3cfd0a6c20aee762edbd1",
+      "before_sha256": "f37a334d093fb03df1e82403f9279901c357d5fc5922d2f203ed261edc7cd3be",
+      "after_sha256": "45146af7672bb979109b2b63e20a1b9f1fe2a97268376f3672c72c874532b761"
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-040.tex",
+      "before_head": "bd3ac07705d038039fa3cfd0a6c20aee762edbd1",
+      "before_sha256": "b6eba23c8b2638ce24a256445d5e962a5a21292072a117aae8ac315e94a4adfe",
+      "after_sha256": "21cbd3ab1028a643b0720017f0c839b2368bd41eeba3d8218cda03857278f754"
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-040.tex",
+      "before_head": "bd3ac07705d038039fa3cfd0a6c20aee762edbd1",
+      "before_sha256": "d0cff03dc96962bce2d0132b80e3724c9a0f3c75da71bc92fd755512532a6a8d",
+      "after_sha256": "e7a55c1bedb3132400e02d74dc973fd34a9f1747897187c79574a010a83d3da2"
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-027.tex",
+      "before_head": "f70fdb2d0488a46cb41925578a811bd723ad9f53",
+      "before_sha256": "a6873b8e427f58afa1bba6e1a551749574f66d38c9bb9d390737a97e50a95418",
+      "after_sha256": "496c5404b5252ecfe9413f1aafea9d2037e98f5afab78def9c746091d65a7ba1"
+    }
+  ],
+  "findings": [
+    {
+      "id": "SECDEG-B2-001",
+      "severity": "PRODUCT_P0",
+      "dimension": "SCIENCE",
+      "sources": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_fil_rouge.tex"
+      ],
+      "observation": "W défini uniquement sur ]0,10[ puis évalué au sommet12,5; confusion aire/volume.",
+      "correction_proof": "W polynôme sur R; identité W=V/x et interprétation aire seulement sur domaine physique. Frontières explicitement non atteintes.",
+      "regression_tests": [
+        "tests/test_second_degree_batch_two_regressions.py::test_box_auxiliary_polynomial_and_physical_domain_are_distinct"
+      ],
+      "status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false,
+      "independent_review": "audit/reviews/independent/2026-09-08-second-degree-batch-two.json"
+    },
+    {
+      "id": "SECDEG-B2-002",
+      "severity": "PRODUCT_P2",
+      "dimension": "PROGRAMME",
+      "sources": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_fil_rouge.tex"
+      ],
+      "observation": "Dérivation et optimisation cubique attribuées à Terminale; abscisse du maximum appelée valeur maximale.",
+      "correction_proof": "Dérivation de cube bien au programme de Première. Le TD annonce une conjecture numérique; preuve analytique différée au chapitre dérivation. Sommet admissible exact(50−√700)/6.",
+      "regression_tests": [
+        "tests/test_second_degree_batch_two_regressions.py::test_box_numerical_search_is_a_conjecture_with_premiere_derivatives"
+      ],
+      "status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false,
+      "independent_review": "audit/reviews/independent/2026-09-08-second-degree-batch-two.json"
+    },
+    {
+      "id": "SECDEG-B2-003",
+      "severity": "PRODUCT_P0",
+      "dimension": "CORRECTION_ALIGNMENT",
+      "sources": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_fil_rouge.tex"
+      ],
+      "observation": "Question entiers consécutifs, réponse3et5 non consécutifs.",
+      "correction_proof": "Question autour de quelle valeur; tableau suggère4, sans preuve générale de maximum.",
+      "regression_tests": [
+        "tests/test_second_degree_batch_two_regressions.py::test_box_numerical_search_is_a_conjecture_with_premiere_derivatives"
+      ],
+      "status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false,
+      "independent_review": "audit/reviews/independent/2026-09-08-second-degree-batch-two.json"
+    },
+    {
+      "id": "SECDEG-B2-004",
+      "severity": "PRODUCT_P2",
+      "dimension": "LATEX",
+      "sources": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_fil_rouge.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-027.tex"
+      ],
+      "observation": "Commande notin cassée par séquence newline+otin.",
+      "correction_proof": "Rétablissement de la commande TeX notin; contrôle explicite des deux sources.",
+      "regression_tests": [
+        "tests/test_second_degree_batch_two_regressions.py::test_broken_notin_control_sequence_is_absent"
+      ],
+      "status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false,
+      "independent_review": "audit/reviews/independent/2026-09-08-second-degree-batch-two.json"
+    },
+    {
+      "id": "SECDEG-B2-005",
+      "severity": "PRODUCT_P0",
+      "dimension": "SCIENCE",
+      "sources": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_contextualise.tex"
+      ],
+      "observation": "Trajectoire appelée arc de cercle, départ au sol malgré hauteur2, maximum dit non atteint malgré sommet10.",
+      "correction_proof": "Arc de parabole, départ2m; identité h=−(x−10)²/20+7 prouve le maximum en10, h15=23/4 en descente.",
+      "regression_tests": [
+        "tests/test_second_degree_batch_two_regressions.py::test_basket_trajectory_starts_above_ground_and_is_parabolic"
+      ],
+      "status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false,
+      "independent_review": "audit/reviews/independent/2026-09-08-second-degree-batch-two.json"
+    },
+    {
+      "id": "SECDEG-B2-006",
+      "severity": "PRODUCT_P0",
+      "dimension": "SCIENCE",
+      "sources": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_contextualise.tex"
+      ],
+      "observation": "Racines calculées en remplaçant radical par arrondi dans égalité exacte;centièmes1,05/18,95 faux; oracle portée accepte21,9 ou autre.",
+      "correction_proof": "Racines exactes10±4√5, arrondis1,06/18,94. Portée10+2√35≈21,8. Oracle exact et arrondi requis.",
+      "regression_tests": [
+        "tests/test_second_degree_batch_two_regressions.py::test_basket_exact_height_roots_and_ground_range_match_oracles"
+      ],
+      "status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false,
+      "independent_review": "audit/reviews/independent/2026-09-08-second-degree-batch-two.json"
+    },
+    {
+      "id": "SECDEG-B2-007",
+      "severity": "PRODUCT_P0",
+      "dimension": "SCIENCE",
+      "sources": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_contextualise.tex"
+      ],
+      "observation": "Question présuppose une autre intersection; changement a décrit comme gravité ou angle plus vertical sans fondement.",
+      "correction_proof": "Seule intersection0; h−k=3x²/100>0 pourx>0. Comparaison à coefficient linéaire/terme constant fixés, conclusion limitée aux deux courbes.",
+      "regression_tests": [
+        "tests/test_second_degree_batch_two_regressions.py::test_basket_does_not_presuppose_a_second_intersection_or_change_gravity"
+      ],
+      "status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false,
+      "independent_review": "audit/reviews/independent/2026-09-08-second-degree-batch-two.json"
+    },
+    {
+      "id": "SECDEG-B2-008",
+      "severity": "PRODUCT_P0",
+      "dimension": "SCIENCE",
+      "sources": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-027.tex"
+      ],
+      "observation": "Tableau imprime A5=40 au lieu0.",
+      "correction_proof": "Valeurs imprimées lues et calculées depuis(16−2x)(10−2x); endpoints160/0, non atteints sur domaine physique.",
+      "regression_tests": [
+        "tests/test_second_degree_batch_two_regressions.py::test_box_base_table_endpoint_is_evaluated_from_its_polynomial"
+      ],
+      "status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false,
+      "independent_review": "audit/reviews/independent/2026-09-08-second-degree-batch-two.json"
+    },
+    {
+      "id": "SECDEG-B2-009",
+      "severity": "PRODUCT_P0",
+      "dimension": "SCIENCE",
+      "sources": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-039.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-039.tex"
+      ],
+      "observation": "Oracle CO039 utilise mauvais modèle nouveau tarif10x au lieu15x et certifie−75; EX039 n’a pas de vérification Q5.",
+      "correction_proof": "Nouveau bénéfice dérivé de x(20−x/5)−(200+5x), maximum325/4 en75/2. Régression compare oracle lu/exécuté au modèle indépendant; échec initial écart−5x.",
+      "regression_tests": [
+        "tests/test_second_degree_batch_two_regressions.py::test_tariff_oracle_uses_the_actual_new_price_and_charges"
+      ],
+      "status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false,
+      "independent_review": "audit/reviews/independent/2026-09-08-second-degree-batch-two.json"
+    },
+    {
+      "id": "SECDEG-B2-010",
+      "severity": "PRODUCT_P0",
+      "dimension": "SCIENCE",
+      "sources": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-039.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-039.tex"
+      ],
+      "observation": "Intervalle rentable ]28,72[ faux; domainequantités non précisé faceaux racines etmaximum37,5.",
+      "correction_proof": "Modèle continu d’unités divisibles explicite. Intervalle exact50±10√5; contre-exemple B28=B72=8/5>0.",
+      "regression_tests": [
+        "tests/test_second_degree_batch_two_regressions.py::test_tariff_profit_interval_preserves_profitable_rounded_boundary_values"
+      ],
+      "status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false,
+      "independent_review": "audit/reviews/independent/2026-09-08-second-degree-batch-two.json"
+    },
+    {
+      "id": "SECDEG-B2-011",
+      "severity": "PRODUCT_P0",
+      "dimension": "SCIENCE",
+      "sources": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-039.tex"
+      ],
+      "observation": "Choix tarif nouveau jusqu’à38 affirmé à partir de son propremaximum, confusiondemande.",
+      "correction_proof": "Différence bénéfices x(50−x)/10 : nouveau supérieur0<x<50, égal0/50, ancien supérieur50<x≤100;aucune prédictiondemande.",
+      "regression_tests": [
+        "tests/test_second_degree_batch_two_regressions.py::test_tariff_comparison_is_based_on_difference_not_each_separate_optimum"
+      ],
+      "status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false,
+      "independent_review": "audit/reviews/independent/2026-09-08-second-degree-batch-two.json"
+    },
+    {
+      "id": "SECDEG-B2-012",
+      "severity": "PRODUCT_P0",
+      "dimension": "SCIENCE",
+      "sources": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-040.tex"
+      ],
+      "observation": "Départ du sol contradictoireh0=2; metadatah0=0.",
+      "correction_proof": "Hauteur initiale2 partout; équationsdonnéessurintervallephysique jusqu’auretourausol.",
+      "regression_tests": [
+        "tests/test_second_degree_batch_two_regressions.py::test_projectile_initial_height_metadata_agrees_with_statement_and_oracle"
+      ],
+      "status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false,
+      "independent_review": "audit/reviews/independent/2026-09-08-second-degree-batch-two.json"
+    },
+    {
+      "id": "SECDEG-B2-013",
+      "severity": "PRODUCT_P0",
+      "dimension": "SCIENCE",
+      "sources": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-040.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-040.tex"
+      ],
+      "observation": "Réponsepropositionangle30incomplète, portéeannoncéepluslonguefausse.",
+      "correction_proof": "À30°, y=2+x/√3−x²/60, y30=10√3−13>3. Portée√3(10+2√35)≈37,8<41,9, obstaclefranchi. Identitéetpositivitéracine exactes, donnéestrig fourniesélève.",
+      "regression_tests": [
+        "tests/test_second_degree_batch_two_regressions.py::test_thirty_degree_proposal_actually_clears_obstacle_and_has_shorter_range"
+      ],
+      "status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false,
+      "independent_review": "audit/reviews/independent/2026-09-08-second-degree-batch-two.json"
+    },
+    {
+      "id": "SECDEG-B2-014",
+      "severity": "PRODUCT_P2",
+      "dimension": "PROGRAMME",
+      "sources": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_fil_rouge.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_contextualise.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-027.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-039.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-040.tex"
+      ],
+      "observation": "Formules générales imposées pour les sommets de cas simples ; capacités C4/C5 nominalement créditées dans les TD sans tâches correspondantes, et C6 créditée sans optimum quadratique dans le TD fil.",
+      "correction_proof": "Complétion du carré au lieu de la procédure générale. Chaque chaîne imprimée est analysée exactement. TD fil : C1/C2 seuls après contre-revue indépendante du parent ; TD contextualisé : C1/C2/C3/C6. Les crédits non justifiés sont retirés, aucun atome officiel ne change.",
+      "regression_tests": [
+        "tests/test_second_degree_batch_two_regressions.py::test_printed_polynomial_identity_chains_are_exact",
+        "tests/test_second_degree_batch_two_regressions.py::test_printed_identity_check_rejects_a_changed_constant"
+      ],
+      "status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false,
+      "independent_review": "audit/reviews/independent/2026-09-08-second-degree-batch-two.json"
+    },
+    {
+      "id": "SECDEG-B2-015",
+      "severity": "PRODUCT_P0",
+      "dimension": "PROGRAMME_CORRECTION_ALIGNMENT",
+      "sources": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-027.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-027.tex"
+      ],
+      "observation": "EX/CO027 créditent C6/M6 sans optimisation quadratique ; les coordonnées demandées sont réduites à l’abscisse. Commentaire oracle maximum2,06 faux.",
+      "correction_proof": "C1/C2 et M1/M2 uniquement : développement et parabole de la base. Aucun crédit C6/M6 ni balise C6. Sommet(13/2,−9) explicite. Vprime=4(x−2)(3x−20), maximum exact2 sur0<x<5.",
+      "regression_tests": [
+        "tests/test_second_degree_batch_two_regressions.py::test_box_027_does_not_claim_an_optimization_it_does_not_perform",
+        "tests/test_second_degree_batch_two_regressions.py::test_box_027_correction_gives_both_vertex_coordinates"
+      ],
+      "status": "VALIDATED_BY_EVIDENCE",
+      "discovered_by": "independent_codex_root",
+      "human_approval": false,
+      "independent_review": "audit/reviews/independent/2026-09-08-second-degree-batch-two.json"
+    }
+  ],
+  "official_source": {
+    "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+    "sha256": "4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
+    "scope": "Lignes317–319 complétion du carré;441–444 dérivées carré/cube/puissances en Première2026–2027. Aucun atome modifié."
+  },
+  "tests": {
+    "command": "python -m pytest -q tests/test_second_degree_batch_two_regressions.py --junitxml=/tmp/second-degree-batch-two-tests.xml",
+    "rc": 0,
+    "collected": 21,
+    "passed": 21,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "junit_sha256": "a8c73d8e31eb836a87eab6d6b3abf1c0337f7ebe6b6b84b5a9f444dd24dde4bc",
+    "names": [
+      "test_box_auxiliary_polynomial_and_physical_domain_are_distinct",
+      "test_box_numerical_search_is_a_conjecture_with_premiere_derivatives",
+      "test_broken_notin_control_sequence_is_absent",
+      "test_basket_trajectory_starts_above_ground_and_is_parabolic",
+      "test_basket_exact_height_roots_and_ground_range_match_oracles",
+      "test_basket_does_not_presuppose_a_second_intersection_or_change_gravity",
+      "test_box_base_table_endpoint_is_evaluated_from_its_polynomial",
+      "test_box_027_does_not_claim_an_optimization_it_does_not_perform",
+      "test_box_027_correction_gives_both_vertex_coordinates",
+      "test_tariff_oracle_uses_the_actual_new_price_and_charges[exercices/1SPE-SECDEG-EX-039.tex]",
+      "test_tariff_oracle_uses_the_actual_new_price_and_charges[corriges/1SPE-SECDEG-CO-039.tex]",
+      "test_tariff_profit_interval_preserves_profitable_rounded_boundary_values",
+      "test_tariff_comparison_is_based_on_difference_not_each_separate_optimum",
+      "test_projectile_initial_height_metadata_agrees_with_statement_and_oracle",
+      "test_thirty_degree_proposal_actually_clears_obstacle_and_has_shorter_range",
+      "test_printed_polynomial_identity_chains_are_exact[cours/07_td_fil_rouge.tex-names0]",
+      "test_printed_polynomial_identity_chains_are_exact[cours/07_td_contextualise.tex-names1]",
+      "test_printed_polynomial_identity_chains_are_exact[corriges/1SPE-SECDEG-CO-027.tex-names2]",
+      "test_printed_polynomial_identity_chains_are_exact[corriges/1SPE-SECDEG-CO-039.tex-names3]",
+      "test_printed_polynomial_identity_chains_are_exact[corriges/1SPE-SECDEG-CO-040.tex-names4]",
+      "test_printed_identity_check_rejects_a_changed_constant"
+    ],
+    "red_observations": "12défauts échouaient avant édition; oracle039 paramétré a ensuite échoué séparément sur EXabsent et COécart−5x. Mutation contrôlée constante−25→+25 est refusée."
+  },
+  "canonical_oracles": {
+    "temporary_root": "/tmp/nexus-second-degree-b2-a8i9a6mm",
+    "command": "python Mathematiques/manuel-maths/scripts/verify_sympy.py --chap 1SPE-SECOND-DEGRE (copie temporaire des seules huit sources B2)",
+    "rc": 0,
+    "counts": {
+      "pass": 8
+    },
+    "verifier_sha256": "68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e",
+    "log_sha256": "b3bd04e10fd0d9c61c54c73bf2560ebe65fb445428433104b345060e1a5baf74",
+    "receipts": [
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/validations/07_td_contextualise.sympy.json",
+        "sha256": "bee689767f3fa01057ba9162dc9af1e1b4a34c4f584c01497dd346cae13839e3",
+        "source_sha256": "sha256:f25c447e845fec9c5923e8cd07bf4f2b441b4f803a73e970b9796193186410bb",
+        "verdict": "pass"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/validations/07_td_fil_rouge.sympy.json",
+        "sha256": "e0a333b0f21398793eaf1be757d6a8b4b108f0d177122e4c562416d4e53e8810",
+        "source_sha256": "sha256:87d3ec69a8654aa3b7e4d3a77295ac477fb7be5a6cf0bd21f32243d0295366d1",
+        "verdict": "pass"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/validations/1SPE-SECDEG-CO-027.sympy.json",
+        "sha256": "fb518fc55d5779da0d83853a9c40ea44c21b1e53d3010a1f7385c89e0729be43",
+        "source_sha256": "sha256:7000edc2e0deec3a8903e4a08e4f0de3c74e3fe0414cc0c9cd0e3d5887429d12",
+        "verdict": "pass"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/validations/1SPE-SECDEG-CO-039.sympy.json",
+        "sha256": "5766f013a5a92027610a7014b06ab7857bbd8f48396ec27bb86b66b61f6c78bb",
+        "source_sha256": "sha256:45146af7672bb979109b2b63e20a1b9f1fe2a97268376f3672c72c874532b761",
+        "verdict": "pass"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/validations/1SPE-SECDEG-CO-040.sympy.json",
+        "sha256": "23635c9cc2c739e2cdedb96956af658a7ee31f65da8272bef78bc57d16b5d54f",
+        "source_sha256": "sha256:e7a55c1bedb3132400e02d74dc973fd34a9f1747897187c79574a010a83d3da2",
+        "verdict": "pass"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/validations/1SPE-SECDEG-EX-027.sympy.json",
+        "sha256": "bcb5085eabc584ba034b40a3ba6204d8ec8150d5d48a5fd2412587129c97b2c7",
+        "source_sha256": "sha256:496c5404b5252ecfe9413f1aafea9d2037e98f5afab78def9c746091d65a7ba1",
+        "verdict": "pass"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/validations/1SPE-SECDEG-EX-039.sympy.json",
+        "sha256": "0bc50f3638ccd6f194b95c49761605f95a2949a9d467134196f12bd23d0f3548",
+        "source_sha256": "sha256:92979079a1d03aa580e084912ade01a14f5e1240e1d23d97c78d6428eda6eeec",
+        "verdict": "pass"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/validations/1SPE-SECDEG-EX-040.sympy.json",
+        "sha256": "3a571161b945a5ad25bb5a7de4f9772a7c498996f678af686b1ab4a8bad1daef",
+        "source_sha256": "sha256:21cbd3ab1028a643b0720017f0c839b2368bd41eeba3d8218cda03857278f754",
+        "verdict": "pass"
+      }
+    ],
+    "copied_to_current": true,
+    "scope": "Assertions mécaniques seulement ; aucune approbation humaine ni certification scientifique intégrale implicite."
+  },
+  "review_status": "VALIDATED_BY_EVIDENCE",
+  "human_approval": false,
+  "release_conclusion": "NOT_CERTIFIED",
+  "excluded_scope": [
+    "B1 séparé",
+    "CO028/037/038/042, évaluations et QCM : prochain lot non certifié",
+    "Revue de figures et PDF non exécutée dans ce lot"
+  ],
+  "independent_review_feedback": {
+    "reviewer": "independent_codex_root",
+    "scope": "Parent a lu intégralement les sept sources initiales et trouvé les calculs principaux corrects ; demandes complémentaires de mapping TDfil et EX/CO027, coordonnées sommet et commentaire oracle corrigées, dernière relecture requise.",
+    "regression_red_observed": true,
+    "human_approval": false
+  },
+  "refreshed_at": "2026-09-08T13:06:02.130744+00:00",
+  "independent_counter_review": "audit/reviews/independent/2026-09-08-second-degree-batch-two.json"
+}

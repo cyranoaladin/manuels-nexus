@@ -1,7 +1,7 @@
 % META: {"id": "1SPE-SECDEG-CO-039", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-039", "capacites_codes": ["C3", "C5", "C6"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import *
-% x = symbols('x', real=True, nonneg=True)
+% x = symbols('x', real=True, nonnegative=True)
 % R = 15*x - x**2 / 10
 % C = 200 + 5*x
 % B = R - C
@@ -29,12 +29,16 @@
 % sols_32 = sorted(solve(B_32, x))
 % assert simplify(sols_32[0] - (50 - 6*sqrt(5))) == 0
 % assert simplify(sols_32[1] - (50 + 6*sqrt(5))) == 0
-% # Q5 : B'(x) = -x^2/5 + 10x - 200, alpha = 25, beta = B'(25)
-% B2 = -x**2/5 + 10*x - 200
-% alpha2 = 25
+% assert expand(B_simplified-(-Rational(1,10)*(x-50)**2+50)) == 0
+% assert B_simplified.subs(x, 28) == B_simplified.subs(x, 72) == Rational(8,5)
+% # Q5 : tarif20-x/5, avec les mêmes charges200+5x.
+% B2 = expand(x*(20-x/5)-C)
+% assert B2 == -x**2/5+15*x-200
+% alpha2 = Rational(75,2)
 % beta2 = B2.subs(x, alpha2)
-% assert float(beta2) == float(-625/5 + 250 - 200)
-% assert beta2 == -75
+% assert beta2 == Rational(325,4)
+% assert expand(B2-(-Rational(1,5)*(x-alpha2)**2+beta2)) == 0
+% assert expand(B2-B_simplified-x*(50-x)/10) == 0
 % END-VERIFY
 \begin{corrige}{1SPE-SECDEG-EX-039}
 
@@ -55,9 +59,11 @@ $R(x) = x \cdot p(x) = x\!\left(15 - \dfrac{x}{10}\right) = 15x - \dfrac{x^2}{10
 
 \textit{a) Forme canonique.}
 
-\commentaireMarge{$a = -\frac{1}{10}$, $b = 10$ : $\alpha = -\frac{10}{2 \times (-\frac{1}{10})} = 50$.}
+\commentaireMarge{Compléter le carré dans $x^2-100x$.}
 
-\[\alpha = -\frac{b}{2a} = -\frac{10}{2 \times (-\frac{1}{10})} = -\frac{10}{-\frac{1}{5}} = 50.\]
+\[B(x)=-\frac{1}{10}(x^2-100x)-200
+=-\frac{1}{10}\bigl((x-50)^2-2500\bigr)-200
+=-\frac{1}{10}(x-50)^2+50.\]
 
 \[\beta = B(50) = -\frac{2500}{10} + 500 - 200 = -250 + 500 - 200 = 50.\]
 
@@ -92,7 +98,10 @@ $\Delta = 100^2 - 4 \times 2000 = 10000 - 8000 = 2000$.
 
 $10\sqrt{5} \approx 22{,}4$, donc $x_1 \approx 27{,}6$ et $x_2 \approx 72{,}4$.
 
-L'entreprise est bénéficiaire pour $x \in \left]28\,;\,72\right[$ (valeurs arrondies à l'unité).
+L'entreprise est bénéficiaire exactement pour
+$x\in]50-10\sqrt{5}\,;\,50+10\sqrt{5}[$.
+Les bornes arrondies à l'unité sont $28$ et $72$, mais cet arrondi ne définit
+pas l'intervalle exact : par exemple, $B(28)=B(72)=1{,}6>0$.
 
 \medskip
 \textbf{4. Équation de seuil $B(x) = 32$.}
@@ -122,11 +131,20 @@ $R'(x) = x\!\left(20 - \dfrac{x}{5}\right) = 20x - \dfrac{x^2}{5}$.
 
 $B'(x) = 20x - \dfrac{x^2}{5} - 200 - 5x = -\dfrac{x^2}{5} + 15x - 200$.
 
-Sommet : $\alpha' = -\dfrac{15}{2 \times (-\frac{1}{5})} = \dfrac{15}{\frac{2}{5}} = \dfrac{15 \times 5}{2} = \dfrac{75}{2} = 37{,}5$.
+On complète le carré :
+\[B'(x)=-\frac{1}{5}(x^2-75x)-200
+=-\frac{1}{5}\left(\left(x-\frac{75}{2}\right)^2-\frac{5625}{4}\right)-200
+=-\frac{1}{5}\left(x-\frac{75}{2}\right)^2+\frac{325}{4}.\]
+Le maximum est atteint pour $x=37{,}5$, quantité admissible dans le modèle continu.
 
-Mais $37{,}5 \leqslant 100$, donc $B'_{\max} = B'(37{,}5) = -\dfrac{37{,}5^2}{5} + 15 \times 37{,}5 - 200 = -281{,}25 + 562{,}5 - 200 = 81{,}25$~\euro.
+Ainsi $B'_{\max}=\frac{325}{4}=81{,}25$~\euro, contre $50$~\euro{} pour le premier tarif.
 
-Comparaison : $B'_{\max} = 81{,}25 > 50 = B_{\max}$. Le tarif dégressif plus élevé $p'$ est préférable pour les faibles volumes ($x \leqslant 37{,}5$), mais impose un prix de vente plus élevé qui limite la demande. Il faut choisir $p'$ si on peut vendre $38$~unités ou moins, car le bénéfice par unité y est plus favorable.
+Pour comparer à une \emph{même quantité} produite et vendue, on étudie :
+\[B'(x)-B(x)=-\frac{x^2}{10}+5x=\frac{x(50-x)}{10}.\]
+Le tarif $p'$ donne donc un bénéfice supérieur pour $0<x<50$ ;
+les deux bénéfices sont égaux en $x=0$ et $x=50$ ; le tarif $p$ est préférable
+pour $50<x\leq100$. Ces conclusions comparent les deux modèles à volume fixé ;
+elles ne prédisent pas comment la demande réagit à un changement de prix.
 
 \baremeIndicatif{Q1 : 2 pts (modeliser, calculer) ; Q2 : 3 pts (calculer, raisonner) ; Q3 : 3 pts (calculer, raisonner, communiquer) ; Q4 : 2 pts (calculer, communiquer) ; Q5 : 4 pts (chercher, modeliser, communiquer)}
 \end{corrige}

@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SECDEG-EX-027", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites_codes": ["C2", "C6"], "methodes": ["M2", "M6"], "parcours": 2, "competences": ["calculer", "raisonner", "modeliser"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-027.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-027.tex", "status": "generated"}
+% META: {"id": "1SPE-SECDEG-EX-027", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites_codes": ["C1", "C2"], "methodes": ["M1", "M2"], "parcours": 2, "competences": ["calculer", "raisonner", "modeliser"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-027.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-027.tex", "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import symbols, Rational, solve, diff, simplify
 % x = symbols('x')
@@ -11,7 +11,7 @@
 % # Sur ]0;5[, A est decroissante (a>0, sommet en 6.5 > 5)
 % alpha_A = Rational(52, 8)
 % assert alpha_A == Rational(13, 2)
-% # V(x) = x * A(x), maximum numerique en x ~ 2.06
+% # V(x) = x * A(x), maximum exact en x=2 sur le domaine physique
 % # Pour le maximum de V, on utilise dV/dx = 0
 % # V = 4x^3 - 52x^2 + 160x
 % V = 4*x**3 - 52*x**2 + 160*x
@@ -28,8 +28,8 @@ On découpe des carrés de côté $x$~cm aux quatre coins d'une feuille rectangu
 On note $V(x)$ le volume (en cm$^3$) de la boîte, avec $0 < x < 5$.
 
 \begin{enumerate}
-  \item \textbf{(C6)} Exprimer les dimensions de la base de la boîte en fonction de $x$.
-  \item \textbf{(C6)} Montrer que $V(x) = 4x^3 - 52x^2 + 160x$.
+  \item Exprimer les dimensions de la base de la boîte en fonction de $x$.
+  \item Montrer que $V(x) = 4x^3 - 52x^2 + 160x$.
 
   \textit{On admet ici que $V$ n'est pas un polynôme du second degré. On s'intéresse à la \textbf{base} de la boîte.}
 
@@ -39,6 +39,6 @@ On note $V(x)$ le volume (en cm$^3$) de la boîte, avec $0 < x < 5$.
     \item Calculer les coordonnées du sommet de la parabole représentant $A$.
     \item Dresser le tableau de variations de $A$ sur $]0\,;\,5[$ et interpréter.
   \end{enumerate}
-  \item \textbf{(C6)} Calculer $V(2)$ et $V(3)$. Quel découpage donne le plus grand volume ?
+  \item Calculer $V(2)$ et $V(3)$. Quel découpage donne le plus grand volume ?
 \end{enumerate}
 \end{exercice}

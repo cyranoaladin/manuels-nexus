@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SECDEG-TD-CONTEXTUALISE", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "td", "capacites_codes": ["C2","C3","C4","C5","C6"], "status": "generated"}
+% META: {"id": "1SPE-SECDEG-TD-CONTEXTUALISE", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "td", "capacites_codes": ["C1","C2","C3","C6"], "status": "generated"}
 
 %---------------------------------------------------------------
 % TD CONTEXTUALISE — Trajectoire d'un ballon de basket
@@ -9,7 +9,7 @@
 
 \subsection*{Mise en situation}
 
-Un joueur de basket tire un ballon depuis le sol. On modélisé la trajectoire du ballon dans un plan vertical par la courbe d'équation :
+Un joueur de basket lance un ballon depuis une hauteur de $2$~m. On modélise la trajectoire du ballon dans un plan vertical par la courbe d'équation :
 \[
   h(x) = -0{,}05x^2 + x + 2,
 \]
@@ -52,9 +52,10 @@ ou $x$ est la distance horizontale parcourue (en metres) et $h(x)$ la hauteur du
 
 \commentaireMarge{$a < 0$ : parabole en $\cap$, le ballon redescend.}
 
-\textbf{Question 1.} $a = -0{,}05 < 0$. La parabole est en $\cap$ : le ballon suit une trajectoire en arc de cercle, il monte puis redescend. Physiquement cohérent avec un lancer parabolique.
+\textbf{Question 1.} $a = -0{,}05 < 0$. La parabole est en $\cap$ : le ballon suit
+un arc de parabole. Pour ce lancer, il monte puis redescend.
 
-\textbf{Question 2.} $h(0) = -0{,}05 \times 0 + 0 + 2 = 2$~m. Le ballon est lance depuis une hauteur de $2$~m (par exemple, au niveau de la poignee du joueur).
+\textbf{Question 2.} $h(0) = -0{,}05 \times 0 + 0 + 2 = 2$~m. Le ballon est lancé depuis une hauteur de $2$~m, au niveau des mains du joueur dans ce modèle.
 
 \textbf{Question 3.}
 \[
@@ -63,17 +64,20 @@ h(10) = -0{,}05 \times 100 + 10 + 2 = -5 + 10 + 2 = 7 \text{ m}.
 \[
 h(15) = -0{,}05 \times 225 + 15 + 2 = -11{,}25 + 17 = 5{,}75 \text{ m}.
 \]
-Le ballon est encore a $5{,}75$~m en $x = 15$ (superieur a $2$~m), donc il n'a pas encore atteint son maximum.
+Les deux valeurs ne suffisent pas à situer exactement le sommet. En complétant
+le carré, on obtient $h(x)=-0{,}05(x-10)^2+7$ : le maximum est atteint en $x=10$.
+À cet endroit le ballon cesse de monter ; à $x=15$, il est déjà redescendu.
 
 \textbf{Question 4.} $h(x) = 3 \Leftrightarrow -0{,}05x^2 + x + 2 = 3 \Leftrightarrow -0{,}05x^2 + x - 1 = 0$.
 
 On multiplie par $-20$ : $x^2 - 20x + 20 = 0$.
 $\Delta = 400 - 80 = 320$. $\sqrt{320} = 8\sqrt{5} \approx 17{,}9$.
 \[
-x_1 = \frac{20 - 17{,}9}{2} \approx 1{,}05 \text{ m}, \qquad x_2 = \frac{20 + 17{,}9}{2} \approx 18{,}95 \text{ m}.
+x_1 = \frac{20-8\sqrt{5}}{2}=10-4\sqrt{5}\approx1{,}06 \text{ m},
+\qquad x_2=\frac{20+8\sqrt{5}}{2}=10+4\sqrt{5}\approx18{,}94 \text{ m}.
 \]
 
-Le ballon est a $3$~m de hauteur pour $x \approx 1{,}05$~m (a la montee) et $x \approx 18{,}95$~m (a la descente).
+Le ballon est à $3$~m de hauteur pour $x \approx 1{,}06$~m (à la montée) et $x \approx 18{,}94$~m (à la descente).
 
 \end{corrige}
 
@@ -94,7 +98,7 @@ Le ballon est a $3$~m de hauteur pour $x \approx 1{,}05$~m (a la montee) et $x \
 \end{exercice}
 
 % BEGIN-VERIFY
-% from sympy import symbols, Rational, sqrt as Sqrt, solve
+% from sympy import symbols, Rational, sqrt as Sqrt, solve, simplify
 % x = symbols('x')
 % h = Rational(-1, 20)*x**2 + x + 2
 % a, b, c = Rational(-1,20), 1, 2
@@ -102,6 +106,8 @@ Le ballon est a $3$~m de hauteur pour $x \approx 1{,}05$~m (a la montee) et $x \
 % assert alpha == 10
 % h_max = h.subs(x, alpha)
 % assert h_max == 7
+% from sympy import expand
+% assert expand(h-(-Rational(1,20)*(x-10)**2+7)) == 0
 % # portee : h(x) = 0 => -0.05x^2 + x + 2 = 0 => x^2 - 20x - 40 = 0
 % # Attention : multiplier par -20
 % # Delta = 400 + 160 = 560
@@ -110,20 +116,22 @@ Le ballon est a $3$~m de hauteur pour $x \approx 1{,}05$~m (a la montee) et $x \
 % positive_sols = [s for s in sols if float(s) > 0]
 % assert len(positive_sols) == 1
 % portee = float(positive_sols[0])
-% assert round(portee, 1) == 21.9 or abs(portee - (10 + math.sqrt(140))) < 0.01
+% assert round(portee, 1) == 21.8
+% assert simplify(positive_sols[0]-(10+2*Sqrt(35))) == 0
 % # sqrt(140) = sqrt(4*35) = 2*sqrt(35) ~ 11.832
 % assert abs(10 + 2*math.sqrt(35) - portee) < 0.001
 % END-VERIFY
 
 \begin{corrige}{1SPE-SECDEG-TD-CTX-B}
 
-\commentaireMarge{$\alpha = -b/(2a) = -1/(2 \times (-0{,}05)) = -1/(-0{,}1)$.}
+\commentaireMarge{Compléter le carré dans $x^2-20x$.}
 
-\textbf{Question 1.} $a = -0{,}05$, $b = 1$.
+\textbf{Question 1.} On complète le carré :
 \[
-\alpha = \frac{-1}{2 \times (-0{,}05)} = \frac{-1}{-0{,}1} = 10 \text{ m}.
+h(x)=-0{,}05(x^2-20x)+2
+=-0{,}05\bigl((x-10)^2-100\bigr)+2=-0{,}05(x-10)^2+7.
 \]
-Le ballon est au point le plus haut après avoir parcouru $10$~m horizontalement.
+On lit $\alpha=10$. Le ballon est au point le plus haut après avoir parcouru $10$~m horizontalement.
 
 \textbf{Question 2.}
 \[
@@ -141,14 +149,19 @@ x = \frac{20 \pm \sqrt{560}}{2} = 10 \pm \sqrt{140}.
 \]
 $\sqrt{140} \approx 11{,}8$.
 \begin{itemize}
-  \item $x_1 = 10 - 11{,}8 \approx -1{,}8$ m (avant le lancer : a ignorer).
-  \item $x_2 = 10 + 11{,}8 \approx 21{,}8$ m.
+  \item $x_1 = 10-\sqrt{140} \approx -1{,}8$~m (hors du domaine physique $x\geq0$).
+  \item $x_2 = 10+\sqrt{140} \approx 21{,}8$~m.
 \end{itemize}
 La portee du tir est d'environ $21{,}8$~m.
 
 \commentaireMarge{Le maximum de $h$ est $7$~m $> 3{,}05$~m. Le ballon passe donc bien au-dessus de la hauteur du panier.}
 
-\textbf{Question 4.} La hauteur du panier est $3{,}05$~m. D'après la question 4 de la Partie A, le ballon est a $3$~m de hauteur pour $x \approx 1{,}05$~m et $x \approx 18{,}95$~m. Comme $3{,}05 < h_{\max} = 7$~m, il existe bien des valeurs de $x$ pour lesquelles $h(x) = 3{,}05$~m. En particulier, si le panier se situe a la bonne distance horizontale, le ballon peut theoriquement y entrer.
+\textbf{Question 4.} La hauteur du panier, $3{,}05$~m, est comprise entre la
+hauteur initiale $2$~m et la hauteur maximale $7$~m. La trajectoire parabolique
+passe donc par cette hauteur à la montée et à la descente. Si le panier est
+dans le plan du tir et à la bonne distance horizontale, le ballon peut
+théoriquement y entrer. Sa distance n'étant pas donnée, on ne peut pas
+affirmer que ce tir atteint un panier particulier.
 
 \end{corrige}
 
@@ -163,8 +176,10 @@ Un second joueur tire avec la trajectoire $k(x) = -0{,}08x^2 + x + 2$.
 \begin{enumerate}
   \item Calculer le sommet de $k$ et la hauteur maximale.
   \item Comparer les deux trajectoires : laquelle monte le plus haut ? Laquelle a la plus grande portee ?
-  \item Résoudre $h(x) = k(x)$ pour trouver l'abscisse ou les deux trajectoires se croisent (autre que $x = 0$).
-  \item \textbf{Question orale} : sans calcul, comment le coefficient $a$ influence-t-il la forme de la parabole et la portee du tir ? Expliquer en termes physiques.
+  \item Résoudre $h(x) = k(x)$. Existe-t-il une autre intersection que le point de départ ?
+  \item \textbf{Question orale} : pour ces deux trajectoires, dont le coefficient
+    linéaire et le terme constant sont identiques, comment le changement de $a$
+    modifie-t-il la hauteur et la portée ? S'appuyer sur la comparaison précédente.
 \end{enumerate}
 \end{exercice}
 
@@ -183,6 +198,8 @@ Un second joueur tire avec la trajectoire $k(x) = -0{,}08x^2 + x + 2$.
 % assert float(k_max) == float(Rational(-25,8) + Rational(25,4) + 2)
 % assert float(k_max) == float(Rational(25,8) + 2)
 % assert float(k_max) == float(Rational(41,8))
+% from sympy import expand
+% assert expand(k-(-Rational(2,25)*(x-Rational(25,4))**2+Rational(41,8))) == 0
 % # Intersection : h(x) = k(x) => (-1/20 + 2/25)x^2 = 0 => (-5/100 + 8/100)x^2 = 0
 % # => 3/100 x^2 = 0 => x = 0 ! Les deux ont meme b et c...
 % # Verifier : h(x) - k(x) = (-1/20 + 2/25)x^2 = (-5+8)/100 x^2 = 3/100 x^2
@@ -198,10 +215,13 @@ Un second joueur tire avec la trajectoire $k(x) = -0{,}08x^2 + x + 2$.
 
 \begin{corrige}{1SPE-SECDEG-TD-CTX-C}
 
-\textbf{Question 1.} $k(x) = -0{,}08x^2 + x + 2$, $a = -0{,}08$, $b = 1$.
+\textbf{Question 1.} On complète le carré :
 \[
-\alpha_k = \frac{-1}{2 \times (-0{,}08)} = \frac{1}{0{,}16} = 6{,}25 \text{ m}.
+k(x)=-0{,}08(x^2-12{,}5x)+2
+=-0{,}08\bigl((x-6{,}25)^2-39{,}0625\bigr)+2
+=-0{,}08(x-6{,}25)^2+5{,}125.
 \]
+On lit $\alpha_k=6{,}25$~m.
 \[
 k_{\max} = k(6{,}25) = -0{,}08 \times 39{,}0625 + 6{,}25 + 2 = -3{,}125 + 8{,}25 = 5{,}125 \text{ m}.
 \]
@@ -221,8 +241,14 @@ k_{\max} = k(6{,}25) = -0{,}08 \times 39{,}0625 + 6{,}25 + 2 = -3{,}125 + 8{,}25
 \]
 Les deux trajectoires ne se croisent qu'en $x = 0$ : elles partent du même point mais s'ecartent immédiatement.
 
-\commentaireMarge{Plus $|a|$ est grand, plus la parabole est «etroite» et le tir plus court et moins haut.}
+\commentaireMarge{Comparer les hauteurs à une même distance horizontale : $h(x)-k(x)=0{,}03x^2$.}
 
-\textbf{Question 4 (orale).} Plus $|a|$ est grand (en valeur absolue), plus la parabole est «etroite» : le ballon monte moins haut, sa portee est plus courte. Physiquement, cela correspond a un tir plus «vertical» (comme un panier en cloche) plutot qu'un tir rasant (longue portee). Le coefficient $a$ pilote la «courbure» de la trajectoire, c'est-a-dire la deceleration verticale due a la gravite, qui est ici modélisée de maniere simplifiee par le terme $ax^2$.
+\textbf{Question 4 (orale).} Ici, le coefficient linéaire et le terme constant
+restent fixés. Le coefficient $a$ devient plus négatif pour $k$.
+Pour toute distance $x>0$, $h(x)-k(x)=0{,}03x^2>0$ : le second ballon est plus bas
+à cette même distance. Les résultats précédents confirment que sa hauteur
+maximale et sa portée sont plus petites. Cette comparaison concerne une
+hauteur en fonction de la distance horizontale ; elle ne suffit pas à déduire
+une modification de la gravité ou de l'angle de lancer.
 
 \end{corrige}

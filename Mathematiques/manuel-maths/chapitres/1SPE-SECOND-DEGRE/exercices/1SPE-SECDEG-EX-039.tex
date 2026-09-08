@@ -1,7 +1,7 @@
 % META: {"id": "1SPE-SECDEG-EX-039", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites_codes": ["C3", "C5", "C6"], "methodes": ["M3", "M5", "M6"], "parcours": 3, "competences": ["chercher", "raisonner", "modeliser", "calculer"], "duree_min": 35, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"cout_fixe": 200, "cout_unit": 5, "prix_unit": 15, "demande_max": 100}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-039.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-039.tex", "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import *
-% x = symbols('x', real=True, nonneg=True)
+% x = symbols('x', real=True, nonnegative=True)
 % # Recettes : prix = 15 - x/10 euros par unite (tarif degressif), quantite = x
 % # R(x) = x*(15 - x/10) = 15x - x^2/10
 % R = 15*x - x**2 / 10
@@ -38,9 +38,19 @@
 % assert float(B_simplified.subs(x, 90)) < 0
 % # Maximum benefice : 50 unites, benefice 50 euros
 % assert B_simplified.subs(x, 50) == 50
+% assert expand(B_simplified-(-Rational(1,10)*(x-50)**2+50)) == 0
+% assert B_simplified.subs(x, 28) == B_simplified.subs(x, 72) == Rational(8,5)
+% # Q5 : même quantité et mêmes charges; le tarif est20-x/5.
+% B2 = expand(x*(20-x/5)-C)
+% assert B2 == -x**2/5+15*x-200
+% assert expand(B2-(-Rational(1,5)*(x-Rational(75,2))**2+Rational(325,4))) == 0
+% assert B2.subs(x, Rational(75,2)) == Rational(325,4)
+% assert expand(B2-B_simplified-x*(50-x)/10) == 0
 % END-VERIFY
 \begin{exercice}{1SPE-SECDEG-EX-039}{3}{35}
-Une entreprise fabrique et vend $x$ unités d'un produit par semaine, avec $0 \leq x \leq 100$.
+Une entreprise fabrique et vend un produit mesurable en unités divisibles.
+Dans un modèle continu, la quantité hebdomadaire $x$ est un nombre réel,
+avec $0 \leq x \leq 100$.
 
 Le prix de vente unitaire (en euros) est $p(x) = 15 - \dfrac{x}{10}$ (tarif dégressif en fonction de la quantité produite).
 
@@ -67,7 +77,8 @@ Les charges hebdomadaires totales sont $C(x) = 200 + 5x$ euros.
   \begin{enumerate}
     \item Montrer que $B(x) > 0$ équivaut à résoudre $x^2 - 100x + 2000 < 0$.
     \item Calculer le discriminant de ce trinôme et exprimer les racines sous la forme $a \pm b\sqrt{5}$.
-    \item En déduire l'intervalle de rentabilité (on donnera des valeurs approchées à l'unité près).
+    \item En déduire l'intervalle exact de rentabilité, puis donner des valeurs
+      approchées de ses bornes à l'unité près, sans remplacer les bornes exactes de l'intervalle.
   \end{enumerate}
 
   \item \textbf{Équation de seuil.} On souhaite que le bénéfice soit exactement $B(x) = 32$ euros.

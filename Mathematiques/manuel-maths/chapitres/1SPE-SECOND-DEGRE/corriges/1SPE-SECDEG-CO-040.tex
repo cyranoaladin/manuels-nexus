@@ -1,8 +1,8 @@
 % META: {"id": "1SPE-SECDEG-CO-040", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-040", "capacites_codes": ["C1", "C2", "C6"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import *
-% t = symbols('t', real=True, nonneg=True)
-% x_sym = symbols('x', real=True, nonneg=True)
+% t = symbols('t', real=True, nonnegative=True)
+% x_sym = symbols('x', real=True, nonnegative=True)
 % v0 = 20
 % theta = pi/4
 % g_val = 10
@@ -35,6 +35,16 @@
 % y_30 = 2 + 30 - 30**2/40
 % assert abs(y_30 - 9.5) < 0.01
 % assert y_30 > 3  # passe au-dessus
+% # Proposition30 degrés : mêmes vitesse, hauteur et gravité.
+% y30_t = 2+10*t-5*t**2
+% y30_x = simplify(y30_t.subs(t,x_sym/(10*sqrt(3))))
+% assert simplify(y30_x-(2+x_sym/sqrt(3)-x_sym**2/60)) == 0
+% assert simplify(y30_x.subs(x_sym,30)-(10*sqrt(3)-13)) == 0
+% assert y30_x.subs(x_sym,30) > 3
+% range30 = sqrt(3)*(10+2*sqrt(35))
+% assert simplify(y30_x.subs(x_sym,range30)) == 0
+% assert 30 < range30 < 20+4*sqrt(30)
+% assert expand(y_t-(-5*(t-sqrt(2))**2+12)) == 0
 % END-VERIFY
 \begin{corrige}{1SPE-SECDEG-EX-040}
 
@@ -63,7 +73,9 @@ $y(t) = -5t^2 + 10\sqrt{2}\,t + 2$ : $a = -5$, $b = 10\sqrt{2}$, $c = 2$.
 
 \textit{b) Forme canonique.}
 
-\[\alpha = -\frac{10\sqrt{2}}{2 \times (-5)} = \frac{10\sqrt{2}}{10} = \sqrt{2}.\]
+On complète le carré :
+\[y(t)=-5(t^2-2\sqrt{2}\,t)+2
+=-5\bigl((t-\sqrt{2})^2-2\bigr)+2=-5(t-\sqrt{2})^2+12.\]
 
 \[\beta = y(\sqrt{2}) = 2 + 10\sqrt{2} \cdot \sqrt{2} - 5 \times 2 = 2 + 20 - 10 = 12.\]
 
@@ -124,7 +136,19 @@ $y(30) = -\dfrac{900}{40} + 30 + 2 = -22{,}5 + 32 = 9{,}5$~m.
 
 Comme $9{,}5 > 3$, le ballon passe \textbf{bien au-dessus} de l'obstacle.
 
-Avec un angle plus faible (ex. $30°$), la trajectoire serait moins haute mais plus longue, ce qui pourrait permettre ou non de passer l'obstacle selon les valeurs — un raisonnement qualitatif indique qu'un angle plus faible réduirait la hauteur à $x = 30$~m et risquerait de faire percuter l'obstacle.
+On peut proposer un angle de $30°$, en gardant la même vitesse initiale,
+la même hauteur de départ et la même valeur de $g$.
+Les équations deviennent $x(t)=10\sqrt{3}\,t$ et $y(t)=2+10t-5t^2$.
+En remplaçant $t$ par $x/(10\sqrt{3})$, on obtient :
+\[y_{30}(x)=2+\frac{x}{\sqrt{3}}-\frac{x^2}{60}.\]
+À la position de l'obstacle,
+\[y_{30}(30)=2+10\sqrt{3}-15=10\sqrt{3}-13\approx4{,}32\text{ m}>3\text{ m}.\]
+Le ballon passe donc aussi au-dessus avec cet angle. La racine positive de
+$2+10t-5t^2=0$ vaut $1+\frac{\sqrt{35}}{5}$ ; la portée correspondante est
+\[10\sqrt{3}\left(1+\frac{\sqrt{35}}{5}\right)
+=\sqrt{3}(10+2\sqrt{35})\approx37{,}8\text{ m}.\]
+Elle est plus courte que celle du lancer à $45°$ ($41{,}9$~m), tout en dépassant
+la distance de l'obstacle. Un angle plus petit n'allonge donc pas systématiquement la portée.
 
 \baremeIndicatif{Q1 : 2 pts (calculer) ; Q2 : 3 pts (calculer, raisonner) ; Q3 : 3 pts (chercher, calculer, communiquer) ; Q4 : 3 pts (calculer) ; Q5 : 3 pts (chercher, raisonner, communiquer)}
 \end{corrige}

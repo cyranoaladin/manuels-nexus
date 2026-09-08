@@ -1,0 +1,143 @@
+{
+  "artifact_type": "independent_scientific_correction_counter_review",
+  "schema_version": 1,
+  "reviewer": "/root",
+  "correction_author": "/root/programme_forensics",
+  "human_approval": false,
+  "observed_base_head": "1a1f4a37fdcdf5740c4f3fd0a43fc43e7c51d9a0",
+  "scope": "Eight exact working source versions read in full, including statements, corrections and oracle blocks. Only the 15 named defects are closed; no chapter or release certification.",
+  "status": "VALIDATED_BY_EVIDENCE",
+  "sources": [
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_fil_rouge.tex",
+      "source_sha256": "sha256:87d3ec69a8654aa3b7e4d3a77295ac477fb7be5a6cf0bd21f32243d0295366d1"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_contextualise.tex",
+      "source_sha256": "sha256:f25c447e845fec9c5923e8cd07bf4f2b441b4f803a73e970b9796193186410bb"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-027.tex",
+      "source_sha256": "sha256:7000edc2e0deec3a8903e4a08e4f0de3c74e3fe0414cc0c9cd0e3d5887429d12"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-039.tex",
+      "source_sha256": "sha256:92979079a1d03aa580e084912ade01a14f5e1240e1d23d97c78d6428eda6eeec"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-039.tex",
+      "source_sha256": "sha256:45146af7672bb979109b2b63e20a1b9f1fe2a97268376f3672c72c874532b761"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-040.tex",
+      "source_sha256": "sha256:21cbd3ab1028a643b0720017f0c839b2368bd41eeba3d8218cda03857278f754"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-040.tex",
+      "source_sha256": "sha256:e7a55c1bedb3132400e02d74dc973fd34a9f1747897187c79574a010a83d3da2"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-027.tex",
+      "source_sha256": "sha256:496c5404b5252ecfe9413f1aafea9d2037e98f5afab78def9c746091d65a7ba1"
+    }
+  ],
+  "reasoning": [
+    "TD box30x20: V=4x³-100x²+600x is cubic, W=4(x-25/2)²-25 is quadratic on R. Only0<x<10 gives physical positive dimensions. W decreases on this interval and cannot attain endpoint values600 or0 there. Values V1..7=504,832,1008,1056,1000,864,672 and V3.5=1046.5 were independently computed. They support a conjecture only. Vprime=4(3x²-50x+150), roots(50±sqrt(700))/6; the smaller is the physical maximum, about3.92. No quadratic optimization C6 credit is retained.",
+    "TD basket: h=-(x-10)²/20+7 gives maximum7 at10 and h15=23/4. h=3 has exactly10±4sqrt(5), rounded1.06 and18.94. Positive ground root10+2sqrt(35) rounds21.8. Height3.05 alone does not establish a basket hit without its horizontal location; the correction now states that limitation.",
+    "The second basket curve k=-2(x-25/4)²/25+41/8 has height5.125 at6.25 and positive root(25+5sqrt(41))/4 about14.3. h-k=3x²/100 is positive forx>0, with sole intersection0. No claim about changing gravity or launch angle follows just from these coefficients. C1/C2/C3/C6 correspond to actual completion, variations, roots and a quadratic maximum.",
+    "EX/CO027: base A=4(x-13/2)²-9 on the algebraic extension, physical0<x<5, so the vertex(13/2,-9) is outside and A decreases from unattained160 toward0. V2=144 and V3=120. Vprime=4(x-2)(3x-20) has unique physical maximum2, not2.06. The questions only compare two volumes and do not establish quadratic optimization; false C6/M6 credits were removed.",
+    "EX/CO039: price15-x/10 and charges200+5x imply B=-(x-50)²/10+50. Continuous divisible quantities on[0,100] make50 and37.5 admissible. B>0 exactly between50±10sqrt(5); B28=B72=8/5 disproves the old rounded open interval. B=32 has two admissible roots50±6sqrt(5).",
+    "New tariff20-x/5 gives Bnew=-x²/5+15x-200=-(x-75/2)²/5+325/4, with maximum81.25 at37.5. Direct subtraction Bnew-B=x(50-x)/10 proves the comparison changes at50, not38; both agree at0 and50. A price comparison at fixed volume is not a prediction of demand.",
+    "EX/CO040: at45degrees, x=10sqrt(2)t and y=-5(t-sqrt(2))²+12, maximum12 atsqrt(2), horizontal20. Eliminating time gives y=2+x-x²/40. Positive root20+4sqrt(30) rounds41.9 and y30=9.5>3. Initial height2 matches source metadata.",
+    "At30degrees, x=10sqrt(3)t and y=2+10t-5t² imply y30(x)=2+x/sqrt(3)-x²/60. Atx30 this is10sqrt(3)-13>3 since3>2.56. Positive flight time1+sqrt(35)/5 gives range sqrt(3)(10+2sqrt(35)), about37.8. It still clears the obstacle and is strictly shorter than the45degree range. The smaller-angle/longer-range generalization is false."
+  ],
+  "findings": [
+    {
+      "id": "SECDEG-B2-001",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "W polynôme sur R; identité W=V/x et interprétation aire seulement sur domaine physique. Frontières explicitement non atteintes."
+    },
+    {
+      "id": "SECDEG-B2-002",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Dérivation de cube bien au programme de Première. Le TD annonce une conjecture numérique; preuve analytique différée au chapitre dérivation. Sommet admissible exact(50−√700)/6."
+    },
+    {
+      "id": "SECDEG-B2-003",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Question autour de quelle valeur; tableau suggère4, sans preuve générale de maximum."
+    },
+    {
+      "id": "SECDEG-B2-004",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Rétablissement de la commande TeX notin; contrôle explicite des deux sources."
+    },
+    {
+      "id": "SECDEG-B2-005",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Arc de parabole, départ2m; identité h=−(x−10)²/20+7 prouve le maximum en10, h15=23/4 en descente."
+    },
+    {
+      "id": "SECDEG-B2-006",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Racines exactes10±4√5, arrondis1,06/18,94. Portée10+2√35≈21,8. Oracle exact et arrondi requis."
+    },
+    {
+      "id": "SECDEG-B2-007",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Seule intersection0; h−k=3x²/100>0 pourx>0. Comparaison à coefficient linéaire/terme constant fixés, conclusion limitée aux deux courbes."
+    },
+    {
+      "id": "SECDEG-B2-008",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Valeurs imprimées lues et calculées depuis(16−2x)(10−2x); endpoints160/0, non atteints sur domaine physique."
+    },
+    {
+      "id": "SECDEG-B2-009",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Nouveau bénéfice dérivé de x(20−x/5)−(200+5x), maximum325/4 en75/2. Régression compare oracle lu/exécuté au modèle indépendant; échec initial écart−5x."
+    },
+    {
+      "id": "SECDEG-B2-010",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Modèle continu d’unités divisibles explicite. Intervalle exact50±10√5; contre-exemple B28=B72=8/5>0."
+    },
+    {
+      "id": "SECDEG-B2-011",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Différence bénéfices x(50−x)/10 : nouveau supérieur0<x<50, égal0/50, ancien supérieur50<x≤100;aucune prédictiondemande."
+    },
+    {
+      "id": "SECDEG-B2-012",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Hauteur initiale2 partout; équationsdonnéessurintervallephysique jusqu’auretourausol."
+    },
+    {
+      "id": "SECDEG-B2-013",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "À30°, y=2+x/√3−x²/60, y30=10√3−13>3. Portée√3(10+2√35)≈37,8<41,9, obstaclefranchi. Identitéetpositivitéracine exactes, donnéestrig fourniesélève."
+    },
+    {
+      "id": "SECDEG-B2-014",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Complétion du carré au lieu de la procédure générale. Chaque chaîne imprimée est analysée exactement. TD fil : C1/C2 seuls après contre-revue indépendante du parent ; TD contextualisé : C1/C2/C3/C6. Les crédits non justifiés sont retirés, aucun atome officiel ne change."
+    },
+    {
+      "id": "SECDEG-B2-015",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "C1/C2 et M1/M2 uniquement : développement et parabole de la base. Aucun crédit C6/M6 ni balise C6. Sommet(13/2,−9) explicite. Vprime=4(x−2)(3x−20), maximum exact2 sur0<x<5."
+    }
+  ],
+  "parent_tests": {
+    "command": "python -m pytest -q tests/test_second_degree_batch_two_regressions.py",
+    "passed": 21,
+    "failed": 0,
+    "skipped": 0,
+    "elapsed_seconds": 1.26
+  },
+  "limits": [
+    "Other second-degree exercises, assessments and QCM remain under separate review.",
+    "Final visual, typography, metadata publication status and human approval remain pending.",
+    "Eight execution receipts attest assertions only; no full source correctness is inferred from their pass values."
+  ]
+}

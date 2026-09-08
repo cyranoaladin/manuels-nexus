@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SECDEG-CO-027", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-027", "capacites_codes": ["C2", "C6"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-SECDEG-CO-027", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-027", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import symbols, Rational, expand, simplify
 % x = symbols('x')
@@ -6,6 +6,8 @@
 % A = (16 - 2*x)*(10 - 2*x)
 % A_exp = expand(A)
 % assert A_exp == 4*x**2 - 52*x + 160
+% assert A.subs(x, 0) == 160 and A.subs(x, 5) == 0
+% assert expand(A-(4*(x-Rational(13,2))**2-9)) == 0
 % # Sommet de A : alpha = 52/8 = 13/2
 % alpha_A = Rational(52, 8)
 % assert alpha_A == Rational(13, 2)
@@ -23,7 +25,7 @@
 
 \textbf{1. Dimensions de la base en fonction de $x$.}
 
-\commentaireMarge{Retirer $x$ des deux membres.}
+\commentaireMarge{Chaque dimension de la feuille perd $x$ à chacune de ses deux extrémités.}
 
 Lorsqu'on découpe des carrés de côté $x$ aux quatre coins d'une feuille $16\,\text{cm} \times 10\,\text{cm}$ :
 \begin{itemize}
@@ -57,11 +59,13 @@ C'est un trinôme du second degré avec $a = 4 > 0$.
 
 \textit{b) Sommet.}
 
-L'abscisse du sommet est :
-\[\alpha = -\frac{-52}{2 \times 4} = \frac{52}{8} = \frac{13}{2} = 6{,}5.\]
+On complète le carré dans le polynôme prolongé à $\mathbb{R}$ :
+\[A(x)=4(x^2-13x)+160
+=4\left(\left(x-\frac{13}{2}\right)^2-\frac{169}{4}\right)+160
+=4\left(x-\frac{13}{2}\right)^2-9.\]
+On lit $\alpha=\frac{13}{2}=6{,}5$ et $\beta=-9$ : le sommet est $S\left(\frac{13}{2}\,;\,-9\right)$.
 
-Or $6{,}5 
-otin ]0\,;\,5[$, donc le sommet est en dehors du domaine d'étude.
+Or $6{,}5 \notin ]0\,;\,5[$, donc le sommet est en dehors du domaine d'étude.
 
 \textit{c) Tableau de variations de $A$ sur $]0\,;\,5[$.}
 
@@ -75,10 +79,13 @@ Sur $]0\,;\,5[$, $A$ est strictement décroissante : plus on découpe un grand c
 \hline
 $x$ & $0$ & $\rightarrow$ & $5$ \\
 \hline
-$A(x)$ & $160$ & $\searrow$ & $40$ \\
+$A(x)$ & $160$ & $\searrow$ & $0$ \\
 \hline
 \end{tabular}
 \end{center}
+
+Les valeurs aux bornes sont celles du polynôme prolongé. Elles ne sont pas
+atteintes pour une boîte de dimensions strictement positives, car $0<x<5$.
 
 \textit{Interprétation :} l'aire de la base diminue lorsqu'on augmente la taille des carrés découpés.
 

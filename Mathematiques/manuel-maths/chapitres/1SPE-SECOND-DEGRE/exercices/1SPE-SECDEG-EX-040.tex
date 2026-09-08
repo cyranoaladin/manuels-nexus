@@ -1,8 +1,8 @@
-% META: {"id": "1SPE-SECDEG-EX-040", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites_codes": ["C1", "C2", "C6"], "methodes": ["M1", "M2", "M6"], "parcours": 3, "competences": ["chercher", "raisonner", "modeliser", "communiquer"], "duree_min": 35, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"g": 10, "v0": 20, "theta": 45, "h0": 0}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-040.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-040.tex", "status": "generated"}
+% META: {"id": "1SPE-SECDEG-EX-040", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites_codes": ["C1", "C2", "C6"], "methodes": ["M1", "M2", "M6"], "parcours": 3, "competences": ["chercher", "raisonner", "modeliser", "communiquer"], "duree_min": 35, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"g": 10, "v0": 20, "theta": 45, "h0": 2}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-040.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-040.tex", "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import *
-% t = symbols('t', real=True, nonneg=True)
-% x_sym = symbols('x', real=True, nonneg=True)
+% t = symbols('t', real=True, nonnegative=True)
+% x_sym = symbols('x', real=True, nonnegative=True)
 % # Projectile : angle 45 deg, v0 = 20 m/s, g = 10 m/s^2, h0 = 2 m
 % # x(t) = v0*cos(45)*t = 20*(sqrt(2)/2)*t = 10*sqrt(2)*t
 % # y(t) = h0 + v0*sin(45)*t - g/2*t^2 = 2 + 10*sqrt(2)*t - 5t^2
@@ -46,17 +46,31 @@
 % alpha_x = 20
 % beta_x = y_x.subs(x_sym, alpha_x)
 % assert beta_x == 12
+% # Proposition30 degrés : mêmes vitesse, hauteur et gravité.
+% y30_t = 2+10*t-5*t**2
+% y30_x = simplify(y30_t.subs(t,x_sym/(10*sqrt(3))))
+% assert simplify(y30_x-(2+x_sym/sqrt(3)-x_sym**2/60)) == 0
+% assert simplify(y30_x.subs(x_sym,30)-(10*sqrt(3)-13)) == 0
+% assert y30_x.subs(x_sym,30) > 3
+% range30 = sqrt(3)*(10+2*sqrt(35))
+% assert simplify(y30_x.subs(x_sym,range30)) == 0
+% assert 30 < range30 < 20+4*sqrt(30)
+% assert expand(y_t-(-5*(t-sqrt(2))**2+12)) == 0
 % END-VERIFY
 \begin{exercice}{1SPE-SECDEG-EX-040}{3}{35}
-Un ballon est lancé depuis le sol (hauteur initiale $h_0 = 2$ m) avec une vitesse initiale $v_0 = 20$ m/s à un angle de $45°$ par rapport à l'horizontale. On prend $g = 10$ m/s².
+Un ballon est lancé depuis une hauteur initiale $h_0 = 2$~m au-dessus du sol avec une vitesse initiale $v_0 = 20$ m/s à un angle de $45°$ par rapport à l'horizontale. On prend $g = 10$ m/s².
 
 On rappelle que $\cos(45°) = \sin(45°) = \dfrac{\sqrt{2}}{2}$.
+Pour la dernière question, on pourra utiliser $\cos(30°)=\dfrac{\sqrt{3}}{2}$
+et $\sin(30°)=\dfrac{1}{2}$ ; pour un autre angle, on remplace $45°$ par cet
+angle dans les équations du mouvement.
 
 Les équations du mouvement sont :
 \[
   x(t) = v_0 \cos(45°) \cdot t \qquad \text{et} \qquad y(t) = h_0 + v_0 \sin(45°) \cdot t - \frac{g}{2}t^2,
 \]
-où $x$ est la distance horizontale (en m) et $y$ la hauteur (en m), $t$ le temps en secondes.
+où $x$ est la distance horizontale (en m) et $y$ la hauteur (en m), $t$ le temps
+en secondes, du lancer jusqu'au premier retour au sol.
 
 \begin{enumerate}
   \item \textbf{Mise en équation.}
