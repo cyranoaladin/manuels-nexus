@@ -2,6 +2,9 @@
 \begin{fichemethode}{M2}{Calculer la dérivée d'une expression}
 \quandUtiliser{J'utilise cette méthode lorsque la fonction est une combinaison de fonctions de base : somme, produit ou quotient. L'énoncé peut demander de « dériver $f$ » ou « calculer $f'$ ».}
 \pasApas{\begin{enumerate}
+  \item Je précise l'intervalle de travail et je vérifie que les fonctions utilisées
+        sont dérivables sur cet intervalle. Pour un quotient $u/v$, je vérifie
+        aussi que $v(x)\neq0$ sur tout l'intervalle.
   \item J'identifie la structure globale : somme, produit ou quotient.
   \item J'applique la règle adaptée :
     \begin{itemize}
@@ -20,6 +23,8 @@
   \item Oublier un des deux termes $u'v$ ou $uv'$ dans la règle du produit.
   \item Inverser l'ordre au numérateur du quotient : écrire $uv'-u'v$ au lieu de $u'v-uv'$.
 \end{itemize}}
-\verifier{Je peux contrôler le degré : si $f$ est de degré $n$, alors $f'$ doit être de degré $n-1$.}
+\verifier{Pour un polynôme de degré $n\geqslant1$, la dérivée a le degré $n-1$.
+La dérivée d'une fonction constante est le polynôme nul : on ne lui attribue
+pas un degré $-1$. Ce contrôle du degré ne suffit pas à valider les coefficients.}
 \sEntrainer{\refExos{M2}}
 \end{fichemethode}

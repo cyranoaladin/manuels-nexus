@@ -1,0 +1,215 @@
+{
+  "artifact_type": "independent_course_and_method_review_and_correction_note",
+  "date": "2026-09-08",
+  "reviewer_and_correction_author": "/root/astra_delta",
+  "head_at_recording": "b5631c9ec0e2cbed63c10a15d370f09795ae0411",
+  "head_scope": "Les sources modifiées sont liées par SHA256 ; elles ne sont pas attribuées au HEAD propre.",
+  "status": "VALIDATED_BY_EVIDENCE_FOR_DECLARED_SCOPE",
+  "human_approval": false,
+  "scope": "Cours C2 et méthode M2 de DERGLOBAL, entièrement lus. Aucune clôture du chapitre.",
+  "programme_evidence": {
+    "official_NOR": "MENE2602917A",
+    "source": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+    "source_sha256": "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
+    "lines": [
+      432,
+      477
+    ],
+    "finding": "La preuve de la dérivée du produit est explicitement exigée. Les règles de somme, produit, inverse et quotient et leur usage simple sont au programme. Aucun atome officiel modifié."
+  },
+  "findings_corrected": [
+    {
+      "id": "DG-PRODUCT-PROOF",
+      "severity": "PRODUCT_GAP",
+      "defect": "La démonstration générale du produit manquait dans les sources actuellement créditées."
+    },
+    {
+      "id": "DG-C2-COUNTEREXAMPLE-SCOPE",
+      "severity": "P0",
+      "defect": "Les non-identités étaient écrites comme inégalités sans préciser la portée, et le quotient simplifié omettait x non nul."
+    },
+    {
+      "id": "DG-ME2-DOMAINS-DEGREE",
+      "severity": "P0",
+      "defect": "La méthode omettait les hypothèses de dérivabilité et du dénominateur non nul ; la règle de degré comprenait abusivement le cas constant."
+    },
+    {
+      "id": "DG-C2-ORACLE-SCOPE",
+      "severity": "CERTIFICATION_DEFECT",
+      "defect": "Le commentaire affirmait traiter des fonctions quelconques avec seulement deux polynômes fixes."
+    }
+  ],
+  "verification": {
+    "test_source": "tests/test_derglobal_product_proof.py",
+    "test_source_sha256": "sha256:a816618aa9540b81c6b213343e7b7da31abaa8d3520ddccb4bad528c77ad50d6",
+    "initial_red": "6 failed sur les sources initiales ; /tmp/derglobal-c2-red.log.",
+    "green": "9 passed, dont trois refus de syntaxes hors de la grammaire fermée des coefficients entiers.",
+    "controlled_source_mutations": [
+      {
+        "mutation": "omit_second_product_term",
+        "caught": true
+      },
+      {
+        "mutation": "inverse_rule_sign",
+        "caught": true
+      },
+      {
+        "mutation": "method_nonzero_denominator",
+        "caught": true
+      },
+      {
+        "mutation": "printed_polynomial_coefficient",
+        "caught": true
+      }
+    ],
+    "execution": {
+      "execution_root": "/tmp/nexus-derglobal-c2-fresh-p5e4x2zz",
+      "command": [
+        "/usr/bin/python",
+        "/tmp/nexus-derglobal-c2-fresh-p5e4x2zz/Mathematiques/manuel-maths/scripts/verify_sympy.py",
+        "--chap",
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "cwd": "/tmp/nexus-derglobal-c2-fresh-p5e4x2zz",
+      "rc": 0,
+      "stdout": "[OK ] 11_C2_regles_derivation: \n[REVIEW] 1SPE-DERGLOBAL-ME-002: aucun bloc VERIFY : revue humaine requise\n",
+      "stderr": "",
+      "network_denial": {
+        "mechanism": "libseccomp inherited syscall filter",
+        "probe_rc": 0,
+        "probe_stdout": "network syscalls refused for IPv4, IPv6 and Unix sockets\n"
+      },
+      "input_digests": {
+        "chapitres/1SPE-DERIVATION-GLOBAL/cours/11_C2_regles_derivation.tex": "sha256:d7f4ac6a3eead7b55202f550cb980898e4a9c510410af37a9443f504b78d4164",
+        "chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-002.tex": "sha256:4241a2c2588fb067b55bd132058174f08b12c18b1ce557fa307cded3a3fe39f3",
+        "scripts/verify_sympy.py": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e",
+        "scripts/common.py": "sha256:f1dd76d4f5f354800fba1dc8ab84dfa3ab5c61b8f8f3093956d146195f520d0c"
+      },
+      "records": [
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/11_C2_regles_derivation.tex",
+          "source_sha256": "sha256:d7f4ac6a3eead7b55202f550cb980898e4a9c510410af37a9443f504b78d4164",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/11_C2_regles_derivation.sympy.json",
+          "receipt_sha256": "sha256:78b9b860b719c07aeb14db9f2f219e90296c9822c28c9fa2ec56d90395283e13",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-002.tex",
+          "source_sha256": "sha256:4241a2c2588fb067b55bd132058174f08b12c18b1ce557fa307cded3a3fe39f3",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/1SPE-DERGLOBAL-ME-002.sympy.json",
+          "receipt_sha256": "sha256:666de85e30cf85f98080f45ef54348c1c6b5f5b739496b70cb089e9816c72f7c",
+          "verdict": "manual_review"
+        }
+      ],
+      "human_approval": false
+    },
+    "parser_review": "Après contre-revue root, suppression de sympify : fullmatch des trois coefficients entiers signés, conversion int et construction algébrique directe. La mutation du coefficient imprimé est de nouveau rejetée."
+  },
+  "objects": [
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/11_C2_regles_derivation.tex",
+      "source_sha256": "sha256:d7f4ac6a3eead7b55202f550cb980898e4a9c510410af37a9443f504b78d4164",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/11_C2_regles_derivation.sympy.json",
+      "receipt_sha256": "sha256:78b9b860b719c07aeb14db9f2f219e90296c9822c28c9fa2ec56d90395283e13",
+      "verdict": "pass",
+      "object_id": "1SPE-DERGLOBAL-COURS-C2",
+      "read_extent": "Source entière, exemples, hypothèses et tous les blocs oracle éventuels.",
+      "before_review_source_sha256": "sha256:e4b6e5f94db776cc21d1c1c86d6ab9af6b7c416fd17e6f94eb50867d63b08654",
+      "status": "VALIDATED_BY_EVIDENCE_FOR_DECLARED_SCOPE",
+      "human_approval": false,
+      "independent_scientific_reasoning": [
+        "La somme et la multiplication par une constante proviennent directement de la linéarité des taux. Les hypothèses de dérivabilité sont indispensables avant d’appliquer les formules.",
+        "Dans la preuve du produit, écrire U=u(a), V=v(a), Uh=u(a+h), Vh=v(a+h). L’identité Uh Vh − U V = (Uh−U)Vh + U(Vh−V) est exacte pour toutes les valeurs réelles. Après division par h non nul, les taux convergent par hypothèse. La différence v(a+h)−v(a) est h multiplié par un taux qui tend vers un réel, donc elle tend vers 0. Le taux du produit converge ainsi vers u′(a)v(a)+u(a)v′(a). Aucune division par U ou V n’exclut le cas où un facteur s’annule.",
+        "La règle du quotient exige v non nul sur l’intervalle. Prendre u=1 donne (1/v)′=−v′/v². Cette formulation fournit exactement la règle à laquelle renvoie la preuve des puissances négatives dans C1.",
+        "Les deux anciennes non-identités sont maintenant des contre-exemples en x=1. Pour u=x et v=x², la dérivée du produit vaut 3, contre 2 pour le produit des dérivées. Pour x²/x, défini seulement si x≠0, la dérivée vaut 1, contre 2 pour le quotient des dérivées en 1. On ne prétend plus que les expressions diffèrent en chaque point.",
+        "Recalcul indépendant des exemples de cours : 12x³−10x+7 ; 1/√x+1/x² pour x>0 ; 8x³+3x²−6 ; 5x√x/2 pour x>0 ; (−3x²+2x+3)/(x²+1)² sur R ; (1−x)/(2√x(x+1)²) pour x>0. Dans l’exemple de méthode, le développement de (2x+1)(x²−3) donne 2x³+x²−6x−3, de dérivée 6x²+2x−6.",
+        "Un polynôme réel de degré n≥1 a un coefficient dominant non nul ; sa dérivée a coefficient dominant n fois ce coefficient, donc degré n−1. Pour une constante, la dérivée est le polynôme nul, auquel aucun degré −1 n’est attribué ici. Le seul contrôle du degré ne vérifie pas les coefficients."
+      ],
+      "pedagogical_review": "La méthode commence par vérifier les hypothèses, et son contrôle de degré distingue la constante. La démonstration générale du produit est présentée comme connaissance attendue, hors du bloc facultatif de preuve de somme. Aucun exercice ni quota ajouté.",
+      "editorial_review": "La promesse de dériver toute combinaison est remplacée par la portée exacte des opérations couvertes. Les contre-exemples ont des valeurs et domaines explicites. Aucun verdict PDF ou de chapitre.",
+      "oracle_review": "Le bloc canonique exécute effectivement les identités et exemples. L’identité algébrique générale est séparée des contrôles sur deux polynômes fixes. La convergence du taux a été relue mathématiquement ; elle n’est pas prétendument prouvée par ces polynômes."
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-002.tex",
+      "source_sha256": "sha256:4241a2c2588fb067b55bd132058174f08b12c18b1ce557fa307cded3a3fe39f3",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/1SPE-DERGLOBAL-ME-002.sympy.json",
+      "receipt_sha256": "sha256:666de85e30cf85f98080f45ef54348c1c6b5f5b739496b70cb089e9816c72f7c",
+      "verdict": "manual_review",
+      "object_id": "1SPE-DERGLOBAL-ME-002",
+      "read_extent": "Source entière, exemples, hypothèses et tous les blocs oracle éventuels.",
+      "before_review_source_sha256": "sha256:b74d34298431cb494005596e243e0014b81651ed4784288db46a51c00bbf6e03",
+      "status": "VALIDATED_BY_EVIDENCE_FOR_DECLARED_SCOPE",
+      "human_approval": false,
+      "independent_scientific_reasoning": [
+        "La somme et la multiplication par une constante proviennent directement de la linéarité des taux. Les hypothèses de dérivabilité sont indispensables avant d’appliquer les formules.",
+        "Dans la preuve du produit, écrire U=u(a), V=v(a), Uh=u(a+h), Vh=v(a+h). L’identité Uh Vh − U V = (Uh−U)Vh + U(Vh−V) est exacte pour toutes les valeurs réelles. Après division par h non nul, les taux convergent par hypothèse. La différence v(a+h)−v(a) est h multiplié par un taux qui tend vers un réel, donc elle tend vers 0. Le taux du produit converge ainsi vers u′(a)v(a)+u(a)v′(a). Aucune division par U ou V n’exclut le cas où un facteur s’annule.",
+        "La règle du quotient exige v non nul sur l’intervalle. Prendre u=1 donne (1/v)′=−v′/v². Cette formulation fournit exactement la règle à laquelle renvoie la preuve des puissances négatives dans C1.",
+        "Les deux anciennes non-identités sont maintenant des contre-exemples en x=1. Pour u=x et v=x², la dérivée du produit vaut 3, contre 2 pour le produit des dérivées. Pour x²/x, défini seulement si x≠0, la dérivée vaut 1, contre 2 pour le quotient des dérivées en 1. On ne prétend plus que les expressions diffèrent en chaque point.",
+        "Recalcul indépendant des exemples de cours : 12x³−10x+7 ; 1/√x+1/x² pour x>0 ; 8x³+3x²−6 ; 5x√x/2 pour x>0 ; (−3x²+2x+3)/(x²+1)² sur R ; (1−x)/(2√x(x+1)²) pour x>0. Dans l’exemple de méthode, le développement de (2x+1)(x²−3) donne 2x³+x²−6x−3, de dérivée 6x²+2x−6.",
+        "Un polynôme réel de degré n≥1 a un coefficient dominant non nul ; sa dérivée a coefficient dominant n fois ce coefficient, donc degré n−1. Pour une constante, la dérivée est le polynôme nul, auquel aucun degré −1 n’est attribué ici. Le seul contrôle du degré ne vérifie pas les coefficients."
+      ],
+      "pedagogical_review": "La méthode commence par vérifier les hypothèses, et son contrôle de degré distingue la constante. La démonstration générale du produit est présentée comme connaissance attendue, hors du bloc facultatif de preuve de somme. Aucun exercice ni quota ajouté.",
+      "editorial_review": "La promesse de dériver toute combinaison est remplacée par la portée exacte des opérations couvertes. Les contre-exemples ont des valeurs et domaines explicites. Aucun verdict PDF ou de chapitre.",
+      "oracle_review": "Aucun bloc mécanique ajouté à la méthode ; le receipt manual_review reste fidèle et ne ferme aucune approbation humaine."
+    }
+  ],
+  "limits": [
+    "Contre-revue indépendante /root réalisée ci-dessus, avec portée explicite ; aucune approbation humaine.",
+    "Les autres cours, TD, exercices, bindings, QCM et PDF ne sont pas fermés par cette note.",
+    "Le receipt manual_review de M2 est conservé ; aucune preuve machine ne devient une approbation humaine."
+  ],
+  "independent_counterreview": {
+    "reviewer": "/root",
+    "observed_head": "87b14852f126d33893cefe5d3cda70c2817d0d85",
+    "scope": "Complete course C2 and method M2; all examples, hypotheses, proof, margin notes and oracle; all nine regression tests; previously read BO2026 lines432–477. Source and receipt SHA256 rechecked.",
+    "reasoning": [
+      "The product difference decomposes by adding and subtracting u(a)v(a+h). Differentiability gives the two finite quotient limits and also v(a+h)-v(a)=h times a convergent quotient, so v(a+h) tends to v(a). This proves the formula even if either factor vanishes.",
+      "Quotient nonzero hypotheses remain explicit. The reciprocal corollary follows by numerator1. The false product and quotient rules are disproved at the admissible value1 rather than claimed unequal at every point; quotient simplification preserves the original exclusion0.",
+      "Independently expanding method product gives 2x³+x²-6x-3 and derivative6x²+2x-6. The six course examples yield 12x³-10x+7,1/sqrt(x)+1/x²,8x³+3x²-6,5x sqrt(x)/2,(-3x²+2x+3)/(x²+1)²,(1-x)/(2sqrt(x)(x+1)²), with the printed domains.",
+      "A degree-n polynomial with n>=1 has nonzero leading derivative coefficient n*a_n. The constant case is the zero polynomial and is explicitly separated. A degree check alone cannot validate coefficients."
+    ],
+    "programme_review": "The proof of the product is mandatory in the cited source; operations and their simple applications are in scope. The sum proof is explicitly additional.",
+    "verification": {
+      "regressions_passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "junit": "/tmp/nexus-root-derglobal-c2.xml",
+      "junit_sha256": "ba20d6fc24f1333ab264f49f2ea011b3709670edc8f89e01faac5ce84118c967",
+      "fresh_course_oracle": "pass",
+      "temporary_missing_second_product_term": "fail",
+      "receipt_bindings": [
+        {
+          "state": "CURRENT_BOUND",
+          "declared_source_path": "chapitres/1SPE-DERIVATION-GLOBAL/cours/11_C2_regles_derivation.tex",
+          "expected_source_sha256": "sha256:d7f4ac6a3eead7b55202f550cb980898e4a9c510410af37a9443f504b78d4164",
+          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/11_C2_regles_derivation.tex",
+          "current_source_sha256": "sha256:d7f4ac6a3eead7b55202f550cb980898e4a9c510410af37a9443f504b78d4164",
+          "source_path_base": "repository",
+          "method_state": "CURRENT_TRUSTED",
+          "reason": null,
+          "canonical_object_id": "1SPE-DERGLOBAL-COURS-C2",
+          "receipt_object_id": "11_C2_regles_derivation"
+        },
+        {
+          "state": "CURRENT_BOUND",
+          "declared_source_path": "chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-002.tex",
+          "expected_source_sha256": "sha256:4241a2c2588fb067b55bd132058174f08b12c18b1ce557fa307cded3a3fe39f3",
+          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-002.tex",
+          "current_source_sha256": "sha256:4241a2c2588fb067b55bd132058174f08b12c18b1ce557fa307cded3a3fe39f3",
+          "source_path_base": "repository",
+          "method_state": "CURRENT_TRUSTED",
+          "reason": null,
+          "canonical_object_id": "1SPE-DERGLOBAL-ME-002",
+          "receipt_object_id": "1SPE-DERGLOBAL-ME-002"
+        }
+      ],
+      "method_oracle": "manual_review: no block, no invented machine proof"
+    },
+    "test_hardening": "Root review removed a newly introduced symbolic evaluator from the printed-coefficient test. Fullmatch of three signed integer coefficients now constructs the polynomial directly; three out-of-grammar fixtures are rejected.",
+    "limits": [
+      "These two objects alone are reviewed; the chapter and programme chains remain open.",
+      "No final visual inspection, human approval, source-status promotion or release readiness is granted."
+    ],
+    "review_status": "VALIDATED_BY_EVIDENCE_FOR_DECLARED_SCOPE"
+  }
+}
