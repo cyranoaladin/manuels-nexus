@@ -6,24 +6,24 @@
   "distinct_from": "P0_PEDAGOGICAL_CONTENT_CLONING : un objet peut etre unique et malgre tout etranger a sa discipline ; la detection de clonage ne le verrait jamais",
   "discriminator": "le programme de Premiere NSI ne comporte aucune analyse : derivation, limite, integrale, etude de fonction. Un objet qui les mobilise n'appartient pas a ce niveau, quel que soit le vocabulaire informatique qui l'entoure",
   "counts": {
-    "NSI_NATIVE": 526
+    "NSI_NATIVE": 580
   },
   "unknown": 0,
-  "objects_scanned": 526,
+  "objects_scanned": 580,
   "condemned_count": 0,
   "condemned_while_approved": [],
   "per_chapter": {
     "1NSI-ALGO-DICHO-GLOUTON-KNN": {
-      "NSI_NATIVE": 31
+      "NSI_NATIVE": 33
     },
     "1NSI-ALGO-PARCOURS-TRIS": {
       "NSI_NATIVE": 40
     },
     "1NSI-ARCHITECTURE-OS": {
-      "NSI_NATIVE": 25
+      "NSI_NATIVE": 27
     },
     "1NSI-LANGAGE": {
-      "NSI_NATIVE": 29
+      "NSI_NATIVE": 31
     },
     "1NSI-PROJET-METHODES": {
       "NSI_NATIVE": 27
@@ -32,37 +32,37 @@
       "NSI_NATIVE": 26
     },
     "1NSI-TABLES": {
-      "NSI_NATIVE": 29
+      "NSI_NATIVE": 31
     },
     "1NSI-TYPES-BASE": {
-      "NSI_NATIVE": 27
+      "NSI_NATIVE": 33
     },
     "1NSI-TYPES-CONSTRUITS": {
       "NSI_NATIVE": 132
     },
     "1NSI-WEB-IHM": {
-      "NSI_NATIVE": 24
+      "NSI_NATIVE": 28
     },
     "TNSI-ALGORITHMIQUE": {
-      "NSI_NATIVE": 29
+      "NSI_NATIVE": 39
     },
     "TNSI-ARCHITECTURES-MATERIELLES-SY": {
-      "NSI_NATIVE": 22
+      "NSI_NATIVE": 28
     },
     "TNSI-BASES-DE-DONNEES": {
-      "NSI_NATIVE": 23
+      "NSI_NATIVE": 27
     },
     "TNSI-HISTOIRE-INFORMATIQUE": {
-      "NSI_NATIVE": 13
+      "NSI_NATIVE": 15
     },
     "TNSI-LANGAGES-ET-PROGRAMMATION": {
-      "NSI_NATIVE": 22
+      "NSI_NATIVE": 30
     },
     "TNSI-PROJET": {
       "NSI_NATIVE": 3
     },
     "TNSI-STRUCTURES-DONNEES": {
-      "NSI_NATIVE": 24
+      "NSI_NATIVE": 30
     }
   },
   "condemned_paths": [],
@@ -331,6 +331,32 @@
     },
     {
       "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:0442ea84272aef0536953206be5dd330fc80b44f4986dbac0b80c1d1e99525d7",
+      "object_id": "1NSI-ADGK-EX-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "P-ALGO-03"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "architecture_systeme",
+        "chapitre",
+        "code_python",
+        "python",
+        "representation",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
       "role": "corriges",
       "source_kind": "LATEX_OBJECT",
       "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-001.tex",
@@ -439,6 +465,29 @@
         "chapitre",
         "code_python",
         "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:8bc638b503ecb08333f8cd70a1e5a840bbb192ee17f9e0cd6d9f024bdd22a265",
+      "object_id": "1NSI-ADGK-CO-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "P-ALGO-03"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "code_python",
+        "python",
+        "representation"
       ],
       "verdict": "NSI_NATIVE"
     },
@@ -1993,6 +2042,29 @@
     },
     {
       "chapter": "1NSI-ARCHITECTURE-OS",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:6f54bbcb271211cb668f6898fb3908d6e1817e38972148cecc1c02f1c197212d",
+      "object_id": "1NSI-ARCHOS-EX-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "P-ARCH-01B"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "architecture_systeme",
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ARCHITECTURE-OS",
       "role": "corriges",
       "source_kind": "LATEX_OBJECT",
       "path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE.tex",
@@ -2111,6 +2183,27 @@
       "calculus_evidence": [],
       "computing_evidence": [
         "bases_de_donnees",
+        "code_python",
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:330100e216b7916e0a2e3897c352152bac50a135527fd40d6b12851b942d0f41",
+      "object_id": "1NSI-ARCHOS-CO-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "P-ARCH-01B"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
         "code_python",
         "python"
       ],
@@ -2606,6 +2699,29 @@
     },
     {
       "chapter": "1NSI-LANGAGE",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:f86b200c628aaf4ad3f1de256507152d2ef276bce8654c2d53609fe7e8d8f2f3",
+      "object_id": "1NSI-LANG-EX-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "P-LANG-01"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "architecture_systeme",
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-LANGAGE",
       "role": "corriges",
       "source_kind": "LATEX_OBJECT",
       "path": "NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-001.tex",
@@ -2709,6 +2825,28 @@
       "computing_evidence": [
         "code_python",
         "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-LANGAGE",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:7a0542896e810db109f9621c71ce0d88a285775ac8e65645ecf9c5e7b0d2d5e7",
+      "object_id": "1NSI-LANG-CO-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "P-LANG-01"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "code_python",
+        "python",
+        "structures"
       ],
       "verdict": "NSI_NATIVE"
     },
@@ -4500,6 +4638,28 @@
     },
     {
       "chapter": "1NSI-TABLES",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:bacf7f2072252ea58f3ce9e378916464e2c7f970a2dbaac06f97afe4f0ebb0db",
+      "object_id": "1NSI-TAB-EX-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "P-TABLE-04"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "bases_de_donnees",
+        "code_python",
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-TABLES",
       "role": "corriges",
       "source_kind": "LATEX_OBJECT",
       "path": "NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-001.tex",
@@ -4595,6 +4755,28 @@
       "sha256": "sha256:b07b09e282fa0a44741fc6f854cd607119528eb2ea7b35ca23f0d468ffbe0bc3",
       "object_id": "1NSI-TAB-CO-005",
       "declared_status": "verified",
+      "declared_capacities": [
+        "P-TABLE-04"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "bases_de_donnees",
+        "code_python",
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-TABLES",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:627e6985f495015269500b32e0f7045610e3058d5e8bb85561a458093447c5b5",
+      "object_id": "1NSI-TAB-CO-006",
+      "declared_status": "generated",
       "declared_capacities": [
         "P-TABLE-04"
       ],
@@ -5156,6 +5338,75 @@
     },
     {
       "chapter": "1NSI-TYPES-BASE",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:cc4473b2c1bd348f5ee6693a9714ebe8989e2327786a346a9ff9c03146abbf49",
+      "object_id": "1NSI-TB-EX-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "P-BASE-01"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "bases_de_donnees",
+        "code_python",
+        "python",
+        "representation"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-TYPES-BASE",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-007.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:e3eceb010c6ecda9855f47351facb4df47ef5a0230e87e0e29c6cd638a38bcea",
+      "object_id": "1NSI-TB-EX-007",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "P-BASE-02"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "bases_de_donnees",
+        "code_python",
+        "python",
+        "representation"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-TYPES-BASE",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-008.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:b6b952d2f64da22e140cc95e8afbe206455809853589322982500fd795f6cc09",
+      "object_id": "1NSI-TB-EX-008",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "P-BASE-05"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "bases_de_donnees",
+        "code_python",
+        "python",
+        "representation"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-TYPES-BASE",
       "role": "corriges",
       "source_kind": "LATEX_OBJECT",
       "path": "NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-001.tex",
@@ -5259,6 +5510,74 @@
         "python",
         "representation",
         "web_ihm"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-TYPES-BASE",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:ef31e89dc9967a0331b149cc2b9788d4a29d51fd4e5c7aa7cc13b446a45c79e3",
+      "object_id": "1NSI-TB-CO-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "P-BASE-01"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "bases_de_donnees",
+        "code_python",
+        "python",
+        "representation"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-TYPES-BASE",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-007.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:e33edf3ec2004063129530cd1496453a5136cb7b6499bdba5bc9542a0492538d",
+      "object_id": "1NSI-TB-CO-007",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "P-BASE-02"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "bases_de_donnees",
+        "code_python",
+        "representation"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-TYPES-BASE",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-008.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:7126c522c21f1fac2a6b018300e85df5928f80efd2aadbd990bbf6cabd48dea6",
+      "object_id": "1NSI-TB-CO-008",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "P-BASE-05"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "bases_de_donnees",
+        "code_python",
+        "python",
+        "representation"
       ],
       "verdict": "NSI_NATIVE"
     },
@@ -8570,6 +8889,53 @@
     },
     {
       "chapter": "1NSI-WEB-IHM",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:29647bbd4bc69c8fdf21db647c99f9b276f9bc1379828f1fc014ae0c3d5a7c5f",
+      "object_id": "1NSI-WEB-EX-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "P-IHM-02"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "architecture_systeme",
+        "code_python",
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-WEB-IHM",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-007.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:32e431dfbdff10022eac8daa5f775ac4fa22fd97c1df4965a570ac6aff07a496",
+      "object_id": "1NSI-WEB-EX-007",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "P-IHM-03A",
+        "P-IHM-03B"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "architecture_systeme",
+        "code_python",
+        "python",
+        "structures",
+        "web_ihm"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-WEB-IHM",
       "role": "corriges",
       "source_kind": "LATEX_OBJECT",
       "path": "NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-001.tex",
@@ -8677,6 +9043,51 @@
       "computing_evidence": [
         "code_python",
         "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-WEB-IHM",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:f384bf8efb1e5566f262364a0ced1f203fd72bca5fea84e8af113f654b090219",
+      "object_id": "1NSI-WEB-CO-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "P-IHM-02"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-WEB-IHM",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-007.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:070cf887de351ffc2f3d7026e6fdc48332a80e0b252dda42797fef445d5cca40",
+      "object_id": "1NSI-WEB-CO-007",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "P-IHM-03A",
+        "P-IHM-03B"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "code_python",
+        "python",
+        "web_ihm"
       ],
       "verdict": "NSI_NATIVE"
     },
@@ -9286,6 +9697,127 @@
     },
     {
       "chapter": "TNSI-ALGORITHMIQUE",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:2338d8f1142f6dca8c9e76002f34f8f85b518fc20f175512fd8ac2691432b37a",
+      "object_id": "TNSI-ALGO-EX-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C2",
+        "C4"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "architecture_systeme",
+        "bases_de_donnees",
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-007.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:82f3e5f7f6eadcc468ecbe5d21d63a7b9caab64a46d25d74cfe1c4d5fd9156ca",
+      "object_id": "TNSI-ALGO-EX-007",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C8",
+        "C9"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "architecture_systeme",
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-008.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:7343775c1506e4c13cc2dfe46d939bf7c0830045cb2b020fbc2665de618b8c00",
+      "object_id": "TNSI-ALGO-EX-008",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C11"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-009.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:d79c9ff555d2fda1613c93cb9e59d98692240d2fff9a90c54ceb5fa45ec6d63c",
+      "object_id": "TNSI-ALGO-EX-009",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C12"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "chapitre",
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-010.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:1b0ec93901a1a3afd5f430ab2806b4db6bd9f838cd023c16a0506bd6601bee86",
+      "object_id": "TNSI-ALGO-EX-010",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C13"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "architecture_systeme",
+        "bases_de_donnees",
+        "code_python",
+        "python",
+        "representation",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
       "role": "corriges",
       "source_kind": "LATEX_OBJECT",
       "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-001.tex",
@@ -9388,6 +9920,126 @@
       ],
       "calculus_evidence": [],
       "computing_evidence": [
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:08a18c1b5266bd53350c14f5617ca36cd62347dbb793f7e8276c8f96b3c4d3d0",
+      "object_id": "TNSI-ALGO-CO-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C2",
+        "C4"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "architecture_systeme",
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-007.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:8034f269ae41ac5597a65b7bfa4561fe109d939f5d7cd8569526328749d272e3",
+      "object_id": "TNSI-ALGO-CO-007",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C8",
+        "C9"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "architecture_systeme",
+        "bases_de_donnees",
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-008.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:7cab3a0bfd27d50884e3e037e4084879b6d0d94d20b71e7d07f7ff01fc1e7c1f",
+      "object_id": "TNSI-ALGO-CO-008",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C11"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "chapitre",
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-009.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:e0bfef01e754a21caa2ef5343bb4ac12fe6c1babcad5c0ffbbe615b115561e31",
+      "object_id": "TNSI-ALGO-CO-009",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C12"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "chapitre",
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-010.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:74b7aa6b531497faf77168115edcc420bf065e2f76a2a59e14874ede925c5d58",
+      "object_id": "TNSI-ALGO-CO-010",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C13"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "bases_de_donnees",
         "code_python",
         "python",
         "structures"
@@ -9826,6 +10478,79 @@
     },
     {
       "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-005.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:1eb9d1ddd0cd07d12be491e44bafd692890434581860aad45524cdf31c351c84",
+      "object_id": "TNSI-ARCH-EX-005",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C1",
+        "C2"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "architecture_systeme",
+        "bases_de_donnees",
+        "code_python",
+        "python",
+        "structures",
+        "web_ihm"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:d5ac962fd3893ae9f54bb0538f7e9b1e54c6dc87a6cc671591860bb1ab4fce5e",
+      "object_id": "TNSI-ARCH-EX-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C3"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "architecture_systeme",
+        "code_python",
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-007.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:c4537f9db1406c2e05f73dd3e7b58d1b5f34e9208c4d5b13821dd823fb4eb1c0",
+      "object_id": "TNSI-ARCH-EX-007",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C7"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "architecture_systeme",
+        "bases_de_donnees",
+        "code_python",
+        "python",
+        "representation",
+        "web_ihm"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
       "role": "corriges",
       "source_kind": "LATEX_OBJECT",
       "path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-001.tex",
@@ -9906,6 +10631,79 @@
       "computing_evidence": [
         "code_python",
         "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-005.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:eacad1b40da93e697056e26fd382ed20cc29b3ab5731024186f2ae114716a182",
+      "object_id": "TNSI-ARCH-CO-005",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C1",
+        "C2"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "architecture_systeme",
+        "bases_de_donnees",
+        "code_python",
+        "python",
+        "web_ihm"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:a3850d4efb58ba28c9339746279ad164fcc55744f8e69345a192dbe7ccd50494",
+      "object_id": "TNSI-ARCH-CO-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C3"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "architecture_systeme",
+        "code_python",
+        "python",
+        "reseaux"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-007.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:d8f87c67c6c2af037766314009d59d241467cb1b73224abcf5f9e884dcabd856",
+      "object_id": "TNSI-ARCH-CO-007",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C7"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "bases_de_donnees",
+        "code_python",
+        "python",
+        "representation",
+        "web_ihm"
       ],
       "verdict": "NSI_NATIVE"
     },
@@ -10342,6 +11140,50 @@
     },
     {
       "chapter": "TNSI-BASES-DE-DONNEES",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/exercices/TNSI-BDD-EX-005.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:ef48b2852d0941a1b179e8c5006b29113fe433426f392867db9f298fa1092d44",
+      "object_id": "TNSI-BDD-EX-005",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C2",
+        "C5"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "bases_de_donnees",
+        "code_python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/exercices/TNSI-BDD-EX-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:666704a47f4e7995bcfbc1da556bd61eb4b82fad41b30e2a154ea238ac9f7362",
+      "object_id": "TNSI-BDD-EX-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C4"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "bases_de_donnees",
+        "code_python",
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-BASES-DE-DONNEES",
       "role": "corriges",
       "source_kind": "LATEX_OBJECT",
       "path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-001.tex",
@@ -10426,6 +11268,53 @@
       "computing_evidence": [
         "bases_de_donnees",
         "code_python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-005.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:45096ab7935fecd41438bfa5e297668380e8009adebaf8defaf4e2939cdff986",
+      "object_id": "TNSI-BDD-CO-005",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C2",
+        "C5"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "bases_de_donnees",
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:559b9516d3739ca320bf7cc2d11ee243d176cd49cba5cee8744b6e328b42ae2b",
+      "object_id": "TNSI-BDD-CO-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C4"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "architecture_systeme",
+        "bases_de_donnees",
+        "code_python",
+        "python"
       ],
       "verdict": "NSI_NATIVE"
     },
@@ -10737,6 +11626,51 @@
       "calculus_evidence": [],
       "computing_evidence": [
         "architecture_systeme",
+        "web_ihm"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
+      "role": "remediation",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/remediation/TNSI-HISTOIRE-INFORMATIQUE-RE-C01.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:cbb29b305a28d7eef5cd31a1a88f87e3e1ca1614a8d36aae968a2be7e8b66cb2",
+      "object_id": "TNSI-HISTOIRE-INFORMATIQUE-RE-C01",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C1"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "histoire",
+        "reseaux",
+        "web_ihm"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
+      "role": "remediation",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/remediation/TNSI-HISTOIRE-INFORMATIQUE-RE-C02.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:c341fffd61bd341d59d55abe44dc3399fce4851d581184af311e9ef92b216ea5",
+      "object_id": "TNSI-HISTOIRE-INFORMATIQUE-RE-C02",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C2"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "architecture_systeme",
+        "code_python",
+        "structures",
         "web_ihm"
       ],
       "verdict": "NSI_NATIVE"
@@ -11127,6 +12061,95 @@
     },
     {
       "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-005.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:f04df68f99c9199890a0ad9784907e93108fdf806ada1427fe4da78ba47e401a",
+      "object_id": "TNSI-LANG-EX-005",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C1"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "architecture_systeme",
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:8298daab5f8ac97ac831313a6041f3ff27269c4289ec49b0998ddcc1a9c8506d",
+      "object_id": "TNSI-LANG-EX-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C2",
+        "C3"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-007.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:bd036c88895924da680b9c6ed61ed1022283fac11bec3eba7918b8edf21e445f",
+      "object_id": "TNSI-LANG-EX-007",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C8"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "code_python",
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-008.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:e0091529d1df13a86a0ebc9d4ba3aeb0a8e5c435c6b44b9b1421d609fb11e750",
+      "object_id": "TNSI-LANG-EX-008",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C11"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
       "role": "corriges",
       "source_kind": "LATEX_OBJECT",
       "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-001.tex",
@@ -11210,6 +12233,98 @@
       "computing_evidence": [
         "code_python",
         "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-005.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:5b70c302b3927487ca474976cba84ec607f92205e179b563c535fd6ae7f894f7",
+      "object_id": "TNSI-LANG-CO-005",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C1"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "architecture_systeme",
+        "bases_de_donnees",
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:9dfd7110cc68d561015fb7285ea61c8570676e54ed7c01a1d54c3ce439871d7d",
+      "object_id": "TNSI-LANG-CO-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C2",
+        "C3"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "code_python",
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-007.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:1d06f45be113c39e3630df6946507433786c43af90cb4735f666dd11b810156a",
+      "object_id": "TNSI-LANG-CO-007",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C8"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "code_python",
+        "python",
+        "representation"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-008.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:1a23fff4168ef5e78c10626b72d6bc4fb3554cabe61f1797e087bd0ebfc467ef",
+      "object_id": "TNSI-LANG-CO-008",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C11"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "code_python",
+        "python",
+        "representation",
         "structures"
       ],
       "verdict": "NSI_NATIVE"
@@ -11748,6 +12863,74 @@
     },
     {
       "chapter": "TNSI-STRUCTURES-DONNEES",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-005.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:a4573a7451c08a050282c822286b774764623f9b9e0bb49760aaaddb8345b106",
+      "object_id": "TNSI-STRUCT-EX-005",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:7564f8fcb80f16b759aab9ec604f9a959bdb2f5c1a8d1185de8988876f1a9575",
+      "object_id": "TNSI-STRUCT-EX-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C8"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "bases_de_donnees",
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "role": "exercices",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-007.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:2fb218e592c5813f10f9c8534cfa9502837431fcb5a20e6a022ba2665abe4056",
+      "object_id": "TNSI-STRUCT-EX-007",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C11"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "code_python",
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
       "role": "corriges",
       "source_kind": "LATEX_OBJECT",
       "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-001.tex",
@@ -11833,6 +13016,76 @@
         "code_python",
         "python",
         "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-005.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:719b1eb7addcca56be6385538f1f382933a440436571d742f19a1e7c76dbf627",
+      "object_id": "TNSI-STRUCT-CO-005",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "bases_de_donnees",
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-006.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:05039ab4e1e368c1a5d77ed2c46f351b54fd6b0f9aeeba9ee0ad6086b03e153c",
+      "object_id": "TNSI-STRUCT-CO-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C8"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "bases_de_donnees",
+        "code_python",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "role": "corriges",
+      "source_kind": "LATEX_OBJECT",
+      "path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-007.tex",
+      "pointers": [
+        "$"
+      ],
+      "sha256": "sha256:ff926a8cdd9febf4e9c1a8cb6171055ccd78dbb301f9b0ab8cc4508d0bac6c6b",
+      "object_id": "TNSI-STRUCT-CO-007",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C11"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "bases_de_donnees",
+        "code_python",
+        "python"
       ],
       "verdict": "NSI_NATIVE"
     },

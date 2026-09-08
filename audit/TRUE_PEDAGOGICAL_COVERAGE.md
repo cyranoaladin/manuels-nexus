@@ -7,12 +7,12 @@ seize capacités alors qu'une seule, `C7`, était traitée.
 
 - capacités contractuelles : `322`
 - cellules (capacité × rôle) : `2254`
-- cellules avec déclaration exacte (alignement sémantique à établir) : `1950`
-- **unités d'écriture requises** : `304`
+- cellules avec déclaration exacte (alignement sémantique à établir) : `1992`
+- **unités d'écriture requises** : `262`
 
 | Manuel | cours | methodes | exercices | corriges | remediation | qcm | evaluations | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `TNSI` | 2 | 43 | 22 | 22 | 56 | 0 | 2 | **147** |
+| `TNSI` | 2 | 43 | 2 | 2 | 54 | 0 | 2 | **105** |
 | `1NSI` | 0 | 15 | 0 | 0 | 32 | 0 | 0 | **47** |
 | `TCOMPL` | 0 | 1 | 0 | 0 | 43 | 0 | 0 | **44** |
 | `TSPE` | 0 | 14 | 0 | 0 | 25 | 0 | 0 | **39** |
