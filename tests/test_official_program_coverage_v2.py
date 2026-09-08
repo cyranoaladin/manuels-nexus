@@ -57,18 +57,22 @@ def _declared_dead_paths() -> set[tuple[str, str]]:
 
 
 def test_every_dead_evidence_path_is_enumerated() -> None:
-    """Le compteur et la liste disent la meme chose, et rien n'est efface."""
-
-    payload = json.loads(
-        (ROOT / "audit" / "OFFICIAL_PROGRAM_COVERAGE_2026_2027.json").read_text(
-            encoding="utf-8"
-        )
-    )
+    """La liste fraîche correspond aux fichiers réellement absents, même vide."""
+    payload = _producer().build_payload()
     morts = payload["coverage_evidence_paths_missing"]
     assert payload["summary"]["COVERAGE_EVIDENCE_PATHS_MISSING"] == len(morts)
-    assert morts, "l'artefact doit enumerer les chemins morts tant qu'il y en a"
+    expected = {
+        (row["atom_id"], field, source)
+        for row in _rows()
+        for field in SOURCE_FIELDS
+        for source in row.get(field) or []
+        if not (ROOT / source.partition("#")[0]).is_file()
+    }
+    actual = {(row["atom_id"], row["field"], row["path"]) for row in morts}
+    assert actual == expected
+    assert len(actual) == len(morts)
     for entree in morts:
-        assert not (ROOT / entree["path"]).exists(), entree
+        assert not (ROOT / entree["path"].partition("#")[0]).is_file(), entree
         assert entree["atom_id"] and entree["chapter"] and entree["field"]
 
 

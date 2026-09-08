@@ -23,13 +23,16 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import build_1spe_referential_capacity_closure as gate  # noqa: E402
+import build_official_program_coverage as coverage  # noqa: E402
 
 
-@pytest.fixture(scope="module")
-def payload() -> dict[str, Any]:
-    if not gate.JSON_TARGET.is_file():
-        pytest.skip(f"artefact absent : {gate.JSON_TARGET}")
-    return json.loads(gate.JSON_TARGET.read_text(encoding="utf-8"))
+@pytest.fixture
+def payload(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> dict[str, Any]:
+    """Recalculer depuis les six matrices sources, sans réécrire les rapports."""
+    current = tmp_path / "current-official-coverage.json"
+    current.write_text(json.dumps(coverage.build_payload()), encoding="utf-8")
+    monkeypatch.setattr(gate, "OFFICIAL", current)
+    return gate.build(write=False)
 
 
 # ---------------------------------------------------------------------------
@@ -116,29 +119,48 @@ def test_the_closure_is_complete_and_within_the_applicable_year(
 def test_a_capacity_without_direct_credit_is_declared_not_hidden(
     payload: dict[str, Any],
 ) -> None:
-    """Onze capacités n'ont pas d'atome en propre : c'est dit, pas effacé.
+    """L'ensemble attendu vient des contrats et mappings courants, pas d'un quota.
 
-    Huit d'entre elles sont celles du second degre -- la totalite du chapitre.
-    Son referentiel local compte cinq atomes, aucun n'est credite a une
-    capacite, et trois capacites du contrat ne portent meme pas de reference.
-    C'est une question editoriale ouverte, remontee au Release Owner : y
-    repondre supposerait d'ecrire du texte officiel, ce qu'un producteur ne
-    fait pas.
+    Le code local distingue les facettes sans ref_capacite : trois valeurs
+    nulles ne doivent jamais devenir une seule ligne après déduplication.
     """
-
-    assert payload["summary"]["CAPACITY_WITHOUT_DIRECT_ATOM_CREDIT"] == 11
-    assert len(payload["capacities_without_direct_atom_credit"]) == 11
-    second_degre = [
-        row for row in payload["capacities_without_direct_atom_credit"]
-        if row["chapter"] == "1SPE-SECOND-DEGRE"
-    ]
-    assert len(second_degre) == 8
-    assert sum(1 for row in second_degre if row["capacity"] is None) == 3
+    mapped_aliases = {
+        row["contract_capacity"] for row in coverage.build_payload()["rows"]
+        if row["manual"] == "1SPE" and row.get("contract_capacity")
+    }
+    expected = {
+        (row["chapter"], row["code"], row["id"])
+        for row in gate.contract_capacities()
+        if not row["id"] or not (
+            {row["id"], f'{row["chapter"]}-{row["code"]}'} & mapped_aliases
+        )
+    }
+    actual_rows = payload["capacities_without_direct_atom_credit"]
+    actual = {(r["chapter"], r["local_code"], r["capacity"]) for r in actual_rows}
+    assert actual == expected
+    assert len(actual_rows) == len(actual)
+    assert payload["summary"]["CAPACITY_WITHOUT_DIRECT_ATOM_CREDIT"] == len(expected)
+    assert (payload["summary"]["CAPACITIES_CLOSED"] + len(expected)
+            == payload["summary"]["CONTRACT_CAPACITIES"])
     assert "pas un trou de programme" in (
         payload["why_a_capacity_without_direct_credit_is_not_a_gap"]
     )
-    # Et ce n'est pas bloquant : réattribuer un atome est un jugement humain.
+    # Une facette pédagogique n'est pas un nouvel attendu officiel.
     assert "CAPACITY_WITHOUT_DIRECT_ATOM_CREDIT" not in gate.BLOCKING
+
+
+def test_removing_a_mapping_keeps_the_newly_uncredited_capacity_visible(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    fresh = coverage.build_payload()
+    fresh["rows"] = [r for r in fresh["rows"] if r["atom_id"] != "1SPE-OFFICIAL-071"]
+    mutated = tmp_path / "removed-mapping.json"
+    mutated.write_text(json.dumps(fresh), encoding="utf-8")
+    monkeypatch.setattr(gate, "OFFICIAL", mutated)
+    rows = gate.build(write=False)["capacities_without_direct_atom_credit"]
+    assert any(r["chapter"] == "1SPE-SECOND-DEGRE"
+               and r["local_code"] == "C8"
+               and r["capacity"] == "1SPE-SECOND-DEGRE-2026-C1" for r in rows)
 
 
 # ---------------------------------------------------------------------------

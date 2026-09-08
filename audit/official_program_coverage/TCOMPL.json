@@ -22,25 +22,25 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_primitives.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/10_C1_ajustement_affine.tex",
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/07_td_contextualise.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/cours/10_C1_courbe_lorenz.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/cours/10_C1_formule_bayes.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/cours/10_C1_definition_ln.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/10_C1_suites_geometriques.tex",
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/07_td_contextualise.tex",
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/07_td_contextualise.tex"
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/11_C2_loi_exponentielle.tex"
       ],
       "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_primitives.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/10_C1_ajustement_affine.tex",
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/07_td_contextualise.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/cours/10_C1_courbe_lorenz.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/cours/10_C1_formule_bayes.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/cours/10_C1_definition_ln.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/10_C1_suites_geometriques.tex",
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/07_td_contextualise.tex",
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/07_td_contextualise.tex"
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/11_C2_loi_exponentielle.tex"
       ],
       "exercise_sources": [],
       "gap_reason": "Exigence structurelle : les neuf themes d'etude du programme correspondent aux 9 chapitres du manuel, chacun avec son cours.",
@@ -71,7 +71,41 @@
       "review_status": "PROGRAM_REVIEWED",
       "row_id": "TCOMPL-COVERAGE-002",
       "scientific_state": "PENDING",
-      "source_content_state": "PRESENT"
+      "source_content_state": "PRESENT",
+      "evidence_reconciliation": {
+        "observation_head": "8a85d9faf82f26946123d05e66343bd3f99e34e2",
+        "date": "2026-09-08",
+        "review_dimension": "PROGRAMME_RELEVANCE_ONLY",
+        "human_approval": false,
+        "review_inheritance": "NONE",
+        "bindings": [
+          {
+            "old_source": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/07_td_contextualise.tex",
+            "old_source_disposition": "SUPERSEDED_HISTORICAL",
+            "replacement": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex",
+            "replacement_sha256": "d3c459f3d284764c5a2b85c0c61580af4557a7b316584c8fd7d7a89ae5f1272c",
+            "semantically_identical": false,
+            "notes": "Cours substantiel Bernoulli/binomiale: preuve de présence du thème, ne prouve pas à lui seul chaque capacité du chapitre."
+          },
+          {
+            "old_source": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/07_td_contextualise.tex",
+            "old_source_disposition": "SUPERSEDED_HISTORICAL",
+            "replacement": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex",
+            "replacement_sha256": "7469c4a99f52152d353551cd2aa5fc9dcd95c9c0193d91dbc93f2b81c4cdce71",
+            "semantically_identical": false,
+            "notes": "Etude de x+9/x et dichotomie: présence effective du thème; couverture exhaustive non démontrée."
+          },
+          {
+            "old_source": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/07_td_contextualise.tex",
+            "old_source_disposition": "SUPERSEDED_HISTORICAL",
+            "replacement": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/11_C2_loi_exponentielle.tex",
+            "replacement_sha256": "8c5bb7a894357105023a108c9958f3f8852a0f26ec0fc524f5efb679d5f26f97",
+            "semantically_identical": false,
+            "notes": "Densité, répartition, espérance et absence de mémoire: présence effective du thème."
+          }
+        ],
+        "worktree_observation": true
+      }
     },
     {
       "NOR": "MENE1921265A",
@@ -458,7 +492,7 @@
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/evaluations/TCOMPL-MF-EV-A.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-001.tex",
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MF-RE-C06.tex"
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MODELES-FONCTION-RE-C1.tex"
       ],
       "exercise_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-001.tex"
@@ -478,11 +512,29 @@
       "pedagogical_state": "PENDING",
       "programme_state": "PASS",
       "remediation_sources": [
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MF-RE-C06.tex"
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MODELES-FONCTION-RE-C1.tex"
       ],
       "review_status": "PROGRAM_REVIEWED",
       "row_id": "TCOMPL-COVERAGE-094",
-      "scientific_state": "PENDING"
+      "scientific_state": "PENDING",
+      "evidence_reconciliation": {
+        "observation_head": "8a85d9faf82f26946123d05e66343bd3f99e34e2",
+        "date": "2026-09-08",
+        "review_dimension": "PROGRAMME_RELEVANCE_ONLY",
+        "human_approval": false,
+        "review_inheritance": "NONE",
+        "bindings": [
+          {
+            "old_source": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MF-RE-C06.tex",
+            "old_source_disposition": "SUPERSEDED_HISTORICAL",
+            "replacement": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MODELES-FONCTION-RE-C1.tex",
+            "replacement_sha256": "1948274fa36203616fcd850de36e5bf7f89d92a75cee2d3afa8369008b7ff168",
+            "semantically_identical": false,
+            "notes": "Quotient et limites latérales seulement; pertinente 094/099/100 partiellement, NON pertinente 098 (dérivées de composées)."
+          }
+        ],
+        "worktree_observation": true
+      }
     },
     {
       "NOR": "MENE1921265A",
@@ -622,36 +674,32 @@
     {
       "NOR": "MENE1921265A",
       "assessment_alignment_state": "PENDING",
-      "assessment_sources": [
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/evaluations/TCOMPL-MF-EV-A.tex"
-      ],
+      "assessment_sources": [],
       "atom_id": "TCOMPL-OFFICIAL-098",
       "chapter": "TCOMPL-MODELES-FONCTION",
       "contract_capacity": "TCOMPL-MF-C1",
-      "correction_sources": [
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-001.tex"
-      ],
+      "correction_sources": [],
       "course_sources": [
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/cours/12_C3_derivee_ln.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_primitives.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex"
       ],
-      "coverage_status": "CONTENT_REVIEW_PENDING",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-001.tex",
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex",
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/evaluations/TCOMPL-MF-EV-A.tex",
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-001.tex",
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-001.tex",
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MF-RE-C06.tex"
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_primitives.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/remediation/TCOMPL-CALCULS-AIRES-RE-C4.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/cours/12_C3_derivee_ln.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/methodes/TCOMPL-LOG-ME-005.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/contrat.yaml",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex"
       ],
-      "exercise_sources": [
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-001.tex"
-      ],
-      "gap_reason": null,
-      "gap_type": null,
+      "exercise_sources": [],
+      "gap_reason": "La nouvelle section f(ax+b) est présente et sa règle, son domaine et ses cas limites ont reçu une contre-revue agent indépendante. La fermeture de l’atome composite exige encore la revue des autres formes et des dimensions pédagogiques; elle ne se déduit pas de cette section.",
+      "gap_type": "PARTIAL_OFFICIAL_CONTENT_COVERAGE",
       "mandatory": "YES",
       "manual": "TCOMPL",
       "method_sources": [
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-001.tex"
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/methodes/TCOMPL-LOG-ME-005.tex"
       ],
       "obligation_type": "MANDATORY_KNOWLEDGE",
       "official_document_id": "TCOMPL-OFFICIAL-098",
@@ -659,13 +707,52 @@
       "official_section": "Contenus et capacités attendues — Fonctions : continuité, dérivabilité, limites, représentation graphique",
       "official_wording_or_short_paraphrase": "Fonction dérivée de x ↦ ƒ(a x + b), x ↦ eu(x), x ↦ ln u(x), x ↦ u(x)2.",
       "pedagogical_state": "PENDING",
-      "programme_state": "PASS",
+      "programme_state": "PENDING",
       "remediation_sources": [
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MF-RE-C06.tex"
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/remediation/TCOMPL-CALCULS-AIRES-RE-C4.tex"
       ],
       "review_status": "PROGRAM_REVIEWED",
       "row_id": "TCOMPL-COVERAGE-098",
-      "scientific_state": "PENDING"
+      "scientific_state": "PENDING",
+      "evidence_reconciliation": {
+        "observation_head": "8a85d9faf82f26946123d05e66343bd3f99e34e2",
+        "date": "2026-09-08",
+        "review_dimension": "PROGRAMME_RELEVANCE_ONLY",
+        "human_approval": false,
+        "review_inheritance": "NONE",
+        "bindings": [
+          {
+            "old_source": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MF-RE-C06.tex",
+            "old_source_disposition": "SUPERSEDED_HISTORICAL",
+            "replacement": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/remediation/TCOMPL-CALCULS-AIRES-RE-C4.tex",
+            "replacement_sha256": "b3d38bffe3a6eb32cf1084fd2cad19f45c4c7496f35ea0f44dd740f81942de92",
+            "semantically_identical": false,
+            "notes": "La remédiation retenue exerce réellement la dérivée de exp(u), contrairement au quotient RE-C1. Avant la correction du 2026-09-08, aucune règle générale f(ax+b) n’était identifiée dans le corpus TCOMPL. La section ajoutée et sa revue locale sont documentées séparément; elles n’héritent d’aucune preuve de la source retirée."
+          }
+        ],
+        "worktree_observation": true,
+        "new_content_candidate": {
+          "source": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex",
+          "source_sha256": "7469c4a99f52152d353551cd2aa5fc9dcd95c9c0193d91dbc93f2b81c4cdce71",
+          "dimension": "DERIVATIVE_OF_AFFINE_COMPOSITION",
+          "authoring_reason": "REAL_GAP",
+          "programme_nor": "MENE1921265A",
+          "official_anchor": "lines:573",
+          "official_archive": "Mathematiques/manuel-maths/sources/txt/BO2019_TCOMPL_optionnel.txt",
+          "official_archive_sha256": "dad0e4941fc0eb7e93a727bfabd49b3298b1e378eafb7fbe1bbdee35b9c4ac27",
+          "official_annex_url": "https://cache.media.education.gouv.fr/file/SPE8_MENJ_25_7_2019/13/4/spe265_annexe_1159134.pdf",
+          "independent_review": "VALIDATED_BY_EVIDENCE",
+          "human_approval": false,
+          "reviewer": "independent_codex_root",
+          "review_scope": "Sous-section Dériver après un changement affine de variable uniquement; aucune certification du reste du cours ou du code Python imprimé.",
+          "dimensions": {
+            "PROGRAMME_REVIEW": "VALIDATED_BY_EVIDENCE",
+            "SCIENTIFIC_REVIEW": "VALIDATED_BY_EVIDENCE",
+            "PEDAGOGICAL_REVIEW": "PENDING"
+          },
+          "review_rationale": "Contre-revue indépendante du quotient de différences pour a non nul et du domaine J ouvert; cas a=0 avec b dans I; calcul indépendant de (1-2x)^2 et de la constante9. La règle f(ax+b) relève du programme applicable MENE1921265A."
+        }
+      }
     },
     {
       "NOR": "MENE1921265A",
@@ -689,7 +776,7 @@
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/evaluations/TCOMPL-MF-EV-A.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-001.tex",
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MF-RE-C06.tex"
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MODELES-FONCTION-RE-C1.tex"
       ],
       "exercise_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-001.tex"
@@ -709,11 +796,29 @@
       "pedagogical_state": "PENDING",
       "programme_state": "PASS",
       "remediation_sources": [
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MF-RE-C06.tex"
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MODELES-FONCTION-RE-C1.tex"
       ],
       "review_status": "PROGRAM_REVIEWED",
       "row_id": "TCOMPL-COVERAGE-099",
-      "scientific_state": "PENDING"
+      "scientific_state": "PENDING",
+      "evidence_reconciliation": {
+        "observation_head": "8a85d9faf82f26946123d05e66343bd3f99e34e2",
+        "date": "2026-09-08",
+        "review_dimension": "PROGRAMME_RELEVANCE_ONLY",
+        "human_approval": false,
+        "review_inheritance": "NONE",
+        "bindings": [
+          {
+            "old_source": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MF-RE-C06.tex",
+            "old_source_disposition": "SUPERSEDED_HISTORICAL",
+            "replacement": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MODELES-FONCTION-RE-C1.tex",
+            "replacement_sha256": "1948274fa36203616fcd850de36e5bf7f89d92a75cee2d3afa8369008b7ff168",
+            "semantically_identical": false,
+            "notes": "Quotient et limites latérales seulement; pertinente 094/099/100 partiellement, NON pertinente 098 (dérivées de composées)."
+          }
+        ],
+        "worktree_observation": true
+      }
     },
     {
       "NOR": "MENE1921265A",
@@ -737,7 +842,7 @@
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/evaluations/TCOMPL-MF-EV-A.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-001.tex",
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MF-RE-C06.tex"
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MODELES-FONCTION-RE-C1.tex"
       ],
       "exercise_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-001.tex"
@@ -757,11 +862,29 @@
       "pedagogical_state": "PENDING",
       "programme_state": "PASS",
       "remediation_sources": [
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MF-RE-C06.tex"
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MODELES-FONCTION-RE-C1.tex"
       ],
       "review_status": "PROGRAM_REVIEWED",
       "row_id": "TCOMPL-COVERAGE-100",
-      "scientific_state": "PENDING"
+      "scientific_state": "PENDING",
+      "evidence_reconciliation": {
+        "observation_head": "8a85d9faf82f26946123d05e66343bd3f99e34e2",
+        "date": "2026-09-08",
+        "review_dimension": "PROGRAMME_RELEVANCE_ONLY",
+        "human_approval": false,
+        "review_inheritance": "NONE",
+        "bindings": [
+          {
+            "old_source": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MF-RE-C06.tex",
+            "old_source_disposition": "SUPERSEDED_HISTORICAL",
+            "replacement": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/remediation/TCOMPL-MODELES-FONCTION-RE-C1.tex",
+            "replacement_sha256": "1948274fa36203616fcd850de36e5bf7f89d92a75cee2d3afa8369008b7ff168",
+            "semantically_identical": false,
+            "notes": "Quotient et limites latérales seulement; pertinente 094/099/100 partiellement, NON pertinente 098 (dérivées de composées)."
+          }
+        ],
+        "worktree_observation": true
+      }
     },
     {
       "NOR": "MENE1921265A",
@@ -2737,21 +2860,21 @@
       "chapter": "TCOMPL-TEMPS-ATTENTE",
       "contract_capacity": "TCOMPL-ATT-C4",
       "correction_sources": [
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-010.tex"
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-004.tex"
       ],
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/11_C2_loi_exponentielle.tex"
       ],
       "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-010.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-004.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/11_C2_loi_exponentielle.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/evaluations/TCOMPL-ATT-EV-B.tex",
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-010.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-004.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-004.tex"
       ],
       "exercise_sources": [
-        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-010.tex"
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-004.tex"
       ],
       "gap_reason": "Chaîne de couverture incomplète : TCOMPL-ATT-C4:remediation_sources.",
       "gap_type": "CONTENT_PRESENT_BUT_INSUFFICIENT",
@@ -2770,7 +2893,33 @@
       "remediation_sources": [],
       "review_status": "PROGRAM_REVIEWED",
       "row_id": "TCOMPL-COVERAGE-160",
-      "scientific_state": "PENDING"
+      "scientific_state": "PENDING",
+      "evidence_reconciliation": {
+        "observation_head": "8a85d9faf82f26946123d05e66343bd3f99e34e2",
+        "date": "2026-09-08",
+        "review_dimension": "PROGRAMME_RELEVANCE_ONLY",
+        "human_approval": false,
+        "review_inheritance": "NONE",
+        "bindings": [
+          {
+            "old_source": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-010.tex",
+            "old_source_disposition": "SUPERSEDED_HISTORICAL",
+            "replacement": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-004.tex",
+            "replacement_sha256": "7397fd53466fc3244cf55b515ea68bec0ea3552182da961642aaae89f6591d3f",
+            "semantically_identical": false,
+            "notes": "Appariement explicite EX-004; intégrale indépendante exacte 20."
+          },
+          {
+            "old_source": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-010.tex",
+            "old_source_disposition": "SUPERSEDED_HISTORICAL",
+            "replacement": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-004.tex",
+            "replacement_sha256": "1315d7926ab4233e3ea97f3d6c6c76b9c24d115be4f6a5e5659de7b67f7f6440",
+            "semantically_identical": false,
+            "notes": "Espérance loi exponentielle lambda=0,05, intégrale demandée puis E(X)=20; couverture partielle de l’atome global."
+          }
+        ],
+        "worktree_observation": true
+      }
     },
     {
       "NOR": "MENE1921265A",
@@ -3229,15 +3378,14 @@
   "schema_version": 2,
   "summary": {
     "by_status": {
-      "CONTENT_REVIEW_PENDING": 16,
-      "STRUCTURALLY_MAPPED": 53
+      "CONTENT_REVIEW_PENDING": 15,
+      "STRUCTURALLY_MAPPED": 54
     },
     "full": 0,
     "gaps_by_type": {
-      "CHAPTER_SCOPE_WRONG": 1,
-      "CONTENT_MISSING": 2,
       "CONTENT_PRESENT_BUT_INSUFFICIENT": 49,
-      "CONTRACT_MISSING": 1
+      "CONTRACT_MISSING": 1,
+      "PARTIAL_OFFICIAL_CONTENT_COVERAGE": 1
     },
     "mandatory_atoms": 69,
     "mapped": 69,

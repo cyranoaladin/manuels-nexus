@@ -231,7 +231,8 @@ def build(write: bool = False) -> dict[str, Any]:
 
         if not atoms:
             without_atom.append(
-                {"chapter": chapter, "capacity": capacity["id"]}
+                {"chapter": chapter, "local_code": capacity["code"],
+                 "capacity": capacity["id"], "origin": capacity["origin"]}
             )
             continue
 
@@ -340,15 +341,13 @@ def build(write: bool = False) -> dict[str, Any]:
         "capacities_without_referential_entry": without_entry,
         "capacities_without_direct_atom_credit": without_atom,
         "why_a_capacity_without_direct_credit_is_not_a_gap": (
-            "Six capacites du contrat ne sont creditees d'aucun atome en "
-            "propre. Ce n'est pas un trou de programme : la matrice "
-            "officielle rattache 133 atomes obligatoires sur 133 pour ce "
-            "manuel, et chacun de ces chapitres en porte entre huit et "
-            "quinze, credites a des capacites soeurs. Ces six-la sont des "
-            "decoupages pedagogiques du meme attendu officiel. C'est "
-            "observe et dit, pas bloquant -- et pas non plus efface : "
-            "reattribuer un atome officiel a une capacite est un jugement "
-            "de programme, pas une reparation d'outil."
+            "Un credit direct absent n'est pas un trou de programme "
+            "demontre par ce seul controle. Une capacite peut etre une "
+            "facette pedagogique d'un attendu porte par une capacite soeur. "
+            "Chaque ligne reste visible avec son code local, sa reference "
+            "et son origine ; la revue du mapping et du contenu determine "
+            "s'il existe un manque reel. Aucun nombre historique ne prouve "
+            "la couverture courante."
         ),
         "atoms_out_of_applicable_year": out_of_year,
         "atoms_credited_to_several_capacities": false_credit,
