@@ -9,17 +9,21 @@
 % xmax = Rational(50, 4)
 % assert xmax == Rational(25, 2)
 % assert R.subs(x, xmax) == Rational(625, 2)
-% # Prix optimal : p = 50 - 2*(25/2) = 50 - 25 = 25
-% p_opt = 50 - 2*xmax
-% assert p_opt == 25
+% # Le sommet donne une borne dans le modèle continu, pas un nombre entier d'articles.
+% receipts = {n: n*(50-2*n) for n in range(26)}
+% assert max(receipts.values()) == 312
+% assert [n for n, value in receipts.items() if value == 312] == [12, 13]
+% assert [(n, 50-2*n) for n in (12, 13)] == [(12, 26), (13, 24)]
 % END-VERIFY
 \begin{exercice}{1SPE-SECDEG-EX-017}{1}{12}
 Un commerçant vend des articles. Des études montrent que si le prix unitaire est $p$ euros, il vend $x = \dfrac{50 - p}{2}$ articles, avec $0 \leqslant p \leqslant 50$.
+Dans ce modèle, on ne retient que les prix pour lesquels le nombre d'articles
+$x$ est un entier.
 
 \begin{enumerate}
   \item Exprimer $p$ en fonction de $x$.
   \item Montrer que la recette $R(x)$ (en euros) s'écrit $R(x) = -2x^2 + 50x$.
-  \item Déterminer le nombre d'articles $x$ à vendre pour maximiser la recette.
-  \item En déduire le prix unitaire optimal et la recette maximale correspondante.
+  \item Déterminer le ou les nombres entiers d'articles $x$ à vendre pour maximiser la recette.
+  \item En déduire les prix unitaires optimaux et la recette maximale correspondante.
 \end{enumerate}
 \end{exercice}

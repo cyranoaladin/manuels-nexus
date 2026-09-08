@@ -40,15 +40,15 @@ Un agriculteur dispose de $60$~m de cloture pour fermer un enclos rectangulaire 
 
 \textbf{Question 1.} Le cote parallele au mur mesure $60 - 2x$ metres.
 
-\textbf{Question 2.} $A(x) = x(60 - 2x) = -2x^2 + 60x$.
+\textbf{Question 2.} $A(x) = x(60 - 2x) = -2x^2 + 60x$, pour $0<x<30$.
 
 \commentaireMarge{$a = -2 < 0$ : la parabole est en $\cap$, le sommet est un maximum.}
 
-\textbf{Question 3.} $a = -2$, $b = 60$. Abscisse du sommet :
+\textbf{Question 3.} On complète le carré :
 \[
-\alpha = \frac{-60}{2 \times (-2)} = \frac{-60}{-4} = 15.
+A(x)=-2(x^2-30x)=-2\bigl((x-15)^2-225\bigr)=-2(x-15)^2+450.
 \]
-L'aire est maximale pour $x = 15$~m.
+Le carré est positif ou nul et $15\in]0\,;\,30[$ : l'aire est maximale pour $x = 15$~m.
 
 \textbf{Question 4.}
 \[
@@ -71,7 +71,7 @@ Un projectile est lance. Sa hauteur (en metres) au bout de $t$ secondes est $h(t
 \end{enumerate}
 \end{exercice}
 
-\coupDePouce{1}{Pour trouver l'instant du maximum : $\alpha = -b/(2a) = -30/(2 \times (-5))$. Calculer soigneusement.}
+\coupDePouce{1}{Mets $-5$ en facteur dans les deux premiers termes de $h(t)$, puis complète le carré dans $t^2-6t$ pour lire l'instant du maximum.}
 
 % BEGIN-VERIFY
 % from sympy import symbols, Rational, sqrt as Sqrt, solve
@@ -99,10 +99,11 @@ Un projectile est lance. Sa hauteur (en metres) au bout de $t$ secondes est $h(t
 
 \commentaireMarge{$a = -5 < 0$ : maximum au sommet.}
 
-\textbf{Question 2.} $a = -5$, $b = 30$.
+\textbf{Question 2.} On complète le carré :
 \[
-\alpha = \frac{-30}{2 \times (-5)} = \frac{-30}{-10} = 3 \text{ s}.
+h(t)=-5(t^2-6t)+2=-5\bigl((t-3)^2-9\bigr)+2=-5(t-3)^2+47.
 \]
+Le maximum est atteint à $t=3$ secondes, avant le retour au sol.
 
 \textbf{Question 3.}
 \[
@@ -124,13 +125,15 @@ Le projectile touche le sol après environ $6{,}1$~secondes.
 %---------------------------------------------------------------
 
 \begin{exercice}{1SPE-SECDEG-RE-C6-EX3}{1}{10}
-Un artisan fabrique des objets et les vend $p$ euros l'unité. Ses études montrent que la demande est $q(p) = 100 - 2p$ unités et son chiffre d'affaires est $CA(p) = p \times q(p)$.
+Un artisan fabrique des objets et les vend au prix $p>0$ euros l'unité. Ses études
+modélisent la demande moyenne par le nombre réel $q(p) = 100 - 2p$ d'unités.
+Le chiffre d'affaires moyen dans ce modèle est $CA(p) = p \times q(p)$.
 \begin{enumerate}
   \item Montrer que $CA(p) = -2p^2 + 100p$.
-  \item Pour quelles valeurs de $p$ la demande est-elle positive ?
+  \item Pour quelles valeurs de $p$ la demande est-elle strictement positive ?
   \item Déterminer le prix $p^*$ qui maximise le chiffre d'affaires.
   \item Calculer le chiffre d'affaires maximal.
-  \item Le coût de production est $C = 500$~euros. Pour quelles valeurs de $p$ le benefice $B(p) = CA(p) - 500$ est-il positif ? (On calculera $\Delta$ de $CA(p) = 500$.)
+  \item Le coût de production est $C = 500$~euros. Pour quelles valeurs de $p$ le bénéfice moyen $B(p) = CA(p) - 500$ est-il positif ou nul ? (On calculera $\Delta$ de $CA(p) = 500$.)
 \end{enumerate}
 \end{exercice}
 
@@ -162,22 +165,25 @@ Un artisan fabrique des objets et les vend $p$ euros l'unité. Ses études montr
 
 \textbf{Question 1.} $CA(p) = p(100 - 2p) = 100p - 2p^2 = -2p^2 + 100p$.
 
-\textbf{Question 2.} $q(p) = 100 - 2p > 0 \Leftrightarrow p < 50$. La demande est positive pour $p \in \,]0\,;\,50[$.
+\textbf{Question 2.} $q(p) = 100 - 2p > 0 \Leftrightarrow p < 50$. La demande moyenne est strictement positive pour $p \in \,]0\,;\,50[$.
 
-\textbf{Question 3.} $CA(p) = -2p^2 + 100p$, $a = -2 < 0$ (maximum).
+\textbf{Question 3.} On complète le carré :
 \[
-p^* = \frac{-100}{2 \times (-2)} = \frac{-100}{-4} = 25 \text{ euros}.
+CA(p)=-2(p^2-50p)=-2\bigl((p-25)^2-625\bigr)=-2(p-25)^2+1250.
 \]
+Le maximum est atteint pour $p^*=25$ euros, valeur admissible puisque $0<25<50$.
 
 \textbf{Question 4.} $CA(25) = -2 \times 625 + 100 \times 25 = -1250 + 2500 = 1250$ euros.
 
 \textbf{Question 5.} $B(p) \geq 0 \Leftrightarrow -2p^2 + 100p - 500 \geq 0$.
-$\Delta = 10000 - 4000 = 6000$. $\sqrt{6000} = 10\sqrt{60} \approx 77{,}5$.
+$\Delta = 10000 - 4000 = 6000$ et $\sqrt{6000}=20\sqrt{15}$.
 \[
-p_{1,2} = \frac{-100 \pm 77{,}5}{-4}.
+p_1=25-5\sqrt{15},\qquad p_2=25+5\sqrt{15}.
 \]
-$p_1 \approx \frac{-100 + 77{,}5}{-4} \approx 5{,}6$ et $p_2 \approx \frac{-100 - 77{,}5}{-4} \approx 44{,}4$.
+$p_1\approx5{,}6$ et $p_2\approx44{,}4$ euros sont des valeurs arrondies.
 
-Comme $a = -2 < 0$, le benefice est positif entre les racines : $B(p) \geq 0$ pour $p \in [5{,}6\,;\,44{,}4]$ environ.
+Comme $a=-2<0$, le bénéfice est positif ou nul exactement pour
+$p\in[25-5\sqrt{15}\,;\,25+5\sqrt{15}]$.
+Les bornes exactes sont nécessaires pour inclure correctement les prix où le bénéfice est nul.
 
 \end{corrige}

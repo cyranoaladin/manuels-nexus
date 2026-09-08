@@ -34,21 +34,20 @@ La \textbf{forme canonique} d'un polynôme du second degré $f(x) = ax^2 + bx + 
 \[
   f(x) = a(x - \alpha)^2 + \beta,
 \]
-où
-\[
-  \alpha = -\frac{b}{2a} \qquad \text{et} \qquad \beta = f(\alpha) = -\frac{\Delta}{4a},
-\]
-avec $\Delta = b^2 - 4ac$.
+où $\alpha$ et $\beta$ sont des réels.
 
 Le point $S(\alpha\,;\,\beta)$ est le \textbf{sommet} de la parabole représentant $f$.
+Toute fonction polynôme du second degré admet une telle écriture.
+En Première, on apprend à la déterminer dans des cas simples par
+\textbf{complétion du carré}, avec l'identité $x^2+2ux=(x+u)^2-u^2$.
 }
 
 \exemple{
 Soit $f(x) = 2x^2 - 8x + 5$.
 
-On a $a = 2$, $b = -8$, $c = 5$, donc $\alpha = -\dfrac{-8}{2 \times 2} = 2$.
-
-$\beta = f(2) = 2 \times 4 - 8 \times 2 + 5 = 8 - 16 + 5 = -3$.
+On écrit $f(x)=2(x^2-4x)+5$ et on remarque que
+$x^2-4x=(x-2)^2-4$. Ainsi
+$f(x)=2\bigl((x-2)^2-4\bigr)+5=2(x-2)^2-3$.
 
 Forme canonique : $f(x) = 2(x - 2)^2 - 3$.
 
@@ -56,6 +55,8 @@ Le sommet est $S(2\,;\,-3)$.
 }
 
 \definition[3]{
+On note $\Delta = b^2 - 4ac$, appelé \textbf{discriminant} du trinôme
+$ax^2+bx+c$ (voir C3).
 Lorsque $\Delta > 0$, le polynôme $f(x) = ax^2 + bx + c$ admet deux racines réelles distinctes $x_1$ et $x_2$ (voir C3) et peut s'écrire sous \textbf{forme factorisée} :
 \[
   f(x) = a(x - x_1)(x - x_2).
@@ -94,7 +95,7 @@ $f(x) = x^2 + x + 1$ : on calcule $\Delta = 1 - 4 = -3 < 0$. Ce trinôme n'admet
 % ============================================================
 
 \erreurFrequente{
-\textbf{Oubli du coefficient directeur $a$ dans la forme canonique ou factorisée.}
+\textbf{Oubli du coefficient $a$ dans la forme canonique ou factorisée.}
 
 On écrit souvent $f(x) = (x - \alpha)^2 + \beta$ en oubliant le facteur $a$ devant. La forme correcte est $f(x) = a(x - \alpha)^2 + \beta$. De même, la forme factorisée est $a(x-x_1)(x-x_2)$, pas $(x-x_1)(x-x_2)$.
 
@@ -104,17 +105,19 @@ On écrit souvent $f(x) = (x - \alpha)^2 + \beta$ en oubliant le facteur $a$ dev
 \erreurFrequente{
 \textbf{Confusion entre $\alpha$ (coordonnée du sommet) et les racines $x_1$, $x_2$.}
 
-$\alpha = -\dfrac{b}{2a}$ est l'abscisse du sommet. Les racines $x_1$ et $x_2$ sont les solutions de $f(x) = 0$. Ces trois valeurs sont en général différentes. Seule coïncidence possible : si $\Delta = 0$, alors $x_0 = \alpha$ (la racine double est l'abscisse du sommet).
+$\alpha$ se lit dans la forme $a(x-\alpha)^2+\beta$ : c'est l'abscisse du sommet.
+Les racines $x_1$ et $x_2$ sont les solutions de $f(x) = 0$.
+Ces valeurs sont en général différentes. Elles coïncident lorsque la racine est double.
 }
 
 \margeAppui{%
 \textbf{Passage développée $\to$ canonique :}
 \newline
-1. Calculer $\alpha = -b/(2a)$.
+1. Mettre le coefficient de $x^2$ en facteur dans les deux premiers termes.
 \newline
-2. Calculer $\beta = f(\alpha)$.
+2. Compléter le carré dans la parenthèse.
 \newline
-3. Écrire $a(x-\alpha)^2+\beta$.%
+3. Réduire les constantes, puis lire $\alpha$ et $\beta$.%
 }
 
 \margeAppui{%
@@ -128,11 +131,14 @@ $= ax^2 - 2a\alpha x + a\alpha^2 + \beta$.%
 }
 
 % ============================================================
-% STRATE 3 — Complétion du carré (technique détaillée)
+% STRATE 3 — Formules générales facultatives
 % ============================================================
 
 \approfondissement{
-\textbf{Obtenir la forme canonique par complétion du carré.}
+\textbf{Approfondissement facultatif : formules générales.}
+Le calcul effectif de la forme canonique dans le cas général n'est
+pas un attendu du programme. La démarche générale ci-dessous explique les
+formules ; elle ne remplace pas le travail de complétion du carré dans des cas simples.
 
 On part de $f(x) = ax^2 + bx + c$. On met $a$ en facteur sur les deux premiers termes :
 \[

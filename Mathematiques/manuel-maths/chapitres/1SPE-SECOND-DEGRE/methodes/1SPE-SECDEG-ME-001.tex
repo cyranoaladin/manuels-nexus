@@ -11,17 +11,17 @@
   \begin{enumerate}
     \item J'identifie les coefficients $a$, $b$, $c$ de $f(x) = ax^2 + bx + c$ (avec $a
 \neq 0$).
-    \item Je calcule l'abscisse du sommet : $\alpha = -\dfrac{b}{2a}$.
-    \item Je calcule l'ordonnée du sommet par l'une des deux méthodes au choix :
-      \begin{itemize}
-        \item \textbf{Méthode directe :} $\beta = f(\alpha)$ (je remplace $x$ par $\alpha$ dans $f$).
-        \item \textbf{Méthode par le discriminant :} $\beta = -\dfrac{\Delta}{4a}$ où $\Delta = b^2 - 4ac$.
-      \end{itemize}
-    \item J'écris la forme canonique : $f(x) = a(x - \alpha)^2 + \beta$.
+    \item Pour obtenir la forme canonique dans un cas simple, je mets $a$
+      en facteur dans les deux premiers termes, puis j'utilise la
+      \textbf{complétion du carré} : $x^2+2ux=(x+u)^2-u^2$.
+    \item Je réduis les constantes pour obtenir $a(x-\alpha)^2+\beta$,
+      puis je lis le sommet $S(\alpha\,;\,\beta)$ dans cette écriture.
     \item \textbf{Pour développer :} je développe $(x - \alpha)^2 = x^2 - 2\alpha x + \alpha^2$
       puis je multiplie par $a$ et j'ajoute $\beta$.
     \item \textbf{Pour factoriser :} je calcule $\Delta$, et si $\Delta > 0$, je pose $x_1$ et $x_2$
       les deux racines, puis $f(x) = a(x - x_1)(x - x_2)$.
+      Si $\Delta=0$, la racine double $x_0$ donne $f(x)=a(x-x_0)^2$.
+      Si $\Delta<0$, le trinôme ne se factorise pas en facteurs du premier degré réels.
   \end{enumerate}
 }
 
@@ -32,20 +32,14 @@
   \commentaireMarge{Identifier $a$, $b$, $c$.}%
   On a $a = 2$, $b = -12$, $c = 22$.
 
-  \commentaireMarge{Calculer $\alpha = -\frac{b}{2a}$.}%
+  \commentaireMarge{Compléter le carré.}%
+  On factorise les deux premiers termes par $2$ :
   \[
-    \alpha = -\frac{-12}{2 \times 2} = \frac{12}{4} = 3.
+    f(x)=2(x^2-6x)+22=2\bigl((x-3)^2-9\bigr)+22
+         =2(x-3)^2+4.
   \]
-
-  \commentaireMarge{Calculer $\beta = f(\alpha) = f(3)$.}%
-  \[
-    \beta = f(3) = 2 \times 3^2 - 12 \times 3 + 22 = 18 - 36 + 22 = 4.
-  \]
-
-  \commentaireMarge{Écrire la forme canonique.}%
-  \[
-    f(x) = 2(x - 3)^2 + 4.
-  \]
+  \commentaireMarge{Lire le sommet.}%
+  La forme canonique donne $\alpha=3$ et $\beta=4$.
 
   \medskip
   \textbf{Vérification par développement :}
@@ -57,10 +51,10 @@
     \item \textbf{Piège 1.} Oublier le facteur $a$ dans la forme canonique. On écrit parfois
       $(x - \alpha)^2 + \beta$ sans le $a$ devant : c'est faux dès que $a
 \neq 1$.
-    \item \textbf{Piège 2.} Se tromper de signe sur $\alpha$. La formule est $\alpha = -\dfrac{b}{2a}$ :
-      si $b = -12$, alors $\alpha = -\dfrac{-12}{4} = +3$ et non $-3$.
-    \item \textbf{Piège 3.} Lors du calcul de $\beta$ par $f(\alpha)$, oublier d'appliquer la valeur
-      à \emph{tous} les termes de $f$, notamment le terme constant $c$.
+    \item \textbf{Piège 2.} Oublier de compenser le carré ajouté :
+      $x^2-6x=(x-3)^2-9$, et non $(x-3)^2$.
+    \item \textbf{Piège 3.} Oublier de distribuer le coefficient extérieur :
+      $2\bigl((x-3)^2-9\bigr)+22=2(x-3)^2-18+22$.
   \end{itemize}
 }
 
@@ -74,3 +68,17 @@
 \sEntrainer{\refExos{M1}}
 
 \end{fichemethode}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand
+% x = symbols('x', real=True)
+% assert expand((x-3)**2-9) == x**2-6*x
+% assert expand(2*((x-3)**2-9)+22) == 2*x**2-12*x+22
+% assert expand(2*(x-3)**2+4) == 2*x**2-12*x+22
+% assert expand((x-3)**2) != x**2-6*x
+% assert expand(2*(x-3)**2-9+22) != 2*x**2-12*x+22
+% # Cas limites de la factorisation réelle : racine double et aucune racine.
+% from sympy import solveset, S
+% assert expand(2*(x-1)**2) == 2*x**2-4*x+2
+% assert solveset(-x**2-1, x, domain=S.Reals) == S.EmptySet
+% END-VERIFY

@@ -105,9 +105,12 @@ Decrire les transformations et identifier le sommet des courbes suivantes.
 
 \textbf{Question 2.} $h(x) = (x-2)^2$ : translation horizontale de $+2$ ; sommet $S(2\,;\,0)$.
 
-\textbf{Question 3.} $k(x) = (x+1)^2 - 4 = (x-(-1))^2 + (-4)$ ; sommet $S(-1\,;\,-4)$.
+\textbf{Question 3.} $k(x) = (x+1)^2 - 4 = (x-(-1))^2 + (-4)$ :
+translation de la parabole $y=x^2$ de vecteur $(-1\,;\,-4)$ ; sommet $S(-1\,;\,-4)$.
 
-\textbf{Question 4.} $m(x) = -(x-3)^2 + 5$ : $a = -1 < 0$ (parabole en $\cap$) ; sommet $S(3\,;\,5)$ (maximum).
+\textbf{Question 4.} $m(x) = -(x-3)^2 + 5$ : on applique à la parabole $y=x^2$
+une symétrie par rapport à l'axe des abscisses, puis une translation de vecteur
+$(3\,;\,5)$. Ainsi $a = -1 < 0$ (parabole en $\cap$) ; sommet $S(3\,;\,5)$ (maximum).
 
 \end{corrige}
 
@@ -116,7 +119,7 @@ Decrire les transformations et identifier le sommet des courbes suivantes.
 \begin{exercice}{1SPE-SECDEG-FR-R4-EX3}{1}{6}
 Passer de la forme developpee a la forme canonique.
 \begin{enumerate}
-  \item $f(x) = x^2 - 4x + 7$. Calculer $\alpha = -b/(2a)$, puis $\beta = f(\alpha)$.
+  \item $f(x) = x^2 - 4x + 7$. Compléter le carré à l'aide du développement de $(x-2)^2$.
   \item $g(x) = x^2 + 6x + 11$. Même méthode.
   \item $h(x) = 2x^2 - 12x + 20$. Factoriser d'abord par $a = 2$.
 \end{enumerate}
@@ -150,20 +153,18 @@ Passer de la forme developpee a la forme canonique.
 
 \begin{corrige}{1SPE-SECDEG-FR-R4-EX3}
 
-\textbf{Question 1.} $a = 1$, $b = -4$, $c = 7$.
-$\alpha = -(-4)/(2 \times 1) = 2$.
-$\beta = f(2) = 4 - 8 + 7 = 3$.
+\textbf{Question 1.} $x^2-4x=(x-2)^2-4$, donc
+$f(x)=(x-2)^2-4+7=(x-2)^2+3$.
 Forme canonique : $f(x) = (x-2)^2 + 3$.
 
-\textbf{Question 2.} $a = 1$, $b = 6$, $c = 11$.
-$\alpha = -6/2 = -3$.
-$\beta = g(-3) = 9 - 18 + 11 = 2$.
+\textbf{Question 2.} $x^2+6x=(x+3)^2-9$, donc
+$g(x)=(x+3)^2-9+11=(x+3)^2+2$.
 Forme canonique : $g(x) = (x+3)^2 + 2$.
 
 \commentaireMarge{On factorise par $a = 2$ avant de compléter le carre.}
 
 \textbf{Question 3.} $h(x) = 2(x^2 - 6x + 10)$.
-Dans $x^2 - 6x + 10$ : $\alpha = 3$, $\beta = 9 - 18 + 20 = 11$... Retour : $\alpha = -(-6)/(2 \times 1) = 3$, $f_{\text{int}}(3) = 9 - 18 + 10 = 1$, donc $x^2 - 6x + 10 = (x-3)^2 + 1$.
+On utilise $x^2-6x=(x-3)^2-9$, donc $x^2-6x+10=(x-3)^2+1$.
 Ainsi : $h(x) = 2\bigl[(x-3)^2 + 1\bigr] = 2(x-3)^2 + 2$.
 
 \end{corrige}

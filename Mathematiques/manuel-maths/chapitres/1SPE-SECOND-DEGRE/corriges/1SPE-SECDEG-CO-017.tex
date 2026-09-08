@@ -12,8 +12,11 @@
 % assert alpha == Rational(25, 2)
 % R_max = R_dev.subs(x, alpha)
 % assert R_max == Rational(625, 2)
-% p_opt = 50 - 2*alpha
-% assert p_opt == 25
+% # La quantité effectivement vendue est entière.
+% receipts = {n: n*(50-2*n) for n in range(26)}
+% assert max(receipts.values()) == 312
+% assert [n for n, value in receipts.items() if value == 312] == [12, 13]
+% assert [(n, 50-2*n) for n in (12, 13)] == [(12, 26), (13, 24)]
 % END-VERIFY
 \begin{corrige}{1SPE-SECDEG-EX-017}
 
@@ -36,25 +39,32 @@ On a $x = \dfrac{50 - p}{2}$, donc $2x = 50 - p$, soit :
 \medskip
 \textbf{3. Nombre d'articles pour maximiser la recette.}
 
-\commentaireMarge{$a = -2 < 0$ : maximum au sommet.}
+\commentaireMarge{Le sommet continu peut ne pas être une quantité entière admissible.}
 
 On a $a = -2$, $b = 50$.
 
-\[\alpha = -\frac{b}{2a} = -\frac{50}{-4} = \frac{25}{2} = 12{,}5.\]
+On complète le carré :
+\[
+R(x)=-2\left(x^2-25x\right)
+=-2\left(x-\frac{25}{2}\right)^2+\frac{625}{2}.
+\]
 
-La recette est maximale pour $x = \dfrac{25}{2}$ articles.
+Le sommet est en $x=12{,}5$, mais on ne peut pas vendre une demi-unité.
+Pour maximiser $R(x)$ sur les entiers de $0$ à $25$, il faut minimiser
+$\left(x-12{,}5\right)^2$. Les entiers les plus proches sont $12$ et $13$.
+Il faut donc vendre $12$ ou $13$ articles.
 
 \medskip
 \textbf{4. Prix optimal et recette maximale.}
 
-\commentaireMarge{Substituer $x = \frac{25}{2}$ dans $p$ et $R$.}
+\commentaireMarge{Comparer les deux quantités entières admissibles.}
 
-Prix unitaire optimal :
-\[p = 50 - 2 \times \frac{25}{2} = 50 - 25 = 25 \text{ euros}.\]
+Pour $x=12$, le prix est $p=50-2\times12=26$ euros et la recette vaut
+$12\times26=312$ euros.
+Pour $x=13$, le prix est $p=50-2\times13=24$ euros et la recette vaut
+$13\times24=312$ euros.
 
-Recette maximale :
-\[R\!\left(\frac{25}{2}\right) = -2 \times \left(\frac{25}{2}\right)^2 + 50 \times \frac{25}{2} = -2 \times \frac{625}{4} + 625 = -\frac{625}{2} + \frac{1250}{2} = \frac{625}{2} = 312{,}5 \text{ euros}.\]
-
-Le prix unitaire optimal est $\mathbf{25}$~euros et la recette maximale est $\mathbf{312{,}5}$~euros.
+Les deux prix optimaux sont donc $\mathbf{26}$ euros et $\mathbf{24}$ euros.
+La recette maximale réalisable est $\mathbf{312}$ euros.
 
 \end{corrige}

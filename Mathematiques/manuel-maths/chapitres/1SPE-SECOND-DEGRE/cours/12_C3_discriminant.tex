@@ -95,7 +95,7 @@ On écrit parfois $\dfrac{-b + \sqrt{\Delta}}{2} \times a$ ou $\dfrac{-b}{2a} + 
 % STRATE 3 — Démonstration exigible
 % ============================================================
 
-\approfondissement{
+\demonstration{
 \textbf{Démonstration exigible : déduction des formules des racines par mise sous forme canonique.}
 
 Soit $f(x) = ax^2 + bx + c$ avec $a
@@ -107,27 +107,29 @@ Soit $f(x) = ax^2 + bx + c$ avec $a
 \]
 
 \medskip
-Résoudre $f(x) = 0$ revient à résoudre :
+Comme $a\neq0$, on peut diviser par $a$, quel que soit son signe.
+Résoudre $f(x) = 0$ revient donc à résoudre :
 \[
-  a\!\left(x + \frac{b}{2a}\right)^{\!2} = \frac{\Delta}{4a}.
+  \left(x + \frac{b}{2a}\right)^2 = \frac{\Delta}{4a^2}.
 \]
 
 \medskip
-\textbf{Cas 1 : $\Delta < 0$.} Le membre gauche est $\geq 0$ (carré), le membre droit $\dfrac{\Delta}{4a}$ et $a$ ont signes opposés si $a > 0$ (car $\Delta < 0$). Plus précisément, $\dfrac{\Delta}{4a} < 0$ si $a > 0$. L'équation est impossible : pas de solution réelle.
+\textbf{Cas 1 : $\Delta < 0$.} Le membre gauche est positif ou nul,
+car c'est un carré. Puisque $4a^2>0$, le membre droit est strictement négatif.
+L'équation est impossible : pas de solution réelle, y compris lorsque $a<0$.
 
 \medskip
 \textbf{Cas 2 : $\Delta = 0$.} On obtient $\left(x + \dfrac{b}{2a}\right)^2 = 0$, soit $x = -\dfrac{b}{2a} = \alpha$. Racine double.
 
 \medskip
-\textbf{Cas 3 : $\Delta > 0$.} On divise par $a$ :
+\textbf{Cas 3 : $\Delta > 0$.} En prenant les deux racines carrées :
 \[
-  \left(x + \frac{b}{2a}\right)^2 = \frac{\Delta}{4a^2}.
+  x + \frac{b}{2a} = \pm\frac{\sqrt{\Delta}}{2|a|}.
 \]
-En prenant la racine carrée (en tenant compte des deux signes) :
-\[
-  x + \frac{b}{2a} = \pm\frac{\sqrt{\Delta}}{2a}.
-\]
-D'où $x = \dfrac{-b \pm \sqrt{\Delta}}{2a}$, ce qui donne les deux racines $x_1$ et $x_2$. \hfill $\square$
+Si $a<0$, remplacer $|a|$ par $a$ échange simplement les deux signes.
+Dans les deux cas, l'ensemble des solutions est donc
+$\left\{\dfrac{-b-\sqrt{\Delta}}{2a}\,;\,\dfrac{-b+\sqrt{\Delta}}{2a}\right\}$.
+Ces solutions sont distinctes puisque $\sqrt{\Delta}>0$. \hfill $\square$
 }
 
 % BEGIN-VERIFY
@@ -139,6 +141,11 @@ D'où $x = \dfrac{-b \pm \sqrt{\Delta}}{2a}$, ce qui donne les deux racines $x_1
 % # Le theoreme, verifie formellement : les deux racines annoncees annulent
 % # bien le trinome quand Delta > 0.
 % Delta = b**2 - 4*a*c
+% # Egalite utilisee AVANT les trois cas, sous l'hypothese a != 0.
+% assert simplify((a*x**2+b*x+c)/a - ((x+b/(2*a))**2-Delta/(4*a**2))) == 0
+% # Le contre-exemple qui faisait echouer l'ancienne preuve : a negatif.
+% assert solve(-x**2-1, x) == []
+% assert (-1)*(1**2) < 0
 % x1 = (-b - sqrt(Delta)) / (2*a)
 % x2 = (-b + sqrt(Delta)) / (2*a)
 % for racine in (x1, x2):

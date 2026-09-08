@@ -8,7 +8,9 @@
 
 \propriete[5 — Extremum d'un polynôme du second degré]{
 Soit $f(x) = ax^2 + bx + c$ ($a
-\neq 0$) un polynôme du second degré de sommet $S(\alpha\,;\,\beta)$ avec $\alpha = -\dfrac{b}{2a}$ et $\beta = f(\alpha)$.
+\neq 0$) un polynôme du second degré de sommet $S(\alpha\,;\,\beta)$.
+On lit $\alpha$ et $\beta$ dans la forme $a(x-\alpha)^2+\beta$,
+obtenue dans les cas simples par complétion du carré.
 
 \begin{itemize}
   \item Si $a > 0$, $f$ admet un \textbf{minimum global} égal à $\beta$, atteint en $x = \alpha$.
@@ -17,17 +19,24 @@ Soit $f(x) = ax^2 + bx + c$ ($a
 
 Si le problème impose un \textbf{domaine de validité} $[x_{\min}\,;\,x_{\max}]$, on doit vérifier si $\alpha$ appartient à ce domaine.
 \begin{itemize}
-  \item Si $\alpha \in [x_{\min}\,;\,x_{\max}]$ : l'extremum global est $\beta$.
-  \item Sinon : l'extremum sur le domaine est atteint à l'une des bornes ; on compare $f(x_{\min})$ et $f(x_{\max})$.
+  \item Si $\alpha \in [x_{\min}\,;\,x_{\max}]$ : $\beta$ est le minimum si $a>0$,
+    le maximum si $a<0$. L'autre extremum se trouve à une borne.
+  \item On compare donc les valeurs aux deux bornes et au sommet, lorsqu'il est
+    admissible, pour répondre à l'objectif : minimum ou maximum.
 \end{itemize}
+Sur un intervalle ouvert, une borne exclue ne donne pas de valeur atteinte :
+l'optimum peut ne pas être atteint. On examine alors les variations sur le domaine.
 }
 
 \propriete[6 — Méthode de résolution d'un problème d'optimisation]{
 \begin{enumerate}
   \item \textbf{Définir la variable} et préciser son domaine de validité.
   \item \textbf{Exprimer la quantité à optimiser} en fonction de cette variable : obtenir $f(x) = ax^2 + bx + c$.
-  \item \textbf{Calculer $\alpha = -\dfrac{b}{2a}$} et vérifier que $\alpha$ appartient au domaine.
-  \item \textbf{Calculer $\beta = f(\alpha)$} : c'est la valeur optimale.
+  \item \textbf{Compléter le carré} dans les cas simples pour lire $\alpha$ et $\beta$.
+  \item \textbf{Examiner le domaine et l'objectif} : comparer les valeurs des
+    candidats admissibles (sommet et bornes incluses) selon le minimum ou le maximum recherché.
+    Si la variable est entière dans un intervalle borné, examiner les entiers
+    admissibles les plus proches du sommet et les deux entiers extrêmes du domaine.
   \item \textbf{Conclure} en précisant la valeur de $x$ et la valeur optimale atteinte.
 \end{enumerate}
 }
@@ -39,7 +48,8 @@ Un agriculteur dispose de $120$~m de clôture pour délimiter un enclos rectangu
 
 \textbf{Étape 2.} Aire : $A(x) = x(120 - 2x) = -2x^2 + 120x$.
 
-\textbf{Étape 3.} $a = -2 < 0$ (maximum), $\alpha = -\dfrac{120}{-4} = 30 \in ]0\,;\,60[$. \checkmark
+\textbf{Étape 3.} $A(x)=-2(x^2-60x)=-2\bigl((x-30)^2-900\bigr)=-2(x-30)^2+1800$.
+On lit $a=-2<0$ (maximum) et $\alpha=30\in]0\,;\,60[$. \checkmark
 
 \textbf{Étape 4.} $\beta = A(30) = -2 \times 900 + 120 \times 30 = -1800 + 3600 = 1800$.
 
@@ -47,11 +57,13 @@ Un agriculteur dispose de $120$~m de clôture pour délimiter un enclos rectangu
 }
 
 \exemple{
-Une entreprise vend $q$ articles au prix unitaire de $p(q) = -0{,}5q + 100$ (en euros), pour $q \in [0\,;\,200]$.
+Une entreprise vend $q$ articles au prix unitaire de $p(q) = -0{,}5q + 100$ (en euros), pour $q$ entier compris entre $0$ et $200$.
 
 Recette : $R(q) = q \times p(q) = -0{,}5q^2 + 100q$.
 
-$a = -0{,}5 < 0$ (maximum), $\alpha = -\dfrac{100}{-1} = 100 \in [0\,;\,200]$.
+$R(q)=-0{,}5(q^2-200q)=-0{,}5\bigl((q-100)^2-10\,000\bigr)
+=-0{,}5(q-100)^2+5\,000$.
+On lit $a=-0{,}5<0$ (maximum) et $\alpha=100$ : c'est bien un entier admissible.
 
 $R(100) = -0{,}5 \times 10\,000 + 100 \times 100 = -5\,000 + 10\,000 = 5\,000$~€.
 
@@ -65,9 +77,9 @@ La recette maximale est $5\,000$~€, atteinte pour $q = 100$ articles.
 \newline
 2. Exprimer $f(x) = ax^2 + bx + c$.
 \newline
-3. $\alpha = -b/(2a)$ : $\alpha$ dans le domaine ?
+3. Compléter le carré, lire le sommet.
 \newline
-4. $\beta = f(\alpha)$ : valeur optimale.
+4. Minimum ou maximum ? Comparer les candidats admissibles.
 \newline
 5. Conclusion claire.%
 }
@@ -87,7 +99,8 @@ Si $\alpha$ n'appartient pas au domaine admissible $[x_{\min}\,;\,x_{\max}]$, l'
 \erreurFrequente{
 \textbf{Confondre « la valeur de $x$ qui optimise » et « la valeur optimale de $f$.}
 
-La question « Pour quelle valeur de $x$ le bénéfice est-il maximal ? » attend $x = \alpha$.
+Si le maximum est atteint au sommet, la question « Pour quelle valeur de $x$
+le bénéfice est-il maximal ? » attend $x=\alpha$.
 
 La question « Quel est le bénéfice maximal ? » attend $\beta = f(\alpha)$.
 
@@ -105,7 +118,9 @@ Ces deux réponses sont distinctes et doivent toutes les deux figurer dans la co
 % alpha = solve(diff(aire, x), x)[0]
 % assert alpha == 30 and 0 < alpha < 60
 % assert aire.subs(x, alpha) == 1800
-% # Maximum global sur le domaine, verifie par balayage.
+% # Identité exacte : le carré positif établit le maximum pour tout x.
+% assert expand(aire-(-2*(x-30)**2+1800)) == 0
+% # Contrôles numériques complémentaires, pas une preuve générale.
 % for k in range(1, 600):
 %     assert aire.subs(x, Rational(k, 10)) <= 1800
 % # Les dimensions annoncees : 30 m perpendiculaires, 60 m paralleles.
@@ -118,6 +133,7 @@ Ces deux réponses sont distinctes et doivent toutes les deux figurer dans la co
 % alpha_q = solve(diff(recette, q), q)[0]
 % assert alpha_q == 100 and 0 <= alpha_q <= 200
 % assert recette.subs(q, 100) == 5000
+% assert expand(recette-(-Rational(1,2)*(q-100)**2+5000)) == 0
 % for k in range(0, 201):
 %     assert recette.subs(q, k) <= 5000
 %

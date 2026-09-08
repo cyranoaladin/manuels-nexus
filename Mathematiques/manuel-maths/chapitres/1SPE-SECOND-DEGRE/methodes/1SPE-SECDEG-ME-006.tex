@@ -15,28 +15,40 @@
     \item \textbf{Exprimer la quantité à optimiser} en fonction de $x$ : j'obtiens une fonction $f(x)$.
     \item \textbf{Identifier le trinôme} : je vérifie que $f$ est un polynôme du second degré
       $f(x) = ax^2 + bx + c$ et je note le signe de $a$.
-    \item \textbf{Trouver le sommet} : je calcule $\alpha = -\dfrac{b}{2a}$ et $\beta = f(\alpha)$.
-    \item \textbf{Vérifier le domaine} : je contrôle que $\alpha$ appartient bien au domaine de
-      définition établi à l'étape 1. Sinon, l'extremum est atteint à la borne la plus proche.
+    \item \textbf{Trouver le sommet} : je complète le carré dans les cas simples
+      et je lis $\alpha$ et $\beta$ dans $f(x)=a(x-\alpha)^2+\beta$.
+    \item \textbf{Vérifier le domaine et l'objectif} : le sommet donne un minimum
+      si $a>0$, un maximum si $a<0$, et seulement s'il appartient au domaine.
+      Sur un intervalle réel fermé, je compare les valeurs aux bornes et au sommet
+      lorsqu'il est admissible. Une borne exclue ne fournit pas de valeur
+      atteinte : sur un intervalle ouvert, l'optimum peut ne pas être atteint.
+      Si les valeurs admissibles sont les entiers d'un intervalle borné,
+      je compare les valeurs aux entiers admissibles les plus proches du sommet
+      et aux deux entiers extrêmes du domaine, selon le minimum ou le maximum recherché.
     \item \textbf{Conclure} en distinguant :
       \begin{itemize}
-        \item ce qu'est la \textbf{valeur optimale} : $\beta = f(\alpha)$ (l'aire maximale, le bénéfice
-          maximal\ldots),
-        \item ce qu'est la \textbf{variable optimale} : $\alpha$ (la longueur, le prix\ldots qui réalise
-          l'optimum).
+        \item la \textbf{valeur optimale} retenue (l'aire maximale, le bénéfice maximal\ldots),
+        \item la ou les \textbf{valeurs de la variable} qui la réalisent parmi
+          les candidats admissibles examinés. Sur un intervalle réel, ce sont
+          le sommet ou une borne incluse ; dans le cas discret, ce sont des entiers.
+          Si l'optimum n'est pas atteint, je le précise.
       \end{itemize}
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Un rectangle a son côté inférieur sur l'axe des abscisses et ses deux sommets supérieurs
-  sur la droite d'équation $y = -2x + 8$ (pour $0 \leq x \leq 4$).
+  Dans un repère orthonormé, on considère le triangle de sommets
+  $(-4\,;\,0)$, $(4\,;\,0)$ et $(0\,;\,8)$ :
+  on inscrit un rectangle symétrique par rapport à l'axe des ordonnées.
+  Son côté inférieur est sur l'axe des abscisses et chacun de ses deux
+  sommets supérieurs appartient à un côté oblique du triangle.
   Déterminer les dimensions du rectangle d'aire maximale.
 
   \medskip
   \commentaireMarge{Variable et domaine.}%
   Soit $x$ la demi-largeur du rectangle ($0 < x < 4$).
-  La largeur est $2x$ et la hauteur est $y = -2x + 8$.
+  La largeur est $2x$. Le sommet supérieur droit appartient à la droite
+  d'équation $y=-2x+8$ : la hauteur du rectangle est donc $8-2x$.
 
   \commentaireMarge{Exprimer l'aire en fonction de $x$.}%
   \[
@@ -46,10 +58,11 @@
   \commentaireMarge{Identifier le trinôme : $a = -4 < 0$, donc maximum au sommet.}%
   $A$ est un trinôme avec $a = -4 < 0$, $b = 16$, $c = 0$.
 
-  \commentaireMarge{Calculer les coordonnées du sommet.}%
+  \commentaireMarge{Compléter le carré et lire le sommet.}%
   \[
-    \alpha = -\frac{16}{2 \times (-4)} = -\frac{16}{-8} = 2.
+    A(x)=-4(x^2-4x)=-4\bigl((x-2)^2-4\bigr)=-4(x-2)^2+16.
   \]
+  On lit $\alpha=2$.
   \[
     \beta = A(2) = -4 \times 4 + 16 \times 2 = -16 + 32 = 16.
   \]
@@ -68,9 +81,10 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Oublier de vérifier le domaine de validité. Si $\alpha$ est hors du
-      domaine, l'extremum de la fonction sur le domaine est atteint en une borne, pas au sommet
-      de la parabole.
+    \item \textbf{Piège 1.} Oublier le domaine de validité et l'objectif.
+      Un minimum n'est pas un maximum. Sur un intervalle fermé, les bornes
+      doivent être examinées ; sur un intervalle ouvert, une borne exclue
+      ne peut pas réaliser l'optimum.
     \item \textbf{Piège 2.} Confondre la valeur optimale $\beta = f(\alpha)$ et la variable
       optimale $\alpha$. La question « pour quelle longueur ? » demande $\alpha$ ;
       la question « quelle aire maximale ? » demande $\beta$.
@@ -94,3 +108,19 @@
 \sEntrainer{\refExos{M6}}
 
 \end{fichemethode}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, Rational
+% x = symbols('x', real=True)
+% area = 2*x*(8-2*x)
+% assert expand(area-(-4*(x-2)**2+16)) == 0
+% assert area.subs(x, 2) == 16
+% assert area.subs(x, Rational(3, 2)) == area.subs(x, Rational(5, 2)) == 15
+% assert 2*(-x)+8 == -2*x+8
+% # Le minimum de -x² sur [-1,2] est à la borne2, pas au sommet0.
+% assert min(-u*u for u in (-1, 0, 2)) == -4
+% # Pour des articles entiers, le sommet 12,5 n'est pas admissible.
+% integer_revenue = {n: n*(50-2*n) for n in range(26)}
+% assert max(integer_revenue.values()) == 312
+% assert [n for n, v in integer_revenue.items() if v == 312] == [12, 13]
+% END-VERIFY
