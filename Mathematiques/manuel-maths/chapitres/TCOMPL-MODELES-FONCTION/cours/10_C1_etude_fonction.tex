@@ -35,6 +35,56 @@ On résout $f'(x)=0$, soit $1 - \dfrac{9}{x^2}=0 \iff x^2=9 \iff x=3$ (car $x>0$
 Ce type de fonction (somme d'un terme proportionnel et d'un terme inversement proportionnel) modélise de nombreux coûts moyens : minimiser $f$ revient à trouver le meilleur compromis entre les deux effets.
 }
 
+\subsection*{Dériver après un changement affine de variable}
+
+\propriete[Dérivée de $x\mapsto f(ax+b)$]{
+Soit $f$ une fonction dérivable sur un intervalle ouvert $I$, et $a,b$ deux
+réels. Sur un intervalle ouvert $J$ tel que $ax+b\in I$ pour tout $x\in J$,
+la fonction $g$ définie par $g(x)=f(ax+b)$ est dérivable et
+\[
+  g'(x)=a\,f'(ax+b).
+\]
+On calcule d'abord $f'$, on y remplace la variable par $ax+b$, puis on
+multiplie par $a$. Le facteur $a$ conserve son signe.
+}
+
+\demonstration{
+Si $a=0$, la condition de domaine impose $b\in I$ : la fonction $g$ est
+constante, égale à $f(b)$, et $g'(x)=0$.
+
+Si $a\ne0$, une variation $h$ de $x$ produit une variation $ah$ de $ax+b$.
+Pour $h\ne0$ suffisamment petit et $x\in J$, le taux de variation s'écrit
+\[
+  \frac{g(x+h)-g(x)}{h}
+  =a\,\frac{f(ax+b+ah)-f(ax+b)}{ah}.
+\]
+Quand $h$ se rapproche de $0$, $ah$ se rapproche aussi de $0$.
+Le quotient de droite se rapproche donc du nombre dérivé $f'(ax+b)$.
+Le taux de variation de $g$ se rapproche ainsi de $a\,f'(ax+b)$.
+}
+
+\exemple{
+Pour $g(x)=(1-2x)^2$, définie sur $\mathbb{R}$, on utilise la fonction carré
+$f(t)=t^2$, de dérivée $f'(t)=2t$. Ici $a=-2$ et $b=1$, donc
+\[
+  g'(x)=-4(1-2x).
+\]
+Si le coefficient $a$ est nul, par exemple $g(x)=(0x+3)^2=9$,
+la fonction est constante et sa dérivée est nulle.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, simplify
+% x, a, b = symbols('x a b', real=True)
+% g = (a*x+b)**2
+% claimed = 2*a*(a*x+b)
+% assert simplify(diff(g, x) - claimed) == 0
+% assert diff(g.subs(a, 0), x) == 0
+% assert g.subs({a: 0, b: 3}) == 9
+% assert simplify(claimed.subs({a: -2, b: 1}) - (-4*(1-2*x))) == 0
+% assert simplify(diff((1-2*x)**2, x) - (-4*(1-2*x))) == 0
+% END-VERIFY
+
 % ============================================================
 % STRATE 2 — Exploiter le tableau de variation, valeurs approchees
 % ============================================================
