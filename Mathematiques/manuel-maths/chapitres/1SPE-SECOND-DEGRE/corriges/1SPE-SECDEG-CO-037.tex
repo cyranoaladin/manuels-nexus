@@ -34,6 +34,11 @@
 % assert B_exp == -x**2/2 + 10*x
 % alpha_B = Rational(10, 1)
 % assert B_exp.subs(x, alpha_B) == 50
+% # Nouveau scénario avec mur : la contrainte3<=x<=8 est levée.
+% B_wall = x*(10-x/2)
+% assert expand(B_wall-(-Rational(1,2)*(x-10)**2+50)) == 0
+% assert B_wall.subs(x,10) == 50 and 0 < 10 < 20
+% assert B_wall.subs(x,8) == 48
 % END-VERIFY
 \begin{corrige}{1SPE-SECDEG-EX-037}
 
@@ -54,7 +59,7 @@ $2(x + y) = 20 \implies y = 10 - x$.
 
 \textit{a) Forme canonique.}
 
-\commentaireMarge{$\alpha = -\frac{b}{2a} = \frac{10}{2} = 5$.}
+\commentaireMarge{Compléter le carré dans $x^2-10x$.}
 
 \[A(x) = -(x^2 - 10x) = -(x^2 - 10x + 25) + 25 = -(x-5)^2 + 25.\]
 
@@ -109,11 +114,16 @@ Les valeurs de $x$ compatibles avec $A(x) \geqslant 21$ sont $x \in [3\,;\,7]$.
 
 Avec un mur comme l'un des côtés de longueur $x$, la clôture ne couvre que trois côtés :
 \[x + 2y = 20 \implies y = \frac{20 - x}{2} = 10 - \frac{x}{2}.\]
+La contrainte de la question 3 est levée : les dimensions sont positives
+exactement pour $0<x<20$.
 
 L'aire devient :
 \[B(x) = x \cdot y = x\!\left(10 - \frac{x}{2}\right) = 10x - \frac{x^2}{2}.\]
 
-Le sommet est en $\alpha = -\dfrac{10}{2 \times (-\frac{1}{2})} = 10$, avec $B(10) = 100 - 50 = 50$~m$^2$.
+On complète le carré :
+\[B(x)=-\frac{1}{2}(x^2-20x)
+=-\frac{1}{2}\bigl((x-10)^2-100\bigr)=-\frac{1}{2}(x-10)^2+50.\]
+Le maximum $50$~m$^2$ est atteint pour $x=10$, qui appartient à $]0\,;\,20[$.
 
 La longueur optimale du côté parallèle au mur est $x = 10$~m, donnant une aire maximale de $50$~m$^2$, soit le double de $25$~m$^2$.
 

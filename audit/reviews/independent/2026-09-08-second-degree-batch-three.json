@@ -1,0 +1,120 @@
+{
+  "artifact_type": "independent_scientific_correction_counter_review",
+  "schema_version": 1,
+  "reviewer": "/root",
+  "correction_author": "/root/programme_forensics",
+  "human_approval": false,
+  "observed_base_head": "31ccdf5585faac52701f8faafa60e949412045a0",
+  "scope": "Twelve exact source versions read in full, statements before corrections, all oracle blocks included. Named defects validated; no whole-chapter, PDF or human certification.",
+  "status": "VALIDATED_BY_EVIDENCE",
+  "sources": [
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-028.tex",
+      "source_sha256": "sha256:a28d7aebd3cd21a45617b1646a44493bd10b095d388e6b68a3620bf7440d1d39"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-037.tex",
+      "source_sha256": "sha256:aea350494ea2f68eea7c4890dab6b0b8ba27d4d8dcce544bdcfa7d93a994e683"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-038.tex",
+      "source_sha256": "sha256:dc641944b655784a06038c4fb46d6ca1a69e315800bb8a089404c50b67d27ade"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-042.tex",
+      "source_sha256": "sha256:8fba5c91eb390a0f1cd44622c4c9e770eeb74035ecace017e64ba2cbcdac72c1"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-038.tex",
+      "source_sha256": "sha256:29367c93149e7461c44ae32bf732094522f86b8e4b5397e65165324bf960d019"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-042.tex",
+      "source_sha256": "sha256:2c7708fd1bd159d80eeb353930ef8ef8daa51e559337dcec1986604d30ba027e"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-A.tex",
+      "source_sha256": "sha256:6c8df22c6822ac683a8c6ffa97871d73edeac7dc488fdd5a48ecde69d8b2da68"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-A-corrige.tex",
+      "source_sha256": "sha256:1c0947383d867337cdbb7788bf3eb7451b965d228b1025ede77fda9e52d3b60d"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-B.tex",
+      "source_sha256": "sha256:7aafb9012ed17e53e956996e67494e860bce9a478c30ea79438dd7efb92f5295"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-B-corrige.tex",
+      "source_sha256": "sha256:8e3c7b67c237c32eed0305692b21f053532b0fdcdab895f98b96b896fe26c035"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-028.tex",
+      "source_sha256": "sha256:de20e4987633fdcbf368c3410613ea10aea2c131ed5ed37bda0380acc69546a8"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-037.tex",
+      "source_sha256": "sha256:c19c99f6e541e7a75a63126792a1ab9a52f9a529cf7f314d6d860e6b944af5e9"
+    }
+  ],
+  "reasoning": [
+    "EX/CO028: B=-2(x-20)²+200 on the real extension[0,40], maximum200 at admissible integer20; real roots10 and30. Positive profit requires10<x<30, hence exactly integers11..29. The printed table endpoints are both-600. Every question is answered with the discrete interpretation retained.",
+    "EX/CO037: full enclosure20m gives y=10-x, domain0<x<10, A=-(x-5)²+25, maximum25 for the5x5square. Added3<=x<=8 preserves the optimum. A>=21 iff3<=x<=7. The wall scenario now explicitly lifts that added constraint, redefines x parallel to the wall, uses y=10-x/2 on0<x<20, and gives B=-(x-10)²/2+50. Comparing the two independent scenarios is now legitimate.",
+    "EX/CO038: f_m=(x-m)²-m-2, Delta=4(m+2). For m<-2 no real roots, m=-2 double root-2, m>-2 two distinct roots m±sqrt(m+2). Atm0 roots±sqrt2; atm2 roots0,4. The vertex(m,-m-2) traces a line. Zero is a root iff m=-1 or2, giving x(x+2) or x(x-4). For two positive real roots, sum2m>0 and product(m-2)(m+1)>0 together with m>-2 are equivalent tom>2. The corrected oracle now tests the reported double root in its actual polynomial.",
+    "EX/CO042: with60m fence and30m wall, y=30-x/2 on0<x<=30, A=-(x-30)²/2+450, maximum450 at boundary30 with y15. Without wall, x(30-x)=-(x-15)²+225 on0<x<30 proves admissible maximum225. For A>=400 the unrestricted interval[20,40] must be intersected with the wall constraint, yielding[20,30].",
+    "With extra fenceL>0 the wall constraint still limitsx<=30. A_L(30)-A_L(x)=(30-x)(30+L-x)/2 is nonnegative, with equality onlyat30. Therefore max=450+15L and reaching600 requiresL>=10. The unconstrained expression(60+L)²/8 is inapplicable; its old proposedL=40sqrt3-60 gives a constrained maximum below600.",
+    "EvaluationA EX1: f=2(x-2)²-2=2(x-1)(x-3), Delta16, roots1/3. EX2 g=-(x-2)²+1 increases to1 at2 then decreases, axisx2. EX3 sign+,-,+, <=0 interval[1,3], >0 outside. All table entries, identities and endpoints were checked.",
+    "EvaluationB EX1: f=3(x-2)²-3=3(x-1)(x-3), Delta36, roots1/3. EX2 g=-2(x-2)²+2, maximum2 at2, same axis. EX3 S4/P3 and individual factor signs are correct; <=0 interval[1,3] and strict positive outside. These calculations do not certify independent mastery of the entire chapter.",
+    "EvaluationA EX4: area x(80-2x)=-2(x-20)²+800 on0<x<40, optimum800 with widths20 and parallel40. Newx<=15 excludes the vertex, and A15-Ax=(15-x)(50-2x)>=0 proves maximum750 with sides15/50. EvaluationB similarlyx(100-2x)=-2(x-25)²+1250 on0<x<50; x<=20 leads to maximum1200 through(20-x)(60-2x)>=0. Both are real quadratic optimization tasks; each preserves4points of20 and55minutes."
+  ],
+  "findings": [
+    {
+      "id": "SECDEG-B3-001",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "La variable x0_m2 vaut−2 et sert à la substitution f_m2(x0_m2)=0 ; identité exacte(x+2)². Commentaire EX038 corrigé sans modifier son résultat."
+    },
+    {
+      "id": "SECDEG-B3-002",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Avec0<x≤30 etL>0, A(30)−A(x)=(30−x)(30+L−x)/2≥0. Maximum450+15L, seuilL=10. Ancienne valeur40√3−60 ne permet pas600m² sous cette contrainte."
+    },
+    {
+      "id": "SECDEG-B3-003",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Remplacement limité à EX4 par modèle A=x(L−2x), forme carrée, optimum admissible, puis nouvelle frontière. VersionA L80/max800 en20 puis borne15/max750 ; versionB L100/max1250 en25 puis borne20/max1200. Chaque inégalité est justifiée par une identité factorisée générale."
+    },
+    {
+      "id": "SECDEG-B3-004",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Quantité entière explicite, polynôme prolongé aux réels pour variations. Rentabilité exacte11à29articles ; maximum20 inchangé. Exhaustivité sur41entiers du domaine déclaré."
+    },
+    {
+      "id": "SECDEG-B3-005",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Nouveau scénario explicite : contrainte levée, mur suffisamment long, 0<x<20. A=−(x−10)²/2+50, optimumx10. Si la contrainte avait été conservée, x8 aurait donné48, donc les scénarios sont distincts."
+    },
+    {
+      "id": "SECDEG-B3-006",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Complétion du carré ou identité remarquable dans chaque cas ; pour le supplément de clôture, comparaison directe avec la frontière, sans imposer de formule canonique générale."
+    },
+    {
+      "id": "SECDEG-B3-007",
+      "status": "VALIDATED_BY_EVIDENCE",
+      "rationale": "Sur0<x<30, A’(x)=−(x−15)²+225≤225, avec égalité au point admissible15. Identité vérifiée exactement par oracle."
+    }
+  ],
+  "parent_tests": {
+    "command": "python -m pytest -q tests/test_second_degree_batch_three_regressions.py",
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0,
+    "elapsed_seconds": 0.59
+  },
+  "limits": [
+    "QCM and remaining chapter sources have separate review debt.",
+    "Global pedagogical quality, visual rendering and student/professor separation are not certified here.",
+    "The twelve receipts prove executed assertions only.",
+    "Generated publication metadata and human approvals are not promoted."
+  ]
+}

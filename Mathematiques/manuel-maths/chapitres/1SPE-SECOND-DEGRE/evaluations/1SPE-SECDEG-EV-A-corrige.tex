@@ -25,10 +25,18 @@
 % assert f.subs(x, Rational(3,2)) < 0
 % assert f.subs(x, 0) > 0
 % assert f.subs(x, 4) > 0
-% # Ex 4
-% V = x*(30 - 2*x)*(20 - 2*x)
-% assert V.subs(x, 3) == 1008
-% assert V.subs(x, 5) == 1000
+% # Exercice4 : vrai modèle quadratique et contrainte de frontière.
+% A_enclos = x*(80-2*x)
+% x_opt = 20
+% assert expand(A_enclos-(-2*(x-x_opt)**2+800)) == 0
+% assert 0 < x_opt < 40
+% assert A_enclos.subs(x,x_opt) == 800
+% x_limite = 15
+% assert 0 < x_limite < x_opt
+% aire_limitee = A_enclos.subs(x,x_limite)
+% assert aire_limitee == 750
+% assert expand(aire_limitee-A_enclos-(x_limite-x)*(50-2*x)) == 0
+% assert 50-2*x_limite == 20 > 0
 % END-VERIFY
 
 %---------------------------------------------------------------
@@ -56,17 +64,14 @@ Pour $f(x) = 2x^2 - 8x + 6$ : $a = 2$, $b = -8$, $c = 6$.
 \medskip
 \textbf{Question 2 — Forme canonique.}
 
-\commentaireMarge{Formule du sommet : $\alpha = -b/(2a)$, $\beta = f(\alpha)$.}
+\commentaireMarge{Compléter le carré dans $x^2-4x$.}
 
-On calcule :
+On écrit :
 \[
-\alpha = \frac{-(-8)}{2 \times 2} = \frac{8}{4} = 2, \qquad
-\beta = f(2) = 2 \times 4 - 8 \times 2 + 6 = 8 - 16 + 6 = -2.
+f(x)=2(x^2-4x)+6
+=2\bigl((x-2)^2-4\bigr)+6=2(x-2)^2-2.
 \]
-
-\[
-\boxed{f(x) = 2(x-2)^2 - 2.}
-\]
+On lit $\alpha=2$ et $\beta=-2$.
 
 \medskip
 \textbf{Question 3 — Discriminant et racines.}
@@ -185,46 +190,44 @@ $f(x) > 0$ sur $]-\infty\,;\,1[ \cup \,]3\,;\,+\infty[$.
 \section*{Exercice 4 \hfill (4 points) — C6}
 %===============================================================
 
-\baremeIndicatif{Q1 : 1 pt (modeliser) ; Q2 : 1 pt (modeliser) ; Q3 : 1 pt (calculer) ; Q4 : 1 pt (chercher)}
+\baremeIndicatif{Q1 : 1 pt (modéliser) ; Q2 : 1 pt (calculer) ; Q3 : 1 pt (raisonner, calculer) ; Q4 : 1 pt (chercher, raisonner)}
 
 \bigskip
-\textbf{Question 1 — Dimensions de la boîte.}
+\textbf{Question 1 — Modèle et domaine.}
 
-\commentaireMarge{Les decoupes de cote $x$ reduisent chaque dimension de $2x$.}
+\commentaireMarge{La clôture ferme deux côtés de longueur $x$ et un côté parallèle au mur.}
 
-Après decoupe et pliage :
-\begin{itemize}
-  \item Hauteur : $x$~cm.
-  \item Longueur : $30 - 2x$~cm.
-  \item Largeur : $20 - 2x$~cm.
-\end{itemize}
+Le côté parallèle mesure $80-2x$ mètres. Ainsi,
+\[A(x)=x(80-2x)=-2x^2+80x.\]
+Les dimensions sont strictement positives si $x>0$ et $80-2x>0$,
+soit $0<x<40$.
 
 \medskip
-\textbf{Question 2 — Volume et domaine.}
+\textbf{Question 2 — Forme canonique.}
 
-\[
-V(x) = x \times (30-2x) \times (20-2x).
-\]
+\commentaireMarge{Compléter le carré dans $x^2-40x$.}
 
-Domaine : $x > 0$, $30 - 2x > 0$ et $20 - 2x > 0$, soit $x \in \,]0\,;\,10[$.
-
-\medskip
-\textbf{Question 3 — Calcul de $V(3)$ et $V(5)$.}
-
-\commentaireMarge{On substitue directement les valeurs dans la formule.}
-
-\[
-V(3) = 3 \times (30-6) \times (20-6) = 3 \times 24 \times 14 = 1\,008 \text{ cm}^3.
-\]
-\[
-V(5) = 5 \times (30-10) \times (20-10) = 5 \times 20 \times 10 = 1\,000 \text{ cm}^3.
-\]
+\[A(x)=-2(x^2-40x)
+=-2\bigl((x-20)^2-400\bigr)=-2(x-20)^2+800.\]
 
 \medskip
-\textbf{Question 4 — Comparaison et limites de la conclusion.}
+\textbf{Question 3 — Optimum admissible.}
 
-$V(3) = 1\,008 > 1\,000 = V(5)$ : pour $x = 3$, le volume est plus grand.
+Comme $(x-20)^2\geq0$, l'aire vérifie $A(x)\leq800$ pour tout réel $x$.
+L'égalité a lieu exactement pour $x=20$, qui appartient à $]0\,;\,40[$.
+L'aire maximale est donc $800$~m$^2$ ; les deux côtés perpendiculaires
+mesurent $20$~m et le côté parallèle $40$~m.
 
-Cependant, on ne peut pas conclure que $x = 3$ est le maximum global : ces deux points ne suffisent pas a prouver qu'il n'existe pas une valeur $x^* \in \,]0\,;\,10[$ donnant un volume encore plus grand. Une étude complete de $V$ (dérivée ou tableau de variations) est nécessaire pour trouver le maximum absolu.
+\medskip
+\textbf{Question 4 — Nouvelle frontière.}
+
+La valeur $20$ n'est plus admissible car $20>15$.
+Sur $]0\,;\,15]$, on compare l'aire à sa valeur au bord :
+\[A(15)-A(x)=(15-x)(50-2x)\geq0.\]
+En effet, $15-x\geq0$ et $50-2x\geq20>0$ sur ce domaine.
+L'égalité n'a lieu qu'en $x=15$ : le nouveau maximum est
+\[A(15)=15\times(80-2\times15)=15\times50=750\text{ m}^2.\]
+Les dimensions réalisables sont $15$~m pour chaque côté perpendiculaire
+et $50$~m pour le côté parallèle au mur.
 
 \end{corrige}

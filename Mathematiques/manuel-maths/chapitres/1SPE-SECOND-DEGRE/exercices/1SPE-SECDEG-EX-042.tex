@@ -44,6 +44,15 @@
 % # Contrainte x <= 30 : solution effective [20, 30]
 % assert P.subs(x, 25) < 0  # dans [20, 40]
 % assert P.subs(x, 15) > 0  # hors
+% # Q5 : le mur limite encore x à30m, même après achat de clôture.
+% L = symbols('L',positive=True)
+% A_L = x*(60+L-x)/2
+% A_max_L = expand(A_L.subs(x,30))
+% assert A_max_L == 450+15*L
+% assert expand(A_max_L-A_L-(30-x)*(30+L-x)/2) == 0
+% L_min = solve(A_max_L-600,L)[0]
+% assert L_min == 10
+% assert A_max_L.subs(L,40*sqrt(3)-60) < 600
 % END-VERIFY
 \begin{exercice}{1SPE-SECDEG-EX-042}{3}{40}
 \textbf{Problème ouvert : enclos optimal avec mur existant.}

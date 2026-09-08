@@ -29,9 +29,18 @@
 % g = -2*x**2 + 8*x - 6
 % assert expand(-2*(x-2)**2 + 2) == g
 % assert g.subs(x, 2) == 2
-% V = x*(30 - 2*x)*(20 - 2*x)
-% assert V.subs(x, 4) == 1056
-% assert V.subs(x, 6) == 864
+% # Exercice4 : vrai modèle quadratique et contrainte de frontière.
+% A_enclos = x*(100-2*x)
+% x_opt = 25
+% assert expand(A_enclos-(-2*(x-x_opt)**2+1250)) == 0
+% assert 0 < x_opt < 50
+% assert A_enclos.subs(x,x_opt) == 1250
+% x_limite = 20
+% assert 0 < x_limite < x_opt
+% aire_limitee = A_enclos.subs(x,x_limite)
+% assert aire_limitee == 1200
+% assert expand(aire_limitee-A_enclos-(x_limite-x)*(60-2*x)) == 0
+% assert 60-2*x_limite == 20 > 0
 % END-VERIFY
 
 %---------------------------------------------------------------
@@ -57,16 +66,14 @@ Pour $f(x) = 3x^2 - 12x + 9$ : $a = 3$, $b = -12$, $c = 9$.
 \medskip
 \textbf{Question 2 — Forme canonique.}
 
-\commentaireMarge{Formule du sommet : $\alpha = -b/(2a)$, $\beta = f(\alpha)$.}
+\commentaireMarge{Compléter le carré dans $x^2-4x$.}
 
+On écrit :
 \[
-\alpha = \frac{-(-12)}{2 \times 3} = \frac{12}{6} = 2, \qquad
-\beta = f(2) = 3 \times 4 - 12 \times 2 + 9 = 12 - 24 + 9 = -3.
+f(x)=3(x^2-4x)+9
+=3\bigl((x-2)^2-4\bigr)+9=3(x-2)^2-3.
 \]
-
-\[
-\boxed{f(x) = 3(x-2)^2 - 3.}
-\]
+On lit $\alpha=2$ et $\beta=-3$.
 
 \medskip
 \textbf{Question 3 — Discriminant et racines.}
@@ -190,37 +197,44 @@ $\boxed{\mathcal{S} = \,]-\infty\,;\,1[ \cup \,]3\,;\,+\infty[}$.
 \section*{Exercice 4 \hfill (4 points) — C6}
 %===============================================================
 
-\baremeIndicatif{Q1 : 1 pt (modeliser) ; Q2 : 1 pt (modeliser) ; Q3 : 1 pt (calculer) ; Q4 : 1 pt (chercher)}
+\baremeIndicatif{Q1 : 1 pt (modéliser) ; Q2 : 1 pt (calculer) ; Q3 : 1 pt (raisonner, calculer) ; Q4 : 1 pt (chercher, raisonner)}
 
 \bigskip
-\textbf{Question 1 — Dimensions.}
+\textbf{Question 1 — Modèle et domaine.}
 
-\commentaireMarge{Hauteur $= x$, longueur $= 30 - 2x$, largeur $= 20 - 2x$.}
+\commentaireMarge{La clôture ferme deux côtés de longueur $x$ et un côté parallèle au mur.}
 
-Après decoupe et pliage : hauteur $x$~cm, longueur $30-2x$~cm, largeur $20-2x$~cm.
-
-\medskip
-\textbf{Question 2 — Volume et domaine.}
-
-$V(x) = x(30-2x)(20-2x)$. Domaine : $x > 0$, $30-2x > 0$ et $20-2x > 0$, d'ou $x \in \,]0\,;\,10[$.
+Le côté parallèle mesure $100-2x$ mètres. Ainsi,
+\[A(x)=x(100-2x)=-2x^2+100x.\]
+Les dimensions sont strictement positives si $x>0$ et $100-2x>0$,
+soit $0<x<50$.
 
 \medskip
-\textbf{Question 3 — Calcul de $V(4)$ et $V(6)$.}
+\textbf{Question 2 — Forme canonique.}
 
-\commentaireMarge{On substitue directement.}
+\commentaireMarge{Compléter le carré dans $x^2-50x$.}
 
-\[
-V(4) = 4 \times (30-8) \times (20-8) = 4 \times 22 \times 12 = 1\,056 \text{ cm}^3.
-\]
-\[
-V(6) = 6 \times (30-12) \times (20-12) = 6 \times 18 \times 8 = 864 \text{ cm}^3.
-\]
+\[A(x)=-2(x^2-50x)
+=-2\bigl((x-25)^2-625\bigr)=-2(x-25)^2+1250.\]
 
 \medskip
-\textbf{Question 4 — Comparaison.}
+\textbf{Question 3 — Optimum admissible.}
 
-$V(4) = 1\,056 > 864 = V(6)$ : pour $x = 4$, le volume est plus grand.
+Comme $(x-25)^2\geq0$, l'aire vérifie $A(x)\leq1250$ pour tout réel $x$.
+L'égalité a lieu exactement pour $x=25$, qui appartient à $]0\,;\,50[$.
+L'aire maximale est donc $1250$~m$^2$ ; les deux côtés perpendiculaires
+mesurent $25$~m et le côté parallèle $50$~m.
 
-Cependant, ces deux valeurs ne permettent pas de conclure que $x = 4$ est le maximum global. Il existe peut-être un $x^* \in \,]0\,;\,10[$ donnant un volume superieur. Une étude complete de $V$ est nécessaire.
+\medskip
+\textbf{Question 4 — Nouvelle frontière.}
+
+La valeur $25$ n'est plus admissible car $25>20$.
+Sur $]0\,;\,20]$, on compare l'aire à sa valeur au bord :
+\[A(20)-A(x)=(20-x)(60-2x)\geq0.\]
+En effet, $20-x\geq0$ et $60-2x\geq20>0$ sur ce domaine.
+L'égalité n'a lieu qu'en $x=20$ : le nouveau maximum est
+\[A(20)=20\times(100-2\times20)=20\times60=1200\text{ m}^2.\]
+Les dimensions réalisables sont $20$~m pour chaque côté perpendiculaire
+et $60$~m pour le côté parallèle au mur.
 
 \end{corrige}

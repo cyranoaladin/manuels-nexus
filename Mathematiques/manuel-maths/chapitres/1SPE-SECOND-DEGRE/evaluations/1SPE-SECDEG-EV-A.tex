@@ -38,16 +38,18 @@
 % assert f.subs(x, 0) > 0
 % assert f.subs(x, 4) > 0
 %
-% # ---- Exercice 4 : optimisation boite ----
-% # V(x) = x(30 - 2x)(20 - 2x), domaine x in ]0;10[
-% V = x*(30 - 2*x)*(20 - 2*x)
-% assert expand(V).subs(x, 0) == 0
-% # Verifier V(3) pour l'exercice de v-validation
-% V3 = V.subs(x, 3)
-% assert V3 == 3*24*14
-% assert V3 == 1008
-% # V(x) se developpe en 4x^3 - 100x^2 + 600x (non second degre, mais on etudie V(x))
-% assert expand(V) == 4*x**3 - 100*x**2 + 600*x
+% # Exercice4 : vrai modèle quadratique et contrainte de frontière.
+% A_enclos = x*(80-2*x)
+% x_opt = 20
+% assert expand(A_enclos-(-2*(x-x_opt)**2+800)) == 0
+% assert 0 < x_opt < 40
+% assert A_enclos.subs(x,x_opt) == 800
+% x_limite = 15
+% assert 0 < x_limite < x_opt
+% aire_limitee = A_enclos.subs(x,x_limite)
+% assert aire_limitee == 750
+% assert expand(aire_limitee-A_enclos-(x_limite-x)*(50-2*x)) == 0
+% assert 50-2*x_limite == 20 > 0
 % END-VERIFY
 
 %---------------------------------------------------------------
@@ -74,8 +76,8 @@ On considere le polynôme du second degré :
   \item Identifier les coefficients $a$, $b$ et $c$.
   \hfill\textit{(1 pt — calculer)}
 
-  \item Calculer l'abscisse $\alpha$ et l'ordonnée $\beta$ du sommet de la parabole representant $f$.
-  Écrire la forme canonique de $f$.
+  \item Mettre $f$ sous forme canonique en complétant le carré.
+  En déduire l'abscisse $\alpha$ et l'ordonnée $\beta$ du sommet de la parabole.
   \hfill\textit{(2 pts — calculer, communiquer)}
 
   \item Calculer le discriminant $\Delta$ de $f$. En déduire les racines $x_1$ et $x_2$ de $f$ (avec $x_1 < x_2$).
@@ -134,25 +136,29 @@ On rappelle que les racines de $f(x) = 2x^2 - 8x + 6$ sont $x_1 = 1$ et $x_2 = 3
 \section*{Exercice 4 \hfill (4 points) \hfill Capacites C6}
 %===============================================================
 
-\textit{Competences evaluees : modeliser, chercher, calculer.}
+\textit{Compétences évaluées : modéliser, chercher, calculer, raisonner.}
 
 \medskip
-Un artisan decoupe des carres de cote $x$~cm aux quatre coins d'une feuille de carton rectangulaire mesurant $30$~cm sur $20$~cm, puis replie les bords pour former une boîte ouverte.
+Un agriculteur dispose de $80$~m de clôture pour trois côtés d'un enclos
+rectangulaire. Le quatrième côté longe un mur suffisamment long et ne
+nécessite pas de clôture. On note $x$ la longueur, en mètres, de chacun des
+deux côtés perpendiculaires au mur.
 
 \begin{enumerate}
-  \item Exprimer, en fonction de $x$, la longueur, la largeur et la hauteur de la boîte.
-  \hfill\textit{(1 pt — modeliser)}
+  \item Exprimer la longueur du côté parallèle au mur, puis l'aire $A(x)$.
+  Préciser le domaine de validité imposé par des dimensions strictement positives.
+  \hfill\textit{(1 pt — modéliser)}
 
-  \item Montrer que le volume de la boîte est $V(x) = x(30-2x)(20-2x)$.
-  Donner le domaine de validite de $x$.
-  \hfill\textit{(1 pt — modeliser)}
-
-  \item Calculer $V(3)$ et $V(5)$.
+  \item Mettre $A(x)$ sous forme canonique en complétant le carré.
   \hfill\textit{(1 pt — calculer)}
 
-  \item En observant les valeurs calculees, quelle valeur de $x$ (parmi $3$ et $5$) donne le plus grand volume ?
-  Justifier par le calcul pourquoi on ne peut pas conclure definitivement sans étude complete.
-  \hfill\textit{(1 pt — chercher)}
+  \item En déduire l'aire maximale et les dimensions de l'enclos qui la réalise.
+  Vérifier que les dimensions sont admissibles.
+  \hfill\textit{(1 pt — raisonner, calculer)}
+
+  \item Une nouvelle contrainte impose $x\leq15$~m. La solution précédente
+  reste-t-elle admissible ? Déterminer et justifier la nouvelle aire maximale.
+  \hfill\textit{(1 pt — chercher, raisonner)}
 \end{enumerate}
 
 \end{evaluation}

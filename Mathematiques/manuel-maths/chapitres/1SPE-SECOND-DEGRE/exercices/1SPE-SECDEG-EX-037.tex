@@ -37,6 +37,11 @@
 % # solution : 3 <= x <= 7
 % assert ineq.subs(x, 5) < 0
 % assert ineq.subs(x, 2) > 0
+% # Nouveau scénario avec mur : la contrainte3<=x<=8 est levée.
+% B_wall = x*(10-x/2)
+% assert expand(B_wall-(-Rational(1,2)*(x-10)**2+50)) == 0
+% assert B_wall.subs(x,10) == 50 and 0 < 10 < 20
+% assert B_wall.subs(x,8) == 48
 % END-VERIFY
 \begin{exercice}{1SPE-SECDEG-EX-037}{3}{35}
 On dispose de $20$ mètres de clôture pour délimiter un enclos rectangulaire. On note $x$ la longueur (en mètres) de l'un des côtés de l'enclos, avec $0 < x < 10$.
@@ -67,6 +72,11 @@ On dispose de $20$ mètres de clôture pour délimiter un enclos rectangulaire. 
     \item Résoudre cette inéquation et en déduire les valeurs de $x$ compatibles.
   \end{enumerate}
 
-  \item \textbf{Question ouverte.} Si on pouvait utiliser un mur existant comme l'un des côtés de l'enclos (ce côté n'utilise donc pas de clôture), proposer une nouvelle modélisation et déterminer la longueur maximale réalisable pour ce côté afin de maximiser l'aire. Comparer avec le résultat de la question 2.
+  \item \textbf{Question ouverte.} Dans ce nouveau scénario, la contrainte
+  $3\leq x\leq8$ est levée. On peut utiliser un mur suffisamment long comme
+  l'un des côtés de l'enclos, sans clôture sur ce côté. On note désormais $x$
+  la longueur du côté parallèle au mur. Proposer une nouvelle modélisation,
+  préciser le domaine admissible, puis déterminer la longueur de ce côté
+  qui maximise l'aire. Comparer avec le résultat de la question 2.
 \end{enumerate}
 \end{exercice}

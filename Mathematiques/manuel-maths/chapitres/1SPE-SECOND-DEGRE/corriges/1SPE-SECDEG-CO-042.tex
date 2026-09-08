@@ -14,6 +14,8 @@
 % assert A_expanded.subs(x, 30) == 450
 % # Sans mur : 2(x+y)=60 => x+y=30 => y=30-x, A_sm = x*(30-x)
 % A_sm = x*(30-x)
+% assert expand(A_sm-(-(x-15)**2+225)) == 0
+% assert 0 < 15 < 30
 % assert A_sm.subs(x, 15) == 225
 % assert 450 == 2*225
 % # Inegalite A >= 400
@@ -31,18 +33,16 @@
 % # Contrainte x <= 30 : [20, 30]
 % assert 20 <= 30 <= 30
 % assert 40 > 30  # r2 hors domaine
-% # Q5 : cloture totale L+60, A_max = (30 + L/4)^2 * ... calcul direct
-% # x + 2y = 60 + L => y = (60+L-x)/2
-% # A(x) = x*(60+L-x)/2
-% # alpha = (60+L)/2, A_max = (60+L)^2/8
-% # A_max >= 600 => (60+L)^2 >= 4800 => 60+L >= sqrt(4800) = 40*sqrt(3)
-% # L >= 40*sqrt(3) - 60
+% # Q5 : la contrainte du mur x<=30 reste active, avec L>0.
 % L = symbols('L', positive=True)
-% A_max_L = (60 + L)**2 / 8
-% val = solve(A_max_L - 600, L)
-% assert simplify(val[0] - (40*sqrt(3) - 60)) == 0
-% import math
-% assert abs(float(40*sqrt(3) - 60) - 9.28) < 0.1
+% A_L = x*(60+L-x)/2
+% A_max_L = expand(A_L.subs(x,30))
+% assert A_max_L == 450+15*L
+% # Sur0<x<=30, chaque facteur de cette différence est positif ou nul.
+% assert expand(A_max_L-A_L-(30-x)*(30+L-x)/2) == 0
+% L_min = solve(A_max_L-600,L)[0]
+% assert L_min == 10
+% assert A_max_L.subs(L,40*sqrt(3)-60) < 600
 % END-VERIFY
 \begin{corrige}{1SPE-SECDEG-EX-042}
 
@@ -70,9 +70,11 @@ Vérification : si $0 < x \leqslant 30$, alors $y = 30 - \dfrac{x}{2} \geqslant 
 
 \textit{a) Forme canonique.}
 
-\commentaireMarge{$a = -\frac{1}{2}$, $b = 30$ : $\alpha = -\frac{30}{2 \times (-\frac{1}{2})} = 30$.}
+\commentaireMarge{Compléter le carré dans $x^2-60x$.}
 
-\[\alpha = 30, \qquad \beta = A(30) = 900 - \frac{900}{2} = 450.\]
+\[A(x)=-\frac{1}{2}(x^2-60x)
+=-\frac{1}{2}\bigl((x-30)^2-900\bigr)=-\frac{1}{2}(x-30)^2+450.\]
+On lit $\alpha=30$ et $\beta=450$.
 
 \[A(x) = -\frac{1}{2}(x - 30)^2 + 450.\]
 
@@ -91,9 +93,9 @@ Pour $x = 30$ : $y = 30 - 15 = 15$~m. L'enclos optimal mesure $30$~m $\times$ $1
 
 \commentaireMarge{Quatre côtés : $2(x+y) = 60 \implies x + y = 30$.}
 
-Sans mur, le périmètre est $2(x + y) = 60$, soit $x + y = 30$. L'aire est $A'(x) = x(30 - x)$.
-
-Maximum en $x = 15$ : $A'_{\max} = 15 \times 15 = 225$~m$^2$.
+Sans mur, le périmètre est $2(x + y) = 60$, soit $x + y = 30$. Les deux côtés sont strictement positifs pour $0<x<30$. On complète le carré :
+\[A'(x) = x(30-x) = -(x-15)^2+225.\]
+Le terme $-(x-15)^2$ est négatif ou nul. La valeur $x=15$ est admissible et annule ce terme : le maximum est donc $A'_{\max}=225$~m$^2$, atteint pour un carré de côté $15$~m.
 
 \textbf{Apport du mur :} $\dfrac{450}{225} = 2$. Le mur permet de \textbf{doubler} l'aire maximale, car il économise une longueur de clôture, permettant d'agrandir les autres côtés.
 
@@ -130,9 +132,10 @@ Avec $60 + L$ mètres de clôture ($L > 0$) :
 
 \[A(x) = x \cdot \frac{60 + L - x}{2} = \frac{1}{2}\left[(60+L)x - x^2\right].\]
 
-Le maximum est atteint en $\alpha = \dfrac{60 + L}{2}$ (si $\alpha \leqslant 30$, sinon en $x = 30$).
-
-Si $\dfrac{60+L}{2} \leqslant 30$, c'est-à-dire $L \leqslant 0$, hors domaine. Donc pour $L > 0$, le sommet est en $\alpha = \dfrac{60+L}{2} > 30$, et la fonction est croissante sur $]0\,;\,30]$.
+La longueur du mur reste $30$~m. Pour $0<x\leq30$ et $L>0$, on compare
+directement à la valeur au bord :
+\[A(30)-A(x)=\frac{(30-x)(30+L-x)}{2}\geq0.\]
+En effet, $30-x\geq0$ et $30+L-x>0$ ; l'égalité n'a lieu que pour $x=30$.
 
 Le maximum sur $]0\,;\,30]$ est alors atteint en $x = 30$ :
 \[A_{\max}(L) = 30 \cdot \frac{60 + L - 30}{2} = 30 \cdot \frac{30 + L}{2} = 15(30 + L) = 450 + 15L.\]

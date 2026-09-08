@@ -18,7 +18,7 @@
 % f_m2 = f.subs(m, -2)
 % Delta_m2 = Delta_simplified.subs(m, -2)
 % assert Delta_m2 == 0
-% x0 = -(-2*(-2)) / 2  # = -2*m/(2) avec m=-2
+% x0 = Rational(2*(-2), 2)  # racine double m=-2, lue dans (x+2)^2
 % assert x0 == -2
 % assert f_m2.subs(x, x0) == 0
 % # Pour m=2 : Delta = 4*2+8=16, racines (4+/-4)/2 = 4 ou 0
@@ -34,6 +34,8 @@
 % # Valeur de m pour que f admet 0 comme racine : f(0) = m^2 - m - 2 = 0
 % sols = solve(m**2 - m - 2, m)
 % assert set(sols) == {-1, 2}
+% # Forme canonique par identité remarquable.
+% assert expand(f-((x-m)**2-m-2)) == 0
 % END-VERIFY
 \begin{exercice}{1SPE-SECDEG-EX-038}{3}{40}
 Pour tout réel $m$, on considère le trinôme :

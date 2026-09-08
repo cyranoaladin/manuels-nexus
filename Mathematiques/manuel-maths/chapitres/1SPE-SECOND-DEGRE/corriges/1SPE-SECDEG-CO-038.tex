@@ -16,11 +16,10 @@
 % f_m2 = f.subs(m, -2)
 % Delta_m2 = Delta_simplified.subs(m, -2)
 % assert Delta_m2 == 0
-% x0_m2 = Rational(-2*(-2), 2)
-% assert x0_m2 == 2
-% # Correction : sommet = 2m/2 = m => x0 = m = -2
-% alpha_m2 = -(-2)  # = -b/(2a) = 2m/2 = m
-% assert f_m2.subs(x, -2) == 0
+% x0_m2 = Rational(2*(-2), 2)
+% assert x0_m2 == -2
+% assert f_m2.subs(x, x0_m2) == 0
+% assert expand(f_m2-(x+2)**2) == 0
 % # m = 2 : Delta = 16, racines = (4 +/- 4)/2 = 0 ou 4
 % f_m2p = f.subs(m, 2)
 % Delta_m2p = Delta_simplified.subs(m, 2)
@@ -96,9 +95,10 @@ La racine $x_1 = 0$ est remarquable.
 
 \textit{a) Forme canonique de $f_m$.}
 
-\commentaireMarge{$\alpha = \frac{2m}{2} = m$.}
+\commentaireMarge{Compléter le carré à l'aide de $(x-m)^2=x^2-2mx+m^2$.}
 
-\[\alpha = m, \qquad \beta = f_m(m) = m^2 - 2m^2 + m^2 - m - 2 = -m - 2.\]
+\[f_m(x)=x^2-2mx+m^2-m-2=(x-m)^2-m-2.\]
+On lit $\alpha=m$ et $\beta=-m-2$.
 
 \[f_m(x) = (x - m)^2 - (m + 2).\]
 

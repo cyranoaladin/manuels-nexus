@@ -15,16 +15,24 @@
 % assert B.subs(x, 20) > 0
 % assert B.subs(x, 5) < 0
 % assert B.subs(x, 35) < 0
+% # Quantités entières : vérification exhaustive sur le domaine fini.
+% from sympy import expand
+% assert expand(B-(-2*(x-20)**2+200)) == 0
+% profits = {n: B.subs(x,n) for n in range(41)}
+% assert [n for n,p in profits.items() if p>0] == list(range(11,30))
+% assert max(profits,key=profits.get) == 20
 % END-VERIFY
 \begin{corrige}{1SPE-SECDEG-EX-028}
 
 \textbf{1. Coordonnées du sommet.}
 
-\commentaireMarge{$\alpha = -\frac{b}{2a}$ avec $a=-2$, $b=80$.}
+\commentaireMarge{Compléter le carré dans $x^2-40x$.}
 
 $B(x) = -2x^2 + 80x - 600$ : on a $a = -2$, $b = 80$, $c = -600$.
 
-\[\alpha = -\frac{80}{2 \times (-2)} = \frac{80}{4} = 20.\]
+\[B(x)=-2(x^2-40x)-600
+=-2\bigl((x-20)^2-400\bigr)-600=-2(x-20)^2+200.\]
+On lit $\alpha=20$.
 
 \[\beta = B(20) = -2(400) + 80(20) - 600 = -800 + 1600 - 600 = 200.\]
 
@@ -53,7 +61,8 @@ $B(x)$ & $-600$ & $\nearrow$ & $200$ & $\searrow$ & $-600$ \\
 
 \commentaireMarge{Le maximum est atteint au sommet de la parabole.}
 
-Le bénéfice est maximal pour $x = 20$ unités produits par semaine.
+Le bénéfice est maximal pour $x = 20$ articles produits par semaine : cette
+valeur entière est admissible.
 
 Le bénéfice maximal est $B(20) = \mathbf{200}$~\euro.
 
@@ -68,7 +77,10 @@ $B(x) = 0 \iff -2x^2 + 80x - 600 = 0 \iff x^2 - 40x + 300 = 0$.
 
 \[x_1 = \frac{40 - 20}{2} = 10 \qquad \text{et} \qquad x_2 = \frac{40 + 20}{2} = 30.\]
 
-Comme $a = -2 < 0$, $B(x) > 0$ entre les racines : l'entreprise est rentable pour $x \in \left]10\,;\,30\right[$.
+Comme $a = -2 < 0$, $B(x)>0$ pour les réels de $]10\,;\,30[$.
+Les nombres d'articles sont des entiers : l'entreprise est donc rentable
+pour les quantités de $11$ à $29$ articles incluses. Aux deux seuils $10$ et
+$30$, le bénéfice est nul.
 
 \baremeIndicatif{Q1 : 2 pts (calculer) ; Q2 : 2 pts (raisonner, communiquer) ; Q3 : 1 pt (raisonner) ; Q4 : 3 pts (calculer, raisonner)}
 \end{corrige}

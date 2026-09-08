@@ -15,15 +15,25 @@
 % # delta = 1600 - 1200 = 400, x1 = (40-20)/2 = 10, x2 = (40+20)/2 = 30
 % seuils = sorted(solve(B, x))
 % assert seuils == [10, 30]
+% # Quantités entières : vérification exhaustive sur le domaine fini.
+% from sympy import expand
+% assert expand(B-(-2*(x-20)**2+200)) == 0
+% profits = {n: B.subs(x,n) for n in range(41)}
+% assert [n for n,p in profits.items() if p>0] == list(range(11,30))
+% assert max(profits,key=profits.get) == 20
 % END-VERIFY
 \begin{exercice}{1SPE-SECDEG-EX-028}{2}{20}
-Une entreprise produit $x$ unités d'un article par semaine ($0 \leqslant x \leqslant 40$). Le bénéfice hebdomadaire (en euros) est modélisé par :
+Une entreprise produit un nombre entier $x$ d'articles par semaine,
+avec $0 \leqslant x \leqslant 40$. Le bénéfice hebdomadaire (en euros) est modélisé par :
 \[B(x) = -2x^2 + 80x - 600.\]
+Pour l'étude de la parabole et des variations, on considère aussi ce polynôme
+sur l'intervalle réel $[0\,;\,40]$.
 
 \begin{enumerate}
   \item \textbf{(C2)} Calculer les coordonnées du sommet de la parabole représentant $B$.
   \item \textbf{(C2)} Dresser le tableau de variations de $B$ sur $[0\,;\,40]$.
   \item \textbf{(C6)} Quel nombre d'unités faut-il produire pour maximiser le bénéfice ? Quel est ce bénéfice maximal ?
-  \item \textbf{(C6)} L'entreprise est rentable quand $B(x) > 0$. Résoudre $B(x) = 0$ et en déduire l'intervalle de rentabilité.
+  \item \textbf{(C6)} L'entreprise est rentable quand $B(x) > 0$. Résoudre
+  $B(x) = 0$, puis déterminer les nombres entiers d'articles rentables.
 \end{enumerate}
 \end{exercice}
