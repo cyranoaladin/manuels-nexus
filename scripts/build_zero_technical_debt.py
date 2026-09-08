@@ -79,10 +79,13 @@ def audit_technical_debt(root: Path) -> dict[str, Any]:
 
     def _required(payload: Mapping[str, Any], rel: str, key: str) -> int:
         section = payload.get("summary", payload)
-        if key not in section:
+        value = section.get(key) if isinstance(section, Mapping) else None
+        if type(value) is not int or value < 0:
             missing_evidence.append(f"{rel}#{key}")
+            # Add no invented product defect. This arithmetic contribution is
+            # only a known subtotal; the separate evidence debt blocks closure.
             return 0
-        return int(section[key])
+        return value
 
     # 3. Content Debt
     content_debt_open = 0
@@ -170,21 +173,37 @@ def audit_technical_debt(root: Path) -> dict[str, Any]:
         }
     ]
 
+    debt_counts = {
+        "EVIDENCE_DEBT_OPEN": len(missing_evidence),
+        "TECHNICAL_DEBT_OPEN": technical_debt_open,
+        "CONTENT_DEBT_OPEN": content_debt_open,
+        "PROGRAMME_DEBT_OPEN": programme_debt_open,
+        "PRINT_DEBT_OPEN": print_debt_open,
+        "MANIFEST_DEBT_OPEN": manifest_debt_open,
+        "REPRODUCIBILITY_DEBT_OPEN": repro_debt_open,
+    }
+    evidence_sources = {
+        "CONTENT_DEBT_OPEN": (parity_rel, findings_rel),
+        "PROGRAMME_DEBT_OPEN": (prog_rel,),
+        "PRINT_DEBT_OPEN": (preflight_rel,),
+        "MANIFEST_DEBT_OPEN": (manifest_rel,),
+        "REPRODUCIBILITY_DEBT_OPEN": (repro_rel,),
+    }
+    measurement_status = {
+        key: "INCOMPLETE_EVIDENCE" if any(
+            missing.split("#", 1)[0] in evidence_sources.get(key, ()) for missing in missing_evidence
+        ) else "MEASURED_OPEN_DEBT" if value else "MEASURED_ZERO"
+        for key, value in debt_counts.items()
+    }
     report = {
         "artifact_type": "zero_technical_debt_report",
         "schema_version": "1.0.0",
         "generated_by": "scripts/build_zero_technical_debt.py",
         "missing_or_malformed_evidence": missing_evidence,
         "p0_content_clone_excess_objects": clone_excess,
-        "product_debt_summary": {
-            "EVIDENCE_DEBT_OPEN": len(missing_evidence),
-            "TECHNICAL_DEBT_OPEN": technical_debt_open,
-            "CONTENT_DEBT_OPEN": content_debt_open,
-            "PROGRAMME_DEBT_OPEN": programme_debt_open,
-            "PRINT_DEBT_OPEN": print_debt_open,
-            "MANIFEST_DEBT_OPEN": manifest_debt_open,
-            "REPRODUCIBILITY_DEBT_OPEN": repro_debt_open,
-        },
+        "product_debt_summary": debt_counts,
+        "debt_measurement_status": measurement_status,
+        "counter_semantics": "KNOWN_SUBTOTAL_ONLY_WHEN_EVIDENCE_INCOMPLETE; never a zero-defect certificate",
         "all_product_debts_zero": (
             not missing_evidence
             and technical_debt_open == 0
@@ -211,15 +230,20 @@ def audit_technical_debt(root: Path) -> dict[str, Any]:
         f.write("# ZERO_TECHNICAL_DEBT_REPORT — Clôture des Dettes Produit Nexus\n\n")
         f.write(f"- **Verdict Produit** : `ALL_PRODUCT_DEBTS_ZERO = {report['all_product_debts_zero']}`\n")
         f.write("- **Règle Fondatrice** : Aucune dette technique, contenu, programme, build, print, manifest ou reproductibilité n'est reclassée en gouvernance.\n\n")
+        f.write(f"- **Dette de preuve** : `{len(missing_evidence)}`. Une mesure incomplète affiche seulement le sous-total connu, sans certificat d'absence de défaut.\n\n")
         f.write("## Synthèse des Dettes Produit\n\n")
         f.write("| Dimension Produit | Dette Ouverte | Statut |\n")
         f.write("| :--- | :---: | :---: |\n")
-        f.write(f"| **Dette Technique (Fichiers temporaires / Placeholders)** | `{technical_debt_open}` | **`CLEARED (0)`** |\n")
-        f.write(f"| **Dette de Contenu (Bijection EX-CO / Étanchéité élève)** | `{content_debt_open}` | **`CLEARED (0)`** |\n")
-        f.write(f"| **Dette de Programme (596 atomes / Conformité 2026-2027)** | `{programme_debt_open}` | **`CLEARED (0)`** |\n")
-        f.write(f"| **Dette d'Impression (Géométrie / Polices / Overfull)** | `{print_debt_open}` | **`CLEARED (0)`** |\n")
-        f.write(f"| **Dette de Manifeste (12 receipts scellés v2)** | `{manifest_debt_open}` | **`CLEARED (0)`** |\n")
-        f.write(f"| **Dette de Reproductibilité (Double build bit-à-bit 12/12)** | `{repro_debt_open}` | **`CLEARED (0)`** |\n\n")
+        for label, key in (
+            ("Dette Technique (Fichiers temporaires / Placeholders)", "TECHNICAL_DEBT_OPEN"),
+            ("Dette de Contenu (Bijection EX-CO / Étanchéité élève)", "CONTENT_DEBT_OPEN"),
+            ("Dette de Programme (Conformité 2026-2027)", "PROGRAMME_DEBT_OPEN"),
+            ("Dette d'Impression (Géométrie / Polices / Overfull)", "PRINT_DEBT_OPEN"),
+            ("Dette de Manifeste", "MANIFEST_DEBT_OPEN"),
+            ("Dette de Reproductibilité", "REPRODUCIBILITY_DEBT_OPEN"),
+        ):
+            f.write(f"| **{label}** | `{debt_counts[key]}` | **`{measurement_status[key]}`** |\n")
+        f.write("\n")
         f.write("## Isolation de la Gouvernance Bureaucratique Externe\n\n")
         for g in governance_items:
             f.write(f"- **{g['category']}** : {g['description']} (Impact produit : `{g['product_impacting']}`, Statut : `{g['status']}`)\n")
