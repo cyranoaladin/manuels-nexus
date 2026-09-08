@@ -1,0 +1,88 @@
+{
+  "artifact_type": "development_qa_correction_log",
+  "schema_version": 1,
+  "approves_nothing": true,
+  "observed_head": "f44cd92399ea13b1e99baa5b78181d092ded0a95",
+  "worktree_observation": true,
+  "sources": [
+    {
+      "path": "scripts/qcm_independent_solver.py",
+      "before_head": "f44cd92399ea13b1e99baa5b78181d092ded0a95",
+      "before_sha256": "77239871c35ddb08991b3b537d0faf2c7cc76d38e7a0255503c4b7336f93152a",
+      "after_sha256": "7a9024deb50557010fd424b259fa9be0835b34defa80f7d32df494c9bc2b6c96"
+    },
+    {
+      "path": "tests/test_qcm_closed_symbolic_parser.py",
+      "before_head": "f44cd92399ea13b1e99baa5b78181d092ded0a95",
+      "before_sha256": null,
+      "after_sha256": "297de41c33cc8601e808cd25cf871ac97183d587883197be0711c492db96d360"
+    }
+  ],
+  "finding": {
+    "id": "QCM-CURRENT-QA-012",
+    "severity": "PRODUCT_P0",
+    "affected_consumers": [
+      "latex_to_sympy",
+      "_polynomial_local_extrema",
+      "_gram_combination"
+    ],
+    "before": "All three text-to-SymPy paths call parse_expr. Controlled statements invoke a Python hook in memory, including a module name built from chr calls that passes the former character filter. Unknown identifiers can also be silently interpreted as products of symbols, attributes as Python classes, decimals as Float.",
+    "after": "One closed arithmetic grammar constructs mathematical objects directly. Exact declared names, rational literals, + - * / powers, parentheses, implicit multiplication, and the fixed sqrt constructor are the only productions. No evaluated Python string, attribute access, arbitrary callable, auto-created symbol or parse_expr remains. The extrema family accepts only actual univariate polynomials.",
+    "status": "CORRECTED_AND_INDEPENDENTLY_REVIEWED_FOR_DECLARED_SCOPE"
+  },
+  "tests": {
+    "red_log": "/tmp/qcm-closed-parser-red.log",
+    "red_sha256": "0470882c7f3b4c823b5356e8fd265dd66e6c4f594a6f6e0e3ab2ccc3bcec2ec5",
+    "initial_failed": 10,
+    "initial_passed": 21,
+    "green_junit": "/tmp/qcm-closed-parser-green.xml",
+    "green_sha256": "83449b072f62d80f4f6c17fb81b7bb985177637f2389280bc680e014ac206ab1",
+    "passed": 49,
+    "failed": 0,
+    "scope": "Controlled mathematical and memory-only fixtures. No current QCM or published program executed."
+  },
+  "memory_probes": {
+    "polynomial_probe": "/tmp/nexus-qcm-parse-execution-probe.py",
+    "additional_probe": "/tmp/nexus-qcm-symbolic-readonly-probes.py",
+    "effect": "Only append to a test list and return a SymPy expression; no filesystem operation or network request in evaluated payload."
+  },
+  "grammar_limits": {
+    "input_characters": 4096,
+    "tokens": 512,
+    "numeric_literal_characters": 24,
+    "nesting": 64,
+    "numeric_real_exponent_absolute_value": 64,
+    "meaning": "Supported reader complexity bounds; expressions outside this subset remain unproved, never omitted from the QCM corpus."
+  },
+  "method_binding": "Implementation remains within qcm_independent_solver.py, already tracked by QA010. No new source dependency was introduced.",
+  "not_run": [
+    "Global V2 replay/generation until independent parser review.",
+    "Full QCM solver suite containing real-current corpus replay."
+  ],
+  "limits": [
+    "Parser safety and mathematical syntax fidelity do not certify the scientific validity of every solver family.",
+    "No complete scientific review or human approval is granted.",
+    "Grammar size limits do not establish a complete CPU or memory bound for arbitrary symbolic calculations.",
+    "Symbolic domain preservation, degenerate extrema and interpretation of unreadable answer options still require their own scientific audits. No corpus-wide validity follows from this parser correction."
+  ],
+  "review_status": "VALIDATED_BY_EVIDENCE_FOR_DECLARED_QA_SCOPE_ONLY",
+  "independent_review": {
+    "reviewer": "/root",
+    "observed_head": "f2137e31a84a61203aac4519b469ee7a8202eb32",
+    "worktree_observation": true,
+    "read_scope": "Complete parser implementation, all three call sites and preprocessing, all 49 parser fixtures, and QA010 binding fixtures. Direct constructors and declared-symbol lookups are the only text-driven productions; symbol followed by parentheses multiplies rather than invoking the symbol.",
+    "verification": {
+      "command": "python -m pytest -q tests/test_qcm_closed_symbolic_parser.py tests/test_qcm_current_evidence_guard.py tests/test_qcm_method_binding.py --junitxml=/tmp/nexus-root-qcm-closed-parser-and-binding.xml",
+      "junit_sha256": "c6dab197156a2043e82baff27407caa816e5d140f87a55f632fd97b3f0c92a8a",
+      "passed": 81,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 20.0
+    },
+    "method_sha256": {
+      "scripts/qcm_independent_solver.py": "7a9024deb50557010fd424b259fa9be0835b34defa80f7d32df494c9bc2b6c96",
+      "tests/test_qcm_closed_symbolic_parser.py": "297de41c33cc8601e808cd25cf871ac97183d587883197be0711c492db96d360"
+    },
+    "conclusion": "The three identified Python-call surfaces are removed and controlled hostile syntax is rejected. Supported arithmetic fixtures preserve exact rationals and usual power/unary precedence."
+  }
+}

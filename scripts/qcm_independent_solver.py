@@ -40,7 +40,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from latex_arith import UnsupportedExpression, evaluate  # noqa: E402
 
-SOLVER_VERSION = "1.1.2"
+SOLVER_VERSION = "1.1.3"
 
 #: Tout champ qui trahirait la reponse. Leur presence rend l'entree invalide.
 FORBIDDEN_INPUT_FIELDS = frozenset(
@@ -323,6 +323,136 @@ def _expand_latex_fractions(text: str) -> str | None:
         text = text[: match.start()] + f"(({numerator})/({denominator}))" + text[end:]
 
 
+class _ClosedSymbolicParser:
+    """A small arithmetic grammar that constructs SymPy objects directly.
+
+    No Python expression is evaluated. Names are exact declared symbols;
+    sqrt is the only function production and calls a fixed mathematical
+    constructor. Limits bound this reader's supported expression complexity.
+    Unary minus binds less tightly than powers, as in -x^2 = -(x^2).
+    """
+
+    TOKEN = re.compile(r"\d+(?:\.\d+)?|[A-Za-z][A-Za-z0-9]*|\*\*|[+\-*/()]")
+
+    def __init__(self, text: str, symbols: dict[str, Any]) -> None:
+        if len(text) > 4096:
+            raise UnsupportedExpression("symbolic input too long")
+        self.symbols = symbols
+        self.tokens: list[str] = []
+        position = 0
+        while position < len(text):
+            if text[position].isspace():
+                position += 1
+                continue
+            match = self.TOKEN.match(text, position)
+            if match is None:
+                raise UnsupportedExpression("unknown symbolic token")
+            token = match.group()
+            if token[0].isalpha() and token not in symbols and token != "sqrt":
+                raise UnsupportedExpression("undeclared symbolic name")
+            if token[0].isdigit() and len(token) > 24:
+                raise UnsupportedExpression("numeric literal too long")
+            self.tokens.append(token)
+            position = match.end()
+        if not self.tokens or len(self.tokens) > 512:
+            raise UnsupportedExpression("unsupported symbolic token count")
+        self.tokens.append("")
+        self.index = 0
+        self.depth = 0
+
+    def _eat(self, token: str) -> bool:
+        if self.tokens[self.index] == token:
+            self.index += 1
+            return True
+        return False
+
+    def parse(self):
+        value = self._sum()
+        if self.tokens[self.index]:
+            raise UnsupportedExpression("unconsumed symbolic input")
+        sympy = _sympy()
+        if value.has(sympy.zoo, sympy.nan, sympy.oo, -sympy.oo):
+            raise UnsupportedExpression("undefined symbolic expression")
+        return value
+
+    def _sum(self):
+        value = self._product()
+        while True:
+            if self._eat("+"):
+                value = value + self._product()
+            elif self._eat("-"):
+                value = value - self._product()
+            else:
+                return value
+
+    def _product(self):
+        value = self._unary()
+        while True:
+            if self._eat("*"):
+                value = value * self._unary()
+            elif self._eat("/"):
+                divisor = self._unary()
+                if divisor.is_zero is True:
+                    raise UnsupportedExpression("division by zero")
+                value = value / divisor
+            elif self.tokens[self.index] == "(" or self.tokens[self.index][:1].isalpha():
+                # Implicit multiplication: 2x, x(x+1), 3sqrt(2), k t.
+                value = value * self._unary()
+            else:
+                return value
+
+    def _unary(self):
+        self.depth += 1
+        if self.depth > 64:
+            raise UnsupportedExpression("symbolic nesting too deep")
+        try:
+            if self._eat("+"):
+                return self._unary()
+            if self._eat("-"):
+                return -self._unary()
+            value = self._atom()
+            if self._eat("**"):
+                exponent = self._unary()
+                if exponent.is_number and exponent.is_real and abs(exponent) > 64:
+                    raise UnsupportedExpression("numeric exponent outside supported range")
+                value = value ** exponent
+            return value
+        finally:
+            self.depth -= 1
+
+    def _atom(self):
+        sympy = _sympy()
+        if self._eat("("):
+            value = self._sum()
+            if not self._eat(")"):
+                raise UnsupportedExpression("unclosed symbolic group")
+            return value
+        token = self.tokens[self.index]
+        if token == "sqrt":
+            self.index += 1
+            if not self._eat("("):
+                raise UnsupportedExpression("sqrt requires a single grouped argument")
+            value = self._sum()
+            if not self._eat(")"):
+                raise UnsupportedExpression("unclosed sqrt argument")
+            return sympy.sqrt(value)
+        if token in self.symbols:
+            self.index += 1
+            return self.symbols[token]
+        if token and token[0].isdigit():
+            self.index += 1
+            value = Fraction(token)
+            return sympy.Rational(value.numerator, value.denominator)
+        raise UnsupportedExpression("missing symbolic atom")
+
+
+def _closed_symbolic_expression(text: str, symbols: dict[str, Any]):
+    try:
+        return _ClosedSymbolicParser(text, symbols).parse()
+    except (UnsupportedExpression, ZeroDivisionError, ValueError, RecursionError):
+        return None
+
+
 def latex_to_sympy(source: str, symbol: str = "x"):
     """Traduit un fragment LaTeX elementaire en expression SymPy, ou None.
 
@@ -363,19 +493,7 @@ def latex_to_sympy(source: str, symbol: str = "x"):
         "sqrt": sympy.sqrt,
         "pi": sympy.pi,
     }
-    from sympy.parsing.sympy_parser import (  # noqa: PLC0415
-        implicit_multiplication_application,
-        parse_expr,
-        standard_transformations,
-    )
-
-    transformations = standard_transformations + (
-        implicit_multiplication_application,
-    )
-    try:
-        return parse_expr(text, local_dict=local, transformations=transformations)
-    except Exception:  # noqa: BLE001 - toute lecture ratee est un refus
-        return None
+    return _closed_symbolic_expression(text, local)
 
 
 def _symbolic_truths(options: dict[str, str], expected, symbol: str = "x"):
@@ -889,21 +1007,9 @@ def _polynomial_local_extrema(inp: SolverInput) -> SolverResult | None:
     except ImportError:  # pragma: no cover - dependance declaree
         return None
     x = sympy.Symbol("x", real=True)
-    expression = match.group(1).replace("^", "**").strip()
-    from sympy.parsing.sympy_parser import (  # noqa: PLC0415
-        implicit_multiplication_application,
-        parse_expr,
-        standard_transformations,
-    )
-
-    transformations = standard_transformations + (
-        implicit_multiplication_application,
-    )
-    try:
-        polynomial = parse_expr(
-            expression, local_dict={"x": x}, transformations=transformations
-        )
-    except (sympy.SympifyError, TypeError, SyntaxError, ValueError):
+    polynomial = latex_to_sympy(match.group(1))
+    if (polynomial is None or not polynomial.is_polynomial(x)
+            or not polynomial.free_symbols <= {x}):
         return None
     derivative = sympy.diff(polynomial, x)
     second = sympy.diff(derivative, x)
@@ -1716,19 +1822,8 @@ def _gram_combination(fragment: str, names: list[str]) -> list | None:
     text = text.replace("^", "**")
 
     symbols = {token: sympy.Symbol(token, real=True) for token in tokens}
-    from sympy.parsing.sympy_parser import (  # noqa: PLC0415
-        implicit_multiplication,
-        parse_expr,
-        standard_transformations,
-    )
-
-    try:
-        expression = parse_expr(
-            text,
-            local_dict=dict(symbols),
-            transformations=standard_transformations + (implicit_multiplication,),
-        )
-    except Exception:  # noqa: BLE001 - toute lecture ratee est un refus
+    expression = _closed_symbolic_expression(text, symbols)
+    if expression is None:
         return None
     if not getattr(expression, "free_symbols", set()) <= set(symbols.values()):
         return None
