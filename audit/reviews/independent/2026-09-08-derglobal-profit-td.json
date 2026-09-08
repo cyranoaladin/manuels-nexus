@@ -1,0 +1,245 @@
+{
+  "artifact_type": "independent_profit_td_review_and_correction",
+  "date": "2026-09-08",
+  "head_at_recording": "f4d651e4c11f05ea1a0423cd051450bff7cc52ce",
+  "head_scope": "Une source de travail liée par SHA256 exact, pas une observation du HEAD propre ni un corpus gelé.",
+  "reviewer_and_correction_author": "/root/astra_delta",
+  "scope": "Le TD contextualisé DERGLOBAL et son corrigé professeur de treize questions ; aucun verdict sur le TD fil rouge ni sur le chapitre entier.",
+  "status": "INDEPENDENTLY_COUNTER_REVIEWED_IN_BOUNDED_SCOPE",
+  "human_approval": false,
+  "authoring_reason": "Corriger les unités et une racine fausse, rendre explicite la discrétisation et fournir le corrigé absent du TD existant ; aucun nouvel exercice ni quota.",
+  "programme_evidence": {
+    "source": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+    "source_sha256": "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
+    "official_NOR": "MENE2602917A",
+    "lines": [
+      432,
+      474
+    ],
+    "official_atom_changed": false
+  },
+  "findings_corrected": [
+    {
+      "id": "DG-TD-CONTEXT-UNITS",
+      "severity": "P0",
+      "defect": "Le prix annoncé par cent stylos n’avait pas l’échelle de la recette et du coût employés."
+    },
+    {
+      "id": "DG-TD-CONTEXT-ROOT",
+      "severity": "P0",
+      "defect": "L’énoncé admettait x=5 comme racine de la dérivée, alors que P′(5)=−30."
+    },
+    {
+      "id": "DG-TD-CONTEXT-DISCRETE",
+      "severity": "P0",
+      "defect": "Compter une quantité en centaines n’impose pas que ce nombre soit entier ; une contrainte de lots doit être annoncée."
+    },
+    {
+      "id": "DG-TD-CONTEXT-CORRECTION",
+      "severity": "PRODUCT_GAP",
+      "defect": "Aucun corrigé lié ou intégré au TD n’était établi dans les inputs réellement assemblés."
+    }
+  ],
+  "assembly_forensics_before_correction": {
+    "observation_head": "cc116e5a568e18a259f601ed741432ac63b09758",
+    "head_scope": "Sources de travail et assembleur liés par SHA ; C5 est modifié pendant la phase de développement, pas un candidat gelé.",
+    "assembler": {
+      "path": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+      "sha256": "0b47740c97e5f6a8ac9a572df53764f3f9438f205f06a24525e5f29d89cd2c24",
+      "functions_read": [
+        "collect_chapter",
+        "render_master",
+        "object_type",
+        "wrap_object_input"
+      ]
+    },
+    "masters": {
+      "eleve": {
+        "path": "/tmp/derglobal-td-forensic-eleve.tex",
+        "sha256": "0e017129dbf249641cb10dc2e897feec80402b0a3da75f5f97032b09cfc4d8b8",
+        "contextual_td_input_count": 1,
+        "red_thread_td_input_count": 1
+      },
+      "professeur": {
+        "path": "/tmp/derglobal-td-forensic-professeur.tex",
+        "sha256": "86175142f15d57e01f4128c5bdf8de003fb8c92fb25582f2ac54e8cff1286e84",
+        "contextual_td_input_count": 1,
+        "red_thread_td_input_count": 1
+      }
+    },
+    "td": {
+      "td_id": "1SPE-DERGLOBAL-TD-CONTEXTUALISE",
+      "source": {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/07_td_contextualise.tex",
+        "object_id": "1SPE-DERGLOBAL-TD-CONTEXTUALISE",
+        "type_objet": "td",
+        "source_sha256": "c65fa158e4761f8f23c1e70ec652c8e4ecd55a9593aa97e8e1ddfad9213fdb9d",
+        "parent_fields": {},
+        "tex_includes": []
+      },
+      "linked_correction_objects": [],
+      "inline_teacher_gate": false,
+      "inline_corrige_environment": false,
+      "inline_inputs": [],
+      "conclusion": "NO_CORRECTION_BOUND_OR_INLINE_IN_CURRENT_ASSEMBLY"
+    },
+    "method": "Lecture de collect_chapter et render_master, production des deux masters, examen des références META de la population assemblée et des inputs du TD ; pas une déduction du seul nom de fichier.",
+    "full_temporary_record_sha256": "sha256:f27502fe7225ea677c94f50e28ff636cf6168481a0f2f029798582fe30eb7de5"
+  },
+  "verification": {
+    "test_source": "tests/test_derglobal_profit_td.py",
+    "test_source_sha256": "sha256:1e15ab608d072e030c6efad41354581bb5ca9b9656aeebb39811b9016589913f",
+    "initial_red": "9 failed sur la source initiale ; /tmp/derglobal-profit-td-red.log.",
+    "green": "9 passed avec refus réseau hérité, dont trois mutations permanentes du gate canonique ; ruff et git diff --check passent.",
+    "permanent_mutations": {
+      "helper": "tests.test_prodscal_remaining_scientific_regressions._run_fixture",
+      "behavior": "Source intacte RC 0 ; suppression du facteur 100, remplacement de x* par 5 ou arrondi en unités incorrectes donnent chacun RC 1.",
+      "log": "/tmp/DERGLOBAL_PROFIT_TD_PERMANENT_MUTATION_TESTS.log"
+    },
+    "execution": {
+      "execution_root": "/tmp/nexus-derglobal-profit-td-fresh-jh9bzb66",
+      "command": [
+        "/usr/bin/python",
+        "/tmp/nexus-derglobal-profit-td-fresh-jh9bzb66/Mathematiques/manuel-maths/scripts/verify_sympy.py",
+        "--chap",
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "cwd": "/tmp/nexus-derglobal-profit-td-fresh-jh9bzb66",
+      "rc": 0,
+      "stdout": "[OK ] 07_td_contextualise: \n",
+      "stderr": "",
+      "network_denial": {
+        "mechanism": "libseccomp inherited syscall filter",
+        "probe_rc": 0,
+        "probe_stdout": "network syscalls refused for IPv4, IPv6 and Unix sockets\n"
+      },
+      "input_digests": {
+        "chapitres/1SPE-DERIVATION-GLOBAL/cours/07_td_contextualise.tex": "sha256:cc6c4a6645b279babf86ce2381fc88c55988b50f4114a24835a31c2ef75042b4",
+        "scripts/verify_sympy.py": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e",
+        "scripts/common.py": "sha256:f1dd76d4f5f354800fba1dc8ab84dfa3ab5c61b8f8f3093956d146195f520d0c"
+      },
+      "records": [
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/07_td_contextualise.tex",
+          "source_sha256": "sha256:cc6c4a6645b279babf86ce2381fc88c55988b50f4114a24835a31c2ef75042b4",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/07_td_contextualise.sympy.json",
+          "receipt_sha256": "sha256:b3d4d8fffb78ee4d8ad0ab2cfd1650dfbef72972539a31371b02c3283ab061ab",
+          "verdict": "pass"
+        }
+      ],
+      "human_approval": false
+    },
+    "development_tex_routing": {
+      "scope": "Deux fixtures article de développement, avec configuration extraite de render_master ; pas de PDF candidat final, ni audit de contenu caché ou de mise en page.",
+      "source_sha256": "cc6c4a6645b279babf86ce2381fc88c55988b50f4114a24835a31c2ef75042b4",
+      "assembler_sha256": "0b47740c97e5f6a8ac9a572df53764f3f9438f205f06a24525e5f29d89cd2c24",
+      "workdir": "/tmp/nexus-derglobal-profit-tex-routing-5iff__sq",
+      "observations": [
+        {
+          "variant": "eleve",
+          "rc": 0,
+          "config": "\n\\nxVersionProfesseurfalse\n\\RenewDocumentEnvironment{corrige}{m +b}{}{}\n\\renewcommand{\\baremeIndicatif}[1]{}\n",
+          "pdf_sha256": "1dda48f842aeb23eb1924fa14faa352e1bb4b98cefbe48e90326a57e6d5a1610",
+          "correction_marker_present": false,
+          "explicit_answer_numbers_raw_order": [],
+          "explicit_answer_numbers_layout_order": []
+        },
+        {
+          "variant": "professeur",
+          "rc": 0,
+          "config": "\n\\nxVersionProfesseurtrue\n",
+          "pdf_sha256": "c0ce3ecde2598833d4d45f73bbca98b49d6e6db286b7384062dd4872742e2c21",
+          "correction_marker_present": true,
+          "explicit_answer_numbers_raw_order": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13"
+          ],
+          "explicit_answer_numbers_layout_order": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "6",
+            "7",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13"
+          ]
+        }
+      ]
+    },
+    "routing_extraction_note": "L’extraction -layout intercale des radicaux entre Question et les numéros 5 et 8 ; les treize libellés sont présents en ordre de contenu avec -raw. Les deux observations sont conservées. Le seuil reste treize réponses professeur et zéro réponse élève ; aucune inspection visuelle ou d’objets cachés n’est prétendue."
+  },
+  "objects": [
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/07_td_contextualise.tex",
+      "source_sha256": "sha256:cc6c4a6645b279babf86ce2381fc88c55988b50f4114a24835a31c2ef75042b4",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/07_td_contextualise.sympy.json",
+      "receipt_sha256": "sha256:b3d4d8fffb78ee4d8ad0ab2cfd1650dfbef72972539a31371b02c3283ab061ab",
+      "verdict": "pass",
+      "object_id": "1SPE-DERGLOBAL-TD-CONTEXTUALISE",
+      "before_review_source_sha256": "sha256:c65fa158e4761f8f23c1e70ec652c8e4ecd55a9593aa97e8e1ddfad9213fdb9d",
+      "status": "INDEPENDENTLY_COUNTER_REVIEWED_IN_BOUNDED_SCOPE",
+      "human_approval": false,
+      "read_extent": "Situation entière, quatre parties, treize questions, treize réponses et quatre blocs oracle.",
+      "independent_scientific_reasoning": [
+        "Q1 : 100x stylos multipliés par 45−6x euros par stylo donnent 100x(45−6x) euros. Diviser par 100 pour exprimer la recette en centaines d’euros donne R=45x−6x².",
+        "Q2 : soustraire C=x³−9x²+30x+5, déjà en centaines d’euros, donne P=−x³+3x²+15x−5 dans la même unité.",
+        "Q3 : le modèle continu impose 0<x≤6. Le prix décroît et reste au moins égal à 9 euros par stylo. Le coût reste également positif : C(0)=5 et C′=3[(x−3)²+1]>0 sur les réels, donc le modèle n’utilise pas de coût négatif sur son domaine.",
+        "Q4 : P′=−3x²+6x+15=−3(x²−2x−5).",
+        "Q5 : le discriminant du facteur quadratique est 24 ; ses racines sont 1−√6 et 1+√6. Seule la seconde appartient à ]0,6]. P′(5)=−30 : l’ancienne racine admise était fausse.",
+        "Q6 : pour x>0, x−(1−√6)>0. Le coefficient −3 inverse le signe du second facteur, donnant P′ positif avant 1+√6 et négatif après.",
+        "Q7 : les signes démontrent la croissance puis la décroissance sur tout le domaine. Le tableau laisse vide la valeur au bord exclu 0 et donne −23 au bord inclus 6 ; l’extremum intérieur est donc global.",
+        "Q8 : x*=1+√6≈3,4494897 centaines. La quantité théorique vaut environ 344,94897 stylos, soit environ 345. Le texte distingue une approximation du modèle continu d’un choix physiquement admissible avec contraintes discrètes.",
+        "Q9 : la substitution exacte donne P(x*)=12+12√6≈41,3938769 centaines d’euros, donc 4139,38769… euros. L’arrondi à l’euro vaut 4139 ; un encadrement rationnel de largeur 1 euro autour de cette valeur est vérifié.",
+        "Q10 : le polynôme peut être évalué en 0 même si le modèle économique l’exclut. Il donne −5, contre P(6)=−23, soit −500 et −2300 euros. Les comparer à l’optimum ne transforme pas 0 en choix admissible et ne demande pas de théorie des limites.",
+        "Q11 : p(x)>0 équivaut à x<7,5. Le domaine ]0,6] est entièrement inclus dans cette condition.",
+        "Q12 : la contrainte supplémentaire de lots de 100 impose exactement x dans {1,2,3,4,5,6}. Comme x* est entre 3 et 4, les variations réduisent le choix aux deux entiers voisins. P(3)=40 et P(4)=39, donc 300 stylos et 4000 euros sont optimaux sous cette contrainte. Les autres lots donnent 12,29,20,−23 centaines d’euros et ne font pas mieux.",
+        "Q13 : la synthèse distingue optimisation continue, unités et contraintes de réalisation. Elle n’interprète pas un optimum algébrique comme une recommandation économique hors du modèle fictif.",
+        "Vérification générale supplémentaire : P(x*)−P(x)=(x−x*)²(x−1+2√6). Pour x>0, le second facteur est strictement positif. L’identité prouve le maximum global unique au-delà des seuls tests ponctuels."
+      ],
+      "programme_review": "Modélisation polynomiale, dérivation, signe, variations et optimisation sont dans le programme. La notation de limite n’est plus demandée pour la comparaison à 0 ; aucun atome officiel modifié.",
+      "pedagogical_review": "La progression existante est conservée. Les unités sont posées avant les calculs ; la factorisation n’admet plus une racine fausse ; le passage du continu aux lots entiers devient une hypothèse explicite, pas une conséquence erronée du mot centaines.",
+      "editorial_review": "Durée totale 50 minutes cohérente avec 10+15+15+10 ; les treize réponses sont numérotées sans doublon. Statut source generated conservé.",
+      "correction_alignment_review": "Chaque question a été résolue indépendamment avant rédaction de sa réponse. Le corrigé est rattaché au propre ID du TD et placé exclusivement dans la garde professeur canonique.",
+      "oracle_review": "Quatre blocs canoniques réellement exécutés sur copie isolée. Les unités, racines, preuve globale, arrondis et choix discrets sont contrôlés ; trois mutations permanentes font échouer le gate réel."
+    }
+  ],
+  "limits": [
+    "Contre-revue scientifique indépendante par /root effectuée sur la source et ses treize réponses ; statut generated conservé, aucune approbation humaine.",
+    "Le TD fil rouge sans correction rattachée est une dette indépendante.",
+    "Les compilations article sont de petites fixtures de développement et ne constituent pas des builds finaux du manuel.",
+    "Pas de clôture de chapitre, audit PDF final, freeze, release ou approbation humaine."
+  ],
+  "independent_counterreview": {
+    "reviewer": "/root",
+    "human_approval": false,
+    "read_extent": "Sources initiale et corrigée entières, treize questions et treize réponses, quatre blocs oracle, neuf tests et note. Les deux observations de compilation article restent celles du sous-agent, sans certification PDF final.",
+    "independent_reasoning": "La quantité100x multipliée par le prix individuel puis divisée par100 donne R. P=-x³+3x²+15x-5 ; en posant y=x-1, P=-y³+18y+12, dont dérivée18-3y². Sur x>0 le seul maximum est y=sqrt6, de valeur12+12sqrt6 centaines d’euros. Facteurs de signe et identité du surplus prouvent globalité. Bornespolynôme P0=-5,P6=-23 ; coût positif car C0=5,C′=3(x-3)²+3. Lots1..6 donnent12,29,40,39,20,-23. Toutes les réponses, unités, domaines et arrondis concordent.",
+    "verification": {
+      "command": "python -m pytest -q tests/test_derglobal_profit_td.py --junitxml=/tmp/root-derglobal-profit-td.xml",
+      "passed": 9,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit_sha256": "c274387d913dfa5af31f5d32f560a58ce886d17cae6330b5c968c7973b1d3cd1",
+      "canonical_blocks_executed_per_intact_fixture": 4,
+      "permanent_mutations_rejected": 3,
+      "current_source_method_binding": true
+    },
+    "remaining_scope": "TD fil rouge non fermé ; rendu du vrai manuel et audit de fuite PDF restent à faire."
+  }
+}

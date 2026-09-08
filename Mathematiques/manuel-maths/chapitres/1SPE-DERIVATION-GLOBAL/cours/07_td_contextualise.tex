@@ -16,10 +16,12 @@
 \textbf{Situation}
 
 \medskip
-\parbox{0.9\textwidth}{Une petite entreprise fabrique et vend des stylos personnalisés. Le responsable dispose des informations suivantes :
+\parbox{0.9\textwidth}{Une petite entreprise fabrique et vend des stylos personnalisés.
+Dans un modèle continu, $x$ désigne une quantité en centaines : la production
+est de $100x$ stylos. Le responsable dispose des informations suivantes :
 \begin{itemize}
-  \item le coût total de production de $x$ stylos (en centaines) est $C(x) = x^3 - 9x^2 + 30x + 5$ (en centaines d'euros) ;
-  \item le prix de vente unitaire est $p(x) = 45 - 6x$ euros par cent stylos (avec $0 < x \leqslant 6$).
+  \item le coût total de production est $C(x) = x^3 - 9x^2 + 30x + 5$, en centaines d'euros ;
+  \item le prix de vente unitaire est $p(x) = 45 - 6x$ euros par stylo, avec $0 < x \leqslant 6$.
 \end{itemize}
 L'entreprise cherche à déterminer la quantité $x$ qui maximise son profit.}
 \end{center}
@@ -35,19 +37,22 @@ L'entreprise cherche à déterminer la quantité $x$ qui maximise son profit.}
 %---------------------------------------------------------------
 
 \begin{enumerate}
-  \item Vérifier que l'expression du chiffre d'affaires est $R(x) = 45x - 6x^2$.
+  \item Vérifier que le chiffre d'affaires, exprimé en centaines d'euros, est $R(x) = 45x - 6x^2$.
   \item Exprimer le profit $P(x) = R(x) - C(x)$ en fonction de $x$. Développer et réduire.
   \item Quel est le domaine d'étude pertinent ? Justifier en tenant compte des contraintes économiques.
 \end{enumerate}
 
 % BEGIN-VERIFY
 % from sympy import symbols, expand, simplify
-% x = symbols('x')
+% x = symbols('x', real=True)
 % C = x**3 - 9*x**2 + 30*x + 5
-% R = (45 - 6*x)*x
+% price = 45-6*x
+% revenue_euros = 100*x*price
+% assert expand(revenue_euros) == 4500*x-600*x**2
+% R = revenue_euros/100
 % assert expand(R) == 45*x - 6*x**2
 % P = R - C
-% Pexp = expand(P)
+% assert expand(P) == -x**3+3*x**2+15*x-5
 % END-VERIFY
 
 \bigskip
@@ -58,29 +63,22 @@ L'entreprise cherche à déterminer la quantité $x$ qui maximise son profit.}
 
 \begin{enumerate}[resume]
   \item Calculer $P'(x)$.
-  \item Factoriser $P'(x)$. \textit{(On admet que $x = 5$ est une racine de $P'$.)}
+  \item Résoudre $P'(x)=0$, puis factoriser $P'(x)$ en utilisant les racines exactes.
   \item Dresser le tableau de signes de $P'(x)$ sur $]0\,;\,6]$.
   \item En déduire le tableau de variations de $P$ sur $]0\,;\,6]$.
 \end{enumerate}
 
 % BEGIN-VERIFY
-% from sympy import symbols, diff, factor, solve, simplify, Rational
-% x = symbols('x')
-% P = -x**3 + 3*x**2 + 15*x - 5
+% from sympy import diff, solve, sqrt, expand, simplify
 % Pp = diff(P, x)
-% # roots of x^2 - 2x - 5 : discriminant = 4+20 = 24
-% from sympy import sqrt
-% roots = solve(Pp, x)
-% # roots are 1 ± sqrt(6)
+% assert expand(Pp) == -3*x**2+6*x+15
 % r1 = 1 - sqrt(6)
-% r2 = 1 + sqrt(6)
-% from sympy import simplify; assert simplify(Pp.subs(x, r2)) == 0
-% # on ]0,6]: only r2 = 1+sqrt(6) ~ 3.449 is in the interval
-% import sympy
-% assert sympy.N(r2) > 0 and sympy.N(r2) < 6
-% assert sympy.N(r1) < 0
-% assert Pp.subs(x, 1) > 0   # between 0 and r2
-% assert Pp.subs(x, 5) < 0   # after r2
+% xopt = 1+sqrt(6)
+% assert set(solve(Pp,x)) == {r1,xopt}
+% assert expand(Pp+3*(x-r1)*(x-xopt)) == 0
+% assert simplify(Pp.subs(x,xopt)) == 0
+% assert r1 < 0 < xopt < 6
+% assert Pp.subs(x,5) == -30
 % END-VERIFY
 
 \bigskip
@@ -90,24 +88,23 @@ L'entreprise cherche à déterminer la quantité $x$ qui maximise son profit.}
 %---------------------------------------------------------------
 
 \begin{enumerate}[resume]
-  \item Déterminer la valeur de $x$ (arrondie au centième) qui maximise le profit. Quelle quantité de stylos cela représente-t-il ?
+  \item Déterminer la valeur de $x$ (arrondie au centième) qui maximise le profit dans le modèle continu. Quelle quantité théorique de stylos cela représente-t-il, approximativement ?
   \item Calculer le profit maximal (arrondi à l'euro). \textit{(Utiliser la valeur exacte $x = 1 + \sqrt{6}$.)}
-  \item Comparer les profits aux bornes : $P(0)$ (non défini économiquement — utiliser $\lim_{x \to 0^+}$) et $P(6)$. Conclure sur l'utilité de l'étude par dérivation.
+  \item Calculer la valeur du polynôme $P$ en $0$, même si $0$ est exclu du domaine économique, puis $P(6)$. Comparer ces valeurs au profit optimal et expliquer pourquoi $0$ n'est pas une quantité admissible dans ce modèle.
 \end{enumerate}
 
 % BEGIN-VERIFY
-% from sympy import symbols, sqrt, N, Rational
-% x = symbols('x')
-% P = -x**3 + 3*x**2 + 15*x - 5
-% xopt = 1 + sqrt(6)
-% Pmax = P.subs(x, xopt)
-% # Pmax = -(1+sqrt6)^3 + 3(1+sqrt6)^2 + 15(1+sqrt6) - 5
-% from sympy import expand, simplify
-% Pmax_simplified = simplify(Pmax)
-% # numerical value
-% Pmax_num = N(Pmax_simplified)
-% assert Pmax_num > 18  # sanity check
-% assert P.subs(x, 6) == -216 + 108 + 90 - 5
+% from sympy import Rational, simplify, expand
+% Pmax = simplify(P.subs(x,xopt))
+% assert Pmax == 12+12*sqrt(6)
+% # Identité globale sur x>0 : les deux facteurs sont non négatifs.
+% assert expand(Pmax-P-(x-xopt)**2*(x-1+2*sqrt(6))) == 0
+% assert -1+2*sqrt(6) > 0
+% assert Rational(689,200) < xopt < Rational(691,200)
+% assert Rational(689,2) < 100*xopt < Rational(691,2)
+% rounded_profit_euros = 4139
+% assert rounded_profit_euros-Rational(1,2) < 100*Pmax < rounded_profit_euros+Rational(1,2)
+% assert P.subs(x,0) == -5
 % assert P.subs(x, 6) == -23
 % END-VERIFY
 
@@ -119,19 +116,114 @@ L'entreprise cherche à déterminer la quantité $x$ qui maximise son profit.}
 
 \begin{enumerate}[resume]
   \item Le modèle suppose que $p(x) = 45 - 6x > 0$. Pour quelles valeurs de $x$ cette condition est-elle satisfaite ? Est-elle compatible avec le domaine d'étude ?
-  \item En pratique, $x$ est un entier (nombre de centaines). Parmi $x = 3$ et $x = 4$, lequel donne le plus grand profit ? Comparer avec la valeur optimale théorique $x^* = 1 + \sqrt{6}$.
+  \item On impose maintenant une production par lots de $100$ stylos : $x$ est alors entier. Parmi $x = 3$ et $x = 4$, lequel donne le plus grand profit ? Justifier à l'aide des variations que les autres lots admissibles ne font pas mieux, puis comparer avec l'optimum continu.
   \item Rédiger une conclusion de 3 à 5 lignes : que peut-on dire de l'apport de la dérivation dans ce problème d'optimisation économique ?
 \end{enumerate}
 
 % BEGIN-VERIFY
-% from sympy import symbols, Rational
-% x = symbols('x')
-% P = -x**3 + 3*x**2 + 15*x - 5
-% # p(x) > 0 iff 45-6x > 0 iff x < 7.5
-% # 6 < 7.5, so condition satisfied on ]0,6]
-% assert 45 - 6*6 == 9  # p(6) = 9 > 0
-% assert P.subs(x, 3) == -27 + 27 + 45 - 5
+% from sympy import symbols, expand
+% slack = symbols('slack', nonnegative=True)
+% assert expand(price.subs(x,6-slack)-(9+6*slack)) == 0
+% assert (9+6*slack).is_positive is True
 % assert P.subs(x, 3) == 40
-% assert P.subs(x, 4) == -64 + 48 + 60 - 5
 % assert P.subs(x, 4) == 39
+% batch_profits = {n: P.subs(x,n) for n in range(1,7)}
+% assert [n for n,value in batch_profits.items() if value == max(batch_profits.values())] == [3]
+% assert 100*batch_profits[3] == 4000
 % END-VERIFY
+
+\ifnxVersionProfesseur
+\begin{corrige}{1SPE-DERGLOBAL-TD-CONTEXTUALISE}
+\textbf{Question 1.}
+Pour $100x$ stylos vendus à $45-6x$ euros chacun, la recette vaut
+$100x(45-6x)$ euros. En centaines d'euros, elle vaut donc
+$R(x)=x(45-6x)=45x-6x^2$.
+
+\textbf{Question 2.}
+Les deux quantités étant exprimées dans la même unité,
+\[
+P(x)=R(x)-C(x)=45x-6x^2-(x^3-9x^2+30x+5)
+=-x^3+3x^2+15x-5.
+\]
+Le profit est exprimé en centaines d'euros.
+
+\textbf{Question 3.}
+La contrainte de production impose $0<x\leqslant6$ : la production est
+strictement positive et ne dépasse pas $600$ stylos. Sur cet intervalle,
+$p(x)\geqslant p(6)=9>0$, donc le prix est positif. Le domaine du modèle
+continu est $]0\,;\,6]$.
+
+\textbf{Question 4.}
+Le polynôme est dérivable et $P'(x)=-3x^2+6x+15=-3(x^2-2x-5)$.
+
+\textbf{Question 5.}
+Le discriminant de $x^2-2x-5$ vaut $24$. Les racines sont
+$r_1=1-\sqrt6$ et $r_2=1+\sqrt6$, donc
+\[
+P'(x)=-3\bigl(x-(1-\sqrt6)\bigr)\bigl(x-(1+\sqrt6)\bigr).
+\]
+Seule $r_2$ appartient au domaine, car $r_1<0<r_2<6$.
+
+\textbf{Question 6.}
+Sur $]0\,;\,6]$, le premier facteur $x-r_1$ est positif.
+Le signe de $P'$ est donc positif sur $]0\,;\,r_2[$, nul en $r_2$
+et négatif sur $]r_2\,;\,6]$.
+
+\textbf{Question 7.}
+Le profit croît jusqu'à $r_2$, puis décroît jusqu'à $6$.
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x & 0 & & r_2 & & 6 \\
+\hline
+P'(x) & & + & 0 & - & \\
+\hline
+P(x) & & \nearrow & 12+12\sqrt6 & \searrow & -23 \\
+\hline
+\end{array}
+\]
+La borne $0$ n'appartient pas au domaine économique.
+
+\textbf{Question 8.}
+Le maximum global du modèle continu est atteint pour
+$x^*=1+\sqrt6\approx3{,}45$. Cela représente théoriquement
+$100(1+\sqrt6)\approx344{,}95$ stylos, soit environ $345$ stylos.
+Cette approximation ne dispense pas d'examiner une contrainte de production discrète.
+
+\textbf{Question 9.}
+En remplaçant $x$ par sa valeur exacte,
+\[
+P(1+\sqrt6)=12+12\sqrt6\approx41{,}3938769
+\]
+centaines d'euros. Le profit optimal vaut donc environ
+$4\,139{,}39$ euros, soit $4\,139$ euros à l'euro près.
+
+\textbf{Question 10.}
+La valeur du polynôme prolongé en $0$ est $P(0)=-5$, soit $-500$ euros ;
+$P(6)=-23$, soit $-2\,300$ euros. Le point $0$ est non admissible, car le
+modèle impose $x>0$. Ces deux valeurs sont inférieures au profit intérieur optimal :
+la quantité maximale autorisée de $600$ stylos n'est pas celle qui maximise le profit.
+L'étude des variations justifie le choix du point intérieur.
+
+\textbf{Question 11.}
+$45-6x>0$ équivaut à $x<7{,}5$. Cette condition est satisfaite pour tout
+$x\in]0\,;\,6]$, conformément à la vérification de la question 3.
+
+\textbf{Question 12.}
+Avec des lots de $100$ stylos, $x\in\{1,2,3,4,5,6\}$.
+Les valeurs sont $P(3)=40$ et $P(4)=39$, soit $4\,000$ et $3\,900$ euros.
+La croissance avant $x^*\in]3\,;\,4[$ assure que les lots $1$ et $2$ font moins
+bien que $3$ ; la décroissance après $x^*$ assure que $5$ et $6$ font moins
+bien que $4$. Le meilleur choix est donc $3$ lots, soit $300$ stylos.
+Son profit est inférieur à l'optimum continu d'environ $4\,139$ euros,
+qui n'est pas réalisable avec cette contrainte de lots entiers.
+
+\textbf{Question 13.}
+\emph{Exemple de synthèse.}
+La dérivation permet de trouver le meilleur compromis entre coût et recette
+dans le modèle continu, et de démontrer le caractère global de l'optimum.
+Les unités doivent être conservées pour interpréter le résultat en stylos et en euros.
+Les contraintes de production, notamment les lots entiers, conduisent ensuite
+à comparer les choix admissibles autour de cet optimum.
+\end{corrige}
+\fi
