@@ -10,7 +10,6 @@ Verifie :
 from __future__ import annotations
 
 import json
-import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -24,10 +23,95 @@ GENERATED_BY = "scripts/build_programme_content_validation.py"
 ATOMS_PATH = ROOT / "audit/OFFICIAL_PROGRAM_ATOMS_2026_2027.json"
 COVERAGE_PATH = ROOT / "audit/OFFICIAL_PROGRAM_COVERAGE_2026_2027.json"
 AUTHORITY_PATH = ROOT / "audit/PROGRAMME_AUTHORITY_MATRIX.json"
-VAL_DIR = ROOT / "chapitres"
+
+# Scientific scope only. Editorial, pedagogical and final human decisions
+# remain separate in the current index. Execution never supplies these states.
+SCIENTIFIC_DIMENSIONS = frozenset({
+    "SCIENTIFIC_REVIEW", "DATA_REVIEW", "CODE_EXECUTION_REVIEW", "ORACLE_REVIEW",
+    "CORRECTION_ALIGNMENT_REVIEW", "FIGURE_REVIEW", "DOCUMENTARY_HISTORICAL_REVIEW",
+})
 
 
-def validate_programme_and_content() -> dict[str, Any]:
+def _input_snapshot(paths: set[Path]) -> dict[str, str | None]:
+    from build_current_review_index import sha256
+    return {path.resolve().relative_to(ROOT.resolve()).as_posix()
+            if path.resolve().is_relative_to(ROOT.resolve()) else str(path.resolve()):
+            sha256(path.read_bytes()) if path.is_file() else None
+            for path in sorted(paths)}
+
+
+def _validation_evidence(index: dict[str, Any], val_files: tuple[Path, ...]) -> dict[str, Any]:
+    from scientific_receipt_binding import bind, usable
+
+    current = {row["path"]: row for row in index["objects"]}
+    rejected, mismatches, duplicates, objects = [], [], [], []
+    grouped: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for vf in val_files:
+        relative = vf.relative_to(ROOT).as_posix()
+        try:
+            receipt = json.loads(vf.read_text(encoding="utf-8"))
+            if not isinstance(receipt, dict):
+                raise ValueError("receipt is not an object")
+        except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as exc:
+            rejected.append({"validation_file": relative, "reason": "UNREADABLE_RECEIPT", "error": str(exc)})
+            continue
+        binding = bind(receipt, vf.parent.parent, ROOT)
+        if not usable(binding):
+            rejected.append({"validation_file": relative, "reason": binding.get("reason"), "binding": binding})
+            continue
+        row = current.get(binding["source_path"])
+        if (row is None or row["object_id"] != binding["canonical_object_id"]
+                or row["source_sha256"] != binding["current_source_sha256"]):
+            rejected.append({"validation_file": relative, "reason": "NOT_IN_CURRENT_REVIEW_OBJECT_SET", "binding": binding})
+            continue
+        key = (row["path"], row["object_id"])
+        grouped.setdefault(key, []).append({"validation_file": relative, "verdict": receipt["verdict"],
+                                          "certifies_documentary_claims": receipt.get("certifies_documentary_claims"),
+                                          "binding": binding})
+        if receipt["verdict"] == "fail":
+            mismatches.append({"validation_file": relative, "path": row["path"], "object_id": row["object_id"],
+                               "verdict": "fail", "details": receipt.get("details")})
+
+    for (path, object_id), receipts in sorted(grouped.items()):
+        row = current[path]
+        dimensions = sorted(SCIENTIFIC_DIMENSIONS.intersection(row["required_review_dimensions"]))
+        pending = [dim for dim in dimensions if row["reviews"][dim]["state"] != "VALIDATED_BY_EVIDENCE"]
+        unique = len(receipts) == 1
+        if not unique:
+            duplicates.append({"path": path, "object_id": object_id,
+                               "validation_files": [receipt["validation_file"] for receipt in receipts]})
+        verdict = receipts[0]["verdict"] if unique else "AMBIGUOUS_DUPLICATE_RECEIPTS"
+        text = (ROOT / path).read_text(encoding="utf-8")
+        executable_claims = any(marker in text for marker in (
+            "% BEGIN-VERIFY", "% BEGIN-TRACE", "% PYTHON-SOURCE", r"\begin{python}",
+            r"\lstinputlisting", r"\inputminted", r"\begin{minted}", r"\begin{lstlisting}"))
+        execution_state = ("CURRENT_EXECUTION_PASSED" if unique and verdict == "pass"
+                           else "CURRENT_EXECUTION_REQUIRED" if executable_claims
+                           else "NO_EXECUTABLE_CLAIMS_IN_SOURCE")
+        # A current independent reading can close a documentary-only object;
+        # a machine failure or ambiguous pair of receipts cannot be overruled.
+        reviewed = (unique and verdict in {"pass", "manual_review"} and not pending
+                    and execution_state != "CURRENT_EXECUTION_REQUIRED")
+        objects.append({"path": path, "object_id": object_id, "source_sha256": row["source_sha256"],
+                        "semantic_digest": row["semantic_digest"], "dependency_digest": row["dependency_digest"],
+                        "verdict": verdict, "receipts": receipts, "required_scientific_dimensions": dimensions,
+                        "execution_requirement_state": execution_state,
+                        "pending_dimensions": pending,
+                        "scientific_review_state": "VALIDATED_BY_EVIDENCE" if reviewed else "PENDING",
+                        "human_approval": row["human_approval"]})
+    return {"current_objects": objects, "rejected_validations": rejected,
+            "mismatches": mismatches, "duplicate_validation_bindings": duplicates}
+
+
+def validate_programme_and_content(*, inventory=None) -> dict[str, Any]:
+    import build_current_review_index as current_review
+
+    val_files = tuple(sorted(ROOT.glob("**/validations/*.execution.json")))
+    disposition_path = ROOT / "audit/MANUAL_REVIEW_ADVERSARIAL_DISPOSITION.json"
+    input_paths = {ATOMS_PATH, COVERAGE_PATH, disposition_path, Path(__file__),
+                   Path(__file__).with_name("scientific_receipt_binding.py"), *val_files}
+    inputs_before = _input_snapshot(input_paths)
+    index = current_review.build_fresh(ROOT, inventory)
     # 1. Official programme atoms & coverage
     atoms_data = json.load(ATOMS_PATH.open("r", encoding="utf-8"))
     atoms = atoms_data.get("atoms", [])
@@ -35,10 +119,8 @@ def validate_programme_and_content() -> dict[str, Any]:
 
     cov_data = json.load(COVERAGE_PATH.open("r", encoding="utf-8"))
     cov_rows = cov_data.get("rows", [])
-    cov_summary = cov_data.get("summary", {})
 
     unmapped_atoms = [r["atom_id"] for r in cov_rows if r.get("coverage_status") == "UNMAPPED"]
-    uncovered_count = len(unmapped_atoms) + cov_summary.get("unmapped_mandatory_atoms", 0)
 
     # Une fausse couverture est un atome declare rattache dont rien ne porte
     # reellement le contenu : aucune source pedagogique, ou une source declaree
@@ -86,70 +168,24 @@ def validate_programme_and_content() -> dict[str, Any]:
                 "why": "source de couverture declaree mais absente du depot",
             })
 
-    # 2. Manual to official : check unlabelled out of programme
-    unlabelled_out_of_programme = []
+    # 2. This producer has no semantic out-of-programme detector. Do not turn
+    # an empty local list into a zero-defect assertion.
 
-    # 3. Independent answer verification
-    # Collect all execution validation records across the collection
-    val_files = list(ROOT.glob("**/validations/*.execution.json"))
-    total_validations = len(val_files)
-    passed_validations = 0
-    mismatches = []
-
-    manual_reviews: list[dict[str, Any]] = []
-    unreviewed: list[dict[str, Any]] = []
-    concrete_defects_found = 0
-
-    disposition_path = ROOT / "audit/MANUAL_REVIEW_ADVERSARIAL_DISPOSITION.json"
-    manual_dispositions: dict[str, Any] = {}
-    if disposition_path.is_file():
-        disposition = json.loads(disposition_path.read_text(encoding="utf-8"))
-        manual_dispositions = {e["object_id"]: e for e in disposition.get("entries", [])}
-    else:
-        # registre absent : chaque objet retombe en UNREVIEWED et pese, plutot
-        # que de disparaitre silencieusement du compte
-        manual_dispositions = {}
-
-    for vf in val_files:
-        try:
-            d = json.load(vf.open("r", encoding="utf-8"))
-            verdict = d.get("verdict")
-            if verdict in ("pass", "verified"):
-                passed_validations += 1
-            elif verdict == "manual_review":
-                rel_val = str(vf.relative_to(ROOT))
-                obj_id = d.get("objet_id", vf.name.replace(".execution.json", ""))
-                # `manual_review` = aucun bloc executable, pas « correction
-                # inconnue ». La disposition vient d'un registre de relecture
-                # adossee a des preuves : un objet absent y est UNREVIEWED, il
-                # n'est jamais suppose conforme par defaut.
-                entry = manual_dispositions.get(obj_id)
-                if entry is None:
-                    unreviewed.append({"validation_file": rel_val, "object_id": obj_id})
-                    manual_reviews.append({
-                        "validation_file": rel_val,
-                        "object_id": obj_id,
-                        "classification": "UNREVIEWED",
-                        "concrete_defect": None,
-                    })
-                else:
-                    open_defects = [
-                        x for x in entry.get("defects", []) if x.get("status") != "FIXED"
-                    ]
-                    concrete_defects_found += len(open_defects)
-                    manual_reviews.append({
-                        "validation_file": rel_val,
-                        "object_id": obj_id,
-                        "classification": entry["classification"],
-                        "concrete_defect": bool(open_defects),
-                        "defects_total": len(entry.get("defects", [])),
-                        "defects_open": len(open_defects),
-                        "review_method": entry.get("review_method"),
-                    })
-            else:
-                mismatches.append({"file": str(vf.relative_to(ROOT)), "verdict": verdict, "details": d.get("details")})
-        except Exception as e:
-            mismatches.append({"file": str(vf.relative_to(ROOT)), "error": str(e)})
+    # 3. Execution is separately bound to source and verifier; scientific
+    # credit comes only from the freshly derived independent review index.
+    evidence = _validation_evidence(index, val_files)
+    objects = evidence["current_objects"]
+    manual_reviews = [{**row, "classification": "SEMANTICALLY_REVIEWED"
+                       if row["scientific_review_state"] == "VALIDATED_BY_EVIDENCE" else "UNREVIEWED",
+                       "concrete_defect": None}
+                      for row in objects if row["verdict"] == "manual_review"]
+    unreviewed = [row for row in manual_reviews if row["classification"] == "UNREVIEWED"]
+    disposition = json.loads(disposition_path.read_text(encoding="utf-8")) if disposition_path.is_file() else {}
+    current_review.assert_current(ROOT, index)
+    if tuple(sorted(ROOT.glob("**/validations/*.execution.json"))) != val_files:
+        raise ValueError("execution receipt population changed during programme validation")
+    if _input_snapshot(input_paths) != inputs_before:
+        raise ValueError("programme validation input changed during observation")
 
     # Summary
     summary = {
@@ -157,29 +193,39 @@ def validate_programme_and_content() -> dict[str, Any]:
         "MAPPED_ATOMS_COUNT": len(cov_rows) - len(unmapped_atoms),
         "OFFICIAL_ATOMS_UNCOVERED": len(unmapped_atoms),
         "FALSE_COVERAGE": len(false_coverage),
-        "UNLABELLED_OUT_OF_PROGRAMME_CONTENT": len(unlabelled_out_of_programme),
-        "INDEPENDENT_ANSWER_MISMATCH": len(mismatches),
-        "TOTAL_INDEPENDENT_VALIDATIONS": total_validations,
-        "PASSED_INDEPENDENT_VALIDATIONS": passed_validations,
+        "UNLABELLED_OUT_OF_PROGRAMME_CONTENT": None,
+        "OUT_OF_PROGRAMME_SEMANTIC_AUDIT_STATUS": "NOT_EVALUATED_BY_THIS_PRODUCER",
+        "INDEPENDENT_ANSWER_MISMATCH": len(evidence["mismatches"]),
+        "TOTAL_INDEPENDENT_VALIDATIONS": len(val_files),
+        "CURRENT_VALIDATION_OBJECTS": len(objects),
+        "CURRENT_EXECUTION_PASSED": sum(row["verdict"] == "pass" for row in objects),
+        "PASSED_INDEPENDENT_VALIDATIONS": sum(row["scientific_review_state"] == "VALIDATED_BY_EVIDENCE" for row in objects),
+        "INDEPENDENT_REVIEW_PENDING": sum(row["scientific_review_state"] != "VALIDATED_BY_EVIDENCE" for row in objects),
+        "REJECTED_VALIDATION_RECEIPTS": len(evidence["rejected_validations"]),
+        "DUPLICATE_VALIDATION_BINDINGS": len(evidence["duplicate_validation_bindings"]),
         "MANUAL_REVIEWS_COUNT": len(manual_reviews),
-        "CONCRETE_DEFECTS_FOUND": concrete_defects_found,
+        "CONCRETE_DEFECTS_FOUND": None,
+        "CONCRETE_DEFECTS_STATUS": "NOT_RECOMPUTED_FROM_CURRENT_FINDINGS",
         "UNREVIEWED_MANUAL_OBJECTS": len(unreviewed),
-        "NON_FORMALIZABLE_NO_CONCRETE_DEFECT": sum(
-            1
-            for m in manual_reviews
-            if m["classification"] == "NON_FORMALIZABLE_NO_CONCRETE_DEFECT"
-        ),
+        "NON_FORMALIZABLE_NO_CONCRETE_DEFECT": 0,
+        "SEMANTICALLY_REVIEWED_MANUAL_OBJECTS": sum(row["classification"] == "SEMANTICALLY_REVIEWED" for row in manual_reviews),
     }
 
     report = {
         "artifact_type": "programme_content_validation",
         "generated_by": GENERATED_BY,
+        "observation": index["observation"],
+        "scope": "CURRENT_EXECUTION_RECEIPT_OBJECTS_AND_STRUCTURAL_PROGRAMME_SOURCE_BINDINGS",
+        "certifies_full_programme_semantic_coverage": False,
+        "input_digests": {**index["input_digests"], **inputs_before},
         "summary": summary,
         "unmapped_atoms": unmapped_atoms,
         "false_coverage": false_coverage,
-        "mismatches": mismatches,
+        **evidence,
         "manual_reviews": manual_reviews,
         "unreviewed_manual_objects": unreviewed,
+        "historical_dispositions": {"path": str(disposition_path.relative_to(ROOT)),
+                                    "current_credit": False, "entries": disposition.get("entries", [])},
     }
     return report
 
@@ -199,17 +245,22 @@ def main() -> int:
         f"- **Fausses couvertures** : `{report['summary']['FALSE_COVERAGE']}`",
         f"- **Contenus hors programme non etiquetes** : `{report['summary']['UNLABELLED_OUT_OF_PROGRAMME_CONTENT']}`",
         f"- **Divergences de reponses independantes** : `{report['summary']['INDEPENDENT_ANSWER_MISMATCH']}`",
-        f"- **Validations formelles executees** : {report['summary']['TOTAL_INDEPENDENT_VALIDATIONS']}",
-        f"- **Validations passees** : {report['summary']['PASSED_INDEPENDENT_VALIDATIONS']}",
+        "Portée : reçus d'exécution présents et rattachements structurels du programme ; aucune certification globale.",
+        f"- **Fichiers de reçus observés** : {report['summary']['TOTAL_INDEPENDENT_VALIDATIONS']}",
+        f"- **Exécutions courantes passées** : {report['summary']['CURRENT_EXECUTION_PASSED']}",
+        f"- **Objets scientifiquement relus dans la portée requise** : {report['summary']['PASSED_INDEPENDENT_VALIDATIONS']}",
+        f"- **Revues courantes en attente** : {report['summary']['INDEPENDENT_REVIEW_PENDING']}",
+        f"- **Reçus rejetés / liaisons dupliquées** : {report['summary']['REJECTED_VALIDATION_RECEIPTS']} / {report['summary']['DUPLICATE_VALIDATION_BINDINGS']}",
         f"- **Objets de revue manuelle (théorique/conceptuel)** : {report['summary']['MANUAL_REVIEWS_COUNT']}",
         f"- **Défauts concrets trouvés** : `{report['summary']['CONCRETE_DEFECTS_FOUND']}`",
-        f"- **Contenus non formalisables sans défaut** : {report['summary']['NON_FORMALIZABLE_NO_CONCRETE_DEFECT']}",
+        "Les défauts concrets et les contenus hors programme ne sont pas évalués par ce producteur.",
         "",
         "## Analyse adversariale des revues manuelles",
         f"- Objets en verdict `manual_review` : {report['summary']['MANUAL_REVIEWS_COUNT']}",
-        f"- Sans défaut concret : {report['summary']['NON_FORMALIZABLE_NO_CONCRETE_DEFECT']}",
+        f"- Revue scientifique actuelle liée : {report['summary']['SEMANTICALLY_REVIEWED_MANUAL_OBJECTS']}",
         f"- Défauts concrets encore ouverts : `{report['summary']['CONCRETE_DEFECTS_FOUND']}`",
-        f"- Objets non relus (aucune disposition enregistrée) : `{report['summary']['UNREVIEWED_MANUAL_OBJECTS']}`",
+        f"- Objets sans revue actuelle complète : `{report['summary']['UNREVIEWED_MANUAL_OBJECTS']}`",
+        "Les dispositions historiques sont conservées sans crédit courant.",
     ]
 
     with MD_TARGET.open("w", encoding="utf-8") as f:
@@ -219,7 +270,11 @@ def main() -> int:
     print(f"Summary: {json.dumps(report["summary"], indent=2)}")
     return 0 if (
         report["summary"]["OFFICIAL_ATOMS_UNCOVERED"] == 0
+        and report["summary"]["FALSE_COVERAGE"] == 0
         and report["summary"]["INDEPENDENT_ANSWER_MISMATCH"] == 0
+        and report["summary"]["INDEPENDENT_REVIEW_PENDING"] == 0
+        and report["summary"]["REJECTED_VALIDATION_RECEIPTS"] == 0
+        and report["summary"]["DUPLICATE_VALIDATION_BINDINGS"] == 0
     ) else 1
 
 
