@@ -28,6 +28,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import evidence_freshness as freshness  # noqa: E402
 import qcm_reviews as declarations  # noqa: E402
 import build_qcm_review_proof_reconciliation as reconciliation  # noqa: E402
+import build_qcm_independent_evidence_v2 as independent_evidence  # noqa: E402
 
 EVIDENCE = ROOT / "audit/QCM_INDEPENDENT_EVIDENCE_V2.json"
 OUTPUT_JSON = ROOT / "audit/QCM_REVIEW_CLOSURE.json"
@@ -61,13 +62,15 @@ def _current_evidence(root: Path) -> dict[str, Any]:
         if (row.get("evidence_status") not in states or row.get("source_path") != source
                 or row.get("full_question_digest") != reconciliation.current_question_digest(question)):
             raise ValueError(f"stale QCM evidence: current content differs for {key}")
+    independent_evidence.validate_current_evidence(evidence, root)
     return evidence
 
 
-def _questions(root: Path) -> list[dict[str, Any]]:
+def _questions(root: Path, evidence: dict[str, Any] | None = None) -> list[dict[str, Any]]:
     # Every current question needs a full scientific review. A proven answer
     # key alone does not review its diagnostics, references or programme fit.
-    evidence = _current_evidence(root)
+    if evidence is None:
+        evidence = _current_evidence(root)
     corpus = reconciliation._load_corpus(root)
     enriched = []
     for row in evidence["questions"]:
@@ -201,10 +204,11 @@ def _inspect_legacy_conceptual_review(question, revue, root: Path) -> dict[str, 
     }
 
 
-def _corpus_totals(root: Path) -> dict[str, int]:
+def _corpus_totals(root: Path, evidence: dict[str, Any] | None = None) -> dict[str, int]:
     """Read validated current routes; these are not full review verdicts."""
 
-    evidence = _current_evidence(root)
+    if evidence is None:
+        evidence = _current_evidence(root)
     counts = evidence["counts"]
     return {
         "total": int(counts["question_count"]),
@@ -217,14 +221,14 @@ def _corpus_totals(root: Path) -> dict[str, int]:
 
 def build(root: Path = ROOT) -> dict[str, Any]:
     source_set = {path.relative_to(root).as_posix() for path in reconciliation._qcm_sources(root)}
-    current = _current_evidence(root)
-    question_set = {(row["chapter"], row["question_id"]) for row in current["questions"]}
     input_paths = ["audit/QCM_INDEPENDENT_EVIDENCE_V2.json", "scripts/qcm_reviews.py",
                    "scripts/build_qcm_review_closure.py", "scripts/build_qcm_review_proof_reconciliation.py",
-                   *sorted(source_set)]
+                   *independent_evidence._proof_input_paths(root)]
     observed_inputs = freshness.stamp(input_paths, root=root)
+    current = _current_evidence(root)
+    question_set = {(row["chapter"], row["question_id"]) for row in current["questions"]}
     resultats = []
-    for question in _questions(root):
+    for question in _questions(root, current):
         cle = (question["chapter"], question["question_id"])
         mecanique = declarations.MECHANICAL_DERIVATIONS.get(cle)
         conceptuelle = declarations.CONCEPTUAL_REVIEWS.get(cle)
@@ -283,7 +287,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
     # dette scientifique parce que personne n'a encore approuve, ou declarer
     # approuve un contenu parce que la revue a ete faite. On publie donc les
     # deux, et aucun ne se deduit de l'autre.
-    totaux = _corpus_totals(root)
+    totaux = _corpus_totals(root, current)
     scientifique_en_attente = (
         etats[OPEN] + etats[DISAGREEMENT] + etats[BROKEN] + totaux["unrouted"]
     )
@@ -334,11 +338,17 @@ def build(root: Path = ROOT) -> dict[str, Any]:
     final_source_set = {path.relative_to(root).as_posix() for path in reconciliation._qcm_sources(root)}
     if final_source_set != source_set:
         raise ValueError("QCM source set changed during current review construction")
-    final_current = _current_evidence(root)
-    if {(row["chapter"], row["question_id"]) for row in final_current["questions"]} != question_set:
+    final_corpus = reconciliation._load_corpus(root)
+    if set(final_corpus) != question_set:
         raise ValueError("QCM question set changed during current review construction")
+    for row in current["questions"]:
+        question, source = final_corpus[(row["chapter"], row["question_id"])]
+        if source != row["source_path"] or reconciliation.current_question_digest(question) != row["full_question_digest"]:
+            raise ValueError("QCM content changed during current review construction")
     if final_inputs != observed_inputs:
         raise ValueError("QCM inputs or HEAD changed during current review construction")
+    if independent_evidence._proof_method_binding(root) != current["proof_method_binding"]:
+        raise ValueError("QCM proof method, dependency or runtime changed during current review construction")
     payload["freshness"] = observed_inputs
     return payload
 

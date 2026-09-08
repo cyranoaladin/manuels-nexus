@@ -1,6 +1,7 @@
 """A historical QCM review must never certify different current content."""
 import copy
 import json
+import shutil
 import sys
 from pathlib import Path
 
@@ -11,24 +12,27 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 import build_qcm_review_closure as C
 import build_qcm_review_proof_reconciliation as R
 import qcm_reviews as D
+import build_qcm_independent_evidence_v2 as V2
 
 
 @pytest.fixture
 def evidence_fixture(tmp_path):
     source = "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/qcm/test-QCM.json"
-    question = {"id": "Q1", "capacite": "C1", "enonce": "Quelle est la valeur de $1+1$ ?",
-                "options": {"A": "$2$", "B": "$3$"}, "correcte": "A",
-                "diagnostics": {"B": {"erreur": "Une unité a été ajoutée au résultat.", "renvoi": "C1"}}}
+    question = {"id": "Q1", "capacite": "C1", "enonce": r"Sachant $V(X)=9$, que vaut $\sigma(X)$ ?",
+                "options": {"A": "$3$", "B": "$9$"}, "correcte": "A",
+                "diagnostics": {"B": {"erreur": "La variance a été prise pour son écart-type.", "renvoi": "C1"}}}
     path = tmp_path / source
     path.parent.mkdir(parents=True)
     path.write_text(json.dumps({"chapitre": "1SPE-SECOND-DEGRE", "questions": [question]}))
-    evidence = {"questions": [{"chapter": "1SPE-SECOND-DEGRE", "question_id": "Q1",
-                               "source_path": source, "full_question_digest": R.current_question_digest(question),
-                               "answer_key_state": "ANSWER_KEY_PROVEN", "evidence_status": "MACHINE_RECALCULATED"}],
-                "counts": {"question_count": 1, "CARRIED_FORWARD_IDENTICAL": 0,
-                           "MACHINE_RECALCULATED": 1, "HUMAN_REVIEW_REQUIRED": 0, "UNKNOWN": 0}}
+    for relative in V2._proof_input_paths(ROOT):
+        if relative not in V2.METHOD_PATHS and not relative.startswith('audit/qcm_review_evidence/'):
+            continue
+        target = tmp_path / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / relative, target)
+    evidence = V2.build_evidence(tmp_path)
     target = tmp_path / "audit/QCM_INDEPENDENT_EVIDENCE_V2.json"
-    target.parent.mkdir()
+    target.parent.mkdir(exist_ok=True)
     target.write_text(json.dumps(evidence))
     return tmp_path, path, target
 

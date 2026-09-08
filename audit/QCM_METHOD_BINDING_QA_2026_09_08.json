@@ -1,0 +1,110 @@
+{
+  "artifact_type": "development_qa_correction_log",
+  "schema_version": 1,
+  "approves_nothing": true,
+  "observed_head": "e5a97527fc9bb286a1da997a33774f58cd854161",
+  "worktree_observation": true,
+  "sources": [
+    {
+      "path": "scripts/build_qcm_independent_evidence_v2.py",
+      "before_head": "e5a97527fc9bb286a1da997a33774f58cd854161",
+      "before_sha256": "e2ec87a475ca8fa7a92726816c9af8735737545861c0cfde220b391b8b402bf0",
+      "after_sha256": "6bc248e8366e1ec15de222b79ea5c9fc1335619ec067d16869895ca3dab51fb4"
+    },
+    {
+      "path": "scripts/build_qcm_review_closure.py",
+      "before_head": "e5a97527fc9bb286a1da997a33774f58cd854161",
+      "before_sha256": "67ac92e070cf114727aeb9681ac64a945536b8a03d894035403b486af028a858",
+      "after_sha256": "3acfae8bf795b9bf189544008e37460824450049a9926b29f394594416d6b286"
+    },
+    {
+      "path": "scripts/build_qcm_review_proof_reconciliation.py",
+      "before_head": "e5a97527fc9bb286a1da997a33774f58cd854161",
+      "before_sha256": "fb18ebd296418b8e0dadfd9ff9c523210df37e5dbc37002c73d5236723e0dae6",
+      "after_sha256": "0ee2f9567ce7f860e87f1cb95ece5485467e36f5cd8369986f4aceb57c0f9d35"
+    },
+    {
+      "path": "tests/test_qcm_current_evidence_guard.py",
+      "before_head": "e5a97527fc9bb286a1da997a33774f58cd854161",
+      "before_sha256": "fafc9b4707f8df3d284b596d07e90b799b1e13f81fa38250ea35cb215f41647e",
+      "after_sha256": "4bf711fbbd4645c71a06ba57c1c7cfae5d2e49724e7dd26cf6aaf05d054b61fc"
+    },
+    {
+      "path": "tests/test_qcm_method_binding.py",
+      "before_head": "e5a97527fc9bb286a1da997a33774f58cd854161",
+      "before_sha256": null,
+      "after_sha256": "116612fde7ec8a345decae9f950833ac3337822c16788bcf99f32914ff7b4850"
+    }
+  ],
+  "finding": {
+    "id": "QCM-CURRENT-QA-010",
+    "severity": "PRODUCT_P0",
+    "before": "A V2 full_question_digest could retain ANSWER_KEY_PROVEN after a method change, without validating method/dependency digest, solver result or verifier verdict.",
+    "after": "Source methods, historical partitions, interpreter identity, and SymPy/mpmath Python-source trees are bound. The consumer recomputes the complete current result/verification and compares the stored artifact before credit. Each question requiring recalculation is solved once per closure; historically carried evidence is reconciled by identity without a solver call; final source/question sets, inputs, runtime and HEAD are checked for changes.",
+    "status": "CORRECTED_AND_INDEPENDENTLY_REVIEWED_FOR_DECLARED_SCOPE"
+  },
+  "tests": {
+    "initial_red": {
+      "path": "/tmp/qcm-method-binding-red.log",
+      "failures": 7,
+      "sha256": "b9728b060f1cbcbea39729d9a2cbb329963c06084e54b1629b9cb23a5284bd8b"
+    },
+    "runtime_red": {
+      "path": "/tmp/qcm-method-runtime-red.log",
+      "failures": 1,
+      "sha256": "2c9498a8781cf598005e0103266ee7e69954bd3782fad5e38dc52924dd588557"
+    },
+    "targeted_green": {
+      "junit": "/tmp/qcm-method-binding-targeted.xml",
+      "sha256": "20c0fb1e8b753e3ecdab4bedfa3fa4564a70cd57975d03d7a6b66fb490402098",
+      "passed": 47,
+      "failed": 0,
+      "deselected": 1
+    },
+    "reconciliation": {
+      "passed": 13,
+      "failed": 1,
+      "failure": "test_the_committed_artifact_is_current: stored aggregate differs from current source set"
+    },
+    "closure_check": {
+      "rc": 1,
+      "reason": "stale QCM evidence: current question set differs"
+    }
+  },
+  "scope": [
+    "Temporary corpus is built by the real producer and solved from its sanitized statement; no handcrafted successful verdict is used.",
+    "No global V2/closure artifacts, historical proofs or human packets have been regenerated.",
+    "Fresh generic answer-key computation remains distinct from complete scientific review and human approval.",
+    "Runtime scope records interpreter version/executable and source trees for the two mathematical packages; this is not a complete operating-system image attestation."
+  ],
+  "open_followup": {
+    "id": "QCM-CURRENT-QA-011",
+    "description": "Uniform-die expectation family assumes six faces from keywords regardless of stated support. Requires independent adversarial correction before credible global regeneration.",
+    "historical_status": "CLOSED_SEPARATELY_AT_f44cd92399ea13b1e99baa5b78181d092ded0a95",
+    "current_open": {
+      "id": "QCM-CURRENT-QA-012",
+      "description": "Three parse_expr call surfaces accept Python calls from question text. Independent bounded correction is in progress; no global replay before verified repair."
+    }
+  },
+  "review_status": "VALIDATED_BY_EVIDENCE_FOR_DECLARED_QA_SCOPE_ONLY",
+  "independent_review": {
+    "reviewer": "/root/review_forensics",
+    "root_counterreview": "/root",
+    "observed_head": "f44cd92399ea13b1e99baa5b78181d092ded0a95",
+    "worktree_observation": true,
+    "read_scope": "Full three producer/consumer diffs, both test files, mutation semantics and bounded QA manifest. Reviewer independently executed the two test modules; root inspected their complete code and fixture behavior.",
+    "targeted_tests": {
+      "command": "pytest -q tests/test_qcm_current_evidence_guard.py tests/test_qcm_method_binding.py",
+      "junit": "/tmp/qcm-qa010-independent.xml",
+      "sha256": "763e3348c289b2170b1167a8e03be5f6c627e002a616cdd4e756fb5ed275d9c1",
+      "passed": 32,
+      "failed": 0
+    },
+    "limitations": [
+      "This validates the evidence binding and rejection paths. It does not establish the mathematical correctness of every solver family.",
+      "QA012 symbolic parser execution vulnerability remains open in this observation; no global evidence replay is authorized by this note.",
+      "Historical stored V2 aggregates remain stale and intentionally have not been regenerated.",
+      "No human approval or complete scientific QCM review is granted."
+    ]
+  }
+}

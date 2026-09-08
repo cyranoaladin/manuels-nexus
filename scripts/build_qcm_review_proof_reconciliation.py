@@ -247,9 +247,11 @@ def _classify_delta(
     return classes or ["OTHER"]
 
 
-def _load_proof() -> dict[tuple[str, str], dict[str, Any]]:
+def _load_proof(root: Path | None = None) -> dict[tuple[str, str], dict[str, Any]]:
     proof: dict[tuple[str, str], dict[str, Any]] = {}
     for name, path, expected in PARTITIONS:
+        if root is not None:
+            path = root / path.relative_to(ROOT)
         if not path.is_file():
             raise ReconciliationError(f"partition absente: {path}")
         rows = json.loads(path.read_text(encoding="utf-8"))["questions"]
@@ -287,9 +289,9 @@ def _load_corpus(root: Path | None = None) -> dict[tuple[str, str], tuple[dict[s
     return corpus
 
 
-def build_reconciliation() -> dict[str, Any]:
-    proof = _load_proof()
-    corpus = _load_corpus()
+def build_reconciliation(root: Path | None = None) -> dict[str, Any]:
+    proof = _load_proof(root)
+    corpus = _load_corpus(root)
 
     orphan_proof_rows = sorted(f"{c}/{q}" for c, q in set(proof) - set(corpus))
 

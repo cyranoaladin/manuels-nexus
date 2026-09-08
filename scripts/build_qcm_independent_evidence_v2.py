@@ -37,9 +37,18 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import build_qcm_review_proof_reconciliation as reconciliation  # noqa: E402
 import qcm_independent_solver as solver  # noqa: E402
+import evidence_freshness as freshness  # noqa: E402
 
 JSON_TARGET = ROOT / "audit" / "QCM_INDEPENDENT_EVIDENCE_V2.json"
 MD_TARGET = ROOT / "audit" / "QCM_INDEPENDENT_EVIDENCE_V2.md"
+
+METHOD_PATHS = (
+    "scripts/build_qcm_independent_evidence_v2.py",
+    "scripts/build_qcm_review_proof_reconciliation.py",
+    "scripts/qcm_independent_solver.py",
+    "scripts/latex_arith.py",
+    "scripts/evidence_freshness.py",
+)
 
 EVIDENCE_SCHEMA_FIELDS = (
     "statement",
@@ -58,6 +67,78 @@ class EvidenceError(RuntimeError):
 def _digest(payload: Any) -> str:
     blob = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     return "sha256:" + hashlib.sha256(blob.encode("utf-8")).hexdigest()
+
+
+def _source_digests(root: Path, paths) -> dict[str, str]:
+    result = {}
+    for relative in sorted(paths):
+        path = root / relative
+        if not path.is_file():
+            raise ValueError(f"missing QCM proof dependency: {relative}")
+        result[relative] = hashlib.sha256(path.read_bytes()).hexdigest()
+    return result
+
+
+_LOADED_METHOD_DIGESTS = _source_digests(ROOT, METHOD_PATHS)
+
+
+def _proof_input_paths(root: Path) -> list[str]:
+    return sorted(set(METHOD_PATHS) | {
+        path.relative_to(reconciliation.ROOT).as_posix()
+        for _name, path, _count in reconciliation.PARTITIONS
+    } | {path.relative_to(root).as_posix() for path in reconciliation._qcm_sources(root)})
+
+
+def _proof_method_binding(root: Path) -> dict[str, Any]:
+    """Bind source methods, historical inputs and mathematical runtime code."""
+    import mpmath
+    import sympy
+
+    packages = {}
+    for package in (sympy, mpmath):
+        package_root = Path(package.__file__).resolve().parent
+        sources = _source_digests(package_root, (
+            path.relative_to(package_root).as_posix()
+            for path in package_root.rglob("*.py")
+        ))
+        packages[package.__name__] = {
+            "version": package.__version__, "python_sources_digest": _digest(sources),
+            "python_source_count": len(sources),
+        }
+    binding = {
+        "protocol": "QCM_METHOD_INPUT_RESULT_RECOMPUTED_V1",
+        "method_sources": _source_digests(root, METHOD_PATHS),
+        "historical_inputs": _source_digests(root, (
+            path.relative_to(reconciliation.ROOT).as_posix()
+            for _name, path, _count in reconciliation.PARTITIONS
+        )),
+        "runtime": {
+            "python_version": sys.version,
+            "python_executable_sha256": hashlib.sha256(Path(sys.executable).read_bytes()).hexdigest(),
+            "packages": packages,
+        },
+    }
+    binding["binding_digest"] = _digest(binding)
+    return binding
+
+
+def validate_current_evidence(evidence: dict[str, Any], root: Path) -> None:
+    """Never trust a status string or input digest in place of its proof.
+
+    Recompute once with the current generic solver and verifier. This checks
+    input/output digests, option truths, declared key, verdicts and routes;
+    it does not constitute a complete scientific review of the question.
+    """
+    if evidence.get("proof_method_binding") != _proof_method_binding(root):
+        raise ValueError("stale QCM proof method or dependency binding")
+    if freshness.assess(evidence.get("freshness") or {}, root)["FRESHNESS_STATUS"] != freshness.CURRENT:
+        raise ValueError("stale QCM proof input dependency binding")
+    current = build_evidence(root)
+    if ({k: v for k, v in evidence.items() if k != "freshness"}
+            != {k: v for k, v in current.items() if k != "freshness"}):
+        raise ValueError("QCM proof integrity/result/verdict differs from current computation")
+    if evidence["freshness"]["INPUT_PATHS"] != current["freshness"]["INPUT_PATHS"]:
+        raise ValueError("QCM proof dependency set differs")
 
 
 def _diagnostic_coverage(question: dict[str, Any]) -> dict[str, Any]:
@@ -147,9 +228,14 @@ def _verify(question: dict[str, Any], result: solver.SolverResult) -> dict[str, 
     return checks
 
 
-def build_evidence() -> dict[str, Any]:
-    routing = reconciliation.build_reconciliation()
-    corpus = reconciliation._load_corpus()
+def build_evidence(root: Path = ROOT) -> dict[str, Any]:
+    input_paths = _proof_input_paths(root)
+    observed_inputs = freshness.stamp(input_paths, root)
+    binding = _proof_method_binding(root)
+    if binding["method_sources"] != _LOADED_METHOD_DIGESTS:
+        raise ValueError("QCM proof method sources differ from the loaded implementation")
+    routing = reconciliation.build_reconciliation(root)
+    corpus = reconciliation._load_corpus(root)
 
     carried_keys = {
         (entry["chapter"], entry["question_id"]) for entry in routing["carried_forward"]
@@ -219,6 +305,8 @@ def build_evidence() -> dict[str, Any]:
                 "solver_family": None,
                 "solver_version": solver.SOLVER_VERSION,
                 "solver_input_digest": sanitized.digest(),
+                "solver_result": result.to_dict(),
+                "solver_output_digest": result.digest(),
                 "computed_option_truths": {},
                 "computed_unique_answer": None,
                 "independent_evidence": "",
@@ -259,6 +347,7 @@ def build_evidence() -> dict[str, Any]:
             "solver_version": solver.SOLVER_VERSION,
             "solver_input_digest": sanitized.digest(),
             "solver_output_digest": result.digest(),
+            "solver_result": result.to_dict(),
             "computed_option_truths": dict(sorted(result.option_truths.items())),
             "computed_unique_answer": result.unique_answer,
             "computed_value": result.computed_value,
@@ -310,7 +399,7 @@ def build_evidence() -> dict[str, Any]:
         if e["human_review_required"]
     )
 
-    return {
+    payload = {
         "artifact_type": "qcm_independent_evidence_v2",
         "schema_version": 2,
         "generated_by": "scripts/build_qcm_independent_evidence_v2.py",
@@ -355,6 +444,13 @@ def build_evidence() -> dict[str, Any]:
         ),
         "questions": questions,
     }
+    if _proof_input_paths(root) != input_paths:
+        raise ValueError("QCM proof source/dependency set changed during computation")
+    if freshness.stamp(input_paths, root) != observed_inputs or _proof_method_binding(root) != binding:
+        raise ValueError("QCM proof inputs, runtime or HEAD changed during computation")
+    payload["proof_method_binding"] = binding
+    payload["freshness"] = observed_inputs
+    return payload
 
 
 def render_json(payload: dict[str, Any]) -> str:
