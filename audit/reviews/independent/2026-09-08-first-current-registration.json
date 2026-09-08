@@ -1,0 +1,62 @@
+{
+  "artifact_type": "bounded_review_registration_observation",
+  "approves_nothing": true,
+  "human_approval": false,
+  "observation": {
+    "head": "2a9a845c23e0de7c6732bf407875a2a2649631b1",
+    "base_head": "2a9a845c23e0de7c6732bf407875a2a2649631b1",
+    "worktree_status": [
+      " M Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-009.tex",
+      " M Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/07_td_fil_rouge.tex",
+      " M Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-009.tex",
+      " M Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/07_td_fil_rouge.sympy.json",
+      " M Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-009.sympy.json",
+      " M Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-009.sympy.json",
+      " M NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/cours/10_C1_evenements_cles.tex",
+      " M NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/qcm/TNSI-HISTOIRE-INFORMATIQUE-QCM.json",
+      " M audit/INDEPENDENT_CONTENT_REVIEWS.json",
+      " M scripts/build_current_review_index.py",
+      " M scripts/build_qcm_independent_evidence_v2.py",
+      " M scripts/build_qcm_review_proof_reconciliation.py",
+      " M tests/test_current_review_index.py",
+      "?? tests/test_prodscal_td_and_triangle_corrections.py",
+      "?? tests/test_qcm_current_evidence_guard.py"
+    ],
+    "worktree_dirty": true,
+    "scope": "WORKTREE_BOUND_BY_INPUT_DIGESTS"
+  },
+  "registration_scope": "13 actual prior independent readings transferred dimension by dimension after exact source/context checks. No new reading is claimed from this bookkeeping operation.",
+  "ledger_path": "audit/INDEPENDENT_CONTENT_REVIEWS.json",
+  "ledger_sha256": "sha256:06c7fecc7f432578df08e84f11573f7e16cc139ef045cff5f652c8cbbdc81a30",
+  "accepted_object_reviews": 13,
+  "validated_dimensions": 40,
+  "whole_objects_closed": 0,
+  "rejected_review_evidence": [],
+  "observed_summary": {
+    "CURRENT_REVIEW_INDEX_TOTAL": 3445,
+    "CURRENT_REVIEW_INDEX_DUPLICATES": 0,
+    "CURRENT_REVIEW_INDEX_MISSING_CURRENT_OBJECTS": 0,
+    "CURRENT_REVIEW_INDEX_RETIRED_OBJECTS": 0,
+    "CURRENT_REVIEW_INDEX_STALE_EVIDENCE": 0,
+    "REJECTED_STALE_REVIEW_EVIDENCE": 0,
+    "NEW_AUTHORING_OBJECTS": 294,
+    "NEW_AUTHORING_REVIEW_PENDING": 294,
+    "MATHEMATICAL_NON_FORMALIZABLE_TOTAL": 411,
+    "MATHEMATICAL_NON_FORMALIZABLE_REVIEW_PENDING": 407,
+    "REVIEW_STATES": {
+      "PENDING": 3445
+    },
+    "HUMAN_APPROVAL_PENDING": 3445,
+    "UNJUSTIFIED_REVIEW_INHERITANCE": 0
+  },
+  "source_set_digest": "sha256:ee4f130cb8cafa94c56f51dd94df982df9c991c789f76241a40b1ad443afe25e",
+  "review_index_digest": "sha256:4589754c4e346163edf19d2bb9260284b48fc4547511a82968c3e7d0916bb0dc",
+  "full_development_observation_sha256": "sha256:a2f8262f8558fc59aea413ca512de204504c9469d113ad563555a765a407956a",
+  "verification": "Canonical inventory captured under a no-write window at3a4c34696; current view rebuilt from that inventory while rereading and checking all source metadata, source/dependency digests, actual source set and HEAD. The producer then validated all10 supporting note/receipt inputs. 46 targeted index tests passed, including four changed/deleted supporting-evidence mutations. Independent agent review found no new issue.",
+  "limits": [
+    "Observation is bound to actual working input digests, not a claim of clean release HEAD.",
+    "294 new authoring objects remain pending in this observation; four directly read hints reduce the strict non-formalizable scientific pending population from411 to407.",
+    "Programme, editorial, data, applicable code and whole-chapter quality dimensions not actually reviewed remain pending.",
+    "Subsequent substantive corpus mutations require a new inventory and current view."
+  ]
+}

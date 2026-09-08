@@ -16,5 +16,651 @@
     "scope": "Only the explicitly reviewed dimensions are credited by evidence: programme, science, pedagogy, editorial and applicable specialized checks. Human approvals are consumed exclusively by HUMAN_REVIEW_GOVERNANCE.",
     "inheritance": "No automatic inheritance. An identical body does not establish identical programme, parent-object or pedagogical review scope."
   },
-  "reviews": []
+  "reviews": [
+    {
+      "object_id": "TEXP-ARI-CR-010",
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/cours/10_C1_divisibilite_pgcd.tex",
+      "source_sha256": "sha256:737ae271e614b8a381d26a6f6404237f014dc7ca1d0d676a68b246c97086a8e8",
+      "semantic_digest": "sha256:93ef82f0e7227fc7629c9d5ae505ee31092818cb797fae1a23de7048f1cab629",
+      "dependency_digest": "sha256:7e5c4f72e2a924b41b2443bfe97ae7d80355e3d50bd6989620b8232b259ab990",
+      "review_id": "REPRISE-20260908-TEXP-ARI-CR-010-001",
+      "reviewer": {
+        "actor_id": "/root",
+        "author_actor_id": "/root/astra_delta",
+        "is_human": false,
+        "independent_from_author": true
+      },
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Common positive divisors of a,b are unchanged by a=bq+r and by absolute values. Positive remainders strictly decrease, final divisor divides both initial inputs. Excluding (0,0), one zero input has gcd equal to absolute value of the other. Divisors36 and Euclidean trace252,105->42->21->0 recomputed. 8 and15 coprime though composite. Recursive identity bu+rv=d with r=a-qb gives av+b(u-qv)=d; abs(r)<abs(b) even for Python negative divisor, base returns(abs(a),sign(a),0). Every pair of signed inputs retains positive gcd. Every composite <=n has a prime divisor<=sqrt(n); crossing multiples from p*p is complete since smaller multiples were already removed. Trial division retains product of extracted factors times remaining integer; after p*p>remaining, remaining>1 must be prime. Empty product1 and n<2 sieve handled."
+        },
+        "PROGRAMME_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Full applicability and current official mapping have not been closed by this bounded algorithm review."
+        },
+        "ORACLE_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The full oracle was read in the named independent review and executed by the canonical verifier. The current receipt source and verifier hashes were checked again when registering this record. General correctness rests on the written invariant and termination proofs; execution covers concrete claims, not all inputs by sampling."
+        }
+      },
+      "evidence_note": {
+        "path": "audit/reviews/independent/2026-09-08-arithmetic-algorithms.json",
+        "sha256": "sha256:05d514ca429d9c7905b5e9080e03fe8f920296415e91525b4cc0998b2fa3ac91",
+        "role": "Previously performed independent reading with explicit mathematical reasoning; no old aggregate PASS imported"
+      },
+      "registration": {
+        "actor_id": "/root",
+        "base_head": "2a9a845c23e0de7c6732bf407875a2a2649631b1",
+        "scope": "Only named dimensions, actual reviewed source bytes and current dependency digest. No human authority.",
+        "dependency_delta": "DERGLOBAL: all198 dependencies identical to reviewed commit a14ce7e450. ARITHMETIQUE:128of129 identical to reviewed commit3554051e0; only programme coverage registry changed, with source-relevance rebinding and no changed disciplinary text or atom. Programme review is not credited."
+      },
+      "oracle_receipt": {
+        "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/validations/10_C1_divisibilite_pgcd.sympy.json",
+        "sha256": "sha256:a6747abdc2af5fd7407202c3d0a6a4a150ad144b140a1540b63697b315f0b557",
+        "source_sha256": "sha256:737ae271e614b8a381d26a6f6404237f014dc7ca1d0d676a68b246c97086a8e8",
+        "verifier_sha256": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e"
+      }
+    },
+    {
+      "object_id": "TEXP-ARI-CR-011",
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/cours/11_C2_congruences.tex",
+      "source_sha256": "sha256:2d8e448a76874367a66b99a5b61a2ccebb476be0db5b944199f2ec9e704b488a",
+      "semantic_digest": "sha256:d02a8309faa4c399deddc1c94be6924cc6339f00197f69c0e14453092215c024",
+      "dependency_digest": "sha256:7e5c4f72e2a924b41b2443bfe97ae7d80355e3d50bd6989620b8232b259ab990",
+      "review_id": "REPRISE-20260908-TEXP-ARI-CR-011-001",
+      "reviewer": {
+        "actor_id": "/root",
+        "author_actor_id": "/root/astra_delta",
+        "is_human": false,
+        "independent_from_author": true
+      },
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Sum/product follow divisibility of differences; positive powers follow induction, exponent0 no longer silently includes0^0. Decimal digit test restricted to natural integers (negative counterexample-1). Bezout provides modular inverse; uniqueness follows cancellation for gcd1. 3x=5mod7 givesx=4 and6x=6mod8 gives1,5. Modulus1 remains permitted by definition and has one residue class. Recursive identity bu+rv=d with r=a-qb gives av+b(u-qv)=d; abs(r)<abs(b) even for Python negative divisor, base returns(abs(a),sign(a),0). Every pair of signed inputs retains positive gcd."
+        },
+        "PROGRAMME_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Full applicability and current official mapping have not been closed by this bounded algorithm review."
+        },
+        "ORACLE_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The full oracle was read in the named independent review and executed by the canonical verifier. The current receipt source and verifier hashes were checked again when registering this record. General correctness rests on the written invariant and termination proofs; execution covers concrete claims, not all inputs by sampling."
+        }
+      },
+      "evidence_note": {
+        "path": "audit/reviews/independent/2026-09-08-arithmetic-algorithms.json",
+        "sha256": "sha256:05d514ca429d9c7905b5e9080e03fe8f920296415e91525b4cc0998b2fa3ac91",
+        "role": "Previously performed independent reading with explicit mathematical reasoning; no old aggregate PASS imported"
+      },
+      "registration": {
+        "actor_id": "/root",
+        "base_head": "2a9a845c23e0de7c6732bf407875a2a2649631b1",
+        "scope": "Only named dimensions, actual reviewed source bytes and current dependency digest. No human authority.",
+        "dependency_delta": "DERGLOBAL: all198 dependencies identical to reviewed commit a14ce7e450. ARITHMETIQUE:128of129 identical to reviewed commit3554051e0; only programme coverage registry changed, with source-relevance rebinding and no changed disciplinary text or atom. Programme review is not credited."
+      },
+      "oracle_receipt": {
+        "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/validations/11_C2_congruences.sympy.json",
+        "sha256": "sha256:51a46066497b74d76152ef4e718b0ca64228650089b2e5bffc9f1b3f37d769b2",
+        "source_sha256": "sha256:2d8e448a76874367a66b99a5b61a2ccebb476be0db5b944199f2ec9e704b488a",
+        "verifier_sha256": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e"
+      }
+    },
+    {
+      "object_id": "TEXP-ARI-ME-009",
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-009.tex",
+      "source_sha256": "sha256:bbb9460b3154804e9c25b72295254c2f0e0f0a735d483fa93ec5a9f016a94e8a",
+      "semantic_digest": "sha256:0615f9ae4222fa02ae49f4444a7fbfe262ca16b264a7bc637f9ed4c974374888",
+      "dependency_digest": "sha256:7e5c4f72e2a924b41b2443bfe97ae7d80355e3d50bd6989620b8232b259ab990",
+      "review_id": "REPRISE-20260908-TEXP-ARI-ME-009-001",
+      "reviewer": {
+        "actor_id": "/root",
+        "author_actor_id": "/root/astra_delta",
+        "is_human": false,
+        "independent_from_author": true
+      },
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Common positive divisors of a,b are unchanged by a=bq+r and by absolute values. Positive remainders strictly decrease, final divisor divides both initial inputs. Excluding (0,0), one zero input has gcd equal to absolute value of the other. Divisors36 and Euclidean trace252,105->42->21->0 recomputed. 8 and15 coprime though composite. Recursive identity bu+rv=d with r=a-qb gives av+b(u-qv)=d; abs(r)<abs(b) even for Python negative divisor, base returns(abs(a),sign(a),0). Every pair of signed inputs retains positive gcd."
+        },
+        "PROGRAMME_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Full applicability and current official mapping have not been closed by this bounded algorithm review."
+        },
+        "ORACLE_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The full oracle was read in the named independent review and executed by the canonical verifier. The current receipt source and verifier hashes were checked again when registering this record. General correctness rests on the written invariant and termination proofs; execution covers concrete claims, not all inputs by sampling."
+        }
+      },
+      "evidence_note": {
+        "path": "audit/reviews/independent/2026-09-08-arithmetic-algorithms.json",
+        "sha256": "sha256:05d514ca429d9c7905b5e9080e03fe8f920296415e91525b4cc0998b2fa3ac91",
+        "role": "Previously performed independent reading with explicit mathematical reasoning; no old aggregate PASS imported"
+      },
+      "registration": {
+        "actor_id": "/root",
+        "base_head": "2a9a845c23e0de7c6732bf407875a2a2649631b1",
+        "scope": "Only named dimensions, actual reviewed source bytes and current dependency digest. No human authority.",
+        "dependency_delta": "DERGLOBAL: all198 dependencies identical to reviewed commit a14ce7e450. ARITHMETIQUE:128of129 identical to reviewed commit3554051e0; only programme coverage registry changed, with source-relevance rebinding and no changed disciplinary text or atom. Programme review is not credited."
+      },
+      "oracle_receipt": {
+        "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/validations/TEXP-ARI-ME-009.sympy.json",
+        "sha256": "sha256:0d3591d3c89678185a9f84047b8c8b0252790af28d7c90b3cce6fd2c6097e83c",
+        "source_sha256": "sha256:bbb9460b3154804e9c25b72295254c2f0e0f0a735d483fa93ec5a9f016a94e8a",
+        "verifier_sha256": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e"
+      }
+    },
+    {
+      "object_id": "TEXP-ARITHMETIQUE-RE-C1",
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C1.tex",
+      "source_sha256": "sha256:3be84a7395fd687a81e1bf0a57cdff7a982e4362b16524e879de357a7ab3ead5",
+      "semantic_digest": "sha256:1597da37d14e624dd81bd4806f68bc1444dbb98c07bfe156cb66bf13ad109b8c",
+      "dependency_digest": "sha256:7e5c4f72e2a924b41b2443bfe97ae7d80355e3d50bd6989620b8232b259ab990",
+      "review_id": "REPRISE-20260908-TEXP-ARITHMETIQUE-RE-C1-001",
+      "reviewer": {
+        "actor_id": "/root/astra_delta",
+        "author_actor_id": "/root",
+        "is_human": false,
+        "independent_from_author": true
+      },
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "For nonzero n, every common positive divisor of n and0 divides|n| and |n| itself is common, hence greatest divisor|n|. Divisor sets unchanged by absolute values. Euclidean chain120=84+36,84=2*36+12,36=3*12 gives12, which divides84 and120. Initial zero second value is handled explicitly. Exclusion(0,0) agrees with current course definition."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The actual misconception, domain, explanation and local practice were read together. No re-test or full Nexus chapter chain certified by this isolated sheet."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Whole displayed text read: nonzero/signed integer conditions and modulo solution counts are stated consistently. No final page-layout review is claimed."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The independent note did not establish a complete teacher correction for the embedded exercise. Correct mathematical explanation alone is not that evidence."
+        },
+        "PROGRAMME_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Local official BO2019 lines493–581 were read; full current applicability and source-capacity bindings are not certified by this record."
+        }
+      },
+      "evidence_note": {
+        "path": "audit/reviews/independent/2026-09-08-arithmetic-boundaries.json",
+        "sha256": "sha256:190ff43ff534ddf1da57960d4c3f6d7f0cc7b6b9a7521d4be3b1832fa5a28b61",
+        "role": "Previously performed independent reading with explicit mathematical reasoning; no old aggregate PASS imported"
+      },
+      "registration": {
+        "actor_id": "/root",
+        "base_head": "2a9a845c23e0de7c6732bf407875a2a2649631b1",
+        "scope": "Only named dimensions, actual reviewed source bytes and current dependency digest. No human authority.",
+        "dependency_delta": "DERGLOBAL: all198 dependencies identical to reviewed commit a14ce7e450. ARITHMETIQUE:128of129 identical to reviewed commit3554051e0; only programme coverage registry changed, with source-relevance rebinding and no changed disciplinary text or atom. Programme review is not credited."
+      }
+    },
+    {
+      "object_id": "TEXP-ARITHMETIQUE-RE-C2",
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C2.tex",
+      "source_sha256": "sha256:a0f768487994c800ca3c89a0a4ffb9180d622245c6b2c12055e445b3b9f759ea",
+      "semantic_digest": "sha256:1d4f219430656773de62e8f8ee54eca4b7d68c2d29181efa00301369ebea8ac7",
+      "dependency_digest": "sha256:7e5c4f72e2a924b41b2443bfe97ae7d80355e3d50bd6989620b8232b259ab990",
+      "review_id": "REPRISE-20260908-TEXP-ARITHMETIQUE-RE-C2-001",
+      "reviewer": {
+        "actor_id": "/root/astra_delta",
+        "author_actor_id": "/root",
+        "is_human": false,
+        "independent_from_author": true
+      },
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "d=gcd(a,n)>0. Necessity follows d|a and d|n. Ifd|b and ua+vn=d, x0=u*b/d solves. ax= b modn is equivalent (n/d)|(x-x0) using coprimality(a/d,n/d). Representatives x0+k*n/d for0<=k<d are exactlyd distinct classes modn. Ifa=0, d=n: n|b yields alln residue classes, otherwise none. Reduced modulus1 has exactly one class, allowed by current course definition n inN*. Example6x=9 mod15 reduces2x=3mod5, inverse2=3 givesx=4mod5, residues4,9,14.6x=8mod15 impossible because3 does not divide8."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The actual misconception, domain, explanation and local practice were read together. Finite enumeration corroborates examples, not general proof; proof is the Bezout/kernel argument above."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Whole displayed text read: nonzero/signed integer conditions and modulo solution counts are stated consistently. No final page-layout review is claimed."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The independent note did not establish a complete teacher correction for the embedded exercise. Correct mathematical explanation alone is not that evidence."
+        },
+        "PROGRAMME_REVIEW": {
+          "state": "PENDING",
+          "rationale": "Local official BO2019 lines493–581 were read; full current applicability and source-capacity bindings are not certified by this record."
+        }
+      },
+      "evidence_note": {
+        "path": "audit/reviews/independent/2026-09-08-arithmetic-boundaries.json",
+        "sha256": "sha256:190ff43ff534ddf1da57960d4c3f6d7f0cc7b6b9a7521d4be3b1832fa5a28b61",
+        "role": "Previously performed independent reading with explicit mathematical reasoning; no old aggregate PASS imported"
+      },
+      "registration": {
+        "actor_id": "/root",
+        "base_head": "2a9a845c23e0de7c6732bf407875a2a2649631b1",
+        "scope": "Only named dimensions, actual reviewed source bytes and current dependency digest. No human authority.",
+        "dependency_delta": "DERGLOBAL: all198 dependencies identical to reviewed commit a14ce7e450. ARITHMETIQUE:128of129 identical to reviewed commit3554051e0; only programme coverage registry changed, with source-relevance rebinding and no changed disciplinary text or atom. Programme review is not credited."
+      }
+    },
+    {
+      "object_id": "1SPE-DERGLOBAL-EX-002",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-002.tex",
+      "source_sha256": "sha256:4b38b994739710841b5641276faaf5b725013d5b40a7b276c7037704ac8190c6",
+      "semantic_digest": "sha256:1a5cba7d409a6cd1e6205c9cfce30f39a9a9f0078a23c944e702ca6e2fb6d43e",
+      "dependency_digest": "sha256:98f1bab407ef8845c87ae58a785ea5a50688562a2ccc0a099ce360d63587421f",
+      "review_id": "REPRISE-20260908-1SPE-DERGLOBAL-EX-002-001",
+      "reviewer": {
+        "actor_id": "/root/astra_delta",
+        "author_actor_id": "/root",
+        "is_human": false,
+        "independent_from_author": true
+      },
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Inverse: ((1/(a+h))-(1/a))/h=-1/(a(a+h)) for a!=0, giving -1/a^2. Square root exists for x>=0, differentiable only x>0; its right quotient at zero equals 1/sqrt(h) and is unbounded. Polynomial powers exist and are differentiable on R. The four stationary hints now state a sufficient sign-change test, not a general necessity. The polynomial parents are differentiable on R, so no endpoint or differentiability hypothesis is missing in their scope."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual object and named current parent/correction were read together; the domain distinction or hint supports the task without a false necessity condition. Inverse: ((1/(a+h))-(1/a))/h=-1/(a(a+h)) for a!=0, giving -1/a^2. Square root exists for x>=0, differentiable only x>0; its right quotient at zero equals 1/sqrt(h) and is unbounded. Polynomial powers exist and are differentiable on R."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The paired source and all indicated parent contexts have the recorded unchanged hashes. Inverse: ((1/(a+h))-(1/a))/h=-1/(a(a+h)) for a!=0, giving -1/a^2. Square root exists for x>=0, differentiable only x>0; its right quotient at zero equals 1/sqrt(h) and is unbounded. Polynomial powers exist and are differentiable on R."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The earlier verdict covered changed text only; a complete editorial review is still required for this dimension."
+        },
+        "PROGRAMME_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The earlier bounded counter-review explicitly did not perform this dimension; no programme credit is inherited."
+        },
+        "ORACLE_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The full oracle was read in the named independent review and executed by the canonical verifier. The current receipt source and verifier hashes were checked again when registering this record. The former independent execution was network denied; receipt source and verifier digests remain current."
+        }
+      },
+      "evidence_note": {
+        "path": "audit/reviews/independent/2026-09-08-derglobal-prodscal-corrections.json",
+        "sha256": "sha256:b5fcc449b9462f0938a399f3d0a37f6c4cfe7fa5262d2c11fe418a87ddbd0bc0",
+        "role": "Previously performed independent reading with explicit mathematical reasoning; no old aggregate PASS imported"
+      },
+      "registration": {
+        "actor_id": "/root",
+        "base_head": "2a9a845c23e0de7c6732bf407875a2a2649631b1",
+        "scope": "Only named dimensions, actual reviewed source bytes and current dependency digest. No human authority.",
+        "dependency_delta": "DERGLOBAL: all198 dependencies identical to reviewed commit a14ce7e450. ARITHMETIQUE:128of129 identical to reviewed commit3554051e0; only programme coverage registry changed, with source-relevance rebinding and no changed disciplinary text or atom. Programme review is not credited."
+      },
+      "oracle_receipt": {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/1SPE-DERGLOBAL-EX-002.sympy.json",
+        "sha256": "sha256:7bb4261868cb9137caa1bf27ee676ef38a3b88232a0d5d9e0d00f4b239808b84",
+        "source_sha256": "sha256:4b38b994739710841b5641276faaf5b725013d5b40a7b276c7037704ac8190c6",
+        "verifier_sha256": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e"
+      }
+    },
+    {
+      "object_id": "1SPE-DERGLOBAL-CO-002",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex",
+      "source_sha256": "sha256:ae35e7a293c395bbf73f7154a98bf7187870a2007d870df9bc5c236b065045e8",
+      "semantic_digest": "sha256:dfbf64d4969b47b56d1ec4b57abf077957e6275166cc242bd5744bf0bad25802",
+      "dependency_digest": "sha256:98f1bab407ef8845c87ae58a785ea5a50688562a2ccc0a099ce360d63587421f",
+      "review_id": "REPRISE-20260908-1SPE-DERGLOBAL-CO-002-001",
+      "reviewer": {
+        "actor_id": "/root/astra_delta",
+        "author_actor_id": "/root",
+        "is_human": false,
+        "independent_from_author": true
+      },
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Inverse: ((1/(a+h))-(1/a))/h=-1/(a(a+h)) for a!=0, giving -1/a^2. Square root exists for x>=0, differentiable only x>0; its right quotient at zero equals 1/sqrt(h) and is unbounded. Polynomial powers exist and are differentiable on R. The four stationary hints now state a sufficient sign-change test, not a general necessity. The polynomial parents are differentiable on R, so no endpoint or differentiability hypothesis is missing in their scope."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual object and named current parent/correction were read together; the domain distinction or hint supports the task without a false necessity condition. Inverse: ((1/(a+h))-(1/a))/h=-1/(a(a+h)) for a!=0, giving -1/a^2. Square root exists for x>=0, differentiable only x>0; its right quotient at zero equals 1/sqrt(h) and is unbounded. Polynomial powers exist and are differentiable on R."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The paired source and all indicated parent contexts have the recorded unchanged hashes. Inverse: ((1/(a+h))-(1/a))/h=-1/(a(a+h)) for a!=0, giving -1/a^2. Square root exists for x>=0, differentiable only x>0; its right quotient at zero equals 1/sqrt(h) and is unbounded. Polynomial powers exist and are differentiable on R."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The earlier verdict covered changed text only; a complete editorial review is still required for this dimension."
+        },
+        "PROGRAMME_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The earlier bounded counter-review explicitly did not perform this dimension; no programme credit is inherited."
+        },
+        "ORACLE_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The full oracle was read in the named independent review and executed by the canonical verifier. The current receipt source and verifier hashes were checked again when registering this record. The former independent execution was network denied; receipt source and verifier digests remain current."
+        }
+      },
+      "evidence_note": {
+        "path": "audit/reviews/independent/2026-09-08-derglobal-prodscal-corrections.json",
+        "sha256": "sha256:b5fcc449b9462f0938a399f3d0a37f6c4cfe7fa5262d2c11fe418a87ddbd0bc0",
+        "role": "Previously performed independent reading with explicit mathematical reasoning; no old aggregate PASS imported"
+      },
+      "registration": {
+        "actor_id": "/root",
+        "base_head": "2a9a845c23e0de7c6732bf407875a2a2649631b1",
+        "scope": "Only named dimensions, actual reviewed source bytes and current dependency digest. No human authority.",
+        "dependency_delta": "DERGLOBAL: all198 dependencies identical to reviewed commit a14ce7e450. ARITHMETIQUE:128of129 identical to reviewed commit3554051e0; only programme coverage registry changed, with source-relevance rebinding and no changed disciplinary text or atom. Programme review is not credited."
+      },
+      "oracle_receipt": {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/1SPE-DERGLOBAL-CO-002.sympy.json",
+        "sha256": "sha256:f4ee186e0319007ef0412a7d85404efcdf689e15464840717cf00532c54fe016",
+        "source_sha256": "sha256:ae35e7a293c395bbf73f7154a98bf7187870a2007d870df9bc5c236b065045e8",
+        "verifier_sha256": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e"
+      }
+    },
+    {
+      "object_id": "1SPE-DERGLOBAL-EX-013",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-013.tex",
+      "source_sha256": "sha256:d586169185d4088c6675e57f14669edebf6ebf7b130b4c2b73d036ddf258734f",
+      "semantic_digest": "sha256:13a5735c42aa56e5cbcf22302a68589a1e6cd4363cdc29977bcc175ceb4117f7",
+      "dependency_digest": "sha256:98f1bab407ef8845c87ae58a785ea5a50688562a2ccc0a099ce360d63587421f",
+      "review_id": "REPRISE-20260908-1SPE-DERGLOBAL-EX-013-001",
+      "reviewer": {
+        "actor_id": "/root/astra_delta",
+        "author_actor_id": "/root",
+        "is_human": false,
+        "independent_from_author": true
+      },
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Independent expansion: (x^2-2x+3)(x+1)=x^3-x^2+x+3, derivative 3x^2-2x+1. x(x-1)(x+1)=x^3-x, derivative 3x^2-1. Product decomposition p=x^2-x gives (2x-1)(x+1)+(x^2-x)=2x^2+2x-x-1+x^2-x=3x^2-1; every printed equality is valid. The four stationary hints now state a sufficient sign-change test, not a general necessity. The polynomial parents are differentiable on R, so no endpoint or differentiability hypothesis is missing in their scope."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual object and named current parent/correction were read together; the domain distinction or hint supports the task without a false necessity condition. Independent expansion: (x^2-2x+3)(x+1)=x^3-x^2+x+3, derivative 3x^2-2x+1. x(x-1)(x+1)=x^3-x, derivative 3x^2-1. Product decomposition p=x^2-x gives (2x-1)(x+1)+(x^2-x)=2x^2+2x-x-1+x^2-x=3x^2-1; every printed equality is valid."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The paired source and all indicated parent contexts have the recorded unchanged hashes. Independent expansion: (x^2-2x+3)(x+1)=x^3-x^2+x+3, derivative 3x^2-2x+1. x(x-1)(x+1)=x^3-x, derivative 3x^2-1. Product decomposition p=x^2-x gives (2x-1)(x+1)+(x^2-x)=2x^2+2x-x-1+x^2-x=3x^2-1; every printed equality is valid."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The earlier verdict covered changed text only; a complete editorial review is still required for this dimension."
+        },
+        "PROGRAMME_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The earlier bounded counter-review explicitly did not perform this dimension; no programme credit is inherited."
+        },
+        "ORACLE_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The full oracle was read in the named independent review and executed by the canonical verifier. The current receipt source and verifier hashes were checked again when registering this record. The former independent execution was network denied; receipt source and verifier digests remain current."
+        }
+      },
+      "evidence_note": {
+        "path": "audit/reviews/independent/2026-09-08-derglobal-prodscal-corrections.json",
+        "sha256": "sha256:b5fcc449b9462f0938a399f3d0a37f6c4cfe7fa5262d2c11fe418a87ddbd0bc0",
+        "role": "Previously performed independent reading with explicit mathematical reasoning; no old aggregate PASS imported"
+      },
+      "registration": {
+        "actor_id": "/root",
+        "base_head": "2a9a845c23e0de7c6732bf407875a2a2649631b1",
+        "scope": "Only named dimensions, actual reviewed source bytes and current dependency digest. No human authority.",
+        "dependency_delta": "DERGLOBAL: all198 dependencies identical to reviewed commit a14ce7e450. ARITHMETIQUE:128of129 identical to reviewed commit3554051e0; only programme coverage registry changed, with source-relevance rebinding and no changed disciplinary text or atom. Programme review is not credited."
+      },
+      "oracle_receipt": {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/1SPE-DERGLOBAL-EX-013.sympy.json",
+        "sha256": "sha256:bc1935b8ebe3c1727a8bc35167e6dca68b10e2060d8f2396c94721781c5ff7c0",
+        "source_sha256": "sha256:d586169185d4088c6675e57f14669edebf6ebf7b130b4c2b73d036ddf258734f",
+        "verifier_sha256": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e"
+      }
+    },
+    {
+      "object_id": "1SPE-DERGLOBAL-CO-013",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-013.tex",
+      "source_sha256": "sha256:4c17f0149c073a30830b04a4cc8d424b955eaed3b264eb6314b0107d9404e19f",
+      "semantic_digest": "sha256:c5451426b7d7394d677b040aa1b060ccb8c0978771b8805ffbec97e0695358ee",
+      "dependency_digest": "sha256:98f1bab407ef8845c87ae58a785ea5a50688562a2ccc0a099ce360d63587421f",
+      "review_id": "REPRISE-20260908-1SPE-DERGLOBAL-CO-013-001",
+      "reviewer": {
+        "actor_id": "/root/astra_delta",
+        "author_actor_id": "/root",
+        "is_human": false,
+        "independent_from_author": true
+      },
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Independent expansion: (x^2-2x+3)(x+1)=x^3-x^2+x+3, derivative 3x^2-2x+1. x(x-1)(x+1)=x^3-x, derivative 3x^2-1. Product decomposition p=x^2-x gives (2x-1)(x+1)+(x^2-x)=2x^2+2x-x-1+x^2-x=3x^2-1; every printed equality is valid. The four stationary hints now state a sufficient sign-change test, not a general necessity. The polynomial parents are differentiable on R, so no endpoint or differentiability hypothesis is missing in their scope."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual object and named current parent/correction were read together; the domain distinction or hint supports the task without a false necessity condition. Independent expansion: (x^2-2x+3)(x+1)=x^3-x^2+x+3, derivative 3x^2-2x+1. x(x-1)(x+1)=x^3-x, derivative 3x^2-1. Product decomposition p=x^2-x gives (2x-1)(x+1)+(x^2-x)=2x^2+2x-x-1+x^2-x=3x^2-1; every printed equality is valid."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The paired source and all indicated parent contexts have the recorded unchanged hashes. Independent expansion: (x^2-2x+3)(x+1)=x^3-x^2+x+3, derivative 3x^2-2x+1. x(x-1)(x+1)=x^3-x, derivative 3x^2-1. Product decomposition p=x^2-x gives (2x-1)(x+1)+(x^2-x)=2x^2+2x-x-1+x^2-x=3x^2-1; every printed equality is valid."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The earlier verdict covered changed text only; a complete editorial review is still required for this dimension."
+        },
+        "PROGRAMME_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The earlier bounded counter-review explicitly did not perform this dimension; no programme credit is inherited."
+        },
+        "ORACLE_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The full oracle was read in the named independent review and executed by the canonical verifier. The current receipt source and verifier hashes were checked again when registering this record. The former independent execution was network denied; receipt source and verifier digests remain current."
+        }
+      },
+      "evidence_note": {
+        "path": "audit/reviews/independent/2026-09-08-derglobal-prodscal-corrections.json",
+        "sha256": "sha256:b5fcc449b9462f0938a399f3d0a37f6c4cfe7fa5262d2c11fe418a87ddbd0bc0",
+        "role": "Previously performed independent reading with explicit mathematical reasoning; no old aggregate PASS imported"
+      },
+      "registration": {
+        "actor_id": "/root",
+        "base_head": "2a9a845c23e0de7c6732bf407875a2a2649631b1",
+        "scope": "Only named dimensions, actual reviewed source bytes and current dependency digest. No human authority.",
+        "dependency_delta": "DERGLOBAL: all198 dependencies identical to reviewed commit a14ce7e450. ARITHMETIQUE:128of129 identical to reviewed commit3554051e0; only programme coverage registry changed, with source-relevance rebinding and no changed disciplinary text or atom. Programme review is not credited."
+      },
+      "oracle_receipt": {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/1SPE-DERGLOBAL-CO-013.sympy.json",
+        "sha256": "sha256:7181ec4a27cadeba1b37ac6018bf24c60888d1e37164491005c74230cd98e891",
+        "source_sha256": "sha256:4c17f0149c073a30830b04a4cc8d424b955eaed3b264eb6314b0107d9404e19f",
+        "verifier_sha256": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e"
+      }
+    },
+    {
+      "object_id": "1SPE-DERGLOBAL-EX-031-CDP",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-031-CDP.tex",
+      "source_sha256": "sha256:1fbf37c47e64c7cd0a9707c842cc4a74fc3ef0827408e548891b2a2f4835327f",
+      "semantic_digest": "sha256:2701c2ebee78cd987b3a68c89834b623d2601450460a117f6fed7d600070024c",
+      "dependency_digest": "sha256:98f1bab407ef8845c87ae58a785ea5a50688562a2ccc0a099ce360d63587421f",
+      "review_id": "REPRISE-20260908-1SPE-DERGLOBAL-EX-031-CDP-001",
+      "reviewer": {
+        "actor_id": "/root/astra_delta",
+        "author_actor_id": "/root",
+        "is_human": false,
+        "independent_from_author": true
+      },
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "f=(x-3)^2-1; f prime=2(x-3), negative left of 3 and positive right: minimum -1 at 3. The four stationary hints now state a sufficient sign-change test, not a general necessity. The polynomial parents are differentiable on R, so no endpoint or differentiability hypothesis is missing in their scope."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual object and named current parent/correction were read together; the domain distinction or hint supports the task without a false necessity condition. f=(x-3)^2-1; f prime=2(x-3), negative left of 3 and positive right: minimum -1 at 3."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The paired source and all indicated parent contexts have the recorded unchanged hashes. f=(x-3)^2-1; f prime=2(x-3), negative left of 3 and positive right: minimum -1 at 3."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The earlier verdict covered changed text only; a complete editorial review is still required for this dimension."
+        },
+        "PROGRAMME_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The earlier bounded counter-review explicitly did not perform this dimension; no programme credit is inherited."
+        }
+      },
+      "evidence_note": {
+        "path": "audit/reviews/independent/2026-09-08-derglobal-prodscal-corrections.json",
+        "sha256": "sha256:b5fcc449b9462f0938a399f3d0a37f6c4cfe7fa5262d2c11fe418a87ddbd0bc0",
+        "role": "Previously performed independent reading with explicit mathematical reasoning; no old aggregate PASS imported"
+      },
+      "registration": {
+        "actor_id": "/root",
+        "base_head": "2a9a845c23e0de7c6732bf407875a2a2649631b1",
+        "scope": "Only named dimensions, actual reviewed source bytes and current dependency digest. No human authority.",
+        "dependency_delta": "DERGLOBAL: all198 dependencies identical to reviewed commit a14ce7e450. ARITHMETIQUE:128of129 identical to reviewed commit3554051e0; only programme coverage registry changed, with source-relevance rebinding and no changed disciplinary text or atom. Programme review is not credited."
+      }
+    },
+    {
+      "object_id": "1SPE-DERGLOBAL-EX-032-CDP",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-032-CDP.tex",
+      "source_sha256": "sha256:93fb7e9792340e33e700685bd83ccff9a21d689453091a691db8ce2ba61556c0",
+      "semantic_digest": "sha256:41795951fa5c8a56b81d87697c5d07e501aabbaf8192549d93d71b271d14df86",
+      "dependency_digest": "sha256:98f1bab407ef8845c87ae58a785ea5a50688562a2ccc0a099ce360d63587421f",
+      "review_id": "REPRISE-20260908-1SPE-DERGLOBAL-EX-032-CDP-001",
+      "reviewer": {
+        "actor_id": "/root/astra_delta",
+        "author_actor_id": "/root",
+        "is_human": false,
+        "independent_from_author": true
+      },
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "g=-(x-2)^2+5; g prime=-2(x-2), positive left of 2 and negative right: maximum 5 at 2. The four stationary hints now state a sufficient sign-change test, not a general necessity. The polynomial parents are differentiable on R, so no endpoint or differentiability hypothesis is missing in their scope."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual object and named current parent/correction were read together; the domain distinction or hint supports the task without a false necessity condition. g=-(x-2)^2+5; g prime=-2(x-2), positive left of 2 and negative right: maximum 5 at 2."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The paired source and all indicated parent contexts have the recorded unchanged hashes. g=-(x-2)^2+5; g prime=-2(x-2), positive left of 2 and negative right: maximum 5 at 2."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The earlier verdict covered changed text only; a complete editorial review is still required for this dimension."
+        },
+        "PROGRAMME_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The earlier bounded counter-review explicitly did not perform this dimension; no programme credit is inherited."
+        }
+      },
+      "evidence_note": {
+        "path": "audit/reviews/independent/2026-09-08-derglobal-prodscal-corrections.json",
+        "sha256": "sha256:b5fcc449b9462f0938a399f3d0a37f6c4cfe7fa5262d2c11fe418a87ddbd0bc0",
+        "role": "Previously performed independent reading with explicit mathematical reasoning; no old aggregate PASS imported"
+      },
+      "registration": {
+        "actor_id": "/root",
+        "base_head": "2a9a845c23e0de7c6732bf407875a2a2649631b1",
+        "scope": "Only named dimensions, actual reviewed source bytes and current dependency digest. No human authority.",
+        "dependency_delta": "DERGLOBAL: all198 dependencies identical to reviewed commit a14ce7e450. ARITHMETIQUE:128of129 identical to reviewed commit3554051e0; only programme coverage registry changed, with source-relevance rebinding and no changed disciplinary text or atom. Programme review is not credited."
+      }
+    },
+    {
+      "object_id": "1SPE-DERGLOBAL-EX-033-CDP",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-033-CDP.tex",
+      "source_sha256": "sha256:b31b0c54c3561c10ec228d47ca4d988218b7795288ad30a7bd6061c11e9bbe25",
+      "semantic_digest": "sha256:3407db58e9c4424806e1abadff7cb5edc86f10acb877d9c3c82a2ee66f20f603",
+      "dependency_digest": "sha256:98f1bab407ef8845c87ae58a785ea5a50688562a2ccc0a099ce360d63587421f",
+      "review_id": "REPRISE-20260908-1SPE-DERGLOBAL-EX-033-CDP-001",
+      "reviewer": {
+        "actor_id": "/root/astra_delta",
+        "author_actor_id": "/root",
+        "is_human": false,
+        "independent_from_author": true
+      },
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "f prime=3x(x-2), signs +,-,+ on the three intervals separated by 0 and 2. Local maximum f(0)=0 and local minimum f(2)=-4. The four stationary hints now state a sufficient sign-change test, not a general necessity. The polynomial parents are differentiable on R, so no endpoint or differentiability hypothesis is missing in their scope."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual object and named current parent/correction were read together; the domain distinction or hint supports the task without a false necessity condition. f prime=3x(x-2), signs +,-,+ on the three intervals separated by 0 and 2. Local maximum f(0)=0 and local minimum f(2)=-4."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The paired source and all indicated parent contexts have the recorded unchanged hashes. f prime=3x(x-2), signs +,-,+ on the three intervals separated by 0 and 2. Local maximum f(0)=0 and local minimum f(2)=-4."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The earlier verdict covered changed text only; a complete editorial review is still required for this dimension."
+        },
+        "PROGRAMME_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The earlier bounded counter-review explicitly did not perform this dimension; no programme credit is inherited."
+        }
+      },
+      "evidence_note": {
+        "path": "audit/reviews/independent/2026-09-08-derglobal-prodscal-corrections.json",
+        "sha256": "sha256:b5fcc449b9462f0938a399f3d0a37f6c4cfe7fa5262d2c11fe418a87ddbd0bc0",
+        "role": "Previously performed independent reading with explicit mathematical reasoning; no old aggregate PASS imported"
+      },
+      "registration": {
+        "actor_id": "/root",
+        "base_head": "2a9a845c23e0de7c6732bf407875a2a2649631b1",
+        "scope": "Only named dimensions, actual reviewed source bytes and current dependency digest. No human authority.",
+        "dependency_delta": "DERGLOBAL: all198 dependencies identical to reviewed commit a14ce7e450. ARITHMETIQUE:128of129 identical to reviewed commit3554051e0; only programme coverage registry changed, with source-relevance rebinding and no changed disciplinary text or atom. Programme review is not credited."
+      }
+    },
+    {
+      "object_id": "1SPE-DERGLOBAL-EX-034-CDP",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-034-CDP.tex",
+      "source_sha256": "sha256:c0c9b38ab71562344fbb5e96c40866a9a8044f0eb15f4136c699be43d429c03d",
+      "semantic_digest": "sha256:0b053b4c0545a393b9843f67b7fba4f62b25567eedc8816dfb453ae0c80526a1",
+      "dependency_digest": "sha256:98f1bab407ef8845c87ae58a785ea5a50688562a2ccc0a099ce360d63587421f",
+      "review_id": "REPRISE-20260908-1SPE-DERGLOBAL-EX-034-CDP-001",
+      "reviewer": {
+        "actor_id": "/root/astra_delta",
+        "author_actor_id": "/root",
+        "is_human": false,
+        "independent_from_author": true
+      },
+      "dimensions": {
+        "SCIENTIFIC_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "p prime=3(x+2)(x-2), signs +,-,+ around -2 and 2. Local maximum p(-2)=21; local minimum p(2)=-11. The four stationary hints now state a sufficient sign-change test, not a general necessity. The polynomial parents are differentiable on R, so no endpoint or differentiability hypothesis is missing in their scope."
+        },
+        "PEDAGOGICAL_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "Actual object and named current parent/correction were read together; the domain distinction or hint supports the task without a false necessity condition. p prime=3(x+2)(x-2), signs +,-,+ around -2 and 2. Local maximum p(-2)=21; local minimum p(2)=-11."
+        },
+        "CORRECTION_ALIGNMENT_REVIEW": {
+          "state": "VALIDATED_BY_EVIDENCE",
+          "rationale": "The paired source and all indicated parent contexts have the recorded unchanged hashes. p prime=3(x+2)(x-2), signs +,-,+ around -2 and 2. Local maximum p(-2)=21; local minimum p(2)=-11."
+        },
+        "EDITORIAL_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The earlier verdict covered changed text only; a complete editorial review is still required for this dimension."
+        },
+        "PROGRAMME_REVIEW": {
+          "state": "PENDING",
+          "rationale": "The earlier bounded counter-review explicitly did not perform this dimension; no programme credit is inherited."
+        }
+      },
+      "evidence_note": {
+        "path": "audit/reviews/independent/2026-09-08-derglobal-prodscal-corrections.json",
+        "sha256": "sha256:b5fcc449b9462f0938a399f3d0a37f6c4cfe7fa5262d2c11fe418a87ddbd0bc0",
+        "role": "Previously performed independent reading with explicit mathematical reasoning; no old aggregate PASS imported"
+      },
+      "registration": {
+        "actor_id": "/root",
+        "base_head": "2a9a845c23e0de7c6732bf407875a2a2649631b1",
+        "scope": "Only named dimensions, actual reviewed source bytes and current dependency digest. No human authority.",
+        "dependency_delta": "DERGLOBAL: all198 dependencies identical to reviewed commit a14ce7e450. ARITHMETIQUE:128of129 identical to reviewed commit3554051e0; only programme coverage registry changed, with source-relevance rebinding and no changed disciplinary text or atom. Programme review is not credited."
+      }
+    }
+  ]
 }
