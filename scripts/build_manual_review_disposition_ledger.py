@@ -46,6 +46,8 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+from scripts.scientific_receipt_binding import bind as bind_scientific_receipt, usable as scientific_method_usable  # noqa: E402
+
 OUTPUT = ROOT / "audit/1SPE_MANUAL_REVIEW_DISPOSITION_LEDGER.json"
 #: Les deux corpus. Les règles de disposition ci-dessous ne nomment aucun
 #: chapitre, aucun objet, aucune valeur attendue : elles lisent le corps et
@@ -88,6 +90,7 @@ def _meta(text: str) -> dict[str, Any]:
 def build_ledger() -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
     unclassified: list[str] = []
+    rejected = []
     chapitres = sorted(
         (chemin for racine in CHAPTER_ROOTS if racine.is_dir()
          for chemin in racine.iterdir()
@@ -107,12 +110,12 @@ def build_ledger() -> dict[str, Any]:
                 continue
             suffixe = ".sympy.json" if receipt_path.name.endswith(".sympy.json") else ".execution.json"
             stem = receipt_path.name[: -len(suffixe)]
-            source = next((p for p in chapter.rglob(stem + ".tex")), None)
-            if source is None:
-                # Un recu qui survit a son objet : c'est un defaut de preuve,
-                # pas une disposition.
+            binding = bind_scientific_receipt(receipt, chapter, ROOT)
+            if not scientific_method_usable(binding):
                 unclassified.append(stem)
+                rejected.append({"receipt": str(receipt_path.relative_to(ROOT)), **binding})
                 continue
+            source = ROOT / binding["source_path"]
             text = source.read_text(encoding="utf-8")
             meta = _meta(text)
             body = text.split("\n", 1)[1] if "\n" in text else ""
@@ -137,6 +140,7 @@ def build_ledger() -> dict[str, Any]:
                     "object_id": meta.get("id", stem),
                     "type_objet": kind,
                     "path": str(source.relative_to(ROOT)),
+                    "source_sha256": binding["current_source_sha256"],
                     "disposition": disposition,
                     "because": because,
                     "computable_claims": len(claims),
@@ -152,7 +156,7 @@ def build_ledger() -> dict[str, Any]:
     for row in rows:
         by_chapter[row["chapter"]][row["disposition"]] += 1
     digest = hashlib.sha256(
-        "\n".join(f"{r['object_id']}:{r['disposition']}" for r in rows).encode("utf-8")
+        json.dumps([{key: r[key] for key in ("path", "object_id", "source_sha256", "disposition")} for r in rows], sort_keys=True).encode("utf-8")
     ).hexdigest()
     return {
         "artifact_type": "manual_review_disposition_ledger",
@@ -160,6 +164,7 @@ def build_ledger() -> dict[str, Any]:
         "scope": "1SPE",
         "machine_unclassified": len(unclassified),
         "machine_unclassified_ids": sorted(unclassified),
+        "rejected_receipts": rejected,
         "totals": dict(sorted(by_disposition.items())),
         "human_queue_size": by_disposition[HUMAN] + by_disposition[AUTHORITATIVE],
         "per_chapter": {k: dict(sorted(v.items())) for k, v in sorted(by_chapter.items())},

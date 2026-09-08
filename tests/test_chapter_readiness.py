@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -262,7 +263,7 @@ def _recu(dossier: Path, nom: str, charge: dict) -> None:
 
 
 def test_scientific_review_ne_compte_que_les_recus_qui_lient_leur_source(
-    tmp_path: Path,
+    tmp_path: Path, monkeypatch,
 ) -> None:
     """Un `pass` non lie n'est pas une preuve scientifique.
 
@@ -273,7 +274,14 @@ def test_scientific_review_ne_compte_que_les_recus_qui_lient_leur_source(
     preuve sans en etre une.
     """
 
-    chapitre = _chapitre_minimal(tmp_path, "1SPE-TEST-RECUS")
+    chapitre = _chapitre_minimal(tmp_path / "chapitres", "1SPE-TEST-RECUS")
+    source = chapitre / "cours/objet.tex"
+    source.parent.mkdir()
+    source.write_text('% META: {"id":"objet", "type_objet":"cours"}\n$1+1=2$.\n')
+    monkeypatch.setattr(chapter_readiness, "RACINE", tmp_path)
+    verifier = tmp_path / "Mathematiques/manuel-maths/scripts/verify_sympy.py"
+    verifier.parent.mkdir(parents=True)
+    verifier.write_bytes((ROOT / "Mathematiques/manuel-maths/scripts/verify_sympy.py").read_bytes())
     validations = chapitre / "validations"
     _recu(
         validations,
@@ -283,7 +291,9 @@ def test_scientific_review_ne_compte_que_les_recus_qui_lient_leur_source(
             "gate": "sympy",
             "verdict": "pass",
             "source_path": "chapitres/1SPE-TEST-RECUS/cours/objet.tex",
-            "source_sha256": "sha256:" + "0" * 64,
+            "source_sha256": "sha256:" + hashlib.sha256(source.read_bytes()).hexdigest(),
+            "verification_protocol": "EXECUTED_ASSERTIONS_PER_BLOCK_V1",
+            "verifier_sha256": "sha256:" + hashlib.sha256(verifier.read_bytes()).hexdigest(),
         },
     )
     _recu(

@@ -40,6 +40,7 @@ import build_true_pedagogical_coverage as coverage_producer  # noqa: E402
 import capacity_identity  # noqa: E402
 import human_review_governance as governance  # noqa: E402
 import qcm_independent_solver as solver  # noqa: E402
+from scientific_receipt_binding import bind as bind_scientific_receipt, usable as scientific_method_usable  # noqa: E402
 
 JSON_TARGET = ROOT / "audit" / "PUBLISH_READINESS_CHAPTER_MATRIX.json"
 MD_TARGET = ROOT / "audit" / "PUBLISH_READINESS_CHAPTER_MATRIX.md"
@@ -788,9 +789,26 @@ def _oracle(directory: Path, dispositions: dict[str, Any] | None = None) -> dict
     recus = sorted((directory / "validations").glob("*.sympy.json")) + sorted(
         (directory / "validations").glob("*.execution.json")
     )
+    rejected = []
+    manual_targets = {}
+    invalid_manual_receipts = []
     for receipt in recus:
         try:
-            verdicts[json.loads(receipt.read_text(encoding="utf-8"))["verdict"]] += 1
+            record = json.loads(receipt.read_text(encoding="utf-8"))
+            binding = bind_scientific_receipt(record, directory, ROOT)
+            if not scientific_method_usable(binding):
+                rejected.append({"receipt": _relative_to_root(receipt), **binding})
+                verdicts["stale_or_unbound"] += 1
+                if record.get("verdict") == "manual_review":
+                    invalid_manual_receipts.append(_relative_to_root(receipt))
+            else:
+                verdicts[record["verdict"]] += 1
+                if record["verdict"] == "manual_review":
+                    key = (binding["source_path"], binding["canonical_object_id"])
+                    if key in manual_targets:
+                        rejected.append({"receipt": _relative_to_root(receipt), "reason": "DUPLICATE_MANUAL_SOURCE_RECEIPT"})
+                        invalid_manual_receipts.append(_relative_to_root(receipt))
+                    manual_targets[key] = binding
         except (json.JSONDecodeError, KeyError, OSError):
             verdicts["unreadable"] += 1
     receipts = sum(verdicts.values())
@@ -799,13 +817,31 @@ def _oracle(directory: Path, dispositions: dict[str, Any] | None = None) -> dict
         for row in (dispositions or {}).get("objects", [])
         if row.get("chapter") == directory.name
     ]
-    unclassified = verdicts.get("manual_review", 0) - len(routed)
-    human = sum(1 for row in routed if row["disposition"] != "AUCUNE_AFFIRMATION_CALCULABLE")
+    matched = {}
+    rejected_dispositions = []
+    for row in routed:
+        key = (row.get("path"), row.get("object_id"))
+        target = manual_targets.get(key)
+        reason = None
+        if target is None:
+            reason = "NOT_A_CURRENT_MANUAL_REVIEW_OBJECT"
+        elif row.get("source_sha256") != target["current_source_sha256"]:
+            reason = "STALE_OR_MISSING_DISPOSITION_SOURCE_DIGEST"
+        elif row.get("disposition") not in {disposition_producer.NO_CLAIM, disposition_producer.AUTHORITATIVE, disposition_producer.HUMAN}:
+            reason = "UNKNOWN_DISPOSITION"
+        elif key in matched:
+            reason = "DUPLICATE_DISPOSITION"
+        if reason:
+            rejected_dispositions.append({"path": row.get("path"), "object_id": row.get("object_id"), "reason": reason})
+        else:
+            matched[key] = row
+    unclassified = len(set(manual_targets) - set(matched)) + len(invalid_manual_receipts)
+    human = sum(1 for row in matched.values() if row["disposition"] != disposition_producer.NO_CLAIM)
     if not receipts:
         status = "NO_RECEIPTS"
-    elif verdicts.get("fail") or verdicts.get("unreadable"):
+    elif verdicts.get("fail") or verdicts.get("unreadable") or rejected:
         status = "GAP"
-    elif unclassified:
+    elif unclassified or rejected_dispositions:
         status = "GAP"
     else:
         status = "COMPLETE"
@@ -815,6 +851,9 @@ def _oracle(directory: Path, dispositions: dict[str, Any] | None = None) -> dict
         "machine_unclassified": unclassified,
         "human_science_required": human,
         "fail": verdicts.get("fail", 0) + verdicts.get("unreadable", 0),
+        "stale_or_unbound": len(rejected), "rejected_receipts": rejected,
+        "rejected_dispositions": rejected_dispositions,
+        "unclassified_sources": [{"path": path, "object_id": ident} for path, ident in sorted(set(manual_targets) - set(matched))],
         "receipts": receipts,
         "status": status,
     }
@@ -840,7 +879,6 @@ def _machine_science_current(source: Path, chapter_dir: Path) -> bool:
     source, corresponde a son contenu actuel, et porte le verdict `pass`.
     """
 
-    digest = "sha256:" + hashlib.sha256(source.read_bytes()).hexdigest()
     for suffix in ("sympy", "execution"):
         receipt_path = chapter_dir / "validations" / f"{source.stem}.{suffix}.json"
         if not receipt_path.is_file():
@@ -851,7 +889,10 @@ def _machine_science_current(source: Path, chapter_dir: Path) -> bool:
             continue
         if receipt.get("verdict") != "pass":
             continue
-        if receipt.get("source_sha256") == digest:
+        binding = bind_scientific_receipt(receipt, chapter_dir, ROOT)
+        binding_root = ROOT if binding.get("source_path_base") == "repository" else chapter_dir.parent.parent
+        if (scientific_method_usable(binding)
+                and (binding_root / binding["source_path"]).resolve() == source.resolve()):
             return True
     return False
 

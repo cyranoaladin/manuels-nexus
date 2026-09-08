@@ -370,6 +370,8 @@ def _bind_passing_receipt(chapter: Path, stem: str) -> None:
                 "verdict": "pass",
                 "source_path": str(source),
                 "source_sha256": digest,
+                "verification_protocol": "EXECUTED_ASSERTIONS_PER_BLOCK_V1",
+                "verifier_sha256": "sha256:" + hashlib.sha256((ROOT / "Mathematiques/manuel-maths/scripts/verify_sympy.py").read_bytes()).hexdigest(),
             }
         ),
         encoding="utf-8",
@@ -736,9 +738,13 @@ def test_ambiguous_course_ownership_blocks_assembly_truth(producer) -> None:
 
 
 def test_oracle_requires_nonempty_pass_receipts_and_no_manual_review(
-    producer, tmp_path: Path
+    producer, tmp_path: Path, monkeypatch
 ) -> None:
-    chapter = tmp_path / "chapter"
+    chapter = tmp_path / "chapitres/chapter"
+    monkeypatch.setattr(producer, "ROOT", tmp_path)
+    verifier = tmp_path / "Mathematiques/manuel-maths/scripts/verify_sympy.py"
+    verifier.parent.mkdir(parents=True)
+    verifier.write_bytes((ROOT / "Mathematiques/manuel-maths/scripts/verify_sympy.py").read_bytes())
     validations = chapter / "validations"
     validations.mkdir(parents=True)
     assert producer._oracle(chapter)["status"] == "NO_RECEIPTS"
@@ -748,9 +754,22 @@ def test_oracle_requires_nonempty_pass_receipts_and_no_manual_review(
     )
     assert producer._oracle(chapter)["status"] == "GAP"
 
+    # A pass without its real source is not a scientific receipt.
     (validations / "one.sympy.json").write_text(
         json.dumps({"verdict": "pass"}), encoding="utf-8"
     )
+    assert producer._oracle(chapter)["status"] == "GAP"
+    source = chapter / "cours/one.tex"
+    source.parent.mkdir()
+    source.write_text('% META: {"id":"one", "type_objet":"cours"}\n$1+1=2$.\n')
+    import hashlib
+    (validations / "one.sympy.json").write_text(json.dumps({
+        "objet_id": "one", "gate": "sympy", "verdict": "pass",
+        "source_path": str(source.relative_to(tmp_path)),
+        "source_sha256": "sha256:" + hashlib.sha256(source.read_bytes()).hexdigest(),
+        "verification_protocol": "EXECUTED_ASSERTIONS_PER_BLOCK_V1",
+        "verifier_sha256": "sha256:" + hashlib.sha256(verifier.read_bytes()).hexdigest(),
+    }))
     assert producer._oracle(chapter)["status"] == "COMPLETE"
 
 

@@ -36,12 +36,14 @@ from pathlib import Path
 import yaml
 
 try:
+    from scripts.scientific_receipt_binding import bind as bind_scientific_receipt, usable as scientific_method_usable
     from scripts.capacity_identity import (
         CapacityIdentityResolver,
         PREREQUISITE,
         UnresolvedCapacityIdentity,
     )
 except ModuleNotFoundError:  # exécution directe depuis scripts/
+    from scientific_receipt_binding import bind as bind_scientific_receipt, usable as scientific_method_usable
     from capacity_identity import (  # type: ignore[no-redef]
         CapacityIdentityResolver,
         PREREQUISITE,
@@ -130,6 +132,7 @@ class Chapitre:
     evaluation_B: bool = False
     scientific_review: dict = field(default_factory=dict)
     unbound_receipts: dict = field(default_factory=dict)
+    rejected_receipts: list = field(default_factory=list)
     programme_review: str = "non_verifie"
     contract_status: str = "absent"
     student_build: bool = False
@@ -391,9 +394,12 @@ def analyser(
             except json.JSONDecodeError:
                 continue
             verdict = str(donnees.get("verdict", "inconnu"))
-            if donnees.get("source_sha256"):
+            binding = bind_scientific_receipt(donnees, dossier, RACINE)
+            if scientific_method_usable(binding):
                 verdicts[verdict] = verdicts.get(verdict, 0) + 1
                 continue
+            if donnees.get("source_sha256"):
+                ch.rejected_receipts.append({"receipt": str(recu), **binding})
             gate = str(donnees.get("gate") or "").strip()
             if not gate:
                 # Un recu sans gate declare est nomme par son suffixe de
@@ -419,6 +425,8 @@ def analyser(
 
     # --- constats bloquants ---------------------------------------------------
     b = ch.blocking_findings
+    if ch.rejected_receipts:
+        b.append(f"{len(ch.rejected_receipts)} validation(s) sans liaison courante à la source")
     if ch.capabilities_total == 0:
         b.append("aucune capacite declaree au contrat")
     if ch.capabilities_mapped < ch.capabilities_total:
