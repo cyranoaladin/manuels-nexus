@@ -1,11 +1,17 @@
 % META: {"id":"1SPE-PRODSCAL-CO-016","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-016","status":"generated"}
 % BEGIN-VERIFY
-% from sympy import *
-% # u.v = (||u+v||^2 - ||u||^2 - ||v||^2)/2 = (49 - 9 - 25)/2 = 15/2
-% assert (49 - 9 - 25) == 15
-% assert Rational(15, 2) == Rational(15, 2)
+% from sympy import Matrix, Rational, sqrt
+% # Une réalisation exacte des trois normes annoncées, dans un repère orthonormé.
+% u = Matrix([3, 0])
+% v = Matrix([Rational(5, 2), 5*sqrt(3)/2])
+% assert u.dot(u) == 9
+% assert v.dot(v) == 25
+% assert (u+v).dot(u+v) == 49
+% polarization = ((u+v).dot(u+v) - u.dot(u) - v.dot(v))/2
+% assert polarization == u.dot(v)
+% assert u.dot(v) == Rational(15, 2)
 % END-VERIFY
 \begin{corrige}{1SPE-PRODSCAL-EX-016}
-On utilise l'identite de polarisation :
+On utilise l'identité de polarisation :
 $\vec{u} \cdot \vec{v} = \dfrac{\|\vec{u} + \vec{v}\|^2 - \|\vec{u}\|^2 - \|\vec{v}\|^2}{2} = \dfrac{49 - 9 - 25}{2} = \dfrac{15}{2}$.
 \end{corrige}

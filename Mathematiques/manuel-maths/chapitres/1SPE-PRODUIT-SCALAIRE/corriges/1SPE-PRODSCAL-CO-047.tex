@@ -1,10 +1,20 @@
 % META: {"id":"1SPE-PRODSCAL-CO-047","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-047","status":"generated"}
 % BEGIN-VERIFY
-% from sympy import *
-% # Demo Al-Kashi
-% b, c, A = symbols('b c A', positive=True)
-% a_sq = b**2 + c**2 - 2*b*c*cos(A)
-% assert simplify(a_sq.subs(A, pi/2) - b**2 - c**2) == 0
+% from sympy import Matrix, symbols, cos, sin, trigsimp, expand, pi
+% b, c = symbols('b c', positive=True)
+% theta = symbols('theta', real=True)
+% # Construction du troisième côté dans un repère orthonormé.
+% AB = Matrix([c, 0])
+% AC = Matrix([b*cos(theta), b*sin(theta)])
+% BC = AC - AB
+% a_sq = BC.dot(BC)
+% assert AB.dot(AB) == c**2
+% assert trigsimp(AC.dot(AC) - b**2) == 0
+% assert AB.dot(AC) == b*c*cos(theta)
+% assert trigsimp(a_sq - (b**2+c**2-2*b*c*cos(theta))) == 0
+% # Cas particuliers complémentaires ; ils ne remplacent pas l'identité générale.
+% assert trigsimp(a_sq.subs(theta, pi/2) - (b**2+c**2)) == 0
+% assert expand(a_sq.subs(theta, pi/3) - (b**2+c**2-b*c)) == 0
 % END-VERIFY
 \begin{corrige}{1SPE-PRODSCAL-EX-047}
 $\overrightarrow{BC} = \overrightarrow{AC} - \overrightarrow{AB}$, donc :

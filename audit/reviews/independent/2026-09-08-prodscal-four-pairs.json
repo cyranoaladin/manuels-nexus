@@ -1,0 +1,390 @@
+{
+  "artifact_type": "independent_four_pair_review_and_correction_note",
+  "date": "2026-09-08",
+  "head_at_recording": "886a3be10497e1a9d9b3b3825c02220842da09d9",
+  "head_scope": "Sources de travail liées par SHA256 ; ces corrections ne sont pas présentées comme une preuve du HEAD propre.",
+  "reviewer_and_correction_author": "/root/astra_delta",
+  "scope": "Huit sources, quatre paires PRODSCAL 005, 016, 018 et 047 entièrement lues. Aucune clôture de chapitre.",
+  "status": "INDEPENDENTLY_COUNTER_REVIEWED_IN_BOUNDED_SCOPE",
+  "human_approval": false,
+  "programme_evidence": {
+    "source": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+    "source_sha256": "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
+    "official_NOR": "MENE2602917A",
+    "lines": [
+      540,
+      574
+    ],
+    "official_atom_changed": false
+  },
+  "findings_corrected": [
+    {
+      "id": "PRODSCAL-005-WRONG-ORACLE",
+      "severity": "CERTIFICATION_DEFECT",
+      "defect": "Le second produit de l’oracle était sans rapport avec les points réels de l’énoncé."
+    },
+    {
+      "id": "PRODSCAL-005-FRAME",
+      "severity": "P0",
+      "defect": "Le repère orthonormé nécessaire au calcul coordonné n’était pas précisé."
+    },
+    {
+      "id": "PRODSCAL-016-018-TAUTOLOGY",
+      "severity": "CERTIFICATION_DEFECT",
+      "defect": "Les assertions de résultat se comparaient à elles-mêmes et ne vérifiaient pas la preuve annoncée."
+    },
+    {
+      "id": "PRODSCAL-018-GEOMETRY",
+      "severity": "P0",
+      "defect": "L’interprétation par un losange ne distinguait pas la figure non dégénérée et l’équivalence vectorielle générale."
+    },
+    {
+      "id": "PRODSCAL-047-RIGHT-ANGLE-ONLY",
+      "severity": "CERTIFICATION_DEFECT",
+      "defect": "Seul le cas cosinus nul était vérifié, ce qui rendait le terme croisé invisible."
+    },
+    {
+      "id": "PRODSCAL-FOUR-DURATIONS",
+      "severity": "EDITORIAL_DEFECT",
+      "defect": "La durée META était 5 minutes pour quatre environnements imprimant 6, 6, 8 et 10 minutes."
+    }
+  ],
+  "verification": {
+    "test_source": "tests/test_prodscal_remaining_oracle_alignment.py",
+    "test_source_sha256": "sha256:d80893a833ca6fd09d953085f8b376045338bb9cd42e479f44c10b877cc364ec",
+    "initial_red": "12 failed sur les sources originales ; /tmp/prodscal-remaining-oracles-red.log.",
+    "green": "16 passed, dont quatre mutations permanentes via le helper canonique existant ; ruff et git diff --check passent.",
+    "canonical_mutations": [
+      {
+        "mutation": "005_point",
+        "source_fixture": "/tmp/nexus-prodscal-four-pairs-fresh-fgg1zq7j/Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-005.tex",
+        "expected_failed_object": "1SPE-PRODSCAL-EX-005",
+        "rc": 1,
+        "verdict": "fail",
+        "reason": "Traceback (most recent call last):\n  File \"<string>\", line 46, in <module>\n  File \"<string>\", line 40, in execute\n  File \"<oracle-block-1>\", line 7, in <module>\nAssertionError"
+      },
+      {
+        "mutation": "016_norm_realization",
+        "source_fixture": "/tmp/nexus-prodscal-four-pairs-fresh-fgg1zq7j/Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-016.tex",
+        "expected_failed_object": "1SPE-PRODSCAL-EX-016",
+        "rc": 1,
+        "verdict": "fail",
+        "reason": "Traceback (most recent call last):\n  File \"<string>\", line 46, in <module>\n  File \"<string>\", line 40, in execute\n  File \"<oracle-block-1>\", line 6, in <module>\nAssertionError"
+      },
+      {
+        "mutation": "018_bilinear_sign",
+        "source_fixture": "/tmp/nexus-prodscal-four-pairs-fresh-fgg1zq7j/Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-018.tex",
+        "expected_failed_object": "1SPE-PRODSCAL-EX-018",
+        "rc": 1,
+        "verdict": "fail",
+        "reason": "Traceback (most recent call last):\n  File \"<string>\", line 46, in <module>\n  File \"<string>\", line 40, in execute\n  File \"<oracle-block-1>\", line 4, in <module>\nAssertionError"
+      },
+      {
+        "mutation": "047_missing_mixed_term",
+        "source_fixture": "/tmp/nexus-prodscal-four-pairs-fresh-fgg1zq7j/Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-047.tex",
+        "expected_failed_object": "1SPE-PRODSCAL-EX-047",
+        "rc": 1,
+        "verdict": "fail",
+        "reason": "Traceback (most recent call last):\n  File \"<string>\", line 46, in <module>\n  File \"<string>\", line 40, in execute\n  File \"<oracle-block-1>\", line 12, in <module>\nAssertionError"
+      }
+    ],
+    "tautology_guard_mutations": [
+      {
+        "mutation": "016_reflexive_assertion",
+        "caught": true
+      },
+      {
+        "mutation": "018_reflexive_assertion",
+        "caught": true
+      }
+    ],
+    "mutation_scope": "Toutes les mutations ont porté exclusivement sur des copies temporaires. Chaque mutation canonique produit un seul objet attendu en fail ; tous les autres restent pass. Les sources réelles ont été vérifiées immuables par SHA256.",
+    "execution": {
+      "execution_root": "/tmp/nexus-prodscal-four-pairs-fresh-fgg1zq7j",
+      "command": [
+        "/usr/bin/python",
+        "/tmp/nexus-prodscal-four-pairs-fresh-fgg1zq7j/Mathematiques/manuel-maths/scripts/verify_sympy.py",
+        "--chap",
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "cwd": "/tmp/nexus-prodscal-four-pairs-fresh-fgg1zq7j",
+      "rc": 0,
+      "stdout": "[OK ] 1SPE-PRODSCAL-CO-005: \n[OK ] 1SPE-PRODSCAL-CO-016: \n[OK ] 1SPE-PRODSCAL-CO-018: \n[OK ] 1SPE-PRODSCAL-CO-047: \n[OK ] 1SPE-PRODSCAL-EX-005: \n[OK ] 1SPE-PRODSCAL-EX-016: \n[OK ] 1SPE-PRODSCAL-EX-018: \n[OK ] 1SPE-PRODSCAL-EX-047: \n",
+      "stderr": "",
+      "network_denial": {
+        "mechanism": "libseccomp inherited syscall filter",
+        "probe_rc": 0,
+        "probe_stdout": "network syscalls refused for IPv4, IPv6 and Unix sockets\n"
+      },
+      "input_digests": {
+        "chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-005.tex": "sha256:2484c316632c27be797f760ddce97338cd8245fe07462201dc410fd9a84ec21e",
+        "chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-005.tex": "sha256:f670d3d721b24637581816777dcc6066279006bc0c3b659941462150c339db91",
+        "chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-016.tex": "sha256:d4cf387f366c5ad9d962c25200309e079a291ff3ad704674117e333e7b990138",
+        "chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-016.tex": "sha256:2d5d6507ae4344c6d59795517a3b21dfcb85cc65c188e08b15706328e6005498",
+        "chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-018.tex": "sha256:11e17c00b651986f55ca2c9fdc758652bee84cc9288f1ff591e1ce74c4b68cfe",
+        "chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-018.tex": "sha256:051c7e4d33a5dd297fbcd03738f88cfb5e8238ea42fe7a94ce11b0a29d296b69",
+        "chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-047.tex": "sha256:faf416f551b6a761a4381edda4d806bc48143573f91f17e5711f28e1ffc19a10",
+        "chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-047.tex": "sha256:e4d99b370225436bf856959489af39e7b9ac617bbcdb82468db49c031b93a1b2",
+        "scripts/verify_sympy.py": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e",
+        "scripts/common.py": "sha256:f1dd76d4f5f354800fba1dc8ab84dfa3ab5c61b8f8f3093956d146195f520d0c"
+      },
+      "records": [
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-005.tex",
+          "source_sha256": "sha256:2484c316632c27be797f760ddce97338cd8245fe07462201dc410fd9a84ec21e",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-005.sympy.json",
+          "receipt_sha256": "sha256:341036c55fb257ef3dde4e2a6aad1ab08847eb949c92f4acd71ee62f93768ff1",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-005.tex",
+          "source_sha256": "sha256:f670d3d721b24637581816777dcc6066279006bc0c3b659941462150c339db91",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-005.sympy.json",
+          "receipt_sha256": "sha256:73545934c23c28d0e11f796c91137466217021fad4541d93ab7442c36200eaff",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-016.tex",
+          "source_sha256": "sha256:d4cf387f366c5ad9d962c25200309e079a291ff3ad704674117e333e7b990138",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-016.sympy.json",
+          "receipt_sha256": "sha256:141105ba526fd91cf9cc7da28bee5a29bd3da7aac136ada956f49d6c4cd118ea",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-016.tex",
+          "source_sha256": "sha256:2d5d6507ae4344c6d59795517a3b21dfcb85cc65c188e08b15706328e6005498",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-016.sympy.json",
+          "receipt_sha256": "sha256:70d6fb7b3fb41367f35c9275db2921974b1920fa5d4dcdd6f721a63ba7c7f553",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-018.tex",
+          "source_sha256": "sha256:11e17c00b651986f55ca2c9fdc758652bee84cc9288f1ff591e1ce74c4b68cfe",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-018.sympy.json",
+          "receipt_sha256": "sha256:efaf2fb9aa63e5d83b067e7d1d03747d1f684cbb8e57e68593884c244485eb9f",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-018.tex",
+          "source_sha256": "sha256:051c7e4d33a5dd297fbcd03738f88cfb5e8238ea42fe7a94ce11b0a29d296b69",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-018.sympy.json",
+          "receipt_sha256": "sha256:92249493e2be549776efa41539764e0c3f5d176610fa169b8b6ecfd080195368",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-047.tex",
+          "source_sha256": "sha256:faf416f551b6a761a4381edda4d806bc48143573f91f17e5711f28e1ffc19a10",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-047.sympy.json",
+          "receipt_sha256": "sha256:a1d83f9139a34fcea309aa0050847aeba7c87ed23a8abf53de8d7541f01387cc",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-047.tex",
+          "source_sha256": "sha256:e4d99b370225436bf856959489af39e7b9ac617bbcdb82468db49c031b93a1b2",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-047.sympy.json",
+          "receipt_sha256": "sha256:07c6e501fbbcc9f223e0de026d1fa181f6410fd3a568e47f8dfdff5ed8aff6d6",
+          "verdict": "pass"
+        }
+      ],
+      "human_approval": false
+    },
+    "permanent_mutations": {
+      "helper": "tests.test_prodscal_remaining_scientific_regressions._run_fixture",
+      "behavior": "Pour chacune des quatre sources, la fixture intacte doit retourner 0 puis sa mutation pertinente doit retourner 1.",
+      "execution": "Suite ciblée exécutée avec filtre seccomp hérité refusant les appels réseau.",
+      "log": "/tmp/PRODSCAL_FOUR_PAIRS_PERMANENT_MUTATION_TESTS.log"
+    }
+  },
+  "objects": [
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-005.tex",
+      "source_sha256": "sha256:2484c316632c27be797f760ddce97338cd8245fe07462201dc410fd9a84ec21e",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-005.sympy.json",
+      "receipt_sha256": "sha256:341036c55fb257ef3dde4e2a6aad1ab08847eb949c92f4acd71ee62f93768ff1",
+      "verdict": "pass",
+      "object_id": "1SPE-PRODSCAL-EX-005",
+      "before_review_source_sha256": "sha256:b9d16c47cc3558d90505916afd8dfb6d1ce2bb681844707447b8108b7e0500bc",
+      "status": "INDEPENDENTLY_COUNTER_REVIEWED_IN_BOUNDED_SCOPE",
+      "read_extent": "Source entière, métadonnées, toutes les questions ou réponses et bloc oracle.",
+      "human_approval": false,
+      "independent_scientific_reasoning": [
+        "Dans un repère orthonormé, soustraire les coordonnées donne AB=(2,3), AC=(−1,4), BA=(−2,−3), BC=(−3,1). Les produits scalaires sont −2+12=10 et 6−3=3. Le corrigé imprimé avait déjà ces résultats corrects ; l’ancien oracle calculait au second rang un autre produit, égal à −17, sans rapport avec les points.",
+        "Le nouvel oracle construit les trois points, en déduit les quatre vecteurs, contrôle leurs coordonnées, l’opposition BA=−AB et les deux produits. Une mutation du point A seule fait échouer les assertions : les entrées correspondent réellement à l’énoncé. L’hypothèse de repère orthonormé est maintenant explicite."
+      ],
+      "programme_review": "Produit scalaire en repère orthonormé, bilinéarité, orthogonalité et loi des cosinus du programme de Première ; aucune référence officielle ni capacité modifiée.",
+      "pedagogical_review": "Les tâches originales sont conservées. Les hypothèses sont explicites et les indications restent conformes au problème. Les durées META concordent avec les durées imprimées de 6, 6, 8 et 10 minutes. Aucun exercice ni quota ajouté.",
+      "editorial_review": "Diacritiques corrigées là où lues, notamment identité, parallélogramme et côtés. Le statut source generated est conservé. Aucun verdict PDF.",
+      "correction_alignment_review": "Énoncé et corrigé du couple entier lus et résolus ; la preuve et les résultats correspondent. Les anciens oracles sans rapport ou réflexifs ne sont plus réutilisés."
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-005.tex",
+      "source_sha256": "sha256:f670d3d721b24637581816777dcc6066279006bc0c3b659941462150c339db91",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-005.sympy.json",
+      "receipt_sha256": "sha256:73545934c23c28d0e11f796c91137466217021fad4541d93ab7442c36200eaff",
+      "verdict": "pass",
+      "object_id": "1SPE-PRODSCAL-CO-005",
+      "before_review_source_sha256": "sha256:1ccd24183d68e82b9b80a8e96c856c55f4c729cf0410c115131f90e3ad8719de",
+      "status": "INDEPENDENTLY_COUNTER_REVIEWED_IN_BOUNDED_SCOPE",
+      "read_extent": "Source entière, métadonnées, toutes les questions ou réponses et bloc oracle.",
+      "human_approval": false,
+      "independent_scientific_reasoning": [
+        "Dans un repère orthonormé, soustraire les coordonnées donne AB=(2,3), AC=(−1,4), BA=(−2,−3), BC=(−3,1). Les produits scalaires sont −2+12=10 et 6−3=3. Le corrigé imprimé avait déjà ces résultats corrects ; l’ancien oracle calculait au second rang un autre produit, égal à −17, sans rapport avec les points.",
+        "Le nouvel oracle construit les trois points, en déduit les quatre vecteurs, contrôle leurs coordonnées, l’opposition BA=−AB et les deux produits. Une mutation du point A seule fait échouer les assertions : les entrées correspondent réellement à l’énoncé. L’hypothèse de repère orthonormé est maintenant explicite."
+      ],
+      "programme_review": "Produit scalaire en repère orthonormé, bilinéarité, orthogonalité et loi des cosinus du programme de Première ; aucune référence officielle ni capacité modifiée.",
+      "pedagogical_review": "Les tâches originales sont conservées. Les hypothèses sont explicites et les indications restent conformes au problème. Les durées META concordent avec les durées imprimées de 6, 6, 8 et 10 minutes. Aucun exercice ni quota ajouté.",
+      "editorial_review": "Diacritiques corrigées là où lues, notamment identité, parallélogramme et côtés. Le statut source generated est conservé. Aucun verdict PDF.",
+      "correction_alignment_review": "Énoncé et corrigé du couple entier lus et résolus ; la preuve et les résultats correspondent. Les anciens oracles sans rapport ou réflexifs ne sont plus réutilisés."
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-016.tex",
+      "source_sha256": "sha256:d4cf387f366c5ad9d962c25200309e079a291ff3ad704674117e333e7b990138",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-016.sympy.json",
+      "receipt_sha256": "sha256:141105ba526fd91cf9cc7da28bee5a29bd3da7aac136ada956f49d6c4cd118ea",
+      "verdict": "pass",
+      "object_id": "1SPE-PRODSCAL-EX-016",
+      "before_review_source_sha256": "sha256:e93601e30c72eb0e0a647a074ddfbc65506bade54173210f4763643f94650bfe",
+      "status": "INDEPENDENTLY_COUNTER_REVIEWED_IN_BOUNDED_SCOPE",
+      "read_extent": "Source entière, métadonnées, toutes les questions ou réponses et bloc oracle.",
+      "human_approval": false,
+      "independent_scientific_reasoning": [
+        "La polarisation donne 2 u·v=||u+v||²−||u||²−||v||²=49−9−25=15, donc u·v=15/2. Les données sont réalisables : dans une base orthonormée, u=(3,0) et v=(5/2,5√3/2) ont les normes 3 et 5, et leur somme a pour norme 7. Leur produit scalaire vaut 15/2.",
+        "Le nouvel oracle vérifie ces trois carrés de normes, puis compare la polarisation au véritable produit scalaire des coordonnées. Il ne se limite plus à comparer la valeur 15/2 avec elle-même. Le changement de la seconde coordonnée de v fait échouer le gate ; le retour d’une assertion réflexive est rejeté par le test de garde."
+      ],
+      "programme_review": "Produit scalaire en repère orthonormé, bilinéarité, orthogonalité et loi des cosinus du programme de Première ; aucune référence officielle ni capacité modifiée.",
+      "pedagogical_review": "Les tâches originales sont conservées. Les hypothèses sont explicites et les indications restent conformes au problème. Les durées META concordent avec les durées imprimées de 6, 6, 8 et 10 minutes. Aucun exercice ni quota ajouté.",
+      "editorial_review": "Diacritiques corrigées là où lues, notamment identité, parallélogramme et côtés. Le statut source generated est conservé. Aucun verdict PDF.",
+      "correction_alignment_review": "Énoncé et corrigé du couple entier lus et résolus ; la preuve et les résultats correspondent. Les anciens oracles sans rapport ou réflexifs ne sont plus réutilisés."
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-016.tex",
+      "source_sha256": "sha256:2d5d6507ae4344c6d59795517a3b21dfcb85cc65c188e08b15706328e6005498",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-016.sympy.json",
+      "receipt_sha256": "sha256:70d6fb7b3fb41367f35c9275db2921974b1920fa5d4dcdd6f721a63ba7c7f553",
+      "verdict": "pass",
+      "object_id": "1SPE-PRODSCAL-CO-016",
+      "before_review_source_sha256": "sha256:0ccc0a4f82d06aa9f75655594980ec3fee2aceeb0f810ae250b7ef7e1bad5b79",
+      "status": "INDEPENDENTLY_COUNTER_REVIEWED_IN_BOUNDED_SCOPE",
+      "read_extent": "Source entière, métadonnées, toutes les questions ou réponses et bloc oracle.",
+      "human_approval": false,
+      "independent_scientific_reasoning": [
+        "La polarisation donne 2 u·v=||u+v||²−||u||²−||v||²=49−9−25=15, donc u·v=15/2. Les données sont réalisables : dans une base orthonormée, u=(3,0) et v=(5/2,5√3/2) ont les normes 3 et 5, et leur somme a pour norme 7. Leur produit scalaire vaut 15/2.",
+        "Le nouvel oracle vérifie ces trois carrés de normes, puis compare la polarisation au véritable produit scalaire des coordonnées. Il ne se limite plus à comparer la valeur 15/2 avec elle-même. Le changement de la seconde coordonnée de v fait échouer le gate ; le retour d’une assertion réflexive est rejeté par le test de garde."
+      ],
+      "programme_review": "Produit scalaire en repère orthonormé, bilinéarité, orthogonalité et loi des cosinus du programme de Première ; aucune référence officielle ni capacité modifiée.",
+      "pedagogical_review": "Les tâches originales sont conservées. Les hypothèses sont explicites et les indications restent conformes au problème. Les durées META concordent avec les durées imprimées de 6, 6, 8 et 10 minutes. Aucun exercice ni quota ajouté.",
+      "editorial_review": "Diacritiques corrigées là où lues, notamment identité, parallélogramme et côtés. Le statut source generated est conservé. Aucun verdict PDF.",
+      "correction_alignment_review": "Énoncé et corrigé du couple entier lus et résolus ; la preuve et les résultats correspondent. Les anciens oracles sans rapport ou réflexifs ne sont plus réutilisés."
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-018.tex",
+      "source_sha256": "sha256:11e17c00b651986f55ca2c9fdc758652bee84cc9288f1ff591e1ce74c4b68cfe",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-018.sympy.json",
+      "receipt_sha256": "sha256:efaf2fb9aa63e5d83b067e7d1d03747d1f684cbb8e57e68593884c244485eb9f",
+      "verdict": "pass",
+      "object_id": "1SPE-PRODSCAL-EX-018",
+      "before_review_source_sha256": "sha256:e329fc5f6f4a5e59e6f40ebe15d4ee5def7dbddd675f4553588ca33c5aa9984e",
+      "status": "INDEPENDENTLY_COUNTER_REVIEWED_IN_BOUNDED_SCOPE",
+      "read_extent": "Source entière, métadonnées, toutes les questions ou réponses et bloc oracle.",
+      "human_approval": false,
+      "independent_scientific_reasoning": [
+        "Pour tous vecteurs réels u,v, la bilinéarité et la symétrie donnent (u+v)·(u−v)=u·u−u·v+v·u−v·v=||u||²−||v||². L’annulation est équivalente à l’égalité des carrés de normes. Comme les normes sont non négatives, elle équivaut à l’égalité des normes, y compris lorsque l’une ou les deux sont nulles. Si une seule est nulle, l’égalité oblige l’autre à être nulle aussi.",
+        "Le nouvel oracle calcule le produit de deux sommes/différences de vecteurs à quatre coordonnées réelles quelconques. Pour l’équivalence entre carrés et nombres non négatifs, solveset traite séparément r>0 et r=0 sur [0,+∞[. Le cas symbolique seulement non négatif n’étant pas complètement simplifié par SymPy, aucun résultat forcé n’est utilisé : les deux cas couvrent exactement le domaine.",
+        "L’interprétation par les diagonales d’un parallélogramme exige deux côtés non colinéaires pour avoir une figure non dégénérée. Cette hypothèse figure seulement dans l’interprétation géométrique ; elle ne restreint pas l’équivalence vectorielle. L’orthogonalité des vecteurs nuls est explicitement comprise au sens du produit scalaire nul."
+      ],
+      "programme_review": "Produit scalaire en repère orthonormé, bilinéarité, orthogonalité et loi des cosinus du programme de Première ; aucune référence officielle ni capacité modifiée.",
+      "pedagogical_review": "Les tâches originales sont conservées. Les hypothèses sont explicites et les indications restent conformes au problème. Les durées META concordent avec les durées imprimées de 6, 6, 8 et 10 minutes. Aucun exercice ni quota ajouté.",
+      "editorial_review": "Diacritiques corrigées là où lues, notamment identité, parallélogramme et côtés. Le statut source generated est conservé. Aucun verdict PDF.",
+      "correction_alignment_review": "Énoncé et corrigé du couple entier lus et résolus ; la preuve et les résultats correspondent. Les anciens oracles sans rapport ou réflexifs ne sont plus réutilisés."
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-018.tex",
+      "source_sha256": "sha256:051c7e4d33a5dd297fbcd03738f88cfb5e8238ea42fe7a94ce11b0a29d296b69",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-018.sympy.json",
+      "receipt_sha256": "sha256:92249493e2be549776efa41539764e0c3f5d176610fa169b8b6ecfd080195368",
+      "verdict": "pass",
+      "object_id": "1SPE-PRODSCAL-CO-018",
+      "before_review_source_sha256": "sha256:b06e18529d043858b87b5f79b1dd8f01aaca04bbe09612c8a88d3417a44bed0b",
+      "status": "INDEPENDENTLY_COUNTER_REVIEWED_IN_BOUNDED_SCOPE",
+      "read_extent": "Source entière, métadonnées, toutes les questions ou réponses et bloc oracle.",
+      "human_approval": false,
+      "independent_scientific_reasoning": [
+        "Pour tous vecteurs réels u,v, la bilinéarité et la symétrie donnent (u+v)·(u−v)=u·u−u·v+v·u−v·v=||u||²−||v||². L’annulation est équivalente à l’égalité des carrés de normes. Comme les normes sont non négatives, elle équivaut à l’égalité des normes, y compris lorsque l’une ou les deux sont nulles. Si une seule est nulle, l’égalité oblige l’autre à être nulle aussi.",
+        "Le nouvel oracle calcule le produit de deux sommes/différences de vecteurs à quatre coordonnées réelles quelconques. Pour l’équivalence entre carrés et nombres non négatifs, solveset traite séparément r>0 et r=0 sur [0,+∞[. Le cas symbolique seulement non négatif n’étant pas complètement simplifié par SymPy, aucun résultat forcé n’est utilisé : les deux cas couvrent exactement le domaine.",
+        "L’interprétation par les diagonales d’un parallélogramme exige deux côtés non colinéaires pour avoir une figure non dégénérée. Cette hypothèse figure seulement dans l’interprétation géométrique ; elle ne restreint pas l’équivalence vectorielle. L’orthogonalité des vecteurs nuls est explicitement comprise au sens du produit scalaire nul."
+      ],
+      "programme_review": "Produit scalaire en repère orthonormé, bilinéarité, orthogonalité et loi des cosinus du programme de Première ; aucune référence officielle ni capacité modifiée.",
+      "pedagogical_review": "Les tâches originales sont conservées. Les hypothèses sont explicites et les indications restent conformes au problème. Les durées META concordent avec les durées imprimées de 6, 6, 8 et 10 minutes. Aucun exercice ni quota ajouté.",
+      "editorial_review": "Diacritiques corrigées là où lues, notamment identité, parallélogramme et côtés. Le statut source generated est conservé. Aucun verdict PDF.",
+      "correction_alignment_review": "Énoncé et corrigé du couple entier lus et résolus ; la preuve et les résultats correspondent. Les anciens oracles sans rapport ou réflexifs ne sont plus réutilisés."
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-047.tex",
+      "source_sha256": "sha256:faf416f551b6a761a4381edda4d806bc48143573f91f17e5711f28e1ffc19a10",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-047.sympy.json",
+      "receipt_sha256": "sha256:a1d83f9139a34fcea309aa0050847aeba7c87ed23a8abf53de8d7541f01387cc",
+      "verdict": "pass",
+      "object_id": "1SPE-PRODSCAL-EX-047",
+      "before_review_source_sha256": "sha256:d33dc305ab2c5b7200ca35f272f6ecff06cf70aef9f19f27eba09903b71fa2a6",
+      "status": "INDEPENDENTLY_COUNTER_REVIEWED_IN_BOUNDED_SCOPE",
+      "read_extent": "Source entière, métadonnées, toutes les questions ou réponses et bloc oracle.",
+      "human_approval": false,
+      "independent_scientific_reasoning": [
+        "Pour un triangle, BC=AC−AB. Développer la norme carrée donne BC²=AC²+AB²−2 AB·AC ; la définition par l’angle fournit AB·AC=AB×AC×cos(BAC), d’où la formule. Le signe négatif vient de la différence des vecteurs, et l’identité est générale, pas limitée à un angle droit.",
+        "Le nouvel oracle construit AB=(c,0) et AC=(b cos θ,b sin θ), avec b,c positifs et θ réel. Le carré de norme de BC est (b cos θ−c)²+b² sin² θ, qui se réduit à b²+c²−2bc cos θ pour tout θ. Les angles π/2 et π/3 ne sont que des cas complémentaires. La suppression du terme croisé fait maintenant échouer le gate, alors que l’ancien unique contrôle en π/2 l’aurait laissée passer.",
+        "Une première exécution a signalé le dernier contrôle en π/3 : trigsimp seul ne développait pas le polynôme restant. La réduction algébrique exacte expand a été utilisée pour ce cas, sans modifier l’égalité attendue ni la preuve générale. La nouvelle exécution canonique des huit sources est verte."
+      ],
+      "programme_review": "Produit scalaire en repère orthonormé, bilinéarité, orthogonalité et loi des cosinus du programme de Première ; aucune référence officielle ni capacité modifiée.",
+      "pedagogical_review": "Les tâches originales sont conservées. Les hypothèses sont explicites et les indications restent conformes au problème. Les durées META concordent avec les durées imprimées de 6, 6, 8 et 10 minutes. Aucun exercice ni quota ajouté.",
+      "editorial_review": "Diacritiques corrigées là où lues, notamment identité, parallélogramme et côtés. Le statut source generated est conservé. Aucun verdict PDF.",
+      "correction_alignment_review": "Énoncé et corrigé du couple entier lus et résolus ; la preuve et les résultats correspondent. Les anciens oracles sans rapport ou réflexifs ne sont plus réutilisés."
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-047.tex",
+      "source_sha256": "sha256:e4d99b370225436bf856959489af39e7b9ac617bbcdb82468db49c031b93a1b2",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-047.sympy.json",
+      "receipt_sha256": "sha256:07c6e501fbbcc9f223e0de026d1fa181f6410fd3a568e47f8dfdff5ed8aff6d6",
+      "verdict": "pass",
+      "object_id": "1SPE-PRODSCAL-CO-047",
+      "before_review_source_sha256": "sha256:be56a93793581c95fd5d480fa5ab98282bb7479956269bbfc85f46ea5b5b2b33",
+      "status": "INDEPENDENTLY_COUNTER_REVIEWED_IN_BOUNDED_SCOPE",
+      "read_extent": "Source entière, métadonnées, toutes les questions ou réponses et bloc oracle.",
+      "human_approval": false,
+      "independent_scientific_reasoning": [
+        "Pour un triangle, BC=AC−AB. Développer la norme carrée donne BC²=AC²+AB²−2 AB·AC ; la définition par l’angle fournit AB·AC=AB×AC×cos(BAC), d’où la formule. Le signe négatif vient de la différence des vecteurs, et l’identité est générale, pas limitée à un angle droit.",
+        "Le nouvel oracle construit AB=(c,0) et AC=(b cos θ,b sin θ), avec b,c positifs et θ réel. Le carré de norme de BC est (b cos θ−c)²+b² sin² θ, qui se réduit à b²+c²−2bc cos θ pour tout θ. Les angles π/2 et π/3 ne sont que des cas complémentaires. La suppression du terme croisé fait maintenant échouer le gate, alors que l’ancien unique contrôle en π/2 l’aurait laissée passer.",
+        "Une première exécution a signalé le dernier contrôle en π/3 : trigsimp seul ne développait pas le polynôme restant. La réduction algébrique exacte expand a été utilisée pour ce cas, sans modifier l’égalité attendue ni la preuve générale. La nouvelle exécution canonique des huit sources est verte."
+      ],
+      "programme_review": "Produit scalaire en repère orthonormé, bilinéarité, orthogonalité et loi des cosinus du programme de Première ; aucune référence officielle ni capacité modifiée.",
+      "pedagogical_review": "Les tâches originales sont conservées. Les hypothèses sont explicites et les indications restent conformes au problème. Les durées META concordent avec les durées imprimées de 6, 6, 8 et 10 minutes. Aucun exercice ni quota ajouté.",
+      "editorial_review": "Diacritiques corrigées là où lues, notamment identité, parallélogramme et côtés. Le statut source generated est conservé. Aucun verdict PDF.",
+      "correction_alignment_review": "Énoncé et corrigé du couple entier lus et résolus ; la preuve et les résultats correspondent. Les anciens oracles sans rapport ou réflexifs ne sont plus réutilisés."
+    }
+  ],
+  "limits": [
+    "Les sources generated demeurent non publiables ; la présente contre-revue scientifique ne vaut ni clôture du chapitre ni approbation humaine.",
+    "Aucun rendu final, page PDF ou approbation humaine n’est revendiqué.",
+    "Les autres objets du chapitre et les reviews dépendantes conservent leurs propres états."
+  ],
+  "independent_counterreview": {
+    "reviewer": "/root",
+    "human_approval": false,
+    "read_extent": "Huit sources originales entières, diff intégral des huit sources corrigées, oracle, tests et note ; section officielle Calcul vectoriel et produit scalaire relue.",
+    "independent_reasoning": "005 : AB=(2,3), AC=(-1,4), BA=(-2,-3), BC=(-3,1), produits10 et3. 016 : polarisation49-9-25=15, produit15/2 et réalisation vectorielle exacte. 018 : les termes croisés se compensent par symétrie pour tous vecteurs ; injectivité du carré sur les normes non négatives, y compris zéro ; distinction du parallélogramme non dégénéré. 047 : BC=AC-AB puis identité bilinéaire générale, terme croisé négatif indispensable.",
+    "tests": {
+      "command": "python -m pytest -q tests/test_prodscal_remaining_oracle_alignment.py --junitxml=/tmp/root-prodscal-four-pairs.xml",
+      "passed": 16,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit_sha256": "755105538489df355a81bff4d8522a399f69a1baa28f31a28966deedcd425c52"
+    },
+    "oracles": {
+      "method": "Copies temporaires des huit seules sources, verify_sympy.py et common.py courants ; point entree canonique --chap PROBE. Aucun reçu courant régénéré par le reviewer.",
+      "objects_passed": 8,
+      "source_method_bindings_valid": 8,
+      "source_digests_unchanged": true,
+      "log_sha256": "74603ef49ec59c4829dd526097494b155afce54f1dbc370e238df5228436ef1b"
+    }
+  }
+}

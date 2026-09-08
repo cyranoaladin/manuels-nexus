@@ -1,12 +1,28 @@
-% META: {"id":"1SPE-PRODSCAL-EX-018","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"exercice","capacites":["1SPE-PRODUIT-SCALAIRE-C2"],"capacites_codes":["C2"],"methodes":["M2"],"parcours":2,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-018.tex","corrige_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-018.tex","status":"generated"}
+% META: {"id":"1SPE-PRODSCAL-EX-018","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"exercice","capacites":["1SPE-PRODUIT-SCALAIRE-C2"],"capacites_codes":["C2"],"methodes":["M2"],"parcours":2,"competences":["calculer"],"duree_min":8,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-018.tex","corrige_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-018.tex","status":"generated"}
 % BEGIN-VERIFY
-% from sympy import *
-% # (u+v).(u-v) = ||u||^2 - ||v||^2 = 0 iff ||u|| = ||v||
-% u, v = symbols('u v', positive=True)
-% assert simplify(u**2 - v**2) == u**2 - v**2
+% from sympy import Matrix, symbols, sqrt, expand, solveset, Interval, oo, FiniteSet
+% a, b, c, d = symbols('a b c d', real=True)
+% u, v = Matrix([a, b]), Matrix([c, d])
+% assert expand((u+v).dot(u-v) - (u.dot(u)-v.dot(v))) == 0
+% norm_u, norm_v = sqrt(u.dot(u)), sqrt(v.dot(v))
+% assert norm_u.is_nonnegative is True
+% assert norm_v.is_nonnegative is True
+% # Sur les réels non négatifs, l'égalité des carrés équivaut à l'égalité.
+% # Cas r>0, puis r=0 : aucun cas nul n'est exclu.
+% r = symbols('r', positive=True)
+% t = symbols('t', real=True)
+% assert solveset(t**2-r**2, t, domain=Interval(0, oo)) == FiniteSet(r)
+% assert solveset(t**2, t, domain=Interval(0, oo)) == FiniteSet(0)
+% assert norm_u.subs({a: 0, b: 0}) == 0
+% assert ((u+v).dot(u-v)).subs({a: 0, b: 0, c: 0, d: 0}) == 0
 % END-VERIFY
 \begin{exercice}{1SPE-PRODSCAL-EX-018}{2}{8}
-Montrer que $(\vec{u} + \vec{v}) \perp (\vec{u} - \vec{v})$ si et seulement si $\|\vec{u}\| = \|\vec{v}\|$.
+Soient $\vec u$ et $\vec v$ deux vecteurs quelconques du plan. Montrer que $(\vec{u} + \vec{v}) \perp (\vec{u} - \vec{v})$ si et seulement si $\|\vec{u}\| = \|\vec{v}\|$.
 
-\textit{Interprétation géométrique : dans un parallelogramme dont les cotes sont égaux (losange), les diagonales sont perpendiculaires.}
+Cette équivalence inclut les vecteurs nuls : l'orthogonalité signifie que le produit scalaire est nul.
+
+\textit{Interprétation géométrique : si $\vec u$ et $\vec v$ sont non colinéaires,
+ils forment deux côtés consécutifs d'un parallélogramme non dégénéré.
+Quand leurs normes sont égales, ce parallélogramme est un losange, dont les diagonales,
+portées par $\vec u+\vec v$ et $\vec u-\vec v$, sont perpendiculaires.}
 \end{exercice}

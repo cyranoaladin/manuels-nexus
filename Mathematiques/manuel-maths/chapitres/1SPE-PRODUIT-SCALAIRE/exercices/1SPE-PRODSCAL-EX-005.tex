@@ -1,11 +1,21 @@
-% META: {"id":"1SPE-PRODSCAL-EX-005","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"exercice","capacites":["1SPE-PRODUIT-SCALAIRE-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":2,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-005.tex","corrige_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-005.tex","status":"generated"}
+% META: {"id":"1SPE-PRODSCAL-EX-005","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"exercice","capacites":["1SPE-PRODUIT-SCALAIRE-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":2,"competences":["calculer"],"duree_min":6,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-005.tex","corrige_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-005.tex","status":"generated"}
 % BEGIN-VERIFY
-% from sympy import *
-% assert 2*(-1) + 3*4 == 10
-% assert (-5)*3 + 1*(-2) == -17
+% from sympy import Matrix
+% A = Matrix([1, 2])
+% B = Matrix([3, 5])
+% C = Matrix([0, 6])
+% AB, AC = B-A, C-A
+% BA, BC = A-B, C-B
+% assert AB == Matrix([2, 3])
+% assert AC == Matrix([-1, 4])
+% assert BA == Matrix([-2, -3])
+% assert BC == Matrix([-3, 1])
+% assert BA == -AB
+% assert AB.dot(AC) == 10
+% assert BA.dot(BC) == 3
 % END-VERIFY
 \begin{exercice}{1SPE-PRODSCAL-EX-005}{2}{6}
-Soient $A(1; 2)$, $B(3; 5)$ et $C(0; 6)$.
+Dans un repère orthonormé du plan, soient $A(1; 2)$, $B(3; 5)$ et $C(0; 6)$.
 \begin{enumerate}
   \item Calculer les coordonnées de $\overrightarrow{AB}$ et $\overrightarrow{AC}$.
   \item Calculer $\overrightarrow{AB} \cdot \overrightarrow{AC}$.

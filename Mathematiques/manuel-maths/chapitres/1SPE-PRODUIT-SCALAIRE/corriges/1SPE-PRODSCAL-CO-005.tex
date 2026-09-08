@@ -1,10 +1,21 @@
 % META: {"id":"1SPE-PRODSCAL-CO-005","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-005","status":"generated"}
 % BEGIN-VERIFY
-% from sympy import *
-% assert 2*(-1) + 3*4 == 10
-% assert (-5)*3 + 1*(-2) == -17
+% from sympy import Matrix
+% A = Matrix([1, 2])
+% B = Matrix([3, 5])
+% C = Matrix([0, 6])
+% AB, AC = B-A, C-A
+% BA, BC = A-B, C-B
+% assert AB == Matrix([2, 3])
+% assert AC == Matrix([-1, 4])
+% assert BA == Matrix([-2, -3])
+% assert BC == Matrix([-3, 1])
+% assert BA == -AB
+% assert AB.dot(AC) == 10
+% assert BA.dot(BC) == 3
 % END-VERIFY
 \begin{corrige}{1SPE-PRODSCAL-EX-005}
+Dans le repère orthonormé donné, on soustrait les coordonnées des points.
 \begin{enumerate}
 \item $\overrightarrow{AB}\begin{pmatrix} 2 \\ 3 \end{pmatrix}$ et $\overrightarrow{AC}\begin{pmatrix} -1 \\ 4 \end{pmatrix}$.
 \item $\overrightarrow{AB} \cdot \overrightarrow{AC} = 2 \times (-1) + 3 \times 4 = -2 + 12 = 10$.
