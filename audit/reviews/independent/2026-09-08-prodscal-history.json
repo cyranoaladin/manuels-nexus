@@ -1,0 +1,104 @@
+{
+  "artifact_type": "PRODSCAL_BOUNDED_HISTORICAL_REVIEW",
+  "head_at_recording": "2c6fc071fc6b386ac9d4a168627e7d2aa01f3b5d",
+  "scope": "Un encadré historique du cours 14, lié au digest du fichier courant du worktree. Cette note ne certifie pas un HEAD propre, le chapitre entier ou un PDF final.",
+  "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/14_C5_al_kashi.tex",
+  "source_sha256": "sha256:e61eee00f3832df59a54a1da610b175116cdac72234803c0a8554fcc6f18f74c",
+  "reviewer": "/root/astra_delta",
+  "author_of_correction": "/root/astra_delta",
+  "independent_counter_review": "VALIDATED_BY_EVIDENCE",
+  "human_approval": false,
+  "documentary_historical_review": {
+    "status": "VALIDATED_BY_EVIDENCE",
+    "old_claim": "L’ancienne formulation disait que la formule était connue depuis l’Antiquité puis « systématisée » par Al-Kashi, sans référence ni sens précis donné à ce dernier verbe.",
+    "correction": "L’encadré distingue les formes géométriques d’Euclide de la notation trigonométrique. Il rattache une procédure de calcul à un ouvrage et une date précis, sans attribuer une invention ou une priorité.",
+    "sources": [
+      {
+        "url": "https://mathcs.clarku.edu/~djoyce/elements/bookII/propII12.html",
+        "document_sha256": "sha256:3f89eaa883521fb56dbe5dc71e8b46b3375b82e0b02cbde523df4c588971aaba",
+        "read_extent": "Proposition II.12 : énoncé et démonstration lus intégralement.",
+        "supported_claim": "Dans le cas obtus, le carré du côté opposé dépasse la somme des deux autres carrés du double du rectangle construit avec un côté et le prolongement intercepté par la hauteur."
+      },
+      {
+        "url": "https://mathcs.clarku.edu/~djoyce/elements/bookII/propII13.html",
+        "document_sha256": "sha256:1903ce8bb97fa1b593271b868baa760a70d895069af056bd791b670acbe446a0",
+        "read_extent": "Proposition II.13 : énoncé et démonstration lus intégralement.",
+        "supported_claim": "Dans le cas aigu, le carré du côté opposé est inférieur à la somme des deux autres carrés du double du rectangle construit avec un côté et la projection correspondante."
+      },
+      {
+        "url": "https://www2.kenyon.edu/Depts/Math/Aydin/Teach/Fall20/128/MiftahIntro.pdf",
+        "document_sha256": "sha256:9d0c652ed38a90feb3291365a9db76c3c53506430c7b99f55d4a3667e3068638",
+        "read_extent": "Page imprimée 1, puis pages 13–14 sur la méthode de traduction et la prudence concernant les attributions. Le reste du volume n’est pas déclaré lu.",
+        "supported_claim": "L’introduction de la traduction savante donne le 2 mars 1427 comme date d’achèvement de Miftah al-Hisab. Seule l’année est reprise dans le manuel."
+      },
+      {
+        "url": "https://www.jphogendijk.nl/samarkand/Azarian5.pdf",
+        "canonical_publication": "https://doi.org/10.35834/2000/1202075",
+        "bibliography": "M. K. Azarian, Meftah al-hesab: A Summary, Missouri Journal of Mathematical Sciences 12(2), 2000, p. 75–95.",
+        "document_sha256": "sha256:b9f61e1d4f079d9deffbd67eee6d02922f70db866bebabe5ab8a151078d3cfc5",
+        "read_extent": "Pages imprimées 75–76 et 83–84 lues sur les images du scan. Les autres pages ne sont pas déclarées relues.",
+        "supported_claim": "La page 84 décrit une méthode pour calculer un côté connaissant les deux autres et leur angle. La page 75 donne l’année 1427.",
+        "source_type": "Étude de recherche historique et mathématique ; ce n’est pas une traduction intégrale du manuscrit. La page 76 décrit les sources utilisées et la réécriture des calculs en notation moderne."
+      }
+    ],
+    "mathematical_interpretation": "L’équivalence avec la loi des cosinus est une interprétation explicitement vérifiée. Pour un angle obtus, la longueur du prolongement vaut l’opposé de la projection signée : le terme positif d’Euclide devient −2bc cos(A), car cos(A) est négatif. Pour un angle aigu, la projection positive vaut c cos(A) : la différence de deux carrés devient le même terme −2bc cos(A). Les deux propositions ne sont pas présentées comme une écriture antique avec des cosinus.",
+    "limits": "La source historique n’est pas utilisée pour attribuer à Al-Kashi une priorité sur la loi des cosinus. Les formules réécrites en notation moderne par Azarian ne sont pas reproduites dans l’encadré. Aucun oracle de date n’est créé."
+  },
+  "scientific_execution": {
+    "execution_root": "/tmp/nexus-prodscal-history-fresh-mw2dsn5o",
+    "command": [
+      "/usr/bin/python",
+      "/tmp/nexus-prodscal-history-fresh-mw2dsn5o/Mathematiques/manuel-maths/scripts/verify_sympy.py",
+      "--chap",
+      "1SPE-PRODUIT-SCALAIRE"
+    ],
+    "cwd": "/tmp/nexus-prodscal-history-fresh-mw2dsn5o",
+    "rc": 0,
+    "stdout": "[OK ] 14_C5_al_kashi: \n",
+    "stderr": "",
+    "network_denial": {
+      "mechanism": "libseccomp inherited syscall filter",
+      "probe_rc": 0,
+      "probe_stdout": "network syscalls refused for IPv4, IPv6 and Unix sockets\n"
+    },
+    "input_digests": {
+      "chapitres/1SPE-PRODUIT-SCALAIRE/cours/14_C5_al_kashi.tex": "sha256:e61eee00f3832df59a54a1da610b175116cdac72234803c0a8554fcc6f18f74c",
+      "scripts/verify_sympy.py": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e",
+      "scripts/common.py": "sha256:f1dd76d4f5f354800fba1dc8ab84dfa3ab5c61b8f8f3093956d146195f520d0c"
+    },
+    "records": [
+      {
+        "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/14_C5_al_kashi.tex",
+        "source_sha256": "sha256:e61eee00f3832df59a54a1da610b175116cdac72234803c0a8554fcc6f18f74c",
+        "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/14_C5_al_kashi.sympy.json",
+        "receipt_sha256": "sha256:54ec7a4a47ce37a3af1125e4d1301bf48ff96ff8ab9606c7a03d7a45bb9047bf",
+        "verdict": "pass"
+      }
+    ],
+    "human_approval": false
+  },
+  "regression_evidence": {
+    "test": "tests/test_prodscal_history_documentary_bindings.py",
+    "test_sha256": "sha256:e9153693969ce4494b079a390cb5081c8c09ce188254bd7b22da21c26199295a",
+    "red": "Deux échecs observés sur l’encadré précédent : /tmp/prodscal-history-RED.log.",
+    "green": "Deux tests passent après correction.",
+    "scope": "Ces tests protègent la présence des références et la distinction éditoriale relue. Ils ne prouvent ni l’année 1427, ni une attribution historique.",
+    "affected_scientific_mutations": "Les deux mutations existantes ciblant le cours 14 ont été réexécutées : inversion du signe du cosinus et utilisation de AC + AB à la place de AC − AB. Deux tests passent ; chacun exige le succès de la source puis l’échec de sa mutation."
+  },
+  "evidence_invalidation": "Le receipt antérieur, lié à l’ancien digest du cours, n’est pas réutilisé. Un receipt frais est produit par l’exécution isolée. Les anciennes notes de lot restent historiques pour leur digest.",
+  "publication_limits": [
+    "Aucune approbation humaine.",
+    "Aucun build final ou audit visuel revendiqué.",
+    "Les documents externes restent uniquement en cache temporaire ; seuls leurs références, empreintes et résultats de lecture sont consignés."
+  ],
+  "root_counter_review": {
+    "reviewer": "/root",
+    "head": "e5a97527fc9bb286a1da997a33774f58cd854161",
+    "read_scope": "Lecture intégrale des deux propositions Euclide II.12 et II.13 sur les pages Clark ; lecture des images des pages imprimées75,76,83,84 d’Azarian et de la page1 de l’introduction Aydin–Hammoudi. Les deux PDF ont été réempreintés puis rendus par /root depuis le cache temporaire : leurs SHA256 correspondent exactement aux références ci-dessus. Le timeout du fetch web ne signifie pas que le lien est cassé.",
+    "documentary_finding": "Euclide formule des relations de carrés et rectangles, sans cosinus. Avec une projection négative pour l’angle obtus, le rectangle ajouté correspond au terme−2bc cos(A) ; la projection positive de l’angle aigu donne le rectangle soustrait. Azarian p.76 précise que son article est une synthèse de recherches, non une traduction complète. Les pages83–84 décrivent les relations du triangle et le calcul d’un troisième côté à partir des deux autres et de l’angle. La page75 et l’introduction de la traduction p.1 situent l’achèvement en1427. Le nouveau paragraphe ne revendique ni invention ni priorité ni systématisation non définie.",
+    "scientific_scope": "Le seul changement de source est l’encadré historique et ses références. Le corps mathématique déjà contre-revu demeure inchangé ; le receipt frais lie correctement son exécution au nouveau digest. Les formules modernes d’Azarian ne sont pas recopiées comme texte original du manuscrit.",
+    "test_scope": "Root :2tests documentaires PASS en0,13s ;2mutations scientifiques ciblées du cours14 PASS en1,84s,12tests non sélectionnés. Les premiers protègent les références et ne prouvent aucune date ; les seconds exigent une exécution correcte puis rejettent un mauvais signe ou une somme à la place de la différence vectorielle.",
+    "human_approval": false,
+    "limits": "Une source de cours et un encadré seulement ; pas de clôture du chapitre, de contrôle de rendu final ou d’approbation humaine."
+  }
+}
