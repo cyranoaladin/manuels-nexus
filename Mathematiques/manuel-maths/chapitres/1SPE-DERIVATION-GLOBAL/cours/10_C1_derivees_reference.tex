@@ -7,11 +7,13 @@
 \definition[Fonction dérivée]{Soit $f$ une fonction dérivable sur un intervalle $I$. La \textbf{fonction dérivée} de $f$, notée $f'$, est la fonction qui, à tout $x$ de $I$, associe le nombre dérivé $f'(x)$.}
 
 \propriete[Tableau des dérivées de référence]{
-Les fonctions suivantes sont dérivables sur leur domaine de définition et leur dérivée est :
+La deuxième colonne indique où la fonction est dérivable. Ce domaine peut être
+plus petit que son domaine de définition : la fonction racine carrée est
+définie sur $[0\,;\,+\infty[$, mais elle n'est dérivable que sur $]0\,;\,+\infty[$.
 \[
 \begin{array}{|c|c|c|}
 \hline
-\textbf{Fonction } f & \textbf{Domaine} & \textbf{Dérivée } f' \\
+\textbf{Fonction } f & \textbf{Dérivabilité} & \textbf{Dérivée } f' \\
 \hline
 f(x) = k \quad (k \in \mathbb{R}) & \mathbb{R} & f'(x) = 0 \\
 \hline
@@ -23,7 +25,7 @@ f(x) = x^n \quad (n \in \mathbb{Z},\, n \leqslant -1) & \mathbb{R} \setminus \{0
 \hline
 f(x) = \dfrac{1}{x} & \mathbb{R} \setminus \{0\} & f'(x) = -\dfrac{1}{x^2} \\[6pt]
 \hline
-f(x) = \sqrt{x} & [0\,;\,+\infty[ & f'(x) = \dfrac{1}{2\sqrt{x}} \quad (x > 0) \\[6pt]
+f(x) = \sqrt{x} & ]0\,;\,+\infty[ & f'(x) = \dfrac{1}{2\sqrt{x}} \\[6pt]
 \hline
 \end{array}
 \]
@@ -60,9 +62,19 @@ Pour $\varphi(x) = \sqrt{x}$, définie sur $[0\,;\,+\infty[$ et dérivable sur $
 En $x = 4$ : $\varphi'(4) = \dfrac{1}{2\sqrt{4}} = \dfrac{1}{4}$.
 }
 
+% [ROOT-ZERO-PROOF]
 \contreexemple{
-La fonction $\sqrt{x}$ n'est pas dérivable en $0$ : $\varphi'(x) = \dfrac{1}{2\sqrt{x}}$ tend vers $+\infty$ quand $x \to 0^+$. La tangente à la courbe en $(0;0)$ est verticale, ce qui correspond à une pente infinie — donc un nombre dérivé qui n'existe pas.
+La fonction $\varphi(x)=\sqrt{x}$ n'est pas dérivable en $0$. Pour $h>0$,
+son taux de variation entre $0$ et $h$ vaut
+\[
+\frac{\sqrt{h}-\sqrt{0}}{h-0}=\frac{1}{\sqrt{h}}.
+\]
+Quand $h$ se rapproche de $0$ par valeurs positives, ce taux dépasse toute
+borne fixée : il ne tend vers aucun réel. Il n'existe donc pas de nombre dérivé
+en $0$. Graphiquement, la courbe possède une demi-tangente verticale en $(0\,;\,0)$ ;
+on ne lui attribue pas une pente réelle.
 }
+% [/ROOT-ZERO-PROOF]
 
 \contreexemple{
 La fonction valeur absolue $f(x) = |x|$ n'est pas dérivable en $0$.
@@ -80,20 +92,18 @@ Les limites à gauche et à droite sont différentes ($-1
 \emph{Interprétation graphique :} la courbe de $|x|$ présente un « angle pointu » (un point anguleux) en $x = 0$. Il n'y a pas de tangente unique en ce point.
 }
 
-\margeAppui{La non-dérivabilité en un point peut se manifester de deux façons : une tangente verticale (comme $\sqrt{x}$ en $0$) ou un point anguleux (comme $|x|$ en $0$). Dans les deux cas, la fonction est continue en ce point mais pas dérivable.}
+\margeAppui{Voici deux exemples de non-dérivabilité : une demi-tangente verticale pour $\sqrt{x}$ en $0$, et un point anguleux pour $|x|$ en $0$. Dans ces deux exemples, la fonction est continue en ce point.}
 
 % BEGIN-VERIFY
-% from sympy import symbols, Abs, Rational, limit
-% x, h = symbols('x h')
-% # Taux de variation de |x| en 0 : |h|/h
-% # Pour h > 0 : |h|/h = 1 ; pour h < 0 : |h|/h = -1
-% assert Abs(1)/1 == 1
-% assert Abs(-1)/(-1) == -1
-% # Vérifier que |x| est dérivable pour x != 0
-% from sympy import diff, Piecewise
-% # Pour x > 0, |x| = x, dérivée = 1
+% from sympy import symbols, Abs, sqrt, simplify, diff, limit, oo
+% x = symbols('x', real=True)
+% h = symbols('h', positive=True)
+% assert simplify((sqrt(h)-sqrt(0))/h - 1/sqrt(h)) == 0
+% assert limit(sqrt(h)/h, h, 0, dir='+') == oo
+% # Identités générales des taux à droite et à gauche, avec h positif.
+% assert simplify(Abs(h)/h) == 1
+% assert simplify(Abs(-h)/(-h)) == -1
 % assert diff(x, x) == 1
-% # Pour x < 0, |x| = -x, dérivée = -1
 % assert diff(-x, x) == -1
 % END-VERIFY
 
@@ -106,17 +116,52 @@ Les limites à gauche et à droite sont différentes ($-1
 }
 
 \erreurFrequente{
-Confondre $\sqrt{x}$ et $x^{1/2}$ dans le calcul : $(\sqrt{x})' = \dfrac{1}{2\sqrt{x}}$. On ne dérive pas $\sqrt{x}$ comme si c'était $\dfrac{1}{2}x$.
+La racine carrée $\sqrt{x}$ n'est pas $\dfrac{x}{2}$. Pour $x>0$, sa dérivée
+est $\dfrac{1}{2\sqrt{x}}$, et non $\dfrac{1}{2}$.
 }
 
-\margeAppui{La formule $x^n \mapsto nx^{n-1}$ fonctionne aussi pour $n=1$ : $(x)' = 1 \cdot x^0 = 1$. Et pour $n=0$ : $(1)' = 0 \cdot x^{-1} = 0$. Tout est cohérent.}
+\margeAppui{Le cas $n=1$ est la fonction identité, de dérivée $1$ en tout réel.
+Le cas $n=0$ donne $x^0=1$ pour $x\neq0$ : sa dérivée est $0$ sur ce domaine.
+La fonction constante $1$ est, elle, définie et dérivable sur tout $\mathbb R$,
+sans utiliser $0^0$ ni multiplier $0$ par une expression non définie.}
+
+\subsection*{Deux démonstrations à connaître}
+
+Pour la fonction carré, pour tout réel $a$ et tout $h\neq0$,
+\[
+\frac{(a+h)^2-a^2}{h}=2a+h.
+\]
+Ce taux tend vers $2a$ lorsque $h$ tend vers $0$ : la dérivée de la fonction
+carré en $a$ est donc $2a$.
+
+Pour la fonction inverse, fixons $a\neq0$. Pour $h\neq0$ assez proche de $0$
+pour que $a+h\neq0$,
+\[
+\frac{\frac{1}{a+h}-\frac{1}{a}}{h}
+=-\frac{1}{a(a+h)}.
+\]
+Lorsque $h$ tend vers $0$, ce taux tend vers $-\frac{1}{a^2}$.
+Cela démontre la formule sur chacun des deux intervalles où la fonction
+inverse est définie, pour les valeurs positives comme négatives de $a$.
+
+% BEGIN-VERIFY
+% from sympy import symbols, cancel, limit
+% a, h = symbols('a h', nonzero=True)
+% assert cancel(((a+h)**2-a**2)/h - (2*a+h)) == 0
+% assert limit(((a+h)**2-a**2)/h, h, 0) == 2*a
+% assert cancel((1/(a+h)-1/a)/h + 1/(a*(a+h))) == 0
+% assert limit((1/(a+h)-1/a)/h, h, 0) == -1/a**2
+% # Le carré est aussi dérivable au point a=0.
+% assert limit(h**2/h, h, 0) == 0
+% END-VERIFY
 
 \propriete[Extension aux exposants entiers négatifs]{
 Pour tout $n \in \mathbb{Z}$ (y compris les entiers négatifs), la fonction $f(x) = x^n$ est dérivable sur $\mathbb{R} \setminus \{0\}$ et :
 \[
 f'(x) = nx^{n-1}.
 \]
-La formule est la même que pour $n \in \mathbb{N}$ ; seul le domaine change.
+Pour $n\geqslant1$, les fonctions puissances sont aussi définies et dérivables
+en $0$. Pour $n=0$, on traite la fonction constante séparément comme ci-dessus.
 }
 
 \exemple{
@@ -144,16 +189,32 @@ g'(x) = -3x^{-4} = -\frac{3}{x^4}.
 % assert diff(x**(-3), x) == -3*x**(-4)
 % # Dérivée de x^(-1) = -x^(-2) = -1/x^2
 % assert diff(x**(-1), x) == -x**(-2)
-% # Cas général : pour tout n entier, (x^n)' = n*x^(n-1)
-% from sympy import Integer
+% # Cas exacts supplémentaires ; cette liste ne remplace pas la preuve générale.
 % for n_val in [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]:
 %     assert diff(x**n_val, x) == n_val * x**(n_val - 1)
 % END-VERIFY
 
 \approfondissement{
-On peut retrouver la formule $(x^n)' = nx^{n-1}$ à partir de la définition du nombre dérivé. Le taux de variation de $f(x) = x^n$ entre $a$ et $a+h$ est :
+\textbf{Puissances naturelles.} Pour $n\geqslant2$ et $a\neq0$, on peut
+développer par le binôme de Newton le taux de variation
 \[
 \frac{(a+h)^n - a^n}{h}.
 \]
-En développant $(a+h)^n$ par le binôme de Newton, le seul terme en $h^0$ après simplification est $na^{n-1}$. Ainsi $f'(a) = na^{n-1}$, ce qui donne bien $f'(x) = nx^{n-1}$.
+Le terme constant en $h$ est $na^{n-1}$ ; tous les autres termes contiennent
+une puissance strictement positive de $h$ et tendent vers $0$.
+Au point $a=0$, on calcule directement, pour $h\neq0$,
+\[
+\frac{h^n-0}{h}=h^{n-1},
+\]
+qui tend vers $0$ puisque $n\geqslant2$. Le cas $n=1$ donne directement un
+taux égal à $1$.
+
+\textbf{Puissances négatives.} Pour $n=-m<0$, avec $m$ entier positif, on écrit
+$x^n=\frac{1}{x^m}$ pour $x\neq0$. La règle de dérivation de l’inverse
+d'une fonction, étudiée dans la capacité suivante, donne
+\[
+\left(\frac{1}{x^m}\right)'=-\frac{mx^{m-1}}{(x^m)^2}
+=-mx^{-m-1}=nx^{n-1}.
+\]
+Le développement fini du binôme n'a donc été utilisé que pour un exposant naturel.
 }

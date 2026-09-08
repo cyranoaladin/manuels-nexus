@@ -1,0 +1,177 @@
+{
+  "artifact_type": "independent_course_review_and_correction_note",
+  "reviewer_and_correction_author": "/root/astra_delta",
+  "date": "2026-09-08",
+  "head_at_recording": "5f64fdb7788b567526394bb036ea12ac5556354a",
+  "head_scope": "Les corrections de travail sont liées à leurs SHA256 exacts ; elles ne constituent pas une observation du HEAD propre.",
+  "scope": "Une source de cours entière, ses exemples, ses domaines, ses démonstrations et ses trois blocs oracle. Aucune clôture du chapitre ni des autres sources.",
+  "status": "VALIDATED_BY_EVIDENCE_FOR_DECLARED_SCOPE",
+  "human_approval": false,
+  "programme_evidence": {
+    "official_NOR": "MENE2602917A",
+    "source": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+    "source_sha256": "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
+    "lines": [
+      432,
+      477
+    ],
+    "review": "Les fonctions de référence, les puissances entières et la valeur absolue en 0 sont dans le programme. Les démonstrations pour la racine carrée en 0, le carré et l’inverse sont explicitement demandées. La preuve générale par binôme demeure dans un approfondissement. Aucun atome officiel n’est modifié."
+  },
+  "findings_corrected": [
+    {
+      "id": "DG-C1-DOMAINS",
+      "severity": "P0",
+      "defect": "Le texte affirmait que la racine carrée était dérivable sur son domaine de définition, qui comprend 0."
+    },
+    {
+      "id": "DG-C1-ROOT-PROOF",
+      "severity": "P0",
+      "defect": "La divergence de la formule de dérivée sur les points positifs remplaçait abusivement la démonstration par le taux au point 0."
+    },
+    {
+      "id": "DG-C1-ZERO-POWER",
+      "severity": "P0",
+      "defect": "La marge évaluait implicitement 0 multiplié par x⁻¹ en tout réel ; l’expression est non définie en 0."
+    },
+    {
+      "id": "DG-C1-PROOF-SCOPE",
+      "severity": "P0",
+      "defect": "La preuve par un développement fini du binôme n’était pas restreinte aux exposants naturels."
+    },
+    {
+      "id": "DG-C1-REQUIRED-PROOFS",
+      "severity": "PRODUCT_GAP",
+      "defect": "Le cours énonçait les formules du carré et de l’inverse sans la démonstration générale explicitement demandée ; le candidat DERLOCAL pour l’inverse ne traitait que le point 1."
+    }
+  ],
+  "verification": {
+    "test_source": "tests/test_derglobal_reference_domains_and_proofs.py",
+    "test_source_sha256": "sha256:a3bfc2071190247250e1a60e6788af23551fe3fa98e88f6947c2b03629becf7b",
+    "initial_red": "6 failed sur les sources initiales ; /tmp/derglobal-c1-red.log.",
+    "green": "6 passed après correction, sans skip ni xfail.",
+    "controlled_source_mutations": [
+      {
+        "mutation": "domain",
+        "caught": true
+      },
+      {
+        "mutation": "root_quotient",
+        "caught": true
+      },
+      {
+        "mutation": "inverse_sign",
+        "caught": true
+      },
+      {
+        "mutation": "negative_binomial",
+        "caught": true
+      }
+    ],
+    "mutation_scope": "Quatre mutations des affirmations imprimées, chacune sur une copie temporaire, sont rejetées par les régressions correspondantes.",
+    "execution": {
+      "execution_root": "/tmp/nexus-derglobal-c1-fresh-55obarid",
+      "command": [
+        "/usr/bin/python",
+        "/tmp/nexus-derglobal-c1-fresh-55obarid/Mathematiques/manuel-maths/scripts/verify_sympy.py",
+        "--chap",
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "cwd": "/tmp/nexus-derglobal-c1-fresh-55obarid",
+      "rc": 0,
+      "stdout": "[OK ] 10_C1_derivees_reference: \n",
+      "stderr": "",
+      "network_denial": {
+        "mechanism": "libseccomp inherited syscall filter",
+        "probe_rc": 0,
+        "probe_stdout": "network syscalls refused for IPv4, IPv6 and Unix sockets\n"
+      },
+      "input_digests": {
+        "chapitres/1SPE-DERIVATION-GLOBAL/cours/10_C1_derivees_reference.tex": "sha256:be00ed4485f2bf474976f65c5c8411cb6155fb7392a66b6136b2e2492d4ef7e2",
+        "scripts/verify_sympy.py": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e",
+        "scripts/common.py": "sha256:f1dd76d4f5f354800fba1dc8ab84dfa3ab5c61b8f8f3093956d146195f520d0c"
+      },
+      "records": [
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/10_C1_derivees_reference.tex",
+          "source_sha256": "sha256:be00ed4485f2bf474976f65c5c8411cb6155fb7392a66b6136b2e2492d4ef7e2",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/10_C1_derivees_reference.sympy.json",
+          "receipt_sha256": "sha256:422edf1533c39ba2f25eb61da82cac8361e69812316616dadbbd2f0e432c9c06",
+          "verdict": "pass"
+        }
+      ],
+      "human_approval": false
+    },
+    "lint_and_diff": "ruff ciblé et git diff --check passent."
+  },
+  "objects": [
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/10_C1_derivees_reference.tex",
+      "source_sha256": "sha256:be00ed4485f2bf474976f65c5c8411cb6155fb7392a66b6136b2e2492d4ef7e2",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/10_C1_derivees_reference.sympy.json",
+      "receipt_sha256": "sha256:422edf1533c39ba2f25eb61da82cac8361e69812316616dadbbd2f0e432c9c06",
+      "verdict": "pass",
+      "object_id": "1SPE-DERGLOBAL-COURS-C1",
+      "read_extent": "Source intégrale, y compris tableaux, exemples, marges, approfondissement et tous les blocs de vérification.",
+      "before_review_source_sha256": "sha256:01936c3135f06100982a9cc54276fd28a46f042826581ceb2b25c5c4102436e3",
+      "status": "VALIDATED_BY_EVIDENCE_FOR_DECLARED_SCOPE",
+      "human_approval": false,
+      "independent_scientific_reasoning": [
+        "La racine est définie en 0 mais le taux entre 0 et h vaut 1/√h pour h>0. Pour toute borne M>0, choisir 0<h<1/M² donne un taux supérieur à M. Il n’existe donc aucune limite réelle de ce taux. Le calcul ne prend pas la limite de la dérivée comme justification.",
+        "Pour la valeur absolue, h>0 donne |h|/h=1 et |-h|/(−h)=−1, pour tout h positif. Les deux taux ont des limites différentes. Les nouveaux oracles utilisent un symbole positif et certifient ces identités générales, au lieu de deux échantillons.",
+        "Pour tout a réel et h non nul, la différence de carrés se simplifie exactement en 2a+h après division par h. Elle tend vers 2a. Au point 0, le taux est h et tend vers 0.",
+        "Pour tout a non nul, restreindre |h|<|a|/2 garantit a+h non nul. La différence 1/(a+h)−1/a vaut −h/[a(a+h)]. Le taux vaut donc −1/[a(a+h)] et tend vers −1/a², pour a positif comme négatif. Les domaines excluent les deux zéros des dénominateurs.",
+        "Pour n≥2, la preuve binomiale à a non nul a un terme constant n a^(n−1) et seulement des termes à puissance positive de h ensuite. À a=0, le taux h^(n−1) tend directement vers 0. Pour n=1 le taux est 1. Pour n=0, la fonction x⁰ est considérée sur les réels non nuls ; la fonction constante 1 fournit séparément une extension dérivable sur tout R, sans convention implicite sur 0⁰.",
+        "Pour n=−m<0 et x non nul, appliquer la règle de l’inverse à x^m donne −m x^(m−1)/x^(2m)=−m x^(−m−1). L’approfondissement annonce explicitement que cette règle vient de la capacité suivante. Le développement fini n’est pas appliqué aux puissances négatives.",
+        "Les exemples ont été recalculés : (x⁵)′=5x⁴ ; (x³)′ en 2 vaut 12 ; (1/x)′ est strictement négative sur chacun des deux intervalles de définition ; (√x)′ en 4 vaut 1/4 ; (x⁻²)′=−2x⁻³ et (x⁻³)′=−3x⁻⁴. La décroissance de 1/x n’est pas étendue à tort à travers 0."
+      ],
+      "pedagogical_review": "La table distingue maintenant les domaines, les cas limites sont nommés, et les trois démonstrations attendues par le programme sont lisibles dans la source. Le cas général du binôme reste un approfondissement ; aucun nouvel exercice ni quota n’a été créé.",
+      "editorial_review": "La fausse opposition entre √x et x^(1/2) est remplacée par la véritable confusion avec x/2. La formulation de demi-tangente en un bord est précise. La mise en page finale reste à inspecter.",
+      "oracle_review": "Trois blocs effectivement exécutés par le vérificateur canonique, sur copie isolée avec refus des appels réseau contrôlé. Les expressions de taux sont vérifiées par simplification exacte et limites ; la liste finie des autres puissances est explicitement annoncée comme complément, pas comme preuve générale."
+    }
+  ],
+  "limits": [
+    "Contre-revue indépendante /root réalisée et bornée dans independent_counterreview ; aucune approbation humaine accordée.",
+    "Les mappings de programme ne sont pas encore régénérés.",
+    "Les cours C2 à C5 et les autres objets ont leurs propres dettes.",
+    "Aucun build final, audit visuel, imprimabilité, approbation humaine ou receipt de release n’est revendiqué."
+  ],
+  "independent_counterreview": {
+    "reviewer": "/root",
+    "observed_head": "2ee198d81de0bab652783317df4267203b1bfdb0",
+    "worktree_bound_by_source_digest": "sha256:be00ed4485f2bf474976f65c5c8411cb6155fb7392a66b6136b2e2492d4ef7e2",
+    "read_scope": "Entire course, all examples, margin notes, table, required and optional proofs, all three verification blocks, six regression tests and BO2026 lines 432–477.",
+    "scientific_reasoning": [
+      "A difference quotient at 0 for sqrt is 1/sqrt(h), h>0; given M>0, 0<h<1/M² makes it exceed M, excluding a finite derivative. The two absolute-value quotients are identically 1 and -1 on their respective sides.",
+      "Difference of squares gives 2a+h for all real a, including a=0. For inverse choose |h|<|a|/2 with a nonzero; cancellation yields -1/[a(a+h)], limit -1/a² for either sign of a.",
+      "Finite binomial expansion is restricted to natural exponents; its terms after division have a single constant term n a^(n-1). At a=0 and n>=2, h^(n-1) tends to zero. Negative powers follow the explicitly announced inverse rule, on nonzero arguments. Constant and identity cases avoid evaluating an undefined factor at zero.",
+      "The examples yield 5x⁴, 3x² and slope12 at2, -1/x², derivative1/4 for sqrt at4, -2/x³ and -3/x⁴. Monotonicity of inverse is restricted to each component of its domain."
+    ],
+    "programme_review": "All reference functions, integer powers and non-differentiability of absolute value at0 occur in the cited BO. Square, inverse and sqrt-at-zero proofs are explicitly required; the broader binomial proof remains marked as an extension. No official definition changed.",
+    "verification": {
+      "regressions_passed": 6,
+      "failed": 0,
+      "junit": "/tmp/nexus-root-derglobal-c1.xml",
+      "junit_sha256": "9d83094aadc78827ee6890759901d0192c5f3f682709931b02769bf9c2407187",
+      "canonical_blocks_executed": 3,
+      "fresh_verdict": "pass",
+      "temporary_wrong_inverse_sign": "fail",
+      "receipt_binding": {
+        "state": "CURRENT_BOUND",
+        "declared_source_path": "chapitres/1SPE-DERIVATION-GLOBAL/cours/10_C1_derivees_reference.tex",
+        "expected_source_sha256": "sha256:be00ed4485f2bf474976f65c5c8411cb6155fb7392a66b6136b2e2492d4ef7e2",
+        "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/10_C1_derivees_reference.tex",
+        "current_source_sha256": "sha256:be00ed4485f2bf474976f65c5c8411cb6155fb7392a66b6136b2e2492d4ef7e2",
+        "source_path_base": "repository",
+        "method_state": "CURRENT_TRUSTED",
+        "reason": null,
+        "canonical_object_id": "1SPE-DERGLOBAL-COURS-C1",
+        "receipt_object_id": "10_C1_derivees_reference"
+      }
+    },
+    "limits": [
+      "The source and mathematics of this single course are reviewed. Chapter mappings and other course objects remain pending.",
+      "No final layout inspection, human approval, source-status promotion or release readiness is granted."
+    ],
+    "review_status": "VALIDATED_BY_EVIDENCE_FOR_DECLARED_SCOPE"
+  }
+}
