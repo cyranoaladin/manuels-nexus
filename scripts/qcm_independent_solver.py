@@ -40,7 +40,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from latex_arith import UnsupportedExpression, evaluate  # noqa: E402
 
-SOLVER_VERSION = "1.1.1"
+SOLVER_VERSION = "1.1.2"
 
 #: Tout champ qui trahirait la reponse. Leur presence rend l'entree invalide.
 FORBIDDEN_INPUT_FIELDS = frozenset(
@@ -495,18 +495,40 @@ def _bernoulli_repetition(inp: SolverInput) -> SolverResult | None:
 
 
 def _uniform_expectation(inp: SolverInput) -> SolverResult | None:
-    """Esperance d'une loi uniforme sur 1..s."""
+    """Uniform mean of explicitly declared consecutive die labels.
 
-    text = _plain(inp.statement)
+    The grammar covers the result itself, not its square, a gain or a
+    conditional variable. Neither six faces nor labels starting at one may
+    be inferred from the word 'die'. Unsupported contexts remain unresolved.
+    """
+
+    text = _math_text(inp.statement)
     if "de equilibre" not in text or "esperance" not in text:
         return None
-    faces = 6
-    expected = Fraction(sum(range(1, faces + 1)), faces)
+    match = re.fullmatch(
+        r"on lance un de equilibre a (\d+) faces numerotees de (-?\d+) a (-?\d+)\. "
+        r"quelle est l['’]esperance(?: e\(\s*x\s*\))? du resultat\s*\?",
+        text,
+    )
+    if match is None:
+        return SolverResult(
+            status="NOT_MACHINE_RESOLVABLE", family="UNIFORM_DISCRETE_EXPECTATION",
+            reason="die expectation requires explicit face count, labels and the precise random variable",
+        )
+    faces, first, last = map(int, match.groups())
+    if faces < 1 or last - first + 1 != faces:
+        return SolverResult(
+            status="NOT_MACHINE_RESOLVABLE", family="UNIFORM_DISCRETE_EXPECTATION",
+            reason="declared die face count and consecutive labels are inconsistent",
+        )
+    expected = Fraction(first + last, 2)
     return _resolved(
         "UNIFORM_DISCRETE_EXPECTATION",
         inp.options,
         expected,
-        f"Loi uniforme sur 1..{faces} : E(X) = (1+...+{faces})/{faces}.",
+        f"Les {faces} etiquettes de {first} a {last} ont chacune probabilite 1/{faces}. "
+        f"La somme de ces entiers consecutifs vaut {faces}*({first}+{last})/2, "
+        f"donc E(X)=({first}+{last})/2={expected}.",
     )
 
 

@@ -158,19 +158,19 @@ def test_a_false_declared_key_leaves_the_solver_output_identical(
 
 
 @pytest.mark.parametrize(
-    ("chapter", "question_id"),
+    ("chapter", "question_id", "expected_status"),
     [
-        ("1SPE-VARIABLES-ALEATOIRES", "Q4"),
-        ("1SPE-VARIABLES-ALEATOIRES", "Q11"),
-        ("1SPE-VARIABLES-ALEATOIRES", "Q19"),
+        ("1SPE-VARIABLES-ALEATOIRES", "Q4", "NOT_MACHINE_RESOLVABLE"),
+        ("1SPE-VARIABLES-ALEATOIRES", "Q11", "MACHINE_RESOLVED"),
+        ("1SPE-VARIABLES-ALEATOIRES", "Q19", "MACHINE_RESOLVED"),
     ],
 )
-def test_permuting_the_options_moves_the_true_letter(
-    chapter: str, question_id: str
+def test_permuting_options_preserves_resolution_and_moves_any_true_letter(
+    chapter: str, question_id: str, expected_status: str
 ) -> None:
     question = _question(chapter, question_id)
     before = S.solve(S.sanitize_canonical(question))
-    assert before.unique_answer is not None
+    assert before.status == expected_status
 
     letters = sorted(question["options"])
     rotated = dict(question)
@@ -181,8 +181,15 @@ def test_permuting_the_options_moves_the_true_letter(
     assert rotated["options"] != question["options"], "la permutation doit permuter"
 
     after = S.solve(S.sanitize_canonical(rotated))
-    expected = letters[(letters.index(before.unique_answer) + 1) % len(letters)]
-    assert after.unique_answer == expected
+    assert after.status == expected_status
+    if expected_status == "NOT_MACHINE_RESOLVABLE":
+        # Q4 omits the face count and labels. Rotation cannot supply them.
+        assert before.unique_answer is None and after.unique_answer is None
+        assert before.option_truths == after.option_truths == {}
+    else:
+        assert before.unique_answer is not None
+        expected = letters[(letters.index(before.unique_answer) + 1) % len(letters)]
+        assert after.unique_answer == expected
     assert after.computed_value == before.computed_value
 
 

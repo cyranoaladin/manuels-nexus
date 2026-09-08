@@ -1,0 +1,69 @@
+{
+  "artifact_type": "development_qa_correction_log",
+  "schema_version": 1,
+  "approves_nothing": true,
+  "observed_head": "15e5aba771f4e18c5b371828c111ce4b342eb498",
+  "worktree_observation": true,
+  "sources": [
+    {
+      "path": "scripts/qcm_independent_solver.py",
+      "before_head": "15e5aba771f4e18c5b371828c111ce4b342eb498",
+      "before_sha256": "fc2c46e91d5f1856367c223155108ca64e1b5b5dccb3277d7b560ee66cc42395",
+      "after_sha256": "77239871c35ddb08991b3b537d0faf2c7cc76d38e7a0255503c4b7336f93152a"
+    },
+    {
+      "path": "tests/test_qcm_independent_solver.py",
+      "before_head": "15e5aba771f4e18c5b371828c111ce4b342eb498",
+      "before_sha256": "a61a693197ff1c5fe9972d6d9a5ccffc4c9757484507169c41c2304ddb3762e1",
+      "after_sha256": "e83f204d9569ff82d50f0b2d1e2a88c1b8e00a655a1ca8f15d8ee30009867e2b"
+    },
+    {
+      "path": "tests/test_qcm_uniform_die_support.py",
+      "before_head": "15e5aba771f4e18c5b371828c111ce4b342eb498",
+      "before_sha256": null,
+      "after_sha256": "88381acd6575ca79736f9b0bb5b01a426443407871df06e379cab98081cd47e8"
+    }
+  ],
+  "finding": {
+    "id": "QCM-CURRENT-QA-011",
+    "severity": "PRODUCT_P0",
+    "before": "The uniform-die family matches the words balanced die and expectation, then always assumes six labels 1..6; eight faces, shifted labels, a transformed variable or a gain can receive false 7/2 credit.",
+    "after": "A bounded full-statement grammar requires explicit face count, consecutive endpoint labels, and asks for the result itself. The count must match the labels. The exact mean is (first+last)/2; missing or different context remains NOT_MACHINE_RESOLVABLE.",
+    "status": "CORRECTED_INDEPENDENTLY_VERIFIED_BY_ROOT"
+  },
+  "scientific_argument": "For N consecutive labels a,...,b with N=b-a+1, each probability is1/N. Pairing a+k with b-k gives constant sum a+b, so the sum of labels is N(a+b)/2 and the expectation is (a+b)/2. This does not assume a=1 or N=6.",
+  "tests": {
+    "red_log": "/tmp/qcm-uniform-die-red.log",
+    "red_sha256": "4bfc213aac07dc50736e6d05ebad76aa3b571014a0a661fc8d30943bda3ca2e6",
+    "initial_failed": 9,
+    "initial_passed": 1,
+    "junit": "/tmp/qcm-uniform-die-targeted.xml",
+    "junit_sha256": "c12e07958d21cc8dd3b7bd91222bae52c0324506b5c1b5126ce4d2ac5c358539",
+    "passed": 63,
+    "failed": 0,
+    "independent_reference": "Finite explicit label sets in regression tests use exact arithmetic enumeration, independent of the endpoint formula in production."
+  },
+  "current_affected_question": {
+    "object_id": "1SPE-VARIABLES-ALEATOIRES/Q4",
+    "source": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
+    "source_changed": false,
+    "status": "NOT_MACHINE_RESOLVABLE",
+    "reason": "Statement gives no explicit face count or labels. Specific source/context review remains necessary; no wrong-key verdict is asserted."
+  },
+  "historical_test_adjustment": "The option-permutation regression still checks Q4, now requires abstention before/after rotation and no truth vector. Q11/Q19 retain mandatory unique resolution and shifted true letter. No skip/xfail added.",
+  "limits": [
+    "No global evidence artifact or source question was regenerated.",
+    "No complete scientific review of other solver families is inferred from this targeted suite.",
+    "No human approval is granted."
+  ],
+  "review_status": "BOUNDED_SCIENTIFIC_QA_INDEPENDENTLY_REVIEWED; PARSER_FINDING_OPEN",
+  "root_counter_review": {
+    "reviewer": "/root",
+    "head": "cb7213745af19646f646dbc45792cc79bc82e803",
+    "scope": "Full changed family, its normalization, ten new regressions, and revised option-permutation test read independently. The entire statement must match the bounded grammar; neither face count nor labels are inferred from the generic noun. Counts and endpoints must agree before computation.",
+    "scientific_argument": "For N=b−a+1 consecutive equally likely labels, pair the sum written forwards and backwards:2S=N(a+b), including the possible middle term when N is odd. Thus E=S/N=(a+b)/2. Exact enumeration in the tests independently confirms9/2 for1..8,5/2 for0..5,1/2 for−3..4 and7/2 for1..6. A gain or square is a different random variable and does not receive this result.",
+    "tests": "Root targeted run:63 PASS, including the ten support cases, four published-function abstention regressions and existing solver cases. No global current scientific verdict follows.",
+    "limits": "Current VARALEA/Q4 is still underspecified and unchanged. Symbolic parsing using parse_expr is a separate newly reproduced defect (QA012); no global V2 generation or release approval is authorized by this lot.",
+    "human_approval": false
+  }
+}
