@@ -827,11 +827,8 @@ def build(apply_changes: bool) -> dict[str, Any]:
 
     packet = []
     for row in human:
-        if row.get("carrier_present") and not any(
-            f["verdict"].startswith("CARRIER_CONTRADICTS")
-            for f in row.get("carrier_audit", [])
-        ):
-            continue
+        # La présence d'un barème indicatif ne vaut ni dérivation depuis le
+        # sujet ni décision humaine. La revue doit encore voir la répartition.
         constraints = {
             "required_total": row["declared_total"],
             "duration_min": row["duration_min"],
@@ -928,6 +925,9 @@ def build(apply_changes: bool) -> dict[str, Any]:
                 "verdict": "PENDING",
                 "status": "ATTENTION_REQUIRED",
                 "proposal_is_not_a_decision": (
+                    "cette repartition est deja materialisee comme bareme "
+                    "indicatif ; sa presence ne vaut pas approbation humaine"
+                    if row.get("carrier_present") else
                     "cette repartition est une proposition machine ; elle n'est "
                     "ecrite dans aucun corrige et ne vaut pas barème"
                 ),

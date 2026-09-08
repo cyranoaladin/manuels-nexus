@@ -309,7 +309,9 @@ La politique est fixée : pour chaque question évaluée, des POINTS, un ATTENDU
 
 Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le contenu candidat que votre verdict de chapitre couvre.
 
-### 1SPE-GEOREP-EV-A
+### 1SPE-GEOREP-EV-A — **DÉCISION HUMAINE OBLIGATOIRE**
+
+Le sujet ne value aucune question individuellement : répartir son total est un jugement pédagogique, et il vous revient. Le dossier complet — contraintes du sujet, geste de raisonnement, indicateurs observables, proposition et sa justification — est dans `audit/1SPE_ASSESSMENT_BAREME_TRANSCRIPTION.json`.
 
 **Exercice 1** — 4 points (C1) · 4 question(s) en attente de jugement
 
@@ -343,7 +345,9 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 - **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
 - **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
 
-### 1SPE-GEOREP-EV-B
+### 1SPE-GEOREP-EV-B — **DÉCISION HUMAINE OBLIGATOIRE**
+
+Le sujet ne value aucune question individuellement : répartir son total est un jugement pédagogique, et il vous revient. Le dossier complet — contraintes du sujet, geste de raisonnement, indicateurs observables, proposition et sa justification — est dans `audit/1SPE_ASSESSMENT_BAREME_TRANSCRIPTION.json`.
 
 **Exercice 1** — 4 points (C1) · 4 question(s) en attente de jugement
 

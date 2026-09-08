@@ -21,7 +21,7 @@ Porteur de charte : `\baremeIndicatif`.
 | `CARRIER_OUTSIDE_ANY_EXERCISE` | — |
 | `CARRIER_VALUES_DISPUTE_SUBJECT` | — |
 | `HUMAN_REQUIRED_IDS` | 1SPE-GEOREP-EV-A, 1SPE-GEOREP-EV-B |
-| `ATTENTION_REQUIRED` | — |
+| `ATTENTION_REQUIRED` | 2 |
 | `CANDIDATE_PROPOSAL_SUM_MISMATCH` | — |
 | `CARRIER_MATCHES_SUBJECT` | 74 |
 | `CARRIER_CONTRADICTS_SUBJECT` | — |
@@ -242,14 +242,14 @@ Porteur de charte : `\baremeIndicatif`.
 
 - sujet : `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-B.tex`
 - corrigé : `Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-B-corrige.tex`
-- capacités : C1, C2, C3, C4, C5, C6
+- capacités : C1, C2, C3, C4, C5, C6, C7, C8
 - classement : **TRANSCRIPTIBLE**
 
 | Ex. | Total | Questions | Questions valuées | Somme | Barème transcrit |
 |---:|---:|---:|---:|---:|---|
 | 1 | 7 | 4 | 4 | 7 | `\baremeIndicatif{Q1 : 1 pt (calculer) ; Q2 : 2 pts (calculer, communiquer) ; Q3 : 2 pts (calculer) ; Q4 : 2 pts (calculer, communiquer)}` |
 | 2 | 5 | 4 | 4 | 5 | `\baremeIndicatif{Q1 : 2 pts (calculer, communiquer) ; Q2 : 1 pt (raisonner) ; Q3 : 1 pt (représenter) ; Q4 : 1 pt (calculer)}` |
-| 3 | 4 | 3 | 3 | 4 | `\baremeIndicatif{Q1 : 2 pts (calculer, représenter) ; Q2 : 1 pt (calculer) ; Q3 : 1 pt (calculer)}` |
+| 3 | 4 | 4 | 4 | 4 | `\baremeIndicatif{Q1 : 1 pt (calculer, raisonner) ; Q2 : 1 pt (calculer, représenter) ; Q3 : 1 pt (calculer) ; Q4 : 1 pt (calculer)}` |
 | 4 | 4 | 4 | 4 | 4 | `\baremeIndicatif{Q1 : 1 pt (modeliser) ; Q2 : 1 pt (modeliser) ; Q3 : 1 pt (calculer) ; Q4 : 1 pt (chercher)}` |
 
 ### `1SPE-SUITES-EV-A`

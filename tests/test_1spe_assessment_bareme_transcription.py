@@ -211,6 +211,29 @@ def test_a_subject_that_does_not_value_its_questions_is_refused(
     assert "question par question" in " ".join(verdict["reasons"])
 
 
+def test_an_indicative_carrier_cannot_remove_the_human_decision(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Un barème présent prouve son existence, pas son approbation humaine."""
+
+    subject = tmp_path / "FIXTURE-EV-A.tex"
+    subject.write_text(UNMARKED_SUBJECT, encoding="utf-8")
+    correction = tmp_path / "FIXTURE-EV-A-corrige.tex"
+    correction.write_text(
+        r"\section*{Exercice 1}" + "\n"
+        + r"\baremeIndicatif{Q1 : 2 pts ; Q2 : 2 pts}", encoding="utf-8",
+    )
+    monkeypatch.setattr(gate, "assessments", lambda: [subject])
+    before = correction.read_bytes()
+
+    result = gate.build(apply_changes=False)
+
+    assert result["summary"]["HUMAN_PEDAGOGICAL_JUDGEMENT_REQUIRED"] == 1
+    assert result["summary"]["ATTENTION_REQUIRED"] == 1
+    assert result["human_decision_packet"][0]["verdict"] == "PENDING"
+    assert correction.read_bytes() == before
+
+
 def test_a_fully_valued_subject_is_transcriptible(tmp_path: Path) -> None:
     subject = _subject(tmp_path, MARKED_SUBJECT)
     verdict = gate.classify(subject)
