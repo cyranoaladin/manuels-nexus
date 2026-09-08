@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 from typing import Any
@@ -11,12 +12,18 @@ def usable(binding: dict[str, Any]) -> bool:
     return binding.get("state") == "CURRENT_BOUND" and binding.get("method_state") == "CURRENT_TRUSTED"
 
 
-def _method_state(receipt: dict[str, Any], chapter: Path, root: Path) -> str:
-    # NSI's present writer is return-code/trace/Ruff based and emits no method
-    # or dependency binding. A source hash does not fix that missing evidence.
+def _method_state(receipt: dict[str, Any], chapter: Path, root: Path, source: Path) -> str:
+    # Load only the local, side-effect-free binding helper, never source code
+    # from a textbook or its execution verifier.
     if (chapter.resolve().is_relative_to((root / "NSI/chapitres").resolve())
             or receipt.get("reviewer") == "verify_python.py"):
-        return "UNTRUSTED_NSI_VERIFICATION_METHOD"
+        helper = Path(__file__).resolve().parents[1] / "NSI/scripts/execution_protocol.py"
+        spec = importlib.util.spec_from_file_location("nexus_nsi_receipt_protocol", helper)
+        if spec is None or spec.loader is None:
+            return "UNTRUSTED_CURRENT_VERIFIER_UNAVAILABLE"
+        protocol = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(protocol)
+        return protocol.current_evidence(receipt, source, chapter.parent.parent, root)
     if receipt.get("verification_protocol") != "EXECUTED_ASSERTIONS_PER_BLOCK_V1":
         return "UNTRUSTED_VERIFICATION_PROTOCOL"
     verifier = root / "Mathematiques/manuel-maths/scripts/verify_sympy.py"
@@ -66,7 +73,7 @@ def bind(receipt: dict[str, Any], chapter: Path, root: Path) -> dict[str, Any]:
     # into objet_id. Both require the explicit source path AND byte digest.
     if not identity or identity not in {meta.get('id'), source.stem}:
         return {**result, 'state': 'STALE', 'reason': 'SOURCE_IDENTITY_MISMATCH'}
-    method = _method_state(receipt, chapter, root)
+    method = _method_state(receipt, chapter, root, source)
     return {**result, 'state': 'CURRENT_BOUND', 'method_state': method,
             'reason': None if method == 'CURRENT_TRUSTED' else method,
             'canonical_object_id': meta.get('id'), 'receipt_object_id': identity}

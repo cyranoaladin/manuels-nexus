@@ -391,7 +391,8 @@ def analyser(
         for recu in sorted(validations.glob("*.json")):
             try:
                 donnees = json.loads(recu.read_text(encoding="utf-8"))
-            except json.JSONDecodeError:
+            except (json.JSONDecodeError, UnicodeError, OSError):
+                ch.rejected_receipts.append({"receipt": str(recu), "state": "UNREADABLE", "reason": "UNREADABLE_RECEIPT"})
                 continue
             verdict = str(donnees.get("verdict", "inconnu"))
             binding = bind_scientific_receipt(donnees, dossier, RACINE)

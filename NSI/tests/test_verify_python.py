@@ -63,9 +63,20 @@ def test_main_check_calcule_sans_ecrire(tmp_path, monkeypatch, capsys):
 def test_cli_accepte_check():
     script = ROOT / "scripts" / "verify_python.py"
     proc = subprocess.run(
-        [sys.executable, str(script), "--chap", "CHAPITRE-ABSENT", "--check"],
+        [sys.executable, str(script), "--help"],
         cwd=ROOT,
         capture_output=True,
         text=True,
     )
     assert proc.returncode == 0, proc.stderr
+    assert "--check" in proc.stdout
+
+
+def test_cli_chapter_absent_is_an_error():
+    script = ROOT / "scripts" / "verify_python.py"
+    proc = subprocess.run(
+        [sys.executable, str(script), "--chap", "CHAPITRE-ABSENT", "--check"],
+        cwd=ROOT, capture_output=True, text=True,
+    )
+    assert proc.returncode != 0
+    assert "absent" in proc.stdout.lower()

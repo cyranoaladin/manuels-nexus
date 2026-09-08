@@ -951,7 +951,7 @@ def validate_findings(
     )
 
 
-_VERIFY_MODULES: dict[tuple[Path, str, str], Any] = {}
+_VERIFY_MODULES: dict[tuple[Path, str, str, str], Any] = {}
 _SYSTEMD_PREFLIGHT_CACHE: set[tuple[Path, Path, Path]] = set()
 SYSTEMD_CGROUP_PROPERTIES = (
     "TasksMax=16",
@@ -1330,29 +1330,37 @@ def _verify_module(root: Path = ROOT) -> Any:
     scripts_dir = resolved_root / "NSI" / "scripts"
     verifier_path = scripts_dir / "verify_python.py"
     common_path = scripts_dir / "common.py"
-    if not verifier_path.is_file() or not common_path.is_file():
-        raise ReviewValidationError("verify_python.py ou common.py introuvable")
+    protocol_path = scripts_dir / "execution_protocol.py"
+    if not all(path.is_file() for path in (verifier_path, common_path, protocol_path)):
+        raise ReviewValidationError("verify_python.py, common.py ou execution_protocol.py introuvable")
     cache_key = (
         resolved_root,
         sha256_file(verifier_path),
         sha256_file(common_path),
+        sha256_file(protocol_path),
     )
     cached = _VERIFY_MODULES.get(cache_key)
     if cached is not None:
         return cached
 
-    suffix_payload = "|".join((str(resolved_root), cache_key[1], cache_key[2]))
+    suffix_payload = "|".join((str(resolved_root), *cache_key[1:]))
     suffix = hashlib.sha256(suffix_payload.encode("utf-8")).hexdigest()[:12]
     previous_common = sys.modules.get("common")
+    previous_protocol = sys.modules.get("execution_protocol")
     try:
         common = _load_module(common_path, f"nsi_review_common_{suffix}")
         sys.modules["common"] = common
+        sys.modules["execution_protocol"] = _load_module(protocol_path, f"nsi_review_protocol_{suffix}")
         module = _load_module(verifier_path, f"nsi_review_verify_python_{suffix}")
     finally:
         if previous_common is None:
             sys.modules.pop("common", None)
         else:
             sys.modules["common"] = previous_common
+        if previous_protocol is None:
+            sys.modules.pop("execution_protocol", None)
+        else:
+            sys.modules["execution_protocol"] = previous_protocol
     module.run_sandbox = lambda script, timeout=30: _confined_python(
         script, timeout=timeout
     )

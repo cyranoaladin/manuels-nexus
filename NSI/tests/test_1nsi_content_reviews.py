@@ -730,6 +730,7 @@ def _install_review_support(root: Path) -> None:
         "scripts/review_1nsi_content.py",
         "NSI/scripts/verify_python.py",
         "NSI/scripts/common.py",
+        "NSI/scripts/execution_protocol.py",
         "audit/schemas/v1/1nsi-content-review.schema.json",
     ):
         destination = root / relative
@@ -2330,6 +2331,11 @@ def test_verifier_cache_is_invalidated_by_checker_or_common_digest(
     after_common = review_module._verify_module(tmp_path)
     assert after_common is not after_checker
 
+    helper_path = tmp_path / "NSI/scripts/execution_protocol.py"
+    helper_path.write_text(helper_path.read_text() + "# helper mutation\n")
+    after_helper = review_module._verify_module(tmp_path)
+    assert after_helper is not after_common
+
 
 def test_accepts_finding_with_git_sealed_review_receipt(
     sealed_review, review_module
@@ -3536,19 +3542,20 @@ def test_missing_systemd_user_cgroup_is_a_hard_validation_error(
 
 def test_check_object_uses_confined_ruff_wrapper(tmp_path, review_module) -> None:
     _install_review_support(tmp_path)
-    tex = tmp_path / "listing.tex"
+    tex = tmp_path / "NSI/listing.tex"
+    (tex.parent / "value.py").write_text("value = 1\nprint(value)\n")
     tex.write_text(
-        "\\begin{python}\nvalue = 1\nprint(value)\n\\end{python}\n",
+        "% PYTHON-SOURCE: value.py\n\\begin{python}\nvalue = 1\nprint(value)\n\\end{python}\n",
         encoding="utf-8",
     )
 
     verifier = review_module._verify_module(tmp_path)
     result = verifier.check_object(tex, no_ruff=False)
 
-    assert result == {
-        "verdict": "verified",
-        "checks": [{"type": "ruff", "index": 0, "pass": True, "detail": ""}],
-    }
+    assert {"type": "ruff", "index": 0, "pass": True, "detail": ""} in result["checks"]
+    # Ruff checks style only; this published listing has never been executed.
+    assert result["verdict"] == "manual_review"
+    assert any(c["type"] == "listing_execution" and c["state"] == "PENDING" for c in result["checks"])
 
 
 def test_discover_sources_normalizes_malformed_contract_type(

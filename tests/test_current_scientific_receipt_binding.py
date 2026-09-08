@@ -152,3 +152,67 @@ def test_old_nsi_execution_is_source_bound_but_not_a_scientific_certificate(tmp_
     binding = bind(receipt, chapter, tmp_path)
     assert binding['state'] == 'CURRENT_BOUND'
     assert binding['method_state'] == 'UNTRUSTED_NSI_VERIFICATION_METHOD'
+
+
+def test_an_unreadable_receipt_is_never_silently_dropped(chapter):
+    directory, _, receipt_path = chapter
+    receipt_path.write_text('{invalid json')
+    result = dashboard.analyser(directory, {}, {})
+    assert result.rejected_receipts
+    assert result.rejected_receipts[0]['reason'] == 'UNREADABLE_RECEIPT'
+
+
+@pytest.fixture
+def current_nsi_receipt(tmp_path, monkeypatch):
+    from NSI.scripts import verify_python as verifier
+    import shutil
+    from NSI.scripts.execution_protocol import implementation_manifest
+    for relative in implementation_manifest(ROOT):
+        target = tmp_path / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / relative, target)
+    chapter = tmp_path / 'NSI/chapitres/TNSI-FIX'
+    source = chapter / 'cours/one.tex'
+    source.parent.mkdir(parents=True)
+    code = chapter / 'code/value.py'
+    code.parent.mkdir()
+    code.write_text('value = 2\n')
+    source.write_text('% META: {"id":"one"}\n% PYTHON-SOURCE: code/value.py\n'
+                      '\\begin{python}\nvalue = 2\n\\end{python}\n'
+                      '% BEGIN-VERIFY\n% value = 2\n% assert value == 2\n% END-VERIFY\n')
+    monkeypatch.setattr(verifier, 'ROOT', tmp_path / 'NSI')
+    assert verifier.main('TNSI-FIX', True) == 0
+    receipt = json.loads((chapter / 'validations/one.execution.json').read_text())
+    return tmp_path, chapter, source, code, receipt
+
+
+def test_new_nsi_receipt_is_method_and_dependency_bound(current_nsi_receipt):
+    from scientific_receipt_binding import bind, usable
+    root, chapter, _, _, receipt = current_nsi_receipt
+    assert usable(bind(receipt, chapter, root))
+
+
+@pytest.mark.parametrize('mutation', ['changed_python', 'changed_helper', 'changed_verifier', 'omitted_dependency', 'omitted_implementation', 'undemonstrated_assertions', 'documentary_claim_credit'])
+def test_nsi_method_or_dependency_changes_never_reuse_current_source_pass(current_nsi_receipt, mutation):
+    from scientific_receipt_binding import bind, usable
+    root, chapter, source, code, receipt = current_nsi_receipt
+    assert usable(bind(receipt, chapter, root))
+    if mutation == 'changed_python':
+        code.write_text('value = 3\n')
+    elif mutation == 'changed_helper':
+        helper = root / 'NSI/scripts/execution_protocol.py'
+        helper.write_text(helper.read_text() + '# mutation\n')
+    elif mutation == 'changed_verifier':
+        verifier = root / 'NSI/scripts/verify_python.py'
+        verifier.write_text(verifier.read_text() + '# mutation\n')
+    elif mutation == 'omitted_dependency':
+        receipt['dependency_digests'] = {}
+    elif mutation == 'omitted_implementation':
+        receipt['implementation_digests'].pop('scripts/review_1nsi_content.py')
+    elif mutation == 'undemonstrated_assertions':
+        next(c for c in receipt['details']['checks'] if c['type'] == 'verify')['assertions_executed'] = 0
+    else:
+        receipt['certifies_documentary_claims'] = True
+    binding = bind(receipt, chapter, root)
+    assert binding['state'] == 'CURRENT_BOUND'
+    assert not usable(binding)
