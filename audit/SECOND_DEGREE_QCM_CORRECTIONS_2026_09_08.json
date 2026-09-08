@@ -1,0 +1,731 @@
+{
+  "artifact_type": "development_correction_log",
+  "schema_version": 1,
+  "batch": "B4_QCM",
+  "chapter": "1SPE-SECOND-DEGRE",
+  "approves_nothing": true,
+  "observed_head": "3a4c3469622e19ec7e3e5e37502dc89f004f079e",
+  "worktree_observation": true,
+  "generated_at": "2026-09-08T13:24:30.337668+00:00",
+  "source": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/qcm/1SPE-SECDEG-QCM.json",
+  "before_head": "3a4c3469622e19ec7e3e5e37502dc89f004f079e",
+  "before_source_sha256": "8936850128660add459fa109233bf1c926a4ac83018ac22a312f299254c97be1",
+  "after_source_sha256": "43b2b86c0d068e4cd07821ee90b526714531db0caf7a4dc6d066ffdc34670916",
+  "derived_tex": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/qcm/1SPE-SECDEG-QCM.tex",
+  "derived_tex_sha256": "d87f0d1ab86692a4131f78f3eac87fd09061e85dab000d9cfa594bb52d0f8b2c",
+  "question_digest_algorithm": "SHA256 UTF-8 JSON sort_keys=true separators=(comma,colon), ensure_ascii=false, all question fields except id; local trace only, not a replacement for repository semantic digest authority.",
+  "questions_current": 19,
+  "questions_read": 19,
+  "diagnostics_read": 57,
+  "questions": [
+    {
+      "question_id": "Q1",
+      "before_question_payload_sha256": "c46699c883b83987f7e1ef3dc23427eb86fbdf59b6032d7a79924a7d2f775ee5",
+      "after_question_payload_sha256": "38c2dc934d7da6871f1d11c8932b44d95479b320428c8e228d61137ae60f0f0f",
+      "changed": true,
+      "capacity_before": "C1",
+      "capacity_after": "C1",
+      "independently_computed_answer": "A",
+      "scientific_reasoning": "Seule 2x²−5x+1 a degré exactement2 ; degré1, degré3 et puissance−2 pour les autres propositions.",
+      "diagnostics_read": [
+        "B",
+        "C",
+        "D"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q2",
+      "before_question_payload_sha256": "d9f898f47b0cf63bfb14e6853d7d116c5163e404a09b81680765b4ad555889a1",
+      "after_question_payload_sha256": "85e4d369c804abe9f359eb7d31e8db6351c4ab4b02dbe29ac1d57bea8aa3daf4",
+      "changed": true,
+      "capacity_before": "C1",
+      "capacity_after": "C1",
+      "independently_computed_answer": "B",
+      "scientific_reasoning": "Complétion : 2[(x−2)²−4]+6=2(x−2)²−2. A développe2x²−16x+22 ; C ajoute4 ; D perd le facteur2.",
+      "diagnostics_read": [
+        "A",
+        "C",
+        "D"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q3",
+      "before_question_payload_sha256": "cd1e959753b381fa39f0bdea49c4462dce4974801899b9194222b4ab6d9ac105",
+      "after_question_payload_sha256": "610736c36b1c09e05630e24d7d5053e199ec0ab301326808403d720cc88aeba6",
+      "changed": true,
+      "capacity_before": "C1",
+      "capacity_after": "C1",
+      "independently_computed_answer": "A",
+      "scientific_reasoning": "3(x²−2x+1)+5=3x²−6x+8. B omet5, C omet le double produit, D remplace à tort le carré par x²−1.",
+      "diagnostics_read": [
+        "B",
+        "C",
+        "D"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q4",
+      "before_question_payload_sha256": "351b1f90e81e7913ee2035990606e30d5797d3dcd5689e48be35a645449ad912",
+      "after_question_payload_sha256": "b699169f16c0517691fe4da169ae0718e51a19504507c47a60babe4a4b2fa4f8",
+      "changed": true,
+      "capacity_before": "C2",
+      "capacity_after": "C2",
+      "independently_computed_answer": "B",
+      "scientific_reasoning": "−x²+4x−3=−(x−2)²+1 ; maximum en2. En−2/−4/4, les valeurs sont−15/−35/−3, toutes inférieures à1.",
+      "diagnostics_read": [
+        "A",
+        "C",
+        "D"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q5",
+      "before_question_payload_sha256": "ad3d42b59b5a63c9f5c167c0a50e695785b731ff4c8cc6f7a4bfb62268d42acc",
+      "after_question_payload_sha256": "5d3f09a541261057d889f7cbda1a2344161cbdec1aa8e3cf9046a6d7a8b02298",
+      "changed": true,
+      "capacity_before": "C2",
+      "capacity_after": "C2",
+      "independently_computed_answer": "C",
+      "scientific_reasoning": "f=(x−3)²−4, décroissante jusqu’à3 et croissante ensuite ; les intervalles A/D sont croissants, B contient la remontée3→5.",
+      "diagnostics_read": [
+        "A",
+        "B",
+        "D"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q6",
+      "before_question_payload_sha256": "ba0524bbd8688e6953a643ecb3b5b2f95536ba2b7d0fed74897b5730861bb710",
+      "after_question_payload_sha256": "9209275e3dc4f33714df6480173f01feff265977d438aa4e7439b3b8065a7de8",
+      "changed": true,
+      "capacity_before": "C2",
+      "capacity_after": "C2",
+      "independently_computed_answer": "D",
+      "scientific_reasoning": "f=2(x−1)²+5≥5 avec égalité en1 ; a2 positif. 7 est f0, pas le minimum.",
+      "diagnostics_read": [
+        "A",
+        "B",
+        "C"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q7",
+      "before_question_payload_sha256": "3d6ff70df09b1bf7345ed0bd5064f3e0c86c0bfb8bc21081649504870f8f7f6e",
+      "after_question_payload_sha256": "510f991c5aa49d8ac1e265428ce0857c3bc0d488c73acfebf62d5971420aced0",
+      "changed": true,
+      "capacity_before": "C3",
+      "capacity_after": "C3",
+      "independently_computed_answer": "A",
+      "scientific_reasoning": "Δ=(−5)²−4×1×6=1. Les distracteurs49/−1/25 sont respectivement addition, soustraction inversée et terme4ac omis.",
+      "diagnostics_read": [
+        "B",
+        "C",
+        "D"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q8",
+      "before_question_payload_sha256": "a718068fd166d19ba5b035122837c951d3197399099fe7aa1ac872f99f1afe64",
+      "after_question_payload_sha256": "e6034f2fdc7f4e013a459334ea436eaee8eaa30cc1f09215e66c28405cdfd558",
+      "changed": true,
+      "capacity_before": "C3",
+      "capacity_after": "C3",
+      "independently_computed_answer": "B",
+      "scientific_reasoning": "2x²−4x+2=2(x−1)² ; une racine double1. L’évaluation en2 donne2, non0.",
+      "diagnostics_read": [
+        "A",
+        "C",
+        "D"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q9",
+      "before_question_payload_sha256": "cec054944df6388680b21f8c8ef70910e0334250664d323bff699b3d5288cdc8",
+      "after_question_payload_sha256": "1cc84e40dc675a4a7ddbe87d8b568efd66b1861808c5c0d8d8d072ad150486a1",
+      "changed": true,
+      "capacity_before": "C3",
+      "capacity_after": "C3",
+      "independently_computed_answer": "C",
+      "scientific_reasoning": "x²−3x−4=(x+1)(x−4) ; racines−1,4 ; substitutions f−4=24 et f1=−6 réfutent les autres couples.",
+      "diagnostics_read": [
+        "A",
+        "B",
+        "D"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q10",
+      "before_question_payload_sha256": "ea3ce421984ac7e33a5162aa2b4b9429d39cee89a84a807e798d094283c2ddd0",
+      "after_question_payload_sha256": "d7e9e84e53d38c7950d89c4f9196c1a53175f2d0498717c56d7301c2aa983265",
+      "changed": true,
+      "capacity_before": "C4",
+      "capacity_after": "C4",
+      "independently_computed_answer": "D",
+      "scientific_reasoning": "2(x−1)(x−3)=2x²−8x+6. A mauvais dominant1, B mauvais dominant4, C mauvaises racines−1/−3.",
+      "diagnostics_read": [
+        "A",
+        "B",
+        "C"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q11",
+      "before_question_payload_sha256": "565e195523a003388208134791f71d2a3834991221cec594ede06047515f7314",
+      "after_question_payload_sha256": "d568cc094ff20e401ec3f36242c02f39456b55142908c6281d16cc7242f69c35",
+      "changed": true,
+      "capacity_before": "C4",
+      "capacity_after": "C8",
+      "independently_computed_answer": "A",
+      "scientific_reasoning": "Produit de deux facteurs affines à racines2 et5, dominant positif : ≤0 exactement sur[2,5], bornes incluses.",
+      "diagnostics_read": [
+        "B",
+        "C",
+        "D"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q12",
+      "before_question_payload_sha256": "7044d35e9f5ae77e94a7ef2995c1b80ca359b3ee061b80d2bd7784eb6c6c6ee6",
+      "after_question_payload_sha256": "af5ff328cf69673ae44542ba5e0c338cad080579647d12d0cc782690f924d6c7",
+      "changed": true,
+      "capacity_before": "C4",
+      "capacity_after": "C5",
+      "independently_computed_answer": "B",
+      "scientific_reasoning": "f=(x+1)²+4≥4>0 surR. SolutionR ; 0 et−1 sont aussi solutions, ce qui réfute les exclusions ; ensemble vide faux.",
+      "diagnostics_read": [
+        "A",
+        "C",
+        "D"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q13",
+      "before_question_payload_sha256": "13af11eca3675fc228982c9070ce6cf820b8e83c6f710e2f99f38e9e3b92a584",
+      "after_question_payload_sha256": "fd2dc2fff28eeadbf76a828295bc00b18bf40764b356e5d0c2d05460b53cb66b",
+      "changed": true,
+      "capacity_before": "C5",
+      "capacity_after": "C5",
+      "independently_computed_answer": "C",
+      "scientific_reasoning": "(x+2)(x−3)≤0 exactement sur[−2,3]. A omet]0,3], D omet[−2,0[, B inverse intérieur/extérieur.",
+      "diagnostics_read": [
+        "A",
+        "B",
+        "D"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q14",
+      "before_question_payload_sha256": "4067e39d4417618dccc05515016261b8212b38b53f454a4a188acaf11a70c29b",
+      "after_question_payload_sha256": "c2f81687ab85b52001d8fa288a5243aaac70225f66fa6b1db1cd97153e3523cb",
+      "changed": true,
+      "capacity_before": "C5",
+      "capacity_after": "C5",
+      "independently_computed_answer": "D",
+      "scientific_reasoning": "−(x−1)(x−3)≥0 exactement sur[1,3]. A inverse signe ; B mauvaise borne−1 ; C réunit ces deux défauts.",
+      "diagnostics_read": [
+        "A",
+        "B",
+        "C"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q15",
+      "before_question_payload_sha256": "851ed12bf1bcbbb39eca010caca22488fbf6dbea75191b94a7be92f96cf8f5ad",
+      "after_question_payload_sha256": "9b1f69de2101e83820ac3a1fcfab2f140fa334e1bab2d5a0febbeee0a9968351",
+      "changed": true,
+      "capacity_before": "C5",
+      "capacity_after": "C3",
+      "independently_computed_answer": "A",
+      "scientific_reasoning": "Δ=4−4k ; unique solution ssi k1. k2→Δ−4 ; k0→Δ4 ; k−1→Δ8 ; a reste1 dans tous les cas.",
+      "diagnostics_read": [
+        "B",
+        "C",
+        "D"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q17",
+      "before_question_payload_sha256": "d54150d0142e4557159f6abda31dc0fcbb6f6f693a91ccc25a6ea4321e3aa6a7",
+      "after_question_payload_sha256": "0a0af3712114335039495895b5a7215f1a6f9aa1333b3e57c38e9f3e077cbcd3",
+      "changed": true,
+      "capacity_before": "C6",
+      "capacity_after": "C6",
+      "independently_computed_answer": "C",
+      "scientific_reasoning": "f=−2(x−2)²+11≤11 avec égalité en2. 3=f0,8 coefficientb,2 abscisse ; aucun n’est le maximum11.",
+      "diagnostics_read": [
+        "A",
+        "B",
+        "D"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q18",
+      "before_question_payload_sha256": "57797ffadb0d27162373e99bd86ef56ede8cb0945cbd17cdcaa943a25670e936",
+      "after_question_payload_sha256": "463223d058d3eebde0cc8752780881b9d05cf9a1cf68c95c9b51c32079d8de17",
+      "changed": true,
+      "capacity_before": "C6",
+      "capacity_after": "C6",
+      "independently_computed_answer": "D",
+      "scientific_reasoning": "h=−5(t−2)²+20 sur[0,4] ; maximum20 en2 admissible. t4 retour au sol, t1 hauteur15, t20 hors domaine.",
+      "diagnostics_read": [
+        "A",
+        "B",
+        "C"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q19",
+      "before_question_payload_sha256": "d9ec6621bd1d77d35744c5101cb999ce233bbd91f3d1b5e628db06f882f6d6cd",
+      "after_question_payload_sha256": "a76589a5a07ed5f425873c463897f6c97b89eb0e5fb0397880af51f4ce2346bb",
+      "changed": true,
+      "capacity_before": "C7",
+      "capacity_after": "C7",
+      "independently_computed_answer": "C",
+      "scientific_reasoning": "a2,b−6,c−8 ; Δ100>0 garantit deux racines distinctes. S=−b/a=3 etP=c/a=−4 ; les autres options inversent un ou deux signes.",
+      "diagnostics_read": [
+        "A",
+        "B",
+        "D"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "NOT_MACHINE_RESOLVABLE",
+        "family": null,
+        "option_truths": {},
+        "computed_value": null,
+        "independent_evidence": "",
+        "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+        "readable_options": null
+      },
+      "human_approval": false
+    },
+    {
+      "question_id": "Q20",
+      "before_question_payload_sha256": "770bf0bed7f394f23af8a3c209914d515037cb6792b81db0d4eb5a4e273aa245",
+      "after_question_payload_sha256": "75e88c352b5d94ebfad960c6fc212b7314337864d1a824be26e1e45f7b99123b",
+      "changed": true,
+      "capacity_before": "C8",
+      "capacity_after": "C8",
+      "independently_computed_answer": "D",
+      "scientific_reasoning": "Racines−3,1 et dominant−2 : strictement positif entre elles seulement. f2=−10 etf0=6 réfutent positivité partout et absence ; une racine double ne changerait pas le signe.",
+      "diagnostics_read": [
+        "A",
+        "B",
+        "C"
+      ],
+      "local_review_status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "reviewer": "agent:/root/programme_forensics",
+      "review_inherited": false,
+      "mechanical_solver": {
+        "status": "MACHINE_RESOLVED",
+        "family": "FACTORED_QUADRATIC_SIGN",
+        "option_truths": {
+          "A": false,
+          "B": false,
+          "C": false,
+          "D": true
+        },
+        "computed_value": "positif entre des racines -3 et 1",
+        "independent_evidence": "le coefficient dominant vaut -2 ; a l'exterieur des racines -3 et 1 le trinome a son signe, entre elles le signe contraire, donc f est positif entre les racines",
+        "reason": null,
+        "readable_options": null
+      },
+      "human_approval": false
+    }
+  ],
+  "findings": [
+    {
+      "id": "QCM-B4-001",
+      "severity": "PRODUCT_P2",
+      "question_ids": [
+        "Q11",
+        "Q12",
+        "Q15"
+      ],
+      "observation_and_correction": "False capacity mappings: given-factor sign C4→C8; positivity C4→C5 with equivalent explicit inequality; unique-root parameter C5→C3.",
+      "status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "human_approval": false
+    },
+    {
+      "id": "QCM-B4-002",
+      "severity": "PRODUCT_P2",
+      "question_ids": [
+        "Q16"
+      ],
+      "observation_and_correction": "Cubic volume image evaluation only tests prerequisite R3, not quadratic optimization C6. Removed from current chapter auto-evaluation without renumbering; volume calculation remains in TD fil rouge. No filler replacement.",
+      "status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "human_approval": false
+    },
+    {
+      "id": "QCM-B4-003",
+      "severity": "PRODUCT_P0",
+      "question_ids": [
+        "Q2",
+        "Q4",
+        "Q5",
+        "Q9",
+        "Q12",
+        "Q13",
+        "Q14",
+        "Q19"
+      ],
+      "observation_and_correction": "Diagnostics did not match the chosen numerical value or interval, or attributed impossible operations. Now each diagnosis describes the observable error and an exact comparison.",
+      "status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "human_approval": false
+    },
+    {
+      "id": "QCM-B4-004",
+      "severity": "PRODUCT_P2",
+      "question_ids": [
+        "Q2",
+        "Q4",
+        "Q5",
+        "Q12",
+        "Q17",
+        "Q18"
+      ],
+      "observation_and_correction": "General canonical-form computation imposed as expected procedure; replaced by simple square completion, as official2026 text requires.",
+      "status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "human_approval": false
+    },
+    {
+      "id": "QCM-B4-005",
+      "severity": "PRODUCT_P0",
+      "question_ids": [
+        "Q6",
+        "Q18",
+        "Q20"
+      ],
+      "observation_and_correction": "Improper quadratic coefficient directeur; seconds called portée; universal sign-change claim false at double root. Terminology and sign scope corrected.",
+      "status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "human_approval": false
+    },
+    {
+      "id": "QCM-B4-006",
+      "severity": "PRODUCT_P2",
+      "question_ids": [
+        "Q19"
+      ],
+      "observation_and_correction": "Question gave both roots, so basic sum/product arithmetic did not exercise their relation to coefficients. Statement now supplies2x²−6x−8 and asksS/P from coefficients without solving; same four options and correct key. REAL_GAP_C7_RELATION_NOT_EXERCISED.",
+      "status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "human_approval": false
+    },
+    {
+      "id": "QCM-B4-007",
+      "severity": "PRODUCT_P0",
+      "question_ids": [
+        "Q3",
+        "Q8",
+        "Q15"
+      ],
+      "observation_and_correction": "Unjustified diagnostic causal claims or double-error qualifier; explanations now rely on identities and substitutions rather than asserting a student mental process.",
+      "status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "human_approval": false
+    },
+    {
+      "id": "QCM-B4-008",
+      "severity": "PRODUCT_P2",
+      "question_ids": [
+        "Q1",
+        "Q3",
+        "Q4",
+        "Q6",
+        "Q7",
+        "Q8",
+        "Q10",
+        "Q11",
+        "Q12",
+        "Q13",
+        "Q14",
+        "Q17"
+      ],
+      "observation_and_correction": "Printed diacritics corrected in individually read fields. Remaining diagnostic mental-process attributions replaced by descriptions of the proposed error. Delta<0 and a<0 remediation labels now use supported LaTeX math mode. No answer key, option mathematics or capacity changed in this editorial follow-up.",
+      "status": "CORRECTED_PENDING_INDEPENDENT_REVIEW",
+      "human_approval": false
+    }
+  ],
+  "historical_dispositions": [
+    {
+      "question_id": "Q16",
+      "status": "SUPERSEDED_HISTORICAL",
+      "source_head": "3a4c3469622e19ec7e3e5e37502dc89f004f079e",
+      "source_sha256": "8936850128660add459fa109233bf1c926a4ac83018ac22a312f299254c97be1",
+      "question_payload_sha256": "5dbe9e510dabb6a4da916dd0a3e7191b7f9e1170aadb2b5e8adc443c0f30e96a",
+      "current": false,
+      "reason": "PREREQUISITE_IMAGE_OF_CUBIC_NOT_QUADRATIC_OPTIMIZATION",
+      "retained_current_content": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/07_td_fil_rouge.tex",
+      "retained_content_sha256": "87d3ec69a8654aa3b7e4d3a77295ac477fb7be5a6cf0bd21f32243d0295366d1",
+      "replacement_question": null,
+      "review_evidence_reused": false
+    }
+  ],
+  "tests": {
+    "command": "python -m pytest tests/test_second_degree_qcm_regressions.py -q --junitxml=/tmp/second-degree-qcm-tests.xml",
+    "rc": 0,
+    "collected": 19,
+    "passed": 19,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "junit_sha256": "9f2e5f7abcba9e3b94b1da2040ef2f50cfdc5d594636c09ad73588fd9e708cfb",
+    "red_observation": "17 initial regressions all failed before source correction; 18th test mutation changes a true displayed polynomial identity and is rejected. Seven first rerun failures were fixture symbol-assumption mismatches, corrected to the parser’s real symbols. The19th editorial regression failed on missing printed accent before the targeted follow-up correction.",
+    "mutation": "Q2 diagnostic expansion −16x→−15x raises AssertionError"
+  },
+  "canonical_tex_check": {
+    "command": "python Mathematiques/manuel-maths/scripts/build_qcm_tex.py --chap 1SPE-SECOND-DEGRE --check",
+    "rc": 0,
+    "questions": 19
+  },
+  "canonical_sympy_receipt": {
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/validations/1SPE-SECDEG-QCM.sympy.json",
+    "sha256": "100e2eb0b2d76c33b24125271c068c55aa804d5a5198d9c8811568b77d5247ec",
+    "source_sha256": "sha256:d87f0d1ab86692a4131f78f3eac87fd09061e85dab000d9cfa594bb52d0f8b2c",
+    "verdict": "manual_review",
+    "temporary_root": "/tmp/nexus-second-degree-qcm-vwgar2c3",
+    "rc": 0,
+    "log_sha256": "94b739a22f38a2bcf211240db2784fb917df0112d99aaa2f700c058025cc98d2"
+  },
+  "mechanical_solver_counts": {
+    "NOT_MACHINE_RESOLVABLE": 18,
+    "MACHINE_RESOLVED": 1
+  },
+  "pending_dependencies": [
+    {
+      "path": "tests/test_qcm_scientific_answer_key_audit.py",
+      "test": "test_three_requested_false_greens_are_closed_in_current_audit",
+      "reason": "Historical Q16 is still required as a current PASS by an old aggregate test; reconcile at fresh aggregate generation, do not retain it as current evidence."
+    }
+  ],
+  "review_status": "PENDING_INDEPENDENT_REVIEW",
+  "human_approval": false,
+  "release_conclusion": "NOT_CERTIFIED",
+  "excluded_scope": [
+    "Visual PDF review",
+    "Human approval",
+    "Full pedagogical chapter quality",
+    "Global review-index / QCM aggregate regeneration"
+  ]
+}
