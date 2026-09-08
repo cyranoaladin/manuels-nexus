@@ -72,67 +72,98 @@ def test_an_adequate_chapter_emits_no_blocker(reasons) -> None:
     assert reasons.classify("CONTENT:X:pedagogical_quality:STRONG") is None
 
 
+@pytest.fixture()
+def verdicts_synthetiques(reasons, tmp_path, monkeypatch):
+    """Un corpus fabrique, avec un chapitre faible et un inexploitable.
+
+    Le corpus reel n'en compte plus aucun, et c'est le but recherche. Une
+    population vide ne prouve pourtant rien sur le detecteur : elle le rend
+    seulement silencieux. On lui fournit donc les cas qu'il doit voir.
+    """
+
+    (tmp_path / "audit").mkdir()
+    (tmp_path / "audit/CHAPTER_PEDAGOGICAL_VERDICT.json").write_text(
+        json.dumps({
+            "chapters": [
+                {"CHAPTER_ID": "TEST-FAIBLE", "PEDAGOGICAL_VERDICT": "WEAK"},
+                {"CHAPTER_ID": "TEST-INEXPLOITABLE", "PEDAGOGICAL_VERDICT": "UNUSABLE"},
+                {"CHAPTER_ID": "TEST-SAIN", "PEDAGOGICAL_VERDICT": "ADEQUATE"},
+                {"CHAPTER_ID": "TEST-FORT", "PEDAGOGICAL_VERDICT": "STRONG"},
+            ]
+        }),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(reasons, "ROOT", tmp_path)
+    return reasons
+
+
 def test_the_conflict_detector_catches_a_verdict_missing_from_the_taxonomy(
-    reasons,
+    verdicts_synthetiques,
 ) -> None:
     """Le test de mutation du detecteur lui-meme.
 
     On lui donne un jeu de raisons ou aucun blocker pedagogique n'apparait :
-    il doit signaler un conflit pour chaque chapitre faible du verdict. Sinon
-    `PEDAGOGICAL_QUALITY_TAXONOMY_CONFLICTS = 0` ne prouverait rien.
+    il doit signaler un conflit pour chaque chapitre faible ou inexploitable.
+    Sinon `PEDAGOGICAL_QUALITY_TAXONOMY_CONFLICTS = 0` ne prouverait rien.
     """
 
-    payload = json.loads(VERDICTS.read_text(encoding="utf-8"))
-    faibles = [
-        r["CHAPTER_ID"] for r in payload["chapters"]
-        if r["PEDAGOGICAL_VERDICT"] in {"WEAK", "UNUSABLE"}
+    conflits = verdicts_synthetiques._pedagogical_quality_conflicts([])
+    assert sorted(c["chapter"] for c in conflits) == [
+        "TEST-FAIBLE", "TEST-INEXPLOITABLE"
     ]
-    conflits = reasons._pedagogical_quality_conflicts([])
-    assert sorted(c["chapter"] for c in conflits) == sorted(faibles)
-    for conflit in conflits:
-        assert conflit["observed"] == "ABSENT_FROM_TAXONOMY"
+    assert all(c["observed"] == "ABSENT_FROM_TAXONOMY" for c in conflits)
+    assert {c["expected"] for c in conflits} == {"PRODUCT_P2", "PRODUCT_P1"}
 
 
 def test_the_conflict_detector_is_silent_when_every_verdict_is_routed(
-    reasons,
+    verdicts_synthetiques,
 ) -> None:
-    payload = json.loads(VERDICTS.read_text(encoding="utf-8"))
-    attendu = reasons.PEDAGOGICAL_QUALITY_EXPECTED_TAXONOMY
+    attendu = verdicts_synthetiques.PEDAGOGICAL_QUALITY_EXPECTED_TAXONOMY
     complet = [
-        {
-            "target": r["CHAPTER_ID"],
-            "category": attendu[r["PEDAGOGICAL_VERDICT"]],
-            "root_cause_id": "ROOT-PEDAGOGICAL-QUALITY-"
-            + r["PEDAGOGICAL_VERDICT"],
-        }
-        for r in payload["chapters"]
-        if r["PEDAGOGICAL_VERDICT"] in attendu
+        {"target": chapitre, "category": categorie,
+         "root_cause_id": "ROOT-PEDAGOGICAL-QUALITY-WEAK"}
+        for chapitre, categorie in (
+            ("TEST-FAIBLE", attendu["WEAK"]),
+            ("TEST-INEXPLOITABLE", attendu["UNUSABLE"]),
+        )
     ]
-    assert reasons._pedagogical_quality_conflicts(complet) == []
+    assert verdicts_synthetiques._pedagogical_quality_conflicts(complet) == []
 
 
-def test_a_downgraded_severity_is_reported_as_a_conflict(reasons) -> None:
-    """Router un chapitre faible en `PRODUCT_P2`... ou ailleurs.
+def test_a_downgraded_severity_is_reported_as_a_conflict(
+    verdicts_synthetiques,
+) -> None:
+    """Ranger un chapitre faible ailleurs qu'en `PRODUCT_P2`.
 
     Si demain quelqu'un range la qualite pedagogique en blocker de
-    certification -- « le produit va bien, c'est la preuve qui manque » --
-    le compteur produit retomberait a zero sans qu'un seul chapitre se soit
+    certification -- « le produit va bien, c'est la preuve qui manque » -- le
+    compteur produit retomberait a zero sans qu'un seul chapitre se soit
     ameliore. Le detecteur doit le voir.
     """
 
-    payload = json.loads(VERDICTS.read_text(encoding="utf-8"))
-    faible = next(
-        r for r in payload["chapters"] if r["PEDAGOGICAL_VERDICT"] == "WEAK"
-    )
     mal_range = [{
-        "target": faible["CHAPTER_ID"],
+        "target": "TEST-FAIBLE",
         "category": "CERTIFICATION_BLOCKER",
         "root_cause_id": "ROOT-PEDAGOGICAL-QUALITY-WEAK",
     }]
-    conflits = reasons._pedagogical_quality_conflicts(mal_range)
-    detail = next(c for c in conflits if c["chapter"] == faible["CHAPTER_ID"])
+    conflits = verdicts_synthetiques._pedagogical_quality_conflicts(mal_range)
+    detail = next(c for c in conflits if c["chapter"] == "TEST-FAIBLE")
     assert detail["expected"] == "PRODUCT_P2"
     assert detail["observed"] == "CERTIFICATION_BLOCKER"
+
+
+def test_the_real_corpus_carries_no_taxonomy_conflict(reasons) -> None:
+    """Et sur le corpus reel, le compteur doit valoir zero pour la bonne raison.
+
+    Zero conflit parce qu'aucun chapitre n'est faible, et non parce que le
+    detecteur ne regarde rien : les deux tests precedents l'etablissent sur
+    des cas fabriques.
+    """
+
+    payload = json.loads(VERDICTS.read_text(encoding="utf-8"))
+    verdicts = {r["PEDAGOGICAL_VERDICT"] for r in payload["chapters"]}
+    assert verdicts <= {"STRONG", "ADEQUATE"}
+    assert reasons._pedagogical_quality_conflicts([]) == []
 
 
 def test_the_matrix_publishes_the_verdict_that_the_gate_will_read() -> None:
