@@ -1,73 +1,94 @@
 % META: {"id": "TEXP-ARI-ME-009", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "methode", "capacites_codes": ["C9"], "methodes": ["M9"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
 % BEGIN-VERIFY
-% def euclide(a, b):
-%     while b:
-%         a, b = b, a % b
-%     return a
-% def bezout(a, b):
-%     if b == 0:
-%         return a, 1, 0
-%     d, u, v = bezout(b, a % b)
-%     return d, v, u - (a // b) * v
-% def crible(n):
-%     prem = [True] * (n + 1); prem[0] = prem[1] = False
-%     for p in range(2, int(n**0.5) + 1):
-%         if prem[p]:
-%             for m in range(p*p, n + 1, p):
-%                 prem[m] = False
-%     return [p for p in range(n + 1) if prem[p]]
-% def decomposition(n):
-%     f, p = {}, 2
-%     while p * p <= n:
-%         while n % p == 0:
-%             f[p] = f.get(p, 0) + 1; n //= p
-%         p += 1
-%     if n > 1:
-%         f[n] = f.get(n, 0) + 1
-%     return f
+% import hashlib
+% import math
+% from pathlib import Path
+% import runpy
+% depart = Path.cwd().resolve()
+% relatif = "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/python"
+% racine = next((p / relatif for p in (depart, *depart.parents) if (p / relatif).is_dir()), None)
+% assert racine is not None, "sources Python de la methode introuvables"
+% empreintes = {
+%     "euclide": "0215fa7fcc2be276acaee67aeed83976e47db01d4ba33e7d9c2faf626fc82802",
+%     "bezout": "bd8143fc34f9482a1a13ea3f57260a6a2680608bd84cfe77b33d060a7dc68ce3",
+%     "crible": "8e20871f55675e796b1da762a708331e3053b118d0bf91c5719bb22438b7a347",
+%     "decomposition": "4d50fc91c951a962e9215c0da11085f4e06565c0d5488031b1f299db4383d718",
+% }
+% fonctions = {}
+% for nom, empreinte in empreintes.items():
+%     fichier = racine / (nom + ".py")
+%     assert hashlib.sha256(fichier.read_bytes()).hexdigest() == empreinte, nom
+%     fonctions[nom] = runpy.run_path(str(fichier))[nom]
+% euclide, bezout, crible, decomposition = (fonctions[nom] for nom in empreintes)
 % assert euclide(252, 198) == 18
-% d, u, v = bezout(252, 198)
-% assert d == 18 and 252*u + 198*v == 18
+% for a, b in ((252, 198), (-252, 198), (252, -198), (-252, -198), (0, -12), (-12, 0)):
+%     d, u, v = bezout(a, b)
+%     assert euclide(a, b) == d == math.gcd(a, b) and a*u + b*v == d
+% for fonction in (euclide, bezout):
+%     try:
+%         fonction(0, 0)
+%     except ValueError:
+%         pass
+%     else:
+%         raise AssertionError("le couple (0, 0) doit etre refuse")
+% assert all(crible(n) == [] for n in (-2, 0, 1))
+% assert crible(2) == [2]
 % assert crible(30) == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+% assert 49 not in crible(49)
+% assert decomposition(1) == {}
 % assert decomposition(360) == {2: 3, 3: 2, 5: 1}
+% for n in (1, 2, 49, 97, 360):
+%     assert math.prod(p**k for p, k in decomposition(n).items()) == n
+% for n in (-1, 0):
+%     try:
+%         decomposition(n)
+%     except ValueError:
+%         pass
+%     else:
+%         raise AssertionError("la decomposition exige n >= 1")
 % END-VERIFY
-\begin{fichemethode}{M9}{Programmer Euclide, Bezout, le crible d'Eratosthene et la decomposition}
+\begin{fichemethode}{M9}{Programmer Euclide, Bézout, le crible d'Ératosthène et la décomposition}
 
 \quandUtiliser{%
   Utiliser cette méthode lorsque l'énoncé demande d'écrire (ou de compléter) en
-  Python l'algorithme d'Euclide, le calcul d'un couple de Bezout, le crible
-  d'Eratosthene ou la decomposition en facteurs premiers.
+  Python l'algorithme d'Euclide, le calcul d'un couple de Bézout, le crible
+  d'Ératosthène ou la décomposition en facteurs premiers.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Euclide : boucle \texttt{while b != 0} qui remplace
+    \item Euclide : pour deux entiers non tous deux nuls, prendre d'abord
+      leurs valeurs absolues. Tant que \texttt{b != 0}, remplacer
       \texttt{(a, b)} par \texttt{(b, a \% b)} ; le PGCD est le dernier
-      \texttt{a}.
-    \item Bezout : version recursive — si $b = 0$, renvoyer $(a, 1, 0)$ ;
-      sinon, obtenir $(d, u, v)$ pour $(b, a \bmod b)$ et renvoyer
-      $(d, v, u - \lfloor a/b \rfloor v)$.
-    \item Crible : tableau de booleens initialise a Vrai (sauf 0 et 1) ; pour
-      chaque premier $p \leq \sqrt{n}$, barrer les multiples de $p$ a partir
+      \texttt{a}, strictement positif.
+    \item Bézout : pour deux entiers non tous deux nuls, si $b=0$, renvoyer
+      $(|a|,\operatorname{sgn}(a),0)$, où $\operatorname{sgn}(a)$ vaut
+      $1$ si $a>0$ et $-1$ si $a<0$. Sinon, calculer
+      $q=\lfloor a/b\rfloor$ et $r=a-qb$, obtenir $(d,u,v)$ pour $(b,r)$,
+      puis renvoyer $(d,v,u-qv)$ : en effet,
+      $bu+rv=av+b(u-qv)=d$. En Python, \texttt{q = a // b} et
+      \texttt{r = a \% b} ; même si $b<0$, on a $|r|<|b|$, ce qui assure
+      la terminaison de la récursion. Le reste Python peut alors être négatif.
+    \item Crible : pour un entier $n<2$, renvoyer la liste vide. Sinon,
+      initialiser le tableau de booléens à Vrai (sauf 0 et 1) ; pour
+      chaque premier $p\leq\sqrt{n}$, barrer les multiples de $p$ à partir
       de $p^2$.
-    \item Decomposition : diviser par les candidats croissants tant que
-      $p^2 \leq n$ ; a la fin, si $n > 1$, c'est un dernier facteur premier.
-    \item Tester chaque fonction sur un cas dont le résultat est connu a la
-      main (fiches M1, M5, M7).
+    \item Décomposition : pour un entier $n\geq1$, diviser par les candidats
+      croissants tant que $p^2\leq n$ ; à la fin, si $n>1$, c'est un dernier
+      facteur premier. Pour $n=1$, le dictionnaire vide représente le produit
+      vide, égal à 1. Les entrées $n\leq0$ sont hors de ce domaine.
+    \item Tester aussi les cas limites : une entrée nulle et l'autre négative
+      pour Euclide et Bézout ; $n=0,1,2$ pour le crible ; $n=1$ et un carré
+      de nombre premier pour la décomposition.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Écrire l'algorithme d'Euclide et l'appliquer a $(252\,;\,198)$.
+  Écrire l'algorithme d'Euclide et l'appliquer à $(252\,;\,198)$.
 
   \medskip
-  \commentaireMarge{L'invariant de boucle : le PGCD du couple est conserve.}%
-\begin{flushleft}\ttfamily\small
-  def euclide(a, b):\\
-  \hspace*{1.2em}while b != 0:\\
-  \hspace*{2.4em}a, b = b, a \% b\\
-  \hspace*{1.2em}return a
-  \end{flushleft}
+  \commentaireMarge{L'invariant de boucle : le PGCD du couple est conservé.}%
+\lstinputlisting[language=Python]{chapitres/TEXP-ARITHMETIQUE/python/euclide.py}
 
   \medskip
   \texttt{euclide(252, 198)} renvoie 18, conforme au calcul manuel
@@ -78,19 +99,19 @@
 \pieges{%
   \begin{itemize}
     \item \textbf{Piège 1.} Confondre \texttt{a \% b} (reste) et
-      \texttt{a // b} (quotient) — les deux interviennent dans Bezout.
-    \item \textbf{Piège 2.} Dans le crible, barrer a partir de $2p$ au lieu de
-      $p^2$ (correct mais inutilement couteux) ou oublier la borne
+      \texttt{a // b} (quotient) — les deux interviennent dans Bézout. Pour un diviseur négatif, le reste Python est négatif ou nul ; le reste euclidien est, lui, toujours non négatif.
+    \item \textbf{Piège 2.} Dans le crible, barrer à partir de $2p$ au lieu de
+      $p^2$ (correct mais inutilement coûteux) ou oublier la borne
       $\sqrt{n}$.
-    \item \textbf{Piège 3.} Dans la decomposition, oublier le facteur final
+    \item \textbf{Piège 3.} Dans la décomposition, oublier le facteur final
       $n > 1$ après la boucle (ex. le 5 de 360, ou un grand premier).
   \end{itemize}
 }
 
 \verifier{%
-  Confronter chaque sortie a un calcul manuel : PGCD par divisions posees,
-  égalité $au + bv = d$ effectivement verifiee, liste des premiers jusqu'a 30,
-  produit de la decomposition égal a l'entier initial.
+  Confronter chaque sortie à un calcul manuel : PGCD par divisions posées,
+  égalité $au + bv = d$ effectivement vérifiée, liste des premiers jusqu'à 30,
+  produit de la décomposition égal à l'entier initial.
 }
 
 \sEntrainer{\refExos{M9}}

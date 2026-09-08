@@ -28,8 +28,11 @@ Le \textbf{PGCD} (plus grand commun diviseur) de deux entiers non tous deux nuls
 }
 
 \theoreme[Algorithme d'Euclide]{
-Pour $a,b$ entiers avec $b
-eq0$, en notant $r$ le reste de la division euclidienne de $a$ par $b$ : $\mathrm{PGCD}(a,b) = \mathrm{PGCD}(b,r)$. En répétant ce procédé jusqu'à un reste nul, le dernier reste non nul est le PGCD.
+Pour $a\in\mathbb{Z}$ et $b\in\mathbb{N}^*$, en notant $r$ le reste de la division euclidienne de $a$ par $b$, on a $0\leq r<b$ et
+$\mathrm{PGCD}(a,b)=\mathrm{PGCD}(b,r)$.
+Les diviseurs communs sont conservés car $a=bq+r$.
+En répétant le procédé, les restes non nuls décroissent strictement : l'algorithme termine.
+À la dernière division, $r=0$ et le dernier diviseur $b$ est le PGCD.
 }
 
 \exemple{
@@ -40,22 +43,30 @@ Calculons $\mathrm{PGCD}(252,105)$ :
 Le dernier reste non nul est $21$ : $\mathrm{PGCD}(252,105)=21$.
 }
 
-\begin{python}
-def pgcd(a, b):
-    while b != 0:
-        a, b = b, a % b
-    return a
-\end{python}
+Pour traiter aussi les entiers négatifs, le programme commence par les valeurs absolues : les diviseurs communs positifs ne changent pas. Si une entrée est nulle, l'autre étant non nulle, le PGCD est sa valeur absolue. Le couple $(0,0)$, exclu par la définition, est refusé.
+
+\lstinputlisting[language=Python]{chapitres/TEXP-ARITHMETIQUE/python/euclide.py}
 
 % BEGIN-VERIFY
-% def pgcd(a, b):
-%     while b != 0:
-%         a, b = b, a % b
-%     return a
-% assert pgcd(252, 105) == 21
+% import hashlib
 % import math
-% assert pgcd(252, 105) == math.gcd(252, 105)
-% assert pgcd(17, 5) == 1
+% from pathlib import Path
+% import runpy
+% depart = Path.cwd().resolve()
+% relatif = "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/python/euclide.py"
+% fichier = next((p / relatif for p in (depart, *depart.parents) if (p / relatif).is_file()), None)
+% assert fichier is not None, "source Python imprimee introuvable"
+% assert hashlib.sha256(fichier.read_bytes()).hexdigest() == "0215fa7fcc2be276acaee67aeed83976e47db01d4ba33e7d9c2faf626fc82802"
+% euclide = runpy.run_path(str(fichier))["euclide"]
+% assert euclide(252, 105) == 21
+% for a, b in ((252, 105), (17, 5), (-252, 105), (252, -105), (-252, -105), (0, -12), (-12, 0)):
+%     assert euclide(a, b) == math.gcd(a, b)
+% try:
+%     euclide(0, 0)
+% except ValueError:
+%     pass
+% else:
+%     raise AssertionError("le couple (0, 0) doit etre refuse")
 % END-VERIFY
 
 \propriete[Couples d'entiers premiers entre eux]{

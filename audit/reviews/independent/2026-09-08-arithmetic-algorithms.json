@@ -1,0 +1,122 @@
+{
+  "artifact_type": "independent_agent_content_review",
+  "approves_nothing": true,
+  "reviewer": "codex_root",
+  "author": "codex_astra_delta",
+  "human_approval": false,
+  "observation_base_head": "ba7a26d4e42f4e129165a09dfc816aaca415342b",
+  "scope": "Three arithmetic objects and four Python dependencies, read in full; not chapter closure or release evidence.",
+  "scientific_review": "VALIDATED_BY_EVIDENCE",
+  "reasoning": {
+    "divisibility_gcd": "Common positive divisors of a,b are unchanged by a=bq+r and by absolute values. Positive remainders strictly decrease, final divisor divides both initial inputs. Excluding (0,0), one zero input has gcd equal to absolute value of the other. Divisors36 and Euclidean trace252,105->42->21->0 recomputed. 8 and15 coprime though composite.",
+    "bezout": "Recursive identity bu+rv=d with r=a-qb gives av+b(u-qv)=d; abs(r)<abs(b) even for Python negative divisor, base returns(abs(a),sign(a),0). Every pair of signed inputs retains positive gcd.",
+    "sieve_factorization": "Every composite <=n has a prime divisor<=sqrt(n); crossing multiples from p*p is complete since smaller multiples were already removed. Trial division retains product of extracted factors times remaining integer; after p*p>remaining, remaining>1 must be prime. Empty product1 and n<2 sieve handled.",
+    "congruences": "Sum/product follow divisibility of differences; positive powers follow induction, exponent0 no longer silently includes0^0. Decimal digit test restricted to natural integers (negative counterexample-1). Bezout provides modular inverse; uniqueness follows cancellation for gcd1. 3x=5mod7 givesx=4 and6x=6mod8 gives1,5. Modulus1 remains permitted by definition and has one residue class."
+  },
+  "execution_observations": [
+    {
+      "execution_root": "/tmp/nexus-arithmetic-fresh-k8i4cm5_",
+      "command": [
+        "/usr/bin/python",
+        "/tmp/nexus-arithmetic-fresh-k8i4cm5_/Mathematiques/manuel-maths/scripts/verify_sympy.py",
+        "--chap",
+        "TEXP-ARITHMETIQUE"
+      ],
+      "cwd": "/tmp/nexus-arithmetic-fresh-k8i4cm5_",
+      "rc": 0,
+      "stdout": "[OK ] 10_C1_divisibilite_pgcd: \n[OK ] 11_C2_congruences: \n[OK ] TEXP-ARI-ME-009: \n",
+      "stderr": "",
+      "network_denial": {
+        "mechanism": "libseccomp inherited syscall filter",
+        "probe_rc": 0,
+        "probe_stdout": "network syscalls refused for IPv4, IPv6 and Unix sockets\n"
+      },
+      "input_digests": {
+        "chapitres/TEXP-ARITHMETIQUE/cours/10_C1_divisibilite_pgcd.tex": "sha256:737ae271e614b8a381d26a6f6404237f014dc7ca1d0d676a68b246c97086a8e8",
+        "chapitres/TEXP-ARITHMETIQUE/cours/11_C2_congruences.tex": "sha256:20447417b783b133c3c95550e47b989cd801d92674f3c4a1224fe86143833e4c",
+        "chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-009.tex": "sha256:bbb9460b3154804e9c25b72295254c2f0e0f0a735d483fa93ec5a9f016a94e8a",
+        "chapitres/TEXP-ARITHMETIQUE/python/bezout.py": "sha256:bd8143fc34f9482a1a13ea3f57260a6a2680608bd84cfe77b33d060a7dc68ce3",
+        "chapitres/TEXP-ARITHMETIQUE/python/crible.py": "sha256:8e20871f55675e796b1da762a708331e3053b118d0bf91c5719bb22438b7a347",
+        "chapitres/TEXP-ARITHMETIQUE/python/decomposition.py": "sha256:4d50fc91c951a962e9215c0da11085f4e06565c0d5488031b1f299db4383d718",
+        "chapitres/TEXP-ARITHMETIQUE/python/euclide.py": "sha256:0215fa7fcc2be276acaee67aeed83976e47db01d4ba33e7d9c2faf626fc82802",
+        "scripts/verify_sympy.py": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e",
+        "scripts/common.py": "sha256:f1dd76d4f5f354800fba1dc8ab84dfa3ab5c61b8f8f3093956d146195f520d0c"
+      },
+      "records": [
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/cours/10_C1_divisibilite_pgcd.tex",
+          "source_sha256": "sha256:737ae271e614b8a381d26a6f6404237f014dc7ca1d0d676a68b246c97086a8e8",
+          "receipt": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/validations/10_C1_divisibilite_pgcd.sympy.json",
+          "receipt_sha256": "sha256:a6747abdc2af5fd7407202c3d0a6a4a150ad144b140a1540b63697b315f0b557",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/cours/11_C2_congruences.tex",
+          "source_sha256": "sha256:20447417b783b133c3c95550e47b989cd801d92674f3c4a1224fe86143833e4c",
+          "receipt": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/validations/11_C2_congruences.sympy.json",
+          "receipt_sha256": "sha256:e3c4772781a21b876bd48b0a164843cb5189f9eacc601be457182277c4fd50e1",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-009.tex",
+          "source_sha256": "sha256:bbb9460b3154804e9c25b72295254c2f0e0f0a735d483fa93ec5a9f016a94e8a",
+          "receipt": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/validations/TEXP-ARI-ME-009.sympy.json",
+          "receipt_sha256": "sha256:0d3591d3c89678185a9f84047b8c8b0252790af28d7c90b3cce6fd2c6097e83c",
+          "verdict": "pass"
+        }
+      ],
+      "human_approval": false
+    },
+    {
+      "execution_root": "/tmp/nexus-arithmetic-fresh-uxtyeehw",
+      "command": [
+        "/usr/bin/python",
+        "/tmp/nexus-arithmetic-fresh-uxtyeehw/Mathematiques/manuel-maths/scripts/verify_sympy.py",
+        "--chap",
+        "TEXP-ARITHMETIQUE"
+      ],
+      "cwd": "/tmp/nexus-arithmetic-fresh-uxtyeehw",
+      "rc": 0,
+      "stdout": "[OK ] 11_C2_congruences: \n",
+      "stderr": "",
+      "network_denial": {
+        "mechanism": "libseccomp inherited syscall filter",
+        "probe_rc": 0,
+        "probe_stdout": "network syscalls refused for IPv4, IPv6 and Unix sockets\n"
+      },
+      "input_digests": {
+        "chapitres/TEXP-ARITHMETIQUE/cours/11_C2_congruences.tex": "sha256:2d8e448a76874367a66b99a5b61a2ccebb476be0db5b944199f2ec9e704b488a",
+        "chapitres/TEXP-ARITHMETIQUE/python/bezout.py": "sha256:bd8143fc34f9482a1a13ea3f57260a6a2680608bd84cfe77b33d060a7dc68ce3",
+        "chapitres/TEXP-ARITHMETIQUE/python/crible.py": "sha256:8e20871f55675e796b1da762a708331e3053b118d0bf91c5719bb22438b7a347",
+        "chapitres/TEXP-ARITHMETIQUE/python/decomposition.py": "sha256:4d50fc91c951a962e9215c0da11085f4e06565c0d5488031b1f299db4383d718",
+        "chapitres/TEXP-ARITHMETIQUE/python/euclide.py": "sha256:0215fa7fcc2be276acaee67aeed83976e47db01d4ba33e7d9c2faf626fc82802",
+        "scripts/verify_sympy.py": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e",
+        "scripts/common.py": "sha256:f1dd76d4f5f354800fba1dc8ab84dfa3ab5c61b8f8f3093956d146195f520d0c"
+      },
+      "records": [
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/cours/11_C2_congruences.tex",
+          "source_sha256": "sha256:2d8e448a76874367a66b99a5b61a2ccebb476be0db5b944199f2ec9e704b488a",
+          "receipt": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/validations/11_C2_congruences.sympy.json",
+          "receipt_sha256": "sha256:51a46066497b74d76152ef4e718b0ca64228650089b2e5bffc9f1b3f37d769b2",
+          "verdict": "pass"
+        }
+      ],
+      "human_approval": false
+    }
+  ],
+  "targeted_tests": {
+    "command": "python -B -m pytest -q --import-mode=importlib -p no:cacheprovider tests/test_arithmetic_algorithms_source_contract.py tests/test_arithmetic_remediation_boundary_claims.py",
+    "passed": 26,
+    "failed": 0
+  },
+  "current_source_digests": {
+    "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/cours/10_C1_divisibilite_pgcd.tex": "sha256:737ae271e614b8a381d26a6f6404237f014dc7ca1d0d676a68b246c97086a8e8",
+    "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/cours/11_C2_congruences.tex": "sha256:2d8e448a76874367a66b99a5b61a2ccebb476be0db5b944199f2ec9e704b488a",
+    "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-009.tex": "sha256:bbb9460b3154804e9c25b72295254c2f0e0f0a735d483fa93ec5a9f016a94e8a",
+    "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/python/euclide.py": "sha256:0215fa7fcc2be276acaee67aeed83976e47db01d4ba33e7d9c2faf626fc82802",
+    "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/python/bezout.py": "sha256:bd8143fc34f9482a1a13ea3f57260a6a2680608bd84cfe77b33d060a7dc68ce3",
+    "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/python/crible.py": "sha256:8e20871f55675e796b1da762a708331e3053b118d0bf91c5719bb22438b7a347",
+    "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/python/decomposition.py": "sha256:4d50fc91c951a962e9215c0da11085f4e06565c0d5488031b1f299db4383d718"
+  }
+}
