@@ -26,7 +26,8 @@ else:  # Compatibilite avec `python scripts/verify_python.py` depuis NSI/.
     import execution_protocol as protocol
 
 VERIFY, TRACE, PYENV = protocol.VERIFY, protocol.TRACE, protocol.PYENV
-SUBDIRS = ("exercices", "corriges", "evaluations", "ece", "projet", "cours", "methodes", "remediation")
+SUBDIRS = ("exercices", "corriges", "evaluations", "ece", "projet", "cours", "methodes", "remediation",
+           "banque_ecrite", "banque_pratique", "amenagee")
 IMPLEMENTATION_DIGESTS = protocol.implementation_manifest(Path(__file__).resolve().parents[2])
 
 

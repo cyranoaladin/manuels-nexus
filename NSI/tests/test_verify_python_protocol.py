@@ -190,3 +190,18 @@ def test_changed_chapter_object_set_never_reports_success(tmp_path, monkeypatch,
     monkeypatch.setattr(gate, 'check_object', mutate_after_first)
     assert gate.main('TNSI-SET', True, check=True) > 0
     assert 'périmètre' in capsys.readouterr().out
+
+
+@pytest.mark.parametrize('directory', ['banque_ecrite', 'banque_pratique', 'amenagee'])
+def test_canonical_bank_and_adapted_oracles_cannot_be_silently_excluded(tmp_path, monkeypatch, directory):
+    monkeypatch.setattr(gate, 'ROOT', tmp_path)
+    chapter = tmp_path / 'chapitres/TNSI-PERIMETRE'
+    baseline = chapter / 'cours/read.tex'
+    baseline.parent.mkdir(parents=True)
+    baseline.write_text(verify('assert 2 + 2 == 4'))
+    false_oracle = chapter / directory / 'wrong.tex'
+    false_oracle.parent.mkdir()
+    false_oracle.write_text(verify('assert 2 + 2 == 5'))
+    assert gate.main(chapter.name, True, check=True) > 0
+    false_oracle.write_text(verify('assert 2 + 2 == 4'))
+    assert gate.main(chapter.name, True, check=True) == 0
