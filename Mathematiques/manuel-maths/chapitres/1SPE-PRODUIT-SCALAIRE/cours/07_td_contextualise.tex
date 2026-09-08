@@ -8,7 +8,7 @@
 
 \section*{TD — Navigation et cap}
 
-\textit{Duree : 50 minutes.}
+\textit{Durée : 50 minutes.}
 
 \bigskip
 
@@ -16,8 +16,11 @@
 \textbf{Situation}
 
 \medskip
-\parbox{0.9\textwidth}{Un bateau quitte le port $P$ et navigue $8$ km dans la direction du vecteur $\vec{u}$ (cap nord-est, angle $\frac{\pi}{4}$ avec l'axe est). Il change ensuite de cap et parcourt $5$ km dans la direction du vecteur $\vec{v}$ (cap sud-est, angle $-\frac{\pi}{6}$ avec l'axe est). On souhaite calculer la distance totale au port et l'angle entre les deux trajets.}
+\parbox{0.9\textwidth}{Un bateau quitte le port $P$ et navigue $8$ km jusqu'à $R$ vers le nord-est, à un angle de $\frac{\pi}{4}$ avec l'axe est. Il parcourt ensuite $5$ km jusqu'à $Q$ dans une direction située à $30^\circ$ au sud de l'est, soit un angle de $-\frac{\pi}{6}$. On pose $\vec u=\overrightarrow{PR}$ et $\vec v=\overrightarrow{RQ}$. On souhaite calculer la distance du point d'arrivée au port et l'angle géométrique entre les deux déplacements.}
 \end{center}
+
+On utilise un repère orthonormé d'origine $P$, d'unité 1 km, avec l'axe des abscisses dirigé vers l'est et celui des ordonnées vers le nord.
+Les angles orientés sont mesurés depuis l'axe est, positivement dans le sens trigonométrique.
 
 \bigskip
 
@@ -30,7 +33,7 @@
 %---------------------------------------------------------------
 
 \begin{enumerate}
-  \item Exprimer les coordonnées de $\vec{u}$ dans un repere orthonorme, sachant que $\|\vec{u}\| = 8$ et que $\vec{u}$ fait un angle de $\frac{\pi}{4}$ avec l'axe des abscisses.
+  \item Exprimer les coordonnées de $\vec{u}$ dans ce repère, sachant que $\|\vec{u}\| = 8$ et que $\vec{u}$ fait un angle de $\frac{\pi}{4}$ avec l'axe des abscisses.
   \item Exprimer les coordonnées de $\vec{v}$ avec $\|\vec{v}\| = 5$ et un angle de $-\frac{\pi}{6}$.
   \item Calculer $\vec{u} \cdot \vec{v}$ par la formule analytique.
 \end{enumerate}
@@ -62,7 +65,7 @@
 %---------------------------------------------------------------
 
 \begin{enumerate}[resume]
-  \item Calculer $\vec{u} \cdot \vec{v}$ par la définition géométrique. En déduire l'angle $\theta$ entre $\vec{u}$ et $\vec{v}$.
+  \item Déterminer l'angle géométrique $\theta\in[0,\pi]$ entre $\vec u$ et $\vec v$. En déduire le produit scalaire $\vec u\cdot\vec v$ par la définition géométrique.
   \item Vérifier la cohérence avec la valeur obtenue dans la Partie A.
 \end{enumerate}
 
@@ -84,9 +87,9 @@
 %---------------------------------------------------------------
 
 \begin{enumerate}[resume]
-  \item Le point d'arrivee $Q$ vérifie $\overrightarrow{PQ} = \vec{u} + \vec{v}$. Calculer $PQ^2 = \|\vec{u} + \vec{v}\|^2$ en utilisant l'identite remarquable vectorielle.
-  \item En déduire $PQ$ (arrondir au dixieme).
-  \item Retrouver ce résultat par la formule d'Al-Kashi dans le triangle forme par $P$, le point intermediaire $R$ (fin du premier trajet) et $Q$, sachant que $PR = 8$, $RQ = 5$ et l'angle en $R$ est $\pi - \theta$.
+  \item Le point d'arrivée $Q$ vérifie $\overrightarrow{PQ} = \vec{u} + \vec{v}$. Calculer $PQ^2 = \|\vec{u} + \vec{v}\|^2$ en utilisant l'identité remarquable vectorielle.
+  \item En déduire $PQ$ (arrondir au dixième).
+  \item Retrouver ce résultat par la formule d'Al-Kashi dans le triangle formé par $P$, le point intermédiaire $R$ (fin du premier trajet) et $Q$, sachant que $PR = 8$, $RQ = 5$ et l'angle en $R$ est $\pi - \theta$.
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -97,8 +100,9 @@
 % ps = 10*sqrt(6) - 10*sqrt(2)
 % PQ_sq = u_sq + 2*ps + v_sq
 % assert simplify(PQ_sq - (89 + 20*sqrt(6) - 20*sqrt(2))) == 0
-% PQ_num = float(N(sqrt(PQ_sq)))
-% assert abs(PQ_num - 10.46) < 0.1
+% PQ = sqrt(PQ_sq)
+% rounded_PQ = Rational(105,10)
+% assert rounded_PQ-Rational(1,20) < PQ < rounded_PQ+Rational(1,20)
 % # Al-Kashi: PQ^2 = PR^2 + RQ^2 - 2*PR*RQ*cos(angle at R)
 % # angle at R = pi - 5*pi/12 = 7*pi/12
 % angle_R = pi - 5*pi/12
@@ -109,22 +113,116 @@
 \bigskip
 
 %---------------------------------------------------------------
-\subsection*{Partie D — Synthese (C1, C5) — 15 min}
+\subsection*{Partie D — Synthèse (C1, C5) — 15 min}
 %---------------------------------------------------------------
 
 \begin{enumerate}[resume]
-  \item Le cap de retour direct de $Q$ a $P$ fait un angle $\alpha$ avec l'axe est. Calculer $\cos\alpha$ et $\sin\alpha$ a partir des coordonnées de $\overrightarrow{QP}$.
-  \item Rediger une synthese de 3 a 5 lignes expliquant comment le produit scalaire et la formule d'Al-Kashi permettent de résoudre un probleme de navigation.
+  \item Le cap de retour direct de $Q$ à $P$ fait un angle orienté $\alpha$ avec l'axe est. Calculer $\cos\alpha$ et $\sin\alpha$ à partir des coordonnées de $\overrightarrow{QP}$.
+  \item Rédiger une synthèse de 3 à 5 lignes expliquant comment le produit scalaire et la formule d'Al-Kashi permettent de résoudre un problème de navigation.
 \end{enumerate}
 
 % BEGIN-VERIFY
 % from sympy import *
-% # QP = -(u+v) = -(4*sqrt(2) + 5*sqrt(3)/2, 4*sqrt(2) - 5/2)
-% QPx = -(4*sqrt(2) + 5*sqrt(3)/2)
-% QPy = -(4*sqrt(2) - Rational(5, 2))
-% PQ_norm = sqrt(QPx**2 + QPy**2)
-% cos_alpha = QPx / PQ_norm
-% sin_alpha = QPy / PQ_norm
-% # Just verify cos^2 + sin^2 = 1
+% u = Matrix([4*sqrt(2),4*sqrt(2)])
+% v = Matrix([5*sqrt(3)/2,-Rational(5,2)])
+% QP = -(u+v)
+% assert QP+u+v == Matrix([0,0])
+% assert QP[0] < 0 and QP[1] < 0
+% PQ_norm = QP.norm()
+% cos_alpha = QP[0] / PQ_norm
+% sin_alpha = QP[1] / PQ_norm
+% assert cos_alpha < 0 and sin_alpha < 0
 % assert simplify(cos_alpha**2 + sin_alpha**2 - 1) == 0
 % END-VERIFY
+
+\ifnxVersionProfesseur
+\begin{corrige}{1SPE-PRODSCAL-TD-CONTEXTUALISE}
+\textbf{Question 1.}
+Dans le repère indiqué,
+\[
+\vec u=\begin{pmatrix}8\cos(\pi/4)\\8\sin(\pi/4)\end{pmatrix}
+=\begin{pmatrix}4\sqrt2\\4\sqrt2\end{pmatrix}.
+\]
+
+\textbf{Question 2.}
+La seconde direction est sous l'axe est : sa composante verticale est négative.
+\[
+\vec v=\begin{pmatrix}5\cos(-\pi/6)\\5\sin(-\pi/6)\end{pmatrix}
+=\begin{pmatrix}5\sqrt3/2\\-5/2\end{pmatrix}.
+\]
+
+\textbf{Question 3.}
+La formule analytique dans ce repère orthonormé donne
+\[
+\vec u\cdot\vec v
+=4\sqrt2\times\frac{5\sqrt3}{2}+4\sqrt2\times\left(-\frac52\right)
+=10\sqrt6-10\sqrt2\ \text{km}^2.
+\]
+
+\textbf{Question 4.}
+L'écart entre les directions est $\pi/4-(-\pi/6)=5\pi/12$.
+Il appartient à $[0,\pi]$, donc l'angle géométrique vaut
+$\theta=\frac{5\pi}{12}=75^\circ$.
+La définition géométrique donne alors
+$\vec u\cdot\vec v=8\times5\cos(5\pi/12)=40\cos(5\pi/12)$ km$^2$.
+
+\textbf{Question 5.}
+Les deux expressions représentent le même produit scalaire :
+\[
+40\cos\left(\frac{5\pi}{12}\right)=10\sqrt6-10\sqrt2.
+\]
+En particulier, on retrouve
+$\cos(5\pi/12)=(\sqrt6-\sqrt2)/4$ par les coordonnées et la définition du produit scalaire.
+
+\textbf{Question 6.}
+Le déplacement direct est la somme des deux déplacements successifs. Ainsi,
+\[
+PQ^2=\|\vec u+\vec v\|^2
+=8^2+2(10\sqrt6-10\sqrt2)+5^2
+=89+20\sqrt6-20\sqrt2\ \text{km}^2.
+\]
+
+\textbf{Question 7.}
+La longueur positive vaut
+\[
+PQ=\sqrt{89+20\sqrt6-20\sqrt2}
+\approx10{,}4740\ \text{km},
+\]
+soit $10{,}5$ km au dixième.
+La distance parcourue par le bateau vaut $8+5=13$ km ; elle est différente de la distance finale au port.
+
+\textbf{Question 8.}
+L'angle intérieur en $R$ est formé par $\overrightarrow{RP}=-\vec u$ et
+$\overrightarrow{RQ}=\vec v$ : il est supplémentaire de $\theta$,
+donc vaut $\frac{7\pi}{12}=105^\circ$.
+Par Al-Kashi et $\cos(\pi-\theta)=-\cos\theta$,
+\[
+PQ^2=8^2+5^2-2\times8\times5\cos\left(\frac{7\pi}{12}\right)
+=89+80\cos\left(\frac{5\pi}{12}\right)
+=89+20\sqrt6-20\sqrt2.
+\]
+On retrouve exactement le résultat de la question 6.
+
+\textbf{Question 9.}
+Le retour inverse le déplacement direct :
+\[
+\overrightarrow{QP}=-(\vec u+\vec v)
+=\begin{pmatrix}-(4\sqrt2+5\sqrt3/2)\\-(4\sqrt2-5/2)\end{pmatrix}.
+\]
+En divisant ses coordonnées par sa norme $PQ>0$, on obtient
+\[
+\cos\alpha=-\frac{4\sqrt2+5\sqrt3/2}{\sqrt{89+20\sqrt6-20\sqrt2}},
+\qquad
+\sin\alpha=-\frac{4\sqrt2-5/2}{\sqrt{89+20\sqrt6-20\sqrt2}}.
+\]
+Ces deux nombres sont négatifs : le retour se dirige vers l'ouest et vers le sud.
+Le contrôle $\cos^2\alpha+\sin^2\alpha=1$ complète celui du sens du déplacement.
+
+\textbf{Question 10.}
+\emph{Exemple de synthèse.}
+Chaque trajet est représenté par un vecteur dont les coordonnées traduisent sa longueur et sa direction.
+La somme des vecteurs donne le déplacement direct entre le port et le point d'arrivée.
+Le produit scalaire relie les coordonnées, l'angle entre les trajets et la norme de cette somme.
+La formule d'Al-Kashi retrouve la distance directe en utilisant l'angle intérieur du triangle de navigation.
+\end{corrige}
+\fi

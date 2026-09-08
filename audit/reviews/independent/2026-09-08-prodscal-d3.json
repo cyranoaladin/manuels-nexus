@@ -1,0 +1,157 @@
+{
+  "artifact_type": "PRODSCAL_BOUNDED_LOT_D3_REVIEW",
+  "head_at_recording": "b2b9c6f249c010420550bbc74f14f32fc896dc7b",
+  "scope": "Un seul TD existant, identifié par son digest de source dans le worktree. Cette note ne certifie ni un HEAD propre, ni le chapitre entier, ni un PDF final.",
+  "human_approval": false,
+  "independent_counter_review": "VALIDATED_BY_EVIDENCE",
+  "source_review": {
+    "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/07_td_contextualise.tex",
+    "source_sha256": "sha256:b5db17f5ed6eb473887176eeb1dfb13bb8f0ab4c49038e814eed801189ca24ed",
+    "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/07_td_contextualise.sympy.json",
+    "receipt_sha256": "sha256:418043042552b35f9fc59155c3ecdadff6bccf3039878a5003432c1dcb038eb0",
+    "verdict": "pass",
+    "author": "/root/astra_delta",
+    "read_extent": "Le texte complet, les dix questions, les dix réponses et les quatre blocs de vérification ont été lus et résolus.",
+    "real_defects": [
+      "Le cap sud-est précis correspond à −π/4, tandis que la donnée du TD était −π/6. La direction est désormais décrite comme 30° au sud de l’est.",
+      "L’origine, les axes et le sens des angles orientés manquaient pour fixer les coordonnées et le cap de retour.",
+      "La distance finale au port pouvait être confondue avec la distance parcourue.",
+      "Le TD ne possédait aucun corrigé enseignant lié à ses dix questions.",
+      "L’ancien contrôle d’arrondi acceptait un intervalle trop large autour de 10,46.",
+      "Le contrôle cos² α + sin² α = 1 acceptait aussi le vecteur de sens opposé au retour."
+    ],
+    "unchanged_data": "Les longueurs 8 km et 5 km ainsi que les angles π/4 et −π/6 sont conservés. Aucun objet d’exercice supplémentaire et aucun quota ne sont créés.",
+    "answers": [
+      {
+        "question": "Q1",
+        "resolution": "Le repère est orthonormé, d’origine P et d’unité 1 km. La direction du premier déplacement est π/4, donc u = (8 cos(π/4), 8 sin(π/4)) = (4√2, 4√2). Sa norme vaut bien 8."
+      },
+      {
+        "question": "Q2",
+        "resolution": "Le second déplacement est dirigé à 30° au sud de l’est. Ses coordonnées sont v = (5 cos(−π/6), 5 sin(−π/6)) = (5√3/2, −5/2). La composante verticale est négative et la norme vaut 5."
+      },
+      {
+        "question": "Q3",
+        "resolution": "Le calcul dans le repère orthonormé donne u·v = (4√2)(5√3/2) + (4√2)(−5/2) = 10√6 − 10√2 km². Le résultat est positif, ce qui sera cohérent avec l’angle aigu entre les déplacements."
+      },
+      {
+        "question": "Q4",
+        "resolution": "L’écart entre les deux directions est π/4 − (−π/6) = 5π/12 = 75°. Il appartient à [0,π], donc c’est l’angle géométrique entre les vecteurs. La définition géométrique donne u·v = 8 × 5 × cos(5π/12) = 40 cos(5π/12) km². Le calcul de l’angle précède désormais celui du produit par cette méthode."
+      },
+      {
+        "question": "Q5",
+        "resolution": "La formule analytique et la définition géométrique calculent le même produit scalaire. On en déduit 40 cos(5π/12) = 10√6 − 10√2, donc cos(5π/12) = (√6 − √2)/4. Cette justification utilise les coordonnées et le produit scalaire ; elle n’impose pas une formule d’addition trigonométrique supplémentaire."
+      },
+      {
+        "question": "Q6",
+        "resolution": "Par Chasles, PQ = u + v en notation vectorielle. Le carré de sa norme vaut 8² + 2(10√6 − 10√2) + 5² = 89 + 20√6 − 20√2 km². Le contrôle indépendant par les coordonnées de u + v donne le même développement."
+      },
+      {
+        "question": "Q7",
+        "resolution": "La distance positive vaut √(89 + 20√6 − 20√2) km = 10,474040462409989… km, donc 10,5 km au dixième. L’oracle vérifie l’intervalle exact 10,45 < PQ < 10,55. Les 13 km du trajet brisé représentent la distance parcourue ; ils ne doivent pas être confondus avec la distance finale au port."
+      },
+      {
+        "question": "Q8",
+        "resolution": "L’angle intérieur PRQ oppose les vecteurs RP = −u et RQ = v. Il est supplémentaire de l’angle entre u et v : il vaut 7π/12 = 105°. Avec cos(π−θ) = −cos θ, Al-Kashi donne PQ² = 89 − 80 cos(7π/12) = 89 + 80 cos(5π/12), ce qui redonne exactement la formule de Q6."
+      },
+      {
+        "question": "Q9",
+        "resolution": "Le retour est QP = −(u + v), avec coordonnées (−4√2 − 5√3/2, −4√2 + 5/2). Les deux composantes sont strictement négatives. La division par la norme positive PQ donne les deux rapports imprimés pour cos α et sin α. Ils sont approximativement −0,9534984426 et −0,3013979429. Leur carré-somme vaut 1, mais ce contrôle seul serait insuffisant : l’oracle vérifie également QP + u + v = 0 et les deux signes négatifs."
+      },
+      {
+        "question": "Q10",
+        "resolution": "La synthèse proposée relie quatre éléments : représentation des trajets par des vecteurs, somme donnant le déplacement direct, produit scalaire reliant coordonnées et angle, puis Al-Kashi utilisant l’angle intérieur du triangle. Elle répond à la consigne sans transformer un exemple numérique en preuve générale."
+      }
+    ],
+    "programme_review": "Les coordonnées de vecteurs, le produit scalaire, la norme d’une somme et Al-Kashi correspondent à la section Calcul vectoriel et produit scalaire du BO 2026. Les angles remarquables et le signe du sinus/cosinus sont des prérequis déjà mobilisés. Le corrigé ne requiert ni arctan ni calcul d’angle supplémentaire au retour.",
+    "pedagogical_review": "Chaque question possède une réponse complète. Les angles de 75° et 105° sont distingués, ainsi que la distance de 10,5 km et le trajet de 13 km. La méthode géométrique suit un ordre exploitable : déterminer l’angle, puis utiliser son cosinus.",
+    "editorial_review": "Les diacritiques lues ont été corrigées. Les symboles P, R, Q, u et v sont définis avant leur utilisation. Les unités des distances et des produits scalaires sont explicites dans le corrigé.",
+    "correction_alignment": "Le nouvel environnement corrige cible l’identifiant 1SPE-PRODSCAL-TD-CONTEXTUALISE et contient exactement les réponses numérotées Q1 à Q10. Il est placé sous le drapeau professeur canonique.",
+    "independent_counter_review": "VALIDATED_BY_EVIDENCE"
+  },
+  "verification": {
+    "regression_test": "tests/test_prodscal_navigation_correction.py",
+    "test_sha256": "sha256:e23a78dd10d4cec75a1385805adeca71e0b6025dc12b3b9b5b7ce145b3e37d01",
+    "red": "8 tests échouaient sur la source précédente ; journal /tmp/prodscal-D3-RED.log.",
+    "green": "Les 8 tests passent après correction.",
+    "mutations": [
+      "L’arrondi candidat 10,4 remplaçant 10,5 est rejeté par le vérificateur canonique sur une copie temporaire.",
+      "Le retour QP = u + v remplaçant QP = −(u + v) est rejeté sur une copie temporaire."
+    ],
+    "execution": {
+      "execution_root": "/tmp/nexus-prodscal-lot-d3-fresh-ge73vf0f",
+      "command": [
+        "/usr/bin/python",
+        "/tmp/nexus-prodscal-lot-d3-fresh-ge73vf0f/Mathematiques/manuel-maths/scripts/verify_sympy.py",
+        "--chap",
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "cwd": "/tmp/nexus-prodscal-lot-d3-fresh-ge73vf0f",
+      "rc": 0,
+      "stdout": "[OK ] 07_td_contextualise: \n",
+      "stderr": "",
+      "network_denial": {
+        "mechanism": "libseccomp inherited syscall filter",
+        "probe_rc": 0,
+        "probe_stdout": "network syscalls refused for IPv4, IPv6 and Unix sockets\n"
+      },
+      "input_digests": {
+        "chapitres/1SPE-PRODUIT-SCALAIRE/cours/07_td_contextualise.tex": "sha256:b5db17f5ed6eb473887176eeb1dfb13bb8f0ab4c49038e814eed801189ca24ed",
+        "scripts/verify_sympy.py": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e",
+        "scripts/common.py": "sha256:f1dd76d4f5f354800fba1dc8ab84dfa3ab5c61b8f8f3093956d146195f520d0c"
+      },
+      "records": [
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/07_td_contextualise.tex",
+          "source_sha256": "sha256:b5db17f5ed6eb473887176eeb1dfb13bb8f0ab4c49038e814eed801189ca24ed",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/07_td_contextualise.sympy.json",
+          "receipt_sha256": "sha256:418043042552b35f9fc59155c3ecdadff6bccf3039878a5003432c1dcb038eb0",
+          "verdict": "pass"
+        }
+      ],
+      "human_approval": false
+    },
+    "development_tex_routing": {
+      "scope": "Temporary development TeX fixture using actual canonical render_master variant configuration and current full navigation TD source; standard article only. Not a final manual/PDF or visual/hidden-object certification.",
+      "source_sha256": "b5db17f5ed6eb473887176eeb1dfb13bb8f0ab4c49038e814eed801189ca24ed",
+      "assembler_sha256": "0b47740c97e5f6a8ac9a572df53764f3f9438f205f06a24525e5f29d89cd2c24",
+      "workdir": "/tmp/nexus-prodscal-D3-tex-routing-roybnsoy",
+      "observations": [
+        {
+          "variant": "eleve",
+          "rc": 0,
+          "config": "\\nxVersionProfesseurfalse\n\\RenewDocumentEnvironment{corrige}{m +b}{}{}\n\\renewcommand{\\baremeIndicatif}[1]{}\n",
+          "pdf_sha256": "065715e3746a499dbb0c87ce0796fb2c431efed68f050d9628548ea68fda3cbd",
+          "correction_marker_present": false,
+          "printed_question9_and10": false
+        },
+        {
+          "variant": "professeur",
+          "rc": 0,
+          "config": "\\nxVersionProfesseurtrue\n",
+          "pdf_sha256": "d210183a4db02fd91b36b27531094f7e98d207a0bf86fbc31c7faabf09d53085",
+          "correction_marker_present": true,
+          "printed_question9_and10": true
+        }
+      ]
+    },
+    "routing_limit": "Les deux petites compilations de développement utilisent une classe article et la configuration réellement produite par render_master. Elles vérifient l’exclusion du corrigé élève, sans constituer un build final du manuel ni un audit de tous les objets PDF.",
+    "lint": "Ruff et git diff --check ont passé."
+  },
+  "remaining_limits": [
+    "La contre-revue indépendante de /root est enregistrée pour le digest de ce TD uniquement.",
+    "L’attribution historique du cours 14 reste un chantier documentaire distinct.",
+    "Les autres exercices et évaluations du chapitre ne sont pas déclarés fermés par ce lot.",
+    "Aucune approbation humaine, publication, promotion CURRENT ou opération de release."
+  ],
+  "root_counter_review": {
+    "reviewer": "/root",
+    "observed_head": "5d0ee94defa503039734d6c5f84e68ab4c6f2074",
+    "scope": "Lecture intégrale du TD : situation, dix questions, dix réponses et quatre blocs VERIFY. Lecture des huit régressions et vérification des empreintes source, receipt et test. Le receipt est lié à la méthode actuelle.",
+    "independent_resolution": "À partir des deux directions et longueurs données, /root a reconstruit séparément u=8(cos π/4,sin π/4), v=5(cos(−π/6),sin(−π/6)). Le produit vaut10√6−10√2. Le calcul arccos du produit normalisé donne5π/12 entre u et v,7π/12 entre−u et v. La norme directe vaut10,4740404624099892 km, rigoureusement entre10,45 et10,55. Le retour a pour vecteur unitaire(−0,953498442579;−0,301397942926), cohérent avec les expressions exactes et les deux signes négatifs du corrigé. L’égalité de normes seule ne certifierait pas le sens du retour.",
+    "alignment": "Les dix réponses suivent les dix consignes. Q5 utilise deux expressions du même produit pour justifier cos75°, Q8 emploie l’angle intérieur supplémentaire. Q10 fournit la synthèse demandée. La distinction entre trajet de13 km et distance au port10,5 km est explicite. Les propriétés relèvent de la section officielle du produit scalaire déjà relue pour D2.",
+    "executed_tests": "python -m pytest -q tests/test_prodscal_navigation_correction.py :8 PASS en2,94 s, dont mutations de l’arrondi et du sens de retour via le vérificateur canonique. Calcul indépendant SymPy ci-dessus exécuté sans utiliser les blocs VERIFY du TD.",
+    "limits": "Contrôle scientifique, pédagogique et alignement de ce TD seulement ; les compilations réduites de l’auteur vérifient le routage mais ne sont pas une inspection de PDF final. Aucune approbation humaine ni clôture du chapitre.",
+    "human_approval": false
+  }
+}
