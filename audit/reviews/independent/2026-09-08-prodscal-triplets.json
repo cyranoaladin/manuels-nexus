@@ -1,0 +1,1428 @@
+{
+  "artifact_type": "independent_triplet_review_and_correction_note",
+  "reviewer": "/root/astra_delta",
+  "head_at_recording": "a14ce7e4509342fa2842504c47c14cd5b8406c57",
+  "scope": "18 triplets / 54 actual read texts. Working source bytes are bound by SHA256; uncommitted changes are not represented as clean HEAD evidence.",
+  "authorship": "Historical originals independently read by /root/astra_delta and /root. Corrections in this lot authored by /root/astra_delta and independently counter-reviewed by /root. 012-CDP and the core of 032-CDP were authored by /root and independently counter-reviewed by /root/astra_delta.",
+  "human_approval": false,
+  "programme_evidence": {
+    "official_NOR": "MENE2602917A",
+    "application": "Article 2 of the arrêté: rentrée scolaire 2026-2027.",
+    "application_source": {
+      "path": "Mathematiques/manuel-maths/sources/txt/BO2026_n14_complet.txt",
+      "sha256": "sha256:622fb2aaeda89920f2378bee57f4458285bfd3e6af2b96680053bf753baaaebf",
+      "lines": [
+        27092,
+        27101
+      ]
+    },
+    "content_source": {
+      "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+      "sha256": "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
+      "lines": [
+        540,
+        574
+      ]
+    },
+    "official_pdf_sha256": "sha256:5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+    "complete_bo_pdf_sha256": "sha256:34875c42a0cf9f8cb1417e6cfd387aa59fa575df6e733d046f4533ae2f37c836",
+    "verification": "Both original PDFs were read from the main project sources directory in read-only mode; fresh pdftotext -layout extracts are byte-identical to the tracked text files. No normative text was changed."
+  },
+  "execution_manifest": {
+    "path": "/tmp/NEXUS_PRODSCAL_18_TRIPLETS_FRESH_EXECUTION.json",
+    "sha256": "sha256:4af8992431333bf9fb06ab1cfa55c799530eaeb979ebbdead18104d4f01b4dac"
+  },
+  "verification_observed": {
+    "target_regressions": "9 failed on originals, then 9 passed after corrections; baseline fixture invocation error corrected before recording the RED result.",
+    "existing_hint_regressions": "6 passed",
+    "canonical_oracles_passed": 36,
+    "mechanical_manual_review_receipts": 18,
+    "network": "Inherited libseccomp syscall denial; IPv4, IPv6 and Unix socket creation probes all refused with EPERM."
+  },
+  "review_inheritance": "None. All 54 texts were read. Similar hints were checked with their own parents and rewritten only for documented task mismatch or missing scope.",
+  "outside_bounded_set_findings": [
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/cours/13_C4_applications.tex",
+      "severity": "P0",
+      "status": "SEPARATE_CORRECTION_LOT_ASSIGNED",
+      "reason": "Three false characterizations of the perpendicular bisector: a universal polarization identity presented as iff; wrong sign of MA·AB; confusion with MA·MB=0 (diameter circle). A=(0,0), B=(2,0), M=(1,0) disproves the latter two."
+    }
+  ],
+  "limits": [
+    "No chapter quality sign-off or publication verdict.",
+    "No final PDF rendering or student/professor separation review.",
+    "The 18 triplets do not alone cover every official scalar-product atom or all chapter capacities.",
+    "Current chapter-dependent index credit remains pending until separate course P0 findings are corrected and re-reviewed."
+  ],
+  "triplets": [
+    {
+      "triplet": "1SPE-PRODSCAL-001",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-001.tex",
+          "source_sha256": "sha256:d6430e93a21de4b8ca55caf3e289b9686574558cd93bbefb8f7b78313b6695d1",
+          "before_review_source_sha256": "sha256:09fd7305f44a65741607d77861f23089f64df7572707b1da87600ff55292ce47",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-001.tex",
+            "source_sha256": "sha256:d6430e93a21de4b8ca55caf3e289b9686574558cd93bbefb8f7b78313b6695d1",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-001.sympy.json",
+            "receipt_sha256": "sha256:cf31c7a1730e3317e33c7d102400f8982e66aa2cc91307e8a8b6d7b9b514a44c",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-001.tex",
+          "source_sha256": "sha256:c04f50b716268262f687453bc7b2dc6612c3d451aebef2bfbc39c7875bdfedef",
+          "before_review_source_sha256": "sha256:c024ca2ae73411ee11d9c2e5a995fe5ce2bee28fc9b3b6aa834e76ac35ba6195",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-001.tex",
+            "source_sha256": "sha256:c04f50b716268262f687453bc7b2dc6612c3d451aebef2bfbc39c7875bdfedef",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-001.sympy.json",
+            "receipt_sha256": "sha256:b4bd6de4f6fa11d046568a6326e68f02e26b7169c84d317b51c707e38acb7d2b",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-001-CDP.tex",
+          "source_sha256": "sha256:2df64c0cb0bad620858de60fec4ff724850742c96091adc193162a056044d2eb",
+          "before_review_source_sha256": "sha256:c4be45419ef1305d6515bee2c766525b51ae10505ca5e7c89704ef6ec1aaf150",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-001-CDP.tex",
+            "source_sha256": "sha256:2df64c0cb0bad620858de60fec4ff724850742c96091adc193162a056044d2eb",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-001-CDP.sympy.json",
+            "receipt_sha256": "sha256:fcf843d2a82fa96f5f386578d8b109b976d9e4a12cd93f78b39e7a36a7e1b47a",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C1",
+        "official_lines": [
+          543,
+          550,
+          551
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "Dans une base orthonormée, les trois produits sont 3×2+4×(−1)=2 ; 1×5+(−2)×3=−1 ; 0×(−3)+7×2=14. La formule n'est pas valable dans une base quelconque : l'hypothèse est désormais explicite dans chaque objet.",
+      "pedagogical_reasoning": "Application initiale avec signes positifs/négatifs et une coordonnée nulle. L'aide fait réellement utiliser les coordonnées fournies ; sa branche géométrique sans données a été retirée.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    },
+    {
+      "triplet": "1SPE-PRODSCAL-002",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-002.tex",
+          "source_sha256": "sha256:3e15e93cb7a1d33c82eeea3884e4a38fdbd8cef3810d52e8ca5eed2713d20733",
+          "before_review_source_sha256": "sha256:4f70b803968047775101dcb41e3f50b1eb25322dda6a96915eb7e3029a0e6d27",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-002.tex",
+            "source_sha256": "sha256:3e15e93cb7a1d33c82eeea3884e4a38fdbd8cef3810d52e8ca5eed2713d20733",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-002.sympy.json",
+            "receipt_sha256": "sha256:f2c0f9477eddd2463d6590af37b2c2bc5ccb6dc7228711b0a692f9e2f8842b03",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-002.tex",
+          "source_sha256": "sha256:24a6cc2bf2cbfa4f7380fefcc5a55dcf8acaebe5db5dddff4f3159ceda6b1436",
+          "before_review_source_sha256": "sha256:24a6cc2bf2cbfa4f7380fefcc5a55dcf8acaebe5db5dddff4f3159ceda6b1436",
+          "modified_in_this_subtask": false,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-002.tex",
+            "source_sha256": "sha256:24a6cc2bf2cbfa4f7380fefcc5a55dcf8acaebe5db5dddff4f3159ceda6b1436",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-002.sympy.json",
+            "receipt_sha256": "sha256:37e9028dd0a80350526aa05444b57addaa917d285c6dd3ca8521037ae177cda6",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-002-CDP.tex",
+          "source_sha256": "sha256:69b97229517f072781489e0900231bea4a1237c15bd0a2527b40fe16c58c8b05",
+          "before_review_source_sha256": "sha256:a2b0cc88f68181fbdbfb43ca16f142ea6303404b829601b9b97ad3b02b2a5468",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-002-CDP.tex",
+            "source_sha256": "sha256:69b97229517f072781489e0900231bea4a1237c15bd0a2527b40fe16c58c8b05",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-002-CDP.sympy.json",
+            "receipt_sha256": "sha256:0f206b4f21cd3ea25047b486031c8631796b21e88b24a9eb50e3c90198d6d95e",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C1",
+        "official_lines": [
+          542,
+          550,
+          551
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "Les normes sont strictement positives. 3×2×cos(π/6)=3√3 et 5×4×cos(π/3)=10. Les angles donnés rendent les configurations possibles ; aucune division ni hypothèse de coordonnées n'intervient.",
+      "pedagogical_reasoning": "Choix de la méthode géométrique à partir des données. L'aide conduit aux valeurs exactes des cosinus, puis à la simplification, au lieu de proposer d'abord des coordonnées absentes.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    },
+    {
+      "triplet": "1SPE-PRODSCAL-003",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-003.tex",
+          "source_sha256": "sha256:a84d257f0b1bb9720ec6bab14c4059cd1fd489845d6518fcbc9040f1bf00ffb5",
+          "before_review_source_sha256": "sha256:1e8961f3de116d4cb70e390d12ecc3ee5b26ea01213429d572eaf290ff49670e",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-003.tex",
+            "source_sha256": "sha256:a84d257f0b1bb9720ec6bab14c4059cd1fd489845d6518fcbc9040f1bf00ffb5",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-003.sympy.json",
+            "receipt_sha256": "sha256:477fb21cc55c0140a589fbce68d1d7636bcaeab9ca812bce122d9dfcb3abe526",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-003.tex",
+          "source_sha256": "sha256:5e36b4fee2174224e11608afafdbfccaf343b742a08e9ee717cc5e719ea56c41",
+          "before_review_source_sha256": "sha256:2f9583787d099698b97481d10f11e2881530c4c94d6d5e3bb1b8b52f76070b1b",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-003.tex",
+            "source_sha256": "sha256:5e36b4fee2174224e11608afafdbfccaf343b742a08e9ee717cc5e719ea56c41",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-003.sympy.json",
+            "receipt_sha256": "sha256:7c0c64199deba891f42766b3eb3c0645436a280f4caf47af39ce3a48bb9588bc",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-003-CDP.tex",
+          "source_sha256": "sha256:8323e77adcfca343ce0d5895c95f94a4426bb1ff52f026f604d7487e550eb6cc",
+          "before_review_source_sha256": "sha256:9f167e0ba13e6bd6c3cdc49479ccd689e820072844e2c21d814b30ba52b5c469",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-003-CDP.tex",
+            "source_sha256": "sha256:8323e77adcfca343ce0d5895c95f94a4426bb1ff52f026f604d7487e550eb6cc",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-003-CDP.sympy.json",
+            "receipt_sha256": "sha256:b086765ad5047e6e7265088c7c6b077b4516909671ce54a9f12136852c678fc9",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C1",
+        "official_lines": [
+          543,
+          550,
+          551
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "u·u=1²+1²=2 ; v·v=(−3)²+4²=25 ; normes √2 et 5 (racines positives) ; u·v=−3+4=1. Toutes les trois sous-questions sont résolues, y compris la dernière non représentée dans l'ancien oracle.",
+      "pedagogical_reasoning": "Progression du produit d'un vecteur par lui-même vers sa norme puis un produit de deux vecteurs différents. L'aide distingue explicitement norme et carré de norme.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    },
+    {
+      "triplet": "1SPE-PRODSCAL-004",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-004.tex",
+          "source_sha256": "sha256:612ab2837ca4744aaa27387212a4f0865ac9479c42060c5730a03f550132564b",
+          "before_review_source_sha256": "sha256:612ab2837ca4744aaa27387212a4f0865ac9479c42060c5730a03f550132564b",
+          "modified_in_this_subtask": false,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-004.tex",
+            "source_sha256": "sha256:612ab2837ca4744aaa27387212a4f0865ac9479c42060c5730a03f550132564b",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-004.sympy.json",
+            "receipt_sha256": "sha256:1f1e3ec72357bfd97d1beb95aa405df6f93ab6b3c685ae3e4cacd8bf4a5fa9ef",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-004.tex",
+          "source_sha256": "sha256:245a7682baeacf18742782336228609c1730bf991f101a5fe4c8e6ca5a069718",
+          "before_review_source_sha256": "sha256:245a7682baeacf18742782336228609c1730bf991f101a5fe4c8e6ca5a069718",
+          "modified_in_this_subtask": false,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-004.tex",
+            "source_sha256": "sha256:245a7682baeacf18742782336228609c1730bf991f101a5fe4c8e6ca5a069718",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-004.sympy.json",
+            "receipt_sha256": "sha256:fea81d9c693a6291bde72ca2602ec0b81737ccf94b92ea16cc2c2988f42ff25f",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-004-CDP.tex",
+          "source_sha256": "sha256:7267226d0d54cbbbd25c0be56df749337dc72ce1770e5e24bccf10c936cac7c2",
+          "before_review_source_sha256": "sha256:861daa71ba3135b85c95ee9df32d837334ed178ae995f9b7ad3b8b2a85d64b36",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-004-CDP.tex",
+            "source_sha256": "sha256:7267226d0d54cbbbd25c0be56df749337dc72ce1770e5e24bccf10c936cac7c2",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-004-CDP.sympy.json",
+            "receipt_sha256": "sha256:199703d0edc26dda9792b6913762e7178ff1416b1a0e468359224d51fc9d97f2",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C1",
+        "official_lines": [
+          542,
+          549,
+          550,
+          551
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "24cos(π/4)=12√2 ; 6cosπ=−6 ; 7cos(π/2)=0. Les normes sont non nulles ; l'angle plat et l'angle droit sont correctement traités. Un produit scalaire n'est pas nécessairement positif.",
+      "pedagogical_reasoning": "Les cas opposés et orthogonaux donnent une interprétation du signe et du zéro. L'aide les distingue au lieu de répéter un choix de méthode générique.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    },
+    {
+      "triplet": "1SPE-PRODSCAL-011",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-011.tex",
+          "source_sha256": "sha256:bc9f20b21d4e17041dc87a88695421faea81bc9ca0c3fe90acf1ef311760858c",
+          "before_review_source_sha256": "sha256:bc9f20b21d4e17041dc87a88695421faea81bc9ca0c3fe90acf1ef311760858c",
+          "modified_in_this_subtask": false,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-011.tex",
+            "source_sha256": "sha256:bc9f20b21d4e17041dc87a88695421faea81bc9ca0c3fe90acf1ef311760858c",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-011.sympy.json",
+            "receipt_sha256": "sha256:76380ee2374e83b2e11536e688d8bfdfe90bcdeb0e347731b1ed680151de1dd4",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-011.tex",
+          "source_sha256": "sha256:dc0b653853eee76c3a72ae1912f2e23d81bde1a27019f136f4f03e45aab3fb6a",
+          "before_review_source_sha256": "sha256:dc0b653853eee76c3a72ae1912f2e23d81bde1a27019f136f4f03e45aab3fb6a",
+          "modified_in_this_subtask": false,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-011.tex",
+            "source_sha256": "sha256:dc0b653853eee76c3a72ae1912f2e23d81bde1a27019f136f4f03e45aab3fb6a",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-011.sympy.json",
+            "receipt_sha256": "sha256:479f8b12880baa55220a59e035c9db3da1a9dd0ed186fdee0f5fc5c19ab57a40",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-011-CDP.tex",
+          "source_sha256": "sha256:6f3f97a181594e7692b6863b0d83385845352005ef3d116129af1505479176b1",
+          "before_review_source_sha256": "sha256:0968372268019c2130c916d24a6462408a589a3998112cafec671fbddab51a63",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-011-CDP.tex",
+            "source_sha256": "sha256:6f3f97a181594e7692b6863b0d83385845352005ef3d116129af1505479176b1",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-011-CDP.sympy.json",
+            "receipt_sha256": "sha256:2b20f64cc8a93062b97307ea8a5c40ecd3abe2957007a590b23e806e44f3da97",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C2",
+        "official_lines": [
+          543,
+          545,
+          550,
+          551
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "Bilinérarité et symétrie donnent ||u+v||²=9−4+16=21, ||u−v||²=9+4+16=29 et (u+v)·(u−v)=9−16=−7. Les données sont réalisables, car |u·v|=2<3×4. Les deux normes supplémentaires imprimées sont les racines positives.",
+      "pedagogical_reasoning": "Transfert depuis des données de normes et de produit scalaire sans coordonnées. L'aide explique aussi la différence et l'annulation des termes croisés, correspondant aux trois questions.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    },
+    {
+      "triplet": "1SPE-PRODSCAL-012",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-012.tex",
+          "source_sha256": "sha256:09dbffe2f9ca1113a9b27fdad14faa7b544d87c040908bf86106d116634e949a",
+          "before_review_source_sha256": "sha256:6ce4b6816b1064c85edb89299a62ede6285b68ad6e0c65db7ca9c13b172767e1",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-012.tex",
+            "source_sha256": "sha256:09dbffe2f9ca1113a9b27fdad14faa7b544d87c040908bf86106d116634e949a",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-012.sympy.json",
+            "receipt_sha256": "sha256:9227ba7bc6ea5a61df011cb9cbecefea4b403f865209ebfe9f1ff4743d763f26",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-012.tex",
+          "source_sha256": "sha256:de717930af81c8f67e602b8f8732da16cace58b2d6bb7b34fae1270a964a8f94",
+          "before_review_source_sha256": "sha256:2f3e069768dec03c600de01a66870237e99b4ecf0281770753294398a2ac1547",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-012.tex",
+            "source_sha256": "sha256:de717930af81c8f67e602b8f8732da16cace58b2d6bb7b34fae1270a964a8f94",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-012.sympy.json",
+            "receipt_sha256": "sha256:1f2f7222c20a5bc83b2c10d4c6c1a9c6852f9932a77cc0823ee746fc84cde7bf",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-012-CDP.tex",
+          "source_sha256": "sha256:b032d1db3f47ba80e77f62cadd21ffee6c1c27be883ec8655ddbe0e993961845",
+          "before_review_source_sha256": "sha256:b032d1db3f47ba80e77f62cadd21ffee6c1c27be883ec8655ddbe0e993961845",
+          "modified_in_this_subtask": false,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-012-CDP.tex",
+            "source_sha256": "sha256:b032d1db3f47ba80e77f62cadd21ffee6c1c27be883ec8655ddbe0e993961845",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-012-CDP.sympy.json",
+            "receipt_sha256": "sha256:5c09b6d5dd5b9e3a23480a2547b294279e1230445ddfd697feda4cbf563f3ed6",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C2",
+        "official_lines": [
+          543,
+          545
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "Pour tous vecteurs, y compris nuls, ||u+v||²=(u+v)·(u+v)=u·u+u·v+v·u+v·v. La symétrie regroupe les termes croisés et la définition des normes donne l'égalité à démontrer. Aucun angle ou dénominateur n'est utilisé.",
+      "pedagogical_reasoning": "Preuve de propriété, distincte d'une application numérique. L'aide 012 corrigée par root a été relue à nouveau et ne suppose plus l'identité cible. Énoncé et corrigé ont reçu les diacritiques manquantes.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    },
+    {
+      "triplet": "1SPE-PRODSCAL-013",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-013.tex",
+          "source_sha256": "sha256:2d89232591a6b6b709605a378d09c37373912a1f5a0e880a9bd39f2cef6a7f2a",
+          "before_review_source_sha256": "sha256:ac84b9c5fcb6a8b1e3d8a5f46394edc60d156712199815402baed4c7b78b3c61",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-013.tex",
+            "source_sha256": "sha256:2d89232591a6b6b709605a378d09c37373912a1f5a0e880a9bd39f2cef6a7f2a",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-013.sympy.json",
+            "receipt_sha256": "sha256:afa5a637c8067de9c2b18bfcea7abd4963cc73093fd79e2c5d430014a5c6ee71",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-013.tex",
+          "source_sha256": "sha256:3b1206ad9911ad2e1118e3a68187afc31ecdbba6298ac19850b847431722beb1",
+          "before_review_source_sha256": "sha256:98f71bea9eea256dbd866ead1bc5e3fa87361ac343005b7e41703a5c0adaba90",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-013.tex",
+            "source_sha256": "sha256:3b1206ad9911ad2e1118e3a68187afc31ecdbba6298ac19850b847431722beb1",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-013.sympy.json",
+            "receipt_sha256": "sha256:5dc8a83a58c170b1c3192a7b53c4ed7846e55799cff96ce14c58c91ee7946d09",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-013-CDP.tex",
+          "source_sha256": "sha256:4046f9489f63d51db98dff6b4dfd851d15e3c74fb46d0320e8c9efcb0b1a3f33",
+          "before_review_source_sha256": "sha256:553b265b66776febf986222866a2b61bdcc23382d68c4a8773184c0a8c402f84",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-013-CDP.tex",
+            "source_sha256": "sha256:4046f9489f63d51db98dff6b4dfd851d15e3c74fb46d0320e8c9efcb0b1a3f33",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-013-CDP.sympy.json",
+            "receipt_sha256": "sha256:64766f0bd0e2549c25c1bcfa5b64e2df9056e9d3537e33a25852971775ba0bac",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C2",
+        "official_lines": [
+          543,
+          545,
+          550
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "u·u=5, v·v=10, u·v=−1 ; u+v=(3,2), de carré de norme 13. L'identité donne indépendamment 5−2+10=13 ; la norme est √13, positive.",
+      "pedagogical_reasoning": "Vérification par deux méthodes explicites, puis passage du carré à la norme. L'hypothèse orthonormée évite une fausse généralité analytique.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    },
+    {
+      "triplet": "1SPE-PRODSCAL-014",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-014.tex",
+          "source_sha256": "sha256:fc92941ee4910ab041c9cc54f7049f1e3c95fdff2452ad7e5a0b2fcb87fa32cc",
+          "before_review_source_sha256": "sha256:c9b18224cce2c9d0e570fb8811c871830fe1cb7480b15675fcf935c6300bd8a9",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-014.tex",
+            "source_sha256": "sha256:fc92941ee4910ab041c9cc54f7049f1e3c95fdff2452ad7e5a0b2fcb87fa32cc",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-014.sympy.json",
+            "receipt_sha256": "sha256:5af7b9bf1c0839a79ce48b9d919d6a1848b4bae81810a036a5e1cd7ec8220925",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-014.tex",
+          "source_sha256": "sha256:254a7c1f6e99a15940884b674b3edc0cd012ced50e7881643f88929cb2eb199c",
+          "before_review_source_sha256": "sha256:3d946aa25f59d4ca38c9a0c90cdcf80dae16150112c2478b9b40574f8c00e707",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-014.tex",
+            "source_sha256": "sha256:254a7c1f6e99a15940884b674b3edc0cd012ced50e7881643f88929cb2eb199c",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-014.sympy.json",
+            "receipt_sha256": "sha256:63102f9437147cec3683096222d2871f1ce0bae1cc5b3df410f2769c2f25f855",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-014-CDP.tex",
+          "source_sha256": "sha256:943ab0c528cd3a6614f4ecfe225472ecb5e392939ccf3a907267145195942cc3",
+          "before_review_source_sha256": "sha256:aaabbf16970c9648c473544d950d7b52590f46e72ee2e3fe18d4464bb5d040f0",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-014-CDP.tex",
+            "source_sha256": "sha256:943ab0c528cd3a6614f4ecfe225472ecb5e392939ccf3a907267145195942cc3",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-014-CDP.sympy.json",
+            "receipt_sha256": "sha256:4b14d90b97f9ff8da132c6187e9f9cc55846dc5f8f87d9aa0dd7097bc65ebfa9",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C2",
+        "official_lines": [
+          543,
+          545
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "L'identité du carré de la somme permet d'isoler u·v en divisant par 2. La soustraction des carrés des normes de u+v et u−v donne 4u·v, puis la division par 4 donne la seconde formule. Les identités sont générales, y compris pour les vecteurs nuls.",
+      "pedagogical_reasoning": "Raisonnement algébrique à partir des développements exigibles. Le nom polarisation désigne ici une déduction demandée dans l'exercice ; il ne crée pas une exigence officielle supplémentaire. L'aide guide séparément les deux déductions.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    },
+    {
+      "triplet": "1SPE-PRODSCAL-021",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-021.tex",
+          "source_sha256": "sha256:6e399ce94cfb362655a5969c867b846a20481b4dbca29e9cb355d23e25837a91",
+          "before_review_source_sha256": "sha256:d004fafd0e6223b5865237f0071d4033201ff078d6641c8ece787b60f08e9d78",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-021.tex",
+            "source_sha256": "sha256:6e399ce94cfb362655a5969c867b846a20481b4dbca29e9cb355d23e25837a91",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-021.sympy.json",
+            "receipt_sha256": "sha256:ccb54375318d13cc2d6cbebcb8deec4a0b04d7f1c8f9b0814c6d83afac18d516",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-021.tex",
+          "source_sha256": "sha256:60891a84aac3190af42cc0ec705ab7917b150de5f76a835ed446b9921d7e7fd4",
+          "before_review_source_sha256": "sha256:17dfe90aa8d58989a76be9b15f578bf95fee38706da5f5360788ee38233715e2",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-021.tex",
+            "source_sha256": "sha256:60891a84aac3190af42cc0ec705ab7917b150de5f76a835ed446b9921d7e7fd4",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-021.sympy.json",
+            "receipt_sha256": "sha256:fb76f9ed57ee456d54831303f494a17132bf3319990643a6a3fa41d3460fe2e3",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-021-CDP.tex",
+          "source_sha256": "sha256:e273c6c4e7d348e6b9b7586aa7f6c6b07d2271ab16b32640c7a86aac23dfa186",
+          "before_review_source_sha256": "sha256:5352b47258e262124efb37dbcc013c854990b23c33e2581b0afa27d4d3ed3a6a",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-021-CDP.tex",
+            "source_sha256": "sha256:e273c6c4e7d348e6b9b7586aa7f6c6b07d2271ab16b32640c7a86aac23dfa186",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-021-CDP.sympy.json",
+            "receipt_sha256": "sha256:ccd885dc4f73cb1723b6a46384b9d9250af5d6981b694aec6b85e7a3bc07da98",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C3",
+        "official_lines": [
+          542,
+          543,
+          549
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "Dans le repère orthonormé, u·v=−6+24=18≠0, donc les vecteurs ne sont pas orthogonaux. Le nouvel indice demande de tester la nullité sans présupposer un résultat nul.",
+      "pedagogical_reasoning": "Diagnostic oui/non avec justification, à opposer aux exercices de démonstration d'orthogonalité. L'aide ne pousse plus l'élève vers une conclusion fausse.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    },
+    {
+      "triplet": "1SPE-PRODSCAL-022",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-022.tex",
+          "source_sha256": "sha256:1ab4a64d81d6c4dfa4635c56f6285f56a8046adcdf2cb9af15026a7b8b9a868e",
+          "before_review_source_sha256": "sha256:0ea90a49e033998093a24c33c467ce04c51f0bf32aea19ec017d26aba27c97d8",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-022.tex",
+            "source_sha256": "sha256:1ab4a64d81d6c4dfa4635c56f6285f56a8046adcdf2cb9af15026a7b8b9a868e",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-022.sympy.json",
+            "receipt_sha256": "sha256:291246506d1888f666ae18cc21a0525e24f43dca442a6199f866669c0c2f56cf",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-022.tex",
+          "source_sha256": "sha256:cfbc9b85130412a3ef8a6f7ca436a05956ea25b5b7e0eade931b7d913d97023a",
+          "before_review_source_sha256": "sha256:b8a2b6c4965b2c7c4b9c11f7957dc6f110049f01244c37cebf056db0ba635d62",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-022.tex",
+            "source_sha256": "sha256:cfbc9b85130412a3ef8a6f7ca436a05956ea25b5b7e0eade931b7d913d97023a",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-022.sympy.json",
+            "receipt_sha256": "sha256:e71785d9740f641311e49e62025106b6fc1345334e23d80b15dd9c0d80b88001",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-022-CDP.tex",
+          "source_sha256": "sha256:9b3e107090f052d420e95112cbe2f16cad8e1fb0f809461556318f7b4d7d2b25",
+          "before_review_source_sha256": "sha256:ac9145a6f36e49a204648e01960fd78998b9a15eefdf15e41ab83e8deec9057a",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-022-CDP.tex",
+            "source_sha256": "sha256:9b3e107090f052d420e95112cbe2f16cad8e1fb0f809461556318f7b4d7d2b25",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-022-CDP.sympy.json",
+            "receipt_sha256": "sha256:a4a1db9dbddf11991b0a526cd80b20bfc588b8ccb4cf3394f0d285c21f133d27",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C3",
+        "official_lines": [
+          542,
+          543,
+          549
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "6×(−2)+3×4=−12+12=0. Le critère u·v=0 établit l'orthogonalité ; il ne faut pas diviser par les normes pour cette seule question.",
+      "pedagogical_reasoning": "Application du critère avec compensation exacte. L'aide garde cette tâche précise et supprime une formule d'angle inutile.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    },
+    {
+      "triplet": "1SPE-PRODSCAL-023",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-023.tex",
+          "source_sha256": "sha256:30b08f7333c9b06f801eea517db5006bb00a111c5f0fb32cdec8b02506205d60",
+          "before_review_source_sha256": "sha256:a7758f7011ed182e8f2378bb64485421a5f13251acf52032c8fd4ba3ed587398",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-023.tex",
+            "source_sha256": "sha256:30b08f7333c9b06f801eea517db5006bb00a111c5f0fb32cdec8b02506205d60",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-023.sympy.json",
+            "receipt_sha256": "sha256:d986aa486228e10bb0d8f464142510cef46e07d4d2f3997bd10f8f677ea903b4",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-023.tex",
+          "source_sha256": "sha256:fd6c72508fa7b00d9d22f07ad7749a22e66719c685c8dda4dff28535927ad051",
+          "before_review_source_sha256": "sha256:21792e78fd976503334a79f62dd1928392d5d4634bc4233c24f0337c933dfadc",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-023.tex",
+            "source_sha256": "sha256:fd6c72508fa7b00d9d22f07ad7749a22e66719c685c8dda4dff28535927ad051",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-023.sympy.json",
+            "receipt_sha256": "sha256:bfb266ebee9a07b690ebe0e455847aee3958a5fe14d66e7b347fd8609ba9fe94",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-023-CDP.tex",
+          "source_sha256": "sha256:e32d748c4383ed9a23cb3a592707f3e49081f176a065fb9fb2004984cf429684",
+          "before_review_source_sha256": "sha256:23d8ae0163a3a057b30760e434e0b81ed80c2e97108c1f6a4ac9c5b00425b80e",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-023-CDP.tex",
+            "source_sha256": "sha256:e32d748c4383ed9a23cb3a592707f3e49081f176a065fb9fb2004984cf429684",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-023-CDP.sympy.json",
+            "receipt_sha256": "sha256:1b99c937f9bfc6598c15fb3337f81681ff66ff1ed8afa4d3fdacf0d97172085e",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C3",
+        "official_lines": [
+          543,
+          549
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "u·v=1, ||u||=√2>0, ||v||=1>0. Ainsi cosθ=1/√2=√2/2. L'angle géométrique θ∈[0,π] est donc uniquement π/4. Sans préciser l'angle géométrique, un angle orienté exigerait une convention d'orientation.",
+      "pedagogical_reasoning": "Calcul d'angle, avec contrôle du dénominateur et reconnaissance d'une valeur remarquable. L'ancienne consigne de montrer une orthogonalité était inadaptée : le produit est 1, pas 0.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    },
+    {
+      "triplet": "1SPE-PRODSCAL-024",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-024.tex",
+          "source_sha256": "sha256:e2ecb939309c15c3ea62a671229523084ba3113efe33b65a7d9b1bfd89eef104",
+          "before_review_source_sha256": "sha256:d3de823ec0dbbe81defe1ad177c215a69bbea4b72741154fd1b34cb29c641dfe",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-024.tex",
+            "source_sha256": "sha256:e2ecb939309c15c3ea62a671229523084ba3113efe33b65a7d9b1bfd89eef104",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-024.sympy.json",
+            "receipt_sha256": "sha256:b1be120d783975e8f2cffd4428799a64e75d13e11d0df3bef61242cab4e81d14",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-024.tex",
+          "source_sha256": "sha256:4407f72c6f211a170c5d2183c0c064fe7decde90989f38ebc2fb3b2d13a6353a",
+          "before_review_source_sha256": "sha256:1d9b6d5bb7f5bebd7f2a0af51eac4a2b8c3a055ce55c33bf61d205f192a8dc92",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-024.tex",
+            "source_sha256": "sha256:4407f72c6f211a170c5d2183c0c064fe7decde90989f38ebc2fb3b2d13a6353a",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-024.sympy.json",
+            "receipt_sha256": "sha256:4741587dd8ad5295887ca077ce7484bd1117640ffc453b69e933359edc2dcafa",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-024-CDP.tex",
+          "source_sha256": "sha256:ccd3cfff34bbe2743ec5d578f369a4f7d622461de21a91cd2673669053dc20b7",
+          "before_review_source_sha256": "sha256:95515eed231063d5e18277f802c9c8d965f39699f75bee9117d2f3773d18393c",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-024-CDP.tex",
+            "source_sha256": "sha256:ccd3cfff34bbe2743ec5d578f369a4f7d622461de21a91cd2673669053dc20b7",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-024-CDP.sympy.json",
+            "receipt_sha256": "sha256:5271877b9109c9cfc2144579180ee69f8e65a7eaa19a3b362061b497addd09e7",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C3",
+        "official_lines": [
+          542,
+          543,
+          549
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "u·v=√3−√3=0 ; les deux normes sont 2, donc les vecteurs sont non nuls. Leurs directions sont orthogonales et les droites correspondantes sont perpendiculaires dans le plan.",
+      "pedagogical_reasoning": "Extension du critère à des coordonnées irrationnelles puis passage des vecteurs aux droites. L'aide distingue l'orthogonalité du produit nul et le rôle de la non-nullité pour être vecteur directeur.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    },
+    {
+      "triplet": "1SPE-PRODSCAL-031",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-031.tex",
+          "source_sha256": "sha256:9b6dc72d9e29e4b44dd3b9895a46e28c711cf9c718ac744cde71e684ca15ab46",
+          "before_review_source_sha256": "sha256:a3dd8208a74ea53581cb5cbdc4ecc8ac43aeab635346ac031bcbc6041f658588",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-031.tex",
+            "source_sha256": "sha256:9b6dc72d9e29e4b44dd3b9895a46e28c711cf9c718ac744cde71e684ca15ab46",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-031.sympy.json",
+            "receipt_sha256": "sha256:a6c52733aa2ed09ff709da2794e27d60f9400e8fa71f768138ebd2ed25028869",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-031.tex",
+          "source_sha256": "sha256:8d395564ea22ac8b595f15b4767c8f0e1cf7d995b19b94fa56efd778ed845710",
+          "before_review_source_sha256": "sha256:b1fc95ae9f492095e770b4376c41461c4a66df62514316bf006c81a901919124",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-031.tex",
+            "source_sha256": "sha256:8d395564ea22ac8b595f15b4767c8f0e1cf7d995b19b94fa56efd778ed845710",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-031.sympy.json",
+            "receipt_sha256": "sha256:b66f7eb4d23ef7387062fe1787556dd1c97d0ffe167130bf042959d4d5296e99",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-031-CDP.tex",
+          "source_sha256": "sha256:826993a33ded961367c05431fe6e4bb5e0e91cf6ed99883714abc4f8fc85b95a",
+          "before_review_source_sha256": "sha256:2204d77e38e34d022887d12822b8c3a092a2c8d35ce8da32f81aad37f535db14",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-031-CDP.tex",
+            "source_sha256": "sha256:826993a33ded961367c05431fe6e4bb5e0e91cf6ed99883714abc4f8fc85b95a",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-031-CDP.sympy.json",
+            "receipt_sha256": "sha256:106f224187ddb6d1594e33ff68b74ef1229a5e7745bf07c5ada2162bd9f375f9",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C4",
+        "official_lines": [
+          549,
+          552,
+          570,
+          574
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "I=(3,2), AB=(4,−2)≠0. IM·AB=4(x−3)−2(y−2)=0 équivaut à 2x−y=4. Contrôle indépendant : MA²−MB²=4(2x−y−4), donc cette droite est exactement le lieu MA=MB.",
+      "pedagogical_reasoning": "Traduction d'un lieu géométrique par milieu et orthogonalité, puis équation. L'aide identifie I et M et ne propose plus une formule d'aire sans rapport. Ce triplet ne certifie pas à lui seul l'atome de transformation de MA·MB.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    },
+    {
+      "triplet": "1SPE-PRODSCAL-032",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-032.tex",
+          "source_sha256": "sha256:af990bc6139244e24b6a53770e81e0052447ce137ee1b39fb9d2508b77804704",
+          "before_review_source_sha256": "sha256:6ff6cef644c5d19a3f9a05da7b5f85d95ff3545149d7bca4b657235c42ac0f15",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-032.tex",
+            "source_sha256": "sha256:af990bc6139244e24b6a53770e81e0052447ce137ee1b39fb9d2508b77804704",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-032.sympy.json",
+            "receipt_sha256": "sha256:c6900745e7f83c7aaded551e8b384481149f77394e417f17770a59b6fe9537f8",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-032.tex",
+          "source_sha256": "sha256:58a57719b6b670352eff3b046a1a9a4782b2c11656123c07a9aa96bd9ebaf1a5",
+          "before_review_source_sha256": "sha256:dcd0c8525f824faa744d6d8bf68d53178bc8a550f76e403702803c103b875704",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-032.tex",
+            "source_sha256": "sha256:58a57719b6b670352eff3b046a1a9a4782b2c11656123c07a9aa96bd9ebaf1a5",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-032.sympy.json",
+            "receipt_sha256": "sha256:d6f5863908fb909c3a1d54a0e8c930370c48699597721dd6dd99bda899f5597c",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-032-CDP.tex",
+          "source_sha256": "sha256:dce1bb2b8930ca1f6beeec49ec13a10c6c15711469b2029f301ca994cbb89d8f",
+          "before_review_source_sha256": "sha256:ed95270a34301f88a4f9a5fc24dbd89ca896f6701759acfcf79d4938d78faa07",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-032-CDP.tex",
+            "source_sha256": "sha256:dce1bb2b8930ca1f6beeec49ec13a10c6c15711469b2029f301ca994cbb89d8f",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-032-CDP.sympy.json",
+            "receipt_sha256": "sha256:cd805b627014d7da57f7cdc9717f697a4a68eaff3fbb599390381bfc9d4c7073",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C4",
+        "official_lines": [
+          549,
+          552,
+          567,
+          571
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "BC=(−4,4), ||BC||²=32>0. H=B+tBC=(6−4t,4t). AH·BC=−24+32t=0 a l'unique solution t=3/4, donc H=(3,3). L'incidence et l'orthogonalité sont toutes deux vérifiées ; ABC est non dégénéré.",
+      "pedagogical_reasoning": "Problème de projection demandant deux conditions complémentaires. L'aide 032 corrigée par root a été conservée et complétée par l'hypothèse orthonormée.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    },
+    {
+      "triplet": "1SPE-PRODSCAL-033",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-033.tex",
+          "source_sha256": "sha256:848ab482c8b38545707f5ef3d61e163d03555bfec23adfc9c0b5b9aa44eba8cf",
+          "before_review_source_sha256": "sha256:56315668aedd79bd33f8fbba3083cb41cf0f0a60225510d5315ed183a3f1e1f4",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-033.tex",
+            "source_sha256": "sha256:848ab482c8b38545707f5ef3d61e163d03555bfec23adfc9c0b5b9aa44eba8cf",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-033.sympy.json",
+            "receipt_sha256": "sha256:647c91d1a55125a1671fd4dc456d6f550059f35f6d3df561eef07a04b112265b",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-033.tex",
+          "source_sha256": "sha256:2de2f021383ed905909c45caa75e36e6b274b184ca78f41a59f45cf78e957d4d",
+          "before_review_source_sha256": "sha256:d009695ac1c29747df790d464fe0a5ef49f0fcfe78802d6db5e5eece875f1e73",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-033.tex",
+            "source_sha256": "sha256:2de2f021383ed905909c45caa75e36e6b274b184ca78f41a59f45cf78e957d4d",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-033.sympy.json",
+            "receipt_sha256": "sha256:48ea613ddfae2f4aa70d3bb5524de787b6c47ce690e5bf6a1518daa7549b9478",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-033-CDP.tex",
+          "source_sha256": "sha256:3c4c62823ddb8e076385c1d86cb3489add8c032aef44f2ef7532ad2c6419ae9f",
+          "before_review_source_sha256": "sha256:2760cb83d312a9e5a0390576938862475eb7e26150e56cd21b34efee7d10437c",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-033-CDP.tex",
+            "source_sha256": "sha256:3c4c62823ddb8e076385c1d86cb3489add8c032aef44f2ef7532ad2c6419ae9f",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-033-CDP.sympy.json",
+            "receipt_sha256": "sha256:ac7bc668c0f4f9578e5ad0215b249138f5b8e95e2b33428c23259b032acf103d",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C4",
+        "official_lines": [
+          549,
+          552,
+          574
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "AB=(4,0), AC=(1,3), produit 4, normes 4 et √10. cosA=1/√10. L'angle intérieur est dans ]0,π[, donc sinA=√(1−1/10)=3/√10. L'aire est 4√10×(3/√10)/2=6 unités d'aire ; contrôle indépendant base 4, hauteur 3. La demi-aire dans l'oracle est désormais rationnelle exacte, sans division entière.",
+      "pedagogical_reasoning": "Transfert du produit scalaire vers un angle puis une aire. Les vecteurs et l'angle de l'aide sont explicitement AB, AC et BAC ; le signe positif du sinus est justifié.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    },
+    {
+      "triplet": "1SPE-PRODSCAL-034",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-034.tex",
+          "source_sha256": "sha256:a21b8e75fc22500e3c8d0272e141a1ba0003430cba497441f9fb4c50554a38e7",
+          "before_review_source_sha256": "sha256:bc50eb1e8be7394a5a431c238dcbc8c275861ecbf46e457ac3ad61e60660f1a2",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-034.tex",
+            "source_sha256": "sha256:a21b8e75fc22500e3c8d0272e141a1ba0003430cba497441f9fb4c50554a38e7",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-034.sympy.json",
+            "receipt_sha256": "sha256:4fc3b610b07870363c8c818d3f9aa50c4c146254ca9127b1367a370ace507072",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-034.tex",
+          "source_sha256": "sha256:28281489e44d92d8eed697e13501e6110e529fcef9564c1c59a3e655e4b600ab",
+          "before_review_source_sha256": "sha256:3095d63d59c93fe291dc3e24684ab372f9984e4877d23d3228ec92406b227f8c",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-034.tex",
+            "source_sha256": "sha256:28281489e44d92d8eed697e13501e6110e529fcef9564c1c59a3e655e4b600ab",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-034.sympy.json",
+            "receipt_sha256": "sha256:e2e36f62e1291db592e416f7a2ee7f0d42b1456f6922b9b5dfd90140ab7b1aac",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-034-CDP.tex",
+          "source_sha256": "sha256:d7f908197189f5decb3612bab69ea03ceffa684c1923c8c58b6352b0197bb13d",
+          "before_review_source_sha256": "sha256:df71618361a01687418076abcea320dfb8a0875b2740a541d246327ff5931526",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-034-CDP.tex",
+            "source_sha256": "sha256:d7f908197189f5decb3612bab69ea03ceffa684c1923c8c58b6352b0197bb13d",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-034-CDP.sympy.json",
+            "receipt_sha256": "sha256:a46d6356bbcd1f35e16a3760b4f74dd2235ab06a13b893b97d6a9fd586e16c34",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C4",
+        "official_lines": [
+          549,
+          552,
+          570,
+          574
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "I=(4,2), AB=(4,2) ; IM·AB=4(x−4)+2(y−2)=0 équivaut à 2x+y=10. Pour C=(3,4), 2×3+4=10. En contrôle indépendant, CA²=CB²=10.",
+      "pedagogical_reasoning": "Après l'équation, une vérification d'appartenance relie calcul et propriété de lieu. Cela ajoute une tâche réelle par rapport à 031 ; la proximité ne justifie pas une suppression automatique.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    },
+    {
+      "triplet": "1SPE-PRODSCAL-041",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-041.tex",
+          "source_sha256": "sha256:4341ac67fce05c449ad60330596604b94be554c707454b129c41fbf147252ae4",
+          "before_review_source_sha256": "sha256:be8a1a5031e81f186434b47fc515f66fef83fd6f9e40920988677ea6c6f8cf83",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-041.tex",
+            "source_sha256": "sha256:4341ac67fce05c449ad60330596604b94be554c707454b129c41fbf147252ae4",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-041.sympy.json",
+            "receipt_sha256": "sha256:df96b5313d10b4d77ea1ea522a40440da114e318962e7cb1350ee4c853e025bf",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-041.tex",
+          "source_sha256": "sha256:4e69753d5e9a9782f79a9f1d38085ef7d3ba99254093b6a6ce22d51693231722",
+          "before_review_source_sha256": "sha256:8e190add623fa6c38118a3a90a2dd34670d395e0e0e4da82911497f916f796b3",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-041.tex",
+            "source_sha256": "sha256:4e69753d5e9a9782f79a9f1d38085ef7d3ba99254093b6a6ce22d51693231722",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-041.sympy.json",
+            "receipt_sha256": "sha256:2e9addf1942318f96c34d1f2671d62ece909e8d1b3bb986f8e49448a5b22ba0c",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-041-CDP.tex",
+          "source_sha256": "sha256:eb2d6e41066979b8442be630d714ecf7c8534a4ac577c342acff6a2e1ad9e8d7",
+          "before_review_source_sha256": "sha256:e164afc03ec17d2b49ee4c3eef2b103f6e787d773ec8864471ef31c8acbb8ecd",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-041-CDP.tex",
+            "source_sha256": "sha256:eb2d6e41066979b8442be630d714ecf7c8534a4ac577c342acff6a2e1ad9e8d7",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-041-CDP.sympy.json",
+            "receipt_sha256": "sha256:73cc981f611453053061d2d3f907812b55a58d98939bccbd5d3e6add56623b3a",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C5",
+        "official_lines": [
+          545,
+          549
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "Al-Kashi donne BC²=25+49−70×1/2=39. Puisque BC est une longueur, BC=√39>0. Les bornes rationnelles 1247/200<√39<1249/200 prouvent l'arrondi au centième 6,24. La longueur respecte aussi 7−5<BC<7+5. La mutation du candidat en −√39 ou √40 est rejetée par les deux vrais oracles.",
+      "pedagogical_reasoning": "Application directe avec identification du côté opposé à l'angle donné, choix de la racine positive et arrondi. Cette application ne remplace pas la démonstration officielle d'Al-Kashi exigée ailleurs.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    },
+    {
+      "triplet": "1SPE-PRODSCAL-042",
+      "read_objects": [
+        {
+          "role": "EX",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-042.tex",
+          "source_sha256": "sha256:7402dfd4a3f72e14902aed597318ee53e9e9936ad5236e4b14f804509e52a1c5",
+          "before_review_source_sha256": "sha256:0481f5e1154609a77e0f52df82e559b60359e85db6e32ceedaf3a277407dca76",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-042.tex",
+            "source_sha256": "sha256:7402dfd4a3f72e14902aed597318ee53e9e9936ad5236e4b14f804509e52a1c5",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-042.sympy.json",
+            "receipt_sha256": "sha256:3d48a4e6e84d16d92ad69b400851bbe51c57641bac58af9b2ea8f966ee5e339a",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CO",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-042.tex",
+          "source_sha256": "sha256:66e3c42e038ff69df64d41500ff03f2badd71ea3d2b8189fc4e6c51a5b9ab2fa",
+          "before_review_source_sha256": "sha256:6cd89937573892cbef4d00cba234b84f3d5485d36ea8ef267f3e3a73fe544c9e",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-042.tex",
+            "source_sha256": "sha256:66e3c42e038ff69df64d41500ff03f2badd71ea3d2b8189fc4e6c51a5b9ab2fa",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-CO-042.sympy.json",
+            "receipt_sha256": "sha256:954d0437b4f6e18f89d1be8971df4a1447844c55c83d883c18af7dad0a2a9f33",
+            "verdict": "pass"
+          }
+        },
+        {
+          "role": "CDP",
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-042-CDP.tex",
+          "source_sha256": "sha256:d659c08828c6391db0fb78f0b0c6ab98a85c40992248addf2cdd697a8a4bcf56",
+          "before_review_source_sha256": "sha256:456a176c69d0628f4ca631aabfd227a5989ee4543689828e277eebf2b1f675e2",
+          "modified_in_this_subtask": true,
+          "receipt": {
+            "source": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-042-CDP.tex",
+            "source_sha256": "sha256:d659c08828c6391db0fb78f0b0c6ab98a85c40992248addf2cdd697a8a4bcf56",
+            "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/validations/1SPE-PRODSCAL-EX-042-CDP.sympy.json",
+            "receipt_sha256": "sha256:809f267aa2626aef90f53c04a6ef6e92a0cff4a5aa55ca26007322a324f421c2",
+            "verdict": "manual_review"
+          }
+        }
+      ],
+      "programme": {
+        "local_capacity": "C5",
+        "official_lines": [
+          545,
+          549
+        ],
+        "verdict": "CONTENT_ALIGNED_WITH_READ_OFFICIAL_CAPABILITIES",
+        "scope": "Legitimacy and actual content of this triplet; no aggregate capacity or chapter completion credit."
+      },
+      "independent_scientific_reasoning": "cosBAC=(4²+5²−3²)/(2×4×5)=32/40=4/5. L'angle géométrique vaut arccos(4/5), environ 0,644 rad et 36,9°. Comme 3²+4²=5² et AB=5 est le plus grand côté, le triangle est rectangle en C, pas en A.",
+      "pedagogical_reasoning": "Application inverse de la formule pour un angle, conversion des unités, puis contrôle indépendant par Pythagore. La dernière question est rendue explicite sans changer le résultat attendu.",
+      "editorial_review": "All three displayed texts read. Missing diacritics found in this bounded set were corrected. Coordinate hypotheses, named objects, signs, equality chains and units were checked.",
+      "oracle_review": "The exercise and correction each have an actually executed passing oracle; handwritten general arguments above also cover claims beyond that oracle subset. The hint has no artificial oracle and remains mechanically manual_review.",
+      "counter_review_status": "VALIDATED_BY_EVIDENCE",
+      "human_approval": false
+    }
+  ],
+  "independent_counter_review": {
+    "reviewer": "/root",
+    "status": "VALIDATED_BY_EVIDENCE",
+    "human_approval": false,
+    "scope": "Source-only independent counter-review of all 54 texts and their corrections; no chapter, dependency, PDF or release sign-off.",
+    "dimensions": [
+      "PROGRAMME_REVIEW",
+      "SCIENTIFIC_REVIEW",
+      "PEDAGOGICAL_REVIEW",
+      "EDITORIAL_REVIEW",
+      "CORRECTION_ALIGNMENT_REVIEW",
+      "DATA_REVIEW",
+      "ORACLE_REVIEW"
+    ],
+    "data_scope": "Fictitious exercise values; no external dataset.",
+    "evidence": "Parent independently solved the 18 tasks and read all 54 texts, their diffs, and official programme lines 540–574; explicit counter-review returned on 2026-09-08.",
+    "reviewed_sources": [
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-001.tex",
+        "source_sha256": "sha256:d6430e93a21de4b8ca55caf3e289b9686574558cd93bbefb8f7b78313b6695d1"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-001.tex",
+        "source_sha256": "sha256:c04f50b716268262f687453bc7b2dc6612c3d451aebef2bfbc39c7875bdfedef"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-001-CDP.tex",
+        "source_sha256": "sha256:2df64c0cb0bad620858de60fec4ff724850742c96091adc193162a056044d2eb"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-002.tex",
+        "source_sha256": "sha256:3e15e93cb7a1d33c82eeea3884e4a38fdbd8cef3810d52e8ca5eed2713d20733"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-002.tex",
+        "source_sha256": "sha256:24a6cc2bf2cbfa4f7380fefcc5a55dcf8acaebe5db5dddff4f3159ceda6b1436"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-002-CDP.tex",
+        "source_sha256": "sha256:69b97229517f072781489e0900231bea4a1237c15bd0a2527b40fe16c58c8b05"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-003.tex",
+        "source_sha256": "sha256:a84d257f0b1bb9720ec6bab14c4059cd1fd489845d6518fcbc9040f1bf00ffb5"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-003.tex",
+        "source_sha256": "sha256:5e36b4fee2174224e11608afafdbfccaf343b742a08e9ee717cc5e719ea56c41"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-003-CDP.tex",
+        "source_sha256": "sha256:8323e77adcfca343ce0d5895c95f94a4426bb1ff52f026f604d7487e550eb6cc"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-004.tex",
+        "source_sha256": "sha256:612ab2837ca4744aaa27387212a4f0865ac9479c42060c5730a03f550132564b"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-004.tex",
+        "source_sha256": "sha256:245a7682baeacf18742782336228609c1730bf991f101a5fe4c8e6ca5a069718"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-004-CDP.tex",
+        "source_sha256": "sha256:7267226d0d54cbbbd25c0be56df749337dc72ce1770e5e24bccf10c936cac7c2"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-011.tex",
+        "source_sha256": "sha256:bc9f20b21d4e17041dc87a88695421faea81bc9ca0c3fe90acf1ef311760858c"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-011.tex",
+        "source_sha256": "sha256:dc0b653853eee76c3a72ae1912f2e23d81bde1a27019f136f4f03e45aab3fb6a"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-011-CDP.tex",
+        "source_sha256": "sha256:6f3f97a181594e7692b6863b0d83385845352005ef3d116129af1505479176b1"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-012.tex",
+        "source_sha256": "sha256:09dbffe2f9ca1113a9b27fdad14faa7b544d87c040908bf86106d116634e949a"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-012.tex",
+        "source_sha256": "sha256:de717930af81c8f67e602b8f8732da16cace58b2d6bb7b34fae1270a964a8f94"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-012-CDP.tex",
+        "source_sha256": "sha256:b032d1db3f47ba80e77f62cadd21ffee6c1c27be883ec8655ddbe0e993961845"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-013.tex",
+        "source_sha256": "sha256:2d89232591a6b6b709605a378d09c37373912a1f5a0e880a9bd39f2cef6a7f2a"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-013.tex",
+        "source_sha256": "sha256:3b1206ad9911ad2e1118e3a68187afc31ecdbba6298ac19850b847431722beb1"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-013-CDP.tex",
+        "source_sha256": "sha256:4046f9489f63d51db98dff6b4dfd851d15e3c74fb46d0320e8c9efcb0b1a3f33"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-014.tex",
+        "source_sha256": "sha256:fc92941ee4910ab041c9cc54f7049f1e3c95fdff2452ad7e5a0b2fcb87fa32cc"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-014.tex",
+        "source_sha256": "sha256:254a7c1f6e99a15940884b674b3edc0cd012ced50e7881643f88929cb2eb199c"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-014-CDP.tex",
+        "source_sha256": "sha256:943ab0c528cd3a6614f4ecfe225472ecb5e392939ccf3a907267145195942cc3"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-021.tex",
+        "source_sha256": "sha256:6e399ce94cfb362655a5969c867b846a20481b4dbca29e9cb355d23e25837a91"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-021.tex",
+        "source_sha256": "sha256:60891a84aac3190af42cc0ec705ab7917b150de5f76a835ed446b9921d7e7fd4"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-021-CDP.tex",
+        "source_sha256": "sha256:e273c6c4e7d348e6b9b7586aa7f6c6b07d2271ab16b32640c7a86aac23dfa186"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-022.tex",
+        "source_sha256": "sha256:1ab4a64d81d6c4dfa4635c56f6285f56a8046adcdf2cb9af15026a7b8b9a868e"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-022.tex",
+        "source_sha256": "sha256:cfbc9b85130412a3ef8a6f7ca436a05956ea25b5b7e0eade931b7d913d97023a"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-022-CDP.tex",
+        "source_sha256": "sha256:9b3e107090f052d420e95112cbe2f16cad8e1fb0f809461556318f7b4d7d2b25"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-023.tex",
+        "source_sha256": "sha256:30b08f7333c9b06f801eea517db5006bb00a111c5f0fb32cdec8b02506205d60"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-023.tex",
+        "source_sha256": "sha256:fd6c72508fa7b00d9d22f07ad7749a22e66719c685c8dda4dff28535927ad051"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-023-CDP.tex",
+        "source_sha256": "sha256:e32d748c4383ed9a23cb3a592707f3e49081f176a065fb9fb2004984cf429684"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-024.tex",
+        "source_sha256": "sha256:e2ecb939309c15c3ea62a671229523084ba3113efe33b65a7d9b1bfd89eef104"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-024.tex",
+        "source_sha256": "sha256:4407f72c6f211a170c5d2183c0c064fe7decde90989f38ebc2fb3b2d13a6353a"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-024-CDP.tex",
+        "source_sha256": "sha256:ccd3cfff34bbe2743ec5d578f369a4f7d622461de21a91cd2673669053dc20b7"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-031.tex",
+        "source_sha256": "sha256:9b6dc72d9e29e4b44dd3b9895a46e28c711cf9c718ac744cde71e684ca15ab46"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-031.tex",
+        "source_sha256": "sha256:8d395564ea22ac8b595f15b4767c8f0e1cf7d995b19b94fa56efd778ed845710"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-031-CDP.tex",
+        "source_sha256": "sha256:826993a33ded961367c05431fe6e4bb5e0e91cf6ed99883714abc4f8fc85b95a"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-032.tex",
+        "source_sha256": "sha256:af990bc6139244e24b6a53770e81e0052447ce137ee1b39fb9d2508b77804704"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-032.tex",
+        "source_sha256": "sha256:58a57719b6b670352eff3b046a1a9a4782b2c11656123c07a9aa96bd9ebaf1a5"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-032-CDP.tex",
+        "source_sha256": "sha256:dce1bb2b8930ca1f6beeec49ec13a10c6c15711469b2029f301ca994cbb89d8f"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-033.tex",
+        "source_sha256": "sha256:848ab482c8b38545707f5ef3d61e163d03555bfec23adfc9c0b5b9aa44eba8cf"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-033.tex",
+        "source_sha256": "sha256:2de2f021383ed905909c45caa75e36e6b274b184ca78f41a59f45cf78e957d4d"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-033-CDP.tex",
+        "source_sha256": "sha256:3c4c62823ddb8e076385c1d86cb3489add8c032aef44f2ef7532ad2c6419ae9f"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-034.tex",
+        "source_sha256": "sha256:a21b8e75fc22500e3c8d0272e141a1ba0003430cba497441f9fb4c50554a38e7"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-034.tex",
+        "source_sha256": "sha256:28281489e44d92d8eed697e13501e6110e529fcef9564c1c59a3e655e4b600ab"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-034-CDP.tex",
+        "source_sha256": "sha256:d7f908197189f5decb3612bab69ea03ceffa684c1923c8c58b6352b0197bb13d"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-041.tex",
+        "source_sha256": "sha256:4341ac67fce05c449ad60330596604b94be554c707454b129c41fbf147252ae4"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-041.tex",
+        "source_sha256": "sha256:4e69753d5e9a9782f79a9f1d38085ef7d3ba99254093b6a6ce22d51693231722"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-041-CDP.tex",
+        "source_sha256": "sha256:eb2d6e41066979b8442be630d714ecf7c8534a4ac577c342acff6a2e1ad9e8d7"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-042.tex",
+        "source_sha256": "sha256:7402dfd4a3f72e14902aed597318ee53e9e9936ad5236e4b14f804509e52a1c5"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-042.tex",
+        "source_sha256": "sha256:66e3c42e038ff69df64d41500ff03f2badd71ea3d2b8189fc4e6c51a5b9ab2fa"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-042-CDP.tex",
+        "source_sha256": "sha256:d659c08828c6391db0fb78f0b0c6ab98a85c40992248addf2cdd697a8a4bcf56"
+      }
+    ]
+  }
+}

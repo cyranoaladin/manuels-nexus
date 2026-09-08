@@ -2,7 +2,11 @@
 % BEGIN-VERIFY
 % from sympy import *
 % assert 5**2 + 7**2 - 2*5*7*cos(pi/3) == 39
-% assert sqrt(39) == sqrt(39)
+% BC_carre = 5**2 + 7**2 - 2*5*7*cos(pi/3)
+% BC = sqrt(39)
+% assert BC > 0
+% assert simplify(BC**2 - BC_carre) == 0
+% assert Rational(1247, 200) < BC < Rational(1249, 200)
 % END-VERIFY
 \begin{corrige}{1SPE-PRODSCAL-EX-041}
 Par la formule d'Al-Kashi :

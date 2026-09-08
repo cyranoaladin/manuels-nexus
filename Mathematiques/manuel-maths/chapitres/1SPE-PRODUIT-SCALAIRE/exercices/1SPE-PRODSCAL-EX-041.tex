@@ -2,7 +2,11 @@
 % BEGIN-VERIFY
 % from sympy import *
 % assert 5**2 + 7**2 - 2*5*7*cos(pi/3) == 39
-% assert sqrt(39) == sqrt(39)
+% BC_carre = 5**2 + 7**2 - 2*5*7*cos(pi/3)
+% BC = sqrt(39)
+% assert BC > 0
+% assert simplify(BC**2 - BC_carre) == 0
+% assert Rational(1247, 200) < BC < Rational(1249, 200)
 % END-VERIFY
 \begin{exercice}{1SPE-PRODSCAL-EX-041}{1}{5}
 Dans un triangle $ABC$, on donne $AB = 5$, $AC = 7$ et $\widehat{BAC} = \dfrac{\pi}{3}$. Calculer $BC$.
