@@ -8,18 +8,24 @@
 
 \textbf{Erreur 1 :} annoncer comme PGCD le dernier reste calculé, qui vaut $0$.
 Le PGCD est le \emph{dernier reste non nul}, c'est-à-dire le diviseur de la
-dernière division.
+dernière division. On commence l'algorithme avec les valeurs absolues des deux
+entiers, qui ne sont pas tous deux nuls.
 
 \textbf{Erreur 2 :} arrêter l'algorithme dès qu'un reste « paraît » être le
 PGCD. Tant que le reste n'est pas nul, on continue.
 
-\textbf{Erreur 3 :} oublier que $\mathrm{PGCD}(n\,;\,0)=n$. C'est précisément
-le cas d'arrêt.
+\textbf{Erreur 3 :} oublier que, pour tout entier non nul $n$,
+$\mathrm{PGCD}(n\,;\,0)=\lvert n\rvert$. Le PGCD est positif, même si $n<0$.
+C'est précisément le cas d'arrêt : par exemple,
+$\mathrm{PGCD}(-12\,;\,0)=12$.
 
 % BEGIN-VERIFY
 % import math
 % assert math.gcd(84, 120) == 12
 % assert math.gcd(12, 0) == 12
+% assert math.gcd(-12, 0) == 12
+% for n in (-120, -12, -1, 1, 12, 120):
+%     assert math.gcd(n, 0) == abs(n)
 % END-VERIFY
 
 \begin{exercice}{TEXP-ARITHMETIQUE-RE-C1-EX1}{1}{10}

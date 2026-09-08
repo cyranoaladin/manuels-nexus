@@ -1,0 +1,72 @@
+{
+  "reviewer": "independent Codex subagent astra_delta (did not author corrections)",
+  "review_kind": "INDEPENDENT_AGENT_COUNTER_REVIEW",
+  "human_approval": false,
+  "scope": "Two remediation sources only, current working digests; not chapter closure",
+  "objects": [
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C1.tex",
+      "source_digest": "sha256:3be84a7395fd687a81e1bf0a57cdff7a982e4362b16524e879de357a7ab3ead5",
+      "scientific_review": "VALIDATED_BY_EVIDENCE",
+      "pedagogical_review": "VALIDATED_BY_EVIDENCE",
+      "editorial_review": "VALIDATED_BY_EVIDENCE",
+      "independent_reasoning": "For nonzero n, every common positive divisor of n and0 divides|n| and |n| itself is common, hence greatest divisor|n|. Divisor sets unchanged by absolute values. Euclidean chain120=84+36,84=2*36+12,36=3*12 gives12, which divides84 and120. Initial zero second value is handled explicitly. Exclusion(0,0) agrees with current course definition.",
+      "limitations": "No re-test or full Nexus chapter chain certified by this isolated sheet."
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C2.tex",
+      "source_digest": "sha256:a0f768487994c800ca3c89a0a4ffb9180d622245c6b2c12055e445b3b9f759ea",
+      "scientific_review": "VALIDATED_BY_EVIDENCE",
+      "pedagogical_review": "VALIDATED_BY_EVIDENCE",
+      "editorial_review": "VALIDATED_BY_EVIDENCE",
+      "independent_reasoning": "d=gcd(a,n)>0. Necessity follows d|a and d|n. Ifd|b and ua+vn=d, x0=u*b/d solves. ax= b modn is equivalent (n/d)|(x-x0) using coprimality(a/d,n/d). Representatives x0+k*n/d for0<=k<d are exactlyd distinct classes modn. Ifa=0, d=n: n|b yields alln residue classes, otherwise none. Reduced modulus1 has exactly one class, allowed by current course definition n inN*. Example6x=9 mod15 reduces2x=3mod5, inverse2=3 givesx=4mod5, residues4,9,14.6x=8mod15 impossible because3 does not divide8.",
+      "limitations": "Finite enumeration corroborates examples, not general proof; proof is the Bezout/kernel argument above."
+    }
+  ],
+  "programme_mapping": {
+    "status": "VALIDATED_AGAINST_LOCAL_OFFICIAL_SOURCE",
+    "source": "Mathematiques/manuel-maths/sources/txt/BO2019_TEXPERTES_optionnel.txt",
+    "sha256": "sha256:a427dd12f3ff774dd0bdd31a26aaa77423509947bf60589e72430b6f5054a1c5",
+    "source_lines": "493-581",
+    "mapped_capacities": [
+      "TEXP-ARI-C1",
+      "TEXP-ARI-C2"
+    ],
+    "limit": "No fresh external applicability audit for whole programme performed in this bounded counter-review."
+  },
+  "tests": {
+    "command": "python -B -m pytest -q -p no:cacheprovider tests/test_arithmetic_remediation_boundary_claims.py",
+    "rc": 0,
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0
+  },
+  "adjacent_open_findings": [
+    {
+      "severity": "P0",
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/cours/10_C1_divisibilite_pgcd.tex",
+      "line": 31,
+      "finding": "Intended nonzero hypothesis rendered from literal newline then eq0, not\\neq0; printed theorem corrupted."
+    },
+    {
+      "severity": "P0",
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/cours/11_C2_congruences.tex",
+      "line": 49,
+      "finding": "Intended2\\neq1 replaced by newline then eq1; mathematical comparison corrupted."
+    },
+    {
+      "severity": "P0",
+      "paths": [
+        "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/cours/10_C1_divisibilite_pgcd.tex",
+        "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-009.tex"
+      ],
+      "finding": "Published Euclid pseudocode returns signed lasta without absolute-value normalization while integer-domain PGCD is positive. Egpgcd(-12,0)=-12,pgcd(252,-198)=-18. Restrict input domain or normalize; source code/formal oracles and printed trace must agree."
+    }
+  ],
+  "approval_statement": "No HUMAN_APPROVED, no freeze, no release sign-off, no claim that this closes TEXP-ARITHMETIQUE.",
+  "observation": {
+    "base_head": "ee4475fdb7e2891eae2ddb04f259d6ed930a963e",
+    "source_state": "WORKING_TREE_BOUND_BY_SOURCE_DIGEST",
+    "not_release_evidence": true
+  }
+}

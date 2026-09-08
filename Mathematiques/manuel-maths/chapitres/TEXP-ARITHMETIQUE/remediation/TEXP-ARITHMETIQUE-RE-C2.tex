@@ -13,8 +13,18 @@ modulo : $2x\equiv3\ [5]$.
 \textbf{Erreur 2 :} chercher un inverse de $a$ modulo $n$ sans vérifier
 $\mathrm{PGCD}(a\,;\,n)=1$. Sans cette condition, l'inverse n'existe pas.
 
-\textbf{Erreur 3 :} donner une seule solution alors que la congruence en admet
-plusieurs modulo $n$ lorsque $\mathrm{PGCD}(a\,;\,n)=d>1$ : il y en a $d$.
+\textbf{Erreur 3 :} compter les solutions sans vérifier leur existence.
+Pour $a,b$ entiers, $n\geq2$ et $d=\mathrm{PGCD}(a\,;\,n)$, la congruence
+$ax\equiv b\ [n]$ admet des solutions si et seulement si $d\mid b$.
+Dans ce cas, elle admet exactement $d$ classes de solutions modulo $n$ ;
+si $d\nmid b$, elle n'a aucune solution.
+
+En effet, $ax-b$ multiple de $n$ impose que $d$ divise $b$. Lorsque $d\mid b$,
+diviser les deux membres et le module par $d$ donne une unique classe modulo
+$n/d$, car $a/d$ et $n/d$ sont premiers entre eux. Cette classe correspond à
+$d$ classes modulo $n$.
+Ainsi, $6x\equiv9\ [15]$ admet trois classes de solutions, mais
+$6x\equiv8\ [15]$ n'a aucune solution : $3$ ne divise pas $8$.
 
 % BEGIN-VERIFY
 % import math
@@ -22,6 +32,14 @@ plusieurs modulo $n$ lorsque $\mathrm{PGCD}(a\,;\,n)=d>1$ : il y en a $d$.
 % assert [x for x in range(5) if (2 * x) % 5 == 3] == [4]
 % assert math.gcd(6, 15) == 3 and len([x for x in range(15) if (6 * x) % 15 == 9]) == 3
 % assert not any((6 * u) % 15 == 1 for u in range(15))
+% assert [x for x in range(15) if (6 * x - 8) % 15 == 0] == []
+% assert len([x for x in range(15) if (0 * x) % 15 == 0]) == 15
+% for a in range(-17, 18):
+%     for n in range(2, 17):
+%         d = math.gcd(a, n)
+%         for b in range(-17, 18):
+%             solutions = [x for x in range(n) if (a * x - b) % n == 0]
+%             assert len(solutions) == (d if b % d == 0 else 0)
 % END-VERIFY
 
 \begin{exercice}{TEXP-ARITHMETIQUE-RE-C2-EX1}{1}{10}
