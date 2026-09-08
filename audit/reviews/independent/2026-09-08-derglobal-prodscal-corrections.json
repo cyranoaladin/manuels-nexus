@@ -1,0 +1,247 @@
+{
+  "artifact_type": "independent_agent_counter_review_note",
+  "reviewer": "/root/astra_delta",
+  "content_author": "/root",
+  "head_observed_at_recording": "a459fca9e3a3554bcdd46e376a26d8198b54b0a7",
+  "scope": "Ten changed texts, read with their current parents/corrections; exact source digests bind this note. Uncommitted content must not be represented as clean HEAD evidence.",
+  "human_approval": false,
+  "review_inheritance": "None: every listed text was read, and calculations were independently derived.",
+  "new_findings_in_changed_texts": [],
+  "limits": [
+    "No new institutional programme audit in this subtask.",
+    "No rendered PDF or student/professor hidden-content inspection.",
+    "The unchanged PRODSCAL parent/correction texts retain missing diacritics (developper/bilinearite, utilise/symetrie, parametrise/d ou); scientific context is valid but those adjacent editorial defects remain outside the ten changed texts."
+  ],
+  "sufficiency_reason": "The four stationary hints now state a sufficient sign-change test, not a general necessity. The polynomial parents are differentiable on R, so no endpoint or differentiability hypothesis is missing in their scope.",
+  "tests_observed": "tests/test_reviewed_hint_parent_alignment.py: 6 passed; independent exact algebra/geometry checks and four current canonical TeX oracles passed with network syscalls denied.",
+  "records": [
+    {
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-002.tex",
+      "source_sha256": "sha256:4b38b994739710841b5641276faaf5b725013d5b40a7b276c7037704ac8190c6",
+      "context_read": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex",
+          "sha256": "sha256:ae35e7a293c395bbf73f7154a98bf7187870a2007d870df9bc5c236b065045e8"
+        }
+      ],
+      "independent_derivation": "Inverse: ((1/(a+h))-(1/a))/h=-1/(a(a+h)) for a!=0, giving -1/a^2. Square root exists for x>=0, differentiable only x>0; its right quotient at zero equals 1/sqrt(h) and is unbounded. Polynomial powers exist and are differentiable on R.",
+      "SCIENTIFIC_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PEDAGOGICAL_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "EDITORIAL_REVIEW": "VALIDATED_BY_EVIDENCE_FOR_CHANGED_TEXT",
+      "CORRECTION_ALIGNMENT_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PROGRAMME_REVIEW": "NOT_PERFORMED_IN_THIS_BOUNDED_SUBTASK",
+      "oracle_evidence": {
+        "status": "EXECUTED_PASS",
+        "blocks": 1,
+        "verifier_sha256": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e"
+      }
+    },
+    {
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex",
+      "source_sha256": "sha256:ae35e7a293c395bbf73f7154a98bf7187870a2007d870df9bc5c236b065045e8",
+      "context_read": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-002.tex",
+          "sha256": "sha256:4b38b994739710841b5641276faaf5b725013d5b40a7b276c7037704ac8190c6"
+        }
+      ],
+      "independent_derivation": "Inverse: ((1/(a+h))-(1/a))/h=-1/(a(a+h)) for a!=0, giving -1/a^2. Square root exists for x>=0, differentiable only x>0; its right quotient at zero equals 1/sqrt(h) and is unbounded. Polynomial powers exist and are differentiable on R.",
+      "SCIENTIFIC_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PEDAGOGICAL_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "EDITORIAL_REVIEW": "VALIDATED_BY_EVIDENCE_FOR_CHANGED_TEXT",
+      "CORRECTION_ALIGNMENT_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PROGRAMME_REVIEW": "NOT_PERFORMED_IN_THIS_BOUNDED_SUBTASK",
+      "oracle_evidence": {
+        "status": "EXECUTED_PASS",
+        "blocks": 1,
+        "verifier_sha256": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e"
+      }
+    },
+    {
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-013.tex",
+      "source_sha256": "sha256:d586169185d4088c6675e57f14669edebf6ebf7b130b4c2b73d036ddf258734f",
+      "context_read": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-013.tex",
+          "sha256": "sha256:4c17f0149c073a30830b04a4cc8d424b955eaed3b264eb6314b0107d9404e19f"
+        }
+      ],
+      "independent_derivation": "Independent expansion: (x^2-2x+3)(x+1)=x^3-x^2+x+3, derivative 3x^2-2x+1. x(x-1)(x+1)=x^3-x, derivative 3x^2-1. Product decomposition p=x^2-x gives (2x-1)(x+1)+(x^2-x)=2x^2+2x-x-1+x^2-x=3x^2-1; every printed equality is valid.",
+      "SCIENTIFIC_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PEDAGOGICAL_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "EDITORIAL_REVIEW": "VALIDATED_BY_EVIDENCE_FOR_CHANGED_TEXT",
+      "CORRECTION_ALIGNMENT_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PROGRAMME_REVIEW": "NOT_PERFORMED_IN_THIS_BOUNDED_SUBTASK",
+      "oracle_evidence": {
+        "status": "EXECUTED_PASS",
+        "blocks": 1,
+        "verifier_sha256": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e"
+      }
+    },
+    {
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-013.tex",
+      "source_sha256": "sha256:4c17f0149c073a30830b04a4cc8d424b955eaed3b264eb6314b0107d9404e19f",
+      "context_read": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-013.tex",
+          "sha256": "sha256:d586169185d4088c6675e57f14669edebf6ebf7b130b4c2b73d036ddf258734f"
+        }
+      ],
+      "independent_derivation": "Independent expansion: (x^2-2x+3)(x+1)=x^3-x^2+x+3, derivative 3x^2-2x+1. x(x-1)(x+1)=x^3-x, derivative 3x^2-1. Product decomposition p=x^2-x gives (2x-1)(x+1)+(x^2-x)=2x^2+2x-x-1+x^2-x=3x^2-1; every printed equality is valid.",
+      "SCIENTIFIC_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PEDAGOGICAL_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "EDITORIAL_REVIEW": "VALIDATED_BY_EVIDENCE_FOR_CHANGED_TEXT",
+      "CORRECTION_ALIGNMENT_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PROGRAMME_REVIEW": "NOT_PERFORMED_IN_THIS_BOUNDED_SUBTASK",
+      "oracle_evidence": {
+        "status": "EXECUTED_PASS",
+        "blocks": 1,
+        "verifier_sha256": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e"
+      }
+    },
+    {
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-031-CDP.tex",
+      "source_sha256": "sha256:1fbf37c47e64c7cd0a9707c842cc4a74fc3ef0827408e548891b2a2f4835327f",
+      "context_read": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-031.tex",
+          "sha256": "sha256:9394e1d8c037ce6443fb2e1d7e58c36cd698ae0c804ae1d9210bfb9bdb1160ac"
+        },
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-031.tex",
+          "sha256": "sha256:4e262151d280858dfda386c6471251f6dc6ba520da8cd78dc578bad22052d96d"
+        }
+      ],
+      "independent_derivation": "f=(x-3)^2-1; f prime=2(x-3), negative left of 3 and positive right: minimum -1 at 3.",
+      "SCIENTIFIC_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PEDAGOGICAL_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "EDITORIAL_REVIEW": "VALIDATED_BY_EVIDENCE_FOR_CHANGED_TEXT",
+      "CORRECTION_ALIGNMENT_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PROGRAMME_REVIEW": "NOT_PERFORMED_IN_THIS_BOUNDED_SUBTASK",
+      "oracle_evidence": {
+        "status": "NOT_APPLICABLE_TO_HINT",
+        "reason": "Scientific argument reviewed directly; no artificial oracle introduced."
+      }
+    },
+    {
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-032-CDP.tex",
+      "source_sha256": "sha256:93fb7e9792340e33e700685bd83ccff9a21d689453091a691db8ce2ba61556c0",
+      "context_read": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-032.tex",
+          "sha256": "sha256:743e7bc6e565c302ed1a91edee4dc540603e4a04167b98d243a0823e9de70d03"
+        },
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-032.tex",
+          "sha256": "sha256:37f696e94e06fa0f1571337300e090c3cb010ea4e34d303baef18c0442373c78"
+        }
+      ],
+      "independent_derivation": "g=-(x-2)^2+5; g prime=-2(x-2), positive left of 2 and negative right: maximum 5 at 2.",
+      "SCIENTIFIC_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PEDAGOGICAL_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "EDITORIAL_REVIEW": "VALIDATED_BY_EVIDENCE_FOR_CHANGED_TEXT",
+      "CORRECTION_ALIGNMENT_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PROGRAMME_REVIEW": "NOT_PERFORMED_IN_THIS_BOUNDED_SUBTASK",
+      "oracle_evidence": {
+        "status": "NOT_APPLICABLE_TO_HINT",
+        "reason": "Scientific argument reviewed directly; no artificial oracle introduced."
+      }
+    },
+    {
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-033-CDP.tex",
+      "source_sha256": "sha256:b31b0c54c3561c10ec228d47ca4d988218b7795288ad30a7bd6061c11e9bbe25",
+      "context_read": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-033.tex",
+          "sha256": "sha256:528984b6f96259164b08dff51d7d12a0a70a4fc74c2df4de8493ed97c2cac8a5"
+        },
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-033.tex",
+          "sha256": "sha256:5f9d0480a4c74b4f6f37ed03144726537efb10061cc4d31b46fcddaea32043ee"
+        }
+      ],
+      "independent_derivation": "f prime=3x(x-2), signs +,-,+ on the three intervals separated by 0 and 2. Local maximum f(0)=0 and local minimum f(2)=-4.",
+      "SCIENTIFIC_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PEDAGOGICAL_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "EDITORIAL_REVIEW": "VALIDATED_BY_EVIDENCE_FOR_CHANGED_TEXT",
+      "CORRECTION_ALIGNMENT_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PROGRAMME_REVIEW": "NOT_PERFORMED_IN_THIS_BOUNDED_SUBTASK",
+      "oracle_evidence": {
+        "status": "NOT_APPLICABLE_TO_HINT",
+        "reason": "Scientific argument reviewed directly; no artificial oracle introduced."
+      }
+    },
+    {
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-034-CDP.tex",
+      "source_sha256": "sha256:c0c9b38ab71562344fbb5e96c40866a9a8044f0eb15f4136c699be43d429c03d",
+      "context_read": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-034.tex",
+          "sha256": "sha256:e0b5de125c2c48f635373aa11f064517fc9657b72a82dabc73d6ac73a9b5c112"
+        },
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-034.tex",
+          "sha256": "sha256:69fc0d94ea31809ca1f07936c4271b1258216b39cf6779046834a0230c9cabb0"
+        }
+      ],
+      "independent_derivation": "p prime=3(x+2)(x-2), signs +,-,+ around -2 and 2. Local maximum p(-2)=21; local minimum p(2)=-11.",
+      "SCIENTIFIC_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PEDAGOGICAL_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "EDITORIAL_REVIEW": "VALIDATED_BY_EVIDENCE_FOR_CHANGED_TEXT",
+      "CORRECTION_ALIGNMENT_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PROGRAMME_REVIEW": "NOT_PERFORMED_IN_THIS_BOUNDED_SUBTASK",
+      "oracle_evidence": {
+        "status": "NOT_APPLICABLE_TO_HINT",
+        "reason": "Scientific argument reviewed directly; no artificial oracle introduced."
+      }
+    },
+    {
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-012-CDP.tex",
+      "source_sha256": "sha256:b032d1db3f47ba80e77f62cadd21ffee6c1c27be883ec8655ddbe0e993961845",
+      "context_read": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-012.tex",
+          "sha256": "sha256:6ce4b6816b1064c85edb89299a62ede6285b68ad6e0c65db7ca9c13b172767e1"
+        },
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-012.tex",
+          "sha256": "sha256:2f3e069768dec03c600de01a66870237e99b4ecf0281770753294398a2ac1547"
+        }
+      ],
+      "independent_derivation": "For every pair of vectors, expanding the scalar product (u+v).(u+v) by bilinearity gives u.u+u.v+v.u+v.v; symmetry combines crossed terms and the defining squared-norm identity gives the target. The hint does not assume the target equality.",
+      "SCIENTIFIC_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PEDAGOGICAL_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "EDITORIAL_REVIEW": "VALIDATED_BY_EVIDENCE_FOR_CHANGED_TEXT",
+      "CORRECTION_ALIGNMENT_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PROGRAMME_REVIEW": "NOT_PERFORMED_IN_THIS_BOUNDED_SUBTASK",
+      "oracle_evidence": {
+        "status": "NOT_APPLICABLE_TO_HINT",
+        "reason": "Scientific argument reviewed directly; no artificial oracle introduced."
+      }
+    },
+    {
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-032-CDP.tex",
+      "source_sha256": "sha256:ed95270a34301f88a4f9a5fc24dbd89ca896f6701759acfcf79d4938d78faa07",
+      "context_read": [
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-032.tex",
+          "sha256": "sha256:6ff6cef644c5d19a3f9a05da7b5f85d95ff3545149d7bca4b657235c42ac0f15"
+        },
+        {
+          "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-032.tex",
+          "sha256": "sha256:dcd0c8525f824faa744d6d8bf68d53178bc8a550f76e403702803c103b875704"
+        }
+      ],
+      "independent_derivation": "BC=(-4,4), nonzero. Every H on (BC) is B+t*BC. Orthogonality (H-A).BC=0 gives -24+32t=0, unique t=3/4, H=(3,3). H lies on the segment too, although segment membership is not needed for a general height foot. Hint addresses height, not perpendicular bisector.",
+      "SCIENTIFIC_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PEDAGOGICAL_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "EDITORIAL_REVIEW": "VALIDATED_BY_EVIDENCE_FOR_CHANGED_TEXT",
+      "CORRECTION_ALIGNMENT_REVIEW": "VALIDATED_BY_EVIDENCE",
+      "PROGRAMME_REVIEW": "NOT_PERFORMED_IN_THIS_BOUNDED_SUBTASK",
+      "oracle_evidence": {
+        "status": "NOT_APPLICABLE_TO_HINT",
+        "reason": "Scientific argument reviewed directly; no artificial oracle introduced."
+      }
+    }
+  ]
+}
