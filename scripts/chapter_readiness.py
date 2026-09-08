@@ -131,6 +131,8 @@ class Chapitre:
     evaluation_A: bool = False
     evaluation_B: bool = False
     scientific_review: dict = field(default_factory=dict)
+    execution_review: dict = field(default_factory=dict)
+    documentary_review: str = "NOT_EVALUATED_BY_THIS_DASHBOARD"
     unbound_receipts: dict = field(default_factory=dict)
     rejected_receipts: list = field(default_factory=list)
     programme_review: str = "non_verifie"
@@ -386,6 +388,7 @@ def analyser(
     # y reste bloquant.
     validations = dossier / "validations"
     verdicts: dict[str, int] = {}
+    execution_verdicts: dict[str, int] = {}
     non_lies: dict[str, dict[str, int]] = {}
     if validations.exists():
         for recu in sorted(validations.glob("*.json")):
@@ -397,7 +400,14 @@ def analyser(
             verdict = str(donnees.get("verdict", "inconnu"))
             binding = bind_scientific_receipt(donnees, dossier, RACINE)
             if scientific_method_usable(binding):
-                verdicts[verdict] = verdicts.get(verdict, 0) + 1
+                if donnees.get("certifies_documentary_claims") is False:
+                    # A current NSI result attests the executed claims only.
+                    # It cannot turn dates, attributions or prose into a
+                    # scientific review merely because the source is bound.
+                    execution_verdicts[verdict] = execution_verdicts.get(verdict, 0) + 1
+                    ch.documentary_review = "REQUIRES_CURRENT_INDEPENDENT_REVIEW"
+                else:
+                    verdicts[verdict] = verdicts.get(verdict, 0) + 1
                 continue
             if donnees.get("source_sha256"):
                 ch.rejected_receipts.append({"receipt": str(recu), **binding})
@@ -410,6 +420,7 @@ def analyser(
             seau = non_lies.setdefault(gate, {})
             seau[verdict] = seau.get(verdict, 0) + 1
     ch.scientific_review = dict(sorted(verdicts.items()))
+    ch.execution_review = dict(sorted(execution_verdicts.items()))
     ch.unbound_receipts = {
         gate: dict(sorted(seau.items())) for gate, seau in sorted(non_lies.items())
     }
@@ -456,6 +467,8 @@ def analyser(
         b.append("evaluation A/B incomplete")
     if verdicts.get("fail"):
         b.append(f"{verdicts['fail']} verdict(s) scientifique(s) en echec")
+    if execution_verdicts.get("fail"):
+        b.append(f"{execution_verdicts['fail']} verdict(s) d'exécution en échec")
     echecs_non_lies = sum(
         seau.get("fail", 0) for seau in ch.unbound_receipts.values()
     )
@@ -484,7 +497,7 @@ def analyser(
         ch.qcm_status == "source_unique",
         ch.remediation_status == "complete",
         ch.evaluation_A and ch.evaluation_B,
-        not verdicts.get("fail"),
+        not verdicts.get("fail") and not execution_verdicts.get("fail"),
         ch.objects_total > 0 and ch.objects_generated == 0,
         ch.student_build,
         ch.teacher_build,
