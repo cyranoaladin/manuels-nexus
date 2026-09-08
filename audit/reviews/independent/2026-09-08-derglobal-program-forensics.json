@@ -1,0 +1,1408 @@
+{
+  "schema_version": 1,
+  "artifact_name": "DERGLOBAL_PROGRAM_BINDINGS_FORENSICS_2026_09_08",
+  "observation_head": "f44cd92399ea13b1e99baa5b78181d092ded0a95",
+  "scope": "16 atomes DERGLOBAL et 3 atomes transversaux dont les preuves pointent dans ce chapitre. Inventaire de lecture, pas clôture scientifique du chapitre.",
+  "reviewer": "Codex /root/astra_delta, indépendant des auteurs historiques",
+  "official_atoms_modified": false,
+  "programme_binding_mutated": false,
+  "human_approval": "NOT_GRANTED",
+  "rows": [
+    {
+      "atom_id": "1SPE-OFFICIAL-015",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:207",
+        "wording": "employer les expressions « condition nécessaire », « condition suffisante » ;"
+      },
+      "contract_capacity": "1SPE-TRANSVERSAL-LOGIQUE-C2",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/13_C4_extremums.tex",
+          "Mathematiques/manuel-maths/transversal/logique_raisonnement.tex"
+        ],
+        "method_sources": [],
+        "exercise_sources": [],
+        "correction_sources": [],
+        "assessment_sources": [],
+        "remediation_sources": []
+      },
+      "old_claim": {
+        "coverage_status": "STRUCTURALLY_MAPPED",
+        "programme_state": "PASS",
+        "reason": "Capacité enregistrée dans le contrat éditorial transversal de fermeture ; aucun contenu source n’est encore prouvé. Les six maillons cours, méthode, exercice, correction, évaluation et remédiation restent à produire ou à rattacher."
+      },
+      "replacement_candidates_entirely_read": [],
+      "status": "PARTIAL_SCIENTIFIC_DEFECT",
+      "semantic_reason": "Les définitions de condition nécessaire et suffisante dans l’annexe sont pertinentes. Son exemple de Fermat et le cours C4 omettent le caractère intérieur du point ; f(x)=x sur [0,1] fournit un contre-exemple à l’énoncé actuel. Corriger les hypothèses, sans changer l’atome.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-030",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:265",
+        "wording": "Calculer un taux d’évolution réciproque."
+      },
+      "contract_capacity": "1SPE-TRANSVERSAL-EVOLUTIONS-C2",
+      "old_binding": {
+        "course_sources": [],
+        "method_sources": [],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-046.tex"
+        ],
+        "correction_sources": [],
+        "assessment_sources": [],
+        "remediation_sources": []
+      },
+      "old_claim": {
+        "coverage_status": "STRUCTURALLY_MAPPED",
+        "programme_state": "PASS",
+        "reason": "Capacité enregistrée dans le contrat éditorial transversal de fermeture ; aucun contenu source n’est encore prouvé. Les six maillons cours, méthode, exercice, correction, évaluation et remédiation restent à produire ou à rattacher."
+      },
+      "replacement_candidates_entirely_read": [],
+      "status": "FALSE_CURRENT_EVIDENCE_GLOBAL_GAP_UNRESOLVED",
+      "semantic_reason": "EX046 optimise le volume d’un cylindre dans un cône ; il ne calcule aucun taux réciproque. Retirer cette preuve. La recherche orientée n’a pas fourni de remplacement entièrement lu : cela ne prouve pas encore une absence dans tout le manuel.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-034",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:273",
+        "wording": "Résoudre graphiquement une équation, une inéquation du type : ƒ (𝑥) = k, ƒ (𝑥) < k, etc."
+      },
+      "contract_capacity": "1SPE-TRANSVERSAL-AUTOMATISMES-C1",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex"
+        ],
+        "method_sources": [],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-030.tex"
+        ],
+        "correction_sources": [],
+        "assessment_sources": [],
+        "remediation_sources": []
+      },
+      "old_claim": {
+        "coverage_status": "STRUCTURALLY_MAPPED",
+        "programme_state": "PASS",
+        "reason": "Capacité enregistrée dans le contrat éditorial transversal de fermeture ; aucun contenu source n’est encore prouvé. Les six maillons cours, méthode, exercice, correction, évaluation et remédiation restent à produire ou à rattacher."
+      },
+      "replacement_candidates_entirely_read": [],
+      "status": "FALSE_CURRENT_EVIDENCE_GLOBAL_GAP_UNRESOLVED",
+      "semantic_reason": "EX030 demande de résoudre f′(x) ≥ 0, au choix graphiquement ou par le calcul, sans fournir de graphique ; l’annexe porte sur des diagrammes statistiques. Le candidat SECOND-DEGRE EX019/CO019 également lu ne fournit pas de graphe. Aucune résolution graphique effective n’est prouvée par ces sources.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-084",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:441",
+        "wording": "Fonction dérivable sur un intervalle. Fonction dérivée."
+      },
+      "contract_capacity": "1SPE-DERIVATION-GLOBAL-C1",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/10_C1_derivees_reference.tex"
+        ],
+        "method_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-001.tex"
+        ],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-010.tex"
+        ],
+        "correction_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-052.tex"
+        ],
+        "assessment_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
+        ],
+        "remediation_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C1.tex"
+        ]
+      },
+      "old_claim": {
+        "coverage_status": "CONTENT_REVIEW_PENDING",
+        "programme_state": "PASS",
+        "reason": "Alignement programme-capacité revu ; chaîne structurelle réelle présente. Science, pédagogie et alignement d’évaluation restent à revoir."
+      },
+      "replacement_candidates_entirely_read": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-010.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-010.tex"
+      ],
+      "status": "REPAIRABLE_BINDING_WITH_SCIENCE_PENDING",
+      "semantic_reason": "EX010 étudie √x − 1/x sur ]0,+∞[ ; CO052 traite la valeur absolue et n’est pas son corrigé. Rattacher CO010. La définition du cours est pertinente mais ses affirmations générales de domaine doivent être corrigées.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-085",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:442",
+        "wording": "Fonction dérivée des fonctions carré, cube, inverse, racine carrée."
+      },
+      "contract_capacity": "1SPE-DERIVATION-GLOBAL-C1",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/10_C1_derivees_reference.tex"
+        ],
+        "method_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-001.tex"
+        ],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-001.tex"
+        ],
+        "correction_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex"
+        ],
+        "assessment_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
+        ],
+        "remediation_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C1.tex"
+        ]
+      },
+      "old_claim": {
+        "coverage_status": "CONTENT_REVIEW_PENDING",
+        "programme_state": "PASS",
+        "reason": "Alignement programme-capacité revu ; chaîne structurelle réelle présente. Science, pédagogie et alignement d’évaluation restent à revoir."
+      },
+      "replacement_candidates_entirely_read": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-001.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-002.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex"
+      ],
+      "status": "PARTIAL_CURRENT_REPAIRABLE_BY_EXISTING_CONTENT",
+      "semantic_reason": "EX001 couvre cube, puissances, constante et identité ; EX002/CO002 apportent carré, inverse, racine carrée et domaines. Leur union couvre les quatre fonctions citées ; EX001 seul ne le fait pas. La revue scientifique du cours reste ouverte.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-086",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:443",
+        "wording": "Opérations sur les fonctions dérivables : somme, produit, inverse, quotient."
+      },
+      "contract_capacity": "1SPE-DERIVATION-GLOBAL-C2",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/11_C2_regles_derivation.tex"
+        ],
+        "method_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-002.tex"
+        ],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-013.tex"
+        ],
+        "correction_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-011.tex"
+        ],
+        "assessment_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
+        ],
+        "remediation_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C2.tex"
+        ]
+      },
+      "old_claim": {
+        "coverage_status": "CONTENT_REVIEW_PENDING",
+        "programme_state": "PASS",
+        "reason": "Alignement programme-capacité revu ; chaîne structurelle réelle présente. Science, pédagogie et alignement d’évaluation restent à revoir."
+      },
+      "replacement_candidates_entirely_read": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-013.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-013.tex"
+      ],
+      "status": "REPAIRABLE_BINDING_WITH_SCIENCE_PENDING",
+      "semantic_reason": "EX013/CO013 traitent deux produits et correspondent effectivement. CO011 est le corrigé d’un autre énoncé. Les règles de somme, produit, inverse et quotient sont dans le cours et la remédiation C2 ; les hypothèses de ME002 sont incomplètes.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-087",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:444",
+        "wording": "Pour 𝑛 dans ℤ, fonction dérivée de la fonction 𝑥 ↦ 𝑥 𝑛."
+      },
+      "contract_capacity": "1SPE-DERIVATION-GLOBAL-C1",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/10_C1_derivees_reference.tex"
+        ],
+        "method_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-001.tex"
+        ],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-010.tex"
+        ],
+        "correction_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex"
+        ],
+        "assessment_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
+        ],
+        "remediation_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C1.tex"
+        ]
+      },
+      "old_claim": {
+        "coverage_status": "CONTENT_REVIEW_PENDING",
+        "programme_state": "PASS",
+        "reason": "Alignement programme-capacité revu ; chaîne structurelle réelle présente. Science, pédagogie et alignement d’évaluation restent à revoir."
+      },
+      "replacement_candidates_entirely_read": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-001.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-053.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-053.tex"
+      ],
+      "status": "PARTIAL_CURRENT_REPAIRABLE_BY_EXISTING_CONTENT",
+      "semantic_reason": "EX010 combine racine et inverse, sans traiter la famille des puissances entières. EX001 et EX053/CO053 couvrent respectivement exposants naturels et exposants négatifs. Le cours doit distinguer n=0, le point x=0, et la preuve limitée initialement à n≥1.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-088",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:445",
+        "wording": "Fonction valeur absolue : étude de la dérivabilité en 0."
+      },
+      "contract_capacity": "1SPE-DERIVATION-GLOBAL-C1",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/10_C1_derivees_reference.tex"
+        ],
+        "method_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-001.tex"
+        ],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-006.tex"
+        ],
+        "correction_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex"
+        ],
+        "assessment_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
+        ],
+        "remediation_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C1.tex"
+        ]
+      },
+      "old_claim": {
+        "coverage_status": "CONTENT_REVIEW_PENDING",
+        "programme_state": "PASS",
+        "reason": "Alignement programme-capacité revu ; chaîne structurelle réelle présente. Science, pédagogie et alignement d’évaluation restent à revoir."
+      },
+      "replacement_candidates_entirely_read": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-052.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-052.tex"
+      ],
+      "status": "REPAIRABLE_PARTIAL_CHAIN",
+      "semantic_reason": "EX006 dérive 4√x − 2/x ; CO001 dérive des puissances. Aucun des deux ne traite |x| en 0. EX052/CO052 démontrent les taux droit 1 et gauche −1, puis traitent |x−2|. ME001, EV-A et RE-C1 ne prouvent pas cette capacité : ne pas maintenir leur crédit générique.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-094",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:453",
+        "wording": "Dans des cas simples, calculer une fonction dérivée en utilisant les propriétés des opérations sur les fonctions dérivables."
+      },
+      "contract_capacity": "1SPE-DERIVATION-GLOBAL-C2",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/11_C2_regles_derivation.tex"
+        ],
+        "method_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-002.tex"
+        ],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-011.tex"
+        ],
+        "correction_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-019.tex"
+        ],
+        "assessment_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
+        ],
+        "remediation_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C2.tex"
+        ]
+      },
+      "old_claim": {
+        "coverage_status": "CONTENT_REVIEW_PENDING",
+        "programme_state": "PASS",
+        "reason": "Alignement programme-capacité revu ; chaîne structurelle réelle présente. Science, pédagogie et alignement d’évaluation restent à revoir."
+      },
+      "replacement_candidates_entirely_read": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-011.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-011.tex"
+      ],
+      "status": "REPAIRABLE_BINDING_WITH_SCIENCE_PENDING",
+      "semantic_reason": "EX011 calcule deux dérivées de produits ; CO019 étudie (x²−1)². CO011 est le vrai compagnon. Les applications de somme et quotient sont présentes dans le cours, la remédiation C2 et EV-A ; leur portée doit rester explicite.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-096",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:456",
+        "wording": "La fonction racine carrée n’est pas dérivable en 0."
+      },
+      "contract_capacity": "1SPE-DERIVATION-GLOBAL-C1",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/10_C1_derivees_reference.tex"
+        ],
+        "method_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-001.tex"
+        ],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-009.tex"
+        ],
+        "correction_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-009.tex"
+        ],
+        "assessment_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
+        ],
+        "remediation_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C1.tex"
+        ]
+      },
+      "old_claim": {
+        "coverage_status": "CONTENT_REVIEW_PENDING",
+        "programme_state": "PASS",
+        "reason": "Alignement programme-capacité revu ; chaîne structurelle réelle présente. Science, pédagogie et alignement d’évaluation restent à revoir."
+      },
+      "replacement_candidates_entirely_read": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-002.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex"
+      ],
+      "status": "REPAIRABLE_PARTIAL_CHAIN",
+      "semantic_reason": "EX009 étudie x²−x+1/x et ne démontre rien en 0 pour √x. EX002/CO002 contiennent maintenant le quotient √h/h=1/√h pour h>0 et sa non-convergence vers un réel. Le cours ne doit pas utiliser seulement la divergence de f′ pour remplacer cette preuve.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-097",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:457",
+        "wording": "Fonction dérivée de la fonction carrée, de la fonction inverse."
+      },
+      "contract_capacity": "1SPE-DERIVATION-GLOBAL-C1",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/10_C1_derivees_reference.tex"
+        ],
+        "method_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-001.tex"
+        ],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-010.tex"
+        ],
+        "correction_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex"
+        ],
+        "assessment_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
+        ],
+        "remediation_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C1.tex"
+        ]
+      },
+      "old_claim": {
+        "coverage_status": "CONTENT_REVIEW_PENDING",
+        "programme_state": "PASS",
+        "reason": "Alignement programme-capacité revu ; chaîne structurelle réelle présente. Science, pédagogie et alignement d’évaluation restent à revoir."
+      },
+      "replacement_candidates_entirely_read": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/cours/11_C2_nombre_derive.tex"
+      ],
+      "status": "PARTIAL_PROOF_REAL_LOCAL_GAP",
+      "semantic_reason": "Le cours DERLOCAL C2 démontre pour tout a réel que ((a+h)²−a²)/h=2a+h. Le cours DERGLOBAL cite les formules mais ne prouve pas la dérivée générale de l’inverse ; DERLOCAL EX012/CO012 ne la prouvent qu’en a=1. EX010/CO001 n’apportent pas les démonstrations exigées. Ajouter la preuve générale 1/x dans le cours réellement consacré à cette formule.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-098",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:458",
+        "wording": "Fonction dérivée d’un produit."
+      },
+      "contract_capacity": "1SPE-DERIVATION-GLOBAL-C2",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/11_C2_regles_derivation.tex"
+        ],
+        "method_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-002.tex"
+        ],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-013.tex"
+        ],
+        "correction_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-019.tex"
+        ],
+        "assessment_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
+        ],
+        "remediation_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C2.tex"
+        ]
+      },
+      "old_claim": {
+        "coverage_status": "CONTENT_REVIEW_PENDING",
+        "programme_state": "PASS",
+        "reason": "Alignement programme-capacité revu ; chaîne structurelle réelle présente. Science, pédagogie et alignement d’évaluation restent à revoir."
+      },
+      "replacement_candidates_entirely_read": [],
+      "status": "REQUIRED_PROOF_MISSING_FROM_CURRENT_CHAIN",
+      "semantic_reason": "Cours C2, EX013, CO019, ME002 et RE-C2 ont été lus : ils énoncent ou appliquent la règle du produit, mais ne la démontrent pas. La démonstration de somme du cours n’est pas celle du produit. Une preuve générale par taux d’accroissement constitue un vrai besoin, sans ajouter un exercice pour son nombre.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-100",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:464",
+        "wording": "Représentation algébrique et graphique de fonctions paires, impaires. Traduction géométrique."
+      },
+      "contract_capacity": "1SPE-DERIVATION-GLOBAL-C3",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/12_C3_signe_variations.tex"
+        ],
+        "method_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-003.tex"
+        ],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-047.tex"
+        ],
+        "correction_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-021.tex"
+        ],
+        "assessment_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
+        ],
+        "remediation_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C3.tex"
+        ]
+      },
+      "old_claim": {
+        "coverage_status": "CONTENT_REVIEW_PENDING",
+        "programme_state": "PASS",
+        "reason": "Alignement programme-capacité revu ; chaîne structurelle réelle présente. Science, pédagogie et alignement d’évaluation restent à revoir."
+      },
+      "replacement_candidates_entirely_read": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-051.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-051.tex"
+      ],
+      "status": "REPAIRABLE_PARTIAL_CHAIN",
+      "semantic_reason": "EX047 est défini sur ]0,+∞[, domaine non symétrique ; CO021 est une quadratique sans demande de parité. EX051/CO051 étudient fonction paire, impaire et ni paire ni impaire, avec symétries. Le cours C3 définit la parité ; ME003, RE-C3 et EV-A ne constituent pas une évaluation de cette notion.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-101",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:465-466",
+        "wording": "Lien entre le sens de variation d’une fonction dérivable sur un intervalle et signe de sa fonction dérivée ; caractérisation des fonctions constantes."
+      },
+      "contract_capacity": "1SPE-DERIVATION-GLOBAL-C3",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/12_C3_signe_variations.tex"
+        ],
+        "method_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-003.tex"
+        ],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-030.tex"
+        ],
+        "correction_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-029.tex"
+        ],
+        "assessment_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
+        ],
+        "remediation_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C3.tex"
+        ]
+      },
+      "old_claim": {
+        "coverage_status": "CONTENT_REVIEW_PENDING",
+        "programme_state": "PASS",
+        "reason": "Alignement programme-capacité revu ; chaîne structurelle réelle présente. Science, pédagogie et alignement d’évaluation restent à revoir."
+      },
+      "replacement_candidates_entirely_read": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-030.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-030.tex"
+      ],
+      "status": "REPAIRABLE_BINDING_WITH_SCIENCE_PENDING",
+      "semantic_reason": "EX030/CO030 étudient la même cubique 2x³−3x²−12x+4, avec dérivée 6(x+1)(x−2), valeurs 11 en −1 et −16 en 2. CO029 correspond à une famille paramétrée différente. Le cours C3 doit compléter le lien non strict entre signe et monotonie et le cas constant.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-102",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:467",
+        "wording": "Nombre dérivé en un extrémum, tangente à la courbe représentative."
+      },
+      "contract_capacity": "1SPE-DERIVATION-GLOBAL-C4",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/13_C4_extremums.tex"
+        ],
+        "method_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-004.tex"
+        ],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-033.tex"
+        ],
+        "correction_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-033.tex"
+        ],
+        "assessment_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
+        ],
+        "remediation_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C4.tex"
+        ]
+      },
+      "old_claim": {
+        "coverage_status": "CONTENT_REVIEW_PENDING",
+        "programme_state": "PASS",
+        "reason": "Alignement programme-capacité revu ; chaîne structurelle réelle présente. Science, pédagogie et alignement d’évaluation restent à revoir."
+      },
+      "replacement_candidates_entirely_read": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-033.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-033.tex"
+      ],
+      "status": "CURRENT_APPLICATION_PARTIAL_SCIENTIFIC_DEFECT",
+      "semantic_reason": "EX033/CO033 traitent correctement x³−3x², maximum intérieur 0 en 0 et minimum intérieur −4 en 2. Le lien à la tangente horizontale est dans C4 ; le théorème imprimé omet l’intériorité, et ME004 affirme à tort absence d’extremum en l’absence de changement de signe.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-103",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:469",
+        "wording": "Étudier les variations d’une fonction. Déterminer les extrémums."
+      },
+      "contract_capacity": "1SPE-DERIVATION-GLOBAL-C4",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/13_C4_extremums.tex"
+        ],
+        "method_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-004.tex"
+        ],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-038.tex"
+        ],
+        "correction_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-038.tex"
+        ],
+        "assessment_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
+        ],
+        "remediation_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C4.tex"
+        ]
+      },
+      "old_claim": {
+        "coverage_status": "CONTENT_REVIEW_PENDING",
+        "programme_state": "PASS",
+        "reason": "Alignement programme-capacité revu ; chaîne structurelle réelle présente. Science, pédagogie et alignement d’évaluation restent à revoir."
+      },
+      "replacement_candidates_entirely_read": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-038.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-038.tex"
+      ],
+      "status": "CURRENT_RELEVANT_PAIR_WITH_CORRECTION_ERROR",
+      "semantic_reason": "La paire traite réellement variations et extremums sur [0,7]. Pour B=−x³+9x²−15x−1, B(7)=−8 ; le tableau de CO038 imprime 10, en contradiction avec deux calculs du corps. Examiner aussi les bornes pour les extremums globaux. Conserver la dette au lieu de masquer le défaut par un autre mapping.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-104",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:470",
+        "wording": "Résoudre un problème d’optimisation."
+      },
+      "contract_capacity": "1SPE-DERIVATION-GLOBAL-C5",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/14_C5_optimisation.tex"
+        ],
+        "method_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-005.tex"
+        ],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-041.tex"
+        ],
+        "correction_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-041.tex"
+        ],
+        "assessment_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
+        ],
+        "remediation_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C5.tex"
+        ]
+      },
+      "old_claim": {
+        "coverage_status": "CONTENT_REVIEW_PENDING",
+        "programme_state": "PASS",
+        "reason": "Alignement programme-capacité revu ; chaîne structurelle réelle présente. Science, pédagogie et alignement d’évaluation restent à revoir."
+      },
+      "replacement_candidates_entirely_read": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-044.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-044.tex"
+      ],
+      "status": "PARTIAL_CURRENT_REPAIRABLE_BY_EXISTING_CONTENT",
+      "semantic_reason": "EX041 est une quadratique sans problème à modéliser. EX044/CO044 minimisent la surface d’une boîte sans couvercle de volume 32 cm³ : h=32/x², S=x²+128/x, minimum 48 cm² en x=4 cm, h=2 cm. Le cours C5, ME005 et le TD contextuel ont des défauts scientifiques distincts encore ouverts.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-105",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:471-472",
+        "wording": "Exploiter les variations d’une fonction pour établir une inégalité. Étudier la position relative de deux courbes représentatives."
+      },
+      "contract_capacity": "1SPE-DERIVATION-GLOBAL-C3",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/12_C3_signe_variations.tex"
+        ],
+        "method_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-003.tex"
+        ],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-047.tex"
+        ],
+        "correction_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-047.tex"
+        ],
+        "assessment_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
+        ],
+        "remediation_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C3.tex"
+        ]
+      },
+      "old_claim": {
+        "coverage_status": "CONTENT_REVIEW_PENDING",
+        "programme_state": "PASS",
+        "reason": "Alignement programme-capacité revu ; chaîne structurelle réelle présente. Science, pédagogie et alignement d’évaluation restent à revoir."
+      },
+      "replacement_candidates_entirely_read": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-030.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-030.tex"
+      ],
+      "status": "FALSE_CURRENT_BINDING_REAL_LATER_REINVESTMENT",
+      "semantic_reason": "EX047/CO047 ne demandent ni inégalité générale ni comparaison de courbes. EXPO EX030/CO030, lus entièrement, étudient h(x)=exp(x)−x−1, de minimum 0 en 0, en déduisent exp(x)≥x+1 puis la position par rapport à la tangente. Réinvestissement ultérieur dans le même manuel, sans duplication ni besoin de nouvel exercice. Réserve éditoriale : la convexité finale et les limites affichées ne sont pas nécessaires au raisonnement et doivent respecter l’étiquetage du programme.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    },
+    {
+      "atom_id": "1SPE-OFFICIAL-106",
+      "official_source": {
+        "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+        "anchor": "lines:473-474",
+        "wording": "Étudier, en lien avec la dérivation, une fonction polynôme du second degré : variations, extrémum, allure selon le signe du coefficient de 𝑥²."
+      },
+      "contract_capacity": "1SPE-DERIVATION-GLOBAL-C3",
+      "old_binding": {
+        "course_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/12_C3_signe_variations.tex"
+        ],
+        "method_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-003.tex"
+        ],
+        "exercise_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-021.tex"
+        ],
+        "correction_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-021.tex"
+        ],
+        "assessment_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
+        ],
+        "remediation_sources": [
+          "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C3.tex"
+        ]
+      },
+      "old_claim": {
+        "coverage_status": "CONTENT_REVIEW_PENDING",
+        "programme_state": "PASS",
+        "reason": "Alignement programme-capacité revu ; chaîne structurelle réelle présente. Science, pédagogie et alignement d’évaluation restent à revoir."
+      },
+      "replacement_candidates_entirely_read": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-021.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-021.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-041.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-041.tex"
+      ],
+      "status": "PARTIAL_CURRENT_REPAIRABLE_BY_EXISTING_CONTENT",
+      "semantic_reason": "EX021/CO021 donnent une quadratique de coefficient dominant positif, minimum −1 en 2 ; EX041/CO041 donnent un coefficient négatif, maximum 4 en 3. Leur union couvre les deux signes avec dérivation. Le cours doit exprimer la règle générale et ne pas confondre monotonie et signe de f.",
+      "scientific_closure": "PENDING",
+      "human_approval": "NOT_GRANTED"
+    }
+  ],
+  "source_reading_ledger": [
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml",
+      "sha256": "00c3fb0f84ff9c09da76479b49a30dc9d5e2759b94ab3f1cf6bd907f49b8f7c3",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex",
+      "sha256": "e2bcf6ae9d7cd9663a1a5ed8ce49cf94862845fb98a18711388be7110dc6d120",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex",
+      "sha256": "ae35e7a293c395bbf73f7154a98bf7187870a2007d870df9bc5c236b065045e8",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-006.tex",
+      "sha256": "6d55d7b6e9423ee0dc122a621e29b27c0dbe17d5d3d869d503520b1435a5d143",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-009.tex",
+      "sha256": "7375ed7c4562e1f42bdf8ba447ae4b8687898bb2617aba131ceceed968b67aa5",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-010.tex",
+      "sha256": "45ddf8980d65c15d4a50db00f17b69a5f722eb8a9b18fc8df8d8883c274821a2",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-011.tex",
+      "sha256": "f84fdf3fd6790b1bc0412ff8bda376fb8d0c033db67f81ceea07e20be9bdde38",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-013.tex",
+      "sha256": "4c17f0149c073a30830b04a4cc8d424b955eaed3b264eb6314b0107d9404e19f",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-019.tex",
+      "sha256": "72968bda7424b066bf0f7fb2b2de6cc8875b3b9457c5356bf430bab36115b3b7",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-021.tex",
+      "sha256": "d1a841dfe693f8e1f786b58ec2f09e5486155c0a6a083093eb021b3bda4e3db4",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-029.tex",
+      "sha256": "928492127125b6ebfe33b3c89ba29b81793e0167540a9c7715f14c00e525278b",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-030.tex",
+      "sha256": "da9e39e48d5812c7d97d4345f6dcfc0beda10b44b824c2279d4d41525b0e2142",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-033.tex",
+      "sha256": "5f9d0480a4c74b4f6f37ed03144726537efb10061cc4d31b46fcddaea32043ee",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-038.tex",
+      "sha256": "69a54c2431203ed8c72bfe41d87702d6be941014d518d3c25996e4674e07754d",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-041.tex",
+      "sha256": "19ab0e8ec38654533b8c8b12a3e8397363cffdacc54d2e196fff2ee934701dd5",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-043.tex",
+      "sha256": "626383b0192c72bae985cfff7b772d7dffc3253cc447590d1f65f9d0b528302b",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-044.tex",
+      "sha256": "5030c3f840a564bbc5f51c3636a74c7d2c13a19d01ed823f36abf35d4c407425",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-045.tex",
+      "sha256": "9604886e59f8783bfd8491e7f040ea2b3608c1ae209324c65d25b4d79394b1ab",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-047.tex",
+      "sha256": "34d86735668b76e0f57876f38c9491513401070174d10b9de1672d5d0af8e2e9",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-051.tex",
+      "sha256": "891b03152a3bab6d3cad42fce5c832e9693bdda67bddd0eeab86976882b970b4",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-052.tex",
+      "sha256": "62ef8213f604241e0eb18da340671c4d3e620c33a8ee5189ccd3903cef9a95e8",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-053.tex",
+      "sha256": "6f3e723d6987f4fff24a3cb3853c237bec8dc963036ca179608fd122b0bddbe6",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/07_td_contextualise.tex",
+      "sha256": "c65fa158e4761f8f23c1e70ec652c8e4ecd55a9593aa97e8e1ddfad9213fdb9d",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/07_td_fil_rouge.tex",
+      "sha256": "31bf7669a59842315809bab760272015213b464ce18b0394e10dbc9bf9a8e3f0",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/10_C1_derivees_reference.tex",
+      "sha256": "01936c3135f06100982a9cc54276fd28a46f042826581ceb2b25c5c4102436e3",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/11_C2_regles_derivation.tex",
+      "sha256": "e4b6e5f94db776cc21d1c1c86d6ab9af6b7c416fd17e6f94eb50867d63b08654",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/12_C3_signe_variations.tex",
+      "sha256": "a0fb697f7d5ef1cbd0993448045120d6243bc2b752f31b7976df153685efaa65",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/13_C4_extremums.tex",
+      "sha256": "737ddeeb2fc446135a0d400250c64a241aae51f02ec2057d7b5793c8c34b12a3",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/14_C5_optimisation.tex",
+      "sha256": "0624a174b9acc168199b328fe25fb194663f4a59cd5fdcd09c9f1a3e8be33a93",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex",
+      "sha256": "1f68ce5903d8b25b3e0e9ab1dce0d71a127d646aa9c94ede60efdd7a036ab716",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-001.tex",
+      "sha256": "e461aa5f7faec0f6ce662cf0a245e5319db5c7e373d67e162d149eafa74563b9",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-002.tex",
+      "sha256": "4b38b994739710841b5641276faaf5b725013d5b40a7b276c7037704ac8190c6",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-006.tex",
+      "sha256": "87c655e630fd709e8dce786875f6656e39340cad287e3ae2107e243f1a95a37a",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-009.tex",
+      "sha256": "0371b70131ef94a2ddce3010230a964b5e69586cd38a54278257ee31d31df556",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-010.tex",
+      "sha256": "f76d85deceb3e182cf4f24e023560819a1a1eaaa95f419b3971083fdb9b48c38",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-011.tex",
+      "sha256": "be80cdb013a45678e34a6bd11931f4e7d755d2ae5cb2aaee56aa58212b4f0e47",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-013.tex",
+      "sha256": "d586169185d4088c6675e57f14669edebf6ebf7b130b4c2b73d036ddf258734f",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-019.tex",
+      "sha256": "9f48f226acd97833f7a476bcadde73b032ace83b51246aa6f083f3ba43658ce7",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-021.tex",
+      "sha256": "5697482782b4f2e08ffeee819728c7a9380ee668834e6e6d175240cf2c4200c5",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-022.tex",
+      "sha256": "18791877de5b4a6ed01043d74864c22d65ff04ba24f5eca314c5d2b77077cebc",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-023.tex",
+      "sha256": "13210925544d7e23a6fb3698c1243c12503e88ed9daee7dbb085afe80eb4dc60",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-024.tex",
+      "sha256": "0ddb63a85270e2e8f2e4ea6ffacad2c30dc1ed763723c0a1a5f2a9244de1d679",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-025.tex",
+      "sha256": "2f63ec830150b3fc8c218dafac1704bda2c1cd4bad146b0a6849347e2da0fab5",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-026.tex",
+      "sha256": "90b4d6c54b81aaf7ad482682258695e9a9e67a01805e41ef0ca318b3e2385eb3",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-027.tex",
+      "sha256": "3d87f42be4b1fe02affc3cbbce534b5957f083e3656e3ec375cfebfe6f84438a",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-028.tex",
+      "sha256": "b9681b7f2109966e6512c5c660de929bf1788bd49ebd5d52e5b20adf5e3b9b81",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-029.tex",
+      "sha256": "549385c21e7f52e9aa70eca064dcb0ad90907308a766186f5d22acf3074832d3",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-030.tex",
+      "sha256": "e3a0b5e2a269b380d4453c860ac983f3e1027aedda7b70b42610e9651bf751b1",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-033.tex",
+      "sha256": "528984b6f96259164b08dff51d7d12a0a70a4fc74c2df4de8493ed97c2cac8a5",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-038.tex",
+      "sha256": "d078c5f5540c8d03d002ea14bdacc65cf35f643b60256f955c7033dece734049",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-041.tex",
+      "sha256": "56d74a9e16e5700cceacd5dda5824dc1021b919cb72b543311e0d705c7b7e67a",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-042.tex",
+      "sha256": "679eff2cc0f4bb198a2d0db1f0cab3fc5dc4b6ffba31355aec35b112a5eb535a",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-043.tex",
+      "sha256": "f6931765fc9a66743226eb1fb53c9bf5b8852f670f1ddfeea989b5ca225dde2f",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-044.tex",
+      "sha256": "81b6bbff38b30163b0db1229266f9261e355b4b23ad2da706a4e313c61f7fd39",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-045.tex",
+      "sha256": "45d345307f3b0ad574c3e100844a52548b5f532cbcf6d2fb9b2e42c96cd154d5",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-046.tex",
+      "sha256": "0b3a08730547c6698e3f4932529f08c38f97147efd9c5f5fccf27b23b1bfc98c",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-047.tex",
+      "sha256": "c6d22f0ede7af2c5ff2c27d48c77f39f34f97bebc48a27d056741e331d1a7394",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-048.tex",
+      "sha256": "5766d101ae32337f002594294bb648521299b26cf5dfffcb518527f10a4535e2",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-049.tex",
+      "sha256": "24047f4c472042d2bf2ef241d43d42b59fea8e1682d70ef661dba65457afccbb",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-050.tex",
+      "sha256": "70242c0d8fbab05a2d6c49ca86d7cd88c20ce0ba7456fed273087cdfeee964db",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-051.tex",
+      "sha256": "6dcc5770c50e97934b9959decc5031d8d57b00101887e765e423a9501e8d2407",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-052.tex",
+      "sha256": "01c87ba2f2d96c9aa017a06a9975724c32260d0a18eb7c87c206fd30a5db2703",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-053.tex",
+      "sha256": "ad3b5adcdcc557a8d6c70849e54796f68f2285eef0da1b050b1aeae0f3feabd9",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-001.tex",
+      "sha256": "a32aabb5531036bccdc81a423d5dc19db42437c33a5abbf107729237e35aff76",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-002.tex",
+      "sha256": "b74d34298431cb494005596e243e0014b81651ed4784288db46a51c00bbf6e03",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-003.tex",
+      "sha256": "20a2afa379003e565b029a5ff4ff1371b67dc2c8be8d94bdd4fcc89338e7e7c3",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-004.tex",
+      "sha256": "d3833998ebb2a73fe342a9a6dd5b9a233c0452b2a617c3073afbc34e0712ac65",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-005.tex",
+      "sha256": "40b7b7fafdd2aeb3c48f8e90bdf4d40c75d35775468ac11a314867cdd8fa8dc3",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C1.tex",
+      "sha256": "ac827f6a4e7f3399adf1b6183d307911634fcbfccda74326e6f9365837fd59b8",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C2.tex",
+      "sha256": "50dfd73515531d487a7bc1ed63f7bd17f77c7288f0c2522f015910f122c56772",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C3.tex",
+      "sha256": "8472b6130931de6885a54903ef9d5ed4716bb69d554dad7bc5e69065f373a548",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C4.tex",
+      "sha256": "22ff08d32a6bd0384f7a8a5a7513aaeaf586c0ef9af949f3e29571a216842e0f",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C5.tex",
+      "sha256": "fea205aff559f51ab93cdd3111f70a790cf46ac6882cf5fd9300bc95f555e2d6",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-012.tex",
+      "sha256": "4a6d53f853f1d9090f40f6448ad739b98bc3c79d22bed35b1153a836e34d1162",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-029.tex",
+      "sha256": "2f2d295ee718c8c4acd4d7753d1e98a8b64b8daf774886a7d86812d78c829e84",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-048.tex",
+      "sha256": "648a2d16263f86dcc5ae4938ea9e71be8103c81f4a0ab1623fedf3d06ed5b053",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/cours/11_C2_nombre_derive.tex",
+      "sha256": "e7a39f68cd7f371cc7e5158bf01d663d3773425ccb0bb9150f6cf158ea2dc325",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-012.tex",
+      "sha256": "3bebc101cdd7f468aed48039fecd1548349ba97221caf8773f85463fc55ba5cc",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-029.tex",
+      "sha256": "213baee3decdc6f88b5cc9044e5695b8dbe09381f86aa3dc6dfd174b66bcacc0",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-048.tex",
+      "sha256": "dacd39b9990e2691e1d5c4dc30e7bf2ead67655c9205da25bcc2e92081a1e67c",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-030.tex",
+      "sha256": "44cdb729ddebecac808115a872f4cdcc0d82651a19d294e1ebae64ce45ec310d",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-030.tex",
+      "sha256": "419d1727a1fb5fe0ef18092de80eb3474bc076bfb7ff83a9bec4264e39add2f7",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-019.tex",
+      "sha256": "544877bd612c4ba9bb3e646184b0630a796327b5e8ae3773ae7b743135a24bb7",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-019.tex",
+      "sha256": "1f4da5082457399b9a6532902bd4a39a1edbdc95ec9b1fe7e84f66ddab439447",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+      "sha256": "4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
+      "reading_scope": "OFFICIAL_LINES_432_477_AND_ATOM_ANCHORS",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/transversal/logique_raisonnement.tex",
+      "sha256": "3aea562d0fbec89fa24e00434ba3219f5d781d6cf1040c0caf22ecfa3ed02646",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/transversal/statistiques_automatismes.tex",
+      "sha256": "f215ba3ed8952dffa390d985c5104e7c887ed331e1df64519f159e818bb42384",
+      "reading_scope": "ENTIRE_SOURCE",
+      "independent_review_status": "FINDINGS_RECORDED_NOT_GLOBAL_PASS"
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "DG-C1-DOMAINS",
+      "severity": "PRODUCT_P0",
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/10_C1_derivees_reference.tex",
+      "reason": "La racine carrée est définie en 0 mais non dérivable en 0. La formule n x^(n−1) pour n=0 ne se lit pas en x=0 ; traiter la constante séparément. La preuve binomiale finie suppose n≥1.",
+      "status": "OPEN"
+    },
+    {
+      "finding_id": "DG-PRODUCT-PROOF",
+      "severity": "PRODUCT_P0",
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/11_C2_regles_derivation.tex",
+      "reason": "La démonstration officielle du produit n’est pas présente dans les sources actuellement liées, seulement celle de la somme et des applications.",
+      "status": "OPEN"
+    },
+    {
+      "finding_id": "DG-FERMAT-BOUNDARY",
+      "severity": "PRODUCT_P0",
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/13_C4_extremums.tex",
+      "reason": "f(x)=x sur [0,1] atteint ses extremums aux bornes avec f′=1. Le théorème de Fermat exige un point intérieur. f(x)=x³ a f′(0)=0 sans extremum ; une constante a des extremums non stricts sans changement de signe.",
+      "status": "OPEN"
+    },
+    {
+      "finding_id": "DG-ME4-PLATEAU",
+      "severity": "PRODUCT_P0",
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-004.tex",
+      "reason": "L’absence de changement de signe ne prouve ni absence d’extremum ni présence d’un point d’inflexion. Une constante suffit comme contre-exemple.",
+      "status": "OPEN"
+    },
+    {
+      "finding_id": "DG-C5-DIMENSIONS",
+      "severity": "PRODUCT_P0",
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/14_C5_optimisation.tex",
+      "reason": "La preuve optionnelle annoncée par moyenne arithmético-géométrique additionne r², r² et h, de dimensions incompatibles. L’optimisation principale du cylindre est correcte, r³=250/π et h=2r.",
+      "status": "OPEN"
+    },
+    {
+      "finding_id": "DG-ME5-TRIANGLE",
+      "severity": "PRODUCT_P0",
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-005.tex",
+      "reason": "Une hypoténuse de 10 ne définit pas les deux côtés de l’angle droit. Pour les côtés 6 et 8, le rectangle parallèle aux côtés a h=8−4x/3 et maximum 12, pas 25.",
+      "status": "OPEN"
+    },
+    {
+      "finding_id": "DG-TD-CONTEXT",
+      "severity": "PRODUCT_P0",
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/07_td_contextualise.tex",
+      "reason": "Les unités du prix par cent stylos sont incohérentes avec le coût en centaines d’euros. Pour le profit annoncé −x³+3x²+15x−5, les points stationnaires sont 1±√6 ; x=5 n’en est pas un.",
+      "status": "OPEN"
+    },
+    {
+      "finding_id": "DG-CO38-ENDPOINT",
+      "severity": "PRODUCT_P0",
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-038.tex",
+      "reason": "Le tableau donne B(7)=10, alors que B(7)=−8.",
+      "status": "OPEN"
+    },
+    {
+      "finding_id": "DG-RE4-COEFFICIENT",
+      "severity": "PRODUCT_P0",
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/remediation/1SPE-DERIVATION-GLOBAL-RE-C4.tex",
+      "reason": "La marge doit lire coefficient de x dans g′, pas coefficient de x² dans g′.",
+      "status": "OPEN"
+    },
+    {
+      "finding_id": "DG-EX43-WALL",
+      "severity": "PRODUCT_P0",
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-043.tex",
+      "reason": "Avec 20 m de clôture sur trois côtés, A=x(20−2x), maximum 50 m² pour x=5 m. Le corrigé repère puis réintroduit l’erreur de facteur 2 ; les deux oracles certifient l’aire erronée.",
+      "status": "OPEN"
+    },
+    {
+      "finding_id": "DG-EX45-GEOMETRY",
+      "severity": "PRODUCT_P0",
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-045.tex",
+      "reason": "La base égale au diamètre de rayon 5 fixe sa moitié à 5, contrairement au paramètre variable x. L’oracle de l’énoncé utilise x(5+√(25−x²)), le corrigé x√(25−x²), et sa justification géométrique contient un brouillon non recommandé.",
+      "status": "OPEN"
+    },
+    {
+      "finding_id": "DG-EX48-FORCED-TRUE",
+      "severity": "PRODUCT_P0",
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-048.tex",
+      "reason": "Un contrôle de racine se termine par « or True » ; cette assertion est inconditionnelle, même si les suivantes testent effectivement les racines. Retirer le retour forcé et contrôler la population des racines.",
+      "status": "OPEN"
+    }
+  ],
+  "limitations": [
+    "Les candidats extérieurs au chapitre sont des réemplois de preuves dans le même manuel ; aucun contenu n’est copié.",
+    "Le tableau ne transforme pas une preuve partielle en chaîne pédagogique complète.",
+    "Les oracles ont été lus mais aucune exécution fraîche de DERGLOBAL n’est revendiquée à cette étape.",
+    "Les anciens nombres de pages imprimées ne sont pas une preuve du HEAD observé.",
+    "Les fichiers candidats lus seulement côté énoncé n’ont pas leur corrigé implicitement validé."
+  ],
+  "next_lots": [
+    "Réparer les bindings réellement démontrés et retirer les maillons sans rapport.",
+    "Corriger C1 et la preuve de l’inverse ; établir la preuve du produit manquante dans un lot distinct.",
+    "Corriger C3/C4, contrat C4 et méthodes concernées avec contre-exemples de bords et fonctions constantes.",
+    "Corriger les modèles C5 et leurs unités dans des lots bornés, puis chaque énoncé et corrigé affecté."
+  ],
+  "root_provenance_check": {
+    "reviewer": "/root",
+    "observation_head": "246a8afd0a5e039c7f2fa632c458f7978bd1cfe0",
+    "historical_bindings_checked": 19,
+    "source_sha256_at_observation_head_checked": 87,
+    "duplicate_source_paths": 0,
+    "method": "Read the 19 complete rows, their explicit reserves and 12 findings. Compare every old chain field and official wording to git show at the recorded observation HEAD; recompute each of the 87 source hashes from that same commit.",
+    "scope": "This preserves historical forensic findings. It is not a new root reading of all 86 sources or a closure of any current programme/scientific dimension. C1 and subsequent edits have separate fresh reviews; these recorded findings remain historical."
+  }
+}
