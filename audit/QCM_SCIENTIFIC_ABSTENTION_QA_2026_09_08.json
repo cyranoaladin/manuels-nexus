@@ -1,0 +1,113 @@
+{
+  "artifact_type": "development_qa_correction_log",
+  "schema_version": 1,
+  "approves_nothing": true,
+  "observed_head": "886a3be10497e1a9d9b3b3825c02220842da09d9",
+  "worktree_observation": true,
+  "sources": [
+    {
+      "path": "scripts/qcm_independent_solver.py",
+      "before_head": "08e8a91152168b0698ad393cffb6c0d083736117",
+      "before_sha256": "7a9024deb50557010fd424b259fa9be0835b34defa80f7d32df494c9bc2b6c96",
+      "after_sha256": "727ba5da31896ce8a2af3f2b494f92f09d7f60d401a05f5ce0247679de2f179f"
+    },
+    {
+      "path": "scripts/latex_arith.py",
+      "before_head": "08e8a91152168b0698ad393cffb6c0d083736117",
+      "before_sha256": "0d41ae201ef048c142816fd0bc30086f629599c144c15c0c1b25285d1a687e47",
+      "after_sha256": "d54c8ee54bc2cad2421e1ff2d4616d886ce00c0caaec05c07f802c7f600fe304"
+    },
+    {
+      "path": "tests/test_qcm_scientific_abstention.py",
+      "before_head": "08e8a91152168b0698ad393cffb6c0d083736117",
+      "before_sha256": null,
+      "after_sha256": "26882897c7206f4d1eb06dc09aa51b8328e5987fb55dfb8a655349f61f94beab"
+    }
+  ],
+  "finding": {
+    "id": "QCM-CURRENT-QA-014",
+    "severity": "PRODUCT_P0",
+    "status": "CORRECTED_AND_INDEPENDENTLY_RECHECKED_IN_BOUNDED_SCOPE",
+    "before": [
+      "Unreadable numeric/symbolic options were asserted false without proof.",
+      "Second-derivative classification omitted the degenerate minimum at0 of x^4-(2/3)x^6 while certifying maxima-only.",
+      "SymPy cancellation erased the exclusion x=0 in x^3/x and falsely created an initial value/extremum or full-domain simplification.",
+      "Both exact parsers imposed the convention0^0=1 without contextual authority.",
+      "Root candidates with undecidable reality were silently removed from the claimed complete extrema list."
+    ],
+    "after": [
+      "Any unreadable option prevents this numeric/symbolic truth-vector proof.",
+      "Any zero or undecidable critical-point curvature makes this limited second-derivative family abstain.",
+      "The scientific expression/option/extrema consumers check divisors and powers before simplification, refuse unproved domains/regularity, and check the new denominator of a shift quotient.",
+      "Both exact parsers explicitly refuse0^0.",
+      "Any candidate root whose reality is undecidable now makes the extrema family abstain."
+    ]
+  },
+  "scientific_argument": "For f=x^4-(2/3)x^6, f'=4x^3(1-x^2): the sign changes from negative to positive at0, so0 is a minimum despite f''(0)=0; at±1 the second derivative is-8. The original expression x^3/x has no value at0 even though its algebraic cancellation is x^2 elsewhere. Unknown option meaning is not falsehood.",
+  "proof_limits": [
+    "No domain is inferred from natural-language restrictions; supported functions are deliberately conservative.",
+    "The general algebra reader without require_total remains a syntax/expression reader, not a proof of domain identity.",
+    "This does not establish completeness of every solver family, every option grammar, or full scientific/pedagogical QCM review.",
+    "No historical/current aggregate is regenerated, no question is removed, and no human approval is written."
+  ],
+  "tests": {
+    "initial_red_log": "/tmp/qcm-scientific-abstention-red.log",
+    "initial_red_sha256": "9c0c4f2aa882c2d1c764a34c2e57bff2a04038a6efc4c8a17023baf57376ed5a",
+    "initial_failed": 6,
+    "initial_passed": 3,
+    "expanded_red_log": "/tmp/qcm-scientific-abstention-expanded-red.log",
+    "expanded_red_sha256": "b179bdc2d53963186bfaab77dc78c2fe35bd04e6daf597e7d69253604cee78d4",
+    "expanded_failed": 10,
+    "expanded_passed": 3,
+    "green_junit": "/tmp/qcm-scientific-abstention-final.xml",
+    "green_sha256": "da6071c48b2d7881e3dd36ad990e8ca5e8d7e61e4dc73a96dade350c84c3ecf7",
+    "passed": 125,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "scope": "Controlled scientific, parser, exact-arithmetic, method-binding and current-evidence fixtures only."
+  },
+  "open_scientific_debts": [
+    {
+      "local_id": "VARIANCE_CONSUMER_DROPS_UNPARSED_CLAIMS",
+      "status": "OPEN",
+      "source": "scripts/audit_variance_sigma_consistency.py::_build_claim"
+    },
+    {
+      "local_id": "OTHER_SOLVER_FAMILIES_AND_CONSUMERS_NOT_REVIEWED",
+      "status": "OPEN",
+      "reason": "The bounded changes above do not establish scientific closure of other solving families, raw reader consumers, or human packet/queue consumers."
+    }
+  ],
+  "not_run": [
+    "Global QCM solver replay",
+    "Global V2/closure regeneration",
+    "Full suite"
+  ],
+  "counterreview_finding": {
+    "reviewer": "/root",
+    "status": "CORRECTED_AND_INDEPENDENTLY_RECHECKED",
+    "before": "An is_real=None candidate returned by sympy.solve was silently excluded from the extrema list.",
+    "controlled_expression": "x^5/5-x^3+x^2/2",
+    "independent_argument": "f'=x(x^3-3x+1). The cubic takes values-1,3,1,-1,3 at-2,-1,0,1,2, so it has three distinct simple real roots in(-2,-1),(0,1),(1,2). Each gives an extremum in addition to0. Certifying only0 is false.",
+    "after": "Any root whose reality is undecidable causes abstention before filtering or curvature classification.",
+    "red_log": "/tmp/qcm-undecidable-roots-red.log",
+    "red_sha256": "6eb64a37f1a15f37d03d60ccc5f81f0a62316b39d8a5c9657fc327d706e35e89",
+    "red_failed": 1,
+    "scope": "Controlled fixture only; no actual QCM executed."
+  },
+  "independent_counterreview": {
+    "reviewer": "/root",
+    "human_approval": false,
+    "source_scope": "Complete functional diff, all controlled tests and evidence manifest read; root independently derived the omitted real roots before the fix. No general solver-family closure.",
+    "verification": {
+      "command": "python -m pytest -q tests/test_qcm_scientific_abstention.py tests/test_qcm_closed_symbolic_parser.py tests/test_latex_arith_exact_contract.py tests/test_qcm_method_binding.py tests/test_qcm_current_evidence_guard.py --junitxml=/tmp/root-qcm-qa014.xml",
+      "passed": 125,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit_sha256": "c1536962f8d22da0e2e5e2e15f6c1a0e0e8d054b5ca9daf3036c3f885180f0c3"
+    },
+    "known_open_debt": "The separate uniform-outcome probability family still assumes six die faces; controlled eight-face counterexample reported and awaiting repair."
+  }
+}

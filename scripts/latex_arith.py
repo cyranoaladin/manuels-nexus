@@ -132,6 +132,8 @@ class _Parser:
             exponent = self._group()
             if exponent.denominator != 1:
                 raise UnsupportedExpression("exposant non entier")
+            if base == 0 and exponent == 0:
+                raise UnsupportedExpression("zero puissance zero exige une convention explicite")
             return base ** int(exponent)
         return base
 

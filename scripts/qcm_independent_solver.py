@@ -40,7 +40,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from latex_arith import UnsupportedExpression, evaluate  # noqa: E402
 
-SOLVER_VERSION = "1.1.3"
+SOLVER_VERSION = "1.1.4"
 
 #: Tout champ qui trahirait la reponse. Leur presence rend l'entree invalide.
 FORBIDDEN_INPUT_FIELDS = frozenset(
@@ -254,17 +254,15 @@ class SolverResult:
 
 def _numeric_truths(
     options: dict[str, str], expected: Fraction
-) -> dict[str, bool] | None:
+) -> tuple[dict[str, bool], int] | None:
     """Verite de chaque option face a une constante calculee independamment.
 
-    Une option qui ne denote aucune valeur determinee ne peut pas etre egale a
-    la constante cherchee : elle est fausse, et non indecidable. Il faut
-    toutefois qu'au moins une option soit lisible, sinon la famille ne
-    s'applique pas.
+    Une option illisible pour ce lecteur reste indeterminee. L'absence de
+    lecture n'est jamais une preuve que l'option est fausse.
     """
 
     values = option_values(options)
-    if all(value is None for value in values.values()):
+    if not values or any(value is None for value in values.values()):
         return None
     return (
         {letter: value == expected for letter, value in values.items()},
@@ -334,10 +332,15 @@ class _ClosedSymbolicParser:
 
     TOKEN = re.compile(r"\d+(?:\.\d+)?|[A-Za-z][A-Za-z0-9]*|\*\*|[+\-*/()]")
 
-    def __init__(self, text: str, symbols: dict[str, Any]) -> None:
+    def __init__(self, text: str, symbols: dict[str, Any], *, require_total: bool = False) -> None:
         if len(text) > 4096:
             raise UnsupportedExpression("symbolic input too long")
         self.symbols = symbols
+        # Check operations before SymPy can cancel a denominator or a power.
+        # This mode deliberately refuses restrictions that are not proved
+        # harmless on the declared real-symbol domain; it does not infer a
+        # domain from prose or silently extend a function by continuity.
+        self.require_total = require_total
         self.tokens: list[str] = []
         position = 0
         while position < len(text):
@@ -394,6 +397,8 @@ class _ClosedSymbolicParser:
                 divisor = self._unary()
                 if divisor.is_zero is True:
                     raise UnsupportedExpression("division by zero")
+                if self.require_total and divisor.is_zero is not False:
+                    raise UnsupportedExpression("unproved nonzero denominator")
                 value = value / divisor
             elif self.tokens[self.index] == "(" or self.tokens[self.index][:1].isalpha():
                 # Implicit multiplication: 2x, x(x+1), 3sqrt(2), k t.
@@ -415,6 +420,14 @@ class _ClosedSymbolicParser:
                 exponent = self._unary()
                 if exponent.is_number and exponent.is_real and abs(exponent) > 64:
                     raise UnsupportedExpression("numeric exponent outside supported range")
+                if value.is_zero is True and exponent.is_zero is True:
+                    raise UnsupportedExpression("zero power zero requires an explicit convention")
+                if self.require_total:
+                    if exponent.is_integer is True:
+                        if exponent.is_positive is not True and value.is_zero is not False:
+                            raise UnsupportedExpression("power may exclude a zero base")
+                    elif value.is_positive is not True:
+                        raise UnsupportedExpression("unproved domain for noninteger power")
                 value = value ** exponent
             return value
         finally:
@@ -435,6 +448,13 @@ class _ClosedSymbolicParser:
             value = self._sum()
             if not self._eat(")"):
                 raise UnsupportedExpression("unclosed sqrt argument")
+            if self.require_total and not (
+                value.is_positive is True
+                or (not value.free_symbols and value.is_nonnegative is True)
+            ):
+                # Strict positivity also avoids claiming a derivative at a
+                # possible cusp such as sqrt(x^2). Constants include sqrt(0).
+                raise UnsupportedExpression("unproved domain or regularity for sqrt")
             return sympy.sqrt(value)
         if token in self.symbols:
             self.index += 1
@@ -446,17 +466,20 @@ class _ClosedSymbolicParser:
         raise UnsupportedExpression("missing symbolic atom")
 
 
-def _closed_symbolic_expression(text: str, symbols: dict[str, Any]):
+def _closed_symbolic_expression(text: str, symbols: dict[str, Any], *, require_total: bool = False):
     try:
-        return _ClosedSymbolicParser(text, symbols).parse()
+        return _ClosedSymbolicParser(text, symbols, require_total=require_total).parse()
     except (UnsupportedExpression, ZeroDivisionError, ValueError, RecursionError):
         return None
 
 
-def latex_to_sympy(source: str, symbol: str = "x"):
+def latex_to_sympy(source: str, symbol: str = "x", *, require_total: bool = False):
     """Traduit un fragment LaTeX elementaire en expression SymPy, ou None.
 
     Volontairement etroit : ce qui n'est pas reconnu n'est pas devine.
+    require_total refuse aussi les restrictions de domaine non demontrees
+    avant simplification. Sans ce mode, une expression seule ne prouve pas
+    l'identite des domaines des fonctions representees.
     """
 
     sympy = _sympy()
@@ -493,7 +516,7 @@ def latex_to_sympy(source: str, symbol: str = "x"):
         "sqrt": sympy.sqrt,
         "pi": sympy.pi,
     }
-    return _closed_symbolic_expression(text, local)
+    return _closed_symbolic_expression(text, local, require_total=require_total)
 
 
 def _symbolic_truths(options: dict[str, str], expected, symbol: str = "x"):
@@ -503,13 +526,9 @@ def _symbolic_truths(options: dict[str, str], expected, symbol: str = "x"):
     truths: dict[str, bool] = {}
     readable = 0
     for letter, raw in options.items():
-        candidate = latex_to_sympy(raw, symbol=symbol)
+        candidate = latex_to_sympy(raw, symbol=symbol, require_total=True)
         if candidate is None:
-            # Une option en langue naturelle ne denote pas la valeur calculee :
-            # elle est fausse, non indecidable. Il faut toutefois qu'une option
-            # au moins soit lisible, sinon la famille ne s'applique pas.
-            truths[letter] = False
-            continue
+            return None
         readable += 1
         try:
             truths[letter] = bool(sympy.simplify(candidate - expected) == 0)
@@ -1007,20 +1026,29 @@ def _polynomial_local_extrema(inp: SolverInput) -> SolverResult | None:
     except ImportError:  # pragma: no cover - dependance declaree
         return None
     x = sympy.Symbol("x", real=True)
-    polynomial = latex_to_sympy(match.group(1))
+    polynomial = latex_to_sympy(match.group(1), require_total=True)
     if (polynomial is None or not polynomial.is_polynomial(x)
             or not polynomial.free_symbols <= {x}):
         return None
     derivative = sympy.diff(polynomial, x)
     second = sympy.diff(derivative, x)
     try:
-        roots = sorted(
-            root for root in sympy.solve(sympy.Eq(derivative, 0), x) if root.is_real
-        )
+        candidates = sympy.solve(sympy.Eq(derivative, 0), x)
+        if any(root.is_real is None for root in candidates):
+            # Radical expressions for real cubic roots can remain undecidable
+            # to SymPy. Unknown is not non-real, and cannot be discarded.
+            return None
+        roots = sorted(root for root in candidates if root.is_real is True)
     except (NotImplementedError, TypeError):
         return None
-    maxima = {sympy.nsimplify(r) for r in roots if second.subs(x, r) < 0}
-    minima = {sympy.nsimplify(r) for r in roots if second.subs(x, r) > 0}
+    curvatures = {root: second.subs(x, root) for root in roots}
+    if any(value.is_positive is not True and value.is_negative is not True
+           for value in curvatures.values()):
+        # f''=0 is inconclusive, including when other critical points have
+        # nonzero curvature. Do not present a partial list as all extrema.
+        return None
+    maxima = {r for r, value in curvatures.items() if value.is_negative is True}
+    minima = {r for r, value in curvatures.items() if value.is_positive is True}
     if not maxima and not minima:
         return None
 
@@ -1267,7 +1295,7 @@ def _symbolic_expression_question(inp: SolverInput) -> SolverResult | None:
         body, variable = payload.split("||", 1)
     else:
         body, variable = payload, "x"
-    expression = latex_to_sympy(body, symbol=variable)
+    expression = latex_to_sympy(body, symbol=variable, require_total=True)
     if expression is None:
         return None
     symbol = sympy.Symbol(variable, real=True)
@@ -1282,6 +1310,8 @@ def _symbolic_expression_question(inp: SolverInput) -> SolverResult | None:
         expected = sympy.simplify(expression.subs(symbol, 0))
         evidence = f"Valeur en {variable} = 0 de {body} : {expected}."
     elif operation == "UNIT_SHIFT_RATIO":
+        if expression.is_zero is not False:
+            return None
         expected = sympy.simplify(
             expression.subs(symbol, symbol + 1) / expression
         )
