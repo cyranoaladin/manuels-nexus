@@ -1,39 +1,50 @@
 % META: {"id": "TNSI-HIST-CR-010", "chapitre": "TNSI-HISTOIRE-INFORMATIQUE", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+% DOCUMENTARY-SOURCES (dates et portée vérifiées indépendamment ; aucun oracle Python ne les certifie):
+% Machine universelle : Turing 1936, paragraphe 6.
+% https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf
+% Moore 1965, Electronics 38(8), "Cramming more components onto integrated circuits", p. 2 du PDF:
+% https://download.intel.com/newsroom/2023/manufacturing/moores-law-electronics.pdf
+% Moore 1975, "Progress in digital integrated electronics", p. 13:
+% https://www.lithoguru.com/scientist/CHE323/Moore1975.pdf
+% ARPANET 1969 / TCP-IP 1983, institution à l'origine du réseau:
+% https://www.darpa.mil/news/features/arpanet
+% Proposition du Web 1989, implémentation 1990, diffusion 1991:
+% https://home.cern/science/computing/the-birth-of-the-web/short-history-web/
 
 \section{Événements clés de l'histoire de l'informatique}
 
 % ============================================================
-% STRATE 1 — Reperes chronologiques (complement au programme de première)
+% STRATE 1 — Repères chronologiques (complément au programme de première)
 % ============================================================
 
 \propriete[Repères 1936–1948 : la machine universelle]{
 \begin{itemize}
-  \item \textbf{1936} : Alan Turing formalise le concept de \textbf{machine universelle} (machine de Turing), capable en theorie d'executer tout algorithme calculable. C'est la première fois que les notions de \textbf{machine}, \textbf{algorithme}, \textbf{langage} et \textbf{information} sont pensees comme un tout coherent.
-  \item \textbf{1945} : John von Neumann décrit l'\textbf{architecture} qui porte son nom : programme et donnees stockes dans une même memoire (voir chapitre Architectures materielles).
-  \item \textbf{1948} : construction des premiers ordinateurs electroniques a programme enregistre (par exemple le \textit{Manchester Baby}).
+  \item \textbf{1936} : Alan Turing définit un \textbf{modèle de calcul}, la machine de Turing, et décrit une machine particulière \textbf{universelle}, capable de simuler toute autre machine de ce modèle dont on lui fournit la description. Le programme officiel présente ce repère comme la première mise en cohérence des notions de \textbf{machine}, \textbf{algorithme}, \textbf{langage} et \textbf{information}.
+  \item \textbf{1945} : John von Neumann décrit l'\textbf{architecture} qui porte son nom : programme et données stockés dans une même mémoire (voir chapitre Architectures matérielles).
+  \item \textbf{1948} : construction des premiers ordinateurs électroniques à programme enregistré (par exemple le \textit{Manchester Baby}).
 \end{itemize}
 }
 
 \propriete[De 1948 à aujourd'hui : croissance et diversification]{
 \begin{itemize}
-  \item La puissance de calcul des ordinateurs a evolue de maniere \textbf{exponentielle} (loi empirique de Moore, 1965 : doublement approximatif du nombre de transistors par circuit tous les deux ans).
-  \item Les ordinateurs se sont \textbf{diversifies} en taille, forme et usage : ordinateurs personnels, serveurs, fermes de calcul, telephones, tablettes, montres connectees, objets connectes.
-  \item \textbf{1969} : mise en service du reseau ARPANET, anc\^être d'\textbf{Internet}, qui relie aujourd'hui ordinateurs et objets connectes a l'echelle mondiale.
+  \item La puissance de calcul a connu une forte croissance, souvent décrite comme \textbf{exponentielle} sur des périodes données. La \textbf{loi empirique de Moore} porte sur un autre indicateur : en \textbf{1965}, Moore observe un doublement approximatif \emph{annuel} du nombre de composants par circuit intégré au coût par composant le plus favorable. En \textbf{1975}, il prévoit un rythme proche d'un doublement \emph{tous les deux ans} avant la fin de la décennie. Cette tendance ne constitue pas une loi générale de vitesse de calcul.
+  \item Les ordinateurs se sont \textbf{diversifiés} en taille, forme et usage : ordinateurs personnels, serveurs, fermes de calcul, téléphones, tablettes, montres connectées, objets connectés.
+  \item \textbf{1969} : mise en service du réseau ARPANET, un ancêtre d'\textbf{Internet}. Son passage aux protocoles TCP/IP en \textbf{1983} est une autre étape du développement d'Internet, qui relie aujourd'hui des réseaux à l'échelle mondiale.
 \end{itemize}
 }
 
 \margeAppui{
-Ces reperes completent ceux vus en première (algorithmes de l'Antiquite, machines a calculer du dix-septieme siecle, fondation des sciences de l'information au dix-neuvieme siecle) : la chronologie de terminale se concentre sur la période 1936 a aujourd'hui.
+Ces repères complètent ceux vus en première (algorithmes de l'Antiquité, machines à calculer du dix-septième siècle, fondation des sciences de l'information au dix-neuvième siècle) : la chronologie de terminale se concentre sur la période 1936 à aujourd'hui.
 }
 
 \exemple{
-Situer sur une frise chronologique : machine de Turing (1936), premiers ordinateurs a programme enregistre (1948), ARPANET (1969), micro-ordinateurs personnels (fin des années 1970), World Wide Web (1989-1991), smartphones (années 2000).
+Situer sur une frise chronologique : machine universelle de Turing (1936), premiers ordinateurs électroniques à programme enregistré (1948), ARPANET (1969), essor des micro-ordinateurs personnels (fin des années 1970), World Wide Web (1989-1991), diversification des smartphones (années 2000).
 }
 
 % ============================================================
-% STRATE 2 — Erreurs frequentes
+% STRATE 2 — Erreurs fréquentes
 % ============================================================
 
 \erreurFrequente{
-\textbf{Confondre Internet et le World Wide Web.} Internet (reseau de reseaux, depuis 1969/ARPANET) est l'infrastructure de communication ; le Web (invente par Tim Berners-Lee en 1989-1991) est un \textbf{service} qui fonctionne au-dessus d'Internet, au même titre que le courrier electronique. Le Web n'est qu'une des utilisations d'Internet.
+\textbf{Confondre Internet et le World Wide Web.} Internet est une infrastructure reliant des réseaux, dont ARPANET est l'un des précurseurs. Le Web, proposé par Tim Berners-Lee au CERN en 1989, mis en œuvre en 1990 puis diffusé en 1991, est un \textbf{service} qui fonctionne au-dessus d'Internet, au même titre que le courrier électronique. Le Web n'est qu'une des utilisations d'Internet.
 }

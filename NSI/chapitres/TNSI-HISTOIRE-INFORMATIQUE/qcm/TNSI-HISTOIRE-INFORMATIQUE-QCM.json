@@ -3,47 +3,107 @@
   "titre": "Histoire de l'informatique — QCM d'auto-évaluation",
   "questions": [
     {
-      "id": "Q1", "capacite": "C1",
+      "id": "Q1",
+      "capacite": "C1",
       "enonce": "Alan Turing formalise le concept de machine universelle en :",
-      "options": {"A": "1936.", "B": "1948.", "C": "1969.", "D": "1991."},
+      "options": {
+        "A": "1936.",
+        "B": "1948.",
+        "C": "1969.",
+        "D": "1991."
+      },
       "correcte": "A",
       "diagnostics": {
-        "B": {"erreur": "1948 est l'époque des premières machines à programme enregistré. Le modèle théorique les précède de plus de dix ans.", "renvoi": "C1, repères chronologiques"},
-        "C": {"erreur": "1969 est la mise en service d'ARPANET, un jalon des réseaux et non du modèle de calcul.", "renvoi": "C1, repères chronologiques"},
-        "D": {"erreur": "1991 est la naissance de Python et l'ouverture du Web au public : bien après les fondements théoriques.", "renvoi": "C1, repères chronologiques"}
+        "B": {
+          "erreur": "En 1948, le Manchester Baby exécute un programme enregistré en mémoire. Le modèle théorique de Turing le précède de plus de dix ans.",
+          "renvoi": "C1, repères chronologiques"
+        },
+        "C": {
+          "erreur": "1969 est la mise en service d'ARPANET, un jalon des réseaux et non du modèle de calcul.",
+          "renvoi": "C1, repères chronologiques"
+        },
+        "D": {
+          "erreur": "1991 est l'année de la première diffusion publique de Python, créé en 1989, et de la diffusion du Web hors du CERN : bien après le modèle théorique de Turing.",
+          "renvoi": "C1, repères chronologiques"
+        }
       }
     },
     {
-      "id": "Q2", "capacite": "C1",
+      "id": "Q2",
+      "capacite": "C1",
       "enonce": "ARPANET, ancêtre d'Internet, est mis en service en :",
-      "options": {"A": "1948.", "B": "1969.", "C": "1989.", "D": "2000."},
+      "options": {
+        "A": "1948.",
+        "B": "1969.",
+        "C": "1989.",
+        "D": "2000."
+      },
       "correcte": "B",
       "diagnostics": {
-        "A": {"erreur": "1948 précède l'existence même des ordinateurs interconnectés ; les premières machines à programme enregistré datent de cette période.", "renvoi": "C1, repères chronologiques"},
-        "C": {"erreur": "1989 est l'année où Tim Berners-Lee propose le Web, soit vingt ans APRÈS le réseau qui le porte.", "renvoi": "C1, Internet et le Web"},
-        "D": {"erreur": "L'élève date le réseau de sa diffusion grand public, largement postérieure à sa création.", "renvoi": "C1, repères chronologiques"}
+        "A": {
+          "erreur": "1948 correspond à la première exécution du Manchester Baby, ordinateur électronique à programme enregistré ; ARPANET est mis en service en 1969.",
+          "renvoi": "C1, repères chronologiques"
+        },
+        "C": {
+          "erreur": "1989 est l'année où Tim Berners-Lee propose le Web au CERN. ARPANET, l'un des précurseurs d'Internet, a été mis en service vingt ans auparavant.",
+          "renvoi": "C1, Internet et le Web"
+        },
+        "D": {
+          "erreur": "ARPANET est mis en service en 1969 ; l'année 2000 se situe 31 ans après ce repère.",
+          "renvoi": "C1, repères chronologiques"
+        }
       }
     },
     {
-      "id": "Q3", "capacite": "C2",
+      "id": "Q3",
+      "capacite": "C2",
       "enonce": "Depuis les débuts de l'informatique, le rôle du matériel a évolué vers :",
-      "options": {"A": "une spécialisation croissante, chaque machine ne traitant qu'une seule tâche.", "B": "une disparition progressive au profit du seul logiciel.", "C": "davantage de généricité, la logique particulière étant portée par le logiciel.", "D": "aucune évolution notable."},
+      "options": {
+        "A": "une spécialisation croissante, chaque machine ne traitant qu'une seule tâche.",
+        "B": "une disparition progressive au profit du seul logiciel.",
+        "C": "davantage de généricité, la logique particulière étant portée par le logiciel.",
+        "D": "aucune évolution notable."
+      },
       "correcte": "C",
       "diagnostics": {
-        "A": {"erreur": "C'est l'inverse du mouvement historique : les premières machines étaient câblées pour une tâche, et le programme enregistré les a rendues polyvalentes.", "renvoi": "C2, rôles relatifs du logiciel et du matériel"},
-        "B": {"erreur": "Tout logiciel s'exécute sur du matériel. Sa part relative dans la valeur a crû, mais le support n'a pas disparu.", "renvoi": "C2, rôles relatifs du logiciel et du matériel"},
-        "D": {"erreur": "Le déplacement de la logique du câblage vers le logiciel est l'une des évolutions majeures de la discipline.", "renvoi": "C2, rôles relatifs du logiciel et du matériel"}
+        "A": {
+          "erreur": "C'est l'inverse du mouvement historique : les premières machines étaient câblées pour une tâche, et le programme enregistré les a rendues polyvalentes.",
+          "renvoi": "C2, rôles relatifs du logiciel et du matériel"
+        },
+        "B": {
+          "erreur": "Tout logiciel s'exécute sur du matériel. Sa part relative dans la valeur a crû, mais le support n'a pas disparu.",
+          "renvoi": "C2, rôles relatifs du logiciel et du matériel"
+        },
+        "D": {
+          "erreur": "Le déplacement de la logique du câblage vers le logiciel est l'une des évolutions majeures de la discipline.",
+          "renvoi": "C2, rôles relatifs du logiciel et du matériel"
+        }
       }
     },
     {
-      "id": "Q4", "capacite": "C2",
+      "id": "Q4",
+      "capacite": "C2",
       "enonce": "Internet et le World Wide Web sont dans le rapport suivant :",
-      "options": {"A": "ce sont deux noms de la même chose.", "B": "ce sont deux réseaux physiques distincts et indépendants.", "C": "Internet est un service qui fonctionne au-dessus du Web.", "D": "le Web est un service qui fonctionne au-dessus du réseau Internet."},
+      "options": {
+        "A": "ce sont deux noms de la même chose.",
+        "B": "ce sont deux réseaux physiques distincts et indépendants.",
+        "C": "Internet est un service qui fonctionne au-dessus du Web.",
+        "D": "le Web est un service qui fonctionne au-dessus du réseau Internet."
+      },
       "correcte": "D",
       "diagnostics": {
-        "A": {"erreur": "Le courriel et bien d'autres services empruntent Internet sans passer par le Web : les deux ne se confondent donc pas.", "renvoi": "C2, Internet et le Web"},
-        "B": {"erreur": "Le Web n'est pas un réseau physique : c'est un ensemble de pages liées, échangées grâce au protocole HTTP.", "renvoi": "C2, Internet et le Web"},
-        "C": {"erreur": "L'élève intervertit les deux niveaux. L'infrastructure est Internet ; le Web est l'un des services qu'elle transporte.", "renvoi": "C2, Internet et le Web"}
+        "A": {
+          "erreur": "Le courriel et bien d'autres services empruntent Internet sans passer par le Web : les deux ne se confondent donc pas.",
+          "renvoi": "C2, Internet et le Web"
+        },
+        "B": {
+          "erreur": "Le Web n'est pas un réseau physique : c'est un ensemble de pages liées, échangées grâce au protocole HTTP.",
+          "renvoi": "C2, Internet et le Web"
+        },
+        "C": {
+          "erreur": "L'élève intervertit les deux niveaux. L'infrastructure est Internet ; le Web est l'un des services qu'elle transporte.",
+          "renvoi": "C2, Internet et le Web"
+        }
       }
     }
   ]
