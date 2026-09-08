@@ -150,12 +150,37 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             suite: list[str] = []
             exercices = chapitre_dir / "exercices"
             if exercices.is_dir():
+                # UN COUP DE POUCE N'EST PAS UN ENONCE. C'est une phrase
+                # d'aide attachee a un exercice, qui declare les memes
+                # capacites que lui mais n'en porte qu'un fragment : lui
+                # demander de satisfaire seul la signature reviendrait a
+                # exiger d'une note de bas de page qu'elle tienne le livre.
+                # Son corps est donc joint a celui de l'exercice dont il
+                # derive, et c'est l'ensemble qui est evalue.
+                aides: dict[str, list[str]] = collections.defaultdict(list)
+                for chemin in sorted(exercices.glob("*.tex")):
+                    texte = chemin.read_text(encoding="utf-8", errors="replace")
+                    if "\\coupDePouce" not in texte:
+                        continue
+                    parent = (read_meta(texte).get("exercice_ref")
+                              or (read_meta(texte).get("id") or "").rsplit("-CDP", 1)[0])
+                    aides[parent].append(body_of(texte))
                 for chemin in sorted(exercices.glob("*.tex")):
                     texte = chemin.read_text(encoding="utf-8", errors="replace")
                     meta = read_meta(texte)
                     codes = meta.get("capacites_codes") or []
                     suite.append(codes[0] if len(codes) == 1 else "")
                     corps = body_of(texte)
+                    if "\\coupDePouce" in texte:
+                        parent = (meta.get("exercice_ref")
+                                  or (meta.get("id") or "").rsplit("-CDP", 1)[0])
+                        source = exercices / f"{parent}.tex"
+                        if source.is_file():
+                            corps = body_of(
+                                source.read_text(encoding="utf-8", errors="replace")
+                            ) + "\n" + corps
+                    elif aides.get(meta.get("id")):
+                        corps = corps + "\n" + "\n".join(aides[meta["id"]])
                     for code in codes:
                         signature = signatures.signature_for(chapitre, code)
                         if signature is None:

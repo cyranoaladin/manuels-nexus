@@ -209,6 +209,126 @@ REVIEWS = [
           action="enonce complete d'une premiere question qui fait justifier "
                  "la loi binomiale et preciser ses parametres ; corrige "
                  "renumerote en consequence"),
+    # ------------------------------------------------------------------
+    # Revues de la campagne d'ecriture des signatures des vingt-sept chapitres
+    # qui n'en avaient pas. Chaque attribution que la signature n'attestait
+    # pas a ete LUE ; treize d'entre elles ne relevaient pas d'une signature
+    # trop etroite mais d'un rattachement ou d'un enonce a corriger.
+    # ------------------------------------------------------------------
+    revue("1SPE-DERGLOBAL-EX-051", "1SPE-DERIVATION-GLOBAL", "C3", PARTIAL,
+          content="determine si trois fonctions sont paires ou impaires, sans "
+                  "jamais dresser de tableau de variations",
+          expected="le signe de la derivee conduisant au tableau de variations",
+          why="la parite n'est pas une capacite du contrat : l'exercice etait "
+              "rattache a C3 par voisinage thematique, non par contenu",
+          action="enonce complete : deux questions ajoutees dressent le tableau "
+                 "de variations de la fonction paire et etablissent que la "
+                 "derivee d'une fonction paire est impaire, ce qui rend le "
+                 "tableau symetrique et fait gagner la moitie de l'etude"),
+    revue("1SPE-DERLOCAL-EX-049", "1SPE-DERIVATION-LOCAL", "C1", MISALIGNED,
+          content="cherche les tangentes a la parabole passant par l'origine, "
+                  "en partant d'une derivee admise",
+          expected="un taux de variation ou la pente d'une secante",
+          why="l'exercice part de f'(a) admis : il n'y a ni taux de variation "
+              "ni passage a la limite, donc rien de ce que C1 entraine",
+          action="capacite corrigee : C1 retire du META ; C4, l'equation de la "
+                 "tangente, reste et est bien servie",
+          corrected="C4"),
+    revue("1SPE-DERLOCAL-EX-049-C5", "1SPE-DERIVATION-LOCAL", "C5", MISALIGNED,
+          content="cherche les tangentes passant par l'origine",
+          expected="une approximation affine au voisinage d'un point",
+          why="aucune valeur approchee de f(a+h) n'est demandee : la tangente "
+              "y est un objet geometrique, pas un outil d'approximation",
+          action="capacite corrigee : C5 retire du META, C4 conserve",
+          corrected="C4"),
+    revue("1SPE-EXPO-EX-049", "1SPE-EXPONENTIELLE", "C5", MISALIGNED,
+          content="etudie les variations de (2x-1)e^x et resout une equation",
+          expected="un modele de croissance ou de decroissance exponentielle",
+          why="aucune grandeur n'est modelisee : c'est une etude de fonction, "
+              "que C3 et C4 couvrent deja",
+          action="capacite corrigee : C5 retire du META, C3 et C4 conserves",
+          corrected="C3"),
+    revue("1SPE-EXPO-EX-050", "1SPE-EXPONENTIELLE", "C5", MISALIGNED,
+          content="demontre l'inegalite e^x > x par etude de x -> e^x - x",
+          expected="un modele de croissance ou de decroissance exponentielle",
+          why="l'exercice etablit une inegalite sur la fonction elle-meme ; il "
+              "ne modelise aucune evolution",
+          action="capacite corrigee : C5 retire du META, C1 et C2 conserves",
+          corrected="C1"),
+    revue("1SPE-GEOREP-EX-020", "1SPE-GEOMETRIE-REPEREE", "C2", MISALIGNED,
+          content="montre qu'un triangle donne par trois points cotes est "
+                  "rectangle et precise en quel sommet",
+          expected="un vecteur normal ou directeur, et une droite",
+          why="aucune droite n'apparait : le probleme se resout par les "
+              "longueurs ou le produit scalaire, ce qui est le domaine de C5",
+          action="capacite corrigee de C2 vers C5, dans l'exercice et dans son "
+                 "corrige",
+          corrected="C5"),
+    revue("1SPE-SUITES-EX-042", "1SPE-SUITES", "C5", MISALIGNED,
+          content="calcule les premiers termes d'une suite geometrique et de "
+                  "ses sommes partielles, puis conjecture leur comportement",
+          expected="l'etude du sens de variation d'une suite",
+          why="la monotonie n'y est jamais etablie : l'exercice porte sur la "
+              "somme (C4) et sur la limite (C8), tous deux declares",
+          action="capacite corrigee : C5 retire du META de l'exercice et de son "
+                 "corrige",
+          corrected="C4"),
+    revue("1SPE-VARALEA-EX-017-CDP", "1SPE-VARIABLES-ALEATOIRES", "C3", ALIGNED,
+          content="une phrase d'aide indiquant d'ecrire X = X1 + X2 et "
+                  "d'utiliser la linearite de l'esperance",
+          expected="un schema de Bernoulli et sa repetition",
+          why="un coup de pouce n'est pas un enonce : il porte un fragment de "
+              "l'exercice dont il derive, et ne peut pas satisfaire seul une "
+              "signature -- comme on ne demande pas a une note de bas de page "
+              "de tenir le livre",
+          action="regle ajoutee au producteur : le corps d'un coup de pouce est "
+                 "joint a celui de son exercice, et c'est l'ensemble qui est "
+                 "evalue ; deux cent quarante-sept objets sont concernes"),
+    revue("TNSI-ALGO-EX-001", "TNSI-ALGORITHMIQUE", "C1", PARTIAL,
+          content="compte les feuilles d'un arbre binaire par une fonction "
+                  "recursive",
+          expected="le calcul de la taille d'un arbre",
+          why="compter les feuilles n'est pas compter les noeuds : la mesure "
+              "demandee par la capacite n'etait pas celle de l'exercice",
+          action="enonce complete : la taille est desormais demandee, et la "
+                 "derniere question etablit la relation entre feuilles et "
+                 "noeuds a deux enfants"),
+    revue("TNSI-ALGO-EX-001-C3", "TNSI-ALGORITHMIQUE", "C3", PARTIAL,
+          content="compte les feuilles par un parcours recursif dont l'ordre "
+                  "n'etait pas nomme",
+          expected="un parcours infixe, prefixe ou suffixe",
+          why="l'exercice parcourt bien l'arbre, mais ne faisait jamais dire a "
+              "l'eleve dans quel ordre -- or c'est cela que la capacite demande",
+          action="question ajoutee : identifier l'ordre du parcours a partir de "
+                 "la place du traitement, et dire ou l'ordre cesse d'etre "
+                 "indifferent"),
+    revue("TNSI-ALGO-EX-009", "TNSI-ALGORITHMIQUE", "C12", ALIGNED,
+          content="calcule le cout minimal d'un trajet dans une grille en "
+                  "remplissant le tableau des couts intermediaires",
+          expected="la programmation dynamique nommee",
+          why="l'enonce, ecrit dans cette campagne, decrivait la methode par "
+              "ses effets -- sous-problemes, tableau des couts -- sans la "
+              "nommer, alors que la capacite la nomme",
+          action="enonce complete : la methode est nommee, comme le fait le "
+                 "libelle de la capacite"),
+    revue("TSPE-INTEG-EX-008", "TSPE-CALCUL-INTEGRAL", "C8", MISALIGNED,
+          content="calcule une integrale de ln(x+1) par integration par parties",
+          expected="la demonstration de la formule d'integration par parties",
+          why="l'exercice APPLIQUE la formule ; la capacite demande de "
+              "l'ETABLIR, ce qui est un autre geste",
+          action="capacite corrigee de C8 vers C2 ; la demonstration de la formule "
+                 "est desormais portee par TSPE-INTEG-EX-010, ecrit pour cette "
+                 "capacite",
+          corrected="C2"),
+    revue("TSPE-SUITLIM-EX-020", "TSPE-SUITES-LIMITES", "C3", MISALIGNED,
+          content="etudie une suite recurrente racine(u_n + 6) : encadrement "
+                  "par recurrence, monotonie, convergence",
+          expected="la modelisation d'un phenomene d'evolution",
+          why="aucun phenomene n'est modelise : la suite est donnee pour "
+              "elle-meme, et l'exercice est une etude de convergence",
+          action="capacite corrigee de C3 vers C1, dans l'exercice et dans son "
+                 "corrige",
+          corrected="C1"),
 ]
 
 

@@ -139,9 +139,23 @@ def test_a_missing_marker_is_not_a_misalignment(producer) -> None:
 def test_an_unsigned_capacity_is_declared_unverified_not_aligned(
     payload: dict,
 ) -> None:
-    """Ne pas compter comme un succes ce qu'on n'a pas verifie."""
+    """Ne pas compter comme un succes ce qu'on n'a pas verifie.
 
-    assert payload["summary"]["NO_SIGNATURE_DECLARED"] > 0
+    Le corpus ne compte plus aucune capacite sans signature, et c'est le but
+    poursuivi. Une population vide ne prouve pourtant pas que la regle existe
+    encore : on l'eprouve donc sur une capacite fabriquee, absente de la table
+    des signatures.
+    """
+
+    from importlib import import_module
+    import sys as _sys
+    _sys.path.insert(0, str(ROOT / "scripts"))
+    signatures = import_module("capacity_signatures")
+    assert signatures.signature_for("CHAPITRE-INEXISTANT", "C1") is None
+    assert payload["summary"]["NO_SIGNATURE_DECLARED"] == 0
+    assert all(
+        a["state"] != "NO_SIGNATURE_DECLARED" for a in payload["assignments"]
+    )
     for assignment in payload["assignments"]:
         if assignment["state"] == "NO_SIGNATURE_DECLARED":
             assert assignment["evidence"] is None
