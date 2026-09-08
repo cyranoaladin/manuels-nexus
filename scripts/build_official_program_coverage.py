@@ -87,6 +87,39 @@ def _refuse_wording_drift(
         )
 
 
+
+#: Les six champs de sources que la revue a nommes pour chaque atome.
+SOURCE_FIELDS = (
+    "course_sources", "method_sources", "exercise_sources",
+    "correction_sources", "assessment_sources", "remediation_sources",
+)
+
+
+def _dead_evidence(rows: list[dict[str, Any]]) -> list[dict[str, str]]:
+    """Les preuves nommees par la revue qui n'existent plus sur le disque.
+
+    Une matrice de couverture qui cite un fichier disparu ne prouve rien : elle
+    l'affirme. Le producteur ne peut pas reparer une revue -- retrouver le
+    fichier qui a remplace celui-la est un jugement editorial -- mais il peut
+    refuser de laisser l'affirmation passer pour une preuve, en nommant chaque
+    chemin mort et l'atome qui s'en reclame.
+    """
+
+    morts = []
+    for row in rows:
+        for field in SOURCE_FIELDS:
+            for relative in row.get(field) or []:
+                if not (ROOT / relative).exists():
+                    morts.append({
+                        "atom_id": row["atom_id"],
+                        "manual": row.get("manual"),
+                        "chapter": row.get("chapter"),
+                        "field": field,
+                        "path": relative,
+                    })
+    return sorted(morts, key=lambda m: (m["atom_id"], m["field"], m["path"]))
+
+
 def build_payload() -> dict[str, Any]:
     atoms = json.loads(ATOMS_PATH.read_text(encoding="utf-8"))["atoms"]
     rows = [
@@ -129,9 +162,11 @@ def build_payload() -> dict[str, Any]:
             "full_atoms": sum(row["coverage_status"] == "FULL" for row in rows),
             "wrong_year": 0,
             "unsupported_claims": 0,
+            "COVERAGE_EVIDENCE_PATHS_MISSING": len(_dead_evidence(rows)),
             "by_status": dict(sorted(states.items())),
             "by_manual": by_manual,
         },
+        "coverage_evidence_paths_missing": _dead_evidence(rows),
         "rows": rows,
     }
 

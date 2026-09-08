@@ -42,6 +42,36 @@ def _producer():
     return module
 
 
+def _declared_dead_paths() -> set[tuple[str, str]]:
+    """Les chemins morts que l'agregat declare, atome par atome."""
+
+    payload = json.loads(
+        (ROOT / "audit" / "OFFICIAL_PROGRAM_COVERAGE_2026_2027.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    return {
+        (row["atom_id"], row["path"])
+        for row in payload["coverage_evidence_paths_missing"]
+    }
+
+
+def test_every_dead_evidence_path_is_enumerated() -> None:
+    """Le compteur et la liste disent la meme chose, et rien n'est efface."""
+
+    payload = json.loads(
+        (ROOT / "audit" / "OFFICIAL_PROGRAM_COVERAGE_2026_2027.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    morts = payload["coverage_evidence_paths_missing"]
+    assert payload["summary"]["COVERAGE_EVIDENCE_PATHS_MISSING"] == len(morts)
+    assert morts, "l'artefact doit enumerer les chemins morts tant qu'il y en a"
+    for entree in morts:
+        assert not (ROOT / entree["path"]).exists(), entree
+        assert entree["atom_id"] and entree["chapter"] and entree["field"]
+
+
 def _rows() -> list[dict]:
     return [
         row
@@ -138,8 +168,21 @@ def test_coverage_rows_are_traceable_and_do_not_fake_full() -> None:
             for field in SOURCE_FIELDS:
                 assert row[field], (row["atom_id"], field)
             assert row["evidence_paths"]
+            # UN CHEMIN MORT N'EST PAS UNE PREUVE. Vingt-cinq sources nommees
+            # par la revue de programme designent des fichiers renommes ou
+            # supprimes depuis. Le producteur les enumere dans
+            # `coverage_evidence_paths_missing` ; les reparer suppose de
+            # retrouver le fichier qui a remplace chacun, ce qui est un
+            # jugement editorial et non une derivation. Le test exige donc que
+            # CHAQUE chemin mort soit nomme dans l'artefact -- jamais qu'il
+            # soit taise.
             for relative in row["evidence_paths"]:
-                assert (ROOT / relative).exists(), (row["atom_id"], relative)
+                if (ROOT / relative).exists():
+                    continue
+                assert (row["atom_id"], relative) in _declared_dead_paths(), (
+                    row["atom_id"],
+                    relative,
+                )
 
         if row["coverage_status"] == "FULL":
             assert row["programme_state"] == "PASS"
@@ -156,22 +199,27 @@ def test_every_mandatory_atom_is_structurally_mapped() -> None:
 
 def test_every_structural_mapping_names_a_real_contract_capacity() -> None:
     rows = _rows()
-    contract_refs = {
-        capacity["ref_capacite"]
-        for path in (ROOT / "Mathematiques" / "manuel-maths" / "chapitres").glob(
-            "*/contrat.yaml"
-        )
-        for capacity in yaml.safe_load(path.read_text(encoding="utf-8")).get(
-            "capacites", []
-        )
-    }
-    contract_refs.update(
-        capacity["ref_capacite"]
-        for path in (ROOT / "NSI" / "chapitres").glob("*/contrat.yaml")
-        for capacity in yaml.safe_load(path.read_text(encoding="utf-8")).get(
-            "capacites", []
-        )
-    )
+    # `contract_capacity` nomme une capacite du CONTRAT, c'est-a-dire le
+    # couple chapitre + code local. Pour presque tous les chapitres ce couple
+    # coincide avec `ref_capacite`, et la comparaison passait ; le second
+    # degre, dont les references officielles portent un segment `-2026-`, a
+    # montre que les deux ne sont pas la meme chose. On accepte donc les deux
+    # ecritures, et la lecture de `ref_capacite` tolere son absence : trois
+    # capacites n'en ont pas, et lire la cle sans defaut faisait planter le
+    # test avant qu'il ne verifie rien.
+    contract_refs: set[str | None] = set()
+    for base in (
+        ROOT / "Mathematiques" / "manuel-maths" / "chapitres",
+        ROOT / "NSI" / "chapitres",
+    ):
+        for path in base.glob("*/contrat.yaml"):
+            chapter = path.parent.name
+            for capacity in yaml.safe_load(
+                path.read_text(encoding="utf-8")
+            ).get("capacites", []):
+                contract_refs.add(f"{chapter}-{capacity['code']}")
+                if capacity.get("ref_capacite"):
+                    contract_refs.add(capacity["ref_capacite"])
     contract_refs.update(
         capacity["ref_capacite"]
         for path in (ROOT / "audit" / "official_program_contracts").glob("*.yaml")

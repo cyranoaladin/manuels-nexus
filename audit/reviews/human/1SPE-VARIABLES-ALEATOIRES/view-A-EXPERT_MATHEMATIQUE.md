@@ -14,7 +14,7 @@ Chapitre `1SPE-VARIABLES-ALEATOIRES` · manuel `1SPE` (Première, Spécialité m
 
 - L'unite de decision est le CHAPITRE : 10 chapitres x 2 roles = 20 verdicts, pas des centaines de signatures objet par objet.
 - Aucun humain n'a encore approuve ce chapitre : REVIEW_DELTA_BASELINE = NONE. Le perimetre de revue est le CHAPITRE COURANT ENTIER. Les listes ci-dessous dirigent l'attention, elles ne reduisent pas le perimetre.
-- CONTENT_APPROVAL_BINDS_TO = SEMANTIC_DIGEST (`sha256:c68406a0ef2cad2dc64b773691e7be431e62d11f149b1783e9b94fa48974fc7c`) ; l'approbation graphique releve de la porte D7, independante.
+- CONTENT_APPROVAL_BINDS_TO = SEMANTIC_DIGEST (`sha256:9671ff88e04e5895e6dd14df39f8f9edf56a0bab9f059543dd6af701ed5e125c`) ; l'approbation graphique releve de la porte D7, independante.
 - Verdicts autorises, a rendre dans le packet JSON canonique et jamais dans cette vue : `APPROVED` / `CHANGES_REQUESTED` / `REJECTED`.
 - Cette vue ne porte aucune decision et ne nomme personne : l'assignation du role reste `PENDING_UNASSIGNED`, l'etat du packet reste `PENDING_UNASSIGNED`.
 
@@ -22,9 +22,9 @@ Chapitre `1SPE-VARIABLES-ALEATOIRES` · manuel `1SPE` (Première, Spécialité m
 | --- | --- |
 | Objets du chapitre dans le packet | 167 |
 | Empreinte de l'ensemble d'objets | `sha256:32b2dd9bff3bc3c7c82007986ef3a2009ee89d1aecb9fcad87cf1670af00490e` |
-| Empreinte semantique liee a l'approbation | `sha256:c68406a0ef2cad2dc64b773691e7be431e62d11f149b1783e9b94fa48974fc7c` |
-| Empreinte du packet | `sha256:9943fd16ddace27b7af542496caeb9d5df3fe28e5e35da0a28db632ce1e0d34b` |
-| Revision du depot gelee dans le packet | `bdb5edb33b59fceb3e69105f8ce108712b0d051c` |
+| Empreinte semantique liee a l'approbation | `sha256:9671ff88e04e5895e6dd14df39f8f9edf56a0bab9f059543dd6af701ed5e125c` |
+| Empreinte du packet | `sha256:ff77013a1b63851c12ddd5bf605eaa9ebaf3f30e964130f51f4cea95c52ab263` |
+| Revision du depot gelee dans le packet | `0c7a470fc8c16372851569be28b650c76eb49d6c` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel

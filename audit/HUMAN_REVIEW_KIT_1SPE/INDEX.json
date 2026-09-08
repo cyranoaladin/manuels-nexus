@@ -20,8 +20,8 @@
           "packet": "audit/reviews/human/1SPE-PROBA-COND/packet-A-EXPERT_MATHEMATIQUE.json",
           "role": "A-EXPERT_MATHEMATIQUE",
           "since_reviewed_kit": {
-            "state": "UNCHANGED_SINCE_REVIEW",
-            "why": "aucune phrase de cette vue n'a change depuis le kit examine"
+            "state": "MUST_BE_RE_READ",
+            "why": "cette vue a change depuis le kit examine"
           },
           "source_view": "audit/reviews/human/1SPE-PROBA-COND/view-A-EXPERT_MATHEMATIQUE.md",
           "state": "PENDING_UNASSIGNED",
@@ -61,8 +61,8 @@
           "packet": "audit/reviews/human/1SPE-SUITES/packet-A-EXPERT_MATHEMATIQUE.json",
           "role": "A-EXPERT_MATHEMATIQUE",
           "since_reviewed_kit": {
-            "state": "UNCHANGED_SINCE_REVIEW",
-            "why": "aucune phrase de cette vue n'a change depuis le kit examine"
+            "state": "MUST_BE_RE_READ",
+            "why": "cette vue a change depuis le kit examine"
           },
           "source_view": "audit/reviews/human/1SPE-SUITES/view-A-EXPERT_MATHEMATIQUE.md",
           "state": "PENDING_UNASSIGNED",
@@ -102,8 +102,8 @@
           "packet": "audit/reviews/human/1SPE-TRIGONOMETRIE/packet-A-EXPERT_MATHEMATIQUE.json",
           "role": "A-EXPERT_MATHEMATIQUE",
           "since_reviewed_kit": {
-            "state": "UNCHANGED_SINCE_REVIEW",
-            "why": "aucune phrase de cette vue n'a change depuis le kit examine"
+            "state": "MUST_BE_RE_READ",
+            "why": "cette vue a change depuis le kit examine"
           },
           "source_view": "audit/reviews/human/1SPE-TRIGONOMETRIE/view-A-EXPERT_MATHEMATIQUE.md",
           "state": "PENDING_UNASSIGNED",
@@ -115,8 +115,8 @@
           "packet": "audit/reviews/human/1SPE-TRIGONOMETRIE/packet-B-EXPERT_PROGRAMME_PEDAGOGIE.json",
           "role": "B-EXPERT_PROGRAMME_PEDAGOGIE",
           "since_reviewed_kit": {
-            "state": "UNCHANGED_SINCE_REVIEW",
-            "why": "aucune phrase de cette vue n'a change depuis le kit examine"
+            "state": "MUST_BE_RE_READ",
+            "why": "cette vue a change depuis le kit examine"
           },
           "source_view": "audit/reviews/human/1SPE-TRIGONOMETRIE/view-B-EXPERT_PROGRAMME_PEDAGOGIE.md",
           "state": "PENDING_UNASSIGNED",
@@ -184,8 +184,8 @@
           "packet": "audit/reviews/human/1SPE-DERIVATION-GLOBAL/packet-A-EXPERT_MATHEMATIQUE.json",
           "role": "A-EXPERT_MATHEMATIQUE",
           "since_reviewed_kit": {
-            "state": "UNCHANGED_SINCE_REVIEW",
-            "why": "aucune phrase de cette vue n'a change depuis le kit examine"
+            "state": "MUST_BE_RE_READ",
+            "why": "cette vue a change depuis le kit examine"
           },
           "source_view": "audit/reviews/human/1SPE-DERIVATION-GLOBAL/view-A-EXPERT_MATHEMATIQUE.md",
           "state": "PENDING_UNASSIGNED",
@@ -225,8 +225,8 @@
           "packet": "audit/reviews/human/1SPE-DERIVATION-LOCAL/packet-A-EXPERT_MATHEMATIQUE.json",
           "role": "A-EXPERT_MATHEMATIQUE",
           "since_reviewed_kit": {
-            "state": "UNCHANGED_SINCE_REVIEW",
-            "why": "aucune phrase de cette vue n'a change depuis le kit examine"
+            "state": "MUST_BE_RE_READ",
+            "why": "cette vue a change depuis le kit examine"
           },
           "source_view": "audit/reviews/human/1SPE-DERIVATION-LOCAL/view-A-EXPERT_MATHEMATIQUE.md",
           "state": "PENDING_UNASSIGNED",
@@ -266,8 +266,8 @@
           "packet": "audit/reviews/human/1SPE-SECOND-DEGRE/packet-A-EXPERT_MATHEMATIQUE.json",
           "role": "A-EXPERT_MATHEMATIQUE",
           "since_reviewed_kit": {
-            "state": "UNCHANGED_SINCE_REVIEW",
-            "why": "aucune phrase de cette vue n'a change depuis le kit examine"
+            "state": "MUST_BE_RE_READ",
+            "why": "cette vue a change depuis le kit examine"
           },
           "source_view": "audit/reviews/human/1SPE-SECOND-DEGRE/view-A-EXPERT_MATHEMATIQUE.md",
           "state": "PENDING_UNASSIGNED",
@@ -307,8 +307,8 @@
           "packet": "audit/reviews/human/1SPE-EXPONENTIELLE/packet-A-EXPERT_MATHEMATIQUE.json",
           "role": "A-EXPERT_MATHEMATIQUE",
           "since_reviewed_kit": {
-            "state": "UNCHANGED_SINCE_REVIEW",
-            "why": "aucune phrase de cette vue n'a change depuis le kit examine"
+            "state": "MUST_BE_RE_READ",
+            "why": "cette vue a change depuis le kit examine"
           },
           "source_view": "audit/reviews/human/1SPE-EXPONENTIELLE/view-A-EXPERT_MATHEMATIQUE.md",
           "state": "PENDING_UNASSIGNED",
@@ -348,8 +348,8 @@
           "packet": "audit/reviews/human/1SPE-PRODUIT-SCALAIRE/packet-A-EXPERT_MATHEMATIQUE.json",
           "role": "A-EXPERT_MATHEMATIQUE",
           "since_reviewed_kit": {
-            "state": "UNCHANGED_SINCE_REVIEW",
-            "why": "aucune phrase de cette vue n'a change depuis le kit examine"
+            "state": "MUST_BE_RE_READ",
+            "why": "cette vue a change depuis le kit examine"
           },
           "source_view": "audit/reviews/human/1SPE-PRODUIT-SCALAIRE/view-A-EXPERT_MATHEMATIQUE.md",
           "state": "PENDING_UNASSIGNED",
@@ -374,12 +374,9 @@
     {
       "bareme": {
         "assessment_questions": 34,
-        "has_mandatory_decision": true,
+        "has_mandatory_decision": false,
         "judgement_required": 34,
-        "mandatory_decisions": [
-          "1SPE-GEOREP-EV-A",
-          "1SPE-GEOREP-EV-B"
-        ]
+        "mandatory_decisions": []
       },
       "chapter": "1SPE-GEOMETRIE-REPEREE",
       "object_count": 147,
@@ -392,8 +389,8 @@
           "packet": "audit/reviews/human/1SPE-GEOMETRIE-REPEREE/packet-A-EXPERT_MATHEMATIQUE.json",
           "role": "A-EXPERT_MATHEMATIQUE",
           "since_reviewed_kit": {
-            "state": "UNCHANGED_SINCE_REVIEW",
-            "why": "aucune phrase de cette vue n'a change depuis le kit examine"
+            "state": "MUST_BE_RE_READ",
+            "why": "cette vue a change depuis le kit examine"
           },
           "source_view": "audit/reviews/human/1SPE-GEOMETRIE-REPEREE/view-A-EXPERT_MATHEMATIQUE.md",
           "state": "PENDING_UNASSIGNED",
@@ -428,10 +425,10 @@
     "BAREME_JUDGEMENTS_REQUIRED": 77,
     "CHAPTERS": 10,
     "CHAPTERS_WITHOUT_BOTH_ROLES": 0,
-    "CHAPTERS_WITH_MANDATORY_DECISION": 1,
+    "CHAPTERS_WITH_MANDATORY_DECISION": 0,
     "EXPECTED_VERDICTS": 20,
-    "PACKETS_TO_RE_READ": 10,
-    "PACKETS_UNCHANGED_SINCE_REVIEW": 10,
+    "PACKETS_TO_RE_READ": 20,
+    "PACKETS_UNCHANGED_SINCE_REVIEW": 0,
     "PACKETS_WITH_UNKNOWN_READING_DEBT": 0,
     "PENDING_VERDICTS": 19,
     "VIEWS_WRITTEN": 20
