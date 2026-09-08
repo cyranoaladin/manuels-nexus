@@ -65,3 +65,10 @@ mutations for these omissions failed before correction. The final index module
 run passed 38 tests; Ruff passed. These are development checks, not full-suite
 or release evidence. The former temporary capture predates these amendments
 and must not be presented as current.
+
+Actual-reading amendment: embedded exercise/correction environments in TDs or
+courses require alignment review. A reviewer can establish an additional
+applicable dimension (for example a missing requested graph); its PENDING
+state blocks closure. Three regressions failed before correction, then all41
+index tests passed in1.61s. The small diff was independently counter-reviewed
+by /root/review_forensics; no blocking finding remained. No human approval.

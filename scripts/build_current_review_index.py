@@ -218,8 +218,9 @@ def _required_dimensions(manual: str, meta: dict[str, Any], text: str, dependenc
         # Chapter-level dependencies are intentionally conservative. A review
         # must examine applicability before declaring a source has no code.
         dimensions.append("CODE_EXECUTION_REVIEW")
-    if meta.get("type_objet") in {"exercice", "corrige", "evaluation", "corrige_evaluation",
-                                  "coup_de_pouce", "amenagee", "remediation"}:
+    if (meta.get("type_objet") in {"exercice", "corrige", "evaluation", "corrige_evaluation",
+                                   "coup_de_pouce", "amenagee", "remediation"}
+            or any(token in text for token in ("\\begin{exercice}", "\\begin{corrige}"))):
         dimensions.append("CORRECTION_ALIGNMENT_REVIEW")
     if any(token in text for token in ("\\includegraphics", "\\begin{tikzpicture}")):
         dimensions.append("FIGURE_REVIEW")
@@ -272,6 +273,10 @@ def _review_evidence(records, objects):
         for dimension, verdict in dimensions.items():
             if row["reviews"].get(dimension, {}).get("review_id"):
                 raise ValueError(f"ambiguous current reviews for {row['object_id']}/{dimension}")
+            # A reviewer can discover applicability that syntax alone misses,
+            # such as a requested figure absent from the source altogether.
+            if dimension not in row["required_review_dimensions"]:
+                row["required_review_dimensions"].append(dimension)
             row["reviews"][dimension] = {**verdict, "review_id": review_id,
                                          "reviewer_actor_id": actor["actor_id"]}
     return rejected

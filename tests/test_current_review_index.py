@@ -112,6 +112,26 @@ def test_digest_bound_review_closes_only_machine_review(gate, corpus):
     assert result["objects"][0]["human_approval"] == "PENDING"
 
 
+@pytest.mark.parametrize("kind", ["td", "cours"])
+def test_embedded_correction_requires_alignment_review(gate, kind):
+    dimensions = gate._required_dimensions(
+        "1SPE", {"type_objet": kind},
+        r"\begin{exercice}{Q1} Tracer la courbe.\end{exercice}"
+        r"\begin{corrige}{Q1} Sa description.\end{corrige}",
+    )
+    assert "CORRECTION_ALIGNMENT_REVIEW" in dimensions
+
+
+def test_finding_in_an_additional_review_dimension_prevents_closure(gate, corpus):
+    review = review_for(build(gate, corpus))
+    review["dimensions"]["FIGURE_REVIEW"] = {
+        "state": "PENDING", "rationale": "The requested graph is missing."
+    }
+    result = build(gate, corpus, reviews=[review])
+    assert result["summary"]["NEW_AUTHORING_REVIEW_PENDING"] == 1
+    assert "FIGURE_REVIEW" in result["objects"][0]["required_review_dimensions"]
+
+
 def test_changed_sign_invalidates_the_old_review(gate, corpus):
     review = review_for(build(gate, corpus))
     source = corpus[1]
