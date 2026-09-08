@@ -2,20 +2,22 @@
 
 \section{Propriétés du produit scalaire}
 
-\margeAppui{Le produit scalaire vérifie des propriétés algébriques remarquables qui permettent de developper et factoriser des expressions vectorielles, exactement comme les nombres réels.}
+Le plan est rapporté à un repère orthonormé.
 
-\propriete[Symetrie]{
+\margeAppui{Le produit scalaire vérifie des propriétés algébriques remarquables qui permettent de développer et factoriser des expressions vectorielles, exactement comme les nombres réels.}
+
+\propriete[Symétrie]{
 Pour tous vecteurs $\vec{u}$ et $\vec{v}$ :
 \[
 \vec{u} \cdot \vec{v} = \vec{v} \cdot \vec{u}.
 \]
 }
 
-\propriete[Bilinearite]{
+\propriete[Bilinéarité]{
 Pour tous vecteurs $\vec{u}$, $\vec{v}$, $\vec{w}$ et tout réel $\lambda$ :
 \begin{itemize}
-  \item $(\vec{u} + \vec{v}) \cdot \vec{w} = \vec{u} \cdot \vec{w} + \vec{v} \cdot \vec{w}$ \quad (distributivite) ;
-  \item $(\lambda \vec{u}) \cdot \vec{v} = \lambda (\vec{u} \cdot \vec{v})$ \quad (homogeneite).
+  \item $(\vec{u} + \vec{v}) \cdot \vec{w} = \vec{u} \cdot \vec{w} + \vec{v} \cdot \vec{w}$ \quad (distributivité) ;
+  \item $(\lambda \vec{u}) \cdot \vec{v} = \lambda (\vec{u} \cdot \vec{v})$ \quad (homogénéité).
 \end{itemize}
 }
 
@@ -41,7 +43,7 @@ Pour tout vecteur $\vec{u}$ :
 \[
 \vec{u} \cdot \vec{u} = \|\vec{u}\|^2.
 \]
-En particulier, si $\vec{u}\begin{pmatrix} x \\ y \end{pmatrix}$ dans un repere orthonorme : $\|\vec{u}\|^2 = x^2 + y^2$.
+En particulier, si $\vec{u}\begin{pmatrix} x \\ y \end{pmatrix}$ dans un repère orthonormé : $\|\vec{u}\|^2 = x^2 + y^2$.
 }
 
 % BEGIN-VERIFY
@@ -50,7 +52,7 @@ En particulier, si $\vec{u}\begin{pmatrix} x \\ y \end{pmatrix}$ dans un repere 
 % assert simplify(x*x + y*y - (x**2 + y**2)) == 0
 % END-VERIFY
 
-\theoreme[Identites remarquables vectorielles]{
+\theoreme[Identités remarquables vectorielles]{
 Pour tous vecteurs $\vec{u}$ et $\vec{v}$ :
 \begin{align}
 \|\vec{u} + \vec{v}\|^2 &= \|\vec{u}\|^2 + 2\,\vec{u} \cdot \vec{v} + \|\vec{v}\|^2 \\
@@ -77,19 +79,19 @@ Pour tous vecteurs $\vec{u}$ et $\vec{v}$ :
 % END-VERIFY
 
 \demonstration{
-\textbf{Démonstration de l'expression analytique (exigible).}
+\textbf{Justification de l'expression analytique.}
 
-Soient $\vec{u}\begin{pmatrix} x_1 \\ y_1 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} x_2 \\ y_2 \end{pmatrix}$ dans un repere orthonorme $(O; \vec{i}, \vec{j})$.
+Soient $\vec{u}\begin{pmatrix} x_1 \\ y_1 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} x_2 \\ y_2 \end{pmatrix}$ dans un repère orthonormé $(O; \vec{i}, \vec{j})$.
 
-On ecrit $\vec{u} = x_1 \vec{i} + y_1 \vec{j}$ et $\vec{v} = x_2 \vec{i} + y_2 \vec{j}$.
+On écrit $\vec{u} = x_1 \vec{i} + y_1 \vec{j}$ et $\vec{v} = x_2 \vec{i} + y_2 \vec{j}$.
 
-Par bilinearite du produit scalaire :
+Par bilinéarité du produit scalaire :
 \begin{align*}
 \vec{u} \cdot \vec{v} &= (x_1 \vec{i} + y_1 \vec{j}) \cdot (x_2 \vec{i} + y_2 \vec{j}) \\
 &= x_1 x_2 (\vec{i} \cdot \vec{i}) + x_1 y_2 (\vec{i} \cdot \vec{j}) + y_1 x_2 (\vec{j} \cdot \vec{i}) + y_1 y_2 (\vec{j} \cdot \vec{j}).
 \end{align*}
 
-Or le repere est orthonorme : $\vec{i} \cdot \vec{i} = \|\vec{i}\|^2 = 1$, $\vec{j} \cdot \vec{j} = 1$ et $\vec{i} \cdot \vec{j} = 0$ (orthogonalite).
+Or le repère est orthonormé : $\vec{i} \cdot \vec{i} = \|\vec{i}\|^2 = 1$, $\vec{j} \cdot \vec{j} = 1$ et $\vec{i} \cdot \vec{j} = 0$ (orthogonalité).
 
 Donc $\vec{u} \cdot \vec{v} = x_1 x_2 + y_1 y_2$.
 }
@@ -99,7 +101,7 @@ Soient $\vec{u}\begin{pmatrix} 1 \\ 2 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} 
 
 $\vec{u} + \vec{v} = \begin{pmatrix} 4 \\ 1 \end{pmatrix}$, donc $\|\vec{u} + \vec{v}\|^2 = 16 + 1 = 17$ et $\|\vec{u} + \vec{v}\| = \sqrt{17}$.
 
-Vérification par l'identite : $\|\vec{u}\|^2 = 5$, $\|\vec{v}\|^2 = 10$, $\vec{u} \cdot \vec{v} = 3 - 2 = 1$.
+Vérification par l'identité : $\|\vec{u}\|^2 = 5$, $\|\vec{v}\|^2 = 10$, $\vec{u} \cdot \vec{v} = 3 - 2 = 1$.
 $\|\vec{u} + \vec{v}\|^2 = 5 + 2 \times 1 + 10 = 17$. \checkmark
 }
 
@@ -113,11 +115,11 @@ $\|\vec{u} + \vec{v}\|^2 = 5 + 2 \times 1 + 10 = 17$. \checkmark
 % END-VERIFY
 
 \erreurFrequente{
-Écrire $\|\vec{u} + \vec{v}\|^2 = \|\vec{u}\|^2 + \|\vec{v}\|^2$. C'est faux en general : il manque le terme $2\,\vec{u} \cdot \vec{v}$. L'égalité n'est vraie que si $\vec{u} \perp \vec{v}$ (théorème de Pythagore).
+Écrire $\|\vec{u} + \vec{v}\|^2 = \|\vec{u}\|^2 + \|\vec{v}\|^2$. C'est faux en général : il manque le terme $2\,\vec{u} \cdot \vec{v}$. L'égalité n'est vraie que si $\vec{u} \perp \vec{v}$ (théorème de Pythagore).
 }
 
 \erreurFrequente{
-Confondre $(\vec{u} \cdot \vec{v})^2$ et $\vec{u} \cdot \vec{v}$. Le produit scalaire est un réel, son carre est $(\vec{u} \cdot \vec{v})^2$, a ne pas confondre avec $\|\vec{u}\|^2$.
+Confondre $(\vec{u} \cdot \vec{v})^2$ et $\vec{u} \cdot \vec{v}$. Le produit scalaire est un réel, son carré est $(\vec{u} \cdot \vec{v})^2$, à ne pas confondre avec $\|\vec{u}\|^2$.
 }
 
 \erreurFrequente{

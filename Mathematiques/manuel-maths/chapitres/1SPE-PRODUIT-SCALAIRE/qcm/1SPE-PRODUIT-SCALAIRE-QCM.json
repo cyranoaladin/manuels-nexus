@@ -5,7 +5,7 @@
     {
       "id": "Q1",
       "capacite": "C1",
-      "enonce": "Soient $\\vec{u}(3,-2)$ et $\\vec{v}(1,4)$. Que vaut $\\vec{u} \\cdot \\vec{v}$ ?",
+      "enonce": "Dans un repère orthonormé, soient $\\vec{u}(3,-2)$ et $\\vec{v}(1,4)$. Que vaut $\\vec{u} \\cdot \\vec{v}$ ?",
       "options": {
         "A": "$-5$",
         "B": "$5$",
@@ -19,11 +19,11 @@
           "renvoi": "M1"
         },
         "C": {
-          "erreur": "L'élève a change a tort le signe du premier produit et calcule $-3-8=-11$ au lieu de $3-8=-5$.",
+          "erreur": "L'élève a changé à tort le signe du premier produit et calcule $-3-8=-11$ au lieu de $3-8=-5$.",
           "renvoi": "M1"
         },
         "D": {
-          "erreur": "L'élève a oublie le signe négatif de la deuxième composante et calcule $3+8=11$ au lieu de $3+(-8)=-5$.",
+          "erreur": "L'élève a oublié le signe négatif de la deuxième composante et calcule $3+8=11$ au lieu de $3+(-8)=-5$.",
           "renvoi": "M1"
         }
       }
@@ -49,7 +49,7 @@
           "renvoi": "M1; R3"
         },
         "D": {
-          "erreur": "L'élève a utilise a tort $\\cos(\\pi/4)=\\sqrt{2}/2$ a la place de $\\cos(\\pi/3)=1/2$, obtenant $5\\times4\\times\\sqrt{2}/2=10\\sqrt{2}$.",
+          "erreur": "L'élève a utilisé à tort $\\cos(\\pi/4)=\\sqrt{2}/2$ à la place de $\\cos(\\pi/3)=1/2$, obtenant $5\\times4\\times\\sqrt{2}/2=10\\sqrt{2}$.",
           "renvoi": "M1; R3"
         }
       }
@@ -83,7 +83,7 @@
     {
       "id": "Q4",
       "capacite": "C2",
-      "enonce": "$\\Vert\\vec{u}+\\vec{v}\\Vert^2 = ?$",
+      "enonce": "Quelle expression de $\\Vert\\vec{u}+\\vec{v}\\Vert^2$ est vraie pour tous les vecteurs $\\vec u$ et $\\vec v$ ?",
       "options": {
         "A": "$\\Vert\\vec{u}\\Vert^2 + 2\\vec{u}\\cdot\\vec{v} + \\Vert\\vec{v}\\Vert^2$",
         "B": "$\\Vert\\vec{u}\\Vert^2 + \\Vert\\vec{v}\\Vert^2$",
@@ -101,7 +101,7 @@
           "renvoi": "M2"
         },
         "D": {
-          "erreur": "Confusion entre norme du carré de la somme et carré du produit scalaire.",
+          "erreur": "Confusion entre le carré de la norme de la somme et le carré du produit scalaire.",
           "renvoi": "M2"
         }
       }
@@ -109,7 +109,7 @@
     {
       "id": "Q5",
       "capacite": "C2",
-      "enonce": "$\\vec{u} \\cdot \\vec{u} = ?$",
+      "enonce": "Quelle expression de $\\vec u\\cdot\\vec u$ est vraie pour tout vecteur $\\vec u$ ?",
       "options": {
         "A": "$\\Vert\\vec{u}\\Vert$",
         "B": "$\\Vert\\vec{u}\\Vert^2$",
@@ -123,7 +123,7 @@
           "renvoi": "M2"
         },
         "C": {
-          "erreur": "L'élève a interprete $\\vec u\\cdot\\vec u$ comme la somme de deux exemplaires de la norme et additionne deux normes, d'ou $2\\Vert\\vec u\\Vert$ au lieu de $\\Vert\\vec u\\Vert^2$.",
+          "erreur": "L'élève a interprété $\\vec u\\cdot\\vec u$ comme la somme de deux exemplaires de la norme et additionne deux normes, d'où $2\\Vert\\vec u\\Vert$ au lieu de $\\Vert\\vec u\\Vert^2$.",
           "renvoi": "M2"
         },
         "D": {
@@ -149,7 +149,7 @@
           "renvoi": "M2"
         },
         "B": {
-          "erreur": "L'élève a transforme l'inégalité triangulaire $\\Vert\\vec u+\\vec v\\Vert\\leqslant\\Vert\\vec u\\Vert+\\Vert\\vec v\\Vert$ en égalité et obtenu $3+4=7$ ; l'égalité n'est pas justifiee ici.",
+          "erreur": "L'élève a transformé l'inégalité triangulaire $\\Vert\\vec u+\\vec v\\Vert\\leqslant\\Vert\\vec u\\Vert+\\Vert\\vec v\\Vert$ en égalité et obtenu $3+4=7$ ; l'égalité n'est pas justifiée ici.",
           "renvoi": "M2"
         },
         "D": {
@@ -175,7 +175,7 @@
           "renvoi": "M3"
         },
         "B": {
-          "erreur": "Un produit scalaire négatif caractérise un angle obtus, pas un angle droit ; l'orthogonalite exige un produit scalaire nul.",
+          "erreur": "Un produit scalaire négatif caractérise un angle obtus, pas un angle droit ; l'orthogonalité exige un produit scalaire nul.",
           "renvoi": "M3"
         },
         "C": {
@@ -187,7 +187,7 @@
     {
       "id": "Q8",
       "capacite": "C3",
-      "enonce": "Les vecteurs $\\vec{u}(2,3)$ et $\\vec{v}(3,-2)$ sont :",
+      "enonce": "Dans un repère orthonormé, les vecteurs $\\vec{u}(2,3)$ et $\\vec{v}(3,-2)$ sont :",
       "options": {
         "A": "orthogonaux",
         "B": "colinéaires",
@@ -205,7 +205,7 @@
           "renvoi": "M3"
         },
         "D": {
-          "erreur": "Des vecteurs de sens contraire sont colineaires avec un coefficient négatif ; ici leur determinant vaut $-13 \\neq 0$, donc ils ne sont pas colineaires.",
+          "erreur": "Des vecteurs de sens contraire sont colinéaires avec un coefficient négatif ; ici leur déterminant vaut $-13 \\neq 0$, donc ils ne sont pas colinéaires.",
           "renvoi": "M3"
         }
       }
@@ -213,7 +213,7 @@
     {
       "id": "Q9",
       "capacite": "C3",
-      "enonce": "Quel est l'angle géométrique entre les vecteurs $(1,0)$ et $(1,1)$ ?",
+      "enonce": "Dans un repère orthonormé, quel est l'angle géométrique entre les vecteurs $(1,0)$ et $(1,1)$ ?",
       "options": {
         "A": "$\\dfrac{\\pi}{6}$",
         "B": "$\\dfrac{\\pi}{4}$",
@@ -223,11 +223,11 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "L'élève a utilise a tort $\\tan(\\theta)=1/\\sqrt{3}$, ce qui conduit a $\\theta=\\pi/6$ ; les coordonnées de $(1,1)$ donnent en realite $\\tan(\\theta)=1$.",
+          "erreur": "L'élève a utilisé à tort $\\tan(\\theta)=1/\\sqrt{3}$, ce qui conduit à $\\theta=\\pi/6$ ; les coordonnées de $(1,1)$ donnent en réalité $\\tan(\\theta)=1$.",
           "renvoi": "M3; R3"
         },
         "C": {
-          "erreur": "L'élève a utilise a tort $\\tan(\\theta)=\\sqrt{3}$, ce qui conduit a $\\theta=\\pi/3$ ; la pente du vecteur $(1,1)$ vaut $1$.",
+          "erreur": "L'élève a utilisé à tort $\\tan(\\theta)=\\sqrt{3}$, ce qui conduit à $\\theta=\\pi/3$ ; la pente du vecteur $(1,1)$ vaut $1$.",
           "renvoi": "M3; R3"
         },
         "D": {
@@ -239,7 +239,7 @@
     {
       "id": "Q10",
       "capacite": "C4",
-      "enonce": "Un point $M$ appartient à la médiatrice du segment $[AB]$ si et seulement si :",
+      "enonce": "Soient deux points $A\\neq B$. Quelle condition caractérise, pour tout point $M$, son appartenance à la médiatrice du segment $[AB]$ ?",
       "options": {
         "A": "$\\vec{MA} \\cdot \\vec{MB} = 0$",
         "B": "$\\vec{MA} + \\vec{MB} = \\vec{0}$",
@@ -265,7 +265,7 @@
     {
       "id": "Q11",
       "capacite": "C4",
-      "enonce": "Dans un triangle de côtés $a, b$ formant un angle $\\theta$, l'aire est donnée par :",
+      "enonce": "Dans un triangle non aplati $ABC$, on note $a=AB$, $b=AC$ et $\\theta=\\widehat{BAC}\\in]0,\\pi[$. Quelle formule donne l'aire pour tout tel triangle ?",
       "options": {
         "A": "$ab \\cos(\\theta)$",
         "B": "$\\dfrac{1}{2} ab \\cos(\\theta)$",
@@ -279,7 +279,7 @@
           "renvoi": "M4"
         },
         "B": {
-          "erreur": "Cosinus au lieu de sinus.",
+          "erreur": "Le facteur de hauteur utilise le sinus de l'angle intérieur. Les expressions avec sinus et cosinus coïncident pour $\\theta=\\pi/4$, mais pas pour tout triangle.",
           "renvoi": "M4"
         },
         "C": {
@@ -291,7 +291,7 @@
     {
       "id": "Q12",
       "capacite": "C4",
-      "enonce": "Soit $H$ le pied de la hauteur issue de $A$ dans le triangle $ABC$. Quelle relation est exacte ?",
+      "enonce": "Soit $H$ le pied de la hauteur issue de $A$ dans un triangle non aplati $ABC$. Quelle relation est toujours exacte ?",
       "options": {
         "A": "$\\vec{AH} \\cdot \\vec{BC} = 0$",
         "B": "$\\vec{AH} \\cdot \\vec{AB} = 0$",
@@ -317,7 +317,7 @@
     {
       "id": "Q13",
       "capacite": "C5",
-      "enonce": "Quelle est l'expression exacte de la formule d'Al-Kashi ?",
+      "enonce": "Dans un triangle $ABC$, on note $a=BC$, $b=AC$ et $c=AB$. Quelle égalité exprime la formule d'Al-Kashi avec l'angle $A=\\widehat{BAC}$ ?",
       "options": {
         "A": "$a^2 = b^2 + c^2 + 2bc \\cos(A)$",
         "B": "$a^2 = b^2 + c^2 - 2bc \\cos(A)$",
@@ -343,7 +343,7 @@
     {
       "id": "Q14",
       "capacite": "C5",
-      "enonce": "Dans un triangle avec $b=5$, $c=8$ et $\\widehat{A} = \\dfrac{\\pi}{3}$, que vaut $a^2$ ?",
+      "enonce": "Dans un triangle $ABC$, on note $a=BC$, $b=AC$ et $c=AB$. Si $b=5$, $c=8$ et $\\widehat{BAC}=\\dfrac{\\pi}{3}$, que vaut $a^2$ ?",
       "options": {
         "A": "$129$",
         "B": "$89$",
@@ -361,7 +361,7 @@
           "renvoi": "M5"
         },
         "D": {
-          "erreur": "L'élève a calcule le carre de la difference des deux longueurs, $(8-5)^2=9$, au lieu d'appliquer $a^2=b^2+c^2-2bc\\cos(A)$.",
+          "erreur": "L'élève a calculé le carré de la différence des deux longueurs, $(8-5)^2=9$, au lieu d'appliquer $a^2=b^2+c^2-2bc\\cos(A)$.",
           "renvoi": "M5"
         }
       }
@@ -369,7 +369,7 @@
     {
       "id": "Q15",
       "capacite": "C5",
-      "enonce": "Si $\\widehat{A} = \\dfrac{\\pi}{2}$, la formule d'Al-Kashi redonne :",
+      "enonce": "Dans un triangle $ABC$ rectangle en $A$, on note $a=BC$, $b=AC$ et $c=AB$. Quelle égalité est toujours donnée par la formule d'Al-Kashi ?",
       "options": {
         "A": "$a^2 = b^2 - c^2$",
         "B": "$a = b + c$",
@@ -387,7 +387,7 @@
           "renvoi": "M5; R5"
         },
         "C": {
-          "erreur": "L'élève a conserve le terme $2bc$ et l'a pris pour $a^2$ ; lorsque $A=\\pi/2$, le terme $2bc\\cos(A)$ est nul, pas $a^2$.",
+          "erreur": "On obtient $a^2=b^2+c^2$, et non $2bc$ en général. Ces expressions coïncident seulement si $b=c$, pour un triangle rectangle isocèle ; l'égalité proposée n'est donc pas toujours vraie.",
           "renvoi": "M5; R5"
         }
       }

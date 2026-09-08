@@ -1,13 +1,15 @@
 % META: {"id":"1SPE-PRODSCAL-ME-003","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"methode","capacites_codes":["C3"],"status":"generated"}
-\begin{fichemethode}{M3}{Montrer l'orthogonalite ou calculer un angle}
-\quandUtiliser{J'utilise cette méthode lorsque l'énoncé demande de montrer que deux droites ou vecteurs sont perpendiculaires, ou de calculer l'angle entre deux vecteurs.}
+\begin{fichemethode}{M3}{Montrer l'orthogonalité ou calculer un angle}
+\quandUtiliser{Le plan est rapporté à un repère orthonormé.
+J'utilise cette méthode pour montrer que deux vecteurs sont orthogonaux, que deux droites sont perpendiculaires, ou pour calculer un angle géométrique entre deux vecteurs. Pour des droites, je choisis des vecteurs directeurs non nuls.}
 \pasApas{\begin{enumerate}
-  \item Je calcule le produit scalaire $\vec{u} \cdot \vec{v}$ (par coordonnées ou geometriquement).
-  \item \textbf{Pour l'orthogonalite :} je vérifie que $\vec{u} \cdot \vec{v} = 0$.
-  \item \textbf{Pour l'angle :} je calcule $\cos\theta = \dfrac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \times \|\vec{v}\|}$ puis $\theta = \arccos(\cos\theta)$.
-  \item Je vérifie que $\vec{u}
-\neq \vec{0}$ et $\vec{v}
-\neq \vec{0}$ avant de diviser par les normes.
+  \item Je calcule le produit scalaire $\vec{u} \cdot \vec{v}$ (par coordonnées ou géométriquement).
+  \item \textbf{Pour l'orthogonalité :} je vérifie que $\vec{u} \cdot \vec{v} = 0$.
+  \item \textbf{Pour l'angle :} je vérifie d'abord que j'ai deux vecteurs non nuls.
+  Leur angle géométrique $\theta\in[0,\pi]$ vérifie
+  $\cos\theta = \dfrac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \times \|\vec{v}\|}$,
+  puis $\theta = \arccos(\cos\theta)$.
+  \item Si l'un des vecteurs est nul, le produit scalaire vaut $0$, mais l'angle entre les deux vecteurs n'est pas défini.
 \end{enumerate}}
 \exempleRedige{Montrons que $\vec{u}\begin{pmatrix} 3 \\ 2 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} -4 \\ 6 \end{pmatrix}$ sont orthogonaux.
 \commentaireMarge{Étape 1 : calcul du produit scalaire.}
@@ -15,11 +17,23 @@ $\vec{u} \cdot \vec{v} = 3 \times (-4) + 2 \times 6 = -12 + 12 = 0$.
 \commentaireMarge{Étape 2 : conclusion.}
 Comme $\vec{u} \cdot \vec{v} = 0$, les vecteurs $\vec{u}$ et $\vec{v}$ sont orthogonaux.}
 \pieges{\begin{itemize}
-  \item Conclure que deux vecteurs sont paralleles si $\vec{u} \cdot \vec{v}
+  \item Conclure que deux vecteurs sont parallèles si $\vec{u} \cdot \vec{v}
 \neq 0$.
   \item Oublier de vérifier que les vecteurs sont non nuls pour le calcul d'angle.
   \item Confondre $\cos\theta$ et $\theta$ : il faut passer par $\arccos$.
+  \item Confondre cet angle géométrique avec un angle orienté : le cosinus ne détermine pas le signe d'un angle orienté.
 \end{itemize}}
-\verifier{Pour l'orthogonalite, je vérifie en faisant un dessin rapide ou en utilisant la condition $x_1 x_2 + y_1 y_2 = 0$.}
+\verifier{Un dessin peut signaler une incohérence, mais le calcul exact justifie l'orthogonalité : dans le repère orthonormé, je contrôle $x_1 x_2 + y_1 y_2 = 0$.}
 \sEntrainer{\refExos{M3}}
 \end{fichemethode}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, acos, pi, simplify
+% u, v = Matrix([3,2]), Matrix([-4,6])
+% assert u.dot(v) == 0 and u.norm() > 0 and v.norm() > 0
+% u, v = Matrix([1,1]), Matrix([1,0])
+% theta = acos(u.dot(v)/(u.norm()*v.norm()))
+% assert simplify(theta-pi/4) == 0
+% assert acos(1) == 0 and acos(-1) == pi
+% assert Matrix([0,0]).dot(v) == 0
+% END-VERIFY
