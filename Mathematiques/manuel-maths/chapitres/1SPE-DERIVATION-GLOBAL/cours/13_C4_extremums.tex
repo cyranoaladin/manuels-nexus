@@ -1,6 +1,6 @@
 % META: {"id":"1SPE-DERGLOBAL-COURS-C4","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"cours","capacites_codes":["C4"],"status":"generated"}
 
-\sectionCapacite{Extremums d'une fonction}{Je sais trouver les extremums d'une fonction en annulant sa dérivée.}
+\sectionCapacite{Extremums d'une fonction}{Je sais déterminer les extremums à partir des variations et examiner les bornes du domaine.}
 
 % ── Définitions ──────────────────────────────────────────────────────────────
 
@@ -9,12 +9,14 @@ Soit $f$ une fonction définie sur un intervalle $I$ et $a \in I$.
 
 \begin{itemize}
   \item $f$ admet un \textbf{maximum local} en $a$ si $f(x) \leq f(a)$ pour tout $x$
-        au voisinage de $a$.
+        appartenant à $I$ et assez proche de $a$.
   \item $f$ admet un \textbf{minimum local} en $a$ si $f(x) \geq f(a)$ pour tout $x$
-        au voisinage de $a$.
+        appartenant à $I$ et assez proche de $a$.
 \end{itemize}
 
-On dit que $f(a)$ est un \textbf{extremum local} de $f$.
+On dit que $f(a)$ est un \textbf{extremum local} de $f$. Les inégalités sont
+larges : ces extremums peuvent être non stricts. Une fonction constante
+admet un maximum et un minimum en chacun de ses points.
 \end{nxdef}
 
 \begin{nxdef}[Extremum global]
@@ -30,33 +32,50 @@ qui répond au problème.}
 % ── Théorème principal ───────────────────────────────────────────────────────
 
 \begin{nxthm}[Condition nécessaire d'extremum]
-Si $f$ est dérivable en $a$ et admet un extremum local en $a$, alors
+Si $a$ est un point intérieur de l'intervalle de définition, si $f$ est
+dérivable en $a$ et y admet un extremum local, alors
 \[
   f'(a) = 0.
 \]
 \end{nxthm}
 
+Au voisinage d'un maximum intérieur, le taux de variation est négatif ou nul
+pour un accroissement positif, et positif ou nul pour un accroissement négatif.
+Si les deux taux tendent vers un même réel $f'(a)$, ce réel est à la fois
+positif ou nul et négatif ou nul : il vaut $0$. Au minimum, les signes sont inversés.
+
+\contreexemple{L'hypothèse de point intérieur est indispensable. Pour
+$f(x)=x$ sur $[0\,;\,1]$, le minimum global vaut $f(0)=0$ et le maximum global
+vaut $f(1)=1$, aux bornes. Pourtant, la fonction affine a $f'(x)=1$.
+Il faut donc examiner les bornes incluses du domaine pour une recherche globale.}
+
 \erreurFrequente{La réciproque est \textbf{fausse} : $f'(a)=0$ ne garantit pas
-l'existence d'un extremum en $a$. Il faut vérifier le changement de signe de
-$f'$ autour de $a$.}
+l'existence d'un extremum en $a$. On étudie les variations de $f$ pour conclure.}
 
 % ── Propriété : critère du changement de signe ───────────────────────────────
 
 \begin{nxprop}[Critère du changement de signe]
-Soit $f$ dérivable sur un intervalle $I$ et $a \in I$ tel que $f'(a)=0$.
+Soit $f$ dérivable sur un intervalle $I$ et $a$ un point intérieur tel que
+$f'(a)=0$. Les signes stricts ci-dessous sont supposés vérifiés sur un
+intervalle immédiatement à gauche et à droite de $a$.
 
 \begin{itemize}
   \item Si $f'$ change de signe de $+$ à $-$ en $a$, alors $f$ admet un
         \textbf{maximum local} en $a$.
   \item Si $f'$ change de signe de $-$ à $+$ en $a$, alors $f$ admet un
         \textbf{minimum local} en $a$.
-  \item Si $f'$ ne change pas de signe en $a$, alors $f$ \textbf{n'admet pas
-        d'extremum} en $a$.
+  \item Si $f'$ garde le même signe \emph{strict} de chaque côté de $a$,
+        alors $f$ est strictement monotone dans ce voisinage et n'y a pas d'extremum.
 \end{itemize}
+Ce sont des critères suffisants. Quand la dérivée s'annule sur tout un
+intervalle, $f$ y est constante. Chaque point intérieur à une telle portion
+constante a des extremums locaux non stricts.
+L'absence de changement de signe, à elle seule, ne permet donc pas d'exclure un extremum.
 \end{nxprop}
 
-\margeAppui{Méthode en trois étapes : (1) résoudre $f'(x)=0$ ; (2) dresser le
-tableau de signes de $f'$ ; (3) conclure sur la nature de chaque point critique.}
+\margeAppui{Après le choix du domaine : calculer $f'$, étudier son signe,
+puis lire les variations. Pour un extremum global, comparer les valeurs aux
+points critiques et aux bornes incluses ; une borne exclue n'est pas un point candidat.}
 
 % ── Exemple complet ──────────────────────────────────────────────────────────
 
@@ -81,8 +100,7 @@ x      & -\infty & & 1 & & 2 & & +\infty \\
 \hline
 f'(x)  &  & + & 0 & - & 0 & + & \\
 \hline
-f      & \nearrow & & 3 & & 2 & & \nearrow \\
-       &          &\searrow& &\searrow& & & \\
+f(x) & & \nearrow & 3 & \searrow & 2 & \nearrow & \\
 \hline
 \end{array}
 \]
@@ -95,8 +113,9 @@ f      & \nearrow & & 3 & & 2 & & \nearrow \\
         \textbf{minimum local}.
 \end{itemize}
 
-Ces extremums sont locaux : $f$ tend vers $+\infty$ quand $x \to +\infty$,
-il n'y a donc pas d'extremum global sur $\mathbb{R}$.
+Ces extremums ne sont pas globaux : $f(0)=-2<2$ et $f(3)=7>3$.
+Un extremum global sur $\mathbb R$ serait aussi local et sa dérivée serait nulle ;
+les seuls candidats étant $1$ et $2$, il n'y a donc pas d'extremum global.
 }
 
 % ── Figure ───────────────────────────────────────────────────────────────────
@@ -127,11 +146,11 @@ il n'y a donc pas d'extremum global sur $\mathbb{R}$.
 \contreexemple{
 Pour $f(x) = x^3$, on a $f'(x) = 3x^2$, donc $f'(0) = 0$.
 
-Pourtant, $f'(x) = 3x^2 \geq 0$ pour tout $x$, et $f'$ \textbf{ne change pas
-de signe} en $0$ : $f'$ est positive avant et après $0$.
-
-Donc $f$ est croissante sur $\mathbb{R}$ et \textbf{n'admet pas d'extremum} en
-$0$. L'annulation de la dérivée est nécessaire mais pas suffisante.
+Pour tout $h>0$, on a $f(-h)=-h^3<0=f(0)<h^3=f(h)$.
+Il y a donc des valeurs plus petites et plus grandes que $f(0)$, aussi près
+de $0$ que l'on veut : aucun extremum n'y est atteint.
+L'annulation de la dérivée est nécessaire en un extremum intérieur d'une
+fonction dérivable, mais pas suffisante.
 }
 
 \margeAppui{Le point $(0\,;\,0)$ de la courbe de $x^3$ est un \emph{point
@@ -140,42 +159,52 @@ hors programme en première ; on retient uniquement que $f'(a)=0$ seul ne suffit
 pas.}
 
 \erreurFrequente{Conclure « $f'(1)=0$ donc $f$ a un extremum en $1$ » sans
-dresser le tableau de signes. Il faut toujours vérifier le changement de signe
-de $f'$.}
+étudier les variations. Un tableau de signes justifié permet de distinguer
+les cas strictement monotones, les changements de sens et les portions constantes.}
 
 \approfondissement{
-Pour les fonctions deux fois dérivables, le signe de $f''(a)$ donne
+Pour une fonction deux fois dérivable sur un intervalle, en un point intérieur
+$a$, le signe de $f''(a)$ donne
 l'information manquante : si $f'(a)=0$ et $f''(a)>0$, alors $f(a)$ est un
 minimum local ; si $f''(a)<0$, c'est un maximum local. Si $f''(a)=0$, on ne
-peut pas conclure directement (cas de $x^3$ en $0$). Ce critère de la dérivée
-seconde est étudié en terminale.
+peut pas conclure directement (cas de $x^3$ en $0$). Ce critère utilise la dérivée
+seconde et dépasse le programme de Première.
 }
 
 % BEGIN-VERIFY
-% from sympy import symbols, diff, solve
+% from sympy import symbols, diff, solve, expand, factor
 %
 % x = symbols('x', real=True)
 %
-% # Condition necessaire : en un extremum local d'une fonction derivable, f'=0.
+% # Minimum global prouvé par une différence carrée, pas par échantillonnage.
 % f = x**2 - 4*x + 1                    # minimum en x = 2
 % assert solve(diff(f, x), x) == [2]
-% assert all(f.subs(x, 2) <= f.subs(x, v) for v in (1.5, 1.9, 2.1, 2.5))
+% assert expand(f-f.subs(x,2) - (x-2)**2) == 0
+% assert ((x-2)**2).is_nonnegative is True
 %
 % # La RECIPROQUE est fausse, et le cours le dit : x^3 annule sa derivee en 0
 % # sans y admettre d'extremum.
 % g = x**3
 % assert solve(diff(g, x), x) == [0]
-% assert g.subs(x, -0.1) < g.subs(x, 0) < g.subs(x, 0.1)
+% t = symbols('t', positive=True)
+% assert g.subs(x,-t) < g.subs(x,0) < g.subs(x,t)
+% # Cas frontières : les valeurs extrêmes de x sur [0,1] sont aux bornes.
+% assert diff(x,x) == 1
+% assert x.subs(x,0) == 0 and x.subs(x,1) == 1
+% # Une constante a simultanément un minimum et un maximum non stricts.
+% c = symbols('c', real=True)
+% assert diff(c,x) == 0
 %
 % # Critere du changement de signe : f' passe de - a + en 2 ; g' ne change pas.
 % assert diff(f, x).subs(x, 1) < 0 < diff(f, x).subs(x, 3)
 % assert diff(g, x).subs(x, -1) > 0 and diff(g, x).subs(x, 1) > 0
 %
-% # Local n'est pas global : sur [-3;3], x^3-3x a un maximum local en -1 que le
-% # bord depasse.
-% h = x**3 - 3*x
-% assert sorted(solve(diff(h, x), x)) == [-1, 1]
-% local = h.subs(x, -1)
-% assert all(local >= h.subs(x, v) for v in (-1.3, -1.1, -0.9, -0.7))
-% assert h.subs(x, 3) > local
+% # Exemple imprimé : dérivée, valeurs, tableau et témoins excluant le global.
+% p = 2*x**3-9*x**2+12*x-2
+% assert expand(diff(p,x)-6*(x-1)*(x-2)) == 0
+% assert sorted(solve(diff(p,x),x)) == [1,2]
+% assert p.subs(x,1) == 3 and p.subs(x,2) == 2
+% assert p.subs(x,0) == -2 and p.subs(x,3) == 7
+% assert p.subs(x,0) < p.subs(x,2)
+% assert p.subs(x,3) > p.subs(x,1)
 % END-VERIFY

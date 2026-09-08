@@ -1,0 +1,282 @@
+{
+  "artifact_type": "independent_course_method_and_contract_review_and_correction_note",
+  "date": "2026-09-08",
+  "reviewer_and_correction_author": "/root/astra_delta",
+  "head_at_recording": "08e8a91152168b0698ad393cffb6c0d083736117",
+  "head_scope": "Sources de travail liées par SHA256 exacts ; pas de preuve attribuée abusivement au HEAD propre.",
+  "status": "VALIDATED_BY_EVIDENCE_FOR_DECLARED_SCOPE",
+  "human_approval": false,
+  "scope": "Trois objets entiers C3, C4 et ME004 ; libellé du contrat C4 ; seul exemple de Fermat de l’annexe logique.",
+  "programme_evidence": {
+    "source": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+    "source_sha256": "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
+    "official_NOR": "MENE2602917A",
+    "lines": [
+      463,
+      477
+    ],
+    "finding": "Parité, signe de la dérivée, caractérisation des constantes, extremums et optimisation sont au programme. Les hypothèses déduites corrigent le contrat local ; aucune définition d’atome officiel n’est changée."
+  },
+  "findings_corrected": [
+    {
+      "id": "DG-FERMAT-BOUNDARY",
+      "severity": "P0",
+      "defect": "Fermat était énoncé sans caractère intérieur, et le contrat assimilait recherche d’extremums à annulation de la dérivée."
+    },
+    {
+      "id": "DG-ME4-PLATEAU",
+      "severity": "P0",
+      "defect": "L’absence de changement de signe était déclarée exclure tout extremum et constituer un point d’inflexion."
+    },
+    {
+      "id": "DG-C3-PARITY-DOMAIN",
+      "severity": "P0",
+      "defect": "La restriction de l’étude par parité sortait potentiellement du domaine réel de la fonction."
+    },
+    {
+      "id": "DG-C3-CONSTANT-LINK",
+      "severity": "PRODUCT_GAP",
+      "defect": "Le lien non strict entre signe et monotonie et la caractérisation des constantes étaient incomplets."
+    },
+    {
+      "id": "DG-C4-ARROWS-GLOBAL",
+      "severity": "P0",
+      "defect": "Les flèches du tableau C4 étaient mal placées ; une seule limite positive était présentée comme exclusion de tout extremum global."
+    }
+  ],
+  "local_contract_change": {
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml",
+    "sha256": "sha256:710198ac8cf0a3bb835e2f343353f3a6f54061f70ef5e47a10147976f2151240",
+    "capacity": "C4",
+    "new_wording": "Je sais déterminer les extremums à partir des variations et examiner les bornes du domaine.",
+    "official_atom_changed": false
+  },
+  "source_fragments_corrected": [
+    {
+      "path": "Mathematiques/manuel-maths/transversal/logique_raisonnement.tex",
+      "source_sha256": "sha256:72b8f93918445042e9bdbcc3adf5c3e7a6f4d1d72e572650fb627477d24aa70c",
+      "fragment": "Exemple Fermat dans la section Réciproque et contraposée.",
+      "status": "FRAGMENT_VALIDATED_BY_EVIDENCE_ONLY",
+      "reason": "Même hypothèse ambiante d’intériorité et de dérivabilité pour l’implication et sa réciproque ; x³ fournit un contre-exemple par les valeurs ±h³ pour tout h>0.",
+      "whole_source_review_closed": false,
+      "human_approval": false
+    }
+  ],
+  "verification": {
+    "test_source": "tests/test_derglobal_extrema_boundaries.py",
+    "test_source_sha256": "sha256:32f8a0d453928e91cb983c2b93969bb50614c8791e487b8590a7dcd703787cbc",
+    "initial_red": "9 failed sur les sources initiales ; /tmp/derglobal-c34-red.log.",
+    "additional_red": "Le contrôle supplémentaire de conclusion globale M4 échoue sur une copie temporaire du M4 initial.",
+    "green": "10 passed après correction ; ruff et git diff --check passent.",
+    "controlled_source_mutations": [
+      {
+        "mutation": "fermat_interior",
+        "caught": true
+      },
+      {
+        "mutation": "sign_necessary",
+        "caught": true
+      },
+      {
+        "mutation": "table_arrow",
+        "caught": true
+      },
+      {
+        "mutation": "parity_domain",
+        "caught": true
+      },
+      {
+        "mutation": "logic_interior",
+        "caught": true
+      }
+    ],
+    "execution": {
+      "execution_root": "/tmp/nexus-derglobal-c34-fresh-1mlfthny",
+      "command": [
+        "/usr/bin/python",
+        "/tmp/nexus-derglobal-c34-fresh-1mlfthny/Mathematiques/manuel-maths/scripts/verify_sympy.py",
+        "--chap",
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "cwd": "/tmp/nexus-derglobal-c34-fresh-1mlfthny",
+      "rc": 0,
+      "stdout": "[OK ] 12_C3_signe_variations: \n[OK ] 13_C4_extremums: \n[REVIEW] 1SPE-DERGLOBAL-ME-004: aucun bloc VERIFY : revue humaine requise\n",
+      "stderr": "",
+      "network_denial": {
+        "mechanism": "libseccomp inherited syscall filter",
+        "probe_rc": 0,
+        "probe_stdout": "network syscalls refused for IPv4, IPv6 and Unix sockets\n"
+      },
+      "input_digests": {
+        "chapitres/1SPE-DERIVATION-GLOBAL/cours/12_C3_signe_variations.tex": "sha256:3cf15288070306ea4050008958cd550bc922b3ceb08816eebdcdfcca57474b54",
+        "chapitres/1SPE-DERIVATION-GLOBAL/cours/13_C4_extremums.tex": "sha256:b3d947c155b7a4a7660594c109ef2fa33b1da8eb73a0a88ab9e939c6408b9417",
+        "chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-004.tex": "sha256:8725aa9fc51dae08c32c0eef43a0ce31669964c3aad1a2fc8053c0b6797260e7",
+        "scripts/verify_sympy.py": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e",
+        "scripts/common.py": "sha256:f1dd76d4f5f354800fba1dc8ab84dfa3ab5c61b8f8f3093956d146195f520d0c"
+      },
+      "records": [
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/12_C3_signe_variations.tex",
+          "source_sha256": "sha256:3cf15288070306ea4050008958cd550bc922b3ceb08816eebdcdfcca57474b54",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/12_C3_signe_variations.sympy.json",
+          "receipt_sha256": "sha256:c51936e0d11b7ba1c8e1bf855a7bf46f227fb8e92bea1e33929821323eeac4f2",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/13_C4_extremums.tex",
+          "source_sha256": "sha256:b3d947c155b7a4a7660594c109ef2fa33b1da8eb73a0a88ab9e939c6408b9417",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/13_C4_extremums.sympy.json",
+          "receipt_sha256": "sha256:ab37f0b244e131b30dc9aa2c0b48a5a9ff7c37039893315f4ea9ed1866527ace",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-004.tex",
+          "source_sha256": "sha256:8725aa9fc51dae08c32c0eef43a0ce31669964c3aad1a2fc8053c0b6797260e7",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/1SPE-DERGLOBAL-ME-004.sympy.json",
+          "receipt_sha256": "sha256:06f47032bdace183f2dce72b1770bf536d409c0de70eaee5440094454bddb05f",
+          "verdict": "manual_review"
+        }
+      ],
+      "human_approval": false
+    }
+  },
+  "objects": [
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/12_C3_signe_variations.tex",
+      "source_sha256": "sha256:3cf15288070306ea4050008958cd550bc922b3ceb08816eebdcdfcca57474b54",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/12_C3_signe_variations.sympy.json",
+      "receipt_sha256": "sha256:c51936e0d11b7ba1c8e1bf855a7bf46f227fb8e92bea1e33929821323eeac4f2",
+      "verdict": "pass",
+      "object_id": "1SPE-DERGLOBAL-COURS-C3",
+      "before_review_source_sha256": "sha256:a0fb697f7d5ef1cbd0993448045120d6243bc2b752f31b7976df153685efaa65",
+      "read_extent": "Source entière, exemples, tableaux, marges et tous les blocs oracle ; paramètres scientifiques de la figure C4, sans verdict de rendu.",
+      "status": "VALIDATED_BY_EVIDENCE_FOR_DECLARED_SCOPE",
+      "human_approval": false,
+      "independent_scientific_reasoning": [
+        "La parité exige un domaine symétrique D et l’identité en tout point de D. Pour n entier, les puissances ont la parité de n sur leur domaine symétrique ; la réduction d’étude porte sur D ∩ [0,+∞[, pas sur une demi-droite extérieure au domaine. L’exemple D=[−1,1] donne seulement [0,1]. La fonction x²+x est ni paire ni impaire : en −1 et 1, les valeurs 0 et 2 réfutent les deux identités.",
+        "Pour f continue sur l’intervalle et dérivable à l’intérieur, le théorème des accroissements finis justifie les implications de f′≥0 vers croissance, f′≤0 vers décroissance et f′=0 vers constance, y compris aux bornes incluses grâce à la continuité. Réciproquement, les taux de variation d’une fonction croissante ont une limite non négative aux points intérieurs ; de même pour décroissante. Une constante a un taux nul. Les signes stricts partout sont des conditions suffisantes, pas nécessaires : x³ est strictement croissante et a une dérivée nulle en 0.",
+        "Le point intérieur est indispensable à Fermat ; une recherche globale doit inclure les bornes présentes. La méthode justifie le signe sur un intervalle par factorisation, au lieu d’inférer un signe constant d’une seule valeur numérique.",
+        "Pour f=x³−3x²−9x+2, f′=3(x+1)(x−3), avec signes positif, négatif, positif sur les intervalles séparés par −1 et 3. Les valeurs sont f(−1)=7 et f(3)=−25, donc les variations et les extremums locaux imprimés sont corrects. Les contre-exemples x² et x²+1 distinguent bien racine de f et racine de f′. La preuve par accroissements finis reste dans un approfondissement explicitement hors programme."
+      ],
+      "pedagogical_review": "La distinction entre condition nécessaire et critère suffisant est explicite ; bornes et portions constantes ne sont plus oubliées. Aucun exercice ni quota ajouté.",
+      "editorial_review": "Terminologie, domaines et valeurs des tableaux relus. Le rendu final reste à contrôler.",
+      "oracle_review": "Bloc canonique réellement exécuté avec refus réseau. Les identités générales et contre-exemples exacts sont distingués des seules évaluations ponctuelles."
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/13_C4_extremums.tex",
+      "source_sha256": "sha256:b3d947c155b7a4a7660594c109ef2fa33b1da8eb73a0a88ab9e939c6408b9417",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/13_C4_extremums.sympy.json",
+      "receipt_sha256": "sha256:ab37f0b244e131b30dc9aa2c0b48a5a9ff7c37039893315f4ea9ed1866527ace",
+      "verdict": "pass",
+      "object_id": "1SPE-DERGLOBAL-COURS-C4",
+      "before_review_source_sha256": "sha256:737ddeeb2fc446135a0d400250c64a241aae51f02ec2057d7b5793c8c34b12a3",
+      "read_extent": "Source entière, exemples, tableaux, marges et tous les blocs oracle ; paramètres scientifiques de la figure C4, sans verdict de rendu.",
+      "status": "VALIDATED_BY_EVIDENCE_FOR_DECLARED_SCOPE",
+      "human_approval": false,
+      "independent_scientific_reasoning": [
+        "Les définitions locales quantifient maintenant les points du domaine proches de a. Elles permettent des extremums non stricts et impliquent qu’un extremum global est local, y compris à un bord inclus. Une fonction constante est à la fois minimale et maximale en chaque point relativement à son domaine.",
+        "Au maximum intérieur, le taux pour h>0 est ≤0 et celui pour h<0 est ≥0. Leur limite commune réelle vaut donc 0 ; au minimum les signes s’inversent. L’intériorité donne accès aux deux côtés. La restriction de f(x)=x à [0,1] a ses extremums globaux en 0 et 1, alors que la fonction affine a une dérivée 1 : ce contre-exemple ferme la condition manquante.",
+        "Si f′ est strictement positive à gauche puis négative à droite d’un point intérieur, f croît puis décroît et a un maximum local strict ; le cas inverse donne un minimum. Si f′ a le même signe strict de part et d’autre, f traverse le point de façon strictement monotone. En revanche une dérivée nulle sur une portion constante permet des extremums non stricts à ses points intérieurs. Les critères de changement de signe ne sont donc pas déclarés nécessaires en général.",
+        "Pour f=2x³−9x²+12x−2, f′=6(x−1)(x−2) et les valeurs en 0,1,2,3 sont −2,3,2,7. Le tableau donne hausse, baisse, hausse aux bons intervalles. Le minimum local 2 n’est pas global puisque f(0)=−2 ; le maximum local 3 n’est pas global puisque f(3)=7. Un extremum global sur R serait local et stationnaire, donc parmi 1 et 2 : aucun n’existe. Cela évite d’utiliser une seule limite pour prétendre exclure les deux extremums.",
+        "Pour tout h>0, (−h)³<0<h³, ce qui prouve sans échantillonnage que x³ n’a pas d’extremum en 0. Le commentaire d’inflexion demeure hors programme. Le critère facultatif de dérivée seconde exige lui aussi un point intérieur : si f′(a)=0 et f′′(a)>0, le taux de variation de f′ en a est positif pour des h assez petits, donc f′ a les signes de h ; le minimum s’ensuit. Le cas négatif donne un maximum ; le cas nul reste indéterminé.",
+        "La figure source représente exactement le polynôme étudié, avec points (1,3) et (2,2) et annotations correspondantes. Le domaine tracé contient les deux points. Seule la cohérence scientifique de ces paramètres a été vérifiée ; la mise en page de la figure n’a pas été inspectée dans un PDF final."
+      ],
+      "pedagogical_review": "La distinction entre condition nécessaire et critère suffisant est explicite ; bornes et portions constantes ne sont plus oubliées. Aucun exercice ni quota ajouté.",
+      "editorial_review": "Terminologie, domaines et valeurs des tableaux relus. Le rendu final reste à contrôler.",
+      "oracle_review": "Bloc canonique réellement exécuté avec refus réseau. Les identités générales et contre-exemples exacts sont distingués des seules évaluations ponctuelles."
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-004.tex",
+      "source_sha256": "sha256:8725aa9fc51dae08c32c0eef43a0ce31669964c3aad1a2fc8053c0b6797260e7",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/1SPE-DERGLOBAL-ME-004.sympy.json",
+      "receipt_sha256": "sha256:06f47032bdace183f2dce72b1770bf536d409c0de70eaee5440094454bddb05f",
+      "verdict": "manual_review",
+      "object_id": "1SPE-DERGLOBAL-ME-004",
+      "before_review_source_sha256": "sha256:d3833998ebb2a73fe342a9a6dd5b9a233c0452b2a617c3073afbc34e0712ac65",
+      "read_extent": "Source entière, exemples, tableaux, marges et tous les blocs oracle ; paramètres scientifiques de la figure C4, sans verdict de rendu.",
+      "status": "VALIDATED_BY_EVIDENCE_FOR_DECLARED_SCOPE",
+      "human_approval": false,
+      "independent_scientific_reasoning": [
+        "La méthode recherche les candidats intérieurs par f′=0, établit les variations, distingue les portions constantes, puis examine les bornes incluses pour le global. Une borne exclue ne peut être un lieu où la fonction atteint son extremum.",
+        "Pour f=−x³+3x²−1, f′=−3x(x−2), de signes négatif, positif, négatif. Il y a un minimum local −1 en 0 et un maximum local 3 en 2. Les valeurs f(−2)=19 et f(4)=−17 excluent leur caractère global ; tous les candidats intérieurs ont été examinés, donc il n’y a aucun extremum global sur R.",
+        "L’ancien raccourci « absence de changement de signe implique point d’inflexion » est faux : une fonction constante a des extremums non stricts et aucun changement de concavité. La méthode utilise désormais les variations et deux contre-exemples précis, sans promettre un critère universel par seul signe."
+      ],
+      "pedagogical_review": "La distinction entre condition nécessaire et critère suffisant est explicite ; bornes et portions constantes ne sont plus oubliées. Aucun exercice ni quota ajouté.",
+      "editorial_review": "Terminologie, domaines et valeurs des tableaux relus. Le rendu final reste à contrôler.",
+      "oracle_review": "Receipt manual_review fidèle, aucun faux oracle fabriqué."
+    }
+  ],
+  "limits": [
+    "Contre-revue /root réalisée dans la portée décrite ; aucune approbation humaine.",
+    "L’annexe logique entière n’est pas déclarée fermée par la correction de cet exemple.",
+    "Pas de regeneration des bindings officiels dans ce lot.",
+    "Pas de build final ni d’approbation humaine ou de revue PDF."
+  ],
+  "editorial_followup": "Après contre-revue root, l’étiquette de la dérivée seconde dit seulement qu’elle dépasse le programme de Première ; aucune attribution au programme de Terminale non vérifié n’est faite.",
+  "independent_counterreview": {
+    "reviewer": "/root",
+    "observed_head": "08e8a91152168b0698ad393cffb6c0d083736117",
+    "scope": "Complete C3/C4/M4, whole local contract with change restricted to C4 wording, modified Fermat fragment in its reciprocal context, ten tests, and BO2026 lines463–477. No whole-annex review.",
+    "reasoning": [
+      "On an interval, continuity including any endpoints and interior differentiability give the nonstrict monotonicity and constancy characterizations via the mean value theorem. Strict derivative sign is sufficient; x³ supplies the failed converse. Parity must restrict the study to the actual symmetric domain intersected with the nonnegative half-line.",
+      "At an interior maximum the right difference quotients are nonpositive and left quotients nonnegative; a common finite derivative must vanish. On [0,1], the restriction of x attains extrema at boundaries although its affine extension has derivative1. Constant portions and the two-sided h³ inequality distinguish nonstrict extrema from stationary non-extrema.",
+      "For C3 the critical points are -1,3 with values7,-25 and signs +,-,+. For C4 the derivative is6(x-1)(x-2), values -2,3,2,7 at0,1,2,3. The witnesses exclude global extrema at both critical points; any global extremum on R would be among those candidates.",
+      "For M4 the derivative is -3x(x-2), minimum -1 at0 and maximum3 at2. Values19 at-2 and -17 at4 exclude both global extrema. No false conclusion from a one-sided infinite limit is used.",
+      "For the optional second derivative criterion, differentiability of f′ at a with f′(a)=0 and f′′(a)>0 gives opposite signs of f′ on the two sides, hence a local minimum; the negative case reverses the result. A zero second derivative remains inconclusive. The final label is restricted to being beyond Première."
+    ],
+    "verification": {
+      "regressions_passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "junit": "/tmp/nexus-root-derglobal-c34.xml",
+      "junit_sha256": "a9312970201d848dde33dfde97ad1d4316d7e043cc383177232c379a7bea01e5",
+      "fresh_c3_oracle": "pass",
+      "fresh_c4_oracle": "pass",
+      "temporary_c4_extremum_value_error": "fail",
+      "receipt_bindings": [
+        {
+          "state": "CURRENT_BOUND",
+          "declared_source_path": "chapitres/1SPE-DERIVATION-GLOBAL/cours/12_C3_signe_variations.tex",
+          "expected_source_sha256": "sha256:3cf15288070306ea4050008958cd550bc922b3ceb08816eebdcdfcca57474b54",
+          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/12_C3_signe_variations.tex",
+          "current_source_sha256": "sha256:3cf15288070306ea4050008958cd550bc922b3ceb08816eebdcdfcca57474b54",
+          "source_path_base": "repository",
+          "method_state": "CURRENT_TRUSTED",
+          "reason": null,
+          "canonical_object_id": "1SPE-DERGLOBAL-COURS-C3",
+          "receipt_object_id": "12_C3_signe_variations"
+        },
+        {
+          "state": "CURRENT_BOUND",
+          "declared_source_path": "chapitres/1SPE-DERIVATION-GLOBAL/cours/13_C4_extremums.tex",
+          "expected_source_sha256": "sha256:b3d947c155b7a4a7660594c109ef2fa33b1da8eb73a0a88ab9e939c6408b9417",
+          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/13_C4_extremums.tex",
+          "current_source_sha256": "sha256:b3d947c155b7a4a7660594c109ef2fa33b1da8eb73a0a88ab9e939c6408b9417",
+          "source_path_base": "repository",
+          "method_state": "CURRENT_TRUSTED",
+          "reason": null,
+          "canonical_object_id": "1SPE-DERGLOBAL-COURS-C4",
+          "receipt_object_id": "13_C4_extremums"
+        },
+        {
+          "state": "CURRENT_BOUND",
+          "declared_source_path": "chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-004.tex",
+          "expected_source_sha256": "sha256:8725aa9fc51dae08c32c0eef43a0ce31669964c3aad1a2fc8053c0b6797260e7",
+          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-004.tex",
+          "current_source_sha256": "sha256:8725aa9fc51dae08c32c0eef43a0ce31669964c3aad1a2fc8053c0b6797260e7",
+          "source_path_base": "repository",
+          "method_state": "CURRENT_TRUSTED",
+          "reason": null,
+          "canonical_object_id": "1SPE-DERGLOBAL-ME-004",
+          "receipt_object_id": "1SPE-DERGLOBAL-ME-004"
+        }
+      ]
+    },
+    "figure_scope": "Polynomial expression, marked points (1,3)/(2,2) and labels match the mathematics. FIGURE_REVIEW remains PENDING because no rendered figure has been visually inspected in this lot.",
+    "limits": [
+      "No whole-source validation of the logic annex, no complete chapter review, no global programme mapping credit.",
+      "No human approval, source-status promotion, final PDF or release claim."
+    ],
+    "review_status": "VALIDATED_BY_EVIDENCE_FOR_DECLARED_SCOPE"
+  }
+}

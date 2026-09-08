@@ -129,10 +129,12 @@ l'équation de départ.}
 $A \Longrightarrow B$ est l'implication $B \Longrightarrow A$. Une implication vraie peut avoir
 une réciproque fausse : les deux énoncés doivent être démontrés séparément.}
 
-\contreexemple{L'implication \og si $f$ est dérivable en $a$ et admet un extremum local en $a$,
-alors $f'(a)=0$ \fg{} est vraie. Sa réciproque \og si $f'(a)=0$, alors $f$ admet un extremum
-local en $a$ \fg{} est fausse : pour $f(x)=x^3$, on a $f'(x)=3x^2$ donc $f'(0)=0$, alors que $f$
-est strictement croissante sur $\mathbb{R}$ et n'admet aucun extremum.}
+\contreexemple{L'implication \og si $f$ admet un extremum local en $a$,
+alors $f'(a)=0$ \fg{} est vraie sous les hypothèses suivantes : $a$ est un point
+intérieur de l'intervalle de définition et $f$ est dérivable en $a$.
+Sous les mêmes hypothèses, sa réciproque \og si $f'(a)=0$, alors $f$ admet un
+extremum local en $a$ \fg{} est fausse : pour $f(x)=x^3$, on a $f'(0)=0$,
+mais $f(-h)<f(0)<f(h)$ pour tout $h>0$. Il n'y a donc pas d'extremum en $0$.}
 
 \definition[Contraposée d'une implication]{La \textbf{contraposée} de l'implication
 $A \Longrightarrow B$ est l'implication $(\text{non } B) \Longrightarrow (\text{non } A)$.}

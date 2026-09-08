@@ -2,17 +2,26 @@
 \begin{fichemethode}{M4}{Déterminer les extremums d'une fonction}
 \quandUtiliser{J'utilise cette méthode lorsque l'énoncé demande de trouver un maximum ou un minimum local (ou global sur un intervalle) d'une fonction dérivable.}
 \pasApas{\begin{enumerate}
+  \item Je précise le domaine de travail, ses bornes incluses ou exclues,
+        et les intervalles de dérivabilité.
   \item Je calcule $f'(x)$.
-  \item Je résous $f'(x)=0$ pour trouver les candidats.
-  \item J'étudie le changement de signe de $f'$ autour de chaque candidat.
-  \item Je détermine la nature de l'extremum et je calcule la valeur de $f$ en ce point.
+  \item Je résous $f'(x)=0$ pour trouver les candidats intérieurs.
+  \item J'étudie le signe de $f'$ et les variations, y compris les éventuelles
+        portions constantes, pour déterminer les extremums locaux.
+  \item Pour un extremum global, je compare les valeurs aux candidats et aux
+        bornes incluses en utilisant l'ensemble du tableau de variations.
 \end{enumerate}}
-\exempleRedige{Déterminons les extremums de $f(x)=-x^3+3x^2-1$ sur $\mathbb{R}$. \commentaireMarge{Étape 1 : dériver.} $f'(x)=-3x^2+6x=-3x(x-2)$. \commentaireMarge{Étape 2 : annulateurs.} $f'(x)=0 \Leftrightarrow x=0$ ou $x=2$. \commentaireMarge{Étape 3 : signe de $f'$.} $f'(x)<0$ sur $\left]-\infty;0\right[$, $f'(x)>0$ sur $\left]0;2\right[$, $f'(x)<0$ sur $\left]2;+\infty\right[$. \commentaireMarge{Étape 4 : nature.} $f'$ change de $-$ à $+$ en $0$ : minimum local $f(0)=-1$. $f'$ change de $+$ à $-$ en $2$ : maximum local $f(2)=-8+12-1=3$.}
+\exempleRedige{Déterminons les extremums de $f(x)=-x^3+3x^2-1$ sur $\mathbb{R}$. \commentaireMarge{Dériver.} $f'(x)=-3x^2+6x=-3x(x-2)$. \commentaireMarge{Trouver les annulateurs.} $f'(x)=0 \Leftrightarrow x=0$ ou $x=2$. \commentaireMarge{Étudier le signe de $f'$.} $f'(x)<0$ sur $\left]-\infty;0\right[$, $f'(x)>0$ sur $\left]0;2\right[$, $f'(x)<0$ sur $\left]2;+\infty\right[$. \commentaireMarge{Conclure sur les extremums.} $f'$ change de $-$ à $+$ en $0$ : minimum local $f(0)=-1$. $f'$ change de $+$ à $-$ en $2$ : maximum local $f(2)=-8+12-1=3$.
+Ces extremums ne sont pas globaux : $f(-2)=19>3$ et $f(4)=-17<-1$.
+Comme tout extremum global sur $\mathbb R$ serait aussi local, il n'y en a aucun.}
 \pieges{\begin{itemize}
-  \item Conclure qu'il y a un extremum en un point sans vérifier le changement de signe de $f'$.
+  \item Conclure à un extremum à partir de la seule égalité $f'(x)=0$.
+  \item Oublier une borne incluse lors de la recherche d'un extremum global.
   \item Confondre maximum et minimum en lisant mal le tableau de variations.
   \item Oublier de calculer la valeur $f(x_0)$ qui définit l'extremum.
 \end{itemize}}
-\verifier{Si $f'$ ne change pas de signe en un zéro, il n'y a pas d'extremum mais un point d'inflexion.}
+\verifier{L'annulation de la dérivée ne suffit pas : $x^3$ n'a pas d'extremum
+en $0$. À l'inverse, une fonction constante a des extremums non stricts sans
+changement de signe. Je justifie la conclusion à partir des variations.}
 \sEntrainer{\refExos{M4}}
 \end{fichemethode}

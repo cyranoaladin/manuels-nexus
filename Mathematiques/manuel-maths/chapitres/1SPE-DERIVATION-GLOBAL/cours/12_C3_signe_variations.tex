@@ -25,7 +25,8 @@ f(-x) = -f(x).
   \item \textbf{Fonctions paires :} $x \mapsto x^2$, $x \mapsto x^4$, $x \mapsto |x|$.
   \item \textbf{Fonctions impaires :} $x \mapsto x^3$, $x \mapsto x$, $x \mapsto \dfrac{1}{x}$.
 \end{itemize}
-Plus généralement, $x \mapsto x^n$ est paire si $n$ est pair, et impaire si $n$ est impair.
+Plus généralement, pour un entier $n$, $x \mapsto x^n$ est paire si $n$ est pair,
+et impaire si $n$ est impair, sur son domaine de définition symétrique.
 }
 
 \exemple{
@@ -55,7 +56,10 @@ Conclure qu'une fonction est impaire parce qu'elle n'est pas paire (ou inverseme
 }
 
 \propriete[Conséquence pour l'étude de variations]{
-Pour une fonction paire ou impaire, il suffit d'étudier la fonction sur $[0\,;\,+\infty[$ (ou $]0\,;\,+\infty[$), puis de compléter par symétrie. Cela divise le travail par deux.
+Pour une fonction paire ou impaire de domaine $D$, il suffit d'étudier sa
+restriction à $D\cap[0\,;\,+\infty[$, puis de compléter par symétrie.
+On reste dans le domaine : pour $D=[-1\,;\,1]$, on étudie $[0\,;\,1]$,
+et pour $D=\mathbb R\setminus\{0\}$, on étudie $]0\,;\,+\infty[$.
 }
 
 % BEGIN-VERIFY
@@ -80,24 +84,37 @@ Pour une fonction paire ou impaire, il suffit d'étudier la fonction sur $[0\,;\
 \section{Signe de la dérivée et sens de variation}
 
 \theoreme[Lien entre signe de $f'$ et variations de $f$]{
-Soit $f$ une fonction dérivable sur un intervalle $I$.
+Soit $f$ une fonction continue sur un intervalle $I$ et dérivable à l'intérieur
+de $I$. Les conditions sur $f'$ ci-dessous portent sur les points intérieurs.
 \begin{itemize}
-  \item Si $f'(x) > 0$ pour tout $x \in I$, alors $f$ est \textbf{strictement croissante} sur $I$.
-  \item Si $f'(x) < 0$ pour tout $x \in I$, alors $f$ est \textbf{strictement décroissante} sur $I$.
-  \item Si $f'(x) = 0$ pour tout $x \in I$, alors $f$ est \textbf{constante} sur $I$.
+  \item $f$ est \textbf{croissante} sur $I$ si et seulement si $f'(x)\geqslant0$
+        en tout point intérieur.
+  \item $f$ est \textbf{décroissante} sur $I$ si et seulement si $f'(x)\leqslant0$
+        en tout point intérieur.
+  \item $f$ est \textbf{constante} sur $I$ si et seulement si $f'(x)=0$
+        en tout point intérieur.
+  \item Si $f'(x)>0$ en tout point intérieur, alors $f$ est
+        \textbf{strictement croissante} ; si $f'(x)<0$, elle est \textbf{strictement décroissante}.
 \end{itemize}
+Les deux dernières conditions strictes sont suffisantes, mais non nécessaires :
+$x\mapsto x^3$ est strictement croissante bien que sa dérivée s'annule en $0$.
 }
 
 \margeAppui{Ce théorème est le pont entre le calcul (signe de $f'$) et la géométrie (sens de la courbe). Il centralise toute l'étude de variations.}
 
 \definition[Extremum local]{
-On dit que $f$ admet un \textbf{maximum local} en $x_0$ si $f(x_0) \geqslant f(x)$ pour tout $x$ au voisinage de $x_0$. De même, $f$ admet un \textbf{minimum local} en $x_0$ si $f(x_0) \leqslant f(x)$ au voisinage de $x_0$.
+On dit que $f$ admet un \textbf{maximum local} en $x_0$ si $f(x_0) \geqslant f(x)$
+pour tout $x$ de son domaine assez proche de $x_0$. De même, $f$ admet un
+\textbf{minimum local} en $x_0$ si $f(x_0) \leqslant f(x)$ pour ces points.
 }
 
 \propriete[Condition nécessaire d'extremum]{
-Si $f$ est dérivable en $x_0$ et admet un extremum local en $x_0$, alors $f'(x_0) = 0$.
+Si $x_0$ est un point intérieur de l'intervalle de définition, si $f$ est
+dérivable en $x_0$ et y admet un extremum local, alors $f'(x_0) = 0$.
 
-\emph{Conséquence pratique :} les extremums d'une fonction dérivable sont à chercher parmi les solutions de $f'(x) = 0$.
+\emph{Conséquence pratique :} les extremums intérieurs d'une fonction dérivable
+sont à chercher parmi les solutions de $f'(x) = 0$. Pour un extremum global,
+on examine aussi les bornes qui appartiennent au domaine et l'ensemble des variations.
 }
 
 \contreexemple{
@@ -107,12 +124,14 @@ La réciproque est fausse : $f'(x_0) = 0$ n'implique pas nécessairement un extr
 \margeAppui{Quatre étapes, dans l'ordre.}
 
 \propriete[Méthode en quatre étapes]{
-Pour étudier les variations d'une fonction $f$ dérivable :
+Après avoir précisé le domaine et les intervalles où $f$ est dérivable :
 \begin{enumerate}
   \item \textbf{Calculer $f'(x)$} en utilisant les règles de dérivation.
   \item \textbf{Résoudre $f'(x) = 0$} pour trouver les éventuels points critiques.
-  \item \textbf{Dresser le tableau de signes de $f'$} en testant le signe de $f'$ sur chaque intervalle séparé par les racines.
-  \item \textbf{Conclure sur les variations de $f$} : là où $f' > 0$, $f$ croît ; là où $f' < 0$, $f$ décroît.
+  \item \textbf{Dresser le tableau de signes de $f'$} en justifiant son signe
+        sur chaque intervalle, par exemple à l'aide d'une factorisation.
+  \item \textbf{Conclure sur les variations de $f$}, puis calculer les valeurs
+        aux points critiques et aux bornes incluses pour étudier les extremums.
 \end{enumerate}
 }
 
