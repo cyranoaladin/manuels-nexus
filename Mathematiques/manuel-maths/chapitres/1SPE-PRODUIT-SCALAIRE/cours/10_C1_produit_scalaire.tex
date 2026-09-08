@@ -2,24 +2,25 @@
 
 \section{Produit scalaire de deux vecteurs}
 
-\margeAppui{Le produit scalaire est une opération qui associe a deux vecteurs un nombre réel. Il permet de traduire algebriquement des notions géométriques comme l'angle, l'orthogonalite et la projection.}
+\margeAppui{Le produit scalaire est une opération qui associe à deux vecteurs un nombre réel. Il permet de traduire algébriquement des notions géométriques comme l'angle, l'orthogonalité et la projection.}
 
 \definition[Produit scalaire (définition géométrique)]{
-Soient $\vec{u}$ et $\vec{v}$ deux vecteurs du plan. Le \textbf{produit scalaire} de $\vec{u}$ et $\vec{v}$ est le nombre réel :
+Soient $\vec{u}$ et $\vec{v}$ deux vecteurs non nuls du plan. Le \textbf{produit scalaire} de $\vec{u}$ et $\vec{v}$ est le nombre réel :
 \[
 \vec{u} \cdot \vec{v} = \|\vec{u}\| \times \|\vec{v}\| \times \cos(\vec{u}, \vec{v})
 \]
-ou $(\vec{u}, \vec{v})$ designe l'angle oriente des vecteurs $\vec{u}$ et $\vec{v}$.
+où $(\vec{u}, \vec{v})$ désigne l'angle orienté des vecteurs $\vec{u}$ et $\vec{v}$.
 
 Si l'un des deux vecteurs est nul, on pose $\vec{u} \cdot \vec{v} = 0$.
 }
 
 % BEGIN-VERIFY
 % from sympy import *
-% u_norm, v_norm, theta = symbols('u_norm v_norm theta', positive=True)
+% u_norm, v_norm = symbols('u_norm v_norm', positive=True)
+% theta = symbols('theta', real=True)
 % ps = u_norm * v_norm * cos(theta)
 % # ps is a real number
-% assert ps.is_real or ps.is_complex
+% assert ps.is_real is True
 % # If theta = 0: ps = ||u||*||v||
 % assert simplify(ps.subs(theta, 0) - u_norm * v_norm) == 0
 % # If theta = pi/2: ps = 0
@@ -28,8 +29,8 @@ Si l'un des deux vecteurs est nul, on pose $\vec{u} \cdot \vec{v} = 0$.
 
 \propriete[Cas particuliers]{
 \begin{itemize}
-  \item Si $\vec{u}$ et $\vec{v}$ sont colineaires de même sens : $\vec{u} \cdot \vec{v} = \|\vec{u}\| \times \|\vec{v}\|$.
-  \item Si $\vec{u}$ et $\vec{v}$ sont colineaires de sens contraire : $\vec{u} \cdot \vec{v} = -\|\vec{u}\| \times \|\vec{v}\|$.
+  \item Si $\vec{u}$ et $\vec{v}$ sont colinéaires de même sens : $\vec{u} \cdot \vec{v} = \|\vec{u}\| \times \|\vec{v}\|$.
+  \item Si $\vec{u}$ et $\vec{v}$ sont colinéaires de sens contraire : $\vec{u} \cdot \vec{v} = -\|\vec{u}\| \times \|\vec{v}\|$.
   \item Si $\vec{u}$ et $\vec{v}$ sont orthogonaux : $\vec{u} \cdot \vec{v} = 0$.
   \item $\vec{u} \cdot \vec{u} = \|\vec{u}\|^2$.
 \end{itemize}
@@ -49,15 +50,31 @@ Si l'un des deux vecteurs est nul, on pose $\vec{u} \cdot \vec{v} = 0$.
 % END-VERIFY
 
 \definition[Produit scalaire par projection]{
-Soient $\vec{u}$ et $\vec{v}$ deux vecteurs non nuls. Si $H$ est le projete orthogonal de l'extrémité de $\vec{v}$ sur la droite portant $\vec{u}$, alors :
+Soient $\vec{u}\neq\vec{0}$ et $\vec{v}$ deux vecteurs. On choisit un point $O$ comme origine commune et les points $A$ et $B$ tels que
+$\overrightarrow{OA}=\vec{u}$ et $\overrightarrow{OB}=\vec{v}$.
+Soit $H$ le projeté orthogonal de $B$ sur la droite $(OA)$, orientée de $O$ vers $A$. Alors :
 \[
 \vec{u} \cdot \vec{v} = \|\vec{u}\| \times \overline{OH}
 \]
-ou $\overline{OH}$ est la mesure algébrique de la projection.
+où $\overline{OH}$ est la mesure algébrique : elle vaut $OH$ si $H$ est sur la demi-droite $[OA)$, et $-OH$ s'il est du côté opposé.
+Elle est donc négative lorsque la projection est de sens opposé à $\vec{u}$, et nulle si $H=O$.
 }
 
+% BEGIN-VERIFY
+% # Orthonormal coordinates with O=(0,0) and the first axis directed towards A.
+% # norm_u > 0; B=(t*norm_u,h), so its orthogonal projection is H=(t*norm_u,0).
+% norm_u = symbols('norm_u', positive=True)
+% t, h = symbols('t h', real=True)
+% u, v = Matrix([norm_u,0]), Matrix([t*norm_u,h])
+% signed_OH = t * norm_u
+% assert simplify(norm_u*signed_OH - u.dot(v)) == 0
+% for parameter, expected in [(Rational(-3,2), -6), (0, 0), (2, 8)]:
+%     assert (norm_u*signed_OH).subs({norm_u:2,t:parameter}) == expected
+% assert u.dot(v).subs({norm_u:2,t:0,h:0}) == 0
+% END-VERIFY
+
 \definition[Expression analytique]{
-Dans un repere orthonorme $(O; \vec{i}, \vec{j})$, si $\vec{u}\begin{pmatrix} x_1 \\ y_1 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} x_2 \\ y_2 \end{pmatrix}$, alors :
+Dans un repère orthonormé $(O; \vec{i}, \vec{j})$, si $\vec{u}\begin{pmatrix} x_1 \\ y_1 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} x_2 \\ y_2 \end{pmatrix}$, alors :
 \[
 \vec{u} \cdot \vec{v} = x_1 x_2 + y_1 y_2.
 \]
@@ -80,7 +97,7 @@ $\vec{u} \cdot \vec{v} = 3 \times 2 + (-1) \times 5 = 6 - 5 = 1.$
 }
 
 \exemple{
-Deux vecteurs $\vec{u}$ et $\vec{v}$ verifient $\|\vec{u}\| = 4$, $\|\vec{v}\| = 3$ et l'angle entre eux est $\dfrac{\pi}{3}$.
+Deux vecteurs $\vec{u}$ et $\vec{v}$ vérifient $\|\vec{u}\| = 4$, $\|\vec{v}\| = 3$ et l'angle entre eux est $\dfrac{\pi}{3}$.
 
 $\vec{u} \cdot \vec{v} = 4 \times 3 \times \cos\!\left(\dfrac{\pi}{3}\right) = 12 \times \dfrac{1}{2} = 6.$
 }
@@ -96,7 +113,7 @@ Oublier le cosinus dans la définition géométrique et écrire $\vec{u} \cdot \
 }
 
 \erreurFrequente{
-Utiliser la formule analytique $x_1 x_2 + y_1 y_2$ dans un repere non orthonorme. Cette formule n'est valable que dans un repere \textbf{orthonorme}.
+Utiliser la formule analytique $x_1 x_2 + y_1 y_2$ dans un repère non orthonormé. Cette formule n'est valable que dans un repère \textbf{orthonormé}.
 }
 
 \erreurFrequente{
@@ -104,10 +121,10 @@ Croire que le produit scalaire est un vecteur. Le produit scalaire est un \textb
 }
 
 \contreexemple{
-Dans un repere non orthonorme, $\vec{i} \cdot \vec{j}
-\neq 0$ en general. On ne peut alors pas utiliser la formule $x_1 x_2 + y_1 y_2$.
+Dans un repère non orthonormé, $\vec{i} \cdot \vec{j}
+\neq 0$ en général. On ne peut alors pas utiliser la formule $x_1 x_2 + y_1 y_2$.
 }
 
 \approfondissement{
-Le produit scalaire se generalise en dimension $n$ : pour $\vec{u} = (x_1, \ldots, x_n)$ et $\vec{v} = (y_1, \ldots, y_n)$, on pose $\vec{u} \cdot \vec{v} = \sum_{k=1}^{n} x_k y_k$. Cette notion est fondamentale en algebre linéaire et en physique.
+Le produit scalaire se généralise en dimension $n$ : pour $\vec{u} = (x_1, \ldots, x_n)$ et $\vec{v} = (y_1, \ldots, y_n)$, on pose $\vec{u} \cdot \vec{v} = \sum_{k=1}^{n} x_k y_k$. Cette notion est fondamentale en algèbre linéaire et en physique.
 }
