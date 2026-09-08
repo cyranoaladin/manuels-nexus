@@ -1,0 +1,171 @@
+{
+  "artifact_type": "independent_optimization_course_and_method_review",
+  "date": "2026-09-08",
+  "head_at_recording": "c602f506c4a7a23ec581b6a1a272f9e52ea0afcb",
+  "head_scope": "Les modifications de travail sont liées par SHA256 ; aucune preuve de HEAD propre n’est revendiquée.",
+  "reviewer_and_correction_author": "/root/astra_delta",
+  "scope": "Deux sources C5 et ME005, entièrement lues. Le TD stylos est un lot séparé et reste ouvert.",
+  "status": "INDEPENDENTLY_COUNTER_REVIEWED_IN_BOUNDED_SCOPE",
+  "human_approval": false,
+  "authoring_reason": "Corriger un modèle géométrique indéterminé, une preuve dimensionnellement fausse et des contrôles mécaniques incomplets ; aucun objectif de volume.",
+  "programme_evidence": {
+    "source": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+    "source_sha256": "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
+    "official_NOR": "MENE2602917A",
+    "lines": [
+      463,
+      474
+    ],
+    "official_atom_changed": false
+  },
+  "findings_corrected": [
+    {
+      "id": "DG-C5-DIMENSIONS",
+      "severity": "P0",
+      "defect": "L’argument facultatif utilisait r²+r²+h, qui ne représente pas la surface et mélange des dimensions."
+    },
+    {
+      "id": "DG-ME5-TRIANGLE",
+      "severity": "P0",
+      "defect": "Le triangle défini par une seule hypoténuse ne donnait pas h=10−x ni l’aire annoncée."
+    },
+    {
+      "id": "DG-C5-BOUNDARIES",
+      "severity": "P0",
+      "defect": "La méthode oubliait les bornes incluses et la vérification de la dérivabilité ; le tableau du rectangle avait des colonnes excédentaires et des bornes ambiguës."
+    },
+    {
+      "id": "DG-C5-ORACLE-COVERAGE",
+      "severity": "CERTIFICATION_DEFECT",
+      "defect": "L’ancien bloc ne contrôlait que le rectangle par échantillonnage ; le cylindre n’était pas exécuté et la méthode ne disposait pas de vérification du modèle."
+    }
+  ],
+  "verification": {
+    "test_source": "tests/test_derglobal_optimization_models.py",
+    "test_source_sha256": "sha256:885d690f5accbdd0326c5f08b48e9636b7606f14c00264c82843f7be43ec6bc1",
+    "initial_red": "6 failed sur les sources originales ; /tmp/derglobal-c5-red.log.",
+    "green": "6 passed, dont deux mutations permanentes du gate canonique ; ruff et git diff --check passent.",
+    "permanent_mutations": {
+      "helper": "tests.test_prodscal_remaining_scientific_regressions._run_fixture",
+      "mutations": [
+        "Omission d’un disque dans la surface du cylindre fermé.",
+        "Retour à la hauteur 10−x sans rapport avec la droite BC du triangle."
+      ],
+      "behavior": "Fixture intacte RC 0, puis fixture modifiée RC 1 pour chaque mutation.",
+      "execution": "Suite ciblée relancée avec refus réseau hérité ; /tmp/DERGLOBAL_C5_PERMANENT_MUTATION_TESTS.log."
+    },
+    "execution": {
+      "execution_root": "/tmp/nexus-derglobal-c5-fresh-rcl89o1s",
+      "command": [
+        "/usr/bin/python",
+        "/tmp/nexus-derglobal-c5-fresh-rcl89o1s/Mathematiques/manuel-maths/scripts/verify_sympy.py",
+        "--chap",
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "cwd": "/tmp/nexus-derglobal-c5-fresh-rcl89o1s",
+      "rc": 0,
+      "stdout": "[OK ] 14_C5_optimisation: \n[OK ] 1SPE-DERGLOBAL-ME-005: \n",
+      "stderr": "",
+      "network_denial": {
+        "mechanism": "libseccomp inherited syscall filter",
+        "probe_rc": 0,
+        "probe_stdout": "network syscalls refused for IPv4, IPv6 and Unix sockets\n"
+      },
+      "input_digests": {
+        "chapitres/1SPE-DERIVATION-GLOBAL/cours/14_C5_optimisation.tex": "sha256:df045fe44c7ceba122f85aebcb6738993b9e180abe7d37f6616acf53bd1085ce",
+        "chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-005.tex": "sha256:cca54fbc55250e8ad8e7bd436d28020163695c6bb964225733e4e11d0c804d45",
+        "scripts/verify_sympy.py": "sha256:68ac070a78abe236ccb39dad63c453a8ceb57d2c95681ee0bb01b4d601dbd02e",
+        "scripts/common.py": "sha256:f1dd76d4f5f354800fba1dc8ab84dfa3ab5c61b8f8f3093956d146195f520d0c"
+      },
+      "records": [
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/14_C5_optimisation.tex",
+          "source_sha256": "sha256:df045fe44c7ceba122f85aebcb6738993b9e180abe7d37f6616acf53bd1085ce",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/14_C5_optimisation.sympy.json",
+          "receipt_sha256": "sha256:635a972ef9f13158658d3944bbfe24e5f7b0a79fe5cb6564cea62310621e35e0",
+          "verdict": "pass"
+        },
+        {
+          "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-005.tex",
+          "source_sha256": "sha256:cca54fbc55250e8ad8e7bd436d28020163695c6bb964225733e4e11d0c804d45",
+          "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/1SPE-DERGLOBAL-ME-005.sympy.json",
+          "receipt_sha256": "sha256:319a375d0970c7c398c94e5810e54ae8de9bb57acef5f735df203a2748c94896",
+          "verdict": "pass"
+        }
+      ],
+      "human_approval": false
+    }
+  },
+  "objects": [
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/cours/14_C5_optimisation.tex",
+      "source_sha256": "sha256:df045fe44c7ceba122f85aebcb6738993b9e180abe7d37f6616acf53bd1085ce",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/14_C5_optimisation.sympy.json",
+      "receipt_sha256": "sha256:635a972ef9f13158658d3944bbfe24e5f7b0a79fe5cb6564cea62310621e35e0",
+      "verdict": "pass",
+      "object_id": "1SPE-DERGLOBAL-COURS-C5",
+      "before_review_source_sha256": "sha256:0624a174b9acc168199b328fe25fb194663f4a59cd5fdcd09c9f1a3e8be33a93",
+      "status": "INDEPENDENTLY_COUNTER_REVIEWED_IN_BOUNDED_SCOPE",
+      "human_approval": false,
+      "read_extent": "Source entière, modèles, unités, domaines, exemples, marges et blocs oracle. Paramètres de la figure du cours lus sans verdict de rendu.",
+      "independent_scientific_reasoning": [
+        "Pour le rectangle de périmètre 20 cm, 2x+2l=20 impose l=10−x, et les dimensions strictement positives donnent 0<x<10. L’aire vaut 10x−x² et sa dérivée 10−2x. La différence 25−A(x)=(x−5)² prouve le maximum global unique en 5, de dimensions 5 cm par 5 cm. Les valeurs 0 aux bornes sont maintenant annoncées comme celles du polynôme prolongé, correspondant à des rectangles dégénérés exclus, et le tableau a exactement cinq colonnes de données.",
+        "Pour la boîte cylindrique fermée, les deux bases donnent 2πr² et la surface latérale 2πrh. Le volume 500 cm³ impose h=500/(πr²), donc S=2πr²+1000/r sur r>0. Sa dérivée est 4πr−1000/r², de même signe que r³−250/π. La fonction cube étant strictement croissante, S décroît puis croît autour de l’unique r0=(250/π)^(1/3). La hauteur vaut alors exactement 2r0. Les arrondis à 0,01 cm sont 4,30 cm et 8,60 cm.",
+        "Preuve exacte indépendante de la seule recherche stationnaire : poser r=t r0 avec t>0 donne [S(t r0)−S(r0)]/(2πr0²)=(t−1)²(t+2)/t. Cette expression est non négative et ne s’annule que pour t=1. L’optimalité est globale et unique. Le nouveau bloc oracle vérifie cette identité et la contrainte de volume ; il ne présente plus un échantillonnage comme preuve générale.",
+        "Pour l’approfondissement arithmético-géométrique, les trois termes 2πr², 500/r et 500/r sont des surfaces mesurées en cm² et sont strictement positifs. Le produit de leurs valeurs numériques est 500000π, indépendant de r. Leur somme est donc au moins 3 fois sa racine cubique, avec égalité exactement lorsque les trois termes sont égaux. Cela équivaut à 2πr²=500/r puis r³=250/π ; la preuve retrouve bien le même unique optimum. L’ancienne somme r²+r²+h mélangeait aire et longueur et ne représentait pas la surface.",
+        "Le contre-exemple mécanique de contrainte x≥6 est maintenant certifié par 24−A(6+t)=t(t+2) pour t≥0 : le maximum admissible de ce modèle est au bord x=6, et non au point stationnaire exclu x=5. Les instructions générales demandent donc les intervalles de dérivabilité et les bornes incluses.",
+        "La figure source du rectangle utilise bien A(x)=10x−x², le point (5,25), des axes en cm et cm² et les bornes 0 et 10. La légende précise désormais leur exclusion du problème non dégénéré. La cohérence des paramètres est vérifiée, mais FIGURE_REVIEW reste en attente du rendu."
+      ],
+      "programme_review": "Optimisation par dérivation, fonctions polynômes et inverses au programme. L’inégalité arithmético-géométrique reste dans un approfondissement explicitement non requis. Aucun atome officiel modifié.",
+      "pedagogical_review": "Les contraintes et les domaines précèdent le calcul, puis la réponse est reliée aux unités et à l’optimalité globale. Aucun exercice ajouté et aucune réduction du périmètre.",
+      "editorial_review": "Les figures dégénérées sont distinguées du domaine admissible ; noms et unités sont explicites. Statut source generated conservé.",
+      "oracle_review": "Exécution canonique fraîche en copie isolée, réseau refusé. Les deux mutations permanentes font échouer le gate réel, après contrôle de la fixture intacte."
+    },
+    {
+      "source": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/methodes/1SPE-DERGLOBAL-ME-005.tex",
+      "source_sha256": "sha256:cca54fbc55250e8ad8e7bd436d28020163695c6bb964225733e4e11d0c804d45",
+      "receipt": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/validations/1SPE-DERGLOBAL-ME-005.sympy.json",
+      "receipt_sha256": "sha256:319a375d0970c7c398c94e5810e54ae8de9bb57acef5f735df203a2748c94896",
+      "verdict": "pass",
+      "object_id": "1SPE-DERGLOBAL-ME-005",
+      "before_review_source_sha256": "sha256:40b7b7fafdd2aeb3c48f8e90bdf4d40c75d35775468ac11a314867cdd8fa8dc3",
+      "status": "INDEPENDENTLY_COUNTER_REVIEWED_IN_BOUNDED_SCOPE",
+      "human_approval": false,
+      "read_extent": "Source entière, modèles, unités, domaines, exemples, marges et blocs oracle. Paramètres de la figure du cours lus sans verdict de rendu.",
+      "independent_scientific_reasoning": [
+        "La seule donnée d’une hypoténuse de 10 cm ne permettait pas de déterminer la hauteur du rectangle. La source définit maintenant le triangle rectangle en A avec AB=6 cm, AC=8 cm et BC=10 cm, ce dernier résultat provenant de 6²+8²=100. Le rectangle a un sommet A, ses côtés sont portés par les deux cathètes et le sommet opposé est sur BC.",
+        "Par similitude, h/8=(6−x)/6, donc h=8−4x/3. La même relation se lit dans le repère orthonormé A=(0,0), B=(6,0), C=(0,8) : le sommet (x,h) doit appartenir à la droite BC. La non-dégénérescence impose 0<x<6.",
+        "L’aire est A(x)=8x−4x²/3, de dérivée 8−8x/3, positive avant x=3 et négative après. Le maximum global est 12 cm², pour largeur 3 cm et hauteur 4 cm. L’identité 12−A(x)=4(x−3)²/3 prouve en outre l’optimalité et son unicité sur le domaine. L’ancienne hauteur 10−x ne place pas le sommet sur BC.",
+        "Le nouveau bloc mécanique découle des points et de la relation de colinéarité, puis contrôle aire, dérivée, domaine, dimensions et maximum. Il répond à la correction d’un modèle faux ; il n’a pas été ajouté pour augmenter le nombre d’oracles ou d’exercices."
+      ],
+      "programme_review": "Optimisation par dérivation, fonctions polynômes et inverses au programme. L’inégalité arithmético-géométrique reste dans un approfondissement explicitement non requis. Aucun atome officiel modifié.",
+      "pedagogical_review": "Les contraintes et les domaines précèdent le calcul, puis la réponse est reliée aux unités et à l’optimalité globale. Aucun exercice ajouté et aucune réduction du périmètre.",
+      "editorial_review": "Les figures dégénérées sont distinguées du domaine admissible ; noms et unités sont explicites. Statut source generated conservé.",
+      "oracle_review": "Exécution canonique fraîche en copie isolée, réseau refusé. Les deux mutations permanentes font échouer le gate réel, après contrôle de la fixture intacte."
+    }
+  ],
+  "limits": [
+    "Sources generated non publiables ; contre-revue critique scientifique réalisée par /root, sans approbation humaine.",
+    "FIGURE_REVIEW du cours reste en attente de rendu.",
+    "Une méthode auparavant sans oracle possède maintenant un bloc réel ; la population attendue des oracles devra être recalculée.",
+    "Aucun verdict de chapitre, PDF final, freeze, release ou approbation humaine."
+  ],
+  "independent_counterreview": {
+    "reviewer": "/root",
+    "human_approval": false,
+    "read_extent": "Deux sources avant et après entières, métadonnées, preuves, exemples, oracles et tests ; lignes463–474 du programme relues. Paramètres de la figure lus, rendu non inspecté.",
+    "independent_reasoning": "Rectangle de périmètre20 : A=25-(x-5)², domaine(0,10). Cylindre fermé de volume500 : h=500/(pi r²), S=2pi r²+1000/r, signe de S′ celui de r³-250/pi, unique minimum r0=(250/pi)^(1/3), h0=2r0. AM-GM : les trois surfaces ont produit500000pi ; égalité iff2pi r²=500/r. L’identité normalisée du surplus est (t-1)²(t+2)/t pour t>0. Triangle : P=(x,h) sur la droite passant par(6,0),(0,8), donc h=8-4x/3 ; A=12-4(x-3)²/3, domaine(0,6), optimum(3,4), aire12.",
+    "verification": {
+      "command": "python -m pytest -q tests/test_derglobal_optimization_models.py --junitxml=/tmp/root-derglobal-c5.xml",
+      "passed": 6,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit_sha256": "9d5da77d95f4972661a942612046e025e55f480acac99d67deead7f5e8c9d330",
+      "source_method_bindings_valid": 2,
+      "intact_canonical_oracles_executed": 2,
+      "mutated_oracles_rejected": 2
+    },
+    "figure_review": "PENDING_RENDER_INSPECTION"
+  }
+}

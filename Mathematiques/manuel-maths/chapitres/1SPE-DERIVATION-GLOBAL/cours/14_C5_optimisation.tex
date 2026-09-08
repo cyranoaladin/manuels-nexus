@@ -14,12 +14,13 @@ Pour trouver le maximum ou le minimum d'une quantité dans un problème concret 
         admissibles de $x$ (contraintes géométriques, physiques, etc.).
   \item \textbf{Exprimer la quantité.} Écrire la fonction $f(x)$ à optimiser en
         fonction de $x$ uniquement (éliminer les autres variables).
-  \item \textbf{Dériver.} Calculer $f'(x)$.
-  \item \textbf{Trouver les points critiques.} Résoudre $f'(x)=0$ sur $I$ et
-        dresser le tableau de variations.
+  \item \textbf{Dériver.} Vérifier la dérivabilité sur les intervalles de travail,
+        puis calculer $f'(x)$.
+  \item \textbf{Étudier les variations.} Résoudre $f'(x)=0$ aux points intérieurs,
+        justifier le signe de $f'$ et dresser le tableau de variations.
   \item \textbf{Conclure dans le contexte.} Exprimer la réponse avec les unités
         adaptées et vérifier qu'elle correspond bien à un maximum ou à un
-        minimum global sur $I$.
+        minimum global sur $I$, en examinant aussi les bornes incluses.
 \end{enumerate}
 \end{nxprop}
 
@@ -27,7 +28,7 @@ Pour trouver le maximum ou le minimum d'une quantité dans un problème concret 
 utiliser la contrainte (périmètre, volume, budget\ldots) pour en éliminer une.}
 
 \erreurFrequente{Oublier de vérifier que le point critique appartient au domaine
-$I$. Une valeur de $x$ négative ou supérieure à la contrainte n'a pas de sens
+$I$. Une valeur exclue par les contraintes ne représente pas un choix admissible
 dans le contexte.}
 
 % ── Exemple 1 : rectangle de périmètre fixé ──────────────────────────────────
@@ -59,7 +60,7 @@ $\ell > 0$, soit $10 - x > 0$, donc $x \in \left]0\,;\,10\right[$.
 Tableau de variations sur $\left]0\,;\,10\right[$ :
 
 \[
-\begin{array}{|c|ccccccc|}
+\begin{array}{|c|ccccc|}
 \hline
 x    & 0 & & 5 & & 10 \\
 \hline
@@ -69,6 +70,8 @@ A(x)  & 0 & \nearrow & 25 & \searrow & 0 \\
 \hline
 \end{array}
 \]
+Les valeurs $0$ aux bornes sont celles du polynôme $10x-x^2$ prolongé en
+$0$ et $10$. Elles correspondent à des rectangles dégénérés, exclus du problème.
 
 \textbf{Étape 6 — Conclusion.} $A'$ change de signe de $+$ à $-$ en $x=5$ :
 $A(5)=25$ est le maximum global sur $\left]0\,;\,10\right[$.
@@ -99,7 +102,8 @@ maximale est le carré de côté $5$ cm, d'aire $25$ cm².}
 \end{axis}
 \end{tikzpicture}
 
-\nxcaption{La parabole atteint son sommet en $x=5$ : l'aire maximale est $25$ cm².}
+\nxcaption{La parabole atteint son sommet en $x=5$ : l'aire maximale est $25$ cm².
+Les points aux bornes $0$ et $10$ correspondent aux rectangles dégénérés exclus.}
 \end{nxfigure}
 
 % ── Exemple 2 : boîte de conserve cylindrique ────────────────────────────────
@@ -144,6 +148,9 @@ On substitue :
   \Leftrightarrow r = \sqrt[3]{\frac{250}{\pi}} \approx 4{,}30 \text{ cm}.
 \]
 
+On pose $r_0=\sqrt[3]{250/\pi}$. Comme
+$S'(r)=\dfrac{4\pi}{r^2}(r^3-r_0^3)$, son signe est négatif pour
+$0<r<r_0$ et positif pour $r>r_0$.
 Tableau de variations sur $\left]0\,;\,+\infty\right[$ :
 
 \[
@@ -153,7 +160,7 @@ r      & 0 & & r_0 \approx 4{,}30 & & +\infty \\
 \hline
 S'(r)  &   & - & 0 & + & \\
 \hline
-S(r)   & +\infty & \searrow & S_{\min} & \nearrow & +\infty \\
+S(r)   & & \searrow & S_{\min} & \nearrow & \\
 \hline
 \end{array}
 \]
@@ -182,15 +189,25 @@ dériver. La contrainte (ici le volume) doit être utilisée pour exprimer $h$ e
 fonction de $r$ avant de dériver.}
 
 \approfondissement{
-La condition $h = 2r$ peut aussi se retrouver par une inégalité classique.
-En posant $u = r^3$ et en appliquant l'inégalité arithmético-géométrique à
-$r^2 + r^2 + h$ (volume fixé), on obtient le même résultat sans dérivation.
-Les deux approches sont complémentaires : la dérivation donne la valeur exacte
-du minimum et prouve son unicité.
+La condition $h=2r$ se retrouve par l'inégalité arithmético-géométrique.
+On écrit la surface, en cm², comme somme de trois termes de même unité :
+\[
+S(r)=2\pi r^2+\frac{500}{r}+\frac{500}{r}.
+\]
+Le produit de leurs valeurs numériques est constant, égal à $500\,000\pi$.
+Pour trois nombres positifs, leur somme est au moins trois fois la racine
+cubique de leur produit. Ainsi
+\[
+S(r)\geqslant3\sqrt[3]{500\,000\pi}.
+\]
+L'égalité a lieu si et seulement si les trois termes sont égaux, soit
+$2\pi r^2=500/r$, donc $r^3=250/\pi$. Cela donne le même rayon unique $r_0$
+et la même hauteur $h=2r_0$. Cette autre preuve utilise une inégalité
+d'approfondissement, non requise pour la méthode par dérivation.
 }
 
 % BEGIN-VERIFY
-% from sympy import symbols, diff, solve, simplify, Rational
+% from sympy import symbols, diff, solve, simplify, expand, Rational, pi
 %
 % x = symbols('x', positive=True)
 %
@@ -206,15 +223,37 @@ du minimum et prouve son unicité.
 % # Etape 6 : maximum GLOBAL sur l'intervalle, et non seulement local.
 % valeur = aire.subs(x, 5)
 % assert valeur == 25
-% for essai in (Rational(1, 10), 1, Rational(5, 2), Rational(49, 10),
-%               Rational(51, 10), Rational(15, 2), 9, Rational(99, 10)):
-%     assert aire.subs(x, essai) <= valeur
+% assert expand(valeur-aire-(x-5)**2) == 0
+% assert ((x-5)**2).is_nonnegative is True
 % # Le rectangle optimal est le carre de cote 5.
 % assert largeur.subs(x, 5) == 5
 %
 % # L'erreur frequente nommee par le cours : un point critique hors du domaine.
 % # Sous la contrainte x >= 6, le maximum est atteint AU BORD, pas en 5.
-% au_bord = max(aire.subs(x, Rational(k, 10)) for k in range(60, 100))
-% assert au_bord == aire.subs(x, 6) == 24
-% assert au_bord < valeur
+% t = symbols('t', nonnegative=True)
+% assert expand(24-aire.subs(x,6+t)-t*(t+2)) == 0
+% assert (t*(t+2)).is_nonnegative is True
+% assert aire.subs(x,6) == 24 < valeur
+%
+% # Cylindre fermé : contrainte, surface, dérivée et optimum réels.
+% r = symbols('r', positive=True)
+% height = 500/(pi*r**2)
+% assert simplify(pi*r**2*height) == 500
+% surface = 2*pi*r**2 + 2*pi*r*height
+% assert simplify(surface - (2*pi*r**2+1000/r)) == 0
+% assert simplify(diff(surface,r) - (4*pi*r-1000/r**2)) == 0
+% r0 = (250/pi)**Rational(1,3)
+% assert simplify(r0**3 - 250/pi) == 0
+% assert simplify(diff(surface,r).subs(r,r0)) == 0
+% assert simplify(height.subs(r,r0)-2*r0) == 0
+% assert Rational(859,200) < r0 < Rational(861,200)
+% assert Rational(1719,200) < 2*r0 < Rational(1721,200)
+% # Preuve exacte du minimum global après r=t*r0, avec t>0.
+% ratio = symbols('ratio', positive=True)
+% gap = simplify((surface.subs(r,ratio*r0)-surface.subs(r,r0))/(2*pi*r0**2))
+% assert simplify(gap - (ratio-1)**2*(ratio+2)/ratio) == 0
+% assert ((ratio-1)**2*(ratio+2)/ratio).is_nonnegative is True
+% # Les trois termes de l'argument AM-GM sont des surfaces positives.
+% assert simplify((2*pi*r**2)*(500/r)*(500/r)) == 500000*pi
+% assert simplify(surface.subs(r,r0)-3*(500000*pi)**Rational(1,3)) == 0
 % END-VERIFY
