@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import sys
+from fractions import Fraction
 from pathlib import Path
 
 import pytest
@@ -31,25 +32,23 @@ CHAPTERS = ROOT / "Mathematiques" / "manuel-maths" / "chapitres"
 @pytest.mark.parametrize(
     ("source", "expected"),
     [
-        (r"\frac{15}{8}", 1.875),
+        (r"\frac{15}{8}", Fraction(15, 8)),
         # Forme sans accolades : TeX ne consomme qu'un caractere par argument.
-        (r"\frac34", 0.75),
-        (r"\frac{\sqrt3}{2}", 3**0.5 / 2),
-        (r"\sqrt3", 3**0.5),
-        (r"10 \times \frac{1}{4} \times \frac{3}{4}", 1.875),
-        (r"\frac{125}{3}", 125 / 3),
-        (r"\sqrt{\frac{35}{12}}", (35 / 12) ** 0.5),
-        (r"\frac{\sqrt{26}}{3}", 26**0.5 / 3),
-        ("4{,}41", 4.41),
-        (r"77\,760\,000", 77760000.0),
-        (r"1600^{2} \times 0{,}6 + 2000^{2} \times 0{,}4", 3136000.0),
+        (r"\frac34", Fraction(3, 4)),
+        (r"10 \times \frac{1}{4} \times \frac{3}{4}", Fraction(15, 8)),
+        (r"\frac{125}{3}", Fraction(125, 3)),
+        ("4{,}41", Fraction(441, 100)),
+        (r"77\,760\,000", Fraction(77760000)),
+        (r"1600^{2} \times 0{,}6 + 2000^{2} \times 0{,}4", Fraction(3136000)),
     ],
 )
-def test_latex_arithmetic_is_exact(source: str, expected: float) -> None:
-    assert float(evaluate(source)) == pytest.approx(expected, rel=1e-12)
+def test_latex_arithmetic_is_exact(source: str, expected: Fraction) -> None:
+    assert evaluate(source) == expected
 
 
-@pytest.mark.parametrize("source", [r"\int_0^1 x", "E(X)", r"\alpha", "{"])
+@pytest.mark.parametrize("source", [r"\int_0^1 x", "E(X)", r"\alpha", "{",
+                                    r"\frac{\sqrt3}{2}", r"\sqrt3",
+                                    r"\sqrt{\frac{35}{12}}", r"\frac{\sqrt{26}}{3}"])
 def test_latex_arithmetic_refuses_what_it_cannot_read(source: str) -> None:
     """Aucune valeur approchee silencieuse : hors sous-langage, on refuse."""
 

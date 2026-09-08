@@ -7,7 +7,7 @@ minimal et ferme : tout ce qui n'est pas reconnu leve UnsupportedExpression,
 jamais une valeur approchee silencieuse.
 
 Reconnu : entiers, decimaux francais (3{,}14 et 3,14), \\frac et \\dfrac,
-\\sqrt (valeur rationnelle approchee a 1e-12 pres), \\times \\cdot \\div,
+\\sqrt (uniquement lorsque sa valeur est rationnelle exacte), \\times \\cdot \\div,
 + - * / ^, parentheses, \\left \\right, \\, et espaces.
 """
 
@@ -111,15 +111,15 @@ class _Parser:
                 return value
 
     def _product(self) -> Fraction:
-        value = self._power()
+        value = self._unary()
         while True:
             char = self._peek()
             if char == "*":
                 self.index += 1
-                value *= self._power()
+                value *= self._unary()
             elif char == "/":
                 self.index += 1
-                divisor = self._power()
+                divisor = self._unary()
                 if divisor == 0:
                     raise UnsupportedExpression("division par zero")
                 value /= divisor
@@ -127,7 +127,7 @@ class _Parser:
                 return value
 
     def _power(self) -> Fraction:
-        base = self._unary()
+        base = self._atom()
         if self._eat("^"):
             exponent = self._group()
             if exponent.denominator != 1:
@@ -140,7 +140,7 @@ class _Parser:
             return -self._unary()
         if self._eat("+"):
             return self._unary()
-        return self._atom()
+        return self._power()
 
     def _atom(self) -> Fraction:
         self._skip()
@@ -179,7 +179,12 @@ class _Parser:
             radicand = self._group()
             if radicand < 0:
                 raise UnsupportedExpression("racine d'un nombre negatif")
-            return Fraction(math.sqrt(radicand)).limit_denominator(10**12)
+            numerator = math.isqrt(radicand.numerator)
+            denominator = math.isqrt(radicand.denominator)
+            if (numerator * numerator != radicand.numerator
+                    or denominator * denominator != radicand.denominator):
+                raise UnsupportedExpression("racine non rationnelle : aucune approximation exacte")
+            return Fraction(numerator, denominator)
         raise UnsupportedExpression(f"commande non supportee : \\{name}")
 
 

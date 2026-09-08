@@ -1,0 +1,100 @@
+{
+  "artifact_type": "development_qa_correction_log",
+  "schema_version": 1,
+  "approves_nothing": true,
+  "observed_head": "71e2ba86deb28477c1ab4b9a7ce430256f14c5dd",
+  "worktree_observation": true,
+  "sources": [
+    {
+      "path": "scripts/latex_arith.py",
+      "before_head": "71e2ba86deb28477c1ab4b9a7ce430256f14c5dd",
+      "before_sha256": "ada209594549ca2578905bffc8f14d14b77256f8a51bd6a4a30d32d8be666ca6",
+      "after_sha256": "0d41ae201ef048c142816fd0bc30086f629599c144c15c0c1b25285d1a687e47"
+    },
+    {
+      "path": "tests/test_latex_arith_exact_contract.py",
+      "before_head": "71e2ba86deb28477c1ab4b9a7ce430256f14c5dd",
+      "before_sha256": null,
+      "after_sha256": "f225cf17c05587ea349731716e2a89d9a2860be63d6b6f88432e8baeeb747e8e"
+    },
+    {
+      "path": "tests/test_variance_sigma_consistency.py",
+      "before_head": "71e2ba86deb28477c1ab4b9a7ce430256f14c5dd",
+      "before_sha256": "ebe8bfe609b82dc7d15c35b190f85fb6ceb29af95fed1cd333b20ace68d24cdf",
+      "after_sha256": "8b6fb0821cfc07f559a5b364018d82483302b2a30e19b48a16b0b08b21d09024"
+    }
+  ],
+  "finding": {
+    "id": "QCM-CURRENT-QA-013",
+    "severity": "PRODUCT_P0",
+    "before": "The exact Fraction evaluator binds unary minus before exponentiation (-2^2 becomes4) and approximates irrational square roots as rational fractions. Historical exactness tests used floating tolerances and therefore did not establish exactness.",
+    "after": "Exponentiation binds before unary signs. Square-root output is a Fraction only when the reduced numerator and denominator are both exact squares; otherwise the API explicitly raises UnsupportedExpression. Existing rational tests now compare Fraction equality; all four former irrational cases remain tested as refusals.",
+    "status": "CORRECTED_AND_INDEPENDENTLY_REVIEWED_FOR_DECLARED_SCOPE"
+  },
+  "scientific_argument": "Unary negation in -a^2 applies to a^2 unless parentheses group the negative base. A reduced nonnegative rational p/q has a rational square root exactly when p and q are integer squares; isqrt plus equality of the squared roots verifies this condition without approximation.",
+  "tests": {
+    "initial_red_log": "/tmp/latex-arith-exact-red.log",
+    "initial_red_sha256": "2887c2ded33bb2695cb9907f1b665c041c1def1667ef4f70d2f45c7c79f217c7",
+    "initial_failed": 6,
+    "initial_passed": 12,
+    "green_junit": "/tmp/latex-arith-exact-targeted.xml",
+    "green_sha256": "cf45ecc4ff00bc777a6d409206dcee434356b1e4560e6f2031cfcaeabd709b45",
+    "passed": 45,
+    "failed": 0,
+    "deselected": 4,
+    "scope": "Controlled arithmetic and variance-detection fixtures only; four tests reading/executing the real corpus were not run."
+  },
+  "open_scientific_debts": [
+    {
+      "local_id": "UNREADABLE_OPTIONS_AS_FALSE",
+      "source": "scripts/qcm_independent_solver.py::_numeric_truths / _symbolic_truths",
+      "status": "OPEN",
+      "reason": "Unreadable options are assigned false without semantic proof."
+    },
+    {
+      "local_id": "DEGENERATE_EXTREMA_OMITTED",
+      "source": "scripts/qcm_independent_solver.py::_polynomial_local_extrema",
+      "status": "OPEN",
+      "reason": "Second-derivative-only classification can omit a degenerate extremum when other nondegenerate extrema coexist."
+    },
+    {
+      "local_id": "SIMPLIFICATION_DOMAIN_LOSS",
+      "source": "scripts/qcm_independent_solver.py::_symbolic_expression_question",
+      "status": "OPEN",
+      "reason": "Automatic simplification such as x^3/x to x^2 can lose the original exclusion x!=0."
+    },
+    {
+      "local_id": "VARIANCE_CONSUMER_DROPS_UNPARSED_CLAIMS",
+      "source": "scripts/audit_variance_sigma_consistency.py::_build_claim",
+      "status": "OPEN",
+      "controlled_evidence": "With the exact Fraction API, V(X)=4 and sigma(X)=sqrt(3) produces no finding because the irrational claimed sigma is discarded as unreadable.",
+      "impact": "No zero-defect claim is supported by this consumer until unsupported claims remain explicitly visible."
+    }
+  ],
+  "not_run": [
+    "Global QCM replay/generation until the listed scientific debts and dependent consumer are addressed."
+  ],
+  "review_status": "VALIDATED_BY_EVIDENCE_FOR_DECLARED_QA_SCOPE_ONLY",
+  "independent_counterreview": {
+    "reviewer": "/root",
+    "observed_head": "71e2ba86deb28477c1ab4b9a7ce430256f14c5dd",
+    "worktree_observation": true,
+    "read_scope": "Entire Fraction parser, both test files, complete functional diff and all controlled cases executed.",
+    "scientific_reasoning": "For a reduced p/q>=0, any rational square root m/n in lowest terms forces p=m² and q=n² by uniqueness of reduced fractions. Thus integer square roots followed by exact squaring tests are necessary and sufficient; no floating conversion is used. The unary production applies its sign after reading a power, while parentheses supply a signed base.",
+    "tests": {
+      "command": "python -m pytest -q tests/test_latex_arith_exact_contract.py tests/test_variance_sigma_consistency.py -k 'not test_co_048_is_corrected_and_covered_by_its_oracle and not test_co_048_sympy_oracle_executes and not test_the_math_corpus_carries_no_remaining_p0_of_this_class and not test_the_audit_covers_every_math_chapter' --junitxml=/tmp/nexus-root-exact-arithmetic.xml",
+      "junit_sha256": "71af6c8b9251a0cc865a643f53360a8dfbfdd441b285bf3ed0211e4f5b9113bf",
+      "passed": 45,
+      "failed": 0,
+      "deselected": 4,
+      "skipped": 0,
+      "seconds": 0.22
+    },
+    "scope_limits": [
+      "This closes the wrong sign precedence and irrational-to-approximate-Fraction defects only.",
+      "The existing variance consumer can discard refused expressions and still needs correction; these results cannot support a current-corpus zero-defect claim.",
+      "The separately documented option truth, degenerate-extrema and domain-preservation debts remain open.",
+      "No global stored evidence has been regenerated, and no scientific QCM or human approval is granted."
+    ]
+  }
+}
