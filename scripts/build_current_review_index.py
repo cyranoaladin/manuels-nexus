@@ -218,7 +218,7 @@ def _required_dimensions(manual: str, meta: dict[str, Any], text: str, dependenc
         # Chapter-level dependencies are intentionally conservative. A review
         # must examine applicability before declaring a source has no code.
         dimensions.append("CODE_EXECUTION_REVIEW")
-    if (meta.get("type_objet") in {"exercice", "corrige", "evaluation", "corrige_evaluation",
+    if (meta.get("type_objet") in {"td", "exercice", "corrige", "evaluation", "corrige_evaluation",
                                    "coup_de_pouce", "amenagee", "remediation"}
             or any(token in text for token in ("\\begin{exercice}", "\\begin{corrige}"))):
         dimensions.append("CORRECTION_ALIGNMENT_REVIEW")

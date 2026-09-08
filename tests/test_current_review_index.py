@@ -122,6 +122,14 @@ def test_embedded_correction_requires_alignment_review(gate, kind):
     assert "CORRECTION_ALIGNMENT_REVIEW" in dimensions
 
 
+def test_td_without_named_exercise_environment_still_requires_a_correction(gate):
+    dimensions = gate._required_dimensions(
+        "1SPE", {"type_objet": "td"},
+        r"\begin{enumerate}\item Calculer la distance au segment.\end{enumerate}",
+    )
+    assert "CORRECTION_ALIGNMENT_REVIEW" in dimensions
+
+
 def test_finding_in_an_additional_review_dimension_prevents_closure(gate, corpus):
     review = review_for(build(gate, corpus))
     review["dimensions"]["FIGURE_REVIEW"] = {
