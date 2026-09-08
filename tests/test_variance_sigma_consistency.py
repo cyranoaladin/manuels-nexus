@@ -165,20 +165,29 @@ def test_a_sigma_covered_by_the_sympy_oracle_is_accepted(tmp_path: Path) -> None
 
 
 @pytest.mark.parametrize(
-    "body",
+    ("body", "unverified_claims"),
     [
-        r"$V(X) = np(1-p) = 10 \times \frac{1}{4} \times \frac{3}{4} = \frac{15}{8}$. "
-        r"$\sigma(X) = \sqrt{\frac{15}{8}} \approx 1{,}37$.",
-        r"$V(G) = 100 \times \frac{5}{12} = \frac{500}{12} = \frac{125}{3} \approx 41{,}7$. "
-        r"$\sigma(G) \approx 6{,}45$~euros.",
-        r"$V(X) = 100 \times \frac{1}{2} \times \frac{1}{2} = 25$, donc $\sigma(X) = 5$.",
-        r"$E(X)=1{,}3,\qquad V(X)=4{,}41,\qquad \sigma(X)=2{,}1.$",
+        (r"$V(X) = np(1-p) = 10 \times \frac{1}{4} \times \frac{3}{4} = \frac{15}{8}$. "
+         r"$\sigma(X) = \sqrt{\frac{15}{8}} \approx 1{,}37$.", 2),
+        (r"$V(G) = 100 \times \frac{5}{12} = \frac{500}{12} = \frac{125}{3} \approx 41{,}7$. "
+         r"$\sigma(G) \approx 6{,}45$~euros.", 0),
+        (r"$V(X) = 100 \times \frac{1}{2} \times \frac{1}{2} = 25$, donc $\sigma(X) = 5$.", 0),
+        (r"$E(X)=1{,}3,\qquad V(X)=4{,}41,\qquad \sigma(X)=2{,}1.$", 0),
     ],
 )
-def test_exact_writings_are_not_flagged(tmp_path: Path, body: str) -> None:
-    """Une chaine terminee par un arrondi ne doit pas servir de reference."""
+def test_exact_writings_are_not_flagged_as_product_errors(
+    tmp_path: Path, body: str, unverified_claims: int
+) -> None:
+    """Pas de faux P0, et chaque partie illisible reste explicitement ouverte.
 
-    assert _audit_text(tmp_path, body) == []
+    La formule np(1-p) et la racine irrationnelle ne sont pas verifiees par
+    le lecteur Fraction. Leurs valeurs lisibles voisines ne les certifient pas.
+    """
+
+    findings = _audit_text(tmp_path, body)
+    assert len(findings) == unverified_claims
+    assert all(f.defect_class == 'UNPARSED_MATHEMATICAL_CLAIM'
+               and f.severity == 'CERTIFICATION_BLOCKER' for f in findings)
 
 
 # --------------------------------------------------------------------------
@@ -219,6 +228,7 @@ def test_the_math_corpus_carries_no_remaining_p0_of_this_class() -> None:
     report = audit.audit_corpus()
     blocking = [f for f in report["findings"] if f["severity"] == "P0"]
     assert blocking == [], blocking
+    assert report["certification_blocker_count"] == 0, report["findings"]
 
 
 def test_the_audit_covers_every_math_chapter() -> None:

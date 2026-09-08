@@ -16,6 +16,9 @@ Defauts recherches :
                              correspondante ailleurs dans le chapitre ;
 * SIGMA_NOT_SELF_CONTAINED   ecart-type exact mais etabli dans un autre objet du
                              chapitre : observation non bloquante.
+* UNPARSED_MATHEMATICAL_CLAIM / UNVERIFIED_VARIANCE_DEPENDENCY
+                            affirmation ou dependance non verifiee : blocker
+                            de certification, sans erreur produit inventee.
 
 Le dernier controle est celui qui capture exactement 1SPE-VARALEA-CO-048 : une
 valeur approchee affirmee dans le texte que rien ne rattache ni a une variance
@@ -64,14 +67,15 @@ class Claim:
     variable: str | None
     chain: str
     stated_raw: str
-    stated_value: float
+    stated_value: float | None
     decimals: int
     approximate: bool
     position: int
     unit: str | None
     sqrt_radicand: float | None
     exact_raw: str
-    exact_value: float
+    exact_value: float | None
+    unparsed_segments: tuple[str, ...]
 
 
 @dataclass
@@ -109,7 +113,10 @@ def _claim_region(text: str, start: int) -> str:
 
 def _segments(region: str) -> list[str]:
     parts = re.split(r"\\approx|=", region)
-    return [part.strip() for part in parts if part.strip()]
+    # A sentence's final full stop may be printed inside math delimiters.
+    # Only that terminal punctuation is removed; the expression remains
+    # subject to the complete arithmetic reader.
+    return [part.strip().removesuffix(".").rstrip() for part in parts if part.strip()]
 
 
 def _exact_segments(region: str) -> list[str]:
@@ -126,19 +133,21 @@ def _evaluate(segment: str) -> float | None:
         return None
 
 
-def _build_claim(kind: str, text: str, match: re.Match[str]) -> Claim | None:
+def _build_claim(kind: str, text: str, match: re.Match[str]) -> Claim:
     region = _claim_region(text, match.end())
     segments = _segments(region)
+    # Preserve every recognized assertion, including an empty or unsupported
+    # right-hand side. A readable later value does not prove an unreadable
+    # earlier equality in the same chain.
+    unparsed = tuple(segment for segment in segments if _evaluate(segment) is None)
     if not segments:
-        return None
-    stated_raw, stated_value = "", None
+        unparsed = (region.strip() or "<missing right-hand side>",)
+    stated_raw, stated_value = segments[-1] if segments else "", None
     for segment in reversed(segments):
         value = _evaluate(segment)
         if value is not None:
             stated_raw, stated_value = segment, value
             break
-    if stated_value is None:
-        return None
 
     # La valeur de reference d'une chaine est sa derniere ecriture exacte :
     # comparer une racine a un arrondi intermediaire fabriquerait un faux positif.
@@ -171,6 +180,7 @@ def _build_claim(kind: str, text: str, match: re.Match[str]) -> Claim | None:
         sqrt_radicand=radicand,
         exact_raw=exact_raw,
         exact_value=exact_value,
+        unparsed_segments=unparsed,
     )
 
 
@@ -178,9 +188,7 @@ def extract_claims(text: str) -> list[Claim]:
     claims = []
     for kind, pattern in (("variance", VARIANCE_RE), ("sigma", SIGMA_RE)):
         for match in pattern.finditer(text):
-            claim = _build_claim(kind, text, match)
-            if claim is not None:
-                claims.append(claim)
+            claims.append(_build_claim(kind, text, match))
     return sorted(claims, key=lambda claim: claim.position)
 
 
@@ -212,6 +220,8 @@ def chapter_variance_values(chapter_dir: Path) -> list[float]:
     for path in sorted(chapter_dir.rglob("*.tex")):
         text = path.read_text(encoding="utf-8")
         for claim in extract_claims(text):
+            if claim.unparsed_segments:
+                continue
             if claim.kind == "variance":
                 values.append(claim.exact_value)
             elif claim.sqrt_radicand is not None:
@@ -270,8 +280,19 @@ def audit_object(
             )
         )
 
+    for claim in claims:
+        if claim.unparsed_segments:
+            add(
+                "UNPARSED_MATHEMATICAL_CLAIM", "CERTIFICATION_BLOCKER",
+                f"{claim.kind}({claim.variable or '?'}) non verifiee : "
+                f"segments hors du lecteur exact {list(claim.unparsed_segments)!r}. "
+                "Aucune valeur de remplacement ni preuve de faussete n'est deduite.",
+            )
+
     variances = [claim for claim in claims if claim.kind == "variance"]
     for sigma in (claim for claim in claims if claim.kind == "sigma"):
+        if sigma.unparsed_segments:
+            continue
         # Une racine explicite est auto-portante : sqrt(radicande) est verifiable.
         if sigma.sqrt_radicand is not None:
             exact = math.sqrt(sigma.sqrt_radicand) if sigma.sqrt_radicand >= 0 else float("nan")
@@ -318,6 +339,14 @@ def audit_object(
             continue
 
         variance = upstream[-1]
+        if variance.unparsed_segments:
+            add(
+                "UNVERIFIED_VARIANCE_DEPENDENCY", "CERTIFICATION_BLOCKER",
+                f"sigma({sigma.variable or '?'}) = {sigma.stated_raw} depend de "
+                f"la variance amont non verifiee {variance.chain!r}; une variance "
+                "plus ancienne ne lui est pas substituee.",
+            )
+            continue
         if variance.exact_value < 0:
             add("ROOT_MISMATCH", "P0", f"variance negative affirmee : {variance.exact_raw}")
             continue
@@ -387,11 +416,19 @@ def audit_corpus(chapters: list[str] | None = None) -> dict:
             "UNIT_ON_VARIANCE",
             "SIGMA_WITHOUT_ORACLE",
             "SIGMA_NOT_SELF_CONTAINED",
+            "UNPARSED_MATHEMATICAL_CLAIM",
+            "UNVERIFIED_VARIANCE_DEPENDENCY",
         ],
         "scope_chapters": [directory.name for directory in directories],
         "findings": [asdict(finding) for finding in findings],
         "finding_count": len(findings),
         "p0_count": sum(1 for finding in findings if finding.severity == "P0"),
+        "unparsed_claim_count": sum(
+            finding.defect_class == "UNPARSED_MATHEMATICAL_CLAIM" for finding in findings
+        ),
+        "certification_blocker_count": sum(
+            finding.severity == "CERTIFICATION_BLOCKER" for finding in findings
+        ),
     }
 
 
@@ -407,7 +444,7 @@ def main(argv: list[str] | None = None) -> int:
         Path(args.out).write_text(payload, encoding="utf-8")
     else:
         sys.stdout.write(payload)
-    return 1 if report["p0_count"] else 0
+    return 1 if report["p0_count"] or report["certification_blocker_count"] else 0
 
 
 if __name__ == "__main__":  # pragma: no cover

@@ -1,0 +1,99 @@
+{
+  "artifact_type": "development_qa_correction_log",
+  "schema_version": 1,
+  "approves_nothing": true,
+  "observed_head": "886a3be10497e1a9d9b3b3825c02220842da09d9",
+  "worktree_observation": true,
+  "sources": [
+    {
+      "path": "scripts/audit_variance_sigma_consistency.py",
+      "before_head": "3d523e8871ef0d91abd610007351552808339c20",
+      "before_sha256": "42aa36ecc6c3bf4c606a585a42e11b6aade2f9d17ebb23f8eb6f4248db7e286a",
+      "after_sha256": "809398410ce2ee64c3df3895d5e021aacbb7d7853fa38b32be0b10c68819fd96"
+    },
+    {
+      "path": "tests/test_variance_sigma_consistency.py",
+      "before_head": "3d523e8871ef0d91abd610007351552808339c20",
+      "before_sha256": "8b6fb0821cfc07f559a5b364018d82483302b2a30e19b48a16b0b08b21d09024",
+      "after_sha256": "c82356b11cd6a10b8c49c73283b677e2a50952dd060be0020aa67fb1b061fd1c"
+    },
+    {
+      "path": "tests/test_variance_unparsed_claims.py",
+      "before_head": "3d523e8871ef0d91abd610007351552808339c20",
+      "before_sha256": null,
+      "after_sha256": "be8db2c811c7ac9a85ab66f5b9e535bd7fc05c12e8287ae861e79341e0f2fbb1"
+    }
+  ],
+  "finding": {
+    "id": "VARIANCE-UNPARSED-QA-015",
+    "severity": "CERTIFICATION_BLOCKER",
+    "status": "CORRECTED_AND_INDEPENDENTLY_RECHECKED_IN_BOUNDED_SCOPE",
+    "before": "The exact Fraction reader refused irrational radicals, but the variance consumer silently discarded those claims or unreadable links in an equality chain. It could report no finding and return RC0 for V=4, sigma=sqrt(3).",
+    "after": "Every recognized variance/sigma claim is preserved. Unreadable chain segments generate UNPARSED_MATHEMATICAL_CLAIM, severity CERTIFICATION_BLOCKER. A dependent sigma cannot reuse an earlier variance instead of the nearest unreadable one. The CLI fails on any such blocker even with no product P0. No mathematical error is inferred solely from unreadability."
+  },
+  "classification": "NON_VERIFIED is distinct from FALSE; both a correct and an incorrect unsupported irrational radical remain unverified with this intentionally rational-only reader.",
+  "legacy_test_change": {
+    "test": "test_exact_writings_are_not_flagged_as_product_errors",
+    "reason": "The previous assertion of an empty finding list conflated absence of a demonstrated product defect with complete verification. The same four fixtures remain, with exact expected blockers(2,0,0,0), no product finding allowed. The first fixture contains an unbound symbolic formula np(1-p) and an irrational radical.",
+    "strengthening": "The current-corpus zero-P0 invariant additionally requires zero certification blockers. That corpus test has not been executed in this targeted lot.",
+    "printed_punctuation": "One terminal sentence full stop is removed from a numerical chain segment before the complete arithmetic parser runs; no other syntax is guessed."
+  },
+  "tests": {
+    "red_log": "/tmp/variance-unparsed-red.log",
+    "red_sha256": "5922971223fe4b67e9c00b22fd454cdaf81703c1e0755e67981a6e58fb7f0614",
+    "red_failed": 6,
+    "red_passed": 1,
+    "intermediate_junit": "/tmp/variance-unparsed-targeted-first.xml",
+    "intermediate_sha256": "23a46ca3502b22fb0f979a3081675fe294dcb6ccc7e38ebd6f7cc3c6bbec3488",
+    "intermediate_failed": 2,
+    "intermediate_reason": "Historical no-finding assertions exposed the previously unverified symbolic chain and terminal punctuation.",
+    "green_junit": "/tmp/variance-unparsed-targeted.xml",
+    "green_sha256": "764244477d7ef42bac52a12c0aa8e56892fa51411bbebfa6cd89a6b2e35012b5",
+    "passed": 34,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "deselected": 4,
+    "scope": "Controlled fixtures only; no actual corpus oracle or global QCM solver run."
+  },
+  "open_scientific_debts": [
+    {
+      "local_id": "EXPLICIT_SIGMA_RADICAL_IGNORES_UPSTREAM_VARIANCE",
+      "status": "OPEN",
+      "controlled_evidence": "V(X)=4 followed by sigma(X)=sqrt(9) still returns no finding. The explicit-root branch checks its own root but never compares with the supplied variance."
+    },
+    {
+      "local_id": "NUMERIC_ORACLE_MENTION_IS_NOT_PROOF",
+      "status": "OPEN",
+      "controlled_evidence": "sigma≈3944 with only a comment containing3944 in BEGIN-VERIFY still returns no finding; no assertion or executed receipt is required."
+    },
+    {
+      "local_id": "EXACT_EQUALITY_CHAIN_NOT_COMPARED",
+      "status": "OPEN",
+      "controlled_evidence": "A separate probe by programme_forensics shows V=4=9 is silently accepted; the next bounded lot must compare the exact links."
+    }
+  ],
+  "not_run": [
+    "Global variance corpus audit",
+    "Actual corpus oracle execution",
+    "Global QCM replay or evidence generation",
+    "Full suite"
+  ],
+  "scope_limits": [
+    "No overall zero-defect verdict is supported until the two separately demonstrated consumer debts and other required reviews are closed.",
+    "No historical audit/receipt/queue is rewritten.",
+    "No mathematical or human review is granted by the classification change."
+  ],
+  "independent_counterreview": {
+    "reviewer": "/root",
+    "human_approval": false,
+    "scope": "Functional diff, all new tests and modified legacy tests read. The four original bodies and exact blocker expectations are preserved. No corpus or whole consumer closure.",
+    "command": "python -m pytest -q tests/test_variance_unparsed_claims.py tests/test_variance_sigma_consistency.py tests/test_latex_arith_exact_contract.py -k 'not co_048 and not math_corpus and not covers_every_math_chapter' --junitxml=/tmp/root-variance-qa015.xml",
+    "passed": 52,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "deselected": 4,
+    "junit_sha256": "572ca0f34158615e2de31ef67a660262d40d6082c6b459d169831b6d2ed1159a"
+  }
+}
