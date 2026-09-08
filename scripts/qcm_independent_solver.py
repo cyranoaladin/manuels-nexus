@@ -40,7 +40,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from latex_arith import UnsupportedExpression, evaluate  # noqa: E402
 
-SOLVER_VERSION = "1.1.4"
+SOLVER_VERSION = "1.1.5"
 
 #: Tout champ qui trahirait la reponse. Leur presence rend l'entree invalide.
 FORBIDDEN_INPUT_FIELDS = frozenset(
@@ -543,20 +543,37 @@ def _symbolic_truths(options: dict[str, str], expected, symbol: str = "x"):
 
 
 def _uniform_outcome_probability(inp: SolverInput) -> SolverResult | None:
-    """Espace uniforme fini, evenement elementaire : P = 1 / cardinal."""
+    """Singleton on a declared uniform support; membership is required."""
 
-    text = _plain(inp.statement)
+    text = _math_text(inp.statement)
     if "de equilibre" not in text and "de non truque" not in text:
         return None
     if not re.search(r"p\s*\(\s*x\s*=", text):
         return None
-    faces = Fraction(6)
+    model = re.fullmatch(
+        r"on lance un de equilibre a (\d+) faces numerotees de (-?\d+) a (-?\d+)\. "
+        r"x designe le resultat\. que vaut p\s*\(\s*x\s*=\s*(-?\d+)\s*\)\s*\?",
+        text,
+    )
+    if model is None:
+        return SolverResult(
+            status="NOT_MACHINE_RESOLVABLE", family="UNIFORM_DISCRETE_PROBABILITY",
+            reason="Support uniforme, variable resultat et evenement non explicitement etablis dans le contexte pris en charge.",
+        )
+    faces, first, last, event = map(int, model.groups())
+    if faces < 1 or last - first + 1 != faces:
+        return SolverResult(
+            status="NOT_MACHINE_RESOLVABLE", family="UNIFORM_DISCRETE_PROBABILITY",
+            reason="Le nombre de faces et les etiquettes consecutives declarees sont incompatibles.",
+        )
+    expected = Fraction(1, faces) if first <= event <= last else Fraction(0)
     return _resolved(
         "UNIFORM_DISCRETE_PROBABILITY",
         inp.options,
-        Fraction(1) / faces,
-        "Espace uniforme a 6 issues equiprobables ; un evenement elementaire "
-        "a pour probabilite 1/6.",
+        expected,
+        f"Les {faces} resultats entiers de {first} a {last} sont equiprobables. "
+        f"L'evenement X={event} contient "
+        f"{'une issue' if first <= event <= last else 'aucune issue'} ; P={expected}.",
     )
 
 

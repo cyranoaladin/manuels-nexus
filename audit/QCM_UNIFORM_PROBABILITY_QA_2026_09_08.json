@@ -1,0 +1,78 @@
+{
+  "artifact_type": "development_qa_correction_log",
+  "schema_version": 1,
+  "approves_nothing": true,
+  "observed_head": "3a616f8dbfe51028a3a92aea1249f67391a7d3f5",
+  "worktree_observation": true,
+  "sources": [
+    {
+      "path": "scripts/qcm_independent_solver.py",
+      "before_head": "c602f506c4a7a23ec581b6a1a272f9e52ea0afcb",
+      "before_sha256": "727ba5da31896ce8a2af3f2b494f92f09d7f60d401a05f5ce0247679de2f179f",
+      "after_sha256": "93df393b960b89103ac036feee765e646201b6c28f30f8004b01feb7f61bccc7"
+    },
+    {
+      "path": "tests/test_qcm_uniform_die_probability.py",
+      "before_head": "c602f506c4a7a23ec581b6a1a272f9e52ea0afcb",
+      "before_sha256": null,
+      "after_sha256": "5c23f744ae3c54f7d5d9d8abc2f135ea4f6c31c99799adcd844f681f1a411d02"
+    }
+  ],
+  "finding": {
+    "id": "QCM-CURRENT-QA-016",
+    "severity": "PRODUCT_P0",
+    "status": "SUPPORT_AND_EVENT_CORRECTED_AND_INDEPENDENTLY_RECHECKED",
+    "before": "The elementary probability family assumed six faces and probability1/6 for every requested X=k, even for an explicitly eight-faced die or an event outside its support.",
+    "after": "A closed statement grammar requires an explicit uniform support of consecutive integer labels, its coherent cardinality, X as the result, and a singleton event. Membership is checked:1/N inside the support,0 outside. Missing/different variable definitions, conditioning or inconsistent support cause explicit abstention."
+  },
+  "scientific_argument": "A uniform variable on N distinct integer labels assigns1/N to each supported value and0 to any other singleton. The complete consecutive support has cardinality last-first+1; no face count or random-variable definition is inferred from the word die.",
+  "relationship_to_previous_qa": "QA011 concerned expected value only. Its closure did not cover this separate probability family.",
+  "review_limits": [
+    "The grammar deliberately refuses a statement that never binds X to the result, even if a human would infer that convention.",
+    "No actual question is removed or modified.",
+    "This is a bounded proof of one solver family, not complete QCM scientific or human review.",
+    "Le lecteur commun option_value interprète encore à tort certaines unités et pourcentages : cette famille entière ne peut pas être déclarée scientifiquement fermée avant sa correction."
+  ],
+  "tests": {
+    "red_log": "/tmp/qcm-uniform-probability-red.log",
+    "red_sha256": "84daf51ebd84abef6f821c2a2e9d6f9ef33c57aa93cc3496b26cab118ec25b96",
+    "red_failed": 11,
+    "red_passed": 1,
+    "green_junit": "/tmp/qcm-uniform-probability-targeted.xml",
+    "green_sha256": "2ad70e3cd97633440cd5550e70810a5afe834a585a6fd427cc5ee129760d1f17",
+    "passed": 119,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "command": "python -m pytest -q tests/test_qcm_uniform_die_probability.py tests/test_qcm_scientific_abstention.py tests/test_qcm_closed_symbolic_parser.py tests/test_qcm_method_binding.py tests/test_qcm_current_evidence_guard.py --junitxml=/tmp/qcm-uniform-probability-targeted.xml",
+    "scope": "Controlled fixtures only: exact support/event countercases, previous scientific/parser regressions and method/current-evidence guards."
+  },
+  "not_run": [
+    "Global QCM replay",
+    "Global V2/closure regeneration",
+    "Full suite"
+  ],
+  "independent_counterreview": {
+    "reviewer": "/root",
+    "human_approval": false,
+    "read_extent": "Diff fonctionnel, grammaire de la phrase entière, normalisation du texte, douze fixtures et manifest lus.",
+    "proof": "Un singleton appartenant à un support uniforme de N entiers distincts a probabilité1/N ; hors support sa probabilité est nulle. Cardinal=last-first+1, et l’absence de contexte/variable explicite oblige à refuser.",
+    "command": "python -m pytest -q tests/test_qcm_uniform_die_probability.py tests/test_qcm_scientific_abstention.py tests/test_qcm_closed_symbolic_parser.py tests/test_qcm_method_binding.py tests/test_qcm_current_evidence_guard.py --junitxml=/tmp/root-qcm-qa016.xml",
+    "passed": 119,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "junit_sha256": "fe16b0b5a0365c06b5737502338aa9fa89b4f0a3eb23c7cf9a8c8b4f8bdbba0f"
+  },
+  "open_debts": [
+    {
+      "id": "QCM-OPTION-PERCENT-SEMANTICS",
+      "severity": "PRODUCT_P0",
+      "status": "OPEN",
+      "discovered_by": "/root",
+      "controlled_counterexample": "Dé8faces numérotées1à8, X=résultat, P(X=8), options A=1/8%, B=1/6 : le lecteur commun certifie A, alors que1/8%=1/800 et la vraie probabilité vaut1/8.",
+      "root_reproduced": true,
+      "correction_scope": "Lecteur commun option_value, lot séparé avant replay global."
+    }
+  ]
+}
