@@ -44,15 +44,30 @@ On découpe quatre carrés identiques de côté $x$ (en cm) aux coins d'une feui
 \begin{itemize}
   \item Exprime le volume $V(x)$ de la boîte en fonction de $x$.
   \item Quelles valeurs de $x$ sont admissibles ?
-  \item Pour quelle valeur de $x$ le volume est-il maximal ?
+  \item Pour quelle découpe l'aire du fond de la boîte vaut-elle $336$~cm$^2$ ?
 \end{itemize}
 
-On obtient $V(x) = x(30 - 2x)(20 - 2x)$, qui se développe en un polynôme de degré 3. En pratique, on étudie souvent la version simplifiée $V(x) \approx 4x^3 - 100x^2 + 600x$ sur $]0\,;\,10[$, et on cherche le maximum. Les outils de ce chapitre — forme canonique, discriminant, tableau de variations — permettent de résoudre ce type de problème d'optimisation.
+On obtient $V(x) = x(30 - 2x)(20 - 2x)$, dont le développement vaut
+\textbf{exactement} $4x^3 - 100x^2 + 600x$ : c'est un polynôme de
+\textbf{degré 3}, et non du second degré. Chercher la découpe qui rend ce volume
+maximal demande un outil que ce chapitre ne fournit pas — la dérivation, étudiée
+plus tard ; la valeur cherchée n'est d'ailleurs même pas un nombre décimal.
 
-Cette situation sera entièrement traitée au Temps~7 (TD fil rouge), une fois les capacités C1 à C6 acquises.
+Le second degré n'en est pas absent pour autant. L'aire du fond,
+$A(x) = (30-2x)(20-2x) = 4x^2 - 100x + 600$, est bien un trinôme : la troisième
+question se ramène à l'équation $4x^2 - 100x + 600 = 336$, que le discriminant
+résout. Ses deux racines sont $3$ et $22$, et seule $x = 3$ appartient au domaine
+admissible $]0\,;\,10[$. Les outils de ce chapitre — formes du trinôme,
+discriminant, tableau de signes, forme canonique — traitent ainsi toute situation
+dont le modèle est quadratique, et c'est cette compétence de modélisation (C6) que
+la boîte sert ici à installer.
+
+Le Temps~7 (TD fil rouge) reprend la situation entière : la fonction auxiliaire du
+second degré avec les outils du chapitre, et le maximum du volume par une
+exploration numérique, faute de la dérivation.
 
 % BEGIN-VERIFY
-% from sympy import symbols, expand, diff, solve, Rational, simplify
+% from sympy import symbols, expand, diff, solve, Rational, simplify, Poly
 %
 % x = symbols('x', real=True)
 %
@@ -82,4 +97,23 @@ Cette situation sera entièrement traitée au Temps~7 (TD fil rouge), une fois l
 % # La boite est bien ouverte : sa hauteur est x, sa base (30-2x)(20-2x).
 % hauteur, base = optimal, (30 - 2*optimal) * (20 - 2*optimal)
 % assert simplify(hauteur * base - meilleur) == 0
+%
+% # Ce que l'accroche affirme desormais, verifie ici meme.
+% # 1. Le developpement du volume est EXACT, ce n'est pas une approximation.
+% assert expand(volume) == 4*x**3 - 100*x**2 + 600*x
+% assert Poly(volume, x).degree() == 3
+%
+% # 2. La decoupe optimale n'est pas decimale : ce chapitre ne peut pas la donner.
+% assert not optimal.is_rational
+%
+% # 3. L'aire du fond, elle, est bien un trinome du second degre.
+% aire = (30 - 2*x) * (20 - 2*x)
+% assert expand(aire) == 4*x**2 - 100*x + 600
+% assert Poly(aire, x).degree() == 2
+%
+% # 4. L'equation A(x) = 336 a pour racines 3 et 22 ; seule 3 est admissible.
+% racines = sorted(solve(expand(aire) - 336, x))
+% assert racines == [3, 22]
+% assert [r for r in racines if domaine[0] < r < domaine[1]] == [3]
+% assert aire.subs(x, 3) == 336
 % END-VERIFY
