@@ -4,7 +4,9 @@ name: CI audit collection Phase 0
   pull_request:
   push:
     branches:
-      - finalisation/collection-v1
+      # La source de verite est `main`. Surveiller une branche de finalisation
+      # historique laissait la CI d'audit muette sur toute la production.
+      - main
   workflow_dispatch:
 
 permissions:

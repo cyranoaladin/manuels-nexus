@@ -1,6 +1,16 @@
 {
-  "all_product_debts_zero": true,
+  "all_product_debts_zero": false,
   "artifact_type": "zero_technical_debt_report",
+  "counter_semantics": "KNOWN_SUBTOTAL_ONLY_WHEN_EVIDENCE_INCOMPLETE; never a zero-defect certificate",
+  "debt_measurement_status": {
+    "CONTENT_DEBT_OPEN": "MEASURED_ZERO",
+    "EVIDENCE_DEBT_OPEN": "MEASURED_ZERO",
+    "MANIFEST_DEBT_OPEN": "MEASURED_OPEN_DEBT",
+    "PRINT_DEBT_OPEN": "MEASURED_ZERO",
+    "PROGRAMME_DEBT_OPEN": "MEASURED_ZERO",
+    "REPRODUCIBILITY_DEBT_OPEN": "MEASURED_ZERO",
+    "TECHNICAL_DEBT_OPEN": "MEASURED_ZERO"
+  },
   "generated_by": "scripts/build_zero_technical_debt.py",
   "isolated_governance_debts": [
     {
@@ -15,7 +25,7 @@
   "product_debt_summary": {
     "CONTENT_DEBT_OPEN": 0,
     "EVIDENCE_DEBT_OPEN": 0,
-    "MANIFEST_DEBT_OPEN": 0,
+    "MANIFEST_DEBT_OPEN": 12,
     "PRINT_DEBT_OPEN": 0,
     "PROGRAMME_DEBT_OPEN": 0,
     "REPRODUCIBILITY_DEBT_OPEN": 0,

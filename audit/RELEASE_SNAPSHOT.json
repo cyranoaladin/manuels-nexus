@@ -2,21 +2,21 @@
   "artifact_type": "release_snapshot",
   "schema_version": "1.0.0",
   "generated_by": "scripts/release_all_check.py",
-  "commit_head": "e76064c5cbbf6f0d883e77f1d1d7d24e0f0b21b1",
-  "timestamp_utc": "2026-09-06T16:44:44.518203+00:00",
-  "release_status": "ALL_CANONICAL_MANUALS_ZERO_DEBT_PUBLISH_READY",
-  "all_targets_candidate_ready": true,
+  "commit_head": "bc2f5ce31ed4750312c4d0fb7649d3da4f7bcb9a",
+  "timestamp_utc": "2026-09-09T21:05:36.055298+00:00",
+  "release_status": "FAIL",
+  "all_targets_candidate_ready": false,
   "evidence_digests": {
     "canonical_release_inventory": "571e8bfb4e8c71bd9080a1e72b5b3a5038dbae039e6a89a7c29b10ced9757238",
-    "programme_authority_matrix": "c1163aac1d2d20e8722ab0b68860f6b81d84f4d5681a6d2e472216e13c71b16f",
+    "programme_authority_matrix": "835c95535d2c9558355ce0c440dee6ff1d8919bb0d82f51ab128c1fc6c2ce152",
     "printed_code_validation": "ae98398bb40728dccfc3b06f4c870d0db880e27f09b316d44743ce963aace607",
     "programme_content_validation": "d95c5b2a86f566ed525a34a9889cf00384e312d8f4e75be9fe2fa89140f5ed51",
     "parity_baremes_validation": "33556c12a80774b36dc54043875743fb78cd61672a88ec58734fb49832041189",
-    "build_manifest": "75ece0a988edf58c8240aa0a03acf2be3db49d71f8bdb71ce47b629a2726bffc",
-    "double_build_reproducibility": "802862c8c524c1c40ad5df4c38235dc06324923dca8f524f5217f74a09ed97e0",
+    "build_manifest": "fcb470ab72f5766458a76c9ca1dd6a4c57e8d85e0b99ef198143dce4be4d33d6",
+    "double_build_reproducibility": "ba96a2c9b64fb5edfd7c4f9cb3e2d44b1a13fdacae298042a3630b669b8b8185",
     "final_print_preflight": "5f4b135cf0a79ec80f772e9eead50a798900692c0147a39a91696000c4f97002",
     "visual_semantic_regression_report": "9bff5abdda642386e03cc596196246b9a2f1442a2b31ef9cd1120a9ab93878b7",
-    "zero_technical_debt_report": "da1227e2a72b51ae6f85fdc52114e79da480303528d3bad1ea1ef0bdc4b77d8d",
+    "zero_technical_debt_report": "0a4b0ee4b37bc12af30ae7ff8580725f90a8b3d66e620f25ac2540245a483864",
     "open_findings": "ad1130e85573406da2d254210e9433376faa48e8385392f8b17831c16867cc45"
   },
   "canonical_targets": [
@@ -28,7 +28,7 @@
       "pdf": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf",
       "page_count": 371,
       "pdf_sha256": "sha256:f3b8ec66584bda2a6883045db452582e4a46fccb284bb3975bc4124c22c4296c",
-      "publish_ready_candidate": true
+      "publish_ready_candidate": false
     },
     {
       "target_id": "1SPE_professeur",
@@ -38,7 +38,7 @@
       "pdf": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf",
       "page_count": 645,
       "pdf_sha256": "sha256:31c99efdca5788f3b17ea58bcc88ac61516a874dc922df806742f3b6e15b92f1",
-      "publish_ready_candidate": true
+      "publish_ready_candidate": false
     },
     {
       "target_id": "TSPE_2026_2027_eleve",
@@ -48,7 +48,7 @@
       "pdf": "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_eleve.pdf",
       "page_count": 205,
       "pdf_sha256": "sha256:e6e0bb31f0b26c44193408e0423cf9a08313835b1bc59b2fd53335b1ebe858c9",
-      "publish_ready_candidate": true
+      "publish_ready_candidate": false
     },
     {
       "target_id": "TSPE_2026_2027_professeur",
@@ -58,7 +58,7 @@
       "pdf": "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_professeur.pdf",
       "page_count": 309,
       "pdf_sha256": "sha256:eaecf91d489ea483572c0235bb88bf2b85d85c226a8bc0c1bf0d9eb2391da833",
-      "publish_ready_candidate": true
+      "publish_ready_candidate": false
     },
     {
       "target_id": "TCOMPL_eleve",
@@ -68,7 +68,7 @@
       "pdf": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf",
       "page_count": 138,
       "pdf_sha256": "sha256:d23883877f8fc1c0252188738340700de2d797cfad082658e358ff071fb8aacd",
-      "publish_ready_candidate": true
+      "publish_ready_candidate": false
     },
     {
       "target_id": "TCOMPL_professeur",
@@ -78,7 +78,7 @@
       "pdf": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.pdf",
       "page_count": 216,
       "pdf_sha256": "sha256:0a38540e158753a4ee718a04aee0ca7d627d74510dae774117cf2ab0ff596f50",
-      "publish_ready_candidate": true
+      "publish_ready_candidate": false
     },
     {
       "target_id": "TEXPERTES_eleve",
@@ -88,7 +88,7 @@
       "pdf": "Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_eleve.pdf",
       "page_count": 92,
       "pdf_sha256": "sha256:c713fcf1a8eae6c0107890a1ff2aba4abded515ab10acc093fb1d38d40ae9c4e",
-      "publish_ready_candidate": true
+      "publish_ready_candidate": false
     },
     {
       "target_id": "TEXPERTES_professeur",
@@ -98,7 +98,7 @@
       "pdf": "Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_professeur.pdf",
       "page_count": 144,
       "pdf_sha256": "sha256:d98fb2614475f162095f865f4749d6352b6855556e760c39ec0b2574d3f71cec",
-      "publish_ready_candidate": true
+      "publish_ready_candidate": false
     },
     {
       "target_id": "1NSI_eleve",
@@ -108,7 +108,7 @@
       "pdf": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf",
       "page_count": 119,
       "pdf_sha256": "sha256:9920613cb4738b60f8d6b2282cf780464943fbe3cf4dbe8214fd01019707f90c",
-      "publish_ready_candidate": true
+      "publish_ready_candidate": false
     },
     {
       "target_id": "1NSI_professeur",
@@ -118,7 +118,7 @@
       "pdf": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.pdf",
       "page_count": 209,
       "pdf_sha256": "sha256:3c16053f183fcdc7240cd316f426b6c24ade90a7b1c11dbdc0d59c71aff19674",
-      "publish_ready_candidate": true
+      "publish_ready_candidate": false
     },
     {
       "target_id": "TNSI_eleve",
@@ -128,7 +128,7 @@
       "pdf": "NSI/build/MANUEL_TNSI/MANUEL_TNSI_eleve.pdf",
       "page_count": 56,
       "pdf_sha256": "sha256:3aae5fab5c8b7f2ca6fcddc649e7cfdfaec6c54fcf7da53bbc1e93c184b490c4",
-      "publish_ready_candidate": true
+      "publish_ready_candidate": false
     },
     {
       "target_id": "TNSI_professeur",
@@ -138,7 +138,7 @@
       "pdf": "NSI/build/MANUEL_TNSI/MANUEL_TNSI_professeur.pdf",
       "page_count": 85,
       "pdf_sha256": "sha256:0bce2214e0cef8b43f86f6e14f7ef64d5f0facddbf5f5619e7cbe62f80f809f5",
-      "publish_ready_candidate": true
+      "publish_ready_candidate": false
     }
   ]
 }

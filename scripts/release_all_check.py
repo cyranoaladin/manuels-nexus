@@ -140,6 +140,22 @@ def create_release_snapshot(report: dict[str, Any], root: Path = ROOT) -> dict[s
     }
 
 
+def _provenance() -> dict[str, Any]:
+    """L'etat reellement observe : commit, proprete de l'arbre, generateur.
+
+    Reutilise les observateurs canoniques du depot plutot que d'en refaire un :
+    `head_sha` pour le commit, `observation` pour l'etat de l'arbre de travail.
+    Un rapport qui ne dit pas de quel etat il parle laisse un verdict survivre
+    aux sources qui le portaient.
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from build_current_review_index import observation
+    from evidence_freshness import head_sha
+
+    head = head_sha(ROOT)
+    return {**observation(ROOT, head), "generated_by": GENERATED_BY}
+
+
 def evaluate_release(
     release_owner_final_signoff: bool = False,
 ) -> dict[str, Any]:
@@ -289,8 +305,20 @@ def evaluate_release(
             "publish_ready": all_checks_pass and release_owner_final_signoff,
         })
 
+    # Fraicheur des preuves lourdes : elles declarent le commit observe. Sans
+    # ce commit, rien ne les rattache a un etat -- ce qui ne vaut pas mieux
+    # qu'un rattachement perime. Une preuve perimee ne peut pas rendre une
+    # cible candidate : ce serait publier sur la foi d'un build d'hier.
+    current_head = _provenance()["head"]
+    repro_current = bool(repro.get("head_commit")) and repro.get("head_commit") == current_head
+    preflight_current = (
+        bool(preflight.get("head_commit")) and preflight.get("head_commit") == current_head
+    )
+
     all_targets_candidate_ready = (
-        len(target_evaluations) == 12
+        repro_current
+        and preflight_current
+        and len(target_evaluations) == 12
         and all(t["publish_ready_candidate"] for t in target_evaluations)
         and inv_summary.get("CANONICAL_MANUALS") == 6
         and inv_summary.get("CANONICAL_PDFS") == 12
@@ -394,14 +422,33 @@ def evaluate_release(
         "BAREME_TOTAL_MISMATCH": require(parity_summary, "audit/PARITY_BAREMES_VALIDATION.json", "BAREME_TOTAL_MISMATCH"),
         "BAREME_SCOPE_AMBIGUOUS": require(parity_summary, "audit/PARITY_BAREMES_VALIDATION.json", "BAREME_SCOPE_AMBIGUOUS"),
         "DOUBLE_BUILD_REPRODUCIBILITY": f"{repro_ok_count}/{len(target_evaluations)}",
-        "REPRODUCIBILITY_GLOBAL": repro.get("reproducibility_global", "UNKNOWN"),
+        # Une preuve rattachee a un autre commit reste consultable, mais cesse
+        # d'etre annoncee comme acquise : c'est la difference entre « prouve »
+        # et « prouve un jour ».
+        "REPRODUCIBILITY_EVIDENCE_HEAD": repro.get("head_commit"),
+        "REPRODUCIBILITY_EVIDENCE_CURRENT": repro_current,
+        "REPRODUCIBILITY_GLOBAL": (
+            repro.get("reproducibility_global", "UNKNOWN")
+            if repro_current
+            else "STALE_EVIDENCE_NOT_REOBSERVED"
+        ),
         "MANIFEST_COVERAGE": f"{manifest_builds}/{len(target_evaluations)}",
         "MANIFEST_GLOBAL": (
             "FULL_CURRENT"
             if manifest_builds == len(target_evaluations) and manifest_debt == 0
             else "INCOMPLETE"
         ),
-        "PREFLIGHT_ALL_TARGETS": preflight.get("preflight_all_targets", "UNKNOWN"),
+        "PREFLIGHT_EVIDENCE_HEAD": preflight.get("head_commit"),
+        "PREFLIGHT_EVIDENCE_CURRENT": preflight_current,
+        "PREFLIGHT_ALL_TARGETS": (
+            preflight.get("preflight_all_targets", "UNKNOWN")
+            if preflight_current
+            else "STALE_EVIDENCE_NOT_REOBSERVED"
+        ),
+        # Compte les cibles reellement PASS, au lieu de le supposer egal au total.
+        "PREFLIGHT_TARGETS_PASSED": sum(
+            1 for r in preflight_records if r.get("preflight_status") == "PASS"
+        ),
         "UNEXPECTED_VISUAL_DIFF": regression.get("unexpected_visual_diff", 0),
         "UNEXPLAINED_SEMANTIC_DIFF": regression.get("unexplained_semantic_diff", 0),
         "ALL_PRODUCT_DEBTS_ZERO": bool(debt.get("all_product_debts_zero", False)),
@@ -411,6 +458,7 @@ def evaluate_release(
         "artifact_type": "release_all_check",
         "schema_version": "2.0.0",
         "generated_by": GENERATED_BY,
+        "provenance": _provenance(),
         "summary": summary,
         "targets": target_evaluations,
     }
@@ -443,9 +491,15 @@ def main() -> int:
         f"- **Signoff Release Owner Final** : `{report['summary']['RELEASE_OWNER_FINAL_SIGNOFF']}`",
         f"- **PUBLISH_READY Définitifs** : `{report['summary']['PUBLISH_READY_COUNT']}/{report['summary']['CANONICAL_TARGETS_COUNT']}`",
         f"- **Reproductibilité Déterministe** : `{report['summary']['REPRODUCIBILITY_GLOBAL']}` ({report['summary']['DOUBLE_BUILD_REPRODUCIBILITY']})",
-        f"- **Préflight Impression Global** : `{report['summary']['PREFLIGHT_ALL_TARGETS']}` (12/12)",
+        # Le denominateur est celui des cibles reellement evaluees, jamais un
+        # « 12/12 » ecrit en dur qui resterait vrai apres avoir cesse de l'etre.
+        f"- **Préflight Impression Global** : `{report['summary']['PREFLIGHT_ALL_TARGETS']}` "
+        f"({report['summary']['PREFLIGHT_TARGETS_PASSED']}/{report['summary']['CANONICAL_TARGETS_COUNT']})",
         f"- **Dette Produit Ouverte** : `{report['summary']['PRODUCT_TECHNICAL_DEBT_OPEN']}` (Technique: {report['summary']['PRODUCT_TECHNICAL_DEBT_OPEN']}, Contenu: {report['summary']['CONTENT_DEBT_OPEN']}, Programme: {report['summary']['PROGRAMME_DEBT_OPEN']}, Print: {report['summary']['PRINT_DEBT_OPEN']}, Manifest: {report['summary']['MANIFEST_DEBT_OPEN']}, Repro: {report['summary']['REPRODUCIBILITY_DEBT_OPEN']})",
         f"- **Défauts Ouverts** : P0={report['summary']['TOTAL_P0_OPEN']}, P1={report['summary']['TOTAL_P1_OPEN']}, P2={report['summary']['TOTAL_P2_OPEN']}, Overfull={report['summary']['OVERFULL']}",
+        f"- **État observé** : commit `{report['provenance']['head']}`, "
+        f"arbre de travail {'SALE' if report['provenance']['worktree_dirty'] else 'propre'} "
+        f"({report['provenance']['scope']})",
         "",
         "## Tableau Récapitulatif Exhaustif des 12 PDF Canoniques",
         "",
