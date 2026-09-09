@@ -6,22 +6,28 @@
   "python_version_here": "3.12.3",
   "pinning": {
     "pinned_requirements_file": "requirements-ci-audit.txt",
-    "pinned_package_count": 30,
-    "match_count": 21,
-    "drift_count": 8,
-    "absent_count": 1,
+    "pinned_package_count": 35,
+    "match_count": 35,
+    "drift_count": 0,
+    "absent_count": 0,
     "packages": [
       {
         "package": "Deprecated",
         "pinned": "1.3.1",
-        "installed_here": "1.2.18",
-        "state": "DRIFT"
+        "installed_here": "1.3.1",
+        "state": "MATCH"
+      },
+      {
+        "package": "PyMuPDF",
+        "pinned": "1.28.2",
+        "installed_here": "1.28.2",
+        "state": "MATCH"
       },
       {
         "package": "PyYAML",
         "pinned": "6.0.3",
-        "installed_here": "6.0.1",
-        "state": "DRIFT"
+        "installed_here": "6.0.3",
+        "state": "MATCH"
       },
       {
         "package": "Pygments",
@@ -38,8 +44,8 @@
       {
         "package": "attrs",
         "pinned": "25.4.0",
-        "installed_here": "23.2.0",
-        "state": "DRIFT"
+        "installed_here": "25.4.0",
+        "state": "MATCH"
       },
       {
         "package": "coverage",
@@ -68,8 +74,8 @@
       {
         "package": "librt",
         "pinned": "0.13.0",
-        "installed_here": "0.12.0",
-        "state": "DRIFT"
+        "installed_here": "0.13.0",
+        "state": "MATCH"
       },
       {
         "package": "lxml",
@@ -108,6 +114,18 @@
         "state": "MATCH"
       },
       {
+        "package": "pdfminer.six",
+        "pinned": "20260107",
+        "installed_here": "20260107",
+        "state": "MATCH"
+      },
+      {
+        "package": "pdfplumber",
+        "pinned": "0.11.10",
+        "installed_here": "0.11.10",
+        "state": "MATCH"
+      },
+      {
         "package": "pikepdf",
         "pinned": "8.7.1",
         "installed_here": "8.7.1",
@@ -126,6 +144,18 @@
         "state": "MATCH"
       },
       {
+        "package": "pypdf",
+        "pinned": "6.18.0",
+        "installed_here": "6.18.0",
+        "state": "MATCH"
+      },
+      {
+        "package": "pypdfium2",
+        "pinned": "5.13.0",
+        "installed_here": "5.13.0",
+        "state": "MATCH"
+      },
+      {
         "package": "pytest",
         "pinned": "9.0.2",
         "installed_here": "9.0.2",
@@ -140,8 +170,8 @@
       {
         "package": "python-dotenv",
         "pinned": "1.2.1",
-        "installed_here": "1.2.2",
-        "state": "DRIFT"
+        "installed_here": "1.2.1",
+        "state": "MATCH"
       },
       {
         "package": "referencing",
@@ -170,26 +200,26 @@
       {
         "package": "types-PyYAML",
         "pinned": "6.0.12.20260724",
-        "installed_here": "6.0.12.20260518",
-        "state": "DRIFT"
+        "installed_here": "6.0.12.20260724",
+        "state": "MATCH"
       },
       {
         "package": "types-jsonschema",
         "pinned": "4.26.0.20260518",
-        "installed_here": null,
-        "state": "ABSENT"
+        "installed_here": "4.26.0.20260518",
+        "state": "MATCH"
       },
       {
         "package": "typing_extensions",
         "pinned": "4.15.0",
-        "installed_here": "4.16.0",
-        "state": "DRIFT"
+        "installed_here": "4.15.0",
+        "state": "MATCH"
       },
       {
         "package": "wrapt",
         "pinned": "2.3.0",
-        "installed_here": "1.17.2",
-        "state": "DRIFT"
+        "installed_here": "2.3.0",
+        "state": "MATCH"
       }
     ]
   },
@@ -289,8 +319,8 @@
     }
   ],
   "pytest_warnings": {
-    "source_capture_sha256": "sha256:304421dc67012f58bef4c0e2029e035a85b6955a829670dee105d0a97be144a2",
-    "source_capture_name": "root_umbrella.log",
+    "source_capture_sha256": "sha256:c4dcfae8698f3af12a9a4f752697633cbad86c85118fa78eca2c0812d8363aea",
+    "source_capture_name": "DEPENDENCY_WARNING_CAPTURE.txt",
     "count": 5,
     "project_owned": 0,
     "upstream_owned": 5,
@@ -333,7 +363,7 @@
         "category": "DeprecationWarning",
         "message": "builtin type swigvarlink has no __module__ attribute",
         "owner": "upstream",
-        "phase": "post_summary"
+        "phase": "summary"
       }
     ]
   },

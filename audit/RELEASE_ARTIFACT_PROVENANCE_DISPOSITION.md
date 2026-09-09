@@ -24,7 +24,7 @@ Genere par `scripts/build_release_artifact_provenance_disposition.py`. Ancestral
 - disposition : **HISTORICAL_OBSOLETE** (decidee dans `audit/HUMAN_DECISION_RELEASE_ARTIFACT_DISPOSITION_2026-09-03.json`)
 - motif : cartographie de dette de statut emise sans producteur reproductible et sans aucun consommateur ; elle ne peut plus etre reemise ni verifiee, elle sort de la surface de release courante
 - sha256 : `bdce8dab57c2a6fc8247b7075a635182d8798f594076bf73438715f982bb57b1`
-- conserve dans l'histoire Git : 1 commits, toujours suivi
+- conserve dans l'histoire Git : 2 commits, toujours suivi
 
 | REFERENCE | ROLE |
 | --- | --- |

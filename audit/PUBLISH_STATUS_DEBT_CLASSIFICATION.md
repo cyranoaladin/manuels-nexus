@@ -1,44 +1,70 @@
-# Classification de la dette de statut publication
+# Classification de la dette de statut — 2222 `blocking_statuses`
 
-Classification conservative des 2 222 blocages du snapshot d'inventaire. Aucun statut source n'est promu et aucune approbation scientifique, pédagogique ou humaine n'est inférée.
+Classification par **clusters** (pas une revue individuelle des 2222 —
+c'est l'objectif explicite de ce lot : cartographier la dette pour pouvoir
+la fermer méthodiquement, pas la fermer ici). Détail machine complet, une
+ligne par objet, dans `audit/PUBLISH_STATUS_DEBT_CLASSIFICATION.json`.
 
-## Provenance
+Aucune promotion de statut effectuée. `UNKNOWN = 0` (2222/2222 classifiés).
 
-- Inventaire source : `audit/INVENTAIRE_COLLECTION.json` (`aa2fc74d006abb0843fc7af44d495d0cc79b0b9c`)
-- Provenance de l'inventaire : `STALE_BUILD_MANIFEST`; seule sa tranche des statuts bloquants est reclassée ici.
-- Les valeurs `current_status` demandées ne sont **pas** certifiées au HEAD courant tant que la tranche n'est pas recalculée depuis les sources.
-- La campagne 1NSI scellée est utilisée uniquement pour identifier les reçus devenus périmés.
+## Répartition par cluster
 
-## Résultat
+| Cluster | Nombre | % | Signification |
+|---|---:|---:|---|
+| `GENERATED_NOT_REVIEWED` | 1756 | 79,0 % | `status=generated` — produit par le pipeline, jamais examiné (ni scientifique, ni pédagogique, ni éditorial). |
+| `EDITORIAL_REVIEW_PENDING` | 164 | 7,4 % | `status=needs_review` (hors méthodes) — flag explicite de revue, type de revue non déductible sans inspection individuelle. |
+| `PEDAGOGICAL_REVIEW_PENDING` | 161 | 7,2 % | `status=verified` — vérification scientifique/computationnelle (SymPy/Python) déjà passée ; reste la revue pédagogique/éditoriale avant `approved`. |
+| `METHOD_REVIEW_DEBT_A4` | 94 | 4,2 % | `status=needs_review`, `type_objet=methode` — dette de revue des méthodes déjà identifiée (`A4_METHOD_REVIEW_DEBT_POLICY.md`, ~89 méthodes ; 94 mesurées ici, écart probablement dû à des méthodes ajoutées depuis A4 — à vérifier). |
+| `HUMAN_APPROVAL_PENDING` | 23 | 1,0 % | Contrats `status=valide` (20) ou `status=complete` (3) — validation informelle déjà faite, transition formelle vers `approved` manquante. |
+| `DRAFT_NOT_REVIEWED` | 17 | 0,8 % | `status=draft` — brouillon, structure/contrat non finalisé. |
+| `SCIENTIFIC_REVIEW_PENDING` | 7 | 0,3 % | `status=manual_review` — SymPy n'a pas pu vérifier automatiquement (règle R2), revue scientifique humaine explicitement requise. |
+| **Total** | **2222** | **100 %** | |
 
-- Classés : **2714 / 2222**
-- UNKNOWN : **0**
-- Promotion de statut : **aucune**
+`UNKNOWN` = 0.
 
-### Par cluster
+## Répartition par manuel × cluster
 
-- `PROGRAM_REVIEW_PENDING` : 203
-- `SCIENTIFIC_REVIEW_PENDING` : 0
-- `PEDAGOGICAL_REVIEW_PENDING` : 0
-- `EDITORIAL_REVIEW_PENDING` : 0
-- `GENERATED_NOT_REVIEWED` : 2173
-- `DRAFT_NOT_REVIEWED` : 8
-- `STALE_RECEIPT` : 330
-- `HUMAN_APPROVAL_PENDING` : 0
-- `NON_PUBLISHABLE_BUT_IN_RELEASE_GRAPH` : 0
-- `OTHER_EXPLICIT` : 0
+| Manuel | Clusters présents |
+|---|---|
+| **1SPE** (1414) | GENERATED_NOT_REVIEWED 1393, PEDAGOGICAL_REVIEW_PENDING 8, DRAFT_NOT_REVIEWED 7, HUMAN_APPROVAL_PENDING 3, METHOD_REVIEW_DEBT_A4 3 |
+| **1NSI** (342) | EDITORIAL_REVIEW_PENDING 164, PEDAGOGICAL_REVIEW_PENDING 153, DRAFT_NOT_REVIEWED 10, METHOD_REVIEW_DEBT_A4 8, SCIENTIFIC_REVIEW_PENDING 7 |
+| **TCOMPL** (209) | GENERATED_NOT_REVIEWED 150, METHOD_REVIEW_DEBT_A4 50, HUMAN_APPROVAL_PENDING 9 |
+| **TEXPERTES** (131) | GENERATED_NOT_REVIEWED 93, METHOD_REVIEW_DEBT_A4 33, HUMAN_APPROVAL_PENDING 5 |
+| **TNSI** (115) | GENERATED_NOT_REVIEWED 109, HUMAN_APPROVAL_PENDING 6 |
+| **TSPE_2026_2027** (11) | GENERATED_NOT_REVIEWED 11 |
 
-### Par manuel
+Observation : **1NSI concentre à lui seul 100 % des clusters
+`EDITORIAL_REVIEW_PENDING` et `PEDAGOGICAL_REVIEW_PENDING`** — cohérent avec
+la règle R2 du pipeline NSI (`verify_python.py`, exécution sandbox
+systématique), qui fait davantage progresser les objets NSI vers
+`verified`/`needs_review` plutôt que de les laisser à `generated`. Les
+manuels de mathématiques (1SPE, TCOMPL, TEXPERTES, TSPE, TNSI) restent
+massivement au stade `generated` — jamais passés par une étape de
+vérification automatique équivalente à grande échelle.
 
-- `1NSI` : 423 — PROGRAM_REVIEW_PENDING=46, GENERATED_NOT_REVIEWED=47, STALE_RECEIPT=330
-- `1SPE` : 1440 — PROGRAM_REVIEW_PENDING=20, GENERATED_NOT_REVIEWED=1413, DRAFT_NOT_REVIEWED=7
-- `TCOMPL` : 327 — PROGRAM_REVIEW_PENDING=76, GENERATED_NOT_REVIEWED=251
-- `TEXPERTES` : 248 — PROGRAM_REVIEW_PENDING=38, GENERATED_NOT_REVIEWED=210
-- `TNSI` : 199 — PROGRAM_REVIEW_PENDING=20, GENERATED_NOT_REVIEWED=178, DRAFT_NOT_REVIEWED=1
-- `TSPE` : 77 — PROGRAM_REVIEW_PENDING=3, GENERATED_NOT_REVIEWED=74
+## Ce que cette classification permet — et ne permet pas
 
-## Interprétation
+**Permet** : prioriser. `GENERATED_NOT_REVIEWED` (79 %) est la masse
+principale — closing ce cluster nécessite de faire passer chaque objet par
+la vérification appropriée à son type (`verify_sympy.py`/`verify_python.py`
+pour le contenu calculatoire, revue humaine pour le reste), pas une
+promotion en masse. `METHOD_REVIEW_DEBT_A4` (94) est un cluster déjà
+identifié et documenté par un lot antérieur (A4) — prioritaire pour
+fermeture réelle (mandat T2 addendum §15).
 
-`STALE_RECEIPT` regroupe 330 objets recoupés avec la campagne de revue 1NSI scellée et 7 objets dont l'identité AGT→APT a rompu la liaison de preuve. `PROGRAM_REVIEW_PENDING` est un classement conservateur de fermeture : il ne vaut pas validation du programme.
+**Ne permet pas** : conclure quoi que ce soit sur la conformité programme,
+l'exactitude scientifique ou la qualité pédagogique d'un objet individuel.
+`programme_state`, `scientific_state`, `pedagogical_state` sont enregistrés
+comme `UNKNOWN_PENDING_AUDIT` pour tous les objets sauf
+`PEDAGOGICAL_REVIEW_PENDING` (`scientific_state=AUTOMATED_CHECK_PASSED`,
+seul signal disponible sans audit individuel). Aucune valeur `FULL`/
+`approved` n'est déclarée par ce lot.
 
-Le détail ligne par ligne, incluant les neuf champs réglementaires demandés, est dans `audit/PUBLISH_STATUS_DEBT_CLASSIFICATION.json`.
+## Prochaine étape
+
+Fermer réellement les 94 `METHOD_REVIEW_DEBT_A4` (programme, scientifique,
+pédagogique, cross-reference, variante/rendu — mandat §15), en parallèle
+des audits scientifique/pédagogique par chapitre (T3/T4) qui feront
+progresser `GENERATED_NOT_REVIEWED` et `EDITORIAL_REVIEW_PENDING` vers des
+statuts honnêtes. Aucune promotion tant que ces contrôles ne sont pas
+réellement passés.

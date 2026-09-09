@@ -53,20 +53,46 @@ def test_unbounded_declarations_are_all_listed() -> None:
 
 
 def test_warnings_are_read_from_a_real_capture_not_invented() -> None:
+    """Le registre doit decrire LA capture commitee, pas une autre.
+
+    L'inclusion seule laissait passer un registre bati sur une capture
+    anterieure : il gardait des avertissements que le depot ne portait plus, et
+    l'empreinte declaree ne designait aucun fichier present. Une preuve qui
+    nomme une source introuvable ne prouve rien.
+    """
+    import hashlib
+
     warnings = _ledger()["pytest_warnings"]
     assert warnings["source_capture_sha256"], "aucune capture source declaree"
     assert warnings["count"] == len(warnings["warnings"])
+
+    empreinte = "sha256:" + hashlib.sha256(CAPTURE_PATH.read_bytes()).hexdigest()
+    assert warnings["source_capture_sha256"] == empreinte, (
+        "le registre declare une capture qui n'est pas celle du depot"
+    )
+
     parsed = ledger.parse_pytest_warnings(CAPTURE_PATH)
-    recorded = {(item["location"], item["line"], item["message"]) for item in warnings["warnings"]}
-    assert {(item["location"], item["line"], item["message"]) for item in parsed} <= recorded
+    identity = lambda item: (item["location"], item["line"], item["message"])  # noqa: E731
+    assert {identity(item) for item in parsed} == {identity(item) for item in warnings["warnings"]}
 
 
 def test_a_post_summary_warning_is_distinguished_from_the_summary_ones() -> None:
+    """Un avertissement emis apres le resume doit rester visible comme tel.
+
+    L'assertion etait inconditionnelle : elle exigeait qu'un tel avertissement
+    existe toujours, ce qui la rendait rouge des que l'environnement cessait
+    d'en emettre -- et verte, a l'inverse, tant qu'un registre perime en
+    conservait un. Ce qui doit tenir est le classement : si la capture en
+    contient un, le registre le distingue du resume.
+    """
+    parsed = ledger.parse_pytest_warnings(CAPTURE_PATH)
+    attendus = {item["phase"] for item in parsed}
     phases = {item["phase"] for item in _ledger()["pytest_warnings"]["warnings"]}
-    assert "post_summary" in phases, (
-        "l'avertissement emis apres le resume echappe au filtrage pytest et doit "
-        "rester visible dans le registre"
+    assert phases == attendus, (
+        "le registre ne classe pas les avertissements comme la capture les presente"
     )
+    if "post_summary" in attendus:
+        assert "post_summary" in phases
 
 
 def test_every_warning_carries_an_owner() -> None:

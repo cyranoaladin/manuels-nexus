@@ -28,6 +28,22 @@ def test_status_is_publish_ready_candidate(release_report: dict) -> None:
 
 
 def test_all_12_targets_candidate_ready(release_report: dict) -> None:
+    """ROUGE ATTENDU tant que les douze PDF ne sont pas reconstruits.
+
+    Ce test passait auparavant parce que la preuve de reproductibilite et le
+    preflight d'impression, observes au commit 6c8b4b5b et non au HEAD,
+    etaient comptes comme courants. Une cible devenait candidate sur la foi
+    d'un build d'hier.
+
+    Depuis que la fraicheur de ces preuves est verifiee, le compte tombe a 0/12
+    et ce test echoue. C'est le comportement correct : il signale un bloqueur
+    de release reel, pas une regression.
+
+    Il redeviendra vert quand les douze editions auront ete reconstruites au
+    commit de release et que leurs preuves declareront ce commit. Ne pas
+    l'ajuster pour qu'il passe : ce serait retablir exactement le faux vert
+    qu'il vient de cesser de couvrir.
+    """
     summary = release_report["summary"]
     assert summary["CANONICAL_TARGETS_COUNT"] == 12
     assert summary["CANDIDATE_READY_COUNT"] == 12

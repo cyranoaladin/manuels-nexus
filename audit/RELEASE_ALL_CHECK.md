@@ -8,7 +8,7 @@
 - **Préflight Impression Global** : `STALE_EVIDENCE_NOT_REOBSERVED` (12/12)
 - **Dette Produit Ouverte** : `0` (Technique: 0, Contenu: 0, Programme: 0, Print: 0, Manifest: 12, Repro: 0)
 - **Défauts Ouverts** : P0=0, P1=0, P2=0, Overfull=0
-- **État observé** : commit `bc2f5ce31ed4750312c4d0fb7649d3da4f7bcb9a`, arbre de travail SALE (WORKTREE_BOUND_BY_INPUT_DIGESTS)
+- **État observé** : commit `f49b7950ef6d651a765a5b872858bd57823a4bd0`, arbre de travail SALE (WORKTREE_BOUND_BY_INPUT_DIGESTS)
 
 ## Tableau Récapitulatif Exhaustif des 12 PDF Canoniques
 

@@ -306,12 +306,24 @@ def test_artifact_upload_uses_step_runner_context_not_dynamic_env() -> None:
 
 
 def test_audit_workflow_triggers_remain_phase_0_only() -> None:
+    """La CI d'audit surveille la source de verite, et elle seule.
+
+    Ce contrat exigeait `finalisation/collection-v1`, une branche de
+    finalisation historique. La CI est ainsi restee muette sur trois semaines
+    de production poussee ailleurs : elle surveillait une branche que plus
+    personne n'alimentait. Ce qui doit tenir n'est pas le nom d'une branche
+    d'epoque, c'est que le declencheur suive la source de verite.
+    """
     workflow, _ = _workflow()
     triggers = workflow["on"]
     assert set(triggers) == {"pull_request", "push", "workflow_dispatch"}
-    assert triggers["push"] == {
-        "branches": ["finalisation/collection-v1"],
-    }
+    assert triggers["push"] == {"branches": ["main"]}
+    # Aucune branche de finalisation ou de sauvetage ne doit revenir comme
+    # cible de push : ce serait rendre la CI muette une seconde fois.
+    assert not any(
+        branch.startswith(("finalisation/", "rescue/", "integration/"))
+        for branch in triggers["push"]["branches"]
+    )
 
 
 def test_audit_workflow_does_not_turn_red_tests_into_silent_success() -> None:
