@@ -40,10 +40,29 @@ complet sans aucune ressource extérieure :
 
 ## Ce qui ne fonctionne pas, et qui bloque la release
 
-**Le PDF publié n'est pas le livrable courant.** Le clone produit **381
-pages** là où `MANUELS_PDF_PUBLICATION/01_Maths_1re_Spe_Eleve.pdf`, daté du
-15 août, en compte **371**. Dix pages de contenu séparent l'artefact publié
-des sources actuelles.
+**Trois PDF distincts portent le même nom de manuel.** Pour la seule édition
+élève de 1SPE :
+
+| Artefact | Pages | SHA-256 | État |
+|---|---:|---|---|
+| Recompilé depuis les sources courantes | **381** | `0ea2e23abdeb5b44…` | courant |
+| `build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf`, **versionné** | 371 | `f3b8ec66584bda2a…` | périmé de 10 pages |
+| `MANUELS_PDF_PUBLICATION/01_Maths_1re_Spe_Eleve.pdf` | 371 | `c23140a53c25c584…` | périmé, **et distinct du précédent** |
+
+Les deux artefacts périmés ont le même nombre de pages mais des empreintes
+différentes : ce ne sont pas la même compilation, et aucun ne correspond aux
+sources. La recompilation, elle, est reproductible : deux passages successifs
+depuis le clone donnent la même empreinte `0ea2e23abdeb5b44`.
+
+**Le dépôt versionne ses artefacts de build.** 36 PDF sont suivis par Git, dont
+les sorties de `build/`. Un PDF périmé voyage donc avec les sources et peut
+être pris pour le livrable. C'est arrivé pendant cet audit : un `git checkout`
+du répertoire de travail a remplacé une compilation fraîche par la version
+commitée, ce qui a d'abord fait croire à six pages blanches finales
+inexistantes. Vérification refaite sur la bonne compilation : la quatrième de
+couverture est correctement composée en page 381, et il reste sept pages sans
+texte (2, 4, 6, 12, 358, 362, 370), aux positions attendues de versos dans une
+mise en page recto-verso.
 
 **La chaîne déclarée n'est pas respectée par la machine courante.**
 `scripts/check_toolchain.py` relève 3 blocages sur 10 contrôles : TeX Live
