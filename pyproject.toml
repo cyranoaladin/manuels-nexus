@@ -45,3 +45,14 @@ warn_unused_ignores = true
 
 [tool.ruff]
 target-version = "py312"
+
+# Les fichiers `chapitres/*/code/*.py` ne sont pas des modules : ce sont les
+# programmes canoniques auxquels un listing publie est lie par egalite d'AST.
+# Un listing de manuel s'appuie legitimement sur le modele du chapitre --
+# `ajouter_gestionnaire` d'une fiche IHM, par exemple, est defini dans le cours
+# et re-declare dans le bloc de verification qui l'execute. F821 y signale donc
+# un nom que l'eleve connait, et rendre ces fichiers autonomes romprait
+# precisement le lien qu'ils servent a etablir. Ce que le code fait reste
+# prouve par les blocs % BEGIN-VERIFY, qui sont executes.
+[tool.ruff.lint.per-file-ignores]
+"*/chapitres/*/code/*.py" = ["F821"]

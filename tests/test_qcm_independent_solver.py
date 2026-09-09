@@ -297,9 +297,17 @@ def test_the_linear_expectation_rule_has_a_counter_example() -> None:
 
 
 def test_option_values_compare_by_value_not_by_writing() -> None:
+    """Deux ecritures d'un meme nombre valent pareil ; une quantite n'est pas un nombre.
+
+    Cette assertion exigeait auparavant que « $12$ euros » vaille 12. C'etait
+    le defaut QCM-CURRENT-QA-018 : en effacant l'unite, le lecteur transformait
+    une quantite en scalaire nu, et certifiait ainsi « $1/8\\%$ » comme la
+    probabilite 1/8. Le lecteur s'abstient desormais sur toute option qualifiee,
+    et c'est ce contrat que ce test doit porter.
+    """
     assert S.option_value(r"$\frac{3}{6}$") == Fraction(1, 2)
     assert S.option_value(r"$0{,}5$") == Fraction(1, 2)
-    assert S.option_value("$12$ euros") == Fraction(12)
+    assert S.option_value("$12$ euros") is None
     assert S.option_value("Le nombre de valeurs prises par $X$") is None
 
 

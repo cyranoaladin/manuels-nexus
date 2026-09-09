@@ -1572,7 +1572,6 @@ def _range_claim(inp: SolverInput) -> SolverResult | None:
     domain = sympy.Interval.open(-sympy.oo, 0) if domain_match else sympy.S.Reals
     truths: dict[str, bool] = {}
     for letter, raw in inp.options.items():
-        chain = re.findall(r"(-?[\w{}\\^.,]+)\s*(<|>|=)\s*", raw.replace("$", ""))
         pieces = re.split(r"<|>|=", raw.replace("$", "").strip())
         operators = re.findall(r"<|>|=", raw.replace("$", ""))
         parsed = [latex_to_sympy(piece) for piece in pieces]
@@ -2158,7 +2157,7 @@ def _published_function_parameter_role(inp: SolverInput) -> SolverResult | None:
     parameter = re.search(r"\$([a-zA-Z_][a-zA-Z0-9_]*)\$\s*\?", inp.statement)
     if parameter is None:
         return None
-    name, signature, wanted = call.group(1), call.group(2), parameter.group(1)
+    signature, wanted = call.group(2), parameter.group(1)
     parameters = [part.strip() for part in signature.split(",") if part.strip()]
     if wanted not in parameters:
         return None
