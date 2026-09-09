@@ -1,22 +1,45 @@
 #!/usr/bin/env python3
 """
-Gate CI : Interdiction absolue de charger l'ancien moteur (V4/V4.1 legacy) ou des forks non autorisés
-dans les chemins de compilation de production.
+Gate CI : interdiction de CHARGER l'ancien moteur (charte V4/V4.1 heritee) ou un
+fork non autorise dans les chemins de compilation de production.
+
+Ce que le gate juge est un chargement, jamais une mention. Les scripts qui
+surveillent la charte heritee doivent la nommer pour l'exclure ou la detecter :
+les signaler obligeait a maintenir une liste blanche de leurs propres noms de
+fichiers, c'est-a-dire une exemption accordee par identite plutot que par
+raison. La regle porte donc sur les directives de chargement LaTeX, y compris
+celles qu'un assembleur ecrit dans un master.
+
+Le filtre de perimetre porte sur le chemin RELATIF a la racine. Applique aux
+segments du chemin absolu, il excluait la totalite d'un depot situe sous un
+repertoire nomme `.worktrees` -- le cas de `.worktrees/t3-publish-readiness`,
+ou vivait toute la production : le gate analysait alors zero fichier et
+concluait SUCCESS.
 """
-import sys
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-# References that indicate legacy charter usage in production paths
-LEGACY_PATTERNS = [
-    r"nexus-manuel-v4",
-    r"reference-v4",
-    r"gabarits/v4",
-]
+#: Cibles heritees dont le chargement est interdit en production.
+LEGACY_TARGETS = r"(?:nexus-manuel-v4|nexus-charte-v4|reference-v4|gabarits/v4)"
 
-# Files to inspect (assemblers, masters, scripts, CI workflows)
+#: Directives qui font reellement entrer un fichier dans la compilation.
+LOAD_DIRECTIVES = r"(?:documentclass|LoadClass(?:WithOptions)?|usepackage|RequirePackage(?:WithOptions)?|input|include(?:only)?)"
+
+#: Une directive de chargement dont l'argument nomme une cible heritee. Le
+#: `\\{1,2}` accepte la contre-oblique echappee d'un assembleur Python qui ecrit
+#: la directive dans un master : le fichier produit chargerait la charte v4.
+LEGACY_LOAD = re.compile(
+    r"\\{1,2}" + LOAD_DIRECTIVES + r"\s*(?:\[[^\]]*\])?\s*\{[^}]*" + LEGACY_TARGETS + r"[^}]*\}",
+    re.IGNORECASE,
+)
+
+#: Repertoires hors du perimetre de production.
+EXCLUDED_PARTS = {".worktrees", ".git", "archive", "build"}
+
+# Fichiers inspectes : assembleurs, classes, styles, masters, workflows CI.
 TARGET_PATTERNS = [
     "**/scripts/*.py",
     "**/gabarits/*.cls",
@@ -26,34 +49,59 @@ TARGET_PATTERNS = [
     ".github/workflows/*.yml",
 ]
 
-def check_legacy_refs():
-    violations = []
-    scanned_count = 0
-    
+
+def is_in_scope(path: Path, root: Path) -> bool:
+    """True si aucun segment INTERIEUR au depot n'est hors perimetre."""
+    try:
+        parts = path.relative_to(root).parts
+    except ValueError:
+        return False
+    return EXCLUDED_PARTS.isdisjoint(parts)
+
+
+def check_legacy_refs_detail() -> tuple[list[str], int]:
+    """Retourne les violations et le nombre de fichiers reellement analyses."""
+    violations: list[str] = []
+    scanned: set[Path] = set()
+
     for pattern in TARGET_PATTERNS:
         for file_path in ROOT.glob(pattern):
-            if ".worktrees" in file_path.parts or ".git" in file_path.parts or "archive" in file_path.parts:
+            if not file_path.is_file() or not is_in_scope(file_path, ROOT):
                 continue
-            if file_path.name in ["check_no_legacy_charter_refs.py", "build_style_inventory.py"]:
+            if file_path in scanned:
                 continue
-            scanned_count += 1
+            scanned.add(file_path)
             content = file_path.read_text(encoding="utf-8", errors="ignore")
-            
-            for leg_pat in LEGACY_PATTERNS:
-                matches = re.finditer(leg_pat, content, re.IGNORECASE)
-                for m in matches:
-                    line_no = content[:m.start()].count("\n") + 1
-                    violations.append(f"{file_path.relative_to(ROOT)}:{line_no} — Motif legacy interdit trouvé: '{m.group(0)}'")
-                    
-    print(f"CHECK NO LEGACY CHARTER REFS: {scanned_count} fichiers analysés.")
+            for match in LEGACY_LOAD.finditer(content):
+                line_no = content[: match.start()].count("\n") + 1
+                violations.append(
+                    f"{file_path.relative_to(ROOT)}:{line_no} — chargement d'une "
+                    f"cible heritee : {match.group(0)!r}"
+                )
+
+    return violations, len(scanned)
+
+
+def check_legacy_refs() -> int:
+    violations, scanned = check_legacy_refs_detail()
+    print(f"CHECK NO LEGACY CHARTER REFS: {scanned} fichiers analysés.")
+    if not scanned:
+        print(
+            "ERREUR: aucun fichier analysé — un gate qui ne voit rien ne prouve rien.",
+            file=sys.stderr,
+        )
+        return 1
     if violations:
-        print("ERREUR: Références legacy trouvées dans les chemins de production :", file=sys.stderr)
+        print(
+            "ERREUR: chargement d'une charte héritée dans un chemin de production :",
+            file=sys.stderr,
+        )
         for v in violations:
             print(f"  ❌ {v}", file=sys.stderr)
         return 1
-    
-    print("SUCCESS: Aucune référence legacy ni fork interdit détecté dans les chemins de production.")
+    print("SUCCESS: aucun chargement de charte héritée dans les chemins de production.")
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(check_legacy_refs())

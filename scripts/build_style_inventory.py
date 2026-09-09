@@ -16,22 +16,32 @@ ROOT = Path(__file__).resolve().parent.parent
 EXCLUDED_PARTS = {".git", ".worktrees", "Fiches_cours_exercices"}
 
 
-def is_scannable(path: Path) -> bool:
-    """True si aucun segment du chemin n'appartient a un dossier hors perimetre."""
-    return EXCLUDED_PARTS.isdisjoint(path.parts)
+def is_scannable(path: Path, root: Path | None = None) -> bool:
+    """True si aucun segment INTERIEUR au depot n'est hors perimetre.
+
+    Le filtre porte sur le chemin relatif a la racine, jamais sur le chemin
+    absolu : un depot place sous un repertoire nomme `.worktrees` -- le cas de
+    `.worktrees/t3-publish-readiness` -- verrait sinon chacun de ses fichiers
+    rejete, et produirait un inventaire vide se donnant pour une preuve.
+    """
+    base = ROOT if root is None else root
+    try:
+        parts = path.relative_to(base).parts
+    except ValueError:
+        return False
+    return EXCLUDED_PARTS.isdisjoint(parts)
 
 
 def scan_style_files():
-    patterns = ["*.cls", "*.sty", "*gabarit*", "*master*.tex", "nexus-*.tex"]
     found_files = set()
 
     for ext in ["*.cls", "*.sty"]:
         for p in ROOT.rglob(ext):
-            if is_scannable(p):
+            if is_scannable(p, ROOT):
                 found_files.add(p)
 
     for p in ROOT.rglob("*.tex"):
-        if is_scannable(p):
+        if is_scannable(p, ROOT):
             name_lower = p.name.lower()
             if "gabarit" in name_lower or "master" in name_lower or name_lower.startswith("nexus-"):
                 found_files.add(p)
@@ -107,7 +117,9 @@ def main():
     # Save Markdown
     md_path = ROOT / "audit/LATEX_STYLE_INVENTORY.md"
     md_content = ["# INVENTAIRE EXHAUSTIF DES CLASSES, STYLES ET GABARITS LATEX\n",
-                  f"Généré le: 2026-08-15 | Nombre total de fichiers inventoriés : {len(inventory)}\n",
+                  f"Généré par `scripts/build_style_inventory.py` "
+                  f"| Périmètre : dépôt hors {', '.join(sorted(EXCLUDED_PARTS))} "
+                  f"| Nombre total de fichiers inventoriés : {len(inventory)}\n",
                   "| Chemin | Rôle | SHA-256 (8 premiers car.) | Discipline | Actif ? | Prod ? | Action Finale |",
                   "| :--- | :--- | :---: | :---: | :---: | :---: | :--- |"]
     
