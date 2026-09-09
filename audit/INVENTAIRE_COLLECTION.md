@@ -6,8 +6,8 @@
 
 | ID | Manuel | Matière | Niveau | Édition | Chapitres | Capacités | Exercices | Fichiers contenu | Objets | Variantes compilées |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1NSI | NSI Première | NSI | Premiere | courante | 10 | 53 | 110 | 413 | 413 | manual |
-| 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 55 | 484 | 1446 | 1446 | manual |
+| 1NSI | NSI Première | NSI | Premiere | courante | 10 | 53 | 110 | 473 | 473 | manual |
+| 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 55 | 484 | 1450 | 1450 | manual |
 | TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 53 | 92 | 318 | 318 | manual |
 | TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 80 | 243 | 243 | manual |
 | TNSI | NSI Terminale | NSI | Terminale | courante | 7 | 61 | 40 | 192 | 192 | manual |
@@ -17,7 +17,8 @@
 
 | Catégorie | Nombre |
 |---|---|
-| blocking_statuses | 2714 |
+| blocking_statuses | 2778 |
+| broken_meta_references | 80 |
 
 ### Échantillon déterministe
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
@@ -25,6 +26,11 @@
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-003, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-004, scope=object
+- broken_meta_references: source=NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M1.tex, cible=M1, champ=methodes, raison=alias de methode ambigu ou duplique
+- broken_meta_references: source=NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M1.tex, cible=M1, champ=methodes[0], raison=alias de methode ambigu ou duplique
+- broken_meta_references: source=NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M2.tex, cible=M2, champ=methodes, raison=alias de methode ambigu ou duplique
+- broken_meta_references: source=NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M2.tex, cible=M2, champ=methodes[0], raison=alias de methode ambigu ou duplique
+- broken_meta_references: source=NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M3.tex, cible=M3, champ=methodes, raison=alias de methode ambigu ou duplique
 
 ## Réconciliation des rapports
 

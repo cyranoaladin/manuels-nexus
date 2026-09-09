@@ -1,14 +1,29 @@
 # SOURCE DE VÉRITÉ — Collection Manuels Nexus Réussite
 
-Consolidation du 11 août 2026. Ce fichier recense **tout** ce qui a été produit
-pour la collection et où cela se trouve. Il prévaut sur tout rapport antérieur
-décrivant l'emplacement des contenus.
+Consolidation du 11 août 2026, rétablie le 9 septembre 2026. Ce fichier
+recense **tout** ce qui a été produit pour la collection et où cela se trouve.
+Il prévaut sur tout rapport antérieur décrivant l'emplacement des contenus.
+
+## Ce qui avait cessé d'être vrai, et qui l'est redevenu
+
+Entre le 15 août et le 9 septembre, la règle ci-dessous était fausse dans les
+faits. La production vivait sur `codex/t3-publish-readiness-current`, dans le
+worktree `.worktrees/t3-publish-readiness`, avec 1 526 commits jamais poussés ;
+`main` accusait 1 443 commits de retard et la racine du dépôt était restée sur
+une branche de sauvetage. Ce document affirmait donc une règle que le dépôt
+n'appliquait plus.
+
+La consolidation du 9 septembre a réconcilié les branches porteuses de travail
+unique, fait avancer `main` sur cet état et poussé l'ensemble. La règle
+redevient un fait vérifiable, et non une intention : `git worktree list` ne doit
+montrer qu'un seul arbre, et `main` doit valoir `origin/main`.
 
 ## Règle
 
-`/home/alaeddine/Documents/Manuels_Nexus`, branche `main`, est l'unique source
-de vérité. Miroir distant : `github.com/cyranoaladin/manuels-nexus`,
-**public**.
+La racine du dépôt, branche `main`, est l'unique source de vérité. Miroir
+distant : `github.com/cyranoaladin/manuels-nexus`, **public**. Aucun chemin
+absolu de machine ne fait autorité ici : le dépôt doit se reconstruire depuis
+un clone propre, où ce chemin n'existe pas.
 
 Historique de visibilité du 11 août 2026 : le dépôt était public, a été basculé
 en privé au titre de la propriété intellectuelle commerciale, puis remis en
@@ -26,14 +41,31 @@ déclinaison serait un artefact qu'aucune commande ne saurait reproduire.
 
 | Manuel | Identifiant | Chapitres | Objets | PDF assemblés |
 |---|---|---:|---:|---|
-| Mathématiques Première spécialité | `1SPE` | 10 | 1 401 | élève, professeur |
-| Mathématiques Terminale spécialité | `TSPE_2026_2027` | 11 | 659 | élève, professeur |
-| Mathématiques Terminale complémentaires | `TCOMPL` | 9 | 150 | élève, professeur |
-| Mathématiques Terminale expertes | `TEXPERTES` | 5 | 93 | élève, professeur |
-| NSI Première spécialité | `1NSI` | 10 | 339 | élève, professeur |
-| NSI Terminale spécialité | `TNSI` | 6 | 109 | élève, professeur |
+| Mathématiques Première spécialité | `1SPE` | 10 | 1 450 | élève, professeur |
+| Mathématiques Terminale spécialité | `TSPE_2026_2027` | 11 | 829 | élève, professeur |
+| Mathématiques Terminale complémentaires | `TCOMPL` | 9 | 318 | élève, professeur |
+| Mathématiques Terminale expertes | `TEXPERTES` | 5 | 243 | élève, professeur |
+| NSI Première spécialité | `1NSI` | 10 | 473 | élève, professeur |
+| NSI Terminale spécialité | `TNSI` | 7 | 192 | élève, professeur |
 
-Total : **51 chapitres, 2 751 objets de contenu, 12 PDF assemblés.**
+Total : **52 chapitres, 3 505 objets de contenu, 12 éditions à assembler.**
+
+Ces valeurs sont un relevé, pas une autorité : elles sont dérivées de
+`audit/INVENTAIRE_COLLECTION.json` et de
+`audit/PUBLISH_READINESS_CHAPTER_MATRIX.json`, qui font seuls foi et qui se
+régénèrent. En cas d'écart, ce sont eux qu'il faut lire, et ce tableau qu'il
+faut corriger.
+
+Correction du 9 septembre 2026 : le décompte précédent annonçait **51
+chapitres et 2 751 objets**, et n'attribuait que 6 chapitres à TNSI. Le
+périmètre canonique en compte 52, le chapitre `TNSI-PROJET` étant établi par
+`NSI/manifests/books/TNSI.json` et `NSI/chapitres/TNSI-PROJET/contrat.yaml`.
+Le décompte d'objets ignorait par ailleurs la production des trois semaines
+qui n'avait jamais été poussée.
+
+Les douze PDF présents dans `MANUELS_PDF_PUBLICATION/` datent du 15 août et
+sont des instantanés historiques : ils ne sont pas les livrables de la
+release, et aucune preuve courante ne les rattache aux sources actuelles.
 
 Les deux `.gitignore` portent cette règle sous forme de liste blanche
 explicite, et non d'un `build/` ignoré doublé de `git add -f` : la liste des

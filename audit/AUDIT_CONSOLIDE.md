@@ -11,7 +11,7 @@
 ### assembler_invalid (0)
 - Aucune.
 
-### blocking_statuses (2714)
+### blocking_statuses (2778)
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-001, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
@@ -42,7 +42,7 @@
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-027.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-027, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-028.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-028, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-029.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-029, scope=object
-- … 2684 autres.
+- … 2748 autres.
 
 ### broken_assembly_references (0)
 - Aucune.
@@ -50,8 +50,38 @@
 ### broken_latex_references (0)
 - Aucune.
 
-### broken_meta_references (0)
-- Aucune.
+### broken_meta_references (80)
+- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M1.tex, cible=M1, champ=methodes, raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M1.tex, cible=M1, champ=methodes[0], raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M2.tex, cible=M2, champ=methodes, raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M2.tex, cible=M2, champ=methodes[0], raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M3.tex, cible=M3, champ=methodes, raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-M3.tex, cible=M3, champ=methodes[0], raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-ME-001.tex, cible=M1, champ=methodes, raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-ME-001.tex, cible=M1, champ=methodes[0], raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-ME-002.tex, cible=M2, champ=methodes, raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-ME-002.tex, cible=M2, champ=methodes[0], raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-ME-003.tex, cible=M3, champ=methodes, raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-ME-003.tex, cible=M3, champ=methodes[0], raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M1.tex, cible=M1, champ=methodes, raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M1.tex, cible=M1, champ=methodes[0], raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M2.tex, cible=M2, champ=methodes, raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M2.tex, cible=M2, champ=methodes[0], raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M3.tex, cible=M3, champ=methodes, raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-M3.tex, cible=M3, champ=methodes[0], raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-ME-001.tex, cible=M1, champ=methodes, raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-ME-001.tex, cible=M1, champ=methodes[0], raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-ME-002.tex, cible=M2, champ=methodes, raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-ME-002.tex, cible=M2, champ=methodes[0], raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-ME-003.tex, cible=M3, champ=methodes, raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-ME-003.tex, cible=M3, champ=methodes[0], raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-M1.tex, cible=M1, champ=methodes, raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-M1.tex, cible=M1, champ=methodes[0], raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-M2.tex, cible=M2, champ=methodes, raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-M2.tex, cible=M2, champ=methodes[0], raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-ME-001.tex, cible=M1, champ=methodes, raison=alias de methode ambigu ou duplique
+- source=NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-ME-001.tex, cible=M1, champ=methodes[0], raison=alias de methode ambigu ou duplique
+- … 50 autres.
 
 ### chapters_not_in_manual (0)
 - Aucune.
