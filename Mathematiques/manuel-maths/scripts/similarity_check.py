@@ -6,6 +6,7 @@ Seuils : n-gram > 0.35 avec source T2/T4 -> FAIL (régénérer) ;
 """
 import argparse
 import datetime
+import hashlib
 import json
 import re
 import sys
@@ -73,6 +74,10 @@ def check_object(tex_path: Path, chap_dir: Path) -> str:
     record = {
         "objet_id": tex_path.stem, "gate": "similarity", "verdict": verdict,
         "details": worst, "reviewer": "similarity_check.py",
+        # Rattachement de la preuve a la source examinee. Sans lui, le recu ne
+        # perime jamais : il survit indefiniment a la reecriture de l'objet.
+        "source_path": tex_path.relative_to(ROOT).as_posix(),
+        "source_sha256": "sha256:" + hashlib.sha256(tex_path.read_bytes()).hexdigest(),
         "created_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
     }
     write_json(chap_dir / "validations" / f"{tex_path.stem}.similarity.json", record)

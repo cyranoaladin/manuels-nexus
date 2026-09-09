@@ -3,6 +3,7 @@ EXEMPTÉ ; seules les sources T2/T4 (inspiration_reformulation) déclenchent un 
 Mode fichiers natif (aucune dépendance PostgreSQL — leçon du run maths)."""
 import argparse
 import datetime
+import hashlib
 import json
 import re
 import sys
@@ -53,6 +54,10 @@ def check(tex: Path, chap_dir: Path) -> str:
     write_json(chap_dir / "validations" / f"{tex.stem}.similarity.json", {
         "objet_id": tex.stem, "gate": "similarity", "verdict": verdict, "details": worst,
         "reviewer": "similarity_check.py",
+        # Rattachement de la preuve a la source examinee. Sans lui, le recu ne
+        # perime jamais : il survit indefiniment a la reecriture de l'objet.
+        "source_path": tex.relative_to(ROOT).as_posix(),
+        "source_sha256": "sha256:" + hashlib.sha256(tex.read_bytes()).hexdigest(),
         "created_at": datetime.datetime.now(datetime.timezone.utc).isoformat()})
     print(f"[{verdict.upper():7}] {tex.stem} (max={worst['score']})")
     return verdict
