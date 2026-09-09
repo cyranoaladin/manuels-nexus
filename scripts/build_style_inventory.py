@@ -10,17 +10,28 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
+# Dossiers hors perimetre de l'inventaire. Le balayage se fait sur le disque et non sur
+# l'index Git : les dossiers locaux non versionnes doivent donc etre exclus explicitement.
+# Fiches_cours_exercices/ contient des documents pedagogiques personnels (cf. .gitignore).
+EXCLUDED_PARTS = {".git", ".worktrees", "Fiches_cours_exercices"}
+
+
+def is_scannable(path: Path) -> bool:
+    """True si aucun segment du chemin n'appartient a un dossier hors perimetre."""
+    return EXCLUDED_PARTS.isdisjoint(path.parts)
+
+
 def scan_style_files():
     patterns = ["*.cls", "*.sty", "*gabarit*", "*master*.tex", "nexus-*.tex"]
     found_files = set()
-    
+
     for ext in ["*.cls", "*.sty"]:
         for p in ROOT.rglob(ext):
-            if ".worktrees" not in p.parts and ".git" not in p.parts:
+            if is_scannable(p):
                 found_files.add(p)
-                
+
     for p in ROOT.rglob("*.tex"):
-        if ".worktrees" not in p.parts and ".git" not in p.parts:
+        if is_scannable(p):
             name_lower = p.name.lower()
             if "gabarit" in name_lower or "master" in name_lower or name_lower.startswith("nexus-"):
                 found_files.add(p)

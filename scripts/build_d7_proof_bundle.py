@@ -199,9 +199,15 @@ def parse_fls_provenance(fls_path: Path) -> dict[str, Any]:
 
 
 def is_valid_path(p: Path) -> bool:
-    """Ignore hidden files, .worktrees, build and tmp directories."""
+    """Ignore hidden files, .worktrees, build/tmp dirs and out-of-scope local folders.
+
+    The scan walks the filesystem rather than the Git index, so unversioned local
+    directories must be excluded by name. Fiches_cours_exercices/ holds personal
+    teaching material (see .gitignore) and is not part of the collection.
+    """
     rel = p.relative_to(REPO_ROOT).parts
-    return not any(part.startswith(".") or part in {"build", "tmp", "node_modules"} for part in rel)
+    excluded = {"build", "tmp", "node_modules", "Fiches_cours_exercices"}
+    return not any(part.startswith(".") or part in excluded for part in rel)
 
 
 def generate_style_inventory() -> dict[str, Any]:
