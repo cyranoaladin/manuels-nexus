@@ -1,0 +1,43 @@
+% META: {"id": "1NSI-TB-ME-003", "chapitre": "1NSI-TYPES-BASE", "type_objet": "methode", "capacites": ["P-BASE-04"], "capacites_codes": ["C4"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% lignes = []
+% for a in (False, True):
+%     for b in (False, True):
+%         for c in (False, True):
+%             lignes.append((a, b, c, (a or b) and (not c)))
+% assert len(lignes) == 8
+% assert sum(1 for *_, r in lignes if r) == 3
+% assert (False, False, False, False) in lignes
+% assert (True, False, False, True) in lignes
+% assert (True, True, True, False) in lignes
+% assert ((True or False) and (not True)) is False
+% END-VERIFY
+\begin{fichemethode}{M3}{Dresser la table de vérité d'une expression booléenne}
+
+\textbf{Quand l'utiliser ?} Dès qu'une expression combine \lstinline{and},
+\lstinline{or} et \lstinline{not}, et qu'il faut dire dans quels cas elle est vraie.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Compte les variables.} Avec $n$ variables, la table a exactement $2^n$ lignes :
+        trois variables donnent huit lignes, jamais six ni neuf.
+  \item \textbf{Énumère les combinaisons méthodiquement}, en comptant en binaire : la dernière
+        colonne alterne à chaque ligne, l'avant-dernière toutes les deux lignes, et ainsi de
+        suite. Tu es alors sûr de n'en oublier aucune.
+  \item \textbf{Ajoute une colonne par sous-expression}, des parenthèses les plus internes vers
+        les plus externes. N'essaie pas d'évaluer l'expression entière d'un coup.
+  \item \textbf{Applique la bonne règle} : \lstinline{and} exige que les \emph{deux} opérandes
+        soient vrais ; \lstinline{or} se contente d'un seul.
+  \item \textbf{Conclus} en décrivant les lignes vraies, pas en récitant la table.
+\end{enumerate}
+
+\textbf{Exemple rédigé.} Pour $(a \text{ or } b) \text{ and } (\text{not } c)$, huit lignes.
+L'expression est vraie exactement lorsque $c$ est faux \emph{et} qu'au moins l'une de $a$, $b$
+est vraie — soit \textbf{trois} lignes sur huit. En français : « l'alarme se déclenche si une
+des deux détections a lieu, sauf si le système est désactivé ».
+
+\textbf{Erreur fréquente.} Appliquer la règle du \lstinline{or} au \lstinline{and} : un seul
+opérande vrai ne suffit pas. Et \lstinline{None} n'est pas un booléen : un opérateur logique
+renvoie toujours l'un de ses opérandes, jamais l'absence de valeur.
+
+\end{fichemethode}

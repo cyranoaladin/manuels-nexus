@@ -1,0 +1,27 @@
+% META: {"id": "1NSI-WEB-IHM-RE-C4", "chapitre": "1NSI-WEB-IHM", "type_objet": "remediation", "capacites": ["P-IHM-03A"], "capacites_codes": ["C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C4 : le navigateur recoit le resultat, pas le programme
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu confonds le programme et sa sortie. Le navigateur ne reçoit jamais
+le code exécuté par le serveur : il reçoit le HTML que ce code a \emph{produit}. Et l'ordre est
+toujours le même — le serveur répond d'abord, le code du client s'exécute ensuite, sur la page
+reçue.
+
+\textbf{À retenir.} Deux machines, jamais simultanées : une requête part, une réponse revient.
+Ce qui exige la base de données reste côté serveur, car le client n'y a pas accès.
+
+\begin{exercice}{1NSI-WEB-RE-C4-EX1}{1}{10}
+Un site affiche la liste des livres empruntés par un adhérent, puis permet de trier cette
+liste sans recharger la page.
+\begin{enumerate}
+  \item Ranger ces quatre étapes dans l'ordre, en précisant pour chacune si elle a lieu chez le
+        client ou sur le serveur : \emph{(a)} le tri de la liste déjà affichée ;
+        \emph{(b)} l'envoi de la requête ; \emph{(c)} la lecture de la base des emprunts ;
+        \emph{(d)} l'affichage du HTML reçu.
+  \item Le visiteur peut-il, en consultant le code de la page, lire le programme qui a interrogé
+        la base ? Justifier.
+  \item Pourquoi la lecture de la base ne peut-elle pas être confiée au client ?
+\end{enumerate}
+\end{exercice}

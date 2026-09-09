@@ -1,0 +1,67 @@
+% META: {"id": "1NSI-RESEAUX-RE-C2", "chapitre": "1NSI-RESEAUX", "type_objet": "remediation", "capacites": ["P-ARCH-02B"], "capacites_codes": ["C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : le bit n'alterne qu'apres un succes
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu changes le bit à chaque tentative, ou tu passes au message
+suivant dès qu'une tentative échoue. Dans les deux cas le récepteur est trompé : un bit qui
+change annonce un \emph{nouveau} message, et un message abandonné ne sera jamais réclamé.
+
+\textbf{À retenir.} Tant qu'un message n'a pas été reçu, l'émetteur le renvoie \textbf{tel
+quel, avec le même bit}. Le bit ne bascule qu'\emph{après} une réception confirmée. Et si
+c'est l'accusé de réception qui se perd, le récepteur reçoit le même paquet deux fois : il
+reconnaît le bit déjà vu et ignore le doublon.
+
+\begin{exercice}{1NSI-RES-RE-C2-EX1}{1}{12}
+On envoie \lstinline{["K", "L"]} avec le protocole du bit alterné ; les tentatives $1$ et $3$
+échouent. Un élève a dressé le tableau suivant :
+\begin{center}
+\begin{tabular}{cccc}
+tentative & message & bit & résultat \\
+\hline
+$1$ & \texttt{"K"} & $0$ & perdu \\
+$2$ & \texttt{"K"} & $1$ & reçu \\
+$3$ & \texttt{"L"} & $0$ & perdu \\
+$4$ & \texttt{"L"} & $1$ & reçu \\
+\end{tabular}
+\end{center}
+\begin{enumerate}
+  \item Quelle règle du protocole ce tableau viole-t-il ? Pourquoi le récepteur, à la
+        tentative $2$, ne peut-il pas savoir qu'il s'agit d'une retransmission ?
+  \item Dresser le tableau correct et donner la liste des couples (bit, message) reçus.
+  \item On suppose maintenant que la tentative $2$ a bien atteint le récepteur, mais que
+        c'est l'\textbf{accusé de réception} qui s'est perdu. Que fait l'émetteur ? Que
+        reçoit alors le récepteur, et pourquoi n'en tient-il pas compte ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def protocole_bit_alterne(messages, tentatives_perdues):
+%     journal = []
+%     resultat = []
+%     bit = 0
+%     compteur = 0
+%     for message in messages:
+%         recu = False
+%         while not recu:
+%             compteur += 1
+%             if compteur in tentatives_perdues:
+%                 journal.append((compteur, message, bit, "perdu"))
+%                 continue
+%             journal.append((compteur, message, bit, "recu"))
+%             resultat.append((bit, message))
+%             recu = True
+%         bit = 1 - bit
+%     return resultat, journal
+% recus, journal = protocole_bit_alterne(["K", "L"], {1, 3})
+% assert journal == [
+%     (1, "K", 0, "perdu"),
+%     (2, "K", 0, "recu"),
+%     (3, "L", 1, "perdu"),
+%     (4, "L", 1, "recu"),
+% ]
+% assert recus == [(0, "K"), (1, "L")]
+% eleve = [(1, "K", 0), (2, "K", 1), (3, "L", 0), (4, "L", 1)]
+% assert eleve[1][2] != journal[1][2]
+% END-VERIFY

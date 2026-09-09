@@ -1,0 +1,121 @@
+{
+  "objet_id": "1NSI-TABLES-RE-C3",
+  "gate": "sympy",
+  "verdict": "manual_review",
+  "details": {
+    "checks": [
+      {
+        "type": "printed_source_alignment",
+        "index": 0,
+        "pass": true,
+        "matching_sources": [
+          "chapitres/1NSI-TABLES/code/1NSI-TABLES-RE-C3-1.py"
+        ],
+        "reason": null,
+        "detail": ""
+      },
+      {
+        "type": "printed_source_alignment",
+        "index": 1,
+        "pass": true,
+        "matching_sources": [
+          "chapitres/1NSI-TABLES/code/1NSI-TABLES-RE-C3-2.py"
+        ],
+        "reason": null,
+        "detail": ""
+      },
+      {
+        "type": "printed_source_alignment",
+        "index": 2,
+        "pass": true,
+        "matching_sources": [
+          "chapitres/1NSI-TABLES/code/1NSI-TABLES-RE-C3-3.py"
+        ],
+        "reason": null,
+        "detail": ""
+      },
+      {
+        "type": "verify",
+        "index": 0,
+        "pass": true,
+        "assertions_executed": 5,
+        "failed_assertions": 0,
+        "detail": ""
+      },
+      {
+        "type": "listing_execution",
+        "index": 0,
+        "state": "LINKED_TO_EXECUTED_PROGRAM",
+        "detail": "identical AST statements in an executed VERIFY/TRACE program"
+      },
+      {
+        "type": "ruff",
+        "index": 0,
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "type": "listing_execution",
+        "index": 1,
+        "state": "PENDING",
+        "detail": "listing has no binding to executed code"
+      },
+      {
+        "type": "ruff",
+        "index": 1,
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "type": "listing_execution",
+        "index": 2,
+        "state": "PENDING",
+        "detail": "listing has no binding to executed code"
+      },
+      {
+        "type": "ruff",
+        "index": 2,
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "type": "python_source_execution",
+        "source": "chapitres/1NSI-TABLES/code/1NSI-TABLES-RE-C3-1.py",
+        "state": "LINKED_TO_EXECUTED_PROGRAM",
+        "detail": "identical AST statements in an executed VERIFY/TRACE program"
+      },
+      {
+        "type": "python_source_execution",
+        "source": "chapitres/1NSI-TABLES/code/1NSI-TABLES-RE-C3-2.py",
+        "state": "PENDING",
+        "detail": "referenced Python has no binding to executed code"
+      },
+      {
+        "type": "python_source_execution",
+        "source": "chapitres/1NSI-TABLES/code/1NSI-TABLES-RE-C3-3.py",
+        "state": "PENDING",
+        "detail": "referenced Python has no binding to executed code"
+      }
+    ]
+  },
+  "reviewer": "verify_python.py",
+  "verification_protocol": "NSI_EXECUTED_CLAIMS_V1",
+  "verifier_sha256": "sha256:66ef29b688bc64c81122db9604382d92fef741092ada14441855f1a0d2591675",
+  "implementation_digests": {
+    "NSI/scripts/verify_python.py": "sha256:66ef29b688bc64c81122db9604382d92fef741092ada14441855f1a0d2591675",
+    "NSI/scripts/execution_protocol.py": "sha256:71c6ee70eb91f1869c17b4087f35da75018a7e848e1038ec338a5c99810f95e5",
+    "NSI/scripts/common.py": "sha256:37822308dace9072c0bedccc3d73c4646dc9010aa859a64591a1fa7ad7338e53",
+    "scripts/review_1nsi_content.py": "sha256:e91ff3ae8aff09573a136c9e292b3975e316b9ba78d013ecdcc925c70935686f"
+  },
+  "dependency_digests": {
+    "chapitres/1NSI-TABLES/code/1NSI-TABLES-RE-C3-1.py": "sha256:0b8c331c7132d4a1f9662ad049134c5e4e8bf8a02695ac1327bd6fde2bbf36a0",
+    "chapitres/1NSI-TABLES/code/1NSI-TABLES-RE-C3-2.py": "sha256:98bbf3f6debf5bf3d66778740c97465684521e4574d2c9ef4127f9515089efbd",
+    "chapitres/1NSI-TABLES/code/1NSI-TABLES-RE-C3-3.py": "sha256:2a57ec5657df3115ee16567afa69bc49dbff59b2a747a884d35e8e81a65b78fe"
+  },
+  "certifies_documentary_claims": false,
+  "certifies_complete_program_correctness": false,
+  "ruff_performed": true,
+  "source_path": "chapitres/1NSI-TABLES/remediation/1NSI-TABLES-RE-C3.tex",
+  "source_sha256": "sha256:7e9cac0aa2556d702a4a7bb09b04666b585c979e6d9021faa4977a9b45faae18",
+  "created_at": "2026-09-09T19:20:26.711985+00:00"
+}

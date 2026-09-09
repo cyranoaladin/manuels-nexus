@@ -1,0 +1,57 @@
+% META: {"id": "1NSI-TABLES-RE-C1", "chapitre": "1NSI-TABLES", "type_objet": "remediation", "capacites": ["P-TABLE-01"], "capacites_codes": ["C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : un CSV ne contient que du texte
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu supposes que le lecteur CSV reconnaît les nombres. Il ne
+reconnaît rien : chaque valeur arrive en chaîne de caractères, et les chaînes se comparent
+lettre par lettre. Un \lstinline{max}, un tri ou un \lstinline{>=} sur une colonne non
+convertie donne un résultat faux, ou une erreur.
+
+\textbf{À retenir.} Après \lstinline{csv.DictReader}, convertir explicitement chaque colonne
+numérique, pour \emph{toutes} les lignes, avant tout calcul. Le fichier stocke des
+caractères ; le type est une décision du programme.
+
+\begin{exercice}{1NSI-TAB-RE-C1-EX1}{1}{10}
+Le fichier \lstinline{eleves.csv} contient :
+\begin{console}
+nom,age
+Lina,17
+Omar,16
+Sara,9
+Tom,21
+\end{console}
+Un élève l'importe avec \lstinline{csv.DictReader} dans une table \lstinline{eleves}, puis
+écrit :
+% PYTHON-SOURCE: code/1NSI-TABLES-RE-C1.py
+\begin{python}
+plus_age = max(ligne["age"] for ligne in eleves)
+majeurs = [ligne["nom"] for ligne in eleves if ligne["age"] >= "18"]
+\end{python}
+\begin{enumerate}
+  \item Que vaut \lstinline{plus_age} ? Que vaut \lstinline{majeurs} ? Expliquer ces deux
+        résultats.
+  \item L'élève remplace \lstinline{"18"} par \lstinline{18}. Que se passe-t-il ?
+  \item Corriger le programme pour obtenir l'âge maximal et la liste des majeurs attendus.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% import csv
+% import io
+% texte = "nom,age\nLina,17\nOmar,16\nSara,9\nTom,21"
+% eleves = list(csv.DictReader(io.StringIO(texte)))
+% assert max(ligne["age"] for ligne in eleves) == "9"
+% assert [ligne["nom"] for ligne in eleves if ligne["age"] >= "18"] == ["Sara", "Tom"]
+% try:
+%     [ligne["nom"] for ligne in eleves if ligne["age"] >= 18]
+% except TypeError:
+%     pass
+% else:
+%     raise AssertionError("comparer une chaine et un entier doit echouer")
+% for ligne in eleves:
+%     ligne["age"] = int(ligne["age"])
+% assert max(ligne["age"] for ligne in eleves) == 21
+% assert [ligne["nom"] for ligne in eleves if ligne["age"] >= 18] == ["Tom"]
+% END-VERIFY

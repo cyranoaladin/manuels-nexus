@@ -1,0 +1,40 @@
+% META: {"id": "1NSI-TYPES-BASE-RE-C5", "chapitre": "1NSI-TYPES-BASE", "type_objet": "remediation", "capacites": ["P-BASE-05"], "capacites_codes": ["C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C5 : plusieurs encodages conviennent souvent
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu retiens qu'UTF-8 représente tous les caractères — c'est exact — et
+tu en conclus qu'il est le \emph{seul} à convenir. Ou l'inverse : tu choisis ISO-8859-1 en
+oubliant qu'ASCII et UTF-8 conviennent aussi dès que le texte n'a pas d'accent.
+
+\textbf{À retenir.} La question n'est jamais « quel encodage est le meilleur » mais « lesquels
+peuvent représenter \emph{ce} texte ». Les $128$ premiers caractères d'UTF-8 sont exactement
+ceux d'ASCII : un texte sans accent s'encode à l'identique dans les trois.
+
+\begin{exercice}{1NSI-TB-RE-C5-EX1}{1}{10}
+Pour chacune des trois chaînes \lstinline{"Note: 12/20"}, \lstinline{"Élève"} et
+« \lstinline{prix 15} » suivi du symbole euro :
+\begin{enumerate}
+  \item Indiquer lesquels d'ASCII, ISO-8859-1 et UTF-8 peuvent la représenter.
+  \item Donner sa taille en octets en UTF-8, et la comparer au nombre de caractères.
+  \item Expliquer pourquoi le symbole euro se comporte différemment du \lstinline{É}.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% assert len("Note: 12/20") == 11
+% assert len("Note: 12/20".encode("ascii")) == 11
+% assert len("Note: 12/20".encode("utf-8")) == 11
+% assert len("Élève") == 5
+% assert len("Élève".encode("utf-8")) == 7
+% assert len("Élève".encode("iso-8859-1")) == 5
+% assert len("prix 15 €") == 9
+% assert len("prix 15 €".encode("utf-8")) == 11
+% try:
+%     "prix 15 €".encode("iso-8859-1")
+%     euro_dans_iso = True
+% except UnicodeEncodeError:
+%     euro_dans_iso = False
+% assert euro_dans_iso is False
+% END-VERIFY

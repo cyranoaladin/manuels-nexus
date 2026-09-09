@@ -1,0 +1,47 @@
+% META: {"id": "1NSI-LANGAGE-RE-C1", "chapitre": "1NSI-LANGAGE", "type_objet": "remediation", "capacites": ["P-LANG-01"], "capacites_codes": ["C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : « non bornee » ne veut pas dire « infinie »
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu lis « boucle non bornée » comme « boucle infinie ». Non bornée
+signifie seulement que le \emph{nombre de tours n'est pas connu d'avance}. La condition est le
+cœur de la boucle \lstinline{while} : elle est évaluée à chaque tour et décide de continuer ou
+d'arrêter.
+
+\textbf{À retenir.} Bornée : le nombre de tours se lit dans l'écriture même
+(\lstinline{for i in range(5)}, cinq tours). Non bornée : on répète \emph{tant que} quelque
+chose reste vrai — le nombre de tours dépend des valeurs. Une boucle non bornée se termine
+dès que sa condition devient fausse ; elle ne tourne indéfiniment que si rien, dans le corps,
+ne fait progresser cette condition.
+
+\begin{exercice}{1NSI-LANG-RE-C1-EX1}{1}{10}
+% PYTHON-SOURCE: code/1NSI-LANGAGE-RE-C1.py
+\begin{python}
+n = 20
+tours = 0
+while n > 1:
+    n = n // 2
+    tours = tours + 1
+\end{python}
+\begin{enumerate}
+  \item Cette boucle est-elle bornée ou non bornée ? Justifier.
+  \item Dérouler l'exécution : donner la suite des valeurs de \lstinline{n}, puis la valeur
+        finale de \lstinline{tours}.
+  \item Qu'est-ce qui garantit l'arrêt ? Quelle modification du corps rendrait la boucle
+        réellement infinie ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% n = 20
+% tours = 0
+% suite = [n]
+% while n > 1:
+%     n = n // 2
+%     tours = tours + 1
+%     suite.append(n)
+% assert suite == [20, 10, 5, 2, 1]
+% assert tours == 4
+% assert n == 1
+% END-VERIFY

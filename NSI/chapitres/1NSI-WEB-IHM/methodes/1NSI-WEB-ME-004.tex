@@ -1,0 +1,67 @@
+% META: {"id": "1NSI-WEB-ME-004", "chapitre": "1NSI-WEB-IHM", "type_objet": "methode", "capacites": ["P-IHM-04A", "P-IHM-04B", "P-IHM-04C"], "capacites_codes": ["C7", "C8", "C9"], "methodes": ["M4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from urllib.parse import urlencode
+% params = {"destination": "Djerba", "voyageurs": 2}
+% url_get = "https://exemple.fr/recherche?" + urlencode(params)
+% assert url_get == "https://exemple.fr/recherche?destination=Djerba&voyageurs=2"
+% assert "Djerba" in url_get
+% secret = {"mot_de_passe": "MonSecret2026"}
+% url_fautive = "https://exemple.fr/connexion?" + urlencode(secret)
+% assert "MonSecret2026" in url_fautive
+% corps_post = urlencode(secret)
+% assert "MonSecret2026" in corps_post
+% assert "?" not in corps_post
+% END-VERIFY
+\begin{fichemethode}{M4}{Analyser un formulaire et choisir entre GET et POST}
+
+\textbf{Quand l'utiliser ?} Devant un formulaire HTML : pour dire ce qui part vers le serveur,
+sous quelle forme, et pour \textbf{justifier} le choix de la méthode.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Lis d'abord la balise \lstinline{<form>}} : son attribut \lstinline{action}
+        donne l'adresse visée, son attribut \lstinline{method} donne \lstinline{GET} ou
+        \lstinline{POST}.
+  \item \textbf{Liste les couples nom/valeur.} Ce qui part vers le serveur, ce n'est pas
+        l'attribut \lstinline{id} mais l'attribut \textbf{\lstinline{name}}, associé à la
+        valeur saisie ou choisie. Un champ sans \lstinline{name} n'est pas transmis.
+  \item \textbf{Écris ce que reçoit le serveur} selon la méthode :
+        \begin{itemize}
+          \item \lstinline{GET} : les couples sont ajoutés à l'URL après un \lstinline{?},
+                séparés par \lstinline{&}. Ils sont donc \textbf{visibles} dans la barre
+                d'adresse, l'historique, les favoris et les journaux du serveur.
+          \item \lstinline{POST} : les couples voyagent dans le \textbf{corps} de la requête.
+                Ils n'apparaissent pas dans l'URL.
+        \end{itemize}
+  \item \textbf{Choisis la méthode selon la nature des valeurs}, jamais par habitude :
+        \begin{itemize}
+          \item la requête ne fait que \emph{demander} des données et l'on souhaite pouvoir
+                partager ou remettre l'adresse en favori $\rightarrow$ \lstinline{GET} ;
+          \item les valeurs sont \emph{confidentielles} ou \emph{modifient} quelque chose
+                sur le serveur $\rightarrow$ \lstinline{POST}.
+        \end{itemize}
+  \item \textbf{Formule la justification en termes de conséquence}, pas de préférence :
+        « en GET, le mot de passe resterait dans l'historique du navigateur ».
+\end{enumerate}
+
+\textbf{Exemple rédigé.} Recherche de voyage, \lstinline{method="GET"} :
+
+% PYTHON-SOURCE: code/1NSI-WEB-ME-004.py
+\begin{python}
+params = {"destination": "Djerba", "voyageurs": 2}
+url_get = "https://exemple.fr/recherche?" + urlencode(params)
+\end{python}
+
+L'URL obtenue est
+\lstinline{https://exemple.fr/recherche?destination=Djerba&voyageurs=2}. C'est adapté : la
+recherche ne modifie rien et l'adresse peut être partagée.
+
+Le même mécanisme appliqué à un mot de passe produirait
+\lstinline{...?mot_de_passe=MonSecret2026} — inscrit dans l'historique. En \lstinline{POST},
+la même valeur part dans le corps de la requête : elle n'apparaît pas dans l'URL.
+
+\textbf{Erreur fréquente.} Croire que \lstinline{POST} chiffre les données. Il ne les chiffre
+pas : il les déplace hors de l'URL. C'est HTTPS qui chiffre la transmission. Les deux réponses
+sont complémentaires, pas interchangeables.
+
+\end{fichemethode}

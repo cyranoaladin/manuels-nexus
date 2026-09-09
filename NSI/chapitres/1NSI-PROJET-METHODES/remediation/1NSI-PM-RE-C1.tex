@@ -1,0 +1,58 @@
+% META: {"id": "1NSI-PM-RE-C1", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "remediation", "capacites": ["P-HIST-01"], "capacites_codes": ["C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : une date sans concept ni personne ne se retient pas
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu retiens des dates isolées et tu les redistribues au hasard entre
+des noms et des inventions : Turing se retrouve inventeur du Web, Berners-Lee auteur de la
+machine universelle. Le programme demande de \emph{situer} un événement, c'est-à-dire de
+relier une date, un concept et une personne, puis de les ordonner.
+
+\textbf{À retenir.} Chaque repère est un triplet (année, fait, personne) rattaché à l'un des
+quatre concepts : algorithme, machine, langage, données. Et l'ordre a un sens : un service ne
+peut pas précéder ce dont il dépend.
+
+\begin{exercice}{1NSI-PM-RE-C1-EX1}{1}{10}
+Un élève a noté la chronologie suivante :
+% PYTHON-SOURCE: code/1NSI-PM-RE-C1.py
+\begin{python}
+chronologie = [
+    (1936, "Invention du World Wide Web", "Alan Turing"),
+    (1642, "Pascaline, machine a calculer", "Blaise Pascal"),
+    (1989, "Concept de machine universelle", "Tim Berners-Lee"),
+    (1969, "Debuts d'Internet (ARPANET)", "DARPA"),
+]
+\end{python}
+\begin{enumerate}
+  \item Deux triplets mélangent un fait et une personne qui ne vont pas ensemble. Les
+        identifier et les réécrire correctement, en gardant les mêmes quatre années.
+  \item La liste est-elle rangée par année ? Écrire l'instruction Python qui le vérifie,
+        puis celle qui la range.
+  \item Une fois la liste corrigée et rangée, expliquer en une phrase pourquoi le Web ne
+        pouvait pas apparaître avant Internet, et ce que la machine universelle change par
+        rapport à la Pascaline.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% chronologie = [
+%     (1936, "Invention du World Wide Web", "Alan Turing"),
+%     (1642, "Pascaline, machine a calculer", "Blaise Pascal"),
+%     (1989, "Concept de machine universelle", "Tim Berners-Lee"),
+%     (1969, "Debuts d'Internet (ARPANET)", "DARPA"),
+% ]
+% assert chronologie != sorted(chronologie, key=lambda e: e[0])
+% corrigee = [
+%     (1936, "Concept de machine universelle", "Alan Turing"),
+%     (1642, "Pascaline, machine a calculer", "Blaise Pascal"),
+%     (1989, "Invention du World Wide Web", "Tim Berners-Lee"),
+%     (1969, "Debuts d'Internet (ARPANET)", "DARPA"),
+% ]
+% rangee = sorted(corrigee, key=lambda e: e[0])
+% assert [e[0] for e in rangee] == [1642, 1936, 1969, 1989]
+% assert rangee[1][2] == "Alan Turing" and rangee[3][2] == "Tim Berners-Lee"
+% internet = [e for e in rangee if "Internet" in e[1]][0]
+% web = [e for e in rangee if "Web" in e[1]][0]
+% assert internet[0] < web[0]
+% END-VERIFY

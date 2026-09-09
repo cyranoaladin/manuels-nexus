@@ -1,0 +1,58 @@
+% META: {"id": "1NSI-LANG-ME-003", "chapitre": "1NSI-LANGAGE", "type_objet": "methode", "capacites": ["P-LANG-04"], "capacites_codes": ["C4"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def est_majeur(age):
+%     return age >= 18
+% assert est_majeur(30) is True
+% assert est_majeur(5) is False
+% assert est_majeur(18) is True
+% assert est_majeur(17) is False
+% def maximum(t):
+%     m = t[0]
+%     for v in t:
+%         if v > m:
+%             m = v
+%     return m
+% assert maximum([3, 9, 4]) == 9
+% assert maximum([7]) == 7
+% assert maximum([-5, -2, -9]) == -2
+% assert maximum([4, 4, 4]) == 4
+% END-VERIFY
+\begin{fichemethode}{M3}{Construire un jeu de tests qui cherche l'erreur}
+
+\textbf{Quand l'utiliser ?} Quand l'énoncé demande de « mettre au point », de « tester », ou
+de proposer un jeu de tests pour une fonction.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Écris d'abord le résultat attendu}, à la main, avant d'exécuter. Un test dont
+        on attend « ce que le programme renverra » ne teste rien.
+  \item \textbf{Prends un cas ordinaire}, celui que tout le monde essaie. Il ne suffit jamais.
+  \item \textbf{Cherche les bords} : la plus petite entrée acceptable (liste à un élément),
+        la valeur pile sur le seuil, les valeurs négatives, les valeurs égales entre elles.
+        C'est là que les erreurs se cachent, pas au milieu.
+  \item \textbf{Teste juste au-dessus et juste en dessous du seuil.} Pour une condition
+        \lstinline{age >= 18}, essaie \lstinline{17} et \lstinline{18} : c'est le seul couple
+        qui distingue \lstinline{>=} de \lstinline{>}.
+  \item \textbf{Conclus prudemment.} Des tests qui passent montrent l'absence d'erreur
+        \emph{sur les cas essayés}. Ils n'établissent jamais qu'il n'y en a aucune.
+\end{enumerate}
+
+\textbf{Exemple rédigé.} Pour \lstinline{est_majeur(age)} :
+
+% PYTHON-SOURCE: code/1NSI-LANG-ME-003.py
+\begin{python}
+assert est_majeur(30) is True    # cas ordinaire
+assert est_majeur(5) is False    # cas ordinaire
+assert est_majeur(18) is True    # seuil exact
+assert est_majeur(17) is False   # juste sous le seuil
+\end{python}
+
+Les deux derniers sont les seuls à détecter une erreur d'inégalité stricte. Pour
+\lstinline{maximum(t)} : un cas ordinaire, une liste à un seul élément, une liste de nombres
+tous négatifs, une liste de valeurs toutes égales.
+
+\textbf{Erreur fréquente.} Croire qu'un programme qui s'exécute sans planter est correct.
+S'exécuter n'est pas produire le bon résultat : une fonction peut renvoyer une valeur fausse
+sans la moindre erreur.
+
+\end{fichemethode}

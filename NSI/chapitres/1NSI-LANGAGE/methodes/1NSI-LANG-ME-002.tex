@@ -1,0 +1,63 @@
+% META: {"id": "1NSI-LANG-ME-002", "chapitre": "1NSI-LANGAGE", "type_objet": "methode", "capacites": ["P-LANG-03A", "P-LANG-03B", "P-LANG-03C"], "capacites_codes": ["C3", "C6", "C7"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def moyenne(notes):
+%     """Renvoie la moyenne des notes.
+%     Precondition : notes est une liste non vide de nombres.
+%     Postcondition : le resultat est compris entre min(notes) et max(notes).
+%     """
+%     return sum(notes) / len(notes)
+% r = moyenne([8, 12, 16])
+% assert r == 12
+% assert min([8, 12, 16]) <= r <= max([8, 12, 16])
+% r2 = moyenne([5])
+% assert r2 == 5 and min([5]) <= r2 <= max([5])
+% try:
+%     moyenne([])
+%     precondition_violee_detectee = False
+% except ZeroDivisionError:
+%     precondition_violee_detectee = True
+% assert precondition_violee_detectee
+% END-VERIFY
+\begin{fichemethode}{M2}{Spécifier une fonction : prototype, préconditions, postconditions}
+
+\textbf{Quand l'utiliser ?} Quand l'énoncé demande de « prototyper », de « spécifier », ou
+d'énoncer ce qu'une fonction exige et ce qu'elle garantit — avant d'écrire la moindre ligne
+de corps.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Écris le prototype} : le nom de la fonction, ses paramètres, et ce qu'elle
+        renvoie. Le prototype dit \textbf{ce que la fonction offre}, jamais comment elle s'y
+        prend. Il précède le corps.
+  \item \textbf{Énonce les préconditions} : ce que \textbf{l'appelant doit garantir} avant
+        l'appel. Type et nature des arguments, valeurs interdites, tailles minimales.
+        Une précondition contraint \emph{l'entrée}.
+  \item \textbf{Énonce les postconditions} : ce que \textbf{la fonction garantit} en retour,
+        si les préconditions sont respectées. Une postcondition décrit \emph{la sortie}.
+  \item \textbf{Vérifie l'orientation de chaque phrase} : « la liste ne doit pas être vide »
+        contraint l'appelant, c'est une précondition. « le résultat est compris entre le
+        minimum et le maximum » décrit la sortie, c'est une postcondition.
+\end{enumerate}
+
+\textbf{Exemple rédigé.}
+
+% PYTHON-SOURCE: code/1NSI-LANG-ME-002.py
+\begin{python}
+def moyenne(notes):
+    """Renvoie la moyenne des notes.
+    Precondition : notes est une liste non vide de nombres.
+    Postcondition : le resultat est compris entre min(notes) et max(notes).
+    """
+    return sum(notes) / len(notes)
+\end{python}
+
+Sur \lstinline{[8, 12, 16]} la fonction renvoie \lstinline{12}, qui est bien compris entre
+\lstinline{8} et \lstinline{16} : la postcondition tient. Sur la liste vide, la précondition
+est violée et l'exécution échoue — ce n'est pas un défaut de la fonction, c'est un appel
+hors contrat.
+
+\textbf{Erreur fréquente.} Décrire l'implémentation au lieu du contrat : « la fonction fait une
+boucle sur la liste » ne dit rien à l'appelant. Et la longueur du code n'engage personne : elle
+n'apparaît dans aucune spécification.
+
+\end{fichemethode}

@@ -1,0 +1,64 @@
+% META: {"id": "1NSI-TABLES-RE-C3", "chapitre": "1NSI-TABLES", "type_objet": "remediation", "capacites": ["P-TABLE-03"], "capacites_codes": ["C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : sorted renvoie, sort modifie
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu confonds les deux façons de trier. \lstinline{sorted(table, ...)}
+construit une \emph{nouvelle} liste et laisse \lstinline{table} intacte : si tu ne gardes
+pas le résultat, rien ne change. \lstinline{table.sort(...)} trie \emph{sur place} et
+renvoie \lstinline{None} : si tu gardes son résultat, tu gardes \lstinline{None}.
+
+\textbf{À retenir.} Une seule règle : \lstinline{classement = sorted(table, key=...)}. Le
+résultat est dans \lstinline{classement}, la table d'origine reste disponible dans son ordre
+initial.
+
+\begin{exercice}{1NSI-TAB-RE-C3-EX1}{1}{10}
+Deux élèves veulent la ligne de la note la plus basse dans
+% PYTHON-SOURCE: code/1NSI-TABLES-RE-C3-1.py
+\begin{python}
+notes = [
+    {"nom": "Amine", "note": 14},
+    {"nom": "Lina", "note": 18},
+    {"nom": "Omar", "note": 9},
+]
+\end{python}
+Le premier écrit :
+% PYTHON-SOURCE: code/1NSI-TABLES-RE-C3-2.py
+\begin{python}
+sorted(notes, key=lambda ligne: ligne["note"])
+print(notes[0])
+\end{python}
+Le second écrit :
+% PYTHON-SOURCE: code/1NSI-TABLES-RE-C3-3.py
+\begin{python}
+tri = notes.sort(key=lambda ligne: ligne["note"])
+print(tri)
+\end{python}
+\begin{enumerate}
+  \item Qu'affiche le premier programme ? Pourquoi n'est-ce pas la ligne attendue ?
+  \item Qu'affiche le second ? Que contient \lstinline{notes} après son exécution ?
+  \item Écrire une version qui affiche la ligne d'Omar sans modifier \lstinline{notes}.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% notes = [
+%     {"nom": "Amine", "note": 14},
+%     {"nom": "Lina", "note": 18},
+%     {"nom": "Omar", "note": 9},
+% ]
+% sorted(notes, key=lambda ligne: ligne["note"])
+% assert notes[0] == {"nom": "Amine", "note": 14}
+% tri = notes.sort(key=lambda ligne: ligne["note"])
+% assert tri is None
+% assert notes[0] == {"nom": "Omar", "note": 9}
+% notes = [
+%     {"nom": "Amine", "note": 14},
+%     {"nom": "Lina", "note": 18},
+%     {"nom": "Omar", "note": 9},
+% ]
+% classement = sorted(notes, key=lambda ligne: ligne["note"])
+% assert classement[0] == {"nom": "Omar", "note": 9}
+% assert notes[0] == {"nom": "Amine", "note": 14}
+% END-VERIFY

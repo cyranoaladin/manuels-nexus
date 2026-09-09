@@ -1,0 +1,49 @@
+% META: {"id": "1NSI-LANGAGE-RE-C6", "chapitre": "1NSI-LANGAGE", "type_objet": "remediation", "capacites": ["P-LANG-03B"], "capacites_codes": ["C6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C6 : une precondition engage l'APPELANT
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu confonds ce qui relève de la lisibilité et ce qui relève du
+contrat. Un nom bien choisi aide à comprendre ; il ne garantit rien. Une précondition énonce
+ce que \textbf{l'appelant doit garantir} avant l'appel — et la fonction n'a rien à promettre
+si cette condition n'est pas remplie.
+
+\textbf{À retenir.} Une précondition porte sur les \emph{arguments}. « la liste n'est pas
+vide », « le diviseur est non nul », « l'indice est compris entre $0$ et la longueur moins
+un ». La longueur du code, le nom des variables ou le style d'écriture n'en sont jamais.
+
+\begin{exercice}{1NSI-LANG-RE-C6-EX1}{1}{10}
+On considère \lstinline{element(t, i)} qui renvoie l'élément d'indice \lstinline{i} du
+tableau \lstinline{t}.
+\begin{enumerate}
+  \item Parmi ces énoncés, lesquels sont des préconditions ? Justifier chaque rejet.
+        \begin{itemize}
+          \item \lstinline{t} est un tableau non vide ;
+          \item la fonction est écrite en trois lignes ;
+          \item \lstinline{i} est un entier vérifiant $0 \leq i < \operatorname{len}(t)$ ;
+          \item le paramètre s'appelle \lstinline{t} et non \lstinline{tableau}.
+        \end{itemize}
+  \item Que se passe-t-il si l'appelant ne respecte pas la seconde précondition ?
+        La fonction est-elle fautive ?
+  \item Énoncer les préconditions de \lstinline{division(a, b)}.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def element(t, i):
+%     return t[i]
+% assert element([4, 8, 15], 1) == 8
+% try:
+%     element([4, 8, 15], 7)
+%     hors_contrat_detecte = False
+% except IndexError:
+%     hors_contrat_detecte = True
+% assert hors_contrat_detecte
+% try:
+%     10 / 0
+%     division_par_zero_detectee = False
+% except ZeroDivisionError:
+%     division_par_zero_detectee = True
+% assert division_par_zero_detectee
+% END-VERIFY

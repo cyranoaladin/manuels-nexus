@@ -1,0 +1,86 @@
+% META: {"id": "1NSI-TABLES-RE-C4", "chapitre": "1NSI-TABLES", "type_objet": "remediation", "capacites": ["P-TABLE-04"], "capacites_codes": ["C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C4 : la fusion ne garde que le domaine commun
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu attends de la fusion qu'elle garde toutes les lignes des deux
+tables, ou qu'elle « complète » celles qui n'ont pas de correspondance. Par défaut, seules les
+valeurs de la clé présentes \emph{dans les deux} tables produisent une ligne. Et quand un
+nom de colonne existe des deux côtés, la fusion s'arrête sur une erreur au lieu d'écraser
+une valeur en silence.
+
+\textbf{À retenir.} Avant de fusionner, écrire les deux domaines de la clé et leur
+intersection : c'est elle qui donne le nombre de lignes. Puis vérifier que les colonnes hors
+clé portent des noms différents.
+
+\begin{exercice}{1NSI-TAB-RE-C4-EX1}{1}{12}
+Le lycée dispose de deux tables :
+% PYTHON-SOURCE: code/1NSI-TABLES-RE-C4.py
+\begin{python}
+eleves = [
+    {"nom": "Amine", "classe": "1A"},
+    {"nom": "Lina", "classe": "1B"},
+    {"nom": "Omar", "classe": "1A"},
+    {"nom": "Sara", "classe": "1B"},
+]
+clubs = [
+    {"nom": "Lina", "club": "robotique"},
+    {"nom": "Sara", "club": "theatre"},
+    {"nom": "Yanis", "club": "echecs"},
+]
+\end{python}
+Un élève prévoit que \lstinline{fusionner(eleves, clubs, "nom")} renverra sept lignes, «
+quatre élèves plus trois inscriptions ».
+\begin{enumerate}
+  \item Écrire le domaine de la clé \lstinline{nom} dans chaque table, puis leur
+        intersection. Combien de lignes la fusion renvoie-t-elle réellement ? Les donner.
+  \item Amine et Omar ne sont dans aucun club, Yanis n'est pas dans \lstinline{eleves}.
+        Pourquoi aucun des trois n'apparaît-il ? Ces cas sont-ils des erreurs ?
+  \item On remplace \lstinline{clubs} par une table où chaque ligne porte aussi une colonne
+        \lstinline{classe}. Que fait \lstinline{fusionner} ? Pourquoi ce comportement
+        vaut-il mieux qu'un résultat silencieux ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def fusionner(table1, table2, cle):
+%     colonnes1 = {nom for ligne in table1 for nom in ligne if nom != cle}
+%     colonnes2 = {nom for ligne in table2 for nom in ligne if nom != cle}
+%     if not colonnes1.isdisjoint(colonnes2):
+%         raise ValueError("les colonnes hors cle doivent etre disjointes")
+%     index2 = {ligne[cle]: ligne for ligne in table2}
+%     fusion = []
+%     for ligne1 in table1:
+%         if ligne1[cle] in index2:
+%             complement = {
+%                 k: v for k, v in index2[ligne1[cle]].items() if k != cle
+%             }
+%             fusion.append({**ligne1, **complement})
+%     return fusion
+% eleves = [
+%     {"nom": "Amine", "classe": "1A"},
+%     {"nom": "Lina", "classe": "1B"},
+%     {"nom": "Omar", "classe": "1A"},
+%     {"nom": "Sara", "classe": "1B"},
+% ]
+% clubs = [
+%     {"nom": "Lina", "club": "robotique"},
+%     {"nom": "Sara", "club": "theatre"},
+%     {"nom": "Yanis", "club": "echecs"},
+% ]
+% commun = {ligne["nom"] for ligne in eleves} & {ligne["nom"] for ligne in clubs}
+% assert commun == {"Lina", "Sara"}
+% resultat = fusionner(eleves, clubs, "nom")
+% assert resultat == [
+%     {"nom": "Lina", "classe": "1B", "club": "robotique"},
+%     {"nom": "Sara", "classe": "1B", "club": "theatre"},
+% ]
+% assert len(resultat) != 7
+% try:
+%     fusionner(eleves, [{"nom": "Lina", "classe": "1B", "club": "robotique"}], "nom")
+% except ValueError as erreur:
+%     assert str(erreur) == "les colonnes hors cle doivent etre disjointes"
+% else:
+%     raise AssertionError("une collision de colonnes doit etre refusee")
+% END-VERIFY

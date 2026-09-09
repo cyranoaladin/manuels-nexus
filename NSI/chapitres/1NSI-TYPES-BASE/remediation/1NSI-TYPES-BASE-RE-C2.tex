@@ -1,0 +1,37 @@
+% META: {"id": "1NSI-TYPES-BASE-RE-C2", "chapitre": "1NSI-TYPES-BASE", "type_objet": "remediation", "capacites": ["P-BASE-02"], "capacites_codes": ["C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : nombre de bits contre nombre de valeurs
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu réponds par le nombre de \emph{combinaisons} quand on te demande un
+nombre de \emph{bits}. Ce sont deux grandeurs différentes : sur $8$ bits on écrit $256$ valeurs,
+mais la réponse à « combien de bits ? » est $8$, pas $256$.
+
+\textbf{À retenir.} Sur $n$ bits : $2^n$ valeurs distinctes, de $0$ à $2^n-1$. Pour trouver
+$n$ à partir d'un nombre $N$, cherche le plus petit $n$ tel que $2^n$ dépasse
+\textbf{strictement} $N$. Chaque bit ajouté \emph{double} le nombre de valeurs.
+
+\begin{exercice}{1NSI-TB-RE-C2-EX1}{1}{10}
+\begin{enumerate}
+  \item Combien de valeurs distinctes peut-on écrire sur $6$ bits ? Quelle est la plus grande ?
+  \item Combien de bits faut-il pour écrire $100$ ? Et pour $128$ ? Justifier les deux.
+  \item Un élève répond « $128$ bits » à la question « combien de bits pour écrire $100$ ? ».
+        Quelle grandeur a-t-il calculée ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% assert 2 ** 6 == 64
+% assert 2 ** 6 - 1 == 63
+% def bits(n):
+%     b = 0
+%     while 2 ** b <= n:
+%         b = b + 1
+%     return b
+% assert bits(100) == 7
+% assert 2 ** 6 <= 100 < 2 ** 7
+% assert bits(128) == 8
+% assert 2 ** 7 <= 128 < 2 ** 8
+% assert bits(127) == 7
+% END-VERIFY

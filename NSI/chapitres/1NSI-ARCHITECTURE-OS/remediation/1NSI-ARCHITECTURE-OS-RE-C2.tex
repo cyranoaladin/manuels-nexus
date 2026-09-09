@@ -1,0 +1,44 @@
+% META: {"id": "1NSI-ARCHITECTURE-OS-RE-C2", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "remediation", "capacites": ["P-ARCH-01B"], "capacites_codes": ["C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : le compteur ordinal ne devine rien
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu sautes des étapes en supposant que la machine « comprend » le
+programme. Le compteur ordinal désigne l'instruction suivante de façon entièrement
+déterminée : aucun hasard, aucune anticipation.
+
+\textbf{À retenir.} Une trace se dresse ligne par ligne, en ne modifiant qu'une chose à la fois
+et en recopiant le reste. Et sur un seul cœur, les instructions se suivent une à une : le
+parallélisme apparent des applications ne vient pas du processeur.
+
+\begin{exercice}{1NSI-ARCHOS-RE-C2-EX1}{1}{12}
+La mémoire contient \lstinline{a} $= 4$ et \lstinline{b} $= 6$. Le programme est :
+charger \lstinline{a} ; ajouter \lstinline{b} ; ajouter \lstinline{a} ; ranger \lstinline{c}.
+\begin{enumerate}
+  \item Dresser la trace : une ligne par instruction, avec le compteur ordinal et
+        l'accumulateur.
+  \item Que vaut \lstinline{c} à la fin ? Que valent \lstinline{a} et \lstinline{b} ?
+  \item Combien d'instructions le processeur exécute-t-il à la fois ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% memoire = {"a": 4, "b": 6}
+% programme = [("charger", "a"), ("ajouter", "b"), ("ajouter", "a"), ("ranger", "c")]
+% registres = {"accumulateur": 0, "compteur_ordinal": 0}
+% trace = []
+% while registres["compteur_ordinal"] < len(programme):
+%     operation, operande = programme[registres["compteur_ordinal"]]
+%     if operation == "charger":
+%         registres["accumulateur"] = memoire[operande]
+%     elif operation == "ajouter":
+%         registres["accumulateur"] = registres["accumulateur"] + memoire[operande]
+%     elif operation == "ranger":
+%         memoire[operande] = registres["accumulateur"]
+%     registres["compteur_ordinal"] = registres["compteur_ordinal"] + 1
+%     trace.append((registres["compteur_ordinal"], registres["accumulateur"]))
+% assert trace == [(1, 4), (2, 10), (3, 14), (4, 14)]
+% assert memoire["c"] == 14
+% assert memoire["a"] == 4 and memoire["b"] == 6
+% END-VERIFY
