@@ -1,0 +1,17 @@
+schema_version: 1
+python: "3.12"
+java:
+  minimum_major: 21
+latex:
+  engine: lualatex
+  minimum_texlive: 2026
+  tagged_pdf: true
+verapdf:
+  version: "1.30.1"
+  profile: ua1
+  report_format: mrr
+poppler:
+  minimum_version: "24.02.0"
+  commands: [pdfinfo, pdffonts, pdftotext, pdftoppm]
+ghostscript:
+  minimum_version: "10.02"
