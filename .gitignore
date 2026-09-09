@@ -10,3 +10,9 @@ __pycache__/
 .env.*
 !.env.example
 /build/
+
+# Corpus pedagogique local, hors des six manuels canoniques : il couvre aussi
+# la Seconde SNT, porte ses propres Makefiles et ses sorties de compilation,
+# et aucun script de la chaine de release n'en depend. Il est exclu de l'index
+# comme des balayages disque (cf. build_style_inventory / build_d7_proof_bundle).
+/Fiches_cours_exercices/
