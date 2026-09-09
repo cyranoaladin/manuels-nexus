@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "artifact_name": "OFFICIAL_AUTHORITIES_2026_2027",
+  "edition": "2026-2027",
+  "authority_order": [
+    "PROGRAMME_D_ENSEIGNEMENT",
+    "DEFINITION_D_EPREUVE",
+    "SUJETS_D_EXAMEN"
+  ],
+  "namespaces": {
+    "PROGRAMME_D_ENSEIGNEMENT": "Determines what must be taught and is the only programme-coverage authority.",
+    "DEFINITION_D_EPREUVE": "Determines assessment regime, duration, structure, weighting and calculator rules; it does not add or remove programme content.",
+    "SUJETS_D_EXAMEN": "Empirical evidence about implementation, style and instructions only; never sufficient programme authority."
+  },
+  "manuals": {
+    "1SPE": {
+      "ASSESSMENT_REGIME": "terminal_exam",
+      "PROGRAMME_D_ENSEIGNEMENT": {
+        "program_authority": true,
+        "official_document_id": "MENE2602917A",
+        "NOR": "MENE2602917A",
+        "kind": "arrete",
+        "signed_on": "2026-02-26",
+        "journal_officiel": "JORF n°0074 du 27-03-2026",
+        "bulletin_officiel": "BO n°14 du 02-04-2026",
+        "effective_from": "rentree_scolaire_2026-2027",
+        "url": "https://www.education.gouv.fr/bo/2026/Hebdo14/MENE2602917A",
+        "legifrance_url": "https://www.legifrance.gouv.fr/eli/arrete/2026/2/26/MENE2602917A/jo/texte"
+      },
+      "DEFINITION_D_EPREUVE": {
+        "official_document_id": "MENE2515469N",
+        "NOR": "MENE2515469N",
+        "kind": "note_de_service",
+        "signed_on": "2025-06-10",
+        "bulletin_officiel": "BO n°24 du 12-06-2025",
+        "applicable_from_session": 2027,
+        "edition_cohort_session": 2028,
+        "duration_minutes": 120,
+        "coefficient": 2,
+        "raw_scale": 20,
+        "calculator": "forbidden",
+        "structure": [
+          {"kind": "automatismes_qcm", "points": 6},
+          {"kind": "2_to_3_independent_exercises", "points": 14}
+        ],
+        "speciality_candidate_subject": "mathematiques_speciality_subject",
+        "url": "https://www.education.gouv.fr/bo/2025/Hebdo24/MENE2515469N",
+        "related_creation_texts": ["MENE2508109D", "MENE2508110A"]
+      },
+      "SUJETS_D_EXAMEN": {
+        "program_authority": false,
+        "SUBJECT_2026_PROGRAM_AUTHORITY": false,
+        "subject_2026_cohort": "school_year_2025-2026_old_programme",
+        "permitted_uses": ["format", "duration", "style", "instruction_types", "exam_organisation"],
+        "new_programme_zero_subject_found_as_of_2026-08-23": false,
+        "eduscol_url": "https://eduscol.education.gouv.fr/5688/epreuve-anticipee-de-mathematiques-aux-baccalaureats-general-et-technologique"
+      },
+      "EXAM_ALIGNMENT": {
+        "duration_minutes": 120,
+        "coefficient": 2,
+        "calculator": "forbidden",
+        "part_1": {"kind": "automatismes_qcm", "points": 6},
+        "part_2": {"kind": "2_to_3_independent_exercises", "points": 14}
+      }
+    },
+    "TSPE": {
+      "ASSESSMENT_REGIME": "terminal_exam",
+      "PROGRAMME_D_ENSEIGNEMENT": {
+        "program_authority": true,
+        "official_document_id": "MENE1921246A",
+        "NOR": "MENE1921246A",
+        "kind": "arrete",
+        "signed_on": "2019-07-19",
+        "bulletin_officiel": "BO special n°8 du 25-07-2019",
+        "effective_from": "rentree_2020",
+        "url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921246A.htm",
+        "wrong_year_document": {"NOR": "MENE2602919A", "effective_from": "rentree_2027-2028"}
+      },
+      "DEFINITION_D_EPREUVE": {
+        "official_document_ids": ["MENE2001796N", "MENE2121273N", "MENE2323020N", "MENE2508110A"],
+        "current_programme_scope_NOR": "MENE2323020N",
+        "applicable_from_session": 2024,
+        "duration_minutes": 240,
+        "coefficient": 16,
+        "raw_scale": 20,
+        "structure": "4_independent_exercises_each_4_to_8_points",
+        "calculator": "subject_specifies_authorized_or_forbidden",
+        "programme_mobilisable": "terminale_programme_in_force_plus_mobilisable_premiere_notions",
+        "url": "https://www.education.gouv.fr/bo/2023/Hebdo36/MENE2323020N"
+      },
+      "SUJETS_D_EXAMEN": {
+        "program_authority": false,
+        "permitted_uses": ["empirical_format", "style", "instruction_types"],
+        "eduscol_url": "https://eduscol.education.gouv.fr/5199/annales-des-epreuves-du-baccalaureat-des-voies-generale-et-technologique"
+      }
+    },
+    "TCOMPL": {
+      "ASSESSMENT_REGIME": "optional_subject_regime",
+      "PROGRAMME_D_ENSEIGNEMENT": {
+        "program_authority": true,
+        "official_document_id": "MENE1921265A",
+        "NOR": "MENE1921265A",
+        "signed_on": "2019-07-19",
+        "bulletin_officiel": "BO special n°8 du 25-07-2019",
+        "effective_from": "rentree_2020",
+        "url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+        "wrong_year_document": {"NOR": "MENE2602920A", "bo_typo_alias": "MENE2902920A", "effective_from": "rentree_2027-2028"}
+      },
+      "DEFINITION_D_EPREUVE": {
+        "school_candidates": {"regime": "continuous_assessment", "additional_coefficient": 2, "authority_NOR": "MENE2121270N"},
+        "individual_or_out_of_contract_candidates": {"regime": "punctual_oral", "duration_minutes": 30, "preparation_minutes": 30, "raw_scale": 20, "calculator": "authorized", "authority_NOR": "MENE2533572N", "applicable_from_session": 2026},
+        "eligibility": "not_available_when_mathematics_speciality_is_presented_as_terminal_exam"
+      },
+      "SUJETS_D_EXAMEN": {"program_authority": false, "national_school_terminal_subject": false}
+    },
+    "TEXPERTES": {
+      "ASSESSMENT_REGIME": "optional_subject_regime",
+      "PROGRAMME_D_ENSEIGNEMENT": {
+        "program_authority": true,
+        "official_document_id": "MENE1921264A",
+        "NOR": "MENE1921264A",
+        "signed_on": "2019-07-19",
+        "bulletin_officiel": "BO special n°8 du 25-07-2019",
+        "effective_from": "rentree_2020",
+        "url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm"
+      },
+      "DEFINITION_D_EPREUVE": {
+        "school_candidates": {"regime": "continuous_assessment", "additional_coefficient": 2, "authority_NOR": "MENE2121270N"},
+        "individual_or_out_of_contract_candidates": {"regime": "punctual_oral", "duration_minutes": 30, "preparation_minutes": 30, "raw_scale": 20, "calculator": "authorized", "authority_NOR": "MENE2533572N", "applicable_from_session": 2026},
+        "eligibility": "requires_mathematics_speciality_terminal_exam"
+      },
+      "SUJETS_D_EXAMEN": {"program_authority": false, "national_school_terminal_subject": false}
+    },
+    "1NSI": {
+      "ASSESSMENT_REGIME": "continuous_assessment",
+      "PROGRAMME_D_ENSEIGNEMENT": {
+        "program_authority": true,
+        "official_document_id": "MENE1901633A",
+        "NOR": "MENE1901633A",
+        "signed_on": "2019-01-17",
+        "bulletin_officiel": "BO special n°1 du 22-01-2019",
+        "effective_from": "rentree_2019",
+        "url": "https://www.education.gouv.fr/bo/19/Special1/MENE1901633A.htm"
+      },
+      "DEFINITION_D_EPREUVE": {
+        "school_candidates_when_not_continued": {"regime": "continuous_assessment", "coefficient": 8, "authority_NOR": "MENE2121270N"},
+        "individual_or_replacement_candidates": {"regime": "punctual_written", "duration_minutes": 120, "questions": 42, "calculator": "forbidden", "authority_NOR": "MENE2121284N"},
+        "when_continued_in_TNSI": "no_separate_1NSI_exam"
+      },
+      "SUJETS_D_EXAMEN": {"program_authority": false, "permitted_uses": ["empirical_qcm_format"]}
+    },
+    "TNSI": {
+      "ASSESSMENT_REGIME": "terminal_exam",
+      "PROGRAMME_D_ENSEIGNEMENT": {
+        "program_authority": true,
+        "official_document_id": "MENE1921247A",
+        "NOR": "MENE1921247A",
+        "signed_on": "2019-07-19",
+        "bulletin_officiel": "BO special n°8 du 25-07-2019",
+        "effective_from": "rentree_2020",
+        "url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921247A.htm"
+      },
+      "DEFINITION_D_EPREUVE": {
+        "official_document_id": "MENE2516123N",
+        "NOR": "MENE2516123N",
+        "kind": "note_de_service",
+        "signed_on": "2025-07-04",
+        "bulletin_officiel": "BO n°31 du 21-08-2025",
+        "applicable_from_session": 2026,
+        "coefficient": 16,
+        "written_duration_minutes": 210,
+        "written_raw_scale": 20,
+        "written_weight": 0.75,
+        "practical_duration_minutes": 60,
+        "practical_raw_scale": 20,
+        "practical_weight": 0.25,
+        "final_scale": 20,
+        "calculator_written": "subject_specifies_authorized_or_forbidden",
+        "school_candidates": "written_plus_practical",
+        "individual_and_out_of_contract_candidates": "practical_exemption_final_mark_from_written_as_defined_by_note",
+        "CNED_free_candidate": "not_exempt_from_practical",
+        "url": "https://www.education.gouv.fr/bo/2025/Hebdo31/MENE2516123N"
+      },
+      "SUJETS_D_EXAMEN": {
+        "program_authority": false,
+        "zero_subjects_available": true,
+        "permitted_uses": ["empirical_practical_format", "instruction_types"],
+        "eduscol_url": "https://eduscol.education.gouv.fr/5823/programmes-et-ressources-en-numerique-et-sciences-informatiques-voie-g"
+      }
+    }
+  },
+  "official_source_anomalies": [
+    {"kind": "NOR_TYPO", "canonical": "MENE2602920A", "alias": "MENE2902920A", "resolution": "JORF_ELI_HAS_PRIORITY"},
+    {"kind": "NOR_TYPO", "canonical": "MENE2323020N", "alias": "MENE23232020N", "resolution": "BO_PAGE_HAS_PRIORITY"}
+  ]
+}

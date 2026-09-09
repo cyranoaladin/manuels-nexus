@@ -83,7 +83,8 @@ def main():
     md_path = ROOT / "audit/RUNTIME_CHARTER_PROVENANCE.md"
     md_content = [
         "# PREUVE RUNTIME DE PROVENANCE DE LA CHARTE GRAPHIQUE (.FLS)\n",
-        f"Généré le: 2026-08-15 | Builds analysés : {len(records)}\n",
+        f"Généré par `scripts/check_runtime_charter_provenance.py` "
+        f"| Builds analysés : {len(records)}\n",
         "| Manuel | Variante | Classe Chargée | SHA256 Classe | Legacy ? | Proto ? | Statut |",
         "| :--- | :---: | :--- | :---: | :---: | :---: | :---: |"
     ]

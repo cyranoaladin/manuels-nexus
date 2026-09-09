@@ -1,0 +1,101 @@
+{
+  "artifact_type": "STUDENT_PDF_PUBLISH_PREFLIGHT",
+  "schema_version": 1,
+  "generated_by": "scripts/audit_student_pdf_publish_preflight.py",
+  "scope": "six canonical student build PDFs; MANUELS_PDF_PUBLICATION explicitly excluded",
+  "provenance": {
+    "current_source_sha": "60ad640814637dbc560bafe1ab3750cd11585518",
+    "working_tree_dirty": true,
+    "build_manifest_source_sha": "74505d5c93f4e85329d86ce21d60e1febfe2280b",
+    "build_manifest_source_digest": "sha256:bcf1b1468f3a6595d09edf30cadb409ed858d49ff739a1062b9e75fec891de39",
+    "final_source_sha_match": false
+  },
+  "summary": {
+    "variants_scanned": 6,
+    "teacher_only_content_leak_documents": 0,
+    "pdf_metadata_incomplete": 0,
+    "pdf_navigation_missing": 0,
+    "pdf_missing": 0,
+    "release_candidate_eligible": false
+  },
+  "variants": [
+    {
+      "manual": "1SPE",
+      "path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf",
+      "exists": true,
+      "pdf_sha256": "sha256:f3b8ec66584bda2a6883045db452582e4a46fccb284bb3975bc4124c22c4296c",
+      "pages": 371,
+      "teacher_only_content_leak": 0,
+      "marker_occurrences": {},
+      "title": "Mathématiques Première spécialité — Édition Élève — 2026-2027",
+      "author": "Nexus Réussite",
+      "bookmark_count": 76,
+      "findings": []
+    },
+    {
+      "manual": "TSPE",
+      "path": "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_eleve.pdf",
+      "exists": true,
+      "pdf_sha256": "sha256:bb120a83f01f6a3f3937904a172a9353be81e0ae702d0a7220e75b318400acc9",
+      "pages": 207,
+      "teacher_only_content_leak": 0,
+      "marker_occurrences": {},
+      "title": "Mathématiques Terminale spécialité — Édition Élève — 2026-2027",
+      "author": "Nexus Réussite",
+      "bookmark_count": 108,
+      "findings": []
+    },
+    {
+      "manual": "TCOMPL",
+      "path": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf",
+      "exists": true,
+      "pdf_sha256": "sha256:3a7c786cecb341a016d166e129e86ce763bf932160d260c9c6f71214d5576a55",
+      "pages": 145,
+      "teacher_only_content_leak": 0,
+      "marker_occurrences": {},
+      "title": "Mathématiques Terminale — maths complémentaires — Édition Élève — 2026-2027",
+      "author": "Nexus Réussite",
+      "bookmark_count": 36,
+      "findings": []
+    },
+    {
+      "manual": "TEXPERTES",
+      "path": "Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_eleve.pdf",
+      "exists": true,
+      "pdf_sha256": "sha256:c713fcf1a8eae6c0107890a1ff2aba4abded515ab10acc093fb1d38d40ae9c4e",
+      "pages": 92,
+      "teacher_only_content_leak": 0,
+      "marker_occurrences": {},
+      "title": "Mathématiques Terminale — maths expertes — Édition Élève — 2026-2027",
+      "author": "Nexus Réussite",
+      "bookmark_count": 20,
+      "findings": []
+    },
+    {
+      "manual": "1NSI",
+      "path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf",
+      "exists": true,
+      "pdf_sha256": "sha256:9920613cb4738b60f8d6b2282cf780464943fbe3cf4dbe8214fd01019707f90c",
+      "pages": 119,
+      "teacher_only_content_leak": 0,
+      "marker_occurrences": {},
+      "title": "NSI Première — Édition Élève — 2026-2027",
+      "author": "Nexus Réussite",
+      "bookmark_count": 51,
+      "findings": []
+    },
+    {
+      "manual": "TNSI",
+      "path": "NSI/build/MANUEL_TNSI/MANUEL_TNSI_eleve.pdf",
+      "exists": true,
+      "pdf_sha256": "sha256:5e31c7971129065cb73b23265558a50a250a3f8d81ba2f9d487a0e158756614d",
+      "pages": 70,
+      "teacher_only_content_leak": 0,
+      "marker_occurrences": {},
+      "title": "NSI Terminale — Édition Élève — 2026-2027",
+      "author": "Nexus Réussite",
+      "bookmark_count": 36,
+      "findings": []
+    }
+  ]
+}
