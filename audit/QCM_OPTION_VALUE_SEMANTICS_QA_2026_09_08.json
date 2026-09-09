@@ -1,0 +1,54 @@
+{
+  "artifact_type": "development_qa_correction_log",
+  "schema_version": 1,
+  "approves_nothing": true,
+  "observed_head": "274a7b8118113e8d574fcc48e8a9b1c7d6bb16d3",
+  "worktree_observation": true,
+  "sources": [
+    {
+      "path": "scripts/qcm_independent_solver.py",
+      "before_head": "73ef32f6461cc6da65e696f7ee51536ae3d6f72c",
+      "before_sha256": "93df393b960b89103ac036feee765e646201b6c28f30f8004b01feb7f61bccc7",
+      "after_sha256": "1aa546333674ded472fd008b99dfaf883695953a891809a21d41424ecd46103b"
+    },
+    {
+      "path": "tests/test_qcm_option_value_semantics.py",
+      "before_head": "73ef32f6461cc6da65e696f7ee51536ae3d6f72c",
+      "before_sha256": null,
+      "after_sha256": "f27622db7c3148999a538d2a76ab24431bf39446c290f10b6e30fd2329b66989"
+    }
+  ],
+  "finding": {
+    "id": "QCM-CURRENT-QA-018",
+    "severity": "PRODUCT_P0",
+    "status": "CORRECTED_PENDING_INDEPENDENT_COUNTERREVIEW",
+    "reported_by": "/root",
+    "before": "option_value removed percentages, euros and arbitrary text qualifiers before computing a scalar. The eight-face probability fixture with A=1/8 percent and B=1/6 incorrectly certified A as probability1/8.",
+    "after": "The bare-scalar reader removes only a single enclosing math-delimiter pair and otherwise submits the complete expression to its closed arithmetic grammar. Units, percentages, text qualifiers and mixed math/text remain unsupported; no quantity or condition is silently erased. The stale readable_options comment is corrected."
+  },
+  "scientific_argument": "A percentage includes a factor1/100 and is not the bare displayed coefficient. A physical/currency quantity or conditional statement cannot be converted to an unqualified scalar without an explicit semantic contract. This API carries no such unit/context contract, so it abstains.",
+  "conservative_scope": "The reader deliberately does not convert percentages or interpret units. A dedicated consumer may later do so only with an explicit and tested contract.",
+  "tests": {
+    "red_log": "/tmp/qcm-option-semantics-red.log",
+    "red_sha256": "d1d309f320724e2faf7ff01f839fb93ecd678ea7676b4fe7e51a8cbada792cd2",
+    "red_failed": 9,
+    "red_passed": 6,
+    "green_junit": "/tmp/qcm-option-semantics-targeted.xml",
+    "green_sha256": "827402db77d245b0b68dfc12373c521bdca8dc1c7a131424a33d19e12d7ce0fa",
+    "passed": 134,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "command": "python -m pytest -q tests/test_qcm_option_value_semantics.py tests/test_qcm_uniform_die_probability.py tests/test_qcm_scientific_abstention.py tests/test_qcm_closed_symbolic_parser.py tests/test_qcm_method_binding.py tests/test_qcm_current_evidence_guard.py --junitxml=/tmp/qcm-option-semantics-targeted.xml",
+    "scope": "Controlled fixtures only; no real-corpus question execution."
+  },
+  "scope_limits": [
+    "This closes meaning-erasing normalization in the numeric option reader; it does not certify every solver family or natural-language option grammar.",
+    "No source question, stored aggregate, historical receipt or human approval is changed."
+  ],
+  "not_run": [
+    "Global QCM replay",
+    "Global V2/closure regeneration",
+    "Full suite"
+  ]
+}

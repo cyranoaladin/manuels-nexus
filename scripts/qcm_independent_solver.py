@@ -40,7 +40,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from latex_arith import UnsupportedExpression, evaluate  # noqa: E402
 
-SOLVER_VERSION = "1.1.5"
+SOLVER_VERSION = "1.1.6"
 
 #: Tout champ qui trahirait la reponse. Leur presence rend l'entree invalide.
 FORBIDDEN_INPUT_FIELDS = frozenset(
@@ -180,14 +180,16 @@ def _numbers(text: str) -> list[Fraction]:
 
 
 def option_value(raw: str) -> Fraction | None:
-    """Valeur exacte d'une option, ou None si elle n'est pas numerique."""
+    """Exact bare scalar, without guessing the meaning of any qualifier.
+
+    This API has no expected-unit or contextual-semantics parameter. Currency,
+    percentages and text therefore require a different, justified reader;
+    dropping those tokens would change what the option says.
+    """
 
     text = str(raw).strip()
-    text = re.sub(r"~?(euros?|%)\b", "", text)
-    text = text.replace(r"\,\%", "").replace(r"\%", "")
-    text = re.sub(r"\\text\{[^}]*\}", "", text)
-    text = text.replace("$", "").strip()
-    text = re.sub(r"\s*(euros?)\s*$", "", text, flags=re.I).strip()
+    if text.startswith("$") and text.endswith("$") and text.count("$") == 2:
+        text = text[1:-1].strip()
     if not text:
         return None
     try:
@@ -213,9 +215,8 @@ class SolverResult:
     computed_value: str | None = None
     independent_evidence: str = ""
     reason: str | None = None
-    #: Options que la famille a su LIRE. Une option illisible est comptee
-    #: fausse pour ne pas bloquer le calcul, mais si aucune option n'est vraie
-    #: et qu'au moins une etait illisible, la famille ne peut rien conclure.
+    #: Options effectivement lues. Les lecteurs numerique et symbolique ne
+    #: produisent aucun vecteur de verite si une option reste illisible.
     readable_options: int | None = None
 
     @property
