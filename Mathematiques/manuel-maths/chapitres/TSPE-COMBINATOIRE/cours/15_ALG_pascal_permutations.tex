@@ -1,0 +1,181 @@
+% META: {"id": "TSPE-COMBI-ALG-015", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "algorithme", "capacites_codes": ["C2", "C4"], "programme_alignment": "OFFICIAL_ALGORITHM_EXAMPLE", "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+\section{Algorithmique : engendrer des coefficients binomiaux et des permutations}
+
+% ============================================================
+% STRATE 1 --- Probleme, modele, algorithmes
+% ============================================================
+
+\margeAppui{
+Le programme cite parmi ses \textbf{exemples d'algorithme} : la generation de
+la liste des $\binom{n}{k}$ par la relation de Pascal, la generation des
+permutations d'un ensemble fini ou le tirage aleatoire d'une permutation, et
+la generation des parties a $2$ ou $3$ elements. Il les cite, il ne les impose
+pas.
+}
+
+\textbf{Le probleme.} Denombrer, c'est compter sans enumerer. Mais pour
+verifier un denombrement -- et pour comprendre ce qu'on compte -- il est utile
+de savoir \emph{fabriquer} les objets. Les algorithmes ci-dessous produisent
+ce que les formules comptent.
+
+\propriete[La relation de Pascal comme algorithme]{
+Pour $1 \leq k \leq n-1$,
+\[
+  \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k},
+  \qquad
+  \binom{n}{0} = \binom{n}{n} = 1 .
+\]
+Chaque ligne se deduit donc de la precedente par des \textbf{additions
+seulement} : aucune factorielle, aucune division. Entree : $n$. Sortie : la
+liste des $n+1$ coefficients de la ligne $n$.
+}
+
+\begin{python}
+def ligne_de_pascal(n):
+    """Liste des coefficients binomiaux de la ligne n, par additions."""
+    if n < 0:
+        raise ValueError("n doit etre positif")
+    ligne = [1]
+    for _ in range(n):
+        ligne = [1] + [a + b for a, b in zip(ligne, ligne[1:])] + [1]
+    return ligne
+
+def permutations(elements):
+    """Toutes les permutations d'une liste, par insertions successives."""
+    if not elements:
+        return [[]]
+    resultat = []
+    for petite in permutations(elements[1:]):
+        for position in range(len(petite) + 1):
+            resultat.append(petite[:position] + [elements[0]] + petite[position:])
+    return resultat
+
+def parties(elements, taille):
+    """Toutes les parties d'une taille donnee, dans l'ordre des indices."""
+    if taille < 0 or taille > len(elements):
+        return []
+    if taille == 0:
+        return [[]]
+    avec = [[elements[0]] + reste for reste in parties(elements[1:], taille - 1)]
+    return avec + parties(elements[1:], taille)
+\end{python}
+
+\exemple{
+\code{ligne\_de\_pascal(6)} renvoie $[1, 6, 15, 20, 15, 6, 1]$ : on y lit
+$\binom{6}{2} = 15$ sans jamais calculer $6!$.
+
+\code{permutations([1, 2, 3, 4])} produit $24 = 4!$ listes, toutes distinctes.
+
+\code{parties([1, 2, 3, 4, 5], 2)} produit $10 = \binom{5}{2}$ paires.
+}
+
+\propriete[Travail demande]{%
+\begin{enumerate}
+  \item Verifier que la somme des coefficients de la ligne $n$ vaut $2^n$, et
+        expliquer pourquoi.
+  \item Verifier que chaque ligne est symetrique.
+  \item Verifier que \code{parties} produit bien $\binom{n}{k}$ listes, sans
+        repetition.
+  \item Combien de permutations pour $n = 10$ ? Est-il raisonnable de toutes
+        les engendrer ?
+\end{enumerate}
+}
+
+\exemple{
+\textbf{Reponses.} 1. La somme vaut $2^n$ : c'est le nombre total de parties
+d'un ensemble a $n$ elements, chaque partie ayant une taille $k$ et une seule.
+4. $10! = 3\,628\,800$. Les engendrer toutes est possible mais couteux ; pour
+$n = 20$ ce serait $2{,}4\times10^{18}$ listes, hors d'atteinte. Denombrer
+n'est pas enumerer -- c'est justement pourquoi on denombre.
+}
+
+% BEGIN-VERIFY
+% from math import comb, factorial
+%
+% def ligne_de_pascal(n):
+%     if n < 0:
+%         raise ValueError("n doit etre positif")
+%     ligne = [1]
+%     for _ in range(n):
+%         ligne = [1] + [a + b for a, b in zip(ligne, ligne[1:])] + [1]
+%     return ligne
+%
+% def permutations(elements):
+%     if not elements:
+%         return [[]]
+%     resultat = []
+%     for petite in permutations(elements[1:]):
+%         for position in range(len(petite) + 1):
+%             resultat.append(petite[:position] + [elements[0]] + petite[position:])
+%     return resultat
+%
+% def parties(elements, taille):
+%     if taille < 0 or taille > len(elements):
+%         return []
+%     if taille == 0:
+%         return [[]]
+%     avec = [[elements[0]] + reste for reste in parties(elements[1:], taille - 1)]
+%     return avec + parties(elements[1:], taille)
+%
+% assert ligne_de_pascal(6) == [1, 6, 15, 20, 15, 6, 1]
+% # L'algorithme redonne exactement les coefficients binomiaux.
+% for n in range(0, 15):
+%     ligne = ligne_de_pascal(n)
+%     assert ligne == [comb(n, k) for k in range(n + 1)]
+%     assert len(ligne) == n + 1
+%     assert sum(ligne) == 2 ** n
+%     assert ligne == ligne[::-1]
+%     # ... et la relation de Pascal elle-meme.
+%     if n >= 1:
+%         precedente = ligne_de_pascal(n - 1)
+%         assert all(
+%             ligne[k] == precedente[k - 1] + precedente[k] for k in range(1, n)
+%         )
+%
+% p4 = permutations([1, 2, 3, 4])
+% assert len(p4) == factorial(4) == 24
+% assert len({tuple(x) for x in p4}) == 24
+% assert all(sorted(x) == [1, 2, 3, 4] for x in p4)
+% for n in range(0, 6):
+%     assert len(permutations(list(range(n)))) == factorial(n)
+%
+% paires = parties([1, 2, 3, 4, 5], 2)
+% assert len(paires) == comb(5, 2) == 10
+% assert len({tuple(x) for x in paires}) == 10
+% assert all(len(x) == 2 for x in paires)
+% for n in range(0, 8):
+%     for k in range(0, n + 1):
+%         engendrees = parties(list(range(n)), k)
+%         assert len(engendrees) == comb(n, k), (n, k)
+%         assert len({tuple(x) for x in engendrees}) == comb(n, k)
+% # Une taille impossible ne produit rien.
+% assert parties([1, 2], 3) == []
+% assert parties([1, 2], -1) == []
+%
+% assert factorial(10) == 3628800
+% try:
+%     ligne_de_pascal(-1)
+% except ValueError:
+%     pass
+% else:
+%     raise AssertionError("n negatif aurait du etre refuse")
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 --- Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Calculer $\binom{n}{k}$ par $\dfrac{n!}{k!(n-k)!}$ dans un
+programme.} Pour $n = 100$, $n!$ compte $158$ chiffres alors que
+$\binom{100}{50}$ n'en compte que $30$. La relation de Pascal n'utilise que
+des additions, et ne fabrique jamais de nombres inutilement grands.
+}
+
+\erreurFrequente{
+\textbf{Confondre enumerer et denombrer.} Engendrer les $\binom{n}{k}$ parties
+permet de \emph{verifier} un denombrement sur de petits cas. Cela ne le
+remplace pas : le nombre de parties croit trop vite pour qu'on puisse les
+lister au-dela de quelques dizaines d'elements.
+}

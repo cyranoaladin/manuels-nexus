@@ -1,0 +1,159 @@
+% META: {"id": "1SPE-TRIGO-ALG-015", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "algorithme", "capacites_codes": ["C1", "C2"], "programme_alignment": "OFFICIAL_ALGORITHM_EXAMPLE", "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+\section{Algorithmique : approcher $\pi$ par la méthode d'Archimède}
+
+% ============================================================
+% STRATE 1 --- Probleme, modele, algorithme
+% ============================================================
+
+\margeAppui{
+« Approximation de $\pi$ par la methode d'Archimede » figure parmi les
+\textbf{exemples d'algorithme} du programme. Le texte le cite, il ne l'impose
+pas.
+}
+
+\textbf{Le probleme.} $\pi$ est le demi-perimetre du cercle de rayon $1$.
+Archimede l'encadre en remplacant le cercle par des polygones reguliers
+inscrits, dont on sait calculer le perimetre, et en doublant le nombre de
+cotes.
+
+\propriete[Le cote d'un polygone regulier inscrit]{
+Dans le cercle trigonometrique, les $n$ sommets d'un polygone regulier inscrit
+sont associes aux reels $\dfrac{2k\pi}{n}$. Deux sommets consecutifs sont vus
+depuis le centre sous un angle $\dfrac{2\pi}{n}$, donc la corde qui les joint
+a pour longueur
+\[
+  s_n = 2\sin\!\left(\frac{\pi}{n}\right).
+\]
+Le perimetre vaut $p_n = n\,s_n$, et $\dfrac{p_n}{2}$ approche $\pi$ par
+defaut : la ligne brisee est plus courte que le cercle.
+}
+
+\propriete[Doubler le nombre de cotes sans trigonometrie]{
+En passant de $n$ a $2n$ cotes, on montre par le theoreme de Pythagore que
+\[
+  s_{2n} = \sqrt{\,2 - \sqrt{4 - s_n^{\,2}}\,}.
+\]
+Le calcul ne demande donc que des racines carrees. On part de l'hexagone, dont
+le cote vaut le rayon : $s_6 = 1$.
+}
+
+\margeAppui{
+$s_6 = 1$ parce que les six triangles formes par deux sommets consecutifs et
+le centre sont equilateraux -- c'est le meme argument que pour
+$\cos\!\left(\frac{\pi}{3}\right) = \frac{1}{2}$.
+}
+
+\begin{python}
+from math import sqrt
+
+def archimede(doublements):
+    """Approximations de pi par les polygones inscrits, en partant de l'hexagone."""
+    if doublements < 0:
+        raise ValueError("le nombre de doublements doit etre positif")
+    cotes, s = 6, 1.0
+    approximations = [cotes * s / 2]
+    for _ in range(doublements):
+        s = sqrt(2 - sqrt(4 - s * s))
+        cotes = 2 * cotes
+        approximations.append(cotes * s / 2)
+    return approximations
+\end{python}
+
+\exemple{
+\code{archimede(5)} renvoie, pour $n = 6, 12, 24, 48, 96, 192$ cotes :
+\[
+  3\;;\; 3{,}105\,829\;;\; 3{,}132\,629\;;\; 3{,}139\,350\;;\;
+  3{,}141\,032\;;\; 3{,}141\,452 .
+\]
+Chaque valeur est \textbf{inferieure} a $\pi = 3{,}141\,592\ldots$, et la suite
+croit : le polygone inscrit epouse le cercle de mieux en mieux. Avec $96$
+cotes, on retrouve l'encadrement obtenu par Archimede lui-meme.
+}
+
+\propriete[Travail demande]{%
+\begin{enumerate}
+  \item Verifier que la premiere valeur est $3$, et dire quel polygone lui
+        correspond.
+  \item Verifier sur les valeurs affichees que la suite est croissante et
+        majoree par $\pi$.
+  \item Pousser jusqu'a $30$ doublements et observer ce qui arrive. Que
+        conclure ?
+\end{enumerate}
+}
+
+\exemple{
+\textbf{Reponse a la question 3.} Passe une quinzaine de doublements, les
+valeurs cessent de se rapprocher de $\pi$ ; au vingt-cinquieme elles en sont
+deja loin, et au vingt-huitieme le resultat vaut exactement $0$. En
+cause : $s_n$ devient minuscule, et $4 - s_n^2$ tres proche de $4$ ; la
+soustraction $2 - \sqrt{4 - s_n^2}$ retranche alors deux nombres presque
+egaux, et les chiffres significatifs disparaissent. L'algorithme est juste ;
+c'est le calcul en nombres flottants qui ne suit plus.
+}
+
+% BEGIN-VERIFY
+% from math import sqrt, pi
+%
+% def archimede(doublements):
+%     if doublements < 0:
+%         raise ValueError("le nombre de doublements doit etre positif")
+%     cotes, s = 6, 1.0
+%     approximations = [cotes * s / 2]
+%     for _ in range(doublements):
+%         s = sqrt(2 - sqrt(4 - s * s))
+%         cotes = 2 * cotes
+%         approximations.append(cotes * s / 2)
+%     return approximations
+%
+% valeurs = archimede(5)
+% attendues = [3.0, 3.105829, 3.132629, 3.139350, 3.141032, 3.141452]
+% assert len(valeurs) == 6
+% assert [round(v, 6) for v in valeurs] == attendues
+% # Approximation PAR DEFAUT, et suite croissante.
+% assert all(v < pi for v in valeurs)
+% assert all(a < b for a, b in zip(valeurs, valeurs[1:]))
+% # Le premier terme est l'hexagone : six cotes de longueur 1.
+% assert valeurs[0] == 6 * 1.0 / 2
+% # Le cote de l'hexagone vaut bien 2 sin(pi/6) = 1.
+% from math import sin
+% assert abs(2 * sin(pi / 6) - 1.0) < 1e-15
+% # La relation de doublement redonne 2 sin(pi/(2n)) a partir de 2 sin(pi/n).
+% for n in (6, 12, 24, 48):
+%     s_n = 2 * sin(pi / n)
+%     assert abs(sqrt(2 - sqrt(4 - s_n * s_n)) - 2 * sin(pi / (2 * n))) < 1e-12
+% # La perte de precision annoncee : passe une trentaine de doublements, la
+% # suite cesse d'approcher pi.
+% longue = archimede(35)
+% # Jusqu'a une quinzaine de doublements, l'approximation progresse.
+% assert abs(longue[15] - pi) < 1e-8
+% # Ensuite elle se degrade, puis s'effondre : la suite n'est plus croissante,
+% # et le vingt-huitieme terme vaut exactement zero.
+% assert any(b < a for a, b in zip(longue[15:], longue[16:]))
+% assert abs(longue[25] - pi) > 0.2
+% assert longue[28] == 0.0
+% assert longue[-1] == 0.0
+% try:
+%     archimede(-1)
+% except ValueError:
+%     pass
+% else:
+%     raise AssertionError("un nombre negatif de doublements aurait du etre refuse")
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 --- Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Croire qu'un algorithme juste donne toujours un resultat juste.} La
+relation de doublement est exacte. C'est l'arithmetique flottante qui perd les
+chiffres : soustraire deux nombres presque egaux detruit la precision. Un
+algorithme s'evalue aussi sur sa \emph{stabilite numerique}.
+}
+
+\erreurFrequente{
+\textbf{Oublier le sens de l'approximation.} Le polygone \emph{inscrit} est a
+l'interieur du cercle : son demi-perimetre est toujours plus petit que $\pi$.
+Archimede utilisait aussi les polygones circonscrits, pour encadrer.
+}

@@ -1,30 +1,182 @@
-% META: {"id":"1SPE-EXPO-COURS-C5-ALGORITHMES","chapitre":"1SPE-EXPONENTIELLE","type_objet":"cours","capacites_codes":[],"programme_alignment":"IMPLEMENTATION_GUIDANCE","status":"generated","programme_reference":"MENE2602917A"}
+% META: {"id":"1SPE-EXPO-COURS-C5-ALGORITHMES","chapitre":"1SPE-EXPONENTIELLE","type_objet":"algorithme","capacites_codes":["C1","C5"],"programme_alignment":"OFFICIAL_ALGORITHM_EXAMPLE","status":"generated","programme_reference":"MENE2602917A"}
 
 \begin{center}\textbf{Mise en œuvre algorithmique — non exigible}\end{center}
 
-\section{Algorithmes — Construire et approcher l'exponentielle}
+\section{Algorithmique : construire et approcher l'exponentielle}
 
-\subsection*{Construction approchée par la méthode d'Euler}
-Pour approcher la fonction vérifiant $y'=y$ et $y(0)=1$, on choisit un pas $h>0$ et on part de $x_0=0$, $y_0=1$. On répète :
-\[
-x_{k+1}=x_k+h,\qquad y_{k+1}=y_k+h\,y_k.
-\]
-Les points $(x_k;y_k)$ donnent une construction numérique approchée de la courbe. Réduire le pas permet de comparer plusieurs approximations, sans constituer ici une démonstration d'existence.
+% ============================================================
+% STRATE 1 --- Probleme, modele, algorithme
+% ============================================================
 
-\subsection*{Approcher numériquement le nombre $\mathrm{e}$}
-Calculer, pour des entiers $n$ de plus en plus grands,
+\margeAppui{
+Le programme cite deux \textbf{exemples d'algorithme} pour cette partie : la
+construction de l'exponentielle par la methode d'Euler, et l'approximation de
+$\mathrm{e}$ par la suite $\left(\left(1+\frac{1}{n}\right)^n\right)$. Il les
+cite, il ne les impose pas.
+}
+
+\textbf{Le probleme.} La fonction exponentielle est definie par une propriete
+--- l'unique fonction derivable verifiant $f' = f$ et $f(0) = 1$ --- et non
+par une formule de calcul. Comment tracer sa courbe, et comment obtenir des
+valeurs de $\mathrm{e}$, a partir de cette seule propriete ?
+
+\propriete[Methode d'Euler]{
+Sur un petit intervalle, on remplace la courbe par sa tangente :
+$f(x+h) \approx f(x) + h\,f'(x)$. Comme $f' = f$, cela donne
+$f(x+h) \approx f(x) + h\,f(x)$.
+
+En partant de $x_0 = 0$ et $y_0 = 1$, on construit donc, pour un pas $h > 0$ :
 \[
-a_n=\left(1+\dfrac{1}{n}\right)^n.
+  x_{k+1} = x_k + h,
+  \qquad
+  y_{k+1} = y_k + h\,y_k = (1+h)\,y_k .
 \]
-Un tableau de valeurs permet de conjecturer que $a_n$ se rapproche de $2{,}718\ldots$, valeur approchée de $\mathrm{e}$. Cette observation numérique n'est pas une formalisation de limite.
+Les points $(x_k\,;\,y_k)$ approchent la courbe de l'exponentielle. Entree :
+le pas $h$ et le nombre de pas. Sortie : la liste des points.
+}
+
+\begin{python}
+def euler_exponentielle(pas, nombre_de_pas):
+    """Points (x ; y) approchant la courbe de exp, par la methode d'Euler."""
+    if pas <= 0 or nombre_de_pas < 0:
+        raise ValueError("le pas doit etre strictement positif")
+    x, y = 0.0, 1.0
+    points = [(x, y)]
+    for _ in range(nombre_de_pas):
+        y = y + pas * y          # car f' = f
+        x = x + pas
+        points.append((x, y))
+    return points
+
+def approche_de_e(n):
+    """Valeur approchee de e par la suite (1 + 1/n)^n."""
+    if n <= 0:
+        raise ValueError("n doit etre strictement positif")
+    return (1 + 1 / n) ** n
+\end{python}
+
+\exemple{
+\textbf{Euler avec dix pas de $0{,}1$.} \code{euler\_exponentielle(0.1, 10)}
+s'arrete en $x = 1$ avec $y = 2{,}593\,742\ldots$, alors que
+$\mathrm{e} = 2{,}718\,281\ldots$ : l'ecart vaut $0{,}125$. En divisant le pas
+par dix, il tombe a $0{,}013$ ; en le divisant encore par dix, a $0{,}0014$.
+L'ecart est a peu pres proportionnel au pas.
+
+\medskip
+\textbf{La suite $a_n$.} \code{approche\_de\_e(10)} renvoie $2{,}593\,742$,
+\code{approche\_de\_e(1000)} renvoie $2{,}716\,924$.
+}
+
+\propriete[Les deux algorithmes n'en font qu'un]{
+Prenons pour Euler le pas $h = \dfrac{1}{n}$ et faisons exactement $n$ pas. La
+relation $y_{k+1} = (1+h)y_k$ donne, en partant de $y_0 = 1$ :
+\[
+  y_n = (1+h)^n = \left(1 + \frac{1}{n}\right)^{\!n} = a_n .
+\]
+La valeur qu'Euler produit en $x = 1$ \emph{est} le terme $a_n$. Les deux
+exemples du programme sont donc le meme calcul, lu de deux facons : une
+construction geometrique pas a pas, et une suite numerique.
+}
+
+\propriete[Travail demande]{%
+\begin{enumerate}
+  \item Verifier a la main que $y_1 = 1 + h$ et $y_2 = (1+h)^2$.
+  \item Faire tourner Euler avec $h = 0{,}5$ puis $h = 0{,}25$ jusqu'a
+        $x = 1$, et comparer les ecarts a $\mathrm{e}$.
+  \item Verifier numeriquement que $y_n = a_n$ pour $h = 1/n$.
+  \item L'ecart a $\mathrm{e}$ diminue-t-il assez vite pour obtenir six
+        decimales ? Estimer le $n$ necessaire.
+\end{enumerate}
+}
+
+\exemple{
+\textbf{Reponse a la question 4.} L'ecart etant a peu pres proportionnel a
+$1/n$, il faudrait $n$ de l'ordre du million pour six decimales. C'est
+beaucoup : cette suite \emph{converge} vers $\mathrm{e}$, mais lentement. La
+methode d'Euler est un outil de \emph{construction}, pas de calcul precis.
+}
 
 % BEGIN-VERIFY
 % from math import e
-% a10000 = (1 + 1/10000)**10000
-% assert 0 < e - a10000 < 0.001
-% h = 0.1
-% y = 1.0
-% for _ in range(10):
-%     y = y + h*y
-% assert abs(y - 2.5937424601) < 1e-10
+%
+% def euler_exponentielle(pas, nombre_de_pas):
+%     if pas <= 0 or nombre_de_pas < 0:
+%         raise ValueError("le pas doit etre strictement positif")
+%     x, y = 0.0, 1.0
+%     points = [(x, y)]
+%     for _ in range(nombre_de_pas):
+%         y = y + pas * y
+%         x = x + pas
+%         points.append((x, y))
+%     return points
+%
+% def approche_de_e(n):
+%     if n <= 0:
+%         raise ValueError("n doit etre strictement positif")
+%     return (1 + 1 / n) ** n
+%
+% points = euler_exponentielle(0.1, 10)
+% assert len(points) == 11
+% assert abs(points[-1][0] - 1.0) < 1e-12
+% assert abs(points[-1][1] - 2.5937424601) < 1e-10
+% assert abs(e - points[-1][1] - 0.125) < 5e-4
+%
+% # L'ecart est a peu pres proportionnel au pas : le diviser par dix le divise
+% # par dix, aux arrondis pres.
+% def valeur_en_1(h, n):
+%     return euler_exponentielle(h, n)[-1][1]
+% ecarts = [e - valeur_en_1(1 / n, n) for n in (10, 100, 1000)]
+% assert abs(ecarts[0] - 0.1245) < 1e-3
+% assert abs(ecarts[1] - 0.0135) < 1e-3
+% assert abs(ecarts[2] - 0.00136) < 1e-4
+% for avant, apres in zip(ecarts, ecarts[1:]):
+%     assert 8 < avant / apres < 12
+%
+% # Les deux algorithmes n'en font qu'un : y_n = a_n pour h = 1/n.
+% for n in (1, 2, 5, 10, 100, 1000):
+%     assert abs(valeur_en_1(1 / n, n) - approche_de_e(n)) < 1e-9, n
+% assert abs(approche_de_e(10) - 2.593742) < 5e-7
+% assert abs(approche_de_e(1000) - 2.716924) < 5e-7
+%
+% # y_1 = 1 + h et y_2 = (1 + h)^2.
+% h = 0.25
+% deux = euler_exponentielle(h, 2)
+% assert abs(deux[1][1] - (1 + h)) < 1e-12
+% assert abs(deux[2][1] - (1 + h) ** 2) < 1e-12
+%
+% # Six decimales demanderaient un n de l'ordre du million.
+% assert abs(e - approche_de_e(10**6)) < 1e-5
+% assert abs(e - approche_de_e(10**4)) > 1e-5
+%
+% for mauvais in ((0.0, 5), (-1.0, 5), (0.1, -1)):
+%     try:
+%         euler_exponentielle(*mauvais)
+%     except ValueError:
+%         pass
+%     else:
+%         raise AssertionError("l'argument invalide aurait du etre refuse")
+% try:
+%     approche_de_e(0)
+% except ValueError:
+%     pass
+% else:
+%     raise AssertionError("n = 0 aurait du etre refuse")
 % END-VERIFY
+
+% ============================================================
+% STRATE 2 --- Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Prendre la construction pour une demonstration.} La methode d'Euler
+\emph{trace} une courbe approchee ; elle ne demontre ni l'existence ni
+l'unicite de la fonction exponentielle. Le tableau de valeurs de $a_n$ ne
+demontre pas davantage que la suite converge : il le suggere.
+}
+
+\erreurFrequente{
+\textbf{Croire qu'un pas plus petit donne toujours mieux.} L'ecart de methode
+diminue avec $h$, mais le nombre d'operations augmente d'autant, et les
+erreurs d'arrondi s'accumulent. Passe un certain point, reduire le pas ne
+gagne plus rien.
+}

@@ -1,0 +1,39 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-054","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C5"],"capacites_codes":["C5"],"methodes":[],"parcours":2,"competences":["modeliser","calculer"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-054.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-054.tex","status":"generated"}
+% BEGIN-VERIFY
+% # Automatisme : appliquer un taux d'evolution pour calculer une valeur
+% # finale ou initiale, reinvesti dans un probleme d'optimisation.
+% R = lambda x: (20 + x) * (500 - 10 * x)
+% assert R(0) == 10000
+% assert R(15) == 12250
+% assert all(R(x) <= R(15) for x in range(0, 51))
+% # Derivee : R'(x) = 300 - 20x, qui s'annule en x = 15.
+% assert 300 - 20 * 15 == 0
+% # Taux d'evolution du prix, puis des ventes.
+% assert (35 - 20) / 20 == 0.75
+% assert (350 - 500) / 500 == -0.30
+% # Valeur initiale a partir de la valeur finale et du taux.
+% assert abs(350 / 0.70 - 500) < 1e-9
+% # Le taux global sur la recette n'est pas la somme des deux taux.
+% assert abs(12250 / 10000 - 1.225) < 1e-12
+% assert 0.225 != 0.75 - 0.30
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-054}{2}{15}
+Un commerçant vend actuellement $500$ articles par mois au prix de $20$ euros.
+Une étude de marché indique que chaque hausse de $1$ euro du prix fait perdre
+$10$ ventes mensuelles.
+
+On note $x$ la hausse de prix, en euros, avec $0 \leqslant x \leqslant 50$.
+\begin{enumerate}
+\item Exprimer, en fonction de $x$, le prix de vente et le nombre d'articles
+  vendus. En déduire que la recette mensuelle est
+  $R(x) = (20+x)(500-10x)$.
+\item Calculer $R'(x)$ et déterminer la hausse $x$ qui rend la recette maximale.
+\item Pour cette valeur, calculer le \textbf{taux d'évolution} du prix et celui
+  du nombre d'articles vendus, en pourcentage.
+\item Le commerçant annonce : « mes ventes ont baissé de $30\,\%$, il m'en
+  reste $350$ ». Retrouver, à partir de ces deux seules informations, le
+  nombre d'articles vendus avant la hausse.
+\item Le taux d'évolution de la recette est-il la somme des deux taux trouvés
+  à la question 3 ? Justifier.
+\end{enumerate}
+\end{exercice}

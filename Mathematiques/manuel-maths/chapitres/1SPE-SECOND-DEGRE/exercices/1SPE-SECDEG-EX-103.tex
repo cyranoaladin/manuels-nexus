@@ -1,0 +1,34 @@
+% META: {"id":"1SPE-SECDEG-EX-103","chapitre":"1SPE-SECOND-DEGRE","type_objet":"exercice","capacites":["1SPE-SECOND-DEGRE-2026-D1"],"capacites_codes":["C3","C6"],"methodes":[],"parcours":2,"competences":["modeliser","calculer"],"duree_min":12,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-103.tex","corrige_tex":"chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-103.tex","status":"generated"}
+% BEGIN-VERIFY
+% # Automatisme : taux d'evolution equivalent a plusieurs evolutions
+% # successives, reinvesti dans une equation du second degre.
+% from math import sqrt
+% # (1+t)^2 = 1,21 : equation t^2 + 2t - 0,21 = 0.
+% a, b, c = 1, 2, -0.21
+% delta = b * b - 4 * a * c
+% assert abs(delta - 4.84) < 1e-12
+% assert abs(sqrt(delta) - 2.2) < 1e-12
+% racines = ((-b - sqrt(delta)) / (2 * a), (-b + sqrt(delta)) / (2 * a))
+% assert abs(racines[1] - 0.10) < 1e-12
+% assert abs(racines[0] + 2.10) < 1e-12
+% # La racine negative est rejetee : un coefficient multiplicateur est positif.
+% assert 1 + racines[0] < 0
+% assert abs((1 + racines[1]) ** 2 - 1.21) < 1e-12
+% # Deuxieme situation : +30 % puis -20 %.
+% assert abs(1.3 * 0.8 - 1.04) < 1e-12
+% assert abs(sqrt(1.04) - 1 - 0.019804) < 5e-7
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-103}{2}{12}
+La population d'une ville a augmenté de $21\,\%$ en deux ans, avec le
+\textbf{même} taux d'évolution chaque année. On note $t$ ce taux annuel,
+écrit sous forme décimale.
+\begin{enumerate}
+\item Justifier que $t$ vérifie $(1+t)^2 = 1{,}21$.
+\item Montrer que cette équation s'écrit $t^2 + 2t - 0{,}21 = 0$, puis la
+  résoudre.
+\item Une des deux racines doit être écartée. Laquelle, et pourquoi ?
+\item Dans une autre ville, la population a augmenté de $30\,\%$ la première
+  année puis diminué de $20\,\%$ la seconde. Calculer le taux d'évolution
+  global, puis le taux annuel équivalent, à $10^{-4}$ près.
+\end{enumerate}
+\end{exercice}

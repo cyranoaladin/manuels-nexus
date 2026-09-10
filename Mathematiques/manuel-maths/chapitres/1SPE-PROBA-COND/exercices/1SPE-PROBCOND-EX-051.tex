@@ -1,0 +1,49 @@
+% META: {"id":"1SPE-PROBCOND-EX-051","chapitre":"1SPE-PROBA-COND","type_objet":"exercice","capacites":["1SPE-PROBA-COND-C1","1SPE-PROBA-COND-C2"],"capacites_codes":["C1","C2"],"methodes":[],"parcours":2,"competences":["calculer","communiquer"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-051.tex","corrige_tex":"chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-051.tex","status":"generated"}
+% BEGIN-VERIFY
+% # Automatisme : calculer et interpreter des indicateurs statistiques,
+% # reinvesti sur deux sous-populations definies par une condition.
+% from statistics import mean, median, pstdev
+% abonnes = [12, 15, 18, 20, 22, 25, 28, 30, 35, 45]
+% sans = [5, 7, 8, 9, 10, 12, 14, 16, 18, 26]
+% assert len(abonnes) == len(sans) == 10
+% assert abonnes == sorted(abonnes) and sans == sorted(sans)
+% assert mean(abonnes) == 25 and median(abonnes) == 23.5
+% assert mean(sans) == 12.5 and median(sans) == 11
+% assert round(pstdev(abonnes), 2) == 9.41
+% assert round(pstdev(sans), 2) == 5.94
+% tous = abonnes + sans
+% assert mean(tous) == 18.75 and median(tous) == 17
+% # La moyenne globale est la moyenne des deux moyennes car les groupes ont
+% # le meme effectif -- ce n'est pas une regle generale.
+% assert mean(tous) == (mean(abonnes) + mean(sans)) / 2
+% # La mediane globale, elle, n'est pas la moyenne des deux medianes.
+% assert median(tous) != (median(abonnes) + median(sans)) / 2
+% # Probabilites conditionnelles.
+% assert sum(1 for x in abonnes if x > 20) / 10 == 0.6
+% assert sum(1 for x in sans if x > 20) / 10 == 0.1
+% assert sum(1 for x in tous if x > 20) / 20 == 0.35
+% assert abs(sum(1 for x in abonnes if x > 20) / sum(1 for x in tous if x > 20)
+%            - 6 / 7) < 1e-12
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-051}{2}{15}
+Une plateforme relève la durée de connexion, en minutes, de $20$ utilisateurs
+tirés au hasard : $10$ abonnés et $10$ non-abonnés.
+
+\medskip
+\textbf{Abonnés :} $12$, $15$, $18$, $20$, $22$, $25$, $28$, $30$, $35$, $45$.
+
+\textbf{Non-abonnés :} $5$, $7$, $8$, $9$, $10$, $12$, $14$, $16$, $18$, $26$.
+
+\begin{enumerate}
+\item Calculer, pour chaque groupe, la moyenne, la médiane et l'écart type
+  (arrondi à $10^{-2}$). Interpréter en une phrase la différence entre les
+  deux groupes.
+\item Calculer la moyenne et la médiane de l'ensemble des $20$ durées.
+\item La moyenne globale est-elle la moyenne des deux moyennes ? Et la
+  médiane globale, la moyenne des deux médianes ? Justifier.
+\item On tire un utilisateur au hasard. On note $A$ l'événement « il est
+  abonné » et $L$ l'événement « sa durée dépasse $20$ minutes ».
+  Calculer $P_A(L)$, $P_{\overline{A}}(L)$ et $P(L)$.
+\item Calculer $P_L(A)$ et interpréter le résultat.
+\end{enumerate}
+\end{exercice}

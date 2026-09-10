@@ -11,14 +11,14 @@
     "LATEX_CONTROL_SEQUENCE_REPAIR": "la campagne de diacritiques avait coupe des \\neq ; les retablir restitue le sens vise, il ne le modifie pas"
   },
   "summary": {
-    "OBJECTS_CLAIMING_HUMAN_APPROVAL": 739,
-    "APPROVAL_RECEIPT_FRESH": 707,
+    "OBJECTS_CLAIMING_HUMAN_APPROVAL": 738,
+    "APPROVAL_RECEIPT_FRESH": 706,
     "APPROVAL_RECEIPT_NEUTRAL_REPAIR": 32,
     "STALE_APPROVAL_AFTER_SEMANTIC_EDIT": 0,
     "APPROVAL_ORIGIN_NOT_IN_HISTORY": 0,
     "SEMANTIC_CHANGE_PRESERVES_OLD_HUMAN_APPROVAL": "PASS",
     "SEMANTIC_CHANGE_INVALIDATES_REVIEW_RECEIPT": "PASS",
-    "INVALIDATED_APPROVALS_AWAITING_HUMAN_REVIEW": 29
+    "INVALIDATED_APPROVALS_AWAITING_HUMAN_REVIEW": 30
   },
   "receipts": [
     {
@@ -1088,16 +1088,6 @@
       "approved_at_commit": "533d19198eb7810699a41a7b5275744691420859",
       "approved_visible_digest": "sha256:7ae2ae3c24639449a4729d9224f360de92a8c284d0fdd1d0d7369bd8c382c3ca",
       "current_visible_digest": "sha256:7ae2ae3c24639449a4729d9224f360de92a8c284d0fdd1d0d7369bd8c382c3ca",
-      "receipt_state": "FRESH",
-      "reason": "le contenu visible est celui qui a ete approuve"
-    },
-    {
-      "path": "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/cours/10_C1_continuite_tvi.tex",
-      "object_id": "TSPE-CONTIN-CR-010",
-      "claimed_status": "approved",
-      "approved_at_commit": "533d19198eb7810699a41a7b5275744691420859",
-      "approved_visible_digest": "sha256:76f225aaf595bfd7448452380b80144ac28ea98c25fc6ec7dc96c5758dfabf79",
-      "current_visible_digest": "sha256:76f225aaf595bfd7448452380b80144ac28ea98c25fc6ec7dc96c5758dfabf79",
       "receipt_state": "FRESH",
       "reason": "le contenu visible est celui qui a ete approuve"
     },
@@ -7506,6 +7496,12 @@
     {
       "path": "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/evaluations/TSPE-COMBI-EV-B.tex",
       "object_id": "TSPE-COMBI-EV-B",
+      "status": "needs_review",
+      "approval_state": "STALE_AFTER_SEMANTIC_EDIT"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/cours/10_C1_continuite_tvi.tex",
+      "object_id": "TSPE-CONTIN-CR-010",
       "status": "needs_review",
       "approval_state": "STALE_AFTER_SEMANTIC_EDIT"
     },

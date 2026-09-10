@@ -1,0 +1,39 @@
+% META: {"id":"1SPE-EXPO-EX-052","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C4"],"capacites_codes":["C4","C5"],"methodes":[],"parcours":2,"competences":["calculer","modeliser"],"duree_min":10,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-052.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-052.tex","status":"generated"}
+% BEGIN-VERIFY
+% # Automatisme : taux d'evolution reciproque, reinvesti sur un modele
+% # exponentiel continu.
+% from math import log, exp
+% c = 0.82
+% reciproque = 1 / c
+% assert abs(reciproque - 1.219512) < 5e-7
+% assert abs((reciproque - 1) * 100 - 21.951220) < 5e-6
+% # Le taux reciproque n'est pas l'oppose du taux de baisse.
+% assert abs((reciproque - 1) * 100 - 18) > 3
+% # Modele continu : V(t) = 18000 e^{kt} avec k = ln(0,82).
+% k = log(c)
+% assert abs(k + 0.198451) < 5e-7
+% assert abs(18000 * exp(k) - 18000 * 0.82) < 1e-9
+% assert abs(18000 * exp(3 * k) - 18000 * 0.82 ** 3) < 1e-9
+% assert abs(18000 * 0.82 ** 3 - 9924.624) < 1e-6
+% assert round(18000 * 0.82 ** 3) == 9925
+% # Remonter : le coefficient reciproque correspond a -k.
+% assert abs(exp(-k) - reciproque) < 1e-12
+% assert abs(18000 * 0.82 ** 3 * exp(-3 * k) - 18000) < 1e-6
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-052}{2}{10}
+La valeur d'un véhicule diminue de $18\,\%$ chaque année. Elle vaut $18\,000$
+euros à l'achat, à l'instant $t = 0$ (le temps $t$ est exprimé en années).
+\begin{enumerate}
+\item Donner le coefficient multiplicateur annuel, puis calculer la valeur du
+  véhicule au bout de $3$ ans, arrondie à l'euro.
+\item Quel taux d'évolution ramènerait la valeur d'une année sur la valeur de
+  l'année précédente ? On donnera le coefficient, puis le taux en pourcentage
+  arrondi à $10^{-2}$.
+\item Un vendeur affirme : « une baisse de $18\,\%$ s'annule par une hausse de
+  $18\,\%$ ». Montrer par le calcul que c'est faux.
+\item On modélise la valeur par $V(t) = 18\,000\,\mathrm{e}^{kt}$. Déterminer
+  $k$ à $10^{-4}$ près, et vérifier que $V(3)$ redonne le résultat de la
+  question 1.
+\item Exprimer, à l'aide de $k$, le coefficient de l'évolution réciproque.
+\end{enumerate}
+\end{exercice}

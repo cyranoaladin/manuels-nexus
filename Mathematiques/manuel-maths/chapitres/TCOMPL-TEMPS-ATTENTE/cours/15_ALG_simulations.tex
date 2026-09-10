@@ -1,0 +1,214 @@
+% META: {"id": "TCOMPL-ATT-ALG-015", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "algorithme", "capacites_codes": ["C1", "C4", "C7"], "programme_alignment": "OFFICIAL_ALGORITHM_EXAMPLE", "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+\section{Algorithmique : simuler une attente, géométrique et exponentielle}
+
+% ============================================================
+% STRATE 1 --- Probleme, modeles, algorithmes
+% ============================================================
+
+\margeAppui{
+Le programme cite parmi ses \textbf{exemples d'algorithme} : « Simulation
+d'une variable aleatoire de loi geometrique a partir du schema de Bernoulli »,
+« Simulation d'une loi exponentielle a partir d'une loi uniforme » et
+« Demi-vie d'un echantillon de grande taille d'atomes radioactifs ». Il les
+cite, il ne les impose pas.
+}
+
+\textbf{Le probleme.} Une machine tombe en panne avec la probabilite $p$ a
+chaque cycle. Combien de cycles avant la premiere panne ? Et si le temps est
+continu plutot que decoupe en cycles, quelle loi decrit l'attente ?
+
+\propriete[Loi geometrique : repeter jusqu'au succes]{
+On repete des epreuves de Bernoulli independantes de parametre $p \in\;]0\,;\,1]$
+et l'on note $X$ le rang du premier succes. Alors $X$ suit la loi geometrique
+de parametre $p$, et $E(X) = \dfrac{1}{p}$.
+
+L'algorithme est la definition meme : tirer, compter, s'arreter au premier
+succes. Entree : $p$, le nombre de repetitions, une graine. Sortie : la liste
+des rangs obtenus.
+}
+
+\begin{python}
+from random import Random
+
+def simuler_geometrique(p, repetitions, graine):
+    """Rangs du premier succes, pour des epreuves de Bernoulli de parametre p."""
+    if not 0 < p <= 1 or repetitions < 1:
+        raise ValueError("il faut 0 < p <= 1 et au moins une repetition")
+    generateur = Random(graine)
+    rangs = []
+    for _ in range(repetitions):
+        rang = 1
+        while generateur.random() >= p:      # echec : on recommence
+            rang = rang + 1
+        rangs.append(rang)
+    return rangs
+\end{python}
+
+\exemple{
+Pour $p = 0{,}25$, dix mille repetitions et la graine $2024$, la moyenne des
+rangs obtenus vaut $4{,}017\,1$, pour une esperance theorique
+$\dfrac{1}{0{,}25} = 4$. Le plus grand rang observe est $30$ : la loi
+geometrique n'est pas bornee, et de longues attentes arrivent.
+}
+
+\propriete[Loi exponentielle : transformer une loi uniforme]{
+Si $U$ suit la loi uniforme sur $[0\,;\,1[$, alors
+\[
+  T = -\frac{\ln(1-U)}{\lambda}
+\]
+suit la loi exponentielle de parametre $\lambda$. En effet, pour $t \geq 0$,
+\[
+  P(T \leq t)
+  = P\!\left(\ln(1-U) \geq -\lambda t\right)
+  = P\!\left(1-U \geq \mathrm{e}^{-\lambda t}\right)
+  = P\!\left(U \leq 1 - \mathrm{e}^{-\lambda t}\right)
+  = 1 - \mathrm{e}^{-\lambda t},
+\]
+qui est bien la fonction de repartition de la loi exponentielle.
+}
+
+\margeAppui{
+On ecrit $1-U$ et non $U$ pour que l'argument du logarithme ne puisse pas
+valoir $0$ : le generateur peut rendre $0$, jamais $1$.
+}
+
+\begin{python}
+from math import log
+
+def simuler_exponentielle(lam, repetitions, graine):
+    """Durees suivant la loi exponentielle de parametre lam."""
+    if lam <= 0 or repetitions < 1:
+        raise ValueError("lambda doit etre strictement positif")
+    generateur = Random(graine)
+    return [-log(1 - generateur.random()) / lam for _ in range(repetitions)]
+\end{python}
+
+\exemple{
+\textbf{Demi-vie.} Pour $\lambda = 0{,}5$, la moyenne des dix mille durees
+simulees vaut $2{,}055$, pour une esperance $\dfrac{1}{\lambda} = 2$. La
+demi-vie, elle, est le temps $t_{1/2}$ tel que la moitie des atomes ait
+disparu :
+\[
+  \mathrm{e}^{-\lambda t_{1/2}} = \frac{1}{2}
+  \quad\Longleftrightarrow\quad
+  t_{1/2} = \frac{\ln 2}{\lambda} = 1{,}386\ldots
+\]
+Sur la simulation, la proportion de durees superieures a $t_{1/2}$ vaut
+$0{,}504\,6$ : tres proche de la moitie, comme annonce. La demi-vie n'est
+\textbf{pas} l'esperance.
+}
+
+\propriete[Travail demande]{%
+\begin{enumerate}
+  \item Simuler la loi geometrique pour $p = 0{,}1$ et comparer la moyenne a
+        $10$.
+  \item Compter la proportion de rangs valant $1$ : que doit-elle valoir ?
+  \item Verifier sur la simulation exponentielle la propriete d'absence de
+        memoire : parmi les durees superieures a $1$, quelle proportion
+        depasse $1 + t_{1/2}$ ?
+  \item Pourquoi la demi-vie est-elle inferieure a l'esperance ?
+\end{enumerate}
+}
+
+\exemple{
+\textbf{Reponses.} 2. Elle doit valoir $p$ : le premier essai est un succes
+avec la probabilite $p$. 3. Environ la moitie, comme sans condition : c'est
+exactement l'absence de memoire. 4. Parce que $\ln 2 < 1$ : la loi
+exponentielle est tres dissymetrique, et sa mediane est plus petite que sa
+moyenne.
+}
+
+% BEGIN-VERIFY
+% from math import log, exp
+% from random import Random
+%
+% def simuler_geometrique(p, repetitions, graine):
+%     if not 0 < p <= 1 or repetitions < 1:
+%         raise ValueError("il faut 0 < p <= 1 et au moins une repetition")
+%     generateur = Random(graine)
+%     rangs = []
+%     for _ in range(repetitions):
+%         rang = 1
+%         while generateur.random() >= p:
+%             rang = rang + 1
+%         rangs.append(rang)
+%     return rangs
+%
+% def simuler_exponentielle(lam, repetitions, graine):
+%     if lam <= 0 or repetitions < 1:
+%         raise ValueError("lambda doit etre strictement positif")
+%     generateur = Random(graine)
+%     return [-log(1 - generateur.random()) / lam for _ in range(repetitions)]
+%
+% rangs = simuler_geometrique(0.25, 10000, 2024)
+% assert len(rangs) == 10000
+% assert all(r >= 1 for r in rangs)
+% moyenne = sum(rangs) / len(rangs)
+% assert round(moyenne, 4) == 4.0171
+% assert abs(moyenne - 1 / 0.25) < 0.05
+% assert max(rangs) == 30
+% # La proportion de rangs valant 1 doit valoir p.
+% assert abs(rangs.count(1) / len(rangs) - 0.25) < 0.02
+% # Avec p = 1, le succes est immediat a chaque fois.
+% assert set(simuler_geometrique(1.0, 100, 7)) == {1}
+%
+% durees = simuler_exponentielle(0.5, 10000, 2024)
+% assert all(d >= 0 for d in durees)
+% moyenne = sum(durees) / len(durees)
+% assert round(moyenne, 3) == 2.055
+% assert abs(moyenne - 1 / 0.5) < 0.1
+%
+% # Demi-vie : ln 2 / lambda, et non l'esperance.
+% demi_vie = log(2) / 0.5
+% assert abs(demi_vie - 1.386294) < 1e-6
+% assert demi_vie < 1 / 0.5
+% assert abs(exp(-0.5 * demi_vie) - 0.5) < 1e-12
+% proportion = sum(1 for d in durees if d > demi_vie) / len(durees)
+% assert round(proportion, 4) == 0.5046
+% assert abs(proportion - 0.5) < 0.02
+%
+% # Absence de memoire : parmi les durees > 1, environ la moitie depasse
+% # 1 + demi-vie.
+% survivantes = [d for d in durees if d > 1]
+% assert survivantes
+% conditionnelle = sum(1 for d in survivantes if d > 1 + demi_vie) / len(survivantes)
+% assert abs(conditionnelle - 0.5) < 0.03
+%
+% # La transformation inverse redonne bien la fonction de repartition annoncee.
+% for t in (0.5, 1.0, 2.0, 5.0):
+%     empirique = sum(1 for d in durees if d <= t) / len(durees)
+%     assert abs(empirique - (1 - exp(-0.5 * t))) < 0.02, t
+%
+% for mauvais in ((0.0, 10, 1), (1.5, 10, 1), (0.5, 0, 1)):
+%     try:
+%         simuler_geometrique(*mauvais)
+%     except ValueError:
+%         pass
+%     else:
+%         raise AssertionError("l'argument invalide aurait du etre refuse")
+% try:
+%     simuler_exponentielle(0.0, 10, 1)
+% except ValueError:
+%     pass
+% else:
+%     raise AssertionError("lambda nul aurait du etre refuse")
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 --- Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Ecrire $-\ln(U)/\lambda$ au lieu de $-\ln(1-U)/\lambda$.} Les deux
+suivent la meme loi, car $U$ et $1-U$ ont la meme loi uniforme. Mais le
+generateur peut rendre $U = 0$, et $\ln 0$ n'existe pas : le programme
+s'arrete sur une erreur. La seconde ecriture ne peut pas echouer.
+}
+
+\erreurFrequente{
+\textbf{Confondre demi-vie et duree de vie moyenne.} La demi-vie vaut
+$\dfrac{\ln 2}{\lambda}$, l'esperance $\dfrac{1}{\lambda}$ : la premiere est
+environ $69\,\%$ de la seconde. La loi exponentielle est dissymetrique, sa
+mediane n'est pas sa moyenne.
+}

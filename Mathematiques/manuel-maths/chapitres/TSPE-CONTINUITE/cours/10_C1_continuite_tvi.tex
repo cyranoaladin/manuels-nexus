@@ -1,4 +1,4 @@
-% META: {"id": "TSPE-CONTIN-CR-010", "chapitre": "TSPE-CONTINUITE", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved"}
+% META: {"id": "TSPE-CONTIN-CR-010", "chapitre": "TSPE-CONTINUITE", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "needs_review", "approval_state": "STALE_AFTER_SEMANTIC_EDIT"}
 
 \section{Continuité et théorème des valeurs intermédiaires}
 
@@ -55,7 +55,12 @@ Pour encadrer la solution $c$ de $f(x) = k$ donnee par le TVI, on peut utiliser 
 
 \begin{python}
 def dichotomie(f, a, b, precision):
-    # f continue, f(a) et f(b) de signes opposes
+    """Renvoie une valeur approchee de la solution de f(x) = 0 sur [a ; b].
+
+    Entree : f continue sur [a ; b], avec f(a) et f(b) de signes opposes,
+    et la precision voulue. Sortie : le milieu du dernier encadrement, donc
+    une valeur approchee a precision/2 pres.
+    """
     while b - a > precision:
         m = (a + b) / 2
         if f(a) * f(m) <= 0:

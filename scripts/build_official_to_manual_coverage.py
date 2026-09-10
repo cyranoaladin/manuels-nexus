@@ -997,6 +997,26 @@ def main(argv: list[str] | None = None) -> int:
         for role_p in ligne["objects_by_role"]:
             objets_de_preuve_par_partie[cle_p] |= set(ligne["objects_by_role"][role_p])
 
+    def _exploitable(oid: str) -> bool:
+        """Le travail algorithmique est-il exploitable par un eleve ?
+
+        Montrer un programme ne suffit pas. Il faut que l'objet dise ce que
+        l'algorithme prend et rend, qu'il demande quelque chose au lecteur,
+        qu'il reponde a ce qu'il demande, et qu'un oracle executable engage
+        le producteur sur la justesse du code. Un `print` decoratif ne fait
+        pas passer un chapitre au vert.
+        """
+        objet = par_identifiant.get(oid)
+        if objet is None or not objet.shows_algorithmic_work:
+            return False
+        if not (objet.algorithmic_objective and objet.algorithmic_activity):
+            return False
+        if objet.publishes_python and not objet.has_executable_oracle:
+            return False
+        # Une correction n'est exigee que si une tache est posee : une demarche
+        # a suivre n'a pas de « reponse ».
+        return objet.algorithmic_answers or not objet.algorithmic_task
+
     qualite_algorithmique = []
     for (manuel, partie), ids in sorted(parties_avec_exemples.items()):
         preuves_p = sorted(objets_de_preuve_par_partie.get((manuel, partie), ()))
@@ -1006,6 +1026,7 @@ def main(argv: list[str] | None = None) -> int:
             if (par_identifiant.get(oid) is not None)
             and par_identifiant[oid].shows_algorithmic_work
         ]
+        exploitable = [oid for oid in travail if _exploitable(oid)]
         qualite_algorithmique.append({
             "manual": manuel,
             "official_part": partie,
@@ -1013,6 +1034,8 @@ def main(argv: list[str] | None = None) -> int:
             "objects_examined": len(preuves_p),
             "manual_has_algorithmic_work": bool(travail),
             "algorithmic_work_evidence": travail[:5],
+            "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": bool(exploitable),
+            "actionable_evidence": exploitable[:5],
             "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD",
         })
 
@@ -1050,6 +1073,10 @@ def main(argv: list[str] | None = None) -> int:
         "NEXUS_ALGORITHMIC_QUALITY_PARTS": len(qualite_algorithmique),
         "NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK": sum(
             1 for q in qualite_algorithmique if not q["manual_has_algorithmic_work"]
+        ),
+        "NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_ACTIONABLE_WORK": sum(
+            1 for q in qualite_algorithmique
+            if not q["ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE"]
         ),
     }
     assert (

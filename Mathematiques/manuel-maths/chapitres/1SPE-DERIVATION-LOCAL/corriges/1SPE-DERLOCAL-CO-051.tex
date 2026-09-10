@@ -1,0 +1,45 @@
+% META: {"id":"1SPE-DERLOCAL-CO-051","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-051","status":"generated"}
+% BEGIN-VERIFY
+% pente = (3 - 7) / (2 - 0)
+% assert pente == -2.0
+% tangente = lambda x: -2 * x + 7
+% assert tangente(2) == 3 and tangente(0) == 7
+% assert abs(tangente(2.1) - 2.8) < 1e-12
+% assert abs(tangente(1.9) - 3.2) < 1e-12
+% f = lambda x: -x * x + 2 * x + 3
+% assert f(2) == 3
+% assert abs(f(2.1) - 2.79) < 1e-12
+% assert abs(f(1.9) - 3.19) < 1e-12
+% # L'approximation affine surestime ici : la fonction est concave.
+% assert tangente(2.1) > f(2.1) and tangente(1.9) > f(1.9)
+% assert abs(tangente(2.1) - f(2.1) - 0.01) < 1e-12
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-051}
+\begin{enumerate}
+\item Le point $A$ appartient à la fois à $\mathcal{C}_f$ et à $T$, donc
+  $f(2) = 3$. Le nombre dérivé est le coefficient directeur de la tangente :
+  \[
+    f'(2) = \frac{3 - 7}{2 - 0} = \frac{-4}{2} = -2 .
+  \]
+
+\item $T : y = f'(2)(x-2) + f(2) = -2(x-2) + 3$, soit
+  $y = -2x + 7$.
+
+\item Il suffit de placer l'ordonnée à l'origine $7$ et d'appliquer le
+  coefficient directeur $-2$ : en avançant de $1$ vers la droite, on descend
+  de $2$. Deux points suffisent pour tracer la droite.
+
+\item L'approximation affine s'écrit $f(2+h) \approx f(2) + h\,f'(2)$ :
+  \[
+    f(2{,}1) \approx 3 + 0{,}1\times(-2) = 2{,}8,
+    \qquad
+    f(1{,}9) \approx 3 - 0{,}1\times(-2) = 3{,}2 .
+  \]
+
+\item Pour $f(x) = -x^2 + 2x + 3$ : $f(2) = -4 + 4 + 3 = 3$ \checkmark, et
+  $f'(x) = -2x + 2$ donne $f'(2) = -2$ \checkmark. Les valeurs exactes sont
+  $f(2{,}1) = 2{,}79$ et $f(1{,}9) = 3{,}19$ : l'approximation affine se
+  trompe de $0{,}01$, et par excès, car la courbe est en dessous de sa
+  tangente.
+\end{enumerate}
+\end{corrige}

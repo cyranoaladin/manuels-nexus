@@ -113,7 +113,12 @@ Lorsqu'une équation $f(x)=k$ n'admet pas de solution exacte simple, on cherche 
 
 \begin{python}
 def dichotomie(f, a, b, precision):
-    # f continue, f(a) et f(b) de signes opposes
+    """Renvoie une valeur approchee de la solution de f(x) = 0 sur [a ; b].
+
+    Entree : f continue sur [a ; b], avec f(a) et f(b) de signes opposes,
+    et la precision voulue. Sortie : le milieu du dernier encadrement, donc
+    une valeur approchee a precision/2 pres.
+    """
     while b - a > precision:
         m = (a + b) / 2
         if f(a) * f(m) <= 0:

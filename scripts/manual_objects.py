@@ -97,6 +97,24 @@ class Objet:
     has_written_proof: bool = False
     #: Presence d'un travail algorithmique effectif (algorithme, programme).
     has_algorithmic_work: bool = False
+    #: L'objet enonce-t-il ce que l'algorithme prend en entree et rend en
+    #: sortie, ou le probleme qu'il resout ? Un bloc de code sans objectif
+    #: enonce ne se travaille pas : il se recopie.
+    algorithmic_objective: bool = False
+    #: L'objet demande-t-il quelque chose a l'eleve -- une demarche a suivre,
+    #: un travail a faire ? Un algorithme qu'on ne fait qu'admirer n'est pas
+    #: un travail algorithmique.
+    algorithmic_activity: bool = False
+    #: ... et si un travail est demande, la reponse est-elle donnee ?
+    algorithmic_answers: bool = False
+    #: Une tache est-elle explicitement demandee ? Elle seule appelle une
+    #: correction.
+    algorithmic_task: bool = False
+    #: L'objet publie-t-il du code Python ? Ce cas exige un oracle executable.
+    publishes_python: bool = False
+    #: Presence d'un oracle executable. Un programme publie sans verification
+    #: n'engage personne.
+    has_executable_oracle: bool = False
     #: Presence d'un algorithme MONTRE A L'ELEVE. La distinction n'est pas
     #: cosmetique : un bloc « BEGIN-VERIFY » est un controle interne que le
     #: lecteur ne voit jamais, et presque tous les corriges en portent un. Les
@@ -225,6 +243,12 @@ def charger_objets(contrats: dict[str, Contrat]) -> list[Objet]:
                     )
                 ),
                 shows_algorithmic_work=bool(ALGORITHME_MONTRE.search(texte)),
+                algorithmic_objective=bool(OBJECTIF_ALGORITHMIQUE.search(texte)),
+                algorithmic_activity=bool(ACTIVITE_ALGORITHMIQUE.search(texte)),
+                algorithmic_answers=bool(REPONSES_ALGORITHMIQUES.search(texte)),
+                algorithmic_task=bool(TACHE_ALGORITHMIQUE.search(texte)),
+                publishes_python=bool(CODE_PYTHON.search(texte)),
+                has_executable_oracle="% BEGIN-VERIFY" in texte,
                 text_length=len(texte),
                 has_worked_examples=bool(EXEMPLE_TRAVAILLE.search(texte)),
                 linked_correction=meta.get("corrige_tex", "") or "",
@@ -274,11 +298,48 @@ def charger_transversaux() -> list[Objet]:
                         re.search(r"\\begin\{python\}|\\begin\{algorithme\}", texte)
                     ),
                     shows_algorithmic_work=bool(ALGORITHME_MONTRE.search(texte)),
+                    algorithmic_objective=bool(OBJECTIF_ALGORITHMIQUE.search(texte)),
+                    algorithmic_activity=bool(ACTIVITE_ALGORITHMIQUE.search(texte)),
+                    algorithmic_answers=bool(REPONSES_ALGORITHMIQUES.search(texte)),
+                    algorithmic_task=bool(TACHE_ALGORITHMIQUE.search(texte)),
+                    publishes_python=bool(CODE_PYTHON.search(texte)),
+                    has_executable_oracle="% BEGIN-VERIFY" in texte,
                     text_length=len(texte),
                 )
             )
     return objets
 
+
+#: Marqueurs d'un objectif : entree/sortie annoncees, ou probleme pose.
+OBJECTIF_ALGORITHMIQUE = re.compile(
+    r"Entree\s*:|Entrée\s*:|Sortie\s*:|rend en sortie|Le probleme|Le problème"
+    r"|\"\"\""                                    # docstring du programme
+    r"|renvoie|retourne"
+    r"|Pour (?:calculer|trouver|determiner|déterminer|obtenir|approcher"
+    r"|estimer|simuler|chercher)"
+)
+#: Marqueurs d'une activite demandee a l'eleve, OU d'une interpretation du
+#: resultat. Le programme demande « activite ou interpretation » : un
+#: algorithme suivi d'un commentaire qui dit ce que le resultat signifie est
+#: exploitable, meme sans question posee.
+ACTIVITE_ALGORITHMIQUE = re.compile(
+    r"Travail demande|Travail demandé|Demarche|Démarche"
+    r"|\\erreurFrequente|\\margeAppui|\\exemple\b"
+    r"|\\item\s+(?:Verifier|Vérifier|Reprendre|Calculer|Chercher|Comparer"
+    r"|Simuler|Modifier|Estimer|Pousser|Changer|Compter|Utiliser|Ajouter|Faire)"
+)
+
+#: Marqueurs d'une TACHE explicitement demandee. C'est elle, et elle seule,
+#: qui appelle une correction : une demarche a suivre n'a pas de « reponse ».
+TACHE_ALGORITHMIQUE = re.compile(r"Travail demande|Travail demandé")
+
+#: L'objet publie-t-il du code Python ? C'est ce cas, et lui seul, qui exige
+#: un oracle executable.
+CODE_PYTHON = re.compile(r"\\begin\{python\}|\\begin\{lstlisting\}")
+#: Marqueurs d'une correction fournie pour le travail demande.
+REPONSES_ALGORITHMIQUES = re.compile(
+    r"Reponses|Réponses|Reponse a la|Réponse à la"
+)
 
 #: Marqueurs d'un algorithme effectivement expose au lecteur : un programme,
 #: un algorithme en pseudo-code, un listing. Les blocs de verification

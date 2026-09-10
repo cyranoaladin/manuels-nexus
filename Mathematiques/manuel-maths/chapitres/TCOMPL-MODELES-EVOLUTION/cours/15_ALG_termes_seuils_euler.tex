@@ -1,0 +1,240 @@
+% META: {"id": "TCOMPL-ME-ALG-015", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "algorithme", "capacites_codes": ["C1", "C4", "C5"], "programme_alignment": "OFFICIAL_ALGORITHM_EXAMPLE", "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+\section{Algorithmique : termes d'une suite, recherche de seuil, méthode d'Euler}
+
+% ============================================================
+% STRATE 1 --- Probleme, modele, algorithmes
+% ============================================================
+
+\margeAppui{
+« Calcul des termes d'une suite », « Recherche de seuils » et « Methode
+d'Euler » figurent parmi les \textbf{exemples d'algorithme} du programme, pour
+les suites comme pour les equations differentielles. Il les cite, il ne les
+impose pas.
+}
+
+\textbf{Le probleme.} Un bassin contient $200$ m$^3$ d'eau. Chaque mois, il en
+perd $20\,\%$ par evaporation et infiltration, et l'on y reinjecte $30$ m$^3$.
+Le volume au bout de $n$ mois est donne par
+\[
+  u_0 = 200,
+  \qquad
+  u_{n+1} = 0{,}8\,u_n + 30 .
+\]
+Deux questions : quels sont les premiers volumes, et a partir de quand
+passe-t-on sous $160$ m$^3$ ?
+
+\propriete[Calculer les termes, chercher un seuil]{
+Le premier algorithme applique la relation de recurrence $n$ fois et conserve
+les valeurs. Le second avance tant que la condition n'est pas remplie, et rend
+le premier rang qui la remplit.
+
+Une boucle « tant que » doit \textbf{toujours} etre bornee : si le seuil n'est
+jamais franchi, elle ne s'arreterait pas. Ici $u_n$ tend vers $150$ : un seuil
+inferieur a $150$ ne serait jamais atteint.
+}
+
+\begin{python}
+def termes(u0, suivant, nombre):
+    """Les nombre+1 premiers termes de la suite definie par recurrence."""
+    if nombre < 0:
+        raise ValueError("le nombre de termes doit etre positif")
+    u = u0
+    valeurs = [u]
+    for _ in range(nombre):
+        u = suivant(u)
+        valeurs.append(u)
+    return valeurs
+
+def seuil(u0, suivant, atteint, maximum=10_000):
+    """Premier rang n tel que atteint(u_n) soit vrai ; None si borne depassee."""
+    u, n = u0, 0
+    while not atteint(u):
+        if n >= maximum:
+            return None          # la boucle est bornee : elle ne tourne pas sans fin
+        u = suivant(u)
+        n = n + 1
+    return n
+\end{python}
+
+\exemple{
+Avec \code{suivant = lambda u: 0.8*u + 30} et $u_0 = 200$, les premiers termes
+sont
+\[
+  200\;;\;190\;;\;182\;;\;175{,}6\;;\;170{,}48\;;\;166{,}384\;;\;
+  163{,}107\,2\;;\;160{,}485\,76\;;\;158{,}388\,608 .
+\]
+Le premier rang pour lequel $u_n < 160$ est donc $n = 8$ : c'est au huitieme
+mois que le volume passe sous $160$ m$^3$.
+
+Un seuil de $140$ m$^3$, lui, ne serait jamais franchi : la suite decroit vers
+$150$ sans jamais l'atteindre. L'algorithme rend alors \code{None} au lieu de
+tourner sans fin.
+}
+
+\propriete[Methode d'Euler : la meme evolution, en continu]{
+Modelisons maintenant le bassin en temps continu. Le volume $y(t)$ perd
+$20\,\%$ par unite de temps et recoit $30$ : cela s'ecrit
+\[
+  y' = -0{,}2\,y + 30, \qquad y(0) = 200 .
+\]
+La methode d'Euler remplace la courbe par sa tangente sur chaque petit pas :
+\[
+  y_{k+1} = y_k + h\left(-0{,}2\,y_k + 30\right).
+\]
+Pour $h = 1$, cela redonne \emph{exactement} $y_{k+1} = 0{,}8\,y_k + 30$ : la
+suite du debut est l'Euler de pas $1$ de cette equation differentielle.
+}
+
+\begin{python}
+def euler(derivee, y0, pas, duree):
+    """Valeurs approchees de y sur [0 ; duree], par la methode d'Euler."""
+    if pas <= 0 or duree < 0:
+        raise ValueError("le pas doit etre strictement positif")
+    y, t = y0, 0.0
+    valeurs = [(t, y)]
+    while t < duree - pas / 2:
+        y = y + pas * derivee(y)
+        t = t + pas
+        valeurs.append((t, y))
+    return valeurs
+\end{python}
+
+\exemple{
+La solution exacte de cette equation est $y(t) = 150 + 50\,\mathrm{e}^{-0{,}2t}$,
+donc $y(5) = 168{,}394$. Euler donne
+\[
+  h = 1 : 166{,}384
+  \qquad
+  h = 0{,}5 : 167{,}434
+  \qquad
+  h = 0{,}1 : 168{,}208
+  \qquad
+  h = 0{,}01 : 168{,}376 .
+\]
+L'ecart est divise par deux quand le pas est divise par deux : l'erreur de la
+methode d'Euler est proportionnelle au pas.
+}
+
+\propriete[Travail demande]{%
+\begin{enumerate}
+  \item Retrouver a la main $u_1$, $u_2$ et $u_3$.
+  \item Chercher le premier rang tel que $u_n < 155$, puis tel que
+        $u_n < 150$. Commenter le second resultat.
+  \item Verifier que la suite $(u_n)$ et l'Euler de pas $1$ coincident.
+  \item Estimer le pas necessaire pour approcher $y(5)$ a $10^{-2}$ pres.
+\end{enumerate}
+}
+
+\exemple{
+\textbf{Reponses.} 2. Pour $155$ : $n = 11$. Pour $150$ : l'algorithme rend
+\code{None}, parce que $u_n > 150$ pour tout $n$ -- la suite converge vers
+$150$ par valeurs superieures. 4. L'erreur etant proportionnelle au pas et
+valant $0{,}018$ pour $h = 0{,}01$, il faut $h$ de l'ordre de $0{,}005$.
+}
+
+% BEGIN-VERIFY
+% from math import exp
+%
+% def termes(u0, suivant, nombre):
+%     if nombre < 0:
+%         raise ValueError("le nombre de termes doit etre positif")
+%     u = u0
+%     valeurs = [u]
+%     for _ in range(nombre):
+%         u = suivant(u)
+%         valeurs.append(u)
+%     return valeurs
+%
+% def seuil(u0, suivant, atteint, maximum=10_000):
+%     u, n = u0, 0
+%     while not atteint(u):
+%         if n >= maximum:
+%             return None
+%         u = suivant(u)
+%         n = n + 1
+%     return n
+%
+% def euler(derivee, y0, pas, duree):
+%     if pas <= 0 or duree < 0:
+%         raise ValueError("le pas doit etre strictement positif")
+%     y, t = y0, 0.0
+%     valeurs = [(t, y)]
+%     while t < duree - pas / 2:
+%         y = y + pas * derivee(y)
+%         t = t + pas
+%         valeurs.append((t, y))
+%     return valeurs
+%
+% suivant = lambda u: 0.8 * u + 30
+% premiers = termes(200.0, suivant, 8)
+% attendus = [200.0, 190.0, 182.0, 175.6, 170.48, 166.384,
+%             163.1072, 160.48576, 158.388608]
+% assert [round(v, 6) for v in premiers] == [round(v, 6) for v in attendus]
+%
+% assert seuil(200.0, suivant, lambda u: u < 160) == 8
+% assert seuil(200.0, suivant, lambda u: u < 155) == 11
+% # Un seuil sous la limite n'est jamais franchi : la boucle est bornee.
+% assert seuil(200.0, suivant, lambda u: u < 150) is None
+% # ... et la suite reste bien strictement au-dessus de 150.
+% longue = termes(200.0, suivant, 500)
+% assert all(u > 150 for u in longue)
+% # Strictement decroissante tant que le calcul flottant peut encore la faire
+% # descendre ; au-dela elle stagne a 150,0000000000001, ce qui est la limite
+% # au bruit d'arrondi pres. La suite exacte, elle, decroit toujours.
+% assert all(a > b for a, b in zip(longue[:150], longue[1:151]))
+% assert all(a >= b for a, b in zip(longue, longue[1:]))
+% assert abs(longue[-1] - 150) < 1e-9
+%
+% # Euler de pas 1 EST la suite.
+% derivee = lambda y: -0.2 * y + 30
+% pas_un = [y for _, y in euler(derivee, 200.0, 1.0, 8.0)]
+% assert [round(v, 9) for v in pas_un] == [round(v, 9) for v in premiers]
+%
+% # Comparaison a la solution exacte, et erreur proportionnelle au pas.
+% exacte = 150 + 50 * exp(-1)
+% assert abs(exacte - 168.393972) < 1e-6
+% obtenues = {h: euler(derivee, 200.0, h, 5.0)[-1][1] for h in (1.0, 0.5, 0.1, 0.01)}
+% assert round(obtenues[1.0], 3) == 166.384
+% assert round(obtenues[0.5], 3) == 167.434
+% assert round(obtenues[0.1], 3) == 168.208
+% assert round(obtenues[0.01], 3) == 168.376
+% ecarts = [exacte - obtenues[h] for h in (1.0, 0.5, 0.1, 0.01)]
+% assert all(e > 0 for e in ecarts)
+% assert 1.9 < ecarts[0] / ecarts[1] < 2.2
+% assert 9 < ecarts[2] / ecarts[3] < 11
+% # 10^-2 demande un pas de l'ordre de 0,005.
+% assert abs(exacte - euler(derivee, 200.0, 0.005, 5.0)[-1][1]) < 1e-2
+%
+% for mauvais in ((derivee, 200.0, 0.0, 5.0), (derivee, 200.0, -1.0, 5.0)):
+%     try:
+%         euler(*mauvais)
+%     except ValueError:
+%         pass
+%     else:
+%         raise AssertionError("le pas invalide aurait du etre refuse")
+% try:
+%     termes(200.0, suivant, -1)
+% except ValueError:
+%     pass
+% else:
+%     raise AssertionError("un nombre negatif de termes aurait du etre refuse")
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 --- Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Ecrire une boucle « tant que » sans borne.} Si le seuil demande est
+sous la limite de la suite, la condition n'est jamais vraie et le programme ne
+s'arrete pas. Une recherche de seuil doit toujours prevoir un nombre maximal
+d'iterations, et dire ce qu'elle rend dans ce cas.
+}
+
+\erreurFrequente{
+\textbf{Confondre la suite et la solution exacte.} L'Euler de pas $1$ donne
+$166{,}384$ la ou la solution vaut $168{,}394$. Le modele discret et le modele
+continu decrivent la meme evolution, mais ne donnent pas les memes nombres :
+c'est l'ecart de methode, et il diminue avec le pas.
+}

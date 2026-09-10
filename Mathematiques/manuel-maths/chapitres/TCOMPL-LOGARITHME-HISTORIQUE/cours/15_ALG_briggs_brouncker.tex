@@ -1,0 +1,174 @@
+% META: {"id": "TCOMPL-LOGHIST-ALG-015", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "algorithme", "capacites_codes": ["C1", "C2"], "programme_alignment": "OFFICIAL_ALGORITHM_EXAMPLE", "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+\section{Algorithmique : calculer un logarithme comme on le faisait avant les calculatrices}
+
+% ============================================================
+% STRATE 1 --- Probleme, modele, algorithmes
+% ============================================================
+
+\margeAppui{
+Le programme cite « Algorithme de Briggs » et « Approximation de $\ln 2$ par
+dichotomie selon l'algorithme de Brouncker » parmi ses \textbf{exemples
+d'algorithme}. Il les cite, il ne les impose pas.
+}
+
+\textbf{Le probleme.} Au XVII\textsuperscript{e} siecle, il n'existe aucune touche
+\code{ln}. Les tables de logarithmes, qui transforment les multiplications en
+additions, doivent pourtant etre calculees. Avec quoi ? Avec des racines
+carrees, et des sommes de fractions.
+
+\propriete[Algorithme de Briggs : extraire des racines carrees]{
+Pour $x > 0$, la suite des racines carrees successives
+$x^{1/2},\,x^{1/4},\,x^{1/8},\ldots$ tend vers $1$. Plus precisement, en
+posant $r_k = x^{1/2^k}$,
+\[
+  \ln x \;\approx\; 2^k\left(r_k - 1\right)
+  \qquad\text{pour $k$ grand.}
+\]
+Entree : le nombre $x$ et le nombre $k$ de racines carrees. Sortie : la valeur
+approchee de $\ln x$.
+}
+
+\margeAppui{
+L'idee : $\ln x = 2^k \ln\!\left(r_k\right)$ par l'equation fonctionnelle, et
+$\ln(1+u) \approx u$ quand $u$ est petit. Comme $r_k - 1$ devient minuscule,
+$\ln(r_k) \approx r_k - 1$.
+}
+
+\begin{python}
+from math import sqrt
+
+def briggs(x, racines):
+    """Valeur approchee de ln(x) par extractions de racines carrees."""
+    if x <= 0 or racines < 0:
+        raise ValueError("x doit etre strictement positif")
+    r = x
+    for _ in range(racines):
+        r = sqrt(r)
+    return 2 ** racines * (r - 1)
+
+def brouncker(termes):
+    """Somme partielle de la serie de Brouncker : 1/(1*2) + 1/(3*4) + ..."""
+    if termes < 1:
+        raise ValueError("il faut au moins un terme")
+    return sum(1 / ((2 * k - 1) * (2 * k)) for k in range(1, termes + 1))
+\end{python}
+
+\exemple{
+\textbf{Briggs pour $x = 2$.} Avec $5$ racines carrees on obtient $0{,}700\,709$,
+avec $10$ racines $0{,}693\,382$, avec $20$ racines $0{,}693\,147\,4$. Or
+$\ln 2 = 0{,}693\,147\,180\ldots$ : chaque racine carree supplementaire gagne
+environ un chiffre binaire, et vingt racines donnent six decimales exactes.
+}
+
+\propriete[Algorithme de Brouncker : additionner des aires]{
+$\ln 2$ est l'aire sous l'hyperbole $y = \dfrac{1}{x}$ entre $1$ et $2$. En
+decoupant cette aire en bandes, Brouncker obtient la serie
+\[
+  \ln 2 = \frac{1}{1\times2} + \frac{1}{3\times4} + \frac{1}{5\times6} + \cdots
+  = \sum_{k \geq 1} \frac{1}{(2k-1)(2k)} .
+\]
+Entree : le nombre de termes. Sortie : la somme partielle.
+}
+
+\exemple{
+\code{brouncker(1)} vaut $0{,}5$, \code{brouncker(10)} vaut $0{,}668\,771$,
+\code{brouncker(200)} vaut $0{,}691\,899$. La convergence est \textbf{beaucoup}
+plus lente que celle de Briggs : deux cents termes ne donnent pas trois
+decimales, quand vingt racines carrees en donnaient six.
+}
+
+\propriete[Travail demande]{%
+\begin{enumerate}
+  \item Verifier que $\ln 2 \approx 0{,}693$ par les deux methodes.
+  \item Comparer, a nombre d'operations comparable, la precision obtenue.
+  \item Utiliser Briggs pour $x = 10$, puis verifier que
+        $\ln 10 \approx \ln 2 + \ln 5$.
+  \item Que renvoie \code{briggs(1, k)} ? Interpreter.
+\end{enumerate}
+}
+
+\exemple{
+\textbf{Reponses.} 2. Briggs gagne un chiffre par racine, Brouncker divise
+l'ecart par deux quand on double le nombre de termes : la premiere est
+exponentiellement plus rapide. 3. On obtient $2{,}302\,585$, et
+$\ln 2 + \ln 5$ donne la meme valeur -- c'est l'equation fonctionnelle a
+l'oeuvre. 4. \code{briggs(1, k)} vaut $0$ pour tout $k$ : $\ln 1 = 0$, et
+toutes les racines de $1$ valent $1$.
+}
+
+% BEGIN-VERIFY
+% from math import sqrt, log
+%
+% def briggs(x, racines):
+%     if x <= 0 or racines < 0:
+%         raise ValueError("x doit etre strictement positif")
+%     r = x
+%     for _ in range(racines):
+%         r = sqrt(r)
+%     return 2 ** racines * (r - 1)
+%
+% def brouncker(termes):
+%     if termes < 1:
+%         raise ValueError("il faut au moins un terme")
+%     return sum(1 / ((2 * k - 1) * (2 * k)) for k in range(1, termes + 1))
+%
+% assert abs(briggs(2, 5) - 0.700709) < 5e-7
+% assert abs(briggs(2, 10) - 0.693382) < 5e-7
+% assert abs(briggs(2, 20) - 0.6931474) < 5e-8
+% assert abs(briggs(2, 20) - log(2)) < 1e-6
+% # Chaque racine supplementaire divise l'ecart par deux environ.
+% ecarts = [abs(briggs(2, k) - log(2)) for k in (10, 11, 12, 13)]
+% for avant, apres in zip(ecarts, ecarts[1:]):
+%     assert 1.8 < avant / apres < 2.2
+%
+% assert brouncker(1) == 0.5
+% assert abs(brouncker(10) - 0.668771) < 5e-7
+% assert abs(brouncker(200) - 0.691899) < 5e-7
+% # Deux cents termes ne donnent pas trois decimales.
+% assert abs(brouncker(200) - log(2)) > 1e-3
+% # ... et vingt racines carrees en donnent six.
+% assert abs(briggs(2, 20) - log(2)) < 1e-6
+% # La serie croit vers ln 2 sans l'atteindre.
+% partielles = [brouncker(n) for n in range(1, 60)]
+% assert all(a < b for a, b in zip(partielles, partielles[1:]))
+% assert all(p < log(2) for p in partielles)
+%
+% # L'equation fonctionnelle, sur les valeurs produites par l'algorithme.
+% assert abs(briggs(10, 25) - 2.302585) < 1e-5
+% assert abs(briggs(10, 25) - (briggs(2, 25) + briggs(5, 25))) < 1e-5
+% # ln 1 = 0 : toutes les racines de 1 valent 1.
+% assert all(briggs(1, k) == 0.0 for k in range(0, 10))
+%
+% for mauvais in ((0, 5), (-2, 5), (2, -1)):
+%     try:
+%         briggs(*mauvais)
+%     except ValueError:
+%         pass
+%     else:
+%         raise AssertionError("l'argument invalide aurait du etre refuse")
+% try:
+%     brouncker(0)
+% except ValueError:
+%     pass
+% else:
+%     raise AssertionError("zero terme aurait du etre refuse")
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 --- Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Croire qu'une serie « qui converge » suffit.} Brouncker converge, mais
+si lentement qu'elle est inutilisable pour dresser une table : il faudrait des
+millions de termes pour six decimales. Un algorithme se juge aussi a sa
+\emph{vitesse}.
+}
+
+\erreurFrequente{
+\textbf{Pousser Briggs indefiniment.} Au-dela d'une cinquantaine de racines,
+$r_k$ est si proche de $1$ que la soustraction $r_k - 1$ perd ses chiffres
+significatifs en calcul flottant, et le resultat se degrade au lieu de
+s'ameliorer.
+}

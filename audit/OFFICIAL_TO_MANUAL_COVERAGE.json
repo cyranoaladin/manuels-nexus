@@ -21,10 +21,11 @@
     "evidence_by_declared_capacity": 307,
     "evidence_by_content_match": 145,
     "evidence_by_content_match_manual_wide": 108,
-    "objects_indexed": 3494,
+    "objects_indexed": 3515,
     "statuses_cover_every_mandatory_item": true,
     "NEXUS_ALGORITHMIC_QUALITY_PARTS": 27,
-    "NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK": 15
+    "NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK": 0,
+    "NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_ACTIONABLE_WORK": 0
   },
   "per_manual": {
     "1NSI": {
@@ -181,18 +182,32 @@
         "manual": "1SPE",
         "official_part": "Dérivation",
         "algorithm_examples_cited_by_the_programme": 1,
-        "objects_examined": 273,
-        "manual_has_algorithmic_work": false,
-        "algorithmic_work_evidence": [],
+        "objects_examined": 279,
+        "manual_has_algorithmic_work": true,
+        "algorithmic_work_evidence": [
+          "1SPE-DERGLOBAL-ALG-015",
+          "1SPE-DERLOCAL-ALG-015"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "1SPE-DERGLOBAL-ALG-015",
+          "1SPE-DERLOCAL-ALG-015"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
         "manual": "1SPE",
         "official_part": "Fonction exponentielle",
         "algorithm_examples_cited_by_the_programme": 2,
-        "objects_examined": 119,
-        "manual_has_algorithmic_work": false,
-        "algorithmic_work_evidence": [],
+        "objects_examined": 121,
+        "manual_has_algorithmic_work": true,
+        "algorithmic_work_evidence": [
+          "1SPE-EXPO-COURS-C5-ALGORITHMES"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "1SPE-EXPO-COURS-C5-ALGORITHMES"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
@@ -206,6 +221,11 @@
           "1SPE-VARALEA-ALG-002",
           "1SPE-VARALEA-EV-A-corrige",
           "1SPE-VARALEA-EV-B-corrige"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "1SPE-PROBCOND-ALG-001",
+          "1SPE-VARALEA-ALG-002"
         ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
@@ -222,15 +242,26 @@
           "1SPE-SUITES-COURS-07-TC",
           "1SPE-SUITES-CR-016"
         ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "1SPE-SUITES-CR-016",
+          "1SPE-SUITES-RE-C7"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
         "manual": "1SPE",
         "official_part": "Trigonométrie",
         "algorithm_examples_cited_by_the_programme": 1,
-        "objects_examined": 78,
-        "manual_has_algorithmic_work": false,
-        "algorithmic_work_evidence": [],
+        "objects_examined": 67,
+        "manual_has_algorithmic_work": true,
+        "algorithmic_work_evidence": [
+          "1SPE-TRIGO-ALG-015"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "1SPE-TRIGO-ALG-015"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
@@ -246,6 +277,11 @@
           "1SPE-VARALEA-EV-A-corrige",
           "1SPE-VARALEA-EV-B-corrige"
         ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "1SPE-VARALEA-ALG-001",
+          "1SPE-VARALEA-ALG-002"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
@@ -253,29 +289,49 @@
         "official_part": "Variations et courbes représentatives des fonctions",
         "algorithm_examples_cited_by_the_programme": 1,
         "objects_examined": 88,
-        "manual_has_algorithmic_work": false,
-        "algorithmic_work_evidence": [],
+        "manual_has_algorithmic_work": true,
+        "algorithmic_work_evidence": [
+          "1SPE-DERGLOBAL-ALG-015"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "1SPE-DERGLOBAL-ALG-015"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
         "manual": "TCOMPL",
         "official_part": "Approche historique de la fonction logarithme",
         "algorithm_examples_cited_by_the_programme": 2,
-        "objects_examined": 34,
-        "manual_has_algorithmic_work": false,
-        "algorithmic_work_evidence": [],
+        "objects_examined": 35,
+        "manual_has_algorithmic_work": true,
+        "algorithmic_work_evidence": [
+          "TCOMPL-LOGHIST-ALG-015"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TCOMPL-LOGHIST-ALG-015"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
         "manual": "TCOMPL",
         "official_part": "Calculs d’aires",
         "algorithm_examples_cited_by_the_programme": 2,
-        "objects_examined": 124,
+        "objects_examined": 125,
         "manual_has_algorithmic_work": true,
         "algorithmic_work_evidence": [
+          "TCOMPL-AIR-ALG-015",
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ECH-CR-011",
           "TCOMPL-ECH-EV-B-corrige",
-          "TCOMPL-MF-CR-010"
+          "TCOMPL-ME-ALG-015"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TCOMPL-AIR-ALG-015",
+          "TCOMPL-ATT-ALG-015",
+          "TCOMPL-ME-ALG-015"
         ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
@@ -283,11 +339,17 @@
         "manual": "TCOMPL",
         "official_part": "Fonctions : continuité, dérivabilité, limites, représentation graphique",
         "algorithm_examples_cited_by_the_programme": 2,
-        "objects_examined": 54,
+        "objects_examined": 55,
         "manual_has_algorithmic_work": true,
         "algorithmic_work_evidence": [
+          "TCOMPL-LOGHIST-ALG-015",
           "TCOMPL-MF-CR-010",
           "TCOMPL-MF-EV-A-corrige"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TCOMPL-LOGHIST-ALG-015",
+          "TCOMPL-MF-CR-010"
         ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
@@ -296,17 +358,29 @@
         "official_part": "Intégration",
         "algorithm_examples_cited_by_the_programme": 2,
         "objects_examined": 38,
-        "manual_has_algorithmic_work": false,
-        "algorithmic_work_evidence": [],
+        "manual_has_algorithmic_work": true,
+        "algorithmic_work_evidence": [
+          "TCOMPL-AIR-ALG-015"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TCOMPL-AIR-ALG-015"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
         "manual": "TCOMPL",
         "official_part": "Lois à densité",
         "algorithm_examples_cited_by_the_programme": 2,
-        "objects_examined": 26,
-        "manual_has_algorithmic_work": false,
-        "algorithmic_work_evidence": [],
+        "objects_examined": 27,
+        "manual_has_algorithmic_work": true,
+        "algorithmic_work_evidence": [
+          "TCOMPL-ATT-ALG-015"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TCOMPL-ATT-ALG-015"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
@@ -318,36 +392,58 @@
         "algorithmic_work_evidence": [
           "TCOMPL-MF-CR-010"
         ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TCOMPL-MF-CR-010"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
         "manual": "TCOMPL",
         "official_part": "Modèles d’évolution",
         "algorithm_examples_cited_by_the_programme": 3,
-        "objects_examined": 30,
-        "manual_has_algorithmic_work": false,
-        "algorithmic_work_evidence": [],
+        "objects_examined": 31,
+        "manual_has_algorithmic_work": true,
+        "algorithmic_work_evidence": [
+          "TCOMPL-ME-ALG-015"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TCOMPL-ME-ALG-015"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
         "manual": "TCOMPL",
         "official_part": "Primitives et équations différentielles",
         "algorithm_examples_cited_by_the_programme": 1,
-        "objects_examined": 25,
-        "manual_has_algorithmic_work": false,
-        "algorithmic_work_evidence": [],
+        "objects_examined": 26,
+        "manual_has_algorithmic_work": true,
+        "algorithmic_work_evidence": [
+          "TCOMPL-ME-ALG-015"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TCOMPL-ME-ALG-015"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
         "manual": "TCOMPL",
         "official_part": "Répétition d’expériences indépendantes, échantillonnage",
         "algorithm_examples_cited_by_the_programme": 2,
-        "objects_examined": 42,
+        "objects_examined": 43,
         "manual_has_algorithmic_work": true,
         "algorithmic_work_evidence": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ECH-CR-011",
           "TCOMPL-ECH-CR-012",
           "TCOMPL-ECH-EV-B-corrige"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TCOMPL-ATT-ALG-015",
+          "TCOMPL-ECH-CR-012"
         ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
@@ -355,9 +451,15 @@
         "manual": "TCOMPL",
         "official_part": "Suites numériques, modèles discrets",
         "algorithm_examples_cited_by_the_programme": 3,
-        "objects_examined": 30,
-        "manual_has_algorithmic_work": false,
-        "algorithmic_work_evidence": [],
+        "objects_examined": 31,
+        "manual_has_algorithmic_work": true,
+        "algorithmic_work_evidence": [
+          "TCOMPL-ME-ALG-015"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TCOMPL-ME-ALG-015"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
@@ -365,8 +467,14 @@
         "official_part": "Temps d’attente",
         "algorithm_examples_cited_by_the_programme": 3,
         "objects_examined": 30,
-        "manual_has_algorithmic_work": false,
-        "algorithmic_work_evidence": [],
+        "manual_has_algorithmic_work": true,
+        "algorithmic_work_evidence": [
+          "TCOMPL-ATT-ALG-015"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TCOMPL-ATT-ALG-015"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
@@ -381,36 +489,62 @@
           "TEXP-ARI-EV-B-corrige",
           "TEXP-ARI-ME-009"
         ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TEXP-ARI-CR-013"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
         "manual": "TSPE",
         "official_part": "Calcul intégral",
         "algorithm_examples_cited_by_the_programme": 3,
-        "objects_examined": 38,
-        "manual_has_algorithmic_work": false,
-        "algorithmic_work_evidence": [],
+        "objects_examined": 39,
+        "manual_has_algorithmic_work": true,
+        "algorithmic_work_evidence": [
+          "TSPE-INTEG-ALG-017"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TSPE-INTEG-ALG-017"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
         "manual": "TSPE",
         "official_part": "Combinatoire et dénombrement",
         "algorithm_examples_cited_by_the_programme": 3,
-        "objects_examined": 32,
-        "manual_has_algorithmic_work": false,
-        "algorithmic_work_evidence": [],
+        "objects_examined": 33,
+        "manual_has_algorithmic_work": true,
+        "algorithmic_work_evidence": [
+          "TSPE-COMBI-ALG-015"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TSPE-COMBI-ALG-015"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
         "manual": "TSPE",
         "official_part": "Concentration, loi des grands nombres",
         "algorithm_examples_cited_by_the_programme": 3,
-        "objects_examined": 48,
+        "objects_examined": 51,
         "manual_has_algorithmic_work": true,
         "algorithmic_work_evidence": [
+          "TSPE-COMBI-ALG-015",
           "TSPE-CONCLGN-ALG-018",
           "TSPE-CONTIN-CO-005",
+          "TSPE-PRIMEQ-ALG-015",
           "TSPE-PROBA-ALG-017"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TSPE-COMBI-ALG-015",
+          "TSPE-CONCLGN-ALG-018",
+          "TSPE-PRIMEQ-ALG-015",
+          "TSPE-PROBA-ALG-017",
+          "TSPE-SUITLIM-ALG-017"
         ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
@@ -424,17 +558,27 @@
           "TSPE-CONTIN-CO-005",
           "TSPE-CONTIN-CR-010"
         ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TSPE-CONTIN-CR-010"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
         "manual": "TSPE",
         "official_part": "Fonction logarithme",
         "algorithm_examples_cited_by_the_programme": 1,
-        "objects_examined": 428,
+        "objects_examined": 429,
         "manual_has_algorithmic_work": true,
         "algorithmic_work_evidence": [
           "TSPE-CONTIN-CO-005",
-          "TSPE-CONTIN-CR-010"
+          "TSPE-CONTIN-CR-010",
+          "TSPE-SUITLIM-ALG-017"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TSPE-CONTIN-CR-010",
+          "TSPE-SUITLIM-ALG-017"
         ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
@@ -442,20 +586,37 @@
         "manual": "TSPE",
         "official_part": "Primitives, équations différentielles",
         "algorithm_examples_cited_by_the_programme": 1,
-        "objects_examined": 31,
-        "manual_has_algorithmic_work": false,
-        "algorithmic_work_evidence": [],
+        "objects_examined": 32,
+        "manual_has_algorithmic_work": true,
+        "algorithmic_work_evidence": [
+          "TSPE-PRIMEQ-ALG-015"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TSPE-PRIMEQ-ALG-015"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
       {
         "manual": "TSPE",
         "official_part": "Succession d’épreuves indépendantes, schéma de Bernoulli",
         "algorithm_examples_cited_by_the_programme": 3,
-        "objects_examined": 160,
+        "objects_examined": 163,
         "manual_has_algorithmic_work": true,
         "algorithmic_work_evidence": [
+          "TSPE-COMBI-ALG-015",
           "TSPE-CONCLGN-ALG-018",
-          "TSPE-PROBA-ALG-017"
+          "TSPE-PRIMEQ-ALG-015",
+          "TSPE-PROBA-ALG-017",
+          "TSPE-SUITLIM-ALG-017"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TSPE-COMBI-ALG-015",
+          "TSPE-CONCLGN-ALG-018",
+          "TSPE-PRIMEQ-ALG-015",
+          "TSPE-PROBA-ALG-017",
+          "TSPE-SUITLIM-ALG-017"
         ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       },
@@ -464,8 +625,14 @@
         "official_part": "Suites",
         "algorithm_examples_cited_by_the_programme": 2,
         "objects_examined": 135,
-        "manual_has_algorithmic_work": false,
-        "algorithmic_work_evidence": [],
+        "manual_has_algorithmic_work": true,
+        "algorithmic_work_evidence": [
+          "TSPE-SUITLIM-ALG-017"
+        ],
+        "ALGORITHMIC_WORK_PEDAGOGICALLY_ACTIONABLE": true,
+        "actionable_evidence": [
+          "TSPE-SUITLIM-ALG-017"
+        ],
         "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
       }
     ]
@@ -1061,12 +1228,12 @@
       "matched_terms": [
         "appliquer",
         "evolution",
+        "finale",
         "initiale"
       ],
-      "missing_terms": [
-        "finale"
-      ],
+      "missing_terms": [],
       "chapters": [
+        "1SPE-DERIVATION-GLOBAL",
         "1SPE-EXPONENTIELLE",
         "1SPE-SUITES"
       ],
@@ -1082,6 +1249,7 @@
           "1SPE-SUITES-CR-015"
         ],
         "REINVESTMENT": [
+          "1SPE-DERGLOBAL-EX-054",
           "1SPE-EXPO-CO-051",
           "1SPE-SUITES-CO-052",
           "1SPE-SUITES-EX-049",
@@ -1094,9 +1262,9 @@
           "1SPE-SUITES-ME-006"
         ]
       },
-      "object_count": 12,
+      "object_count": 13,
       "coverage_status": "COMPLETE",
-      "coverage_reason": "travaille dans 2 chapitres : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique, cette condition est remplie",
+      "coverage_reason": "travaille dans 3 chapitres : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique, cette condition est remplie",
       "contradictory_review": null
     },
     {
@@ -1136,7 +1304,9 @@
         ],
         "REINVESTMENT": [
           "1SPE-DERGLOBAL-EX-046",
+          "1SPE-DERGLOBAL-EX-054",
           "1SPE-EXPO-EX-051",
+          "1SPE-EXPO-EX-052",
           "1SPE-SUITES-EX-049",
           "1SPE-SUITES-EX-052"
         ],
@@ -1148,7 +1318,7 @@
           "1SPE-SUITES-ME-006"
         ]
       },
-      "object_count": 13,
+      "object_count": 15,
       "coverage_status": "COMPLETE",
       "coverage_reason": "travaille dans 4 chapitres : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique, cette condition est remplie",
       "contradictory_review": null
@@ -1175,6 +1345,7 @@
       "missing_terms": [],
       "chapters": [
         "1SPE-EXPONENTIELLE",
+        "1SPE-SECOND-DEGRE",
         "1SPE-SUITES"
       ],
       "objects_by_role": {
@@ -1190,6 +1361,8 @@
         "REINVESTMENT": [
           "1SPE-EXPO-CO-051",
           "1SPE-EXPO-EX-051",
+          "1SPE-SECDEG-CO-103",
+          "1SPE-SECDEG-EX-103",
           "1SPE-SUITES-CO-034"
         ],
         "REMEDIATION": [
@@ -1197,9 +1370,9 @@
           "1SPE-SUITES-RE-C6"
         ]
       },
-      "object_count": 10,
+      "object_count": 12,
       "coverage_status": "COMPLETE",
-      "coverage_reason": "travaille dans 2 chapitres : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique, cette condition est remplie",
+      "coverage_reason": "travaille dans 3 chapitres : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique, cette condition est remplie",
       "contradictory_review": null
     },
     {
@@ -1220,6 +1393,7 @@
       ],
       "missing_terms": [],
       "chapters": [
+        "1SPE-EXPONENTIELLE",
         "1SPE-SUITES",
         "1SPE-TRANSVERSAL"
       ],
@@ -1228,13 +1402,15 @@
           "1SPE-TRANSVERSAL-STATISTIQUES_AUTOMATISMES"
         ],
         "REINVESTMENT": [
+          "1SPE-EXPO-CO-052",
+          "1SPE-EXPO-EX-052",
           "1SPE-SUITES-CO-052",
           "1SPE-SUITES-EX-052"
         ]
       },
-      "object_count": 3,
+      "object_count": 5,
       "coverage_status": "COMPLETE",
-      "coverage_reason": "travaille dans 2 chapitres : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique, cette condition est remplie",
+      "coverage_reason": "travaille dans 3 chapitres : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique, cette condition est remplie",
       "contradictory_review": null
     },
     {
@@ -1397,6 +1573,7 @@
           "1SPE-SUITES-FR-R4"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-DERGLOBAL-ALG-015",
           "1SPE-DERGLOBAL-TD-FIL-ROUGE",
           "1SPE-DERLOCAL-TD-FILROUGE",
           "1SPE-GEOREP-ME-002",
@@ -1411,7 +1588,7 @@
           "1SPE-TRIGO-ME-004"
         ]
       },
-      "object_count": 133,
+      "object_count": 134,
       "coverage_status": "COMPLETE",
       "coverage_reason": "travaille dans 9 chapitres : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique, cette condition est remplie",
       "contradictory_review": null
@@ -1566,6 +1743,7 @@
           "1SPE-SECDEG-EX-049",
           "1SPE-SECDEG-EX-050",
           "1SPE-SECDEG-EX-102",
+          "1SPE-SECDEG-EX-103",
           "1SPE-SUITES-CO-014",
           "1SPE-SUITES-CO-024",
           "1SPE-SUITES-CO-030",
@@ -1613,7 +1791,7 @@
           "1SPE-SUITES-ME-005"
         ]
       },
-      "object_count": 153,
+      "object_count": 154,
       "coverage_status": "COMPLETE",
       "coverage_reason": "travaille dans 9 chapitres : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique, cette condition est remplie",
       "contradictory_review": null
@@ -1722,6 +1900,7 @@
           "1SPE-DERLOCAL-CO-050",
           "1SPE-DERLOCAL-EX-048",
           "1SPE-DERLOCAL-EX-050",
+          "1SPE-DERLOCAL-EX-051",
           "1SPE-EXPO-EX-025",
           "1SPE-SECDEG-CO-011",
           "1SPE-SECDEG-CO-025",
@@ -1782,7 +1961,7 @@
           "1SPE-TRIGO-ME-004"
         ]
       },
-      "object_count": 67,
+      "object_count": 68,
       "coverage_status": "COMPLETE",
       "coverage_reason": "travaille dans 6 chapitres : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique, cette condition est remplie",
       "contradictory_review": null
@@ -2121,9 +2300,11 @@
           "1SPE-DERLOCAL-CO-024",
           "1SPE-DERLOCAL-CO-036",
           "1SPE-DERLOCAL-CO-043",
+          "1SPE-DERLOCAL-CO-051",
           "1SPE-DERLOCAL-EX-004",
           "1SPE-DERLOCAL-EX-018",
           "1SPE-DERLOCAL-EX-036-CDP",
+          "1SPE-DERLOCAL-EX-051",
           "1SPE-GEOREP-CO-001",
           "1SPE-GEOREP-CO-003",
           "1SPE-GEOREP-CO-005",
@@ -2153,13 +2334,14 @@
         ],
         "SUPPORTING_EVIDENCE": [
           "1SPE-DERLOCAL-ME-004",
+          "1SPE-DERLOCAL-TD-FILROUGE",
           "1SPE-GEOREP-ME-001",
           "1SPE-GEOREP-ME-002",
           "1SPE-GEOREP-ME-005",
           "1SPE-SECDEG-ME-002"
         ]
       },
-      "object_count": 57,
+      "object_count": 60,
       "coverage_status": "COMPLETE",
       "coverage_reason": "travaille dans 4 chapitres : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique, cette condition est remplie",
       "contradictory_review": null
@@ -2237,6 +2419,7 @@
           "1SPE-DERLOCAL-EX-024",
           "1SPE-DERLOCAL-EX-048",
           "1SPE-DERLOCAL-EX-050",
+          "1SPE-DERLOCAL-EX-051",
           "1SPE-EXPO-EX-030",
           "1SPE-GEOREP-CO-001",
           "1SPE-GEOREP-CO-002",
@@ -2289,6 +2472,7 @@
           "1SPE-SUITES-FR-R3"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-DERGLOBAL-ALG-015",
           "1SPE-DERLOCAL-ME-003",
           "1SPE-DERLOCAL-ME-004",
           "1SPE-DERLOCAL-TD-FILROUGE",
@@ -2301,7 +2485,7 @@
           "1SPE-TRIGO-ME-004"
         ]
       },
-      "object_count": 95,
+      "object_count": 97,
       "coverage_status": "COMPLETE",
       "coverage_reason": "travaille dans 9 chapitres : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique, cette condition est remplie",
       "contradictory_review": null
@@ -2383,6 +2567,7 @@
           "1SPE-DERLOCAL-CO-024",
           "1SPE-DERLOCAL-CO-036",
           "1SPE-DERLOCAL-CO-043",
+          "1SPE-DERLOCAL-CO-051",
           "1SPE-DERLOCAL-EX-004",
           "1SPE-DERLOCAL-EX-005",
           "1SPE-DERLOCAL-EX-014",
@@ -2390,6 +2575,7 @@
           "1SPE-DERLOCAL-EX-016",
           "1SPE-DERLOCAL-EX-018",
           "1SPE-DERLOCAL-EX-036-CDP",
+          "1SPE-DERLOCAL-EX-051",
           "1SPE-GEOREP-CO-001",
           "1SPE-GEOREP-CO-003",
           "1SPE-GEOREP-CO-004",
@@ -2441,6 +2627,7 @@
           "1SPE-SUITES-FR-R3"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-DERLOCAL-ALG-015",
           "1SPE-GEOREP-ME-001",
           "1SPE-GEOREP-ME-002",
           "1SPE-GEOREP-ME-003",
@@ -2451,7 +2638,7 @@
           "1SPE-SECDEG-ME-002"
         ]
       },
-      "object_count": 105,
+      "object_count": 108,
       "coverage_status": "COMPLETE",
       "coverage_reason": "travaille dans 7 chapitres : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique, cette condition est remplie",
       "contradictory_review": null
@@ -2553,9 +2740,12 @@
           "1SPE-GEOREP-COURS-00",
           "1SPE-SUITES-CR-011",
           "1SPE-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+        ],
+        "REINVESTMENT": [
+          "1SPE-DERLOCAL-EX-051"
         ]
       },
-      "object_count": 4,
+      "object_count": 5,
       "coverage_status": "COMPLETE",
       "coverage_reason": "travaille dans 4 chapitres : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique, cette condition est remplie",
       "contradictory_review": null
@@ -2581,6 +2771,7 @@
       ],
       "missing_terms": [],
       "chapters": [
+        "1SPE-PROBA-COND",
         "1SPE-TRANSVERSAL",
         "1SPE-VARIABLES-ALEATOIRES"
       ],
@@ -2589,13 +2780,14 @@
           "1SPE-TRANSVERSAL-STATISTIQUES_AUTOMATISMES"
         ],
         "REINVESTMENT": [
+          "1SPE-PROBCOND-EX-051",
           "1SPE-VARALEA-CO-055",
           "1SPE-VARALEA-EX-055"
         ]
       },
-      "object_count": 3,
+      "object_count": 4,
       "coverage_status": "COMPLETE",
-      "coverage_reason": "travaille dans 2 chapitres : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique, cette condition est remplie",
+      "coverage_reason": "travaille dans 3 chapitres : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique, cette condition est remplie",
       "contradictory_review": null
     },
     {
@@ -2683,6 +2875,7 @@
           "1SPE-PROBCOND-CO-041",
           "1SPE-PROBCOND-CO-045",
           "1SPE-PROBCOND-CO-047",
+          "1SPE-PROBCOND-CO-051",
           "1SPE-PROBCOND-EX-001",
           "1SPE-PROBCOND-EX-002",
           "1SPE-PROBCOND-EX-003",
@@ -2705,6 +2898,7 @@
           "1SPE-PROBCOND-EX-020",
           "1SPE-PROBCOND-EX-041",
           "1SPE-PROBCOND-EX-047",
+          "1SPE-PROBCOND-EX-051",
           "1SPE-VARALEA-EX-030"
         ],
         "REMEDIATION": [
@@ -2716,10 +2910,11 @@
           "1SPE-PROBCOND-ME-002",
           "1SPE-PROBCOND-ME-004",
           "1SPE-PROBCOND-ME-005",
+          "1SPE-VARALEA-ALG-002",
           "1SPE-VARALEA-ME-001"
         ]
       },
-      "object_count": 75,
+      "object_count": 78,
       "coverage_status": "COMPLETE",
       "coverage_reason": "travaille dans 3 chapitres : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique, cette condition est remplie",
       "contradictory_review": null
@@ -3009,23 +3204,30 @@
       "official_normativity": "COMMENTARY",
       "mandatory": false,
       "internal_atoms": [],
-      "evidence_kind": null,
-      "matched_terms": [],
-      "missing_terms": [
-        "alexandrie",
+      "evidence_kind": "CONTENT_MATCH_MANUAL_WIDE",
+      "matched_terms": [
         "approximation",
         "archimede",
         "carree",
         "encadrement",
-        "heron",
         "racine",
         "reels"
       ],
-      "chapters": [],
-      "objects_by_role": {},
-      "object_count": 0,
-      "coverage_status": "MISSING",
-      "coverage_reason": "aucun objet du manuel ne porte cet attendu",
+      "missing_terms": [
+        "alexandrie",
+        "heron"
+      ],
+      "chapters": [
+        "1SPE-TRIGONOMETRIE"
+      ],
+      "objects_by_role": {
+        "SUPPORTING_EVIDENCE": [
+          "1SPE-TRIGO-ALG-015"
+        ]
+      },
+      "object_count": 1,
+      "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
+      "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
     },
     {
@@ -5484,6 +5686,7 @@
           "1SPE-SECDEG-CO-048",
           "1SPE-SECDEG-CO-049",
           "1SPE-SECDEG-CO-050",
+          "1SPE-SECDEG-CO-103",
           "1SPE-SECDEG-EX-001",
           "1SPE-SECDEG-EX-002",
           "1SPE-SECDEG-EX-003",
@@ -5523,7 +5726,8 @@
           "1SPE-SECDEG-EX-047",
           "1SPE-SECDEG-EX-048",
           "1SPE-SECDEG-EX-049",
-          "1SPE-SECDEG-EX-050"
+          "1SPE-SECDEG-EX-050",
+          "1SPE-SECDEG-EX-103"
         ],
         "REMEDIATION": [
           "1SPE-SECDEG-RE-C1",
@@ -5540,7 +5744,7 @@
           "1SPE-SECDEG-TD-FIL-ROUGE"
         ]
       },
-      "object_count": 100,
+      "object_count": 102,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -5593,6 +5797,7 @@
           "1SPE-SECDEG-CO-041",
           "1SPE-SECDEG-CO-042",
           "1SPE-SECDEG-CO-046",
+          "1SPE-SECDEG-CO-103",
           "1SPE-SECDEG-EX-007",
           "1SPE-SECDEG-EX-008",
           "1SPE-SECDEG-EX-009",
@@ -5608,7 +5813,8 @@
           "1SPE-SECDEG-EX-039",
           "1SPE-SECDEG-EX-041",
           "1SPE-SECDEG-EX-042",
-          "1SPE-SECDEG-EX-046"
+          "1SPE-SECDEG-EX-046",
+          "1SPE-SECDEG-EX-103"
         ],
         "REMEDIATION": [
           "1SPE-SECDEG-RE-C3"
@@ -5618,7 +5824,7 @@
           "1SPE-SECDEG-TD-CONTEXTUALISE"
         ]
       },
-      "object_count": 42,
+      "object_count": 44,
       "coverage_status": "COMPLETE",
       "coverage_reason": "la demonstration est redigee dans un objet du manuel",
       "contradictory_review": null
@@ -6118,6 +6324,7 @@
         "1SPE-SECOND-DEGRE",
         "1SPE-SUITES",
         "1SPE-TRANSVERSAL",
+        "1SPE-TRIGONOMETRIE",
         "1SPE-VARIABLES-ALEATOIRES"
       ],
       "objects_by_role": {
@@ -6178,20 +6385,24 @@
           "1SPE-SUITES-FR-R4"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-DERGLOBAL-ALG-015",
           "1SPE-DERGLOBAL-ME-001",
           "1SPE-DERGLOBAL-TD-CONTEXTUALISE",
+          "1SPE-DERLOCAL-ALG-015",
           "1SPE-DERLOCAL-ME-005",
           "1SPE-DERLOCAL-TD-FILROUGE",
+          "1SPE-EXPO-COURS-C5-ALGORITHMES",
           "1SPE-EXPO-ME-002",
           "1SPE-PRODSCAL-ME-005",
           "1SPE-PRODSCAL-TD-FIL-ROUGE",
           "1SPE-SECDEG-ME-002",
           "1SPE-SECDEG-TD-CONTEXTUALISE",
           "1SPE-SECDEG-TD-FIL-ROUGE",
+          "1SPE-TRIGO-ALG-015",
           "1SPE-VARALEA-ME-002"
         ]
       },
-      "object_count": 59,
+      "object_count": 63,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -6232,10 +6443,11 @@
           "1SPE-GEOREP-CR-013"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-DERLOCAL-ALG-015",
           "1SPE-GEOREP-ME-004"
         ]
       },
-      "object_count": 6,
+      "object_count": 7,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -6479,9 +6691,12 @@
         "REMEDIATION": [
           "1SPE-DERIVATION-GLOBAL-FR-R1",
           "1SPE-DERIVATION-GLOBAL-FR-R2"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "1SPE-DERGLOBAL-ALG-015"
         ]
       },
-      "object_count": 9,
+      "object_count": 10,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -6568,13 +6783,14 @@
           "1SPE-DERIVATION-GLOBAL-FR-R5"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-DERGLOBAL-ALG-015",
           "1SPE-DERGLOBAL-ME-002",
           "1SPE-DERGLOBAL-ME-003",
           "1SPE-DERGLOBAL-ME-004",
           "1SPE-DERGLOBAL-TD-CONTEXTUALISE"
         ]
       },
-      "object_count": 22,
+      "object_count": 23,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -6787,6 +7003,7 @@
           "1SPE-DERGLOBAL-CO-051",
           "1SPE-DERGLOBAL-CO-052",
           "1SPE-DERGLOBAL-CO-053",
+          "1SPE-DERGLOBAL-CO-054",
           "1SPE-DERGLOBAL-EX-001",
           "1SPE-DERGLOBAL-EX-001-CDP",
           "1SPE-DERGLOBAL-EX-002",
@@ -6857,7 +7074,8 @@
           "1SPE-DERGLOBAL-EX-050",
           "1SPE-DERGLOBAL-EX-051",
           "1SPE-DERGLOBAL-EX-052",
-          "1SPE-DERGLOBAL-EX-053"
+          "1SPE-DERGLOBAL-EX-053",
+          "1SPE-DERGLOBAL-EX-054"
         ],
         "REMEDIATION": [
           "1SPE-DERIVATION-GLOBAL-FR-R1",
@@ -6872,6 +7090,7 @@
           "1SPE-DERIVATION-GLOBAL-RE-C5"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-DERGLOBAL-ALG-015",
           "1SPE-DERGLOBAL-ME-001",
           "1SPE-DERGLOBAL-ME-002",
           "1SPE-DERGLOBAL-ME-003",
@@ -6881,7 +7100,7 @@
           "1SPE-DERGLOBAL-TD-FIL-ROUGE"
         ]
       },
-      "object_count": 151,
+      "object_count": 154,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -6978,12 +7197,13 @@
           "1SPE-DERIVATION-LOCAL-RE-C1"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-DERLOCAL-ALG-015",
           "1SPE-DERLOCAL-ME-001",
           "1SPE-DERLOCAL-TD-CONTEXTE",
           "1SPE-DERLOCAL-TD-FILROUGE"
         ]
       },
-      "object_count": 32,
+      "object_count": 33,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -7050,12 +7270,13 @@
           "1SPE-DERIVATION-LOCAL-RE-C2"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-DERLOCAL-ALG-015",
           "1SPE-DERLOCAL-ME-002",
           "1SPE-DERLOCAL-TD-CONTEXTE",
           "1SPE-DERLOCAL-TD-FILROUGE"
         ]
       },
-      "object_count": 36,
+      "object_count": 37,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -7102,6 +7323,7 @@
           "1SPE-DERLOCAL-CO-043",
           "1SPE-DERLOCAL-CO-048",
           "1SPE-DERLOCAL-CO-050",
+          "1SPE-DERLOCAL-CO-051",
           "1SPE-DERLOCAL-EX-013",
           "1SPE-DERLOCAL-EX-014",
           "1SPE-DERLOCAL-EX-015",
@@ -7112,7 +7334,8 @@
           "1SPE-DERLOCAL-EX-036",
           "1SPE-DERLOCAL-EX-043",
           "1SPE-DERLOCAL-EX-048",
-          "1SPE-DERLOCAL-EX-050"
+          "1SPE-DERLOCAL-EX-050",
+          "1SPE-DERLOCAL-EX-051"
         ],
         "REMEDIATION": [
           "1SPE-DERIVATION-LOCAL-RE-C3"
@@ -7122,7 +7345,7 @@
           "1SPE-DERLOCAL-TD-FILROUGE"
         ]
       },
-      "object_count": 31,
+      "object_count": 33,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -7169,6 +7392,7 @@
           "1SPE-DERLOCAL-CO-047",
           "1SPE-DERLOCAL-CO-049",
           "1SPE-DERLOCAL-CO-050",
+          "1SPE-DERLOCAL-CO-051",
           "1SPE-DERLOCAL-EX-019",
           "1SPE-DERLOCAL-EX-020",
           "1SPE-DERLOCAL-EX-021",
@@ -7179,7 +7403,8 @@
           "1SPE-DERLOCAL-EX-044",
           "1SPE-DERLOCAL-EX-047",
           "1SPE-DERLOCAL-EX-049",
-          "1SPE-DERLOCAL-EX-050"
+          "1SPE-DERLOCAL-EX-050",
+          "1SPE-DERLOCAL-EX-051"
         ],
         "REMEDIATION": [
           "1SPE-DERIVATION-LOCAL-RE-C4"
@@ -7190,7 +7415,7 @@
           "1SPE-DERLOCAL-TD-FILROUGE"
         ]
       },
-      "object_count": 32,
+      "object_count": 34,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -7374,9 +7599,12 @@
         "REMEDIATION": [
           "1SPE-DERIVATION-GLOBAL-FR-R1",
           "1SPE-DERIVATION-GLOBAL-FR-R2"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "1SPE-DERGLOBAL-ALG-015"
         ]
       },
-      "object_count": 11,
+      "object_count": 12,
       "coverage_status": "COMPLETE",
       "coverage_reason": "Le cours sur l'equation de la tangente redige la demonstration complete : caracterisation d'une droite de pente m passant par A, identification de m a f'(a), et reciproque.",
       "contradictory_review": {
@@ -7418,11 +7646,12 @@
           "1SPE-DERGLOBAL-CO-002"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-DERGLOBAL-ALG-015",
           "1SPE-DERGLOBAL-ME-001",
           "1SPE-DERGLOBAL-TD-CONTEXTUALISE"
         ]
       },
-      "object_count": 7,
+      "object_count": 8,
       "coverage_status": "COMPLETE",
       "coverage_reason": "Le cours calcule le taux de variation entre 0 et h, montre qu'il vaut 1/racine(h) et depasse toute borne quand h tend vers 0 : il n'existe donc pas de nombre derive en 0. La demi-tangente verticale est mentionnee.",
       "contradictory_review": {
@@ -7508,6 +7737,7 @@
         "REINVESTMENT": [
           "1SPE-DERGLOBAL-CO-011",
           "1SPE-DERGLOBAL-CO-019",
+          "1SPE-DERGLOBAL-CO-054",
           "1SPE-DERGLOBAL-EX-001-CDP",
           "1SPE-DERGLOBAL-EX-002-CDP",
           "1SPE-DERGLOBAL-EX-003-CDP",
@@ -7526,10 +7756,11 @@
           "1SPE-DERIVATION-GLOBAL-RE-C5"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-DERGLOBAL-ALG-015",
           "1SPE-DERGLOBAL-ME-002"
         ]
       },
-      "object_count": 20,
+      "object_count": 22,
       "coverage_status": "COMPLETE",
       "coverage_reason": "la demonstration est redigee dans un objet du manuel",
       "contradictory_review": null
@@ -7673,12 +7904,13 @@
           "1SPE-DERIVATION-GLOBAL-RE-C3"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-DERGLOBAL-ALG-015",
           "1SPE-DERGLOBAL-ME-003",
           "1SPE-DERGLOBAL-TD-CONTEXTUALISE",
           "1SPE-DERGLOBAL-TD-FIL-ROUGE"
         ]
       },
-      "object_count": 38,
+      "object_count": 39,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -7788,12 +8020,13 @@
           "1SPE-DERIVATION-GLOBAL-RE-C4"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-DERGLOBAL-ALG-015",
           "1SPE-DERGLOBAL-ME-004",
           "1SPE-DERGLOBAL-TD-CONTEXTUALISE",
           "1SPE-DERGLOBAL-TD-FIL-ROUGE"
         ]
       },
-      "object_count": 34,
+      "object_count": 35,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -7837,6 +8070,7 @@
           "1SPE-DERGLOBAL-CO-046",
           "1SPE-DERGLOBAL-CO-049",
           "1SPE-DERGLOBAL-CO-050",
+          "1SPE-DERGLOBAL-CO-054",
           "1SPE-DERGLOBAL-EX-041",
           "1SPE-DERGLOBAL-EX-042",
           "1SPE-DERGLOBAL-EX-043",
@@ -7844,7 +8078,8 @@
           "1SPE-DERGLOBAL-EX-045",
           "1SPE-DERGLOBAL-EX-046",
           "1SPE-DERGLOBAL-EX-049",
-          "1SPE-DERGLOBAL-EX-050"
+          "1SPE-DERGLOBAL-EX-050",
+          "1SPE-DERGLOBAL-EX-054"
         ],
         "REMEDIATION": [
           "1SPE-DERIVATION-GLOBAL-RE-C5"
@@ -7855,7 +8090,7 @@
           "1SPE-DERGLOBAL-TD-FIL-ROUGE"
         ]
       },
-      "object_count": 26,
+      "object_count": 28,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -7978,28 +8213,23 @@
       "official_normativity": "ILLUSTRATIVE_EXAMPLE",
       "mandatory": false,
       "internal_atoms": [],
-      "evidence_kind": "CONTENT_MATCH_MANUAL_WIDE",
+      "evidence_kind": "CONTENT_MATCH",
       "matched_terms": [
         "favorables",
-        "methode"
-      ],
-      "missing_terms": [
         "limitant",
+        "methode",
         "newton"
       ],
+      "missing_terms": [],
       "chapters": [
-        "1SPE-VARIABLES-ALEATOIRES"
+        "1SPE-DERIVATION-GLOBAL"
       ],
       "objects_by_role": {
-        "PRIMARY_TEACHING": [
-          "1SPE-VARALEA-CR-014"
-        ],
         "SUPPORTING_EVIDENCE": [
-          "1SPE-VARALEA-ME-005",
-          "1SPE-VARALEA-ME-008"
+          "1SPE-DERGLOBAL-ALG-015"
         ]
       },
-      "object_count": 3,
+      "object_count": 1,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -8060,11 +8290,12 @@
           "1SPE-EXPONENTIELLE-RE-C1"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-EXPO-COURS-C5-ALGORITHMES",
           "1SPE-EXPO-ME-006",
           "1SPE-EXPO-TD-FIL-ROUGE"
         ]
       },
-      "object_count": 29,
+      "object_count": 30,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -8266,6 +8497,7 @@
           "1SPE-EXPO-CO-037",
           "1SPE-EXPO-CO-038",
           "1SPE-EXPO-CO-049",
+          "1SPE-EXPO-CO-052",
           "1SPE-EXPO-EX-031",
           "1SPE-EXPO-EX-032",
           "1SPE-EXPO-EX-033",
@@ -8273,7 +8505,8 @@
           "1SPE-EXPO-EX-036",
           "1SPE-EXPO-EX-037",
           "1SPE-EXPO-EX-038",
-          "1SPE-EXPO-EX-049"
+          "1SPE-EXPO-EX-049",
+          "1SPE-EXPO-EX-052"
         ],
         "REMEDIATION": [
           "1SPE-EXPONENTIELLE-RE-C4"
@@ -8284,7 +8517,7 @@
           "1SPE-EXPO-TD-FIL-ROUGE"
         ]
       },
-      "object_count": 26,
+      "object_count": 28,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -8335,11 +8568,12 @@
           "1SPE-EXPONENTIELLE-RE-C3"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-EXPO-COURS-C5-ALGORITHMES",
           "1SPE-EXPO-ME-002",
           "1SPE-EXPO-ME-005"
         ]
       },
-      "object_count": 15,
+      "object_count": 16,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -8382,25 +8616,28 @@
           "1SPE-EXPO-CO-045",
           "1SPE-EXPO-CO-046",
           "1SPE-EXPO-CO-051",
+          "1SPE-EXPO-CO-052",
           "1SPE-EXPO-EX-041",
           "1SPE-EXPO-EX-042",
           "1SPE-EXPO-EX-043",
           "1SPE-EXPO-EX-044",
           "1SPE-EXPO-EX-045",
           "1SPE-EXPO-EX-046",
-          "1SPE-EXPO-EX-051"
+          "1SPE-EXPO-EX-051",
+          "1SPE-EXPO-EX-052"
         ],
         "REMEDIATION": [
           "1SPE-EXPONENTIELLE-RE-C5"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-EXPO-COURS-C5-ALGORITHMES",
           "1SPE-EXPO-ME-004",
           "1SPE-EXPO-ME-005",
           "1SPE-EXPO-TD-CONTEXTUALISE",
           "1SPE-EXPO-TD-FIL-ROUGE"
         ]
       },
-      "object_count": 25,
+      "object_count": 28,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -8429,8 +8666,7 @@
       ],
       "objects_by_role": {
         "PRIMARY_TEACHING": [
-          "1SPE-EXPO-COURS-C1",
-          "1SPE-EXPO-COURS-C5-ALGORITHMES"
+          "1SPE-EXPO-COURS-C1"
         ],
         "REINVESTMENT": [
           "1SPE-EXPO-CO-001",
@@ -8473,9 +8709,11 @@
           "1SPE-EXPO-EX-047",
           "1SPE-EXPO-EX-049",
           "1SPE-EXPO-EX-050",
-          "1SPE-EXPO-EX-051"
+          "1SPE-EXPO-EX-051",
+          "1SPE-EXPO-EX-052"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-EXPO-COURS-C5-ALGORITHMES",
           "1SPE-EXPO-ME-001",
           "1SPE-EXPO-ME-002",
           "1SPE-EXPO-ME-003",
@@ -8484,7 +8722,7 @@
           "1SPE-EXPO-ME-006"
         ]
       },
-      "object_count": 49,
+      "object_count": 50,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -8503,20 +8741,22 @@
       "evidence_kind": "CONTENT_MATCH",
       "matched_terms": [
         "approchee",
-        "determination"
-      ],
-      "missing_terms": [
+        "determination",
         "suite"
       ],
+      "missing_terms": [],
       "chapters": [
         "1SPE-EXPONENTIELLE"
       ],
       "objects_by_role": {
         "REINVESTMENT": [
           "1SPE-EXPO-EX-043"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "1SPE-EXPO-COURS-C5-ALGORITHMES"
         ]
       },
-      "object_count": 1,
+      "object_count": 2,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -8561,10 +8801,11 @@
           "1SPE-EXPONENTIELLE-RE-C1"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-EXPO-COURS-C5-ALGORITHMES",
           "1SPE-EXPO-ME-006"
         ]
       },
-      "object_count": 9,
+      "object_count": 10,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -8688,13 +8929,14 @@
           "1SPE-EXPONENTIELLE-RE-C5"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-EXPO-COURS-C5-ALGORITHMES",
           "1SPE-EXPO-ME-002",
           "1SPE-EXPO-ME-005",
           "1SPE-EXPO-TD-CONTEXTUALISE",
           "1SPE-EXPO-TD-FIL-ROUGE"
         ]
       },
-      "object_count": 54,
+      "object_count": 55,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -8761,12 +9003,13 @@
           "1SPE-TRIGO-RE-C1"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-TRIGO-ALG-015",
           "1SPE-TRIGO-ME-001",
           "1SPE-TRIGO-TD-CONTEXTUALISE",
           "1SPE-TRIGO-TD-FIL-ROUGE"
         ]
       },
-      "object_count": 36,
+      "object_count": 37,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -8906,6 +9149,7 @@
           "1SPE-TRIGO-RE-C1"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-TRIGO-ALG-015",
           "1SPE-TRIGO-ME-001",
           "1SPE-TRIGO-ME-002",
           "1SPE-TRIGO-ME-004",
@@ -8914,7 +9158,7 @@
           "1SPE-TRIGO-TD-FIL-ROUGE"
         ]
       },
-      "object_count": 23,
+      "object_count": 24,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -8966,13 +9210,14 @@
           "1SPE-TRIGO-EX-024-CDP"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-TRIGO-ALG-015",
           "1SPE-TRIGO-ME-002",
           "1SPE-TRIGO-ME-004",
           "1SPE-TRIGO-ME-005",
           "1SPE-TRIGO-TD-FIL-ROUGE"
         ]
       },
-      "object_count": 17,
+      "object_count": 18,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -9034,12 +9279,13 @@
           "1SPE-TRIGO-RE-C2"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-TRIGO-ALG-015",
           "1SPE-TRIGO-ME-002",
           "1SPE-TRIGO-TD-CONTEXTUALISE",
           "1SPE-TRIGO-TD-FIL-ROUGE"
         ]
       },
-      "object_count": 31,
+      "object_count": 32,
       "coverage_status": "COMPLETE",
       "coverage_reason": "Le manuel donnait les valeurs remarquables en tableau et indiquait en une phrase leur origine geometrique, sans les calculer : ce n'etait pas la demonstration que le programme exige. Elle a ete redigee -- pi/4 par le complementaire et l'identite fondamentale, pi/3 par le triangle equilateral, pi/6 par deduction -- et verifiee exactement en sympy.",
       "contradictory_review": {
@@ -9058,39 +9304,22 @@
       "official_normativity": "ILLUSTRATIVE_EXAMPLE",
       "mandatory": false,
       "internal_atoms": [],
-      "evidence_kind": "CONTENT_MATCH_MANUAL_WIDE",
+      "evidence_kind": "CONTENT_MATCH",
       "matched_terms": [
         "approximation",
+        "archimede",
         "methode"
       ],
-      "missing_terms": [
-        "archimede"
-      ],
+      "missing_terms": [],
       "chapters": [
-        "1SPE-DERIVATION-LOCAL",
-        "1SPE-EXPONENTIELLE"
+        "1SPE-TRIGONOMETRIE"
       ],
       "objects_by_role": {
-        "PRIMARY_TEACHING": [
-          "1SPE-EXPO-COURS-C5-ALGORITHMES"
-        ],
-        "REINVESTMENT": [
-          "1SPE-DERLOCAL-EX-025",
-          "1SPE-DERLOCAL-EX-026",
-          "1SPE-DERLOCAL-EX-027",
-          "1SPE-DERLOCAL-EX-028",
-          "1SPE-DERLOCAL-EX-029",
-          "1SPE-DERLOCAL-EX-030",
-          "1SPE-DERLOCAL-EX-038",
-          "1SPE-DERLOCAL-EX-045",
-          "1SPE-DERLOCAL-EX-046",
-          "1SPE-DERLOCAL-EX-048"
-        ],
         "SUPPORTING_EVIDENCE": [
-          "1SPE-DERLOCAL-ME-005"
+          "1SPE-TRIGO-ALG-015"
         ]
       },
-      "object_count": 12,
+      "object_count": 1,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -10915,6 +11144,7 @@
         ],
         "SUPPORTING_EVIDENCE": [
           "1SPE-VARALEA-ALG-001",
+          "1SPE-VARALEA-ALG-002",
           "1SPE-VARALEA-EXP-001",
           "1SPE-VARALEA-EXP-002",
           "1SPE-VARALEA-EXP-003",
@@ -10929,7 +11159,7 @@
           "1SPE-VARALEA-TD-FIL-ROUGE"
         ]
       },
-      "object_count": 59,
+      "object_count": 60,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -11963,10 +12193,11 @@
           "1SPE-VARALEA-EX-039"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-VARALEA-ALG-001",
           "1SPE-VARALEA-ME-002"
         ]
       },
-      "object_count": 5,
+      "object_count": 6,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -12685,6 +12916,8 @@
         "liste",
         "parties",
         "produit",
+        "programme",
+        "quelques",
         "toutes"
       ],
       "missing_terms": [
@@ -12692,8 +12925,6 @@
         "manipuler",
         "notamment",
         "notions",
-        "programme",
-        "quelques",
         "uplet"
       ],
       "chapters": [
@@ -12721,9 +12952,12 @@
         ],
         "REMEDIATION": [
           "TSPE-GEOMETRIE-ESPACE-RE-C1"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "TSPE-COMBI-ALG-015"
         ]
       },
-      "object_count": 9,
+      "object_count": 10,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -12751,12 +12985,12 @@
         "objets",
         "parties",
         "permutations",
+        "quelques",
         "representes"
       ],
       "missing_terms": [
         "diversement",
-        "pouvant",
-        "quelques"
+        "pouvant"
       ],
       "chapters": [
         "TSPE-COMBINATOIRE",
@@ -12799,10 +13033,11 @@
           "TSPE-GEOMETRIE-ESPACE-RE-C1"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TSPE-COMBI-ALG-015",
           "TSPE-COMBI-ME-001"
         ]
       },
-      "object_count": 26,
+      "object_count": 27,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -12977,9 +13212,12 @@
         ],
         "REMEDIATION": [
           "TSPE-COMBINATOIRE-RE-C2"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "TSPE-COMBI-ALG-015"
         ]
       },
-      "object_count": 4,
+      "object_count": 5,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -13062,10 +13300,11 @@
           "TSPE-COMBI-EX-007"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TSPE-COMBI-ALG-015",
           "TSPE-COMBI-ME-001"
         ]
       },
-      "object_count": 10,
+      "object_count": 11,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -13187,10 +13426,11 @@
           "TSPE-COMBINATOIRE-RE-C2"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TSPE-COMBI-ALG-015",
           "TSPE-COMBI-ME-001"
         ]
       },
-      "object_count": 12,
+      "object_count": 13,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -13272,9 +13512,12 @@
           "TSPE-COMBI-CO-007",
           "TSPE-COMBI-EX-006",
           "TSPE-COMBI-EX-007"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "TSPE-COMBI-ALG-015"
         ]
       },
-      "object_count": 10,
+      "object_count": 11,
       "coverage_status": "COMPLETE",
       "coverage_reason": "la demonstration est redigee dans un objet du manuel",
       "contradictory_review": null
@@ -13347,9 +13590,12 @@
         ],
         "PRIMARY_TEACHING": [
           "TSPE-COMBI-CR-013"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "TSPE-COMBI-ALG-015"
         ]
       },
-      "object_count": 3,
+      "object_count": 4,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -13367,14 +13613,13 @@
       "internal_atoms": [],
       "evidence_kind": "CONTENT_MATCH",
       "matched_terms": [
+        "aleatoire",
         "generation",
         "permutation",
         "permutations",
         "tirage"
       ],
-      "missing_terms": [
-        "aleatoire"
-      ],
+      "missing_terms": [],
       "chapters": [
         "TSPE-COMBINATOIRE"
       ],
@@ -13382,9 +13627,12 @@
         "ASSESSMENT": [
           "TSPE-COMBI-EV-B-corrige",
           "TSPE-COMBINATOIRE-QCM"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "TSPE-COMBI-ALG-015"
         ]
       },
-      "object_count": 2,
+      "object_count": 3,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -13423,9 +13671,12 @@
         ],
         "REINVESTMENT": [
           "TSPE-COMBI-CO-008"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "TSPE-COMBI-ALG-015"
         ]
       },
-      "object_count": 7,
+      "object_count": 8,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -15982,10 +16233,11 @@
           "TSPE-SUITLIM-EX-031-CDP"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TSPE-SUITLIM-ALG-017",
           "TSPE-SUITLIM-ME-001"
         ]
       },
-      "object_count": 3,
+      "object_count": 4,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -16040,11 +16292,12 @@
           "TSPE-SUITES-LIMITES-RE-C3"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TSPE-SUITLIM-ALG-017",
           "TSPE-SUITLIM-ME-001",
           "TSPE-SUITLIM-ME-003"
         ]
       },
-      "object_count": 21,
+      "object_count": 22,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -16169,10 +16422,11 @@
           "TSPE-SUITES-LIMITES-RE-C1"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TSPE-SUITLIM-ALG-017",
           "TSPE-SUITLIM-ME-001"
         ]
       },
-      "object_count": 26,
+      "object_count": 27,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -16286,10 +16540,11 @@
           "TSPE-SUITES-LIMITES-RE-C3"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TSPE-SUITLIM-ALG-017",
           "TSPE-SUITLIM-ME-003"
         ]
       },
-      "object_count": 22,
+      "object_count": 23,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -16539,18 +16794,18 @@
       "official_normativity": "ILLUSTRATIVE_EXAMPLE",
       "mandatory": false,
       "internal_atoms": [],
-      "evidence_kind": "CONTENT_MATCH_MANUAL_WIDE",
+      "evidence_kind": "CONTENT_MATCH",
       "matched_terms": [
         "recherche",
         "seuils"
       ],
       "missing_terms": [],
       "chapters": [
-        "TSPE-PROBABILITES"
+        "TSPE-SUITES-LIMITES"
       ],
       "objects_by_role": {
-        "PRIMARY_TEACHING": [
-          "TSPE-PROBA-CR-012"
+        "SUPPORTING_EVIDENCE": [
+          "TSPE-SUITLIM-ALG-017"
         ]
       },
       "object_count": 1,
@@ -16569,17 +16824,23 @@
       "official_normativity": "ILLUSTRATIVE_EXAMPLE",
       "mandatory": false,
       "internal_atoms": [],
-      "evidence_kind": null,
-      "matched_terms": [],
-      "missing_terms": [
+      "evidence_kind": "CONTENT_MATCH",
+      "matched_terms": [
         "approchees",
         "recherche"
       ],
-      "chapters": [],
-      "objects_by_role": {},
-      "object_count": 0,
-      "coverage_status": "MISSING",
-      "coverage_reason": "aucun objet du manuel ne porte cet attendu",
+      "missing_terms": [],
+      "chapters": [
+        "TSPE-SUITES-LIMITES"
+      ],
+      "objects_by_role": {
+        "SUPPORTING_EVIDENCE": [
+          "TSPE-SUITLIM-ALG-017"
+        ]
+      },
+      "object_count": 1,
+      "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
+      "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
     },
     {
@@ -16633,6 +16894,7 @@
           "TSPE-SUITES-LIMITES-FR-R3"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TSPE-SUITLIM-ALG-017",
           "TSPE-SUITLIM-ME-001",
           "TSPE-SUITLIM-ME-002",
           "TSPE-SUITLIM-ME-003",
@@ -16640,7 +16902,7 @@
           "TSPE-SUITLIM-ME-005"
         ]
       },
-      "object_count": 23,
+      "object_count": 24,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -17257,6 +17519,7 @@
       ],
       "missing_terms": [],
       "chapters": [
+        "TSPE-CALCUL-INTEGRAL",
         "TSPE-CONTINUITE",
         "TSPE-DERIVATION-CONVEXITE",
         "TSPE-LOGARITHME",
@@ -17275,9 +17538,12 @@
         "REINVESTMENT": [
           "TSPE-CONTIN-CO-032",
           "TSPE-DERCONV-CO-029"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "TSPE-INTEG-ALG-017"
         ]
       },
-      "object_count": 7,
+      "object_count": 8,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -17375,10 +17641,11 @@
           "TSPE-DERCONV-ME-003",
           "TSPE-DERCONV-ME-004",
           "TSPE-GEOESPACE-ME-010",
+          "TSPE-INTEG-ALG-017",
           "TSPE-LIMFCT-ME-002"
         ]
       },
-      "object_count": 42,
+      "object_count": 43,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -18105,15 +18372,17 @@
           "TSPE-DERCONV-ME-003",
           "TSPE-DERCONV-ME-004",
           "TSPE-DERCONV-ME-005",
+          "TSPE-INTEG-ALG-017",
           "TSPE-INTEG-ME-001",
           "TSPE-INTEG-ME-003",
           "TSPE-INTEG-ME-004",
           "TSPE-LOG-ME-002",
+          "TSPE-PRIMEQ-ALG-015",
           "TSPE-PRIMEQ-ME-001",
           "TSPE-TRIGO-ME-002"
         ]
       },
-      "object_count": 210,
+      "object_count": 212,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -18845,6 +19114,7 @@
         "TSPE-GEOMETRIE-ESPACE",
         "TSPE-LOGARITHME",
         "TSPE-PROBABILITES",
+        "TSPE-SUITES-LIMITES",
         "TSPE-TRANSVERSAL"
       ],
       "objects_by_role": {
@@ -18868,10 +19138,11 @@
           "TSPE-DERIVATION-CONVEXITE-FR-R5"
         ],
         "SUPPORTING_EVIDENCE": [
-          "TSPE-LOG-ME-001"
+          "TSPE-LOG-ME-001",
+          "TSPE-SUITLIM-ALG-017"
         ]
       },
-      "object_count": 14,
+      "object_count": 15,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -19153,10 +19424,11 @@
           "TSPE-LIMFCT-ME-001",
           "TSPE-LIMFCT-ME-003",
           "TSPE-LOG-ME-002",
+          "TSPE-SUITLIM-ALG-017",
           "TSPE-SUITLIM-ME-005"
         ]
       },
-      "object_count": 72,
+      "object_count": 73,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -19362,14 +19634,18 @@
         "briggs"
       ],
       "chapters": [
-        "TSPE-CONTINUITE"
+        "TSPE-CONTINUITE",
+        "TSPE-SUITES-LIMITES"
       ],
       "objects_by_role": {
         "PRIMARY_TEACHING": [
           "TSPE-CONTIN-CR-010"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "TSPE-SUITLIM-ALG-017"
         ]
       },
-      "object_count": 1,
+      "object_count": 2,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -19787,6 +20063,7 @@
           "TSPE-LIMFCT-ME-002",
           "TSPE-LIMFCT-ME-003",
           "TSPE-LOG-ME-002",
+          "TSPE-SUITLIM-ALG-017",
           "TSPE-SUITLIM-ME-001",
           "TSPE-SUITLIM-ME-002",
           "TSPE-SUITLIM-ME-003",
@@ -19794,7 +20071,7 @@
           "TSPE-SUITLIM-ME-005"
         ]
       },
-      "object_count": 362,
+      "object_count": 363,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -19962,8 +20239,10 @@
       ],
       "missing_terms": [],
       "chapters": [
+        "TSPE-CALCUL-INTEGRAL",
         "TSPE-CONTINUITE",
-        "TSPE-DERIVATION-CONVEXITE"
+        "TSPE-DERIVATION-CONVEXITE",
+        "TSPE-PRIMITIVES-EQDIFF"
       ],
       "objects_by_role": {
         "ASSESSMENT": [
@@ -20023,10 +20302,12 @@
         ],
         "SUPPORTING_EVIDENCE": [
           "TSPE-DERCONV-ME-003",
-          "TSPE-DERCONV-ME-004"
+          "TSPE-DERCONV-ME-004",
+          "TSPE-INTEG-ALG-017",
+          "TSPE-PRIMEQ-ALG-015"
         ]
       },
-      "object_count": 49,
+      "object_count": 51,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -20143,12 +20424,12 @@
       "internal_atoms": [],
       "evidence_kind": "CONTENT_MATCH",
       "matched_terms": [
+        "courbes",
         "differentielle",
         "equation"
       ],
       "missing_terms": [
-        "allure",
-        "courbes"
+        "allure"
       ],
       "chapters": [
         "TSPE-PRIMITIVES-EQDIFF"
@@ -20171,10 +20452,11 @@
           "TSPE-PRIMEQ-EX-008"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TSPE-PRIMEQ-ALG-015",
           "TSPE-PRIMEQ-ME-002"
         ]
       },
-      "object_count": 11,
+      "object_count": 12,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -20219,10 +20501,11 @@
           "TSPE-PRIMITIVES-EQDIFF-RE-C1"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TSPE-PRIMEQ-ALG-015",
           "TSPE-PRIMEQ-ME-001"
         ]
       },
-      "object_count": 12,
+      "object_count": 13,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -20265,10 +20548,11 @@
           "TSPE-PRIMITIVES-EQDIFF-RE-C2"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TSPE-PRIMEQ-ALG-015",
           "TSPE-PRIMEQ-ME-002"
         ]
       },
-      "object_count": 10,
+      "object_count": 11,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -20444,21 +20728,23 @@
       "internal_atoms": [],
       "evidence_kind": "CONTENT_MATCH",
       "matched_terms": [
+        "euler",
         "methode",
         "resolution"
       ],
-      "missing_terms": [
-        "euler"
-      ],
+      "missing_terms": [],
       "chapters": [
         "TSPE-PRIMITIVES-EQDIFF"
       ],
       "objects_by_role": {
         "PRIMARY_TEACHING": [
           "TSPE-PRIMEQ-CR-014"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "TSPE-PRIMEQ-ALG-015"
         ]
       },
-      "object_count": 1,
+      "object_count": 2,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -20484,11 +20770,10 @@
         "integrale",
         "notation",
         "positive",
-        "representative"
-      ],
-      "missing_terms": [
+        "representative",
         "segment"
       ],
+      "missing_terms": [],
       "chapters": [
         "TSPE-CALCUL-INTEGRAL"
       ],
@@ -20504,9 +20789,12 @@
         ],
         "REINVESTMENT": [
           "TSPE-INTEG-CO-010"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "TSPE-INTEG-ALG-017"
         ]
       },
-      "object_count": 6,
+      "object_count": 7,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -20850,10 +21138,11 @@
           "TSPE-INTEG-EX-001"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TSPE-INTEG-ALG-017",
           "TSPE-INTEG-ME-003"
         ]
       },
-      "object_count": 7,
+      "object_count": 8,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -20940,10 +21229,11 @@
           "TSPE-INTEG-EX-003"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TSPE-INTEG-ALG-017",
           "TSPE-INTEG-ME-003"
         ]
       },
-      "object_count": 7,
+      "object_count": 8,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -21236,11 +21526,12 @@
           "TSPE-INTEG-EX-001"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TSPE-INTEG-ALG-017",
           "TSPE-INTEG-ME-003",
           "TSPE-INTEG-ME-004"
         ]
       },
-      "object_count": 13,
+      "object_count": 14,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -21259,12 +21550,11 @@
       "evidence_kind": "CONTENT_MATCH",
       "matched_terms": [
         "methodes",
+        "milieux",
         "rectangles",
         "trapezes"
       ],
-      "missing_terms": [
-        "milieux"
-      ],
+      "missing_terms": [],
       "chapters": [
         "TSPE-CALCUL-INTEGRAL"
       ],
@@ -21272,9 +21562,12 @@
         "REINVESTMENT": [
           "TSPE-INTEG-CO-007",
           "TSPE-INTEG-EX-007"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "TSPE-INTEG-ALG-017"
         ]
       },
-      "object_count": 2,
+      "object_count": 3,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -21542,11 +21835,12 @@
           "TSPE-PROBA-EX-002"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TSPE-COMBI-ALG-015",
           "TSPE-PROBA-ALG-017",
           "TSPE-PROBA-ME-001"
         ]
       },
-      "object_count": 8,
+      "object_count": 9,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -21822,10 +22116,12 @@
       ],
       "chapters": [
         "TSPE-CALCUL-INTEGRAL",
+        "TSPE-COMBINATOIRE",
         "TSPE-CONTINUITE",
         "TSPE-DERIVATION-CONVEXITE",
         "TSPE-GEOMETRIE-ESPACE",
         "TSPE-LIMITES-FONCTIONS",
+        "TSPE-PRIMITIVES-EQDIFF",
         "TSPE-PROBABILITES",
         "TSPE-SUITES-LIMITES",
         "TSPE-TRANSVERSAL"
@@ -21860,10 +22156,13 @@
           "TSPE-PROBA-EX-061"
         ],
         "SUPPORTING_EVIDENCE": [
-          "TSPE-CONCLGN-ALG-018"
+          "TSPE-COMBI-ALG-015",
+          "TSPE-CONCLGN-ALG-018",
+          "TSPE-PRIMEQ-ALG-015",
+          "TSPE-SUITLIM-ALG-017"
         ]
       },
-      "object_count": 23,
+      "object_count": 26,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -22057,12 +22356,13 @@
           "TSPE-GEOESPACE-ME-008",
           "TSPE-GEOESPACE-ME-009",
           "TSPE-GEOESPACE-ME-010",
+          "TSPE-SUITLIM-ALG-017",
           "TSPE-SUITLIM-ME-001",
           "TSPE-SUITLIM-ME-003",
           "TSPE-TRIGO-ME-002"
         ]
       },
-      "object_count": 110,
+      "object_count": 111,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -22668,6 +22968,7 @@
           "TSPE-LIMITES-FONCTIONS-FR-R5"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TSPE-COMBI-ALG-015",
           "TSPE-COMBI-ME-001",
           "TSPE-CONCLGN-ALG-018",
           "TSPE-DERCONV-ME-002",
@@ -22676,10 +22977,11 @@
           "TSPE-INTEG-ME-004",
           "TSPE-LIMFCT-ME-001",
           "TSPE-PROBA-ALG-017",
+          "TSPE-SUITLIM-ALG-017",
           "TSPE-SUITLIM-ME-005"
         ]
       },
-      "object_count": 33,
+      "object_count": 35,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -22881,6 +23183,7 @@
         "TSPE-CALCUL-INTEGRAL",
         "TSPE-CONTINUITE",
         "TSPE-GEOMETRIE-ESPACE",
+        "TSPE-PRIMITIVES-EQDIFF",
         "TSPE-PROBABILITES"
       ],
       "objects_by_role": {
@@ -22899,10 +23202,11 @@
           "TSPE-GEOMETRIE-ESPACE-RE-C8"
         ],
         "SUPPORTING_EVIDENCE": [
-          "TSPE-CONTIN-ME-005"
+          "TSPE-CONTIN-ME-005",
+          "TSPE-PRIMEQ-ALG-015"
         ]
       },
-      "object_count": 7,
+      "object_count": 8,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -23101,9 +23405,12 @@
           "TSPE-COMBI-CR-010",
           "TSPE-TRANSVERSAL-LOGIQUE_RAISONNEMENT",
           "TSPE-TRANSVERSAL-MEMO_PYTHON"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "TSPE-COMBI-ALG-015"
         ]
       },
-      "object_count": 5,
+      "object_count": 6,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -23947,10 +24254,11 @@
           "TCOMPL-MODELES-EVOLUTION-QCM"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-005"
         ]
       },
-      "object_count": 2,
+      "object_count": 3,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -24023,10 +24331,11 @@
           "TCOMPL-ME-CO-004"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-005"
         ]
       },
-      "object_count": 4,
+      "object_count": 5,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -24264,12 +24573,13 @@
           "TCOMPL-ME-CO-005"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-001",
           "TCOMPL-ME-ME-004",
           "TCOMPL-ME-ME-005"
         ]
       },
-      "object_count": 6,
+      "object_count": 7,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -24319,13 +24629,14 @@
           "TCOMPL-ME-EX-032"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-002",
           "TCOMPL-ME-ME-003",
           "TCOMPL-ME-ME-004",
           "TCOMPL-ME-ME-006"
         ]
       },
-      "object_count": 22,
+      "object_count": 23,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -24372,6 +24683,7 @@
           "TCOMPL-ME-EX-032"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-001",
           "TCOMPL-ME-ME-002",
           "TCOMPL-ME-ME-003",
@@ -24379,7 +24691,7 @@
           "TCOMPL-ME-ME-006"
         ]
       },
-      "object_count": 19,
+      "object_count": 20,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -24395,17 +24707,23 @@
       "official_normativity": "ILLUSTRATIVE_EXAMPLE",
       "mandatory": false,
       "internal_atoms": [],
-      "evidence_kind": null,
-      "matched_terms": [],
-      "missing_terms": [
+      "evidence_kind": "CONTENT_MATCH",
+      "matched_terms": [
         "recherche",
         "seuils"
       ],
-      "chapters": [],
-      "objects_by_role": {},
-      "object_count": 0,
-      "coverage_status": "MISSING",
-      "coverage_reason": "aucun objet du manuel ne porte cet attendu",
+      "missing_terms": [],
+      "chapters": [
+        "TCOMPL-MODELES-EVOLUTION"
+      ],
+      "objects_by_role": {
+        "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015"
+        ]
+      },
+      "object_count": 1,
+      "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
+      "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
     },
     {
@@ -24419,17 +24737,23 @@
       "official_normativity": "ILLUSTRATIVE_EXAMPLE",
       "mandatory": false,
       "internal_atoms": [],
-      "evidence_kind": null,
-      "matched_terms": [],
-      "missing_terms": [
+      "evidence_kind": "CONTENT_MATCH",
+      "matched_terms": [
         "euler",
         "methode"
       ],
-      "chapters": [],
-      "objects_by_role": {},
-      "object_count": 0,
-      "coverage_status": "MISSING",
-      "coverage_reason": "aucun objet du manuel ne porte cet attendu",
+      "missing_terms": [],
+      "chapters": [
+        "TCOMPL-MODELES-EVOLUTION"
+      ],
+      "objects_by_role": {
+        "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015"
+        ]
+      },
+      "object_count": 1,
+      "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
+      "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
     },
     {
@@ -24446,6 +24770,7 @@
       "evidence_kind": "CONTENT_MATCH",
       "matched_terms": [
         "besoins",
+        "extraction",
         "methodes",
         "multiplication",
         "racine",
@@ -24456,7 +24781,6 @@
         "conduit",
         "developpement",
         "division",
-        "extraction",
         "facilitant",
         "influence",
         "navigation",
@@ -24471,9 +24795,12 @@
       "objects_by_role": {
         "PRIMARY_TEACHING": [
           "TCOMPL-LOG-CR-011"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "TCOMPL-LOGHIST-ALG-015"
         ]
       },
-      "object_count": 1,
+      "object_count": 2,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -24698,10 +25025,11 @@
           "TCOMPL-LOG-ME-002",
           "TCOMPL-LOG-ME-003",
           "TCOMPL-LOG-ME-004",
-          "TCOMPL-LOG-ME-005"
+          "TCOMPL-LOG-ME-005",
+          "TCOMPL-LOGHIST-ALG-015"
         ]
       },
-      "object_count": 34,
+      "object_count": 35,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -24746,17 +25074,23 @@
       "official_normativity": "ILLUSTRATIVE_EXAMPLE",
       "mandatory": false,
       "internal_atoms": [],
-      "evidence_kind": null,
-      "matched_terms": [],
-      "missing_terms": [
+      "evidence_kind": "CONTENT_MATCH",
+      "matched_terms": [
         "algorithme",
         "briggs"
       ],
-      "chapters": [],
-      "objects_by_role": {},
-      "object_count": 0,
-      "coverage_status": "MISSING",
-      "coverage_reason": "aucun objet du manuel ne porte cet attendu",
+      "missing_terms": [],
+      "chapters": [
+        "TCOMPL-LOGARITHME-HISTORIQUE"
+      ],
+      "objects_by_role": {
+        "SUPPORTING_EVIDENCE": [
+          "TCOMPL-LOGHIST-ALG-015"
+        ]
+      },
+      "object_count": 1,
+      "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
+      "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
     },
     {
@@ -24770,20 +25104,26 @@
       "official_normativity": "ILLUSTRATIVE_EXAMPLE",
       "mandatory": false,
       "internal_atoms": [],
-      "evidence_kind": null,
-      "matched_terms": [],
-      "missing_terms": [
+      "evidence_kind": "CONTENT_MATCH",
+      "matched_terms": [
         "algorithme",
         "approximation",
         "brouncker",
         "dichotomie",
         "selon"
       ],
-      "chapters": [],
-      "objects_by_role": {},
-      "object_count": 0,
-      "coverage_status": "MISSING",
-      "coverage_reason": "aucun objet du manuel ne porte cet attendu",
+      "missing_terms": [],
+      "chapters": [
+        "TCOMPL-LOGARITHME-HISTORIQUE"
+      ],
+      "objects_by_role": {
+        "SUPPORTING_EVIDENCE": [
+          "TCOMPL-LOGHIST-ALG-015"
+        ]
+      },
+      "object_count": 1,
+      "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
+      "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
     },
     {
@@ -24797,19 +25137,26 @@
       "official_normativity": "OPTIONAL_ENRICHMENT",
       "mandatory": false,
       "internal_atoms": [],
-      "evidence_kind": null,
-      "matched_terms": [],
+      "evidence_kind": "CONTENT_MATCH",
+      "matched_terms": [
+        "methode",
+        "parabole"
+      ],
       "missing_terms": [
         "archimede",
-        "methode",
-        "parabole",
         "quadrature"
       ],
-      "chapters": [],
-      "objects_by_role": {},
-      "object_count": 0,
-      "coverage_status": "MISSING",
-      "coverage_reason": "aucun objet du manuel ne porte cet attendu",
+      "chapters": [
+        "TCOMPL-CALCULS-AIRES"
+      ],
+      "objects_by_role": {
+        "SUPPORTING_EVIDENCE": [
+          "TCOMPL-AIR-ALG-015"
+        ]
+      },
+      "object_count": 1,
+      "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
+      "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
     },
     {
@@ -24881,13 +25228,14 @@
           "TCOMPL-AIR-CR-011"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-AIR-ALG-015",
           "TCOMPL-AIR-ME-001",
           "TCOMPL-AIR-ME-002",
           "TCOMPL-AIR-ME-003",
           "TCOMPL-AIR-ME-006"
         ]
       },
-      "object_count": 7,
+      "object_count": 8,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -24905,14 +25253,13 @@
       "internal_atoms": [],
       "evidence_kind": "CONTENT_MATCH",
       "matched_terms": [
+        "carlo",
         "courbe",
         "estimation",
         "methode",
         "monte"
       ],
-      "missing_terms": [
-        "carlo"
-      ],
+      "missing_terms": [],
       "chapters": [
         "TCOMPL-CALCULS-AIRES",
         "TCOMPL-MODELES-EVOLUTION"
@@ -24922,11 +25269,13 @@
           "TCOMPL-AIR-CR-011"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-AIR-ALG-015",
           "TCOMPL-AIR-ME-002",
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-003"
         ]
       },
-      "object_count": 3,
+      "object_count": 5,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -24998,13 +25347,14 @@
           "TCOMPL-ME-EX-032"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-002",
           "TCOMPL-ME-ME-003",
           "TCOMPL-ME-ME-004",
           "TCOMPL-ME-ME-006"
         ]
       },
-      "object_count": 19,
+      "object_count": 20,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -25096,6 +25446,7 @@
           "TCOMPL-CALCULS-AIRES-RE-C4"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-AIR-ALG-015",
           "TCOMPL-AIR-ME-002",
           "TCOMPL-AIR-ME-003",
           "TCOMPL-AIR-ME-004",
@@ -25103,7 +25454,7 @@
           "TCOMPL-AIR-ME-006"
         ]
       },
-      "object_count": 22,
+      "object_count": 23,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -25146,10 +25497,11 @@
         "SUPPORTING_EVIDENCE": [
           "TCOMPL-AIR-ME-005",
           "TCOMPL-AIR-ME-006",
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-005"
         ]
       },
-      "object_count": 10,
+      "object_count": 11,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -25244,6 +25596,7 @@
           "TCOMPL-TEMPS-ATTENTE-RE-C5"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-001",
           "TCOMPL-ATT-ME-002",
           "TCOMPL-ATT-ME-003",
@@ -25259,7 +25612,7 @@
           "TCOMPL-ECH-ME-005"
         ]
       },
-      "object_count": 70,
+      "object_count": 71,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -25313,6 +25666,7 @@
           "TCOMPL-ME-EX-032"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-001",
           "TCOMPL-ME-ME-002",
           "TCOMPL-ME-ME-003",
@@ -25321,7 +25675,7 @@
           "TCOMPL-ME-ME-006"
         ]
       },
-      "object_count": 25,
+      "object_count": 26,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -25337,23 +25691,21 @@
       "official_normativity": "ILLUSTRATIVE_EXAMPLE",
       "mandatory": false,
       "internal_atoms": [],
-      "evidence_kind": "CONTENT_MATCH_MANUAL_WIDE",
+      "evidence_kind": "CONTENT_MATCH",
       "matched_terms": [
         "approchee",
-        "precision"
-      ],
-      "missing_terms": [
+        "precision",
         "recherche"
       ],
+      "missing_terms": [],
       "chapters": [
-        "TCOMPL-MODELES-FONCTION"
+        "TCOMPL-CALCULS-AIRES",
+        "TCOMPL-MODELES-EVOLUTION"
       ],
       "objects_by_role": {
-        "PRIMARY_TEACHING": [
-          "TCOMPL-MF-CR-010"
-        ],
         "SUPPORTING_EVIDENCE": [
-          "TCOMPL-MF-ME-003"
+          "TCOMPL-AIR-ALG-015",
+          "TCOMPL-ME-ALG-015"
         ]
       },
       "object_count": 2,
@@ -25560,6 +25912,7 @@
           "TCOMPL-TEMPS-ATTENTE-RE-C5"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-001",
           "TCOMPL-ATT-ME-002",
           "TCOMPL-ATT-ME-007",
@@ -25573,7 +25926,7 @@
           "TCOMPL-MF-ME-007"
         ]
       },
-      "object_count": 40,
+      "object_count": 41,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -26109,6 +26462,7 @@
           "TCOMPL-ECHANTILLONNAGE-RE-C3"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-001",
           "TCOMPL-ATT-ME-002",
           "TCOMPL-ATT-ME-003",
@@ -26120,7 +26474,7 @@
           "TCOMPL-ECH-ME-005"
         ]
       },
-      "object_count": 24,
+      "object_count": 25,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -26160,11 +26514,12 @@
           "TCOMPL-ECH-CO-005"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-001",
           "TCOMPL-ECH-ME-001"
         ]
       },
-      "object_count": 8,
+      "object_count": 9,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -26204,11 +26559,12 @@
           "TCOMPL-ECH-EX-005"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-001",
           "TCOMPL-ECH-ME-001"
         ]
       },
-      "object_count": 7,
+      "object_count": 8,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -26276,11 +26632,11 @@
         "pascal",
         "probabilite",
         "probabilites",
+        "superieure",
         "triangle"
       ],
       "missing_terms": [
-        "cadre",
-        "superieure"
+        "cadre"
       ],
       "chapters": [
         "TCOMPL-ECHANTILLONNAGE",
@@ -26305,6 +26661,7 @@
           "TCOMPL-ECH-EX-005"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-001",
           "TCOMPL-ATT-ME-007",
           "TCOMPL-ECH-ME-001",
@@ -26312,7 +26669,7 @@
           "TCOMPL-ECH-ME-003"
         ]
       },
-      "object_count": 16,
+      "object_count": 17,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -26372,15 +26729,15 @@
       "evidence_kind": "CONTENT_MATCH",
       "matched_terms": [
         "aleatoire",
+        "atome",
         "duree",
         "exponentielle",
+        "radioactif",
         "suivant",
         "variable"
       ],
       "missing_terms": [
-        "atome",
-        "discretisation",
-        "radioactif"
+        "discretisation"
       ],
       "chapters": [
         "TCOMPL-TEMPS-ATTENTE"
@@ -26397,9 +26754,12 @@
         ],
         "REMEDIATION": [
           "TCOMPL-TEMPS-ATTENTE-RE-C5"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015"
         ]
       },
-      "object_count": 4,
+      "object_count": 5,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -26452,11 +26812,12 @@
           "TCOMPL-TEMPS-ATTENTE-RE-C5"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-004",
           "TCOMPL-ATT-ME-007"
         ]
       },
-      "object_count": 7,
+      "object_count": 8,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -26496,10 +26857,11 @@
           "TCOMPL-ATT-CR-012"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-007"
         ]
       },
-      "object_count": 4,
+      "object_count": 5,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -26589,10 +26951,11 @@
           "TCOMPL-ATT-CO-007"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-004"
         ]
       },
-      "object_count": 4,
+      "object_count": 5,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -26640,13 +27003,14 @@
           "TCOMPL-ATT-EX-038"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-001",
           "TCOMPL-ATT-ME-003",
           "TCOMPL-ATT-ME-004",
           "TCOMPL-ATT-ME-007"
         ]
       },
-      "object_count": 16,
+      "object_count": 17,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -26667,12 +27031,11 @@
         "aleatoire",
         "bernoulli",
         "geometrique",
+        "schema",
+        "simulation",
         "variable"
       ],
-      "missing_terms": [
-        "schema",
-        "simulation"
-      ],
+      "missing_terms": [],
       "chapters": [
         "TCOMPL-TEMPS-ATTENTE"
       ],
@@ -26685,10 +27048,11 @@
           "TCOMPL-ATT-CR-011"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-001"
         ]
       },
-      "object_count": 4,
+      "object_count": 5,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -26724,11 +27088,12 @@
           "TCOMPL-ATT-EX-038"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-006",
           "TCOMPL-ATT-ME-007"
         ]
       },
-      "object_count": 6,
+      "object_count": 7,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -26744,22 +27109,21 @@
       "official_normativity": "ILLUSTRATIVE_EXAMPLE",
       "mandatory": false,
       "internal_atoms": [],
-      "evidence_kind": "CONTENT_MATCH_MANUAL_WIDE",
+      "evidence_kind": "CONTENT_MATCH",
       "matched_terms": [
+        "atomes",
         "echantillon",
         "grande",
+        "radioactifs",
         "taille"
       ],
-      "missing_terms": [
-        "atomes",
-        "radioactifs"
-      ],
+      "missing_terms": [],
       "chapters": [
-        "TCOMPL-ECHANTILLONNAGE"
+        "TCOMPL-TEMPS-ATTENTE"
       ],
       "objects_by_role": {
-        "ASSESSMENT": [
-          "TCOMPL-ECHANTILLONNAGE-QCM"
+        "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015"
         ]
       },
       "object_count": 1,
@@ -27129,15 +27493,16 @@
         "differentielles",
         "equation",
         "equations",
+        "faire",
         "premiere",
         "resolution"
       ],
       "missing_terms": [
-        "faire",
         "notion",
         "primitive"
       ],
       "chapters": [
+        "TCOMPL-LOGARITHME-HISTORIQUE",
         "TCOMPL-MODELES-EVOLUTION",
         "TCOMPL-MODELES-FONCTION"
       ],
@@ -27150,11 +27515,13 @@
           "TCOMPL-ME-CR-012"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-LOGHIST-ALG-015",
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-005",
           "TCOMPL-MF-ME-002"
         ]
       },
-      "object_count": 5,
+      "object_count": 7,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -27314,12 +27681,13 @@
           "TCOMPL-ME-EX-032"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-002",
           "TCOMPL-ME-ME-004",
           "TCOMPL-ME-ME-006"
         ]
       },
-      "object_count": 21,
+      "object_count": 22,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -27375,12 +27743,13 @@
           "TCOMPL-ME-EX-032"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-002",
           "TCOMPL-ME-ME-004",
           "TCOMPL-ME-ME-006"
         ]
       },
-      "object_count": 19,
+      "object_count": 20,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -27475,10 +27844,11 @@
           "TCOMPL-ME-EX-005"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-001"
         ]
       },
-      "object_count": 9,
+      "object_count": 10,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -27602,10 +27972,11 @@
           "TCOMPL-ME-EX-002"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-004"
         ]
       },
-      "object_count": 7,
+      "object_count": 8,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -27661,12 +28032,13 @@
           "TCOMPL-ME-EX-032"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-002",
           "TCOMPL-ME-ME-004",
           "TCOMPL-ME-ME-006"
         ]
       },
-      "object_count": 19,
+      "object_count": 20,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -27682,17 +28054,23 @@
       "official_normativity": "ILLUSTRATIVE_EXAMPLE",
       "mandatory": false,
       "internal_atoms": [],
-      "evidence_kind": null,
-      "matched_terms": [],
-      "missing_terms": [
+      "evidence_kind": "CONTENT_MATCH",
+      "matched_terms": [
         "recherche",
         "seuils"
       ],
-      "chapters": [],
-      "objects_by_role": {},
-      "object_count": 0,
-      "coverage_status": "MISSING",
-      "coverage_reason": "aucun objet du manuel ne porte cet attendu",
+      "missing_terms": [],
+      "chapters": [
+        "TCOMPL-MODELES-EVOLUTION"
+      ],
+      "objects_by_role": {
+        "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015"
+        ]
+      },
+      "object_count": 1,
+      "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
+      "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
     },
     {
@@ -27739,6 +28117,7 @@
           "TCOMPL-ME-EX-032"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-001",
           "TCOMPL-ME-ME-002",
           "TCOMPL-ME-ME-003",
@@ -27746,7 +28125,7 @@
           "TCOMPL-ME-ME-006"
         ]
       },
-      "object_count": 19,
+      "object_count": 20,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -27765,11 +28144,11 @@
       "evidence_kind": "CONTENT_MATCH",
       "matched_terms": [
         "approchees",
-        "constantes"
+        "constantes",
+        "recherche"
       ],
       "missing_terms": [
-        "mathematiques",
-        "recherche"
+        "mathematiques"
       ],
       "chapters": [
         "TCOMPL-MODELES-EVOLUTION"
@@ -27780,9 +28159,12 @@
         ],
         "PRIMARY_TEACHING": [
           "TCOMPL-ME-CR-011"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015"
         ]
       },
-      "object_count": 2,
+      "object_count": 3,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -27801,6 +28183,7 @@
       "evidence_kind": "CONTENT_MATCH",
       "matched_terms": [
         "carre",
+        "carree",
         "continuite",
         "exponentielle",
         "inverse",
@@ -27811,7 +28194,6 @@
       ],
       "missing_terms": [
         "asymptotes",
-        "carree",
         "horizontales",
         "notion",
         "reference",
@@ -27837,10 +28219,11 @@
           "TCOMPL-LOG-EX-010"
         ],
         "SUPPORTING_EVIDENCE": [
-          "TCOMPL-LOG-ME-001"
+          "TCOMPL-LOG-ME-001",
+          "TCOMPL-LOGHIST-ALG-015"
         ]
       },
-      "object_count": 9,
+      "object_count": 10,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -27965,10 +28348,11 @@
           "TCOMPL-LOG-EX-010"
         ],
         "SUPPORTING_EVIDENCE": [
-          "TCOMPL-LOG-ME-001"
+          "TCOMPL-LOG-ME-001",
+          "TCOMPL-LOGHIST-ALG-015"
         ]
       },
-      "object_count": 11,
+      "object_count": 12,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -28089,6 +28473,7 @@
         "allure",
         "cadre",
         "carre",
+        "carree",
         "courbes",
         "exponentielle",
         "inverse",
@@ -28098,7 +28483,6 @@
         "representatives"
       ],
       "missing_terms": [
-        "carree",
         "resolution"
       ],
       "chapters": [
@@ -28120,10 +28504,11 @@
           "TCOMPL-LOG-EX-010"
         ],
         "SUPPORTING_EVIDENCE": [
-          "TCOMPL-LOG-ME-001"
+          "TCOMPL-LOG-ME-001",
+          "TCOMPL-LOGHIST-ALG-015"
         ]
       },
-      "object_count": 8,
+      "object_count": 9,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -28249,10 +28634,11 @@
           "TCOMPL-LOG-EX-006"
         ],
         "SUPPORTING_EVIDENCE": [
-          "TCOMPL-LOG-ME-002"
+          "TCOMPL-LOG-ME-002",
+          "TCOMPL-LOGHIST-ALG-015"
         ]
       },
-      "object_count": 11,
+      "object_count": 12,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -28485,11 +28871,12 @@
         ],
         "SUPPORTING_EVIDENCE": [
           "TCOMPL-LOG-ME-002",
+          "TCOMPL-LOGHIST-ALG-015",
           "TCOMPL-MF-ME-002",
           "TCOMPL-MF-ME-003"
         ]
       },
-      "object_count": 9,
+      "object_count": 10,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -28505,18 +28892,24 @@
       "official_normativity": "ILLUSTRATIVE_EXAMPLE",
       "mandatory": false,
       "internal_atoms": [],
-      "evidence_kind": null,
-      "matched_terms": [],
-      "missing_terms": [
+      "evidence_kind": "CONTENT_MATCH",
+      "matched_terms": [
         "algorithme",
         "briggs",
         "logarithmes"
       ],
-      "chapters": [],
-      "objects_by_role": {},
-      "object_count": 0,
-      "coverage_status": "MISSING",
-      "coverage_reason": "aucun objet du manuel ne porte cet attendu",
+      "missing_terms": [],
+      "chapters": [
+        "TCOMPL-LOGARITHME-HISTORIQUE"
+      ],
+      "objects_by_role": {
+        "SUPPORTING_EVIDENCE": [
+          "TCOMPL-LOGHIST-ALG-015"
+        ]
+      },
+      "object_count": 1,
+      "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
+      "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
     },
     {
@@ -28557,10 +28950,11 @@
           "TCOMPL-MODELES-EVOLUTION-RE-C5"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-005"
         ]
       },
-      "object_count": 6,
+      "object_count": 7,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -28640,9 +29034,12 @@
         ],
         "PRIMARY_TEACHING": [
           "TCOMPL-ME-CR-012"
+        ],
+        "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015"
         ]
       },
-      "object_count": 2,
+      "object_count": 3,
       "coverage_status": "COMPLETE",
       "coverage_reason": "`12_C3_equation_differentielle.tex` traite l'equation y' = ay + b et sa resolution.",
       "contradictory_review": {
@@ -28687,12 +29084,13 @@
           "TCOMPL-MODELES-EVOLUTION-RE-C5"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-003",
           "TCOMPL-ME-ME-004",
           "TCOMPL-ME-ME-005"
         ]
       },
-      "object_count": 8,
+      "object_count": 9,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -28785,10 +29183,11 @@
           "TCOMPL-MODELES-EVOLUTION-RE-C5"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-005"
         ]
       },
-      "object_count": 8,
+      "object_count": 9,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -28857,10 +29256,11 @@
           "TCOMPL-ME-CR-012"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-005"
         ]
       },
-      "object_count": 4,
+      "object_count": 5,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -28881,12 +29281,11 @@
         "approchee",
         "differentielle",
         "equation",
+        "euler",
         "methode",
         "resolution"
       ],
-      "missing_terms": [
-        "euler"
-      ],
+      "missing_terms": [],
       "chapters": [
         "TCOMPL-MODELES-EVOLUTION"
       ],
@@ -28899,10 +29298,11 @@
           "TCOMPL-ME-CR-012"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ME-ALG-015",
           "TCOMPL-ME-ME-005"
         ]
       },
-      "object_count": 4,
+      "object_count": 5,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -29205,10 +29605,11 @@
           "TCOMPL-AIR-EX-005"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-AIR-ALG-015",
           "TCOMPL-AIR-ME-001"
         ]
       },
-      "object_count": 7,
+      "object_count": 8,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -29248,13 +29649,14 @@
           "TCOMPL-AIR-CR-012"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-AIR-ALG-015",
           "TCOMPL-AIR-ME-001",
           "TCOMPL-AIR-ME-002",
           "TCOMPL-AIR-ME-003",
           "TCOMPL-AIR-ME-006"
         ]
       },
-      "object_count": 7,
+      "object_count": 8,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -29300,13 +29702,14 @@
           "TCOMPL-AIR-EX-011"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-AIR-ALG-015",
           "TCOMPL-AIR-ME-001",
           "TCOMPL-AIR-ME-002",
           "TCOMPL-AIR-ME-003",
           "TCOMPL-AIR-ME-006"
         ]
       },
-      "object_count": 14,
+      "object_count": 15,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -29458,6 +29861,7 @@
           "TCOMPL-CALCULS-AIRES-RE-C4"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-AIR-ALG-015",
           "TCOMPL-AIR-ME-001",
           "TCOMPL-AIR-ME-002",
           "TCOMPL-AIR-ME-003",
@@ -29466,7 +29870,7 @@
           "TCOMPL-AIR-ME-006"
         ]
       },
-      "object_count": 23,
+      "object_count": 24,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -29506,10 +29910,11 @@
           "TCOMPL-AIR-EX-006"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-AIR-ALG-015",
           "TCOMPL-AIR-ME-002"
         ]
       },
-      "object_count": 9,
+      "object_count": 10,
       "coverage_status": "COMPLETE",
       "coverage_reason": "enseigne et mis en pratique",
       "contradictory_review": null
@@ -29735,13 +30140,14 @@
           "TCOMPL-AIR-EX-010"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-AIR-ALG-015",
           "TCOMPL-AIR-ME-001",
           "TCOMPL-AIR-ME-002",
           "TCOMPL-AIR-ME-003",
           "TCOMPL-AIR-ME-006"
         ]
       },
-      "object_count": 12,
+      "object_count": 13,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -29757,20 +30163,19 @@
       "official_normativity": "ILLUSTRATIVE_EXAMPLE",
       "mandatory": false,
       "internal_atoms": [],
-      "evidence_kind": "CONTENT_MATCH_MANUAL_WIDE",
+      "evidence_kind": "CONTENT_MATCH",
       "matched_terms": [
+        "carlo",
         "methode",
         "monte"
       ],
-      "missing_terms": [
-        "carlo"
-      ],
+      "missing_terms": [],
       "chapters": [
-        "TCOMPL-MODELES-EVOLUTION"
+        "TCOMPL-CALCULS-AIRES"
       ],
       "objects_by_role": {
         "SUPPORTING_EVIDENCE": [
-          "TCOMPL-ME-ME-003"
+          "TCOMPL-AIR-ALG-015"
         ]
       },
       "object_count": 1,
@@ -29820,10 +30225,11 @@
           "TCOMPL-ECH-EX-038"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-007"
         ]
       },
-      "object_count": 14,
+      "object_count": 15,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -29866,10 +30272,11 @@
           "TCOMPL-ATT-CO-005"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-001"
         ]
       },
-      "object_count": 7,
+      "object_count": 8,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -29906,10 +30313,11 @@
           "TCOMPL-ATT-CO-001"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ECH-ME-001"
         ]
       },
-      "object_count": 3,
+      "object_count": 4,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -29961,13 +30369,14 @@
           "TCOMPL-ECH-EX-002"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-001",
           "TCOMPL-ECH-ME-001",
           "TCOMPL-ECH-ME-002",
           "TCOMPL-ECH-ME-005"
         ]
       },
-      "object_count": 12,
+      "object_count": 13,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -30021,13 +30430,14 @@
           "TCOMPL-ECH-EX-005"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-001",
           "TCOMPL-ECH-ME-001",
           "TCOMPL-ECH-ME-005",
           "TCOMPL-ECH-ME-006"
         ]
       },
-      "object_count": 11,
+      "object_count": 12,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -30067,10 +30477,11 @@
           "TCOMPL-ATT-EX-005"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-001"
         ]
       },
-      "object_count": 9,
+      "object_count": 10,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -30424,13 +30835,14 @@
           "TCOMPL-TEMPS-ATTENTE-RE-C5"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-001",
           "TCOMPL-ATT-ME-007",
           "TCOMPL-ECH-ME-001",
           "TCOMPL-ECH-ME-005"
         ]
       },
-      "object_count": 17,
+      "object_count": 18,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -30486,13 +30898,14 @@
           "TCOMPL-TEMPS-ATTENTE-RE-C5"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-001",
           "TCOMPL-ATT-ME-007",
           "TCOMPL-ECH-ME-001",
           "TCOMPL-ECH-ME-005"
         ]
       },
-      "object_count": 22,
+      "object_count": 23,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -30584,13 +30997,14 @@
           "TCOMPL-ATT-EX-038"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-001",
           "TCOMPL-ATT-ME-003",
           "TCOMPL-ATT-ME-004",
           "TCOMPL-ATT-ME-007"
         ]
       },
-      "object_count": 17,
+      "object_count": 18,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -30635,12 +31049,13 @@
           "TCOMPL-ATT-EX-039"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-004",
           "TCOMPL-ATT-ME-005",
           "TCOMPL-ATT-ME-007"
         ]
       },
-      "object_count": 10,
+      "object_count": 11,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -30726,10 +31141,11 @@
           "TCOMPL-ATT-EX-038"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-007"
         ]
       },
-      "object_count": 9,
+      "object_count": 10,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -30767,10 +31183,11 @@
           "TCOMPL-ATT-EX-007"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-004"
         ]
       },
-      "object_count": 7,
+      "object_count": 8,
       "coverage_status": "COMPLETE",
       "coverage_reason": "traite dans un objet de cours",
       "contradictory_review": null
@@ -30880,12 +31297,11 @@
         "aleatoire",
         "bernoulli",
         "lancer",
+        "simulation",
         "uniforme",
         "variable"
       ],
-      "missing_terms": [
-        "simulation"
-      ],
+      "missing_terms": [],
       "chapters": [
         "TCOMPL-TEMPS-ATTENTE"
       ],
@@ -30898,10 +31314,11 @@
           "TCOMPL-ATT-CR-012"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-001"
         ]
       },
-      "object_count": 4,
+      "object_count": 5,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null
@@ -30921,12 +31338,12 @@
       "matched_terms": [
         "aleatoires",
         "independantes",
+        "simulation",
         "somme",
         "variables"
       ],
       "missing_terms": [
-        "comportement",
-        "simulation"
+        "comportement"
       ],
       "chapters": [
         "TCOMPL-TEMPS-ATTENTE"
@@ -30936,10 +31353,11 @@
           "TCOMPL-ATT-CR-010"
         ],
         "SUPPORTING_EVIDENCE": [
+          "TCOMPL-ATT-ALG-015",
           "TCOMPL-ATT-ME-001"
         ]
       },
-      "object_count": 2,
+      "object_count": 3,
       "coverage_status": "OUT_OF_SCOPE_ENRICHMENT",
       "coverage_reason": "attendu non obligatoire",
       "contradictory_review": null

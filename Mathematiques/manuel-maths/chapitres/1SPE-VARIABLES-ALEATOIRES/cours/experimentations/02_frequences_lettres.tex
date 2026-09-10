@@ -31,3 +31,30 @@ les lettres les plus fréquentes. Les fréquences calculées décrivent les
 textes choisis : un extrait différent, même dans la même langue, peut donner
 un classement différent.
 }
+
+% BEGIN-VERIFY
+% from collections import Counter
+% from unicodedata import normalize
+%
+% def frequences_lettres(texte):
+%     decompose = normalize("NFD", texte.lower())
+%     lettres = [caractere for caractere in decompose if "a" <= caractere <= "z"]
+%     if not lettres:
+%         return {}
+%     effectifs = Counter(lettres)
+%     total = len(lettres)
+%     return {lettre: effectifs[lettre] / total for lettre in sorted(effectifs)}
+%
+% # Une loi de probabilite : des frequences positives dont la somme vaut 1.
+% loi = frequences_lettres("Il etait une fois")
+% assert all(0 < f <= 1 for f in loi.values())
+% assert abs(sum(loi.values()) - 1) < 1e-12
+% # La casse, les espaces et la ponctuation sont ignores.
+% assert frequences_lettres("Abc, abc !") == frequences_lettres("abcABC")
+% # Une lettre accentuee est ramenee a la lettre latine correspondante.
+% assert frequences_lettres("ete") == frequences_lettres("été")
+% assert sorted(frequences_lettres("été")) == ["e", "t"]
+% assert abs(frequences_lettres("été")["e"] - 2 / 3) < 1e-12
+% # Un texte sans lettre ne definit aucune loi.
+% assert frequences_lettres("123 ... !") == {}
+% END-VERIFY

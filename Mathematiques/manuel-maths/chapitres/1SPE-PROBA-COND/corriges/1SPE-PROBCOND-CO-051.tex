@@ -1,0 +1,62 @@
+% META: {"id":"1SPE-PROBCOND-CO-051","chapitre":"1SPE-PROBA-COND","type_objet":"corrige","exercice_id":"1SPE-PROBCOND-EX-051","status":"generated"}
+% BEGIN-VERIFY
+% from statistics import mean, median, pstdev
+% abonnes = [12, 15, 18, 20, 22, 25, 28, 30, 35, 45]
+% sans = [5, 7, 8, 9, 10, 12, 14, 16, 18, 26]
+% tous = abonnes + sans
+% assert mean(abonnes) == 25 and median(abonnes) == 23.5
+% assert mean(sans) == 12.5 and median(sans) == 11
+% assert round(pstdev(abonnes), 2) == 9.41 and round(pstdev(sans), 2) == 5.94
+% assert mean(tous) == 18.75 and median(tous) == 17
+% assert mean(tous) == (25 + 12.5) / 2
+% assert median(tous) != (23.5 + 11) / 2
+% pa_l = 6 / 10
+% pnona_l = 1 / 10
+% p_l = 7 / 20
+% assert pa_l == 0.6 and pnona_l == 0.1 and p_l == 0.35
+% # Formule des probabilites totales : P(L) = P(A)P_A(L) + P(nonA)P_nonA(L).
+% assert abs(0.5 * pa_l + 0.5 * pnona_l - p_l) < 1e-12
+% # Formule de Bayes.
+% assert abs(0.5 * pa_l / p_l - 6 / 7) < 1e-12
+% assert abs(6 / 7 - 0.857143) < 5e-7
+% END-VERIFY
+\begin{corrige}{1SPE-PROBCOND-EX-051}
+\begin{enumerate}
+\item \textbf{Abonnés :} moyenne $25$, médiane $23{,}5$, écart type
+  $\approx 9{,}41$.
+  \textbf{Non-abonnés :} moyenne $12{,}5$, médiane $11$, écart type
+  $\approx 5{,}94$.
+
+  Les abonnés se connectent deux fois plus longtemps en moyenne, et leurs
+  durées sont aussi \emph{plus dispersées} : l'écart type est presque le
+  double.
+
+\item Sur les $20$ durées : moyenne $18{,}75$ ; médiane $17$ (demi-somme des
+  dixième et onzième valeurs rangées dans l'ordre croissant).
+
+\item La moyenne globale \emph{est} ici la moyenne des deux moyennes,
+  $\dfrac{25 + 12{,}5}{2} = 18{,}75$, mais uniquement parce que les deux
+  groupes ont le \textbf{même effectif}. Avec des effectifs différents, il
+  faudrait pondérer.
+
+  La médiane globale, elle, vaut $17$, alors que la moyenne des deux médianes
+  vaut $\dfrac{23{,}5 + 11}{2} = 17{,}25$ : la médiane ne se combine pas de
+  cette façon, quels que soient les effectifs.
+
+\item Sur les $10$ abonnés, $6$ dépassent $20$ minutes :
+  $P_A(L) = 0{,}6$. Sur les $10$ non-abonnés, $1$ seul :
+  $P_{\overline{A}}(L) = 0{,}1$. Par la formule des probabilités totales,
+  \[
+    P(L) = 0{,}5 \times 0{,}6 + 0{,}5 \times 0{,}1 = 0{,}35 .
+  \]
+
+\item
+  \[
+    P_L(A) = \frac{P(A \cap L)}{P(L)} = \frac{0{,}5\times0{,}6}{0{,}35}
+    = \frac{6}{7} \approx 0{,}857 .
+  \]
+  Parmi les utilisateurs qui restent plus de $20$ minutes, environ $86\,\%$
+  sont abonnés. Attention au sens : ce n'est pas $P_A(L)$, qui vaut $0{,}6$.
+  Les deux probabilités conditionnelles ne répondent pas à la même question.
+\end{enumerate}
+\end{corrige}

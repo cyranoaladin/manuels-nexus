@@ -1,0 +1,38 @@
+% META: {"id":"1SPE-DERLOCAL-EX-051","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C3","1SPE-DERIVATION-LOCAL-C4"],"capacites_codes":["C3","C4"],"methodes":[],"parcours":1,"competences":["representer","raisonner"],"duree_min":12,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-051.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-051.tex","status":"generated"}
+% BEGIN-VERIFY
+% # Automatisme : passer du graphique aux donnees et reciproquement.
+% # Lecture : la tangente en A(2 ; 3) passe par B(0 ; 7).
+% pente = (3 - 7) / (2 - 0)
+% assert pente == -2.0
+% # Equation de la tangente : y = f'(a)(x - a) + f(a).
+% tangente = lambda x: pente * (x - 2) + 3
+% assert tangente(2) == 3
+% assert tangente(0) == 7
+% assert all(abs(tangente(x) - (-2 * x + 7)) < 1e-12 for x in (-3, 0, 2, 5))
+% # Retour au graphique : ordonnee a l'origine 7, coefficient directeur -2.
+% assert tangente(0) == 7 and tangente(1) - tangente(0) == pente
+% # Approximation affine au voisinage de 2.
+% assert abs(tangente(2.1) - 2.8) < 1e-12
+% assert abs(tangente(1.9) - 3.2) < 1e-12
+% # Une fonction possible : f(x) = -x^2 + 2x + 3 verifie les deux lectures.
+% f = lambda x: -x * x + 2 * x + 3
+% fprime = lambda x: -2 * x + 2
+% assert f(2) == 3
+% assert fprime(2) == -2
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-051}{1}{12}
+Sur un graphique, on lit la courbe $\mathcal{C}_f$ d'une fonction $f$
+dérivable, et sa tangente $T$ au point $A$ d'abscisse $2$. On relève deux
+points de cette tangente : $A(2\,;\,3)$ et $B(0\,;\,7)$.
+\begin{enumerate}
+\item \textbf{Du graphique aux données.} Déterminer $f(2)$ et $f'(2)$.
+\item En déduire l'équation réduite de la tangente $T$.
+\item \textbf{Des données au graphique.} On veut retrouver $T$ sans calcul :
+  quelle ordonnée à l'origine et quel coefficient directeur faut-il utiliser
+  pour la tracer ?
+\item Donner une valeur approchée de $f(2{,}1)$ et de $f(1{,}9)$ à l'aide de
+  l'approximation affine.
+\item Vérifier que la fonction $f(x) = -x^2 + 2x + 3$ est compatible avec les
+  deux lectures de la question 1.
+\end{enumerate}
+\end{exercice}

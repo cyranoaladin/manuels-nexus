@@ -151,6 +151,13 @@ SOURCES: tuple[tuple[str, str, tuple[str, ...]], ...] = (
         COVERAGE,
         ("summary", "NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK"),
     ),
+    # Montrer un programme ne suffit pas : encore faut-il que l'eleve puisse
+    # en faire quelque chose. Ce second compteur est la couche qualitative.
+    (
+        "NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_ACTIONABLE_WORK",
+        COVERAGE,
+        ("summary", "NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_ACTIONABLE_WORK"),
+    ),
     (
         "NORMATIVITY_CREATED_BY_ATOMIZATION",
         NORMATIVITE,
@@ -289,11 +296,6 @@ SOURCES: tuple[tuple[str, str, tuple[str, ...]], ...] = (
         "INVALIDATED_APPROVALS_AWAITING_HUMAN_REVIEW",
         RECUS_APPROBATION,
         ("summary", "INVALIDATED_APPROVALS_AWAITING_HUMAN_REVIEW"),
-    ),
-    (
-        "NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK",
-        COVERAGE,
-        ("summary", "NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK"),
     ),
 )
 

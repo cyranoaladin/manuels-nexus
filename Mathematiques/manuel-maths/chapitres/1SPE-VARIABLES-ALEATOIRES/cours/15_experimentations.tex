@@ -38,6 +38,40 @@ Ces résultats sont des calculs exacts à l'arrondi d'affichage près : ils
 proviennent de la loi donnée, sans simulation.
 }
 
+% BEGIN-VERIFY
+% from math import sqrt
+%
+% def caracteristiques(valeurs, probabilites):
+%     if len(valeurs) == 0 or len(valeurs) != len(probabilites):
+%         raise ValueError("la loi doit contenir autant de valeurs que de probabilites")
+%     if any(p < 0 for p in probabilites):
+%         raise ValueError("les probabilites doivent etre positives")
+%     if abs(sum(probabilites) - 1) > 1e-12:
+%         raise ValueError("la somme des probabilites doit valoir 1")
+%     esperance = sum(x * p for x, p in zip(valeurs, probabilites))
+%     variance = sum((x - esperance) ** 2 * p for x, p in zip(valeurs, probabilites))
+%     return esperance, variance, sqrt(variance)
+%
+% esperance, variance, ecart_type = caracteristiques((-2, 1, 4), (0.2, 0.5, 0.3))
+% assert abs(esperance - 1.3) < 1e-12
+% assert abs(variance - 4.41) < 1e-12
+% assert abs(ecart_type - 2.1) < 1e-12
+% # La formule de Koenig-Huygens donne la meme variance.
+% moment2 = sum(x * x * p for x, p in zip((-2, 1, 4), (0.2, 0.5, 0.3)))
+% assert abs(moment2 - esperance ** 2 - variance) < 1e-12
+% # Une variable certaine a une variance nulle.
+% assert caracteristiques((7,), (1.0,)) == (7.0, 0.0, 0.0)
+% # Les preconditions sont verifiees.
+% for mauvaise in (((), ()), ((1, 2), (0.5,)), ((1, 2), (-0.5, 1.5)),
+%                  ((1, 2), (0.4, 0.4))):
+%     try:
+%         caracteristiques(*mauvaise)
+%     except ValueError:
+%         pass
+%     else:
+%         raise AssertionError("la loi invalide aurait du etre refusee")
+% END-VERIFY
+
 \input{chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex}
 \input{chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex}
 \input{chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex}

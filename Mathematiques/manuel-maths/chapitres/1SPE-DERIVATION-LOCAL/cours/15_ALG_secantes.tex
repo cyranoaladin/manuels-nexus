@@ -1,0 +1,129 @@
+% META: {"id": "1SPE-DERLOCAL-ALG-015", "chapitre": "1SPE-DERIVATION-LOCAL", "type_objet": "algorithme", "capacites_codes": ["C1", "C2"], "programme_alignment": "OFFICIAL_ALGORITHM_EXAMPLE", "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+\section{Algorithmique : la liste des pentes des sécantes}
+
+% ============================================================
+% STRATE 1 --- Probleme, modele, algorithme
+% ============================================================
+
+\margeAppui{
+Le programme cite parmi ses \textbf{exemples d'algorithme} : « Ecrire la liste
+des coefficients directeurs des secantes pour un pas donne ». Il le cite, il
+ne l'impose pas : cette page est un entrainement.
+}
+
+\textbf{Le probleme.} Le nombre derive de $f$ en $a$ est defini comme la
+limite des pentes des secantes $(AM_h)$ quand $h$ tend vers $0$. Une limite ne
+se calcule pas en un seul essai : il faut \emph{voir} les pentes se rapprocher.
+L'algorithme sert exactement a cela.
+
+\propriete[Ce que l'algorithme calcule]{
+Pour une fonction $f$, un reel $a$ et un pas $h \neq 0$, la secante joignant
+les points d'abscisses $a$ et $a+h$ a pour coefficient directeur
+\[
+  \tau(h) = \frac{f(a+h) - f(a)}{h}.
+\]
+L'algorithme prend en entree $f$, $a$ et une \textbf{liste de pas} ; il rend
+en sortie la liste des $\tau(h)$ correspondants.
+}
+
+\margeAppui{
+Le pas $h$ peut etre negatif : la secante existe aussi a gauche de $a$, et sa
+pente tend vers la meme limite lorsque $f$ est derivable en $a$.
+}
+
+\begin{python}
+def pentes_des_secantes(f, a, pas):
+    """Coefficients directeurs des secantes en a, pour chaque pas de la liste."""
+    if any(h == 0 for h in pas):
+        raise ValueError("le pas h = 0 ne definit aucune secante")
+    return [(f(a + h) - f(a)) / h for h in pas]
+
+def carre(x):
+    return x * x
+\end{python}
+
+\exemple{
+Prenons $f(x) = x^2$ et $a = 1$. L'appel
+\code{pentes\_des\_secantes(carre, 1, [1, 0.5, 0.1, 0.01])} renvoie
+\[
+  [\,3\;;\; 2{,}5\;;\; 2{,}1\;;\; 2{,}01\,].
+\]
+
+Le calcul litteral explique ces valeurs : pour $f(x)=x^2$ et $a=1$,
+\[
+  \tau(h) = \frac{(1+h)^2 - 1}{h} = \frac{2h + h^2}{h} = 2 + h
+  \qquad (h \neq 0).
+\]
+La liste affichee est donc exactement $2+h$ pour chaque pas, et l'on lit
+directement que $\tau(h)$ se rapproche de $2$ : le nombre derive de $f$ en $1$
+vaut $f'(1) = 2$.
+}
+
+\propriete[Travail demande]{%
+\begin{enumerate}
+  \item Reprendre l'algorithme avec $a = 3$ et verifier que les pentes se
+        rapprochent de $6$.
+  \item Ajouter des pas \emph{negatifs} $-0{,}1$ et $-0{,}01$ : que constate-t-on ?
+  \item Remplacer \code{carre} par la fonction cube et conjecturer $f'(1)$.
+\end{enumerate}
+}
+
+\exemple{
+\textbf{Reponses.} Pour $a=3$ : $\tau(h) = 6 + h$, les pentes valent
+$7\;;\;6{,}5\;;\;6{,}1\;;\;6{,}01$ et se rapprochent de $6$. Avec des pas
+negatifs on obtient $1{,}9$ et $1{,}99$ en $a=1$ : les secantes de gauche
+tendent vers la meme limite. Pour le cube en $a=1$,
+$\tau(h) = 3 + 3h + h^2$, et les pentes se rapprochent de $3$.
+}
+
+% BEGIN-VERIFY
+% from fractions import Fraction as F
+%
+% def pentes_des_secantes(f, a, pas):
+%     if any(h == 0 for h in pas):
+%         raise ValueError("le pas h = 0 ne definit aucune secante")
+%     return [(f(a + h) - f(a)) / h for h in pas]
+%
+% def carre(x):
+%     return x * x
+%
+% def cube(x):
+%     return x * x * x
+%
+% pas = [F(1), F(1, 2), F(1, 10), F(1, 100)]
+% assert pentes_des_secantes(carre, F(1), pas) == [F(3), F(5, 2), F(21, 10), F(201, 100)]
+% # ... c'est-a-dire exactement 2 + h, comme le dit le calcul litteral.
+% assert pentes_des_secantes(carre, F(1), pas) == [2 + h for h in pas]
+% assert pentes_des_secantes(carre, F(3), pas) == [6 + h for h in pas]
+% # Les pas negatifs donnent la meme limite, par la gauche.
+% gauche = pentes_des_secantes(carre, F(1), [F(-1, 10), F(-1, 100)])
+% assert gauche == [F(19, 10), F(199, 100)]
+% assert all(p < 2 for p in gauche)
+% # Le cube : tau(h) = 3 + 3h + h^2.
+% assert pentes_des_secantes(cube, F(1), pas) == [3 + 3*h + h*h for h in pas]
+% # Un pas nul ne definit aucune secante : le contrat est verifie.
+% try:
+%     pentes_des_secantes(carre, F(1), [F(0)])
+% except ValueError:
+%     pass
+% else:
+%     raise AssertionError("le pas nul aurait du etre refuse")
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 --- Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Prendre $h = 0$ pour « aller au bout ».} La secante n'existe pas pour
+$h = 0$ : le quotient devient $\frac{0}{0}$. La tangente est la position
+\emph{limite} des secantes, elle n'en est pas une.
+}
+
+\erreurFrequente{
+\textbf{Conclure d'une seule valeur.} Une pente calculee pour $h = 0{,}1$ n'est
+pas le nombre derive : c'est une approximation. Ce que l'algorithme montre,
+c'est une \emph{tendance}, et c'est le calcul litteral $\tau(h) = 2+h$ qui la
+prouve.
+}

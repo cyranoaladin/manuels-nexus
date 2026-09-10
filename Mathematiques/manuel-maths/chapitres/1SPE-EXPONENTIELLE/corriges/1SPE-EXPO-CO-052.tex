@@ -1,0 +1,54 @@
+% META: {"id":"1SPE-EXPO-CO-052","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-052","status":"generated"}
+% BEGIN-VERIFY
+% from math import log, exp
+% assert abs(1 - 18 / 100 - 0.82) < 1e-15
+% valeur3 = 18000 * 0.82 ** 3
+% assert abs(valeur3 - 9924.624) < 1e-6
+% assert round(valeur3) == 9925
+% reciproque = 1 / 0.82
+% assert abs(reciproque - 1.219512) < 5e-7
+% assert round((reciproque - 1) * 100, 2) == 21.95
+% # 0,82 x 1,18 ne rend pas 1 : la hausse de 18 % ne compense pas.
+% assert abs(0.82 * 1.18 - 0.9676) < 1e-12
+% assert 0.82 * 1.18 < 1
+% k = log(0.82)
+% assert round(k, 4) == -0.1985
+% assert abs(18000 * exp(3 * k) - valeur3) < 1e-6
+% assert abs(exp(-k) - reciproque) < 1e-12
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-052}
+\begin{enumerate}
+\item Une baisse de $18\,\%$ correspond au coefficient
+  $1 - \dfrac{18}{100} = 0{,}82$. Au bout de $3$ ans :
+  \[
+    18\,000 \times 0{,}82^3 = 9\,924{,}624 \approx 9\,925 \text{ euros.}
+  \]
+
+\item Remonter d'une année sur la précédente revient à multiplier par
+  l'inverse :
+  \[
+    \frac{1}{0{,}82} \approx 1{,}219\,512 .
+  \]
+  Le taux réciproque est donc d'environ $+21{,}95\,\%$, et non $+18\,\%$.
+
+\item Une baisse de $18\,\%$ suivie d'une hausse de $18\,\%$ donne
+  \[
+    0{,}82 \times 1{,}18 = 0{,}967\,6 < 1 .
+  \]
+  Il manque $3{,}24\,\%$ pour revenir à la valeur de départ : la hausse porte
+  sur une valeur déjà diminuée, donc plus petite.
+
+\item $V(1) = 18\,000\,\mathrm{e}^{k}$ doit valoir $18\,000 \times 0{,}82$,
+  donc $\mathrm{e}^{k} = 0{,}82$ et $k = \ln(0{,}82) \approx -0{,}1985$.
+  Alors
+  \[
+    V(3) = 18\,000\,\mathrm{e}^{3k} = 18\,000 \times 0{,}82^3 = 9\,924{,}62,
+  \]
+  ce qui redonne bien la question 1. Le signe négatif de $k$ traduit la
+  décroissance.
+
+\item Le coefficient réciproque est $\dfrac{1}{\mathrm{e}^{k}} =
+  \mathrm{e}^{-k} \approx 1{,}2195$ : changer le sens d'une évolution
+  exponentielle revient à changer le signe de $k$.
+\end{enumerate}
+\end{corrige}

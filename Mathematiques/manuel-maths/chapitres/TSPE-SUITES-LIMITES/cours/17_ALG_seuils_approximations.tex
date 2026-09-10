@@ -1,0 +1,176 @@
+% META: {"id": "TSPE-SUITLIM-ALG-017", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "algorithme", "capacites_codes": ["C1", "C3"], "programme_alignment": "OFFICIAL_ALGORITHM_EXAMPLE", "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+\section{Algorithmique : recherche de seuil, valeurs approchées}
+
+% ============================================================
+% STRATE 1 --- Probleme, modele, algorithmes
+% ============================================================
+
+\margeAppui{
+« Recherche de seuils » et « Recherche de valeurs approchees de $\pi$,
+$\mathrm{e}$, $\sqrt{2}$, $\ln 2$ » figurent parmi les \textbf{exemples
+d'algorithme} du programme pour les suites. Il les cite, il ne les impose pas.
+}
+
+\textbf{Le probleme.} Une suite converge : la definition dit que ses termes
+finissent par entrer dans tout intervalle autour de la limite, et y rester.
+Un algorithme peut repondre a la question concrete que cette definition
+souleve : \emph{a partir de quel rang} ?
+
+\propriete[Recherche de seuil]{
+Soit $(u_n)$ une suite et $\varepsilon > 0$. On cherche le plus petit $n$ tel
+que $|u_n - \ell| < \varepsilon$. L'algorithme avance de terme en terme tant
+que la condition n'est pas remplie.
+
+Deux precautions. La boucle doit etre \textbf{bornee} : si la suite ne
+converge pas vers $\ell$, la condition n'est jamais vraie. Et le rang trouve
+depend de $\varepsilon$ : il n'y a pas « un » rang, il y en a un par
+precision demandee.
+}
+
+\begin{python}
+def rang_de_seuil(terme, limite, epsilon, maximum=100_000):
+    """Plus petit n tel que |u_n - limite| < epsilon ; None si borne depassee."""
+    if epsilon <= 0:
+        raise ValueError("epsilon doit etre strictement positif")
+    for n in range(maximum + 1):
+        if abs(terme(n) - limite) < epsilon:
+            return n
+    return None
+\end{python}
+
+\exemple{
+Pour $u_n = 0{,}95^{\,n}$, de limite $0$ :
+\code{rang\_de\_seuil(lambda n: 0.95**n, 0, 0.01)} renvoie $90$. On le retrouve
+par le calcul : $0{,}95^{\,n} < 0{,}01$ equivaut a
+$n > \dfrac{\ln 0{,}01}{\ln 0{,}95} = 89{,}78\ldots$, donc $n = 90$.
+
+L'algorithme et le calcul se controlent mutuellement : c'est ce qui distingue
+une valeur \emph{trouvee} d'une valeur \emph{devinee}.
+}
+
+\propriete[Valeur approchee de $\mathrm{e}$]{
+La suite $S_K = \displaystyle\sum_{k=0}^{K} \frac{1}{k!}$ converge vers
+$\mathrm{e}$, et beaucoup plus vite que $\left(1+\frac{1}{n}\right)^n$ : le
+terme ajoute est divise par $k$ a chaque etape.
+}
+
+\begin{python}
+def somme_inverses_factorielles(K):
+    """Somme des 1/k! pour k de 0 a K."""
+    if K < 0:
+        raise ValueError("K doit etre positif")
+    terme, total = 1.0, 1.0     # terme = 1/k!, mis a jour sans factorielle
+    for k in range(1, K + 1):
+        terme = terme / k
+        total = total + terme
+    return total
+\end{python}
+
+\exemple{
+$S_5 = 2{,}716\,666\,7$, $S_{10} = 2{,}718\,281\,801$, $S_{15} = 2{,}718\,281\,828\,459$.
+Or $\mathrm{e} = 2{,}718\,281\,828\,459\ldots$ : quinze termes donnent douze
+decimales. La suite $\left(1+\frac{1}{n}\right)^n$, elle, en demanderait des
+milliards.
+}
+
+\propriete[Travail demande]{%
+\begin{enumerate}
+  \item Chercher le rang de seuil de $0{,}95^{\,n}$ pour
+        $\varepsilon = 10^{-3}$, puis $10^{-6}$.
+  \item Verifier chaque rang trouve par le calcul avec le logarithme.
+  \item Que renvoie l'algorithme pour la suite $u_n = 1 + \frac{1}{n+1}$ et
+        la limite $0$ ? Pourquoi ?
+  \item Comparer, a nombre d'operations egal, $S_K$ et
+        $\left(1+\frac{1}{n}\right)^n$.
+\end{enumerate}
+}
+
+\exemple{
+\textbf{Reponses.} 1. $135$ et $270$. 3. Il renvoie \code{None} : la suite
+converge vers $1$, pas vers $0$, et aucun terme n'approche $0$. La borne
+empeche la boucle de tourner sans fin. 4. $S_{10}$ donne huit decimales la ou
+$\left(1+\frac{1}{10}\right)^{10}$ n'en donne aucune.
+}
+
+% BEGIN-VERIFY
+% from math import e, log, factorial
+%
+% def rang_de_seuil(terme, limite, epsilon, maximum=100_000):
+%     if epsilon <= 0:
+%         raise ValueError("epsilon doit etre strictement positif")
+%     for n in range(maximum + 1):
+%         if abs(terme(n) - limite) < epsilon:
+%             return n
+%     return None
+%
+% def somme_inverses_factorielles(K):
+%     if K < 0:
+%         raise ValueError("K doit etre positif")
+%     terme, total = 1.0, 1.0
+%     for k in range(1, K + 1):
+%         terme = terme / k
+%         total = total + terme
+%     return total
+%
+% geometrique = lambda n: 0.95 ** n
+% assert rang_de_seuil(geometrique, 0, 0.01) == 90
+% # Le calcul par logarithme donne le meme rang.
+% assert 89 < log(0.01) / log(0.95) < 90
+% for epsilon, rang in ((1e-2, 90), (1e-3, 135), (1e-6, 270)):
+%     assert rang_de_seuil(geometrique, 0, epsilon) == rang, epsilon
+%     theorique = log(epsilon) / log(0.95)
+%     assert rang - 1 <= theorique <= rang, epsilon
+%     # C'est bien le PLUS PETIT rang : le precedent ne convient pas.
+%     assert abs(geometrique(rang) - 0) < epsilon
+%     assert abs(geometrique(rang - 1) - 0) >= epsilon
+%
+% # Une limite fausse ne donne aucun rang, et la boucle reste bornee.
+% assert rang_de_seuil(lambda n: 1 + 1 / (n + 1), 0, 0.1, maximum=1000) is None
+%
+% # La somme des inverses de factorielles, sans jamais calculer de factorielle.
+% for K in range(0, 18):
+%     assert abs(somme_inverses_factorielles(K)
+%                - sum(1 / factorial(k) for k in range(K + 1))) < 1e-15, K
+% assert round(somme_inverses_factorielles(5), 7) == 2.7166667
+% assert round(somme_inverses_factorielles(10), 9) == 2.718281801
+% assert round(somme_inverses_factorielles(15), 12) == 2.718281828459
+% assert abs(e - somme_inverses_factorielles(15)) < 1e-12
+% # ... beaucoup plus vite que (1 + 1/n)^n.
+% assert abs(e - somme_inverses_factorielles(10)) < 1e-7
+% assert abs(e - (1 + 1 / 10) ** 10) > 1e-1
+% # La suite des sommes partielles croit vers e sans l'atteindre.
+% sommes = [somme_inverses_factorielles(K) for K in range(0, 15)]
+% assert all(a < b for a, b in zip(sommes, sommes[1:]))
+% assert all(s < e for s in sommes)
+%
+% try:
+%     rang_de_seuil(geometrique, 0, 0)
+% except ValueError:
+%     pass
+% else:
+%     raise AssertionError("epsilon nul aurait du etre refuse")
+% try:
+%     somme_inverses_factorielles(-1)
+% except ValueError:
+%     pass
+% else:
+%     raise AssertionError("K negatif aurait du etre refuse")
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 --- Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Parler du rang a partir duquel la suite est proche de sa limite.} Il
+n'y en a pas un seul : il y en a un par precision demandee. Passer de
+$10^{-3}$ a $10^{-6}$ fait passer le rang de $135$ a $270$.
+}
+
+\erreurFrequente{
+\textbf{Recalculer $k!$ a chaque terme.} Le programme met a jour
+$\frac{1}{k!}$ en divisant le terme precedent par $k$ : une division par
+terme, au lieu de $k$ multiplications. Sur les grandes valeurs de $K$, la
+difference est considerable.
+}

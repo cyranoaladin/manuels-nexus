@@ -171,14 +171,19 @@ def test_aucun_objet_ne_reste_sans_statut(carte_inverse):
         o for o in carte_inverse["objects"] if o["classification"] == "OFF_TOPIC"
     ]
     assert not sans_statut, [o["object_id"] for o in sans_statut]
+    # La page d'algorithmes de l'exponentielle etait le temoin de ce defaut :
+    # elle mettait en oeuvre les deux « Exemples d'algorithme » du BO et
+    # passait pour un objet sans justification. Elle declare depuis les
+    # capacites qu'elle sert, et releve donc du programme -- ce qui est mieux
+    # encore. Ce que le test verrouille est qu'elle ait un statut et des
+    # parents officiels, non lequel des deux chemins l'y conduit.
     exponentielle = [
         o for o in carte_inverse["objects"]
         if o["object_id"] == "1SPE-EXPO-COURS-C5-ALGORITHMES"
     ]
     assert len(exponentielle) == 1
-    assert exponentielle[0]["classification"] == "LEGITIMATE_ENRICHMENT"
+    assert exponentielle[0]["classification"] != "OFF_TOPIC"
     assert exponentielle[0]["official_parents"]
-    assert not exponentielle[0]["mandatory_parents"]
 
 
 def test_le_hors_annee_garde_la_priorite_sur_l_enrichissement():

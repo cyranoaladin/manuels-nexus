@@ -1,0 +1,162 @@
+% META: {"id": "1SPE-DERGLOBAL-ALG-015", "chapitre": "1SPE-DERIVATION-GLOBAL", "type_objet": "algorithme", "capacites_codes": ["C3", "C4"], "programme_alignment": "OFFICIAL_ALGORITHM_EXAMPLE", "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+\section{Algorithmique : la méthode de Newton}
+
+% ============================================================
+% STRATE 1 --- Probleme, modele, algorithme
+% ============================================================
+
+\margeAppui{
+Le programme cite « Methode de Newton, en se limitant a des cas favorables »
+parmi ses \textbf{exemples d'algorithme}. Il la cite, il ne l'impose pas.
+}
+
+\textbf{Le probleme.} L'equation $x^2 = 2$ n'a pas de solution decimale. On
+cherche a en approcher la solution positive aussi finement qu'on veut, sans
+disposer d'une formule.
+
+\propriete[L'idee : remplacer la courbe par sa tangente]{
+Soit $f$ derivable et $x_n$ une valeur approchee d'une solution de $f(x)=0$.
+La tangente a $\mathcal{C}_f$ au point d'abscisse $x_n$ a pour equation
+\[
+  y = f'(x_n)(x - x_n) + f(x_n).
+\]
+Si $f'(x_n) \neq 0$, cette droite coupe l'axe des abscisses en un unique point,
+que l'on prend pour valeur approchee suivante :
+\[
+  x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}.
+\]
+}
+
+\margeAppui{
+\textbf{Cas favorable.} Ici $f(x) = x^2 - 2$, avec $f'(x) = 2x$. Sur
+$[1\,;\,2]$, $f$ est strictement croissante ($f' > 0$) et sa courbe est au
+dessus de chacune de ses tangentes : partant de $x_0 = 2$, la suite reste dans
+$[\sqrt{2}\,;\,2]$ et decroit. C'est ce que « cas favorable » veut dire.
+}
+
+Pour $f(x) = x^2 - 2$, la formule se simplifie :
+\[
+  x_{n+1} = x_n - \frac{x_n^2 - 2}{2x_n} = \frac{1}{2}\left(x_n + \frac{2}{x_n}\right).
+\]
+
+\begin{python}
+def newton(f, fprime, depart, iterations):
+    """Valeurs approchees successives d'une solution de f(x) = 0."""
+    if iterations < 0:
+        raise ValueError("le nombre d'iterations doit etre positif")
+    x = depart
+    valeurs = [x]
+    for _ in range(iterations):
+        pente = fprime(x)
+        if pente == 0:
+            raise ZeroDivisionError("tangente horizontale : la methode s'arrete")
+        x = x - f(x) / pente
+        valeurs.append(x)
+    return valeurs
+\end{python}
+
+\exemple{
+Avec $f(x) = x^2 - 2$, $f'(x) = 2x$ et $x_0 = 2$, l'algorithme produit
+\[
+  x_0 = 2,\quad
+  x_1 = \frac{3}{2},\quad
+  x_2 = \frac{17}{12},\quad
+  x_3 = \frac{577}{408},\quad
+  x_4 = \frac{665\,857}{470\,832},
+\]
+soit en valeurs decimales
+\[
+  2\;;\; 1{,}5\;;\; 1{,}416\,666\ldots\;;\; 1{,}414\,215\,686\ldots\;;\;
+  1{,}414\,213\,562\,374\ldots
+\]
+Or $\sqrt{2} = 1{,}414\,213\,562\,373\ldots$ : quatre iterations donnent douze
+decimales exactes. Le nombre de decimales correctes double a peu pres a chaque
+etape.
+}
+
+\propriete[Travail demande]{%
+\begin{enumerate}
+  \item Verifier a la main que $x_1 = \frac{1}{2}\left(2 + \frac{2}{2}\right)
+        = \frac{3}{2}$.
+  \item Compter, pour chaque $x_n$, le nombre de decimales communes avec
+        $\sqrt{2}$.
+  \item Reprendre avec $f(x) = x^2 - 5$ et $x_0 = 3$ : combien d'iterations
+        faut-il pour obtenir dix decimales de $\sqrt{5}$ ?
+  \item Que se passe-t-il si l'on part de $x_0 = 0$ ? Expliquer avec la
+        tangente.
+\end{enumerate}
+}
+
+\exemple{
+\textbf{Reponses.} 2. Les nombres de decimales exactes sont $0$, $1$, $2$, $5$
+puis $11$. 3. Quatre iterations suffisent depuis $x_0 = 3$ ; trois n'en
+donnent que six. 4. En $x_0 = 0$ la
+tangente est horizontale : elle ne coupe pas l'axe des abscisses, et
+l'algorithme s'arrete -- c'est le cas defavorable que la formule signale par
+une division par $f'(x_n) = 0$.
+}
+
+% BEGIN-VERIFY
+% from fractions import Fraction as F
+% from math import sqrt
+%
+% def newton(f, fprime, depart, iterations):
+%     if iterations < 0:
+%         raise ValueError("le nombre d'iterations doit etre positif")
+%     x = depart
+%     valeurs = [x]
+%     for _ in range(iterations):
+%         pente = fprime(x)
+%         if pente == 0:
+%             raise ZeroDivisionError("tangente horizontale : la methode s'arrete")
+%         x = x - f(x) / pente
+%         valeurs.append(x)
+%     return valeurs
+%
+% f = lambda x: x*x - 2
+% fp = lambda x: 2*x
+% suite = newton(f, fp, F(2), 4)
+% assert suite == [F(2), F(3, 2), F(17, 12), F(577, 408), F(665857, 470832)]
+% # La formule simplifiee donne la meme suite.
+% assert all(b == (a + 2/a)/2 for a, b in zip(suite, suite[1:]))
+% # Cas favorable : la suite decroit et reste au-dessus de racine de 2.
+% assert all(float(x) >= sqrt(2) for x in suite)
+% assert all(float(a) > float(b) for a, b in zip(suite, suite[1:]))
+% # Nombre de decimales exactes : 0, 1, 2, 5, 11.
+% def decimales_exactes(x):
+%     ecart = abs(float(x) - sqrt(2))
+%     n = 0
+%     while ecart < 10.0**(-(n + 1)):
+%         n += 1
+%     return n
+% assert [decimales_exactes(x) for x in suite] == [0, 1, 2, 5, 11]
+% # Racine de 5 depuis 3 : dix decimales en quatre iterations.
+% cinq = newton(lambda x: x*x - 5, lambda x: 2*x, F(3), 4)
+% assert abs(float(cinq[4]) - sqrt(5)) < 1e-10
+% assert abs(float(cinq[3]) - sqrt(5)) > 1e-10
+% # Depart en 0 : tangente horizontale, la methode s'arrete.
+% try:
+%     newton(f, fp, F(0), 1)
+% except ZeroDivisionError:
+%     pass
+% else:
+%     raise AssertionError("la tangente horizontale aurait du arreter la methode")
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 --- Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Croire que la methode converge toujours.} Elle ne converge que dans des
+cas favorables. Une tangente horizontale ($f'(x_n) = 0$) l'arrete net ; un
+mauvais point de depart peut l'envoyer vers une autre solution, ou la faire
+osciller.
+}
+
+\erreurFrequente{
+\textbf{Confondre valeur approchee et valeur exacte.} $\frac{577}{408}$ n'est
+pas $\sqrt{2}$ : c'est un rationnel qui en donne six decimales. La methode
+approche, elle ne demontre pas l'irrationalite.
+}

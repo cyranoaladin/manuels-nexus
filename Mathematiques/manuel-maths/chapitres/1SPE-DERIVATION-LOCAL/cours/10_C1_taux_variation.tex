@@ -73,7 +73,10 @@ Pour une position $d(t)$ exprimée en mètres, le taux de variation entre deux i
 %
 % # Definition : le taux de variation de f entre a et b.
 % def taux(f, a, b):
-%     assert a != b, "deux abscisses distinctes sont exigees"
+%     if a == b:
+%         # Une precondition violee n'est pas une assertion fausse : la lever
+%         # comme ValueError evite d'absorber un echec d'assertion.
+%         raise ValueError("deux abscisses distinctes sont exigees")
 %     return Rational(f(b) - f(a), b - a)
 %
 % carre = lambda t: t**2
@@ -84,7 +87,7 @@ Pour une position $d(t)$ exprimée en mètres, le taux de variation entre deux i
 % # Le contre-exemple du cours : a == b n'est pas un taux de variation.
 % try:
 %     taux(carre, 2, 2)
-% except AssertionError:
+% except ValueError:
 %     pass
 % else:
 %     raise AssertionError("un denominateur nul aurait du etre refuse")

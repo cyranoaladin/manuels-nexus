@@ -65,3 +65,37 @@ L'écart à $\pi$ est ici d'environ $0{,}012$. Ce constat décrit cette
 simulation précise et ne garantit pas l'écart obtenu lors d'une autre
 simulation.
 }
+
+% BEGIN-VERIFY
+% from random import Random
+% from math import pi
+%
+% def estimer_pi(n, graine):
+%     if n <= 0:
+%         raise ValueError("n doit etre strictement positif")
+%     generateur = Random(graine)
+%     dedans = 0
+%     for _ in range(n):
+%         x = generateur.random()
+%         y = generateur.random()
+%         if x * x + y * y <= 1:
+%             dedans = dedans + 1
+%     return 4 * dedans / n
+%
+% # La valeur annoncee dans l'exemple, au chiffre pres.
+% estimation = estimer_pi(10000, 1729)
+% assert round(estimation, 2) == 3.13
+% assert abs(estimation - pi) < 0.02
+% # C'est une estimation : deux graines donnent deux resultats.
+% valeurs = [estimer_pi(10000, graine) for graine in (1, 2, 3, 1729)]
+% assert len(set(valeurs)) > 1
+% assert all(abs(v - pi) < 0.1 for v in valeurs)
+% # L'aire du quart de disque rapportee a celle du carre vaut bien pi/4.
+% assert abs(pi / 4 - 0.7853981633974483) < 1e-15
+% try:
+%     estimer_pi(0, 1)
+% except ValueError:
+%     pass
+% else:
+%     raise AssertionError("n = 0 aurait du etre refuse")
+% END-VERIFY

@@ -1,0 +1,43 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-054","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-054","status":"generated"}
+% BEGIN-VERIFY
+% R = lambda x: (20 + x) * (500 - 10 * x)
+% # Forme developpee annoncee dans le corrige.
+% assert all(R(x) == 10000 + 300 * x - 10 * x * x for x in range(0, 51))
+% assert R(15) == 12250 and R(14) < R(15) and R(16) < R(15)
+% assert (35 - 20) / 20 == 0.75
+% assert (350 - 500) / 500 == -0.30
+% assert abs(350 / 0.70 - 500) < 1e-9
+% assert abs(1.75 * 0.70 - 1.225) < 1e-12
+% assert abs(12250 / 10000 - 1.225) < 1e-12
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-054}
+\begin{enumerate}
+\item Le prix devient $20 + x$ euros et le nombre d'articles vendus
+  $500 - 10x$. La recette est le produit des deux :
+  \[
+    R(x) = (20+x)(500-10x) = 10\,000 + 300x - 10x^2 .
+  \]
+
+\item $R'(x) = 300 - 20x$, qui s'annule en $x = 15$, est positive avant et
+  négative après. La recette est donc maximale pour une hausse de $15$ euros,
+  et vaut alors $R(15) = 35 \times 350 = 12\,250$ euros.
+
+\item Le prix passe de $20$ à $35$ euros :
+  $\dfrac{35-20}{20} = 0{,}75$, soit $+75\,\%$.
+  Les ventes passent de $500$ à $350$ :
+  $\dfrac{350-500}{500} = -0{,}30$, soit $-30\,\%$.
+
+\item Une baisse de $30\,\%$ correspond au coefficient $0{,}70$. Si $V$ est
+  le nombre initial, alors $0{,}70\,V = 350$, donc
+  $V = \dfrac{350}{0{,}70} = 500$. On retrouve bien la valeur initiale.
+
+\item Non. Les taux ne s'additionnent pas : ce sont les \emph{coefficients}
+  qui se multiplient.
+  \[
+    1{,}75 \times 0{,}70 = 1{,}225,
+  \]
+  soit une hausse de $22{,}5\,\%$ de la recette -- et non
+  $75 - 30 = 45\,\%$. Le calcul direct le confirme :
+  $\dfrac{12\,250}{10\,000} = 1{,}225$.
+\end{enumerate}
+\end{corrige}

@@ -37,8 +37,15 @@ Un vélo est équipé d'un capteur qui enregistre la distance parcourue $d(t)$ (
 % assert d12 == Rational(8640,100) - 72 + 72
 % assert d12 == Rational(8640,100)
 % d14 = d(14)
+% assert d14 == Rational(616, 5)
+% # Vitesse moyenne sur [10 ; 14], puis sur [10 ; 12] : le taux de variation
+% # depend de l'intervalle, et se rapproche de la vitesse instantanee quand
+% # l'intervalle se resserre.
 % v_10_14 = (d(14)-d(10))/(14-10)
 % v_10_12 = (d(12)-d(10))/(12-10)
+% assert v_10_14 == Rational(79, 5)
+% assert v_10_12 == Rational(66, 5)
+% assert v_10_12 < v_10_14
 % END-VERIFY
 
 %---------------------------------------------------------------
@@ -80,7 +87,12 @@ Un vélo est équipé d'un capteur qui enregistre la distance parcourue $d(t)$ (
 % d12 = Rational(8640,100)
 % dp12 = Rational(78, 5)
 % T = expand(dp12*(t-12) + d12)
+% # L'equation reduite de la tangente en t = 12.
+% assert T == expand(Rational(78, 5)*t - Rational(504, 5))
+% assert T.subs(t, 12) == d12
+% # Approximation affine de d(12,5) par la tangente.
 % approx = T.subs(t, Rational(25,2))
+% assert approx == Rational(471, 5)
 % END-VERIFY
 
 %---------------------------------------------------------------

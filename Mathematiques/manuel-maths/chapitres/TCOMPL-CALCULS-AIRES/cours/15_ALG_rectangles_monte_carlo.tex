@@ -1,0 +1,235 @@
+% META: {"id": "TCOMPL-AIR-ALG-015", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "algorithme", "capacites_codes": ["C1", "C2"], "programme_alignment": "OFFICIAL_ALGORITHM_EXAMPLE", "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+\section{Algorithmique : encadrer une aire, rectangles et Monte-Carlo}
+
+% ============================================================
+% STRATE 1 --- Probleme, modele, algorithmes
+% ============================================================
+
+\margeAppui{
+« Methode des rectangles, des trapezes » et « Methode de Monte-Carlo pour un
+calcul d'aire » figurent parmi les \textbf{exemples d'algorithme} du
+programme. Il les cite, il ne les impose pas.
+}
+
+\textbf{Le probleme.} L'aire sous la parabole $y = x^2$ entre $0$ et $1$ vaut
+$\dfrac{1}{3}$ : le calcul par primitive le donne en une ligne. Mais que faire
+lorsque la fonction n'a pas de primitive calculable ? Les deux algorithmes
+ci-dessous n'utilisent aucune primitive. Ils sont mis a l'epreuve ici sur un
+cas ou la reponse est connue -- c'est ainsi qu'on verifie une methode avant de
+s'en servir ailleurs.
+
+\propriete[Methode des rectangles]{
+On decoupe $[0\,;\,1]$ en $n$ intervalles de largeur $\dfrac{1}{n}$. Sur
+chacun, on remplace la courbe par un segment horizontal, pris a gauche ou a
+droite de l'intervalle :
+\[
+  R_{\text{g}} = \frac{1}{n}\sum_{k=0}^{n-1} f\!\left(\frac{k}{n}\right),
+  \qquad
+  R_{\text{d}} = \frac{1}{n}\sum_{k=1}^{n} f\!\left(\frac{k}{n}\right).
+\]
+Comme $f$ est \textbf{croissante} sur $[0\,;\,1]$, $R_{\text{g}}$ minore l'aire
+et $R_{\text{d}} $ la majore. La methode des trapezes en prend la moyenne.
+
+Entree : la fonction, les bornes, le nombre $n$ d'intervalles. Sortie : les
+deux sommes, et leur moyenne.
+}
+
+\begin{python}
+def rectangles(f, a, b, n):
+    """Sommes de gauche et de droite, sur n intervalles de [a ; b]."""
+    if n < 1 or b <= a:
+        raise ValueError("il faut n >= 1 et a < b")
+    pas = (b - a) / n
+    gauche = pas * sum(f(a + k * pas) for k in range(n))
+    droite = pas * sum(f(a + k * pas) for k in range(1, n + 1))
+    return gauche, droite
+
+def trapezes(f, a, b, n):
+    gauche, droite = rectangles(f, a, b, n)
+    return (gauche + droite) / 2
+\end{python}
+
+\exemple{
+Pour $f(x) = x^2$ sur $[0\,;\,1]$ :
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$n$ & $R_{\text{g}}$ & $R_{\text{d}}$ & trapezes \\
+\hline
+$10$ & $0{,}285\,000$ & $0{,}385\,000$ & $0{,}335\,000$ \\
+\hline
+$100$ & $0{,}328\,350$ & $0{,}338\,350$ & $0{,}333\,350$ \\
+\hline
+$1000$ & $0{,}332\,834$ & $0{,}333\,834$ & $0{,}333\,334$ \\
+\hline
+\end{tabular}
+\end{center}
+
+L'encadrement $R_{\text{g}} \leq \frac{1}{3} \leq R_{\text{d}}$ est verifie a
+chaque ligne, et sa largeur vaut exactement $\dfrac{1}{n}$ : c'est
+$f(1) - f(0)$ divise par $n$. Les trapezes font beaucoup mieux : leur ecart
+est divise par $100$ quand $n$ est multiplie par $10$.
+}
+
+\propriete[Methode de Monte-Carlo]{
+On tire au hasard $N$ points dans le carre $[0\,;\,1]^2$ et l'on compte ceux
+qui tombent sous la courbe. La frequence obtenue estime la proportion d'aire,
+donc ici l'aire elle-meme, puisque le carre a pour aire $1$.
+
+Entree : la fonction, le nombre de points, une graine. Sortie : une estimation.
+}
+
+\begin{python}
+from random import Random
+
+def monte_carlo(f, nombre_de_points, graine):
+    """Estime l'aire sous f sur [0 ; 1], f etant a valeurs dans [0 ; 1]."""
+    if nombre_de_points < 1:
+        raise ValueError("il faut au moins un point")
+    generateur = Random(graine)
+    dedans = 0
+    for _ in range(nombre_de_points):
+        x = generateur.random()
+        y = generateur.random()
+        if y <= f(x):
+            dedans = dedans + 1
+    return dedans / nombre_de_points
+\end{python}
+
+\exemple{
+\code{monte\_carlo(carre, 10000, 2024)} renvoie $0{,}340\,2$, pour une aire
+exacte de $0{,}333\,3\ldots$ : l'ecart vaut $0{,}007$. Dix mille tirages font
+donc moins bien que dix trapezes. Monte-Carlo n'est pas fait pour la
+precision en dimension $1$ ; son interet apparait quand la forme est trop
+compliquee pour etre decoupee.
+}
+
+\propriete[Travail demande]{%
+\begin{enumerate}
+  \item Verifier que la largeur de l'encadrement vaut $\dfrac{1}{n}$, et
+        l'expliquer avec $f(1) - f(0)$.
+  \item Quelle valeur de $n$ faut-il pour encadrer $\frac{1}{3}$ a
+        $10^{-3}$ pres par les rectangles ?
+  \item Changer la graine de Monte-Carlo et observer la dispersion des
+        estimations.
+  \item Reprendre les rectangles avec $f(x) = 1 - x^2$ : l'encadrement
+        est-il encore dans le meme sens ? Pourquoi ?
+\end{enumerate}
+}
+
+\exemple{
+\textbf{Reponses.} 2. Il faut $n \geq 1000$. 4. Non : $1 - x^2$ est
+\emph{decroissante}, donc c'est la somme de gauche qui majore. Le sens de
+l'encadrement depend du sens de variation, pas de la methode.
+}
+
+% BEGIN-VERIFY
+% from fractions import Fraction as F
+% from random import Random
+%
+% def rectangles(f, a, b, n):
+%     if n < 1 or b <= a:
+%         raise ValueError("il faut n >= 1 et a < b")
+%     pas = (b - a) / n
+%     gauche = pas * sum(f(a + k * pas) for k in range(n))
+%     droite = pas * sum(f(a + k * pas) for k in range(1, n + 1))
+%     return gauche, droite
+%
+% def trapezes(f, a, b, n):
+%     gauche, droite = rectangles(f, a, b, n)
+%     return (gauche + droite) / 2
+%
+% def monte_carlo(f, nombre_de_points, graine):
+%     if nombre_de_points < 1:
+%         raise ValueError("il faut au moins un point")
+%     generateur = Random(graine)
+%     dedans = 0
+%     for _ in range(nombre_de_points):
+%         x = generateur.random()
+%         y = generateur.random()
+%         if y <= f(x):
+%             dedans = dedans + 1
+%     return dedans / nombre_de_points
+%
+% carre = lambda x: x * x
+% exacte = F(1, 3)
+%
+% # Le tableau, en valeurs exactes : aucune erreur d'arrondi ne peut s'y cacher.
+% g, d = rectangles(carre, F(0), F(1), 10)
+% assert (g, d) == (F(57, 200), F(77, 200))
+% assert (float(g), float(d)) == (0.285, 0.385)
+% assert trapezes(carre, F(0), F(1), 10) == F(67, 200)
+% for n, (vg, vd, vt) in {
+%     100: (0.328350, 0.338350, 0.333350),
+%     1000: (0.332834, 0.333834, 0.333334),
+% }.items():
+%     g, d = rectangles(carre, F(0), F(1), n)
+%     assert round(float(g), 6) == vg, (n, g)
+%     assert round(float(d), 6) == vd, (n, d)
+%     assert round(float(trapezes(carre, F(0), F(1), n)), 6) == vt, n
+%
+% # L'encadrement, et sa largeur exacte 1/n = (f(1) - f(0))/n.
+% for n in (1, 2, 10, 100, 1000):
+%     g, d = rectangles(carre, F(0), F(1), n)
+%     assert g <= exacte <= d
+%     assert d - g == F(1, n)
+%     assert d - g == (carre(F(1)) - carre(F(0))) / n
+% # 10^-3 demande n >= 1000.
+% g, d = rectangles(carre, F(0), F(1), 999)
+% assert d - g > F(1, 1000)
+% g, d = rectangles(carre, F(0), F(1), 1000)
+% assert d - g <= F(1, 1000)
+%
+% # Les trapezes gagnent deux ordres de grandeur quand n est multiplie par dix.
+% ecarts = [abs(trapezes(carre, F(0), F(1), n) - exacte) for n in (10, 100, 1000)]
+% for avant, apres in zip(ecarts, ecarts[1:]):
+%     assert 90 < avant / apres < 110
+%
+% # Une fonction decroissante renverse l'encadrement.
+% decroissante = lambda x: 1 - x * x
+% g, d = rectangles(decroissante, F(0), F(1), 10)
+% assert d <= F(2, 3) <= g
+%
+% # Monte-Carlo : la valeur annoncee, et sa mediocre precision ici.
+% estimation = monte_carlo(carre, 10000, 2024)
+% assert estimation == 0.3402
+% assert abs(estimation - 1 / 3) > abs(float(trapezes(carre, F(0), F(1), 10)) - 1 / 3)
+% # La dispersion selon la graine est bien reelle.
+% valeurs = [monte_carlo(carre, 10000, graine) for graine in (1, 2, 3, 4, 5)]
+% assert len(set(valeurs)) > 1
+% assert all(abs(v - 1 / 3) < 0.02 for v in valeurs)
+%
+% for mauvais in ((carre, F(0), F(1), 0), (carre, F(1), F(0), 10)):
+%     try:
+%         rectangles(*mauvais)
+%     except ValueError:
+%         pass
+%     else:
+%         raise AssertionError("l'argument invalide aurait du etre refuse")
+% try:
+%     monte_carlo(carre, 0, 1)
+% except ValueError:
+%     pass
+% else:
+%     raise AssertionError("zero point aurait du etre refuse")
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 --- Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Croire que la somme de gauche minore toujours.} Elle ne minore que si
+la fonction est \emph{croissante}. Pour une fonction decroissante, c'est
+l'inverse ; pour une fonction qui varie, aucune des deux ne conclut sans
+decoupage supplementaire.
+}
+
+\erreurFrequente{
+\textbf{Prendre une estimation de Monte-Carlo pour une valeur.} Deux graines
+donnent deux resultats. Ce que la methode fournit, c'est une valeur approchee
+dont l'erreur diminue comme $\dfrac{1}{\sqrt{N}}$ : cent fois plus de points
+pour dix fois moins d'erreur.
+}
