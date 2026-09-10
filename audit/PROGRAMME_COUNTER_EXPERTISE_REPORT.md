@@ -21,7 +21,10 @@ la ligne de base `af8506b79` a la matrice courante.
 | UNDECIDABLE_TRUE_CONTENT_GAP | 1 |
 | OFFICIAL_REQUIRED_MISSING_NOW | 0 |
 | OFFICIAL_REQUIRED_PARTIAL_NOW | 0 |
-| CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING | 9 |
+| CONTENT_CREATED_FOR_TRUE_MISSING | 2 |
+| CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL | 6 |
+| CONTENT_CREATED_AFTER_UNDECIDABLE_REVIEW | 1 |
+| CONTENT_CREATED_FOR_NEXUS_QUALITY_ENRICHMENT | 2 |
 
 ## Les anciens « manquants »
 
@@ -99,24 +102,24 @@ la ligne de base `af8506b79` a la matrice courante.
 | 1SPE | Calcul de 1 + 2 + … + 𝑛. | UNDECIDABLE_BY_CONTENT_MATCH | FALSE_MISSING_TOOLING | le libelle officiel se reduit a des symboles mathematiques : aucun mot distinctif, donc aucune recherche possible | 1SPE-SUITES-CR-013 | revue contradictoire declaree ; verdict rendu a la lecture de l'objet : FALSE_MISSING_TOOLING | NO |
 | 1SPE | Calcul de cos , sin , cos , sin . 4 4 3 3 | UNDECIDABLE_BY_CONTENT_MATCH | TRUE_CONTENT_GAP | le libelle officiel a perdu ses fractions a l'extraction (« Calcul de cos , sin , cos , sin . 4 4 3 3 ») : aucune recherche n'etait possible. La lectu | 1SPE-TRIGO-CO-011, 1SPE-TRIGO-CO-012, 1SPE-TRIGO-CO-013, 1SPE-TRIGO-CO-014, 1SPE-TRIGO-CO-015, 1SPE-TRIGO-CO-016 | demonstration complete redigee : cosinus et sinus de pi/4, pi/3 et pi/6, avec hypotheses et chaine logique, plus bloc VE | YES |
 
-## CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING
+## Contenu ecrit, par cause
 
 Ce qui a ete ECRIT, et rien d'autre : les reparations d'outillage n'y
-figurent pas.
+figurent pas. Chaque fichier releve d'une seule cause principale.
 
-| Fichier | Manuel | Attendu | Verdict |
-| --- | --- | --- | --- |
-| `Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/cours/10_C0_dispersion.tex` | TCOMPL | Statistique descriptive : caractéristiques de dispersion (médiane, qua | TRUE_CONTENT_GAP |
-| `Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/12_C7_produit_scalaire.tex` | TSPE | Développement de u  v , formules de polarisation. | TRUE_CONTENT_GAP |
-| `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-051.tex` | 1SPE | Calculer un taux d’évolution réciproque. | TRUE_PARTIAL_PEDAGOGICAL |
-| `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-051.tex` | 1SPE | Calculer un taux d’évolution réciproque. | TRUE_PARTIAL_PEDAGOGICAL |
-| `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-052.tex` | 1SPE | Calculer le taux d’évolution équivalent à plusieurs évolutions success | TRUE_PARTIAL_PEDAGOGICAL |
-| `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-052.tex` | 1SPE | Calculer le taux d’évolution équivalent à plusieurs évolutions success | TRUE_PARTIAL_PEDAGOGICAL |
-| `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-055.tex` | 1SPE | Calculer et interpréter des indicateurs statistiques pour une série st | TRUE_PARTIAL_PEDAGOGICAL |
-| `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-055.tex` | 1SPE | Calculer et interpréter des indicateurs statistiques pour une série st | TRUE_PARTIAL_PEDAGOGICAL |
-| `Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/cours/11_C2_cosinus_sinus.tex` | 1SPE | Calcul de cos , sin , cos , sin . 4 4 3 3 | TRUE_CONTENT_GAP |
+| Fichier | Manuel | Cause | Attendu | Verdict |
+| --- | --- | --- | --- | --- |
+| `Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/cours/10_C0_dispersion.tex` | TCOMPL | CONTENT_CREATED_FOR_TRUE_MISSING | Statistique descriptive : caractéristiques de dispersion (médiane, qua | TRUE_CONTENT_GAP |
+| `Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/12_C7_produit_scalaire.tex` | TSPE | CONTENT_CREATED_FOR_TRUE_MISSING | Développement de u  v , formules de polarisation. | TRUE_CONTENT_GAP |
+| `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-051.tex` | 1SPE | CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL | Calculer un taux d’évolution réciproque. | TRUE_PARTIAL_PEDAGOGICAL |
+| `Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-051.tex` | 1SPE | CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL | Calculer un taux d’évolution réciproque. | TRUE_PARTIAL_PEDAGOGICAL |
+| `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-052.tex` | 1SPE | CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL | Calculer le taux d’évolution équivalent à plusieurs évolutions success | TRUE_PARTIAL_PEDAGOGICAL |
+| `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-052.tex` | 1SPE | CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL | Calculer le taux d’évolution équivalent à plusieurs évolutions success | TRUE_PARTIAL_PEDAGOGICAL |
+| `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-055.tex` | 1SPE | CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL | Calculer et interpréter des indicateurs statistiques pour une série st | TRUE_PARTIAL_PEDAGOGICAL |
+| `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-055.tex` | 1SPE | CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL | Calculer et interpréter des indicateurs statistiques pour une série st | TRUE_PARTIAL_PEDAGOGICAL |
+| `Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/cours/11_C2_cosinus_sinus.tex` | 1SPE | CONTENT_CREATED_AFTER_UNDECIDABLE_REVIEW | Calcul de cos , sin , cos , sin . 4 4 3 3 | TRUE_CONTENT_GAP |
 
-## EDITORIAL_QUALITY_ENRICHMENT
+## CONTENT_CREATED_FOR_NEXUS_QUALITY_ENRICHMENT
 
 Ecrit aussi, mais pour une autre raison : le programme NOMME ces
 exemples d'algorithme sans les imposer. Ils ne comblent aucun manque

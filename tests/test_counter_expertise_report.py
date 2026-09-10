@@ -9,6 +9,7 @@ deduit d'un instantane fige plutot que d'une memoire.
 import json
 import subprocess
 import sys
+from collections import Counter
 from pathlib import Path
 
 import pytest
@@ -108,11 +109,22 @@ def test_un_vrai_manque_a_produit_un_contenu_et_lui_seul(rapport):
             "TRUE_PARTIAL_PEDAGOGICAL",
         )
         assert (ligne["content_created"] == "YES") == reel, ligne["official_id"]
-    ecrits = rapport["CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING"]
+    ecrits = rapport["content_created"]
     assert ecrits
-    assert len(ecrits) == rapport["summary"][
-        "CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING"
-    ]
+    resume = rapport["summary"]
+    # Chaque fichier releve d'une seule cause principale, et la somme des
+    # causes est le nombre de fichiers ecrits : un compteur unique melangeait
+    # une obligation absente, une obligation mal travaillee et un attendu
+    # qu'on n'avait pas pu chercher.
+    causes = Counter(e["cause"] for e in ecrits)
+    assert set(causes) <= {
+        "CONTENT_CREATED_FOR_TRUE_MISSING",
+        "CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL",
+        "CONTENT_CREATED_AFTER_UNDECIDABLE_REVIEW",
+    }
+    for nom, compte in causes.items():
+        assert resume[nom] == compte, nom
+    assert sum(causes.values()) == len(ecrits)
     for entree in ecrits:
         assert (ROOT / entree["path"]).exists(), entree["path"]
 
@@ -125,9 +137,10 @@ def test_l_enrichissement_ne_se_melange_pas_aux_manques(rapport):
     """
     enrichissements = rapport["EDITORIAL_QUALITY_ENRICHMENT"]
     assert enrichissements
-    chemins_de_manques = {
-        e["path"] for e in rapport["CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING"]
-    }
+    assert rapport["summary"]["CONTENT_CREATED_FOR_NEXUS_QUALITY_ENRICHMENT"] == len(
+        enrichissements
+    )
+    chemins_de_manques = {e["path"] for e in rapport["content_created"]}
     for entree in enrichissements:
         assert entree["path"] not in chemins_de_manques
         assert entree["standard"] == "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
@@ -158,7 +171,10 @@ def test_les_compteurs_du_rapport_sont_canoniques():
         "TRUE_CONTENT_GAP",
         "FALSE_PARTIAL_TOOLING",
         "TRUE_PARTIAL_PEDAGOGICAL",
-        "CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING",
+        "CONTENT_CREATED_FOR_TRUE_MISSING",
+        "CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL",
+        "CONTENT_CREATED_AFTER_UNDECIDABLE_REVIEW",
+        "CONTENT_CREATED_FOR_NEXUS_QUALITY_ENRICHMENT",
     ):
         assert metriques[nom].artifact == "audit/PROGRAMME_COUNTER_EXPERTISE_REPORT.json"
         assert metriques[nom].value == charge["summary"][nom]

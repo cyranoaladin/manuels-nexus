@@ -17,7 +17,10 @@
     "UNDECIDABLE_TRUE_CONTENT_GAP": 1,
     "OFFICIAL_REQUIRED_MISSING_NOW": 0,
     "OFFICIAL_REQUIRED_PARTIAL_NOW": 0,
-    "CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING": 9
+    "CONTENT_CREATED_FOR_TRUE_MISSING": 2,
+    "CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL": 6,
+    "CONTENT_CREATED_AFTER_UNDECIDABLE_REVIEW": 1,
+    "CONTENT_CREATED_FOR_NEXUS_QUALITY_ENRICHMENT": 2
   },
   "former_missing": [
     {
@@ -1321,79 +1324,90 @@
       ]
     }
   ],
-  "CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING": [
+  "content_created": [
     {
       "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/cours/10_C0_dispersion.tex",
       "official_id": "MENE1921265A::THEMES-D-ETUDE::REPARTITION-DES-RICHESSES-INEGALIT::KNOWLEDGE::d1dca1fd",
       "manual": "TCOMPL",
       "official_wording": "Statistique descriptive : caractéristiques de dispersion (médiane, quartiles, déciles, rapport interdécile).",
-      "verdict": "TRUE_CONTENT_GAP"
+      "verdict": "TRUE_CONTENT_GAP",
+      "cause": "CONTENT_CREATED_FOR_TRUE_MISSING"
     },
     {
       "path": "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/12_C7_produit_scalaire.tex",
       "official_id": "MENE1921246A::ALGEBRE-ET-GEOMETRIE::ORTHOGONALITE-ET-DISTANCES-DANS-L::KNOWLEDGE::e04b8897",
       "manual": "TSPE",
       "official_wording": "Développement de u  v , formules de polarisation.",
-      "verdict": "TRUE_CONTENT_GAP"
+      "verdict": "TRUE_CONTENT_GAP",
+      "cause": "CONTENT_CREATED_FOR_TRUE_MISSING"
     },
     {
       "path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-051.tex",
       "official_id": "MENE2602917A::AUTOMATISMES::EVOLUTIONS-ET-VARIATIONS::AUTOMATISM::65ae076a",
       "manual": "1SPE",
       "official_wording": "Calculer un taux d’évolution réciproque.",
-      "verdict": "TRUE_PARTIAL_PEDAGOGICAL"
+      "verdict": "TRUE_PARTIAL_PEDAGOGICAL",
+      "cause": "CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL"
     },
     {
       "path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-051.tex",
       "official_id": "MENE2602917A::AUTOMATISMES::EVOLUTIONS-ET-VARIATIONS::AUTOMATISM::65ae076a",
       "manual": "1SPE",
       "official_wording": "Calculer un taux d’évolution réciproque.",
-      "verdict": "TRUE_PARTIAL_PEDAGOGICAL"
+      "verdict": "TRUE_PARTIAL_PEDAGOGICAL",
+      "cause": "CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL"
     },
     {
       "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-052.tex",
       "official_id": "MENE2602917A::AUTOMATISMES::EVOLUTIONS-ET-VARIATIONS::AUTOMATISM::8ce04fd3",
       "manual": "1SPE",
       "official_wording": "Calculer le taux d’évolution équivalent à plusieurs évolutions successives.",
-      "verdict": "TRUE_PARTIAL_PEDAGOGICAL"
+      "verdict": "TRUE_PARTIAL_PEDAGOGICAL",
+      "cause": "CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL"
     },
     {
       "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-052.tex",
       "official_id": "MENE2602917A::AUTOMATISMES::EVOLUTIONS-ET-VARIATIONS::AUTOMATISM::8ce04fd3",
       "manual": "1SPE",
       "official_wording": "Calculer le taux d’évolution équivalent à plusieurs évolutions successives.",
-      "verdict": "TRUE_PARTIAL_PEDAGOGICAL"
+      "verdict": "TRUE_PARTIAL_PEDAGOGICAL",
+      "cause": "CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL"
     },
     {
       "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-055.tex",
       "official_id": "MENE2602917A::AUTOMATISMES::STATISTIQUES::AUTOMATISM::8754c49b",
       "manual": "1SPE",
       "official_wording": "Calculer et interpréter des indicateurs statistiques pour une série statistique.",
-      "verdict": "TRUE_PARTIAL_PEDAGOGICAL"
+      "verdict": "TRUE_PARTIAL_PEDAGOGICAL",
+      "cause": "CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL"
     },
     {
       "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-055.tex",
       "official_id": "MENE2602917A::AUTOMATISMES::STATISTIQUES::AUTOMATISM::8754c49b",
       "manual": "1SPE",
       "official_wording": "Calculer et interpréter des indicateurs statistiques pour une série statistique.",
-      "verdict": "TRUE_PARTIAL_PEDAGOGICAL"
+      "verdict": "TRUE_PARTIAL_PEDAGOGICAL",
+      "cause": "CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL"
     },
     {
       "path": "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/cours/11_C2_cosinus_sinus.tex",
       "official_id": "MENE2602917A::ANALYSE::TRIGONOMETRIE::DEMONSTRATION::810aff62",
       "manual": "1SPE",
       "official_wording": "Calcul de cos , sin , cos , sin . 4 4 3 3",
-      "verdict": "TRUE_CONTENT_GAP"
+      "verdict": "TRUE_CONTENT_GAP",
+      "cause": "CONTENT_CREATED_AFTER_UNDECIDABLE_REVIEW"
     }
   ],
   "EDITORIAL_QUALITY_ENRICHMENT": [
     {
       "path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/17_ALG_planche_de_galton.tex",
+      "cause": "CONTENT_CREATED_FOR_NEXUS_QUALITY_ENRICHMENT",
       "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD",
       "official_basis": "Exemple d'algorithme cite par le programme, non impose"
     },
     {
       "path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/18_ALG_marche_aleatoire.tex",
+      "cause": "CONTENT_CREATED_FOR_NEXUS_QUALITY_ENRICHMENT",
       "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD",
       "official_basis": "Exemple d'algorithme cite par le programme, non impose"
     }

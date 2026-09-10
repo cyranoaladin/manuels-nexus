@@ -36,6 +36,7 @@ PREREQUIS = "audit/1SPE_PREREQUISITE_SUPPORT.json"
 NORMATIVITE = "audit/NORMATIVITY_PROVENANCE_GATE.json"
 REPARATIONS = "audit/DANGLING_CAPACITY_REPAIRS.json"
 CONTRE_EXPERTISE = "audit/PROGRAMME_COUNTER_EXPERTISE_REPORT.json"
+RECUS_APPROBATION = "audit/CONTENT_APPROVAL_RECEIPTS.json"
 
 
 @dataclass(frozen=True)
@@ -245,10 +246,49 @@ SOURCES: tuple[tuple[str, str, tuple[str, ...]], ...] = (
         CONTRE_EXPERTISE,
         ("summary", "TRUE_PARTIAL_PEDAGOGICAL"),
     ),
+    # Un compteur unique melangeait trois causes que rien n'oblige a
+    # confondre : obligation absente, obligation insuffisamment travaillee, et
+    # attendu que la mesure n'avait pas pu chercher. Plus l'enrichissement, qui
+    # ne repond a aucune obligation.
     (
-        "CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING",
+        "CONTENT_CREATED_FOR_TRUE_MISSING",
         CONTRE_EXPERTISE,
-        ("summary", "CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING"),
+        ("summary", "CONTENT_CREATED_FOR_TRUE_MISSING"),
+    ),
+    (
+        "CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL",
+        CONTRE_EXPERTISE,
+        ("summary", "CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL"),
+    ),
+    (
+        "CONTENT_CREATED_AFTER_UNDECIDABLE_REVIEW",
+        CONTRE_EXPERTISE,
+        ("summary", "CONTENT_CREATED_AFTER_UNDECIDABLE_REVIEW"),
+    ),
+    (
+        "CONTENT_CREATED_FOR_NEXUS_QUALITY_ENRICHMENT",
+        CONTRE_EXPERTISE,
+        ("summary", "CONTENT_CREATED_FOR_NEXUS_QUALITY_ENRICHMENT"),
+    ),
+    (
+        "STALE_APPROVAL_AFTER_SEMANTIC_EDIT",
+        RECUS_APPROBATION,
+        ("summary", "STALE_APPROVAL_AFTER_SEMANTIC_EDIT"),
+    ),
+    (
+        "SEMANTIC_CHANGE_PRESERVES_OLD_HUMAN_APPROVAL",
+        RECUS_APPROBATION,
+        ("summary", "SEMANTIC_CHANGE_PRESERVES_OLD_HUMAN_APPROVAL"),
+    ),
+    (
+        "SEMANTIC_CHANGE_INVALIDATES_REVIEW_RECEIPT",
+        RECUS_APPROBATION,
+        ("summary", "SEMANTIC_CHANGE_INVALIDATES_REVIEW_RECEIPT"),
+    ),
+    (
+        "INVALIDATED_APPROVALS_AWAITING_HUMAN_REVIEW",
+        RECUS_APPROBATION,
+        ("summary", "INVALIDATED_APPROVALS_AWAITING_HUMAN_REVIEW"),
     ),
     (
         "NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK",

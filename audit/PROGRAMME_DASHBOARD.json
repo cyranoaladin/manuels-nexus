@@ -428,12 +428,68 @@
         "TRUE_PARTIAL_PEDAGOGICAL"
       ]
     },
-    "CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING": {
-      "value": 9,
+    "CONTENT_CREATED_FOR_TRUE_MISSING": {
+      "value": 2,
       "artifact": "audit/PROGRAMME_COUNTER_EXPERTISE_REPORT.json",
       "pointer": [
         "summary",
-        "CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING"
+        "CONTENT_CREATED_FOR_TRUE_MISSING"
+      ]
+    },
+    "CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL": {
+      "value": 6,
+      "artifact": "audit/PROGRAMME_COUNTER_EXPERTISE_REPORT.json",
+      "pointer": [
+        "summary",
+        "CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL"
+      ]
+    },
+    "CONTENT_CREATED_AFTER_UNDECIDABLE_REVIEW": {
+      "value": 1,
+      "artifact": "audit/PROGRAMME_COUNTER_EXPERTISE_REPORT.json",
+      "pointer": [
+        "summary",
+        "CONTENT_CREATED_AFTER_UNDECIDABLE_REVIEW"
+      ]
+    },
+    "CONTENT_CREATED_FOR_NEXUS_QUALITY_ENRICHMENT": {
+      "value": 2,
+      "artifact": "audit/PROGRAMME_COUNTER_EXPERTISE_REPORT.json",
+      "pointer": [
+        "summary",
+        "CONTENT_CREATED_FOR_NEXUS_QUALITY_ENRICHMENT"
+      ]
+    },
+    "STALE_APPROVAL_AFTER_SEMANTIC_EDIT": {
+      "value": 0,
+      "artifact": "audit/CONTENT_APPROVAL_RECEIPTS.json",
+      "pointer": [
+        "summary",
+        "STALE_APPROVAL_AFTER_SEMANTIC_EDIT"
+      ]
+    },
+    "SEMANTIC_CHANGE_PRESERVES_OLD_HUMAN_APPROVAL": {
+      "value": "PASS",
+      "artifact": "audit/CONTENT_APPROVAL_RECEIPTS.json",
+      "pointer": [
+        "summary",
+        "SEMANTIC_CHANGE_PRESERVES_OLD_HUMAN_APPROVAL"
+      ]
+    },
+    "SEMANTIC_CHANGE_INVALIDATES_REVIEW_RECEIPT": {
+      "value": "PASS",
+      "artifact": "audit/CONTENT_APPROVAL_RECEIPTS.json",
+      "pointer": [
+        "summary",
+        "SEMANTIC_CHANGE_INVALIDATES_REVIEW_RECEIPT"
+      ]
+    },
+    "INVALIDATED_APPROVALS_AWAITING_HUMAN_REVIEW": {
+      "value": 29,
+      "artifact": "audit/CONTENT_APPROVAL_RECEIPTS.json",
+      "pointer": [
+        "summary",
+        "INVALIDATED_APPROVALS_AWAITING_HUMAN_REVIEW"
       ]
     }
   }

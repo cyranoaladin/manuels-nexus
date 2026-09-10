@@ -39,6 +39,15 @@ COVERAGE = ROOT / "audit" / "OFFICIAL_TO_MANUAL_COVERAGE.json"
 OUT = ROOT / "audit" / "PROGRAMME_COUNTER_EXPERTISE_REPORT.json"
 OUT_MD = ROOT / "audit" / "PROGRAMME_COUNTER_EXPERTISE_REPORT.md"
 
+#: Contenus ecrits pour l'exigence de qualite de la collection, pas pour une
+#: obligation du programme. Le BO les NOMME parmi ses exemples d'algorithme.
+ENRICHISSEMENTS_NEXUS: tuple[str, ...] = (
+    "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/"
+    "17_ALG_planche_de_galton.tex",
+    "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/"
+    "18_ALG_marche_aleatoire.tex",
+)
+
 #: Ce que la seule comparaison des artefacts ne peut pas savoir : qu'un
 #: contenu a ete ECRIT, qu'une page existante n'etait pas assemblee, ou qu'un
 #: entrainement manquait vraiment. Chaque entree nomme le fichier qui la
@@ -150,6 +159,21 @@ DISPOSITIONS: tuple[dict[str, Any], ...] = (
     },
 )
 
+#: La cause PRINCIPALE d'une creation de contenu. Un compteur unique --
+#: « cree parce que le programme manquait » -- melangeait trois choses que
+#: rien n'oblige a confondre : une obligation reglementaire absente, une
+#: obligation presente mais insuffisamment travaillee, et un attendu que la
+#: mesure n'avait pas pu chercher. Chaque fichier releve d'une seule cause.
+CAUSE_DE_CREATION: dict[tuple[str, str], str] = {
+    ("MISSING", "TRUE_CONTENT_GAP"): "CONTENT_CREATED_FOR_TRUE_MISSING",
+    ("PARTIAL", "TRUE_PARTIAL_PEDAGOGICAL"): (
+        "CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL"
+    ),
+    ("UNDECIDABLE_BY_CONTENT_MATCH", "TRUE_CONTENT_GAP"): (
+        "CONTENT_CREATED_AFTER_UNDECIDABLE_REVIEW"
+    ),
+}
+
 #: Ce qu'un changement de nature de preuve dit de la cause. La correspondance
 #: n'est pas une supposition : chaque nature nomme le defaut d'outillage qui a
 #: ete repare pour l'obtenir.
@@ -223,6 +247,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args(argv)
 
+    for enrichissement in ENRICHISSEMENTS_NEXUS:
+        if not (ROOT / enrichissement).exists():
+            print(f"ENRICHISSEMENT INTROUVABLE : {enrichissement}", file=sys.stderr)
+            return 2
+
     base = json.loads(BASELINE.read_text(encoding="utf-8"))
     courante = json.loads(COVERAGE.read_text(encoding="utf-8"))
     par_id = {r["official_id"]: r for r in courante["rows"]}
@@ -282,6 +311,7 @@ def main(argv: list[str] | None = None) -> int:
                 "manual": avant["manual"],
                 "official_wording": avant["official_wording"],
                 "verdict": verdict,
+                "cause": CAUSE_DE_CREATION[(avant["coverage_status"], verdict)],
             })
 
     anciens_manquants = [x for x in lignes if x["ancien_verdict"] == "MISSING"]
@@ -332,34 +362,43 @@ def main(argv: list[str] | None = None) -> int:
             "OFFICIAL_REQUIRED_PARTIAL_NOW": courante["summary"][
                 "OFFICIAL_REQUIRED_PARTIAL"
             ],
-            "CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING": len(ecrits),
+            "CONTENT_CREATED_FOR_TRUE_MISSING": sum(
+                1 for e in ecrits
+                if e["cause"] == "CONTENT_CREATED_FOR_TRUE_MISSING"
+            ),
+            "CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL": sum(
+                1 for e in ecrits
+                if e["cause"] == "CONTENT_CREATED_FOR_TRUE_PARTIAL_PEDAGOGICAL"
+            ),
+            "CONTENT_CREATED_AFTER_UNDECIDABLE_REVIEW": sum(
+                1 for e in ecrits
+                if e["cause"] == "CONTENT_CREATED_AFTER_UNDECIDABLE_REVIEW"
+            ),
+            "CONTENT_CREATED_FOR_NEXUS_QUALITY_ENRICHMENT": len(
+                ENRICHISSEMENTS_NEXUS
+            ),
         },
         "former_missing": anciens_manquants,
         "former_partial": anciens_partiels,
         "former_undecidable": anciens_indecidables,
-        "CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING": ecrits,
+        "content_created": ecrits,
         # Ecrit aussi, mais pour une autre raison, et le dire est la moitie du
-        # travail : le BO NOMME ces deux simulations sans les imposer. Les
-        # ranger avec les manques du programme aurait fait passer un
-        # enrichissement pour une obligation comblee.
+        # travail : le BO NOMME ces simulations sans les imposer. Les ranger
+        # avec les manques du programme ferait passer un enrichissement pour
+        # une obligation comblee.
         "EDITORIAL_QUALITY_ENRICHMENT": [
             {
                 "path": chemin,
+                "cause": "CONTENT_CREATED_FOR_NEXUS_QUALITY_ENRICHMENT",
                 "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD",
-                "official_basis": "Exemple d'algorithme cite par le programme, non impose",
+                "official_basis": (
+                    "Exemple d'algorithme cite par le programme, non impose"
+                ),
             }
-            for chemin in (
-                "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/"
-                "17_ALG_planche_de_galton.tex",
-                "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/"
-                "18_ALG_marche_aleatoire.tex",
-            )
+            for chemin in ENRICHISSEMENTS_NEXUS
         ],
     }
-    for enrichissement in charge_enrichissements(charge):
-        if not (ROOT / enrichissement).exists():
-            print(f"ENRICHISSEMENT INTROUVABLE : {enrichissement}", file=sys.stderr)
-            return 2
+
     texte = json.dumps(charge, ensure_ascii=False, indent=2) + "\n"
     markdown = _markdown(charge)
     if args.check:
@@ -421,22 +460,22 @@ def _markdown(charge: dict[str, Any]) -> str:
             )
     lignes += [
         "",
-        "## CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING",
+        "## Contenu ecrit, par cause",
         "",
         "Ce qui a ete ECRIT, et rien d'autre : les reparations d'outillage n'y",
-        "figurent pas.",
+        "figurent pas. Chaque fichier releve d'une seule cause principale.",
         "",
-        "| Fichier | Manuel | Attendu | Verdict |",
-        "| --- | --- | --- | --- |",
+        "| Fichier | Manuel | Cause | Attendu | Verdict |",
+        "| --- | --- | --- | --- | --- |",
     ]
-    for x in charge["CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING"]:
+    for x in charge["content_created"]:
         lignes.append(
-            f"| `{x['path']}` | {x['manual']} | "
+            f"| `{x['path']}` | {x['manual']} | {x['cause']} | "
             f"{_cellule(x['official_wording'][:70])} | {x['verdict']} |"
         )
     lignes += [
         "",
-        "## EDITORIAL_QUALITY_ENRICHMENT",
+        "## CONTENT_CREATED_FOR_NEXUS_QUALITY_ENRICHMENT",
         "",
         "Ecrit aussi, mais pour une autre raison : le programme NOMME ces",
         "exemples d'algorithme sans les imposer. Ils ne comblent aucun manque",
@@ -451,9 +490,6 @@ def _markdown(charge: dict[str, Any]) -> str:
         )
     return "\n".join(lignes) + "\n"
 
-
-def charge_enrichissements(charge: dict[str, Any]) -> list[str]:
-    return [x["path"] for x in charge["EDITORIAL_QUALITY_ENRICHMENT"]]
 
 
 if __name__ == "__main__":
