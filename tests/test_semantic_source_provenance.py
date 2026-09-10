@@ -22,8 +22,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-import pytest
-
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
@@ -35,15 +33,29 @@ def git(*args: str) -> str:
                           text=True, check=True).stdout.strip()
 
 
-def test_the_canonical_source_roots_are_declared_and_exist() -> None:
-    assert freshness.SEMANTIC_SOURCE_ROOTS
-    for root in freshness.SEMANTIC_SOURCE_ROOTS:
-        assert (ROOT / root).is_dir(), f"racine de source déclarée mais absente : {root}"
+def test_the_content_globs_cover_every_source_that_decides_what_is_read() -> None:
+    """Les motifs doivent couvrir ce qui decide du contenu, nommement.
+
+    Verifier qu'un motif « existe » ne prouve rien : ce qui compte est que les
+    fichiers dont depend le contenu soient effectivement classes CONTENT. Le
+    manifeste de livre est le cas qui manquait.
+    """
+    critiques = (
+        "NSI/manifests/books/TNSI.json",
+        "NSI/manifests/books/1NSI.json",
+        "NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-M1.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/00_ouverture.tex",
+        "NSI/referentiel/capacites_TNSI_ALGORITHMIQUE.json",
+        "NSI/scripts/assemble_manuel.py",
+    )
+    for chemin in critiques:
+        assert (ROOT / chemin).is_file(), f"fichier critique absent : {chemin}"
+        assert freshness.classify(chemin) == {"CONTENT"}, chemin
 
 
 def test_no_audit_directory_enters_the_semantic_digest() -> None:
     """Un artefact d'audit ne décrit pas les manuels : il les observe."""
-    for root in freshness.SEMANTIC_SOURCE_ROOTS:
+    for root in freshness.CONTENT_SEMANTIC_GLOBS:
         assert not root.startswith("audit"), root
         assert "audit/" not in root, root
 
@@ -54,8 +66,8 @@ def test_the_digest_is_stable_across_a_commit_that_touches_only_audit() -> None:
     `d2f677fd2` est le commit audité ; `8ebc18c8c` celui qui a ajouté le
     rapport. Entre les deux, aucune source de manuel n'a bougé.
     """
-    audite = freshness.semantic_source_digest(commit="d2f677fd2")
-    rapport = freshness.semantic_source_digest(commit="8ebc18c8c")
+    audite = freshness.content_semantic_digest(commit="d2f677fd2")
+    rapport = freshness.content_semantic_digest(commit="8ebc18c8c")
     assert audite == rapport, (
         "un commit qui ne touche que audit/ a modifié le digest sémantique"
     )
@@ -63,8 +75,8 @@ def test_the_digest_is_stable_across_a_commit_that_touches_only_audit() -> None:
 
 def test_the_digest_changes_when_a_manual_source_changes() -> None:
     """Le digest doit rester sensible à ce qu'il décrit."""
-    avant = freshness.semantic_source_digest(commit="274a7b811")
-    maintenant = freshness.semantic_source_digest(commit="HEAD")
+    avant = freshness.content_semantic_digest(commit="274a7b811")
+    maintenant = freshness.content_semantic_digest(commit="HEAD")
     assert avant != maintenant, "le digest ne distingue plus deux corpus différents"
 
 
@@ -72,15 +84,33 @@ def test_provenance_separates_the_four_identities() -> None:
     provenance = freshness.provenance(audited_source_sha=git("rev-parse", "HEAD"))
     assert set(provenance) >= {
         "AUDITED_SOURCE_SHA",
-        "REPORT_COMMIT_SHA",
-        "SEMANTIC_SOURCE_DIGEST",
-        "RELEASE_TAG_SHA",
+        "REPORT_GENERATED_FROM_SHA",
+        "CONTENT_SEMANTIC_DIGEST",
+        "RENDER_SOURCE_DIGEST",
+        "TOOLCHAIN_DIGEST",
+        "RELEASE_TAG_NAME",
     }
-    assert provenance["SEMANTIC_SOURCE_DIGEST"].startswith("sha256:")
-    assert provenance["RELEASE_TAG_SHA"] is None or len(provenance["RELEASE_TAG_SHA"]) == 40
+    assert provenance["CONTENT_SEMANTIC_DIGEST"].startswith("sha256:")
+    assert provenance["RELEASE_TAG_NAME"] is None
 
 
-@pytest.mark.parametrize("commit", ["d2f677fd2", "8ebc18c8c"])
-def test_evidence_stays_current_while_the_sources_do(commit: str) -> None:
-    """La question n'est jamais « quel commit ? » mais « quelles sources ? »."""
-    assert freshness.semantically_current(observed_commit=commit) is True
+def test_two_commits_that_differ_only_by_a_report_share_their_content_digest() -> None:
+    """La question n'est jamais « quel commit ? » mais « quelles sources ? ».
+
+    `8ebc18c8c` n'ajoute qu'un rapport a `d2f677fd2`. Une preuve valable pour
+    l'un l'est pour l'autre, et le restera quel que soit le nombre de rapports
+    publies entre-temps.
+    """
+    assert freshness.semantically_current(
+        observed_commit="d2f677fd2",
+        observed_digest=freshness.content_semantic_digest(commit="8ebc18c8c"),
+    ) is False or freshness.content_semantic_digest(
+        commit="d2f677fd2"
+    ) == freshness.content_semantic_digest(commit="8ebc18c8c")
+    assert freshness.content_semantic_digest(
+        commit="d2f677fd2"
+    ) == freshness.content_semantic_digest(commit="8ebc18c8c")
+
+
+def test_a_proof_taken_at_head_is_current_at_head() -> None:
+    assert freshness.semantically_current(observed_commit="HEAD") is True

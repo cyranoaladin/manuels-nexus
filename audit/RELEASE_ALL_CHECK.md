@@ -8,10 +8,12 @@
 - **Préflight Impression Global** : `STALE_EVIDENCE_NOT_REOBSERVED` (12/12)
 - **Dette Produit Ouverte** : `0` (Technique: 0, Contenu: 0, Programme: 0, Print: 0, Manifest: 12, Repro: 0)
 - **Défauts Ouverts** : P0=0, P1=0, P2=0, Overfull=0
-- **Source auditée** : `3458f8e3c72a735098cef6a7fd27bc57b095c84a`
-- **Digest sémantique des sources** : `sha256:524be9d45ebe77df12c7249d46bceb2ec538dd070c00e6baf1138c03ef8c7e68`
-- **Commit du rapport** : `3458f8e3c72a735098cef6a7fd27bc57b095c84a` (traçabilité seule — ne périme aucune preuve)
-- **Arbre de travail** : SALE (124 entrée(s))
+- **Source auditée** : `32a6fe5281f5081dd065b7c408a88f69e2c77629`
+- **Contenu (digest sémantique)** : `sha256:ff8de46764fb3f34f513f633ebd3d581fbca4a022a52c49e5568a28e41e16d16`
+- **Rendu (digest des sources)** : `sha256:017e347a73b46bf209b276042fd7605a9f6f14f9f4c36439efbd935ac189c182`
+- **Chaîne de fabrication (digest)** : `sha256:26d18c8e031873ab6c56e5f43e08605df21747bb899364ed60848d2965ec0ea6`
+- **Rapport généré depuis** : `32a6fe5281f5081dd065b7c408a88f69e2c77629` (le commit qui portera ce rapport n'existe pas encore)
+- **Arbre de travail** : SALE (11 entrée(s))
 
 ## Tableau Récapitulatif Exhaustif des 12 PDF Canoniques
 

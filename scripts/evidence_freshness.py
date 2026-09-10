@@ -39,6 +39,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import subprocess
 from pathlib import Path
 from typing import Any, Iterable
@@ -180,92 +181,287 @@ def assess_artifact(path: Path, root: Path = ROOT) -> dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
-# Provenance sémantique : ce qui décrit le courant est le digest, pas le commit
+# Trois digests, parce qu'une preuve ne depend pas de tout
 # ---------------------------------------------------------------------------
 #
-# Un rapport d'audit qui se commite fait avancer HEAD sans toucher un seul
-# octet de manuel. Juger la fraîcheur d'une preuve sur HEAD la périme donc à
-# chaque publication : le rapport s'invalide lui-même. Quatre identités sont
-# distinguées, et une seule sert de critère.
+# Un digest unique confondait deux questions distinctes : « le contenu
+# enseigne a-t-il change ? » et « le rendu a-t-il change ? ». Changer une
+# couleur de charte perimait alors la validation scientifique d'un chapitre,
+# et un manifeste de livre -- qui decide de la liste et de l'ordre des
+# chapitres -- n'entrait dans aucun digest alors qu'il decide du contenu.
 #
-#     AUDITED_SOURCE_SHA      le commit dont les sources ont été observées
-#     REPORT_COMMIT_SHA       le commit portant le rapport — traçabilité seule
-#     SEMANTIC_SOURCE_DIGEST  l'empreinte des sources canoniques : LE critère
-#     RELEASE_TAG_SHA         le tag de release, lorsqu'il existe
+#   CONTENT_SEMANTIC_DIGEST   ce que l'eleve et le professeur lisent
+#   RENDER_SOURCE_DIGEST      la facon dont cela s'imprime
+#   TOOLCHAIN_DIGEST          le dispositif qui reconstruit
 #
-#: Les racines qui CONSTITUENT les manuels. `audit/` en est exclu par nature :
-#: il observe les manuels, il ne les compose pas.
-SEMANTIC_SOURCE_ROOTS = (
-    "Mathematiques/manuel-maths/chapitres",
-    "Mathematiques/manuel-maths/gabarits",
-    "Mathematiques/manuel-maths/referentiel",
-    "NSI/chapitres",
-    "NSI/gabarits",
-    "NSI/referentiel",
-    "gabarits",
+# Dependances des preuves :
+#   scientifique / pedagogique   CONTENT
+#   visuelle / D7                CONTENT + RENDER
+#   reproductibilite / release   les trois
+
+#: Ce qui decide de ce qui est LU : objets, contrats, capacites, referentiels,
+#: textes officiels, manifestes de livres, et la logique d'assemblage qui
+#: choisit les objets, leur ordre et la variante eleve ou professeur.
+CONTENT_SEMANTIC_GLOBS = (
+    "Mathematiques/manuel-maths/chapitres/**",
+    "NSI/chapitres/**",
+    "Mathematiques/manuel-maths/referentiel/**",
+    "NSI/referentiel/**",
+    "NSI/manifests/**",
+    "Mathematiques/manuel-maths/manifests/**",
+    "docs/programmes/**",
+    "Mathematiques/manuel-maths/sources/txt/**",
+    "NSI/sources/**",
+    "Mathematiques/manuel-maths/scripts/assemble*.py",
+    "NSI/scripts/assemble*.py",
+    "gabarits/common/chapitre_master.tex",
+    "Mathematiques/manuel-maths/gabarits/chapitre_master.tex",
+    "NSI/gabarits/book_master.tex",
+    "NSI/gabarits/chapitre_master.tex",
+)
+
+#: Ce qui decide de la FORME : classes, styles, charte, polices, logos,
+#: couvertures, composition des marges. Rien de cela ne change un enonce.
+RENDER_SOURCE_GLOBS = (
+    "gabarits/**/*.cls", "gabarits/**/*.sty", "gabarits/**/*.lua",
+    "gabarits/**/*.otf", "gabarits/**/*.png",
+    "gabarits/common/nexus-*.tex",
+    "Mathematiques/manuel-maths/gabarits/**/*.cls",
+    "Mathematiques/manuel-maths/gabarits/**/*.sty",
+    "Mathematiques/manuel-maths/gabarits/**/*.lua",
+    "Mathematiques/manuel-maths/gabarits/**/*.otf",
+    "Mathematiques/manuel-maths/gabarits/**/*.png",
+    "Mathematiques/manuel-maths/gabarits/nexus-*.tex",
+    "NSI/gabarits/**/*.cls", "NSI/gabarits/**/*.sty", "NSI/gabarits/**/*.lua",
+    "NSI/gabarits/**/*.otf", "NSI/gabarits/**/*.png",
+    "NSI/gabarits/nexus-*.tex",
+)
+
+#: Ce qui decide de la RECONSTRUCTION : dependances figees, outillage epingle,
+#: workflows, configuration deterministe.
+TOOLCHAIN_GLOBS = (
+    "requirements-ci-audit.txt",
+    "pyproject.toml",
+    "Mathematiques/manuel-maths/release/**",
+    ".github/workflows/**",
 )
 
 
-def _tree_sha(root: Path, commit: str, path: str) -> str | None:
-    """SHA de l'arbre Git d'un répertoire à un commit donné.
+def _tree_blobs(root: Path, commit: str) -> dict[str, str]:
+    """Chemins suivis et identifiant de blob, en UN seul appel a Git.
 
-    Git hache déjà récursivement le contenu d'un répertoire : ce SHA EST
-    l'empreinte de ces sources, sans avoir à les relire.
+    `git ls-tree -r` donne deja « mode type sha<TAB>chemin » : interroger Git
+    fichier par fichier coutait neuf mille processus par digest.
     """
     try:
         completed = subprocess.run(
-            ["git", "rev-parse", f"{commit}:{path}"],
+            ["git", "ls-tree", "-r", commit],
             cwd=root, capture_output=True, text=True, check=True,
         )
     except (OSError, subprocess.CalledProcessError):
-        return None
-    return completed.stdout.strip() or None
+        return {}
+    blobs: dict[str, str] = {}
+    for ligne in completed.stdout.splitlines():
+        entete, _, chemin = ligne.partition("\t")
+        morceaux = entete.split()
+        if chemin and len(morceaux) >= 3:
+            blobs[chemin] = morceaux[2]
+    return blobs
 
 
-def semantic_source_digest(root: Path = ROOT, commit: str = "HEAD") -> str:
-    """Empreinte des sources canoniques à un commit.
+def _glob_regex(motif: str) -> re.Pattern[str]:
+    """Traduit un motif de chemin en expression reguliere.
 
-    Insensible à tout commit qui ne touche que `audit/`, la documentation ou
-    les tests : ces fichiers ne composent aucun manuel.
+    `**` traverse les repertoires, `*` s'arrete au separateur. Python 3.12 n'a
+    pas `PurePath.full_match` : la traduction est explicite plutot que
+    dependante d'une version.
     """
+    morceaux, i = [], 0
+    while i < len(motif):
+        if motif.startswith("**/", i):
+            morceaux.append("(?:[^/]+/)*")
+            i += 3
+        elif motif.startswith("**", i):
+            morceaux.append(".*")
+            i += 2
+        elif motif[i] == "*":
+            morceaux.append("[^/]*")
+            i += 1
+        elif motif[i] == "?":
+            morceaux.append("[^/]")
+            i += 1
+        else:
+            morceaux.append(re.escape(motif[i]))
+            i += 1
+    return re.compile("".join(morceaux) + r"\Z")
+
+
+_MOTIFS = None
+
+
+def classify(path: str) -> set[str]:
+    """Les familles de digest auxquelles un chemin appartient."""
+    global _MOTIFS
+    if _MOTIFS is None:
+        _MOTIFS = {
+            "CONTENT": [_glob_regex(m) for m in CONTENT_SEMANTIC_GLOBS],
+            "RENDER": [_glob_regex(m) for m in RENDER_SOURCE_GLOBS],
+            "TOOLCHAIN": [_glob_regex(m) for m in TOOLCHAIN_GLOBS],
+        }
+    return {
+        nom for nom, motifs in _MOTIFS.items()
+        if any(motif.match(path) for motif in motifs)
+    }
+
+
+#: Calculer sur l'ARBRE DE TRAVAIL et non sur un commit. Indispensable pour
+#: eprouver le modele par mutation : une mutation non commitee doit deja se
+#: voir, sinon le digest ne protege que ce qui est deja fige.
+WORKTREE = "WORKTREE"
+
+
+def _worktree_blob(root: Path, path: str) -> str:
+    """Identifiant de blob Git d'un fichier de l'arbre de travail.
+
+    Recalcule la meme empreinte que `git rev-parse <commit>:<path>` --
+    sha1 de « blob <taille>\\0 » suivi du contenu -- pour que les deux modes
+    soient comparables. Les melanger donnerait deux digests differents pour un
+    contenu identique, et rendrait toute mutation indetectable.
+    """
+    fichier = root / path
+    if not fichier.is_file():
+        return "ABSENT"
+    contenu = fichier.read_bytes()
+    entete = f"blob {len(contenu)}\0".encode()
+    return hashlib.sha1(entete + contenu).hexdigest()  # noqa: S324
+
+
+def _family_digest(root: Path, commit: str, famille: str) -> str:
+    blobs = _tree_blobs(root, "HEAD" if commit == WORKTREE else commit)
+    if commit == WORKTREE:
+        blobs = {chemin: _worktree_blob(root, chemin) for chemin in blobs}
     lignes = [
-        f"{path}:{_tree_sha(root, commit, path) or 'ABSENT'}"
-        for path in SEMANTIC_SOURCE_ROOTS
+        f"{chemin}:{blob}"
+        for chemin, blob in sorted(blobs.items())
+        if famille in classify(chemin)
     ]
     empreinte = hashlib.sha256("\n".join(lignes).encode("utf-8")).hexdigest()
     return f"sha256:{empreinte}"
 
 
-def release_tag_sha(root: Path = ROOT) -> str | None:
-    """SHA du tag de release couvrant HEAD, s'il en existe un."""
+def content_semantic_digest(root: Path = ROOT, commit: str = "HEAD") -> str:
+    """Empreinte de tout ce qui peut changer ce qui est enseigne ou lu."""
+    return _family_digest(root, commit, "CONTENT")
+
+
+def render_source_digest(root: Path = ROOT, commit: str = "HEAD") -> str:
+    """Empreinte de tout ce qui change le rendu imprime."""
+    return _family_digest(root, commit, "RENDER")
+
+
+def toolchain_digest(root: Path = ROOT, commit: str = "HEAD") -> str:
+    """Empreinte du dispositif de reconstruction."""
+    return _family_digest(root, commit, "TOOLCHAIN")
+
+
+def source_digests(root: Path = ROOT, commit: str = "HEAD") -> dict[str, str]:
+    return {
+        "CONTENT_SEMANTIC_DIGEST": content_semantic_digest(root, commit),
+        "RENDER_SOURCE_DIGEST": render_source_digest(root, commit),
+        "TOOLCHAIN_DIGEST": toolchain_digest(root, commit),
+    }
+
+
+class AmbiguousReleaseTag(Exception):
+    """Plusieurs tags de release designent le meme candidat.
+
+    Prendre le premier reviendrait a choisir la release au hasard de l'ordre
+    alphabetique. Le controle echoue, et un humain tranche.
+    """
+
+
+def release_tag_identity(root: Path = ROOT, commit: str = "HEAD") -> dict[str, Any]:
+    """Identite complete d'un tag de release.
+
+    Un tag ANNOTE est un objet Git distinct du commit qu'il reference : les
+    deux n'ont pas le meme SHA. Les confondre sous un unique RELEASE_TAG_SHA
+    rendait impossible de dire lequel on citait.
+
+        RELEASE_TAG_NAME        le nom, tel qu'un humain le lit
+        RELEASE_TAG_OBJECT_SHA  l'objet tag lui-meme (None si tag leger)
+        RELEASE_COMMIT_SHA      le commit reference
+        RELEASE_TREE_SHA        l'arbre de ce commit -- le contenu publie
+    """
+    vide: dict[str, Any] = {
+        "RELEASE_TAG_NAME": None,
+        "RELEASE_TAG_OBJECT_SHA": None,
+        "RELEASE_COMMIT_SHA": None,
+        "RELEASE_TREE_SHA": None,
+    }
     try:
         completed = subprocess.run(
-            ["git", "tag", "--points-at", "HEAD", "--list", "release/*"],
+            ["git", "tag", "--points-at", commit, "--list", "release/*"],
             cwd=root, capture_output=True, text=True, check=True,
         )
     except (OSError, subprocess.CalledProcessError):
-        return None
-    tags = [line for line in completed.stdout.split() if line]
+        return vide
+    tags = sorted(nom for nom in completed.stdout.split() if nom)
     if not tags:
-        return None
-    return _tree_sha(root, tags[0], "") or head_sha(root)
+        return vide
+    if len(tags) > 1:
+        raise AmbiguousReleaseTag("AMBIGUOUS_RELEASE_TAG : " + ", ".join(tags))
+    nom = tags[0]
+
+    def rev(expression: str) -> str | None:
+        try:
+            sortie = subprocess.run(
+                ["git", "rev-parse", expression],
+                cwd=root, capture_output=True, text=True, check=True,
+            )
+        except (OSError, subprocess.CalledProcessError):
+            return None
+        return sortie.stdout.strip() or None
+
+    objet = rev(nom)
+    commit_sha = rev(f"{nom}^{{commit}}")
+    return {
+        "RELEASE_TAG_NAME": nom,
+        # Un tag leger pointe directement le commit : il n'y a pas d'objet tag.
+        "RELEASE_TAG_OBJECT_SHA": objet if objet != commit_sha else None,
+        "RELEASE_COMMIT_SHA": commit_sha,
+        "RELEASE_TREE_SHA": rev(f"{nom}^{{tree}}"),
+    }
 
 
 def provenance(
     audited_source_sha: str | None = None,
     root: Path = ROOT,
 ) -> dict[str, Any]:
-    """Les quatre identités, séparées, sans qu'aucune ne se confonde."""
-    return {
-        "AUDITED_SOURCE_SHA": audited_source_sha or head_sha(root),
-        "REPORT_COMMIT_SHA": head_sha(root),
-        "SEMANTIC_SOURCE_DIGEST": semantic_source_digest(root),
-        "RELEASE_TAG_SHA": release_tag_sha(root),
+    """Provenance d'un rapport, sans identite trompeuse.
+
+    Le commit qui CONTIENT le rapport n'existe pas encore quand le rapport se
+    genere : le nommer REPORT_COMMIT_SHA etait faux. Ce qui est connu est le
+    commit DEPUIS lequel on genere. Le commit d'introduction se retrouve apres
+    coup :
+
+        git log -1 --format=%H -- <chemin du rapport>
+    """
+    depuis = head_sha(root)
+    identite: dict[str, Any] = {
+        "AUDITED_SOURCE_SHA": audited_source_sha or depuis,
+        "REPORT_GENERATED_FROM_SHA": depuis,
+        **source_digests(root),
         "freshness_rule": (
-            "Une preuve reste courante tant que SEMANTIC_SOURCE_DIGEST n'a pas "
-            "change. REPORT_COMMIT_SHA ne fait jamais perimer quoi que ce soit."
+            "Une preuve de contenu reste courante tant que "
+            "CONTENT_SEMANTIC_DIGEST n'a pas change. Le commit qui publie un "
+            "rapport ne perime rien."
         ),
     }
+    try:
+        identite.update(release_tag_identity(root))
+    except AmbiguousReleaseTag as exc:
+        identite["RELEASE_TAG_IDENTITY_ERROR"] = str(exc)
+    return identite
 
 
 def semantically_current(
@@ -273,13 +469,13 @@ def semantically_current(
     observed_digest: str | None = None,
     root: Path = ROOT,
 ) -> bool:
-    """La preuve decrit-elle les sources COURANTES ?
+    """La preuve de CONTENU decrit-elle les sources courantes ?
 
-    Repond par le digest. Un commit observe n'est utilise que pour retrouver le
-    digest d'alors, jamais compare a HEAD.
+    Repond par le digest de contenu. Un commit observe ne sert qu'a retrouver
+    le digest d'alors, jamais a etre compare a HEAD.
     """
     if observed_digest is None:
         if observed_commit is None:
             return False
-        observed_digest = semantic_source_digest(root, observed_commit)
-    return observed_digest == semantic_source_digest(root)
+        observed_digest = content_semantic_digest(root, observed_commit)
+    return observed_digest == content_semantic_digest(root)

@@ -22,8 +22,8 @@ def test_the_release_report_records_the_commit_it_observed() -> None:
     payload = json.loads(REPORT.read_text(encoding="utf-8"))
     provenance = payload["provenance"]
     assert len(provenance["AUDITED_SOURCE_SHA"]) == 40
-    assert len(provenance["REPORT_COMMIT_SHA"]) == 40
-    assert provenance["SEMANTIC_SOURCE_DIGEST"].startswith("sha256:")
+    assert len(provenance["REPORT_GENERATED_FROM_SHA"]) == 40
+    assert provenance["CONTENT_SEMANTIC_DIGEST"].startswith("sha256:")
     assert isinstance(provenance["worktree_dirty"], bool)
     assert provenance["generated_by"] == payload["generated_by"]
     assert provenance["scope"] in {
@@ -41,13 +41,13 @@ def test_the_report_commit_is_never_a_freshness_criterion() -> None:
     """
     import sys
     sys.path.insert(0, str(ROOT / "scripts"))
-    from evidence_freshness import semantic_source_digest
+    from evidence_freshness import content_semantic_digest
 
     provenance = json.loads(REPORT.read_text(encoding="utf-8"))["provenance"]
-    assert provenance["SEMANTIC_SOURCE_DIGEST"] == semantic_source_digest()
+    assert provenance["CONTENT_SEMANTIC_DIGEST"] == content_semantic_digest()
     # Les deux commits du rapport de consolidation partagent le meme digest :
     # aucun des deux ne decrit des sources differentes.
-    assert semantic_source_digest(commit="d2f677fd2") == semantic_source_digest(
+    assert content_semantic_digest(commit="d2f677fd2") == content_semantic_digest(
         commit="8ebc18c8c"
     )
 

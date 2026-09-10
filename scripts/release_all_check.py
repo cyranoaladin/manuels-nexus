@@ -519,9 +519,11 @@ def main() -> int:
         f"- **Dette Produit Ouverte** : `{report['summary']['PRODUCT_TECHNICAL_DEBT_OPEN']}` (Technique: {report['summary']['PRODUCT_TECHNICAL_DEBT_OPEN']}, Contenu: {report['summary']['CONTENT_DEBT_OPEN']}, Programme: {report['summary']['PROGRAMME_DEBT_OPEN']}, Print: {report['summary']['PRINT_DEBT_OPEN']}, Manifest: {report['summary']['MANIFEST_DEBT_OPEN']}, Repro: {report['summary']['REPRODUCIBILITY_DEBT_OPEN']})",
         f"- **Défauts Ouverts** : P0={report['summary']['TOTAL_P0_OPEN']}, P1={report['summary']['TOTAL_P1_OPEN']}, P2={report['summary']['TOTAL_P2_OPEN']}, Overfull={report['summary']['OVERFULL']}",
         f"- **Source auditée** : `{report['provenance']['AUDITED_SOURCE_SHA']}`",
-        f"- **Digest sémantique des sources** : `{report['provenance']['SEMANTIC_SOURCE_DIGEST']}`",
-        f"- **Commit du rapport** : `{report['provenance']['REPORT_COMMIT_SHA']}` "
-        f"(traçabilité seule — ne périme aucune preuve)",
+        f"- **Contenu (digest sémantique)** : `{report['provenance']['CONTENT_SEMANTIC_DIGEST']}`",
+        f"- **Rendu (digest des sources)** : `{report['provenance']['RENDER_SOURCE_DIGEST']}`",
+        f"- **Chaîne de fabrication (digest)** : `{report['provenance']['TOOLCHAIN_DIGEST']}`",
+        f"- **Rapport généré depuis** : `{report['provenance']['REPORT_GENERATED_FROM_SHA']}` "
+        f"(le commit qui portera ce rapport n'existe pas encore)",
         f"- **Arbre de travail** : {'SALE' if report['provenance']['worktree_dirty'] else 'propre'} "
         f"({report['provenance']['worktree_dirty_entries']} entrée(s))",
         "",
