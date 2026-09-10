@@ -86,6 +86,111 @@ BANALS = {
 }
 
 
+
+#: Verdicts rendus a la LECTURE, pour les attendus que le rapprochement
+#: automatique ne pouvait pas trancher. Trois situations, et il importe de ne
+#: pas les confondre :
+#:
+#:   FALSE_MISSING_TOOLING   le manuel traite l'attendu ; c'est l'outil qui ne
+#:                           le voyait pas.
+#:   MISSING_FROM_ASSEMBLY   le contenu existe mais n'entre pas dans le manuel
+#:                           assemble.
+#:   TRUE_CONTENT_GAP        le manuel assemble ne traite pas l'attendu.
+#:
+#: Chaque entree cite les objets qui la fondent : un verdict sans objet nomme
+#: ne serait qu'une opinion.
+REVUES_CONTRADICTOIRES: tuple[dict[str, Any], ...] = (
+    {
+        "manual": "1SPE",
+        "wording_prefix": "Calcul de 1 + 2 +",
+        "verdict": "FALSE_MISSING_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": ("1SPE-SUITES-CR-013",),
+        "cause": (
+            "le libelle officiel se reduit a des symboles mathematiques : "
+            "aucun mot distinctif, donc aucune recherche possible"
+        ),
+        "reading": (
+            "Le cours sur les sommes redige la demonstration par la methode de "
+            "Gauss -- somme ecrite a l'envers, addition membre a membre, "
+            "2S = n(n+1) -- dans un bloc titre « Demonstrations exigibles »."
+        ),
+    },
+    {
+        "manual": "1SPE",
+        "wording_prefix": "Calcul de 1 + 𝑞",
+        "verdict": "FALSE_MISSING_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": ("1SPE-SUITES-CR-013",),
+        "cause": "meme cause : un libelle sans mot distinctif",
+        "reading": (
+            "Le meme cours redige la demonstration de la somme geometrique par "
+            "multiplication par q et telescopage, jusqu'a "
+            "S = (1 - q^{n+1}) / (1 - q)."
+        ),
+    },
+    {
+        "manual": "1SPE",
+        "wording_prefix": "Utiliser un repère pour étudier une configuration",
+        "verdict": "FALSE_MISSING_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": ("1SPE-GEOREP-CR-014", "1SPE-GEOREP-ME-005"),
+        "cause": (
+            "le mot « configuration » ne figure dans aucun objet, alors que "
+            "c'est le seul terme distinctif du libelle avec « repere »"
+        ),
+        "reading": (
+            "Le chapitre de geometrie reperee comporte un cours entier "
+            "« Problemes dans un repere » et la fiche methode correspondante, "
+            "tous deux rattaches a la capacite C5 du contrat : « resoudre des "
+            "problemes geometriques dans un repere orthonorme »."
+        ),
+    },
+    {
+        "manual": "1SPE",
+        "wording_prefix": "Calcul de cos , sin , cos , sin",
+        "verdict": "TRUE_CONTENT_GAP",
+        "status": "COMPLETE",
+        "evidence_objects": ("1SPE-TRIGO-CR-011",),
+        "cause": (
+            "le libelle officiel n'a pas survecu a l'extraction du PDF -- il "
+            "s'y reduit a « Calcul de cos , sin , cos , sin . 4 4 3 3 » -- et "
+            "ne portait donc aucun mot cherchable"
+        ),
+        "reading": (
+            "Le manuel donnait les valeurs remarquables en tableau et indiquait "
+            "en une phrase leur origine geometrique, sans les calculer : ce "
+            "n'etait pas la demonstration que le programme exige. Elle a ete "
+            "redigee -- pi/4 par le complementaire et l'identite fondamentale, "
+            "pi/3 par le triangle equilateral, pi/6 par deduction -- et "
+            "verifiee exactement en sympy."
+        ),
+    },
+    {
+        "manual": "TEXPERTES",
+        "wording_prefix": "Effectuer des calculs sur des nombres complexes",
+        "verdict": "FALSE_MISSING_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": (
+            "TEXP-CTP-CR-010",
+            "TEXP-CTP-ME-001",
+            "TEXP-CTP-ME-002",
+        ),
+        "cause": (
+            "les termes du libelle -- « effectuer », « calculs », "
+            "« choisissant », « adaptee » -- sont trop generiques pour "
+            "designer quoi que ce soit"
+        ),
+        "reading": (
+            "Le cours sur la forme exponentielle et les deux fiches methode "
+            "enseignent precisement le choix de la forme : forme exponentielle "
+            "pour une puissance, formules d'Euler pour une linearisation, "
+            "Moivre pour cos(nt) et sin(nt)."
+        ),
+    },
+)
+
+
 def _sans_accents(texte: str) -> str:
     return "".join(
         c for c in unicodedata.normalize("NFKD", texte) if not unicodedata.combining(c)
@@ -172,6 +277,7 @@ def verdict(
     chapitres_de_reinvestissement: set[str],
     demonstration_redigee: bool,
     travail_algorithmique: bool,
+    exemples_travailles: bool = False,
     travail_algorithmique_de_la_partie: bool = False,
     exemple_impose: bool = True,
 ) -> tuple[str, str]:
@@ -276,10 +382,17 @@ def verdict(
         )
 
     if normativity == EXPECTED_CAPACITY:
-        if enseigne and (pratique or appuye):
+        if enseigne and (pratique or appuye or evalue):
             return "COMPLETE", "enseigne et mis en pratique"
+        if enseigne and exemples_travailles:
+            # Une capacite n'a pas besoin d'une fiche methode pour etre mise en
+            # pratique : elle a besoin d'un entrainement adapte. Un exemple
+            # travaille dans le corps du cours en est un -- c'est la forme que
+            # prennent les pages transversales, qui montrent seize fois la
+            # capacite a l'oeuvre sans aucun exercice separe.
+            return "COMPLETE", "enseigne et montre a l'oeuvre sur des exemples travailles"
         if enseigne:
-            return "PARTIAL", "enseigne, mais sans exercice ni methode"
+            return "PARTIAL", "enseigne, mais sans exercice, methode ni exemple travaille"
         if pratique or appuye or evalue:
             return "PARTIAL", "pratique ou evalue, mais jamais enseigne"
         return "PARTIAL", "objets presents, roles insuffisants"
@@ -299,6 +412,19 @@ def main(argv: list[str] | None = None) -> int:
     liaison = json.loads(BINDING.read_text(encoding="utf-8"))
     contrats = charger_contrats()
     objets = charger_objets(contrats) + charger_transversaux()
+    par_identifiant = {o.object_id: o for o in objets}
+    def revue_de(item: dict[str, Any]) -> dict[str, Any] | None:
+        """Verdict declare pour cet attendu, s'il en existe un.
+
+        Le rapprochement se fait sur le debut du libelle officiel : un
+        identifiant technique changerait au moindre reformatage du texte.
+        """
+        for entree in REVUES_CONTRADICTOIRES:
+            if entree["manual"] == item["manual"] and item[
+                "official_wording"
+            ].startswith(entree["wording_prefix"]):
+                return entree
+        return None
 
     # atome -> objets qui le servent
     par_atome: dict[str, list[Objet]] = defaultdict(list)
@@ -506,13 +632,25 @@ def main(argv: list[str] | None = None) -> int:
             and not atomes
             and not termes_distinctifs(item["official_wording"])
         )
+        revue = revue_de(item)
+        if revue is not None:
+            # Le verdict rendu a la lecture remplace celui du rapprochement,
+            # et cite les objets qui le fondent.
+            for identifiant in revue["evidence_objects"]:
+                objet = par_identifiant.get(identifiant)
+                if objet is not None:
+                    servants[objet.object_id] = objet
+            preuve = "CONTRADICTORY_REVIEW"
+
         roles: Counter[str] = Counter(o.role for o in servants.values())
         chapitres = {o.chapter for o in servants.values()}
         reinvestissement = {
             o.chapter for o in servants.values()
             if o.role in ("REINVESTMENT", "ASSESSMENT", "SUPPORTING_EVIDENCE")
         }
-        if indecidable:
+        if revue is not None:
+            statut, motif = revue["status"], revue["reading"]
+        elif indecidable:
             # Le libelle ne porte aucun mot distinctif : « Calcul de cos , sin
             # , cos , sin . 4 4 3 3 », ou la notation mathematique n'a pas
             # survecu a l'extraction. Declarer l'attendu absent serait affirmer
@@ -530,6 +668,9 @@ def main(argv: list[str] | None = None) -> int:
                 reinvestissement,
                 any(o.has_written_proof for o in servants.values()),
                 any(o.has_algorithmic_work for o in servants.values()),
+                exemples_travailles=any(
+                    o.has_worked_examples for o in servants.values()
+                ),
                 travail_algorithmique_de_la_partie=algorithmique_par_partie.get(
                     (
                         manuel,
@@ -563,6 +704,14 @@ def main(argv: list[str] | None = None) -> int:
             "object_count": len(servants),
             "coverage_status": statut,
             "coverage_reason": motif,
+            "contradictory_review": (
+                {
+                    "verdict": revue["verdict"],
+                    "cause": revue["cause"],
+                }
+                if revue is not None
+                else None
+            ),
         })
 
     obligatoires = [r for r in lignes if r["mandatory"]]
@@ -682,6 +831,11 @@ def main(argv: list[str] | None = None) -> int:
                 "contenu que le cours d'a cote enseigne. Ce n'est pas un "
                 "heritage : le corps de l'objet doit porter le vocabulaire de "
                 "la ligne."
+            ),
+            "CONTRADICTORY_REVIEW": (
+                "verdict rendu a la lecture de l'attendu officiel et des objets "
+                "du manuel, la ou le rapprochement automatique ne pouvait pas "
+                "conclure. Les objets qui le fondent sont nommes."
             ),
             "CONTENT_MATCH_MANUAL_WIDE": (
                 "aucun chapitre ne se rattache a cette partie du programme : "

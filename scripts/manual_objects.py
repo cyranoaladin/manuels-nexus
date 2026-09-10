@@ -107,6 +107,12 @@ class Objet:
     #: « OPTIONAL_EXTENSION — Approfondissement, vers la Terminale » : ils ne
     #: relevent pas du programme de l'annee et le disent. Ignorer cette
     #: declaration les faisait passer pour des objets sans justification.
+    #: Presence d'exemples travailles dans le corps de l'objet. Un attendu
+    #: n'a pas besoin d'une fiche methode pour etre mis en pratique : il a
+    #: besoin d'un entrainement adapte, et un exemple redige en est un. Les
+    #: pages transversales du manuel en portent seize pour la seule logique,
+    #: sans aucun exercice separe.
+    has_worked_examples: bool = False
     programme_alignment: str = ""
     extension_label: str = ""
 
@@ -197,9 +203,7 @@ def charger_objets(contrats: dict[str, Contrat]) -> list[Objet]:
                 path=str(chemin.relative_to(ROOT)),
                 atoms=tuple(sorted(atomes)),
                 codes=codes,
-                has_written_proof=bool(
-                    re.search(r"\\demonstration|\\begin\{demonstration\}|\\preuve", texte)
-                ),
+                has_written_proof=_porte_une_demonstration(texte),
                 has_algorithmic_work=bool(
                     re.search(
                         r"\\begin\{python\}|\\begin\{algorithme\}|\\lstinputlisting"
@@ -208,6 +212,7 @@ def charger_objets(contrats: dict[str, Contrat]) -> list[Objet]:
                     )
                 ),
                 text_length=len(texte),
+                has_worked_examples=bool(EXEMPLE_TRAVAILLE.search(texte)),
                 linked_correction=meta.get("corrige_tex", "") or "",
                 programme_alignment=meta.get("programme_alignment", "") or "",
                 extension_label=meta.get("extension_label", "") or "",
@@ -248,9 +253,8 @@ def charger_transversaux() -> list[Objet]:
                     kind="transversal",
                     role="PRIMARY_TEACHING",
                     path=str(chemin.relative_to(ROOT)),
-                    has_written_proof=bool(
-                        re.search(r"\\demonstration|\\preuve", texte)
-                    ),
+                    has_written_proof=_porte_une_demonstration(texte),
+                    has_worked_examples=bool(EXEMPLE_TRAVAILLE.search(texte)),
                     has_algorithmic_work=bool(
                         re.search(r"\\begin\{python\}|\\begin\{algorithme\}", texte)
                     ),
@@ -258,6 +262,35 @@ def charger_transversaux() -> list[Objet]:
                 )
             )
     return objets
+
+
+#: Marqueurs d'une demonstration REDIGEE. La macro dediee ne suffit pas : le
+#: manuel redige aussi ses demonstrations exigibles dans un bloc
+#: d'approfondissement titre « Demonstrations exigibles », clos par un carre
+#: de fin de preuve. Ne chercher que la macro faisait passer pour absentes des
+#: demonstrations completes -- celle de 1 + 2 + ... + n par la methode de
+#: Gauss, celle de la somme geometrique par telescopage.
+#: Un exemple travaille : le manuel y montre la capacite a l'oeuvre.
+EXEMPLE_TRAVAILLE = re.compile(
+    r"\\exempleRedige|\\exempleGuide|\\exemple\b|\\contreexemple"
+)
+
+MACRO_DE_PREUVE = re.compile(r"\\demonstration|\\begin\{demonstration\}|\\preuve")
+#: Une demonstration TITREE : le manuel la redige aussi en prose, sous un titre
+#: explicite, dans un bloc d'approfondissement ou une sous-section. Exiger la
+#: macro dediee, ou un carre de fin de preuve, faisait passer pour absentes des
+#: demonstrations completes -- la regle du produit, l'equation de la tangente,
+#: la somme des n premiers entiers par la methode de Gauss.
+TITRE_DE_PREUVE = re.compile(
+    r"\\textbf\{\s*[Dd][ée]monstration"
+    r"|\\subsection\*?\{\s*[Dd][ée]monstration"
+    r"|\\paragraph\{\s*[Dd][ée]monstration"
+    r"|[Dd][ée]monstration exigible"
+)
+
+
+def _porte_une_demonstration(texte: str) -> bool:
+    return bool(MACRO_DE_PREUVE.search(texte) or TITRE_DE_PREUVE.search(texte))
 
 
 def _manuel_depuis(chapitre: str) -> str:

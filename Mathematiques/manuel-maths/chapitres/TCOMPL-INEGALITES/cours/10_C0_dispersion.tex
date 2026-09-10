@@ -1,0 +1,139 @@
+% META: {"id": "TCOMPL-INEG-CR-009", "chapitre": "TCOMPL-INEGALITES", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Caractéristiques de dispersion d'une série statistique}
+
+% ============================================================
+% STRATE 1 — Médiane, quartiles, déciles
+% ============================================================
+
+Une courbe de Lorenz se construit à partir de \emph{quantiles} : il faut donc
+savoir découper une série ordonnée en tranches d'effectifs égaux, et lire ce que
+ce découpage dit de la dispersion.
+
+\definition[1]{
+Soit une série statistique de $N$ valeurs, rangées dans l'ordre croissant.
+
+\begin{itemize}
+  \item La \textbf{médiane} $\mathrm{Me}$ partage la série en deux groupes de
+    même effectif : au moins la moitié des valeurs lui sont inférieures ou
+    égales, au moins la moitié lui sont supérieures ou égales.
+  \item Le \textbf{premier quartile} $Q_1$ est la valeur de rang
+    $\lceil N/4 \rceil$ ; le \textbf{troisième quartile} $Q_3$ est celle de rang
+    $\lceil 3N/4 \rceil$.
+  \item Le \textbf{premier décile} $D_1$ est la valeur de rang
+    $\lceil N/10 \rceil$ ; le \textbf{neuvième décile} $D_9$ est celle de rang
+    $\lceil 9N/10 \rceil$.
+\end{itemize}
+}
+
+\margeAppui{
+$\lceil x \rceil$ désigne le plus petit entier supérieur ou égal à $x$. Pour
+$N = 20$, $\lceil 20/4 \rceil = 5$ : $Q_1$ est la cinquième valeur.
+}
+
+\definition[2]{
+L'\textbf{écart interquartile} est $Q_3 - Q_1$ : c'est l'amplitude de l'intervalle
+qui contient la moitié centrale de la série.
+
+Lorsque toutes les valeurs sont strictement positives, le \textbf{rapport
+interdécile} est le quotient $\dfrac{D_9}{D_1}$.
+}
+
+\propriete{
+L'écart interquartile et le rapport interdécile mesurent la dispersion sans être
+sensibles aux valeurs extrêmes : modifier la plus grande valeur d'une série ne
+les change pas, alors que cela change l'étendue et la moyenne.
+
+Le rapport interdécile se lit directement : $\dfrac{D_9}{D_1} = 4$ signifie que
+les $10\,\%$ les mieux dotés reçoivent au moins quatre fois ce que reçoivent les
+$10\,\%$ les moins bien dotés.
+}
+
+% ============================================================
+% STRATE 2 — Exemple travaillé
+% ============================================================
+
+\exemple{
+On relève les revenus mensuels, en centaines d'euros, de $20$ foyers, rangés
+dans l'ordre croissant :
+\[
+  9,\; 11,\; 12,\; 13,\; 14,\; 15,\; 16,\; 17,\; 18,\; 19,\;
+  21,\; 22,\; 24,\; 26,\; 28,\; 31,\; 35,\; 40,\; 52,\; 75.
+\]
+
+Ici $N = 20$.
+
+\begin{itemize}
+  \item \textbf{Médiane.} $N$ est pair : la médiane est la demi-somme des
+    dixième et onzième valeurs,
+    $\mathrm{Me} = \dfrac{19 + 21}{2} = 20$.
+  \item \textbf{Quartiles.} $\lceil 20/4 \rceil = 5$, donc $Q_1 = 14$ ;
+    $\lceil 60/4 \rceil = 15$, donc $Q_3 = 28$.
+    L'écart interquartile vaut $28 - 14 = 14$.
+  \item \textbf{Déciles.} $\lceil 20/10 \rceil = 2$, donc $D_1 = 11$ ;
+    $\lceil 180/10 \rceil = 18$, donc $D_9 = 40$.
+  \item \textbf{Rapport interdécile.}
+    $\dfrac{D_9}{D_1} = \dfrac{40}{11} \approx 3{,}6$.
+\end{itemize}
+
+Lecture : les $10\,\%$ de foyers les mieux dotés perçoivent environ $3{,}6$ fois
+ce que perçoivent les $10\,\%$ les moins bien dotés. La moitié centrale des
+foyers se tient entre $1\,400$ et $2\,800$ euros.
+}
+
+\margeAppui{
+Le foyer à $75$ pèse lourdement sur la moyenne (qui vaut ici $24{,}9$) mais ne
+déplace ni la médiane, ni les quartiles, ni $D_9$ : c'est tout l'intérêt de ces
+indicateurs pour décrire une répartition inégale.
+}
+
+% ============================================================
+% STRATE 3 — Approfondissement
+% ============================================================
+
+\approfondissement{
+Les quantiles sont exactement ce que la courbe de Lorenz met en abscisse. Si
+l'on classe la population par revenu croissant et que l'on note $x$ la
+proportion cumulée de population et $y$ la proportion cumulée de revenu, alors
+$x = 0{,}1$ correspond au premier décile de population, $x = 0{,}25$ au premier
+quartile, et ainsi de suite. Une répartition parfaitement égalitaire donnerait
+$y = x$ pour tout $x$, un rapport interdécile égal à $1$ et un écart
+interquartile nul en proportion.
+}
+
+% BEGIN-VERIFY
+% from math import ceil
+%
+% serie = [9, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+%          21, 22, 24, 26, 28, 31, 35, 40, 52, 75]
+% assert serie == sorted(serie)
+% N = len(serie)
+% assert N == 20
+%
+% def quantile(rang_theorique):
+%     """Valeur de rang ceil(rang_theorique), rangs comptes a partir de 1."""
+%     return serie[ceil(rang_theorique) - 1]
+%
+% mediane = (serie[9] + serie[10]) / 2
+% assert mediane == 20
+%
+% q1 = quantile(N / 4)
+% q3 = quantile(3 * N / 4)
+% assert q1 == 14 and q3 == 28
+% assert q3 - q1 == 14
+%
+% d1 = quantile(N / 10)
+% d9 = quantile(9 * N / 10)
+% assert d1 == 11 and d9 == 40
+% assert abs(d9 / d1 - 3.636363636363636) < 1e-12
+% assert round(d9 / d1, 1) == 3.6
+%
+% # La moyenne est bien tiree vers le haut par la valeur extreme, contrairement
+% # aux indicateurs de position : c'est ce que dit l'appui de marge.
+% moyenne = sum(serie) / N
+% assert abs(moyenne - 24.9) < 1e-9
+% sans_extreme = serie[:-1] + [200]
+% assert sum(sans_extreme) / N > moyenne
+% assert (sans_extreme[9] + sans_extreme[10]) / 2 == mediane
+% assert quantile.__doc__ is not None
+% END-VERIFY

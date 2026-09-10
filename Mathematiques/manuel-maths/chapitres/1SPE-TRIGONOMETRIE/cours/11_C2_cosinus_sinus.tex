@@ -78,10 +78,76 @@ Pour tout réel $x$ :
 % ============================================================
 
 \approfondissement{
-Les valeurs remarquables de $\cos\!\left(\dfrac{\pi}{6}\right)$ et $\sin\!\left(\dfrac{\pi}{6}\right)$ se retrouvent a partir d'un triangle equilateral de cote $1$ : la hauteur vaut $\dfrac{\sqrt{3}}{2}$ et la moitie de la base vaut $\dfrac{1}{2}$. Celles de $\cos\!\left(\dfrac{\pi}{4}\right)$ et $\sin\!\left(\dfrac{\pi}{4}\right)$ proviennent d'un triangle rectangle isocele d'hypotenuse $1$.
+\textbf{Demonstration exigible — calcul de $\cos\!\left(\frac{\pi}{4}\right)$, $\sin\!\left(\frac{\pi}{4}\right)$, $\cos\!\left(\frac{\pi}{3}\right)$, $\sin\!\left(\frac{\pi}{3}\right)$.}
+
+\medskip
+\textbf{(a) Valeurs en $\dfrac{\pi}{4}$.}
+
+Le reel $\dfrac{\pi}{4}$ est son propre complementaire : $\dfrac{\pi}{2} - \dfrac{\pi}{4} = \dfrac{\pi}{4}$. La formule du complementaire donne donc
+\[
+  \cos\!\left(\frac{\pi}{4}\right)
+  = \sin\!\left(\frac{\pi}{2} - \frac{\pi}{4}\right)
+  = \sin\!\left(\frac{\pi}{4}\right).
+\]
+En reportant cette egalite dans l'identite fondamentale $\cos^2 t + \sin^2 t = 1$ prise en $t = \dfrac{\pi}{4}$ :
+\[
+  2\cos^2\!\left(\frac{\pi}{4}\right) = 1,
+  \qquad\text{d'ou}\qquad
+  \cos^2\!\left(\frac{\pi}{4}\right) = \frac{1}{2}.
+\]
+Le point associe a $\dfrac{\pi}{4}$ est dans le premier quadrant, donc $\cos\!\left(\frac{\pi}{4}\right) > 0$ : c'est la racine positive.
+\[
+  \cos\!\left(\frac{\pi}{4}\right) = \sin\!\left(\frac{\pi}{4}\right) = \frac{1}{\sqrt{2}} = \frac{\sqrt{2}}{2}.
+\]
+
+\medskip
+\textbf{(b) Valeurs en $\dfrac{\pi}{3}$.}
+
+Notons $A$ le point de coordonnees $(1\,;\,0)$ et $M$ le point du cercle trigonometrique associe a $\dfrac{\pi}{3}$. Alors $OA = OM = 1$, car ce sont deux rayons, et l'angle $\widehat{AOM}$ mesure $\dfrac{\pi}{3}$.
+
+Le triangle $OAM$ est isocele en $O$ : ses deux angles a la base sont egaux, et leur somme avec $\dfrac{\pi}{3}$ vaut $\pi$. Chacun mesure donc
+\[
+  \frac{\pi - \frac{\pi}{3}}{2} = \frac{\pi}{3}.
+\]
+Les trois angles de $OAM$ valent $\dfrac{\pi}{3}$ : le triangle est equilateral, donc $AM = 1$.
+
+Soit $H$ le projete orthogonal de $M$ sur la droite $(OA)$. Dans un triangle equilateral, la hauteur issue de $M$ est aussi mediane : $H$ est le milieu de $[OA]$, d'ou $OH = \dfrac{1}{2}$. Or $OH$ est exactement l'abscisse de $M$ :
+\[
+  \cos\!\left(\frac{\pi}{3}\right) = \frac{1}{2}.
+\]
+L'identite fondamentale donne alors $\sin^2\!\left(\frac{\pi}{3}\right) = 1 - \dfrac{1}{4} = \dfrac{3}{4}$, et $M$ est dans le premier quadrant, donc $\sin\!\left(\frac{\pi}{3}\right) > 0$ :
+\[
+  \sin\!\left(\frac{\pi}{3}\right) = \frac{\sqrt{3}}{2}.
+\]
+
+\medskip
+\textbf{(c) Valeurs en $\dfrac{\pi}{6}$.} Elles s'en deduisent sans nouveau calcul, par la formule du complementaire :
+$\cos\!\left(\frac{\pi}{6}\right) = \sin\!\left(\frac{\pi}{3}\right) = \dfrac{\sqrt{3}}{2}$
+et
+$\sin\!\left(\frac{\pi}{6}\right) = \cos\!\left(\frac{\pi}{3}\right) = \dfrac{1}{2}$.
+\hfill$\square$
 }
 
 % BEGIN-VERIFY
+% # Les valeurs remarquables demontrees ci-dessus, verifiees exactement.
+% from sympy import pi, sqrt, Rational, cos, sin, simplify
+%
+% assert simplify(cos(pi/4) - sqrt(2)/2) == 0
+% assert simplify(sin(pi/4) - sqrt(2)/2) == 0
+% assert simplify(cos(pi/3) - Rational(1, 2)) == 0
+% assert simplify(sin(pi/3) - sqrt(3)/2) == 0
+% assert simplify(cos(pi/6) - sqrt(3)/2) == 0
+% assert simplify(sin(pi/6) - Rational(1, 2)) == 0
+%
+% # L'argument de (a) : pi/4 est son propre complementaire, d'ou cos = sin,
+% # puis 2cos^2 = 1 avec le cosinus positif dans le premier quadrant.
+% assert simplify(cos(pi/2 - pi/4) - sin(pi/4)) == 0
+% assert simplify(2*cos(pi/4)**2 - 1) == 0
+% assert cos(pi/4) > 0
+%
+% # L'argument de (c) : les valeurs en pi/6 se deduisent du complementaire.
+% assert simplify(cos(pi/6) - sin(pi/2 - pi/6)) == 0
+%
 % from sympy import pi, sqrt, Rational, cos, sin, simplify
 %
 % # L'identite fondamentale, sur des angles remarquables et des angles
