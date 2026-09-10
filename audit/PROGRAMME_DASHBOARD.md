@@ -21,7 +21,6 @@ Ne pas editer : chaque valeur est relue dans l'artefact qui la produit.
 | `REFERENTIAL_AUTHORITY_NOT_EXPLICIT` | 0 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / REFERENTIAL_AUTHORITY_NOT_EXPLICIT |
 | `DIFF_1SPE_ADDED_2026_MANDATORY` | 28 | `audit/1SPE_PROGRAMME_DIFF_2019_2026.json` :: summary / ADDED_2026_MANDATORY |
 | `DIFF_1SPE_REMOVED_2026_MANDATORY` | 12 | `audit/1SPE_PROGRAMME_DIFF_2019_2026.json` :: summary / REMOVED_2026_MANDATORY |
-| `AUTOMATISMS_1SPE_OFFICIAL` | 17 | `audit/1SPE_PROGRAMME_DIFF_2019_2026.json` :: summary / AUTOMATISMS_2026 |
 | `MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY` | 0 | `audit/LIBELLE_BO_AUTHORITY_GATE.json` :: summary / MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY |
 | `LIBELLE_BO_AUTHORITY_GATE` | PASS | `audit/LIBELLE_BO_AUTHORITY_GATE.json` :: summary / LIBELLE_BO_AUTHORITY_GATE |
 | `OFFICIAL_REQUIRED_COMPLETE` | 619 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_COMPLETE |
@@ -30,6 +29,11 @@ Ne pas editer : chaque valeur est relue dans l'artefact qui la produit.
 | `OFFICIAL_REQUIRED_INSTITUTIONAL` | 14 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_INSTITUTIONAL |
 | `OFFICIAL_REQUIRED_UNDECIDABLE_BY_CONTENT_MATCH` | 3 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_UNDECIDABLE_BY_CONTENT_MATCH |
 | `MANUAL_OBJECTS_INDEXED` | 3483 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / objects_indexed |
+| `AUTOMATISMS_1SPE_ADEQUATELY_REINVESTED` | 14 | `audit/1SPE_AUTOMATISMS_AUDIT.json` :: summary / AUTOMATISMS_1SPE_ADEQUATELY_REINVESTED |
+| `AUTOMATISM_NOT_REINVESTED` | 3 | `audit/1SPE_AUTOMATISMS_AUDIT.json` :: summary / AUTOMATISM_NOT_REINVESTED |
+| `ADDED_2026_TRULY_MISSING` | 0 | `audit/1SPE_REFORM_TRANSITION_AUDIT.json` :: summary / ADDED_TRULY_MISSING |
+| `REMOVED_2019_CONTENT_STILL_PRESENTED_AS_REQUIRED` | 0 | `audit/1SPE_REFORM_TRANSITION_AUDIT.json` :: summary / REMOVED_2019_CONTENT_STILL_PRESENTED_AS_REQUIRED |
+| `REMOVED_2019_CONTENT_REQUIRING_EDITORIAL_REVIEW` | 4 | `audit/1SPE_REFORM_TRANSITION_AUDIT.json` :: summary / REMOVED_2019_CONTENT_REQUIRING_EDITORIAL_REVIEW |
 
 ## Comment lire ces compteurs
 
@@ -37,8 +41,9 @@ Ne pas editer : chaque valeur est relue dans l'artefact qui la produit.
 - **`INTERNAL_ATOMS_AMBIGUOUS_REQUIRES_HUMAN`** — atomes qu'aucune preuve objective ne tranche. Ils ne portent aucun parent et attendent un arbitrage ; chacun est classe (subdivision pedagogique, enrichissement, programme perime, atome obsolete).
 - **`INTERNAL_ATOM_WITHOUT_CONFIRMED_PARENT`** — atomes internes dont le parent officiel n'est pas etabli : la somme des propositions en attente et des atomes sans candidat.
 - **`OFFICIAL_REQUIRED_UNMAPPED`** — rattachement non encore etabli — PAS un contenu absent du manuel. Les referentiels internes encodent surtout des capacites ; une connaissance peut etre parfaitement traitee dans un fichier de cours sans posseder d'atome dedie.
-- **`AUTOMATISMS_1SPE_OFFICIAL`** — automatismes que le programme de 2026 enonce ; leur presence dans le manuel se juge ailleurs, sur les objets eux-memes.
 - **`MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY`** — champs dont le nom promet le texte du Bulletin officiel sans qu'aucun producteur ne l'ait verifie. Le champ `libelle_bo` du referentiel interne n'est verbatim que dans la moitie des cas : il est deprecie au profit de `libelle_interne`, et le texte officiel exact vit dans l'inventaire sous `official_wording`.
 - **`OFFICIAL_REQUIRED_MISSING`** — attendus obligatoires dont AUCUN objet du manuel ne porte la trace. A distinguer de OFFICIAL_REQUIRED_UNMAPPED, qui ne dit que l'absence de rattachement etabli entre le referentiel interne et le BO.
 - **`OFFICIAL_REQUIRED_INSTITUTIONAL`** — exigences que le manuel ne peut pas certifier a lui seul -- « Un quart au moins de l'horaire total est reserve aux projets » releve de l'etablissement. Le manuel peut les outiller, pas les garantir.
 - **`OFFICIAL_REQUIRED_UNDECIDABLE_BY_CONTENT_MATCH`** — attendus dont le libelle officiel ne porte aucun mot distinctif exploitable : la recherche par contenu ne peut ni conclure a la presence ni conclure a l'absence.
+- **`AUTOMATISM_NOT_REINVESTED`** — automatismes que le manuel travaille sans les repartir : le programme exclut qu'ils fassent l'objet d'un chapitre specifique et demande qu'ils soient entretenus sur l'annee. Aucun n'est absent du manuel.
+- **`ADDED_2026_TRULY_MISSING`** — attendus ajoutes par la reforme qu'il faudrait ecrire. La dette de contenu ne se deduit pas du differentiel : un attendu ajoute au programme peut etre traite depuis des annees.

@@ -133,15 +133,6 @@
         "REMOVED_2026_MANDATORY"
       ]
     },
-    "AUTOMATISMS_1SPE_OFFICIAL": {
-      "value": 17,
-      "artifact": "audit/1SPE_PROGRAMME_DIFF_2019_2026.json",
-      "pointer": [
-        "summary",
-        "AUTOMATISMS_2026"
-      ],
-      "reading": "automatismes que le programme de 2026 enonce ; leur presence dans le manuel se juge ailleurs, sur les objets eux-memes."
-    },
     "MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY": {
       "value": 0,
       "artifact": "audit/LIBELLE_BO_AUTHORITY_GATE.json",
@@ -208,6 +199,48 @@
       "pointer": [
         "summary",
         "objects_indexed"
+      ]
+    },
+    "AUTOMATISMS_1SPE_ADEQUATELY_REINVESTED": {
+      "value": 14,
+      "artifact": "audit/1SPE_AUTOMATISMS_AUDIT.json",
+      "pointer": [
+        "summary",
+        "AUTOMATISMS_1SPE_ADEQUATELY_REINVESTED"
+      ]
+    },
+    "AUTOMATISM_NOT_REINVESTED": {
+      "value": 3,
+      "artifact": "audit/1SPE_AUTOMATISMS_AUDIT.json",
+      "pointer": [
+        "summary",
+        "AUTOMATISM_NOT_REINVESTED"
+      ],
+      "reading": "automatismes que le manuel travaille sans les repartir : le programme exclut qu'ils fassent l'objet d'un chapitre specifique et demande qu'ils soient entretenus sur l'annee. Aucun n'est absent du manuel."
+    },
+    "ADDED_2026_TRULY_MISSING": {
+      "value": 0,
+      "artifact": "audit/1SPE_REFORM_TRANSITION_AUDIT.json",
+      "pointer": [
+        "summary",
+        "ADDED_TRULY_MISSING"
+      ],
+      "reading": "attendus ajoutes par la reforme qu'il faudrait ecrire. La dette de contenu ne se deduit pas du differentiel : un attendu ajoute au programme peut etre traite depuis des annees."
+    },
+    "REMOVED_2019_CONTENT_STILL_PRESENTED_AS_REQUIRED": {
+      "value": 0,
+      "artifact": "audit/1SPE_REFORM_TRANSITION_AUDIT.json",
+      "pointer": [
+        "summary",
+        "REMOVED_2019_CONTENT_STILL_PRESENTED_AS_REQUIRED"
+      ]
+    },
+    "REMOVED_2019_CONTENT_REQUIRING_EDITORIAL_REVIEW": {
+      "value": 4,
+      "artifact": "audit/1SPE_REFORM_TRANSITION_AUDIT.json",
+      "pointer": [
+        "summary",
+        "REMOVED_2019_CONTENT_REQUIRING_EDITORIAL_REVIEW"
       ]
     }
   }

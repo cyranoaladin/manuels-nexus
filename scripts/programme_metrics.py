@@ -27,6 +27,8 @@ BINDING = "audit/OFFICIAL_PROGRAMME_BINDING.json"
 DIFF_1SPE = "audit/1SPE_PROGRAMME_DIFF_2019_2026.json"
 LIBELLE_GATE = "audit/LIBELLE_BO_AUTHORITY_GATE.json"
 COVERAGE = "audit/OFFICIAL_TO_MANUAL_COVERAGE.json"
+AUTOMATISMS = "audit/1SPE_AUTOMATISMS_AUDIT.json"
+TRANSITION = "audit/1SPE_REFORM_TRANSITION_AUDIT.json"
 
 
 @dataclass(frozen=True)
@@ -101,7 +103,7 @@ SOURCES: tuple[tuple[str, str, tuple[str, ...]], ...] = (
         DIFF_1SPE,
         ("summary", "REMOVED_2026_MANDATORY"),
     ),
-    ("AUTOMATISMS_1SPE_OFFICIAL", DIFF_1SPE, ("summary", "AUTOMATISMS_2026")),
+
     (
         "MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY",
         LIBELLE_GATE,
@@ -126,6 +128,27 @@ SOURCES: tuple[tuple[str, str, tuple[str, ...]], ...] = (
         ("summary", "OFFICIAL_REQUIRED_UNDECIDABLE_BY_CONTENT_MATCH"),
     ),
     ("MANUAL_OBJECTS_INDEXED", COVERAGE, ("summary", "objects_indexed")),
+    (
+        "AUTOMATISMS_1SPE_ADEQUATELY_REINVESTED",
+        AUTOMATISMS,
+        ("summary", "AUTOMATISMS_1SPE_ADEQUATELY_REINVESTED"),
+    ),
+    (
+        "AUTOMATISM_NOT_REINVESTED",
+        AUTOMATISMS,
+        ("summary", "AUTOMATISM_NOT_REINVESTED"),
+    ),
+    ("ADDED_2026_TRULY_MISSING", TRANSITION, ("summary", "ADDED_TRULY_MISSING")),
+    (
+        "REMOVED_2019_CONTENT_STILL_PRESENTED_AS_REQUIRED",
+        TRANSITION,
+        ("summary", "REMOVED_2019_CONTENT_STILL_PRESENTED_AS_REQUIRED"),
+    ),
+    (
+        "REMOVED_2019_CONTENT_REQUIRING_EDITORIAL_REVIEW",
+        TRANSITION,
+        ("summary", "REMOVED_2019_CONTENT_REQUIRING_EDITORIAL_REVIEW"),
+    ),
 )
 
 

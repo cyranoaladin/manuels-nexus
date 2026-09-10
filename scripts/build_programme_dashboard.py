@@ -70,9 +70,15 @@ LECTURES: dict[str, str] = {
         "exploitable : la recherche par contenu ne peut ni conclure a la "
         "presence ni conclure a l'absence."
     ),
-    "AUTOMATISMS_1SPE_OFFICIAL": (
-        "automatismes que le programme de 2026 enonce ; leur presence dans le "
-        "manuel se juge ailleurs, sur les objets eux-memes."
+    "AUTOMATISM_NOT_REINVESTED": (
+        "automatismes que le manuel travaille sans les repartir : le programme "
+        "exclut qu'ils fassent l'objet d'un chapitre specifique et demande "
+        "qu'ils soient entretenus sur l'annee. Aucun n'est absent du manuel."
+    ),
+    "ADDED_2026_TRULY_MISSING": (
+        "attendus ajoutes par la reforme qu'il faudrait ecrire. La dette de "
+        "contenu ne se deduit pas du differentiel : un attendu ajoute au "
+        "programme peut etre traite depuis des annees."
     ),
 }
 
