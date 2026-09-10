@@ -694,6 +694,267 @@ def classer_residu(
     }
 
 
+
+#: Relations qu'un atome interne peut entretenir avec un attendu officiel
+#: lorsqu'il ne s'y identifie pas. Les nommer evite le faux choix entre « lien
+#: etabli » et « rien » : un atome peut raffiner un attendu, ou en integrer
+#: plusieurs, sans etre l'un d'eux.
+SUBDIVISION = "PEDAGOGICAL_SUBDIVISION_OF"
+INTEGRATION = "PEDAGOGICAL_INTEGRATION_OF"
+
+#: Arbitrages rendus a la lecture, pour les atomes qu'aucune regle mecanique ne
+#: tranche. Chacun designe ses parents par le debut de leur libelle officiel --
+#: un identifiant technique changerait au moindre reformatage -- et porte la
+#: raison qui l'a decide. Ce ne sont pas des rattachements par defaut : ils
+#: traversent souvent les parties du programme, ce qu'aucune regle de portee ne
+#: pouvait faire.
+DISPOSITIONS_DECLAREES: tuple[dict[str, Any], ...] = (
+    {
+        "atom_id": "1SPE-PROBA-COND-C2",
+        "relationship": SUBDIVISION,
+        "parents": ("Calculer des probabilités conditionnelles lorsque",),
+        "justification": (
+            "Le programme de 2026 sort l'arbre pondere des contenus de "
+            "premiere et le place parmi les automatismes, ou il sert a "
+            "calculer des probabilites conditionnelles. Le parent est donc "
+            "dans une autre partie du programme, ce qu'aucune regle de portee "
+            "ne pouvait franchir."
+        ),
+    },
+    {
+        "atom_id": "1SPE-PROBA-COND-C5",
+        "relationship": INTEGRATION,
+        "parents": (
+            "Dans des cas simples, calculer une probabilité à l’aide de la formule",
+            "Savoir utiliser ou justifier l’indépendance",
+            "Représenter la succession de deux épreuves indépendantes",
+        ),
+        "justification": (
+            "« Resoudre des problemes contextualises » ne raffine aucun "
+            "attendu : c'est une mise en situation qui les mobilise ensemble. "
+            "Lui imposer un parent unique aurait fait disparaitre les autres."
+        ),
+    },
+    {
+        "atom_id": "1SPE-PRODUIT-SCALAIRE-C2",
+        "relationship": SUBDIVISION,
+        "parents": ("Bilinéarité, symétrie.",),
+        "justification": (
+            "Le programme de 2026 porte bien cet attendu ; c'est le libelle de "
+            "2019 qui lui ressemblait davantage, d'ou le soupcon de hors-annee. "
+            "La notion est au programme applicable."
+        ),
+    },
+    {
+        "atom_id": "1SPE-VARIABLES-ALEATOIRES-C3",
+        "relationship": SUBDIVISION,
+        "parents": ("Pour 𝑛 ⩽ 4, représenter l’arbre associé",),
+        "justification": (
+            "L'attendu existe mot pour mot en 2026, mais dans « Probabilites "
+            "conditionnelles et independance » et non dans « Variables "
+            "aleatoires reelles » que traite ce chapitre."
+        ),
+    },
+    {
+        "atom_id": "1SPE-VARIABLES-ALEATOIRES-C6",
+        "relationship": SUBDIVISION,
+        "parents": ("Simuler, avec Python ou un tableur, N échantillons",),
+        "justification": (
+            "Cet atome reprend la prose de cadrage de la sous-partie "
+            "« Experimentations » ; l'attendu qu'elle introduit est la "
+            "simulation d'echantillons."
+        ),
+    },
+    {
+        "atom_id": "1SPE-VARIABLES-ALEATOIRES-C7",
+        "relationship": SUBDIVISION,
+        "parents": ("Étudier sur des exemples la distance entre la moyenne",),
+        "justification": (
+            "Reprise quasi mot pour mot d'un attendu de « Experimentations », "
+            "partie voisine de celle que traite le chapitre."
+        ),
+    },
+    {
+        "atom_id": "1SPE-SUITES-C6",
+        "relationship": SUBDIVISION,
+        "parents": ("Modéliser un phénomène discret à croissance linéaire",),
+        "justification": (
+            "Le programme reunit en un seul attendu la modelisation lineaire "
+            "par une suite arithmetique et la modelisation exponentielle par "
+            "une suite geometrique ; l'atome en couvre les deux faces."
+        ),
+    },
+    {
+        "atom_id": "TCOMPL-BAYES-C3",
+        "relationship": SUBDIVISION,
+        "parents": ("Probabilités conditionnelles, inversion du conditionnement",),
+        "justification": (
+            "Cet atome reprend le descriptif du theme d'etude ; l'attendu "
+            "correspondant est le contenu associe que ce descriptif introduit."
+        ),
+    },
+    {
+        "atom_id": "1SPE-PROBA-COND-C1",
+        "relationship": SUBDIVISION,
+        "parents": ("Calculer des probabilités conditionnelles lorsque",),
+        "justification": (
+            "Le calcul d'une probabilite conditionnelle quitte les contenus de "
+            "premiere en 2026 et devient un automatisme a entretenir. Le nom "
+            "abrege du theme -- « PROBA-COND » -- ne permettait a aucune regle "
+            "de retrouver la partie officielle correspondante."
+        ),
+    },
+    {
+        "atom_id": "1SPE-PROBA-COND-C3",
+        "relationship": SUBDIVISION,
+        "parents": (
+            "Dans des cas simples, calculer une probabilité à l’aide de la formule",
+        ),
+        "justification": (
+            "La formule des probabilites totales est nommee telle quelle par le "
+            "programme ; seul le nom abrege du theme empechait de la retrouver."
+        ),
+    },
+    {
+        "atom_id": "1SPE-PROBA-COND-C4",
+        "relationship": SUBDIVISION,
+        "parents": ("Savoir utiliser ou justifier l’indépendance",),
+        "justification": (
+            "« Reconnaitre et utiliser l'independance » raffine l'attendu "
+            "officiel « Savoir utiliser ou justifier l'independance de deux "
+            "evenements »."
+        ),
+    },
+    {
+        "atom_id": "1SPE-VARIABLES-ALEATOIRES-C5",
+        "relationship": INTEGRATION,
+        "parents": (
+            "Modéliser une situation à l’aide d’une variable aléatoire.",
+            "Déterminer la loi de probabilité d’une variable aléatoire.",
+            "Utiliser la notion d’espérance dans une résolution de problème",
+        ),
+        "justification": (
+            "« Resoudre des problemes contextualises faisant intervenir des "
+            "variables aleatoires » ne raffine aucun attendu : c'est la mise en "
+            "situation qui les mobilise ensemble."
+        ),
+    },
+    {
+        "atom_id": "TEXP-CTP-C4",
+        "relationship": INTEGRATION,
+        "parents": (
+            "Résoudre une équation polynomiale de degré 2 à coefficients réels.",
+            "Résoudre une équation de degré 3 à coefficients réels dont une racine",
+        ),
+        "justification": (
+            "L'atome reunit les deux attendus de resolution d'equations "
+            "polynomiales que le programme enonce separement, degre 2 puis "
+            "degre 3 a racine connue."
+        ),
+    },
+    {
+        "atom_id": "1NSI-TYPES-CONSTRUITS-C5",
+        "relationship": SUBDIVISION,
+        "parents": ("Lire et modifier les éléments d’un tableau grâce à leurs index.",),
+        "justification": (
+            "La mutabilite n'est pas un attendu du programme de premiere NSI : "
+            "aucun de ses enonces ne la nomme. Elle est ce qui rend possible "
+            "l'attendu « Lire et modifier les elements d'un tableau », qu'elle "
+            "raffine -- et non un contenu supplementaire a exiger."
+        ),
+    },
+)
+
+
+
+def disposer(
+    lien: dict[str, Any],
+    items: list[dict[str, Any]],
+    declarees: dict[str, dict[str, Any]],
+) -> dict[str, Any] | None:
+    """Donne un parent aux atomes qu'aucune regle mecanique ne tranchait.
+
+    Deux voies. Les arbitrages declares ci-dessus, rendus a la lecture du BO et
+    du chapitre, traversent au besoin les parties du programme. Les autres --
+    ceux que la classification du residu range parmi les subdivisions
+    pedagogiques -- recoivent pour parents tous les attendus de leur partie qui
+    se tenaient a egalite : c'est precisement parce qu'ils raffinaient une
+    facette commune a plusieurs qu'aucun ne se detachait.
+
+    Dans les deux cas la relation est nommee. Un atome dispose n'est pas un
+    atome identifie a son parent : il le raffine, ou il en integre plusieurs.
+    """
+    declaree = declarees.get(lien["atom_id"])
+    if declaree is not None:
+        parents = []
+        for debut in declaree["parents"]:
+            trouve = next(
+                (i for i in items if i["official_wording"].startswith(debut)), None
+            )
+            if trouve is not None:
+                parents.append(trouve)
+        if len(parents) != len(declaree["parents"]):
+            return None
+        return {
+            "binding_method": "DISPOSED",
+            "official_id": parents[0]["official_id"],
+            "official_ids": [p["official_id"] for p in parents],
+            "official_wording": parents[0]["official_wording"],
+            "official_kind": parents[0]["kind"],
+            "binding_score": None,
+            "relationship": declaree["relationship"],
+            "review_status": "DISPOSED_BY_READING",
+            "context_reason": declaree["justification"],
+        }
+
+    if lien.get("residual_classification") != "PEDAGOGICAL_SUBDIVISION":
+        return None
+    portee_theme = lien.get("theme_scope")
+    if not portee_theme:
+        return None
+    cibles = set(portee_theme["scopes"])
+    reference = jetons(lien["libelle_interne"]) | jetons(
+        " ".join(lien["contenu_bo"])
+        if isinstance(lien["contenu_bo"], list)
+        else (lien["contenu_bo"] or "")
+    )
+    # Les parents possibles sont les attendus OBLIGATOIRES de la partie. Un
+    # « Objectifs » ou un approfondissement n'engage pas le manuel : en faire
+    # le parent d'une capacite interne lui donnerait un ancetre qui ne demande
+    # rien, et priverait de rattachement l'attendu qu'elle sert reellement.
+    dedans = sorted(
+        (
+            (proximite(reference, jetons(i["official_wording"])), i)
+            for i in items
+            if portee(i) in cibles and i["mandatory"]
+        ),
+        key=lambda t: (-t[0], t[1]["official_id"]),
+    )
+    if not dedans or dedans[0][0] <= 0:
+        return None
+    tete = dedans[0][0]
+    # Plusieurs parents ne se justifient que par une egalite REELLE. Une
+    # quasi-egalite laissait l'atome revendiquer un attendu que son chapitre ne
+    # traite pas, et que le chapitre voisin enseigne : le programme paraissait
+    # couvert deux fois la ou il l'etait une seule.
+    parents = [i for sc, i in dedans if sc == tete]
+    return {
+        "binding_method": "DISPOSED",
+        "official_id": parents[0]["official_id"],
+        "official_ids": [p["official_id"] for p in parents],
+        "official_wording": parents[0]["official_wording"],
+        "official_kind": parents[0]["kind"],
+        "binding_score": round(tete, 3),
+        "relationship": SUBDIVISION,
+        "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
+        "context_reason": (
+            f"aucun des {len(parents)} attendus obligatoires de la partie ne se "
+            "detachait : l'atome en raffine une facette commune, et les recoit "
+            "tous pour parents plutot qu'un seul choisi arbitrairement"
+        ),
+    }
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
@@ -739,7 +1000,15 @@ def main(argv: list[str] | None = None) -> int:
         if lien["review_status"] == "AMBIGUOUS_REQUIRES_HUMAN":
             lien.update(classer_residu(lien, officiels, hors_edition))
 
-    ETABLIS = ("ANCHOR", "VERBATIM", "CONTEXT")
+    declarees = {d["atom_id"]: d for d in DISPOSITIONS_DECLAREES}
+    for lien in liens:
+        if lien["review_status"] != "AMBIGUOUS_REQUIRES_HUMAN":
+            continue
+        disposition = disposer(lien, officiels.get(lien["manual"] or "", []), declarees)
+        if disposition is not None:
+            lien.update(disposition)
+
+    ETABLIS = ("ANCHOR", "VERBATIM", "CONTEXT", "DISPOSED")
     confirmes = [lien for lien in liens if lien["binding_method"] in ETABLIS]
     # Un atome peut avoir plusieurs parents officiels : il arrive qu'il
     # fusionne des attendus que le BO enonce separement. Ne compter que le
@@ -839,6 +1108,9 @@ def main(argv: list[str] | None = None) -> int:
         "summary": {
             "internal_atoms": len(liens),
             "bound_confirmed": len(confirmes),
+            "disposed": sum(
+                1 for lien in liens if lien["binding_method"] == "DISPOSED"
+            ),
             "bound_by_context": sum(
                 1 for lien in liens if lien["binding_method"] == "CONTEXT"
             ),

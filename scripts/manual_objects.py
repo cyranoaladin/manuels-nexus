@@ -73,6 +73,10 @@ TRANSVERSAUX: dict[str, tuple[str, ...]] = {
         "transversal/logique_raisonnement.tex",
         "transversal/memo_python.tex",
     ),
+    "TCOMPL": (
+        "transversal/logique_raisonnement.tex",
+        "transversal/memo_python.tex",
+    ),
 }
 RACINE_MATHS = "Mathematiques/manuel-maths"
 

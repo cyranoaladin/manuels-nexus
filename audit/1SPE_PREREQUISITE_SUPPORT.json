@@ -6,12 +6,12 @@
   "basis": "« A la liste ci-dessous s'ajoute la liste des automatismes travailles en classe de seconde, qui doivent etre entretenus en classe de premiere. »",
   "summary": {
     "PREREQUISITES_DECLARED": 46,
-    "PREREQUISITES_DIAGNOSED_AND_REMEDIATED": 30,
+    "PREREQUISITES_DIAGNOSED_AND_REMEDIATED": 29,
     "PREREQUISITES_ASSUMED_WITHOUT_SUPPORT": 1,
     "status_counts": {
       "ASSUMED_WITHOUT_SUPPORT": 1,
-      "DIAGNOSED_AND_REMEDIATED": 30,
-      "REMEDIATED_ONLY": 15
+      "DIAGNOSED_AND_REMEDIATED": 29,
+      "REMEDIATED_ONLY": 16
     }
   },
   "prerequisites": [
@@ -21,18 +21,13 @@
       "prerequisite_label": "Taux de variation et nombre dérivé",
       "origin": "1SPE-DERIVATION-LOCAL",
       "diagnostic_evidence": [
-        "1SPE-DERGLOBAL-EV-A",
-        "1SPE-DERGLOBAL-EV-A-corrige",
-        "1SPE-DERGLOBAL-EV-B",
-        "1SPE-DERGLOBAL-EV-B-corrige",
         "1SPE-DERIVATION-GLOBAL-QCM"
       ],
       "remediation_evidence": [
         "1SPE-DERIVATION-GLOBAL-FR-R1",
         "1SPE-DERIVATION-GLOBAL-FR-R4",
         "1SPE-DERIVATION-GLOBAL-FR-R5",
-        "1SPE-DERIVATION-GLOBAL-RE-C3",
-        "1SPE-DERIVATION-GLOBAL-RE-C4"
+        "1SPE-DERIVATION-GLOBAL-RE-C3"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
       "reason": "un diagnostic le revele, une reprise y repond"
@@ -71,8 +66,7 @@
         "1SPE-DERIVATION-GLOBAL-FR-R4",
         "1SPE-DERIVATION-GLOBAL-RE-C2",
         "1SPE-DERIVATION-GLOBAL-RE-C3",
-        "1SPE-DERIVATION-GLOBAL-RE-C4",
-        "1SPE-DERIVATION-GLOBAL-RE-C5"
+        "1SPE-DERIVATION-GLOBAL-RE-C4"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
       "reason": "un diagnostic le revele, une reprise y repond"
@@ -135,7 +129,6 @@
       "diagnostic_evidence": [],
       "remediation_evidence": [
         "1SPE-DERIVATION-LOCAL-FR-R2",
-        "1SPE-DERIVATION-LOCAL-FR-R4",
         "1SPE-DERIVATION-LOCAL-RE-C2"
       ],
       "status": "REMEDIATED_ONLY",
@@ -474,17 +467,12 @@
       "prerequisite_label": "Calcul litteral : developper, factoriser, identites remarquables",
       "origin": "2GT",
       "diagnostic_evidence": [
-        "1SPE-SECDEG-EV-A",
-        "1SPE-SECDEG-EV-A-corrige",
-        "1SPE-SECDEG-EV-B",
-        "1SPE-SECDEG-EV-B-corrige",
         "1SPE-SECOND-DEGRE-QCM"
       ],
       "remediation_evidence": [
         "1SPE-SECDEG-FR-R1",
-        "1SPE-SECDEG-FR-R2",
         "1SPE-SECDEG-FR-R4",
-        "1SPE-SECDEG-RE-C7"
+        "1SPE-SECDEG-RE-C1"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
       "reason": "un diagnostic le revele, une reprise y repond"
@@ -572,8 +560,7 @@
       "origin": "2GT",
       "diagnostic_evidence": [],
       "remediation_evidence": [
-        "1SPE-SUITES-FR-R1",
-        "1SPE-SUITES-FR-R4"
+        "1SPE-SUITES-FR-R1"
       ],
       "status": "REMEDIATED_ONLY",
       "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
@@ -690,17 +677,12 @@
       "prerequisite_code": "R2",
       "prerequisite_label": "Probabilites conditionnelles et independance",
       "origin": "1SPE-PROBA-COND",
-      "diagnostic_evidence": [
-        "1SPE-VARALEA-EV-A",
-        "1SPE-VARALEA-EV-B",
-        "1SPE-VARIABLES-ALEATOIRES-QCM"
-      ],
+      "diagnostic_evidence": [],
       "remediation_evidence": [
-        "1SPE-VARALEA-FR-R2",
-        "1SPE-VARALEA-RE-C3"
+        "1SPE-VARALEA-FR-R2"
       ],
-      "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "status": "REMEDIATED_ONLY",
+      "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
     },
     {
       "chapter": "1SPE-VARIABLES-ALEATOIRES",

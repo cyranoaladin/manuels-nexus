@@ -17,7 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 BINDING = ROOT / "audit" / "OFFICIAL_PROGRAMME_BINDING.json"
 INDEX = ROOT / "audit" / "OFFICIAL_PROGRAMME_INVENTORY.json"
 
-ETABLIS = {"ANCHOR", "VERBATIM", "CONTEXT"}
+#: Un atome dispose n'est pas identifie a son parent : il le raffine, ou il
+#: en integre plusieurs. La relation est nommee, et le lien est etabli.
+ETABLIS = {"ANCHOR", "VERBATIM", "CONTEXT", "DISPOSED"}
 
 
 @pytest.fixture(scope="module")
@@ -53,7 +55,14 @@ def test_un_rapprochement_incertain_ne_prend_pas_l_apparence_d_un_lien_etabli(li
         if lien["binding_method"] in ETABLIS:
             assert lien["official_id"], lien["atom_id"]
             assert lien["official_ids"], lien["atom_id"]
-            assert lien["review_status"].startswith("CONFIRMED_BY_")
+            assert lien["review_status"].startswith(("CONFIRMED_BY_", "DISPOSED"))
+        if lien["binding_method"] == "DISPOSED":
+            # Un arbitrage doit dire de quelle relation il s'agit et pourquoi.
+            assert lien["relationship"] in (
+                "PEDAGOGICAL_SUBDIVISION_OF",
+                "PEDAGOGICAL_INTEGRATION_OF",
+            ), lien["atom_id"]
+            assert lien["context_reason"], lien["atom_id"]
 
 
 def test_un_lien_etabli_par_contexte_publie_la_preuve_qui_l_etablit(liaison):
@@ -131,6 +140,9 @@ def test_les_compteurs_publies_decoulent_des_liens_publies(liaison):
     )
     assert resume["INTERNAL_ATOM_WITHOUT_OFFICIAL_PARENT"] == len(liens) - len(etablis)
     assert resume["bound_confirmed"] + resume["unbound"] == len(liens)
+    assert resume["disposed"] == sum(
+        1 for b in liens if b["binding_method"] == "DISPOSED"
+    )
 
 
 def test_un_meme_attendu_officiel_n_est_jamais_compte_deux_fois(liaison, officiels):

@@ -236,6 +236,24 @@ FileFingerprint = tuple[int, int, int, int, int, int, int]
 DirectoryFingerprint = tuple[int, int]
 
 
+#: Pages transversales integrees a chaque manuel, dans l'ordre. Elles sont
+#: rattachees au PROGRAMME du manuel, pas a ses chapitres : la partie
+#: « Vocabulaire ensembliste et logique » figure au programme de premiere, de
+#: terminale specialite et de l'option complementaire, et aucun chapitre
+#: disciplinaire ne la porte. Le formulaire et les automatismes statistiques
+#: sont propres a la premiere.
+ANNEXES_TRANSVERSALES: dict[str, tuple[str, ...]] = {
+    "1SPE": (
+        "formulaire",
+        "logique_raisonnement",
+        "statistiques_automatismes",
+        "memo_python",
+    ),
+    "TSPE_2026_2027": ("logique_raisonnement", "memo_python"),
+    "TCOMPL": ("logique_raisonnement", "memo_python"),
+}
+
+
 def _active_runner(runner: Callable[..., Any] | None) -> Callable[..., Any]:
     return subprocess.run if runner is None else runner
 
@@ -1138,26 +1156,18 @@ def render_master(
         parts.append(opening)
         parts.append("\n".join(blocs))
 
-    # Back matter. Le formulaire est propre au 1SPE ; la logique et le memo
-    # Python sont transversaux : le programme les demande en Premiere comme en
-    # Terminale, et les capacites correspondantes ne sont portees par aucun
-    # chapitre disciplinaire.
-    if manual == "1SPE":
-        parts.append("\\appendix")
+    # Back matter. Les pages transversales ne dependent pas du chapitre mais du
+    # PROGRAMME du manuel : la logique et le vocabulaire ensembliste sont une
+    # partie a part entiere du programme de premiere, de terminale specialite et
+    # de l'option complementaire, et aucun chapitre disciplinaire ne les porte.
+    # L'option complementaire en etait privee alors que son programme la
+    # comporte : sept capacites attendues se retrouvaient sans support dans le
+    # manuel assemble, faute d'assemblage et non faute de contenu.
+    for rang, page in enumerate(ANNEXES_TRANSVERSALES.get(manual, ())):
+        if rang == 0:
+            parts.append("\\appendix")
         parts.append("\\clearpage")
-        parts.append("\\input{transversal/formulaire}")
-        parts.append("\\clearpage")
-        parts.append("\\input{transversal/logique_raisonnement}")
-        parts.append("\\clearpage")
-        parts.append("\\input{transversal/statistiques_automatismes}")
-        parts.append("\\clearpage")
-        parts.append("\\input{transversal/memo_python}")
-    elif manual == "TSPE_2026_2027":
-        parts.append("\\appendix")
-        parts.append("\\clearpage")
-        parts.append("\\input{transversal/logique_raisonnement}")
-        parts.append("\\clearpage")
-        parts.append("\\input{transversal/memo_python}")
+        parts.append(f"\\input{{transversal/{page}}}")
 
     # Quatrieme de couverture de collection (charte v6)
     parts.append("\\nxSuspendreDecor")

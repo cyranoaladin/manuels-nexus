@@ -104,15 +104,31 @@ def _slug_preambule(intitule: str) -> str:
     ).strip("-")
 
 
+#: Suffixes francais retires pour ramener un terme a son radical, du plus long
+#: au plus court. Tronquer a longueur fixe ne suffisait pas : « derivation » et
+#: « derivee » ne partagent que cinq lettres, et le programme ecrit l'un la ou
+#: le cours ecrit l'autre.
+SUFFIXES = (
+    "ations", "ation", "ements", "ement", "ismes", "isme", "ives", "ive",
+    "ique", "iques", "elles", "elle", "ites", "ite", "ees", "ee", "aux",
+    "als", "al", "es", "s",
+)
+#: Longueur minimale d'un radical : en deca, le mot ne distingue plus rien.
+RADICAL_MINIMAL = 5
+
+
 def racine(terme: str) -> str:
-    """Radical grossier, pour ne pas dependre des flexions.
+    """Radical grossier, pour ne pas dependre des flexions ni des derivations.
 
     Le programme ecrit « Expressions booleennes » la ou le cours ecrit « une
-    expression booleenne » : chercher la forme exacte declarait absent un
-    contenu present. Deux caracteres de moins suffisent a franchir la plupart
-    des accords, sans confondre des notions distinctes.
+    expression booleenne », et « Continuite et derivation » la ou le cours
+    parle de fonction « derivee ». Chercher la forme exacte declarait absent un
+    contenu present ; tronquer a longueur fixe manquait encore le second cas.
     """
-    return terme[: max(5, len(terme) - 2)]
+    for suffixe in SUFFIXES:
+        if terme.endswith(suffixe) and len(terme) - len(suffixe) >= RADICAL_MINIMAL:
+            return terme[: -len(suffixe)]
+    return terme
 
 
 def charger_lignes_officielles() -> dict[str, list[str]]:
@@ -279,6 +295,7 @@ def main(argv: list[str] | None = None) -> int:
     items, autorites = charger_officiels()
     voisins_de_ligne = charger_lignes_officielles()
     par_official_id = {i["official_id"]: i for i in items}
+
     liaison = json.loads(BINDING.read_text(encoding="utf-8"))
     contrats = charger_contrats()
     objets = charger_objets(contrats) + charger_transversaux()

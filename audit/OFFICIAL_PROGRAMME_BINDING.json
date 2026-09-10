@@ -11,9 +11,10 @@
   },
   "summary": {
     "internal_atoms": 316,
-    "bound_confirmed": 281,
+    "bound_confirmed": 316,
+    "disposed": 35,
     "bound_by_context": 112,
-    "ambiguous_requires_human": 35,
+    "ambiguous_requires_human": 0,
     "residual_classification_counts": {
       "ENRICHMENT": 1,
       "OBSOLETE_INTERNAL_ATOM": 1,
@@ -22,9 +23,9 @@
       "WRONG_YEAR": 4
     },
     "rejected_wrong_match_candidates": 99,
-    "unbound": 35,
-    "INTERNAL_ATOM_WITHOUT_OFFICIAL_PARENT": 35,
-    "OFFICIAL_REQUIRED_UNMAPPED": 369,
+    "unbound": 0,
+    "INTERNAL_ATOM_WITHOUT_OFFICIAL_PARENT": 0,
+    "OFFICIAL_REQUIRED_UNMAPPED": 342,
     "UNJUSTIFIED_MULTIPLE_ASSIGNMENT": 5,
     "WRONG_YEAR_USED_AS_AUTHORITY": 0,
     "AUTHORITY_NAMESPACE_VIOLATION": 0,
@@ -32,8 +33,7 @@
     "binding_method_counts": {
       "ANCHOR": 5,
       "CONTEXT": 112,
-      "NONE": 7,
-      "PROPOSED": 28,
+      "DISPOSED": 35,
       "VERBATIM": 164
     }
   },
@@ -45,8 +45,8 @@
       "official_mandatory_bound_confirmed": 51,
       "OFFICIAL_REQUIRED_UNMAPPED": 44,
       "internal_atoms": 50,
-      "internal_atoms_confirmed": 49,
-      "INTERNAL_ATOM_WITHOUT_OFFICIAL_PARENT": 1,
+      "internal_atoms_confirmed": 50,
+      "INTERNAL_ATOM_WITHOUT_OFFICIAL_PARENT": 0,
       "by_official_kind": {
         "EXPECTED_CAPACITY": {
           "mandatory": 51,
@@ -66,27 +66,27 @@
       "authority_ref": "MENE2602917A",
       "official_items": 175,
       "official_mandatory": 129,
-      "official_mandatory_bound_confirmed": 30,
-      "OFFICIAL_REQUIRED_UNMAPPED": 99,
+      "official_mandatory_bound_confirmed": 50,
+      "OFFICIAL_REQUIRED_UNMAPPED": 79,
       "internal_atoms": 52,
-      "internal_atoms_confirmed": 29,
-      "INTERNAL_ATOM_WITHOUT_OFFICIAL_PARENT": 23,
+      "internal_atoms_confirmed": 52,
+      "INTERNAL_ATOM_WITHOUT_OFFICIAL_PARENT": 0,
       "by_official_kind": {
         "AUTOMATISM": {
           "mandatory": 17,
-          "bound_confirmed": 0
+          "bound_confirmed": 1
         },
         "DEMONSTRATION": {
           "mandatory": 11,
-          "bound_confirmed": 1
+          "bound_confirmed": 2
         },
         "EXPECTED_CAPACITY": {
           "mandatory": 59,
-          "bound_confirmed": 20
+          "bound_confirmed": 33
         },
         "KNOWLEDGE": {
           "mandatory": 42,
-          "bound_confirmed": 9
+          "bound_confirmed": 14
         }
       }
     },
@@ -94,11 +94,11 @@
       "authority_ref": "MENE1921265A",
       "official_items": 183,
       "official_mandatory": 108,
-      "official_mandatory_bound_confirmed": 37,
-      "OFFICIAL_REQUIRED_UNMAPPED": 71,
+      "official_mandatory_bound_confirmed": 41,
+      "OFFICIAL_REQUIRED_UNMAPPED": 67,
       "internal_atoms": 53,
-      "internal_atoms_confirmed": 46,
-      "INTERNAL_ATOM_WITHOUT_OFFICIAL_PARENT": 7,
+      "internal_atoms_confirmed": 53,
+      "INTERNAL_ATOM_WITHOUT_OFFICIAL_PARENT": 0,
       "by_official_kind": {
         "EXPECTED_CAPACITY": {
           "mandatory": 35,
@@ -106,7 +106,7 @@
         },
         "KNOWLEDGE": {
           "mandatory": 73,
-          "bound_confirmed": 14
+          "bound_confirmed": 18
         }
       }
     },
@@ -114,11 +114,11 @@
       "authority_ref": "MENE1921264A",
       "official_items": 105,
       "official_mandatory": 74,
-      "official_mandatory_bound_confirmed": 40,
-      "OFFICIAL_REQUIRED_UNMAPPED": 34,
+      "official_mandatory_bound_confirmed": 43,
+      "OFFICIAL_REQUIRED_UNMAPPED": 31,
       "internal_atoms": 33,
-      "internal_atoms_confirmed": 31,
-      "INTERNAL_ATOM_WITHOUT_OFFICIAL_PARENT": 2,
+      "internal_atoms_confirmed": 33,
+      "INTERNAL_ATOM_WITHOUT_OFFICIAL_PARENT": 0,
       "by_official_kind": {
         "DEMONSTRATION": {
           "mandatory": 12,
@@ -126,11 +126,11 @@
         },
         "EXPECTED_CAPACITY": {
           "mandatory": 22,
-          "bound_confirmed": 16
+          "bound_confirmed": 18
         },
         "KNOWLEDGE": {
           "mandatory": 40,
-          "bound_confirmed": 16
+          "bound_confirmed": 17
         }
       }
     },
@@ -141,8 +141,8 @@
       "official_mandatory_bound_confirmed": 49,
       "OFFICIAL_REQUIRED_UNMAPPED": 37,
       "internal_atoms": 61,
-      "internal_atoms_confirmed": 59,
-      "INTERNAL_ATOM_WITHOUT_OFFICIAL_PARENT": 2,
+      "internal_atoms_confirmed": 61,
+      "INTERNAL_ATOM_WITHOUT_OFFICIAL_PARENT": 0,
       "by_official_kind": {
         "EXPECTED_CAPACITY": {
           "mandatory": 48,
@@ -889,12 +889,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::ANALYSE::FONCTION-EXPONENTIELLE::EXPECTED_CAPACITY::31725d67",
+      "official_wording": "Modéliser une situation par une croissance, une décroissance exponentielle (par exemple évolution d’un capital à taux fixe, décroissance radioactive).",
+      "official_kind": "EXPECTED_CAPACITY",
       "binding_score": 0.286,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE2602917A::ANALYSE::FONCTION-EXPONENTIELLE::EXPECTED_CAPACITY::31725d67",
@@ -927,7 +927,7 @@
           }
         ]
       },
-      "context_reason": "dans « Fonction exponentielle », aucun attendu ne se detache (0.29 contre 0.20)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [
         {
           "official_id": "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::EXPECTED_CAPACITY::13334c07",
@@ -938,7 +938,11 @@
         }
       ],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE2602917A::ANALYSE::FONCTION-EXPONENTIELLE::EXPECTED_CAPACITY::31725d67"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-GEOMETRIE-REPEREE-C1",
@@ -1142,12 +1146,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "NONE",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::GEOMETRIE::GEOMETRIE-REPEREE::EXPECTED_CAPACITY::ddbb184a",
+      "official_wording": "Utiliser un repère pour étudier une configuration.",
+      "official_kind": "EXPECTED_CAPACITY",
       "binding_score": 0.091,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE2602917A::GEOMETRIE::GEOMETRIE-REPEREE::EXPECTED_CAPACITY::ddbb184a",
@@ -1186,10 +1190,14 @@
           }
         ]
       },
-      "context_reason": "dans « Géométrie », « Géométrie repérée », aucun attendu ne se detache (0.09 contre 0.06)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE2602917A::GEOMETRIE::GEOMETRIE-REPEREE::EXPECTED_CAPACITY::ddbb184a"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-GEOMETRIE-REPEREE-C5",
@@ -1202,12 +1210,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "NONE",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.143,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::GEOMETRIE::GEOMETRIE-REPEREE::EXPECTED_CAPACITY::ddbb184a",
+      "official_wording": "Utiliser un repère pour étudier une configuration.",
+      "official_kind": "EXPECTED_CAPACITY",
+      "binding_score": 0.111,
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE2602917A::GEOMETRIE::OBJECTIFS::OBJECTIVE::c3da9d83",
@@ -1246,10 +1254,14 @@
           }
         ]
       },
-      "context_reason": "dans « Géométrie », « Géométrie repérée », aucun attendu ne se detache (0.14 contre 0.11)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE2602917A::GEOMETRIE::GEOMETRIE-REPEREE::EXPECTED_CAPACITY::ddbb184a"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-PROBA-COND-C1",
@@ -1262,12 +1274,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.231,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::AUTOMATISMES::PROBABILITES::AUTOMATISM::dd94c401",
+      "official_wording": "Calculer des probabilités conditionnelles lorsque les évènements sont présentés sous forme de tableau croisé d’effectifs ou d’arbres pondérés.",
+      "official_kind": "AUTOMATISM",
+      "binding_score": null,
+      "review_status": "DISPOSED_BY_READING",
       "candidates": [
         {
           "official_id": "MENE2602917A::AUTOMATISMES::PROBABILITES::AUTOMATISM::dd94c401",
@@ -1289,10 +1301,14 @@
         }
       ],
       "theme_scope": null,
-      "context_reason": "la partie officielle traitee par ce theme n'est pas etablie",
+      "context_reason": "Le calcul d'une probabilite conditionnelle quitte les contenus de premiere en 2026 et devient un automatisme a entretenir. Le nom abrege du theme -- « PROBA-COND » -- ne permettait a aucune regle de retrouver la partie officielle correspondante.",
       "rejected_candidates": [],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE2602917A::AUTOMATISMES::PROBABILITES::AUTOMATISM::dd94c401"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-PROBA-COND-C2",
@@ -1305,18 +1321,22 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "NONE",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.111,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::AUTOMATISMES::PROBABILITES::AUTOMATISM::dd94c401",
+      "official_wording": "Calculer des probabilités conditionnelles lorsque les évènements sont présentés sous forme de tableau croisé d’effectifs ou d’arbres pondérés.",
+      "official_kind": "AUTOMATISM",
+      "binding_score": null,
+      "review_status": "DISPOSED_BY_READING",
       "candidates": [],
       "theme_scope": null,
-      "context_reason": "la partie officielle traitee par ce theme n'est pas etablie",
+      "context_reason": "Le programme de 2026 sort l'arbre pondere des contenus de premiere et le place parmi les automatismes, ou il sert a calculer des probabilites conditionnelles. Le parent est donc dans une autre partie du programme, ce qu'aucune regle de portee ne pouvait franchir.",
       "rejected_candidates": [],
       "residual_classification": "OBSOLETE_INTERNAL_ATOM",
-      "residual_evidence": "aucun attendu du programme applicable ne lui repond, meme partiellement"
+      "residual_evidence": "aucun attendu du programme applicable ne lui repond, meme partiellement",
+      "official_ids": [
+        "MENE2602917A::AUTOMATISMES::PROBABILITES::AUTOMATISM::dd94c401"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-PROBA-COND-C3",
@@ -1329,12 +1349,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.333,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::PROBABILITES-CONDITIONNELLES-ET-IN::EXPECTED_CAPACITY::03d93336",
+      "official_wording": "Dans des cas simples, calculer une probabilité à l’aide de la formule des probabilités totales.",
+      "official_kind": "EXPECTED_CAPACITY",
+      "binding_score": null,
+      "review_status": "DISPOSED_BY_READING",
       "candidates": [
         {
           "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::PROBABILITES-CONDITIONNELLES-ET-IN::EXPECTED_CAPACITY::03d93336",
@@ -1356,10 +1376,14 @@
         }
       ],
       "theme_scope": null,
-      "context_reason": "la partie officielle traitee par ce theme n'est pas etablie",
+      "context_reason": "La formule des probabilites totales est nommee telle quelle par le programme ; seul le nom abrege du theme empechait de la retrouver.",
       "rejected_candidates": [],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE2602917A::PROBABILITES-ET-STATISTIQUES::PROBABILITES-CONDITIONNELLES-ET-IN::EXPECTED_CAPACITY::03d93336"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-PROBA-COND-C4",
@@ -1372,12 +1396,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.5,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::PROBABILITES-CONDITIONNELLES-ET-IN::EXPECTED_CAPACITY::31fc284c",
+      "official_wording": "Savoir utiliser ou justifier l’indépendance de deux évènements.",
+      "official_kind": "EXPECTED_CAPACITY",
+      "binding_score": null,
+      "review_status": "DISPOSED_BY_READING",
       "candidates": [
         {
           "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::PROBABILITES-CONDITIONNELLES-ET-IN::EXPECTED_CAPACITY::31fc284c",
@@ -1399,10 +1423,14 @@
         }
       ],
       "theme_scope": null,
-      "context_reason": "la partie officielle traitee par ce theme n'est pas etablie",
+      "context_reason": "« Reconnaitre et utiliser l'independance » raffine l'attendu officiel « Savoir utiliser ou justifier l'independance de deux evenements ».",
       "rejected_candidates": [],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE2602917A::PROBABILITES-ET-STATISTIQUES::PROBABILITES-CONDITIONNELLES-ET-IN::EXPECTED_CAPACITY::31fc284c"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-PROBA-COND-C5",
@@ -1415,12 +1443,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.214,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::PROBABILITES-CONDITIONNELLES-ET-IN::EXPECTED_CAPACITY::03d93336",
+      "official_wording": "Dans des cas simples, calculer une probabilité à l’aide de la formule des probabilités totales.",
+      "official_kind": "EXPECTED_CAPACITY",
+      "binding_score": null,
+      "review_status": "DISPOSED_BY_READING",
       "candidates": [
         {
           "official_id": "MENE2602917A::GEOMETRIE::OBJECTIFS::OBJECTIVE::c3da9d83",
@@ -1442,10 +1470,16 @@
         }
       ],
       "theme_scope": null,
-      "context_reason": "la partie officielle traitee par ce theme n'est pas etablie",
+      "context_reason": "« Resoudre des problemes contextualises » ne raffine aucun attendu : c'est une mise en situation qui les mobilise ensemble. Lui imposer un parent unique aurait fait disparaitre les autres.",
       "rejected_candidates": [],
       "residual_classification": "OFFICIAL_CHILD",
-      "residual_evidence": "releve d'un attendu de la partie traitee, sans qu'un candidat se detache assez pour trancher mecaniquement"
+      "residual_evidence": "releve d'un attendu de la partie traitee, sans qu'un candidat se detache assez pour trancher mecaniquement",
+      "official_ids": [
+        "MENE2602917A::PROBABILITES-ET-STATISTIQUES::PROBABILITES-CONDITIONNELLES-ET-IN::EXPECTED_CAPACITY::03d93336",
+        "MENE2602917A::PROBABILITES-ET-STATISTIQUES::PROBABILITES-CONDITIONNELLES-ET-IN::EXPECTED_CAPACITY::31fc284c",
+        "MENE2602917A::PROBABILITES-ET-STATISTIQUES::PROBABILITES-CONDITIONNELLES-ET-IN::EXPECTED_CAPACITY::ca12839f"
+      ],
+      "relationship": "PEDAGOGICAL_INTEGRATION_OF"
     },
     {
       "atom_id": "1SPE-PRODUIT-SCALAIRE-C1",
@@ -1458,12 +1492,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::GEOMETRIE::CALCUL-VECTORIEL-ET-PRODUIT-SCALAI::KNOWLEDGE::18cf2b2a",
+      "official_wording": "Produit scalaire à partir de la projection orthogonale et de la formule avec le cosinus. Caractérisation de l’orthogonalité.",
+      "official_kind": "KNOWLEDGE",
       "binding_score": 0.267,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE2602917A::GEOMETRIE::CALCUL-VECTORIEL-ET-PRODUIT-SCALAI::KNOWLEDGE::18cf2b2a",
@@ -1496,10 +1530,14 @@
           }
         ]
       },
-      "context_reason": "dans « Calcul vectoriel et produit scalaire », aucun attendu ne se detache (0.27 contre 0.23)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE2602917A::GEOMETRIE::CALCUL-VECTORIEL-ET-PRODUIT-SCALAI::KNOWLEDGE::18cf2b2a"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-PRODUIT-SCALAIRE-C2",
@@ -1512,12 +1550,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.278,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::GEOMETRIE::CALCUL-VECTORIEL-ET-PRODUIT-SCALAI::KNOWLEDGE::b1d9b1f0",
+      "official_wording": "Bilinéarité, symétrie. En base orthonormée, expression du produit scalaire et de la norme, critère d’orthogonalité. Expression des coordonnées dans une base orthonormée en termes de produits scalaires avec les vecteurs de la base.",
+      "official_kind": "KNOWLEDGE",
+      "binding_score": null,
+      "review_status": "DISPOSED_BY_READING",
       "candidates": [
         {
           "official_id": "MENE2602917A::GEOMETRIE::CALCUL-VECTORIEL-ET-PRODUIT-SCALAI::KNOWLEDGE::b1d9b1f0",
@@ -1550,10 +1588,14 @@
           }
         ]
       },
-      "context_reason": "dans « Calcul vectoriel et produit scalaire », aucun attendu ne se detache (0.28 contre 0.27)",
+      "context_reason": "Le programme de 2026 porte bien cet attendu ; c'est le libelle de 2019 qui lui ressemblait davantage, d'ou le soupcon de hors-annee. La notion est au programme applicable.",
       "rejected_candidates": [],
       "residual_classification": "WRONG_YEAR",
-      "residual_evidence": "recouvre mieux un attendu d'un programme non applicable (0.38) que le programme en vigueur (0.28)"
+      "residual_evidence": "recouvre mieux un attendu d'un programme non applicable (0.38) que le programme en vigueur (0.28)",
+      "official_ids": [
+        "MENE2602917A::GEOMETRIE::CALCUL-VECTORIEL-ET-PRODUIT-SCALAI::KNOWLEDGE::b1d9b1f0"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-PRODUIT-SCALAIRE-C3",
@@ -1566,12 +1608,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::GEOMETRIE::CALCUL-VECTORIEL-ET-PRODUIT-SCALAI::EXPECTED_CAPACITY::ed914f34",
+      "official_wording": "Utiliser le produit scalaire pour résoudre un problème géométrique.",
+      "official_kind": "EXPECTED_CAPACITY",
       "binding_score": 0.3,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE2602917A::GEOMETRIE::CALCUL-VECTORIEL-ET-PRODUIT-SCALAI::EXPECTED_CAPACITY::ed914f34",
@@ -1604,7 +1646,7 @@
           }
         ]
       },
-      "context_reason": "dans « Calcul vectoriel et produit scalaire », aucun attendu ne se detache (0.30 contre 0.23)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [
         {
           "official_id": "MENE2602917A::AUTOMATISMES::CALCUL-NUMERIQUE-ET-ALGEBRIQUE::AUTOMATISM::d09f2a1f",
@@ -1615,7 +1657,11 @@
         }
       ],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE2602917A::GEOMETRIE::CALCUL-VECTORIEL-ET-PRODUIT-SCALAI::EXPECTED_CAPACITY::ed914f34"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-PRODUIT-SCALAIRE-C4",
@@ -1691,12 +1737,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::GEOMETRIE::CALCUL-VECTORIEL-ET-PRODUIT-SCALAI::KNOWLEDGE::c0243f98",
+      "official_wording": "Développement de ‖𝑢 ⃗ + 𝑣‖2 et ‖𝑢 ⃗ − 𝑣 ‖2 . Formule d’Al-Kashi.",
+      "official_kind": "KNOWLEDGE",
       "binding_score": 0.182,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE2602917A::GEOMETRIE::CALCUL-VECTORIEL-ET-PRODUIT-SCALAI::KNOWLEDGE::c0243f98",
@@ -1729,7 +1775,7 @@
           }
         ]
       },
-      "context_reason": "dans « Calcul vectoriel et produit scalaire », aucun attendu ne se detache (0.18 contre 0.15)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [
         {
           "official_id": "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::OPTIONAL_ENRICHMENT::2b31a824",
@@ -1740,7 +1786,11 @@
         }
       ],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE2602917A::GEOMETRIE::CALCUL-VECTORIEL-ET-PRODUIT-SCALAI::KNOWLEDGE::c0243f98"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-SECOND-DEGRE-2026-C1",
@@ -1951,12 +2001,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.25,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::KNOWLEDGE::24e8781f",
+      "official_wording": "Exemples de modes de génération d’une suite : explicite 𝑢𝑛 = ƒ (𝑛), par une relation de récurrence 𝑢𝑛 + 1 = ƒ (𝑢𝑛), par un algorithme, par des motifs géométriques.",
+      "official_kind": "KNOWLEDGE",
+      "binding_score": 0.2,
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::KNOWLEDGE::24e8781f",
@@ -1989,7 +2039,7 @@
           }
         ]
       },
-      "context_reason": "dans « Suites numériques, modèles discrets », aucun attendu ne se detache (0.20 contre 0.18)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [
         {
           "official_id": "MENE2602917A::ALGEBRE::OBJECTIFS::OBJECTIVE::7e1152d5",
@@ -2000,7 +2050,11 @@
         }
       ],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::KNOWLEDGE::24e8781f"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-SUITES-C3",
@@ -2013,12 +2067,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.25,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::EXPECTED_CAPACITY::68f810d3",
+      "official_wording": "Proposer, modéliser une situation permettant de générer une suite de nombres. Déterminer une relation explicite ou une relation de récurrence pour une suite définie par un motif géométrique, par une question de dénombrement.",
+      "official_kind": "EXPECTED_CAPACITY",
+      "binding_score": 0.2,
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::EXPECTED_CAPACITY::68f810d3",
@@ -2051,7 +2105,7 @@
           }
         ]
       },
-      "context_reason": "dans « Suites numériques, modèles discrets », aucun attendu ne se detache (0.20 contre 0.20)",
+      "context_reason": "aucun des 2 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [
         {
           "official_id": "MENE2602917A::ALGEBRE::OBJECTIFS::OBJECTIVE::7e1152d5",
@@ -2062,7 +2116,12 @@
         }
       ],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::EXPECTED_CAPACITY::68f810d3",
+        "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::KNOWLEDGE::24e8781f"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-SUITES-C4",
@@ -2075,12 +2134,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::EXPECTED_CAPACITY::16311681",
+      "official_wording": "Pour une suite arithmétique ou géométrique, calculer le terme général, la somme de termes consécutifs, déterminer le sens de variation.",
+      "official_kind": "EXPECTED_CAPACITY",
       "binding_score": 0.357,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::EXPECTED_CAPACITY::16311681",
@@ -2113,10 +2172,14 @@
           }
         ]
       },
-      "context_reason": "dans « Suites numériques, modèles discrets », aucun attendu ne se detache (0.36 contre 0.27)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::EXPECTED_CAPACITY::16311681"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-SUITES-C5",
@@ -2129,12 +2192,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::KNOWLEDGE::26ddea99",
+      "official_wording": "Sens de variation d’une suite.",
+      "official_kind": "KNOWLEDGE",
       "binding_score": 0.231,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::KNOWLEDGE::26ddea99",
@@ -2167,7 +2230,7 @@
           }
         ]
       },
-      "context_reason": "dans « Suites numériques, modèles discrets », aucun attendu ne se detache (0.23 contre 0.19)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [
         {
           "official_id": "MENE2602917A::ANALYSE::FONCTION-EXPONENTIELLE::KNOWLEDGE::21ebb97e",
@@ -2185,7 +2248,11 @@
         }
       ],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::KNOWLEDGE::26ddea99"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-SUITES-C6",
@@ -2198,12 +2265,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.278,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::EXPECTED_CAPACITY::13334c07",
+      "official_wording": "Modéliser un phénomène discret à croissance linéaire par une suite arithmétique, un phénomène discret à croissance exponentielle par une suite géométrique.",
+      "official_kind": "EXPECTED_CAPACITY",
+      "binding_score": null,
+      "review_status": "DISPOSED_BY_READING",
       "candidates": [
         {
           "official_id": "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::EXPECTED_CAPACITY::13334c07",
@@ -2236,10 +2303,14 @@
           }
         ]
       },
-      "context_reason": "dans « Suites numériques, modèles discrets », aucun attendu ne se detache (0.28 contre 0.16)",
+      "context_reason": "Le programme reunit en un seul attendu la modelisation lineaire par une suite arithmetique et la modelisation exponentielle par une suite geometrique ; l'atome en couvre les deux faces.",
       "rejected_candidates": [],
       "residual_classification": "OFFICIAL_CHILD",
-      "residual_evidence": "releve d'un attendu de la partie traitee, sans qu'un candidat se detache assez pour trancher mecaniquement"
+      "residual_evidence": "releve d'un attendu de la partie traitee, sans qu'un candidat se detache assez pour trancher mecaniquement",
+      "official_ids": [
+        "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::EXPECTED_CAPACITY::13334c07"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-SUITES-C7",
@@ -2252,12 +2323,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.182,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::EXPECTED_CAPACITY::16311681",
+      "official_wording": "Pour une suite arithmétique ou géométrique, calculer le terme général, la somme de termes consécutifs, déterminer le sens de variation.",
+      "official_kind": "EXPECTED_CAPACITY",
+      "binding_score": 0.176,
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::ALGORITHM_EXAMPLE::58e04eac",
@@ -2290,10 +2361,14 @@
           }
         ]
       },
-      "context_reason": "dans « Suites numériques, modèles discrets », aucun attendu ne se detache (0.18 contre 0.18)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::EXPECTED_CAPACITY::16311681"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-SUITES-C8",
@@ -2424,12 +2499,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::ANALYSE::TRIGONOMETRIE::DEMONSTRATION::810aff62",
+      "official_wording": "Calcul de cos , sin , cos , sin . 4 4 3 3",
+      "official_kind": "DEMONSTRATION",
       "binding_score": 0.2,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE2602917A::ANALYSE::TRIGONOMETRIE::DEMONSTRATION::810aff62",
@@ -2462,10 +2537,14 @@
           }
         ]
       },
-      "context_reason": "dans « Trigonométrie », aucun attendu ne se detache (0.20 contre 0.12)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE2602917A::ANALYSE::TRIGONOMETRIE::DEMONSTRATION::810aff62"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-VARIABLES-ALEATOIRES-C1",
@@ -2606,12 +2685,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.714,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::PROBABILITES-CONDITIONNELLES-ET-IN::EXPECTED_CAPACITY::16e734e1",
+      "official_wording": "Pour 𝑛 ⩽ 4, représenter l’arbre associé à la répétition de 𝑛 épreuves de Bernoulli indépendantes et identiques afin de calculer des probabilités.",
+      "official_kind": "EXPECTED_CAPACITY",
+      "binding_score": null,
+      "review_status": "DISPOSED_BY_READING",
       "candidates": [
         {
           "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::VARIABLES-ALEATOIRES-REELLES::EXPECTED_CAPACITY::45b6b602",
@@ -2644,7 +2723,7 @@
           }
         ]
       },
-      "context_reason": "dans « Variables aléatoires réelles », aucun attendu ne se detache (0.06 contre 0.00)",
+      "context_reason": "L'attendu existe mot pour mot en 2026, mais dans « Probabilites conditionnelles et independance » et non dans « Variables aleatoires reelles » que traite ce chapitre.",
       "rejected_candidates": [
         {
           "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::PROBABILITES-CONDITIONNELLES-ET-IN::EXPECTED_CAPACITY::16e734e1",
@@ -2669,7 +2748,11 @@
         }
       ],
       "residual_classification": "WRONG_YEAR",
-      "residual_evidence": "recouvre mieux un attendu d'un programme non applicable (0.36) que le programme en vigueur (0.06)"
+      "residual_evidence": "recouvre mieux un attendu d'un programme non applicable (0.36) que le programme en vigueur (0.06)",
+      "official_ids": [
+        "MENE2602917A::PROBABILITES-ET-STATISTIQUES::PROBABILITES-CONDITIONNELLES-ET-IN::EXPECTED_CAPACITY::16e734e1"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-VARIABLES-ALEATOIRES-C4",
@@ -2745,12 +2828,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.214,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::VARIABLES-ALEATOIRES-REELLES::EXPECTED_CAPACITY::f8a872e4",
+      "official_wording": "Modéliser une situation à l’aide d’une variable aléatoire.",
+      "official_kind": "EXPECTED_CAPACITY",
+      "binding_score": null,
+      "review_status": "DISPOSED_BY_READING",
       "candidates": [
         {
           "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::VARIABLES-ALEATOIRES-REELLES::ALGORITHM_EXAMPLE::5e9498d2",
@@ -2783,7 +2866,7 @@
           }
         ]
       },
-      "context_reason": "dans « Variables aléatoires réelles », aucun attendu ne se detache (0.00 contre 0.00)",
+      "context_reason": "« Resoudre des problemes contextualises faisant intervenir des variables aleatoires » ne raffine aucun attendu : c'est la mise en situation qui les mobilise ensemble.",
       "rejected_candidates": [
         {
           "official_id": "MENE2602917A::GEOMETRIE::OBJECTIFS::OBJECTIVE::c3da9d83",
@@ -2808,7 +2891,13 @@
         }
       ],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE2602917A::PROBABILITES-ET-STATISTIQUES::VARIABLES-ALEATOIRES-REELLES::EXPECTED_CAPACITY::f8a872e4",
+        "MENE2602917A::PROBABILITES-ET-STATISTIQUES::VARIABLES-ALEATOIRES-REELLES::EXPECTED_CAPACITY::fd25d9a4",
+        "MENE2602917A::PROBABILITES-ET-STATISTIQUES::VARIABLES-ALEATOIRES-REELLES::EXPECTED_CAPACITY::0e6f1a44"
+      ],
+      "relationship": "PEDAGOGICAL_INTEGRATION_OF"
     },
     {
       "atom_id": "1SPE-VARIABLES-ALEATOIRES-C6",
@@ -2821,12 +2910,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.367,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::EXPERIMENTATIONS::EXPECTED_CAPACITY::f5d91804",
+      "official_wording": "Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n",
+      "official_kind": "EXPECTED_CAPACITY",
+      "binding_score": null,
+      "review_status": "DISPOSED_BY_READING",
       "candidates": [
         {
           "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::VARIABLES-ALEATOIRES-REELLES::ALGORITHM_EXAMPLE::a7984a79",
@@ -2859,7 +2948,7 @@
           }
         ]
       },
-      "context_reason": "dans « Variables aléatoires réelles », aucun attendu ne se detache (0.12 contre 0.09)",
+      "context_reason": "Cet atome reprend la prose de cadrage de la sous-partie « Experimentations » ; l'attendu qu'elle introduit est la simulation d'echantillons.",
       "rejected_candidates": [
         {
           "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::EXPERIMENTATIONS::EXPECTED_CAPACITY::1f25b6d3",
@@ -2884,7 +2973,11 @@
         }
       ],
       "residual_classification": "WRONG_YEAR",
-      "residual_evidence": "recouvre mieux un attendu d'un programme non applicable (0.37) que le programme en vigueur (0.12)"
+      "residual_evidence": "recouvre mieux un attendu d'un programme non applicable (0.37) que le programme en vigueur (0.12)",
+      "official_ids": [
+        "MENE2602917A::PROBABILITES-ET-STATISTIQUES::EXPERIMENTATIONS::EXPECTED_CAPACITY::f5d91804"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "1SPE-VARIABLES-ALEATOIRES-C7",
@@ -2897,12 +2990,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.818,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::EXPERIMENTATIONS::EXPECTED_CAPACITY::3d6c38c4",
+      "official_wording": "Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire.",
+      "official_kind": "EXPECTED_CAPACITY",
+      "binding_score": null,
+      "review_status": "DISPOSED_BY_READING",
       "candidates": [
         {
           "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::VARIABLES-ALEATOIRES-REELLES::KNOWLEDGE::191f0ef9",
@@ -2935,7 +3028,7 @@
           }
         ]
       },
-      "context_reason": "dans « Variables aléatoires réelles », aucun attendu ne se detache (0.22 contre 0.20)",
+      "context_reason": "Reprise quasi mot pour mot d'un attendu de « Experimentations », partie voisine de celle que traite le chapitre.",
       "rejected_candidates": [
         {
           "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::EXPERIMENTATIONS::EXPECTED_CAPACITY::f5d91804",
@@ -2960,7 +3053,11 @@
         }
       ],
       "residual_classification": "WRONG_YEAR",
-      "residual_evidence": "recouvre mieux un attendu d'un programme non applicable (0.82) que le programme en vigueur (0.22)"
+      "residual_evidence": "recouvre mieux un attendu d'un programme non applicable (0.82) que le programme en vigueur (0.22)",
+      "official_ids": [
+        "MENE2602917A::PROBABILITES-ET-STATISTIQUES::EXPERIMENTATIONS::EXPECTED_CAPACITY::3d6c38c4"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "TCOMPL-AIR-C1",
@@ -3120,12 +3217,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.875,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE1921265A::ANALYSE::INTEGRATION::KNOWLEDGE::d2a6783a",
+      "official_wording": "Théorème : si ƒ est continue sur [a,b], la fonction F définie sur [a,b] par x F(x) = ∫a ƒ(t)dt est dérivable sur [a,b] et a pour dérivée ƒ.",
+      "official_kind": "KNOWLEDGE",
+      "binding_score": 0.167,
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE1921265A::ANALYSE::INTEGRATION::DEMONSTRATION_SUGGESTED::83afb8d7",
@@ -3164,7 +3261,7 @@
           }
         ]
       },
-      "context_reason": "dans « Calculs d’aires », « Intégration », aucun attendu ne se detache (0.17 contre 0.17)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [
         {
           "official_id": "MENE1921265A::ANALYSE::PRIMITIVES-ET-EQUATIONS-DIFFERENTI::EXPECTED_CAPACITY::90dd6c57",
@@ -3189,7 +3286,11 @@
         }
       ],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE1921265A::ANALYSE::INTEGRATION::KNOWLEDGE::d2a6783a"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "TCOMPL-AIR-C5",
@@ -3202,12 +3303,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.923,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE1921265A::THEMES-D-ETUDE::CALCULS-D-AIRES::KNOWLEDGE::93d6ca43",
+      "official_wording": "Intégrale d’une fonction continue et positive.",
+      "official_kind": "KNOWLEDGE",
+      "binding_score": 0.143,
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE1921265A::THEMES-D-ETUDE::CALCULS-D-AIRES::KNOWLEDGE::93d6ca43",
@@ -3246,7 +3347,7 @@
           }
         ]
       },
-      "context_reason": "dans « Calculs d’aires », « Intégration », aucun attendu ne se detache (0.14 contre 0.12)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [
         {
           "official_id": "MENE1921265A::ANALYSE::PRIMITIVES-ET-EQUATIONS-DIFFERENTI::KNOWLEDGE::8dcac0e9",
@@ -3271,7 +3372,11 @@
         }
       ],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE1921265A::THEMES-D-ETUDE::CALCULS-D-AIRES::KNOWLEDGE::93d6ca43"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "TCOMPL-AIR-C6",
@@ -3533,12 +3638,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "NONE",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
+      "binding_method": "DISPOSED",
+      "official_id": "MENE1921265A::PROBABILITES-ET-STATISTIQUE::STATISTIQUE-A-DEUX-VARIABLES-QUANT::KNOWLEDGE::cfb6ec02",
+      "official_wording": "Ajustement affine. Droite des moindres carrés. Coefficient de corrélation.",
+      "official_kind": "KNOWLEDGE",
       "binding_score": 0.067,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE1921265A::PROBABILITES-ET-STATISTIQUE::STATISTIQUE-A-DEUX-VARIABLES-QUANT::KNOWLEDGE::cfb6ec02",
@@ -3577,10 +3682,14 @@
           }
         ]
       },
-      "context_reason": "dans « Corrélation et causalité », « Statistique à deux variables quantitatives », aucun attendu ne se detache (0.07 contre 0.00)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE1921265A::PROBABILITES-ET-STATISTIQUE::STATISTIQUE-A-DEUX-VARIABLES-QUANT::KNOWLEDGE::cfb6ec02"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "TCOMPL-ECH-C1",
@@ -4178,12 +4287,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.625,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE1921265A::ANALYSE::FONCTIONS-CONVEXES::KNOWLEDGE::7fa2c49c",
+      "official_wording": "Fonction convexe sur un intervalle : définition par la position relative de la courbe représentative et des sécantes, équivalence admise, lorsque ƒ est dérivable, avec la position par rapport aux tangentes.",
+      "official_kind": "KNOWLEDGE",
+      "binding_score": 0.045,
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE1921265A::ANALYSE::FONCTIONS-CONVEXES::KNOWLEDGE::7fa2c49c",
@@ -4222,7 +4331,7 @@
           }
         ]
       },
-      "context_reason": "dans « Fonctions convexes », « Répartition des richesses, inégalités », aucun attendu ne se detache (0.05 contre 0.03)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [
         {
           "official_id": "MENE1921265A::ANALYSE::INTEGRATION::EXPECTED_CAPACITY::0e4862af",
@@ -4247,7 +4356,11 @@
         }
       ],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE1921265A::ANALYSE::FONCTIONS-CONVEXES::KNOWLEDGE::7fa2c49c"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "TCOMPL-BAYES-C1",
@@ -4284,12 +4397,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "NONE",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
+      "binding_method": "DISPOSED",
+      "official_id": "MENE1921265A::THEMES-D-ETUDE::INFERENCE-BAYESIENNE::KNOWLEDGE::83ced9d3",
+      "official_wording": "Probabilités conditionnelles, inversion du conditionnement, formule de Bayes.",
+      "official_kind": "KNOWLEDGE",
       "binding_score": 0.133,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE1921265A::THEMES-D-ETUDE::INFERENCE-BAYESIENNE::KNOWLEDGE::83ced9d3",
@@ -4328,10 +4441,14 @@
           }
         ]
       },
-      "context_reason": "dans « Inférence bayésienne », « Lois discrètes », aucun attendu ne se detache (0.13 contre 0.05)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE1921265A::THEMES-D-ETUDE::INFERENCE-BAYESIENNE::KNOWLEDGE::83ced9d3"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "TCOMPL-BAYES-C3",
@@ -4344,12 +4461,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "NONE",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.0,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE1921265A::THEMES-D-ETUDE::INFERENCE-BAYESIENNE::KNOWLEDGE::83ced9d3",
+      "official_wording": "Probabilités conditionnelles, inversion du conditionnement, formule de Bayes.",
+      "official_kind": "KNOWLEDGE",
+      "binding_score": null,
+      "review_status": "DISPOSED_BY_READING",
       "candidates": [
         {
           "official_id": "MENE1921265A::PROBABILITES-ET-STATISTIQUE::LOIS-DISCRETES::DEMONSTRATION_SUGGESTED::0a811b27",
@@ -4388,10 +4505,14 @@
           }
         ]
       },
-      "context_reason": "dans « Inférence bayésienne », « Lois discrètes », aucun attendu ne se detache (0.00 contre 0.00)",
+      "context_reason": "Cet atome reprend le descriptif du theme d'etude ; l'attendu correspondant est le contenu associe que ce descriptif introduit.",
       "rejected_candidates": [],
       "residual_classification": "ENRICHMENT",
-      "residual_evidence": "ses seuls rapprochements possibles portent sur des attendus que le programme ne rend pas obligatoires"
+      "residual_evidence": "ses seuls rapprochements possibles portent sur des attendus que le programme ne rend pas obligatoires",
+      "official_ids": [
+        "MENE1921265A::THEMES-D-ETUDE::INFERENCE-BAYESIENNE::KNOWLEDGE::83ced9d3"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "TCOMPL-BAYES-C4",
@@ -5454,12 +5575,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": "Lois uniformes discrètes et continues sur [0,1].",
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
+      "binding_method": "DISPOSED",
+      "official_id": "MENE1921265A::PROBABILITES-ET-STATISTIQUE::LOIS-A-DENSITE::KNOWLEDGE::065095ee",
+      "official_wording": "Loi uniforme sur [0,1] puis sur [a,b]. Fonction de densité, fonction de répartition. Espérance et variance.",
+      "official_kind": "KNOWLEDGE",
       "binding_score": 0.429,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE1921265A::PROBABILITES-ET-STATISTIQUE::LOIS-A-DENSITE::KNOWLEDGE::065095ee",
@@ -5510,10 +5631,14 @@
           }
         ]
       },
-      "context_reason": "dans « Lois discrètes », « Lois à densité », « Répétition d’expériences indépendantes, échantillonnage », « Temps d’attente », aucun attendu ne se detache (0.43 contre 0.33)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE1921265A::PROBABILITES-ET-STATISTIQUE::LOIS-A-DENSITE::KNOWLEDGE::065095ee"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "TEXP-ARI-C1",
@@ -6238,12 +6363,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.727,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE1921264A::NOMBRES-COMPLEXES::EQUATIONS-POLYNOMIALES::EXPECTED_CAPACITY::27945a83",
+      "official_wording": "Résoudre une équation polynomiale de degré 2 à coefficients réels.",
+      "official_kind": "EXPECTED_CAPACITY",
+      "binding_score": null,
+      "review_status": "DISPOSED_BY_READING",
       "candidates": [
         {
           "official_id": "MENE1921264A::NOMBRES-COMPLEXES::NOMBRES-COMPLEXES-ET-TRIGONOMETRIE::DEMONSTRATION::7b3f3d3b",
@@ -6282,7 +6407,7 @@
           }
         ]
       },
-      "context_reason": "dans « Nombres complexes et trigonométrie », « Utilisation des nombres complexes en géométrie », aucun attendu ne se detache (0.00 contre 0.00)",
+      "context_reason": "L'atome reunit les deux attendus de resolution d'equations polynomiales que le programme enonce separement, degre 2 puis degre 3 a racine connue.",
       "rejected_candidates": [
         {
           "official_id": "MENE1921264A::NOMBRES-COMPLEXES::EQUATIONS-POLYNOMIALES::EXPECTED_CAPACITY::c1422940",
@@ -6307,7 +6432,12 @@
         }
       ],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE1921264A::NOMBRES-COMPLEXES::EQUATIONS-POLYNOMIALES::EXPECTED_CAPACITY::27945a83",
+        "MENE1921264A::NOMBRES-COMPLEXES::EQUATIONS-POLYNOMIALES::EXPECTED_CAPACITY::c1422940"
+      ],
+      "relationship": "PEDAGOGICAL_INTEGRATION_OF"
     },
     {
       "atom_id": "TEXP-CTP-C5",
@@ -6320,12 +6450,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": null,
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.875,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE1921264A::NOMBRES-COMPLEXES::NOMBRES-COMPLEXES-ET-TRIGONOMETRIE::EXPECTED_CAPACITY::878b93f3",
+      "official_wording": "Passer de la forme algébrique d’un nombre complexe à sa forme trigonométrique ou exponentielle et inversement.",
+      "official_kind": "EXPECTED_CAPACITY",
+      "binding_score": 0.067,
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE1921264A::NOMBRES-COMPLEXES::UTILISATION-DES-NOMBRES-COMPLEXES::OPTIONAL_ENRICHMENT::56c31181",
@@ -6364,7 +6494,7 @@
           }
         ]
       },
-      "context_reason": "dans « Nombres complexes et trigonométrie », « Utilisation des nombres complexes en géométrie », aucun attendu ne se detache (0.09 contre 0.07)",
+      "context_reason": "aucun des 2 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [
         {
           "official_id": "MENE1921264A::NOMBRES-COMPLEXES::EQUATIONS-POLYNOMIALES::DEMONSTRATION::2c928468",
@@ -6389,7 +6519,12 @@
         }
       ],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE1921264A::NOMBRES-COMPLEXES::NOMBRES-COMPLEXES-ET-TRIGONOMETRIE::EXPECTED_CAPACITY::878b93f3",
+        "MENE1921264A::NOMBRES-COMPLEXES::NOMBRES-COMPLEXES-ET-TRIGONOMETRIE::KNOWLEDGE::d4868338"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "TEXP-CTP-C6",
@@ -10663,12 +10798,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": "Mutabilité, copie et références (indications du programme : effets de bord).",
       "source_anchor": null,
-      "binding_method": "NONE",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
-      "binding_score": 0.062,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "binding_method": "DISPOSED",
+      "official_id": "MENE1901633A::REPRESENTATION-DES-DONNEES-TYPES-C::CAPACITES-ATTENDUES::EXPECTED_CAPACITY::79197dfa",
+      "official_wording": "Lire et modifier les éléments d’un tableau grâce à leurs index.",
+      "official_kind": "EXPECTED_CAPACITY",
+      "binding_score": null,
+      "review_status": "DISPOSED_BY_READING",
       "candidates": [
         {
           "official_id": "MENE1901633A::REPRESENTATION-DES-DONNEES-TYPES-C::CAPACITES-ATTENDUES::EXPECTED_CAPACITY::0ea39f60",
@@ -10701,10 +10836,14 @@
           }
         ]
       },
-      "context_reason": "dans « Représentation des données : types construits », aucun attendu ne se detache (0.00 contre 0.00)",
+      "context_reason": "La mutabilite n'est pas un attendu du programme de premiere NSI : aucun de ses enonces ne la nomme. Elle est ce qui rend possible l'attendu « Lire et modifier les elements d'un tableau », qu'elle raffine -- et non un contenu supplementaire a exiger.",
       "rejected_candidates": [],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE1901633A::REPRESENTATION-DES-DONNEES-TYPES-C::CAPACITES-ATTENDUES::EXPECTED_CAPACITY::79197dfa"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "T-ALGO-01A",
@@ -11851,12 +11990,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": "Services d'un SGBD relationnel",
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
+      "binding_method": "DISPOSED",
+      "official_id": "MENE1921247A::BASES-DE-DONNEES::CAPACITES-ATTENDUES::EXPECTED_CAPACITY::ceaac0e8",
+      "official_wording": "Identifier les concepts définissant le modèle relationnel.",
+      "official_kind": "EXPECTED_CAPACITY",
       "binding_score": 0.25,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE1921247A::BASES-DE-DONNEES::CAPACITES-ATTENDUES::EXPECTED_CAPACITY::ceaac0e8",
@@ -11889,10 +12028,14 @@
           }
         ]
       },
-      "context_reason": "dans « Bases de données », aucun attendu ne se detache (0.25 contre 0.18)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE1921247A::BASES-DE-DONNEES::CAPACITES-ATTENDUES::EXPECTED_CAPACITY::ceaac0e8"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "T-BDD-03A",
@@ -12259,12 +12402,12 @@
       "libelle_bo_is_verbatim": false,
       "contenu_bo": "SQL DELETE",
       "source_anchor": null,
-      "binding_method": "PROPOSED",
-      "official_id": null,
-      "official_wording": null,
-      "official_kind": null,
+      "binding_method": "DISPOSED",
+      "official_id": "MENE1921247A::BASES-DE-DONNEES::CAPACITES-ATTENDUES::EXPECTED_CAPACITY::69867504",
+      "official_wording": "Construire des requêtes d’insertion et de mise à jour à l’aide de : UPDATE, INSERT, DELETE.",
+      "official_kind": "EXPECTED_CAPACITY",
       "binding_score": 0.273,
-      "review_status": "AMBIGUOUS_REQUIRES_HUMAN",
+      "review_status": "DISPOSED_AS_PEDAGOGICAL_SUBDIVISION",
       "candidates": [
         {
           "official_id": "MENE1921247A::BASES-DE-DONNEES::CAPACITES-ATTENDUES::EXPECTED_CAPACITY::69867504",
@@ -12297,10 +12440,14 @@
           }
         ]
       },
-      "context_reason": "dans « Bases de données », aucun attendu ne se detache (0.27 contre 0.23)",
+      "context_reason": "aucun des 1 attendus obligatoires de la partie ne se detachait : l'atome en raffine une facette commune, et les recoit tous pour parents plutot qu'un seul choisi arbitrairement",
       "rejected_candidates": [],
       "residual_classification": "PEDAGOGICAL_SUBDIVISION",
-      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul"
+      "residual_evidence": "l'atome recoupe a egalite plusieurs attendus de la partie : il en decoupe une facette sans en epouser un seul",
+      "official_ids": [
+        "MENE1921247A::BASES-DE-DONNEES::CAPACITES-ATTENDUES::EXPECTED_CAPACITY::69867504"
+      ],
+      "relationship": "PEDAGOGICAL_SUBDIVISION_OF"
     },
     {
       "atom_id": "T-HIST-01A",
