@@ -1,0 +1,137 @@
+{
+  "artifact_type": "programme_dashboard",
+  "schema_version": 1,
+  "generated_by": "scripts/build_programme_dashboard.py",
+  "note": "Aucun compteur n'est saisi ici : chacun est lu dans l'artefact qui le produit, et cite son chemin.",
+  "metrics": {
+    "CANONICAL_OFFICIAL_ITEMS_APPLICABLE": {
+      "value": 932,
+      "artifact": "audit/OFFICIAL_PROGRAMME_INVENTORY.json",
+      "pointer": [
+        "official_items_applicable"
+      ]
+    },
+    "CANONICAL_OFFICIAL_ITEMS_MANDATORY": {
+      "value": 694,
+      "artifact": "audit/OFFICIAL_PROGRAMME_INVENTORY.json",
+      "pointer": [
+        "official_items_mandatory"
+      ]
+    },
+    "OFFICIAL_REFERENCES_VERIFIED": {
+      "value": "6/6",
+      "artifact": "audit/OFFICIAL_PROGRAMME_INVENTORY.json",
+      "pointer": [
+        "OFFICIAL_REFERENCES_VERIFIED"
+      ]
+    },
+    "INTERNAL_ATOMS": {
+      "value": 313,
+      "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
+      "pointer": [
+        "summary",
+        "internal_atoms"
+      ]
+    },
+    "INTERNAL_ATOMS_CONFIRMED_PARENT": {
+      "value": 159,
+      "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
+      "pointer": [
+        "summary",
+        "bound_confirmed"
+      ]
+    },
+    "INTERNAL_ATOMS_PROPOSED": {
+      "value": 139,
+      "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
+      "pointer": [
+        "summary",
+        "bound_proposed"
+      ],
+      "reading": "rapprochements mesures, publies avec leurs concurrents ; ils ne valent pas couverture."
+    },
+    "INTERNAL_ATOMS_UNRESOLVED": {
+      "value": 15,
+      "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
+      "pointer": [
+        "summary",
+        "unbound"
+      ]
+    },
+    "INTERNAL_ATOM_WITHOUT_CONFIRMED_PARENT": {
+      "value": 154,
+      "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
+      "pointer": [
+        "summary",
+        "INTERNAL_ATOM_WITHOUT_OFFICIAL_PARENT"
+      ],
+      "reading": "atomes internes dont le parent officiel n'est pas etabli : la somme des propositions en attente et des atomes sans candidat."
+    },
+    "OFFICIAL_REQUIRED_UNMAPPED": {
+      "value": 537,
+      "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
+      "pointer": [
+        "summary",
+        "OFFICIAL_REQUIRED_UNMAPPED"
+      ],
+      "reading": "rattachement non encore etabli — PAS un contenu absent du manuel. Les referentiels internes encodent surtout des capacites ; une connaissance peut etre parfaitement traitee dans un fichier de cours sans posseder d'atome dedie."
+    },
+    "UNJUSTIFIED_MULTIPLE_ASSIGNMENT": {
+      "value": 1,
+      "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
+      "pointer": [
+        "summary",
+        "UNJUSTIFIED_MULTIPLE_ASSIGNMENT"
+      ]
+    },
+    "WRONG_YEAR_USED_AS_AUTHORITY": {
+      "value": 0,
+      "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
+      "pointer": [
+        "summary",
+        "WRONG_YEAR_USED_AS_AUTHORITY"
+      ]
+    },
+    "AUTHORITY_NAMESPACE_VIOLATION": {
+      "value": 0,
+      "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
+      "pointer": [
+        "summary",
+        "AUTHORITY_NAMESPACE_VIOLATION"
+      ]
+    },
+    "REFERENTIAL_AUTHORITY_NOT_EXPLICIT": {
+      "value": 0,
+      "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
+      "pointer": [
+        "summary",
+        "REFERENTIAL_AUTHORITY_NOT_EXPLICIT"
+      ]
+    },
+    "DIFF_1SPE_ADDED_2026_MANDATORY": {
+      "value": 28,
+      "artifact": "audit/1SPE_PROGRAMME_DIFF_2019_2026.json",
+      "pointer": [
+        "summary",
+        "ADDED_2026_MANDATORY"
+      ]
+    },
+    "DIFF_1SPE_REMOVED_2026_MANDATORY": {
+      "value": 12,
+      "artifact": "audit/1SPE_PROGRAMME_DIFF_2019_2026.json",
+      "pointer": [
+        "summary",
+        "REMOVED_2026_MANDATORY"
+      ]
+    },
+    "AUTOMATISMS_1SPE_OFFICIAL": {
+      "value": 17,
+      "artifact": "audit/1SPE_PROGRAMME_DIFF_2019_2026.json",
+      "pointer": [
+        "summary",
+        "AUTOMATISMS_2026"
+      ],
+      "reading": "automatismes que le programme de 2026 enonce ; leur presence dans le manuel se juge ailleurs, sur les objets eux-memes."
+    }
+  }
+}

@@ -34,16 +34,16 @@ from typing import Any
 
 import pdfplumber
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+import programme_normativity as pn  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[1]
 
-#: Colonne -> (nature, engage-t-il le manuel).
-#: Les commentaires du BO eclairent la mise en oeuvre mais n'ajoutent pas
-#: d'attendu opposable : les compter comme obligatoires gonflerait le programme.
-COLUMNS = (
-    ("Contenus", "KNOWLEDGE", True),
-    ("Capacités attendues", "EXPECTED_CAPACITY", True),
-    ("Commentaires", "COMMENTARY", False),
-)
+#: Colonnes du tableau du BO. La portee de chacune est prise dans la table
+#: commune de normativite, sur la foi de l'intitule imprime par le programme :
+#: les commentaires y eclairent la mise en oeuvre sans ajouter d'attendu.
+COLUMNS = ("Contenus", "Capacités attendues", "Commentaires")
 HEADER_CELLS = ("contenus", "capacites attendues", "commentaires")
 #: Les titres de rubrique sont composes en corps 14, le texte courant en 11.
 HEADING_MIN_SIZE = 12.5
@@ -148,8 +148,8 @@ def extract(
                     empreinte = hashlib.sha256(phrase.encode("utf-8")).hexdigest()[:8]
                     items.append({
                         "official_id": "::".join(
-                            [authority, _slug(titre), "TRANSVERSAL_REQUIREMENT",
-                             empreinte]
+                            [authority, _slug(titre),
+                             pn.PROJECT_REQUIREMENT.local_kind, empreinte]
                         ),
                         "locally_assigned_identifier": True,
                         "manual": manual,
@@ -157,13 +157,18 @@ def extract(
                         "official_section": "Préambule",
                         "official_subsection": titre,
                         "official_subheading": None,
+                        "official_heading": titre,
                         "official_rubric": titre,
                         "official_rubric_index": rang,
+                        "official_normativity": pn.PROJECT_REQUIREMENT.normativity,
+                        "normativity_basis": pn.PROJECT_REQUIREMENT.basis,
+                        "local_kind": pn.PROJECT_REQUIREMENT.local_kind,
+                        "exact_example_imposed": True,
                         "official_row": None,
                         "rubric_is_implicit_in_source": False,
                         "official_wording": phrase,
-                        "kind": "TRANSVERSAL_REQUIREMENT",
-                        "mandatory": True,
+                        "kind": pn.PROJECT_REQUIREMENT.local_kind,
+                        "mandatory": pn.PROJECT_REQUIREMENT.mandatory,
                         "source_page_or_anchor": f"page={numero_page};preamble={_slug(titre)}",
                     })
                 if titre not in rubriques:
@@ -194,7 +199,9 @@ def extract(
                         "expected_capacity": [],
                         "commentary": [],
                     }
-                    for index, (titre, nature, obligatoire) in enumerate(COLUMNS):
+                    for index, titre in enumerate(COLUMNS):
+                        portee = pn.resolve(None, titre)
+                        nature = portee.local_kind
                         brut = rangee[index] if index < len(rangee) else None
                         texte = re.sub(r"\s+", " ", (brut or "")).strip()
                         if not texte:
@@ -240,12 +247,17 @@ def extract(
                                 "official_section": rubrique,
                                 "official_subsection": None,
                                 "official_subheading": None,
+                                "official_heading": titre,
                                 "official_rubric": titre,
+                                "official_normativity": portee.normativity,
+                                "normativity_basis": portee.basis,
+                                "local_kind": nature,
+                                "exact_example_imposed": portee.exact_example_imposed,
                                 "official_row": ligne_globale,
                                 "rubric_is_implicit_in_source": False,
                                 "official_wording": morceau,
                                 "kind": nature,
-                                "mandatory": obligatoire,
+                                "mandatory": portee.mandatory,
                                 "source_page_or_anchor": (
                                     f"page={numero_page};row={ligne_globale}"
                                 ),

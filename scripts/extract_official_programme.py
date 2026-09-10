@@ -35,31 +35,11 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-#: Rubriques du BO -> (nature, engage-t-il le manuel).
-#: Les variantes singulier/pluriel sont toutes presentes : le texte alterne
-#: « Exemples d'algorithme » et « Exemple d'algorithme » d'une section a l'autre,
-#: et n'en connaitre qu'une forme ferait disparaitre cinq rubriques entieres.
-RUBRIC_PATTERNS: tuple[tuple[str, str, bool], ...] = (
-    (r"contenus?", "KNOWLEDGE", True),
-    # Les themes d'etude de l'option complementaire portent leurs attendus
-    # sous l'intitule « Contenus associes » et non « Contenus ».
-    (r"contenus? associes?", "KNOWLEDGE", True),
-    (r"capacites? attendues?( et commentaires)?", "EXPECTED_CAPACITY", True),
-    (r"demonstrations?( attendues?| exigibles?)?", "DEMONSTRATION", True),
-    # « Demonstrations possibles » : l'option complementaire propose des
-    # demonstrations au professeur sans les exiger de l'eleve.
-    (r"demonstrations? possibles?", "DEMONSTRATION", False),
-    (r"exemples? d[’']?algorithmes?", "ALGORITHMIC_CAPACITY", True),
-    (r"approfondissements? possibles?", "OPTIONAL_ENRICHMENT", False),
-    (r"histoire des mathematiques", "HISTORY_CONTEXT", False),
-    (r"objectifs?", "OBJECTIVE", False),
-    # Les « problemes possibles » des options de terminale sont des pistes
-    # d'etude offertes au professeur, pas des attendus opposables a l'eleve.
-    (r"problemes? possibles?", "OPTIONAL_ENRICHMENT", False),
-    (r"commentaires?", "COMMENTARY", False),
-)
+import programme_normativity as pn  # noqa: E402
+
+ROOT = Path(__file__).resolve().parents[1]
 
 #: Sections de premier niveau connues, toutes editions confondues. Cette liste
 #: sert de defaut ; la liste REELLEMENT appliquee est propre a chaque document
@@ -103,12 +83,14 @@ def sans_marqueur(nue: str) -> str:
     return nue.lstrip(MARKERS).strip()
 
 
-def match_rubric(ligne: str) -> tuple[str, str, bool] | None:
-    cle = normalise(ligne).rstrip(" :")
-    for motif, nature, obligatoire in RUBRIC_PATTERNS:
-        if re.fullmatch(motif, cle):
-            return ligne.strip(), nature, obligatoire
-    return None
+def match_rubric(ligne: str) -> tuple[str, pn.Portee] | None:
+    """Reconnait un intitule de rubrique et lui associe sa portee normative.
+
+    L'intitule exact du BO est conserve tel qu'il est imprime : c'est lui qui
+    justifie la portee, et non l'inverse.
+    """
+    portee = pn.for_heading(ligne)
+    return (ligne.strip(), portee) if portee is not None else None
 
 
 def is_heading(nue: str) -> bool:
@@ -125,27 +107,6 @@ def is_heading(nue: str) -> bool:
         and not BULLET.match(nue)
         and nue[0].isupper()
     )
-
-
-#: Nature par defaut des puces d'une section quand le BO n'ouvre aucune rubrique
-#: nommee. Le texte ne libelle pas toujours ses listes d'attendus : la « Notion
-#: de liste » de 2026 enumere quatre capacites sous une simple prose, la ou
-#: 2019 les rangeait sous « Capacites attendues ».
-#:
-#: Seule la partie « Automatismes » a une nature propre, parce que le BO la
-#: nomme ainsi. Ailleurs, une liste non intitulee reste une capacite attendue :
-#: lui inventer une categorie -- « capacite de programmation » pour la section
-#: d'algorithmique, par exemple -- faisait apparaitre en 2026 quatre attendus
-#: « ajoutes » et en 2019 les memes quatre « retires », alors que le texte est
-#: mot pour mot le meme et que seul son intitule de rubrique avait bouge.
-SECTION_DEFAULT_KIND: dict[str, str] = {
-    "automatismes": "AUTOMATISM",
-}
-DEFAULT_KIND = "EXPECTED_CAPACITY"
-
-
-def default_kind_for(section: str | None) -> str:
-    return SECTION_DEFAULT_KIND.get(normalise(section or ""), DEFAULT_KIND)
 
 
 def _slug(texte: str, longueur: int = 34) -> str:
@@ -267,7 +228,7 @@ def extract(
     section: str | None = None
     subsection: str | None = None
     subheading: str | None = None
-    rubric: tuple[str, str, bool] | None = None
+    rubric: tuple[str, pn.Portee] | None = None
     rubric_is_implicit = False
     en_automatismes = False
 
@@ -298,7 +259,12 @@ def extract(
                 "official_subsection": subsection,
             })
             return
-        titre, nature, obligatoire = rubric
+        titre, portee = rubric
+        # La partie prime sur la rubrique : dans « Automatismes », le BO
+        # intitule ses listes « Capacites attendues » tout en precisant
+        # qu'elles relevent d'un entrainement reparti sur l'annee.
+        portee = pn.resolve(section, titre) if not rubric_is_implicit else portee
+        nature = portee.local_kind
         # Rang de la puce dans sa rubrique. C'est la coordonnee que citent les
         # ancrages du referentiel interne (« ... / Capacites attendues / puce 3 »)
         # et sans laquelle ces ancrages ne designent rien de resoluble.
@@ -323,8 +289,13 @@ def extract(
             "official_section": section,
             "official_subsection": subsection,
             "official_subheading": subheading,
+            "official_heading": None if rubric_is_implicit else titre,
             "official_rubric": titre,
             "official_rubric_index": rangs[coord],
+            "official_normativity": portee.normativity,
+            "normativity_basis": portee.basis,
+            "local_kind": nature,
+            "exact_example_imposed": portee.exact_example_imposed,
             "rubric_is_implicit_in_source": rubric_is_implicit,
             "official_wording": libelle,
             # Le BO 2019 compose ses formules en police Symbol ; `pdftotext`
@@ -332,7 +303,7 @@ def extract(
             # trace ne peut pas etre lu comme le texte officiel exact.
             "wording_contains_unmapped_glyphs": bool(PRIVATE_USE.search(libelle)),
             "kind": nature,
-            "mandatory": obligatoire,
+            "mandatory": portee.mandatory,
             "source_page_or_anchor": f"page={ancre.page};line={ancre.numero}",
         })
 
@@ -367,8 +338,7 @@ def extract(
                 sur_amorce = precedente is not None and precedente.nue.endswith(":")
                 rubric = (
                     amorce if amorce and sur_amorce else (subsection or ""),
-                    default_kind_for(section),
-                    True,
+                    pn.resolve(section, None),
                 )
                 rubric_is_implicit = True
             cloturer()
