@@ -146,6 +146,12 @@ def main(argv: list[str] | None = None) -> int:
                 "l'epreuve pratique se passe sur machine : un sujet pratique "
                 "sans programme a ecrire ou a mettre au point ne l'entraine pas"
             ),
+            # La mesure retenue est la large, a dessein. Un sujet pratique dont
+            # tout l'interet est que l'eleve ecrive le code ne MONTRE aucun
+            # programme -- P6 donne l'interface d'une file et rien d'autre --,
+            # et exiger un bloc de code affiche l'aurait declare sans travail
+            # sur machine. Ce qui prouve ici le travail sur machine est qu'un
+            # programme soit en jeu, ecrit ou a ecrire.
             "evidence_objects": sorted(
                 o.object_id for o in pratiques if o.has_algorithmic_work
             ),

@@ -692,7 +692,7 @@ def main(argv: list[str] | None = None) -> int:
             o
             for chap in sorted(chapitres_p)
             for o in objets_par_chapitre_tmp.get(chap, [])
-            if o.has_algorithmic_work
+            if o.shows_algorithmic_work
         ]
         algorithmique_par_partie[(manuel_p, partie)] = bool(trouves)
         objets_algorithmiques_par_partie[(manuel_p, partie)] = trouves
@@ -894,7 +894,7 @@ def main(argv: list[str] | None = None) -> int:
                 roles,
                 reinvestissement,
                 any(o.has_written_proof for o in servants.values()),
-                any(o.has_algorithmic_work for o in servants.values()),
+                any(o.shows_algorithmic_work for o in servants.values()),
                 exemples_travailles=any(
                     o.has_worked_examples for o in servants.values()
                 ),
@@ -977,18 +977,44 @@ def main(argv: list[str] | None = None) -> int:
                     item["official_subsection"] or item["official_section"] or "",
                 )
             ].append(item["official_id"])
-    qualite_algorithmique = [
-        {
+    # Ce que le controle regarde, ce sont les objets que la matrice designe
+    # elle-meme comme preuve des attendus de la partie -- exemples d'algorithme
+    # compris. Passer par la portee des themes le rendait aveugle deux fois :
+    # quatre parties n'ont recu aucune portee, faute de lien ANCHOR ou VERBATIM
+    # qui y atterrisse, et le controle repondait « pas de travail
+    # algorithmique » a propos de chapitres qu'il n'avait pas regardes -- les
+    # probabilites conditionnelles de premiere portent pourtant une page
+    # Monte-Carlo complete. Elargir a tous les chapitres cites aurait produit
+    # la faute symetrique : la fonction logarithme aurait ete declaree servie
+    # par un algorithme du calcul integral. Les objets cites, eux, traitent la
+    # partie.
+    objets_de_preuve_par_partie: dict[tuple[str, str], set[str]] = defaultdict(set)
+    for ligne in lignes:
+        cle_p = (
+            ligne["manual"],
+            ligne["official_subsection"] or ligne["official_section"] or "",
+        )
+        for role_p in ligne["objects_by_role"]:
+            objets_de_preuve_par_partie[cle_p] |= set(ligne["objects_by_role"][role_p])
+
+    qualite_algorithmique = []
+    for (manuel, partie), ids in sorted(parties_avec_exemples.items()):
+        preuves_p = sorted(objets_de_preuve_par_partie.get((manuel, partie), ()))
+        travail = [
+            oid
+            for oid in preuves_p
+            if (par_identifiant.get(oid) is not None)
+            and par_identifiant[oid].shows_algorithmic_work
+        ]
+        qualite_algorithmique.append({
             "manual": manuel,
             "official_part": partie,
             "algorithm_examples_cited_by_the_programme": len(ids),
-            "manual_has_algorithmic_work": bool(
-                algorithmique_par_partie.get((manuel, partie))
-            ),
+            "objects_examined": len(preuves_p),
+            "manual_has_algorithmic_work": bool(travail),
+            "algorithmic_work_evidence": travail[:5],
             "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD",
-        }
-        for (manuel, partie), ids in sorted(parties_avec_exemples.items())
-    ]
+        })
 
     resume = {
         "OFFICIAL_REQUIRED_COMPLETE": sum(

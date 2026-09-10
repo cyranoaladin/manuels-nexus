@@ -97,6 +97,14 @@ class Objet:
     has_written_proof: bool = False
     #: Presence d'un travail algorithmique effectif (algorithme, programme).
     has_algorithmic_work: bool = False
+    #: Presence d'un algorithme MONTRE A L'ELEVE. La distinction n'est pas
+    #: cosmetique : un bloc « BEGIN-VERIFY » est un controle interne que le
+    #: lecteur ne voit jamais, et presque tous les corriges en portent un. Les
+    #: compter comme travail algorithmique rendait la mesure vide -- trois
+    #: mille objets sur trois mille cinq cents « faisaient de l'algorithmique »
+    #: --, et permettait a n'importe quelle partie du programme de paraitre
+    #: servie par un algorithme qu'elle n'expose pas.
+    shows_algorithmic_work: bool = False
     text_length: int = 0
     #: Chemin du corrige declare par un exercice. Un corrige ne redeclare pas
     #: toujours les capacites de son exercice : sans ce lien, il apparaitrait
@@ -216,6 +224,7 @@ def charger_objets(contrats: dict[str, Contrat]) -> list[Objet]:
                         texte,
                     )
                 ),
+                shows_algorithmic_work=bool(ALGORITHME_MONTRE.search(texte)),
                 text_length=len(texte),
                 has_worked_examples=bool(EXEMPLE_TRAVAILLE.search(texte)),
                 linked_correction=meta.get("corrige_tex", "") or "",
@@ -264,10 +273,21 @@ def charger_transversaux() -> list[Objet]:
                     has_algorithmic_work=bool(
                         re.search(r"\\begin\{python\}|\\begin\{algorithme\}", texte)
                     ),
+                    shows_algorithmic_work=bool(ALGORITHME_MONTRE.search(texte)),
                     text_length=len(texte),
                 )
             )
     return objets
+
+
+#: Marqueurs d'un algorithme effectivement expose au lecteur : un programme,
+#: un algorithme en pseudo-code, un listing. Les blocs de verification
+#: « BEGIN-VERIFY » en sont exclus a dessein : ils prouvent au producteur que
+#: le contenu est juste, ils n'enseignent rien a l'eleve.
+ALGORITHME_MONTRE = re.compile(
+    r"\\begin\{python\}|\\begin\{sql\}|\\begin\{algorithme\}"
+    r"|\\lstinputlisting|\\begin\{pseudocode\}|\\begin\{lstlisting\}"
+)
 
 
 #: Marqueurs d'une demonstration REDIGEE. La macro dediee ne suffit pas : le
