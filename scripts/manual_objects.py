@@ -1,0 +1,236 @@
+#!/usr/bin/env python3
+"""Index des objets pedagogiques reellement presents dans les manuels.
+
+La couverture d'un programme ne se prouve pas dans un referentiel : elle se
+prouve dans les objets que l'eleve a sous les yeux -- un paragraphe de cours,
+un exercice, une demonstration, une evaluation. Ce module les recense et
+retablit, pour chacun, les capacites internes qu'il sert.
+
+Deux chemins mènent d'un objet a une capacite, et les deux sont lus :
+
+  `capacites`        l'objet nomme directement les atomes du referentiel ;
+  `capacites_codes`  il nomme les codes de son chapitre (C1, C2...), qu'il
+                     faut resoudre dans le contrat du chapitre.
+
+Le second chemin est le plus repandu et le seul disponible pour beaucoup
+d'objets : l'ignorer priverait de preuve la majorite du manuel.
+"""
+from __future__ import annotations
+
+import json
+import re
+import subprocess
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Any
+
+import yaml
+
+ROOT = Path(__file__).resolve().parents[1]
+RACINES = ("Mathematiques/manuel-maths/chapitres", "NSI/chapitres")
+META = re.compile(r"^%\s*META:\s*(\{.*\})\s*$", re.M)
+
+#: Role pedagogique par type d'objet. Un meme attendu officiel peut etre
+#: enseigne a un endroit et reinvesti ailleurs : distinguer les roles evite de
+#: compter dix exercices comme un enseignement, et un unique paragraphe de
+#: cours comme un entrainement.
+ROLES: dict[str, str] = {
+    "cours": "PRIMARY_TEACHING",
+    "methode": "SUPPORTING_EVIDENCE",
+    "algorithme": "SUPPORTING_EVIDENCE",
+    "experimentation": "SUPPORTING_EVIDENCE",
+    "td": "SUPPORTING_EVIDENCE",
+    "projet": "SUPPORTING_EVIDENCE",
+    "exercice": "REINVESTMENT",
+    "corrige": "REINVESTMENT",
+    "coup_de_pouce": "REINVESTMENT",
+    "qcm": "ASSESSMENT",
+    "qcm_diagnostics": "ASSESSMENT",
+    "evaluation": "ASSESSMENT",
+    "corrige_evaluation": "ASSESSMENT",
+    "banque_ecrite": "ASSESSMENT",
+    "banque_pratique": "ASSESSMENT",
+    "remediation": "REMEDIATION",
+    "amenagee": "REMEDIATION",
+}
+
+
+#: Pages transversales et manuels qui les integrent, tels que l'assembleur les
+#: monte (`Mathematiques/manuel-maths/scripts/assemble_manuel.py`). Elles ne
+#: vivent pas dans `chapitres/` et n'ont pas d'en-tete META, mais elles portent
+#: du contenu que le programme exige : le vocabulaire ensembliste et logique,
+#: les automatismes statistiques, le memo Python. Les ignorer faisait declarer
+#: absents des attendus qui sont enseignes en annexe -- « formuler la
+#: reciproque d'une implication, la contraposee » en est l'exemple exact.
+TRANSVERSAUX: dict[str, tuple[str, ...]] = {
+    "1SPE": (
+        "transversal/formulaire.tex",
+        "transversal/logique_raisonnement.tex",
+        "transversal/statistiques_automatismes.tex",
+        "transversal/memo_python.tex",
+    ),
+    "TSPE": (
+        "transversal/logique_raisonnement.tex",
+        "transversal/memo_python.tex",
+    ),
+}
+RACINE_MATHS = "Mathematiques/manuel-maths"
+
+
+@dataclass
+class Objet:
+    object_id: str
+    chapter: str
+    manual: str
+    kind: str
+    role: str
+    path: str
+    atoms: tuple[str, ...] = ()
+    codes: tuple[str, ...] = ()
+    #: Presence d'une demonstration redigee dans le corps de l'objet. Une
+    #: demonstration exigible ne peut pas etre prouvee par le seul nom d'un
+    #: theoreme ; il faut que la preuve soit ecrite quelque part.
+    has_written_proof: bool = False
+    #: Presence d'un travail algorithmique effectif (algorithme, programme).
+    has_algorithmic_work: bool = False
+    text_length: int = 0
+
+
+@dataclass
+class Contrat:
+    chapter: str
+    manual: str
+    theme: str
+    #: code local -> identifiant d'atome du referentiel
+    aliases: dict[str, str] = field(default_factory=dict)
+    #: codes declares sans alias officiel, avec la facette qu'ils portent
+    facettes: dict[str, dict[str, Any]] = field(default_factory=dict)
+
+
+def fichiers_suivis(motif: str) -> list[Path]:
+    sortie = subprocess.run(
+        ["git", "ls-files", "--", *RACINES],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.split("\n")
+    return [ROOT / f for f in sortie if f.endswith(motif)]
+
+
+def charger_contrats() -> dict[str, Contrat]:
+    contrats: dict[str, Contrat] = {}
+    for chemin in fichiers_suivis("contrat.yaml"):
+        charge = yaml.safe_load(chemin.read_text(encoding="utf-8")) or {}
+        contrat = Contrat(
+            chapter=charge.get("chapitre", chemin.parent.name),
+            manual=charge.get("niveau", ""),
+            theme=charge.get("theme", ""),
+        )
+        for capacite in charge.get("capacites", []) or []:
+            code = capacite.get("code")
+            if not code:
+                continue
+            if capacite.get("ref_capacite"):
+                contrat.aliases[code] = capacite["ref_capacite"]
+            elif capacite.get("sans_alias_officiel"):
+                contrat.facettes[code] = capacite["sans_alias_officiel"]
+        contrats[contrat.chapter] = contrat
+    return contrats
+
+
+def charger_objets(contrats: dict[str, Contrat]) -> list[Objet]:
+    objets: list[Objet] = []
+    for chemin in fichiers_suivis(".tex"):
+        texte = chemin.read_text(encoding="utf-8", errors="replace")
+        trouve = META.search(texte)
+        if not trouve:
+            continue
+        try:
+            meta = json.loads(trouve.group(1))
+        except json.JSONDecodeError:
+            continue
+        chapitre = meta.get("chapitre") or chemin.parents[1].name
+        contrat = contrats.get(chapitre)
+        codes = tuple(meta.get("capacites_codes") or ())
+        atomes = set(meta.get("capacites") or ())
+        if contrat:
+            # Un code local ne vaut que par le contrat qui le definit : c'est
+            # lui qui dit quelle capacite du referentiel il designe.
+            atomes.update(
+                contrat.aliases[c] for c in codes if c in contrat.aliases
+            )
+        kind = meta.get("type_objet", "?")
+        objets.append(
+            Objet(
+                object_id=meta.get("id", chemin.stem),
+                chapter=chapitre,
+                manual=(contrat.manual if contrat else "") or _manuel_depuis(chapitre),
+                kind=kind,
+                role=ROLES.get(kind, "SUPPORTING_EVIDENCE"),
+                path=str(chemin.relative_to(ROOT)),
+                atoms=tuple(sorted(atomes)),
+                codes=codes,
+                has_written_proof=bool(
+                    re.search(r"\\demonstration|\\begin\{demonstration\}|\\preuve", texte)
+                ),
+                has_algorithmic_work=bool(
+                    re.search(
+                        r"\\begin\{python\}|\\begin\{algorithme\}|\\lstinputlisting"
+                        r"|BEGIN-VERIFY|\\begin\{pseudocode\}",
+                        texte,
+                    )
+                ),
+                text_length=len(texte),
+            )
+        )
+    return objets
+
+
+def charger_transversaux() -> list[Objet]:
+    """Les pages transversales, rattachees au manuel qui les integre."""
+    objets: list[Objet] = []
+    for manuel, chemins in TRANSVERSAUX.items():
+        for relatif in chemins:
+            chemin = ROOT / RACINE_MATHS / relatif
+            if not chemin.is_file():
+                continue
+            texte = chemin.read_text(encoding="utf-8", errors="replace")
+            objets.append(
+                Objet(
+                    object_id=f"{manuel}-TRANSVERSAL-{chemin.stem.upper()}",
+                    chapter=f"{manuel}-TRANSVERSAL",
+                    manual=manuel,
+                    kind="transversal",
+                    role="PRIMARY_TEACHING",
+                    path=str(chemin.relative_to(ROOT)),
+                    has_written_proof=bool(
+                        re.search(r"\\demonstration|\\preuve", texte)
+                    ),
+                    has_algorithmic_work=bool(
+                        re.search(r"\\begin\{python\}|\\begin\{algorithme\}", texte)
+                    ),
+                    text_length=len(texte),
+                )
+            )
+    return objets
+
+
+def _manuel_depuis(chapitre: str) -> str:
+    for prefixe in ("TEXPERTES", "TCOMPL", "TSPE", "TNSI", "1SPE", "1NSI"):
+        if chapitre.startswith(prefixe):
+            return prefixe
+    return ""
+
+
+if __name__ == "__main__":
+    from collections import Counter
+
+    contrats = charger_contrats()
+    objets = charger_objets(contrats) + charger_transversaux()
+    print(f"contrats de chapitre : {len(contrats)}")
+    print(f"objets indexes       : {len(objets)}")
+    print(f"  avec au moins une capacite resolue : "
+          f"{sum(1 for o in objets if o.atoms)}")
+    print("par manuel :", dict(Counter(o.manual for o in objets)))
+    print("par role   :", dict(Counter(o.role for o in objets)))

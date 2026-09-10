@@ -55,6 +55,21 @@ LECTURES: dict[str, str] = {
         "au profit de `libelle_interne`, et le texte officiel exact vit dans "
         "l'inventaire sous `official_wording`."
     ),
+    "OFFICIAL_REQUIRED_MISSING": (
+        "attendus obligatoires dont AUCUN objet du manuel ne porte la trace. "
+        "A distinguer de OFFICIAL_REQUIRED_UNMAPPED, qui ne dit que l'absence "
+        "de rattachement etabli entre le referentiel interne et le BO."
+    ),
+    "OFFICIAL_REQUIRED_INSTITUTIONAL": (
+        "exigences que le manuel ne peut pas certifier a lui seul -- « Un "
+        "quart au moins de l'horaire total est reserve aux projets » releve de "
+        "l'etablissement. Le manuel peut les outiller, pas les garantir."
+    ),
+    "OFFICIAL_REQUIRED_UNDECIDABLE_BY_CONTENT_MATCH": (
+        "attendus dont le libelle officiel ne porte aucun mot distinctif "
+        "exploitable : la recherche par contenu ne peut ni conclure a la "
+        "presence ni conclure a l'absence."
+    ),
     "AUTOMATISMS_1SPE_OFFICIAL": (
         "automatismes que le programme de 2026 enonce ; leur presence dans le "
         "manuel se juge ailleurs, sur les objets eux-memes."
