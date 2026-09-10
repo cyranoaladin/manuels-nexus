@@ -1,0 +1,155 @@
+% META: {"id": "TSPE-PROBA-ALG-017", "chapitre": "TSPE-PROBABILITES", "type_objet": "algorithme", "capacites_codes": ["C2", "C4"], "programme_alignment": "OFFICIAL_ALGORITHM_EXAMPLE", "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+\section{Algorithmique : simuler la planche de Galton}
+
+% ============================================================
+% STRATE 1 --- Le probleme, le modele, l'algorithme
+% ============================================================
+
+\margeAppui{
+Le programme cite la simulation de la planche de Galton parmi ses
+\textbf{exemples d'algorithme}. Il ne l'impose pas : cette page est un
+entrainement, pas un attendu exigible.
+}
+
+Une bille tombe sur une planche percee de $n$ rangees de clous. A chaque
+rangee elle est deviee vers la gauche ou vers la droite, avec la meme chance,
+independamment des rangees precedentes. Elle atteint enfin l'une des $n+1$
+cases du bas. Pourquoi les cases centrales se remplissent-elles beaucoup plus
+que les cases des bords ?
+
+\propriete[Le trajet d'une bille est un schema de Bernoulli]{
+Notons $X$ le nombre de deviations vers la droite au cours de la descente.
+Chaque rangee est une epreuve de Bernoulli de parametre $p=\frac{1}{2}$
+(succes $=$ « la bille part a droite »), et les $n$ rangees sont
+independantes et identiques. Donc
+\[
+  X \sim \mathcal{B}\left(n\,;\,\tfrac{1}{2}\right),
+  \qquad
+  P(X=k)=\binom{n}{k}\left(\frac{1}{2}\right)^{n}
+  \quad \text{pour } 0 \leq k \leq n.
+\]
+La bille tombe dans la case numero $k$ : la case atteinte \emph{est} le
+nombre de succes.
+}
+
+\margeAppui{
+$E(X)=\dfrac{n}{2}$ et $V(X)=\dfrac{n}{4}$ : la loi est centree sur la case
+du milieu, et elle s'y concentre d'autant plus, relativement a $n$, que $n$
+est grand.
+}
+
+Les cases centrales ne sont pas plus probables parce que la bille les
+« viserait » : elles le sont parce qu'un plus grand nombre de trajets y
+menent. Il n'y a qu'un seul trajet menant a la case $0$ --- tout a gauche ---,
+et $\binom{n}{n/2}$ trajets menant a la case centrale.
+
+\propriete[Demarche de simulation]{%
+\begin{enumerate}
+  \item Fixer le nombre de rangees $n$, le nombre de billes $N$ et une graine.
+  \item Pour chaque bille, tirer $n$ fois au hasard entre gauche et droite et
+        compter les deviations a droite : on obtient la case $k$.
+  \item Incrementer l'effectif de la case $k$.
+  \item Comparer la frequence $\dfrac{\text{effectif de } k}{N}$ a la
+        probabilite $\binom{n}{k}2^{-n}$.
+\end{enumerate}
+}
+
+\begin{python}
+from random import Random
+
+def simuler_galton(n, N, graine):
+    """Repartit N billes dans les n+1 cases d'une planche a n rangees."""
+    if n <= 0 or N <= 0:
+        raise ValueError("n et N doivent etre strictement positifs")
+    generateur = Random(graine)
+    effectifs = [0] * (n + 1)
+    for _ in range(N):
+        k = 0
+        for _ in range(n):
+            if generateur.random() < 0.5:
+                k = k + 1
+        effectifs[k] = effectifs[k] + 1
+    return effectifs
+\end{python}
+
+\exemple{
+Pour $n=10$, $N=10\,000$ et la graine $2024$, l'appel
+\code{simuler\_galton(10, 10000, 2024)} renvoie les effectifs
+
+\[
+  [\,6,\ 91,\ 446,\ 1202,\ 1979,\ 2436,\ 2101,\ 1171,\ 469,\ 89,\ 10\,].
+\]
+
+La case centrale $k=5$ recoit $2436$ billes, soit une frequence de
+$0{,}2436$. La probabilite exacte vaut
+\[
+  P(X=5)=\binom{10}{5}\left(\frac{1}{2}\right)^{10}
+  =\frac{252}{1024}\approx 0{,}2461 .
+\]
+La case $k=0$ recoit $6$ billes, soit $0{,}0006$, pour une probabilite exacte
+$2^{-10}\approx 0{,}0010$ : sur $10\,000$ billes, une case aussi peu probable
+n'est atteinte que quelques fois, et sa frequence est donc tres instable.
+}
+
+% BEGIN-VERIFY
+% from math import comb
+% from random import Random
+%
+% def simuler_galton(n, N, graine):
+%     if n <= 0 or N <= 0:
+%         raise ValueError("n et N doivent etre strictement positifs")
+%     generateur = Random(graine)
+%     effectifs = [0] * (n + 1)
+%     for _ in range(N):
+%         k = 0
+%         for _ in range(n):
+%             if generateur.random() < 0.5:
+%                 k = k + 1
+%         effectifs[k] = effectifs[k] + 1
+%     return effectifs
+%
+% effectifs = simuler_galton(10, 10000, 2024)
+% assert effectifs == [6, 91, 446, 1202, 1979, 2436, 2101, 1171, 469, 89, 10]
+% assert sum(effectifs) == 10000
+% assert len(effectifs) == 11
+% # la loi exacte : somme des probabilites egale a 1
+% assert sum(comb(10, k) for k in range(11)) == 2**10
+% assert comb(10, 5) == 252
+% assert abs(252 / 1024 - 0.2461) < 5e-5
+% assert abs(effectifs[5] / 10000 - 0.2436) < 1e-12
+% assert abs(effectifs[0] / 10000 - 0.0006) < 1e-12
+% assert abs(1 / 1024 - 0.0010) < 5e-5
+% # E(X) = n/2 et V(X) = n/4 pour p = 1/2
+% esperance = sum(k * comb(10, k) for k in range(11)) / 2**10
+% assert abs(esperance - 5) < 1e-12
+% moment2 = sum(k * k * comb(10, k) for k in range(11)) / 2**10
+% assert abs(moment2 - esperance**2 - 10 / 4) < 1e-12
+% # un seul trajet mene a la case 0, 252 menent a la case centrale
+% assert comb(10, 0) == 1
+% # n et N strictement positifs : le contrat est verifie
+% for mauvais in ((0, 10), (10, 0), (-1, 5)):
+%     try:
+%         simuler_galton(*mauvais, 1)
+%     except ValueError:
+%         pass
+%     else:
+%         raise AssertionError("l'argument invalide aurait du etre refuse")
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 --- Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Lire l'histogramme comme une preuve.} La simulation \emph{illustre}
+la loi binomiale, elle ne la demontre pas. Changer de graine change les
+effectifs ; seule la probabilite $\binom{n}{k}2^{-n}$ est exacte.
+}
+
+\erreurFrequente{
+\textbf{Croire que les $n+1$ cases sont equiprobables.} Ce sont les $2^{n}$
+\emph{trajets} qui le sont. Une case rassemble autant de trajets qu'il y a de
+facons de choisir les rangees ou la bille part a droite, c'est-a-dire
+$\binom{n}{k}$.
+}

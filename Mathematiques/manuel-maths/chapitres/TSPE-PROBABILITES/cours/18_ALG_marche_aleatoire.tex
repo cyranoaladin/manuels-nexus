@@ -1,0 +1,187 @@
+% META: {"id": "TSPE-CONCLGN-ALG-018", "chapitre": "TSPE-PROBABILITES", "type_objet": "algorithme", "capacites_codes": ["TSPE-CONCLGN-C1"], "programme_alignment": "OFFICIAL_ALGORITHM_EXAMPLE", "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+\section{Algorithmique : simuler une marche aléatoire}
+
+% ============================================================
+% STRATE 1 --- Le probleme, le modele, l'algorithme
+% ============================================================
+
+\margeAppui{
+Le programme cite la simulation d'une marche aleatoire parmi ses
+\textbf{exemples d'algorithme} de la partie « Concentration, loi des grands
+nombres ». Il ne l'impose pas : cette page est un entrainement.
+}
+
+Un promeneur part de l'origine sur une droite graduee. A chaque seconde il
+avance d'un pas vers la droite ou vers la gauche, avec la meme chance,
+independamment des pas precedents. A quelle distance de son point de depart
+se trouve-t-il au bout de $n$ pas ?
+
+\propriete[Esperance et variance de la position]{
+Notons $X_1,\dots,X_n$ les pas, a valeurs dans $\{-1\,;\,1\}$, independants,
+de meme loi avec $P(X_i=1)=P(X_i=-1)=\frac{1}{2}$, et
+$S_n = X_1+\cdots+X_n$ la position apres $n$ pas. Alors
+\[
+  E(X_i)=0,\quad V(X_i)=E(X_i^2)-E(X_i)^2 = 1-0 = 1,
+\]
+donc, par linearite de l'esperance et additivite de la variance de variables
+independantes,
+\[
+  E(S_n)=0
+  \qquad\text{et}\qquad
+  V(S_n)=n,\quad \sigma(S_n)=\sqrt{n}.
+\]
+}
+
+\margeAppui{
+$E(S_n)=0$ ne signifie pas que le promeneur reste pres de $0$ : c'est la
+\emph{moyenne} des positions qui est nulle, par symetrie entre la gauche et
+la droite. L'ecart-type $\sqrt{n}$ donne l'ordre de grandeur de l'eloignement
+reellement observe.
+}
+
+\propriete[Ce que dit l'inegalite de Bienaymé-Tchebychev]{
+En appliquant l'inegalite a $Y=S_n$, d'esperance $0$ et de variance $n$, avec
+$\delta = k\sqrt{n}$ pour un reel $k>0$ :
+\[
+  P\big(|S_n| \geq k\sqrt{n}\,\big) \leq \frac{n}{\big(k\sqrt{n}\big)^{2}}
+  = \frac{1}{k^{2}}.
+\]
+La majoration ne depend plus de $n$ : quelle que soit la duree de la marche,
+la position depasse $k$ ecarts-types avec une probabilite au plus
+$\dfrac{1}{k^{2}}$.
+}
+
+\propriete[Demarche de simulation]{%
+\begin{enumerate}
+  \item Fixer le nombre de pas $n$, le nombre de marches $N$ et une graine.
+  \item Pour chaque marche, cumuler $n$ pas tires au hasard dans
+        $\{-1\,;\,1\}$ ; conserver la position finale.
+  \item Pour $k=1,2,3$, compter les marches telles que
+        $|S_n| \geq k\sqrt{n}$ et diviser par $N$.
+  \item Comparer chaque proportion obtenue a la majoration $1/k^{2}$.
+\end{enumerate}
+}
+
+\begin{python}
+from math import sqrt
+from random import Random
+
+def simuler_marches(n, N, graine):
+    """Renvoie les N positions finales de marches de n pas."""
+    if n <= 0 or N <= 0:
+        raise ValueError("n et N doivent etre strictement positifs")
+    generateur = Random(graine)
+    positions = []
+    for _ in range(N):
+        position = 0
+        for _ in range(n):
+            if generateur.random() < 0.5:
+                position = position + 1
+            else:
+                position = position - 1
+        positions.append(position)
+    return positions
+
+def proportion_au_dela(positions, n, k):
+    """Proportion de marches dont la position finale depasse k ecarts-types."""
+    seuil = k * sqrt(n)
+    depassent = [s for s in positions if abs(s) >= seuil]
+    return len(depassent) / len(positions)
+\end{python}
+
+\exemple{
+Pour $n=100$ pas, $N=10\,000$ marches et la graine $2024$ :
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+$k$ & proportion observee de $|S_{100}| \geq k\sqrt{100}$ & majoration $1/k^{2}$ \\
+\hline
+$1$ & $0{,}3620$ & $1$ \\
+\hline
+$2$ & $0{,}0579$ & $0{,}25$ \\
+\hline
+$3$ & $0{,}0043$ & $0{,}1111\ldots$ \\
+\hline
+\end{tabular}
+\end{center}
+
+Chaque proportion respecte bien sa majoration. On observe aussi que pour
+$k=1$ la majoration vaut $1$ : elle est vraie, mais elle n'apprend rien. Ce
+n'est qu'a partir de $k=2$ que l'inegalite devient informative.
+}
+
+% BEGIN-VERIFY
+% from math import sqrt
+% from random import Random
+%
+% def simuler_marches(n, N, graine):
+%     if n <= 0 or N <= 0:
+%         raise ValueError("n et N doivent etre strictement positifs")
+%     generateur = Random(graine)
+%     positions = []
+%     for _ in range(N):
+%         position = 0
+%         for _ in range(n):
+%             if generateur.random() < 0.5:
+%                 position = position + 1
+%             else:
+%                 position = position - 1
+%         positions.append(position)
+%     return positions
+%
+% def proportion_au_dela(positions, n, k):
+%     seuil = k * sqrt(n)
+%     depassent = [s for s in positions if abs(s) >= seuil]
+%     return len(depassent) / len(positions)
+%
+% positions = simuler_marches(100, 10000, 2024)
+% assert len(positions) == 10000
+% # la position finale a la parite du nombre de pas
+% assert all(s % 2 == 0 for s in positions)
+% assert all(-100 <= s <= 100 for s in positions)
+% observees = [proportion_au_dela(positions, 100, k) for k in (1, 2, 3)]
+% assert abs(observees[0] - 0.3620) < 1e-12
+% assert abs(observees[1] - 0.0579) < 1e-12
+% assert abs(observees[2] - 0.0043) < 1e-12
+% # chaque proportion respecte la majoration de Bienayme-Tchebychev
+% for k, observee in zip((1, 2, 3), observees):
+%     assert observee <= 1 / k**2
+% assert abs(1 / 3**2 - 0.1111) < 5e-5
+% # E(S_n) = 0 et V(S_n) = n : verification exacte sur la loi d'un pas
+% from fractions import Fraction
+% esperance_pas = Fraction(1, 2) * 1 + Fraction(1, 2) * (-1)
+% assert esperance_pas == 0
+% moment2_pas = Fraction(1, 2) * 1 + Fraction(1, 2) * 1
+% assert moment2_pas - esperance_pas**2 == 1
+% # la majoration en k racine de n ne depend plus de n
+% for n in (25, 100, 10000):
+%     assert abs(n / (2 * sqrt(n))**2 - 1 / 4) < 1e-12
+% for mauvais in ((0, 10), (10, 0), (-3, 4)):
+%     try:
+%         simuler_marches(*mauvais, 1)
+%     except ValueError:
+%         pass
+%     else:
+%         raise AssertionError("l'argument invalide aurait du etre refuse")
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 --- Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Prendre la majoration pour une approximation.} L'inegalite de
+Bienaymé-Tchebychev donne un \emph{majorant}, pas une valeur approchee.
+Observer $0{,}0579$ la ou elle annonce au plus $0{,}25$ ne la contredit pas :
+elle est vraie pour toute loi, et cette generalite se paie par une borne
+souvent large.
+}
+
+\erreurFrequente{
+\textbf{Conclure de $E(S_n)=0$ que le promeneur revient pres de l'origine.}
+L'esperance est nulle par symetrie : les eloignements vers la droite et vers
+la gauche se compensent en moyenne. L'eloignement typique, lui, croit comme
+$\sqrt{n}$ --- c'est ce que mesure l'ecart-type.
+}
