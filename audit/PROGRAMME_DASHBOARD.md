@@ -34,6 +34,12 @@ Ne pas editer : chaque valeur est relue dans l'artefact qui la produit.
 | `ADDED_2026_TRULY_MISSING` | 0 | `audit/1SPE_REFORM_TRANSITION_AUDIT.json` :: summary / ADDED_TRULY_MISSING |
 | `REMOVED_2019_CONTENT_STILL_PRESENTED_AS_REQUIRED` | 0 | `audit/1SPE_REFORM_TRANSITION_AUDIT.json` :: summary / REMOVED_2019_CONTENT_STILL_PRESENTED_AS_REQUIRED |
 | `REMOVED_2019_CONTENT_REQUIRING_EDITORIAL_REVIEW` | 4 | `audit/1SPE_REFORM_TRANSITION_AUDIT.json` :: summary / REMOVED_2019_CONTENT_REQUIRING_EDITORIAL_REVIEW |
+| `TNSI_PROGRAMME_MATRIX` | FAIL | `audit/TNSI_EXAM_PREPARATION_MATRIX.json` :: summary / TNSI_PROGRAMME_MATRIX |
+| `TNSI_EXAM_PREPARATION_MATRIX` | PASS | `audit/TNSI_EXAM_PREPARATION_MATRIX.json` :: summary / TNSI_EXAM_PREPARATION_MATRIX |
+| `EXAM_ONLY_NOTIONS` | 0 | `audit/TNSI_EXAM_PREPARATION_MATRIX.json` :: summary / EXAM_ONLY_NOTIONS |
+| `UNCLASSIFIED_OUT_OF_PROGRAMME_OBJECTS` | 1 | `audit/OBJECTS_TO_OFFICIAL_REVERSE_MAP.json` :: summary / UNCLASSIFIED_OUT_OF_PROGRAMME_OBJECTS |
+| `FUTURE_PROGRAM_CONTAMINATION` | 0 | `audit/OBJECTS_TO_OFFICIAL_REVERSE_MAP.json` :: summary / WRONG_YEAR_OBJECTS |
+| `OBJECTS_CITING_AN_UNKNOWN_CAPACITY` | 64 | `audit/OBJECTS_TO_OFFICIAL_REVERSE_MAP.json` :: summary / OBJECTS_CITING_AN_UNKNOWN_CAPACITY |
 
 ## Comment lire ces compteurs
 
@@ -47,3 +53,6 @@ Ne pas editer : chaque valeur est relue dans l'artefact qui la produit.
 - **`OFFICIAL_REQUIRED_UNDECIDABLE_BY_CONTENT_MATCH`** — attendus dont le libelle officiel ne porte aucun mot distinctif exploitable : la recherche par contenu ne peut ni conclure a la presence ni conclure a l'absence.
 - **`AUTOMATISM_NOT_REINVESTED`** — automatismes que le manuel travaille sans les repartir : le programme exclut qu'ils fassent l'objet d'un chapitre specifique et demande qu'ils soient entretenus sur l'annee. Aucun n'est absent du manuel.
 - **`ADDED_2026_TRULY_MISSING`** — attendus ajoutes par la reforme qu'il faudrait ecrire. La dette de contenu ne se deduit pas du differentiel : un attendu ajoute au programme peut etre traite depuis des annees.
+- **`UNCLASSIFIED_OUT_OF_PROGRAMME_OBJECTS`** — objets sans attendu ET sans statut : ni prerequis, ni enrichissement assume, ni entrainement a l'epreuve. Un manuel a le droit de depasser le programme ; il n'a pas le droit de le faire sans le dire.
+- **`FUTURE_PROGRAM_CONTAMINATION`** — objets du manuel qui reprennent un attendu d'un programme ne regissant pas cette edition, sur des notions absentes du programme en vigueur.
+- **`OBJECTS_CITING_AN_UNKNOWN_CAPACITY`** — objets qui se reclament d'une capacite absente de tout referentiel. L'objet parait rattache et ne l'est pas : personne ne s'en apercoit.

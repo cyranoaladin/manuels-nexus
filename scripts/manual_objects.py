@@ -94,6 +94,17 @@ class Objet:
     #: Presence d'un travail algorithmique effectif (algorithme, programme).
     has_algorithmic_work: bool = False
     text_length: int = 0
+    #: Chemin du corrige declare par un exercice. Un corrige ne redeclare pas
+    #: toujours les capacites de son exercice : sans ce lien, il apparaitrait
+    #: comme un objet sans rattachement alors qu'il sert exactement le meme
+    #: attendu.
+    linked_correction: str = ""
+    #: Alignement declare par l'objet lui-meme. Certains objets s'annoncent
+    #: « OPTIONAL_EXTENSION — Approfondissement, vers la Terminale » : ils ne
+    #: relevent pas du programme de l'annee et le disent. Ignorer cette
+    #: declaration les faisait passer pour des objets sans justification.
+    programme_alignment: str = ""
+    extension_label: str = ""
 
 
 @dataclass
@@ -160,6 +171,17 @@ def charger_objets(contrats: dict[str, Contrat]) -> list[Objet]:
             atomes.update(
                 contrat.aliases[c] for c in codes if c in contrat.aliases
             )
+            # Un code declare « sans alias officiel » travaille une facette
+            # d'une capacite portee par un code frere. Le contrat nomme ce
+            # frere : l'objet sert donc bien cette capacite officielle, et
+            # l'ignorer le faisait passer pour un objet sans rattachement.
+            for code in codes:
+                facette = contrat.facettes.get(code)
+                if not facette:
+                    continue
+                porteur = facette.get("porte_par")
+                if porteur and porteur in contrat.aliases:
+                    atomes.add(contrat.aliases[porteur])
         kind = meta.get("type_objet", "?")
         objets.append(
             Objet(
@@ -182,9 +204,27 @@ def charger_objets(contrats: dict[str, Contrat]) -> list[Objet]:
                     )
                 ),
                 text_length=len(texte),
+                linked_correction=meta.get("corrige_tex", "") or "",
+                programme_alignment=meta.get("programme_alignment", "") or "",
+                extension_label=meta.get("extension_label", "") or "",
             )
         )
+    _propager_aux_corriges(objets)
     return objets
+
+
+def _propager_aux_corriges(objets: list[Objet]) -> None:
+    """Un corrige herite des capacites de l'exercice qui le declare."""
+    par_chemin = {o.path: o for o in objets}
+    for objet in objets:
+        cible = objet.linked_correction
+        if not cible or not objet.atoms:
+            continue
+        for prefixe in ("Mathematiques/manuel-maths/", "NSI/"):
+            corrige = par_chemin.get(prefixe + cible)
+            if corrige is not None and not corrige.atoms:
+                corrige.atoms = objet.atoms
+                break
 
 
 def charger_transversaux() -> list[Objet]:

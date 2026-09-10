@@ -97,6 +97,13 @@ def termes_distinctifs(libelle: str) -> set[str]:
     return {m for m in mots if len(m) >= 5 and m not in BANALS}
 
 
+def _slug_preambule(intitule: str) -> str:
+    """Forme d'identifiant utilisee par les objets pour citer le preambule."""
+    return re.sub(
+        r"[^A-Z0-9]+", "-", _sans_accents(intitule).upper()
+    ).strip("-")
+
+
 def racine(terme: str) -> str:
     """Radical grossier, pour ne pas dependre des flexions.
 
@@ -258,6 +265,21 @@ def main(argv: list[str] | None = None) -> int:
         for atome in objet.atoms:
             par_atome[atome].append(objet)
 
+    # Certains objets citent une capacite du preambule sous la forme
+    # « BO-PREAMBULE-DEMARCHE-DE-PROJET ». Cet identifiant n'existe dans aucun
+    # referentiel, mais il nomme sans ambiguite une partie du preambule que
+    # l'inventaire officiel porte. Le resoudre evite de laisser sans preuve
+    # une exigence que le manuel outille reellement.
+    objets_par_partie_de_preambule: dict[tuple[str, str], list[Objet]] = defaultdict(
+        list
+    )
+    for objet in objets:
+        for atome in objet.atoms:
+            if atome.startswith("BO-PREAMBULE-"):
+                objets_par_partie_de_preambule[
+                    (objet.manual, atome.removeprefix("BO-PREAMBULE-"))
+                ].append(objet)
+
     # attendu officiel -> atomes rattaches de facon etablie
     atomes_par_item: dict[str, list[str]] = defaultdict(list)
     for lien in liaison["bindings"]:
@@ -307,6 +329,11 @@ def main(argv: list[str] | None = None) -> int:
         for atome in atomes:
             for objet in par_atome.get(atome, []):
                 servants[objet.object_id] = objet
+        if item["official_section"] == "Préambule":
+            cle_partie = _slug_preambule(item["official_subsection"] or "")
+            for objet in objets_par_partie_de_preambule.get((manuel, cle_partie), []):
+                servants[objet.object_id] = objet
+
         preuve = "DECLARED_CAPACITY" if servants else None
         termes_trouves: list[str] = []
         termes_absents: list[str] = []

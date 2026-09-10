@@ -75,6 +75,20 @@ LECTURES: dict[str, str] = {
         "exclut qu'ils fassent l'objet d'un chapitre specifique et demande "
         "qu'ils soient entretenus sur l'annee. Aucun n'est absent du manuel."
     ),
+    "FUTURE_PROGRAM_CONTAMINATION": (
+        "objets du manuel qui reprennent un attendu d'un programme ne "
+        "regissant pas cette edition, sur des notions absentes du programme "
+        "en vigueur."
+    ),
+    "OBJECTS_CITING_AN_UNKNOWN_CAPACITY": (
+        "objets qui se reclament d'une capacite absente de tout referentiel. "
+        "L'objet parait rattache et ne l'est pas : personne ne s'en apercoit."
+    ),
+    "UNCLASSIFIED_OUT_OF_PROGRAMME_OBJECTS": (
+        "objets sans attendu ET sans statut : ni prerequis, ni enrichissement "
+        "assume, ni entrainement a l'epreuve. Un manuel a le droit de depasser "
+        "le programme ; il n'a pas le droit de le faire sans le dire."
+    ),
     "ADDED_2026_TRULY_MISSING": (
         "attendus ajoutes par la reforme qu'il faudrait ecrire. La dette de "
         "contenu ne se deduit pas du differentiel : un attendu ajoute au "

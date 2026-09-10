@@ -242,6 +242,57 @@
         "summary",
         "REMOVED_2019_CONTENT_REQUIRING_EDITORIAL_REVIEW"
       ]
+    },
+    "TNSI_PROGRAMME_MATRIX": {
+      "value": "FAIL",
+      "artifact": "audit/TNSI_EXAM_PREPARATION_MATRIX.json",
+      "pointer": [
+        "summary",
+        "TNSI_PROGRAMME_MATRIX"
+      ]
+    },
+    "TNSI_EXAM_PREPARATION_MATRIX": {
+      "value": "PASS",
+      "artifact": "audit/TNSI_EXAM_PREPARATION_MATRIX.json",
+      "pointer": [
+        "summary",
+        "TNSI_EXAM_PREPARATION_MATRIX"
+      ]
+    },
+    "EXAM_ONLY_NOTIONS": {
+      "value": 0,
+      "artifact": "audit/TNSI_EXAM_PREPARATION_MATRIX.json",
+      "pointer": [
+        "summary",
+        "EXAM_ONLY_NOTIONS"
+      ]
+    },
+    "UNCLASSIFIED_OUT_OF_PROGRAMME_OBJECTS": {
+      "value": 1,
+      "artifact": "audit/OBJECTS_TO_OFFICIAL_REVERSE_MAP.json",
+      "pointer": [
+        "summary",
+        "UNCLASSIFIED_OUT_OF_PROGRAMME_OBJECTS"
+      ],
+      "reading": "objets sans attendu ET sans statut : ni prerequis, ni enrichissement assume, ni entrainement a l'epreuve. Un manuel a le droit de depasser le programme ; il n'a pas le droit de le faire sans le dire."
+    },
+    "FUTURE_PROGRAM_CONTAMINATION": {
+      "value": 0,
+      "artifact": "audit/OBJECTS_TO_OFFICIAL_REVERSE_MAP.json",
+      "pointer": [
+        "summary",
+        "WRONG_YEAR_OBJECTS"
+      ],
+      "reading": "objets du manuel qui reprennent un attendu d'un programme ne regissant pas cette edition, sur des notions absentes du programme en vigueur."
+    },
+    "OBJECTS_CITING_AN_UNKNOWN_CAPACITY": {
+      "value": 64,
+      "artifact": "audit/OBJECTS_TO_OFFICIAL_REVERSE_MAP.json",
+      "pointer": [
+        "summary",
+        "OBJECTS_CITING_AN_UNKNOWN_CAPACITY"
+      ],
+      "reading": "objets qui se reclament d'une capacite absente de tout referentiel. L'objet parait rattache et ne l'est pas : personne ne s'en apercoit."
     }
   }
 }

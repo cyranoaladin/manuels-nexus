@@ -1,0 +1,123 @@
+{
+  "artifact_type": "tnsi_two_matrices",
+  "schema_version": 1,
+  "generated_by": "scripts/build_tnsi_exam_preparation_matrix.py",
+  "manual": "TNSI",
+  "programme_authority": "MENE1921247A",
+  "exam_authority": "MENE2516123N",
+  "separation_rule": "Le programme dit ce qui doit etre enseigne ; la definition d'epreuve dit comment cela sera evalue. L'epreuve n'ajoute jamais une notion au programme.",
+  "summary": {
+    "TNSI_PROGRAMME_MATRIX": "FAIL",
+    "TNSI_PROGRAMME_MANDATORY_MISSING": 1,
+    "TNSI_EXAM_PREPARATION_MATRIX": "PASS",
+    "EXAM_REQUIREMENTS": 5,
+    "EXAM_REQUIREMENTS_COMPLETE": 5,
+    "EXAM_ONLY_NOTIONS": 0
+  },
+  "programme_mandatory_missing": [
+    {
+      "official_id": "MENE1921247A::ARCHITECTURES-MATERIELLES-SYSTEMES::CONTENUS::KNOWLEDGE::51966072",
+      "official_wording": "Sécurisation des communications.",
+      "official_normativity": "REQUIRED_CONTENT"
+    }
+  ],
+  "exam_requirements": [
+    {
+      "requirement_id": "WRITTEN_EXAM_FORMAT",
+      "from_authority": "MENE2516123N",
+      "official_basis": "epreuve ecrite de 210 minutes, notee sur 20, comptant pour 75% de la note finale",
+      "evidence_objects": [
+        "TNSI-ECRIT-S1-EX1",
+        "TNSI-ECRIT-S1-EX2",
+        "TNSI-ECRIT-S1-EX3",
+        "TNSI-ECRIT-S2-EX1",
+        "TNSI-ECRIT-S2-EX2",
+        "TNSI-ECRIT-S2-EX3",
+        "TNSI-ECRIT-S3-EX1",
+        "TNSI-ECRIT-S3-EX2",
+        "TNSI-ECRIT-S3-EX3",
+        "TNSI-ECRIT-S4-EX1",
+        "TNSI-ECRIT-S4-EX2",
+        "TNSI-ECRIT-S4-EX3",
+        "TNSI-ECRIT-S5-EX1",
+        "TNSI-ECRIT-S5-EX2",
+        "TNSI-ECRIT-S5-EX3",
+        "TNSI-ECRIT-S6-EX1",
+        "TNSI-ECRIT-S6-EX2",
+        "TNSI-ECRIT-S6-EX3"
+      ],
+      "evidence_count": 18,
+      "subjects": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6"
+      ],
+      "status": "COMPLETE",
+      "reason": "6 sujets ecrits complets dans la banque"
+    },
+    {
+      "requirement_id": "PRACTICAL_EXAM_FORMAT",
+      "from_authority": "MENE2516123N",
+      "official_basis": "epreuve pratique de 60 minutes, notee sur 20, comptant pour 25%",
+      "evidence_objects": [
+        "TNSI-PRATIQUE-P1",
+        "TNSI-PRATIQUE-P2",
+        "TNSI-PRATIQUE-P3",
+        "TNSI-PRATIQUE-P4",
+        "TNSI-PRATIQUE-P5",
+        "TNSI-PRATIQUE-P6",
+        "TNSI-PRATIQUE-P7",
+        "TNSI-PRATIQUE-P8"
+      ],
+      "evidence_count": 8,
+      "status": "COMPLETE",
+      "reason": "8 sujets pratiques dans la banque"
+    },
+    {
+      "requirement_id": "PRACTICAL_IS_DONE_ON_A_MACHINE",
+      "from_authority": "MENE2516123N",
+      "official_basis": "l'epreuve pratique se passe sur machine : un sujet pratique sans programme a ecrire ou a mettre au point ne l'entraine pas",
+      "evidence_objects": [
+        "TNSI-PRATIQUE-P1",
+        "TNSI-PRATIQUE-P2",
+        "TNSI-PRATIQUE-P3",
+        "TNSI-PRATIQUE-P4",
+        "TNSI-PRATIQUE-P5",
+        "TNSI-PRATIQUE-P6",
+        "TNSI-PRATIQUE-P7",
+        "TNSI-PRATIQUE-P8"
+      ],
+      "evidence_count": 8,
+      "status": "COMPLETE",
+      "reason": "tous les sujets pratiques comportent un travail sur machine"
+    },
+    {
+      "requirement_id": "WRITTEN_BANK_SPANS_THE_PROGRAMME",
+      "from_authority": "MENE2516123N",
+      "official_basis": "l'epreuve ecrite porte sur le programme : une banque concentree sur quelques rubriques n'y prepare pas",
+      "evidence_objects": [
+        "Algorithmique",
+        "Architectures matérielles, systèmes d’exploitation et réseaux",
+        "Bases de données",
+        "Histoire de l’informatique",
+        "Langages et programmation",
+        "Structures de données"
+      ],
+      "evidence_count": 6,
+      "status": "COMPLETE",
+      "reason": "6 parties du programme touchees sur 7"
+    },
+    {
+      "requirement_id": "EXAM_ADDS_NO_NOTION_TO_THE_PROGRAMME",
+      "from_authority": "MENE1921247A",
+      "official_basis": "une definition d'epreuve fixe des modalites, jamais des contenus : chaque objet de preparation doit se rattacher a une capacite du programme",
+      "evidence_objects": [],
+      "evidence_count": 0,
+      "status": "COMPLETE",
+      "reason": "tous les objets de preparation se rattachent au programme"
+    }
+  ]
+}
