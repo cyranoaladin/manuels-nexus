@@ -39,6 +39,69 @@ Le triangle n'est donc \textbf{pas} rectangle en $A$.
 $\|\vec{u}\| = \sqrt{\vec{u}\cdot\vec{u}} = \sqrt{x^2+y^2+z^2}$.
 }
 
+\propriete[Developpement de $\|\vec{u}\pm\vec{v}\|^2$]{
+Pour tous vecteurs $\vec{u}$ et $\vec{v}$ de l'espace :
+\[
+  \|\vec{u}+\vec{v}\|^2 = \|\vec{u}\|^2 + 2\,\vec{u}\cdot\vec{v} + \|\vec{v}\|^2,
+  \qquad
+  \|\vec{u}-\vec{v}\|^2 = \|\vec{u}\|^2 - 2\,\vec{u}\cdot\vec{v} + \|\vec{v}\|^2.
+\]
+}
+
+\demonstration{
+Par definition, $\|\vec{w}\|^2 = \vec{w}\cdot\vec{w}$. En prenant
+$\vec{w} = \vec{u}+\vec{v}$ et en developpant par bilinearite :
+\[
+  (\vec{u}+\vec{v})\cdot(\vec{u}+\vec{v})
+  = \vec{u}\cdot\vec{u} + \vec{u}\cdot\vec{v}
+  + \vec{v}\cdot\vec{u} + \vec{v}\cdot\vec{v}.
+\]
+La symetrie du produit scalaire donne $\vec{v}\cdot\vec{u} = \vec{u}\cdot\vec{v}$,
+d'ou les deux termes centraux se regroupent en $2\,\vec{u}\cdot\vec{v}$. Le
+second developpement s'obtient de meme, ou en remplacant $\vec{v}$ par
+$-\vec{v}$.
+}
+
+\propriete[Formules de polarisation]{
+Le produit scalaire se retrouve a partir des seules longueurs :
+\[
+  \vec{u}\cdot\vec{v} = \frac{1}{2}\left(\|\vec{u}+\vec{v}\|^2 - \|\vec{u}\|^2 - \|\vec{v}\|^2\right)
+  = \frac{1}{4}\left(\|\vec{u}+\vec{v}\|^2 - \|\vec{u}-\vec{v}\|^2\right).
+\]
+}
+
+\demonstration{
+La premiere egalite s'obtient en isolant $2\,\vec{u}\cdot\vec{v}$ dans le
+developpement de $\|\vec{u}+\vec{v}\|^2$. Pour la seconde, on soustrait les
+deux developpements :
+\[
+  \|\vec{u}+\vec{v}\|^2 - \|\vec{u}-\vec{v}\|^2
+  = \bigl(\ldots + 2\,\vec{u}\cdot\vec{v}\bigr)
+  - \bigl(\ldots - 2\,\vec{u}\cdot\vec{v}\bigr)
+  = 4\,\vec{u}\cdot\vec{v},
+\]
+les termes $\|\vec{u}\|^2$ et $\|\vec{v}\|^2$ se simplifiant.
+}
+
+\exemple{
+Dans un repere orthonorme, $\vec{u}\begin{pmatrix}2\\1\\-1\end{pmatrix}$ et
+$\vec{v}\begin{pmatrix}1\\-1\\2\end{pmatrix}$.
+
+On a $\|\vec{u}\|^2 = 6$, $\|\vec{v}\|^2 = 6$ et
+$\vec{u}+\vec{v}\begin{pmatrix}3\\0\\1\end{pmatrix}$, donc
+$\|\vec{u}+\vec{v}\|^2 = 10$.
+
+La formule de polarisation donne
+$\vec{u}\cdot\vec{v} = \dfrac{10 - 6 - 6}{2} = -1$,
+ce que confirme le calcul direct $2 - 1 - 2 = -1$.
+}
+
+\margeAppui{
+Les formules de polarisation disent qu'un produit scalaire ne contient rien de
+plus que des longueurs : on peut le calculer sans coordonnees, a partir de
+trois mesures.
+}
+
 % ============================================================
 % STRATE 2 — Erreurs frequentes
 % ============================================================

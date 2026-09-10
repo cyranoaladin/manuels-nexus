@@ -10,11 +10,12 @@
     "AUTOMATISMS_1SPE_WITH_AN_INTERNAL_ATOM": 0,
     "AUTOMATISMS_1SPE_PRESENT": 17,
     "AUTOMATISMS_1SPE_ADEQUATELY_REINVESTED": 12,
-    "AUTOMATISM_NOT_REINVESTED": 5,
+    "AUTOMATISM_NOT_REINVESTED": 0,
+    "NEXUS_DISTRIBUTED_AUTOMATISM_STANDARD": "3 chapitres au moins, avec entrainement ou evaluation — exigence de la collection, pas du programme",
+    "AUTOMATISMS_BELOW_NEXUS_STANDARD": 5,
     "verdict_counts": {
       "ADEQUATELY_REINVESTED": 12,
-      "DISTRIBUTED_INSUFFICIENTLY": 2,
-      "PRESENT_BUT_NOT_DISTRIBUTED": 3
+      "MEETS_OFFICIAL_MINIMUM_BELOW_NEXUS_STANDARD": 5
     }
   },
   "automatisms": [
@@ -35,7 +36,10 @@
         "1SPE-SUITES-ME-006"
       ],
       "PRACTICE_EVIDENCE": [
-        "1SPE-SUITES-EX-049"
+        "1SPE-EXPO-CO-051",
+        "1SPE-SUITES-CO-052",
+        "1SPE-SUITES-EX-049",
+        "1SPE-SUITES-EX-052"
       ],
       "ASSESSMENT_EVIDENCE": [
         "1SPE-SUITES-QCM"
@@ -47,9 +51,9 @@
         "1SPE-EXPONENTIELLE",
         "1SPE-SUITES"
       ],
-      "occurrence_count": 9,
-      "verdict": "DISTRIBUTED_INSUFFICIENTLY",
-      "reason": "present dans 2 chapitres seulement, pour un entretien qui doit courir sur l'annee"
+      "occurrence_count": 12,
+      "verdict": "MEETS_OFFICIAL_MINIMUM_BELOW_NEXUS_STANDARD",
+      "reason": "present dans 2 chapitres : le programme est satisfait, mais la collection vise trois chapitres au moins"
     },
     {
       "automatism_id": "MENE2602917A::AUTOMATISMES::EVOLUTIONS-ET-VARIATIONS::AUTOMATISM::90d28a6b",
@@ -69,7 +73,9 @@
       ],
       "PRACTICE_EVIDENCE": [
         "1SPE-DERGLOBAL-EX-046",
-        "1SPE-SUITES-EX-049"
+        "1SPE-EXPO-EX-051",
+        "1SPE-SUITES-EX-049",
+        "1SPE-SUITES-EX-052"
       ],
       "ASSESSMENT_EVIDENCE": [
         "1SPE-SUITES-QCM"
@@ -80,12 +86,13 @@
       ],
       "chapters_distribution": [
         "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
         "1SPE-SUITES",
         "1SPE-TRANSVERSAL"
       ],
-      "occurrence_count": 11,
+      "occurrence_count": 13,
       "verdict": "ADEQUATELY_REINVESTED",
-      "reason": "introduit, puis entretenu dans 3 chapitres, avec 2 objets d'entrainement et 1 objets d'evaluation"
+      "reason": "introduit, puis entretenu dans 4 chapitres, avec 4 objets d'entrainement et 1 objets d'evaluation"
     },
     {
       "automatism_id": "MENE2602917A::AUTOMATISMES::EVOLUTIONS-ET-VARIATIONS::AUTOMATISM::8ce04fd3",
@@ -101,6 +108,8 @@
       ],
       "SUPPORTING_EVIDENCE": [],
       "PRACTICE_EVIDENCE": [
+        "1SPE-EXPO-CO-051",
+        "1SPE-EXPO-EX-051",
         "1SPE-SUITES-CO-034"
       ],
       "ASSESSMENT_EVIDENCE": [
@@ -111,11 +120,12 @@
         "1SPE-SUITES-RE-C6"
       ],
       "chapters_distribution": [
+        "1SPE-EXPONENTIELLE",
         "1SPE-SUITES"
       ],
-      "occurrence_count": 8,
-      "verdict": "PRESENT_BUT_NOT_DISTRIBUTED",
-      "reason": "travaille dans le seul chapitre 1SPE-SUITES : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique"
+      "occurrence_count": 10,
+      "verdict": "MEETS_OFFICIAL_MINIMUM_BELOW_NEXUS_STANDARD",
+      "reason": "present dans 2 chapitres : le programme est satisfait, mais la collection vise trois chapitres au moins"
     },
     {
       "automatism_id": "MENE2602917A::AUTOMATISMES::EVOLUTIONS-ET-VARIATIONS::AUTOMATISM::65ae076a",
@@ -127,15 +137,19 @@
         "1SPE-TRANSVERSAL-STATISTIQUES_AUTOMATISMES"
       ],
       "SUPPORTING_EVIDENCE": [],
-      "PRACTICE_EVIDENCE": [],
+      "PRACTICE_EVIDENCE": [
+        "1SPE-SUITES-CO-052",
+        "1SPE-SUITES-EX-052"
+      ],
       "ASSESSMENT_EVIDENCE": [],
       "REMEDIATION_EVIDENCE": [],
       "chapters_distribution": [
+        "1SPE-SUITES",
         "1SPE-TRANSVERSAL"
       ],
-      "occurrence_count": 1,
-      "verdict": "PRESENT_BUT_NOT_DISTRIBUTED",
-      "reason": "travaille dans le seul chapitre 1SPE-TRANSVERSAL : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique"
+      "occurrence_count": 3,
+      "verdict": "MEETS_OFFICIAL_MINIMUM_BELOW_NEXUS_STANDARD",
+      "reason": "present dans 2 chapitres : le programme est satisfait, mais la collection vise trois chapitres au moins"
     },
     {
       "automatism_id": "MENE2602917A::AUTOMATISMES::CALCUL-NUMERIQUE-ET-ALGEBRIQUE::AUTOMATISM::d09f2a1f",
@@ -1290,8 +1304,8 @@
         "1SPE-TRANSVERSAL"
       ],
       "occurrence_count": 4,
-      "verdict": "DISTRIBUTED_INSUFFICIENTLY",
-      "reason": "reparti mais jamais mis en pratique ni evalue : un automatisme se construit par l'entrainement"
+      "verdict": "MEETS_OFFICIAL_MINIMUM_BELOW_NEXUS_STANDARD",
+      "reason": "reparti sur 4 chapitres, donc conforme au programme, mais jamais mis en pratique ni evalue : la collection attend un entrainement"
     },
     {
       "automatism_id": "MENE2602917A::AUTOMATISMES::STATISTIQUES::AUTOMATISM::8754c49b",
@@ -1303,15 +1317,19 @@
         "1SPE-TRANSVERSAL-STATISTIQUES_AUTOMATISMES"
       ],
       "SUPPORTING_EVIDENCE": [],
-      "PRACTICE_EVIDENCE": [],
+      "PRACTICE_EVIDENCE": [
+        "1SPE-VARALEA-CO-055",
+        "1SPE-VARALEA-EX-055"
+      ],
       "ASSESSMENT_EVIDENCE": [],
       "REMEDIATION_EVIDENCE": [],
       "chapters_distribution": [
-        "1SPE-TRANSVERSAL"
+        "1SPE-TRANSVERSAL",
+        "1SPE-VARIABLES-ALEATOIRES"
       ],
-      "occurrence_count": 1,
-      "verdict": "PRESENT_BUT_NOT_DISTRIBUTED",
-      "reason": "travaille dans le seul chapitre 1SPE-TRANSVERSAL : le programme exclut qu'un automatisme fasse l'objet d'un chapitre specifique"
+      "occurrence_count": 3,
+      "verdict": "MEETS_OFFICIAL_MINIMUM_BELOW_NEXUS_STANDARD",
+      "reason": "present dans 2 chapitres : le programme est satisfait, mais la collection vise trois chapitres au moins"
     },
     {
       "automatism_id": "MENE2602917A::AUTOMATISMES::PROBABILITES::AUTOMATISM::dd94c401",

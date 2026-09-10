@@ -92,6 +92,12 @@ LECTURES: dict[str, str] = {
         "remedier. Le programme demande que les automatismes de seconde soient "
         "entretenus en premiere."
     ),
+    "AUTOMATISMS_BELOW_NEXUS_STANDARD": (
+        "exigence de la COLLECTION, pas du programme : le BO demande qu'un "
+        "automatisme ne fasse pas l'objet d'un chapitre specifique et soit "
+        "entretenu sur l'annee ; la collection vise trois chapitres au moins, "
+        "avec entrainement ou evaluation."
+    ),
     "NORMATIVITY_CREATED_BY_ATOMIZATION": (
         "attendus publies comme obligatoires alors que la rubrique du BO dont "
         "ils viennent ne l'est pas. C'est le risque propre a toute chaine "

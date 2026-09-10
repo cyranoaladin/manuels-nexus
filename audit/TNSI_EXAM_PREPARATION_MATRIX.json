@@ -12,7 +12,11 @@
     "TNSI_EXAM_PREPARATION_MATRIX": "PASS",
     "EXAM_REQUIREMENTS": 5,
     "EXAM_REQUIREMENTS_COMPLETE": 5,
-    "EXAM_ONLY_NOTIONS": 0
+    "EXAM_ONLY_NOTIONS": 0,
+    "PROGRAMME_PARTS_EXAMINABLE": 6,
+    "PROGRAMME_PARTS_COVERED_BY_WRITTEN_BANK": 6,
+    "PROGRAMME_PARTS_MISSING_FROM_WRITTEN_BANK": 0,
+    "WRITTEN_BANK_SPANS_THE_PROGRAMME": "PASS"
   },
   "programme_mandatory_missing": [],
   "exam_requirements": [
@@ -91,7 +95,27 @@
     {
       "requirement_id": "WRITTEN_BANK_SPANS_THE_PROGRAMME",
       "from_authority": "MENE2516123N",
-      "official_basis": "l'epreuve ecrite porte sur le programme : une banque concentree sur quelques rubriques n'y prepare pas",
+      "official_basis": "l'epreuve ecrite porte sur le programme. Ce n'est pas a chaque sujet de tout couvrir : c'est la banque CUMULEE qui doit etre representative. Une partie du programme absente de toute la banque n'est jamais entrainee a l'ecrit.",
+      "PROGRAMME_PARTS_EXAMINABLE": [
+        "Algorithmique",
+        "Architectures matérielles, systèmes d’exploitation et réseaux",
+        "Bases de données",
+        "Histoire de l’informatique",
+        "Langages et programmation",
+        "Structures de données"
+      ],
+      "excluded_from_examination": {
+        "Préambule": "MENE2516123N institue un ecrit et une epreuve pratique sur machine ; elle n'evalue pas la demarche de projet comme telle. Une exclusion fondee sur l'autorite, non sur la commodite."
+      },
+      "PROGRAMME_PARTS_COVERED_BY_WRITTEN_BANK": [
+        "Algorithmique",
+        "Architectures matérielles, systèmes d’exploitation et réseaux",
+        "Bases de données",
+        "Histoire de l’informatique",
+        "Langages et programmation",
+        "Structures de données"
+      ],
+      "PROGRAMME_PARTS_MISSING_FROM_WRITTEN_BANK": [],
       "evidence_objects": [
         "Algorithmique",
         "Architectures matérielles, systèmes d’exploitation et réseaux",
@@ -102,7 +126,7 @@
       ],
       "evidence_count": 6,
       "status": "COMPLETE",
-      "reason": "6 parties du programme touchees sur 7"
+      "reason": "les 6 parties examinables du programme sont toutes representees dans la banque ecrite"
     },
     {
       "requirement_id": "EXAM_ADDS_NO_NOTION_TO_THE_PROGRAMME",

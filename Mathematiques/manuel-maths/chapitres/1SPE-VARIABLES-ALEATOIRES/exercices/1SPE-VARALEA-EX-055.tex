@@ -1,0 +1,34 @@
+% META: {"id":"1SPE-VARALEA-EX-055","chapitre":"1SPE-VARIABLES-ALEATOIRES","type_objet":"exercice","capacites":["1SPE-VARIABLES-ALEATOIRES-C2"],"capacites_codes":["C2"],"methodes":[],"parcours":1,"competences":["calculer","representer"],"duree_min":10,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-055.tex","corrige_tex":"chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-055.tex","status":"generated"}
+% BEGIN-VERIFY
+% # Automatisme : calculer et interpreter des indicateurs statistiques.
+% from math import isclose, sqrt
+% serie = [2]*4 + [3]*7 + [4]*6 + [5]*3
+% assert len(serie) == 20
+% moyenne = sum(serie) / len(serie)
+% assert isclose(moyenne, 3.4, abs_tol=1e-12)
+% # Mediane d'un effectif pair : demi-somme des 10e et 11e valeurs.
+% s = sorted(serie)
+% assert isclose((s[9] + s[10]) / 2, 3.0, abs_tol=1e-12)
+% variance = sum((x - moyenne)**2 for x in serie) / len(serie)
+% assert isclose(variance, 0.94, abs_tol=1e-12)
+% assert isclose(round(sqrt(variance), 2), 0.97, abs_tol=1e-12)
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-055}{1}{10}
+On interroge $20$ foyers sur leur nombre de pièces habitables. Les réponses
+sont résumées ci-dessous.
+\[
+\begin{array}{c|cccc}
+  \text{Nombre de pièces } x_i & 2 & 3 & 4 & 5 \\
+  \hline
+  \text{Effectif } n_i & 4 & 7 & 6 & 3
+\end{array}
+\]
+\begin{enumerate}
+\item Calculer la moyenne et la médiane de cette série statistique.
+\item Calculer la variance puis l'écart type de la série, à $10^{-2}$ près.
+\item On choisit un foyer au hasard et on note $X$ son nombre de pièces.
+  Donner la loi de probabilité de $X$.
+\item Calculer $E(X)$ et $\sigma(X)$. Comparer avec les résultats des questions
+  1 et 2, et expliquer la coïncidence.
+\end{enumerate}
+\end{exercice}

@@ -34,11 +34,20 @@ ROOT = Path(__file__).resolve().parents[1]
 COVERAGE = ROOT / "audit" / "OFFICIAL_TO_MANUAL_COVERAGE.json"
 OUT = ROOT / "audit" / "1SPE_AUTOMATISMS_AUDIT.json"
 
-#: Un automatisme entretenu se retrouve dans plusieurs chapitres. Le seuil
-#: n'est pas une convention arbitraire : le programme exclut explicitement
-#: qu'ils fassent l'objet d'un chapitre specifique, donc un automatisme
-#: cantonne a un seul endroit du manuel n'est pas entretenu.
-CHAPITRES_POUR_ETRE_REPARTI = 3
+#: Ce que le BO exige, et ce que la collection ajoute -- il faut les separer.
+#:
+#: Le programme ecrit qu'un automatisme n'a « pas vocation a faire l'objet d'un
+#: chapitre d'enseignement specifique » et doit etre « entretenu et consolide
+#: au cours de l'annee ». Un automatisme present dans DEUX chapitres ne
+#: contredit donc plus le texte : c'est le seuil officiel, et c'est lui que la
+#: matrice de couverture applique.
+#:
+#: Exiger trois chapitres, avec entrainement et evaluation, est une exigence de
+#: qualite que la collection se donne. Le ministere ne l'ecrit nulle part. Elle
+#: porte donc son nom -- NEXUS_DISTRIBUTED_AUTOMATISM_STANDARD -- pour qu'on ne
+#: la prenne jamais pour une obligation reglementaire.
+SEUIL_OFFICIEL_PAS_DE_CHAPITRE_DEDIE = 2
+NEXUS_DISTRIBUTED_AUTOMATISM_STANDARD = 3
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -82,19 +91,21 @@ def main(argv: list[str] | None = None) -> int:
             motif = (
                 f"travaille dans le seul chapitre {chapitres[0]} : le programme "
                 "exclut qu'un automatisme fasse l'objet d'un chapitre "
-                "specifique"
+                "specifique. C'est le seul cas ou le texte lui-meme est "
+                "contredit."
             )
-        elif len(chapitres) < CHAPITRES_POUR_ETRE_REPARTI:
-            verdict = "DISTRIBUTED_INSUFFICIENTLY"
+        elif len(chapitres) < NEXUS_DISTRIBUTED_AUTOMATISM_STANDARD:
+            verdict = "MEETS_OFFICIAL_MINIMUM_BELOW_NEXUS_STANDARD"
             motif = (
-                f"present dans {len(chapitres)} chapitres seulement, pour un "
-                "entretien qui doit courir sur l'annee"
+                f"present dans {len(chapitres)} chapitres : le programme est "
+                "satisfait, mais la collection vise trois chapitres au moins"
             )
         elif not (pratique or evaluation):
-            verdict = "DISTRIBUTED_INSUFFICIENTLY"
+            verdict = "MEETS_OFFICIAL_MINIMUM_BELOW_NEXUS_STANDARD"
             motif = (
-                "reparti mais jamais mis en pratique ni evalue : un automatisme "
-                "se construit par l'entrainement"
+                f"reparti sur {len(chapitres)} chapitres, donc conforme au "
+                "programme, mais jamais mis en pratique ni evalue : la "
+                "collection attend un entrainement"
             )
         else:
             verdict = "ADEQUATELY_REINVESTED"
@@ -145,8 +156,16 @@ def main(argv: list[str] | None = None) -> int:
                 "ADEQUATELY_REINVESTED", 0
             ),
             "AUTOMATISM_NOT_REINVESTED": sum(
+                1 for x in lignes if x["verdict"] == "PRESENT_BUT_NOT_DISTRIBUTED"
+            ),
+            "NEXUS_DISTRIBUTED_AUTOMATISM_STANDARD": (
+                f"{NEXUS_DISTRIBUTED_AUTOMATISM_STANDARD} chapitres au moins, "
+                "avec entrainement ou evaluation — exigence de la collection, "
+                "pas du programme"
+            ),
+            "AUTOMATISMS_BELOW_NEXUS_STANDARD": sum(
                 1 for x in lignes
-                if x["verdict"] != "ADEQUATELY_REINVESTED"
+                if x["verdict"] == "MEETS_OFFICIAL_MINIMUM_BELOW_NEXUS_STANDARD"
             ),
             "verdict_counts": dict(sorted(compte.items())),
         },

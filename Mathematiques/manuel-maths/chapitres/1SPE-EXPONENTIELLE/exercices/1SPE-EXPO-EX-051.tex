@@ -1,0 +1,29 @@
+% META: {"id":"1SPE-EXPO-EX-051","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C5"],"capacites_codes":["C5"],"methodes":[],"parcours":1,"competences":["calculer","modeliser"],"duree_min":8,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-051.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-051.tex","status":"generated"}
+% BEGIN-VERIFY
+% # Automatisme : taux d'evolution equivalent a plusieurs evolutions successives.
+% from math import isclose, log
+% c1, c2 = 1.08, 0.95
+% cg = c1 * c2
+% assert isclose(cg, 1.026, abs_tol=1e-12)
+% assert isclose((cg - 1) * 100, 2.6, abs_tol=1e-12)
+% # Le taux equivalent n'est pas la somme des taux : 2,6 % et non 3 %.
+% assert (cg - 1) * 100 != 8 - 5
+% # Ecriture exponentielle du coefficient equivalent.
+% k = log(cg)
+% assert isclose(round(k, 4), 0.0257, abs_tol=1e-12)
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-051}{1}{8}
+Le chiffre d'affaires d'une entreprise augmente de $8\,\%$ une année, puis
+diminue de $5\,\%$ l'année suivante.
+\begin{enumerate}
+\item Déterminer le coefficient multiplicateur associé à chacune de ces deux
+  évolutions.
+\item En déduire le coefficient multiplicateur global sur les deux années, puis
+  le taux d'évolution équivalent, en pourcentage.
+\item Un collègue affirme : « $+8\,\%$ puis $-5\,\%$, cela fait $+3\,\%$. »
+  Expliquer pourquoi c'est faux.
+\item On suppose que ce taux équivalent se répète chaque période de deux ans.
+  Écrire le coefficient multiplicateur après $3$ périodes sous la forme
+  $\mathrm{e}^{kt}$, en donnant $k$ à $10^{-4}$ près.
+\end{enumerate}
+\end{exercice}

@@ -113,6 +113,11 @@ class Objet:
     #: pages transversales du manuel en portent seize pour la seule logique,
     #: sans aucun exercice separe.
     has_worked_examples: bool = False
+    #: Prerequis que l'objet remet en place, declares par lui-meme. Le lien
+    #: est structurel : le chercher par les mots du libelle faisait manquer
+    #: une fiche intitulee « Calcul litteral » pour un prerequis nomme
+    #: « Calcul litteral : mise en equation, resolution ».
+    prerequis_testes: tuple[str, ...] = ()
     programme_alignment: str = ""
     extension_label: str = ""
 
@@ -214,6 +219,7 @@ def charger_objets(contrats: dict[str, Contrat]) -> list[Objet]:
                 text_length=len(texte),
                 has_worked_examples=bool(EXEMPLE_TRAVAILLE.search(texte)),
                 linked_correction=meta.get("corrige_tex", "") or "",
+                prerequis_testes=tuple(meta.get("prerequis_testes") or ()),
                 programme_alignment=meta.get("programme_alignment", "") or "",
                 extension_label=meta.get("extension_label", "") or "",
             )
@@ -270,9 +276,13 @@ def charger_transversaux() -> list[Objet]:
 #: de fin de preuve. Ne chercher que la macro faisait passer pour absentes des
 #: demonstrations completes -- celle de 1 + 2 + ... + n par la methode de
 #: Gauss, celle de la somme geometrique par telescopage.
-#: Un exemple travaille : le manuel y montre la capacite a l'oeuvre.
+#: Un exemple travaille : le manuel y montre la capacite a l'oeuvre. Un bloc
+#: de code en est un pour une capacite de programmation -- « Parcourir une
+#: liste » se montre en ecrivant la boucle, pas en la decrivant. Le memo Python
+#: du manuel fonctionne ainsi : vingt-huit blocs, aucun exercice separe.
 EXEMPLE_TRAVAILLE = re.compile(
     r"\\exempleRedige|\\exempleGuide|\\exemple\b|\\contreexemple"
+    r"|\\begin\{verbatim\}|\\begin\{python\}|\\begin\{lstlisting\}"
 )
 
 MACRO_DE_PREUVE = re.compile(r"\\demonstration|\\begin\{demonstration\}|\\preuve")

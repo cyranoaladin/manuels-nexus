@@ -25,26 +25,29 @@ Ne pas editer : chaque valeur est relue dans l'artefact qui la produit.
 | `DIFF_1SPE_REMOVED_2026_MANDATORY` | 12 | `audit/1SPE_PROGRAMME_DIFF_2019_2026.json` :: summary / REMOVED_2026_MANDATORY |
 | `MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY` | 0 | `audit/LIBELLE_BO_AUTHORITY_GATE.json` :: summary / MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY |
 | `LIBELLE_BO_AUTHORITY_GATE` | PASS | `audit/LIBELLE_BO_AUTHORITY_GATE.json` :: summary / LIBELLE_BO_AUTHORITY_GATE |
-| `OFFICIAL_REQUIRED_COMPLETE` | 599 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_COMPLETE |
-| `OFFICIAL_REQUIRED_PARTIAL` | 26 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_PARTIAL |
+| `OFFICIAL_REQUIRED_COMPLETE` | 625 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_COMPLETE |
+| `OFFICIAL_REQUIRED_PARTIAL` | 0 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_PARTIAL |
 | `OFFICIAL_REQUIRED_MISSING` | 0 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_MISSING |
 | `OFFICIAL_REQUIRED_INSTITUTIONAL` | 18 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_INSTITUTIONAL |
 | `OFFICIAL_REQUIRED_UNDECIDABLE_BY_CONTENT_MATCH` | 0 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_UNDECIDABLE_BY_CONTENT_MATCH |
-| `MANUAL_OBJECTS_INDEXED` | 3486 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / objects_indexed |
+| `MANUAL_OBJECTS_INDEXED` | 3492 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / objects_indexed |
 | `NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK` | 4 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK |
 | `NORMATIVITY_CREATED_BY_ATOMIZATION` | 0 | `audit/NORMATIVITY_PROVENANCE_GATE.json` :: summary / NORMATIVITY_CREATED_BY_ATOMIZATION |
 | `MANDATORY_COUNT_BEFORE` | 643 | `audit/NORMATIVITY_PROVENANCE_GATE.json` :: summary / MANDATORY_COUNT_BEFORE |
 | `MANDATORY_COUNT_AFTER` | 643 | `audit/NORMATIVITY_PROVENANCE_GATE.json` :: summary / MANDATORY_COUNT_AFTER |
 | `CHANGED_NORMATIVITY_ITEMS` | 0 | `audit/NORMATIVITY_PROVENANCE_GATE.json` :: summary / CHANGED_NORMATIVITY_ITEMS |
 | `AUTOMATISMS_1SPE_ADEQUATELY_REINVESTED` | 12 | `audit/1SPE_AUTOMATISMS_AUDIT.json` :: summary / AUTOMATISMS_1SPE_ADEQUATELY_REINVESTED |
-| `AUTOMATISM_NOT_REINVESTED` | 5 | `audit/1SPE_AUTOMATISMS_AUDIT.json` :: summary / AUTOMATISM_NOT_REINVESTED |
+| `AUTOMATISM_NOT_REINVESTED` | 0 | `audit/1SPE_AUTOMATISMS_AUDIT.json` :: summary / AUTOMATISM_NOT_REINVESTED |
 | `ADDED_2026_TRULY_MISSING` | 0 | `audit/1SPE_REFORM_TRANSITION_AUDIT.json` :: summary / ADDED_TRULY_MISSING |
 | `REMOVED_2019_CONTENT_STILL_PRESENTED_AS_REQUIRED` | 0 | `audit/1SPE_REFORM_TRANSITION_AUDIT.json` :: summary / REMOVED_2019_CONTENT_STILL_PRESENTED_AS_REQUIRED |
 | `REMOVED_2019_CONTENT_REQUIRING_EDITORIAL_REVIEW` | 5 | `audit/1SPE_REFORM_TRANSITION_AUDIT.json` :: summary / REMOVED_2019_CONTENT_REQUIRING_EDITORIAL_REVIEW |
 | `TNSI_PROGRAMME_MATRIX` | PASS | `audit/TNSI_EXAM_PREPARATION_MATRIX.json` :: summary / TNSI_PROGRAMME_MATRIX |
 | `TNSI_EXAM_PREPARATION_MATRIX` | PASS | `audit/TNSI_EXAM_PREPARATION_MATRIX.json` :: summary / TNSI_EXAM_PREPARATION_MATRIX |
 | `EXAM_ONLY_NOTIONS` | 0 | `audit/TNSI_EXAM_PREPARATION_MATRIX.json` :: summary / EXAM_ONLY_NOTIONS |
-| `PREREQUISITES_ASSUMED_WITHOUT_SUPPORT` | 1 | `audit/1SPE_PREREQUISITE_SUPPORT.json` :: summary / PREREQUISITES_ASSUMED_WITHOUT_SUPPORT |
+| `WRITTEN_BANK_SPANS_THE_PROGRAMME` | PASS | `audit/TNSI_EXAM_PREPARATION_MATRIX.json` :: summary / WRITTEN_BANK_SPANS_THE_PROGRAMME |
+| `PROGRAMME_PARTS_MISSING_FROM_WRITTEN_BANK` | 0 | `audit/TNSI_EXAM_PREPARATION_MATRIX.json` :: summary / PROGRAMME_PARTS_MISSING_FROM_WRITTEN_BANK |
+| `AUTOMATISMS_BELOW_NEXUS_STANDARD` | 5 | `audit/1SPE_AUTOMATISMS_AUDIT.json` :: summary / AUTOMATISMS_BELOW_NEXUS_STANDARD |
+| `PREREQUISITES_ASSUMED_WITHOUT_SUPPORT` | 0 | `audit/1SPE_PREREQUISITE_SUPPORT.json` :: summary / PREREQUISITES_ASSUMED_WITHOUT_SUPPORT |
 | `UNCLASSIFIED_OUT_OF_PROGRAMME_OBJECTS` | 169 | `audit/OBJECTS_TO_OFFICIAL_REVERSE_MAP.json` :: summary / UNCLASSIFIED_OUT_OF_PROGRAMME_OBJECTS |
 | `FUTURE_PROGRAM_CONTAMINATION` | 0 | `audit/OBJECTS_TO_OFFICIAL_REVERSE_MAP.json` :: summary / WRONG_YEAR_OBJECTS |
 | `OBJECTS_CITING_AN_UNKNOWN_CAPACITY` | 0 | `audit/OBJECTS_TO_OFFICIAL_REVERSE_MAP.json` :: summary / OBJECTS_CITING_AN_UNKNOWN_CAPACITY |
@@ -65,6 +68,7 @@ Ne pas editer : chaque valeur est relue dans l'artefact qui la produit.
 - **`NORMATIVITY_CREATED_BY_ATOMIZATION`** — attendus publies comme obligatoires alors que la rubrique du BO dont ils viennent ne l'est pas. C'est le risque propre a toute chaine d'atomisation : personne ne ment, le niveau d'obligation est cree par le traitement.
 - **`AUTOMATISM_NOT_REINVESTED`** — automatismes que le manuel travaille sans les repartir : le programme exclut qu'ils fassent l'objet d'un chapitre specifique et demande qu'ils soient entretenus sur l'annee. Aucun n'est absent du manuel.
 - **`ADDED_2026_TRULY_MISSING`** — attendus ajoutes par la reforme qu'il faudrait ecrire. La dette de contenu ne se deduit pas du differentiel : un attendu ajoute au programme peut etre traite depuis des annees.
+- **`AUTOMATISMS_BELOW_NEXUS_STANDARD`** — exigence de la COLLECTION, pas du programme : le BO demande qu'un automatisme ne fasse pas l'objet d'un chapitre specifique et soit entretenu sur l'annee ; la collection vise trois chapitres au moins, avec entrainement ou evaluation.
 - **`PREREQUISITES_ASSUMED_WITHOUT_SUPPORT`** — prerequis qu'un chapitre declare mobiliser sans que rien, dans ce chapitre, ne permette a l'eleve de constater le manque ni d'y remedier. Le programme demande que les automatismes de seconde soient entretenus en premiere.
 - **`UNCLASSIFIED_OUT_OF_PROGRAMME_OBJECTS`** — objets sans attendu ET sans statut : ni prerequis, ni enrichissement assume, ni entrainement a l'epreuve. Un manuel a le droit de depasser le programme ; il n'a pas le droit de le faire sans le dire.
 - **`FUTURE_PROGRAM_CONTAMINATION`** — objets du manuel qui reprennent un attendu d'un programme ne regissant pas cette edition, sur des notions absentes du programme en vigueur.

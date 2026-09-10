@@ -169,7 +169,7 @@
       ]
     },
     "OFFICIAL_REQUIRED_COMPLETE": {
-      "value": 599,
+      "value": 625,
       "artifact": "audit/OFFICIAL_TO_MANUAL_COVERAGE.json",
       "pointer": [
         "summary",
@@ -177,7 +177,7 @@
       ]
     },
     "OFFICIAL_REQUIRED_PARTIAL": {
-      "value": 26,
+      "value": 0,
       "artifact": "audit/OFFICIAL_TO_MANUAL_COVERAGE.json",
       "pointer": [
         "summary",
@@ -212,7 +212,7 @@
       "reading": "attendus dont le libelle officiel ne porte aucun mot distinctif exploitable : la recherche par contenu ne peut ni conclure a la presence ni conclure a l'absence."
     },
     "MANUAL_OBJECTS_INDEXED": {
-      "value": 3486,
+      "value": 3492,
       "artifact": "audit/OFFICIAL_TO_MANUAL_COVERAGE.json",
       "pointer": [
         "summary",
@@ -270,7 +270,7 @@
       ]
     },
     "AUTOMATISM_NOT_REINVESTED": {
-      "value": 5,
+      "value": 0,
       "artifact": "audit/1SPE_AUTOMATISMS_AUDIT.json",
       "pointer": [
         "summary",
@@ -327,8 +327,33 @@
         "EXAM_ONLY_NOTIONS"
       ]
     },
+    "WRITTEN_BANK_SPANS_THE_PROGRAMME": {
+      "value": "PASS",
+      "artifact": "audit/TNSI_EXAM_PREPARATION_MATRIX.json",
+      "pointer": [
+        "summary",
+        "WRITTEN_BANK_SPANS_THE_PROGRAMME"
+      ]
+    },
+    "PROGRAMME_PARTS_MISSING_FROM_WRITTEN_BANK": {
+      "value": 0,
+      "artifact": "audit/TNSI_EXAM_PREPARATION_MATRIX.json",
+      "pointer": [
+        "summary",
+        "PROGRAMME_PARTS_MISSING_FROM_WRITTEN_BANK"
+      ]
+    },
+    "AUTOMATISMS_BELOW_NEXUS_STANDARD": {
+      "value": 5,
+      "artifact": "audit/1SPE_AUTOMATISMS_AUDIT.json",
+      "pointer": [
+        "summary",
+        "AUTOMATISMS_BELOW_NEXUS_STANDARD"
+      ],
+      "reading": "exigence de la COLLECTION, pas du programme : le BO demande qu'un automatisme ne fasse pas l'objet d'un chapitre specifique et soit entretenu sur l'annee ; la collection vise trois chapitres au moins, avec entrainement ou evaluation."
+    },
     "PREREQUISITES_ASSUMED_WITHOUT_SUPPORT": {
-      "value": 1,
+      "value": 0,
       "artifact": "audit/1SPE_PREREQUISITE_SUPPORT.json",
       "pointer": [
         "summary",

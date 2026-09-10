@@ -63,9 +63,15 @@ INDEX = ROOT / "audit" / "OFFICIAL_PROGRAMME_INVENTORY.json"
 BINDING = ROOT / "audit" / "OFFICIAL_PROGRAMME_BINDING.json"
 OUT = ROOT / "audit" / "OFFICIAL_TO_MANUAL_COVERAGE.json"
 
-#: Un automatisme se travaille sur l'annee : le BO ecrit qu'il n'a « pas
-#: vocation a faire l'objet d'un chapitre d'enseignement specifique ». Le
-#: trouver dans un seul chapitre ne suffit donc pas a le dire entretenu.
+#: Ce que le BO exige d'un automatisme : qu'il ne fasse pas « l'objet d'un
+#: chapitre d'enseignement specifique » et soit « entretenu et consolide au
+#: cours de l'annee ». Le trouver dans un seul chapitre contredit donc le
+#: texte ; le trouver dans deux ne le contredit plus.
+#:
+#: Exiger davantage -- trois chapitres, de l'entrainement, de l'evaluation --
+#: releve de la qualite que la collection se donne, pas de ce que le ministere
+#: ecrit. Ce seuil-la porte son nom et se mesure ailleurs :
+#: NEXUS_DISTRIBUTED_AUTOMATISM_STANDARD, dans l'audit des automatismes.
 CHAPITRES_MINIMAUX_POUR_UN_AUTOMATISME = 2
 #: Rapprochement par contenu : part des mots distinctifs qu'un objet doit
 #: contenir, et nombre minimal exige. Le plafond compte autant que la part :
@@ -164,6 +170,209 @@ REVUES_CONTRADICTOIRES: tuple[dict[str, Any], ...] = (
             "redigee -- pi/4 par le complementaire et l'identite fondamentale, "
             "pi/3 par le triangle equilateral, pi/6 par deduction -- et "
             "verifiee exactement en sympy."
+        ),
+    },
+    {
+        "manual": "1SPE",
+        "wording_prefix": "Équation de la tangente en un point",
+        "verdict": "FALSE_PARTIAL_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": ("1SPE-DERIVATION-LOCAL-CR-013",),
+        "cause": (
+            "la demonstration est redigee dans le chapitre voisin, celui de la "
+            "derivation locale, que la recherche n'a pas atteint"
+        ),
+        "reading": (
+            "Le cours sur l'equation de la tangente redige la demonstration "
+            "complete : caracterisation d'une droite de pente m passant par A, "
+            "identification de m a f'(a), et reciproque."
+        ),
+    },
+    {
+        "manual": "1SPE",
+        "wording_prefix": "La fonction racine carrée n’est pas dérivable",
+        "verdict": "FALSE_PARTIAL_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": ("1SPE-DERGLOBAL-COURS-C1",),
+        "cause": (
+            "la demonstration est redigee dans un bloc de contre-exemple, que "
+            "le detecteur de preuve ne reconnaissait pas"
+        ),
+        "reading": (
+            "Le cours calcule le taux de variation entre 0 et h, montre qu'il "
+            "vaut 1/racine(h) et depasse toute borne quand h tend vers 0 : il "
+            "n'existe donc pas de nombre derive en 0. La demi-tangente "
+            "verticale est mentionnee."
+        ),
+    },
+    {
+        "manual": "TCOMPL",
+        "wording_prefix": "Équation différentielle y’ = a y + b",
+        "verdict": "FALSE_PARTIAL_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": ("TCOMPL-ME-CR-012",),
+        "cause": "le cours est dans le theme des modeles d'evolution",
+        "reading": (
+            "`12_C3_equation_differentielle.tex` traite l'equation y' = ay + b "
+            "et sa resolution."
+        ),
+    },
+    {
+        "manual": "TCOMPL",
+        "wording_prefix": "Étude de fonction.",
+        "verdict": "FALSE_PARTIAL_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": ("TCOMPL-MF-CR-010",),
+        "cause": (
+            "contenu associe a un theme d'etude, enseigne dans le theme voisin "
+            "des modeles definis par une fonction"
+        ),
+        "reading": "`10_C1_etude_fonction.tex` est le cours d'etude de fonction.",
+    },
+    {
+        "manual": "TCOMPL",
+        "wording_prefix": "Fonctions de référence.",
+        "verdict": "FALSE_PARTIAL_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": ("TCOMPL-MF-CR-010",),
+        "cause": "meme cause : contenu associe enseigne dans un autre theme",
+        "reading": (
+            "Le cours d'etude de fonction traite les fonctions de reference et "
+            "leurs variations."
+        ),
+    },
+    {
+        "manual": "TCOMPL",
+        "wording_prefix": "Représentations graphiques.",
+        "verdict": "FALSE_PARTIAL_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": ("TCOMPL-MF-CR-010",),
+        "cause": "meme cause",
+        "reading": (
+            "Le cours d'etude de fonction construit et exploite les "
+            "representations graphiques."
+        ),
+    },
+    {
+        "manual": "TCOMPL",
+        "wording_prefix": "Minimum d’une fonction trinôme.",
+        "verdict": "FALSE_PARTIAL_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": ("TCOMPL-MF-CR-010",),
+        "cause": "meme cause",
+        "reading": (
+            "Le cours d'etude de fonction traite la recherche d'un minimum, "
+            "trinome compris."
+        ),
+    },
+    {
+        "manual": "TCOMPL",
+        "wording_prefix": "Présentation de l’intégrale des fonctions continues",
+        "verdict": "FALSE_PARTIAL_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": ("TCOMPL-AIR-CR-012",),
+        "cause": "le cours de calcul integral n'a pas ete atteint par la recherche",
+        "reading": (
+            "`12_C3_calcul_integral.tex` presente l'integrale, y compris pour "
+            "des fonctions de signe quelconque."
+        ),
+    },
+    {
+        "manual": "TCOMPL",
+        "wording_prefix": "Interpréter une intégrale, une valeur moyenne",
+        "verdict": "FALSE_PARTIAL_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": ("TCOMPL-AIR-CR-012",),
+        "cause": "meme cause",
+        "reading": (
+            "Le meme cours traite la valeur moyenne et son interpretation."
+        ),
+    },
+    {
+        "manual": "TEXPERTES",
+        "wording_prefix": "Forme trigonométrique.",
+        "verdict": "FALSE_PARTIAL_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": ("TEXP-CTP-CR-010",),
+        "cause": (
+            "le cours s'intitule « forme exponentielle » et traite la forme "
+            "trigonometrique dont elle derive"
+        ),
+        "reading": (
+            "`10_C1_forme_exponentielle.tex` introduit module et argument, la "
+            "forme trigonometrique, puis la notation exponentielle."
+        ),
+    },
+    {
+        "manual": "TSPE",
+        "wording_prefix": "Primitives des fonctions de référence",
+        "verdict": "FALSE_PARTIAL_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": ("TSPE-PRIMEQ-CR-011",),
+        "cause": "le cours dedie n'a pas ete atteint par la recherche",
+        "reading": (
+            "`11_C1_calcul_primitives.tex` donne les primitives des fonctions "
+            "de reference et leur calcul."
+        ),
+    },
+    {
+        "manual": "TSPE",
+        "wording_prefix": "Appliquer l’inégalité de Bienaymé-Tchebychev",
+        "verdict": "FALSE_PARTIAL_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": ("TSPE-PROBA-CR-016",),
+        "cause": "le cours dedie n'etait pas rattache a cet attendu",
+        "reading": (
+            "`16_CONCLGN_bienayme_tchebychev.tex` enonce et applique "
+            "l'inegalite."
+        ),
+    },
+    {
+        "manual": "1NSI",
+        "wording_prefix": "Interaction avec l’utilisateur dans une page Web",
+        "verdict": "FALSE_PARTIAL_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": ("1NSI-WEB-COURS-C3",),
+        "cause": (
+            "le cours du chapitre Web et IHM porte les capacites de la ligne "
+            "officielle sans que son intitule reprenne les termes du contenu"
+        ),
+        "reading": (
+            "`1NSI-WEB-COURS-C3` traite l'interaction avec l'utilisateur : "
+            "evenements, formulaires, requetes."
+        ),
+    },
+    {
+        "manual": "1SPE",
+        "wording_prefix": "Transformation de l’expression",
+        "verdict": "FALSE_PARTIAL_TOOLING",
+        "status": "COMPLETE",
+        "evidence_objects": ("1SPE-PRODSCAL-COURS-C4",),
+        "cause": (
+            "le libelle officiel est illisible apres extraction du PDF -- les "
+            "fleches vectorielles y ont disloque les noms de points"
+        ),
+        "reading": (
+            "Le cours d'applications du produit scalaire etablit la "
+            "transformation de MA.MB en MI^2 - AB^2/4 et s'en sert pour "
+            "caracteriser le cercle de diametre [AB]."
+        ),
+    },
+    {
+        "manual": "TSPE",
+        "wording_prefix": "Développement de u",
+        "verdict": "TRUE_CONTENT_GAP",
+        "status": "COMPLETE",
+        "evidence_objects": ("TSPE-GEOESPACE-CR-012",),
+        "cause": (
+            "le cours de produit scalaire dans l'espace s'arretait a la "
+            "longueur d'un vecteur : ni le developpement de la norme d'une "
+            "somme, ni les formules de polarisation n'y figuraient"
+        ),
+        "reading": (
+            "Le developpement de ||u+v||^2 et ||u-v||^2, leur demonstration par "
+            "bilinearite et symetrie, les deux formules de polarisation avec "
+            "leur demonstration et un exemple numerique ont ete rediges."
         ),
     },
     {
@@ -280,8 +489,10 @@ def verdict(
     exemples_travailles: bool = False,
     travail_algorithmique_de_la_partie: bool = False,
     exemple_impose: bool = True,
+    chapitres_d_enseignement: set[str] | None = None,
 ) -> tuple[str, str]:
     """Verdict et motif, selon ce que la nature de l'attendu exige reellement."""
+    chapitres_d_enseignement = chapitres_d_enseignement or set()
     enseigne = roles.get("PRIMARY_TEACHING", 0) > 0
     appuye = roles.get("SUPPORTING_EVIDENCE", 0) > 0
     pratique = roles.get("REINVESTMENT", 0) > 0
@@ -362,15 +573,18 @@ def verdict(
         )
 
     if normativity == REQUIRED_AUTOMATISM:
-        if len(chapitres_de_reinvestissement) >= CHAPITRES_MINIMAUX_POUR_UN_AUTOMATISME:
+        chapitres = chapitres_de_reinvestissement | chapitres_d_enseignement
+        if len(chapitres) >= CHAPITRES_MINIMAUX_POUR_UN_AUTOMATISME:
             return (
                 "COMPLETE",
-                f"entretenu dans {len(chapitres_de_reinvestissement)} chapitres",
+                f"travaille dans {len(chapitres)} chapitres : le programme "
+                "exclut qu'un automatisme fasse l'objet d'un chapitre "
+                "specifique, cette condition est remplie",
             )
         return (
             "PARTIAL",
-            "present mais concentre : le programme demande un entretien "
-            "reparti sur l'annee, pas une lecon isolee",
+            "concentre dans un seul chapitre, ce que le programme exclut "
+            "explicitement pour un automatisme",
         )
 
     if normativity == REQUIRED_CONTENT:
@@ -637,9 +851,9 @@ def main(argv: list[str] | None = None) -> int:
             # Le verdict rendu a la lecture remplace celui du rapprochement,
             # et cite les objets qui le fondent.
             for identifiant in revue["evidence_objects"]:
-                objet = par_identifiant.get(identifiant)
-                if objet is not None:
-                    servants[objet.object_id] = objet
+                cite = par_identifiant.get(identifiant)
+                if cite is not None:
+                    servants[cite.object_id] = cite
             preuve = "CONTRADICTORY_REVIEW"
 
         roles: Counter[str] = Counter(o.role for o in servants.values())
@@ -671,6 +885,10 @@ def main(argv: list[str] | None = None) -> int:
                 exemples_travailles=any(
                     o.has_worked_examples for o in servants.values()
                 ),
+                chapitres_d_enseignement={
+                    o.chapter for o in servants.values()
+                    if o.role == "PRIMARY_TEACHING"
+                },
                 travail_algorithmique_de_la_partie=algorithmique_par_partie.get(
                     (
                         manuel,

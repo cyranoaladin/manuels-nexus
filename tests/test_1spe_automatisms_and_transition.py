@@ -20,10 +20,13 @@ ROOT = Path(__file__).resolve().parents[1]
 AUTOMATISMES = ROOT / "audit" / "1SPE_AUTOMATISMS_AUDIT.json"
 TRANSITION = ROOT / "audit" / "1SPE_REFORM_TRANSITION_AUDIT.json"
 
+#: Le seul verdict qui contredise le PROGRAMME est celui d'un automatisme
+#: cantonne a un chapitre. Les autres ecarts relevent du standard que la
+#: collection se donne, et portent un nom qui le dit.
 VERDICTS = {
     "ABSENT",
     "PRESENT_BUT_NOT_DISTRIBUTED",
-    "DISTRIBUTED_INSUFFICIENTLY",
+    "MEETS_OFFICIAL_MINIMUM_BELOW_NEXUS_STANDARD",
     "ADEQUATELY_REINVESTED",
 }
 
@@ -74,6 +77,22 @@ def test_un_automatisme_concentre_dans_un_chapitre_n_est_pas_entretenu(automatis
         if ligne["verdict"] == "ADEQUATELY_REINVESTED":
             assert len(ligne["chapters_distribution"]) >= 3
             assert ligne["PRACTICE_EVIDENCE"] or ligne["ASSESSMENT_EVIDENCE"]
+
+
+def test_le_seuil_de_trois_chapitres_est_nomme_comme_exigence_maison(automatismes):
+    """Le BO ne dit nulle part « au moins trois chapitres ».
+
+    Il dit qu'un automatisme ne doit pas faire l'objet d'un chapitre
+    specifique et doit etre entretenu sur l'annee. Presenter le seuil de la
+    collection comme une obligation ministerielle ferait passer une exigence
+    maison pour du droit.
+    """
+    resume = automatismes["summary"]
+    assert "collection" in resume["NEXUS_DISTRIBUTED_AUTOMATISM_STANDARD"]
+    assert "pas du programme" in resume["NEXUS_DISTRIBUTED_AUTOMATISM_STANDARD"]
+    # Ce que le programme exige est tenu : aucun automatisme n'est cantonne.
+    assert resume["AUTOMATISM_NOT_REINVESTED"] == 0
+    assert resume["AUTOMATISMS_1SPE_PRESENT"] == resume["AUTOMATISMS_1SPE_OFFICIAL"]
 
 
 def test_la_dette_de_contenu_ne_se_deduit_pas_du_differentiel(transition):

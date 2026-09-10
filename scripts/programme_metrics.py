@@ -190,6 +190,21 @@ SOURCES: tuple[tuple[str, str, tuple[str, ...]], ...] = (
     ),
     ("EXAM_ONLY_NOTIONS", TNSI, ("summary", "EXAM_ONLY_NOTIONS")),
     (
+        "WRITTEN_BANK_SPANS_THE_PROGRAMME",
+        TNSI,
+        ("summary", "WRITTEN_BANK_SPANS_THE_PROGRAMME"),
+    ),
+    (
+        "PROGRAMME_PARTS_MISSING_FROM_WRITTEN_BANK",
+        TNSI,
+        ("summary", "PROGRAMME_PARTS_MISSING_FROM_WRITTEN_BANK"),
+    ),
+    (
+        "AUTOMATISMS_BELOW_NEXUS_STANDARD",
+        AUTOMATISMS,
+        ("summary", "AUTOMATISMS_BELOW_NEXUS_STANDARD"),
+    ),
+    (
         "PREREQUISITES_ASSUMED_WITHOUT_SUPPORT",
         PREREQUIS,
         ("summary", "PREREQUISITES_ASSUMED_WITHOUT_SUPPORT"),

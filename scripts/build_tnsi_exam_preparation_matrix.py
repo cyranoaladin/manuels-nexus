@@ -84,13 +84,26 @@ def main(argv: list[str] | None = None) -> int:
     parties_ecrites = sorted(
         {p for o in ecrits for a in o.atoms for p in par_atome.get(a, ())}
     )
+    # Une partie est examinable a l'ecrit si elle porte un attendu obligatoire
+    # ET releve du programme lui-meme. Le preambule en est exclu sur la foi de
+    # la definition d'epreuve : MENE2516123N institue un ecrit et une epreuve
+    # pratique sur machine, et n'evalue pas la demarche de projet comme telle.
+    # Reprocher a la banque ecrite de ne pas l'entrainer serait lui demander de
+    # preparer a une epreuve qui n'existe pas.
     parties_programme = sorted(
         {
             ligne["official_subsection"] or ligne["official_section"] or ""
             for ligne in couverture["rows"]
-            if ligne["manual"] == "TNSI" and ligne["mandatory"]
+            if ligne["manual"] == "TNSI"
+            and ligne["mandatory"]
+            and ligne["official_section"] != "Préambule"
         }
     )
+
+    # Une partie du programme est examinable des lors qu'elle porte un attendu
+    # obligatoire. Le seuil precedent -- la moitie des parties -- laissait
+    # passer pour complet un entrainement qui ignorait une rubrique entiere.
+    parties_absentes = [p for p in parties_programme if p not in parties_ecrites]
 
     exigences: list[dict[str, Any]] = [
         {
@@ -152,19 +165,31 @@ def main(argv: list[str] | None = None) -> int:
             "requirement_id": "WRITTEN_BANK_SPANS_THE_PROGRAMME",
             "from_authority": epreuve["NOR"],
             "official_basis": (
-                "l'epreuve ecrite porte sur le programme : une banque "
-                "concentree sur quelques rubriques n'y prepare pas"
+                "l'epreuve ecrite porte sur le programme. Ce n'est pas a "
+                "chaque sujet de tout couvrir : c'est la banque CUMULEE qui "
+                "doit etre representative. Une partie du programme absente de "
+                "toute la banque n'est jamais entrainee a l'ecrit."
             ),
+            "PROGRAMME_PARTS_EXAMINABLE": parties_programme,
+            "excluded_from_examination": {
+                "Préambule": (
+                    "MENE2516123N institue un ecrit et une epreuve pratique sur "
+                    "machine ; elle n'evalue pas la demarche de projet comme "
+                    "telle. Une exclusion fondee sur l'autorite, non sur la "
+                    "commodite."
+                )
+            },
+            "PROGRAMME_PARTS_COVERED_BY_WRITTEN_BANK": parties_ecrites,
+            "PROGRAMME_PARTS_MISSING_FROM_WRITTEN_BANK": parties_absentes,
             "evidence_objects": parties_ecrites,
             "evidence_count": len(parties_ecrites),
-            "status": (
-                "COMPLETE"
-                if len(parties_ecrites) >= max(1, len(parties_programme) // 2)
-                else "PARTIAL"
-            ),
+            "status": "COMPLETE" if not parties_absentes else "PARTIAL",
             "reason": (
-                f"{len(parties_ecrites)} parties du programme touchees sur "
-                f"{len(parties_programme)}"
+                f"les {len(parties_programme)} parties examinables du programme "
+                "sont toutes representees dans la banque ecrite"
+                if not parties_absentes
+                else "parties du programme absentes de toute la banque ecrite : "
+                + ", ".join(f"« {p} »" for p in parties_absentes)
             ),
         },
         {
@@ -218,6 +243,12 @@ def main(argv: list[str] | None = None) -> int:
                 1 for e in exigences if e["status"] == "COMPLETE"
             ),
             "EXAM_ONLY_NOTIONS": len(orphelins),
+            "PROGRAMME_PARTS_EXAMINABLE": len(parties_programme),
+            "PROGRAMME_PARTS_COVERED_BY_WRITTEN_BANK": len(parties_ecrites),
+            "PROGRAMME_PARTS_MISSING_FROM_WRITTEN_BANK": len(parties_absentes),
+            "WRITTEN_BANK_SPANS_THE_PROGRAMME": (
+                "PASS" if not parties_absentes else "FAIL"
+            ),
         },
         "programme_mandatory_missing": [
             {

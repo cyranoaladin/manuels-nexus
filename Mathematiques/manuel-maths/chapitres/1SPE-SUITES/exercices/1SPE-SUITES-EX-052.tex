@@ -1,0 +1,26 @@
+% META: {"id":"1SPE-SUITES-EX-052","chapitre":"1SPE-SUITES","type_objet":"exercice","capacites":["1SPE-SUITES-C3"],"capacites_codes":["C3"],"methodes":[],"parcours":1,"competences":["calculer","raisonner"],"duree_min":6,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-052.tex","corrige_tex":"chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-052.tex","status":"generated"}
+% BEGIN-VERIFY
+% # Automatisme : taux d'evolution reciproque.
+% from math import isclose
+% c = 1.25
+% creciproque = 1 / c
+% assert isclose(creciproque, 0.8, abs_tol=1e-12)
+% assert isclose((creciproque - 1) * 100, -20.0, abs_tol=1e-12)
+% # La baisse reciproque n'est pas l'oppose du taux de hausse.
+% assert (creciproque - 1) * 100 != -25.0
+% # Retour effectif a la valeur initiale.
+% assert isclose(200 * c * creciproque, 200, abs_tol=1e-12)
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-052}{1}{6}
+Le prix d'un article passe de $200$ euros à $250$ euros.
+\begin{enumerate}
+\item Calculer le taux d'évolution, en pourcentage.
+\item Quel taux d'évolution ramènerait le prix de $250$ euros à $200$ euros ?
+  On donnera le coefficient multiplicateur, puis le taux en pourcentage.
+\item Un client affirme : « Une hausse de $25\,\%$ s'annule par une baisse de
+  $25\,\%$. » Justifier que c'est faux, en calculant le prix obtenu.
+\item Soit $(u_n)$ la suite géométrique de premier terme $u_0 = 200$ et de
+  raison $1{,}25$. Exprimer, à l'aide d'une suite géométrique, le prix obtenu
+  après $n$ hausses suivies de $n$ baisses réciproques.
+\end{enumerate}
+\end{exercice}

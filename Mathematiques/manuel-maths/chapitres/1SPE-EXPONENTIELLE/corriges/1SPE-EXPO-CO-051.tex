@@ -1,0 +1,41 @@
+% META: {"id":"1SPE-EXPO-CO-051","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-051","status":"generated"}
+% BEGIN-VERIFY
+% from math import log, isclose
+% c1, c2 = 1.08, 0.95
+% cg = c1 * c2
+% assert isclose(cg, 1.026, rel_tol=0, abs_tol=1e-12)
+% taux = (cg - 1) * 100
+% assert isclose(taux, 2.6, abs_tol=1e-12)
+% assert taux != 3.0            # +8 % puis -5 % ne font pas +3 %
+% k = log(cg)
+% assert isclose(round(k, 4), 0.0257, abs_tol=1e-12)
+% assert isclose(cg**3, 2.718281828459045**(3*k), rel_tol=1e-12)
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-051}
+\begin{enumerate}
+\item Une hausse de $8\,\%$ correspond au coefficient $1 + \dfrac{8}{100} = 1{,}08$ ;
+  une baisse de $5\,\%$ au coefficient $1 - \dfrac{5}{100} = 0{,}95$.
+
+\item Les évolutions successives se composent en \textbf{multipliant} les
+  coefficients :
+  \[
+    1{,}08 \times 0{,}95 = 1{,}026.
+  \]
+  Le taux d'évolution équivalent est donc $1{,}026 - 1 = 0{,}026$, soit
+  $+2{,}6\,\%$.
+
+\item Les taux d'évolution ne s'additionnent pas : la baisse de $5\,\%$ porte
+  sur une valeur déjà augmentée, donc plus grande. Elle retire davantage que
+  $5\,\%$ de la valeur initiale, et le gain net ($+2{,}6\,\%$) est inférieur à
+  la somme naïve $8 - 5 = 3$.
+
+\item Après $3$ périodes, le coefficient vaut $1{,}026^3$. En posant
+  $k = \ln(1{,}026) \approx 0{,}0257$, on a $1{,}026 = \mathrm{e}^{k}$, donc
+  \[
+    1{,}026^3 = \mathrm{e}^{3k} \approx \mathrm{e}^{0{,}0771}.
+  \]
+  Le coefficient après $t$ périodes s'écrit $\mathrm{e}^{kt}$ avec
+  $k \approx 0{,}0257$ : une évolution à taux constant est bien une croissance
+  exponentielle.
+\end{enumerate}
+\end{corrige}

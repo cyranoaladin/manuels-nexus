@@ -58,9 +58,21 @@ def main(argv: list[str] | None = None) -> int:
             libelle = prerequis.get("libelle", "")
             termes = termes_distinctifs(libelle)
             exigence = min(len(termes), TERMES_REQUIS) if termes else 0
-            reprises: list[str] = []
+            code = prerequis.get("code")
+            # Lien declare : l'objet nomme le prerequis qu'il remet en place.
+            # C'est une preuve structurelle, bien meilleure qu'un rapprochement
+            # de mots -- une fiche intitulee « Calcul litteral » repond a un
+            # prerequis nomme « Calcul litteral : mise en equation, resolution »
+            # sans en reprendre les termes.
+            declarees = [
+                o.object_id for o in objets_du_chapitre
+                if code and code in o.prerequis_testes
+            ]
+            reprises: list[str] = list(declarees)
             diagnostics: list[str] = []
             for objet in objets_du_chapitre:
+                if objet.object_id in declarees:
+                    continue
                 if objet.role not in ("REMEDIATION", "ASSESSMENT"):
                     continue
                 texte = textes.get(objet.path)
@@ -73,7 +85,19 @@ def main(argv: list[str] | None = None) -> int:
                     (
                         diagnostics if objet.role == "ASSESSMENT" else reprises
                     ).append(objet.object_id)
-            if reprises and diagnostics:
+            if declarees and diagnostics:
+                statut = "DIAGNOSED_AND_REMEDIATED"
+                motif = (
+                    "une fiche declare remettre ce prerequis en place, et un "
+                    "diagnostic en revele le manque"
+                )
+            elif declarees:
+                statut = "REMEDIATED_ONLY"
+                motif = (
+                    "une fiche declare remettre ce prerequis en place ; rien "
+                    "ne signale le manque a l'eleve en amont"
+                )
+            elif reprises and diagnostics:
                 statut = "DIAGNOSED_AND_REMEDIATED"
                 motif = "un diagnostic le revele, une reprise y repond"
             elif reprises:
@@ -90,6 +114,7 @@ def main(argv: list[str] | None = None) -> int:
                 )
             lignes.append({
                 "chapter": chapitre,
+                "declared_by_object": declarees,
                 "prerequisite_code": prerequis.get("code"),
                 "prerequisite_label": libelle,
                 "origin": prerequis.get("chapitre_origine"),

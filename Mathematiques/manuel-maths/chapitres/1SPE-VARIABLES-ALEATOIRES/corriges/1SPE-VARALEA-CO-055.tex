@@ -1,0 +1,63 @@
+% META: {"id":"1SPE-VARALEA-CO-055","chapitre":"1SPE-VARIABLES-ALEATOIRES","type_objet":"corrige","exercice_id":"1SPE-VARALEA-EX-055","status":"generated"}
+% BEGIN-VERIFY
+% from fractions import Fraction as F
+% from math import isclose, sqrt
+% valeurs, effectifs = [2, 3, 4, 5], [4, 7, 6, 3]
+% N = sum(effectifs)
+% assert N == 20
+% moyenne = sum(v * n for v, n in zip(valeurs, effectifs)) / N
+% assert isclose(moyenne, 3.4, abs_tol=1e-12)
+% loi = [F(n, N) for n in effectifs]
+% assert sum(loi) == 1
+% assert loi == [F(1, 5), F(7, 20), F(3, 10), F(3, 20)]
+% esperance = sum(v * p for v, p in zip(valeurs, loi))
+% assert esperance == F(17, 5) == F(68, 20)
+% assert isclose(float(esperance), moyenne, abs_tol=1e-12)
+% variance = sum(p * (v - esperance)**2 for v, p in zip(valeurs, loi))
+% assert isclose(float(variance), 0.94, abs_tol=1e-12)
+% assert isclose(round(sqrt(float(variance)), 2), 0.97, abs_tol=1e-12)
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-055}
+\begin{enumerate}
+\item La moyenne vaut
+  \[
+    \bar{x} = \frac{2\times4 + 3\times7 + 4\times6 + 5\times3}{20}
+    = \frac{8 + 21 + 24 + 15}{20} = \frac{68}{20} = 3{,}4.
+  \]
+  L'effectif est pair : la médiane est la demi-somme des $10^{\text{e}}$ et
+  $11^{\text{e}}$ valeurs rangées dans l'ordre croissant. Les quatre premières
+  valent $2$, les sept suivantes $3$ : ces deux valeurs valent $3$, donc
+  $\mathrm{Me} = 3$.
+
+\item La variance vaut
+  \[
+    V = \frac{4(2-3{,}4)^2 + 7(3-3{,}4)^2 + 6(4-3{,}4)^2 + 3(5-3{,}4)^2}{20}
+    = 0{,}94,
+  \]
+  d'où l'écart type $\sigma = \sqrt{0{,}94} \approx 0{,}97$.
+
+\item Chaque foyer a la même probabilité d'être choisi, donc
+  $P(X = x_i) = \dfrac{n_i}{20}$ :
+  \[
+  \begin{array}{c|cccc}
+    x_i & 2 & 3 & 4 & 5 \\
+    \hline
+    P(X = x_i) & \frac{4}{20} & \frac{7}{20} & \frac{6}{20} & \frac{3}{20}
+  \end{array}
+  \]
+  La somme des probabilités vaut bien $1$.
+
+\item On obtient
+  \[
+    E(X) = 2\times\tfrac{4}{20} + 3\times\tfrac{7}{20} + 4\times\tfrac{6}{20}
+    + 5\times\tfrac{3}{20} = \tfrac{68}{20} = 3{,}4,
+    \qquad \sigma(X) \approx 0{,}97.
+  \]
+  Ce ne sont pas des coïncidences. Tirer un foyer au hasard avec équiprobabilité
+  fait de $P(X = x_i)$ la \textbf{fréquence} $\frac{n_i}{N}$ de la valeur $x_i$
+  dans la série. L'espérance est alors la moyenne pondérée par ces fréquences,
+  c'est-à-dire la moyenne de la série ; le même argument vaut pour la variance
+  et l'écart type. Les indicateurs statistiques d'une série et ceux de la
+  variable aléatoire associée sont les mêmes nombres, lus dans deux langages.
+\end{enumerate}
+\end{corrige}

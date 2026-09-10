@@ -7,16 +7,18 @@
   "summary": {
     "PREREQUISITES_DECLARED": 46,
     "PREREQUISITES_DIAGNOSED_AND_REMEDIATED": 29,
-    "PREREQUISITES_ASSUMED_WITHOUT_SUPPORT": 1,
+    "PREREQUISITES_ASSUMED_WITHOUT_SUPPORT": 0,
     "status_counts": {
-      "ASSUMED_WITHOUT_SUPPORT": 1,
       "DIAGNOSED_AND_REMEDIATED": 29,
-      "REMEDIATED_ONLY": 16
+      "REMEDIATED_ONLY": 17
     }
   },
   "prerequisites": [
     {
       "chapter": "1SPE-DERIVATION-GLOBAL",
+      "declared_by_object": [
+        "1SPE-DERIVATION-GLOBAL-FR-R1"
+      ],
       "prerequisite_code": "R1",
       "prerequisite_label": "Taux de variation et nombre dérivé",
       "origin": "1SPE-DERIVATION-LOCAL",
@@ -30,10 +32,13 @@
         "1SPE-DERIVATION-GLOBAL-RE-C3"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-DERIVATION-GLOBAL",
+      "declared_by_object": [
+        "1SPE-DERIVATION-GLOBAL-FR-R2"
+      ],
       "prerequisite_code": "R2",
       "prerequisite_label": "Équation de la tangente",
       "origin": "1SPE-DERIVATION-LOCAL",
@@ -48,10 +53,13 @@
         "1SPE-DERIVATION-GLOBAL-FR-R2"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-DERIVATION-GLOBAL",
+      "declared_by_object": [
+        "1SPE-DERIVATION-GLOBAL-FR-R3"
+      ],
       "prerequisite_code": "R3",
       "prerequisite_label": "Calcul littéral (développer, factoriser, signe d'un produit/quotient)",
       "origin": "2GT",
@@ -69,10 +77,13 @@
         "1SPE-DERIVATION-GLOBAL-RE-C4"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-DERIVATION-GLOBAL",
+      "declared_by_object": [
+        "1SPE-DERIVATION-GLOBAL-FR-R4"
+      ],
       "prerequisite_code": "R4",
       "prerequisite_label": "Fonctions polynômes du second degré (racines, signe, tableau de signes)",
       "origin": "1SPE-SECOND-DEGRE",
@@ -89,10 +100,13 @@
         "1SPE-DERIVATION-GLOBAL-RE-C4"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-DERIVATION-GLOBAL",
+      "declared_by_object": [
+        "1SPE-DERIVATION-GLOBAL-FR-R5"
+      ],
       "prerequisite_code": "R5",
       "prerequisite_label": "Sens de variation d'une fonction (définition, croissante/décroissante)",
       "origin": "2GT",
@@ -107,10 +121,13 @@
         "1SPE-DERIVATION-GLOBAL-RE-C4"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-DERIVATION-LOCAL",
+      "declared_by_object": [
+        "1SPE-DERIVATION-LOCAL-FR-R1"
+      ],
       "prerequisite_code": "R1",
       "prerequisite_label": "Calculer une image et lire une image sur une courbe",
       "origin": "2GT",
@@ -119,10 +136,13 @@
         "1SPE-DERIVATION-LOCAL-FR-R1"
       ],
       "status": "REMEDIATED_ONLY",
-      "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
+      "reason": "une fiche declare remettre ce prerequis en place ; rien ne signale le manque a l'eleve en amont"
     },
     {
       "chapter": "1SPE-DERIVATION-LOCAL",
+      "declared_by_object": [
+        "1SPE-DERIVATION-LOCAL-FR-R2"
+      ],
       "prerequisite_code": "R2",
       "prerequisite_label": "Calcul littéral : développer, factoriser et simplifier une fraction",
       "origin": "2GT",
@@ -132,10 +152,13 @@
         "1SPE-DERIVATION-LOCAL-RE-C2"
       ],
       "status": "REMEDIATED_ONLY",
-      "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
+      "reason": "une fiche declare remettre ce prerequis en place ; rien ne signale le manque a l'eleve en amont"
     },
     {
       "chapter": "1SPE-DERIVATION-LOCAL",
+      "declared_by_object": [
+        "1SPE-DERIVATION-LOCAL-FR-R3"
+      ],
       "prerequisite_code": "R3",
       "prerequisite_label": "Coefficient directeur et équation d'une droite",
       "origin": "2GT",
@@ -150,10 +173,13 @@
         "1SPE-DERIVATION-LOCAL-RE-C3"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-DERIVATION-LOCAL",
+      "declared_by_object": [
+        "1SPE-DERIVATION-LOCAL-FR-R4"
+      ],
       "prerequisite_code": "R4",
       "prerequisite_label": "Fonctions carré et inverse",
       "origin": "2GT",
@@ -162,10 +188,13 @@
         "1SPE-DERIVATION-LOCAL-FR-R4"
       ],
       "status": "REMEDIATED_ONLY",
-      "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
+      "reason": "une fiche declare remettre ce prerequis en place ; rien ne signale le manque a l'eleve en amont"
     },
     {
       "chapter": "1SPE-DERIVATION-LOCAL",
+      "declared_by_object": [
+        "1SPE-DERIVATION-LOCAL-FR-R5"
+      ],
       "prerequisite_code": "R5",
       "prerequisite_label": "Calculer une vitesse moyenne à partir d'une distance et d'une durée",
       "origin": "2GT",
@@ -178,10 +207,13 @@
         "1SPE-DERIVATION-LOCAL-RE-C2"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-EXPONENTIELLE",
+      "declared_by_object": [
+        "1SPE-EXPONENTIELLE-FR-R1"
+      ],
       "prerequisite_code": "R1",
       "prerequisite_label": "Dérivée d'une somme, d'un produit, d'un quotient",
       "origin": "1SPE-DERIVATION-GLOBAL",
@@ -195,10 +227,13 @@
         "1SPE-EXPONENTIELLE-RE-C2"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-EXPONENTIELLE",
+      "declared_by_object": [
+        "1SPE-EXPONENTIELLE-FR-R2"
+      ],
       "prerequisite_code": "R2",
       "prerequisite_label": "Signe de la dérivée et sens de variation",
       "origin": "1SPE-DERIVATION-GLOBAL",
@@ -211,10 +246,13 @@
         "1SPE-EXPONENTIELLE-RE-C4"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-EXPONENTIELLE",
+      "declared_by_object": [
+        "1SPE-EXPONENTIELLE-FR-R3"
+      ],
       "prerequisite_code": "R3",
       "prerequisite_label": "Résolution d'équations et d'inéquations du second degré",
       "origin": "1SPE-SECOND-DEGRE",
@@ -223,10 +261,13 @@
         "1SPE-EXPONENTIELLE-FR-R3"
       ],
       "status": "REMEDIATED_ONLY",
-      "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
+      "reason": "une fiche declare remettre ce prerequis en place ; rien ne signale le manque a l'eleve en amont"
     },
     {
       "chapter": "1SPE-EXPONENTIELLE",
+      "declared_by_object": [
+        "1SPE-EXPONENTIELLE-FR-R4"
+      ],
       "prerequisite_code": "R4",
       "prerequisite_label": "Puissances entières et règles de calcul",
       "origin": "2GT",
@@ -238,10 +279,13 @@
         "1SPE-EXPONENTIELLE-RE-C2"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-EXPONENTIELLE",
+      "declared_by_object": [
+        "1SPE-EXPONENTIELLE-FR-R5"
+      ],
       "prerequisite_code": "R5",
       "prerequisite_label": "Suites géométriques et coefficient multiplicateur",
       "origin": "1SPE-SUITES",
@@ -256,10 +300,14 @@
         "1SPE-EXPONENTIELLE-FR-R5"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-GEOMETRIE-REPEREE",
+      "declared_by_object": [
+        "1SPE-GEOREP-COURS-01",
+        "1SPE-GEOREP-FR-R1"
+      ],
       "prerequisite_code": "R1",
       "prerequisite_label": "Repérage dans le plan : coordonnées, milieu, distance",
       "origin": "2GT",
@@ -269,13 +317,18 @@
         "1SPE-GEOREP-EV-B"
       ],
       "remediation_evidence": [
+        "1SPE-GEOREP-COURS-01",
         "1SPE-GEOREP-FR-R1"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-GEOMETRIE-REPEREE",
+      "declared_by_object": [
+        "1SPE-GEOREP-COURS-01",
+        "1SPE-GEOREP-FR-R2"
+      ],
       "prerequisite_code": "R2",
       "prerequisite_label": "Vecteurs et coordonnées : somme, produit par un scalaire, colinéarité",
       "origin": "2GT",
@@ -285,26 +338,36 @@
         "1SPE-GEOREP-EV-B"
       ],
       "remediation_evidence": [
+        "1SPE-GEOREP-COURS-01",
         "1SPE-GEOREP-FR-R2",
         "1SPE-GEOREP-FR-R3"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-GEOMETRIE-REPEREE",
+      "declared_by_object": [
+        "1SPE-GEOREP-COURS-01",
+        "1SPE-GEOREP-FR-R3"
+      ],
       "prerequisite_code": "R3",
       "prerequisite_label": "Produit scalaire : calcul, orthogonalité",
       "origin": "1SPE-PRODUIT-SCALAIRE",
       "diagnostic_evidence": [],
       "remediation_evidence": [
+        "1SPE-GEOREP-COURS-01",
         "1SPE-GEOREP-FR-R3"
       ],
       "status": "REMEDIATED_ONLY",
-      "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
+      "reason": "une fiche declare remettre ce prerequis en place ; rien ne signale le manque a l'eleve en amont"
     },
     {
       "chapter": "1SPE-GEOMETRIE-REPEREE",
+      "declared_by_object": [
+        "1SPE-GEOREP-COURS-01",
+        "1SPE-GEOREP-FR-R4"
+      ],
       "prerequisite_code": "R4",
       "prerequisite_label": "Équations du second degré : discriminant, racines",
       "origin": "1SPE-SECOND-DEGRE",
@@ -312,13 +375,18 @@
         "1SPE-GEOMETRIE-REPEREE-QCM"
       ],
       "remediation_evidence": [
+        "1SPE-GEOREP-COURS-01",
         "1SPE-GEOREP-FR-R4"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-GEOMETRIE-REPEREE",
+      "declared_by_object": [
+        "1SPE-GEOREP-COURS-01",
+        "1SPE-GEOREP-FR-R5"
+      ],
       "prerequisite_code": "R5",
       "prerequisite_label": "Systèmes d'équations linéaires à deux inconnues",
       "origin": "2GT",
@@ -326,13 +394,18 @@
         "1SPE-GEOMETRIE-REPEREE-QCM"
       ],
       "remediation_evidence": [
+        "1SPE-GEOREP-COURS-01",
         "1SPE-GEOREP-FR-R5"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-PROBA-COND",
+      "declared_by_object": [
+        "1SPE-PROBCOND-CR-001",
+        "1SPE-PROBCOND-FR-R1"
+      ],
       "prerequisite_code": "R1",
       "prerequisite_label": "Probabilites de base : vocabulaire, union, intersection, complementaire",
       "origin": "2GT",
@@ -341,59 +414,85 @@
         "1SPE-PROBCOND-EV-A"
       ],
       "remediation_evidence": [
+        "1SPE-PROBCOND-CR-001",
         "1SPE-PROBCOND-FR-R1"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-PROBA-COND",
+      "declared_by_object": [
+        "1SPE-PROBCOND-CR-001",
+        "1SPE-PROBCOND-FR-R2"
+      ],
       "prerequisite_code": "R2",
       "prerequisite_label": "Fractions et pourcentages : conversions, operations",
       "origin": "2GT",
       "diagnostic_evidence": [],
       "remediation_evidence": [
+        "1SPE-PROBCOND-CR-001",
         "1SPE-PROBCOND-FR-R2"
       ],
       "status": "REMEDIATED_ONLY",
-      "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
+      "reason": "une fiche declare remettre ce prerequis en place ; rien ne signale le manque a l'eleve en amont"
     },
     {
       "chapter": "1SPE-PROBA-COND",
+      "declared_by_object": [
+        "1SPE-PROBCOND-CR-001",
+        "1SPE-PROBCOND-FR-R3"
+      ],
       "prerequisite_code": "R3",
       "prerequisite_label": "Arbres de denombrement",
       "origin": "2GT",
       "diagnostic_evidence": [],
       "remediation_evidence": [
+        "1SPE-PROBCOND-CR-001",
         "1SPE-PROBCOND-FR-R3"
       ],
       "status": "REMEDIATED_ONLY",
-      "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
+      "reason": "une fiche declare remettre ce prerequis en place ; rien ne signale le manque a l'eleve en amont"
     },
     {
       "chapter": "1SPE-PROBA-COND",
+      "declared_by_object": [
+        "1SPE-PROBCOND-CR-001",
+        "1SPE-PROBCOND-FR-R4"
+      ],
       "prerequisite_code": "R4",
       "prerequisite_label": "Calcul litteral : mise en equation, resolution",
       "origin": "2GT",
       "diagnostic_evidence": [],
-      "remediation_evidence": [],
-      "status": "ASSUMED_WITHOUT_SUPPORT",
-      "reason": "prerequis suppose acquis, sans diagnostic ni reprise dans le chapitre qui s'en sert"
+      "remediation_evidence": [
+        "1SPE-PROBCOND-CR-001",
+        "1SPE-PROBCOND-FR-R4"
+      ],
+      "status": "REMEDIATED_ONLY",
+      "reason": "une fiche declare remettre ce prerequis en place ; rien ne signale le manque a l'eleve en amont"
     },
     {
       "chapter": "1SPE-PROBA-COND",
+      "declared_by_object": [
+        "1SPE-PROBCOND-CR-001",
+        "1SPE-PROBCOND-FR-R5"
+      ],
       "prerequisite_code": "R5",
       "prerequisite_label": "Tableaux de donnees : lecture, frequences, effectifs",
       "origin": "2GT",
       "diagnostic_evidence": [],
       "remediation_evidence": [
+        "1SPE-PROBCOND-CR-001",
         "1SPE-PROBCOND-FR-R5"
       ],
       "status": "REMEDIATED_ONLY",
-      "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
+      "reason": "une fiche declare remettre ce prerequis en place ; rien ne signale le manque a l'eleve en amont"
     },
     {
       "chapter": "1SPE-PRODUIT-SCALAIRE",
+      "declared_by_object": [
+        "1SPE-PRODUIT-SCALAIRE-FR-R1"
+      ],
       "prerequisite_code": "R1",
       "prerequisite_label": "Vecteurs et coordonnees dans le plan",
       "origin": "2GT",
@@ -404,10 +503,13 @@
         "1SPE-PRODUIT-SCALAIRE-FR-R1"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-PRODUIT-SCALAIRE",
+      "declared_by_object": [
+        "1SPE-PRODUIT-SCALAIRE-FR-R2"
+      ],
       "prerequisite_code": "R2",
       "prerequisite_label": "Norme d'un vecteur",
       "origin": "2GT",
@@ -418,10 +520,13 @@
         "1SPE-PRODUIT-SCALAIRE-FR-R2"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-PRODUIT-SCALAIRE",
+      "declared_by_object": [
+        "1SPE-PRODUIT-SCALAIRE-FR-R3"
+      ],
       "prerequisite_code": "R3",
       "prerequisite_label": "Trigonometrie (cos, sin, valeurs remarquables)",
       "origin": "1SPE-TRIGONOMETRIE",
@@ -430,10 +535,13 @@
         "1SPE-PRODUIT-SCALAIRE-FR-R3"
       ],
       "status": "REMEDIATED_ONLY",
-      "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
+      "reason": "une fiche declare remettre ce prerequis en place ; rien ne signale le manque a l'eleve en amont"
     },
     {
       "chapter": "1SPE-PRODUIT-SCALAIRE",
+      "declared_by_object": [
+        "1SPE-PRODUIT-SCALAIRE-FR-R4"
+      ],
       "prerequisite_code": "R4",
       "prerequisite_label": "Calcul litteral (identites remarquables, developpement)",
       "origin": "2GT",
@@ -445,10 +553,13 @@
         "1SPE-PRODUIT-SCALAIRE-FR-R4"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-PRODUIT-SCALAIRE",
+      "declared_by_object": [
+        "1SPE-PRODUIT-SCALAIRE-FR-R5"
+      ],
       "prerequisite_code": "R5",
       "prerequisite_label": "Theoreme de Pythagore",
       "origin": "2GT",
@@ -459,10 +570,14 @@
         "1SPE-PRODUIT-SCALAIRE-FR-R5"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-SECOND-DEGRE",
+      "declared_by_object": [
+        "1SPE-SECDEG-CR-001",
+        "1SPE-SECDEG-FR-R1"
+      ],
       "prerequisite_code": "R1",
       "prerequisite_label": "Calcul litteral : developper, factoriser, identites remarquables",
       "origin": "2GT",
@@ -470,15 +585,20 @@
         "1SPE-SECOND-DEGRE-QCM"
       ],
       "remediation_evidence": [
+        "1SPE-SECDEG-CR-001",
         "1SPE-SECDEG-FR-R1",
         "1SPE-SECDEG-FR-R4",
         "1SPE-SECDEG-RE-C1"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-SECOND-DEGRE",
+      "declared_by_object": [
+        "1SPE-SECDEG-CR-001",
+        "1SPE-SECDEG-FR-R2"
+      ],
       "prerequisite_code": "R2",
       "prerequisite_label": "Equations du premier degre et produit nul",
       "origin": "2GT",
@@ -490,6 +610,7 @@
         "1SPE-SECOND-DEGRE-QCM"
       ],
       "remediation_evidence": [
+        "1SPE-SECDEG-CR-001",
         "1SPE-SECDEG-FR-R1",
         "1SPE-SECDEG-FR-R2",
         "1SPE-SECDEG-FR-R3",
@@ -502,22 +623,31 @@
         "1SPE-SECDEG-RE-C7"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-SECOND-DEGRE",
+      "declared_by_object": [
+        "1SPE-SECDEG-CR-001",
+        "1SPE-SECDEG-FR-R3"
+      ],
       "prerequisite_code": "R3",
       "prerequisite_label": "Fonctions : image, antecedent, courbe representative",
       "origin": "2GT",
       "diagnostic_evidence": [],
       "remediation_evidence": [
+        "1SPE-SECDEG-CR-001",
         "1SPE-SECDEG-FR-R3"
       ],
       "status": "REMEDIATED_ONLY",
-      "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
+      "reason": "une fiche declare remettre ce prerequis en place ; rien ne signale le manque a l'eleve en amont"
     },
     {
       "chapter": "1SPE-SECOND-DEGRE",
+      "declared_by_object": [
+        "1SPE-SECDEG-CR-001",
+        "1SPE-SECDEG-FR-R4"
+      ],
       "prerequisite_code": "R4",
       "prerequisite_label": "Fonctions de reference : carre, inverse",
       "origin": "2GT",
@@ -525,14 +655,19 @@
         "1SPE-SECOND-DEGRE-QCM"
       ],
       "remediation_evidence": [
+        "1SPE-SECDEG-CR-001",
         "1SPE-SECDEG-FR-R4",
         "1SPE-SECDEG-FR-R5"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-SECOND-DEGRE",
+      "declared_by_object": [
+        "1SPE-SECDEG-CR-001",
+        "1SPE-SECDEG-FR-R5"
+      ],
       "prerequisite_code": "R5",
       "prerequisite_label": "Inegalites : regles de calcul, tableau de signes",
       "origin": "2GT",
@@ -544,6 +679,7 @@
         "1SPE-SECOND-DEGRE-QCM"
       ],
       "remediation_evidence": [
+        "1SPE-SECDEG-CR-001",
         "1SPE-SECDEG-FR-R5",
         "1SPE-SECDEG-RE-C2",
         "1SPE-SECDEG-RE-C4",
@@ -551,22 +687,31 @@
         "1SPE-SECDEG-RE-C8"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-SUITES",
+      "declared_by_object": [
+        "1SPE-SUITES-COURS-01",
+        "1SPE-SUITES-FR-R1"
+      ],
       "prerequisite_code": "R1",
       "prerequisite_label": "Calcul littéral : développer, factoriser, réduire",
       "origin": "2GT",
       "diagnostic_evidence": [],
       "remediation_evidence": [
+        "1SPE-SUITES-COURS-01",
         "1SPE-SUITES-FR-R1"
       ],
       "status": "REMEDIATED_ONLY",
-      "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
+      "reason": "une fiche declare remettre ce prerequis en place ; rien ne signale le manque a l'eleve en amont"
     },
     {
       "chapter": "1SPE-SUITES",
+      "declared_by_object": [
+        "1SPE-SUITES-COURS-01",
+        "1SPE-SUITES-FR-R2"
+      ],
       "prerequisite_code": "R2",
       "prerequisite_label": "Pourcentages : coefficient multiplicateur, évolutions successives",
       "origin": "2GT",
@@ -574,26 +719,36 @@
         "1SPE-SUITES-QCM"
       ],
       "remediation_evidence": [
+        "1SPE-SUITES-COURS-01",
         "1SPE-SUITES-FR-R2",
         "1SPE-SUITES-RE-C6"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-SUITES",
+      "declared_by_object": [
+        "1SPE-SUITES-COURS-01",
+        "1SPE-SUITES-FR-R3"
+      ],
       "prerequisite_code": "R3",
       "prerequisite_label": "Fonctions : image, antécédent, sens de variation",
       "origin": "2GT",
       "diagnostic_evidence": [],
       "remediation_evidence": [
+        "1SPE-SUITES-COURS-01",
         "1SPE-SUITES-FR-R3"
       ],
       "status": "REMEDIATED_ONLY",
-      "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
+      "reason": "une fiche declare remettre ce prerequis en place ; rien ne signale le manque a l'eleve en amont"
     },
     {
       "chapter": "1SPE-SUITES",
+      "declared_by_object": [
+        "1SPE-SUITES-COURS-01",
+        "1SPE-SUITES-FR-R4"
+      ],
       "prerequisite_code": "R4",
       "prerequisite_label": "Inégalités et signe d'une expression",
       "origin": "2GT",
@@ -603,14 +758,19 @@
         "1SPE-SUITES-QCM"
       ],
       "remediation_evidence": [
+        "1SPE-SUITES-COURS-01",
         "1SPE-SUITES-FR-R4",
         "1SPE-SUITES-RE-C5"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-SUITES",
+      "declared_by_object": [
+        "1SPE-SUITES-COURS-01",
+        "1SPE-SUITES-FR-R5"
+      ],
       "prerequisite_code": "R5",
       "prerequisite_label": "Python : variables, boucle for, boucle while (SNT)",
       "origin": "SNT",
@@ -622,14 +782,18 @@
         "1SPE-SUITES-QCM"
       ],
       "remediation_evidence": [
+        "1SPE-SUITES-COURS-01",
         "1SPE-SUITES-FR-R5",
         "1SPE-SUITES-RE-C7"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-TRIGONOMETRIE",
+      "declared_by_object": [
+        "1SPE-TRIGO-FR-R1"
+      ],
       "prerequisite_code": "R1",
       "prerequisite_label": "Theoreme de Pythagore",
       "origin": "2GT",
@@ -638,10 +802,13 @@
         "1SPE-TRIGO-FR-R1"
       ],
       "status": "REMEDIATED_ONLY",
-      "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
+      "reason": "une fiche declare remettre ce prerequis en place ; rien ne signale le manque a l'eleve en amont"
     },
     {
       "chapter": "1SPE-TRIGONOMETRIE",
+      "declared_by_object": [
+        "1SPE-TRIGO-FR-R2"
+      ],
       "prerequisite_code": "R2",
       "prerequisite_label": "Reperage dans le plan : coordonnees, distance",
       "origin": "2GT",
@@ -650,10 +817,14 @@
         "1SPE-TRIGO-FR-R2"
       ],
       "status": "REMEDIATED_ONLY",
-      "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
+      "reason": "une fiche declare remettre ce prerequis en place ; rien ne signale le manque a l'eleve en amont"
     },
     {
       "chapter": "1SPE-VARIABLES-ALEATOIRES",
+      "declared_by_object": [
+        "1SPE-VARALEA-CR-001",
+        "1SPE-VARALEA-FR-R1"
+      ],
       "prerequisite_code": "R1",
       "prerequisite_label": "Probabilites de base : experience aleatoire, univers, evenements, probabilite d'un evenement",
       "origin": "2GT",
@@ -665,27 +836,37 @@
         "1SPE-VARIABLES-ALEATOIRES-QCM"
       ],
       "remediation_evidence": [
+        "1SPE-VARALEA-CR-001",
         "1SPE-VARALEA-FR-R1",
         "1SPE-VARALEA-FR-R2",
         "1SPE-VARALEA-RE-C3"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-VARIABLES-ALEATOIRES",
+      "declared_by_object": [
+        "1SPE-VARALEA-CR-001",
+        "1SPE-VARALEA-FR-R2"
+      ],
       "prerequisite_code": "R2",
       "prerequisite_label": "Probabilites conditionnelles et independance",
       "origin": "1SPE-PROBA-COND",
       "diagnostic_evidence": [],
       "remediation_evidence": [
+        "1SPE-VARALEA-CR-001",
         "1SPE-VARALEA-FR-R2"
       ],
       "status": "REMEDIATED_ONLY",
-      "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
+      "reason": "une fiche declare remettre ce prerequis en place ; rien ne signale le manque a l'eleve en amont"
     },
     {
       "chapter": "1SPE-VARIABLES-ALEATOIRES",
+      "declared_by_object": [
+        "1SPE-VARALEA-CR-001",
+        "1SPE-VARALEA-FR-R4"
+      ],
       "prerequisite_code": "R4",
       "prerequisite_label": "Suites et sommes : notation sigma, suites arithmetiques et geometriques",
       "origin": "1SPE-SUITES",
@@ -697,22 +878,28 @@
         "1SPE-VARIABLES-ALEATOIRES-QCM"
       ],
       "remediation_evidence": [
+        "1SPE-VARALEA-CR-001",
         "1SPE-VARALEA-FR-R4"
       ],
       "status": "DIAGNOSED_AND_REMEDIATED",
-      "reason": "un diagnostic le revele, une reprise y repond"
+      "reason": "une fiche declare remettre ce prerequis en place, et un diagnostic en revele le manque"
     },
     {
       "chapter": "1SPE-VARIABLES-ALEATOIRES",
+      "declared_by_object": [
+        "1SPE-VARALEA-CR-001",
+        "1SPE-VARALEA-FR-R5"
+      ],
       "prerequisite_code": "R5",
       "prerequisite_label": "Puissances : regles de calcul, puissances entieres",
       "origin": "2GT",
       "diagnostic_evidence": [],
       "remediation_evidence": [
+        "1SPE-VARALEA-CR-001",
         "1SPE-VARALEA-FR-R5"
       ],
       "status": "REMEDIATED_ONLY",
-      "reason": "une reprise existe, mais rien ne signale le manque a l'eleve"
+      "reason": "une fiche declare remettre ce prerequis en place ; rien ne signale le manque a l'eleve en amont"
     }
   ]
 }
