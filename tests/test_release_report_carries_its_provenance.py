@@ -34,9 +34,22 @@ def test_a_dirty_worktree_is_never_presented_as_a_committed_state() -> None:
     provenance = json.loads(REPORT.read_text(encoding="utf-8"))["provenance"]
     if provenance["worktree_dirty"]:
         assert provenance["scope"] == "WORKTREE_BOUND_BY_INPUT_DIGESTS"
-        assert provenance["worktree_status"], "arbre sale sans aucune ligne d'etat"
+        assert provenance["worktree_dirty_entries"] > 0, "arbre sale sans aucune entree"
     else:
         assert provenance["scope"] == "HEAD_BOUND_BY_INPUT_DIGESTS"
+        assert provenance["worktree_dirty_entries"] == 0
+
+
+def test_the_provenance_never_publishes_the_paths_it_observed() -> None:
+    """Enumerer les chemins modifies ferait du rapport une reference vers eux.
+
+    Le graphe de reference du depot lit les artefacts pour savoir qui cite qui.
+    Un rapport qui publie la liste de l'arbre de travail se met a « citer » des
+    fichiers qu'il ne fait qu'observer, et fausse ce graphe.
+    """
+    provenance = json.loads(REPORT.read_text(encoding="utf-8"))["provenance"]
+    assert "worktree_status" not in provenance
+    assert isinstance(provenance["worktree_dirty_entries"], int)
 
 
 def test_the_published_readiness_shares_that_provenance() -> None:

@@ -26,13 +26,29 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def load(name: str, manual_root: Path):
-    """Charge le gate avec CORPUS_DIR/ROOT pointés sur une racine de test."""
+    """Charge le gate avec CORPUS_DIR/ROOT pointés sur une racine de test.
+
+    Le dépôt porte DEUX modules nommés `common` -- un par discipline -- et ils
+    n'exposent pas les mêmes noms. Celui qu'une autre suite a importé avant
+    nous reste dans sys.modules et serait servi à la place du nôtre, d'où un
+    `ImportError: cannot import name 'STORAGE_MODE'` selon l'ordre des tests.
+    Le chargement isole donc `common`, puis le neutralise, pour ne pas imposer
+    le nôtre aux suites suivantes.
+    """
     path = ROOT / MANUELS[name]
+    sauvegarde = sys.modules.pop("common", None)
+    chemin_initial = list(sys.path)
     sys.path.insert(0, str(path.parent))
-    spec = importlib.util.spec_from_file_location(f"similarity_{name}", path)
-    assert spec and spec.loader
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+    try:
+        spec = importlib.util.spec_from_file_location(f"similarity_{name}", path)
+        assert spec and spec.loader
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+    finally:
+        sys.path[:] = chemin_initial
+        sys.modules.pop("common", None)
+        if sauvegarde is not None:
+            sys.modules["common"] = sauvegarde
     module.ROOT = manual_root
     module.CORPUS_DIR = manual_root / "corpus_vide"
     (manual_root / "corpus_vide").mkdir(exist_ok=True)

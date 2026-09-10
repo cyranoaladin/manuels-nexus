@@ -5,11 +5,8 @@ manuals:
   1NSI:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '483'
+      detail: '455'
       source: anomalies.blocking_statuses
-    - code: anomalie:broken_meta_references
-      detail: '80'
-      source: anomalies.broken_meta_references
     - code: livrable_non_compile
       detail: declared
       source: deliverable_matrix.1NSI.variants.evaluations
@@ -26,7 +23,7 @@ manuals:
       detail: declared
       source: deliverable_matrix.1NSI.variants.version_amenagee
     - code: statuts_non_approuves
-      detail: objets=473; contrats=10
+      detail: objets=445; contrats=10
       source: manuals.1NSI.statuses
     current:
       artifacts:
@@ -47,7 +44,7 @@ manuals:
       statuses:
         generated: 47
         manual_review: 7
-        needs_review: 270
+        needs_review: 242
         verified: 149
       totals:
         banque_ecrite: 0
@@ -58,7 +55,7 @@ manuals:
         diagnostics: 1
         evaluations: 20
         exercices_principaux: 110
-        methodes: 62
+        methodes: 34
         projets: 1
         qcm: 10
         remediations: 49
@@ -79,7 +76,6 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
-    - anomalie:broken_meta_references
     - statuts_non_approuves
     structural_compile_ready: false
     variants:
@@ -599,12 +595,12 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:59d829461fd4e43c6cbbb400493fa6a19fc46b458dddf047162993007fb25fdb
+model_digest: sha256:480d595f204e4553edac20651e599e8c75578f1427be2542b600da930f4fe98f
 provenance:
   branch: null
-  dirty: false
+  dirty: true
   errors: []
-  generated_at_utc: '2026-09-09T21:06:13Z'
+  generated_at_utc: '2026-09-09T22:38:45Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:79b255deeddfa4b483a9a5a9f568bdc143defd7b2a69e8b8a704f4afdd35d6bf
     scripts/build_manifest.py: sha256:62d4f5da9454aaa2923041db777b759e3e4b672e7c2f33b59a62e07afc76de26
@@ -616,8 +612,56 @@ provenance:
   generator_sha256: sha256:f932fe8c33273bdba8f5f9230ed39a824111f74177310dc1c4ea7c529714d065
   generator_version: 1
   git_available: true
-  head_sha: 7021a13d131ce37c9e8b53598c3b937739003400
-  modified_tracked: []
+  head_sha: e17444f13dfd717680d81560e10b450aab168be2
+  modified_tracked:
+  - NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-ME-001.tex
+  - NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-ME-002.tex
+  - NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-ME-003.tex
+  - NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-ME-004.tex
+  - NSI/chapitres/1NSI-LANGAGE/code/1NSI-LANG-ME-001.py
+  - NSI/chapitres/1NSI-LANGAGE/code/1NSI-LANG-ME-002.py
+  - NSI/chapitres/1NSI-LANGAGE/code/1NSI-LANG-ME-003.py
+  - NSI/chapitres/1NSI-LANGAGE/code/1NSI-LANG-ME-004.py
+  - NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-ME-001.tex
+  - NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-ME-002.tex
+  - NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-ME-003.tex
+  - NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-ME-004.tex
+  - NSI/chapitres/1NSI-PROJET-METHODES/code/1NSI-PM-ME-003.py
+  - NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-ME-001.tex
+  - NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-ME-002.tex
+  - NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-ME-003.tex
+  - NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-ME-004.tex
+  - NSI/chapitres/1NSI-RESEAUX/code/1NSI-RES-ME-003.py
+  - NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-ME-001.tex
+  - NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-ME-002.tex
+  - NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-ME-003.tex
+  - NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-ME-004.tex
+  - NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-ME-001.tex
+  - NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-ME-002.tex
+  - NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-ME-003.tex
+  - NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-ME-004.tex
+  - NSI/chapitres/1NSI-TYPES-BASE/code/1NSI-TB-ME-002.py
+  - NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-ME-001.tex
+  - NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-ME-002.tex
+  - NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-ME-003.tex
+  - NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-ME-004.tex
+  - NSI/chapitres/1NSI-WEB-IHM/code/1NSI-WEB-ME-002.py
+  - NSI/chapitres/1NSI-WEB-IHM/code/1NSI-WEB-ME-003.py
+  - NSI/chapitres/1NSI-WEB-IHM/code/1NSI-WEB-ME-004.py
+  - NSI/chapitres/1NSI-WEB-IHM/methodes/1NSI-WEB-ME-001.tex
+  - NSI/chapitres/1NSI-WEB-IHM/methodes/1NSI-WEB-ME-002.tex
+  - NSI/chapitres/1NSI-WEB-IHM/methodes/1NSI-WEB-ME-003.tex
+  - NSI/chapitres/1NSI-WEB-IHM/methodes/1NSI-WEB-ME-004.tex
+  - audit/COLLECTION_PUBLISH_READINESS.json
+  - audit/COLLECTION_PUBLISH_READINESS.md
+  - audit/RELEASE_ALL_CHECK.json
+  - audit/RELEASE_ALL_CHECK.md
+  - audit/RELEASE_ARTIFACT_PROVENANCE_DISPOSITION.json
+  - audit/RELEASE_ARTIFACT_PROVENANCE_DISPOSITION.md
+  - audit/RELEASE_SNAPSHOT.json
+  - scripts/release_all_check.py
+  - tests/test_release_report_carries_its_provenance.py
+  - tests/test_similarity_receipt_binds_its_source.py
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
     git: git version 2.43.0
@@ -628,4 +672,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:a982b256f053bbfdf9bd3c05fadd2335ef79a9c7b16f46683939da58bb8bc34e
+source_digest: sha256:92d540969b59bfe7e65cbdec9ca61608c776249fd9cacb9bafd23676fe1ee097

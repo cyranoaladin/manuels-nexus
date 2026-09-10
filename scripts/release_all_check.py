@@ -153,7 +153,14 @@ def _provenance() -> dict[str, Any]:
     from evidence_freshness import head_sha
 
     head = head_sha(ROOT)
-    return {**observation(ROOT, head), "generated_by": GENERATED_BY}
+    observed = observation(ROOT, head)
+    # `worktree_status` enumere les chemins modifies. Publie tel quel, il fait
+    # de ce rapport une REFERENCE vers chacun de ces fichiers et fausse les
+    # graphes de reference qui le lisent. Seuls la proprete et le nombre
+    # d'entrees sont conserves : l'information demeure, les chemins sortent.
+    entries = observed.pop("worktree_status", [])
+    observed["worktree_dirty_entries"] = len(entries)
+    return {**observed, "generated_by": GENERATED_BY}
 
 
 def evaluate_release(
