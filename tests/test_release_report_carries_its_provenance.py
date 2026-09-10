@@ -21,13 +21,35 @@ READINESS = ROOT / "audit" / "COLLECTION_PUBLISH_READINESS.json"
 def test_the_release_report_records_the_commit_it_observed() -> None:
     payload = json.loads(REPORT.read_text(encoding="utf-8"))
     provenance = payload["provenance"]
-    assert provenance["head"] is None or len(provenance["head"]) == 40
+    assert len(provenance["AUDITED_SOURCE_SHA"]) == 40
+    assert len(provenance["REPORT_COMMIT_SHA"]) == 40
+    assert provenance["SEMANTIC_SOURCE_DIGEST"].startswith("sha256:")
     assert isinstance(provenance["worktree_dirty"], bool)
     assert provenance["generated_by"] == payload["generated_by"]
     assert provenance["scope"] in {
         "WORKTREE_BOUND_BY_INPUT_DIGESTS",
         "HEAD_BOUND_BY_INPUT_DIGESTS",
     }
+
+
+def test_the_report_commit_is_never_a_freshness_criterion() -> None:
+    """Publier le rapport ne doit perimer aucune preuve.
+
+    Le rapport du 10 septembre decrivait d2f677fd2 ; son propre commit a
+    fait avancer main a 8ebc18c8c. Juger la fraicheur sur le commit rendait
+    le rapport faux au moment meme de sa publication.
+    """
+    import sys
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from evidence_freshness import semantic_source_digest
+
+    provenance = json.loads(REPORT.read_text(encoding="utf-8"))["provenance"]
+    assert provenance["SEMANTIC_SOURCE_DIGEST"] == semantic_source_digest()
+    # Les deux commits du rapport de consolidation partagent le meme digest :
+    # aucun des deux ne decrit des sources differentes.
+    assert semantic_source_digest(commit="d2f677fd2") == semantic_source_digest(
+        commit="8ebc18c8c"
+    )
 
 
 def test_a_dirty_worktree_is_never_presented_as_a_committed_state() -> None:

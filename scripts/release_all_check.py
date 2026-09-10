@@ -141,16 +141,16 @@ def create_release_snapshot(report: dict[str, Any], root: Path = ROOT) -> dict[s
 
 
 def _provenance() -> dict[str, Any]:
-    """L'etat reellement observe : commit, proprete de l'arbre, generateur.
+    """Les quatre identites de provenance, jamais confondues.
 
-    Reutilise les observateurs canoniques du depot plutot que d'en refaire un :
-    `head_sha` pour le commit, `observation` pour l'etat de l'arbre de travail.
-    Un rapport qui ne dit pas de quel etat il parle laisse un verdict survivre
-    aux sources qui le portaient.
+    AUDITED_SOURCE_SHA dit ce qui a ete observe, REPORT_COMMIT_SHA ou le
+    rapport atterrit, SEMANTIC_SOURCE_DIGEST ce qui decide de la fraicheur, et
+    RELEASE_TAG_SHA le tag lorsqu'il existe. Un commit de rapport fait avancer
+    le second sans toucher le troisieme : il ne perime donc rien.
     """
     sys.path.insert(0, str(ROOT / "scripts"))
     from build_current_review_index import observation
-    from evidence_freshness import head_sha
+    from evidence_freshness import head_sha, provenance
 
     head = head_sha(ROOT)
     observed = observation(ROOT, head)
@@ -160,7 +160,7 @@ def _provenance() -> dict[str, Any]:
     # d'entrees sont conserves : l'information demeure, les chemins sortent.
     entries = observed.pop("worktree_status", [])
     observed["worktree_dirty_entries"] = len(entries)
-    return {**observed, "generated_by": GENERATED_BY}
+    return {**observed, **provenance(root=ROOT), "generated_by": GENERATED_BY}
 
 
 def evaluate_release(
@@ -316,11 +316,25 @@ def evaluate_release(
     # ce commit, rien ne les rattache a un etat -- ce qui ne vaut pas mieux
     # qu'un rattachement perime. Une preuve perimee ne peut pas rendre une
     # cible candidate : ce serait publier sur la foi d'un build d'hier.
-    current_head = _provenance()["head"]
-    repro_current = bool(repro.get("head_commit")) and repro.get("head_commit") == current_head
-    preflight_current = (
-        bool(preflight.get("head_commit")) and preflight.get("head_commit") == current_head
-    )
+    from evidence_freshness import semantically_current
+
+    def _evidence_is_current(evidence: dict[str, Any]) -> bool:
+        """Les sources qu'a vues cette preuve sont-elles les sources courantes ?
+
+        La question n'est pas « quel commit ? ». Un commit d'audit fait avancer
+        HEAD sans toucher un manuel : comparer les commits perimerait la preuve
+        a chaque rapport publie. Ce qui tranche est le digest des sources.
+        """
+        digest = evidence.get("semantic_source_digest")
+        commit = evidence.get("head_commit")
+        if not digest and not commit:
+            return False
+        return semantically_current(
+            observed_commit=commit, observed_digest=digest, root=ROOT
+        )
+
+    repro_current = _evidence_is_current(repro)
+    preflight_current = _evidence_is_current(preflight)
 
     all_targets_candidate_ready = (
         repro_current
@@ -504,9 +518,12 @@ def main() -> int:
         f"({report['summary']['PREFLIGHT_TARGETS_PASSED']}/{report['summary']['CANONICAL_TARGETS_COUNT']})",
         f"- **Dette Produit Ouverte** : `{report['summary']['PRODUCT_TECHNICAL_DEBT_OPEN']}` (Technique: {report['summary']['PRODUCT_TECHNICAL_DEBT_OPEN']}, Contenu: {report['summary']['CONTENT_DEBT_OPEN']}, Programme: {report['summary']['PROGRAMME_DEBT_OPEN']}, Print: {report['summary']['PRINT_DEBT_OPEN']}, Manifest: {report['summary']['MANIFEST_DEBT_OPEN']}, Repro: {report['summary']['REPRODUCIBILITY_DEBT_OPEN']})",
         f"- **Défauts Ouverts** : P0={report['summary']['TOTAL_P0_OPEN']}, P1={report['summary']['TOTAL_P1_OPEN']}, P2={report['summary']['TOTAL_P2_OPEN']}, Overfull={report['summary']['OVERFULL']}",
-        f"- **État observé** : commit `{report['provenance']['head']}`, "
-        f"arbre de travail {'SALE' if report['provenance']['worktree_dirty'] else 'propre'} "
-        f"({report['provenance']['scope']})",
+        f"- **Source auditée** : `{report['provenance']['AUDITED_SOURCE_SHA']}`",
+        f"- **Digest sémantique des sources** : `{report['provenance']['SEMANTIC_SOURCE_DIGEST']}`",
+        f"- **Commit du rapport** : `{report['provenance']['REPORT_COMMIT_SHA']}` "
+        f"(traçabilité seule — ne périme aucune preuve)",
+        f"- **Arbre de travail** : {'SALE' if report['provenance']['worktree_dirty'] else 'propre'} "
+        f"({report['provenance']['worktree_dirty_entries']} entrée(s))",
         "",
         "## Tableau Récapitulatif Exhaustif des 12 PDF Canoniques",
         "",

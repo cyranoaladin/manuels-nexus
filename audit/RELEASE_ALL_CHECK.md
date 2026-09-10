@@ -8,7 +8,10 @@
 - **Préflight Impression Global** : `STALE_EVIDENCE_NOT_REOBSERVED` (12/12)
 - **Dette Produit Ouverte** : `0` (Technique: 0, Contenu: 0, Programme: 0, Print: 0, Manifest: 12, Repro: 0)
 - **Défauts Ouverts** : P0=0, P1=0, P2=0, Overfull=0
-- **État observé** : commit `e17444f13dfd717680d81560e10b450aab168be2`, arbre de travail SALE (WORKTREE_BOUND_BY_INPUT_DIGESTS)
+- **Source auditée** : `8ebc18c8cdc33c3c5b562dece63e908bbea12c53`
+- **Digest sémantique des sources** : `sha256:524be9d45ebe77df12c7249d46bceb2ec538dd070c00e6baf1138c03ef8c7e68`
+- **Commit du rapport** : `8ebc18c8cdc33c3c5b562dece63e908bbea12c53` (traçabilité seule — ne périme aucune preuve)
+- **Arbre de travail** : SALE (40 entrée(s))
 
 ## Tableau Récapitulatif Exhaustif des 12 PDF Canoniques
 

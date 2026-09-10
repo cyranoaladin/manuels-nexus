@@ -1,0 +1,402 @@
+# MISSION DE REPRISE — RÉCUPÉRER, POURSUIVRE ET FINALISER LE MANUEL HGGSP 2027
+
+Vous reprenez une production interrompue dans le projet « Manuels scolaires ».
+
+Votre mission est d’abord de récupérer le travail existant, puis de le contrôler et de poursuivre la rédaction du manuel HGGSP du cycle terminal destiné aux candidats individuels au baccalauréat français, session 2027.
+
+JE NE DEMANDE NI UN NOUVEAU DOSSIER FONDATEUR, NI UN SIMPLE PLAN, NI UN RÉSUMÉ DU PROGRAMME.
+
+Je demande la continuation d’un ouvrage dont la rédaction et la fabrication ont déjà été engagées. Ne recommencez pas les parties récupérables. Ne présentez jamais comme récupéré un texte nouvellement rédigé.
+
+
+## 1. PIÈCES JOINTES ET ÉTAT DE DÉPART
+
+L’archive « HGGSP_2027_Dossier_reprise.zip » rassemble :
+— le présent prompt ;
+— un état détaillé de reprise ;
+— un inventaire de récupération ;
+— le kit fondateur original ;
+— dix images de travail retrouvées ;
+— un manifeste des empreintes des fichiers.
+
+Commencez par lire :
+« ETAT_REPRISE.md »
+« Inventaire_recuperation.json »
+« LISEZMOI.md »
+
+Ouvrez ensuite l’archive de fondation incluse.
+
+Le kit « HGGSP_Cycle_terminal_Kit_fondateur.zip » contient 27 fichiers : dossier fondateur, module 00 candidat et autocorrection, sources Markdown/JSON, documents PDF/Word, programme structuré, profils d’examen, registre de sources, mission de construction et scripts.
+
+Ce kit ne contient pas, à lui seul, les cours développés des onze thèmes.
+
+La session qui a préparé ce passage de relais a retrouvé dix images : quatre illustrations, deux rendus de pages et quatre planches de pages. Elle n’a pas retrouvé dans son espace monté les fichiers Markdown du manuscrit complet ni les cinq PDF intégraux de la tentative précédente.
+
+Cependant, les traces d’opérations de cette tentative attestent un travail plus avancé que le seul kit fondateur : rédaction des chapitres P01 à P05 et T01 à T06, constitution de banques, production de sources assemblées et plusieurs compilations.
+
+Ces traces fournissent des pistes précises. Elles ne rendent pas automatiquement les fichiers correspondants disponibles dans cette nouvelle session.
+
+Distinguez constamment :
+— fichier accessible ;
+— contenu documentaire retrouvé dans une trace ;
+— simple mention d’un fichier ;
+— reconstruction nouvelle ;
+— validation effectivement exécutée.
+
+
+## 2. RECHERCHE PRIORITAIRE DU MANUSCRIT ET DE SES DÉPENDANCES
+
+Inspectez les pièces jointes et l’espace de travail réellement accessible, y compris ses sous-répertoires.
+
+Les anciens chemins ont parfois été remontés sous des répertoires imbriqués : cherchez par noms et chemins relatifs, pas seulement à la racine de /mnt/data.
+
+Les anciennes racines étaient :
+
+/mnt/data/HGGSP_2027_Manuel/
+/mnt/data/_hggsp_work/
+
+Ce sont des pistes historiques, pas des répertoires dont l’existence actuelle est garantie.
+
+Sous « HGGSP_2027_Manuel/ », recherchez en priorité :
+
+CHAPITRES
+chapitres/P01.md
+chapitres/P02.md
+chapitres/P03.md
+chapitres/P04.md
+chapitres/P05.md
+chapitres/T01.md
+chapitres/T02.md
+chapitres/T03.md
+chapitres/T04.md
+chapitres/T05.md
+chapitres/T06.md
+
+MÉTHODES ET CONTENUS ASSOCIÉS
+methodes/00_mode_emploi.md
+methodes/13_oral_et_evaluation.md
+methodes/14_atlas.md
+entrainements/
+corrections/
+examens/
+illustrations/
+
+DONNÉES STRUCTURÉES
+referentiel/banque_pedagogique.json
+referentiel/examens_originaux.json
+referentiel/couverture_redaction.json
+referentiel/registre_sources.json
+referentiel/references.md
+referentiel/correspondance_programme.md
+referentiel/base_programme_cycle_terminal.json
+referentiel/base_profils_examens.json
+
+SOURCES ASSEMBLÉES
+production/manuel_cycle.md
+production/manuel_niveau1.md
+production/compagnon.md
+production/epreuves.md
+production/sujets_seuls.md
+
+SCRIPTS ET GABARITS
+production/build.py
+production/banque.py
+production/examens.py
+production/assemble.py
+production/atlas.py
+production/template.latex
+production/style.tex
+
+VÉRIFICATIONS
+verification/verifier.py
+verification/CONTROLES_STRUCTURELS.json
+verification/ETAT_EDITORIAL.md
+verification/build/
+
+Les cinq anciens noms de sortie étaient :
+
+HGGSP_2027_Manuel_Cycle_terminal.pdf
+HGGSP_2027_Niveau_1_Premiere.pdf
+HGGSP_2027_Compagnon_Autocorrection.pdf
+HGGSP_2027_Epreuves_blanches_et_corriges.pdf
+HGGSP_2027_Epreuves_Sujets_seuls.pdf
+
+Recherchez aussi les PDF intermédiaires, TeX, journaux et fichiers auxiliaires sous « verification/build/ », notamment les familles :
+manuel_cycle
+manuel_niveau1
+compagnon
+epreuves
+sujets_seuls
+
+Sous « _hggsp_work/ », recherchez les scripts banque.py, examens.py, assemble.py et atlas.py, les fichiers final_build.log et build_status.txt, ainsi que les dossiers renders/, rendus_finaux/ et interrupted_build_2/.
+
+Un ancien fichier PID n’identifie pas un processus actuel et ne doit jamais servir à arrêter un processus.
+
+Lorsque les outils disponibles permettent de rechercher dans les fichiers du projet, la bibliothèque de fichiers ou l’historique accessible, utilisez ces voies avec les noms exacts.
+
+Si un outil autorise l’accès à des traces partageables d’opérations, recherchez les contenus des artefacts, les commandes de création et les résultats factuels. Ne supposez pas que l’historique détaillé de l’ancienne conversation soit accessible.
+
+Si des textes complets de fichiers sont retrouvés dans des traces, matérialisez-les dans un dossier de récupération distinct et consignez leur provenance. Un fragment tronqué ne devient pas un fichier intégral.
+
+Si seul un PDF est retrouvé, conservez-le, puis examinez son texte et ses objets avant d’envisager une reconstruction.
+
+Les planches de vignettes servent d’indices et de repères visuels, pas de substitut fiable à tout le manuscrit. Ne recourez à l’OCR qu’en dernier ressort sur les pages nécessaires.
+
+BORNEZ CETTE RECHERCHE.
+
+Après une inspection récursive ciblée et les recherches réellement disponibles, consignez les absences et poursuivez à partir des matériaux récupérés. Ne répétez pas indéfiniment les mêmes listes de répertoire.
+
+Un échec d’outil local ne démontre pas que toutes les voies de récupération sont fermées.
+
+
+## 3. PRÉSERVER AVANT DE REPRENDRE
+
+Conservez les originaux intacts.
+
+Travaillez sur une copie identifiée. Ne lancez pas d’assembleur avant d’avoir lu ses entrées, ses sorties et ses effets.
+
+Vérifiez les archives avant extraction, empêchez les sorties de répertoire et n’exécutez pas automatiquement leurs scripts.
+
+Établissez un inventaire avec :
+chemin, taille, empreinte SHA-256, provenance, rôle et statut.
+
+Distinguez les versions par leur contenu et leurs dépendances, pas seulement par leur date. Préservez les corrections propres à chaque version avant toute consolidation.
+
+Créez rapidement une archive de sauvegarde portable avec un lien vérifié.
+
+Le but de cette reprise est précisément de ne plus laisser plusieurs heures de travail uniquement dans un environnement temporaire.
+
+
+## 4. RECONSTITUER L’ÉTAT ÉDITORIAL SANS SURESTIMER L’AVANCEMENT
+
+Les traces historiques donnent les repères suivants :
+
+— onze chapitres ;
+— environ 40 905 mots de cours à un stade de rédaction ;
+— 88 exercices ;
+— 55 questions de QCM ;
+— douze méthodes ;
+— six remédiations ;
+— onze nouveaux tests ;
+— cinq sujets N1 ;
+— quatre sujets N2 ;
+— neuf illustrations prévues ou produites.
+
+Un assemblage ultérieur indiquait environ 60 208 mots, selon une autre méthode de comptage et un périmètre plus large.
+
+Ces nombres sont des repères de rapprochement historiques, pas des quotas à remplir artificiellement ni un état actuel certifié.
+
+Recomptez sur les fichiers retrouvés. Vérifiez surtout le contenu et les correspondances.
+
+Un contrôle historique a d’abord indiqué 723 réussites et 7 échecs sur 730 vérifications, puis une exécution ultérieure a indiqué 730 réussites.
+
+Les échecs initiaux concernaient la longueur d’explications de distracteurs. Ces tests étaient principalement structurels : ils ne certifient ni toutes les sources historiques ni la qualité didactique.
+
+Ne déclarez pas avoir réexécuté ces tests sans les avoir effectivement exécutés dans cette session.
+
+Produisez une matrice comprenant :
+thème, introduction, axes, jalons, objet conclusif, cours développé, documents disponibles, activités, corrections, méthodes, remédiations, évaluation, liens et statut de revue.
+
+Un titre, une ancre ou un seuil de mots ne suffit pas à valider une couverture.
+
+
+## 5. PUBLICS ET NIVEAUX À CONSERVER
+
+NIVEAU 1 — HGGSP NON POURSUIVIE APRÈS LA PREMIÈRE
+
+Prévoir un apprentissage autonome des cinq thèmes de Première et une préparation spécifique à l’évaluation ponctuelle.
+
+La demande vise notamment une passation pendant la première année lorsque la modalité d’inscription le permet.
+
+Ne confondez pas année d’apprentissage, année de passation et session de délivrance du diplôme.
+
+NIVEAU 2 — HGGSP CONSERVÉE EN TERMINALE, PRÉPARATION INTENSIVE EN UNE ANNÉE
+
+Organiser une progression explicite depuis les fondations de Première jusqu’au programme de Terminale et aux épreuves de 2027.
+
+Le candidat doit savoir quels prérequis reprendre, quel parcours suivre et comment vérifier ses progrès.
+
+Ces niveaux sont des parcours éditoriaux, distincts des trois degrés de difficulté des exercices.
+
+Préparer le bac en un an ne signifie pas nécessairement conserver HGGSP : celui qui ne la poursuit pas reste orienté vers N1 pour cette spécialité.
+
+N’inventez pas un cumul d’épreuves pour une même spécialité conservée.
+
+Le manuel prépare HGGSP, pas à lui seul l’ensemble du baccalauréat.
+
+La préparation intensive et l’autorisation administrative de réunir des épreuves la même année sont deux questions distinctes.
+
+Vérifiez les conditions sans présumer l’âge, les dispenses, les notes acquises ni la situation personnelle du candidat. Ne fabriquez aucun calendrier local tunisien.
+
+
+## 6. VÉRIFICATION OFFICIELLE PROPRE À LA SESSION 2027
+
+Avant de finaliser les pages réglementaires et les sujets blancs, consultez les BO et les pages institutionnelles applicables, avec dates, références et périmètres.
+
+Les textes officiels priment sur le kit et sur toute réponse antérieure.
+
+Le registre fondateur identifie les programmes de Première et Terminale, la note du 27 août 2025 sur l’épreuve HGGSP, les textes relatifs aux candidats individuels et les ressources sur le Grand oral.
+
+Réouvrez-les et contrôlez les éventuelles modifications applicables à 2027.
+
+REPÈRES CONSIGNÉS DANS LE TRAVAIL PRÉCÉDENT, À RECONFIRMER :
+
+— composition de 2 heures pour la spécialité non poursuivie, coefficient 8 ;
+— écrit terminal de 4 heures, coefficient 16, dissertation et étude critique ;
+— deux dissertations au choix portant sur deux thèmes différents et étude critique sur un troisième ;
+— thèmes T02, T04, T05 et T06 évaluables à l’écrit en 2027 ;
+— coefficient 8 du Grand oral en voie générale à partir de 2027 et articulation des deux questions avec les deux spécialités conservées.
+
+Distinguez programme enseigné et périmètre des sujets d’examen.
+
+Conservez les six thèmes de Terminale dans l’ouvrage. Ne supprimez pas T01 et T03 au motif de la rotation.
+
+Maintenez une préparation distincte à la composition, à la dissertation, à l’étude critique, au Grand oral et, lorsque pertinent, à l’oral de contrôle.
+
+Archivez les références vérifiées et datez les actualisations.
+
+Ne prétendez pas connaître les futurs sujets officiels de 2027.
+
+
+## 7. CONTINUER UN VÉRITABLE MANUEL, PAS UNE COLLECTION DE FICHES
+
+Préservez les onze thèmes, les deux axes et l’objet de travail conclusif de chacun, ainsi que les jalons du référentiel, dont le dénombrement antérieur était de 78.
+
+Vérifiez les formulations dans les programmes. Les identifiants locaux ne sont pas des codes ministériels.
+
+Chaque unité doit relier :
+diagnostic → orientation → cours essentiel développé → exemple commenté → guidage progressivement réduit → entraînement → preuve de maîtrise → correction → remédiation → nouveau test → réactivation → transfert.
+
+Le cours doit expliquer les contextes, acteurs, temporalités, espaces, mécanismes et interprétations.
+
+Une synthèse de révision vient après ces explications ; elle ne les remplace pas.
+
+Croisez les approches historique, géographique, géopolitique et politique lorsque cela éclaire l’objet, sans juxtaposition artificielle.
+
+Les documents nécessaires aux exercices doivent être disponibles dans le support, lisibles et exploitables.
+
+Variez les textes, cartes, chronologies, tableaux, données, images documentaires et confrontations. Une simple liste de liens ne remplace pas un dossier.
+
+Distinguez documents authentiques, adaptations, synthèses éditoriales et situations fictives.
+
+Ne transformez jamais une synthèse rédigée en citation d’un acteur historique.
+
+Les fictions méthodologiques du module 00 ne remplacent pas les faits des jalons.
+
+Identifiez auteur, nature, date, contexte, provenance, coupes, traduction éventuelle et droits.
+
+Les faits contemporains sensibles doivent être datés et vérifiés.
+
+Entraînez explicitement à contextualiser, problématiser, sélectionner, comparer, argumenter, construire un plan et rédiger.
+
+N’imposez pas de plan universel en trois parties.
+
+Une correction doit expliquer pourquoi la réponse convient, ses limites et les autres démarches recevables.
+
+
+## 8. ACTIVITÉS, AUTOCORRECTION ET EXAMENS BLANCS
+
+Réutilisez la banque retrouvée, puis complétez les lacunes réelles.
+
+Vérifiez chaque question, document, aide, réponse et renvoi. Une aide générique copiée partout n’est pas une remédiation ciblée.
+
+Préservez les diagnostics, parcours gradués, tâches de rédaction, productions orales et reprises espacées.
+
+Reliez le tableau de suivi à des critères observables : restituer, expliquer puis mobiliser dans un sujet nouveau.
+
+Les candidats doivent accéder aux corrections nécessaires à leur apprentissage, dans un compagnon séparé à consulter après une première tentative.
+
+Ne réservez pas toutes les explications au professeur.
+
+Les exemples résolus du cours sont légitimes. Séparez les sujets seuls de leurs corrigés. Un sujet déjà distribué avec sa réponse n’est plus une évaluation confidentielle.
+
+Recherchez les cinq compositions N1 et les quatre écrits N2 de la tentative précédente avant d’en créer d’autres.
+
+Vérifiez leur conformité à 2027, leur diversité, les durées, les documents intégrés et la couverture de tous les sujets proposés.
+
+Contrôlez aussi les corrigés de la seconde dissertation au choix : quelques indications trop brèves ne suffisent pas toujours à l’apprentissage autonome.
+
+Distinguez barème pédagogique proposé et prescription ministérielle.
+
+Les seuils des scripts ne doivent pas servir à fabriquer des réponses longues mais pauvres ou des validations de façade.
+
+
+## 9. MISE EN FORME ET FABRICATION
+
+L’ancienne chaîne utilisait des sources Markdown/JSON, Pandoc et LuaLaTeX, avec template.latex, style.tex et build.py.
+
+Reprenez-la si ses composants sont récupérables et adaptés.
+
+Examinez les chemins absolus vers « _hggsp_work/ » : les scripts doivent devenir portables avant une reconstruction hors de l’ancien environnement.
+
+Le gabarit de cette tentative était autonome, pas une charte canonique approuvée du dépôt.
+
+Les images conservées renseignent sur son aspect, mais ne sont pas une validation globale. Les notes de reprise décrivent les derniers ajustements connus.
+
+Pour consulter la logique de collection, le dépôt de référence est :
+cyranoaladin/manuels-nexus
+
+Utilisez le connecteur adapté s’il est disponible.
+
+Ne supposez pas que le manuscrit HGGSP y a été envoyé.
+
+Aucun mandat de cette reprise n’autorise une publication, une fusion dans la branche principale, une suppression ou une modification des autres manuels.
+
+Les noms A. BEN RHOUMA et P. Caillabet concernaient les supports NSI antérieurs : ne les attribuez pas automatiquement comme auteurs HGGSP.
+
+Contrôlez :
+sommaire, signets, métadonnées, renvois, titres, pagination, tableaux, cartes, légendes, polices incorporées, contraste, ordre de lecture et impression.
+
+Inspectez les rendus, pas seulement le texte extrait.
+
+Consignez les pages effectivement contrôlées.
+
+N’exportez aucun fichier de police dans le paquet.
+
+
+## 10. SAUVEGARDES PROGRESSIVES ET LIVRAISON
+
+Sauvegardez après chaque bloc significatif :
+sources réellement écrites, références, matrice de couverture et état d’avancement.
+
+Créez des archives de reprise successives et fournissez leurs liens vérifiés aux points d’étape, sans attendre le tout dernier assemblage.
+
+Un checkpoint doit indiquer :
+— contenu récupéré ;
+— contenu reconstitué ou nouveau ;
+— fichiers modifiés ;
+— tests exécutés ;
+— pages inspectées ;
+— problèmes ouverts ;
+— prochaine opération exacte.
+
+Ne comptez pas sur la persistance implicite d’un chemin temporaire.
+
+Le livrable final attendu comprend :
+— le manuel du cycle terminal avec navigation N1/N2 ;
+— l’extraction Première N1 ;
+— le compagnon d’autocorrection ;
+— les sujets blancs avec corrections ;
+— les sujets seuls ;
+— les sources modifiables et leurs dépendances autorisées ;
+— les références ;
+— un rapport de vérification.
+
+Une extraction N2 peut être ajoutée depuis les mêmes sources si elle facilite réellement l’usage.
+
+Ouvrez les exports finaux et testez les archives.
+
+Ne qualifiez l’ouvrage de complet qu’après contrôle du contenu et de sa couverture.
+
+Une réussite des tests structurels ne doit jamais être présentée comme une relecture disciplinaire indépendante.
+
+
+## ACTION IMMÉDIATE
+
+Commencez maintenant par l’inventaire concret et une sauvegarde des éléments récupérés.
+
+Poursuivez ensuite la rédaction sans attendre une nouvelle autorisation pour chaque chapitre.
+
+Si des fichiers demeurent introuvables après recherche, indiquez précisément lesquels, préservez tout ce qui existe et reconstituez uniquement les parties nécessaires en les identifiant comme telles.
+
+Une interruption technique doit conduire à remettre un checkpoint utilisable, pas à perdre de nouveau le manuscrit ou à renvoyer uniquement le dossier fondateur.

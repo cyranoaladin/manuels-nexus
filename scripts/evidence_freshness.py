@@ -177,3 +177,109 @@ def assess_artifact(path: Path, root: Path = ROOT) -> dict[str, Any]:
     return assess(
         payload.get("freshness") or {}, root, _seen=frozenset({str(path)})
     )
+
+
+# ---------------------------------------------------------------------------
+# Provenance sémantique : ce qui décrit le courant est le digest, pas le commit
+# ---------------------------------------------------------------------------
+#
+# Un rapport d'audit qui se commite fait avancer HEAD sans toucher un seul
+# octet de manuel. Juger la fraîcheur d'une preuve sur HEAD la périme donc à
+# chaque publication : le rapport s'invalide lui-même. Quatre identités sont
+# distinguées, et une seule sert de critère.
+#
+#     AUDITED_SOURCE_SHA      le commit dont les sources ont été observées
+#     REPORT_COMMIT_SHA       le commit portant le rapport — traçabilité seule
+#     SEMANTIC_SOURCE_DIGEST  l'empreinte des sources canoniques : LE critère
+#     RELEASE_TAG_SHA         le tag de release, lorsqu'il existe
+#
+#: Les racines qui CONSTITUENT les manuels. `audit/` en est exclu par nature :
+#: il observe les manuels, il ne les compose pas.
+SEMANTIC_SOURCE_ROOTS = (
+    "Mathematiques/manuel-maths/chapitres",
+    "Mathematiques/manuel-maths/gabarits",
+    "Mathematiques/manuel-maths/referentiel",
+    "NSI/chapitres",
+    "NSI/gabarits",
+    "NSI/referentiel",
+    "gabarits",
+)
+
+
+def _tree_sha(root: Path, commit: str, path: str) -> str | None:
+    """SHA de l'arbre Git d'un répertoire à un commit donné.
+
+    Git hache déjà récursivement le contenu d'un répertoire : ce SHA EST
+    l'empreinte de ces sources, sans avoir à les relire.
+    """
+    try:
+        completed = subprocess.run(
+            ["git", "rev-parse", f"{commit}:{path}"],
+            cwd=root, capture_output=True, text=True, check=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    return completed.stdout.strip() or None
+
+
+def semantic_source_digest(root: Path = ROOT, commit: str = "HEAD") -> str:
+    """Empreinte des sources canoniques à un commit.
+
+    Insensible à tout commit qui ne touche que `audit/`, la documentation ou
+    les tests : ces fichiers ne composent aucun manuel.
+    """
+    lignes = [
+        f"{path}:{_tree_sha(root, commit, path) or 'ABSENT'}"
+        for path in SEMANTIC_SOURCE_ROOTS
+    ]
+    empreinte = hashlib.sha256("\n".join(lignes).encode("utf-8")).hexdigest()
+    return f"sha256:{empreinte}"
+
+
+def release_tag_sha(root: Path = ROOT) -> str | None:
+    """SHA du tag de release couvrant HEAD, s'il en existe un."""
+    try:
+        completed = subprocess.run(
+            ["git", "tag", "--points-at", "HEAD", "--list", "release/*"],
+            cwd=root, capture_output=True, text=True, check=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    tags = [line for line in completed.stdout.split() if line]
+    if not tags:
+        return None
+    return _tree_sha(root, tags[0], "") or head_sha(root)
+
+
+def provenance(
+    audited_source_sha: str | None = None,
+    root: Path = ROOT,
+) -> dict[str, Any]:
+    """Les quatre identités, séparées, sans qu'aucune ne se confonde."""
+    return {
+        "AUDITED_SOURCE_SHA": audited_source_sha or head_sha(root),
+        "REPORT_COMMIT_SHA": head_sha(root),
+        "SEMANTIC_SOURCE_DIGEST": semantic_source_digest(root),
+        "RELEASE_TAG_SHA": release_tag_sha(root),
+        "freshness_rule": (
+            "Une preuve reste courante tant que SEMANTIC_SOURCE_DIGEST n'a pas "
+            "change. REPORT_COMMIT_SHA ne fait jamais perimer quoi que ce soit."
+        ),
+    }
+
+
+def semantically_current(
+    observed_commit: str | None = None,
+    observed_digest: str | None = None,
+    root: Path = ROOT,
+) -> bool:
+    """La preuve decrit-elle les sources COURANTES ?
+
+    Repond par le digest. Un commit observe n'est utilise que pour retrouver le
+    digest d'alors, jamais compare a HEAD.
+    """
+    if observed_digest is None:
+        if observed_commit is None:
+            return False
+        observed_digest = semantic_source_digest(root, observed_commit)
+    return observed_digest == semantic_source_digest(root)
