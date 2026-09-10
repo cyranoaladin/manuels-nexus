@@ -35,6 +35,7 @@ MULTIPLE = "audit/MULTIPLE_ASSIGNMENT_RESOLUTION.json"
 PREREQUIS = "audit/1SPE_PREREQUISITE_SUPPORT.json"
 NORMATIVITE = "audit/NORMATIVITY_PROVENANCE_GATE.json"
 REPARATIONS = "audit/DANGLING_CAPACITY_REPAIRS.json"
+CONTRE_EXPERTISE = "audit/PROGRAMME_COUNTER_EXPERTISE_REPORT.json"
 
 
 @dataclass(frozen=True)
@@ -219,6 +220,40 @@ SOURCES: tuple[tuple[str, str, tuple[str, ...]], ...] = (
         "OBJECTS_CITING_AN_UNKNOWN_CAPACITY",
         REVERSE,
         ("summary", "OBJECTS_CITING_AN_UNKNOWN_CAPACITY"),
+    ),
+    # La contre-expertise : ce que sont devenus les attendus non couverts. Un
+    # zero ne dit pas s'il vient d'un manuel complete ou d'une mesure
+    # assouplie ; ces compteurs-la le disent.
+    (
+        "FALSE_MISSING_TOOLING",
+        CONTRE_EXPERTISE,
+        ("summary", "FALSE_MISSING_TOOLING"),
+    ),
+    (
+        "MISSING_FROM_ASSEMBLY",
+        CONTRE_EXPERTISE,
+        ("summary", "MISSING_FROM_ASSEMBLY"),
+    ),
+    ("TRUE_CONTENT_GAP", CONTRE_EXPERTISE, ("summary", "TRUE_CONTENT_GAP")),
+    (
+        "FALSE_PARTIAL_TOOLING",
+        CONTRE_EXPERTISE,
+        ("summary", "FALSE_PARTIAL_TOOLING"),
+    ),
+    (
+        "TRUE_PARTIAL_PEDAGOGICAL",
+        CONTRE_EXPERTISE,
+        ("summary", "TRUE_PARTIAL_PEDAGOGICAL"),
+    ),
+    (
+        "CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING",
+        CONTRE_EXPERTISE,
+        ("summary", "CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING"),
+    ),
+    (
+        "NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK",
+        COVERAGE,
+        ("summary", "NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK"),
     ),
 )
 

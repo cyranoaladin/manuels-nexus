@@ -1,0 +1,1401 @@
+{
+  "artifact_type": "programme_counter_expertise_report",
+  "schema_version": 1,
+  "generated_by": "scripts/build_counter_expertise_report.py",
+  "question": "Chacun des treize « manquants » et des quarante-cinq « partiels » a-t-il ete refute, assemble, ou reellement comble ?",
+  "baseline_commit": "af8506b793893019b57c3a4db4aa6b2b8d09c823",
+  "summary": {
+    "MISSING_BEFORE": 13,
+    "PARTIAL_BEFORE": 45,
+    "UNDECIDABLE_BEFORE": 3,
+    "FALSE_MISSING_TOOLING": 7,
+    "MISSING_FROM_ASSEMBLY": 4,
+    "TRUE_CONTENT_GAP": 2,
+    "FALSE_PARTIAL_TOOLING": 42,
+    "TRUE_PARTIAL_PEDAGOGICAL": 3,
+    "UNDECIDABLE_FALSE_MISSING_TOOLING": 2,
+    "UNDECIDABLE_TRUE_CONTENT_GAP": 1,
+    "OFFICIAL_REQUIRED_MISSING_NOW": 0,
+    "OFFICIAL_REQUIRED_PARTIAL_NOW": 0,
+    "CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING": 9
+  },
+  "former_missing": [
+    {
+      "official_id": "MENE1901633A::LANGAGES-ET-PROGRAMMATION::CONTENUS::KNOWLEDGE::5d1ed68f",
+      "manual": "1NSI",
+      "official_wording": "Utilisation de bibliothèques",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "MISSING",
+      "ancien_motif": "aucun objet du manuel ne porte cet attendu",
+      "verdict_apres_contre_expertise": "FALSE_MISSING_TOOLING",
+      "cause": "la ligne du tableau officiel n'etait pas conservee : le contenu et les capacites qui le realisent etaient mesures separement",
+      "existing_evidence_if_any": [
+        "1NSI-LANG-COURS-C5",
+        "1NSI-LANG-EVAL-B",
+        "1NSI-LANG-M3",
+        "1NSI-LANGAGE-QCM"
+      ],
+      "evidence_kind_now": "OFFICIAL_ROW_EVIDENCE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par OFFICIAL_ROW_EVIDENCE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE2602917A::GEOMETRIE::GEOMETRIE-REPEREE::EXPECTED_CAPACITY::ddbb184a",
+      "manual": "1SPE",
+      "official_wording": "Utiliser un repère pour étudier une configuration.",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "MISSING",
+      "ancien_motif": "aucun objet du manuel ne porte cet attendu",
+      "verdict_apres_contre_expertise": "FALSE_MISSING_TOOLING",
+      "cause": "le mot « configuration » ne figure dans aucun objet, alors que c'est le seul terme distinctif du libelle avec « repere »",
+      "existing_evidence_if_any": [
+        "1SPE-GEOMETRIE-REPEREE-QCM",
+        "1SPE-GEOREP-CO-020",
+        "1SPE-GEOREP-CO-031",
+        "1SPE-GEOREP-CO-032",
+        "1SPE-GEOREP-CO-033",
+        "1SPE-GEOREP-CO-034"
+      ],
+      "evidence_kind_now": "CONTRADICTORY_REVIEW",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "revue contradictoire declaree ; verdict rendu a la lecture de l'objet : FALSE_MISSING_TOOLING",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921265A::THEMES-D-ETUDE::CALCULS-D-AIRES::KNOWLEDGE::8a8ba6b0",
+      "manual": "TCOMPL",
+      "official_wording": "Continuité et dérivation.",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "MISSING",
+      "ancien_motif": "aucun objet du manuel ne porte cet attendu",
+      "verdict_apres_contre_expertise": "FALSE_MISSING_TOOLING",
+      "cause": "l'attendu n'etait rattache a aucun atome, et le rapprochement par contenu ne concluait pas",
+      "existing_evidence_if_any": [
+        "TCOMPL-AIR-CO-010",
+        "TCOMPL-AIR-CR-010",
+        "TCOMPL-AIR-CR-012",
+        "TCOMPL-AIR-EV-B",
+        "TCOMPL-AIR-EV-B-corrige",
+        "TCOMPL-AIR-EX-009"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921265A::THEMES-D-ETUDE::REPARTITION-DES-RICHESSES-INEGALIT::KNOWLEDGE::d1dca1fd",
+      "manual": "TCOMPL",
+      "official_wording": "Statistique descriptive : caractéristiques de dispersion (médiane, quartiles, déciles, rapport interdécile).",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "MISSING",
+      "ancien_motif": "aucun objet du manuel ne porte cet attendu",
+      "verdict_apres_contre_expertise": "TRUE_CONTENT_GAP",
+      "cause": "aucun cours du manuel n'exposait mediane, quartiles, deciles ni rapport interdecile",
+      "existing_evidence_if_any": [
+        "TCOMPL-INEG-CR-009"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "cours redige : dispersion, quartiles, deciles, rapport interdecile, exemple travaille sur vingt revenus",
+      "content_created": "YES",
+      "content_paths": [
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/cours/10_C0_dispersion.tex"
+      ]
+    },
+    {
+      "official_id": "MENE1921265A::VOCABULAIRE-ENSEMBLISTE-ET-LOGIQUE::LES-ELEVES-APPRENNENT-EN-SITUATION::EXPECTED_CAPACITY::2d1adb12",
+      "manual": "TCOMPL",
+      "official_wording": "lire et écrire des propositions contenant les connecteurs « et », « ou » ;",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "MISSING",
+      "ancien_motif": "aucun objet du manuel ne porte cet attendu",
+      "verdict_apres_contre_expertise": "MISSING_FROM_ASSEMBLY",
+      "cause": "meme cause : page transversale existante, absente de l'assemblage TCOMPL",
+      "existing_evidence_if_any": [
+        "TCOMPL-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "ANNEXES_TRANSVERSALES etendu",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921265A::VOCABULAIRE-ENSEMBLISTE-ET-LOGIQUE::LES-ELEVES-APPRENNENT-EN-SITUATION::EXPECTED_CAPACITY::6deddd36",
+      "manual": "TCOMPL",
+      "official_wording": "formuler une implication, une équivalence logique, et à les mobiliser dans un raisonnement simple ;",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "MISSING",
+      "ancien_motif": "aucun objet du manuel ne porte cet attendu",
+      "verdict_apres_contre_expertise": "MISSING_FROM_ASSEMBLY",
+      "cause": "meme cause : page transversale existante, absente de l'assemblage TCOMPL",
+      "existing_evidence_if_any": [
+        "TCOMPL-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "ANNEXES_TRANSVERSALES etendu",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921265A::VOCABULAIRE-ENSEMBLISTE-ET-LOGIQUE::LES-ELEVES-APPRENNENT-EN-SITUATION::EXPECTED_CAPACITY::c54deb1f",
+      "manual": "TCOMPL",
+      "official_wording": "reconnaître ce qu’est une proposition mathématique, à utiliser des variables pour écrire des propositions mathématiques ;",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "MISSING",
+      "ancien_motif": "aucun objet du manuel ne porte cet attendu",
+      "verdict_apres_contre_expertise": "MISSING_FROM_ASSEMBLY",
+      "cause": "la page transversale de logique existait, mais l'assembleur ne la portait dans aucun manuel de terminale complementaire",
+      "existing_evidence_if_any": [
+        "TCOMPL-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "ANNEXES_TRANSVERSALES etendu : une source logique canonique, plusieurs assemblages",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921265A::VOCABULAIRE-ENSEMBLISTE-ET-LOGIQUE::LES-ELEVES-APPRENNENT-EN-SITUATION::EXPECTED_CAPACITY::f0ebc11f",
+      "manual": "TCOMPL",
+      "official_wording": "lire et écrire des propositions contenant une quantification universelle ou existentielle (les symboles ∀ et ∃ ne sont pas exigibles).",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "MISSING",
+      "ancien_motif": "aucun objet du manuel ne porte cet attendu",
+      "verdict_apres_contre_expertise": "MISSING_FROM_ASSEMBLY",
+      "cause": "meme cause : page transversale existante, absente de l'assemblage TCOMPL",
+      "existing_evidence_if_any": [
+        "TCOMPL-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "ANNEXES_TRANSVERSALES etendu",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921264A::NOMBRES-COMPLEXES::NOMBRES-COMPLEXES-ET-TRIGONOMETRIE::EXPECTED_CAPACITY::be235323",
+      "manual": "TEXPERTES",
+      "official_wording": "Effectuer des calculs sur des nombres complexes en choisissant une forme adaptée, en particulier dans le cadre de la résolution de problèmes.",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "MISSING",
+      "ancien_motif": "aucun objet du manuel ne porte cet attendu",
+      "verdict_apres_contre_expertise": "FALSE_MISSING_TOOLING",
+      "cause": "les termes du libelle -- « effectuer », « calculs », « choisissant », « adaptee » -- sont trop generiques pour designer quoi que ce soit",
+      "existing_evidence_if_any": [
+        "TEXP-CTP-CR-010",
+        "TEXP-CTP-ME-001",
+        "TEXP-CTP-ME-002"
+      ],
+      "evidence_kind_now": "CONTRADICTORY_REVIEW",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "revue contradictoire declaree ; verdict rendu a la lecture de l'objet : FALSE_MISSING_TOOLING",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921247A::ARCHITECTURES-MATERIELLES-SYSTEMES::CONTENUS::KNOWLEDGE::51966072",
+      "manual": "TNSI",
+      "official_wording": "Sécurisation des communications.",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "MISSING",
+      "ancien_motif": "aucun objet du manuel ne porte cet attendu",
+      "verdict_apres_contre_expertise": "FALSE_MISSING_TOOLING",
+      "cause": "la ligne du tableau officiel n'etait pas conservee : le contenu et les capacites qui le realisent etaient mesures separement",
+      "existing_evidence_if_any": [
+        "TNSI-ARCH-CO-004",
+        "TNSI-ARCH-CO-007",
+        "TNSI-ARCH-CR-013",
+        "TNSI-ARCH-EVAL-B",
+        "TNSI-ARCH-EVAL-B-corrige",
+        "TNSI-ARCH-EX-004"
+      ],
+      "evidence_kind_now": "OFFICIAL_ROW_EVIDENCE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par OFFICIAL_ROW_EVIDENCE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921246A::ALGEBRE-ET-GEOMETRIE::ORTHOGONALITE-ET-DISTANCES-DANS-L::KNOWLEDGE::e04b8897",
+      "manual": "TSPE",
+      "official_wording": "Développement de u  v , formules de polarisation.",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "MISSING",
+      "ancien_motif": "aucun objet du manuel ne porte cet attendu",
+      "verdict_apres_contre_expertise": "TRUE_CONTENT_GAP",
+      "cause": "le chapitre traitait le produit scalaire sans developper la norme d'une somme ni enoncer les formules de polarisation",
+      "existing_evidence_if_any": [
+        "TSPE-GEOESPACE-CR-012",
+        "TSPE-SUITLIM-EX-033"
+      ],
+      "evidence_kind_now": "CONTRADICTORY_REVIEW",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "cours redige : developpement de la norme d'une somme et d'une difference, les deux formules de polarisation et leurs demonstrations",
+      "content_created": "YES",
+      "content_paths": [
+        "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/12_C7_produit_scalaire.tex"
+      ]
+    },
+    {
+      "official_id": "MENE1921246A::PROBABILITES::CONCENTRATION-LOI-DES-GRANDS-NOMBR::ALGORITHM_EXAMPLE::55261635",
+      "manual": "TSPE",
+      "official_wording": "Simulation d’une marche aléatoire.",
+      "official_normativity_before": "PRESCRIBED_ALGORITHMIC_WORK",
+      "mandatory_now": false,
+      "ancien_verdict": "MISSING",
+      "ancien_motif": "aucun travail algorithmique dans la partie concernee",
+      "verdict_apres_contre_expertise": "FALSE_MISSING_TOOLING",
+      "cause": "NORMATIVITY_MISCLASSIFIED : le BO nomme un exemple d'algorithme, il ne l'impose pas ; l'atomisation en avait fait une obligation",
+      "existing_evidence_if_any": [
+        "TSPE-CONCLGN-ALG-018",
+        "TSPE-PROBA-ALG-017"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "OUT_OF_SCOPE_ENRICHMENT",
+      "modification_effectuee": "normativite corrigee ; l'attendu ne compte plus au denominateur des obligations",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921246A::PROBABILITES::SUCCESSION-D-EPREUVES-INDEPENDANTE::ALGORITHM_EXAMPLE::44e05f87",
+      "manual": "TSPE",
+      "official_wording": "Simulation de la planche de Galton.",
+      "official_normativity_before": "PRESCRIBED_ALGORITHMIC_WORK",
+      "mandatory_now": false,
+      "ancien_verdict": "MISSING",
+      "ancien_motif": "aucun travail algorithmique dans la partie concernee",
+      "verdict_apres_contre_expertise": "FALSE_MISSING_TOOLING",
+      "cause": "NORMATIVITY_MISCLASSIFIED : le BO nomme un exemple d'algorithme, il ne l'impose pas ; l'atomisation en avait fait une obligation",
+      "existing_evidence_if_any": [
+        "TSPE-PROBA-ALG-017"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "OUT_OF_SCOPE_ENRICHMENT",
+      "modification_effectuee": "normativite corrigee ; l'attendu ne compte plus au denominateur des obligations",
+      "content_created": "NO",
+      "content_paths": []
+    }
+  ],
+  "former_partial": [
+    {
+      "official_id": "MENE1901633A::TRAITEMENT-DE-DONNEES-EN-TABLES::CONTENUS::KNOWLEDGE::63b597e8",
+      "manual": "1NSI",
+      "official_wording": "Indexation de tables",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "aborde par des objets du manuel, mais aucun cours ne l'expose",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la ligne du tableau officiel n'etait pas conservee : le contenu et les capacites qui le realisent etaient mesures separement",
+      "existing_evidence_if_any": [
+        "1NSI-TAB-AM-EXTRAIT",
+        "1NSI-TAB-COURS-C1",
+        "1NSI-TAB-EVAL-A",
+        "1NSI-TAB-EVAL-B",
+        "1NSI-TAB-EX-001",
+        "1NSI-TAB-M1"
+      ],
+      "evidence_kind_now": "OFFICIAL_ROW_EVIDENCE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par OFFICIAL_ROW_EVIDENCE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::DEMONSTRATION::3e16065b",
+      "manual": "1SPE",
+      "official_wording": "Calcul du terme général d’une suite arithmétique, d’une suite géométrique.",
+      "official_normativity_before": "REQUIRED_DEMONSTRATION",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "des objets portent cet attendu, mais aucun ne contient de demonstration redigee : le nom d'un theoreme ne demontre rien",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "l'attendu n'etait rattache a aucun atome, et le rapprochement par contenu ne concluait pas",
+      "existing_evidence_if_any": [
+        "1SPE-SUITES-CO-001",
+        "1SPE-SUITES-CO-002",
+        "1SPE-SUITES-CO-003",
+        "1SPE-SUITES-CO-004",
+        "1SPE-SUITES-CO-005",
+        "1SPE-SUITES-CO-006"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE2602917A::ALGORITHMIQUE-ET-PROGRAMMATION::NOTION-DE-LISTE::EXPECTED_CAPACITY::8445dfe6",
+      "manual": "1SPE",
+      "official_wording": "Itérer sur les éléments d’une liste.",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "1SPE-TRANSVERSAL-LOGIQUE_RAISONNEMENT",
+        "1SPE-TRANSVERSAL-MEMO_PYTHON"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE2602917A::ALGORITHMIQUE-ET-PROGRAMMATION::NOTION-DE-LISTE::EXPECTED_CAPACITY::c882beaf",
+      "manual": "1SPE",
+      "official_wording": "Manipuler des éléments d’une liste (ajouter, supprimer, etc.) et leurs indices.",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "1SPE-TRANSVERSAL-MEMO_PYTHON"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE2602917A::ANALYSE::DERIVATION::DEMONSTRATION::08fe75c7",
+      "manual": "1SPE",
+      "official_wording": "Fonction dérivée de la fonction carrée, de la fonction inverse.",
+      "official_normativity_before": "REQUIRED_DEMONSTRATION",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "des objets portent cet attendu, mais aucun ne contient de demonstration redigee : le nom d'un theoreme ne demontre rien",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "l'attendu n'etait rattache a aucun atome, et le rapprochement par contenu ne concluait pas",
+      "existing_evidence_if_any": [
+        "1SPE-DERGLOBAL-CO-002",
+        "1SPE-DERGLOBAL-CO-044",
+        "1SPE-DERGLOBAL-CO-051",
+        "1SPE-DERGLOBAL-COURS-C1",
+        "1SPE-DERGLOBAL-COURS-C2",
+        "1SPE-DERGLOBAL-COURS-C3"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE2602917A::ANALYSE::DERIVATION::DEMONSTRATION::37130c94",
+      "manual": "1SPE",
+      "official_wording": "Fonction dérivée d’un produit.",
+      "official_normativity_before": "REQUIRED_DEMONSTRATION",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "des objets portent cet attendu, mais aucun ne contient de demonstration redigee : le nom d'un theoreme ne demontre rien",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "l'attendu n'etait rattache a aucun atome, et le rapprochement par contenu ne concluait pas",
+      "existing_evidence_if_any": [
+        "1SPE-DERGLOBAL-CO-011",
+        "1SPE-DERGLOBAL-CO-019",
+        "1SPE-DERGLOBAL-COURS-C2",
+        "1SPE-DERGLOBAL-COURS-C5",
+        "1SPE-DERGLOBAL-EX-001-CDP",
+        "1SPE-DERGLOBAL-EX-002-CDP"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE2602917A::ANALYSE::DERIVATION::DEMONSTRATION::3c2299bd",
+      "manual": "1SPE",
+      "official_wording": "Équation de la tangente en un point à une courbe représentative.",
+      "official_normativity_before": "REQUIRED_DEMONSTRATION",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "des objets portent cet attendu, mais aucun ne contient de demonstration redigee : le nom d'un theoreme ne demontre rien",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la demonstration est redigee dans le chapitre voisin, celui de la derivation locale, que la recherche n'a pas atteint",
+      "existing_evidence_if_any": [
+        "1SPE-DERGLOBAL-COURS-C1",
+        "1SPE-DERGLOBAL-COURS-C3",
+        "1SPE-DERGLOBAL-COURS-C4",
+        "1SPE-DERGLOBAL-EV-A",
+        "1SPE-DERGLOBAL-EV-A-corrige",
+        "1SPE-DERGLOBAL-EV-B"
+      ],
+      "evidence_kind_now": "CONTRADICTORY_REVIEW",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "revue contradictoire declaree ; verdict rendu a la lecture de l'objet : FALSE_PARTIAL_TOOLING",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE2602917A::ANALYSE::DERIVATION::DEMONSTRATION::eb93e3bd",
+      "manual": "1SPE",
+      "official_wording": "La fonction racine carrée n’est pas dérivable en 0.",
+      "official_normativity_before": "REQUIRED_DEMONSTRATION",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "des objets portent cet attendu, mais aucun ne contient de demonstration redigee : le nom d'un theoreme ne demontre rien",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la demonstration est redigee dans un bloc de contre-exemple, que le detecteur de preuve ne reconnaissait pas",
+      "existing_evidence_if_any": [
+        "1SPE-DERGLOBAL-CO-002",
+        "1SPE-DERGLOBAL-COURS-C1",
+        "1SPE-DERGLOBAL-COURS-C3",
+        "1SPE-DERGLOBAL-COURS-C4",
+        "1SPE-DERGLOBAL-ME-001",
+        "1SPE-DERGLOBAL-TD-CONTEXTUALISE"
+      ],
+      "evidence_kind_now": "CONTRADICTORY_REVIEW",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "revue contradictoire declaree ; verdict rendu a la lecture de l'objet : FALSE_PARTIAL_TOOLING",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE2602917A::ANALYSE::TRIGONOMETRIE::KNOWLEDGE::ccc29161",
+      "manual": "1SPE",
+      "official_wording": "Enroulement de la droite sur le cercle trigonométrique. Image d’un nombre réel.",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "aborde par des objets du manuel, mais aucun cours ne l'expose",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "l'attendu n'etait rattache a aucun atome, et le rapprochement par contenu ne concluait pas",
+      "existing_evidence_if_any": [
+        "1SPE-TRIGO-CR-011",
+        "1SPE-TRIGO-EV-A",
+        "1SPE-TRIGO-EV-A-corrige",
+        "1SPE-TRIGO-EV-B",
+        "1SPE-TRIGO-EV-B-corrige",
+        "1SPE-TRIGO-ME-004"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE2602917A::ANALYSE::VARIATIONS-ET-COURBES-REPRESENTATI::EXPECTED_CAPACITY::2ab2fcf3",
+      "manual": "1SPE",
+      "official_wording": "Exploiter les variations d’une fonction pour établir une inégalité. Étudier la position relative de deux courbes représentatives.",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "l'attendu n'etait rattache a aucun atome, et le rapprochement par contenu ne concluait pas",
+      "existing_evidence_if_any": [
+        "1SPE-DERGLOBAL-COURS-C5"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE2602917A::AUTOMATISMES::EVOLUTIONS-ET-VARIATIONS::AUTOMATISM::65ae076a",
+      "manual": "1SPE",
+      "official_wording": "Calculer un taux d’évolution réciproque.",
+      "official_normativity_before": "REQUIRED_AUTOMATISM",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "present mais concentre : le programme demande un entretien reparti sur l'annee, pas une lecon isolee",
+      "verdict_apres_contre_expertise": "TRUE_PARTIAL_PEDAGOGICAL",
+      "cause": "automatisme travaille dans un seul chapitre, ce que le programme exclut",
+      "existing_evidence_if_any": [
+        "1SPE-SUITES-CO-052",
+        "1SPE-SUITES-EX-052",
+        "1SPE-TRANSVERSAL-STATISTIQUES_AUTOMATISMES"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "reinvestissement ecrit dans un autre chapitre, avec son corrige",
+      "content_created": "YES",
+      "content_paths": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-051.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-051.tex"
+      ]
+    },
+    {
+      "official_id": "MENE2602917A::AUTOMATISMES::EVOLUTIONS-ET-VARIATIONS::AUTOMATISM::8ce04fd3",
+      "manual": "1SPE",
+      "official_wording": "Calculer le taux d’évolution équivalent à plusieurs évolutions successives.",
+      "official_normativity_before": "REQUIRED_AUTOMATISM",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "present mais concentre : le programme demande un entretien reparti sur l'annee, pas une lecon isolee",
+      "verdict_apres_contre_expertise": "TRUE_PARTIAL_PEDAGOGICAL",
+      "cause": "automatisme travaille dans un seul chapitre, ce que le programme exclut",
+      "existing_evidence_if_any": [
+        "1SPE-EXPO-CO-051",
+        "1SPE-EXPO-EX-051",
+        "1SPE-SUITES-CO-034",
+        "1SPE-SUITES-COURS-00",
+        "1SPE-SUITES-COURS-01",
+        "1SPE-SUITES-COURS-07-FR"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "reinvestissement ecrit dans un autre chapitre, avec son corrige",
+      "content_created": "YES",
+      "content_paths": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-052.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-052.tex"
+      ]
+    },
+    {
+      "official_id": "MENE2602917A::AUTOMATISMES::STATISTIQUES::AUTOMATISM::8754c49b",
+      "manual": "1SPE",
+      "official_wording": "Calculer et interpréter des indicateurs statistiques pour une série statistique.",
+      "official_normativity_before": "REQUIRED_AUTOMATISM",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "present mais concentre : le programme demande un entretien reparti sur l'annee, pas une lecon isolee",
+      "verdict_apres_contre_expertise": "TRUE_PARTIAL_PEDAGOGICAL",
+      "cause": "automatisme travaille dans un seul chapitre, ce que le programme exclut",
+      "existing_evidence_if_any": [
+        "1SPE-TRANSVERSAL-STATISTIQUES_AUTOMATISMES",
+        "1SPE-VARALEA-CO-055",
+        "1SPE-VARALEA-EX-055"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "reinvestissement ecrit dans un autre chapitre, avec son corrige",
+      "content_created": "YES",
+      "content_paths": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-055.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-055.tex"
+      ]
+    },
+    {
+      "official_id": "MENE2602917A::VOCABULAIRE-ENSEMBLISTE-ET-LOGIQUE::LES-ELEVES-APPRENNENT-EN-SITUATION::EXPECTED_CAPACITY::197f5605",
+      "manual": "1SPE",
+      "official_wording": "formuler une implication, une équivalence logique, et à les mobiliser dans un raisonnement simple;",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "1SPE-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE2602917A::VOCABULAIRE-ENSEMBLISTE-ET-LOGIQUE::LES-ELEVES-APPRENNENT-EN-SITUATION::EXPECTED_CAPACITY::3e7c0ea4",
+      "manual": "1SPE",
+      "official_wording": "lire et écrire des propositions contenant les connecteurs logiques « et », « ou » ;",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "1SPE-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE2602917A::VOCABULAIRE-ENSEMBLISTE-ET-LOGIQUE::LES-ELEVES-APPRENNENT-EN-SITUATION::EXPECTED_CAPACITY::b848a83f",
+      "manual": "1SPE",
+      "official_wording": "utiliser les quantificateurs (les symboles ∀ et ∃ ne sont pas exigibles) et repérer les quantifications implicites dans certaines propositions, particulièrement dans les propositions conditionnelles ;",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "1SPE-PRODSCAL-COURS-C5",
+        "1SPE-SUITES-CO-048",
+        "1SPE-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE2602917A::VOCABULAIRE-ENSEMBLISTE-ET-LOGIQUE::LES-ELEVES-APPRENNENT-EN-SITUATION::EXPECTED_CAPACITY::e8757f2e",
+      "manual": "1SPE",
+      "official_wording": "formuler la réciproque d'une implication, la contraposée ;",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "1SPE-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921265A::ANALYSE::INTEGRATION::EXPECTED_CAPACITY::96fe0bae",
+      "manual": "TCOMPL",
+      "official_wording": "Interpréter une intégrale, une valeur moyenne dans un contexte issu d’une autre discipline.",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "pratique ou evalue, mais jamais enseigne",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "meme cause",
+      "existing_evidence_if_any": [
+        "TCOMPL-AIR-CR-012",
+        "TCOMPL-AIR-EX-006"
+      ],
+      "evidence_kind_now": "CONTRADICTORY_REVIEW",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "revue contradictoire declaree ; verdict rendu a la lecture de l'objet : FALSE_PARTIAL_TOOLING",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921265A::ANALYSE::INTEGRATION::KNOWLEDGE::9d893719",
+      "manual": "TCOMPL",
+      "official_wording": "Présentation de l’intégrale des fonctions continues de signe quelconque.",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "aborde par des objets du manuel, mais aucun cours ne l'expose",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "le cours de calcul integral n'a pas ete atteint par la recherche",
+      "existing_evidence_if_any": [
+        "TCOMPL-AIR-CR-012",
+        "TCOMPL-AIR-ME-001",
+        "TCOMPL-CALCULS-AIRES-QCM"
+      ],
+      "evidence_kind_now": "CONTRADICTORY_REVIEW",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "revue contradictoire declaree ; verdict rendu a la lecture de l'objet : FALSE_PARTIAL_TOOLING",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921265A::ANALYSE::PRIMITIVES-ET-EQUATIONS-DIFFERENTI::KNOWLEDGE::17786796",
+      "manual": "TCOMPL",
+      "official_wording": "Équation différentielle y’ = a y + b, où a et b sont des réels ; allure des courbes.",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "aborde par des objets du manuel, mais aucun cours ne l'expose",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "le cours est dans le theme des modeles d'evolution",
+      "existing_evidence_if_any": [
+        "TCOMPL-ME-CR-012",
+        "TCOMPL-MODELES-EVOLUTION-QCM"
+      ],
+      "evidence_kind_now": "CONTRADICTORY_REVIEW",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "revue contradictoire declaree ; verdict rendu a la lecture de l'objet : FALSE_PARTIAL_TOOLING",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921265A::PROBABILITES-ET-STATISTIQUE::LOIS-DISCRETES::EXPECTED_CAPACITY::b451a7fd",
+      "manual": "TCOMPL",
+      "official_wording": "Dans le cadre de la résolution de problème, utiliser l’espérance des lois précédentes.",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "l'attendu n'etait rattache a aucun atome, et le rapprochement par contenu ne concluait pas",
+      "existing_evidence_if_any": [
+        "TCOMPL-ATT-CR-010"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921265A::THEMES-D-ETUDE::CORRELATION-ET-CAUSALITE::KNOWLEDGE::a32643d9",
+      "manual": "TCOMPL",
+      "official_wording": "Minimum d’une fonction trinôme.",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "aborde par des objets du manuel, mais aucun cours ne l'expose",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "meme cause",
+      "existing_evidence_if_any": [
+        "TCOMPL-MF-CR-010",
+        "TCOMPL-MF-ME-001"
+      ],
+      "evidence_kind_now": "CONTRADICTORY_REVIEW",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "revue contradictoire declaree ; verdict rendu a la lecture de l'objet : FALSE_PARTIAL_TOOLING",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921265A::THEMES-D-ETUDE::INFERENCE-BAYESIENNE::KNOWLEDGE::f904e127",
+      "manual": "TCOMPL",
+      "official_wording": "Étude de fonction.",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "aborde par des objets du manuel, mais aucun cours ne l'expose",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "contenu associe a un theme d'etude, enseigne dans le theme voisin des modeles definis par une fonction",
+      "existing_evidence_if_any": [
+        "TCOMPL-CORR-CO-010",
+        "TCOMPL-MF-CR-010",
+        "TCOMPL-MF-ME-001",
+        "TCOMPL-MF-ME-002",
+        "TCOMPL-MF-ME-005"
+      ],
+      "evidence_kind_now": "CONTRADICTORY_REVIEW",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "revue contradictoire declaree ; verdict rendu a la lecture de l'objet : FALSE_PARTIAL_TOOLING",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921265A::THEMES-D-ETUDE::MODELES-DEFINIS-PAR-UNE-FONCTION-D::KNOWLEDGE::4dc36cd8",
+      "manual": "TCOMPL",
+      "official_wording": "Fonctions de référence.",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "aborde par des objets du manuel, mais aucun cours ne l'expose",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "meme cause : contenu associe enseigne dans un autre theme",
+      "existing_evidence_if_any": [
+        "TCOMPL-MF-CR-010",
+        "TCOMPL-MF-ME-003"
+      ],
+      "evidence_kind_now": "CONTRADICTORY_REVIEW",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "revue contradictoire declaree ; verdict rendu a la lecture de l'objet : FALSE_PARTIAL_TOOLING",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921265A::THEMES-D-ETUDE::REPETITION-D-EXPERIENCES-INDEPENDA::KNOWLEDGE::c64fe5e2",
+      "manual": "TCOMPL",
+      "official_wording": "Lois uniformes discrètes et continues sur [0,1].",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "aborde par des objets du manuel, mais aucun cours ne l'expose",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "l'attendu n'avait aucun parent etabli : la disposition a tranche le rattachement",
+      "existing_evidence_if_any": [
+        "TCOMPL-ECH-CO-037",
+        "TCOMPL-ECH-CO-038",
+        "TCOMPL-ECH-CR-013",
+        "TCOMPL-ECH-EV-B",
+        "TCOMPL-ECH-EV-B-corrige",
+        "TCOMPL-ECH-EX-037"
+      ],
+      "evidence_kind_now": "DECLARED_CAPACITY",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par DECLARED_CAPACITY",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921265A::VOCABULAIRE-ENSEMBLISTE-ET-LOGIQUE::LES-ELEVES-APPRENNENT-EN-SITUATION::EXPECTED_CAPACITY::31127f02",
+      "manual": "TCOMPL",
+      "official_wording": "mobiliser un contre-exemple pour montrer qu’une proposition est fausse ;",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "pratique ou evalue, mais jamais enseigne",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "TCOMPL-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921265A::VOCABULAIRE-ENSEMBLISTE-ET-LOGIQUE::LES-ELEVES-APPRENNENT-EN-SITUATION::EXPECTED_CAPACITY::e5c832d8",
+      "manual": "TCOMPL",
+      "official_wording": "formuler la négation de propositions simples (sans implication ni quantificateurs) ;",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "pratique ou evalue, mais jamais enseigne",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "TCOMPL-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921265A::VOCABULAIRE-ENSEMBLISTE-ET-LOGIQUE::LES-ELEVES-APPRENNENT-EN-SITUATION::EXPECTED_CAPACITY::ea7318da",
+      "manual": "TCOMPL",
+      "official_wording": "formuler la réciproque d’une implication ;",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "TCOMPL-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921264A::NOMBRES-COMPLEXES::NOMBRES-COMPLEXES-POINT-DE-VUE-GEO::KNOWLEDGE::94719f66",
+      "manual": "TEXPERTES",
+      "official_wording": "Forme trigonométrique.",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "aborde par des objets du manuel, mais aucun cours ne l'expose",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "le cours s'intitule « forme exponentielle » et traite la forme trigonometrique dont elle derive",
+      "existing_evidence_if_any": [
+        "TEXP-CAG-ME-004",
+        "TEXP-CTP-CR-010"
+      ],
+      "evidence_kind_now": "CONTRADICTORY_REVIEW",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "revue contradictoire declaree ; verdict rendu a la lecture de l'objet : FALSE_PARTIAL_TOOLING",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921247A::ALGORITHMIQUE::CONTENUS::KNOWLEDGE::78533638",
+      "manual": "TNSI",
+      "official_wording": "Recherche textuelle.",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "aborde par des objets du manuel, mais aucun cours ne l'expose",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la ligne du tableau officiel n'etait pas conservee : le contenu et les capacites qui le realisent etaient mesures separement",
+      "existing_evidence_if_any": [
+        "TNSI-ALGO-CO-010",
+        "TNSI-ALGO-CR-016",
+        "TNSI-ALGO-EVAL-B",
+        "TNSI-ALGO-EVAL-B-corrige",
+        "TNSI-ALGO-EX-010",
+        "TNSI-ALGORITHMIQUE-QCM"
+      ],
+      "evidence_kind_now": "OFFICIAL_ROW_EVIDENCE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par OFFICIAL_ROW_EVIDENCE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921247A::LANGAGES-ET-PROGRAMMATION::CONTENUS::KNOWLEDGE::494dd143",
+      "manual": "TNSI",
+      "official_wording": "Récursivité.",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "aborde par des objets du manuel, mais aucun cours ne l'expose",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la ligne du tableau officiel n'etait pas conservee : le contenu et les capacites qui le realisent etaient mesures separement",
+      "existing_evidence_if_any": [
+        "TNSI-LANG-CR-011",
+        "TNSI-LANG-EX-001",
+        "TNSI-LANGAGES-ET-PROGRAMMATION-QCM"
+      ],
+      "evidence_kind_now": "OFFICIAL_ROW_EVIDENCE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par OFFICIAL_ROW_EVIDENCE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921247A::LANGAGES-ET-PROGRAMMATION::CONTENUS::KNOWLEDGE::941d3b3a",
+      "manual": "TNSI",
+      "official_wording": "Notion de programme en tant que donnée.",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "aborde par des objets du manuel, mais aucun cours ne l'expose",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la ligne du tableau officiel n'etait pas conservee : le contenu et les capacites qui le realisent etaient mesures separement",
+      "existing_evidence_if_any": [
+        "TNSI-LANG-CO-005",
+        "TNSI-LANG-CO-006",
+        "TNSI-LANG-CR-010",
+        "TNSI-LANG-EVAL-A",
+        "TNSI-LANG-EVAL-A-corrige",
+        "TNSI-LANG-EVAL-B"
+      ],
+      "evidence_kind_now": "OFFICIAL_ROW_EVIDENCE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par OFFICIAL_ROW_EVIDENCE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921247A::LANGAGES-ET-PROGRAMMATION::CONTENUS::KNOWLEDGE::a1c744e5",
+      "manual": "TNSI",
+      "official_wording": "Gestion des bugs.",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "aborde par des objets du manuel, mais aucun cours ne l'expose",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la ligne du tableau officiel n'etait pas conservee : le contenu et les capacites qui le realisent etaient mesures separement",
+      "existing_evidence_if_any": [
+        "TNSI-ECRIT-S3-EX3",
+        "TNSI-LANG-AM-EXTRAIT",
+        "TNSI-LANG-CO-004",
+        "TNSI-LANG-CO-008",
+        "TNSI-LANG-CR-014",
+        "TNSI-LANG-EVAL-B"
+      ],
+      "evidence_kind_now": "OFFICIAL_ROW_EVIDENCE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par OFFICIAL_ROW_EVIDENCE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921247A::STRUCTURES-DE-DONNEES::CONTENUS::KNOWLEDGE::c807c2d5",
+      "manual": "TNSI",
+      "official_wording": "Dictionnaires, index et clé.",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "aborde par des objets du manuel, mais aucun cours ne l'expose",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la ligne du tableau officiel n'etait pas conservee : le contenu et les capacites qui le realisent etaient mesures separement",
+      "existing_evidence_if_any": [
+        "TNSI-ECRIT-S2-EX1",
+        "TNSI-PRATIQUE-P6",
+        "TNSI-STRUCT-AM-EXTRAIT",
+        "TNSI-STRUCT-CO-006",
+        "TNSI-STRUCT-CR-012",
+        "TNSI-STRUCT-EVAL-A"
+      ],
+      "evidence_kind_now": "OFFICIAL_ROW_EVIDENCE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par OFFICIAL_ROW_EVIDENCE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921246A::ALGORITHMIQUE-ET-PROGRAMMATION::CAPACITES-ATTENDUES::EXPECTED_CAPACITY::3941a02a",
+      "manual": "TSPE",
+      "official_wording": "Générer une liste (en extension, par ajouts successifs ou en compréhension).",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "TSPE-TRANSVERSAL-MEMO_PYTHON"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921246A::ALGORITHMIQUE-ET-PROGRAMMATION::CAPACITES-ATTENDUES::EXPECTED_CAPACITY::8445dfe6",
+      "manual": "TSPE",
+      "official_wording": "Itérer sur les éléments d’une liste.",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "TSPE-COMBI-CR-010",
+        "TSPE-COMBI-EV-B-corrige",
+        "TSPE-COMBINATOIRE-QCM",
+        "TSPE-TRANSVERSAL-LOGIQUE_RAISONNEMENT",
+        "TSPE-TRANSVERSAL-MEMO_PYTHON"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921246A::ALGORITHMIQUE-ET-PROGRAMMATION::CAPACITES-ATTENDUES::EXPECTED_CAPACITY::c7d1468c",
+      "manual": "TSPE",
+      "official_wording": "Manipuler des éléments d’une liste (ajouter, supprimer…) et leurs indices.",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "TSPE-TRANSVERSAL-MEMO_PYTHON"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921246A::ANALYSE::PRIMITIVES-EQUATIONS-DIFFERENTIELL::KNOWLEDGE::f6c14097",
+      "manual": "TSPE",
+      "official_wording": "Primitives des fonctions de référence : x ↦ xn pour n ∈ ℤ, x  , exponentielle, x sinus, cosinus.",
+      "official_normativity_before": "REQUIRED_CONTENT",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "aborde par des objets du manuel, mais aucun cours ne l'expose",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "le cours dedie n'a pas ete atteint par la recherche",
+      "existing_evidence_if_any": [
+        "TSPE-PRIMEQ-CR-011",
+        "TSPE-TRIGONOMETRIE-QCM"
+      ],
+      "evidence_kind_now": "CONTRADICTORY_REVIEW",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "revue contradictoire declaree ; verdict rendu a la lecture de l'objet : FALSE_PARTIAL_TOOLING",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921246A::PROBABILITES::CONCENTRATION-LOI-DES-GRANDS-NOMBR::EXPECTED_CAPACITY::d9f76e68",
+      "manual": "TSPE",
+      "official_wording": "Appliquer l’inégalité de Bienaymé-Tchebychev pour définir une taille d’échantillon, en fonction de la précision et du risque choisi.",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "pratique ou evalue, mais jamais enseigne",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "le cours dedie n'etait pas rattache a cet attendu",
+      "existing_evidence_if_any": [
+        "TSPE-PROBA-CO-009",
+        "TSPE-PROBA-EV-B",
+        "TSPE-PROBA-EV-B-corrige",
+        "TSPE-PROBA-EX-009",
+        "TSPE-PROBABILITES-QCM"
+      ],
+      "evidence_kind_now": "CONTRADICTORY_REVIEW",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "revue contradictoire declaree ; verdict rendu a la lecture de l'objet : FALSE_PARTIAL_TOOLING",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921246A::VOCABULAIRE-ENSEMBLISTE-ET-LOGIQUE::LES-ELEVES-APPRENNENT-EN-SITUATION::EXPECTED_CAPACITY::2d1adb12",
+      "manual": "TSPE",
+      "official_wording": "lire et écrire des propositions contenant les connecteurs « et », « ou » ;",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "TSPE-LIMFCT-CR-010",
+        "TSPE-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921246A::VOCABULAIRE-ENSEMBLISTE-ET-LOGIQUE::LES-ELEVES-APPRENNENT-EN-SITUATION::EXPECTED_CAPACITY::38837bfb",
+      "manual": "TSPE",
+      "official_wording": "lire et écrire des propositions contenant une quantification universelle ou existentielle (les symboles ∀ et ∃ ne sont pas exigibles) ;",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "TSPE-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921246A::VOCABULAIRE-ENSEMBLISTE-ET-LOGIQUE::LES-ELEVES-APPRENNENT-EN-SITUATION::EXPECTED_CAPACITY::6541b5a2",
+      "manual": "TSPE",
+      "official_wording": "formuler la réciproque d’une implication, ou sa contraposée ;",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "TSPE-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921246A::VOCABULAIRE-ENSEMBLISTE-ET-LOGIQUE::LES-ELEVES-APPRENNENT-EN-SITUATION::EXPECTED_CAPACITY::6deddd36",
+      "manual": "TSPE",
+      "official_wording": "formuler une implication, une équivalence logique, et à les mobiliser dans un raisonnement simple ;",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "TSPE-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921246A::VOCABULAIRE-ENSEMBLISTE-ET-LOGIQUE::LES-ELEVES-APPRENNENT-EN-SITUATION::EXPECTED_CAPACITY::c54deb1f",
+      "manual": "TSPE",
+      "official_wording": "reconnaître ce qu’est une proposition mathématique, à utiliser des variables pour écrire des propositions mathématiques ;",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "TSPE-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE1921246A::VOCABULAIRE-ENSEMBLISTE-ET-LOGIQUE::LES-ELEVES-APPRENNENT-EN-SITUATION::EXPECTED_CAPACITY::e6792168",
+      "manual": "TSPE",
+      "official_wording": "raisonner par disjonctions des cas, par l’absurde, par contraposée ;",
+      "official_normativity_before": "EXPECTED_CAPACITY",
+      "mandatory_now": true,
+      "ancien_verdict": "PARTIAL",
+      "ancien_motif": "enseigne, mais sans exercice ni methode",
+      "verdict_apres_contre_expertise": "FALSE_PARTIAL_TOOLING",
+      "cause": "la recherche etait bornee a une portee de theme, et s'arretait avant le reste du manuel -- une page transversale ou un autre chapitre",
+      "existing_evidence_if_any": [
+        "TSPE-TRANSVERSAL-LOGIQUE_RAISONNEMENT"
+      ],
+      "evidence_kind_now": "CONTENT_MATCH_MANUAL_WIDE",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "preuve etablie par CONTENT_MATCH_MANUAL_WIDE",
+      "content_created": "NO",
+      "content_paths": []
+    }
+  ],
+  "former_undecidable": [
+    {
+      "official_id": "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::DEMONSTRATION::1ef63032",
+      "manual": "1SPE",
+      "official_wording": "Calcul de 1 + 𝑞 + … + 𝑞𝑛.",
+      "official_normativity_before": "REQUIRED_DEMONSTRATION",
+      "mandatory_now": true,
+      "ancien_verdict": "UNDECIDABLE_BY_CONTENT_MATCH",
+      "ancien_motif": "aucun mot distinctif dans le libelle officiel : la recherche par contenu ne peut ni conclure a la presence ni conclure a l'absence",
+      "verdict_apres_contre_expertise": "FALSE_MISSING_TOOLING",
+      "cause": "meme cause : un libelle sans mot distinctif",
+      "existing_evidence_if_any": [
+        "1SPE-SUITES-CR-013"
+      ],
+      "evidence_kind_now": "CONTRADICTORY_REVIEW",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "revue contradictoire declaree ; verdict rendu a la lecture de l'objet : FALSE_MISSING_TOOLING",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE2602917A::ALGEBRE::SUITES-NUMERIQUES-MODELES-DISCRETS::DEMONSTRATION::77c7949f",
+      "manual": "1SPE",
+      "official_wording": "Calcul de 1 + 2 + … + 𝑛.",
+      "official_normativity_before": "REQUIRED_DEMONSTRATION",
+      "mandatory_now": true,
+      "ancien_verdict": "UNDECIDABLE_BY_CONTENT_MATCH",
+      "ancien_motif": "aucun mot distinctif dans le libelle officiel : la recherche par contenu ne peut ni conclure a la presence ni conclure a l'absence",
+      "verdict_apres_contre_expertise": "FALSE_MISSING_TOOLING",
+      "cause": "le libelle officiel se reduit a des symboles mathematiques : aucun mot distinctif, donc aucune recherche possible",
+      "existing_evidence_if_any": [
+        "1SPE-SUITES-CR-013"
+      ],
+      "evidence_kind_now": "CONTRADICTORY_REVIEW",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "revue contradictoire declaree ; verdict rendu a la lecture de l'objet : FALSE_MISSING_TOOLING",
+      "content_created": "NO",
+      "content_paths": []
+    },
+    {
+      "official_id": "MENE2602917A::ANALYSE::TRIGONOMETRIE::DEMONSTRATION::810aff62",
+      "manual": "1SPE",
+      "official_wording": "Calcul de cos , sin , cos , sin . 4 4 3 3",
+      "official_normativity_before": "REQUIRED_DEMONSTRATION",
+      "mandatory_now": true,
+      "ancien_verdict": "UNDECIDABLE_BY_CONTENT_MATCH",
+      "ancien_motif": "aucun mot distinctif dans le libelle officiel : la recherche par contenu ne peut ni conclure a la presence ni conclure a l'absence",
+      "verdict_apres_contre_expertise": "TRUE_CONTENT_GAP",
+      "cause": "le libelle officiel a perdu ses fractions a l'extraction (« Calcul de cos , sin , cos , sin . 4 4 3 3 ») : aucune recherche n'etait possible. La lecture du chapitre a montre que les valeurs remarquables etaient donnees sans etre demontrees",
+      "existing_evidence_if_any": [
+        "1SPE-TRIGO-CO-011",
+        "1SPE-TRIGO-CO-012",
+        "1SPE-TRIGO-CO-013",
+        "1SPE-TRIGO-CO-014",
+        "1SPE-TRIGO-CO-015",
+        "1SPE-TRIGO-CO-016"
+      ],
+      "evidence_kind_now": "CONTRADICTORY_REVIEW",
+      "coverage_status_now": "COMPLETE",
+      "modification_effectuee": "demonstration complete redigee : cosinus et sinus de pi/4, pi/3 et pi/6, avec hypotheses et chaine logique, plus bloc VERIFY etendu",
+      "content_created": "YES",
+      "content_paths": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/cours/11_C2_cosinus_sinus.tex"
+      ]
+    }
+  ],
+  "CONTENT_CREATED_BECAUSE_PROGRAMME_REALLY_MISSING": [
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/cours/10_C0_dispersion.tex",
+      "official_id": "MENE1921265A::THEMES-D-ETUDE::REPARTITION-DES-RICHESSES-INEGALIT::KNOWLEDGE::d1dca1fd",
+      "manual": "TCOMPL",
+      "official_wording": "Statistique descriptive : caractéristiques de dispersion (médiane, quartiles, déciles, rapport interdécile).",
+      "verdict": "TRUE_CONTENT_GAP"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/12_C7_produit_scalaire.tex",
+      "official_id": "MENE1921246A::ALGEBRE-ET-GEOMETRIE::ORTHOGONALITE-ET-DISTANCES-DANS-L::KNOWLEDGE::e04b8897",
+      "manual": "TSPE",
+      "official_wording": "Développement de u  v , formules de polarisation.",
+      "verdict": "TRUE_CONTENT_GAP"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-051.tex",
+      "official_id": "MENE2602917A::AUTOMATISMES::EVOLUTIONS-ET-VARIATIONS::AUTOMATISM::65ae076a",
+      "manual": "1SPE",
+      "official_wording": "Calculer un taux d’évolution réciproque.",
+      "verdict": "TRUE_PARTIAL_PEDAGOGICAL"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-051.tex",
+      "official_id": "MENE2602917A::AUTOMATISMES::EVOLUTIONS-ET-VARIATIONS::AUTOMATISM::65ae076a",
+      "manual": "1SPE",
+      "official_wording": "Calculer un taux d’évolution réciproque.",
+      "verdict": "TRUE_PARTIAL_PEDAGOGICAL"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-052.tex",
+      "official_id": "MENE2602917A::AUTOMATISMES::EVOLUTIONS-ET-VARIATIONS::AUTOMATISM::8ce04fd3",
+      "manual": "1SPE",
+      "official_wording": "Calculer le taux d’évolution équivalent à plusieurs évolutions successives.",
+      "verdict": "TRUE_PARTIAL_PEDAGOGICAL"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-052.tex",
+      "official_id": "MENE2602917A::AUTOMATISMES::EVOLUTIONS-ET-VARIATIONS::AUTOMATISM::8ce04fd3",
+      "manual": "1SPE",
+      "official_wording": "Calculer le taux d’évolution équivalent à plusieurs évolutions successives.",
+      "verdict": "TRUE_PARTIAL_PEDAGOGICAL"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-055.tex",
+      "official_id": "MENE2602917A::AUTOMATISMES::STATISTIQUES::AUTOMATISM::8754c49b",
+      "manual": "1SPE",
+      "official_wording": "Calculer et interpréter des indicateurs statistiques pour une série statistique.",
+      "verdict": "TRUE_PARTIAL_PEDAGOGICAL"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-055.tex",
+      "official_id": "MENE2602917A::AUTOMATISMES::STATISTIQUES::AUTOMATISM::8754c49b",
+      "manual": "1SPE",
+      "official_wording": "Calculer et interpréter des indicateurs statistiques pour une série statistique.",
+      "verdict": "TRUE_PARTIAL_PEDAGOGICAL"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/cours/11_C2_cosinus_sinus.tex",
+      "official_id": "MENE2602917A::ANALYSE::TRIGONOMETRIE::DEMONSTRATION::810aff62",
+      "manual": "1SPE",
+      "official_wording": "Calcul de cos , sin , cos , sin . 4 4 3 3",
+      "verdict": "TRUE_CONTENT_GAP"
+    }
+  ],
+  "EDITORIAL_QUALITY_ENRICHMENT": [
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/17_ALG_planche_de_galton.tex",
+      "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD",
+      "official_basis": "Exemple d'algorithme cite par le programme, non impose"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/18_ALG_marche_aleatoire.tex",
+      "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD",
+      "official_basis": "Exemple d'algorithme cite par le programme, non impose"
+    }
+  ]
+}
