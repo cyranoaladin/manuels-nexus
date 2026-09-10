@@ -154,3 +154,37 @@ def test_les_audits_sont_bien_regeneres_par_leur_generateur(script):
         check=False,
     )
     assert acheve.returncode == 0, acheve.stdout + acheve.stderr
+
+
+def test_le_socle_suppose_acquis_est_reactive_ou_signale():
+    """« Les automatismes travailles en seconde doivent etre entretenus. »
+
+    Un chapitre qui suppose un prerequis sans rien offrir pour le reprendre
+    laisse l'eleve sans recours : il ne saura pas ce qui lui manque.
+    """
+    charge = json.loads(
+        (ROOT / "audit" / "1SPE_PREREQUISITE_SUPPORT.json").read_text(encoding="utf-8")
+    )
+    lignes = charge["prerequisites"]
+    assert lignes
+    assert charge["summary"]["PREREQUISITES_DECLARED"] == len(lignes)
+    for ligne in lignes:
+        assert ligne["status"] in {
+            "DIAGNOSED_AND_REMEDIATED",
+            "REMEDIATED_ONLY",
+            "DIAGNOSED_ONLY",
+            "ASSUMED_WITHOUT_SUPPORT",
+        }
+        if ligne["status"] != "ASSUMED_WITHOUT_SUPPORT":
+            assert ligne["diagnostic_evidence"] or ligne["remediation_evidence"]
+
+
+def test_la_matrice_des_prerequis_est_bien_regeneree():
+    acheve = subprocess.run(
+        [sys.executable, "scripts/build_1spe_prerequisite_support.py", "--check"],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert acheve.returncode == 0, acheve.stdout + acheve.stderr

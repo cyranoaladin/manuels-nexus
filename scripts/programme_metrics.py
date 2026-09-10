@@ -32,6 +32,7 @@ TRANSITION = "audit/1SPE_REFORM_TRANSITION_AUDIT.json"
 TNSI = "audit/TNSI_EXAM_PREPARATION_MATRIX.json"
 REVERSE = "audit/OBJECTS_TO_OFFICIAL_REVERSE_MAP.json"
 MULTIPLE = "audit/MULTIPLE_ASSIGNMENT_RESOLUTION.json"
+PREREQUIS = "audit/1SPE_PREREQUISITE_SUPPORT.json"
 
 
 @dataclass(frozen=True)
@@ -169,6 +170,11 @@ SOURCES: tuple[tuple[str, str, tuple[str, ...]], ...] = (
         ("summary", "TNSI_EXAM_PREPARATION_MATRIX"),
     ),
     ("EXAM_ONLY_NOTIONS", TNSI, ("summary", "EXAM_ONLY_NOTIONS")),
+    (
+        "PREREQUISITES_ASSUMED_WITHOUT_SUPPORT",
+        PREREQUIS,
+        ("summary", "PREREQUISITES_ASSUMED_WITHOUT_SUPPORT"),
+    ),
     (
         "UNCLASSIFIED_OUT_OF_PROGRAMME_OBJECTS",
         REVERSE,

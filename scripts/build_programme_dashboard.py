@@ -86,6 +86,12 @@ LECTURES: dict[str, str] = {
         "declare sans rien avoir derriere, ou un attendu pratique sans jamais "
         "etre enseigne."
     ),
+    "PREREQUISITES_ASSUMED_WITHOUT_SUPPORT": (
+        "prerequis qu'un chapitre declare mobiliser sans que rien, dans ce "
+        "chapitre, ne permette a l'eleve de constater le manque ni d'y "
+        "remedier. Le programme demande que les automatismes de seconde soient "
+        "entretenus en premiere."
+    ),
     "FUTURE_PROGRAM_CONTAMINATION": (
         "objets du manuel qui reprennent un attendu d'un programme ne "
         "regissant pas cette edition, sur des notions absentes du programme "
