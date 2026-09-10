@@ -140,6 +140,11 @@ def test_un_contenu_retire_n_est_fautif_que_s_il_reste_exigible(transition):
             "REMOVED_AND_ABSENT",
             "REMOVED_BUT_STILL_IN_PROGRAMME",
             "REMOVED_2019_CONTENT_REQUIRING_EDITORIAL_REVIEW",
+            # Les trois issues d'une lecture rendue, qui remplacent le
+            # verdict lexical faible.
+            "REMOVED_STILL_REQUIRED_UNDER_2026_WORDING",
+            "REMOVED_OPTIONAL_BUT_USEFUL",
+            "REMOVED_TRULY_REMOVED",
         )
     )
     assert total == resume["REMOVED_2026_MANDATORY"]
@@ -149,18 +154,40 @@ def test_une_preuve_lexicale_faible_ne_se_donne_pas_pour_une_certitude(transitio
     """Savoir qu'un mot reste au programme ne dit pas que la notion y reste.
 
     « Cosinus » et « sinus » restent au programme de 2026, mais l'etude des
-    fonctions cosinus et sinus en sort. Ces cas doivent rester marques comme
-    demandant une lecture, jamais comme tranches.
+    fonctions cosinus et sinus en sort. Tant qu'aucune lecture n'a ete rendue,
+    ces cas restent marques comme demandant une lecture, jamais comme
+    tranches. Une fois la lecture rendue, elle prend leur place -- et elle
+    porte alors une force de preuve differente.
     """
     faibles = [
         r for r in transition["removed_2026"]
         if r["classification"] == "NOTION_STILL_NAMED_IN_PROGRAMME_REQUIRES_REVIEW"
     ]
-    assert faibles, "aucun cas faible : le second filet serait inerte"
     for ligne in faibles:
         assert ligne["evidence_strength"] == "WEAK_LEXICAL"
         assert "a verifier" in ligne["reason"]
         assert ligne["still_in_programme_as"]
+
+    lues = [
+        r for r in transition["removed_2026"]
+        if r["evidence_strength"] == "DECLARED_READING_OF_THE_2026_TEXT"
+    ]
+    assert lues, "aucune lecture rendue : le second filet serait inerte"
+    for ligne in lues:
+        assert ligne["classification"] in {
+            "STILL_REQUIRED_UNDER_2026_WORDING",
+            "OPTIONAL_BUT_USEFUL",
+            "TRULY_REMOVED",
+        }
+        # Une lecture cite le texte de 2026 ; elle ne se contente pas de
+        # renvoyer a un identifiant.
+        assert len(ligne["reason"]) > 120, ligne["official_wording"]
+        assert ligne["still_in_programme_as"] is None
+        # Un contenu declare retire ne doit plus etre enseigne ni evalue.
+        if ligne["classification"] == "TRULY_REMOVED":
+            assert not ligne["surviving_in_course_or_assessment"], ligne[
+                "official_wording"
+            ]
 
 
 @pytest.mark.parametrize(

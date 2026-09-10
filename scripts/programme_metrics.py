@@ -191,6 +191,21 @@ SOURCES: tuple[tuple[str, str, tuple[str, ...]], ...] = (
         TRANSITION,
         ("summary", "REMOVED_2019_CONTENT_REQUIRING_EDITORIAL_REVIEW"),
     ),
+    (
+        "REMOVED_TRULY_REMOVED",
+        TRANSITION,
+        ("summary", "REMOVED_TRULY_REMOVED"),
+    ),
+    (
+        "REMOVED_STILL_REQUIRED_UNDER_2026_WORDING",
+        TRANSITION,
+        ("summary", "REMOVED_STILL_REQUIRED_UNDER_2026_WORDING"),
+    ),
+    (
+        "REMOVED_OPTIONAL_BUT_USEFUL",
+        TRANSITION,
+        ("summary", "REMOVED_OPTIONAL_BUT_USEFUL"),
+    ),
     ("TNSI_PROGRAMME_MATRIX", TNSI, ("summary", "TNSI_PROGRAMME_MATRIX")),
     (
         "TNSI_EXAM_PREPARATION_MATRIX",

@@ -59,6 +59,89 @@ TERMES_PARTAGES_MINIMUM = 2
 FREQUENCE_MAXIMALE_POUR_ETRE_SPECIFIQUE = 4
 
 
+
+#: Lectures rendues sur les attendus de 2019 que le rapprochement lexical ne
+#: pouvait pas trancher. Le producteur le dit lui-meme : savoir qu'un mot du
+#: libelle retire figure encore au programme ne dit pas que la NOTION y
+#: figure encore. Il y faut une lecture du texte de 2026, et elle est
+#: consignee ici plutot que devinee.
+#:
+#: Trois verdicts, et trois seulement :
+#: - STILL_REQUIRED_UNDER_2026_WORDING : la notion reste exigible, sous une
+#;   autre formulation, qui est nommee ;
+#: - OPTIONAL_BUT_USEFUL : le programme ne la demande plus, le manuel peut la
+#:   garder comme approfondissement assume ;
+#: - TRULY_REMOVED : elle sort du programme, et ne doit plus etre presentee
+#:   comme exigible.
+LECTURES_DE_TRANSITION: tuple[dict[str, str], ...] = (
+    {
+        "wording_prefix": "Fonctions cosinus et sinus. Parité, périodicité",
+        "verdict": "TRULY_REMOVED",
+        "reading": (
+            "La partie « Trigonometrie » de 2026 s'arrete au cosinus et au "
+            "sinus d'un NOMBRE REEL, lus sur le cercle : cercle "
+            "trigonometrique, enroulement de la droite, valeurs remarquables, "
+            "et leur demonstration. Les fonctions cosinus et sinus comme "
+            "fonctions -- leur parite, leur periodicite, leurs courbes "
+            "representatives -- n'y figurent plus, et le mot « periodicite » "
+            "ne figure nulle part dans le programme de 2026."
+        ),
+    },
+    {
+        "wording_prefix": "Traduire graphiquement la parité et la périodicité",
+        "verdict": "TRULY_REMOVED",
+        "reading": (
+            "Meme lecture. La parite subsiste en 2026, mais comme propriete "
+            "generale d'une fonction (« Representation algebrique et graphique "
+            "de fonctions paires, impaires »), et non pour les fonctions "
+            "trigonometriques, qui ne sont plus etudiees comme fonctions."
+        ),
+    },
+    {
+        "wording_prefix": "Parabole représentative d’une fonction polynôme du second degré",
+        "verdict": "STILL_REQUIRED_UNDER_2026_WORDING",
+        "reading": (
+            "Le mot « parabole » a disparu de la partie « Equations, fonctions "
+            "polynomes du second degre », mais la notion est portee par la "
+            "capacite de 2026 « Etudier, en lien avec la derivation, une "
+            "fonction polynome du second degre : variations, extremum, allure "
+            "selon le signe de a » -- c'est-a-dire le sommet et la forme de la "
+            "courbe. La forme canonique reste par ailleurs un contenu exigible."
+        ),
+    },
+    {
+        "wording_prefix": "Probabilité conditionnelle d’un événement B sachant",
+        "verdict": "STILL_REQUIRED_UNDER_2026_WORDING",
+        "reading": (
+            "Le programme de 2026 ne redonne pas la definition en toutes "
+            "lettres, mais il intitule la partie « Probabilites "
+            "conditionnelles et independance », exige la formule des "
+            "probabilites totales -- qui n'a pas de sens sans probabilite "
+            "conditionnelle -- et impose l'automatisme « Calculer des "
+            "probabilites conditionnelles lorsque les evenements sont "
+            "presentes sous forme de tableau croise »."
+        ),
+    },
+    {
+        "wording_prefix": "Distinguer en situation PA(B) et PB(A)",
+        "verdict": "OPTIONAL_BUT_USEFUL",
+        "reading": (
+            "Aucun attendu de 2026 ne demande cette distinction, ni les "
+            "situations de faux positifs. Elle reste un excellent garde-fou "
+            "contre la confusion des deux conditionnements, et le manuel la "
+            "garde a ce titre -- sans la compter dans la couverture."
+        ),
+    },
+)
+
+
+def lecture_declaree(libelle: str) -> dict[str, str] | None:
+    """Verdict rendu a la lecture pour cet attendu retire, s'il en existe un."""
+    for entree in LECTURES_DE_TRANSITION:
+        if libelle.startswith(entree["wording_prefix"]):
+            return entree
+    return None
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
@@ -120,6 +203,24 @@ def main(argv: list[str] | None = None) -> int:
         for t in termes_distinctifs(r["official_wording"]):
             if racine(t) in minuscule:
                 frequence_2026[racine(t)] += 1
+    def _survivants(termes: set[str]) -> list[Any]:
+        """Objets du manuel qui portent encore assez de mots de cet attendu."""
+        exigence = max(2, round(len(termes) * SEUIL_SURVIVANCE)) if termes else 0
+        trouves: list[Any] = []
+        if not termes or exigence > len(termes):
+            return trouves
+        for objet in objets:
+            texte = textes.get(objet.path)
+            if texte is None:
+                texte = _sans_accents(
+                    (ROOT / objet.path).read_text(encoding="utf-8", errors="replace")
+                ).lower()
+                textes[objet.path] = texte
+            if sum(1 for t in termes if racine(t) in texte) >= exigence:
+                trouves.append(objet)
+        return trouves
+
+
     retires: list[dict[str, Any]] = []
     for verdict in diff["verdicts"]:
         if verdict["verdict"] != "REMOVED_2026" or not verdict.get("mandatory"):
@@ -180,6 +281,31 @@ def main(argv: list[str] | None = None) -> int:
         # Ordre fixe : `termes` est un ensemble, et l'iteration d'un ensemble
         # de chaines varie d'un processus a l'autre. L'artefact cesserait
         # d'etre reproductible.
+        lecture = lecture_declaree(libelle)
+        if lecture is not None:
+            # La lecture l'emporte sur le rapprochement de mots : c'est
+            # precisement ce que le rapprochement ne savait pas faire. Elle
+            # ne dispense pas de regarder le manuel : un contenu declare
+            # RETIRE qui subsisterait dans un cours ou une evaluation serait
+            # presente a l'eleve comme exigible.
+            restes = _survivants(termes)
+            enseignes = [
+                o for o in restes if o.role in ("PRIMARY_TEACHING", "ASSESSMENT")
+            ]
+            retires.append({
+                "official_id_2019": verdict["official_id_2019"],
+                "official_wording": libelle,
+                "still_in_programme_as": None,
+                "surviving_objects": sorted(o.object_id for o in restes),
+                "surviving_in_course_or_assessment": sorted(
+                    o.object_id for o in enseignes
+                ),
+                "classification": lecture["verdict"],
+                "evidence_strength": "DECLARED_READING_OF_THE_2026_TEXT",
+                "reason": lecture["reading"],
+            })
+            continue
+
         specifiques = [
             t for t in sorted(termes)
             if 1 <= frequence_2026.get(racine(t), 0) <= FREQUENCE_MAXIMALE_POUR_ETRE_SPECIFIQUE
@@ -231,20 +357,7 @@ def main(argv: list[str] | None = None) -> int:
             })
             continue
 
-        exigence = max(2, round(len(termes) * SEUIL_SURVIVANCE)) if termes else 0
-        survivants: list[Any] = []
-        if termes and exigence <= len(termes):
-            for objet in objets:
-                texte = textes.get(objet.path)
-                if texte is None:
-                    texte = _sans_accents(
-                        (ROOT / objet.path).read_text(
-                            encoding="utf-8", errors="replace"
-                        )
-                    ).lower()
-                    textes[objet.path] = texte
-                if sum(1 for t in termes if racine(t) in texte) >= exigence:
-                    survivants.append(objet)
+        survivants = _survivants(termes)
         # Un contenu retire n'est fautif que s'il est presente comme exigible :
         # dans un cours ou une evaluation, l'eleve le travaillera comme un
         # attendu alors que le programme ne le demande plus.
@@ -310,6 +423,14 @@ def main(argv: list[str] | None = None) -> int:
             "REMOVED_2019_CONTENT_REQUIRING_EDITORIAL_REVIEW": compte_r.get(
                 "NOTION_STILL_NAMED_IN_PROGRAMME_REQUIRES_REVIEW", 0
             ),
+            # Les trois issues d'une lecture. Publier le zero sans publier
+            # ce qu'il est devenu laisserait croire que le probleme a
+            # disparu de lui-meme.
+            "REMOVED_STILL_REQUIRED_UNDER_2026_WORDING": compte_r.get(
+                "STILL_REQUIRED_UNDER_2026_WORDING", 0
+            ),
+            "REMOVED_OPTIONAL_BUT_USEFUL": compte_r.get("OPTIONAL_BUT_USEFUL", 0),
+            "REMOVED_TRULY_REMOVED": compte_r.get("TRULY_REMOVED", 0),
         },
         "added_2026": ajoutes,
         "removed_2026": retires,
