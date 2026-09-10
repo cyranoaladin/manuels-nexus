@@ -1,9 +1,9 @@
 # Renvois des diagnostics QCM : chaque cible existe-t-elle ?
 
-- Population : `1587` renvois
+- Population : `1584` renvois
 - `BROKEN_REMEDIATION_REFERENCES` : `0`
 - `QCM_DIAGNOSTIC_MISMATCH` : `0`
-- `CROSS_CAPACITY_RENVOI_JUSTIFIED` : `11`
+- `CROSS_CAPACITY_RENVOI_JUSTIFIED` : `13`
 
 ## Renvois croisés, jugés un par un
 
@@ -18,3 +18,5 @@
 - `TSPE-PRIMITIVES-EQDIFF/Q2` option `C` — capacité `C4`, renvoi `C1, ensemble des primitives` : Même question, même confusion sur l'ensemble des primitives : le renvoi conduit en C1, où cet ensemble est caractérisé.
 - `TSPE-PRIMITIVES-EQDIFF/Q2` option `D` — capacité `C4`, renvoi `C1, ensemble des primitives` : Même question, troisième distracteur : il se trompe encore sur la forme de l'ensemble des primitives, caractérisé en C1. Le renvoi y conduit, et non vers la démonstration qui fait l'objet de la question.
 - `TSPE-SUITES-LIMITES/Q7` option `B` — capacité `C4`, renvoi `C1, définition` : La question porte sur le théorème de la limite monotone (C4) ; le distracteur confond convergence et croissance, notions définies en C1.
+- `TNSI-HISTOIRE-INFORMATIQUE/Q4` option `B` — capacité `C2`, renvoi `C1, Internet et le Web ; C2, un même matériel, plusieurs usages` : La question évalue en C2 l'ajout d'un service logiciel sur une infrastructure existante. Le distracteur invente un réseau physique indépendant : C1 distingue Internet et le Web, puis C2 précise l'utilisation des ressources matérielles par les logiciels.
+- `TNSI-HISTOIRE-INFORMATIQUE/Q4` option `C` — capacité `C2`, renvoi `C1, repères chronologiques ; C2, des programmes aux couches d'abstraction` : La question porte sur le rôle logiciel du Web en C2. Le distracteur en fait une condition d'apparition d'ARPANET : les repères 1969 et 1989 en C1 réfutent cette causalité, avant de revenir aux couches logicielles étudiées en C2.

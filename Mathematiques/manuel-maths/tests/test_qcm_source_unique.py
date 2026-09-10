@@ -124,25 +124,43 @@ def test_le_renderer_ne_forge_pas_un_renvoi_m1_absent() -> None:
     assert "Renvoi : M1." not in rendu
 
 
-def test_second_degre_q16_cle_correspond_au_calcul_independant() -> None:
-    """Régression SCIENTIFIC_P0 : la clé doit désigner l'unique valeur V(4)."""
-    question = _question("1SPE-SECOND-DEGRE", "Q16")
-    valeur_attendue = 4 * (30 - 2 * 4) * (20 - 2 * 4)
-    options_correctes = [
-        lettre
-        for lettre, option in question["options"].items()
-        if option.strip() == f"$V(4) = {valeur_attendue}$"
-    ]
+def test_second_degre_q16_est_retiree_et_son_calcul_reste_dans_le_td() -> None:
+    """La question Q16 a ete retiree le 2026-09-08, et pour une raison.
 
-    assert valeur_attendue == 1056
-    assert question["enonce"].endswith("Quelle est la valeur de $V(4)$ ?")
-    assert len(options_correctes) == 1
-    assert question["correcte"] == options_correctes[0]
-    assert set(question["diagnostics"]) == set(question["options"]) - {
-        question["correcte"]
-    }
-    for fragment in ("1664", "2400", "264"):
-        assert _par_contenu.diagnostic_unique_contenant(question, fragment)
+    Elle demandait l'image $V(4)$ d'un volume $x(30-2x)(20-2x)$ : une
+    expression du TROISIEME degre, dans le chapitre du second degre. Elle
+    testait donc le prerequis R3 -- evaluer une expression -- et non la
+    capacite C6 qu'elle declarait. La disposition QCM-B4-002 l'enregistre :
+    « Removed from current chapter auto-evaluation without renumbering ;
+    volume calculation remains in TD fil rouge. No filler replacement. »
+
+    Ce test gardait auparavant la cle de cette question. Il gardait donc une
+    exigence que le depot avait remplacee, et faisait echouer la suite sur un
+    contrat perime. Il garde desormais la decision elle-meme : la question
+    absente, la numerotation inchangee, et le calcul de volume toujours
+    travaille -- ailleurs, et au bon endroit.
+    """
+    donnees = json.loads(
+        SOURCES["1SPE-SECOND-DEGRE"].read_text(encoding="utf-8")
+    )
+    identifiants = [q["id"] for q in donnees["questions"]]
+    assert "Q16" not in identifiants
+    # Retiree SANS renumerotation : les autres questions gardent leur identite.
+    assert identifiants == [f"Q{n}" for n in range(1, 21) if n != 16]
+
+    # Le calcul de volume n'a pas disparu du chapitre : il est traite dans le
+    # TD fil rouge, ou il sert la modelisation au lieu de tester un prerequis.
+    td = (
+        RACINE
+        / "chapitres/1SPE-SECOND-DEGRE/cours/07_td_fil_rouge.tex"
+    ).read_text(encoding="utf-8")
+    assert "V(x) = x(30 - 2x)(20 - 2x)" in td
+    # L'aire de la base, elle, est bien un trinome : c'est ce que le chapitre
+    # doit travailler.
+    ouverture = (
+        RACINE / "chapitres/1SPE-SECOND-DEGRE/cours/00_ouverture.tex"
+    ).read_text(encoding="utf-8")
+    assert "4x^2 - 100x + 600" in ouverture
 
 
 def test_primitives_q2_a_une_unique_reponse_correcte() -> None:
@@ -356,10 +374,25 @@ def test_suites_q14_demande_un_critere_objectif() -> None:
         ("1SPE-PRODUIT-SCALAIRE", "Q9", "A", ("$\\tan(\\theta)=1/\\sqrt{3}$",)),
         ("1SPE-PRODUIT-SCALAIRE", "Q9", "C", ("$\\tan(\\theta)=\\sqrt{3}$",)),
         ("1SPE-PRODUIT-SCALAIRE", "Q14", "D", ("$(8-5)^2=9$",)),
-        ("1SPE-PRODUIT-SCALAIRE", "Q15", "C", ("terme $2bc", "pas $a^2$")),
+        # Le diagnostic doit dire d'ou vient 2bc : l'eleve a annule le mauvais
+        # membre de la formule d'Al-Kashi.
+        (
+            "1SPE-PRODUIT-SCALAIRE",
+            "Q15",
+            "C",
+            ("terme $2bc", "annule le mauvais membre"),
+        ),
         ("1SPE-SECOND-DEGRE", "Q1", "D", ("exposants entiers naturels",)),
         ("1SPE-SECOND-DEGRE", "Q15", "B", ("$4-2k=0$", "$k=2$")),
-        ("1SPE-SECOND-DEGRE", "Q18", "B", ("$-b/(4a)$", "$t=1$")),
+        # La cause de t = 1 doit etre nommee : une division par 4a au lieu de
+        # 2a. Elle l'est sans ecrire la formule elle-meme, que le chapitre
+        # n'enseigne pas -- il enseigne la forme canonique.
+        (
+            "1SPE-SECOND-DEGRE",
+            "Q18",
+            "B",
+            ("$t=1$", "$4 \\times 5$", "$2 \\times 5$"),
+        ),
         ("1SPE-SUITES", "Q2", "C", ("oublie le $-2$", "$v_1=3\\times4=12$", "$v_2=3\\times12-2=34$")),
         ("1SPE-SUITES", "Q2", "D", ("soustrait $v_0=4$", "$v_2=3\\times8-2=22$")),
         ("1SPE-SUITES", "Q5", "B", ("quatre accroissements", "$8+4\\times(-3)=-4$")),

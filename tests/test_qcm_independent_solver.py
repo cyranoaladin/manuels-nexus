@@ -125,7 +125,11 @@ def test_the_solver_contains_no_question_identifier_and_no_answer_table() -> Non
 @pytest.mark.parametrize(
     ("chapter", "question_id"),
     [
-        ("1SPE-VARIABLES-ALEATOIRES", "Q1"),
+        # Q1 ne figure plus ici : depuis QCM-CURRENT-QA-011, le solveur
+        # s'abstient sur un « de equilibre » dont le nombre de faces n'est pas
+        # ecrit. Une question sur laquelle il s'abstient ne peut pas temoigner
+        # qu'il retrouve la bonne cle ; l'invariant « une cle fausse ne change
+        # rien a la sortie » est verifie sur elle par le test dedie ci-dessous.
         ("1SPE-VARIABLES-ALEATOIRES", "Q7"),
         ("1SPE-VARIABLES-ALEATOIRES", "Q11"),
         ("1SPE-VARIABLES-ALEATOIRES", "Q19"),
@@ -152,6 +156,27 @@ def test_a_false_declared_key_leaves_the_solver_output_identical(
     # Seul le verificateur voit la difference.
     assert truthful.unique_answer == question["correcte"]
     assert truthful.unique_answer != forged["correcte"]
+
+
+def test_a_false_declared_key_changes_nothing_even_when_the_solver_abstains() -> None:
+    """L'abstention doit etre aussi insensible a la cle que la resolution.
+
+    Sinon un enonce non modelisable offrirait une porte : une cle fausse y
+    passerait sans laisser de trace.
+    """
+    question = _question("1SPE-VARIABLES-ALEATOIRES", "Q1")
+    truthful = S.solve(S.sanitize_canonical(question))
+    assert truthful.status == "NOT_MACHINE_RESOLVABLE"
+
+    forged = dict(question)
+    forged["correcte"] = next(
+        lettre for lettre in sorted(question["options"])
+        if lettre != question["correcte"]
+    )
+    lied = S.solve(S.sanitize_canonical(forged))
+    assert truthful.digest() == lied.digest()
+    assert truthful.to_dict() == lied.to_dict()
+    assert truthful.unique_answer is None and lied.unique_answer is None
 
 
 # -- 8. La verite suit le CONTENU des options, pas la lettre ---------------
@@ -197,19 +222,37 @@ def test_permuting_options_preserves_resolution_and_moves_any_true_letter(
 
 
 def test_the_solver_reports_a_single_true_option_on_the_current_corpus() -> None:
-    question = _question("1SPE-VARIABLES-ALEATOIRES", "Q1")
+    """Sur une question du corpus qu'il sait modeliser, une seule option vraie.
+
+    Le temoin etait Q1 -- « on lance un de equilibre » --, sur laquelle le
+    solveur s'abstient depuis QCM-CURRENT-QA-011 : le nombre de faces n'y est
+    pas ecrit, et le supposer egal a six accorderait un faux credit. Le temoin
+    est donc pris parmi les questions que le solveur resout reellement.
+    """
+    question = _question("1SPE-VARIABLES-ALEATOIRES", "Q7")
     result = S.solve(S.sanitize_canonical(question))
+    assert result.status == "MACHINE_RESOLVED"
     assert result.true_option_count == 1
-    assert result.unique_answer is not None
+    assert result.unique_answer == question["correcte"]
 
 
 def test_two_equivalent_options_are_both_true() -> None:
     """La classe historique : $3/6$ et $1/2$ valent la meme chose."""
 
+    # L'enonce nomme le support : sans lui, le solveur s'abstient a bon droit,
+    # et la question posee ici -- deux ecritures d'un meme nombre -- ne serait
+    # pas celle qu'on teste.
     question = {
         "id": "FIXTURE-EQUIV",
         "capacite": "C1",
-        "enonce": "On lance un de equilibre. Soit $X$ le resultat. Quelle est $P(X = 3)$ ?",
+        # La grammaire acceptee est bornee, et volontairement : elle exige le
+        # nombre de faces, les etiquettes consecutives, et la variable
+        # designee. C'est ce qui interdit d'accorder six faces a un de qui
+        # n'en declare aucune.
+        "enonce": (
+            "On lance un de equilibre a 6 faces numerotees de 1 a 6. "
+            "X designe le resultat. Que vaut $P(X = 3)$ ?"
+        ),
         "options": {"A": r"$\frac{1}{6}$", "B": r"$\frac{2}{12}$", "C": "$1$", "D": "$0$"},
     }
     result = S.solve(S.sanitize(question))
@@ -221,7 +264,14 @@ def test_no_true_option_is_reported_as_zero() -> None:
     question = {
         "id": "FIXTURE-NONE",
         "capacite": "C1",
-        "enonce": "On lance un de equilibre. Soit $X$ le resultat. Quelle est $P(X = 3)$ ?",
+        # La grammaire acceptee est bornee, et volontairement : elle exige le
+        # nombre de faces, les etiquettes consecutives, et la variable
+        # designee. C'est ce qui interdit d'accorder six faces a un de qui
+        # n'en declare aucune.
+        "enonce": (
+            "On lance un de equilibre a 6 faces numerotees de 1 a 6. "
+            "X designe le resultat. Que vaut $P(X = 3)$ ?"
+        ),
         "options": {"A": "$1$", "B": "$0$", "C": r"$\frac{1}{2}$", "D": r"$\frac{1}{3}$"},
     }
     result = S.solve(S.sanitize(question))

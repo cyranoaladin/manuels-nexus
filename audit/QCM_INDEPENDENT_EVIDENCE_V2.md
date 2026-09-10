@@ -5,62 +5,50 @@
 Une identite par question. La v1 reste l'enregistrement historique.
 Cet artefact n'approuve rien.
 
-- Questions du corpus : 529
-- Report d'identite : 301
-- Recalcul independant : 25
-- Revue humaine requise : 203
+- Questions du corpus : 528
+- Report d'identite : 272
+- Recalcul independant : 20
+- Revue humaine requise : 236
 - UNKNOWN : 0
-- Equation : 529 = 301 + 25 + 203
+- Equation : 528 = 272 + 20 + 236
 - EVIDENCE_ROUTING_COMPLETE : True
 - ALL_QCM_HUMAN_REVIEW_COMPLETE : False
 
 ## Familles generiques employees
 
-- `ALGEBRAIC_GAIN`
 - `BINARY_TREE_TERMINAL_PATHS`
 - `EUCLIDEAN_GRAM_FORM`
 - `EXPECTATION_SIGN_INTERPRETATION`
-- `EXPECTED_PROFIT_OF_A_CONTRACT`
 - `FACTORED_QUADRATIC_SIGN`
 - `INDEPENDENT_BERNOULLI_REPETITION`
 - `INVERSE_TRANSFORM_SAMPLING`
 - `KOENIG_HUYGENS_SECOND_MOMENT`
 - `LINEAR_EXPECTATION`
 - `POLYNOMIAL_LOCAL_EXTREMA`
-- `PROBABILITY_DISTRIBUTION_TOTAL_MASS`
-- `PUBLISHED_FUNCTION_PARAMETER_ROLE`
 - `SAMPLE_MEAN_DEFINITION`
 - `SAMPLE_MEAN_FLUCTUATION_MONOTONICITY`
 - `SAMPLE_MEAN_FLUCTUATION_SCALE`
 - `STANDARD_DEVIATION_FROM_VARIANCE`
-- `SUM_AND_PRODUCT_OF_ROOTS`
 - `TWO_SIGMA_COVERAGE_PROPORTION`
-- `UNIFORM_DISCRETE_EXPECTATION`
-- `UNIFORM_DISCRETE_PROBABILITY`
 
 ## Questions recalculees independamment
 
 | chapitre | question | famille | verite calculee | cle declaree | verdict |
 |---|---|---|---|---|---|
+| 1SPE-PRODUIT-SCALAIRE | Q1 | EUCLIDEAN_GRAM_FORM | A | A | PASS |
 | 1SPE-PRODUIT-SCALAIRE | Q6 | EUCLIDEAN_GRAM_FORM | C | C | PASS |
-| 1SPE-SECOND-DEGRE | Q19 | SUM_AND_PRODUCT_OF_ROOTS | C | C | PASS |
+| 1SPE-PRODUIT-SCALAIRE | Q9 | EUCLIDEAN_GRAM_FORM | B | B | PASS |
 | 1SPE-SECOND-DEGRE | Q20 | FACTORED_QUADRATIC_SIGN | D | D | PASS |
-| 1SPE-VARIABLES-ALEATOIRES | Q1 | UNIFORM_DISCRETE_PROBABILITY | A | A | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q10 | LINEAR_EXPECTATION | A | A | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q11 | LINEAR_EXPECTATION | B | B | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q12 | LINEAR_EXPECTATION | C | C | PASS |
-| 1SPE-VARIABLES-ALEATOIRES | Q13 | ALGEBRAIC_GAIN | D | D | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q14 | EXPECTATION_SIGN_INTERPRETATION | A | A | PASS |
-| 1SPE-VARIABLES-ALEATOIRES | Q15 | EXPECTED_PROFIT_OF_A_CONTRACT | B | B | PASS |
-| 1SPE-VARIABLES-ALEATOIRES | Q16 | PUBLISHED_FUNCTION_PARAMETER_ROLE | C | C | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q17 | SAMPLE_MEAN_DEFINITION | D | D | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q18 | INVERSE_TRANSFORM_SAMPLING | A | A | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q19 | SAMPLE_MEAN_FLUCTUATION_SCALE | B | B | PASS |
-| 1SPE-VARIABLES-ALEATOIRES | Q2 | PROBABILITY_DISTRIBUTION_TOTAL_MASS | A | A | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q20 | SAMPLE_MEAN_FLUCTUATION_MONOTONICITY | C | C | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q21 | TWO_SIGMA_COVERAGE_PROPORTION | D | D | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q3 | INDEPENDENT_BERNOULLI_REPETITION | B | B | PASS |
-| 1SPE-VARIABLES-ALEATOIRES | Q4 | UNIFORM_DISCRETE_EXPECTATION | C | C | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q5 | STANDARD_DEVIATION_FROM_VARIANCE | D | D | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q6 | KOENIG_HUYGENS_SECOND_MOMENT | A | A | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q7 | INDEPENDENT_BERNOULLI_REPETITION | B | B | PASS |
@@ -150,6 +138,39 @@ Comportement correct du solveur, pas un echec : aucune regle mathematique generi
 | 1NSI-WEB-IHM | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | 1NSI-WEB-IHM | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | 1NSI-WEB-IHM | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-PRODUIT-SCALAIRE | Q10 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-PRODUIT-SCALAIRE | Q11 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-PRODUIT-SCALAIRE | Q12 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-PRODUIT-SCALAIRE | Q13 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-PRODUIT-SCALAIRE | Q14 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-PRODUIT-SCALAIRE | Q15 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-PRODUIT-SCALAIRE | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-PRODUIT-SCALAIRE | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-PRODUIT-SCALAIRE | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q10 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q11 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q12 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q13 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q14 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q15 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q17 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q18 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q19 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-SECOND-DEGRE | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-VARIABLES-ALEATOIRES | Q1 | Support uniforme, variable resultat et evenement non explicitement etablis dans le contexte pris en charge. |
+| 1SPE-VARIABLES-ALEATOIRES | Q13 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-VARIABLES-ALEATOIRES | Q15 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-VARIABLES-ALEATOIRES | Q16 | referential code question: no uniquely identified chapter source and no source-bound general argument for the parameter role; finite sample executions cannot prove this claim |
+| 1SPE-VARIABLES-ALEATOIRES | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1SPE-VARIABLES-ALEATOIRES | Q4 | die expectation requires explicit face count, labels and the precise random variable |
 | TCOMPL-ECHANTILLONNAGE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TCOMPL-ECHANTILLONNAGE | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TCOMPL-INFERENCE-BAYESIENNE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
