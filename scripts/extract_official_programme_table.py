@@ -86,7 +86,49 @@ def est_entete(cellules: list[str | None]) -> bool:
     return tuple(normalise(c or "") for c in cellules[:3]) == HEADER_CELLS
 
 
-def extract(pdf_path: Path, authority: str, manual: str) -> dict[str, Any]:
+def sections_de_preambule(
+    page: pdfplumber.page.Page, voulues: tuple[str, ...]
+) -> list[tuple[str, str]]:
+    """Recupere le texte des parties prescriptives du preambule.
+
+    Le preambule d'un programme de NSI n'est pas que du cadrage : il y impose
+    aussi des obligations, dont « Un quart au moins de l'horaire total de la
+    specialite est reserve a la conception et a l'elaboration de projets ».
+    Ces exigences n'apparaissent dans aucun tableau ; ne lire que les tableaux
+    les faisait disparaitre du programme, alors qu'elles engagent le manuel.
+
+    Les parties retenues sont DECLAREES a l'appel. Deviner lesquelles d'un
+    preambule sont prescriptives et lesquelles sont de simples intentions
+    demanderait un jugement que ce script n'a pas a rendre seul.
+    """
+    if not voulues:
+        return []
+    attendus = {normalise(v) for v in voulues}
+    titres = titres_de_page(page)
+    if not titres:
+        return []
+    bas = min((t.bbox[1] for t in page.find_tables()), default=page.height)
+    trouves: list[tuple[str, str]] = []
+    for rang, (y, texte) in enumerate(titres):
+        if normalise(texte) not in attendus:
+            continue
+        fin = titres[rang + 1][0] if rang + 1 < len(titres) else bas
+        mots = [
+            m for m in page.extract_words()
+            if y < float(m["top"]) < fin
+        ]
+        corps = re.sub(r"\s+", " ", " ".join(m["text"] for m in mots)).strip()
+        if corps:
+            trouves.append((texte, corps))
+    return trouves
+
+
+def extract(
+    pdf_path: Path,
+    authority: str,
+    manual: str,
+    preamble_sections: tuple[str, ...] = (),
+) -> dict[str, Any]:
     items: list[dict[str, Any]] = []
     rejets: list[dict[str, Any]] = []
     rubriques: list[str] = []
@@ -97,6 +139,35 @@ def extract(pdf_path: Path, authority: str, manual: str) -> dict[str, Any]:
 
     with pdfplumber.open(str(pdf_path)) as pdf:
         for numero_page, page in enumerate(pdf.pages, start=1):
+            for titre, corps in sections_de_preambule(page, preamble_sections):
+                for rang, phrase in enumerate(
+                    (m.strip() for m in SENTENCE.split(corps)), start=1
+                ):
+                    if len(phrase) < MIN_ITEM_LEN:
+                        continue
+                    empreinte = hashlib.sha256(phrase.encode("utf-8")).hexdigest()[:8]
+                    items.append({
+                        "official_id": "::".join(
+                            [authority, _slug(titre), "TRANSVERSAL_REQUIREMENT",
+                             empreinte]
+                        ),
+                        "locally_assigned_identifier": True,
+                        "manual": manual,
+                        "authority_ref": authority,
+                        "official_section": "Préambule",
+                        "official_subsection": titre,
+                        "official_subheading": None,
+                        "official_rubric": titre,
+                        "official_rubric_index": rang,
+                        "official_row": None,
+                        "rubric_is_implicit_in_source": False,
+                        "official_wording": phrase,
+                        "kind": "TRANSVERSAL_REQUIREMENT",
+                        "mandatory": True,
+                        "source_page_or_anchor": f"page={numero_page};preamble={_slug(titre)}",
+                    })
+                if titre not in rubriques:
+                    rubriques.append(titre)
             titres = titres_de_page(page)
             tableaux = page.find_tables()
             for tableau in sorted(tableaux, key=lambda t: t.bbox[1]):
@@ -141,7 +212,7 @@ def extract(pdf_path: Path, authority: str, manual: str) -> dict[str, Any]:
                                 "text": texte,
                             })
                             continue
-                        for morceau in morceaux:
+                        for rang, morceau in enumerate(morceaux, start=1):
                             if len(morceau) < MIN_ITEM_LEN:
                                 if morceau:
                                     rejets.append({

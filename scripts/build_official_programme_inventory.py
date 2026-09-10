@@ -131,7 +131,12 @@ DOCUMENTS: tuple[dict[str, Any], ...] = (
         "effective_from": "2019-09-01",
         "effective_until": None,
         "applies_to_edition": True,
-        "note": "Programme publie en tableau a trois colonnes ; lu dans le PDF.",
+        "preamble_sections": ("Démarche de projet",),
+        "note": (
+            "Programme publie en tableau a trois colonnes ; lu dans le PDF. "
+            "Son preambule impose en outre une demarche de projet, qui ne "
+            "figure dans aucun tableau."
+        ),
     },
     {
         "manual": "TNSI",
@@ -141,6 +146,7 @@ DOCUMENTS: tuple[dict[str, Any], ...] = (
         "effective_from": "2020-09-01",
         "effective_until": None,
         "applies_to_edition": True,
+        "preamble_sections": ("Démarche de projet",),
         "note": (
             "Programme d'enseignement. La definition d'epreuve MENE2516123N "
             "reste dans un autre espace d'autorite et n'ajoute aucun contenu."
@@ -179,7 +185,12 @@ def _digest(charge: dict[str, Any]) -> str:
 def construire(doc: dict[str, Any]) -> dict[str, Any]:
     source = ROOT / doc["source"]
     if doc["layout"] == "table":
-        res = tableau.extract(source, doc["authority_ref"], doc["manual"])
+        res = tableau.extract(
+            source,
+            doc["authority_ref"],
+            doc["manual"],
+            tuple(doc.get("preamble_sections", ())),
+        )
         items, rejets = res["items"], res["discarded"]
         comptes = {
             "table_rows": len(res["row_bindings"]),

@@ -266,6 +266,7 @@ def extract(
 
     tampon: list[str] = []
     ancre: Ligne | None = None
+    rangs: dict[tuple[str | None, str | None, str], int] = {}
     precedente: Ligne | None = None
     apres_section = False
 
@@ -291,6 +292,11 @@ def extract(
             })
             return
         titre, nature, obligatoire = rubric
+        # Rang de la puce dans sa rubrique. C'est la coordonnee que citent les
+        # ancrages du referentiel interne (« ... / Capacites attendues / puce 3 »)
+        # et sans laquelle ces ancrages ne designent rien de resoluble.
+        coord = (section, subsection, titre)
+        rangs[coord] = rangs.get(coord, 0) + 1
         empreinte = hashlib.sha256(libelle.encode("utf-8")).hexdigest()[:8]
         res.items.append({
             # La nature fait partie de l'identifiant : le BO enonce parfois le
@@ -311,6 +317,7 @@ def extract(
             "official_subsection": subsection,
             "official_subheading": subheading,
             "official_rubric": titre,
+            "official_rubric_index": rangs[coord],
             "rubric_is_implicit_in_source": rubric_is_implicit,
             "official_wording": libelle,
             # Le BO 2019 compose ses formules en police Symbol ; `pdftotext`
