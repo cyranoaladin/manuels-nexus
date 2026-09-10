@@ -34,24 +34,33 @@
       ]
     },
     "INTERNAL_ATOMS_CONFIRMED_PARENT": {
-      "value": 159,
+      "value": 279,
       "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
       "pointer": [
         "summary",
         "bound_confirmed"
       ]
     },
-    "INTERNAL_ATOMS_PROPOSED": {
-      "value": 139,
+    "INTERNAL_ATOMS_CONFIRMED_BY_CONTEXT": {
+      "value": 110,
       "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
       "pointer": [
         "summary",
-        "bound_proposed"
+        "bound_by_context"
       ],
-      "reading": "rapprochements mesures, publies avec leurs concurrents ; ils ne valent pas couverture."
+      "reading": "rattachements etablis par la structure des deux sources : la partie du programme que le chapitre traite, et le libelle de l'attendu a l'interieur de cette partie. Ce n'est pas une approbation humaine ; la preuve est publiee avec chaque lien."
+    },
+    "INTERNAL_ATOMS_AMBIGUOUS_REQUIRES_HUMAN": {
+      "value": 34,
+      "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
+      "pointer": [
+        "summary",
+        "ambiguous_requires_human"
+      ],
+      "reading": "atomes qu'aucune preuve objective ne tranche. Ils ne portent aucun parent et attendent un arbitrage ; chacun est classe (subdivision pedagogique, enrichissement, programme perime, atome obsolete)."
     },
     "INTERNAL_ATOMS_UNRESOLVED": {
-      "value": 15,
+      "value": 34,
       "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
       "pointer": [
         "summary",
@@ -59,7 +68,7 @@
       ]
     },
     "INTERNAL_ATOM_WITHOUT_CONFIRMED_PARENT": {
-      "value": 154,
+      "value": 34,
       "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
       "pointer": [
         "summary",
@@ -68,7 +77,7 @@
       "reading": "atomes internes dont le parent officiel n'est pas etabli : la somme des propositions en attente et des atomes sans candidat."
     },
     "OFFICIAL_REQUIRED_UNMAPPED": {
-      "value": 537,
+      "value": 418,
       "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
       "pointer": [
         "summary",
@@ -77,7 +86,7 @@
       "reading": "rattachement non encore etabli — PAS un contenu absent du manuel. Les referentiels internes encodent surtout des capacites ; une connaissance peut etre parfaitement traitee dans un fichier de cours sans posseder d'atome dedie."
     },
     "UNJUSTIFIED_MULTIPLE_ASSIGNMENT": {
-      "value": 1,
+      "value": 5,
       "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
       "pointer": [
         "summary",

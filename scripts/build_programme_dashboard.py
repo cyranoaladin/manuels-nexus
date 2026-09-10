@@ -37,9 +37,16 @@ LECTURES: dict[str, str] = {
         "atomes internes dont le parent officiel n'est pas etabli : la somme "
         "des propositions en attente et des atomes sans candidat."
     ),
-    "INTERNAL_ATOMS_PROPOSED": (
-        "rapprochements mesures, publies avec leurs concurrents ; ils ne "
-        "valent pas couverture."
+    "INTERNAL_ATOMS_CONFIRMED_BY_CONTEXT": (
+        "rattachements etablis par la structure des deux sources : la partie "
+        "du programme que le chapitre traite, et le libelle de l'attendu a "
+        "l'interieur de cette partie. Ce n'est pas une approbation humaine ; "
+        "la preuve est publiee avec chaque lien."
+    ),
+    "INTERNAL_ATOMS_AMBIGUOUS_REQUIRES_HUMAN": (
+        "atomes qu'aucune preuve objective ne tranche. Ils ne portent aucun "
+        "parent et attendent un arbitrage ; chacun est classe (subdivision "
+        "pedagogique, enrichissement, programme perime, atome obsolete)."
     ),
     "MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY": (
         "champs dont le nom promet le texte du Bulletin officiel sans qu'aucun "

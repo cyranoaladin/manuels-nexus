@@ -57,7 +57,16 @@ SOURCES: tuple[tuple[str, str, tuple[str, ...]], ...] = (
     ("OFFICIAL_REFERENCES_VERIFIED", INVENTORY, ("OFFICIAL_REFERENCES_VERIFIED",)),
     ("INTERNAL_ATOMS", BINDING, ("summary", "internal_atoms")),
     ("INTERNAL_ATOMS_CONFIRMED_PARENT", BINDING, ("summary", "bound_confirmed")),
-    ("INTERNAL_ATOMS_PROPOSED", BINDING, ("summary", "bound_proposed")),
+    (
+        "INTERNAL_ATOMS_CONFIRMED_BY_CONTEXT",
+        BINDING,
+        ("summary", "bound_by_context"),
+    ),
+    (
+        "INTERNAL_ATOMS_AMBIGUOUS_REQUIRES_HUMAN",
+        BINDING,
+        ("summary", "ambiguous_requires_human"),
+    ),
     ("INTERNAL_ATOMS_UNRESOLVED", BINDING, ("summary", "unbound")),
     (
         "INTERNAL_ATOM_WITHOUT_CONFIRMED_PARENT",
