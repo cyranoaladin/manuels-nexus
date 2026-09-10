@@ -115,6 +115,28 @@ def racine(terme: str) -> str:
     return terme[: max(5, len(terme) - 2)]
 
 
+def charger_lignes_officielles() -> dict[str, list[str]]:
+    """Pour chaque attendu, les autres attendus de SA ligne du tableau.
+
+    Le BO de NSI place sur une meme ligne un contenu, les capacites qui le
+    mettent en oeuvre et les commentaires qui l'eclairent. C'est une unite
+    reglementaire, pas trois enonces voisins.
+    """
+    index = json.loads(INDEX.read_text(encoding="utf-8"))
+    voisins: dict[str, list[str]] = {}
+    for entree in index["documents"]:
+        charge = json.loads((ROOT / entree["inventory_path"]).read_text(encoding="utf-8"))
+        for ligne in charge.get("row_bindings", []):
+            tous = (
+                ligne["content_items"]
+                + ligne["capacity_items"]
+                + ligne["commentary_items"]
+            )
+            for oid in tous:
+                voisins[oid] = [autre for autre in tous if autre != oid]
+    return voisins
+
+
 def charger_officiels() -> tuple[list[dict[str, Any]], dict[str, str]]:
     index = json.loads(INDEX.read_text(encoding="utf-8"))
     items: list[dict[str, Any]] = []
@@ -255,6 +277,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     items, autorites = charger_officiels()
+    voisins_de_ligne = charger_lignes_officielles()
+    par_official_id = {i["official_id"]: i for i in items}
     liaison = json.loads(BINDING.read_text(encoding="utf-8"))
     contrats = charger_contrats()
     objets = charger_objets(contrats) + charger_transversaux()
@@ -337,6 +361,43 @@ def main(argv: list[str] | None = None) -> int:
         preuve = "DECLARED_CAPACITY" if servants else None
         termes_trouves: list[str] = []
         termes_absents: list[str] = []
+
+        if not servants and voisins_de_ligne.get(item["official_id"]):
+            # Preuve par la ligne officielle. Un objet qui prouve une capacite
+            # soeur ne prouve PAS le contenu par heritage : il faut que son
+            # corps traite reellement le sujet de la ligne. Le vocabulaire
+            # examine est celui de la ligne entiere -- contenu, capacites,
+            # commentaires --, parce que c'est ce que le BO y a mis ensemble.
+            vocabulaire: set[str] = set()
+            for autre in [item["official_id"], *voisins_de_ligne[item["official_id"]]]:
+                voisin = par_official_id.get(autre)
+                if voisin is not None:
+                    vocabulaire |= termes_distinctifs(voisin["official_wording"])
+            seuil_ligne = min(
+                len(vocabulaire),
+                TERMES_SUFFISANTS,
+                max(TERMES_MINIMAUX, math.ceil(len(vocabulaire) * PART_DE_TERMES_REQUISE)),
+            ) if vocabulaire else 0
+            candidats: dict[str, Objet] = {}
+            for autre in voisins_de_ligne[item["official_id"]]:
+                for atome_voisin in atomes_par_item.get(autre, []):
+                    for objet in par_atome.get(atome_voisin, []):
+                        candidats[objet.object_id] = objet
+            for objet in candidats.values():
+                texte = textes.get(objet.path)
+                if texte is None:
+                    texte = _sans_accents(
+                        (ROOT / objet.path).read_text(encoding="utf-8", errors="replace")
+                    ).lower()
+                    textes[objet.path] = texte
+                presents = [t for t in vocabulaire if racine(t) in texte]
+                if seuil_ligne and len(presents) >= seuil_ligne:
+                    servants[objet.object_id] = objet
+                    termes_trouves = sorted(set(termes_trouves) | set(presents))
+            if servants:
+                preuve = "OFFICIAL_ROW_EVIDENCE"
+                termes_absents = sorted(vocabulaire - set(termes_trouves))
+
 
         if not servants:
             # Aucun atome ne porte cet attendu : on cherche dans les chapitres
@@ -595,6 +656,15 @@ def main(argv: list[str] | None = None) -> int:
                 "le programme nomme un exemple d'algorithme sans l'imposer ; "
                 "la partie concernee comporte un travail algorithmique, porte "
                 "par les objets listes"
+            ),
+            "OFFICIAL_ROW_EVIDENCE": (
+                "un objet qui prouve une capacite de la MEME LIGNE du tableau "
+                "officiel traite materiellement le sujet de cette ligne. Le BO "
+                "y place ensemble un contenu et les capacites qui le mettent en "
+                "oeuvre : les traiter separement fait declarer absent un "
+                "contenu que le cours d'a cote enseigne. Ce n'est pas un "
+                "heritage : le corps de l'objet doit porter le vocabulaire de "
+                "la ligne."
             ),
             "CONTENT_MATCH_MANUAL_WIDE": (
                 "aucun chapitre ne se rattache a cette partie du programme : "

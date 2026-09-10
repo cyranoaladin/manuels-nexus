@@ -260,7 +260,9 @@ def extract(
                     rubriques.append(titre)
             titres = titres_de_page(page)
             tableaux = page.find_tables()
-            for tableau in sorted(tableaux, key=lambda t: t.bbox[1]):
+            for bloc_courant, tableau in enumerate(
+                sorted(tableaux, key=lambda t: t.bbox[1]), start=1
+            ):
                 haut = tableau.bbox[1]
                 # Un tableau peut se poursuivre sur la page suivante sans titre
                 # ni ligne d'entete : la rubrique en vigueur est alors celle
@@ -276,13 +278,19 @@ def extract(
                     if not any((c or "").strip() for c in rangee[:3]):
                         continue
                     ligne_globale += 1
+                    # Une ligne du tableau est une unite reglementaire : le BO y
+                    # place ensemble un contenu, les capacites qui le mettent
+                    # en oeuvre et les commentaires qui l'eclairent. Traiter les
+                    # colonnes separement fait perdre ce lien -- et fait
+                    # declarer absent un contenu que le cours d'a cote enseigne.
                     liaison: dict[str, Any] = {
+                        "official_table": bloc_courant,
                         "official_row": ligne_globale,
                         "official_section": rubrique,
                         "page": numero_page,
-                        "knowledge": [],
-                        "expected_capacity": [],
-                        "commentary": [],
+                        "content_items": [],
+                        "capacity_items": [],
+                        "commentary_items": [],
                     }
                     for index, titre in enumerate(COLUMNS):
                         portee = pn.resolve(None, titre)
@@ -322,7 +330,11 @@ def extract(
                                  nature, empreinte]
                             )
                             liaison[
-                                ("knowledge", "expected_capacity", "commentary")[index]
+                                (
+                                    "content_items",
+                                    "capacity_items",
+                                    "commentary_items",
+                                )[index]
                             ].append(oid)
                             items.append({
                                 "official_id": oid,

@@ -182,9 +182,9 @@ def test_les_tableaux_nsi_conservent_le_lien_entre_contenu_et_capacite(inventair
         connus = {i["official_id"] for i in charge["items"]}
         lie = 0
         for ligne_ in liaisons:
-            for champ in ("knowledge", "expected_capacity", "commentary"):
+            for champ in ("content_items", "capacity_items", "commentary_items"):
                 assert set(ligne_[champ]) <= connus, (cle, ligne_["official_row"])
-            if ligne_["knowledge"] and ligne_["expected_capacity"]:
+            if ligne_["content_items"] and ligne_["capacity_items"]:
                 lie += 1
         assert lie >= len(liaisons) // 2, cle
 

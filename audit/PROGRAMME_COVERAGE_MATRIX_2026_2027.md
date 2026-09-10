@@ -7,8 +7,8 @@ Les trois autorités restent séparées : `PROGRAMME_D_ENSEIGNEMENT`, `DEFINITIO
 ## Synthèse
 
 - Autorités officielles : **6/6**
-- Candidats issus des référentiels internes : **313**
-- `STRUCTURALLY_MAPPED` dans ce périmètre interne : **313**
+- Candidats issus des référentiels internes : **316**
+- `STRUCTURALLY_MAPPED` dans ce périmètre interne : **316**
 - Inventaire des atomes officiels : **à refaire directement depuis les six textes**
 - `MANDATORY_MISSING` : **indéterminé tant que cette ré-atomisation n'est pas terminée**
 - `FULL` : **0** — aucun renvoi structurel n'est auto-promu
@@ -20,7 +20,7 @@ Les trois autorités restent séparées : `PROGRAMME_D_ENSEIGNEMENT`, `DEFINITIO
 
 - `1SPE` : 52 candidats internes ; structurellement mappés=52 ; FULL=0.
 - `TSPE` : 67 candidats internes ; structurellement mappés=67 ; FULL=0.
-- `TCOMPL` : 50 candidats internes ; structurellement mappés=50 ; FULL=0.
+- `TCOMPL` : 53 candidats internes ; structurellement mappés=53 ; FULL=0.
 - `TEXPERTES` : 33 candidats internes ; structurellement mappés=33 ; FULL=0.
 - `1NSI` : 50 candidats internes ; structurellement mappés=50 ; FULL=0.
 - `TNSI` : 61 candidats internes ; structurellement mappés=61 ; FULL=0.
