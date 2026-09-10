@@ -436,14 +436,14 @@ def main() -> int:
     donnees["_source"] = str(source.relative_to(_racine_de(source)))
     ancienne = meta_existante(cible)
     donnees["_identifiant"] = ancienne.get("id")
-    # On n'ajoute pas ce champ la ou il n'a jamais existe : les QCM de
-    # mathematiques n'en portent pas, et le corpus n'a pas a bouger pour cela.
     donnees["_statut"] = ancienne.get("status")
-    donnees["_capacites"] = (
-        official_refs
-        if "capacites" in ancienne
-        else None
-    )
+    # Le QCM evalue des capacites ; le resolveur les etablit exactement a
+    # partir du code local de chaque question. Ne les inscrire que la ou le
+    # champ existait deja laissait quarante-deux QCM muets sur ce qu'ils
+    # evaluent : la carte inverse ne pouvait alors rien dire d'eux, et cinq
+    # QCM de terminale NSI se retrouvaient sans aucun statut. Le champ est
+    # donc ecrit des que la resolution aboutit.
+    donnees["_capacites"] = official_refs or None
     rendu = rendre(donnees)
     if args.check:
         actuel = cible.read_text(encoding="utf-8") if cible.exists() else ""

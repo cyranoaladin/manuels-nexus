@@ -64,7 +64,7 @@ def main(argv: list[str] | None = None) -> int:
     }
     parents_par_atome: dict[str, list[str]] = defaultdict(list)
     for lien in liaison["bindings"]:
-        if lien["binding_method"] in ("ANCHOR", "VERBATIM", "CONTEXT"):
+        if lien["binding_method"] in ("ANCHOR", "VERBATIM", "CONTEXT", "DISPOSED"):
             for oid in lien.get("official_ids") or [lien["official_id"]]:
                 parents_par_atome[lien["atom_id"]].append(oid)
 
@@ -77,12 +77,19 @@ def main(argv: list[str] | None = None) -> int:
         if lien["review_status"] == "AMBIGUOUS_REQUIRES_HUMAN"
     }
     prouve_un_attendu: dict[str, set[str]] = defaultdict(set)
+    # Un objet retenu comme preuve d'un attendu NON obligatoire n'est pas non
+    # plus sans justification : le programme nomme cet attendu, il ne l'impose
+    # pas. C'est le cas de la page d'algorithmes de l'exponentielle, qui met en
+    # oeuvre les deux « Exemples d'algorithme » du BO. La distinction est
+    # conservee : elle decide du classement, elle ne se perd pas.
+    prouve_un_attendu_facultatif: dict[str, set[str]] = defaultdict(set)
     for ligne in couverture["rows"]:
-        if not ligne["mandatory"]:
-            continue
+        cible = (
+            prouve_un_attendu if ligne["mandatory"] else prouve_un_attendu_facultatif
+        )
         for role in ligne["objects_by_role"]:
             for oid in ligne["objects_by_role"][role]:
-                prouve_un_attendu[oid].add(ligne["official_id"])
+                cible[oid].add(ligne["official_id"])
 
     hors_edition: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for entree in index["documents"]:
@@ -146,10 +153,15 @@ def main(argv: list[str] | None = None) -> int:
     lignes: list[dict[str, Any]] = []
     textes: dict[str, str] = {}
     for objet in objets:
-        parents = sorted(
+        parents_declares = sorted(
             {oid for a in objet.atoms for oid in parents_par_atome.get(a, [])}
             | prouve_un_attendu.get(objet.object_id, set())
         )
+        facultatifs_prouves = sorted(
+            prouve_un_attendu_facultatif.get(objet.object_id, set())
+            - set(parents_declares)
+        )
+        parents = sorted(set(parents_declares) | set(facultatifs_prouves))
         obligatoires = [p for p in parents if obligatoire_par_id.get(p)]
         if obligatoires:
             classement = "IN_PROGRAMME"
@@ -157,7 +169,7 @@ def main(argv: list[str] | None = None) -> int:
         elif objet.kind in ENTRAINEMENT_EPREUVE:
             classement = "EXAM_TRAINING"
             motif = "objet de banque, destine au format de l'epreuve"
-        elif parents:
+        elif parents_declares:
             classement = "LEGITIMATE_ENRICHMENT"
             motif = (
                 "rattache au programme, mais a des attendus que le texte ne "
@@ -227,6 +239,18 @@ def main(argv: list[str] | None = None) -> int:
                 motif = (
                     "reprend un attendu d'un programme qui ne regit pas cette "
                     f"edition ({hors['authority_ref']})"
+                )
+            elif facultatifs_prouves:
+                # La matrice de couverture le cite deja comme preuve d'un
+                # attendu officiel que le texte ne rend pas obligatoire. Le
+                # declarer « sans justification » contredirait l'artefact qui
+                # le nomme. Le controle du hors-annee passe avant : un objet
+                # qui traite un programme perime ne se rachete pas en croisant
+                # au passage un exemple facultatif du programme en vigueur.
+                classement = "LEGITIMATE_ENRICHMENT"
+                motif = (
+                    "met en oeuvre un attendu officiel non obligatoire "
+                    f"({len(facultatifs_prouves)}), sans porter d'attendu exigible"
                 )
             elif objet.kind in ("cours", "transversal"):
                 classement = "OFF_TOPIC"

@@ -7,7 +7,7 @@
   "basis": "« Les capacites attendues enoncees ci-dessous n'ont pas vocation a faire l'objet d'un chapitre d'enseignement specifique [...] et doivent etre entretenues et consolidees au cours de l'annee. »",
   "summary": {
     "AUTOMATISMS_1SPE_OFFICIAL": 17,
-    "AUTOMATISMS_1SPE_WITH_AN_INTERNAL_ATOM": 0,
+    "AUTOMATISMS_1SPE_WITH_AN_INTERNAL_ATOM": 1,
     "AUTOMATISMS_1SPE_PRESENT": 17,
     "AUTOMATISMS_1SPE_ADEQUATELY_REINVESTED": 12,
     "AUTOMATISM_NOT_REINVESTED": 0,
@@ -1335,8 +1335,11 @@
       "automatism_id": "MENE2602917A::AUTOMATISMES::PROBABILITES::AUTOMATISM::dd94c401",
       "official_wording": "Calculer des probabilités conditionnelles lorsque les évènements sont présentés sous forme de tableau croisé d’effectifs ou d’arbres pondérés.",
       "official_domain": "Probabilités",
-      "internal_atoms": [],
-      "evidence_kind": "CONTENT_MATCH_MANUAL_WIDE",
+      "internal_atoms": [
+        "1SPE-PROBA-COND-C1",
+        "1SPE-PROBA-COND-C2"
+      ],
+      "evidence_kind": "DECLARED_CAPACITY",
       "INTRODUCTION_EVIDENCE": [
         "1SPE-PROBCOND-CR-001",
         "1SPE-PROBCOND-CR-010",
@@ -1360,11 +1363,50 @@
         "1SPE-VARALEA-ME-001"
       ],
       "PRACTICE_EVIDENCE": [
+        "1SPE-PROBCOND-CO-001",
+        "1SPE-PROBCOND-CO-002",
+        "1SPE-PROBCOND-CO-003",
+        "1SPE-PROBCOND-CO-004",
+        "1SPE-PROBCOND-CO-005",
+        "1SPE-PROBCOND-CO-006",
+        "1SPE-PROBCOND-CO-007",
+        "1SPE-PROBCOND-CO-008",
+        "1SPE-PROBCOND-CO-009",
+        "1SPE-PROBCOND-CO-010",
+        "1SPE-PROBCOND-CO-011",
+        "1SPE-PROBCOND-CO-012",
+        "1SPE-PROBCOND-CO-013",
+        "1SPE-PROBCOND-CO-014",
         "1SPE-PROBCOND-CO-015",
+        "1SPE-PROBCOND-CO-016",
+        "1SPE-PROBCOND-CO-017",
+        "1SPE-PROBCOND-CO-018",
+        "1SPE-PROBCOND-CO-019",
+        "1SPE-PROBCOND-CO-020",
         "1SPE-PROBCOND-CO-021",
         "1SPE-PROBCOND-CO-041",
         "1SPE-PROBCOND-CO-045",
         "1SPE-PROBCOND-CO-047",
+        "1SPE-PROBCOND-EX-001",
+        "1SPE-PROBCOND-EX-002",
+        "1SPE-PROBCOND-EX-003",
+        "1SPE-PROBCOND-EX-004",
+        "1SPE-PROBCOND-EX-005",
+        "1SPE-PROBCOND-EX-006",
+        "1SPE-PROBCOND-EX-007",
+        "1SPE-PROBCOND-EX-008",
+        "1SPE-PROBCOND-EX-009",
+        "1SPE-PROBCOND-EX-010",
+        "1SPE-PROBCOND-EX-011",
+        "1SPE-PROBCOND-EX-012",
+        "1SPE-PROBCOND-EX-013",
+        "1SPE-PROBCOND-EX-014",
+        "1SPE-PROBCOND-EX-015",
+        "1SPE-PROBCOND-EX-016",
+        "1SPE-PROBCOND-EX-017",
+        "1SPE-PROBCOND-EX-018",
+        "1SPE-PROBCOND-EX-019",
+        "1SPE-PROBCOND-EX-020",
         "1SPE-PROBCOND-EX-041",
         "1SPE-PROBCOND-EX-047",
         "1SPE-VARALEA-EX-030"
@@ -1372,20 +1414,25 @@
       "ASSESSMENT_EVIDENCE": [
         "1SPE-PROBA-COND-QCM",
         "1SPE-PROBCOND-EV-A",
+        "1SPE-PROBCOND-EV-A-corrige",
         "1SPE-PROBCOND-EV-B",
+        "1SPE-PROBCOND-EV-B-corrige",
         "1SPE-VARALEA-EV-A",
         "1SPE-VARALEA-EV-B",
         "1SPE-VARIABLES-ALEATOIRES-QCM"
       ],
-      "REMEDIATION_EVIDENCE": [],
+      "REMEDIATION_EVIDENCE": [
+        "1SPE-PROBCOND-RE-C1",
+        "1SPE-PROBCOND-RE-C2"
+      ],
       "chapters_distribution": [
         "1SPE-PROBA-COND",
         "1SPE-SUITES",
         "1SPE-VARIABLES-ALEATOIRES"
       ],
-      "occurrence_count": 32,
+      "occurrence_count": 75,
       "verdict": "ADEQUATELY_REINVESTED",
-      "reason": "introduit, puis entretenu dans 3 chapitres, avec 8 objets d'entrainement et 6 objets d'evaluation"
+      "reason": "introduit, puis entretenu dans 3 chapitres, avec 47 objets d'entrainement et 8 objets d'evaluation"
     },
     {
       "automatism_id": "MENE2602917A::AUTOMATISMES::PROBABILITES::AUTOMATISM::49158027",

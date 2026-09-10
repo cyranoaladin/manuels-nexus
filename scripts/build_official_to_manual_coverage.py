@@ -664,7 +664,7 @@ def main(argv: list[str] | None = None) -> int:
     # attendu officiel -> atomes rattaches de facon etablie
     atomes_par_item: dict[str, list[str]] = defaultdict(list)
     for lien in liaison["bindings"]:
-        if lien["binding_method"] not in ("ANCHOR", "VERBATIM", "CONTEXT"):
+        if lien["binding_method"] not in ("ANCHOR", "VERBATIM", "CONTEXT", "DISPOSED"):
             continue
         for oid in lien.get("official_ids") or [lien["official_id"]]:
             atomes_par_item[oid].append(lien["atom_id"])
@@ -756,7 +756,18 @@ def main(argv: list[str] | None = None) -> int:
                 termes_absents = sorted(vocabulaire - set(termes_trouves))
 
 
-        if not servants:
+        # Un automatisme se mesure a sa repartition : le programme exclut
+        # qu'il fasse l'objet d'un chapitre specifique. Ne regarder que les
+        # objets qui le declarent mesurerait la repartition des declarations,
+        # pas celle du travail reel -- une disposition qui rattache
+        # l'automatisme a un chapitre le ferait aussitot paraitre « concentre »
+        # alors que le manuel le retravaille ailleurs sans le declarer. La
+        # recherche par contenu s'ajoute donc aux objets declarants au lieu de
+        # les remplacer.
+        mesure_par_repartition = item["official_normativity"] == REQUIRED_AUTOMATISM
+        declares = set(servants)
+
+        if not servants or mesure_par_repartition:
             # Aucun atome ne porte cet attendu : on cherche dans les chapitres
             # qui traitent cette partie du programme. La recherche est bornee
             # par la portee -- sans cela, un mot suffisamment courant
@@ -819,8 +830,10 @@ def main(argv: list[str] | None = None) -> int:
                                 termes_trouves = sorted(
                                     set(termes_trouves) | set(presents)
                                 )
-                    if servants:
-                        preuve = etiquette
+                    if set(servants) - declares:
+                        # La preuve declaree reste la preuve : la recherche par
+                        # contenu ne fait ici qu'elargir la mesure.
+                        preuve = preuve or etiquette
                         termes_absents = sorted(termes - set(termes_trouves))
                         break
                 else:

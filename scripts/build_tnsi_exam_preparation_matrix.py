@@ -64,7 +64,7 @@ def main(argv: list[str] | None = None) -> int:
         lien["atom_id"]
         for lien in liaison["bindings"]
         if lien["manual"] == "TNSI"
-        and lien["binding_method"] in ("ANCHOR", "VERBATIM", "CONTEXT")
+        and lien["binding_method"] in ("ANCHOR", "VERBATIM", "CONTEXT", "DISPOSED")
     }
     orphelins = [
         o.object_id

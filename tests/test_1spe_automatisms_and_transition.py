@@ -52,13 +52,19 @@ def test_les_dix_sept_automatismes_du_programme_sont_tous_audites(automatismes):
 def test_l_absence_d_atome_n_est_pas_l_absence_du_manuel(automatismes):
     """Le constat qui a corrige le precedent.
 
-    Aucun des dix-sept automatismes ne porte d'atome interne. Si l'absence
-    d'atome valait absence, ils seraient tous a ecrire ; ils sont en fait
-    travailles dans les objets, sans avoir jamais recu de code.
+    Presque aucun des dix-sept automatismes ne porte d'atome interne. Si
+    l'absence d'atome valait absence, ils seraient a ecrire ; ils sont en fait
+    travailles dans les objets, sans avoir jamais recu de code. Ce que ce test
+    verrouille n'est donc pas le nombre d'automatismes codes -- un arbitrage
+    de rattachement peut legitimement en coder un -- mais l'invariant : un
+    automatisme SANS atome doit quand meme etre trouve dans le manuel.
     """
     resume = automatismes["summary"]
-    assert resume["AUTOMATISMS_1SPE_WITH_AN_INTERNAL_ATOM"] == 0
     assert resume["AUTOMATISMS_1SPE_PRESENT"] == resume["AUTOMATISMS_1SPE_OFFICIAL"]
+    sans_atome = [x for x in automatismes["automatisms"] if not x["internal_atoms"]]
+    assert sans_atome, "un corpus ou tout serait code ne testerait plus rien"
+    for ligne in sans_atome:
+        assert ligne["verdict"] != "ABSENT", ligne["automatism_id"]
     for ligne in automatismes["automatisms"]:
         if ligne["verdict"] != "ABSENT":
             assert ligne["occurrence_count"] > 0, ligne["automatism_id"]

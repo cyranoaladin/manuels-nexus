@@ -8,8 +8,8 @@
   "summary": {
     "ADDED_2026_MANDATORY": 27,
     "ADDED_TRULY_MISSING": 0,
-    "ADDED_ALREADY_PRESENT_WITHOUT_OFFICIAL_MAPPING": 24,
-    "ADDED_ALREADY_FIXED": 3,
+    "ADDED_ALREADY_PRESENT_WITHOUT_OFFICIAL_MAPPING": 22,
+    "ADDED_ALREADY_FIXED": 5,
     "REMOVED_2026_MANDATORY": 12,
     "REMOVED_2019_CONTENT_STILL_PRESENTED_AS_REQUIRED": 0,
     "REMOVED_KEPT_AS_ENRICHMENT": 0,
@@ -1280,6 +1280,7 @@
       "present_in_internal_reference": true,
       "objects_by_role": {
         "ASSESSMENT": [
+          "1SPE-DERIVATION-LOCAL-QCM",
           "1SPE-DERLOCAL-EV-A",
           "1SPE-DERLOCAL-EV-A-corrige",
           "1SPE-DERLOCAL-EV-B",
@@ -1347,7 +1348,8 @@
           "1SPE-EXPO-EV-A",
           "1SPE-EXPO-EV-A-corrige",
           "1SPE-EXPO-EV-B",
-          "1SPE-EXPO-EV-B-corrige"
+          "1SPE-EXPO-EV-B-corrige",
+          "1SPE-EXPONENTIELLE-QCM"
         ],
         "PRIMARY_TEACHING": [
           "1SPE-EXPO-COURS-C4"
@@ -1462,72 +1464,117 @@
       "official_wording": "Savoir utiliser ou justifier l’indépendance de deux évènements.",
       "official_normativity": "EXPECTED_CAPACITY",
       "coverage_status": "COMPLETE",
-      "present_in_internal_reference": false,
+      "present_in_internal_reference": true,
       "objects_by_role": {
         "ASSESSMENT": [
           "1SPE-PROBA-COND-QCM",
           "1SPE-PROBCOND-EV-A",
-          "1SPE-PROBCOND-EV-B"
+          "1SPE-PROBCOND-EV-A-corrige",
+          "1SPE-PROBCOND-EV-B",
+          "1SPE-PROBCOND-EV-B-corrige"
         ],
         "PRIMARY_TEACHING": [
           "1SPE-PROBCOND-CR-013",
           "1SPE-PROBCOND-CR-014",
-          "1SPE-PROBCOND-TD-002",
-          "1SPE-SUITES-COURS-07-FR",
-          "1SPE-TRANSVERSAL-LOGIQUE_RAISONNEMENT",
-          "1SPE-VARALEA-CR-000",
-          "1SPE-VARALEA-CR-001"
+          "1SPE-PROBCOND-TD-001",
+          "1SPE-PROBCOND-TD-002"
         ],
         "REINVESTMENT": [
-          "1SPE-PROBCOND-CO-010",
+          "1SPE-PROBCOND-CO-031",
+          "1SPE-PROBCOND-CO-032",
+          "1SPE-PROBCOND-CO-033",
+          "1SPE-PROBCOND-CO-034",
+          "1SPE-PROBCOND-CO-035",
+          "1SPE-PROBCOND-CO-036",
+          "1SPE-PROBCOND-CO-037",
+          "1SPE-PROBCOND-CO-038",
+          "1SPE-PROBCOND-CO-039",
+          "1SPE-PROBCOND-CO-040",
+          "1SPE-PROBCOND-CO-041",
+          "1SPE-PROBCOND-CO-042",
+          "1SPE-PROBCOND-CO-043",
+          "1SPE-PROBCOND-CO-044",
+          "1SPE-PROBCOND-CO-045",
+          "1SPE-PROBCOND-CO-046",
+          "1SPE-PROBCOND-CO-047",
+          "1SPE-PROBCOND-CO-048",
+          "1SPE-PROBCOND-CO-049",
+          "1SPE-PROBCOND-CO-050",
           "1SPE-PROBCOND-EX-031",
           "1SPE-PROBCOND-EX-032",
+          "1SPE-PROBCOND-EX-033",
+          "1SPE-PROBCOND-EX-034",
           "1SPE-PROBCOND-EX-035",
-          "1SPE-PROBCOND-EX-036"
+          "1SPE-PROBCOND-EX-036",
+          "1SPE-PROBCOND-EX-037",
+          "1SPE-PROBCOND-EX-038",
+          "1SPE-PROBCOND-EX-039",
+          "1SPE-PROBCOND-EX-040",
+          "1SPE-PROBCOND-EX-041",
+          "1SPE-PROBCOND-EX-042",
+          "1SPE-PROBCOND-EX-043",
+          "1SPE-PROBCOND-EX-044",
+          "1SPE-PROBCOND-EX-045",
+          "1SPE-PROBCOND-EX-046",
+          "1SPE-PROBCOND-EX-047",
+          "1SPE-PROBCOND-EX-048",
+          "1SPE-PROBCOND-EX-049",
+          "1SPE-PROBCOND-EX-050"
         ],
         "REMEDIATION": [
-          "1SPE-PROBCOND-RE-C4"
+          "1SPE-PROBCOND-RE-C4",
+          "1SPE-PROBCOND-RE-C5"
         ],
         "SUPPORTING_EVIDENCE": [
+          "1SPE-PROBCOND-ALG-001",
           "1SPE-PROBCOND-ME-004",
           "1SPE-PROBCOND-ME-005"
         ]
       },
-      "classification": "ALREADY_PRESENT_WITHOUT_OFFICIAL_MAPPING",
-      "reason": "le manuel le traite deja, sans qu'aucune capacite interne ne le declare : c'est le suivi qui manquait, pas le contenu"
+      "classification": "NEWLY_ADDED_AND_ALREADY_FIXED",
+      "reason": "traite et rattache a une capacite interne"
     },
     {
       "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::PROBABILITES-CONDITIONNELLES-ET-IN::EXPECTED_CAPACITY::16e734e1",
       "official_wording": "Pour 𝑛 ⩽ 4, représenter l’arbre associé à la répétition de 𝑛 épreuves de Bernoulli indépendantes et identiques afin de calculer des probabilités.",
       "official_normativity": "EXPECTED_CAPACITY",
       "coverage_status": "COMPLETE",
-      "present_in_internal_reference": false,
+      "present_in_internal_reference": true,
       "objects_by_role": {
         "ASSESSMENT": [
-          "1SPE-PROBCOND-EV-A",
-          "1SPE-PROBCOND-EV-A-corrige",
-          "1SPE-PROBCOND-EV-B",
           "1SPE-VARALEA-EV-A",
+          "1SPE-VARALEA-EV-A-corrige",
           "1SPE-VARALEA-EV-B",
+          "1SPE-VARALEA-EV-B-corrige",
           "1SPE-VARIABLES-ALEATOIRES-QCM"
         ],
         "PRIMARY_TEACHING": [
           "1SPE-VARALEA-CR-000",
-          "1SPE-VARALEA-CR-012",
-          "1SPE-VARALEA-CR-014"
+          "1SPE-VARALEA-CR-012"
         ],
         "REINVESTMENT": [
-          "1SPE-PROBCOND-EX-040",
-          "1SPE-VARALEA-EX-030"
+          "1SPE-VARALEA-CO-002",
+          "1SPE-VARALEA-CO-005",
+          "1SPE-VARALEA-CO-017",
+          "1SPE-VARALEA-CO-030",
+          "1SPE-VARALEA-CO-046",
+          "1SPE-VARALEA-EX-002",
+          "1SPE-VARALEA-EX-005",
+          "1SPE-VARALEA-EX-017",
+          "1SPE-VARALEA-EX-017-CDP",
+          "1SPE-VARALEA-EX-030",
+          "1SPE-VARALEA-EX-046"
+        ],
+        "REMEDIATION": [
+          "1SPE-VARALEA-RE-C3"
         ],
         "SUPPORTING_EVIDENCE": [
-          "1SPE-PROBCOND-ME-004",
-          "1SPE-VARALEA-ME-003",
-          "1SPE-VARALEA-ME-006"
+          "1SPE-VARALEA-ME-006",
+          "1SPE-VARALEA-TD-CONTEXTUALISE"
         ]
       },
-      "classification": "ALREADY_PRESENT_WITHOUT_OFFICIAL_MAPPING",
-      "reason": "le manuel le traite deja, sans qu'aucune capacite interne ne le declare : c'est le suivi qui manquait, pas le contenu"
+      "classification": "NEWLY_ADDED_AND_ALREADY_FIXED",
+      "reason": "traite et rattache a une capacite interne"
     },
     {
       "official_id": "MENE2602917A::PROBABILITES-ET-STATISTIQUES::VARIABLES-ALEATOIRES-REELLES::KNOWLEDGE::adeac2fd",
@@ -1540,7 +1587,8 @@
           "1SPE-VARALEA-EV-A",
           "1SPE-VARALEA-EV-A-corrige",
           "1SPE-VARALEA-EV-B",
-          "1SPE-VARALEA-EV-B-corrige"
+          "1SPE-VARALEA-EV-B-corrige",
+          "1SPE-VARIABLES-ALEATOIRES-QCM"
         ],
         "PRIMARY_TEACHING": [
           "1SPE-VARALEA-CR-000",
