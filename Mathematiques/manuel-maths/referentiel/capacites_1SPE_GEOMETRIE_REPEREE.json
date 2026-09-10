@@ -9,31 +9,41 @@
       "id": "1SPE-GEOMETRIE-REPEREE-C1",
       "libelle_bo": "Déterminer une équation cartésienne d'une droite dans le plan repéré.",
       "libelle_eleve": "Je sais déterminer une équation ax+by+c=0 d'une droite.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Déterminer une équation cartésienne d'une droite dans le plan repéré.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-GEOMETRIE-REPEREE-C2",
       "libelle_bo": "Utiliser un vecteur normal à une droite pour déterminer son équation.",
       "libelle_eleve": "Je sais qu'un vecteur normal (a;b) donne l'équation ax+by+c=0.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Utiliser un vecteur normal à une droite pour déterminer son équation.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-GEOMETRIE-REPEREE-C3",
       "libelle_bo": "Déterminer une équation du cercle de centre (a,b) et de rayon r.",
       "libelle_eleve": "Je sais écrire et reconnaître l'équation d'un cercle.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Déterminer une équation du cercle de centre (a,b) et de rayon r.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-GEOMETRIE-REPEREE-C4",
       "libelle_bo": "Étudier les positions relatives de droites et cercles (parallélisme, intersection, tangence).",
       "libelle_eleve": "Je sais déterminer les positions relatives de droites et de cercles dans le plan repéré.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Étudier les positions relatives de droites et cercles (parallélisme, intersection, tangence).",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-GEOMETRIE-REPEREE-C5",
       "libelle_bo": "Résoudre des problèmes de géométrie plane dans un repère orthonormé.",
       "libelle_eleve": "Je sais résoudre des problèmes géométriques par le calcul dans un repère.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Résoudre des problèmes de géométrie plane dans un repère orthonormé.",
+      "libelle_bo_is_verbatim": false
     }
   ],
   "authority": {
@@ -43,5 +53,6 @@
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
     "source_digest": "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
     "provenance_note": "NOR complété depuis sources/SOURCES.md et le bulletin complet déposé ; aucune capacité modifiée."
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

@@ -8,47 +8,61 @@
       "id": "TSPE-SUITLIM-C1",
       "libelle_bo": "Établir la convergence d'une suite, ou sa divergence vers + ∞ ou – ∞.",
       "libelle_eleve": "Je sais établir la convergence ou la divergence d'une suite en utilisant les outils adaptés (comparaison, gendarmes, suite monotone bornée).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Établir la convergence d'une suite, ou sa divergence vers + ∞ ou – ∞.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TSPE-SUITLIM-C2",
       "libelle_bo": "Raisonner par récurrence pour établir une propriété d'une suite.",
       "libelle_eleve": "Je sais démontrer une propriété d'une suite par récurrence.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Raisonner par récurrence pour établir une propriété d'une suite.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TSPE-SUITLIM-C3",
       "libelle_bo": "Étudier des phénomènes d'évolution modélisables par une suite.",
       "libelle_eleve": "Je sais modéliser et étudier un phénomène d'évolution à l'aide d'une suite.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Étudier des phénomènes d'évolution modélisables par une suite.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TSPE-SUITLIM-C4",
       "libelle_bo": "Toute suite croissante non majorée tend vers + ∞.",
       "libelle_eleve": "Je sais démontrer que toute suite croissante non majorée tend vers + ∞.",
       "demonstration_exigible": true,
-      "demonstration": "Toute suite croissante non majorée tend vers + ∞."
+      "demonstration": "Toute suite croissante non majorée tend vers + ∞.",
+      "libelle_interne": "Toute suite croissante non majorée tend vers + ∞.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TSPE-SUITLIM-C5",
       "libelle_bo": "Limite de (q^n), après démonstration par récurrence de l'inégalité de Bernoulli.",
       "libelle_eleve": "Je sais démontrer l'inégalité de Bernoulli par récurrence et en déduire la limite de (q^n).",
       "demonstration_exigible": true,
-      "demonstration": "Limite de (q^n), après démonstration par récurrence de l'inégalité de Bernoulli."
+      "demonstration": "Limite de (q^n), après démonstration par récurrence de l'inégalité de Bernoulli.",
+      "libelle_interne": "Limite de (q^n), après démonstration par récurrence de l'inégalité de Bernoulli.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "TSPE-SUITLIM-C6",
       "libelle_bo": "Divergence vers + ∞ d'une suite minorée par une suite divergeant vers + ∞.",
       "libelle_eleve": "Je sais démontrer la divergence d'une suite par minoration par une suite divergente.",
       "demonstration_exigible": true,
-      "demonstration": "Divergence vers + ∞ d'une suite minorée par une suite divergeant vers + ∞."
+      "demonstration": "Divergence vers + ∞ d'une suite minorée par une suite divergeant vers + ∞.",
+      "libelle_interne": "Divergence vers + ∞ d'une suite minorée par une suite divergeant vers + ∞.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TSPE-SUITLIM-C7",
       "libelle_bo": "Limite en + ∞ et en – ∞ de la fonction exponentielle.",
       "libelle_eleve": "Je sais démontrer les limites de la fonction exponentielle en + ∞ et en – ∞.",
       "demonstration_exigible": true,
-      "demonstration": "Limite en + ∞ et en – ∞ de la fonction exponentielle."
+      "demonstration": "Limite en + ∞ et en – ∞ de la fonction exponentielle.",
+      "libelle_interne": "Limite en + ∞ et en – ∞ de la fonction exponentielle.",
+      "libelle_bo_is_verbatim": true
     }
   ],
   "authority": {
@@ -60,5 +74,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2019_TSPE_specialite.txt",
     "source_digest": "sha256:65eb5a55df14a2b3025a96db72fbcb1d917b55e8da7feb13669e28b903712210"
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

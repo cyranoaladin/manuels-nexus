@@ -8,46 +8,60 @@
       "id": "TEXP-CTP-C1",
       "libelle_bo": "Passer de la forme algébrique d'un nombre complexe à sa forme trigonométrique ou exponentielle et inversement.",
       "libelle_eleve": "Je sais passer de la forme algébrique d'un nombre complexe à sa forme trigonométrique ou exponentielle, et inversement.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Passer de la forme algébrique d'un nombre complexe à sa forme trigonométrique ou exponentielle et inversement.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TEXP-CTP-C2",
       "libelle_bo": "Utiliser les formules d'Euler et de Moivre pour transformer des expressions trigonométriques, calculer des puissances de nombres complexes.",
       "libelle_eleve": "Je sais utiliser les formules d'Euler et de Moivre pour transformer des expressions trigonométriques et calculer des puissances de nombres complexes.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Utiliser les formules d'Euler et de Moivre pour transformer des expressions trigonométriques, calculer des puissances de nombres complexes.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "TEXP-CTP-C3",
       "libelle_bo": "Démonstration d'une des formules d'addition (à partir du produit scalaire).",
       "libelle_eleve": "Je sais démontrer une formule d'addition trigonométrique à partir du produit scalaire.",
       "demonstration_exigible": true,
-      "demonstration": "Démonstration d'une des formules d'addition."
+      "demonstration": "Démonstration d'une des formules d'addition.",
+      "libelle_interne": "Démonstration d'une des formules d'addition (à partir du produit scalaire).",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "TEXP-CTP-C4",
       "libelle_bo": "Résoudre une équation polynomiale de degré 2 à coefficients réels. Résoudre une équation de degré 3 à coefficients réels dont une racine est connue. Factoriser un polynôme dont une racine est connue.",
       "libelle_eleve": "Je sais résoudre une équation polynomiale de degré 2, ou de degré 3 quand une racine est connue, et factoriser un polynôme dont une racine est connue.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Résoudre une équation polynomiale de degré 2 à coefficients réels. Résoudre une équation de degré 3 à coefficients réels dont une racine est connue. Factoriser un polynôme dont une racine est connue.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "TEXP-CTP-C5",
       "libelle_bo": "Factorisation de zⁿ − aⁿ par z − a. Factorisation de P(z) par z − a si P(a) = 0. Le nombre de solutions d'une équation polynomiale est inférieur ou égal à son degré.",
       "libelle_eleve": "Je sais démontrer la factorisation de zⁿ−aⁿ par z−a, celle de P(z) par z−a si P(a)=0, et que le nombre de racines d'un polynôme est majoré par son degré.",
       "demonstration_exigible": true,
-      "demonstration": "Factorisation de zⁿ − aⁿ par z − a. Factorisation de P(z) par z − a si P(a) = 0. Nombre de solutions ≤ degré."
+      "demonstration": "Factorisation de zⁿ − aⁿ par z − a. Factorisation de P(z) par z − a si P(a) = 0. Nombre de solutions ≤ degré.",
+      "libelle_interne": "Factorisation de zⁿ − aⁿ par z − a. Factorisation de P(z) par z − a si P(a) = 0. Le nombre de solutions d'une équation polynomiale est inférieur ou égal à son degré.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "TEXP-CTP-C6",
       "libelle_bo": "Dans le cadre de la résolution de problème, utiliser les nombres complexes pour étudier des configurations du plan : démontrer un alignement, une orthogonalité, calculer des longueurs, des angles, déterminer des ensembles de points.",
       "libelle_eleve": "Je sais utiliser les nombres complexes pour étudier des configurations du plan (alignement, orthogonalité, longueurs, angles, ensembles de points).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Dans le cadre de la résolution de problème, utiliser les nombres complexes pour étudier des configurations du plan : démontrer un alignement, une orthogonalité, calculer des longueurs, des angles, déterminer des ensembles de points.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TEXP-CTP-C7",
       "libelle_bo": "Utiliser les racines de l'unité dans l'étude de configurations liées aux polygones réguliers. Détermination de l'ensemble 𝕌ₙ.",
       "libelle_eleve": "Je sais déterminer l'ensemble des racines n-ièmes de l'unité et les utiliser pour étudier des polygones réguliers.",
       "demonstration_exigible": true,
-      "demonstration": "Détermination de l'ensemble 𝕌ₙ des racines n-ièmes de l'unité."
+      "demonstration": "Détermination de l'ensemble 𝕌ₙ des racines n-ièmes de l'unité.",
+      "libelle_interne": "Utiliser les racines de l'unité dans l'étude de configurations liées aux polygones réguliers. Détermination de l'ensemble 𝕌ₙ.",
+      "libelle_bo_is_verbatim": false
     }
   ],
   "authority": {
@@ -59,5 +73,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2019_TEXPERTES_optionnel.txt",
     "source_digest": "sha256:a427dd12f3ff774dd0bdd31a26aaa77423509947bf60589e72430b6f5054a1c5"
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

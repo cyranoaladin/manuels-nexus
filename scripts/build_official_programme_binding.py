@@ -128,7 +128,16 @@ def charger_atomes() -> list[dict[str, Any]]:
                     "referential_path": str(chemin.relative_to(ROOT)),
                     "bo_reference": charge.get("bo_reference", ""),
                     "declared_authority": (charge.get("authority") or {}).get("nor"),
-                    "libelle_bo": capacite.get("libelle_bo", ""),
+                    # `libelle_bo` est deprecie : son nom affirme un texte
+                    # officiel qu'il ne porte pas dans la plupart des cas. On
+                    # lit la formulation interne sous son vrai nom, et on
+                    # transporte le verdict d'authenticite avec elle.
+                    "libelle_interne": capacite.get(
+                        "libelle_interne", capacite.get("libelle_bo", "")
+                    ),
+                    "libelle_bo_is_verbatim": capacite.get(
+                        "libelle_bo_is_verbatim", False
+                    ),
                     "contenu_bo": capacite.get("contenu_bo"),
                     "source_anchor": capacite.get("source_anchor"),
                 })
@@ -178,7 +187,7 @@ def lier(atome: dict[str, Any], items: list[dict[str, Any]]) -> dict[str, Any]:
             "candidates": [],
         }
 
-    libelle = normalise(atome["libelle_bo"])
+    libelle = normalise(atome["libelle_interne"])
     if libelle:
         cle = forme_typographique(libelle)
         for item in items:

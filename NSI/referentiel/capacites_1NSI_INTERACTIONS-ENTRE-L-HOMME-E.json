@@ -10,7 +10,9 @@
       "libelle_bo": "Identifier les composants graphiques permettant d'interagir avec une application Web.",
       "libelle_eleve": "",
       "commentaire_officiel": "Distinguer description HTML et comportement programmé.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Identifier les composants graphiques permettant d'interagir avec une application Web.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "P-IHM-01B",
@@ -18,7 +20,9 @@
       "libelle_bo": "Identifier les événements que les fonctions associées aux composants graphiques peuvent traiter.",
       "libelle_eleve": "",
       "commentaire_officiel": "Exemples en JavaScript limités aux événements simples.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Identifier les événements que les fonctions associées aux composants graphiques peuvent traiter.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "P-IHM-02",
@@ -26,7 +30,9 @@
       "libelle_bo": "Analyser et modifier les méthodes exécutées lors d'un clic sur un bouton d'une page Web.",
       "libelle_eleve": "",
       "commentaire_officiel": "Expertise exhaustive des langages Web non attendue.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Analyser et modifier les méthodes exécutées lors d'un clic sur un bouton d'une page Web.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-IHM-03A",
@@ -34,7 +40,9 @@
       "libelle_bo": "Distinguer ce qui est exécuté sur le client ou sur le serveur et dans quel ordre.",
       "libelle_eleve": "",
       "commentaire_officiel": "Lien avec HTTP et l'ordre des échanges.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Distinguer ce qui est exécuté sur le client ou sur le serveur et dans quel ordre.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-IHM-03B",
@@ -42,7 +50,9 @@
       "libelle_bo": "Distinguer ce qui est mémorisé dans le client et retransmis au serveur.",
       "libelle_eleve": "",
       "commentaire_officiel": "Lien avec paramètres et cookies de façon limitée.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Distinguer ce qui est mémorisé dans le client et retransmis au serveur.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-IHM-03C",
@@ -50,7 +60,9 @@
       "libelle_bo": "Reconnaître quand et pourquoi la transmission est chiffrée.",
       "libelle_eleve": "",
       "commentaire_officiel": "Approche fonctionnelle de HTTPS, sans détail cryptographique.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Reconnaître quand et pourquoi la transmission est chiffrée.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-IHM-04A",
@@ -58,7 +70,9 @@
       "libelle_bo": "Analyser le fonctionnement d'un formulaire simple.",
       "libelle_eleve": "",
       "commentaire_officiel": "Formulaires sans collecte de données personnelles.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Analyser le fonctionnement d'un formulaire simple.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-IHM-04B",
@@ -66,7 +80,9 @@
       "libelle_bo": "Distinguer les transmissions de paramètres par requêtes POST ou GET.",
       "libelle_eleve": "",
       "commentaire_officiel": "Lien avec confidentialité des paramètres.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Distinguer les transmissions de paramètres par requêtes POST ou GET.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "P-IHM-04C",
@@ -74,7 +90,9 @@
       "libelle_bo": "Discuter les types de requêtes selon les valeurs à transmettre et leur confidentialité.",
       "libelle_eleve": "",
       "commentaire_officiel": "Rester sur des critères simples et observables.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Discuter les types de requêtes selon les valeurs à transmettre et leur confidentialité.",
+      "libelle_bo_is_verbatim": false
     }
   ],
   "authority": {
@@ -86,5 +104,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "reverify_resolution": "VERIFIED_CURRENT",
     "reverify_note": "La mention « à re-vérifier contre le B.O. » est levée : l'autorité est corroborée par le registre de sources et par la matrice."
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

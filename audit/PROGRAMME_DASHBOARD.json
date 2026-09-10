@@ -132,6 +132,23 @@
         "AUTOMATISMS_2026"
       ],
       "reading": "automatismes que le programme de 2026 enonce ; leur presence dans le manuel se juge ailleurs, sur les objets eux-memes."
+    },
+    "MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY": {
+      "value": 0,
+      "artifact": "audit/LIBELLE_BO_AUTHORITY_GATE.json",
+      "pointer": [
+        "summary",
+        "MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY"
+      ],
+      "reading": "champs dont le nom promet le texte du Bulletin officiel sans qu'aucun producteur ne l'ait verifie. Le champ `libelle_bo` du referentiel interne n'est verbatim que dans la moitie des cas : il est deprecie au profit de `libelle_interne`, et le texte officiel exact vit dans l'inventaire sous `official_wording`."
+    },
+    "LIBELLE_BO_AUTHORITY_GATE": {
+      "value": "PASS",
+      "artifact": "audit/LIBELLE_BO_AUTHORITY_GATE.json",
+      "pointer": [
+        "summary",
+        "LIBELLE_BO_AUTHORITY_GATE"
+      ]
     }
   }
 }

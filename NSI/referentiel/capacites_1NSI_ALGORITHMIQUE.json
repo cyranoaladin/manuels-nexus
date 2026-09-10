@@ -10,7 +10,9 @@
       "libelle_bo": "Ecrire un algorithme de recherche d'une occurrence sur des valeurs de type quelconque.",
       "libelle_eleve": "",
       "commentaire_officiel": "Coût linéaire.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Ecrire un algorithme de recherche d'une occurrence sur des valeurs de type quelconque.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "P-ALGO-01B",
@@ -18,7 +20,9 @@
       "libelle_bo": "Ecrire un algorithme de recherche d'un extremum ou de calcul d'une moyenne.",
       "libelle_eleve": "",
       "commentaire_officiel": "Coût linéaire.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Ecrire un algorithme de recherche d'un extremum ou de calcul d'une moyenne.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "P-ALGO-02A",
@@ -26,7 +30,9 @@
       "libelle_bo": "Ecrire un algorithme de tri par insertion.",
       "libelle_eleve": "",
       "commentaire_officiel": "Terminaison à justifier ; coût quadratique dans le pire cas.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Ecrire un algorithme de tri par insertion.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "P-ALGO-02B",
@@ -34,7 +40,9 @@
       "libelle_bo": "Ecrire un algorithme de tri par sélection.",
       "libelle_eleve": "",
       "commentaire_officiel": "Terminaison à justifier ; coût quadratique dans le pire cas.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Ecrire un algorithme de tri par sélection.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "P-ALGO-02C",
@@ -42,7 +50,9 @@
       "libelle_bo": "Décrire un invariant de boucle prouvant la correction du tri par insertion.",
       "libelle_eleve": "",
       "commentaire_officiel": "Invariant présenté au niveau Première.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Décrire un invariant de boucle prouvant la correction du tri par insertion.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "P-ALGO-02D",
@@ -50,7 +60,9 @@
       "libelle_bo": "Décrire un invariant de boucle prouvant la correction du tri par sélection.",
       "libelle_eleve": "",
       "commentaire_officiel": "Invariant présenté au niveau Première.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Décrire un invariant de boucle prouvant la correction du tri par sélection.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "P-ALGO-03",
@@ -58,7 +70,9 @@
       "libelle_bo": "Ecrire un algorithme qui prédit la classe d'un élément à partir de la classe majoritaire de ses k plus proches voisins.",
       "libelle_eleve": "",
       "commentaire_officiel": "Exemple d'algorithme d'apprentissage.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Ecrire un algorithme qui prédit la classe d'un élément à partir de la classe majoritaire de ses k plus proches voisins.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "P-ALGO-04",
@@ -66,7 +80,9 @@
       "libelle_bo": "Montrer la terminaison de la recherche dichotomique à l'aide d'un variant de boucle.",
       "libelle_eleve": "",
       "commentaire_officiel": "Assertions possibles ; preuve de correction présentable par le professeur.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Montrer la terminaison de la recherche dichotomique à l'aide d'un variant de boucle.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-ALGO-05",
@@ -74,7 +90,9 @@
       "libelle_bo": "Résoudre un problème grâce à un algorithme glouton.",
       "libelle_eleve": "",
       "commentaire_officiel": "Exemples possibles : sac à dos ou rendu de monnaie.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Résoudre un problème grâce à un algorithme glouton.",
+      "libelle_bo_is_verbatim": true
     }
   ],
   "authority": {
@@ -86,5 +104,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "reverify_resolution": "VERIFIED_CURRENT",
     "reverify_note": "La mention « à re-vérifier contre le B.O. » est levée : l'autorité est corroborée par le registre de sources et par la matrice."
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

@@ -10,7 +10,9 @@
       "libelle_bo": "Comprendre que tout programme est aussi une donnée.",
       "libelle_eleve": "",
       "commentaire_officiel": "Interpréteur et compilateur aident à comprendre ce point.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Comprendre que tout programme est aussi une donnée.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "T-LANG-01B",
@@ -18,7 +20,9 @@
       "libelle_bo": "Comprendre que la calculabilité ne dépend pas du langage.",
       "libelle_eleve": "",
       "commentaire_officiel": "Approche sans formalisme théorique lourd.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Comprendre que la calculabilité ne dépend pas du langage.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-LANG-01C",
@@ -26,7 +30,9 @@
       "libelle_bo": "Montrer sans formalisme théorique que le problème de l'arrêt est indécidable.",
       "libelle_eleve": "",
       "commentaire_officiel": "Argument intuitif encadré.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Montrer sans formalisme théorique que le problème de l'arrêt est indécidable.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-LANG-02A",
@@ -34,7 +40,9 @@
       "libelle_bo": "Ecrire un programme récursif.",
       "libelle_eleve": "",
       "commentaire_officiel": "Exemples de domaines variés à privilégier.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Ecrire un programme récursif.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-LANG-02B",
@@ -42,7 +50,9 @@
       "libelle_bo": "Analyser le fonctionnement d'un programme récursif.",
       "libelle_eleve": "",
       "commentaire_officiel": "Arbre d'appels et terminaison.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Analyser le fonctionnement d'un programme récursif.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "T-LANG-03A",
@@ -50,7 +60,9 @@
       "libelle_bo": "Utiliser des API ou bibliothèques.",
       "libelle_eleve": "",
       "commentaire_officiel": "Lien direct avec bibliothèques et interfaces.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Utiliser des API ou bibliothèques.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-LANG-03B",
@@ -58,7 +70,9 @@
       "libelle_bo": "Exploiter la documentation d'API ou bibliothèques.",
       "libelle_eleve": "",
       "commentaire_officiel": "Lire signatures et exemples.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Exploiter la documentation d'API ou bibliothèques.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-LANG-03C",
@@ -66,7 +80,9 @@
       "libelle_bo": "Créer des modules simples et les documenter.",
       "libelle_eleve": "",
       "commentaire_officiel": "Organisation minimale de projet.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Créer des modules simples et les documenter.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "T-LANG-04A",
@@ -74,7 +90,9 @@
       "libelle_bo": "Distinguer sur des exemples les paradigmes impératif, fonctionnel et objet.",
       "libelle_eleve": "",
       "commentaire_officiel": "Un même langage ou programme peut mobiliser plusieurs paradigmes.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Distinguer sur des exemples les paradigmes impératif, fonctionnel et objet.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "T-LANG-04B",
@@ -82,7 +100,9 @@
       "libelle_bo": "Choisir le paradigme selon le champ d'application.",
       "libelle_eleve": "",
       "commentaire_officiel": "Rester sur des cas simples et argumentés.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Choisir le paradigme selon le champ d'application.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-LANG-05",
@@ -90,7 +110,9 @@
       "libelle_bo": "Savoir répondre aux causes typiques de bugs.",
       "libelle_eleve": "",
       "commentaire_officiel": "Typage, effets de bord, débordements, conditionnelles, inégalités, flottants et nommage.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Savoir répondre aux causes typiques de bugs.",
+      "libelle_bo_is_verbatim": false
     }
   ],
   "authority": {
@@ -102,5 +124,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "source_path": "NSI/sources/txt/BO2019_NSI_terminale.txt",
     "source_digest": "sha256:3cfce30c85fdc7ab78eb9acb39e43bcb33d6205e0c4205d4cb499f80c097f15b"
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

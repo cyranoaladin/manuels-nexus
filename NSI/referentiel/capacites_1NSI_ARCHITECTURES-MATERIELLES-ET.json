@@ -10,7 +10,9 @@
       "libelle_bo": "Distinguer les rôles et les caractéristiques des constituants d'une machine.",
       "libelle_eleve": "",
       "commentaire_officiel": "Présentation limitée aux concepts généraux.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Distinguer les rôles et les caractéristiques des constituants d'une machine.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "P-ARCH-01B",
@@ -18,7 +20,9 @@
       "libelle_bo": "Dérouler l'exécution d'une séquence d'instructions simples de type langage machine.",
       "libelle_eleve": "",
       "commentaire_officiel": "Activités débranchées possibles.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Dérouler l'exécution d'une séquence d'instructions simples de type langage machine.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "P-ARCH-02A",
@@ -26,7 +30,9 @@
       "libelle_bo": "Mettre en évidence l'intérêt du découpage en paquets et de l'encapsulation.",
       "libelle_eleve": "",
       "commentaire_officiel": "Lien avec TCP/IP au niveau attendu.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Mettre en évidence l'intérêt du découpage en paquets et de l'encapsulation.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "P-ARCH-02B",
@@ -34,7 +40,9 @@
       "libelle_bo": "Dérouler le fonctionnement d'un protocole simple de récupération de perte de paquets.",
       "libelle_eleve": "",
       "commentaire_officiel": "Le bit alterné est un exemple adapté.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Dérouler le fonctionnement d'un protocole simple de récupération de perte de paquets.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "P-ARCH-02C",
@@ -42,7 +50,9 @@
       "libelle_bo": "Simuler ou mettre en œuvre un réseau.",
       "libelle_eleve": "",
       "commentaire_officiel": "Rester sur un réseau local ou une simulation contrôlée.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Simuler ou mettre en œuvre un réseau.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-ARCH-03A",
@@ -50,7 +60,9 @@
       "libelle_bo": "Identifier les fonctions d'un système d'exploitation.",
       "libelle_eleve": "",
       "commentaire_officiel": "Usage d'un système libre possible.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Identifier les fonctions d'un système d'exploitation.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-ARCH-03B",
@@ -58,7 +70,9 @@
       "libelle_bo": "Utiliser les commandes de base en ligne de commande.",
       "libelle_eleve": "",
       "commentaire_officiel": "Commandes de base sur fichiers et dossiers.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Utiliser les commandes de base en ligne de commande.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-ARCH-03C",
@@ -66,7 +80,9 @@
       "libelle_bo": "Gérer les droits et permissions d'accès aux fichiers.",
       "libelle_eleve": "",
       "commentaire_officiel": "Scénarios sans données personnelles.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Gérer les droits et permissions d'accès aux fichiers.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-ARCH-04A",
@@ -74,7 +90,9 @@
       "libelle_bo": "Identifier le rôle des capteurs et actionneurs.",
       "libelle_eleve": "",
       "commentaire_officiel": "Objets connectés ou systèmes embarqués possibles.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Identifier le rôle des capteurs et actionneurs.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-ARCH-04B",
@@ -82,7 +100,9 @@
       "libelle_bo": "Réaliser par programmation une IHM répondant à un cahier des charges donné.",
       "libelle_eleve": "",
       "commentaire_officiel": "Activité bornée et reliée aux interactions Web ou objets.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Réaliser par programmation une IHM répondant à un cahier des charges donné.",
+      "libelle_bo_is_verbatim": true
     }
   ],
   "authority": {
@@ -94,5 +114,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "reverify_resolution": "VERIFIED_CURRENT",
     "reverify_note": "La mention « à re-vérifier contre le B.O. » est levée : l'autorité est corroborée par le registre de sources et par la matrice."
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

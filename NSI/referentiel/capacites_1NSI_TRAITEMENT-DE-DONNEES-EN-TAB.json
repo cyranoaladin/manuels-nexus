@@ -10,7 +10,9 @@
       "libelle_bo": "Importer une table depuis un fichier texte tabulé ou un fichier CSV.",
       "libelle_eleve": "",
       "commentaire_officiel": "Tableau doublement indexé ou tableau de p-uplets partageant les mêmes descripteurs.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Importer une table depuis un fichier texte tabulé ou un fichier CSV.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-TABLE-02",
@@ -18,7 +20,9 @@
       "libelle_bo": "Rechercher les lignes d'une table vérifiant des critères exprimés en logique propositionnelle.",
       "libelle_eleve": "",
       "commentaire_officiel": "Recherche de doublons et tests de cohérence à présenter.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Rechercher les lignes d'une table vérifiant des critères exprimés en logique propositionnelle.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-TABLE-03",
@@ -26,7 +30,9 @@
       "libelle_bo": "Trier une table suivant une colonne.",
       "libelle_eleve": "",
       "commentaire_officiel": "Une fonction de tri intégrée peut être utilisée.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Trier une table suivant une colonne.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-TABLE-04",
@@ -34,7 +40,9 @@
       "libelle_bo": "Construire une nouvelle table en combinant les données de deux tables.",
       "libelle_eleve": "",
       "commentaire_officiel": "La notion de domaine de valeurs est mise en évidence.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Construire une nouvelle table en combinant les données de deux tables.",
+      "libelle_bo_is_verbatim": true
     }
   ],
   "authority": {
@@ -46,5 +54,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "reverify_resolution": "VERIFIED_CURRENT",
     "reverify_note": "La mention « à re-vérifier contre le B.O. » est levée : l'autorité est corroborée par le registre de sources et par la matrice."
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

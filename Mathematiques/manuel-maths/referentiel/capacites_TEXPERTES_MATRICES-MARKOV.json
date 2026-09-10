@@ -8,44 +8,58 @@
       "id": "TEXP-MAT-C1",
       "libelle_bo": "Notion de matrice (tableau de nombres réels). Matrice carrée, matrice colonne, matrice ligne. Opérations. Inverse, puissances d'une matrice carrée.",
       "libelle_eleve": "Je sais effectuer les opérations sur les matrices (somme, produit, inverse, puissance).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Notion de matrice (tableau de nombres réels). Matrice carrée, matrice colonne, matrice ligne. Opérations. Inverse, puissances d'une matrice carrée.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TEXP-MAT-C2",
       "libelle_bo": "Modéliser une situation par une matrice.",
       "libelle_eleve": "Je sais modéliser une situation par une matrice.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Modéliser une situation par une matrice.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TEXP-MAT-C3",
       "libelle_bo": "Suite de matrices colonnes (Uₙ) vérifiant une relation de récurrence du type Uₙ₊₁ = AUₙ + C.",
       "libelle_eleve": "Je sais étudier une suite de matrices colonnes vérifiant Uₙ₊₁=AUₙ+C, en résolvant un système linéaire ou une suite récurrente.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Suite de matrices colonnes (Uₙ) vérifiant une relation de récurrence du type Uₙ₊₁ = AUₙ + C.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TEXP-MAT-C4",
       "libelle_bo": "Graphe orienté pondéré associé à une chaîne de Markov à deux ou trois états. Chaîne de Markov à deux ou trois états. Distribution initiale, représentée par une matrice ligne π₀. Matrice de transition, graphe pondéré associé.",
       "libelle_eleve": "Je sais associer un graphe orienté pondéré à une chaîne de Markov à deux ou trois états, et représenter distribution initiale et matrice de transition.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Graphe orienté pondéré associé à une chaîne de Markov à deux ou trois états. Chaîne de Markov à deux ou trois états. Distribution initiale, représentée par une matrice ligne π₀. Matrice de transition, graphe pondéré associé.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "TEXP-MAT-C5",
       "libelle_bo": "Pour une chaîne de Markov à deux ou trois états de matrice P, interprétation du coefficient (i,j) de Pⁿ. Distribution après n transitions, représentée comme la matrice ligne π₀Pⁿ.",
       "libelle_eleve": "Je sais calculer, pour une chaîne de Markov, la distribution après n transitions π₀Pⁿ et interpréter le coefficient (i,j) de Pⁿ.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Pour une chaîne de Markov à deux ou trois états de matrice P, interprétation du coefficient (i,j) de Pⁿ. Distribution après n transitions, représentée comme la matrice ligne π₀Pⁿ.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TEXP-MAT-C6",
       "libelle_bo": "Pour une chaîne de Markov, expression de la probabilité de passer de l'état i à l'état j en n transitions, de la matrice ligne représentant la distribution après n transitions.",
       "libelle_eleve": "Je sais démontrer l'expression de la distribution après n transitions π₀Pⁿ pour une chaîne de Markov.",
       "demonstration_exigible": true,
-      "demonstration": "Expression de la distribution après n transitions comme π₀Pⁿ."
+      "demonstration": "Expression de la distribution après n transitions comme π₀Pⁿ.",
+      "libelle_interne": "Pour une chaîne de Markov, expression de la probabilité de passer de l'état i à l'état j en n transitions, de la matrice ligne représentant la distribution après n transitions.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TEXP-MAT-C7",
       "libelle_bo": "Distributions invariantes d'une chaîne de Markov à deux ou trois états.",
       "libelle_eleve": "Je sais déterminer une distribution invariante d'une chaîne de Markov à deux ou trois états.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Distributions invariantes d'une chaîne de Markov à deux ou trois états.",
+      "libelle_bo_is_verbatim": true
     }
   ],
   "authority": {
@@ -57,5 +71,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2019_TEXPERTES_optionnel.txt",
     "source_digest": "sha256:a427dd12f3ff774dd0bdd31a26aaa77423509947bf60589e72430b6f5054a1c5"
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

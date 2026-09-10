@@ -8,27 +8,35 @@
       "id": "TSPE-COMBINATOIRE-C1",
       "libelle_bo": "Dans le cadre d'un problème de dénombrement, utiliser une représentation adaptée (ensembles, arbres, tableaux, diagrammes) et reconnaître les objets à dénombrer.",
       "libelle_eleve": "Je sais choisir une représentation adaptée (ensemble, arbre, tableau, diagramme) pour résoudre un problème de dénombrement.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Dans le cadre d'un problème de dénombrement, utiliser une représentation adaptée (ensembles, arbres, tableaux, diagrammes) et reconnaître les objets à dénombrer.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TSPE-COMBINATOIRE-C2",
       "libelle_bo": "Effectuer des dénombrements simples dans des situations issues de divers domaines scientifiques (informatique, génétique, théorie des jeux, probabilités, etc.).",
       "libelle_eleve": "Je sais effectuer des dénombrements simples en utilisant les principes additif et multiplicatif, les permutations et les combinaisons.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Effectuer des dénombrements simples dans des situations issues de divers domaines scientifiques (informatique, génétique, théorie des jeux, probabilités, etc.).",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TSPE-COMBINATOIRE-C3",
       "libelle_bo": "Démonstration par dénombrement de la relation : la somme des coefficients binomiaux (n parmi k) pour k de 0 à n vaut 2^n.",
       "libelle_eleve": "Je sais démontrer par dénombrement que la somme des (n parmi k) pour k de 0 à n vaut 2^n.",
       "demonstration_exigible": true,
-      "demonstration": "Démonstration par dénombrement de la relation : somme_{k=0}^{n} C(n,k) = 2^n."
+      "demonstration": "Démonstration par dénombrement de la relation : somme_{k=0}^{n} C(n,k) = 2^n.",
+      "libelle_interne": "Démonstration par dénombrement de la relation : la somme des coefficients binomiaux (n parmi k) pour k de 0 à n vaut 2^n.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "TSPE-COMBINATOIRE-C4",
       "libelle_bo": "Démonstrations de la relation de Pascal (par le calcul, par une méthode combinatoire).",
       "libelle_eleve": "Je sais démontrer la relation de Pascal par le calcul et par une méthode combinatoire.",
       "demonstration_exigible": true,
-      "demonstration": "Démonstrations de la relation de Pascal (par le calcul, par une méthode combinatoire)."
+      "demonstration": "Démonstrations de la relation de Pascal (par le calcul, par une méthode combinatoire).",
+      "libelle_interne": "Démonstrations de la relation de Pascal (par le calcul, par une méthode combinatoire).",
+      "libelle_bo_is_verbatim": true
     }
   ],
   "authority": {
@@ -40,5 +48,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2019_TSPE_specialite.txt",
     "source_digest": "sha256:65eb5a55df14a2b3025a96db72fbcb1d917b55e8da7feb13669e28b903712210"
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

@@ -9,33 +9,43 @@
       "id": "1SPE-PRODUIT-SCALAIRE-C1",
       "libelle_bo": "Définir le produit scalaire de deux vecteurs (définition géométrique, projection orthogonale, expression analytique).",
       "libelle_eleve": "Je sais calculer un produit scalaire par la formule avec le cosinus, par projection ou par coordonnées.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Définir le produit scalaire de deux vecteurs (définition géométrique, projection orthogonale, expression analytique).",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-PRODUIT-SCALAIRE-C2",
       "libelle_bo": "Connaître et utiliser les propriétés du produit scalaire (bilinéarité, symétrie, norme).",
       "libelle_eleve": "Je sais utiliser les propriétés algébriques du produit scalaire et le lien avec la norme.",
       "demonstration_exigible": true,
-      "demonstration": "Démonstration de l'expression analytique à partir de la bilinéarité."
+      "demonstration": "Démonstration de l'expression analytique à partir de la bilinéarité.",
+      "libelle_interne": "Connaître et utiliser les propriétés du produit scalaire (bilinéarité, symétrie, norme).",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-PRODUIT-SCALAIRE-C3",
       "libelle_bo": "Utiliser le produit scalaire pour déterminer des angles, des orthogonalités et des longueurs.",
       "libelle_eleve": "Je sais utiliser le produit scalaire pour prouver l'orthogonalité et calculer des angles.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Utiliser le produit scalaire pour déterminer des angles, des orthogonalités et des longueurs.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-PRODUIT-SCALAIRE-C4",
       "libelle_bo": "Résoudre des problèmes géométriques à l'aide du produit scalaire.",
       "libelle_eleve": "Je sais résoudre des problèmes de géométrie plane en utilisant le produit scalaire.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Résoudre des problèmes géométriques à l'aide du produit scalaire.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-PRODUIT-SCALAIRE-C5",
       "libelle_bo": "Développer les carrés des normes de la somme et de la différence de deux vecteurs ; connaître et démontrer la formule d'Al-Kashi.",
       "libelle_eleve": "Je sais développer les carrés des normes de u+v et u-v, puis appliquer la formule d'Al-Kashi.",
       "demonstration_exigible": true,
-      "demonstration": "Démonstration de la formule d'Al-Kashi par le produit scalaire."
+      "demonstration": "Démonstration de la formule d'Al-Kashi par le produit scalaire.",
+      "libelle_interne": "Développer les carrés des normes de la somme et de la différence de deux vecteurs ; connaître et démontrer la formule d'Al-Kashi.",
+      "libelle_bo_is_verbatim": false
     }
   ],
   "extensions": [
@@ -53,5 +63,6 @@
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
     "source_digest": "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
     "provenance_note": "NOR complété depuis sources/SOURCES.md et le bulletin complet déposé ; aucune capacité modifiée."
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

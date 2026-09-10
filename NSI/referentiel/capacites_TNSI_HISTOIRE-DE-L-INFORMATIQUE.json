@@ -10,7 +10,9 @@
       "libelle_bo": "Situer dans le temps les principaux événements de l'histoire de l'informatique et leurs protagonistes.",
       "libelle_eleve": "",
       "commentaire_officiel": "Repères complétant ceux de première, construits au fil des concepts.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Situer dans le temps les principaux événements de l'histoire de l'informatique et leurs protagonistes.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "T-HIST-01B",
@@ -18,7 +20,9 @@
       "libelle_bo": "Identifier l'évolution des rôles relatifs des logiciels et des matériels.",
       "libelle_eleve": "",
       "commentaire_officiel": "Relier aux architectures et aux systèmes.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Identifier l'évolution des rôles relatifs des logiciels et des matériels.",
+      "libelle_bo_is_verbatim": true
     }
   ],
   "authority": {
@@ -30,5 +34,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "source_path": "NSI/sources/txt/BO2019_NSI_terminale.txt",
     "source_digest": "sha256:3cfce30c85fdc7ab78eb9acb39e43bcb33d6205e0c4205d4cb499f80c097f15b"
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

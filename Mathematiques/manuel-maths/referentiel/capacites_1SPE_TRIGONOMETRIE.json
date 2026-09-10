@@ -9,13 +9,17 @@
       "id": "1SPE-TRIGONOMETRIE-C1",
       "libelle_bo": "Connaître le cercle trigonométrique, la mesure en radian, les angles orientés.",
       "libelle_eleve": "Je sais placer un angle sur le cercle trigonométrique et convertir degrés/radians.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Connaître le cercle trigonométrique, la mesure en radian, les angles orientés.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-TRIGONOMETRIE-C2",
       "libelle_bo": "Connaître et utiliser cos et sin (relation fondamentale, valeurs remarquables, symétries).",
       "libelle_eleve": "Je connais cos²+sin²=1, les valeurs remarquables et les formules de symétrie.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Connaître et utiliser cos et sin (relation fondamentale, valeurs remarquables, symétries).",
+      "libelle_bo_is_verbatim": false
     }
   ],
   "optional_extensions": [
@@ -45,5 +49,6 @@
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
     "source_digest": "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
     "provenance_note": "NOR complété depuis sources/SOURCES.md et le bulletin complet déposé ; aucune capacité modifiée."
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

@@ -25,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 INVENTORY = "audit/OFFICIAL_PROGRAMME_INVENTORY.json"
 BINDING = "audit/OFFICIAL_PROGRAMME_BINDING.json"
 DIFF_1SPE = "audit/1SPE_PROGRAMME_DIFF_2019_2026.json"
+LIBELLE_GATE = "audit/LIBELLE_BO_AUTHORITY_GATE.json"
 
 
 @dataclass(frozen=True)
@@ -91,6 +92,12 @@ SOURCES: tuple[tuple[str, str, tuple[str, ...]], ...] = (
         ("summary", "REMOVED_2026_MANDATORY"),
     ),
     ("AUTOMATISMS_1SPE_OFFICIAL", DIFF_1SPE, ("summary", "AUTOMATISMS_2026")),
+    (
+        "MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY",
+        LIBELLE_GATE,
+        ("summary", "MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY"),
+    ),
+    ("LIBELLE_BO_AUTHORITY_GATE", LIBELLE_GATE, ("summary", "LIBELLE_BO_AUTHORITY_GATE")),
 )
 
 

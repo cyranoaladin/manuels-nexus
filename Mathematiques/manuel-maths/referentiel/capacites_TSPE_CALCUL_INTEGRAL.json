@@ -8,51 +8,67 @@
       "id": "TSPE-INTEG-C1",
       "libelle_bo": "Estimer graphiquement ou encadrer une intégrale, une valeur moyenne.",
       "libelle_eleve": "Je sais estimer graphiquement ou encadrer une intégrale et une valeur moyenne.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Estimer graphiquement ou encadrer une intégrale, une valeur moyenne.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TSPE-INTEG-C2",
       "libelle_bo": "Calculer une intégrale à l'aide d'une primitive, à l'aide d'une intégration par parties.",
       "libelle_eleve": "Je sais calculer une intégrale en utilisant une primitive ou une intégration par parties.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Calculer une intégrale à l'aide d'une primitive, à l'aide d'une intégration par parties.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TSPE-INTEG-C3",
       "libelle_bo": "Majorer (minorer) une intégrale à partir d'une majoration (minoration) d'une fonction par une autre fonction.",
       "libelle_eleve": "Je sais majorer ou minorer une intégrale en comparant les fonctions intégrées.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Majorer (minorer) une intégrale à partir d'une majoration (minoration) d'une fonction par une autre fonction.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TSPE-INTEG-C4",
       "libelle_bo": "Calculer l'aire entre deux courbes.",
       "libelle_eleve": "Je sais calculer l'aire comprise entre deux courbes à l'aide d'intégrales.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Calculer l'aire entre deux courbes.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TSPE-INTEG-C5",
       "libelle_bo": "Étudier une suite d'intégrales, vérifiant éventuellement une relation de récurrence.",
       "libelle_eleve": "Je sais étudier une suite d'intégrales, notamment en établissant une relation de récurrence.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Étudier une suite d'intégrales, vérifiant éventuellement une relation de récurrence.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TSPE-INTEG-C6",
       "libelle_bo": "Interpréter une intégrale, une valeur moyenne dans un contexte issu d'une autre discipline.",
       "libelle_eleve": "Je sais interpréter une intégrale ou une valeur moyenne dans un contexte concret (physique, économie, etc.).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Interpréter une intégrale, une valeur moyenne dans un contexte issu d'une autre discipline.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TSPE-INTEG-C7",
       "libelle_bo": "Pour une fonction positive croissante ƒ sur [a,b], la fonction x ↦ ∫_a^x ƒ(t) dt est une primitive de ƒ. Pour toute primitive F de ƒ, relation ∫_a^b ƒ(x) dx = F(b) - F(a).",
       "libelle_eleve": "Je sais démontrer que la fonction intégrale d'une fonction positive croissante est une primitive, et en déduire la relation ∫_a^b ƒ = F(b) - F(a).",
       "demonstration_exigible": true,
-      "demonstration": "Pour une fonction positive croissante ƒ sur [a,b], la fonction x ↦ ∫_a^x ƒ(t) dt est une primitive de ƒ. Pour toute primitive F de ƒ, relation ∫_a^b ƒ(x) dx = F(b) - F(a)."
+      "demonstration": "Pour une fonction positive croissante ƒ sur [a,b], la fonction x ↦ ∫_a^x ƒ(t) dt est une primitive de ƒ. Pour toute primitive F de ƒ, relation ∫_a^b ƒ(x) dx = F(b) - F(a).",
+      "libelle_interne": "Pour une fonction positive croissante ƒ sur [a,b], la fonction x ↦ ∫_a^x ƒ(t) dt est une primitive de ƒ. Pour toute primitive F de ƒ, relation ∫_a^b ƒ(x) dx = F(b) - F(a).",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "TSPE-INTEG-C8",
       "libelle_bo": "Intégration par parties.",
       "libelle_eleve": "Je sais démontrer la formule d'intégration par parties.",
       "demonstration_exigible": true,
-      "demonstration": "Intégration par parties."
+      "demonstration": "Intégration par parties.",
+      "libelle_interne": "Intégration par parties.",
+      "libelle_bo_is_verbatim": true
     }
   ],
   "authority": {
@@ -64,5 +80,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2019_TSPE_specialite.txt",
     "source_digest": "sha256:65eb5a55df14a2b3025a96db72fbcb1d917b55e8da7feb13669e28b903712210"
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

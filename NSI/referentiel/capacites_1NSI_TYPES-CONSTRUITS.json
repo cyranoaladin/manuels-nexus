@@ -8,35 +8,45 @@
       "contenu_bo": "P-uplets. P-uplets nommés.",
       "libelle_bo": "Écrire une fonction renvoyant un p-uplet de valeurs.",
       "libelle_eleve": "Je sais utiliser des p-uplets et écrire une fonction qui renvoie plusieurs valeurs.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Écrire une fonction renvoyant un p-uplet de valeurs.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "1NSI-TYPES-CONSTRUITS-C2",
       "contenu_bo": "Tableaux indexés, tableaux donnés en compréhension.",
       "libelle_bo": "Lire et modifier les éléments d'un tableau grâce à leurs index. Construire un tableau par compréhension.",
       "libelle_eleve": "Je sais lire, modifier et construire des tableaux (listes Python), y compris en compréhension.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Lire et modifier les éléments d'un tableau grâce à leurs index. Construire un tableau par compréhension.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1NSI-TYPES-CONSTRUITS-C3",
       "contenu_bo": "Tableaux de tableaux.",
       "libelle_bo": "Utiliser des tableaux de tableaux pour représenter des matrices : notation a[i][j]. Itérer sur les éléments d'un tableau.",
       "libelle_eleve": "Je sais représenter et parcourir une grille avec un tableau de tableaux (a[i][j]).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Utiliser des tableaux de tableaux pour représenter des matrices : notation a[i][j]. Itérer sur les éléments d'un tableau.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1NSI-TYPES-CONSTRUITS-C4",
       "contenu_bo": "Dictionnaires par clés et valeurs.",
       "libelle_bo": "Construire une entrée de dictionnaire. Itérer sur les éléments d'un dictionnaire.",
       "libelle_eleve": "Je sais créer, modifier et parcourir un dictionnaire (clés, valeurs, items).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Construire une entrée de dictionnaire. Itérer sur les éléments d'un dictionnaire.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1NSI-TYPES-CONSTRUITS-C5",
       "contenu_bo": "Mutabilité, copie et références (indications du programme : effets de bord).",
       "libelle_bo": "Distinguer types mutables et immuables ; identifier les effets d'une affectation ou d'un passage en argument sur un objet mutable.",
       "libelle_eleve": "Je sais prévoir l'effet d'une affectation sur un objet mutable (références, copie, effets de bord).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Distinguer types mutables et immuables ; identifier les effets d'une affectation ou d'un passage en argument sur un objet mutable.",
+      "libelle_bo_is_verbatim": false
     }
   ],
   "authority": {
@@ -48,5 +58,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "reverify_resolution": "VERIFIED_CURRENT",
     "reverify_note": "La mention « à re-vérifier contre le B.O. » est levée : l'autorité est corroborée par le registre de sources et par la matrice."
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

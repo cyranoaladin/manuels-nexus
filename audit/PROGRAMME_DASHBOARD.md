@@ -21,6 +21,8 @@ Ne pas editer : chaque valeur est relue dans l'artefact qui la produit.
 | `DIFF_1SPE_ADDED_2026_MANDATORY` | 28 | `audit/1SPE_PROGRAMME_DIFF_2019_2026.json` :: summary / ADDED_2026_MANDATORY |
 | `DIFF_1SPE_REMOVED_2026_MANDATORY` | 12 | `audit/1SPE_PROGRAMME_DIFF_2019_2026.json` :: summary / REMOVED_2026_MANDATORY |
 | `AUTOMATISMS_1SPE_OFFICIAL` | 17 | `audit/1SPE_PROGRAMME_DIFF_2019_2026.json` :: summary / AUTOMATISMS_2026 |
+| `MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY` | 0 | `audit/LIBELLE_BO_AUTHORITY_GATE.json` :: summary / MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY |
+| `LIBELLE_BO_AUTHORITY_GATE` | PASS | `audit/LIBELLE_BO_AUTHORITY_GATE.json` :: summary / LIBELLE_BO_AUTHORITY_GATE |
 
 ## Comment lire ces compteurs
 
@@ -28,3 +30,4 @@ Ne pas editer : chaque valeur est relue dans l'artefact qui la produit.
 - **`INTERNAL_ATOM_WITHOUT_CONFIRMED_PARENT`** — atomes internes dont le parent officiel n'est pas etabli : la somme des propositions en attente et des atomes sans candidat.
 - **`OFFICIAL_REQUIRED_UNMAPPED`** — rattachement non encore etabli — PAS un contenu absent du manuel. Les referentiels internes encodent surtout des capacites ; une connaissance peut etre parfaitement traitee dans un fichier de cours sans posseder d'atome dedie.
 - **`AUTOMATISMS_1SPE_OFFICIAL`** — automatismes que le programme de 2026 enonce ; leur presence dans le manuel se juge ailleurs, sur les objets eux-memes.
+- **`MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY`** — champs dont le nom promet le texte du Bulletin officiel sans qu'aucun producteur ne l'ait verifie. Le champ `libelle_bo` du referentiel interne n'est verbatim que dans la moitie des cas : il est deprecie au profit de `libelle_interne`, et le texte officiel exact vit dans l'inventaire sous `official_wording`.

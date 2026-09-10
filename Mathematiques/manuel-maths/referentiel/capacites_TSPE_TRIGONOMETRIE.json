@@ -8,13 +8,17 @@
       "id": "TSPE-TRIGO-C1",
       "libelle_bo": "Résoudre une équation du type cos(x) = a, une inéquation de la forme cos(x) ⩽ a sur [-π,π].",
       "libelle_eleve": "Je sais résoudre des équations et inéquations trigonométriques du type cos(x) = a ou cos(x) ⩽ a sur [-π,π].",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Résoudre une équation du type cos(x) = a, une inéquation de la forme cos(x) ⩽ a sur [-π,π].",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TSPE-TRIGO-C2",
       "libelle_bo": "Dans le cadre de la résolution de problème, notamment géométrique, étudier une fonction simple définie à partir de fonctions trigonométriques, pour déterminer des variations, un optimum.",
       "libelle_eleve": "Je sais étudier une fonction construite à partir de fonctions trigonométriques (variations, optimum) dans un contexte de résolution de problème.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Dans le cadre de la résolution de problème, notamment géométrique, étudier une fonction simple définie à partir de fonctions trigonométriques, pour déterminer des variations, un optimum.",
+      "libelle_bo_is_verbatim": true
     }
   ],
   "authority": {
@@ -26,5 +30,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2019_TSPE_specialite.txt",
     "source_digest": "sha256:65eb5a55df14a2b3025a96db72fbcb1d917b55e8da7feb13669e28b903712210"
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

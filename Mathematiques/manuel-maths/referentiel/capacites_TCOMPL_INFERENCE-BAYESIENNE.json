@@ -8,31 +8,41 @@
       "id": "TCOMPL-BAYES-C1",
       "libelle_bo": "Calculer des probabilités dans des situations faisant intervenir des probabilités conditionnelles, des répétitions d'expériences aléatoires.",
       "libelle_eleve": "Je sais calculer des probabilités dans des situations faisant intervenir des probabilités conditionnelles.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Calculer des probabilités dans des situations faisant intervenir des probabilités conditionnelles, des répétitions d'expériences aléatoires.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TCOMPL-BAYES-C2",
       "libelle_bo": "La formule de Bayes P_B(A) = P_A(B) × P(A) / P(B) permet d'exprimer la probabilité a posteriori lorsque l'expression du second membre est évaluable.",
       "libelle_eleve": "Je sais utiliser la formule de Bayes pour calculer une probabilité a posteriori P_B(A) à partir de P_A(B), P(A) et P(B).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "La formule de Bayes P_B(A) = P_A(B) × P(A) / P(B) permet d'exprimer la probabilité a posteriori lorsque l'expression du second membre est évaluable.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "TCOMPL-BAYES-C3",
       "libelle_bo": "Elle montre la distinction essentielle entre P_B(A) et P_A(B). Bien comprendre cette distinction est un objectif majeur.",
       "libelle_eleve": "Je sais distinguer P_B(A) (probabilité a posteriori) de P_A(B) (probabilité a priori inversée) dans un problème concret.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Elle montre la distinction essentielle entre P_B(A) et P_A(B). Bien comprendre cette distinction est un objectif majeur.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "TCOMPL-BAYES-C4",
       "libelle_bo": "Tests binaires pour le diagnostic médical. Notion de vrais/faux positifs et négatifs, sensibilité, spécificité, valeurs prédictives positive et négative, lien avec les probabilités conditionnelles.",
       "libelle_eleve": "Je sais définir sensibilité, spécificité, valeur prédictive positive et négative d'un test, et les relier aux probabilités conditionnelles.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Tests binaires pour le diagnostic médical. Notion de vrais/faux positifs et négatifs, sensibilité, spécificité, valeurs prédictives positive et négative, lien avec les probabilités conditionnelles.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "TCOMPL-BAYES-C5",
       "libelle_bo": "Tests de dépistage de sensibilité et de spécificité données : étude des valeurs prédictives en fonction de la proportion de malades et interprétation.",
       "libelle_eleve": "Je sais étudier, comme fonction de la prévalence, la valeur prédictive positive d'un test de sensibilité/spécificité données, et interpréter le résultat.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Tests de dépistage de sensibilité et de spécificité données : étude des valeurs prédictives en fonction de la proportion de malades et interprétation.",
+      "libelle_bo_is_verbatim": false
     }
   ],
   "authority": {
@@ -44,5 +54,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2019_TCOMPL_optionnel.txt",
     "source_digest": "sha256:dad0e4941fc0eb7e93a727bfabd49b3298b1e378eafb7fbe1bbdee35b9c4ac27"
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

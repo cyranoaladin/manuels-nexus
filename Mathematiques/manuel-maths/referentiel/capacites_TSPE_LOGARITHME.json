@@ -8,27 +8,35 @@
       "id": "TSPE-LOG-C1",
       "libelle_bo": "Utiliser l'équation fonctionnelle de l'exponentielle ou du logarithme pour transformer une écriture, résoudre une équation, une inéquation.",
       "libelle_eleve": "Je sais utiliser les propriétés algébriques du logarithme et de l'exponentielle pour transformer des expressions, résoudre des équations et inéquations.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Utiliser l'équation fonctionnelle de l'exponentielle ou du logarithme pour transformer une écriture, résoudre une équation, une inéquation.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TSPE-LOG-C2",
       "libelle_bo": "Dans le cadre d'une résolution de problème, utiliser les propriétés des fonctions exponentielle et logarithme.",
       "libelle_eleve": "Je sais mobiliser les propriétés de l'exponentielle et du logarithme dans le cadre de la résolution de problèmes.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Dans le cadre d'une résolution de problème, utiliser les propriétés des fonctions exponentielle et logarithme.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TSPE-LOG-C3",
       "libelle_bo": "Calcul de la fonction dérivée de la fonction logarithme népérien, la dérivabilité étant admise.",
       "libelle_eleve": "Je sais démontrer que la dérivée de ln est x ↦ 1/x, en admettant la dérivabilité.",
       "demonstration_exigible": true,
-      "demonstration": "Calcul de la fonction dérivée de la fonction logarithme népérien, la dérivabilité étant admise."
+      "demonstration": "Calcul de la fonction dérivée de la fonction logarithme népérien, la dérivabilité étant admise.",
+      "libelle_interne": "Calcul de la fonction dérivée de la fonction logarithme népérien, la dérivabilité étant admise.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TSPE-LOG-C4",
       "libelle_bo": "Limite en 0 de x ↦ x ln(x).",
       "libelle_eleve": "Je sais démontrer que la limite de x ln(x) quand x tend vers 0 est 0.",
       "demonstration_exigible": true,
-      "demonstration": "Limite en 0 de x ↦ x ln(x)."
+      "demonstration": "Limite en 0 de x ↦ x ln(x).",
+      "libelle_interne": "Limite en 0 de x ↦ x ln(x).",
+      "libelle_bo_is_verbatim": true
     }
   ],
   "authority": {
@@ -40,5 +48,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2019_TSPE_specialite.txt",
     "source_digest": "sha256:65eb5a55df14a2b3025a96db72fbcb1d917b55e8da7feb13669e28b903712210"
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

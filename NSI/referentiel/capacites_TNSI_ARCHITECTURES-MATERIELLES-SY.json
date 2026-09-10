@@ -10,7 +10,9 @@
       "libelle_bo": "Identifier les principaux composants sur un schéma de circuit et les avantages de leur intégration.",
       "libelle_eleve": "",
       "commentaire_officiel": "Exemple possible : téléphone, mémoires, interfaces, accélérateurs.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Identifier les principaux composants sur un schéma de circuit et les avantages de leur intégration.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-ARCH-02A",
@@ -18,7 +20,9 @@
       "libelle_bo": "Décrire la création d'un processus.",
       "libelle_eleve": "",
       "commentaire_officiel": "Observation avec outils standard.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Décrire la création d'un processus.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-ARCH-02B",
@@ -26,7 +30,9 @@
       "libelle_bo": "Décrire l'ordonnancement de plusieurs processus.",
       "libelle_eleve": "",
       "commentaire_officiel": "Activité débranchée ou simulation.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Décrire l'ordonnancement de plusieurs processus.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-ARCH-02C",
@@ -34,7 +40,9 @@
       "libelle_bo": "Mettre en évidence le risque d'interblocage.",
       "libelle_eleve": "",
       "commentaire_officiel": "Scénarios à ressources limitées.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Mettre en évidence le risque d'interblocage.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-ARCH-03",
@@ -42,7 +50,9 @@
       "libelle_bo": "Identifier, selon le protocole de routage utilisé, la route empruntée par un paquet.",
       "libelle_eleve": "",
       "commentaire_officiel": "RIP par nombre de sauts ou OSPF par coût ; lien avec chemins dans un graphe.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Identifier, selon le protocole de routage utilisé, la route empruntée par un paquet.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-ARCH-04A",
@@ -50,7 +60,9 @@
       "libelle_bo": "Décrire les principes du chiffrement symétrique et asymétrique.",
       "libelle_eleve": "",
       "commentaire_officiel": "Illustration possible en mode débranché.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Décrire les principes du chiffrement symétrique et asymétrique.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-ARCH-04B",
@@ -58,7 +70,9 @@
       "libelle_bo": "Décrire l'échange d'une clé symétrique avec un protocole asymétrique pour sécuriser HTTPS.",
       "libelle_eleve": "",
       "commentaire_officiel": "Négociation SSL détaillée non abordée.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Décrire l'échange d'une clé symétrique avec un protocole asymétrique pour sécuriser HTTPS.",
+      "libelle_bo_is_verbatim": false
     }
   ],
   "authority": {
@@ -70,5 +84,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "source_path": "NSI/sources/txt/BO2019_NSI_terminale.txt",
     "source_digest": "sha256:3cfce30c85fdc7ab78eb9acb39e43bcb33d6205e0c4205d4cb499f80c097f15b"
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

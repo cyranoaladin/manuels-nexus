@@ -9,52 +9,68 @@
       "libelle_bo": "Dans le cadre de l'étude d'une suite, utiliser le registre de la langue naturelle, le registre algébrique, le registre fonctionnel. Générer une suite définie de façon explicite ou par récurrence.",
       "libelle_eleve": "Je sais calculer les termes d'une suite définie de façon explicite ou par récurrence, à la main, à la calculatrice et en Python.",
       "demonstration_exigible": false,
-      "algo_bo": "Calcul de termes d'une suite, de sommes de termes, de seuil."
+      "algo_bo": "Calcul de termes d'une suite, de sommes de termes, de seuil.",
+      "libelle_interne": "Dans le cadre de l'étude d'une suite, utiliser le registre de la langue naturelle, le registre algébrique, le registre fonctionnel. Générer une suite définie de façon explicite ou par récurrence.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-SUITES-C2",
       "libelle_bo": "Reconnaître si une suite est arithmétique. Exploiter la relation entre termes, la formule explicite.",
       "libelle_eleve": "Je sais montrer qu'une suite est arithmétique, trouver sa raison et exprimer son terme général.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Reconnaître si une suite est arithmétique. Exploiter la relation entre termes, la formule explicite.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-SUITES-C3",
       "libelle_bo": "Reconnaître si une suite est géométrique. Exploiter la relation entre termes, la formule explicite.",
       "libelle_eleve": "Je sais montrer qu'une suite est géométrique, trouver sa raison et exprimer son terme général.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Reconnaître si une suite est géométrique. Exploiter la relation entre termes, la formule explicite.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-SUITES-C4",
       "libelle_bo": "Calculer la somme des n premiers entiers, la somme des premiers termes d'une suite géométrique.",
       "libelle_eleve": "Je sais calculer la somme des premiers entiers et la somme des premiers termes d'une suite géométrique.",
       "demonstration_exigible": true,
-      "demonstration": "Calcul de 1+2+...+n et de 1+q+...+q^n."
+      "demonstration": "Calcul de 1+2+...+n et de 1+q+...+q^n.",
+      "libelle_interne": "Calculer la somme des n premiers entiers, la somme des premiers termes d'une suite géométrique.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-SUITES-C5",
       "libelle_bo": "Étudier le sens de variation d'une suite : étude du signe de u(n+1)−u(n), ou du quotient si les termes sont strictement positifs, ou utilisation de la fonction associée.",
       "libelle_eleve": "Je sais étudier si une suite est croissante ou décroissante par la méthode adaptée.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Étudier le sens de variation d'une suite : étude du signe de u(n+1)−u(n), ou du quotient si les termes sont strictement positifs, ou utilisation de la fonction associée.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-SUITES-C6",
       "libelle_bo": "Modéliser un phénomène discret par une suite (évolutions successives, suites arithmétiques et géométriques comme modèles linéaire et exponentiel discrets).",
       "libelle_eleve": "Je sais modéliser une situation concrète (évolution, pourcentages) par une suite adaptée.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Modéliser un phénomène discret par une suite (évolutions successives, suites arithmétiques et géométriques comme modèles linéaire et exponentiel discrets).",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-SUITES-C7",
       "libelle_bo": "Écrire et interpréter un programme calculant un terme, une somme de termes, un seuil.",
       "libelle_eleve": "Je sais écrire et lire un programme Python qui calcule un terme, une somme ou un seuil.",
       "demonstration_exigible": false,
-      "algo_bo": "Boucle for (terme, somme) ; boucle while (seuil)."
+      "algo_bo": "Boucle for (terme, somme) ; boucle while (seuil).",
+      "libelle_interne": "Écrire et interpréter un programme calculant un terme, une somme de termes, un seuil.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-SUITES-C8",
       "libelle_bo": "Sensibilisation intuitive à la notion de limite d'une suite : limite finie, limite infinie et absence de limite ; toute formalisation est exclue.",
       "libelle_eleve": "Je sais décrire intuitivement si les termes d'une suite semblent se rapprocher d'un réel, devenir arbitrairement grands ou ne suivre aucun de ces deux comportements.",
       "demonstration_exigible": false,
-      "formalisation_exclue": true
+      "formalisation_exclue": true,
+      "libelle_interne": "Sensibilisation intuitive à la notion de limite d'une suite : limite finie, limite infinie et absence de limite ; toute formalisation est exclue.",
+      "libelle_bo_is_verbatim": false
     }
   ],
   "authority": {
@@ -64,5 +80,6 @@
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
     "source_digest": "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
     "provenance_note": "La référence d'origine ne portait que le NOR nu. Le NOR est confirmé par sources/SOURCES.md et par le bulletin complet déposé (sources/txt/BO2026_n14_complet.txt). Aucune capacité n'est modifiée : seule la provenance d'autorité est complétée."
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

@@ -10,7 +10,9 @@
       "libelle_bo": "Identifier les concepts définissant le modèle relationnel.",
       "libelle_eleve": "",
       "commentaire_officiel": "Relation, attribut, domaine, clé, schéma.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Identifier les concepts définissant le modèle relationnel.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "T-BDD-01B",
@@ -18,7 +20,9 @@
       "libelle_bo": "Distinguer structure et contenu d'une base de données.",
       "libelle_eleve": "",
       "commentaire_officiel": "Exemples réalistes mais fictifs.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Distinguer structure et contenu d'une base de données.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-BDD-01C",
@@ -26,7 +30,9 @@
       "libelle_bo": "Repérer les anomalies dans le schéma d'une base de données.",
       "libelle_eleve": "",
       "commentaire_officiel": "Manipulation de données nombreuses et réalistes à privilégier.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Repérer les anomalies dans le schéma d'une base de données.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-BDD-02",
@@ -34,7 +40,9 @@
       "libelle_bo": "Identifier les services rendus par un SGBD relationnel.",
       "libelle_eleve": "",
       "commentaire_officiel": "Persistance, concurrence, efficacité, sécurisation.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Identifier les services rendus par un SGBD relationnel.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-BDD-03A",
@@ -42,7 +50,9 @@
       "libelle_bo": "Identifier les composants d'une requête.",
       "libelle_eleve": "",
       "commentaire_officiel": "Distinguer clauses et mots clés.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Identifier les composants d'une requête.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "T-BDD-03B",
@@ -50,7 +60,9 @@
       "libelle_bo": "Construire des requêtes d'interrogation avec SELECT et FROM.",
       "libelle_eleve": "",
       "commentaire_officiel": "Base de la projection et du choix de table.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Construire des requêtes d'interrogation avec SELECT et FROM.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-BDD-03C",
@@ -58,7 +70,9 @@
       "libelle_bo": "Construire des requêtes d'interrogation avec WHERE.",
       "libelle_eleve": "",
       "commentaire_officiel": "Conditions simples et composées.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Construire des requêtes d'interrogation avec WHERE.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-BDD-03D",
@@ -66,7 +80,9 @@
       "libelle_bo": "Construire des requêtes d'interrogation avec JOIN.",
       "libelle_eleve": "",
       "commentaire_officiel": "Lien avec clés et contraintes.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Construire des requêtes d'interrogation avec JOIN.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-BDD-03E",
@@ -74,7 +90,9 @@
       "libelle_bo": "Construire des requêtes d'interrogation avec ORDER BY.",
       "libelle_eleve": "",
       "commentaire_officiel": "ORDER BY possible sans agrégations avancées.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Construire des requêtes d'interrogation avec ORDER BY.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-BDD-03F",
@@ -82,7 +100,9 @@
       "libelle_bo": "Construire des requêtes d'insertion avec INSERT.",
       "libelle_eleve": "",
       "commentaire_officiel": "Données fictives uniquement.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Construire des requêtes d'insertion avec INSERT.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-BDD-03G",
@@ -90,7 +110,9 @@
       "libelle_bo": "Construire des requêtes de mise à jour avec UPDATE.",
       "libelle_eleve": "",
       "commentaire_officiel": "Insister sur WHERE pour limiter la mise à jour.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Construire des requêtes de mise à jour avec UPDATE.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "T-BDD-03H",
@@ -98,7 +120,9 @@
       "libelle_bo": "Construire des requêtes de suppression avec DELETE.",
       "libelle_eleve": "",
       "commentaire_officiel": "Insister sur les risques et transactions de façon simple.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Construire des requêtes de suppression avec DELETE.",
+      "libelle_bo_is_verbatim": false
     }
   ],
   "authority": {
@@ -110,5 +134,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "source_path": "NSI/sources/txt/BO2019_NSI_terminale.txt",
     "source_digest": "sha256:3cfce30c85fdc7ab78eb9acb39e43bcb33d6205e0c4205d4cb499f80c097f15b"
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

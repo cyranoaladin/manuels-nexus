@@ -9,13 +9,17 @@
       "official_atom": "TNSI-ATOM-060",
       "official_section": "Démarche de projet (préambule)",
       "libelle_bo": "Un quart au moins de l'horaire total de la spécialité est réservé à la conception et à l'élaboration de projets conduits par les élèves.",
-      "libelle_eleve": "Je sais concevoir et élaborer en équipe un projet informatique répondant à un problème explicite."
+      "libelle_eleve": "Je sais concevoir et élaborer en équipe un projet informatique répondant à un problème explicite.",
+      "libelle_interne": "Un quart au moins de l'horaire total de la spécialité est réservé à la conception et à l'élaboration de projets conduits par les élèves.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TNSI-PROJET-BO-02",
       "official_section": "Démarche de projet (préambule)",
       "libelle_bo": "La conduite d'un projet inclut des points d'étape pour faire un bilan, valider des éléments, contrôler l'avancement ou adapter les objectifs, avec une ambition raisonnable.",
-      "libelle_eleve": "Je sais organiser des points d'étape, contrôler l'avancement et adapter les objectifs pour faire aboutir le projet."
+      "libelle_eleve": "Je sais organiser des points d'étape, contrôler l'avancement et adapter les objectifs pour faire aboutir le projet.",
+      "libelle_interne": "La conduite d'un projet inclut des points d'étape pour faire un bilan, valider des éléments, contrôler l'avancement ou adapter les objectifs, avec une ambition raisonnable.",
+      "libelle_bo_is_verbatim": false
     }
   ],
   "authority": {
@@ -27,5 +31,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "source_path": "NSI/sources/txt/BO2019_NSI_terminale.txt",
     "source_digest": "sha256:3cfce30c85fdc7ab78eb9acb39e43bcb33d6205e0c4205d4cb499f80c097f15b"
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

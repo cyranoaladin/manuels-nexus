@@ -41,6 +41,13 @@ LECTURES: dict[str, str] = {
         "rapprochements mesures, publies avec leurs concurrents ; ils ne "
         "valent pas couverture."
     ),
+    "MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY": (
+        "champs dont le nom promet le texte du Bulletin officiel sans qu'aucun "
+        "producteur ne l'ait verifie. Le champ `libelle_bo` du referentiel "
+        "interne n'est verbatim que dans la moitie des cas : il est deprecie "
+        "au profit de `libelle_interne`, et le texte officiel exact vit dans "
+        "l'inventaire sous `official_wording`."
+    ),
     "AUTOMATISMS_1SPE_OFFICIAL": (
         "automatismes que le programme de 2026 enonce ; leur presence dans le "
         "manuel se juge ailleurs, sur les objets eux-memes."

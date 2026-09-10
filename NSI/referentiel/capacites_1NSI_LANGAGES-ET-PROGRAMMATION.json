@@ -10,7 +10,9 @@
       "libelle_bo": "Mettre en évidence un corpus de constructions élémentaires.",
       "libelle_eleve": "",
       "commentaire_officiel": "Séquences, affectation, conditionnelles, boucles bornées ou non, appels de fonction.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Mettre en évidence un corpus de constructions élémentaires.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-LANG-02",
@@ -18,7 +20,9 @@
       "libelle_bo": "Repérer dans un nouveau langage les traits communs et particuliers à ce langage.",
       "libelle_eleve": "",
       "commentaire_officiel": "Comparer l'écriture d'un même programme simple dans différents langages.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Repérer dans un nouveau langage les traits communs et particuliers à ce langage.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "P-LANG-03A",
@@ -26,7 +30,9 @@
       "libelle_bo": "Prototyper une fonction.",
       "libelle_eleve": "",
       "commentaire_officiel": "Signature et intention doivent être lisibles.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Prototyper une fonction.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-LANG-03B",
@@ -34,7 +40,9 @@
       "libelle_bo": "Décrire les préconditions sur les arguments.",
       "libelle_eleve": "",
       "commentaire_officiel": "Assertions possibles pour garantir les préconditions.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Décrire les préconditions sur les arguments.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-LANG-03C",
@@ -42,7 +50,9 @@
       "libelle_bo": "Décrire des postconditions sur les résultats.",
       "libelle_eleve": "",
       "commentaire_officiel": "Lien avec tests d'exemples et cas limites.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Décrire des postconditions sur les résultats.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-LANG-04",
@@ -50,7 +60,9 @@
       "libelle_bo": "Utiliser des jeux de tests.",
       "libelle_eleve": "",
       "commentaire_officiel": "La réussite d'un jeu de tests ne prouve pas la correction générale.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Utiliser des jeux de tests.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "P-LANG-05",
@@ -58,7 +70,9 @@
       "libelle_bo": "Utiliser la documentation d'une bibliothèque.",
       "libelle_eleve": "",
       "commentaire_officiel": "Aucune connaissance exhaustive d'une bibliothèque particulière n'est exigible.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Utiliser la documentation d'une bibliothèque.",
+      "libelle_bo_is_verbatim": true
     }
   ],
   "authority": {
@@ -70,5 +84,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "reverify_resolution": "VERIFIED_CURRENT",
     "reverify_note": "La mention « à re-vérifier contre le B.O. » est levée : l'autorité est corroborée par le registre de sources et par la matrice."
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

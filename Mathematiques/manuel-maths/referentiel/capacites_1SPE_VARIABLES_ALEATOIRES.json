@@ -9,31 +9,41 @@
       "id": "1SPE-VARIABLES-ALEATOIRES-C1",
       "libelle_bo": "Interpréter les événements liés à une variable aléatoire et déterminer sa loi de probabilité sur un univers fini.",
       "libelle_eleve": "Je sais interpréter les événements liés à X et déterminer la loi de X.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Interpréter les événements liés à une variable aléatoire et déterminer sa loi de probabilité sur un univers fini.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-VARIABLES-ALEATOIRES-C2",
       "libelle_bo": "Calculer l'espérance, la variance et l'écart type d'une variable aléatoire.",
       "libelle_eleve": "Je sais calculer E(X), V(X) et σ(X).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Calculer l'espérance, la variance et l'écart type d'une variable aléatoire.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-VARIABLES-ALEATOIRES-C3",
       "libelle_bo": "Pour n ≤ 4, représenter par un arbre la répétition d'épreuves de Bernoulli indépendantes et identiques afin de calculer les probabilités liées au nombre de succès.",
       "libelle_eleve": "Je sais utiliser un arbre pour étudier le nombre de succès dans deux à quatre épreuves de Bernoulli indépendantes et identiques.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Pour n ≤ 4, représenter par un arbre la répétition d'épreuves de Bernoulli indépendantes et identiques afin de calculer les probabilités liées au nombre de succès.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-VARIABLES-ALEATOIRES-C4",
       "libelle_bo": "Utiliser la linéarité de l'espérance.",
       "libelle_eleve": "Je sais calculer l'espérance de aX+b à partir de celle de X.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Utiliser la linéarité de l'espérance.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-VARIABLES-ALEATOIRES-C5",
       "libelle_bo": "Résoudre des problèmes contextualisés faisant intervenir des variables aléatoires.",
       "libelle_eleve": "Je sais modéliser une situation par une variable aléatoire et interpréter E(X).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Résoudre des problèmes contextualisés faisant intervenir des variables aléatoires.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-VARIABLES-ALEATOIRES-C6",
@@ -66,7 +76,9 @@
           "texte": "Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire."
         }
       ],
-      "derive_par": "scripts/build_1spe_referential_capacity_closure.py"
+      "derive_par": "scripts/build_1spe_referential_capacity_closure.py",
+      "libelle_interne": "Le travail expérimental de simulation d’échantillons prolonge celui entrepris en seconde. L’objectif est de faire percevoir le principe de l’estimation de l’espérance d’une variable aléatoire, ou de la moyenne d’une variable statistique dans une population, par une moyenne observée sur un échantillon. Simuler une variable aléatoire avec Python ou un tableur. Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-VARIABLES-ALEATOIRES-C7",
@@ -93,7 +105,9 @@
           "texte": "Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à 2𝜎/√n."
         }
       ],
-      "derive_par": "scripts/build_1spe_referential_capacity_closure.py"
+      "derive_par": "scripts/build_1spe_referential_capacity_closure.py",
+      "libelle_interne": "Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à 2𝜎/√n.",
+      "libelle_bo_is_verbatim": false
     }
   ],
   "optional_extensions": [
@@ -117,5 +131,6 @@
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
     "source_digest": "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
     "provenance_note": "NOR complété depuis sources/SOURCES.md et le bulletin complet déposé ; aucune capacité modifiée."
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

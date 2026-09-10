@@ -8,32 +8,42 @@
       "id": "1SPE-DERIVATION-LOCAL-C1",
       "libelle_bo": "Calculer un taux de variation, la pente d'une sécante.",
       "libelle_eleve": "Je sais calculer et interpréter un taux de variation et la pente d'une sécante.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Calculer un taux de variation, la pente d'une sécante.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "1SPE-DERIVATION-LOCAL-C2",
       "libelle_bo": "Interpréter le nombre dérivé en contexte : pente d'une tangente, vitesse instantanée, coût marginal, etc.",
       "libelle_eleve": "Je sais interpréter un nombre dérivé comme une pente ou une vitesse instantanée.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Interpréter le nombre dérivé en contexte : pente d'une tangente, vitesse instantanée, coût marginal, etc.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-DERIVATION-LOCAL-C3",
       "libelle_bo": "Déterminer graphiquement un nombre dérivé par la pente de la tangente. Construire la tangente en un point à une courbe représentative connaissant le nombre dérivé.",
       "libelle_eleve": "Je sais lire un nombre dérivé sur un graphique et construire la tangente correspondante.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Déterminer graphiquement un nombre dérivé par la pente de la tangente. Construire la tangente en un point à une courbe représentative connaissant le nombre dérivé.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "1SPE-DERIVATION-LOCAL-C4",
       "libelle_bo": "Déterminer l'équation de la tangente en un point à la courbe représentative d'une fonction.",
       "libelle_eleve": "Je sais écrire l'équation d'une tangente à partir de l'abscisse, de l'image et du nombre dérivé.",
       "demonstration_exigible": true,
-      "demonstration": "Équation de la tangente en un point à une courbe représentative."
+      "demonstration": "Équation de la tangente en un point à une courbe représentative.",
+      "libelle_interne": "Déterminer l'équation de la tangente en un point à la courbe représentative d'une fonction.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "1SPE-DERIVATION-LOCAL-C5",
       "libelle_bo": "Calculer une valeur approchée de f(a+h).",
       "libelle_eleve": "Je sais approcher f(a+h) avec l'approximation linéaire au voisinage de a.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Calculer une valeur approchée de f(a+h).",
+      "libelle_bo_is_verbatim": true
     }
   ],
   "authority": {
@@ -43,5 +53,6 @@
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
     "source_digest": "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
     "provenance_note": "NOR complété depuis sources/SOURCES.md et le bulletin complet déposé ; aucune capacité modifiée."
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

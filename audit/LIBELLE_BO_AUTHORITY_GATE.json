@@ -1,0 +1,21 @@
+{
+  "artifact_type": "libelle_bo_authority_gate",
+  "schema_version": 1,
+  "generated_by": "scripts/check_libelle_bo_authority.py",
+  "checked_field_names": [
+    "libelle_bo",
+    "bo_wording",
+    "texte_bo"
+  ],
+  "summary": {
+    "MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY": 0,
+    "REFERENTIAL_CAPACITIES_WITHOUT_VERBATIM_FLAG": 0,
+    "HISTORICAL_ARCHIVES_DECLARING_THEIR_OWN_UNCERTAINTY": 1,
+    "LIBELLE_BO_AUTHORITY_GATE": "PASS"
+  },
+  "historical_archives_accepted": [
+    "audit/historique/capacites_1SPE_SECOND_DEGRE_2019.json"
+  ],
+  "violations": [],
+  "capacities_without_verbatim_flag": []
+}

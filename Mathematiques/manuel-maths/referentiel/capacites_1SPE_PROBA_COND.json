@@ -9,32 +9,42 @@
       "id": "1SPE-PROBA-COND-C1",
       "libelle_bo": "Calculer des probabilités conditionnelles P_A(B).",
       "libelle_eleve": "Je sais calculer P_A(B) = P(A∩B)/P(A).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Calculer des probabilités conditionnelles P_A(B).",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-PROBA-COND-C2",
       "libelle_bo": "Construire et exploiter un arbre pondéré.",
       "libelle_eleve": "Je sais construire un arbre de probabilités et lire les probabilités sur les branches.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Construire et exploiter un arbre pondéré.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-PROBA-COND-C3",
       "libelle_bo": "Appliquer la formule des probabilités totales.",
       "libelle_eleve": "Je sais appliquer P(B)=P(A)P_A(B)+P(Ā)P_Ā(B).",
       "demonstration_exigible": true,
-      "demonstration": "Démonstration de la formule des probabilités totales à partir de la partition."
+      "demonstration": "Démonstration de la formule des probabilités totales à partir de la partition.",
+      "libelle_interne": "Appliquer la formule des probabilités totales.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-PROBA-COND-C4",
       "libelle_bo": "Reconnaître et utiliser l'indépendance de deux événements.",
       "libelle_eleve": "Je sais reconnaître deux événements indépendants et utiliser P(A∩B)=P(A)P(B).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Reconnaître et utiliser l'indépendance de deux événements.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-PROBA-COND-C5",
       "libelle_bo": "Résoudre des problèmes contextualisés faisant intervenir des probabilités conditionnelles.",
       "libelle_eleve": "Je sais modéliser et résoudre un problème concret avec des probabilités conditionnelles.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Résoudre des problèmes contextualisés faisant intervenir des probabilités conditionnelles.",
+      "libelle_bo_is_verbatim": false
     }
   ],
   "authority": {
@@ -44,5 +54,6 @@
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
     "source_digest": "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
     "provenance_note": "NOR complété depuis sources/SOURCES.md et le bulletin complet déposé ; aucune capacité modifiée."
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

@@ -9,32 +9,42 @@
       "id": "1SPE-DERIVATION-GLOBAL-C1",
       "libelle_bo": "Calculer la dérivée de fonctions de référence : x^n, 1/x, racine(x).",
       "libelle_eleve": "Je sais dériver les fonctions de référence (puissances, inverse, racine carrée).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Calculer la dérivée de fonctions de référence : x^n, 1/x, racine(x).",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-DERIVATION-GLOBAL-C2",
       "libelle_bo": "Calculer la dérivée d'une somme, d'un produit par un réel, d'un produit, d'un quotient de fonctions dérivables.",
       "libelle_eleve": "Je sais utiliser les règles de dérivation (somme, produit, quotient).",
       "demonstration_exigible": true,
-      "demonstration": "Dérivée d'une somme et d'un produit par un scalaire."
+      "demonstration": "Dérivée d'une somme et d'un produit par un scalaire.",
+      "libelle_interne": "Calculer la dérivée d'une somme, d'un produit par un réel, d'un produit, d'un quotient de fonctions dérivables.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-DERIVATION-GLOBAL-C3",
       "libelle_bo": "Exploiter le lien entre le signe de la dérivée et le sens de variation d'une fonction.",
       "libelle_eleve": "Je sais utiliser le signe de la dérivée pour dresser le tableau de variations.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Exploiter le lien entre le signe de la dérivée et le sens de variation d'une fonction.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-DERIVATION-GLOBAL-C4",
       "libelle_bo": "Déterminer les extremums d'une fonction polynôme de degré 3.",
       "libelle_eleve": "Je sais trouver les extremums d'une fonction en annulant sa dérivée.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Déterminer les extremums d'une fonction polynôme de degré 3.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-DERIVATION-GLOBAL-C5",
       "libelle_bo": "Résoudre un problème d'optimisation.",
       "libelle_eleve": "Je sais modéliser et résoudre un problème d'optimisation à l'aide de la dérivation.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Résoudre un problème d'optimisation.",
+      "libelle_bo_is_verbatim": true
     }
   ],
   "authority": {
@@ -44,5 +54,6 @@
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
     "source_digest": "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
     "provenance_note": "NOR complété depuis sources/SOURCES.md et le bulletin complet déposé ; aucune capacité modifiée."
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

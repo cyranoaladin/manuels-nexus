@@ -157,7 +157,7 @@ def test_un_libelle_reecrit_perd_son_statut_de_lien_etabli():
     assert verbatim, "aucun libelle repris mot pour mot : la methode est morte"
 
     temoin = dict(verbatim[0])
-    temoin["libelle_bo"] = "Libelle reecrit par le test de mutation."
+    temoin["libelle_interne"] = "Libelle reecrit par le test de mutation."
     apres = jointure.lier(temoin, officiels[temoin["manual"]])
     assert apres["binding_method"] != "VERBATIM"
     assert apres["official_id"] is None

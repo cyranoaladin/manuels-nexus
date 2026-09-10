@@ -9,31 +9,41 @@
       "id": "1SPE-EXPONENTIELLE-C1",
       "libelle_bo": "Connaître la définition de la fonction exponentielle comme unique fonction dérivable sur ℝ vérifiant f'=f et f(0)=1.",
       "libelle_eleve": "Je sais que la fonction exponentielle est l'unique fonction égale à sa dérivée valant 1 en 0.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Connaître la définition de la fonction exponentielle comme unique fonction dérivable sur ℝ vérifiant f'=f et f(0)=1.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-EXPONENTIELLE-C2",
       "libelle_bo": "Connaître et utiliser les propriétés algébriques de la fonction exponentielle : exp(a+b)=exp(a)exp(b), exp(-a)=1/exp(a), exp(na)=(exp(a))^n.",
       "libelle_eleve": "Je sais utiliser les propriétés algébriques de l'exponentielle (somme, produit, puissance).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Connaître et utiliser les propriétés algébriques de la fonction exponentielle : exp(a+b)=exp(a)exp(b), exp(-a)=1/exp(a), exp(na)=(exp(a))^n.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-EXPONENTIELLE-C3",
       "libelle_bo": "Connaître le signe, le sens de variation et la courbe représentative de la fonction exponentielle ; faire le lien avec les suites géométriques.",
       "libelle_eleve": "Je sais exploiter le signe, la croissance et la courbe de l'exponentielle, en lien avec les suites géométriques.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Connaître le signe, le sens de variation et la courbe représentative de la fonction exponentielle ; faire le lien avec les suites géométriques.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-EXPONENTIELLE-C4",
       "libelle_bo": "Pour a réel, déterminer la dérivée de la fonction t → $e^{at}$.",
       "libelle_eleve": "Je sais dériver la fonction t → $e^{at}$ pour un réel a.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Pour a réel, déterminer la dérivée de la fonction t → $e^{at}$.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "1SPE-EXPONENTIELLE-C5",
       "libelle_bo": "Pour k strictement positif, représenter t → e^{-kt} et t → e^{kt} ; modéliser une croissance ou une décroissance exponentielle.",
       "libelle_eleve": "Je sais représenter et utiliser un modèle de croissance ou de décroissance exponentielle.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Pour k strictement positif, représenter t → e^{-kt} et t → e^{kt} ; modéliser une croissance ou une décroissance exponentielle.",
+      "libelle_bo_is_verbatim": false
     }
   ],
   "situations_algorithmiques": [
@@ -84,5 +94,6 @@
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
     "source_digest": "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
     "provenance_note": "NOR complété depuis sources/SOURCES.md et le bulletin complet déposé ; aucune capacité modifiée."
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

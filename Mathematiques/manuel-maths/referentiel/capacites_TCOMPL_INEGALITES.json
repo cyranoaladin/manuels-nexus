@@ -8,31 +8,41 @@
       "id": "TCOMPL-INEG-C1",
       "libelle_bo": "Courbe de Lorenz : sur des données réelles, présentation, définition, lecture, construction d'une ligne polygonale à partir des quantiles, interprétation.",
       "libelle_eleve": "Je sais construire et interpréter une courbe de Lorenz à partir de données réelles (quantiles d'une répartition).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Courbe de Lorenz : sur des données réelles, présentation, définition, lecture, construction d'une ligne polygonale à partir des quantiles, interprétation.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "TCOMPL-INEG-C2",
       "libelle_bo": "Modélisation par la courbe représentative d'une fonction continue, croissante, convexe de [0,1] dans [0,1] et ayant 0 et 1 comme points fixes. Position par rapport à la première bissectrice.",
       "libelle_eleve": "Je sais modéliser une courbe de Lorenz par une fonction convexe de [0,1] dans [0,1] et interpréter sa position par rapport à la première bissectrice (égalité parfaite).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Modélisation par la courbe représentative d'une fonction continue, croissante, convexe de [0,1] dans [0,1] et ayant 0 et 1 comme points fixes. Position par rapport à la première bissectrice.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "TCOMPL-INEG-C3",
       "libelle_bo": "Indice de Gini : définition, calcul, interprétation comme mesure du degré d'inégalité d'une répartition. Comparaison de plusieurs répartitions.",
       "libelle_eleve": "Je sais calculer un indice de Gini (à l'aide d'une intégrale) et l'interpréter comme mesure du degré d'inégalité d'une répartition.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Indice de Gini : définition, calcul, interprétation comme mesure du degré d'inégalité d'une répartition. Comparaison de plusieurs répartitions.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "TCOMPL-INEG-C4",
       "libelle_bo": "Étudier la convexité, la concavité, d'une fonction deux fois dérivable sur un intervalle.",
       "libelle_eleve": "Je sais étudier la convexité d'une fonction modélisant une courbe de Lorenz à l'aide de sa dérivée seconde.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Étudier la convexité, la concavité, d'une fonction deux fois dérivable sur un intervalle.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TCOMPL-INEG-C5",
       "libelle_bo": "Calculer une intégrale, une valeur moyenne. Calculer l'aire sous une courbe ou entre deux courbes.",
       "libelle_eleve": "Je sais calculer, par une intégrale, l'aire entre une courbe de Lorenz et la première bissectrice pour en déduire l'indice de Gini.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Calculer une intégrale, une valeur moyenne. Calculer l'aire sous une courbe ou entre deux courbes.",
+      "libelle_bo_is_verbatim": false
     }
   ],
   "authority": {
@@ -44,5 +54,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2019_TCOMPL_optionnel.txt",
     "source_digest": "sha256:dad0e4941fc0eb7e93a727bfabd49b3298b1e378eafb7fbe1bbdee35b9c4ac27"
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

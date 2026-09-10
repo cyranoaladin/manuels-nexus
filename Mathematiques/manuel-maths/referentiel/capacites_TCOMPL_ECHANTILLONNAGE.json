@@ -8,38 +8,50 @@
       "id": "TCOMPL-ECH-C1",
       "libelle_bo": "Identifier des situations où une variable aléatoire suit une loi de Bernoulli, une loi binomiale ou une loi géométrique.",
       "libelle_eleve": "Je sais identifier une situation où une variable aléatoire suit une loi de Bernoulli ou une loi binomiale.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Identifier des situations où une variable aléatoire suit une loi de Bernoulli, une loi binomiale ou une loi géométrique.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TCOMPL-ECH-C2",
       "libelle_bo": "Déterminer des coefficients binomiaux à l'aide du triangle de Pascal.",
       "libelle_eleve": "Je sais déterminer des coefficients binomiaux à l'aide du triangle de Pascal.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Déterminer des coefficients binomiaux à l'aide du triangle de Pascal.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TCOMPL-ECH-C3",
       "libelle_bo": "Dans le cas où X suit une loi binomiale, calculer à l'aide d'une calculatrice ou d'un logiciel, les probabilités des événements de type P(X = k) ou P(X ≤ k), etc.",
       "libelle_eleve": "Je sais calculer, à la calculatrice ou en Python, des probabilités P(X=k) ou P(X≤k) pour X suivant une loi binomiale.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Dans le cas où X suit une loi binomiale, calculer à l'aide d'une calculatrice ou d'un logiciel, les probabilités des événements de type P(X = k) ou P(X ≤ k), etc.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "TCOMPL-ECH-C4",
       "libelle_bo": "Dans le cas où X suit une loi binomiale, déterminer un intervalle I pour lequel la probabilité P(X ∈ I) est inférieure à une valeur donnée α, ou supérieure à 1 - α.",
       "libelle_eleve": "Je sais déterminer un intervalle de fluctuation I tel que P(X∈I) ≥ 1-α pour X suivant une loi binomiale.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Dans le cas où X suit une loi binomiale, déterminer un intervalle I pour lequel la probabilité P(X ∈ I) est inférieure à une valeur donnée α, ou supérieure à 1 - α.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TCOMPL-ECH-C5",
       "libelle_bo": "Simulation avec Python d'une variable aléatoire d'un échantillon de taille n. Fonction Python renvoyant une moyenne pour un échantillon. Série des moyennes pour N échantillons de taille n.",
       "libelle_eleve": "Je sais simuler en Python un échantillon de taille n d'une variable aléatoire, et calculer la série des moyennes de N échantillons.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Simulation avec Python d'une variable aléatoire d'un échantillon de taille n. Fonction Python renvoyant une moyenne pour un échantillon. Série des moyennes pour N échantillons de taille n.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "TCOMPL-ECH-C6",
       "libelle_bo": "Espérance d'une variable aléatoire suivant une binomiale (n ≤ 3).",
       "libelle_eleve": "Je sais démontrer l'espérance d'une variable aléatoire suivant une loi binomiale, pour n ≤ 3.",
       "demonstration_exigible": true,
-      "demonstration": "Espérance d'une variable aléatoire suivant une binomiale (n ≤ 3)."
+      "demonstration": "Espérance d'une variable aléatoire suivant une binomiale (n ≤ 3).",
+      "libelle_interne": "Espérance d'une variable aléatoire suivant une binomiale (n ≤ 3).",
+      "libelle_bo_is_verbatim": false
     }
   ],
   "authority": {
@@ -51,5 +63,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2019_TCOMPL_optionnel.txt",
     "source_digest": "sha256:dad0e4941fc0eb7e93a727bfabd49b3298b1e378eafb7fbe1bbdee35b9c4ac27"
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

@@ -10,7 +10,9 @@
       "libelle_bo": "Situer dans le temps les principaux événements de l'histoire de l'informatique et leurs protagonistes.",
       "libelle_eleve": "",
       "commentaire_officiel": "Repères construits progressivement au fil des concepts et techniques.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Situer dans le temps les principaux événements de l'histoire de l'informatique et leurs protagonistes.",
+      "libelle_bo_is_verbatim": true
     }
   ],
   "authority": {
@@ -22,5 +24,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "reverify_resolution": "VERIFIED_CURRENT",
     "reverify_note": "La mention « à re-vérifier contre le B.O. » est levée : l'autorité est corroborée par le registre de sources et par la matrice."
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }

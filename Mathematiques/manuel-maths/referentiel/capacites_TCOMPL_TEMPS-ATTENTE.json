@@ -8,38 +8,50 @@
       "id": "TCOMPL-ATT-C1",
       "libelle_bo": "Loi géométrique : définition, expression, espérance (admise), représentation graphique et propriété caractéristique (loi sans mémoire).",
       "libelle_eleve": "Je sais définir la loi géométrique, son espérance, et sa propriété d'absence de mémoire.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Loi géométrique : définition, expression, espérance (admise), représentation graphique et propriété caractéristique (loi sans mémoire).",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TCOMPL-ATT-C2",
       "libelle_bo": "Calculer explicitement ces probabilités pour une variable aléatoire suivant une loi géométrique.",
       "libelle_eleve": "Je sais calculer explicitement des probabilités pour une variable aléatoire suivant une loi géométrique.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Calculer explicitement ces probabilités pour une variable aléatoire suivant une loi géométrique.",
+      "libelle_bo_is_verbatim": false
     },
     {
       "id": "TCOMPL-ATT-C3",
       "libelle_bo": "Utiliser en situation la caractérisation d'une loi géométrique par l'absence de mémoire.",
       "libelle_eleve": "Je sais utiliser la caractérisation d'une loi géométrique par l'absence de mémoire dans un problème concret.",
       "demonstration_exigible": true,
-      "demonstration": "Caractérisation d'une loi géométrique par l'absence de mémoire."
+      "demonstration": "Caractérisation d'une loi géométrique par l'absence de mémoire.",
+      "libelle_interne": "Utiliser en situation la caractérisation d'une loi géométrique par l'absence de mémoire.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TCOMPL-ATT-C4",
       "libelle_bo": "Loi exponentielle. Fonction densité, fonction de répartition. Espérance, propriété d'absence de mémoire.",
       "libelle_eleve": "Je sais définir la loi exponentielle (densité, fonction de répartition, espérance) et sa propriété d'absence de mémoire.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Loi exponentielle. Fonction densité, fonction de répartition. Espérance, propriété d'absence de mémoire.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TCOMPL-ATT-C5",
       "libelle_bo": "Déterminer si une fonction est une densité de probabilité. Calculer des probabilités.",
       "libelle_eleve": "Je sais vérifier qu'une fonction est une densité de probabilité et calculer des probabilités associées.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Déterminer si une fonction est une densité de probabilité. Calculer des probabilités.",
+      "libelle_bo_is_verbatim": true
     },
     {
       "id": "TCOMPL-ATT-C6",
       "libelle_bo": "Calculer l'espérance d'une variable aléatoire à densité.",
       "libelle_eleve": "Je sais calculer l'espérance d'une variable aléatoire suivant une loi exponentielle, sous forme d'intégrale.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "libelle_interne": "Calculer l'espérance d'une variable aléatoire à densité.",
+      "libelle_bo_is_verbatim": true
     }
   ],
   "authority": {
@@ -51,5 +63,6 @@
     "resolved_from": "audit/PROGRAMME_AUTHORITY_MATRIX.json",
     "source_path": "Mathematiques/manuel-maths/sources/txt/BO2019_TCOMPL_optionnel.txt",
     "source_digest": "sha256:dad0e4941fc0eb7e93a727bfabd49b3298b1e378eafb7fbe1bbdee35b9c4ac27"
-  }
+  },
+  "libelle_bo_status": "Le champ `libelle_bo` est deprecie : son nom affirme un texte officiel qu'il ne porte pas dans la plupart des cas. Utiliser `libelle_interne` pour la formulation du projet, et `official_wording` de audit/OFFICIAL_PROGRAMME_INVENTORY.json pour le texte du BO. `libelle_bo_is_verbatim` dit, atome par atome, si les deux coincident."
 }
