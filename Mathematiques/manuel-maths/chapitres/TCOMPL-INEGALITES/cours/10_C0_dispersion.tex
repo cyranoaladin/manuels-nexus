@@ -6,9 +6,10 @@
 % STRATE 1 — Médiane, quartiles, déciles
 % ============================================================
 
-Une courbe de Lorenz se construit à partir de \emph{quantiles} : il faut donc
+Décrire une répartition inégale demande autre chose qu'une moyenne : il faut
 savoir découper une série ordonnée en tranches d'effectifs égaux, et lire ce que
-ce découpage dit de la dispersion.
+ce découpage dit de la dispersion. Ces découpages serviront ensuite à situer des
+groupes sur une courbe de Lorenz.
 
 \definition[1]{
 Soit une série statistique de $N$ valeurs, rangées dans l'ordre croissant.
@@ -37,6 +38,11 @@ qui contient la moitié centrale de la série.
 
 Lorsque toutes les valeurs sont strictement positives, le \textbf{rapport
 interdécile} est le quotient $\dfrac{D_9}{D_1}$.
+
+Dans un contexte de revenus, $D_1$ et $D_9$ sont deux \textbf{valeurs seuils} :
+au plus $10\,\%$ des foyers ont un revenu strictement inférieur à $D_1$, et au
+plus $10\,\%$ ont un revenu strictement supérieur à $D_9$. Ce sont des revenus
+individuels de référence, et non des sommes perçues par un groupe.
 }
 
 \propriete{
@@ -44,9 +50,15 @@ L'écart interquartile et le rapport interdécile mesurent la dispersion sans ê
 sensibles aux valeurs extrêmes : modifier la plus grande valeur d'une série ne
 les change pas, alors que cela change l'étendue et la moyenne.
 
-Le rapport interdécile se lit directement : $\dfrac{D_9}{D_1} = 4$ signifie que
-les $10\,\%$ les mieux dotés reçoivent au moins quatre fois ce que reçoivent les
-$10\,\%$ les moins bien dotés.
+Le rapport interdécile compare deux \textbf{seuils}, et rien d'autre :
+$\dfrac{D_9}{D_1} = 4$ signifie que le seuil du neuvième décile vaut quatre fois
+celui du premier décile. Dans un contexte de revenus, un foyer situé au seuil
+$D_9$ perçoit quatre fois ce que perçoit un foyer situé au seuil $D_1$.
+
+Ce rapport ne dit rien des \emph{masses} : ni de la somme perçue par les
+$10\,\%$ les mieux dotés, ni de leur revenu moyen, ni du quotient de ces deux
+masses. Ces trois grandeurs se calculent autrement et prennent en général des
+valeurs différentes.
 }
 
 % ============================================================
@@ -76,9 +88,19 @@ Ici $N = 20$.
     $\dfrac{D_9}{D_1} = \dfrac{40}{11} \approx 3{,}6$.
 \end{itemize}
 
-Lecture : les $10\,\%$ de foyers les mieux dotés perçoivent environ $3{,}6$ fois
-ce que perçoivent les $10\,\%$ les moins bien dotés. La moitié centrale des
-foyers se tient entre $1\,400$ et $2\,800$ euros.
+Lecture : le seuil du neuvième décile vaut environ $3{,}6$ fois celui du premier
+décile ; autrement dit, un foyer situé au seuil $D_9$ perçoit environ $3{,}6$
+fois ce que perçoit un foyer situé au seuil $D_1$. La moitié centrale des foyers
+se tient entre $1\,400$ et $2\,800$ euros.
+}
+
+\erreurFrequente{
+\textbf{Lire le rapport interdécile comme un rapport de masses.} Sur cette
+série, les deux foyers les mieux dotés perçoivent $52 + 75 = 127$ centaines
+d'euros, les deux moins bien dotés $9 + 11 = 20$ : le quotient de ces deux
+masses vaut $\dfrac{127}{20} = 6{,}35$, et non $3{,}6$. Le rapport interdécile
+compare des seuils ; il n'est ni le quotient des sommes perçues, ni celui des
+moyennes des deux groupes.
 }
 
 \margeAppui{
@@ -92,13 +114,22 @@ indicateurs pour décrire une répartition inégale.
 % ============================================================
 
 \approfondissement{
-Les quantiles sont exactement ce que la courbe de Lorenz met en abscisse. Si
-l'on classe la population par revenu croissant et que l'on note $x$ la
-proportion cumulée de population et $y$ la proportion cumulée de revenu, alors
-$x = 0{,}1$ correspond au premier décile de population, $x = 0{,}25$ au premier
-quartile, et ainsi de suite. Une répartition parfaitement égalitaire donnerait
-$y = x$ pour tout $x$, un rapport interdécile égal à $1$ et un écart
-interquartile nul en proportion.
+La courbe de Lorenz ne porte pas les quantiles en abscisse. On classe la
+population par revenu croissant, puis on porte en abscisse la \textbf{proportion
+cumulée de population} et en ordonnée la \textbf{proportion cumulée du revenu
+total}. Les deux axes portent donc des proportions comprises entre $0$ et $1$,
+pas des revenus.
+
+Les quantiles servent seulement de repères pour découper cette population :
+l'abscisse $x = 0{,}1$ désigne le groupe des $10\,\%$ les moins bien dotés, dont
+le seuil supérieur est $D_1$ ; l'ordonnée associée est la part du revenu total
+que ce groupe détient. Sur la série ci-dessus, ces deux foyers perçoivent $20$
+centaines d'euros sur un total de $498$, soit $y \approx 0{,}040$ : l'écart entre
+$0{,}040$ et $0{,}1$ est exactement ce que la courbe donne à voir. La valeur
+$D_1 = 11$, elle, ne figure sur aucun des deux axes.
+
+Une répartition parfaitement égalitaire donnerait $y = x$ pour tout $x$, et un
+rapport interdécile égal à $1$.
 }
 
 % BEGIN-VERIFY
@@ -136,4 +167,37 @@ interquartile nul en proportion.
 % assert sum(sans_extreme) / N > moyenne
 % assert (sans_extreme[9] + sans_extreme[10]) / 2 == mediane
 % assert quantile.__doc__ is not None
+%
+% # Le rapport interdecile compare DEUX SEUILS. Le quotient des masses des deux
+% # groupes extremes vaut tout autre chose : c'est ce que dit l'erreur frequente,
+% # et c'est ce qui interdit de lire D9/D1 comme un rapport de sommes percues.
+% total = sum(serie)
+% assert total == 498
+% masse_basse = sum(serie[:2])
+% masse_haute = sum(serie[-2:])
+% assert masse_basse == 20 and masse_haute == 127
+% assert masse_haute / masse_basse == 6.35
+% assert abs(masse_haute / masse_basse - d9 / d1) > 2.7
+% # ... pas davantage le quotient des moyennes des deux groupes
+% moyenne_basse = masse_basse / 2
+% moyenne_haute = masse_haute / 2
+% assert moyenne_haute / moyenne_basse == 6.35
+% assert abs(moyenne_haute / moyenne_basse - d9 / d1) > 2.7
+%
+% # Courbe de Lorenz : en abscisse une proportion de POPULATION, en ordonnee une
+% # proportion de MASSE. L'ordonnee au point x = 0,1 n'est pas D1, et n'est pas
+% # non plus egale a x des que la repartition est inegale.
+% x = 2 / N
+% y = masse_basse / total
+% assert x == 0.1
+% assert abs(y - 0.040160642570281124) < 1e-12
+% assert round(y, 3) == 0.040
+% assert y < x
+% # Repartition parfaitement egalitaire : la courbe est la diagonale.
+% egale = [10] * N
+% assert sum(egale[:2]) / sum(egale) == 2 / N
+% # ... et le rapport interdecile y vaut 1.
+% egale_d1 = egale[ceil(N / 10) - 1]
+% egale_d9 = egale[ceil(9 * N / 10) - 1]
+% assert egale_d9 / egale_d1 == 1
 % END-VERIFY

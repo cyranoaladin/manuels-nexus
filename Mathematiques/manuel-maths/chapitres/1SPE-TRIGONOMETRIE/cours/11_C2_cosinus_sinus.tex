@@ -74,11 +74,19 @@ Pour tout réel $x$ :
 }
 
 % ============================================================
-% STRATE 3 — Approfondissement
+% Demonstration exigible — valeurs remarquables
 % ============================================================
+% Cette demonstration est exigible au programme. Elle ne peut donc pas etre
+% presentee sous la signaletique « Pour aller plus loin » que porte la macro
+% \approfondissement : l'eleve y lirait une extension facultative.
 
-\approfondissement{
-\textbf{Demonstration exigible — calcul de $\cos\!\left(\frac{\pi}{4}\right)$, $\sin\!\left(\frac{\pi}{4}\right)$, $\cos\!\left(\frac{\pi}{3}\right)$, $\sin\!\left(\frac{\pi}{3}\right)$.}
+\propriete[Valeurs en $\frac{\pi}{4}$, $\frac{\pi}{3}$ et $\frac{\pi}{6}$]{
+Les valeurs du tableau ci-dessus en $\dfrac{\pi}{4}$, $\dfrac{\pi}{3}$ et
+$\dfrac{\pi}{6}$ se demontrent a partir de l'identite fondamentale et de la
+formule du complementaire. Cette demonstration est \textbf{exigible}.
+}
+
+\demonstration{
 
 \medskip
 \textbf{(a) Valeurs en $\dfrac{\pi}{4}$.}
@@ -111,7 +119,7 @@ Le triangle $OAM$ est isocele en $O$ : ses deux angles a la base sont egaux, et 
 \]
 Les trois angles de $OAM$ valent $\dfrac{\pi}{3}$ : le triangle est equilateral, donc $AM = 1$.
 
-Soit $H$ le projete orthogonal de $M$ sur la droite $(OA)$. Dans un triangle equilateral, la hauteur issue de $M$ est aussi mediane : $H$ est le milieu de $[OA]$, d'ou $OH = \dfrac{1}{2}$. Or $OH$ est exactement l'abscisse de $M$ :
+Soit $H$ le projete orthogonal de $M$ sur la droite $(OA)$. Dans un triangle equilateral, la hauteur issue de $M$ est aussi mediane : $H$ est le milieu de $[OA]$. Comme $O$ est l'origine et $A$ le point de coordonnees $(1\,;\,0)$, le milieu $H$ a pour coordonnees $\left(\dfrac{1}{2}\,;\,0\right)$. Or $M$ et son projete orthogonal sur l'axe des abscisses ont la meme abscisse :
 \[
   \cos\!\left(\frac{\pi}{3}\right) = \frac{1}{2}.
 \]
@@ -145,10 +153,19 @@ $\sin\!\left(\frac{\pi}{6}\right) = \cos\!\left(\frac{\pi}{3}\right) = \dfrac{1}
 % assert simplify(2*cos(pi/4)**2 - 1) == 0
 % assert cos(pi/4) > 0
 %
+% # L'argument de (b) : OAM equilateral, H milieu de [OA], et M a la meme
+% # abscisse que son projete orthogonal sur l'axe des abscisses.
+% A = (1, 0)
+% M = (cos(pi/3), sin(pi/3))
+% H = (Rational(1, 2), 0)
+% assert simplify((A[0] - 0)**2 + (A[1] - 0)**2 - 1) == 0          # OA = 1
+% assert simplify(M[0]**2 + M[1]**2 - 1) == 0                      # OM = 1
+% assert simplify((M[0] - A[0])**2 + (M[1] - A[1])**2 - 1) == 0    # AM = 1
+% assert H == ((0 + A[0]) / 2, (0 + A[1]) / 2)                     # H milieu
+% assert simplify(M[0] - H[0]) == 0                                # meme abscisse
+%
 % # L'argument de (c) : les valeurs en pi/6 se deduisent du complementaire.
 % assert simplify(cos(pi/6) - sin(pi/2 - pi/6)) == 0
-%
-% from sympy import pi, sqrt, Rational, cos, sin, simplify
 %
 % # L'identite fondamentale, sur des angles remarquables et des angles
 % # quelconques.

@@ -1,4 +1,4 @@
-% META: {"id": "TSPE-GEOESPACE-CR-012", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "cours", "capacites_codes": ["C7"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved"}
+% META: {"id": "TSPE-GEOESPACE-CR-012", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "cours", "capacites_codes": ["C7"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "needs_review", "approval_state": "STALE_AFTER_SEMANTIC_EDIT"}
 
 \section{Produit scalaire dans l'espace}
 
@@ -14,24 +14,45 @@ Dans un repere orthonorme $(O;\vec{i},\vec{j},\vec{k})$, si $\vec{u}\begin{pmatr
 }
 
 \propriete{
-$\vec{u}\cdot\vec{v} = \|\vec{u}\|\times\|\vec{v}\|\times\cos(\widehat{\vec{u},\vec{v}})$. En particulier, $\vec{u}$ et $\vec{v}$ sont orthogonaux si et seulement si $\vec{u}\cdot\vec{v}=0$.
+Pour tous vecteurs $\vec{u}$ et $\vec{v}$ de l'espace, $\vec{u}$ et $\vec{v}$ sont
+orthogonaux si et seulement si $\vec{u}\cdot\vec{v}=0$.
+
+Lorsque $\vec{u}$ et $\vec{v}$ sont tous deux \textbf{non nuls}, l'angle
+$\widehat{\vec{u},\vec{v}}$ est defini et
+\[
+  \vec{u}\cdot\vec{v} = \|\vec{u}\|\times\|\vec{v}\|\times\cos(\widehat{\vec{u},\vec{v}}).
+\]
+}
+
+\margeAppui{
+L'hypothese « non nuls » ne porte que sur la formule avec le cosinus. La
+definition $xx'+yy'+zz'$, elle, garde tout son sens si l'un des vecteurs est
+nul : le produit scalaire vaut alors $0$, quel que soit l'autre vecteur. Le
+vecteur nul est ainsi orthogonal a tout vecteur, sans qu'aucun angle
+n'intervienne.
 }
 
 \exemple{
-Soit $A(1,0,2)$, $B(3,1,1)$, $C(2,-1,4)$. Montrer que le triangle $ABC$ est rectangle en $A$.
+Soit $A(1,0,2)$, $B(3,1,1)$, $C(2,-1,4)$. Determiner si le triangle $ABC$ est
+rectangle en $A$.
 
 $\vec{AB}\begin{pmatrix}2\\1\\-1\end{pmatrix}$, $\vec{AC}\begin{pmatrix}1\\-1\\2\end{pmatrix}$.
 
 $\vec{AB}\cdot\vec{AC} = 2\times1+1\times(-1)+(-1)\times2 = 2-1-2 = -1
 \neq 0$.
 
-Le triangle n'est donc \textbf{pas} rectangle en $A$.
+Le triangle n'est donc \textbf{pas} rectangle en $A$. Un produit scalaire non
+nul suffit a conclure : il n'y a rien de plus a verifier.
 
 % BEGIN-VERIFY
-% AB = (2, 1, -1)
-% AC = (1, -1, 2)
+% A, B, C = (1, 0, 2), (3, 1, 1), (2, -1, 4)
+% AB = tuple(b - a for a, b in zip(A, B))
+% AC = tuple(c - a for a, c in zip(A, C))
+% assert AB == (2, 1, -1) and AC == (1, -1, 2)
 % dot = sum(a*b for a, b in zip(AB, AC))
 % assert dot == -1
+% # La conclusion annoncee est bien celle que le calcul autorise.
+% assert dot != 0
 % END-VERIFY
 }
 
@@ -109,3 +130,37 @@ trois mesures.
 \erreurFrequente{
 \textbf{Utiliser la formule analytique dans un repere non orthonorme.} La formule $\vec{u}\cdot\vec{v}=xx'+yy'+zz'$ n'est valable que dans un repere \textbf{orthonorme}. Toujours vérifier cette hypothèse avant de l'appliquer.
 }
+
+\erreurFrequente{
+\textbf{Parler de l'angle d'un vecteur nul.} Ecrire
+$\cos(\widehat{\vec{0},\vec{v}}) = \dfrac{\vec{0}\cdot\vec{v}}{\|\vec{0}\|\,\|\vec{v}\|}$
+reviendrait a diviser par $0$ : aucun angle n'est defini quand l'un des deux
+vecteurs est nul. On conclut alors directement par la definition,
+$\vec{0}\cdot\vec{v} = 0$, donc $\vec{0}$ est orthogonal a $\vec{v}$.
+}
+
+% BEGIN-VERIFY
+% # Le cas nul, precisement.
+% zero = (0, 0, 0)
+% for v in ((1, -1, 2), (0, 0, 0), (-3, 7, 5)):
+%     assert sum(a*b for a, b in zip(zero, v)) == 0
+% # La definition algebrique tient ; la formule angulaire, elle, diviserait par
+% # zero -- c'est pourquoi elle exige deux vecteurs non nuls.
+% from math import sqrt
+% norme_nulle = sqrt(sum(c*c for c in zero))
+% assert norme_nulle == 0
+% try:
+%     1 / norme_nulle
+% except ZeroDivisionError:
+%     pass
+% else:
+%     raise AssertionError("la norme du vecteur nul doit etre nulle")
+% # Sur deux vecteurs non nuls, les deux expressions coincident.
+% u, v = (2, 1, -1), (1, -1, 2)
+% produit = sum(a*b for a, b in zip(u, v))
+% nu = sqrt(sum(c*c for c in u))
+% nv = sqrt(sum(c*c for c in v))
+% cosinus = produit / (nu * nv)
+% assert -1 <= cosinus <= 1
+% assert abs(nu * nv * cosinus - produit) < 1e-12
+% END-VERIFY

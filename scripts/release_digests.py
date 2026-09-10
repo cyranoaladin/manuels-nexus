@@ -58,6 +58,11 @@ GOVERNANCE_META_KEYS: frozenset[str] = frozenset({
     "sources_inspiration",
     "genere_depuis",
     "version",
+    # Une approbation retiree parce que le contenu a change est une donnee de
+    # gouvernance : elle dit qui a valide quoi, jamais ce que l'objet enseigne.
+    # La classer pedagogique ferait bouger l'empreinte du contenu au moment
+    # meme ou l'on constate qu'il n'a pas bouge.
+    "approval_state",
 })
 
 #: Artefacts de preuve *antérieurs* à toute décision humaine. Un artefact qui

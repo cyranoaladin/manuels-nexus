@@ -42,7 +42,13 @@ est grand.
 Les cases centrales ne sont pas plus probables parce que la bille les
 « viserait » : elles le sont parce qu'un plus grand nombre de trajets y
 menent. Il n'y a qu'un seul trajet menant a la case $0$ --- tout a gauche ---,
-et $\binom{n}{n/2}$ trajets menant a la case centrale.
+contre $\binom{n}{k}$ trajets menant a la case $k$.
+
+Le maximum depend de la parite de $n$. Si $n$ est \textbf{pair}, il y a une
+seule case centrale, $k = \dfrac{n}{2}$, atteinte par $\binom{n}{n/2}$ trajets.
+Si $n$ est \textbf{impair}, il y en a deux, $k = \dfrac{n-1}{2}$ et
+$k = \dfrac{n+1}{2}$, atteintes par le meme nombre de trajets et donc de meme
+probabilite maximale.
 
 \propriete[Demarche de simulation]{%
 \begin{enumerate}
@@ -127,6 +133,26 @@ n'est atteinte que quelques fois, et sa frequence est donc tres instable.
 % assert abs(moment2 - esperance**2 - 10 / 4) < 1e-12
 % # un seul trajet mene a la case 0, 252 menent a la case centrale
 % assert comb(10, 0) == 1
+%
+% # Parite : le nombre de cases et le nombre de modes.
+% def modes(n):
+%     poids = [comb(n, k) for k in range(n + 1)]
+%     sommet = max(poids)
+%     return [k for k, w in enumerate(poids) if w == sommet]
+%
+% # n pair : n+1 cases, une seule case centrale, k = n/2
+% assert len([comb(10, k) for k in range(11)]) == 11
+% assert modes(10) == [5]
+% assert 5 == 10 // 2
+% # n impair : n+1 cases, DEUX cases centrales de meme probabilite maximale
+% assert len([comb(9, k) for k in range(10)]) == 10
+% assert modes(9) == [4, 5]
+% assert (9 - 1) // 2 == 4 and (9 + 1) // 2 == 5
+% assert comb(9, 4) == comb(9, 5) == 126
+% # symetrie de la loi pour p = 1/2, dans les deux cas
+% for n in (9, 10):
+%     assert all(comb(n, k) == comb(n, n - k) for k in range(n + 1))
+%     assert sum(comb(n, k) for k in range(n + 1)) == 2**n
 % # n et N strictement positifs : le contrat est verifie
 % for mauvais in ((0, 10), (10, 0), (-1, 5)):
 %     try:
