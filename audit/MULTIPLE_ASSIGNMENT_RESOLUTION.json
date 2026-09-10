@@ -1,0 +1,215 @@
+{
+  "artifact_type": "multiple_assignment_resolution",
+  "schema_version": 1,
+  "generated_by": "scripts/build_multiple_assignment_resolution.py",
+  "rule": "Un attendu revendique par plusieurs themes ne compte qu'une fois dans la couverture. Ce qui se decide ici n'est pas son poids, mais la nature du partage : enseignement distribue, enseignement puis reinvestissement, ou rattachement en trop.",
+  "summary": {
+    "SHARED_OFFICIAL_ITEMS": 5,
+    "JUSTIFIED_DISTRIBUTED_COVERAGE": 5,
+    "PRIMARY_TEACHING_PLUS_REINVESTMENT": 0,
+    "UNJUSTIFIED_MULTIPLE_ASSIGNMENT": 0,
+    "resolution_counts": {
+      "JUSTIFIED_DISTRIBUTED_COVERAGE": 5
+    }
+  },
+  "resolutions": [
+    {
+      "official_id": "MENE1921265A::ANALYSE::FONCTIONS-CONVEXES::EXPECTED_CAPACITY::ad1291d4",
+      "official_wording": "Étudier la convexité, la concavité, d'une fonction deux fois dérivable sur un intervalle.",
+      "official_normativity": "EXPECTED_CAPACITY",
+      "manual": "TCOMPL",
+      "claiming_themes": [
+        "TCOMPL/INEGALITES",
+        "TCOMPL/MODELES-FONCTION"
+      ],
+      "PRIMARY_TEACHING": [
+        "TCOMPL-INEGALITES",
+        "TCOMPL-MODELES-FONCTION"
+      ],
+      "REINVESTMENT": [],
+      "objects_by_chapter": {
+        "TCOMPL-INEGALITES": [
+          "TCOMPL-INEG-CO-001",
+          "TCOMPL-INEG-CR-011",
+          "TCOMPL-INEG-EV-A",
+          "TCOMPL-INEG-EV-A-corrige",
+          "TCOMPL-INEG-EX-001",
+          "TCOMPL-INEG-ME-004"
+        ],
+        "TCOMPL-MODELES-FONCTION": [
+          "TCOMPL-MF-CO-003",
+          "TCOMPL-MF-CO-009",
+          "TCOMPL-MF-CR-011",
+          "TCOMPL-MF-EV-B",
+          "TCOMPL-MF-EV-B-corrige",
+          "TCOMPL-MF-EX-003",
+          "TCOMPL-MF-EX-009",
+          "TCOMPL-MF-ME-005",
+          "TCOMPL-MODELES-FONCTION-RE-C5"
+        ]
+      },
+      "counted_once_in_coverage": true,
+      "resolution": "JUSTIFIED_DISTRIBUTED_COVERAGE",
+      "reason": "2 chapitres l'enseignent chacun dans leur contexte ; le programme de l'option rattache les memes contenus a plusieurs themes d'etude"
+    },
+    {
+      "official_id": "MENE1921265A::PROBABILITES-ET-STATISTIQUE::LOIS-DISCRETES::EXPECTED_CAPACITY::8e5ad9fb",
+      "official_wording": "Dans le cas où 𝑋 suit une loi binomiale, calculer à l’aide d’une calculatrice ou d’un logiciel, les probabilités des événements de type P(X = k) ou P(X ⩽ k), etc. Calculer explicitement ces probabilités pour une variable aléatoire suivant une loi géométrique.",
+      "official_normativity": "EXPECTED_CAPACITY",
+      "manual": "TCOMPL",
+      "claiming_themes": [
+        "TCOMPL/ECHANTILLONNAGE",
+        "TCOMPL/TEMPS-ATTENTE"
+      ],
+      "PRIMARY_TEACHING": [
+        "TCOMPL-ECHANTILLONNAGE",
+        "TCOMPL-TEMPS-ATTENTE"
+      ],
+      "REINVESTMENT": [],
+      "objects_by_chapter": {
+        "TCOMPL-ECHANTILLONNAGE": [
+          "TCOMPL-ECH-CO-001",
+          "TCOMPL-ECH-CO-007",
+          "TCOMPL-ECH-CR-011",
+          "TCOMPL-ECH-EV-A",
+          "TCOMPL-ECH-EV-A-corrige",
+          "TCOMPL-ECH-EX-001",
+          "TCOMPL-ECH-EX-007",
+          "TCOMPL-ECH-ME-003",
+          "TCOMPL-ECHANTILLONNAGE-RE-C3"
+        ],
+        "TCOMPL-TEMPS-ATTENTE": [
+          "TCOMPL-ATT-CO-001",
+          "TCOMPL-ATT-CR-010",
+          "TCOMPL-ATT-EV-A",
+          "TCOMPL-ATT-EV-A-corrige",
+          "TCOMPL-ATT-EX-001",
+          "TCOMPL-ATT-ME-002"
+        ]
+      },
+      "counted_once_in_coverage": true,
+      "resolution": "JUSTIFIED_DISTRIBUTED_COVERAGE",
+      "reason": "2 chapitres l'enseignent chacun dans leur contexte ; le programme de l'option rattache les memes contenus a plusieurs themes d'etude"
+    },
+    {
+      "official_id": "MENE1921265A::PROBABILITES-ET-STATISTIQUE::STATISTIQUE-A-DEUX-VARIABLES-QUANT::KNOWLEDGE::2a974a93",
+      "official_wording": "Calculer les coordonnées d’un point moyen.",
+      "official_normativity": "REQUIRED_CONTENT",
+      "manual": "TCOMPL",
+      "claiming_themes": [
+        "TCOMPL/CORRELATION-CAUSALITE",
+        "TCOMPL/MODELES-FONCTION"
+      ],
+      "PRIMARY_TEACHING": [
+        "TCOMPL-CORRELATION-CAUSALITE",
+        "TCOMPL-MODELES-FONCTION"
+      ],
+      "REINVESTMENT": [],
+      "objects_by_chapter": {
+        "TCOMPL-CORRELATION-CAUSALITE": [
+          "TCOMPL-CORR-CO-001",
+          "TCOMPL-CORR-CO-006",
+          "TCOMPL-CORR-CR-010",
+          "TCOMPL-CORR-EV-A",
+          "TCOMPL-CORR-EV-A-corrige",
+          "TCOMPL-CORR-EX-001",
+          "TCOMPL-CORR-EX-006",
+          "TCOMPL-CORR-ME-001"
+        ],
+        "TCOMPL-MODELES-FONCTION": [
+          "TCOMPL-MF-CO-004",
+          "TCOMPL-MF-CO-011",
+          "TCOMPL-MF-CR-012",
+          "TCOMPL-MF-EV-B",
+          "TCOMPL-MF-EV-B-corrige",
+          "TCOMPL-MF-EX-004",
+          "TCOMPL-MF-EX-011",
+          "TCOMPL-MF-ME-006"
+        ]
+      },
+      "counted_once_in_coverage": true,
+      "resolution": "JUSTIFIED_DISTRIBUTED_COVERAGE",
+      "reason": "2 chapitres l'enseignent chacun dans leur contexte ; le programme de l'option rattache les memes contenus a plusieurs themes d'etude"
+    },
+    {
+      "official_id": "MENE1921265A::PROBABILITES-ET-STATISTIQUE::STATISTIQUE-A-DEUX-VARIABLES-QUANT::KNOWLEDGE::6c155328",
+      "official_wording": "Représenter un nuage de points.",
+      "official_normativity": "REQUIRED_CONTENT",
+      "manual": "TCOMPL",
+      "claiming_themes": [
+        "TCOMPL/CORRELATION-CAUSALITE",
+        "TCOMPL/MODELES-FONCTION"
+      ],
+      "PRIMARY_TEACHING": [
+        "TCOMPL-CORRELATION-CAUSALITE",
+        "TCOMPL-MODELES-FONCTION"
+      ],
+      "REINVESTMENT": [],
+      "objects_by_chapter": {
+        "TCOMPL-CORRELATION-CAUSALITE": [
+          "TCOMPL-CORR-CO-001",
+          "TCOMPL-CORR-CO-006",
+          "TCOMPL-CORR-CR-010",
+          "TCOMPL-CORR-EV-A",
+          "TCOMPL-CORR-EV-A-corrige",
+          "TCOMPL-CORR-EX-001",
+          "TCOMPL-CORR-EX-006",
+          "TCOMPL-CORR-ME-001"
+        ],
+        "TCOMPL-MODELES-FONCTION": [
+          "TCOMPL-MF-CO-004",
+          "TCOMPL-MF-CO-011",
+          "TCOMPL-MF-CR-012",
+          "TCOMPL-MF-EV-B",
+          "TCOMPL-MF-EV-B-corrige",
+          "TCOMPL-MF-EX-004",
+          "TCOMPL-MF-EX-011",
+          "TCOMPL-MF-ME-006"
+        ]
+      },
+      "counted_once_in_coverage": true,
+      "resolution": "JUSTIFIED_DISTRIBUTED_COVERAGE",
+      "reason": "2 chapitres l'enseignent chacun dans leur contexte ; le programme de l'option rattache les memes contenus a plusieurs themes d'etude"
+    },
+    {
+      "official_id": "MENE1921265A::PROBABILITES-ET-STATISTIQUE::STATISTIQUE-A-DEUX-VARIABLES-QUANT::KNOWLEDGE::ef5c6778",
+      "official_wording": "Nuage de points. Point moyen.",
+      "official_normativity": "REQUIRED_CONTENT",
+      "manual": "TCOMPL",
+      "claiming_themes": [
+        "TCOMPL/CORRELATION-CAUSALITE",
+        "TCOMPL/MODELES-FONCTION"
+      ],
+      "PRIMARY_TEACHING": [
+        "TCOMPL-CORRELATION-CAUSALITE",
+        "TCOMPL-MODELES-FONCTION"
+      ],
+      "REINVESTMENT": [],
+      "objects_by_chapter": {
+        "TCOMPL-CORRELATION-CAUSALITE": [
+          "TCOMPL-CORR-CO-001",
+          "TCOMPL-CORR-CO-006",
+          "TCOMPL-CORR-CR-010",
+          "TCOMPL-CORR-EV-A",
+          "TCOMPL-CORR-EV-A-corrige",
+          "TCOMPL-CORR-EX-001",
+          "TCOMPL-CORR-EX-006",
+          "TCOMPL-CORR-ME-001"
+        ],
+        "TCOMPL-MODELES-FONCTION": [
+          "TCOMPL-MF-CO-004",
+          "TCOMPL-MF-CO-011",
+          "TCOMPL-MF-CR-012",
+          "TCOMPL-MF-EV-B",
+          "TCOMPL-MF-EV-B-corrige",
+          "TCOMPL-MF-EX-004",
+          "TCOMPL-MF-EX-011",
+          "TCOMPL-MF-ME-006"
+        ]
+      },
+      "counted_once_in_coverage": true,
+      "resolution": "JUSTIFIED_DISTRIBUTED_COVERAGE",
+      "reason": "2 chapitres l'enseignent chacun dans leur contexte ; le programme de l'option rattache les memes contenus a plusieurs themes d'etude"
+    }
+  ]
+}

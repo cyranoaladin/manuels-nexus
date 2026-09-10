@@ -15,7 +15,9 @@ Ne pas editer : chaque valeur est relue dans l'artefact qui la produit.
 | `INTERNAL_ATOMS_UNRESOLVED` | 34 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / unbound |
 | `INTERNAL_ATOM_WITHOUT_CONFIRMED_PARENT` | 34 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / INTERNAL_ATOM_WITHOUT_OFFICIAL_PARENT |
 | `OFFICIAL_REQUIRED_UNMAPPED` | 418 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / OFFICIAL_REQUIRED_UNMAPPED |
-| `UNJUSTIFIED_MULTIPLE_ASSIGNMENT` | 5 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / UNJUSTIFIED_MULTIPLE_ASSIGNMENT |
+| `OFFICIAL_ITEMS_CLAIMED_BY_SEVERAL_THEMES` | 5 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / UNJUSTIFIED_MULTIPLE_ASSIGNMENT |
+| `UNJUSTIFIED_MULTIPLE_ASSIGNMENT` | 0 | `audit/MULTIPLE_ASSIGNMENT_RESOLUTION.json` :: summary / UNJUSTIFIED_MULTIPLE_ASSIGNMENT |
+| `JUSTIFIED_DISTRIBUTED_COVERAGE` | 5 | `audit/MULTIPLE_ASSIGNMENT_RESOLUTION.json` :: summary / JUSTIFIED_DISTRIBUTED_COVERAGE |
 | `WRONG_YEAR_USED_AS_AUTHORITY` | 0 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / WRONG_YEAR_USED_AS_AUTHORITY |
 | `AUTHORITY_NAMESPACE_VIOLATION` | 0 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / AUTHORITY_NAMESPACE_VIOLATION |
 | `REFERENTIAL_AUTHORITY_NOT_EXPLICIT` | 0 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / REFERENTIAL_AUTHORITY_NOT_EXPLICIT |
@@ -47,6 +49,8 @@ Ne pas editer : chaque valeur est relue dans l'artefact qui la produit.
 - **`INTERNAL_ATOMS_AMBIGUOUS_REQUIRES_HUMAN`** — atomes qu'aucune preuve objective ne tranche. Ils ne portent aucun parent et attendent un arbitrage ; chacun est classe (subdivision pedagogique, enrichissement, programme perime, atome obsolete).
 - **`INTERNAL_ATOM_WITHOUT_CONFIRMED_PARENT`** — atomes internes dont le parent officiel n'est pas etabli : la somme des propositions en attente et des atomes sans candidat.
 - **`OFFICIAL_REQUIRED_UNMAPPED`** — rattachement non encore etabli — PAS un contenu absent du manuel. Les referentiels internes encodent surtout des capacites ; une connaissance peut etre parfaitement traitee dans un fichier de cours sans posseder d'atome dedie.
+- **`OFFICIAL_ITEMS_CLAIMED_BY_SEVERAL_THEMES`** — attendus revendiques par plusieurs themes internes. Le chiffre brut ne dit pas si c'est une faute : il faut regarder qui ENSEIGNE l'attendu et qui le reinvestit. Voir audit/MULTIPLE_ASSIGNMENT_RESOLUTION.json.
+- **`UNJUSTIFIED_MULTIPLE_ASSIGNMENT`** — parmi eux, ceux qu'aucun contenu ne justifie : un theme qui se declare sans rien avoir derriere, ou un attendu pratique sans jamais etre enseigne.
 - **`MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY`** — champs dont le nom promet le texte du Bulletin officiel sans qu'aucun producteur ne l'ait verifie. Le champ `libelle_bo` du referentiel interne n'est verbatim que dans la moitie des cas : il est deprecie au profit de `libelle_interne`, et le texte officiel exact vit dans l'inventaire sous `official_wording`.
 - **`OFFICIAL_REQUIRED_MISSING`** — attendus obligatoires dont AUCUN objet du manuel ne porte la trace. A distinguer de OFFICIAL_REQUIRED_UNMAPPED, qui ne dit que l'absence de rattachement etabli entre le referentiel interne et le BO.
 - **`OFFICIAL_REQUIRED_INSTITUTIONAL`** — exigences que le manuel ne peut pas certifier a lui seul -- « Un quart au moins de l'horaire total est reserve aux projets » releve de l'etablissement. Le manuel peut les outiller, pas les garantir.

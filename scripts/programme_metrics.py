@@ -31,6 +31,7 @@ AUTOMATISMS = "audit/1SPE_AUTOMATISMS_AUDIT.json"
 TRANSITION = "audit/1SPE_REFORM_TRANSITION_AUDIT.json"
 TNSI = "audit/TNSI_EXAM_PREPARATION_MATRIX.json"
 REVERSE = "audit/OBJECTS_TO_OFFICIAL_REVERSE_MAP.json"
+MULTIPLE = "audit/MULTIPLE_ASSIGNMENT_RESOLUTION.json"
 
 
 @dataclass(frozen=True)
@@ -80,9 +81,19 @@ SOURCES: tuple[tuple[str, str, tuple[str, ...]], ...] = (
     ),
     ("OFFICIAL_REQUIRED_UNMAPPED", BINDING, ("summary", "OFFICIAL_REQUIRED_UNMAPPED")),
     (
-        "UNJUSTIFIED_MULTIPLE_ASSIGNMENT",
+        "OFFICIAL_ITEMS_CLAIMED_BY_SEVERAL_THEMES",
         BINDING,
         ("summary", "UNJUSTIFIED_MULTIPLE_ASSIGNMENT"),
+    ),
+    (
+        "UNJUSTIFIED_MULTIPLE_ASSIGNMENT",
+        MULTIPLE,
+        ("summary", "UNJUSTIFIED_MULTIPLE_ASSIGNMENT"),
+    ),
+    (
+        "JUSTIFIED_DISTRIBUTED_COVERAGE",
+        MULTIPLE,
+        ("summary", "JUSTIFIED_DISTRIBUTED_COVERAGE"),
     ),
     (
         "WRONG_YEAR_USED_AS_AUTHORITY",

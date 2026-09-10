@@ -75,6 +75,17 @@ LECTURES: dict[str, str] = {
         "exclut qu'ils fassent l'objet d'un chapitre specifique et demande "
         "qu'ils soient entretenus sur l'annee. Aucun n'est absent du manuel."
     ),
+    "OFFICIAL_ITEMS_CLAIMED_BY_SEVERAL_THEMES": (
+        "attendus revendiques par plusieurs themes internes. Le chiffre brut "
+        "ne dit pas si c'est une faute : il faut regarder qui ENSEIGNE "
+        "l'attendu et qui le reinvestit. Voir "
+        "audit/MULTIPLE_ASSIGNMENT_RESOLUTION.json."
+    ),
+    "UNJUSTIFIED_MULTIPLE_ASSIGNMENT": (
+        "parmi eux, ceux qu'aucun contenu ne justifie : un theme qui se "
+        "declare sans rien avoir derriere, ou un attendu pratique sans jamais "
+        "etre enseigne."
+    ),
     "FUTURE_PROGRAM_CONTAMINATION": (
         "objets du manuel qui reprennent un attendu d'un programme ne "
         "regissant pas cette edition, sur des notions absentes du programme "

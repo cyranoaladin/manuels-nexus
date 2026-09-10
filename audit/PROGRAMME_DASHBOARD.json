@@ -85,12 +85,30 @@
       ],
       "reading": "rattachement non encore etabli — PAS un contenu absent du manuel. Les referentiels internes encodent surtout des capacites ; une connaissance peut etre parfaitement traitee dans un fichier de cours sans posseder d'atome dedie."
     },
-    "UNJUSTIFIED_MULTIPLE_ASSIGNMENT": {
+    "OFFICIAL_ITEMS_CLAIMED_BY_SEVERAL_THEMES": {
       "value": 5,
       "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
       "pointer": [
         "summary",
         "UNJUSTIFIED_MULTIPLE_ASSIGNMENT"
+      ],
+      "reading": "attendus revendiques par plusieurs themes internes. Le chiffre brut ne dit pas si c'est une faute : il faut regarder qui ENSEIGNE l'attendu et qui le reinvestit. Voir audit/MULTIPLE_ASSIGNMENT_RESOLUTION.json."
+    },
+    "UNJUSTIFIED_MULTIPLE_ASSIGNMENT": {
+      "value": 0,
+      "artifact": "audit/MULTIPLE_ASSIGNMENT_RESOLUTION.json",
+      "pointer": [
+        "summary",
+        "UNJUSTIFIED_MULTIPLE_ASSIGNMENT"
+      ],
+      "reading": "parmi eux, ceux qu'aucun contenu ne justifie : un theme qui se declare sans rien avoir derriere, ou un attendu pratique sans jamais etre enseigne."
+    },
+    "JUSTIFIED_DISTRIBUTED_COVERAGE": {
+      "value": 5,
+      "artifact": "audit/MULTIPLE_ASSIGNMENT_RESOLUTION.json",
+      "pointer": [
+        "summary",
+        "JUSTIFIED_DISTRIBUTED_COVERAGE"
       ]
     },
     "WRONG_YEAR_USED_AS_AUTHORITY": {
