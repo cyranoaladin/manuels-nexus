@@ -287,6 +287,20 @@ def main(argv: list[str] | None = None) -> int:
                     {"atom_id": lien["atom_id"], "cited": nor, "expected": attendue}
                 )
 
+    # Un referentiel qui cite un bulletin sans nommer l'arrete ne designe pas
+    # son autorite : le meme bulletin porte plusieurs programmes, et rien n'y
+    # distingue celui dont le referentiel se reclame. C'est une preuve sans
+    # source, meme quand la reference se trouve etre la bonne.
+    autorite_implicite = sorted(
+        {
+            lien["referential_path"]
+            for lien in liens
+            if autorites.get(lien["manual"] or "")
+            and autorites[lien["manual"]] not in (lien["bo_reference"] or "")
+            and lien["declared_authority"] != autorites[lien["manual"]]
+        }
+    )
+
     resume_par_manuel: dict[str, dict[str, Any]] = {}
     for manuel, items in sorted(officiels.items()):
         obligatoires = [i for i in items if i["mandatory"]]
@@ -350,6 +364,7 @@ def main(argv: list[str] | None = None) -> int:
             "UNJUSTIFIED_MULTIPLE_ASSIGNMENT": len(multiples),
             "WRONG_YEAR_USED_AS_AUTHORITY": len(mauvaise_annee),
             "AUTHORITY_NAMESPACE_VIOLATION": len(espace_viole),
+            "REFERENTIAL_AUTHORITY_NOT_EXPLICIT": len(autorite_implicite),
             "binding_method_counts": dict(
                 sorted(Counter(lien["binding_method"] for lien in liens).items())
             ),
@@ -358,6 +373,7 @@ def main(argv: list[str] | None = None) -> int:
         "multiple_assignment": multiples,
         "wrong_year_citations": mauvaise_annee,
         "authority_namespace_violations": espace_viole,
+        "referentials_not_naming_their_authority": autorite_implicite,
         "bindings": liens,
     }
     texte = json.dumps(charge, ensure_ascii=False, indent=2) + "\n"
@@ -388,6 +404,7 @@ def main(argv: list[str] | None = None) -> int:
         "UNJUSTIFIED_MULTIPLE_ASSIGNMENT",
         "WRONG_YEAR_USED_AS_AUTHORITY",
         "AUTHORITY_NAMESPACE_VIOLATION",
+        "REFERENTIAL_AUTHORITY_NOT_EXPLICIT",
     ):
         print(f"{cle} = {s[cle]}")
     return 0
