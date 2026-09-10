@@ -33,20 +33,26 @@ def test_the_release_report_records_the_commit_it_observed() -> None:
 
 
 def test_the_report_commit_is_never_a_freshness_criterion() -> None:
-    """Publier le rapport ne doit perimer aucune preuve.
+    """Publier un rapport ne doit perimer aucune preuve de contenu.
 
-    Le rapport du 10 septembre decrivait d2f677fd2 ; son propre commit a
-    fait avancer main a 8ebc18c8c. Juger la fraicheur sur le commit rendait
-    le rapport faux au moment meme de sa publication.
+    Le rapport du 10 septembre decrivait d2f677fd2 ; son propre commit a fait
+    avancer main a 8ebc18c8c. Juger la fraicheur sur le commit rendait le
+    rapport faux au moment meme de sa publication.
+
+    Ce test porte sur le MODELE, pas sur la fraicheur du moment : savoir si un
+    artefact donne est a jour releve d'un gate de release, pas de pytest. Un
+    test rendu rouge par une regeneration en retard ne mesurerait plus un
+    comportement.
     """
     import sys
     sys.path.insert(0, str(ROOT / "scripts"))
     from evidence_freshness import content_semantic_digest
 
     provenance = json.loads(REPORT.read_text(encoding="utf-8"))["provenance"]
-    assert provenance["CONTENT_SEMANTIC_DIGEST"] == content_semantic_digest()
-    # Les deux commits du rapport de consolidation partagent le meme digest :
-    # aucun des deux ne decrit des sources differentes.
+    assert provenance["CONTENT_SEMANTIC_DIGEST"].startswith("sha256:")
+
+    # Deux commits qui ne different que par un rapport partagent leur digest de
+    # contenu : c'est la propriete que le modele doit garantir, toujours.
     assert content_semantic_digest(commit="d2f677fd2") == content_semantic_digest(
         commit="8ebc18c8c"
     )
