@@ -1,6 +1,6 @@
 # INVENTAIRE EXHAUSTIF DES CLASSES, STYLES ET GABARITS LATEX
 
-Généré par `scripts/build_style_inventory.py` | Périmètre : dépôt hors .git, .worktrees, Fiches_cours_exercices | Nombre total de fichiers inventoriés : 54
+Généré par `scripts/build_style_inventory.py` | Périmètre : dépôt hors .git, .worktrees, Fiches_cours_exercices, HGGSP, HLP, _SAUVEGARDES_HGGSP | Nombre total de fichiers inventoriés : 54
 
 | Chemin | Rôle | SHA-256 (8 premiers car.) | Discipline | Actif ? | Prod ? | Action Finale |
 | :--- | :--- | :---: | :---: | :---: | :---: | :--- |

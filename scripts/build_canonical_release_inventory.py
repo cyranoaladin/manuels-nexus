@@ -106,6 +106,10 @@ class InventoryError(RuntimeError):
     """Une preuve manque : l'inventaire ne peut pas etre etabli."""
 
 
+if str(ROOT / "scripts") not in sys.path:
+    sys.path.insert(0, str(ROOT / "scripts"))
+from check_repository_scope import is_out_of_scope  # noqa: E402
+
 def relative(path: Path) -> str:
     return path.resolve().relative_to(ROOT).as_posix()
 
@@ -123,6 +127,10 @@ def tex_roots() -> list[Path]:
     found: list[Path] = []
     for path in sorted(ROOT.rglob("*.tex")):
         if ".git" in path.parts:
+            continue
+        # HLP et HGGSP restent sur le disque : une autre instance les traite.
+        # Leurs racines TeX ne sont pas des cibles de release de Maths/NSI.
+        if is_out_of_scope(path, ROOT):
             continue
         head = path.read_text(encoding="utf-8", errors="replace")[:4000]
         if re.search(r"^\\documentclass", head, re.M):

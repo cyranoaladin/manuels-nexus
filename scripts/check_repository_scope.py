@@ -52,6 +52,36 @@ def foreign_tracked(root: Path = ROOT) -> dict[str, list[str]]:
     return trouve
 
 
+def is_out_of_scope(path: Path | str, root: Path = ROOT) -> bool:
+    """True si un chemin appartient a une collection etrangere.
+
+    Filtre PARTAGE par tous les balayages disque de cette instance. HLP et
+    HGGSP restent presents sur le disque -- c'est intentionnel, ils sont pris
+    en charge par une autre instance -- mais aucun inventaire, aucun registre
+    et aucun gate de Maths/NSI ne doit les lire : ils produiraient de faux
+    diagnostics et parcourraient des centaines de mega-octets sans objet.
+
+    Mesure du 10 septembre 2026 : sans ce filtre, un `rglob('*.json')` depuis
+    la racine ramenait 129 fichiers de collections etrangeres.
+    """
+    chemin = Path(path)
+    try:
+        parts = chemin.relative_to(root).parts
+    except ValueError:
+        parts = chemin.parts
+    if not parts:
+        return False
+    premier = parts[0]
+    return premier in FOREIGN_COLLECTION_ROOTS or any(
+        premier.startswith(prefixe) for prefixe in FOREIGN_COLLECTION_PREFIXES
+    )
+
+
+def in_scope(paths, root: Path = ROOT):
+    """Filtre un iterable de chemins sur le perimetre Maths/NSI."""
+    return [chemin for chemin in paths if not is_out_of_scope(chemin, root)]
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)

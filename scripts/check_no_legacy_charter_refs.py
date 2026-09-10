@@ -37,7 +37,12 @@ LEGACY_LOAD = re.compile(
 )
 
 #: Repertoires hors du perimetre de production.
-EXCLUDED_PARTS = {".worktrees", ".git", "archive", "build"}
+EXCLUDED_PARTS = {
+    ".worktrees", ".git", "archive", "build",
+    # Collections etrangeres : leurs scripts ne sont pas des chemins de
+    # production de Maths/NSI, et `**/scripts/*.py` les attrapait.
+    "HLP", "HGGSP", "_SAUVEGARDES_HGGSP",
+}
 
 # Fichiers inspectes : assembleurs, classes, styles, masters, workflows CI.
 TARGET_PATTERNS = [

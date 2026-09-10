@@ -109,6 +109,10 @@ EMPTIED = re.compile(r"\\RenewDocumentEnvironment\{(\w+)\}\{[^}]*\}\{\}\{\}")
 LITERATE = re.compile(r"\{(.)\}\{\{(.*?)\}\}\d")
 
 
+if str(ROOT / "scripts") not in sys.path:
+    sys.path.insert(0, str(ROOT / "scripts"))
+from check_repository_scope import is_out_of_scope  # noqa: E402
+
 def relative(path: Path) -> str:
     """Le chemin tel qu'on le nomme ici — depuis la racine que ce module lit.
 
@@ -301,6 +305,8 @@ def latex_sources() -> tuple[Path, ...]:
         if ".git" not in path.parts
         and "build" not in path.parts
         and "reference-v4" not in path.parts
+        # Collections etrangeres presentes sur disque, traitees ailleurs.
+        and not is_out_of_scope(path, ROOT)
     )
 
 

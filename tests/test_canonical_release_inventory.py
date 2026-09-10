@@ -115,15 +115,31 @@ def test_no_tex_root_is_silently_excluded_from_discovery(inventory: dict) -> Non
 
     sys.path.insert(0, str(ROOT / "scripts"))
     import build_canonical_release_inventory as mod
+    from check_repository_scope import is_out_of_scope
 
-    observed = set()
+    # La redecouverte applique la meme regle de PERIMETRE que le depot, et
+    # aucune autre. HLP et HGGSP restent presents sur le disque -- une autre
+    # instance les traite -- mais leurs racines TeX ne sont pas des racines de
+    # ce depot : les compter gonflerait un denominateur qui ne les concerne pas.
+    observed, etrangeres = set(), set()
     for path in Path(mod.ROOT).rglob("*.tex"):
         if ".git" in path.parts:
             continue
         head = path.read_text(encoding="utf-8", errors="replace")[:4000]
-        if re.search(r"^\\documentclass", head, re.M):
-            observed.add(path.resolve().relative_to(mod.ROOT).as_posix())
+        if not re.search(r"^\\documentclass", head, re.M):
+            continue
+        relatif = path.resolve().relative_to(mod.ROOT).as_posix()
+        if is_out_of_scope(relatif, mod.ROOT):
+            etrangeres.add(relatif)
+        else:
+            observed.add(relatif)
 
     declared = _declared_roots(inventory)
     assert observed - declared == set(), "racine TeX decouverte mais non classee"
     assert declared - observed == set(), "racine classee mais introuvable"
+
+    # L'exclusion n'est jamais silencieuse : ce qui est ecarte l'est par la
+    # regle de perimetre, nommement, et n'apparait dans aucun denominateur.
+    for relatif in etrangeres:
+        assert is_out_of_scope(relatif, mod.ROOT)
+        assert relatif not in declared

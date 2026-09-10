@@ -13,7 +13,12 @@ ROOT = Path(__file__).resolve().parent.parent
 # Dossiers hors perimetre de l'inventaire. Le balayage se fait sur le disque et non sur
 # l'index Git : les dossiers locaux non versionnes doivent donc etre exclus explicitement.
 # Fiches_cours_exercices/ contient des documents pedagogiques personnels (cf. .gitignore).
-EXCLUDED_PARTS = {".git", ".worktrees", "Fiches_cours_exercices"}
+# HLP et HGGSP restent sur le disque -- c'est intentionnel, une autre
+# instance les traite -- mais aucun inventaire de Maths/NSI ne les lit.
+EXCLUDED_PARTS = {
+    ".git", ".worktrees", "Fiches_cours_exercices",
+    "HLP", "HGGSP", "_SAUVEGARDES_HGGSP",
+}
 
 
 def is_scannable(path: Path, root: Path | None = None) -> bool:
