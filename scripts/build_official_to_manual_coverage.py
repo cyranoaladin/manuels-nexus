@@ -504,6 +504,34 @@ def main(argv: list[str] | None = None) -> int:
             "by_normativity": dict(sorted(par_nature.items())),
         }
 
+    # Exigence de qualite propre a la collection, distincte du programme. Le BO
+    # nomme des « Exemples d'algorithme » sans les imposer : ils ne comptent
+    # donc pas au denominateur des obligations. Mais une partie du programme
+    # que ces exemples accompagnent doit, dans un bon manuel, offrir un travail
+    # algorithmique reel -- et cela se controle a part, sous son propre nom,
+    # pour qu'aucune exigence maison ne passe pour une exigence ministerielle.
+    parties_avec_exemples: dict[tuple[str, str], list[str]] = defaultdict(list)
+    for item in items:
+        if item["local_kind"] == "ALGORITHM_EXAMPLE":
+            parties_avec_exemples[
+                (
+                    item["manual"],
+                    item["official_subsection"] or item["official_section"] or "",
+                )
+            ].append(item["official_id"])
+    qualite_algorithmique = [
+        {
+            "manual": manuel,
+            "official_part": partie,
+            "algorithm_examples_cited_by_the_programme": len(ids),
+            "manual_has_algorithmic_work": bool(
+                algorithmique_par_partie.get((manuel, partie))
+            ),
+            "standard": "NEXUS_ALGORITHMIC_QUALITY_STANDARD",
+        }
+        for (manuel, partie), ids in sorted(parties_avec_exemples.items())
+    ]
+
     resume = {
         "OFFICIAL_REQUIRED_COMPLETE": sum(
             1 for r in obligatoires if r["coverage_status"] == "COMPLETE"
@@ -535,6 +563,10 @@ def main(argv: list[str] | None = None) -> int:
         ),
         "objects_indexed": len(objets),
         "statuses_cover_every_mandatory_item": True,
+        "NEXUS_ALGORITHMIC_QUALITY_PARTS": len(qualite_algorithmique),
+        "NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK": sum(
+            1 for q in qualite_algorithmique if not q["manual_has_algorithmic_work"]
+        ),
     }
     assert (
         resume["OFFICIAL_REQUIRED_COMPLETE"]
@@ -573,6 +605,15 @@ def main(argv: list[str] | None = None) -> int:
         },
         "summary": resume,
         "per_manual": par_manuel,
+        "nexus_algorithmic_quality_standard": {
+            "nature": (
+                "exigence de qualite de la collection, PAS une obligation du "
+                "programme : le BO nomme des exemples d'algorithme sans les "
+                "imposer. Ce controle verifie qu'une partie accompagnee de tels "
+                "exemples comporte bien un travail algorithmique dans le manuel."
+            ),
+            "parts": qualite_algorithmique,
+        },
         "rows": lignes,
     }
     texte = json.dumps(charge, ensure_ascii=False, indent=2) + "\n"

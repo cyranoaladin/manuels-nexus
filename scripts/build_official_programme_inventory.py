@@ -132,6 +132,20 @@ DOCUMENTS: tuple[dict[str, Any], ...] = (
         "effective_until": None,
         "applies_to_edition": True,
         "preamble_sections": ("Démarche de projet",),
+        "preamble_passages": (
+            (
+                "COMPETENCES-METHODE",
+                r"permet de d[ée]velopper des comp[ée]tences\s*:",
+            ),
+            (
+                "COMPETENCES-TRANSVERSALES",
+                r"d[ée]velopper des comp[ée]tences transversales\s*:",
+            ),
+            (
+                "COMPETENCES-ORALES",
+                r"contribue au d[ée]veloppement des",
+            ),
+        ),
         "note": (
             "Programme publie en tableau a trois colonnes ; lu dans le PDF. "
             "Son preambule impose en outre une demarche de projet, qui ne "
@@ -147,6 +161,20 @@ DOCUMENTS: tuple[dict[str, Any], ...] = (
         "effective_until": None,
         "applies_to_edition": True,
         "preamble_sections": ("Démarche de projet",),
+        "preamble_passages": (
+            (
+                "COMPETENCES-METHODE",
+                r"permet de d[ée]velopper des comp[ée]tences\s*:",
+            ),
+            (
+                "COMPETENCES-TRANSVERSALES",
+                r"d[ée]velopper des comp[ée]tences transversales\s*:",
+            ),
+            (
+                "COMPETENCES-ORALES",
+                r"contribue au d[ée]veloppement des",
+            ),
+        ),
         "note": (
             "Programme d'enseignement. La definition d'epreuve MENE2516123N "
             "reste dans un autre espace d'autorite et n'ajoute aucun contenu."
@@ -214,6 +242,7 @@ def construire(doc: dict[str, Any]) -> dict[str, Any]:
             doc["authority_ref"],
             doc["manual"],
             tuple(doc.get("preamble_sections", ())),
+            tuple(doc.get("preamble_passages", ())),
         )
         items, rejets = res["items"], res["discarded"]
         comptes = {

@@ -110,21 +110,29 @@ def test_une_demonstration_exigible_ne_se_prouve_pas_par_un_exercice(couverture)
         assert ligne["object_count"] > 0
 
 
-def test_un_exemple_d_algorithme_n_impose_pas_cet_exemple_la(couverture):
-    """Le BO nomme des exemples ; il ne les impose pas.
+def test_le_travail_algorithmique_est_une_exigence_maison_nommee_comme_telle(couverture):
+    """Le BO nomme des exemples d'algorithme ; il ne les impose pas.
 
-    Exiger l'algorithme cite transformerait une illustration en obligation que
-    le texte ne porte pas, et declarerait manquant un chapitre qui fait le
-    travail autrement.
+    Ils sortent donc du denominateur des obligations. Mais un bon manuel doit
+    offrir un travail algorithmique dans les parties que ces exemples
+    accompagnent : cette exigence est celle de la collection, et elle doit
+    porter son nom pour qu'on ne la prenne pas pour une exigence ministerielle.
     """
-    lignes = [
+    standard = couverture["nexus_algorithmic_quality_standard"]
+    assert standard["parts"]
+    assert "PAS une obligation du programme" in standard["nature"]
+    for partie in standard["parts"]:
+        assert partie["standard"] == "NEXUS_ALGORITHMIC_QUALITY_STANDARD"
+        assert partie["algorithm_examples_cited_by_the_programme"] > 0
+
+    exemples = [
         r for r in couverture["rows"]
-        if r["official_normativity"] == "PRESCRIBED_ALGORITHMIC_WORK"
-        and r["coverage_status"] == "COMPLETE"
+        if r["official_normativity"] == "ILLUSTRATIVE_EXAMPLE"
+        and r["official_heading"]
+        and "Exemple" in r["official_heading"]
     ]
-    assert lignes
-    motifs = {r["coverage_reason"] for r in lignes}
-    assert any("il ne l'impose pas" in m for m in motifs), motifs
+    assert exemples
+    assert not any(r["mandatory"] for r in exemples)
 
 
 def test_le_quart_de_l_horaire_n_est_jamais_declare_satisfait_par_le_livre(couverture):

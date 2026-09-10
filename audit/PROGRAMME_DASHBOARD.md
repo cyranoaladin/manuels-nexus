@@ -5,32 +5,37 @@ Ne pas editer : chaque valeur est relue dans l'artefact qui la produit.
 
 | Compteur | Valeur | Artefact |
 |---|---|---|
-| `CANONICAL_OFFICIAL_ITEMS_APPLICABLE` | 932 | `audit/OFFICIAL_PROGRAMME_INVENTORY.json` :: official_items_applicable |
-| `CANONICAL_OFFICIAL_ITEMS_MANDATORY` | 694 | `audit/OFFICIAL_PROGRAMME_INVENTORY.json` :: official_items_mandatory |
+| `CANONICAL_OFFICIAL_ITEMS_APPLICABLE` | 965 | `audit/OFFICIAL_PROGRAMME_INVENTORY.json` :: official_items_applicable |
+| `CANONICAL_OFFICIAL_ITEMS_MANDATORY` | 643 | `audit/OFFICIAL_PROGRAMME_INVENTORY.json` :: official_items_mandatory |
 | `OFFICIAL_REFERENCES_VERIFIED` | 6/6 | `audit/OFFICIAL_PROGRAMME_INVENTORY.json` :: OFFICIAL_REFERENCES_VERIFIED |
-| `INTERNAL_ATOMS` | 313 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / internal_atoms |
-| `INTERNAL_ATOMS_CONFIRMED_PARENT` | 279 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / bound_confirmed |
-| `INTERNAL_ATOMS_CONFIRMED_BY_CONTEXT` | 110 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / bound_by_context |
-| `INTERNAL_ATOMS_AMBIGUOUS_REQUIRES_HUMAN` | 34 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / ambiguous_requires_human |
-| `INTERNAL_ATOMS_UNRESOLVED` | 34 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / unbound |
-| `INTERNAL_ATOM_WITHOUT_CONFIRMED_PARENT` | 34 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / INTERNAL_ATOM_WITHOUT_OFFICIAL_PARENT |
-| `OFFICIAL_REQUIRED_UNMAPPED` | 418 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / OFFICIAL_REQUIRED_UNMAPPED |
+| `INTERNAL_ATOMS` | 316 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / internal_atoms |
+| `INTERNAL_ATOMS_CONFIRMED_PARENT` | 281 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / bound_confirmed |
+| `INTERNAL_ATOMS_CONFIRMED_BY_CONTEXT` | 112 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / bound_by_context |
+| `INTERNAL_ATOMS_AMBIGUOUS_REQUIRES_HUMAN` | 35 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / ambiguous_requires_human |
+| `INTERNAL_ATOMS_UNRESOLVED` | 35 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / unbound |
+| `INTERNAL_ATOM_WITHOUT_CONFIRMED_PARENT` | 35 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / INTERNAL_ATOM_WITHOUT_OFFICIAL_PARENT |
+| `OFFICIAL_REQUIRED_UNMAPPED` | 369 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / OFFICIAL_REQUIRED_UNMAPPED |
 | `OFFICIAL_ITEMS_CLAIMED_BY_SEVERAL_THEMES` | 5 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / UNJUSTIFIED_MULTIPLE_ASSIGNMENT |
 | `UNJUSTIFIED_MULTIPLE_ASSIGNMENT` | 0 | `audit/MULTIPLE_ASSIGNMENT_RESOLUTION.json` :: summary / UNJUSTIFIED_MULTIPLE_ASSIGNMENT |
 | `JUSTIFIED_DISTRIBUTED_COVERAGE` | 5 | `audit/MULTIPLE_ASSIGNMENT_RESOLUTION.json` :: summary / JUSTIFIED_DISTRIBUTED_COVERAGE |
 | `WRONG_YEAR_USED_AS_AUTHORITY` | 0 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / WRONG_YEAR_USED_AS_AUTHORITY |
 | `AUTHORITY_NAMESPACE_VIOLATION` | 0 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / AUTHORITY_NAMESPACE_VIOLATION |
 | `REFERENTIAL_AUTHORITY_NOT_EXPLICIT` | 0 | `audit/OFFICIAL_PROGRAMME_BINDING.json` :: summary / REFERENTIAL_AUTHORITY_NOT_EXPLICIT |
-| `DIFF_1SPE_ADDED_2026_MANDATORY` | 28 | `audit/1SPE_PROGRAMME_DIFF_2019_2026.json` :: summary / ADDED_2026_MANDATORY |
+| `DIFF_1SPE_ADDED_2026_MANDATORY` | 27 | `audit/1SPE_PROGRAMME_DIFF_2019_2026.json` :: summary / ADDED_2026_MANDATORY |
 | `DIFF_1SPE_REMOVED_2026_MANDATORY` | 12 | `audit/1SPE_PROGRAMME_DIFF_2019_2026.json` :: summary / REMOVED_2026_MANDATORY |
 | `MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY` | 0 | `audit/LIBELLE_BO_AUTHORITY_GATE.json` :: summary / MISLEADING_LIBELLE_BO_FIELDS_USED_AS_AUTHORITY |
 | `LIBELLE_BO_AUTHORITY_GATE` | PASS | `audit/LIBELLE_BO_AUTHORITY_GATE.json` :: summary / LIBELLE_BO_AUTHORITY_GATE |
-| `OFFICIAL_REQUIRED_COMPLETE` | 619 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_COMPLETE |
-| `OFFICIAL_REQUIRED_PARTIAL` | 45 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_PARTIAL |
-| `OFFICIAL_REQUIRED_MISSING` | 13 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_MISSING |
-| `OFFICIAL_REQUIRED_INSTITUTIONAL` | 14 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_INSTITUTIONAL |
+| `OFFICIAL_REQUIRED_COMPLETE` | 567 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_COMPLETE |
+| `OFFICIAL_REQUIRED_PARTIAL` | 44 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_PARTIAL |
+| `OFFICIAL_REQUIRED_MISSING` | 11 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_MISSING |
+| `OFFICIAL_REQUIRED_INSTITUTIONAL` | 18 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_INSTITUTIONAL |
 | `OFFICIAL_REQUIRED_UNDECIDABLE_BY_CONTENT_MATCH` | 3 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / OFFICIAL_REQUIRED_UNDECIDABLE_BY_CONTENT_MATCH |
 | `MANUAL_OBJECTS_INDEXED` | 3483 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / objects_indexed |
+| `NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK` | 4 | `audit/OFFICIAL_TO_MANUAL_COVERAGE.json` :: summary / NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK |
+| `NORMATIVITY_CREATED_BY_ATOMIZATION` | 0 | `audit/NORMATIVITY_PROVENANCE_GATE.json` :: summary / NORMATIVITY_CREATED_BY_ATOMIZATION |
+| `MANDATORY_COUNT_BEFORE` | 694 | `audit/NORMATIVITY_PROVENANCE_GATE.json` :: summary / MANDATORY_COUNT_BEFORE |
+| `MANDATORY_COUNT_AFTER` | 643 | `audit/NORMATIVITY_PROVENANCE_GATE.json` :: summary / MANDATORY_COUNT_AFTER |
+| `CHANGED_NORMATIVITY_ITEMS` | 82 | `audit/NORMATIVITY_PROVENANCE_GATE.json` :: summary / CHANGED_NORMATIVITY_ITEMS |
 | `AUTOMATISMS_1SPE_ADEQUATELY_REINVESTED` | 14 | `audit/1SPE_AUTOMATISMS_AUDIT.json` :: summary / AUTOMATISMS_1SPE_ADEQUATELY_REINVESTED |
 | `AUTOMATISM_NOT_REINVESTED` | 3 | `audit/1SPE_AUTOMATISMS_AUDIT.json` :: summary / AUTOMATISM_NOT_REINVESTED |
 | `ADDED_2026_TRULY_MISSING` | 0 | `audit/1SPE_REFORM_TRANSITION_AUDIT.json` :: summary / ADDED_TRULY_MISSING |
@@ -42,7 +47,7 @@ Ne pas editer : chaque valeur est relue dans l'artefact qui la produit.
 | `PREREQUISITES_ASSUMED_WITHOUT_SUPPORT` | 1 | `audit/1SPE_PREREQUISITE_SUPPORT.json` :: summary / PREREQUISITES_ASSUMED_WITHOUT_SUPPORT |
 | `UNCLASSIFIED_OUT_OF_PROGRAMME_OBJECTS` | 1 | `audit/OBJECTS_TO_OFFICIAL_REVERSE_MAP.json` :: summary / UNCLASSIFIED_OUT_OF_PROGRAMME_OBJECTS |
 | `FUTURE_PROGRAM_CONTAMINATION` | 0 | `audit/OBJECTS_TO_OFFICIAL_REVERSE_MAP.json` :: summary / WRONG_YEAR_OBJECTS |
-| `OBJECTS_CITING_AN_UNKNOWN_CAPACITY` | 64 | `audit/OBJECTS_TO_OFFICIAL_REVERSE_MAP.json` :: summary / OBJECTS_CITING_AN_UNKNOWN_CAPACITY |
+| `OBJECTS_CITING_AN_UNKNOWN_CAPACITY` | 0 | `audit/OBJECTS_TO_OFFICIAL_REVERSE_MAP.json` :: summary / OBJECTS_CITING_AN_UNKNOWN_CAPACITY |
 
 ## Comment lire ces compteurs
 
@@ -56,6 +61,8 @@ Ne pas editer : chaque valeur est relue dans l'artefact qui la produit.
 - **`OFFICIAL_REQUIRED_MISSING`** — attendus obligatoires dont AUCUN objet du manuel ne porte la trace. A distinguer de OFFICIAL_REQUIRED_UNMAPPED, qui ne dit que l'absence de rattachement etabli entre le referentiel interne et le BO.
 - **`OFFICIAL_REQUIRED_INSTITUTIONAL`** — exigences que le manuel ne peut pas certifier a lui seul -- « Un quart au moins de l'horaire total est reserve aux projets » releve de l'etablissement. Le manuel peut les outiller, pas les garantir.
 - **`OFFICIAL_REQUIRED_UNDECIDABLE_BY_CONTENT_MATCH`** — attendus dont le libelle officiel ne porte aucun mot distinctif exploitable : la recherche par contenu ne peut ni conclure a la presence ni conclure a l'absence.
+- **`NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK`** — exigence de la COLLECTION, pas du programme : parties accompagnees d'exemples d'algorithme officiels ou le manuel n'offre aucun travail algorithmique.
+- **`NORMATIVITY_CREATED_BY_ATOMIZATION`** — attendus publies comme obligatoires alors que la rubrique du BO dont ils viennent ne l'est pas. C'est le risque propre a toute chaine d'atomisation : personne ne ment, le niveau d'obligation est cree par le traitement.
 - **`AUTOMATISM_NOT_REINVESTED`** — automatismes que le manuel travaille sans les repartir : le programme exclut qu'ils fassent l'objet d'un chapitre specifique et demande qu'ils soient entretenus sur l'annee. Aucun n'est absent du manuel.
 - **`ADDED_2026_TRULY_MISSING`** — attendus ajoutes par la reforme qu'il faudrait ecrire. La dette de contenu ne se deduit pas du differentiel : un attendu ajoute au programme peut etre traite depuis des annees.
 - **`PREREQUISITES_ASSUMED_WITHOUT_SUPPORT`** — prerequis qu'un chapitre declare mobiliser sans que rien, dans ce chapitre, ne permette a l'eleve de constater le manque ni d'y remedier. Le programme demande que les automatismes de seconde soient entretenus en premiere.

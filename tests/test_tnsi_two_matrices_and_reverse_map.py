@@ -101,17 +101,35 @@ def test_aucun_objet_ne_travaille_sur_un_programme_hors_annee(inverse):
     ]
 
 
-def test_une_capacite_citee_mais_inexistante_est_signalee(inverse):
+def test_plus_aucune_capacite_citee_n_est_inexistante(inverse):
     """Un objet qui cite une capacite fantome parait rattache sans l'etre.
 
     Le defaut est invisible a la lecture : la metadonnee est bien remplie,
-    elle designe simplement quelque chose qui n'existe pas.
+    elle designe simplement quelque chose qui n'existe pas. Les references
+    pendantes ont ete reparees a la source -- codes locaux remis dans leur
+    champ, alias inventes retires, entrees de referentiel manquantes creees,
+    references au preambule reconnues dans leur espace de noms.
     """
-    pendantes = inverse["dangling_capacity_references"]
-    assert inverse["summary"]["UNKNOWN_CAPACITIES_CITED"] == len(pendantes)
-    assert pendantes, "aucune reference pendante detectee : le controle serait inerte"
-    for atome, objets in pendantes.items():
-        assert objets, atome
+    assert inverse["summary"]["UNKNOWN_CAPACITIES_CITED"] == 0, (
+        inverse["dangling_capacity_references"]
+    )
+    assert inverse["summary"]["OBJECTS_CITING_AN_UNKNOWN_CAPACITY"] == 0
+    assert inverse["dangling_capacity_references"] == {}
+
+
+def test_le_detecteur_de_capacite_fantome_reste_vivant():
+    """Un compteur a zero ne prouve rien si le detecteur ne detecte plus rien.
+
+    Une capacite inventee doit toujours ressortir : sans ce controle, le zero
+    pourrait venir d'un detecteur en panne plutot que d'un depot propre.
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from repair_dangling_capacity_references import atomes_connus
+
+    connus = atomes_connus()
+    assert connus, "aucun atome connu : le referentiel serait vide"
+    assert "CAPACITE-QUI-N-EXISTE-PAS-C99" not in connus
+    assert any(a.startswith("1SPE-") for a in connus)
 
 
 @pytest.mark.parametrize(

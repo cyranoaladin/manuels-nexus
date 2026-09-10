@@ -44,7 +44,11 @@ def test_chaque_capacite_interne_dit_si_son_libelle_vient_du_bo():
                     declarees += 1
                     verbatim += bool(capacite["libelle_bo_is_verbatim"])
                 assert "libelle_interne" in capacite, capacite["id"]
-    assert total == declarees == 313
+    # Le total suit le referentiel : le figer ferait echouer ce test a
+    # chaque capacite ajoutee, et inviterait a ajuster le chiffre plutot
+    # qu'a regarder ce qui a change. Ce qui doit tenir est que CHAQUE
+    # capacite dise si son libelle vient du BO.
+    assert total == declarees > 300
     # Le chiffre exact suivra l'evolution des referentiels ; ce qui doit tenir
     # est que le champ ne soit pas verbatim partout -- sinon le probleme
     # n'existerait pas et ce garde-fou serait un decor.

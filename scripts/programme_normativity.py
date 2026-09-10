@@ -121,13 +121,17 @@ RULES: tuple[tuple[str, Portee], ...] = (
         ),
     ),
     (
-        r"exemples? d[’']?algorithmes?",
+        r"exemples? d[’\']?algorithmes?",
         Portee(
-            PRESCRIBED_ALGORITHMIC_WORK,
+            ILLUSTRATIVE_EXAMPLE,
             "ALGORITHM_EXAMPLE",
-            "rubrique « Exemples d'algorithme » : le programme prescrit un "
-            "travail algorithmique sur ce theme, mais nomme des EXEMPLES. "
-            "L'exemple cite n'est donc pas impose tel quel.",
+            "rubrique « Exemples d'algorithme ». Le programme nomme des "
+            "EXEMPLES, et aucun passage du texte -- ni l'organisation du "
+            "programme, ni la partie « Algorithmique et programmation » -- ne "
+            "les rend exigibles. Ils n'entrent donc pas au denominateur des "
+            "obligations. Que la partie concernee comporte un travail "
+            "algorithmique suffisant releve d'une exigence de qualite propre a "
+            "la collection, controlee separement.",
             exact_example_imposed=False,
         ),
     ),
@@ -193,6 +197,15 @@ DEFAULT = Portee(
     "meme rang que ses capacites attendues.",
 )
 
+#: Portee des passages du preambule, declaree passage par passage sur la foi
+#: de ce que le texte fait. Le programme DECRIT les competences que
+#: l'enseignement developpe (« Il permet de developper des competences : »,
+#: « Cet enseignement a vocation a multiplier les occasions... ») ; il PRESCRIT
+#: en revanche la demarche de projet (« Un quart au moins de l'horaire [...]
+#: est reserve »). Les compter ensemble ferait entrer une intention pedagogique
+#: dans le denominatur des obligations du manuel.
+PREAMBLE_PASSAGE_SCOPES: dict[str, "Portee"] = {}  # rempli plus bas
+
 PROJECT_REQUIREMENT = Portee(
     TRANSVERSAL_REQUIREMENT,
     "TRANSVERSAL_REQUIREMENT",
@@ -200,6 +213,21 @@ PROJECT_REQUIREMENT = Portee(
     "total de la specialite est reserve a la conception et a l'elaboration "
     "de projets conduits par les eleves. »",
 )
+
+
+PREAMBLE_INTENT = Portee(
+    OBJECTIVE_OR_INTENT,
+    "OBJECTIVE",
+    "passage du preambule qui DECRIT ce que l'enseignement developpe, sans "
+    "imposer d'attendu au manuel : « Il permet de developper des competences », "
+    "« Cet enseignement a vocation a multiplier les occasions... », « cette "
+    "specialite contribue au developpement des competences orales ».",
+)
+
+
+def for_preamble_passage(slug: str) -> Portee:
+    """Portee d'un passage du preambule, d'apres ce que le texte y fait."""
+    return PREAMBLE_PASSAGE_SCOPES.get(slug, PREAMBLE_INTENT)
 
 
 def _cle(intitule: str) -> str:

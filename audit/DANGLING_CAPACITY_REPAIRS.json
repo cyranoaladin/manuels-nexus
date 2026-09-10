@@ -1,0 +1,251 @@
+{
+  "artifact_type": "dangling_capacity_repairs",
+  "schema_version": 1,
+  "generated_by": "scripts/repair_dangling_capacity_references.py",
+  "summary": {
+    "OBJECTS_REPAIRED": 18,
+    "LOCAL_CODE_IN_WRONG_FIELD": 15,
+    "TYPO_OR_ALIAS": 3,
+    "MISSING_REFERENTIAL_ENTRIES_CREATED": 3
+  },
+  "object_repairs": [
+    {
+      "object_id": "1NSI-ADGK-ME-001",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-001.tex",
+      "classification": "TYPO_OR_ALIAS",
+      "removed": [
+        "1NSI-ALGO-DICHO-GLOUTON-KNN-C1"
+      ],
+      "reason": "identifiant forge en collant le nom du chapitre au code local ; l'objet porte deja ce code, la reference inventee est retiree"
+    },
+    {
+      "object_id": "1NSI-ADGK-ME-002",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-002.tex",
+      "classification": "TYPO_OR_ALIAS",
+      "removed": [
+        "1NSI-ALGO-DICHO-GLOUTON-KNN-C2"
+      ],
+      "reason": "identifiant forge en collant le nom du chapitre au code local ; l'objet porte deja ce code, la reference inventee est retiree"
+    },
+    {
+      "object_id": "1NSI-ADGK-ME-003",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-003.tex",
+      "classification": "TYPO_OR_ALIAS",
+      "removed": [
+        "1NSI-ALGO-DICHO-GLOUTON-KNN-C3"
+      ],
+      "reason": "identifiant forge en collant le nom du chapitre au code local ; l'objet porte deja ce code, la reference inventee est retiree"
+    },
+    {
+      "object_id": "1SPE-GEOREP-COURS-00",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/cours/00_ouverture.tex",
+      "classification": "LOCAL_CODE_IN_WRONG_FIELD",
+      "moved": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "reason": "codes de chapitre ecrits dans le champ reserve aux identifiants d'atome ; deplaces vers `capacites_codes`, que le contrat sait resoudre"
+    },
+    {
+      "object_id": "1SPE-GEOREP-COURS-07-FR",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/cours/07_td_fil_rouge.tex",
+      "classification": "LOCAL_CODE_IN_WRONG_FIELD",
+      "moved": [
+        "C1",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "reason": "codes de chapitre ecrits dans le champ reserve aux identifiants d'atome ; deplaces vers `capacites_codes`, que le contrat sait resoudre"
+    },
+    {
+      "object_id": "1SPE-GEOREP-COURS-07-TC",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/cours/07_td_contextualise.tex",
+      "classification": "LOCAL_CODE_IN_WRONG_FIELD",
+      "moved": [
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "reason": "codes de chapitre ecrits dans le champ reserve aux identifiants d'atome ; deplaces vers `capacites_codes`, que le contrat sait resoudre"
+    },
+    {
+      "object_id": "1SPE-SECDEG-CR-000",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/00_ouverture.tex",
+      "classification": "LOCAL_CODE_IN_WRONG_FIELD",
+      "moved": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6"
+      ],
+      "reason": "codes de chapitre ecrits dans le champ reserve aux identifiants d'atome ; deplaces vers `capacites_codes`, que le contrat sait resoudre"
+    },
+    {
+      "object_id": "1SPE-SUITES-COURS-00",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/00_ouverture.tex",
+      "classification": "LOCAL_CODE_IN_WRONG_FIELD",
+      "moved": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6",
+        "C7",
+        "C8"
+      ],
+      "reason": "codes de chapitre ecrits dans le champ reserve aux identifiants d'atome ; deplaces vers `capacites_codes`, que le contrat sait resoudre"
+    },
+    {
+      "object_id": "1SPE-SUITES-COURS-07-FR",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/07_td_fil_rouge.tex",
+      "classification": "LOCAL_CODE_IN_WRONG_FIELD",
+      "moved": [
+        "C2",
+        "C3",
+        "C6",
+        "C7"
+      ],
+      "reason": "codes de chapitre ecrits dans le champ reserve aux identifiants d'atome ; deplaces vers `capacites_codes`, que le contrat sait resoudre"
+    },
+    {
+      "object_id": "1SPE-SUITES-COURS-07-TC",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/07_td_contextualise.tex",
+      "classification": "LOCAL_CODE_IN_WRONG_FIELD",
+      "moved": [
+        "C3",
+        "C5",
+        "C6",
+        "C7"
+      ],
+      "reason": "codes de chapitre ecrits dans le champ reserve aux identifiants d'atome ; deplaces vers `capacites_codes`, que le contrat sait resoudre"
+    },
+    {
+      "object_id": "TSPE-CONTIN-COURS-07-FR",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/cours/07_td_fil_rouge.tex",
+      "classification": "LOCAL_CODE_IN_WRONG_FIELD",
+      "moved": [
+        "C1",
+        "C2"
+      ],
+      "reason": "codes de chapitre ecrits dans le champ reserve aux identifiants d'atome ; deplaces vers `capacites_codes`, que le contrat sait resoudre"
+    },
+    {
+      "object_id": "TSPE-CONTIN-COURS-07-TC",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/cours/07_td_contextualise.tex",
+      "classification": "LOCAL_CODE_IN_WRONG_FIELD",
+      "moved": [
+        "C1",
+        "C2"
+      ],
+      "reason": "codes de chapitre ecrits dans le champ reserve aux identifiants d'atome ; deplaces vers `capacites_codes`, que le contrat sait resoudre"
+    },
+    {
+      "object_id": "TSPE-DERCONV-COURS-07-FR",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/cours/07_td_fil_rouge.tex",
+      "classification": "LOCAL_CODE_IN_WRONG_FIELD",
+      "moved": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6"
+      ],
+      "reason": "codes de chapitre ecrits dans le champ reserve aux identifiants d'atome ; deplaces vers `capacites_codes`, que le contrat sait resoudre"
+    },
+    {
+      "object_id": "TSPE-DERCONV-COURS-07-TC",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/cours/07_td_contextualise.tex",
+      "classification": "LOCAL_CODE_IN_WRONG_FIELD",
+      "moved": [
+        "C1",
+        "C2",
+        "C3",
+        "C6"
+      ],
+      "reason": "codes de chapitre ecrits dans le champ reserve aux identifiants d'atome ; deplaces vers `capacites_codes`, que le contrat sait resoudre"
+    },
+    {
+      "object_id": "TSPE-LIMFCT-COURS-07-FR",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/cours/07_td_fil_rouge.tex",
+      "classification": "LOCAL_CODE_IN_WRONG_FIELD",
+      "moved": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "reason": "codes de chapitre ecrits dans le champ reserve aux identifiants d'atome ; deplaces vers `capacites_codes`, que le contrat sait resoudre"
+    },
+    {
+      "object_id": "TSPE-LIMFCT-COURS-07-TC",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/cours/07_td_contextualise.tex",
+      "classification": "LOCAL_CODE_IN_WRONG_FIELD",
+      "moved": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "reason": "codes de chapitre ecrits dans le champ reserve aux identifiants d'atome ; deplaces vers `capacites_codes`, que le contrat sait resoudre"
+    },
+    {
+      "object_id": "TSPE-SUITLIM-COURS-07-FR",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/cours/07_td_fil_rouge.tex",
+      "classification": "LOCAL_CODE_IN_WRONG_FIELD",
+      "moved": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6",
+        "C7"
+      ],
+      "reason": "codes de chapitre ecrits dans le champ reserve aux identifiants d'atome ; deplaces vers `capacites_codes`, que le contrat sait resoudre"
+    },
+    {
+      "object_id": "TSPE-SUITLIM-COURS-07-TC",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/cours/07_td_contextualise.tex",
+      "classification": "LOCAL_CODE_IN_WRONG_FIELD",
+      "moved": [
+        "C1",
+        "C3",
+        "C5",
+        "C6"
+      ],
+      "reason": "codes de chapitre ecrits dans le champ reserve aux identifiants d'atome ; deplaces vers `capacites_codes`, que le contrat sait resoudre"
+    }
+  ],
+  "referential_entries": [
+    {
+      "capacity_id": "TCOMPL-ATT-C7",
+      "referential": "Mathematiques/manuel-maths/referentiel/capacites_TCOMPL_TEMPS-ATTENTE.json",
+      "declared_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/contrat.yaml",
+      "classification": "MISSING_REFERENTIAL_ENTRY",
+      "already_present": true,
+      "reason": "le contrat de chapitre declare cette capacite depuis l'origine ; le referentiel ne l'avait jamais recue"
+    },
+    {
+      "capacity_id": "TCOMPL-ECH-C7",
+      "referential": "Mathematiques/manuel-maths/referentiel/capacites_TCOMPL_ECHANTILLONNAGE.json",
+      "declared_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/contrat.yaml",
+      "classification": "MISSING_REFERENTIAL_ENTRY",
+      "already_present": true,
+      "reason": "le contrat de chapitre declare cette capacite depuis l'origine ; le referentiel ne l'avait jamais recue"
+    },
+    {
+      "capacity_id": "TCOMPL-ME-C6",
+      "referential": "Mathematiques/manuel-maths/referentiel/capacites_TCOMPL_MODELES-EVOLUTION.json",
+      "declared_by": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/contrat.yaml",
+      "classification": "MISSING_REFERENTIAL_ENTRY",
+      "already_present": true,
+      "reason": "le contrat de chapitre declare cette capacite depuis l'origine ; le referentiel ne l'avait jamais recue"
+    }
+  ]
+}

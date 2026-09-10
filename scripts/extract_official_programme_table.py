@@ -45,11 +45,21 @@ ROOT = Path(__file__).resolve().parents[1]
 #: les commentaires y eclairent la mise en oeuvre sans ajouter d'attendu.
 COLUMNS = ("Contenus", "Capacités attendues", "Commentaires")
 HEADER_CELLS = ("contenus", "capacites attendues", "commentaires")
+#: Bandeau de pied de page, present sur chaque page du BO. Un passage qui
+#: franchit une page le ramasserait au milieu de son texte.
+FOOTER = re.compile(r"©\s*Minist[èe]re|www\.education\.gouv\.fr")
 #: Les titres de rubrique sont composes en corps 14, le texte courant en 11.
 HEADING_MIN_SIZE = 12.5
+#: Ecart tolere, en points, entre l'ordonnee d'une ligne et celle de ses
+#: caracteres.
+MARGE_DE_LIGNE = 2.0
 #: Une phrase se termine par un point ou un point-virgule suivi d'une majuscule.
 #: Le decoupage ne coupe donc pas « (taille, encadrement de la hauteur, etc.). ».
 SENTENCE = re.compile(r"(?<=[.;])\s+(?=[A-ZÀ-ÖØ-Þ«])")
+#: Dans le preambule, les exigences se presentent aussi en listes dont chaque
+#: element se termine par un point-virgule et commence en minuscule. Ne couper
+#: que devant une majuscule y aurait ramasse six competences en un seul item.
+SENTENCE_PREAMBULE = re.compile(r"(?<=[.;])\s+")
 MIN_ITEM_LEN = 8
 
 
@@ -123,11 +133,78 @@ def sections_de_preambule(
     return trouves
 
 
+def lignes_de_page(page: pdfplumber.page.Page) -> list[tuple[float, str]]:
+    """Lignes de la page, dans l'ordre, avec leur ordonnee.
+
+    On s'appuie sur le decoupage de pdfplumber plutot que sur un regroupement
+    par ordonnee arrondie : deux lignes voisines s'y confondaient, et leurs
+    mots ressortaient melanges -- « Elle permet a jusqu'a la remettre en cause
+    [...] chacun de faire evoluer sa pensee ».
+    """
+    return [
+        (float(ligne["top"]), ligne["text"]) for ligne in page.extract_text_lines()
+    ]
+
+
+def passages_de_preambule(
+    page: pdfplumber.page.Page, passages: tuple[tuple[str, str], ...]
+) -> list[tuple[str, str]]:
+    """Recupere des passages prescriptifs du preambule, designes par une amorce.
+
+    Certaines exigences du preambule n'ont pas de titre a elles : le programme
+    les introduit par une phrase (« Il permet de developper des competences : »)
+    au fil du texte. Les objets du manuel s'y referent pourtant, sous un
+    espace de noms qui leur est propre. Les laisser hors de l'inventaire
+    faisait de ces references des capacites fantomes -- des metadonnees bien
+    remplies designant quelque chose qui n'existe pas.
+
+    Chaque passage est DECLARE par son amorce, jamais devine : deviner quelles
+    phrases d'un preambule sont prescriptives demanderait un jugement que ce
+    script n'a pas a rendre seul.
+    """
+    if not passages:
+        return []
+    lignes = plignes = lignes_de_page(page)
+    titres = [y for y, _ in titres_de_page(page)]
+    bas_tableau = min((t.bbox[1] for t in page.find_tables()), default=page.height)
+    trouves: list[tuple[str, str]] = []
+    for slug, amorce in passages:
+        depart = next(
+            (i for i, (_, texte) in enumerate(plignes) if re.search(amorce, texte)),
+            None,
+        )
+        if depart is None:
+            continue
+        y_depart = lignes[depart][0]
+        fins = [y for y in titres if y > y_depart] + [
+            y for y, _ in (
+                (ly, lt) for ly, lt in plignes
+                if ly > y_depart
+                and any(re.search(a, lt) for s2, a in passages if s2 != slug)
+            )
+        ] + [bas_tableau]
+        y_fin = min(fins)
+        # La marge absorbe l'ecart de quelques points entre l'ordonnee d'une
+        # ligne et celle de ses caracteres : sans elle, le titre suivant --
+        # « Demarche de projet » -- se retrouvait aspire dans le passage.
+        # Les pieds de page sont ecartes : un passage qui franchit une page en
+        # ramassait le bandeau du ministere.
+        corps = " ".join(
+            texte for y, texte in lignes
+            if y_depart <= y < y_fin - MARGE_DE_LIGNE and not FOOTER.search(texte)
+        )
+        corps = re.sub(r"\s+", " ", corps).strip()
+        if corps:
+            trouves.append((slug, corps))
+    return trouves
+
+
 def extract(
     pdf_path: Path,
     authority: str,
     manual: str,
     preamble_sections: tuple[str, ...] = (),
+    preamble_passages: tuple[tuple[str, str], ...] = (),
 ) -> dict[str, Any]:
     items: list[dict[str, Any]] = []
     rejets: list[dict[str, Any]] = []
@@ -139,9 +216,17 @@ def extract(
 
     with pdfplumber.open(str(pdf_path)) as pdf:
         for numero_page, page in enumerate(pdf.pages, start=1):
-            for titre, corps in sections_de_preambule(page, preamble_sections):
+            prescriptifs = [
+                (titre, corps, pn.PROJECT_REQUIREMENT)
+                for titre, corps in sections_de_preambule(page, preamble_sections)
+            ]
+            descriptifs = [
+                (slug, texte, pn.for_preamble_passage(slug))
+                for slug, texte in passages_de_preambule(page, preamble_passages)
+            ]
+            for titre, corps, portee_p in prescriptifs + descriptifs:
                 for rang, phrase in enumerate(
-                    (m.strip() for m in SENTENCE.split(corps)), start=1
+                    (m.strip() for m in SENTENCE_PREAMBULE.split(corps)), start=1
                 ):
                     if len(phrase) < MIN_ITEM_LEN:
                         continue
@@ -149,7 +234,7 @@ def extract(
                     items.append({
                         "official_id": "::".join(
                             [authority, _slug(titre),
-                             pn.PROJECT_REQUIREMENT.local_kind, empreinte]
+                             portee_p.local_kind, empreinte]
                         ),
                         "locally_assigned_identifier": True,
                         "manual": manual,
@@ -160,15 +245,15 @@ def extract(
                         "official_heading": titre,
                         "official_rubric": titre,
                         "official_rubric_index": rang,
-                        "official_normativity": pn.PROJECT_REQUIREMENT.normativity,
-                        "normativity_basis": pn.PROJECT_REQUIREMENT.basis,
-                        "local_kind": pn.PROJECT_REQUIREMENT.local_kind,
+                        "official_normativity": portee_p.normativity,
+                        "normativity_basis": portee_p.basis,
+                        "local_kind": portee_p.local_kind,
                         "exact_example_imposed": True,
                         "official_row": None,
                         "rubric_is_implicit_in_source": False,
                         "official_wording": phrase,
-                        "kind": pn.PROJECT_REQUIREMENT.local_kind,
-                        "mandatory": pn.PROJECT_REQUIREMENT.mandatory,
+                        "kind": portee_p.local_kind,
+                        "mandatory": portee_p.mandatory,
                         "source_page_or_anchor": f"page={numero_page};preamble={_slug(titre)}",
                     })
                 if titre not in rubriques:

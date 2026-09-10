@@ -5,14 +5,14 @@
   "note": "Aucun compteur n'est saisi ici : chacun est lu dans l'artefact qui le produit, et cite son chemin.",
   "metrics": {
     "CANONICAL_OFFICIAL_ITEMS_APPLICABLE": {
-      "value": 932,
+      "value": 965,
       "artifact": "audit/OFFICIAL_PROGRAMME_INVENTORY.json",
       "pointer": [
         "official_items_applicable"
       ]
     },
     "CANONICAL_OFFICIAL_ITEMS_MANDATORY": {
-      "value": 694,
+      "value": 643,
       "artifact": "audit/OFFICIAL_PROGRAMME_INVENTORY.json",
       "pointer": [
         "official_items_mandatory"
@@ -26,7 +26,7 @@
       ]
     },
     "INTERNAL_ATOMS": {
-      "value": 313,
+      "value": 316,
       "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
       "pointer": [
         "summary",
@@ -34,7 +34,7 @@
       ]
     },
     "INTERNAL_ATOMS_CONFIRMED_PARENT": {
-      "value": 279,
+      "value": 281,
       "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
       "pointer": [
         "summary",
@@ -42,7 +42,7 @@
       ]
     },
     "INTERNAL_ATOMS_CONFIRMED_BY_CONTEXT": {
-      "value": 110,
+      "value": 112,
       "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
       "pointer": [
         "summary",
@@ -51,7 +51,7 @@
       "reading": "rattachements etablis par la structure des deux sources : la partie du programme que le chapitre traite, et le libelle de l'attendu a l'interieur de cette partie. Ce n'est pas une approbation humaine ; la preuve est publiee avec chaque lien."
     },
     "INTERNAL_ATOMS_AMBIGUOUS_REQUIRES_HUMAN": {
-      "value": 34,
+      "value": 35,
       "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
       "pointer": [
         "summary",
@@ -60,7 +60,7 @@
       "reading": "atomes qu'aucune preuve objective ne tranche. Ils ne portent aucun parent et attendent un arbitrage ; chacun est classe (subdivision pedagogique, enrichissement, programme perime, atome obsolete)."
     },
     "INTERNAL_ATOMS_UNRESOLVED": {
-      "value": 34,
+      "value": 35,
       "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
       "pointer": [
         "summary",
@@ -68,7 +68,7 @@
       ]
     },
     "INTERNAL_ATOM_WITHOUT_CONFIRMED_PARENT": {
-      "value": 34,
+      "value": 35,
       "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
       "pointer": [
         "summary",
@@ -77,7 +77,7 @@
       "reading": "atomes internes dont le parent officiel n'est pas etabli : la somme des propositions en attente et des atomes sans candidat."
     },
     "OFFICIAL_REQUIRED_UNMAPPED": {
-      "value": 418,
+      "value": 369,
       "artifact": "audit/OFFICIAL_PROGRAMME_BINDING.json",
       "pointer": [
         "summary",
@@ -136,7 +136,7 @@
       ]
     },
     "DIFF_1SPE_ADDED_2026_MANDATORY": {
-      "value": 28,
+      "value": 27,
       "artifact": "audit/1SPE_PROGRAMME_DIFF_2019_2026.json",
       "pointer": [
         "summary",
@@ -169,7 +169,7 @@
       ]
     },
     "OFFICIAL_REQUIRED_COMPLETE": {
-      "value": 619,
+      "value": 567,
       "artifact": "audit/OFFICIAL_TO_MANUAL_COVERAGE.json",
       "pointer": [
         "summary",
@@ -177,7 +177,7 @@
       ]
     },
     "OFFICIAL_REQUIRED_PARTIAL": {
-      "value": 45,
+      "value": 44,
       "artifact": "audit/OFFICIAL_TO_MANUAL_COVERAGE.json",
       "pointer": [
         "summary",
@@ -185,7 +185,7 @@
       ]
     },
     "OFFICIAL_REQUIRED_MISSING": {
-      "value": 13,
+      "value": 11,
       "artifact": "audit/OFFICIAL_TO_MANUAL_COVERAGE.json",
       "pointer": [
         "summary",
@@ -194,7 +194,7 @@
       "reading": "attendus obligatoires dont AUCUN objet du manuel ne porte la trace. A distinguer de OFFICIAL_REQUIRED_UNMAPPED, qui ne dit que l'absence de rattachement etabli entre le referentiel interne et le BO."
     },
     "OFFICIAL_REQUIRED_INSTITUTIONAL": {
-      "value": 14,
+      "value": 18,
       "artifact": "audit/OFFICIAL_TO_MANUAL_COVERAGE.json",
       "pointer": [
         "summary",
@@ -217,6 +217,48 @@
       "pointer": [
         "summary",
         "objects_indexed"
+      ]
+    },
+    "NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK": {
+      "value": 4,
+      "artifact": "audit/OFFICIAL_TO_MANUAL_COVERAGE.json",
+      "pointer": [
+        "summary",
+        "NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK"
+      ],
+      "reading": "exigence de la COLLECTION, pas du programme : parties accompagnees d'exemples d'algorithme officiels ou le manuel n'offre aucun travail algorithmique."
+    },
+    "NORMATIVITY_CREATED_BY_ATOMIZATION": {
+      "value": 0,
+      "artifact": "audit/NORMATIVITY_PROVENANCE_GATE.json",
+      "pointer": [
+        "summary",
+        "NORMATIVITY_CREATED_BY_ATOMIZATION"
+      ],
+      "reading": "attendus publies comme obligatoires alors que la rubrique du BO dont ils viennent ne l'est pas. C'est le risque propre a toute chaine d'atomisation : personne ne ment, le niveau d'obligation est cree par le traitement."
+    },
+    "MANDATORY_COUNT_BEFORE": {
+      "value": 694,
+      "artifact": "audit/NORMATIVITY_PROVENANCE_GATE.json",
+      "pointer": [
+        "summary",
+        "MANDATORY_COUNT_BEFORE"
+      ]
+    },
+    "MANDATORY_COUNT_AFTER": {
+      "value": 643,
+      "artifact": "audit/NORMATIVITY_PROVENANCE_GATE.json",
+      "pointer": [
+        "summary",
+        "MANDATORY_COUNT_AFTER"
+      ]
+    },
+    "CHANGED_NORMATIVITY_ITEMS": {
+      "value": 82,
+      "artifact": "audit/NORMATIVITY_PROVENANCE_GATE.json",
+      "pointer": [
+        "summary",
+        "CHANGED_NORMATIVITY_ITEMS"
       ]
     },
     "AUTOMATISMS_1SPE_ADEQUATELY_REINVESTED": {
@@ -313,7 +355,7 @@
       "reading": "objets du manuel qui reprennent un attendu d'un programme ne regissant pas cette edition, sur des notions absentes du programme en vigueur."
     },
     "OBJECTS_CITING_AN_UNKNOWN_CAPACITY": {
-      "value": 64,
+      "value": 0,
       "artifact": "audit/OBJECTS_TO_OFFICIAL_REVERSE_MAP.json",
       "pointer": [
         "summary",

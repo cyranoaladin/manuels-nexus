@@ -25,7 +25,12 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from build_official_to_manual_coverage import _sans_accents, racine, termes_distinctifs
+from build_official_to_manual_coverage import (
+    _sans_accents,
+    _slug_preambule,
+    racine,
+    termes_distinctifs,
+)
 from manual_objects import charger_contrats, charger_objets, charger_transversaux
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -116,11 +121,27 @@ def main(argv: list[str] | None = None) -> int:
     # jamais cree, et des competences du preambule qui n'ont pas d'entree dans
     # les referentiels.
     atomes_connus = {lien["atom_id"] for lien in liaison["bindings"]}
+    # « BO-PREAMBULE-... » n'est pas une capacite disciplinaire : c'est une
+    # reference au preambule du programme, dans son espace de noms propre. Elle
+    # est connue des lors que l'inventaire officiel porte la partie qu'elle
+    # designe -- ce qui evite a la fois d'inventer une fausse capacite et de
+    # compter une reference legitime parmi les fantomes.
+    parties_de_preambule = {
+        (ligne["manual"], _slug_preambule(ligne["official_subsection"] or ""))
+        for ligne in couverture["rows"]
+        if ligne["official_section"] == "Préambule"
+    }
     references_pendantes: dict[str, list[str]] = defaultdict(list)
     for objet in objets:
         for atome in objet.atoms:
-            if atome not in atomes_connus:
-                references_pendantes[atome].append(objet.object_id)
+            if atome in atomes_connus:
+                continue
+            if atome.startswith("BO-PREAMBULE-") and (
+                objet.manual,
+                atome.removeprefix("BO-PREAMBULE-"),
+            ) in parties_de_preambule:
+                continue
+            references_pendantes[atome].append(objet.object_id)
 
     lignes: list[dict[str, Any]] = []
     textes: dict[str, str] = {}

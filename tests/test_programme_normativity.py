@@ -58,18 +58,23 @@ def test_un_approfondissement_possible_n_est_jamais_obligatoire(items):
     assert all("en aucun cas obligatoires" in i["normativity_basis"] for i in enrichissements)
 
 
-def test_un_exemple_d_algorithme_prescrit_le_travail_pas_l_exemple(items):
+def test_un_exemple_d_algorithme_n_entre_pas_au_denominateur(items):
     """Le BO intitule cette rubrique « Exemples d'algorithme ».
 
-    Le travail algorithmique sur le theme est prescrit ; l'exemple cite ne
-    l'est pas. Confondre les deux imposerait au manuel d'implementer
-    exactement l'algorithme du programme, ce que le texte ne demande pas.
+    Aucun passage du texte ne les rend exigibles : ni l'organisation du
+    programme, ni la partie « Algorithmique et programmation ». Les compter
+    comme obligatoires reviendrait a fabriquer un niveau d'obligation que le
+    ministere n'a pas ecrit -- et a exiger du manuel qu'il implemente
+    exactement l'algorithme cite.
+
+    Que la partie concernee comporte un travail algorithmique reel est une
+    exigence de la collection, controlee sous son propre nom.
     """
     exemples = [i for i in items if i["local_kind"] == "ALGORITHM_EXAMPLE"]
     assert exemples
     for item in exemples:
-        assert item["official_normativity"] == pn.PRESCRIBED_ALGORITHMIC_WORK
-        assert item["mandatory"] is True
+        assert item["official_normativity"] == pn.ILLUSTRATIVE_EXAMPLE
+        assert item["mandatory"] is False
         assert item["exact_example_imposed"] is False
         assert "Exemple" in (item["official_heading"] or "")
 

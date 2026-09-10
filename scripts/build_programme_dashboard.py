@@ -92,6 +92,17 @@ LECTURES: dict[str, str] = {
         "remedier. Le programme demande que les automatismes de seconde soient "
         "entretenus en premiere."
     ),
+    "NORMATIVITY_CREATED_BY_ATOMIZATION": (
+        "attendus publies comme obligatoires alors que la rubrique du BO dont "
+        "ils viennent ne l'est pas. C'est le risque propre a toute chaine "
+        "d'atomisation : personne ne ment, le niveau d'obligation est cree par "
+        "le traitement."
+    ),
+    "NEXUS_ALGORITHMIC_QUALITY_PARTS_WITHOUT_WORK": (
+        "exigence de la COLLECTION, pas du programme : parties accompagnees "
+        "d'exemples d'algorithme officiels ou le manuel n'offre aucun travail "
+        "algorithmique."
+    ),
     "FUTURE_PROGRAM_CONTAMINATION": (
         "objets du manuel qui reprennent un attendu d'un programme ne "
         "regissant pas cette edition, sur des notions absentes du programme "
