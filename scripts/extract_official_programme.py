@@ -129,9 +129,16 @@ def is_heading(nue: str) -> bool:
 
 #: Nature par defaut des puces d'une section quand le BO n'ouvre aucune rubrique
 #: nommee. Le texte ne libelle pas toujours ses listes d'attendus : la « Notion
-#: de liste » enumere quatre capacites de programmation sous une simple prose.
+#: de liste » de 2026 enumere quatre capacites sous une simple prose, la ou
+#: 2019 les rangeait sous « Capacites attendues ».
+#:
+#: Seule la partie « Automatismes » a une nature propre, parce que le BO la
+#: nomme ainsi. Ailleurs, une liste non intitulee reste une capacite attendue :
+#: lui inventer une categorie -- « capacite de programmation » pour la section
+#: d'algorithmique, par exemple -- faisait apparaitre en 2026 quatre attendus
+#: « ajoutes » et en 2019 les memes quatre « retires », alors que le texte est
+#: mot pour mot le meme et que seul son intitule de rubrique avait bouge.
 SECTION_DEFAULT_KIND: dict[str, str] = {
-    "algorithmique et programmation": "PROGRAMMING_CAPACITY",
     "automatismes": "AUTOMATISM",
 }
 DEFAULT_KIND = "EXPECTED_CAPACITY"
@@ -445,7 +452,14 @@ def extract(
             # les domaines se succedent sans rubrique intercalaire : les traiter
             # en sous-titres les aurait tous fondus dans le premier.
             subsection, subheading, rubric = titre_nu, None, None
-        elif suit_une_puce and not detache:
+        elif suit_une_puce and rubric is not None:
+            # Un titre suivi directement de puces, alors qu'une rubrique est
+            # ouverte, regroupe ces puces a l'interieur de la rubrique : c'est
+            # un sous-titre. Une sous-section, elle, s'ouvre toujours sur une
+            # rubrique ou sur un paragraphe de presentation. Le critere ne peut
+            # pas etre la seule presence d'un blanc au-dessus : le BO de 2019
+            # detache « Point de vue local » d'une ligne vide, et le prendre
+            # pour une sous-section faisait disparaitre « Derivation ».
             subheading = titre_nu
         else:
             subsection, subheading, rubric = titre_nu, None, None

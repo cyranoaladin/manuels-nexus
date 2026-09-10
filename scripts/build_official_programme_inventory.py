@@ -153,6 +153,30 @@ DOCUMENTS: tuple[dict[str, Any], ...] = (
         ),
     },
     {
+        "manual": "1SPE",
+        "authority_ref": "MENE1901632A",
+        "layout": "bullets",
+        "source": "Mathematiques/manuel-maths/sources/txt/BO2019_1SPE_specialite.txt",
+        "effective_from": "2019-09-01",
+        "effective_until": "2026-08-31",
+        "applies_to_edition": False,
+        "sections": (
+            "Algèbre",
+            "Analyse",
+            "Géométrie",
+            "Probabilités et statistiques",
+            "Algorithmique et programmation",
+            "Vocabulaire ensembliste et logique",
+        ),
+        "note": (
+            "Programme de premiere de 2019, remplace par MENE2602917A a la "
+            "rentree 2026. Il n'est plus applicable, mais reste inventorie : "
+            "sans lui, on ne pourrait pas dire ce que la reforme de 2026 a "
+            "ajoute, retire ou reformule, ni reconnaitre qu'un chapitre est "
+            "reste adosse au programme d'avant."
+        ),
+    },
+    {
         "manual": "TSPE",
         "authority_ref": "MENE2602919A",
         "layout": "bullets",

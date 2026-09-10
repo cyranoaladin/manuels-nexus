@@ -117,16 +117,27 @@ def test_les_identifiants_sont_declares_techniques_et_uniques(inventaires):
         assert all(i["locally_assigned_identifier"] is True for i in charge["items"])
 
 
-def test_le_programme_de_terminale_de_2026_ne_regit_pas_l_edition(index, inventaires):
-    """Il s'applique a la rentree 2027, donc pas au manuel 2026-2027.
+def test_un_programme_hors_edition_est_soit_a_venir_soit_perime(index, inventaires):
+    """Deux textes sont inventories sans regir l'edition, pour deux raisons.
 
-    Il est extrait quand meme : sans lui, rien ne permettrait de detecter
-    qu'un chapitre de terminale s'adosserait par avance a ce texte.
+    Celui de terminale du 26-02-2026 s'applique a la rentree 2027 : sans lui,
+    rien ne permettrait de detecter qu'un chapitre s'y adosserait par avance.
+    Celui de premiere de 2019 est perime : sans lui, on ne pourrait pas dire
+    ce que la reforme a ajoute, retire ou reformule.
+
+    Les confondre serait une erreur de sens : l'un est un risque d'anticipation,
+    l'autre un point de comparaison. Chacun doit donc porter la date qui dit
+    laquelle des deux situations est la sienne.
     """
-    futurs = [e for e in index["documents"] if not e["applies_to_edition"]]
-    assert futurs, "le programme de terminale de 2026 doit rester inventorie"
-    for e in futurs:
-        assert e["effective_from"] > "2027-01-01"
+    debut = "2026-09-01"
+    hors = [e for e in index["documents"] if not e["applies_to_edition"]]
+    assert hors, "les programmes hors edition doivent rester inventories"
+    a_venir = [e for e in hors if e["effective_from"] > debut]
+    perimes = [e for e in hors if e["effective_until"] and e["effective_until"] < debut]
+    assert a_venir, "le programme de terminale de 2026 doit rester inventorie"
+    assert perimes, "le programme de premiere de 2019 doit rester inventorie"
+    assert len(a_venir) + len(perimes) == len(hors)
+    for e in hors:
         charge = inventaires[(e["manual"], e["authority_ref"])]
         assert all(
             i["applies_to_edition_2026_2027"] is False for i in charge["items"]
