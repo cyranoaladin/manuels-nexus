@@ -76,6 +76,9 @@ table[0]["points"]    # 17, un entier, pas '17'
     \lstinline{len(table[0]) == 1}, c'est le symptôme.
   \item Oublier \lstinline{encoding="utf-8"} : les accents deviennent illisibles selon la
     machine, et le même programme donne deux résultats différents.
+  \item \textbf{Convertir une seule ligne.} \lstinline{table[0]["prix"] = float(...)} ne
+    touche que la première : les autres restent des chaînes, et la comparaison qui suit sera
+    fausse sans rien signaler. La conversion se fait dans la boucle, pour toutes les lignes.
 \end{itemize}
 
 \textbf{Vérifier :} affiche \lstinline{len(table)} — le compte doit valoir le nombre de

@@ -75,6 +75,9 @@ def moyenne_ponderee(valeurs, poids):
     bugs, au lieu de ce qu'il devait faire.
   \item Oublier de dire ce qui \textbf{n'est pas} modifié. « Ne modifie pas ses arguments »
     est une postcondition à part entière, et l'appelant en dépend.
+  \item \textbf{Décrire l'implémentation au lieu du contrat.} « La fonction fait une boucle
+    sur la liste » ne dit rien à l'appelant : ni ce qu'il doit fournir, ni ce qu'il obtiendra.
+    Une spécification parle de ce qui entre et de ce qui sort, jamais du chemin emprunté.
 \end{itemize}
 
 \textbf{Vérifier :} pour chaque précondition, écris un appel qui la viole et vérifie qu'il

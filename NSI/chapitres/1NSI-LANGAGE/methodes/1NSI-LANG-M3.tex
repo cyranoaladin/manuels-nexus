@@ -69,6 +69,9 @@ n'atteint jamais $6$ : la borne haute y est exclue, comme dans \lstinline{range}
     fausse.
   \item Ne pas fixer de graine quand on teste du hasard : le test passe une fois sur deux,
     et personne ne sait pourquoi. \lstinline{random.seed(...)} rend le tirage reproductible.
+  \item \textbf{Recopier le code de la bibliothèque dans son programme.} On alourdit le
+    fichier et surtout on se coupe des corrections ultérieures : la version recopiée gardera
+    ses bugs pour toujours. Un \lstinline{import} suffit.
 \end{itemize}
 
 \textbf{Vérifier :} tire mille valeurs et regarde le minimum et le maximum obtenus. Ils

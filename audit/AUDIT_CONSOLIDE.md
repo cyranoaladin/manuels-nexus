@@ -104,8 +104,16 @@
 ### unassembled_objects (0)
 - Aucune.
 
-### unattributed_pdfs (0)
-- Aucune.
+### unattributed_pdfs (9)
+- source=HLP/01_REFERENCES_RECUPEREES/Programme_HLP_premiere.pdf, cible=HLP/01_REFERENCES_RECUPEREES/Programme_HLP_premiere.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=HLP/01_REFERENCES_RECUPEREES/programme_HLP_terminale.pdf, cible=HLP/01_REFERENCES_RECUPEREES/programme_HLP_terminale.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=HLP/01_REFERENCES_RECUPEREES/voie-g_hlp_version-consolidee-2024.pdf, cible=HLP/01_REFERENCES_RECUPEREES/voie-g_hlp_version-consolidee-2024.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=HLP/90_HGGSP_DOCUMENTATION_ET_MANUELS/01_MANUELS_PDF/HGGSP_2027_Compagnon_Autocorrection.pdf, cible=HLP/90_HGGSP_DOCUMENTATION_ET_MANUELS/01_MANUELS_PDF/HGGSP_2027_Compagnon_Autocorrection.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=HLP/90_HGGSP_DOCUMENTATION_ET_MANUELS/01_MANUELS_PDF/HGGSP_2027_Epreuves_Sujets_seuls.pdf, cible=HLP/90_HGGSP_DOCUMENTATION_ET_MANUELS/01_MANUELS_PDF/HGGSP_2027_Epreuves_Sujets_seuls.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=HLP/90_HGGSP_DOCUMENTATION_ET_MANUELS/01_MANUELS_PDF/HGGSP_2027_Epreuves_blanches_et_corriges.pdf, cible=HLP/90_HGGSP_DOCUMENTATION_ET_MANUELS/01_MANUELS_PDF/HGGSP_2027_Epreuves_blanches_et_corriges.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=HLP/90_HGGSP_DOCUMENTATION_ET_MANUELS/01_MANUELS_PDF/HGGSP_2027_Manuel_Cycle_terminal.pdf, cible=HLP/90_HGGSP_DOCUMENTATION_ET_MANUELS/01_MANUELS_PDF/HGGSP_2027_Manuel_Cycle_terminal.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=HLP/90_HGGSP_DOCUMENTATION_ET_MANUELS/01_MANUELS_PDF/HGGSP_2027_Niveau_1_Premiere.pdf, cible=HLP/90_HGGSP_DOCUMENTATION_ET_MANUELS/01_MANUELS_PDF/HGGSP_2027_Niveau_1_Premiere.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=HLP/90_HGGSP_DOCUMENTATION_ET_MANUELS/04_TRACES_ET_RECUPERATION/HGGSP_Traces_Facsimile_Partiel.pdf, cible=HLP/90_HGGSP_DOCUMENTATION_ET_MANUELS/04_TRACES_ET_RECUPERATION/HGGSP_Traces_Facsimile_Partiel.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
 
 ### unavailable_inspiration_sources (0)
 - Aucune.

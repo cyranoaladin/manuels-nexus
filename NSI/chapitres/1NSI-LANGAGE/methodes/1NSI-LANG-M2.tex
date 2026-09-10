@@ -85,6 +85,9 @@ assert est_recu(20) is True
   \item \textbf{Croire qu'un jeu de tests réussi prouve la correction.} Il prouve seulement
     que la fonction est correcte \textbf{sur ces cas-là}. La fonction qui renvoie toujours
     \lstinline{True} passe deux des trois tests ci-dessus.
+  \item \textbf{Croire qu'un programme qui ne plante pas est correct.} S'exécuter n'est pas
+    produire le bon résultat : une fonction peut renvoyer une valeur fausse sans la moindre
+    erreur, et c'est précisément ce que les tests doivent débusquer.
 \end{itemize}
 
 \textbf{Vérifier :} introduis volontairement un bug — change un \lstinline{>=} en

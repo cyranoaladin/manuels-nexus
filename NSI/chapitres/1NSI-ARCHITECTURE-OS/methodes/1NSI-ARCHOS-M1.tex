@@ -87,6 +87,10 @@ La séquence calcule $3 + 2 + 1 = 6$ : la somme des entiers de $1$ à $3$.
     Ici, \lstinline{JNZ R1, 2} regarde le \lstinline{R1} déjà décrémenté par la ligne $3$.
   \item Confondre une valeur et une adresse. \lstinline{LOAD R1, 3} charge le nombre $3$ ;
     charger \textbf{le contenu de la case} $3$ serait une autre instruction.
+  \item \textbf{Décrire l'architecture de Harvard en croyant décrire von Neumann.} Von
+    Neumann range programme et données dans la \textbf{même} mémoire ; Harvard les sépare.
+    Et sur un seul cœur, les instructions se suivent une à une : le parallélisme apparent
+    des applications ne se transpose pas au processeur.
 \end{itemize}
 
 \textbf{Vérifier :} relis la dernière ligne et demande-toi si le résultat a un sens

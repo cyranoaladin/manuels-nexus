@@ -67,6 +67,9 @@ par_classe = sorted(table, key=lambda ligne: (ligne["classe"], -ligne["points"])
     égales, l'ordre relatif serait inversé lui aussi. Utilise \lstinline{reverse=True}.
   \item Oublier que le tri est \textbf{stable} : deux lignes de même clé gardent leur ordre
     d'origine. C'est une garantie utile, pas un hasard — elle permet de trier en deux passes.
+  \item \textbf{Appeler \lstinline{sorted(table, ...)} sans garder le résultat.}
+    \lstinline{sorted} ne modifie pas la table : elle en renvoie une nouvelle. Lire ensuite
+    \lstinline{table[0]} en la croyant triée donne la première ligne d'origine.
 \end{itemize}
 
 \textbf{Vérifier :} contrôle que la table triée a exactement le \textbf{même nombre de

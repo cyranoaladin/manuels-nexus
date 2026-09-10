@@ -70,6 +70,10 @@ recus_1g2 = selection(
     s'écrit \lstinline{> 10}. Une ligne à exactement $10$ points distingue les deux.
   \item Modifier \lstinline{table} pendant qu'on la parcourt. Construis une nouvelle liste,
     ne supprime jamais dans celle qu'on lit.
+  \item \textbf{Oublier les parenthèses entre \lstinline{and} et \lstinline{or}.}
+    \lstinline{and} est prioritaire : \lstinline{a and b or c} se lit
+    \lstinline{(a and b) or c}, et sélectionne donc aussi tout ce qui vérifie \lstinline{c}
+    seul. Écris les parenthèses même quand tu crois qu'elles vont de soi.
 \end{itemize}
 
 \textbf{Vérifier :} compte les lignes sélectionnées, puis compte celles qui \textbf{ne} le

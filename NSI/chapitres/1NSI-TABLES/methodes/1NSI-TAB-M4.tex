@@ -83,6 +83,9 @@ def fusionner(gauche, droite, cle):
     de fusionner si les deux comptent.
   \item Comparer des clés de types différents : \lstinline{"12"} et \lstinline{12} ne
     s'apparient jamais. C'est encore la conversion oubliée à l'import.
+  \item \textbf{Choisir comme clé une colonne qui n'identifie rien.} \lstinline{genre} ou
+    \lstinline{classe} se répètent : la fusion apparie alors des lignes qui n'ont rien à voir
+    et le résultat paraît plausible. Une clé doit désigner \textbf{une} ligne et une seule.
 \end{itemize}
 
 \textbf{Vérifier :} compare \lstinline{len(jointe)} au nombre de clés réellement communes.

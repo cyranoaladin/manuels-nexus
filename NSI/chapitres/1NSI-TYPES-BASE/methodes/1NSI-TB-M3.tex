@@ -79,6 +79,10 @@ for a, b in product([False, True], repeat=2):
     mets les parenthèses.
   \item Conclure d'une seule ligne. Une ligne où les deux expressions coïncident ne prouve
     rien : il faut les $2^{n}$.
+  \item \textbf{Croire qu'un opérateur logique renvoie \lstinline{True} ou \lstinline{False}.}
+    En Python, \lstinline{and} et \lstinline{or} renvoient toujours \textbf{l'un de leurs
+    opérandes} : \lstinline{0 or "a"} vaut \lstinline{"a"}. Et \lstinline{None} n'est pas un
+    booléen — c'est l'absence de valeur, pas le faux.
 \end{itemize}
 
 \textbf{Vérifier :} compte tes lignes ($2^{n}$), puis vérifie qu'aucune combinaison n'est

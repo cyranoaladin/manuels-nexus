@@ -66,6 +66,10 @@ quel traitement ? & corps de la fonction & source, calcul, destination \\
     \lstinline{"20" + 32} donne \lstinline{"2032"} : l'addition concatène.
   \item Modifier trois choses puis tester : quand le résultat est faux, on ne sait plus
     laquelle est en cause.
+  \item \textbf{Mettre des parenthèses au gestionnaire.}
+    \lstinline{ajouter_gestionnaire("bouton", compter())} \textbf{appelle} la fonction tout de
+    suite et associe au bouton la \emph{valeur renvoyée} : le bouton devient inerte. Sans
+    parenthèses, on confie la fonction elle-même.
 \end{itemize}
 
 \textbf{Vérifier :} clique avec une valeur dont tu connais la réponse — $0\,^\circ$C doit

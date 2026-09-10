@@ -95,6 +95,9 @@ chacun. C'est exactement ce que le protocole promet.
   \item Croire qu'un seul bit ne suffit pas. Il suffit parce que l'émetteur n'a jamais plus
     d'un message en attente : il n'y a que deux cas à distinguer, « celui que j'attends » et
     « celui d'avant ».
+  \item \textbf{Passer au message suivant après une perte}, comme si le protocole
+    abandonnait. Il ne renonce jamais : il retransmet le même message, avec le même bit,
+    jusqu'à recevoir son accusé.
 \end{itemize}
 
 \textbf{Vérifier :} compte les messages délivrés par le récepteur. Ils doivent être

@@ -18,6 +18,7 @@
 | Catégorie | Nombre |
 |---|---|
 | blocking_statuses | 2750 |
+| unattributed_pdfs | 9 |
 
 ### Échantillon déterministe
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
@@ -25,6 +26,11 @@
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-003, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-004, scope=object
+- unattributed_pdfs: source=HLP/01_REFERENCES_RECUPEREES/Programme_HLP_premiere.pdf, cible=HLP/01_REFERENCES_RECUPEREES/Programme_HLP_premiere.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- unattributed_pdfs: source=HLP/01_REFERENCES_RECUPEREES/programme_HLP_terminale.pdf, cible=HLP/01_REFERENCES_RECUPEREES/programme_HLP_terminale.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- unattributed_pdfs: source=HLP/01_REFERENCES_RECUPEREES/voie-g_hlp_version-consolidee-2024.pdf, cible=HLP/01_REFERENCES_RECUPEREES/voie-g_hlp_version-consolidee-2024.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- unattributed_pdfs: source=HLP/90_HGGSP_DOCUMENTATION_ET_MANUELS/01_MANUELS_PDF/HGGSP_2027_Compagnon_Autocorrection.pdf, cible=HLP/90_HGGSP_DOCUMENTATION_ET_MANUELS/01_MANUELS_PDF/HGGSP_2027_Compagnon_Autocorrection.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- unattributed_pdfs: source=HLP/90_HGGSP_DOCUMENTATION_ET_MANUELS/01_MANUELS_PDF/HGGSP_2027_Epreuves_Sujets_seuls.pdf, cible=HLP/90_HGGSP_DOCUMENTATION_ET_MANUELS/01_MANUELS_PDF/HGGSP_2027_Epreuves_Sujets_seuls.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
 
 ## Réconciliation des rapports
 

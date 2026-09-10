@@ -89,6 +89,10 @@ def au_clic(saisie):
     fige au premier caractère inattendu.
   \item Confondre « le code existe » et « l'exigence est remplie ». Le contrôle se fait en
     manipulant l'interface, pas en relisant le programme.
+  \item \textbf{N'écrire qu'un seul seuil quand le cahier des charges en donne deux.} Avec
+    un seuil unique, la sortie bascule sans cesse autour de la valeur limite — une ventilation
+    qui s'allume et s'éteint en boucle. Deux seuils distincts créent la zone morte qui évite
+    ce clignotement, et c'est aux valeurs exactes des seuils qu'il faut tester.
 \end{itemize}
 
 \textbf{Vérifier :} reprends le tableau exigence par exigence et manipule l'interface pour

@@ -82,6 +82,10 @@ $ ls -l script.sh
     le fichier. Le bon réflexe est de chercher quel droit manque, pas de tous les donner.
   \item Oublier qu'un \textbf{dossier} a besoin du droit \lstinline{x} pour être traversé :
     un dossier lisible mais non exécutable ne laisse pas entrer dans son contenu.
+  \item \textbf{Répondre en lisant le mauvais triplet.} Le premier triplet est celui du
+    \textbf{propriétaire}, le deuxième celui du \textbf{groupe}, le troisième celui des
+    autres. Une question sur le groupe à laquelle on répond par le propriétaire donne une
+    réponse fausse alors que la lecture des lettres était juste.
 \end{itemize}
 
 \textbf{Vérifier :} refais \lstinline{ls -l} après le \lstinline{chmod} et retraduis les
