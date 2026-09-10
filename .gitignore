@@ -16,3 +16,13 @@ __pycache__/
 # et aucun script de la chaine de release n'en depend. Il est exclu de l'index
 # comme des balayages disque (cf. build_style_inventory / build_d7_proof_bundle).
 /Fiches_cours_exercices/
+
+# Collections etrangeres. Ce depot porte SIX manuels : 1SPE, TSPE_2026_2027,
+# TCOMPL, TEXPERTES, 1NSI, TNSI. HGGSP est traite par une instance independante
+# dans son propre chantier ; HLP n'appartient pas non plus a ces six manuels.
+# Un `git add -A` a deja fait entrer 58 Mo de HGGSP par le repertoire HLP/ :
+# l'exclusion est ici, dans l'index, et un gate la fait respecter.
+/HLP/
+/HGGSP/
+/_SAUVEGARDES_HGGSP/
+/AUDIT_HGGSP_*/
