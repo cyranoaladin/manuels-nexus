@@ -89,8 +89,12 @@ La séquence calcule $3 + 2 + 1 = 6$ : la somme des entiers de $1$ à $3$.
     charger \textbf{le contenu de la case} $3$ serait une autre instruction.
   \item \textbf{Décrire l'architecture de Harvard en croyant décrire von Neumann.} Von
     Neumann range programme et données dans la \textbf{même} mémoire ; Harvard les sépare.
-    Et sur un seul cœur, les instructions se suivent une à une : le parallélisme apparent
-    des applications ne se transpose pas au processeur.
+  \item \textbf{Confondre trois choses différentes.} Dans le modèle séquentiel employé
+    ici, on suit le flot d'instructions \textbf{une par une} : c'est ce qu'on déroule dans
+    le tableau. Cela ne dit rien de deux autres réalités, qui existent bel et bien mais ne
+    relèvent pas de ce déroulé — le système d'exploitation \emph{entrelace} l'exécution de
+    plusieurs processus, et un processeur moderne exploite du \emph{parallélisme interne}.
+    Ce qu'on trace ici est la séquence abstraite, pas ce que fait la machine physique.
 \end{itemize}
 
 \textbf{Vérifier :} relis la dernière ligne et demande-toi si le résultat a un sens

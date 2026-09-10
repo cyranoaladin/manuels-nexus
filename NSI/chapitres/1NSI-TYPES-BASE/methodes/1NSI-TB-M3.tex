@@ -65,6 +65,12 @@ for a, b in product([False, True], repeat=2):
 % # trois variables : huit lignes, aucune repetee
 % triplets = list(product([False, True], repeat=3))
 % assert len(triplets) == 8 and len(set(triplets)) == 8
+% # Ce que la fiche affirme sur les operateurs et sur None.
+% assert (0 or "a") == "a"
+% assert (3 and 7) == 7
+% assert None is not False
+% assert bool(None) is False
+% assert (None or "defaut") == "defaut"
 % END-VERIFY
 
 \textbf{Pièges :}
@@ -80,9 +86,14 @@ for a, b in product([False, True], repeat=2):
   \item Conclure d'une seule ligne. Une ligne où les deux expressions coïncident ne prouve
     rien : il faut les $2^{n}$.
   \item \textbf{Croire qu'un opérateur logique renvoie \lstinline{True} ou \lstinline{False}.}
-    En Python, \lstinline{and} et \lstinline{or} renvoient toujours \textbf{l'un de leurs
-    opérandes} : \lstinline{0 or "a"} vaut \lstinline{"a"}. Et \lstinline{None} n'est pas un
-    booléen — c'est l'absence de valeur, pas le faux.
+    En Python, \lstinline{and} et \lstinline{or} renvoient \textbf{l'un de leurs opérandes},
+    pas nécessairement un booléen : \lstinline{0 or "a"} vaut \lstinline{"a"}, et
+    \lstinline{3 and 7} vaut \lstinline{7}.
+  \item \textbf{Confondre \lstinline{None} et \lstinline{False}.} \lstinline{None} est une
+    valeur spéciale de Python, \textbf{distincte} du booléen \lstinline{False}, souvent
+    employée pour représenter l'absence d'une valeur. Dans un contexte booléen elle est
+    néanmoins évaluée comme fausse : \lstinline{None is not False}, et pourtant
+    \lstinline{bool(None)} vaut \lstinline{False}.
 \end{itemize}
 
 \textbf{Vérifier :} compte tes lignes ($2^{n}$), puis vérifie qu'aucune combinaison n'est
