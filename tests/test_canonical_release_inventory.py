@@ -73,7 +73,20 @@ def test_tex_roots_exact_partition(inventory: dict) -> None:
     assert summary["CANONICAL_RELEASE_ROOTS"] == 12
     assert summary["CANONICAL_RELEASE_ROOTS"] + summary["EXPLICIT_NON_RELEASE_ROOTS"] == summary["TOTAL_TEX_ROOTS"]
     assert summary["UNCLASSIFIED_TEX_ROOTS"] == 0
-    assert summary["EXTRA_ASSEMBLER_VARIANTS"] == 5
+
+    # DISCOVERY_DENOMINATOR_GATE : toute racine decouverte est soit une cible
+    # canonique, soit classee non-source avec un MOTIF. Le compte des variantes
+    # de travail suit ce que les assembleurs savent produire : le figer ferait
+    # echouer le test des qu'une variante est declaree, et pousserait a
+    # recopier le nouveau chiffre au lieu d'examiner ce qui a change.
+    variantes = inventory["extra_assembler_variants"]
+    assert summary["EXTRA_ASSEMBLER_VARIANTS"] == len(variantes)
+    for entree in variantes:
+        assert entree["why"], "variante de travail sans motif"
+        assert entree["classification"] == "EXPLICITLY_NON_RELEASE"
+        assert entree["variant"] not in {"eleve", "professeur"}, (
+            "une variante diffusee est classee comme variante de travail"
+        )
     assert (
         summary["NON_RELEASE_TARGETS"]
         == summary["EXPLICIT_NON_RELEASE_ROOTS"] + summary["EXTRA_ASSEMBLER_VARIANTS"]

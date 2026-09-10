@@ -99,6 +99,17 @@ NON_RELEASE_RULES = (
         re.compile(r"(^|/)gabarits/reference-v4/"),
         "maquette de charte v4 heritee : plus aucune cible ne la compose",
     ),
+    (
+        re.compile(r"^Fiches_cours_exercices/"),
+        # LOCAL_REFERENCE_CORPUS / NON_CANONICAL / NOT_RELEASE_INPUT.
+        # Etabli par les faits, non par le nom du dossier : 123 fichiers sur le
+        # disque et ZERO suivi par Git, repertoire ignore, chaine de
+        # compilation propre (Makefile et sorties .aux/.log), couverture
+        # debordant les six manuels jusqu'a la Seconde SNT, et aucun script,
+        # manifeste ou assembleur ne le consomme -- les seuls a le nommer sont
+        # ceux qui l'excluent.
+        "corpus pedagogique local : ni source ni entree de release des six manuels",
+    ),
 )
 
 

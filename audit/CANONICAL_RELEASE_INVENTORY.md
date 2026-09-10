@@ -13,12 +13,12 @@
 | `CANONICAL_MANUALS` | 6 |
 | `CANONICAL_PDFS` | 12 |
 | `CANONICAL_RELEASE_ROOTS` | 12 |
-| `EXPLICIT_NON_RELEASE_ROOTS` | 34 |
-| `TOTAL_TEX_ROOTS` | 46 |
-| `TEX_ROOTS_FOUND` | 46 |
+| `EXPLICIT_NON_RELEASE_ROOTS` | 52 |
+| `TOTAL_TEX_ROOTS` | 64 |
+| `TEX_ROOTS_FOUND` | 64 |
 | `UNCLASSIFIED_TEX_ROOTS` | 0 |
-| `EXTRA_ASSEMBLER_VARIANTS` | 5 |
-| `NON_RELEASE_TARGETS` | 39 |
+| `EXTRA_ASSEMBLER_VARIANTS` | 9 |
+| `NON_RELEASE_TARGETS` | 61 |
 | `UNREGISTERED_RELEASE_TARGET` | 0 |
 | `MISSING_CANONICAL_TARGET` | 0 |
 | `AMBIGUOUS_CURRENT_ARTIFACT` | 0 |
@@ -43,7 +43,27 @@
 
 ## Cibles explicitement hors release
 
+- `Fiches_cours_exercices/Premiere_EDS_MATHS/chapitre-01-second-degre/fiche-cours.tex` — corpus pedagogique local : ni source ni entree de release des six manuels
+- `Fiches_cours_exercices/Premiere_EDS_MATHS/chapitre-01-second-degre/fiche-exercices-corriges.tex` — corpus pedagogique local : ni source ni entree de release des six manuels
+- `Fiches_cours_exercices/Premiere_EDS_MATHS/chapitre-01-second-degre/fiche-exercices.tex` — corpus pedagogique local : ni source ni entree de release des six manuels
+- `Fiches_cours_exercices/Seconde_SNT/seance-01/annexe-classe.tex` — corpus pedagogique local : ni source ni entree de release des six manuels
+- `Fiches_cours_exercices/Seconde_SNT/seance-01/fiche-eleve.tex` — corpus pedagogique local : ni source ni entree de release des six manuels
+- `Fiches_cours_exercices/Seconde_SNT/seance-01/guide-professeur.tex` — corpus pedagogique local : ni source ni entree de release des six manuels
+- `Fiches_cours_exercices/Terminale_EDS_MATHS/chapitre-01-suites-recurrence/fiche-cours.tex` — corpus pedagogique local : ni source ni entree de release des six manuels
+- `Fiches_cours_exercices/Terminale_EDS_MATHS/chapitre-01-suites-recurrence/fiche-exercices-corriges.tex` — corpus pedagogique local : ni source ni entree de release des six manuels
+- `Fiches_cours_exercices/Terminale_EDS_MATHS/chapitre-01-suites-recurrence/fiche-exercices.tex` — corpus pedagogique local : ni source ni entree de release des six manuels
+- `Mathematiques/manuel-maths/build/1SPE-DERIVATION-GLOBAL/1SPE-DERIVATION-GLOBAL_complet.tex` — construction d'un chapitre isole : artefact de travail, pas un manuel
+- `Mathematiques/manuel-maths/build/1SPE-DERIVATION-LOCAL/1SPE-DERIVATION-LOCAL_complet.tex` — construction d'un chapitre isole : artefact de travail, pas un manuel
+- `Mathematiques/manuel-maths/build/1SPE-EXPONENTIELLE/1SPE-EXPONENTIELLE_complet.tex` — construction d'un chapitre isole : artefact de travail, pas un manuel
+- `Mathematiques/manuel-maths/build/1SPE-GEOMETRIE-REPEREE/1SPE-GEOMETRIE-REPEREE_complet.tex` — construction d'un chapitre isole : artefact de travail, pas un manuel
 - `Mathematiques/manuel-maths/build/1SPE-PROBA-COND/1SPE-PROBA-COND_complet.tex` — construction d'un chapitre isole : artefact de travail, pas un manuel
+- `Mathematiques/manuel-maths/build/1SPE-PRODUIT-SCALAIRE/1SPE-PRODUIT-SCALAIRE_complet.tex` — construction d'un chapitre isole : artefact de travail, pas un manuel
+- `Mathematiques/manuel-maths/build/1SPE-SECOND-DEGRE/1SPE-SECOND-DEGRE_complet.tex` — construction d'un chapitre isole : artefact de travail, pas un manuel
+- `Mathematiques/manuel-maths/build/1SPE-SUITES/1SPE-SUITES_complet.tex` — construction d'un chapitre isole : artefact de travail, pas un manuel
+- `Mathematiques/manuel-maths/build/1SPE-TRIGONOMETRIE/1SPE-TRIGONOMETRIE_complet.tex` — construction d'un chapitre isole : artefact de travail, pas un manuel
+- `Mathematiques/manuel-maths/build/1SPE-VARIABLES-ALEATOIRES/1SPE-VARIABLES-ALEATOIRES_complet.tex` — construction d'un chapitre isole : artefact de travail, pas un manuel
+- `Mathematiques/manuel-maths/build/TCOMPL-CALCULS-AIRES/TCOMPL-CALCULS-AIRES_complet.tex` — construction d'un chapitre isole : artefact de travail, pas un manuel
+- `Mathematiques/manuel-maths/build/TSPE-SUITES-LIMITES/TSPE-SUITES-LIMITES_complet.tex` — construction d'un chapitre isole : artefact de travail, pas un manuel
 - `Mathematiques/manuel-maths/build/maquette-v5/maquette.tex` — maquette de charte : sert au controle visuel, ne se diffuse pas
 - `Mathematiques/manuel-maths/gabarits/chapitre_master.tex` — gabarit de compilation d'un chapitre isole
 - `Mathematiques/manuel-maths/gabarits/objet_standalone.tex` — gabarit de compilation d'un objet isole
@@ -51,9 +71,7 @@
 - `Mathematiques/manuel-maths/gabarits/specimen-pont-v6.tex` — specimen de charte, jamais diffuse
 - `Mathematiques/manuel-maths/gabarits/specimen-v6.tex` — specimen de charte, jamais diffuse
 - `Mathematiques/manuel-maths/gabarits/specimen.tex` — specimen de charte, jamais diffuse
-- `NSI/build/MANUEL_1NSI/.MANUEL_1NSI_professeur-8kftu7dd/MANUEL_1NSI_professeur.tex` — repertoire de construction transitoire, efface en fin de build
-- `NSI/build/MANUEL_1NSI/.MANUEL_1NSI_professeur-xdcj5dhv/MANUEL_1NSI_professeur.tex` — repertoire de construction transitoire, efface en fin de build
-- `NSI/build/MANUEL_TNSI/.MANUEL_TNSI_professeur-um6bu82c/MANUEL_TNSI_professeur.tex` — repertoire de construction transitoire, efface en fin de build
+- `NSI/build/test_prof.tex` — construction d'un chapitre isole : artefact de travail, pas un manuel
 - `NSI/corpus_nsi/02_modeles_documents/modele_aides.tex` — modele de document du corpus NSI : gabarit d'auteur, jamais assemble
 - `NSI/corpus_nsi/02_modeles_documents/modele_corrige.tex` — modele de document du corpus NSI : gabarit d'auteur, jamais assemble
 - `NSI/corpus_nsi/02_modeles_documents/modele_cours.tex` — modele de document du corpus NSI : gabarit d'auteur, jamais assemble
@@ -77,8 +95,12 @@
 - `NSI/gabarits/objet_standalone.tex` — gabarit de compilation d'un objet isole
 - `NSI/gabarits/specimen.tex` — specimen de charte, jamais diffuse
 - `gabarits/common/chapitre_master.tex` — gabarit de compilation d'un chapitre isole
+- `maths:methodes` — variante de travail : la release ne diffuse que eleve et professeur
+- `maths:remediation` — variante de travail : la release ne diffuse que eleve et professeur
 - `nsi:methodes` — variante de travail : la release ne diffuse que eleve et professeur
 - `nsi:remediation` — variante de travail : la release ne diffuse que eleve et professeur
 - `nsi:amenagee` — variante de travail : la release ne diffuse que eleve et professeur
 - `nsi:evaluations` — variante de travail : la release ne diffuse que eleve et professeur
 - `nsi:projets` — variante de travail : la release ne diffuse que eleve et professeur
+- `nsi:banque_ecrite` — variante de travail : la release ne diffuse que eleve et professeur
+- `nsi:banque_pratique` — variante de travail : la release ne diffuse que eleve et professeur
